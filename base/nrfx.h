@@ -1,0 +1,19 @@
+/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+
+#ifndef NRFX_H__
+#define NRFX_H__
+
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+#include <nrf.h>
+#include <nrf_peripherals.h>
+
+//#include <nrfx_config.h>
+#include <nrfx_macros.h>
+#include <nrfx_assert.h>
+//#include <nrfx_delay.h>
+#include <nrfx_log.h>
+
+#endif // NRFX_H__
