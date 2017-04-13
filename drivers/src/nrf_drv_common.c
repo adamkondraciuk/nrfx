@@ -4,8 +4,6 @@
 #include "nrfx.h"
 #include "nrf_drv_common.h"
 
-//#include "app_util_platform.h"
-
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
 #include "nrf_drv_power.h"
 #include "nrf_drv_clock.h"
