@@ -1,23 +1,24 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 
-#define NRFX_LOG_MODULE_NAME "UART"
-#include "nrfx.h"
+#include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(UART)
-#include "nrf_drv_uart.h"
-#include "nrf_drv_common.h"
-#include "nrf_gpio.h"
+#include <nrf_drv_uart.h>
+#include <nrf_drv_common.h>
+#include <nrf_gpio.h>
 
-
+#define NRFX_LOG_MODULE_NAME "UART"
 #if UART_CONFIG_LOG_ENABLED
-#define NRF_LOG_LEVEL       UART_CONFIG_LOG_LEVEL
-#define NRF_LOG_INFO_COLOR  UART_CONFIG_INFO_COLOR
-#define NRF_LOG_DEBUG_COLOR UART_CONFIG_DEBUG_COLOR
+#define NRFX_LOG_LEVEL          UART_CONFIG_LOG_LEVEL
+#define NRFX_LOG_INFO_COLOR     UART_CONFIG_INFO_COLOR
+#define NRFX_LOG_DEBUG_COLOR    UART_CONFIG_DEBUG_COLOR
 #define EVT_TO_STR(event)   (event == NRF_UART_EVENT_ERROR ? "NRF_UART_EVENT_ERROR" : "UNKNOWN EVENT")
 #else //UART_CONFIG_LOG_ENABLED
 #define EVT_TO_STR(event)   ""
-#define NRF_LOG_LEVEL       0
+#define NRFX_LOG_LEVEL          0
 #endif //UART_CONFIG_LOG_ENABLED
+#include <nrfx_log.h>
+
 
 #if (defined(UARTE_IN_USE) && defined(UART_IN_USE))
     // UARTE and UART combined
@@ -230,7 +231,7 @@ ret_code_t nrf_drv_uart_init(const nrf_drv_uart_t * p_instance, nrf_drv_uart_con
     if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRF_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -253,7 +254,7 @@ ret_code_t nrf_drv_uart_init(const nrf_drv_uart_t * p_instance, nrf_drv_uart_con
     p_cb->tx_buffer_length = 0;
     p_cb->state = NRF_DRV_STATE_INITIALIZED;
     p_cb->rx_enabled = false;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -322,7 +323,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_tx_for_uart(const nrf_drv_uart_t * p_ins
         p_cb->tx_buffer_length = 0;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 #endif
@@ -356,7 +357,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_tx_for_uarte(const nrf_drv_uart_t * p_in
         p_cb->tx_buffer_length = 0;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 #endif
@@ -377,7 +378,7 @@ ret_code_t nrf_drv_uart_tx(const nrf_drv_uart_t * p_instance, uint8_t const * co
         if (!nrf_drv_is_in_RAM(p_data))
         {
             err_code = NRF_ERROR_INVALID_ADDR;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     )
@@ -385,7 +386,7 @@ ret_code_t nrf_drv_uart_tx(const nrf_drv_uart_t * p_instance, uint8_t const * co
     if (nrf_drv_uart_tx_in_progress(p_instance))
     {
         err_code = NRF_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     p_cb->tx_buffer_length = length;
@@ -471,14 +472,14 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uart(const nrf_drv_uart_t * p_ins
         if (error)
         {
             err_code = NRF_ERROR_INTERNAL;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
 
         if (rxto)
         {
             err_code = NRF_ERROR_FORBIDDEN;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
 
@@ -497,7 +498,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uart(const nrf_drv_uart_t * p_ins
         nrf_uart_int_enable(p_instance->reg.p_uart, NRF_UART_INT_MASK_RXDRDY | NRF_UART_INT_MASK_ERROR);
     }
     err_code = NRF_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 #endif
@@ -545,7 +546,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uarte(const nrf_drv_uart_t * p_in
     {
         nrf_uarte_int_enable(p_instance->reg.p_uarte, NRF_UARTE_INT_ERROR_MASK | NRF_UARTE_INT_ENDRX_MASK);
     }
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 #endif
@@ -566,7 +567,7 @@ ret_code_t nrf_drv_uart_rx(const nrf_drv_uart_t * p_instance, uint8_t * p_data, 
         if (!nrf_drv_is_in_RAM(p_data))
         {
             err_code = NRF_ERROR_INVALID_ADDR;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     )
@@ -600,7 +601,7 @@ ret_code_t nrf_drv_uart_rx(const nrf_drv_uart_t * p_instance, uint8_t * p_data, 
                 )
             }
             err_code = NRF_ERROR_BUSY;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOGX_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         second_buffer = true;

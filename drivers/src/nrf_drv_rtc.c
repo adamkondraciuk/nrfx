@@ -1,28 +1,28 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
 
-#define NRFX_LOG_MODULE_NAME "RTC"
-#include "nrfx.h"
+#include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(RTC)
 #define ENABLED_RTC_COUNT (RTC0_ENABLED+RTC1_ENABLED+RTC2_ENABLED)
 #if ENABLED_RTC_COUNT
-#include "nrf_drv_rtc.h"
+#include <nrf_drv_rtc.h>
 
-
+#define NRFX_LOG_MODULE_NAME "RTC"
 #if RTC_CONFIG_LOG_ENABLED
-#define NRF_LOG_LEVEL       RTC_CONFIG_LOG_LEVEL
-#define NRF_LOG_INFO_COLOR  RTC_CONFIG_INFO_COLOR
-#define NRF_LOG_DEBUG_COLOR RTC_CONFIG_DEBUG_COLOR
-#define EVT_TO_STR(event)   (event == NRF_RTC_EVENT_TICK ? "NRF_RTC_EVENT_TICK" :               \
-                            (event == NRF_RTC_EVENT_OVERFLOW ? "NRF_RTC_EVENT_OVERFLOW" :       \
-                            (event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" :     \
-                            (event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" :     \
-                            (event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" :     \
-                            (event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : "UNKNOWN EVENT")
+#define NRFX_LOG_LEVEL          RTC_CONFIG_LOG_LEVEL
+#define NRFX_LOG_INFO_COLOR     RTC_CONFIG_INFO_COLOR
+#define NRFX_LOG_DEBUG_COLOR    RTC_CONFIG_DEBUG_COLOR
+#define EVT_TO_STR(event)  (event == NRF_RTC_EVENT_TICK ? "NRF_RTC_EVENT_TICK" :               \
+                            event == NRF_RTC_EVENT_OVERFLOW ? "NRF_RTC_EVENT_OVERFLOW" :       \
+                            event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" :     \
+                            event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" :     \
+                            event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" :     \
+                            event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : "UNKNOWN EVENT")
 #else //RTC_CONFIG_LOG_ENABLED
 #define EVT_TO_STR(event)   ""
-#define NRF_LOG_LEVEL       0
+#define NRFX_LOG_LEVEL       0
 #endif //RTC_CONFIG_LOG_ENABLED
+#include <nrfx_log.h>
 
 
 /**@brief RTC driver instance control block structure. */
@@ -52,14 +52,14 @@ ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
     else
     {
         err_code = NRF_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
     if (m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRF_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -70,7 +70,7 @@ ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
     m_cb[p_instance->instance_id].state        = NRF_DRV_STATE_INITIALIZED;
 
     err_code = NRF_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -129,13 +129,13 @@ ret_code_t nrf_drv_rtc_cc_disable(nrf_drv_rtc_t const * const p_instance, uint32
         {
             nrf_rtc_event_clear(p_instance->p_reg,event);
             err_code = NRF_ERROR_TIMEOUT;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     }
     NRFX_LOG_INFO("RTC id: %d, channel disabled: %d.\r\n", p_instance->instance_id, channel);
     err_code = NRF_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -167,7 +167,7 @@ ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
         if (diff < m_cb[p_instance->instance_id].tick_latency)
         {
             err_code = NRF_ERROR_TIMEOUT;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     }
@@ -185,7 +185,7 @@ ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
 
     NRFX_LOG_INFO("RTC id: %d, channel enabled: %d, compare value: %d.\r\n", p_instance->instance_id, channel, val);
     err_code = NRF_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

@@ -1,8 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 
-#define NRFX_LOG_MODULE_NAME "COMMON"
-#include "nrfx.h"
-#include "nrf_drv_common.h"
+#include <nrfx.h>
+#include <nrf_drv_common.h>
 
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
 #include "nrf_drv_power.h"
@@ -14,13 +13,16 @@
 
 #if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
 
+#define NRFX_LOG_MODULE_NAME "COMMON"
 #if COMMON_CONFIG_LOG_ENABLED
-#define NRF_LOG_LEVEL       COMMON_CONFIG_LOG_LEVEL
-#define NRF_LOG_INFO_COLOR  COMMON_CONFIG_INFO_COLOR
-#define NRF_LOG_DEBUG_COLOR COMMON_CONFIG_DEBUG_COLOR
+#define NRFX_LOG_LEVEL          COMMON_CONFIG_LOG_LEVEL
+#define NRFX_LOG_INFO_COLOR     COMMON_CONFIG_INFO_COLOR
+#define NRFX_LOG_DEBUG_COLOR    COMMON_CONFIG_DEBUG_COLOR
 #else //COMMON_CONFIG_LOG_ENABLED
-#define NRF_LOG_LEVEL       0
+#define NRFX_LOG_LEVEL          0
 #endif //COMMON_CONFIG_LOG_ENABLED
+#include <nrfx_log.h>
+
 
 typedef struct {
     nrf_drv_irq_handler_t handler;
@@ -124,13 +126,13 @@ static ret_code_t acquire_shared_resource(shared_resource_t * p_resource,
     if (busy)
     {
         err_code = NRF_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
     p_resource->handler = handler;
     err_code = NRF_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 #endif
@@ -168,7 +170,7 @@ ret_code_t nrf_drv_common_per_res_acquire(void const * p_per_base,
     ret_code_t err_code;
 
     err_code = NRF_ERROR_INVALID_PARAM;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRF_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
