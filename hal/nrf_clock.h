@@ -2,7 +2,7 @@
 #ifndef NRF_CLOCK_H__
 #define NRF_CLOCK_H__
 
-#include "nrfx.h"
+#include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {

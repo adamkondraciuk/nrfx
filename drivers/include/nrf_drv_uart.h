@@ -15,10 +15,10 @@
 #ifndef NRF_DRV_UART_H
 #define NRF_DRV_UART_H
 
-#include "nrfx.h"
-#include "nrf_uart.h"
+#include <nrfx.h>
+#include <nrf_uart.h>
 #ifdef UARTE_PRESENT
-#include "nrf_uarte.h"
+#include <nrf_uarte.h>
 #endif
 
 #ifdef __cplusplus
@@ -202,7 +202,7 @@ typedef void (*nrf_uart_event_handler_t)(nrf_drv_uart_event_t * p_event, void * 
  *                          blocking mode.
  *
  * @retval    NRF_SUCCESS             If initialization was successful.
- * @retval    NRF_ERROR_INVALID_STATE If driver is already initialized.
+ * @retval    NRFX_ERROR_INVALID_STATE If driver is already initialized.
  */
 ret_code_t nrf_drv_uart_init(nrf_drv_uart_t const *        p_instance,
                              nrf_drv_uart_config_t const * p_config,
@@ -247,17 +247,17 @@ __STATIC_INLINE uint32_t nrf_drv_uart_event_address_get(nrf_drv_uart_t const * p
  *
  * @note Peripherals using EasyDMA (i.e. UARTE) require that the transfer buffers
  *       are placed in the Data RAM region. If they are not and UARTE instance is
- *       used, this function will fail with error code NRF_ERROR_INVALID_ADDR.
+ *       used, this function will fail with error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_data     Pointer to data.
  * @param[in] length     Number of bytes to send.
  *
  * @retval    NRF_SUCCESS            If initialization was successful.
- * @retval    NRF_ERROR_BUSY         If driver is already transferring.
- * @retval    NRF_ERROR_FORBIDDEN    If the transfer was aborted from a different context
+ * @retval    NRFX_ERROR_BUSY         If driver is already transferring.
+ * @retval    NRFX_ERROR_FORBIDDEN    If the transfer was aborted from a different context
  *                                   (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
- * @retval    NRF_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
+ * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
  */
 ret_code_t nrf_drv_uart_tx(nrf_drv_uart_t const * p_instance,
                            uint8_t const * const p_data, uint8_t length);
@@ -298,20 +298,20 @@ void nrf_drv_uart_tx_abort(nrf_drv_uart_t const * p_instance);
  *
  * @note Peripherals using EasyDMA (i.e. UARTE) require that the transfer buffers
  *       are placed in the Data RAM region. If they are not and UARTE driver instance
- *       is used, this function will fail with error code NRF_ERROR_INVALID_ADDR.
+ *       is used, this function will fail with error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_data     Pointer to data.
  * @param[in] length     Number of bytes to receive.
  *
  * @retval    NRF_SUCCESS If initialization was successful.
- * @retval    NRF_ERROR_BUSY If the driver is already receiving
+ * @retval    NRFX_ERROR_BUSY If the driver is already receiving
  *                           (and the secondary buffer has already been set
  *                           in non-blocking mode).
- * @retval    NRF_ERROR_FORBIDDEN If the transfer was aborted from a different context
+ * @retval    NRFX_ERROR_FORBIDDEN If the transfer was aborted from a different context
  *                               (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
- * @retval    NRF_ERROR_INTERNAL If UART peripheral reported an error.
- * @retval    NRF_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
+ * @retval    NRFX_ERROR_INTERNAL If UART peripheral reported an error.
+ * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
  */
 ret_code_t nrf_drv_uart_rx(nrf_drv_uart_t const * p_instance,
                            uint8_t * p_data, uint8_t length);

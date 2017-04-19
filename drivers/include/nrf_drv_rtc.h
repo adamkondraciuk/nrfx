@@ -2,9 +2,8 @@
 #ifndef NRF_DRV_RTC_H
 #define NRF_DRV_RTC_H
 
-#include "nrfx.h"
-#include "nrf_drv_common.h"
-#include "nrf_rtc.h"
+#include <nrfx.h>
+#include <nrf_rtc.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -92,8 +91,8 @@ typedef void (*nrf_drv_rtc_handler_t)(nrf_drv_rtc_int_type_t int_type);
  * @param[in]  handler            User's event handler.
  *
  * @retval     NRF_SUCCESS               If successfully initialized.
- * @retval     NRF_ERROR_INVALID_PARAM   If no handler was provided.
- * @retval     NRF_ERROR_INVALID_STATE   If the instance is already initialized.
+ * @retval     NRFX_ERROR_INVALID_PARAM   If no handler was provided.
+ * @retval     NRFX_ERROR_INVALID_STATE   If the instance is already initialized.
  */
 ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
                             nrf_drv_rtc_config_t const * p_config,
@@ -145,7 +144,7 @@ void nrf_drv_rtc_disable(nrf_drv_rtc_t const * const p_instance);
  * @param[in]  enable_irq         True to enable the interrupt. False to disable the interrupt.
  *
  * @retval     NRF_SUCCESS         If the procedure was successful.
- * @retval     NRF_ERROR_TIMEOUT   If the compare was not set because the request value is behind the current counter
+ * @retval     NRFX_ERROR_TIMEOUT   If the compare was not set because the request value is behind the current counter
  *                                 value. This error can only be reported if RTCn_CONFIG_RELIABLE = 1.
  */
 ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
@@ -162,7 +161,7 @@ ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
  * @param[in]  channel             One of the instance's channels.
  *
  * @retval     NRF_SUCCESS         If the procedure was successful.
- * @retval     NRF_ERROR_TIMEOUT   If an interrupt was pending on the requested channel.
+ * @retval     NRFX_ERROR_TIMEOUT   If an interrupt was pending on the requested channel.
  */
 ret_code_t nrf_drv_rtc_cc_disable(nrf_drv_rtc_t const * const p_instance, uint32_t channel);
 

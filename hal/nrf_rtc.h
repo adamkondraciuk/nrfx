@@ -14,7 +14,7 @@
  * @brief Hardware access layer for managing the real time counter (RTC).
  */
 
-#include "nrfx.h"
+#include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -259,7 +259,7 @@ __STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type * p_rtc)
 
 __STATIC_INLINE void nrf_rtc_prescaler_set(NRF_RTC_Type * p_rtc, uint32_t val)
 {
-    ASSERT(val <= (RTC_PRESCALER_PRESCALER_Msk >> RTC_PRESCALER_PRESCALER_Pos));
+    NRFX_ASSERT(val <= (RTC_PRESCALER_PRESCALER_Msk >> RTC_PRESCALER_PRESCALER_Pos));
     p_rtc->PRESCALER = val;
 }
 __STATIC_INLINE uint32_t rtc_prescaler_get(NRF_RTC_Type * p_rtc)

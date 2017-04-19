@@ -2,7 +2,7 @@
 #ifndef NRF_UARTE_H__
 #define NRF_UARTE_H__
 
-#include "nrfx.h"
+#include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {

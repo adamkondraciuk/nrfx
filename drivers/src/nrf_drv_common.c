@@ -41,7 +41,7 @@ typedef struct {
     static shared_resource_t m_serial_box_0 = { .acquired = false };
     void SPI0_TWI0_IRQHandler(void)
     {
-        ASSERT(m_serial_box_0.handler);
+        NRFX_ASSERT(m_serial_box_0.handler);
         m_serial_box_0.handler();
     }
 #endif // (NRFX_MODULE_ENABLED(SPI0) || NRFX_MODULE_ENABLED(SPIS0) ||
@@ -63,7 +63,7 @@ typedef struct {
     void SPI1_TWI1_IRQHandler(void)
 #endif
     {
-        ASSERT(m_serial_box_1.handler);
+        NRFX_ASSERT(m_serial_box_1.handler);
         m_serial_box_1.handler();
     }
 #endif // (NRFX_MODULE_ENABLED(SPI1) || NRFX_MODULE_ENABLED(SPIS1) ||
@@ -80,7 +80,7 @@ typedef struct {
     static shared_resource_t m_serial_box_2 = { .acquired = false };
     void SPIM2_SPIS2_SPI2_IRQHandler(void)
     {
-        ASSERT(m_serial_box_2.handler);
+        NRFX_ASSERT(m_serial_box_2.handler);
         m_serial_box_2.handler();
     }
 #endif // (NRFX_MODULE_ENABLED(SPI2) || NRFX_MODULE_ENABLED(SPIS2))
@@ -96,7 +96,7 @@ typedef struct {
     static shared_resource_t m_comp_lpcomp = { .acquired = false };
     void LPCOMP_IRQHandler(void)
     {
-        ASSERT(m_comp_lpcomp.handler);
+        NRFX_ASSERT(m_comp_lpcomp.handler);
         m_comp_lpcomp.handler();
     }
 #endif // (NRFX_MODULE_ENABLED(COMP) || NRFX_MODULE_ENABLED(LPCOMP))
@@ -112,7 +112,7 @@ static ret_code_t acquire_shared_resource(shared_resource_t * p_resource,
 
     bool busy = false;
 
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     if (p_resource->acquired)
     {
         busy = true;
@@ -121,11 +121,11 @@ static ret_code_t acquire_shared_resource(shared_resource_t * p_resource,
     {
         p_resource->acquired = true;
     }
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_EXIT();
 
     if (busy)
     {
-        err_code = NRF_ERROR_BUSY;
+        err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
@@ -169,7 +169,7 @@ ret_code_t nrf_drv_common_per_res_acquire(void const * p_per_base,
 #endif
     ret_code_t err_code;
 
-    err_code = NRF_ERROR_INVALID_PARAM;
+    err_code = NRFX_ERROR_INVALID_PARAM;
     NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -251,7 +251,7 @@ void POWER_CLOCK_IRQHandler(void)
 
 void nrf_drv_common_irq_enable(IRQn_Type IRQn, uint8_t priority)
 {
-    INTERRUPT_PRIORITY_ASSERT(priority);
+    NRFX_IRQ_PRIORITY_CHECK(priority);
 
     NVIC_SetPriority(IRQn, priority);
     NVIC_ClearPendingIRQ(IRQn);

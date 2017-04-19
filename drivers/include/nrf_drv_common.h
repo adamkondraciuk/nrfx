@@ -2,28 +2,11 @@
 #ifndef NRF_DRV_COMMON_H__
 #define NRF_DRV_COMMON_H__
 
-#include "nrfx.h"
+#include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#ifdef NRF51
-#ifdef SOFTDEVICE_PRESENT
-#define INTERRUPT_PRIORITY_IS_VALID(pri) (((pri) == 1) || ((pri) == 3))
-#else
-#define INTERRUPT_PRIORITY_IS_VALID(pri) ((pri) < 4)
-#endif //SOFTDEVICE_PRESENT
-#else
-#ifdef SOFTDEVICE_PRESENT
-#define INTERRUPT_PRIORITY_IS_VALID(pri) ((((pri) > 1) && ((pri) < 4)) || (((pri) > 5) && ((pri) < 8)))
-#else
-#define INTERRUPT_PRIORITY_IS_VALID(pri) ((pri) < 8)
-#endif //SOFTDEVICE_PRESENT
-#endif //NRF52
-
-#define INTERRUPT_PRIORITY_VALIDATION(pri) STATIC_ASSERT(INTERRUPT_PRIORITY_IS_VALID((pri)))
-#define INTERRUPT_PRIORITY_ASSERT(pri)     ASSERT(INTERRUPT_PRIORITY_IS_VALID((pri)))
 
 /**
  * @defgroup nrf_drv_common Peripheral drivers common module
@@ -98,8 +81,8 @@ typedef void (*nrf_drv_irq_handler_t)(void);
  *                       if interrupts are not used for the peripheral.
  *
  * @retval NRF_SUCCESS             If resources were acquired successfully.
- * @retval NRF_ERROR_BUSY          If resources were already acquired.
- * @retval NRF_ERROR_INVALID_PARAM If the specified peripheral is not enabled
+ * @retval NRFX_ERROR_BUSY          If resources were already acquired.
+ * @retval NRFX_ERROR_INVALID_PARAM If the specified peripheral is not enabled
  *                                 or the peripheral does not share resources
  *                                 with other peripherals.
  */

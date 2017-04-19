@@ -2,7 +2,7 @@
 #ifndef NRF_GPIO_H__
 #define NRF_GPIO_H__
 
-#include "nrfx.h"
+#include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -419,7 +419,7 @@ __STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
  */
 __STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 {
-    ASSERT(*p_pin < NUMBER_OF_PINS);
+    NRFX_ASSERT(*p_pin < NUMBER_OF_PINS);
 #if (GPIO_COUNT == 1)
     // The oldest definition case
     return NRF_GPIO;
@@ -699,7 +699,7 @@ __STATIC_INLINE void nrf_gpio_ports_read(uint32_t start_port, uint32_t length, u
 {
     NRF_GPIO_Type * gpio_regs[GPIO_COUNT] = GPIO_REG_LIST;
 
-    ASSERT(start_port + length <= GPIO_COUNT);
+    NRFX_ASSERT(start_port + length <= GPIO_COUNT);
     uint32_t i;
 
     for (i = start_port; i < (start_port + length); i++)
