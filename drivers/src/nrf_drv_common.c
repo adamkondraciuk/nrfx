@@ -131,7 +131,7 @@ static ret_code_t acquire_shared_resource(shared_resource_t * p_resource,
     }
 
     p_resource->handler = handler;
-    err_code = NRF_SUCCESS;
+    err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }

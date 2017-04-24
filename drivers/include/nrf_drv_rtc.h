@@ -90,7 +90,7 @@ typedef void (*nrf_drv_rtc_handler_t)(nrf_drv_rtc_int_type_t int_type);
  * @param[in]  p_config           Initial configuration.
  * @param[in]  handler            User's event handler.
  *
- * @retval     NRF_SUCCESS               If successfully initialized.
+ * @retval     NRFX_SUCCESS               If successfully initialized.
  * @retval     NRFX_ERROR_INVALID_PARAM   If no handler was provided.
  * @retval     NRFX_ERROR_INVALID_STATE   If the instance is already initialized.
  */
@@ -143,9 +143,9 @@ void nrf_drv_rtc_disable(nrf_drv_rtc_t const * const p_instance);
  * @param[in]  val                Absolute value to be set in the compare register.
  * @param[in]  enable_irq         True to enable the interrupt. False to disable the interrupt.
  *
- * @retval     NRF_SUCCESS         If the procedure was successful.
+ * @retval     NRFX_SUCCESS         If the procedure was successful.
  * @retval     NRFX_ERROR_TIMEOUT   If the compare was not set because the request value is behind the current counter
- *                                 value. This error can only be reported if RTCn_CONFIG_RELIABLE = 1.
+ *                                  value. This error can only be reported if RTCn_CONFIG_RELIABLE = 1.
  */
 ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
                               uint32_t channel,
@@ -160,7 +160,7 @@ ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
  * @param[in]  p_instance          Pointer to the driver instance structure.
  * @param[in]  channel             One of the instance's channels.
  *
- * @retval     NRF_SUCCESS         If the procedure was successful.
+ * @retval     NRFX_SUCCESS         If the procedure was successful.
  * @retval     NRFX_ERROR_TIMEOUT   If an interrupt was pending on the requested channel.
  */
 ret_code_t nrf_drv_rtc_cc_disable(nrf_drv_rtc_t const * const p_instance, uint32_t channel);

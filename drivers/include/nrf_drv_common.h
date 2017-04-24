@@ -80,11 +80,11 @@ typedef void (*nrf_drv_irq_handler_t)(void);
  * @param[in] handler    Interrupt handler to register. May be NULL
  *                       if interrupts are not used for the peripheral.
  *
- * @retval NRF_SUCCESS             If resources were acquired successfully.
+ * @retval NRFX_SUCCESS             If resources were acquired successfully.
  * @retval NRFX_ERROR_BUSY          If resources were already acquired.
  * @retval NRFX_ERROR_INVALID_PARAM If the specified peripheral is not enabled
- *                                 or the peripheral does not share resources
- *                                 with other peripherals.
+ *                                  or the peripheral does not share resources
+ *                                  with other peripherals.
  */
 ret_code_t nrf_drv_common_per_res_acquire(void const * p_per_base,
                                           nrf_drv_irq_handler_t handler);

@@ -201,7 +201,7 @@ typedef void (*nrf_uart_event_handler_t)(nrf_drv_uart_event_t * p_event, void * 
  * @param[in] event_handler Event handler provided by the user. If not provided driver works in
  *                          blocking mode.
  *
- * @retval    NRF_SUCCESS             If initialization was successful.
+ * @retval    NRFX_SUCCESS             If initialization was successful.
  * @retval    NRFX_ERROR_INVALID_STATE If driver is already initialized.
  */
 ret_code_t nrf_drv_uart_init(nrf_drv_uart_t const *        p_instance,
@@ -253,10 +253,10 @@ __STATIC_INLINE uint32_t nrf_drv_uart_event_address_get(nrf_drv_uart_t const * p
  * @param[in] p_data     Pointer to data.
  * @param[in] length     Number of bytes to send.
  *
- * @retval    NRF_SUCCESS            If initialization was successful.
+ * @retval    NRFX_SUCCESS            If initialization was successful.
  * @retval    NRFX_ERROR_BUSY         If driver is already transferring.
  * @retval    NRFX_ERROR_FORBIDDEN    If the transfer was aborted from a different context
- *                                   (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
+ *                                    (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
  * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
  */
 ret_code_t nrf_drv_uart_tx(nrf_drv_uart_t const * p_instance,
@@ -304,12 +304,12 @@ void nrf_drv_uart_tx_abort(nrf_drv_uart_t const * p_instance);
  * @param[in] p_data     Pointer to data.
  * @param[in] length     Number of bytes to receive.
  *
- * @retval    NRF_SUCCESS If initialization was successful.
+ * @retval    NRFX_SUCCESS If initialization was successful.
  * @retval    NRFX_ERROR_BUSY If the driver is already receiving
- *                           (and the secondary buffer has already been set
- *                           in non-blocking mode).
+ *                            (and the secondary buffer has already been set
+ *                            in non-blocking mode).
  * @retval    NRFX_ERROR_FORBIDDEN If the transfer was aborted from a different context
- *                               (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
+ *                                (blocking mode only, also see @ref nrf_drv_uart_rx_disable).
  * @retval    NRFX_ERROR_INTERNAL If UART peripheral reported an error.
  * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer (UARTE only).
  */

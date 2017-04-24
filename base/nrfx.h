@@ -10,10 +10,10 @@
 #include <nrf.h>
 #include <nrf_peripherals.h>
 
-#include <nrfx_macros.h>
-#include <nrfx_errors.h>
-
 #include <nrfx_config.h>
 #include <nrfx_glue.h>
+
+#include <nrfx_macros.h>
+#include <nrfx_errors.h>
 
 #endif // NRFX_H__

@@ -226,7 +226,7 @@ ret_code_t nrf_drv_uart_init(const nrf_drv_uart_t * p_instance, nrf_drv_uart_con
 {
     NRFX_ASSERT(p_config);
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code = NRF_SUCCESS;
+    ret_code_t err_code = NRFX_SUCCESS;
 
     if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
     {
@@ -288,7 +288,7 @@ __STATIC_INLINE void tx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb
 __STATIC_INLINE ret_code_t nrf_drv_uart_tx_for_uart(const nrf_drv_uart_t * p_instance)
 {
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code = NRF_SUCCESS;
+    ret_code_t err_code = NRFX_SUCCESS;
 
     nrf_uart_event_clear(p_instance->reg.p_uart, NRF_UART_EVENT_TXDRDY);
     nrf_uart_task_trigger(p_instance->reg.p_uart, NRF_UART_TASK_STARTTX);
@@ -332,7 +332,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_tx_for_uart(const nrf_drv_uart_t * p_ins
 __STATIC_INLINE ret_code_t nrf_drv_uart_tx_for_uarte(const nrf_drv_uart_t * p_instance)
 {
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code = NRF_SUCCESS;
+    ret_code_t err_code = NRFX_SUCCESS;
 
     nrf_uarte_event_clear(p_instance->reg.p_uarte, NRF_UARTE_EVENT_ENDTX);
     nrf_uarte_event_clear(p_instance->reg.p_uarte, NRF_UARTE_EVENT_TXSTOPPED);
@@ -497,7 +497,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uart(const nrf_drv_uart_t * p_ins
     {
         nrf_uart_int_enable(p_instance->reg.p_uart, NRF_UART_INT_MASK_RXDRDY | NRF_UART_INT_MASK_ERROR);
     }
-    err_code = NRF_SUCCESS;
+    err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -506,7 +506,7 @@ __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uart(const nrf_drv_uart_t * p_ins
 #if defined(UARTE_IN_USE)
 __STATIC_INLINE ret_code_t nrf_drv_uart_rx_for_uarte(const nrf_drv_uart_t * p_instance, uint8_t * p_data, uint8_t length, bool second_buffer)
 {
-    ret_code_t err_code = NRF_SUCCESS;
+    ret_code_t err_code = NRFX_SUCCESS;
     nrf_uarte_event_clear(p_instance->reg.p_uarte, NRF_UARTE_EVENT_ENDRX);
     nrf_uarte_event_clear(p_instance->reg.p_uarte, NRF_UARTE_EVENT_RXTO);
     nrf_uarte_rx_buffer_set(p_instance->reg.p_uarte, p_data, length);
