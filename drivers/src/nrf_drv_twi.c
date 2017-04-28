@@ -10,11 +10,9 @@
 #include <nrf_gpio.h>
 #include <nrf_delay.h>
 
-#define NRFX_LOG_MODULE_NAME "TWI"
-#if TWI_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          TWI_CONFIG_LOG_LEVEL
-#define NRFX_LOG_INFO_COLOR     TWI_CONFIG_INFO_COLOR
-#define NRFX_LOG_DEBUG_COLOR    TWI_CONFIG_DEBUG_COLOR
+#define NRFX_LOG_MODULE TWI
+#include <nrfx_log.h>
+
 #define EVT_TO_STR(event)       (event == NRF_DRV_TWI_EVT_DONE ? "EVT_DONE" :                            \
                                 (event == NRF_DRV_TWI_EVT_ADDRESS_NACK ? "EVT_ADDRESS_NACK" :            \
                                 (event == NRF_DRV_TWI_EVT_DATA_NACK ? "EVT_DATA_NACK" : "UNKNOWN ERROR")))
@@ -35,14 +33,6 @@
                                 (type == NRF_DRV_TWI_XFER_RX ? "XFER_RX" :                             \
                                 (type == NRF_DRV_TWI_XFER_TXRX ? "XFER_TXRX" :                         \
                                 (type == NRF_DRV_TWI_XFER_TXTX ? "XFER_TXTX" : "UNKNOWN TRANSFER TYPE"))))
-#else //TWI_CONFIG_LOG_ENABLED
-#define EVT_TO_STR(event)           ""
-#define EVT_TO_STR_TWI(event)       ""
-#define EVT_TO_STR_TWIM(event)      ""
-#define TRANSFER_TO_STR(event)      ""
-#define NRFX_LOG_LEVEL          0
-#endif //TWI_CONFIG_LOG_ENABLED
-#include <nrfx_log.h>
 
 
 #define TWI0_IRQ_HANDLER    SPI0_TWI0_IRQHandler

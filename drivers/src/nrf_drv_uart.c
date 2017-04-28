@@ -7,17 +7,12 @@
 #include <nrf_drv_common.h>
 #include <nrf_gpio.h>
 
-#define NRFX_LOG_MODULE_NAME "UART"
-#if UART_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          UART_CONFIG_LOG_LEVEL
-#define NRFX_LOG_INFO_COLOR     UART_CONFIG_INFO_COLOR
-#define NRFX_LOG_DEBUG_COLOR    UART_CONFIG_DEBUG_COLOR
-#define EVT_TO_STR(event)   (event == NRF_UART_EVENT_ERROR ? "NRF_UART_EVENT_ERROR" : "UNKNOWN EVENT")
-#else //UART_CONFIG_LOG_ENABLED
-#define EVT_TO_STR(event)   ""
-#define NRFX_LOG_LEVEL          0
-#endif //UART_CONFIG_LOG_ENABLED
+#define NRFX_LOG_MODULE UART
 #include <nrfx_log.h>
+
+#define EVT_TO_STR(event) \
+    (event == NRF_UART_EVENT_ERROR ? "NRF_UART_EVENT_ERROR" : \
+                                     "UNKNOWN EVENT")
 
 
 #if (defined(UARTE_IN_USE) && defined(UART_IN_USE))

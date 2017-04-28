@@ -48,6 +48,12 @@ extern "C" {
 /** Auxiliary macro used by @ref CONCAT_3 */
 #define CONCAT_3_(p1, p2, p3) p1##p2##p3
 
+/** @brief Converts a macro argument into a character constant.
+ */
+#define STRINGIFY(val)  STRINGIFY_(val)
+/** Auxiliary macro used by @ref STRINGIFY */
+#define STRINGIFY_(val) #val
+
 
 #ifdef __cplusplus
 }

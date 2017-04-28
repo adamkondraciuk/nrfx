@@ -8,22 +8,17 @@
 #include <nrf_drv_rtc.h>
 #include <nrf_drv_common.h>
 
-#define NRFX_LOG_MODULE_NAME "RTC"
-#if RTC_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          RTC_CONFIG_LOG_LEVEL
-#define NRFX_LOG_INFO_COLOR     RTC_CONFIG_INFO_COLOR
-#define NRFX_LOG_DEBUG_COLOR    RTC_CONFIG_DEBUG_COLOR
-#define EVT_TO_STR(event)  (event == NRF_RTC_EVENT_TICK ? "NRF_RTC_EVENT_TICK" :               \
-                            event == NRF_RTC_EVENT_OVERFLOW ? "NRF_RTC_EVENT_OVERFLOW" :       \
-                            event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" :     \
-                            event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" :     \
-                            event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" :     \
-                            event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : "UNKNOWN EVENT")
-#else //RTC_CONFIG_LOG_ENABLED
-#define EVT_TO_STR(event)   ""
-#define NRFX_LOG_LEVEL       0
-#endif //RTC_CONFIG_LOG_ENABLED
+#define NRFX_LOG_MODULE RTC
 #include <nrfx_log.h>
+
+#define EVT_TO_STR(event) \
+    (event == NRF_RTC_EVENT_TICK      ? "NRF_RTC_EVENT_TICK"      : \
+     event == NRF_RTC_EVENT_OVERFLOW  ? "NRF_RTC_EVENT_OVERFLOW"  : \
+     event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" : \
+     event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" : \
+     event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" : \
+     event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : \
+                                        "UNKNOWN EVENT")
 
 
 /**@brief RTC driver instance control block structure. */

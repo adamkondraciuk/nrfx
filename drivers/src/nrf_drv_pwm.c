@@ -10,15 +10,9 @@
 #include <nrf_drv_common.h>
 #include <nrf_gpio.h>
 
-#define NRFX_LOG_MODULE_NAME "PWM"
-#if PWM_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          PWM_CONFIG_LOG_LEVEL
-#define NRFX_LOG_INFO_COLOR     PWM_CONFIG_INFO_COLOR
-#define NRFX_LOG_DEBUG_COLOR    PWM_CONFIG_DEBUG_COLOR
-#else //PWM_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          0
-#endif //PWM_CONFIG_LOG_ENABLED
+#define NRFX_LOG_MODULE PWM
 #include <nrfx_log.h>
+
 
 #if NRFX_MODULE_ENABLED(PWM_NRF52_ANOMALY_109_WORKAROUND)
 // The workaround uses interrupts to wake up the CPU and ensure it is active

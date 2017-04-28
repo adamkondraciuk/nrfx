@@ -9,15 +9,9 @@
 #include <nrf_drv_common.h>
 #include <nrf_gpio.h>
 
-#define NRFX_LOG_MODULE_NAME "SPI"
-#if SPI_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          SPI_CONFIG_LOG_LEVEL
-#define NRFX_LOG_INFO_COLOR     SPI_CONFIG_INFO_COLOR
-#define NRFX_LOG_DEBUG_COLOR    SPI_CONFIG_DEBUG_COLOR
-#else //SPI_CONFIG_LOG_ENABLED
-#define NRFX_LOG_LEVEL          0
-#endif //SPI_CONFIG_LOG_ENABLED
+#define NRFX_LOG_MODULE SPI
 #include <nrfx_log.h>
+
 
 #ifndef SPIM_PRESENT
     // Make sure SPIx_USE_EASY_DMA is 0 for nRF51 (if a common
