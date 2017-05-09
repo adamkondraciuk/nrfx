@@ -8,6 +8,7 @@ extern "C" {
 #endif
 
 
+//lint -emacro(491,NRFX_MODULE_ENABLED) // 491: "non-standard use of 'defined' preprocessor operator"
 #define NRFX_MODULE_ENABLED(module) \
     ((defined(module ## _ENABLED) && (module ## _ENABLED)) ? 1 : 0)
 
