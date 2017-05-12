@@ -5,6 +5,13 @@
 
 typedef uint32_t ret_code_t;
 
+/**
+ @defgroup nrfx_error nrfx Global Error Codes
+ @{
+
+ @brief Global Error definitions
+*/
+
 #ifndef NRFX_ERROR_BASE_NUM
 #define NRFX_ERROR_BASE_NUM         0xBAD00000
 #endif
@@ -50,5 +57,9 @@ typedef uint32_t ret_code_t;
 #ifndef NRFX_ERROR_DRV_TWI_ERR_DNACK
 #define NRFX_ERROR_DRV_TWI_ERR_DNACK        (NRFX_ERROR_PERIPH_DRIVERS_ERR_BASE + 0x0002)
 #endif
+
+/**
+  @}
+*/
 
 #endif // NRFX_ERRORS_H__
