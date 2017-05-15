@@ -840,7 +840,7 @@ __STATIC_INLINE void nrf_power_system_off(void)
 
 __STATIC_INLINE void nrf_power_pofcon_set(bool enabled, nrf_power_pof_thr_t thr)
 {
-    ASSERT(thr == (thr & (POWER_POFCON_THRESHOLD_Msk >> POWER_POFCON_THRESHOLD_Pos)));
+    NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLD_Msk >> POWER_POFCON_THRESHOLD_Pos)));
 #if NRF_POWER_HAS_VDDH
     uint32_t pofcon = NRF_POWER->POFCON;
     pofcon &= ~(POWER_POFCON_THRESHOLD_Msk | POWER_POFCON_POF_Msk);
@@ -873,7 +873,7 @@ __STATIC_INLINE nrf_power_pof_thr_t nrf_power_pofcon_get(bool * p_enabled)
 #if NRF_POWER_HAS_VDDH
 __STATIC_INLINE void nrf_power_pofcon_vddh_set(nrf_power_pof_thrvddh_t thr)
 {
-    ASSERT(thr == (thr & (POWER_POFCON_THRESHOLDVDDH_Msk >> POWER_POFCON_THRESHOLDVDDH_Pos)));
+    NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLDVDDH_Msk >> POWER_POFCON_THRESHOLDVDDH_Pos)));
     uint32_t pofcon = NRF_POWER->POFCON;
     pofcon &= ~POWER_POFCON_THRESHOLDVDDH_Msk;
     pofcon |= (((uint32_t)thr) << POWER_POFCON_THRESHOLDVDDH_Pos);
@@ -938,19 +938,19 @@ __STATIC_INLINE bool nrf_power_dcdcen_get(void)
 #if NRF_POWER_HAS_RAMPOWER_REGS
 __STATIC_INLINE void nrf_power_rampower_mask_on(uint8_t block, uint32_t section_mask)
 {
-    ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
+    NRFX_ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
     NRF_POWER->RAM[block].POWERSET = section_mask;
 }
 
 __STATIC_INLINE void nrf_power_rampower_mask_off(uint8_t block, uint32_t section_mask)
 {
-    ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
+    NRFX_ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
     NRF_POWER->RAM[block].POWERCLR = section_mask;
 }
 
 __STATIC_INLINE uint32_t nrf_power_rampower_mask_get(uint8_t block)
 {
-    ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
+    NRFX_ASSERT(block < ARRAY_SIZE(NRF_POWER->RAM));
     return NRF_POWER->RAM[block].POWER;
 }
 #endif /* NRF_POWER_HAS_RAMPOWER_REGS */

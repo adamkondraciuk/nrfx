@@ -979,12 +979,12 @@ uint32_t nrf_usbd_haltedep(uint8_t ep)
     uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
     if (NRF_USBD_EPIN_CHECK(ep))
     {
-        ASSERT(epnr < ARRAY_SIZE(NRF_USBD->HALTED.EPIN));
+        NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->HALTED.EPIN));
         return NRF_USBD->HALTED.EPIN[epnr];
     }
     else
     {
-        ASSERT(epnr < ARRAY_SIZE(NRF_USBD->HALTED.EPOUT));
+        NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->HALTED.EPOUT));
         return NRF_USBD->HALTED.EPOUT[epnr];
     }
 }
@@ -1068,21 +1068,21 @@ uint16_t nrf_usbd_setup_wlength_get(void)
 
 size_t nrf_usbd_epout_size_get(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EPOUT_CHECK(ep));
+    NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep));
     if (NRF_USBD_EPISO_CHECK(ep))
     {
         /* Only single isochronous endpoint supported */
-        ASSERT(NRF_USBD_EP_NR_GET(ep) == ARRAY_SIZE(NRF_USBD->SIZE.EPOUT));
+        NRFX_ASSERT(NRF_USBD_EP_NR_GET(ep) == ARRAY_SIZE(NRF_USBD->SIZE.EPOUT));
         return NRF_USBD->SIZE.ISOOUT;
     }
 
-    ASSERT(NRF_USBD_EP_NR_GET(ep) < ARRAY_SIZE(NRF_USBD->SIZE.EPOUT));
+    NRFX_ASSERT(NRF_USBD_EP_NR_GET(ep) < ARRAY_SIZE(NRF_USBD->SIZE.EPOUT));
     return NRF_USBD->SIZE.EPOUT[NRF_USBD_EP_NR_GET(ep)];
 }
 
 void nrf_usbd_epout_clear(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EPOUT_CHECK(ep) && (NRF_USBD_EP_NR_GET(ep) < ARRAY_SIZE(NRF_USBD->SIZE.EPOUT)));
+    NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep) && (NRF_USBD_EP_NR_GET(ep) < ARRAY_SIZE(NRF_USBD->SIZE.EPOUT)));
     NRF_USBD->SIZE.EPOUT[NRF_USBD_EP_NR_GET(ep)] = 0;
     __ISB();
     __DSB();
@@ -1130,7 +1130,7 @@ nrf_usbd_dtoggle_t nrf_usbd_dtoggle_get(uint8_t ep)
 
 bool nrf_usbd_ep_enable_check(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EP_VALIDATE(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
 
     if (NRF_USBD_EPIN_CHECK(ep))
@@ -1145,7 +1145,7 @@ bool nrf_usbd_ep_enable_check(uint8_t ep)
 
 void nrf_usbd_ep_enable(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EP_VALIDATE(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
 
     if (NRF_USBD_EPIN_CHECK(ep))
@@ -1162,7 +1162,7 @@ void nrf_usbd_ep_enable(uint8_t ep)
 
 void nrf_usbd_ep_disable(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EP_VALIDATE(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
 
     if (NRF_USBD_EPIN_CHECK(ep))
@@ -1187,7 +1187,7 @@ void nrf_usbd_ep_all_disable(void)
 
 void nrf_usbd_ep_stall(uint8_t ep)
 {
-    ASSERT(!NRF_USBD_EPISO_CHECK(ep));
+    NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->EPSTALL = (USBD_EPSTALL_STALL_Stall << USBD_EPSTALL_STALL_Pos) | ep;
     __ISB();
     __DSB();
@@ -1195,7 +1195,7 @@ void nrf_usbd_ep_stall(uint8_t ep)
 
 void nrf_usbd_ep_unstall(uint8_t ep)
 {
-    ASSERT(!NRF_USBD_EPISO_CHECK(ep));
+    NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->EPSTALL = (USBD_EPSTALL_STALL_UnStall << USBD_EPSTALL_STALL_Pos) | ep;
     __ISB();
     __DSB();
@@ -1229,7 +1229,7 @@ void nrf_usbd_ep_easydma_set(uint8_t ep, uint32_t ptr, uint32_t maxcnt)
         else
         {
             uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
-            ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPIN));
+            NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPIN));
             NRF_USBD->EPIN[epnr].PTR    = ptr;
             NRF_USBD->EPIN[epnr].MAXCNT = maxcnt;
         }
@@ -1244,7 +1244,7 @@ void nrf_usbd_ep_easydma_set(uint8_t ep, uint32_t ptr, uint32_t maxcnt)
         else
         {
             uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
-            ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
+            NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
             NRF_USBD->EPOUT[epnr].PTR    = ptr;
             NRF_USBD->EPOUT[epnr].MAXCNT = maxcnt;
         }
@@ -1264,7 +1264,7 @@ uint32_t nrf_usbd_ep_amount_get(uint8_t ep)
         else
         {
             uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
-            ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
+            NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
             ret = NRF_USBD->EPIN[epnr].AMOUNT;
         }
     }
@@ -1277,7 +1277,7 @@ uint32_t nrf_usbd_ep_amount_get(uint8_t ep)
         else
         {
             uint8_t epnr = NRF_USBD_EP_NR_GET(ep);
-            ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
+            NRFX_ASSERT(epnr < ARRAY_SIZE(NRF_USBD->EPOUT));
             ret = NRF_USBD->EPOUT[epnr].AMOUNT;
         }
     }

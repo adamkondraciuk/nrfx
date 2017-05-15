@@ -85,7 +85,7 @@ static void lfclk_stop(void)
     // If LFCLK is requested to stop while SD is still enabled,
     // it indicates an error in the application.
     // Enabling SD should increment the LFCLK request.
-    ASSERT(!softdevice_handler_is_enabled());
+    NRFX_ASSERT(!softdevice_handler_is_enabled());
 #endif // SOFTDEVICE_PRESENT
 
     nrf_clock_task_trigger(NRF_CLOCK_TASK_LFCLKSTOP);
@@ -165,7 +165,7 @@ ret_code_t nrf_drv_clock_init(void)
 
 void nrf_drv_clock_uninit(void)
 {
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
     nrf_drv_common_clock_irq_disable();
     nrf_clock_int_disable(0xFFFFFFFF);
 
@@ -204,7 +204,7 @@ static nrf_drv_clock_handler_item_t * item_dequeue(nrf_drv_clock_handler_item_t 
 
 void nrf_drv_clock_lfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
 {
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
 
     if (m_clock_cb.lfclk_on)
     {
@@ -232,13 +232,13 @@ void nrf_drv_clock_lfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
         CRITICAL_REGION_EXIT();
     }
 
-    ASSERT(m_clock_cb.lfclk_requests > 0);
+    NRFX_ASSERT(m_clock_cb.lfclk_requests > 0);
 }
 
 void nrf_drv_clock_lfclk_release(void)
 {
-    ASSERT(m_clock_cb.module_initialized);
-    ASSERT(m_clock_cb.lfclk_requests > 0);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.lfclk_requests > 0);
 
     CRITICAL_REGION_ENTER();
     --(m_clock_cb.lfclk_requests);
@@ -251,7 +251,7 @@ void nrf_drv_clock_lfclk_release(void)
 
 bool nrf_drv_clock_lfclk_is_running(void)
 {
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
 
 #ifdef SOFTDEVICE_PRESENT
     if (softdevice_handler_is_enabled())
@@ -265,7 +265,7 @@ bool nrf_drv_clock_lfclk_is_running(void)
 
 void nrf_drv_clock_hfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
 {
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
 
     if (m_clock_cb.hfclk_on)
     {
@@ -293,13 +293,13 @@ void nrf_drv_clock_hfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
         CRITICAL_REGION_EXIT();
     }
 
-    ASSERT(m_clock_cb.hfclk_requests > 0);
+    NRFX_ASSERT(m_clock_cb.hfclk_requests > 0);
 }
 
 void nrf_drv_clock_hfclk_release(void)
 {
-    ASSERT(m_clock_cb.module_initialized);
-    ASSERT(m_clock_cb.hfclk_requests > 0);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.hfclk_requests > 0);
 
     CRITICAL_REGION_ENTER();
     --(m_clock_cb.hfclk_requests);
@@ -312,7 +312,7 @@ void nrf_drv_clock_hfclk_release(void)
 
 bool nrf_drv_clock_hfclk_is_running(void)
 {
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
 
 #ifdef SOFTDEVICE_PRESENT
     if (softdevice_handler_is_enabled())
@@ -352,7 +352,7 @@ ret_code_t nrf_drv_clock_calibration_start(uint8_t interval, nrf_drv_clock_event
 {
     ret_code_t err_code = NRFX_SUCCESS;
 #if CALIBRATION_SUPPORT
-    ASSERT(m_clock_cb.cal_state == CAL_STATE_IDLE);
+    NRFX_ASSERT(m_clock_cb.cal_state == CAL_STATE_IDLE);
     if (m_clock_cb.lfclk_on == false)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
@@ -427,7 +427,7 @@ ret_code_t nrf_drv_clock_is_calibrating(bool * p_is_calibrating)
 {
     ret_code_t err_code = NRFX_SUCCESS;
 #if CALIBRATION_SUPPORT
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
     *p_is_calibrating = (m_clock_cb.cal_state != CAL_STATE_IDLE);
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -537,7 +537,7 @@ void nrf_drv_clock_on_sd_enable(void)
 void nrf_drv_clock_on_sd_disable(void)
 {
     /* Reinit interrupts */
-    ASSERT(m_clock_cb.module_initialized);
+    NRFX_ASSERT(m_clock_cb.module_initialized);
     nrf_drv_common_irq_enable(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
 
     /* SD leaves LFCLK enabled - disable it if it is no longer required. */

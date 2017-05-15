@@ -327,7 +327,7 @@ __STATIC_INLINE uint32_t  nrf_saadc_event_address_get(nrf_saadc_event_t saadc_ev
  */
 __STATIC_INLINE volatile uint32_t * nrf_saadc_event_limit_address_get(uint8_t channel, nrf_saadc_limit_t limit_type)
 {
-    ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
+    NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     if (limit_type == NRF_SAADC_LIMIT_HIGH)
     {
         return &NRF_SAADC->EVENTS_CH[channel].LIMITH;
@@ -439,7 +439,7 @@ __STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask)
  */
 __STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limit_t limit_type)
 {
-    ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
+    NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     uint32_t mask = (limit_type == NRF_SAADC_LIMIT_LOW) ? NRF_SAADC_INT_CH0LIMITL : NRF_SAADC_INT_CH0LIMITH;
     return mask << (channel * 2);
 }

@@ -30,14 +30,14 @@ static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
     }
 }
 
-#if NRF_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
     #define IRQ_HANDLER_NAME   irq_handler_for_comp
     #define IRQ_HANDLER        static void IRQ_HANDLER_NAME(void)
 
     IRQ_HANDLER;
 #else
     #define IRQ_HANDLER void COMP_LPCOMP_IRQHandler(void)
-#endif // NRF_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
 
 IRQ_HANDLER
 {
@@ -65,7 +65,7 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
         p_config = &m_default_config;
     }
 
-#if NRF_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
     if (nrf_drv_common_per_res_acquire(NRF_COMP, IRQ_HANDLER_NAME) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
@@ -126,10 +126,10 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 
 void nrf_drv_comp_uninit(void)
 {
-    ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
     nrf_drv_common_irq_disable(COMP_LPCOMP_IRQn);
     nrf_comp_disable();
-#if NRF_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
     nrf_drv_common_per_res_release(NRF_COMP);
 #endif
     m_state = NRF_DRV_STATE_UNINITIALIZED;
@@ -155,7 +155,7 @@ void nrf_drv_comp_pin_select(nrf_comp_input_t psel)
 
 void nrf_drv_comp_start(uint32_t comp_int_mask, uint32_t comp_shorts_mask)
 {
-    ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
     nrf_comp_int_enable(comp_int_mask);
     nrf_comp_shorts_enable(comp_shorts_mask);
     nrf_comp_task_trigger(NRF_COMP_TASK_START);
@@ -165,7 +165,7 @@ void nrf_drv_comp_start(uint32_t comp_int_mask, uint32_t comp_shorts_mask)
 
 void nrf_drv_comp_stop(void)
 {
-    ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
     nrf_comp_shorts_disable(UINT32_MAX);
     nrf_comp_int_disable(UINT32_MAX);
     nrf_comp_task_trigger(NRF_COMP_TASK_STOP);
@@ -175,7 +175,7 @@ void nrf_drv_comp_stop(void)
 
 uint32_t nrf_drv_comp_sample()
 {
-    ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
     nrf_comp_task_trigger(NRF_COMP_TASK_SAMPLE);
     return nrf_comp_result_get();
 }

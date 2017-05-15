@@ -158,7 +158,7 @@ __STATIC_INLINE uint32_t * nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx,
 __STATIC_INLINE uint32_t * nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_EGUx,
                                                            uint8_t channel)
 {
-    ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
+    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (uint32_t*)&NRF_EGUx->TASKS_TRIGGER[channel];
 }
 
@@ -171,7 +171,7 @@ __STATIC_INLINE uint32_t * nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_E
  */
 __STATIC_INLINE nrf_egu_task_t nrf_egu_task_trigger_get(NRF_EGU_Type * NRF_EGUx, uint8_t channel)
 {
-    ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
+    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (nrf_egu_task_t)((uint32_t) NRF_EGU_TASK_TRIGGER0 + (channel * sizeof(uint32_t)));
 }
 
@@ -228,7 +228,7 @@ __STATIC_INLINE uint32_t * nrf_egu_event_address_get(NRF_EGU_Type * NRF_EGUx,
 __STATIC_INLINE uint32_t * nrf_egu_event_triggered_address_get(NRF_EGU_Type * NRF_EGUx,
                                                               uint8_t channel)
 {
-    ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
+    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (uint32_t*)&NRF_EGUx->EVENTS_TRIGGERED[channel];
 }
 
@@ -242,7 +242,7 @@ __STATIC_INLINE uint32_t * nrf_egu_event_triggered_address_get(NRF_EGU_Type * NR
 __STATIC_INLINE nrf_egu_event_t nrf_egu_event_triggered_get(NRF_EGU_Type * NRF_EGUx,
                                                             uint8_t channel)
 {
-    ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
+    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (nrf_egu_event_t)((uint32_t) NRF_EGU_EVENT_TRIGGERED0 + (channel * sizeof(uint32_t)));
 }
 
@@ -295,7 +295,7 @@ __STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t egu_i
  */
 __STATIC_INLINE nrf_egu_int_mask_t nrf_egu_int_get(NRF_EGU_Type * NRF_EGUx, uint8_t channel)
 {
-    ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
+    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (nrf_egu_int_mask_t)((uint32_t) (EGU_INTENSET_TRIGGERED0_Msk << channel));
 }
 

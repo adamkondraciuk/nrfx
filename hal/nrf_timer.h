@@ -560,7 +560,7 @@ __STATIC_INLINE uint32_t nrf_timer_us_to_ticks(uint32_t time_us,
     // The "frequency" parameter here is actually the prescaler value, and the
     // timer runs at the following frequency: f = 16 MHz / 2^prescaler.
     uint32_t prescaler = (uint32_t)frequency;
-    ASSERT(time_us <= (UINT32_MAX / 16UL));
+    NRFX_ASSERT(time_us <= (UINT32_MAX / 16UL));
     return ((time_us * 16UL) >> prescaler);
 }
 
@@ -570,7 +570,7 @@ __STATIC_INLINE uint32_t nrf_timer_ms_to_ticks(uint32_t time_ms,
     // The "frequency" parameter here is actually the prescaler value, and the
     // timer runs at the following frequency: f = 16000 kHz / 2^prescaler.
     uint32_t prescaler = (uint32_t)frequency;
-    ASSERT(time_ms <= (UINT32_MAX / 16000UL));
+    NRFX_ASSERT(time_ms <= (UINT32_MAX / 16000UL));
     return ((time_ms * 16000UL) >> prescaler);
 }
 
