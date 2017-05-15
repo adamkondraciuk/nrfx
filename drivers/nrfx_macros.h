@@ -55,6 +55,15 @@ extern "C" {
 /** Auxiliary macro used by @ref STRINGIFY */
 #define STRINGIFY_(val) #val
 
+/**@brief Macro for performing rounded integer division (as opposed to truncating the result).
+ *
+ * @param[in]   A   Numerator.
+ * @param[in]   B   Denominator.
+ *
+ * @return      Rounded (integer) result of dividing A by B.
+ */
+#define ROUNDED_DIV(A, B) (((A) + ((B) / 2)) / (B))
+
 
 #ifdef __cplusplus
 }

@@ -20,6 +20,7 @@ typedef uint32_t ret_code_t;
 
 #define NRFX_SUCCESS                (NRFX_ERROR_BASE_NUM + 0)  ///< Successful command
 #define NRFX_ERROR_INTERNAL         (NRFX_ERROR_BASE_NUM + 3)  ///< Internal Error
+#define NRFX_ERROR_NO_MEM           (NRFX_ERROR_BASE_NUM + 4)  ///< No Memory for operation
 #define NRFX_ERROR_NOT_SUPPORTED    (NRFX_ERROR_BASE_NUM + 6)  ///< Not supported
 #define NRFX_ERROR_INVALID_PARAM    (NRFX_ERROR_BASE_NUM + 7)  ///< Invalid Parameter
 #define NRFX_ERROR_INVALID_STATE    (NRFX_ERROR_BASE_NUM + 8)  ///< Invalid state, operation disallowed in this state
@@ -27,6 +28,14 @@ typedef uint32_t ret_code_t;
 #define NRFX_ERROR_FORBIDDEN        (NRFX_ERROR_BASE_NUM + 15) ///< Forbidden Operation
 #define NRFX_ERROR_INVALID_ADDR     (NRFX_ERROR_BASE_NUM + 16) ///< Bad Memory Address
 #define NRFX_ERROR_BUSY             (NRFX_ERROR_BASE_NUM + 17) ///< Busy
+
+
+#ifndef NRFX_ERROR_SDK_COMMON_ERROR_BASE
+#define NRFX_ERROR_SDK_COMMON_ERROR_BASE  (NRFX_ERROR_BASE_NUM + 0x0080)
+#endif
+
+#define NRFX_ERROR_MODULE_ALREADY_INITIALIZED (NRFX_ERROR_SDK_COMMON_ERROR_BASE + 0x0005)
+
 
 #ifndef NRFX_ERROR_PERIPH_DRIVERS_ERR_BASE
 #define NRFX_ERROR_PERIPH_DRIVERS_ERR_BASE  (NRFX_ERROR_BASE_NUM + 0x10000)
