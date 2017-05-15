@@ -8,7 +8,7 @@
 #include <string.h>
 #include <nrf_drv_pwm.h>
 #include <nrf_drv_common.h>
-#include <nrf_gpio.h>
+#include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE PWM
 #include <nrfx_log.h>

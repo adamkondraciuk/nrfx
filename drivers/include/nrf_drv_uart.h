@@ -16,9 +16,9 @@
 #define NRF_DRV_UART_H
 
 #include <nrfx.h>
-#include <nrf_uart.h>
+#include <hal/nrf_uart.h>
 #ifdef UARTE_PRESENT
-#include <nrf_uarte.h>
+#include <hal/nrf_uarte.h>
 #endif
 
 #ifdef __cplusplus

@@ -15,7 +15,7 @@
 #define NRF_DRV_PWM_H__
 
 #include <nrfx.h>
-#include <nrf_pwm.h>
+#include <hal/nrf_pwm.h>
 
 #ifdef __cplusplus
 extern "C" {

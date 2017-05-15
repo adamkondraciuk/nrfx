@@ -3,7 +3,7 @@
 #define NRF_DRV_RTC_H
 
 #include <nrfx.h>
-#include <nrf_rtc.h>
+#include <hal/nrf_rtc.h>
 
 #ifdef __cplusplus
 extern "C" {

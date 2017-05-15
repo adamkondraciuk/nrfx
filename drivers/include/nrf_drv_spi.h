@@ -10,9 +10,9 @@
 #define NRF_DRV_SPI_H__
 
 #include <nrfx.h>
-#include <nrf_spi.h>
+#include <hal/nrf_spi.h>
 #ifdef SPIM_PRESENT
-#include <nrf_spim.h>
+#include <hal/nrf_spim.h>
 #endif
 
 #ifdef __cplusplus

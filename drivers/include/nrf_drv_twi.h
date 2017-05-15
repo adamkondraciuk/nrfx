@@ -26,9 +26,9 @@
     #define TWI_IN_USE
 #endif
 
-#include <nrf_twi.h>
+#include <hal/nrf_twi.h>
 #ifdef TWIM_IN_USE
-    #include <nrf_twim.h>
+    #include <hal/nrf_twim.h>
 #endif
 
 #ifdef __cplusplus

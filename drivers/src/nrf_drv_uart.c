@@ -5,7 +5,7 @@
 #if NRFX_MODULE_ENABLED(UART)
 #include <nrf_drv_uart.h>
 #include <nrf_drv_common.h>
-#include <nrf_gpio.h>
+#include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE UART
 #include <nrfx_log.h>

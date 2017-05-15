@@ -7,7 +7,7 @@
 #if ENABLED_SPI_COUNT
 #include <nrf_drv_spi.h>
 #include <nrf_drv_common.h>
-#include <nrf_gpio.h>
+#include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE SPI
 #include <nrfx_log.h>

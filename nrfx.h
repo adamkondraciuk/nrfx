@@ -13,7 +13,7 @@
 #include <nrfx_config.h>
 #include <nrfx_glue.h>
 
-#include <nrfx_macros.h>
-#include <nrfx_errors.h>
+#include <drivers/nrfx_macros.h>
+#include <drivers/nrfx_errors.h>
 
 #endif // NRFX_H__

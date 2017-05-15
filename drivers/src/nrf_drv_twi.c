@@ -7,7 +7,7 @@
 #if ENABLED_TWI_COUNT
 #include <nrf_drv_twi.h>
 #include <nrf_drv_common.h>
-#include <nrf_gpio.h>
+#include <hal/nrf_gpio.h>
 #include <nrf_delay.h>
 
 #define NRFX_LOG_MODULE TWI
