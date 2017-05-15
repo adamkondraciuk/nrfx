@@ -3,7 +3,6 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(CLOCK)
-
 #include <nrf_drv_clock.h>
 #include <nrf_drv_common.h>
 #ifdef SOFTDEVICE_PRESENT

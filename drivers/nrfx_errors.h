@@ -26,6 +26,7 @@ typedef uint32_t ret_code_t;
 #define NRFX_ERROR_INVALID_STATE    (NRFX_ERROR_BASE_NUM + 8)  ///< Invalid state, operation disallowed in this state
 #define NRFX_ERROR_TIMEOUT          (NRFX_ERROR_BASE_NUM + 13) ///< Operation timed out
 #define NRFX_ERROR_FORBIDDEN        (NRFX_ERROR_BASE_NUM + 15) ///< Forbidden Operation
+#define NRFX_ERROR_NULL             (NRFX_ERROR_BASE_NUM + 14) ///< Null Pointer
 #define NRFX_ERROR_INVALID_ADDR     (NRFX_ERROR_BASE_NUM + 16) ///< Bad Memory Address
 #define NRFX_ERROR_BUSY             (NRFX_ERROR_BASE_NUM + 17) ///< Busy
 
