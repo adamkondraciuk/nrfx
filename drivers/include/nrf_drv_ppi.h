@@ -22,8 +22,6 @@
  * @brief Programmable Peripheral Interconnect (PPI) driver.
  */
 
-#include "sdk_resources.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif
