@@ -5,6 +5,7 @@
 #define ENABLED_TWIS_COUNT (TWIS0_ENABLED+TWIS1_ENABLED)
 #if ENABLED_TWIS_COUNT
 #include <nrf_drv_twis.h>
+#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME TWIS
 #include <nrfx_log.h>
@@ -726,7 +727,7 @@ static uint32_t nrf_drv_twis_error_get_and_clear_internal(uint32_t volatile * co
         [zero]"l"(0),
         [perror]"l"(perror)
     );
-    UNUSED_VARIABLE(temp);
+    (void)temp;
     return ret;
 }
 #elif defined ( __ICCARM__ )
@@ -747,7 +748,7 @@ static uint32_t nrf_drv_twis_error_get_and_clear_internal(uint32_t volatile * co
         [zero]"l"(0),
         [perror]"l"(perror)
     );
-    UNUSED_VARIABLE(temp);
+    (void)temp;
     return ret;
 }
 #else

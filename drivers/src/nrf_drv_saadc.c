@@ -163,7 +163,9 @@ void SAADC_IRQHandler(void)
                 evt.type                  = NRF_DRV_SAADC_EVT_LIMIT;
                 evt.data.limit.channel    = LIMIT_EVENT_TO_CHANNEL(event);
                 evt.data.limit.limit_type = LIMIT_EVENT_TO_LIMIT_TYPE(event);
-                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.\r\n", evt.data.limit.channel, (uint32_t)EVT_TO_STR(evt.data.limit.limit_type));
+                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.\r\n",
+                    evt.data.limit.channel,
+                    (uint32_t)EVT_TO_STR_LIMIT(evt.data.limit.limit_type));
                 m_cb.event_handler(&evt);
             }
         }

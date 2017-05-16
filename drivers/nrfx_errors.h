@@ -24,6 +24,7 @@ typedef uint32_t ret_code_t;
 #define NRFX_ERROR_NOT_SUPPORTED    (NRFX_ERROR_BASE_NUM + 6)  ///< Not supported
 #define NRFX_ERROR_INVALID_PARAM    (NRFX_ERROR_BASE_NUM + 7)  ///< Invalid Parameter
 #define NRFX_ERROR_INVALID_STATE    (NRFX_ERROR_BASE_NUM + 8)  ///< Invalid state, operation disallowed in this state
+#define NRFX_ERROR_INVALID_LENGTH   (NRFX_ERROR_BASE_NUM + 9)  ///< Invalid Length
 #define NRFX_ERROR_TIMEOUT          (NRFX_ERROR_BASE_NUM + 13) ///< Operation timed out
 #define NRFX_ERROR_FORBIDDEN        (NRFX_ERROR_BASE_NUM + 15) ///< Forbidden Operation
 #define NRFX_ERROR_NULL             (NRFX_ERROR_BASE_NUM + 14) ///< Null Pointer

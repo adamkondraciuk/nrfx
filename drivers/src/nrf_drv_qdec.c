@@ -37,7 +37,7 @@ void QDEC_IRQHandler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_REPORTRDY_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_REPORTRDY);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_QDEC_INT_REPORTRDY_MASK));
+        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_REPORTRDY));
 
         event.type = NRF_QDEC_EVENT_REPORTRDY;
 
