@@ -3,6 +3,8 @@
 #ifndef NRFX_ERRORS_H__
 #define NRFX_ERRORS_H__
 
+#ifndef NRFX_ERRORS_DEFINED_EXTERNALLY
+
 typedef uint32_t ret_code_t;
 
 /**
@@ -11,8 +13,6 @@ typedef uint32_t ret_code_t;
 
 @brief Global Error definitions
 */
-
-#ifndef NRFX_ERRORS_DEFINED_EXTERNALLY
 
 #ifndef NRFX_ERROR_BASE_NUM
 #define NRFX_ERROR_BASE_NUM         0xBAD00000
