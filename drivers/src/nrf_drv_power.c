@@ -374,12 +374,12 @@ void nrf_drv_power_on_soc_event(uint32_t evt_id)
 void nrf_drv_power_on_sd_enable(void)
 {
     NRFX_ASSERT(m_initialized); /* This module has to be enabled first */
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     if (m_pofwarn_handler != NULL)
     {
         sd_power_pof_enable(true);
     }
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_ENTER();
 }
 
 void nrf_drv_power_on_sd_disable(void)

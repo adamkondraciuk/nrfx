@@ -211,13 +211,13 @@ void nrf_drv_clock_lfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
         {
             p_handler_item->event_handler(NRF_DRV_CLOCK_EVT_LFCLK_STARTED);
         }
-        CRITICAL_REGION_ENTER();
+        NRFX_CRITICAL_SECTION_ENTER();
         ++(m_clock_cb.lfclk_requests);
-        CRITICAL_REGION_EXIT();
+        NRFX_CRITICAL_SECTION_EXIT();
     }
     else
     {
-        CRITICAL_REGION_ENTER();
+        NRFX_CRITICAL_SECTION_ENTER();
         if (p_handler_item)
         {
             item_enqueue((nrf_drv_clock_handler_item_t **)&m_clock_cb.p_lf_head,
@@ -228,7 +228,7 @@ void nrf_drv_clock_lfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
             lfclk_start();
         }
         ++(m_clock_cb.lfclk_requests);
-        CRITICAL_REGION_EXIT();
+        NRFX_CRITICAL_SECTION_EXIT();
     }
 
     NRFX_ASSERT(m_clock_cb.lfclk_requests > 0);
@@ -239,13 +239,13 @@ void nrf_drv_clock_lfclk_release(void)
     NRFX_ASSERT(m_clock_cb.module_initialized);
     NRFX_ASSERT(m_clock_cb.lfclk_requests > 0);
 
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     --(m_clock_cb.lfclk_requests);
     if (m_clock_cb.lfclk_requests == 0)
     {
         lfclk_stop();
     }
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_EXIT();
 }
 
 bool nrf_drv_clock_lfclk_is_running(void)
@@ -272,13 +272,13 @@ void nrf_drv_clock_hfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
         {
             p_handler_item->event_handler(NRF_DRV_CLOCK_EVT_HFCLK_STARTED);
         }
-        CRITICAL_REGION_ENTER();
+        NRFX_CRITICAL_SECTION_ENTER();
         ++(m_clock_cb.hfclk_requests);
-        CRITICAL_REGION_EXIT();
+        NRFX_CRITICAL_SECTION_EXIT();
     }
     else
     {
-        CRITICAL_REGION_ENTER();
+        NRFX_CRITICAL_SECTION_ENTER();
         if (p_handler_item)
         {
             item_enqueue((nrf_drv_clock_handler_item_t **)&m_clock_cb.p_hf_head,
@@ -289,7 +289,7 @@ void nrf_drv_clock_hfclk_request(nrf_drv_clock_handler_item_t * p_handler_item)
             hfclk_start();
         }
         ++(m_clock_cb.hfclk_requests);
-        CRITICAL_REGION_EXIT();
+        NRFX_CRITICAL_SECTION_EXIT();
     }
 
     NRFX_ASSERT(m_clock_cb.hfclk_requests > 0);
@@ -300,13 +300,13 @@ void nrf_drv_clock_hfclk_release(void)
     NRFX_ASSERT(m_clock_cb.module_initialized);
     NRFX_ASSERT(m_clock_cb.hfclk_requests > 0);
 
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     --(m_clock_cb.hfclk_requests);
     if (m_clock_cb.hfclk_requests == 0)
     {
         hfclk_stop();
     }
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_EXIT();
 }
 
 bool nrf_drv_clock_hfclk_is_running(void)
@@ -391,7 +391,7 @@ ret_code_t nrf_drv_clock_calibration_abort(void)
 {
     ret_code_t err_code = NRFX_SUCCESS;
 #if CALIBRATION_SUPPORT
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     switch (m_clock_cb.cal_state)
     {
     case CAL_STATE_CT:
@@ -411,7 +411,7 @@ ret_code_t nrf_drv_clock_calibration_abort(void)
     default:
         break;
     }
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_EXIT();
 
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -521,7 +521,7 @@ void nrf_drv_clock_on_soc_event(uint32_t evt_id)
 
 void nrf_drv_clock_on_sd_enable(void)
 {
-    CRITICAL_REGION_ENTER();
+    NRFX_CRITICAL_SECTION_ENTER();
     /* Make sure that nrf_drv_clock module is initialized */
     if (!m_clock_cb.module_initialized)
     {
@@ -530,7 +530,7 @@ void nrf_drv_clock_on_sd_enable(void)
     /* SD is one of the LFCLK requesters, but it will enable it by itself. */
     ++(m_clock_cb.lfclk_requests);
     m_clock_cb.lfclk_on = true;
-    CRITICAL_REGION_EXIT();
+    NRFX_CRITICAL_SECTION_EXIT();
 }
 
 void nrf_drv_clock_on_sd_disable(void)
