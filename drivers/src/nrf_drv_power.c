@@ -379,7 +379,7 @@ void nrf_drv_power_on_sd_enable(void)
     {
         sd_power_pof_enable(true);
     }
-    NRFX_CRITICAL_SECTION_ENTER();
+    NRFX_CRITICAL_SECTION_EXIT();
 }
 
 void nrf_drv_power_on_sd_disable(void)
