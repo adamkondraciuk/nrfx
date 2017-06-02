@@ -1,29 +1,34 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
-#ifndef NRF_PERIPHERALS_H
-#define NRF_PERIPHERALS_H
+
+#ifndef NRF_PERIPHERALS_H__
+#define NRF_PERIPHERALS_H__
 
 /*lint ++flb "Enter library region */
 
-#ifdef NRF51422
+#if defined(NRF51422)
 #include "nrf51422_peripherals.h"
 #endif
 
-#ifdef NRF51802
+#if defined(NRF51802)
 #include "nrf51802_peripherals.h"
 #endif
 
-#ifdef NRF51822
+#if defined(NRF51822)
 #include "nrf51822_peripherals.h"
 #endif
 
-#ifdef NRF52832_XXAA
+#if defined(NRF52810_XXAA)
+#include "nrf52810_peripherals.h"
+#endif
+
+#if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
 #include "nrf52832_peripherals.h"
 #endif
 
-#ifdef NRF52840_XXAA
+#if defined(NRF52840_XXAA)
 #include "nrf52840_peripherals.h"
 #endif
 
 /*lint --flb "Leave library region" */
 
-#endif /* NRF_PERIPHERALS_H */
+#endif // NRF_PERIPHERALS_H__

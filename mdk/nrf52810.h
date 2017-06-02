@@ -1,15 +1,15 @@
 
 /****************************************************************************************************//**
- * @file     nrf52840.h
+ * @file     nrf52810.h
  *
  * @brief    CMSIS Cortex-M4 Peripheral Access Layer Header File for
- *           nrf52840 from Nordic Semiconductor.
+ *           nrf52810 from Nordic Semiconductor.
  *
  * @version  V1
  * @date     12. May 2017
  *
  * @note     Generated with SVDConv V2.81d 
- *           from CMSIS SVD File 'nrf52840.svd' Version 1,
+ *           from CMSIS SVD File 'nrf52810.svd' Version 1,
  *
  * @par      Copyright (c) 2010 - 2017, Nordic Semiconductor ASA All rights reserved.
  *           
@@ -48,12 +48,12 @@
   * @{
   */
 
-/** @addtogroup nrf52840
+/** @addtogroup nrf52810
   * @{
   */
 
-#ifndef NRF52840_H
-#define NRF52840_H
+#ifndef NRF52810_H
+#define NRF52810_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,13 +76,12 @@ typedef enum {
   DebugMonitor_IRQn             =  -4,              /*!<  12  Debug Monitor                                                    */
   PendSV_IRQn                   =  -2,              /*!<  14  Pendable request for system service                              */
   SysTick_IRQn                  =  -1,              /*!<  15  System Tick Timer                                                */
-/* ---------------------  nrf52840 Specific Interrupt Numbers  -------------------- */
+/* ---------------------  nrf52810 Specific Interrupt Numbers  -------------------- */
   POWER_CLOCK_IRQn              =   0,              /*!<   0  POWER_CLOCK                                                      */
   RADIO_IRQn                    =   1,              /*!<   1  RADIO                                                            */
-  UARTE0_UART0_IRQn             =   2,              /*!<   2  UARTE0_UART0                                                     */
-  SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn=   3,      /*!<   3  SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0                                */
-  SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQn=   4,      /*!<   4  SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1                                */
-  NFCT_IRQn                     =   5,              /*!<   5  NFCT                                                             */
+  UARTE0_IRQn                   =   2,              /*!<   2  UARTE0                                                           */
+  TWIM0_TWIS0_IRQn              =   3,              /*!<   3  TWIM0_TWIS0                                                      */
+  SPIM0_SPIS0_IRQn              =   4,              /*!<   4  SPIM0_SPIS0                                                      */
   GPIOTE_IRQn                   =   6,              /*!<   6  GPIOTE                                                           */
   SAADC_IRQn                    =   7,              /*!<   7  SAADC                                                            */
   TIMER0_IRQn                   =   8,              /*!<   8  TIMER0                                                           */
@@ -96,30 +95,15 @@ typedef enum {
   WDT_IRQn                      =  16,              /*!<  16  WDT                                                              */
   RTC1_IRQn                     =  17,              /*!<  17  RTC1                                                             */
   QDEC_IRQn                     =  18,              /*!<  18  QDEC                                                             */
-  COMP_LPCOMP_IRQn              =  19,              /*!<  19  COMP_LPCOMP                                                      */
+  COMP_IRQn                     =  19,              /*!<  19  COMP                                                             */
   SWI0_EGU0_IRQn                =  20,              /*!<  20  SWI0_EGU0                                                        */
   SWI1_EGU1_IRQn                =  21,              /*!<  21  SWI1_EGU1                                                        */
-  SWI2_EGU2_IRQn                =  22,              /*!<  22  SWI2_EGU2                                                        */
-  SWI3_EGU3_IRQn                =  23,              /*!<  23  SWI3_EGU3                                                        */
-  SWI4_EGU4_IRQn                =  24,              /*!<  24  SWI4_EGU4                                                        */
-  SWI5_EGU5_IRQn                =  25,              /*!<  25  SWI5_EGU5                                                        */
-  TIMER3_IRQn                   =  26,              /*!<  26  TIMER3                                                           */
-  TIMER4_IRQn                   =  27,              /*!<  27  TIMER4                                                           */
+  SWI2_IRQn                     =  22,              /*!<  22  SWI2                                                             */
+  SWI3_IRQn                     =  23,              /*!<  23  SWI3                                                             */
+  SWI4_IRQn                     =  24,              /*!<  24  SWI4                                                             */
+  SWI5_IRQn                     =  25,              /*!<  25  SWI5                                                             */
   PWM0_IRQn                     =  28,              /*!<  28  PWM0                                                             */
-  PDM_IRQn                      =  29,              /*!<  29  PDM                                                              */
-  MWU_IRQn                      =  32,              /*!<  32  MWU                                                              */
-  PWM1_IRQn                     =  33,              /*!<  33  PWM1                                                             */
-  PWM2_IRQn                     =  34,              /*!<  34  PWM2                                                             */
-  SPIM2_SPIS2_SPI2_IRQn         =  35,              /*!<  35  SPIM2_SPIS2_SPI2                                                 */
-  RTC2_IRQn                     =  36,              /*!<  36  RTC2                                                             */
-  I2S_IRQn                      =  37,              /*!<  37  I2S                                                              */
-  FPU_IRQn                      =  38,              /*!<  38  FPU                                                              */
-  USBD_IRQn                     =  39,              /*!<  39  USBD                                                             */
-  UARTE1_IRQn                   =  40,              /*!<  40  UARTE1                                                           */
-  QSPI_IRQn                     =  41,              /*!<  41  QSPI                                                             */
-  CRYPTOCELL_IRQn               =  42,              /*!<  42  CRYPTOCELL                                                       */
-  PWM3_IRQn                     =  45,              /*!<  45  PWM3                                                             */
-  SPIM3_IRQn                    =  47               /*!<  47  SPIM3                                                            */
+  PDM_IRQn                      =  29               /*!<  29  PDM                                                              */
 } IRQn_Type;
 
 
@@ -137,11 +121,11 @@ typedef enum {
 #define __MPU_PRESENT                  1            /*!< MPU present or not                                                    */
 #define __NVIC_PRIO_BITS               3            /*!< Number of Bits used for Priority Levels                               */
 #define __Vendor_SysTickConfig         0            /*!< Set to 1 if different SysTick Config is used                          */
-#define __FPU_PRESENT                  1            /*!< FPU present or not                                                    */
+#define __FPU_PRESENT                  0            /*!< FPU present or not                                                    */
 /** @} */ /* End of group Configuration_of_CMSIS */
 
 #include "core_cm4.h"                               /*!< Cortex-M4 processor and core peripherals                              */
-#include "system_nrf52840.h"                        /*!< nrf52840 System                                                       */
+#include "system_nrf52810.h"                        /*!< nrf52810 System                                                       */
 
 
 /* ================================================================================ */
@@ -173,7 +157,7 @@ typedef enum {
 
 typedef struct {
   __I  uint32_t  PART;                              /*!< Part code                                                             */
-  __I  uint32_t  VARIANT;                           /*!< Part variant (hardware version and production configuration)          */
+  __I  uint32_t  VARIANT;                           /*!< Part variant, hardware version and production configuration           */
   __I  uint32_t  PACKAGE;                           /*!< Package option                                                        */
   __I  uint32_t  RAM;                               /*!< RAM variant                                                           */
   __I  uint32_t  FLASH;                             /*!< Flash variant                                                         */
@@ -201,17 +185,6 @@ typedef struct {
 } FICR_TEMP_Type;
 
 typedef struct {
-  __I  uint32_t  TAGHEADER0;                        /*!< Default header for NFC tag. Software can read these values to
-                                                         populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.            */
-  __I  uint32_t  TAGHEADER1;                        /*!< Default header for NFC tag. Software can read these values to
-                                                         populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.            */
-  __I  uint32_t  TAGHEADER2;                        /*!< Default header for NFC tag. Software can read these values to
-                                                         populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.            */
-  __I  uint32_t  TAGHEADER3;                        /*!< Default header for NFC tag. Software can read these values to
-                                                         populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.            */
-} FICR_NFC_Type;
-
-typedef struct {
   __IO uint32_t  POWER;                             /*!< Description cluster[0]: RAM0 power control register                   */
   __O  uint32_t  POWERSET;                          /*!< Description cluster[0]: RAM0 power control set register               */
   __O  uint32_t  POWERCLR;                          /*!< Description cluster[0]: RAM0 power control clear register             */
@@ -236,59 +209,6 @@ typedef struct {
   __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in transmit buffer                            */
   __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
 } UARTE_TXD_Type;
-
-typedef struct {
-  __IO uint32_t  RTS;                               /*!< Pin select for RTS                                                    */
-  __IO uint32_t  TXD;                               /*!< Pin select for TXD                                                    */
-  __IO uint32_t  CTS;                               /*!< Pin select for CTS                                                    */
-  __IO uint32_t  RXD;                               /*!< Pin select for RXD                                                    */
-} UART_PSEL_Type;
-
-typedef struct {
-  __IO uint32_t  SCK;                               /*!< Pin select for SCK                                                    */
-  __IO uint32_t  MOSI;                              /*!< Pin select for MOSI signal                                            */
-  __IO uint32_t  MISO;                              /*!< Pin select for MISO signal                                            */
-  __IO uint32_t  CSN;                               /*!< Pin select for CSN                                                    */
-} SPIM_PSEL_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in receive buffer                             */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
-  __IO uint32_t  LIST;                              /*!< EasyDMA list type                                                     */
-} SPIM_RXD_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
-  __IO uint32_t  MAXCNT;                            /*!< Number of bytes in transmit buffer                                    */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
-  __IO uint32_t  LIST;                              /*!< EasyDMA list type                                                     */
-} SPIM_TXD_Type;
-
-typedef struct {
-  __IO uint32_t  RXDELAY;                           /*!< Sample delay for input serial data on MISO                            */
-  __IO uint32_t  CSNDUR;                            /*!< Minimum duration between edge of CSN and edge of SCK and minimum
-                                                         duration CSN must stay high between transactions                      */
-} SPIM_IFTIMING_Type;
-
-typedef struct {
-  __IO uint32_t  SCK;                               /*!< Pin select for SCK                                                    */
-  __IO uint32_t  MISO;                              /*!< Pin select for MISO signal                                            */
-  __IO uint32_t  MOSI;                              /*!< Pin select for MOSI signal                                            */
-  __IO uint32_t  CSN;                               /*!< Pin select for CSN signal                                             */
-} SPIS_PSEL_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< RXD data pointer                                                      */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in receive buffer                             */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes received in last granted transaction                  */
-} SPIS_RXD_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< TXD data pointer                                                      */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in transmit buffer                            */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transmitted in last granted transaction               */
-} SPIS_TXD_Type;
 
 typedef struct {
   __IO uint32_t  SCL;                               /*!< Pin select for SCL signal                                             */
@@ -330,26 +250,40 @@ typedef struct {
   __IO uint32_t  SCK;                               /*!< Pin select for SCK                                                    */
   __IO uint32_t  MOSI;                              /*!< Pin select for MOSI signal                                            */
   __IO uint32_t  MISO;                              /*!< Pin select for MISO signal                                            */
-} SPI_PSEL_Type;
+} SPIM_PSEL_Type;
 
 typedef struct {
-  __IO uint32_t  SCL;                               /*!< Pin select for SCL                                                    */
-  __IO uint32_t  SDA;                               /*!< Pin select for SDA                                                    */
-} TWI_PSEL_Type;
+  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
+  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in receive buffer                             */
+  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
+  __IO uint32_t  LIST;                              /*!< EasyDMA list type                                                     */
+} SPIM_RXD_Type;
 
 typedef struct {
-  __IO uint32_t  RX;                                /*!< Result of last incoming frame                                         */
-} NFCT_FRAMESTATUS_Type;
+  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
+  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in transmit buffer                            */
+  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
+  __IO uint32_t  LIST;                              /*!< EasyDMA list type                                                     */
+} SPIM_TXD_Type;
 
 typedef struct {
-  __IO uint32_t  FRAMECONFIG;                       /*!< Configuration of outgoing frames                                      */
-  __IO uint32_t  AMOUNT;                            /*!< Size of outgoing frame                                                */
-} NFCT_TXD_Type;
+  __IO uint32_t  SCK;                               /*!< Pin select for SCK                                                    */
+  __IO uint32_t  MISO;                              /*!< Pin select for MISO signal                                            */
+  __IO uint32_t  MOSI;                              /*!< Pin select for MOSI signal                                            */
+  __IO uint32_t  CSN;                               /*!< Pin select for CSN signal                                             */
+} SPIS_PSEL_Type;
 
 typedef struct {
-  __IO uint32_t  FRAMECONFIG;                       /*!< Configuration of incoming frames                                      */
-  __I  uint32_t  AMOUNT;                            /*!< Size of last incoming frame                                           */
-} NFCT_RXD_Type;
+  __IO uint32_t  PTR;                               /*!< RXD data pointer                                                      */
+  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in receive buffer                             */
+  __I  uint32_t  AMOUNT;                            /*!< Number of bytes received in last granted transaction                  */
+} SPIS_RXD_Type;
+
+typedef struct {
+  __IO uint32_t  PTR;                               /*!< TXD data pointer                                                      */
+  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes in transmit buffer                            */
+  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transmitted in last granted transaction               */
+} SPIS_TXD_Type;
 
 typedef struct {
   __IO uint32_t  LIMITH;                            /*!< Description cluster[0]: Last results is equal or above CH[0].LIMIT.HIGH */
@@ -403,16 +337,6 @@ typedef struct {
 } PDM_SAMPLE_Type;
 
 typedef struct {
-  __IO uint32_t  ADDR;                              /*!< Description cluster[0]: Configure the word-aligned start address
-                                                         of region 0 to protect                                                */
-  __IO uint32_t  SIZE;                              /*!< Description cluster[0]: Size of region to protect counting from
-                                                         address ACL[0].ADDR. Write '0' as no effect.                          */
-  __IO uint32_t  PERM;                              /*!< Description cluster[0]: Access permissions for region 0 as defined
-                                                         by start address ACL[0].ADDR and size ACL[0].SIZE                     */
-  __IO uint32_t  UNUSED0;                           /*!< Unspecified                                                           */
-} ACL_ACL_Type;
-
-typedef struct {
   __O  uint32_t  EN;                                /*!< Description cluster[0]: Enable channel group 0                        */
   __O  uint32_t  DIS;                               /*!< Description cluster[0]: Disable channel group 0                       */
 } PPI_TASKS_CHG_Type;
@@ -425,141 +349,6 @@ typedef struct {
 typedef struct {
   __IO uint32_t  TEP;                               /*!< Description cluster[0]: Channel 0 task end-point                      */
 } PPI_FORK_Type;
-
-typedef struct {
-  __IO uint32_t  WA;                                /*!< Description cluster[0]: Write access to region 0 detected             */
-  __IO uint32_t  RA;                                /*!< Description cluster[0]: Read access to region 0 detected              */
-} MWU_EVENTS_REGION_Type;
-
-typedef struct {
-  __IO uint32_t  WA;                                /*!< Description cluster[0]: Write access to peripheral region 0
-                                                         detected                                                              */
-  __IO uint32_t  RA;                                /*!< Description cluster[0]: Read access to peripheral region 0 detected   */
-} MWU_EVENTS_PREGION_Type;
-
-typedef struct {
-  __IO uint32_t  SUBSTATWA;                         /*!< Description cluster[0]: Source of event/interrupt in region
-                                                         0, write access detected while corresponding subregion was enabled
-                                                          for watching                                                         */
-  __IO uint32_t  SUBSTATRA;                         /*!< Description cluster[0]: Source of event/interrupt in region
-                                                         0, read access detected while corresponding subregion was enabled
-                                                          for watching                                                         */
-} MWU_PERREGION_Type;
-
-typedef struct {
-  __IO uint32_t  START;                             /*!< Description cluster[0]: Start address for region 0                    */
-  __IO uint32_t  END;                               /*!< Description cluster[0]: End address of region 0                       */
-  __I  uint32_t  RESERVED2[2];
-} MWU_REGION_Type;
-
-typedef struct {
-  __I  uint32_t  START;                             /*!< Description cluster[0]: Reserved for future use                       */
-  __I  uint32_t  END;                               /*!< Description cluster[0]: Reserved for future use                       */
-  __IO uint32_t  SUBS;                              /*!< Description cluster[0]: Subregions of region 0                        */
-  __I  uint32_t  RESERVED3;
-} MWU_PREGION_Type;
-
-typedef struct {
-  __IO uint32_t  MODE;                              /*!< I2S mode.                                                             */
-  __IO uint32_t  RXEN;                              /*!< Reception (RX) enable.                                                */
-  __IO uint32_t  TXEN;                              /*!< Transmission (TX) enable.                                             */
-  __IO uint32_t  MCKEN;                             /*!< Master clock generator enable.                                        */
-  __IO uint32_t  MCKFREQ;                           /*!< Master clock generator frequency.                                     */
-  __IO uint32_t  RATIO;                             /*!< MCK / LRCK ratio.                                                     */
-  __IO uint32_t  SWIDTH;                            /*!< Sample width.                                                         */
-  __IO uint32_t  ALIGN;                             /*!< Alignment of sample within a frame.                                   */
-  __IO uint32_t  FORMAT;                            /*!< Frame format.                                                         */
-  __IO uint32_t  CHANNELS;                          /*!< Enable channels.                                                      */
-} I2S_CONFIG_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Receive buffer RAM start address.                                     */
-} I2S_RXD_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Transmit buffer RAM start address.                                    */
-} I2S_TXD_Type;
-
-typedef struct {
-  __IO uint32_t  MAXCNT;                            /*!< Size of RXD and TXD buffers.                                          */
-} I2S_RXTXD_Type;
-
-typedef struct {
-  __IO uint32_t  MCK;                               /*!< Pin select for MCK signal.                                            */
-  __IO uint32_t  SCK;                               /*!< Pin select for SCK signal.                                            */
-  __IO uint32_t  LRCK;                              /*!< Pin select for LRCK signal.                                           */
-  __IO uint32_t  SDIN;                              /*!< Pin select for SDIN signal.                                           */
-  __IO uint32_t  SDOUT;                             /*!< Pin select for SDOUT signal.                                          */
-} I2S_PSEL_Type;
-
-typedef struct {
-  __I  uint32_t  EPIN[8];                           /*!< Description collection[0]: IN endpoint halted status. Can be
-                                                         used as is as response to a GetStatus() request to endpoint.          */
-  __I  uint32_t  RESERVED4;
-  __I  uint32_t  EPOUT[8];                          /*!< Description collection[0]: OUT endpoint halted status. Can be
-                                                         used as is as response to a GetStatus() request to endpoint.          */
-} USBD_HALTED_Type;
-
-typedef struct {
-  __IO uint32_t  EPOUT[8];                          /*!< Description collection[0]: Amount of bytes received last in
-                                                         the data stage of this OUT endpoint                                   */
-  __I  uint32_t  ISOOUT;                            /*!< Amount of bytes received last on this iso OUT data endpoint           */
-} USBD_SIZE_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Description cluster[0]: Data pointer                                  */
-  __IO uint32_t  MAXCNT;                            /*!< Description cluster[0]: Maximum number of bytes to transfer           */
-  __I  uint32_t  AMOUNT;                            /*!< Description cluster[0]: Number of bytes transferred in the last
-                                                         transaction                                                           */
-  __I  uint32_t  RESERVED5[2];
-} USBD_EPIN_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes to transfer                                   */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
-} USBD_ISOIN_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Description cluster[0]: Data pointer                                  */
-  __IO uint32_t  MAXCNT;                            /*!< Description cluster[0]: Maximum number of bytes to transfer           */
-  __I  uint32_t  AMOUNT;                            /*!< Description cluster[0]: Number of bytes transferred in the last
-                                                         transaction                                                           */
-  __I  uint32_t  RESERVED6[2];
-} USBD_EPOUT_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Data pointer                                                          */
-  __IO uint32_t  MAXCNT;                            /*!< Maximum number of bytes to transfer                                   */
-  __I  uint32_t  AMOUNT;                            /*!< Number of bytes transferred in the last transaction                   */
-} USBD_ISOOUT_Type;
-
-typedef struct {
-  __IO uint32_t  SRC;                               /*!< Flash memory source address                                           */
-  __IO uint32_t  DST;                               /*!< RAM destination address                                               */
-  __IO uint32_t  CNT;                               /*!< Read transfer length                                                  */
-} QSPI_READ_Type;
-
-typedef struct {
-  __IO uint32_t  DST;                               /*!< Flash destination address                                             */
-  __IO uint32_t  SRC;                               /*!< RAM source address                                                    */
-  __IO uint32_t  CNT;                               /*!< Write transfer length                                                 */
-} QSPI_WRITE_Type;
-
-typedef struct {
-  __IO uint32_t  PTR;                               /*!< Start address of flash block to be erased                             */
-  __IO uint32_t  LEN;                               /*!< Size of block to be erased.                                           */
-} QSPI_ERASE_Type;
-
-typedef struct {
-  __IO uint32_t  SCK;                               /*!< Pin select for serial clock SCK                                       */
-  __IO uint32_t  CSN;                               /*!< Pin select for chip select signal CSN.                                */
-  __I  uint32_t  RESERVED7;
-  __IO uint32_t  IO0;                               /*!< Pin select for serial data MOSI/IO0.                                  */
-  __IO uint32_t  IO1;                               /*!< Pin select for serial data MISO/IO1.                                  */
-  __IO uint32_t  IO2;                               /*!< Pin select for serial data IO2.                                       */
-  __IO uint32_t  IO3;                               /*!< Pin select for serial data IO3.                                       */
-} QSPI_PSEL_Type;
 
 
 /* ================================================================================ */
@@ -579,15 +368,13 @@ typedef struct {                                    /*!< FICR Structure         
   __I  uint32_t  DEVICEID[2];                       /*!< Description collection[0]: Device identifier                          */
   __I  uint32_t  RESERVED2[6];
   __I  uint32_t  ER[4];                             /*!< Description collection[0]: Encryption root, word 0                    */
-  __I  uint32_t  IR[4];                             /*!< Description collection[0]: Identity Root, word 0                      */
+  __I  uint32_t  IR[4];                             /*!< Description collection[0]: Identity root, word 0                      */
   __I  uint32_t  DEVICEADDRTYPE;                    /*!< Device address type                                                   */
   __I  uint32_t  DEVICEADDR[2];                     /*!< Description collection[0]: Device address 0                           */
   __I  uint32_t  RESERVED3[21];
   FICR_INFO_Type INFO;                              /*!< Device info                                                           */
   __I  uint32_t  RESERVED4[185];
   FICR_TEMP_Type TEMP;                              /*!< Registers storing factory TEMP module linearization coefficients      */
-  __I  uint32_t  RESERVED5[2];
-  FICR_NFC_Type NFC;                                /*!< Unspecified                                                           */
 } NRF_FICR_Type;
 
 
@@ -610,17 +397,28 @@ typedef struct {                                    /*!< UICR Structure         
   __IO uint32_t  NRFHW[12];                         /*!< Description collection[0]: Reserved for Nordic hardware design        */
   __IO uint32_t  CUSTOMER[32];                      /*!< Description collection[0]: Reserved for customer                      */
   __I  uint32_t  RESERVED1[64];
-  __IO uint32_t  PSELRESET[2];                      /*!< Description collection[0]: Mapping of the nRESET function             */
+  __IO uint32_t  PSELRESET[2];                      /*!< Description collection[0]: Mapping of the nRESET function (see
+                                                         POWER chapter for details)                                            */
   __IO uint32_t  APPROTECT;                         /*!< Access port protection                                                */
-  __IO uint32_t  NFCPINS;                           /*!< Setting of pins dedicated to NFC functionality: NFC antenna
-                                                         or GPIO                                                               */
-  __IO uint32_t  DEBUGCTRL;                         /*!< Processor debug control                                               */
-  __I  uint32_t  RESERVED2[59];
-  __IO uint32_t  EXTSUPPLY;                         /*!< Enable external circuitry to be supplied from VDD pin. Applicable
-                                                         in high voltage mode only.                                            */
-  __IO uint32_t  REGOUT0;                           /*!< GPIO reference voltage / external output supply voltage in high
-                                                         voltage mode                                                          */
 } NRF_UICR_Type;
+
+
+/* ================================================================================ */
+/* ================                      BPROT                     ================ */
+/* ================================================================================ */
+
+
+/**
+  * @brief Block Protect (BPROT)
+  */
+
+typedef struct {                                    /*!< BPROT Structure                                                       */
+  __I  uint32_t  RESERVED0[384];
+  __IO uint32_t  CONFIG0;                           /*!< Block protect configuration register 0                                */
+  __IO uint32_t  CONFIG1;                           /*!< Block protect configuration register 1                                */
+  __IO uint32_t  DISABLEINDEBUG;                    /*!< Disable protection mechanism in debug mode                            */
+  __IO uint32_t  UNUSED0;                           /*!< Unspecified                                                           */
+} NRF_BPROT_Type;
 
 
 /* ================================================================================ */
@@ -641,33 +439,22 @@ typedef struct {                                    /*!< POWER Structure        
   __I  uint32_t  RESERVED2[2];
   __IO uint32_t  EVENTS_SLEEPENTER;                 /*!< CPU entered WFI/WFE sleep                                             */
   __IO uint32_t  EVENTS_SLEEPEXIT;                  /*!< CPU exited WFI/WFE sleep                                              */
-  __IO uint32_t  EVENTS_USBDETECTED;                /*!< Voltage supply detected on VBUS                                       */
-  __IO uint32_t  EVENTS_USBREMOVED;                 /*!< Voltage supply removed from VBUS                                      */
-  __IO uint32_t  EVENTS_USBPWRRDY;                  /*!< USB 3.3 V supply ready                                                */
-  __I  uint32_t  RESERVED3[119];
+  __I  uint32_t  RESERVED3[122];
   __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
   __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
   __I  uint32_t  RESERVED4[61];
   __IO uint32_t  RESETREAS;                         /*!< Reset reason                                                          */
-  __I  uint32_t  RESERVED5[9];
-  __I  uint32_t  RAMSTATUS;                         /*!< Deprecated register - RAM status register                             */
-  __I  uint32_t  RESERVED6[3];
-  __I  uint32_t  USBREGSTATUS;                      /*!< USB supply status                                                     */
-  __I  uint32_t  RESERVED7[49];
+  __I  uint32_t  RESERVED5[63];
   __O  uint32_t  SYSTEMOFF;                         /*!< System OFF register                                                   */
-  __I  uint32_t  RESERVED8[3];
+  __I  uint32_t  RESERVED6[3];
   __IO uint32_t  POFCON;                            /*!< Power failure comparator configuration                                */
-  __I  uint32_t  RESERVED9[2];
+  __I  uint32_t  RESERVED7[2];
   __IO uint32_t  GPREGRET;                          /*!< General purpose retention register                                    */
   __IO uint32_t  GPREGRET2;                         /*!< General purpose retention register                                    */
-  __I  uint32_t  RESERVED10[21];
-  __IO uint32_t  DCDCEN;                            /*!< Enable DC/DC converter for REG1 stage.                                */
-  __I  uint32_t  RESERVED11;
-  __IO uint32_t  DCDCEN0;                           /*!< Enable DC/DC converter for REG0 stage.                                */
-  __I  uint32_t  RESERVED12[47];
-  __I  uint32_t  MAINREGSTATUS;                     /*!< Main supply status                                                    */
-  __I  uint32_t  RESERVED13[175];
-  POWER_RAM_Type RAM[9];                            /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED8[21];
+  __IO uint32_t  DCDCEN;                            /*!< DC/DC enable register                                                 */
+  __I  uint32_t  RESERVED9[225];
+  POWER_RAM_Type RAM[8];                            /*!< Unspecified                                                           */
 } NRF_POWER_Type;
 
 
@@ -685,7 +472,7 @@ typedef struct {                                    /*!< CLOCK Structure        
   __O  uint32_t  TASKS_HFCLKSTOP;                   /*!< Stop HFCLK crystal oscillator                                         */
   __O  uint32_t  TASKS_LFCLKSTART;                  /*!< Start LFCLK source                                                    */
   __O  uint32_t  TASKS_LFCLKSTOP;                   /*!< Stop LFCLK source                                                     */
-  __O  uint32_t  TASKS_CAL;                         /*!< Start calibration of LFRC or LFULP oscillator                         */
+  __O  uint32_t  TASKS_CAL;                         /*!< Start calibration of LFRC oscillator                                  */
   __O  uint32_t  TASKS_CTSTART;                     /*!< Start calibration timer                                               */
   __O  uint32_t  TASKS_CTSTOP;                      /*!< Stop calibration timer                                                */
   __I  uint32_t  RESERVED0[57];
@@ -706,15 +493,10 @@ typedef struct {                                    /*!< CLOCK Structure        
   __I  uint32_t  LFCLKSRCCOPY;                      /*!< Copy of LFCLKSRC register, set when LFCLKSTART task was triggered     */
   __I  uint32_t  RESERVED5[62];
   __IO uint32_t  LFCLKSRC;                          /*!< Clock source for the LFCLK                                            */
-  __I  uint32_t  RESERVED6[3];
-  __IO uint32_t  HFXODEBOUNCE;                      /*!< HFXO debounce time. The HFXO is started by triggering the TASKS_HFCLKSTART
-                                                         task.                                                                 */
-  __I  uint32_t  RESERVED7[3];
+  __I  uint32_t  RESERVED6[7];
   __IO uint32_t  CTIV;                              /*!< Calibration timer interval                                            */
-  __I  uint32_t  RESERVED8[8];
+  __I  uint32_t  RESERVED7[8];
   __IO uint32_t  TRACECONFIG;                       /*!< Clocking options for the Trace Port debug interface                   */
-  __I  uint32_t  RESERVED9[21];
-  __IO uint32_t  LFRCMODE;                          /*!< LFRC mode configuration                                               */
 } NRF_CLOCK_Type;
 
 
@@ -738,11 +520,7 @@ typedef struct {                                    /*!< RADIO Structure        
   __O  uint32_t  TASKS_RSSISTOP;                    /*!< Stop the RSSI measurement                                             */
   __O  uint32_t  TASKS_BCSTART;                     /*!< Start the bit counter                                                 */
   __O  uint32_t  TASKS_BCSTOP;                      /*!< Stop the bit counter                                                  */
-  __O  uint32_t  TASKS_EDSTART;                     /*!< Start the Energy Detect measurement used in IEEE 802.15.4 mode        */
-  __O  uint32_t  TASKS_EDSTOP;                      /*!< Stop the Energy Detect measurement                                    */
-  __O  uint32_t  TASKS_CCASTART;                    /*!< Start the Clear Channel Assessment used in IEEE 802.15.4 mode         */
-  __O  uint32_t  TASKS_CCASTOP;                     /*!< Stop the Clear Channel Assessment                                     */
-  __I  uint32_t  RESERVED0[51];
+  __I  uint32_t  RESERVED0[55];
   __IO uint32_t  EVENTS_READY;                      /*!< RADIO has ramped up and is ready to be started                        */
   __IO uint32_t  EVENTS_ADDRESS;                    /*!< Address sent or received                                              */
   __IO uint32_t  EVENTS_PAYLOAD;                    /*!< Packet payload sent or received                                       */
@@ -756,34 +534,18 @@ typedef struct {                                    /*!< RADIO Structure        
   __I  uint32_t  RESERVED2;
   __IO uint32_t  EVENTS_CRCOK;                      /*!< Packet received with CRC ok                                           */
   __IO uint32_t  EVENTS_CRCERROR;                   /*!< Packet received with CRC error                                        */
-  __IO uint32_t  EVENTS_FRAMESTART;                 /*!< IEEE 802.15.4 length field received                                   */
-  __IO uint32_t  EVENTS_EDEND;                      /*!< Sampling of Energy Detection complete. A new ED sample is ready
-                                                         for readout from the RADIO.EDSAMPLE register                          */
-  __IO uint32_t  EVENTS_EDSTOPPED;                  /*!< The sampling of Energy Detection has stopped                          */
-  __IO uint32_t  EVENTS_CCAIDLE;                    /*!< Wireless medium in idle - clear to send                               */
-  __IO uint32_t  EVENTS_CCABUSY;                    /*!< Wireless medium busy - do not send                                    */
-  __IO uint32_t  EVENTS_CCASTOPPED;                 /*!< The CCA has stopped                                                   */
-  __IO uint32_t  EVENTS_RATEBOOST;                  /*!< Ble_LR CI field received, receive mode is changed from Ble_LR125Kbit
-                                                         to Ble_LR500Kbit.                                                     */
-  __IO uint32_t  EVENTS_TXREADY;                    /*!< RADIO has ramped up and is ready to be started TX path                */
-  __IO uint32_t  EVENTS_RXREADY;                    /*!< RADIO has ramped up and is ready to be started RX path                */
-  __IO uint32_t  EVENTS_MHRMATCH;                   /*!< MAC Header match found.                                               */
-  __I  uint32_t  RESERVED3[3];
-  __IO uint32_t  EVENTS_PHYEND;                     /*!< Generated in Ble_LR125Kbit, Ble_LR500Kbit and BleIeee802154_250Kbit
-                                                         modes when last bit is sent on air.                                   */
-  __I  uint32_t  RESERVED4[36];
+  __I  uint32_t  RESERVED3[50];
   __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED5[64];
+  __I  uint32_t  RESERVED4[64];
   __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
   __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED6[61];
+  __I  uint32_t  RESERVED5[61];
   __I  uint32_t  CRCSTATUS;                         /*!< CRC status                                                            */
-  __I  uint32_t  RESERVED7;
+  __I  uint32_t  RESERVED6;
   __I  uint32_t  RXMATCH;                           /*!< Received address                                                      */
   __I  uint32_t  RXCRC;                             /*!< CRC field of previously received packet                               */
   __I  uint32_t  DAI;                               /*!< Device address match index                                            */
-  __I  uint32_t  PDUSTAT;                           /*!< Payload status                                                        */
-  __I  uint32_t  RESERVED8[59];
+  __I  uint32_t  RESERVED7[60];
   __IO uint32_t  PACKETPTR;                         /*!< Packet pointer                                                        */
   __IO uint32_t  FREQUENCY;                         /*!< Frequency                                                             */
   __IO uint32_t  TXPOWER;                           /*!< Output power                                                          */
@@ -799,28 +561,21 @@ typedef struct {                                    /*!< RADIO Structure        
   __IO uint32_t  CRCCNF;                            /*!< CRC configuration                                                     */
   __IO uint32_t  CRCPOLY;                           /*!< CRC polynomial                                                        */
   __IO uint32_t  CRCINIT;                           /*!< CRC initial value                                                     */
-  __I  uint32_t  RESERVED9;
+  __IO uint32_t  UNUSED0;                           /*!< Unspecified                                                           */
   __IO uint32_t  TIFS;                              /*!< Inter Frame Spacing in us                                             */
   __I  uint32_t  RSSISAMPLE;                        /*!< RSSI sample                                                           */
-  __I  uint32_t  RESERVED10;
+  __I  uint32_t  RESERVED8;
   __I  uint32_t  STATE;                             /*!< Current radio state                                                   */
   __IO uint32_t  DATAWHITEIV;                       /*!< Data whitening initial value                                          */
-  __I  uint32_t  RESERVED11[2];
+  __I  uint32_t  RESERVED9[2];
   __IO uint32_t  BCC;                               /*!< Bit counter compare                                                   */
-  __I  uint32_t  RESERVED12[39];
+  __I  uint32_t  RESERVED10[39];
   __IO uint32_t  DAB[8];                            /*!< Description collection[0]: Device address base segment 0              */
   __IO uint32_t  DAP[8];                            /*!< Description collection[0]: Device address prefix 0                    */
   __IO uint32_t  DACNF;                             /*!< Device address match configuration                                    */
-  __IO uint32_t  MHRMATCHCONF;                      /*!< Search Pattern Configuration                                          */
-  __IO uint32_t  MHRMATCHMAS;                       /*!< Pattern mask                                                          */
-  __I  uint32_t  RESERVED13;
+  __I  uint32_t  RESERVED11[3];
   __IO uint32_t  MODECNF0;                          /*!< Radio mode configuration register 0                                   */
-  __I  uint32_t  RESERVED14[3];
-  __IO uint32_t  SFD;                               /*!< IEEE 802.15.4 Start of Frame Delimiter                                */
-  __IO uint32_t  EDCNT;                             /*!< IEEE 802.15.4 Energy Detect Loop Count                                */
-  __IO uint32_t  EDSAMPLE;                          /*!< IEEE 802.15.4 Energy Detect Level                                     */
-  __IO uint32_t  CCACTRL;                           /*!< IEEE 802.15.4 Clear Channel Assessment Control                        */
-  __I  uint32_t  RESERVED15[611];
+  __I  uint32_t  RESERVED12[618];
   __IO uint32_t  POWER;                             /*!< Peripheral power control                                              */
 } NRF_RADIO_Type;
 
@@ -831,7 +586,7 @@ typedef struct {                                    /*!< RADIO Structure        
 
 
 /**
-  * @brief UART with EasyDMA 0 (UARTE)
+  * @brief UART with EasyDMA (UARTE)
   */
 
 typedef struct {                                    /*!< UARTE Structure                                                       */
@@ -883,157 +638,12 @@ typedef struct {                                    /*!< UARTE Structure        
 
 
 /* ================================================================================ */
-/* ================                      UART                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Universal Asynchronous Receiver/Transmitter (UART)
-  */
-
-typedef struct {                                    /*!< UART Structure                                                        */
-  __O  uint32_t  TASKS_STARTRX;                     /*!< Start UART receiver                                                   */
-  __O  uint32_t  TASKS_STOPRX;                      /*!< Stop UART receiver                                                    */
-  __O  uint32_t  TASKS_STARTTX;                     /*!< Start UART transmitter                                                */
-  __O  uint32_t  TASKS_STOPTX;                      /*!< Stop UART transmitter                                                 */
-  __I  uint32_t  RESERVED0[3];
-  __O  uint32_t  TASKS_SUSPEND;                     /*!< Suspend UART                                                          */
-  __I  uint32_t  RESERVED1[56];
-  __IO uint32_t  EVENTS_CTS;                        /*!< CTS is activated (set low). Clear To Send.                            */
-  __IO uint32_t  EVENTS_NCTS;                       /*!< CTS is deactivated (set high). Not Clear To Send.                     */
-  __IO uint32_t  EVENTS_RXDRDY;                     /*!< Data received in RXD                                                  */
-  __I  uint32_t  RESERVED2[4];
-  __IO uint32_t  EVENTS_TXDRDY;                     /*!< Data sent from TXD                                                    */
-  __I  uint32_t  RESERVED3;
-  __IO uint32_t  EVENTS_ERROR;                      /*!< Error detected                                                        */
-  __I  uint32_t  RESERVED4[7];
-  __IO uint32_t  EVENTS_RXTO;                       /*!< Receiver timeout                                                      */
-  __I  uint32_t  RESERVED5[46];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED6[64];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED7[93];
-  __IO uint32_t  ERRORSRC;                          /*!< Error source                                                          */
-  __I  uint32_t  RESERVED8[31];
-  __IO uint32_t  ENABLE;                            /*!< Enable UART                                                           */
-  __I  uint32_t  RESERVED9;
-  UART_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
-  __I  uint32_t  RXD;                               /*!< RXD register                                                          */
-  __O  uint32_t  TXD;                               /*!< TXD register                                                          */
-  __I  uint32_t  RESERVED10;
-  __IO uint32_t  BAUDRATE;                          /*!< Baud rate. Accuracy depends on the HFCLK source selected.             */
-  __I  uint32_t  RESERVED11[17];
-  __IO uint32_t  CONFIG;                            /*!< Configuration of parity and hardware flow control                     */
-} NRF_UART_Type;
-
-
-/* ================================================================================ */
-/* ================                      SPIM                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Serial Peripheral Interface Master with EasyDMA 0 (SPIM)
-  */
-
-typedef struct {                                    /*!< SPIM Structure                                                        */
-  __I  uint32_t  RESERVED0[4];
-  __O  uint32_t  TASKS_START;                       /*!< Start SPI transaction                                                 */
-  __O  uint32_t  TASKS_STOP;                        /*!< Stop SPI transaction                                                  */
-  __I  uint32_t  RESERVED1;
-  __O  uint32_t  TASKS_SUSPEND;                     /*!< Suspend SPI transaction                                               */
-  __O  uint32_t  TASKS_RESUME;                      /*!< Resume SPI transaction                                                */
-  __I  uint32_t  RESERVED2[56];
-  __IO uint32_t  EVENTS_STOPPED;                    /*!< SPI transaction has stopped                                           */
-  __I  uint32_t  RESERVED3[2];
-  __IO uint32_t  EVENTS_ENDRX;                      /*!< End of RXD buffer reached                                             */
-  __I  uint32_t  RESERVED4;
-  __IO uint32_t  EVENTS_END;                        /*!< End of RXD buffer and TXD buffer reached                              */
-  __I  uint32_t  RESERVED5;
-  __IO uint32_t  EVENTS_ENDTX;                      /*!< End of TXD buffer reached                                             */
-  __I  uint32_t  RESERVED6[10];
-  __IO uint32_t  EVENTS_STARTED;                    /*!< Transaction started                                                   */
-  __I  uint32_t  RESERVED7[44];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED8[64];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED9[61];
-  __IO uint32_t  STALLSTAT;                         /*!< Stall status for EasyDMA RAM accesses. The fields in this register
-                                                         is set to STALL by hardware whenever a stall occurres and can
-                                                          be cleared (set to NOSTALL) by the CPU.                              */
-  __I  uint32_t  RESERVED10[63];
-  __IO uint32_t  ENABLE;                            /*!< Enable SPIM                                                           */
-  __I  uint32_t  RESERVED11;
-  SPIM_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED12[3];
-  __IO uint32_t  FREQUENCY;                         /*!< SPI frequency. Accuracy depends on the HFCLK source selected.         */
-  __I  uint32_t  RESERVED13[3];
-  SPIM_RXD_Type RXD;                                /*!< RXD EasyDMA channel                                                   */
-  SPIM_TXD_Type TXD;                                /*!< TXD EasyDMA channel                                                   */
-  __IO uint32_t  CONFIG;                            /*!< Configuration register                                                */
-  __I  uint32_t  RESERVED14[2];
-  SPIM_IFTIMING_Type IFTIMING;                      /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED15[22];
-  __IO uint32_t  ORC;                               /*!< Byte transmitted after TXD.MAXCNT bytes have been transmitted
-                                                         in the case when RXD.MAXCNT is greater than TXD.MAXCNT                */
-} NRF_SPIM_Type;
-
-
-/* ================================================================================ */
-/* ================                      SPIS                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief SPI Slave 0 (SPIS)
-  */
-
-typedef struct {                                    /*!< SPIS Structure                                                        */
-  __I  uint32_t  RESERVED0[9];
-  __O  uint32_t  TASKS_ACQUIRE;                     /*!< Acquire SPI semaphore                                                 */
-  __O  uint32_t  TASKS_RELEASE;                     /*!< Release SPI semaphore, enabling the SPI slave to acquire it           */
-  __I  uint32_t  RESERVED1[54];
-  __IO uint32_t  EVENTS_END;                        /*!< Granted transaction completed                                         */
-  __I  uint32_t  RESERVED2[2];
-  __IO uint32_t  EVENTS_ENDRX;                      /*!< End of RXD buffer reached                                             */
-  __I  uint32_t  RESERVED3[5];
-  __IO uint32_t  EVENTS_ACQUIRED;                   /*!< Semaphore acquired                                                    */
-  __I  uint32_t  RESERVED4[53];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED5[64];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED6[61];
-  __I  uint32_t  SEMSTAT;                           /*!< Semaphore status register                                             */
-  __I  uint32_t  RESERVED7[15];
-  __IO uint32_t  STATUS;                            /*!< Status from last transaction                                          */
-  __I  uint32_t  RESERVED8[47];
-  __IO uint32_t  ENABLE;                            /*!< Enable SPI slave                                                      */
-  __I  uint32_t  RESERVED9;
-  SPIS_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED10[7];
-  SPIS_RXD_Type RXD;                                /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED11;
-  SPIS_TXD_Type TXD;                                /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED12;
-  __IO uint32_t  CONFIG;                            /*!< Configuration register                                                */
-  __I  uint32_t  RESERVED13;
-  __IO uint32_t  DEF;                               /*!< Default character. Character clocked out in case of an ignored
-                                                         transaction.                                                          */
-  __I  uint32_t  RESERVED14[24];
-  __IO uint32_t  ORC;                               /*!< Over-read character                                                   */
-} NRF_SPIS_Type;
-
-
-/* ================================================================================ */
 /* ================                      TWIM                      ================ */
 /* ================================================================================ */
 
 
 /**
-  * @brief I2C compatible Two-Wire Master Interface with EasyDMA 0 (TWIM)
+  * @brief I2C compatible Two-Wire Master Interface with EasyDMA (TWIM)
   */
 
 typedef struct {                                    /*!< TWIM Structure                                                        */
@@ -1086,7 +696,7 @@ typedef struct {                                    /*!< TWIM Structure         
 
 
 /**
-  * @brief I2C compatible Two-Wire Slave Interface with EasyDMA 0 (TWIS)
+  * @brief I2C compatible Two-Wire Slave Interface with EasyDMA (TWIS)
   */
 
 typedef struct {                                    /*!< TWIS Structure                                                        */
@@ -1136,159 +746,96 @@ typedef struct {                                    /*!< TWIS Structure         
 
 
 /* ================================================================================ */
-/* ================                       SPI                      ================ */
+/* ================                      SPIM                      ================ */
 /* ================================================================================ */
 
 
 /**
-  * @brief Serial Peripheral Interface 0 (SPI)
+  * @brief Serial Peripheral Interface Master with EasyDMA (SPIM)
   */
 
-typedef struct {                                    /*!< SPI Structure                                                         */
-  __I  uint32_t  RESERVED0[66];
-  __IO uint32_t  EVENTS_READY;                      /*!< TXD byte sent and RXD byte received                                   */
-  __I  uint32_t  RESERVED1[126];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED2[125];
-  __IO uint32_t  ENABLE;                            /*!< Enable SPI                                                            */
-  __I  uint32_t  RESERVED3;
-  SPI_PSEL_Type PSEL;                               /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED4;
-  __I  uint32_t  RXD;                               /*!< RXD register                                                          */
-  __IO uint32_t  TXD;                               /*!< TXD register                                                          */
-  __I  uint32_t  RESERVED5;
-  __IO uint32_t  FREQUENCY;                         /*!< SPI frequency. Accuracy depends on the HFCLK source selected.         */
-  __I  uint32_t  RESERVED6[11];
-  __IO uint32_t  CONFIG;                            /*!< Configuration register                                                */
-} NRF_SPI_Type;
-
-
-/* ================================================================================ */
-/* ================                       TWI                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief I2C compatible Two-Wire Interface 0 (TWI)
-  */
-
-typedef struct {                                    /*!< TWI Structure                                                         */
-  __O  uint32_t  TASKS_STARTRX;                     /*!< Start TWI receive sequence                                            */
-  __I  uint32_t  RESERVED0;
-  __O  uint32_t  TASKS_STARTTX;                     /*!< Start TWI transmit sequence                                           */
-  __I  uint32_t  RESERVED1[2];
-  __O  uint32_t  TASKS_STOP;                        /*!< Stop TWI transaction                                                  */
-  __I  uint32_t  RESERVED2;
-  __O  uint32_t  TASKS_SUSPEND;                     /*!< Suspend TWI transaction                                               */
-  __O  uint32_t  TASKS_RESUME;                      /*!< Resume TWI transaction                                                */
-  __I  uint32_t  RESERVED3[56];
-  __IO uint32_t  EVENTS_STOPPED;                    /*!< TWI stopped                                                           */
-  __IO uint32_t  EVENTS_RXDREADY;                   /*!< TWI RXD byte received                                                 */
-  __I  uint32_t  RESERVED4[4];
-  __IO uint32_t  EVENTS_TXDSENT;                    /*!< TWI TXD byte sent                                                     */
-  __I  uint32_t  RESERVED5;
-  __IO uint32_t  EVENTS_ERROR;                      /*!< TWI error                                                             */
-  __I  uint32_t  RESERVED6[4];
-  __IO uint32_t  EVENTS_BB;                         /*!< TWI byte boundary, generated before each byte that is sent or
-                                                         received                                                              */
-  __I  uint32_t  RESERVED7[3];
-  __IO uint32_t  EVENTS_SUSPENDED;                  /*!< TWI entered the suspended state                                       */
-  __I  uint32_t  RESERVED8[45];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED9[64];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED10[110];
-  __IO uint32_t  ERRORSRC;                          /*!< Error source                                                          */
-  __I  uint32_t  RESERVED11[14];
-  __IO uint32_t  ENABLE;                            /*!< Enable TWI                                                            */
-  __I  uint32_t  RESERVED12;
-  TWI_PSEL_Type PSEL;                               /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED13[2];
-  __I  uint32_t  RXD;                               /*!< RXD register                                                          */
-  __IO uint32_t  TXD;                               /*!< TXD register                                                          */
-  __I  uint32_t  RESERVED14;
-  __IO uint32_t  FREQUENCY;                         /*!< TWI frequency. Accuracy depends on the HFCLK source selected.         */
-  __I  uint32_t  RESERVED15[24];
-  __IO uint32_t  ADDRESS;                           /*!< Address used in the TWI transfer                                      */
-} NRF_TWI_Type;
-
-
-/* ================================================================================ */
-/* ================                      NFCT                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief NFC-A compatible radio (NFCT)
-  */
-
-typedef struct {                                    /*!< NFCT Structure                                                        */
-  __O  uint32_t  TASKS_ACTIVATE;                    /*!< Activate NFCT peripheral for incoming and outgoing frames, change
-                                                         state to activated                                                    */
-  __O  uint32_t  TASKS_DISABLE;                     /*!< Disable NFCT peripheral                                               */
-  __O  uint32_t  TASKS_SENSE;                       /*!< Enable NFC sense field mode, change state to sense mode               */
-  __O  uint32_t  TASKS_STARTTX;                     /*!< Start transmission of an outgoing frame, change state to transmit     */
-  __I  uint32_t  RESERVED0[3];
-  __O  uint32_t  TASKS_ENABLERXDATA;                /*!< Initializes the EasyDMA for receive.                                  */
+typedef struct {                                    /*!< SPIM Structure                                                        */
+  __I  uint32_t  RESERVED0[4];
+  __O  uint32_t  TASKS_START;                       /*!< Start SPI transaction                                                 */
+  __O  uint32_t  TASKS_STOP;                        /*!< Stop SPI transaction                                                  */
   __I  uint32_t  RESERVED1;
-  __O  uint32_t  TASKS_GOIDLE;                      /*!< Force state machine to IDLE state                                     */
-  __O  uint32_t  TASKS_GOSLEEP;                     /*!< Force state machine to SLEEP_A state                                  */
-  __I  uint32_t  RESERVED2[53];
-  __IO uint32_t  EVENTS_READY;                      /*!< The NFCT peripheral is ready to receive and send frames               */
-  __IO uint32_t  EVENTS_FIELDDETECTED;              /*!< Remote NFC field detected                                             */
-  __IO uint32_t  EVENTS_FIELDLOST;                  /*!< Remote NFC field lost                                                 */
-  __IO uint32_t  EVENTS_TXFRAMESTART;               /*!< Marks the start of the first symbol of a transmitted frame            */
-  __IO uint32_t  EVENTS_TXFRAMEEND;                 /*!< Marks the end of the last transmitted on-air symbol of a frame        */
-  __IO uint32_t  EVENTS_RXFRAMESTART;               /*!< Marks the end of the first symbol of a received frame                 */
-  __IO uint32_t  EVENTS_RXFRAMEEND;                 /*!< Received data has been checked (CRC, parity) and transferred
-                                                         to RAM, and EasyDMA has ended accessing the RX buffer                 */
-  __IO uint32_t  EVENTS_ERROR;                      /*!< NFC error reported. The ERRORSTATUS register contains details
-                                                         on the source of the error.                                           */
+  __O  uint32_t  TASKS_SUSPEND;                     /*!< Suspend SPI transaction                                               */
+  __O  uint32_t  TASKS_RESUME;                      /*!< Resume SPI transaction                                                */
+  __I  uint32_t  RESERVED2[56];
+  __IO uint32_t  EVENTS_STOPPED;                    /*!< SPI transaction has stopped                                           */
   __I  uint32_t  RESERVED3[2];
-  __IO uint32_t  EVENTS_RXERROR;                    /*!< NFC RX frame error reported. The FRAMESTATUS.RX register contains
-                                                         details on the source of the error.                                   */
-  __IO uint32_t  EVENTS_ENDRX;                      /*!< RX buffer (as defined by PACKETPTR and MAXLEN) in Data RAM full.      */
-  __IO uint32_t  EVENTS_ENDTX;                      /*!< Transmission of data in RAM has ended, and EasyDMA has ended
-                                                         accessing the TX buffer                                               */
+  __IO uint32_t  EVENTS_ENDRX;                      /*!< End of RXD buffer reached                                             */
   __I  uint32_t  RESERVED4;
-  __IO uint32_t  EVENTS_AUTOCOLRESSTARTED;          /*!< Auto collision resolution process has started                         */
-  __I  uint32_t  RESERVED5[3];
-  __IO uint32_t  EVENTS_COLLISION;                  /*!< NFC auto collision resolution error reported.                         */
-  __IO uint32_t  EVENTS_SELECTED;                   /*!< NFC auto collision resolution successfully completed                  */
-  __IO uint32_t  EVENTS_STARTED;                    /*!< EasyDMA is ready to receive or send frames.                           */
-  __I  uint32_t  RESERVED6[43];
+  __IO uint32_t  EVENTS_END;                        /*!< End of RXD buffer and TXD buffer reached                              */
+  __I  uint32_t  RESERVED5;
+  __IO uint32_t  EVENTS_ENDTX;                      /*!< End of TXD buffer reached                                             */
+  __I  uint32_t  RESERVED6[10];
+  __IO uint32_t  EVENTS_STARTED;                    /*!< Transaction started                                                   */
+  __I  uint32_t  RESERVED7[44];
   __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED7[63];
-  __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
+  __I  uint32_t  RESERVED8[64];
   __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
   __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED8[62];
-  __IO uint32_t  ERRORSTATUS;                       /*!< NFC Error Status register                                             */
+  __I  uint32_t  RESERVED9[125];
+  __IO uint32_t  ENABLE;                            /*!< Enable SPIM                                                           */
+  __I  uint32_t  RESERVED10;
+  SPIM_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED11[4];
+  __IO uint32_t  FREQUENCY;                         /*!< SPI frequency. Accuracy depends on the HFCLK source selected.         */
+  __I  uint32_t  RESERVED12[3];
+  SPIM_RXD_Type RXD;                                /*!< RXD EasyDMA channel                                                   */
+  SPIM_TXD_Type TXD;                                /*!< TXD EasyDMA channel                                                   */
+  __IO uint32_t  CONFIG;                            /*!< Configuration register                                                */
+  __I  uint32_t  RESERVED13[26];
+  __IO uint32_t  ORC;                               /*!< Over-read character. Character clocked out in case and over-read
+                                                         of the TXD buffer.                                                    */
+} NRF_SPIM_Type;
+
+
+/* ================================================================================ */
+/* ================                      SPIS                      ================ */
+/* ================================================================================ */
+
+
+/**
+  * @brief SPI Slave (SPIS)
+  */
+
+typedef struct {                                    /*!< SPIS Structure                                                        */
+  __I  uint32_t  RESERVED0[9];
+  __O  uint32_t  TASKS_ACQUIRE;                     /*!< Acquire SPI semaphore                                                 */
+  __O  uint32_t  TASKS_RELEASE;                     /*!< Release SPI semaphore, enabling the SPI slave to acquire it           */
+  __I  uint32_t  RESERVED1[54];
+  __IO uint32_t  EVENTS_END;                        /*!< Granted transaction completed                                         */
+  __I  uint32_t  RESERVED2[2];
+  __IO uint32_t  EVENTS_ENDRX;                      /*!< End of RXD buffer reached                                             */
+  __I  uint32_t  RESERVED3[5];
+  __IO uint32_t  EVENTS_ACQUIRED;                   /*!< Semaphore acquired                                                    */
+  __I  uint32_t  RESERVED4[53];
+  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
+  __I  uint32_t  RESERVED5[64];
+  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
+  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
+  __I  uint32_t  RESERVED6[61];
+  __I  uint32_t  SEMSTAT;                           /*!< Semaphore status register                                             */
+  __I  uint32_t  RESERVED7[15];
+  __IO uint32_t  STATUS;                            /*!< Status from last transaction                                          */
+  __I  uint32_t  RESERVED8[47];
+  __IO uint32_t  ENABLE;                            /*!< Enable SPI slave                                                      */
   __I  uint32_t  RESERVED9;
-  NFCT_FRAMESTATUS_Type FRAMESTATUS;                /*!< Unspecified                                                           */
-  __I  uint32_t  NFCTAGSTATE;                       /*!< NfcTag state register                                                 */
-  __I  uint32_t  RESERVED10[10];
-  __I  uint32_t  FIELDPRESENT;                      /*!< Indicates the presence or not of a valid field                        */
-  __I  uint32_t  RESERVED11[49];
-  __IO uint32_t  FRAMEDELAYMIN;                     /*!< Minimum frame delay                                                   */
-  __IO uint32_t  FRAMEDELAYMAX;                     /*!< Maximum frame delay                                                   */
-  __IO uint32_t  FRAMEDELAYMODE;                    /*!< Configuration register for the Frame Delay Timer                      */
-  __IO uint32_t  PACKETPTR;                         /*!< Packet pointer for TXD and RXD data storage in Data RAM               */
-  __IO uint32_t  MAXLEN;                            /*!< Size of the RAM buffer allocated to TXD and RXD data storage
-                                                         each                                                                  */
-  NFCT_TXD_Type TXD;                                /*!< Unspecified                                                           */
-  NFCT_RXD_Type RXD;                                /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED12[26];
-  __IO uint32_t  NFCID1_LAST;                       /*!< Last NFCID1 part (4, 7 or 10 bytes ID)                                */
-  __IO uint32_t  NFCID1_2ND_LAST;                   /*!< Second last NFCID1 part (7 or 10 bytes ID)                            */
-  __IO uint32_t  NFCID1_3RD_LAST;                   /*!< Third last NFCID1 part (10 bytes ID)                                  */
-  __IO uint32_t  AUTOCOLRESCONFIG;                  /*!< Controls the auto collision resolution function. This setting
-                                                         must be done before the NFCT peripheral is enabled.                   */
-  __IO uint32_t  SENSRES;                           /*!< NFC-A SENS_RES auto-response settings                                 */
-  __IO uint32_t  SELRES;                            /*!< NFC-A SEL_RES auto-response settings                                  */
-} NRF_NFCT_Type;
+  SPIS_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED10[7];
+  SPIS_RXD_Type RXD;                                /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED11;
+  SPIS_TXD_Type TXD;                                /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED12;
+  __IO uint32_t  CONFIG;                            /*!< Configuration register                                                */
+  __I  uint32_t  RESERVED13;
+  __IO uint32_t  DEF;                               /*!< Default character. Character clocked out in case of an ignored
+                                                         transaction.                                                          */
+  __I  uint32_t  RESERVED14[24];
+  __IO uint32_t  ORC;                               /*!< Over-read character                                                   */
+} NRF_SPIS_Type;
 
 
 /* ================================================================================ */
@@ -1393,14 +940,12 @@ typedef struct {                                    /*!< TIMER Structure        
   __I  uint32_t  RESERVED3[64];
   __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
   __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED4[61];
-  __I  uint32_t  STATUS;                            /*!< Timer status                                                          */
-  __I  uint32_t  RESERVED5[64];
+  __I  uint32_t  RESERVED4[126];
   __IO uint32_t  MODE;                              /*!< Timer mode selection                                                  */
   __IO uint32_t  BITMODE;                           /*!< Configure the number of bits used by the TIMER                        */
-  __I  uint32_t  RESERVED6;
+  __I  uint32_t  RESERVED5;
   __IO uint32_t  PRESCALER;                         /*!< Timer prescaler register                                              */
-  __I  uint32_t  RESERVED7[11];
+  __I  uint32_t  RESERVED6[11];
   __IO uint32_t  CC[6];                             /*!< Description collection[0]: Capture/Compare register 0                 */
 } NRF_TIMER_Type;
 
@@ -1720,43 +1265,6 @@ typedef struct {                                    /*!< COMP Structure         
 
 
 /* ================================================================================ */
-/* ================                     LPCOMP                     ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Low Power Comparator (LPCOMP)
-  */
-
-typedef struct {                                    /*!< LPCOMP Structure                                                      */
-  __O  uint32_t  TASKS_START;                       /*!< Start comparator                                                      */
-  __O  uint32_t  TASKS_STOP;                        /*!< Stop comparator                                                       */
-  __O  uint32_t  TASKS_SAMPLE;                      /*!< Sample comparator value                                               */
-  __I  uint32_t  RESERVED0[61];
-  __IO uint32_t  EVENTS_READY;                      /*!< LPCOMP is ready and output is valid                                   */
-  __IO uint32_t  EVENTS_DOWN;                       /*!< Downward crossing                                                     */
-  __IO uint32_t  EVENTS_UP;                         /*!< Upward crossing                                                       */
-  __IO uint32_t  EVENTS_CROSS;                      /*!< Downward or upward crossing                                           */
-  __I  uint32_t  RESERVED1[60];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED2[64];
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED3[61];
-  __I  uint32_t  RESULT;                            /*!< Compare result                                                        */
-  __I  uint32_t  RESERVED4[63];
-  __IO uint32_t  ENABLE;                            /*!< Enable LPCOMP                                                         */
-  __IO uint32_t  PSEL;                              /*!< Input pin select                                                      */
-  __IO uint32_t  REFSEL;                            /*!< Reference select                                                      */
-  __IO uint32_t  EXTREFSEL;                         /*!< External reference select                                             */
-  __I  uint32_t  RESERVED5[4];
-  __IO uint32_t  ANADETECT;                         /*!< Analog detect configuration                                           */
-  __I  uint32_t  RESERVED6[5];
-  __IO uint32_t  HYST;                              /*!< Comparator hysteresis enable                                          */
-} NRF_LPCOMP_Type;
-
-
-/* ================================================================================ */
 /* ================                       SWI                      ================ */
 /* ================================================================================ */
 
@@ -1798,7 +1306,7 @@ typedef struct {                                    /*!< EGU Structure          
 
 
 /**
-  * @brief Pulse Width Modulation Unit 0 (PWM)
+  * @brief Pulse Width Modulation Unit (PWM)
   */
 
 typedef struct {                                    /*!< PWM Structure                                                         */
@@ -1870,9 +1378,7 @@ typedef struct {                                    /*!< PDM Structure          
   __I  uint32_t  RESERVED3[3];
   __IO uint32_t  GAINL;                             /*!< Left output gain adjustment                                           */
   __IO uint32_t  GAINR;                             /*!< Right output gain adjustment                                          */
-  __IO uint32_t  RATIO;                             /*!< Selects the ratio between PDM_CLK and output sample rate. Change
-                                                         PDMCLKCTRL accordingly.                                               */
-  __I  uint32_t  RESERVED4[7];
+  __I  uint32_t  RESERVED4[8];
   PDM_PSEL_Type PSEL;                               /*!< Unspecified                                                           */
   __I  uint32_t  RESERVED5[6];
   PDM_SAMPLE_Type SAMPLE;                           /*!< Unspecified                                                           */
@@ -1903,27 +1409,7 @@ typedef struct {                                    /*!< NVMC Structure         
   __IO uint32_t  ERASEPCR0;                         /*!< Deprecated register - Register for erasing a page in code area.
                                                          Equivalent to ERASEPAGE.                                              */
   __IO uint32_t  ERASEUICR;                         /*!< Register for erasing user information configuration registers         */
-  __I  uint32_t  RESERVED2[10];
-  __IO uint32_t  ICACHECNF;                         /*!< I-code cache configuration register.                                  */
-  __I  uint32_t  RESERVED3;
-  __IO uint32_t  IHIT;                              /*!< I-code cache hit counter.                                             */
-  __IO uint32_t  IMISS;                             /*!< I-code cache miss counter.                                            */
 } NRF_NVMC_Type;
-
-
-/* ================================================================================ */
-/* ================                       ACL                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Access control lists (ACL)
-  */
-
-typedef struct {                                    /*!< ACL Structure                                                         */
-  __I  uint32_t  RESERVED0[512];
-  ACL_ACL_Type ACL[8];                              /*!< Unspecified                                                           */
-} NRF_ACL_Type;
 
 
 /* ================================================================================ */
@@ -1951,261 +1437,12 @@ typedef struct {                                    /*!< PPI Structure          
 
 
 /* ================================================================================ */
-/* ================                       MWU                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Memory Watch Unit (MWU)
-  */
-
-typedef struct {                                    /*!< MWU Structure                                                         */
-  __I  uint32_t  RESERVED0[64];
-  MWU_EVENTS_REGION_Type EVENTS_REGION[4];          /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED1[16];
-  MWU_EVENTS_PREGION_Type EVENTS_PREGION[2];        /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED2[100];
-  __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED3[5];
-  __IO uint32_t  NMIEN;                             /*!< Enable or disable non-maskable interrupt                              */
-  __IO uint32_t  NMIENSET;                          /*!< Enable non-maskable interrupt                                         */
-  __IO uint32_t  NMIENCLR;                          /*!< Disable non-maskable interrupt                                        */
-  __I  uint32_t  RESERVED4[53];
-  MWU_PERREGION_Type PERREGION[2];                  /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED5[64];
-  __IO uint32_t  REGIONEN;                          /*!< Enable/disable regions watch                                          */
-  __IO uint32_t  REGIONENSET;                       /*!< Enable regions watch                                                  */
-  __IO uint32_t  REGIONENCLR;                       /*!< Disable regions watch                                                 */
-  __I  uint32_t  RESERVED6[57];
-  MWU_REGION_Type REGION[4];                        /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED7[32];
-  MWU_PREGION_Type PREGION[2];                      /*!< Unspecified                                                           */
-} NRF_MWU_Type;
-
-
-/* ================================================================================ */
-/* ================                       I2S                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Inter-IC Sound (I2S)
-  */
-
-typedef struct {                                    /*!< I2S Structure                                                         */
-  __O  uint32_t  TASKS_START;                       /*!< Starts continuous I2S transfer. Also starts MCK generator when
-                                                         this is enabled.                                                      */
-  __O  uint32_t  TASKS_STOP;                        /*!< Stops I2S transfer. Also stops MCK generator. Triggering this
-                                                         task will cause the {event:STOPPED} event to be generated.            */
-  __I  uint32_t  RESERVED0[63];
-  __IO uint32_t  EVENTS_RXPTRUPD;                   /*!< The RXD.PTR register has been copied to internal double-buffers.
-                                                         When the I2S module is started and RX is enabled, this event
-                                                          will be generated for every RXTXD.MAXCNT words that are received
-                                                          on the SDIN pin.                                                     */
-  __IO uint32_t  EVENTS_STOPPED;                    /*!< I2S transfer stopped.                                                 */
-  __I  uint32_t  RESERVED1[2];
-  __IO uint32_t  EVENTS_TXPTRUPD;                   /*!< The TDX.PTR register has been copied to internal double-buffers.
-                                                         When the I2S module is started and TX is enabled, this event
-                                                          will be generated for every RXTXD.MAXCNT words that are sent
-                                                          on the SDOUT pin.                                                    */
-  __I  uint32_t  RESERVED2[122];
-  __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED3[125];
-  __IO uint32_t  ENABLE;                            /*!< Enable I2S module.                                                    */
-  I2S_CONFIG_Type CONFIG;                           /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED4[3];
-  I2S_RXD_Type RXD;                                 /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED5;
-  I2S_TXD_Type TXD;                                 /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED6[3];
-  I2S_RXTXD_Type RXTXD;                             /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED7[3];
-  I2S_PSEL_Type PSEL;                               /*!< Unspecified                                                           */
-} NRF_I2S_Type;
-
-
-/* ================================================================================ */
-/* ================                       FPU                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief FPU (FPU)
-  */
-
-typedef struct {                                    /*!< FPU Structure                                                         */
-  __I  uint32_t  UNUSED;                            /*!< Unused.                                                               */
-} NRF_FPU_Type;
-
-
-/* ================================================================================ */
-/* ================                      USBD                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief Universal Serial Bus device (USBD)
-  */
-
-typedef struct {                                    /*!< USBD Structure                                                        */
-  __I  uint32_t  RESERVED0;
-  __O  uint32_t  TASKS_STARTEPIN[8];                /*!< Description collection[0]: Captures the EPIN[0].PTR, EPIN[0].MAXCNT
-                                                         and EPIN[0].CONFIG registers values, and enables endpoint IN
-                                                          0 to respond to traffic from host                                    */
-  __O  uint32_t  TASKS_STARTISOIN;                  /*!< Captures the ISOIN.PTR, ISOIN.MAXCNT and ISOIN.CONFIG registers
-                                                         values, and enables sending data on iso endpoint                      */
-  __O  uint32_t  TASKS_STARTEPOUT[8];               /*!< Description collection[0]: Captures the EPOUT[0].PTR, EPOUT[0].MAXCNT
-                                                         and EPOUT[0].CONFIG registers values, and enables endpoint 0
-                                                          to respond to traffic from host                                      */
-  __O  uint32_t  TASKS_STARTISOOUT;                 /*!< Captures the ISOOUT.PTR, ISOOUT.MAXCNT and ISOOUT.CONFIG registers
-                                                         values, and enables receiving of data on iso endpoint                 */
-  __O  uint32_t  TASKS_EP0RCVOUT;                   /*!< Allows OUT data stage on control endpoint 0                           */
-  __O  uint32_t  TASKS_EP0STATUS;                   /*!< Allows status stage on control endpoint 0                             */
-  __O  uint32_t  TASKS_EP0STALL;                    /*!< STALLs data and status stage on control endpoint 0                    */
-  __O  uint32_t  TASKS_DPDMDRIVE;                   /*!< Forces D+ and D-lines to the state defined in the DPDMVALUE
-                                                         register                                                              */
-  __O  uint32_t  TASKS_DPDMNODRIVE;                 /*!< Stops forcing D+ and D- lines to any state (USB engine takes
-                                                         control)                                                              */
-  __I  uint32_t  RESERVED1[40];
-  __IO uint32_t  EVENTS_USBRESET;                   /*!< Signals that a USB reset condition has been detected on the
-                                                         USB lines                                                             */
-  __IO uint32_t  EVENTS_STARTED;                    /*!< Confirms that the EPIN[n].PTR, EPIN[n].MAXCNT, EPIN[n].CONFIG,
-                                                         or EPOUT[n].PTR, EPOUT[n].MAXCNT and EPOUT[n].CONFIG registers
-                                                          have been captured on all endpoints reported in the EPSTATUS
-                                                          register                                                             */
-  __IO uint32_t  EVENTS_ENDEPIN[8];                 /*!< Description collection[0]: The whole EPIN[0] buffer has been
-                                                         consumed. The RAM buffer can be accessed safely by software.          */
-  __IO uint32_t  EVENTS_EP0DATADONE;                /*!< An acknowledged data transfer has taken place on the control
-                                                         endpoint                                                              */
-  __IO uint32_t  EVENTS_ENDISOIN;                   /*!< The whole ISOIN buffer has been consumed. The RAM buffer can
-                                                         be accessed safely by software.                                       */
-  __IO uint32_t  EVENTS_ENDEPOUT[8];                /*!< Description collection[0]: The whole EPOUT[0] buffer has been
-                                                         consumed. The RAM buffer can be accessed safely by software.          */
-  __IO uint32_t  EVENTS_ENDISOOUT;                  /*!< The whole ISOOUT buffer has been consumed. The RAM buffer can
-                                                         be accessed safely by software.                                       */
-  __IO uint32_t  EVENTS_SOF;                        /*!< Signals that a SOF (start of frame) condition has been detected
-                                                         on the USB lines                                                      */
-  __IO uint32_t  EVENTS_USBEVENT;                   /*!< An event or an error not covered by specific events has occurred,
-                                                         check EVENTCAUSE register to find the cause                           */
-  __IO uint32_t  EVENTS_EP0SETUP;                   /*!< A valid SETUP token has been received (and acknowledged) on
-                                                         the control endpoint                                                  */
-  __IO uint32_t  EVENTS_EPDATA;                     /*!< A data transfer has occurred on a data endpoint, indicated by
-                                                         the EPDATASTATUS register                                             */
-  __IO uint32_t  EVENTS_ACCESSFAULT;                /*!< Access to an unavailable USB register has been attempted (software
-                                                         or EasyDMA). This event can get fired even when USBD is not
-                                                          ENABLEd.                                                             */
-  __I  uint32_t  RESERVED2[38];
-  __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
-  __I  uint32_t  RESERVED3[63];
-  __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED4[61];
-  __IO uint32_t  EVENTCAUSE;                        /*!< Details on event that caused the USBEVENT event                       */
-  __I  uint32_t  BUSSTATE;                          /*!< Provides the logic state of the D+ and D- lines                       */
-  __I  uint32_t  RESERVED5[6];
-  USBD_HALTED_Type HALTED;                          /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED6;
-  __IO uint32_t  EPSTATUS;                          /*!< Provides information on which endpoint's EasyDMA registers have
-                                                         been captured                                                         */
-  __IO uint32_t  EPDATASTATUS;                      /*!< Provides information on which endpoint(s) an acknowledged data
-                                                         transfer has occurred (EPDATA event)                                  */
-  __I  uint32_t  USBADDR;                           /*!< Device USB address                                                    */
-  __I  uint32_t  RESERVED7[3];
-  __I  uint32_t  BMREQUESTTYPE;                     /*!< SETUP data, byte 0, bmRequestType                                     */
-  __I  uint32_t  BREQUEST;                          /*!< SETUP data, byte 1, bRequest                                          */
-  __I  uint32_t  WVALUEL;                           /*!< SETUP data, byte 2, LSB of wValue                                     */
-  __I  uint32_t  WVALUEH;                           /*!< SETUP data, byte 3, MSB of wValue                                     */
-  __I  uint32_t  WINDEXL;                           /*!< SETUP data, byte 4, LSB of wIndex                                     */
-  __I  uint32_t  WINDEXH;                           /*!< SETUP data, byte 5, MSB of wIndex                                     */
-  __I  uint32_t  WLENGTHL;                          /*!< SETUP data, byte 6, LSB of wLength                                    */
-  __I  uint32_t  WLENGTHH;                          /*!< SETUP data, byte 7, MSB of wLength                                    */
-  USBD_SIZE_Type SIZE;                              /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED8[15];
-  __IO uint32_t  ENABLE;                            /*!< Enable USB                                                            */
-  __IO uint32_t  USBPULLUP;                         /*!< Control of the USB pull-up                                            */
-  __IO uint32_t  DPDMVALUE;                         /*!< State at which the DPDMDRIVE task will force D+ and D-. The
-                                                         DPDMNODRIVE task reverts the control of the lines to MAC IP
-                                                          (no forcing).                                                        */
-  __IO uint32_t  DTOGGLE;                           /*!< Data toggle control and status.                                       */
-  __IO uint32_t  EPINEN;                            /*!< Endpoint IN enable                                                    */
-  __IO uint32_t  EPOUTEN;                           /*!< Endpoint OUT enable                                                   */
-  __O  uint32_t  EPSTALL;                           /*!< STALL endpoints                                                       */
-  __IO uint32_t  ISOSPLIT;                          /*!< Controls the split of ISO buffers                                     */
-  __I  uint32_t  FRAMECNTR;                         /*!< Returns the current value of the start of frame counter               */
-  __I  uint32_t  RESERVED9[2];
-  __IO uint32_t  LOWPOWER;                          /*!< First silicon only: Controls USBD peripheral low-power mode
-                                                         during USB suspend                                                    */
-  __IO uint32_t  ISOINCONFIG;                       /*!< Controls the response of the ISO IN endpoint to an IN token
-                                                         when no data is ready to be sent                                      */
-  __I  uint32_t  RESERVED10[51];
-  USBD_EPIN_Type EPIN[8];                           /*!< Unspecified                                                           */
-  USBD_ISOIN_Type ISOIN;                            /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED11[21];
-  USBD_EPOUT_Type EPOUT[8];                         /*!< Unspecified                                                           */
-  USBD_ISOOUT_Type ISOOUT;                          /*!< Unspecified                                                           */
-} NRF_USBD_Type;
-
-
-/* ================================================================================ */
-/* ================                      QSPI                      ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief External flash interface (QSPI)
-  */
-
-typedef struct {                                    /*!< QSPI Structure                                                        */
-  __O  uint32_t  TASKS_ACTIVATE;                    /*!< Activate QSPI interface                                               */
-  __O  uint32_t  TASKS_READSTART;                   /*!< Start transfer from external flash memory to internal RAM             */
-  __O  uint32_t  TASKS_WRITESTART;                  /*!< Start transfer from internal RAM to external flash memory             */
-  __O  uint32_t  TASKS_ERASESTART;                  /*!< Start external flash memory erase operation                           */
-  __O  uint32_t  TASKS_DEACTIVATE;                  /*!< Deactivate QSPI interface                                             */
-  __I  uint32_t  RESERVED0[59];
-  __IO uint32_t  EVENTS_READY;                      /*!< QSPI peripheral is ready. This event will be generated as a
-                                                         response to any QSPI task.                                            */
-  __I  uint32_t  RESERVED1[127];
-  __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
-  __IO uint32_t  INTENSET;                          /*!< Enable interrupt                                                      */
-  __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
-  __I  uint32_t  RESERVED2[125];
-  __IO uint32_t  ENABLE;                            /*!< Enable QSPI peripheral and acquire the pins selected in PSELn
-                                                         registers                                                             */
-  QSPI_READ_Type READ;                              /*!< Unspecified                                                           */
-  QSPI_WRITE_Type WRITE;                            /*!< Unspecified                                                           */
-  QSPI_ERASE_Type ERASE;                            /*!< Unspecified                                                           */
-  QSPI_PSEL_Type PSEL;                              /*!< Unspecified                                                           */
-  __IO uint32_t  XIPOFFSET;                         /*!< Address offset into the external memory for Execute in Place
-                                                         operation.                                                            */
-  __IO uint32_t  IFCONFIG0;                         /*!< Interface configuration.                                              */
-  __I  uint32_t  RESERVED3[46];
-  __IO uint32_t  IFCONFIG1;                         /*!< Interface configuration.                                              */
-  __I  uint32_t  STATUS;                            /*!< Status register.                                                      */
-  __I  uint32_t  RESERVED4[3];
-  __IO uint32_t  DPMDUR;                            /*!< Set the duration required to enter/exit deep power-down mode
-                                                         (DPM).                                                                */
-  __I  uint32_t  RESERVED5[3];
-  __IO uint32_t  ADDRCONF;                          /*!< Extended address configuration.                                       */
-  __I  uint32_t  RESERVED6[3];
-  __IO uint32_t  CINSTRCONF;                        /*!< Custom instruction configuration register.                            */
-  __IO uint32_t  CINSTRDAT0;                        /*!< Custom instruction data register 0.                                   */
-  __IO uint32_t  CINSTRDAT1;                        /*!< Custom instruction data register 1.                                   */
-  __IO uint32_t  IFTIMING;                          /*!< SPI interface timing.                                                 */
-} NRF_QSPI_Type;
-
-
-/* ================================================================================ */
 /* ================                      GPIO                      ================ */
 /* ================================================================================ */
 
 
 /**
-  * @brief GPIO Port 1 (GPIO)
+  * @brief GPIO Port (GPIO)
   */
 
 typedef struct {                                    /*!< GPIO Structure                                                        */
@@ -2223,21 +1460,6 @@ typedef struct {                                    /*!< GPIO Structure         
   __I  uint32_t  RESERVED1[118];
   __IO uint32_t  PIN_CNF[32];                       /*!< Description collection[0]: Configuration of GPIO pins                 */
 } NRF_GPIO_Type;
-
-
-/* ================================================================================ */
-/* ================                   CRYPTOCELL                   ================ */
-/* ================================================================================ */
-
-
-/**
-  * @brief ARM CryptoCell register interface (CRYPTOCELL)
-  */
-
-typedef struct {                                    /*!< CRYPTOCELL Structure                                                  */
-  __I  uint32_t  RESERVED0[320];
-  __IO uint32_t  ENABLE;                            /*!< Control power and clock for ARM CryptoCell subsystem                  */
-} NRF_CRYPTOCELL_Type;
 
 
 /* --------------------  End of section using anonymous unions  ------------------- */
@@ -2264,24 +1486,15 @@ typedef struct {                                    /*!< CRYPTOCELL Structure   
 
 #define NRF_FICR_BASE                   0x10000000UL
 #define NRF_UICR_BASE                   0x10001000UL
+#define NRF_BPROT_BASE                  0x40000000UL
 #define NRF_POWER_BASE                  0x40000000UL
 #define NRF_CLOCK_BASE                  0x40000000UL
 #define NRF_RADIO_BASE                  0x40001000UL
 #define NRF_UARTE0_BASE                 0x40002000UL
-#define NRF_UART0_BASE                  0x40002000UL
-#define NRF_SPIM0_BASE                  0x40003000UL
-#define NRF_SPIS0_BASE                  0x40003000UL
 #define NRF_TWIM0_BASE                  0x40003000UL
 #define NRF_TWIS0_BASE                  0x40003000UL
-#define NRF_SPI0_BASE                   0x40003000UL
-#define NRF_TWI0_BASE                   0x40003000UL
-#define NRF_SPIM1_BASE                  0x40004000UL
-#define NRF_SPIS1_BASE                  0x40004000UL
-#define NRF_TWIM1_BASE                  0x40004000UL
-#define NRF_TWIS1_BASE                  0x40004000UL
-#define NRF_SPI1_BASE                   0x40004000UL
-#define NRF_TWI1_BASE                   0x40004000UL
-#define NRF_NFCT_BASE                   0x40005000UL
+#define NRF_SPIM0_BASE                  0x40004000UL
+#define NRF_SPIS0_BASE                  0x40004000UL
 #define NRF_GPIOTE_BASE                 0x40006000UL
 #define NRF_SAADC_BASE                  0x40007000UL
 #define NRF_TIMER0_BASE                 0x40008000UL
@@ -2297,43 +1510,19 @@ typedef struct {                                    /*!< CRYPTOCELL Structure   
 #define NRF_RTC1_BASE                   0x40011000UL
 #define NRF_QDEC_BASE                   0x40012000UL
 #define NRF_COMP_BASE                   0x40013000UL
-#define NRF_LPCOMP_BASE                 0x40013000UL
 #define NRF_SWI0_BASE                   0x40014000UL
 #define NRF_EGU0_BASE                   0x40014000UL
 #define NRF_SWI1_BASE                   0x40015000UL
 #define NRF_EGU1_BASE                   0x40015000UL
 #define NRF_SWI2_BASE                   0x40016000UL
-#define NRF_EGU2_BASE                   0x40016000UL
 #define NRF_SWI3_BASE                   0x40017000UL
-#define NRF_EGU3_BASE                   0x40017000UL
 #define NRF_SWI4_BASE                   0x40018000UL
-#define NRF_EGU4_BASE                   0x40018000UL
 #define NRF_SWI5_BASE                   0x40019000UL
-#define NRF_EGU5_BASE                   0x40019000UL
-#define NRF_TIMER3_BASE                 0x4001A000UL
-#define NRF_TIMER4_BASE                 0x4001B000UL
 #define NRF_PWM0_BASE                   0x4001C000UL
 #define NRF_PDM_BASE                    0x4001D000UL
 #define NRF_NVMC_BASE                   0x4001E000UL
-#define NRF_ACL_BASE                    0x4001E000UL
 #define NRF_PPI_BASE                    0x4001F000UL
-#define NRF_MWU_BASE                    0x40020000UL
-#define NRF_PWM1_BASE                   0x40021000UL
-#define NRF_PWM2_BASE                   0x40022000UL
-#define NRF_SPIM2_BASE                  0x40023000UL
-#define NRF_SPIS2_BASE                  0x40023000UL
-#define NRF_SPI2_BASE                   0x40023000UL
-#define NRF_RTC2_BASE                   0x40024000UL
-#define NRF_I2S_BASE                    0x40025000UL
-#define NRF_FPU_BASE                    0x40026000UL
-#define NRF_USBD_BASE                   0x40027000UL
-#define NRF_UARTE1_BASE                 0x40028000UL
-#define NRF_QSPI_BASE                   0x40029000UL
-#define NRF_PWM3_BASE                   0x4002D000UL
-#define NRF_SPIM3_BASE                  0x4002F000UL
 #define NRF_P0_BASE                     0x50000000UL
-#define NRF_P1_BASE                     0x50000300UL
-#define NRF_CRYPTOCELL_BASE             0x5002A000UL
 
 
 /* ================================================================================ */
@@ -2342,24 +1531,15 @@ typedef struct {                                    /*!< CRYPTOCELL Structure   
 
 #define NRF_FICR                        ((NRF_FICR_Type           *) NRF_FICR_BASE)
 #define NRF_UICR                        ((NRF_UICR_Type           *) NRF_UICR_BASE)
+#define NRF_BPROT                       ((NRF_BPROT_Type          *) NRF_BPROT_BASE)
 #define NRF_POWER                       ((NRF_POWER_Type          *) NRF_POWER_BASE)
 #define NRF_CLOCK                       ((NRF_CLOCK_Type          *) NRF_CLOCK_BASE)
 #define NRF_RADIO                       ((NRF_RADIO_Type          *) NRF_RADIO_BASE)
 #define NRF_UARTE0                      ((NRF_UARTE_Type          *) NRF_UARTE0_BASE)
-#define NRF_UART0                       ((NRF_UART_Type           *) NRF_UART0_BASE)
-#define NRF_SPIM0                       ((NRF_SPIM_Type           *) NRF_SPIM0_BASE)
-#define NRF_SPIS0                       ((NRF_SPIS_Type           *) NRF_SPIS0_BASE)
 #define NRF_TWIM0                       ((NRF_TWIM_Type           *) NRF_TWIM0_BASE)
 #define NRF_TWIS0                       ((NRF_TWIS_Type           *) NRF_TWIS0_BASE)
-#define NRF_SPI0                        ((NRF_SPI_Type            *) NRF_SPI0_BASE)
-#define NRF_TWI0                        ((NRF_TWI_Type            *) NRF_TWI0_BASE)
-#define NRF_SPIM1                       ((NRF_SPIM_Type           *) NRF_SPIM1_BASE)
-#define NRF_SPIS1                       ((NRF_SPIS_Type           *) NRF_SPIS1_BASE)
-#define NRF_TWIM1                       ((NRF_TWIM_Type           *) NRF_TWIM1_BASE)
-#define NRF_TWIS1                       ((NRF_TWIS_Type           *) NRF_TWIS1_BASE)
-#define NRF_SPI1                        ((NRF_SPI_Type            *) NRF_SPI1_BASE)
-#define NRF_TWI1                        ((NRF_TWI_Type            *) NRF_TWI1_BASE)
-#define NRF_NFCT                        ((NRF_NFCT_Type           *) NRF_NFCT_BASE)
+#define NRF_SPIM0                       ((NRF_SPIM_Type           *) NRF_SPIM0_BASE)
+#define NRF_SPIS0                       ((NRF_SPIS_Type           *) NRF_SPIS0_BASE)
 #define NRF_GPIOTE                      ((NRF_GPIOTE_Type         *) NRF_GPIOTE_BASE)
 #define NRF_SAADC                       ((NRF_SAADC_Type          *) NRF_SAADC_BASE)
 #define NRF_TIMER0                      ((NRF_TIMER_Type          *) NRF_TIMER0_BASE)
@@ -2375,47 +1555,23 @@ typedef struct {                                    /*!< CRYPTOCELL Structure   
 #define NRF_RTC1                        ((NRF_RTC_Type            *) NRF_RTC1_BASE)
 #define NRF_QDEC                        ((NRF_QDEC_Type           *) NRF_QDEC_BASE)
 #define NRF_COMP                        ((NRF_COMP_Type           *) NRF_COMP_BASE)
-#define NRF_LPCOMP                      ((NRF_LPCOMP_Type         *) NRF_LPCOMP_BASE)
 #define NRF_SWI0                        ((NRF_SWI_Type            *) NRF_SWI0_BASE)
 #define NRF_EGU0                        ((NRF_EGU_Type            *) NRF_EGU0_BASE)
 #define NRF_SWI1                        ((NRF_SWI_Type            *) NRF_SWI1_BASE)
 #define NRF_EGU1                        ((NRF_EGU_Type            *) NRF_EGU1_BASE)
 #define NRF_SWI2                        ((NRF_SWI_Type            *) NRF_SWI2_BASE)
-#define NRF_EGU2                        ((NRF_EGU_Type            *) NRF_EGU2_BASE)
 #define NRF_SWI3                        ((NRF_SWI_Type            *) NRF_SWI3_BASE)
-#define NRF_EGU3                        ((NRF_EGU_Type            *) NRF_EGU3_BASE)
 #define NRF_SWI4                        ((NRF_SWI_Type            *) NRF_SWI4_BASE)
-#define NRF_EGU4                        ((NRF_EGU_Type            *) NRF_EGU4_BASE)
 #define NRF_SWI5                        ((NRF_SWI_Type            *) NRF_SWI5_BASE)
-#define NRF_EGU5                        ((NRF_EGU_Type            *) NRF_EGU5_BASE)
-#define NRF_TIMER3                      ((NRF_TIMER_Type          *) NRF_TIMER3_BASE)
-#define NRF_TIMER4                      ((NRF_TIMER_Type          *) NRF_TIMER4_BASE)
 #define NRF_PWM0                        ((NRF_PWM_Type            *) NRF_PWM0_BASE)
 #define NRF_PDM                         ((NRF_PDM_Type            *) NRF_PDM_BASE)
 #define NRF_NVMC                        ((NRF_NVMC_Type           *) NRF_NVMC_BASE)
-#define NRF_ACL                         ((NRF_ACL_Type            *) NRF_ACL_BASE)
 #define NRF_PPI                         ((NRF_PPI_Type            *) NRF_PPI_BASE)
-#define NRF_MWU                         ((NRF_MWU_Type            *) NRF_MWU_BASE)
-#define NRF_PWM1                        ((NRF_PWM_Type            *) NRF_PWM1_BASE)
-#define NRF_PWM2                        ((NRF_PWM_Type            *) NRF_PWM2_BASE)
-#define NRF_SPIM2                       ((NRF_SPIM_Type           *) NRF_SPIM2_BASE)
-#define NRF_SPIS2                       ((NRF_SPIS_Type           *) NRF_SPIS2_BASE)
-#define NRF_SPI2                        ((NRF_SPI_Type            *) NRF_SPI2_BASE)
-#define NRF_RTC2                        ((NRF_RTC_Type            *) NRF_RTC2_BASE)
-#define NRF_I2S                         ((NRF_I2S_Type            *) NRF_I2S_BASE)
-#define NRF_FPU                         ((NRF_FPU_Type            *) NRF_FPU_BASE)
-#define NRF_USBD                        ((NRF_USBD_Type           *) NRF_USBD_BASE)
-#define NRF_UARTE1                      ((NRF_UARTE_Type          *) NRF_UARTE1_BASE)
-#define NRF_QSPI                        ((NRF_QSPI_Type           *) NRF_QSPI_BASE)
-#define NRF_PWM3                        ((NRF_PWM_Type            *) NRF_PWM3_BASE)
-#define NRF_SPIM3                       ((NRF_SPIM_Type           *) NRF_SPIM3_BASE)
 #define NRF_P0                          ((NRF_GPIO_Type           *) NRF_P0_BASE)
-#define NRF_P1                          ((NRF_GPIO_Type           *) NRF_P1_BASE)
-#define NRF_CRYPTOCELL                  ((NRF_CRYPTOCELL_Type     *) NRF_CRYPTOCELL_BASE)
 
 
 /** @} */ /* End of group Device_Peripheral_Registers */
-/** @} */ /* End of group nrf52840 */
+/** @} */ /* End of group nrf52810 */
 /** @} */ /* End of group Nordic Semiconductor */
 
 #ifdef __cplusplus
@@ -2423,5 +1579,5 @@ typedef struct {                                    /*!< CRYPTOCELL Structure   
 #endif
 
 
-#endif  /* nrf52840_H */
+#endif  /* nrf52810_H */
 

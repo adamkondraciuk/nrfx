@@ -30,8 +30,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF51_TO_NRF52840_H
-#define NRF51_TO_NRF52840_H
+#ifndef NRF51_TO_NRF52810_H
+#define NRF51_TO_NRF52810_H
 
 /*lint ++flb "Enter library region */
 
@@ -41,31 +41,15 @@ POSSIBILITY OF SUCH DAMAGE.
  * from the nrf51_deprecated.h file. */
 
 
+ /* Differences between latest nRF51 headers and nRF52810 headers. */
+ 
 /* IRQ */
 /* Several peripherals have been added to several indexes. Names of IRQ handlers and IRQ numbers have changed. */
-#define UART0_IRQHandler        UARTE0_UART0_IRQHandler
-#define SPI0_TWI0_IRQHandler    SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler
-#define SPI1_TWI1_IRQHandler    SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler
-#define ADC_IRQHandler          SAADC_IRQHandler
-#define LPCOMP_IRQHandler       COMP_LPCOMP_IRQHandler
 #define SWI0_IRQHandler         SWI0_EGU0_IRQHandler
 #define SWI1_IRQHandler         SWI1_EGU1_IRQHandler
-#define SWI2_IRQHandler         SWI2_EGU2_IRQHandler
-#define SWI3_IRQHandler         SWI3_EGU3_IRQHandler
-#define SWI4_IRQHandler         SWI4_EGU4_IRQHandler
-#define SWI5_IRQHandler         SWI5_EGU5_IRQHandler
 
-#define UART0_IRQn              UARTE0_UART0_IRQn
-#define SPI0_TWI0_IRQn          SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn
-#define SPI1_TWI1_IRQn          SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQn
-#define ADC_IRQn                SAADC_IRQn
-#define LPCOMP_IRQn             COMP_LPCOMP_IRQn
 #define SWI0_IRQn               SWI0_EGU0_IRQn
 #define SWI1_IRQn               SWI1_EGU1_IRQn
-#define SWI2_IRQn               SWI2_EGU2_IRQn
-#define SWI3_IRQn               SWI3_EGU3_IRQn
-#define SWI4_IRQn               SWI4_EGU4_IRQn
-#define SWI5_IRQn               SWI5_EGU5_IRQn
 
 
 /* UICR */
@@ -121,41 +105,11 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS_AMOUNTTX_AMOUNTTX_Msk  SPIS_TXD_AMOUNT_AMOUNT_Msk
 
 
-/* UART */
-/* The registers PSELRTS, PSELTXD, PSELCTS, PSELRXD were restructured into a struct. */
-#define PSELRTS       PSEL.RTS
-#define PSELTXD       PSEL.TXD
-#define PSELCTS       PSEL.CTS
-#define PSELRXD       PSEL.RXD
-
-/* TWI */
-/* The registers PSELSCL, PSELSDA were restructured into a struct. */
-#define PSELSCL       PSEL.SCL
-#define PSELSDA       PSEL.SDA
-
-
-
-/* From nrf51_deprecated.h */
+/* From nrf51_deprecated.h. Several macros changed in different versions of nRF52 headers. By defining the following, any code written for any version of nRF52 headers will still compile. */
 
 /* NVMC */
 /* The register ERASEPROTECTEDPAGE changed name to ERASEPCR0 in the documentation. */
 #define ERASEPROTECTEDPAGE      ERASEPCR0
-
-
-/* IRQ */
-/* COMP module was eliminated. Adapted to nrf52840 headers. */
-#define LPCOMP_COMP_IRQHandler  COMP_LPCOMP_IRQHandler
-#define LPCOMP_COMP_IRQn        COMP_LPCOMP_IRQn
-
-
-/* REFSEL register redefined enumerated values and added some more. */
-#define LPCOMP_REFSEL_REFSEL_SupplyOneEighthPrescaling          LPCOMP_REFSEL_REFSEL_Ref1_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplyTwoEighthsPrescaling         LPCOMP_REFSEL_REFSEL_Ref2_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplyThreeEighthsPrescaling       LPCOMP_REFSEL_REFSEL_Ref3_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplyFourEighthsPrescaling        LPCOMP_REFSEL_REFSEL_Ref4_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplyFiveEighthsPrescaling        LPCOMP_REFSEL_REFSEL_Ref5_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplySixEighthsPrescaling         LPCOMP_REFSEL_REFSEL_Ref6_8Vdd
-#define LPCOMP_REFSEL_REFSEL_SupplySevenEighthsPrescaling       LPCOMP_REFSEL_REFSEL_Ref7_8Vdd
 
 
 /* RADIO */
@@ -565,5 +519,5 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /*lint --flb "Leave library region" */
 
-#endif /* NRF51_TO_NRF52840_H */
+#endif /* NRF51_TO_NRF52810_H */
 
