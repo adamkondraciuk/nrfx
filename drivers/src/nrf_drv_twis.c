@@ -2,8 +2,11 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(TWIS)
-#define ENABLED_TWIS_COUNT (TWIS0_ENABLED+TWIS1_ENABLED)
-#if ENABLED_TWIS_COUNT
+
+#if !(NRFX_MODULE_ENABLED(TWIS0) || NRFX_MODULE_ENABLED(TWIS1))
+#error "No enabled TWIS instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_twis.h>
 #include <nrf_drv_common.h>
 
@@ -75,14 +78,14 @@ typedef struct
 
 
 /** The constant instance part implementation */
-static const nrf_drv_twis_const_inst_t m_const_inst[ENABLED_TWIS_COUNT] =
+static const nrf_drv_twis_const_inst_t m_const_inst[NRFX_TWIS_ENABLED_COUNT] =
 {
     #define X(n)  { .p_reg = NRF_TWIS##n },
     #include "nrf_drv_twis_inst.def"
 };
 
 /** The variable instance part implementation */
-static nrf_drv_twis_var_inst_t m_var_inst[ENABLED_TWIS_COUNT] =
+static nrf_drv_twis_var_inst_t m_var_inst[NRFX_TWIS_ENABLED_COUNT] =
 {
     #define X(n) { .state      = NRF_DRV_STATE_UNINITIALIZED, \
                    .substate   = NRF_DRV_TWIS_SUBSTATE_IDLE, \
@@ -101,7 +104,7 @@ static nrf_drv_twis_var_inst_t m_var_inst[ENABLED_TWIS_COUNT] =
     #if NRFX_MODULE_ENABLED(TWIS1)
         IRQ_HANDLER(1);
     #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[ENABLED_TWIS_COUNT] = {
+    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
     #if NRFX_MODULE_ENABLED(TWIS0)
         IRQ_HANDLER_NAME(0),
     #endif
@@ -135,7 +138,7 @@ static nrf_drv_twis_var_inst_t m_var_inst[ENABLED_TWIS_COUNT] =
  * Because of how it is used no atomic instructions are required to support this kind of semaphore.
  * It is not waitable semaphore - function executed or not depending of its state.
  */
-static uint8_t m_sm_semaphore[ENABLED_TWIS_COUNT];
+static uint8_t m_sm_semaphore[NRFX_TWIS_ENABLED_COUNT];
 
 /**
  * @brief Used interrupts mask
@@ -534,7 +537,7 @@ static inline void nrf_drv_twis_on_ISR(uint8_t instNr)
 #define X(n) \
     IRQ_HANDLER(n) \
     { \
-        nrf_drv_twis_on_ISR(TWIS##n##_INSTANCE_INDEX); \
+        nrf_drv_twis_on_ISR(NRFX_TWIS##n##_INST_IDX); \
     }
 #include "nrf_drv_twis_inst.def"
 
@@ -891,5 +894,5 @@ bool nrf_drv_twis_is_pending_rx(nrf_drv_twis_t const * const p_instance)
     nrf_drv_twis_preprocess_status(p_instance->instNr);
     return NRF_DRV_TWIS_SUBSTATE_WRITE_PENDING == m_var_inst[(p_instance->instNr)].substate;
 }
-#endif // TWIS_COUNT
+
 #endif // NRFX_MODULE_ENABLED(TWIS)

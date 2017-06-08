@@ -20,14 +20,14 @@ extern "C" {
 #endif
 
 #if defined(SPIM_PRESENT)
-    #define NRF_DRV_SPI_PERIPHERAL(id)           \
-        (CONCAT_3(SPI, id, _USE_EASY_DMA) == 1 ? \
-            (void *)CONCAT_2(NRF_SPIM, id)       \
-          : (void *)CONCAT_2(NRF_SPI, id))
+    #define NRF_DRV_SPI_PERIPHERAL(id)                \
+        (NRFX_CONCAT_3(SPI, id, _USE_EASY_DMA) == 1 ? \
+            (void *)NRFX_CONCAT_2(NRF_SPIM, id)       \
+          : (void *)NRFX_CONCAT_2(NRF_SPI, id))
     #define SPI2_IRQ            SPIM2_SPIS2_SPI2_IRQn
     #define SPI2_IRQ_HANDLER    SPIM2_SPIS2_SPI2_IRQHandler
 #else
-    #define NRF_DRV_SPI_PERIPHERAL(id)  (void *)CONCAT_2(NRF_SPI, id)
+    #define NRF_DRV_SPI_PERIPHERAL(id)  (void *)NRFX_CONCAT_2(NRF_SPI, id)
 #endif
 #define SPI0_IRQ            SPI0_TWI0_IRQn
 #define SPI0_IRQ_HANDLER    SPI0_TWI0_IRQHandler
@@ -53,19 +53,28 @@ typedef struct
     bool      use_easy_dma; ///< True if the peripheral with EasyDMA (SPIM) shall be used.
 } nrf_drv_spi_t;
 
-#define SPI0_INSTANCE_INDEX 0
-#define SPI1_INSTANCE_INDEX SPI0_INSTANCE_INDEX+SPI0_ENABLED
-#define SPI2_INSTANCE_INDEX SPI1_INSTANCE_INDEX+SPI1_ENABLED
+enum {
+#if NRFX_MODULE_ENABLED(SPI0)
+    NRFX_SPI0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(SPI1)
+    NRFX_SPI1_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(SPI2)
+    NRFX_SPI2_INST_IDX,
+#endif
+    NRFX_SPI_ENABLED_COUNT
+};
 
 /**
  * @brief Macro for creating an SPI master driver instance.
  */
-#define NRF_DRV_SPI_INSTANCE(id)                        \
-{                                                       \
-    .p_registers  = NRF_DRV_SPI_PERIPHERAL(id),         \
-    .irq          = CONCAT_3(SPI, id, _IRQ),            \
-    .drv_inst_idx = CONCAT_3(SPI, id, _INSTANCE_INDEX), \
-    .use_easy_dma = CONCAT_3(SPI, id, _USE_EASY_DMA)    \
+#define NRF_DRV_SPI_INSTANCE(id)                            \
+{                                                           \
+    .p_registers  = NRF_DRV_SPI_PERIPHERAL(id),             \
+    .irq          = NRFX_CONCAT_3(SPI, id, _IRQ),           \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_SPI, id, _INST_IDX), \
+    .use_easy_dma = NRFX_CONCAT_3(SPI, id, _USE_EASY_DMA)   \
 }
 
 /**

@@ -115,7 +115,7 @@ typedef enum
  */
 #define NRF_DRV_TWIS_INSTANCE_x(id) \
     { \
-        TWIS##id##_INSTANCE_INDEX \
+        NRFX_TWIS##id##_INST_IDX \
     }
 
 /**
@@ -123,10 +123,20 @@ typedef enum
  *
  * @param[in] id Instance index. Use 0 for TWIS0 and 1 for TWIS1
  */
-#define NRF_DRV_TWIS_INSTANCE(id) NRF_DRV_TWIS_INSTANCE_x(id)
+#define NRF_DRV_TWIS_INSTANCE(id)                      \
+{                                                      \
+    .instNr = NRFX_CONCAT_3(NRFX_TWIS, id, _INST_IDX), \
+}
 
-#define TWIS0_INSTANCE_INDEX 0
-#define TWIS1_INSTANCE_INDEX TWIS0_INSTANCE_INDEX+TWIS0_ENABLED
+enum {
+#if NRFX_MODULE_ENABLED(TWIS0)
+    NRFX_TWIS0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TWIS1)
+    NRFX_TWIS1_INST_IDX,
+#endif
+    NRFX_TWIS_ENABLED_COUNT
+};
 
 /**
  * @brief Generate default configuration for TWIS driver instance

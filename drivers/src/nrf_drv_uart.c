@@ -3,6 +3,11 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(UART)
+
+#if !(NRFX_MODULE_ENABLED(UART0) || NRFX_MODULE_ENABLED(UART1))
+#error "No enabled UART instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_uart.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
@@ -55,7 +60,7 @@ typedef struct
 #endif
 } uart_control_block_t;
 
-static uart_control_block_t m_cb[UART_ENABLED_COUNT];
+static uart_control_block_t m_cb[NRFX_UART_ENABLED_COUNT];
 
 __STATIC_INLINE void apply_config(nrf_drv_uart_t const * p_instance, nrf_drv_uart_config_t const * p_config)
 {
@@ -910,33 +915,34 @@ __STATIC_INLINE void uarte_irq_handler(NRF_UARTE_Type * p_uarte, uart_control_bl
 }
 #endif
 
-#if UART0_ENABLED
+#if NRFX_MODULE_ENABLED(UART0)
 void UART0_IRQHandler(void)
 {
     CODE_FOR_UARTE_INT
     (
-        UART0_INSTANCE_INDEX,
-        uarte_irq_handler(NRF_UARTE0, &m_cb[UART0_INSTANCE_INDEX]);
+        NRFX_UART0_INST_IDX,
+        uarte_irq_handler(NRF_UARTE0, &m_cb[NRFX_UART0_INST_IDX]);
     )
     CODE_FOR_UART
     (
-        uart_irq_handler(NRF_UART0, &m_cb[UART0_INSTANCE_INDEX]);
+        uart_irq_handler(NRF_UART0, &m_cb[NRFX_UART0_INST_IDX]);
     )
 }
 #endif
 
-#if UART1_ENABLED
+#if NRFX_MODULE_ENABLED(UART1)
 void UARTE1_IRQHandler(void)
 {
     CODE_FOR_UARTE_INT
     (
-        UART1_INSTANCE_INDEX,
-        uarte_irq_handler(NRF_UARTE1, &m_cb[UART1_INSTANCE_INDEX]);
+        NRFX_UART1_INST_IDX,
+        uarte_irq_handler(NRF_UARTE1, &m_cb[NRFX_UART1_INST_IDX]);
     )
     CODE_FOR_UART
     (
-        uart_irq_handler(NRF_UART1, &m_cb[UART1_INSTANCE_INDEX]);
+        uart_irq_handler(NRF_UART1, &m_cb[NRFX_UART1_INST_IDX]);
     )
 }
 #endif
+
 #endif // NRFX_MODULE_ENABLED(UART)

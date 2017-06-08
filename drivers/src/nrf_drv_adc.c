@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(ADC)
+
 #include <nrf_drv_adc.h>
 #include <nrf_drv_common.h>
 
@@ -286,4 +287,5 @@ void ADC_IRQHandler(void)
         m_cb.event_handler(&evt);
     }
 }
+
 #endif // NRFX_MODULE_ENABLED(ADC)

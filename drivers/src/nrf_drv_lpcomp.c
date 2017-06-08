@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(LPCOMP)
+
 #include <nrf_drv_lpcomp.h>
 #include <nrf_drv_common.h>
 

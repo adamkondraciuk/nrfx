@@ -25,25 +25,13 @@
 extern "C" {
 #endif
 
-#ifndef UART1_ENABLED
-#define UART1_ENABLED 0
-#endif
-
-#ifndef UART0_ENABLED
-#define UART0_ENABLED 0
-#endif
-
-#define UART0_INSTANCE_INDEX 0
-#define UART1_INSTANCE_INDEX UART0_ENABLED
-#define UART_ENABLED_COUNT UART0_ENABLED + UART1_ENABLED
-
 #if defined(UARTE_PRESENT)
-    #define NRF_DRV_UART_PERIPHERAL(id)           \
-        (CONCAT_3(UART, id, _CONFIG_USE_EASY_DMA) == 1 ? \
-            (void *)CONCAT_2(NRF_UARTE, id)       \
-          : (void *)CONCAT_2(NRF_UART, id))
+    #define NRF_DRV_UART_PERIPHERAL(id)                       \
+        (NRFX_CONCAT_3(UART, id, _CONFIG_USE_EASY_DMA) == 1 ? \
+            (void *)NRFX_CONCAT_2(NRF_UARTE, id)              \
+          : (void *)NRFX_CONCAT_2(NRF_UART, id))
 #else
-    #define NRF_DRV_UART_PERIPHERAL(id)  (void *)CONCAT_2(NRF_UART, id)
+    #define NRF_DRV_UART_PERIPHERAL(id)  (void *)NRFX_CONCAT_2(NRF_UART, id)
 #endif
 
 // This set of macros makes it possible to exclude parts of code, when one type
@@ -59,7 +47,7 @@ extern "C" {
 #define UART_IN_USE
 #endif
 
-#if (UART_ENABLED == 1) && ((!defined(UARTE_IN_USE) && !defined(UART_IN_USE)) || ((UART_EASY_DMA_SUPPORT == 0) && (UART_LEGACY_SUPPORT == 0)))
+#if NRFX_MODULE_ENABLED(UART) && ((!defined(UARTE_IN_USE) && !defined(UART_IN_USE)) || ((UART_EASY_DMA_SUPPORT == 0) && (UART_LEGACY_SUPPORT == 0)))
 #error "Illegal settings in uart module!"
 #endif
 
@@ -90,8 +78,18 @@ typedef struct
 #define NRF_DRV_UART_INSTANCE(id)                            \
 {                                                            \
     .reg          = {NRF_DRV_UART_PERIPHERAL(id)},           \
-    .drv_inst_idx = CONCAT_3(UART, id, _INSTANCE_INDEX),\
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_UART, id, _INST_IDX), \
 }
+
+enum {
+#if NRFX_MODULE_ENABLED(UART0)
+    NRFX_UART0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(UART1)
+    NRFX_UART1_INST_IDX,
+#endif
+    NRFX_UART_ENABLED_COUNT
+};
 
 /**
  * @brief Types of UART driver events.

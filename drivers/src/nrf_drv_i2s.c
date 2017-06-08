@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(I2S)
+
 #include <nrf_drv_i2s.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>

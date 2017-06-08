@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(POWER)
+
 #include <nrf_drv_power.h>
 #include <nrf_drv_common.h>
 #ifdef SOFTDEVICE_PRESENT

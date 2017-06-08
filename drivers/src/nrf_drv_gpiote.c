@@ -2,6 +2,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(GPIOTE)
+
 #include <nrf_drv_gpiote.h>
 #include <nrf_drv_common.h>
 #include "nrf_bitmask.h"

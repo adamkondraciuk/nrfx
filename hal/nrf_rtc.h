@@ -25,7 +25,7 @@ extern "C" {
  *        in a given RTC instance.
  */
 
-#define NRF_RTC_CC_CHANNEL_COUNT(id) CONCAT_3(RTC, id, _CC_NUM)
+#define NRF_RTC_CC_CHANNEL_COUNT(id)    NRFX_CONCAT_3(RTC, id, _CC_NUM)
 
 #define RTC_INPUT_FREQ 32768 /**< Input frequency of the RTC instance. */
 

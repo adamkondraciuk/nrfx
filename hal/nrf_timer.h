@@ -21,7 +21,7 @@ extern "C" {
  * @brief Macro for validating the correctness of the BIT_WIDTH setting.
  */
 
-#define TIMER_MAX_SIZE(id) CONCAT_3(TIMER, id, _MAX_SIZE)
+#define TIMER_MAX_SIZE(id)  NRFX_CONCAT_3(TIMER, id, _MAX_SIZE)
 
 #define TIMER_BIT_WIDTH_MAX(id, bit_width) \
     (TIMER_MAX_SIZE(id) == 8   ? (bit_width == NRF_TIMER_BIT_WIDTH_8)  :  \
@@ -56,7 +56,7 @@ extern "C" {
  * @brief Macro for getting the number of capture/compare channels available
  *        in a given timer instance.
  */
-#define NRF_TIMER_CC_CHANNEL_COUNT(id)  CONCAT_3(TIMER, id, _CC_NUM)
+#define NRF_TIMER_CC_CHANNEL_COUNT(id)  NRFX_CONCAT_3(TIMER, id, _CC_NUM)
 
 /**
  * @brief Timer tasks.

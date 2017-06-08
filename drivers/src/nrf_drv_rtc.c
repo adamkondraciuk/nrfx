@@ -3,8 +3,12 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(RTC)
-#define ENABLED_RTC_COUNT (RTC0_ENABLED+RTC1_ENABLED+RTC2_ENABLED)
-#if ENABLED_RTC_COUNT
+
+#if !(NRFX_MODULE_ENABLED(RTC0) || NRFX_MODULE_ENABLED(RTC1) || \
+      NRFX_MODULE_ENABLED(RTC2))
+#error "No enabled RTC instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_rtc.h>
 #include <nrf_drv_common.h>
 
@@ -30,8 +34,8 @@ typedef struct
 } nrf_drv_rtc_cb_t;
 
 // User callbacks local storage.
-static nrf_drv_rtc_handler_t        m_handlers[ENABLED_RTC_COUNT];
-static nrf_drv_rtc_cb_t             m_cb[ENABLED_RTC_COUNT];
+static nrf_drv_rtc_handler_t        m_handlers[NRFX_RTC_ENABLED_COUNT];
+static nrf_drv_rtc_cb_t             m_cb[NRFX_RTC_ENABLED_COUNT];
 
 ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
                             nrf_drv_rtc_config_t const * p_config,
@@ -290,22 +294,25 @@ __STATIC_INLINE void nrf_drv_rtc_int_handler(NRF_RTC_Type * p_reg,
 #if NRFX_MODULE_ENABLED(RTC0)
 void RTC0_IRQHandler(void)
 {
-    nrf_drv_rtc_int_handler(NRF_RTC0,RTC0_INSTANCE_INDEX, NRF_RTC_CC_CHANNEL_COUNT(0));
+    nrf_drv_rtc_int_handler(NRF_RTC0, NRFX_RTC0_INST_IDX,
+        NRF_RTC_CC_CHANNEL_COUNT(0));
 }
 #endif
 
 #if NRFX_MODULE_ENABLED(RTC1)
 void RTC1_IRQHandler(void)
 {
-    nrf_drv_rtc_int_handler(NRF_RTC1,RTC1_INSTANCE_INDEX, NRF_RTC_CC_CHANNEL_COUNT(1));
+    nrf_drv_rtc_int_handler(NRF_RTC1, NRFX_RTC1_INST_IDX,
+        NRF_RTC_CC_CHANNEL_COUNT(1));
 }
 #endif
 
 #if NRFX_MODULE_ENABLED(RTC2)
 void RTC2_IRQHandler(void)
 {
-    nrf_drv_rtc_int_handler(NRF_RTC2,RTC2_INSTANCE_INDEX, NRF_RTC_CC_CHANNEL_COUNT(2));
+    nrf_drv_rtc_int_handler(NRF_RTC2, NRFX_RTC2_INST_IDX,
+        NRF_RTC_CC_CHANNEL_COUNT(2));
 }
 #endif
-#endif // ENABLED_RTC_COUNT
+
 #endif // NRFX_MODULE_ENABLED(RTC)

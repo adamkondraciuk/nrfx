@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(PDM)
+
 #include <nrf_drv_pdm.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>

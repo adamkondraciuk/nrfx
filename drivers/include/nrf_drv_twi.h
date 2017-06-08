@@ -37,11 +37,11 @@ extern "C" {
 
 #if defined(TWIM_IN_USE)
     #define NRF_DRV_TWI_PERIPHERAL(id)           \
-        (CONCAT_3(TWI, id, _USE_EASY_DMA) == 1 ? \
-            (void *)CONCAT_2(NRF_TWIM, id)       \
-          : (void *)CONCAT_2(NRF_TWI, id))
+        (NRFX_CONCAT_3(TWI, id, _USE_EASY_DMA) == 1 ? \
+            (void *)NRFX_CONCAT_2(NRF_TWIM, id)       \
+          : (void *)NRFX_CONCAT_2(NRF_TWI, id))
 #else
-    #define NRF_DRV_TWI_PERIPHERAL(id)  (void *)CONCAT_2(NRF_TWI, id)
+    #define NRF_DRV_TWI_PERIPHERAL(id)  (void *)NRFX_CONCAT_2(NRF_TWI, id)
 #endif
 
 
@@ -61,18 +61,25 @@ typedef struct
     bool    use_easy_dma; ///< True if the peripheral with EasyDMA (TWIM) shall be used.
 } nrf_drv_twi_t;
 
-#define TWI0_INSTANCE_INDEX 0
-#define TWI1_INSTANCE_INDEX TWI0_INSTANCE_INDEX+TWI0_ENABLED
-
 /**
  * @brief Macro for creating a TWI master driver instance.
  */
-#define NRF_DRV_TWI_INSTANCE(id)                        \
-{                                                       \
-    .reg          = {NRF_DRV_TWI_PERIPHERAL(id)},       \
-    .drv_inst_idx = CONCAT_3(TWI, id, _INSTANCE_INDEX), \
-    .use_easy_dma = CONCAT_3(TWI, id, _USE_EASY_DMA)    \
+#define NRF_DRV_TWI_INSTANCE(id)                            \
+{                                                           \
+    .reg          = {NRF_DRV_TWI_PERIPHERAL(id)},           \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_TWI, id, _INST_IDX), \
+    .use_easy_dma = NRFX_CONCAT_3(TWI, id, _USE_EASY_DMA)   \
 }
+
+enum {
+#if NRFX_MODULE_ENABLED(TWI0)
+    NRFX_TWI0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TWI1)
+    NRFX_TWI1_INST_IDX,
+#endif
+    NRFX_TWI_ENABLED_COUNT
+};
 
 /**
  * @brief Structure for the TWI master driver instance configuration.

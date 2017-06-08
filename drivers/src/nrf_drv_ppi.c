@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(PPI)
+
 #include <nrf_drv_ppi.h>
 #include <nrf_drv_common.h>
 

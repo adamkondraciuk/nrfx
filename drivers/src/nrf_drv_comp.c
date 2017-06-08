@@ -2,6 +2,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(COMP)
+
 #include <nrf_drv_comp.h>
 #include <nrf_drv_common.h>
 

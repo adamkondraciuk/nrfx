@@ -3,8 +3,12 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(PWM)
-#define ENABLED_PWM_COUNT (PWM0_ENABLED+PWM1_ENABLED+PWM2_ENABLED)
-#if ENABLED_PWM_COUNT
+
+#if !(NRFX_MODULE_ENABLED(PWM0) || NRFX_MODULE_ENABLED(PWM1) || \
+      NRFX_MODULE_ENABLED(PWM2) || NRFX_MODULE_ENABLED(PWM3))
+#error "No enabled PWM instances. Check <nrfx_config.h>."
+#endif
+
 #include <string.h>
 #include <nrf_drv_pwm.h>
 #include <nrf_drv_common.h>
@@ -30,7 +34,7 @@
 #define EGU_IRQHandler(i)   EGU_IRQHandler_(i)
 #define EGU_IRQHandler_(i)  SWI##i##_EGU##i##_IRQHandler
 #define DMA_ISSUE_EGU_IDX   PWM_NRF52_ANOMALY_109_EGU_INSTANCE
-#define DMA_ISSUE_EGU               CONCAT_2(NRF_EGU, DMA_ISSUE_EGU_IDX)
+#define DMA_ISSUE_EGU               NRFX_CONCAT_2(NRF_EGU, DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQn          EGU_IRQn(DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQHandler    EGU_IRQHandler(DMA_ISSUE_EGU_IDX)
 #endif
@@ -45,7 +49,7 @@ typedef struct
     nrf_drv_state_t volatile state;
     uint8_t                  flags;
 } pwm_control_block_t;
-static pwm_control_block_t m_cb[ENABLED_PWM_COUNT];
+static pwm_control_block_t m_cb[NRFX_PWM_ENABLED_COUNT];
 
 static void configure_pins(nrf_drv_pwm_t const * const p_instance,
                            nrf_drv_pwm_config_t const * p_config)
@@ -431,7 +435,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
 void DMA_ISSUE_EGU_IRQHandler(void)
 {
     int i;
-    for (i = 0; i < ENABLED_PWM_COUNT; ++i)
+    for (i = 0; i < NRFX_PWM_ENABLED_COUNT; ++i)
     {
         volatile uint32_t * p_event_reg =
             nrf_egu_event_triggered_address_get(DMA_ISSUE_EGU, i);
@@ -448,29 +452,29 @@ void DMA_ISSUE_EGU_IRQHandler(void)
 #if NRFX_MODULE_ENABLED(PWM0)
 void PWM0_IRQHandler(void)
 {
-    irq_handler(NRF_PWM0, &m_cb[PWM0_INSTANCE_INDEX]);
+    irq_handler(NRF_PWM0, &m_cb[NRFX_PWM0_INST_IDX]);
 }
 #endif
 
 #if NRFX_MODULE_ENABLED(PWM1)
 void PWM1_IRQHandler(void)
 {
-    irq_handler(NRF_PWM1, &m_cb[PWM1_INSTANCE_INDEX]);
+    irq_handler(NRF_PWM1, &m_cb[NRFX_PWM1_INST_IDX]);
 }
 #endif
 
 #if NRFX_MODULE_ENABLED(PWM2)
 void PWM2_IRQHandler(void)
 {
-    irq_handler(NRF_PWM2, &m_cb[PWM2_INSTANCE_INDEX]);
+    irq_handler(NRF_PWM2, &m_cb[NRFX_PWM2_INST_IDX]);
 }
 #endif
 
-#if PWM3_ENABLED
+#if NRFX_MODULE_ENABLED(PWM3)
 void PWM3_IRQHandler(void)
 {
-    irq_handler(NRF_PWM3, &m_cb[PWM3_INSTANCE_INDEX]);
+    irq_handler(NRF_PWM3, &m_cb[NRFX_PWM3_INST_IDX]);
 }
 #endif
-#endif // ENABLED_PWM_COUNT
+
 #endif // NRFX_MODULE_ENABLED(PWM)

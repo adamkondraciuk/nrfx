@@ -48,18 +48,30 @@ typedef struct
     uint8_t         cc_channel_count; /**< Number of capture/compare channels. */
 } nrf_drv_rtc_t;
 
-#define RTC0_INSTANCE_INDEX 0
-#define RTC1_INSTANCE_INDEX RTC0_INSTANCE_INDEX+RTC0_ENABLED
-#define RTC2_INSTANCE_INDEX RTC1_INSTANCE_INDEX+RTC1_ENABLED
-
 /**@brief Macro for creating RTC driver instance.*/
-#define NRF_DRV_RTC_INSTANCE(id)                           \
-{                                                          \
-    .p_reg            = CONCAT_2(NRF_RTC, id),             \
-    .irq              = CONCAT_3(RTC, id, _IRQn),          \
-    .instance_id      = CONCAT_3(RTC, id, _INSTANCE_INDEX),\
-    .cc_channel_count = NRF_RTC_CC_CHANNEL_COUNT(id),      \
+#define NRF_DRV_RTC_INSTANCE(id)                                \
+{                                                               \
+    .p_reg            = NRFX_CONCAT_2(NRF_RTC, id),             \
+    .irq              = NRFX_CONCAT_3(RTC, id, _IRQn),          \
+    .instance_id      = NRFX_CONCAT_3(NRFX_RTC, id, _INST_IDX), \
+    .cc_channel_count = NRF_RTC_CC_CHANNEL_COUNT(id),           \
 }
+
+enum {
+#if NRFX_MODULE_ENABLED(RTC0)
+    NRFX_RTC0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(RTC1)
+    NRFX_RTC1_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(RTC2)
+    NRFX_RTC2_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(RTC3)
+    NRFX_RTC3_INST_IDX,
+#endif
+    NRFX_RTC_ENABLED_COUNT
+};
 
 /**@brief RTC driver instance configuration structure. */
 typedef struct

@@ -3,6 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(QDEC)
+
 #include <nrf_drv_qdec.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>

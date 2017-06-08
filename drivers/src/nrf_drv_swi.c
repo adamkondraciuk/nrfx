@@ -95,7 +95,7 @@ NRFX_STATIC_ASSERT(SWI_COUNT <= SWI_MAX);
 static nrf_drv_state_t   m_drv_state = NRF_DRV_STATE_UNINITIALIZED;
 static nrf_swi_handler_t m_swi_handlers[SWI_ARRAY_SIZE];
 
-#if !EGU_ENABLED
+#if !NRFX_MODULE_ENABLED(EGU)
 static nrf_swi_flags_t   m_swi_flags[SWI_ARRAY_SIZE];
 #endif
 

@@ -21,18 +21,6 @@
 extern "C" {
 #endif
 
-#ifndef PWM0_ENABLED
-#define PWM0_ENABLED 0
-#endif
-#ifndef PWM1_ENABLED
-#define PWM1_ENABLED 0
-#endif
-#ifndef PWM2_ENABLED
-#define PWM2_ENABLED 0
-#endif
-#ifndef PWM3_ENABLED
-#define PWM3_ENABLED 0
-#endif
 /**
  * @brief PWM driver instance data structure.
  */
@@ -42,18 +30,30 @@ typedef struct
     uint8_t        drv_inst_idx; ///< Driver instance index.
 } nrf_drv_pwm_t;
 
-#define PWM0_INSTANCE_INDEX 0
-#define PWM1_INSTANCE_INDEX PWM0_INSTANCE_INDEX+PWM0_ENABLED
-#define PWM2_INSTANCE_INDEX PWM1_INSTANCE_INDEX+PWM1_ENABLED
-#define PWM3_INSTANCE_INDEX PWM2_INSTANCE_INDEX+PWM2_ENABLED
+enum {
+#if NRFX_MODULE_ENABLED(PWM0)
+    NRFX_PWM0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(PWM1)
+    NRFX_PWM1_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(PWM2)
+    NRFX_PWM2_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(PWM3)
+    NRFX_PWM3_INST_IDX,
+#endif
+    NRFX_PWM_ENABLED_COUNT
+};
+
 
 /**
  * @brief Macro for creating a PWM driver instance.
  */
-#define NRF_DRV_PWM_INSTANCE(id)                        \
-{                                                       \
-    .p_registers  = CONCAT_2(NRF_PWM, id),              \
-    .drv_inst_idx = CONCAT_3(PWM, id, _INSTANCE_INDEX), \
+#define NRF_DRV_PWM_INSTANCE(id)                            \
+{                                                           \
+    .p_registers  = NRFX_CONCAT_2(NRF_PWM, id),             \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_PWM, id, _INST_IDX), \
 }
 
 

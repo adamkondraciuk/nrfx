@@ -3,8 +3,11 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(TWI)
-#define ENABLED_TWI_COUNT (TWI0_ENABLED+TWI1_ENABLED)
-#if ENABLED_TWI_COUNT
+
+#if !(NRFX_MODULE_ENABLED(TWI0) || NRFX_MODULE_ENABLED(TWI1))
+#error "No enabled TWI instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_twi.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
@@ -102,7 +105,7 @@ typedef struct
 #endif
 } twi_control_block_t;
 
-static twi_control_block_t m_cb[ENABLED_TWI_COUNT];
+static twi_control_block_t m_cb[NRFX_TWI_ENABLED_COUNT];
 
 #if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
@@ -114,7 +117,7 @@ static twi_control_block_t m_cb[ENABLED_TWI_COUNT];
     #if NRFX_MODULE_ENABLED(TWI1)
         IRQ_HANDLER(1);
     #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[ENABLED_TWI_COUNT] = {
+    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
     #if NRFX_MODULE_ENABLED(TWI0)
         IRQ_HANDLER_NAME(0),
     #endif
@@ -1193,7 +1196,7 @@ IRQ_HANDLER(0)
     #else
         irq_handler_twi(NRF_TWI0,
     #endif
-            &m_cb[TWI0_INSTANCE_INDEX]);
+            &m_cb[NRFX_TWI0_INST_IDX]);
 }
 #endif // NRFX_MODULE_ENABLED(TWI0)
 
@@ -1205,8 +1208,8 @@ IRQ_HANDLER(1)
     #else
         irq_handler_twi(NRF_TWI1,
     #endif
-            &m_cb[TWI1_INSTANCE_INDEX]);
+            &m_cb[NRFX_TWI1_INST_IDX]);
 }
 #endif // NRFX_MODULE_ENABLED(TWI1)
-#endif // TWI_COUNT
+
 #endif // NRFX_MODULE_ENABLED(TWI)

@@ -3,8 +3,13 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(TIMER)
-#define ENABLED_TIMER_COUNT (TIMER0_ENABLED+TIMER1_ENABLED+TIMER2_ENABLED+TIMER3_ENABLED+TIMER4_ENABLED)
-#if ENABLED_TIMER_COUNT
+
+#if !(NRFX_MODULE_ENABLED(TIMER0) || NRFX_MODULE_ENABLED(TIMER1) || \
+      NRFX_MODULE_ENABLED(TIMER2) || NRFX_MODULE_ENABLED(TIMER3) || \
+      NRFX_MODULE_ENABLED(TIMER4))
+#error "No enabled TIMER instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_timer.h>
 #include <nrf_drv_common.h>
 
@@ -19,20 +24,13 @@ typedef struct
     nrf_drv_state_t           state;
 } timer_control_block_t;
 
-static timer_control_block_t m_cb[ENABLED_TIMER_COUNT];
+static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 
 ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
                               nrf_drv_timer_config_t const * p_config,
                               nrf_timer_event_handler_t timer_event_handler)
 {
     timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
-    NRFX_ASSERT(((p_instance->p_reg == NRF_TIMER0) && TIMER0_ENABLED) || (p_instance->p_reg != NRF_TIMER0));
-    NRFX_ASSERT(((p_instance->p_reg == NRF_TIMER1) && TIMER1_ENABLED) || (p_instance->p_reg != NRF_TIMER1));
-    NRFX_ASSERT(((p_instance->p_reg == NRF_TIMER2) && TIMER2_ENABLED) || (p_instance->p_reg != NRF_TIMER2));
-#if TIMER_COUNT == 5
-    NRFX_ASSERT(((p_instance->p_reg == NRF_TIMER3) && TIMER3_ENABLED) || (p_instance->p_reg != NRF_TIMER3));
-    NRFX_ASSERT(((p_instance->p_reg == NRF_TIMER4) && TIMER4_ENABLED) || (p_instance->p_reg != NRF_TIMER4));
-#endif //TIMER_COUNT
 #ifdef SOFTDEVICE_PRESENT
     NRFX_ASSERT(p_instance->p_reg != NRF_TIMER0);
 #endif
@@ -246,7 +244,7 @@ static void irq_handler(NRF_TIMER_Type * p_reg,
 #if NRFX_MODULE_ENABLED(TIMER0)
 void TIMER0_IRQHandler(void)
 {
-    irq_handler(NRF_TIMER0, &m_cb[TIMER0_INSTANCE_INDEX],
+    irq_handler(NRF_TIMER0, &m_cb[NRFX_TIMER0_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(0));
 }
 #endif
@@ -254,7 +252,7 @@ void TIMER0_IRQHandler(void)
 #if NRFX_MODULE_ENABLED(TIMER1)
 void TIMER1_IRQHandler(void)
 {
-    irq_handler(NRF_TIMER1, &m_cb[TIMER1_INSTANCE_INDEX],
+    irq_handler(NRF_TIMER1, &m_cb[NRFX_TIMER1_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(1));
 }
 #endif
@@ -262,7 +260,7 @@ void TIMER1_IRQHandler(void)
 #if NRFX_MODULE_ENABLED(TIMER2)
 void TIMER2_IRQHandler(void)
 {
-    irq_handler(NRF_TIMER2, &m_cb[TIMER2_INSTANCE_INDEX],
+    irq_handler(NRF_TIMER2, &m_cb[NRFX_TIMER2_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(2));
 }
 #endif
@@ -270,7 +268,7 @@ void TIMER2_IRQHandler(void)
 #if NRFX_MODULE_ENABLED(TIMER3)
 void TIMER3_IRQHandler(void)
 {
-    irq_handler(NRF_TIMER3, &m_cb[TIMER3_INSTANCE_INDEX],
+    irq_handler(NRF_TIMER3, &m_cb[NRFX_TIMER3_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(3));
 }
 #endif
@@ -278,9 +276,9 @@ void TIMER3_IRQHandler(void)
 #if NRFX_MODULE_ENABLED(TIMER4)
 void TIMER4_IRQHandler(void)
 {
-    irq_handler(NRF_TIMER4, &m_cb[TIMER4_INSTANCE_INDEX],
+    irq_handler(NRF_TIMER4, &m_cb[NRFX_TIMER4_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(4));
 }
 #endif
-#endif // ENABLED_TIMER_COUNT
+
 #endif // NRFX_MODULE_ENABLED(TIMER)

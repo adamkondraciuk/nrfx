@@ -3,8 +3,12 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(SPI)
-#define ENABLED_SPI_COUNT (SPI0_ENABLED+SPI1_ENABLED+SPI2_ENABLED)
-#if ENABLED_SPI_COUNT
+
+#if !(NRFX_MODULE_ENABLED(SPI0) || NRFX_MODULE_ENABLED(SPI1) || \
+      NRFX_MODULE_ENABLED(SPI2))
+#error "No enabled SPI instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_spi.h>
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
@@ -92,7 +96,7 @@ typedef struct
     bool rx_done : 1;
     bool abort   : 1;
 } spi_control_block_t;
-static spi_control_block_t m_cb[ENABLED_SPI_COUNT];
+static spi_control_block_t m_cb[NRFX_SPI_ENABLED_COUNT];
 
 #if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
@@ -107,7 +111,7 @@ static spi_control_block_t m_cb[ENABLED_SPI_COUNT];
     #if NRFX_MODULE_ENABLED(SPI2)
         IRQ_HANDLER(2);
     #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[ENABLED_SPI_COUNT] = {
+    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
     #if NRFX_MODULE_ENABLED(SPI0)
         IRQ_HANDLER_NAME(0),
     #endif
@@ -696,7 +700,7 @@ static void irq_handler_spi(NRF_SPI_Type * p_spi, spi_control_block_t * p_cb)
 #if NRFX_MODULE_ENABLED(SPI0)
 IRQ_HANDLER(0)
 {
-    spi_control_block_t * p_cb  = &m_cb[SPI0_INSTANCE_INDEX];
+    spi_control_block_t * p_cb  = &m_cb[NRFX_SPI0_INST_IDX];
     #if SPI0_USE_EASY_DMA
         irq_handler_spim(NRF_SPIM0, p_cb);
     #else
@@ -708,7 +712,7 @@ IRQ_HANDLER(0)
 #if NRFX_MODULE_ENABLED(SPI1)
 IRQ_HANDLER(1)
 {
-    spi_control_block_t * p_cb  = &m_cb[SPI1_INSTANCE_INDEX];
+    spi_control_block_t * p_cb  = &m_cb[NRFX_SPI1_INST_IDX];
     #if SPI1_USE_EASY_DMA
         irq_handler_spim(NRF_SPIM1, p_cb);
     #else
@@ -720,7 +724,7 @@ IRQ_HANDLER(1)
 #if NRFX_MODULE_ENABLED(SPI2)
 IRQ_HANDLER(2)
 {
-    spi_control_block_t * p_cb  = &m_cb[SPI2_INSTANCE_INDEX];
+    spi_control_block_t * p_cb  = &m_cb[NRFX_SPI2_INST_IDX];
     #if SPI2_USE_EASY_DMA
         irq_handler_spim(NRF_SPIM2, p_cb);
     #else
@@ -728,5 +732,5 @@ IRQ_HANDLER(2)
     #endif
 }
 #endif // NRFX_MODULE_ENABLED(SPI2)
-#endif // ENABLED_SPI_COUNT
+
 #endif // NRFX_MODULE_ENABLED(SPI)

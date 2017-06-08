@@ -29,7 +29,8 @@ extern "C" {
  *                            reference voltage divided by 64.
  * @param[in] ref             Reference voltage.
  */
-#define VOLTAGE_THRESHOLD_TO_INT(vol, ref) (uint8_t)(((vol) > ((ref) / 64)) ? (ROUNDED_DIV((vol) * 64,(ref)) - 1) : 0)
+#define VOLTAGE_THRESHOLD_TO_INT(vol, ref) \
+    (uint8_t)(((vol) > ((ref) / 64)) ? (NRFX_ROUNDED_DIV((vol) * 64,(ref)) - 1) : 0)
 
 /**@brief COMP event handler function type.
  * @param[in] event  COMP event.

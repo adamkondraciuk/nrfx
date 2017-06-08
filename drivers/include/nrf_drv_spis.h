@@ -85,17 +85,26 @@ typedef struct
     IRQn_Type       irq;            //!< IRQ of the specific instance.
 } nrf_drv_spis_t;
 
-#define SPIS0_INSTANCE_INDEX 0
-#define SPIS1_INSTANCE_INDEX SPIS0_INSTANCE_INDEX+SPIS0_ENABLED
-#define SPIS2_INSTANCE_INDEX SPIS1_INSTANCE_INDEX+SPIS1_ENABLED
-
 /** @brief Macro for creating an SPI slave driver instance. */
-#define NRF_DRV_SPIS_INSTANCE(id)                        \
-{                                                        \
-    .p_reg        = CONCAT_2(NRF_SPIS, id),              \
-    .irq          = CONCAT_3(SPIS, id, _IRQ),            \
-    .instance_id  = CONCAT_3(SPIS, id, _INSTANCE_INDEX), \
+#define NRF_DRV_SPIS_INSTANCE(id)                            \
+{                                                            \
+    .p_reg        = NRFX_CONCAT_2(NRF_SPIS, id),             \
+    .irq          = NRFX_CONCAT_3(SPIS, id, _IRQ),           \
+    .instance_id  = NRFX_CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
 }
+
+enum {
+#if NRFX_MODULE_ENABLED(SPIS0)
+    NRFX_SPIS0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(SPIS1)
+    NRFX_SPIS1_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(SPIS2)
+    NRFX_SPIS2_INST_IDX,
+#endif
+    NRFX_SPIS_ENABLED_COUNT
+};
 
 /** @brief SPI slave instance default configuration. */
 #define NRF_DRV_SPIS_DEFAULT_CONFIG                                \

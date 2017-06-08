@@ -32,23 +32,34 @@ typedef struct
     uint8_t          cc_channel_count; ///< Number of capture/compare channels.
 } nrf_drv_timer_t;
 
-#define ENABLED_TIMER_COUNT (TIMER0_ENABLED+TIMER1_ENABLED+TIMER2_ENABLED+TIMER3_ENABLED+TIMER4_ENABLED)
-
-#define TIMER0_INSTANCE_INDEX 0
-#define TIMER1_INSTANCE_INDEX TIMER0_INSTANCE_INDEX+TIMER0_ENABLED
-#define TIMER2_INSTANCE_INDEX TIMER1_INSTANCE_INDEX+TIMER1_ENABLED
-#define TIMER3_INSTANCE_INDEX TIMER2_INSTANCE_INDEX+TIMER2_ENABLED
-#define TIMER4_INSTANCE_INDEX TIMER3_INSTANCE_INDEX+TIMER3_ENABLED
-
 /**
  * @brief Macro for creating a timer driver instance.
  */
 #define NRF_DRV_TIMER_INSTANCE(id) \
-{                                                             \
-    .p_reg            = CONCAT_2(NRF_TIMER, id),              \
-    .instance_id      = CONCAT_3(TIMER, id, _INSTANCE_INDEX), \
-    .cc_channel_count = NRF_TIMER_CC_CHANNEL_COUNT(id),       \
+{                                                                 \
+    .p_reg            = NRFX_CONCAT_2(NRF_TIMER, id),             \
+    .instance_id      = NRFX_CONCAT_3(NRFX_TIMER, id, _INST_IDX), \
+    .cc_channel_count = NRF_TIMER_CC_CHANNEL_COUNT(id),           \
 }
+
+enum {
+#if NRFX_MODULE_ENABLED(TIMER0)
+    NRFX_TIMER0_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TIMER1)
+    NRFX_TIMER1_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TIMER2)
+    NRFX_TIMER2_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TIMER3)
+    NRFX_TIMER3_INST_IDX,
+#endif
+#if NRFX_MODULE_ENABLED(TIMER4)
+    NRFX_TIMER4_INST_IDX,
+#endif
+    NRFX_TIMER_ENABLED_COUNT
+};
 
 /**
  * @brief Timer driver instance configuration structure.

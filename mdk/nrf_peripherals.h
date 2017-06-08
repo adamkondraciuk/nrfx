@@ -6,27 +6,17 @@
 /*lint ++flb "Enter library region */
 
 #if defined(NRF51422)
-#include "nrf51422_peripherals.h"
-#endif
-
-#if defined(NRF51802)
-#include "nrf51802_peripherals.h"
-#endif
-
-#if defined(NRF51822)
-#include "nrf51822_peripherals.h"
-#endif
-
-#if defined(NRF52810_XXAA)
-#include "nrf52810_peripherals.h"
-#endif
-
-#if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
-#include "nrf52832_peripherals.h"
-#endif
-
-#if defined(NRF52840_XXAA)
-#include "nrf52840_peripherals.h"
+    #include "nrf51422_peripherals.h"
+#elif defined(NRF51802)
+    #include "nrf51802_peripherals.h"
+#elif defined(NRF51822)
+    #include "nrf51822_peripherals.h"
+#elif defined(NRF52810_XXAA)
+    #include "nrf52810_peripherals.h"
+#elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
+    #include "nrf52832_peripherals.h"
+#elif defined(NRF52840_XXAA)
+    #include "nrf52840_peripherals.h"
 #endif
 
 /*lint --flb "Leave library region" */

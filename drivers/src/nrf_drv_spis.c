@@ -3,8 +3,12 @@
 #include <nrfx.h>
 
 #if NRFX_MODULE_ENABLED(SPIS)
-#define ENABLED_SPIS_COUNT (SPIS0_ENABLED+SPIS1_ENABLED+SPIS2_ENABLED)
-#if ENABLED_SPIS_COUNT
+
+#if !(NRFX_MODULE_ENABLED(SPIS0) || NRFX_MODULE_ENABLED(SPIS1) || \
+      NRFX_MODULE_ENABLED(SPIS2))
+#error "No enabled SPIS instances. Check <nrfx_config.h>."
+#endif
+
 #include <nrf_drv_spis.h>
 #include <nrf_drv_common.h>
 
@@ -53,7 +57,7 @@ typedef enum
     #if NRFX_MODULE_ENABLED(SPIS2)
         IRQ_HANDLER(2);
     #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[ENABLED_SPIS_COUNT] = {
+    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
     #if NRFX_MODULE_ENABLED(SPIS0)
         IRQ_HANDLER_NAME(0),
     #endif
@@ -69,9 +73,9 @@ typedef enum
 #endif // PERIPHERAL_RESOURCE_SHARING_ENABLED
 
 #define SPIS_IRQHANDLER_TEMPLATE(NUM) \
-    IRQ_HANDLER(NUM)                                                        \
-    {                                                                       \
-        spis_irq_handler(NRF_SPIS##NUM, &m_cb[SPIS##NUM##_INSTANCE_INDEX]); \
+    IRQ_HANDLER(NUM)                                                       \
+    {                                                                      \
+        spis_irq_handler(NRF_SPIS##NUM, &m_cb[NRFX_SPIS##NUM##_INST_IDX]); \
     }
 
 
@@ -87,7 +91,7 @@ typedef struct
     volatile nrf_drv_spis_state_t spi_state;       //!< SPI slave state.
 } spis_cb_t;
 
-static spis_cb_t m_cb[ENABLED_SPIS_COUNT];
+static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
 ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                              nrf_drv_spis_config_t const * p_config,
@@ -441,5 +445,4 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     SPIS_IRQHANDLER_TEMPLATE(2)
 #endif
 
-#endif // SPI_COUNT > 0
 #endif // NRFX_MODULE_ENABLED(SPIS)
