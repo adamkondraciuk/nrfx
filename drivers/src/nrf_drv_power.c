@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(POWER)
+#if NRFX_CHECK(POWER_ENABLED)
 
 #include <nrf_drv_power.h>
 #include <nrf_drv_common.h>
@@ -405,4 +405,4 @@ void nrf_drv_power_on_sd_disable(void)
 
 #endif // SOFTDEVICE_PRESENT
 
-#endif // NRFX_MODULE_ENABLED(POWER)
+#endif // NRFX_CHECK(POWER_ENABLED)

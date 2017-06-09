@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(I2S)
+#if NRFX_CHECK(I2S_ENABLED)
 
 #include <nrf_drv_i2s.h>
 #include <nrf_drv_common.h>
@@ -393,4 +393,4 @@ void I2S_IRQHandler(void)
         }
     }
 }
-#endif // NRFX_MODULE_ENABLED(I2S)
+#endif // NRFX_CHECK(I2S_ENABLED)

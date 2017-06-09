@@ -1,9 +1,9 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(TWIS)
+#if NRFX_CHECK(TWIS_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(TWIS0) || NRFX_MODULE_ENABLED(TWIS1))
+#if !(NRFX_CHECK(TWIS0_ENABLED) || NRFX_CHECK(TWIS1_ENABLED))
 #error "No enabled TWIS instances. Check <nrfx_config.h>."
 #endif
 
@@ -94,28 +94,28 @@ static nrf_drv_twis_var_inst_t m_var_inst[NRFX_TWIS_ENABLED_COUNT] =
     #include "nrf_drv_twis_inst.def"
 };
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
     #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
 
-    #if NRFX_MODULE_ENABLED(TWIS0)
+    #if NRFX_CHECK(TWIS0_ENABLED)
         IRQ_HANDLER(0);
     #endif
-    #if NRFX_MODULE_ENABLED(TWIS1)
+    #if NRFX_CHECK(TWIS1_ENABLED)
         IRQ_HANDLER(1);
     #endif
     static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
-    #if NRFX_MODULE_ENABLED(TWIS0)
+    #if NRFX_CHECK(TWIS0_ENABLED)
         IRQ_HANDLER_NAME(0),
     #endif
-    #if NRFX_MODULE_ENABLED(TWIS1)
+    #if NRFX_CHECK(TWIS1_ENABLED)
         IRQ_HANDLER_NAME(1),
     #endif
     };
 #else
     #define IRQ_HANDLER(n) \
         void SPIM##n##_SPIS##n##_TWIM##n##_TWIS##n##_SPI##n##_TWI##n##_IRQHandler(void)
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 /**
  * @brief State processing semaphore
@@ -566,7 +566,7 @@ ret_code_t nrf_drv_twis_init(
         return err_code;
     }
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     if (nrf_drv_common_per_res_acquire(p_reg, m_irq_handlers[instNr]) !=
             NRFX_SUCCESS)
     {
@@ -644,7 +644,7 @@ void nrf_drv_twis_uninit(nrf_drv_twis_t const * const p_instance)
         nrf_gpio_cfg_default(psel.SDA);
     }
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     nrf_drv_common_per_res_release(p_reg);
 #endif
 
@@ -895,4 +895,4 @@ bool nrf_drv_twis_is_pending_rx(nrf_drv_twis_t const * const p_instance)
     return NRF_DRV_TWIS_SUBSTATE_WRITE_PENDING == m_var_inst[(p_instance->instNr)].substate;
 }
 
-#endif // NRFX_MODULE_ENABLED(TWIS)
+#endif // NRFX_CHECK(TWIS_ENABLED)

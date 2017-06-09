@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(GPIOTE)
+#if NRFX_CHECK(GPIOTE_ENABLED)
 
 #include <nrf_drv_gpiote.h>
 #include <nrf_drv_common.h>
@@ -759,4 +759,4 @@ void GPIOTE_IRQHandler(void)
 
 
 /*lint -restore*/
-#endif // NRFX_MODULE_ENABLED(GPIOTE)
+#endif // NRFX_CHECK(GPIOTE_ENABLED)

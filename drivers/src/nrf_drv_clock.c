@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(CLOCK)
+#if NRFX_CHECK(CLOCK_ENABLED)
 #include <nrf_drv_clock.h>
 #include <nrf_drv_common.h>
 #ifdef SOFTDEVICE_PRESENT
@@ -549,4 +549,4 @@ void nrf_drv_clock_on_sd_disable(void)
 #undef NRF_CLOCK_LFCLK_Xtal
 #undef NRF_CLOCK_LFCLK_Synth
 
-#endif // NRFX_MODULE_ENABLED(CLOCK)
+#endif // NRFX_CHECK(CLOCK_ENABLED)

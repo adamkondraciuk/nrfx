@@ -8,8 +8,7 @@ extern "C" {
 #endif
 
 
-#define NRFX_MODULE_ENABLED(module) \
-    ((defined(module ## _ENABLED) && (module ## _ENABLED)) ? 1 : 0)
+#define NRFX_CHECK(module_enabled)  (module_enabled)
 
 #define NRFX_CONCAT_2(p1, p2)       NRFX_CONCAT_2_(p1, p2)
 #define NRFX_CONCAT_2_(p1, p2)      p1 ## p2

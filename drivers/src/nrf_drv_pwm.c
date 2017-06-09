@@ -2,10 +2,10 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(PWM)
+#if NRFX_CHECK(PWM_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(PWM0) || NRFX_MODULE_ENABLED(PWM1) || \
-      NRFX_MODULE_ENABLED(PWM2) || NRFX_MODULE_ENABLED(PWM3))
+#if !(NRFX_CHECK(PWM0_ENABLED) || NRFX_CHECK(PWM1_ENABLED) || \
+      NRFX_CHECK(PWM2_ENABLED) || NRFX_CHECK(PWM3_ENABLED))
 #error "No enabled PWM instances. Check <nrfx_config.h>."
 #endif
 
@@ -18,7 +18,7 @@
 #include <nrfx_log.h>
 
 
-#if NRFX_MODULE_ENABLED(PWM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
 // The workaround uses interrupts to wake up the CPU and ensure it is active
 // when PWM is about to start a DMA transfer. For initial transfer, done when
 // a playback is started via PPI, a specific EGU instance is used to generate
@@ -449,32 +449,32 @@ void DMA_ISSUE_EGU_IRQHandler(void)
 #endif
 
 
-#if NRFX_MODULE_ENABLED(PWM0)
+#if NRFX_CHECK(PWM0_ENABLED)
 void PWM0_IRQHandler(void)
 {
     irq_handler(NRF_PWM0, &m_cb[NRFX_PWM0_INST_IDX]);
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(PWM1)
+#if NRFX_CHECK(PWM1_ENABLED)
 void PWM1_IRQHandler(void)
 {
     irq_handler(NRF_PWM1, &m_cb[NRFX_PWM1_INST_IDX]);
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(PWM2)
+#if NRFX_CHECK(PWM2_ENABLED)
 void PWM2_IRQHandler(void)
 {
     irq_handler(NRF_PWM2, &m_cb[NRFX_PWM2_INST_IDX]);
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(PWM3)
+#if NRFX_CHECK(PWM3_ENABLED)
 void PWM3_IRQHandler(void)
 {
     irq_handler(NRF_PWM3, &m_cb[NRFX_PWM3_INST_IDX]);
 }
 #endif
 
-#endif // NRFX_MODULE_ENABLED(PWM)
+#endif // NRFX_CHECK(PWM_ENABLED)

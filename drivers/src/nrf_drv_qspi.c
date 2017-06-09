@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(QSPI)
+#if NRFX_CHECK(QSPI_ENABLED)
 #include <nrf_drv_qspi.h>
 #include <nrf_drv_common.h>
 
@@ -258,4 +258,4 @@ void QSPI_IRQHandler(void)
     }
 }
 
-#endif // NRFX_MODULE_ENABLED(QSPI)
+#endif // NRFX_CHECK(QSPI_ENABLED)

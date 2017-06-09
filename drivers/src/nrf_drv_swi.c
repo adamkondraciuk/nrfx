@@ -95,7 +95,7 @@ NRFX_STATIC_ASSERT(SWI_COUNT <= SWI_MAX);
 static nrf_drv_state_t   m_drv_state = NRF_DRV_STATE_UNINITIALIZED;
 static nrf_swi_handler_t m_swi_handlers[SWI_ARRAY_SIZE];
 
-#if !NRFX_MODULE_ENABLED(EGU)
+#if !NRFX_CHECK(EGU_ENABLED)
 static nrf_swi_flags_t   m_swi_flags[SWI_ARRAY_SIZE];
 #endif
 
@@ -104,7 +104,7 @@ static nrf_swi_flags_t   m_swi_flags[SWI_ARRAY_SIZE];
  * @param[in]  swi                 SWI number.
  * @return     number of available channels.
  */
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
 __STATIC_INLINE uint32_t swi_channel_number(nrf_swi_t swi)
 {
     uint32_t retval = 0;
@@ -137,7 +137,7 @@ __STATIC_INLINE uint32_t swi_channel_number(nrf_swi_t swi)
 #define swi_channel_number(swi) SWI_MAX_FLAGS
 #endif
 
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
 
 /**@brief Get the specific EGU instance. */
 __STATIC_INLINE NRF_EGU_Type * egu_instance_get(nrf_swi_t swi)
@@ -275,7 +275,7 @@ void nrf_drv_swi_uninit(void)
     {
         m_swi_handlers[i - SWI_START_NUMBER] = NULL;
         nrf_drv_common_irq_disable(nrf_drv_swi_irq_of((nrf_swi_t) i));
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
         NRF_EGU_Type * NRF_EGUx = egu_instance_get(i);
         nrf_egu_int_disable(NRF_EGUx, NRF_EGU_INT_ALL);
 #endif
@@ -296,7 +296,7 @@ void nrf_drv_swi_free(nrf_swi_t * p_swi)
 
 ret_code_t nrf_drv_swi_alloc(nrf_swi_t * p_swi, nrf_swi_handler_t event_handler, uint32_t priority)
 {
-#if !NRFX_MODULE_ENABLED(EGU)
+#if !NRFX_CHECK(EGU_ENABLED)
     NRFX_ASSERT(event_handler);
 #endif
     uint32_t err_code = NRFX_ERROR_NO_MEM;
@@ -309,7 +309,7 @@ ret_code_t nrf_drv_swi_alloc(nrf_swi_t * p_swi, nrf_swi_handler_t event_handler,
             m_swi_handlers[i - SWI_START_NUMBER] = event_handler;
             *p_swi = (nrf_swi_t) i;
             nrf_drv_common_irq_enable(nrf_drv_swi_irq_of(*p_swi), priority);
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
             if(event_handler != NULL)
             {
                 NRF_EGU_Type * NRF_EGUx = egu_instance_get(i);
@@ -334,7 +334,7 @@ void nrf_drv_swi_trigger(nrf_swi_t swi, uint8_t flag_number)
 {
     NRFX_ASSERT(swi_is_allocated((uint32_t) swi));
     NRFX_ASSERT(flag_number < swi_channel_number(swi));
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
     NRF_EGU_Type * NRF_EGUx = egu_instance_get(swi);
     nrf_egu_task_trigger(NRF_EGUx, nrf_egu_task_trigger_get(NRF_EGUx, flag_number));
 #else
@@ -344,7 +344,7 @@ void nrf_drv_swi_trigger(nrf_swi_t swi, uint8_t flag_number)
 }
 
 
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
 
 uint32_t nrf_drv_swi_task_trigger_address_get(nrf_swi_t swi, uint8_t channel)
 {

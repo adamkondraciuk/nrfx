@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(PDM)
+#if NRFX_CHECK(PDM_ENABLED)
 
 #include <nrf_drv_pdm.h>
 #include <nrf_drv_common.h>
@@ -317,4 +317,4 @@ ret_code_t nrf_drv_pdm_stop(void)
     return err_code;
 }
 
-#endif // NRFX_MODULE_ENABLED(PDM)
+#endif // NRFX_CHECK(PDM_ENABLED)

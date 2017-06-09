@@ -2,11 +2,11 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(TIMER)
+#if NRFX_CHECK(TIMER_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(TIMER0) || NRFX_MODULE_ENABLED(TIMER1) || \
-      NRFX_MODULE_ENABLED(TIMER2) || NRFX_MODULE_ENABLED(TIMER3) || \
-      NRFX_MODULE_ENABLED(TIMER4))
+#if !(NRFX_CHECK(TIMER0_ENABLED) || NRFX_CHECK(TIMER1_ENABLED) || \
+      NRFX_CHECK(TIMER2_ENABLED) || NRFX_CHECK(TIMER3_ENABLED) || \
+      NRFX_CHECK(TIMER4_ENABLED))
 #error "No enabled TIMER instances. Check <nrfx_config.h>."
 #endif
 
@@ -241,7 +241,7 @@ static void irq_handler(NRF_TIMER_Type * p_reg,
     }
 }
 
-#if NRFX_MODULE_ENABLED(TIMER0)
+#if NRFX_CHECK(TIMER0_ENABLED)
 void TIMER0_IRQHandler(void)
 {
     irq_handler(NRF_TIMER0, &m_cb[NRFX_TIMER0_INST_IDX],
@@ -249,7 +249,7 @@ void TIMER0_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(TIMER1)
+#if NRFX_CHECK(TIMER1_ENABLED)
 void TIMER1_IRQHandler(void)
 {
     irq_handler(NRF_TIMER1, &m_cb[NRFX_TIMER1_INST_IDX],
@@ -257,7 +257,7 @@ void TIMER1_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(TIMER2)
+#if NRFX_CHECK(TIMER2_ENABLED)
 void TIMER2_IRQHandler(void)
 {
     irq_handler(NRF_TIMER2, &m_cb[NRFX_TIMER2_INST_IDX],
@@ -265,7 +265,7 @@ void TIMER2_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(TIMER3)
+#if NRFX_CHECK(TIMER3_ENABLED)
 void TIMER3_IRQHandler(void)
 {
     irq_handler(NRF_TIMER3, &m_cb[NRFX_TIMER3_INST_IDX],
@@ -273,7 +273,7 @@ void TIMER3_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(TIMER4)
+#if NRFX_CHECK(TIMER4_ENABLED)
 void TIMER4_IRQHandler(void)
 {
     irq_handler(NRF_TIMER4, &m_cb[NRFX_TIMER4_INST_IDX],
@@ -281,4 +281,4 @@ void TIMER4_IRQHandler(void)
 }
 #endif
 
-#endif // NRFX_MODULE_ENABLED(TIMER)
+#endif // NRFX_CHECK(TIMER_ENABLED)

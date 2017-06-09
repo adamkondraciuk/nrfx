@@ -2,10 +2,10 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(SPI)
+#if NRFX_CHECK(SPI_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(SPI0) || NRFX_MODULE_ENABLED(SPI1) || \
-      NRFX_MODULE_ENABLED(SPI2))
+#if !(NRFX_CHECK(SPI0_ENABLED) || NRFX_CHECK(SPI1_ENABLED) || \
+      NRFX_CHECK(SPI2_ENABLED))
 #error "No enabled SPI instances. Check <nrfx_config.h>."
 #endif
 
@@ -42,14 +42,14 @@
 
 // This set of macros makes it possible to exclude parts of code when one type
 // of supported peripherals is not used.
-#if ((NRFX_MODULE_ENABLED(SPI0) && SPI0_USE_EASY_DMA) || \
-     (NRFX_MODULE_ENABLED(SPI1) && SPI1_USE_EASY_DMA) || \
-     (NRFX_MODULE_ENABLED(SPI2) && SPI2_USE_EASY_DMA))
+#if ((NRFX_CHECK(SPI0_ENABLED) && SPI0_USE_EASY_DMA) || \
+     (NRFX_CHECK(SPI1_ENABLED) && SPI1_USE_EASY_DMA) || \
+     (NRFX_CHECK(SPI2_ENABLED) && SPI2_USE_EASY_DMA))
     #define SPIM_IN_USE
 #endif
-#if ((NRFX_MODULE_ENABLED(SPI0) && !SPI0_USE_EASY_DMA) || \
-     (NRFX_MODULE_ENABLED(SPI1) && !SPI1_USE_EASY_DMA) || \
-     (NRFX_MODULE_ENABLED(SPI2) && !SPI2_USE_EASY_DMA))
+#if ((NRFX_CHECK(SPI0_ENABLED) && !SPI0_USE_EASY_DMA) || \
+     (NRFX_CHECK(SPI1_ENABLED) && !SPI1_USE_EASY_DMA) || \
+     (NRFX_CHECK(SPI2_ENABLED) && !SPI2_USE_EASY_DMA))
     #define SPI_IN_USE
 #endif
 #if defined(SPIM_IN_USE) && defined(SPI_IN_USE)
@@ -87,7 +87,7 @@ typedef struct
     uint8_t         orc;
     uint8_t         bytes_transferred;
 
-#if NRFX_MODULE_ENABLED(SPIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     uint8_t         tx_length;
     uint8_t         rx_length;
 #endif
@@ -98,33 +98,33 @@ typedef struct
 } spi_control_block_t;
 static spi_control_block_t m_cb[NRFX_SPI_ENABLED_COUNT];
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
     #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
 
-    #if NRFX_MODULE_ENABLED(SPI0)
+    #if NRFX_CHECK(SPI0_ENABLED)
         IRQ_HANDLER(0);
     #endif
-    #if NRFX_MODULE_ENABLED(SPI1)
+    #if NRFX_CHECK(SPI1_ENABLED)
         IRQ_HANDLER(1);
     #endif
-    #if NRFX_MODULE_ENABLED(SPI2)
+    #if NRFX_CHECK(SPI2_ENABLED)
         IRQ_HANDLER(2);
     #endif
     static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
-    #if NRFX_MODULE_ENABLED(SPI0)
+    #if NRFX_CHECK(SPI0_ENABLED)
         IRQ_HANDLER_NAME(0),
     #endif
-    #if NRFX_MODULE_ENABLED(SPI1)
+    #if NRFX_CHECK(SPI1_ENABLED)
         IRQ_HANDLER_NAME(1),
     #endif
-    #if NRFX_MODULE_ENABLED(SPI2)
+    #if NRFX_CHECK(SPI2_ENABLED)
         IRQ_HANDLER_NAME(2),
     #endif
     };
 #else
     #define IRQ_HANDLER(n) void SPI##n##_IRQ_HANDLER(void)
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
                             nrf_drv_spi_config_t const * p_config,
@@ -144,7 +144,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
         return err_code;
     }
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     if (nrf_drv_common_per_res_acquire(p_instance->p_registers,
             m_irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
@@ -304,7 +304,7 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
     )
     #undef DISABLE_ALL
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     nrf_drv_common_per_res_release(p_instance->p_registers);
 #endif
 
@@ -507,7 +507,7 @@ static ret_code_t spim_xfer(NRF_SPIM_Type                * p_spim,
         return err_code;
     }
 
-#if NRFX_MODULE_ENABLED(SPIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     p_cb->tx_length = 0;
     p_cb->rx_length = 0;
 #endif
@@ -523,7 +523,7 @@ static ret_code_t spim_xfer(NRF_SPIM_Type                * p_spim,
     {
         nrf_spim_task_trigger(p_spim, NRF_SPIM_TASK_START);
     }
-#if NRFX_MODULE_ENABLED(SPIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     if (flags & NRF_DRV_SPI_FLAG_HOLD_XFER)
     {
         nrf_spim_event_clear(p_spim, NRF_SPIM_EVENT_STARTED);
@@ -637,7 +637,7 @@ void nrf_drv_spi_abort(nrf_drv_spi_t const * p_instance)
 static void irq_handler_spim(NRF_SPIM_Type * p_spim, spi_control_block_t * p_cb)
 {
 
-#if NRFX_MODULE_ENABLED(SPIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     if ((nrf_spim_int_enable_check(p_spim, NRF_SPIM_INT_STARTED_MASK)) &&
         (nrf_spim_event_check(p_spim, NRF_SPIM_EVENT_STARTED)) )
     {
@@ -697,7 +697,7 @@ static void irq_handler_spi(NRF_SPI_Type * p_spi, spi_control_block_t * p_cb)
 }
 #endif // SPI_IN_USE
 
-#if NRFX_MODULE_ENABLED(SPI0)
+#if NRFX_CHECK(SPI0_ENABLED)
 IRQ_HANDLER(0)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI0_INST_IDX];
@@ -707,9 +707,9 @@ IRQ_HANDLER(0)
         irq_handler_spi(NRF_SPI0, p_cb);
     #endif
 }
-#endif // NRFX_MODULE_ENABLED(SPI0)
+#endif // NRFX_CHECK(SPI0_ENABLED)
 
-#if NRFX_MODULE_ENABLED(SPI1)
+#if NRFX_CHECK(SPI1_ENABLED)
 IRQ_HANDLER(1)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI1_INST_IDX];
@@ -719,9 +719,9 @@ IRQ_HANDLER(1)
         irq_handler_spi(NRF_SPI1, p_cb);
     #endif
 }
-#endif // NRFX_MODULE_ENABLED(SPI1)
+#endif // NRFX_CHECK(SPI1_ENABLED)
 
-#if NRFX_MODULE_ENABLED(SPI2)
+#if NRFX_CHECK(SPI2_ENABLED)
 IRQ_HANDLER(2)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI2_INST_IDX];
@@ -731,6 +731,6 @@ IRQ_HANDLER(2)
         irq_handler_spi(NRF_SPI2, p_cb);
     #endif
 }
-#endif // NRFX_MODULE_ENABLED(SPI2)
+#endif // NRFX_CHECK(SPI2_ENABLED)
 
-#endif // NRFX_MODULE_ENABLED(SPI)
+#endif // NRFX_CHECK(SPI_ENABLED)

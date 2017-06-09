@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(WDT)
+#if NRFX_CHECK(WDT_ENABLED)
 
 #include <nrf_drv_wdt.h>
 #include <nrf_drv_common.h>
@@ -117,4 +117,4 @@ void nrf_drv_wdt_channel_feed(nrf_drv_wdt_channel_id channel_id)
     nrf_wdt_reload_request_set(channel_id);
 }
 
-#endif // NRFX_MODULE_ENABLED(WDT)
+#endif // NRFX_CHECK(WDT_ENABLED)

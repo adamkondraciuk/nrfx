@@ -2,9 +2,9 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(TWI)
+#if NRFX_CHECK(TWI_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(TWI0) || NRFX_MODULE_ENABLED(TWI1))
+#if !(NRFX_CHECK(TWI0_ENABLED) || NRFX_CHECK(TWI1_ENABLED))
 #error "No enabled TWI instances. Check <nrfx_config.h>."
 #endif
 
@@ -100,34 +100,34 @@ typedef struct
     bool                      repeated;
     uint8_t                   bytes_transferred;
     bool                      hold_bus_uninit;
-#if NRFX_MODULE_ENABLED(TWIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     nrf_twim_frequency_t      bus_frequency;
 #endif
 } twi_control_block_t;
 
 static twi_control_block_t m_cb[NRFX_TWI_ENABLED_COUNT];
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
     #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
 
-    #if NRFX_MODULE_ENABLED(TWI0)
+    #if NRFX_CHECK(TWI0_ENABLED)
         IRQ_HANDLER(0);
     #endif
-    #if NRFX_MODULE_ENABLED(TWI1)
+    #if NRFX_CHECK(TWI1_ENABLED)
         IRQ_HANDLER(1);
     #endif
     static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
-    #if NRFX_MODULE_ENABLED(TWI0)
+    #if NRFX_CHECK(TWI0_ENABLED)
         IRQ_HANDLER_NAME(0),
     #endif
-    #if NRFX_MODULE_ENABLED(TWI1)
+    #if NRFX_CHECK(TWI1_ENABLED)
         IRQ_HANDLER_NAME(1),
     #endif
     };
 #else
     #define IRQ_HANDLER(n) void SPI##n##_TWI##n##_IRQHandler(void)
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 static ret_code_t twi_process_error(uint32_t errorsrc)
 {
@@ -206,7 +206,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
         return err_code;
     }
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     if (nrf_drv_common_per_res_acquire(p_instance->reg.p_twi,
             m_irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
@@ -216,7 +216,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
     p_cb->handler         = event_handler;
     p_cb->p_context       = p_context;
@@ -224,7 +224,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
     p_cb->repeated        = false;
     p_cb->busy            = false;
     p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
-#if NRFX_MODULE_ENABLED(TWIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->frequency;
 #endif
 
@@ -297,7 +297,7 @@ void nrf_drv_twi_uninit(nrf_drv_twi_t const * p_instance)
     }
     nrf_drv_twi_disable(p_instance);
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     nrf_drv_common_per_res_release(p_instance->reg.p_twi);
 #endif
 
@@ -849,7 +849,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twi_control_block_t           * p_cb,
         }
         nrf_twim_int_enable(p_twim, p_cb->int_mask);
 
-#if NRFX_MODULE_ENABLED(TWIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
         if ((flags & NRF_DRV_TWI_FLAG_HOLD_XFER) && ((p_xfer_desc->type == NRF_DRV_TWI_XFER_TX) ||
                                                      (p_xfer_desc->type == NRF_DRV_TWI_XFER_TXRX)))
         {
@@ -998,7 +998,7 @@ uint32_t nrf_drv_twi_stopped_event_get(nrf_drv_twi_t const * p_instance)
 static void irq_handler_twim(NRF_TWIM_Type * p_twim, twi_control_block_t * p_cb)
 {
 
-#if NRFX_MODULE_ENABLED(TWIM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     /* Handle only workaround case. Can be used without TWIM handler in IRQs. */
     if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_TXSTARTED))
     {
@@ -1188,7 +1188,7 @@ static void irq_handler_twi(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
 }
 #endif // TWI_IN_USE
 
-#if NRFX_MODULE_ENABLED(TWI0)
+#if NRFX_CHECK(TWI0_ENABLED)
 IRQ_HANDLER(0)
 {
     #if (TWI0_USE_EASY_DMA == 1)
@@ -1198,9 +1198,9 @@ IRQ_HANDLER(0)
     #endif
             &m_cb[NRFX_TWI0_INST_IDX]);
 }
-#endif // NRFX_MODULE_ENABLED(TWI0)
+#endif // NRFX_CHECK(TWI0_ENABLED)
 
-#if NRFX_MODULE_ENABLED(TWI1)
+#if NRFX_CHECK(TWI1_ENABLED)
 IRQ_HANDLER(1)
 {
     #if (TWI1_USE_EASY_DMA == 1)
@@ -1210,6 +1210,6 @@ IRQ_HANDLER(1)
     #endif
             &m_cb[NRFX_TWI1_INST_IDX]);
 }
-#endif // NRFX_MODULE_ENABLED(TWI1)
+#endif // NRFX_CHECK(TWI1_ENABLED)
 
-#endif // NRFX_MODULE_ENABLED(TWI)
+#endif // NRFX_CHECK(TWI_ENABLED)

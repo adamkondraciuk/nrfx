@@ -11,7 +11,7 @@
 #include "nrf_soc.h"
 #endif
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 #define NRFX_LOG_MODULE COMMON
 #include <nrfx_log.h>
@@ -23,8 +23,8 @@ typedef struct {
 } shared_resource_t;
 
 // SPIM0, SPIS0, SPI0, TWIM0, TWIS0, TWI0
-#if (NRFX_MODULE_ENABLED(SPI0) || NRFX_MODULE_ENABLED(SPIS0) || \
-     NRFX_MODULE_ENABLED(TWI0) || NRFX_MODULE_ENABLED(TWIS0))
+#if (NRFX_CHECK(SPI0_ENABLED) || NRFX_CHECK(SPIS0_ENABLED) || \
+     NRFX_CHECK(TWI0_ENABLED) || NRFX_CHECK(TWIS0_ENABLED))
     #define SERIAL_BOX_0_IN_USE
     // [this checking may need a different form in unit tests, hence macro]
     #ifndef IS_SERIAL_BOX_0
@@ -37,12 +37,12 @@ typedef struct {
         NRFX_ASSERT(m_serial_box_0.handler);
         m_serial_box_0.handler();
     }
-#endif // (NRFX_MODULE_ENABLED(SPI0) || NRFX_MODULE_ENABLED(SPIS0) ||
-       //  NRFX_MODULE_ENABLED(TWI0) || NRFX_MODULE_ENABLED(TWIS0))
+#endif // (NRFX_CHECK(SPI0_ENABLED) || NRFX_CHECK(SPIS0_ENABLED) ||
+       //  NRFX_CHECK(TWI0_ENABLED) || NRFX_CHECK(TWIS0_ENABLED))
 
 // SPIM1, SPIS1, SPI1, TWIM1, TWIS1, TWI1
-#if (NRFX_MODULE_ENABLED(SPI1) || NRFX_MODULE_ENABLED(SPIS1) || \
-     NRFX_MODULE_ENABLED(TWI1) || NRFX_MODULE_ENABLED(TWIS1))
+#if (NRFX_CHECK(SPI1_ENABLED) || NRFX_CHECK(SPIS1_ENABLED) || \
+     NRFX_CHECK(TWI1_ENABLED) || NRFX_CHECK(TWIS1_ENABLED))
     #define SERIAL_BOX_1_IN_USE
     // [this checking may need a different form in unit tests, hence macro]
     #ifndef IS_SERIAL_BOX_1
@@ -59,11 +59,11 @@ typedef struct {
         NRFX_ASSERT(m_serial_box_1.handler);
         m_serial_box_1.handler();
     }
-#endif // (NRFX_MODULE_ENABLED(SPI1) || NRFX_MODULE_ENABLED(SPIS1) ||
-       //  NRFX_MODULE_ENABLED(TWI1) || NRFX_MODULE_ENABLED(TWIS1))
+#endif // (NRFX_CHECK(SPI1_ENABLED) || NRFX_CHECK(SPIS1_ENABLED) ||
+       //  NRFX_CHECK(TWI1_ENABLED) || NRFX_CHECK(TWIS1_ENABLED))
 
 // SPIM2, SPIS2, SPI2
-#if (NRFX_MODULE_ENABLED(SPI2) || NRFX_MODULE_ENABLED(SPIS2))
+#if (NRFX_CHECK(SPI2_ENABLED) || NRFX_CHECK(SPIS2_ENABLED))
     #define SERIAL_BOX_2_IN_USE
     // [this checking may need a different form in unit tests, hence macro]
     #ifndef IS_SERIAL_BOX_2
@@ -76,10 +76,10 @@ typedef struct {
         NRFX_ASSERT(m_serial_box_2.handler);
         m_serial_box_2.handler();
     }
-#endif // (NRFX_MODULE_ENABLED(SPI2) || NRFX_MODULE_ENABLED(SPIS2))
+#endif // (NRFX_CHECK(SPI2_ENABLED) || NRFX_CHECK(SPIS2_ENABLED))
 
 // COMP, LPCOMP
-#if (NRFX_MODULE_ENABLED(COMP) || NRFX_MODULE_ENABLED(LPCOMP))
+#if (NRFX_CHECK(COMP_ENABLED) || NRFX_CHECK(LPCOMP_ENABLED))
     #define COMP_LPCOMP_IN_USE
 
     #ifndef IS_COMP_LPCOMP
@@ -92,7 +92,7 @@ typedef struct {
         NRFX_ASSERT(m_comp_lpcomp.handler);
         m_comp_lpcomp.handler();
     }
-#endif // (NRFX_MODULE_ENABLED(COMP) || NRFX_MODULE_ENABLED(LPCOMP))
+#endif // (NRFX_CHECK(COMP_ENABLED) || NRFX_CHECK(LPCOMP_ENABLED))
 
 #if defined(SERIAL_BOX_0_IN_USE) || \
     defined(SERIAL_BOX_1_IN_USE) || \
@@ -204,9 +204,9 @@ void nrf_drv_common_per_res_release(void const * p_per_base)
     {}
 }
 
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
-#if NRFX_MODULE_ENABLED(POWER)
+#if NRFX_CHECK(POWER_ENABLED)
 void nrf_drv_common_power_irq_disable(void)
 {
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
@@ -216,9 +216,9 @@ void nrf_drv_common_power_irq_disable(void)
         nrf_drv_common_irq_disable(POWER_CLOCK_IRQn);
     }
 }
-#endif // NRFX_MODULE_ENABLED(POWER)
+#endif // NRFX_CHECK(POWER_ENABLED)
 
-#if NRFX_MODULE_ENABLED(CLOCK)
+#if NRFX_CHECK(CLOCK_ENABLED)
 void nrf_drv_common_clock_irq_disable(void)
 {
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
@@ -228,7 +228,7 @@ void nrf_drv_common_clock_irq_disable(void)
         nrf_drv_common_irq_disable(POWER_CLOCK_IRQn);
     }
 }
-#endif // NRFX_MODULE_ENABLED(CLOCK)
+#endif // NRFX_CHECK(CLOCK_ENABLED)
 
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
 void POWER_CLOCK_IRQHandler(void)

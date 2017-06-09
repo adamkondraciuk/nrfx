@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(ADC)
+#if NRFX_CHECK(ADC_ENABLED)
 
 #include <nrf_drv_adc.h>
 #include <nrf_drv_common.h>
@@ -288,4 +288,4 @@ void ADC_IRQHandler(void)
     }
 }
 
-#endif // NRFX_MODULE_ENABLED(ADC)
+#endif // NRFX_CHECK(ADC_ENABLED)

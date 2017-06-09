@@ -2,10 +2,10 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(SPIS)
+#if NRFX_CHECK(SPIS_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(SPIS0) || NRFX_MODULE_ENABLED(SPIS1) || \
-      NRFX_MODULE_ENABLED(SPIS2))
+#if !(NRFX_CHECK(SPIS0_ENABLED) || NRFX_CHECK(SPIS1_ENABLED) || \
+      NRFX_CHECK(SPIS2_ENABLED))
 #error "No enabled SPIS instances. Check <nrfx_config.h>."
 #endif
 
@@ -21,7 +21,7 @@
                                         "UNKNOWN ERROR"))
 
 
-#if NRFX_MODULE_ENABLED(SPIS_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
 #include <nrf_drv_gpiote.h>
 #define USE_DMA_ISSUE_WORKAROUND
 // This handler is called by the GPIOTE driver when a falling edge is detected
@@ -44,27 +44,27 @@ typedef enum
 } nrf_drv_spis_state_t;
 
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
     #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
 
-    #if NRFX_MODULE_ENABLED(SPIS0)
+    #if NRFX_CHECK(SPIS0_ENABLED)
         IRQ_HANDLER(0);
     #endif
-    #if NRFX_MODULE_ENABLED(SPIS1)
+    #if NRFX_CHECK(SPIS1_ENABLED)
         IRQ_HANDLER(1);
     #endif
-    #if NRFX_MODULE_ENABLED(SPIS2)
+    #if NRFX_CHECK(SPIS2_ENABLED)
         IRQ_HANDLER(2);
     #endif
     static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
-    #if NRFX_MODULE_ENABLED(SPIS0)
+    #if NRFX_CHECK(SPIS0_ENABLED)
         IRQ_HANDLER_NAME(0),
     #endif
-    #if NRFX_MODULE_ENABLED(SPIS1)
+    #if NRFX_CHECK(SPIS1_ENABLED)
         IRQ_HANDLER_NAME(1),
     #endif
-    #if NRFX_MODULE_ENABLED(SPIS2)
+    #if NRFX_CHECK(SPIS2_ENABLED)
         IRQ_HANDLER_NAME(2),
     #endif
     };
@@ -128,7 +128,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     if (nrf_drv_common_per_res_acquire(p_spis,
             m_irq_handlers[p_instance->instance_id]) != NRFX_SUCCESS)
     {
@@ -265,7 +265,7 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
     nrf_spis_int_disable(p_spis, DISABLE_ALL);
     #undef  DISABLE_ALL
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
     nrf_drv_common_per_res_release(p_spis);
 #endif
 
@@ -433,16 +433,16 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     }
 }
 
-#if NRFX_MODULE_ENABLED(SPIS0)
+#if NRFX_CHECK(SPIS0_ENABLED)
     SPIS_IRQHANDLER_TEMPLATE(0)
 #endif
 
-#if NRFX_MODULE_ENABLED(SPIS1)
+#if NRFX_CHECK(SPIS1_ENABLED)
     SPIS_IRQHANDLER_TEMPLATE(1)
 #endif
 
-#if NRFX_MODULE_ENABLED(SPIS2)
+#if NRFX_CHECK(SPIS2_ENABLED)
     SPIS_IRQHANDLER_TEMPLATE(2)
 #endif
 
-#endif // NRFX_MODULE_ENABLED(SPIS)
+#endif // NRFX_CHECK(SPIS_ENABLED)

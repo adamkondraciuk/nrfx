@@ -18,7 +18,7 @@
     #define EGU_ENABLED 0
 #endif
 
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
 #include <hal/nrf_egu.h>
 #endif
 
@@ -44,7 +44,7 @@ typedef uint16_t nrf_swi_flags_t;
 typedef void (* nrf_swi_handler_t)(nrf_swi_t, nrf_swi_flags_t);
 
 /**@brief Maximum numbers of SWIs. This number is fixed for a specific chip. */
-#if NRFX_MODULE_ENABLED(EGU)
+#if NRFX_CHECK(EGU_ENABLED)
 #define SWI_MAX              EGU_COUNT
 #else
 #define SWI_MAX              SWI_COUNT
@@ -67,7 +67,7 @@ typedef void (* nrf_swi_handler_t)(nrf_swi_t, nrf_swi_flags_t);
     #endif
 #endif
 
-#if NRFX_MODULE_ENABLED(PWM_NRF52_ANOMALY_109_WORKAROUND)
+#if NRFX_CHECK(PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     #if   (PWM_NRF52_ANOMALY_109_EGU_INSTANCE == 0)
         #define SWI_DISABLE0
     #elif (PWM_NRF52_ANOMALY_109_EGU_INSTANCE == 1)
@@ -153,7 +153,7 @@ uint32_t nrf_drv_swi_task_trigger_address_get(nrf_swi_t swi, uint8_t channel);
  */
 uint32_t nrf_drv_swi_event_triggered_address_get(nrf_swi_t swi, uint8_t channel);
 
-#endif // NRFX_MODULE_ENABLED(EGU)
+#endif // NRFX_CHECK(EGU_ENABLED)
 
 
 

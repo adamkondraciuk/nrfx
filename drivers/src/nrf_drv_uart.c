@@ -2,9 +2,9 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(UART)
+#if NRFX_CHECK(UART_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(UART0) || NRFX_MODULE_ENABLED(UART1))
+#if !(NRFX_CHECK(UART0_ENABLED) || NRFX_CHECK(UART1_ENABLED))
 #error "No enabled UART instances. Check <nrfx_config.h>."
 #endif
 
@@ -915,7 +915,7 @@ __STATIC_INLINE void uarte_irq_handler(NRF_UARTE_Type * p_uarte, uart_control_bl
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(UART0)
+#if NRFX_CHECK(UART0_ENABLED)
 void UART0_IRQHandler(void)
 {
     CODE_FOR_UARTE_INT
@@ -930,7 +930,7 @@ void UART0_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(UART1)
+#if NRFX_CHECK(UART1_ENABLED)
 void UARTE1_IRQHandler(void)
 {
     CODE_FOR_UARTE_INT
@@ -945,4 +945,4 @@ void UARTE1_IRQHandler(void)
 }
 #endif
 
-#endif // NRFX_MODULE_ENABLED(UART)
+#endif // NRFX_CHECK(UART_ENABLED)

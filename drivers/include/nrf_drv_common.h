@@ -33,7 +33,7 @@ extern "C" {
  * The implementation functions in @c clock and @c power are required to handle
  * correctly the case when they are called without any event bit set.
  */
-#define NRF_DRV_COMMON_POWER_CLOCK_ISR (NRFX_MODULE_ENABLED(CLOCK) && NRFX_MODULE_ENABLED(POWER))
+#define NRF_DRV_COMMON_POWER_CLOCK_ISR (NRFX_CHECK(CLOCK_ENABLED) && NRFX_CHECK(POWER_ENABLED))
 
 /**
  * @brief Driver state.
@@ -60,7 +60,7 @@ typedef enum
 typedef void (*nrf_drv_irq_handler_t)(void);
 
 
-#if NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 /**
  * @brief Function for acquiring shared peripheral resources associated with
@@ -97,7 +97,7 @@ ret_code_t nrf_drv_common_per_res_acquire(void const * p_per_base,
  */
 void nrf_drv_common_per_res_release(void const * p_per_base);
 
-#endif // NRFX_MODULE_ENABLED(PERIPHERAL_RESOURCE_SHARING)
+#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 
 /**
@@ -110,7 +110,7 @@ void nrf_drv_common_per_res_release(void const * p_per_base);
  */
 void nrf_drv_common_irq_enable(IRQn_Type IRQn, uint8_t priority);
 
-#if NRFX_MODULE_ENABLED(POWER)
+#if NRFX_CHECK(POWER_ENABLED)
 /**
  * @brief Disable power IRQ
  *
@@ -123,7 +123,7 @@ void nrf_drv_common_irq_enable(IRQn_Type IRQn, uint8_t priority);
 void nrf_drv_common_power_irq_disable(void);
 #endif
 
-#if NRFX_MODULE_ENABLED(CLOCK)
+#if NRFX_CHECK(CLOCK_ENABLED)
 /**
  * @brief Disable clock IRQ
  *
@@ -195,7 +195,7 @@ __STATIC_INLINE uint32_t nrf_drv_event_to_bitpos(uint32_t event);
  */
 __STATIC_INLINE IRQn_Type nrf_drv_get_IRQn(void const * const pinst);
 
-#if NRFX_MODULE_ENABLED(CLOCK) || NRFX_MODULE_ENABLED(POWER)
+#if NRFX_CHECK(CLOCK_ENABLED) || NRFX_CHECK(POWER_ENABLED)
 /**
  * @brief Enable and setup power clock IRQ
  *
@@ -258,7 +258,7 @@ __STATIC_INLINE IRQn_Type nrf_drv_get_IRQn(void const * const pinst)
     return (IRQn_Type) ret;
 }
 
-#if NRFX_MODULE_ENABLED(CLOCK) || NRFX_MODULE_ENABLED(POWER)
+#if NRFX_CHECK(CLOCK_ENABLED) || NRFX_CHECK(POWER_ENABLED)
 __STATIC_INLINE void nrf_drv_common_power_clock_irq_init(void)
 {
     if(!nrf_drv_common_irq_enable_check(POWER_CLOCK_IRQn))
@@ -270,9 +270,9 @@ __STATIC_INLINE void nrf_drv_common_power_clock_irq_init(void)
     #error CLOCK_CONFIG_IRQ_PRIORITY and POWER_CONFIG_IRQ_PRIORITY have to be the same.
     #endif
             CLOCK_CONFIG_IRQ_PRIORITY
-#elif NRFX_MODULE_ENABLED(CLOCK)
+#elif NRFX_CHECK(CLOCK_ENABLED)
             CLOCK_CONFIG_IRQ_PRIORITY
-#elif NRFX_MODULE_ENABLED(POWER)
+#elif NRFX_CHECK(POWER_ENABLED)
             POWER_CONFIG_IRQ_PRIORITY
 #endif
             );

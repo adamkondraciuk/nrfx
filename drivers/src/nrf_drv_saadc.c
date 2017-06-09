@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(SAADC)
+#if NRFX_CHECK(SAADC_ENABLED)
 #include <nrf_drv_saadc.h>
 #include <nrf_drv_common.h>
 
@@ -598,4 +598,4 @@ void nrf_drv_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t limit_
         nrf_saadc_int_enable(int_mask);
     }
 }
-#endif // NRFX_MODULE_ENABLED(SAADC)
+#endif // NRFX_CHECK(SAADC_ENABLED)

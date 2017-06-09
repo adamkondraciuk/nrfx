@@ -2,10 +2,10 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(RTC)
+#if NRFX_CHECK(RTC_ENABLED)
 
-#if !(NRFX_MODULE_ENABLED(RTC0) || NRFX_MODULE_ENABLED(RTC1) || \
-      NRFX_MODULE_ENABLED(RTC2))
+#if !(NRFX_CHECK(RTC0_ENABLED) || NRFX_CHECK(RTC1_ENABLED) || \
+      NRFX_CHECK(RTC2_ENABLED))
 #error "No enabled RTC instances. Check <nrfx_config.h>."
 #endif
 
@@ -291,7 +291,7 @@ __STATIC_INLINE void nrf_drv_rtc_int_handler(NRF_RTC_Type * p_reg,
     }
 }
 
-#if NRFX_MODULE_ENABLED(RTC0)
+#if NRFX_CHECK(RTC0_ENABLED)
 void RTC0_IRQHandler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC0, NRFX_RTC0_INST_IDX,
@@ -299,7 +299,7 @@ void RTC0_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(RTC1)
+#if NRFX_CHECK(RTC1_ENABLED)
 void RTC1_IRQHandler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC1, NRFX_RTC1_INST_IDX,
@@ -307,7 +307,7 @@ void RTC1_IRQHandler(void)
 }
 #endif
 
-#if NRFX_MODULE_ENABLED(RTC2)
+#if NRFX_CHECK(RTC2_ENABLED)
 void RTC2_IRQHandler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC2, NRFX_RTC2_INST_IDX,
@@ -315,4 +315,4 @@ void RTC2_IRQHandler(void)
 }
 #endif
 
-#endif // NRFX_MODULE_ENABLED(RTC)
+#endif // NRFX_CHECK(RTC_ENABLED)

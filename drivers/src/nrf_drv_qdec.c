@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(QDEC)
+#if NRFX_CHECK(QDEC_ENABLED)
 
 #include <nrf_drv_qdec.h>
 #include <nrf_drv_common.h>
@@ -179,4 +179,4 @@ void nrf_drv_qdec_event_address_get(nrf_qdec_event_t event, uint32_t * p_event)
     *p_event = (uint32_t)nrf_qdec_event_address_get(event);
 }
 
-#endif // NRFX_MODULE_ENABLED(QDEC)
+#endif // NRFX_CHECK(QDEC_ENABLED)

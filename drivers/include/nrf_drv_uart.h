@@ -47,7 +47,7 @@ extern "C" {
 #define UART_IN_USE
 #endif
 
-#if NRFX_MODULE_ENABLED(UART) && ((!defined(UARTE_IN_USE) && !defined(UART_IN_USE)) || ((UART_EASY_DMA_SUPPORT == 0) && (UART_LEGACY_SUPPORT == 0)))
+#if NRFX_CHECK(UART_ENABLED) && ((!defined(UARTE_IN_USE) && !defined(UART_IN_USE)) || ((UART_EASY_DMA_SUPPORT == 0) && (UART_LEGACY_SUPPORT == 0)))
 #error "Illegal settings in uart module!"
 #endif
 
@@ -82,10 +82,10 @@ typedef struct
 }
 
 enum {
-#if NRFX_MODULE_ENABLED(UART0)
+#if NRFX_CHECK(UART0_ENABLED)
     NRFX_UART0_INST_IDX,
 #endif
-#if NRFX_MODULE_ENABLED(UART1)
+#if NRFX_CHECK(UART1_ENABLED)
     NRFX_UART1_INST_IDX,
 #endif
     NRFX_UART_ENABLED_COUNT

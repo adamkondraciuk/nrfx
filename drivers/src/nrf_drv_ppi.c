@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_MODULE_ENABLED(PPI)
+#if NRFX_CHECK(PPI_ENABLED)
 
 #include <nrf_drv_ppi.h>
 #include <nrf_drv_common.h>
@@ -490,4 +490,4 @@ uint32_t nrf_drv_ppi_channels_include_in_group(uint32_t channel_mask,
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
-#endif // NRFX_MODULE_ENABLED(PPI)
+#endif // NRFX_CHECK(PPI_ENABLED)
