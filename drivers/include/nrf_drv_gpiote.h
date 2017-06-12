@@ -337,6 +337,9 @@ void nrf_drv_gpiote_clr_task_trigger(nrf_drv_gpiote_pin_t pin);
  **/
 
 
+void nrfx_gpiote_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

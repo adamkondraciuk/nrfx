@@ -10,6 +10,7 @@
 #endif
 
 #include <nrf_drv_spis.h>
+#include "prs/nrfx_prs.h"
 #include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME SPIS
@@ -44,36 +45,8 @@ typedef enum
 } nrf_drv_spis_state_t;
 
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
-    #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
-
-    #if NRFX_CHECK(SPIS0_ENABLED)
-        IRQ_HANDLER(0);
-    #endif
-    #if NRFX_CHECK(SPIS1_ENABLED)
-        IRQ_HANDLER(1);
-    #endif
-    #if NRFX_CHECK(SPIS2_ENABLED)
-        IRQ_HANDLER(2);
-    #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
-    #if NRFX_CHECK(SPIS0_ENABLED)
-        IRQ_HANDLER_NAME(0),
-    #endif
-    #if NRFX_CHECK(SPIS1_ENABLED)
-        IRQ_HANDLER_NAME(1),
-    #endif
-    #if NRFX_CHECK(SPIS2_ENABLED)
-        IRQ_HANDLER_NAME(2),
-    #endif
-    };
-#else
-    #define IRQ_HANDLER(n) void SPIS##n##_IRQ_HANDLER(void)
-#endif // PERIPHERAL_RESOURCE_SHARING_ENABLED
-
 #define SPIS_IRQHANDLER_TEMPLATE(NUM) \
-    IRQ_HANDLER(NUM)                                                       \
+    void nrfx_spis_##NUM##_irq_handler(void)                               \
     {                                                                      \
         spis_irq_handler(NRF_SPIS##NUM, &m_cb[NRFX_SPIS##NUM##_INST_IDX]); \
     }
@@ -128,9 +101,20 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    if (nrf_drv_common_per_res_acquire(p_spis,
-            m_irq_handlers[p_instance->instance_id]) != NRFX_SUCCESS)
+#if NRFX_CHECK(PRS_ENABLED)
+    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
+        #if NRFX_CHECK(SPIS0_ENABLED)
+        nrfx_spis_0_irq_handler,
+        #endif
+        #if NRFX_CHECK(SPIS1_ENABLED)
+        nrfx_spis_1_irq_handler,
+        #endif
+        #if NRFX_CHECK(SPIS2_ENABLED)
+        nrfx_spis_2_irq_handler,
+        #endif
+    };
+    if (nrfx_prs_acquire(p_spis,
+            irq_handlers[p_instance->instance_id]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -138,7 +122,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif
+#endif // NRFX_CHECK(PRS_ENABLED)
 
     // Configure the SPI pins for input.
     uint32_t mosi_pin;
@@ -265,8 +249,8 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
     nrf_spis_int_disable(p_spis, DISABLE_ALL);
     #undef  DISABLE_ALL
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    nrf_drv_common_per_res_release(p_spis);
+#if NRFX_CHECK(PRS_ENABLED)
+    nrfx_prs_release(p_spis);
 #endif
 
     p_cb->state = NRF_DRV_STATE_UNINITIALIZED;

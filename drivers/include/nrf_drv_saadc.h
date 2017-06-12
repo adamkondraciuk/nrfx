@@ -277,6 +277,10 @@ void nrf_drv_saadc_abort(void);
  */
 void nrf_drv_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t limit_high);
 
+
+void nrfx_saadc_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -916,7 +916,7 @@ __STATIC_INLINE void uarte_irq_handler(NRF_UARTE_Type * p_uarte, uart_control_bl
 #endif
 
 #if NRFX_CHECK(UART0_ENABLED)
-void UART0_IRQHandler(void)
+void nrfx_uarte_0_irq_handler(void)
 {
     CODE_FOR_UARTE_INT
     (
@@ -931,7 +931,7 @@ void UART0_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(UART1_ENABLED)
-void UARTE1_IRQHandler(void)
+void nrfx_uarte_1_irq_handler(void)
 {
     CODE_FOR_UARTE_INT
     (

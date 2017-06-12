@@ -8,6 +8,7 @@
 #endif
 
 #include <nrf_drv_twis.h>
+#include "prs/nrfx_prs.h"
 #include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME TWIS
@@ -93,29 +94,6 @@ static nrf_drv_twis_var_inst_t m_var_inst[NRFX_TWIS_ENABLED_COUNT] =
                    .error      = 0 },
     #include "nrf_drv_twis_inst.def"
 };
-
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
-    #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
-
-    #if NRFX_CHECK(TWIS0_ENABLED)
-        IRQ_HANDLER(0);
-    #endif
-    #if NRFX_CHECK(TWIS1_ENABLED)
-        IRQ_HANDLER(1);
-    #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
-    #if NRFX_CHECK(TWIS0_ENABLED)
-        IRQ_HANDLER_NAME(0),
-    #endif
-    #if NRFX_CHECK(TWIS1_ENABLED)
-        IRQ_HANDLER_NAME(1),
-    #endif
-    };
-#else
-    #define IRQ_HANDLER(n) \
-        void SPIM##n##_SPIS##n##_TWIM##n##_TWIS##n##_SPI##n##_TWI##n##_IRQHandler(void)
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 /**
  * @brief State processing semaphore
@@ -535,7 +513,7 @@ static inline void nrf_drv_twis_on_ISR(uint8_t instNr)
  * Implementation of IRQ Handlers
  */
 #define X(n) \
-    IRQ_HANDLER(n) \
+    void nrfx_twis_##n##_irq_handler(void) \
     { \
         nrf_drv_twis_on_ISR(NRFX_TWIS##n##_INST_IDX); \
     }
@@ -566,15 +544,25 @@ ret_code_t nrf_drv_twis_init(
         return err_code;
     }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    if (nrf_drv_common_per_res_acquire(p_reg, m_irq_handlers[instNr]) !=
-            NRFX_SUCCESS)
+#if NRFX_CHECK(PRS_ENABLED)
+    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
+        #if NRFX_CHECK(TWIS0_ENABLED)
+        nrfx_twis_0_irq_handler,
+        #endif
+        #if NRFX_CHECK(TWIS1_ENABLED)
+        nrfx_twis_1_irq_handler,
+        #endif
+        #if NRFX_CHECK(TWIS2_ENABLED)
+        nrfx_twis_2_irq_handler,
+        #endif
+    };
+    if (nrfx_prs_acquire(p_reg, irq_handlers[instNr]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif
+#endif // NRFX_CHECK(PRS_ENABLED)
 
     if (!TWIS_ASSUME_INIT_AFTER_RESET_ONLY)
     {
@@ -644,8 +632,8 @@ void nrf_drv_twis_uninit(nrf_drv_twis_t const * const p_instance)
         nrf_gpio_cfg_default(psel.SDA);
     }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    nrf_drv_common_per_res_release(p_reg);
+#if NRFX_CHECK(PRS_ENABLED)
+    nrfx_prs_release(p_reg);
 #endif
 
     /* Clear variables */

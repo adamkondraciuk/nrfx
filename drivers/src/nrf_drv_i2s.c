@@ -187,7 +187,7 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
     }
 
     // Initially we set up the peripheral to use the first half of each buffer,
-    // then in 'I2S_IRQHandler' we will switch to the second half.
+    // then in 'nrfx_i2s_irq_handler' we will switch to the second half.
     nrf_i2s_transfer_set(NRF_I2S, buffer_half_size, p_rx_buffer, p_tx_buffer);
 
     m_cb.p_rx_buffer      = p_rx_buffer;
@@ -261,7 +261,7 @@ void nrf_drv_i2s_stop(void)
 }
 
 
-void I2S_IRQHandler(void)
+void nrfx_i2s_irq_handler(void)
 {
     uint32_t * p_data_received = NULL;
     uint32_t * p_data_to_send  = NULL;

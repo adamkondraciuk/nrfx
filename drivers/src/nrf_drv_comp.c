@@ -4,6 +4,7 @@
 #if NRFX_CHECK(COMP_ENABLED)
 
 #include <nrf_drv_comp.h>
+#include "prs/nrfx_prs.h"
 #include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE COMP
@@ -31,16 +32,7 @@ static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
     }
 }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    #define IRQ_HANDLER_NAME   irq_handler_for_comp
-    #define IRQ_HANDLER        static void IRQ_HANDLER_NAME(void)
-
-    IRQ_HANDLER;
-#else
-    #define IRQ_HANDLER void COMP_LPCOMP_IRQHandler(void)
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-
-IRQ_HANDLER
+void nrfx_comp_irq_handler(void)
 {
     comp_execute_handler(NRF_COMP_EVENT_READY, COMP_INTENSET_READY_Msk);
     comp_execute_handler(NRF_COMP_EVENT_DOWN, COMP_INTENSET_DOWN_Msk);
@@ -66,8 +58,8 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
         p_config = &m_default_config;
     }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    if (nrf_drv_common_per_res_acquire(NRF_COMP, IRQ_HANDLER_NAME) != NRFX_SUCCESS)
+#if NRFX_CHECK(PRS_ENABLED)
+    if (nrfx_prs_acquire(NRF_COMP, nrfx_comp_irq_handler) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -130,8 +122,8 @@ void nrf_drv_comp_uninit(void)
     NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
     nrf_drv_common_irq_disable(COMP_LPCOMP_IRQn);
     nrf_comp_disable();
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    nrf_drv_common_per_res_release(NRF_COMP);
+#if NRFX_CHECK(PRS_ENABLED)
+    nrfx_prs_release(NRF_COMP);
 #endif
     m_state = NRF_DRV_STATE_UNINITIALIZED;
     m_comp_events_handler = NULL;

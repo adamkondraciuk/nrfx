@@ -60,46 +60,6 @@ typedef enum
 typedef void (*nrf_drv_irq_handler_t)(void);
 
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-
-/**
- * @brief Function for acquiring shared peripheral resources associated with
- *        the specified peripheral.
- *
- * Certain resources and registers are shared among peripherals that have
- * the same ID (for example: SPI0, SPIM0, SPIS0, TWI0, TWIM0, and TWIS0).
- * Only one of them can be utilized at a given time. This function reserves
- * proper resources to be used by the specified peripheral.
- * If PERIPHERAL_RESOURCE_SHARING_ENABLED is set to a non-zero value, IRQ
- * handlers for peripherals that are sharing resources with others are
- * implemented by the nrf_drv_common module instead of individual drivers.
- * The drivers must then specify their interrupt handling routines and
- * register them by using this function.
- *
- * @param[in] p_per_base Requested peripheral base pointer.
- * @param[in] handler    Interrupt handler to register. May be NULL
- *                       if interrupts are not used for the peripheral.
- *
- * @retval NRFX_SUCCESS             If resources were acquired successfully.
- * @retval NRFX_ERROR_BUSY          If resources were already acquired.
- * @retval NRFX_ERROR_INVALID_PARAM If the specified peripheral is not enabled
- *                                  or the peripheral does not share resources
- *                                  with other peripherals.
- */
-ret_code_t nrf_drv_common_per_res_acquire(void const * p_per_base,
-                                          nrf_drv_irq_handler_t handler);
-
-/**
- * @brief Function for releasing shared resources reserved previously by
- *        @ref nrf_drv_common_per_res_acquire() for the specified peripheral.
- *
- * @param[in] p_per_base Requested peripheral base pointer.
- */
-void nrf_drv_common_per_res_release(void const * p_per_base);
-
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-
-
 /**
  * @brief Function sets priority and enables NVIC interrupt
  *

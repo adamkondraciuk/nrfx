@@ -1,0 +1,126 @@
+/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+
+#include <nrfx.h>
+
+#if NRFX_CHECK(PRS_ENABLED)
+#include "nrfx_prs.h"
+
+#define NRFX_LOG_MODULE PRS
+#include <nrfx_log.h>
+
+#define LOG_FUNCTION_EXIT(level, ret_code) \
+    NRFX_LOG_##level("Function: %s, error code: %s.\r\n", \
+        (uint32_t)__func__, \
+        (uint32_t)NRFX_LOG_ERROR_STRING_GET(ret_code))
+
+
+typedef struct {
+    nrfx_prs_irq_handler_t handler;
+    bool                   acquired;
+} prs_box_t;
+
+#define PRS_BOX_DEFINE(n) \
+    static prs_box_t m_prs_box_##n = { .handler = NULL, .acquired = false }; \
+    void nrfx_prs_box_##n##_irq_handler(void) \
+    { \
+        NRFX_ASSERT(m_prs_box_##n.handler); \
+        m_prs_box_##n.handler(); \
+    }
+
+#if NRFX_CHECK(PRS_BOX_0_ENABLED)
+PRS_BOX_DEFINE(0)
+#endif
+#if NRFX_CHECK(PRS_BOX_1_ENABLED)
+PRS_BOX_DEFINE(1)
+#endif
+#if NRFX_CHECK(PRS_BOX_2_ENABLED)
+PRS_BOX_DEFINE(2)
+#endif
+#if NRFX_CHECK(PRS_BOX_3_ENABLED)
+PRS_BOX_DEFINE(3)
+#endif
+#if NRFX_CHECK(PRS_BOX_4_ENABLED)
+PRS_BOX_DEFINE(4)
+#endif
+
+
+static prs_box_t * prs_box_get(void const * p_base_addr)
+{
+#define PRS_BOX_HANDLE(n) \
+    case (uint32_t)NRFX_PRS_BOX_##n##_ADDR: \
+        return &m_prs_box_##n
+
+    switch ((uint32_t)p_base_addr)
+    {
+#if NRFX_CHECK(PRS_BOX_0_ENABLED)
+        PRS_BOX_HANDLE(0);
+#endif
+#if NRFX_CHECK(PRS_BOX_1_ENABLED)
+        PRS_BOX_HANDLE(1);
+#endif
+#if NRFX_CHECK(PRS_BOX_2_ENABLED)
+        PRS_BOX_HANDLE(2);
+#endif
+#if NRFX_CHECK(PRS_BOX_3_ENABLED)
+        PRS_BOX_HANDLE(3);
+#endif
+#if NRFX_CHECK(PRS_BOX_4_ENABLED)
+        PRS_BOX_HANDLE(4);
+#endif
+    default:
+        NRFX_ASSERT(false);
+        return NULL;
+    }
+}
+
+ret_code_t nrfx_prs_acquire(void const * p_base_addr,
+                            nrfx_prs_irq_handler_t irq_handler)
+{
+    NRFX_ASSERT(p_base_addr);
+
+    ret_code_t ret_code;
+
+    prs_box_t * p_box = prs_box_get(p_base_addr);
+    if (p_box != NULL)
+    {
+        bool busy = false;
+
+        NRFX_CRITICAL_SECTION_ENTER();
+        if (p_box->acquired)
+        {
+            busy = true;
+        }
+        else
+        {
+            p_box->handler  = irq_handler;
+            p_box->acquired = true;
+        }
+        NRFX_CRITICAL_SECTION_EXIT();
+
+        if (busy)
+        {
+            ret_code = NRFX_ERROR_BUSY;
+            LOG_FUNCTION_EXIT(WARNING, ret_code);
+            return ret_code;
+        }
+    }
+
+    ret_code = NRFX_SUCCESS;
+    LOG_FUNCTION_EXIT(INFO, ret_code);
+    return ret_code;
+}
+
+void nrfx_prs_release(void const * p_base_addr)
+{
+    NRFX_ASSERT(p_base_addr);
+
+    prs_box_t * p_box = prs_box_get(p_base_addr);
+    if (p_box != NULL)
+    {
+        p_box->handler  = NULL;
+        p_box->acquired = false;
+    }
+}
+
+
+#endif // NRFX_CHECK(PRS_ENABLED)

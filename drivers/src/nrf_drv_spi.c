@@ -10,6 +10,7 @@
 #endif
 
 #include <nrf_drv_spi.h>
+#include "prs/nrfx_prs.h"
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 
@@ -98,34 +99,6 @@ typedef struct
 } spi_control_block_t;
 static spi_control_block_t m_cb[NRFX_SPI_ENABLED_COUNT];
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
-    #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
-
-    #if NRFX_CHECK(SPI0_ENABLED)
-        IRQ_HANDLER(0);
-    #endif
-    #if NRFX_CHECK(SPI1_ENABLED)
-        IRQ_HANDLER(1);
-    #endif
-    #if NRFX_CHECK(SPI2_ENABLED)
-        IRQ_HANDLER(2);
-    #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
-    #if NRFX_CHECK(SPI0_ENABLED)
-        IRQ_HANDLER_NAME(0),
-    #endif
-    #if NRFX_CHECK(SPI1_ENABLED)
-        IRQ_HANDLER_NAME(1),
-    #endif
-    #if NRFX_CHECK(SPI2_ENABLED)
-        IRQ_HANDLER_NAME(2),
-    #endif
-    };
-#else
-    #define IRQ_HANDLER(n) void SPI##n##_IRQ_HANDLER(void)
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-
 ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
                             nrf_drv_spi_config_t const * p_config,
                             nrf_drv_spi_evt_handler_t handler,
@@ -144,9 +117,20 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
         return err_code;
     }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    if (nrf_drv_common_per_res_acquire(p_instance->p_registers,
-            m_irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
+#if NRFX_CHECK(PRS_ENABLED)
+    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
+        #if NRFX_CHECK(SPI0_ENABLED)
+        nrfx_spi_0_irq_handler,
+        #endif
+        #if NRFX_CHECK(SPI1_ENABLED)
+        nrfx_spi_1_irq_handler,
+        #endif
+        #if NRFX_CHECK(SPI2_ENABLED)
+        nrfx_spi_2_irq_handler,
+        #endif
+    };
+    if (nrfx_prs_acquire(p_instance->p_registers,
+            irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -154,7 +138,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif
+#endif // NRFX_CHECK(PRS_ENABLED)
 
     p_cb->handler = handler;
     p_cb->p_context = p_context;
@@ -304,8 +288,8 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
     )
     #undef DISABLE_ALL
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    nrf_drv_common_per_res_release(p_instance->p_registers);
+#if NRFX_CHECK(PRS_ENABLED)
+    nrfx_prs_release(p_instance->p_registers);
 #endif
 
     p_cb->state = NRF_DRV_STATE_UNINITIALIZED;
@@ -698,7 +682,7 @@ static void irq_handler_spi(NRF_SPI_Type * p_spi, spi_control_block_t * p_cb)
 #endif // SPI_IN_USE
 
 #if NRFX_CHECK(SPI0_ENABLED)
-IRQ_HANDLER(0)
+void nrfx_spi_0_irq_handler(void)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI0_INST_IDX];
     #if SPI0_USE_EASY_DMA
@@ -710,7 +694,7 @@ IRQ_HANDLER(0)
 #endif // NRFX_CHECK(SPI0_ENABLED)
 
 #if NRFX_CHECK(SPI1_ENABLED)
-IRQ_HANDLER(1)
+void nrfx_spi_1_irq_handler(void)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI1_INST_IDX];
     #if SPI1_USE_EASY_DMA
@@ -722,7 +706,7 @@ IRQ_HANDLER(1)
 #endif // NRFX_CHECK(SPI1_ENABLED)
 
 #if NRFX_CHECK(SPI2_ENABLED)
-IRQ_HANDLER(2)
+void nrfx_spi_2_irq_handler(void)
 {
     spi_control_block_t * p_cb  = &m_cb[NRFX_SPI2_INST_IDX];
     #if SPI2_USE_EASY_DMA

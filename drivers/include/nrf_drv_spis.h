@@ -164,7 +164,7 @@ typedef void (*nrf_drv_spis_event_handler_t)(nrf_drv_spis_event_t event);
  * @retval NRFX_ERROR_INVALID_PARAM If an invalid parameter is supplied.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if PERIPHERAL_RESOURCE_SHARING_ENABLED
+ *                                  possible only if PRS_ENABLED
  *                                  is set to a value other than zero.
  * @retval NRFX_ERROR_INTERNAL      GPIOTE channel for detecting falling edges
  *                                  on CSN pin cannot be initialized. Possible
@@ -218,6 +218,11 @@ ret_code_t nrf_drv_spis_buffers_set(nrf_drv_spis_t const * const  p_instance,
                                     uint8_t   tx_buffer_length,
                                     uint8_t * p_rx_buffer,
                                     uint8_t   rx_buffer_length);
+
+
+void nrfx_spis_0_irq_handler(void);
+void nrfx_spis_1_irq_handler(void);
+void nrfx_spis_2_irq_handler(void);
 
 
 #ifdef __cplusplus

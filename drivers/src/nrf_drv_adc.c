@@ -255,7 +255,7 @@ bool nrf_drv_adc_is_busy(void)
     return (m_cb.state == NRF_DRV_STATE_POWERED_ON) ? true : false;
 }
 
-void ADC_IRQHandler(void)
+void nrfx_adc_irq_handler(void)
 {
     if (m_cb.p_buffer == NULL)
     {

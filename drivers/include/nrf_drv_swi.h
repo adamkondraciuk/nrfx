@@ -156,6 +156,13 @@ uint32_t nrf_drv_swi_event_triggered_address_get(nrf_swi_t swi, uint8_t channel)
 #endif // NRFX_CHECK(EGU_ENABLED)
 
 
+void nrfx_swi_0_irq_handler(void);
+void nrfx_swi_1_irq_handler(void);
+void nrfx_swi_2_irq_handler(void);
+void nrfx_swi_3_irq_handler(void);
+void nrfx_swi_4_irq_handler(void);
+void nrfx_swi_5_irq_handler(void);
+
 
 #ifdef __cplusplus
 }

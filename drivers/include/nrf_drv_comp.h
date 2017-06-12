@@ -197,6 +197,9 @@ __STATIC_INLINE uint32_t nrf_drv_comp_event_address_get(nrf_comp_event_t comp_ev
  **/
 
 
+void nrfx_comp_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

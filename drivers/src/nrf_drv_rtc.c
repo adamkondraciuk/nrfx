@@ -292,7 +292,7 @@ __STATIC_INLINE void nrf_drv_rtc_int_handler(NRF_RTC_Type * p_reg,
 }
 
 #if NRFX_CHECK(RTC0_ENABLED)
-void RTC0_IRQHandler(void)
+void nrfx_rtc_0_irq_handler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC0, NRFX_RTC0_INST_IDX,
         NRF_RTC_CC_CHANNEL_COUNT(0));
@@ -300,7 +300,7 @@ void RTC0_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(RTC1_ENABLED)
-void RTC1_IRQHandler(void)
+void nrfx_rtc_1_irq_handler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC1, NRFX_RTC1_INST_IDX,
         NRF_RTC_CC_CHANNEL_COUNT(1));
@@ -308,7 +308,7 @@ void RTC1_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(RTC2_ENABLED)
-void RTC2_IRQHandler(void)
+void nrfx_rtc_2_irq_handler(void)
 {
     nrf_drv_rtc_int_handler(NRF_RTC2, NRFX_RTC2_INST_IDX,
         NRF_RTC_CC_CHANNEL_COUNT(2));

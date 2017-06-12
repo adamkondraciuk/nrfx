@@ -165,10 +165,11 @@ static void nrf_drv_swi_process(nrf_swi_t swi)
     m_swi_handlers[swi - SWI_START_NUMBER](swi, flags);
 }
 
-#define SWI_HANDLER_TEMPLATE(NUM)  void SWI##NUM##_EGU##NUM##_IRQHandler(void) \
-                        {                                                      \
-                            nrf_drv_swi_process(NUM);                          \
-                        }
+#define SWI_HANDLER_TEMPLATE(NUM)           \
+    void nrfx_swi_##NUM##_irq_handler(void) \
+    {                                       \
+        nrf_drv_swi_process(NUM);           \
+    }
 
 #else
 
@@ -181,10 +182,11 @@ static void nrf_drv_swi_process(nrf_swi_t swi, nrf_swi_flags_t flags)
 }
 
 
-#define SWI_HANDLER_TEMPLATE(NUM)  void SWI##NUM##_IRQHandler(void)                            \
-                        {                                                                      \
-                            nrf_drv_swi_process((NUM), m_swi_flags[(NUM) - SWI_START_NUMBER]); \
-                        }
+#define SWI_HANDLER_TEMPLATE(NUM)                                          \
+    void nrfx_swi_##NUM##_irq_handler(void)                                \
+    {                                                                      \
+        nrf_drv_swi_process((NUM), m_swi_flags[(NUM) - SWI_START_NUMBER]); \
+    }
 
 #endif
 

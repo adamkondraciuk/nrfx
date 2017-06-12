@@ -178,6 +178,10 @@ ret_code_t nrf_drv_pdm_stop(void);
  */
 ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
 
+
+void nrfx_pdm_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

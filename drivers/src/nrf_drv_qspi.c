@@ -247,7 +247,7 @@ ret_code_t nrf_drv_qspi_chip_erase(void)
     return nrf_drv_qspi_erase(NRF_QSPI_ERASE_LEN_ALL, 0);
 }
 
-void QSPI_IRQHandler(void)
+void nrfx_qspi_irq_handler(void)
 {
     // Catch Event ready interrupts
     if (nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY))

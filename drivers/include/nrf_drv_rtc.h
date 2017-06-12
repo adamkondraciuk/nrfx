@@ -328,6 +328,12 @@ __STATIC_INLINE uint32_t nrf_drv_rtc_event_address_get(nrf_drv_rtc_t const * con
  *@}
  **/
 
+
+void nrfx_rtc_0_irq_handler(void);
+void nrfx_rtc_1_irq_handler(void);
+void nrfx_rtc_2_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

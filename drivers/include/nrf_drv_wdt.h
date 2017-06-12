@@ -111,6 +111,10 @@ __STATIC_INLINE uint32_t nrf_drv_wdt_ppi_event_addr(nrf_wdt_event_t event)
     return nrf_wdt_event_address_get(event);
 }
 
+
+void nrfx_wdt_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

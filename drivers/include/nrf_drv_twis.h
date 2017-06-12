@@ -168,7 +168,7 @@ enum {
  * @retval NRFX_ERROR_INVALID_STATE If the driver is already initialized.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if PERIPHERAL_RESOURCE_SHARING_ENABLED
+ *                                  possible only if PRS_ENABLED
  *                                  is set to a value other than zero.
  */
 ret_code_t nrf_drv_twis_init(
@@ -356,6 +356,12 @@ bool nrf_drv_twis_is_pending_tx(nrf_drv_twis_t const * const p_instance);
 bool nrf_drv_twis_is_pending_rx(nrf_drv_twis_t const * const p_instance);
 
 /** @} */ /* End of lib_twis_drv group */
+
+
+void nrfx_twis_0_irq_handler(void);
+void nrfx_twis_1_irq_handler(void);
+void nrfx_twis_2_irq_handler(void);
+
 
 #ifdef __cplusplus
 }

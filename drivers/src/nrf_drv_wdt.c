@@ -23,7 +23,7 @@ static uint32_t m_alloc_index;
 static const nrf_drv_wdt_config_t m_default_config = NRF_DRV_WDT_DEAFULT_CONFIG;
 
 /**@brief WDT interrupt handler. */
-void WDT_IRQHandler(void)
+void nrfx_wdt_irq_handler(void)
 {
     if (nrf_wdt_int_enable_check(NRF_WDT_INT_TIMEOUT_MASK) == true)
     {

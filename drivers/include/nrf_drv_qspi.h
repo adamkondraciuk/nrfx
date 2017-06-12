@@ -261,6 +261,10 @@ ret_code_t nrf_drv_qspi_cinstr_quick_send(uint8_t               opcode,
                                           nrf_qspi_cinstr_len_t length,
                                           void const *          p_tx_buffer);
 
+
+void nrfx_qspi_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

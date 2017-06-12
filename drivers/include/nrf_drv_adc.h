@@ -249,11 +249,15 @@ __STATIC_INLINE uint32_t nrf_drv_adc_start_task_get(void)
     return nrf_adc_task_address_get(NRF_ADC_TASK_START);
 }
 
+#endif
+/** @} */
+
+
+void nrfx_adc_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif
-/** @} */
 
 #endif // NRF_DRV_ADC_H__

@@ -206,6 +206,9 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
 void       nrf_drv_i2s_stop(void);
 
 
+void nrfx_i2s_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

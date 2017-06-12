@@ -463,6 +463,12 @@ __STATIC_INLINE uint32_t nrf_drv_pwm_event_address_get(
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
 
+void nrfx_pwm_0_irq_handler(void);
+void nrfx_pwm_1_irq_handler(void);
+void nrfx_pwm_2_irq_handler(void);
+void nrfx_pwm_3_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

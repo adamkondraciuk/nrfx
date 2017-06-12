@@ -20,7 +20,7 @@ static qdec_event_handler_t m_qdec_event_handler = NULL;
 static const nrf_drv_qdec_config_t m_default_config = NRF_DRV_QDEC_DEFAULT_CONFIG;
 static nrf_drv_state_t m_state = NRF_DRV_STATE_UNINITIALIZED;
 
-void QDEC_IRQHandler(void)
+void nrfx_qdec_irq_handler(void)
 {
     nrf_drv_qdec_event_t event;
     if ( nrf_qdec_event_check(NRF_QDEC_EVENT_SAMPLERDY) &&

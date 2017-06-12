@@ -242,7 +242,7 @@ static void irq_handler(NRF_TIMER_Type * p_reg,
 }
 
 #if NRFX_CHECK(TIMER0_ENABLED)
-void TIMER0_IRQHandler(void)
+void nrfx_timer_0_irq_handler(void)
 {
     irq_handler(NRF_TIMER0, &m_cb[NRFX_TIMER0_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(0));
@@ -250,7 +250,7 @@ void TIMER0_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(TIMER1_ENABLED)
-void TIMER1_IRQHandler(void)
+void nrfx_timer_1_irq_handler(void)
 {
     irq_handler(NRF_TIMER1, &m_cb[NRFX_TIMER1_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(1));
@@ -258,7 +258,7 @@ void TIMER1_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(TIMER2_ENABLED)
-void TIMER2_IRQHandler(void)
+void nrfx_timer_2_irq_handler(void)
 {
     irq_handler(NRF_TIMER2, &m_cb[NRFX_TIMER2_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(2));
@@ -266,7 +266,7 @@ void TIMER2_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(TIMER3_ENABLED)
-void TIMER3_IRQHandler(void)
+void nrfx_timer_3_irq_handler(void)
 {
     irq_handler(NRF_TIMER3, &m_cb[NRFX_TIMER3_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(3));
@@ -274,7 +274,7 @@ void TIMER3_IRQHandler(void)
 #endif
 
 #if NRFX_CHECK(TIMER4_ENABLED)
-void TIMER4_IRQHandler(void)
+void nrfx_timer_4_irq_handler(void)
 {
     irq_handler(NRF_TIMER4, &m_cb[NRFX_TIMER4_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(4));

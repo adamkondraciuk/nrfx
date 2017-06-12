@@ -597,7 +597,7 @@ uint32_t nrf_drv_gpiote_in_event_addr_get(nrf_drv_gpiote_pin_t pin)
 }
 
 
-void GPIOTE_IRQHandler(void)
+void nrfx_gpiote_irq_handler(void)
 {
     uint32_t status            = 0;
     uint32_t input[GPIO_COUNT] = {0};

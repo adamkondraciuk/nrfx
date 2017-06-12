@@ -393,6 +393,11 @@ __STATIC_INLINE uint32_t nrf_drv_uart_event_address_get(nrf_drv_uart_t const * p
 }
 #endif //SUPPRESS_INLINE_IMPLEMENTATION
 
+
+void nrfx_uarte_0_irq_handler(void);
+void nrfx_uarte_1_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -249,7 +249,7 @@ typedef void (* nrf_drv_spi_evt_handler_t)(nrf_drv_spi_evt_t const * p_event,
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if PERIPHERAL_RESOURCE_SHARING_ENABLED
+ *                                  possible only if PRS_ENABLED
  *                                  is set to a value other than zero.
  */
 ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
@@ -371,6 +371,12 @@ uint32_t nrf_drv_spi_end_event_get(nrf_drv_spi_t const * p_instance);
  * @param[in]  p_instance Pointer to the driver instance structure.
  */
 void nrf_drv_spi_abort(nrf_drv_spi_t const * p_instance);
+
+
+void nrfx_spi_0_irq_handler(void);
+void nrfx_spi_1_irq_handler(void);
+void nrfx_spi_2_irq_handler(void);
+
 
 #ifdef __cplusplus
 }

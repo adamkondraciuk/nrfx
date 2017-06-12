@@ -371,6 +371,13 @@ __STATIC_INLINE uint32_t nrf_drv_timer_ms_to_ticks(
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
 
+void nrfx_timer_0_irq_handler(void);
+void nrfx_timer_1_irq_handler(void);
+void nrfx_timer_2_irq_handler(void);
+void nrfx_timer_3_irq_handler(void);
+void nrfx_timer_4_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

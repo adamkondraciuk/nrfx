@@ -137,6 +137,10 @@ void nrf_drv_qdec_event_address_get(nrf_qdec_event_t event, uint32_t * p_event);
    *@}
  **/
 
+
+void nrfx_qdec_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

@@ -64,7 +64,7 @@ static nrf_drv_saadc_cb_t m_cb;
                                             ? NRF_SAADC_LIMIT_LOW : NRF_SAADC_LIMIT_HIGH)
 #define HW_TIMEOUT 10000
 
-void SAADC_IRQHandler(void)
+void nrfx_saadc_irq_handler(void)
 {
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_END))
     {

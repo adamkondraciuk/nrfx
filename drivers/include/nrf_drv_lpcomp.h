@@ -106,6 +106,9 @@ void nrf_drv_lpcomp_disable(void);
  **/
 
 
+void nrfx_lpcomp_irq_handler(void);
+
+
 #ifdef __cplusplus
 }
 #endif

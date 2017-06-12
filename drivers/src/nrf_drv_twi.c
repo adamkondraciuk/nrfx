@@ -9,6 +9,7 @@
 #endif
 
 #include <nrf_drv_twi.h>
+#include "prs/nrfx_prs.h"
 #include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 #include <nrf_delay.h>
@@ -37,9 +38,6 @@
                                 (type == NRF_DRV_TWI_XFER_TXRX ? "XFER_TXRX" :                         \
                                 (type == NRF_DRV_TWI_XFER_TXTX ? "XFER_TXTX" : "UNKNOWN TRANSFER TYPE"))))
 
-
-#define TWI0_IRQ_HANDLER    SPI0_TWI0_IRQHandler
-#define TWI1_IRQ_HANDLER    SPI1_TWI1_IRQHandler
 
 #if (defined(TWIM_IN_USE) && defined(TWI_IN_USE))
     // TWIM and TWI combined
@@ -106,28 +104,6 @@ typedef struct
 } twi_control_block_t;
 
 static twi_control_block_t m_cb[NRFX_TWI_ENABLED_COUNT];
-
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    #define IRQ_HANDLER_NAME(n) irq_handler_for_instance_##n
-    #define IRQ_HANDLER(n)      static void IRQ_HANDLER_NAME(n)(void)
-
-    #if NRFX_CHECK(TWI0_ENABLED)
-        IRQ_HANDLER(0);
-    #endif
-    #if NRFX_CHECK(TWI1_ENABLED)
-        IRQ_HANDLER(1);
-    #endif
-    static nrf_drv_irq_handler_t const m_irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
-    #if NRFX_CHECK(TWI0_ENABLED)
-        IRQ_HANDLER_NAME(0),
-    #endif
-    #if NRFX_CHECK(TWI1_ENABLED)
-        IRQ_HANDLER_NAME(1),
-    #endif
-    };
-#else
-    #define IRQ_HANDLER(n) void SPI##n##_TWI##n##_IRQHandler(void)
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
 
 static ret_code_t twi_process_error(uint32_t errorsrc)
 {
@@ -206,9 +182,17 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
         return err_code;
     }
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    if (nrf_drv_common_per_res_acquire(p_instance->reg.p_twi,
-            m_irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
+#if NRFX_CHECK(PRS_ENABLED)
+    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
+        #if NRFX_CHECK(TWI0_ENABLED)
+        nrfx_twi_0_irq_handler,
+        #endif
+        #if NRFX_CHECK(TWI1_ENABLED)
+        nrfx_twi_1_irq_handler,
+        #endif
+    };
+    if (nrfx_prs_acquire(p_instance->reg.p_twi,
+            irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -216,7 +200,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif // NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
+#endif // NRFX_CHECK(PRS_ENABLED)
 
     p_cb->handler         = event_handler;
     p_cb->p_context       = p_context;
@@ -297,8 +281,8 @@ void nrf_drv_twi_uninit(nrf_drv_twi_t const * p_instance)
     }
     nrf_drv_twi_disable(p_instance);
 
-#if NRFX_CHECK(PERIPHERAL_RESOURCE_SHARING_ENABLED)
-    nrf_drv_common_per_res_release(p_instance->reg.p_twi);
+#if NRFX_CHECK(PRS_ENABLED)
+    nrfx_prs_release(p_instance->reg.p_twi);
 #endif
 
     if (!p_cb->hold_bus_uninit)
@@ -1189,7 +1173,7 @@ static void irq_handler_twi(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
 #endif // TWI_IN_USE
 
 #if NRFX_CHECK(TWI0_ENABLED)
-IRQ_HANDLER(0)
+void nrfx_twi_0_irq_handler(void)
 {
     #if (TWI0_USE_EASY_DMA == 1)
         irq_handler_twim(NRF_TWIM0,
@@ -1201,7 +1185,7 @@ IRQ_HANDLER(0)
 #endif // NRFX_CHECK(TWI0_ENABLED)
 
 #if NRFX_CHECK(TWI1_ENABLED)
-IRQ_HANDLER(1)
+void nrfx_twi_1_irq_handler(void)
 {
     #if (TWI1_USE_EASY_DMA == 1)
         irq_handler_twim(NRF_TWIM1,
