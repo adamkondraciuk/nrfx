@@ -221,7 +221,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
 
     // Enable IRQ.
     nrf_spis_int_enable(p_spis, NRF_SPIS_INT_ACQUIRED_MASK | NRF_SPIS_INT_END_MASK);
-    nrf_drv_common_irq_enable(p_instance->irq, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(p_instance->irq, p_config->irq_priority);
 
     p_cb->state = NRF_DRV_STATE_INITIALIZED;
 
@@ -245,7 +245,7 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
 
     #define DISABLE_ALL 0xFFFFFFFF
     nrf_spis_disable(p_spis);
-    nrf_drv_common_irq_disable(p_instance->irq);
+    NRFX_IRQ_DISABLE(p_instance->irq);
     nrf_spis_int_disable(p_spis, DISABLE_ALL);
     #undef  DISABLE_ALL
 

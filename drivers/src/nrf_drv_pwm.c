@@ -128,12 +128,12 @@ ret_code_t nrf_drv_pwm_init(nrf_drv_pwm_t const * const p_instance,
     // is read). Therefore, the PWM interrupt must be enabled even if the event
     // handler is not used.
 #if defined(USE_DMA_ISSUE_WORKAROUND)
-    nrf_drv_common_irq_enable(DMA_ISSUE_EGU_IRQn, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(DMA_ISSUE_EGU_IRQn, p_config->irq_priority);
 #else
     if (p_cb->handler)
 #endif
     {
-        nrf_drv_common_irq_enable(nrf_drv_get_IRQn(p_instance->p_registers),
+        NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_instance->p_registers),
             p_config->irq_priority);
     }
 
@@ -152,9 +152,9 @@ void nrf_drv_pwm_uninit(nrf_drv_pwm_t const * const p_instance)
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
 
-    nrf_drv_common_irq_disable(nrf_drv_get_IRQn(p_instance->p_registers));
+    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_instance->p_registers));
 #if defined(USE_DMA_ISSUE_WORKAROUND)
-    nrf_drv_common_irq_disable(DMA_ISSUE_EGU_IRQn);
+    NRFX_IRQ_DISABLE(DMA_ISSUE_EGU_IRQn);
 #endif
 
     nrf_pwm_disable(p_instance->p_registers);

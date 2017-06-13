@@ -176,7 +176,7 @@ static inline void nrf_drv_twis_swreset(NRF_TWIS_Type * const p_reg)
     nrf_twis_pins_set(p_reg, ~0U, ~0U);
 
     /* Disable interrupt global for the instance */
-    nrf_drv_common_irq_disable(nrf_drv_get_IRQn(p_reg));
+    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_reg));
 
     /* Disable interrupts */
     nrf_twis_int_disable(p_reg, ~0U);
@@ -589,7 +589,7 @@ ret_code_t nrf_drv_twis_init(
     /* Peripheral interrupt configure
      * (note - interrupts still needs to be configured in INTEN register.
      * This is done in enable function) */
-    nrf_drv_common_irq_enable(nrf_drv_get_IRQn(p_reg), p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_reg), p_config->interrupt_priority);
 
     /* Configure */
     nrf_twis_pins_set          (p_reg, p_config->scl, p_config->sda);

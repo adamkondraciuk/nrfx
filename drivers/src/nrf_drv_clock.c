@@ -20,9 +20,6 @@
                             (event == NRF_CLOCK_EVENT_CTTO ? "NRF_CLOCK_EVENT_CTTO" : "UNKNOWN EVENT"))))
 
 
-/* Validate configuration */
-INTERRUPT_PRIORITY_VALIDATION(CLOCK_CONFIG_IRQ_PRIORITY);
-
 /*lint -save -e652 */
 #define NRF_CLOCK_LFCLK_RC    CLOCK_LFCLKSRC_SRC_RC
 #define NRF_CLOCK_LFCLK_Xtal  CLOCK_LFCLKSRC_SRC_Xtal
@@ -537,7 +534,7 @@ void nrf_drv_clock_on_sd_disable(void)
 {
     /* Reinit interrupts */
     NRFX_ASSERT(m_clock_cb.module_initialized);
-    nrf_drv_common_irq_enable(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
 
     /* SD leaves LFCLK enabled - disable it if it is no longer required. */
     nrf_drv_clock_lfclk_release();

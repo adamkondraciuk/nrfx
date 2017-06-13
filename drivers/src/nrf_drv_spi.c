@@ -234,7 +234,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
 
     if (p_cb->handler)
     {
-        nrf_drv_common_irq_enable(p_instance->irq, p_config->irq_priority);
+        NRFX_IRQ_ENABLE(p_instance->irq, p_config->irq_priority);
     }
 
     p_cb->transfer_in_progress = false;
@@ -256,7 +256,7 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
 
     if (p_cb->handler)
     {
-        nrf_drv_common_irq_disable(p_instance->irq);
+        NRFX_IRQ_DISABLE(p_instance->irq);
     }
 
     #define DISABLE_ALL  0xFFFFFFFF

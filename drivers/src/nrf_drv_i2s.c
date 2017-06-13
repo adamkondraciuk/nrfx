@@ -132,7 +132,7 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
 
     m_cb.handler = handler;
 
-    nrf_drv_common_irq_enable(I2S_IRQn, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(I2S_IRQn, p_config->irq_priority);
 
     m_cb.state = NRF_DRV_STATE_INITIALIZED;
 
@@ -148,7 +148,7 @@ void nrf_drv_i2s_uninit(void)
 
     nrf_drv_i2s_stop();
 
-    nrf_drv_common_irq_disable(I2S_IRQn);
+    NRFX_IRQ_DISABLE(I2S_IRQn);
 
     m_cb.state = NRF_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Initialized.\r\n");

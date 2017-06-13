@@ -63,7 +63,7 @@ ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
         return err_code;
     }
 
-    nrf_drv_common_irq_enable(p_instance->irq, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(p_instance->irq, p_config->interrupt_priority);
     nrf_rtc_prescaler_set(p_instance->p_reg, p_config->prescaler);
     m_cb[p_instance->instance_id].reliable     = p_config->reliable;
     m_cb[p_instance->instance_id].tick_latency = p_config->tick_latency;
@@ -84,7 +84,7 @@ void nrf_drv_rtc_uninit(nrf_drv_rtc_t const * const p_instance)
                     NRF_RTC_INT_COMPARE3_MASK;
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
 
-    nrf_drv_common_irq_disable(p_instance->irq);
+    NRFX_IRQ_DISABLE(p_instance->irq);
 
     nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
     nrf_rtc_event_disable(p_instance->p_reg, mask);

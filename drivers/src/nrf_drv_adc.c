@@ -47,7 +47,7 @@ ret_code_t nrf_drv_adc_init(nrf_drv_adc_config_t const * p_config,
         {
             p_config = (nrf_drv_adc_config_t *)&m_default_config;
         }
-        nrf_drv_common_irq_enable(ADC_IRQn, p_config->interrupt_priority);
+        NRFX_IRQ_ENABLE(ADC_IRQn, p_config->interrupt_priority);
     }
     m_cb.event_handler = event_handler;
     m_cb.state = NRF_DRV_STATE_INITIALIZED;
@@ -61,7 +61,7 @@ ret_code_t nrf_drv_adc_init(nrf_drv_adc_config_t const * p_config,
 void nrf_drv_adc_uninit(void)
 {
     m_cb.p_head = NULL;
-    nrf_drv_common_irq_disable(ADC_IRQn);
+    NRFX_IRQ_DISABLE(ADC_IRQn);
     nrf_adc_int_disable(NRF_ADC_INT_END_MASK);
     nrf_adc_task_trigger(NRF_ADC_TASK_STOP);
 

@@ -12,9 +12,6 @@
 #include <nrfx_log.h>
 
 
-/* Validate configuration */
-INTERRUPT_PRIORITY_VALIDATION(GPIOTE_CONFIG_IRQ_PRIORITY);
-
 #define FORBIDDEN_HANDLER_ADDRESS ((nrf_drv_gpiote_evt_handler_t)UINT32_MAX)
 #define PIN_NOT_USED              (-1)
 #define PIN_USED                  (-2)
@@ -200,7 +197,7 @@ ret_code_t nrf_drv_gpiote_init(void)
         channel_free(i);
     }
 
-    nrf_drv_common_irq_enable(GPIOTE_IRQn, GPIOTE_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(GPIOTE_IRQn, GPIOTE_CONFIG_IRQ_PRIORITY);
     nrf_gpiote_event_clear(NRF_GPIOTE_EVENTS_PORT);
     nrf_gpiote_int_enable(GPIOTE_INTENSET_PORT_Msk);
     m_cb.state = NRF_DRV_STATE_INITIALIZED;

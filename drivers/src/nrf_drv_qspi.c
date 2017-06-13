@@ -104,7 +104,7 @@ ret_code_t nrf_drv_qspi_init(nrf_drv_qspi_config_t const * p_config,
 
     if (handler)
     {
-        nrf_drv_common_irq_enable(QSPI_IRQn, p_config->irq_priority);
+        NRFX_IRQ_ENABLE(QSPI_IRQn, p_config->irq_priority);
     }
 
     m_cb.state = NRF_DRV_STATE_INITIALIZED;
@@ -194,7 +194,7 @@ void nrf_drv_qspi_uninit(void)
 
     nrf_qspi_disable(NRF_QSPI);
 
-    nrf_drv_common_irq_disable(QSPI_IRQn);
+    NRFX_IRQ_DISABLE(QSPI_IRQn);
 
     nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
 

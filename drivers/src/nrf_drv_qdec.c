@@ -119,7 +119,7 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     }
 
     nrf_qdec_int_enable(int_mask);
-    nrf_drv_common_irq_enable(QDEC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(QDEC_IRQn, p_config->interrupt_priority);
 
     m_state = NRF_DRV_STATE_INITIALIZED;
 
@@ -132,7 +132,7 @@ void nrf_drv_qdec_uninit(void)
 {
     NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
     nrf_drv_qdec_disable();
-    nrf_drv_common_irq_disable(QDEC_IRQn);
+    NRFX_IRQ_DISABLE(QDEC_IRQn);
     m_state = NRF_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.\r\n");
 }

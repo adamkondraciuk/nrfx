@@ -276,7 +276,7 @@ void nrf_drv_swi_uninit(void)
     for (uint32_t i = SWI_START_NUMBER; i < SWI_COUNT; ++i)
     {
         m_swi_handlers[i - SWI_START_NUMBER] = NULL;
-        nrf_drv_common_irq_disable(nrf_drv_swi_irq_of((nrf_swi_t) i));
+        NRFX_IRQ_DISABLE(nrf_drv_swi_irq_of((nrf_swi_t) i));
 #if NRFX_CHECK(EGU_ENABLED)
         NRF_EGU_Type * NRF_EGUx = egu_instance_get(i);
         nrf_egu_int_disable(NRF_EGUx, NRF_EGU_INT_ALL);
@@ -290,7 +290,7 @@ void nrf_drv_swi_uninit(void)
 void nrf_drv_swi_free(nrf_swi_t * p_swi)
 {
     NRFX_ASSERT(swi_is_allocated(*p_swi));
-    nrf_drv_common_irq_disable(nrf_drv_swi_irq_of(*p_swi));
+    NRFX_IRQ_DISABLE(nrf_drv_swi_irq_of(*p_swi));
     m_swi_handlers[(*p_swi) - SWI_START_NUMBER] = NULL;
     *p_swi = NRF_SWI_UNALLOCATED;
 }
@@ -310,7 +310,7 @@ ret_code_t nrf_drv_swi_alloc(nrf_swi_t * p_swi, nrf_swi_handler_t event_handler,
         {
             m_swi_handlers[i - SWI_START_NUMBER] = event_handler;
             *p_swi = (nrf_swi_t) i;
-            nrf_drv_common_irq_enable(nrf_drv_swi_irq_of(*p_swi), priority);
+            NRFX_IRQ_ENABLE(nrf_drv_swi_irq_of(*p_swi), priority);
 #if NRFX_CHECK(EGU_ENABLED)
             if(event_handler != NULL)
             {

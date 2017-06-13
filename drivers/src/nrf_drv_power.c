@@ -12,9 +12,6 @@
 #include "nrf_soc.h"
 #endif
 
-/* Validate configuration */
-INTERRUPT_PRIORITY_VALIDATION(POWER_CONFIG_IRQ_PRIORITY);
-
 /**
  * @internal
  * @defgroup nrf_drv_power_internals POWER driver internals
@@ -387,7 +384,7 @@ void nrf_drv_power_on_sd_disable(void)
 {
     /* Reinit interrupts */
     NRFX_ASSERT(m_initialized);
-    nrf_drv_common_irq_enable(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
     if (m_pofwarn_handler != NULL)
     {
         nrf_power_int_enable(NRF_POWER_INT_POFWARN_MASK);

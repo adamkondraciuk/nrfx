@@ -107,7 +107,7 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 
     nrf_comp_input_select(p_config->input);
 
-    nrf_drv_common_irq_enable(COMP_LPCOMP_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(COMP_LPCOMP_IRQn, p_config->interrupt_priority);
 
     m_state = NRF_DRV_STATE_INITIALIZED;
 
@@ -120,7 +120,7 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 void nrf_drv_comp_uninit(void)
 {
     NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
-    nrf_drv_common_irq_disable(COMP_LPCOMP_IRQn);
+    NRFX_IRQ_DISABLE(COMP_LPCOMP_IRQn);
     nrf_comp_disable();
 #if NRFX_CHECK(PRS_ENABLED)
     nrfx_prs_release(NRF_COMP);

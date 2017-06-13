@@ -73,7 +73,7 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
             nrf_timer_compare_event_get(i));
     }
 
-    nrf_drv_common_irq_enable(nrf_drv_get_IRQn(p_instance->p_reg),
+    NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_instance->p_reg),
         p_config->interrupt_priority);
 
     nrf_timer_mode_set(p_instance->p_reg, p_config->mode);
@@ -89,7 +89,7 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
 
 void nrf_drv_timer_uninit(nrf_drv_timer_t const * const p_instance)
 {
-    nrf_drv_common_irq_disable(nrf_drv_get_IRQn(p_instance->p_reg));
+    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_instance->p_reg));
 
     #define DISABLE_ALL UINT32_MAX
     nrf_timer_shorts_disable(p_instance->p_reg, DISABLE_ALL);

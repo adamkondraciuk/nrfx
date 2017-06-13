@@ -19,7 +19,7 @@ void nrf_drv_common_power_irq_disable(void)
     if(!nrf_drv_clock_init_check())
 #endif
     {
-        nrf_drv_common_irq_disable(POWER_CLOCK_IRQn);
+        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
     }
 }
 #endif // NRFX_CHECK(POWER_ENABLED)
@@ -31,7 +31,7 @@ void nrf_drv_common_clock_irq_disable(void)
     if(!nrf_drv_power_init_check())
 #endif
     {
-        nrf_drv_common_irq_disable(POWER_CLOCK_IRQn);
+        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
     }
 }
 #endif // NRFX_CHECK(CLOCK_ENABLED)
@@ -46,13 +46,3 @@ void POWER_CLOCK_IRQHandler(void)
     nrf_drv_power_onIRQ();
 }
 #endif // NRF_DRV_COMMON_POWER_CLOCK_ISR
-
-
-void nrf_drv_common_irq_enable(IRQn_Type IRQn, uint8_t priority)
-{
-    NRFX_IRQ_PRIORITY_CHECK(priority);
-
-    NVIC_SetPriority(IRQn, priority);
-    NVIC_ClearPendingIRQ(IRQn);
-    NVIC_EnableIRQ(IRQn);
-}

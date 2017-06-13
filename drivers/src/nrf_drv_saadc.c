@@ -211,7 +211,7 @@ ret_code_t nrf_drv_saadc_init(nrf_drv_saadc_config_t const * p_config,
     nrf_saadc_int_disable(NRF_SAADC_INT_ALL);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
-    nrf_drv_common_irq_enable(SAADC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(SAADC_IRQn, p_config->interrupt_priority);
     nrf_saadc_int_enable(NRF_SAADC_INT_END);
 
     if (m_cb.low_power_mode)
@@ -233,7 +233,7 @@ void nrf_drv_saadc_uninit(void)
     NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
 
     nrf_saadc_int_disable(NRF_SAADC_INT_ALL);
-    nrf_drv_common_irq_disable(SAADC_IRQn);
+    NRFX_IRQ_DISABLE(SAADC_IRQn);
     nrf_saadc_task_trigger(NRF_SAADC_TASK_STOP);
 
     // Wait for ADC being stopped.

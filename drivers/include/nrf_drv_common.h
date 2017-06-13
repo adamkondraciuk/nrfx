@@ -60,16 +60,6 @@ typedef enum
 typedef void (*nrf_drv_irq_handler_t)(void);
 
 
-/**
- * @brief Function sets priority and enables NVIC interrupt
- *
- * @note Function checks if correct priority is used when softdevice is present
- *
- * @param[in] IRQn     Interrupt id
- * @param[in] priority Interrupt priority
- */
-void nrf_drv_common_irq_enable(IRQn_Type IRQn, uint8_t priority);
-
 #if NRFX_CHECK(POWER_ENABLED)
 /**
  * @brief Disable power IRQ
@@ -107,13 +97,6 @@ void nrf_drv_common_clock_irq_disable(void);
  * @retval false Selected IRQ is disabled.
  */
 __STATIC_INLINE bool nrf_drv_common_irq_enable_check(IRQn_Type IRQn);
-
-/**
- * @brief Function disables NVIC interrupt
- *
- * @param[in] IRQn     Interrupt id
- */
-__STATIC_INLINE void nrf_drv_common_irq_disable(IRQn_Type IRQn);
 
 /**
  * @brief Convert bit position to event code
@@ -197,11 +180,6 @@ __STATIC_INLINE bool nrf_drv_common_irq_enable_check(IRQn_Type IRQn)
         (uint32_t)(1UL << (((uint32_t)(int32_t)IRQn) & 0x1FUL)));
 }
 
-__STATIC_INLINE void nrf_drv_common_irq_disable(IRQn_Type IRQn)
-{
-    NVIC_DisableIRQ(IRQn);
-}
-
 __STATIC_INLINE uint32_t nrf_drv_bitpos_to_event(uint32_t bit)
 {
     return NRF_DRV_COMMON_EVREGS_OFFSET + bit * sizeof(uint32_t);
@@ -223,7 +201,7 @@ __STATIC_INLINE void nrf_drv_common_power_clock_irq_init(void)
 {
     if(!nrf_drv_common_irq_enable_check(POWER_CLOCK_IRQn))
     {
-        nrf_drv_common_irq_enable(
+        NRFX_IRQ_ENABLE(
             POWER_CLOCK_IRQn,
 #if NRF_DRV_COMMON_POWER_CLOCK_ISR
     #if CLOCK_CONFIG_IRQ_PRIORITY != POWER_CONFIG_IRQ_PRIORITY

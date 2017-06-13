@@ -244,12 +244,12 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
     {
         CODE_FOR_TWIM
         (
-            nrf_drv_common_irq_enable(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim),
+            NRFX_IRQ_ENABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim),
                 p_config->interrupt_priority);
         )
         CODE_FOR_TWI
         (
-            nrf_drv_common_irq_enable(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi),
+            NRFX_IRQ_ENABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi),
                 p_config->interrupt_priority);
         )
     }
@@ -272,11 +272,11 @@ void nrf_drv_twi_uninit(nrf_drv_twi_t const * p_instance)
     {
         CODE_FOR_TWIM
         (
-            nrf_drv_common_irq_disable(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim));
+            NRFX_IRQ_DISABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim));
         )
         CODE_FOR_TWI
         (
-            nrf_drv_common_irq_disable(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi));
+            NRFX_IRQ_DISABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi));
         )
     }
     nrf_drv_twi_disable(p_instance);
