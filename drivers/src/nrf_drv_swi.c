@@ -2,7 +2,6 @@
 #include <nrfx.h>
 
 #include <nrf_drv_swi.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME SWI
 #include <nrfx_log.h>
@@ -92,7 +91,7 @@ NRFX_STATIC_ASSERT(SWI_COUNT <= SWI_MAX);
   #define SWI_ARRAY_SIZE 1
 #endif
 
-static nrf_drv_state_t   m_drv_state = NRF_DRV_STATE_UNINITIALIZED;
+static nrfx_drv_state_t  m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
 static nrf_swi_handler_t m_swi_handlers[SWI_ARRAY_SIZE];
 
 #if !NRFX_CHECK(EGU_ENABLED)
@@ -256,9 +255,9 @@ ret_code_t nrf_drv_swi_init(void)
 {
     ret_code_t err_code;
 
-    if (m_drv_state == NRF_DRV_STATE_UNINITIALIZED)
+    if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
-        m_drv_state = NRF_DRV_STATE_INITIALIZED;
+        m_drv_state = NRFX_DRV_STATE_INITIALIZED;
         err_code = NRFX_SUCCESS;
         NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -271,7 +270,7 @@ ret_code_t nrf_drv_swi_init(void)
 
 void nrf_drv_swi_uninit(void)
 {
-    NRFX_ASSERT(m_drv_state != NRF_DRV_STATE_UNINITIALIZED)
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED)
 
     for (uint32_t i = SWI_START_NUMBER; i < SWI_COUNT; ++i)
     {
@@ -282,7 +281,7 @@ void nrf_drv_swi_uninit(void)
         nrf_egu_int_disable(NRF_EGUx, NRF_EGU_INT_ALL);
 #endif
     }
-    m_drv_state = NRF_DRV_STATE_UNINITIALIZED;
+    m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
     return;
 }
 

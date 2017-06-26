@@ -5,7 +5,8 @@
 #if NRFX_CHECK(POWER_ENABLED)
 
 #include <nrf_drv_power.h>
-#include <nrf_drv_common.h>
+#include <nrf_drv_clock.h>
+#include <nrfx_power_clock.h>
 #ifdef SOFTDEVICE_PRESENT
 #include "softdevice_handler.h"
 #include "nrf_sdm.h"
@@ -88,7 +89,7 @@ ret_code_t nrf_drv_power_init(nrf_drv_power_config_t const * p_config)
 #endif
     nrf_power_dcdcen_set(p_used_config->dcdcen);
 
-    nrf_drv_common_power_clock_irq_init();
+    nrfx_power_clock_irq_init();
 
     m_initialized = true;
     return NRFX_SUCCESS;
@@ -97,6 +98,14 @@ ret_code_t nrf_drv_power_init(nrf_drv_power_config_t const * p_config)
 void nrf_drv_power_uninit(void)
 {
     NRFX_ASSERT(m_initialized);
+
+#if NRFX_CHECK(CLOCK_ENABLED)
+    if (!nrf_drv_clock_init_check())
+#endif
+    {
+        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
+    }
+
     nrf_drv_power_pof_uninit();
 #if NRF_POWER_HAS_SLEEPEVT
     nrf_drv_power_sleepevt_uninit();
@@ -296,17 +305,7 @@ void nrf_drv_power_usbevt_uninit(void)
 #endif /* NRF_POWER_HAS_USBREG */
 
 
-/**
- * @ingroup nrf_drv_power_internals
- * @brief Interrupt handler
- *
- * POWER peripheral interrupt handler
- */
-#if NRF_DRV_COMMON_POWER_CLOCK_ISR
-void nrf_drv_power_onIRQ(void)
-#else
-void POWER_CLOCK_IRQHandler(void)
-#endif
+void nrfx_power_irq_handler(void)
 {
     uint32_t enabled = nrf_power_int_enable_get();
     if ((0 != (enabled & NRF_POWER_INT_POFWARN_MASK)) &&

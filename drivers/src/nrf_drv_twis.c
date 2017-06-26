@@ -9,7 +9,6 @@
 
 #include <nrf_drv_twis.h>
 #include "prs/nrfx_prs.h"
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME TWIS
 #include <nrfx_log.h>
@@ -63,7 +62,7 @@ typedef struct
  */
 typedef struct
 {
-    nrf_drv_state_t                  state;      ///< Actual driver state
+    nrfx_drv_state_t                 state;      ///< Actual driver state
     volatile nrf_drv_twis_substate_t substate;   ///< Actual driver substate
     nrf_drv_twis_event_handler_t     ev_handler; ///< Event handler functiomn
     volatile uint32_t                error;      ///< Internal error flags
@@ -88,7 +87,7 @@ static const nrf_drv_twis_const_inst_t m_const_inst[NRFX_TWIS_ENABLED_COUNT] =
 /** The variable instance part implementation */
 static nrf_drv_twis_var_inst_t m_var_inst[NRFX_TWIS_ENABLED_COUNT] =
 {
-    #define X(n) { .state      = NRF_DRV_STATE_UNINITIALIZED, \
+    #define X(n) { .state      = NRFX_DRV_STATE_UNINITIALIZED, \
                    .substate   = NRF_DRV_TWIS_SUBSTATE_IDLE, \
                    .ev_handler = NULL, \
                    .error      = 0 },
@@ -176,7 +175,7 @@ static inline void nrf_drv_twis_swreset(NRF_TWIS_Type * const p_reg)
     nrf_twis_pins_set(p_reg, ~0U, ~0U);
 
     /* Disable interrupt global for the instance */
-    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_reg));
+    NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_reg));
 
     /* Disable interrupts */
     nrf_twis_int_disable(p_reg, ~0U);
@@ -228,14 +227,14 @@ static void nrf_drv_call_event_handler(uint8_t instNr, nrf_drv_twis_evt_t const 
  * @param[in,out] p_reg TWIS to read  event from
  * @param ev  Event code
  *
- * @return Selected event state shifted by @ref nrf_drv_event_to_bitpos
+ * @return Selected event state shifted by @ref nrfx_event_to_bitpos
  *
  * @sa nrf_twis_event_get
- * @sa nrf_drv_event_to_bitpos
+ * @sa nrfx_event_to_bitpos
  */
 static inline uint32_t nrf_drv_twis_event_bit_get(NRF_TWIS_Type * const p_reg, nrf_twis_event_t ev)
 {
-    return (uint32_t)nrf_twis_event_get_and_clear(p_reg, ev) << nrf_drv_event_to_bitpos(ev);
+    return (uint32_t)nrf_twis_event_get_and_clear(p_reg, ev) << nrfx_event_to_bitpos(ev);
 }
 
 /**
@@ -252,7 +251,7 @@ static inline uint32_t nrf_drv_twis_event_bit_get(NRF_TWIS_Type * const p_reg, n
  */
 static inline bool nrf_drv_twis_check_bit(uint32_t flags, nrf_twis_event_t ev)
 {
-    return 0 != (flags & (1U<<nrf_drv_event_to_bitpos(ev)));
+    return 0 != (flags & (1U<<nrfx_event_to_bitpos(ev)));
 }
 
 /**
@@ -267,7 +266,7 @@ static inline bool nrf_drv_twis_check_bit(uint32_t flags, nrf_twis_event_t ev)
  */
 static inline uint32_t nrf_drv_twis_clear_bit(uint32_t flags, nrf_twis_event_t ev)
 {
-    return flags & ~(1U<<nrf_drv_event_to_bitpos(ev));
+    return flags & ~(1U<<nrfx_event_to_bitpos(ev));
 }
 
 /**
@@ -537,7 +536,7 @@ ret_code_t nrf_drv_twis_init(
     nrf_twis_config_addr_mask_t addr_mask = (nrf_twis_config_addr_mask_t)0;
     ret_code_t err_code;
 
-    if ( m_var_inst[instNr].state != NRF_DRV_STATE_UNINITIALIZED)
+    if ( m_var_inst[instNr].state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -545,7 +544,7 @@ ret_code_t nrf_drv_twis_init(
     }
 
 #if NRFX_CHECK(PRS_ENABLED)
-    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
+    static nrfx_irq_handler_t const irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
         #if NRFX_CHECK(TWIS0_ENABLED)
         nrfx_twis_0_irq_handler,
         #endif
@@ -589,7 +588,7 @@ ret_code_t nrf_drv_twis_init(
     /* Peripheral interrupt configure
      * (note - interrupts still needs to be configured in INTEN register.
      * This is done in enable function) */
-    NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_reg), p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg), p_config->interrupt_priority);
 
     /* Configure */
     nrf_twis_pins_set          (p_reg, p_config->scl, p_config->sda);
@@ -605,7 +604,7 @@ ret_code_t nrf_drv_twis_init(
     /* Set internal instance variables */
     m_var_inst[instNr].substate   = NRF_DRV_TWIS_SUBSTATE_IDLE;
     m_var_inst[instNr].ev_handler = event_handler;
-    m_var_inst[instNr].state      = NRF_DRV_STATE_INITIALIZED;
+    m_var_inst[instNr].state      = NRFX_DRV_STATE_INITIALIZED;
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -618,7 +617,7 @@ void nrf_drv_twis_uninit(nrf_drv_twis_t const * const p_instance)
     NRF_TWIS_Type * const p_reg = m_const_inst[instNr].p_reg;
     TWIS_PSEL_Type psel = p_reg->PSEL;
 
-    NRFX_ASSERT(m_var_inst[instNr].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_var_inst[instNr].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_drv_twis_swreset(p_reg);
 
@@ -638,7 +637,7 @@ void nrf_drv_twis_uninit(nrf_drv_twis_t const * const p_instance)
 
     /* Clear variables */
     m_var_inst[instNr].ev_handler = NULL;
-    m_var_inst[instNr].state      = NRF_DRV_STATE_UNINITIALIZED;
+    m_var_inst[instNr].state      = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 
@@ -648,7 +647,7 @@ void nrf_drv_twis_enable(nrf_drv_twis_t const * const p_instance)
     NRF_TWIS_Type * const p_reg = m_const_inst[instNr].p_reg;
     nrf_drv_twis_var_inst_t * const p_var_inst = &m_var_inst[instNr];
 
-    NRFX_ASSERT(m_var_inst[instNr].state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_var_inst[instNr].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrf_drv_twis_clear_all_events(p_reg);
 
@@ -660,7 +659,7 @@ void nrf_drv_twis_enable(nrf_drv_twis_t const * const p_instance)
 
     nrf_twis_enable(p_reg);
     p_var_inst->error    = 0;
-    p_var_inst->state    = NRF_DRV_STATE_POWERED_ON;
+    p_var_inst->state    = NRFX_DRV_STATE_POWERED_ON;
     p_var_inst->substate = NRF_DRV_TWIS_SUBSTATE_IDLE;
 }
 
@@ -670,12 +669,12 @@ void nrf_drv_twis_disable(nrf_drv_twis_t const * const p_instance)
     uint8_t instNr = p_instance->instNr;
     NRF_TWIS_Type * const p_reg = m_const_inst[instNr].p_reg;
 
-    NRFX_ASSERT(m_var_inst[instNr].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_var_inst[instNr].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_twis_int_disable(p_reg, m_used_ints_mask);
 
     nrf_twis_disable(p_reg);
-    m_var_inst[instNr].state    = NRF_DRV_STATE_INITIALIZED;
+    m_var_inst[instNr].state    = NRFX_DRV_STATE_INITIALIZED;
 }
 
 /* ARM recommends not using the LDREX and STREX instructions in C code.
@@ -696,7 +695,7 @@ nrf_drv_twis_error_get_and_clear_internal_try
     ldrex r0, [r3]
     strex r2, r1, [r3]
     cmp   r2, r1                                        /* did this succeed?       */
-    bne   nrf_drv_twis_error_get_and_clear_internal_try /* no â€“ try again          */
+    bne   nrf_drv_twis_error_get_and_clear_internal_try /* no – try again          */
     bx    lr
 }
 #elif defined ( __GNUC__ )
@@ -768,14 +767,14 @@ ret_code_t nrf_drv_twis_tx_prepare(
     nrf_drv_twis_var_inst_t * const p_var_inst = &m_var_inst[instNr];
 
     /* Check power state*/
-    if (p_var_inst->state != NRF_DRV_STATE_POWERED_ON)
+    if (p_var_inst->state != NRFX_DRV_STATE_POWERED_ON)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data address */
-    if (!nrf_drv_is_in_RAM(p_buf))
+    if (!nrfx_is_in_ram(p_buf))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -816,14 +815,14 @@ ret_code_t nrf_drv_twis_rx_prepare(
     nrf_drv_twis_var_inst_t * const p_var_inst = &m_var_inst[instNr];
 
     /* Check power state*/
-    if (p_var_inst->state != NRF_DRV_STATE_POWERED_ON)
+    if (p_var_inst->state != NRFX_DRV_STATE_POWERED_ON)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data address */
-    if (!nrf_drv_is_in_RAM(p_buf))
+    if (!nrfx_is_in_ram(p_buf))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));

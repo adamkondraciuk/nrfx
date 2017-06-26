@@ -5,13 +5,12 @@
 #if NRFX_CHECK(PPI_ENABLED)
 
 #include <nrf_drv_ppi.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME PPI
 #include <nrfx_log.h>
 
 
-static nrf_drv_state_t     m_drv_state;            /**< Driver state */
+static nrfx_drv_state_t    m_drv_state;            /**< Driver state */
 static uint32_t            m_channels_allocated;   /**< Bitmap representing channels availability. 1 when a channel is allocated, 0 otherwise. */
 static uint8_t             m_groups_allocated;     /**< Bitmap representing groups availability. 1 when a group is allocated, 0 otherwise.*/
 
@@ -150,9 +149,9 @@ uint32_t nrf_drv_ppi_init(void)
 {
     uint32_t err_code;
 
-    if (m_drv_state == NRF_DRV_STATE_UNINITIALIZED)
+    if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
-        m_drv_state = NRF_DRV_STATE_INITIALIZED;
+        m_drv_state = NRFX_DRV_STATE_INITIALIZED;
         err_code    = NRFX_SUCCESS;
     }
     else
@@ -172,14 +171,14 @@ uint32_t nrf_drv_ppi_uninit(void)
     uint32_t mask = NRF_PPI_ALL_APP_GROUPS_MASK;
     nrf_ppi_channel_group_t group;
 
-    if (m_drv_state == NRF_DRV_STATE_UNINITIALIZED)
+    if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
-    m_drv_state = NRF_DRV_STATE_UNINITIALIZED;
+    m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
 
     // Disable all channels and groups
     nrf_ppi_channels_disable(NRF_PPI_ALL_APP_CHANNELS_MASK);

@@ -11,7 +11,6 @@
 
 #include <nrf_drv_spis.h>
 #include "prs/nrfx_prs.h"
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME SPIS
 #include <nrfx_log.h>
@@ -60,7 +59,7 @@ typedef struct
     nrf_drv_spis_event_handler_t  handler;         //!< SPI event handler.
     volatile const uint8_t *      tx_buffer;       //!< SPI slave TX buffer.
     volatile uint8_t *            rx_buffer;       //!< SPI slave RX buffer.
-    nrf_drv_state_t               state;           //!< driver initialization state.
+    nrfx_drv_state_t              state;           //!< driver initialization state.
     volatile nrf_drv_spis_state_t spi_state;       //!< SPI slave state.
 } spis_cb_t;
 
@@ -76,7 +75,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
 
     NRF_SPIS_Type * p_spis = p_instance->p_reg;
 
-    if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
+    if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -102,7 +101,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
         return err_code;
     }
 #if NRFX_CHECK(PRS_ENABLED)
-    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
+    static nrfx_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
         #if NRFX_CHECK(SPIS0_ENABLED)
         nrfx_spis_0_irq_handler,
         #endif
@@ -223,7 +222,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
     nrf_spis_int_enable(p_spis, NRF_SPIS_INT_ACQUIRED_MASK | NRF_SPIS_INT_END_MASK);
     NRFX_IRQ_ENABLE(p_instance->irq, p_config->irq_priority);
 
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     // Enable SPI slave device.
     nrf_spis_enable(p_spis);
@@ -239,7 +238,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
 void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->instance_id];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     NRF_SPIS_Type * p_spis = p_instance->p_reg;
 
@@ -253,7 +252,7 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
     nrfx_prs_release(p_spis);
 #endif
 
-    p_cb->state = NRF_DRV_STATE_UNINITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Initialized.\r\n");
 }
 
@@ -328,8 +327,8 @@ ret_code_t nrf_drv_spis_buffers_set(nrf_drv_spis_t const * const  p_instance,
 
     // EasyDMA requires that transfer buffers are placed in Data RAM region;
     // signal error if they are not.
-    if ((p_tx_buffer != NULL && !nrf_drv_is_in_RAM(p_tx_buffer)) ||
-        (p_rx_buffer != NULL && !nrf_drv_is_in_RAM(p_rx_buffer)))
+    if ((p_tx_buffer != NULL && !nrfx_is_in_ram(p_tx_buffer)) ||
+        (p_rx_buffer != NULL && !nrfx_is_in_ram(p_rx_buffer)))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",

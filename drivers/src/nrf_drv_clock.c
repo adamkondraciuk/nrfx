@@ -3,8 +3,10 @@
 #include <nrfx.h>
 
 #if NRFX_CHECK(CLOCK_ENABLED)
+
 #include <nrf_drv_clock.h>
-#include <nrf_drv_common.h>
+#include <nrf_drv_power.h>
+#include <nrfx_power_clock.h>
 #ifdef SOFTDEVICE_PRESENT
 #include "softdevice_handler.h"
 #include "nrf_sdm.h"
@@ -139,7 +141,7 @@ ret_code_t nrf_drv_clock_init(void)
         m_clock_cb.hfclk_requests = 0;
         m_clock_cb.p_lf_head      = NULL;
         m_clock_cb.lfclk_requests = 0;
-        nrf_drv_common_power_clock_irq_init();
+        nrfx_power_clock_irq_init();
 #ifdef SOFTDEVICE_PRESENT
         if (!softdevice_handler_is_enabled())
 #endif
@@ -162,7 +164,12 @@ ret_code_t nrf_drv_clock_init(void)
 void nrf_drv_clock_uninit(void)
 {
     NRFX_ASSERT(m_clock_cb.module_initialized);
-    nrf_drv_common_clock_irq_disable();
+#if NRFX_CHECK(POWER_ENABLED)
+    if(!nrf_drv_power_init_check())
+#endif
+    {
+        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
+    }
     nrf_clock_int_disable(0xFFFFFFFF);
 
     lfclk_stop();
@@ -458,11 +465,7 @@ __STATIC_INLINE void clock_clk_started_notify(nrf_drv_clock_evt_type_t evt_type)
     }
 }
 
-#if NRF_DRV_COMMON_POWER_CLOCK_ISR
-void nrf_drv_clock_onIRQ(void)
-#else
-void POWER_CLOCK_IRQHandler(void)
-#endif
+void nrfx_clock_irq_handler(void)
 {
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_HFCLKSTARTED))
     {

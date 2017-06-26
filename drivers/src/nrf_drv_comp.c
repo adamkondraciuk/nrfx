@@ -5,7 +5,6 @@
 
 #include <nrf_drv_comp.h>
 #include "prs/nrfx_prs.h"
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE COMP
 #include <nrfx_log.h>
@@ -17,7 +16,7 @@
 
 
 static comp_events_handler_t     m_comp_events_handler = NULL;
-static nrf_drv_state_t           m_state = NRF_DRV_STATE_UNINITIALIZED;
+static nrfx_drv_state_t          m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
 static const nrf_drv_comp_config_t m_default_config = NRF_DRV_COMP_DEFAULT_CONFIG(NRF_COMP_INPUT_0);
 
@@ -46,7 +45,7 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 {
     ret_code_t err_code;
 
-    if (m_state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     { // COMP driver is already initialized
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -109,7 +108,7 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 
     NRFX_IRQ_ENABLE(COMP_LPCOMP_IRQn, p_config->interrupt_priority);
 
-    m_state = NRF_DRV_STATE_INITIALIZED;
+    m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -119,13 +118,13 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
 
 void nrf_drv_comp_uninit(void)
 {
-    NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_IRQ_DISABLE(COMP_LPCOMP_IRQn);
     nrf_comp_disable();
 #if NRFX_CHECK(PRS_ENABLED)
     nrfx_prs_release(NRF_COMP);
 #endif
-    m_state = NRF_DRV_STATE_UNINITIALIZED;
+    m_state = NRFX_DRV_STATE_UNINITIALIZED;
     m_comp_events_handler = NULL;
     NRFX_LOG_INFO("Uninitialized.\r\n");
 }
@@ -134,9 +133,9 @@ void nrf_drv_comp_pin_select(nrf_comp_input_t psel)
 {
     bool comp_enable_state = nrf_comp_enable_check();
     nrf_comp_task_trigger(NRF_COMP_TASK_STOP);
-    if (m_state == NRF_DRV_STATE_POWERED_ON)
+    if (m_state == NRFX_DRV_STATE_POWERED_ON)
     {
-        m_state = NRF_DRV_STATE_INITIALIZED;
+        m_state = NRFX_DRV_STATE_INITIALIZED;
     }
     nrf_comp_disable();
     nrf_comp_input_select(psel);
@@ -148,27 +147,27 @@ void nrf_drv_comp_pin_select(nrf_comp_input_t psel)
 
 void nrf_drv_comp_start(uint32_t comp_int_mask, uint32_t comp_shorts_mask)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
     nrf_comp_int_enable(comp_int_mask);
     nrf_comp_shorts_enable(comp_shorts_mask);
     nrf_comp_task_trigger(NRF_COMP_TASK_START);
-    m_state = NRF_DRV_STATE_POWERED_ON;
+    m_state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.\r\n");
 }
 
 void nrf_drv_comp_stop(void)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     nrf_comp_shorts_disable(UINT32_MAX);
     nrf_comp_int_disable(UINT32_MAX);
     nrf_comp_task_trigger(NRF_COMP_TASK_STOP);
-    m_state = NRF_DRV_STATE_INITIALIZED;
+    m_state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled.\r\n");
 }
 
 uint32_t nrf_drv_comp_sample()
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     nrf_comp_task_trigger(NRF_COMP_TASK_SAMPLE);
     return nrf_comp_result_get();
 }

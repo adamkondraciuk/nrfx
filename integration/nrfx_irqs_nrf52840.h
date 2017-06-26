@@ -23,6 +23,7 @@ extern "C" {
 
 
 // POWER_CLOCK_IRQn
+#define nrfx_power_clock_irq_handler    POWER_CLOCK_IRQHandler
 
 // RADIO_IRQn
 

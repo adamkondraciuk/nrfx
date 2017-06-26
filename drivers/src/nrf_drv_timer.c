@@ -11,7 +11,6 @@
 #endif
 
 #include <nrf_drv_timer.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME TIMER
 #include <nrfx_log.h>
@@ -21,7 +20,7 @@ typedef struct
 {
     nrf_timer_event_handler_t handler;
     void *                    context;
-    nrf_drv_state_t           state;
+    nrfx_drv_state_t          state;
 } timer_control_block_t;
 
 static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
@@ -38,7 +37,7 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
 
     ret_code_t err_code;
 
-    if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
+    if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -73,14 +72,14 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
             nrf_timer_compare_event_get(i));
     }
 
-    NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_instance->p_reg),
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_reg),
         p_config->interrupt_priority);
 
     nrf_timer_mode_set(p_instance->p_reg, p_config->mode);
     nrf_timer_bit_width_set(p_instance->p_reg, p_config->bit_width);
     nrf_timer_frequency_set(p_instance->p_reg, p_config->frequency);
 
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -89,61 +88,61 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
 
 void nrf_drv_timer_uninit(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_instance->p_reg));
+    NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_instance->p_reg));
 
     #define DISABLE_ALL UINT32_MAX
     nrf_timer_shorts_disable(p_instance->p_reg, DISABLE_ALL);
     nrf_timer_int_disable(p_instance->p_reg, DISABLE_ALL);
     #undef DISABLE_ALL
 
-    if (m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON)
+    if (m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON)
     {
         nrf_drv_timer_disable(p_instance);
     }
 
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_UNINITIALIZED;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized instance: %d.\r\n", p_instance->instance_id);
 }
 
 void nrf_drv_timer_enable(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_START);
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_POWERED_ON;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled instance: %d.\r\n", p_instance->instance_id);
 }
 
 void nrf_drv_timer_disable(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_SHUTDOWN);
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_INITIALIZED;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled instance: %d.\r\n", p_instance->instance_id);
 }
 
 void nrf_drv_timer_resume(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_START);
     NRFX_LOG_INFO("Resumed instance: %d.\r\n", p_instance->instance_id);
 }
 
 void nrf_drv_timer_pause(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_STOP);
     NRFX_LOG_INFO("Paused instance: %d.\r\n", p_instance->instance_id);
 }
 
 void nrf_drv_timer_clear(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_CLEAR);
 }
 
 void nrf_drv_timer_increment(nrf_drv_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
     NRFX_ASSERT(nrf_timer_mode_get(p_instance->p_reg) != NRF_TIMER_MODE_TIMER);
 
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_COUNT);
@@ -152,7 +151,7 @@ void nrf_drv_timer_increment(nrf_drv_timer_t const * const p_instance)
 uint32_t nrf_drv_timer_capture(nrf_drv_timer_t const * const p_instance,
                                nrf_timer_cc_channel_t cc_channel)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
     NRFX_ASSERT(cc_channel < p_instance->cc_channel_count);
 
     nrf_timer_task_trigger(p_instance->p_reg,
@@ -202,7 +201,7 @@ void nrf_drv_timer_extended_compare(nrf_drv_timer_t const * const p_instance,
 void nrf_drv_timer_compare_int_enable(nrf_drv_timer_t const * const p_instance,
                                       uint32_t channel)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
     nrf_timer_event_clear(p_instance->p_reg,
@@ -214,7 +213,7 @@ void nrf_drv_timer_compare_int_enable(nrf_drv_timer_t const * const p_instance,
 void nrf_drv_timer_compare_int_disable(nrf_drv_timer_t const * const p_instance,
                                        uint32_t channel)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
     nrf_timer_int_disable(p_instance->p_reg,

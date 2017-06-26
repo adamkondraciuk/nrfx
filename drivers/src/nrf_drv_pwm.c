@@ -11,7 +11,6 @@
 
 #include <string.h>
 #include <nrf_drv_pwm.h>
-#include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE PWM
@@ -45,9 +44,9 @@ typedef struct
 #if defined(USE_DMA_ISSUE_WORKAROUND)
     uint32_t                 starting_task_address;
 #endif
-    nrf_drv_pwm_handler_t    handler;
-    nrf_drv_state_t volatile state;
-    uint8_t                  flags;
+    nrf_drv_pwm_handler_t     handler;
+    nrfx_drv_state_t volatile state;
+    uint8_t                   flags;
 } pwm_control_block_t;
 static pwm_control_block_t m_cb[NRFX_PWM_ENABLED_COUNT];
 
@@ -96,7 +95,7 @@ ret_code_t nrf_drv_pwm_init(nrf_drv_pwm_t const * const p_instance,
 
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 
-    if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
+    if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -133,11 +132,11 @@ ret_code_t nrf_drv_pwm_init(nrf_drv_pwm_t const * const p_instance,
     if (p_cb->handler)
 #endif
     {
-        NRFX_IRQ_ENABLE(nrf_drv_get_IRQn(p_instance->p_registers),
+        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_registers),
             p_config->irq_priority);
     }
 
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
@@ -150,16 +149,16 @@ ret_code_t nrf_drv_pwm_init(nrf_drv_pwm_t const * const p_instance,
 void nrf_drv_pwm_uninit(nrf_drv_pwm_t const * const p_instance)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    NRFX_IRQ_DISABLE(nrf_drv_get_IRQn(p_instance->p_registers));
+    NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_instance->p_registers));
 #if defined(USE_DMA_ISSUE_WORKAROUND)
     NRFX_IRQ_DISABLE(DMA_ISSUE_EGU_IRQn);
 #endif
 
     nrf_pwm_disable(p_instance->p_registers);
 
-    p_cb->state = NRF_DRV_STATE_UNINITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 
@@ -168,7 +167,7 @@ static uint32_t start_playback(nrf_drv_pwm_t const * const p_instance,
                                uint8_t               flags,
                                nrf_pwm_task_t        starting_task)
 {
-    p_cb->state = NRF_DRV_STATE_POWERED_ON;
+    p_cb->state = NRFX_DRV_STATE_POWERED_ON;
     p_cb->flags = flags;
 
     if (p_cb->handler)
@@ -244,9 +243,9 @@ uint32_t nrf_drv_pwm_simple_playback(nrf_drv_pwm_t const * const p_instance,
                                      uint32_t                   flags)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(playback_count > 0);
-    NRFX_ASSERT(nrf_drv_is_in_RAM(p_sequence->values.p_raw));
+    NRFX_ASSERT(nrfx_is_in_ram(p_sequence->values.p_raw));
 
     // To take advantage of the looping mechanism, we need to use both sequences
     // (single sequence can be played back only once).
@@ -290,10 +289,10 @@ uint32_t nrf_drv_pwm_complex_playback(nrf_drv_pwm_t const * const p_instance,
                                       uint32_t                   flags)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(playback_count > 0);
-    NRFX_ASSERT(nrf_drv_is_in_RAM(p_sequence_0->values.p_raw));
-    NRFX_ASSERT(nrf_drv_is_in_RAM(p_sequence_1->values.p_raw));
+    NRFX_ASSERT(nrfx_is_in_ram(p_sequence_0->values.p_raw));
+    NRFX_ASSERT(nrfx_is_in_ram(p_sequence_1->values.p_raw));
 
     nrf_pwm_sequence_set(p_instance->p_registers, 0, p_sequence_0);
     nrf_pwm_sequence_set(p_instance->p_registers, 1, p_sequence_1);
@@ -333,7 +332,7 @@ uint32_t nrf_drv_pwm_complex_playback(nrf_drv_pwm_t const * const p_instance,
 bool nrf_drv_pwm_stop(nrf_drv_pwm_t const * const p_instance,
                       bool wait_until_stopped)
 {
-    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     bool ret_val = false;
 
@@ -362,20 +361,20 @@ bool nrf_drv_pwm_stop(nrf_drv_pwm_t const * const p_instance,
 bool nrf_drv_pwm_is_stopped(nrf_drv_pwm_t const * const p_instance)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     bool ret_val = false;
 
     // If the event handler is used (interrupts are enabled), the state will
     // be changed in interrupt handler when the STOPPED event occurs.
-    if (p_cb->state != NRF_DRV_STATE_POWERED_ON)
+    if (p_cb->state != NRFX_DRV_STATE_POWERED_ON)
     {
         ret_val = true;
     }
     // If interrupts are disabled, we must check the STOPPED event here.
     if (nrf_pwm_event_check(p_instance->p_registers, NRF_PWM_EVENT_STOPPED))
     {
-        p_cb->state = NRF_DRV_STATE_INITIALIZED;
+        p_cb->state = NRFX_DRV_STATE_INITIALIZED;
         NRFX_LOG_INFO("Disabled.\r\n");
         ret_val = true;
     }
@@ -421,7 +420,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
     {
         nrf_pwm_event_clear(p_pwm, NRF_PWM_EVENT_STOPPED);
 
-        p_cb->state = NRF_DRV_STATE_INITIALIZED;
+        p_cb->state = NRFX_DRV_STATE_INITIALIZED;
         if (p_cb->handler)
         {
             p_cb->handler(NRF_DRV_PWM_EVT_STOPPED);

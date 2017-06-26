@@ -264,6 +264,8 @@ __STATIC_INLINE uint32_t nrf_drv_clock_ppi_event_addr(nrf_clock_event_t event)
 
 /*lint --flb "Leave library region" */
 
+void nrfx_clock_irq_handler(void);
+
 #ifdef __cplusplus
 }
 #endif

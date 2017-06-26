@@ -3,7 +3,6 @@
 
 #if NRFX_CHECK(SAADC_ENABLED)
 #include <nrf_drv_saadc.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME SAADC
 #include <nrfx_log.h>
@@ -46,7 +45,7 @@ typedef struct
     uint16_t                      secondary_buffer_size;         ///< Size of the secondary buffer.
     uint16_t                      buffer_size_left;              ///< When low power mode is active indicates how many samples left to convert on current buffer.
     nrf_saadc_psel_buffer         psel[NRF_SAADC_CHANNEL_COUNT]; ///< Pin configurations of SAADC channels.
-    nrf_drv_state_t               state;                         ///< Driver initialization state.
+    nrfx_drv_state_t              state;                         ///< Driver initialization state.
     uint8_t                       active_channels;               ///< Number of enabled SAADC channels.
     bool                          low_power_mode;                ///< Indicates if low power mode is active.
     bool                          conversions_end;               ///< When low power mode is active indicates end of conversions on current buffer.
@@ -178,7 +177,7 @@ ret_code_t nrf_drv_saadc_init(nrf_drv_saadc_config_t const * p_config,
 {
     ret_code_t err_code;
 
-    if (m_cb.state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -202,7 +201,7 @@ ret_code_t nrf_drv_saadc_init(nrf_drv_saadc_config_t const * p_config,
     nrf_saadc_resolution_set(p_config->resolution);
     nrf_saadc_oversample_set(p_config->oversample);
     m_cb.low_power_mode       = p_config->low_power_mode;
-    m_cb.state                = NRF_DRV_STATE_INITIALIZED;
+    m_cb.state                = NRFX_DRV_STATE_INITIALIZED;
     m_cb.adc_state            = NRF_SAADC_STATE_IDLE;
     m_cb.active_channels      = 0;
     m_cb.limits_enabled_flags = 0;
@@ -230,7 +229,7 @@ ret_code_t nrf_drv_saadc_init(nrf_drv_saadc_config_t const * p_config,
 
 void nrf_drv_saadc_uninit(void)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_saadc_int_disable(NRF_SAADC_INT_ALL);
     NRFX_IRQ_DISABLE(SAADC_IRQn);
@@ -256,14 +255,14 @@ void nrf_drv_saadc_uninit(void)
         }
     }
 
-    m_cb.state = NRF_DRV_STATE_UNINITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 
 ret_code_t nrf_drv_saadc_channel_init(uint8_t                                  channel,
                                       nrf_saadc_channel_config_t const * const p_config)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     // Oversampling can be used only with one channel.
     NRFX_ASSERT((nrf_saadc_oversample_get() == NRF_SAADC_OVERSAMPLE_DISABLED) ||
@@ -316,7 +315,7 @@ ret_code_t nrf_drv_saadc_channel_init(uint8_t                                  c
 ret_code_t nrf_drv_saadc_channel_uninit(uint8_t channel)
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT)
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     ret_code_t err_code;
 
@@ -416,7 +415,7 @@ ret_code_t nrf_drv_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_v
 
 ret_code_t nrf_drv_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT((size % m_cb.active_channels) == 0);
     ret_code_t err_code;
 
@@ -484,7 +483,7 @@ ret_code_t nrf_drv_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t s
 
 ret_code_t nrf_drv_saadc_sample()
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     ret_code_t err_code = NRFX_SUCCESS;
     if (m_cb.adc_state != NRF_SAADC_STATE_BUSY)
@@ -507,7 +506,7 @@ ret_code_t nrf_drv_saadc_sample()
 
 ret_code_t nrf_drv_saadc_calibrate_offset()
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     ret_code_t err_code;
 
@@ -567,7 +566,7 @@ void nrf_drv_saadc_abort(void)
 
 void nrf_drv_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t limit_high)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(m_cb.event_handler); // only non blocking mode supported
     NRFX_ASSERT(limit_low >= NRF_DRV_SAADC_LIMITL_DISABLED);
     NRFX_ASSERT(limit_high <= NRF_DRV_SAADC_LIMITH_DISABLED);

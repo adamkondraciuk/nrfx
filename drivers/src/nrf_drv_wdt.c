@@ -5,7 +5,6 @@
 #if NRFX_CHECK(WDT_ENABLED)
 
 #include <nrf_drv_wdt.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE_NAME WDT
 #include <nrfx_log.h>
@@ -15,7 +14,7 @@
 static nrf_wdt_event_handler_t m_wdt_event_handler;
 
 /**@brief WDT state. */
-static nrf_drv_state_t m_state;
+static nrfx_drv_state_t m_state;
 
 /**@brief WDT alloc table. */
 static uint32_t m_alloc_index;
@@ -40,9 +39,9 @@ ret_code_t nrf_drv_wdt_init(nrf_drv_wdt_config_t const * p_config,
     ret_code_t err_code;
     m_wdt_event_handler = wdt_event_handler;
 
-    if (m_state == NRF_DRV_STATE_UNINITIALIZED)
+    if (m_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
-        m_state = NRF_DRV_STATE_INITIALIZED;
+        m_state = NRFX_DRV_STATE_INITIALIZED;
     }
     else
     {
@@ -71,17 +70,17 @@ ret_code_t nrf_drv_wdt_init(nrf_drv_wdt_config_t const * p_config,
 void nrf_drv_wdt_enable(void)
 {
     NRFX_ASSERT(m_alloc_index != 0);
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
     nrf_wdt_int_enable(NRF_WDT_INT_TIMEOUT_MASK);
     nrf_wdt_task_trigger(NRF_WDT_TASK_START);
-    m_state = NRF_DRV_STATE_POWERED_ON;
+    m_state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.\r\n");
 }
 
 
 void nrf_drv_wdt_feed(void)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     for (uint32_t i = 0; i < m_alloc_index; i++)
     {
         nrf_wdt_reload_request_set((nrf_wdt_rr_register_t)(NRF_WDT_RR0 + i));
@@ -92,7 +91,7 @@ ret_code_t nrf_drv_wdt_channel_alloc(nrf_drv_wdt_channel_id * p_channel_id)
 {
     ret_code_t result;
     NRFX_ASSERT(p_channel_id);
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
 
     NRFX_CRITICAL_SECTION_ENTER();
     if (m_alloc_index < NRF_WDT_CHANNEL_NUMBER)
@@ -113,7 +112,7 @@ ret_code_t nrf_drv_wdt_channel_alloc(nrf_drv_wdt_channel_id * p_channel_id)
 
 void nrf_drv_wdt_channel_feed(nrf_drv_wdt_channel_id channel_id)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     nrf_wdt_reload_request_set(channel_id);
 }
 

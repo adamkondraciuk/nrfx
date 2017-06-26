@@ -5,7 +5,6 @@
 #if NRFX_CHECK(QDEC_ENABLED)
 
 #include <nrf_drv_qdec.h>
-#include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE_NAME QDEC
@@ -18,7 +17,7 @@
 
 static qdec_event_handler_t m_qdec_event_handler = NULL;
 static const nrf_drv_qdec_config_t m_default_config = NRF_DRV_QDEC_DEFAULT_CONFIG;
-static nrf_drv_state_t m_state = NRF_DRV_STATE_UNINITIALIZED;
+static nrfx_drv_state_t m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
 void nrfx_qdec_irq_handler(void)
 {
@@ -64,7 +63,7 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
 {
     ret_code_t err_code;
 
-    if (m_state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -121,7 +120,7 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     nrf_qdec_int_enable(int_mask);
     NRFX_IRQ_ENABLE(QDEC_IRQn, p_config->interrupt_priority);
 
-    m_state = NRF_DRV_STATE_INITIALIZED;
+    m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -130,34 +129,34 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
 
 void nrf_drv_qdec_uninit(void)
 {
-    NRFX_ASSERT(m_state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_drv_qdec_disable();
     NRFX_IRQ_DISABLE(QDEC_IRQn);
-    m_state = NRF_DRV_STATE_UNINITIALIZED;
+    m_state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.\r\n");
 }
 
 void nrf_drv_qdec_enable(void)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
     nrf_qdec_enable();
     nrf_qdec_task_trigger(NRF_QDEC_TASK_START);
-    m_state = NRF_DRV_STATE_POWERED_ON;
+    m_state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.\r\n");
 }
 
 void nrf_drv_qdec_disable(void)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     nrf_qdec_task_trigger(NRF_QDEC_TASK_STOP);
     nrf_qdec_disable();
-    m_state = NRF_DRV_STATE_INITIALIZED;
+    m_state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled.\r\n");
 }
 
 void nrf_drv_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl)
 {
-    NRFX_ASSERT(m_state == NRF_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
     nrf_qdec_task_trigger(NRF_QDEC_TASK_READCLRACC);
 
     *p_acc    = (int16_t)nrf_qdec_accread_get();

@@ -348,6 +348,7 @@ __STATIC_INLINE nrf_drv_power_usb_state_t nrf_drv_power_usbstatus_get(void)
 
 #endif /* SUPPRESS_INLINE_IMPLEMENTATION */
 
+void nrfx_power_irq_handler(void);
 
 #ifdef __cplusplus
 }

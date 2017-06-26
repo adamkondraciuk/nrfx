@@ -12,7 +12,7 @@
 
 #include <nrfx_config.h>
 
-#include <drivers/nrfx_macros.h>
+#include <drivers/nrfx_common.h>
 #include <nrfx_glue.h>
 #include <drivers/nrfx_errors.h>
 

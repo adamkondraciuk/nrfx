@@ -15,8 +15,8 @@
 
 
 typedef struct {
-    nrfx_prs_irq_handler_t handler;
-    bool                   acquired;
+    nrfx_irq_handler_t handler;
+    bool               acquired;
 } prs_box_t;
 
 #define PRS_BOX_DEFINE(n) \
@@ -74,7 +74,7 @@ static prs_box_t * prs_box_get(void const * p_base_addr)
 }
 
 ret_code_t nrfx_prs_acquire(void const * p_base_addr,
-                            nrfx_prs_irq_handler_t irq_handler)
+                            nrfx_irq_handler_t irq_handler)
 {
     NRFX_ASSERT(p_base_addr);
 

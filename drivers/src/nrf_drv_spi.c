@@ -11,7 +11,6 @@
 
 #include <nrf_drv_spi.h>
 #include "prs/nrfx_prs.h"
-#include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE SPI
@@ -79,7 +78,7 @@ typedef struct
     nrf_drv_spi_evt_handler_t handler;
     void *                p_context;
     nrf_drv_spi_evt_t     evt;  // Keep the struct that is ready for event handler. Less memcpy.
-    nrf_drv_state_t       state;
+    nrfx_drv_state_t      state;
     volatile bool         transfer_in_progress;
 
     // [no need for 'volatile' attribute for the following members, as they
@@ -108,7 +107,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
     spi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     ret_code_t err_code;
 
-    if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
+    if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -118,7 +117,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
     }
 
 #if NRFX_CHECK(PRS_ENABLED)
-    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
+    static nrfx_irq_handler_t const irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
         #if NRFX_CHECK(SPI0_ENABLED)
         nrfx_spi_0_irq_handler,
         #endif
@@ -238,7 +237,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
     }
 
     p_cb->transfer_in_progress = false;
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     NRFX_LOG_INFO("Init\r\n");
 
@@ -252,7 +251,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
 void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
 {
     spi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (p_cb->handler)
     {
@@ -292,7 +291,7 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
     nrfx_prs_release(p_instance->p_registers);
 #endif
 
-    p_cb->state = NRF_DRV_STATE_UNINITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 ret_code_t nrf_drv_spi_transfer(nrf_drv_spi_t const * const p_instance,
@@ -480,8 +479,8 @@ static ret_code_t spim_xfer(NRF_SPIM_Type                * p_spim,
     ret_code_t err_code;
     // EasyDMA requires that transfer buffers are placed in Data RAM region;
     // signal error if they are not.
-    if ((p_xfer_desc->p_tx_buffer != NULL && !nrf_drv_is_in_RAM(p_xfer_desc->p_tx_buffer)) ||
-        (p_xfer_desc->p_rx_buffer != NULL && !nrf_drv_is_in_RAM(p_xfer_desc->p_rx_buffer)))
+    if ((p_xfer_desc->p_tx_buffer != NULL && !nrfx_is_in_ram(p_xfer_desc->p_tx_buffer)) ||
+        (p_xfer_desc->p_rx_buffer != NULL && !nrfx_is_in_ram(p_xfer_desc->p_rx_buffer)))
     {
         p_cb->transfer_in_progress = false;
         err_code = NRFX_ERROR_INVALID_ADDR;
@@ -544,7 +543,7 @@ ret_code_t nrf_drv_spi_xfer(nrf_drv_spi_t     const * const p_instance,
                             uint32_t                        flags)
 {
     spi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_xfer_desc->p_tx_buffer != NULL || p_xfer_desc->tx_length == 0);
     NRFX_ASSERT(p_xfer_desc->p_rx_buffer != NULL || p_xfer_desc->rx_length == 0);
 
@@ -602,7 +601,7 @@ ret_code_t nrf_drv_spi_xfer(nrf_drv_spi_t     const * const p_instance,
 void nrf_drv_spi_abort(nrf_drv_spi_t const * p_instance)
 {
     spi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     CODE_FOR_SPIM
     (

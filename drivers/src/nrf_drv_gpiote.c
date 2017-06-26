@@ -4,7 +4,6 @@
 #if NRFX_CHECK(GPIOTE_ENABLED)
 
 #include <nrf_drv_gpiote.h>
-#include <nrf_drv_common.h>
 #include "nrf_bitmask.h"
 #include <string.h>
 
@@ -63,7 +62,7 @@ typedef struct
     nrf_drv_gpiote_evt_handler_t handlers[GPIOTE_CH_NUM + GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS];
     int8_t                       pin_assignments[NUMBER_OF_PINS];
     int8_t                       port_handlers_pins[GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS];
-    nrf_drv_state_t              state;
+    nrfx_drv_state_t             state;
 } gpiote_control_block_t;
 
 static gpiote_control_block_t m_cb;
@@ -176,7 +175,7 @@ ret_code_t nrf_drv_gpiote_init(void)
 {
     ret_code_t err_code;
 
-    if (m_cb.state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -200,7 +199,7 @@ ret_code_t nrf_drv_gpiote_init(void)
     NRFX_IRQ_ENABLE(GPIOTE_IRQn, GPIOTE_CONFIG_IRQ_PRIORITY);
     nrf_gpiote_event_clear(NRF_GPIOTE_EVENTS_PORT);
     nrf_gpiote_int_enable(GPIOTE_INTENSET_PORT_Msk);
-    m_cb.state = NRF_DRV_STATE_INITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__,
@@ -211,13 +210,13 @@ ret_code_t nrf_drv_gpiote_init(void)
 
 bool nrf_drv_gpiote_is_init(void)
 {
-    return (m_cb.state != NRF_DRV_STATE_UNINITIALIZED) ? true : false;
+    return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED) ? true : false;
 }
 
 
 void nrf_drv_gpiote_uninit(void)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     uint32_t i;
 
@@ -235,7 +234,7 @@ void nrf_drv_gpiote_uninit(void)
             nrf_drv_gpiote_in_uninit(i);
         }
     }
-    m_cb.state = NRF_DRV_STATE_UNINITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.\r\n");
 }
 
@@ -244,7 +243,7 @@ ret_code_t nrf_drv_gpiote_out_init(nrf_drv_gpiote_pin_t                pin,
                                    nrf_drv_gpiote_out_config_t const * p_config)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
-    NRFX_ASSERT(m_cb.state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_config);
 
     ret_code_t err_code = NRFX_SUCCESS;

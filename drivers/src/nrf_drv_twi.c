@@ -10,7 +10,6 @@
 
 #include <nrf_drv_twi.h>
 #include "prs/nrfx_prs.h"
-#include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 #include <nrf_delay.h>
 
@@ -92,7 +91,7 @@ typedef struct
     uint8_t *                 p_curr_buf;
     uint8_t                   curr_length;
     bool                      curr_no_stop;
-    nrf_drv_state_t           state;
+    nrfx_drv_state_t          state;
     bool                      error;
     volatile bool             busy;
     bool                      repeated;
@@ -173,7 +172,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
     twi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     ret_code_t err_code;
 
-    if (p_cb->state != NRF_DRV_STATE_UNINITIALIZED)
+    if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -183,7 +182,7 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
     }
 
 #if NRFX_CHECK(PRS_ENABLED)
-    static nrfx_prs_irq_handler_t const irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
+    static nrfx_irq_handler_t const irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
         #if NRFX_CHECK(TWI0_ENABLED)
         nrfx_twi_0_irq_handler,
         #endif
@@ -244,17 +243,17 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
     {
         CODE_FOR_TWIM
         (
-            NRFX_IRQ_ENABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim),
+            NRFX_IRQ_ENABLE(nrfx_get_irq_number((void *)p_instance->reg.p_twim),
                 p_config->interrupt_priority);
         )
         CODE_FOR_TWI
         (
-            NRFX_IRQ_ENABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi),
+            NRFX_IRQ_ENABLE(nrfx_get_irq_number((void *)p_instance->reg.p_twi),
                 p_config->interrupt_priority);
         )
     }
 
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
@@ -266,17 +265,17 @@ ret_code_t nrf_drv_twi_init(nrf_drv_twi_t const *        p_instance,
 void nrf_drv_twi_uninit(nrf_drv_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (p_cb->handler)
     {
         CODE_FOR_TWIM
         (
-            NRFX_IRQ_DISABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twim));
+            NRFX_IRQ_DISABLE(nrfx_get_irq_number((void *)p_instance->reg.p_twim));
         )
         CODE_FOR_TWI
         (
-            NRFX_IRQ_DISABLE(nrf_drv_get_IRQn((void *)p_instance->reg.p_twi));
+            NRFX_IRQ_DISABLE(nrfx_get_irq_number((void *)p_instance->reg.p_twi));
         )
     }
     nrf_drv_twi_disable(p_instance);
@@ -299,14 +298,14 @@ void nrf_drv_twi_uninit(nrf_drv_twi_t const * p_instance)
         )
     }
 
-    p_cb->state = NRF_DRV_STATE_UNINITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Instance uninitialized: %d.\r\n", p_instance->drv_inst_idx);
 }
 
 void nrf_drv_twi_enable(nrf_drv_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     CODE_FOR_TWIM
     (
@@ -321,14 +320,14 @@ void nrf_drv_twi_enable(nrf_drv_twi_t const * p_instance)
         nrf_twi_enable(p_twi);
     )
 
-    p_cb->state = NRF_DRV_STATE_POWERED_ON;
+    p_cb->state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Instance enabled: %d.\r\n", p_instance->drv_inst_idx);
 }
 
 void nrf_drv_twi_disable(nrf_drv_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    NRFX_ASSERT(p_cb->state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     CODE_FOR_TWIM
     (
@@ -346,7 +345,7 @@ void nrf_drv_twi_disable(nrf_drv_twi_t const * p_instance)
         nrf_twi_disable(p_twi);
     )
 
-    p_cb->state = NRF_DRV_STATE_INITIALIZED;
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Instance disabled: %d.\r\n", p_instance->drv_inst_idx);
 }
 
@@ -716,7 +715,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twi_control_block_t           * p_cb,
     nrf_twim_task_t  start_task = NRF_TWIM_TASK_STARTTX;
     nrf_twim_event_t evt_to_wait = NRF_TWIM_EVENT_STOPPED;
 
-    if (!nrf_drv_is_in_RAM(p_xfer_desc->p_primary_buf))
+    if (!nrfx_is_in_ram(p_xfer_desc->p_primary_buf))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -755,7 +754,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twi_control_block_t           * p_cb,
         NRFX_ASSERT(!(flags & NRF_DRV_TWI_FLAG_REPEATED_XFER));
         NRFX_ASSERT(!(flags & NRF_DRV_TWI_FLAG_HOLD_XFER));
         NRFX_ASSERT(!(flags & NRF_DRV_TWI_FLAG_NO_XFER_EVT_HANDLER));
-        if (!nrf_drv_is_in_RAM(p_xfer_desc->p_secondary_buf))
+        if (!nrfx_is_in_ram(p_xfer_desc->p_secondary_buf))
         {
             err_code = NRFX_ERROR_INVALID_ADDR;
             NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -779,7 +778,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twi_control_block_t           * p_cb,
         break;
     case NRF_DRV_TWI_XFER_TXRX:
         nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
-        if (!nrf_drv_is_in_RAM(p_xfer_desc->p_secondary_buf))
+        if (!nrfx_is_in_ram(p_xfer_desc->p_secondary_buf))
         {
             err_code = NRFX_ERROR_INVALID_ADDR;
             NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",

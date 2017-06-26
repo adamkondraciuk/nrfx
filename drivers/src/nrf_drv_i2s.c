@@ -5,7 +5,6 @@
 #if NRFX_CHECK(I2S_ENABLED)
 
 #include <nrf_drv_i2s.h>
-#include <nrf_drv_common.h>
 #include <hal/nrf_gpio.h>
 #include <string.h>
 
@@ -17,13 +16,13 @@
                             (event == NRF_I2S_EVENT_STOPPED ? "NRF_I2S_EVENT_STOPPED" : "UNKNOWN EVENT")))
 
 
-#define MODULE_INITIALIZED (m_cb.state == NRF_DRV_STATE_INITIALIZED) /**< Macro designating whether the module has been initialized properly. */
+#define MODULE_INITIALIZED (m_cb.state == NRFX_DRV_STATE_INITIALIZED) /**< Macro designating whether the module has been initialized properly. */
 
 // Control block - driver instance local data.
 typedef struct
 {
     nrf_drv_i2s_data_handler_t handler;
-    nrf_drv_state_t            state;
+    nrfx_drv_state_t           state;
 
     bool       synchronized_mode : 1;
     bool       rx_ready          : 1;
@@ -104,7 +103,7 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
 
     ret_code_t err_code;
 
-    if (m_cb.state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -134,7 +133,7 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
 
     NRFX_IRQ_ENABLE(I2S_IRQn, p_config->irq_priority);
 
-    m_cb.state = NRF_DRV_STATE_INITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -144,13 +143,13 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
 
 void nrf_drv_i2s_uninit(void)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_drv_i2s_stop();
 
     NRFX_IRQ_DISABLE(I2S_IRQn);
 
-    m_cb.state = NRF_DRV_STATE_UNINITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Initialized.\r\n");
 }
 
@@ -165,21 +164,21 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
     uint16_t buffer_half_size = buffer_size / 2;
     NRFX_ASSERT(buffer_half_size != 0);
 
-    if (m_cb.state != NRF_DRV_STATE_INITIALIZED)
+    if (m_cb.state != NRFX_DRV_STATE_INITIALIZED)
     {
         return NRFX_ERROR_INVALID_STATE;
     }
 
     ret_code_t err_code;
 
-    if ((p_rx_buffer != NULL) && !nrf_drv_is_in_RAM(p_rx_buffer))
+    if ((p_rx_buffer != NULL) && !nrfx_is_in_ram(p_rx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
-    if ((p_tx_buffer != NULL) && !nrf_drv_is_in_RAM(p_tx_buffer))
+    if ((p_tx_buffer != NULL) && !nrfx_is_in_ram(p_tx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -210,7 +209,7 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
 
     nrf_i2s_enable(NRF_I2S);
 
-    m_cb.state = NRF_DRV_STATE_POWERED_ON;
+    m_cb.state = NRFX_DRV_STATE_POWERED_ON;
 
     if (m_cb.p_tx_buffer != NULL)
     {
@@ -244,7 +243,7 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
 
 void nrf_drv_i2s_stop(void)
 {
-    NRFX_ASSERT(m_cb.state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     // First disable interrupts, then trigger the STOP task, so no spurious
     // RXPTRUPD and TXPTRUPD events (see FTPAN-55) will be processed.
@@ -255,7 +254,7 @@ void nrf_drv_i2s_stop(void)
 
     nrf_i2s_disable(NRF_I2S);
 
-    m_cb.state = NRF_DRV_STATE_INITIALIZED;
+    m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     NRFX_LOG_INFO("Disabled.");
 }

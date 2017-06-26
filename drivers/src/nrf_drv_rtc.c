@@ -10,7 +10,6 @@
 #endif
 
 #include <nrf_drv_rtc.h>
-#include <nrf_drv_common.h>
 
 #define NRFX_LOG_MODULE RTC
 #include <nrfx_log.h>
@@ -28,9 +27,9 @@
 /**@brief RTC driver instance control block structure. */
 typedef struct
 {
-    nrf_drv_state_t state;        /**< Instance state. */
-    bool            reliable;     /**< Reliable mode flag. */
-    uint8_t         tick_latency; /**< Maximum length of interrupt handler in ticks (max 7.7 ms). */
+    nrfx_drv_state_t state;        /**< Instance state. */
+    bool             reliable;     /**< Reliable mode flag. */
+    uint8_t          tick_latency; /**< Maximum length of interrupt handler in ticks (max 7.7 ms). */
 } nrf_drv_rtc_cb_t;
 
 // User callbacks local storage.
@@ -56,7 +55,7 @@ ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
         return err_code;
     }
 
-    if (m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED)
+    if (m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -67,7 +66,7 @@ ret_code_t nrf_drv_rtc_init(nrf_drv_rtc_t const * const p_instance,
     nrf_rtc_prescaler_set(p_instance->p_reg, p_config->prescaler);
     m_cb[p_instance->instance_id].reliable     = p_config->reliable;
     m_cb[p_instance->instance_id].tick_latency = p_config->tick_latency;
-    m_cb[p_instance->instance_id].state        = NRF_DRV_STATE_INITIALIZED;
+    m_cb[p_instance->instance_id].state        = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -82,7 +81,7 @@ void nrf_drv_rtc_uninit(nrf_drv_rtc_t const * const p_instance)
                     NRF_RTC_INT_COMPARE1_MASK |
                     NRF_RTC_INT_COMPARE2_MASK |
                     NRF_RTC_INT_COMPARE3_MASK;
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     NRFX_IRQ_DISABLE(p_instance->irq);
 
@@ -90,31 +89,31 @@ void nrf_drv_rtc_uninit(nrf_drv_rtc_t const * const p_instance)
     nrf_rtc_event_disable(p_instance->p_reg, mask);
     nrf_rtc_int_disable(p_instance->p_reg, mask);
 
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_UNINITIALIZED;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.\r\n");
 }
 
 void nrf_drv_rtc_enable(nrf_drv_rtc_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRF_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_START);
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_POWERED_ON;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.\r\n");
 }
 
 void nrf_drv_rtc_disable(nrf_drv_rtc_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
-    m_cb[p_instance->instance_id].state = NRF_DRV_STATE_INITIALIZED;
+    m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled.\r\n");
 }
 
 ret_code_t nrf_drv_rtc_cc_disable(nrf_drv_rtc_t const * const p_instance, uint32_t channel)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel<p_instance->cc_channel_count);
 
     ret_code_t err_code;
@@ -144,7 +143,7 @@ ret_code_t nrf_drv_rtc_cc_set(nrf_drv_rtc_t const * const p_instance,
                               uint32_t val,
                               bool enable_irq)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRF_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel<p_instance->cc_channel_count);
 
     ret_code_t err_code;
