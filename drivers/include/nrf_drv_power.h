@@ -5,6 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_power.h>
+#include <nrfx_power_clock.h>
 
 #ifdef __cplusplus
 extern "C" {

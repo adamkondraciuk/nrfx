@@ -6,7 +6,6 @@
 
 #include <nrf_drv_clock.h>
 #include <nrf_drv_power.h>
-#include <nrfx_power_clock.h>
 #ifdef SOFTDEVICE_PRESENT
 #include "softdevice_handler.h"
 #include "nrf_sdm.h"
