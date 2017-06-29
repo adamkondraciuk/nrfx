@@ -543,7 +543,7 @@ ret_code_t nrf_drv_twis_init(
         return err_code;
     }
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
         #if NRFX_CHECK(TWIS0_ENABLED)
         nrfx_twis_0_irq_handler,
@@ -561,7 +561,7 @@ ret_code_t nrf_drv_twis_init(
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif // NRFX_CHECK(PRS_ENABLED)
+#endif // NRFX_CHECK(NRFX_PRS_ENABLED)
 
     if (!TWIS_ASSUME_INIT_AFTER_RESET_ONLY)
     {
@@ -631,7 +631,7 @@ void nrf_drv_twis_uninit(nrf_drv_twis_t const * const p_instance)
         nrf_gpio_cfg_default(psel.SDA);
     }
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_reg);
 #endif
 

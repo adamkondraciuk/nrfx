@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
 #include "nrfx_prs.h"
 
 #define NRFX_LOG_MODULE PRS
@@ -123,4 +123,4 @@ void nrfx_prs_release(void const * p_base_addr)
 }
 
 
-#endif // NRFX_CHECK(PRS_ENABLED)
+#endif // NRFX_CHECK(NRFX_PRS_ENABLED)

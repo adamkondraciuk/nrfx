@@ -53,7 +53,7 @@ ret_code_t nrf_drv_lpcomp_init(const nrf_drv_lpcomp_config_t * p_config,
         return err_code;
     }
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     if (nrfx_prs_acquire(NRF_LPCOMP, nrfx_lpcomp_irq_handler) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
@@ -111,7 +111,7 @@ void nrf_drv_lpcomp_uninit(void)
     NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_IRQ_DISABLE(LPCOMP_IRQn);
     nrf_drv_lpcomp_disable();
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(NRF_LPCOMP);
 #endif
     m_state = NRFX_DRV_STATE_UNINITIALIZED;

@@ -100,7 +100,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
         #if NRFX_CHECK(SPIS0_ENABLED)
         nrfx_spis_0_irq_handler,
@@ -121,7 +121,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif // NRFX_CHECK(PRS_ENABLED)
+#endif // NRFX_CHECK(NRFX_PRS_ENABLED)
 
     // Configure the SPI pins for input.
     uint32_t mosi_pin;
@@ -248,7 +248,7 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
     nrf_spis_int_disable(p_spis, DISABLE_ALL);
     #undef  DISABLE_ALL
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_spis);
 #endif
 

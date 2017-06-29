@@ -116,7 +116,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
         return err_code;
     }
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
         #if NRFX_CHECK(SPI0_ENABLED)
         nrfx_spi_0_irq_handler,
@@ -137,7 +137,7 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-#endif // NRFX_CHECK(PRS_ENABLED)
+#endif // NRFX_CHECK(NRFX_PRS_ENABLED)
 
     p_cb->handler = handler;
     p_cb->p_context = p_context;
@@ -287,7 +287,7 @@ void nrf_drv_spi_uninit(nrf_drv_spi_t const * const p_instance)
     )
     #undef DISABLE_ALL
 
-#if NRFX_CHECK(PRS_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_instance->p_registers);
 #endif
 
