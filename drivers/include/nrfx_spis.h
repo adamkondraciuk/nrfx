@@ -81,11 +81,11 @@ typedef struct
 } nrfx_spis_t;
 
 /** @brief Macro for creating an SPI slave driver instance. */
-#define NRFX_SPIS_INSTANCE(id)                           \
-{                                                        \
-    .p_reg        = CONCAT_2(NRF_SPIS, id),              \
-    .irq          = CONCAT_3(SPIS, id, _IRQ),            \
-    .instance_id  = CONCAT_3(SPIS, id, _INSTANCE_INDEX), \
+#define NRFX_SPIS_INSTANCE(id)                          \
+{                                                       \
+    .p_reg        = CONCAT_2(NRF_SPIS, id),             \
+    .irq          = CONCAT_3(SPIS, id, _IRQ),           \
+    .instance_id  = CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
 }
 
 enum {
