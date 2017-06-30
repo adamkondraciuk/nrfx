@@ -2,14 +2,14 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(SPIS_ENABLED)
+#if NRFX_CHECK(NRFX_SPIS_ENABLED)
 
-#if !(NRFX_CHECK(SPIS0_ENABLED) || NRFX_CHECK(SPIS1_ENABLED) || \
-      NRFX_CHECK(SPIS2_ENABLED))
+#if !(NRFX_CHECK(NRFX_SPIS0_ENABLED) || NRFX_CHECK(NRFX_SPIS1_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS2_ENABLED))
 #error "No enabled SPIS instances. Check <nrfx_config.h>."
 #endif
 
-#include <nrf_drv_spis.h>
+#include <nrfx_spis.h>
 #include "prs/nrfx_prs.h"
 
 #define NRFX_LOG_MODULE_NAME SPIS
@@ -21,7 +21,7 @@
                                         "UNKNOWN ERROR"))
 
 
-#if NRFX_CHECK(SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
+#if NRFX_CHECK(NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
 #include <nrf_drv_gpiote.h>
 #define USE_DMA_ISSUE_WORKAROUND
 // This handler is called by the GPIOTE driver when a falling edge is detected
@@ -41,33 +41,25 @@ typedef enum
     SPIS_BUFFER_RESOURCE_REQUESTED,                  /**< State where the configuration of the memory buffers, which are to be used in SPI transaction, has started. */
     SPIS_BUFFER_RESOURCE_CONFIGURED,                 /**< State where the configuration of the memory buffers, which are to be used in SPI transaction, has completed. */
     SPIS_XFER_COMPLETED                              /**< State where SPI transaction has been completed. */
-} nrf_drv_spis_state_t;
-
-
-#define SPIS_IRQHANDLER_TEMPLATE(NUM) \
-    void nrfx_spis_##NUM##_irq_handler(void)                               \
-    {                                                                      \
-        spis_irq_handler(NRF_SPIS##NUM, &m_cb[NRFX_SPIS##NUM##_INST_IDX]); \
-    }
-
+} nrfx_spis_state_t;
 
 /**@brief SPIS control block - driver instance local data. */
 typedef struct
 {
-    volatile uint32_t             tx_buffer_size;  //!< SPI slave TX buffer size in bytes.
-    volatile uint32_t             rx_buffer_size;  //!< SPI slave RX buffer size in bytes.
-    nrf_drv_spis_event_handler_t  handler;         //!< SPI event handler.
-    volatile const uint8_t *      tx_buffer;       //!< SPI slave TX buffer.
-    volatile uint8_t *            rx_buffer;       //!< SPI slave RX buffer.
-    nrfx_drv_state_t              state;           //!< driver initialization state.
-    volatile nrf_drv_spis_state_t spi_state;       //!< SPI slave state.
+    volatile uint32_t          tx_buffer_size;  //!< SPI slave TX buffer size in bytes.
+    volatile uint32_t          rx_buffer_size;  //!< SPI slave RX buffer size in bytes.
+    nrfx_spis_event_handler_t  handler;         //!< SPI event handler.
+    volatile const uint8_t *   tx_buffer;       //!< SPI slave TX buffer.
+    volatile uint8_t *         rx_buffer;       //!< SPI slave RX buffer.
+    nrfx_drv_state_t           state;           //!< driver initialization state.
+    volatile nrfx_spis_state_t spi_state;       //!< SPI slave state.
 } spis_cb_t;
 
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
-ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
-                             nrf_drv_spis_config_t const * p_config,
-                             nrf_drv_spis_event_handler_t  event_handler)
+ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
+                          nrfx_spis_config_t const * p_config,
+                          nrfx_spis_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
     spis_cb_t * p_cb = &m_cb[p_instance->instance_id];
@@ -84,7 +76,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
         return err_code;
     }
 
-    if ((uint32_t)p_config->mode > (uint32_t)NRF_DRV_SPIS_MODE_3)
+    if ((uint32_t)p_config->mode > (uint32_t)NRFX_SPIS_MODE_3)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
@@ -102,13 +94,13 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
     }
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
-        #if NRFX_CHECK(SPIS0_ENABLED)
+        #if NRFX_CHECK(NRFX_SPIS0_ENABLED)
         nrfx_spis_0_irq_handler,
         #endif
-        #if NRFX_CHECK(SPIS1_ENABLED)
+        #if NRFX_CHECK(NRFX_SPIS1_ENABLED)
         nrfx_spis_1_irq_handler,
         #endif
-        #if NRFX_CHECK(SPIS2_ENABLED)
+        #if NRFX_CHECK(NRFX_SPIS2_ENABLED)
         nrfx_spis_2_irq_handler,
         #endif
     };
@@ -127,14 +119,14 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
     uint32_t mosi_pin;
     uint32_t miso_pin;
 
-    if (p_config->miso_pin != NRF_DRV_SPIS_PIN_NOT_USED)
+    if (p_config->miso_pin != NRFX_SPIS_PIN_NOT_USED)
     {
         nrf_gpio_cfg(p_config->miso_pin,
-                    NRF_GPIO_PIN_DIR_INPUT,
-                    NRF_GPIO_PIN_INPUT_CONNECT,
-                    NRF_GPIO_PIN_NOPULL,
-                    p_config->miso_drive,
-                    NRF_GPIO_PIN_NOSENSE);
+                     NRF_GPIO_PIN_DIR_INPUT,
+                     NRF_GPIO_PIN_INPUT_CONNECT,
+                     NRF_GPIO_PIN_NOPULL,
+                     p_config->miso_drive,
+                     NRF_GPIO_PIN_NOSENSE);
         miso_pin = p_config->miso_pin;
     }
     else
@@ -142,7 +134,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
         miso_pin = NRF_SPIS_PIN_NOT_CONNECTED;
     }
 
-    if (p_config->mosi_pin != NRF_DRV_SPIS_PIN_NOT_USED)
+    if (p_config->mosi_pin != NRFX_SPIS_PIN_NOT_USED)
     {
         nrf_gpio_cfg(p_config->mosi_pin,
                      NRF_GPIO_PIN_DIR_INPUT,
@@ -235,7 +227,7 @@ ret_code_t nrf_drv_spis_init(nrf_drv_spis_t const * const  p_instance,
 }
 
 
-void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
+void nrfx_spis_uninit(nrfx_spis_t const * const p_instance)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->instance_id];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -261,7 +253,7 @@ void nrf_drv_spis_uninit(nrf_drv_spis_t const * const p_instance)
 static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
                                             spis_cb_t * p_cb)
 {
-    nrf_drv_spis_event_t event;
+    nrfx_spis_event_t event;
 
     switch (p_cb->spi_state)
     {
@@ -270,7 +262,7 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
             break;
 
         case SPIS_BUFFER_RESOURCE_CONFIGURED:
-            event.evt_type  = NRF_DRV_SPIS_BUFFERS_SET_DONE;
+            event.evt_type  = NRFX_SPIS_BUFFERS_SET_DONE;
             event.rx_amount = 0;
             event.tx_amount = 0;
 
@@ -279,7 +271,7 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
             break;
 
         case SPIS_XFER_COMPLETED:
-            event.evt_type  = NRF_DRV_SPIS_XFER_DONE;
+            event.evt_type  = NRFX_SPIS_XFER_DONE;
             event.rx_amount = nrf_spis_rx_amount_get(p_spis);
             event.tx_amount = nrf_spis_tx_amount_get(p_spis);
             NRFX_LOG_INFO("Transfer rx_len:%d.\r\n", event.rx_amount);
@@ -304,18 +296,18 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
  */
 static void spis_state_change(NRF_SPIS_Type * p_spis,
                               spis_cb_t * p_cb,
-                              nrf_drv_spis_state_t new_state)
+                              nrfx_spis_state_t new_state)
 {
     p_cb->spi_state = new_state;
     spis_state_entry_action_execute(p_spis, p_cb);
 }
 
 
-ret_code_t nrf_drv_spis_buffers_set(nrf_drv_spis_t const * const  p_instance,
-                                    const uint8_t * p_tx_buffer,
-                                    uint8_t   tx_buffer_length,
-                                    uint8_t * p_rx_buffer,
-                                    uint8_t   rx_buffer_length)
+ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
+                                 uint8_t const * p_tx_buffer,
+                                 uint8_t         tx_buffer_length,
+                                 uint8_t       * p_rx_buffer,
+                                 uint8_t         rx_buffer_length)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->instance_id];
     uint32_t err_code;
@@ -416,16 +408,25 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     }
 }
 
-#if NRFX_CHECK(SPIS0_ENABLED)
-    SPIS_IRQHANDLER_TEMPLATE(0)
+#if NRFX_CHECK(NRFX_SPIS0_ENABLED)
+void nrfx_spis_0_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS0, &m_cb[NRFX_SPIS0_INST_IDX]);
+}
 #endif
 
-#if NRFX_CHECK(SPIS1_ENABLED)
-    SPIS_IRQHANDLER_TEMPLATE(1)
+#if NRFX_CHECK(NRFX_SPIS1_ENABLED)
+void nrfx_spis_1_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS1, &m_cb[NRFX_SPIS1_INST_IDX]);
+}
 #endif
 
-#if NRFX_CHECK(SPIS2_ENABLED)
-    SPIS_IRQHANDLER_TEMPLATE(2)
+#if NRFX_CHECK(NRFX_SPIS2_ENABLED)
+void nrfx_spis_2_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS2, &m_cb[NRFX_SPIS2_INST_IDX]);
+}
 #endif
 
 #endif // NRFX_CHECK(SPIS_ENABLED)
