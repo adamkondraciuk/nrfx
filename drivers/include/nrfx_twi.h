@@ -11,6 +11,18 @@ extern "C" {
 #endif
 
 /**
+ * @addtogroup nrf_twi Two Wire master interface
+ * @ingroup    nrf_drivers
+ * @brief      Two Wire master interface APIs.
+ *
+ *
+ * @defgroup nrfx_twi TWI driver
+ * @{
+ * @ingroup    nrf_twi
+ * @brief      TWI master APIs.
+ */
+
+/**
  * @brief Structure for the TWI master driver instance.
  */
 typedef struct
