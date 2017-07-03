@@ -156,10 +156,10 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_TWIM_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_TWI0_ENABLED)
+        #if NRFX_CHECK(NRFX_TWIM0_ENABLED)
         nrfx_twim_0_irq_handler,
         #endif
-        #if NRFX_CHECK(NRFX_TWI1_ENABLED)
+        #if NRFX_CHECK(NRFX_TWIM1_ENABLED)
         nrfx_twim_1_irq_handler,
         #endif
     };
