@@ -31,7 +31,7 @@
 #define EGU_IRQn_(i)        SWI##i##_EGU##i##_IRQn
 #define EGU_IRQHandler(i)   EGU_IRQHandler_(i)
 #define EGU_IRQHandler_(i)  SWI##i##_EGU##i##_IRQHandler
-#define DMA_ISSUE_EGU_IDX   NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
+#define DMA_ISSUE_EGU_IDX           NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
 #define DMA_ISSUE_EGU               NRFX_CONCAT_2(NRF_EGU, DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQn          EGU_IRQn(DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQHandler    EGU_IRQHandler(DMA_ISSUE_EGU_IDX)
