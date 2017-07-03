@@ -341,8 +341,10 @@ uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance);
  *@}
  **/
 
+#ifndef SUPPRESS_INLINE_IMPLEMENTATION
 void nrfx_twim_0_irq_handler(void);
 void nrfx_twim_1_irq_handler(void);
+#endif
 
 #ifdef __cplusplus
 }

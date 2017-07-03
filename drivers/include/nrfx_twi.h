@@ -331,8 +331,10 @@ uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance);
  *@}
  **/
 
+#ifndef SUPPRESS_INLINE_IMPLEMENTATION
 void nrfx_twi_0_irq_handler(void);
 void nrfx_twi_1_irq_handler(void);
+#endif
 
 #ifdef __cplusplus
 }
