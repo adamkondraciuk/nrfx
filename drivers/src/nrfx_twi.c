@@ -642,13 +642,6 @@ uint32_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance)
     return m_cb[p_instance->drv_inst_idx].bytes_transferred;
 }
 
-uint32_t nrfx_twi_start_task_get(nrfx_twi_t const * p_instance,
-                                 nrfx_twi_xfer_type_t xfer_type)
-{
-    return (uint32_t)nrf_twi_task_address_get(p_instance->p_twi,
-            (xfer_type != NRFX_TWI_XFER_RX) ? NRF_TWI_TASK_STARTTX : NRF_TWI_TASK_STARTRX);
-}
-
 uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance)
 {
     return (uint32_t)nrf_twi_event_address_get(p_instance->p_twi, NRF_TWI_EVENT_STOPPED);

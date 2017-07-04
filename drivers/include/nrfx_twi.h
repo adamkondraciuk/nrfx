@@ -275,7 +275,6 @@ ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * @note
  * Some flag combinations are invalid:
  * - @ref NRFX_TWI_FLAG_TX_NO_STOP with @ref nrfx_twi_xfer_desc_t::type different than @ref NRFX_TWI_XFER_TX
- * - @ref NRFX_TWI_FLAG_REPEATED_XFER with @ref nrfx_twi_xfer_desc_t::type set to @ref NRFX_TWI_XFER_TXTX
  *
  * @note
  * This function should be used only if the instance is configured to work in non-blocking mode. If the function is used in blocking mode, the driver asserts.
@@ -314,19 +313,6 @@ bool nrfx_twi_is_busy(nrfx_twi_t const * p_instance);
  * @return     Data count.
  */
 uint32_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance);
-
-/**
- * @brief Function for returning the address of a TWI start task.
- *
- * This function should be used if @ref nrfx_twi_xfer was called with the flag @ref NRFX_TWI_FLAG_HOLD_XFER.
- * In that case, the transfer is not started by the driver, but it must be started externally by PPI.
- *
- * @param[in]  p_instance Pointer to the driver instance structure.
- * @param[in]  xfer_type  Transfer type used in the last call of the @ref nrfx_twi_xfer function.
- *
- * @return     Start task address (TX or RX) depending on the value of xfer_type.
- */
-uint32_t nrfx_twi_start_task_get(nrfx_twi_t const * p_instance, nrfx_twi_xfer_type_t xfer_type);
 
 /**
  * @brief Function for returning the address of a STOPPED TWI event.
