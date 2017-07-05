@@ -8,20 +8,6 @@ extern "C" {
 #endif
 
 
-// PRS boxes with peripherals that share a common IRQ:
-
-// SPIM0, SPIS0, TWIM0, TWIS0, SPI0, TWI0
-#define NRFX_PRS_BOX_0_ADDR     NRF_SPIM0
-// SPIM1, SPIS1, TWIM1, TWIS1, SPI1, TWI1
-#define NRFX_PRS_BOX_1_ADDR     NRF_SPIM1
-// SPIM2, SPIS2, SPI2
-#define NRFX_PRS_BOX_2_ADDR     NRF_SPIM2
-// UARTE0, UART0
-#define NRFX_PRS_BOX_3_ADDR     NRF_UARTE0
-// COMP, LPCOMP
-#define NRFX_PRS_BOX_4_ADDR     NRF_COMP
-
-
 // POWER_CLOCK_IRQn
 #define nrfx_power_clock_irq_handler    POWER_CLOCK_IRQHandler
 
