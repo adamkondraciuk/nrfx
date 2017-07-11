@@ -59,7 +59,8 @@ ret_code_t nrf_drv_wdt_init(nrf_drv_wdt_config_t const * p_config,
 
     nrf_wdt_reload_value_set((p_config->reload_value * 32768) / 1000);
 
-    NRFX_IRQ_ENABLE(WDT_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(WDT_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(WDT_IRQn);
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));

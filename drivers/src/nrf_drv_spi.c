@@ -233,7 +233,8 @@ ret_code_t nrf_drv_spi_init(nrf_drv_spi_t const * const p_instance,
 
     if (p_cb->handler)
     {
-        NRFX_IRQ_ENABLE(p_instance->irq, p_config->irq_priority);
+        NRFX_IRQ_PRIORITY_SET(p_instance->irq, p_config->irq_priority);
+        NRFX_IRQ_ENABLE(p_instance->irq);
     }
 
     p_cb->transfer_in_progress = false;

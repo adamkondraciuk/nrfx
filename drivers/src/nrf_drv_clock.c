@@ -536,7 +536,8 @@ void nrf_drv_clock_on_sd_disable(void)
 {
     /* Reinit interrupts */
     NRFX_ASSERT(m_clock_cb.module_initialized);
-    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
 
     /* SD leaves LFCLK enabled - disable it if it is no longer required. */
     nrf_drv_clock_lfclk_release();

@@ -131,7 +131,8 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
 
     m_cb.handler = handler;
 
-    NRFX_IRQ_ENABLE(I2S_IRQn, p_config->irq_priority);
+    NRFX_IRQ_PRIORITY_SET(I2S_IRQn, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(I2S_IRQn);
 
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 

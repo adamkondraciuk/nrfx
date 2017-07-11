@@ -29,7 +29,8 @@ __STATIC_INLINE void nrfx_power_clock_irq_init(void)
 
     if (!NRFX_IRQ_IS_ENABLED(POWER_CLOCK_IRQn))
     {
-        NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn, priority);
+        NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, priority);
+        NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
     }
 }
 #endif // SUPPRESS_INLINE_IMPLEMENTATION

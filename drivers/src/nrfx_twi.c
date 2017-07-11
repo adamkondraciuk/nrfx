@@ -202,8 +202,9 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
 
     if (p_cb->handler)
     {
-        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_twi),
+        NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_twi),
             p_config->interrupt_priority);
+        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_twi));
     }
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;

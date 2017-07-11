@@ -204,8 +204,9 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 
     if (p_cb->handler)
     {
-        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_twim),
+        NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_twim),
             p_config->interrupt_priority);
+        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_twim));
     }
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;

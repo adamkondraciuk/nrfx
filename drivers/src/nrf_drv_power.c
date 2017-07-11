@@ -382,7 +382,8 @@ void nrf_drv_power_on_sd_disable(void)
 {
     /* Reinit interrupts */
     NRFX_ASSERT(m_initialized);
-    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
     if (m_pofwarn_handler != NULL)
     {
         nrf_power_int_enable(NRF_POWER_INT_POFWARN_MASK);

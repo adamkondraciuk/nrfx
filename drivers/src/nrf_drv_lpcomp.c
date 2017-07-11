@@ -96,7 +96,8 @@ ret_code_t nrf_drv_lpcomp_init(const nrf_drv_lpcomp_config_t * p_config,
     }
     nrf_lpcomp_shorts_enable(NRF_LPCOMP_SHORT_READY_SAMPLE_MASK);
 
-    NRFX_IRQ_ENABLE(LPCOMP_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(LPCOMP_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(LPCOMP_IRQn);
 
     m_state = NRFX_DRV_STATE_INITIALIZED;
 

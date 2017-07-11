@@ -30,7 +30,7 @@
 #define EGU_IRQn(i)         EGU_IRQn_(i)
 #define EGU_IRQn_(i)        SWI##i##_EGU##i##_IRQn
 #define EGU_IRQHandler(i)   EGU_IRQHandler_(i)
-#define EGU_IRQHandler_(i)  SWI##i##_EGU##i##_IRQHandler
+#define EGU_IRQHandler_(i)  nrfx_swi_##i##_irq_handler
 #define DMA_ISSUE_EGU_IDX           NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
 #define DMA_ISSUE_EGU               NRFX_CONCAT_2(NRF_EGU, DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQn          EGU_IRQn(DMA_ISSUE_EGU_IDX)
@@ -41,9 +41,9 @@
 typedef struct
 {
 #if defined(USE_DMA_ISSUE_WORKAROUND)
-    uint32_t                 starting_task_address;
+    uint32_t                  starting_task_address;
 #endif
-    nrfx_pwm_handler_t       handler;
+    nrfx_pwm_handler_t        handler;
     nrfx_drv_state_t volatile state;
     uint8_t                   flags;
 } pwm_control_block_t;
@@ -126,13 +126,15 @@ ret_code_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
     // is read). Therefore, the PWM interrupt must be enabled even if the event
     // handler is not used.
 #if defined(USE_DMA_ISSUE_WORKAROUND)
-    NRFX_IRQ_ENABLE(DMA_ISSUE_EGU_IRQn, p_config->irq_priority);
+    NRFX_IRQ_PRIORITY_SET(DMA_ISSUE_EGU_IRQn, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(DMA_ISSUE_EGU_IRQn);
 #else
     if (p_cb->handler)
 #endif
     {
-        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_registers),
+        NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_registers),
             p_config->irq_priority);
+        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_registers));
     }
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;

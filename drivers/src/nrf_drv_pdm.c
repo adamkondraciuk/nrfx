@@ -35,7 +35,6 @@ typedef struct
     volatile nrf_drv_pdm_state_t op_state;         ///< PDM peripheral operation state.
     uint8_t                      active_buffer;    ///< Number of currently active buffer.
     uint8_t                      error;            ///< Driver error flag.
-    uint8_t                      irq_priority;     ///< Interrupt priority.
     volatile uint8_t             irq_buff_request; ///< Request the next buffer in the ISR.
 } nrf_drv_pdm_cb_t;
 
@@ -183,8 +182,8 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
     nrf_pdm_event_clear(NRF_PDM_EVENT_END);
     nrf_pdm_event_clear(NRF_PDM_EVENT_STOPPED);
     nrf_pdm_int_enable(NRF_PDM_INT_STARTED | NRF_PDM_INT_STOPPED);
-    m_cb.irq_priority = p_config->interrupt_priority;
-    NRFX_IRQ_ENABLE(PDM_IRQn, m_cb.irq_priority);
+    NRFX_IRQ_PRIORITY_SET(PDM_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(PDM_IRQn);
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -284,7 +283,7 @@ ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
         }
     }
 
-    NRFX_IRQ_ENABLE(PDM_IRQn, m_cb.irq_priority);
+    NRFX_IRQ_ENABLE(PDM_IRQn);
     return err_code;
 }
 

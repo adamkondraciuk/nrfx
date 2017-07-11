@@ -588,7 +588,8 @@ ret_code_t nrf_drv_twis_init(
     /* Peripheral interrupt configure
      * (note - interrupts still needs to be configured in INTEN register.
      * This is done in enable function) */
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg), p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
 
     /* Configure */
     nrf_twis_pins_set          (p_reg, p_config->scl, p_config->sda);

@@ -72,8 +72,9 @@ ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
             nrf_timer_compare_event_get(i));
     }
 
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_reg),
+    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_reg),
         p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_reg));
 
     nrf_timer_mode_set(p_instance->p_reg, p_config->mode);
     nrf_timer_bit_width_set(p_instance->p_reg, p_config->bit_width);

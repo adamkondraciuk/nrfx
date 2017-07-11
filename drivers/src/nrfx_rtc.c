@@ -62,7 +62,8 @@ ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const p_instance,
         return err_code;
     }
 
-    NRFX_IRQ_ENABLE(p_instance->irq, p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(p_instance->irq, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(p_instance->irq);
     nrf_rtc_prescaler_set(p_instance->p_reg, p_config->prescaler);
     m_cb[p_instance->instance_id].reliable     = p_config->reliable;
     m_cb[p_instance->instance_id].tick_latency = p_config->tick_latency;

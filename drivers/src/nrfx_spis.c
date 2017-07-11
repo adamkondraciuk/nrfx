@@ -212,7 +212,8 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
 
     // Enable IRQ.
     nrf_spis_int_enable(p_spis, NRF_SPIS_INT_ACQUIRED_MASK | NRF_SPIS_INT_END_MASK);
-    NRFX_IRQ_ENABLE(p_instance->irq, p_config->irq_priority);
+    NRFX_IRQ_PRIORITY_SET(p_instance->irq, p_config->irq_priority);
+    NRFX_IRQ_ENABLE(p_instance->irq);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 

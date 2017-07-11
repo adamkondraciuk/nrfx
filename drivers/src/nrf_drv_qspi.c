@@ -103,7 +103,8 @@ ret_code_t nrf_drv_qspi_init(nrf_drv_qspi_config_t const * p_config,
 
     if (handler)
     {
-        NRFX_IRQ_ENABLE(QSPI_IRQn, p_config->irq_priority);
+        NRFX_IRQ_PRIORITY_SET(QSPI_IRQn, p_config->irq_priority);
+        NRFX_IRQ_ENABLE(QSPI_IRQn);
     }
 
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;

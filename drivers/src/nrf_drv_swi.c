@@ -309,7 +309,8 @@ ret_code_t nrf_drv_swi_alloc(nrf_swi_t * p_swi, nrf_swi_handler_t event_handler,
         {
             m_swi_handlers[i - SWI_START_NUMBER] = event_handler;
             *p_swi = (nrf_swi_t) i;
-            NRFX_IRQ_ENABLE(nrf_drv_swi_irq_of(*p_swi), priority);
+            NRFX_IRQ_PRIORITY_SET(nrf_drv_swi_irq_of(*p_swi), priority);
+            NRFX_IRQ_ENABLE(nrf_drv_swi_irq_of(*p_swi));
 #if NRFX_CHECK(EGU_ENABLED)
             if(event_handler != NULL)
             {

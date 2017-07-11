@@ -46,7 +46,8 @@ ret_code_t nrf_drv_adc_init(nrf_drv_adc_config_t const * p_config,
         {
             p_config = (nrf_drv_adc_config_t *)&m_default_config;
         }
-        NRFX_IRQ_ENABLE(ADC_IRQn, p_config->interrupt_priority);
+        NRFX_IRQ_PRIORITY_SET(ADC_IRQn, p_config->interrupt_priority);
+        NRFX_IRQ_ENABLE(ADC_IRQn);
     }
     m_cb.event_handler = event_handler;
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;

@@ -210,7 +210,8 @@ ret_code_t nrf_drv_saadc_init(nrf_drv_saadc_config_t const * p_config,
     nrf_saadc_int_disable(NRF_SAADC_INT_ALL);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
-    NRFX_IRQ_ENABLE(SAADC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(SAADC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(SAADC_IRQn);
     nrf_saadc_int_enable(NRF_SAADC_INT_END);
 
     if (m_cb.low_power_mode)

@@ -196,7 +196,8 @@ ret_code_t nrf_drv_gpiote_init(void)
         channel_free(i);
     }
 
-    NRFX_IRQ_ENABLE(GPIOTE_IRQn, GPIOTE_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_PRIORITY_SET(GPIOTE_IRQn, GPIOTE_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(GPIOTE_IRQn);
     nrf_gpiote_event_clear(NRF_GPIOTE_EVENTS_PORT);
     nrf_gpiote_int_enable(GPIOTE_INTENSET_PORT_Msk);
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;

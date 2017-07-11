@@ -118,7 +118,8 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     }
 
     nrf_qdec_int_enable(int_mask);
-    NRFX_IRQ_ENABLE(QDEC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_PRIORITY_SET(QDEC_IRQn, p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(QDEC_IRQn);
 
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
