@@ -46,29 +46,31 @@ PRS_BOX_DEFINE(4)
 
 static prs_box_t * prs_box_get(void const * p_base_addr)
 {
-#define PRS_BOX_HANDLE(n) \
-    case (uint32_t)NRFX_PRS_BOX_##n##_ADDR: \
-        return &m_prs_box_##n
+#if !defined(IS_PRS_BOX)
+#define IS_PRS_BOX(n, p_base_addr)  ((p_base_addr) == NRFX_PRS_BOX_##n##_ADDR)
+#endif
 
-    switch ((uint32_t)p_base_addr)
-    {
 #if defined(NRFX_PRS_BOX_0_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
-        PRS_BOX_HANDLE(0);
+    if (IS_PRS_BOX(0, p_base_addr)) { return &m_prs_box_0; }
+    else
 #endif
 #if defined(NRFX_PRS_BOX_1_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
-        PRS_BOX_HANDLE(1);
+    if (IS_PRS_BOX(1, p_base_addr)) { return &m_prs_box_1; }
+    else
 #endif
 #if defined(NRFX_PRS_BOX_2_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
-        PRS_BOX_HANDLE(2);
+    if (IS_PRS_BOX(2, p_base_addr)) { return &m_prs_box_2; }
+    else
 #endif
 #if defined(NRFX_PRS_BOX_3_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
-        PRS_BOX_HANDLE(3);
+    if (IS_PRS_BOX(3, p_base_addr)) { return &m_prs_box_3; }
+    else
 #endif
 #if defined(NRFX_PRS_BOX_4_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
-        PRS_BOX_HANDLE(4);
+    if (IS_PRS_BOX(4, p_base_addr)) { return &m_prs_box_4; }
+    else
 #endif
-    default:
-        NRFX_ASSERT(false);
+    {
         return NULL;
     }
 }
