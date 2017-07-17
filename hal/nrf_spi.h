@@ -40,7 +40,8 @@ typedef enum
  */
 typedef enum
 {
-    NRF_SPI_INT_READY_MASK = SPI_INTENSET_READY_Msk ///< Interrupt on READY event.
+    NRF_SPI_INT_READY_MASK = SPI_INTENSET_READY_Msk, ///< Interrupt on READY event.
+    NRF_SPI_ALL_INTS_MASK  = SPI_INTENSET_READY_Msk  ///< All SPI interrupts.
 } nrf_spi_int_mask_t;
 
 /**
