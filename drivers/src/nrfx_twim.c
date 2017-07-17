@@ -32,9 +32,6 @@
                                 (type == NRFX_TWIM_XFER_TXTX ? "XFER_TXTX" : "UNKNOWN TRANSFER TYPE"))))
 
 
-// All interrupt flags
-#define DISABLE_ALL_INT_SHORT  0xFFFFFFFF
-
 #define SCL_PIN_INIT_CONF     ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
                               | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
                               | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
@@ -261,8 +258,8 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance)
 
     NRF_TWIM_Type * p_twim = p_instance->p_twim;
     p_cb->int_mask = 0;
-    nrf_twim_int_disable(p_twim, DISABLE_ALL_INT_SHORT);
-    nrf_twim_shorts_disable(p_twim, DISABLE_ALL_INT_SHORT);
+    nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+    nrf_twim_shorts_disable(p_twim, NRF_TWIM_ALL_SHORTS_MASK);
     nrf_twim_disable(p_twim);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
@@ -315,7 +312,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         return err_code;
     }
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
-    nrf_twim_int_disable(p_twim, DISABLE_ALL_INT_SHORT);
+    nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
     if (p_cb->busy)
     {
         nrf_twim_int_enable(p_twim, p_cb->int_mask);
@@ -589,7 +586,7 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
         {
             nrf_twim_shorts_set(p_twim, 0);
             p_cb->int_mask = 0;
-            nrf_twim_int_disable(p_twim, DISABLE_ALL_INT_SHORT);
+            nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
         }
     }
     else
@@ -603,14 +600,14 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
             {
                 nrf_twim_shorts_set(p_twim, 0);
                 p_cb->int_mask = 0;
-                nrf_twim_int_disable(p_twim, DISABLE_ALL_INT_SHORT);
+                nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
             }
         }
         else
         {
             nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK | NRF_TWIM_INT_ERROR_MASK;
-            nrf_twim_int_disable(p_twim, DISABLE_ALL_INT_SHORT);
+            nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
             nrf_twim_int_enable(p_twim, p_cb->int_mask);
             nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
             nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);

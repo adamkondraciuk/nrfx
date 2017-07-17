@@ -51,11 +51,16 @@ typedef enum
  */
 typedef enum
 {
-    NRF_TWIM_SHORT_LASTTX_STARTRX_MASK = TWIM_SHORTS_LASTTX_STARTRX_Msk, ///< Shortcut between LASTTX event and STARTRX task.
-    NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK = TWIM_SHORTS_LASTTX_SUSPEND_Msk, ///< Shortcut between LASTTX event and SUSPEND task.
-    NRF_TWIM_SHORT_LASTTX_STOP_MASK    = TWIM_SHORTS_LASTTX_STOP_Msk,    ///< Shortcut between LASTTX event and STOP task.
-    NRF_TWIM_SHORT_LASTRX_STARTTX_MASK = TWIM_SHORTS_LASTRX_STARTTX_Msk, ///< Shortcut between LASTRX event and STARTTX task.
-    NRF_TWIM_SHORT_LASTRX_STOP_MASK    = TWIM_SHORTS_LASTRX_STOP_Msk     ///< Shortcut between LASTRX event and STOP task.
+    NRF_TWIM_SHORT_LASTTX_STARTRX_MASK = TWIM_SHORTS_LASTTX_STARTRX_Msk,  ///< Shortcut between LASTTX event and STARTRX task.
+    NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK = TWIM_SHORTS_LASTTX_SUSPEND_Msk,  ///< Shortcut between LASTTX event and SUSPEND task.
+    NRF_TWIM_SHORT_LASTTX_STOP_MASK    = TWIM_SHORTS_LASTTX_STOP_Msk,     ///< Shortcut between LASTTX event and STOP task.
+    NRF_TWIM_SHORT_LASTRX_STARTTX_MASK = TWIM_SHORTS_LASTRX_STARTTX_Msk,  ///< Shortcut between LASTRX event and STARTTX task.
+    NRF_TWIM_SHORT_LASTRX_STOP_MASK    = TWIM_SHORTS_LASTRX_STOP_Msk,     ///< Shortcut between LASTRX event and STOP task.
+    NRF_TWIM_ALL_SHORTS_MASK           = TWIM_SHORTS_LASTTX_STARTRX_Msk |
+                                         TWIM_SHORTS_LASTTX_SUSPEND_Msk |
+                                         TWIM_SHORTS_LASTTX_STOP_Msk    |
+                                         TWIM_SHORTS_LASTRX_STARTTX_Msk |
+                                         TWIM_SHORTS_LASTRX_STOP_Msk      ///< All TWIM shortcuts.
 } nrf_twim_short_mask_t;
 
 /**
@@ -65,11 +70,18 @@ typedef enum
 {
     NRF_TWIM_INT_STOPPED_MASK   = TWIM_INTENSET_STOPPED_Msk,   ///< Interrupt on STOPPED event.
     NRF_TWIM_INT_ERROR_MASK     = TWIM_INTENSET_ERROR_Msk,     ///< Interrupt on ERROR event.
-    NRF_TWIM_INT_SUSPENDED_MASK = (1 << 18),                   ///< Interrupt on SUSPENDED event.
+    NRF_TWIM_INT_SUSPENDED_MASK = TWIM_INTENSET_SUSPENDED_Msk, ///< Interrupt on SUSPENDED event.
     NRF_TWIM_INT_RXSTARTED_MASK = TWIM_INTENSET_RXSTARTED_Msk, ///< Interrupt on RXSTARTED event.
     NRF_TWIM_INT_TXSTARTED_MASK = TWIM_INTENSET_TXSTARTED_Msk, ///< Interrupt on TXSTARTED event.
     NRF_TWIM_INT_LASTRX_MASK    = TWIM_INTENSET_LASTRX_Msk,    ///< Interrupt on LASTRX event.
-    NRF_TWIM_INT_LASTTX_MASK    = TWIM_INTENSET_LASTTX_Msk     ///< Interrupt on LASTTX event.
+    NRF_TWIM_INT_LASTTX_MASK    = TWIM_INTENSET_LASTTX_Msk,     ///< Interrupt on LASTTX event.
+    NRF_TWIM_ALL_INTS_MASK      = TWIM_INTENSET_STOPPED_Msk   |
+                                  TWIM_INTENSET_ERROR_Msk     |
+                                  TWIM_INTENSET_SUSPENDED_Msk |
+                                  TWIM_INTENSET_RXSTARTED_Msk |
+                                  TWIM_INTENSET_TXSTARTED_Msk |
+                                  TWIM_INTENSET_LASTRX_Msk    |
+                                  TWIM_INTENSET_LASTTX_Msk      ///< Interrupt on LASTTX event.
 } nrf_twim_int_mask_t;
 
 /**

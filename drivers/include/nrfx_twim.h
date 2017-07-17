@@ -15,8 +15,8 @@ extern "C" {
  */
 typedef struct
 {
-    NRF_TWIM_Type * p_twim; ///< Pointer to a structure with TWIM registers.
-    uint8_t drv_inst_idx; ///< Driver instance index.
+    NRF_TWIM_Type * p_twim;       ///< Pointer to a structure with TWIM registers.
+    uint8_t         drv_inst_idx; ///< Driver instance index.
 } nrfx_twim_t;
 
 /**

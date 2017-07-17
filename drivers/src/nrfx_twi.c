@@ -31,9 +31,6 @@
                                 (type == NRFX_TWI_XFER_TXTX ? "XFER_TXTX" : "UNKNOWN TRANSFER TYPE"))))
 
 
-// All interrupt flags
-#define DISABLE_ALL_INT_SHORT  0xFFFFFFFF
-
 #define SCL_PIN_INIT_CONF     ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
                               | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
                               | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
@@ -259,8 +256,8 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance)
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     NRF_TWI_Type * p_twi = p_instance->p_twi;
-    nrf_twi_int_disable(p_twi, DISABLE_ALL_INT_SHORT);
-    nrf_twi_shorts_disable(p_twi, DISABLE_ALL_INT_SHORT);
+    nrf_twi_int_disable(p_twi, NRF_TWI_ALL_INTS_MASK);
+    nrf_twi_shorts_disable(p_twi, NRF_TWI_ALL_SHORTS_MASK);
     nrf_twi_disable(p_twi);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
@@ -535,7 +532,7 @@ __STATIC_INLINE ret_code_t twi_xfer(twi_control_block_t        * p_cb,
     ret_code_t err_code = NRFX_SUCCESS;
 
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
-    nrf_twi_int_disable(p_twi, DISABLE_ALL_INT_SHORT);
+    nrf_twi_int_disable(p_twi, NRF_TWI_ALL_INTS_MASK);
 
     if (p_cb->busy)
     {

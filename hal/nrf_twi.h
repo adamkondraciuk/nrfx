@@ -50,8 +50,10 @@ typedef enum
  */
 typedef enum
 {
-    NRF_TWI_SHORT_BB_SUSPEND_MASK = TWI_SHORTS_BB_SUSPEND_Msk, ///< Shortcut between BB event and SUSPEND task.
-    NRF_TWI_SHORT_BB_STOP_MASK    = TWI_SHORTS_BB_STOP_Msk,    ///< Shortcut between BB event and STOP task.
+    NRF_TWI_SHORT_BB_SUSPEND_MASK = TWI_SHORTS_BB_SUSPEND_Msk,  ///< Shortcut between BB event and SUSPEND task.
+    NRF_TWI_SHORT_BB_STOP_MASK    = TWI_SHORTS_BB_STOP_Msk,     ///< Shortcut between BB event and STOP task.
+    NRF_TWI_ALL_SHORTS_MASK       = TWI_SHORTS_BB_SUSPEND_Msk |
+                                    TWI_SHORTS_BB_STOP_Msk      ///< All TWI shortcuts.
 } nrf_twi_short_mask_t;
 
 /**
@@ -59,12 +61,18 @@ typedef enum
  */
 typedef enum
 {
-    NRF_TWI_INT_STOPPED_MASK    = TWI_INTENSET_STOPPED_Msk,  ///< Interrupt on STOPPED event.
-    NRF_TWI_INT_RXDREADY_MASK   = TWI_INTENSET_RXDREADY_Msk, ///< Interrupt on RXDREADY event.
-    NRF_TWI_INT_TXDSENT_MASK    = TWI_INTENSET_TXDSENT_Msk,  ///< Interrupt on TXDSENT event.
-    NRF_TWI_INT_ERROR_MASK      = TWI_INTENSET_ERROR_Msk,    ///< Interrupt on ERROR event.
-    NRF_TWI_INT_BB_MASK         = TWI_INTENSET_BB_Msk,       ///< Interrupt on BB event.
-    NRF_TWI_INT_SUSPENDED_MASK  = TWI_INTENSET_SUSPENDED_Msk ///< Interrupt on SUSPENDED event.
+    NRF_TWI_INT_STOPPED_MASK    = TWI_INTENSET_STOPPED_Msk,    ///< Interrupt on STOPPED event.
+    NRF_TWI_INT_RXDREADY_MASK   = TWI_INTENSET_RXDREADY_Msk,   ///< Interrupt on RXDREADY event.
+    NRF_TWI_INT_TXDSENT_MASK    = TWI_INTENSET_TXDSENT_Msk,    ///< Interrupt on TXDSENT event.
+    NRF_TWI_INT_ERROR_MASK      = TWI_INTENSET_ERROR_Msk,      ///< Interrupt on ERROR event.
+    NRF_TWI_INT_BB_MASK         = TWI_INTENSET_BB_Msk,         ///< Interrupt on BB event.
+    NRF_TWI_INT_SUSPENDED_MASK  = TWI_INTENSET_SUSPENDED_Msk,  ///< Interrupt on SUSPENDED event.
+    NRF_TWI_ALL_INTS_MASK       = TWI_INTENSET_STOPPED_Msk   |
+                                  TWI_INTENSET_RXDREADY_Msk  |
+                                  TWI_INTENSET_TXDSENT_Msk   |
+                                  TWI_INTENSET_ERROR_Msk     |
+                                  TWI_INTENSET_BB_Msk        |
+                                  TWI_INTENSET_SUSPENDED_Msk   ///< All TWI interrupts.
 } nrf_twi_int_mask_t;
 
 /**

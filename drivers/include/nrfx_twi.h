@@ -27,8 +27,8 @@ extern "C" {
  */
 typedef struct
 {
-    NRF_TWI_Type  * p_twi;  ///< Pointer to a structure with TWI registers.
-    uint8_t drv_inst_idx; ///< Driver instance index.
+    NRF_TWI_Type * p_twi;        ///< Pointer to a structure with TWI registers.
+    uint8_t        drv_inst_idx; ///< Driver instance index.
 } nrfx_twi_t;
 
 /**
