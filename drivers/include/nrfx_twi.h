@@ -11,15 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup nrf_twi Two Wire master interface
- * @ingroup    nrf_drivers
- * @brief      Two Wire master interface APIs.
- *
- *
  * @defgroup nrfx_twi TWI driver
  * @{
- * @ingroup    nrf_twi
- * @brief      TWI master APIs.
+ * @ingroup nrf_twi
+ * @brief   Multi-instance TWI driver.
  */
 
 /**
@@ -325,14 +320,15 @@ uint32_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance);
  * @return     STOPPED event address.
  */
 uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance);
-/**
- *@}
- **/
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 void nrfx_twi_0_irq_handler(void);
 void nrfx_twi_1_irq_handler(void);
 #endif
+
+/**
+ *@}
+ **/
 
 #ifdef __cplusplus
 }

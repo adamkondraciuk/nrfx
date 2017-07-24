@@ -1,10 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_spim Serial peripheral interface (SPIM)
- * @ingroup    nrf_drivers
- * @brief      Serial peripheral interface (SPIM) APIs.
- *
- */
 
 #ifndef NRFX_SPIM_H__
 #define NRFX_SPIM_H__
@@ -17,11 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfx_spim SPIM master driver
+ * @defgroup nrfx_spim SPIM driver
  * @{
- * @ingroup  nrf_spim
- *
- * @brief    Multi-instance SPIM master driver.
+ * @ingroup  nrf_spi
+ * @brief    Multi-instance SPIM driver.
  */
 
 /**
@@ -352,11 +345,12 @@ void nrfx_spim_0_irq_handler(void);
 void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
 
+/**
+ *@}
+ **/
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_SPIM_H__
-
-/** @} */

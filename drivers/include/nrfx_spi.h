@@ -1,10 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_spi Serial peripheral interface (SPI)
- * @ingroup    nrf_drivers
- * @brief      Serial peripheral interface (SPI) APIs.
- *
- */
 
 #ifndef NRFX_SPI_H__
 #define NRFX_SPI_H__
@@ -17,11 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfx_spi SPI master driver
+ * @defgroup nrfx_spi SPI driver
  * @{
  * @ingroup  nrf_spi
- *
- * @brief    Multi-instance SPI master driver.
+ * @brief    Multi-instance SPI driver.
  */
 
 /**
@@ -287,11 +280,12 @@ void nrfx_spi_0_irq_handler(void);
 void nrfx_spi_1_irq_handler(void);
 void nrfx_spi_2_irq_handler(void);
 
+/**
+ *@}
+ **/
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_SPI_H__
-
-/** @} */

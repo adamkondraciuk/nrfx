@@ -11,6 +11,13 @@ extern "C" {
 #endif
 
 /**
+ * @defgroup nrfx_twim TWIM driver
+ * @{
+ * @ingroup nrf_twi
+ * @brief   Multi-instance TWIM driver.
+ */
+
+/**
  * @brief Structure for the TWI master driver instance.
  */
 typedef struct
@@ -337,14 +344,15 @@ uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer
  * @return     STOPPED event address.
  */
 uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance);
-/**
- *@}
- **/
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 void nrfx_twim_0_irq_handler(void);
 void nrfx_twim_1_irq_handler(void);
 #endif
+
+/**
+ *@}
+ **/
 
 #ifdef __cplusplus
 }
