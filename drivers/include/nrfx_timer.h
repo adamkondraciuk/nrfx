@@ -6,14 +6,14 @@
  * @details    The timer HAL provides basic APIs for accessing the registers
  *             of the timer. The timer driver provides APIs on a higher level.
  *
- * @defgroup   nrf_drv_timer Timer driver
+ * @defgroup   nrfx_timer Timer driver
  * @{
  * @ingroup    nrf_timer
  * @brief      Multi-instance timer driver.
  */
 
-#ifndef NRF_DRV_TIMER_H__
-#define NRF_DRV_TIMER_H__
+#ifndef NRFX_TIMER_H__
+#define NRFX_TIMER_H__
 
 #include <nrfx.h>
 #include <hal/nrf_timer.h>
@@ -30,12 +30,12 @@ typedef struct
     NRF_TIMER_Type * p_reg;            ///< Pointer to the structure with TIMER peripheral instance registers.
     uint8_t          instance_id;      ///< Driver instance index.
     uint8_t          cc_channel_count; ///< Number of capture/compare channels.
-} nrf_drv_timer_t;
+} nrfx_timer_t;
 
 /**
  * @brief Macro for creating a timer driver instance.
  */
-#define NRF_DRV_TIMER_INSTANCE(id) \
+#define NRFX_TIMER_INSTANCE(id)                                   \
 {                                                                 \
     .p_reg            = NRFX_CONCAT_2(NRF_TIMER, id),             \
     .instance_id      = NRFX_CONCAT_3(NRFX_TIMER, id, _INST_IDX), \
@@ -43,19 +43,19 @@ typedef struct
 }
 
 enum {
-#if NRFX_CHECK(TIMER0_ENABLED)
+#if NRFX_CHECK(NRFX_TIMER0_ENABLED)
     NRFX_TIMER0_INST_IDX,
 #endif
-#if NRFX_CHECK(TIMER1_ENABLED)
+#if NRFX_CHECK(NRFX_TIMER1_ENABLED)
     NRFX_TIMER1_INST_IDX,
 #endif
-#if NRFX_CHECK(TIMER2_ENABLED)
+#if NRFX_CHECK(NRFX_TIMER2_ENABLED)
     NRFX_TIMER2_INST_IDX,
 #endif
-#if NRFX_CHECK(TIMER3_ENABLED)
+#if NRFX_CHECK(NRFX_TIMER3_ENABLED)
     NRFX_TIMER3_INST_IDX,
 #endif
-#if NRFX_CHECK(TIMER4_ENABLED)
+#if NRFX_CHECK(NRFX_TIMER4_ENABLED)
     NRFX_TIMER4_INST_IDX,
 #endif
     NRFX_TIMER_ENABLED_COUNT
@@ -71,18 +71,18 @@ typedef struct
     nrf_timer_bit_width_t bit_width;          ///< Bit width.
     uint8_t               interrupt_priority; ///< Interrupt priority.
     void *                p_context;          ///< Context passed to interrupt handler.
-} nrf_drv_timer_config_t;
+} nrfx_timer_config_t;
 
 /**
  * @brief Timer driver instance default configuration.
  */
-#define NRF_DRV_TIMER_DEFAULT_CONFIG \
-{                                                                               \
-    .frequency          = (nrf_timer_frequency_t)TIMER_DEFAULT_CONFIG_FREQUENCY,\
-    .mode               = (nrf_timer_mode_t)TIMER_DEFAULT_CONFIG_MODE,          \
-    .bit_width          = (nrf_timer_bit_width_t)TIMER_DEFAULT_CONFIG_BIT_WIDTH,\
-    .interrupt_priority = TIMER_DEFAULT_CONFIG_IRQ_PRIORITY,                    \
-    .p_context          = NULL                                                  \
+#define NRFX_TIMER_DEFAULT_CONFIG                                                    \
+{                                                                                    \
+    .frequency          = (nrf_timer_frequency_t)NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY,\
+    .mode               = (nrf_timer_mode_t)NRFX_TIMER_DEFAULT_CONFIG_MODE,          \
+    .bit_width          = (nrf_timer_bit_width_t)NRFX_TIMER_DEFAULT_CONFIG_BIT_WIDTH,\
+    .interrupt_priority = NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY,                    \
+    .p_context          = NULL                                                       \
 }
 
 /**
@@ -94,8 +94,8 @@ typedef struct
  *                       additional information to the handler function, for
  *                       example, the timer ID.
  */
-typedef void (* nrf_timer_event_handler_t)(nrf_timer_event_t event_type,
-                                           void * p_context);
+typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
+                                            void            * p_context);
 
 /**
  * @brief Function for initializing the timer.
@@ -109,23 +109,23 @@ typedef void (* nrf_timer_event_handler_t)(nrf_timer_event_t event_type,
  * @retval NRFX_ERROR_INVALID_STATE If the instance is already initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If no handler was provided.
  */
-ret_code_t nrf_drv_timer_init(nrf_drv_timer_t const * const p_instance,
-                              nrf_drv_timer_config_t const * p_config,
-                              nrf_timer_event_handler_t timer_event_handler);
+ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
+                           nrfx_timer_config_t const * p_config,
+                           nrfx_timer_event_handler_t  timer_event_handler);
 
 /**
  * @brief Function for uninitializing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_uninit(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_uninit(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for turning on the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_enable(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_enable(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for turning off the timer.
@@ -135,35 +135,35 @@ void nrf_drv_timer_enable(nrf_drv_timer_t const * const p_instance);
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_disable(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_disable(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for pausing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_pause(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_pause(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for resuming the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_resume(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_resume(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for clearing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_clear(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_clear(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for incrementing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrf_drv_timer_increment(nrf_drv_timer_t const * const p_instance);
+void nrfx_timer_increment(nrfx_timer_t const * const p_instance);
 
 /**
  * @brief Function for returning the address of a specific timer task.
@@ -173,9 +173,8 @@ void nrf_drv_timer_increment(nrf_drv_timer_t const * const p_instance);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_task_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_task_t timer_task);
+__STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
+                                                     nrf_timer_task_t           timer_task);
 
 /**
  * @brief Function for returning the address of a specific timer capture task.
@@ -185,9 +184,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_task_address_get(
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_capture_task_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t channel);
+__STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const * const p_instance,
+                                                             uint32_t                   channel);
 
 /**
  * @brief Function for returning the address of a specific timer event.
@@ -197,9 +195,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_capture_task_address_get(
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_event_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_event_t timer_event);
+__STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
+                                                      nrf_timer_event_t          timer_event);
 
 /**
  * @brief Function for returning the address of a specific timer compare event.
@@ -209,9 +206,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_event_address_get(
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_compare_event_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t channel);
+__STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t const * const p_instance,
+                                                              uint32_t                   channel);
 
 /**
  * @brief Function for capturing the timer value.
@@ -221,8 +217,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_compare_event_address_get(
  *
  * @return Captured value.
  */
-uint32_t nrf_drv_timer_capture(nrf_drv_timer_t const * const p_instance,
-                               nrf_timer_cc_channel_t cc_channel);
+uint32_t nrfx_timer_capture(nrfx_timer_t const * const p_instance,
+                            nrf_timer_cc_channel_t     cc_channel);
 
 /**
  * @brief Function for returning the capture value from a specific channel.
@@ -234,9 +230,8 @@ uint32_t nrf_drv_timer_capture(nrf_drv_timer_t const * const p_instance,
  *
  * @return Captured value.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_capture_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_cc_channel_t cc_channel);
+__STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
+                                                nrf_timer_cc_channel_t     cc_channel);
 
 /**
  * @brief Function for setting the timer channel in compare mode.
@@ -246,10 +241,10 @@ __STATIC_INLINE uint32_t nrf_drv_timer_capture_get(
  * @param[in] cc_value   Compare value.
  * @param[in] enable_int Enable or disable the interrupt for the compare channel.
  */
-void nrf_drv_timer_compare(nrf_drv_timer_t const * const p_instance,
-                           nrf_timer_cc_channel_t cc_channel,
-                           uint32_t               cc_value,
-                           bool                   enable_int);
+void nrfx_timer_compare(nrfx_timer_t const * const p_instance,
+                        nrf_timer_cc_channel_t     cc_channel,
+                        uint32_t                   cc_value,
+                        bool                       enable_int);
 
 /**
  * @brief Function for setting the timer channel in extended compare mode.
@@ -262,11 +257,11 @@ void nrf_drv_timer_compare(nrf_drv_timer_t const * const p_instance,
  * @param[in] enable_int       Enable or disable the interrupt for the compare
  *                             channel.
  */
-void nrf_drv_timer_extended_compare(nrf_drv_timer_t const * const p_instance,
-                                    nrf_timer_cc_channel_t cc_channel,
-                                    uint32_t               cc_value,
-                                    nrf_timer_short_mask_t timer_short_mask,
-                                    bool                   enable_int);
+void nrfx_timer_extended_compare(nrfx_timer_t const * const p_instance,
+                                 nrf_timer_cc_channel_t     cc_channel,
+                                 uint32_t                   cc_value,
+                                 nrf_timer_short_mask_t     timer_short_mask,
+                                 bool                       enable_int);
 
 /**
  * @brief Function for converting time in microseconds to timer ticks.
@@ -276,9 +271,8 @@ void nrf_drv_timer_extended_compare(nrf_drv_timer_t const * const p_instance,
  *
  * @return Number of ticks.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_us_to_ticks(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t time_us);
+__STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
+                                                uint32_t                   time_us);
 
 /**
  * @brief Function for converting time in milliseconds to timer ticks.
@@ -288,9 +282,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_us_to_ticks(
  *
  * @return Number of ticks.
  */
-__STATIC_INLINE uint32_t nrf_drv_timer_ms_to_ticks(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t time_ms);
+__STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
+                                                uint32_t                   time_ms);
 
 /**
  * @brief Function for enabling timer compare interrupt.
@@ -298,8 +291,8 @@ __STATIC_INLINE uint32_t nrf_drv_timer_ms_to_ticks(
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    Compare channel.
  */
-void nrf_drv_timer_compare_int_enable(nrf_drv_timer_t const * const p_instance,
-                                      uint32_t channel);
+void nrfx_timer_compare_int_enable(nrfx_timer_t const * const p_instance,
+                                   uint32_t                   channel);
 
 /**
  * @brief Function for disabling timer compare interrupt.
@@ -307,65 +300,56 @@ void nrf_drv_timer_compare_int_enable(nrf_drv_timer_t const * const p_instance,
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    Compare channel.
  */
-void nrf_drv_timer_compare_int_disable(nrf_drv_timer_t const * const p_instance,
-                                       uint32_t channel);
+void nrfx_timer_compare_int_disable(nrfx_timer_t const * const p_instance,
+                                    uint32_t                   channel);
 
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
-__STATIC_INLINE uint32_t nrf_drv_timer_task_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_task_t timer_task)
+__STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
+                                                     nrf_timer_task_t           timer_task)
 {
     return (uint32_t)nrf_timer_task_address_get(p_instance->p_reg, timer_task);
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_capture_task_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t channel)
+__STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const * const p_instance,
+                                                             uint32_t                   channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
     return (uint32_t)nrf_timer_task_address_get(p_instance->p_reg,
                          nrf_timer_capture_task_get(channel));
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_event_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_event_t timer_event)
+__STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
+                                                      nrf_timer_event_t          timer_event)
 {
     return (uint32_t)nrf_timer_event_address_get(p_instance->p_reg, timer_event);
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_compare_event_address_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t channel)
+__STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t const * const p_instance,
+                                                              uint32_t                   channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
     return (uint32_t)nrf_timer_event_address_get(p_instance->p_reg,
                          nrf_timer_compare_event_get(channel));
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_capture_get(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       nrf_timer_cc_channel_t cc_channel)
+__STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
+                                                nrf_timer_cc_channel_t     cc_channel)
 {
     return nrf_timer_cc_read(p_instance->p_reg, cc_channel);
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_us_to_ticks(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t timer_us)
+__STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
+                                                uint32_t                   timer_us)
 {
-    return nrf_timer_us_to_ticks(timer_us,
-        nrf_timer_frequency_get(p_instance->p_reg));
+    return nrf_timer_us_to_ticks(timer_us, nrf_timer_frequency_get(p_instance->p_reg));
 }
 
-__STATIC_INLINE uint32_t nrf_drv_timer_ms_to_ticks(
-                                       nrf_drv_timer_t const * const p_instance,
-                                       uint32_t timer_ms)
+__STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
+                                                uint32_t                   timer_ms)
 {
-    return nrf_timer_ms_to_ticks(timer_ms,
-        nrf_timer_frequency_get(p_instance->p_reg));
+    return nrf_timer_ms_to_ticks(timer_ms, nrf_timer_frequency_get(p_instance->p_reg));
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
@@ -382,6 +366,6 @@ void nrfx_timer_4_irq_handler(void);
 }
 #endif
 
-#endif // NRF_DRV_TIMER_H__
+#endif // NRFX_TIMER_H__
 
 /** @} */
