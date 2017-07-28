@@ -115,6 +115,9 @@ typedef struct
     nrf_adc_config_reference_t  reference;  /**< ADC reference. */
 } nrf_adc_config_t;
 
+/**@brief Analog-to-digital value type. */
+typedef int16_t nrf_adc_value_t;
+
 /** Default ADC configuration. */
 #define NRF_ADC_CONFIG_DEFAULT { NRF_ADC_CONFIG_RES_10BIT,               \
                                  NRF_ADC_CONFIG_SCALING_INPUT_ONE_THIRD, \

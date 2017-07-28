@@ -16,7 +16,7 @@ typedef struct
     nrfx_adc_event_handler_t event_handler;
     nrfx_adc_channel_t     * p_head;
     nrfx_adc_channel_t     * p_current_conv;
-    nrfx_adc_value_t       * p_buffer;
+    nrf_adc_value_t        * p_buffer;
     uint8_t                  size;
     uint8_t                  idx;
     nrfx_drv_state_t         state;
@@ -126,7 +126,7 @@ void nrfx_adc_sample(void)
 }
 
 ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
-                                   nrfx_adc_value_t               * p_value)
+                                   nrf_adc_value_t                * p_value)
 {
     ret_code_t err_code;
 
@@ -151,7 +151,7 @@ ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
         {
             while (!nrf_adc_event_check(NRF_ADC_EVENT_END)) {}
             nrf_adc_event_clear(NRF_ADC_EVENT_END);
-            *p_value = (nrfx_adc_value_t)nrf_adc_result_get();
+            *p_value = (nrf_adc_value_t)nrf_adc_result_get();
             nrf_adc_disable();
 
             m_cb.state = NRFX_DRV_STATE_INITIALIZED;
@@ -174,7 +174,7 @@ static bool adc_sample_process()
 {
     nrf_adc_event_clear(NRF_ADC_EVENT_END);
     nrf_adc_disable();
-    m_cb.p_buffer[m_cb.idx] = (nrfx_adc_value_t)nrf_adc_result_get();
+    m_cb.p_buffer[m_cb.idx] = (nrf_adc_value_t)nrf_adc_result_get();
     m_cb.idx++;
     if (m_cb.idx < m_cb.size)
     {
@@ -203,7 +203,7 @@ static bool adc_sample_process()
     }
 }
 
-ret_code_t nrfx_adc_buffer_convert(nrfx_adc_value_t * buffer, uint16_t size)
+ret_code_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
@@ -271,9 +271,9 @@ void nrfx_adc_irq_handler(void)
         nrf_adc_disable();
         nrfx_adc_evt_t evt;
         evt.type = NRFX_ADC_EVT_SAMPLE;
-        evt.data.sample.sample = (nrfx_adc_value_t)nrf_adc_result_get();
+        evt.data.sample.sample = (nrf_adc_value_t)nrf_adc_result_get();
         NRFX_LOG_DEBUG("ADC data:\r\n");
-        NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)(&evt.data.sample.sample), sizeof(nrfx_adc_value_t));
+        NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)(&evt.data.sample.sample), sizeof(nrf_adc_value_t));
         m_cb.state = NRFX_DRV_STATE_INITIALIZED;
         m_cb.event_handler(&evt);
     }
@@ -288,7 +288,7 @@ void nrfx_adc_irq_handler(void)
         evt.data.done.size     = m_cb.size;
         m_cb.state = NRFX_DRV_STATE_INITIALIZED;
         NRFX_LOG_DEBUG("ADC data:\r\n");
-        NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)m_cb.p_buffer, m_cb.size * sizeof(nrfx_adc_value_t));
+        NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)m_cb.p_buffer, m_cb.size * sizeof(nrf_adc_value_t));
         m_cb.event_handler(&evt);
     }
 }

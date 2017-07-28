@@ -31,15 +31,15 @@ typedef enum
     NRFX_ADC_EVT_SAMPLE,  ///< Event generated when the requested channel is sampled.
 } nrfx_adc_evt_type_t;
 
-typedef int16_t nrfx_adc_value_t;
+
 
 /**
  * @brief Analog-to-digital converter driver DONE event.
  */
 typedef struct
 {
-    nrfx_adc_value_t *        p_buffer; ///< Pointer to buffer with converted samples.
-    uint16_t                  size;     ///< Number of samples in the buffer.
+    nrf_adc_value_t *        p_buffer; ///< Pointer to buffer with converted samples.
+    uint16_t                 size;     ///< Number of samples in the buffer.
 } nrfx_adc_done_evt_t;
 
 /**
@@ -47,7 +47,7 @@ typedef struct
  */
 typedef struct
 {
-    nrfx_adc_value_t   sample; ///< Converted sample.
+    nrf_adc_value_t   sample; ///< Converted sample.
 } nrfx_adc_sample_evt_t;
 
 /**
@@ -193,7 +193,7 @@ void nrfx_adc_sample(void);
  * @retval NRFX_ERROR_BUSY If the ADC driver is busy.
  */
 ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
-                                   nrfx_adc_value_t * p_value);
+                                   nrf_adc_value_t                * p_value);
 
 /**
  * @brief Function for converting data to the buffer.
@@ -223,7 +223,7 @@ ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
  * @retval NRFX_SUCCESS    If conversion was successful.
  * @retval NRFX_ERROR_BUSY If the driver is busy.
  */
-ret_code_t nrfx_adc_buffer_convert(nrfx_adc_value_t * buffer, uint16_t size);
+ret_code_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size);
 
 /**
  * @brief Function for retrieving the ADC state.
