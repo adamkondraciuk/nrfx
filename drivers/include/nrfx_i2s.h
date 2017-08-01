@@ -4,15 +4,15 @@
  * @ingroup    nrf_drivers
  * @brief      @tagAPI52 Inter-IC Sound (I2S) interface APIs.
  *
- * @defgroup   nrf_drv_i2s I2S driver
+ * @defgroup   nrfx_i2s I2S driver
  * @{
  * @ingroup    nrf_i2s
  * @brief      @tagAPI52 Inter-IC Sound (I2S) interface driver.
  */
 
 
-#ifndef NRF_DRV_I2S_H__
-#define NRF_DRV_I2S_H__
+#ifndef NRFX_I2S_H__
+#define NRFX_I2S_H__
 
 #include <nrfx.h>
 #include <hal/nrf_i2s.h>
@@ -27,19 +27,19 @@ extern "C" {
  *        SDOUT, SDIN, and MCK to specify that a given signal is not used
  *        and therefore does not need to be connected to a pin.
  */
-#define NRF_DRV_I2S_PIN_NOT_USED  0xFF
+#define NRFX_I2S_PIN_NOT_USED  0xFF
 
 /**
  * @brief Flag indicating that calls to the data handler for RX and TX should
  *        be synchronized, thus always combined into one call.
  *
- * Use this flag when calling @ref nrf_drv_i2s_start to force a common call
- * to the @ref nrf_drv_i2s_data_handler_t "data handler" for RX and TX data.
+ * Use this flag when calling @ref nrfx_i2s_start to force a common call
+ * to the @ref nrfx_i2s_data_handler_t "data handler" for RX and TX data.
  * This is useful, for example, when received data should be processed and
  * then be sent back. Obviously, this flag is only applicable when both
  * directions (RX and TX) are enabled.
  */
-#define NRF_DRV_I2S_FLAG_SYNCHRONIZED_MODE  0x01
+#define NRFX_I2S_FLAG_SYNCHRONIZED_MODE  0x01
 
 /**
  * @brief I2S driver configuration structure.
@@ -49,13 +49,13 @@ typedef struct
     uint8_t sck_pin;      ///< SCK pin number.
     uint8_t lrck_pin;     ///< LRCK pin number.
     uint8_t mck_pin;      ///< MCK pin number.
-                          /**< Optional. Use @ref NRF_DRV_I2S_PIN_NOT_USED
+                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
                            *   if this signal is not needed. */
     uint8_t sdout_pin;    ///< SDOUT pin number.
-                          /**< Optional. Use @ref NRF_DRV_I2S_PIN_NOT_USED
+                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
                            *   if this signal is not needed. */
     uint8_t sdin_pin;     ///< SDIN pin number.
-                          /**< Optional. Use @ref NRF_DRV_I2S_PIN_NOT_USED
+                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
                            *   if this signal is not needed. */
     uint8_t irq_priority; ///< Interrupt priority.
 
@@ -66,26 +66,26 @@ typedef struct
     nrf_i2s_channels_t channels;     ///< Enabled channels.
     nrf_i2s_mck_t      mck_setup;    ///< Master clock setup.
     nrf_i2s_ratio_t    ratio;        ///< MCK/LRCK ratio.
-} nrf_drv_i2s_config_t;
+} nrfx_i2s_config_t;
 
 /**
  * @brief I2S driver default configuration.
  */
-#define NRF_DRV_I2S_DEFAULT_CONFIG           \
-{                                            \
-    .sck_pin      = I2S_CONFIG_SCK_PIN,      \
-    .lrck_pin     = I2S_CONFIG_LRCK_PIN,     \
-    .mck_pin      = I2S_CONFIG_MCK_PIN,      \
-    .sdout_pin    = I2S_CONFIG_SDOUT_PIN,    \
-    .sdin_pin     = I2S_CONFIG_SDIN_PIN,     \
-    .irq_priority = I2S_CONFIG_IRQ_PRIORITY, \
-    .mode         = (nrf_i2s_mode_t)I2S_CONFIG_MASTER,       \
-    .format       = (nrf_i2s_format_t)I2S_CONFIG_FORMAT,       \
-    .alignment    = (nrf_i2s_align_t)I2S_CONFIG_ALIGN,        \
-    .sample_width = (nrf_i2s_swidth_t)I2S_CONFIG_SWIDTH,       \
-    .channels     = (nrf_i2s_channels_t)I2S_CONFIG_CHANNELS,     \
-    .mck_setup    = (nrf_i2s_mck_t)I2S_CONFIG_MCK_SETUP,    \
-    .ratio        = (nrf_i2s_ratio_t)I2S_CONFIG_RATIO,        \
+#define NRFX_I2S_DEFAULT_CONFIG                                    \
+{                                                                  \
+    .sck_pin      = NRFX_I2S_CONFIG_SCK_PIN,                       \
+    .lrck_pin     = NRFX_I2S_CONFIG_LRCK_PIN,                      \
+    .mck_pin      = NRFX_I2S_CONFIG_MCK_PIN,                       \
+    .sdout_pin    = NRFX_I2S_CONFIG_SDOUT_PIN,                     \
+    .sdin_pin     = NRFX_I2S_CONFIG_SDIN_PIN,                      \
+    .irq_priority = NRFX_I2S_CONFIG_IRQ_PRIORITY,                  \
+    .mode         = (nrf_i2s_mode_t)NRFX_I2S_CONFIG_MASTER,        \
+    .format       = (nrf_i2s_format_t)NRFX_I2S_CONFIG_FORMAT,      \
+    .alignment    = (nrf_i2s_align_t)NRFX_I2S_CONFIG_ALIGN,        \
+    .sample_width = (nrf_i2s_swidth_t)NRFX_I2S_CONFIG_SWIDTH,      \
+    .channels     = (nrf_i2s_channels_t)NRFX_I2S_CONFIG_CHANNELS,  \
+    .mck_setup    = (nrf_i2s_mck_t)NRFX_I2S_CONFIG_MCK_SETUP,      \
+    .ratio        = (nrf_i2s_ratio_t)NRFX_I2S_CONFIG_RATIO,        \
 }
 
 /**
@@ -103,7 +103,7 @@ typedef struct
  * @note The two cases mentioned above may be indicated separately or combined
  *       into one call (depending on the environment in which the driver is
  *       used). Therefore, both parameters should be checked and handled
- *       properly in every call. @ref NRF_DRV_I2S_FLAG_SYNCHRONIZED_MODE
+ *       properly in every call. @ref NRFX_I2S_FLAG_SYNCHRONIZED_MODE
  *       "Synchronized mode" can be used to always combine these indications.
  *
  * @param[in]  p_data_received Pointer to the buffer with received data,
@@ -115,11 +115,11 @@ typedef struct
  * @param[in]  number_of_words Length of data received and/or to be written
  *                             (in 32-bit words). This value is always equal to
  *                             half the size of the buffers set by the call
- *                             to the @ref nrf_drv_i2s_start function.
+ *                             to the @ref nrfx_i2s_start function.
  */
-typedef void (* nrf_drv_i2s_data_handler_t)(uint32_t const * p_data_received,
-                                            uint32_t       * p_data_to_send,
-                                            uint16_t         number_of_words);
+typedef void (* nrfx_i2s_data_handler_t)(uint32_t const * p_data_received,
+                                         uint32_t       * p_data_to_send,
+                                         uint16_t         number_of_words);
 
 
 /**
@@ -134,13 +134,13 @@ typedef void (* nrf_drv_i2s_data_handler_t)(uint32_t const * p_data_received,
  * @retval NRFX_ERROR_INVALID_PARAM If the requested combination of configuration
   *                                 options is not allowed by the I2S peripheral.
  */
-ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
-                            nrf_drv_i2s_data_handler_t   handler);
+ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
+                         nrfx_i2s_data_handler_t   handler);
 
 /**
  * @brief Function for uninitializing the I2S driver.
  */
-void       nrf_drv_i2s_uninit(void);
+void       nrfx_i2s_uninit(void);
 
 /**
  * @brief Function for starting the continuous I2S transfer.
@@ -161,13 +161,13 @@ void       nrf_drv_i2s_uninit(void);
  * The provided buffers are logically divided into two parts of equal size.
  * One of them is in use by the peripheral (for storing received data or for
  * getting data to be transmitted, respectively). The other part is provided
- * to the application via a call to the defined @ref nrf_drv_i2s_data_handler_t
+ * to the application via a call to the defined @ref nrfx_i2s_data_handler_t
  * "data handling function", so that the application can process the received
  * data or prepare the next portion of data to be sent. The two parts are
  * swapped every time @p buffer_size/2 data words are received or transmitted.
  *
  * Additional options are provided using the @p flags parameter:
- * - @ref NRF_DRV_I2S_FLAG_SYNCHRONIZED_MODE - the calls to data handler should
+ * - @ref NRFX_I2S_FLAG_SYNCHRONIZED_MODE - the calls to data handler should
  *   be done in a synchronized manner (one common call for TX and RX).
  *   Applicable only when both RX and TX are enabled.
  *
@@ -195,15 +195,15 @@ void       nrf_drv_i2s_uninit(void);
  * @retval NRFX_ERROR_INVALID_ADDR  If the provided buffers are not placed
  *                                  in the Data RAM region.
  */
-ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
-                             uint32_t * p_tx_buffer,
-                             uint16_t   buffer_size,
-                             uint8_t    flags);
+ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
+                          uint32_t * p_tx_buffer,
+                          uint16_t   buffer_size,
+                          uint8_t    flags);
 
 /**
  * @brief Function for stopping the I2S transfer.
  */
-void       nrf_drv_i2s_stop(void);
+void       nrfx_i2s_stop(void);
 
 
 void nrfx_i2s_irq_handler(void);
@@ -213,6 +213,6 @@ void nrfx_i2s_irq_handler(void);
 }
 #endif
 
-#endif // NRF_DRV_I2S_H__
+#endif // NRFX_I2S_H__
 
 /** @} */

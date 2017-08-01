@@ -2,9 +2,9 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(I2S_ENABLED)
+#if NRFX_CHECK(NRFX_I2S_ENABLED)
 
-#include <nrf_drv_i2s.h>
+#include <nrfx_i2s.h>
 #include <hal/nrf_gpio.h>
 #include <string.h>
 
@@ -15,14 +15,11 @@
                             (event == NRF_I2S_EVENT_TXPTRUPD ? "NRF_I2S_EVENT_TXPTRUPD" :                \
                             (event == NRF_I2S_EVENT_STOPPED ? "NRF_I2S_EVENT_STOPPED" : "UNKNOWN EVENT")))
 
-
-#define MODULE_INITIALIZED (m_cb.state == NRFX_DRV_STATE_INITIALIZED) /**< Macro designating whether the module has been initialized properly. */
-
 // Control block - driver instance local data.
 typedef struct
 {
-    nrf_drv_i2s_data_handler_t handler;
-    nrfx_drv_state_t           state;
+    nrfx_i2s_data_handler_t handler;
+    nrfx_drv_state_t        state;
 
     bool       synchronized_mode : 1;
     bool       rx_ready          : 1;
@@ -35,10 +32,10 @@ typedef struct
 static i2s_control_block_t m_cb;
 
 
-static nrf_drv_i2s_config_t const m_default_config = NRF_DRV_I2S_DEFAULT_CONFIG;
+static nrfx_i2s_config_t const m_default_config = NRFX_I2S_DEFAULT_CONFIG;
 
 
-static void configure_pins(nrf_drv_i2s_config_t const * p_config)
+static void configure_pins(nrfx_i2s_config_t const * p_config)
 {
     uint32_t mck_pin, sdout_pin, sdin_pin;
 
@@ -59,7 +56,7 @@ static void configure_pins(nrf_drv_i2s_config_t const * p_config)
     }
 
     // - MCK (optional) - always output,
-    if (p_config->mck_pin != NRF_DRV_I2S_PIN_NOT_USED)
+    if (p_config->mck_pin != NRFX_I2S_PIN_NOT_USED)
     {
         mck_pin = p_config->mck_pin;
         nrf_gpio_cfg_output(mck_pin);
@@ -70,7 +67,7 @@ static void configure_pins(nrf_drv_i2s_config_t const * p_config)
     }
 
     // - SDOUT (optional) - always output,
-    if (p_config->sdout_pin != NRF_DRV_I2S_PIN_NOT_USED)
+    if (p_config->sdout_pin != NRFX_I2S_PIN_NOT_USED)
     {
         sdout_pin = p_config->sdout_pin;
         nrf_gpio_cfg_output(sdout_pin);
@@ -81,7 +78,7 @@ static void configure_pins(nrf_drv_i2s_config_t const * p_config)
     }
 
     // - SDIN (optional) - always input.
-    if (p_config->sdin_pin != NRF_DRV_I2S_PIN_NOT_USED)
+    if (p_config->sdin_pin != NRFX_I2S_PIN_NOT_USED)
     {
         sdin_pin = p_config->sdin_pin;
         nrf_gpio_cfg_input(sdin_pin, NRF_GPIO_PIN_NOPULL);
@@ -96,8 +93,8 @@ static void configure_pins(nrf_drv_i2s_config_t const * p_config)
 }
 
 
-ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
-                            nrf_drv_i2s_data_handler_t   handler)
+ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
+                         nrfx_i2s_data_handler_t   handler)
 {
     NRFX_ASSERT(handler);
 
@@ -106,7 +103,9 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -124,7 +123,9 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
                                     p_config->ratio))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     configure_pins(p_config);
@@ -137,28 +138,30 @@ ret_code_t nrf_drv_i2s_init(nrf_drv_i2s_config_t const * p_config,
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
 
-void nrf_drv_i2s_uninit(void)
+void nrfx_i2s_uninit(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    nrf_drv_i2s_stop();
+    nrfx_i2s_stop();
 
     NRFX_IRQ_DISABLE(I2S_IRQn);
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Initialized.\r\n");
+    NRFX_LOG_INFO("Uninitialized.\r\n");
 }
 
 
-ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
-                             uint32_t * p_tx_buffer,
-                             uint16_t   buffer_size,
-                             uint8_t    flags)
+ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
+                          uint32_t * p_tx_buffer,
+                          uint16_t   buffer_size,
+                          uint8_t    flags)
 {
     NRFX_ASSERT((p_rx_buffer != NULL) || (p_tx_buffer != NULL));
 
@@ -175,14 +178,18 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
     if ((p_rx_buffer != NULL) && !nrfx_is_in_ram(p_rx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
     if ((p_tx_buffer != NULL) && !nrfx_is_in_ram(p_tx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -195,7 +202,7 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
     m_cb.buffer_half_size = buffer_half_size;
     m_cb.just_started     = true;
 
-    if ((flags & NRF_DRV_I2S_FLAG_SYNCHRONIZED_MODE) &&
+    if ((flags & NRFX_I2S_FLAG_SYNCHRONIZED_MODE) &&
         // [synchronized mode makes sense only when both RX and TX are enabled]
         (m_cb.p_rx_buffer != NULL) && (m_cb.p_tx_buffer != NULL))
     {
@@ -237,12 +244,14 @@ ret_code_t nrf_drv_i2s_start(uint32_t * p_rx_buffer,
     nrf_i2s_task_trigger(NRF_I2S, NRF_I2S_TASK_START);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
 
-void nrf_drv_i2s_stop(void)
+void nrfx_i2s_stop(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
@@ -393,4 +402,4 @@ void nrfx_i2s_irq_handler(void)
         }
     }
 }
-#endif // NRFX_CHECK(I2S_ENABLED)
+#endif // NRFX_CHECK(NRFX_I2S_ENABLED)
