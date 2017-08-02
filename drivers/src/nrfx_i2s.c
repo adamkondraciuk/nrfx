@@ -229,7 +229,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
         // to that moment.
         if (m_cb.synchronized_mode)
         {
-            memset(m_cb.p_tx_buffer, 0, buffer_size);
+            memset(m_cb.p_tx_buffer, 0, m_cb.buffer_half_size * sizeof(uint32_t));
         }
         else
         {
@@ -272,8 +272,8 @@ void nrfx_i2s_stop(void)
 
 void nrfx_i2s_irq_handler(void)
 {
-    uint32_t * p_data_received = NULL;
-    uint32_t * p_data_to_send  = NULL;
+    uint32_t const * p_data_received = NULL;
+    uint32_t       * p_data_to_send  = NULL;
 
     if (nrf_i2s_event_check(NRF_I2S, NRF_I2S_EVENT_TXPTRUPD))
     {
@@ -360,7 +360,7 @@ void nrfx_i2s_irq_handler(void)
             {
                 NRFX_LOG_DEBUG("Rx data:\r\n");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_data_received,
-                                       m_cb.buffer_half_size * sizeof(p_data_received));
+                                       m_cb.buffer_half_size * sizeof(p_data_received[0]));
             }
             m_cb.handler(p_data_received, p_data_to_send,
                 m_cb.buffer_half_size);
@@ -368,7 +368,7 @@ void nrfx_i2s_irq_handler(void)
             {
                 NRFX_LOG_DEBUG("Tx data:\r\n");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_data_to_send,
-                                       m_cb.buffer_half_size * sizeof(p_data_to_send));
+                                       m_cb.buffer_half_size * sizeof(p_data_to_send[0]));
             }
         }
     }
@@ -391,13 +391,13 @@ void nrfx_i2s_irq_handler(void)
             {
                 NRFX_LOG_DEBUG("Rx data:\r\n");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)nrf_i2s_rx_buffer_get(NRF_I2S),
-                                       m_cb.buffer_half_size * sizeof(p_data_to_send));
+                                       m_cb.buffer_half_size * sizeof(p_data_received[0]));
                 m_cb.handler(nrf_i2s_rx_buffer_get(NRF_I2S),
                              nrf_i2s_tx_buffer_get(NRF_I2S),
                              m_cb.buffer_half_size);
                 NRFX_LOG_DEBUG("Tx data:\r\n");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)nrf_i2s_tx_buffer_get(NRF_I2S),
-                                       m_cb.buffer_half_size * sizeof(p_data_to_send));
+                                       m_cb.buffer_half_size * sizeof(p_data_to_send[0]));
             }
         }
     }
