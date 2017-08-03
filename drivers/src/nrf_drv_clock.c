@@ -5,7 +5,7 @@
 #if NRFX_CHECK(CLOCK_ENABLED)
 
 #include <nrf_drv_clock.h>
-#include <nrf_drv_power.h>
+#include <nrfx_power.h>
 #ifdef SOFTDEVICE_PRESENT
 #include "nrf_sdh.h"
 #include "nrf_sdh_soc.h"
@@ -164,8 +164,8 @@ ret_code_t nrf_drv_clock_init(void)
 void nrf_drv_clock_uninit(void)
 {
     NRFX_ASSERT(m_clock_cb.module_initialized);
-#if NRFX_CHECK(POWER_ENABLED)
-    if(!nrf_drv_power_init_check())
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
+    if (!nrfx_power_init_check())
 #endif
     {
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
@@ -182,9 +182,9 @@ static void item_enqueue(nrf_drv_clock_handler_item_t ** p_head,
                          nrf_drv_clock_handler_item_t * p_item)
 {
     nrf_drv_clock_handler_item_t * p_next = *p_head;
-    while(p_next)
+    while (p_next)
     {
-        if(p_next == p_item)
+        if (p_next == p_item)
         {
             return;
         }

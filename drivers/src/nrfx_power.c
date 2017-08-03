@@ -2,19 +2,20 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(POWER_ENABLED)
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
 
-#include <nrf_drv_power.h>
+#include <nrfx_power.h>
 #include <nrf_drv_clock.h>
 #ifdef SOFTDEVICE_PRESENT
-#include "nrf_sdh.h"
-#include "nrf_sdh_soc.h"
+#include "softdevice_handler.h"
+#include "nrf_sdm.h"
+#include "nrf_soc.h"
 #endif
 
 /**
  * @internal
- * @defgroup nrf_drv_power_internals POWER driver internals
- * @ingroup nrf_drv_power
+ * @defgroup nrfx_power_internals POWER driver internals
+ * @ingroup nrfx_power
  *
  * Internal variables, auxiliary macros and functions of POWER driver.
  * @{
@@ -25,13 +26,13 @@
  *
  * The structure with default configuration data.
  * This structure would be used if configuration pointer given
- * to the @ref nrf_drv_power_init is set to NULL.
+ * to the @ref nrfx_power_init is set to NULL.
  */
-static const nrf_drv_power_config_t m_drv_power_config_default =
+static const nrfx_power_config_t m_drv_power_config_default =
 {
-    .dcdcen = POWER_CONFIG_DEFAULT_DCDCEN,
-#if NRF_POWER_HAS_VDDH
-    .dcdcenhv = POWER_CONFIG_DEFAULT_DCDCENHV,
+    .dcdcen = NRFX_POWER_CONFIG_DEFAULT_DCDCEN,
+#if NRF_POWER_HAS_VDDH || defined(__SDK_DOXYGEN__)
+    .dcdcenhv = NRFX_POWER_CONFIG_DEFAULT_DCDCENHV,
 #endif
 };
 
@@ -43,38 +44,38 @@ static bool m_initialized;
 /**
  * @brief The handler of power fail comparator warning event
  */
-static nrf_drv_power_pofwarn_event_handler_t m_pofwarn_handler;
+static nrfx_power_pofwarn_event_handler_t m_pofwarn_handler;
 
-#if NRF_POWER_HAS_SLEEPEVT
+#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
 /**
  * @brief The handler of sleep event handler
  */
-static nrf_drv_power_sleep_event_handler_t m_sleepevt_handler;
+static nrfx_power_sleep_event_handler_t m_sleepevt_handler;
 #endif
 
-#if NRF_POWER_HAS_USBREG
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
 /**
  * @brief The handler of USB power events
  */
-static nrf_drv_power_usb_event_handler_t m_usbevt_handler;
+static nrfx_power_usb_event_handler_t m_usbevt_handler;
 #endif
 
 /** @} */
 
-bool nrf_drv_power_init_check(void)
+bool nrfx_power_init_check(void)
 {
     return m_initialized;
 }
 
-ret_code_t nrf_drv_power_init(nrf_drv_power_config_t const * p_config)
+ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config)
 {
-    nrf_drv_power_config_t const * p_used_config;
+    nrfx_power_config_t const * p_used_config;
     if (m_initialized)
     {
         return NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
     }
 #ifdef SOFTDEVICE_PRESENT
-    if (nrf_sdh_is_enabled())
+    if (softdevice_handler_is_enabled())
     {
         return NRFX_ERROR_INVALID_STATE;
     }
@@ -93,7 +94,7 @@ ret_code_t nrf_drv_power_init(nrf_drv_power_config_t const * p_config)
     return NRFX_SUCCESS;
 }
 
-void nrf_drv_power_uninit(void)
+void nrfx_power_uninit(void)
 {
     NRFX_ASSERT(m_initialized);
 
@@ -104,25 +105,24 @@ void nrf_drv_power_uninit(void)
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
     }
 
-    nrf_drv_power_pof_uninit();
-#if NRF_POWER_HAS_SLEEPEVT
-    nrf_drv_power_sleepevt_uninit();
+    nrfx_power_pof_uninit();
+#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+    nrfx_power_sleepevt_uninit();
 #endif
-#if NRF_POWER_HAS_USBREG
-    nrf_drv_power_usbevt_uninit();
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+    nrfx_power_usbevt_uninit();
 #endif
     m_initialized = false;
 }
 
-ret_code_t nrf_drv_power_pof_init(nrf_drv_power_pofwarn_config_t const * p_config)
+ret_code_t nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 {
-    ret_code_t err_code = NRF_SUCCESS;
     NRFX_ASSERT(p_config != NULL);
 
-    nrf_drv_power_pof_uninit();
+    nrfx_power_pof_uninit();
 
 #ifdef SOFTDEVICE_PRESENT
-    if (nrf_sdh_is_enabled())
+    if (softdevice_handler_is_enabled())
     {
         /* Currently when SD is enabled - the configuration can be changed
          * in very limited range.
@@ -159,8 +159,7 @@ ret_code_t nrf_drv_power_pof_init(nrf_drv_power_pofwarn_config_t const * p_confi
                     /* Cannot configure */
                     return NRFX_ERROR_INVALID_STATE;
             }
-
-            err_code = sd_power_pof_threshold_set(thr);
+            sd_power_pof_threshold_set(thr);
         }
     }
     else
@@ -172,13 +171,13 @@ ret_code_t nrf_drv_power_pof_init(nrf_drv_power_pofwarn_config_t const * p_confi
 #endif
     }
 
-    if ((p_config->handler != NULL) && (err_code == NRFX_SUCCESS))
+    if (p_config->handler != NULL)
     {
         m_pofwarn_handler = p_config->handler;
 #ifdef SOFTDEVICE_PRESENT
-        if (nrf_sdh_is_enabled())
+        if (softdevice_handler_is_enabled())
         {
-            err_code = sd_power_pof_enable(true);
+            sd_power_pof_enable(true);
         }
         else
 #endif
@@ -186,15 +185,15 @@ ret_code_t nrf_drv_power_pof_init(nrf_drv_power_pofwarn_config_t const * p_confi
             nrf_power_int_enable(NRF_POWER_INT_POFWARN_MASK);
         }
     }
-    return err_code;
+    return NRFX_SUCCESS;
 }
 
-void nrf_drv_power_pof_uninit(void)
+void nrfx_power_pof_uninit(void)
 {
 #ifdef SOFTDEVICE_PRESENT
-    if (nrf_sdh_is_enabled())
+    if (softdevice_handler_is_enabled())
     {
-        (void)sd_power_pof_enable(false);
+        sd_power_pof_enable(false);
     }
     else
 #endif
@@ -204,12 +203,12 @@ void nrf_drv_power_pof_uninit(void)
     m_pofwarn_handler = NULL;
 }
 
-#if NRF_POWER_HAS_SLEEPEVT
-ret_code_t nrf_drv_power_sleepevt_init(nrf_drv_power_sleepevt_config_t const * p_config)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+ret_code_t nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config)
 {
     NRFX_ASSERT(p_config != NULL);
 
-    nrf_drv_power_sleepevt_uninit();
+    nrfx_power_sleepevt_uninit();
     if (p_config->handler != NULL)
     {
         uint32_t enmask = 0;
@@ -225,7 +224,7 @@ ret_code_t nrf_drv_power_sleepevt_init(nrf_drv_power_sleepevt_config_t const * p
             nrf_power_event_clear(NRF_POWER_EVENT_SLEEPEXIT);
         }
 #ifdef SOFTDEVICE_PRESENT
-        if (nrf_sdh_is_enabled())
+        if (softdevice_handler_is_enabled())
         {
             if (enmask != 0)
             {
@@ -242,10 +241,10 @@ ret_code_t nrf_drv_power_sleepevt_init(nrf_drv_power_sleepevt_config_t const * p
     return NRFX_SUCCESS;
 }
 
-void nrf_drv_power_sleepevt_uninit(void)
+void nrfx_power_sleepevt_uninit(void)
 {
 #ifdef SOFTDEVICE_PRESENT
-    if (nrf_sdh_is_enabled())
+    if (softdevice_handler_is_enabled())
     {
         /* Nothing to do */
     }
@@ -260,15 +259,15 @@ void nrf_drv_power_sleepevt_uninit(void)
 }
 #endif /* NRF_POWER_HAS_SLEEPEVT */
 
-#if NRF_POWER_HAS_USBREG
-ret_code_t nrf_drv_power_usbevt_init(nrf_drv_power_usbevt_config_t const * p_config)
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+ret_code_t nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config)
 {
-    nrf_drv_power_usbevt_uninit();
+    nrfx_power_usbevt_uninit();
     if (p_config->handler != NULL)
     {
         m_usbevt_handler = p_config->handler;
 #ifdef SOFTDEVICE_PRESENT
-        if (nrf_sdh_is_enabled())
+        if (softdevice_handler_is_enabled())
         {
             /** @todo Implement USB power events when SD support it */
             return NRFX_ERROR_INVALID_STATE;
@@ -285,10 +284,10 @@ ret_code_t nrf_drv_power_usbevt_init(nrf_drv_power_usbevt_config_t const * p_con
     return NRFX_SUCCESS;
 }
 
-void nrf_drv_power_usbevt_uninit(void)
+void nrfx_power_usbevt_uninit(void)
 {
 #ifdef SOFTDEVICE_PRESENT
-    if (nrf_sdh_is_enabled())
+    if (softdevice_handler_is_enabled())
     {
         /** @todo Implement USB power events when SD support it */
     }
@@ -315,61 +314,59 @@ void nrfx_power_irq_handler(void)
         NRFX_ASSERT(m_pofwarn_handler != NULL);
         m_pofwarn_handler();
     }
-#if NRF_POWER_HAS_SLEEPEVT
+#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
     if ((0 != (enabled & NRF_POWER_INT_SLEEPENTER_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_SLEEPENTER))
     {
         /* Cannot be null if event is enabled */
         NRFX_ASSERT(m_sleepevt_handler != NULL);
-        m_sleepevt_handler(NRF_DRV_POWER_SLEEP_EVT_ENTER);
+        m_sleepevt_handler(NRFX_POWER_SLEEP_EVT_ENTER);
     }
     if ((0 != (enabled & NRF_POWER_INT_SLEEPEXIT_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_SLEEPEXIT))
     {
         /* Cannot be null if event is enabled */
         NRFX_ASSERT(m_sleepevt_handler != NULL);
-        m_sleepevt_handler(NRF_DRV_POWER_SLEEP_EVT_EXIT);
+        m_sleepevt_handler(NRFX_POWER_SLEEP_EVT_EXIT);
     }
 #endif
-#if NRF_POWER_HAS_USBREG
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
     if ((0 != (enabled & NRF_POWER_INT_USBDETECTED_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_USBDETECTED))
     {
         /* Cannot be null if event is enabled */
         NRFX_ASSERT(m_usbevt_handler != NULL);
-        m_usbevt_handler(NRF_DRV_POWER_USB_EVT_DETECTED);
+        m_usbevt_handler(NRFX_POWER_USB_EVT_DETECTED);
     }
     if ((0 != (enabled & NRF_POWER_INT_USBREMOVED_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_USBREMOVED))
     {
         /* Cannot be null if event is enabled */
         NRFX_ASSERT(m_usbevt_handler != NULL);
-        m_usbevt_handler(NRF_DRV_POWER_USB_EVT_REMOVED);
+        m_usbevt_handler(NRFX_POWER_USB_EVT_REMOVED);
     }
     if ((0 != (enabled & NRF_POWER_INT_USBPWRRDY_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_USBPWRRDY))
     {
         /* Cannot be null if event is enabled */
         NRFX_ASSERT(m_usbevt_handler != NULL);
-        m_usbevt_handler(NRF_DRV_POWER_USB_EVT_READY);
+        m_usbevt_handler(NRFX_POWER_USB_EVT_READY);
     }
 #endif
 }
 
 #ifdef SOFTDEVICE_PRESENT
-static void nrf_drv_power_sdh_soc_evt_handler(uint32_t evt_id, void * p_context);
-static void nrf_drv_power_sdh_state_evt_handler(nrf_sdh_state_evt_t state, void * p_context);
 
 NRF_SDH_SOC_OBSERVER(m_soc_observer, POWER_CONFIG_SOC_OBSERVER_PRIO,
-                     nrf_drv_power_sdh_soc_evt_handler, NULL);
+                     nrfx_power_sdh_soc_evt_handler, NULL);
 
-NRF_SDH_STATE_OBSERVER(m_sd_observer, POWER_CONFIG_STATE_OBSERVER_PRIO) =
+NRF_SDH_STATE_OBSERVER(m_sd_observer, NRFX_POWER_CONFIG_STATE_OBSERVER_PRIO) =
 {
-    .handler   = nrf_drv_power_sdh_state_evt_handler,
+    .handler   = nrfx_power_sdh_state_evt_handler,
     .p_context = NULL
 };
 
-static void nrf_drv_power_sdh_soc_evt_handler(uint32_t evt_id, void * p_context)
+static void nrfx_power_sdh_soc_evt_handler(uint32_t evt_id, void * p_context)
 {
     if (evt_id == NRF_EVT_POWER_FAILURE_WARNING)
     {
@@ -379,7 +376,7 @@ static void nrf_drv_power_sdh_soc_evt_handler(uint32_t evt_id, void * p_context)
     }
 }
 
-static void nrf_drv_power_on_sd_enable(void)
+static void nrfx_power_on_sd_enable(void)
 {
     NRFX_ASSERT(m_initialized); /* This module has to be enabled first */
     NRFX_CRITICAL_SECTION_ENTER();
@@ -390,18 +387,18 @@ static void nrf_drv_power_on_sd_enable(void)
     NRFX_CRITICAL_SECTION_EXIT();
 }
 
-static void nrf_drv_power_on_sd_disable(void)
+static void nrfx_power_on_sd_disable(void)
 {
     /* Reinit interrupts */
     NRFX_ASSERT(m_initialized);
-    NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, NRFX_CLOCK_CONFIG_IRQ_PRIORITY);
     NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
 
     if (m_pofwarn_handler != NULL)
     {
         nrf_power_int_enable(NRF_POWER_INT_POFWARN_MASK);
     }
-#if NRF_POWER_HAS_USBREG
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
     if (m_usbevt_handler != NULL)
     {
        nrf_power_int_enable(
@@ -417,11 +414,11 @@ static void nrf_drv_power_sdh_state_evt_handler(nrf_sdh_state_evt_t state, void 
     switch (state)
     {
         case NRF_SDH_EVT_STATE_ENABLED:
-            nrf_drv_power_on_sd_enable();
+            nrfx_power_on_sd_enable();
             break;
 
         case NRF_SDH_EVT_STATE_DISABLED:
-            nrf_drv_power_on_sd_disable();
+            nrfx_power_on_sd_disable();
             break;
 
         default:
@@ -433,4 +430,4 @@ static void nrf_drv_power_sdh_state_evt_handler(nrf_sdh_state_evt_t state, void 
 
 #endif // SOFTDEVICE_PRESENT
 
-#endif // NRFX_CHECK(POWER_ENABLED)
+#endif // NRFX_CHECK(NRFX_POWER_ENABLED)
