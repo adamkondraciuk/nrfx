@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 
 #ifndef NRFX_TWIM_H__
 #define NRFX_TWIM_H__
@@ -350,9 +350,7 @@ void nrfx_twim_0_irq_handler(void);
 void nrfx_twim_1_irq_handler(void);
 #endif
 
-/**
- *@}
- **/
+/** @} */
 
 #ifdef __cplusplus
 }

@@ -345,9 +345,7 @@ void nrfx_spim_0_irq_handler(void);
 void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
 
-/**
- *@}
- **/
+/** @} */
 
 #ifdef __cplusplus
 }

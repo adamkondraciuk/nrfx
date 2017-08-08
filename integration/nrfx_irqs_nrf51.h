@@ -14,7 +14,7 @@ extern "C" {
 // RADIO_IRQn
 
 // UART0_IRQn
-#define nrfx_uarte_0_irq_handler    UART0_IRQHandler
+#define nrfx_uart_0_irq_handler     UART0_IRQHandler
 
 // SPI0_TWI0_IRQn
 #if NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)

@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 
 #ifndef NRFX_TWI_H__
 #define NRFX_TWI_H__
@@ -326,9 +326,7 @@ void nrfx_twi_0_irq_handler(void);
 void nrfx_twi_1_irq_handler(void);
 #endif
 
-/**
- *@}
- **/
+/** @} */
 
 #ifdef __cplusplus
 }
