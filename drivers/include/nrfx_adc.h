@@ -115,9 +115,9 @@ typedef struct
 } nrfx_adc_config_t;
 
 /** @brief ADC default configuration. */
-#define NRFX_ADC_DEFAULT_CONFIG                   \
-{                                                 \
-    .interrupt_priority = ADC_CONFIG_IRQ_PRIORITY \
+#define NRFX_ADC_DEFAULT_CONFIG                        \
+{                                                      \
+    .interrupt_priority = NRFX_ADC_CONFIG_IRQ_PRIORITY \
 }
 
 /**

@@ -347,7 +347,7 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
     if (flags)
     {
         p_cb->transfer_in_progress = false;
-        err_code = NRF_ERROR_NOT_SUPPORTED;
+        err_code = NRFX_ERROR_NOT_SUPPORTED;
     }
     else
     {
@@ -376,7 +376,7 @@ ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
 void nrfx_spi_abort(nrfx_spi_t const * p_instance)
 {
     spi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     p_cb->abort = true;
 }
 

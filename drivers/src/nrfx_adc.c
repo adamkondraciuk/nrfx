@@ -2,7 +2,7 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(ADC_ENABLED)
+#if NRFX_CHECK(NRFX_ADC_ENABLED)
 
 #include <nrfx_adc.h>
 
@@ -293,4 +293,4 @@ void nrfx_adc_irq_handler(void)
     }
 }
 
-#endif // NRFX_CHECK(ADC_ENABLED)
+#endif // NRFX_CHECK(NRFX_ADC_ENABLED)

@@ -35,13 +35,13 @@ extern "C" {
 /**
  * @brief Macro for setting @ref nrfx_saadc_config_t to default settings.
  */
-#define NRFX_SAADC_DEFAULT_CONFIG                                           \
-    {                                                                       \
-    .resolution         = (nrf_saadc_resolution_t)SAADC_CONFIG_RESOLUTION,  \
-    .oversample         = (nrf_saadc_oversample_t)SAADC_CONFIG_OVERSAMPLE,  \
-    .interrupt_priority = SAADC_CONFIG_IRQ_PRIORITY,                        \
-    .low_power_mode     = SAADC_CONFIG_LP_MODE                              \
-    }
+#define NRFX_SAADC_DEFAULT_CONFIG                                               \
+{                                                                               \
+    .resolution         = (nrf_saadc_resolution_t)NRFX_SAADC_CONFIG_RESOLUTION, \
+    .oversample         = (nrf_saadc_oversample_t)NRFX_SAADC_CONFIG_OVERSAMPLE, \
+    .interrupt_priority = NRFX_SAADC_CONFIG_IRQ_PRIORITY,                       \
+    .low_power_mode     = NRFX_SAADC_CONFIG_LP_MODE                             \
+}
 
 /**
  * @brief Macro for setting @ref nrf_saadc_channel_config_t to default settings
@@ -49,18 +49,18 @@ extern "C" {
  *
  * @param PIN_P Analog input.
  */
-#define NRFX_SAADC_DEFAULT_CHANNEL_CONFIG_SE(PIN_P)    \
-    {                                                  \
-        .resistor_p = NRF_SAADC_RESISTOR_DISABLED,     \
-        .resistor_n = NRF_SAADC_RESISTOR_DISABLED,     \
-        .gain       = NRF_SAADC_GAIN1_6,               \
-        .reference  = NRF_SAADC_REFERENCE_INTERNAL,    \
-        .acq_time   = NRF_SAADC_ACQTIME_10US,          \
-        .mode       = NRF_SAADC_MODE_SINGLE_ENDED,     \
-        .burst      = NRF_SAADC_BURST_DISABLED,        \
-        .pin_p      = (nrf_saadc_input_t)(PIN_P),      \
-        .pin_n      = NRF_SAADC_INPUT_DISABLED         \
-    }
+#define NRFX_SAADC_DEFAULT_CHANNEL_CONFIG_SE(PIN_P) \
+{                                                   \
+    .resistor_p = NRF_SAADC_RESISTOR_DISABLED,      \
+    .resistor_n = NRF_SAADC_RESISTOR_DISABLED,      \
+    .gain       = NRF_SAADC_GAIN1_6,                \
+    .reference  = NRF_SAADC_REFERENCE_INTERNAL,     \
+    .acq_time   = NRF_SAADC_ACQTIME_10US,           \
+    .mode       = NRF_SAADC_MODE_SINGLE_ENDED,      \
+    .burst      = NRF_SAADC_BURST_DISABLED,         \
+    .pin_p      = (nrf_saadc_input_t)(PIN_P),       \
+    .pin_n      = NRF_SAADC_INPUT_DISABLED          \
+}
 
 /**
  * @brief Macro for setting @ref nrf_saadc_channel_config_t to default settings
@@ -69,17 +69,17 @@ extern "C" {
  * @param PIN_P Positive analog input.
  * @param PIN_N Negative analog input.
  */
-#define NRFX_SAADC_DEFAULT_CHANNEL_CONFIG_DIFFERENTIAL(PIN_P, PIN_N)    \
-    {                                                                   \
-        .resistor_p = NRF_SAADC_RESISTOR_DISABLED,                      \
-        .resistor_n = NRF_SAADC_RESISTOR_DISABLED,                      \
-        .gain       = NRF_SAADC_GAIN1_6,                                \
-        .reference  = NRF_SAADC_REFERENCE_INTERNAL,                     \
-        .acq_time   = NRF_SAADC_ACQTIME_10US,                           \
-        .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                      \
-        .pin_p      = (nrf_saadc_input_t)(PIN_P),                       \
-        .pin_n      = (nrf_saadc_input_t)(PIN_N)                        \
-    }
+#define NRFX_SAADC_DEFAULT_CHANNEL_CONFIG_DIFFERENTIAL(PIN_P, PIN_N) \
+{                                                                    \
+    .resistor_p = NRF_SAADC_RESISTOR_DISABLED,                       \
+    .resistor_n = NRF_SAADC_RESISTOR_DISABLED,                       \
+    .gain       = NRF_SAADC_GAIN1_6,                                 \
+    .reference  = NRF_SAADC_REFERENCE_INTERNAL,                      \
+    .acq_time   = NRF_SAADC_ACQTIME_10US,                            \
+    .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                       \
+    .pin_p      = (nrf_saadc_input_t)(PIN_P),                        \
+    .pin_n      = (nrf_saadc_input_t)(PIN_N)                         \
+}
 
 /**
  * @brief Analog-to-digital converter driver configuration structure.

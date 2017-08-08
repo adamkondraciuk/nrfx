@@ -17,12 +17,6 @@
 extern "C" {
 #endif
 
-#define SPIS0_IRQ            SPI0_TWI0_IRQn
-#define SPIS1_IRQ            SPI1_TWI1_IRQn
-#if SPIS_COUNT > 2
-    #define SPIS2_IRQ            SPIM2_SPIS2_SPI2_IRQn
-#endif
-
 /**
  * @defgroup nrfx_spis SPI slave driver
  * @{
@@ -30,8 +24,8 @@ extern "C" {
  * @brief    Multi-instance SPI slave driver.
  */
 
-#define NRFX_SPIS_DEFAULT_CSN_PULLUP NRF_GPIO_PIN_NOPULL /**< Default pull-up configuration of the SPI CS. */
-#define NRFX_SPIS_DEFAULT_MISO_DRIVE NRF_GPIO_PIN_S0S1   /**< Default drive configuration of the SPI MISO. */
+#define NRFX_SPIS_DEFAULT_CSN_PULLUP  NRF_GPIO_PIN_NOPULL /**< Default pull-up configuration of the SPI CS. */
+#define NRFX_SPIS_DEFAULT_MISO_DRIVE  NRF_GPIO_PIN_S0S1   /**< Default drive configuration of the SPI MISO. */
 
 /**
 * @brief This value can be provided instead of a pin number for the signals MOSI
@@ -75,17 +69,15 @@ typedef struct
 /** @brief SPI slave driver instance data structure. */
 typedef struct
 {
-    NRF_SPIS_Type * p_reg;          //!< SPIS instance register.
-    uint8_t         instance_id;    //!< SPIS instance ID.
-    IRQn_Type       irq;            //!< IRQ of the specific instance.
+    NRF_SPIS_Type * p_reg;          //!< Pointer to a structure with SPIS registers.
+    uint8_t         drv_inst_idx;   //!< Driver instance index.
 } nrfx_spis_t;
 
 /** @brief Macro for creating an SPI slave driver instance. */
-#define NRFX_SPIS_INSTANCE(id)                          \
-{                                                       \
-    .p_reg        = CONCAT_2(NRF_SPIS, id),             \
-    .irq          = CONCAT_3(SPIS, id, _IRQ),           \
-    .instance_id  = CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
+#define NRFX_SPIS_INSTANCE(id)                               \
+{                                                            \
+    .p_reg        = NRFX_CONCAT_2(NRF_SPIS, id),             \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
 }
 
 enum {
