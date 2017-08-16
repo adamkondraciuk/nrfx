@@ -14,8 +14,8 @@ extern "C" {
 // RADIO_IRQn
 
 // UARTE0_UART0_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
-#define nrfx_prs_box_3_irq_handler  UARTE0_UART0_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#define nrfx_prs_box_4_irq_handler  UARTE0_UART0_IRQHandler
 #else
 #define nrfx_uarte_0_irq_handler    UARTE0_UART0_IRQHandler
 #define nrfx_uart_0_irq_handler     UARTE0_UART0_IRQHandler
@@ -83,8 +83,8 @@ extern "C" {
 #define nrfx_qdec_irq_handler       QDEC_IRQHandler
 
 // COMP_LPCOMP_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
-#define nrfx_prs_box_4_irq_handler  COMP_LPCOMP_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
+#define nrfx_prs_box_3_irq_handler  COMP_LPCOMP_IRQHandler
 #else
 #define nrfx_comp_irq_handler       COMP_LPCOMP_IRQHandler
 #define nrfx_lpcomp_irq_handler     COMP_LPCOMP_IRQHandler
@@ -148,7 +148,12 @@ extern "C" {
 // USBD_IRQn
 
 // UARTE1_IRQn
+#if NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
+#define nrfx_prs_box_5_irq_handler  UARTE1_IRQHandler
+#else
 #define nrfx_uarte_1_irq_handler    UARTE1_IRQHandler
+#define nrfx_uart_1_irq_handler     UARTE1_IRQHandler
+#endif
 
 // QSPI_IRQn
 #define nrfx_qspi_irq_handler       QSPI_IRQHandler
