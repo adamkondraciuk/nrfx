@@ -55,7 +55,7 @@ struct nrf_drv_clock_handler_item_s
  * @brief Function for checking if driver is already initialized
  *
  * This function is used to check whatever common POWER_CLOCK common interrupt
- * should be disabled or not if @ref nrf_drv_power tries to disable the interrupt.
+ * should be disabled or not if @ref nrfx_power tries to disable the interrupt.
  *
  * @retval true  Driver is initialized
  * @retval false Driver is uninitialized

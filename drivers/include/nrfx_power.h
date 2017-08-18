@@ -181,10 +181,24 @@ typedef struct
 #endif /* NRF_POWER_HAS_USBREG */
 
 /**
+ * @brief Function for getting the handler of the power failure comparator.
+ * @return Handler of the power failure comparator.
+ */
+nrfx_power_pofwarn_event_handler_t nrfx_power_pof_handler_get(void);
+
+#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+/**
+ * @brief Function for getting the handler of the USB power.
+ * @return Handler of the USB power.
+ */
+nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
+#endif
+
+/**
  * @brief Function for checking if driver is already initialized
  *
- * This function is used to check whatever common POWER_CLOCK common interrupt
- * should be disabled or not if @ref nrfx_clock tries to disable the interrupt.
+ * This function is used to check whether POWER_CLOCK common interrupt
+ * should be disabled or not if @ref nrf_drv_clock tries to disable the interrupt.
  *
  * @retval true  Driver is initialized
  * @retval false Driver is uninitialized
@@ -220,22 +234,36 @@ void nrfx_power_uninit(void);
 /**
  * @brief Initialize power failure comparator
  *
- * Configures and setups the power failure comparator and enables it.
+ * Configures the power failure comparator. This function does not setup and enable it.
+ * Those steps can be done with functions @ref nrfx_power_pof_enable and @ref nrfx_power_pof_disable
+ * or with Softdevice API (when Softdevice is using).
  *
  * @param[in] p_config Configuration with values and event handler.
  *                     If event handler is set to NULL, interrupt would be disabled.
- *
- * @retval NRFX_ERROR_INVALID_STATE POF is initialized when SD is enabled and
- *                                  the configuration differs from the old one and
- *                                  is not possible to be set using SD interface.
- * @retval NRFX_SUCCESS             Successfully initialized and configured.
  */
-ret_code_t nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config);
+void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config);
 
 /**
- * @brief Turn off the power failure comparator
+ * @brief Enable power failure comparator
+ * Sets and enables interrupt of the power failure comparator. This functions cannot be using
+ * when Softdevice is enabled. If event handler set in init function is set to NULL, interrupt
+ * would be disabled.
  *
- * Disables and clears the settings of the power failure comparator.
+ * @param[in] p_config Configuration with values and event handler.
+ */
+void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config);
+
+/**
+ * @brief Disable the power failure comparator
+ *
+ * Disables the power failure comparator interrupt.
+ */
+void nrfx_power_pof_disable(void);
+
+/**
+ * @brief Clear the power failure comparator settings
+ *
+ * Clears the settings of the power failure comparator.
  */
 void nrfx_power_pof_uninit(void);
 
@@ -244,21 +272,29 @@ void nrfx_power_pof_uninit(void);
  * @brief Initialize sleep entering and exiting events processing
  *
  * Configures and setups the sleep event processing.
- *
- * @param[in] p_config Configuration with values and event handler.
- *
- * @sa nrfx_power_sleepevt_uninit
- *
  * @note Sleep events are not available when SoftDevice is enabled.
  * @note If sleep event is enabled when SoftDevice is initialized, sleep events
  *       would be automatically disabled - it is the limitation of the
  *       SoftDevice itself.
  *
- * @retval NRFX_ERROR_INVALID_STATE This event cannot be initialized
- *                                  when SD is enabled.
- * @retval NRFX_SUCCESS             Successfully initialized and configured.
+ * @param[in] p_config Configuration with values and event handler.
+ *
+ * @sa nrfx_power_sleepevt_uninit
+ *
  */
-ret_code_t nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config);
+void nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config);
+
+/**
+ * @brief Enable sleep entering and exiting events processing
+ *
+ * @param[in] p_config Configuration with values and event handler.
+ */
+void nrfx_power_sleepevt_enable(nrfx_power_sleepevt_config_t const * p_config);
+
+/**
+ * @brief Disable sleep entering and exiting events processing
+ */
+void nrfx_power_sleepevt_disable(void);
 
 /**
  * @brief Uninitialize sleep entering and exiting events processing
@@ -277,13 +313,18 @@ void nrfx_power_sleepevt_uninit(void);
  * @param[in] p_config Configuration with values and event handler.
  *
  * @sa nrfx_power_usbevt_uninit
- *
- * @retval NRFX_ERROR_INVALID_STATE This event cannot be initialized
- *                                  when SD is enabled and SD does not support
- *                                  USB power events.
- * @retval NRFX_SUCCESS             Successfully initialized and configured.
  */
-ret_code_t nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config);
+void nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config);
+
+/**
+ * @brief Enable USB power event processing
+ */
+void nrfx_power_usbevt_enable(void);
+
+/**
+ * @brief Disable USB power event processing
+ */
+void nrfx_power_usbevt_disable(void);
 
 /**
  * @brief Uninitalize USB power event processing
@@ -300,7 +341,6 @@ void nrfx_power_usbevt_uninit(void);
 __STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void);
 
 #endif /* NRF_POWER_HAS_USBREG */
-
 
 /** @} */
 
