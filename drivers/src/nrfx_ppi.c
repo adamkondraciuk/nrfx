@@ -28,7 +28,7 @@ __STATIC_INLINE uint32_t group_to_mask(nrf_ppi_channel_group_t group)
 /**@brief  Check whether a channel is a programmable channel and can be used by an application.
  * @param[in]  channel  Channel to check.
  * @retval     true     The channel is a programmable application channel.
- *             false    The channel is used by a SoftDevice or is preprogrammed.
+ *             false    The channel is used by a stack (for example SoftDevice) or is preprogrammed.
  */
 __STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
 {
@@ -39,7 +39,7 @@ __STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
 /**@brief  Check whether a channels can be used by an application.
  * @param[in]  channel  Channel mask to check.
  * @retval     true     All specified channels can be used by an application.
- *             false    At least one specified channel is used by a SoftDevice.
+ *             false    At least one specified channel is used by a stack (for example SoftDevice).
  */
 __STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
 {
@@ -51,7 +51,7 @@ __STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
 /**@brief  Check whether a channel can be used by an application.
  * @param[in]  channel  Channel to check.
  * @retval     true     The channel can be used by an application.
- *             false    The channel is used by a SoftDevice.
+ *             false    The channel is used by a stack (for example SoftDevice).
  */
 __STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
 {
@@ -63,7 +63,7 @@ __STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
  * @param[in]  group    Group to check.
  * @retval     true     The group is an application group.
  *             false    The group is not an application group (this group either does not exist or
- *                      it is used by a SoftDevice).
+ *                      it is used by a stack (for example SoftDevice)).
  */
 __STATIC_INLINE bool is_app_group(nrf_ppi_channel_group_t group)
 {
