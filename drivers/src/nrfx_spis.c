@@ -22,12 +22,12 @@
 
 
 #if NRFX_CHECK(NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
-#include <nrf_drv_gpiote.h>
+#include <nrfx_gpiote.h>
 #define USE_DMA_ISSUE_WORKAROUND
 // This handler is called by the GPIOTE driver when a falling edge is detected
 // on the CSN line. There is no need to do anything here. The handling of the
 // interrupt itself provides a protection for DMA transfers.
-static void csn_event_handler(nrf_drv_gpiote_pin_t pin,
+static void csn_event_handler(nrfx_gpiote_pin_t     pin,
                               nrf_gpiote_polarity_t action)
 {
 }
@@ -194,10 +194,10 @@ ret_code_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
     // [the GPIOTE driver may be already initialized at this point (by this
     //  driver when another SPIS instance is used, or by an application code),
     //  so just ignore the returned value]
-    (void)nrf_drv_gpiote_init();
-    static nrf_drv_gpiote_in_config_t const csn_gpiote_config =
-        GPIOTE_CONFIG_IN_SENSE_HITOLO(true);
-    ret_code_t gpiote_err_code = nrf_drv_gpiote_in_init(p_config->csn_pin,
+    (void)nrfx_gpiote_init();
+    static nrfx_gpiote_in_config_t const csn_gpiote_config =
+        NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(true);
+    ret_code_t gpiote_err_code = nrfx_gpiote_in_init(p_config->csn_pin,
         &csn_gpiote_config, csn_event_handler);
     if (gpiote_err_code != NRFX_SUCCESS)
     {
@@ -207,7 +207,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-    nrf_drv_gpiote_in_event_enable(p_config->csn_pin, true);
+    nrfx_gpiote_in_event_enable(p_config->csn_pin, true);
 #endif
 
     // Enable IRQ.
