@@ -7,9 +7,8 @@
 #include <nrf_drv_clock.h>
 #include <nrf_drv_power.h>
 #ifdef SOFTDEVICE_PRESENT
-#include "softdevice_handler.h"
-#include "nrf_sdm.h"
-#include "nrf_soc.h"
+#include "nrf_sdh.h"
+#include "nrf_sdh_soc.h"
 #endif
 
 #define NRFX_LOG_MODULE CLOCK
@@ -82,7 +81,7 @@ static void lfclk_stop(void)
     // If LFCLK is requested to stop while SD is still enabled,
     // it indicates an error in the application.
     // Enabling SD should increment the LFCLK request.
-    NRFX_ASSERT(!softdevice_handler_is_enabled());
+    NRFX_ASSERT(!nrf_sdh_is_enabled());
 #endif // SOFTDEVICE_PRESENT
 
     nrf_clock_task_trigger(NRF_CLOCK_TASK_LFCLKSTOP);
@@ -94,7 +93,7 @@ static void lfclk_stop(void)
 static void hfclk_start(void)
 {
 #ifdef SOFTDEVICE_PRESENT
-    if (softdevice_handler_is_enabled())
+    if (nrf_sdh_is_enabled())
     {
         (void)sd_clock_hfclk_request();
         return;
@@ -109,7 +108,7 @@ static void hfclk_start(void)
 static void hfclk_stop(void)
 {
 #ifdef SOFTDEVICE_PRESENT
-    if (softdevice_handler_is_enabled())
+    if (nrf_sdh_is_enabled())
     {
         (void)sd_clock_hfclk_release();
         return;
@@ -140,11 +139,11 @@ ret_code_t nrf_drv_clock_init(void)
         m_clock_cb.hfclk_requests = 0;
         m_clock_cb.p_lf_head      = NULL;
         m_clock_cb.lfclk_requests = 0;
-        nrfx_power_clock_irq_init();
 #ifdef SOFTDEVICE_PRESENT
-        if (!softdevice_handler_is_enabled())
+        if (!nrf_sdh_is_enabled())
 #endif
         {
+            nrfx_power_clock_irq_init();
             nrf_clock_lf_src_set((nrf_clock_lfclk_t)CLOCK_CONFIG_LF_SRC);
         }
 
@@ -256,7 +255,7 @@ bool nrf_drv_clock_lfclk_is_running(void)
     NRFX_ASSERT(m_clock_cb.module_initialized);
 
 #ifdef SOFTDEVICE_PRESENT
-    if (softdevice_handler_is_enabled())
+    if (nrf_sdh_is_enabled())
     {
         return true;
     }
@@ -317,7 +316,7 @@ bool nrf_drv_clock_hfclk_is_running(void)
     NRFX_ASSERT(m_clock_cb.module_initialized);
 
 #ifdef SOFTDEVICE_PRESENT
-    if (softdevice_handler_is_enabled())
+    if (nrf_sdh_is_enabled())
     {
         uint32_t is_running;
         UNUSED_VARIABLE(sd_clock_hfclk_is_running(&is_running));
@@ -509,39 +508,70 @@ void nrfx_clock_irq_handler(void)
 }
 
 #ifdef SOFTDEVICE_PRESENT
-
-void nrf_drv_clock_on_soc_event(uint32_t evt_id)
+/**
+ * @brief SoftDevice SoC event handler.
+ *
+ * @param[in] evt_id    SoC event.
+ * @param[in] p_context Context.
+ */
+static void soc_evt_handler(uint32_t evt_id, void * p_context)
 {
     if (evt_id == NRF_EVT_HFCLKSTARTED)
     {
         clock_clk_started_notify(NRF_DRV_CLOCK_EVT_HFCLK_STARTED);
     }
 }
+NRF_SDH_SOC_OBSERVER(m_soc_evt_observer, CLOCK_CONFIG_SOC_OBSERVER_PRIO, soc_evt_handler, NULL);
 
-void nrf_drv_clock_on_sd_enable(void)
+/**
+ * @brief SoftDevice enable/disable state handler.
+ *
+ * @param[in] state     State.
+ * @param[in] p_context Context.
+ */
+static void sd_state_evt_handler(nrf_sdh_state_evt_t state, void * p_context)
 {
-    NRFX_CRITICAL_SECTION_ENTER();
-    /* Make sure that nrf_drv_clock module is initialized */
-    if (!m_clock_cb.module_initialized)
+    switch (state)
     {
-        (void)nrf_drv_clock_init();
+        case NRF_SDH_EVT_STATE_ENABLE_PREPARE:
+            NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
+            break;
+
+        case NRF_SDH_EVT_STATE_ENABLED:
+            NRFX_CRITICAL_SECTION_ENTER();
+            /* Make sure that nrf_drv_clock module is initialized */
+            if (!m_clock_cb.module_initialized)
+            {
+                (void)nrf_drv_clock_init();
+            }
+            /* SD is one of the LFCLK requesters, but it will enable it by itself. */
+            ++(m_clock_cb.lfclk_requests);
+            m_clock_cb.lfclk_on = true;
+            NRFX_CRITICAL_SECTION_EXIT();
+            break;
+
+        case NRF_SDH_EVT_STATE_DISABLED:
+            /* Reinit interrupts */
+            NRFX_ASSERT(m_clock_cb.module_initialized);
+            NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
+            NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
+
+            /* SD leaves LFCLK enabled - disable it if it is no longer required. */
+            nrf_drv_clock_lfclk_release();
+            break;
+
+        default:
+            break;
     }
-    /* SD is one of the LFCLK requesters, but it will enable it by itself. */
-    ++(m_clock_cb.lfclk_requests);
-    m_clock_cb.lfclk_on = true;
-    NRFX_CRITICAL_SECTION_EXIT();
 }
 
-void nrf_drv_clock_on_sd_disable(void)
+NRF_SDH_STATE_OBSERVER(m_sd_state_observer, CLOCK_CONFIG_STATE_OBSERVER_PRIO) =
 {
-    /* Reinit interrupts */
-    NRFX_ASSERT(m_clock_cb.module_initialized);
-    NRFX_IRQ_PRIORITY_SET(POWER_CLOCK_IRQn, CLOCK_CONFIG_IRQ_PRIORITY);
-    NRFX_IRQ_ENABLE(POWER_CLOCK_IRQn);
+    .handler   = sd_state_evt_handler,
+    .p_context = NULL,
+};
 
-    /* SD leaves LFCLK enabled - disable it if it is no longer required. */
-    nrf_drv_clock_lfclk_release();
-}
+
 
 #endif // SOFTDEVICE_PRESENT
 
