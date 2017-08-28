@@ -7,8 +7,9 @@
 #include <nrf_drv_qdec.h>
 #include <hal/nrf_gpio.h>
 
-#define NRFX_LOG_MODULE_NAME QDEC
+#define NRFX_LOG_MODULE QDEC
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)   (event == NRF_QDEC_EVENT_SAMPLERDY ? "NRF_QDEC_EVENT_SAMPLERDY" :        \
                             (event == NRF_QDEC_EVENT_REPORTRDY ? "NRF_QDEC_EVENT_REPORTRDY" :        \
@@ -26,7 +27,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_SAMPLERDY_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_SAMPLERDY);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_SAMPLERDY));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_SAMPLERDY));
 
         event.type = NRF_QDEC_EVENT_SAMPLERDY;
         event.data.sample.value = (int8_t)nrf_qdec_sample_get();
@@ -37,7 +38,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_REPORTRDY_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_REPORTRDY);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_REPORTRDY));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_REPORTRDY));
 
         event.type = NRF_QDEC_EVENT_REPORTRDY;
 
@@ -50,7 +51,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_ACCOF_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_ACCOF);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_ACCOF));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_ACCOF));
 
         event.type = NRF_QDEC_EVENT_ACCOF;
         m_qdec_event_handler(event);
@@ -66,7 +67,9 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -82,7 +85,9 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     else
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -124,7 +129,9 @@ ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -134,7 +141,7 @@ void nrf_drv_qdec_uninit(void)
     nrf_drv_qdec_disable();
     NRFX_IRQ_DISABLE(QDEC_IRQn);
     m_state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 void nrf_drv_qdec_enable(void)
@@ -143,7 +150,7 @@ void nrf_drv_qdec_enable(void)
     nrf_qdec_enable();
     nrf_qdec_task_trigger(NRF_QDEC_TASK_START);
     m_state = NRFX_DRV_STATE_POWERED_ON;
-    NRFX_LOG_INFO("Enabled.\r\n");
+    NRFX_LOG_INFO("Enabled.");
 }
 
 void nrf_drv_qdec_disable(void)
@@ -152,7 +159,7 @@ void nrf_drv_qdec_disable(void)
     nrf_qdec_task_trigger(NRF_QDEC_TASK_STOP);
     nrf_qdec_disable();
     m_state = NRFX_DRV_STATE_INITIALIZED;
-    NRFX_LOG_INFO("Disabled.\r\n");
+    NRFX_LOG_INFO("Disabled.");
 }
 
 void nrf_drv_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl)
@@ -163,9 +170,9 @@ void nrf_drv_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl)
     *p_acc    = (int16_t)nrf_qdec_accread_get();
     *p_accdbl = (int16_t)nrf_qdec_accdblread_get();
 
-    NRFX_LOG_DEBUG("Accumulators data, ACC register:\r\n");
+    NRFX_LOG_DEBUG("Accumulators data, ACC register:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_acc, sizeof(p_acc));
-    NRFX_LOG_DEBUG("Accumulators data, ACCDBL register:\r\n");
+    NRFX_LOG_DEBUG("Accumulators data, ACCDBL register:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_accdbl, sizeof(p_accdbl));
 }
 

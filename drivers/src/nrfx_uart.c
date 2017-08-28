@@ -14,6 +14,7 @@
 
 #define NRFX_LOG_MODULE UART
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event) \
     (event == NRF_UART_EVENT_ERROR ? "NRF_UART_EVENT_ERROR" : \
@@ -136,7 +137,7 @@ ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -155,7 +156,7 @@ ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -178,7 +179,7 @@ ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
     p_cb->rx_enabled                 = false;
     p_cb->tx_buffer_length           = 0;
     p_cb->state                      = NRFX_DRV_STATE_INITIALIZED;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
                      (uint32_t)__func__,
                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -203,7 +204,7 @@ void nrfx_uart_uninit(nrfx_uart_t const * p_instance)
 
     p_cb->state   = NRFX_DRV_STATE_UNINITIALIZED;
     p_cb->handler = NULL;
-    NRFX_LOG_INFO("Instance uninitialized: %d.\r\n", p_instance->drv_inst_idx);
+    NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
 static void tx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
@@ -248,7 +249,7 @@ ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
     if (nrfx_uart_tx_in_progress(p_instance))
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -258,8 +259,8 @@ ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
     p_cb->tx_counter       = 0;
     p_cb->tx_abort         = false;
 
-    NRFX_LOG_INFO("Transfer tx_len: %d.\r\n", p_cb->tx_buffer_length);
-    NRFX_LOG_DEBUG("Tx data:\r\n");
+    NRFX_LOG_INFO("Transfer tx_len: %d.", p_cb->tx_buffer_length);
+    NRFX_LOG_DEBUG("Tx data:");
     NRFX_LOG_HEXDUMP_DEBUG(p_cb->p_tx_buffer,
                            p_cb->tx_buffer_length * sizeof(p_cb->p_tx_buffer[0]));
 
@@ -287,7 +288,7 @@ ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
         p_cb->tx_buffer_length = 0;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -348,7 +349,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                                                        NRF_UART_INT_MASK_ERROR);
             }
             err_code = NRFX_ERROR_BUSY;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -369,7 +370,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
         p_cb->rx_secondary_buffer_length = length;
     }
 
-    NRFX_LOG_INFO("Transfer rx_len: %d.\r\n", length);
+    NRFX_LOG_INFO("Transfer rx_len: %d.", length);
 
     if ((!p_cb->rx_enabled) && (!second_buffer))
     {
@@ -403,7 +404,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
         if (error)
         {
             err_code = NRFX_ERROR_INTERNAL;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -412,7 +413,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
         if (rxto)
         {
             err_code = NRFX_ERROR_FORBIDDEN;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -434,7 +435,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                                                NRF_UART_INT_MASK_ERROR);
     }
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -504,7 +505,7 @@ void nrfx_uart_tx_abort(nrfx_uart_t const * p_instance)
         tx_done_event(p_cb, p_cb->tx_counter);
     }
 
-    NRFX_LOG_INFO("TX transaction aborted.\r\n");
+    NRFX_LOG_INFO("TX transaction aborted.");
 }
 
 void nrfx_uart_rx_abort(nrfx_uart_t const * p_instance)
@@ -513,7 +514,7 @@ void nrfx_uart_rx_abort(nrfx_uart_t const * p_instance)
                                             NRF_UART_INT_MASK_ERROR);
     nrf_uart_task_trigger(p_instance->p_reg, NRF_UART_TASK_STOPRX);
 
-    NRFX_LOG_INFO("RX transaction aborted.\r\n");
+    NRFX_LOG_INFO("RX transaction aborted.");
 }
 
 static void uart_irq_handler(NRF_UART_Type *        p_uart,
@@ -524,7 +525,7 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
     {
         nrfx_uart_event_t event;
         nrf_uart_event_clear(p_uart, NRF_UART_EVENT_ERROR);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_UART_EVENT_ERROR));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_UART_EVENT_ERROR));
         nrf_uart_int_disable(p_uart, NRF_UART_INT_MASK_RXDRDY |
                                      NRF_UART_INT_MASK_ERROR);
         if (!p_cb->rx_enabled)

@@ -4,8 +4,9 @@
 #if NRFX_CHECK(NRFX_SAADC_ENABLED)
 #include <nrfx_saadc.h>
 
-#define NRFX_LOG_MODULE_NAME SAADC
+#define NRFX_LOG_MODULE SAADC
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                                       \
     (event == NRF_SAADC_EVENT_STARTED       ? "NRF_SAADC_EVENT_STARTED"       : \
@@ -72,7 +73,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_END))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_END));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_END));
 
         if (!m_cb.low_power_mode || m_cb.conversions_end)
         {
@@ -103,7 +104,7 @@ void nrfx_saadc_irq_handler(void)
     if (m_cb.low_power_mode && nrf_saadc_event_check(NRF_SAADC_EVENT_STARTED))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STARTED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STARTED));
 
         if (m_cb.buffer_size_left > m_cb.active_channels)
         {
@@ -135,7 +136,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_CALIBRATEDONE))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_CALIBRATEDONE);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_CALIBRATEDONE));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_CALIBRATEDONE));
         m_cb.adc_state = NRF_SAADC_STATE_IDLE;
 
         nrfx_saadc_evt_t evt;
@@ -145,7 +146,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_STOPPED))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STOPPED));
         m_cb.adc_state = NRF_SAADC_STATE_IDLE;
     }
     else
@@ -166,7 +167,7 @@ void nrfx_saadc_irq_handler(void)
                 evt.type                  = NRFX_SAADC_EVT_LIMIT;
                 evt.data.limit.channel    = LIMIT_EVENT_TO_CHANNEL(event);
                 evt.data.limit.limit_type = LIMIT_EVENT_TO_LIMIT_TYPE(event);
-                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.\r\n",
+                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.",
                                evt.data.limit.channel,
                                (uint32_t)EVT_TO_STR_LIMIT(evt.data.limit.limit_type));
                 m_cb.event_handler(&evt);
@@ -184,7 +185,7 @@ ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -192,7 +193,7 @@ ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
     if (event_handler == NULL)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -228,7 +229,7 @@ ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
     nrf_saadc_enable();
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
 
@@ -286,7 +287,7 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -317,9 +318,9 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
     }
 #endif //NRF52_PAN_74
 
-    NRFX_LOG_INFO("Channel initialized: %d.\r\n", channel);
+    NRFX_LOG_INFO("Channel initialized: %d.", channel);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -337,7 +338,7 @@ ret_code_t nrfx_saadc_channel_uninit(uint8_t channel)
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -351,10 +352,10 @@ ret_code_t nrfx_saadc_channel_uninit(uint8_t channel)
     m_cb.psel[channel].pseln = NRF_SAADC_INPUT_DISABLED;
     nrf_saadc_channel_input_set(channel, NRF_SAADC_INPUT_DISABLED, NRF_SAADC_INPUT_DISABLED);
     nrfx_saadc_limits_set(channel, NRFX_SAADC_LIMITL_DISABLED, NRFX_SAADC_LIMITH_DISABLED);
-    NRFX_LOG_INFO("Channel denitialized: %d.\r\n", channel);
+    NRFX_LOG_INFO("Channel denitialized: %d.", channel);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -375,7 +376,7 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -403,7 +404,7 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
     nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
 
-    NRFX_LOG_INFO("Conversion value: %d, channel %d.\r\n", *p_value, channel);
+    NRFX_LOG_INFO("Conversion value: %d, channel %d.", *p_value, channel);
 
     if (m_cb.active_channels > 1)
     {
@@ -425,7 +426,7 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
     m_cb.adc_state = NRF_SAADC_STATE_IDLE;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
                      (uint32_t)__func__,
                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -443,7 +444,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
     {
         nrf_saadc_int_enable(NRF_SAADC_INT_END | NRF_SAADC_INT_CALIBRATEDONE);
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -454,7 +455,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
         {
             nrf_saadc_int_enable(NRF_SAADC_INT_END);
             err_code = NRFX_ERROR_BUSY;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -471,7 +472,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
             }
             nrf_saadc_int_enable(NRF_SAADC_INT_END);
             err_code = NRFX_SUCCESS;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -484,7 +485,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
     m_cb.buffer_size        = size;
     m_cb.p_secondary_buffer = NULL;
 
-    NRFX_LOG_INFO("Function: %d, buffer length: %d, active channels: %d.\r\n",
+    NRFX_LOG_INFO("Function: %d, buffer length: %d, active channels: %d.",
                   (uint32_t)__func__,
                   size,
                   m_cb.active_channels);
@@ -502,7 +503,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
     }
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -527,7 +528,7 @@ ret_code_t nrfx_saadc_sample()
         nrf_saadc_task_trigger(NRF_SAADC_TASK_SAMPLE);
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -543,7 +544,7 @@ ret_code_t nrfx_saadc_calibrate_offset()
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -555,7 +556,7 @@ ret_code_t nrfx_saadc_calibrate_offset()
     nrf_saadc_int_enable(NRF_SAADC_INT_CALIBRATEDONE);
     nrf_saadc_task_trigger(NRF_SAADC_TASK_CALIBRATEOFFSET);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -593,7 +594,7 @@ void nrfx_saadc_abort(void)
 
         m_cb.p_buffer           = 0;
         m_cb.p_secondary_buffer = 0;
-        NRFX_LOG_INFO("Conversion aborted.\r\n");
+        NRFX_LOG_INFO("Conversion aborted.");
     }
 }
 

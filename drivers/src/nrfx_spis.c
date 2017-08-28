@@ -12,8 +12,9 @@
 #include <nrfx_spis.h>
 #include "prs/nrfx_prs.h"
 
-#define NRFX_LOG_MODULE_NAME SPIS
+#define NRFX_LOG_MODULE SPIS
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event) \
     (event == NRF_SPIS_EVENT_ACQUIRED ? "NRF_SPIS_EVENT_ACQUIRED" : \
@@ -54,6 +55,7 @@ typedef struct
     nrfx_drv_state_t           state;           //!< driver initialization state.
     volatile nrfx_spis_state_t spi_state;       //!< SPI slave state.
 } spis_cb_t;
+
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
 ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
@@ -69,7 +71,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                         (uint32_t)__func__,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -78,7 +80,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
     if ((uint32_t)p_config->mode > (uint32_t)NRFX_SPIS_MODE_3)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                         (uint32_t)__func__,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -86,7 +88,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
     if (!event_handler)
     {
         err_code = NRFX_ERROR_NULL;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                         (uint32_t)__func__,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -107,7 +109,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                         (uint32_t)__func__,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -201,7 +203,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
     if (gpiote_err_code != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_INTERNAL;
-        NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_INFO("Function: %s, error code: %s.",
                      (uint32_t)__func__,
                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -222,7 +224,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
     nrf_spis_enable(p_spis);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                  (uint32_t)__func__,
                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -247,7 +249,7 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance)
 #endif
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Initialized.");
 }
 
 
@@ -276,8 +278,8 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
             event.evt_type  = NRFX_SPIS_XFER_DONE;
             event.rx_amount = nrf_spis_rx_amount_get(p_spis);
             event.tx_amount = nrf_spis_tx_amount_get(p_spis);
-            NRFX_LOG_INFO("Transfer rx_len:%d.\r\n", event.rx_amount);
-            NRFX_LOG_DEBUG("Rx data:\r\n");
+            NRFX_LOG_INFO("Transfer rx_len:%d.", event.rx_amount);
+            NRFX_LOG_DEBUG("Rx data:");
             NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_cb->rx_buffer,
                                   event.rx_amount * sizeof(p_cb->rx_buffer));
             NRFX_ASSERT(p_cb->handler != NULL);
@@ -325,7 +327,7 @@ ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
         (p_rx_buffer != NULL && !nrfx_is_in_ram(p_rx_buffer)))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                         (uint32_t)__func__,
                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -355,7 +357,7 @@ ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
             break;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                  (uint32_t)__func__,
                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -372,7 +374,7 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     if (nrf_spis_event_check(p_spis, NRF_SPIS_EVENT_ACQUIRED))
     {
         nrf_spis_event_clear(p_spis, NRF_SPIS_EVENT_ACQUIRED);
-        NRFX_LOG_DEBUG("SPIS: Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SPIS_EVENT_ACQUIRED));
+        NRFX_LOG_DEBUG("SPIS: Event: %s.", (uint32_t)EVT_TO_STR(NRF_SPIS_EVENT_ACQUIRED));
 
         switch (p_cb->spi_state)
         {
@@ -395,7 +397,7 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     if (nrf_spis_event_check(p_spis, NRF_SPIS_EVENT_END))
     {
         nrf_spis_event_clear(p_spis, NRF_SPIS_EVENT_END);
-        NRFX_LOG_DEBUG("SPIS: Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_SPIS_EVENT_END));
+        NRFX_LOG_DEBUG("SPIS: Event: %s.", (uint32_t)EVT_TO_STR(NRF_SPIS_EVENT_END));
 
         switch (p_cb->spi_state)
         {

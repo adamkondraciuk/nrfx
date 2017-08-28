@@ -13,6 +13,7 @@
 
 #define NRFX_LOG_MODULE CLOCK
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)   (event == NRF_CLOCK_EVENT_HFCLKSTARTED ? "NRF_CLOCK_EVENT_HFCLKSTARTED" :        \
                             (event == NRF_CLOCK_EVENT_LFCLKSTARTED ? "NRF_CLOCK_EVENT_LFCLKSTARTED" :        \
@@ -154,7 +155,7 @@ ret_code_t nrf_drv_clock_init(void)
         m_clock_cb.module_initialized = true;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
         (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -173,7 +174,7 @@ void nrf_drv_clock_uninit(void)
     lfclk_stop();
     hfclk_stop();
     m_clock_cb.module_initialized = false;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 static void item_enqueue(nrf_drv_clock_handler_item_t ** p_head,
@@ -380,11 +381,15 @@ ret_code_t nrf_drv_clock_calibration_start(uint8_t interval, nrf_drv_clock_event
     {
         err_code = NRFX_ERROR_BUSY;
     }
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                     (uint32_t)__func__,
+                     (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #else
     err_code = NRFX_ERROR_FORBIDDEN;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                     (uint32_t)__func__,
+                     (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #endif // CALIBRATION_SUPPORT
 }
@@ -415,11 +420,15 @@ ret_code_t nrf_drv_clock_calibration_abort(void)
     }
     NRFX_CRITICAL_SECTION_EXIT();
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #else
     err_code = NRFX_ERROR_FORBIDDEN;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                     (uint32_t)__func__,
+                     (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #endif // CALIBRATION_SUPPORT
 }
@@ -430,11 +439,15 @@ ret_code_t nrf_drv_clock_is_calibrating(bool * p_is_calibrating)
 #if CALIBRATION_SUPPORT
     NRFX_ASSERT(m_clock_cb.module_initialized);
     *p_is_calibrating = (m_clock_cb.cal_state != CAL_STATE_IDLE);
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #else
     err_code = NRFX_ERROR_FORBIDDEN;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                     (uint32_t)__func__,
+                     (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #endif // CALIBRATION_SUPPORT
 }
@@ -468,7 +481,7 @@ void nrfx_clock_irq_handler(void)
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_HFCLKSTARTED))
     {
         nrf_clock_event_clear(NRF_CLOCK_EVENT_HFCLKSTARTED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_HFCLKSTARTED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_HFCLKSTARTED));
         nrf_clock_int_disable(NRF_CLOCK_INT_HF_STARTED_MASK);
         m_clock_cb.hfclk_on = true;
         clock_clk_started_notify(NRF_DRV_CLOCK_EVT_HFCLK_STARTED);
@@ -476,7 +489,7 @@ void nrfx_clock_irq_handler(void)
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_LFCLKSTARTED))
     {
         nrf_clock_event_clear(NRF_CLOCK_EVENT_LFCLKSTARTED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_LFCLKSTARTED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_LFCLKSTARTED));
         nrf_clock_int_disable(NRF_CLOCK_INT_LF_STARTED_MASK);
         m_clock_cb.lfclk_on = true;
         clock_clk_started_notify(NRF_DRV_CLOCK_EVT_LFCLK_STARTED);
@@ -485,7 +498,7 @@ void nrfx_clock_irq_handler(void)
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_CTTO))
     {
         nrf_clock_event_clear(NRF_CLOCK_EVENT_CTTO);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_CTTO));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_CTTO));
         nrf_clock_int_disable(NRF_CLOCK_INT_CTTO_MASK);
         nrf_drv_clock_hfclk_request(&m_clock_cb.cal_hfclk_started_handler_item);
     }
@@ -493,7 +506,7 @@ void nrfx_clock_irq_handler(void)
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_DONE))
     {
         nrf_clock_event_clear(NRF_CLOCK_EVENT_DONE);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_DONE));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_CLOCK_EVENT_DONE));
         nrf_clock_int_disable(NRF_CLOCK_INT_DONE_MASK);
         nrf_drv_clock_hfclk_release();
         bool aborted = (m_clock_cb.cal_state == CAL_STATE_ABORT);

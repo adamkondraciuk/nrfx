@@ -3,9 +3,9 @@
 
 #include <nrf_drv_swi.h>
 
-#define NRFX_LOG_MODULE_NAME SWI
+#define NRFX_LOG_MODULE SWI
 #include <nrfx_log.h>
-
+NRFX_LOG_MODULE_REGISTER();
 
 NRFX_STATIC_ASSERT(SWI_COUNT > 0);
 NRFX_STATIC_ASSERT(SWI_COUNT <= SWI_MAX);
@@ -259,11 +259,15 @@ ret_code_t nrf_drv_swi_init(void)
     {
         m_drv_state = NRFX_DRV_STATE_INITIALIZED;
         err_code = NRFX_SUCCESS;
-        NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_INFO("Function: %s, error code: %s.",
+                      (uint32_t)__func__,
+                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     err_code = NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -323,11 +327,13 @@ ret_code_t nrf_drv_swi_alloc(nrf_swi_t * p_swi, nrf_swi_handler_t event_handler,
         NRFX_CRITICAL_SECTION_EXIT();
         if (err_code == NRFX_SUCCESS)
         {
-            NRFX_LOG_INFO("SWI channel allocated: %d.\r\n", (*p_swi));
+            NRFX_LOG_INFO("SWI channel allocated: %d.", (*p_swi));
             break;
         }
     }
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

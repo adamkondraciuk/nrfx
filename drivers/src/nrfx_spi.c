@@ -15,7 +15,7 @@
 
 #define NRFX_LOG_MODULE SPI
 #include <nrfx_log.h>
-
+NRFX_LOG_MODULE_REGISTER();
 
 // Control block - driver instance local data.
 typedef struct
@@ -49,7 +49,7 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -71,7 +71,7 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -159,7 +159,7 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -301,7 +301,7 @@ static void spi_xfer(NRF_SPI_Type               * p_spi,
         do {
             while (!nrf_spi_event_check(p_spi, NRF_SPI_EVENT_READY)) {}
             nrf_spi_event_clear(p_spi, NRF_SPI_EVENT_READY);
-            NRFX_LOG_DEBUG("SPI: Event: NRF_SPI_EVENT_READY.\r\n");
+            NRFX_LOG_DEBUG("SPI: Event: NRF_SPI_EVENT_READY.");
         } while (transfer_byte(p_spi, p_cb));
         if (p_cb->ss_pin != NRFX_SPI_PIN_NOT_USED)
         {
@@ -324,7 +324,7 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
     if (p_cb->transfer_in_progress)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -353,7 +353,7 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
     {
         spi_xfer(p_instance->p_reg, p_cb, p_xfer_desc);
     }
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -385,7 +385,7 @@ static void irq_handler(NRF_SPI_Type * p_spi, spi_control_block_t * p_cb)
     NRFX_ASSERT(p_cb->handler);
 
     nrf_spi_event_clear(p_spi, NRF_SPI_EVENT_READY);
-    NRFX_LOG_DEBUG("Event: NRF_SPI_EVENT_READY.\r\n");
+    NRFX_LOG_DEBUG("Event: NRF_SPI_EVENT_READY.");
 
     if (!transfer_byte(p_spi, p_cb))
     {

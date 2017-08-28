@@ -134,7 +134,7 @@ ret_code_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -153,7 +153,7 @@ ret_code_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -175,7 +175,7 @@ ret_code_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     p_cb->rx_secondary_buffer_length = 0;
     p_cb->tx_buffer_length           = 0;
     p_cb->state                      = NRFX_DRV_STATE_INITIALIZED;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_WARNING("Function: %s, error code: %s.",
                      (uint32_t)__func__,
                      (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -200,7 +200,7 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
 
     p_cb->state   = NRFX_DRV_STATE_UNINITIALIZED;
     p_cb->handler = NULL;
-    NRFX_LOG_INFO("Instance uninitialized: %d.\r\n", p_instance->drv_inst_idx);
+    NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
 ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
@@ -219,7 +219,7 @@ ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
     if (!nrfx_is_in_ram(p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -228,7 +228,7 @@ ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
     if (nrfx_uarte_tx_in_progress(p_instance))
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -236,8 +236,8 @@ ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
     p_cb->tx_buffer_length = length;
     p_cb->p_tx_buffer      = p_data;
 
-    NRFX_LOG_INFO("Transfer tx_len: %d.\r\n", p_cb->tx_buffer_length);
-    NRFX_LOG_DEBUG("Tx data:\r\n");
+    NRFX_LOG_INFO("Transfer tx_len: %d.", p_cb->tx_buffer_length);
+    NRFX_LOG_DEBUG("Tx data:");
     NRFX_LOG_HEXDUMP_DEBUG(p_cb->p_tx_buffer,
                            p_cb->tx_buffer_length * sizeof(p_cb->p_tx_buffer[0]));
 
@@ -266,7 +266,7 @@ ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
         p_cb->tx_buffer_length = 0;
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -294,7 +294,7 @@ ret_code_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
     if (!nrfx_is_in_ram(p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -317,7 +317,7 @@ ret_code_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
                                                         NRF_UARTE_INT_ENDRX_MASK);
             }
             err_code = NRFX_ERROR_BUSY;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
                              (uint32_t)__func__,
                              (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
@@ -337,7 +337,7 @@ ret_code_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
         p_cb->rx_secondary_buffer_length = length;
     }
 
-    NRFX_LOG_INFO("Transfer rx_len: %d.\r\n", length);
+    NRFX_LOG_INFO("Transfer rx_len: %d.", length);
 
     err_code = NRFX_SUCCESS;
 
@@ -381,7 +381,7 @@ ret_code_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
         nrf_uarte_int_enable(p_instance->p_reg, NRF_UARTE_INT_ERROR_MASK |
                                                 NRF_UARTE_INT_ENDRX_MASK);
     }
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -436,13 +436,13 @@ void nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance)
         while (!nrf_uarte_event_check(p_instance->p_reg, NRF_UARTE_EVENT_TXSTOPPED))
         {}
     }
-    NRFX_LOG_INFO("TX transaction aborted.\r\n");
+    NRFX_LOG_INFO("TX transaction aborted.");
 }
 
 void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance)
 {
     nrf_uarte_task_trigger(p_instance->p_reg, NRF_UARTE_TASK_STOPRX);
-    NRFX_LOG_INFO("RX transaction aborted.\r\n");
+    NRFX_LOG_INFO("RX transaction aborted.");
 }
 
 static void uarte_irq_handler(NRF_UARTE_Type *        p_uarte,

@@ -7,8 +7,9 @@
 #include <nrf_drv_pdm.h>
 #include <hal/nrf_gpio.h>
 
-#define NRFX_LOG_MODULE_NAME PDM
+#define NRFX_LOG_MODULE PDM
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)   (event == NRF_PDM_EVENT_STARTED ? "NRF_PDM_EVENT_STARTED" :                \
                             (event == NRF_PDM_EVENT_STOPPED ? "NRF_PDM_EVENT_STOPPED" :                  \
@@ -47,7 +48,7 @@ void nrfx_pdm_irq_handler(void)
     if (nrf_pdm_event_check(NRF_PDM_EVENT_STARTED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STARTED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STARTED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STARTED));
 
         nrf_drv_pdm_evt_t evt;
         uint8_t finished_buffer = m_cb.active_buffer;
@@ -96,7 +97,7 @@ void nrfx_pdm_irq_handler(void)
     else if (nrf_pdm_event_check(NRF_PDM_EVENT_STOPPED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
         nrf_pdm_disable();
         m_cb.op_state = NRF_PDM_STATE_IDLE;
 
@@ -143,21 +144,27 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
     if (m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if ((p_config == NULL)
         || (event_handler == NULL))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM
         || p_config->gain_r > NRF_PDM_GAIN_MAXIMUM)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -187,17 +194,18 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
-
 
 void nrf_drv_pdm_uninit(void)
 {
     nrf_pdm_disable();
     nrf_pdm_psel_disconnect();
     m_cb.drv_state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 static void pdm_start()
@@ -224,11 +232,15 @@ ret_code_t nrf_drv_pdm_start(void)
         if (m_cb.op_state == NRF_PDM_STATE_RUNNING)
         {
             err_code = NRFX_SUCCESS;
-            NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+            NRFX_LOG_INFO("Function: %s, error code: %s.",
+                          (uint32_t)__func__,
+                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -236,7 +248,9 @@ ret_code_t nrf_drv_pdm_start(void)
     pdm_buf_request();
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -299,11 +313,15 @@ ret_code_t nrf_drv_pdm_stop(void)
             nrf_pdm_disable();
             m_cb.op_state = NRF_PDM_STATE_IDLE;
             err_code = NRFX_SUCCESS;
-            NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+            NRFX_LOG_INFO("Function: %s, error code: %s.",
+                          (uint32_t)__func__,
+                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         (uint32_t)__func__,
+                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
@@ -311,7 +329,9 @@ ret_code_t nrf_drv_pdm_stop(void)
 
     nrf_pdm_task_trigger(NRF_PDM_TASK_STOP);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
+                  (uint32_t)__func__,
+                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

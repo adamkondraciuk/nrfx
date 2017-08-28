@@ -8,8 +8,9 @@
 #include <hal/nrf_gpio.h>
 #include <string.h>
 
-#define NRFX_LOG_MODULE_NAME I2S
+#define NRFX_LOG_MODULE I2S
 #include <nrfx_log.h>
+NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)   (event == NRF_I2S_EVENT_RXPTRUPD ? "NRF_I2S_EVENT_RXPTRUPD" :                \
                             (event == NRF_I2S_EVENT_TXPTRUPD ? "NRF_I2S_EVENT_TXPTRUPD" :                \
@@ -103,7 +104,7 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -123,7 +124,7 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
                                     p_config->ratio))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -138,7 +139,7 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -154,7 +155,7 @@ void nrfx_i2s_uninit(void)
     NRFX_IRQ_DISABLE(I2S_IRQn);
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Initialized.");
 }
 
 
@@ -178,7 +179,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     if ((p_rx_buffer != NULL) && !nrfx_is_in_ram(p_rx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -187,7 +188,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     if ((p_tx_buffer != NULL) && !nrfx_is_in_ram(p_tx_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -244,7 +245,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     nrf_i2s_task_trigger(NRF_I2S, NRF_I2S_TASK_START);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -278,7 +279,7 @@ void nrfx_i2s_irq_handler(void)
     if (nrf_i2s_event_check(NRF_I2S, NRF_I2S_EVENT_TXPTRUPD))
     {
         nrf_i2s_event_clear(NRF_I2S, NRF_I2S_EVENT_TXPTRUPD);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_TXPTRUPD));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_TXPTRUPD));
 
         // If transmission is not enabled, but for some reason the TXPTRUPD
         // event has been generated, just ignore it.
@@ -309,7 +310,7 @@ void nrfx_i2s_irq_handler(void)
     if (nrf_i2s_event_check(NRF_I2S, NRF_I2S_EVENT_RXPTRUPD))
     {
         nrf_i2s_event_clear(NRF_I2S, NRF_I2S_EVENT_RXPTRUPD);
-        NRFX_LOG_DEBUG("Event: %s.\r\n", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_RXPTRUPD));
+        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_RXPTRUPD));
 
         // If reception is not enabled, but for some reason the RXPTRUPD event
         // has been generated, just ignore it.
@@ -358,7 +359,7 @@ void nrfx_i2s_irq_handler(void)
         {
             if (p_data_received != NULL)
             {
-                NRFX_LOG_DEBUG("Rx data:\r\n");
+                NRFX_LOG_DEBUG("Rx data:");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_data_received,
                                        m_cb.buffer_half_size * sizeof(p_data_received[0]));
             }
@@ -366,7 +367,7 @@ void nrfx_i2s_irq_handler(void)
                 m_cb.buffer_half_size);
             if (p_data_to_send != NULL)
             {
-                NRFX_LOG_DEBUG("Tx data:\r\n");
+                NRFX_LOG_DEBUG("Tx data:");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_data_to_send,
                                        m_cb.buffer_half_size * sizeof(p_data_to_send[0]));
             }
@@ -389,13 +390,13 @@ void nrfx_i2s_irq_handler(void)
             }
             else
             {
-                NRFX_LOG_DEBUG("Rx data:\r\n");
+                NRFX_LOG_DEBUG("Rx data:");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)nrf_i2s_rx_buffer_get(NRF_I2S),
                                        m_cb.buffer_half_size * sizeof(p_data_received[0]));
                 m_cb.handler(nrf_i2s_rx_buffer_get(NRF_I2S),
                              nrf_i2s_tx_buffer_get(NRF_I2S),
                              m_cb.buffer_half_size);
-                NRFX_LOG_DEBUG("Tx data:\r\n");
+                NRFX_LOG_DEBUG("Tx data:");
                 NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)nrf_i2s_tx_buffer_get(NRF_I2S),
                                        m_cb.buffer_half_size * sizeof(p_data_to_send[0]));
             }

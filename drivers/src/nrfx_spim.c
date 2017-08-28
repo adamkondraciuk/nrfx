@@ -15,7 +15,7 @@
 
 #define NRFX_LOG_MODULE SPIM
 #include <nrfx_log.h>
-
+NRFX_LOG_MODULE_REGISTER();
 
 // Control block - driver instance local data.
 typedef struct
@@ -52,7 +52,7 @@ ret_code_t nrfx_spim_init(nrfx_spim_t const * const p_instance,
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -74,7 +74,7 @@ ret_code_t nrfx_spim_init(nrfx_spim_t const * const p_instance,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -162,7 +162,7 @@ ret_code_t nrfx_spim_init(nrfx_spim_t const * const p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -276,7 +276,7 @@ static ret_code_t spim_xfer(NRF_SPIM_Type               * p_spim,
     {
         p_cb->transfer_in_progress = false;
         err_code = NRFX_ERROR_INVALID_ADDR;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -323,7 +323,7 @@ static ret_code_t spim_xfer(NRF_SPIM_Type               * p_spim,
         spim_int_enable(p_spim, !(flags & NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER));
     }
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -343,7 +343,7 @@ ret_code_t nrfx_spim_xfer(nrfx_spim_t     const * const p_instance,
     if (p_cb->transfer_in_progress)
     {
         err_code = NRFX_ERROR_BUSY;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -420,7 +420,7 @@ static void irq_handler(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
     {
         nrf_spim_event_clear(p_spim, NRF_SPIM_EVENT_END);
         NRFX_ASSERT(p_cb->handler);
-        NRFX_LOG_DEBUG("Event: NRF_SPIM_EVENT_END.\r\n");
+        NRFX_LOG_DEBUG("Event: NRF_SPIM_EVENT_END.");
         finish_transfer(p_cb);
     }
 }

@@ -9,7 +9,7 @@
 
 #define NRFX_LOG_MODULE GPIOTE
 #include <nrfx_log.h>
-
+NRFX_LOG_MODULE_REGISTER();
 
 #define FORBIDDEN_HANDLER_ADDRESS ((nrf_drv_gpiote_evt_handler_t)UINT32_MAX)
 #define PIN_NOT_USED              (-1)
@@ -178,7 +178,7 @@ ret_code_t nrf_drv_gpiote_init(void)
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -203,7 +203,7 @@ ret_code_t nrf_drv_gpiote_init(void)
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__,
+    NRFX_LOG_INFO("Function: %s, error code: %s.", (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -236,7 +236,7 @@ void nrf_drv_gpiote_uninit(void)
         }
     }
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Uninitialized.\r\n");
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 
@@ -288,7 +288,7 @@ ret_code_t nrf_drv_gpiote_out_init(nrf_drv_gpiote_pin_t                pin,
         }
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__,
+    NRFX_LOG_INFO("Function: %s, error code: %s.", (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -489,7 +489,7 @@ ret_code_t nrf_drv_gpiote_in_init(nrf_drv_gpiote_pin_t               pin,
         }
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n", (uint32_t)__func__,
+    NRFX_LOG_INFO("Function: %s, error code: %s.", (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
@@ -636,10 +636,10 @@ void nrfx_gpiote_irq_handler(void)
             if (mask & status)
             {
                 nrf_drv_gpiote_pin_t pin = nrf_gpiote_event_pin_get(i);
-                NRFX_LOG_DEBUG("Event in number: %d.\r\n", i);
+                NRFX_LOG_DEBUG("Event in number: %d.", i);
                 nrf_gpiote_polarity_t        polarity = nrf_gpiote_event_polarity_get(i);
                 nrf_drv_gpiote_evt_handler_t handler  = channel_handler_get(i);
-                NRFX_LOG_DEBUG("Pin: %d, polarity: %d.\r\n", pin, polarity);
+                NRFX_LOG_DEBUG("Pin: %d, polarity: %d.", pin, polarity);
                 if (handler)
                 {
                     handler(pin, polarity);
@@ -691,7 +691,7 @@ void nrfx_gpiote_irq_handler(void)
                         if ((pin_state && (sense == NRF_GPIO_PIN_SENSE_HIGH)) ||
                             (!pin_state && (sense == NRF_GPIO_PIN_SENSE_LOW))  )
                         {
-                            NRFX_LOG_DEBUG("PORT event for pin: %d, polarity: %d.\r\n", pin,
+                            NRFX_LOG_DEBUG("PORT event for pin: %d, polarity: %d.", pin,
                                            polarity);
                             if (polarity == NRF_GPIOTE_POLARITY_TOGGLE)
                             {

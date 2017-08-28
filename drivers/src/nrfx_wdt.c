@@ -5,7 +5,7 @@
 #if NRFX_CHECK(NRFX_WDT_ENABLED)
 #include <nrfx_wdt.h>
 
-#define NRFX_LOG_MODULE_NAME WDT
+#define NRFX_LOG_MODULE WDT
 #include <nrfx_log.h>
 
 
@@ -45,7 +45,7 @@ ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
     else
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.\r\n",
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          (uint32_t)__func__,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
@@ -64,7 +64,7 @@ ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
     NRFX_IRQ_ENABLE(WDT_IRQn);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -78,7 +78,7 @@ void nrfx_wdt_enable(void)
     nrf_wdt_int_enable(NRF_WDT_INT_TIMEOUT_MASK);
     nrf_wdt_task_trigger(NRF_WDT_TASK_START);
     m_state = NRFX_DRV_STATE_POWERED_ON;
-    NRFX_LOG_INFO("Enabled.\r\n");
+    NRFX_LOG_INFO("Enabled.");
 }
 
 
@@ -110,7 +110,7 @@ ret_code_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id)
         result = NRFX_ERROR_NO_MEM;
     }
     NRFX_CRITICAL_SECTION_EXIT();
-    NRFX_LOG_INFO("Function: %s, error code: %s.\r\n",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                   (uint32_t)__func__,
                   (uint32_t)NRFX_LOG_ERROR_STRING_GET(result));
     return result;
