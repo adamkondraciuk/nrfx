@@ -40,10 +40,10 @@ typedef struct
 static spim_control_block_t m_cb[NRFX_SPIM_ENABLED_COUNT];
 
 
-ret_code_t nrfx_spim_init(nrfx_spim_t const * const p_instance,
+ret_code_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
                           nrfx_spim_config_t const * p_config,
-                          nrfx_spim_evt_handler_t handler,
-                          void * p_context)
+                          nrfx_spim_evt_handler_t    handler,
+                          void                     * p_context)
 {
     NRFX_ASSERT(p_config);
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -201,10 +201,10 @@ void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
 }
 
 ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
-                              uint8_t const * p_tx_buffer,
-                              uint8_t         tx_buffer_length,
-                              uint8_t       * p_rx_buffer,
-                              uint8_t         rx_buffer_length)
+                              uint8_t           const * p_tx_buffer,
+                              uint8_t                   tx_buffer_length,
+                              uint8_t                 * p_rx_buffer,
+                              uint8_t                   rx_buffer_length)
 {
     nrfx_spim_xfer_desc_t xfer_desc;
     xfer_desc.p_tx_buffer = p_tx_buffer;

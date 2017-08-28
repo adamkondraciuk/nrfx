@@ -10,10 +10,12 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_COMP_EVENT_READY ? "NRF_COMP_EVENT_READY" :                   \
-                            (event == NRF_COMP_EVENT_DOWN ? "NRF_COMP_EVENT_DOWN" :                     \
-                            (event == NRF_COMP_EVENT_UP ? "NRF_COMP_EVENT_UP" :                         \
-                            (event == NRF_COMP_EVENT_CROSS ? "NRF_COMP_EVENT_CROSS" : "UNKNOWN ERROR"))))
+#define EVT_TO_STR(event)                                     \
+    (event == NRF_COMP_EVENT_READY ? "NRF_COMP_EVENT_READY" : \
+    (event == NRF_COMP_EVENT_DOWN  ? "NRF_COMP_EVENT_DOWN"  : \
+    (event == NRF_COMP_EVENT_UP    ? "NRF_COMP_EVENT_UP"    : \
+    (event == NRF_COMP_EVENT_CROSS ? "NRF_COMP_EVENT_CROSS" : \
+                                     "UNKNOWN ERROR"))))
 
 
 static comp_events_handler_t     m_comp_events_handler = NULL;
@@ -93,7 +95,8 @@ ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
     nrf_comp_speed_mode_set(p_config->speed_mode);
     nrf_comp_hysteresis_set(p_config->hyst);
     nrf_comp_isource_set(p_config->isource);
-    nrf_comp_shorts_disable(NRF_DRV_COMP_SHORT_STOP_AFTER_CROSS_EVT | NRF_DRV_COMP_SHORT_STOP_AFTER_UP_EVT |
+    nrf_comp_shorts_disable(NRF_DRV_COMP_SHORT_STOP_AFTER_CROSS_EVT |
+                            NRF_DRV_COMP_SHORT_STOP_AFTER_UP_EVT    |
                             NRF_DRV_COMP_SHORT_STOP_AFTER_DOWN_EVT);
     nrf_comp_int_disable(COMP_INTENCLR_CROSS_Msk | COMP_INTENCLR_UP_Msk |
                          COMP_INTENCLR_DOWN_Msk | COMP_INTENCLR_READY_Msk);

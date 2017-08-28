@@ -17,40 +17,54 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)       (event == NRFX_TWI_EVT_DONE ? "EVT_DONE" :                            \
-                                (event == NRFX_TWI_EVT_ADDRESS_NACK ? "EVT_ADDRESS_NACK" :            \
-                                (event == NRFX_TWI_EVT_DATA_NACK ? "EVT_DATA_NACK" : "UNKNOWN ERROR")))
-#define EVT_TO_STR_TWI(event)   (event == NRF_TWI_EVENT_STOPPED ? "NRF_TWI_EVENT_STOPPED" :                            \
-                                (event == NRF_TWI_EVENT_RXDREADY ? "NRF_TWI_EVENT_RXDREADY" :                          \
-                                (event == NRF_TWI_EVENT_TXDSENT ? "NRF_TWI_EVENT_TXDSENT" :                            \
-                                (event == NRF_TWI_EVENT_ERROR ? "NRF_TWI_EVENT_ERROR" :                                \
-                                (event == NRF_TWI_EVENT_BB ? "NRF_TWI_EVENT_BB" :                                      \
-                                (event == NRF_TWI_EVENT_SUSPENDED ? "NRF_TWI_EVENT_SUSPENDED" : "UNKNOWN ERROR"))))))
-#define TRANSFER_TO_STR(type)   (type == NRFX_TWI_XFER_TX ? "XFER_TX" :                             \
-                                (type == NRFX_TWI_XFER_RX ? "XFER_RX" :                             \
-                                (type == NRFX_TWI_XFER_TXRX ? "XFER_TXRX" :                         \
-                                (type == NRFX_TWI_XFER_TXTX ? "XFER_TXTX" : "UNKNOWN TRANSFER TYPE"))))
+#define EVT_TO_STR(event)                                      \
+    (event == NRFX_TWI_EVT_DONE         ? "EVT_DONE"         : \
+    (event == NRFX_TWI_EVT_ADDRESS_NACK ? "EVT_ADDRESS_NACK" : \
+    (event == NRFX_TWI_EVT_DATA_NACK    ? "EVT_DATA_NACK"    : \
+                                          "UNKNOWN ERROR")))
+
+#define EVT_TO_STR_TWI(event)                                       \
+    (event == NRF_TWI_EVENT_STOPPED   ? "NRF_TWI_EVENT_STOPPED"   : \
+    (event == NRF_TWI_EVENT_RXDREADY  ? "NRF_TWI_EVENT_RXDREADY"  : \
+    (event == NRF_TWI_EVENT_TXDSENT   ? "NRF_TWI_EVENT_TXDSENT"   : \
+    (event == NRF_TWI_EVENT_ERROR     ? "NRF_TWI_EVENT_ERROR"     : \
+    (event == NRF_TWI_EVENT_BB        ? "NRF_TWI_EVENT_BB"        : \
+    (event == NRF_TWI_EVENT_SUSPENDED ? "NRF_TWI_EVENT_SUSPENDED" : \
+                                        "UNKNOWN ERROR"))))))
+
+#define TRANSFER_TO_STR(type)                   \
+    (type == NRFX_TWI_XFER_TX   ? "XFER_TX"   : \
+    (type == NRFX_TWI_XFER_RX   ? "XFER_RX"   : \
+    (type == NRFX_TWI_XFER_TXRX ? "XFER_TXRX" : \
+    (type == NRFX_TWI_XFER_TXTX ? "XFER_TXTX" : \
+                                  "UNKNOWN TRANSFER TYPE"))))
 
 
-#define SCL_PIN_INIT_CONF     ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
-                              | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
-                              | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
-                              | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
-                              | (GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos))
+#define SCL_PIN_INIT_CONF                                     \
+    ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
+    | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
+    | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
+    | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
+    | (GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos))
+
 #define SDA_PIN_INIT_CONF        SCL_PIN_INIT_CONF
 
-#define SDA_PIN_UNINIT_CONF   ( (GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos) \
-                              | (GPIO_PIN_CNF_DRIVE_H0H1       << GPIO_PIN_CNF_DRIVE_Pos) \
-                              | (GPIO_PIN_CNF_PULL_Disabled    << GPIO_PIN_CNF_PULL_Pos)  \
-                              | (GPIO_PIN_CNF_INPUT_Disconnect << GPIO_PIN_CNF_INPUT_Pos) \
-                              | (GPIO_PIN_CNF_DIR_Input        << GPIO_PIN_CNF_DIR_Pos))
+#define SDA_PIN_UNINIT_CONF                                     \
+    ( (GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos) \
+    | (GPIO_PIN_CNF_DRIVE_H0H1       << GPIO_PIN_CNF_DRIVE_Pos) \
+    | (GPIO_PIN_CNF_PULL_Disabled    << GPIO_PIN_CNF_PULL_Pos)  \
+    | (GPIO_PIN_CNF_INPUT_Disconnect << GPIO_PIN_CNF_INPUT_Pos) \
+    | (GPIO_PIN_CNF_DIR_Input        << GPIO_PIN_CNF_DIR_Pos))
+
 #define SCL_PIN_UNINIT_CONF      SDA_PIN_UNINIT_CONF
 
-#define SCL_PIN_INIT_CONF_CLR ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
-                              | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
-                              | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
-                              | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
-                              | (GPIO_PIN_CNF_DIR_Output     << GPIO_PIN_CNF_DIR_Pos))
+#define SCL_PIN_INIT_CONF_CLR                                 \
+    ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
+    | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
+    | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
+    | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
+    | (GPIO_PIN_CNF_DIR_Output     << GPIO_PIN_CNF_DIR_Pos))
+
 #define SDA_PIN_INIT_CONF_CLR    SCL_PIN_INIT_CONF_CLR
 
 #define HW_TIMEOUT      10000
@@ -618,7 +632,7 @@ ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
 
 ret_code_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
-                       uint8_t const *    p_data,
+                       uint8_t    const * p_data,
                        uint32_t           length,
                        bool               no_stop)
 {

@@ -259,10 +259,10 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  *                                 RAM region.
  */
 ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
-                              uint8_t const * p_tx_buffer,
-                              uint8_t         tx_buffer_length,
-                              uint8_t       * p_rx_buffer,
-                              uint8_t         rx_buffer_length);
+                              uint8_t           const * p_tx_buffer,
+                              uint8_t                   tx_buffer_length,
+                              uint8_t                 * p_rx_buffer,
+                              uint8_t                   rx_buffer_length);
 
 /**
  * @brief Function for starting the SPI data transfer with additional option flags.

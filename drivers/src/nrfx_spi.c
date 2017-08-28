@@ -310,7 +310,7 @@ static void spi_xfer(NRF_SPI_Type               * p_spi,
     }
 }
 
-ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
+ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
                          nrfx_spi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags)
 {
@@ -360,10 +360,10 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
 }
 
 ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
-                             uint8_t const * p_tx_buffer,
-                             uint32_t        tx_buffer_length,
-                             uint8_t       * p_rx_buffer,
-                             uint32_t        rx_buffer_length)
+                             uint8_t          const * p_tx_buffer,
+                             uint32_t                 tx_buffer_length,
+                             uint8_t                * p_rx_buffer,
+                             uint32_t                 rx_buffer_length)
 {
     nrfx_spi_xfer_desc_t xfer_desc;
     xfer_desc.p_tx_buffer = p_tx_buffer;

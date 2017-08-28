@@ -11,10 +11,12 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_LPCOMP_EVENT_READY ? "NRF_LPCOMP_EVENT_READY" :                \
-                            (event == NRF_LPCOMP_EVENT_DOWN ? "NRF_LPCOMP_EVENT_DOWN" :                  \
-                            (event == NRF_LPCOMP_EVENT_UP ? "NRF_LPCOMP_EVENT_UP" :                      \
-                            (event == NRF_LPCOMP_EVENT_CROSS ? "NRF_LPCOMP_EVENT_CROSS" : "UNKNOWN EVENT"))))
+#define EVT_TO_STR(event)                                         \
+    (event == NRF_LPCOMP_EVENT_READY ? "NRF_LPCOMP_EVENT_READY" : \
+    (event == NRF_LPCOMP_EVENT_DOWN  ? "NRF_LPCOMP_EVENT_DOWN"  : \
+    (event == NRF_LPCOMP_EVENT_UP    ? "NRF_LPCOMP_EVENT_UP"    : \
+    (event == NRF_LPCOMP_EVENT_CROSS ? "NRF_LPCOMP_EVENT_CROSS" : \
+                                       "UNKNOWN EVENT"))))
 
 
 static lpcomp_events_handler_t m_lpcomp_events_handler = NULL;
@@ -31,7 +33,6 @@ static void lpcomp_execute_handler(nrf_lpcomp_event_t event, uint32_t event_mask
     }
 }
 
-
 void nrfx_lpcomp_irq_handler(void)
 {
     lpcomp_execute_handler(NRF_LPCOMP_EVENT_READY, LPCOMP_INTENSET_READY_Msk);
@@ -39,7 +40,6 @@ void nrfx_lpcomp_irq_handler(void)
     lpcomp_execute_handler(NRF_LPCOMP_EVENT_UP, LPCOMP_INTENSET_UP_Msk);
     lpcomp_execute_handler(NRF_LPCOMP_EVENT_CROSS, LPCOMP_INTENSET_CROSS_Msk);
 }
-
 
 ret_code_t nrf_drv_lpcomp_init(const nrf_drv_lpcomp_config_t * p_config,
                                lpcomp_events_handler_t   events_handler)

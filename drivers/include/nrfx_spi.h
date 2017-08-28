@@ -246,10 +246,10 @@ void       nrfx_spi_uninit(nrfx_spi_t const * const p_instance);
  * @retval NRFX_ERROR_BUSY If a previously started transfer has not finished yet.
  */
 ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
-                             uint8_t const * p_tx_buffer,
-                             uint32_t        tx_buffer_length,
-                             uint8_t       * p_rx_buffer,
-                             uint32_t        rx_buffer_length);
+                             uint8_t          const * p_tx_buffer,
+                             uint32_t                 tx_buffer_length,
+                             uint8_t                * p_rx_buffer,
+                             uint32_t                 rx_buffer_length);
 
 /**
  * @brief Function for starting the SPI data transfer with additional option flags.

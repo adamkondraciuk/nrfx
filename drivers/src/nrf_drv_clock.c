@@ -15,10 +15,12 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_CLOCK_EVENT_HFCLKSTARTED ? "NRF_CLOCK_EVENT_HFCLKSTARTED" :        \
-                            (event == NRF_CLOCK_EVENT_LFCLKSTARTED ? "NRF_CLOCK_EVENT_LFCLKSTARTED" :        \
-                            (event == NRF_CLOCK_EVENT_DONE ? "NRF_CLOCK_EVENT_DONE" :                        \
-                            (event == NRF_CLOCK_EVENT_CTTO ? "NRF_CLOCK_EVENT_CTTO" : "UNKNOWN EVENT"))))
+#define EVT_TO_STR(event)                                                     \
+    (event == NRF_CLOCK_EVENT_HFCLKSTARTED ? "NRF_CLOCK_EVENT_HFCLKSTARTED" : \
+    (event == NRF_CLOCK_EVENT_LFCLKSTARTED ? "NRF_CLOCK_EVENT_LFCLKSTARTED" : \
+    (event == NRF_CLOCK_EVENT_DONE         ? "NRF_CLOCK_EVENT_DONE"         : \
+    (event == NRF_CLOCK_EVENT_CTTO         ? "NRF_CLOCK_EVENT_CTTO"         : \
+                                             "UNKNOWN EVENT"))))
 
 
 /*lint -save -e652 */

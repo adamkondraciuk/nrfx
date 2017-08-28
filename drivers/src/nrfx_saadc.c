@@ -16,6 +16,7 @@ NRFX_LOG_MODULE_REGISTER();
     (event == NRF_SAADC_EVENT_CALIBRATEDONE ? "NRF_SAADC_EVENT_CALIBRATEDONE" : \
     (event == NRF_SAADC_EVENT_STOPPED       ? "NRF_SAADC_EVENT_STOPPED"       : \
                                               "UNKNOWN EVENT"))))))
+
 #define EVT_TO_STR_LIMIT(event)                               \
     (event == NRF_SAADC_LIMIT_LOW  ? "NRF_SAADC_LIMIT_LOW"  : \
     (event == NRF_SAADC_LIMIT_HIGH ? "NRF_SAADC_LIMIT_HIGH" : \

@@ -105,9 +105,9 @@ typedef void (*nrfx_rtc_handler_t)(nrfx_rtc_int_type_t int_type);
  * @retval     NRFX_ERROR_INVALID_PARAM   If no handler was provided.
  * @retval     NRFX_ERROR_INVALID_STATE   If the instance is already initialized.
  */
-ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const p_instance,
+ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_config_t const * p_config,
-                         nrfx_rtc_handler_t handler);
+                         nrfx_rtc_handler_t        handler);
 
 /**@brief Function for uninitializing the RTC driver instance.
  *
@@ -159,9 +159,9 @@ void nrfx_rtc_disable(nrfx_rtc_t const * const p_instance);
  *                                  value. This error can only be reported if RTCn_CONFIG_RELIABLE = 1.
  */
 ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
-                           uint32_t channel,
-                           uint32_t val,
-                           bool enable_irq);
+                           uint32_t                 channel,
+                           uint32_t                 val,
+                           bool                     enable_irq);
 
 /**@brief Function for disabling a channel.
  *
@@ -231,7 +231,7 @@ uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * const p_instance);
  * @param[in]  p_mask              Pointer to the location where the mask is filled.
  */
 __STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
-                                          uint32_t * p_mask);
+                                          uint32_t               * p_mask);
 
 /**@brief Function for enabling instance interrupts.
  *
@@ -268,7 +268,7 @@ __STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
  * @retval     Address of task register.
  */
 __STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
-                                                   nrf_rtc_task_t task);
+                                                   nrf_rtc_task_t           task);
 
 /**@brief Function for returning a requested event address for the RTC driver instance.
  *
@@ -280,12 +280,12 @@ __STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_in
  * @retval     Address of event register.
  */
 __STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
-                                                    nrf_rtc_event_t event);
+                                                    nrf_rtc_event_t          event);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
-                                          uint32_t * p_mask)
+                                          uint32_t               * p_mask)
 {
     *p_mask = nrf_rtc_int_get(p_instance->p_reg);
     nrf_rtc_int_disable(p_instance->p_reg, NRF_RTC_INT_TICK_MASK |
@@ -312,13 +312,13 @@ __STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
 }
 
 __STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
-                                                   nrf_rtc_task_t task)
+                                                   nrf_rtc_task_t           task)
 {
     return nrf_rtc_task_address_get(p_instance->p_reg, task);
 }
 
 __STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
-                                                    nrf_rtc_event_t event)
+                                                    nrf_rtc_event_t          event)
 {
     return nrf_rtc_event_address_get(p_instance->p_reg, event);
 }

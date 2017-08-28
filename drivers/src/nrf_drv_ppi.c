@@ -463,7 +463,7 @@ uint32_t nrf_drv_ppi_group_disable(nrf_ppi_channel_group_t group)
     return err_code;
 }
 
-uint32_t nrf_drv_ppi_channels_remove_from_group(uint32_t channel_mask,
+uint32_t nrf_drv_ppi_channels_remove_from_group(uint32_t                channel_mask,
                                                 nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
@@ -492,7 +492,7 @@ uint32_t nrf_drv_ppi_channels_remove_from_group(uint32_t channel_mask,
     return err_code;
 }
 
-uint32_t nrf_drv_ppi_channels_include_in_group(uint32_t channel_mask,
+uint32_t nrf_drv_ppi_channels_include_in_group(uint32_t                channel_mask,
                                                nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;

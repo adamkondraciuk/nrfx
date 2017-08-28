@@ -201,10 +201,10 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance);
  * @retval NRFX_ERROR_INTERNAL       If the operation failed because of an internal error.
  */
 ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
-                                 uint8_t const * p_tx_buffer,
-                                 uint8_t         tx_buffer_length,
-                                 uint8_t       * p_rx_buffer,
-                                 uint8_t         rx_buffer_length);
+                                 uint8_t           const * p_tx_buffer,
+                                 uint8_t                   tx_buffer_length,
+                                 uint8_t                 * p_rx_buffer,
+                                 uint8_t                   rx_buffer_length);
 
 
 void nrfx_spis_0_irq_handler(void);

@@ -12,9 +12,11 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_I2S_EVENT_RXPTRUPD ? "NRF_I2S_EVENT_RXPTRUPD" :                \
-                            (event == NRF_I2S_EVENT_TXPTRUPD ? "NRF_I2S_EVENT_TXPTRUPD" :                \
-                            (event == NRF_I2S_EVENT_STOPPED ? "NRF_I2S_EVENT_STOPPED" : "UNKNOWN EVENT")))
+#define EVT_TO_STR(event)                                         \
+    (event == NRF_I2S_EVENT_RXPTRUPD ? "NRF_I2S_EVENT_RXPTRUPD" : \
+    (event == NRF_I2S_EVENT_TXPTRUPD ? "NRF_I2S_EVENT_TXPTRUPD" : \
+    (event == NRF_I2S_EVENT_STOPPED  ? "NRF_I2S_EVENT_STOPPED"  : \
+                                       "UNKNOWN EVENT")))
 
 // Control block - driver instance local data.
 typedef struct

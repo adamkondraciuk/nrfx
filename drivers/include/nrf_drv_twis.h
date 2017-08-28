@@ -144,11 +144,11 @@ enum {
 #define NRF_DRV_TWIS_DEFAULT_CONFIG \
 { \
     .addr               = { TWIS_DEFAULT_CONFIG_ADDR0, TWIS_DEFAULT_CONFIG_ADDR1 }, \
-    .scl                = 31, \
-    .scl_pull           = (nrf_gpio_pin_pull_t)TWIS_DEFAULT_CONFIG_SCL_PULL, \
-    .sda                = 31, \
-    .sda_pull           = (nrf_gpio_pin_pull_t)TWIS_DEFAULT_CONFIG_SDA_PULL, \
-    .interrupt_priority = TWIS_DEFAULT_CONFIG_IRQ_PRIORITY \
+    .scl                = 31,                                                       \
+    .scl_pull           = (nrf_gpio_pin_pull_t)TWIS_DEFAULT_CONFIG_SCL_PULL,        \
+    .sda                = 31,                                                       \
+    .sda_pull           = (nrf_gpio_pin_pull_t)TWIS_DEFAULT_CONFIG_SDA_PULL,        \
+    .interrupt_priority = TWIS_DEFAULT_CONFIG_IRQ_PRIORITY                          \
 }
 
 /**
@@ -173,7 +173,7 @@ enum {
  */
 ret_code_t nrf_drv_twis_init(
         nrf_drv_twis_t          const * const p_instance,
-        nrf_drv_twis_config_t   const * p_config,
+        nrf_drv_twis_config_t   const *       p_config,
         nrf_drv_twis_event_handler_t    const event_handler);
 
 /**
@@ -243,10 +243,9 @@ uint32_t nrf_drv_twis_error_get_and_clear(nrf_drv_twis_t const * const p_instanc
  * @retval NRFX_ERROR_INVALID_LENGTH Wrong value in @em size parameter
  * @retval NRFX_ERROR_INVALID_STATE  Module not initialized or not enabled
  */
-ret_code_t nrf_drv_twis_tx_prepare(
-        nrf_drv_twis_t const * const p_instance,
-        void const * const p_buf,
-        size_t size);
+ret_code_t nrf_drv_twis_tx_prepare(nrf_drv_twis_t const * const p_instance,
+                                   void const * const           p_buf,
+                                   size_t                       size);
 
 /**
  * @brief Get number of transmitted bytes
@@ -275,10 +274,9 @@ size_t nrf_drv_twis_tx_amount(nrf_drv_twis_t const * const p_instance);
  * @retval NRFX_ERROR_INVALID_LENGTH Wrong value in @em size parameter
  * @retval NRFX_ERROR_INVALID_STATE  Module not initialized or not enabled
  */
-ret_code_t nrf_drv_twis_rx_prepare(
-        nrf_drv_twis_t const * const p_instance,
-        void * const p_buf,
-        size_t size);
+ret_code_t nrf_drv_twis_rx_prepare(nrf_drv_twis_t const * const p_instance,
+                                   void * const                 p_buf,
+                                   size_t                       size);
 
 /**
  * @brief Get number of received bytes

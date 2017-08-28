@@ -76,13 +76,14 @@ NRFX_STATIC_ASSERT(SWI_COUNT <= SWI_MAX);
  #endif
 #endif
 
-#define SWI_START_NUMBER ( (SWI_DISABLE0)                                                             \
-                         + (SWI_DISABLE0 * SWI_DISABLE1)                                              \
-                         + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2)                               \
-                         + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3)                \
-                         + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3 * SWI_DISABLE4) \
-                         + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3 * SWI_DISABLE4  \
-                            * SWI_DISABLE5) )
+#define SWI_START_NUMBER                                                         \
+    ( (SWI_DISABLE0)                                                             \
+    + (SWI_DISABLE0 * SWI_DISABLE1)                                              \
+    + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2)                               \
+    + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3)                \
+    + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3 * SWI_DISABLE4) \
+    + (SWI_DISABLE0 * SWI_DISABLE1 * SWI_DISABLE2 * SWI_DISABLE3 * SWI_DISABLE4  \
+       * SWI_DISABLE5) )
 
 #define SWI_ARRAY_SIZE   (SWI_COUNT - SWI_START_NUMBER)
 

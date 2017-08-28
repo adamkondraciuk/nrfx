@@ -91,7 +91,7 @@ typedef void (*qdec_event_handler_t)(nrf_drv_qdec_event_t event);
  * @retval NRFX_ERROR_INVALID_STATE If QDEC was already initialized.
  */
 ret_code_t nrf_drv_qdec_init(nrf_drv_qdec_config_t const * p_config,
-                             qdec_event_handler_t event_handler);
+                             qdec_event_handler_t          event_handler);
 
 /**@brief Function for uninitializing QDEC.
  * @note  Function asserts if module is uninitialized.

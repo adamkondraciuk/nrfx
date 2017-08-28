@@ -31,7 +31,7 @@ typedef struct
 
 /**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect low-to-high transition.
  * @details Set hi_accu to true to use IN_EVENT. */
-#define GPIOTE_CONFIG_IN_SENSE_LOTOHI(hi_accu)     \
+#define GPIOTE_CONFIG_IN_SENSE_LOTOHI(hi_accu)   \
     {                                            \
         .is_watcher = false,                     \
         .hi_accuracy = hi_accu,                  \
@@ -41,7 +41,7 @@ typedef struct
 
 /**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect high-to-low transition.
  * @details Set hi_accu to true to use IN_EVENT. */
-#define GPIOTE_CONFIG_IN_SENSE_HITOLO(hi_accu)      \
+#define GPIOTE_CONFIG_IN_SENSE_HITOLO(hi_accu)   \
     {                                            \
         .is_watcher = false,                     \
         .hi_accuracy = hi_accu,                  \
@@ -152,7 +152,7 @@ void nrf_drv_gpiote_uninit(void);
  * @retval NRFX_ERROR_INVALID_STATE If the driver is not initialized or the pin is already used.
  * @retval NRFX_ERROR_NO_MEM        If no GPIOTE channel is available.
  */
-ret_code_t nrf_drv_gpiote_out_init(nrf_drv_gpiote_pin_t pin,
+ret_code_t nrf_drv_gpiote_out_init(nrf_drv_gpiote_pin_t                pin,
                                    nrf_drv_gpiote_out_config_t const * p_config);
 
 /**
@@ -252,9 +252,9 @@ uint32_t nrf_drv_gpiote_clr_task_addr_get(nrf_drv_gpiote_pin_t pin);
  * @retval NRFX_ERROR_INVALID_STATE If the driver is not initialized or the pin is already used.
  * @retval NRFX_ERROR_NO_MEM        If no GPIOTE channel is available.
  */
-ret_code_t nrf_drv_gpiote_in_init(nrf_drv_gpiote_pin_t pin,
+ret_code_t nrf_drv_gpiote_in_init(nrf_drv_gpiote_pin_t               pin,
                                   nrf_drv_gpiote_in_config_t const * p_config,
-                                  nrf_drv_gpiote_evt_handler_t evt_handler);
+                                  nrf_drv_gpiote_evt_handler_t       evt_handler);
 
 /**
  * @brief Function for uninitializing a GPIOTE input pin.

@@ -14,12 +14,14 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_TWIS_EVENT_STOPPED ? "NRF_TWIS_EVENT_STOPPED" :               \
-                            (event == NRF_TWIS_EVENT_ERROR ? "NRF_TWIS_EVENT_ERROR" :                   \
-                            (event == NRF_TWIS_EVENT_RXSTARTED ? "NRF_TWIS_EVENT_RXSTARTED" :           \
-                            (event == NRF_TWIS_EVENT_TXSTARTED ? "NRF_TWIS_EVENT_TXSTARTED" :           \
-                            (event == NRF_TWIS_EVENT_WRITE ? "NRF_TWIS_EVENT_WRITE" :                   \
-                            (event == NRF_TWIS_EVENT_READ ? "NRF_TWIS_EVENT_READ" : "UNKNOWN EVENT"))))))
+#define EVT_TO_STR(event)                                             \
+    (event == NRF_TWIS_EVENT_STOPPED   ? "NRF_TWIS_EVENT_STOPPED"   : \
+    (event == NRF_TWIS_EVENT_ERROR     ? "NRF_TWIS_EVENT_ERROR"     : \
+    (event == NRF_TWIS_EVENT_RXSTARTED ? "NRF_TWIS_EVENT_RXSTARTED" : \
+    (event == NRF_TWIS_EVENT_TXSTARTED ? "NRF_TWIS_EVENT_TXSTARTED" : \
+    (event == NRF_TWIS_EVENT_WRITE     ? "NRF_TWIS_EVENT_WRITE"     : \
+    (event == NRF_TWIS_EVENT_READ      ? "NRF_TWIS_EVENT_READ"      : \
+                                         "UNKNOWN EVENT"))))))
 
 
 /**

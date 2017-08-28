@@ -111,7 +111,7 @@ typedef struct
  * @retval NRFX_ERROR_BUSY              If the LPCOMP driver is initialized.
  */
 ret_code_t nrf_drv_comp_init(const nrf_drv_comp_config_t * p_config,
-                             comp_events_handler_t   event_handler);
+                             comp_events_handler_t         event_handler);
 
 
 /**

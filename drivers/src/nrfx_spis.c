@@ -16,9 +16,9 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event) \
+#define EVT_TO_STR(event)                                           \
     (event == NRF_SPIS_EVENT_ACQUIRED ? "NRF_SPIS_EVENT_ACQUIRED" : \
-    (event == NRF_SPIS_EVENT_END      ? "NRF_SPIS_EVENT_END" : \
+    (event == NRF_SPIS_EVENT_END      ? "NRF_SPIS_EVENT_END"      : \
                                         "UNKNOWN ERROR"))
 
 
@@ -58,7 +58,7 @@ typedef struct
 
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
-ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
+ret_code_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
                           nrfx_spis_config_t const * p_config,
                           nrfx_spis_event_handler_t  event_handler)
 {
@@ -255,7 +255,7 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance)
 
 /**@brief Function for executing the state entry action. */
 static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
-                                            spis_cb_t * p_cb)
+                                            spis_cb_t     * p_cb)
 {
     nrfx_spis_event_t event;
 
@@ -298,8 +298,8 @@ static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,
  * @param[in] p_cb      SPIS instance control block.
  * @param[in] new_state State where the state machine transits to.
  */
-static void spis_state_change(NRF_SPIS_Type * p_spis,
-                              spis_cb_t * p_cb,
+static void spis_state_change(NRF_SPIS_Type   * p_spis,
+                              spis_cb_t       * p_cb,
                               nrfx_spis_state_t new_state)
 {
     p_cb->spi_state = new_state;
@@ -308,10 +308,10 @@ static void spis_state_change(NRF_SPIS_Type * p_spis,
 
 
 ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
-                                 uint8_t const * p_tx_buffer,
-                                 uint8_t         tx_buffer_length,
-                                 uint8_t       * p_rx_buffer,
-                                 uint8_t         rx_buffer_length)
+                                 uint8_t           const * p_tx_buffer,
+                                 uint8_t                   tx_buffer_length,
+                                 uint8_t                 * p_rx_buffer,
+                                 uint8_t                   rx_buffer_length)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     uint32_t err_code;

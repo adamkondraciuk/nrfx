@@ -38,19 +38,21 @@ typedef struct
 
 /** @brief LPCOMP driver default configuration including the LPCOMP HAL configuration. */
 #ifdef NRF52_SERIES
-#define NRF_DRV_LPCOMP_DEFAULT_CONFIG                                                                                     \
-    {                                                                                                                     \
-        .hal                = {(nrf_lpcomp_ref_t)LPCOMP_CONFIG_REFERENCE , (nrf_lpcomp_detect_t)LPCOMP_CONFIG_DETECTION,  \
-                               (nrf_lpcomp_hysteresis_t)LPCOMP_CONFIG_HYST},                                              \
-        .input              = (nrf_lpcomp_input_t)LPCOMP_CONFIG_INPUT,                                                    \
-        .interrupt_priority = LPCOMP_CONFIG_IRQ_PRIORITY                                                                  \
+#define NRF_DRV_LPCOMP_DEFAULT_CONFIG                                        \
+    {                                                                        \
+        .hal                = {(nrf_lpcomp_ref_t)LPCOMP_CONFIG_REFERENCE ,   \
+                               (nrf_lpcomp_detect_t)LPCOMP_CONFIG_DETECTION, \
+                               (nrf_lpcomp_hysteresis_t)LPCOMP_CONFIG_HYST}, \
+        .input              = (nrf_lpcomp_input_t)LPCOMP_CONFIG_INPUT,       \
+        .interrupt_priority = LPCOMP_CONFIG_IRQ_PRIORITY                     \
     }
 #else
-#define NRF_DRV_LPCOMP_DEFAULT_CONFIG                                                                                     \
-    {                                                                                                                     \
-        .hal                = {(nrf_lpcomp_ref_t)LPCOMP_CONFIG_REFERENCE , (nrf_lpcomp_detect_t)LPCOMP_CONFIG_DETECTION},  \
-        .input              = (nrf_lpcomp_input_t)LPCOMP_CONFIG_INPUT,                                                    \
-        .interrupt_priority = LPCOMP_CONFIG_IRQ_PRIORITY                                                                  \
+#define NRF_DRV_LPCOMP_DEFAULT_CONFIG                                         \
+    {                                                                         \
+        .hal                = {(nrf_lpcomp_ref_t)LPCOMP_CONFIG_REFERENCE ,    \
+                               (nrf_lpcomp_detect_t)LPCOMP_CONFIG_DETECTION}, \
+        .input              = (nrf_lpcomp_input_t)LPCOMP_CONFIG_INPUT,        \
+        .interrupt_priority = LPCOMP_CONFIG_IRQ_PRIORITY                      \
     }
 #endif
 
@@ -68,7 +70,7 @@ typedef struct
  * @retval NRFX_ERROR_INVALID_STATE If the driver has already been initialized.
  */
 ret_code_t nrf_drv_lpcomp_init(const nrf_drv_lpcomp_config_t * p_config,
-                               lpcomp_events_handler_t   events_handler);
+                               lpcomp_events_handler_t         events_handler);
 
 
 /**

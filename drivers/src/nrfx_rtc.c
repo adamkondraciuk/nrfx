@@ -15,14 +15,14 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event) \
+#define EVT_TO_STR(event)                                           \
     (event == NRF_RTC_EVENT_TICK      ? "NRF_RTC_EVENT_TICK"      : \
-     event == NRF_RTC_EVENT_OVERFLOW  ? "NRF_RTC_EVENT_OVERFLOW"  : \
-     event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" : \
-     event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" : \
-     event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" : \
-     event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : \
-                                        "UNKNOWN EVENT")
+    (event == NRF_RTC_EVENT_OVERFLOW  ? "NRF_RTC_EVENT_OVERFLOW"  : \
+    (event == NRF_RTC_EVENT_COMPARE_0 ? "NRF_RTC_EVENT_COMPARE_0" : \
+    (event == NRF_RTC_EVENT_COMPARE_1 ? "NRF_RTC_EVENT_COMPARE_1" : \
+    (event == NRF_RTC_EVENT_COMPARE_2 ? "NRF_RTC_EVENT_COMPARE_2" : \
+    (event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : \
+                                        "UNKNOWN EVENT"))))))
 
 
 /**@brief RTC driver instance control block structure. */
@@ -37,9 +37,9 @@ typedef struct
 static nrfx_rtc_handler_t m_handlers[NRFX_RTC_ENABLED_COUNT];
 static nrfx_rtc_cb_t      m_cb[NRFX_RTC_ENABLED_COUNT];
 
-ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const p_instance,
+ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_config_t const * p_config,
-                         nrfx_rtc_handler_t handler)
+                         nrfx_rtc_handler_t        handler)
 {
     NRFX_ASSERT(p_config != NULL);
 
@@ -265,8 +265,8 @@ uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * const p_instance)
 }
 
 static void irq_handler(NRF_RTC_Type * p_reg,
-                        uint32_t instance_id,
-                        uint32_t channel_count)
+                        uint32_t       instance_id,
+                        uint32_t       channel_count)
 {
     uint32_t i;
     uint32_t int_mask = (uint32_t)NRF_RTC_INT_COMPARE0_MASK;

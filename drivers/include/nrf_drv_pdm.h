@@ -106,7 +106,7 @@ typedef void (*nrf_drv_pdm_event_handler_t)(nrf_drv_pdm_evt_t const * const evt)
  * @retval    NRFX_ERROR_INVALID_PARAM If invalid parameters were specified.
  */
 ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
-                            nrf_drv_pdm_event_handler_t event_handler);
+                            nrf_drv_pdm_event_handler_t  event_handler);
 
 
 /**

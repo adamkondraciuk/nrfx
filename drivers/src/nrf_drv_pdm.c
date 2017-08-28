@@ -11,9 +11,11 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_PDM_EVENT_STARTED ? "NRF_PDM_EVENT_STARTED" :                \
-                            (event == NRF_PDM_EVENT_STOPPED ? "NRF_PDM_EVENT_STOPPED" :                  \
-                            (event == NRF_PDM_EVENT_END ? "NRF_PDM_EVENT_END" : "UNKNOWN EVENT")))
+#define EVT_TO_STR(event)                                       \
+    (event == NRF_PDM_EVENT_STARTED ? "NRF_PDM_EVENT_STARTED" : \
+    (event == NRF_PDM_EVENT_STOPPED ? "NRF_PDM_EVENT_STOPPED" : \
+    (event == NRF_PDM_EVENT_END     ? "NRF_PDM_EVENT_END"     : \
+                                      "UNKNOWN EVENT")))
 
 
 /** @brief PDM interface status. */
@@ -137,7 +139,7 @@ void nrfx_pdm_irq_handler(void)
 
 
 ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
-                              nrf_drv_pdm_event_handler_t event_handler)
+                            nrf_drv_pdm_event_handler_t  event_handler)
 {
     ret_code_t err_code;
 
@@ -167,7 +169,6 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-
 
     m_cb.buff_address[0] = 0;
     m_cb.buff_address[1] = 0;

@@ -9,9 +9,9 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define LOG_FUNCTION_EXIT(level, ret_code) \
+#define LOG_FUNCTION_EXIT(level, ret_code)            \
     NRFX_LOG_##level("Function: %s, error code: %s.", \
-        (uint32_t)__func__, \
+        (uint32_t)__func__,                           \
         (uint32_t)NRFX_LOG_ERROR_STRING_GET(ret_code))
 
 
@@ -20,12 +20,12 @@ typedef struct {
     bool               acquired;
 } prs_box_t;
 
-#define PRS_BOX_DEFINE(n) \
+#define PRS_BOX_DEFINE(n)                                                    \
     static prs_box_t m_prs_box_##n = { .handler = NULL, .acquired = false }; \
-    void nrfx_prs_box_##n##_irq_handler(void) \
-    { \
-        NRFX_ASSERT(m_prs_box_##n.handler); \
-        m_prs_box_##n.handler(); \
+    void nrfx_prs_box_##n##_irq_handler(void)                                \
+    {                                                                        \
+        NRFX_ASSERT(m_prs_box_##n.handler);                                  \
+        m_prs_box_##n.handler();                                             \
     }
 
 #if defined(NRFX_PRS_BOX_0_ADDR) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
@@ -83,7 +83,7 @@ static prs_box_t * prs_box_get(void const * p_base_addr)
     }
 }
 
-ret_code_t nrfx_prs_acquire(void const * p_base_addr,
+ret_code_t nrfx_prs_acquire(void       const * p_base_addr,
                             nrfx_irq_handler_t irq_handler)
 {
     NRFX_ASSERT(p_base_addr);

@@ -192,7 +192,7 @@ __STATIC_INLINE uint32_t nrf_drv_ppi_channel_to_mask(nrf_ppi_channel_t channel)
  *
  * @retval     NRFX_SUCCESS             If the channels was successfully included.
  */
-uint32_t nrf_drv_ppi_channels_include_in_group(uint32_t channel_mask,
+uint32_t nrf_drv_ppi_channels_include_in_group(uint32_t                channel_mask,
                                                nrf_ppi_channel_group_t group);
 
 /**@brief Function for including a PPI channel in a channel group.
@@ -215,7 +215,7 @@ __STATIC_INLINE uint32_t nrf_drv_ppi_channel_include_in_group(nrf_ppi_channel_t 
  *
  * @retval     NRFX_SUCCESS             If the channel was successfully removed.
  */
-uint32_t nrf_drv_ppi_channels_remove_from_group(uint32_t channel_mask,
+uint32_t nrf_drv_ppi_channels_remove_from_group(uint32_t                channel_mask,
                                                 nrf_ppi_channel_group_t group);
 
 /**@brief Function for removing a PPI channel from a channel group.

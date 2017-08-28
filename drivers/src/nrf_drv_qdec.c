@@ -11,9 +11,11 @@
 #include <nrfx_log.h>
 NRFX_LOG_MODULE_REGISTER();
 
-#define EVT_TO_STR(event)   (event == NRF_QDEC_EVENT_SAMPLERDY ? "NRF_QDEC_EVENT_SAMPLERDY" :        \
-                            (event == NRF_QDEC_EVENT_REPORTRDY ? "NRF_QDEC_EVENT_REPORTRDY" :        \
-                            (event == NRF_QDEC_EVENT_ACCOF ? "NRF_QDEC_EVENT_ACCOF" : "UNKNOWN EVENT")))
+#define EVT_TO_STR(event)                                             \
+    (event == NRF_QDEC_EVENT_SAMPLERDY ? "NRF_QDEC_EVENT_SAMPLERDY" : \
+    (event == NRF_QDEC_EVENT_REPORTRDY ? "NRF_QDEC_EVENT_REPORTRDY" : \
+    (event == NRF_QDEC_EVENT_ACCOF     ? "NRF_QDEC_EVENT_ACCOF"     : \
+                                         "UNKNOWN EVENT")))
 
 
 static qdec_event_handler_t m_qdec_event_handler = NULL;
@@ -60,7 +62,7 @@ void nrfx_qdec_irq_handler(void)
 
 
 ret_code_t nrf_drv_qdec_init(const nrf_drv_qdec_config_t * p_config,
-                             qdec_event_handler_t event_handler)
+                             qdec_event_handler_t          event_handler)
 {
     ret_code_t err_code;
 
