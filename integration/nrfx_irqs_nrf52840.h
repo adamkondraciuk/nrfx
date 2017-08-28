@@ -14,7 +14,7 @@ extern "C" {
 // RADIO_IRQn
 
 // UARTE0_UART0_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
 #define nrfx_prs_box_4_irq_handler  UARTE0_UART0_IRQHandler
 #else
 #define nrfx_uarte_0_irq_handler    UARTE0_UART0_IRQHandler
@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 // SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
 #define nrfx_prs_box_0_irq_handler  SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler
 #else
 #define nrfx_spim_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler
@@ -34,7 +34,7 @@ extern "C" {
 #endif
 
 // SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
 #define nrfx_prs_box_1_irq_handler  SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler
 #else
 #define nrfx_spim_1_irq_handler     SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler
@@ -83,7 +83,7 @@ extern "C" {
 #define nrfx_qdec_irq_handler       QDEC_IRQHandler
 
 // COMP_LPCOMP_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
 #define nrfx_prs_box_3_irq_handler  COMP_LPCOMP_IRQHandler
 #else
 #define nrfx_comp_irq_handler       COMP_LPCOMP_IRQHandler
@@ -129,7 +129,7 @@ extern "C" {
 #define nrfx_pwm_2_irq_handler      PWM2_IRQHandler
 
 // SPIM2_SPIS2_SPI2_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
 #define nrfx_prs_box_2_irq_handler  SPIM2_SPIS2_SPI2_IRQHandler
 #else
 #define nrfx_spim_2_irq_handler     SPIM2_SPIS2_SPI2_IRQHandler
@@ -148,7 +148,7 @@ extern "C" {
 // USBD_IRQn
 
 // UARTE1_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
 #define nrfx_prs_box_5_irq_handler  UARTE1_IRQHandler
 #else
 #define nrfx_uarte_1_irq_handler    UARTE1_IRQHandler

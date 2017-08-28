@@ -17,7 +17,7 @@ extern "C" {
 #define nrfx_uart_0_irq_handler     UART0_IRQHandler
 
 // SPI0_TWI0_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
 #define nrfx_prs_box_0_irq_handler  SPI0_TWI0_IRQHandler
 #else
 #define nrfx_spi_0_irq_handler      SPI0_TWI0_IRQHandler
@@ -25,7 +25,7 @@ extern "C" {
 #endif
 
 // SPI1_TWI1_IRQn
-#if NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
 #define nrfx_prs_box_1_irq_handler  SPI1_TWI1_IRQHandler
 #else
 #define nrfx_spi_1_irq_handler      SPI1_TWI1_IRQHandler
