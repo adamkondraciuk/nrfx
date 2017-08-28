@@ -8,8 +8,7 @@
  * @defgroup nrf_usbd_hal USBD HAL
  * @{
  *
- * @brief @tagAPI52840 Hardware access layer for Two Wire Interface Slave with EasyDMA
- * (USBD) peripheral.
+ * @brief @tagAPI52840 Hardware access layer for Universal Serial Bus Device (USBD) peripheral.
  */
 
 #include <nrfx.h>
@@ -1119,7 +1118,7 @@ uint16_t nrf_usbd_setup_wlength_get(void)
 
 size_t nrf_usbd_epout_size_get(uint8_t ep)
 {
-    NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep));
     if (NRF_USBD_EPISO_CHECK(ep))
     {
@@ -1137,9 +1136,9 @@ size_t nrf_usbd_epout_size_get(uint8_t ep)
 
 size_t nrf_usbd_episoout_size_get(uint8_t ep)
 {
-    ASSERT(NRF_USBD_EP_VALIDATE(ep));
-    ASSERT(NRF_USBD_EPOUT_CHECK(ep));
-    ASSERT(NRF_USBD_EPISO_CHECK(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
+    NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep));
+    NRFX_ASSERT(NRF_USBD_EPISO_CHECK(ep));
 
     size_t size_isoout = NRF_USBD->SIZE.ISOOUT;
     if (size_isoout == 0)
