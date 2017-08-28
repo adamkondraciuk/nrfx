@@ -699,7 +699,7 @@ nrf_drv_twis_error_get_and_clear_internal_try
     ldrex r0, [r3]
     strex r2, r1, [r3]
     cmp   r2, r1                                        /* did this succeed?       */
-    bne   nrf_drv_twis_error_get_and_clear_internal_try /* no – try again          */
+    bne   nrf_drv_twis_error_get_and_clear_internal_try /* no - try again          */
     bx    lr
 }
 #elif defined ( __GNUC__ )
