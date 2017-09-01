@@ -54,6 +54,7 @@ extern "C" {
 // TEMP_IRQn
 
 // RNG_IRQn
+#define nrfx_rng_irq_handler        RNG_IRQHandler
 
 // ECB_IRQn
 
