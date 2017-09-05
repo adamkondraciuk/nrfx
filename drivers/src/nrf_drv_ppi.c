@@ -8,7 +8,6 @@
 
 #define NRFX_LOG_MODULE PPI
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 static nrfx_drv_state_t    m_drv_state;            /**< Driver state */
 static uint32_t            m_channels_allocated;   /**< Bitmap representing channels availability. 1 when a channel is allocated, 0 otherwise. */

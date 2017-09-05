@@ -7,7 +7,6 @@
 
 #define NRFX_LOG_MODULE PRS
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define LOG_FUNCTION_EXIT(level, ret_code)            \
     NRFX_LOG_##level("Function: %s, error code: %s.", \

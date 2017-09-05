@@ -8,7 +8,6 @@
 
 #define NRFX_LOG_MODULE COMP
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                     \
     (event == NRF_COMP_EVENT_READY ? "NRF_COMP_EVENT_READY" : \

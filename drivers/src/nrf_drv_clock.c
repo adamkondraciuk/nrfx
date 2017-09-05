@@ -13,7 +13,6 @@
 
 #define NRFX_LOG_MODULE CLOCK
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                                     \
     (event == NRF_CLOCK_EVENT_HFCLKSTARTED ? "NRF_CLOCK_EVENT_HFCLKSTARTED" : \

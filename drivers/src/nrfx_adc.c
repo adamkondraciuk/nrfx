@@ -8,7 +8,6 @@
 
 #define NRFX_LOG_MODULE ADC
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)   (event == NRF_ADC_EVENT_END ? "NRF_ADC_EVENT_END" : "UNKNOWN EVENT")
 

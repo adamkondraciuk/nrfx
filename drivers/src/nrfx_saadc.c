@@ -6,7 +6,6 @@
 
 #define NRFX_LOG_MODULE SAADC
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                                       \
     (event == NRF_SAADC_EVENT_STARTED       ? "NRF_SAADC_EVENT_STARTED"       : \

@@ -15,7 +15,6 @@
 
 #define NRFX_LOG_MODULE SPIM
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 // Control block - driver instance local data.
 typedef struct

@@ -14,7 +14,6 @@
 
 #define NRFX_LOG_MODULE UART
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event) \
     (event == NRF_UART_EVENT_ERROR ? "NRF_UART_EVENT_ERROR" : \

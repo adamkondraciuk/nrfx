@@ -14,7 +14,6 @@
 
 #define NRFX_LOG_MODULE PWM
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #if NRFX_CHECK(NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
 // The workaround uses interrupts to wake up the CPU and ensure it is active

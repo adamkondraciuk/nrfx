@@ -13,7 +13,6 @@
 
 #define NRFX_LOG_MODULE RTC
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                           \
     (event == NRF_RTC_EVENT_TICK      ? "NRF_RTC_EVENT_TICK"      : \

@@ -9,7 +9,6 @@
 
 #define NRFX_LOG_MODULE PDM
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                       \
     (event == NRF_PDM_EVENT_STARTED ? "NRF_PDM_EVENT_STARTED" : \

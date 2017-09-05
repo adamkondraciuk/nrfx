@@ -15,7 +15,6 @@
 
 #define NRFX_LOG_MODULE TWI
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                      \
     (event == NRFX_TWI_EVT_DONE         ? "EVT_DONE"         : \

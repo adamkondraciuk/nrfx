@@ -9,7 +9,6 @@
 
 #define NRFX_LOG_MODULE GPIOTE
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define FORBIDDEN_HANDLER_ADDRESS ((nrf_drv_gpiote_evt_handler_t)UINT32_MAX)
 #define PIN_NOT_USED              (-1)

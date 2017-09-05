@@ -12,7 +12,6 @@
 
 #define NRFX_LOG_MODULE TWIS
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 #define EVT_TO_STR(event)                                             \
     (event == NRF_TWIS_EVENT_STOPPED   ? "NRF_TWIS_EVENT_STOPPED"   : \

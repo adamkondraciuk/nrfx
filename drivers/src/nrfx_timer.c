@@ -14,7 +14,6 @@
 
 #define NRFX_LOG_MODULE TIMER
 #include <nrfx_log.h>
-NRFX_LOG_MODULE_REGISTER();
 
 /**@brief Timer control block. */
 typedef struct
