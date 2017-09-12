@@ -1,6 +1,6 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-#ifndef NRFX_PPI_H
-#define NRFX_PPI_H
+#ifndef NRFX_PPI_H__
+#define NRFX_PPI_H__
 
 #include <nrfx.h>
 #include <hal/nrf_ppi.h>
@@ -44,200 +44,229 @@ extern "C" {
 #define NRFX_PPI_ALL_APP_GROUPS_MASK     (((1uL << PPI_GROUP_NUM) - 1) & ~(NRFX_PPI_GROUPS_USED))    /**< All PPI groups available to the application. */
 
 
-/**@brief Function for initializing PPI module.
+/**
+ * @brief Function for initializing PPI module.
  *
- * @retval     NRFX_SUCCESS                           If the module was successfully initialized.
- * @retval     NRFX_ERROR_MODULE_ALREADY_INITIALIZED  If the module has already been initialized.
+ * @retval NRFX_SUCCESS                          If the module was successfully initialized.
+ * @retval NRFX_ERROR_MODULE_ALREADY_INITIALIZED If the module has already been initialized.
  */
-uint32_t nrfx_ppi_init(void);
+ret_code_t nrfx_ppi_init(void);
 
-/**@brief Function for uninitializing the PPI module.
+/**
+ * @brief Function for uninitializing the PPI module.
  *
  * This function also disables all channels and clears the channel groups.
- *
- * @retval     NRFX_SUCCESS             If the module was successfully uninitialized.
- * @retval     NRFX_ERROR_INVALID_STATE If the module has not been initialized yet.
- * @retval     NRFX_ERROR_INTERNAL      If the channels or groups could not be disabled.
  */
-uint32_t nrfx_ppi_uninit(void);
+void nrfx_ppi_uninit(void);
 
-/**@brief Function for allocating a PPI channel.
+/**
+ * @brief Function for allocating a PPI channel.
  * @details This function allocates the first unused PPI channel.
  *
- * @param[out] p_channel               Pointer to the PPI channel that has been allocated.
+ * @param[out] p_channel Pointer to the PPI channel that has been allocated.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully allocated.
- * @retval     NRFX_ERROR_NO_MEM        If there is no available channel to be used.
+ * @retval NRFX_SUCCESS      If the channel was successfully allocated.
+ * @retval NRFX_ERROR_NO_MEM If there is no available channel to be used.
  */
-uint32_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel);
+ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel);
 
-/**@brief Function for freeing a PPI channel.
+/**
+ * @brief Function for freeing a PPI channel.
  * @details This function also disables the chosen channel.
  *
- * @param[in]  channel                 PPI channel to be freed.
+ * @param[in] channel PPI channel to be freed.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully freed.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
+ * @retval NRFX_SUCCESS             If the channel was successfully freed.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
  */
-uint32_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel);
+ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel);
 
-/**@brief Function for assigning task and event endpoints to the PPI channel.
+/**
+ * @brief Function for assigning task and event endpoints to the PPI channel.
  *
- * @param[in]  channel                 PPI channel to be assigned endpoints.
+ * @param[in] channel PPI channel to be assigned endpoints.
+ * @param[in] eep     Event endpoint address.
+ * @param[in] tep     Task endpoint address.
  *
- * @param[in]  eep                     Event endpoint address.
- *
- * @param[in]  tep                     Task endpoint address.
- *
- * @retval     NRFX_SUCCESS             If the channel was successfully assigned.
- * @retval     NRFX_ERROR_INVALID_STATE If the channel is not allocated for the user.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
+ * @retval NRFX_SUCCESS             If the channel was successfully assigned.
+ * @retval NRFX_ERROR_INVALID_STATE If the channel is not allocated for the user.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
  */
-uint32_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep);
+ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep);
 
-/**@brief Function for assigning or clearing fork endpoint to the PPI channel.
+/**
+ * @brief Function for assigning or clearing fork endpoint to the PPI channel.
  *
- * @param[in]  channel                 PPI channel to be assigned endpoints.
+ * @param[in] channel  PPI channel to be assigned endpoints.
+ * @param[in] fork_tep Fork task endpoint address or 0 to clear.
  *
- * @param[in]  fork_tep                Fork task endpoint address or 0 to clear.
- *
- * @retval     NRFX_SUCCESS             If the channel was successfully assigned.
- * @retval     NRFX_ERROR_INVALID_STATE If the channel is not allocated for the user.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
- * @retval     NRFX_ERROR_NOT_SUPPORTED If function is not supported.
+ * @retval NRFX_SUCCESS             If the channel was successfully assigned.
+ * @retval NRFX_ERROR_INVALID_STATE If the channel is not allocated for the user.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel is not user-configurable.
+ * @retval NRFX_ERROR_NOT_SUPPORTED If function is not supported.
  */
-uint32_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep);
+ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep);
 
-/**@brief Function for enabling a PPI channel.
+/**
+ * @brief Function for enabling a PPI channel.
  *
- * @param[in]  channel                 PPI channel to be enabled.
+ * @param[in] channel PPI channel to be enabled.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully enabled.
- * @retval     NRFX_ERROR_INVALID_STATE If the user-configurable channel is not allocated.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel cannot be enabled by the user.
+ * @retval NRFX_SUCCESS             If the channel was successfully enabled.
+ * @retval NRFX_ERROR_INVALID_STATE If the user-configurable channel is not allocated.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel cannot be enabled by the user.
  */
-uint32_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel);
+ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel);
 
-/**@brief Function for disabling a PPI channel.
+/**
+ * @brief Function for disabling a PPI channel.
  *
- * @param[in]  channel                 PPI channel to be disabled.
+ * @param[in] channel PPI channel to be disabled.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully disabled.
- * @retval     NRFX_ERROR_INVALID_STATE If the user-configurable channel is not allocated.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel cannot be disabled by the user.
+ * @retval NRFX_SUCCESS             If the channel was successfully disabled.
+ * @retval NRFX_ERROR_INVALID_STATE If the user-configurable channel is not allocated.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel cannot be disabled by the user.
  */
-uint32_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel);
+ret_code_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel);
 
-/**@brief Function for allocating a PPI channel group.
+/**
+ * @brief Function for allocating a PPI channel group.
  * @details This function allocates the first unused PPI group.
  *
- * @param[out] p_group                 Pointer to the PPI channel group that has been allocated.
+ * @param[out] p_group Pointer to the PPI channel group that has been allocated.
  *
- * @retval     NRFX_SUCCESS             If the channel group was successfully allocated.
- * @retval     NRFX_ERROR_NO_MEM        If there is no available channel group to be used.
+ * @retval NRFX_SUCCESS      If the channel group was successfully allocated.
+ * @retval NRFX_ERROR_NO_MEM If there is no available channel group to be used.
  */
-uint32_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group);
+ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group);
 
-/**@brief Function for freeing a PPI channel group.
+/**
+ * @brief Function for freeing a PPI channel group.
  * @details This function also disables the chosen group.
  *
- * @param[in]  group                   PPI channel group to be freed.
+ * @param[in] group PPI channel group to be freed.
  *
- * @retval     NRFX_SUCCESS             If the channel group was successfully freed.
- * @retval     NRFX_ERROR_INVALID_PARAM If the channel group is not user-configurable.
+ * @retval NRFX_SUCCESS             If the channel group was successfully freed.
+ * @retval NRFX_ERROR_INVALID_PARAM If the channel group is not user-configurable.
  */
-uint32_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group);
+ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group);
 
-/**@brief  Compute a channel mask for NRF_PPI registers.
+/**
+ * @brief  Compute a channel mask for NRF_PPI registers.
  *
- * @param[in]  channel  Channel number to transform to a mask.
+ * @param[in] channel Channel number to transform to a mask.
  *
- * @retval     Channel mask.
+ * @retval Channel mask.
  */
 __STATIC_INLINE uint32_t nrfx_ppi_channel_to_mask(nrf_ppi_channel_t channel)
 {
     return (1uL << (uint32_t) channel);
 }
 
-/**@brief Function for including multiple PPI channels in a channel group.
+/**
+ * @brief Function for including multiple PPI channels in a channel group.
  *
- * @param[in]  channel_mask            PPI channels to be added.
- * @param[in]  group                   Channel group in which to include the channels.
+ * @param[in] channel_mask PPI channels to be added.
+ * @param[in] group        Channel group in which to include the channels.
  *
- * @retval     NRFX_SUCCESS             If the channels was successfully included.
+ * @retval NRFX_SUCCESS             If the channels was successfully included.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group or channels are not an
+ *                                  application channels.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-uint32_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
-                                            nrf_ppi_channel_group_t group);
+ret_code_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
+                                              nrf_ppi_channel_group_t group);
 
-/**@brief Function for including a PPI channel in a channel group.
+/**
+ * @brief Function for including a PPI channel in a channel group.
  *
- * @param[in]  channel                 PPI channel to be added.
- * @param[in]  group                   Channel group in which to include the channel.
+ * @param[in] channel PPI channel to be added.
+ * @param[in] group   Channel group in which to include the channel.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully included.
+ * @retval NRFX_SUCCESS             If the channel was successfully included.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group or channel is not an
+ *                                  application channel.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-__STATIC_INLINE uint32_t nrfx_ppi_channel_include_in_group(nrf_ppi_channel_t       channel,
-                                                           nrf_ppi_channel_group_t group)
+__STATIC_INLINE ret_code_t nrfx_ppi_channel_include_in_group(nrf_ppi_channel_t       channel,
+                                                             nrf_ppi_channel_group_t group)
 {
     return nrfx_ppi_channels_include_in_group(nrfx_ppi_channel_to_mask(channel), group);
 }
 
-/**@brief Function for removing multiple PPI channels from a channel group.
+/**
+ * @brief Function for removing multiple PPI channels from a channel group.
  *
- * @param[in]  channel_mask            PPI channels to be removed.
- * @param[in]  group                   Channel group from which to remove the channels.
+ * @param[in] channel_mask PPI channels to be removed.
+ * @param[in] group        Channel group from which to remove the channels.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully removed.
+ * @retval NRFX_SUCCESS             If the channel was successfully removed.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group or channels are not an
+ *                                  application channels.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-uint32_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
-                                             nrf_ppi_channel_group_t group);
+ret_code_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
+                                               nrf_ppi_channel_group_t group);
 
-/**@brief Function for removing a PPI channel from a channel group.
+/**
+ * @brief Function for removing a PPI channel from a channel group.
  *
- * @param[in]  channel                 PPI channel to be removed.
- * @param[in]  group                   Channel group from which to remove the channel.
+ * @param[in] channel PPI channel to be removed.
+ * @param[in] group   Channel group from which to remove the channel.
  *
- * @retval     NRFX_SUCCESS             If the channel was successfully removed.
+ * @retval NRFX_SUCCESS             If the channel was successfully removed.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group or channel is not an
+ *                                  application channel.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-__STATIC_INLINE uint32_t nrfx_ppi_channel_remove_from_group(nrf_ppi_channel_t       channel,
-                                                            nrf_ppi_channel_group_t group)
+__STATIC_INLINE ret_code_t nrfx_ppi_channel_remove_from_group(nrf_ppi_channel_t       channel,
+                                                              nrf_ppi_channel_group_t group)
 {
     return nrfx_ppi_channels_remove_from_group(nrfx_ppi_channel_to_mask(channel), group);
 }
 
-/**@brief Function for clearing a PPI channel group.
+/**
+ * @brief Function for clearing a PPI channel group.
  *
- * @param[in]  group                   Channel group to be cleared.
+ * @param[in] group Channel group to be cleared.
  *
- * @retval     NRFX_SUCCESS             If the group was successfully cleared.
+ * @retval NRFX_SUCCESS             If the group was successfully cleared.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-__STATIC_INLINE uint32_t nrfx_ppi_group_clear(nrf_ppi_channel_group_t group)
+__STATIC_INLINE ret_code_t nrfx_ppi_group_clear(nrf_ppi_channel_group_t group)
 {
     return nrfx_ppi_channels_remove_from_group(NRFX_PPI_ALL_APP_CHANNELS_MASK, group);
 }
 
-/**@brief Function for enabling a PPI channel group.
+/**
+ * @brief Function for enabling a PPI channel group.
  *
- * @param[in]  group                   Channel group to be enabled.
+ * @param[in] group Channel group to be enabled.
  *
- * @retval     NRFX_SUCCESS             If the group was successfully enabled.
+ * @retval NRFX_SUCCESS             If the group was successfully enabled.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-uint32_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group);
+ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group);
 
-/**@brief Function for disabling a PPI channel group.
+/**
+ * @brief Function for disabling a PPI channel group.
  *
- * @param[in]  group                   Channel group to be disabled.
+ * @param[in] group Channel group to be disabled.
  *
- * @retval     NRFX_SUCCESS             If the group was successfully disabled.
+ * @retval NRFX_SUCCESS             If the group was successfully disabled.
+ * @retval NRFX_ERROR_INVALID_PARAM If group is not an application group.
+ * @retval NRFX_ERROR_INVALID_STATE If group is not an allocated group.
  */
-uint32_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group);
+ret_code_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group);
 
 /**
  * @brief Function for getting the address of a PPI task.
  *
- * @param[in]  task                      Task.
+ * @param[in] task Task.
  *
- * @retval     Task address.
+ * @retval Task address.
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_get(nrf_ppi_task_t task)
 {
@@ -247,9 +276,9 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_get(nrf_ppi_task_t task)
 /**
  * @brief Function for getting the address of a PPI group enable task.
  *
- * @param[in]  group                     PPI channel group
+ * @param[in] group PPI channel group
  *
- * @retval     Task address.
+ * @retval Task address.
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_enable_get(nrf_ppi_channel_group_t group)
 {
@@ -259,9 +288,9 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_enable_get(nrf_ppi_channel_gro
 /**
  * @brief Function for getting the address of a PPI group enable task.
  *
- * @param[in]  group                     PPI channel group
+ * @param[in] group PPI channel group
  *
- * @retval     Task address.
+ * @retval Task address.
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_disable_get(nrf_ppi_channel_group_t group)
 {
@@ -276,4 +305,4 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_disable_get(nrf_ppi_channel_gr
 }
 #endif
 
-#endif // NRFX_PPI_H
+#endif // NRFX_PPI_H__

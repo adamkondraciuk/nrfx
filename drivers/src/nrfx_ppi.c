@@ -10,14 +10,17 @@
 #include <nrfx_log.h>
 
 
-static nrfx_drv_state_t    m_drv_state;            /**< Driver state */
-static uint32_t            m_channels_allocated;   /**< Bitmap representing channels availability. 1 when a channel is allocated, 0 otherwise. */
-static uint8_t             m_groups_allocated;     /**< Bitmap representing groups availability. 1 when a group is allocated, 0 otherwise.*/
+static nrfx_drv_state_t m_drv_state;          /**< Driver state */
+static uint32_t         m_channels_allocated; /**< Bitmap representing channels availability. 1 when a channel is allocated, 0 otherwise. */
+static uint8_t          m_groups_allocated;   /**< Bitmap representing groups availability. 1 when a group is allocated, 0 otherwise.*/
 
 
-/**@brief  Compute a group mask (needed for driver internals, not used for NRF_PPI registers).
- * @param[in]  group  Group number to transform to a mask.
- * @retval     Group mask.
+/**
+ * @brief Compute a group mask (needed for driver internals, not used for NRF_PPI registers).
+ *
+ * @param[in] group Group number to transform to a mask.
+ *
+ * @retval Group mask.
  */
 __STATIC_INLINE uint32_t group_to_mask(nrf_ppi_channel_group_t group)
 {
@@ -25,10 +28,13 @@ __STATIC_INLINE uint32_t group_to_mask(nrf_ppi_channel_group_t group)
 }
 
 
-/**@brief  Check whether a channel is a programmable channel and can be used by an application.
- * @param[in]  channel  Channel to check.
- * @retval     true     The channel is a programmable application channel.
- *             false    The channel is used by a stack (for example SoftDevice) or is preprogrammed.
+/**
+ * @brief Check whether a channel is a programmable channel and can be used by an application.
+ *
+ * @param[in] channel Channel to check.
+ *
+ * @retval true  The channel is a programmable application channel.
+ * @retval false The channel is used by a stack (for example SoftDevice) or is preprogrammed.
  */
 __STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
 {
@@ -36,10 +42,13 @@ __STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
 }
 
 
-/**@brief  Check whether a channels can be used by an application.
- * @param[in]  channel  Channel mask to check.
- * @retval     true     All specified channels can be used by an application.
- *             false    At least one specified channel is used by a stack (for example SoftDevice).
+/**
+ * @brief Check whether channels can be used by an application.
+ *
+ * @param[in] channel_mask Channel mask to check.
+ *
+ * @retval true  All specified channels can be used by an application.
+ * @retval false At least one specified channel is used by a stack (for example SoftDevice).
  */
 __STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
 {
@@ -48,10 +57,13 @@ __STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
 }
 
 
-/**@brief  Check whether a channel can be used by an application.
- * @param[in]  channel  Channel to check.
- * @retval     true     The channel can be used by an application.
- *             false    The channel is used by a stack (for example SoftDevice).
+/**
+ * @brief Check whether a channel can be used by an application.
+ *
+ * @param[in] channel Channel to check.
+ *
+ * @retval true  The channel can be used by an application.
+ * @retval false The channel is used by a stack (for example SoftDevice).
  */
 __STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
 {
@@ -59,11 +71,14 @@ __STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
 }
 
 
-/**@brief  Check whether a channel group can be used by an application.
- * @param[in]  group    Group to check.
- * @retval     true     The group is an application group.
- *             false    The group is not an application group (this group either does not exist or
- *                      it is used by a stack (for example SoftDevice)).
+/**
+ * @brief Check whether a channel group can be used by an application.
+ *
+ * @param[in] group Group to check.
+ *
+ * @retval true  The group is an application group.
+ * @retval false The group is not an application group (this group either does not exist or
+ *               it is used by a stack (for example SoftDevice)).
  */
 __STATIC_INLINE bool is_app_group(nrf_ppi_channel_group_t group)
 {
@@ -71,10 +86,13 @@ __STATIC_INLINE bool is_app_group(nrf_ppi_channel_group_t group)
 }
 
 
-/**@brief  Check whether a channel is allocated.
- * @param[in]  channel_num  Channel number to check.
- * @retval     true         The channel is allocated.
- *             false        The channel is not allocated.
+/**
+ * @brief Check whether a channel is allocated.
+ *
+ * @param[in] channel_num  Channel number to check.
+ *
+ * @retval true  The channel is allocated.
+ * @retval false The channel is not allocated.
  */
 __STATIC_INLINE bool is_allocated_channel(nrf_ppi_channel_t channel)
 {
@@ -82,8 +100,10 @@ __STATIC_INLINE bool is_allocated_channel(nrf_ppi_channel_t channel)
 }
 
 
-/**@brief  Set channel allocated indication.
- * @param[in]  channel_num  Specifies the channel to set the "allocated" indication.
+/**
+ * @brief Set channel allocated indication.
+ *
+ * @param[in] channel_num Specifies the channel to set the "allocated" indication.
  */
 __STATIC_INLINE void channel_allocated_set(nrf_ppi_channel_t channel)
 {
@@ -91,8 +111,10 @@ __STATIC_INLINE void channel_allocated_set(nrf_ppi_channel_t channel)
 }
 
 
-/**@brief  Clear channel allocated indication.
- * @param[in]  channel_num  Specifies the channel to clear the "allocated" indication.
+/**
+ * @brief Clear channel allocated indication.
+ *
+ * @param[in] channel_num Specifies the channel to clear the "allocated" indication.
  */
 __STATIC_INLINE void channel_allocated_clr(nrf_ppi_channel_t channel)
 {
@@ -100,7 +122,8 @@ __STATIC_INLINE void channel_allocated_clr(nrf_ppi_channel_t channel)
 }
 
 
-/**@brief  Clear all allocated channels.
+/**
+ * @brief Clear all allocated channels.
  */
 __STATIC_INLINE void channel_allocated_clr_all(void)
 {
@@ -108,10 +131,13 @@ __STATIC_INLINE void channel_allocated_clr_all(void)
 }
 
 
-/**@brief  Check whether a group is allocated.
- * @param[in]  group_num    Group number to check.
- * @retval     true         The group is allocated.
- *             false        The group is not allocated.
+/**
+ * @brief Check whether a group is allocated.
+ *
+ * @param[in] group_num Group number to check.
+ *
+ * @retval true  The group is allocated.
+ *         false The group is not allocated.
  */
 __STATIC_INLINE bool is_allocated_group(nrf_ppi_channel_group_t group)
 {
@@ -119,8 +145,10 @@ __STATIC_INLINE bool is_allocated_group(nrf_ppi_channel_group_t group)
 }
 
 
-/**@brief  Set group allocated indication.
- * @param[in]  group_num  Specifies the group to set the "allocated" indication.
+/**
+ * @brief Set group allocated indication.
+ *
+ * @param[in] group_num Specifies the group to set the "allocated" indication.
  */
 __STATIC_INLINE void group_allocated_set(nrf_ppi_channel_group_t group)
 {
@@ -128,8 +156,10 @@ __STATIC_INLINE void group_allocated_set(nrf_ppi_channel_group_t group)
 }
 
 
-/**@brief  Clear group allocated indication.
- * @param[in]  group_num  Specifies the group to clear the "allocated" indication.
+/**
+ * @brief Clear group allocated indication.
+ *
+ * @param[in] group_num Specifies the group to clear the "allocated" indication.
  */
 __STATIC_INLINE void group_allocated_clr(nrf_ppi_channel_group_t group)
 {
@@ -137,7 +167,8 @@ __STATIC_INLINE void group_allocated_clr(nrf_ppi_channel_group_t group)
 }
 
 
-/**@brief  Clear all allocated groups.
+/**
+ * @brief Clear all allocated groups.
  */
 __STATIC_INLINE void group_allocated_clr_all()
 {
@@ -145,9 +176,9 @@ __STATIC_INLINE void group_allocated_clr_all()
 }
 
 
-uint32_t nrfx_ppi_init(void)
+ret_code_t nrfx_ppi_init(void)
 {
-    uint32_t err_code;
+    ret_code_t err_code;
 
     if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -166,22 +197,12 @@ uint32_t nrfx_ppi_init(void)
 }
 
 
-uint32_t nrfx_ppi_uninit(void)
+void nrfx_ppi_uninit(void)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
     uint32_t mask = NRFX_PPI_ALL_APP_GROUPS_MASK;
     nrf_ppi_channel_group_t group;
 
-    if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
-    {
-        err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-
-    m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     // Disable all channels and groups
     nrf_ppi_channels_disable(NRFX_PPI_ALL_APP_CHANNELS_MASK);
@@ -195,18 +216,16 @@ uint32_t nrfx_ppi_uninit(void)
     }
     channel_allocated_clr_all();
     group_allocated_clr_all();
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
-    return err_code;
+    m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 
-uint32_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
+ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 {
-    uint32_t err_code = NRFX_SUCCESS;
+    ret_code_t err_code = NRFX_SUCCESS;
     nrf_ppi_channel_t channel;
     uint32_t mask = 0;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     err_code = NRFX_ERROR_NO_MEM;
 
@@ -237,9 +256,10 @@ uint32_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 }
 
 
-uint32_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
+ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_programmable_app_channel(channel))
     {
@@ -260,8 +280,10 @@ uint32_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 }
 
 
-uint32_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep)
+ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep)
 {
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
+
     if ((uint32_t *)eep == NULL || (uint32_t *)tep == NULL)
     {
         return NRFX_ERROR_NULL;
@@ -291,8 +313,9 @@ uint32_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32
     return err_code;
 }
 
-uint32_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep)
+ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep)
 {
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
     ret_code_t err_code = NRFX_SUCCESS;
 #ifdef PPI_FEATURE_FORKS_PRESENT
     if (!is_programmable_app_channel(channel))
@@ -321,9 +344,10 @@ uint32_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_t
 #endif
 }
 
-uint32_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
+ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_channel(channel))
     {
@@ -344,9 +368,10 @@ uint32_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 }
 
 
-uint32_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
+ret_code_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_channel(channel))
     {
@@ -368,11 +393,12 @@ uint32_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
 }
 
 
-uint32_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
+ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
 {
-    uint32_t err_code;
+    ret_code_t err_code;
     uint32_t mask = 0;
     nrf_ppi_channel_group_t group;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     err_code = NRFX_ERROR_NO_MEM;
 
@@ -401,9 +427,10 @@ uint32_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
 }
 
 
-uint32_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
+ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -427,9 +454,10 @@ uint32_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 }
 
 
-uint32_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
+ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -450,9 +478,10 @@ uint32_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 }
 
 
-uint32_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
+ret_code_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -468,10 +497,11 @@ uint32_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
     return err_code;
 }
 
-uint32_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
-                                             nrf_ppi_channel_group_t group)
+ret_code_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
+                                               nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -497,10 +527,11 @@ uint32_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mas
     return err_code;
 }
 
-uint32_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
-                                            nrf_ppi_channel_group_t group)
+ret_code_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
+                                              nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
+    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
