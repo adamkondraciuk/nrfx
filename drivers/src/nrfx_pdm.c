@@ -2,9 +2,9 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(PDM_ENABLED)
+#if NRFX_CHECK(NRFX_PDM_ENABLED)
 
-#include <nrf_drv_pdm.h>
+#include <nrfx_pdm.h>
 #include <hal/nrf_gpio.h>
 
 #define NRFX_LOG_MODULE PDM
@@ -20,28 +20,26 @@
 /** @brief PDM interface status. */
 typedef enum
 {
-    NRF_PDM_STATE_IDLE,
-    NRF_PDM_STATE_RUNNING,
-    NRF_PDM_STATE_STARTING,
-    NRF_PDM_STATE_STOPPING
-} nrf_drv_pdm_state_t;
-
+    NRFX_PDM_STATE_IDLE,
+    NRFX_PDM_STATE_RUNNING,
+    NRFX_PDM_STATE_STARTING,
+    NRFX_PDM_STATE_STOPPING
+} nrfx_pdm_state_t;
 
 /** @brief PDM interface control block.*/
 typedef struct
 {
-    nrf_drv_pdm_event_handler_t  event_handler;    ///< Event handler function pointer.
-    int16_t *                    buff_address[2];  ///< Sample buffers.
-    uint16_t                     buff_length[2];   ///< Length of the sample buffers.
-    nrfx_drv_state_t             drv_state;        ///< Driver state.
-    volatile nrf_drv_pdm_state_t op_state;         ///< PDM peripheral operation state.
-    uint8_t                      active_buffer;    ///< Number of currently active buffer.
-    uint8_t                      error;            ///< Driver error flag.
-    volatile uint8_t             irq_buff_request; ///< Request the next buffer in the ISR.
-} nrf_drv_pdm_cb_t;
+    nrfx_pdm_event_handler_t  event_handler;    ///< Event handler function pointer.
+    int16_t *                 buff_address[2];  ///< Sample buffers.
+    uint16_t                  buff_length[2];   ///< Length of the sample buffers.
+    nrfx_drv_state_t          drv_state;        ///< Driver state.
+    volatile nrfx_pdm_state_t op_state;         ///< PDM peripheral operation state.
+    uint8_t                   active_buffer;    ///< Number of currently active buffer.
+    uint8_t                   error;            ///< Driver error flag.
+    volatile uint8_t          irq_buff_request; ///< Request the next buffer in the ISR.
+} nrfx_pdm_cb_t;
 
-
-static nrf_drv_pdm_cb_t m_cb;
+static nrfx_pdm_cb_t m_cb;
 
 
 void nrfx_pdm_irq_handler(void)
@@ -49,23 +47,25 @@ void nrfx_pdm_irq_handler(void)
     if (nrf_pdm_event_check(NRF_PDM_EVENT_STARTED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STARTED);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STARTED));
+        NRFX_LOG_DEBUG("Event: %s.",
+                       (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STARTED));
 
-        nrf_drv_pdm_evt_t evt;
         uint8_t finished_buffer = m_cb.active_buffer;
 
         // Check if the next buffer was set before.
         uint8_t next_buffer = (~m_cb.active_buffer) & 0x01;
-        if (m_cb.buff_address[next_buffer] || m_cb.op_state == NRF_PDM_STATE_STARTING)
+        if (m_cb.buff_address[next_buffer] ||
+            m_cb.op_state == NRFX_PDM_STATE_STARTING)
         {
-            evt.error = PDM_NO_ERROR;
+            nrfx_pdm_evt_t evt;
+            evt.error = NRFX_PDM_NO_ERROR;
             m_cb.error = 0;
 
             // Release the full buffer if ready and request the next one.
-            if (m_cb.op_state == NRF_PDM_STATE_STARTING)
+            if (m_cb.op_state == NRFX_PDM_STATE_STARTING)
             {
                 evt.buffer_released = 0;
-                m_cb.op_state = NRF_PDM_STATE_RUNNING;
+                m_cb.op_state = NRFX_PDM_STATE_RUNNING;
             }
             else
             {
@@ -82,29 +82,32 @@ void nrfx_pdm_irq_handler(void)
             // Do not request the new buffer as it was already done.
             if (m_cb.error == 0)
             {
-                evt.error = PDM_ERROR_OVERFLOW;
-                evt.buffer_released = 0;
-                evt.buffer_requested = false;
+                nrfx_pdm_evt_t const evt = {
+                    .buffer_requested = false,
+                    .buffer_released  = NULL,
+                    .error = NRFX_PDM_ERROR_OVERFLOW
+                };
                 m_cb.error = 1;
                 m_cb.event_handler(&evt);
             }
         }
 
-        if (m_cb.op_state == NRF_PDM_STATE_STARTING)
+        if (m_cb.op_state == NRFX_PDM_STATE_STARTING)
         {
-            m_cb.op_state = NRF_PDM_STATE_RUNNING;
+            m_cb.op_state = NRFX_PDM_STATE_RUNNING;
         }
     }
     else if (nrf_pdm_event_check(NRF_PDM_EVENT_STOPPED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("Event: %s.",
+                       (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
         nrf_pdm_disable();
-        m_cb.op_state = NRF_PDM_STATE_IDLE;
+        m_cb.op_state = NRFX_PDM_STATE_IDLE;
 
         // Release the buffers.
-        nrf_drv_pdm_evt_t evt;
-        evt.error = PDM_NO_ERROR;
+        nrfx_pdm_evt_t evt;
+        evt.error = NRFX_PDM_NO_ERROR;
         evt.buffer_requested = false;
         if (m_cb.buff_address[m_cb.active_buffer])
         {
@@ -121,24 +124,24 @@ void nrfx_pdm_irq_handler(void)
             m_cb.event_handler(&evt);
         }
         m_cb.active_buffer = 0;
-
-
     }
 
     if (m_cb.irq_buff_request)
     {
-        nrf_drv_pdm_evt_t evt;
-        evt.buffer_released = 0;
-        evt.error = PDM_NO_ERROR;
-        evt.buffer_requested = true;
+        nrfx_pdm_evt_t const evt =
+        {
+            .buffer_requested = true,
+            .buffer_released  = NULL,
+            .error = NRFX_PDM_NO_ERROR,
+        };
         m_cb.irq_buff_request = 0;
         m_cb.event_handler(&evt);
     }
 }
 
 
-ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
-                            nrf_drv_pdm_event_handler_t  event_handler)
+ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
+                         nrfx_pdm_event_handler_t  event_handler)
 {
     ret_code_t err_code;
 
@@ -150,8 +153,7 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-    if ((p_config == NULL)
-        || (event_handler == NULL))
+    if ((p_config == NULL) || (event_handler == NULL))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -159,8 +161,8 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-    if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM
-        || p_config->gain_r > NRF_PDM_GAIN_MAXIMUM)
+    if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM ||
+        p_config->gain_r > NRF_PDM_GAIN_MAXIMUM)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -174,7 +176,7 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
     m_cb.active_buffer = 0;
     m_cb.error = 0;
     m_cb.event_handler = event_handler;
-    m_cb.op_state = NRF_PDM_STATE_IDLE;
+    m_cb.op_state = NRFX_PDM_STATE_IDLE;
 
     nrf_pdm_clock_set(p_config->clock_freq);
     nrf_pdm_mode_set(p_config->mode, p_config->edge);
@@ -200,7 +202,7 @@ ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
     return err_code;
 }
 
-void nrf_drv_pdm_uninit(void)
+void nrfx_pdm_uninit(void)
 {
     nrf_pdm_disable();
     nrf_pdm_psel_disconnect();
@@ -222,14 +224,14 @@ static void pdm_buf_request()
     NVIC_SetPendingIRQ(PDM_IRQn);
 }
 
-ret_code_t nrf_drv_pdm_start(void)
+ret_code_t nrfx_pdm_start(void)
 {
     NRFX_ASSERT(m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED);
     ret_code_t err_code;
 
-    if (m_cb.op_state != NRF_PDM_STATE_IDLE)
+    if (m_cb.op_state != NRFX_PDM_STATE_IDLE)
     {
-        if (m_cb.op_state == NRF_PDM_STATE_RUNNING)
+        if (m_cb.op_state == NRFX_PDM_STATE_RUNNING)
         {
             err_code = NRFX_SUCCESS;
             NRFX_LOG_INFO("Function: %s, error code: %s.",
@@ -244,7 +246,7 @@ ret_code_t nrf_drv_pdm_start(void)
         return err_code;
     }
 
-    m_cb.op_state = NRF_PDM_STATE_STARTING;
+    m_cb.op_state = NRFX_PDM_STATE_STARTING;
     pdm_buf_request();
 
     err_code = NRFX_SUCCESS;
@@ -254,17 +256,17 @@ ret_code_t nrf_drv_pdm_start(void)
     return err_code;
 }
 
-ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
+ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
 {
     if (m_cb.drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
         return NRFX_ERROR_INVALID_STATE;
     }
-    if (m_cb.op_state == NRF_PDM_STATE_STOPPING)
+    if (m_cb.op_state == NRFX_PDM_STATE_STOPPING)
     {
         return NRFX_ERROR_BUSY;
     }
-    if ((!buffer) || (buffer_length > NRF_PDM_MAX_BUFFER_SIZE))
+    if ((buffer == NULL) || (buffer_length > NRFX_PDM_MAX_BUFFER_SIZE))
     {
         return NRFX_ERROR_INVALID_PARAM;
     }
@@ -275,7 +277,7 @@ ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
     NRFX_IRQ_DISABLE(PDM_IRQn);
 
     uint8_t next_buffer = (~m_cb.active_buffer) & 0x01;
-    if (m_cb.op_state == NRF_PDM_STATE_STARTING)
+    if (m_cb.op_state == NRFX_PDM_STATE_STARTING)
     {
         next_buffer = 0;
     }
@@ -293,7 +295,7 @@ ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
 
         if (m_cb.drv_state != NRFX_DRV_STATE_POWERED_ON)
         {
-                pdm_start();
+            pdm_start();
         }
     }
 
@@ -301,17 +303,18 @@ ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
     return err_code;
 }
 
-ret_code_t nrf_drv_pdm_stop(void)
+ret_code_t nrfx_pdm_stop(void)
 {
     NRFX_ASSERT(m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED);
     ret_code_t err_code;
 
-    if (m_cb.op_state != NRF_PDM_STATE_RUNNING)
+    if (m_cb.op_state != NRFX_PDM_STATE_RUNNING)
     {
-        if (m_cb.op_state == NRF_PDM_STATE_IDLE || m_cb.op_state == NRF_PDM_STATE_STARTING)
+        if (m_cb.op_state == NRFX_PDM_STATE_IDLE ||
+            m_cb.op_state == NRFX_PDM_STATE_STARTING)
         {
             nrf_pdm_disable();
-            m_cb.op_state = NRF_PDM_STATE_IDLE;
+            m_cb.op_state = NRFX_PDM_STATE_IDLE;
             err_code = NRFX_SUCCESS;
             NRFX_LOG_INFO("Function: %s, error code: %s.",
                           (uint32_t)__func__,
@@ -325,7 +328,7 @@ ret_code_t nrf_drv_pdm_stop(void)
         return err_code;
     }
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
-    m_cb.op_state = NRF_PDM_STATE_STOPPING;
+    m_cb.op_state = NRFX_PDM_STATE_STOPPING;
 
     nrf_pdm_task_trigger(NRF_PDM_TASK_STOP);
     err_code = NRFX_SUCCESS;
@@ -335,4 +338,4 @@ ret_code_t nrf_drv_pdm_stop(void)
     return err_code;
 }
 
-#endif // NRFX_CHECK(PDM_ENABLED)
+#endif // NRFX_CHECK(NRFX_PDM_ENABLED)

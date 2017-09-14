@@ -1,22 +1,8 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @addtogroup nrf_pdm PDM HAL and driver
- * @ingroup    nrf_drivers
- * @brief      @tagAPI52 Pulse density modulation (PDM) interface APIs.
- *
- * The PDM HAL provides basic APIs for accessing the registers of the PDM interface peripheral.
- * The PDM driver provides APIs on a higher level.
- *
- * @defgroup nrf_drv_pdm PDM driver
- * @{
- * @ingroup  nrf_pdm
- *
- * @brief    @tagAPI52 Pulse density modulation (PDM) interface driver.
- */
 
 
-#ifndef NRF_DRV_PDM_H__
-#define NRF_DRV_PDM_H__
+#ifndef NRFX_PDM_H__
+#define NRFX_PDM_H__
 
 #include <nrfx.h>
 #include <hal/nrf_pdm.h>
@@ -25,8 +11,23 @@
 extern "C" {
 #endif
 
+/**
+ * @addtogroup nrf_pdm PDM HAL and driver
+ * @ingroup    nrf_drivers
+ * @brief      @tagAPI52 Pulse density modulation (PDM) interface APIs.
+ *
+ * The PDM HAL provides basic APIs for accessing the registers of the PDM interface peripheral.
+ * The PDM driver provides APIs on a higher level.
+ *
+ * @defgroup nrfx_pdm PDM driver
+ * @{
+ * @ingroup  nrf_pdm
+ *
+ * @brief    @tagAPI52 Pulse density modulation (PDM) interface driver.
+ */
 
-#define NRF_PDM_MAX_BUFFER_SIZE 32767
+
+#define NRFX_PDM_MAX_BUFFER_SIZE 32767
 
 
 /**
@@ -34,19 +35,19 @@ extern "C" {
  */
 typedef enum
 {
-    PDM_NO_ERROR = 0,
-    PDM_ERROR_OVERFLOW = 1
-} nrf_drv_pdm_error_t;
+    NRFX_PDM_NO_ERROR = 0,
+    NRFX_PDM_ERROR_OVERFLOW = 1
+} nrfx_pdm_error_t;
 
 /**
  * @brief PDM event structure.
  */
 typedef struct
 {
-    bool                buffer_requested;  ///< Buffer request flag.
-    int16_t *           buffer_released;   ///< Pointer to the released buffer. Can be NULL.
-    nrf_drv_pdm_error_t error;             ///< Error type.
-} nrf_drv_pdm_evt_t;
+    bool             buffer_requested;  ///< Buffer request flag.
+    int16_t *        buffer_released;   ///< Pointer to the released buffer. Can be NULL.
+    nrfx_pdm_error_t error;             ///< Error type.
+} nrfx_pdm_evt_t;
 
 /**
  * @brief PDM interface driver configuration structure.
@@ -61,38 +62,36 @@ typedef struct
     nrf_pdm_gain_t gain_l;             ///< Left channel gain.
     nrf_pdm_gain_t gain_r;             ///< Right channel gain.
     uint8_t        interrupt_priority; ///< Interrupt priority.
-} nrf_drv_pdm_config_t;
-
+} nrfx_pdm_config_t;
 
 /**
- * @brief Macro for setting @ref nrf_drv_pdm_config_t to default settings
+ * @brief Macro for setting @ref nrfx_pdm_config_t to default settings
  *        in single ended mode.
  *
- * @param PIN_CLK  CLK output pin.
- * @param PIN_DIN  DIN input pin.
+ * @param _pin_clk  CLK output pin.
+ * @param _pin_din  DIN input pin.
  */
-#define NRF_DRV_PDM_DEFAULT_CONFIG(PIN_CLK, PIN_DIN) \
-{                                                                              \
-    .mode               = (nrf_pdm_mode_t)PDM_CONFIG_MODE,                     \
-    .edge               = (nrf_pdm_edge_t)PDM_CONFIG_EDGE,                     \
-    .pin_clk            = PIN_CLK,                                             \
-    .pin_din            = PIN_DIN,                                             \
-    .clock_freq         = (nrf_pdm_freq_t)PDM_CONFIG_CLOCK_FREQ,               \
-    .gain_l             = NRF_PDM_GAIN_DEFAULT,                                \
-    .gain_r             = NRF_PDM_GAIN_DEFAULT,                                \
-    .interrupt_priority = PDM_CONFIG_IRQ_PRIORITY                              \
+#define NRFX_PDM_DEFAULT_CONFIG(_pin_clk, _pin_din)                   \
+{                                                                     \
+    .mode               = (nrf_pdm_mode_t)NRFX_PDM_CONFIG_MODE,       \
+    .edge               = (nrf_pdm_edge_t)NRFX_PDM_CONFIG_EDGE,       \
+    .pin_clk            = _pin_clk,                                   \
+    .pin_din            = _pin_din,                                   \
+    .clock_freq         = (nrf_pdm_freq_t)NRFX_PDM_CONFIG_CLOCK_FREQ, \
+    .gain_l             = NRF_PDM_GAIN_DEFAULT,                       \
+    .gain_r             = NRF_PDM_GAIN_DEFAULT,                       \
+    .interrupt_priority = NRFX_PDM_CONFIG_IRQ_PRIORITY                \
 }
 
-
 /**
- * @brief   Handler for PDM interface ready events.
+ * @brief Handler for PDM interface ready events.
  *
- * This event handler is called on buffer request, error or when a buffer is full
- * and ready to be processed.
+ * This event handler is called on a buffer request, an error or when a buffer
+ * is full and ready to be processed.
  *
- * @param[in] evt    Pointer to the PDM event structure.
+ * @param[in] p_evt Pointer to the PDM event structure.
  */
-typedef void (*nrf_drv_pdm_event_handler_t)(nrf_drv_pdm_evt_t const * const evt);
+typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * const p_evt);
 
 
 /**
@@ -105,17 +104,15 @@ typedef void (*nrf_drv_pdm_event_handler_t)(nrf_drv_pdm_evt_t const * const evt)
  * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
  * @retval    NRFX_ERROR_INVALID_PARAM If invalid parameters were specified.
  */
-ret_code_t nrf_drv_pdm_init(nrf_drv_pdm_config_t const * p_config,
-                            nrf_drv_pdm_event_handler_t  event_handler);
-
+ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
+                         nrfx_pdm_event_handler_t  event_handler);
 
 /**
  * @brief Function for uninitializing the PDM interface.
  *
  * This function stops PDM sampling, if it is in progress.
  */
-void nrf_drv_pdm_uninit(void);
-
+void nrfx_pdm_uninit(void);
 
 /**
  * @brief Function for getting the address of a PDM interface task.
@@ -124,23 +121,21 @@ void nrf_drv_pdm_uninit(void);
  *
  * @return     Task address.
  */
-__STATIC_INLINE uint32_t nrf_drv_pdm_task_address_get(nrf_pdm_task_t task)
+__STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task)
 {
     return nrf_pdm_task_address_get(task);
 }
 
-
 /**
  * @brief Function for getting the state of the PDM interface.
  *
- * @retval TRUE  If the PDM interface is enabled.
- * @retval FALSE If the PDM interface is disabled.
+ * @retval true  If the PDM interface is enabled.
+ * @retval false If the PDM interface is disabled.
  */
-__STATIC_INLINE bool nrf_drv_pdm_enable_check()
+__STATIC_INLINE bool nrfx_pdm_enable_check(void)
 {
     return nrf_pdm_enable_check();
 }
-
 
 /**
  * @brief Function for starting PDM sampling.
@@ -148,8 +143,7 @@ __STATIC_INLINE bool nrf_drv_pdm_enable_check()
  * @retval NRFX_SUCCESS    If sampling was started successfully or was already in progress.
  * @retval NRFX_ERROR_BUSY If a previous start/stop operation is in progress.
  */
-ret_code_t nrf_drv_pdm_start(void);
-
+ret_code_t nrfx_pdm_start(void);
 
 /**
  * @brief   Function for stopping PDM sampling.
@@ -161,7 +155,7 @@ ret_code_t nrf_drv_pdm_start(void);
  * @retval NRFX_SUCCESS    If sampling was stopped successfully or was already stopped before.
  * @retval NRFX_ERROR_BUSY If a previous start/stop operation is in progress.
  */
-ret_code_t nrf_drv_pdm_stop(void);
+ret_code_t nrfx_pdm_stop(void);
 
 /**
  * @brief   Function for supplying the sample buffer.
@@ -176,16 +170,15 @@ ret_code_t nrf_drv_pdm_stop(void);
  * @retval NRFX_ERROR_INVALID_STATE If the driver was not initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If invalid parameters were provided.
  */
-ret_code_t nrf_drv_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
+ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
 
 
 void nrfx_pdm_irq_handler(void);
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // NRF_DRV_PDM_H__
-
-/** @} */
+#endif // NRFX_PDM_H__
