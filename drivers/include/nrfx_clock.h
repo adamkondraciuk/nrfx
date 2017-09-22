@@ -1,0 +1,191 @@
+/*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
+#ifndef NRFX_CLOCK_H__
+#define NRFX_CLOCK_H__
+
+#include <nrfx.h>
+#include <hal/nrf_clock.h>
+#include <nrfx_power_clock.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @defgroup nrfx_clock Clock driver
+ * @{
+ * @ingroup nrf_clock
+ * @brief Driver for managing the low-frequency clock (LFCLK) and the high-frequency clock (HFCLK).
+ */
+
+/**
+ * @brief Clock events.
+ */
+typedef enum
+{
+    NRFX_CLOCK_EVT_HFCLK_STARTED, ///< HFCLK has been started.
+    NRFX_CLOCK_EVT_LFCLK_STARTED, ///< LFCLK has been started.
+    NRFX_CLOCK_EVT_CTTO,          ///< Calibration timeout.
+    NRFX_CLOCK_EVT_CAL_DONE       ///< Calibration has been done.
+} nrfx_clock_evt_type_t;
+
+/**
+ * @brief Clock event handler.
+ *
+ * @param[in] event  Event.
+ */
+typedef void (*nrfx_clock_event_handler_t)(nrfx_clock_evt_type_t event);
+
+/**
+ * @brief Function for checking if driver is already initialized
+ *
+ * This function is used to check whether common POWER_CLOCK common interrupt
+ * should be disabled or not if @ref nrfx_power tries to disable the interrupt.
+ *
+ * @retval true  Driver is initialized
+ * @retval false Driver is uninitialized
+ */
+bool nrfx_clock_init_check(void);
+
+/**
+ * @brief Function for initializing internal structures in the nrfx_clock module.
+ *
+ * After initialization, the module is in power off state (clocks are not started).
+ *
+ * @retval NRFX_SUCCESS                           If the procedure was successful.
+ * @retval NRFX_ERROR_MODULE_ALREADY_INITIALIZED  If the driver was already initialized.
+ */
+ret_code_t nrfx_clock_init(nrfx_clock_event_handler_t  event_handler);
+
+/**
+ * @brief Function for enabling interrupts in the clock module.
+ */
+void nrfx_clock_enable(void);
+
+/**
+ * @brief Function for disabling interrupts in the clock module.
+ */
+void nrfx_clock_disable(void);
+
+/**
+ * @brief Function for uninitializing the clock module.
+ */
+void nrfx_clock_uninit(void);
+
+/**
+ * @brief Function for starting the LFCLK.
+ */
+void nrfx_clock_lfclk_start(void);
+
+/**
+ * @brief Function for stoping the LFCLK.
+ */
+void nrfx_clock_lfclk_stop(void);
+
+/**
+ * @brief Function for checking the LFCLK state.
+ *
+ * @retval true If the LFCLK is running.
+ * @retval false If the LFCLK is not running.
+ */
+__STATIC_INLINE bool nrfx_clock_lfclk_is_running(void);
+
+/**
+ * @brief Function for starting the high-accuracy source HFCLK.
+ */
+void nrfx_clock_hfclk_start(void);
+
+/**
+ * @brief Function for stoping external high-accuracy source HFCLK.
+ */
+void nrfx_clock_hfclk_stop(void);
+
+/**
+ * @brief Function for checking the HFCLK state.
+ *
+ * @retval true If the HFCLK is running (for \nRFXX XTAL source).
+ * @retval false If the HFCLK is not running.
+ */
+__STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
+
+/**
+ * @brief Function for starting calibration of internal LFCLK.
+ *
+ * This function starts the calibration process. The process cannot be aborted. LFCLK and HFCLK
+ * must be running before this function is called.
+ *
+ * @retval     NRFX_SUCCESS                        If the procedure was successful.
+ * @retval     NRFX_ERROR_INVALID_STATE            If the low-frequency of high-frequency clock is off.
+ * @retval     NRFX_ERROR_BUSY                     If calibration is in progress.
+ */
+ret_code_t nrfx_clock_calibration_start(void);
+
+/**
+ * @brief Function for checking if calibration is in progress.
+ *
+ * This function indicates that the system is in calibration phase.
+ *
+ * @retval     NRFX_SUCCESS                        If the procedure was successful.
+ * @retval     NRFX_ERROR_BUSY                     If calibration is in progress.
+ */
+ret_code_t nrfx_clock_is_calibrating(void);
+
+/**
+ * @brief Function for starting calibration timer.
+ * @param interval Time after which the CTTO event and interrupt will be generated (in 0.25 s units).
+ */
+void nrfx_clock_calibration_timer_start(uint8_t interval);
+
+/**
+ * @brief Function for stoping calibration timer.
+ */
+void nrfx_clock_calibration_timer_stop(void);
+
+/**@brief Function for returning a requested task address for the clock driver module.
+ *
+ * @param[in]  task                               One of the peripheral tasks.
+ *
+ * @return     Task address.
+ */
+__STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task);
+
+/**@brief Function for returning a requested event address for the clock driver module.
+ *
+ * @param[in]  event                              One of the peripheral events.
+ *
+ * @return     Event address.
+ */
+__STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event);
+
+/**
+ *@}
+ **/
+
+#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+__STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task)
+{
+    return nrf_clock_task_address_get(task);
+}
+
+__STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event)
+{
+    return nrf_clock_event_address_get(event);
+}
+
+__STATIC_INLINE bool nrfx_clock_hfclk_is_running(void)
+{
+    return nrf_clock_hf_is_running(NRF_CLOCK_HFCLK_HIGH_ACCURACY);
+}
+
+__STATIC_INLINE bool nrfx_clock_lfclk_is_running(void)
+{
+    return nrf_clock_lf_is_running();
+}
+#endif //SUPPRESS_INLINE_IMPLEMENTATION
+
+void nrfx_clock_irq_handler(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NRFX_CLOCK_H__

@@ -198,7 +198,7 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
  * @brief Function for checking if driver is already initialized
  *
  * This function is used to check whether POWER_CLOCK common interrupt
- * should be disabled or not if @ref nrf_drv_clock tries to disable the interrupt.
+ * should be disabled or not if @ref nrfx_clock tries to disable the interrupt.
  *
  * @retval true  Driver is initialized
  * @retval false Driver is uninitialized

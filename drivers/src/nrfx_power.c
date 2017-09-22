@@ -5,7 +5,7 @@
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
 
 #include <nrfx_power.h>
-#include <nrf_drv_clock.h>
+#include <nrfx_clock.h>
 
 /**
  * @internal
@@ -101,7 +101,7 @@ void nrfx_power_uninit(void)
     NRFX_ASSERT(m_initialized);
 
 #if NRFX_CHECK(CLOCK_ENABLED)
-    if (!nrf_drv_clock_init_check())
+    if (!nrfx_clock_init_check())
 #endif
     {
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
