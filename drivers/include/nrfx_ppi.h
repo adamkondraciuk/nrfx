@@ -43,21 +43,12 @@ extern "C" {
 
 #define NRFX_PPI_ALL_APP_GROUPS_MASK     (((1uL << PPI_GROUP_NUM) - 1) & ~(NRFX_PPI_GROUPS_USED))    /**< All PPI groups available to the application. */
 
-
-/**
- * @brief Function for initializing PPI module.
- *
- * @retval NRFX_SUCCESS                          If the module was successfully initialized.
- * @retval NRFX_ERROR_MODULE_ALREADY_INITIALIZED If the module has already been initialized.
- */
-ret_code_t nrfx_ppi_init(void);
-
 /**
  * @brief Function for uninitializing the PPI module.
  *
- * This function also disables all channels and clears the channel groups.
+ * This function disables all channels and clears the channel groups.
  */
-void nrfx_ppi_uninit(void);
+void nrfx_ppi_free_all(void);
 
 /**
  * @brief Function for allocating a PPI channel.

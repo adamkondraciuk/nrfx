@@ -10,7 +10,6 @@
 #include <nrfx_log.h>
 
 
-static nrfx_drv_state_t m_drv_state;          /**< Driver state */
 static uint32_t         m_channels_allocated; /**< Bitmap representing channels availability. 1 when a channel is allocated, 0 otherwise. */
 static uint8_t          m_groups_allocated;   /**< Bitmap representing groups availability. 1 when a group is allocated, 0 otherwise.*/
 
@@ -176,33 +175,10 @@ __STATIC_INLINE void group_allocated_clr_all()
 }
 
 
-ret_code_t nrfx_ppi_init(void)
-{
-    ret_code_t err_code;
-
-    if (m_drv_state == NRFX_DRV_STATE_UNINITIALIZED)
-    {
-        m_drv_state = NRFX_DRV_STATE_INITIALIZED;
-        err_code    = NRFX_SUCCESS;
-    }
-    else
-    {
-        err_code = NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
-    }
-
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
-    return err_code;
-}
-
-
-void nrfx_ppi_uninit(void)
+void nrfx_ppi_free_all(void)
 {
     uint32_t mask = NRFX_PPI_ALL_APP_GROUPS_MASK;
     nrf_ppi_channel_group_t group;
-
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     // Disable all channels and groups
     nrf_ppi_channels_disable(NRFX_PPI_ALL_APP_CHANNELS_MASK);
@@ -216,7 +192,6 @@ void nrfx_ppi_uninit(void)
     }
     channel_allocated_clr_all();
     group_allocated_clr_all();
-    m_drv_state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
 
@@ -225,8 +200,6 @@ ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
     ret_code_t err_code = NRFX_SUCCESS;
     nrf_ppi_channel_t channel;
     uint32_t mask = 0;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
-
     err_code = NRFX_ERROR_NO_MEM;
 
     mask = NRFX_PPI_PROG_APP_CHANNELS_MASK;
@@ -259,7 +232,6 @@ ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_programmable_app_channel(channel))
     {
@@ -282,8 +254,6 @@ ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 
 ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep)
 {
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
-
     if ((uint32_t *)eep == NULL || (uint32_t *)tep == NULL)
     {
         return NRFX_ERROR_NULL;
@@ -315,7 +285,6 @@ ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint
 
 ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep)
 {
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
     ret_code_t err_code = NRFX_SUCCESS;
 #ifdef PPI_FEATURE_FORKS_PRESENT
     if (!is_programmable_app_channel(channel))
@@ -347,7 +316,6 @@ ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork
 ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_channel(channel))
     {
@@ -371,7 +339,6 @@ ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 ret_code_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_channel(channel))
     {
@@ -398,7 +365,6 @@ ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
     ret_code_t err_code;
     uint32_t mask = 0;
     nrf_ppi_channel_group_t group;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     err_code = NRFX_ERROR_NO_MEM;
 
@@ -430,7 +396,6 @@ ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
 ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -457,7 +422,6 @@ ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -481,7 +445,6 @@ ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 ret_code_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -501,7 +464,6 @@ ret_code_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_m
                                                nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
@@ -531,7 +493,6 @@ ret_code_t nrfx_ppi_channels_include_in_group(uint32_t                channel_ma
                                               nrf_ppi_channel_group_t group)
 {
     ret_code_t err_code = NRFX_SUCCESS;
-    NRFX_ASSERT(m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!is_app_group(group))
     {
