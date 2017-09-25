@@ -1,8 +1,10 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
+
 #include <nrfx.h>
 
-#if NRFX_CHECK(QSPI_ENABLED)
-#include <nrf_drv_qspi.h>
+#if NRFX_CHECK(NRFX_QSPI_ENABLED)
+
+#include <nrfx_qspi.h>
 
 
 /**
@@ -23,14 +25,13 @@
 
 /**
   * @brief Control block - driver instance local data.
-  *
   */
 typedef struct
 {
-    nrf_drv_qspi_handler_t handler;          /**< Handler. */
-    nrfx_drv_state_t       state;            /**< Driver state. */
-    volatile bool          interrupt_driven; /**< Information if the current operation is performed and is interrupt-driven. */
-    void *                 p_context;        /**< Driver context used in interrupt. */
+    nrfx_qspi_handler_t handler;          /**< Handler. */
+    nrfx_drv_state_t    state;            /**< Driver state. */
+    volatile bool       interrupt_driven; /**< Information if the current operation is performed and is interrupt-driven. */
+    void *              p_context;        /**< Driver context used in interrupt. */
 } qspi_control_block_t;
 
 static qspi_control_block_t m_cb;
@@ -76,9 +77,9 @@ static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
     return true;
 }
 
-ret_code_t nrf_drv_qspi_init(nrf_drv_qspi_config_t const * p_config,
-                             nrf_drv_qspi_handler_t        handler,
-                             void *                        p_context)
+ret_code_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
+                          nrfx_qspi_handler_t        handler,
+                          void *                     p_context)
 {
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -120,9 +121,9 @@ ret_code_t nrf_drv_qspi_init(nrf_drv_qspi_config_t const * p_config,
     return NRFX_SUCCESS;
 }
 
-ret_code_t nrf_drv_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
-                                    void const *                   p_tx_buffer,
-                                    void *                         p_rx_buffer)
+ret_code_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
+                                 void const *                   p_tx_buffer,
+                                 void *                         p_rx_buffer)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
@@ -155,23 +156,23 @@ ret_code_t nrf_drv_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
     return NRFX_SUCCESS;
 }
 
-ret_code_t nrf_drv_qspi_cinstr_quick_send(uint8_t               opcode,
-                                          nrf_qspi_cinstr_len_t length,
-                                          void const *          p_tx_buffer)
+ret_code_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
+                                       nrf_qspi_cinstr_len_t length,
+                                       void const *          p_tx_buffer)
 {
-    nrf_qspi_cinstr_conf_t config = NRF_DRV_QSPI_DEFAULT_CINSTR(opcode, length);
-    return nrf_drv_qspi_cinstr_xfer(&config, p_tx_buffer, NULL);
+    nrf_qspi_cinstr_conf_t config = NRFX_QSPI_DEFAULT_CINSTR(opcode, length);
+    return nrfx_qspi_cinstr_xfer(&config, p_tx_buffer, NULL);
 }
 
-ret_code_t nrf_drv_qspi_mem_busy_check(void)
+ret_code_t nrfx_qspi_mem_busy_check(void)
 {
     ret_code_t ret_code;
     uint8_t status_value = 0;
 
-    nrf_qspi_cinstr_conf_t config = NRF_DRV_QSPI_DEFAULT_CINSTR(QSPI_STD_CMD_RDSR,
-                                                                NRF_QSPI_CINSTR_LEN_2B);
-
-    ret_code = nrf_drv_qspi_cinstr_xfer(&config, &status_value, &status_value);
+    nrf_qspi_cinstr_conf_t const config =
+        NRFX_QSPI_DEFAULT_CINSTR(QSPI_STD_CMD_RDSR,
+                                 NRF_QSPI_CINSTR_LEN_2B);
+    ret_code = nrfx_qspi_cinstr_xfer(&config, &status_value, &status_value);
 
     if (ret_code != NRFX_SUCCESS)
     {
@@ -186,7 +187,7 @@ ret_code_t nrf_drv_qspi_mem_busy_check(void)
     return NRFX_SUCCESS;
 }
 
-void nrf_drv_qspi_uninit(void)
+void nrfx_qspi_uninit(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
@@ -201,9 +202,9 @@ void nrf_drv_qspi_uninit(void)
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
-ret_code_t nrf_drv_qspi_write(void const * p_tx_buffer,
-                              size_t       tx_buffer_length,
-                              uint32_t     dst_address)
+ret_code_t nrfx_qspi_write(void const * p_tx_buffer,
+                           size_t       tx_buffer_length,
+                           uint32_t     dst_address)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_tx_buffer != NULL);
@@ -218,9 +219,9 @@ ret_code_t nrf_drv_qspi_write(void const * p_tx_buffer,
 
 }
 
-ret_code_t nrf_drv_qspi_read(void *   p_rx_buffer,
-                             size_t   rx_buffer_length,
-                             uint32_t src_address)
+ret_code_t nrfx_qspi_read(void *   p_rx_buffer,
+                          size_t   rx_buffer_length,
+                          uint32_t src_address)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_rx_buffer != NULL);
@@ -234,17 +235,17 @@ ret_code_t nrf_drv_qspi_read(void *   p_rx_buffer,
     return qspi_task_perform(NRF_QSPI_TASK_READSTART);
 }
 
-ret_code_t nrf_drv_qspi_erase(nrf_qspi_erase_len_t length,
-                              uint32_t             start_address)
+ret_code_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
+                           uint32_t             start_address)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_qspi_erase_ptr_set(NRF_QSPI, start_address, length);
     return qspi_task_perform(NRF_QSPI_TASK_ERASESTART);
 }
 
-ret_code_t nrf_drv_qspi_chip_erase(void)
+ret_code_t nrfx_qspi_chip_erase(void)
 {
-    return nrf_drv_qspi_erase(NRF_QSPI_ERASE_LEN_ALL, 0);
+    return nrfx_qspi_erase(NRF_QSPI_ERASE_LEN_ALL, 0);
 }
 
 void nrfx_qspi_irq_handler(void)
@@ -254,8 +255,8 @@ void nrfx_qspi_irq_handler(void)
     {
         m_cb.interrupt_driven = false;
         nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
-        m_cb.handler(NRF_DRV_QSPI_EVENT_DONE, m_cb.p_context);
+        m_cb.handler(NRFX_QSPI_EVENT_DONE, m_cb.p_context);
     }
 }
 
-#endif // NRFX_CHECK(QSPI_ENABLED)
+#endif // NRFX_CHECK(NRFX_QSPI_ENABLED)
