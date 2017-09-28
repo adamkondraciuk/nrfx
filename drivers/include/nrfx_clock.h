@@ -36,17 +36,6 @@ typedef enum
 typedef void (*nrfx_clock_event_handler_t)(nrfx_clock_evt_type_t event);
 
 /**
- * @brief Function for checking if driver is already initialized
- *
- * This function is used to check whether common POWER_CLOCK common interrupt
- * should be disabled or not if @ref nrfx_power tries to disable the interrupt.
- *
- * @retval true  Driver is initialized
- * @retval false Driver is uninitialized
- */
-bool nrfx_clock_init_check(void);
-
-/**
  * @brief Function for initializing internal structures in the nrfx_clock module.
  *
  * After initialization, the module is in power off state (clocks are not started).

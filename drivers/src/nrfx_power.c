@@ -5,7 +5,10 @@
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
 
 #include <nrfx_power.h>
-#include <nrfx_clock.h>
+
+#if NRFX_CHECK(NRFX_CLOCK_ENABLED)
+extern bool nrfx_clock_irq_enabled;
+#endif
 
 /**
  * @internal
@@ -32,9 +35,17 @@ static const nrfx_power_config_t m_drv_power_config_default =
 };
 
 /**
+ * This variable is used to check whether common POWER_CLOCK common interrupt
+ * should be disabled or not if @ref nrfx_clock tries to disable the interrupt.
+ */
+
+bool nrfx_power_irq_enabled;
+
+/**
  * @brief The initialization flag
  */
-static bool m_initialized;
+
+#define m_initialized nrfx_power_irq_enabled
 
 /**
  * @brief The handler of power fail comparator warning event
@@ -69,11 +80,6 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void)
 }
 #endif
 
-bool nrfx_power_init_check(void)
-{
-    return m_initialized;
-}
-
 ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config)
 {
     nrfx_power_config_t const * p_used_config;
@@ -100,8 +106,8 @@ void nrfx_power_uninit(void)
 {
     NRFX_ASSERT(m_initialized);
 
-#if NRFX_CHECK(CLOCK_ENABLED)
-    if (!nrfx_clock_init_check())
+#if NRFX_CHECK(NRFX_CLOCK_ENABLED)
+    if (!nrfx_clock_irq_enabled)
 #endif
     {
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);

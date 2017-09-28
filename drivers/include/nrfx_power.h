@@ -195,19 +195,6 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
 #endif
 
 /**
- * @brief Function for checking if driver is already initialized
- *
- * This function is used to check whether POWER_CLOCK common interrupt
- * should be disabled or not if @ref nrfx_clock tries to disable the interrupt.
- *
- * @retval true  Driver is initialized
- * @retval false Driver is uninitialized
- *
- * @sa nrfx_power_uninit
- */
-bool nrfx_power_init_check(void);
-
-/**
  * @brief Initialize power module driver
  *
  * Enabled power module driver would process all the interrupts from power system.

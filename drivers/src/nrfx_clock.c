@@ -5,10 +5,13 @@
 #if NRFX_CHECK(NRFX_CLOCK_ENABLED)
 
 #include <nrfx_clock.h>
-#include <nrfx_power.h>
 
 #define NRFX_LOG_MODULE CLOCK
 #include <nrfx_log.h>
+
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
+extern bool nrfx_power_irq_enabled;
+#endif
 
 #define EVT_TO_STR(event)                                                     \
     (event == NRF_CLOCK_EVENT_HFCLKSTARTED ? "NRF_CLOCK_EVENT_HFCLKSTARTED" : \
@@ -48,10 +51,13 @@ typedef struct
 
 static nrfx_clock_cb_t m_clock_cb;
 
-bool nrfx_clock_init_check(void)
-{
-    return m_clock_cb.module_initialized;
-}
+/**
+ * This variable is used to check whether common POWER_CLOCK common interrupt
+ * should be disabled or not if @ref nrfx_power tries to disable the interrupt.
+ */
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
+bool nrfx_clock_irq_enabled;
+#endif
 
 ret_code_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
 {
@@ -80,6 +86,11 @@ void nrfx_clock_enable(void)
     NRFX_ASSERT(m_clock_cb.module_initialized);
     nrfx_power_clock_irq_init();
     nrf_clock_lf_src_set((nrf_clock_lfclk_t)CLOCK_CONFIG_LF_SRC);
+
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
+    nrfx_clock_irq_enabled = true;
+#endif
+
     NRFX_LOG_INFO("Module enabled.");
 }
 
@@ -87,7 +98,8 @@ void nrfx_clock_disable(void)
 {
     NRFX_ASSERT(m_clock_cb.module_initialized);
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
-    if (!nrfx_power_init_check())
+    NRFX_ASSERT(nrfx_clock_irq_enabled);
+    if (!nrfx_power_irq_enabled)
 #endif
     {
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
@@ -96,6 +108,9 @@ void nrfx_clock_disable(void)
                           CLOCK_INTENSET_LFCLKSTARTED_Msk |
                           CLOCK_INTENSET_DONE_Msk |
                           CLOCK_INTENSET_CTTO_Msk);
+#if NRFX_CHECK(NRFX_POWER_ENABLED)
+    nrfx_clock_irq_enabled = false;
+#endif
     NRFX_LOG_INFO("Module disabled.");
 }
 
