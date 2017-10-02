@@ -16,20 +16,14 @@
 extern "C" {
 #endif
 
-#if defined(ADC_PRESENT) || defined(__SDK_DOXYGEN__)
-/**
- * @enum  nrf_adc_config_resolution_t
- * @brief Resolution of the analog-to-digital converter.
- */
 
-/**
- * @brief ADC interrupts.
- */
+/** @brief ADC interrupts. */
 typedef enum
 {
     NRF_ADC_INT_END_MASK  = ADC_INTENSET_END_Msk,   /**< ADC interrupt on END event. */
 } nrf_adc_int_mask_t;
 
+/** @brief Resolution of the analog-to-digital converter. */
 typedef enum
 {
     NRF_ADC_CONFIG_RES_8BIT  = ADC_CONFIG_RES_8bit,  /**< 8 bit resolution. */
@@ -38,10 +32,7 @@ typedef enum
 } nrf_adc_config_resolution_t;
 
 
-/**
- * @enum nrf_adc_config_scaling_t
- * @brief Scaling factor of the analog-to-digital conversion.
- */
+/** @brief Scaling factor of the analog-to-digital conversion. */
 typedef enum
 {
     NRF_ADC_CONFIG_SCALING_INPUT_FULL_SCALE  = ADC_CONFIG_INPSEL_AnalogInputNoPrescaling,        /**< Full scale input. */
@@ -52,7 +43,6 @@ typedef enum
 } nrf_adc_config_scaling_t;
 
 /**
- * @enum nrf_adc_config_reference_t
  * @brief Reference selection of the analog-to-digital converter.
  */
 typedef enum
@@ -67,10 +57,7 @@ typedef enum
                                   ADC_CONFIG_EXTREFSEL_AnalogReference1 << ADC_CONFIG_EXTREFSEL_Pos, /**< External reference 0. */
 } nrf_adc_config_reference_t;
 
-/**
- * @enum nrf_adc_config_input_t
- * @brief Input selection of the analog-to-digital converter.
- */
+/** @brief Input selection of the analog-to-digital converter. */
 typedef enum
 {
     NRF_ADC_CONFIG_INPUT_DISABLED = ADC_CONFIG_PSEL_Disabled,     /**< No input selected. */
@@ -84,10 +71,7 @@ typedef enum
     NRF_ADC_CONFIG_INPUT_7        = ADC_CONFIG_PSEL_AnalogInput7, /**< Input 7. */
 } nrf_adc_config_input_t;
 
-/**
- * @enum nrf_adc_task_t
- * @brief Analog-to-digital converter tasks.
- */
+/** @brief Analog-to-digital converter tasks. */
 typedef enum
 {
     /*lint -save -e30*/
@@ -96,10 +80,7 @@ typedef enum
     /*lint -restore*/
 } nrf_adc_task_t;
 
-/**
- * @enum nrf_adc_event_t
- * @brief Analog-to-digital converter events.
- */
+/** @brief Analog-to-digital converter events. */
 typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
 {
     /*lint -save -e30*/
@@ -406,7 +387,6 @@ __STATIC_INLINE void nrf_adc_disable(void)
     NRF_ADC->ENABLE = 0;
 }
 #endif
-#endif /* ADC_PRESENT */
 /**
  *@}
  **/

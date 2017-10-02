@@ -29,7 +29,7 @@ extern bool nrfx_clock_irq_enabled;
 static const nrfx_power_config_t m_drv_power_config_default =
 {
     .dcdcen = NRFX_POWER_CONFIG_DEFAULT_DCDCEN,
-#if NRF_POWER_HAS_VDDH || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
     .dcdcenhv = NRFX_POWER_CONFIG_DEFAULT_DCDCENHV,
 #endif
 };
@@ -52,14 +52,14 @@ bool nrfx_power_irq_enabled;
  */
 static nrfx_power_pofwarn_event_handler_t m_pofwarn_handler;
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The handler of sleep event handler
  */
 static nrfx_power_sleep_event_handler_t m_sleepevt_handler;
 #endif
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The handler of USB power events
  */
@@ -114,10 +114,10 @@ void nrfx_power_uninit(void)
     }
 
     nrfx_power_pof_uninit();
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
     nrfx_power_sleepevt_uninit();
 #endif
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
     nrfx_power_usbevt_uninit();
 #endif
     m_initialized = false;
@@ -138,7 +138,7 @@ void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config)
 {
     nrf_power_pofcon_set(true, p_config->thr);
-#if NRF_POWER_HAS_VDDH || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
     nrf_power_pofcon_vddh_set(p_config->thrvddh);
 #endif
     if (m_pofwarn_handler != NULL)
@@ -157,7 +157,7 @@ void nrfx_power_pof_uninit(void)
     m_pofwarn_handler = NULL;
 }
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 void nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config)
 {
     NRFX_ASSERT(p_config != NULL);
@@ -198,7 +198,7 @@ void nrfx_power_sleepevt_uninit(void)
 }
 #endif /* NRF_POWER_HAS_SLEEPEVT */
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 void nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config)
 {
     nrfx_power_usbevt_uninit();
@@ -241,7 +241,7 @@ void nrfx_power_irq_handler(void)
         NRFX_ASSERT(m_pofwarn_handler != NULL);
         m_pofwarn_handler();
     }
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
     if ((0 != (enabled & NRF_POWER_INT_SLEEPENTER_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_SLEEPENTER))
     {
@@ -257,7 +257,7 @@ void nrfx_power_irq_handler(void)
         m_sleepevt_handler(NRFX_POWER_SLEEP_EVT_EXIT);
     }
 #endif
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
     if ((0 != (enabled & NRF_POWER_INT_USBDETECTED_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_USBDETECTED))
     {

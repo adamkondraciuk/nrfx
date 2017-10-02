@@ -26,7 +26,7 @@ extern "C" {
  */
 typedef enum
 {
-#if (LPCOMP_REFSEL_RESOLUTION == 8) || defined(__SDK_DOXYGEN__)
+#if (LPCOMP_REFSEL_RESOLUTION == 8) || defined(__NRFX_DOXYGEN__)
     NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_SupplyOneEighthPrescaling,    /**< Use supply with a 1/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_SupplyTwoEighthsPrescaling,   /**< Use supply with a 2/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_SupplyThreeEighthsPrescaling, /**< Use supply with a 3/8 prescaler as reference. */
@@ -34,7 +34,7 @@ typedef enum
     NRF_LPCOMP_REF_SUPPLY_5_8   = LPCOMP_REFSEL_REFSEL_SupplyFiveEighthsPrescaling,  /**< Use supply with a 5/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_6_8   = LPCOMP_REFSEL_REFSEL_SupplySixEighthsPrescaling,   /**< Use supply with a 6/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_7_8   = LPCOMP_REFSEL_REFSEL_SupplySevenEighthsPrescaling, /**< Use supply with a 7/8 prescaler as reference. */
-#elif (LPCOMP_REFSEL_RESOLUTION == 16) || defined(__SDK_DOXYGEN__)
+#elif (LPCOMP_REFSEL_RESOLUTION == 16) || defined(__NRFX_DOXYGEN__)
     NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_Ref1_8Vdd, /**< Use supply with a 1/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_Ref2_8Vdd, /**< Use supply with a 2/8 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_Ref3_8Vdd, /**< Use supply with a 3/8 prescaler as reference. */

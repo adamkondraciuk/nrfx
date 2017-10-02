@@ -34,7 +34,7 @@
 #define TE_OUT_IDX_TO_TASK_ADDR(idx) (nrf_gpiote_tasks_t)((uint32_t)NRF_GPIOTE_TASKS_OUT_0 + \
                                                           (sizeof(uint32_t) * (idx)))
 
-#if defined(GPIOTE_FEATURE_SET_PRESENT)
+#if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Macro for converting task-event index of SET task to an address of a task register.
  *
@@ -43,9 +43,9 @@
 #define TE_SET_IDX_TO_TASK_ADDR(idx) (nrf_gpiote_tasks_t)((uint32_t)NRF_GPIOTE_TASKS_SET_0 + \
                                                           (sizeof(uint32_t) * (idx)))
 
-#endif // defined(GPIOTE_FEATURE_SET_PRESENT)
+#endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if defined(GPIOTE_FEATURE_CLR_PRESENT)
+#if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Macro for converting task-event index of CLR task to an address of a task register.
  *
@@ -54,7 +54,7 @@
 #define TE_CLR_IDX_TO_TASK_ADDR(idx) (nrf_gpiote_tasks_t)((uint32_t)NRF_GPIOTE_TASKS_CLR_0 + \
                                                           (sizeof(uint32_t) * (idx)))
 
-#endif // defined(GPIOTE_FEATURE_CLR_PRESENT)
+#endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /*lint -save -e571*/ /* Suppress "Warning 571: Suspicious cast" */
 typedef struct

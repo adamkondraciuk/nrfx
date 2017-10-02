@@ -84,9 +84,6 @@ typedef enum
     NRF_GPIO_PIN_SENSE_HIGH = GPIO_PIN_CNF_SENSE_High,     ///<  Pin sense high level.
 } nrf_gpio_pin_sense_t;
 
-
-#if (__LINT__ != 1)
-
 /**
  * @brief Function for configuring the GPIO pin range as output pins with normal drive strength.
  *        This function can be used to configure pin range as simple output with gate driving GPIO_PIN_CNF_DRIVE_S0S1 (normal cases).
@@ -375,7 +372,7 @@ __STATIC_INLINE void nrf_gpio_port_out_clear(NRF_GPIO_Type * p_reg, uint32_t clr
  */
 __STATIC_INLINE void nrf_gpio_ports_read(uint32_t start_port, uint32_t length, uint32_t * p_masks);
 
-#ifdef GPIO_DETECTMODE_DETECTMODE_LDETECT
+#if defined(GPIO_DETECTMODE_DETECTMODE_LDETECT) || defined(__NRF_DOXYGEN__)
 /**
  * @brief Function for reading latch state of multiple consecutive ports.
  *
@@ -403,9 +400,6 @@ __STATIC_INLINE uint32_t nrf_gpio_pin_latch_get(uint32_t pin_number);
  */
 __STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
 #endif
-
-
-#endif // #ifndef (__LINT__ != 1)
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 

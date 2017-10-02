@@ -29,7 +29,7 @@ extern "C" {
  *
  * Macros that defines functionality that is implemented into POWER peripheral.
  */
-#if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The fact that sleep events are present
  *
@@ -41,7 +41,7 @@ extern "C" {
 #define NRF_POWER_HAS_SLEEPEVT 0
 #endif
 
-#if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The fact that RAMPOWER registers are present
  *
@@ -55,7 +55,7 @@ extern "C" {
 #define NRF_POWER_HAS_RAMPOWER_REGS 0
 #endif
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Auxiliary definition to mark the fact that VDDH is present
  *
@@ -67,7 +67,7 @@ extern "C" {
 #define NRF_POWER_HAS_VDDH 0
 #endif
 
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The fact that power module manages USB regulator
  *
@@ -334,14 +334,14 @@ typedef enum
     NRF_POWER_RESETREAS_SREQ_MASK     = POWER_RESETREAS_SREQ_Msk    , /*!< Bit mask of SREQ field. */    //!< NRF_POWER_RESETREAS_SREQ_MASK
     NRF_POWER_RESETREAS_LOCKUP_MASK   = POWER_RESETREAS_LOCKUP_Msk  , /*!< Bit mask of LOCKUP field. */  //!< NRF_POWER_RESETREAS_LOCKUP_MASK
     NRF_POWER_RESETREAS_OFF_MASK      = POWER_RESETREAS_OFF_Msk     , /*!< Bit mask of OFF field. */     //!< NRF_POWER_RESETREAS_OFF_MASK
-#if defined(POWER_RESETREAS_LPCOMP_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_RESETREAS_LPCOMP_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_RESETREAS_LPCOMP_MASK   = POWER_RESETREAS_LPCOMP_Msk  , /*!< Bit mask of LPCOMP field. */  //!< NRF_POWER_RESETREAS_LPCOMP_MASK
 #endif
     NRF_POWER_RESETREAS_DIF_MASK      = POWER_RESETREAS_DIF_Msk     , /*!< Bit mask of DIF field. */     //!< NRF_POWER_RESETREAS_DIF_MASK
-#if defined(POWER_RESETREAS_NFC_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_RESETREAS_NFC_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_RESETREAS_NFC_MASK      = POWER_RESETREAS_NFC_Msk     , /*!< Bit mask of NFC field. */
 #endif
-#if defined(POWER_RESETREAS_VBUS_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_RESETREAS_VBUS_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /*!< Bit mask of VBUS field. */
 #endif
 }nrf_power_resetreas_mask_t;
@@ -436,7 +436,7 @@ typedef enum
     NRF_POWER_POFTHR_V23 = POWER_POFCON_THRESHOLD_V23, /**< Set threshold to 2.3&nbsp;V */
     NRF_POWER_POFTHR_V25 = POWER_POFCON_THRESHOLD_V25, /**< Set threshold to 2.5&nbsp;V */
     NRF_POWER_POFTHR_V27 = POWER_POFCON_THRESHOLD_V27, /**< Set threshold to 2.7&nbsp;V */
-#if defined(POWER_POFCON_THRESHOLD_V17) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_POFCON_THRESHOLD_V17) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_POFTHR_V17 = POWER_POFCON_THRESHOLD_V17, /**< Set threshold to 1.7&nbsp;V */
     NRF_POWER_POFTHR_V18 = POWER_POFCON_THRESHOLD_V18, /**< Set threshold to 1.8&nbsp;V */
     NRF_POWER_POFTHR_V19 = POWER_POFCON_THRESHOLD_V19, /**< Set threshold to 1.9&nbsp;V */
@@ -679,7 +679,7 @@ __STATIC_INLINE void nrf_power_gpregret_set(uint8_t val);
  */
 __STATIC_INLINE uint8_t nrf_power_gpregret_get(void);
 
-#if defined(POWER_GPREGRET2_GPREGRET_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_GPREGRET2_GPREGRET_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Set general purpose retention register 2
  *
@@ -911,7 +911,7 @@ __STATIC_INLINE uint8_t nrf_power_gpregret_get(void)
     return NRF_POWER->GPREGRET;
 }
 
-#if defined(POWER_GPREGRET2_GPREGRET_Msk) || defined(__SDK_DOXYGEN__)
+#if defined(POWER_GPREGRET2_GPREGRET_Msk) || defined(__NRFX_DOXYGEN__)
 void nrf_power_gpregret2_set(uint8_t val)
 {
     NRF_POWER->GPREGRET2 = val;

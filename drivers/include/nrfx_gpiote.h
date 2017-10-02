@@ -206,7 +206,7 @@ void nrfx_gpiote_out_task_disable(nrfx_gpiote_pin_t pin);
  */
 uint32_t nrfx_gpiote_out_task_addr_get(nrfx_gpiote_pin_t pin);
 
-#if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__SDK_DOXYGEN__)
+#if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting the address of a configurable GPIOTE task.
  *
@@ -215,9 +215,9 @@ uint32_t nrfx_gpiote_out_task_addr_get(nrfx_gpiote_pin_t pin);
  * @return Address of SET task.
  */
 uint32_t nrfx_gpiote_set_task_addr_get(nrfx_gpiote_pin_t pin);
-#endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__SDK_DOXYGEN__)
+#endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__SDK_DOXYGEN__)
+#if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting the address of a configurable GPIOTE task.
  *
@@ -226,7 +226,7 @@ uint32_t nrfx_gpiote_set_task_addr_get(nrfx_gpiote_pin_t pin);
  * @return Address of CLR task.
  */
 uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin);
-#endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__SDK_DOXYGEN__)
+#endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for initializing a GPIOTE input pin.
@@ -316,23 +316,23 @@ void nrfx_gpiote_out_task_force(nrfx_gpiote_pin_t pin, uint8_t state);
  */
 void nrfx_gpiote_out_task_trigger(nrfx_gpiote_pin_t pin);
 
-#if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__SDK_DOXYGEN__)
+#if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for triggering the task SET manually.
  *
  * @param[in] pin Pin.
  */
 void nrfx_gpiote_set_task_trigger(nrfx_gpiote_pin_t pin);
-#endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__SDK_DOXYGEN__)
+#endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__SDK_DOXYGEN__)
+#if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for triggering the task CLR manually.
  *
  * @param[in] pin Pin.
  */
 void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_pin_t pin);
-#endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__SDK_DOXYGEN__)
+#endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /** @} */
 

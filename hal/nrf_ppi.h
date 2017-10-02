@@ -39,7 +39,7 @@ typedef enum
     NRF_PPI_CHANNEL13 = PPI_CHEN_CH13_Pos, /**< Channel 13. */
     NRF_PPI_CHANNEL14 = PPI_CHEN_CH14_Pos, /**< Channel 14. */
     NRF_PPI_CHANNEL15 = PPI_CHEN_CH15_Pos, /**< Channel 15. */
-#if (PPI_CH_NUM > 16) || defined(__SDK_DOXYGEN__)
+#if (PPI_CH_NUM > 16) || defined(__NRFX_DOXYGEN__)
     NRF_PPI_CHANNEL16 = PPI_CHEN_CH16_Pos, /**< Channel 16. */
     NRF_PPI_CHANNEL17 = PPI_CHEN_CH17_Pos, /**< Channel 17. */
     NRF_PPI_CHANNEL18 = PPI_CHEN_CH18_Pos, /**< Channel 18. */
@@ -69,7 +69,7 @@ typedef enum
     NRF_PPI_CHANNEL_GROUP1 = 1, /**< Channel group 1. */
     NRF_PPI_CHANNEL_GROUP2 = 2, /**< Channel group 2. */
     NRF_PPI_CHANNEL_GROUP3 = 3, /**< Channel group 3. */
-#if (PPI_GROUP_NUM > 4) || defined(__SDK_DOXYGEN__)
+#if (PPI_GROUP_NUM > 4) || defined(__NRFX_DOXYGEN__)
     NRF_PPI_CHANNEL_GROUP4 = 4, /**< Channel group 4. */
     NRF_PPI_CHANNEL_GROUP5 = 5  /**< Channel group 5. */
 #endif
@@ -110,7 +110,7 @@ typedef enum
     NRF_PPI_TASK_CHG2_DIS = offsetof(NRF_PPI_Type, TASKS_CHG[2].DIS), /**< Task for disabling channel group 2 */
     NRF_PPI_TASK_CHG3_EN  = offsetof(NRF_PPI_Type, TASKS_CHG[3].EN),  /**< Task for enabling channel group 3 */
     NRF_PPI_TASK_CHG3_DIS = offsetof(NRF_PPI_Type, TASKS_CHG[3].DIS), /**< Task for disabling channel group 3 */
-#if (PPI_GROUP_NUM > 4) || defined(__SDK_DOXYGEN__)
+#if (PPI_GROUP_NUM > 4) || defined(__NRFX_DOXYGEN__)
     NRF_PPI_TASK_CHG4_EN  = offsetof(NRF_PPI_Type, TASKS_CHG[4].EN),  /**< Task for enabling channel group 4 */
     NRF_PPI_TASK_CHG4_DIS = offsetof(NRF_PPI_Type, TASKS_CHG[4].DIS), /**< Task for disabling channel group 4 */
     NRF_PPI_TASK_CHG5_EN  = offsetof(NRF_PPI_Type, TASKS_CHG[5].EN),  /**< Task for enabling channel group 5 */
@@ -205,7 +205,7 @@ __STATIC_INLINE void nrf_ppi_channel_endpoint_setup(nrf_ppi_channel_t channel,
     NRF_PPI->CH[(uint32_t) channel].TEP = tep;
 }
 
-#if defined(PPI_FEATURE_FORKS_PRESENT) || defined(__SDK_DOXYGEN__)
+#if defined(PPI_FEATURE_FORKS_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting up task endpoint for a given PPI fork.
  *

@@ -38,7 +38,7 @@ typedef enum
     NRFX_POWER_MODE_LOWPWR    /**< Low power mode        */
 }nrfx_power_mode_t;
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Events from power system
  */
@@ -53,7 +53,7 @@ typedef enum
 }nrfx_power_sleep_evt_t;
 #endif /* NRF_POWER_HAS_SLEEPEVT */
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Events from USB power system
  */
@@ -91,7 +91,7 @@ typedef enum
  */
 typedef void (*nrfx_power_pofwarn_event_handler_t)(void);
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Event handler for entering/exiting sleep
  *
@@ -100,7 +100,7 @@ typedef void (*nrfx_power_pofwarn_event_handler_t)(void);
 typedef void (*nrfx_power_sleep_event_handler_t)(nrfx_power_sleep_evt_t event);
 #endif
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Event handler for USB related power events
  *
@@ -127,7 +127,7 @@ typedef struct
      */
     bool dcdcen:1;
 
-#if NRF_POWER_HAS_VDDH || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
     /**
      * @brief Enable HV DCDC regulator
      *
@@ -149,12 +149,12 @@ typedef struct
 {
     nrfx_power_pofwarn_event_handler_t handler; //!< Event handler
     nrf_power_pof_thr_t                thr;     //!< Threshold for power failure detection
-#if NRF_POWER_HAS_VDDH || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
     nrf_power_pof_thrvddh_t            thrvddh; //!< Threshold for power failure detection on VDDH pin
 #endif
 }nrfx_power_pofwarn_config_t;
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The configuration of sleep event processing
  *
@@ -168,7 +168,7 @@ typedef struct
 }nrfx_power_sleepevt_config_t;
 #endif
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief The configuration of USB related power events
  *
@@ -186,7 +186,7 @@ typedef struct
  */
 nrfx_power_pofwarn_event_handler_t nrfx_power_pof_handler_get(void);
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting the handler of the USB power.
  * @return Handler of the USB power.
@@ -254,7 +254,7 @@ void nrfx_power_pof_disable(void);
  */
 void nrfx_power_pof_uninit(void);
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Initialize sleep entering and exiting events processing
  *
@@ -291,7 +291,7 @@ void nrfx_power_sleepevt_disable(void);
 void nrfx_power_sleepevt_uninit(void);
 #endif /* NRF_POWER_HAS_SLEEPEVT */
 
-#if NRF_POWER_HAS_USBREG || defined(__SDK_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Initialize USB power event processing
  *

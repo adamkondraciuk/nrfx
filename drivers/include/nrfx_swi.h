@@ -94,7 +94,7 @@ void nrfx_swi_trigger(nrfx_swi_t swi,
  */
 bool nrfx_swi_is_allocated(nrfx_swi_t swi);
 
-#if NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__SDK_DOXYGEN__)
+#if NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for returning the base address of the EGU peripheral
@@ -165,7 +165,7 @@ __STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
     return (uint32_t)nrf_egu_event_triggered_address_get(p_egu, channel);
 }
 
-#endif // NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__SDK_DOXYGEN__)
+#endif // NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__NRFX_DOXYGEN__)
 
 
 void nrfx_swi_0_irq_handler(void);
