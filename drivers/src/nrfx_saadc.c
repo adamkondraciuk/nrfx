@@ -632,4 +632,4 @@ void nrfx_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t limit_hig
         nrf_saadc_int_enable(int_mask);
     }
 }
-#endif // NRFX_CHECK(SAADC_ENABLED)
+#endif // NRFX_CHECK(NRFX_SAADC_ENABLED)

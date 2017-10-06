@@ -2,10 +2,10 @@
 
 #include <nrfx.h>
 #include <nrfx_power.h>
-#include <nrf_drv_clock.h>
+#include <nrfx_clock.h>
 
 
-#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(CLOCK_ENABLED)
+#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(NRFX_CLOCK_ENABLED)
 void nrfx_power_clock_irq_handler(void)
 {
     nrfx_power_irq_handler();

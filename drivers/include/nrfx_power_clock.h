@@ -16,15 +16,15 @@ __STATIC_INLINE void nrfx_power_clock_irq_init(void);
 __STATIC_INLINE void nrfx_power_clock_irq_init(void)
 {
     uint8_t priority;
-#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(CLOCK_ENABLED)
-    #if NRFX_POWER_CONFIG_IRQ_PRIORITY != CLOCK_CONFIG_IRQ_PRIORITY
+#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(NRFX_CLOCK_ENABLED)
+    #if NRFX_POWER_CONFIG_IRQ_PRIORITY != NRFX_CLOCK_CONFIG_IRQ_PRIORITY
     #error "IRQ priority for POWER and CLOCK have to be the same. Check <nrfx_config.h>."
     #endif
     priority = NRFX_POWER_CONFIG_IRQ_PRIORITY;
 #elif NRFX_CHECK(NRFX_POWER_ENABLED)
     priority = NRFX_POWER_CONFIG_IRQ_PRIORITY;
-#elif NRFX_CHECK(CLOCK_ENABLED)
-    priority = CLOCK_CONFIG_IRQ_PRIORITY;
+#elif NRFX_CHECK(NRFX_CLOCK_ENABLED)
+    priority = NRFX_CLOCK_CONFIG_IRQ_PRIORITY;
 #endif
 
     if (!NRFX_IRQ_IS_ENABLED(POWER_CLOCK_IRQn))
@@ -36,11 +36,11 @@ __STATIC_INLINE void nrfx_power_clock_irq_init(void)
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
 
-#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(CLOCK_ENABLED)
+#if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(NRFX_CLOCK_ENABLED)
 void nrfx_power_clock_irq_handler(void);
 #elif NRFX_CHECK(NRFX_POWER_ENABLED)
 #define nrfx_power_irq_handler  nrfx_power_clock_irq_handler
-#elif NRFX_CHECK(CLOCK_ENABLED)
+#elif NRFX_CHECK(NRFX_CLOCK_ENABLED)
 #define nrfx_clock_irq_handler  nrfx_power_clock_irq_handler
 #endif
 

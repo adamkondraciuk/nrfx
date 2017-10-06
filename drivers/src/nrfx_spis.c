@@ -432,4 +432,4 @@ void nrfx_spis_2_irq_handler(void)
 }
 #endif
 
-#endif // NRFX_CHECK(SPIS_ENABLED)
+#endif // NRFX_CHECK(NRFX_SPIS_ENABLED)

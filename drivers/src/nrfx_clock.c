@@ -85,7 +85,7 @@ void nrfx_clock_enable(void)
 {
     NRFX_ASSERT(m_clock_cb.module_initialized);
     nrfx_power_clock_irq_init();
-    nrf_clock_lf_src_set((nrf_clock_lfclk_t)CLOCK_CONFIG_LF_SRC);
+    nrf_clock_lf_src_set((nrf_clock_lfclk_t)NRFX_CLOCK_CONFIG_LF_SRC);
 
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
     nrfx_clock_irq_enabled = true;

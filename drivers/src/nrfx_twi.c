@@ -744,4 +744,4 @@ void nrfx_twi_1_irq_handler(void)
 }
 #endif
 
-#endif // NRFX_CHECK(TWI_ENABLED)
+#endif // NRFX_CHECK(NRFX_TWI_ENABLED)
