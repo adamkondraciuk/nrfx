@@ -67,6 +67,17 @@
 #error "No available SWI instances. Check <nrfx_config.h> and NRFX_SWI_USED."
 #endif
 
+#define NRFX_SWI_FIRST (0 + (NRFX_SWI_DISABLE_0 * (1 + \
+                             NRFX_SWI_DISABLE_1 * (1 + \
+                             NRFX_SWI_DISABLE_2 * (1 + \
+                             NRFX_SWI_DISABLE_3 * (1 + \
+                             NRFX_SWI_DISABLE_4))))))
+#define NRFX_SWI_LAST  (SWI_COUNT - 1 - (NRFX_SWI_DISABLE_5 * (1 + \
+                                         NRFX_SWI_DISABLE_4 * (1 + \
+                                         NRFX_SWI_DISABLE_3 * (1 + \
+                                         NRFX_SWI_DISABLE_2 * (1 + \
+                                         NRFX_SWI_DISABLE_1))))))
+
 #if NRFX_CHECK(NRFX_EGU_ENABLED)
 #define NRFX_SWI_EGU_COUNT  EGU_COUNT
 #else
@@ -137,7 +148,7 @@ ret_code_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
 {
     uint32_t err_code;
 
-    for (nrfx_swi_t swi = 0; swi < SWI_COUNT; ++swi)
+    for (nrfx_swi_t swi = NRFX_SWI_FIRST; swi <= NRFX_SWI_LAST; ++swi)
     {
         if (swi_is_available(swi))
         {
@@ -170,7 +181,7 @@ ret_code_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
 
 void nrfx_swi_all_free(void)
 {
-    for (nrfx_swi_t swi = 0; swi < SWI_COUNT; ++swi)
+    for (nrfx_swi_t swi = NRFX_SWI_FIRST; swi <= NRFX_SWI_LAST; ++swi)
     {
         if (swi_is_allocated(swi))
         {
@@ -232,7 +243,7 @@ void nrfx_swi_trigger(nrfx_swi_t swi, uint8_t flag_number)
 #if NRFX_SWI_EGU_COUNT
 static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 {
-    NRFX_ASSERT(swi < SWI_COUNT);
+    NRFX_ASSERT(swi >= NRFX_SWI_FIRST && swi <= NRFX_SWI_LAST);
     nrfx_swi_handler_t handler = m_swi_handlers[swi];
     NRFX_ASSERT(handler != NULL);
 
@@ -257,7 +268,7 @@ static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 #if (NRFX_SWI_EGU_COUNT < SWI_COUNT)
 static void swi_irq_handler(nrfx_swi_t swi)
 {
-    NRFX_ASSERT(swi < SWI_COUNT);
+    NRFX_ASSERT(swi >= NRFX_SWI_FIRST && swi <= NRFX_SWI_LAST);
     nrfx_swi_handler_t handler = m_swi_handlers[swi];
     NRFX_ASSERT(handler != NULL);
 
