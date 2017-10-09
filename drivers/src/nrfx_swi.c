@@ -59,22 +59,24 @@
 #endif
 
 #define NRFX_SWI_PRESENT_MASK   ((1u << SWI_COUNT) - 1)
-#define NRFX_SWI_AVAILABLE_MASK (NRFX_SWI_PRESENT_MASK & \
-                                 ~NRFX_SWI_RESERVED_MASK & \
-                                 ~NRFX_SWI_DISABLED_MASK)
+#define NRFX_SWI_AVAILABLE_MASK (NRFX_SWI_PRESENT_MASK &    \
+                                 ~(NRFX_SWI_RESERVED_MASK | \
+                                   NRFX_SWI_DISABLED_MASK))
 
 #if (NRFX_SWI_AVAILABLE_MASK == 0)
 #error "No available SWI instances. Check <nrfx_config.h> and NRFX_SWI_USED."
 #endif
 
-static nrfx_swi_handler_t m_swi_handlers[SWI_COUNT];
-#if !NRFX_CHECK(NRFX_EGU_ENABLED)
-static nrfx_swi_flags_t   m_swi_flags[SWI_COUNT];
-#elif (EGU_COUNT < SWI_COUNT)
-// When EGU support is enabled user flags are needed only for SWIs that have
-// no corresponding EGU unit.
-static nrfx_swi_flags_t   m_swi_flags[SWI_COUNT - EGU_COUNT];
+#if NRFX_CHECK(NRFX_EGU_ENABLED)
+#define NRFX_SWI_EGU_COUNT  EGU_COUNT
+#else
+#define NRFX_SWI_EGU_COUNT  0
 #endif
+
+// When EGU support is enabled, user flags are needed only for SWIs that have
+// no corresponding EGU unit.
+static nrfx_swi_flags_t   m_swi_flags[SWI_COUNT - NRFX_SWI_EGU_COUNT];
+static nrfx_swi_handler_t m_swi_handlers[SWI_COUNT];
 static uint8_t            m_swi_allocated_mask;
 
 
@@ -109,18 +111,21 @@ static void swi_handler_setup(nrfx_swi_t         swi,
 {
     m_swi_handlers[swi] = event_handler;
 
- #if NRFX_CHECK(NRFX_EGU_ENABLED)
-    if ((event_handler == NULL) || (swi >= EGU_COUNT))
+#if NRFX_CHECK(NRFX_EGU_ENABLED)
+    if (swi < NRFX_SWI_EGU_COUNT)
     {
-        return;
-    }
+        NRF_EGU_Type * p_egu = nrfx_swi_egu_instance_get(swi);
+        NRFX_ASSERT(p_egu != NULL);
+        nrf_egu_int_enable(p_egu, NRF_EGU_INT_ALL);
 
-    NRF_EGU_Type * p_egu = nrfx_swi_egu_instance_get(swi);
-    NRFX_ASSERT(p_egu != NULL);
-    nrf_egu_int_enable(p_egu, NRF_EGU_INT_ALL);
-#else
-    NRFX_ASSERT(event_handler != NULL);
+        if (event_handler == NULL)
+        {
+            return;
+        }
+    }
 #endif
+
+    NRFX_ASSERT(event_handler != NULL);
 
     NRFX_IRQ_PRIORITY_SET(swi_irq_number_get(swi), irq_priority);
     NRFX_IRQ_ENABLE(swi_irq_number_get(swi));
@@ -173,7 +178,7 @@ void nrfx_swi_all_free(void)
             m_swi_handlers[swi] = NULL;
         }
 #if NRFX_CHECK(NRFX_EGU_ENABLED)
-        if (swi < EGU_COUNT)
+        if (swi < NRFX_SWI_EGU_COUNT)
         {
             nrf_egu_int_disable(nrfx_swi_egu_instance_get(swi),
                                 NRF_EGU_INT_ALL);
@@ -203,14 +208,14 @@ void nrfx_swi_trigger(nrfx_swi_t swi, uint8_t flag_number)
 #if NRFX_CHECK(NRFX_EGU_ENABLED)
 
     NRF_EGU_Type * p_egu = nrfx_swi_egu_instance_get(swi);
-#if (EGU_COUNT < SWI_COUNT)
+#if (NRFX_SWI_EGU_COUNT < SWI_COUNT)
     if (p_egu == NULL)
     {
-        m_swi_flags[swi - EGU_COUNT] |= (1 << flag_number);
+        m_swi_flags[swi - NRFX_SWI_EGU_COUNT] |= (1 << flag_number);
         NVIC_SetPendingIRQ(swi_irq_number_get(swi));
     }
     else
-#endif // (EGU_COUNT < SWI_COUNT)
+#endif // (NRFX_SWI_EGU_COUNT < SWI_COUNT)
     {
         nrf_egu_task_trigger(p_egu,
             nrf_egu_task_trigger_get(p_egu, flag_number));
@@ -218,13 +223,13 @@ void nrfx_swi_trigger(nrfx_swi_t swi, uint8_t flag_number)
 
 #else // !NRFX_CHECK(NRFX_EGU_ENABLED)
 
-    m_swi_flags[swi] |= (1 << flag_number);
+    m_swi_flags[swi - NRFX_SWI_EGU_COUNT] |= (1 << flag_number);
     NVIC_SetPendingIRQ(swi_irq_number_get(swi));
 
 #endif
 }
 
-#if NRFX_CHECK(NRFX_EGU_ENABLED)
+#if NRFX_SWI_EGU_COUNT
 static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 {
     NRFX_ASSERT(swi < SWI_COUNT);
@@ -247,27 +252,27 @@ static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 
     handler(swi, flags);
 }
-#endif // NRFX_CHECK(NRFX_EGU_ENABLED)
+#endif // NRFX_SWI_EGU_COUNT
 
-#if !NRFX_CHECK(NRFX_EGU_ENABLED) || (EGU_COUNT < SWI_COUNT)
+#if (NRFX_SWI_EGU_COUNT < SWI_COUNT)
 static void swi_irq_handler(nrfx_swi_t swi)
 {
     NRFX_ASSERT(swi < SWI_COUNT);
     nrfx_swi_handler_t handler = m_swi_handlers[swi];
     NRFX_ASSERT(handler != NULL);
 
-    nrfx_swi_flags_t flags = m_swi_flags[swi];
-    m_swi_flags[swi] &= ~flags;
+    nrfx_swi_flags_t flags = m_swi_flags[swi - NRFX_SWI_EGU_COUNT];
+    m_swi_flags[swi - NRFX_SWI_EGU_COUNT] &= ~flags;
 
     handler(swi, flags);
 }
-#endif // !NRFX_CHECK(NRFX_EGU_ENABLED) || (EGU_COUNT < SWI_COUNT)
+#endif // (NRFX_SWI_EGU_COUNT < SWI_COUNT)
 
 
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 0))
 void nrfx_swi_0_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 0)
+#if (NRFX_SWI_EGU_COUNT > 0)
     egu_irq_handler(0, EGU0_CH_NUM);
 #else
     swi_irq_handler(0);
@@ -278,7 +283,7 @@ void nrfx_swi_0_irq_handler(void)
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 1))
 void nrfx_swi_1_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 1)
+#if (NRFX_SWI_EGU_COUNT > 1)
     egu_irq_handler(1, EGU1_CH_NUM);
 #else
     swi_irq_handler(1);
@@ -289,7 +294,7 @@ void nrfx_swi_1_irq_handler(void)
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 2))
 void nrfx_swi_2_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 2)
+#if (NRFX_SWI_EGU_COUNT > 2)
     egu_irq_handler(2, EGU2_CH_NUM);
 #else
     swi_irq_handler(2);
@@ -300,7 +305,7 @@ void nrfx_swi_2_irq_handler(void)
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 3))
 void nrfx_swi_3_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 3)
+#if (NRFX_SWI_EGU_COUNT > 3)
     egu_irq_handler(3, EGU3_CH_NUM);
 #else
     swi_irq_handler(3);
@@ -311,7 +316,7 @@ void nrfx_swi_3_irq_handler(void)
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 4))
 void nrfx_swi_4_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 4)
+#if (NRFX_SWI_EGU_COUNT > 4)
     egu_irq_handler(4, EGU4_CH_NUM);
 #else
     swi_irq_handler(4);
@@ -322,7 +327,7 @@ void nrfx_swi_4_irq_handler(void)
 #if (NRFX_SWI_AVAILABLE_MASK & (1u << 5))
 void nrfx_swi_5_irq_handler(void)
 {
-#if NRFX_CHECK(NRFX_EGU_ENABLED) && (EGU_COUNT > 5)
+#if (NRFX_SWI_EGU_COUNT > 5)
     egu_irq_handler(5, EGU5_CH_NUM);
 #else
     swi_irq_handler(5);
