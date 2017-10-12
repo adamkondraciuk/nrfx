@@ -4,7 +4,7 @@
 #define NRF_USBD_H__
 
 /**
- * @ingroup nrf_drivers
+ * @ingroup nrf_usbd
  * @defgroup nrf_usbd_hal USBD HAL
  * @{
  *

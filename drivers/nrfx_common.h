@@ -15,7 +15,7 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfx_common nrfx common module
+ * @defgroup nrfx_common Common module
  * @{
  * @ingroup nrfx
  */

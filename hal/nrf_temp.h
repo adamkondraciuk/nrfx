@@ -11,7 +11,7 @@ extern "C" {
 /**
 * @defgroup nrf_temperature TEMP (temperature) abstraction
 * @{
-* @ingroup nrf_drivers temperature_example
+* @ingroup nrf_temp temperature_example
 * @brief Temperature module init and read functions.
 *
 */
