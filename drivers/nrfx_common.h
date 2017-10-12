@@ -3,6 +3,13 @@
 #ifndef NRFX_COMMON_H__
 #define NRFX_COMMON_H__
 
+#include <stdint.h>
+#include <stddef.h>
+#include <stdbool.h>
+
+#include <nrf.h>
+#include <nrf_peripherals.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

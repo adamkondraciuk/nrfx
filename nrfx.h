@@ -3,15 +3,7 @@
 #ifndef NRFX_H__
 #define NRFX_H__
 
-#include <stdint.h>
-#include <stddef.h>
-#include <stdbool.h>
-
-#include <nrf.h>
-#include <nrf_peripherals.h>
-
 #include <nrfx_config.h>
-
 #include <drivers/nrfx_common.h>
 #include <nrfx_glue.h>
 #include <drivers/nrfx_errors.h>
