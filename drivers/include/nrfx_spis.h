@@ -151,8 +151,8 @@ typedef void (*nrfx_spis_event_handler_t)(nrfx_spis_event_t event);
  * @retval NRFX_ERROR_INVALID_PARAM If an invalid parameter is supplied.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if @ref NRFX_PRS_ENABLED
- *                                  is set to a value other than zero.
+ *                                  possible only if @ref nrfx_prs module
+ *                                  is enabled.
  * @retval NRFX_ERROR_INTERNAL      GPIOTE channel for detecting falling edges
  *                                  on CSN pin cannot be initialized. Possible
  *                                  only when using nRF52 Anomaly 109 workaround.

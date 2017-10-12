@@ -142,8 +142,8 @@ typedef void (*nrfx_uart_event_handler_t)(nrfx_uart_event_t const * p_event,
  * @retval    NRFX_ERROR_INVALID_STATE If driver is already initialized.
  * @retval    NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                     instance ID is already in use. This is
- *                                     possible only if NRFX_PRS_ENABLED
- *                                     is set to a value other than zero.
+ *                                     possible only if @ref nrfx_prs module
+ *                                     is enabled.
  */
 ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
                           nrfx_uart_config_t const * p_config,

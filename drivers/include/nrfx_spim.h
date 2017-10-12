@@ -217,8 +217,8 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if NRFX_PRS_ENABLED
- *                                  is set to a value other than zero.
+ *                                  possible only if @ref nrfx_prs module
+ *                                  is enabled.
  */
 ret_code_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
                           nrfx_spim_config_t const * p_config,

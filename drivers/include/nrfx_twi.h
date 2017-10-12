@@ -176,8 +176,8 @@ typedef void (* nrfx_twi_evt_handler_t)(nrfx_twi_evt_t const * p_event,
  * @retval NRFX_ERROR_INVALID_STATE If the driver is in invalid state.
  * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
  *                                  instance ID is already in use. This is
- *                                  possible only if @ref NRFX_PRS_ENABLED
- *                                  is set to a value other than zero.
+ *                                  possible only if @ref nrfx_prs module
+ *                                  is enabled.
  */
 ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_config_t const * p_config,
