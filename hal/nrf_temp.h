@@ -16,7 +16,6 @@ extern "C" {
 *
 */
 
-/**@cond NO_DOXYGEN */
 #define MASK_SIGN           (0x00000200UL)
 #define MASK_SIGN_EXTENSION (0xFFFFFC00UL)
 
@@ -41,7 +40,6 @@ static __INLINE int32_t nrf_temp_read(void)
     /**@note Workaround for PAN_028 rev2.0A anomaly 28 - TEMP: Negative measured values are not represented correctly */
     return ((NRF_TEMP->TEMP & MASK_SIGN) != 0) ? (NRF_TEMP->TEMP | MASK_SIGN_EXTENSION) : (NRF_TEMP->TEMP);
 }
-/**@endcond */
 
 /** @} */
 
