@@ -205,7 +205,6 @@ ret_code_t nrfx_qspi_mem_busy_check(void);
  * Use this function to transfer configuration data to memory and to receive data from memory.
  * Pointers can be addresses from flash memory.
  * This function is a synchronous function and should be used only if necessary.
- * See more: @ref hardware_driver_qspi.
  *
  * @param[in]  p_config    Pointer to the structure with opcode and transfer configuration.
  * @param[in]  p_tx_buffer Pointer to the array with data to send. Can be NULL if only opcode is transmitted.
