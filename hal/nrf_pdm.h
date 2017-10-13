@@ -2,20 +2,18 @@
 #ifndef NRF_PDM_H_
 #define NRF_PDM_H_
 
-/**
- * @defgroup nrf_pdm_hal PDM HAL
- * @{
- * @ingroup nrf_pdm
- *
- * @brief @tagAPI52 Hardware abstraction layer for accessing the pulse density modulation (PDM) peripheral.
- */
-
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_pdm_hal PDM HAL
+ * @{
+ * @ingroup nrf_pdm
+ * @brief   Hardware access layer for managing the Pulse Density Modulation (PDM) peripheral.
+ */
 
 #define NRF_PDM_GAIN_MINIMUM  0x00
 #define NRF_PDM_GAIN_DEFAULT  0x28
@@ -342,11 +340,7 @@ __STATIC_INLINE uint32_t * nrf_pdm_buffer_get()
     return (uint32_t *)NRF_PDM->SAMPLE.PTR;
 }
 
-
-/**
- *@}
- **/
-
+/** @} */
 
 #ifdef __cplusplus
 }

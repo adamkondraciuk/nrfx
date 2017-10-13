@@ -12,21 +12,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrf_power Power HAL and driver
- * @ingroup nrf_drivers
- * @brief POWER peripheral APIs.
- *
- * The power peripheral HAL provides basic APIs for accessing
- * the registers of the POWER peripheral.
- * The POWER driver provides APIs on a higher level.
- */
-
-/**
  * @defgroup nrfx_power POWER driver
  * @{
  * @ingroup nrf_power
- * @brief Driver for managing events and the state of POWER peripheral.
- *
+ * @brief   POWER peripheral driver.
  */
 
 /**
@@ -329,8 +318,6 @@ __STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void);
 
 #endif /* NRF_POWER_HAS_USBREG */
 
-/** @} */
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 #if NRF_POWER_HAS_USBREG
@@ -351,7 +338,11 @@ __STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void)
 
 #endif /* SUPPRESS_INLINE_IMPLEMENTATION */
 
+
 void nrfx_power_irq_handler(void);
+
+
+/** @} */
 
 #ifdef __cplusplus
 }

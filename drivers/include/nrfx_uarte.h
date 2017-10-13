@@ -13,8 +13,8 @@ extern "C" {
 /**
  * @defgroup nrfx_uarte UARTE driver
  * @{
- * @ingroup  nrf_uart
- * @brief    Multi-instance UARTE driver.
+ * @ingroup nrf_uarte
+ * @brief   UARTE peripheral driver.
  */
 
 /**

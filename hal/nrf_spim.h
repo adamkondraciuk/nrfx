@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @defgroup nrf_spim_hal SPIM HAL
- * @{
- * @ingroup nrf_spi
- *
- * @brief Hardware access layer for accessing the SPIM peripheral.
- */
 
 #ifndef NRF_SPIM_H__
 #define NRF_SPIM_H__
@@ -16,6 +9,12 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_spim_hal SPIM HAL
+ * @{
+ * @ingroup nrf_spim
+ * @brief   Hardware access layer for managing the SPIM peripheral.
+ */
 
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
@@ -505,11 +504,10 @@ __STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_SPIM_H__
-
-/** @} */

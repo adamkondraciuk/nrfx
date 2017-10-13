@@ -1,10 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
 
-/**
- * @file
- * @brief ADC HAL implementation
- */
-
 #include <nrfx.h>
 
 #ifdef ADC_PRESENT

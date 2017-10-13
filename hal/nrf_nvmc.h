@@ -1,8 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2012>$$$*/
-/**
- * @file
- * @brief NMVC driver API.
- */
 
 #ifndef NRF_NVMC_H__
 #define NRF_NVMC_H__
@@ -15,10 +11,10 @@ extern "C" {
 
 
 /**
- * @defgroup nrf_nvmc Non-volatile memory controller
+ * @defgroup nrf_nvmc_hal NVMC HAL
  * @{
- * @ingroup nrf_drivers
- * @brief Driver for the NVMC peripheral.
+ * @ingroup nrf_nvmc
+ * @brief   Hardware access layer for managing the Non-Volatile Memory Controller (NVMC) peripheral.
  *
  * This driver allows writing to the non-volatile memory (NVM) regions
  * of the chip. In order to write to NVM the controller must be powered
@@ -76,12 +72,10 @@ void nrf_nvmc_write_bytes(uint32_t  address, const uint8_t * src, uint32_t num_b
 void nrf_nvmc_write_words(uint32_t address, const uint32_t * src, uint32_t num_words);
 
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_NVMC_H__
-/** @} */
-
-

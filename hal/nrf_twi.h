@@ -1,20 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_TWI_H__
 #define NRF_TWI_H__
-
-/**
- * @defgroup nrf_twi_hal TWI HAL
- * @{
- * @ingroup nrf_twi
- *
- * @brief Hardware access layer for managing the TWI peripheral.
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_twi_hal TWI HAL
+ * @{
+ * @ingroup nrf_twi
+ * @brief   Hardware access layer for managing the TWI peripheral.
+ */
 
 /**
  * @brief TWI tasks.
@@ -272,11 +272,6 @@ __STATIC_INLINE void nrf_twi_txd_set(NRF_TWI_Type * p_reg, uint8_t data);
 __STATIC_INLINE void nrf_twi_shorts_set(NRF_TWI_Type * p_reg,
                                         uint32_t shorts_mask);
 
-/**
- * @}
- */
-
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE void nrf_twi_task_trigger(NRF_TWI_Type * p_reg,
@@ -409,6 +404,7 @@ __STATIC_INLINE void nrf_twi_shorts_set(NRF_TWI_Type * p_reg,
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }

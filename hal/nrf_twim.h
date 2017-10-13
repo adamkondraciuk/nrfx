@@ -1,20 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_TWIM_H__
 #define NRF_TWIM_H__
-
-/**
- * @defgroup nrf_twim_hal TWIM HAL
- * @{
- * @ingroup nrf_twi
- *
- * @brief Hardware access layer for managing the TWIM peripheral.
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_twim_hal TWIM HAL
+ * @{
+ * @ingroup nrf_twim
+ * @brief   Hardware access layer for managing the TWIM peripheral.
+ */
 
 /**
  * @brief TWIM tasks.
@@ -316,11 +316,6 @@ __STATIC_INLINE void nrf_twim_rx_list_enable(NRF_TWIM_Type * p_reg);
  */
 __STATIC_INLINE void nrf_twim_rx_list_disable(NRF_TWIM_Type * p_reg);
 
-/**
- * @}
- */
-
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE void nrf_twim_task_trigger(NRF_TWIM_Type * p_reg,
@@ -480,6 +475,7 @@ __STATIC_INLINE void nrf_twim_rx_list_disable(NRF_TWIM_Type * p_reg)
 }
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }

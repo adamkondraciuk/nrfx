@@ -1,20 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_SAADC_H_
 #define NRF_SAADC_H_
-
-/**
- * @defgroup nrf_saadc_hal SAADC HAL
- * @{
- * @ingroup nrf_saadc
- *
- * @brief @tagAPI52 Hardware access layer for accessing the SAADC peripheral.
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_saadc_hal SAADC HAL
+ * @{
+ * @ingroup nrf_saadc
+ * @brief   Hardware access layer for managing the SAADC peripheral.
+ */
 
 #define NRF_SAADC_CHANNEL_COUNT 8
 
@@ -567,10 +567,8 @@ __STATIC_INLINE void nrf_saadc_channel_init(uint8_t                             
             | ((config->burst      << SAADC_CH_CONFIG_BURST_Pos)  & SAADC_CH_CONFIG_BURST_Msk);
     nrf_saadc_channel_input_set(channel, config->pin_p, config->pin_n);
 }
-/**
- *@}
- **/
 
+/** @} */
 
 #ifdef __cplusplus
 }

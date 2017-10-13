@@ -1,12 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @ingroup nrf_twis
- * @defgroup nrf_twis_hal TWIS HAL
- * @{
- *
- * @brief @tagAPI52 Hardware access layer for Two Wire Interface Slave with EasyDMA
- * (TWIS) peripheral.
- */
+
 #ifndef NRF_TWIS_H__
 #define NRF_TWIS_H__
 
@@ -15,6 +8,14 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_twis_hal TWIS HAL
+ * @{
+ * @ingroup nrf_twis
+ * @brief   Hardware access layer for managing the Two Wire Interface Slave with EasyDMA
+ *          (TWIS) peripheral.
+ */
 
 /**
  * @brief TWIS tasks
@@ -661,4 +662,3 @@ uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * const p_reg)
 #endif
 
 #endif /* NRF_TWIS_H__ */
-

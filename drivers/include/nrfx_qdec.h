@@ -14,7 +14,7 @@ extern "C" {
  * @defgroup nrfx_qdec QDEC driver
  * @{
  * @ingroup nrf_qdec
- * @brief Quadrature decoder (QDEC) driver.
+ * @brief   Quadrature Decoder (QDEC) peripheral driver.
  */
 
 /**@brief QDEC configuration structure.*/

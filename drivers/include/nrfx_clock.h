@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
+
 #ifndef NRFX_CLOCK_H__
 #define NRFX_CLOCK_H__
 
@@ -11,10 +12,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfx_clock Clock driver
+ * @defgroup nrfx_clock CLOCK driver
  * @{
  * @ingroup nrf_clock
- * @brief Driver for managing the low-frequency clock (LFCLK) and the high-frequency clock (HFCLK).
+ * @brief   CLOCK peripheral driver.
  */
 
 /**
@@ -145,9 +146,6 @@ __STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task);
  */
 __STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event);
 
-/**
- *@}
- **/
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 __STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task)
@@ -171,7 +169,11 @@ __STATIC_INLINE bool nrfx_clock_lfclk_is_running(void)
 }
 #endif //SUPPRESS_INLINE_IMPLEMENTATION
 
+
 void nrfx_clock_irq_handler(void);
+
+
+/** @} */
 
 #ifdef __cplusplus
 }

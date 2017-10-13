@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_CLOCK_H__
 #define NRF_CLOCK_H__
 
@@ -12,7 +13,10 @@ extern "C" {
  * @defgroup nrf_clock_hal Clock HAL
  * @{
  * @ingroup nrf_clock
- * @brief Hardware access layer for managing the low-frequency clock (LFCLK) and the high-frequency clock (HFCLK).
+ * @brief   Hardware access layer for managing the CLOCK peripheral.
+ *
+ * This code can be used to managing low-frequency clock (LFCLK) and the high-frequency clock
+ * (HFCLK) settings.
  */
 
 #define NRF_CLOCK_TASK_TRIGGER (1UL)
@@ -349,9 +353,7 @@ __STATIC_INLINE void nrf_clock_cal_timer_timeout_set(uint32_t interval)
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
-/**
- *@}
- **/
+/** @} */
 
 #ifdef __cplusplus
 }

@@ -15,8 +15,7 @@ extern "C" {
  * @defgroup nrfx_twis TWIS driver
  * @{
  * @ingroup nrf_twis
- *
- * @brief   Two Wire Slave interface (TWIS) driver.
+ * @brief   Two Wire Slave interface (TWIS) peripheral driver.
  */
 
 /**
@@ -349,6 +348,7 @@ __STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance)
 
 void nrfx_twis_0_irq_handler(void);
 void nrfx_twis_1_irq_handler(void);
+
 
 /** @} */
 

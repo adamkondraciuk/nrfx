@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**
- * @defgroup nrf_timer_hal Timer HAL
- * @{
- * @ingroup nrf_timer
- *
- * @brief Hardware access layer for accessing the timer peripheral.
- */
 
 #ifndef NRF_TIMER_H__
 #define NRF_TIMER_H__
@@ -16,6 +9,12 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_timer_hal TIMER HAL
+ * @{
+ * @ingroup nrf_timer
+ * @brief   Hardware access layer for managing the TIMER peripheral.
+ */
 
 /**
  * @brief Macro for validating the correctness of the BIT_WIDTH setting.
@@ -576,11 +575,10 @@ __STATIC_INLINE uint32_t nrf_timer_ms_to_ticks(uint32_t time_ms,
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_TIMER_H__
-
-/** @} */

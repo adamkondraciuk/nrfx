@@ -11,17 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup nrf_lpcomp LPCOMP HAL and driver
- * @ingroup nrf_drivers
- * @brief Low Power Comparator (LPCOMP) APIs.
- *
- * The LPCOMP HAL provides basic APIs for accessing the registers of Low Power Comparator.
- * The LPCOMP driver provides APIs on a higher level.
- *
  * @defgroup nrfx_lpcomp LPCOMP driver
  * @{
  * @ingroup nrf_lpcomp
- * @brief Low Power Comparator (LPCOMP) driver.
+ * @brief   Low Power Comparator (LPCOMP) peripheral driver.
  */
 
 /**

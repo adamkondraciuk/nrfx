@@ -1,10 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_spis SPIS HAL and driver
- * @ingroup    nrf_drivers
- * @brief      SPIS APIs.
- *
- */
 
 #ifndef NRFX_SPIS_H__
 #define NRFX_SPIS_H__
@@ -20,8 +14,8 @@ extern "C" {
 /**
  * @defgroup nrfx_spis SPI slave driver
  * @{
- * @ingroup  nrf_spis
- * @brief    Multi-instance SPI slave driver.
+ * @ingroup nrf_spis
+ * @brief   SPI Slave peripheral driver.
  */
 
 #define NRFX_SPIS_DEFAULT_CSN_PULLUP  NRF_GPIO_PIN_NOPULL /**< Default pull-up configuration of the SPI CS. */
@@ -212,10 +206,11 @@ void nrfx_spis_1_irq_handler(void);
 void nrfx_spis_2_irq_handler(void);
 
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_SPIS_H__
 
-/** @} */

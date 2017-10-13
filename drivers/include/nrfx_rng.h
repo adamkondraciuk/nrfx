@@ -13,7 +13,7 @@ extern "C" {
  * @defgroup nrfx_rng RNG driver
  * @{
  * @ingroup nrf_rng
- * @brief Driver for managing the random number generator (RNG).
+ * @brief   Random Number Generator (RNG) peripheral driver.
  */
 
 /**
@@ -77,11 +77,11 @@ void nrfx_rng_stop(void);
  */
 void nrfx_rng_uninit(void);
 
+
 void nrfx_rng_irq_handler(void);
 
-/**
- *@}
- **/
+
+/** @} */
 
 #ifdef __cplusplus
 }

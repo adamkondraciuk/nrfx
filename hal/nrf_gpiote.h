@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_GPIOTE_H__
 #define NRF_GPIOTE_H__
 
@@ -8,17 +9,18 @@
 extern "C" {
 #endif
 
+/**
+* @defgroup nrf_gpiote_hal GPIOTE HAL
+* @{
+* @ingroup nrf_gpiote
+* @brief   Hardware access layer for managing the GPIOTE peripheral.
+*/
+
 #ifdef GPIOTE_CONFIG_PORT_Msk
 #define GPIOTE_CONFIG_PORT_PIN_Msk (GPIOTE_CONFIG_PORT_Msk | GPIOTE_CONFIG_PSEL_Msk)
 #else
 #define GPIOTE_CONFIG_PORT_PIN_Msk GPIOTE_CONFIG_PSEL_Msk
 #endif
-/**
-* @defgroup nrf_gpiote_abs GPIOTE abstraction
-* @{
-* @ingroup nrf_gpiote
-* @brief GPIOTE abstraction for configuration of channels.
-*/
 
  /**
  * @enum nrf_gpiote_polarity_t
@@ -378,8 +380,8 @@ __STATIC_INLINE void nrf_gpiote_te_default(uint32_t idx)
     NRF_GPIOTE->CONFIG[idx] = 0;
 }
 #endif //SUPPRESS_INLINE_IMPLEMENTATION
-/** @} */
 
+/** @} */
 
 #ifdef __cplusplus
 }

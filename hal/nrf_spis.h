@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @defgroup nrf_spis_hal SPIS HAL
- * @{
- * @ingroup nrf_spis
- *
- * @brief Hardware access layer for accessing the SPIS peripheral.
- */
 
 #ifndef NRF_SPIS_H__
 #define NRF_SPIS_H__
@@ -16,6 +9,12 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_spis_hal SPIS HAL
+ * @{
+ * @ingroup nrf_spis
+ * @brief   Hardware access layer for managing the SPIS peripheral.
+ */
 
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spis_pins_set
@@ -500,11 +499,10 @@ __STATIC_INLINE void nrf_spis_def_set(NRF_SPIS_Type * p_reg,
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_SPIS_H__
-
-/** @} */

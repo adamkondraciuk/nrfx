@@ -13,8 +13,8 @@ extern "C" {
 /**
  * @defgroup nrfx_spim SPIM driver
  * @{
- * @ingroup  nrf_spi
- * @brief    Multi-instance SPIM driver.
+ * @ingroup nrf_spim
+ * @brief   SPIM peripheral driver.
  */
 
 /**
@@ -344,6 +344,7 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance);
 void nrfx_spim_0_irq_handler(void);
 void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
+
 
 /** @} */
 

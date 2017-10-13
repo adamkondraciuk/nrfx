@@ -1,9 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2012>$$$*/
-/**
- * @file
- * @brief Implementation of AES ECB driver
- */
-
 
 //lint -e438
 

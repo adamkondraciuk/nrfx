@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
-/**
- * @defgroup nrf_qspi_hal QSPI HAL
- * @{
- * @ingroup nrf_qspi
- *
- * @brief Hardware access layer for accessing the QSPI peripheral.
- */
 
 #ifndef NRF_QSPI_H__
 #define NRF_QSPI_H__
@@ -15,6 +8,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_qspi_hal QSPI HAL
+ * @{
+ * @ingroup nrf_qspi
+ * @brief   Hardware access layer for managing the QSPI peripheral.
+ */
 
 /**
  * @brief This value can be used as a parameter for the @ref nrf_qspi_pins_set
@@ -715,10 +715,10 @@ __STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *             
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_QSPI_H__
-
-/** @} */

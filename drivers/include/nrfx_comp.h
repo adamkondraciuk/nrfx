@@ -11,17 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup nrf_comp COMP HAL and driver
- * @ingroup nrf_drivers
- * @brief @tagAPI52 Comparator (COMP) APIs.
- *
- * The COMP HAL provides basic APIs for accessing the registers of Comparator.
- * The COMP driver provides APIs on a higher level.
- *
  * @defgroup nrfx_comp COMP driver
  * @{
  * @ingroup nrf_comp
- * @brief @tagAPI52 Comparator (COMP) driver.
+ * @brief   Comparator (COMP) peripheral driver.
  */
 
 /**
@@ -189,6 +182,7 @@ __STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event)
 
 
 void nrfx_comp_irq_handler(void);
+
 
 /** @} **/
 

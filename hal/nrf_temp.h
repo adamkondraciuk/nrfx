@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2012>$$$*/
+
 #ifndef NRF_TEMP_H__
 #define NRF_TEMP_H__
 
@@ -9,11 +10,10 @@ extern "C" {
 #endif
 
 /**
-* @defgroup nrf_temperature TEMP (temperature) abstraction
+* @defgroup nrf_temp_hal TEMP HAL
 * @{
 * @ingroup nrf_temp temperature_example
-* @brief Temperature module init and read functions.
-*
+* @brief   Temperature module init and read functions.
 */
 
 #define MASK_SIGN           (0x00000200UL)
@@ -42,7 +42,6 @@ static __INLINE int32_t nrf_temp_read(void)
 }
 
 /** @} */
-
 
 #ifdef __cplusplus
 }

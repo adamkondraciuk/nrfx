@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @defgroup nrf_i2s_hal I2S HAL
- * @{
- * @ingroup nrf_i2s
- *
- * @brief @tagAPI52 Hardware access layer for managing the Inter-IC Sound (I2S) peripheral.
- */
 
 #ifndef NRF_I2S_H__
 #define NRF_I2S_H__
@@ -16,6 +9,12 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_i2s_hal I2S HAL
+ * @{
+ * @ingroup nrf_i2s
+ * @brief   Hardware access layer for managing the Inter-IC Sound (I2S) peripheral.
+ */
 
 /**
  * @brief This value can be provided as a parameter for the @ref nrf_i2s_pins_set
@@ -511,11 +510,10 @@ __STATIC_INLINE uint32_t * nrf_i2s_tx_buffer_get(NRF_I2S_Type const * p_i2s)
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRF_I2S_H__
-
-/** @} */

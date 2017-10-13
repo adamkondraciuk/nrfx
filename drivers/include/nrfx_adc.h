@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRFX_ADC_H__
 #define NRFX_ADC_H__
 
@@ -10,16 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup nrf_adc ADC HAL and driver
- * @ingroup nrf_drivers
- * @brief Analog-to-digital converter (ADC) APIs.
- * @details The ADC HAL provides basic APIs for accessing the registers of the analog-to-digital converter.
- * The ADC driver provides APIs on a higher level.
- *
  * @defgroup nrfx_adc ADC driver
  * @{
  * @ingroup nrf_adc
- * @brief Analog-to-digital converter (ADC) driver.
+ * @brief   Analog-to-Digital Converter (ADC) peripheral driver.
  */
 
 /**
@@ -251,11 +246,12 @@ __STATIC_INLINE uint32_t nrfx_adc_start_task_get(void)
 }
 
 #endif
-/** @} */
 
 
 void nrfx_adc_irq_handler(void);
 
+
+/** @} */
 
 #ifdef __cplusplus
 }

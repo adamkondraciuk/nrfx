@@ -1,6 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
 
-
 #ifndef NRFX_PDM_H__
 #define NRFX_PDM_H__
 
@@ -12,18 +11,10 @@ extern "C" {
 #endif
 
 /**
- * @addtogroup nrf_pdm PDM HAL and driver
- * @ingroup    nrf_drivers
- * @brief      @tagAPI52 Pulse density modulation (PDM) interface APIs.
- *
- * The PDM HAL provides basic APIs for accessing the registers of the PDM interface peripheral.
- * The PDM driver provides APIs on a higher level.
- *
  * @defgroup nrfx_pdm PDM driver
  * @{
- * @ingroup  nrf_pdm
- *
- * @brief    @tagAPI52 Pulse density modulation (PDM) interface driver.
+ * @ingroup nrf_pdm
+ * @brief   Pulse Density Modulation (PDM) peripheral driver.
  */
 
 
@@ -174,6 +165,7 @@ ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
 
 
 void nrfx_pdm_irq_handler(void);
+
 
 /** @} */
 

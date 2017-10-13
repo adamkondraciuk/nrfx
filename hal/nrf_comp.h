@@ -1,24 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @file
- * @brief COMP HAL API.
- */
 
 #ifndef NRF_COMP_H_
 #define NRF_COMP_H_
-
-/**
- * @defgroup nrf_comp_hal COMP HAL
- * @{
- * @ingroup nrf_comp
- * @brief @tagAPI52 Hardware access layer for managing the Comparator (COMP).
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_comp_hal COMP HAL
+ * @{
+ * @ingroup nrf_comp
+ * @brief   Hardware access layer for managing the Comparator (COMP) peripheral.
+ */
 
 /**
  * @enum nrf_comp_input_t
@@ -457,10 +453,7 @@ __STATIC_INLINE bool nrf_comp_event_check(nrf_comp_event_t comp_event)
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
-/**
- *@}
- **/
-
+/** @} */
 
 #ifdef __cplusplus
 }

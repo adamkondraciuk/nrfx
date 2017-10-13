@@ -5,103 +5,70 @@ The nrfx documentation includes descriptions and other reference material to hel
 
 @defgroup nrfx_drivers All Drivers
 @{
-@defgroup nrf_adc ADC HAL and driver
-@brief ADC driver API.
+@defgroup nrf_adc ADC
 
-@defgroup nrf_clock CLOCK HAL and driver
-@brief CLOCK driver API.
+@defgroup nrf_clock CLOCK
 
-@defgroup nrf_comp COMP HAL and driver
-@brief COMP driver API.
+@defgroup nrf_comp COMP
 
-@defgroup nrf_ecb ECB HAL
-@brief ECB driver API.
+@defgroup nrf_ecb ECB
 
-@defgroup nrf_gpio GPIO HAL
-@brief GPIO driver API.
+@defgroup nrf_gpio GPIO
 
-@defgroup nrf_gpiote GPIOTE HAL and driver
-@brief GPIOTE driver API.
+@defgroup nrf_gpiote GPIOTE
 
-@defgroup nrf_i2s I2S HAL and driver
-@brief I2S driver API.
+@defgroup nrf_i2s I2S
 
-@defgroup nrf_lpcomp LPCOMP HAL and driver
-@brief LPCOMP driver API.
+@defgroup nrf_lpcomp LPCOMP
 
-@defgroup nrf_nvmc NVMC HAL
-@brief NVMC driver API.
+@defgroup nrf_nvmc NVMC
 
-@defgroup nrf_pdm PDM HAL and driver
-@brief PDM driver API.
+@defgroup nrf_pdm PDM
 
-@defgroup nrf_power POWER HAL and driver
-@brief POWER driver API.
+@defgroup nrf_power POWER
 
-@defgroup nrf_ppi PPI HAL and allocator
-@brief PPI driver API.
+@defgroup nrf_ppi PPI
 
-@defgroup nrf_pwm PWM HAL and driver
-@brief PWM driver API.
+@defgroup nrf_pwm PWM
 
-@defgroup nrf_qdec QDEC HAL and driver
-@brief QDEC driver API.
+@defgroup nrf_qdec QDEC
 
-@defgroup nrf_qspi QSPI HAL and driver
-@brief QSPI driver API.
+@defgroup nrf_qspi QSPI
 
-@defgroup nrf_rng RNG HAL and driver
-@brief RNG driver API.
+@defgroup nrf_rng RNG
 
-@defgroup nrf_rtc RTC HAL and driver
-@brief RTC driver API.
+@defgroup nrf_rtc RTC
 
-@defgroup nrf_saadc SAADC HAL and driver
-@brief SAADC driver API.
+@defgroup nrf_saadc SAADC
 
-@defgroup nrf_spi SPI HAL and driver
-@brief SPI driver API.
+@defgroup nrf_spi SPI
 
-@defgroup nrf_spim SPIM HAL and driver
-@brief SPIM driver API.
+@defgroup nrf_spim SPIM
 
-@defgroup nrf_spis SPIS HAL and driver
-@brief SPIS driver API.
+@defgroup nrf_spis SPIS
 
-@defgroup nrf_systick Cortex-M Systick HAL
-@brief Cortex-M Systick driver API.
+@defgroup nrf_systick Cortex-M Systick
 
-@defgroup nrf_swi_egu SWI(EGU) HAL and allocator
-@brief SWI(EGU) driver API.
+@defgroup nrf_swi_egu SWI/EGU
 
-@defgroup nrf_temp TEMP HAL
-@brief Temperature driver API.
+@defgroup nrf_temp TEMP
 
-@defgroup nrf_timer TIMER HAL and driver
-@brief TIMER driver API.
+@defgroup nrf_timer TIMER
 
-@defgroup nrf_twi TWI HAL and driver
-@brief TWI driver API.
+@defgroup nrf_twi TWI
 
-@defgroup nrf_twim TWIM HAL and driver
-@brief TWIM driver API.
+@defgroup nrf_twim TWIM
 
-@defgroup nrf_twis TWIS HAL and driver
-@brief TWIS driver API.
+@defgroup nrf_twis TWIS
 
-@defgroup nrf_uart UART HAL and driver
-@brief UART driver API.
+@defgroup nrf_uart UART
 
-@defgroup nrf_uarte UARTE HAL and driver
-@brief UARTE driver API.
+@defgroup nrf_uarte UARTE
 
-@defgroup nrf_usbd USBD HAL and driver
-@brief USB driver API.
+@defgroup nrf_usbd USBD
 
-@defgroup nrf_wdt WDT HAL and driver
-@brief WDT driver API.
+@defgroup nrf_wdt WDT
 @}
 
 @defgroup nrfx nrfx API
-@brief nrfx API.
 */

@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_UARTE_H__
 #define NRF_UARTE_H__
 
@@ -13,9 +14,8 @@ extern "C" {
 /**
  * @defgroup nrf_uarte_hal UARTE HAL
  * @{
- * @ingroup nrf_uart
- *
- * @brief Hardware access layer for accessing the UARTE peripheral.
+ * @ingroup nrf_uarte
+ * @brief   Hardware access layer for managing the UARTE peripheral.
  */
 
 /**
@@ -525,6 +525,7 @@ __STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type * p_reg)
     return p_reg->RXD.AMOUNT;
 }
 #endif //SUPPRESS_INLINE_IMPLEMENTATION
+
 /** @} */
 
 #ifdef __cplusplus

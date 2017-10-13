@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_UART_H__
 #define NRF_UART_H__
 
@@ -15,8 +16,7 @@ extern "C" {
  * @defgroup nrf_uart_hal UART HAL
  * @{
  * @ingroup nrf_uart
- *
- * @brief Hardware access layer for accessing the UART peripheral.
+ * @brief   Hardware access layer for managing the UART peripheral.
  */
 
 #define NRF_UART_PSEL_DISCONNECTED 0xFFFFFFFF
@@ -498,6 +498,7 @@ __STATIC_INLINE void nrf_uart_baudrate_set(NRF_UART_Type   * p_reg, nrf_uart_bau
     p_reg->BAUDRATE = baudrate;
 }
 #endif //SUPPRESS_INLINE_IMPLEMENTATION
+
 /** @} */
 
 #ifdef __cplusplus

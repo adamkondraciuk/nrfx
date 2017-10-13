@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_GPIO_H__
 #define NRF_GPIO_H__
 
@@ -9,10 +10,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrf_gpio GPIO abstraction
+ * @defgroup nrf_gpio_hal GPIO HAL
  * @{
- * @ingroup nrf_drivers
- * @brief GPIO pin abstraction and port abstraction for reading and writing byte-wise to GPIO ports.
+ * @ingroup nrf_gpio
+ * @brief   Hardware access layer for managing the GPIO peripheral.
  */
 
 #if (GPIO_COUNT == 1)
@@ -738,7 +739,6 @@ __STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number)
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
 /** @} */
-
 
 #ifdef __cplusplus
 }

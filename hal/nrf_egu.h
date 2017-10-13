@@ -1,20 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_EGU_H__
 #define NRF_EGU_H__
-
-/**
-* @defgroup nrf_egu EGU (Event Generator Unit) abstraction
-* @{
-* @ingroup nrf_swi_egu
-* @brief @tagAPI52 EGU (Event Generator Unit) module functions.
-*
-*/
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+* @defgroup nrf_egu_hal EGU HAL
+* @{
+* @ingroup nrf_swi_egu
+* @brief   Hardware access layer for managing the Event Generator Unit (EGU) peripheral.
+*/
 
 /**
  * @enum  nrf_egu_task_t
@@ -315,7 +315,6 @@ __STATIC_INLINE nrf_egu_int_mask_t nrf_egu_int_get(NRF_EGU_Type * NRF_EGUx, uint
 }
 
 /** @} */
-
 
 #ifdef __cplusplus
 }

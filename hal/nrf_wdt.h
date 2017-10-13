@@ -1,11 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @defgroup nrf_wdt_hal WDT HAL
- * @{
- * @ingroup nrf_wdt
- *
- * @brief Hardware access layer for accessing the watchdog timer (WDT) peripheral.
- */
 
 #ifndef NRF_WDT_H__
 #define NRF_WDT_H__
@@ -15,6 +8,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_wdt_hal WDT HAL
+ * @{
+ * @ingroup nrf_wdt
+ * @brief   Hardware access layer for managing the Watchdog Timer (WDT) peripheral.
+ */
 
 #define NRF_WDT_CHANNEL_NUMBER 0x8UL
 #define NRF_WDT_RR_VALUE       0x6E524635UL /* Fixed value, shouldn't be modified.*/
@@ -286,12 +286,10 @@ __STATIC_INLINE void nrf_wdt_reload_request_set(nrf_wdt_rr_register_t rr_registe
     NRF_WDT->RR[rr_register] = NRF_WDT_RR_VALUE;
 }
 
-
+/** @} */
 
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-
-/** @} */

@@ -1,15 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_i2s I2S HAL and driver
- * @ingroup    nrf_drivers
- * @brief      @tagAPI52 Inter-IC Sound (I2S) interface APIs.
- *
- * @defgroup   nrfx_i2s I2S driver
- * @{
- * @ingroup    nrf_i2s
- * @brief      @tagAPI52 Inter-IC Sound (I2S) interface driver.
- */
-
 
 #ifndef NRFX_I2S_H__
 #define NRFX_I2S_H__
@@ -20,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_i2s I2S driver
+ * @{
+ * @ingroup nrf_i2s
+ * @brief   Inter-IC Sound (I2S) peripheral driver.
+ */
 
 
 /**
@@ -209,10 +205,11 @@ void       nrfx_i2s_stop(void);
 void nrfx_i2s_irq_handler(void);
 
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_I2S_H__
 
-/** @} */

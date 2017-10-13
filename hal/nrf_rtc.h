@@ -1,24 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**
- * @file
- * @brief RTC HAL API.
- */
 
 #ifndef NRF_RTC_H
 #define NRF_RTC_H
-
-/**
- * @defgroup nrf_rtc_hal RTC HAL
- * @{
- * @ingroup nrf_rtc
- * @brief Hardware access layer for managing the real time counter (RTC).
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_rtc_hal RTC HAL
+ * @{
+ * @ingroup nrf_rtc
+ * @brief   Hardware access layer for managing the Real Time Counter (RTC) peripheral.
+ */
 
 /**
  * @brief Macro for getting the number of compare channels available
@@ -201,11 +197,6 @@ __STATIC_INLINE void nrf_rtc_event_enable(NRF_RTC_Type * p_rtc, uint32_t mask);
  */
 __STATIC_INLINE void nrf_rtc_event_disable(NRF_RTC_Type * p_rtc, uint32_t event);
 
-/**
- *@}
- **/
-
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE  void nrf_rtc_cc_set(NRF_RTC_Type * p_rtc, uint32_t ch, uint32_t cc_val)
@@ -292,6 +283,7 @@ __STATIC_INLINE void nrf_rtc_event_disable(NRF_RTC_Type * p_rtc, uint32_t mask)
 }
 #endif
 
+/** @} */
 
 #ifdef __cplusplus
 }

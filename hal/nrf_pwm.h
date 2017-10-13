@@ -1,12 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @defgroup nrf_pwm_hal PWM HAL
- * @{
- * @ingroup nrf_pwm
- *
- * @brief @tagAPI52 Hardware access layer for managing the Pulse Width Modulation (PWM)
- *        peripheral.
- */
 
 #ifndef NRF_PWM_H__
 #define NRF_PWM_H__
@@ -17,6 +9,12 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_pwm_hal PWM HAL
+ * @{
+ * @ingroup nrf_pwm
+ * @brief   Hardware access layer for managing the Pulse Width Modulation (PWM) peripheral.
+ */
 
 /**
  * @brief This value can be provided as a parameter for the @ref nrf_pwm_pins_set
@@ -648,6 +646,7 @@ __STATIC_INLINE void nrf_pwm_loop_set(NRF_PWM_Type * p_reg,
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
+/** @} */
 
 #ifdef __cplusplus
 }
@@ -655,4 +654,3 @@ __STATIC_INLINE void nrf_pwm_loop_set(NRF_PWM_Type * p_reg,
 
 #endif // NRF_PWM_H__
 
-/** @} */

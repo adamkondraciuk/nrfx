@@ -8,13 +8,11 @@
 extern "C" {
 #endif
 
-/*lint ++flb "Enter library region" */
-
 /**
  * @defgroup nrf_qdec_hal QDEC HAL
  * @{
  * @ingroup nrf_qdec
- * @brief Hardware access layer for accessing the quadrature decoder (QDEC) peripheral.
+ * @brief   Hardware access layer for managing the Quadrature Decoder (QDEC) peripheral.
  */
 
 /**
@@ -450,12 +448,7 @@ __STATIC_INLINE uint32_t nrf_qdec_ledpol_get(void)
     return NRF_QDEC->LEDPOL;
 }
 
-
-/**
-   *@}
- **/
-
-/*lint --flb "Leave library region" */
+/** @} */
 
 #ifdef __cplusplus
 }

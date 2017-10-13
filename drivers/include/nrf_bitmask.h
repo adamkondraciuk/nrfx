@@ -13,6 +13,7 @@ extern "C" {
  * @defgroup nrf_bitmask Bitmask module
  * @{
  * @ingroup nrfx
+ * @brief   Bitmask managing module.
  */
 
 #define BITMASK_BYTE_GET(abs_bit) ((abs_bit)/8)

@@ -1,16 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_timer Timer HAL and driver
- * @ingroup    nrf_drivers
- * @brief      Timer APIs.
- * @details    The timer HAL provides basic APIs for accessing the registers
- *             of the timer. The timer driver provides APIs on a higher level.
- *
- * @defgroup   nrfx_timer Timer driver
- * @{
- * @ingroup    nrf_timer
- * @brief      Multi-instance timer driver.
- */
 
 #ifndef NRFX_TIMER_H__
 #define NRFX_TIMER_H__
@@ -21,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_timer Timer driver
+ * @{
+ * @ingroup nrf_timer
+ * @brief   TIMER peripheral driver.
+ */
 
 /**
  * @brief Timer driver instance data structure.
@@ -362,10 +357,11 @@ void nrfx_timer_3_irq_handler(void);
 void nrfx_timer_4_irq_handler(void);
 
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_TIMER_H__
 
-/** @} */

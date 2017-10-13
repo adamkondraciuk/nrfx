@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRF_PPI_H__
 #define NRF_PPI_H__
 
@@ -12,7 +13,8 @@ extern "C" {
  * @defgroup nrf_ppi_hal PPI HAL
  * @{
  * @ingroup nrf_ppi
- * @brief Hardware access layer for setting up Programmable Peripheral Interconnect (PPI) channels.
+ * @brief   Hardware access layer for managing the Programmable Peripheral Interconnect (PPI)
+ *          channels.
  */
 
 #define NRF_PPI_TASK_SET    (1UL)
@@ -385,12 +387,7 @@ __STATIC_INLINE uint32_t * nrf_ppi_task_group_disable_address_get(nrf_ppi_channe
     return (uint32_t *) &NRF_PPI->TASKS_CHG[(uint32_t) group].DIS;
 }
 
-
-/**
- *@}
- **/
-
-/*lint --flb "Leave library region" */
+/** @} */
 
 #ifdef __cplusplus
 }

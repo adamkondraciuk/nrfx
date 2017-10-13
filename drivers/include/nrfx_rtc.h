@@ -1,17 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**
- * @addtogroup nrf_rtc RTC HAL and driver
- * @ingroup nrf_drivers
- * @brief Real timer counter (RTC) APIs.
- * @details The RTC HAL provides basic APIs for accessing the registers of the real time counter (RTC).
- * The RTC driver provides APIs on a higher level.
- *
- * @defgroup nrfx_rtc RTC driver
- * @{
- * @ingroup nrf_rtc
- * @brief Real timer counter (RTC) driver.
- */
-
 
 #ifndef NRFX_RTC_H__
 #define NRFX_RTC_H__
@@ -22,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_rtc RTC driver
+ * @{
+ * @ingroup nrf_rtc
+ * @brief   Real Timer Counter (RTC) peripheral driver.
+ */
 
 /**@brief Macro to convert microseconds into ticks. */
 #define RTC_US_TO_TICKS(us,freq) (((us) * (freq)) / 1000000U)
@@ -324,15 +318,13 @@ __STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_i
 }
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
-/**
- *@}
- **/
-
 
 void nrfx_rtc_0_irq_handler(void);
 void nrfx_rtc_1_irq_handler(void);
 void nrfx_rtc_2_irq_handler(void);
 
+
+/** @} */
 
 #ifdef __cplusplus
 }

@@ -13,8 +13,8 @@ extern "C" {
 /**
  * @defgroup nrfx_spi SPI driver
  * @{
- * @ingroup  nrf_spi
- * @brief    Multi-instance SPI driver.
+ * @ingroup nrf_spi
+ * @brief   SPI peripheral driver.
  */
 
 /**
@@ -279,6 +279,7 @@ void nrfx_spi_abort(nrfx_spi_t const * p_instance);
 void nrfx_spi_0_irq_handler(void);
 void nrfx_spi_1_irq_handler(void);
 void nrfx_spi_2_irq_handler(void);
+
 
 /** @} */
 

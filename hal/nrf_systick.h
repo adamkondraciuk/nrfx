@@ -1,15 +1,19 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
+
 #ifndef NRF_SYSTICK_H__
 #define NRF_SYSTICK_H__
 
 #include <nrfx.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @defgroup nrf_systick_hal SYSTICK HAL
  * @{
  * @ingroup nrf_systick
- *
- * @brief Hardware access layer for accessing the SYSTICK peripheral.
+ * @brief   Hardware access layer for managing the SYSTICK peripheral.
  *
  * SYSTICK is ARM peripheral, not Nordic design.
  * It means that it has no Nordic-typical interface with Tasks and Events.
@@ -140,4 +144,9 @@ __STATIC_INLINE uint32_t nrf_systick_calib_get(void)
 #endif /* SUPPRESS_INLINE_IMPLEMENTATION */
 
 /** @} */
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* NRF_SYSTICK_H__ */

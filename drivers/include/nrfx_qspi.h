@@ -14,8 +14,7 @@ extern "C" {
  * @defgroup nrfx_qspi QSPI driver
  * @{
  * @ingroup nrf_qspi
- *
- * @brief   @tagAPI52840 Quad serial peripheral interface (QSPI) driver.
+ * @brief   Quad Serial Peripheral Interface (QSPI) peripheral driver.
  */
 
 /**

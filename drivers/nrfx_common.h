@@ -18,6 +18,7 @@ extern "C" {
  * @defgroup nrfx_common Common module
  * @{
  * @ingroup nrfx
+ * @brief Common module.
  */
 
 #define NRFX_CHECK(module_enabled)  (module_enabled)

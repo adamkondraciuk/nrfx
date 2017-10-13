@@ -13,8 +13,8 @@ extern "C" {
 /**
  * @defgroup nrfx_uart UART driver
  * @{
- * @ingroup  nrf_uart
- * @brief    Multi-instance UART driver.
+ * @ingroup nrf_uart
+ * @brief   UART peripheral driver.
  */
 
 /**
@@ -320,6 +320,7 @@ __STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_insta
 
 void nrfx_uart_0_irq_handler(void);
 void nrfx_uart_1_irq_handler(void);
+
 
 /** @} */
 

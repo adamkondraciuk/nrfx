@@ -3,19 +3,18 @@
 #ifndef NRF_POWER_H__
 #define NRF_POWER_H__
 
-/**
- * @ingroup nrf_power
- * @defgroup nrf_power_hal POWER HAL
- * @{
- *
- * Hardware access layer for (POWER) peripheral.
- */
-
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_power_hal POWER HAL
+ * @{
+ * @ingroup nrf_power
+ * @brief   Hardware access layer for managing the POWER peripheral.
+ */
 
 #if defined(POWER_RAMSTATUS_RAMBLOCK0_Msk)
 #define NRF_POWER_HAS_RAMSTATUS 1
@@ -819,8 +818,6 @@ __STATIC_INLINE bool nrf_power_usbregstatus_vbusdet_get(void);
 __STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void);
 #endif /* NRF_POWER_HAS_USBREG */
 
-/** @} */
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE uint32_t nrf_power_resetreas_get(void)
@@ -1013,6 +1010,7 @@ __STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void)
 
 #endif /* SUPPRESS_INLINE_IMPLEMENTATION */
 
+/** @} */
 
 #ifdef __cplusplus
 }

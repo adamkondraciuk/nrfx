@@ -1,24 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**
- * @file
- * @brief LPCOMP HAL API.
- */
 
 #ifndef NRF_LPCOMP_H_
 #define NRF_LPCOMP_H_
-
-/**
- * @defgroup nrf_lpcomp_hal LPCOMP HAL
- * @{
- * @ingroup nrf_lpcomp
- * @brief Hardware access layer for managing the Low Power Comparator (LPCOMP).
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_lpcomp_hal LPCOMP HAL
+ * @{
+ * @ingroup nrf_lpcomp
+ * @brief   Hardware access layer for managing the Low Power Comparator (LPCOMP) peripheral.
+ */
 
 /**
  * @enum nrf_lpcomp_ref_t
@@ -369,11 +365,7 @@ __STATIC_INLINE bool nrf_lpcomp_event_check(nrf_lpcomp_event_t lpcomp_event)
     return (bool) (*(volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + lpcomp_event));
 }
 
-
-/**
- *@}
- **/
-
+/** @} */
 
 #ifdef __cplusplus
 }

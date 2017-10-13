@@ -1,16 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**@file
- * @addtogroup nrf_wdt WDT HAL and driver
- * @ingroup nrf_drivers
- * @brief Watchdog timer (WDT) APIs.
- * @details The WDT HAL provides basic APIs for accessing the registers of the watchdog timer.
- * The WDT driver provides APIs on a higher level.
- * @defgroup nrfx_wdt WDT driver
- * @{
- * @ingroup  nrf_wdt
- *
- * @brief    Driver for managing the watchdog timer (WDT).
- */
 
 #ifndef NRFX_WDT_H__
 #define NRFX_WDT_H__
@@ -21,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_wdt WDT driver
+ * @{
+ * @ingroup nrf_wdt
+ * @brief   Watchdog Timer (WDT) peripheral driver.
+ */
 
 /**@brief Struct for WDT initialization. */
 typedef struct
@@ -110,7 +105,11 @@ __STATIC_INLINE uint32_t nrfx_wdt_ppi_event_addr(nrf_wdt_event_t event)
     return nrf_wdt_event_address_get(event);
 }
 
+
 void nrfx_wdt_irq_handler(void);
+
+
+/** @} */
 
 #ifdef __cplusplus
 }
@@ -118,4 +117,3 @@ void nrfx_wdt_irq_handler(void);
 
 #endif
 
-/** @} */

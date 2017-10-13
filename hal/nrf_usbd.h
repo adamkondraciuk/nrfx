@@ -3,15 +3,19 @@
 #ifndef NRF_USBD_H__
 #define NRF_USBD_H__
 
+#include <nrfx.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
- * @ingroup nrf_usbd
  * @defgroup nrf_usbd_hal USBD HAL
  * @{
- *
- * @brief @tagAPI52840 Hardware access layer for Universal Serial Bus Device (USBD) peripheral.
+ * @ingroup nrf_usbd
+ * @brief   Hardware access layer for managing the Universal Serial Bus Device (USBD)
+ *          peripheral.
  */
-
-#include <nrfx.h>
 
 /**
  * @brief USBD tasks
@@ -1376,4 +1380,9 @@ uint32_t nrf_usbd_ep_amount_get(uint8_t ep)
 #endif /* SUPPRESS_INLINE_IMPLEMENTATION */
 
 /** @} */
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* NRF_USBD_H__ */

@@ -1,17 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**
- * @addtogroup nrf_saadc SAADC HAL and driver
- * @ingroup    nrf_drivers
- * @brief      @tagAPI52 Successive Approximation Analog-to-Digital Converter (SAADC) APIs.
- * @details The SAADC HAL provides basic APIs for accessing the registers of the SAADC peripheral.
- * The SAADC driver provides APIs on a higher level.
- *
- * @defgroup nrfx_saadc SAADC driver
- * @{
- * @ingroup  nrf_saadc
- *
- * @brief    @tagAPI52 Successive Approximation Analog-to-Digital Converter (SAADC) driver.
- */
 
 #ifndef NRFX_SAADC_H__
 #define NRFX_SAADC_H__
@@ -22,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_saadc SAADC driver
+ * @{
+ * @ingroup nrf_saadc
+ * @brief   Successive Approximation Analog-to-Digital Converter (SAADC) peripheral driver.
+ */
 
 /**
  * @brief Value that should be set as high limit to disable limit detection.
@@ -284,10 +278,11 @@ void nrfx_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t limit_hig
 void nrfx_saadc_irq_handler(void);
 
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_SAADC_H__
 
-/** @} */

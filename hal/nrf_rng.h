@@ -1,23 +1,20 @@
 /*$$$LICENCE_NORDIC_STANDARD<2014>$$$*/
-/**
- * @file
- * @brief RNG HAL API.
- */
 
 #ifndef NRF_RNG_H__
 #define NRF_RNG_H__
-/**
- * @defgroup nrf_rng_hal RNG HAL
- * @{
- * @ingroup nrf_rng
- * @brief Hardware access layer for managing the random number generator (RNG).
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_rng_hal RNG HAL
+ * @{
+ * @ingroup nrf_rng
+ * @brief   Hardware access layer for managing the Random Number Generator (RNG) peripheral.
+ */
 
 #define NRF_RNG_TASK_SET    (1UL)
 #define NRF_RNG_EVENT_CLEAR (0UL)
@@ -157,10 +154,6 @@ __STATIC_INLINE void nrf_rng_error_correction_enable(void);
  */
 __STATIC_INLINE void nrf_rng_error_correction_disable(void);
 
-/**
- *@}
- **/
-
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
 __STATIC_INLINE void nrf_rng_int_enable(uint32_t rng_int_mask)
@@ -233,6 +226,8 @@ __STATIC_INLINE void nrf_rng_error_correction_disable(void)
 }
 
 #endif
+
+/** @} */
 
 #ifdef __cplusplus
 }

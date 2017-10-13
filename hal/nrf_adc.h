@@ -3,19 +3,19 @@
 #ifndef NRF_ADC_H_
 #define NRF_ADC_H_
 
-/**
- * @defgroup nrf_adc_hal ADC HAL
- * @{
- * @ingroup nrf_adc
- * @brief @tagAPI51 Hardware access layer for managing the analog-to-digital converter (ADC).
- */
-
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_adc_hal ADC HAL
+ * @{
+ * @ingroup nrf_adc
+ * @brief   Hardware access layer for managing the Analog-to-Digital Converter (ADC)
+ *          peripheral.
+ */
 
 /** @brief ADC interrupts. */
 typedef enum
@@ -387,9 +387,7 @@ __STATIC_INLINE void nrf_adc_disable(void)
     NRF_ADC->ENABLE = 0;
 }
 #endif
-/**
- *@}
- **/
+/** @} */
 
 
 #ifdef __cplusplus

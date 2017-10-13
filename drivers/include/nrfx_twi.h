@@ -14,7 +14,7 @@ extern "C" {
  * @defgroup nrfx_twi TWI driver
  * @{
  * @ingroup nrf_twi
- * @brief   Multi-instance TWI driver.
+ * @brief   TWI peripheral driver.
  */
 
 /**

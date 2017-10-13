@@ -1,15 +1,4 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
-/**@file
- * @addtogroup nrf_pwm PWM HAL and driver
- * @ingroup    nrf_drivers
- * @brief      @tagAPI52 Pulse Width Modulation (PWM) module APIs.
- *
- * @defgroup   nrfx_pwm PWM driver
- * @{
- * @ingroup    nrf_pwm
- * @brief      @tagAPI52 Pulse Width Modulation (PWM) module driver.
- */
-
 
 #ifndef NRFX_PWM_H__
 #define NRFX_PWM_H__
@@ -20,6 +9,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrfx_pwm PWM driver
+ * @{
+ * @ingroup nrf_pwm
+ * @brief   Pulse Width Modulation (PWM) peripheral driver.
+ */
 
 /**
  * @brief PWM driver instance data structure.
@@ -175,7 +171,7 @@ typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type);
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_config   Pointer to the structure with initial configuration.
- *                       
+ *
  * @param[in] handler    Event handler provided by the user. If NULL is passed
  *                       instead, event notifications are not done and PWM
  *                       interrupts are disabled.
@@ -454,10 +450,10 @@ void nrfx_pwm_2_irq_handler(void);
 void nrfx_pwm_3_irq_handler(void);
 
 
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif // NRFX_PWM_H__
-
-/** @} */

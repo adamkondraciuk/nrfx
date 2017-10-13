@@ -1,27 +1,23 @@
 /*$$$LICENCE_NORDIC_STANDARD<2012>$$$*/
-/**
- * @file
- * @brief ECB driver API.
- */
 
 #ifndef NRF_ECB_H__
 #define NRF_ECB_H__
-
-/**
- * @defgroup nrf_ecb AES ECB encryption
- * @{
- * @ingroup nrf_drivers
- * @brief Driver for the AES Electronic Code Book (ECB) peripheral.
- *
- * To encrypt data, the peripheral must first be powered on
- * using @ref nrf_ecb_init. Next, the key must be set using @ref nrf_ecb_set_key.
- */
 
 #include <nrfx.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_ecb_hal AES ECB encryption HAL
+ * @{
+ * @ingroup nrf_ecb
+ * @brief   Driver for the AES Electronic Code Book (ECB) peripheral.
+ *
+ * To encrypt data, the peripheral must first be powered on
+ * using @ref nrf_ecb_init. Next, the key must be set using @ref nrf_ecb_set_key.
+ */
 
 /**
  * @brief Function for initializing and powering on the ECB peripheral.
@@ -53,6 +49,7 @@ bool nrf_ecb_crypt(uint8_t * dst, const uint8_t * src);
  */
 void nrf_ecb_set_key(const uint8_t * key);
 
+/** @} */
 
 #ifdef __cplusplus
 }
@@ -60,4 +57,3 @@ void nrf_ecb_set_key(const uint8_t * key);
 
 #endif  // NRF_ECB_H__
 
-/** @} */

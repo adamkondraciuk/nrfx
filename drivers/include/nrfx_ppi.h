@@ -1,24 +1,16 @@
 /*$$$LICENCE_NORDIC_STANDARD<2015>$$$*/
+
 #ifndef NRFX_PPI_H__
 #define NRFX_PPI_H__
 
 #include <nrfx.h>
 #include <hal/nrf_ppi.h>
 
-/** @file
- *
- * @addtogroup nrf_ppi PPI HAL and driver
- * @ingroup nrf_drivers
- * @brief Programmable Peripheral Interconnect (PPI) APIs.
- *
- * @details The PPI HAL provides basic APIs for accessing the registers of the PPI.
- * The PPI driver provides APIs on a higher level.
- *
- * @defgroup nrfx_ppi PPI driver
+/**
+ * @defgroup nrfx_ppi PPI allocator
  * @{
- * @ingroup  nrf_ppi
- *
- * @brief Programmable Peripheral Interconnect (PPI) driver.
+ * @ingroup nrf_ppi
+ * @brief   Programmable Peripheral Interconnect (PPI) allocator.
  */
 
 #ifdef __cplusplus
@@ -288,9 +280,7 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_disable_get(nrf_ppi_channel_gr
     return (uint32_t) nrf_ppi_task_group_disable_address_get(group);
 }
 
-/**
- *@}
- **/
+/** @} */
 
 #ifdef __cplusplus
 }

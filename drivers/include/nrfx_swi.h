@@ -16,7 +16,7 @@ extern "C" {
 /**
  * @defgroup nrfx_swi SWI driver
  * @{
- * @ingroup  nrf_swi
+ * @ingroup  nrf_swi_egu
  *
  * @brief    Driver for managing software interrupts (SWI).
  */

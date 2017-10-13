@@ -6,11 +6,11 @@
 #if !defined(NRFX_ERRORS_DEFINED_EXTERNALLY)
 
 /**
- * @defgroup nrfx_error Global Error Codes
+ * @defgroup nrfx_error_codes Global Error Codes
  * @{
  * @ingroup nrfx
  *
- * @brief Global Error definitions
+ * @brief Global error codes definitions.
  */
 
 #define NRFX_ERROR_BASE_NUM                 0xBAD00000
