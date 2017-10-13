@@ -22,7 +22,7 @@
 // an interrupt. During the playback, the PWM interrupt triggered on SEQEND
 // event of a preceding sequence is used to protect the transfer done for
 // the next sequence to be played.
-#include <nrf_egu.h>
+#include <hal/nrf_egu.h>
 #define USE_DMA_ISSUE_WORKAROUND
 #endif
 #if defined(USE_DMA_ISSUE_WORKAROUND)
