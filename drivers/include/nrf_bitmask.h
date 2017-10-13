@@ -1,4 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2016>$$$*/
+
 #ifndef NRF_BITMASK_H
 #define NRF_BITMASK_H
 
@@ -7,6 +8,12 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+/**
+ * @defgroup nrf_bitmask Bitmask module
+ * @{
+ * @ingroup nrfx
+ */
 
 #define BITMASK_BYTE_GET(abs_bit) ((abs_bit)/8)
 #define BITMASK_RELBIT_GET(abs_bit) ((abs_bit) & 0x00000007)
@@ -100,6 +107,8 @@ __STATIC_INLINE void nrf_bitmask_masks_and(void const *   p_mask1,
         p_mask8_out[i] = p_mask8_1[i] & p_mask8_2[i];
     }
 }
+
+/** @} */
 
 #ifdef __cplusplus
 }
