@@ -1,5 +1,5 @@
 /**
-@defgroup nrf52810_drivers nRF52810 Drivers
+@page nrf52810_drivers nRF52810 Drivers
 @{
 
 @ref nrf_clock

@@ -1,5 +1,5 @@
 /**
-@defgroup nrf52832_drivers nRF52832 Drivers
+@page nrf52832_drivers nRF52832 Drivers
 @{
 
 @ref nrf_clock

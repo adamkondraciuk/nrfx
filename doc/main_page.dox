@@ -1,0 +1,7 @@
+/**
+@mainpage Introduction
+
+The nrfx documentation includes descriptions and other reference material to help you understand the driver components.
+
+To check whether peripheral in your IC is supported see @ref nrfx_drv_supp_matrix for more.
+*/

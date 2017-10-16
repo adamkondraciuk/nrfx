@@ -200,7 +200,7 @@ TAB_SIZE = 4
 
 ALIASES = \
 tagGreenTick="@htmlonly<CENTER><font color="green">✔</font></CENTER>@endhtmlonly" \
-tagRedNotSupported="@htmlonly<CENTER><font color="red">✖</font></CENTER>@endhtmlonly" \
+tagRedCross="@htmlonly<CENTER><font color="red">✖</font></CENTER>@endhtmlonly" \
 linkProductSpecification52="[nRF52840 Product Specification](http://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52/dita/nrf52/chips/nrf52840_ps.html) or [nRF52832 Product Specification](http://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52/dita/nrf52/chips/nrf52832_ps.html)" \
 
 

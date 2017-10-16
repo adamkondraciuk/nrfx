@@ -1,5 +1,5 @@
 /**
-@defgroup nrf51_series_drivers nRF51 Series Drivers
+@page nrf51_series_drivers nRF51 Series Drivers
 @{
 
 @ref nrf_adc
