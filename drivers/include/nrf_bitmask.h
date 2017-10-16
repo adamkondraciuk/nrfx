@@ -68,7 +68,7 @@ __STATIC_INLINE void nrf_bitmask_bit_clear(uint32_t bit, void * p_mask)
  *
  * @param p_mask1    A pointer to the first bit mask.
  * @param p_mask2    A pointer to the second bit mask.
- * @param p_mask_out A pointer to the output bit mask.
+ * @param p_out_mask A pointer to the output bit mask.
  * @param length     Length of output mask in bytes.
  */
 __STATIC_INLINE void nrf_bitmask_masks_or(void const *   p_mask1,
@@ -91,7 +91,7 @@ __STATIC_INLINE void nrf_bitmask_masks_or(void const *   p_mask1,
  *
  * @param p_mask1    A pointer to the first bit mask.
  * @param p_mask2    A pointer to the second bit mask.
- * @param p_mask_out A pointer to the output bit mask.
+ * @param p_out_mask A pointer to the output bit mask.
  * @param length     Length of output mask in bytes.
  */
 __STATIC_INLINE void nrf_bitmask_masks_and(void const *   p_mask1,

@@ -211,7 +211,7 @@ uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance);
 /**
  * @brief Prepare data for sending
  *
- * This function should be used in response for @ref TWIS_EVT_READ_REQ event.
+ * This function should be used in response for @ref NRFX_TWIS_EVT_READ_REQ event.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_buf      Transmission buffer
@@ -231,7 +231,7 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
  * @brief Get number of transmitted bytes
  *
  * Function returns number of bytes sent.
- * This function may be called after @ref TWIS_EVT_READ_DONE or @ref TWIS_EVT_READ_ERROR events.
+ * This function may be called after @ref NRFX_TWIS_EVT_READ_DONE or @ref NRFX_TWIS_EVT_READ_ERROR events.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  *
@@ -242,7 +242,7 @@ __STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
 /**
  * @brief Prepare data for receiving
  *
- * This function should be used in response for @ref TWIS_EVT_WRITE_REQ event.
+ * This function should be used in response for @ref NRFX_TWIS_EVT_WRITE_REQ event.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_buf      Buffer that would be filled with received data
@@ -262,7 +262,7 @@ ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
  * @brief Get number of received bytes
  *
  * Function returns number of bytes received.
- * This function may be called after @ref TWIS_EVT_WRITE_DONE or @ref TWIS_EVT_WRITE_ERROR events.
+ * This function may be called after @ref NRFX_TWIS_EVT_WRITE_DONE or @ref NRFX_TWIS_EVT_WRITE_ERROR events.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  *

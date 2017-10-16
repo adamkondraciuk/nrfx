@@ -92,7 +92,7 @@ void nrfx_clock_hfclk_stop(void);
 /**
  * @brief Function for checking the HFCLK state.
  *
- * @retval true If the HFCLK is running (for \nRFXX XTAL source).
+ * @retval true If the HFCLK is running (XTAL source).
  * @retval false If the HFCLK is not running.
  */
 __STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
