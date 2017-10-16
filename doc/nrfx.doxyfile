@@ -199,14 +199,8 @@ TAB_SIZE = 4
 # You can put \n's in the value part of an alias to insert newlines.
 
 ALIASES = \
-tag51="<span class=\"whichnRF nRF51\">nRF51 Series</span>" \
-tag52810="<span class=\"whichnRF nRF52810\">nRF52810</span>" \
-tag52832="<span class=\"whichnRF nRF52\">nRF52832</span>" \
-tag52840="<span class=\"whichnRF nRF52840\">nRF52840</span>" \
-tagAPI51="<span class=\"whichnRF nRF51\">nRF51 Series only:</span>" \
-tagAPI52="" \
-tagAPI52832="<span class=\"whichnRF nRF52\">nRF52832 only:</span>" \
-tagAPI52840="<span class=\"whichnRF nRF52840\">nRF52840 only:</span>" \
+tagGreenTick="@htmlonly<CENTER><font color="green">✔</font></CENTER>@endhtmlonly" \
+tagRedNotSupported="@htmlonly<CENTER><font color="red">✖</font></CENTER>@endhtmlonly" \
 linkProductSpecification52="[nRF52840 Product Specification](http://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52/dita/nrf52/chips/nrf52840_ps.html) or [nRF52832 Product Specification](http://infocenter.nordicsemi.com/topic/com.nordic.infocenter.nrf52/dita/nrf52/chips/nrf52832_ps.html)" \
 
 
