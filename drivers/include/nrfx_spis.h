@@ -177,9 +177,9 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance);
  * @note Client applications must call this function after every @ref NRFX_SPIS_XFER_DONE event if
  * the SPI slave driver should be prepared for a possible new SPI transaction.
  *
- * @note Peripherals that are using EasyDMA (for example, SPIS) require the transfer buffers
- * to be placed in the Data RAM region. Otherwise, this function will fail
- * with the error code NRFX_ERROR_INVALID_ADDR.
+ * @note Peripherals using EasyDMA (including SPIS) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance            Pointer to the driver instance structure.
  * @param[in] p_tx_buffer           Pointer to the TX buffer.

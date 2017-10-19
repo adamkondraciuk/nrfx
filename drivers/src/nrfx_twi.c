@@ -565,7 +565,7 @@ ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
     ret_code_t err_code = NRFX_SUCCESS;
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    // TXRX and TXTX transfers are support only in non-blocking mode.
+    // TXRX and TXTX transfers are supported only in non-blocking mode.
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWI_XFER_TXRX)));
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWI_XFER_TXTX)));
 

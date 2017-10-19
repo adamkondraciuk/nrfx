@@ -186,9 +186,9 @@ __STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_ins
  * returns when the transfer is finished. Blocking mode is not using interrupt
  * so there is no context switching inside the function.
  *
- * @note Peripherals using EasyDMA (including UARTE) require that the transfer buffers
- *       are placed in the Data RAM region. If they are not, this function will fail
- *       with error code NRFX_ERROR_INVALID_ADDR.
+ * @note Peripherals using EasyDMA (including UARTE) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_data     Pointer to data.
@@ -237,9 +237,9 @@ void nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance);
  * when the primary buffer is full. The double buffering feature allows
  * receiving data continuously.
  *
- * @note Peripherals using EasyDMA (including UARTE) require that the transfer buffers
- *       are placed in the Data RAM region. If they are not, this function will fail
- *       with error code NRFX_ERROR_INVALID_ADDR.
+ * @note Peripherals using EasyDMA (including UARTE) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_data     Pointer to data.

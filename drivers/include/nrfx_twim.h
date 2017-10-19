@@ -213,6 +213,10 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  * The transmission will be stopped when an error occurs. If a transfer is ongoing,
  * the function returns the error code @ref NRFX_ERROR_BUSY.
  *
+ * @note Peripherals using EasyDMA (including TWIM) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
+ *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
  * @param[in] p_data     Pointer to a transmit buffer.
@@ -224,7 +228,7 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  * @retval NRFX_SUCCESS                  If the procedure was successful.
  * @retval NRFX_ERROR_BUSY               If the driver is not ready for a new transfer.
  * @retval NRFX_ERROR_INTERNAL           If an error was detected by hardware.
- * @retval NRFX_ERROR_INVALID_ADDR       If the EasyDMA is used and memory adress in not in RAM.
+ * @retval NRFX_ERROR_INVALID_ADDR       If the provided buffer is not placed in the Data RAM region.
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK  If NACK received after sending the address in polling mode.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK  If NACK received after sending a data byte in polling mode.
  */
@@ -265,6 +269,8 @@ ret_code_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
  * - @ref NRFX_TWIM_XFER_TX<span></span>:   Write operation (with or without STOP condition).
  * - @ref NRFX_TWIM_XFER_RX<span></span>:   Read operation  (with STOP condition).
  *
+ * @note TXRX and TXTX transfers are supported only in non-blocking mode.
+ *
  * Additional options are provided using the flags parameter:
  * - @ref NRFX_TWIM_FLAG_TX_POSTINC and @ref NRFX_TWIM_FLAG_RX_POSTINC<span></span>: Post-incrementation of buffer addresses. Supported only by TWIM.
  * - @ref NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER<span></span>: No user event handler after transfer completion. In most cases, this also means no interrupt at the end of the transfer.
@@ -288,8 +294,9 @@ ret_code_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
  * flags are set, two tasks must be used to trigger a transfer: TASKS_RESUME followed by TASKS_STARTTX. If no stop condition is generated,
  * TWIM is in SUSPENDED state. Therefore, it must be resumed before the transfer can be started.
  *
- * @note
- * This function should be used only if the instance is configured to work in non-blocking mode. If the function is used in blocking mode, the driver asserts.
+ * @note Peripherals using EasyDMA (including TWIM) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance        Pointer to the driver instance structure.
  * @param[in] p_xfer_desc       Pointer to the transfer descriptor.
@@ -299,7 +306,7 @@ ret_code_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
  * @retval NRFX_ERROR_BUSY                 If the driver is not ready for a new transfer.
  * @retval NRFX_ERROR_NOT_SUPPORTED        If the provided parameters are not supported.
  * @retval NRFX_ERROR_INTERNAL             If an error was detected by hardware.
- * @retval NRFX_ERROR_INVALID_ADDR         If the EasyDMA is used and memory adress in not in RAM
+ * @retval NRFX_ERROR_INVALID_ADDR         If the provided buffers are not placed in the Data RAM region.
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK    If NACK received after sending the address.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK    If NACK received after sending a data byte.
  */

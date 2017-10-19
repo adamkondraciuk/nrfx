@@ -213,6 +213,10 @@ uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance);
  *
  * This function should be used in response for @ref NRFX_TWIS_EVT_READ_REQ event.
  *
+ * @note Peripherals using EasyDMA (including TWIS) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
+ *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_buf      Transmission buffer
  * @attention            Transmission buffer has to be placed in RAM.
@@ -243,6 +247,10 @@ __STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
  * @brief Prepare data for receiving
  *
  * This function should be used in response for @ref NRFX_TWIS_EVT_WRITE_REQ event.
+ *
+ * @note Peripherals using EasyDMA (including TWIS) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_buf      Buffer that would be filled with received data

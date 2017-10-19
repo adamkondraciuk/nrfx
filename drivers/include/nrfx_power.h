@@ -191,8 +191,6 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
  * @param[in] p_config Driver configuration. Can be NULL - the default configuration
  *                     from @em sdk_config.h file would be used then.
  *
- * @retval NRFX_ERROR_INVALID_STATE              Power driver has to be enabled
- *                                               before SoftDevice.
  * @retval NRFX_ERROR_MODULE_ALREADY_INITIALIZED Module is initialized already.
  * @retval NRFX_SUCCESS                          Successfully initialized.
  */
@@ -248,10 +246,6 @@ void nrfx_power_pof_uninit(void);
  * @brief Initialize sleep entering and exiting events processing
  *
  * Configures and setups the sleep event processing.
- * @note Sleep events are not available when SoftDevice is enabled.
- * @note If sleep event is enabled when SoftDevice is initialized, sleep events
- *       would be automatically disabled - it is the limitation of the
- *       SoftDevice itself.
  *
  * @param[in] p_config Configuration with values and event handler.
  *

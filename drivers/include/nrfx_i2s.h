@@ -173,7 +173,7 @@ void       nrfx_i2s_uninit(void);
  *            portion of data to be sent will be done before the actual transfer
  *            starts).
  *
- * @note Peripherals using EasyDMA (like I2S) require the transfer buffers
+ * @note Peripherals using EasyDMA (including I2S) require the transfer buffers
  *       to be placed in the Data RAM region. If this condition is not met,
  *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *

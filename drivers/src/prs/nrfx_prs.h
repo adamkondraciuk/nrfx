@@ -60,22 +60,22 @@ extern "C" {
  *        the specified peripheral.
  *
  * Certain resources and registers are shared among peripherals that have
- * the same ID (for example: SPI0, SPIM0, SPIS0, TWI0, TWIM0, and TWIS0 in nRF52832).
- * Only one of them can be utilized at a given time. This function reserves
- * proper resources to be used by the specified peripheral.
- * If NRFX_PRS_ENABLED is set to a non-zero value, IRQ
- * handlers for peripherals that are sharing resources with others are
- * implemented by the @ref nrfx_prs module instead of individual drivers.
- * The drivers must then specify their interrupt handling routines and
- * register them by using this function.
+ * the same ID (for example: SPI0, SPIM0, SPIS0, TWI0, TWIM0, and TWIS0 in
+ * nRF52832). Only one of them can be utilized at a given time. This function
+ * reserves proper resources to be used by the specified peripheral.
+ * If NRFX_PRS_ENABLED is set to a non-zero value, IRQ handlers for peripherals
+ * that are sharing resources with others are implemented by the @ref nrfx_prs
+ * module instead of individual drivers. The drivers must then specify their
+ * interrupt handling routines and register them by using this function.
  *
  * @param[in] p_base_addr Requested peripheral base pointer.
  * @param[in] irq_handler Interrupt handler to register.
  *
- * @retval NRF_SUCCESS    If resources were acquired successfully or the specified peripheral
- *                        is not handled by the PRS subsystem and there is no need to acquire
- *                        resources for it.
- * @retval NRF_ERROR_BUSY If resources were already acquired.
+ * @retval NRFX_SUCCESS    If resources were acquired successfully or the
+ *                         specified peripheral is not handled by the PRS
+ *                         subsystem and there is no need to acquire resources
+ *                         for it.
+ * @retval NRFX_ERROR_BUSY If resources were already acquired.
  */
 ret_code_t nrfx_prs_acquire(void       const * p_base_addr,
                             nrfx_irq_handler_t irq_handler);

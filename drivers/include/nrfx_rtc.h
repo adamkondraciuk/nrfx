@@ -208,10 +208,11 @@ void nrfx_rtc_overflow_disable(nrfx_rtc_t const * const p_instance);
 
 /**@brief Function for getting the maximum relative ticks value that can be set in the compare channel.
  *
- * When a SoftDevice is used, it occupies the highest level interrupt, so that the application code can be
- *       interrupted at any moment for a certain period of time. If Reliable mode is enabled, the provided
- *       maximum latency is taken into account and the return value is smaller than the RTC counter
- *       resolution. If Reliable mode is disabled, the return value equals the counter resolution.
+ * When a stack (for example SoftDevice) is used and it occupies high priority interrupts,
+ * the application code can be interrupted at any moment for a certain period of time.
+ * If Reliable mode is enabled, the provided maximum latency is taken into account
+ * and the return value is smaller than the RTC counter resolution.
+ * If Reliable mode is disabled, the return value equals the counter resolution.
  *
  * @param[in]  p_instance  Pointer to the driver instance structure.
  *

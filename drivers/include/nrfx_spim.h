@@ -240,9 +240,9 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  * Otherwise, the transfer is performed in blocking mode, which means that this function
  * returns when the transfer is finished.
  *
- * @note Peripherals using EasyDMA (for example, SPIM) require the transfer buffers
- *       to be placed in the Data RAM region. If they are not and an SPIM instance is
- *       used, this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
+ * @note Peripherals using EasyDMA (including SPIM) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param[in] p_instance       Pointer to the driver instance structure.
  * @param[in] p_tx_buffer      Pointer to the transmit buffer. Can be NULL
@@ -265,9 +265,9 @@ ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
                               uint8_t                   rx_buffer_length);
 
 /**
- * @brief Function for starting the SPI data transfer with additional option flags.
+ * @brief Function for starting the SPI data transfer with additional options.
  *
- * Function enables customizing the transfer by using option flags.
+ * @note This function is intended to be used only in non-blocking mode.
  *
  * Additional options are provided using the flags parameter:
  *
@@ -293,7 +293,10 @@ ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
  *   used to count the number of transfers. If @ref NRFX_SPIM_FLAG_REPEATED_XFER is used,
  *   the driver does not set the instance into busy state, so you must ensure that the next
  *   transfers are set up when SPIM is not active. Supported only by SPIM.
- * @note Function is intended to be used only in non-blocking mode.
+ *
+ * @note Peripherals using EasyDMA (including SPIM) require the transfer buffers
+ *       to be placed in the Data RAM region. If this condition is not met,
+ *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
  * @param p_instance  Pointer to the driver instance structure.
  * @param p_xfer_desc Pointer to the transfer descriptor.

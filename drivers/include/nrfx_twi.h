@@ -261,6 +261,8 @@ ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * - @ref NRFX_TWI_XFER_TX<span></span>:   Write operation (with or without STOP condition).
  * - @ref NRFX_TWI_XFER_RX<span></span>:   Read operation  (with STOP condition).
  *
+ * @note TXRX and TXTX transfers are supported only in non-blocking mode.
+ *
  * Additional options are provided using the flags parameter:
  * - @ref NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER<span></span>: No user event handler after transfer completion. In most cases, this also means no interrupt at the end of the transfer.
  * - @ref NRFX_TWI_FLAG_TX_NO_STOP<span></span>: No stop condition after TX transfer.
@@ -268,9 +270,6 @@ ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * @note
  * Some flag combinations are invalid:
  * - @ref NRFX_TWI_FLAG_TX_NO_STOP with @ref nrfx_twi_xfer_desc_t::type different than @ref NRFX_TWI_XFER_TX
- *
- * @note
- * This function should be used only if the instance is configured to work in non-blocking mode. If the function is used in blocking mode, the driver asserts.
  *
  * @param[in] p_instance        Pointer to the driver instance structure.
  * @param[in] p_xfer_desc       Pointer to the transfer descriptor.
