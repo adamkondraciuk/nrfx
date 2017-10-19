@@ -52,9 +52,9 @@ typedef void (* nrfx_rng_evt_handler_t)(uint8_t rng_data);
  * @param[in]  handler  Event handler provided by the user. Handler is required
  *                      to work with the module. NULL value is not supported.
  *
- * @retval  NRFX_SUCCESS                          Driver was successfully initialized.
- * @retval  NRFX_ERROR_MODULE_ALREADY_INITIALIZED Driver was already initialized.
- * @retval  NRFX_ERROR_INVALID_PARAM              Handler value or p_config is NULL.
+ * @retval  NRFX_SUCCESS                   Driver was successfully initialized.
+ * @retval  NRFX_ERROR_ALREADY_INITIALIZED Driver was already initialized.
+ * @retval  NRFX_ERROR_INVALID_PARAM       Handler value or p_config is NULL.
  */
 ret_code_t nrfx_rng_init(nrfx_rng_config_t const * p_config, nrfx_rng_evt_handler_t handler);
 

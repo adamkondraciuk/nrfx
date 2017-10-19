@@ -85,7 +85,7 @@ ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config)
     nrfx_power_config_t const * p_used_config;
     if (m_initialized)
     {
-        return NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY_INITIALIZED;
     }
 
     p_used_config = (p_config != NULL) ?

@@ -64,7 +64,7 @@ ret_code_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
     ret_code_t err_code = NRFX_SUCCESS;
     if (m_clock_cb.module_initialized)
     {
-        err_code = NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
+        err_code = NRFX_ERROR_ALREADY_INITIALIZED;
     }
     else
     {

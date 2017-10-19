@@ -23,7 +23,7 @@ ret_code_t nrfx_rng_init(nrfx_rng_config_t const * p_config, nrfx_rng_evt_handle
 {
     if (m_rng_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_MODULE_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY_INITIALIZED;
     }
 
     if ((handler == NULL) || (p_config == NULL))

@@ -191,8 +191,8 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
  * @param[in] p_config Driver configuration. Can be NULL - the default configuration
  *                     from @em sdk_config.h file would be used then.
  *
- * @retval NRFX_ERROR_MODULE_ALREADY_INITIALIZED Module is initialized already.
- * @retval NRFX_SUCCESS                          Successfully initialized.
+ * @retval NRFX_SUCCESS                   Successfully initialized.
+ * @retval NRFX_ERROR_ALREADY_INITIALIZED Module was already initialized.
  */
 ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config);
 
