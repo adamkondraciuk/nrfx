@@ -21,14 +21,71 @@ extern "C" {
  * @brief Common module.
  */
 
+/**
+ * @brief Macro for checking if the specified identifier is defined and it has
+ *        a non-zero value.
+ *
+ * Normally, preprocessors treat all undefined identifiers as having the value
+ * zero but some tools, like static code analyzers, may issue a warning when
+ * such identifier is evaluated. This macro gives the possibility to suppress
+ * such warnings only in places where this macro is used for evaluation, not in
+ * the whole analyzed code.
+ */
 #define NRFX_CHECK(module_enabled)  (module_enabled)
 
+/**
+ * @brief Macro for concatenating two tokens in macro expansion.
+ *
+ * @note This macro is expanded in two steps so that tokens given as macros
+ *       themselves are fully expanded before they are merged.
+ *
+ * @param p1  First token.
+ * @param p2  Second token.
+ *
+ * @return The two tokens merged unless they don't together form a valid token.
+ *         In such a case the preprocessor issues a warning and does not perform
+ *         the concatenation.
+ *
+ * @sa NRFX_CONCAT_3
+ */
 #define NRFX_CONCAT_2(p1, p2)       NRFX_CONCAT_2_(p1, p2)
+/**
+ * @brief Internal macro used by @ref NRFX_CONCAT_2 to perform the expansion
+ *        in two steps.
+ */
 #define NRFX_CONCAT_2_(p1, p2)      p1 ## p2
 
+/**
+ * @brief Macro for concatenating three tokens in macro expansion.
+ *
+ * @note This macro is expanded in two steps so that tokens given as macros
+ *       themselves are fully expanded before they are merged.
+ *
+ * @param p1  First token.
+ * @param p2  Second token.
+ * @param p3  Third token.
+ *
+ * @return The three tokens merged unless they don't together form a valid token.
+ *         In such a case the preprocessor issues a warning and does not perform
+ *         the concatenation.
+ *
+ * @sa NRFX_CONCAT_2
+ */
 #define NRFX_CONCAT_3(p1, p2, p3)   NRFX_CONCAT_3_(p1, p2, p3)
+/**
+ * @brief Internal macro used by @ref NRFX_CONCAT_3 to perform the expansion
+ *        in two steps.
+ */
 #define NRFX_CONCAT_3_(p1, p2, p3)  p1 ## p2 ## p3
 
+/**@brief Macro for performing rounded integer division (as opposed to
+ *        truncating the result).
+ *
+ * @param a  Numerator.
+ * @param b  Denominator.
+ *
+ * @return Rounded (integer) result of dividing @c a by @c b.
+ */
 #define NRFX_ROUNDED_DIV(a, b)  (((a) + ((b) / 2)) / (b))
 
 
@@ -48,12 +105,59 @@ typedef enum
 } nrfx_drv_state_t;
 
 
+/**
+ * @brief Function for checking if an object is placed in the Data RAM region.
+ *
+ * Several peripherals (the ones using EasyDMA) require the transfer buffers
+ * to be placed in the Data RAM region. This function can be used to check if
+ * this condition is met.
+ *
+ * @param[in] p_object  Pointer to an object whose location is to be checked.
+ *
+ * @retval true  If the pointed object is located in the Data RAM region.
+ * @retval false Otherwise.
+ */
 __STATIC_INLINE bool nrfx_is_in_ram(void const * p_object);
 
+/**
+ * @brief Function for getting the interrupt number for a specific peripheral.
+ *
+ * @param[in] p_reg  Peripheral base pointer.
+ *
+ * @return Interrupt number associated with the pointed peripheral.
+ */
 __STATIC_INLINE IRQn_Type nrfx_get_irq_number(void const * p_reg);
 
+/**
+ * @brief Function for converting an INTEN register bit position to the
+ *        corresponding event identifier.
+ *
+ * The event identifier is the offset between the event register address and
+ * the peripheral base address, and is equal (thus, can be directly casted)
+ * to the corresponding value of the enumerated type from HAL (nrf_*_event_t).
+
+ * @param bit  INTEN register bit position.
+ *
+ * @return Event identifier.
+ *
+ * @sa nrfx_event_to_bitpos
+ */
 __STATIC_INLINE uint32_t nrfx_bitpos_to_event(uint32_t bit);
 
+/**
+ * @brief Function for converting an event identifier to the corresponding
+ *        INTEN register bit position.
+ *
+ * The event identifier is the offset between the event register address and
+ * the peripheral base address, and is equal (thus, can be directly casted)
+ * to the corresponding value of the enumerated type from HAL (nrf_*_event_t).
+ *
+ * @param event  Event identifier.
+ *
+ * @return INTEN register bit position.
+ *
+ * @sa nrfx_bitpos_to_event
+ */
 __STATIC_INLINE uint32_t nrfx_event_to_bitpos(uint32_t event);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
