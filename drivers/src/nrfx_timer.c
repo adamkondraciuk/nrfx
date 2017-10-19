@@ -41,8 +41,8 @@ ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -50,8 +50,8 @@ ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -88,8 +88,8 @@ ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                  __func__,
+                  NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -207,7 +207,8 @@ void nrfx_timer_extended_compare(nrfx_timer_t const * const p_instance,
                        enable_int);
     NRFX_LOG_INFO("Timer id: %d, capture value set: %d, channel: %d.",
                   p_instance->instance_id,
-                  cc_value, cc_channel);
+                  cc_value,
+                  cc_channel);
 }
 
 void nrfx_timer_compare_int_enable(nrfx_timer_t const * const p_instance,

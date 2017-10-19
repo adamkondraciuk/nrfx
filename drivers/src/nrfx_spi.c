@@ -49,8 +49,8 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -71,8 +71,8 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
@@ -158,9 +158,7 @@ ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -324,8 +322,8 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     else
@@ -353,8 +351,8 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
         spi_xfer(p_instance->p_reg, p_cb, p_xfer_desc);
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                  __func__,
+                  NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

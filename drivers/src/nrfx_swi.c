@@ -188,9 +188,7 @@ ret_code_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
     }
 
     err_code = NRFX_ERROR_NO_MEM;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

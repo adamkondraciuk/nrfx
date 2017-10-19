@@ -52,8 +52,8 @@ ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -61,8 +61,8 @@ ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -74,9 +74,7 @@ ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
     m_cb[p_instance->instance_id].state        = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -136,16 +134,14 @@ ret_code_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t cha
             nrf_rtc_event_clear(p_instance->p_reg,event);
             err_code = NRFX_ERROR_TIMEOUT;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     }
     NRFX_LOG_INFO("RTC id: %d, channel disabled: %d.", p_instance->instance_id, channel);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -178,8 +174,8 @@ ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
         {
             err_code = NRFX_ERROR_TIMEOUT;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     }
@@ -200,9 +196,7 @@ ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
                   channel,
                   val);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -278,8 +272,7 @@ static void irq_handler(NRF_RTC_Type * p_reg,
             nrf_rtc_event_disable(p_reg,int_mask);
             nrf_rtc_int_disable(p_reg,int_mask);
             nrf_rtc_event_clear(p_reg,event);
-            NRFX_LOG_DEBUG("Event: %s, instance id: %d.",
-                         (uint32_t)EVT_TO_STR(event), (uint32_t)instance_id);
+            NRFX_LOG_DEBUG("Event: %s, instance id: %d.", EVT_TO_STR(event), instance_id);
             m_handlers[instance_id]((nrfx_rtc_int_type_t)i);
         }
         int_mask <<= 1;
@@ -290,7 +283,7 @@ static void irq_handler(NRF_RTC_Type * p_reg,
         nrf_rtc_event_pending(p_reg, event))
     {
         nrf_rtc_event_clear(p_reg, event);
-        NRFX_LOG_DEBUG("Event: %s, instance id: %d.", (uint32_t)EVT_TO_STR(event), instance_id);
+        NRFX_LOG_DEBUG("Event: %s, instance id: %d.", EVT_TO_STR(event), instance_id);
         m_handlers[instance_id](NRFX_RTC_INT_TICK);
     }
 
@@ -299,7 +292,7 @@ static void irq_handler(NRF_RTC_Type * p_reg,
         nrf_rtc_event_pending(p_reg, event))
     {
         nrf_rtc_event_clear(p_reg,event);
-        NRFX_LOG_DEBUG("Event: %s, instance id: %d.", (uint32_t)EVT_TO_STR(event), instance_id);
+        NRFX_LOG_DEBUG("Event: %s, instance id: %d.", EVT_TO_STR(event), instance_id);
         m_handlers[instance_id](NRFX_RTC_INT_OVERFLOW);
     }
 }

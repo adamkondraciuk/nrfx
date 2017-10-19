@@ -46,8 +46,8 @@ ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -64,9 +64,7 @@ ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
     NRFX_IRQ_ENABLE(WDT_IRQn);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -110,9 +108,7 @@ ret_code_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id)
         result = NRFX_ERROR_NO_MEM;
     }
     NRFX_CRITICAL_SECTION_EXIT();
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(result));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(result));
     return result;
 }
 

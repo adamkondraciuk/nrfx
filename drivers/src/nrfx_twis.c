@@ -435,8 +435,8 @@ ret_code_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -454,8 +454,8 @@ ret_code_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
@@ -508,9 +508,7 @@ ret_code_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
     p_cb->ev_handler = event_handler;
     p_cb->state      = NRFX_DRV_STATE_INITIALIZED;
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -669,8 +667,8 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data address */
@@ -678,8 +676,8 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data size */
@@ -687,8 +685,8 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_LENGTH;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -696,9 +694,7 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
                         (uint8_t const *)p_buf,
                         (nrf_twis_amount_t)size);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -715,8 +711,8 @@ ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data address */
@@ -724,8 +720,8 @@ ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Check data size */
@@ -733,8 +729,8 @@ ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
     {
         err_code = NRFX_ERROR_INVALID_LENGTH;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -742,9 +738,7 @@ ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
                         (uint8_t *)p_buf,
                         (nrf_twis_amount_t)size);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

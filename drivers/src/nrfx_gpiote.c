@@ -179,8 +179,8 @@ ret_code_t nrfx_gpiote_init(void)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -203,9 +203,7 @@ ret_code_t nrfx_gpiote_init(void)
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -292,9 +290,7 @@ ret_code_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
         }
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -494,9 +490,7 @@ ret_code_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
         }
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -697,8 +691,7 @@ void nrfx_gpiote_irq_handler(void)
                         if ((pin_state && (sense == NRF_GPIO_PIN_SENSE_HIGH)) ||
                             (!pin_state && (sense == NRF_GPIO_PIN_SENSE_LOW))  )
                         {
-                            NRFX_LOG_DEBUG("PORT event for pin: %d, polarity: %d.", pin,
-                                           polarity);
+                            NRFX_LOG_DEBUG("PORT event for pin: %d, polarity: %d.", pin, polarity);
                             if (polarity == NRF_GPIOTE_POLARITY_TOGGLE)
                             {
                                 nrf_gpio_pin_sense_t next_sense =

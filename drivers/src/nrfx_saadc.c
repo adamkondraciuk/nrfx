@@ -73,7 +73,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_END))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_END));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_SAADC_EVENT_END));
 
         if (!m_cb.low_power_mode || m_cb.conversions_end)
         {
@@ -104,7 +104,7 @@ void nrfx_saadc_irq_handler(void)
     if (m_cb.low_power_mode && nrf_saadc_event_check(NRF_SAADC_EVENT_STARTED))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STARTED));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_SAADC_EVENT_STARTED));
 
         if (m_cb.buffer_size_left > m_cb.active_channels)
         {
@@ -136,7 +136,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_CALIBRATEDONE))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_CALIBRATEDONE);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_CALIBRATEDONE));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_SAADC_EVENT_CALIBRATEDONE));
         m_cb.adc_state = NRF_SAADC_STATE_IDLE;
 
         nrfx_saadc_evt_t evt;
@@ -146,7 +146,7 @@ void nrfx_saadc_irq_handler(void)
     if (nrf_saadc_event_check(NRF_SAADC_EVENT_STOPPED))
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_SAADC_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_SAADC_EVENT_STOPPED));
         m_cb.adc_state = NRF_SAADC_STATE_IDLE;
     }
     else
@@ -169,7 +169,7 @@ void nrfx_saadc_irq_handler(void)
                 evt.data.limit.limit_type = LIMIT_EVENT_TO_LIMIT_TYPE(event);
                 NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.",
                                evt.data.limit.channel,
-                               (uint32_t)EVT_TO_STR_LIMIT(evt.data.limit.limit_type));
+                               EVT_TO_STR_LIMIT(evt.data.limit.limit_type));
                 m_cb.event_handler(&evt);
             }
         }
@@ -186,16 +186,16 @@ ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if (event_handler == NULL)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -229,9 +229,7 @@ ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
     nrf_saadc_enable();
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
 
     return err_code;
 }
@@ -288,8 +286,8 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -320,9 +318,7 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
 
     NRFX_LOG_INFO("Channel initialized: %d.", channel);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -339,8 +335,8 @@ ret_code_t nrfx_saadc_channel_uninit(uint8_t channel)
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -355,9 +351,7 @@ ret_code_t nrfx_saadc_channel_uninit(uint8_t channel)
     NRFX_LOG_INFO("Channel denitialized: %d.", channel);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -377,8 +371,8 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     m_cb.adc_state = NRF_SAADC_STATE_BUSY;
@@ -427,8 +421,8 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                     (uint32_t)__func__,
-                     (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                     __func__,
+                     NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -445,8 +439,8 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
         nrf_saadc_int_enable(NRF_SAADC_INT_END | NRF_SAADC_INT_CALIBRATEDONE);
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if (m_cb.adc_state == NRF_SAADC_STATE_BUSY)
@@ -456,8 +450,8 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
             nrf_saadc_int_enable(NRF_SAADC_INT_END);
             err_code = NRFX_ERROR_BUSY;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         else
@@ -473,8 +467,8 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
             nrf_saadc_int_enable(NRF_SAADC_INT_END);
             err_code = NRFX_SUCCESS;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
     }
@@ -486,7 +480,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
     m_cb.p_secondary_buffer = NULL;
 
     NRFX_LOG_INFO("Function: %d, buffer length: %d, active channels: %d.",
-                  (uint32_t)__func__,
+                  __func__,
                   size,
                   m_cb.active_channels);
 
@@ -503,9 +497,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
     }
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -528,9 +520,7 @@ ret_code_t nrfx_saadc_sample()
         nrf_saadc_task_trigger(NRF_SAADC_TASK_SAMPLE);
     }
 
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -545,8 +535,8 @@ ret_code_t nrfx_saadc_calibrate_offset()
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -557,8 +547,8 @@ ret_code_t nrfx_saadc_calibrate_offset()
     nrf_saadc_task_trigger(NRF_SAADC_TASK_CALIBRATEOFFSET);
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                  __func__,
+                  NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

@@ -10,8 +10,8 @@
 
 #define LOG_FUNCTION_EXIT(level, ret_code)            \
     NRFX_LOG_##level("Function: %s, error code: %s.", \
-        (uint32_t)__func__,                           \
-        (uint32_t)NRFX_LOG_ERROR_STRING_GET(ret_code))
+        __func__,                                     \
+        NRFX_LOG_ERROR_STRING_GET(ret_code))
 
 
 typedef struct {

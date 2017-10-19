@@ -47,8 +47,7 @@ void nrfx_pdm_irq_handler(void)
     if (nrf_pdm_event_check(NRF_PDM_EVENT_STARTED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STARTED);
-        NRFX_LOG_DEBUG("Event: %s.",
-                       (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STARTED));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_PDM_EVENT_STARTED));
 
         uint8_t finished_buffer = m_cb.active_buffer;
 
@@ -100,8 +99,7 @@ void nrfx_pdm_irq_handler(void)
     else if (nrf_pdm_event_check(NRF_PDM_EVENT_STOPPED))
     {
         nrf_pdm_event_clear(NRF_PDM_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("Event: %s.",
-                       (uint32_t)EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_PDM_EVENT_STOPPED));
         nrf_pdm_disable();
         m_cb.op_state = NRFX_PDM_STATE_IDLE;
 
@@ -149,16 +147,16 @@ ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if ((p_config == NULL) || (event_handler == NULL))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM ||
@@ -166,8 +164,8 @@ ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -197,8 +195,8 @@ ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                  __func__,
+                  NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -235,14 +233,14 @@ ret_code_t nrfx_pdm_start(void)
         {
             err_code = NRFX_SUCCESS;
             NRFX_LOG_INFO("Function: %s, error code: %s.",
-                          (uint32_t)__func__,
-                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                          __func__,
+                          NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -251,8 +249,8 @@ ret_code_t nrfx_pdm_start(void)
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                  __func__,
+                  NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -317,14 +315,14 @@ ret_code_t nrfx_pdm_stop(void)
             m_cb.op_state = NRFX_PDM_STATE_IDLE;
             err_code = NRFX_SUCCESS;
             NRFX_LOG_INFO("Function: %s, error code: %s.",
-                          (uint32_t)__func__,
-                          (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                          __func__,
+                          NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
@@ -332,9 +330,7 @@ ret_code_t nrfx_pdm_stop(void)
 
     nrf_pdm_task_trigger(NRF_PDM_TASK_STOP);
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

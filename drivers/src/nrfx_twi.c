@@ -161,8 +161,8 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -180,8 +180,8 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
@@ -221,9 +221,7 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -346,7 +344,7 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
     else if (nrf_twi_event_check(p_twi, NRF_TWI_EVENT_ERROR))
     {
         nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_ERROR);
-        NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
+        NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
         nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STOP);
         *p_error = true;
     }
@@ -355,11 +353,11 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
         if (nrf_twi_event_check(p_twi, NRF_TWI_EVENT_TXDSENT))
         {
             nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_TXDSENT);
-            NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_TXDSENT));
+            NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_TXDSENT));
             if (nrf_twi_event_check(p_twi, NRF_TWI_EVENT_ERROR))
             {
                 nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_ERROR);
-                NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
+                NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
                 nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STOP);
                 *p_error = true;
             }
@@ -374,10 +372,10 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
         else if (nrf_twi_event_check(p_twi, NRF_TWI_EVENT_RXDREADY))
         {
             nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_RXDREADY);
-            NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_RXDREADY));
+            NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_RXDREADY));
             if (nrf_twi_event_check(p_twi, NRF_TWI_EVENT_ERROR))
             {
-                NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
+                NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_ERROR));
                 nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_ERROR);
                 nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STOP);
                 *p_error = true;
@@ -392,7 +390,7 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
     if (do_stop_check && nrf_twi_event_check(p_twi, NRF_TWI_EVENT_STOPPED))
     {
         nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_STOPPED);
-        NRFX_LOG_DEBUG("TWI: Event: %s.", (uint32_t)EVT_TO_STR_TWI(NRF_TWI_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_STOPPED));
         return false;
     }
 
@@ -428,9 +426,9 @@ static ret_code_t twi_tx_start_transfer(twi_control_block_t * p_cb,
     if (p_cb->handler)
     {
         p_cb->int_mask = NRF_TWI_INT_STOPPED_MASK   |
-                        NRF_TWI_INT_ERROR_MASK     |
-                        NRF_TWI_INT_TXDSENT_MASK   |
-                        NRF_TWI_INT_RXDREADY_MASK;
+                         NRF_TWI_INT_ERROR_MASK     |
+                         NRF_TWI_INT_TXDSENT_MASK   |
+                         NRF_TWI_INT_RXDREADY_MASK;
         nrf_twi_int_enable(p_twi, p_cb->int_mask);
     }
     else
@@ -553,8 +551,8 @@ __STATIC_INLINE ret_code_t twi_xfer(twi_control_block_t        * p_cb,
         nrf_twi_int_enable(p_twi, p_cb->int_mask);
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     else
@@ -613,9 +611,10 @@ ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWI_XFER_TXRX)));
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWI_XFER_TXTX)));
 
-    NRFX_LOG_INFO("Transfer type: %s.", (uint32_t)TRANSFER_TO_STR(p_xfer_desc->type));
+    NRFX_LOG_INFO("Transfer type: %s.", TRANSFER_TO_STR(p_xfer_desc->type));
     NRFX_LOG_INFO("Transfer buffers length: primary: %d, secondary: %d.",
-                  p_xfer_desc->primary_length, p_xfer_desc->secondary_length);
+                  p_xfer_desc->primary_length,
+                  p_xfer_desc->secondary_length);
     NRFX_LOG_DEBUG("Primary buffer data:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_xfer_desc->p_primary_buf,
                            p_xfer_desc->primary_length * sizeof(p_xfer_desc->p_primary_buf));
@@ -625,7 +624,8 @@ ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
 
     err_code = twi_xfer(p_cb, (NRF_TWI_Type  *)p_instance->p_twi, p_xfer_desc, flags);
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                     (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                     __func__,
+                     NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -706,18 +706,18 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
             if (errorsrc & NRF_TWI_ERROR_ADDRESS_NACK)
             {
                 event.type = NRFX_TWI_EVT_ADDRESS_NACK;
-                NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWI_EVT_ADDRESS_NACK));
+                NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWI_EVT_ADDRESS_NACK));
             }
             else if (errorsrc & NRF_TWI_ERROR_DATA_NACK)
             {
                 event.type = NRFX_TWI_EVT_DATA_NACK;
-                NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWI_EVT_DATA_NACK));
+                NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWI_EVT_DATA_NACK));
             }
         }
         else
         {
             event.type = NRFX_TWI_EVT_DONE;
-            NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWI_EVT_DONE));
+            NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWI_EVT_DONE));
         }
 
         p_cb->busy = false;

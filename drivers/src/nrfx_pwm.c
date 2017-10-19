@@ -97,8 +97,8 @@ ret_code_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-            (uint32_t)__func__,
-            (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -139,9 +139,7 @@ ret_code_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-        (uint32_t)__func__,
-        (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -272,11 +270,11 @@ uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const * const p_instance,
     nrf_pwm_shorts_set(p_instance->p_registers, shorts_mask);
 
     NRFX_LOG_INFO("Function: %s, sequence length: %d.",
-        (uint32_t)__func__,
-        p_sequence->length * sizeof(p_sequence->values));
+                  __func__,
+                  p_sequence->length * sizeof(p_sequence->values));
     NRFX_LOG_DEBUG("Sequence data:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_sequence->values.p_raw,
-        p_sequence->length * sizeof(p_sequence->values));
+                           p_sequence->length * sizeof(p_sequence->values));
     return start_playback(p_instance, p_cb, flags,
         odd ? NRF_PWM_TASK_SEQSTART1 : NRF_PWM_TASK_SEQSTART0);
 }
@@ -314,10 +312,10 @@ uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const * const p_instance,
     nrf_pwm_shorts_set(p_instance->p_registers, shorts_mask);
 
     NRFX_LOG_INFO("Function: %s, sequence 0 length: %d.",
-        (uint32_t)__func__,
+        __func__,
         p_sequence_0->length * sizeof(p_sequence_0->values));
     NRFX_LOG_INFO("Function: %s, sequence 1 length: %d.",
-        (uint32_t)__func__,
+        __func__,
         p_sequence_1->length * sizeof(p_sequence_1->values));
     NRFX_LOG_DEBUG("Sequence 0 data:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_sequence_0->values.p_raw,
@@ -353,7 +351,7 @@ bool nrfx_pwm_stop(nrfx_pwm_t const * const p_instance,
         } while (wait_until_stopped);
     }
 
-    NRFX_LOG_INFO("%s returned %d.", (uint32_t)__func__, ret_val);
+    NRFX_LOG_INFO("%s returned %d.", __func__, ret_val);
     return ret_val;
 }
 
@@ -379,7 +377,7 @@ bool nrfx_pwm_is_stopped(nrfx_pwm_t const * const p_instance)
         ret_val = true;
     }
 
-    NRFX_LOG_INFO("%s returned %d.", (uint32_t)__func__, ret_val);
+    NRFX_LOG_INFO("%s returned %d.", __func__, ret_val);
     return ret_val;
 }
 

@@ -106,8 +106,8 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -126,8 +126,8 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     configure_pins(p_config);
@@ -140,9 +140,7 @@ ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -181,8 +179,8 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -190,8 +188,8 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -246,9 +244,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
     nrf_i2s_task_trigger(NRF_I2S, NRF_I2S_TASK_START);
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -259,8 +255,7 @@ void nrfx_i2s_stop(void)
 
     // First disable interrupts, then trigger the STOP task, so no spurious
     // RXPTRUPD and TXPTRUPD events (see FTPAN-55) will be processed.
-    nrf_i2s_int_disable(NRF_I2S,
-        NRF_I2S_INT_RXPTRUPD_MASK | NRF_I2S_INT_TXPTRUPD_MASK);
+    nrf_i2s_int_disable(NRF_I2S, NRF_I2S_INT_RXPTRUPD_MASK | NRF_I2S_INT_TXPTRUPD_MASK);
 
     nrf_i2s_task_trigger(NRF_I2S, NRF_I2S_TASK_STOP);
 
@@ -280,7 +275,7 @@ void nrfx_i2s_irq_handler(void)
     if (nrf_i2s_event_check(NRF_I2S, NRF_I2S_EVENT_TXPTRUPD))
     {
         nrf_i2s_event_clear(NRF_I2S, NRF_I2S_EVENT_TXPTRUPD);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_TXPTRUPD));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_I2S_EVENT_TXPTRUPD));
 
         // If transmission is not enabled, but for some reason the TXPTRUPD
         // event has been generated, just ignore it.
@@ -311,7 +306,7 @@ void nrfx_i2s_irq_handler(void)
     if (nrf_i2s_event_check(NRF_I2S, NRF_I2S_EVENT_RXPTRUPD))
     {
         nrf_i2s_event_clear(NRF_I2S, NRF_I2S_EVENT_RXPTRUPD);
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRF_I2S_EVENT_RXPTRUPD));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_I2S_EVENT_RXPTRUPD));
 
         // If reception is not enabled, but for some reason the RXPTRUPD event
         // has been generated, just ignore it.

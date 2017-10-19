@@ -27,8 +27,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_SAMPLERDY_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_SAMPLERDY);
-        NRFX_LOG_DEBUG("Event: %s.",
-                       (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_SAMPLERDY));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_QDEC_EVENT_SAMPLERDY));
 
         event.type = NRF_QDEC_EVENT_SAMPLERDY;
         event.data.sample.value = (int8_t)nrf_qdec_sample_get();
@@ -39,8 +38,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_REPORTRDY_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_REPORTRDY);
-        NRFX_LOG_DEBUG("Event: %s.",
-                       (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_REPORTRDY));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_QDEC_EVENT_REPORTRDY));
 
         event.type = NRF_QDEC_EVENT_REPORTRDY;
 
@@ -53,8 +51,7 @@ void nrfx_qdec_irq_handler(void)
          nrf_qdec_int_enable_check(NRF_QDEC_INT_ACCOF_MASK) )
     {
         nrf_qdec_event_clear(NRF_QDEC_EVENT_ACCOF);
-        NRFX_LOG_DEBUG("Event: %s.",
-                       (uint32_t)EVT_TO_STR(NRF_QDEC_EVENT_ACCOF));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_QDEC_EVENT_ACCOF));
 
         event.type = NRF_QDEC_EVENT_ACCOF;
         m_qdec_event_handler(event);
@@ -71,8 +68,8 @@ ret_code_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -90,8 +87,8 @@ ret_code_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -133,9 +130,7 @@ ret_code_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 

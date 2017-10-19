@@ -160,8 +160,8 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     {
         err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 
@@ -179,8 +179,8 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     {
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
@@ -223,9 +223,7 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  (uint32_t)__func__,
-                  (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -321,8 +319,8 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
@@ -332,8 +330,8 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         nrf_twim_int_enable(p_twim, p_cb->int_mask);
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         (uint32_t)__func__,
-                         (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
     else
@@ -360,8 +358,8 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         {
             err_code = NRFX_ERROR_INVALID_ADDR;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
@@ -373,7 +371,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
         while (!nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_TXSTARTED))
         {}
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", (uint32_t)EVT_TO_STR_TWIM(NRF_TWIM_EVENT_TXSTARTED));
+        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_TXSTARTED));
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
         nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_secondary_buf, p_xfer_desc->secondary_length);
         p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK | NRF_TWIM_INT_ERROR_MASK;
@@ -384,8 +382,8 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         {
             err_code = NRFX_ERROR_INVALID_ADDR;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             (uint32_t)__func__,
-                             (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
         nrf_twim_rx_buffer_set(p_twim, p_xfer_desc->p_secondary_buf, p_xfer_desc->secondary_length);
@@ -452,8 +450,7 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
         {
             if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_ERROR))
             {
-                NRFX_LOG_DEBUG("TWIM: Event: %s.",
-                               (uint32_t)EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
+                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
                 nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
                 nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
                 nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
@@ -486,9 +483,10 @@ ret_code_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWIM_XFER_TXRX)));
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWIM_XFER_TXTX)));
 
-    NRFX_LOG_INFO("Transfer type: %s.", (uint32_t)TRANSFER_TO_STR(p_xfer_desc->type));
+    NRFX_LOG_INFO("Transfer type: %s.", TRANSFER_TO_STR(p_xfer_desc->type));
     NRFX_LOG_INFO("Transfer buffers length: primary: %d, secondary: %d.",
-                  p_xfer_desc->primary_length, p_xfer_desc->secondary_length);
+                  p_xfer_desc->primary_length,
+                  p_xfer_desc->secondary_length);
     NRFX_LOG_DEBUG("Primary buffer data:");
     NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_xfer_desc->p_primary_buf,
                            p_xfer_desc->primary_length * sizeof(p_xfer_desc->p_primary_buf));
@@ -498,7 +496,8 @@ ret_code_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
 
     err_code = twim_xfer(p_cb, (NRF_TWIM_Type *)p_instance->p_twim, p_xfer_desc, flags);
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                     (uint32_t)__func__, (uint32_t)NRFX_LOG_ERROR_STRING_GET(err_code));
+                     __func__,
+                     NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -565,7 +564,7 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_ERROR))
     {
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", (uint32_t)EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
+        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
         if (!nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
         {
             nrf_twim_int_disable(p_twim, p_cb->int_mask);
@@ -582,7 +581,7 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
 
     if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
     {
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", (uint32_t)EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
+        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
         event.xfer_desc = p_cb->xfer_desc;
         if (p_cb->error)
@@ -606,7 +605,7 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     else
     {
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", (uint32_t)EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
+        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
         if (p_cb->xfer_desc.type == NRFX_TWIM_XFER_TX)
         {
             event.xfer_desc = p_cb->xfer_desc;
@@ -633,17 +632,17 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     if (errorsrc & NRF_TWIM_ERROR_ADDRESS_NACK)
     {
         event.type = NRFX_TWIM_EVT_ADDRESS_NACK;
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWIM_EVT_ADDRESS_NACK));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_ADDRESS_NACK));
     }
     else if (errorsrc & NRF_TWIM_ERROR_DATA_NACK)
     {
         event.type = NRFX_TWIM_EVT_DATA_NACK;
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWIM_EVT_DATA_NACK));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_DATA_NACK));
     }
     else
     {
         event.type = NRFX_TWIM_EVT_DONE;
-        NRFX_LOG_DEBUG("Event: %s.", (uint32_t)EVT_TO_STR(NRFX_TWIM_EVT_DONE));
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_DONE));
     }
 
     if (!p_cb->repeated)
