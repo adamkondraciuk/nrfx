@@ -10,8 +10,6 @@
 
 #include <nrfx_twi.h>
 #include "prs/nrfx_prs.h"
-#include <hal/nrf_gpio.h>
-#include <nrf_delay.h>
 
 #define NRFX_LOG_MODULE TWI
 #include <nrfx_log.h>
@@ -111,41 +109,7 @@ static ret_code_t twi_process_error(uint32_t errorsrc)
     return ret;
 }
 
-static void twi_clear_bus(nrfx_twi_config_t const * p_config)
-{
-    NRF_GPIO->PIN_CNF[p_config->scl] = SCL_PIN_INIT_CONF;
-    NRF_GPIO->PIN_CNF[p_config->sda] = SDA_PIN_INIT_CONF;
 
-    nrf_gpio_pin_set(p_config->scl);
-    nrf_gpio_pin_set(p_config->sda);
-
-    NRF_GPIO->PIN_CNF[p_config->scl] = SCL_PIN_INIT_CONF_CLR;
-    NRF_GPIO->PIN_CNF[p_config->sda] = SDA_PIN_INIT_CONF_CLR;
-
-    nrf_delay_us(4);
-
-    for (int i = 0; i < 9; i++)
-    {
-        if (nrf_gpio_pin_read(p_config->sda))
-        {
-            if (i == 0)
-            {
-                return;
-            }
-            else
-            {
-                break;
-            }
-        }
-        nrf_gpio_pin_clear(p_config->scl);
-        nrf_delay_us(4);
-        nrf_gpio_pin_set(p_config->scl);
-        nrf_delay_us(4);
-    }
-    nrf_gpio_pin_clear(p_config->sda);
-    nrf_delay_us(4);
-    nrf_gpio_pin_set(p_config->sda);
-}
 
 ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_config_t const * p_config,
@@ -192,12 +156,6 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     p_cb->repeated        = false;
     p_cb->busy            = false;
     p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
-
-    if(p_config->clear_bus_init)
-    {
-        /* Send clocks (max 9) until slave device back from stuck mode */
-        twi_clear_bus(p_config);
-    }
 
     /* To secure correct signal levels on the pins used by the TWI
        master when the system is in OFF mode, and when the TWI master is

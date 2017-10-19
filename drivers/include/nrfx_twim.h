@@ -54,7 +54,6 @@ typedef struct
     uint32_t             sda;                 ///< SDA pin number.
     nrf_twim_frequency_t frequency;           ///< TWIM frequency.
     uint8_t              interrupt_priority;  ///< Interrupt priority.
-    bool                 clear_bus_init;      ///< Clear bus during init.
     bool                 hold_bus_uninit;     ///< Hold pull up state on gpio pins after uninit.
 } nrfx_twim_config_t;
 
@@ -67,7 +66,6 @@ typedef struct
     .scl                = 31,                                                       \
     .sda                = 31,                                                       \
     .interrupt_priority = NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY,                    \
-    .clear_bus_init     = NRFX_TWIM_DEFAULT_CONFIG_CLR_BUS_INIT,                    \
     .hold_bus_uninit    = NRFX_TWIM_DEFAULT_CONFIG_HOLD_BUS_UNINIT,                 \
 }
 
