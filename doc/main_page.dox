@@ -43,7 +43,7 @@ To install the handlers in the standard MDK way, you must only add the following
 line to the @ref nrfx_glue file:
 
 @code
-#include <integration/nrfx_irqs.h>
+#include <soc/nrfx_irqs.h>
 @endcode
 
 This will cause the preprocessor to properly rename all the IRQ handler

@@ -4,13 +4,13 @@
 #define NRFX_IRQS_H__
 
 #if defined(NRF51)
-    #include <integration/nrfx_irqs_nrf51.h>
+    #include <soc/nrfx_irqs_nrf51.h>
 #elif defined(NRF52810_XXAA)
-    #include <integration/nrfx_irqs_nrf52810.h>
+    #include <soc/nrfx_irqs_nrf52810.h>
 #elif defined(NRF52832_XXAA) || defined (NRF52832_XXAB)
-    #include <integration/nrfx_irqs_nrf52832.h>
+    #include <soc/nrfx_irqs_nrf52832.h>
 #elif defined(NRF52840_XXAA)
-    #include <integration/nrfx_irqs_nrf52840.h>
+    #include <soc/nrfx_irqs_nrf52840.h>
 #else
     #error "Unknown device."
 #endif

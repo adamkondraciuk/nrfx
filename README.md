@@ -23,9 +23,9 @@ files etc.
  │   └── include     # nrfx drivers headers
  │   └── src         # nrfx drivers sources
  ├── hal             # Hardware Access Layer files
- ├── integration     # Integration files
  ├── mdk             # Nordic MDK files
- └── templates       # Default integration files for Nordic SoCs
+ ├── soc             # Nordic SoC related files
+ └── templates       # Templates of nrfx integration files
 ```
 
 ##Generating documentation

@@ -15,4 +15,4 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Allocators for: PPI, SWI/EGU.
 - MDK in version 8.14.0.
 - Offline documentation for every added driver and simple integration description.
-- Default integration files.
+- Template integration files.
