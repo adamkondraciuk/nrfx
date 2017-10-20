@@ -18,7 +18,7 @@
 
 /** @brief Enumerated type for error codes. */
 typedef enum {
-    NRFX_SUCCESS                    = (NRFX_ERROR_BASE_NUM + 0),  ///< Operation performed successfuly.
+    NRFX_SUCCESS                    = (NRFX_ERROR_BASE_NUM + 0),  ///< Operation performed successfully.
     NRFX_ERROR_INTERNAL             = (NRFX_ERROR_BASE_NUM + 1),  ///< Internal error.
     NRFX_ERROR_NO_MEM               = (NRFX_ERROR_BASE_NUM + 2),  ///< No memory for operation.
     NRFX_ERROR_NOT_SUPPORTED        = (NRFX_ERROR_BASE_NUM + 3),  ///< Not supported.
@@ -27,7 +27,7 @@ typedef enum {
     NRFX_ERROR_INVALID_LENGTH       = (NRFX_ERROR_BASE_NUM + 6),  ///< Invalid length.
     NRFX_ERROR_TIMEOUT              = (NRFX_ERROR_BASE_NUM + 7),  ///< Operation timed out.
     NRFX_ERROR_FORBIDDEN            = (NRFX_ERROR_BASE_NUM + 8),  ///< Operation is forbidden.
-    NRFX_ERROR_NULL                 = (NRFX_ERROR_BASE_NUM + 9),  ///< Null pointer
+    NRFX_ERROR_NULL                 = (NRFX_ERROR_BASE_NUM + 9),  ///< Null pointer.
     NRFX_ERROR_INVALID_ADDR         = (NRFX_ERROR_BASE_NUM + 10), ///< Bad memory address.
     NRFX_ERROR_BUSY                 = (NRFX_ERROR_BASE_NUM + 11), ///< Busy.
     NRFX_ERROR_ALREADY_INITIALIZED  = (NRFX_ERROR_BASE_NUM + 12), ///< Module already initialized.

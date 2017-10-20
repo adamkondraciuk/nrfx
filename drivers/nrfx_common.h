@@ -26,8 +26,8 @@ extern "C" {
  *        a non-zero value.
  *
  * Normally, preprocessors treat all undefined identifiers as having the value
- * zero but some tools, like static code analyzers, may issue a warning when
- * such identifier is evaluated. This macro gives the possibility to suppress
+ * zero. However, some tools, like static code analyzers, may issue a warning
+ * when such identifier is evaluated. This macro gives the possibility to suppress
  * such warnings only in places where this macro is used for evaluation, not in
  * the whole analyzed code.
  */
@@ -42,9 +42,9 @@ extern "C" {
  * @param p1  First token.
  * @param p2  Second token.
  *
- * @return The two tokens merged unless they don't together form a valid token.
- *         In such a case the preprocessor issues a warning and does not perform
- *         the concatenation.
+ * @return The two tokens merged into one, unless they cannot together form
+ *         a valid token (in such case, the preprocessor issues a warning and
+ *         does not perform the concatenation).
  *
  * @sa NRFX_CONCAT_3
  */
@@ -65,9 +65,9 @@ extern "C" {
  * @param p2  Second token.
  * @param p3  Third token.
  *
- * @return The three tokens merged unless they don't together form a valid token.
- *         In such a case the preprocessor issues a warning and does not perform
- *         the concatenation.
+ * @return The three tokens merged into one, unless they cannot together form
+ *         a valid token (in such case, the preprocessor issues a warning and
+ *         does not perform the concatenation).
  *
  * @sa NRFX_CONCAT_2
  */
@@ -133,8 +133,8 @@ __STATIC_INLINE IRQn_Type nrfx_get_irq_number(void const * p_reg);
  *        corresponding event identifier.
  *
  * The event identifier is the offset between the event register address and
- * the peripheral base address, and is equal (thus, can be directly casted)
- * to the corresponding value of the enumerated type from HAL (nrf_*_event_t).
+ * the peripheral base address, and is equal (thus, can be directly cast) to
+ * the corresponding value of the enumerated type from HAL (nrf_*_event_t).
 
  * @param bit  INTEN register bit position.
  *
@@ -149,8 +149,8 @@ __STATIC_INLINE uint32_t nrfx_bitpos_to_event(uint32_t bit);
  *        INTEN register bit position.
  *
  * The event identifier is the offset between the event register address and
- * the peripheral base address, and is equal (thus, can be directly casted)
- * to the corresponding value of the enumerated type from HAL (nrf_*_event_t).
+ * the peripheral base address, and is equal (thus, can be directly cast) to
+ * the corresponding value of the enumerated type from HAL (nrf_*_event_t).
  *
  * @param event  Event identifier.
  *

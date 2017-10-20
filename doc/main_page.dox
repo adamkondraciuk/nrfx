@@ -1,7 +1,7 @@
 /**
 @mainpage Introduction
 
-@em nrfx is an extract from the nRF5 SDK that contains solely drivers for
+@em nrfx is an extract from the nRF5 SDK that contains solely the drivers for
 peripherals present in Nordic SoCs, for convenience complemented with the MDK
 package containing required structures and bitfields definitions, startup
 files etc.
@@ -13,7 +13,7 @@ for a given SoC.
 
 The purpose of @em nrfx is to make it possible to use the same set of peripheral
 drivers in various environments, from RTOSes to bare metal applications.
-Hence, for a given host environment a light integration layer must be provided
+Hence, for a given host environment, a light integration layer must be provided
 that implements certain specific routines, like interrupt management, critical
 sections, assertions, or logging. This is done by filling a predefined set of
 macros with proper implementations (or keeping some empty if desired) in files
@@ -39,14 +39,14 @@ In addition, the following locations should be specified as include paths
 The IRQ handlers in all drivers are implemented as ordinary API functions
 named "nrfx_*_irq_handler". They can be bound to some structures or called in
 a specific way according to the requirements of the host environment.
-In case the standard MDK way of installing the handlers is to be used, the only
-thing to do is to add the following line to the @ref nrfx_glue file:
+To install the handlers in the standard MDK way, you must only add the following
+line to the @ref nrfx_glue file:
 
 @code
 #include <integration/nrfx_irqs.h>
 @endcode
 
-This will cause that the preprocessor will properly rename all the IRQ handler
+This will cause the preprocessor to properly rename all the IRQ handler
 functions so that the linker could install them in the vector table.
 
 @section nrfx_configuration Configuration
@@ -67,10 +67,10 @@ in a file named:
 - nrfx_config.h
 
 This file, similarly to the integration files mentioned above, can be placed
-in any suitable location withing the host environment.
+in any suitable location within the host environment.
 The <a href="../../templates/">templates</a> subfolder contains templates of
 configuration files for all currently supported Nordic SoCs placed in respective
 subfolders.
 Refer to the "driver configuration" section in the API reference for a given
-driver to get more information regarding configuration options available for it.
+driver for more information regarding configuration options available for it.
 */
