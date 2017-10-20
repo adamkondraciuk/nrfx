@@ -18,7 +18,7 @@ extern "C" {
  */
 
 /**@brief Macro to convert microseconds into ticks. */
-#define RTC_US_TO_TICKS(us,freq) (((us) * (freq)) / 1000000U)
+#define NRFX_RTC_US_TO_TICKS(us,freq) (((us) * (freq)) / 1000000U)
 
 /**@brief RTC driver interrupt types. */
 typedef enum
@@ -80,8 +80,8 @@ typedef struct
     .prescaler          = RTC_FREQ_TO_PRESCALER(NRFX_RTC_DEFAULT_CONFIG_FREQUENCY), \
     .interrupt_priority = NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY,                     \
     .reliable           = NRFX_RTC_DEFAULT_CONFIG_RELIABLE,                         \
-    .tick_latency       = RTC_US_TO_TICKS(NRF_MAXIMUM_LATENCY_US,                   \
-                                          NRFX_RTC_DEFAULT_CONFIG_FREQUENCY),       \
+    .tick_latency       = NRFX_RTC_US_TO_TICKS(NRF_MAXIMUM_LATENCY_US,              \
+                                               NRFX_RTC_DEFAULT_CONFIG_FREQUENCY),  \
 }
 
 /**@brief RTC driver instance handler type. */
