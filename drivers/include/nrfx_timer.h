@@ -104,7 +104,7 @@ typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
  * @retval NRFX_ERROR_INVALID_STATE If the instance is already initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If no handler was provided.
  */
-ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
+nrfx_err_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
                            nrfx_timer_config_t const * p_config,
                            nrfx_timer_event_handler_t  timer_event_handler);
 

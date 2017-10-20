@@ -145,7 +145,7 @@ typedef void (*nrfx_uart_event_handler_t)(nrfx_uart_event_t const * p_event,
  *                                     possible only if @ref nrfx_prs module
  *                                     is enabled.
  */
-ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
+nrfx_err_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
                           nrfx_uart_config_t const * p_config,
                           nrfx_uart_event_handler_t  event_handler);
 
@@ -195,7 +195,7 @@ __STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_insta
  * @retval    NRFX_ERROR_FORBIDDEN    If the transfer was aborted from a different context
  *                                    (blocking mode only).
  */
-ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
+nrfx_err_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
                         uint8_t const *     p_data,
                         uint32_t            length);
 
@@ -244,7 +244,7 @@ void nrfx_uart_tx_abort(nrfx_uart_t const * p_instance);
  *                                (blocking mode only, also see @ref nrfx_uart_rx_disable).
  * @retval    NRFX_ERROR_INTERNAL If UART peripheral reported an error.
  */
-ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
+nrfx_err_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                         uint8_t *           p_data,
                         uint32_t            length);
 

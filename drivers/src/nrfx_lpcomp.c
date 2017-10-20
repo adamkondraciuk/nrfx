@@ -40,11 +40,11 @@ void nrfx_lpcomp_irq_handler(void)
     lpcomp_execute_handler(NRF_LPCOMP_EVENT_CROSS, LPCOMP_INTENSET_CROSS_Msk);
 }
 
-ret_code_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
+nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
                             nrfx_lpcomp_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     { // LPCOMP driver is already initialized

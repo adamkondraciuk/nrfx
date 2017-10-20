@@ -39,14 +39,14 @@ typedef struct
 static spim_control_block_t m_cb[NRFX_SPIM_ENABLED_COUNT];
 
 
-ret_code_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
+nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
                           void                     * p_context)
 {
     NRFX_ASSERT(p_config);
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -197,7 +197,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
-ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
+nrfx_err_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
                               uint8_t           const * p_tx_buffer,
                               uint8_t                   tx_buffer_length,
                               uint8_t                 * p_rx_buffer,
@@ -260,12 +260,12 @@ __STATIC_INLINE void spim_list_enable_handle(NRF_SPIM_Type * p_spim, uint32_t fl
     }
 }
 
-static ret_code_t spim_xfer(NRF_SPIM_Type               * p_spim,
+static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
                             spim_control_block_t        * p_cb,
                             nrfx_spim_xfer_desc_t const * p_xfer_desc,
                             uint32_t                      flags)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     // EasyDMA requires that transfer buffers are placed in Data RAM region;
     // signal error if they are not.
     if ((p_xfer_desc->p_tx_buffer != NULL && !nrfx_is_in_ram(p_xfer_desc->p_tx_buffer)) ||
@@ -324,7 +324,7 @@ static ret_code_t spim_xfer(NRF_SPIM_Type               * p_spim,
     return err_code;
 }
 
-ret_code_t nrfx_spim_xfer(nrfx_spim_t     const * const p_instance,
+nrfx_err_t nrfx_spim_xfer(nrfx_spim_t     const * const p_instance,
                           nrfx_spim_xfer_desc_t const * p_xfer_desc,
                           uint32_t                      flags)
 {
@@ -333,7 +333,7 @@ ret_code_t nrfx_spim_xfer(nrfx_spim_t     const * const p_instance,
     NRFX_ASSERT(p_xfer_desc->p_tx_buffer != NULL || p_xfer_desc->tx_length == 0);
     NRFX_ASSERT(p_xfer_desc->p_rx_buffer != NULL || p_xfer_desc->rx_length == 0);
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (p_cb->transfer_in_progress)
     {

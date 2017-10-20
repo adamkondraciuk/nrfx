@@ -177,10 +177,10 @@ void nrfx_saadc_irq_handler(void)
 }
 
 
-ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
+nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                            nrfx_saadc_event_handler_t  event_handler)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -267,7 +267,7 @@ void nrfx_saadc_uninit(void)
 }
 
 
-ret_code_t nrfx_saadc_channel_init(uint8_t                                  channel,
+nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  channel,
                                    nrf_saadc_channel_config_t const * const p_config)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -279,7 +279,7 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
                 (p_config->pin_p > NRF_SAADC_INPUT_DISABLED));
     NRFX_ASSERT(p_config->pin_n <= NRF_SAADC_INPUT_VDD);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     // A channel can only be initialized if the driver is in the idle state.
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
@@ -323,12 +323,12 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
 }
 
 
-ret_code_t nrfx_saadc_channel_uninit(uint8_t channel)
+nrfx_err_t nrfx_saadc_channel_uninit(uint8_t channel)
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT)
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     // A channel can only be uninitialized if the driver is in the idle state.
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
@@ -363,9 +363,9 @@ uint32_t nrfx_saadc_sample_task_get(void)
 }
 
 
-ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_value)
+nrfx_err_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_value)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {
@@ -427,11 +427,11 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
 }
 
 
-ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size)
+nrfx_err_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT((size % m_cb.active_channels) == 0);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     nrf_saadc_int_disable(NRF_SAADC_INT_END | NRF_SAADC_INT_CALIBRATEDONE);
     if (m_cb.adc_state == NRF_SAADC_STATE_CALIBRATION)
@@ -502,11 +502,11 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * p_buffer, uint16_t size
 }
 
 
-ret_code_t nrfx_saadc_sample()
+nrfx_err_t nrfx_saadc_sample()
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     if (m_cb.adc_state != NRF_SAADC_STATE_BUSY)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
@@ -525,11 +525,11 @@ ret_code_t nrfx_saadc_sample()
 }
 
 
-ret_code_t nrfx_saadc_calibrate_offset()
+nrfx_err_t nrfx_saadc_calibrate_offset()
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.adc_state != NRF_SAADC_STATE_IDLE)
     {

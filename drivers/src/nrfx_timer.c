@@ -25,7 +25,7 @@ typedef struct
 
 static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 
-ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
+nrfx_err_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
                            nrfx_timer_config_t const * p_config,
                            nrfx_timer_event_handler_t  timer_event_handler)
 {
@@ -35,7 +35,7 @@ ret_code_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
 #endif
     NRFX_ASSERT(p_config);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {

@@ -155,13 +155,13 @@ static void swi_handler_setup(nrfx_swi_t         swi,
     NRFX_IRQ_ENABLE(swi_irq_number_get(swi));
 }
 
-ret_code_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
+nrfx_err_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
                           nrfx_swi_handler_t event_handler,
                           uint32_t           irq_priority)
 {
     NRFX_ASSERT(p_swi != NULL);
 
-    uint32_t err_code;
+    nrfx_err_t err_code;
 
     for (nrfx_swi_t swi = NRFX_SWI_FIRST; swi <= NRFX_SWI_LAST; ++swi)
     {

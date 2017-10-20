@@ -36,14 +36,14 @@ typedef struct
 static spi_control_block_t m_cb[NRFX_SPI_ENABLED_COUNT];
 
 
-ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
+nrfx_err_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
                          nrfx_spi_config_t const * p_config,
                          nrfx_spi_evt_handler_t    handler,
                          void *                    p_context)
 {
     NRFX_ASSERT(p_config);
     spi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -307,7 +307,7 @@ static void spi_xfer(NRF_SPI_Type               * p_spi,
     }
 }
 
-ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
+nrfx_err_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
                          nrfx_spi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags)
 {
@@ -316,7 +316,7 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
     NRFX_ASSERT(p_xfer_desc->p_tx_buffer != NULL || p_xfer_desc->tx_length == 0);
     NRFX_ASSERT(p_xfer_desc->p_rx_buffer != NULL || p_xfer_desc->rx_length == 0);
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (p_cb->transfer_in_progress)
     {
@@ -356,7 +356,7 @@ ret_code_t nrfx_spi_xfer(nrfx_spi_t     const * const p_instance,
     return err_code;
 }
 
-ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
+nrfx_err_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
                              uint8_t          const * p_tx_buffer,
                              uint32_t                 tx_buffer_length,
                              uint8_t                * p_rx_buffer,

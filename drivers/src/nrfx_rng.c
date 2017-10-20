@@ -19,7 +19,7 @@ static nrfx_drv_state_t m_rng_state;
  */
 static nrfx_rng_evt_handler_t m_rng_hndl;
 
-ret_code_t nrfx_rng_init(nrfx_rng_config_t const * p_config, nrfx_rng_evt_handler_t handler)
+nrfx_err_t nrfx_rng_init(nrfx_rng_config_t const * p_config, nrfx_rng_evt_handler_t handler)
 {
     if (m_rng_state != NRFX_DRV_STATE_UNINITIALIZED)
     {

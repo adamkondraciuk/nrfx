@@ -138,10 +138,10 @@ void nrfx_pdm_irq_handler(void)
 }
 
 
-ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
+nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -222,10 +222,10 @@ static void pdm_buf_request()
     NVIC_SetPendingIRQ(PDM_IRQn);
 }
 
-ret_code_t nrfx_pdm_start(void)
+nrfx_err_t nrfx_pdm_start(void)
 {
     NRFX_ASSERT(m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.op_state != NRFX_PDM_STATE_IDLE)
     {
@@ -254,7 +254,7 @@ ret_code_t nrfx_pdm_start(void)
     return err_code;
 }
 
-ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
+nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
 {
     if (m_cb.drv_state == NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -269,7 +269,7 @@ ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
         return NRFX_ERROR_INVALID_PARAM;
     }
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     // Enter the PDM critical section.
     NRFX_IRQ_DISABLE(PDM_IRQn);
@@ -301,10 +301,10 @@ ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
     return err_code;
 }
 
-ret_code_t nrfx_pdm_stop(void)
+nrfx_err_t nrfx_pdm_stop(void)
 {
     NRFX_ASSERT(m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.op_state != NRFX_PDM_STATE_RUNNING)
     {

@@ -95,12 +95,12 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
 }
 
 
-ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
+nrfx_err_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
                          nrfx_i2s_data_handler_t   handler)
 {
     NRFX_ASSERT(handler);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -158,7 +158,7 @@ void nrfx_i2s_uninit(void)
 }
 
 
-ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
+nrfx_err_t nrfx_i2s_start(uint32_t * p_rx_buffer,
                           uint32_t * p_tx_buffer,
                           uint16_t   buffer_size,
                           uint8_t    flags)
@@ -173,7 +173,7 @@ ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
         return NRFX_ERROR_INVALID_STATE;
     }
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if ((p_rx_buffer != NULL) && !nrfx_is_in_ram(p_rx_buffer))
     {

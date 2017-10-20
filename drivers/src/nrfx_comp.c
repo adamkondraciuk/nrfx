@@ -43,10 +43,10 @@ void nrfx_comp_irq_handler(void)
 }
 
 
-ret_code_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
+nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           nrfx_comp_event_handler_t  event_handler)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     { // COMP driver is already initialized

@@ -83,7 +83,7 @@ extern "C" {
 
 /**
  * @brief When set to a non-zero value, this macro specifies that the
- *        @ref nrfx_error_codes and the @ref ret_code_t type itself are defined
+ *        @ref nrfx_error_codes and the @ref nrfx_err_t type itself are defined
  *        in a customized way and the default definitions from @c <nrfx_error.h>
  *        should not be used.
  */

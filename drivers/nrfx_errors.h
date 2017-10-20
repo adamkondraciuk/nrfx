@@ -35,7 +35,7 @@ typedef enum {
     NRFX_ERROR_DRV_TWI_ERR_OVERRUN  = (NRFX_ERROR_DRIVERS_BASE_NUM + 0), ///< TWI error: Overrun.
     NRFX_ERROR_DRV_TWI_ERR_ANACK    = (NRFX_ERROR_DRIVERS_BASE_NUM + 1), ///< TWI error: Address not acknowledged.
     NRFX_ERROR_DRV_TWI_ERR_DNACK    = (NRFX_ERROR_DRIVERS_BASE_NUM + 2)  ///< TWI error: Data not acknowledged.
-} ret_code_t;
+} nrfx_err_t;
 
 /** @} */
 

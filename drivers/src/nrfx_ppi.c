@@ -195,9 +195,9 @@ void nrfx_ppi_free_all(void)
 }
 
 
-ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
+nrfx_err_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     nrf_ppi_channel_t channel;
     uint32_t mask = 0;
     err_code = NRFX_ERROR_NO_MEM;
@@ -227,9 +227,9 @@ ret_code_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 }
 
 
-ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
+nrfx_err_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_programmable_app_channel(channel))
     {
@@ -248,14 +248,14 @@ ret_code_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 }
 
 
-ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep)
+nrfx_err_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint32_t tep)
 {
     if ((uint32_t *)eep == NULL || (uint32_t *)tep == NULL)
     {
         return NRFX_ERROR_NULL;
     }
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_programmable_app_channel(channel))
     {
@@ -277,9 +277,9 @@ ret_code_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint
     return err_code;
 }
 
-ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep)
+nrfx_err_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork_tep)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 #ifdef PPI_FEATURE_FORKS_PRESENT
     if (!is_programmable_app_channel(channel))
     {
@@ -305,9 +305,9 @@ ret_code_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork
 #endif
 }
 
-ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
+nrfx_err_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_channel(channel))
     {
@@ -326,9 +326,9 @@ ret_code_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
 }
 
 
-ret_code_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
+nrfx_err_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_channel(channel))
     {
@@ -348,9 +348,9 @@ ret_code_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
 }
 
 
-ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
+nrfx_err_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     uint32_t mask = 0;
     nrf_ppi_channel_group_t group;
 
@@ -379,9 +379,9 @@ ret_code_t nrfx_ppi_group_alloc(nrf_ppi_channel_group_t * p_group)
 }
 
 
-ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
+nrfx_err_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_group(group))
     {
@@ -403,9 +403,9 @@ ret_code_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
 }
 
 
-ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
+nrfx_err_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_group(group))
     {
@@ -424,9 +424,9 @@ ret_code_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
 }
 
 
-ret_code_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
+nrfx_err_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_group(group))
     {
@@ -440,10 +440,10 @@ ret_code_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
     return err_code;
 }
 
-ret_code_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
+nrfx_err_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_mask,
                                                nrf_ppi_channel_group_t group)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_group(group))
     {
@@ -467,10 +467,10 @@ ret_code_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_m
     return err_code;
 }
 
-ret_code_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
+nrfx_err_t nrfx_ppi_channels_include_in_group(uint32_t                channel_mask,
                                               nrf_ppi_channel_group_t group)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (!is_app_group(group))
     {

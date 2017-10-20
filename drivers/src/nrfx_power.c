@@ -80,7 +80,7 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void)
 }
 #endif
 
-ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config)
+nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config)
 {
     nrfx_power_config_t const * p_used_config;
     if (m_initialized)

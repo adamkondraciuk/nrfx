@@ -146,7 +146,7 @@ typedef void (* nrfx_saadc_event_handler_t)(nrfx_saadc_evt_t const * p_event);
  * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
  * @retval    NRFX_ERROR_INVALID_PARAM If event_handler is NULL.
  */
-ret_code_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
+nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                            nrfx_saadc_event_handler_t  event_handler);
 
 /**
@@ -173,7 +173,7 @@ uint32_t nrfx_saadc_sample_task_get(void);
  * @retval NRFX_ERROR_INVALID_STATE If the ADC was not initialized.
  * @retval NRFX_ERROR_NO_MEM        If the specified channel was already allocated.
  */
-ret_code_t nrfx_saadc_channel_init(uint8_t                                  channel,
+nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  channel,
                                    nrf_saadc_channel_config_t const * const p_config);
 
 
@@ -183,7 +183,7 @@ ret_code_t nrfx_saadc_channel_init(uint8_t                                  chan
  * @retval NRFX_SUCCESS    If uninitialization was successful.
  * @retval NRFX_ERROR_BUSY If the ADC is busy.
  */
-ret_code_t nrfx_saadc_channel_uninit(uint8_t channel);
+nrfx_err_t nrfx_saadc_channel_uninit(uint8_t channel);
 
 /**
  * @brief Function for starting SAADC sampling.
@@ -191,7 +191,7 @@ ret_code_t nrfx_saadc_channel_uninit(uint8_t channel);
  * @retval NRFX_SUCCESS             If ADC sampling was triggered.
  * @retval NRFX_ERROR_INVALID_STATE If ADC is in idle state.
  */
-ret_code_t nrfx_saadc_sample(void);
+nrfx_err_t nrfx_saadc_sample(void);
 
 /**
  * @brief Blocking function for executing a single ADC conversion.
@@ -207,7 +207,7 @@ ret_code_t nrfx_saadc_sample(void);
  * @retval NRFX_SUCCESS    If conversion was successful.
  * @retval NRFX_ERROR_BUSY If the ADC driver is busy.
  */
-ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_value);
+nrfx_err_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_value);
 
 /**
  * @brief Function for issuing conversion of data to the buffer.
@@ -227,7 +227,7 @@ ret_code_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
  * @retval NRFX_SUCCESS    If conversion was successful.
  * @retval NRFX_ERROR_BUSY If the driver already has two buffers set or calibration is in progress.
  */
-ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * buffer, uint16_t size);
+nrfx_err_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * buffer, uint16_t size);
 
 /**
  * @brief Function for triggering the ADC offset calibration.
@@ -240,7 +240,7 @@ ret_code_t nrfx_saadc_buffer_convert(nrf_saadc_value_t * buffer, uint16_t size);
  * @retval NRFX_SUCCESS    If calibration was started successfully.
  * @retval NRFX_ERROR_BUSY If the ADC driver is busy.
  */
-ret_code_t nrfx_saadc_calibrate_offset(void);
+nrfx_err_t nrfx_saadc_calibrate_offset(void);
 
 /**
  * @brief Function for retrieving the SAADC state.

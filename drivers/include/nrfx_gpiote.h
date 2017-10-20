@@ -119,7 +119,7 @@ typedef void (*nrfx_gpiote_evt_handler_t)(nrfx_gpiote_pin_t pin, nrf_gpiote_pola
  * @retval NRFX_SUCCESS             If initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  */
-ret_code_t nrfx_gpiote_init(void);
+nrfx_err_t nrfx_gpiote_init(void);
 
 /**
  * @brief Function for checking if the GPIOTE module is initialized.
@@ -151,7 +151,7 @@ void nrfx_gpiote_uninit(void);
  * @retval NRFX_ERROR_INVALID_STATE If the driver is not initialized or the pin is already used.
  * @retval NRFX_ERROR_NO_MEM        If no GPIOTE channel is available.
  */
-ret_code_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
+nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
                                 nrfx_gpiote_out_config_t const * p_config);
 
 /**
@@ -251,7 +251,7 @@ uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin);
  * @retval NRFX_ERROR_INVALID_STATE If the driver is not initialized or the pin is already used.
  * @retval NRFX_ERROR_NO_MEM        If no GPIOTE channel is available.
  */
-ret_code_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
+nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
                                nrfx_gpiote_in_config_t const * p_config,
                                nrfx_gpiote_evt_handler_t       evt_handler);
 

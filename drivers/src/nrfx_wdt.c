@@ -31,11 +31,11 @@ void nrfx_wdt_irq_handler(void)
 }
 
 
-ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
+nrfx_err_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
                          nrfx_wdt_event_handler_t  wdt_event_handler)
 {
     NRFX_ASSERT(wdt_event_handler != NULL);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     m_wdt_event_handler = wdt_event_handler;
 
     if (m_state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -89,9 +89,9 @@ void nrfx_wdt_feed(void)
     }
 }
 
-ret_code_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id)
+nrfx_err_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id)
 {
-    ret_code_t result;
+    nrfx_err_t result;
     NRFX_ASSERT(p_channel_id);
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
 

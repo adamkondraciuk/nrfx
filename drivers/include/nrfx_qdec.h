@@ -85,7 +85,7 @@ typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event);
  * @retval NRFX_ERROR_INVALID_PARAM If invalid parameters were supplied.
  * @retval NRFX_ERROR_INVALID_STATE If QDEC was already initialized.
  */
-ret_code_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
+nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  event_handler);
 
 /**@brief Function for uninitializing QDEC.

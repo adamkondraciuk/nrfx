@@ -96,7 +96,7 @@ typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If the pin configuration was incorrect.
  */
-ret_code_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
+nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
                           nrfx_qspi_handler_t        handler,
                           void *                     p_context);
 
@@ -124,7 +124,7 @@ void nrfx_qspi_uninit(void);
  * @retval NRFX_ERROR_BUSY         If the driver currently handles another operation.
  * @retval NRFX_ERROR_INVALID_ADDR If the provided buffer is not placed in the Data RAM region.
  */
-ret_code_t nrfx_qspi_read(void *   p_rx_buffer,
+nrfx_err_t nrfx_qspi_read(void *   p_rx_buffer,
                           size_t   rx_buffer_length,
                           uint32_t src_address);
 
@@ -151,7 +151,7 @@ ret_code_t nrfx_qspi_read(void *   p_rx_buffer,
  * @retval NRFX_ERROR_BUSY         If the driver currently handles other operation.
  * @retval NRFX_ERROR_INVALID_ADDR If the provided buffer is not placed in the Data RAM region.
  */
-ret_code_t nrfx_qspi_write(void const * p_tx_buffer,
+nrfx_err_t nrfx_qspi_write(void const * p_tx_buffer,
                            size_t       tx_buffer_length,
                            uint32_t     dst_address);
 
@@ -177,7 +177,7 @@ ret_code_t nrfx_qspi_write(void const * p_tx_buffer,
  *                         was commissioned (handler mode).
  * @retval NRFX_ERROR_BUSY If the driver currently handles another operation.
  */
-ret_code_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
+nrfx_err_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
                            uint32_t             start_address);
 
 /**
@@ -187,7 +187,7 @@ ret_code_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
  *                         was commissioned (handler mode).
  * @retval NRFX_ERROR_BUSY If the driver currently handles another operation.
  */
-ret_code_t nrfx_qspi_chip_erase(void);
+nrfx_err_t nrfx_qspi_chip_erase(void);
 
 /**
  * @brief Function for getting the current driver status and status byte of memory device with
@@ -196,7 +196,7 @@ ret_code_t nrfx_qspi_chip_erase(void);
  * @retval NRFX_SUCCESS    If the driver and memory are ready to handle a new operation.
  * @retval NRFX_ERROR_BUSY If the driver or memory currently handle another operation.
  */
-ret_code_t nrfx_qspi_mem_busy_check(void);
+nrfx_err_t nrfx_qspi_mem_busy_check(void);
 
 /**
  * @brief Function for sending operation code, sending data, and receiving data from the memory device.
@@ -212,7 +212,7 @@ ret_code_t nrfx_qspi_mem_busy_check(void);
  * @retval NRFX_SUCCESS            If the operation was successful.
  * @retval NRFX_ERROR_BUSY         If the driver currently handles other operation.
  */
-ret_code_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
+nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
                                  void const *                   p_tx_buffer,
                                  void *                         p_rx_buffer);
 /**
@@ -228,7 +228,7 @@ ret_code_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
  * @retval NRFX_SUCCESS            If the operation was successful.
  * @retval NRFX_ERROR_BUSY         If the driver currently handles another operation.
  */
-ret_code_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
+nrfx_err_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
                                        nrf_qspi_cinstr_len_t length,
                                        void const *          p_tx_buffer);
 

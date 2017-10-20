@@ -420,13 +420,13 @@ static inline void nrfx_twis_preprocess_status(nrfx_twis_t const * p_instance)
  */
 
 
-ret_code_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
+nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
                           nrfx_twis_config_t const * p_config,
                           nrfx_twis_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(p_config->scl != p_config->sda);
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     NRF_TWIS_Type *        p_reg = p_instance->p_reg;
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
@@ -655,11 +655,11 @@ uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance)
 }
 
 
-ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
+nrfx_err_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
                                 void const *        p_buf,
                                 size_t              size)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     /* Check power state*/
@@ -699,11 +699,11 @@ ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
 }
 
 
-ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
+nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
                                 void *              p_buf,
                                 size_t              size)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     /* Check power state*/

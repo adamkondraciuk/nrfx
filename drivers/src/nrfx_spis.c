@@ -57,13 +57,13 @@ typedef struct
 
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
-ret_code_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
+nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
                           nrfx_spis_config_t const * p_config,
                           nrfx_spis_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     NRF_SPIS_Type * p_spis = p_instance->p_reg;
 
@@ -197,7 +197,7 @@ ret_code_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
     (void)nrfx_gpiote_init();
     static nrfx_gpiote_in_config_t const csn_gpiote_config =
         NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(true);
-    ret_code_t gpiote_err_code = nrfx_gpiote_in_init(p_config->csn_pin,
+    nrfx_err_t gpiote_err_code = nrfx_gpiote_in_init(p_config->csn_pin,
         &csn_gpiote_config, csn_event_handler);
     if (gpiote_err_code != NRFX_SUCCESS)
     {
@@ -306,14 +306,14 @@ static void spis_state_change(NRF_SPIS_Type   * p_spis,
 }
 
 
-ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
+nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
                                  uint8_t           const * p_tx_buffer,
                                  uint8_t                   tx_buffer_length,
                                  uint8_t                 * p_rx_buffer,
                                  uint8_t                   rx_buffer_length)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    uint32_t err_code;
+    nrfx_err_t err_code;
 
     if (p_rx_buffer == NULL || p_tx_buffer == NULL)
     {

@@ -36,13 +36,13 @@ typedef struct
 static nrfx_rtc_handler_t m_handlers[NRFX_RTC_ENABLED_COUNT];
 static nrfx_rtc_cb_t      m_cb[NRFX_RTC_ENABLED_COUNT];
 
-ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
+nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_config_t const * p_config,
                          nrfx_rtc_handler_t        handler)
 {
     NRFX_ASSERT(p_config != NULL);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (handler)
     {
@@ -116,12 +116,12 @@ void nrfx_rtc_disable(nrfx_rtc_t const * const p_instance)
     NRFX_LOG_INFO("Disabled.");
 }
 
-ret_code_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t channel)
+nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t channel)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel<p_instance->cc_channel_count);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     uint32_t int_mask = RTC_CHANNEL_INT_MASK(channel);
     nrf_rtc_event_t event    = RTC_CHANNEL_EVENT_ADDR(channel);
 
@@ -145,7 +145,7 @@ ret_code_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t cha
     return err_code;
 }
 
-ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
+nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
                            uint32_t channel,
                            uint32_t val,
                            bool enable_irq)
@@ -153,7 +153,7 @@ ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel<p_instance->cc_channel_count);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
     uint32_t int_mask = RTC_CHANNEL_INT_MASK(channel);
     nrf_rtc_event_t event    = RTC_CHANNEL_EVENT_ADDR(channel);
 

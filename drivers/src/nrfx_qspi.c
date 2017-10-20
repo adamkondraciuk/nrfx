@@ -36,7 +36,7 @@ typedef struct
 
 static qspi_control_block_t m_cb;
 
-static ret_code_t qspi_task_perform(nrf_qspi_task_t task)
+static nrfx_err_t qspi_task_perform(nrf_qspi_task_t task)
 {
     // Wait for peripheral
     if (m_cb.interrupt_driven)
@@ -77,7 +77,7 @@ static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
     return true;
 }
 
-ret_code_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
+nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
                           nrfx_qspi_handler_t        handler,
                           void *                     p_context)
 {
@@ -121,7 +121,7 @@ ret_code_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
     return NRFX_SUCCESS;
 }
 
-ret_code_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
+nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
                                  void const *                   p_tx_buffer,
                                  void *                         p_rx_buffer)
 {
@@ -156,7 +156,7 @@ ret_code_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
     return NRFX_SUCCESS;
 }
 
-ret_code_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
+nrfx_err_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
                                        nrf_qspi_cinstr_len_t length,
                                        void const *          p_tx_buffer)
 {
@@ -164,9 +164,9 @@ ret_code_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
     return nrfx_qspi_cinstr_xfer(&config, p_tx_buffer, NULL);
 }
 
-ret_code_t nrfx_qspi_mem_busy_check(void)
+nrfx_err_t nrfx_qspi_mem_busy_check(void)
 {
-    ret_code_t ret_code;
+    nrfx_err_t ret_code;
     uint8_t status_value = 0;
 
     nrf_qspi_cinstr_conf_t const config =
@@ -202,7 +202,7 @@ void nrfx_qspi_uninit(void)
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
-ret_code_t nrfx_qspi_write(void const * p_tx_buffer,
+nrfx_err_t nrfx_qspi_write(void const * p_tx_buffer,
                            size_t       tx_buffer_length,
                            uint32_t     dst_address)
 {
@@ -219,7 +219,7 @@ ret_code_t nrfx_qspi_write(void const * p_tx_buffer,
 
 }
 
-ret_code_t nrfx_qspi_read(void *   p_rx_buffer,
+nrfx_err_t nrfx_qspi_read(void *   p_rx_buffer,
                           size_t   rx_buffer_length,
                           uint32_t src_address)
 {
@@ -235,7 +235,7 @@ ret_code_t nrfx_qspi_read(void *   p_rx_buffer,
     return qspi_task_perform(NRF_QSPI_TASK_READSTART);
 }
 
-ret_code_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
+nrfx_err_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
                            uint32_t             start_address)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -243,7 +243,7 @@ ret_code_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
     return qspi_task_perform(NRF_QSPI_TASK_ERASESTART);
 }
 
-ret_code_t nrfx_qspi_chip_erase(void)
+nrfx_err_t nrfx_qspi_chip_erase(void)
 {
     return nrfx_qspi_erase(NRF_QSPI_ERASE_LEN_ALL, 0);
 }

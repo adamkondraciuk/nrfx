@@ -194,7 +194,7 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
  * @retval NRFX_SUCCESS                   Successfully initialized.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED Module was already initialized.
  */
-ret_code_t nrfx_power_init(nrfx_power_config_t const * p_config);
+nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config);
 
 /**
  * @brief Unintialize power module driver

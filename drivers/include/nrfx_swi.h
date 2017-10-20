@@ -60,7 +60,7 @@ typedef void (*nrfx_swi_handler_t)(nrfx_swi_t swi, nrfx_swi_flags_t flags);
  * @retval NRFX_SUCCESS       If the SWI was successfully allocated.
  * @retval NRFX_ERROR_NO_MEM  If there is no available SWI to be used.
  */
-ret_code_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
+nrfx_err_t nrfx_swi_alloc(nrfx_swi_t *       p_swi,
                           nrfx_swi_handler_t event_handler,
                           uint32_t           irq_priority);
 

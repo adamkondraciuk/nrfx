@@ -25,10 +25,10 @@ typedef struct
 static adc_cb_t m_cb;
 static const nrfx_adc_config_t m_default_config = NRFX_ADC_DEFAULT_CONFIG;
 
-ret_code_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
+nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
                          nrfx_adc_event_handler_t  event_handler)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -123,10 +123,10 @@ void nrfx_adc_sample(void)
     nrf_adc_start();
 }
 
-ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
+nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
                                    nrf_adc_value_t                * p_value)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     if (m_cb.state == NRFX_DRV_STATE_POWERED_ON)
@@ -201,11 +201,11 @@ static bool adc_sample_process()
     }
 }
 
-ret_code_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size)
+nrfx_err_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     NRFX_LOG_INFO("Number of samples requested to convert: %d.", size);
 

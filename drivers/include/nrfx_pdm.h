@@ -95,7 +95,7 @@ typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * const p_evt);
  * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
  * @retval    NRFX_ERROR_INVALID_PARAM If invalid parameters were specified.
  */
-ret_code_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
+nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler);
 
 /**
@@ -134,7 +134,7 @@ __STATIC_INLINE bool nrfx_pdm_enable_check(void)
  * @retval NRFX_SUCCESS    If sampling was started successfully or was already in progress.
  * @retval NRFX_ERROR_BUSY If a previous start/stop operation is in progress.
  */
-ret_code_t nrfx_pdm_start(void);
+nrfx_err_t nrfx_pdm_start(void);
 
 /**
  * @brief   Function for stopping PDM sampling.
@@ -146,7 +146,7 @@ ret_code_t nrfx_pdm_start(void);
  * @retval NRFX_SUCCESS    If sampling was stopped successfully or was already stopped before.
  * @retval NRFX_ERROR_BUSY If a previous start/stop operation is in progress.
  */
-ret_code_t nrfx_pdm_stop(void);
+nrfx_err_t nrfx_pdm_stop(void);
 
 /**
  * @brief   Function for supplying the sample buffer.
@@ -161,7 +161,7 @@ ret_code_t nrfx_pdm_stop(void);
  * @retval NRFX_ERROR_INVALID_STATE If the driver was not initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If invalid parameters were provided.
  */
-ret_code_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
+nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
 
 
 void nrfx_pdm_irq_handler(void);

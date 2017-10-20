@@ -59,10 +59,10 @@ void nrfx_qdec_irq_handler(void)
 }
 
 
-ret_code_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
+nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  event_handler)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     {

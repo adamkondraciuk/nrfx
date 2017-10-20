@@ -130,7 +130,7 @@ typedef void (* nrfx_i2s_data_handler_t)(uint32_t const * p_data_received,
  * @retval NRFX_ERROR_INVALID_PARAM If the requested combination of configuration
   *                                 options is not allowed by the I2S peripheral.
  */
-ret_code_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
+nrfx_err_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
                          nrfx_i2s_data_handler_t   handler);
 
 /**
@@ -191,7 +191,7 @@ void       nrfx_i2s_uninit(void);
  * @retval NRFX_ERROR_INVALID_ADDR  If the provided buffers are not placed
  *                                  in the Data RAM region.
  */
-ret_code_t nrfx_i2s_start(uint32_t * p_rx_buffer,
+nrfx_err_t nrfx_i2s_start(uint32_t * p_rx_buffer,
                           uint32_t * p_tx_buffer,
                           uint16_t   buffer_size,
                           uint8_t    flags);

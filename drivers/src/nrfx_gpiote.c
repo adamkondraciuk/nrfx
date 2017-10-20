@@ -171,9 +171,9 @@ static void channel_free(uint8_t channel_id)
 }
 
 
-ret_code_t nrfx_gpiote_init(void)
+nrfx_err_t nrfx_gpiote_init(void)
 {
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -239,14 +239,14 @@ void nrfx_gpiote_uninit(void)
 }
 
 
-ret_code_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
+nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
                                 nrfx_gpiote_out_config_t const * p_config)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_config);
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (pin_in_use(pin))
     {
@@ -448,12 +448,12 @@ void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_pin_t pin)
 
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT)
 
-ret_code_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
+nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
                                nrfx_gpiote_in_config_t const * p_config,
                                nrfx_gpiote_evt_handler_t       evt_handler)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     /* Only one GPIOTE channel can be assigned to one physical pin. */
     if (pin_in_use_by_gpiote(pin))

@@ -136,7 +136,7 @@ typedef void (*nrfx_adc_event_handler_t)(nrfx_adc_evt_t const * p_event);
  * @retval    NRFX_SUCCESS If initialization was successful.
  * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
  */
-ret_code_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
+nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
                          nrfx_adc_event_handler_t  event_handler);
 
 /**
@@ -187,7 +187,7 @@ void nrfx_adc_sample(void);
  * @retval NRFX_SUCCESS    If conversion was successful.
  * @retval NRFX_ERROR_BUSY If the ADC driver is busy.
  */
-ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
+nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
                                    nrf_adc_value_t                * p_value);
 
 /**
@@ -218,7 +218,7 @@ ret_code_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
  * @retval NRFX_SUCCESS    If conversion was successful.
  * @retval NRFX_ERROR_BUSY If the driver is busy.
  */
-ret_code_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size);
+nrfx_err_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size);
 
 /**
  * @brief Function for retrieving the ADC state.

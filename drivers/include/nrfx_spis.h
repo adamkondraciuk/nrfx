@@ -151,7 +151,7 @@ typedef void (*nrfx_spis_event_handler_t)(nrfx_spis_event_t event);
  *                                  on CSN pin cannot be initialized. Possible
  *                                  only when using nRF52 Anomaly 109 workaround.
  */
-ret_code_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
+nrfx_err_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
                           nrfx_spis_config_t const * p_config,
                           nrfx_spis_event_handler_t  event_handler);
 
@@ -194,7 +194,7 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance);
  *                                   RAM region.
  * @retval NRFX_ERROR_INTERNAL       If the operation failed because of an internal error.
  */
-ret_code_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
+nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
                                  uint8_t           const * p_tx_buffer,
                                  uint8_t                   tx_buffer_length,
                                  uint8_t                 * p_rx_buffer,

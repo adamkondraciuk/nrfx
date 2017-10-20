@@ -152,7 +152,7 @@ typedef struct
  *                                  possible only if NRFX_PRS_ENABLED
  *                                  is set to a value other than zero.
  */
-ret_code_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
+nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
                           nrfx_twis_config_t const * p_config,
                           nrfx_twis_event_handler_t  event_handler);
 
@@ -227,7 +227,7 @@ uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance);
  * @retval NRFX_ERROR_INVALID_LENGTH Wrong value in @em size parameter.
  * @retval NRFX_ERROR_INVALID_STATE  Module not initialized or not enabled.
  */
-ret_code_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
+nrfx_err_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
                                 void const *        p_buf,
                                 size_t              size);
 
@@ -262,7 +262,7 @@ __STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
  * @retval NRFX_ERROR_INVALID_LENGTH Wrong value in @em size parameter.
  * @retval NRFX_ERROR_INVALID_STATE  Module not initialized or not enabled.
  */
-ret_code_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
+nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
                                 void *              p_buf,
                                 size_t              size);
 

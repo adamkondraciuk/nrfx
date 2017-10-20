@@ -99,7 +99,7 @@ typedef void (*nrfx_rtc_handler_t)(nrfx_rtc_int_type_t int_type);
  * @retval     NRFX_ERROR_INVALID_PARAM   If no handler was provided.
  * @retval     NRFX_ERROR_INVALID_STATE   If the instance is already initialized.
  */
-ret_code_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
+nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_config_t const * p_config,
                          nrfx_rtc_handler_t        handler);
 
@@ -152,7 +152,7 @@ void nrfx_rtc_disable(nrfx_rtc_t const * const p_instance);
  * @retval     NRFX_ERROR_TIMEOUT   If the compare was not set because the request value is behind the current counter
  *                                  value. This error can only be reported if RTCn_CONFIG_RELIABLE = 1.
  */
-ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
+nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
                            uint32_t                 channel,
                            uint32_t                 val,
                            bool                     enable_irq);
@@ -168,7 +168,7 @@ ret_code_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
  * @retval     NRFX_SUCCESS         If the procedure was successful.
  * @retval     NRFX_ERROR_TIMEOUT   If an interrupt was pending on the requested channel.
  */
-ret_code_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t channel);
+nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t channel);
 
 /**@brief Function for enabling tick.
  *

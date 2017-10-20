@@ -44,7 +44,7 @@ typedef void (*nrfx_clock_event_handler_t)(nrfx_clock_evt_type_t event);
  * @retval NRFX_SUCCESS                   If the procedure was successful.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED If the driver was already initialized.
  */
-ret_code_t nrfx_clock_init(nrfx_clock_event_handler_t  event_handler);
+nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t  event_handler);
 
 /**
  * @brief Function for enabling interrupts in the clock module.
@@ -107,7 +107,7 @@ __STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
  * @retval     NRFX_ERROR_INVALID_STATE            If the low-frequency of high-frequency clock is off.
  * @retval     NRFX_ERROR_BUSY                     If calibration is in progress.
  */
-ret_code_t nrfx_clock_calibration_start(void);
+nrfx_err_t nrfx_clock_calibration_start(void);
 
 /**
  * @brief Function for checking if calibration is in progress.
@@ -117,7 +117,7 @@ ret_code_t nrfx_clock_calibration_start(void);
  * @retval     NRFX_SUCCESS                        If the procedure was successful.
  * @retval     NRFX_ERROR_BUSY                     If calibration is in progress.
  */
-ret_code_t nrfx_clock_is_calibrating(void);
+nrfx_err_t nrfx_clock_is_calibrating(void);
 
 /**
  * @brief Function for starting calibration timer.

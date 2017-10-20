@@ -125,13 +125,13 @@ static void pins_to_default(nrfx_uart_t const * p_instance)
     }
 }
 
-ret_code_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
+nrfx_err_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
                           nrfx_uart_config_t const * p_config,
                           nrfx_uart_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -234,7 +234,7 @@ static bool tx_blocking(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
     return true;
 }
 
-ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
+nrfx_err_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
                         uint8_t const *     p_data,
                         uint32_t            length)
 {
@@ -243,7 +243,7 @@ ret_code_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
     NRFX_ASSERT(p_data);
     NRFX_ASSERT(length > 0);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (nrfx_uart_tx_in_progress(p_instance))
     {
@@ -317,7 +317,7 @@ static void rx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
     p_cb->rx_counter++;
 }
 
-ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
+nrfx_err_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                         uint8_t *           p_data,
                         uint32_t            length)
 {
@@ -327,7 +327,7 @@ ret_code_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
     NRFX_ASSERT(p_data);
     NRFX_ASSERT(length > 0);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     bool second_buffer = false;
 

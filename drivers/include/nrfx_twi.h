@@ -177,7 +177,7 @@ typedef void (* nrfx_twi_evt_handler_t)(nrfx_twi_evt_t const * p_event,
  *                                  possible only if @ref nrfx_prs module
  *                                  is enabled.
  */
-ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
+nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_config_t const * p_config,
                          nrfx_twi_evt_handler_t    event_handler,
                          void *                    p_context);
@@ -223,7 +223,7 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance);
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK  If NACK received after sending the address in polling mode.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK  If NACK received after sending a data byte in polling mode.
  */
-ret_code_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
+nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t const *    p_data,
                        uint32_t           length,
@@ -247,7 +247,7 @@ ret_code_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK    If NACK received after sending the address in polling mode.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK    If NACK received after sending a data byte in polling mode.
  */
-ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
+nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t *          p_data,
                        uint32_t           length);
@@ -283,7 +283,7 @@ ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK    If NACK received after sending the address.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK    If NACK received after sending a data byte.
  */
-ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
+nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
                          nrfx_twi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags);
 

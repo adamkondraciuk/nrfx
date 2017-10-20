@@ -82,12 +82,12 @@ static prs_box_t * prs_box_get(void const * p_base_addr)
     }
 }
 
-ret_code_t nrfx_prs_acquire(void       const * p_base_addr,
+nrfx_err_t nrfx_prs_acquire(void       const * p_base_addr,
                             nrfx_irq_handler_t irq_handler)
 {
     NRFX_ASSERT(p_base_addr);
 
-    ret_code_t ret_code;
+    nrfx_err_t ret_code;
 
     prs_box_t * p_box = prs_box_get(p_base_addr);
     if (p_box != NULL)

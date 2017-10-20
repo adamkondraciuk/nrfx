@@ -145,7 +145,7 @@ typedef void (*nrfx_uarte_event_handler_t)(nrfx_uarte_event_t const * p_event,
  *                                     possible only if @ref nrfx_prs module
  *                                     is enabled.
  */
-ret_code_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
+nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
                            nrfx_uarte_config_t const * p_config,
                            nrfx_uarte_event_handler_t  event_handler);
 
@@ -200,7 +200,7 @@ __STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_ins
  *                                    (blocking mode only).
  * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer.
  */
-ret_code_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
+nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
                          uint8_t const *      p_data,
                          uint8_t              length);
 
@@ -254,7 +254,7 @@ void nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance);
  * @retval    NRFX_ERROR_INTERNAL     If UARTE peripheral reported an error.
  * @retval    NRFX_ERROR_INVALID_ADDR If p_data does not point to RAM buffer.
  */
-ret_code_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
+nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
                          uint8_t *            p_data,
                          uint8_t              length);
 

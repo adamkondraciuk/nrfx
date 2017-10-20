@@ -87,9 +87,9 @@ typedef struct
 
 static twi_control_block_t m_cb[NRFX_TWI_ENABLED_COUNT];
 
-static ret_code_t twi_process_error(uint32_t errorsrc)
+static nrfx_err_t twi_process_error(uint32_t errorsrc)
 {
-    ret_code_t ret = NRFX_ERROR_INTERNAL;
+    nrfx_err_t ret = NRFX_ERROR_INTERNAL;
 
     if (errorsrc & NRF_TWI_ERROR_OVERRUN)
     {
@@ -111,7 +111,7 @@ static ret_code_t twi_process_error(uint32_t errorsrc)
 
 
 
-ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
+nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_config_t const * p_config,
                          nrfx_twi_evt_handler_t    event_handler,
                          void *                    p_context)
@@ -119,7 +119,7 @@ ret_code_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(p_config->scl != p_config->sda);
     twi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -355,13 +355,13 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
     return true;
 }
 
-static ret_code_t twi_tx_start_transfer(twi_control_block_t * p_cb,
+static nrfx_err_t twi_tx_start_transfer(twi_control_block_t * p_cb,
                                         NRF_TWI_Type *        p_twi,
                                         uint8_t const *       p_data,
                                         uint8_t               length,
                                         bool                  no_stop)
 {
-    ret_code_t ret_code = NRFX_SUCCESS;
+    nrfx_err_t ret_code = NRFX_SUCCESS;
     volatile int32_t hw_timeout;
 
     hw_timeout = HW_TIMEOUT;
@@ -423,12 +423,12 @@ static ret_code_t twi_tx_start_transfer(twi_control_block_t * p_cb,
     return ret_code;
 }
 
-static ret_code_t twi_rx_start_transfer(twi_control_block_t * p_cb,
+static nrfx_err_t twi_rx_start_transfer(twi_control_block_t * p_cb,
                                         NRF_TWI_Type *        p_twi,
                                         uint8_t const *       p_data,
                                         uint8_t               length)
 {
-    ret_code_t ret_code = NRFX_SUCCESS;
+    nrfx_err_t ret_code = NRFX_SUCCESS;
     volatile int32_t hw_timeout;
 
     hw_timeout = HW_TIMEOUT;
@@ -493,13 +493,13 @@ static ret_code_t twi_rx_start_transfer(twi_control_block_t * p_cb,
     return ret_code;
 }
 
-__STATIC_INLINE ret_code_t twi_xfer(twi_control_block_t        * p_cb,
+__STATIC_INLINE nrfx_err_t twi_xfer(twi_control_block_t        * p_cb,
                                     NRF_TWI_Type               * p_twi,
                                     nrfx_twi_xfer_desc_t const * p_xfer_desc,
                                     uint32_t                     flags)
 {
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
     nrf_twi_int_disable(p_twi, NRF_TWI_ALL_INTS_MASK);
@@ -557,12 +557,12 @@ bool nrfx_twi_is_busy(nrfx_twi_t const * p_instance)
     return p_cb->busy;
 }
 
-ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
+nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
                          nrfx_twi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags)
 {
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     // TXRX and TXTX transfers are supported only in non-blocking mode.
@@ -587,7 +587,7 @@ ret_code_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
     return err_code;
 }
 
-ret_code_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
+nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t    const * p_data,
                        uint32_t           length,
@@ -598,7 +598,7 @@ ret_code_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
     return nrfx_twi_xfer(p_instance, &xfer, no_stop ? NRFX_TWI_FLAG_TX_NO_STOP : 0);
 }
 
-ret_code_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
+nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t *          p_data,
                        uint32_t           length)

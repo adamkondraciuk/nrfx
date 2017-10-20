@@ -47,7 +47,7 @@ typedef nrf_wdt_rr_register_t nrfx_wdt_channel_id;
  *
  * @return    NRFX_SUCCESS on success, otherwise an error code.
  */
-ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
+nrfx_err_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
                          nrfx_wdt_event_handler_t  wdt_event_handler);
 
 /**
@@ -59,7 +59,7 @@ ret_code_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
  *
  * @return    NRFX_SUCCESS on success, otherwise an error code.
  */
-ret_code_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id);
+nrfx_err_t nrfx_wdt_channel_alloc(nrfx_wdt_channel_id * p_channel_id);
 
 /**
  * @brief This function starts watchdog.

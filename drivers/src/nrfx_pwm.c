@@ -83,13 +83,13 @@ static void configure_pins(nrfx_pwm_t const * const p_instance,
 }
 
 
-ret_code_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
+nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
                          nrfx_pwm_config_t const * p_config,
                          nrfx_pwm_handler_t        handler)
 {
     NRFX_ASSERT(p_config);
 
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 

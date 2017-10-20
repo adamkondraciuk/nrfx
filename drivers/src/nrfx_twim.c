@@ -91,9 +91,9 @@ typedef struct
 
 static twim_control_block_t m_cb[NRFX_TWIM_ENABLED_COUNT];
 
-static ret_code_t twi_process_error(uint32_t errorsrc)
+static nrfx_err_t twi_process_error(uint32_t errorsrc)
 {
-    ret_code_t ret = NRFX_ERROR_INTERNAL;
+    nrfx_err_t ret = NRFX_ERROR_INTERNAL;
 
     if (errorsrc & NRF_TWIM_ERROR_ADDRESS_NACK)
     {
@@ -108,7 +108,7 @@ static ret_code_t twi_process_error(uint32_t errorsrc)
     return ret;
 }
 
-ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
+nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           nrfx_twim_config_t const * p_config,
                           nrfx_twim_evt_handler_t    event_handler,
                           void *                     p_context)
@@ -116,7 +116,7 @@ ret_code_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(p_config->scl != p_config->sda);
     twim_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    ret_code_t err_code;
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -262,12 +262,12 @@ __STATIC_INLINE void twim_list_enable_handle(NRF_TWIM_Type * p_twim, uint32_t fl
         nrf_twim_rx_list_disable(p_twim);
     }
 }
-__STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
+__STATIC_INLINE nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
                                      NRF_TWIM_Type               * p_twim,
                                      nrfx_twim_xfer_desc_t const * p_xfer_desc,
                                      uint32_t                      flags)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     nrf_twim_task_t  start_task = NRF_TWIM_TASK_STARTTX;
     nrf_twim_event_t evt_to_wait = NRF_TWIM_EVENT_STOPPED;
 
@@ -427,12 +427,12 @@ __STATIC_INLINE ret_code_t twim_xfer(twim_control_block_t        * p_cb,
 }
 
 
-ret_code_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
+nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
                           nrfx_twim_xfer_desc_t const * p_xfer_desc,
                           uint32_t                      flags)
 {
 
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     // TXRX and TXTX transfers are supported only in non-blocking mode.
@@ -457,7 +457,7 @@ ret_code_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
     return err_code;
 }
 
-ret_code_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
+nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
                         uint8_t             address,
                         uint8_t     const * p_data,
                         uint8_t             length,
@@ -468,7 +468,7 @@ ret_code_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
     return nrfx_twim_xfer(p_instance, &xfer, no_stop ? NRFX_TWIM_FLAG_TX_NO_STOP : 0);
 }
 
-ret_code_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
+nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
                         uint8_t             address,
                         uint8_t *           p_data,
                         uint8_t             length)

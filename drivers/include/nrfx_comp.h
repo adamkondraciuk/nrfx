@@ -100,7 +100,7 @@ typedef struct
  * @retval NRFX_ERROR_INVALID_STATE If the driver has already been initialized.
  * @retval NRFX_ERROR_BUSY          If the LPCOMP driver is initialized.
  */
-ret_code_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
+nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           nrfx_comp_event_handler_t  event_handler);
 
 

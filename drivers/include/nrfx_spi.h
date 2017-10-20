@@ -214,7 +214,7 @@ typedef void (* nrfx_spi_evt_handler_t)(nrfx_spi_evt_t const * p_event,
  *                                  possible only if @ref nrfx_prs module
  *                                  is enabled.
  */
-ret_code_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
+nrfx_err_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
                          nrfx_spi_config_t const * p_config,
                          nrfx_spi_evt_handler_t    handler,
                          void *                    p_context);
@@ -245,7 +245,7 @@ void       nrfx_spi_uninit(nrfx_spi_t const * const p_instance);
  * @retval NRFX_SUCCESS    If the operation was successful.
  * @retval NRFX_ERROR_BUSY If a previously started transfer has not finished yet.
  */
-ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
+nrfx_err_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
                              uint8_t          const * p_tx_buffer,
                              uint32_t                 tx_buffer_length,
                              uint8_t                * p_rx_buffer,
@@ -264,7 +264,7 @@ ret_code_t nrfx_spi_transfer(nrfx_spi_t const * const p_instance,
  * @retval NRFX_ERROR_BUSY          If the driver is not ready for a new transfer.
  * @retval NRFX_ERROR_NOT_SUPPORTED If the provided parameters are not supported.
  */
-ret_code_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
+nrfx_err_t nrfx_spi_xfer(nrfx_spi_t const * const     p_instance,
                          nrfx_spi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags);
 

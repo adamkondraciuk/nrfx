@@ -220,7 +220,7 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *                                  possible only if @ref nrfx_prs module
  *                                  is enabled.
  */
-ret_code_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
+nrfx_err_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
                           void *                     p_context);
@@ -258,7 +258,7 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  * @retval NRFX_ERROR_INVALID_ADDR If the provided buffers are not placed in the Data
  *                                 RAM region.
  */
-ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
+nrfx_err_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
                               uint8_t           const * p_tx_buffer,
                               uint8_t                   tx_buffer_length,
                               uint8_t                 * p_rx_buffer,
@@ -308,7 +308,7 @@ ret_code_t nrfx_spim_transfer(nrfx_spim_t const * const p_instance,
  * @retval NRFX_ERROR_INVALID_ADDR  If the provided buffers are not placed in the Data
  *                                  RAM region.
  */
-ret_code_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
+nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
                           nrfx_spim_xfer_desc_t const * p_xfer_desc,
                           uint32_t                      flags);
 

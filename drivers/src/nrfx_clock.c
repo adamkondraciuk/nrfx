@@ -59,9 +59,9 @@ static nrfx_clock_cb_t m_clock_cb;
 bool nrfx_clock_irq_enabled;
 #endif
 
-ret_code_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
+nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
     if (m_clock_cb.module_initialized)
     {
         err_code = NRFX_ERROR_ALREADY_INITIALIZED;
@@ -153,9 +153,9 @@ void nrfx_clock_hfclk_stop(void)
     {}
 }
 
-ret_code_t nrfx_clock_calibration_start(void)
+nrfx_err_t nrfx_clock_calibration_start(void)
 {
-    ret_code_t err_code = NRFX_SUCCESS;
+    nrfx_err_t err_code = NRFX_SUCCESS;
 #if CALIBRATION_SUPPORT
     if (nrfx_clock_hfclk_is_running() == false)
     {
@@ -185,7 +185,7 @@ ret_code_t nrfx_clock_calibration_start(void)
     return err_code;
 }
 
-ret_code_t nrfx_clock_is_calibrating(void)
+nrfx_err_t nrfx_clock_is_calibrating(void)
 {
 #if CALIBRATION_SUPPORT
     if (m_clock_cb.cal_state == CAL_STATE_CAL)

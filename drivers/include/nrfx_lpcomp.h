@@ -65,7 +65,7 @@ typedef struct
  * @retval NRFX_ERROR_INVALID_PARAM If the configuration is invalid.
  * @retval NRFX_ERROR_INVALID_STATE If the driver has already been initialized.
  */
-ret_code_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
+nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
                             nrfx_lpcomp_event_handler_t  event_handler);
 
 /**

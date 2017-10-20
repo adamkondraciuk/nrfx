@@ -179,7 +179,7 @@ typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type);
  * @retval NRFX_SUCCESS             If initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  */
-ret_code_t nrfx_pwm_init(nrfx_pwm_t const * const  p_instance,
+nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const  p_instance,
                          nrfx_pwm_config_t const * p_config,
                          nrfx_pwm_handler_t        handler);
 
