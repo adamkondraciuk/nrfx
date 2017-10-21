@@ -11,9 +11,31 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SPIS_ENABLED
-/** @brief Interrupt priority
+/** @brief Enable SPIS0 instance
  *
- * Priorities 0,2 (nRF51) and 0,1,4,5 (nRF52) are reserved for SoftDevice
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_SPIS0_ENABLED
+
+/** @brief Enable SPIS1 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_SPIS1_ENABLED
+
+/** @brief Enable SPIS2 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_SPIS2_ENABLED
+
+/** @brief Interrupt priority
  *
  *  Following options are available:
  * - 0 - 0 (highest)
@@ -68,30 +90,6 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SPIS_DEFAULT_ORC
-
-/** @brief Enable SPIS0 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_SPIS0_ENABLED
-
-/** @brief Enable SPIS1 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_SPIS1_ENABLED
-
-/** @brief Enable SPIS2 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_SPIS2_ENABLED
 
 /** @brief Enables logging in the module.
  *

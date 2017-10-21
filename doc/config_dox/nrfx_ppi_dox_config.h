@@ -1,10 +1,10 @@
 /**
  *
- * @defgroup nrfx_ppi_config PPI peripheral driver configuration
+ * @defgroup nrfx_ppi_config PPI peripheral allocator configuration
  * @{
  * @ingroup nrfx_ppi
  */
-/** @brief Enabling PPI driver
+/** @brief Enabling PPI allocator
  *
  *  Set to 1 to activate.
  *

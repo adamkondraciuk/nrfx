@@ -11,6 +11,38 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_PWM_ENABLED
+/** @brief Enable PWM0 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_PWM0_ENABLED
+
+/** @brief Enable PWM1 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_PWM1_ENABLED
+
+/** @brief Enable PWM2 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_PWM2_ENABLED
+
+/** @brief Enable PWM3 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_PWM3_ENABLED
+
 /** @brief Out0 pin
  *
  *  Minimum value: 0
@@ -57,7 +89,7 @@
  * - 4 - 1 MHz
  * - 5 - 500 kHz
  * - 6 - 250 kHz
- * - 7 - 125 MHz
+ * - 7 - 125 kHz
  *
  * @note This is an NRF_CONFIG macro.
  */
@@ -104,53 +136,19 @@
 
 /** @brief Interrupt priority
  *
- * Priorities 0,1,4,5 (nRF52) are reserved for SoftDevice
- *
  *  Following options are available:
  * - 0 - 0 (highest)
  * - 1 - 1
  * - 2 - 2
  * - 3 - 3
- * - 4 - 4
- * - 5 - 5
- * - 6 - 6
- * - 7 - 7
+ * - 4 - 4 (Software Component only)
+ * - 5 - 5 (Software Component only)
+ * - 6 - 6 (Software Component only)
+ * - 7 - 7 (Software Component only)
  *
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY
-
-/** @brief Enable PWM0 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_PWM0_ENABLED
-
-/** @brief Enable PWM1 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_PWM1_ENABLED
-
-/** @brief Enable PWM2 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_PWM2_ENABLED
-
-/** @brief Enable PWM3 instance
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_PWM3_ENABLED
 
 /** @brief Enables logging in the module.
  *

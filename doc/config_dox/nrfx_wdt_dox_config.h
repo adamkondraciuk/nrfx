@@ -34,8 +34,6 @@
 
 /** @brief Interrupt priority
  *
- * Priorities 0,2 (nRF51) and 0,1,4,5 (nRF52) are reserved for SoftDevice
- *
  *  Following options are available:
  * - 0 - 0 (highest)
  * - 1 - 1

@@ -11,6 +11,20 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_UART_ENABLED
+/** @brief Enable UART0 instance
+ *
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_UART0_ENABLED
+
+/** @brief Enable UART1 instance
+ *
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_UART1_ENABLED
+
 /** @brief Hardware Flow Control
  *
  *  Following options are available:
@@ -58,8 +72,6 @@
 
 /** @brief Interrupt priority
  *
- * Priorities 0,2 (nRF51) and 0,1,4,5 (nRF52) are reserved for SoftDevice
- *
  *  Following options are available:
  * - 0 - 0 (highest)
  * - 1 - 1
@@ -73,20 +85,6 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY
-
-/** @brief Enable UART0 instance
- *
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_UART0_ENABLED
-
-/** @brief Enable UART1 instance
- *
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_UART1_ENABLED
 
 /** @brief Enables logging in the module.
  *
