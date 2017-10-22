@@ -27,7 +27,7 @@ extern bool nrfx_power_irq_enabled;
 #define NRF_CLOCK_LFCLK_Synth CLOCK_LFCLKSRC_SRC_Synth
 /*lint -restore */
 
-#if (CLOCK_CONFIG_LF_SRC == NRF_CLOCK_LFCLK_RC)
+#if (NRFX_CLOCK_CONFIG_LF_SRC == NRF_CLOCK_LFCLK_RC)
 #define CALIBRATION_SUPPORT 1
 #else
 #define CALIBRATION_SUPPORT 0
