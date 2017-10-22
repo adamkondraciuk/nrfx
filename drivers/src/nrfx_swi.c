@@ -262,7 +262,10 @@ void nrfx_swi_trigger(nrfx_swi_t swi, uint8_t flag_number)
 #if NRFX_SWI_EGU_COUNT
 static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 {
-    NRFX_ASSERT(swi >= NRFX_SWI_FIRST && swi <= NRFX_SWI_LAST);
+#if (NRFX_SWI_FIRST > 0)
+    NRFX_ASSERT(swi >= NRFX_SWI_FIRST);
+#endif
+    NRFX_ASSERT(swi <= NRFX_SWI_LAST);
     nrfx_swi_handler_t handler = m_swi_handlers[swi];
     NRFX_ASSERT(handler != NULL);
 
@@ -287,7 +290,10 @@ static void egu_irq_handler(nrfx_swi_t swi, uint8_t egu_channel_count)
 #if (NRFX_SWI_EGU_COUNT < SWI_COUNT)
 static void swi_irq_handler(nrfx_swi_t swi)
 {
-    NRFX_ASSERT(swi >= NRFX_SWI_FIRST && swi <= NRFX_SWI_LAST);
+#if (NRFX_SWI_FIRST > 0)
+    NRFX_ASSERT(swi >= NRFX_SWI_FIRST);
+#endif
+    NRFX_ASSERT(swi <= NRFX_SWI_LAST);
     nrfx_swi_handler_t handler = m_swi_handlers[swi];
     NRFX_ASSERT(handler != NULL);
 
