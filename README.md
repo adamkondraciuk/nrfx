@@ -1,20 +1,20 @@
 # nrfx
 
-##Overview
+## Overview
 
 nrfx is an extract from the nRF5 SDK that contains solely the drivers for
 peripherals present in Nordic SoCs, for convenience complemented with the MDK
 package containing required structures and bitfields definitions, startup
 files etc.
 
-##Supported SoCs
+## Supported SoCs
 
 * nRF51 Series
 * nRF52810
 * nRF52832
 * nRF52840
 
-##Directories
+## Directories
 
 ```
  .
@@ -28,7 +28,7 @@ files etc.
  └── templates       # Templates of nrfx integration files
 ```
 
-##Generating documentation
+## Generating documentation
 
 nrfx documentation is availabe in the `doc\html` folder of the release package.
 
@@ -36,6 +36,6 @@ You can also generate documentation yourself from the source code. To do it, ins
 and run one of the scripts: `generate_html_doc.bat` or `generate_html_doc.sh`. Generated
 documentation will be stored in the `doc\html` directory. Use `index.html` to open it.
 
-##Licence
+## Licence
 
 nrfx is licensed under the BSD 3-clause License. License text can be found in every source file.
