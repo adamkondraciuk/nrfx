@@ -107,7 +107,9 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
     nrf_comp_main_mode_set(p_config->main_mode);
     nrf_comp_speed_mode_set(p_config->speed_mode);
     nrf_comp_hysteresis_set(p_config->hyst);
+#if defined (COMP_ISOURCE_ISOURCE_Msk)
     nrf_comp_isource_set(p_config->isource);
+#endif
     nrf_comp_shorts_disable(NRFX_COMP_SHORT_STOP_AFTER_CROSS_EVT |
                             NRFX_COMP_SHORT_STOP_AFTER_UP_EVT |
                             NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT);

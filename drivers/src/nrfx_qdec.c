@@ -170,9 +170,9 @@ void nrfx_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl)
     *p_accdbl = (int16_t)nrf_qdec_accdblread_get();
 
     NRFX_LOG_DEBUG("Accumulators data, ACC register:");
-    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_acc, sizeof(p_acc));
+    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_acc, sizeof(p_acc[0]));
     NRFX_LOG_DEBUG("Accumulators data, ACCDBL register:");
-    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_accdbl, sizeof(p_accdbl));
+    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_accdbl, sizeof(p_accdbl[0]));
 }
 
 #endif // NRFX_CHECK(NRFX_QDEC_ENABLED)

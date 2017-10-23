@@ -16,11 +16,6 @@
     (event == NRF_SAADC_EVENT_STOPPED       ? "NRF_SAADC_EVENT_STOPPED"       : \
                                               "UNKNOWN EVENT"))))))
 
-#define EVT_TO_STR_LIMIT(event)                               \
-    (event == NRF_SAADC_LIMIT_LOW  ? "NRF_SAADC_LIMIT_LOW"  : \
-    (event == NRF_SAADC_LIMIT_HIGH ? "NRF_SAADC_LIMIT_HIGH" : \
-                                     "UNKNOWN EVENT"))
-
 
 typedef enum
 {
@@ -167,9 +162,9 @@ void nrfx_saadc_irq_handler(void)
                 evt.type                  = NRFX_SAADC_EVT_LIMIT;
                 evt.data.limit.channel    = LIMIT_EVENT_TO_CHANNEL(event);
                 evt.data.limit.limit_type = LIMIT_EVENT_TO_LIMIT_TYPE(event);
-                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %s.",
+                NRFX_LOG_DEBUG("Event limit, channel: %d, limit type: %d.",
                                evt.data.limit.channel,
-                               EVT_TO_STR_LIMIT(evt.data.limit.limit_type));
+                               evt.data.limit.limit_type);
                 m_cb.event_handler(&evt);
             }
         }

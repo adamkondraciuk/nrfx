@@ -175,6 +175,7 @@ void nrfx_timer_compare(nrfx_timer_t const * const p_instance,
 
     if (enable_int)
     {
+        nrf_timer_event_clear(p_instance->p_reg, nrf_timer_compare_event_get(cc_channel));
         nrf_timer_int_enable(p_instance->p_reg, timer_int);
     }
     else

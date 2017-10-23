@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - XIP support in QSPI driver.
 
+### Changed
+- Update drivers: COMP, PWM, QDEC, SAADC, SPIS, TIMER, TWI, TWIS.
+- Update HALs: COMP, NVMC, USBD.
+
 ## [0.7.0] - 2017-10-20
 ### Added
 - This CHANGELOG.md file.

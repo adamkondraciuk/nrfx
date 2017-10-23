@@ -574,11 +574,11 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
                   p_xfer_desc->primary_length,
                   p_xfer_desc->secondary_length);
     NRFX_LOG_DEBUG("Primary buffer data:");
-    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_xfer_desc->p_primary_buf,
-                           p_xfer_desc->primary_length * sizeof(p_xfer_desc->p_primary_buf));
+    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->p_primary_buf,
+                           p_xfer_desc->primary_length * sizeof(p_xfer_desc->p_primary_buf[0]));
     NRFX_LOG_DEBUG("Secondary buffer data:");
-    NRFX_LOG_HEXDUMP_DEBUG((uint8_t *)p_xfer_desc->p_secondary_buf,
-                           p_xfer_desc->secondary_length * sizeof(p_xfer_desc->p_secondary_buf));
+    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->p_secondary_buf,
+                           p_xfer_desc->secondary_length * sizeof(p_xfer_desc->p_secondary_buf[0]));
 
     err_code = twi_xfer(p_cb, (NRF_TWI_Type  *)p_instance->p_twi, p_xfer_desc, flags);
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
