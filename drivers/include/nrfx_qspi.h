@@ -22,6 +22,7 @@ extern "C" {
  */
 typedef struct
 {
+    uint32_t             xip_offset;   /**< Address offset into the external memory for Execute in Place operation. */
     nrf_qspi_pins_t      pins;         /**< Pins configuration structure. */
     nrf_qspi_prot_conf_t prot_if;      /**< Protocol layer interface configuration structure. */
     nrf_qspi_phy_conf_t  phy_if;       /**< Physical layer interface configuration structure. */
@@ -33,6 +34,7 @@ typedef struct
  */
 #define NRFX_QSPI_DEFAULT_CONFIG                                        \
 {                                                                       \
+    .xip_offset  = NRFX_QSPI_CONFIG_XIP_OFFSET,                         \
     .pins = {                                                           \
        .sck_pin     = NRFX_QSPI_PIN_SCK,                                \
        .csn_pin     = NRFX_QSPI_PIN_CSN,                                \
@@ -53,7 +55,7 @@ typedef struct
         .sck_delay  = (uint8_t)NRFX_QSPI_CONFIG_SCK_DELAY,              \
         .spi_mode   = (nrf_qspi_spi_mode_t)NRFX_QSPI_CONFIG_MODE,       \
         .dpmen      = false                                             \
-    }                                                                   \
+    },                                                                  \
 }
 
 /**
