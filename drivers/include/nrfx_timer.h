@@ -96,7 +96,7 @@ typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
  * @brief Function for initializing the timer.
  *
  * @param[in] p_instance          Pointer to the driver instance structure.
- * @param[in] p_config            Initial configuration. Must not be NULL.
+ * @param[in] p_config            Pointer to the structure with initial configuration.
  * @param[in] timer_event_handler Event handler provided by the user.
  *                                Must not be NULL.
  *

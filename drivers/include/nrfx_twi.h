@@ -166,7 +166,7 @@ typedef void (* nrfx_twi_evt_handler_t)(nrfx_twi_evt_t const * p_event,
  * @brief Function for initializing the TWI driver instance.
  *
  * @param[in] p_instance      Pointer to the driver instance structure.
- * @param[in] p_config        Initial configuration.
+ * @param[in] p_config        Pointer to the structure with initial configuration.
  * @param[in] event_handler   Event handler provided by the user. If NULL, blocking mode is enabled.
  * @param[in] p_context       Context passed to event handler.
  *

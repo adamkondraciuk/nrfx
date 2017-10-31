@@ -88,7 +88,7 @@ typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
 /**
  * @brief Function for initializing the QSPI driver instance.
  *
- * @param[in] p_config   Pointer to the structure with the initial configuration.
+ * @param[in] p_config   Pointer to the structure with initial configuration.
  * @param[in] handler    Event handler provided by the user. If NULL, transfers
  *                       will be performed in blocking mode.
  * @param[in] p_context  Pointer to context. Use in interrupt handler.

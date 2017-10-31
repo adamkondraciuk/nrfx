@@ -62,6 +62,7 @@ void nrfx_qdec_irq_handler(void)
 nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  event_handler)
 {
+    NRFX_ASSERT(p_config);
     nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -71,12 +72,6 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
-    }
-
-    if (p_config == NULL)
-    {
-        static nrfx_qdec_config_t const default_config = NRFX_QDEC_DEFAULT_CONFIG;
-        p_config = &default_config;
     }
 
     if (event_handler)

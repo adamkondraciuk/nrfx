@@ -21,8 +21,6 @@
 static nrfx_comp_event_handler_t    m_comp_event_handler = NULL;
 static nrfx_drv_state_t             m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
-static nrfx_comp_config_t const m_default_config = NRFX_COMP_DEFAULT_CONFIG(NRF_COMP_INPUT_0);
-
 static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
 {
     if (nrf_comp_event_check(event) && nrf_comp_int_enable_check(event_mask))
@@ -46,6 +44,7 @@ void nrfx_comp_irq_handler(void)
 nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           nrfx_comp_event_handler_t  event_handler)
 {
+    NRFX_ASSERT(p_config);
     nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -55,11 +54,6 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
-    }
-
-    if (p_config == NULL)
-    {
-        p_config = &m_default_config;
     }
 
     if (event_handler)

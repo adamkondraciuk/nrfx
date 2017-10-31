@@ -207,7 +207,7 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  * This function configures and enables the specified peripheral.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_config   Pointer to the structure with the initial configuration.
+ * @param[in] p_config   Pointer to the structure with initial configuration.
  *
  * @param     handler    Event handler provided by the user. If NULL, transfers
  *                       will be performed in blocking mode.

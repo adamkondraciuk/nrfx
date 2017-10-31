@@ -137,8 +137,7 @@ typedef void (*nrfx_spis_event_handler_t)(nrfx_spis_event_t event);
  *       to detect falling edges on CSN pin.
  *
  * @param[in] p_instance    Pointer to the driver instance structure.
- * @param[in] p_config      Pointer to the structure with the initial configuration.
- *                          If NULL, the default configuration will be used.
+ * @param[in] p_config      Pointer to the structure with initial configuration.
  * @param[in] event_handler Function to be called by the SPI slave driver upon event.
  *
  * @retval NRFX_SUCCESS             If the initialization was successful.

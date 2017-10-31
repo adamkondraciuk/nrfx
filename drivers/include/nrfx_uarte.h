@@ -134,7 +134,7 @@ typedef void (*nrfx_uarte_event_handler_t)(nrfx_uarte_event_t const * p_event,
  * This function configures and enables UARTE. After this function GPIO pins are controlled by UARTE.
  *
  * @param[in] p_instance    Pointer to the driver instance structure.
- * @param[in] p_config      Initial configuration.
+ * @param[in] p_config      Pointer to the structure with initial configuration.
  * @param[in] event_handler Event handler provided by the user. If not provided driver works in
  *                          blocking mode.
  *

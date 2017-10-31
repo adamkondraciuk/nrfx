@@ -31,8 +31,6 @@ typedef struct
     nrf_saadc_input_t pseln;
 } nrf_saadc_psel_buffer;
 
-static const nrfx_saadc_config_t m_default_config = NRFX_SAADC_DEFAULT_CONFIG;
-
 /** @brief SAADC control block.*/
 typedef struct
 {
@@ -175,6 +173,7 @@ void nrfx_saadc_irq_handler(void)
 nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                            nrfx_saadc_event_handler_t  event_handler)
 {
+    NRFX_ASSERT(p_config);
     nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -192,11 +191,6 @@ nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
-    }
-
-    if (p_config == NULL)
-    {
-        p_config = &m_default_config;
     }
 
     m_cb.event_handler = event_handler;
