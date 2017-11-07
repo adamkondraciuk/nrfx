@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - XIP support in QSPI driver.
+- Errata 132 implementation in CLOCK driver.
 
 ### Changed
 - Update MDK to 8.15.0. Introduce Segger Embedded Studio startup files.
