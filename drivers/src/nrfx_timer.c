@@ -158,7 +158,7 @@ void nrfx_timer_increment(nrfx_timer_t const * const p_instance)
 uint32_t nrfx_timer_capture(nrfx_timer_t const * const p_instance,
                             nrf_timer_cc_channel_t     cc_channel)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(cc_channel < p_instance->cc_channel_count);
 
     nrf_timer_task_trigger(p_instance->p_reg,
