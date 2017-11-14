@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update drivers: COMP, PWM, QDEC, SAADC, SPIS, TIMER, TWI, TWIS.
 - Update HALs: COMP, NVMC, USBD.
 
+### Fixed
+- TWI and TWIM drivers support now GPIOs from all ports.
+
 ### Removed
 - Default configuration when NULL in drivers.
 

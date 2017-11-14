@@ -9,6 +9,7 @@
 #endif
 
 #include <nrfx_twim.h>
+#include <hal/nrf_gpio.h>
 #include "prs/nrfx_prs.h"
 
 #define NRFX_LOG_MODULE TWIM
@@ -37,33 +38,12 @@
     (type == NRFX_TWIM_XFER_TXTX ? "XFER_TXTX" : \
                                    "UNKNOWN TRANSFER TYPE"))))
 
-
-#define SCL_PIN_INIT_CONF                                     \
-    ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
-    | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
-    | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
-    | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
-    | (GPIO_PIN_CNF_DIR_Input      << GPIO_PIN_CNF_DIR_Pos))
-
-#define SDA_PIN_INIT_CONF        SCL_PIN_INIT_CONF
-
-#define SDA_PIN_UNINIT_CONF                                     \
-    ( (GPIO_PIN_CNF_SENSE_Disabled   << GPIO_PIN_CNF_SENSE_Pos) \
-    | (GPIO_PIN_CNF_DRIVE_H0H1       << GPIO_PIN_CNF_DRIVE_Pos) \
-    | (GPIO_PIN_CNF_PULL_Disabled    << GPIO_PIN_CNF_PULL_Pos)  \
-    | (GPIO_PIN_CNF_INPUT_Disconnect << GPIO_PIN_CNF_INPUT_Pos) \
-    | (GPIO_PIN_CNF_DIR_Input        << GPIO_PIN_CNF_DIR_Pos))
-
-#define SCL_PIN_UNINIT_CONF      SDA_PIN_UNINIT_CONF
-
-#define SCL_PIN_INIT_CONF_CLR                                 \
-    ( (GPIO_PIN_CNF_SENSE_Disabled << GPIO_PIN_CNF_SENSE_Pos) \
-    | (GPIO_PIN_CNF_DRIVE_S0D1     << GPIO_PIN_CNF_DRIVE_Pos) \
-    | (GPIO_PIN_CNF_PULL_Pullup    << GPIO_PIN_CNF_PULL_Pos)  \
-    | (GPIO_PIN_CNF_INPUT_Connect  << GPIO_PIN_CNF_INPUT_Pos) \
-    | (GPIO_PIN_CNF_DIR_Output     << GPIO_PIN_CNF_DIR_Pos))
-
-#define SDA_PIN_INIT_CONF_CLR    SCL_PIN_INIT_CONF_CLR
+#define TWIM_PIN_INIT(_pin) nrf_gpio_cfg((_pin),                     \
+                                         NRF_GPIO_PIN_DIR_INPUT,     \
+                                         NRF_GPIO_PIN_INPUT_CONNECT, \
+                                         NRF_GPIO_PIN_PULLUP,        \
+                                         NRF_GPIO_PIN_S0D1,          \
+                                         NRF_GPIO_PIN_NOSENSE)
 
 #define HW_TIMEOUT      10000
 
@@ -161,8 +141,8 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
        master when the system is in OFF mode, and when the TWI master is
        disabled, these pins must be configured in the GPIO peripheral.
     */
-    NRF_GPIO->PIN_CNF[p_config->scl] = SCL_PIN_INIT_CONF;
-    NRF_GPIO->PIN_CNF[p_config->sda] = SDA_PIN_INIT_CONF;
+    TWIM_PIN_INIT(p_config->scl);
+    TWIM_PIN_INIT(p_config->sda);
 
     NRF_TWIM_Type * p_twim = p_instance->p_twim;
     nrf_twim_pins_set(p_twim, p_config->scl, p_config->sda);
@@ -200,8 +180,8 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 
     if (!p_cb->hold_bus_uninit)
     {
-        NRF_GPIO->PIN_CNF[p_instance->p_twim->PSEL.SCL] = SCL_PIN_UNINIT_CONF;
-        NRF_GPIO->PIN_CNF[p_instance->p_twim->PSEL.SDA] = SDA_PIN_UNINIT_CONF;
+        nrf_gpio_cfg_default(p_instance->p_twim->PSEL.SCL);
+        nrf_gpio_cfg_default(p_instance->p_twim->PSEL.SDA);
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
