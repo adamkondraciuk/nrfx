@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - TWI and TWIM drivers support now GPIOs from all ports.
+- Compare channels related definitions in TIMER HAL.
 
 ### Removed
 - Default configuration when NULL in drivers.
