@@ -133,6 +133,15 @@ void nrfx_timer_enable(nrfx_timer_t const * const p_instance);
 void nrfx_timer_disable(nrfx_timer_t const * const p_instance);
 
 /**
+ * @brief Function for checking the timer state.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @return True if timer is enabled, false otherwise.
+ */
+bool nrfx_timer_is_enabled(nrfx_timer_t const * const p_instance);
+
+/**
  * @brief Function for pausing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

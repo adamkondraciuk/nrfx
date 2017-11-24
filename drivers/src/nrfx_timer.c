@@ -127,6 +127,12 @@ void nrfx_timer_disable(nrfx_timer_t const * const p_instance)
     NRFX_LOG_INFO("Disabled instance: %d.", p_instance->instance_id);
 }
 
+bool nrfx_timer_is_enabled(nrfx_timer_t const * const p_instance)
+{
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+    return (m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+}
+
 void nrfx_timer_resume(nrfx_timer_t const * const p_instance)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
