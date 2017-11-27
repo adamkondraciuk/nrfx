@@ -868,13 +868,6 @@
 #define NRFX_PRS_BOX_4_ENABLED 1
 #endif
 
-// <q> NRFX_PRS_BOX_5_ENABLED  - Enables box 5 in the module.
- 
-
-#ifndef NRFX_PRS_BOX_5_ENABLED
-#define NRFX_PRS_BOX_5_ENABLED 1
-#endif
-
 // </e>
 
 // <e> NRFX_PWM_ENABLED - nrfx_pwm - PWM peripheral driver

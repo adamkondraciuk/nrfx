@@ -30,9 +30,6 @@ enum {
 #if NRFX_CHECK(NRFX_UART0_ENABLED)
     NRFX_UART0_INST_IDX,
 #endif
-#if NRFX_CHECK(NRFX_UART1_ENABLED)
-    NRFX_UART1_INST_IDX,
-#endif
     NRFX_UART_ENABLED_COUNT
 };
 
@@ -319,7 +316,6 @@ __STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_insta
 
 
 void nrfx_uart_0_irq_handler(void);
-void nrfx_uart_1_irq_handler(void);
 
 
 /** @} */

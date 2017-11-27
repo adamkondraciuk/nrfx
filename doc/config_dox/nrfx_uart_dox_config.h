@@ -18,13 +18,6 @@
  */
 #define NRFX_UART0_ENABLED
 
-/** @brief Enable UART1 instance
- *
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_UART1_ENABLED
-
 /** @brief Hardware Flow Control
  *
  *  Following options are available:

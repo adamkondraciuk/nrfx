@@ -4,7 +4,7 @@
 
 #if NRFX_CHECK(NRFX_UART_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_UART0_ENABLED) || NRFX_CHECK(NRFX_UART1_ENABLED))
+#if !NRFX_CHECK(NRFX_UART0_ENABLED)
 #error "No enabled UART instances. Check <nrfx_config.h>."
 #endif
 
@@ -146,9 +146,6 @@ nrfx_err_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
     static nrfx_irq_handler_t const irq_handlers[NRFX_UART_ENABLED_COUNT] = {
         #if NRFX_CHECK(NRFX_UART0_ENABLED)
         nrfx_uart_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UART1_ENABLED)
-        nrfx_uart_1_irq_handler,
         #endif
     };
     if (nrfx_prs_acquire(p_instance->p_reg,
@@ -608,13 +605,6 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
 void nrfx_uart_0_irq_handler(void)
 {
     uart_irq_handler(NRF_UART0, &m_cb[NRFX_UART0_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_UART1_ENABLED)
-void nrfx_uart_1_irq_handler(void)
-{
-    uart_irq_handler(NRF_UART1, &m_cb[NRFX_UART1_INST_IDX]);
 }
 #endif
 

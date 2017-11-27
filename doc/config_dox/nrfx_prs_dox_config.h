@@ -51,13 +51,5 @@
  */
 #define NRFX_PRS_BOX_4_ENABLED
 
-/** @brief Enables box 5 in the module.
- *
- *  Set to 1 to activate.
- *
- * @note This is an NRF_CONFIG macro.
- */
-#define NRFX_PRS_BOX_5_ENABLED
-
 
 /** @} */
