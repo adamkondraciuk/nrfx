@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Update MDK to 8.15.0. Introduce Segger Embedded Studio startup files.
 - Update drivers: COMP, PWM, QDEC, SAADC, SPIS, TIMER, TWI, TWIS.
 - Update HALs: COMP, NVMC, UART, UARTE, USBD.
+- Update template files and documentation of configuration options.
 
 ### Fixed
 - TWI and TWIM drivers support now GPIOs from all ports.

@@ -465,27 +465,6 @@
 #define NRFX_PRS_BOX_1_ENABLED 1
 #endif
 
-// <q> NRFX_PRS_BOX_2_ENABLED  - Enables box 2 in the module.
-
-
-#ifndef NRFX_PRS_BOX_2_ENABLED
-#define NRFX_PRS_BOX_2_ENABLED 1
-#endif
-
-// <q> NRFX_PRS_BOX_3_ENABLED  - Enables box 3 in the module.
-
-
-#ifndef NRFX_PRS_BOX_3_ENABLED
-#define NRFX_PRS_BOX_3_ENABLED 1
-#endif
-
-// <q> NRFX_PRS_BOX_4_ENABLED  - Enables box 4 in the module.
-
-
-#ifndef NRFX_PRS_BOX_4_ENABLED
-#define NRFX_PRS_BOX_4_ENABLED 1
-#endif
-
 // </e>
 
 // <e> NRFX_QDEC_ENABLED - nrfx_qdec - QDEC peripheral driver
