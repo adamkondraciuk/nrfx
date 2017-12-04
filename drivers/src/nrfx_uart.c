@@ -29,11 +29,11 @@ typedef struct
     uint8_t           const * p_tx_buffer;
     uint8_t                 * p_rx_buffer;
     uint8_t                 * p_rx_secondary_buffer;
-    uint32_t                  tx_buffer_length;
-    uint32_t                  rx_buffer_length;
-    uint32_t                  rx_secondary_buffer_length;
-    volatile uint32_t         tx_counter;
-    volatile uint32_t         rx_counter;
+    size_t                    tx_buffer_length;
+    size_t                    rx_buffer_length;
+    size_t                    rx_secondary_buffer_length;
+    volatile size_t           tx_counter;
+    volatile size_t           rx_counter;
     volatile bool             tx_abort;
     bool                      rx_enabled;
     nrfx_drv_state_t          state;
@@ -233,7 +233,7 @@ static bool tx_blocking(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 
 nrfx_err_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
                         uint8_t const *     p_data,
-                        uint32_t            length)
+                        size_t              length)
 {
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
@@ -316,7 +316,7 @@ static void rx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 
 nrfx_err_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                         uint8_t *           p_data,
-                        uint32_t            length)
+                        size_t              length)
 {
     uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
@@ -460,7 +460,7 @@ uint32_t nrfx_uart_errorsrc_get(nrfx_uart_t const * p_instance)
 }
 
 static void rx_done_event(uart_control_block_t * p_cb,
-                          uint32_t               bytes,
+                          size_t                 bytes,
                           uint8_t *              p_data)
 {
     nrfx_uart_event_t event;
@@ -473,7 +473,7 @@ static void rx_done_event(uart_control_block_t * p_cb,
 }
 
 static void tx_done_event(uart_control_block_t * p_cb,
-                          uint8_t                bytes)
+                          size_t                 bytes)
 {
     nrfx_uart_event_t event;
 
@@ -529,7 +529,7 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
         event.data.error.rxtx.bytes  = p_cb->rx_buffer_length;
         event.data.error.rxtx.p_data = p_cb->p_rx_buffer;
 
-        //abort transfer
+        // Abort transfer.
         p_cb->rx_buffer_length = 0;
         p_cb->rx_secondary_buffer_length = 0;
 
@@ -544,9 +544,9 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
             if (p_cb->rx_secondary_buffer_length)
             {
                 uint8_t * p_data     = p_cb->p_rx_buffer;
-                uint32_t  rx_counter = p_cb->rx_counter;
+                size_t    rx_counter = p_cb->rx_counter;
 
-                //Switch to secondary buffer.
+                // Switch to secondary buffer.
                 p_cb->rx_buffer_length = p_cb->rx_secondary_buffer_length;
                 p_cb->p_rx_buffer = p_cb->p_rx_secondary_buffer;
                 p_cb->rx_secondary_buffer_length = 0;

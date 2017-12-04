@@ -49,20 +49,20 @@
 // Control block - driver instance local data.
 typedef struct
 {
-    nrfx_twi_evt_handler_t    handler;
-    void *                    p_context;
-    volatile uint32_t         int_mask;
-    nrfx_twi_xfer_desc_t      xfer_desc;
-    uint32_t                  flags;
-    uint8_t *                 p_curr_buf;
-    uint8_t                   curr_length;
-    bool                      curr_no_stop;
-    nrfx_drv_state_t          state;
-    bool                      error;
-    volatile bool             busy;
-    bool                      repeated;
-    uint8_t                   bytes_transferred;
-    bool                      hold_bus_uninit;
+    nrfx_twi_evt_handler_t  handler;
+    void *                  p_context;
+    volatile uint32_t       int_mask;
+    nrfx_twi_xfer_desc_t    xfer_desc;
+    uint32_t                flags;
+    uint8_t *               p_curr_buf;
+    uint8_t                 curr_length;
+    bool                    curr_no_stop;
+    nrfx_drv_state_t        state;
+    bool                    error;
+    volatile bool           busy;
+    bool                    repeated;
+    uint8_t                 bytes_transferred;
+    bool                    hold_bus_uninit;
 } twi_control_block_t;
 
 static twi_control_block_t m_cb[NRFX_TWI_ENABLED_COUNT];
@@ -570,7 +570,7 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
 nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t    const * p_data,
-                       uint32_t           length,
+                       size_t             length,
                        bool               no_stop)
 {
     nrfx_twi_xfer_desc_t xfer = NRFX_TWI_XFER_DESC_TX(address, (uint8_t*)p_data, length);
@@ -581,13 +581,13 @@ nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
 nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t *          p_data,
-                       uint32_t           length)
+                       size_t             length)
 {
     nrfx_twi_xfer_desc_t xfer = NRFX_TWI_XFER_DESC_RX(address, p_data, length);
     return nrfx_twi_xfer(p_instance, &xfer, 0);
 }
 
-uint32_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance)
+size_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance)
 {
     return m_cb[p_instance->drv_inst_idx].bytes_transferred;
 }

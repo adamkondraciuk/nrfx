@@ -194,7 +194,7 @@ __STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_insta
  */
 nrfx_err_t nrfx_uart_tx(nrfx_uart_t const * p_instance,
                         uint8_t const *     p_data,
-                        uint32_t            length);
+                        size_t              length);
 
 /**
  * @brief Function for checking if UART is currently transmitting.
@@ -243,7 +243,7 @@ void nrfx_uart_tx_abort(nrfx_uart_t const * p_instance);
  */
 nrfx_err_t nrfx_uart_rx(nrfx_uart_t const * p_instance,
                         uint8_t *           p_data,
-                        uint32_t            length);
+                        size_t              length);
 
 
 

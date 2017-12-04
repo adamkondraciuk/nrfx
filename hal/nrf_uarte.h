@@ -342,7 +342,7 @@ __STATIC_INLINE void nrf_uarte_baudrate_set(NRF_UARTE_Type   * p_reg, nrf_uarte_
  */
 __STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
                                              uint8_t  const * p_buffer,
-                                             uint8_t          length);
+                                             size_t           length);
 
 /**
  * @brief Function for getting number of bytes transmitted in the last transaction.
@@ -362,7 +362,7 @@ __STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type * p_reg);
  */
 __STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
                                              uint8_t * p_buffer,
-                                             uint8_t   length);
+                                             size_t    length);
 
 /**
  * @brief Function for getting number of bytes received in the last transaction.
@@ -503,7 +503,7 @@ __STATIC_INLINE void nrf_uarte_baudrate_set(NRF_UARTE_Type   * p_reg, nrf_uarte_
 
 __STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
                                              uint8_t  const * p_buffer,
-                                             uint8_t          length)
+                                             size_t           length)
 {
     p_reg->TXD.PTR    = (uint32_t)p_buffer;
     p_reg->TXD.MAXCNT = length;
@@ -516,7 +516,7 @@ __STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type * p_reg)
 
 __STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
                                              uint8_t * p_buffer,
-                                             uint8_t   length)
+                                             size_t    length)
 {
     p_reg->RXD.PTR    = (uint32_t)p_buffer;
     p_reg->RXD.MAXCNT = length;

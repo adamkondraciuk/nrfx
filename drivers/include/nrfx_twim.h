@@ -104,8 +104,8 @@ typedef struct
 {
     nrfx_twim_xfer_type_t   type;             ///< Type of transfer.
     uint8_t                 address;          ///< Slave address.
-    uint8_t                 primary_length;   ///< Number of bytes transferred.
-    uint8_t                 secondary_length; ///< Number of bytes transferred.
+    size_t                  primary_length;   ///< Number of bytes transferred.
+    size_t                  secondary_length; ///< Number of bytes transferred.
     uint8_t *               p_primary_buf;    ///< Pointer to transferred data.
     uint8_t *               p_secondary_buf;  ///< Pointer to transferred data.
 } nrfx_twim_xfer_desc_t;
@@ -220,7 +220,10 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
  * @param[in] p_data     Pointer to a transmit buffer.
- * @param[in] length     Number of bytes to send.
+ * @param[in] length     Number of bytes to send. Maximum possible length is
+ *                       dependent on the used SoC (see the MAXCNT register
+ *                       description in the Product Specification). The driver
+ *                       checks it with assertion.
  * @param[in] no_stop    If set, the stop condition is not generated on the bus
  *                       after the transfer has completed successfully (allowing
  *                       for a repeated start in the next transfer).
@@ -235,7 +238,7 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
 nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
                         uint8_t             address,
                         uint8_t const *     p_data,
-                        uint8_t             length,
+                        size_t              length,
                         bool                no_stop);
 
 /**
@@ -247,7 +250,10 @@ nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
  * @param[in] p_data     Pointer to a receive buffer.
- * @param[in] length     Number of bytes to be received.
+ * @param[in] length     Number of bytes to be received. Maximum possible length
+ *                       is dependent on the used SoC (see the MAXCNT register
+ *                       description in the Product Specification). The driver
+ *                       checks it with assertion.
  *
  * @retval NRFX_SUCCESS                    If the procedure was successful.
  * @retval NRFX_ERROR_BUSY                 If the driver is not ready for a new transfer.
@@ -258,7 +264,7 @@ nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
 nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
                         uint8_t             address,
                         uint8_t *           p_data,
-                        uint8_t             length);
+                        size_t              length);
 
 /**
  * @brief Function for preparing a TWI transfer.
