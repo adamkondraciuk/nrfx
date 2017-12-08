@@ -27,10 +27,9 @@
     (event == NRF_SPIS_EVENT_END      ? "NRF_SPIS_EVENT_END"      : \
                                         "UNKNOWN ERROR"))
 
-#define SPISX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len)      \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX))      && \
-     ((rx_len) < (1U << NRFX_CONCAT_2(peripheral, _EASYDMA_MAXCNT_SIZE))) && \
-     ((tx_len) < (1U << NRFX_CONCAT_2(peripheral, _EASYDMA_MAXCNT_SIZE))))
+#define SPISX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len) \
+    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, rx_len, tx_len))
 
 #if NRFX_CHECK(NRFX_SPIS0_ENABLED)
 #define SPIS0_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS0, __VA_ARGS__)
@@ -354,9 +353,9 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
         return NRFX_ERROR_NULL;
     }
 
-    if (SPIS_LENGTH_VALIDATE(p_instance->drv_inst_idx,
-                             rx_buffer_length,
-                             tx_buffer_length) == 0)
+    if (!SPIS_LENGTH_VALIDATE(p_instance->drv_inst_idx,
+                              rx_buffer_length,
+                              tx_buffer_length))
     {
         return NRFX_ERROR_INVALID_LENGTH;
     }

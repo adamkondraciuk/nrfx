@@ -20,10 +20,9 @@
 #define NRFX_LOG_MODULE SPIM
 #include <nrfx_log.h>
 
-#define SPIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len)      \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX))      && \
-     ((rx_len) < (1U << NRFX_CONCAT_2(peripheral, _EASYDMA_MAXCNT_SIZE))) && \
-     ((tx_len) < (1U << NRFX_CONCAT_2(peripheral, _EASYDMA_MAXCNT_SIZE))))
+#define SPIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len) \
+    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, rx_len, tx_len))
 
 #if NRFX_CHECK(NRFX_SPIM0_ENABLED)
 #define SPIM0_LENGTH_VALIDATE(...)  SPIMX_LENGTH_VALIDATE(SPIM0, __VA_ARGS__)
