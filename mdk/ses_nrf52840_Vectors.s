@@ -498,9 +498,11 @@ _vectors:
   .word UARTE1_IRQHandler
   .word QSPI_IRQHandler
   .word CRYPTOCELL_IRQHandler
-  .word SPIM3_IRQHandler
+  .word Dummy_Handler /* Reserved */
   .word Dummy_Handler /* Reserved */
   .word PWM3_IRQHandler
+  .word Dummy_Handler /* Reserved */
+  .word SPIM3_IRQHandler
 _vectors_end:
 
 #ifdef VECTORS_IN_RAM
