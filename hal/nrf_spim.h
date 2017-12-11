@@ -23,7 +23,14 @@ extern "C" {
  */
 #define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
-#if defined(SPIM_DCXCNT_DCXCNT_Msk)
+#if defined(SPIM_DCXCNT_DCXCNT_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief This value specified in the DCX line configuration causes this line
+ *        to be set low during whole transmission (all transmitted bytes are
+ *        marked as command bytes). Any lower value causes the DCX line to be
+ *        switched from low to high after this number of bytes is transmitted
+ *        (all remaining bytes are marked as data bytes).
+ */
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
 #endif
 
