@@ -35,6 +35,22 @@
  */
 #define NRFX_SPIM2_ENABLED
 
+/** @brief Enable SPIM3 instance
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_SPIM3_ENABLED
+
+/** @brief Enable extended SPIM features
+ *
+ *  Set to 1 to activate.
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_SPIM_EXTENDED_ENABLED
+
 /** @brief MISO pin pull configuration.
  *
  *  Following options are available:

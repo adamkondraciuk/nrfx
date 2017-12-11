@@ -1705,6 +1705,20 @@
 #define NRFX_SPIM2_ENABLED 1
 #endif
 
+// <q> NRFX_SPIM3_ENABLED  - Enable SPIM3 instance
+
+
+#ifndef NRFX_SPIM3_ENABLED
+#define NRFX_SPIM3_ENABLED 0
+#endif
+
+// <q> NRFX_SPIM_EXTENDED_ENABLED  - Enable extended SPIM features
+
+
+#ifndef NRFX_SPIM_EXTENDED_ENABLED
+#define NRFX_SPIM_EXTENDED_ENABLED 0
+#endif
+
 // <o> NRFX_SPIM_MISO_PULL_CFG  - MISO pin pull configuration.
 
 // <0=> NRF_GPIO_PIN_NOPULL
