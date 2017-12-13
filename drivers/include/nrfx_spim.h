@@ -65,13 +65,13 @@ typedef struct
 {
     uint8_t sck_pin;      ///< SCK pin number.
     uint8_t mosi_pin;     ///< MOSI pin number (optional).
-                          /**< Set to @ref NRFX_SPI_PIN_NOT_USED
+                          /**< Set to @ref NRFX_SPIM_PIN_NOT_USED
                            *   if this signal is not needed. */
     uint8_t miso_pin;     ///< MISO pin number (optional).
-                          /**< Set to @ref NRFX_SPI_PIN_NOT_USED
+                          /**< Set to @ref NRFX_SPIM_PIN_NOT_USED
                            *   if this signal is not needed. */
     uint8_t ss_pin;       ///< Slave Select pin number (optional).
-                          /**< Set to @ref NRFX_SPI_PIN_NOT_USED
+                          /**< Set to @ref NRFX_SPIM_PIN_NOT_USED
                            *   if this signal is not needed. */
     bool ss_active_high;  ///< Polarity of the Slave Select pin during transmission.
     uint8_t irq_priority; ///< Interrupt priority.
