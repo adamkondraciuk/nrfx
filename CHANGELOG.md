@@ -11,6 +11,7 @@ All notable changes to this project are documented in this file.
 ### Changed
 - Updated MDK to 8.15.0. Introduced Segger Embedded Studio startup files.
 - Updated drivers: COMP, PWM, QDEC, SAADC, SPIS, TIMER, TWI, TWIS.
+- Changed the type used for transfer lengths to 'size_t' in drivers: SPI, SPIM, SPIS, TWI, TWIM, TWIS, UART, UARTE. Introduced checking of EasyDMA transfers limits.
 - Updated HALs: COMP, NVMC, UART, UARTE, USBD.
 - Updated template files and documentation of configuration options.
 
