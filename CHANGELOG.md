@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [0.8.0] - 2017-12-18
+## [0.8.0] - 2017-12-20
 ### Added
 - Added XIP support in the QSPI driver.
 - Implemented Errata 132 in the CLOCK driver.
