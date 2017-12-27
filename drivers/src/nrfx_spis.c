@@ -15,13 +15,6 @@
 #define NRFX_LOG_MODULE SPIS
 #include <nrfx_log.h>
 
-#if defined(NRF51) && !defined(SPIS1_EASYDMA_MAXCNT_SIZE)
-/* MDK comes with SPIS0 definition of maximum transmission length but nRF51 Series is equipped
- * with SPIS1 only. It is a simple workaround and will be removed in the next release of the MDK.
- */
-#define SPIS1_EASYDMA_MAXCNT_SIZE SPIS0_EASYDMA_MAXCNT_SIZE
-#endif
-
 #define EVT_TO_STR(event)                                           \
     (event == NRF_SPIS_EVENT_ACQUIRED ? "NRF_SPIS_EVENT_ACQUIRED" : \
     (event == NRF_SPIS_EVENT_END      ? "NRF_SPIS_EVENT_END"      : \
