@@ -121,7 +121,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS_PRESENT
 #define SPIS_COUNT 1
 
-#define SPIS0_EASYDMA_MAXCNT_SIZE 8
+#define SPIS1_EASYDMA_MAXCNT_SIZE 8
 
 /* Two Wire Interface Master */
 #define TWI_PRESENT

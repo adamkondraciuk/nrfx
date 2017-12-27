@@ -6,7 +6,7 @@
  *           nrf52 from Nordic Semiconductor.
  *
  * @version  V1
- * @date     3. October 2017
+ * @date     18. January 2018
  *
  * @note     Generated with SVDConv V2.81d 
  *           from CMSIS SVD File 'nrf52.svd' Version 1,
@@ -1576,7 +1576,7 @@ typedef struct {                                    /*!< COMP Structure         
   __I  uint32_t  RESERVED4[63];
   __IO uint32_t  ENABLE;                            /*!< COMP enable                                                           */
   __IO uint32_t  PSEL;                              /*!< Pin select                                                            */
-  __IO uint32_t  REFSEL;                            /*!< Reference source select                                               */
+  __IO uint32_t  REFSEL;                            /*!< Reference source select for single-ended mode                         */
   __IO uint32_t  EXTREFSEL;                         /*!< External reference select                                             */
   __I  uint32_t  RESERVED5[8];
   __IO uint32_t  TH;                                /*!< Threshold configuration for hysteresis unit                           */

@@ -38,6 +38,41 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: AAR */
 /* Description: Accelerated Address Resolver */
 
+/* Register: AAR_TASKS_START */
+/* Description: Start resolving addresses based on IRKs specified in the IRK data structure */
+
+/* Bit 0 :   */
+#define AAR_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define AAR_TASKS_START_TASKS_START_Msk (0x1UL << AAR_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: AAR_TASKS_STOP */
+/* Description: Stop resolving addresses */
+
+/* Bit 0 :   */
+#define AAR_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define AAR_TASKS_STOP_TASKS_STOP_Msk (0x1UL << AAR_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: AAR_EVENTS_END */
+/* Description: Address resolution procedure complete */
+
+/* Bit 0 :   */
+#define AAR_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define AAR_EVENTS_END_EVENTS_END_Msk (0x1UL << AAR_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
+/* Register: AAR_EVENTS_RESOLVED */
+/* Description: Address resolved */
+
+/* Bit 0 :   */
+#define AAR_EVENTS_RESOLVED_EVENTS_RESOLVED_Pos (0UL) /*!< Position of EVENTS_RESOLVED field. */
+#define AAR_EVENTS_RESOLVED_EVENTS_RESOLVED_Msk (0x1UL << AAR_EVENTS_RESOLVED_EVENTS_RESOLVED_Pos) /*!< Bit mask of EVENTS_RESOLVED field. */
+
+/* Register: AAR_EVENTS_NOTRESOLVED */
+/* Description: Address not resolved */
+
+/* Bit 0 :   */
+#define AAR_EVENTS_NOTRESOLVED_EVENTS_NOTRESOLVED_Pos (0UL) /*!< Position of EVENTS_NOTRESOLVED field. */
+#define AAR_EVENTS_NOTRESOLVED_EVENTS_NOTRESOLVED_Msk (0x1UL << AAR_EVENTS_NOTRESOLVED_EVENTS_NOTRESOLVED_Pos) /*!< Bit mask of EVENTS_NOTRESOLVED field. */
+
 /* Register: AAR_INTENSET */
 /* Description: Enable interrupt */
 
@@ -144,7 +179,7 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Register: ACL_ACL_SIZE */
 /* Description: Description cluster[0]:  Size of region to protect counting from address ACL[0].ADDR. Write '0' as no effect. */
 
-/* Bits 31..0 : Size of flash region 0 in bytes. Must be a multiple of the flash page size. */
+/* Bits 31..0 : Size of flash region 0 in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512kB. */
 #define ACL_ACL_SIZE_SIZE_Pos (0UL) /*!< Position of SIZE field. */
 #define ACL_ACL_SIZE_SIZE_Msk (0xFFFFFFFFUL << ACL_ACL_SIZE_SIZE_Pos) /*!< Bit mask of SIZE field. */
 
@@ -166,6 +201,55 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: CCM */
 /* Description: AES CCM Mode Encryption */
+
+/* Register: CCM_TASKS_KSGEN */
+/* Description: Start generation of key-stream. This operation will stop by itself when completed. */
+
+/* Bit 0 :   */
+#define CCM_TASKS_KSGEN_TASKS_KSGEN_Pos (0UL) /*!< Position of TASKS_KSGEN field. */
+#define CCM_TASKS_KSGEN_TASKS_KSGEN_Msk (0x1UL << CCM_TASKS_KSGEN_TASKS_KSGEN_Pos) /*!< Bit mask of TASKS_KSGEN field. */
+
+/* Register: CCM_TASKS_CRYPT */
+/* Description: Start encryption/decryption. This operation will stop by itself when completed. */
+
+/* Bit 0 :   */
+#define CCM_TASKS_CRYPT_TASKS_CRYPT_Pos (0UL) /*!< Position of TASKS_CRYPT field. */
+#define CCM_TASKS_CRYPT_TASKS_CRYPT_Msk (0x1UL << CCM_TASKS_CRYPT_TASKS_CRYPT_Pos) /*!< Bit mask of TASKS_CRYPT field. */
+
+/* Register: CCM_TASKS_STOP */
+/* Description: Stop encryption/decryption */
+
+/* Bit 0 :   */
+#define CCM_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define CCM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << CCM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: CCM_TASKS_RATEOVERRIDE */
+/* Description: Override DATARATE setting in MODE register with the contents of the RATEOVERRIDE register for any ongoing encryption/decryption */
+
+/* Bit 0 :   */
+#define CCM_TASKS_RATEOVERRIDE_TASKS_RATEOVERRIDE_Pos (0UL) /*!< Position of TASKS_RATEOVERRIDE field. */
+#define CCM_TASKS_RATEOVERRIDE_TASKS_RATEOVERRIDE_Msk (0x1UL << CCM_TASKS_RATEOVERRIDE_TASKS_RATEOVERRIDE_Pos) /*!< Bit mask of TASKS_RATEOVERRIDE field. */
+
+/* Register: CCM_EVENTS_ENDKSGEN */
+/* Description: Key-stream generation complete */
+
+/* Bit 0 :   */
+#define CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Pos (0UL) /*!< Position of EVENTS_ENDKSGEN field. */
+#define CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Msk (0x1UL << CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Pos) /*!< Bit mask of EVENTS_ENDKSGEN field. */
+
+/* Register: CCM_EVENTS_ENDCRYPT */
+/* Description: Encrypt/decrypt complete */
+
+/* Bit 0 :   */
+#define CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Pos (0UL) /*!< Position of EVENTS_ENDCRYPT field. */
+#define CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Msk (0x1UL << CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Pos) /*!< Bit mask of EVENTS_ENDCRYPT field. */
+
+/* Register: CCM_EVENTS_ERROR */
+/* Description: Deprecated register -  CCM error event */
+
+/* Bit 0 :   */
+#define CCM_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define CCM_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << CCM_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
 
 /* Register: CCM_SHORTS */
 /* Description: Shortcut register */
@@ -314,6 +398,97 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: CLOCK */
 /* Description: Clock control */
+
+/* Register: CLOCK_TASKS_HFCLKSTART */
+/* Description: Start HFCLK crystal oscillator */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_HFCLKSTART_TASKS_HFCLKSTART_Pos (0UL) /*!< Position of TASKS_HFCLKSTART field. */
+#define CLOCK_TASKS_HFCLKSTART_TASKS_HFCLKSTART_Msk (0x1UL << CLOCK_TASKS_HFCLKSTART_TASKS_HFCLKSTART_Pos) /*!< Bit mask of TASKS_HFCLKSTART field. */
+
+/* Register: CLOCK_TASKS_HFCLKSTOP */
+/* Description: Stop HFCLK crystal oscillator */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_HFCLKSTOP_TASKS_HFCLKSTOP_Pos (0UL) /*!< Position of TASKS_HFCLKSTOP field. */
+#define CLOCK_TASKS_HFCLKSTOP_TASKS_HFCLKSTOP_Msk (0x1UL << CLOCK_TASKS_HFCLKSTOP_TASKS_HFCLKSTOP_Pos) /*!< Bit mask of TASKS_HFCLKSTOP field. */
+
+/* Register: CLOCK_TASKS_LFCLKSTART */
+/* Description: Start LFCLK source */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_LFCLKSTART_TASKS_LFCLKSTART_Pos (0UL) /*!< Position of TASKS_LFCLKSTART field. */
+#define CLOCK_TASKS_LFCLKSTART_TASKS_LFCLKSTART_Msk (0x1UL << CLOCK_TASKS_LFCLKSTART_TASKS_LFCLKSTART_Pos) /*!< Bit mask of TASKS_LFCLKSTART field. */
+
+/* Register: CLOCK_TASKS_LFCLKSTOP */
+/* Description: Stop LFCLK source */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_LFCLKSTOP_TASKS_LFCLKSTOP_Pos (0UL) /*!< Position of TASKS_LFCLKSTOP field. */
+#define CLOCK_TASKS_LFCLKSTOP_TASKS_LFCLKSTOP_Msk (0x1UL << CLOCK_TASKS_LFCLKSTOP_TASKS_LFCLKSTOP_Pos) /*!< Bit mask of TASKS_LFCLKSTOP field. */
+
+/* Register: CLOCK_TASKS_CAL */
+/* Description: Start calibration of LFRC or LFULP oscillator */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_CAL_TASKS_CAL_Pos (0UL) /*!< Position of TASKS_CAL field. */
+#define CLOCK_TASKS_CAL_TASKS_CAL_Msk (0x1UL << CLOCK_TASKS_CAL_TASKS_CAL_Pos) /*!< Bit mask of TASKS_CAL field. */
+
+/* Register: CLOCK_TASKS_CTSTART */
+/* Description: Start calibration timer */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_CTSTART_TASKS_CTSTART_Pos (0UL) /*!< Position of TASKS_CTSTART field. */
+#define CLOCK_TASKS_CTSTART_TASKS_CTSTART_Msk (0x1UL << CLOCK_TASKS_CTSTART_TASKS_CTSTART_Pos) /*!< Bit mask of TASKS_CTSTART field. */
+
+/* Register: CLOCK_TASKS_CTSTOP */
+/* Description: Stop calibration timer */
+
+/* Bit 0 :   */
+#define CLOCK_TASKS_CTSTOP_TASKS_CTSTOP_Pos (0UL) /*!< Position of TASKS_CTSTOP field. */
+#define CLOCK_TASKS_CTSTOP_TASKS_CTSTOP_Msk (0x1UL << CLOCK_TASKS_CTSTOP_TASKS_CTSTOP_Pos) /*!< Bit mask of TASKS_CTSTOP field. */
+
+/* Register: CLOCK_EVENTS_HFCLKSTARTED */
+/* Description: HFCLK oscillator started */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_HFCLKSTARTED_EVENTS_HFCLKSTARTED_Pos (0UL) /*!< Position of EVENTS_HFCLKSTARTED field. */
+#define CLOCK_EVENTS_HFCLKSTARTED_EVENTS_HFCLKSTARTED_Msk (0x1UL << CLOCK_EVENTS_HFCLKSTARTED_EVENTS_HFCLKSTARTED_Pos) /*!< Bit mask of EVENTS_HFCLKSTARTED field. */
+
+/* Register: CLOCK_EVENTS_LFCLKSTARTED */
+/* Description: LFCLK started */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_Pos (0UL) /*!< Position of EVENTS_LFCLKSTARTED field. */
+#define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_Msk (0x1UL << CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_Pos) /*!< Bit mask of EVENTS_LFCLKSTARTED field. */
+
+/* Register: CLOCK_EVENTS_DONE */
+/* Description: Calibration of LFCLK RC oscillator complete event */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Pos (0UL) /*!< Position of EVENTS_DONE field. */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Msk (0x1UL << CLOCK_EVENTS_DONE_EVENTS_DONE_Pos) /*!< Bit mask of EVENTS_DONE field. */
+
+/* Register: CLOCK_EVENTS_CTTO */
+/* Description: Calibration timer timeout */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_CTTO_EVENTS_CTTO_Pos (0UL) /*!< Position of EVENTS_CTTO field. */
+#define CLOCK_EVENTS_CTTO_EVENTS_CTTO_Msk (0x1UL << CLOCK_EVENTS_CTTO_EVENTS_CTTO_Pos) /*!< Bit mask of EVENTS_CTTO field. */
+
+/* Register: CLOCK_EVENTS_CTSTARTED */
+/* Description: Calibration timer has been started and is ready to process new tasks */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_CTSTARTED_EVENTS_CTSTARTED_Pos (0UL) /*!< Position of EVENTS_CTSTARTED field. */
+#define CLOCK_EVENTS_CTSTARTED_EVENTS_CTSTARTED_Msk (0x1UL << CLOCK_EVENTS_CTSTARTED_EVENTS_CTSTARTED_Pos) /*!< Bit mask of EVENTS_CTSTARTED field. */
+
+/* Register: CLOCK_EVENTS_CTSTOPPED */
+/* Description: Calibration timer has been stopped and is ready to process new tasks */
+
+/* Bit 0 :   */
+#define CLOCK_EVENTS_CTSTOPPED_EVENTS_CTSTOPPED_Pos (0UL) /*!< Position of EVENTS_CTSTOPPED field. */
+#define CLOCK_EVENTS_CTSTOPPED_EVENTS_CTSTOPPED_Msk (0x1UL << CLOCK_EVENTS_CTSTOPPED_EVENTS_CTSTOPPED_Pos) /*!< Bit mask of EVENTS_CTSTOPPED field. */
 
 /* Register: CLOCK_INTENSET */
 /* Description: Enable interrupt */
@@ -492,6 +667,8 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Bits 7..0 : HFXO debounce time. Debounce time = HFXODEBOUNCE * 16 us. */
 #define CLOCK_HFXODEBOUNCE_HFXODEBOUNCE_Pos (0UL) /*!< Position of HFXODEBOUNCE field. */
 #define CLOCK_HFXODEBOUNCE_HFXODEBOUNCE_Msk (0xFFUL << CLOCK_HFXODEBOUNCE_HFXODEBOUNCE_Pos) /*!< Bit mask of HFXODEBOUNCE field. */
+#define CLOCK_HFXODEBOUNCE_HFXODEBOUNCE_Db256us (0x10UL) /*!< 256 us debounce time. Recommended for TSX-3225, FA-20H and FA-128 crystals. */
+#define CLOCK_HFXODEBOUNCE_HFXODEBOUNCE_Db1024us (0x40UL) /*!< 1024 us debounce time. Recommended for NX1612AA and NX1210AB crystals. */
 
 /* Register: CLOCK_CTIV */
 /* Description: Calibration timer interval */
@@ -536,6 +713,55 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: COMP */
 /* Description: Comparator */
+
+/* Register: COMP_TASKS_START */
+/* Description: Start comparator */
+
+/* Bit 0 :   */
+#define COMP_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define COMP_TASKS_START_TASKS_START_Msk (0x1UL << COMP_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: COMP_TASKS_STOP */
+/* Description: Stop comparator */
+
+/* Bit 0 :   */
+#define COMP_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define COMP_TASKS_STOP_TASKS_STOP_Msk (0x1UL << COMP_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: COMP_TASKS_SAMPLE */
+/* Description: Sample comparator value */
+
+/* Bit 0 :   */
+#define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL) /*!< Position of TASKS_SAMPLE field. */
+#define COMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << COMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE field. */
+
+/* Register: COMP_EVENTS_READY */
+/* Description: COMP is ready and output is valid */
+
+/* Bit 0 :   */
+#define COMP_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define COMP_EVENTS_READY_EVENTS_READY_Msk (0x1UL << COMP_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
+
+/* Register: COMP_EVENTS_DOWN */
+/* Description: Downward crossing */
+
+/* Bit 0 :   */
+#define COMP_EVENTS_DOWN_EVENTS_DOWN_Pos (0UL) /*!< Position of EVENTS_DOWN field. */
+#define COMP_EVENTS_DOWN_EVENTS_DOWN_Msk (0x1UL << COMP_EVENTS_DOWN_EVENTS_DOWN_Pos) /*!< Bit mask of EVENTS_DOWN field. */
+
+/* Register: COMP_EVENTS_UP */
+/* Description: Upward crossing */
+
+/* Bit 0 :   */
+#define COMP_EVENTS_UP_EVENTS_UP_Pos (0UL) /*!< Position of EVENTS_UP field. */
+#define COMP_EVENTS_UP_EVENTS_UP_Msk (0x1UL << COMP_EVENTS_UP_EVENTS_UP_Pos) /*!< Bit mask of EVENTS_UP field. */
+
+/* Register: COMP_EVENTS_CROSS */
+/* Description: Downward or upward crossing */
+
+/* Bit 0 :   */
+#define COMP_EVENTS_CROSS_EVENTS_CROSS_Pos (0UL) /*!< Position of EVENTS_CROSS field. */
+#define COMP_EVENTS_CROSS_EVENTS_CROSS_Msk (0x1UL << COMP_EVENTS_CROSS_EVENTS_CROSS_Pos) /*!< Bit mask of EVENTS_CROSS field. */
 
 /* Register: COMP_SHORTS */
 /* Description: Shortcut register */
@@ -772,6 +998,34 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: ECB */
 /* Description: AES ECB Mode Encryption */
 
+/* Register: ECB_TASKS_STARTECB */
+/* Description: Start ECB block encrypt */
+
+/* Bit 0 :   */
+#define ECB_TASKS_STARTECB_TASKS_STARTECB_Pos (0UL) /*!< Position of TASKS_STARTECB field. */
+#define ECB_TASKS_STARTECB_TASKS_STARTECB_Msk (0x1UL << ECB_TASKS_STARTECB_TASKS_STARTECB_Pos) /*!< Bit mask of TASKS_STARTECB field. */
+
+/* Register: ECB_TASKS_STOPECB */
+/* Description: Abort a possible executing ECB operation */
+
+/* Bit 0 :   */
+#define ECB_TASKS_STOPECB_TASKS_STOPECB_Pos (0UL) /*!< Position of TASKS_STOPECB field. */
+#define ECB_TASKS_STOPECB_TASKS_STOPECB_Msk (0x1UL << ECB_TASKS_STOPECB_TASKS_STOPECB_Pos) /*!< Bit mask of TASKS_STOPECB field. */
+
+/* Register: ECB_EVENTS_ENDECB */
+/* Description: ECB block encrypt complete */
+
+/* Bit 0 :   */
+#define ECB_EVENTS_ENDECB_EVENTS_ENDECB_Pos (0UL) /*!< Position of EVENTS_ENDECB field. */
+#define ECB_EVENTS_ENDECB_EVENTS_ENDECB_Msk (0x1UL << ECB_EVENTS_ENDECB_EVENTS_ENDECB_Pos) /*!< Bit mask of EVENTS_ENDECB field. */
+
+/* Register: ECB_EVENTS_ERRORECB */
+/* Description: ECB block encrypt aborted because of a STOPECB task or due to an error */
+
+/* Bit 0 :   */
+#define ECB_EVENTS_ERRORECB_EVENTS_ERRORECB_Pos (0UL) /*!< Position of EVENTS_ERRORECB field. */
+#define ECB_EVENTS_ERRORECB_EVENTS_ERRORECB_Msk (0x1UL << ECB_EVENTS_ERRORECB_EVENTS_ERRORECB_Pos) /*!< Bit mask of EVENTS_ERRORECB field. */
+
 /* Register: ECB_INTENSET */
 /* Description: Enable interrupt */
 
@@ -816,6 +1070,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: EGU */
 /* Description: Event Generator Unit 0 */
+
+/* Register: EGU_TASKS_TRIGGER */
+/* Description: Description collection[0]:  Trigger 0 for triggering the corresponding TRIGGERED[0] event */
+
+/* Bit 0 :   */
+#define EGU_TASKS_TRIGGER_TASKS_TRIGGER_Pos (0UL) /*!< Position of TASKS_TRIGGER field. */
+#define EGU_TASKS_TRIGGER_TASKS_TRIGGER_Msk (0x1UL << EGU_TASKS_TRIGGER_TASKS_TRIGGER_Pos) /*!< Bit mask of TASKS_TRIGGER field. */
+
+/* Register: EGU_EVENTS_TRIGGERED */
+/* Description: Description collection[0]:  Event number 0 generated by triggering the corresponding TRIGGER[0] task */
+
+/* Bit 0 :   */
+#define EGU_EVENTS_TRIGGERED_EVENTS_TRIGGERED_Pos (0UL) /*!< Position of EVENTS_TRIGGERED field. */
+#define EGU_EVENTS_TRIGGERED_EVENTS_TRIGGERED_Msk (0x1UL << EGU_EVENTS_TRIGGERED_EVENTS_TRIGGERED_Pos) /*!< Bit mask of EVENTS_TRIGGERED field. */
 
 /* Register: EGU_INTEN */
 /* Description: Enable or disable interrupt */
@@ -1211,17 +1479,18 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FICR_INFO_PART_PART_Unspecified (0xFFFFFFFFUL) /*!< Unspecified */
 
 /* Register: FICR_INFO_VARIANT */
-/* Description: Part variant (hardware version and production configuration) */
+/* Description: Build code (hardware version and production configuration) */
 
-/* Bits 31..0 : Part variant (hardware version and production configuration). Encoded as ASCII. */
+/* Bits 31..0 : Build code (hardware version and production configuration). Encoded as ASCII. */
 #define FICR_INFO_VARIANT_VARIANT_Pos (0UL) /*!< Position of VARIANT field. */
 #define FICR_INFO_VARIANT_VARIANT_Msk (0xFFFFFFFFUL << FICR_INFO_VARIANT_VARIANT_Pos) /*!< Bit mask of VARIANT field. */
 #define FICR_INFO_VARIANT_VARIANT_AAAA (0x41414141UL) /*!< AAAA */
 #define FICR_INFO_VARIANT_VARIANT_AAAB (0x41414142UL) /*!< AAAB */
-#define FICR_INFO_VARIANT_VARIANT_AAB0 (0x41414230UL) /*!< AAB0 */
 #define FICR_INFO_VARIANT_VARIANT_AABA (0x41414241UL) /*!< AABA */
 #define FICR_INFO_VARIANT_VARIANT_AABB (0x41414242UL) /*!< AABB */
-#define FICR_INFO_VARIANT_VARIANT_ABBA (0x41424241UL) /*!< ABBA */
+#define FICR_INFO_VARIANT_VARIANT_AACA (0x41414341UL) /*!< AACA */
+#define FICR_INFO_VARIANT_VARIANT_BAAA (0x42414141UL) /*!< BAAA */
+#define FICR_INFO_VARIANT_VARIANT_CAAA (0x43414141UL) /*!< CAAA */
 #define FICR_INFO_VARIANT_VARIANT_Unspecified (0xFFFFFFFFUL) /*!< Unspecified */
 
 /* Register: FICR_INFO_PACKAGE */
@@ -1258,6 +1527,15 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FICR_INFO_FLASH_FLASH_K1024 (0x400UL) /*!< 1 MByte FLASH */
 #define FICR_INFO_FLASH_FLASH_K2048 (0x800UL) /*!< 2 MByte FLASH */
 #define FICR_INFO_FLASH_FLASH_Unspecified (0xFFFFFFFFUL) /*!< Unspecified */
+
+/* Register: FICR_PRODTEST */
+/* Description: Description collection[0]:  Production test signature 0 */
+
+/* Bits 31..0 : Production test signature 0 */
+#define FICR_PRODTEST_PRODTEST_Pos (0UL) /*!< Position of PRODTEST field. */
+#define FICR_PRODTEST_PRODTEST_Msk (0xFFFFFFFFUL << FICR_PRODTEST_PRODTEST_Pos) /*!< Bit mask of PRODTEST field. */
+#define FICR_PRODTEST_PRODTEST_Done (0xBB42319FUL) /*!< Production tests done */
+#define FICR_PRODTEST_PRODTEST_NotDone (0xFFFFFFFFUL) /*!< Production tests not done */
 
 /* Register: FICR_TEMP_A0 */
 /* Description: Slope definition A0 */
@@ -1454,9 +1732,100 @@ POSSIBILITY OF SUCH DAMAGE.
 #define FICR_NFC_TAGHEADER3_UD12_Pos (0UL) /*!< Position of UD12 field. */
 #define FICR_NFC_TAGHEADER3_UD12_Msk (0xFFUL << FICR_NFC_TAGHEADER3_UD12_Pos) /*!< Bit mask of UD12 field. */
 
+/* Register: FICR_TRNG90B_BYTES */
+/* Description: Amount of bytes for the required entropy bits */
+
+/* Bits 31..0 : Amount of bytes for the required entropy bits */
+#define FICR_TRNG90B_BYTES_BYTES_Pos (0UL) /*!< Position of BYTES field. */
+#define FICR_TRNG90B_BYTES_BYTES_Msk (0xFFFFFFFFUL << FICR_TRNG90B_BYTES_BYTES_Pos) /*!< Bit mask of BYTES field. */
+
+/* Register: FICR_TRNG90B_RCCUTOFF */
+/* Description: Repetition counter cutoff */
+
+/* Bits 31..0 : Repetition counter cutoff */
+#define FICR_TRNG90B_RCCUTOFF_RCCUTOFF_Pos (0UL) /*!< Position of RCCUTOFF field. */
+#define FICR_TRNG90B_RCCUTOFF_RCCUTOFF_Msk (0xFFFFFFFFUL << FICR_TRNG90B_RCCUTOFF_RCCUTOFF_Pos) /*!< Bit mask of RCCUTOFF field. */
+
+/* Register: FICR_TRNG90B_APCUTOFF */
+/* Description: Adaptive proportion cutoff */
+
+/* Bits 31..0 : Adaptive proportion cutoff */
+#define FICR_TRNG90B_APCUTOFF_APCUTOFF_Pos (0UL) /*!< Position of APCUTOFF field. */
+#define FICR_TRNG90B_APCUTOFF_APCUTOFF_Msk (0xFFFFFFFFUL << FICR_TRNG90B_APCUTOFF_APCUTOFF_Pos) /*!< Bit mask of APCUTOFF field. */
+
+/* Register: FICR_TRNG90B_STARTUP */
+/* Description: Amount of bytes for the startup tests */
+
+/* Bits 31..0 : Amount of bytes for the startup tests */
+#define FICR_TRNG90B_STARTUP_STARTUP_Pos (0UL) /*!< Position of STARTUP field. */
+#define FICR_TRNG90B_STARTUP_STARTUP_Msk (0xFFFFFFFFUL << FICR_TRNG90B_STARTUP_STARTUP_Pos) /*!< Bit mask of STARTUP field. */
+
+/* Register: FICR_TRNG90B_ROSC1 */
+/* Description: Sample count for ring oscillator 1 */
+
+/* Bits 31..0 : Sample count for ring oscillator 1 */
+#define FICR_TRNG90B_ROSC1_ROSC1_Pos (0UL) /*!< Position of ROSC1 field. */
+#define FICR_TRNG90B_ROSC1_ROSC1_Msk (0xFFFFFFFFUL << FICR_TRNG90B_ROSC1_ROSC1_Pos) /*!< Bit mask of ROSC1 field. */
+
+/* Register: FICR_TRNG90B_ROSC2 */
+/* Description: Sample count for ring oscillator 2 */
+
+/* Bits 31..0 : Sample count for ring oscillator 2 */
+#define FICR_TRNG90B_ROSC2_ROSC2_Pos (0UL) /*!< Position of ROSC2 field. */
+#define FICR_TRNG90B_ROSC2_ROSC2_Msk (0xFFFFFFFFUL << FICR_TRNG90B_ROSC2_ROSC2_Pos) /*!< Bit mask of ROSC2 field. */
+
+/* Register: FICR_TRNG90B_ROSC3 */
+/* Description: Sample count for ring oscillator 3 */
+
+/* Bits 31..0 : Sample count for ring oscillator 3 */
+#define FICR_TRNG90B_ROSC3_ROSC3_Pos (0UL) /*!< Position of ROSC3 field. */
+#define FICR_TRNG90B_ROSC3_ROSC3_Msk (0xFFFFFFFFUL << FICR_TRNG90B_ROSC3_ROSC3_Pos) /*!< Bit mask of ROSC3 field. */
+
+/* Register: FICR_TRNG90B_ROSC4 */
+/* Description: Sample count for ring oscillator 4 */
+
+/* Bits 31..0 : Sample count for ring oscillator 4 */
+#define FICR_TRNG90B_ROSC4_ROSC4_Pos (0UL) /*!< Position of ROSC4 field. */
+#define FICR_TRNG90B_ROSC4_ROSC4_Msk (0xFFFFFFFFUL << FICR_TRNG90B_ROSC4_ROSC4_Pos) /*!< Bit mask of ROSC4 field. */
+
 
 /* Peripheral: GPIOTE */
 /* Description: GPIO Tasks and Events */
+
+/* Register: GPIOTE_TASKS_OUT */
+/* Description: Description collection[0]:  Task for writing to pin specified in CONFIG[0].PSEL. Action on pin is configured in CONFIG[0].POLARITY. */
+
+/* Bit 0 :   */
+#define GPIOTE_TASKS_OUT_TASKS_OUT_Pos (0UL) /*!< Position of TASKS_OUT field. */
+#define GPIOTE_TASKS_OUT_TASKS_OUT_Msk (0x1UL << GPIOTE_TASKS_OUT_TASKS_OUT_Pos) /*!< Bit mask of TASKS_OUT field. */
+
+/* Register: GPIOTE_TASKS_SET */
+/* Description: Description collection[0]:  Task for writing to pin specified in CONFIG[0].PSEL. Action on pin is to set it high. */
+
+/* Bit 0 :   */
+#define GPIOTE_TASKS_SET_TASKS_SET_Pos (0UL) /*!< Position of TASKS_SET field. */
+#define GPIOTE_TASKS_SET_TASKS_SET_Msk (0x1UL << GPIOTE_TASKS_SET_TASKS_SET_Pos) /*!< Bit mask of TASKS_SET field. */
+
+/* Register: GPIOTE_TASKS_CLR */
+/* Description: Description collection[0]:  Task for writing to pin specified in CONFIG[0].PSEL. Action on pin is to set it low. */
+
+/* Bit 0 :   */
+#define GPIOTE_TASKS_CLR_TASKS_CLR_Pos (0UL) /*!< Position of TASKS_CLR field. */
+#define GPIOTE_TASKS_CLR_TASKS_CLR_Msk (0x1UL << GPIOTE_TASKS_CLR_TASKS_CLR_Pos) /*!< Bit mask of TASKS_CLR field. */
+
+/* Register: GPIOTE_EVENTS_IN */
+/* Description: Description collection[0]:  Event generated from pin specified in CONFIG[0].PSEL */
+
+/* Bit 0 :   */
+#define GPIOTE_EVENTS_IN_EVENTS_IN_Pos (0UL) /*!< Position of EVENTS_IN field. */
+#define GPIOTE_EVENTS_IN_EVENTS_IN_Msk (0x1UL << GPIOTE_EVENTS_IN_EVENTS_IN_Pos) /*!< Bit mask of EVENTS_IN field. */
+
+/* Register: GPIOTE_EVENTS_PORT */
+/* Description: Event generated from multiple input GPIO pins with SENSE mechanism enabled */
+
+/* Bit 0 :   */
+#define GPIOTE_EVENTS_PORT_EVENTS_PORT_Pos (0UL) /*!< Position of EVENTS_PORT field. */
+#define GPIOTE_EVENTS_PORT_EVENTS_PORT_Msk (0x1UL << GPIOTE_EVENTS_PORT_EVENTS_PORT_Pos) /*!< Bit mask of EVENTS_PORT field. */
 
 /* Register: GPIOTE_INTENSET */
 /* Description: Enable interrupt */
@@ -1625,6 +1994,41 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: I2S */
 /* Description: Inter-IC Sound */
+
+/* Register: I2S_TASKS_START */
+/* Description: Starts continuous I2S transfer. Also starts MCK generator when this is enabled. */
+
+/* Bit 0 :   */
+#define I2S_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define I2S_TASKS_START_TASKS_START_Msk (0x1UL << I2S_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: I2S_TASKS_STOP */
+/* Description: Stops I2S transfer. Also stops MCK generator. Triggering this task will cause the {event:STOPPED} event to be generated. */
+
+/* Bit 0 :   */
+#define I2S_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define I2S_TASKS_STOP_TASKS_STOP_Msk (0x1UL << I2S_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: I2S_EVENTS_RXPTRUPD */
+/* Description: The RXD.PTR register has been copied to internal double-buffers. When the I2S module is started and RX is enabled, this event will be generated for every RXTXD.MAXCNT words that are received on the SDIN pin. */
+
+/* Bit 0 :   */
+#define I2S_EVENTS_RXPTRUPD_EVENTS_RXPTRUPD_Pos (0UL) /*!< Position of EVENTS_RXPTRUPD field. */
+#define I2S_EVENTS_RXPTRUPD_EVENTS_RXPTRUPD_Msk (0x1UL << I2S_EVENTS_RXPTRUPD_EVENTS_RXPTRUPD_Pos) /*!< Bit mask of EVENTS_RXPTRUPD field. */
+
+/* Register: I2S_EVENTS_STOPPED */
+/* Description: I2S transfer stopped. */
+
+/* Bit 0 :   */
+#define I2S_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define I2S_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << I2S_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: I2S_EVENTS_TXPTRUPD */
+/* Description: The TDX.PTR register has been copied to internal double-buffers. When the I2S module is started and TX is enabled, this event will be generated for every RXTXD.MAXCNT words that are sent on the SDOUT pin. */
+
+/* Bit 0 :   */
+#define I2S_EVENTS_TXPTRUPD_EVENTS_TXPTRUPD_Pos (0UL) /*!< Position of EVENTS_TXPTRUPD field. */
+#define I2S_EVENTS_TXPTRUPD_EVENTS_TXPTRUPD_Msk (0x1UL << I2S_EVENTS_TXPTRUPD_EVENTS_TXPTRUPD_Pos) /*!< Bit mask of EVENTS_TXPTRUPD field. */
 
 /* Register: I2S_INTEN */
 /* Description: Enable or disable interrupt */
@@ -1849,8 +2253,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define I2S_PSEL_MCK_CONNECT_Connected (0UL) /*!< Connect */
 #define I2S_PSEL_MCK_CONNECT_Disconnected (1UL) /*!< Disconnect */
 
-/* Bit 8 : Port number */
-#define I2S_PSEL_MCK_PORT_Pos (8UL) /*!< Position of PORT field. */
+/* Bit 5 : Port number */
+#define I2S_PSEL_MCK_PORT_Pos (5UL) /*!< Position of PORT field. */
 #define I2S_PSEL_MCK_PORT_Msk (0x1UL << I2S_PSEL_MCK_PORT_Pos) /*!< Bit mask of PORT field. */
 
 /* Bits 4..0 : Pin number */
@@ -1866,8 +2270,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define I2S_PSEL_SCK_CONNECT_Connected (0UL) /*!< Connect */
 #define I2S_PSEL_SCK_CONNECT_Disconnected (1UL) /*!< Disconnect */
 
-/* Bit 8 : Port number */
-#define I2S_PSEL_SCK_PORT_Pos (8UL) /*!< Position of PORT field. */
+/* Bit 5 : Port number */
+#define I2S_PSEL_SCK_PORT_Pos (5UL) /*!< Position of PORT field. */
 #define I2S_PSEL_SCK_PORT_Msk (0x1UL << I2S_PSEL_SCK_PORT_Pos) /*!< Bit mask of PORT field. */
 
 /* Bits 4..0 : Pin number */
@@ -1883,8 +2287,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define I2S_PSEL_LRCK_CONNECT_Connected (0UL) /*!< Connect */
 #define I2S_PSEL_LRCK_CONNECT_Disconnected (1UL) /*!< Disconnect */
 
-/* Bit 8 : Port number */
-#define I2S_PSEL_LRCK_PORT_Pos (8UL) /*!< Position of PORT field. */
+/* Bit 5 : Port number */
+#define I2S_PSEL_LRCK_PORT_Pos (5UL) /*!< Position of PORT field. */
 #define I2S_PSEL_LRCK_PORT_Msk (0x1UL << I2S_PSEL_LRCK_PORT_Pos) /*!< Bit mask of PORT field. */
 
 /* Bits 4..0 : Pin number */
@@ -1900,8 +2304,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define I2S_PSEL_SDIN_CONNECT_Connected (0UL) /*!< Connect */
 #define I2S_PSEL_SDIN_CONNECT_Disconnected (1UL) /*!< Disconnect */
 
-/* Bit 8 : Port number */
-#define I2S_PSEL_SDIN_PORT_Pos (8UL) /*!< Position of PORT field. */
+/* Bit 5 : Port number */
+#define I2S_PSEL_SDIN_PORT_Pos (5UL) /*!< Position of PORT field. */
 #define I2S_PSEL_SDIN_PORT_Msk (0x1UL << I2S_PSEL_SDIN_PORT_Pos) /*!< Bit mask of PORT field. */
 
 /* Bits 4..0 : Pin number */
@@ -1917,8 +2321,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define I2S_PSEL_SDOUT_CONNECT_Connected (0UL) /*!< Connect */
 #define I2S_PSEL_SDOUT_CONNECT_Disconnected (1UL) /*!< Disconnect */
 
-/* Bit 8 : Port number */
-#define I2S_PSEL_SDOUT_PORT_Pos (8UL) /*!< Position of PORT field. */
+/* Bit 5 : Port number */
+#define I2S_PSEL_SDOUT_PORT_Pos (5UL) /*!< Position of PORT field. */
 #define I2S_PSEL_SDOUT_PORT_Msk (0x1UL << I2S_PSEL_SDOUT_PORT_Pos) /*!< Bit mask of PORT field. */
 
 /* Bits 4..0 : Pin number */
@@ -1928,6 +2332,55 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: LPCOMP */
 /* Description: Low Power Comparator */
+
+/* Register: LPCOMP_TASKS_START */
+/* Description: Start comparator */
+
+/* Bit 0 :   */
+#define LPCOMP_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define LPCOMP_TASKS_START_TASKS_START_Msk (0x1UL << LPCOMP_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: LPCOMP_TASKS_STOP */
+/* Description: Stop comparator */
+
+/* Bit 0 :   */
+#define LPCOMP_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define LPCOMP_TASKS_STOP_TASKS_STOP_Msk (0x1UL << LPCOMP_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: LPCOMP_TASKS_SAMPLE */
+/* Description: Sample comparator value */
+
+/* Bit 0 :   */
+#define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL) /*!< Position of TASKS_SAMPLE field. */
+#define LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << LPCOMP_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE field. */
+
+/* Register: LPCOMP_EVENTS_READY */
+/* Description: LPCOMP is ready and output is valid */
+
+/* Bit 0 :   */
+#define LPCOMP_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define LPCOMP_EVENTS_READY_EVENTS_READY_Msk (0x1UL << LPCOMP_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
+
+/* Register: LPCOMP_EVENTS_DOWN */
+/* Description: Downward crossing */
+
+/* Bit 0 :   */
+#define LPCOMP_EVENTS_DOWN_EVENTS_DOWN_Pos (0UL) /*!< Position of EVENTS_DOWN field. */
+#define LPCOMP_EVENTS_DOWN_EVENTS_DOWN_Msk (0x1UL << LPCOMP_EVENTS_DOWN_EVENTS_DOWN_Pos) /*!< Bit mask of EVENTS_DOWN field. */
+
+/* Register: LPCOMP_EVENTS_UP */
+/* Description: Upward crossing */
+
+/* Bit 0 :   */
+#define LPCOMP_EVENTS_UP_EVENTS_UP_Pos (0UL) /*!< Position of EVENTS_UP field. */
+#define LPCOMP_EVENTS_UP_EVENTS_UP_Msk (0x1UL << LPCOMP_EVENTS_UP_EVENTS_UP_Pos) /*!< Bit mask of EVENTS_UP field. */
+
+/* Register: LPCOMP_EVENTS_CROSS */
+/* Description: Downward or upward crossing */
+
+/* Bit 0 :   */
+#define LPCOMP_EVENTS_CROSS_EVENTS_CROSS_Pos (0UL) /*!< Position of EVENTS_CROSS field. */
+#define LPCOMP_EVENTS_CROSS_EVENTS_CROSS_Msk (0x1UL << LPCOMP_EVENTS_CROSS_EVENTS_CROSS_Pos) /*!< Bit mask of EVENTS_CROSS field. */
 
 /* Register: LPCOMP_SHORTS */
 /* Description: Shortcut register */
@@ -2111,6 +2564,34 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: MWU */
 /* Description: Memory Watch Unit */
+
+/* Register: MWU_EVENTS_REGION_WA */
+/* Description: Description cluster[0]:  Write access to region 0 detected */
+
+/* Bit 0 :   */
+#define MWU_EVENTS_REGION_WA_WA_Pos (0UL) /*!< Position of WA field. */
+#define MWU_EVENTS_REGION_WA_WA_Msk (0x1UL << MWU_EVENTS_REGION_WA_WA_Pos) /*!< Bit mask of WA field. */
+
+/* Register: MWU_EVENTS_REGION_RA */
+/* Description: Description cluster[0]:  Read access to region 0 detected */
+
+/* Bit 0 :   */
+#define MWU_EVENTS_REGION_RA_RA_Pos (0UL) /*!< Position of RA field. */
+#define MWU_EVENTS_REGION_RA_RA_Msk (0x1UL << MWU_EVENTS_REGION_RA_RA_Pos) /*!< Bit mask of RA field. */
+
+/* Register: MWU_EVENTS_PREGION_WA */
+/* Description: Description cluster[0]:  Write access to peripheral region 0 detected */
+
+/* Bit 0 :   */
+#define MWU_EVENTS_PREGION_WA_WA_Pos (0UL) /*!< Position of WA field. */
+#define MWU_EVENTS_PREGION_WA_WA_Msk (0x1UL << MWU_EVENTS_PREGION_WA_WA_Pos) /*!< Bit mask of WA field. */
+
+/* Register: MWU_EVENTS_PREGION_RA */
+/* Description: Description cluster[0]:  Read access to peripheral region 0 detected */
+
+/* Bit 0 :   */
+#define MWU_EVENTS_PREGION_RA_RA_Pos (0UL) /*!< Position of RA field. */
+#define MWU_EVENTS_PREGION_RA_RA_Msk (0x1UL << MWU_EVENTS_PREGION_RA_RA_Pos) /*!< Bit mask of RA field. */
 
 /* Register: MWU_INTEN */
 /* Description: Enable or disable interrupt */
@@ -3476,6 +3957,160 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: NFCT */
 /* Description: NFC-A compatible radio */
 
+/* Register: NFCT_TASKS_ACTIVATE */
+/* Description: Activate NFCT peripheral for incoming and outgoing frames, change state to activated */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_ACTIVATE_TASKS_ACTIVATE_Pos (0UL) /*!< Position of TASKS_ACTIVATE field. */
+#define NFCT_TASKS_ACTIVATE_TASKS_ACTIVATE_Msk (0x1UL << NFCT_TASKS_ACTIVATE_TASKS_ACTIVATE_Pos) /*!< Bit mask of TASKS_ACTIVATE field. */
+
+/* Register: NFCT_TASKS_DISABLE */
+/* Description: Disable NFCT peripheral */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_DISABLE_TASKS_DISABLE_Pos (0UL) /*!< Position of TASKS_DISABLE field. */
+#define NFCT_TASKS_DISABLE_TASKS_DISABLE_Msk (0x1UL << NFCT_TASKS_DISABLE_TASKS_DISABLE_Pos) /*!< Bit mask of TASKS_DISABLE field. */
+
+/* Register: NFCT_TASKS_SENSE */
+/* Description: Enable NFC sense field mode, change state to sense mode */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_SENSE_TASKS_SENSE_Pos (0UL) /*!< Position of TASKS_SENSE field. */
+#define NFCT_TASKS_SENSE_TASKS_SENSE_Msk (0x1UL << NFCT_TASKS_SENSE_TASKS_SENSE_Pos) /*!< Bit mask of TASKS_SENSE field. */
+
+/* Register: NFCT_TASKS_STARTTX */
+/* Description: Start transmission of an outgoing frame, change state to transmit */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_STARTTX_TASKS_STARTTX_Pos (0UL) /*!< Position of TASKS_STARTTX field. */
+#define NFCT_TASKS_STARTTX_TASKS_STARTTX_Msk (0x1UL << NFCT_TASKS_STARTTX_TASKS_STARTTX_Pos) /*!< Bit mask of TASKS_STARTTX field. */
+
+/* Register: NFCT_TASKS_ENABLERXDATA */
+/* Description: Initializes the EasyDMA for receive. */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_ENABLERXDATA_TASKS_ENABLERXDATA_Pos (0UL) /*!< Position of TASKS_ENABLERXDATA field. */
+#define NFCT_TASKS_ENABLERXDATA_TASKS_ENABLERXDATA_Msk (0x1UL << NFCT_TASKS_ENABLERXDATA_TASKS_ENABLERXDATA_Pos) /*!< Bit mask of TASKS_ENABLERXDATA field. */
+
+/* Register: NFCT_TASKS_GOIDLE */
+/* Description: Force state machine to IDLE state */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_GOIDLE_TASKS_GOIDLE_Pos (0UL) /*!< Position of TASKS_GOIDLE field. */
+#define NFCT_TASKS_GOIDLE_TASKS_GOIDLE_Msk (0x1UL << NFCT_TASKS_GOIDLE_TASKS_GOIDLE_Pos) /*!< Bit mask of TASKS_GOIDLE field. */
+
+/* Register: NFCT_TASKS_GOSLEEP */
+/* Description: Force state machine to SLEEP_A state */
+
+/* Bit 0 :   */
+#define NFCT_TASKS_GOSLEEP_TASKS_GOSLEEP_Pos (0UL) /*!< Position of TASKS_GOSLEEP field. */
+#define NFCT_TASKS_GOSLEEP_TASKS_GOSLEEP_Msk (0x1UL << NFCT_TASKS_GOSLEEP_TASKS_GOSLEEP_Pos) /*!< Bit mask of TASKS_GOSLEEP field. */
+
+/* Register: NFCT_EVENTS_READY */
+/* Description: The NFCT peripheral is ready to receive and send frames */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define NFCT_EVENTS_READY_EVENTS_READY_Msk (0x1UL << NFCT_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
+
+/* Register: NFCT_EVENTS_FIELDDETECTED */
+/* Description: Remote NFC field detected */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_FIELDDETECTED_EVENTS_FIELDDETECTED_Pos (0UL) /*!< Position of EVENTS_FIELDDETECTED field. */
+#define NFCT_EVENTS_FIELDDETECTED_EVENTS_FIELDDETECTED_Msk (0x1UL << NFCT_EVENTS_FIELDDETECTED_EVENTS_FIELDDETECTED_Pos) /*!< Bit mask of EVENTS_FIELDDETECTED field. */
+
+/* Register: NFCT_EVENTS_FIELDLOST */
+/* Description: Remote NFC field lost */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_FIELDLOST_EVENTS_FIELDLOST_Pos (0UL) /*!< Position of EVENTS_FIELDLOST field. */
+#define NFCT_EVENTS_FIELDLOST_EVENTS_FIELDLOST_Msk (0x1UL << NFCT_EVENTS_FIELDLOST_EVENTS_FIELDLOST_Pos) /*!< Bit mask of EVENTS_FIELDLOST field. */
+
+/* Register: NFCT_EVENTS_TXFRAMESTART */
+/* Description: Marks the start of the first symbol of a transmitted frame */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_TXFRAMESTART_EVENTS_TXFRAMESTART_Pos (0UL) /*!< Position of EVENTS_TXFRAMESTART field. */
+#define NFCT_EVENTS_TXFRAMESTART_EVENTS_TXFRAMESTART_Msk (0x1UL << NFCT_EVENTS_TXFRAMESTART_EVENTS_TXFRAMESTART_Pos) /*!< Bit mask of EVENTS_TXFRAMESTART field. */
+
+/* Register: NFCT_EVENTS_TXFRAMEEND */
+/* Description: Marks the end of the last transmitted on-air symbol of a frame */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_TXFRAMEEND_EVENTS_TXFRAMEEND_Pos (0UL) /*!< Position of EVENTS_TXFRAMEEND field. */
+#define NFCT_EVENTS_TXFRAMEEND_EVENTS_TXFRAMEEND_Msk (0x1UL << NFCT_EVENTS_TXFRAMEEND_EVENTS_TXFRAMEEND_Pos) /*!< Bit mask of EVENTS_TXFRAMEEND field. */
+
+/* Register: NFCT_EVENTS_RXFRAMESTART */
+/* Description: Marks the end of the first symbol of a received frame */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_RXFRAMESTART_EVENTS_RXFRAMESTART_Pos (0UL) /*!< Position of EVENTS_RXFRAMESTART field. */
+#define NFCT_EVENTS_RXFRAMESTART_EVENTS_RXFRAMESTART_Msk (0x1UL << NFCT_EVENTS_RXFRAMESTART_EVENTS_RXFRAMESTART_Pos) /*!< Bit mask of EVENTS_RXFRAMESTART field. */
+
+/* Register: NFCT_EVENTS_RXFRAMEEND */
+/* Description: Received data has been checked (CRC, parity) and transferred to RAM, and EasyDMA has ended accessing the RX buffer */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_RXFRAMEEND_EVENTS_RXFRAMEEND_Pos (0UL) /*!< Position of EVENTS_RXFRAMEEND field. */
+#define NFCT_EVENTS_RXFRAMEEND_EVENTS_RXFRAMEEND_Msk (0x1UL << NFCT_EVENTS_RXFRAMEEND_EVENTS_RXFRAMEEND_Pos) /*!< Bit mask of EVENTS_RXFRAMEEND field. */
+
+/* Register: NFCT_EVENTS_ERROR */
+/* Description: NFC error reported. The ERRORSTATUS register contains details on the source of the error. */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define NFCT_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << NFCT_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: NFCT_EVENTS_RXERROR */
+/* Description: NFC RX frame error reported. The FRAMESTATUS.RX register contains details on the source of the error. */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_RXERROR_EVENTS_RXERROR_Pos (0UL) /*!< Position of EVENTS_RXERROR field. */
+#define NFCT_EVENTS_RXERROR_EVENTS_RXERROR_Msk (0x1UL << NFCT_EVENTS_RXERROR_EVENTS_RXERROR_Pos) /*!< Bit mask of EVENTS_RXERROR field. */
+
+/* Register: NFCT_EVENTS_ENDRX */
+/* Description: RX buffer (as defined by PACKETPTR and MAXLEN) in Data RAM full. */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_ENDRX_EVENTS_ENDRX_Pos (0UL) /*!< Position of EVENTS_ENDRX field. */
+#define NFCT_EVENTS_ENDRX_EVENTS_ENDRX_Msk (0x1UL << NFCT_EVENTS_ENDRX_EVENTS_ENDRX_Pos) /*!< Bit mask of EVENTS_ENDRX field. */
+
+/* Register: NFCT_EVENTS_ENDTX */
+/* Description: Transmission of data in RAM has ended, and EasyDMA has ended accessing the TX buffer */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_ENDTX_EVENTS_ENDTX_Pos (0UL) /*!< Position of EVENTS_ENDTX field. */
+#define NFCT_EVENTS_ENDTX_EVENTS_ENDTX_Msk (0x1UL << NFCT_EVENTS_ENDTX_EVENTS_ENDTX_Pos) /*!< Bit mask of EVENTS_ENDTX field. */
+
+/* Register: NFCT_EVENTS_AUTOCOLRESSTARTED */
+/* Description: Auto collision resolution process has started */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_AUTOCOLRESSTARTED_EVENTS_AUTOCOLRESSTARTED_Pos (0UL) /*!< Position of EVENTS_AUTOCOLRESSTARTED field. */
+#define NFCT_EVENTS_AUTOCOLRESSTARTED_EVENTS_AUTOCOLRESSTARTED_Msk (0x1UL << NFCT_EVENTS_AUTOCOLRESSTARTED_EVENTS_AUTOCOLRESSTARTED_Pos) /*!< Bit mask of EVENTS_AUTOCOLRESSTARTED field. */
+
+/* Register: NFCT_EVENTS_COLLISION */
+/* Description: NFC auto collision resolution error reported. */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_COLLISION_EVENTS_COLLISION_Pos (0UL) /*!< Position of EVENTS_COLLISION field. */
+#define NFCT_EVENTS_COLLISION_EVENTS_COLLISION_Msk (0x1UL << NFCT_EVENTS_COLLISION_EVENTS_COLLISION_Pos) /*!< Bit mask of EVENTS_COLLISION field. */
+
+/* Register: NFCT_EVENTS_SELECTED */
+/* Description: NFC auto collision resolution successfully completed */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_SELECTED_EVENTS_SELECTED_Pos (0UL) /*!< Position of EVENTS_SELECTED field. */
+#define NFCT_EVENTS_SELECTED_EVENTS_SELECTED_Msk (0x1UL << NFCT_EVENTS_SELECTED_EVENTS_SELECTED_Pos) /*!< Bit mask of EVENTS_SELECTED field. */
+
+/* Register: NFCT_EVENTS_STARTED */
+/* Description: EasyDMA is ready to receive or send frames. */
+
+/* Bit 0 :   */
+#define NFCT_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field. */
+#define NFCT_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << NFCT_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED field. */
+
 /* Register: NFCT_SHORTS */
 /* Description: Shortcut register */
 
@@ -3847,6 +4482,15 @@ POSSIBILITY OF SUCH DAMAGE.
 #define NFCT_NFCTAGSTATE_NFCTAGSTATE_FrameDelay (5UL) /*!< FrameDelay */
 #define NFCT_NFCTAGSTATE_NFCTAGSTATE_Transmit (6UL) /*!< Transmit */
 
+/* Register: NFCT_SLEEPSTATE */
+/* Description: Sleep state during automatic collision resolution */
+
+/* Bit 0 : Reflects the sleep state during automatic collision resolution. Set to IDLE  by a GOIDLE task. Set to SLEEP_A when a valid SLEEP_REQ frame is received or by a  GOSLEEP task. */
+#define NFCT_SLEEPSTATE_SLEEPSTATE_Pos (0UL) /*!< Position of SLEEPSTATE field. */
+#define NFCT_SLEEPSTATE_SLEEPSTATE_Msk (0x1UL << NFCT_SLEEPSTATE_SLEEPSTATE_Pos) /*!< Bit mask of SLEEPSTATE field. */
+#define NFCT_SLEEPSTATE_SLEEPSTATE_Idle (0UL) /*!< State is IDLE. */
+#define NFCT_SLEEPSTATE_SLEEPSTATE_SleepA (1UL) /*!< State is SLEEP_A. */
+
 /* Register: NFCT_FIELDPRESENT */
 /* Description: Indicates the presence or not of a valid field */
 
@@ -4154,6 +4798,20 @@ POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ERASEUICR_ERASEUICR_Msk (0x1UL << NVMC_ERASEUICR_ERASEUICR_Pos) /*!< Bit mask of ERASEUICR field. */
 #define NVMC_ERASEUICR_ERASEUICR_NoOperation (0UL) /*!< No operation */
 #define NVMC_ERASEUICR_ERASEUICR_Erase (1UL) /*!< Start erase of UICR */
+
+/* Register: NVMC_ERASEPAGEPARTIAL */
+/* Description: Register for partial erase of a page in code area */
+
+/* Bits 31..0 : Register for starting partial erase of a page in code area */
+#define NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Pos (0UL) /*!< Position of ERASEPAGEPARTIAL field. */
+#define NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Msk (0xFFFFFFFFUL << NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Pos) /*!< Bit mask of ERASEPAGEPARTIAL field. */
+
+/* Register: NVMC_ERASEPAGEPARTIALCFG */
+/* Description: Register for partial erase configuration */
+
+/* Bits 6..0 : Duration of the partial erase in milliseconds */
+#define NVMC_ERASEPAGEPARTIALCFG_DURATION_Pos (0UL) /*!< Position of DURATION field. */
+#define NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk (0x7FUL << NVMC_ERASEPAGEPARTIALCFG_DURATION_Pos) /*!< Bit mask of DURATION field. */
 
 /* Register: NVMC_ICACHECNF */
 /* Description: I-code cache configuration register. */
@@ -5930,6 +6588,41 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: PDM */
 /* Description: Pulse Density Modulation (Digital Microphone) Interface */
 
+/* Register: PDM_TASKS_START */
+/* Description: Starts continuous PDM transfer */
+
+/* Bit 0 :   */
+#define PDM_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define PDM_TASKS_START_TASKS_START_Msk (0x1UL << PDM_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: PDM_TASKS_STOP */
+/* Description: Stops PDM transfer */
+
+/* Bit 0 :   */
+#define PDM_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define PDM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << PDM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: PDM_EVENTS_STARTED */
+/* Description: PDM transfer has started */
+
+/* Bit 0 :   */
+#define PDM_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field. */
+#define PDM_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << PDM_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED field. */
+
+/* Register: PDM_EVENTS_STOPPED */
+/* Description: PDM transfer has finished */
+
+/* Bit 0 :   */
+#define PDM_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define PDM_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << PDM_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: PDM_EVENTS_END */
+/* Description: The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been received) to Data RAM */
+
+/* Bit 0 :   */
+#define PDM_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define PDM_EVENTS_END_EVENTS_END_Msk (0x1UL << PDM_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
 /* Register: PDM_INTEN */
 /* Description: Enable or disable interrupt */
 
@@ -6043,17 +6736,17 @@ POSSIBILITY OF SUCH DAMAGE.
 #define PDM_GAINL_GAINL_Pos (0UL) /*!< Position of GAINL field. */
 #define PDM_GAINL_GAINL_Msk (0x7FUL << PDM_GAINL_GAINL_Pos) /*!< Bit mask of GAINL field. */
 #define PDM_GAINL_GAINL_MinGain (0x00UL) /*!< -20dB gain adjustment (minimum) */
-#define PDM_GAINL_GAINL_DefaultGain (0x28UL) /*!< 0dB gain adjustment ('2500 RMS' requirement) */
+#define PDM_GAINL_GAINL_DefaultGain (0x28UL) /*!< 0dB gain adjustment */
 #define PDM_GAINL_GAINL_MaxGain (0x50UL) /*!< +20dB gain adjustment (maximum) */
 
 /* Register: PDM_GAINR */
 /* Description: Right output gain adjustment */
 
-/* Bits 7..0 : Right output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) */
+/* Bits 6..0 : Right output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) */
 #define PDM_GAINR_GAINR_Pos (0UL) /*!< Position of GAINR field. */
-#define PDM_GAINR_GAINR_Msk (0xFFUL << PDM_GAINR_GAINR_Pos) /*!< Bit mask of GAINR field. */
+#define PDM_GAINR_GAINR_Msk (0x7FUL << PDM_GAINR_GAINR_Pos) /*!< Bit mask of GAINR field. */
 #define PDM_GAINR_GAINR_MinGain (0x00UL) /*!< -20dB gain adjustment (minimum) */
-#define PDM_GAINR_GAINR_DefaultGain (0x28UL) /*!< 0dB gain adjustment ('2500 RMS' requirement) */
+#define PDM_GAINR_GAINR_DefaultGain (0x28UL) /*!< 0dB gain adjustment */
 #define PDM_GAINR_GAINR_MaxGain (0x50UL) /*!< +20dB gain adjustment (maximum) */
 
 /* Register: PDM_RATIO */
@@ -6116,6 +6809,62 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: POWER */
 /* Description: Power control */
+
+/* Register: POWER_TASKS_CONSTLAT */
+/* Description: Enable constant latency mode */
+
+/* Bit 0 :   */
+#define POWER_TASKS_CONSTLAT_TASKS_CONSTLAT_Pos (0UL) /*!< Position of TASKS_CONSTLAT field. */
+#define POWER_TASKS_CONSTLAT_TASKS_CONSTLAT_Msk (0x1UL << POWER_TASKS_CONSTLAT_TASKS_CONSTLAT_Pos) /*!< Bit mask of TASKS_CONSTLAT field. */
+
+/* Register: POWER_TASKS_LOWPWR */
+/* Description: Enable low power mode (variable latency) */
+
+/* Bit 0 :   */
+#define POWER_TASKS_LOWPWR_TASKS_LOWPWR_Pos (0UL) /*!< Position of TASKS_LOWPWR field. */
+#define POWER_TASKS_LOWPWR_TASKS_LOWPWR_Msk (0x1UL << POWER_TASKS_LOWPWR_TASKS_LOWPWR_Pos) /*!< Bit mask of TASKS_LOWPWR field. */
+
+/* Register: POWER_EVENTS_POFWARN */
+/* Description: Power failure warning */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_POFWARN_EVENTS_POFWARN_Pos (0UL) /*!< Position of EVENTS_POFWARN field. */
+#define POWER_EVENTS_POFWARN_EVENTS_POFWARN_Msk (0x1UL << POWER_EVENTS_POFWARN_EVENTS_POFWARN_Pos) /*!< Bit mask of EVENTS_POFWARN field. */
+
+/* Register: POWER_EVENTS_SLEEPENTER */
+/* Description: CPU entered WFI/WFE sleep */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_Pos (0UL) /*!< Position of EVENTS_SLEEPENTER field. */
+#define POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_Msk (0x1UL << POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_Pos) /*!< Bit mask of EVENTS_SLEEPENTER field. */
+
+/* Register: POWER_EVENTS_SLEEPEXIT */
+/* Description: CPU exited WFI/WFE sleep */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_Pos (0UL) /*!< Position of EVENTS_SLEEPEXIT field. */
+#define POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_Msk (0x1UL << POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_Pos) /*!< Bit mask of EVENTS_SLEEPEXIT field. */
+
+/* Register: POWER_EVENTS_USBDETECTED */
+/* Description: Voltage supply detected on VBUS */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_USBDETECTED_EVENTS_USBDETECTED_Pos (0UL) /*!< Position of EVENTS_USBDETECTED field. */
+#define POWER_EVENTS_USBDETECTED_EVENTS_USBDETECTED_Msk (0x1UL << POWER_EVENTS_USBDETECTED_EVENTS_USBDETECTED_Pos) /*!< Bit mask of EVENTS_USBDETECTED field. */
+
+/* Register: POWER_EVENTS_USBREMOVED */
+/* Description: Voltage supply removed from VBUS */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_USBREMOVED_EVENTS_USBREMOVED_Pos (0UL) /*!< Position of EVENTS_USBREMOVED field. */
+#define POWER_EVENTS_USBREMOVED_EVENTS_USBREMOVED_Msk (0x1UL << POWER_EVENTS_USBREMOVED_EVENTS_USBREMOVED_Pos) /*!< Bit mask of EVENTS_USBREMOVED field. */
+
+/* Register: POWER_EVENTS_USBPWRRDY */
+/* Description: USB 3.3 V supply ready */
+
+/* Bit 0 :   */
+#define POWER_EVENTS_USBPWRRDY_EVENTS_USBPWRRDY_Pos (0UL) /*!< Position of EVENTS_USBPWRRDY field. */
+#define POWER_EVENTS_USBPWRRDY_EVENTS_USBPWRRDY_Msk (0x1UL << POWER_EVENTS_USBPWRRDY_EVENTS_USBPWRRDY_Pos) /*!< Bit mask of EVENTS_USBPWRRDY field. */
 
 /* Register: POWER_INTENSET */
 /* Description: Enable interrupt */
@@ -6924,6 +7673,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: PPI */
 /* Description: Programmable Peripheral Interconnect */
+
+/* Register: PPI_TASKS_CHG_EN */
+/* Description: Description cluster[0]:  Enable channel group 0 */
+
+/* Bit 0 :   */
+#define PPI_TASKS_CHG_EN_EN_Pos (0UL) /*!< Position of EN field. */
+#define PPI_TASKS_CHG_EN_EN_Msk (0x1UL << PPI_TASKS_CHG_EN_EN_Pos) /*!< Bit mask of EN field. */
+
+/* Register: PPI_TASKS_CHG_DIS */
+/* Description: Description cluster[0]:  Disable channel group 0 */
+
+/* Bit 0 :   */
+#define PPI_TASKS_CHG_DIS_DIS_Pos (0UL) /*!< Position of DIS field. */
+#define PPI_TASKS_CHG_DIS_DIS_Msk (0x1UL << PPI_TASKS_CHG_DIS_DIS_Pos) /*!< Bit mask of DIS field. */
 
 /* Register: PPI_CHEN */
 /* Description: Channel enable register */
@@ -7792,7 +8555,63 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 /* Peripheral: PWM */
-/* Description: Pulse Width Modulation Unit 0 */
+/* Description: Pulse width modulation unit 0 */
+
+/* Register: PWM_TASKS_STOP */
+/* Description: Stops PWM pulse generation on all channels at the end of current PWM period, and stops sequence playback */
+
+/* Bit 0 :   */
+#define PWM_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define PWM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << PWM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: PWM_TASKS_SEQSTART */
+/* Description: Description collection[0]:  Loads the first PWM value on all enabled channels from sequence 0, and starts playing that sequence at the rate defined in SEQ[0]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running. */
+
+/* Bit 0 :   */
+#define PWM_TASKS_SEQSTART_TASKS_SEQSTART_Pos (0UL) /*!< Position of TASKS_SEQSTART field. */
+#define PWM_TASKS_SEQSTART_TASKS_SEQSTART_Msk (0x1UL << PWM_TASKS_SEQSTART_TASKS_SEQSTART_Pos) /*!< Bit mask of TASKS_SEQSTART field. */
+
+/* Register: PWM_TASKS_NEXTSTEP */
+/* Description: Steps by one value in the current sequence on all enabled channels if DECODER.MODE=NextStep. Does not cause PWM generation to start if not running. */
+
+/* Bit 0 :   */
+#define PWM_TASKS_NEXTSTEP_TASKS_NEXTSTEP_Pos (0UL) /*!< Position of TASKS_NEXTSTEP field. */
+#define PWM_TASKS_NEXTSTEP_TASKS_NEXTSTEP_Msk (0x1UL << PWM_TASKS_NEXTSTEP_TASKS_NEXTSTEP_Pos) /*!< Bit mask of TASKS_NEXTSTEP field. */
+
+/* Register: PWM_EVENTS_STOPPED */
+/* Description: Response to STOP task, emitted when PWM pulses are no longer generated */
+
+/* Bit 0 :   */
+#define PWM_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define PWM_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << PWM_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: PWM_EVENTS_SEQSTARTED */
+/* Description: Description collection[0]:  First PWM period started on sequence 0 */
+
+/* Bit 0 :   */
+#define PWM_EVENTS_SEQSTARTED_EVENTS_SEQSTARTED_Pos (0UL) /*!< Position of EVENTS_SEQSTARTED field. */
+#define PWM_EVENTS_SEQSTARTED_EVENTS_SEQSTARTED_Msk (0x1UL << PWM_EVENTS_SEQSTARTED_EVENTS_SEQSTARTED_Pos) /*!< Bit mask of EVENTS_SEQSTARTED field. */
+
+/* Register: PWM_EVENTS_SEQEND */
+/* Description: Description collection[0]:  Emitted at end of every sequence 0, when last value from RAM has been applied to wave counter */
+
+/* Bit 0 :   */
+#define PWM_EVENTS_SEQEND_EVENTS_SEQEND_Pos (0UL) /*!< Position of EVENTS_SEQEND field. */
+#define PWM_EVENTS_SEQEND_EVENTS_SEQEND_Msk (0x1UL << PWM_EVENTS_SEQEND_EVENTS_SEQEND_Pos) /*!< Bit mask of EVENTS_SEQEND field. */
+
+/* Register: PWM_EVENTS_PWMPERIODEND */
+/* Description: Emitted at the end of each PWM period */
+
+/* Bit 0 :   */
+#define PWM_EVENTS_PWMPERIODEND_EVENTS_PWMPERIODEND_Pos (0UL) /*!< Position of EVENTS_PWMPERIODEND field. */
+#define PWM_EVENTS_PWMPERIODEND_EVENTS_PWMPERIODEND_Msk (0x1UL << PWM_EVENTS_PWMPERIODEND_EVENTS_PWMPERIODEND_Pos) /*!< Bit mask of EVENTS_PWMPERIODEND field. */
+
+/* Register: PWM_EVENTS_LOOPSDONE */
+/* Description: Concatenated sequences have been played the amount of times defined in LOOP.CNT */
+
+/* Bit 0 :   */
+#define PWM_EVENTS_LOOPSDONE_EVENTS_LOOPSDONE_Pos (0UL) /*!< Position of EVENTS_LOOPSDONE field. */
+#define PWM_EVENTS_LOOPSDONE_EVENTS_LOOPSDONE_Msk (0x1UL << PWM_EVENTS_LOOPSDONE_EVENTS_LOOPSDONE_Pos) /*!< Bit mask of EVENTS_LOOPSDONE field. */
 
 /* Register: PWM_SHORTS */
 /* Description: Shortcut register */
@@ -7988,33 +8807,33 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Register: PWM_MODE */
 /* Description: Selects operating mode of the wave counter */
 
-/* Bit 0 : Selects up or up and down as wave counter mode */
+/* Bit 0 : Selects up mode or up-and-down mode for the counter */
 #define PWM_MODE_UPDOWN_Pos (0UL) /*!< Position of UPDOWN field. */
 #define PWM_MODE_UPDOWN_Msk (0x1UL << PWM_MODE_UPDOWN_Pos) /*!< Bit mask of UPDOWN field. */
-#define PWM_MODE_UPDOWN_Up (0UL) /*!< Up counter - edge aligned PWM duty-cycle */
-#define PWM_MODE_UPDOWN_UpAndDown (1UL) /*!< Up and down counter - center aligned PWM duty cycle */
+#define PWM_MODE_UPDOWN_Up (0UL) /*!< Up counter, edge-aligned PWM duty cycle */
+#define PWM_MODE_UPDOWN_UpAndDown (1UL) /*!< Up and down counter, center-aligned PWM duty cycle */
 
 /* Register: PWM_COUNTERTOP */
 /* Description: Value up to which the pulse generator counter counts */
 
-/* Bits 14..0 : Value up to which the pulse generator counter counts. This register is ignored when DECODER.MODE=WaveForm and only values from RAM will be used. */
+/* Bits 14..0 : Value up to which the pulse generator counter counts. This register is ignored when DECODER.MODE=WaveForm and only values from RAM are used. */
 #define PWM_COUNTERTOP_COUNTERTOP_Pos (0UL) /*!< Position of COUNTERTOP field. */
 #define PWM_COUNTERTOP_COUNTERTOP_Msk (0x7FFFUL << PWM_COUNTERTOP_COUNTERTOP_Pos) /*!< Bit mask of COUNTERTOP field. */
 
 /* Register: PWM_PRESCALER */
 /* Description: Configuration for PWM_CLK */
 
-/* Bits 2..0 : Pre-scaler of PWM_CLK */
+/* Bits 2..0 : Prescaler of PWM_CLK */
 #define PWM_PRESCALER_PRESCALER_Pos (0UL) /*!< Position of PRESCALER field. */
 #define PWM_PRESCALER_PRESCALER_Msk (0x7UL << PWM_PRESCALER_PRESCALER_Pos) /*!< Bit mask of PRESCALER field. */
-#define PWM_PRESCALER_PRESCALER_DIV_1 (0UL) /*!< Divide by   1 (16MHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_2 (1UL) /*!< Divide by   2 ( 8MHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_4 (2UL) /*!< Divide by   4 ( 4MHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_8 (3UL) /*!< Divide by   8 ( 2MHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_16 (4UL) /*!< Divide by  16 ( 1MHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_32 (5UL) /*!< Divide by  32 ( 500kHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_64 (6UL) /*!< Divide by  64 ( 250kHz) */
-#define PWM_PRESCALER_PRESCALER_DIV_128 (7UL) /*!< Divide by 128 ( 125kHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_1 (0UL) /*!< Divide by 1 (16 MHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_2 (1UL) /*!< Divide by 2 (8 MHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_4 (2UL) /*!< Divide by 4 (4 MHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_8 (3UL) /*!< Divide by 8 (2 MHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_16 (4UL) /*!< Divide by 16 (1 MHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_32 (5UL) /*!< Divide by 32 (500 kHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_64 (6UL) /*!< Divide by 64 (250 kHz) */
+#define PWM_PRESCALER_PRESCALER_DIV_128 (7UL) /*!< Divide by 128 (125 kHz) */
 
 /* Register: PWM_DECODER */
 /* Description: Configuration of the decoder */
@@ -8034,32 +8853,32 @@ POSSIBILITY OF SUCH DAMAGE.
 #define PWM_DECODER_LOAD_WaveForm (3UL) /*!< 1st half word (16-bit) in ch.0; 2nd in ch.1; ...; 4th in COUNTERTOP */
 
 /* Register: PWM_LOOP */
-/* Description: Amount of playback of a loop */
+/* Description: Number of playbacks of a loop */
 
-/* Bits 15..0 : Amount of playback of pattern cycles */
+/* Bits 15..0 : Number of playbacks of pattern cycles */
 #define PWM_LOOP_CNT_Pos (0UL) /*!< Position of CNT field. */
 #define PWM_LOOP_CNT_Msk (0xFFFFUL << PWM_LOOP_CNT_Pos) /*!< Bit mask of CNT field. */
 #define PWM_LOOP_CNT_Disabled (0UL) /*!< Looping disabled (stop at the end of the sequence) */
 
 /* Register: PWM_SEQ_PTR */
-/* Description: Description cluster[0]:  Beginning address in Data RAM of this sequence */
+/* Description: Description cluster[0]:  Beginning address in RAM of this sequence */
 
-/* Bits 31..0 : Beginning address in Data RAM of this sequence */
+/* Bits 31..0 : Beginning address in RAM of this sequence */
 #define PWM_SEQ_PTR_PTR_Pos (0UL) /*!< Position of PTR field. */
 #define PWM_SEQ_PTR_PTR_Msk (0xFFFFFFFFUL << PWM_SEQ_PTR_PTR_Pos) /*!< Bit mask of PTR field. */
 
 /* Register: PWM_SEQ_CNT */
-/* Description: Description cluster[0]:  Amount of values (duty cycles) in this sequence */
+/* Description: Description cluster[0]:  Number of values (duty cycles) in this sequence */
 
-/* Bits 14..0 : Amount of values (duty cycles) in this sequence */
+/* Bits 14..0 : Number of values (duty cycles) in this sequence */
 #define PWM_SEQ_CNT_CNT_Pos (0UL) /*!< Position of CNT field. */
 #define PWM_SEQ_CNT_CNT_Msk (0x7FFFUL << PWM_SEQ_CNT_CNT_Pos) /*!< Bit mask of CNT field. */
 #define PWM_SEQ_CNT_CNT_Disabled (0UL) /*!< Sequence is disabled, and shall not be started as it is empty */
 
 /* Register: PWM_SEQ_REFRESH */
-/* Description: Description cluster[0]:  Amount of additional PWM periods between samples loaded into compare register */
+/* Description: Description cluster[0]:  Number of additional PWM periods between samples loaded into compare register */
 
-/* Bits 23..0 : Amount of additional PWM periods between samples loaded into compare register (load every REFRESH.CNT+1 PWM periods) */
+/* Bits 23..0 : Number of additional PWM periods between samples loaded into compare register (load every REFRESH.CNT+1 PWM periods) */
 #define PWM_SEQ_REFRESH_CNT_Pos (0UL) /*!< Position of CNT field. */
 #define PWM_SEQ_REFRESH_CNT_Msk (0xFFFFFFUL << PWM_SEQ_REFRESH_CNT_Pos) /*!< Bit mask of CNT field. */
 #define PWM_SEQ_REFRESH_CNT_Continuous (0UL) /*!< Update every PWM period */
@@ -8091,6 +8910,76 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: QDEC */
 /* Description: Quadrature Decoder */
+
+/* Register: QDEC_TASKS_START */
+/* Description: Task starting the quadrature decoder */
+
+/* Bit 0 :   */
+#define QDEC_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define QDEC_TASKS_START_TASKS_START_Msk (0x1UL << QDEC_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: QDEC_TASKS_STOP */
+/* Description: Task stopping the quadrature decoder */
+
+/* Bit 0 :   */
+#define QDEC_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define QDEC_TASKS_STOP_TASKS_STOP_Msk (0x1UL << QDEC_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: QDEC_TASKS_READCLRACC */
+/* Description: Read and clear ACC and ACCDBL */
+
+/* Bit 0 :   */
+#define QDEC_TASKS_READCLRACC_TASKS_READCLRACC_Pos (0UL) /*!< Position of TASKS_READCLRACC field. */
+#define QDEC_TASKS_READCLRACC_TASKS_READCLRACC_Msk (0x1UL << QDEC_TASKS_READCLRACC_TASKS_READCLRACC_Pos) /*!< Bit mask of TASKS_READCLRACC field. */
+
+/* Register: QDEC_TASKS_RDCLRACC */
+/* Description: Read and clear ACC */
+
+/* Bit 0 :   */
+#define QDEC_TASKS_RDCLRACC_TASKS_RDCLRACC_Pos (0UL) /*!< Position of TASKS_RDCLRACC field. */
+#define QDEC_TASKS_RDCLRACC_TASKS_RDCLRACC_Msk (0x1UL << QDEC_TASKS_RDCLRACC_TASKS_RDCLRACC_Pos) /*!< Bit mask of TASKS_RDCLRACC field. */
+
+/* Register: QDEC_TASKS_RDCLRDBL */
+/* Description: Read and clear ACCDBL */
+
+/* Bit 0 :   */
+#define QDEC_TASKS_RDCLRDBL_TASKS_RDCLRDBL_Pos (0UL) /*!< Position of TASKS_RDCLRDBL field. */
+#define QDEC_TASKS_RDCLRDBL_TASKS_RDCLRDBL_Msk (0x1UL << QDEC_TASKS_RDCLRDBL_TASKS_RDCLRDBL_Pos) /*!< Bit mask of TASKS_RDCLRDBL field. */
+
+/* Register: QDEC_EVENTS_SAMPLERDY */
+/* Description: Event being generated for every new sample value written to the SAMPLE register */
+
+/* Bit 0 :   */
+#define QDEC_EVENTS_SAMPLERDY_EVENTS_SAMPLERDY_Pos (0UL) /*!< Position of EVENTS_SAMPLERDY field. */
+#define QDEC_EVENTS_SAMPLERDY_EVENTS_SAMPLERDY_Msk (0x1UL << QDEC_EVENTS_SAMPLERDY_EVENTS_SAMPLERDY_Pos) /*!< Bit mask of EVENTS_SAMPLERDY field. */
+
+/* Register: QDEC_EVENTS_REPORTRDY */
+/* Description: Non-null report ready */
+
+/* Bit 0 :   */
+#define QDEC_EVENTS_REPORTRDY_EVENTS_REPORTRDY_Pos (0UL) /*!< Position of EVENTS_REPORTRDY field. */
+#define QDEC_EVENTS_REPORTRDY_EVENTS_REPORTRDY_Msk (0x1UL << QDEC_EVENTS_REPORTRDY_EVENTS_REPORTRDY_Pos) /*!< Bit mask of EVENTS_REPORTRDY field. */
+
+/* Register: QDEC_EVENTS_ACCOF */
+/* Description: ACC or ACCDBL register overflow */
+
+/* Bit 0 :   */
+#define QDEC_EVENTS_ACCOF_EVENTS_ACCOF_Pos (0UL) /*!< Position of EVENTS_ACCOF field. */
+#define QDEC_EVENTS_ACCOF_EVENTS_ACCOF_Msk (0x1UL << QDEC_EVENTS_ACCOF_EVENTS_ACCOF_Pos) /*!< Bit mask of EVENTS_ACCOF field. */
+
+/* Register: QDEC_EVENTS_DBLRDY */
+/* Description: Double displacement(s) detected */
+
+/* Bit 0 :   */
+#define QDEC_EVENTS_DBLRDY_EVENTS_DBLRDY_Pos (0UL) /*!< Position of EVENTS_DBLRDY field. */
+#define QDEC_EVENTS_DBLRDY_EVENTS_DBLRDY_Msk (0x1UL << QDEC_EVENTS_DBLRDY_EVENTS_DBLRDY_Pos) /*!< Bit mask of EVENTS_DBLRDY field. */
+
+/* Register: QDEC_EVENTS_STOPPED */
+/* Description: QDEC has been stopped */
+
+/* Bit 0 :   */
+#define QDEC_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define QDEC_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << QDEC_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
 
 /* Register: QDEC_SHORTS */
 /* Description: Shortcut register */
@@ -8370,6 +9259,48 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: QSPI */
 /* Description: External flash interface */
+
+/* Register: QSPI_TASKS_ACTIVATE */
+/* Description: Activate QSPI interface */
+
+/* Bit 0 :   */
+#define QSPI_TASKS_ACTIVATE_TASKS_ACTIVATE_Pos (0UL) /*!< Position of TASKS_ACTIVATE field. */
+#define QSPI_TASKS_ACTIVATE_TASKS_ACTIVATE_Msk (0x1UL << QSPI_TASKS_ACTIVATE_TASKS_ACTIVATE_Pos) /*!< Bit mask of TASKS_ACTIVATE field. */
+
+/* Register: QSPI_TASKS_READSTART */
+/* Description: Start transfer from external flash memory to internal RAM */
+
+/* Bit 0 :   */
+#define QSPI_TASKS_READSTART_TASKS_READSTART_Pos (0UL) /*!< Position of TASKS_READSTART field. */
+#define QSPI_TASKS_READSTART_TASKS_READSTART_Msk (0x1UL << QSPI_TASKS_READSTART_TASKS_READSTART_Pos) /*!< Bit mask of TASKS_READSTART field. */
+
+/* Register: QSPI_TASKS_WRITESTART */
+/* Description: Start transfer from internal RAM to external flash memory */
+
+/* Bit 0 :   */
+#define QSPI_TASKS_WRITESTART_TASKS_WRITESTART_Pos (0UL) /*!< Position of TASKS_WRITESTART field. */
+#define QSPI_TASKS_WRITESTART_TASKS_WRITESTART_Msk (0x1UL << QSPI_TASKS_WRITESTART_TASKS_WRITESTART_Pos) /*!< Bit mask of TASKS_WRITESTART field. */
+
+/* Register: QSPI_TASKS_ERASESTART */
+/* Description: Start external flash memory erase operation */
+
+/* Bit 0 :   */
+#define QSPI_TASKS_ERASESTART_TASKS_ERASESTART_Pos (0UL) /*!< Position of TASKS_ERASESTART field. */
+#define QSPI_TASKS_ERASESTART_TASKS_ERASESTART_Msk (0x1UL << QSPI_TASKS_ERASESTART_TASKS_ERASESTART_Pos) /*!< Bit mask of TASKS_ERASESTART field. */
+
+/* Register: QSPI_TASKS_DEACTIVATE */
+/* Description: Deactivate QSPI interface */
+
+/* Bit 0 :   */
+#define QSPI_TASKS_DEACTIVATE_TASKS_DEACTIVATE_Pos (0UL) /*!< Position of TASKS_DEACTIVATE field. */
+#define QSPI_TASKS_DEACTIVATE_TASKS_DEACTIVATE_Msk (0x1UL << QSPI_TASKS_DEACTIVATE_TASKS_DEACTIVATE_Pos) /*!< Bit mask of TASKS_DEACTIVATE field. */
+
+/* Register: QSPI_EVENTS_READY */
+/* Description: QSPI peripheral is ready. This event will be generated as a response to any QSPI task. */
+
+/* Bit 0 :   */
+#define QSPI_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define QSPI_EVENTS_READY_EVENTS_READY_Msk (0x1UL << QSPI_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
 
 /* Register: QSPI_INTEN */
 /* Description: Enable or disable interrupt */
@@ -8802,6 +9733,251 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: RADIO */
 /* Description: 2.4 GHz Radio */
+
+/* Register: RADIO_TASKS_TXEN */
+/* Description: Enable RADIO in TX mode */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_TXEN_TASKS_TXEN_Pos (0UL) /*!< Position of TASKS_TXEN field. */
+#define RADIO_TASKS_TXEN_TASKS_TXEN_Msk (0x1UL << RADIO_TASKS_TXEN_TASKS_TXEN_Pos) /*!< Bit mask of TASKS_TXEN field. */
+
+/* Register: RADIO_TASKS_RXEN */
+/* Description: Enable RADIO in RX mode */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_RXEN_TASKS_RXEN_Pos (0UL) /*!< Position of TASKS_RXEN field. */
+#define RADIO_TASKS_RXEN_TASKS_RXEN_Msk (0x1UL << RADIO_TASKS_RXEN_TASKS_RXEN_Pos) /*!< Bit mask of TASKS_RXEN field. */
+
+/* Register: RADIO_TASKS_START */
+/* Description: Start RADIO */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define RADIO_TASKS_START_TASKS_START_Msk (0x1UL << RADIO_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: RADIO_TASKS_STOP */
+/* Description: Stop RADIO */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define RADIO_TASKS_STOP_TASKS_STOP_Msk (0x1UL << RADIO_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: RADIO_TASKS_DISABLE */
+/* Description: Disable RADIO */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_DISABLE_TASKS_DISABLE_Pos (0UL) /*!< Position of TASKS_DISABLE field. */
+#define RADIO_TASKS_DISABLE_TASKS_DISABLE_Msk (0x1UL << RADIO_TASKS_DISABLE_TASKS_DISABLE_Pos) /*!< Bit mask of TASKS_DISABLE field. */
+
+/* Register: RADIO_TASKS_RSSISTART */
+/* Description: Start the RSSI and take one single sample of the receive signal strength. */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_RSSISTART_TASKS_RSSISTART_Pos (0UL) /*!< Position of TASKS_RSSISTART field. */
+#define RADIO_TASKS_RSSISTART_TASKS_RSSISTART_Msk (0x1UL << RADIO_TASKS_RSSISTART_TASKS_RSSISTART_Pos) /*!< Bit mask of TASKS_RSSISTART field. */
+
+/* Register: RADIO_TASKS_RSSISTOP */
+/* Description: Stop the RSSI measurement */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_RSSISTOP_TASKS_RSSISTOP_Pos (0UL) /*!< Position of TASKS_RSSISTOP field. */
+#define RADIO_TASKS_RSSISTOP_TASKS_RSSISTOP_Msk (0x1UL << RADIO_TASKS_RSSISTOP_TASKS_RSSISTOP_Pos) /*!< Bit mask of TASKS_RSSISTOP field. */
+
+/* Register: RADIO_TASKS_BCSTART */
+/* Description: Start the bit counter */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_BCSTART_TASKS_BCSTART_Pos (0UL) /*!< Position of TASKS_BCSTART field. */
+#define RADIO_TASKS_BCSTART_TASKS_BCSTART_Msk (0x1UL << RADIO_TASKS_BCSTART_TASKS_BCSTART_Pos) /*!< Bit mask of TASKS_BCSTART field. */
+
+/* Register: RADIO_TASKS_BCSTOP */
+/* Description: Stop the bit counter */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_BCSTOP_TASKS_BCSTOP_Pos (0UL) /*!< Position of TASKS_BCSTOP field. */
+#define RADIO_TASKS_BCSTOP_TASKS_BCSTOP_Msk (0x1UL << RADIO_TASKS_BCSTOP_TASKS_BCSTOP_Pos) /*!< Bit mask of TASKS_BCSTOP field. */
+
+/* Register: RADIO_TASKS_EDSTART */
+/* Description: Start the Energy Detect measurement used in IEEE 802.15.4 mode */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_EDSTART_TASKS_EDSTART_Pos (0UL) /*!< Position of TASKS_EDSTART field. */
+#define RADIO_TASKS_EDSTART_TASKS_EDSTART_Msk (0x1UL << RADIO_TASKS_EDSTART_TASKS_EDSTART_Pos) /*!< Bit mask of TASKS_EDSTART field. */
+
+/* Register: RADIO_TASKS_EDSTOP */
+/* Description: Stop the Energy Detect measurement */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_EDSTOP_TASKS_EDSTOP_Pos (0UL) /*!< Position of TASKS_EDSTOP field. */
+#define RADIO_TASKS_EDSTOP_TASKS_EDSTOP_Msk (0x1UL << RADIO_TASKS_EDSTOP_TASKS_EDSTOP_Pos) /*!< Bit mask of TASKS_EDSTOP field. */
+
+/* Register: RADIO_TASKS_CCASTART */
+/* Description: Start the Clear Channel Assessment used in IEEE 802.15.4 mode */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_CCASTART_TASKS_CCASTART_Pos (0UL) /*!< Position of TASKS_CCASTART field. */
+#define RADIO_TASKS_CCASTART_TASKS_CCASTART_Msk (0x1UL << RADIO_TASKS_CCASTART_TASKS_CCASTART_Pos) /*!< Bit mask of TASKS_CCASTART field. */
+
+/* Register: RADIO_TASKS_CCASTOP */
+/* Description: Stop the Clear Channel Assessment */
+
+/* Bit 0 :   */
+#define RADIO_TASKS_CCASTOP_TASKS_CCASTOP_Pos (0UL) /*!< Position of TASKS_CCASTOP field. */
+#define RADIO_TASKS_CCASTOP_TASKS_CCASTOP_Msk (0x1UL << RADIO_TASKS_CCASTOP_TASKS_CCASTOP_Pos) /*!< Bit mask of TASKS_CCASTOP field. */
+
+/* Register: RADIO_EVENTS_READY */
+/* Description: RADIO has ramped up and is ready to be started */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define RADIO_EVENTS_READY_EVENTS_READY_Msk (0x1UL << RADIO_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
+
+/* Register: RADIO_EVENTS_ADDRESS */
+/* Description: Address sent or received */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_ADDRESS_EVENTS_ADDRESS_Pos (0UL) /*!< Position of EVENTS_ADDRESS field. */
+#define RADIO_EVENTS_ADDRESS_EVENTS_ADDRESS_Msk (0x1UL << RADIO_EVENTS_ADDRESS_EVENTS_ADDRESS_Pos) /*!< Bit mask of EVENTS_ADDRESS field. */
+
+/* Register: RADIO_EVENTS_PAYLOAD */
+/* Description: Packet payload sent or received */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_PAYLOAD_EVENTS_PAYLOAD_Pos (0UL) /*!< Position of EVENTS_PAYLOAD field. */
+#define RADIO_EVENTS_PAYLOAD_EVENTS_PAYLOAD_Msk (0x1UL << RADIO_EVENTS_PAYLOAD_EVENTS_PAYLOAD_Pos) /*!< Bit mask of EVENTS_PAYLOAD field. */
+
+/* Register: RADIO_EVENTS_END */
+/* Description: Packet sent or received */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define RADIO_EVENTS_END_EVENTS_END_Msk (0x1UL << RADIO_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
+/* Register: RADIO_EVENTS_DISABLED */
+/* Description: RADIO has been disabled */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_DISABLED_EVENTS_DISABLED_Pos (0UL) /*!< Position of EVENTS_DISABLED field. */
+#define RADIO_EVENTS_DISABLED_EVENTS_DISABLED_Msk (0x1UL << RADIO_EVENTS_DISABLED_EVENTS_DISABLED_Pos) /*!< Bit mask of EVENTS_DISABLED field. */
+
+/* Register: RADIO_EVENTS_DEVMATCH */
+/* Description: A device address match occurred on the last received packet */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_DEVMATCH_EVENTS_DEVMATCH_Pos (0UL) /*!< Position of EVENTS_DEVMATCH field. */
+#define RADIO_EVENTS_DEVMATCH_EVENTS_DEVMATCH_Msk (0x1UL << RADIO_EVENTS_DEVMATCH_EVENTS_DEVMATCH_Pos) /*!< Bit mask of EVENTS_DEVMATCH field. */
+
+/* Register: RADIO_EVENTS_DEVMISS */
+/* Description: No device address match occurred on the last received packet */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_DEVMISS_EVENTS_DEVMISS_Pos (0UL) /*!< Position of EVENTS_DEVMISS field. */
+#define RADIO_EVENTS_DEVMISS_EVENTS_DEVMISS_Msk (0x1UL << RADIO_EVENTS_DEVMISS_EVENTS_DEVMISS_Pos) /*!< Bit mask of EVENTS_DEVMISS field. */
+
+/* Register: RADIO_EVENTS_RSSIEND */
+/* Description: Sampling of receive signal strength complete. */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_RSSIEND_EVENTS_RSSIEND_Pos (0UL) /*!< Position of EVENTS_RSSIEND field. */
+#define RADIO_EVENTS_RSSIEND_EVENTS_RSSIEND_Msk (0x1UL << RADIO_EVENTS_RSSIEND_EVENTS_RSSIEND_Pos) /*!< Bit mask of EVENTS_RSSIEND field. */
+
+/* Register: RADIO_EVENTS_BCMATCH */
+/* Description: Bit counter reached bit count value. */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_BCMATCH_EVENTS_BCMATCH_Pos (0UL) /*!< Position of EVENTS_BCMATCH field. */
+#define RADIO_EVENTS_BCMATCH_EVENTS_BCMATCH_Msk (0x1UL << RADIO_EVENTS_BCMATCH_EVENTS_BCMATCH_Pos) /*!< Bit mask of EVENTS_BCMATCH field. */
+
+/* Register: RADIO_EVENTS_CRCOK */
+/* Description: Packet received with CRC ok */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_CRCOK_EVENTS_CRCOK_Pos (0UL) /*!< Position of EVENTS_CRCOK field. */
+#define RADIO_EVENTS_CRCOK_EVENTS_CRCOK_Msk (0x1UL << RADIO_EVENTS_CRCOK_EVENTS_CRCOK_Pos) /*!< Bit mask of EVENTS_CRCOK field. */
+
+/* Register: RADIO_EVENTS_CRCERROR */
+/* Description: Packet received with CRC error */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_CRCERROR_EVENTS_CRCERROR_Pos (0UL) /*!< Position of EVENTS_CRCERROR field. */
+#define RADIO_EVENTS_CRCERROR_EVENTS_CRCERROR_Msk (0x1UL << RADIO_EVENTS_CRCERROR_EVENTS_CRCERROR_Pos) /*!< Bit mask of EVENTS_CRCERROR field. */
+
+/* Register: RADIO_EVENTS_FRAMESTART */
+/* Description: IEEE 802.15.4 length field received */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_FRAMESTART_EVENTS_FRAMESTART_Pos (0UL) /*!< Position of EVENTS_FRAMESTART field. */
+#define RADIO_EVENTS_FRAMESTART_EVENTS_FRAMESTART_Msk (0x1UL << RADIO_EVENTS_FRAMESTART_EVENTS_FRAMESTART_Pos) /*!< Bit mask of EVENTS_FRAMESTART field. */
+
+/* Register: RADIO_EVENTS_EDEND */
+/* Description: Sampling of Energy Detection complete. A new ED sample is ready for readout from the RADIO.EDSAMPLE register */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_EDEND_EVENTS_EDEND_Pos (0UL) /*!< Position of EVENTS_EDEND field. */
+#define RADIO_EVENTS_EDEND_EVENTS_EDEND_Msk (0x1UL << RADIO_EVENTS_EDEND_EVENTS_EDEND_Pos) /*!< Bit mask of EVENTS_EDEND field. */
+
+/* Register: RADIO_EVENTS_EDSTOPPED */
+/* Description: The sampling of Energy Detection has stopped */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_EDSTOPPED_EVENTS_EDSTOPPED_Pos (0UL) /*!< Position of EVENTS_EDSTOPPED field. */
+#define RADIO_EVENTS_EDSTOPPED_EVENTS_EDSTOPPED_Msk (0x1UL << RADIO_EVENTS_EDSTOPPED_EVENTS_EDSTOPPED_Pos) /*!< Bit mask of EVENTS_EDSTOPPED field. */
+
+/* Register: RADIO_EVENTS_CCAIDLE */
+/* Description: Wireless medium in idle - clear to send */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_CCAIDLE_EVENTS_CCAIDLE_Pos (0UL) /*!< Position of EVENTS_CCAIDLE field. */
+#define RADIO_EVENTS_CCAIDLE_EVENTS_CCAIDLE_Msk (0x1UL << RADIO_EVENTS_CCAIDLE_EVENTS_CCAIDLE_Pos) /*!< Bit mask of EVENTS_CCAIDLE field. */
+
+/* Register: RADIO_EVENTS_CCABUSY */
+/* Description: Wireless medium busy - do not send */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_CCABUSY_EVENTS_CCABUSY_Pos (0UL) /*!< Position of EVENTS_CCABUSY field. */
+#define RADIO_EVENTS_CCABUSY_EVENTS_CCABUSY_Msk (0x1UL << RADIO_EVENTS_CCABUSY_EVENTS_CCABUSY_Pos) /*!< Bit mask of EVENTS_CCABUSY field. */
+
+/* Register: RADIO_EVENTS_CCASTOPPED */
+/* Description: The CCA has stopped */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_CCASTOPPED_EVENTS_CCASTOPPED_Pos (0UL) /*!< Position of EVENTS_CCASTOPPED field. */
+#define RADIO_EVENTS_CCASTOPPED_EVENTS_CCASTOPPED_Msk (0x1UL << RADIO_EVENTS_CCASTOPPED_EVENTS_CCASTOPPED_Pos) /*!< Bit mask of EVENTS_CCASTOPPED field. */
+
+/* Register: RADIO_EVENTS_RATEBOOST */
+/* Description: Ble_LR CI field received, receive mode is changed from Ble_LR125Kbit to Ble_LR500Kbit. */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_RATEBOOST_EVENTS_RATEBOOST_Pos (0UL) /*!< Position of EVENTS_RATEBOOST field. */
+#define RADIO_EVENTS_RATEBOOST_EVENTS_RATEBOOST_Msk (0x1UL << RADIO_EVENTS_RATEBOOST_EVENTS_RATEBOOST_Pos) /*!< Bit mask of EVENTS_RATEBOOST field. */
+
+/* Register: RADIO_EVENTS_TXREADY */
+/* Description: RADIO has ramped up and is ready to be started TX path */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_TXREADY_EVENTS_TXREADY_Pos (0UL) /*!< Position of EVENTS_TXREADY field. */
+#define RADIO_EVENTS_TXREADY_EVENTS_TXREADY_Msk (0x1UL << RADIO_EVENTS_TXREADY_EVENTS_TXREADY_Pos) /*!< Bit mask of EVENTS_TXREADY field. */
+
+/* Register: RADIO_EVENTS_RXREADY */
+/* Description: RADIO has ramped up and is ready to be started RX path */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_RXREADY_EVENTS_RXREADY_Pos (0UL) /*!< Position of EVENTS_RXREADY field. */
+#define RADIO_EVENTS_RXREADY_EVENTS_RXREADY_Msk (0x1UL << RADIO_EVENTS_RXREADY_EVENTS_RXREADY_Pos) /*!< Bit mask of EVENTS_RXREADY field. */
+
+/* Register: RADIO_EVENTS_MHRMATCH */
+/* Description: MAC Header match found. */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_MHRMATCH_EVENTS_MHRMATCH_Pos (0UL) /*!< Position of EVENTS_MHRMATCH field. */
+#define RADIO_EVENTS_MHRMATCH_EVENTS_MHRMATCH_Msk (0x1UL << RADIO_EVENTS_MHRMATCH_EVENTS_MHRMATCH_Pos) /*!< Bit mask of EVENTS_MHRMATCH field. */
+
+/* Register: RADIO_EVENTS_PHYEND */
+/* Description: Generated in Ble_LR125Kbit, Ble_LR500Kbit and BleIeee802154_250Kbit modes when last bit is sent on air. */
+
+/* Bit 0 :   */
+#define RADIO_EVENTS_PHYEND_EVENTS_PHYEND_Pos (0UL) /*!< Position of EVENTS_PHYEND field. */
+#define RADIO_EVENTS_PHYEND_EVENTS_PHYEND_Msk (0x1UL << RADIO_EVENTS_PHYEND_EVENTS_PHYEND_Pos) /*!< Bit mask of EVENTS_PHYEND field. */
 
 /* Register: RADIO_SHORTS */
 /* Description: Shortcut register */
@@ -9762,6 +10938,27 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: RNG */
 /* Description: Random Number Generator */
 
+/* Register: RNG_TASKS_START */
+/* Description: Task starting the random number generator */
+
+/* Bit 0 :   */
+#define RNG_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define RNG_TASKS_START_TASKS_START_Msk (0x1UL << RNG_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: RNG_TASKS_STOP */
+/* Description: Task stopping the random number generator */
+
+/* Bit 0 :   */
+#define RNG_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define RNG_TASKS_STOP_TASKS_STOP_Msk (0x1UL << RNG_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: RNG_EVENTS_VALRDY */
+/* Description: Event being generated for every new random number written to the VALUE register */
+
+/* Bit 0 :   */
+#define RNG_EVENTS_VALRDY_EVENTS_VALRDY_Pos (0UL) /*!< Position of EVENTS_VALRDY field. */
+#define RNG_EVENTS_VALRDY_EVENTS_VALRDY_Msk (0x1UL << RNG_EVENTS_VALRDY_EVENTS_VALRDY_Pos) /*!< Bit mask of EVENTS_VALRDY field. */
+
 /* Register: RNG_SHORTS */
 /* Description: Shortcut register */
 
@@ -9810,6 +11007,55 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: RTC */
 /* Description: Real time counter 0 */
+
+/* Register: RTC_TASKS_START */
+/* Description: Start RTC COUNTER */
+
+/* Bit 0 :   */
+#define RTC_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define RTC_TASKS_START_TASKS_START_Msk (0x1UL << RTC_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: RTC_TASKS_STOP */
+/* Description: Stop RTC COUNTER */
+
+/* Bit 0 :   */
+#define RTC_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define RTC_TASKS_STOP_TASKS_STOP_Msk (0x1UL << RTC_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: RTC_TASKS_CLEAR */
+/* Description: Clear RTC COUNTER */
+
+/* Bit 0 :   */
+#define RTC_TASKS_CLEAR_TASKS_CLEAR_Pos (0UL) /*!< Position of TASKS_CLEAR field. */
+#define RTC_TASKS_CLEAR_TASKS_CLEAR_Msk (0x1UL << RTC_TASKS_CLEAR_TASKS_CLEAR_Pos) /*!< Bit mask of TASKS_CLEAR field. */
+
+/* Register: RTC_TASKS_TRIGOVRFLW */
+/* Description: Set COUNTER to 0xFFFFF0 */
+
+/* Bit 0 :   */
+#define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos (0UL) /*!< Position of TASKS_TRIGOVRFLW field. */
+#define RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Msk (0x1UL << RTC_TASKS_TRIGOVRFLW_TASKS_TRIGOVRFLW_Pos) /*!< Bit mask of TASKS_TRIGOVRFLW field. */
+
+/* Register: RTC_EVENTS_TICK */
+/* Description: Event on COUNTER increment */
+
+/* Bit 0 :   */
+#define RTC_EVENTS_TICK_EVENTS_TICK_Pos (0UL) /*!< Position of EVENTS_TICK field. */
+#define RTC_EVENTS_TICK_EVENTS_TICK_Msk (0x1UL << RTC_EVENTS_TICK_EVENTS_TICK_Pos) /*!< Bit mask of EVENTS_TICK field. */
+
+/* Register: RTC_EVENTS_OVRFLW */
+/* Description: Event on COUNTER overflow */
+
+/* Bit 0 :   */
+#define RTC_EVENTS_OVRFLW_EVENTS_OVRFLW_Pos (0UL) /*!< Position of EVENTS_OVRFLW field. */
+#define RTC_EVENTS_OVRFLW_EVENTS_OVRFLW_Msk (0x1UL << RTC_EVENTS_OVRFLW_EVENTS_OVRFLW_Pos) /*!< Bit mask of EVENTS_OVRFLW field. */
+
+/* Register: RTC_EVENTS_COMPARE */
+/* Description: Description collection[0]:  Compare event on CC[0] match */
+
+/* Bit 0 :   */
+#define RTC_EVENTS_COMPARE_EVENTS_COMPARE_Pos (0UL) /*!< Position of EVENTS_COMPARE field. */
+#define RTC_EVENTS_COMPARE_EVENTS_COMPARE_Msk (0x1UL << RTC_EVENTS_COMPARE_EVENTS_COMPARE_Pos) /*!< Bit mask of EVENTS_COMPARE field. */
 
 /* Register: RTC_INTENSET */
 /* Description: Enable interrupt */
@@ -10054,6 +11300,90 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: SAADC */
 /* Description: Analog to Digital Converter */
+
+/* Register: SAADC_TASKS_START */
+/* Description: Start the ADC and prepare the result buffer in RAM */
+
+/* Bit 0 :   */
+#define SAADC_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define SAADC_TASKS_START_TASKS_START_Msk (0x1UL << SAADC_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: SAADC_TASKS_SAMPLE */
+/* Description: Take one ADC sample, if scan is enabled all channels are sampled */
+
+/* Bit 0 :   */
+#define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos (0UL) /*!< Position of TASKS_SAMPLE field. */
+#define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Msk (0x1UL << SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Pos) /*!< Bit mask of TASKS_SAMPLE field. */
+
+/* Register: SAADC_TASKS_STOP */
+/* Description: Stop the ADC and terminate any on-going conversion */
+
+/* Bit 0 :   */
+#define SAADC_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define SAADC_TASKS_STOP_TASKS_STOP_Msk (0x1UL << SAADC_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: SAADC_TASKS_CALIBRATEOFFSET */
+/* Description: Starts offset auto-calibration */
+
+/* Bit 0 :   */
+#define SAADC_TASKS_CALIBRATEOFFSET_TASKS_CALIBRATEOFFSET_Pos (0UL) /*!< Position of TASKS_CALIBRATEOFFSET field. */
+#define SAADC_TASKS_CALIBRATEOFFSET_TASKS_CALIBRATEOFFSET_Msk (0x1UL << SAADC_TASKS_CALIBRATEOFFSET_TASKS_CALIBRATEOFFSET_Pos) /*!< Bit mask of TASKS_CALIBRATEOFFSET field. */
+
+/* Register: SAADC_EVENTS_STARTED */
+/* Description: The ADC has started */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field. */
+#define SAADC_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << SAADC_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED field. */
+
+/* Register: SAADC_EVENTS_END */
+/* Description: The ADC has filled up the Result buffer */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define SAADC_EVENTS_END_EVENTS_END_Msk (0x1UL << SAADC_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
+/* Register: SAADC_EVENTS_DONE */
+/* Description: A conversion task has been completed. Depending on the mode, multiple conversions might be needed for a result to be transferred to RAM. */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_DONE_EVENTS_DONE_Pos (0UL) /*!< Position of EVENTS_DONE field. */
+#define SAADC_EVENTS_DONE_EVENTS_DONE_Msk (0x1UL << SAADC_EVENTS_DONE_EVENTS_DONE_Pos) /*!< Bit mask of EVENTS_DONE field. */
+
+/* Register: SAADC_EVENTS_RESULTDONE */
+/* Description: A result is ready to get transferred to RAM. */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_RESULTDONE_EVENTS_RESULTDONE_Pos (0UL) /*!< Position of EVENTS_RESULTDONE field. */
+#define SAADC_EVENTS_RESULTDONE_EVENTS_RESULTDONE_Msk (0x1UL << SAADC_EVENTS_RESULTDONE_EVENTS_RESULTDONE_Pos) /*!< Bit mask of EVENTS_RESULTDONE field. */
+
+/* Register: SAADC_EVENTS_CALIBRATEDONE */
+/* Description: Calibration is complete */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_CALIBRATEDONE_EVENTS_CALIBRATEDONE_Pos (0UL) /*!< Position of EVENTS_CALIBRATEDONE field. */
+#define SAADC_EVENTS_CALIBRATEDONE_EVENTS_CALIBRATEDONE_Msk (0x1UL << SAADC_EVENTS_CALIBRATEDONE_EVENTS_CALIBRATEDONE_Pos) /*!< Bit mask of EVENTS_CALIBRATEDONE field. */
+
+/* Register: SAADC_EVENTS_STOPPED */
+/* Description: The ADC has stopped */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define SAADC_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << SAADC_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: SAADC_EVENTS_CH_LIMITH */
+/* Description: Description cluster[0]:  Last results is equal or above CH[0].LIMIT.HIGH */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_CH_LIMITH_LIMITH_Pos (0UL) /*!< Position of LIMITH field. */
+#define SAADC_EVENTS_CH_LIMITH_LIMITH_Msk (0x1UL << SAADC_EVENTS_CH_LIMITH_LIMITH_Pos) /*!< Bit mask of LIMITH field. */
+
+/* Register: SAADC_EVENTS_CH_LIMITL */
+/* Description: Description cluster[0]:  Last results is equal or below CH[0].LIMIT.LOW */
+
+/* Bit 0 :   */
+#define SAADC_EVENTS_CH_LIMITL_LIMITL_Pos (0UL) /*!< Position of LIMITL field. */
+#define SAADC_EVENTS_CH_LIMITL_LIMITL_Msk (0x1UL << SAADC_EVENTS_CH_LIMITL_LIMITL_Pos) /*!< Bit mask of LIMITL field. */
 
 /* Register: SAADC_INTEN */
 /* Description: Enable or disable interrupt */
@@ -10693,6 +12023,13 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: SPI */
 /* Description: Serial Peripheral Interface 0 */
 
+/* Register: SPI_EVENTS_READY */
+/* Description: TXD byte sent and RXD byte received */
+
+/* Bit 0 :   */
+#define SPI_EVENTS_READY_EVENTS_READY_Pos (0UL) /*!< Position of EVENTS_READY field. */
+#define SPI_EVENTS_READY_EVENTS_READY_Msk (0x1UL << SPI_EVENTS_READY_EVENTS_READY_Pos) /*!< Bit mask of EVENTS_READY field. */
+
 /* Register: SPI_INTENSET */
 /* Description: Enable interrupt */
 
@@ -10825,6 +12162,69 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: SPIM */
 /* Description: Serial Peripheral Interface Master with EasyDMA 0 */
+
+/* Register: SPIM_TASKS_START */
+/* Description: Start SPI transaction */
+
+/* Bit 0 :   */
+#define SPIM_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define SPIM_TASKS_START_TASKS_START_Msk (0x1UL << SPIM_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: SPIM_TASKS_STOP */
+/* Description: Stop SPI transaction */
+
+/* Bit 0 :   */
+#define SPIM_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define SPIM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << SPIM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: SPIM_TASKS_SUSPEND */
+/* Description: Suspend SPI transaction */
+
+/* Bit 0 :   */
+#define SPIM_TASKS_SUSPEND_TASKS_SUSPEND_Pos (0UL) /*!< Position of TASKS_SUSPEND field. */
+#define SPIM_TASKS_SUSPEND_TASKS_SUSPEND_Msk (0x1UL << SPIM_TASKS_SUSPEND_TASKS_SUSPEND_Pos) /*!< Bit mask of TASKS_SUSPEND field. */
+
+/* Register: SPIM_TASKS_RESUME */
+/* Description: Resume SPI transaction */
+
+/* Bit 0 :   */
+#define SPIM_TASKS_RESUME_TASKS_RESUME_Pos (0UL) /*!< Position of TASKS_RESUME field. */
+#define SPIM_TASKS_RESUME_TASKS_RESUME_Msk (0x1UL << SPIM_TASKS_RESUME_TASKS_RESUME_Pos) /*!< Bit mask of TASKS_RESUME field. */
+
+/* Register: SPIM_EVENTS_STOPPED */
+/* Description: SPI transaction has stopped */
+
+/* Bit 0 :   */
+#define SPIM_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define SPIM_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << SPIM_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: SPIM_EVENTS_ENDRX */
+/* Description: End of RXD buffer reached */
+
+/* Bit 0 :   */
+#define SPIM_EVENTS_ENDRX_EVENTS_ENDRX_Pos (0UL) /*!< Position of EVENTS_ENDRX field. */
+#define SPIM_EVENTS_ENDRX_EVENTS_ENDRX_Msk (0x1UL << SPIM_EVENTS_ENDRX_EVENTS_ENDRX_Pos) /*!< Bit mask of EVENTS_ENDRX field. */
+
+/* Register: SPIM_EVENTS_END */
+/* Description: End of RXD buffer and TXD buffer reached */
+
+/* Bit 0 :   */
+#define SPIM_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define SPIM_EVENTS_END_EVENTS_END_Msk (0x1UL << SPIM_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
+/* Register: SPIM_EVENTS_ENDTX */
+/* Description: End of TXD buffer reached */
+
+/* Bit 0 :   */
+#define SPIM_EVENTS_ENDTX_EVENTS_ENDTX_Pos (0UL) /*!< Position of EVENTS_ENDTX field. */
+#define SPIM_EVENTS_ENDTX_EVENTS_ENDTX_Msk (0x1UL << SPIM_EVENTS_ENDTX_EVENTS_ENDTX_Pos) /*!< Bit mask of EVENTS_ENDTX field. */
+
+/* Register: SPIM_EVENTS_STARTED */
+/* Description: Transaction started */
+
+/* Bit 0 :   */
+#define SPIM_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field. */
+#define SPIM_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << SPIM_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED field. */
 
 /* Register: SPIM_SHORTS */
 /* Description: Shortcut register */
@@ -11158,6 +12558,41 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: SPIS */
 /* Description: SPI Slave 0 */
 
+/* Register: SPIS_TASKS_ACQUIRE */
+/* Description: Acquire SPI semaphore */
+
+/* Bit 0 :   */
+#define SPIS_TASKS_ACQUIRE_TASKS_ACQUIRE_Pos (0UL) /*!< Position of TASKS_ACQUIRE field. */
+#define SPIS_TASKS_ACQUIRE_TASKS_ACQUIRE_Msk (0x1UL << SPIS_TASKS_ACQUIRE_TASKS_ACQUIRE_Pos) /*!< Bit mask of TASKS_ACQUIRE field. */
+
+/* Register: SPIS_TASKS_RELEASE */
+/* Description: Release SPI semaphore, enabling the SPI slave to acquire it */
+
+/* Bit 0 :   */
+#define SPIS_TASKS_RELEASE_TASKS_RELEASE_Pos (0UL) /*!< Position of TASKS_RELEASE field. */
+#define SPIS_TASKS_RELEASE_TASKS_RELEASE_Msk (0x1UL << SPIS_TASKS_RELEASE_TASKS_RELEASE_Pos) /*!< Bit mask of TASKS_RELEASE field. */
+
+/* Register: SPIS_EVENTS_END */
+/* Description: Granted transaction completed */
+
+/* Bit 0 :   */
+#define SPIS_EVENTS_END_EVENTS_END_Pos (0UL) /*!< Position of EVENTS_END field. */
+#define SPIS_EVENTS_END_EVENTS_END_Msk (0x1UL << SPIS_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field. */
+
+/* Register: SPIS_EVENTS_ENDRX */
+/* Description: End of RXD buffer reached */
+
+/* Bit 0 :   */
+#define SPIS_EVENTS_ENDRX_EVENTS_ENDRX_Pos (0UL) /*!< Position of EVENTS_ENDRX field. */
+#define SPIS_EVENTS_ENDRX_EVENTS_ENDRX_Msk (0x1UL << SPIS_EVENTS_ENDRX_EVENTS_ENDRX_Pos) /*!< Bit mask of EVENTS_ENDRX field. */
+
+/* Register: SPIS_EVENTS_ACQUIRED */
+/* Description: Semaphore acquired */
+
+/* Bit 0 :   */
+#define SPIS_EVENTS_ACQUIRED_EVENTS_ACQUIRED_Pos (0UL) /*!< Position of EVENTS_ACQUIRED field. */
+#define SPIS_EVENTS_ACQUIRED_EVENTS_ACQUIRED_Msk (0x1UL << SPIS_EVENTS_ACQUIRED_EVENTS_ACQUIRED_Pos) /*!< Bit mask of EVENTS_ACQUIRED field. */
+
 /* Register: SPIS_SHORTS */
 /* Description: Shortcut register */
 
@@ -11401,6 +12836,27 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: TEMP */
 /* Description: Temperature Sensor */
 
+/* Register: TEMP_TASKS_START */
+/* Description: Start temperature measurement */
+
+/* Bit 0 :   */
+#define TEMP_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define TEMP_TASKS_START_TASKS_START_Msk (0x1UL << TEMP_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: TEMP_TASKS_STOP */
+/* Description: Stop temperature measurement */
+
+/* Bit 0 :   */
+#define TEMP_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define TEMP_TASKS_STOP_TASKS_STOP_Msk (0x1UL << TEMP_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: TEMP_EVENTS_DATARDY */
+/* Description: Temperature measurement complete, data ready */
+
+/* Bit 0 :   */
+#define TEMP_EVENTS_DATARDY_EVENTS_DATARDY_Pos (0UL) /*!< Position of EVENTS_DATARDY field. */
+#define TEMP_EVENTS_DATARDY_EVENTS_DATARDY_Msk (0x1UL << TEMP_EVENTS_DATARDY_EVENTS_DATARDY_Pos) /*!< Bit mask of EVENTS_DATARDY field. */
+
 /* Register: TEMP_INTENSET */
 /* Description: Enable interrupt */
 
@@ -11550,6 +13006,55 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: TIMER */
 /* Description: Timer/Counter 0 */
+
+/* Register: TIMER_TASKS_START */
+/* Description: Start Timer */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define TIMER_TASKS_START_TASKS_START_Msk (0x1UL << TIMER_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: TIMER_TASKS_STOP */
+/* Description: Stop Timer */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define TIMER_TASKS_STOP_TASKS_STOP_Msk (0x1UL << TIMER_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: TIMER_TASKS_COUNT */
+/* Description: Increment Timer (Counter mode only) */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_COUNT_TASKS_COUNT_Pos (0UL) /*!< Position of TASKS_COUNT field. */
+#define TIMER_TASKS_COUNT_TASKS_COUNT_Msk (0x1UL << TIMER_TASKS_COUNT_TASKS_COUNT_Pos) /*!< Bit mask of TASKS_COUNT field. */
+
+/* Register: TIMER_TASKS_CLEAR */
+/* Description: Clear time */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_CLEAR_TASKS_CLEAR_Pos (0UL) /*!< Position of TASKS_CLEAR field. */
+#define TIMER_TASKS_CLEAR_TASKS_CLEAR_Msk (0x1UL << TIMER_TASKS_CLEAR_TASKS_CLEAR_Pos) /*!< Bit mask of TASKS_CLEAR field. */
+
+/* Register: TIMER_TASKS_SHUTDOWN */
+/* Description: Deprecated register -  Shut down timer */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Pos (0UL) /*!< Position of TASKS_SHUTDOWN field. */
+#define TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Msk (0x1UL << TIMER_TASKS_SHUTDOWN_TASKS_SHUTDOWN_Pos) /*!< Bit mask of TASKS_SHUTDOWN field. */
+
+/* Register: TIMER_TASKS_CAPTURE */
+/* Description: Description collection[0]:  Capture Timer value to CC[0] register */
+
+/* Bit 0 :   */
+#define TIMER_TASKS_CAPTURE_TASKS_CAPTURE_Pos (0UL) /*!< Position of TASKS_CAPTURE field. */
+#define TIMER_TASKS_CAPTURE_TASKS_CAPTURE_Msk (0x1UL << TIMER_TASKS_CAPTURE_TASKS_CAPTURE_Pos) /*!< Bit mask of TASKS_CAPTURE field. */
+
+/* Register: TIMER_EVENTS_COMPARE */
+/* Description: Description collection[0]:  Compare event on CC[0] match */
+
+/* Bit 0 :   */
+#define TIMER_EVENTS_COMPARE_EVENTS_COMPARE_Pos (0UL) /*!< Position of EVENTS_COMPARE field. */
+#define TIMER_EVENTS_COMPARE_EVENTS_COMPARE_Msk (0x1UL << TIMER_EVENTS_COMPARE_EVENTS_COMPARE_Pos) /*!< Bit mask of EVENTS_COMPARE field. */
 
 /* Register: TIMER_SHORTS */
 /* Description: Shortcut register */
@@ -11755,6 +13260,83 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: TWI */
 /* Description: I2C compatible Two-Wire Interface 0 */
 
+/* Register: TWI_TASKS_STARTRX */
+/* Description: Start TWI receive sequence */
+
+/* Bit 0 :   */
+#define TWI_TASKS_STARTRX_TASKS_STARTRX_Pos (0UL) /*!< Position of TASKS_STARTRX field. */
+#define TWI_TASKS_STARTRX_TASKS_STARTRX_Msk (0x1UL << TWI_TASKS_STARTRX_TASKS_STARTRX_Pos) /*!< Bit mask of TASKS_STARTRX field. */
+
+/* Register: TWI_TASKS_STARTTX */
+/* Description: Start TWI transmit sequence */
+
+/* Bit 0 :   */
+#define TWI_TASKS_STARTTX_TASKS_STARTTX_Pos (0UL) /*!< Position of TASKS_STARTTX field. */
+#define TWI_TASKS_STARTTX_TASKS_STARTTX_Msk (0x1UL << TWI_TASKS_STARTTX_TASKS_STARTTX_Pos) /*!< Bit mask of TASKS_STARTTX field. */
+
+/* Register: TWI_TASKS_STOP */
+/* Description: Stop TWI transaction */
+
+/* Bit 0 :   */
+#define TWI_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define TWI_TASKS_STOP_TASKS_STOP_Msk (0x1UL << TWI_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: TWI_TASKS_SUSPEND */
+/* Description: Suspend TWI transaction */
+
+/* Bit 0 :   */
+#define TWI_TASKS_SUSPEND_TASKS_SUSPEND_Pos (0UL) /*!< Position of TASKS_SUSPEND field. */
+#define TWI_TASKS_SUSPEND_TASKS_SUSPEND_Msk (0x1UL << TWI_TASKS_SUSPEND_TASKS_SUSPEND_Pos) /*!< Bit mask of TASKS_SUSPEND field. */
+
+/* Register: TWI_TASKS_RESUME */
+/* Description: Resume TWI transaction */
+
+/* Bit 0 :   */
+#define TWI_TASKS_RESUME_TASKS_RESUME_Pos (0UL) /*!< Position of TASKS_RESUME field. */
+#define TWI_TASKS_RESUME_TASKS_RESUME_Msk (0x1UL << TWI_TASKS_RESUME_TASKS_RESUME_Pos) /*!< Bit mask of TASKS_RESUME field. */
+
+/* Register: TWI_EVENTS_STOPPED */
+/* Description: TWI stopped */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define TWI_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << TWI_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: TWI_EVENTS_RXDREADY */
+/* Description: TWI RXD byte received */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_RXDREADY_EVENTS_RXDREADY_Pos (0UL) /*!< Position of EVENTS_RXDREADY field. */
+#define TWI_EVENTS_RXDREADY_EVENTS_RXDREADY_Msk (0x1UL << TWI_EVENTS_RXDREADY_EVENTS_RXDREADY_Pos) /*!< Bit mask of EVENTS_RXDREADY field. */
+
+/* Register: TWI_EVENTS_TXDSENT */
+/* Description: TWI TXD byte sent */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_TXDSENT_EVENTS_TXDSENT_Pos (0UL) /*!< Position of EVENTS_TXDSENT field. */
+#define TWI_EVENTS_TXDSENT_EVENTS_TXDSENT_Msk (0x1UL << TWI_EVENTS_TXDSENT_EVENTS_TXDSENT_Pos) /*!< Bit mask of EVENTS_TXDSENT field. */
+
+/* Register: TWI_EVENTS_ERROR */
+/* Description: TWI error */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define TWI_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << TWI_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: TWI_EVENTS_BB */
+/* Description: TWI byte boundary, generated before each byte that is sent or received */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_BB_EVENTS_BB_Pos (0UL) /*!< Position of EVENTS_BB field. */
+#define TWI_EVENTS_BB_EVENTS_BB_Msk (0x1UL << TWI_EVENTS_BB_EVENTS_BB_Pos) /*!< Bit mask of EVENTS_BB field. */
+
+/* Register: TWI_EVENTS_SUSPENDED */
+/* Description: TWI entered the suspended state */
+
+/* Bit 0 :   */
+#define TWI_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Pos (0UL) /*!< Position of EVENTS_SUSPENDED field. */
+#define TWI_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Msk (0x1UL << TWI_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Pos) /*!< Bit mask of EVENTS_SUSPENDED field. */
+
 /* Register: TWI_SHORTS */
 /* Description: Shortcut register */
 
@@ -11959,6 +13541,90 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: TWIM */
 /* Description: I2C compatible Two-Wire Master Interface with EasyDMA 0 */
 
+/* Register: TWIM_TASKS_STARTRX */
+/* Description: Start TWI receive sequence */
+
+/* Bit 0 :   */
+#define TWIM_TASKS_STARTRX_TASKS_STARTRX_Pos (0UL) /*!< Position of TASKS_STARTRX field. */
+#define TWIM_TASKS_STARTRX_TASKS_STARTRX_Msk (0x1UL << TWIM_TASKS_STARTRX_TASKS_STARTRX_Pos) /*!< Bit mask of TASKS_STARTRX field. */
+
+/* Register: TWIM_TASKS_STARTTX */
+/* Description: Start TWI transmit sequence */
+
+/* Bit 0 :   */
+#define TWIM_TASKS_STARTTX_TASKS_STARTTX_Pos (0UL) /*!< Position of TASKS_STARTTX field. */
+#define TWIM_TASKS_STARTTX_TASKS_STARTTX_Msk (0x1UL << TWIM_TASKS_STARTTX_TASKS_STARTTX_Pos) /*!< Bit mask of TASKS_STARTTX field. */
+
+/* Register: TWIM_TASKS_STOP */
+/* Description: Stop TWI transaction. Must be issued while the TWI master is not suspended. */
+
+/* Bit 0 :   */
+#define TWIM_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define TWIM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << TWIM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: TWIM_TASKS_SUSPEND */
+/* Description: Suspend TWI transaction */
+
+/* Bit 0 :   */
+#define TWIM_TASKS_SUSPEND_TASKS_SUSPEND_Pos (0UL) /*!< Position of TASKS_SUSPEND field. */
+#define TWIM_TASKS_SUSPEND_TASKS_SUSPEND_Msk (0x1UL << TWIM_TASKS_SUSPEND_TASKS_SUSPEND_Pos) /*!< Bit mask of TASKS_SUSPEND field. */
+
+/* Register: TWIM_TASKS_RESUME */
+/* Description: Resume TWI transaction */
+
+/* Bit 0 :   */
+#define TWIM_TASKS_RESUME_TASKS_RESUME_Pos (0UL) /*!< Position of TASKS_RESUME field. */
+#define TWIM_TASKS_RESUME_TASKS_RESUME_Msk (0x1UL << TWIM_TASKS_RESUME_TASKS_RESUME_Pos) /*!< Bit mask of TASKS_RESUME field. */
+
+/* Register: TWIM_EVENTS_STOPPED */
+/* Description: TWI stopped */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define TWIM_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << TWIM_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: TWIM_EVENTS_ERROR */
+/* Description: TWI error */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define TWIM_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << TWIM_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: TWIM_EVENTS_SUSPENDED */
+/* Description: Last byte has been sent out after the SUSPEND task has been issued, TWI traffic is now suspended. */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Pos (0UL) /*!< Position of EVENTS_SUSPENDED field. */
+#define TWIM_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Msk (0x1UL << TWIM_EVENTS_SUSPENDED_EVENTS_SUSPENDED_Pos) /*!< Bit mask of EVENTS_SUSPENDED field. */
+
+/* Register: TWIM_EVENTS_RXSTARTED */
+/* Description: Receive sequence started */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos (0UL) /*!< Position of EVENTS_RXSTARTED field. */
+#define TWIM_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Msk (0x1UL << TWIM_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos) /*!< Bit mask of EVENTS_RXSTARTED field. */
+
+/* Register: TWIM_EVENTS_TXSTARTED */
+/* Description: Transmit sequence started */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos (0UL) /*!< Position of EVENTS_TXSTARTED field. */
+#define TWIM_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Msk (0x1UL << TWIM_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos) /*!< Bit mask of EVENTS_TXSTARTED field. */
+
+/* Register: TWIM_EVENTS_LASTRX */
+/* Description: Byte boundary, starting to receive the last byte */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_LASTRX_EVENTS_LASTRX_Pos (0UL) /*!< Position of EVENTS_LASTRX field. */
+#define TWIM_EVENTS_LASTRX_EVENTS_LASTRX_Msk (0x1UL << TWIM_EVENTS_LASTRX_EVENTS_LASTRX_Pos) /*!< Bit mask of EVENTS_LASTRX field. */
+
+/* Register: TWIM_EVENTS_LASTTX */
+/* Description: Byte boundary, starting to transmit the last byte */
+
+/* Bit 0 :   */
+#define TWIM_EVENTS_LASTTX_EVENTS_LASTTX_Pos (0UL) /*!< Position of EVENTS_LASTTX field. */
+#define TWIM_EVENTS_LASTTX_EVENTS_LASTTX_Msk (0x1UL << TWIM_EVENTS_LASTTX_EVENTS_LASTTX_Pos) /*!< Bit mask of EVENTS_LASTTX field. */
+
 /* Register: TWIM_SHORTS */
 /* Description: Shortcut register */
 
@@ -11967,6 +13633,12 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM_SHORTS_LASTRX_STOP_Msk (0x1UL << TWIM_SHORTS_LASTRX_STOP_Pos) /*!< Bit mask of LASTRX_STOP field. */
 #define TWIM_SHORTS_LASTRX_STOP_Disabled (0UL) /*!< Disable shortcut */
 #define TWIM_SHORTS_LASTRX_STOP_Enabled (1UL) /*!< Enable shortcut */
+
+/* Bit 11 : Shortcut between LASTRX event and SUSPEND task */
+#define TWIM_SHORTS_LASTRX_SUSPEND_Pos (11UL) /*!< Position of LASTRX_SUSPEND field. */
+#define TWIM_SHORTS_LASTRX_SUSPEND_Msk (0x1UL << TWIM_SHORTS_LASTRX_SUSPEND_Pos) /*!< Bit mask of LASTRX_SUSPEND field. */
+#define TWIM_SHORTS_LASTRX_SUSPEND_Disabled (0UL) /*!< Disable shortcut */
+#define TWIM_SHORTS_LASTRX_SUSPEND_Enabled (1UL) /*!< Enable shortcut */
 
 /* Bit 10 : Shortcut between LASTRX event and STARTTX task */
 #define TWIM_SHORTS_LASTRX_STARTTX_Pos (10UL) /*!< Position of LASTRX_STARTTX field. */
@@ -12286,6 +13958,83 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: TWIS */
 /* Description: I2C compatible Two-Wire Slave Interface with EasyDMA 0 */
 
+/* Register: TWIS_TASKS_STOP */
+/* Description: Stop TWI transaction */
+
+/* Bit 0 :   */
+#define TWIS_TASKS_STOP_TASKS_STOP_Pos (0UL) /*!< Position of TASKS_STOP field. */
+#define TWIS_TASKS_STOP_TASKS_STOP_Msk (0x1UL << TWIS_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field. */
+
+/* Register: TWIS_TASKS_SUSPEND */
+/* Description: Suspend TWI transaction */
+
+/* Bit 0 :   */
+#define TWIS_TASKS_SUSPEND_TASKS_SUSPEND_Pos (0UL) /*!< Position of TASKS_SUSPEND field. */
+#define TWIS_TASKS_SUSPEND_TASKS_SUSPEND_Msk (0x1UL << TWIS_TASKS_SUSPEND_TASKS_SUSPEND_Pos) /*!< Bit mask of TASKS_SUSPEND field. */
+
+/* Register: TWIS_TASKS_RESUME */
+/* Description: Resume TWI transaction */
+
+/* Bit 0 :   */
+#define TWIS_TASKS_RESUME_TASKS_RESUME_Pos (0UL) /*!< Position of TASKS_RESUME field. */
+#define TWIS_TASKS_RESUME_TASKS_RESUME_Msk (0x1UL << TWIS_TASKS_RESUME_TASKS_RESUME_Pos) /*!< Bit mask of TASKS_RESUME field. */
+
+/* Register: TWIS_TASKS_PREPARERX */
+/* Description: Prepare the TWI slave to respond to a write command */
+
+/* Bit 0 :   */
+#define TWIS_TASKS_PREPARERX_TASKS_PREPARERX_Pos (0UL) /*!< Position of TASKS_PREPARERX field. */
+#define TWIS_TASKS_PREPARERX_TASKS_PREPARERX_Msk (0x1UL << TWIS_TASKS_PREPARERX_TASKS_PREPARERX_Pos) /*!< Bit mask of TASKS_PREPARERX field. */
+
+/* Register: TWIS_TASKS_PREPARETX */
+/* Description: Prepare the TWI slave to respond to a read command */
+
+/* Bit 0 :   */
+#define TWIS_TASKS_PREPARETX_TASKS_PREPARETX_Pos (0UL) /*!< Position of TASKS_PREPARETX field. */
+#define TWIS_TASKS_PREPARETX_TASKS_PREPARETX_Msk (0x1UL << TWIS_TASKS_PREPARETX_TASKS_PREPARETX_Pos) /*!< Bit mask of TASKS_PREPARETX field. */
+
+/* Register: TWIS_EVENTS_STOPPED */
+/* Description: TWI stopped */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_STOPPED_EVENTS_STOPPED_Pos (0UL) /*!< Position of EVENTS_STOPPED field. */
+#define TWIS_EVENTS_STOPPED_EVENTS_STOPPED_Msk (0x1UL << TWIS_EVENTS_STOPPED_EVENTS_STOPPED_Pos) /*!< Bit mask of EVENTS_STOPPED field. */
+
+/* Register: TWIS_EVENTS_ERROR */
+/* Description: TWI error */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define TWIS_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << TWIS_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: TWIS_EVENTS_RXSTARTED */
+/* Description: Receive sequence started */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos (0UL) /*!< Position of EVENTS_RXSTARTED field. */
+#define TWIS_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Msk (0x1UL << TWIS_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos) /*!< Bit mask of EVENTS_RXSTARTED field. */
+
+/* Register: TWIS_EVENTS_TXSTARTED */
+/* Description: Transmit sequence started */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos (0UL) /*!< Position of EVENTS_TXSTARTED field. */
+#define TWIS_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Msk (0x1UL << TWIS_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos) /*!< Bit mask of EVENTS_TXSTARTED field. */
+
+/* Register: TWIS_EVENTS_WRITE */
+/* Description: Write command received */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_WRITE_EVENTS_WRITE_Pos (0UL) /*!< Position of EVENTS_WRITE field. */
+#define TWIS_EVENTS_WRITE_EVENTS_WRITE_Msk (0x1UL << TWIS_EVENTS_WRITE_EVENTS_WRITE_Pos) /*!< Bit mask of EVENTS_WRITE field. */
+
+/* Register: TWIS_EVENTS_READ */
+/* Description: Read command received */
+
+/* Bit 0 :   */
+#define TWIS_EVENTS_READ_EVENTS_READ_Pos (0UL) /*!< Position of EVENTS_READ field. */
+#define TWIS_EVENTS_READ_EVENTS_READ_Msk (0x1UL << TWIS_EVENTS_READ_EVENTS_READ_Pos) /*!< Bit mask of EVENTS_READ field. */
+
 /* Register: TWIS_SHORTS */
 /* Description: Shortcut register */
 
@@ -12576,6 +14325,83 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: UART */
 /* Description: Universal Asynchronous Receiver/Transmitter */
 
+/* Register: UART_TASKS_STARTRX */
+/* Description: Start UART receiver */
+
+/* Bit 0 :   */
+#define UART_TASKS_STARTRX_TASKS_STARTRX_Pos (0UL) /*!< Position of TASKS_STARTRX field. */
+#define UART_TASKS_STARTRX_TASKS_STARTRX_Msk (0x1UL << UART_TASKS_STARTRX_TASKS_STARTRX_Pos) /*!< Bit mask of TASKS_STARTRX field. */
+
+/* Register: UART_TASKS_STOPRX */
+/* Description: Stop UART receiver */
+
+/* Bit 0 :   */
+#define UART_TASKS_STOPRX_TASKS_STOPRX_Pos (0UL) /*!< Position of TASKS_STOPRX field. */
+#define UART_TASKS_STOPRX_TASKS_STOPRX_Msk (0x1UL << UART_TASKS_STOPRX_TASKS_STOPRX_Pos) /*!< Bit mask of TASKS_STOPRX field. */
+
+/* Register: UART_TASKS_STARTTX */
+/* Description: Start UART transmitter */
+
+/* Bit 0 :   */
+#define UART_TASKS_STARTTX_TASKS_STARTTX_Pos (0UL) /*!< Position of TASKS_STARTTX field. */
+#define UART_TASKS_STARTTX_TASKS_STARTTX_Msk (0x1UL << UART_TASKS_STARTTX_TASKS_STARTTX_Pos) /*!< Bit mask of TASKS_STARTTX field. */
+
+/* Register: UART_TASKS_STOPTX */
+/* Description: Stop UART transmitter */
+
+/* Bit 0 :   */
+#define UART_TASKS_STOPTX_TASKS_STOPTX_Pos (0UL) /*!< Position of TASKS_STOPTX field. */
+#define UART_TASKS_STOPTX_TASKS_STOPTX_Msk (0x1UL << UART_TASKS_STOPTX_TASKS_STOPTX_Pos) /*!< Bit mask of TASKS_STOPTX field. */
+
+/* Register: UART_TASKS_SUSPEND */
+/* Description: Suspend UART */
+
+/* Bit 0 :   */
+#define UART_TASKS_SUSPEND_TASKS_SUSPEND_Pos (0UL) /*!< Position of TASKS_SUSPEND field. */
+#define UART_TASKS_SUSPEND_TASKS_SUSPEND_Msk (0x1UL << UART_TASKS_SUSPEND_TASKS_SUSPEND_Pos) /*!< Bit mask of TASKS_SUSPEND field. */
+
+/* Register: UART_EVENTS_CTS */
+/* Description: CTS is activated (set low). Clear To Send. */
+
+/* Bit 0 :   */
+#define UART_EVENTS_CTS_EVENTS_CTS_Pos (0UL) /*!< Position of EVENTS_CTS field. */
+#define UART_EVENTS_CTS_EVENTS_CTS_Msk (0x1UL << UART_EVENTS_CTS_EVENTS_CTS_Pos) /*!< Bit mask of EVENTS_CTS field. */
+
+/* Register: UART_EVENTS_NCTS */
+/* Description: CTS is deactivated (set high). Not Clear To Send. */
+
+/* Bit 0 :   */
+#define UART_EVENTS_NCTS_EVENTS_NCTS_Pos (0UL) /*!< Position of EVENTS_NCTS field. */
+#define UART_EVENTS_NCTS_EVENTS_NCTS_Msk (0x1UL << UART_EVENTS_NCTS_EVENTS_NCTS_Pos) /*!< Bit mask of EVENTS_NCTS field. */
+
+/* Register: UART_EVENTS_RXDRDY */
+/* Description: Data received in RXD */
+
+/* Bit 0 :   */
+#define UART_EVENTS_RXDRDY_EVENTS_RXDRDY_Pos (0UL) /*!< Position of EVENTS_RXDRDY field. */
+#define UART_EVENTS_RXDRDY_EVENTS_RXDRDY_Msk (0x1UL << UART_EVENTS_RXDRDY_EVENTS_RXDRDY_Pos) /*!< Bit mask of EVENTS_RXDRDY field. */
+
+/* Register: UART_EVENTS_TXDRDY */
+/* Description: Data sent from TXD */
+
+/* Bit 0 :   */
+#define UART_EVENTS_TXDRDY_EVENTS_TXDRDY_Pos (0UL) /*!< Position of EVENTS_TXDRDY field. */
+#define UART_EVENTS_TXDRDY_EVENTS_TXDRDY_Msk (0x1UL << UART_EVENTS_TXDRDY_EVENTS_TXDRDY_Pos) /*!< Bit mask of EVENTS_TXDRDY field. */
+
+/* Register: UART_EVENTS_ERROR */
+/* Description: Error detected */
+
+/* Bit 0 :   */
+#define UART_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define UART_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << UART_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: UART_EVENTS_RXTO */
+/* Description: Receiver timeout */
+
+/* Bit 0 :   */
+#define UART_EVENTS_RXTO_EVENTS_RXTO_Pos (0UL) /*!< Position of EVENTS_RXTO field. */
+#define UART_EVENTS_RXTO_EVENTS_RXTO_Msk (0x1UL << UART_EVENTS_RXTO_EVENTS_RXTO_Pos) /*!< Bit mask of EVENTS_RXTO field. */
+
 /* Register: UART_SHORTS */
 /* Description: Shortcut register */
 
@@ -12842,6 +14668,118 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: UARTE */
 /* Description: UART with EasyDMA 0 */
+
+/* Register: UARTE_TASKS_STARTRX */
+/* Description: Start UART receiver */
+
+/* Bit 0 :   */
+#define UARTE_TASKS_STARTRX_TASKS_STARTRX_Pos (0UL) /*!< Position of TASKS_STARTRX field. */
+#define UARTE_TASKS_STARTRX_TASKS_STARTRX_Msk (0x1UL << UARTE_TASKS_STARTRX_TASKS_STARTRX_Pos) /*!< Bit mask of TASKS_STARTRX field. */
+
+/* Register: UARTE_TASKS_STOPRX */
+/* Description: Stop UART receiver */
+
+/* Bit 0 :   */
+#define UARTE_TASKS_STOPRX_TASKS_STOPRX_Pos (0UL) /*!< Position of TASKS_STOPRX field. */
+#define UARTE_TASKS_STOPRX_TASKS_STOPRX_Msk (0x1UL << UARTE_TASKS_STOPRX_TASKS_STOPRX_Pos) /*!< Bit mask of TASKS_STOPRX field. */
+
+/* Register: UARTE_TASKS_STARTTX */
+/* Description: Start UART transmitter */
+
+/* Bit 0 :   */
+#define UARTE_TASKS_STARTTX_TASKS_STARTTX_Pos (0UL) /*!< Position of TASKS_STARTTX field. */
+#define UARTE_TASKS_STARTTX_TASKS_STARTTX_Msk (0x1UL << UARTE_TASKS_STARTTX_TASKS_STARTTX_Pos) /*!< Bit mask of TASKS_STARTTX field. */
+
+/* Register: UARTE_TASKS_STOPTX */
+/* Description: Stop UART transmitter */
+
+/* Bit 0 :   */
+#define UARTE_TASKS_STOPTX_TASKS_STOPTX_Pos (0UL) /*!< Position of TASKS_STOPTX field. */
+#define UARTE_TASKS_STOPTX_TASKS_STOPTX_Msk (0x1UL << UARTE_TASKS_STOPTX_TASKS_STOPTX_Pos) /*!< Bit mask of TASKS_STOPTX field. */
+
+/* Register: UARTE_TASKS_FLUSHRX */
+/* Description: Flush RX FIFO into RX buffer */
+
+/* Bit 0 :   */
+#define UARTE_TASKS_FLUSHRX_TASKS_FLUSHRX_Pos (0UL) /*!< Position of TASKS_FLUSHRX field. */
+#define UARTE_TASKS_FLUSHRX_TASKS_FLUSHRX_Msk (0x1UL << UARTE_TASKS_FLUSHRX_TASKS_FLUSHRX_Pos) /*!< Bit mask of TASKS_FLUSHRX field. */
+
+/* Register: UARTE_EVENTS_CTS */
+/* Description: CTS is activated (set low). Clear To Send. */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_CTS_EVENTS_CTS_Pos (0UL) /*!< Position of EVENTS_CTS field. */
+#define UARTE_EVENTS_CTS_EVENTS_CTS_Msk (0x1UL << UARTE_EVENTS_CTS_EVENTS_CTS_Pos) /*!< Bit mask of EVENTS_CTS field. */
+
+/* Register: UARTE_EVENTS_NCTS */
+/* Description: CTS is deactivated (set high). Not Clear To Send. */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_NCTS_EVENTS_NCTS_Pos (0UL) /*!< Position of EVENTS_NCTS field. */
+#define UARTE_EVENTS_NCTS_EVENTS_NCTS_Msk (0x1UL << UARTE_EVENTS_NCTS_EVENTS_NCTS_Pos) /*!< Bit mask of EVENTS_NCTS field. */
+
+/* Register: UARTE_EVENTS_RXDRDY */
+/* Description: Data received in RXD (but potentially not yet transferred to Data RAM) */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_RXDRDY_EVENTS_RXDRDY_Pos (0UL) /*!< Position of EVENTS_RXDRDY field. */
+#define UARTE_EVENTS_RXDRDY_EVENTS_RXDRDY_Msk (0x1UL << UARTE_EVENTS_RXDRDY_EVENTS_RXDRDY_Pos) /*!< Bit mask of EVENTS_RXDRDY field. */
+
+/* Register: UARTE_EVENTS_ENDRX */
+/* Description: Receive buffer is filled up */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_ENDRX_EVENTS_ENDRX_Pos (0UL) /*!< Position of EVENTS_ENDRX field. */
+#define UARTE_EVENTS_ENDRX_EVENTS_ENDRX_Msk (0x1UL << UARTE_EVENTS_ENDRX_EVENTS_ENDRX_Pos) /*!< Bit mask of EVENTS_ENDRX field. */
+
+/* Register: UARTE_EVENTS_TXDRDY */
+/* Description: Data sent from TXD */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_TXDRDY_EVENTS_TXDRDY_Pos (0UL) /*!< Position of EVENTS_TXDRDY field. */
+#define UARTE_EVENTS_TXDRDY_EVENTS_TXDRDY_Msk (0x1UL << UARTE_EVENTS_TXDRDY_EVENTS_TXDRDY_Pos) /*!< Bit mask of EVENTS_TXDRDY field. */
+
+/* Register: UARTE_EVENTS_ENDTX */
+/* Description: Last TX byte transmitted */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_ENDTX_EVENTS_ENDTX_Pos (0UL) /*!< Position of EVENTS_ENDTX field. */
+#define UARTE_EVENTS_ENDTX_EVENTS_ENDTX_Msk (0x1UL << UARTE_EVENTS_ENDTX_EVENTS_ENDTX_Pos) /*!< Bit mask of EVENTS_ENDTX field. */
+
+/* Register: UARTE_EVENTS_ERROR */
+/* Description: Error detected */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_ERROR_EVENTS_ERROR_Pos (0UL) /*!< Position of EVENTS_ERROR field. */
+#define UARTE_EVENTS_ERROR_EVENTS_ERROR_Msk (0x1UL << UARTE_EVENTS_ERROR_EVENTS_ERROR_Pos) /*!< Bit mask of EVENTS_ERROR field. */
+
+/* Register: UARTE_EVENTS_RXTO */
+/* Description: Receiver timeout */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_RXTO_EVENTS_RXTO_Pos (0UL) /*!< Position of EVENTS_RXTO field. */
+#define UARTE_EVENTS_RXTO_EVENTS_RXTO_Msk (0x1UL << UARTE_EVENTS_RXTO_EVENTS_RXTO_Pos) /*!< Bit mask of EVENTS_RXTO field. */
+
+/* Register: UARTE_EVENTS_RXSTARTED */
+/* Description: UART receiver has started */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos (0UL) /*!< Position of EVENTS_RXSTARTED field. */
+#define UARTE_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Msk (0x1UL << UARTE_EVENTS_RXSTARTED_EVENTS_RXSTARTED_Pos) /*!< Bit mask of EVENTS_RXSTARTED field. */
+
+/* Register: UARTE_EVENTS_TXSTARTED */
+/* Description: UART transmitter has started */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos (0UL) /*!< Position of EVENTS_TXSTARTED field. */
+#define UARTE_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Msk (0x1UL << UARTE_EVENTS_TXSTARTED_EVENTS_TXSTARTED_Pos) /*!< Bit mask of EVENTS_TXSTARTED field. */
+
+/* Register: UARTE_EVENTS_TXSTOPPED */
+/* Description: Transmitter stopped */
+
+/* Bit 0 :   */
+#define UARTE_EVENTS_TXSTOPPED_EVENTS_TXSTOPPED_Pos (0UL) /*!< Position of EVENTS_TXSTOPPED field. */
+#define UARTE_EVENTS_TXSTOPPED_EVENTS_TXSTOPPED_Msk (0x1UL << UARTE_EVENTS_TXSTOPPED_EVENTS_TXSTOPPED_Pos) /*!< Bit mask of EVENTS_TXSTOPPED field. */
 
 /* Register: UARTE_SHORTS */
 /* Description: Shortcut register */
@@ -13381,6 +15319,146 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: USBD */
 /* Description: Universal Serial Bus device */
 
+/* Register: USBD_TASKS_STARTEPIN */
+/* Description: Description collection[0]:  Captures the EPIN[0].PTR and EPIN[0].MAXCNT registers values, and enables endpoint IN 0 to respond to traffic from host */
+
+/* Bit 0 :   */
+#define USBD_TASKS_STARTEPIN_TASKS_STARTEPIN_Pos (0UL) /*!< Position of TASKS_STARTEPIN field. */
+#define USBD_TASKS_STARTEPIN_TASKS_STARTEPIN_Msk (0x1UL << USBD_TASKS_STARTEPIN_TASKS_STARTEPIN_Pos) /*!< Bit mask of TASKS_STARTEPIN field. */
+
+/* Register: USBD_TASKS_STARTISOIN */
+/* Description: Captures the ISOIN.PTR and ISOIN.MAXCNT registers values, and enables sending data on iso endpoint */
+
+/* Bit 0 :   */
+#define USBD_TASKS_STARTISOIN_TASKS_STARTISOIN_Pos (0UL) /*!< Position of TASKS_STARTISOIN field. */
+#define USBD_TASKS_STARTISOIN_TASKS_STARTISOIN_Msk (0x1UL << USBD_TASKS_STARTISOIN_TASKS_STARTISOIN_Pos) /*!< Bit mask of TASKS_STARTISOIN field. */
+
+/* Register: USBD_TASKS_STARTEPOUT */
+/* Description: Description collection[0]:  Captures the EPOUT[0].PTR and EPOUT[0].MAXCNT registers values, and enables endpoint 0 to respond to traffic from host */
+
+/* Bit 0 :   */
+#define USBD_TASKS_STARTEPOUT_TASKS_STARTEPOUT_Pos (0UL) /*!< Position of TASKS_STARTEPOUT field. */
+#define USBD_TASKS_STARTEPOUT_TASKS_STARTEPOUT_Msk (0x1UL << USBD_TASKS_STARTEPOUT_TASKS_STARTEPOUT_Pos) /*!< Bit mask of TASKS_STARTEPOUT field. */
+
+/* Register: USBD_TASKS_STARTISOOUT */
+/* Description: Captures the ISOOUT.PTR and ISOOUT.MAXCNT registers values, and enables receiving of data on iso endpoint */
+
+/* Bit 0 :   */
+#define USBD_TASKS_STARTISOOUT_TASKS_STARTISOOUT_Pos (0UL) /*!< Position of TASKS_STARTISOOUT field. */
+#define USBD_TASKS_STARTISOOUT_TASKS_STARTISOOUT_Msk (0x1UL << USBD_TASKS_STARTISOOUT_TASKS_STARTISOOUT_Pos) /*!< Bit mask of TASKS_STARTISOOUT field. */
+
+/* Register: USBD_TASKS_EP0RCVOUT */
+/* Description: Allows OUT data stage on control endpoint 0 */
+
+/* Bit 0 :   */
+#define USBD_TASKS_EP0RCVOUT_TASKS_EP0RCVOUT_Pos (0UL) /*!< Position of TASKS_EP0RCVOUT field. */
+#define USBD_TASKS_EP0RCVOUT_TASKS_EP0RCVOUT_Msk (0x1UL << USBD_TASKS_EP0RCVOUT_TASKS_EP0RCVOUT_Pos) /*!< Bit mask of TASKS_EP0RCVOUT field. */
+
+/* Register: USBD_TASKS_EP0STATUS */
+/* Description: Allows status stage on control endpoint 0 */
+
+/* Bit 0 :   */
+#define USBD_TASKS_EP0STATUS_TASKS_EP0STATUS_Pos (0UL) /*!< Position of TASKS_EP0STATUS field. */
+#define USBD_TASKS_EP0STATUS_TASKS_EP0STATUS_Msk (0x1UL << USBD_TASKS_EP0STATUS_TASKS_EP0STATUS_Pos) /*!< Bit mask of TASKS_EP0STATUS field. */
+
+/* Register: USBD_TASKS_EP0STALL */
+/* Description: STALLs data and status stage on control endpoint 0 */
+
+/* Bit 0 :   */
+#define USBD_TASKS_EP0STALL_TASKS_EP0STALL_Pos (0UL) /*!< Position of TASKS_EP0STALL field. */
+#define USBD_TASKS_EP0STALL_TASKS_EP0STALL_Msk (0x1UL << USBD_TASKS_EP0STALL_TASKS_EP0STALL_Pos) /*!< Bit mask of TASKS_EP0STALL field. */
+
+/* Register: USBD_TASKS_DPDMDRIVE */
+/* Description: Forces D+ and D-lines to the state defined in the DPDMVALUE register */
+
+/* Bit 0 :   */
+#define USBD_TASKS_DPDMDRIVE_TASKS_DPDMDRIVE_Pos (0UL) /*!< Position of TASKS_DPDMDRIVE field. */
+#define USBD_TASKS_DPDMDRIVE_TASKS_DPDMDRIVE_Msk (0x1UL << USBD_TASKS_DPDMDRIVE_TASKS_DPDMDRIVE_Pos) /*!< Bit mask of TASKS_DPDMDRIVE field. */
+
+/* Register: USBD_TASKS_DPDMNODRIVE */
+/* Description: Stops forcing D+ and D- lines to any state (USB engine takes control) */
+
+/* Bit 0 :   */
+#define USBD_TASKS_DPDMNODRIVE_TASKS_DPDMNODRIVE_Pos (0UL) /*!< Position of TASKS_DPDMNODRIVE field. */
+#define USBD_TASKS_DPDMNODRIVE_TASKS_DPDMNODRIVE_Msk (0x1UL << USBD_TASKS_DPDMNODRIVE_TASKS_DPDMNODRIVE_Pos) /*!< Bit mask of TASKS_DPDMNODRIVE field. */
+
+/* Register: USBD_EVENTS_USBRESET */
+/* Description: Signals that a USB reset condition has been detected on the USB lines */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_USBRESET_EVENTS_USBRESET_Pos (0UL) /*!< Position of EVENTS_USBRESET field. */
+#define USBD_EVENTS_USBRESET_EVENTS_USBRESET_Msk (0x1UL << USBD_EVENTS_USBRESET_EVENTS_USBRESET_Pos) /*!< Bit mask of EVENTS_USBRESET field. */
+
+/* Register: USBD_EVENTS_STARTED */
+/* Description: Confirms that the EPIN[n].PTR and EPIN[n].MAXCNT, or EPOUT[n].PTR and EPOUT[n].MAXCNT registers have been captured on all endpoints reported in the EPSTATUS register */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field. */
+#define USBD_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << USBD_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED field. */
+
+/* Register: USBD_EVENTS_ENDEPIN */
+/* Description: Description collection[0]:  The whole EPIN[0] buffer has been consumed. The RAM buffer can be accessed safely by software. */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_ENDEPIN_EVENTS_ENDEPIN_Pos (0UL) /*!< Position of EVENTS_ENDEPIN field. */
+#define USBD_EVENTS_ENDEPIN_EVENTS_ENDEPIN_Msk (0x1UL << USBD_EVENTS_ENDEPIN_EVENTS_ENDEPIN_Pos) /*!< Bit mask of EVENTS_ENDEPIN field. */
+
+/* Register: USBD_EVENTS_EP0DATADONE */
+/* Description: An acknowledged data transfer has taken place on the control endpoint */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_EP0DATADONE_EVENTS_EP0DATADONE_Pos (0UL) /*!< Position of EVENTS_EP0DATADONE field. */
+#define USBD_EVENTS_EP0DATADONE_EVENTS_EP0DATADONE_Msk (0x1UL << USBD_EVENTS_EP0DATADONE_EVENTS_EP0DATADONE_Pos) /*!< Bit mask of EVENTS_EP0DATADONE field. */
+
+/* Register: USBD_EVENTS_ENDISOIN */
+/* Description: The whole ISOIN buffer has been consumed. The RAM buffer can be accessed safely by software. */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_ENDISOIN_EVENTS_ENDISOIN_Pos (0UL) /*!< Position of EVENTS_ENDISOIN field. */
+#define USBD_EVENTS_ENDISOIN_EVENTS_ENDISOIN_Msk (0x1UL << USBD_EVENTS_ENDISOIN_EVENTS_ENDISOIN_Pos) /*!< Bit mask of EVENTS_ENDISOIN field. */
+
+/* Register: USBD_EVENTS_ENDEPOUT */
+/* Description: Description collection[0]:  The whole EPOUT[0] buffer has been consumed. The RAM buffer can be accessed safely by software. */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_ENDEPOUT_EVENTS_ENDEPOUT_Pos (0UL) /*!< Position of EVENTS_ENDEPOUT field. */
+#define USBD_EVENTS_ENDEPOUT_EVENTS_ENDEPOUT_Msk (0x1UL << USBD_EVENTS_ENDEPOUT_EVENTS_ENDEPOUT_Pos) /*!< Bit mask of EVENTS_ENDEPOUT field. */
+
+/* Register: USBD_EVENTS_ENDISOOUT */
+/* Description: The whole ISOOUT buffer has been consumed. The RAM buffer can be accessed safely by software. */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_ENDISOOUT_EVENTS_ENDISOOUT_Pos (0UL) /*!< Position of EVENTS_ENDISOOUT field. */
+#define USBD_EVENTS_ENDISOOUT_EVENTS_ENDISOOUT_Msk (0x1UL << USBD_EVENTS_ENDISOOUT_EVENTS_ENDISOOUT_Pos) /*!< Bit mask of EVENTS_ENDISOOUT field. */
+
+/* Register: USBD_EVENTS_SOF */
+/* Description: Signals that a SOF (start of frame) condition has been detected on the USB lines */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_SOF_EVENTS_SOF_Pos (0UL) /*!< Position of EVENTS_SOF field. */
+#define USBD_EVENTS_SOF_EVENTS_SOF_Msk (0x1UL << USBD_EVENTS_SOF_EVENTS_SOF_Pos) /*!< Bit mask of EVENTS_SOF field. */
+
+/* Register: USBD_EVENTS_USBEVENT */
+/* Description: An event or an error not covered by specific events has occurred, check EVENTCAUSE register to find the cause */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_USBEVENT_EVENTS_USBEVENT_Pos (0UL) /*!< Position of EVENTS_USBEVENT field. */
+#define USBD_EVENTS_USBEVENT_EVENTS_USBEVENT_Msk (0x1UL << USBD_EVENTS_USBEVENT_EVENTS_USBEVENT_Pos) /*!< Bit mask of EVENTS_USBEVENT field. */
+
+/* Register: USBD_EVENTS_EP0SETUP */
+/* Description: A valid SETUP token has been received (and acknowledged) on the control endpoint */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_EP0SETUP_EVENTS_EP0SETUP_Pos (0UL) /*!< Position of EVENTS_EP0SETUP field. */
+#define USBD_EVENTS_EP0SETUP_EVENTS_EP0SETUP_Msk (0x1UL << USBD_EVENTS_EP0SETUP_EVENTS_EP0SETUP_Pos) /*!< Bit mask of EVENTS_EP0SETUP field. */
+
+/* Register: USBD_EVENTS_EPDATA */
+/* Description: A data transfer has occurred on a data endpoint, indicated by the EPDATASTATUS register */
+
+/* Bit 0 :   */
+#define USBD_EVENTS_EPDATA_EVENTS_EPDATA_Pos (0UL) /*!< Position of EVENTS_EPDATA field. */
+#define USBD_EVENTS_EPDATA_EVENTS_EPDATA_Msk (0x1UL << USBD_EVENTS_EPDATA_EVENTS_EPDATA_Pos) /*!< Bit mask of EVENTS_EPDATA field. */
+
 /* Register: USBD_SHORTS */
 /* Description: Shortcut register */
 
@@ -13416,12 +15494,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Register: USBD_INTEN */
 /* Description: Enable or disable interrupt */
-
-/* Bit 25 : Enable or disable interrupt for ACCESSFAULT event */
-#define USBD_INTEN_ACCESSFAULT_Pos (25UL) /*!< Position of ACCESSFAULT field. */
-#define USBD_INTEN_ACCESSFAULT_Msk (0x1UL << USBD_INTEN_ACCESSFAULT_Pos) /*!< Bit mask of ACCESSFAULT field. */
-#define USBD_INTEN_ACCESSFAULT_Disabled (0UL) /*!< Disable */
-#define USBD_INTEN_ACCESSFAULT_Enabled (1UL) /*!< Enable */
 
 /* Bit 24 : Enable or disable interrupt for EPDATA event */
 #define USBD_INTEN_EPDATA_Pos (24UL) /*!< Position of EPDATA field. */
@@ -13575,13 +15647,6 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Register: USBD_INTENSET */
 /* Description: Enable interrupt */
-
-/* Bit 25 : Write '1' to Enable interrupt for ACCESSFAULT event */
-#define USBD_INTENSET_ACCESSFAULT_Pos (25UL) /*!< Position of ACCESSFAULT field. */
-#define USBD_INTENSET_ACCESSFAULT_Msk (0x1UL << USBD_INTENSET_ACCESSFAULT_Pos) /*!< Bit mask of ACCESSFAULT field. */
-#define USBD_INTENSET_ACCESSFAULT_Disabled (0UL) /*!< Read: Disabled */
-#define USBD_INTENSET_ACCESSFAULT_Enabled (1UL) /*!< Read: Enabled */
-#define USBD_INTENSET_ACCESSFAULT_Set (1UL) /*!< Enable */
 
 /* Bit 24 : Write '1' to Enable interrupt for EPDATA event */
 #define USBD_INTENSET_EPDATA_Pos (24UL) /*!< Position of EPDATA field. */
@@ -13761,13 +15826,6 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Register: USBD_INTENCLR */
 /* Description: Disable interrupt */
 
-/* Bit 25 : Write '1' to Disable interrupt for ACCESSFAULT event */
-#define USBD_INTENCLR_ACCESSFAULT_Pos (25UL) /*!< Position of ACCESSFAULT field. */
-#define USBD_INTENCLR_ACCESSFAULT_Msk (0x1UL << USBD_INTENCLR_ACCESSFAULT_Pos) /*!< Bit mask of ACCESSFAULT field. */
-#define USBD_INTENCLR_ACCESSFAULT_Disabled (0UL) /*!< Read: Disabled */
-#define USBD_INTENCLR_ACCESSFAULT_Enabled (1UL) /*!< Read: Enabled */
-#define USBD_INTENCLR_ACCESSFAULT_Clear (1UL) /*!< Disable */
-
 /* Bit 24 : Write '1' to Disable interrupt for EPDATA event */
 #define USBD_INTENCLR_EPDATA_Pos (24UL) /*!< Position of EPDATA field. */
 #define USBD_INTENCLR_EPDATA_Msk (0x1UL << USBD_INTENCLR_EPDATA_Pos) /*!< Bit mask of EPDATA field. */
@@ -13946,11 +16004,17 @@ POSSIBILITY OF SUCH DAMAGE.
 /* Register: USBD_EVENTCAUSE */
 /* Description: Details on event that caused the USBEVENT event */
 
-/* Bit 11 : Wrapper has re-initialized SFRs to the proper values. MAC is ready for normal operation. Write '1' to clear. */
+/* Bit 11 : USB device is ready for normal operation. Write '1' to clear. */
 #define USBD_EVENTCAUSE_READY_Pos (11UL) /*!< Position of READY field. */
 #define USBD_EVENTCAUSE_READY_Msk (0x1UL << USBD_EVENTCAUSE_READY_Pos) /*!< Bit mask of READY field. */
 #define USBD_EVENTCAUSE_READY_NotDetected (0UL) /*!< USBEVENT was not issued due to USBD peripheral ready */
 #define USBD_EVENTCAUSE_READY_Ready (1UL) /*!< USBD peripheral is ready */
+
+/* Bit 10 : USB MAC has been woken up and operational. Write '1' to clear. */
+#define USBD_EVENTCAUSE_USBWUALLOWED_Pos (10UL) /*!< Position of USBWUALLOWED field. */
+#define USBD_EVENTCAUSE_USBWUALLOWED_Msk (0x1UL << USBD_EVENTCAUSE_USBWUALLOWED_Pos) /*!< Bit mask of USBWUALLOWED field. */
+#define USBD_EVENTCAUSE_USBWUALLOWED_NotAllowed (0UL) /*!< Wake up not allowed */
+#define USBD_EVENTCAUSE_USBWUALLOWED_Allowed (1UL) /*!< Wake up allowed */
 
 /* Bit 9 : Signals that a RESUME condition (K state or activity restart) has been detected on the USB lines. Write '1' to clear. */
 #define USBD_EVENTCAUSE_RESUME_Pos (9UL) /*!< Position of RESUME field. */
@@ -13969,21 +16033,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #define USBD_EVENTCAUSE_ISOOUTCRC_Msk (0x1UL << USBD_EVENTCAUSE_ISOOUTCRC_Pos) /*!< Bit mask of ISOOUTCRC field. */
 #define USBD_EVENTCAUSE_ISOOUTCRC_NotDetected (0UL) /*!< No error detected */
 #define USBD_EVENTCAUSE_ISOOUTCRC_Detected (1UL) /*!< Error detected */
-
-/* Register: USBD_BUSSTATE */
-/* Description: Provides the logic state of the D+ and D- lines */
-
-/* Bit 1 : State of the D+ line */
-#define USBD_BUSSTATE_DP_Pos (1UL) /*!< Position of DP field. */
-#define USBD_BUSSTATE_DP_Msk (0x1UL << USBD_BUSSTATE_DP_Pos) /*!< Bit mask of DP field. */
-#define USBD_BUSSTATE_DP_Low (0UL) /*!< Low */
-#define USBD_BUSSTATE_DP_High (1UL) /*!< High */
-
-/* Bit 0 : State of the D- line */
-#define USBD_BUSSTATE_DM_Pos (0UL) /*!< Position of DM field. */
-#define USBD_BUSSTATE_DM_Msk (0x1UL << USBD_BUSSTATE_DM_Pos) /*!< Bit mask of DM field. */
-#define USBD_BUSSTATE_DM_Low (0UL) /*!< Low */
-#define USBD_BUSSTATE_DM_High (1UL) /*!< High */
 
 /* Register: USBD_HALTED_EPIN */
 /* Description: Description collection[0]:  IN endpoint halted status. Can be used as is as response to a GetStatus() request to endpoint. */
@@ -14614,6 +16663,20 @@ POSSIBILITY OF SUCH DAMAGE.
 
 /* Peripheral: WDT */
 /* Description: Watchdog Timer */
+
+/* Register: WDT_TASKS_START */
+/* Description: Start the watchdog */
+
+/* Bit 0 :   */
+#define WDT_TASKS_START_TASKS_START_Pos (0UL) /*!< Position of TASKS_START field. */
+#define WDT_TASKS_START_TASKS_START_Msk (0x1UL << WDT_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field. */
+
+/* Register: WDT_EVENTS_TIMEOUT */
+/* Description: Watchdog timeout */
+
+/* Bit 0 :   */
+#define WDT_EVENTS_TIMEOUT_EVENTS_TIMEOUT_Pos (0UL) /*!< Position of EVENTS_TIMEOUT field. */
+#define WDT_EVENTS_TIMEOUT_EVENTS_TIMEOUT_Msk (0x1UL << WDT_EVENTS_TIMEOUT_EVENTS_TIMEOUT_Pos) /*!< Bit mask of EVENTS_TIMEOUT field. */
 
 /* Register: WDT_INTENSET */
 /* Description: Enable interrupt */

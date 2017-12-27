@@ -6,7 +6,7 @@
  *           nrf52840 from Nordic Semiconductor.
  *
  * @version  V1
- * @date     3. October 2017
+ * @date     18. January 2018
  *
  * @note     Generated with SVDConv V2.81d 
  *           from CMSIS SVD File 'nrf52840.svd' Version 1,
@@ -173,7 +173,7 @@ typedef enum {
 
 typedef struct {
   __I  uint32_t  PART;                              /*!< Part code                                                             */
-  __I  uint32_t  VARIANT;                           /*!< Part variant (hardware version and production configuration)          */
+  __I  uint32_t  VARIANT;                           /*!< Build code (hardware version and production configuration)            */
   __I  uint32_t  PACKAGE;                           /*!< Package option                                                        */
   __I  uint32_t  RAM;                               /*!< RAM variant                                                           */
   __I  uint32_t  FLASH;                             /*!< Flash variant                                                         */
@@ -210,6 +210,17 @@ typedef struct {
   __I  uint32_t  TAGHEADER3;                        /*!< Default header for NFC tag. Software can read these values to
                                                          populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.            */
 } FICR_NFC_Type;
+
+typedef struct {
+  __I  uint32_t  BYTES;                             /*!< Amount of bytes for the required entropy bits                         */
+  __I  uint32_t  RCCUTOFF;                          /*!< Repetition counter cutoff                                             */
+  __I  uint32_t  APCUTOFF;                          /*!< Adaptive proportion cutoff                                            */
+  __I  uint32_t  STARTUP;                           /*!< Amount of bytes for the startup tests                                 */
+  __I  uint32_t  ROSC1;                             /*!< Sample count for ring oscillator 1                                    */
+  __I  uint32_t  ROSC2;                             /*!< Sample count for ring oscillator 2                                    */
+  __I  uint32_t  ROSC3;                             /*!< Sample count for ring oscillator 3                                    */
+  __I  uint32_t  ROSC4;                             /*!< Sample count for ring oscillator 4                                    */
+} FICR_TRNG90B_Type;
 
 typedef struct {
   __IO uint32_t  POWER;                             /*!< Description cluster[0]: RAM0 power control register                   */
@@ -377,11 +388,10 @@ typedef struct {
 } QDEC_PSEL_Type;
 
 typedef struct {
-  __IO uint32_t  PTR;                               /*!< Description cluster[0]: Beginning address in Data RAM of this
+  __IO uint32_t  PTR;                               /*!< Description cluster[0]: Beginning address in RAM of this sequence     */
+  __IO uint32_t  CNT;                               /*!< Description cluster[0]: Number of values (duty cycles) in this
                                                          sequence                                                              */
-  __IO uint32_t  CNT;                               /*!< Description cluster[0]: Amount of values (duty cycles) in this
-                                                         sequence                                                              */
-  __IO uint32_t  REFRESH;                           /*!< Description cluster[0]: Amount of additional PWM periods between
+  __IO uint32_t  REFRESH;                           /*!< Description cluster[0]: Number of additional PWM periods between
                                                          samples loaded into compare register                                  */
   __IO uint32_t  ENDDELAY;                          /*!< Description cluster[0]: Time added after the sequence                 */
   __I  uint32_t  RESERVED1[4];
@@ -584,10 +594,14 @@ typedef struct {                                    /*!< FICR Structure         
   __I  uint32_t  DEVICEADDR[2];                     /*!< Description collection[0]: Device address 0                           */
   __I  uint32_t  RESERVED3[21];
   FICR_INFO_Type INFO;                              /*!< Device info                                                           */
-  __I  uint32_t  RESERVED4[185];
+  __I  uint32_t  RESERVED4[140];
+  __I  uint32_t  PRODTEST[3];                       /*!< Description collection[0]: Production test signature 0                */
+  __I  uint32_t  RESERVED5[42];
   FICR_TEMP_Type TEMP;                              /*!< Registers storing factory TEMP module linearization coefficients      */
-  __I  uint32_t  RESERVED5[2];
+  __I  uint32_t  RESERVED6[2];
   FICR_NFC_Type NFC;                                /*!< Unspecified                                                           */
+  __I  uint32_t  RESERVED7[488];
+  FICR_TRNG90B_Type TRNG90B;                        /*!< NIST800-90B RNG calibration data                                      */
 } NRF_FICR_Type;
 
 
@@ -1277,9 +1291,11 @@ typedef struct {                                    /*!< NFCT Structure         
   __I  uint32_t  RESERVED9;
   NFCT_FRAMESTATUS_Type FRAMESTATUS;                /*!< Unspecified                                                           */
   __I  uint32_t  NFCTAGSTATE;                       /*!< NfcTag state register                                                 */
-  __I  uint32_t  RESERVED10[10];
+  __I  uint32_t  RESERVED10[3];
+  __I  uint32_t  SLEEPSTATE;                        /*!< Sleep state during automatic collision resolution                     */
+  __I  uint32_t  RESERVED11[6];
   __I  uint32_t  FIELDPRESENT;                      /*!< Indicates the presence or not of a valid field                        */
-  __I  uint32_t  RESERVED11[49];
+  __I  uint32_t  RESERVED12[49];
   __IO uint32_t  FRAMEDELAYMIN;                     /*!< Minimum frame delay                                                   */
   __IO uint32_t  FRAMEDELAYMAX;                     /*!< Maximum frame delay                                                   */
   __IO uint32_t  FRAMEDELAYMODE;                    /*!< Configuration register for the Frame Delay Timer                      */
@@ -1288,7 +1304,7 @@ typedef struct {                                    /*!< NFCT Structure         
                                                          each                                                                  */
   NFCT_TXD_Type TXD;                                /*!< Unspecified                                                           */
   NFCT_RXD_Type RXD;                                /*!< Unspecified                                                           */
-  __I  uint32_t  RESERVED12[26];
+  __I  uint32_t  RESERVED13[26];
   __IO uint32_t  NFCID1_LAST;                       /*!< Last NFCID1 part (4, 7 or 10 bytes ID)                                */
   __IO uint32_t  NFCID1_2ND_LAST;                   /*!< Second last NFCID1 part (7 or 10 bytes ID)                            */
   __IO uint32_t  NFCID1_3RD_LAST;                   /*!< Third last NFCID1 part (10 bytes ID)                                  */
@@ -1803,7 +1819,7 @@ typedef struct {                                    /*!< EGU Structure          
 
 
 /**
-  * @brief Pulse Width Modulation Unit 0 (PWM)
+  * @brief Pulse width modulation unit 0 (PWM)
   */
 
 typedef struct {                                    /*!< PWM Structure                                                         */
@@ -1813,10 +1829,10 @@ typedef struct {                                    /*!< PWM Structure          
   __O  uint32_t  TASKS_SEQSTART[2];                 /*!< Description collection[0]: Loads the first PWM value on all
                                                          enabled channels from sequence 0, and starts playing that sequence
                                                           at the rate defined in SEQ[0]REFRESH and/or DECODER.MODE. Causes
-                                                          PWM generation to start it was not running.                          */
+                                                          PWM generation to start if not running.                              */
   __O  uint32_t  TASKS_NEXTSTEP;                    /*!< Steps by one value in the current sequence on all enabled channels
                                                          if DECODER.MODE=NextStep. Does not cause PWM generation to start
-                                                          it was not running.                                                  */
+                                                          if not running.                                                      */
   __I  uint32_t  RESERVED1[60];
   __IO uint32_t  EVENTS_STOPPED;                    /*!< Response to STOP task, emitted when PWM pulses are no longer
                                                          generated                                                             */
@@ -1839,7 +1855,7 @@ typedef struct {                                    /*!< PWM Structure          
   __IO uint32_t  COUNTERTOP;                        /*!< Value up to which the pulse generator counter counts                  */
   __IO uint32_t  PRESCALER;                         /*!< Configuration for PWM_CLK                                             */
   __IO uint32_t  DECODER;                           /*!< Configuration of the decoder                                          */
-  __IO uint32_t  LOOP;                              /*!< Amount of playback of a loop                                          */
+  __IO uint32_t  LOOP;                              /*!< Number of playbacks of a loop                                         */
   __I  uint32_t  RESERVED5[2];
   PWM_SEQ_Type SEQ[2];                              /*!< Unspecified                                                           */
   PWM_PSEL_Type PSEL;                               /*!< Unspecified                                                           */
@@ -1910,7 +1926,9 @@ typedef struct {                                    /*!< NVMC Structure         
   __IO uint32_t  ERASEPCR0;                         /*!< Deprecated register - Register for erasing a page in code area.
                                                          Equivalent to ERASEPAGE.                                              */
   __IO uint32_t  ERASEUICR;                         /*!< Register for erasing user information configuration registers         */
-  __I  uint32_t  RESERVED3[10];
+  __IO uint32_t  ERASEPAGEPARTIAL;                  /*!< Register for partial erase of a page in code area                     */
+  __IO uint32_t  ERASEPAGEPARTIALCFG;               /*!< Register for partial erase configuration                              */
+  __I  uint32_t  RESERVED3[8];
   __IO uint32_t  ICACHECNF;                         /*!< I-code cache configuration register.                                  */
   __I  uint32_t  RESERVED4;
   __IO uint32_t  IHIT;                              /*!< I-code cache hit counter.                                             */
@@ -2060,16 +2078,16 @@ typedef struct {                                    /*!< FPU Structure          
 
 typedef struct {                                    /*!< USBD Structure                                                        */
   __I  uint32_t  RESERVED0;
-  __O  uint32_t  TASKS_STARTEPIN[8];                /*!< Description collection[0]: Captures the EPIN[0].PTR, EPIN[0].MAXCNT
-                                                         and EPIN[0].CONFIG registers values, and enables endpoint IN
-                                                          0 to respond to traffic from host                                    */
-  __O  uint32_t  TASKS_STARTISOIN;                  /*!< Captures the ISOIN.PTR, ISOIN.MAXCNT and ISOIN.CONFIG registers
-                                                         values, and enables sending data on iso endpoint                      */
-  __O  uint32_t  TASKS_STARTEPOUT[8];               /*!< Description collection[0]: Captures the EPOUT[0].PTR, EPOUT[0].MAXCNT
-                                                         and EPOUT[0].CONFIG registers values, and enables endpoint 0
-                                                          to respond to traffic from host                                      */
-  __O  uint32_t  TASKS_STARTISOOUT;                 /*!< Captures the ISOOUT.PTR, ISOOUT.MAXCNT and ISOOUT.CONFIG registers
-                                                         values, and enables receiving of data on iso endpoint                 */
+  __O  uint32_t  TASKS_STARTEPIN[8];                /*!< Description collection[0]: Captures the EPIN[0].PTR and EPIN[0].MAXCNT
+                                                         registers values, and enables endpoint IN 0 to respond to traffic
+                                                          from host                                                            */
+  __O  uint32_t  TASKS_STARTISOIN;                  /*!< Captures the ISOIN.PTR and ISOIN.MAXCNT registers values, and
+                                                         enables sending data on iso endpoint                                  */
+  __O  uint32_t  TASKS_STARTEPOUT[8];               /*!< Description collection[0]: Captures the EPOUT[0].PTR and EPOUT[0].MAXCNT
+                                                         registers values, and enables endpoint 0 to respond to traffic
+                                                          from host                                                            */
+  __O  uint32_t  TASKS_STARTISOOUT;                 /*!< Captures the ISOOUT.PTR and ISOOUT.MAXCNT registers values,
+                                                         and enables receiving of data on iso endpoint                         */
   __O  uint32_t  TASKS_EP0RCVOUT;                   /*!< Allows OUT data stage on control endpoint 0                           */
   __O  uint32_t  TASKS_EP0STATUS;                   /*!< Allows status stage on control endpoint 0                             */
   __O  uint32_t  TASKS_EP0STALL;                    /*!< STALLs data and status stage on control endpoint 0                    */
@@ -2080,10 +2098,9 @@ typedef struct {                                    /*!< USBD Structure         
   __I  uint32_t  RESERVED1[40];
   __IO uint32_t  EVENTS_USBRESET;                   /*!< Signals that a USB reset condition has been detected on the
                                                          USB lines                                                             */
-  __IO uint32_t  EVENTS_STARTED;                    /*!< Confirms that the EPIN[n].PTR, EPIN[n].MAXCNT, EPIN[n].CONFIG,
-                                                         or EPOUT[n].PTR, EPOUT[n].MAXCNT and EPOUT[n].CONFIG registers
-                                                          have been captured on all endpoints reported in the EPSTATUS
-                                                          register                                                             */
+  __IO uint32_t  EVENTS_STARTED;                    /*!< Confirms that the EPIN[n].PTR and EPIN[n].MAXCNT, or EPOUT[n].PTR
+                                                         and EPOUT[n].MAXCNT registers have been captured on all endpoints
+                                                          reported in the EPSTATUS register                                    */
   __IO uint32_t  EVENTS_ENDEPIN[8];                 /*!< Description collection[0]: The whole EPIN[0] buffer has been
                                                          consumed. The RAM buffer can be accessed safely by software.          */
   __IO uint32_t  EVENTS_EP0DATADONE;                /*!< An acknowledged data transfer has taken place on the control
@@ -2102,10 +2119,7 @@ typedef struct {                                    /*!< USBD Structure         
                                                          the control endpoint                                                  */
   __IO uint32_t  EVENTS_EPDATA;                     /*!< A data transfer has occurred on a data endpoint, indicated by
                                                          the EPDATASTATUS register                                             */
-  __IO uint32_t  EVENTS_ACCESSFAULT;                /*!< Access to an unavailable USB register has been attempted (software
-                                                         or EasyDMA). This event can get fired even when USBD is not
-                                                          ENABLEd.                                                             */
-  __I  uint32_t  RESERVED2[38];
+  __I  uint32_t  RESERVED2[39];
   __IO uint32_t  SHORTS;                            /*!< Shortcut register                                                     */
   __I  uint32_t  RESERVED3[63];
   __IO uint32_t  INTEN;                             /*!< Enable or disable interrupt                                           */
@@ -2113,8 +2127,7 @@ typedef struct {                                    /*!< USBD Structure         
   __IO uint32_t  INTENCLR;                          /*!< Disable interrupt                                                     */
   __I  uint32_t  RESERVED4[61];
   __IO uint32_t  EVENTCAUSE;                        /*!< Details on event that caused the USBEVENT event                       */
-  __I  uint32_t  BUSSTATE;                          /*!< Provides the logic state of the D+ and D- lines                       */
-  __I  uint32_t  RESERVED5[6];
+  __I  uint32_t  RESERVED5[7];
   USBD_HALTED_Type HALTED;                          /*!< Unspecified                                                           */
   __I  uint32_t  RESERVED6;
   __IO uint32_t  EPSTATUS;                          /*!< Provides information on which endpoint's EasyDMA registers have
