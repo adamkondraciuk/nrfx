@@ -38,7 +38,7 @@ static __INLINE void nrf_temp_init(void)
 static __INLINE int32_t nrf_temp_read(void)
 {
     /**@note Workaround for PAN_028 rev2.0A anomaly 28 - TEMP: Negative measured values are not represented correctly */
-    return ((NRF_TEMP->TEMP & MASK_SIGN) != 0) ? (NRF_TEMP->TEMP | MASK_SIGN_EXTENSION) : (NRF_TEMP->TEMP);
+    return ((NRF_TEMP->TEMP & MASK_SIGN) != 0) ? (int32_t)(NRF_TEMP->TEMP | MASK_SIGN_EXTENSION) : (NRF_TEMP->TEMP);
 }
 
 /** @} */

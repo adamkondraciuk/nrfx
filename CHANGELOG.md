@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [Unreleased]
+### Fixed
+- Fixed result value casting in TEMP HAL.
+
 ## [0.8.0] - 2017-12-20
 ### Added
 - Added XIP support in the QSPI driver.
