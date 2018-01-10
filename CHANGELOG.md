@@ -4,6 +4,7 @@ All notable changes to this project are documented in this file.
 ## [Unreleased]
 ### Fixed
 - Fixed result value casting in TEMP HAL.
+- Fixed types of conversion result and buffer size in ADC HAL and driver.
 
 ## [0.8.0] - 2017-12-20
 ### Added

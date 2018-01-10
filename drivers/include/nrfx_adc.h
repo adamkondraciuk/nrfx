@@ -98,7 +98,7 @@ struct nrfx_adc_channel_s
         nrfx_adc_channel_config_t config; ///< Channel configuration.
         uint32_t data;                    ///< Raw value.
     } config;
-    nrfx_adc_channel_t      * p_next;     ///< Pointer to the next enabled channel (for internal use).
+    nrfx_adc_channel_t * p_next;          ///< Pointer to the next enabled channel (for internal use).
 };
 
 /**

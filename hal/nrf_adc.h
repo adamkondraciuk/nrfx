@@ -97,7 +97,7 @@ typedef struct
 } nrf_adc_config_t;
 
 /**@brief Analog-to-digital value type. */
-typedef int16_t nrf_adc_value_t;
+typedef uint16_t nrf_adc_value_t;
 
 /** Default ADC configuration. */
 #define NRF_ADC_CONFIG_DEFAULT { NRF_ADC_CONFIG_RES_10BIT,               \
@@ -113,7 +113,7 @@ typedef int16_t nrf_adc_value_t;
  *
  * @param[in] config Configuration parameters.
  */
-void nrf_adc_configure(nrf_adc_config_t * config);
+void nrf_adc_configure(nrf_adc_config_t const * config);
 
 /**
  * @brief Blocking function for executing a single ADC conversion.
@@ -128,7 +128,7 @@ void nrf_adc_configure(nrf_adc_config_t * config);
  *
  * @return Conversion result.
  */
-int32_t nrf_adc_convert_single(nrf_adc_config_input_t input);
+nrf_adc_value_t nrf_adc_convert_single(nrf_adc_config_input_t input);
 
 /**
  * @brief Function for selecting ADC input.
@@ -161,9 +161,9 @@ __STATIC_INLINE void nrf_adc_input_select(nrf_adc_config_input_t input)
  *
  * @return Last conversion result.
  */
-__STATIC_INLINE int32_t nrf_adc_result_get(void)
+__STATIC_INLINE nrf_adc_value_t nrf_adc_result_get(void)
 {
-    return (int32_t)NRF_ADC->RESULT;
+    return (nrf_adc_value_t)NRF_ADC->RESULT;
 }
 
 
@@ -177,7 +177,7 @@ __STATIC_INLINE int32_t nrf_adc_result_get(void)
  */
 __STATIC_INLINE bool nrf_adc_is_busy(void)
 {
-    return ( (NRF_ADC->BUSY & ADC_BUSY_BUSY_Msk) == ADC_BUSY_BUSY_Msk);
+    return ((NRF_ADC->BUSY & ADC_BUSY_BUSY_Msk) == ADC_BUSY_BUSY_Msk);
 }
 
 /**

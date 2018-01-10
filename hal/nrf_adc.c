@@ -13,7 +13,7 @@
  *
  * @param[in] config  Requested configuration.
  */
-void nrf_adc_configure(nrf_adc_config_t * config)
+void nrf_adc_configure(nrf_adc_config_t const * config)
 {
     uint32_t config_reg = 0;
 
@@ -46,9 +46,9 @@ void nrf_adc_configure(nrf_adc_config_t * config)
  *
  * @return Conversion result
  */
-int32_t nrf_adc_convert_single(nrf_adc_config_input_t input)
+nrf_adc_value_t nrf_adc_convert_single(nrf_adc_config_input_t input)
 {
-    int32_t val;
+    nrf_adc_value_t val;
 
     nrf_adc_input_select(input);
     nrf_adc_start();
