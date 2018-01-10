@@ -30,7 +30,7 @@ extern "C" {
 /**
  * @brief Macro for mapping port and pin numbers to values understandable for nrf_gpio functions.
  */
-#define NRF_GPIO_PIN_MAP(port, pin) ((port << 5) | (pin & 0x1F))
+#define NRF_GPIO_PIN_MAP(port, pin) (((port) << 5) | ((pin) & 0x1F))
 
 /**
  * @brief Pin direction definitions.
