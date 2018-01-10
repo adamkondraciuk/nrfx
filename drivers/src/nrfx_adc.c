@@ -17,8 +17,8 @@ typedef struct
     nrfx_adc_channel_t     * p_head;
     nrfx_adc_channel_t     * p_current_conv;
     nrf_adc_value_t        * p_buffer;
-    uint8_t                  size;
-    uint8_t                  idx;
+    uint16_t                 size;
+    uint16_t                 idx;
     nrfx_drv_state_t         state;
 } adc_cb_t;
 
