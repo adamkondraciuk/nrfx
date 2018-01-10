@@ -3,6 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 ### Changed
+- Extended input pin configuration in GPIOTE driver.
 - Unified the way of checking if required event handler was provided. Now, all drivers do it with assertion.
 - Improved condition checking in uninit and init functions in SAADC driver.
 - Enabled RNG bias correction by default.

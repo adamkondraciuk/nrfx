@@ -62,6 +62,7 @@ typedef struct
     nrfx_gpiote_evt_handler_t handlers[GPIOTE_CH_NUM + NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS];
     int8_t                    pin_assignments[NUMBER_OF_PINS];
     int8_t                    port_handlers_pins[NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS];
+    uint8_t                   configured_pins[((NUMBER_OF_PINS)+7) / 8];
     nrfx_drv_state_t          state;
 } gpiote_control_block_t;
 
@@ -123,6 +124,21 @@ __STATIC_INLINE void pin_in_use_clear(uint32_t pin)
     m_cb.pin_assignments[pin] = PIN_NOT_USED;
 }
 
+
+__STATIC_INLINE void pin_configured_set(uint32_t pin)
+{
+    nrf_bitmask_bit_set(pin, m_cb.configured_pins);
+}
+
+__STATIC_INLINE void pin_configured_clear(uint32_t pin)
+{
+    nrf_bitmask_bit_clear(pin, m_cb.configured_pins);
+}
+
+__STATIC_INLINE bool pin_configured_check(uint32_t pin)
+{
+    return 0 != nrf_bitmask_bit_is_set(pin, m_cb.configured_pins);
+}
 
 __STATIC_INLINE int8_t channel_port_get(uint32_t pin)
 {
@@ -195,6 +211,8 @@ nrfx_err_t nrfx_gpiote_init(void)
     {
         channel_free(i);
     }
+
+    memset(m_cb.configured_pins, 0, sizeof(m_cb.configured_pins));
 
     NRFX_IRQ_PRIORITY_SET(GPIOTE_IRQn, NRFX_GPIOTE_CONFIG_IRQ_PRIORITY);
     NRFX_IRQ_ENABLE(GPIOTE_IRQn);
@@ -287,6 +305,7 @@ nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
             }
 
             nrf_gpio_cfg_output(pin);
+            pin_configured_set(pin);
         }
     }
 
@@ -307,7 +326,11 @@ void nrfx_gpiote_out_uninit(nrfx_gpiote_pin_t pin)
     }
     pin_in_use_clear(pin);
 
-    nrf_gpio_cfg_default(pin);
+    if (pin_configured_check(pin))
+    {
+        nrf_gpio_cfg_default(pin);
+        pin_configured_clear(pin);
+    }
 }
 
 
@@ -465,13 +488,17 @@ nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
         int8_t channel = channel_port_alloc(pin, evt_handler, p_config->hi_accuracy);
         if (channel != NO_CHANNELS)
         {
-            if (p_config->is_watcher)
+            if (!p_config->skip_gpio_setup)
             {
-                nrf_gpio_cfg_watcher(pin);
-            }
-            else
-            {
-                nrf_gpio_cfg_input(pin, p_config->pull);
+                if (p_config->is_watcher)
+                {
+                    nrf_gpio_cfg_watcher(pin);
+                }
+                else
+                {
+                    nrf_gpio_cfg_input(pin, p_config->pull);
+                }
+                pin_configured_set(pin);
             }
 
             if (p_config->hi_accuracy)
@@ -493,7 +520,6 @@ nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
-
 
 void nrfx_gpiote_in_event_enable(nrfx_gpiote_pin_t pin, bool int_enable)
 {
@@ -566,7 +592,11 @@ void nrfx_gpiote_in_uninit(nrfx_gpiote_pin_t pin)
     {
         nrf_gpiote_te_default((uint32_t)channel_port_get(pin));
     }
-    nrf_gpio_cfg_default(pin);
+    if (pin_configured_check(pin))
+    {
+        nrf_gpio_cfg_default(pin);
+        pin_configured_clear(pin);
+    }
     channel_free((uint8_t)channel_port_get(pin));
     pin_in_use_clear(pin);
 }

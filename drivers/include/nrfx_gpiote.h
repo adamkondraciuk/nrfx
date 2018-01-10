@@ -21,10 +21,11 @@ extern "C" {
 /**@brief Input pin configuration. */
 typedef struct
 {
-    nrf_gpiote_polarity_t sense;      /**< Transition that triggers interrupt. */
-    nrf_gpio_pin_pull_t   pull;       /**< Pulling mode. */
-    bool                  is_watcher; /**< True when the input pin is tracking an output pin. */
-    bool                  hi_accuracy;/**< True when high accuracy (IN_EVENT) is used. */
+    nrf_gpiote_polarity_t sense;               /**< Transition that triggers interrupt. */
+    nrf_gpio_pin_pull_t   pull;                /**< Pulling mode. */
+    bool                  is_watcher      : 1; /**< True when the input pin is tracking an output pin. */
+    bool                  hi_accuracy     : 1; /**< True when high accuracy (IN_EVENT) is used. */
+    bool                  skip_gpio_setup : 1; /**< Do not change GPIO configuration */
 } nrfx_gpiote_in_config_t;
 
 /**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect low-to-high transition.
@@ -56,6 +57,43 @@ typedef struct
         .pull = NRF_GPIO_PIN_NOPULL,                \
         .sense = NRF_GPIOTE_POLARITY_TOGGLE,        \
     }
+
+/**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect low-to-high transition.
+ * @details Set hi_accu to true to use IN_EVENT.
+ * @note This macro prepares configuration that skips GPIO setup. */
+#define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_LOTOHI(hi_accu) \
+    {                                               \
+        .is_watcher = false,                        \
+        .hi_accuracy = hi_accu,                     \
+        .pull = NRF_GPIO_PIN_NOPULL,                \
+        .sense = NRF_GPIOTE_POLARITY_LOTOHI,        \
+        .skip_gpio_setup = true,                    \
+    }
+
+/**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect high-to-low transition.
+ * @details Set hi_accu to true to use IN_EVENT.
+ * @note This macro prepares configuration that skips GPIO setup. */
+#define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_HITOLO(hi_accu) \
+    {                                               \
+        .is_watcher = false,                        \
+        .hi_accuracy = hi_accu,                     \
+        .pull = NRF_GPIO_PIN_NOPULL,                \
+        .sense = NRF_GPIOTE_POLARITY_HITOLO,        \
+        .skip_gpio_setup = true,                    \
+    }
+
+/**@brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect any change on the pin.
+ * @details Set hi_accu to true to use IN_EVENT.
+ * @note This macro prepares configuration that skips GPIO setup. */
+#define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_TOGGLE(hi_accu) \
+    {                                               \
+        .is_watcher = false,                        \
+        .hi_accuracy = hi_accu,                     \
+        .pull = NRF_GPIO_PIN_NOPULL,                \
+        .sense = NRF_GPIOTE_POLARITY_TOGGLE,        \
+        .skip_gpio_setup = true,                    \
+    }
+
 
 /**@brief Output pin configuration. */
 typedef struct
