@@ -41,6 +41,9 @@ typedef void (*nrfx_clock_event_handler_t)(nrfx_clock_evt_type_t event);
  *
  * After initialization, the module is in power off state (clocks are not started).
  *
+ * @param[in] event_handler Event handler provided by the user.
+ *                          Must not be NULL.
+ *
  * @retval NRFX_SUCCESS                   If the procedure was successful.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED If the driver was already initialized.
  */

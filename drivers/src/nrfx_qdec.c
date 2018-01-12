@@ -63,6 +63,7 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(event_handler);
     nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -74,18 +75,7 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
         return err_code;
     }
 
-    if (event_handler)
-    {
-        m_qdec_event_handler = event_handler;
-    }
-    else
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
+    m_qdec_event_handler = event_handler;
 
     nrf_qdec_sampleper_set(p_config->sampleper);
     nrf_gpio_cfg_input(p_config->pselled, NRF_GPIO_PIN_NOPULL);

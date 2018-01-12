@@ -96,6 +96,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
                           nrfx_spis_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(event_handler);
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;
 
@@ -113,14 +114,6 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
     if ((uint32_t)p_config->mode > (uint32_t)NRFX_SPIS_MODE_3)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-    if (!event_handler)
-    {
-        err_code = NRFX_ERROR_NULL;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

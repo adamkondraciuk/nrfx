@@ -41,9 +41,8 @@ typedef nrf_wdt_rr_register_t nrfx_wdt_channel_id;
  * @brief This function initializes watchdog.
  *
  * @param[in] p_config          Pointer to the structure with initial configuration.
- * @param[in] wdt_event_handler specifies event handler provided by user.
- *
- * @note Function asserts if wdt_event_handler is NULL.
+ * @param[in] wdt_event_handler Event handler provided by the user.
+ *                              Must not be NULL.
  *
  * @return    NRFX_SUCCESS on success, otherwise an error code.
  */

@@ -44,6 +44,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
                             nrfx_lpcomp_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(event_handler);
     nrfx_err_t err_code;
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -55,18 +56,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
         return err_code;
     }
 
-    if (event_handler)
-    {
-        m_lpcomp_event_handler = event_handler;
-    }
-    else
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
+    m_lpcomp_event_handler = event_handler;
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     if (nrfx_prs_acquire(NRF_LPCOMP, nrfx_lpcomp_irq_handler) != NRFX_SUCCESS)

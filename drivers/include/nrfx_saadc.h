@@ -141,10 +141,10 @@ typedef void (* nrfx_saadc_event_handler_t)(nrfx_saadc_evt_t const * p_event);
  *
  * @param[in] p_config      Pointer to the structure with initial configuration.
  * @param[in] event_handler Event handler provided by the user.
+ *                          Must not be NULL.
  *
- * @retval    NRFX_SUCCESS If initialization was successful.
- * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
- * @retval    NRFX_ERROR_INVALID_PARAM If event_handler is NULL.
+ * @retval    NRFX_SUCCESS              If initialization was successful.
+ * @retval    NRFX_ERROR_INVALID_STATE  If the driver is already initialized.
  */
 nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                            nrfx_saadc_event_handler_t  event_handler);

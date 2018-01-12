@@ -174,19 +174,12 @@ nrfx_err_t nrfx_saadc_init(nrfx_saadc_config_t const * p_config,
                            nrfx_saadc_event_handler_t  event_handler)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(event_handler);
     nrfx_err_t err_code;
 
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-    if (event_handler == NULL)
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

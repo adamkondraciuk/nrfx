@@ -93,7 +93,7 @@ typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * const p_evt);
  *
  * @retval    NRFX_SUCCESS If initialization was successful.
  * @retval    NRFX_ERROR_INVALID_STATE If the driver is already initialized.
- * @retval    NRFX_ERROR_INVALID_PARAM If specified event handler is NULL.
+ * @retval    NRFX_ERROR_INVALID_PARAM If invalid configuration was specified.
  */
 nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler);

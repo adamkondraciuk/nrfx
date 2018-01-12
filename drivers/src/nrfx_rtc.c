@@ -41,21 +41,10 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_handler_t        handler)
 {
     NRFX_ASSERT(p_config);
-
+    NRFX_ASSERT(handler);
     nrfx_err_t err_code;
 
-    if (handler)
-    {
-        m_handlers[p_instance->instance_id] = handler;
-    }
-    else
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
+    m_handlers[p_instance->instance_id] = handler;
 
     if (m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED)
     {

@@ -106,6 +106,8 @@ static void nrfx_clock_anomaly_132(void)
 
 nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
 {
+    NRFX_ASSERT(event_handler);
+
     nrfx_err_t err_code = NRFX_SUCCESS;
     if (m_clock_cb.module_initialized)
     {

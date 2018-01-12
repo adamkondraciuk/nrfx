@@ -34,21 +34,13 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
     NRFX_ASSERT(p_instance->p_reg != NRF_TIMER0);
 #endif
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(timer_event_handler);
 
     nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-
-    if (timer_event_handler == NULL)
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

@@ -2,6 +2,9 @@
 All notable changes to this project are documented in this file.
 
 ## [Unreleased]
+### Changed
+- Unified the way of checking if required event handler was provided. Now, all drivers do it with assertion.
+
 ### Fixed
 - Fixed result value casting in TEMP HAL.
 - Fixed types of conversion result and buffer size in ADC HAL and driver.

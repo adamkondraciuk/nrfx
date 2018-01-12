@@ -79,10 +79,10 @@ typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event);
 /**@brief Function for initializing QDEC.
  *
  * @param[in] p_config      Pointer to the structure with initial configuration.
- * @param[in] event_handler Event handler function.
+ * @param[in] event_handler Event handler provided by the user.
+ *                          Must not be NULL.
  *
  * @retval NRFX_SUCCESS             If initialization was successful.
- * @retval NRFX_ERROR_INVALID_PARAM If invalid parameters were supplied.
  * @retval NRFX_ERROR_INVALID_STATE If QDEC was already initialized.
  */
 nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,

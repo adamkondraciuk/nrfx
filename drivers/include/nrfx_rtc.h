@@ -91,13 +91,13 @@ typedef void (*nrfx_rtc_handler_t)(nrfx_rtc_int_type_t int_type);
  *
  * After initialization, the instance is in power off state.
  *
- * @param[in]  p_instance         Pointer to the driver instance structure.
- * @param[in]  p_config           Pointer to the structure with initial configuration.
- * @param[in]  handler            User's event handler.
+ * @param[in]  p_instance   Pointer to the driver instance structure.
+ * @param[in]  p_config     Pointer to the structure with initial configuration.
+ * @param[in]  handler      Event handler provided by the user.
+ *                          Must not be NULL.
  *
- * @retval     NRFX_SUCCESS               If successfully initialized.
- * @retval     NRFX_ERROR_INVALID_PARAM   If no handler was provided.
- * @retval     NRFX_ERROR_INVALID_STATE   If the instance is already initialized.
+ * @retval     NRFX_SUCCESS             If successfully initialized.
+ * @retval     NRFX_ERROR_INVALID_STATE If the instance is already initialized.
  */
 nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
                          nrfx_rtc_config_t const * p_config,

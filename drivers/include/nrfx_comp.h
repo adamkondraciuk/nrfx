@@ -107,11 +107,14 @@ typedef struct
  * To start the driver, call the function @ref nrfx_comp_start() after initialization.
  *
  * @param[in] p_config      Pointer to the structure with initial configuration.
- * @param[in] event_handler Handler function.
+ * @param[in] event_handler Event handler provided by the user.
+ *                          Must not be NULL.
  *
- * @retval NRFX_ERROR_INVALID_PARAM If the configuration is invalid.
+ * @retval NRFX_SUCCESS             If initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE If the driver has already been initialized.
- * @retval NRFX_ERROR_BUSY          If the LPCOMP driver is initialized.
+ * @retval NRFX_ERROR_BUSY          If the LPCOMP peripheral is already in use.
+ *                                  This is possible only if @ref nrfx_prs module
+ *                                  is enabled.
  */
 nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           nrfx_comp_event_handler_t  event_handler);
