@@ -226,13 +226,9 @@ void nrfx_saadc_uninit(void)
     nrf_saadc_task_trigger(NRF_SAADC_TASK_STOP);
 
     // Wait for ADC being stopped.
-    uint32_t timeout = HW_TIMEOUT;
-
-    while (nrf_saadc_event_check(NRF_SAADC_EVENT_STOPPED) == 0 && timeout > 0)
-    {
-        --timeout;
-    }
-    NRFX_ASSERT(timeout > 0);
+    bool result;
+    NRFX_WAIT_FOR(nrf_saadc_event_check(NRF_SAADC_EVENT_STOPPED), HW_TIMEOUT, 0, result);
+    NRFX_ASSERT(result);
 
     nrf_saadc_disable();
     m_cb.adc_state = NRF_SAADC_STATE_IDLE;
@@ -372,12 +368,10 @@ nrfx_err_t nrfx_saadc_sample_convert(uint8_t channel, nrf_saadc_value_t * p_valu
     nrf_saadc_task_trigger(NRF_SAADC_TASK_START);
     nrf_saadc_task_trigger(NRF_SAADC_TASK_SAMPLE);
 
-    uint32_t timeout = HW_TIMEOUT;
+    bool result;
+    NRFX_WAIT_FOR(nrf_saadc_event_check(NRF_SAADC_EVENT_END), HW_TIMEOUT, 0, result);
+    NRFX_ASSERT(result);
 
-    while (0 == nrf_saadc_event_check(NRF_SAADC_EVENT_END) && timeout > 0)
-    {
-        timeout--;
-    }
     nrf_saadc_event_clear(NRF_SAADC_EVENT_STARTED);
     nrf_saadc_event_clear(NRF_SAADC_EVENT_END);
 
@@ -557,13 +551,9 @@ void nrfx_saadc_abort(void)
         else
         {
             // Wait for ADC being stopped.
-            uint32_t timeout = HW_TIMEOUT;
-
-            while ((m_cb.adc_state != NRF_SAADC_STATE_IDLE) && (timeout > 0))
-            {
-                --timeout;
-            }
-            NRFX_ASSERT(timeout > 0);
+            bool result;
+            NRFX_WAIT_FOR((m_cb.adc_state != NRF_SAADC_STATE_IDLE), HW_TIMEOUT, 0, result);
+            NRFX_ASSERT(result);
         }
 
         nrf_saadc_int_disable(NRF_SAADC_INT_STOPPED);
