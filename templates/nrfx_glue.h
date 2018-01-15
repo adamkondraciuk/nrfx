@@ -80,6 +80,13 @@ extern "C" {
  */
 #define NRFX_CRITICAL_SECTION_EXIT()
 
+/**
+ * @brief Macro for delaying the code execution for at least the specified time.
+ *
+ * @param us_time Number of microseconds to wait.
+ */
+#define NRFX_DELAY_US(us_time)
+
 
 /**
  * @brief When set to a non-zero value, this macro specifies that the
@@ -108,6 +115,14 @@ extern "C" {
  * @brief Bitmask defining TIMER instances reserved to be used outside of nrfx.
  */
 #define NRFX_TIMERS_USED        0
+
+/**
+ * @brief When set to a non-zero value, this macro specifies that the
+ *        @ref nrfx_coredep_delay_us uses precise DWT based solution.
+ *        A compilation error is generated if the DWT unit is not present
+ *        in the SoC used.
+ */
+#define NRFX_DELAY_DWT_BASED    0
 
 /** @} */
 
