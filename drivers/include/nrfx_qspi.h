@@ -93,8 +93,19 @@ typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
  *                       will be performed in blocking mode.
  * @param[in] p_context  Pointer to context. Use in interrupt handler.
  *
+ * Function configures peripheral, interrupts and activte it. During activation
+ * process internal clocks are started and QSPI peripheral is trying to read status
+ * byte to read busy bit. Reading status byte is providing in simple poll and wait
+ * mechanism.
+ * If busy bit is one during init function it shows issues with external memory device
+ * and @ref nrfx_qspi_init returns NRFX_ERROR_TIMEOUT as a result.
+ * In case of issues:
+ * - Check connection.
+ * - Make sure that memory device does not perform other operations like erasing or writing.
+ * - Check if there is an short circuit.
  *
  * @retval NRFX_SUCCESS             If initialization was successful.
+ * @retval NRFX_ERROR_TIMEOUT       If peripheral cannot connect with external memory.
  * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
  * @retval NRFX_ERROR_INVALID_PARAM If the pin configuration was incorrect.
  */
@@ -212,6 +223,7 @@ nrfx_err_t nrfx_qspi_mem_busy_check(void);
  * @param[out] p_rx_buffer Pointer to the array for data to receive. Can be NULL if there is nothing to receive.
  *
  * @retval NRFX_SUCCESS            If the operation was successful.
+ * @retval NRFX_ERROR_TIMEOUT      If external memory performs operation or connection issue appears.
  * @retval NRFX_ERROR_BUSY         If the driver currently handles other operation.
  */
 nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,

@@ -19,9 +19,15 @@
  */
 #define QSPI_MEM_STATUSREG_WIP_Pos 0x01
 
-#define QSPI_WAIT_READY() do {                                         \
-        while (!nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY)); \
-    } while(0)
+/**
+ * @brief Default time used in timeout function.
+ */
+#define QSPI_DEF_WAIT_TIME_US 10
+
+/**
+ * @brief Default number of tries in timeout function.
+ */
+#define QSPI_DEF_WAIT_ATTEMPTS 100
 
 /**
   * @brief Control block - driver instance local data.
@@ -56,7 +62,8 @@ static nrfx_err_t qspi_task_perform(nrf_qspi_task_t task)
 
     if (m_cb.handler == NULL)
     {
-        QSPI_WAIT_READY();
+        while (!nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY))
+        {};
     }
     return NRFX_SUCCESS;
 }
@@ -118,7 +125,16 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
     nrf_qspi_task_trigger(NRF_QSPI, NRF_QSPI_TASK_ACTIVATE);
 
     // Waiting for the peripheral to activate
-    QSPI_WAIT_READY();
+    bool result;
+    NRFX_WAIT_FOR(nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY),
+                  QSPI_DEF_WAIT_ATTEMPTS,
+                  QSPI_DEF_WAIT_TIME_US,
+                  result);
+
+    if (!result)
+    {
+        return NRFX_ERROR_TIMEOUT;
+    }
 
     return NRFX_SUCCESS;
 }
@@ -146,7 +162,21 @@ nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
 
     nrf_qspi_cinstr_transfer_start(NRF_QSPI, p_config);
 
-    QSPI_WAIT_READY();
+    bool result;
+    NRFX_WAIT_FOR(nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY),
+                  QSPI_DEF_WAIT_ATTEMPTS,
+                  QSPI_DEF_WAIT_TIME_US,
+                  result);
+
+    if (!result)
+    {
+        // This timeout should never occur when WIPWAIT is not active, since in this
+        // case the QSPI peripheral should send the command immediately, without any
+        // waiting for previous write to complete.
+        NRFX_ASSERT(p_config->wipwait);
+
+        return NRFX_ERROR_TIMEOUT;
+    }
     nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
     nrf_qspi_int_enable(NRF_QSPI, NRF_QSPI_INT_READY_MASK);
 
