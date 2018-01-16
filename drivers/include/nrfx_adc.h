@@ -26,15 +26,13 @@ typedef enum
     NRFX_ADC_EVT_SAMPLE,  ///< Event generated when the requested channel is sampled.
 } nrfx_adc_evt_type_t;
 
-
-
 /**
  * @brief Analog-to-digital converter driver DONE event.
  */
 typedef struct
 {
-    nrf_adc_value_t *        p_buffer; ///< Pointer to buffer with converted samples.
-    uint16_t                 size;     ///< Number of samples in the buffer.
+    nrf_adc_value_t * p_buffer; ///< Pointer to buffer with converted samples.
+    uint16_t          size;     ///< Number of samples in the buffer.
 } nrfx_adc_done_evt_t;
 
 /**
@@ -59,28 +57,17 @@ typedef struct
 } nrfx_adc_evt_t;
 
 /**@brief Macro for initializing the ADC channel with the default configuration. */
-#define NRFX_ADC_DEFAULT_CHANNEL(analog_input)             \
- {{{                                                       \
-    .resolution = NRF_ADC_CONFIG_RES_10BIT,                \
-    .input      = NRF_ADC_CONFIG_SCALING_INPUT_FULL_SCALE, \
-    .reference  = NRF_ADC_CONFIG_REF_VBG,                  \
-    .ain        = (analog_input)                           \
- }}, NULL}
-
-/**
- * @brief ADC channel configuration.
- *
- * @note The bit fields reflect bit fields in the ADC CONFIG register.
- */
-typedef struct
-{
-    uint32_t resolution        :2; ///< 8 - 10 bit resolution.
-    uint32_t input             :3; ///< Input selection and scaling.
-    uint32_t reference         :2; ///< Reference source.
-    uint32_t reserved          :1; ///< Unused bit fields.
-    uint32_t ain               :8; ///< Analog input.
-    uint32_t external_reference:2; ///< Eternal reference source.
-}nrfx_adc_channel_config_t;
+#define NRFX_ADC_DEFAULT_CHANNEL(analog_input)                 \
+ {                                                             \
+     NULL,                                                     \
+     {                                                         \
+        .resolution = NRF_ADC_CONFIG_RES_10BIT,                \
+        .scaling    = NRF_ADC_CONFIG_SCALING_INPUT_FULL_SCALE, \
+        .reference  = NRF_ADC_CONFIG_REF_VBG,                  \
+        .input      = (analog_input),                          \
+        .extref     = NRF_ADC_CONFIG_EXTREFSEL_NONE            \
+     }                                                         \
+ }
 
 // Forward declaration of the nrfx_adc_channel_t type.
 typedef struct nrfx_adc_channel_s nrfx_adc_channel_t;
@@ -93,12 +80,8 @@ typedef struct nrfx_adc_channel_s nrfx_adc_channel_t;
  */
 struct nrfx_adc_channel_s
 {
-    union
-    {
-        nrfx_adc_channel_config_t config; ///< Channel configuration.
-        uint32_t data;                    ///< Raw value.
-    } config;
-    nrfx_adc_channel_t * p_next;          ///< Pointer to the next enabled channel (for internal use).
+    nrfx_adc_channel_t * p_next; ///< Pointer to the next enabled channel (for internal use).
+    nrf_adc_config_t     config; ///< ADC configuration for current channel.
 };
 
 /**
@@ -106,7 +89,7 @@ struct nrfx_adc_channel_s
  */
 typedef struct
 {
-    uint8_t interrupt_priority;              ///< Priority of ADC interrupt.
+    uint8_t interrupt_priority; ///< Priority of ADC interrupt.
 } nrfx_adc_config_t;
 
 /** @brief ADC default configuration. */

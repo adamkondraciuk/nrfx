@@ -115,8 +115,8 @@ void nrfx_adc_channel_disable(nrfx_adc_channel_t * const p_channel)
 void nrfx_adc_sample(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
-    NRFX_ASSERT(!nrf_adc_is_busy());
-    nrf_adc_start();
+    NRFX_ASSERT(!nrf_adc_busy_check());
+    nrf_adc_task_trigger(NRF_ADC_TASK_START);
 }
 
 nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
@@ -137,10 +137,10 @@ nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
     {
         m_cb.state = NRFX_DRV_STATE_POWERED_ON;
 
-        nrf_adc_config_set(p_channel->config.data);
+        nrf_adc_init(&p_channel->config);
         nrf_adc_enable();
         nrf_adc_int_disable(NRF_ADC_INT_END_MASK);
-        nrf_adc_start();
+        nrf_adc_task_trigger(NRF_ADC_TASK_START);
         if (p_value)
         {
             while (!nrf_adc_event_check(NRF_ADC_EVENT_END)) {}
@@ -182,11 +182,10 @@ static bool adc_sample_process()
             m_cb.p_current_conv = m_cb.p_current_conv->p_next;
             task_trigger = true;
         }
-        nrf_adc_config_set(m_cb.p_current_conv->config.data);
+        nrf_adc_init(&m_cb.p_current_conv->config);
         nrf_adc_enable();
         if (task_trigger)
         {
-            //nrf_adc_start();
             nrf_adc_task_trigger(NRF_ADC_TASK_START);
         }
         return false;
@@ -220,7 +219,7 @@ nrfx_err_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size)
         m_cb.size           = size;
         m_cb.idx            = 0;
         m_cb.p_buffer       = buffer;
-        nrf_adc_config_set(m_cb.p_current_conv->config.data);
+        nrf_adc_init(&m_cb.p_current_conv->config);
         nrf_adc_event_clear(NRF_ADC_EVENT_END);
         nrf_adc_enable();
         if (m_cb.event_handler)

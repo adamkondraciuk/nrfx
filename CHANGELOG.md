@@ -7,6 +7,7 @@ All notable changes to this project are documented in this file.
 - Improved condition checking in uninit and init functions in SAADC driver.
 - Enabled RNG bias correction by default.
 - Updated MDK to 8.15.4.
+- Refactored ADC driver and HAL.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.
