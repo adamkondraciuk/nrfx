@@ -241,7 +241,8 @@ void nrfx_saadc_uninit(void)
     {
         if (m_cb.psel[channel].pselp != NRF_SAADC_INPUT_DISABLED)
         {
-            (void)nrfx_saadc_channel_uninit(channel);
+            nrfx_err_t err_code = nrfx_saadc_channel_uninit(channel);
+            NRFX_ASSERT(err_code == NRFX_SUCCESS);
         }
     }
 
