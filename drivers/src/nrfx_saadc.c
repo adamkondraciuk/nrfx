@@ -547,6 +547,7 @@ void nrfx_saadc_abort(void)
     if (nrfx_saadc_is_busy())
     {
         nrf_saadc_event_clear(NRF_SAADC_EVENT_STOPPED);
+        nrf_saadc_int_enable(NRF_SAADC_INT_STOPPED);
         nrf_saadc_task_trigger(NRF_SAADC_TASK_STOP);
 
         if (m_cb.adc_state == NRF_SAADC_STATE_CALIBRATION)
@@ -564,6 +565,8 @@ void nrfx_saadc_abort(void)
             }
             NRFX_ASSERT(timeout > 0);
         }
+
+        nrf_saadc_int_disable(NRF_SAADC_INT_STOPPED);
 
         m_cb.p_buffer           = 0;
         m_cb.p_secondary_buffer = 0;
