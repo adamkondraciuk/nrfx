@@ -282,7 +282,7 @@ nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  chan
     }
 #endif //NRF52_PAN_74
 
-    if (!m_cb.psel[channel].pselp)
+    if (m_cb.psel[channel].pselp == NRF_SAADC_INPUT_DISABLED)
     {
         ++m_cb.active_channels;
     }
@@ -323,7 +323,7 @@ nrfx_err_t nrfx_saadc_channel_uninit(uint8_t channel)
         return err_code;
     }
 
-    if (m_cb.psel[channel].pselp)
+    if (m_cb.psel[channel].pselp != NRF_SAADC_INPUT_DISABLED)
     {
         --m_cb.active_channels;
     }

@@ -4,10 +4,12 @@ All notable changes to this project are documented in this file.
 ## [Unreleased]
 ### Changed
 - Unified the way of checking if required event handler was provided. Now, all drivers do it with assertion.
+- Improved condition checking in uninit and init functions in SAADC driver.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.
 - Fixed types of conversion result and buffer size in ADC HAL and driver.
+- Fixed timeout in SAADC driver in abort function.
 
 ## [0.8.0] - 2017-12-20
 ### Added
