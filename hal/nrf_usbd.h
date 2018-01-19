@@ -80,7 +80,6 @@ typedef enum
     NRF_USBD_EVENT_USBEVENT      = offsetof(NRF_USBD_Type, EVENTS_USBEVENT   ), /**< An event or an error not covered by specific events has occurred, check EVENTCAUSE register to find the cause */
     NRF_USBD_EVENT_EP0SETUP      = offsetof(NRF_USBD_Type, EVENTS_EP0SETUP   ), /**< A valid SETUP token has been received (and acknowledged) on the control endpoint */
     NRF_USBD_EVENT_DATAEP        = offsetof(NRF_USBD_Type, EVENTS_EPDATA     ), /**< A data transfer has occurred on a data endpoint, indicated by the EPDATASTATUS register */
-    NRF_USBD_EVENT_ACCESSFAULT   = offsetof(NRF_USBD_Type, EVENTS_ACCESSFAULT), /**< >Access to an unavailable USB register has been attempted (software or EasyDMA) */
     /*lint -restore*/
 }nrf_usbd_event_t;
 
@@ -126,7 +125,6 @@ typedef enum
     NRF_USBD_INT_USBEVENT_MASK    = USBD_INTEN_USBEVENT_Msk   , /**< Enable or disable interrupt for USBEVENT event */
     NRF_USBD_INT_EP0SETUP_MASK    = USBD_INTEN_EP0SETUP_Msk   , /**< Enable or disable interrupt for EP0SETUP event */
     NRF_USBD_INT_DATAEP_MASK      = USBD_INTEN_EPDATA_Msk     , /**< Enable or disable interrupt for EPDATA event */
-    NRF_USBD_INT_ACCESSFAULT_MASK = USBD_INTEN_ACCESSFAULT_Msk, /**< Enable or disable interrupt for ACCESSFAULT event */
 }nrf_usbd_int_mask_t;
 
 
@@ -512,31 +510,6 @@ typedef enum
 }nrf_usbd_eventcause_mask_t;
 
 /**
- * @brief BUSSTATE register bit masks
- */
-typedef enum
-{
-    NRF_USBD_BUSSTATE_DM_MASK = USBD_BUSSTATE_DM_Msk, /**< Negative line mask */
-    NRF_USBD_BUSSTATE_DP_MASK = USBD_BUSSTATE_DP_Msk, /**< Positive line mask */
-    /** Both lines are low */
-    NRF_USBD_BUSSTATE_DPDM_LL = (USBD_BUSSTATE_DM_Low  << USBD_BUSSTATE_DM_Pos) | (USBD_BUSSTATE_DP_Low  << USBD_BUSSTATE_DP_Pos),
-    /** Positive line is high, negative line is low */
-    NRF_USBD_BUSSTATE_DPDM_HL = (USBD_BUSSTATE_DM_Low  << USBD_BUSSTATE_DM_Pos) | (USBD_BUSSTATE_DP_High << USBD_BUSSTATE_DP_Pos),
-    /** Positive line is low, negative line is high */
-    NRF_USBD_BUSSTATE_DPDM_LH = (USBD_BUSSTATE_DM_High << USBD_BUSSTATE_DM_Pos) | (USBD_BUSSTATE_DP_Low  << USBD_BUSSTATE_DP_Pos),
-    /** Both lines are high */
-    NRF_USBD_BUSSTATE_DPDM_HH = (USBD_BUSSTATE_DM_High << USBD_BUSSTATE_DM_Pos) | (USBD_BUSSTATE_DP_High << USBD_BUSSTATE_DP_Pos),
-    /** J state */
-    NRF_USBD_BUSSTATE_J = NRF_USBD_BUSSTATE_DPDM_HL,
-    /** K state */
-    NRF_USBD_BUSSTATE_K = NRF_USBD_BUSSTATE_DPDM_LH,
-    /** Single ended 0 */
-    NRF_USBD_BUSSTATE_SE0 = NRF_USBD_BUSSTATE_DPDM_LL,
-    /** Single ended 1 */
-    NRF_USBD_BUSSTATE_SE1 = NRF_USBD_BUSSTATE_DPDM_HH
-}nrf_usbd_busstate_t;
-
-/**
  * @brief DPDMVALUE register
  */
 typedef enum
@@ -648,13 +621,6 @@ __STATIC_INLINE void nrf_usbd_eventcause_clear(uint32_t flags);
  * @return Flag values defined in @ref nrf_usbd_eventcause_mask_t
  */
 __STATIC_INLINE uint32_t nrf_usbd_eventcause_get_and_clear(void);
-
-/**
- * @brief Function for getting BUSSTATE register value
- *
- * @return The value of BUSSTATE register
- */
-__STATIC_INLINE nrf_usbd_busstate_t nrf_usbd_busstate_get(void);
 
 /**
  * @brief Function for getting HALTEDEPIN register value
@@ -1021,11 +987,6 @@ uint32_t nrf_usbd_eventcause_get_and_clear(void)
     __ISB();
     __DSB();
     return ret;
-}
-
-nrf_usbd_busstate_t nrf_usbd_busstate_get(void)
-{
-    return (nrf_usbd_busstate_t)(NRF_USBD->BUSSTATE);
 }
 
 uint32_t nrf_usbd_haltedep(uint8_t ep)
