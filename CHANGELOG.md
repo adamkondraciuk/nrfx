@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 - Unified the way of checking if required event handler was provided. Now, all drivers do it with assertion.
 - Improved condition checking in uninit and init functions in SAADC driver.
 - Enabled RNG bias correction by default.
-- Updated MDK to 8.15.3.
+- Updated MDK to 8.15.4.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.

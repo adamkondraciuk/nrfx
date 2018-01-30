@@ -6,7 +6,7 @@
  *           nrf52810 from Nordic Semiconductor.
  *
  * @version  V1
- * @date     18. January 2018
+ * @date     24. January 2018
  *
  * @note     Generated with SVDConv V2.81d 
  *           from CMSIS SVD File 'nrf52810.svd' Version 1,
@@ -1405,8 +1405,6 @@ typedef struct {                                    /*!< NVMC Structure         
   __IO uint32_t  ERASEPCR0;                         /*!< Deprecated register - Register for erasing a page in code area.
                                                          Equivalent to ERASEPAGE.                                              */
   __IO uint32_t  ERASEUICR;                         /*!< Register for erasing user information configuration registers         */
-  __IO uint32_t  ERASEPAGEPARTIAL;                  /*!< Register for partial erase of a page in code area                     */
-  __IO uint32_t  ERASEPAGEPARTIALCFG;               /*!< Register for partial erase configuration                              */
 } NRF_NVMC_Type;
 
 

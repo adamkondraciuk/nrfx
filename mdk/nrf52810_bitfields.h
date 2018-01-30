@@ -2079,20 +2079,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ERASEUICR_ERASEUICR_NoOperation (0UL) /*!< No operation */
 #define NVMC_ERASEUICR_ERASEUICR_Erase (1UL) /*!< Start erase of UICR */
 
-/* Register: NVMC_ERASEPAGEPARTIAL */
-/* Description: Register for partial erase of a page in code area */
-
-/* Bits 31..0 : Register for starting partial erase of a page in code area */
-#define NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Pos (0UL) /*!< Position of ERASEPAGEPARTIAL field. */
-#define NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Msk (0xFFFFFFFFUL << NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Pos) /*!< Bit mask of ERASEPAGEPARTIAL field. */
-
-/* Register: NVMC_ERASEPAGEPARTIALCFG */
-/* Description: Register for partial erase configuration */
-
-/* Bits 6..0 : Duration of the partial erase in milliseconds */
-#define NVMC_ERASEPAGEPARTIALCFG_DURATION_Pos (0UL) /*!< Position of DURATION field. */
-#define NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk (0x7FUL << NVMC_ERASEPAGEPARTIALCFG_DURATION_Pos) /*!< Bit mask of DURATION field. */
-
 
 /* Peripheral: GPIO */
 /* Description: GPIO Port */

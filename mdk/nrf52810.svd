@@ -22679,35 +22679,6 @@ POSSIBILITY OF SUCH DAMAGE.\n
             </field>
           </fields>
         </register>
-        <register>
-          <name>ERASEPAGEPARTIAL</name>
-          <description>Register for partial erase of a page in code area</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>ERASEPAGEPARTIAL</name>
-              <description>Register for starting partial erase of a page in code area</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ERASEPAGEPARTIALCFG</name>
-          <description>Register for partial erase configuration</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
-          <fields>
-            <field>
-              <name>DURATION</name>
-              <description>Duration of the partial erase in milliseconds</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
