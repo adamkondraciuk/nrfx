@@ -31,7 +31,7 @@ typedef enum
  */
 typedef struct
 {
-    nrf_adc_value_t * p_buffer; ///< Pointer to buffer with converted samples.
+    nrf_adc_value_t * p_buffer; ///< Pointer to the buffer with converted samples.
     uint16_t          size;     ///< Number of samples in the buffer.
 } nrfx_adc_done_evt_t;
 
@@ -81,7 +81,7 @@ typedef struct nrfx_adc_channel_s nrfx_adc_channel_t;
 struct nrfx_adc_channel_s
 {
     nrfx_adc_channel_t * p_next; ///< Pointer to the next enabled channel (for internal use).
-    nrf_adc_config_t     config; ///< ADC configuration for current channel.
+    nrf_adc_config_t     config; ///< ADC configuration for the current channel.
 };
 
 /**
@@ -160,7 +160,7 @@ void nrfx_adc_sample(void);
  * This function selects the desired input and starts a single conversion. If a valid pointer
  * is provided for the result, the function blocks until the conversion is completed. Otherwise, the
  * function returns when the conversion is started, and the result is provided in an event (driver
- * must be initialized in non-blocking mode otherwise an assertion will fail). The function will
+ * must be initialized in non-blocking mode, otherwise an assertion will fail). The function will
  * fail if ADC is busy. The channel does not need to be enabled to perform a single conversion.
  *
  * @param[in]  p_channel Channel.
@@ -190,6 +190,7 @@ nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
  * a single START task will trigger conversion on all enabled channels. For example:
  * If 3 channels are enabled and the user requests 6 samples, the completion event
  * handler will be called after 2 START tasks.
+ *
  * @note The application must adjust the sampling frequency. The maximum frequency
  * depends on the sampling timer and the maximum latency of the ADC interrupt. If
  * an interrupt is not handled before the next sampling is triggered, the sample

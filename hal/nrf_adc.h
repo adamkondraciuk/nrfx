@@ -26,9 +26,9 @@ typedef enum
 /** @brief Resolution of the analog-to-digital converter. */
 typedef enum
 {
-    NRF_ADC_CONFIG_RES_8BIT  = ADC_CONFIG_RES_8bit,  /**< 8 bit resolution. */
-    NRF_ADC_CONFIG_RES_9BIT  = ADC_CONFIG_RES_9bit,  /**< 9 bit resolution. */
-    NRF_ADC_CONFIG_RES_10BIT = ADC_CONFIG_RES_10bit, /**< 10 bit resolution. */
+    NRF_ADC_CONFIG_RES_8BIT  = ADC_CONFIG_RES_8bit,  /**< 8-bit resolution. */
+    NRF_ADC_CONFIG_RES_9BIT  = ADC_CONFIG_RES_9bit,  /**< 9-bit resolution. */
+    NRF_ADC_CONFIG_RES_10BIT = ADC_CONFIG_RES_10bit, /**< 10-bit resolution. */
 } nrf_adc_config_resolution_t;
 
 
@@ -61,7 +61,7 @@ typedef enum
     NRF_ADC_CONFIG_REF_VBG              = ADC_CONFIG_REFSEL_VBG,                      /**< 1.2 V reference. */
     NRF_ADC_CONFIG_REF_SUPPLY_ONE_HALF  = ADC_CONFIG_REFSEL_SupplyOneHalfPrescaling,  /**< 1/2 of power supply. */
     NRF_ADC_CONFIG_REF_SUPPLY_ONE_THIRD = ADC_CONFIG_REFSEL_SupplyOneThirdPrescaling, /**< 1/3 of power supply. */
-    NRF_ADC_CONFIG_REF_EXT              = ADC_CONFIG_REFSEL_External                  /**< External reference. See @ref nrf_adc_config_extref_t to make further configuration.*/
+    NRF_ADC_CONFIG_REF_EXT              = ADC_CONFIG_REFSEL_External                  /**< External reference. See @ref nrf_adc_config_extref_t for further configuration.*/
 } nrf_adc_config_reference_t;
 
 /** @brief Input selection of the analog-to-digital converter. */
@@ -91,7 +91,7 @@ typedef enum
 typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
 {
     /*lint -save -e30*/
-    NRF_ADC_EVENT_END = offsetof(NRF_ADC_Type, EVENTS_END) /**< End of conversion event. */
+    NRF_ADC_EVENT_END = offsetof(NRF_ADC_Type, EVENTS_END) /**< End of a conversion event. */
     /*lint -restore*/
 } nrf_adc_event_t;
 
@@ -125,7 +125,7 @@ __STATIC_INLINE void nrf_adc_task_trigger(nrf_adc_task_t task);
 __STATIC_INLINE uint32_t nrf_adc_task_address_get(nrf_adc_task_t task);
 
 /**
- * @brief Function for checking state of an ADC event.
+ * @brief Function for checking the state of an ADC event.
  *
  * @param[in] event Event to check.
  *
@@ -151,21 +151,21 @@ __STATIC_INLINE void nrf_adc_event_clear(nrf_adc_event_t event);
 __STATIC_INLINE uint32_t nrf_adc_event_address_get(nrf_adc_event_t adc_event);
 
 /**
- * @brief Function for enabling specified interrupts.
+ * @brief Function for enabling the specified interrupts.
  *
  * @param[in] int_mask  Interrupts to enable.
  */
 __STATIC_INLINE void nrf_adc_int_enable(uint32_t int_mask);
 
 /**
- * @brief Function for disabling specified interrupts.
+ * @brief Function for disabling the specified interrupts.
  *
  * @param[in] int_mask  Interrupts to disable.
  */
 __STATIC_INLINE void nrf_adc_int_disable(uint32_t int_mask);
 
 /**
- * @brief Function for retrieving the state of specified ADC interrupts.
+ * @brief Function for retrieving the state of the specified ADC interrupts.
  *
  * @param[in] int_mask Interrupts to check.
  *
@@ -216,7 +216,7 @@ __STATIC_INLINE nrf_adc_value_t nrf_adc_result_get(void);
 /**
  * @brief Function for initializing the ADC.
  *
- * This function write data to the ADC's CONFIG register. After the configuration,
+ * This function writes data to ADC's CONFIG register. After the configuration,
  * the ADC is in DISABLE state and must be enabled before using it.
  *
  * @param[in] config Configuration parameters.
