@@ -118,7 +118,7 @@ __STATIC_INLINE void nrf_adc_task_trigger(nrf_adc_task_t task);
 /**
  * @brief Function for getting the address of an ADC task register.
  *
- * @param[in] adc_task ADC task.
+ * @param[in] task ADC task.
  *
  * @return Address of the specified ADC task.
  */
@@ -219,7 +219,7 @@ __STATIC_INLINE nrf_adc_value_t nrf_adc_result_get(void);
  * This function writes data to ADC's CONFIG register. After the configuration,
  * the ADC is in DISABLE state and must be enabled before using it.
  *
- * @param[in] config Configuration parameters.
+ * @param[in] p_config Configuration parameters.
  */
 __STATIC_INLINE void nrf_adc_init(nrf_adc_config_t const * p_config);
 
