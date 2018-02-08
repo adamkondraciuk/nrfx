@@ -4,10 +4,10 @@
 #define NRFX_COREDEP_H__
 
 /**
- * @defgroup nrfx_coredep Core dependent funcionality module
+ * @defgroup nrfx_coredep Core-dependent functionality
  * @{
  * @ingroup nrfx
- * @brief Module containing core dependent functions like delay.
+ * @brief Module containing functions with core-dependent implementation, like delay.
  */
 
 #if defined(__NRFX_DOXYGEN__)
@@ -34,12 +34,12 @@
 #endif
 
 /**
- * @brief Function for delaying execution for number of microseconds.
+ * @brief Function for delaying execution for a number of microseconds.
  *
- * Value of @par time_us is multiplied by frequency in MHz. Therefore, the delay is limited to
+ * The value of @p time_us is multiplied by the frequency in MHz. Therefore, the delay is limited to
  * maximum uint32_t capacity divided by frequency. For example:
- * - For SoCs working at 64MHz it is 0xFFFFFFFF/64 = 0x03FFFFFF (67108863 microseconds)
- * - For SoCs working at 16MHz it is 0xFFFFFFFF/16 = 0x0FFFFFFF (268435455 microseconds)
+ * - For SoCs working at 64MHz: 0xFFFFFFFF/64 = 0x03FFFFFF (67108863 microseconds)
+ * - For SoCs working at 16MHz: 0xFFFFFFFF/16 = 0x0FFFFFFF (268435455 microseconds)
  *
  * @param time_us Number of microseconds to wait.
  */
@@ -52,7 +52,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us);
 #if NRFX_CHECK(NRFX_DELAY_DWT_BASED)
 
 #if !NRFX_DELAY_DWT_PRESENT
-#error "DWT unit not included in choosen SoC."
+#error "DWT unit not present in the SoC that is used."
 #endif
 
 __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
@@ -68,7 +68,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     uint32_t core_debug = CoreDebug->DEMCR;
     CoreDebug->DEMCR = core_debug | CoreDebug_DEMCR_TRCENA_Msk;
 
-    // Preserve CTRL register in DWT block to do not influence into its configuration. Make sure
+    // Save the current state of the CTRL register in DWT block. Make sure
     // that cycle counter is enabled.
     uint32_t dwt_ctrl = DWT->CTRL;
     DWT->CTRL = dwt_ctrl | DWT_CTRL_CYCCNTENA_Msk;

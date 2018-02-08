@@ -117,8 +117,8 @@ extern "C" {
 #define NRFX_TIMERS_USED        0
 
 /**
- * @brief When set to a non-zero value, this macro specifies that the
- *        @ref nrfx_coredep_delay_us uses precise DWT based solution.
+ * @brief When set to a non-zero value, this macro specifies that
+ *        @ref nrfx_coredep_delay_us uses a precise DWT-based solution.
  *        A compilation error is generated if the DWT unit is not present
  *        in the SoC used.
  */

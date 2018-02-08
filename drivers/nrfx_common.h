@@ -106,8 +106,8 @@ extern "C" {
  * @param[in]  condition Condition to meet.
  * @param[in]  attempts  Maximum number of condition checks. Must not be 0.
  * @param[in]  delay_us  Delay between consecutive checks, in microseconds.
- * @param[out] result    Boolean variable to store result of wait process.
- *                       Set to true if condition met or false otherwise.
+ * @param[out] result    Boolean variable to store the result of the wait process.
+ *                       Set to true if the condition is met or false otherwise.
  */
 #define NRFX_WAIT_FOR(condition, attempts, delay_us, result) \
 do {                                                         \

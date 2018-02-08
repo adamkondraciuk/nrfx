@@ -3,7 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [Unreleased]
 ### Added
-- Added wait-for function to improve timeout functionality in QSPI and SAADC drivers.
+- Added wait-for function to improve time-out functionality in QSPI and SAADC drivers.
 
 ### Changed
 - Extended input pin configuration in GPIOTE driver.
