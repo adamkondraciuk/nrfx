@@ -86,8 +86,12 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
         sdin_pin = NRF_I2S_PIN_NOT_CONNECTED;
     }
 
-    nrf_i2s_pins_set(NRF_I2S, p_config->sck_pin, p_config->lrck_pin,
-        mck_pin, sdout_pin, sdin_pin);
+    nrf_i2s_pins_set(NRF_I2S,
+                     p_config->sck_pin,
+                     p_config->lrck_pin,
+                     mck_pin,
+                     sdout_pin,
+                     sdin_pin);
 }
 
 
@@ -108,13 +112,14 @@ nrfx_err_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
         return err_code;
     }
 
-    if (!nrf_i2s_configure(NRF_I2S, p_config->mode,
-                                    p_config->format,
-                                    p_config->alignment,
-                                    p_config->sample_width,
-                                    p_config->channels,
-                                    p_config->mck_setup,
-                                    p_config->ratio))
+    if (!nrf_i2s_configure(NRF_I2S,
+                           p_config->mode,
+                           p_config->format,
+                           p_config->alignment,
+                           p_config->sample_width,
+                           p_config->channels,
+                           p_config->mck_setup,
+                           p_config->ratio))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -145,8 +150,15 @@ void nrfx_i2s_uninit(void)
 
     NRFX_IRQ_DISABLE(I2S_IRQn);
 
+    nrf_i2s_pins_set(NRF_I2S,
+                     NRF_I2S_PIN_NOT_CONNECTED,
+                     NRF_I2S_PIN_NOT_CONNECTED,
+                     NRF_I2S_PIN_NOT_CONNECTED,
+                     NRF_I2S_PIN_NOT_CONNECTED,
+                     NRF_I2S_PIN_NOT_CONNECTED);
+
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
-    NRFX_LOG_INFO("Initialized.");
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 
