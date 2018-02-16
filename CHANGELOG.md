@@ -15,6 +15,7 @@ All notable changes to this project are documented in this file.
 - Updated MDK to 8.15.4.
 - Refactored ADC driver and HAL.
 - Corrected TIMER asserts to make it usable with PPI in debug.
+- Improved buffer handling in I2S driver. The API of the driver has been sligthly modified.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.
