@@ -13,7 +13,7 @@
  * @brief Global error codes definitions.
  */
 
-#define NRFX_ERROR_BASE_NUM         0xBAD00000
+#define NRFX_ERROR_BASE_NUM         0x0BAD0000
 #define NRFX_ERROR_DRIVERS_BASE_NUM (NRFX_ERROR_BASE_NUM + 0x10000)
 
 /** @brief Enumerated type for error codes. */
