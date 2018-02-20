@@ -13,6 +13,7 @@ All notable changes to this project are documented in this file.
 - Enabled RNG bias correction by default.
 - Updated MDK to 8.15.4.
 - Refactored ADC driver and HAL.
+- Corrected TIMER asserts to make it usable with PPI in debug.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.

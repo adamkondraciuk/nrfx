@@ -65,7 +65,7 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const * const  p_instance,
     for (i = 0; i < p_instance->cc_channel_count; ++i)
     {
         nrf_timer_event_clear(p_instance->p_reg,
-            nrf_timer_compare_event_get(i));
+                              nrf_timer_compare_event_get(i));
     }
 
     NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_reg),
@@ -94,10 +94,7 @@ void nrfx_timer_uninit(nrfx_timer_t const * const p_instance)
     nrf_timer_int_disable(p_instance->p_reg, DISABLE_ALL);
     #undef DISABLE_ALL
 
-    if (m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON)
-    {
-        nrfx_timer_disable(p_instance);
-    }
+    nrfx_timer_disable(p_instance);
 
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized instance: %d.", p_instance->instance_id);
@@ -113,7 +110,7 @@ void nrfx_timer_enable(nrfx_timer_t const * const p_instance)
 
 void nrfx_timer_disable(nrfx_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_SHUTDOWN);
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled instance: %d.", p_instance->instance_id);
@@ -127,14 +124,14 @@ bool nrfx_timer_is_enabled(nrfx_timer_t const * const p_instance)
 
 void nrfx_timer_resume(nrfx_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_START);
     NRFX_LOG_INFO("Resumed instance: %d.", p_instance->instance_id);
 }
 
 void nrfx_timer_pause(nrfx_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_STOP);
     NRFX_LOG_INFO("Paused instance: %d.", p_instance->instance_id);
 }
@@ -147,7 +144,7 @@ void nrfx_timer_clear(nrfx_timer_t const * const p_instance)
 
 void nrfx_timer_increment(nrfx_timer_t const * const p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(nrf_timer_mode_get(p_instance->p_reg) != NRF_TIMER_MODE_TIMER);
 
     nrf_timer_task_trigger(p_instance->p_reg, NRF_TIMER_TASK_COUNT);
