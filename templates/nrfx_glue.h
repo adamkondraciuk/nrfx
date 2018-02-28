@@ -22,6 +22,12 @@ extern "C" {
  *        the needs of the host environment into which @em nrfx is integrated.
  */
 
+// Uncomment this line to use the standard MDK way of binding IRQ handlers
+// at linking time.
+//#include <soc/nrfx_irqs.h>
+
+//------------------------------------------------------------------------------
+
 /**
  * @brief Macro for placing a runtime assertion.
  *
@@ -36,6 +42,7 @@ extern "C" {
  */
 #define NRFX_STATIC_ASSERT(expression)
 
+//------------------------------------------------------------------------------
 
 /**
  * @brief Macro for setting the priority of a specific IRQ.
@@ -101,6 +108,16 @@ extern "C" {
  */
 #define NRFX_CRITICAL_SECTION_EXIT()
 
+//------------------------------------------------------------------------------
+
+/**
+ * @brief When set to a non-zero value, this macro specifies that
+ *        @ref nrfx_coredep_delay_us uses a precise DWT-based solution.
+ *        A compilation error is generated if the DWT unit is not present
+ *        in the SoC used.
+ */
+#define NRFX_DELAY_DWT_BASED    0
+
 /**
  * @brief Macro for delaying the code execution for at least the specified time.
  *
@@ -108,6 +125,7 @@ extern "C" {
  */
 #define NRFX_DELAY_US(us_time)
 
+//------------------------------------------------------------------------------
 
 /**
  * @brief When set to a non-zero value, this macro specifies that the
@@ -116,6 +134,8 @@ extern "C" {
  *        should not be used.
  */
 #define NRFX_CUSTOM_ERROR_CODES 0
+
+//------------------------------------------------------------------------------
 
 /**
  * @brief Bitmask defining PPI channels reserved to be used outside of nrfx.
@@ -136,14 +156,6 @@ extern "C" {
  * @brief Bitmask defining TIMER instances reserved to be used outside of nrfx.
  */
 #define NRFX_TIMERS_USED        0
-
-/**
- * @brief When set to a non-zero value, this macro specifies that
- *        @ref nrfx_coredep_delay_us uses a precise DWT-based solution.
- *        A compilation error is generated if the DWT unit is not present
- *        in the SoC used.
- */
-#define NRFX_DELAY_DWT_BASED    0
 
 /** @} */
 
