@@ -42,7 +42,9 @@ typedef enum
     /*lint -save -e30*/
     NRF_UARTE_EVENT_CTS       = offsetof(NRF_UARTE_Type, EVENTS_CTS),      ///< CTS is activated.
     NRF_UARTE_EVENT_NCTS      = offsetof(NRF_UARTE_Type, EVENTS_NCTS),     ///< CTS is deactivated.
+    NRF_UARTE_EVENT_RXDRDY    = offsetof(NRF_UARTE_Type, EVENTS_RXDRDY),   ///< Data received in RXD (but potentially not yet transferred to Data RAM).
     NRF_UARTE_EVENT_ENDRX     = offsetof(NRF_UARTE_Type, EVENTS_ENDRX),    ///< Receive buffer is filled up.
+    NRF_UARTE_EVENT_TXDDY     = offsetof(NRF_UARTE_Type, EVENTS_TXDRDY),   ///< Data sent from TXD.
     NRF_UARTE_EVENT_ENDTX     = offsetof(NRF_UARTE_Type, EVENTS_ENDTX),    ///< Last TX byte transmitted.
     NRF_UARTE_EVENT_ERROR     = offsetof(NRF_UARTE_Type, EVENTS_ERROR),    ///< Error detected.
     NRF_UARTE_EVENT_RXTO      = offsetof(NRF_UARTE_Type, EVENTS_RXTO),     ///< Receiver timeout.
@@ -70,7 +72,9 @@ typedef enum
 {
     NRF_UARTE_INT_CTS_MASK       = UARTE_INTENSET_CTS_Msk,      ///< Interrupt on CTS event.
     NRF_UARTE_INT_NCTSRX_MASK    = UARTE_INTENSET_NCTS_Msk,     ///< Interrupt on NCTS event.
+    NRF_UARTE_INT_RXDRDY_MASK    = UARTE_INTENSET_RXDRDY_Msk,   ///< Interrupt on RXDRDY event.
     NRF_UARTE_INT_ENDRX_MASK     = UARTE_INTENSET_ENDRX_Msk,    ///< Interrupt on ENDRX event.
+    NRF_UARTE_INT_TXDRDY_MASK    = UARTE_INTENSET_TXDRDY_Msk,   ///< Interrupt on TXDRDY event.
     NRF_UARTE_INT_ENDTX_MASK     = UARTE_INTENSET_ENDTX_Msk,    ///< Interrupt on ENDTX event.
     NRF_UARTE_INT_ERROR_MASK     = UARTE_INTENSET_ERROR_Msk,    ///< Interrupt on ERROR event.
     NRF_UARTE_INT_RXTO_MASK      = UARTE_INTENSET_RXTO_Msk,     ///< Interrupt on RXTO event.
