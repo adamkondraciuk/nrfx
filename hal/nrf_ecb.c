@@ -3,7 +3,7 @@
 //lint -e438
 
 #include <nrfx.h>
-#include <nrf_ecb.h>
+#include "nrf_ecb.h"
 #include <string.h>
 
 static uint8_t  ecb_data[48];   ///< ECB data structure for RNG peripheral to access.

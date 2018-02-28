@@ -5,7 +5,7 @@
  */
 
 #include <nrfx.h>
-#include <nrf_nvmc.h>
+#include "nrf_nvmc.h"
 
 static inline void wait_for_flash_ready(void)
 {
