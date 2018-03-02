@@ -1048,8 +1048,6 @@ uint32_t nrf_usbd_epdatastatus_get_and_clear(void)
     uint32_t ret;
     ret = nrf_usbd_epdatastatus_get();
     nrf_usbd_epdatastatus_clear(ret);
-    __ISB();
-    __DSB();
     return ret;
 }
 
