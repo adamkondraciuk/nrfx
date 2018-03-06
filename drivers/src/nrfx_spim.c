@@ -232,11 +232,8 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
 
 
     nrf_spim_pins_set(p_spim, p_config->sck_pin, mosi_pin, miso_pin);
-    nrf_spim_frequency_set(p_spim,
-        (nrf_spim_frequency_t)p_config->frequency);
-    nrf_spim_configure(p_spim,
-        (nrf_spim_mode_t)p_config->mode,
-        (nrf_spim_bit_order_t)p_config->bit_order);
+    nrf_spim_frequency_set(p_spim, p_config->frequency);
+    nrf_spim_configure(p_spim, p_config->mode, p_config->bit_order);
 
     nrf_spim_orc_set(p_spim, p_config->orc);
 

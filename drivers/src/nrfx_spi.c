@@ -87,7 +87,7 @@ nrfx_err_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     //   0 - for modes 0 and 1 (CPOL = 0), 1 - for modes 2 and 3 (CPOL = 1);
     //   according to the reference manual guidelines this pin and its input
     //   buffer must always be connected for the SPI to work.
-    if (p_config->mode <= NRFX_SPI_MODE_1)
+    if (p_config->mode <= NRF_SPI_MODE_1)
     {
         nrf_gpio_pin_clear(p_config->sck_pin);
     }
@@ -132,11 +132,8 @@ nrfx_err_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
 
     NRF_SPI_Type * p_spi = p_instance->p_reg;
     nrf_spi_pins_set(p_spi, p_config->sck_pin, mosi_pin, miso_pin);
-    nrf_spi_frequency_set(p_spi,
-        (nrf_spi_frequency_t)p_config->frequency);
-    nrf_spi_configure(p_spi,
-        (nrf_spi_mode_t)p_config->mode,
-        (nrf_spi_bit_order_t)p_config->bit_order);
+    nrf_spi_frequency_set(p_spi, p_config->frequency);
+    nrf_spi_configure(p_spi, p_config->mode, p_config->bit_order);
 
     m_cb[p_instance->drv_inst_idx].orc = p_config->orc;
 
