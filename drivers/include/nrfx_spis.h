@@ -28,22 +28,6 @@ extern "C" {
 */
 #define NRFX_SPIS_PIN_NOT_USED  0xFF
 
-/** @brief SPIS transaction bit order definitions. */
-typedef enum
-{
-    NRFX_SPIS_BIT_ORDER_LSB_FIRST = NRF_SPIS_BIT_ORDER_LSB_FIRST, /**< Least significant bit shifted out first. */
-    NRFX_SPIS_BIT_ORDER_MSB_FIRST = NRF_SPIS_BIT_ORDER_MSB_FIRST  /**< Most significant bit shifted out first. */
-} nrfx_spis_endian_t;
-
-/** @brief SPIS mode definitions for clock polarity and phase. */
-typedef enum
-{
-    NRFX_SPIS_MODE_0 = NRF_SPIS_MODE_0, /**< (CPOL = 0, CPHA = 0). */
-    NRFX_SPIS_MODE_1 = NRF_SPIS_MODE_1, /**< (CPOL = 0, CPHA = 1). */
-    NRFX_SPIS_MODE_2 = NRF_SPIS_MODE_2, /**< (CPOL = 1, CPHA = 0). */
-    NRFX_SPIS_MODE_3 = NRF_SPIS_MODE_3  /**< (CPOL = 1, CPHA = 1). */
-} nrfx_spis_mode_t;
-
 /** @brief Event callback function event definitions. */
 typedef enum
 {
@@ -88,39 +72,39 @@ enum {
 };
 
 /** @brief SPI slave instance default configuration. */
-#define NRFX_SPIS_DEFAULT_CONFIG                                     \
-{                                                                    \
-    .sck_pin      = NRFX_SPIS_PIN_NOT_USED,                          \
-    .mosi_pin     = NRFX_SPIS_PIN_NOT_USED,                          \
-    .miso_pin     = NRFX_SPIS_PIN_NOT_USED,                          \
-    .csn_pin      = NRFX_SPIS_PIN_NOT_USED,                          \
-    .miso_drive   = NRFX_SPIS_DEFAULT_MISO_DRIVE,                    \
-    .csn_pullup   = NRFX_SPIS_DEFAULT_CSN_PULLUP,                    \
-    .orc          = NRFX_SPIS_DEFAULT_ORC,                           \
-    .def          = NRFX_SPIS_DEFAULT_DEF,                           \
-    .mode         = (nrfx_spis_mode_t)NRFX_SPIS_DEFAULT_MODE,        \
-    .bit_order    = (nrfx_spis_endian_t)NRFX_SPIS_DEFAULT_BIT_ORDER, \
-    .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY,           \
+#define NRFX_SPIS_DEFAULT_CONFIG                           \
+{                                                          \
+    .sck_pin      = NRFX_SPIS_PIN_NOT_USED,                \
+    .mosi_pin     = NRFX_SPIS_PIN_NOT_USED,                \
+    .miso_pin     = NRFX_SPIS_PIN_NOT_USED,                \
+    .csn_pin      = NRFX_SPIS_PIN_NOT_USED,                \
+    .mode         = NRF_SPIS_MODE_0,                       \
+    .bit_order    = NRF_SPIS_BIT_ORDER_MSB_FIRST,          \
+    .csn_pullup   = NRFX_SPIS_DEFAULT_CSN_PULLUP,          \
+    .miso_drive   = NRFX_SPIS_DEFAULT_MISO_DRIVE,          \
+    .def          = NRFX_SPIS_DEFAULT_DEF,                 \
+    .orc          = NRFX_SPIS_DEFAULT_ORC,                 \
+    .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY, \
 }
 
 /** @brief SPI peripheral device configuration data. */
 typedef struct
 {
-    uint32_t              miso_pin;            //!< SPI MISO pin (optional).
-                                               /**< Set @ref NRFX_SPIS_PIN_NOT_USED
-                                                *   if this signal is not needed. */
-    uint32_t              mosi_pin;            //!< SPI MOSI pin (optional).
-                                               /**< Set @ref NRFX_SPIS_PIN_NOT_USED
-                                                *   if this signal is not needed. */
-    uint32_t              sck_pin;             //!< SPI SCK pin.
-    uint32_t              csn_pin;             //!< SPI CSN pin.
-    nrfx_spis_mode_t      mode;                //!< SPI mode.
-    nrfx_spis_endian_t    bit_order;           //!< SPI transaction bit order.
-    nrf_gpio_pin_pull_t   csn_pullup;          //!< CSN pin pull-up configuration.
-    nrf_gpio_pin_drive_t  miso_drive;          //!< MISO pin drive configuration.
-    uint8_t               def;                 //!< Character clocked out in case of an ignored transaction.
-    uint8_t               orc;                 //!< Character clocked out after an over-read of the transmit buffer.
-    uint8_t               irq_priority;        //!< Interrupt priority.
+    uint32_t             miso_pin;      //!< SPI MISO pin (optional).
+                                        /**< Set @ref NRFX_SPIS_PIN_NOT_USED
+                                         *   if this signal is not needed. */
+    uint32_t             mosi_pin;      //!< SPI MOSI pin (optional).
+                                        /**< Set @ref NRFX_SPIS_PIN_NOT_USED
+                                         *   if this signal is not needed. */
+    uint32_t             sck_pin;       //!< SPI SCK pin.
+    uint32_t             csn_pin;       //!< SPI CSN pin.
+    nrf_spis_mode_t      mode;          //!< SPI mode.
+    nrf_spis_bit_order_t bit_order;     //!< SPI transaction bit order.
+    nrf_gpio_pin_pull_t  csn_pullup;    //!< CSN pin pull-up configuration.
+    nrf_gpio_pin_drive_t miso_drive;    //!< MISO pin drive configuration.
+    uint8_t              def;           //!< Character clocked out in case of an ignored transaction.
+    uint8_t              orc;           //!< Character clocked out after an over-read of the transmit buffer.
+    uint8_t              irq_priority;  //!< Interrupt priority.
 } nrfx_spis_config_t;
 
 

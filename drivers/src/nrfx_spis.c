@@ -104,7 +104,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
         return err_code;
     }
 
-    if ((uint32_t)p_config->mode > (uint32_t)NRFX_SPIS_MODE_3)
+    if ((uint32_t)p_config->mode > (uint32_t)NRF_SPIS_MODE_3)
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -189,8 +189,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
     nrf_spis_tx_buffer_set(p_spis, NULL, 0);
 
     // Configure SPI mode.
-    nrf_spis_configure(p_spis, (nrf_spis_mode_t) p_config->mode,
-                               (nrf_spis_bit_order_t) p_config->bit_order);
+    nrf_spis_configure(p_spis, p_config->mode, p_config->bit_order);
 
     // Configure DEF and ORC characters.
     nrf_spis_def_set(p_spis, p_config->def);
