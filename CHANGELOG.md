@@ -16,6 +16,7 @@ All notable changes to this project are documented in this file.
 - Refactored ADC driver and HAL.
 - Corrected TIMER asserts to make it usable with PPI in debug.
 - Improved buffer handling in I2S driver. The API of the driver has been sligthly modified.
+- Enhanced SPIS driver API: added "p_context" parameter, allowed NULL pointers for zero-length buffers.
 
 ### Fixed
 - Fixed result value casting in TEMP HAL.
