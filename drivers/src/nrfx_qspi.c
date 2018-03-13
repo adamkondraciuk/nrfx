@@ -227,6 +227,11 @@ void nrfx_qspi_uninit(void)
 
     nrf_qspi_disable(NRF_QSPI);
 
+    nrf_qspi_task_trigger(NRF_QSPI, NRF_QSPI_TASK_DEACTIVATE);
+
+    // Workaround for nRF52840 anomaly 122: Current consumption is too high.
+    *(volatile uint32_t *)0x40029054ul = 1ul;
+
     NRFX_IRQ_DISABLE(QSPI_IRQn);
 
     nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
