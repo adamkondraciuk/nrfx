@@ -1709,7 +1709,7 @@
 
 
 #ifndef NRFX_SPIM3_ENABLED
-#define NRFX_SPIM3_ENABLED 0
+#define NRFX_SPIM3_ENABLED 1
 #endif
 
 // <q> NRFX_SPIM_EXTENDED_ENABLED  - Enable extended SPIM features
@@ -1794,6 +1794,16 @@
 #endif
 
 // </e>
+
+// <q> NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED  - Enables nRF52840 anomaly 198 workaround for SPIM3.
+ 
+
+// <i> See more in the Errata document located at 
+// <i> https://infocenter.nordicsemi.com/
+
+#ifndef NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED
+#define NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED 0
+#endif
 
 // </e>
 

@@ -8,6 +8,7 @@ All notable changes to this project are documented in this file.
 - Added new interrupts and events to UARTE HAL.
 - Implemented Errata 192 in the CLOCK driver.
 - Implemented Errata 122 in the QSPI driver.
+- Implemented Errata 198 in the SPIM driver.
 
 ### Changed
 - Extended input pin configuration in GPIOTE driver.
