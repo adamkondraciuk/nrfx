@@ -117,13 +117,13 @@ typedef struct
 } nrfx_twis_config_t;
 
 /** @brief Generate the default configuration for the TWIS driver instance. */
-#define NRFX_TWIS_DEFAULT_CONFIG \
-{ \
+#define NRFX_TWIS_DEFAULT_CONFIG                                                  \
+{                                                                                 \
     .addr               = { NRFX_TWIS_DEFAULT_CONFIG_ADDR0,                       \
                             NRFX_TWIS_DEFAULT_CONFIG_ADDR1 },                     \
     .scl                = 31,                                                     \
-    .scl_pull           = (nrf_gpio_pin_pull_t)NRFX_TWIS_DEFAULT_CONFIG_SCL_PULL, \
     .sda                = 31,                                                     \
+    .scl_pull           = (nrf_gpio_pin_pull_t)NRFX_TWIS_DEFAULT_CONFIG_SCL_PULL, \
     .sda_pull           = (nrf_gpio_pin_pull_t)NRFX_TWIS_DEFAULT_CONFIG_SDA_PULL, \
     .interrupt_priority = NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY                   \
 }

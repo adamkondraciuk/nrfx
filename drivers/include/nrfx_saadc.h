@@ -65,6 +65,7 @@ extern "C" {
     .reference  = NRF_SAADC_REFERENCE_INTERNAL,                      \
     .acq_time   = NRF_SAADC_ACQTIME_10US,                            \
     .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                       \
+    .burst      = NRF_SAADC_BURST_DISABLED,                          \
     .pin_p      = (nrf_saadc_input_t)(PIN_P),                        \
     .pin_n      = (nrf_saadc_input_t)(PIN_N)                         \
 }

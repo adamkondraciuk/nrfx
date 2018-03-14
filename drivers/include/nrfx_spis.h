@@ -79,9 +79,9 @@ typedef struct
 /** @brief The default configuration of the SPI slave instance. */
 #define NRFX_SPIS_DEFAULT_CONFIG                           \
 {                                                          \
-    .sck_pin      = NRFX_SPIS_PIN_NOT_USED,                \
-    .mosi_pin     = NRFX_SPIS_PIN_NOT_USED,                \
     .miso_pin     = NRFX_SPIS_PIN_NOT_USED,                \
+    .mosi_pin     = NRFX_SPIS_PIN_NOT_USED,                \
+    .sck_pin      = NRFX_SPIS_PIN_NOT_USED,                \
     .csn_pin      = NRFX_SPIS_PIN_NOT_USED,                \
     .mode         = NRF_SPIS_MODE_0,                       \
     .bit_order    = NRF_SPIS_BIT_ORDER_MSB_FIRST,          \
@@ -92,7 +92,7 @@ typedef struct
     .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY, \
 }
 
-/** @brief The configuration data of the SPI peripheral device. */
+/** @brief SPI peripheral device configuration data. */
 typedef struct
 {
     uint32_t             miso_pin;      //!< SPI MISO pin (optional).

@@ -33,36 +33,39 @@ typedef struct
  * @details Set hi_accu to true to use IN_EVENT.
  */
 #define NRFX_GPIOTE_CONFIG_IN_SENSE_LOTOHI(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_LOTOHI,        \
-    }
+{                                                   \
+    .sense = NRF_GPIOTE_POLARITY_LOTOHI,            \
+    .pull = NRF_GPIO_PIN_NOPULL,                    \
+    .is_watcher = false,                            \
+    .hi_accuracy = hi_accu,                         \
+    .skip_gpio_setup = false,                       \
+}
 
 /**
  * @brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect high-to-low transition.
  * @details Set hi_accu to true to use IN_EVENT.
  */
 #define NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_HITOLO,        \
-    }
+{                                                   \
+    .sense = NRF_GPIOTE_POLARITY_HITOLO,            \
+    .pull = NRF_GPIO_PIN_NOPULL,                    \
+    .is_watcher = false,                            \
+    .hi_accuracy = hi_accu,                         \
+    .skip_gpio_setup = false,                       \
+}
 
 /**
  * @brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect any change on the pin.
  * @details Set hi_accu to true to use IN_EVENT.
  */
 #define NRFX_GPIOTE_CONFIG_IN_SENSE_TOGGLE(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_TOGGLE,        \
-    }
+{                                                   \
+    .sense = NRF_GPIOTE_POLARITY_TOGGLE,            \
+    .pull = NRF_GPIO_PIN_NOPULL,                    \
+    .is_watcher = false,                            \
+    .hi_accuracy = hi_accu,                         \
+    .skip_gpio_setup = false,                       \
+}
 
 /**
  * @brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect low-to-high transition.
@@ -70,13 +73,13 @@ typedef struct
  * @note This macro prepares configuration that skips the GPIO setup.
  */
 #define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_LOTOHI(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_LOTOHI,        \
-        .skip_gpio_setup = true,                    \
-    }
+{                                                       \
+    .sense = NRF_GPIOTE_POLARITY_LOTOHI,                \
+    .pull = NRF_GPIO_PIN_NOPULL,                        \
+    .is_watcher = false,                                \
+    .hi_accuracy = hi_accu,                             \
+    .skip_gpio_setup = true,                            \
+}
 
 /**
  * @brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect high-to-low transition.
@@ -84,13 +87,13 @@ typedef struct
  * @note This macro prepares configuration that skips the GPIO setup.
  */
 #define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_HITOLO(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_HITOLO,        \
-        .skip_gpio_setup = true,                    \
-    }
+{                                                       \
+    .sense = NRF_GPIOTE_POLARITY_HITOLO,                \
+    .pull = NRF_GPIO_PIN_NOPULL,                        \
+    .is_watcher = false,                                \
+    .hi_accuracy = hi_accu,                             \
+    .skip_gpio_setup = true,                            \
+}
 
 /**
  * @brief Macro for configuring a pin to use a GPIO IN or PORT EVENT to detect any change on the pin.
@@ -98,13 +101,13 @@ typedef struct
  * @note This macro prepares configuration that skips the GPIO setup.
  */
 #define NRFX_GPIOTE_RAW_CONFIG_IN_SENSE_TOGGLE(hi_accu) \
-    {                                               \
-        .is_watcher = false,                        \
-        .hi_accuracy = hi_accu,                     \
-        .pull = NRF_GPIO_PIN_NOPULL,                \
-        .sense = NRF_GPIOTE_POLARITY_TOGGLE,        \
-        .skip_gpio_setup = true,                    \
-    }
+{                                                       \
+    .sense = NRF_GPIOTE_POLARITY_TOGGLE,                \
+    .pull = NRF_GPIO_PIN_NOPULL,                        \
+    .is_watcher = false,                                \
+    .hi_accuracy = hi_accu,                             \
+    .skip_gpio_setup = true,                            \
+}
 
 
 /** @brief Output pin configuration. */
@@ -118,8 +121,9 @@ typedef struct
 /** @brief Macro for configuring a pin to use as output. GPIOTE is not used for the pin. */
 #define NRFX_GPIOTE_CONFIG_OUT_SIMPLE(init_high)                                                \
     {                                                                                           \
+        .action     = NRF_GPIOTE_POLARITY_LOTOHI,                                               \
         .init_state = init_high ? NRF_GPIOTE_INITIAL_VALUE_HIGH : NRF_GPIOTE_INITIAL_VALUE_LOW, \
-        .task_pin = false,                                                                      \
+        .task_pin   = false,                                                                    \
     }
 
 /**
@@ -139,9 +143,9 @@ typedef struct
  */
 #define NRFX_GPIOTE_CONFIG_OUT_TASK_HIGH            \
     {                                               \
+        .action     = NRF_GPIOTE_POLARITY_LOTOHI,   \
         .init_state = NRF_GPIOTE_INITIAL_VALUE_LOW, \
         .task_pin   = true,                         \
-        .action     = NRF_GPIOTE_POLARITY_LOTOHI,   \
     }
 
 /**
@@ -150,9 +154,9 @@ typedef struct
  */
 #define NRFX_GPIOTE_CONFIG_OUT_TASK_TOGGLE(init_high)                                           \
     {                                                                                           \
+        .action     = NRF_GPIOTE_POLARITY_TOGGLE,                                               \
         .init_state = init_high ? NRF_GPIOTE_INITIAL_VALUE_HIGH : NRF_GPIOTE_INITIAL_VALUE_LOW, \
         .task_pin   = true,                                                                     \
-        .action     = NRF_GPIOTE_POLARITY_TOGGLE,                                               \
     }
 
 /** @brief Pin. */

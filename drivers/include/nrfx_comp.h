@@ -80,6 +80,7 @@ typedef struct
 #define NRFX_COMP_DEFAULT_CONFIG(_input)                                    \
 {                                                                           \
     .reference          = (nrf_comp_ref_t)NRFX_COMP_CONFIG_REF,             \
+    .ext_ref            = NRF_COMP_EXT_REF_0,                               \
     .main_mode          = (nrf_comp_main_mode_t)NRFX_COMP_CONFIG_MAIN_MODE, \
     .threshold          = NRFX_COMP_CONFIG_TH,                              \
     .speed_mode         = (nrf_comp_sp_mode_t)NRFX_COMP_CONFIG_SPEED_MODE,  \
@@ -92,6 +93,7 @@ typedef struct
 #define NRFX_COMP_DEFAULT_CONFIG(_input)                                    \
 {                                                                           \
     .reference          = (nrf_comp_ref_t)NRFX_COMP_CONFIG_REF,             \
+    .ext_ref            = NRF_COMP_EXT_REF_0,                               \
     .main_mode          = (nrf_comp_main_mode_t)NRFX_COMP_CONFIG_MAIN_MODE, \
     .threshold          = NRFX_COMP_CONFIG_TH,                              \
     .speed_mode         = (nrf_comp_sp_mode_t)NRFX_COMP_CONFIG_SPEED_MODE,  \

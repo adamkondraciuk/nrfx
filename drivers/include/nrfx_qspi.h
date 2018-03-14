@@ -39,7 +39,6 @@ typedef struct
        .io2_pin     = NRFX_QSPI_PIN_IO2,                                \
        .io3_pin     = NRFX_QSPI_PIN_IO3,                                \
     },                                                                  \
-    .irq_priority   = (uint8_t)NRFX_QSPI_CONFIG_IRQ_PRIORITY,           \
     .prot_if = {                                                        \
         .readoc     = (nrf_qspi_readoc_t)NRFX_QSPI_CONFIG_READOC,       \
         .writeoc    = (nrf_qspi_writeoc_t)NRFX_QSPI_CONFIG_WRITEOC,     \
@@ -47,11 +46,12 @@ typedef struct
         .dpmconfig  = false,                                            \
     },                                                                  \
     .phy_if = {                                                         \
-        .sck_freq   = (nrf_qspi_frequency_t)NRFX_QSPI_CONFIG_FREQUENCY, \
         .sck_delay  = (uint8_t)NRFX_QSPI_CONFIG_SCK_DELAY,              \
+        .dpmen      = false,                                            \
         .spi_mode   = (nrf_qspi_spi_mode_t)NRFX_QSPI_CONFIG_MODE,       \
-        .dpmen      = false                                             \
+        .sck_freq   = (nrf_qspi_frequency_t)NRFX_QSPI_CONFIG_FREQUENCY, \
     },                                                                  \
+    .irq_priority   = (uint8_t)NRFX_QSPI_CONFIG_IRQ_PRIORITY,           \
 }
 
 /** @brief QSPI custom instruction helper with the default configuration. */

@@ -32,11 +32,11 @@ typedef struct
  *            { ...
  *        @endcode
  */
-#define NRFX_RNG_DEFAULT_CONFIG                                 \
-    {                                                           \
-        .error_correction   = NRFX_RNG_CONFIG_ERROR_CORRECTION, \
-        .interrupt_priority = NRFX_RNG_CONFIG_IRQ_PRIORITY,     \
-    }
+#define NRFX_RNG_DEFAULT_CONFIG                             \
+{                                                           \
+    .error_correction   = NRFX_RNG_CONFIG_ERROR_CORRECTION, \
+    .interrupt_priority = NRFX_RNG_CONFIG_IRQ_PRIORITY,     \
+}
 
 /** @brief RNG driver event handler type. */
 typedef void (* nrfx_rng_evt_handler_t)(uint8_t rng_data);

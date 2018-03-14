@@ -104,13 +104,13 @@ typedef struct
  *
  * This macro is for internal use only.
  */
-#define NRFX_SPI_SINGLE_XFER(p_tx, tx_len, p_rx, rx_len)  \
-    {                                                     \
-    .p_tx_buffer = (uint8_t const *)(p_tx),               \
-    .tx_length = (tx_len),                                \
-    .p_rx_buffer = (p_rx),                                \
-    .rx_length = (rx_len),                                \
-    }
+#define NRFX_SPI_SINGLE_XFER(p_tx, tx_len, p_rx, rx_len) \
+{                                                        \
+    .p_tx_buffer = (uint8_t const *)(p_tx),              \
+    .tx_length = (tx_len),                               \
+    .p_rx_buffer = (p_rx),                               \
+    .rx_length = (rx_len),                               \
+}
 
 /** @brief Macro for setting the duplex TX RX transfer. */
 #define NRFX_SPI_XFER_TRX(p_tx_buf, tx_length, p_rx_buf, rx_length) \

@@ -79,9 +79,9 @@ typedef struct
 {                                                                                   \
     .prescaler          = RTC_FREQ_TO_PRESCALER(NRFX_RTC_DEFAULT_CONFIG_FREQUENCY), \
     .interrupt_priority = NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY,                     \
-    .reliable           = NRFX_RTC_DEFAULT_CONFIG_RELIABLE,                         \
     .tick_latency       = NRFX_RTC_US_TO_TICKS(NRFX_RTC_MAXIMUM_LATENCY_US,         \
                                                NRFX_RTC_DEFAULT_CONFIG_FREQUENCY),  \
+    .reliable           = NRFX_RTC_DEFAULT_CONFIG_RELIABLE,                         \
 }
 
 /** @brief RTC driver instance handler type. */

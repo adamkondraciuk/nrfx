@@ -33,22 +33,22 @@ typedef struct
 
 /** @brief LPCOMP driver default configuration, including the LPCOMP HAL configuration. */
 #ifdef NRF52_SERIES
-#define NRFX_LPCOMP_DEFAULT_CONFIG                                      \
-    {                                                                   \
-        .hal    = { (nrf_lpcomp_ref_t)NRFX_LPCOMP_CONFIG_REFERENCE ,    \
-                    (nrf_lpcomp_detect_t)NRFX_LPCOMP_CONFIG_DETECTION,  \
-                    (nrf_lpcomp_hysteresis_t)NRFX_LPCOMP_CONFIG_HYST }, \
-        .input  = (nrf_lpcomp_input_t)NRFX_LPCOMP_CONFIG_INPUT,         \
-        .interrupt_priority = NRFX_LPCOMP_CONFIG_IRQ_PRIORITY           \
-    }
+#define NRFX_LPCOMP_DEFAULT_CONFIG                                  \
+{                                                                   \
+    .hal    = { (nrf_lpcomp_ref_t)NRFX_LPCOMP_CONFIG_REFERENCE ,    \
+                (nrf_lpcomp_detect_t)NRFX_LPCOMP_CONFIG_DETECTION,  \
+                (nrf_lpcomp_hysteresis_t)NRFX_LPCOMP_CONFIG_HYST }, \
+    .input  = (nrf_lpcomp_input_t)NRFX_LPCOMP_CONFIG_INPUT,         \
+    .interrupt_priority = NRFX_LPCOMP_CONFIG_IRQ_PRIORITY           \
+}
 #else
-#define NRFX_LPCOMP_DEFAULT_CONFIG                                       \
-    {                                                                    \
-        .hal    = { (nrf_lpcomp_ref_t)NRFX_LPCOMP_CONFIG_REFERENCE ,     \
-                    (nrf_lpcomp_detect_t)NRFX_LPCOMP_CONFIG_DETECTION }, \
-        .input  = (nrf_lpcomp_input_t)NRFX_LPCOMP_CONFIG_INPUT,          \
-        .interrupt_priority = NRFX_LPCOMP_CONFIG_IRQ_PRIORITY            \
-    }
+#define NRFX_LPCOMP_DEFAULT_CONFIG                                   \
+{                                                                    \
+    .hal    = { (nrf_lpcomp_ref_t)NRFX_LPCOMP_CONFIG_REFERENCE ,     \
+                (nrf_lpcomp_detect_t)NRFX_LPCOMP_CONFIG_DETECTION }, \
+    .input  = (nrf_lpcomp_input_t)NRFX_LPCOMP_CONFIG_INPUT,          \
+    .interrupt_priority = NRFX_LPCOMP_CONFIG_IRQ_PRIORITY            \
+}
 #endif
 
 /**

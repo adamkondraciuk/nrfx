@@ -32,20 +32,20 @@ typedef struct
     uint8_t              interrupt_priority; /**< QDEC interrupt priority. */
 } nrfx_qdec_config_t;
 
-/** @brief QDEC default configuration. */
-#define NRFX_QDEC_DEFAULT_CONFIG                                                \
-    {                                                                           \
-        .reportper          = (nrf_qdec_reportper_t)NRFX_QDEC_CONFIG_REPORTPER, \
-        .sampleper          = (nrf_qdec_sampleper_t)NRFX_QDEC_CONFIG_SAMPLEPER, \
-        .psela              = NRFX_QDEC_CONFIG_PIO_A,                           \
-        .pselb              = NRFX_QDEC_CONFIG_PIO_B,                           \
-        .pselled            = NRFX_QDEC_CONFIG_PIO_LED,                         \
-        .ledpre             = NRFX_QDEC_CONFIG_LEDPRE,                          \
-        .ledpol             = (nrf_qdec_ledpol_t)NRFX_QDEC_CONFIG_LEDPOL,       \
-        .interrupt_priority = NRFX_QDEC_CONFIG_IRQ_PRIORITY,                    \
-        .dbfen              = NRFX_QDEC_CONFIG_DBFEN,                           \
-        .sample_inten       = NRFX_QDEC_CONFIG_SAMPLE_INTEN                     \
-    }
+/**@brief QDEC default configuration. */
+#define NRFX_QDEC_DEFAULT_CONFIG                                            \
+{                                                                           \
+    .reportper          = (nrf_qdec_reportper_t)NRFX_QDEC_CONFIG_REPORTPER, \
+    .sampleper          = (nrf_qdec_sampleper_t)NRFX_QDEC_CONFIG_SAMPLEPER, \
+    .psela              = NRFX_QDEC_CONFIG_PIO_A,                           \
+    .pselb              = NRFX_QDEC_CONFIG_PIO_B,                           \
+    .pselled            = NRFX_QDEC_CONFIG_PIO_LED,                         \
+    .ledpre             = NRFX_QDEC_CONFIG_LEDPRE,                          \
+    .ledpol             = (nrf_qdec_ledpol_t)NRFX_QDEC_CONFIG_LEDPOL,       \
+    .dbfen              = NRFX_QDEC_CONFIG_DBFEN,                           \
+    .sample_inten       = NRFX_QDEC_CONFIG_SAMPLE_INTEN,                    \
+    .interrupt_priority = NRFX_QDEC_CONFIG_IRQ_PRIORITY,                    \
+}
 
 /** @brief QDEC sample event data. */
 typedef struct
