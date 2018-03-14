@@ -59,7 +59,7 @@ static nrfx_clock_cb_t m_clock_cb;
 bool nrfx_clock_irq_enabled;
 #endif
 
-#ifdef NRF52832_XXAA
+#if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
 
 // ANOMALY 132 - LFCLK needs to avoid frame from 66us to 138us after LFCLK stop. This solution
 //               applies delay of 138us before starting LFCLK.
@@ -102,7 +102,7 @@ static void nrfx_clock_anomaly_132(void)
     CoreDebug->DEMCR = core_debug;
 }
 
-#endif // NRF52832_XXAA
+#endif // defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
 
 nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
 {
@@ -174,7 +174,7 @@ void nrfx_clock_lfclk_start(void)
     nrf_clock_event_clear(NRF_CLOCK_EVENT_LFCLKSTARTED);
     nrf_clock_int_enable(NRF_CLOCK_INT_LF_STARTED_MASK);
 
-#ifdef NRF52832_XXAA
+#if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     nrfx_clock_anomaly_132();
 #endif
 
