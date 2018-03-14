@@ -33,6 +33,14 @@ extern bool nrfx_power_irq_enabled;
 #define CALIBRATION_SUPPORT 0
 #endif
 
+#if defined(NRF52810_XXAA) || \
+    defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || \
+    defined(NRF52840_XXAA)
+// Enable workaround for nRF52 anomaly 192 (LFRC oscillator frequency is wrong
+// after calibration, exceeding 500 ppm).
+#define USE_WORKAROUND_FOR_ANOMALY_192
+#endif
+
 typedef enum
 {
     CAL_STATE_IDLE,
@@ -224,6 +232,9 @@ nrfx_err_t nrfx_clock_calibration_start(void)
         nrf_clock_event_clear(NRF_CLOCK_EVENT_DONE);
         nrf_clock_int_enable(NRF_CLOCK_INT_DONE_MASK);
         m_clock_cb.cal_state = CAL_STATE_CAL;
+#if defined(USE_WORKAROUND_FOR_ANOMALY_192)
+        *(volatile uint32_t *)0x40000C34 = 0x00000002;
+#endif
         nrf_clock_task_trigger(NRF_CLOCK_TASK_CAL);
     }
     else
@@ -292,6 +303,9 @@ void nrfx_clock_irq_handler(void)
 
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_DONE))
     {
+#if defined(USE_WORKAROUND_FOR_ANOMALY_192)
+        *(volatile uint32_t *)0x40000C34 = 0x00000000;
+#endif
         nrf_clock_event_clear(NRF_CLOCK_EVENT_DONE);
         NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_CLOCK_EVENT_DONE));
         nrf_clock_int_disable(NRF_CLOCK_INT_DONE_MASK);
