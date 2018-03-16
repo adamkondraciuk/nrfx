@@ -39,6 +39,9 @@ extern bool nrfx_power_irq_enabled;
 // Enable workaround for nRF52 anomaly 192 (LFRC oscillator frequency is wrong
 // after calibration, exceeding 500 ppm).
 #define USE_WORKAROUND_FOR_ANOMALY_192
+
+// Enable workaround for nRF52 anomaly 201 (EVENTS_HFCLKSTARTED might be generated twice).
+#define USE_WORKAROUND_FOR_ANOMALY_201
 #endif
 
 typedef enum
@@ -52,6 +55,10 @@ typedef struct
 {
     nrfx_clock_event_handler_t      event_handler;
     bool                            module_initialized; /*< Indicate the state of module */
+#if defined(USE_WORKAROUND_FOR_ANOMALY_201)
+    bool                            hfclk_started;      /*< Anomaly 201 workaround. */
+#endif
+
 #if CALIBRATION_SUPPORT
     volatile nrfx_clock_cal_state_t cal_state;
 #endif // CALIBRATION_SUPPORT
@@ -128,6 +135,9 @@ nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t event_handler)
 #endif
         m_clock_cb.event_handler = event_handler;
         m_clock_cb.module_initialized = true;
+#if defined(USE_WORKAROUND_FOR_ANOMALY_201)
+        m_clock_cb.hfclk_started = false;
+#endif
     }
 
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -211,6 +221,9 @@ void nrfx_clock_hfclk_stop(void)
     nrf_clock_task_trigger(NRF_CLOCK_TASK_HFCLKSTOP);
     while (nrf_clock_hf_is_running(NRF_CLOCK_HFCLK_HIGH_ACCURACY))
     {}
+#if defined(USE_WORKAROUND_FOR_ANOMALY_201)
+    m_clock_cb.hfclk_started = false;
+#endif
 }
 
 nrfx_err_t nrfx_clock_calibration_start(void)
@@ -281,7 +294,15 @@ void nrfx_clock_irq_handler(void)
         NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRF_CLOCK_EVENT_HFCLKSTARTED));
         nrf_clock_int_disable(NRF_CLOCK_INT_HF_STARTED_MASK);
 
+#if defined(USE_WORKAROUND_FOR_ANOMALY_201)
+        if (!m_clock_cb.hfclk_started)
+        {
+            m_clock_cb.hfclk_started = true;
+            m_clock_cb.event_handler(NRFX_CLOCK_EVT_HFCLK_STARTED);
+        }
+#else
         m_clock_cb.event_handler(NRFX_CLOCK_EVT_HFCLK_STARTED);
+#endif
     }
     if (nrf_clock_event_check(NRF_CLOCK_EVENT_LFCLKSTARTED))
     {

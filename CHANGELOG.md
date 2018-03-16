@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 - Added wait-for function to improve time-out functionality in QSPI and SAADC drivers.
 - Added glue layer for interrupt pending set/clear and is set functions.
 - Added new interrupts and events to UARTE HAL.
-- Implemented Errata 192 in the CLOCK driver.
+- Implemented Erratas 192 and 201 in the CLOCK driver.
 - Implemented Errata 122 in the QSPI driver.
 - Implemented Errata 198 in the SPIM driver.
 
