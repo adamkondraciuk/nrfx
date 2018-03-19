@@ -28,6 +28,7 @@ typedef struct
     // [no need for 'volatile' attribute for the following members, as they
     //  are not concurrently used in IRQ handlers and main line code]
     uint8_t     ss_pin;
+    uint8_t     miso_pin;
     uint8_t     orc;
     size_t      bytes_transferred;
 
@@ -122,6 +123,7 @@ nrfx_err_t nrfx_spi_init(nrfx_spi_t const * const  p_instance,
     {
         miso_pin = NRF_SPI_PIN_NOT_CONNECTED;
     }
+    m_cb[p_instance->drv_inst_idx].miso_pin = p_config->miso_pin;
     // - Slave Select (optional) - output with initial value 1 (inactive).
     if (p_config->ss_pin != NRFX_SPI_PIN_NOT_USED)
     {
@@ -173,6 +175,11 @@ void nrfx_spi_uninit(nrfx_spi_t const * const p_instance)
     if (p_cb->handler)
     {
         nrf_spi_int_disable(p_spi, NRF_SPI_ALL_INTS_MASK);
+    }
+
+    if (p_cb->miso_pin != NRFX_SPI_PIN_NOT_USED)
+    {
+        nrf_gpio_cfg_default(p_cb->miso_pin);
     }
     nrf_spi_disable(p_spi);
 

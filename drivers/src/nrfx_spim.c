@@ -72,6 +72,7 @@ typedef struct
     //  are not concurrently used in IRQ handlers and main line code]
     bool            ss_active_high;
     uint8_t         ss_pin;
+    uint8_t         miso_pin;
     uint8_t         orc;
 
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
@@ -190,6 +191,7 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
     {
         miso_pin = NRF_SPIM_PIN_NOT_CONNECTED;
     }
+    m_cb[p_instance->drv_inst_idx].miso_pin = p_config->miso_pin;
     // - Slave Select (optional) - output with initial value 1 (inactive).
     if (p_config->ss_pin != NRFX_SPIM_PIN_NOT_USED)
     {
@@ -281,6 +283,11 @@ void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
             {}
             p_cb->transfer_in_progress = false;
         }
+    }
+
+    if (p_cb->miso_pin != NRFX_SPIM_PIN_NOT_USED)
+    {
+        nrf_gpio_cfg_default(p_cb->miso_pin);
     }
     nrf_spim_disable(p_spim);
 
