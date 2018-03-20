@@ -1151,8 +1151,8 @@ void nrf_usbd_dpdmvalue_set(nrf_usbd_dpdmvalue_t val)
 
 void nrf_usbd_dtoggle_set(uint8_t ep, nrf_usbd_dtoggle_t op)
 {
-    ASSERT(NRF_USBD_EP_VALIDATE(ep));
-    ASSERT(!NRF_USBD_EPISO_CHECK(ep));
+    NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
+    NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->DTOGGLE = ep | (NRF_USBD_DTOGGLE_NOP << USBD_DTOGGLE_VALUE_Pos);
     __DSB();
     NRF_USBD->DTOGGLE = ep | (op << USBD_DTOGGLE_VALUE_Pos);

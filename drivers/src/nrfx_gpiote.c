@@ -338,7 +338,7 @@ void nrfx_gpiote_out_set(nrfx_gpiote_pin_t pin)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(!pin_in_use_by_te(pin))
+    NRFX_ASSERT(!pin_in_use_by_te(pin));
 
     nrf_gpio_pin_set(pin);
 }
@@ -348,7 +348,7 @@ void nrfx_gpiote_out_clear(nrfx_gpiote_pin_t pin)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(!pin_in_use_by_te(pin))
+    NRFX_ASSERT(!pin_in_use_by_te(pin));
 
     nrf_gpio_pin_clear(pin);
 }
@@ -358,7 +358,7 @@ void nrfx_gpiote_out_toggle(nrfx_gpiote_pin_t pin)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(!pin_in_use_by_te(pin))
+    NRFX_ASSERT(!pin_in_use_by_te(pin));
 
     nrf_gpio_pin_toggle(pin);
 }
@@ -368,7 +368,7 @@ void nrfx_gpiote_out_task_enable(nrfx_gpiote_pin_t pin)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(pin_in_use_by_te(pin))
+    NRFX_ASSERT(pin_in_use_by_te(pin));
 
     nrf_gpiote_task_enable((uint32_t)m_cb.pin_assignments[pin]);
 }
@@ -378,7 +378,7 @@ void nrfx_gpiote_out_task_disable(nrfx_gpiote_pin_t pin)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
     NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(pin_in_use_by_te(pin))
+    NRFX_ASSERT(pin_in_use_by_te(pin));
 
     nrf_gpiote_task_disable((uint32_t)m_cb.pin_assignments[pin]);
 }

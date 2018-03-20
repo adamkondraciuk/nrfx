@@ -304,7 +304,7 @@ nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  chan
 
 nrfx_err_t nrfx_saadc_channel_uninit(uint8_t channel)
 {
-    NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT)
+    NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfx_err_t err_code;

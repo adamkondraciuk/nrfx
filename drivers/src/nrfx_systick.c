@@ -45,7 +45,7 @@
  * @param us Time in microseconds to check
  */
 #define NRFX_SYSTICK_ASSERT_TIMEOUT(us) \
-    NRFX_ASSERT(us <= (NRFX_SYSTICK_TICKS_MAX / ((SystemCoreClock) / NRFX_SYSTICK_US)))
+    NRFX_ASSERT(us <= (NRFX_SYSTICK_TICKS_MAX / ((SystemCoreClock) / NRFX_SYSTICK_US)));
 
 /**
  * @brief Function that converts microseconds to ticks
