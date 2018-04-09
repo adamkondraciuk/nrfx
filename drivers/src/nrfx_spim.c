@@ -54,6 +54,10 @@
      SPIM2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
      SPIM3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
 
+#if defined(NRF52840_XXAA) && (NRFX_CHECK(NRFX_SPIM3_ENABLED))
+// Enable workaround for nRF52840 anomaly 195 (SPIM3 continues to draw current after disable).
+#define USE_WORKAROUND_FOR_ANOMALY_195
+#endif
 
 // Control block - driver instance local data.
 typedef struct
@@ -331,6 +335,13 @@ void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
         nrf_gpio_cfg_default(p_cb->miso_pin);
     }
     nrf_spim_disable(p_spim);
+
+#ifdef USE_WORKAROUND_FOR_ANOMALY_195
+    if (p_spim == NRF_SPIM3)
+    {
+        *(volatile uint32_t *)0x4002F004 = 1;
+    }
+#endif
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_instance->p_reg);
