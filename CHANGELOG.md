@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [Unreleased]
+### Added
+- Implemented workaround for nRF52832 and nRF52840 anomaly 194 in the I2S driver.
+
 ## [1.0.0] - 2018-03-21
 ### Added
 - Added the NRFX_WAIT_FOR macro to improve the time-out functionality in QSPI and SAADC drivers.

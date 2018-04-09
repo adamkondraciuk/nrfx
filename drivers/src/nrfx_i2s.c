@@ -16,6 +16,14 @@
     (event == NRF_I2S_EVENT_STOPPED  ? "NRF_I2S_EVENT_STOPPED"  : \
                                        "UNKNOWN EVENT")))
 
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_194) &&          \
+    (defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || \
+     defined(NRF52840_XXAA))
+// Enable workaround for nRF52832 and nRF52840 anomaly 194 (STOP task does not
+// switch off all resources).
+#define USE_WORKAROUND_FOR_ANOMALY_194 1
+#endif
+
 // Control block - driver instance local data.
 typedef struct
 {
@@ -292,6 +300,11 @@ void nrfx_i2s_stop(void)
     nrf_i2s_int_disable(NRF_I2S, NRF_I2S_INT_RXPTRUPD_MASK |
                                  NRF_I2S_INT_TXPTRUPD_MASK);
     nrf_i2s_task_trigger(NRF_I2S, NRF_I2S_TASK_STOP);
+
+#if USE_WORKAROUND_FOR_ANOMALY_194
+    *((volatile uint32_t *)0x40025038) = 1;
+    *((volatile uint32_t *)0x4002503C) = 1;
+#endif
 }
 
 
