@@ -23,8 +23,8 @@ void nrfx_wdt_irq_handler(void)
 {
     if (nrf_wdt_int_enable_check(NRF_WDT_INT_TIMEOUT_MASK) == true)
     {
-        nrf_wdt_event_clear(NRF_WDT_EVENT_TIMEOUT);
         m_wdt_event_handler();
+        nrf_wdt_event_clear(NRF_WDT_EVENT_TIMEOUT);
     }
 }
 
