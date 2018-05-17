@@ -6,7 +6,7 @@
 
 #include <nrfx_ppi.h>
 
-#define NRFX_LOG_MODULE_NAME PPI
+#define NRFX_LOG_MODULE PPI
 #include <nrfx_log.h>
 
 

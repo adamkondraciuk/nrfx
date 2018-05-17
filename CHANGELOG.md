@@ -6,6 +6,9 @@ All notable changes to this project are documented in this file.
 - Implemented workaround for nRF52832 and nRF52840 anomaly 194 in the I2S driver.
 - Implemented workaround for nRF52840 anomaly 195 in the SPIM driver.
 
+### Fixed
+- Fixed log definition in nrfx_ppi.
+
 ## [1.0.0] - 2018-03-21
 ### Added
 - Added the NRFX_WAIT_FOR macro to improve the time-out functionality in QSPI and SAADC drivers.
