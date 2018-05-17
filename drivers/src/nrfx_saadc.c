@@ -285,7 +285,6 @@ nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  chan
     m_cb.psel[channel].pselp = p_config->pin_p;
     m_cb.psel[channel].pseln = p_config->pin_n;
     nrf_saadc_channel_init(channel, p_config);
-    nrf_saadc_channel_input_set(channel, p_config->pin_p, p_config->pin_n);
 
 #ifdef NRF52_PAN_74
     if ((p_config->acq_time == NRF_SAADC_ACQTIME_3US) ||
