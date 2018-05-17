@@ -8,6 +8,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 - Fixed log definition in nrfx_ppi.
+- Fixed SPIM interrupt definition for nRF52810 SoC.
 
 ## [1.0.0] - 2018-03-21
 ### Added

@@ -24,12 +24,12 @@ extern "C" {
 #define nrfx_twis_0_irq_handler     TWIM0_TWIS0_IRQHandler
 #endif
 
-// SPIM1_SPIS1_IRQn
+// SPIM0_SPIS0_IRQn
 #if NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
-#define nrfx_prs_box_1_irq_handler  SPIM1_SPIS1_IRQHandler
+#define nrfx_prs_box_1_irq_handler  SPIM0_SPIS0_IRQHandler
 #else
-#define nrfx_spim_1_irq_handler     SPIM1_SPIS1_IRQHandler
-#define nrfx_spis_1_irq_handler     SPIM1_SPIS1_IRQHandler
+#define nrfx_spim_0_irq_handler     SPIM0_SPIS0_IRQHandler
+#define nrfx_spis_0_irq_handler     SPIM0_SPIS0_IRQHandler
 #endif
 
 // GPIOTE_IRQn
