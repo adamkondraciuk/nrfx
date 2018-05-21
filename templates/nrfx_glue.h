@@ -128,6 +128,73 @@ extern "C" {
 //------------------------------------------------------------------------------
 
 /**
+ * @brief Atomic 32-bit unsigned type.
+ */
+#define nrfx_atomic_t
+
+/**
+ * @brief Stores value to an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value to store.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_STORE(p_data, value)
+
+/**
+ * @brief Performs bitwise OR operation on an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value of second operand of OR operation.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_OR(p_data, value)
+
+/**
+ * @brief Performs bitwise AND operation on an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value of second operand of AND operation.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_AND(p_data, value)
+
+/**
+ * @brief Performs bitwise XOR operation on an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value of second operand of XOR operation.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_XOR(p_data, value)
+
+/**
+ * @brief Performs an addition operation on an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value of second operand of ADD operation.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_ADD(p_data, value)
+
+/**
+ * @brief Performs a subtraction operation on an atomic object and returns its previous value.
+ *
+ * @param[in] p_data  Atomic memory pointer.
+ * @param[in] value   Value of second operand of SUB operation.
+ *
+ * @return Previous value of the atomic object.
+ */
+#define NRFX_ATOMIC_FETCH_SUB(p_data, value)
+
+//------------------------------------------------------------------------------
+
+/**
  * @brief When set to a non-zero value, this macro specifies that the
  *        @ref nrfx_error_codes and the @ref nrfx_err_t type itself are defined
  *        in a customized way and the default definitions from @c <nrfx_error.h>
