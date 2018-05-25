@@ -146,6 +146,11 @@ void nrfx_adc_channel_enable(nrfx_adc_channel_t * const p_channel);
 void nrfx_adc_channel_disable(nrfx_adc_channel_t * const p_channel);
 
 /**
+ * @brief Function for disabling all ADC channels.
+ */
+void nrfx_adc_all_channels_disable(void);
+
+/**
  * @brief Function for starting ADC sampling.
  *
  * This function triggers single ADC sampling. If more than one channel is enabled, the driver

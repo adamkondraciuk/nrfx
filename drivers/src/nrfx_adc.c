@@ -55,7 +55,8 @@ nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
 
 void nrfx_adc_uninit(void)
 {
-    m_cb.p_head = NULL;
+    nrfx_adc_all_channels_disable();
+
     NRFX_IRQ_DISABLE(ADC_IRQn);
     nrf_adc_int_disable(NRF_ADC_INT_END_MASK);
     nrf_adc_task_trigger(NRF_ADC_TASK_STOP);
@@ -109,6 +110,13 @@ void nrfx_adc_channel_disable(nrfx_adc_channel_t * const p_channel)
     }
 
     NRFX_LOG_INFO("Disabled.");
+}
+
+void nrfx_adc_all_channels_disable(void)
+{
+    NRFX_ASSERT(!nrfx_adc_is_busy());
+
+    m_cb.p_head = NULL;
 }
 
 void nrfx_adc_sample(void)

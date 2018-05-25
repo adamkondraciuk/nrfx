@@ -497,19 +497,44 @@ __STATIC_INLINE bool nrf_saadc_enable_check(void)
 /**
  * @brief Function for initializing the SAADC result buffer.
  *
- * @param[in] buffer Pointer to the result buffer.
- * @param[in] num    Size of buffer in words.
+ * @param[in] p_buffer Pointer to the result buffer.
+ * @param[in] size     Size of the buffer (in 16-bit samples).
  */
-__STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * buffer, uint32_t num)
+__STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
+                                           uint32_t            size)
 {
-    NRF_SAADC->RESULT.PTR = (uint32_t)buffer;
-    NRF_SAADC->RESULT.MAXCNT = num;
+    NRF_SAADC->RESULT.PTR = (uint32_t)p_buffer;
+    NRF_SAADC->RESULT.MAXCNT = size;
 }
 
+
 /**
- * @brief Function for getting the number of buffer words transferred since last START operation.
+ * @brief Function for setting the SAADC result buffer pointer.
  *
- * @returns Number of words transferred.
+ * @param[in] buffer Pointer to the result buffer.
+ */
+__STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer)
+{
+    NRF_SAADC->RESULT.PTR = (uint32_t)p_buffer;
+}
+
+
+/**
+ * @brief Function for getting the SAADC result buffer pointer.
+ *
+ * @return Pointer to the result buffer.
+ */
+__STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void)
+{
+    return (nrf_saadc_value_t *)NRF_SAADC->RESULT.PTR;
+}
+
+
+/**
+ * @brief Function for getting the number of samples written to the result
+ *        buffer since the previous START task.
+ *
+ * @returns Number of 16-bit samples written to the buffer.
  */
 __STATIC_INLINE uint16_t nrf_saadc_amount_get(void)
 {
