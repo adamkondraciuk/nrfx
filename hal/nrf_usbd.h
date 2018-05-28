@@ -905,12 +905,20 @@ NRF_STATIC_INLINE void nrf_usbd_ep_disable(NRF_USBD_Type * p_reg, uint8_t ep);
 /**
  * @brief Function for disabling all endpoints.
  *
- * An auxiliary function to disable all aviable endpoints.
- * It leaves only EP0 IN and OUT enabled.
- *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_usbd_ep_all_disable(NRF_USBD_Type * p_reg);
+
+/**
+ * @brief Function for setting the default endpoint configuration.
+ *
+ * @note The default configuration means that all endpoints, except for EP0 IN
+ *       and EP0 OUT, are disabled. Such configuration is used after the USB
+ *       device reset.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_usbd_ep_default_config(NRF_USBD_Type * p_reg);
 
 /**
  * @brief Function for stalling the selected endpoint.
@@ -1303,6 +1311,12 @@ NRF_STATIC_INLINE void nrf_usbd_ep_disable(NRF_USBD_Type * p_reg, uint8_t ep)
 }
 
 NRF_STATIC_INLINE void nrf_usbd_ep_all_disable(NRF_USBD_Type * p_reg)
+{
+    p_reg->EPINEN  = 0;
+    p_reg->EPOUTEN = 0;
+}
+
+void nrf_usbd_ep_default_config(NRF_USBD_Type * p_reg)
 {
     p_reg->EPINEN  = USBD_EPINEN_IN0_Enable << USBD_EPINEN_IN0_Pos;
     p_reg->EPOUTEN = USBD_EPOUTEN_OUT0_Enable << USBD_EPOUTEN_OUT0_Pos;
