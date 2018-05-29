@@ -148,6 +148,7 @@ extern "C" {
 // FPU_IRQn
 
 // USBD_IRQn
+#define nrfx_usbd_irq_handler       USBD_IRQHandler
 
 // UARTE1_IRQn
 #define nrfx_uarte_1_irq_handler    UARTE1_IRQHandler
