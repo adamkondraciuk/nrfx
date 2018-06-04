@@ -511,7 +511,7 @@ __STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
 /**
  * @brief Function for setting the SAADC result buffer pointer.
  *
- * @param[in] buffer Pointer to the result buffer.
+ * @param[in] p_buffer Pointer to the result buffer.
  */
 __STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer)
 {
