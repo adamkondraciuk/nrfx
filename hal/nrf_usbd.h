@@ -584,8 +584,8 @@ typedef enum
  */
 typedef enum
 {
-    NRF_USBD_ISOSPLIT_OneDir = USBD_ISOSPLIT_SPLIT_OneDir, /**< Full buffer dedicated to either iso IN or OUT */
-    NRF_USBD_ISOSPLIT_Half   = USBD_ISOSPLIT_SPLIT_HalfIN, /**< Buffer divided in half */
+    NRF_USBD_ISOSPLIT_ONEDIR = USBD_ISOSPLIT_SPLIT_OneDir, /**< Full buffer dedicated to either iso IN or OUT */
+    NRF_USBD_ISOSPLIT_HALF   = USBD_ISOSPLIT_SPLIT_HalfIN, /**< Buffer divided in half */
 }nrf_usbd_isosplit_t;
 
 /**
