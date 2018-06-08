@@ -55,11 +55,15 @@ nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
 
 void nrfx_adc_uninit(void)
 {
-    nrfx_adc_all_channels_disable();
-
     NRFX_IRQ_DISABLE(ADC_IRQn);
     nrf_adc_int_disable(NRF_ADC_INT_END_MASK);
     nrf_adc_task_trigger(NRF_ADC_TASK_STOP);
+
+    // Disable all channels. This must be done after the interrupt is disabled
+    // because adc_sample_process() dereferences this pointer when it needs to
+    // switch back to the first channel in the list (when the number of samples
+    // to read is bigger than the number of enabled channels).
+    m_cb.p_head = NULL;
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
@@ -182,6 +186,10 @@ static bool adc_sample_process()
         bool task_trigger = false;
         if (m_cb.p_current_conv->p_next == NULL)
         {
+            // Make sure the list of channels has not been somehow removed
+            // (it is when all channels are disabled).
+            NRFX_ASSERT(m_cb.p_head);
+
             m_cb.p_current_conv = m_cb.p_head;
         }
         else

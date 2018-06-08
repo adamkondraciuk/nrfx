@@ -135,6 +135,9 @@ void nrfx_adc_uninit(void);
  * This function configures and enables the channel. When @ref nrfx_adc_buffer_convert is
  * called, all channels that have been enabled with this function are sampled.
  *
+ * This function can be called only when there is no conversion in progress
+ * (the ADC is not busy).
+ *
  * @note The channel instance variable @p p_channel is used by the driver as an item
  *       in a list. Therefore, it cannot be an automatic variable that is located on the stack.
  */
@@ -142,11 +145,17 @@ void nrfx_adc_channel_enable(nrfx_adc_channel_t * const p_channel);
 
 /**
  * @brief Function for disabling an ADC channel.
+ *
+ * This function can be called only when there is no conversion in progress
+ * (the ADC is not busy).
  */
 void nrfx_adc_channel_disable(nrfx_adc_channel_t * const p_channel);
 
 /**
  * @brief Function for disabling all ADC channels.
+ *
+ * This function can be called only when there is no conversion in progress
+ * (the ADC is not busy).
  */
 void nrfx_adc_all_channels_disable(void);
 
