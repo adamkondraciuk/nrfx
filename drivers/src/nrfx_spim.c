@@ -146,14 +146,13 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
     }
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-
-    // Currently, only SPIM3 in nRF52840 supports the extended features. Other instances must be checked.
+    // Currently, only SPIM3 in nRF52840 supports the extended features.
+    // Other instances must be checked.
     if ((p_instance->drv_inst_idx != NRFX_SPIM3_INST_IDX) &&
-           ((p_config->dcx_pin     != NRFX_SPIM_PIN_NOT_USED) ||
-            (p_config->frequency   == NRF_SPIM_FREQ_16M)      ||
-            (p_config->frequency   == NRF_SPIM_FREQ_32M)      ||
-            (p_config->rx_delay    != 0x00)                   ||
-            (p_config->use_hw_ss)))
+        ((p_config->dcx_pin   != NRFX_SPIM_PIN_NOT_USED) ||
+         (p_config->frequency == NRF_SPIM_FREQ_16M)      ||
+         (p_config->frequency == NRF_SPIM_FREQ_32M)      ||
+         (p_config->use_hw_ss)))
     {
         err_code = NRFX_ERROR_NOT_SUPPORTED;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
