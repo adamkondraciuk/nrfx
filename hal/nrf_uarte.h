@@ -44,7 +44,7 @@ typedef enum
     NRF_UARTE_EVENT_NCTS      = offsetof(NRF_UARTE_Type, EVENTS_NCTS),      ///< CTS is deactivated.
     NRF_UARTE_EVENT_RXDRDY    = offsetof(NRF_UARTE_Type, EVENTS_RXDRDY),    ///< Data received in RXD (but potentially not yet transferred to Data RAM).
     NRF_UARTE_EVENT_ENDRX     = offsetof(NRF_UARTE_Type, EVENTS_ENDRX),     ///< Receive buffer is filled up.
-    NRF_UARTE_EVENT_TXDDY     = offsetof(NRF_UARTE_Type, EVENTS_TXDRDY),    ///< Data sent from TXD.
+    NRF_UARTE_EVENT_TXDRDY    = offsetof(NRF_UARTE_Type, EVENTS_TXDRDY),    ///< Data sent from TXD.
     NRF_UARTE_EVENT_ENDTX     = offsetof(NRF_UARTE_Type, EVENTS_ENDTX),     ///< Last TX byte transmitted.
     NRF_UARTE_EVENT_ERROR     = offsetof(NRF_UARTE_Type, EVENTS_ERROR),     ///< Error detected.
     NRF_UARTE_EVENT_RXTO      = offsetof(NRF_UARTE_Type, EVENTS_RXTO),      ///< Receiver timeout.
