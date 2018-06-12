@@ -5,10 +5,16 @@ All notable changes to this project are documented in this file.
 ### Added
 - Implemented workaround for nRF52832 and nRF52840 anomaly 194 in the I2S driver.
 - Implemented workaround for nRF52840 anomaly 195 in the SPIM driver.
+- Added HALs for CCM, ECB and RADIO.
+- Extended HALs for GPIO and PPI.
+
+### Changed
+- Corrected handling of transfer lengths in the TWI driver.
 
 ### Fixed
 - Fixed log definition in nrfx_ppi.
 - Fixed SPIM interrupt definition for nRF52810 SoC.
+- Fixed Slave Select configuration in the SPIM driver.
 
 ## [1.0.0] - 2018-03-21
 ### Added
