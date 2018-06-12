@@ -922,28 +922,16 @@ __STATIC_INLINE uint8_t nrf_power_gpregret2_get(void)
 
 __STATIC_INLINE void nrf_power_dcdcen_set(bool enable)
 {
-#if NRF_POWER_HAS_VDDH
     NRF_POWER->DCDCEN = (enable ?
         POWER_DCDCEN_DCDCEN_Enabled : POWER_DCDCEN_DCDCEN_Disabled) <<
             POWER_DCDCEN_DCDCEN_Pos;
-#else
-    NRF_POWER->DCDCEN = (enable ?
-        POWER_DCDCEN_DCDCEN_Enabled : POWER_DCDCEN_DCDCEN_Disabled) <<
-            POWER_DCDCEN_DCDCEN_Pos;
-#endif
 }
 
 __STATIC_INLINE bool nrf_power_dcdcen_get(void)
 {
-#if NRF_POWER_HAS_VDDH
     return (NRF_POWER->DCDCEN & POWER_DCDCEN_DCDCEN_Msk)
             ==
            (POWER_DCDCEN_DCDCEN_Enabled << POWER_DCDCEN_DCDCEN_Pos);
-#else
-    return (NRF_POWER->DCDCEN & POWER_DCDCEN_DCDCEN_Msk)
-            ==
-           (POWER_DCDCEN_DCDCEN_Enabled << POWER_DCDCEN_DCDCEN_Pos);
-#endif
 }
 
 #if NRF_POWER_HAS_RAMPOWER_REGS
