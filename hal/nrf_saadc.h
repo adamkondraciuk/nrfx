@@ -379,6 +379,19 @@ __STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t channel,
 
 
 /**
+ * @brief Function for configuring the positive input pin for a specific SAADC channel.
+ *
+ * @param[in] channel Channel number.
+ * @param[in] pselp   Positive input.
+ */
+__STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t channel,
+                                                     nrf_saadc_input_t pselp)
+{
+    NRF_SAADC->CH[channel].PSELP = pselp;
+}
+
+
+/**
  * @brief Function for setting the SAADC channel monitoring limits.
  *
  * @param[in] channel Channel number.
