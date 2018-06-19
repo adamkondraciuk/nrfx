@@ -105,7 +105,7 @@ void SystemInit(void)
     if (errata_31()){
         *(volatile uint32_t *)0x4000053C = ((*(volatile uint32_t *)0x10000244) & 0x0000E000) >> 13;
     }
-    
+
     #if defined (DEVELOP_IN_NRF52832)
     /* Workaround for Errata 32 "DIF: Debug session automatically enables TracePort pins" found at the Errata document
        for nRF52832 device located at https://infocenter.nordicsemi.com/ */
@@ -183,7 +183,7 @@ void SystemInit(void)
         if (NRF_POWER->RESETREAS & POWER_RESETREAS_RESETPIN_Msk){
             NRF_POWER->RESETREAS =  ~POWER_RESETREAS_RESETPIN_Msk;
         }
-    }    
+    }
     
     #if defined (DEVELOP_IN_NRF52832)
     /* Workaround for Errata 182 "RADIO: Fixes for anomalies #102, #106, and #107 do not take effect" found at the Errata document
@@ -217,7 +217,6 @@ void SystemInit(void)
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_12(void)
 {
-    #if !defined (DISABLE_WORKAROUND_12)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
@@ -229,7 +228,6 @@ static bool errata_12(void)
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -238,13 +236,11 @@ static bool errata_12(void)
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_16(void)
 {
-    #if !defined (DISABLE_WORKAROUND_16)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -252,7 +248,6 @@ static bool errata_16(void)
 
 static bool errata_31(void)
 {
-    #if !defined (DISABLE_WORKAROUND_31)
     if ((*(uint32_t *)0x10000130ul == 0xAul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
         return true;
     }
@@ -271,23 +266,18 @@ static bool errata_31(void)
     }
     #endif
 
-    #endif
-
     /* Fix should always apply. */
-    /* No fix is planned in future revisions */
     return true;
 }
 
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_32(void)
 {
-    #if !defined (DISABLE_WORKAROUND_32)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -295,7 +285,6 @@ static bool errata_32(void)
 
 static bool errata_36(void)
 {
-    #if !defined (DISABLE_WORKAROUND_36)
     if ((*(uint32_t *)0x10000130ul == 0xAul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
         return true;
     }
@@ -314,23 +303,18 @@ static bool errata_36(void)
     }
     #endif
 
-    #endif
-
     /* Fix should always apply. */
-    /* No fix is planned in future revisions */
     return true;
 }
 
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_37(void)
 {
-    #if !defined (DISABLE_WORKAROUND_37)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -339,13 +323,11 @@ static bool errata_37(void)
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_57(void)
 {
-    #if !defined (DISABLE_WORKAROUND_57)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -353,7 +335,6 @@ static bool errata_57(void)
 
 static bool errata_66(void)
 {
-    #if !defined (DISABLE_WORKAROUND_66)
     if ((*(uint32_t *)0x10000130ul == 0xAul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
         return true;
     }
@@ -366,30 +347,23 @@ static bool errata_66(void)
     }
     #endif
 
-    #endif
-
     /* Fix should always apply. */
-    /* No fix is planned in future revisions */
     return true;
 }
 
 static bool errata_103(void)
 {
-    #if !defined (DISABLE_WORKAROUND_103)
     if ((*(uint32_t *)0x10000130ul == 0xAul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
         return true;
     }
-    #endif
 
     /* Fix should always apply. */
-    /* No fix is planned in future revisions */
     return true;
 }
 
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_108(void)
 {
-    #if !defined (DISABLE_WORKAROUND_108)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
@@ -401,7 +375,6 @@ static bool errata_108(void)
             return true;
         }
     }
-    #endif
 
     return false;
 }
@@ -409,7 +382,6 @@ static bool errata_108(void)
 
 static bool errata_136(void)
 {
-    #if !defined (DISABLE_WORKAROUND_136)
     if ((*(uint32_t *)0x10000130ul == 0xAul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
         return true;
     }
@@ -428,23 +400,18 @@ static bool errata_136(void)
     }
     #endif
 
-    #endif
-
     /* Fix should always apply. */
-    /* No fix is planned in future revisions */
     return true;
 }
 
 #if defined (DEVELOP_IN_NRF52832)
 static bool errata_182(void)
 {
-    #if !defined (DISABLE_WORKAROUND_182)
     if (*(uint32_t *)0x10000130ul == 0x6ul){
         if (*(uint32_t *)0x10000134ul == 0x6ul){
             return true;
         }
     }
-    #endif
 
     return false;
 }

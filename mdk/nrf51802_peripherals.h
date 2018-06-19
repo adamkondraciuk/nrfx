@@ -127,12 +127,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPI_PRESENT
 #define SPI_COUNT 2
 
-/* Serial Peripheral Interface Master with DMA */
-#define SPIM_PRESENT
-#define SPIM_COUNT 1
-
-#define SPIM0_EASYDMA_MAXCNT_SIZE 8
-
 /* Serial Peripheral Interface Slave with DMA */
 #define SPIS_PRESENT
 #define SPIS_COUNT 1
