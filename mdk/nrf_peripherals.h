@@ -51,21 +51,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(__APPLE__)
     /* Do not include nrf specific files when building for PC host */
 #else
-    
+
     #if defined(NRF51)
         #include "nrf51_peripherals.h"
         
     #elif defined(NRF52810_XXAA)
         #include "nrf52810_peripherals.h"
+    #elif defined(NRF52811_XXAA)
+        #include "nrf52811_peripherals.h"
     #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
         #include "nrf52832_peripherals.h"
     #elif defined(NRF52840_XXAA)
         #include "nrf52840_peripherals.h"
         
+    #elif defined (NRF5340_XXAA)
+        #include "nrf5340_peripherals.h"
+    #elif defined (NRF5340_XXAA_NETWORK)
+        #include "nrf5340_network_peripherals.h"
+        
+    #elif defined (NRF9120_XXAA)
+        #include "nrf9120_peripherals.h"
+    #elif defined (NRF9120_XXAA_MODEM)
+        #include "nrf9120_modem_peripherals.h"
+    #elif defined (NRF9120_XXAA_MLM1)
+        #include "nrf9120_mlm1_peripherals.h"
+    #elif defined (NRF9120_XXAA_MLM1_MODEM)
+        #include "nrf9120_mlm1_modem_peripherals.h"
+        
     #else
         #error "Device must be defined. See nrf.h."
     #endif
-#endif
+#endif    
 
 /*lint --flb "Leave library region" */
 

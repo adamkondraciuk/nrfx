@@ -44,6 +44,8 @@ static bool errata_108(void);
 static bool errata_136(void);
 static bool errata_182(void);
 
+static bool ic_11060(void);
+
 
 #if defined ( __CC_ARM )
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_64M;
@@ -168,7 +170,14 @@ void SystemInit(void)
     if (errata_182()){
         *(volatile uint32_t *) 0x4000173C |= (0x1 << 10);
     }
-    
+
+    /* Workaround for IC-11060 present in certain FPGA versions of Quark and Graviton. See Jira issue for details. */
+    if (ic_11060()){
+        NRF_NFCT->EVENTS_READY = 0;
+        NRF_NFCT->EVENTS_FIELDDETECTED = 0;
+        NRF_NFCT->EVENTS_ERROR = 0;
+    }
+
     /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
      * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
      * operations are not used in your code. */
@@ -217,131 +226,139 @@ void SystemInit(void)
 
 static bool errata_12(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_12)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+                return true;
+            }
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
-            return true;
-        }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
-            return true;
-        }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_16(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_16)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
         }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_31(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_31)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+                return true;
+            }
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
-            return true;
-        }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
-            return true;
-        }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_32(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_32)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
         }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_36(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_36)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+                return true;
+            }
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
-            return true;
-        }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
-            return true;
-        }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_37(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_37)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
         }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_57(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_57)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
         }
-    }
-
+    #endif
     return false;
 }
 
 static bool errata_66(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_66)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+                return true;
+            }
         }
-    }
-
+    #endif
     return false;
 }
-
 
 static bool errata_108(void)
 {
-    if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
-            return true;
+    #if !defined (DISABLE_WORKAROUND_108)
+        if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
+                return true;
+            }
+            if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
+                return true;
+            }
         }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x40){
-            return true;
-        }
-        if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x50){
-            return true;
-        }
-    }
-
+    #endif
     return false;
 }
-
 
 static bool errata_136(void)
 {
+    #if !defined (DISABLE_WORKAROUND_136)
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
         if (((*(uint32_t *)0xF0000FE8) & 0x000000F0) == 0x30){
             return true;
@@ -353,19 +370,32 @@ static bool errata_136(void)
             return true;
         }
     }
+    #endif
 
     return false;
 }
 
-
 static bool errata_182(void)
 {
+    #if !defined (DISABLE_WORKAROUND_182)
     if (*(uint32_t *)0x10000130ul == 0x6ul){
         if (*(uint32_t *)0x10000134ul == 0x6ul){
             return true;
         }
     }
+    #endif
 
+    return false;
+}
+
+
+static bool ic_11060(void)
+{
+    #if !defined (DISABLE_WORKAROUND_IC11060)
+        if (NRF_NFCT->EVENTS_READY || NRF_NFCT->EVENTS_FIELDDETECTED || NRF_NFCT->EVENTS_ERROR){
+            return true;
+        }
+    #endif
     return false;
 }
 

@@ -244,6 +244,9 @@ Dummy_Handler:
 .weak SPIM3_IRQHandler
 .thumb_set SPIM3_IRQHandler, Dummy_Handler
 
+.weak RAMBISTHUB_IRQHandler
+.thumb_set RAMBISTHUB_IRQHandler, Dummy_Handler
+
 /************************************************************************************
  * Reset Handler Extensions                                                         *
  ************************************************************************************/
@@ -392,7 +395,7 @@ _vectors:
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
-  .word   0                           /*Reserved */
+  .word   RAMBISTHUB_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */

@@ -193,7 +193,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     RAMBISTHUB_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -479,6 +479,11 @@ PWM3_IRQHandler
         PUBWEAK  SPIM3_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 SPIM3_IRQHandler
+        B .
+
+        PUBWEAK  RAMBISTHUB_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+RAMBISTHUB_IRQHandler
         B .
 
         END

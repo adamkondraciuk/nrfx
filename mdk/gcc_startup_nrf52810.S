@@ -92,7 +92,7 @@ __isr_vector:
   /* External Interrupts */
     .long   POWER_CLOCK_IRQHandler
     .long   RADIO_IRQHandler
-    .long   UARTE0_IRQHandler
+    .long   UARTE0_UART0_IRQHandler
     .long   TWIM0_TWIS0_IRQHandler
     .long   SPIM0_SPIS0_IRQHandler
     .long   0                           /*Reserved */
@@ -365,7 +365,7 @@ Default_Handler:
 
     IRQ  POWER_CLOCK_IRQHandler
     IRQ  RADIO_IRQHandler
-    IRQ  UARTE0_IRQHandler
+    IRQ  UARTE0_UART0_IRQHandler
     IRQ  TWIM0_TWIS0_IRQHandler
     IRQ  SPIM0_SPIS0_IRQHandler
     IRQ  GPIOTE_IRQHandler

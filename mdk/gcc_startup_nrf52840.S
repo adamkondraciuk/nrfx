@@ -198,7 +198,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   RAMBISTHUB_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -406,5 +406,6 @@ Default_Handler:
     IRQ  CRYPTOCELL_IRQHandler
     IRQ  PWM3_IRQHandler
     IRQ  SPIM3_IRQHandler
+    IRQ  RAMBISTHUB_IRQHandler
 
   .end

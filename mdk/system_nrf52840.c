@@ -127,7 +127,7 @@ void SystemInit(void)
     /* Workaround for Errata 120 "QSPI: Data read or written is corrupted" found at the Errata document
        for your device located at https://infocenter.nordicsemi.com/  */
     if (errata_120()){
-        *(volatile uint32_t *)0x40029640ul = 0x200ul;
+        *(volatile uint32_t *)0x40029640ul = 0x200ul; 
     }
     
     /* Workaround for Errata 136 "System: Bits in RESETREAS are set when they should not be" found at the Errata document
@@ -183,9 +183,9 @@ void SystemInit(void)
     SystemCoreClockUpdate();
 }
 
-
 static bool errata_36(void)
 {
+    #if !defined (DISABLE_WORKAROUND_36)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
@@ -197,13 +197,15 @@ static bool errata_36(void)
             return true;
         }
     }
+    #endif
     
-    return true;
+    return false;
 }
 
 
 static bool errata_66(void)
 {
+    #if !defined (DISABLE_WORKAROUND_66)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
@@ -215,18 +217,21 @@ static bool errata_66(void)
             return true;
         }
     }
+    #endif
     
-    return true;
+    return false;
 }
 
 
 static bool errata_98(void)
 {
+    #if !defined (DISABLE_WORKAROUND_98)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
+    #endif
     
     return false;
 }
@@ -234,11 +239,13 @@ static bool errata_98(void)
 
 static bool errata_103(void)
 {
+    #if !defined (DISABLE_WORKAROUND_103)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
+    #endif
     
     return false;
 }
@@ -246,11 +253,13 @@ static bool errata_103(void)
 
 static bool errata_115(void)
 {
+    #if !defined (DISABLE_WORKAROUND_115)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
+    #endif
     
     return false;
 }
@@ -258,11 +267,13 @@ static bool errata_115(void)
 
 static bool errata_120(void)
 {
+    #if !defined (DISABLE_WORKAROUND_120)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
+    #endif
     
     return false;
 }
@@ -270,6 +281,7 @@ static bool errata_120(void)
 
 static bool errata_136(void)
 {
+    #if !defined (DISABLE_WORKAROUND_136)
     if (*(uint32_t *)0x10000130ul == 0x8ul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
@@ -281,8 +293,10 @@ static bool errata_136(void)
             return true;
         }
     }
+    #endif
     
-    return true;
+    return false;
 }
+
 
 /*lint --flb "Leave library region" */
