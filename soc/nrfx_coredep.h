@@ -29,6 +29,9 @@
 #elif defined(NRF52840_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
+#elif defined(NRF9120_XXAA)
+    #define NRFX_DELAY_CPU_FREQ_MHZ 64
+    #define NRFX_DELAY_DWT_PRESENT  1
 #else
     #error "Unknown device."
 #endif
@@ -108,7 +111,10 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
         0xd8fd, // BHI .-2
         0x4770  // BX LR
         };
-    #elif  defined(NRF52832_XXAA) || defined (NRF52832_XXAB) ||  defined(NRF52840_XXAA)
+    #elif  (defined(NRF52832_XXAA) || \
+           defined (NRF52832_XXAB) || \
+           defined(NRF52840_XXAA)  || \
+           defined(NRF9120_XXAA))
     // The loop takes 3 cycles: 1 for SUBS and 2 for BHI.
     // Make sure that code will be cached properly, so that no extra wait states appear.
     __ALIGN(16)
