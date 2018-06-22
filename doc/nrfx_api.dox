@@ -12,6 +12,8 @@
 
 @defgroup nrf_comp COMP
 
+@defgroup nrf_dppi DPPI
+
 @defgroup nrf_ecb ECB
 
 @defgroup nrf_gpio GPIO

@@ -2,6 +2,8 @@
 @page nrf9160_drivers nRF9160 drivers
 @{
 
+@ref nrf_dppi
+
 @ref nrf_gpio
 
 @ref nrf_gpiote
