@@ -1,0 +1,36 @@
+/**
+@page nrf9120_drivers nRF9120 Drivers
+@{
+
+@ref nrf_gpio
+
+@ref nrf_gpiote
+
+@ref nrf_i2s
+
+@ref nrf_pdm
+
+@ref nrf_pwm
+
+@ref nrf_rtc
+
+@ref nrf_saadc
+
+@ref nrf_spim
+
+@ref nrf_spis
+
+@ref nrf_systick
+
+@ref nrf_timer
+
+@ref nrf_twim
+
+@ref nrf_twis
+
+@ref nrf_uarte
+
+@ref nrf_wdt
+
+@}
+*/

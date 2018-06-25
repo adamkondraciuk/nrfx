@@ -13,6 +13,7 @@ files etc.
 * nRF52810
 * nRF52832
 * nRF52840
+* nRF9120
 
 ## Directories
 
