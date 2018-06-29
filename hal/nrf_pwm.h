@@ -371,7 +371,7 @@ __STATIC_INLINE void nrf_pwm_subscribe_clear(NRF_PWM_Type * p_reg,
 
 /**
  * @brief Function for setting the publish configuration for a given
- *        PWM task.
+ *        PWM event.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] event   Event for which to set the configuration.
@@ -383,7 +383,7 @@ __STATIC_INLINE void nrf_pwm_publish_set(NRF_PWM_Type *  p_reg,
 
 /**
  * @brief Function for clearing the publish configuration for a given
- *        PWM task.
+ *        PWM event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
