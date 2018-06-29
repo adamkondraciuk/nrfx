@@ -122,6 +122,52 @@ __STATIC_INLINE uint32_t nrf_rtc_int_is_enabled(NRF_RTC_Type * p_reg, uint32_t m
  */
 __STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type * p_reg);
 
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the subscribe configuration for a given
+ *        RTC task.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] task    Task for which to set the configuration.
+ * @param[in] channel Channel through which to subscribe events.
+ */
+__STATIC_INLINE void nrf_rtc_subscribe_set(NRF_RTC_Type * p_reg,
+                                           nrf_rtc_task_t task,
+                                           uint8_t        channel);
+
+/**
+ * @brief Function for clearing the subscribe configuration for a given
+ *        RTC task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which to clear the configuration.
+ */
+__STATIC_INLINE void nrf_rtc_subscribe_clear(NRF_RTC_Type * p_reg,
+                                             nrf_rtc_task_t task);
+
+/**
+ * @brief Function for setting the publish configuration for a given
+ *        RTC event.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] event   Event for which to set the configuration.
+ * @param[in] channel Channel through which to publish the event.
+ */
+__STATIC_INLINE void nrf_rtc_publish_set(NRF_RTC_Type *  p_reg,
+                                         nrf_rtc_event_t event,
+                                         uint8_t         channel);
+
+/**
+ * @brief Function for clearing the publish configuration for a given
+ *        RTC event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event for which to clear the configuration.
+ */
+__STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,
+                                           nrf_rtc_event_t event);
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+
 /**
  * @brief Function for checking if an event is pending.
  *
@@ -233,6 +279,36 @@ __STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type * p_reg)
 {
     return p_reg->INTENSET;
 }
+
+#if defined(DPPI_PRESENT)
+__STATIC_INLINE void nrf_rtc_subscribe_set(NRF_RTC_Type * p_reg,
+                                           nrf_rtc_task_t task,
+                                           uint8_t        channel)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
+            ((uint32_t)channel | RTC_SUBSCRIBE_START_EN_Msk);
+}
+
+__STATIC_INLINE void nrf_rtc_subscribe_clear(NRF_RTC_Type * p_reg,
+                                             nrf_rtc_task_t task)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
+}
+
+__STATIC_INLINE void nrf_rtc_publish_set(NRF_RTC_Type *  p_reg,
+                                         nrf_rtc_event_t event,
+                                         uint8_t         channel)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
+            ((uint32_t)channel | RTC_PUBLISH_TICK_EN_Msk);
+}
+
+__STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,
+                                           nrf_rtc_event_t event)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
+}
+#endif // defined(DPPI_PRESENT)
 
 __STATIC_INLINE uint32_t nrf_rtc_event_pending(NRF_RTC_Type * p_reg, nrf_rtc_event_t event)
 {
