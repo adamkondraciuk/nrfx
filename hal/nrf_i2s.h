@@ -160,96 +160,96 @@ typedef enum
 /**
  * @brief Function for activating a specific I2S task.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task to activate.
  */
-__STATIC_INLINE void nrf_i2s_task_trigger(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_task_trigger(NRF_I2S_Type * p_reg,
                                           nrf_i2s_task_t task);
 
 /**
  * @brief Function for getting the address of a specific I2S task register.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Requested task.
  *
  * @return Address of the specified task register.
  */
-__STATIC_INLINE uint32_t nrf_i2s_task_address_get(NRF_I2S_Type const * p_i2s,
-                                                  nrf_i2s_task_t task);
+__STATIC_INLINE uint32_t nrf_i2s_task_address_get(NRF_I2S_Type const * p_reg,
+                                                  nrf_i2s_task_t       task);
 
 /**
  * @brief Function for clearing a specific I2S event.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
-__STATIC_INLINE void nrf_i2s_event_clear(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_event_clear(NRF_I2S_Type * p_reg,
                                          nrf_i2s_event_t event);
 
 /**
  * @brief Function for checking the state of a specific I2S event.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to check.
  *
  * @retval true  If the event is set.
  * @retval false If the event is not set.
  */
-__STATIC_INLINE bool nrf_i2s_event_check(NRF_I2S_Type const * p_i2s,
-                                         nrf_i2s_event_t event);
+__STATIC_INLINE bool nrf_i2s_event_check(NRF_I2S_Type const * p_reg,
+                                         nrf_i2s_event_t      event);
 
 /**
  * @brief Function for getting the address of a specific I2S event register.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Requested event.
  *
  * @return Address of the specified event register.
  */
-__STATIC_INLINE uint32_t nrf_i2s_event_address_get(NRF_I2S_Type const * p_i2s,
-                                                   nrf_i2s_event_t event);
+__STATIC_INLINE uint32_t nrf_i2s_event_address_get(NRF_I2S_Type const * p_reg,
+                                                   nrf_i2s_event_t      event);
 
 /**
  * @brief Function for enabling specified interrupts.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Interrupts to enable.
  */
-__STATIC_INLINE void nrf_i2s_int_enable(NRF_I2S_Type * p_i2s, uint32_t mask);
+__STATIC_INLINE void nrf_i2s_int_enable(NRF_I2S_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling specified interrupts.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Interrupts to disable.
  */
-__STATIC_INLINE void nrf_i2s_int_disable(NRF_I2S_Type * p_i2s, uint32_t mask);
+__STATIC_INLINE void nrf_i2s_int_disable(NRF_I2S_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for retrieving the state of a given interrupt.
  *
- * @param[in] p_i2s   I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] i2s_int Interrupt to check.
  *
  * @retval true  If the interrupt is enabled.
  * @retval false If the interrupt is not enabled.
  */
-__STATIC_INLINE bool nrf_i2s_int_enable_check(NRF_I2S_Type const * p_i2s,
-                                              nrf_i2s_int_mask_t i2s_int);
+__STATIC_INLINE bool nrf_i2s_int_enable_check(NRF_I2S_Type const * p_reg,
+                                              nrf_i2s_int_mask_t   i2s_int);
 
 /**
  * @brief Function for enabling the I2S peripheral.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-__STATIC_INLINE void nrf_i2s_enable(NRF_I2S_Type * p_i2s);
+__STATIC_INLINE void nrf_i2s_enable(NRF_I2S_Type * p_reg);
 
 /**
  * @brief Function for disabling the I2S peripheral.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-__STATIC_INLINE void nrf_i2s_disable(NRF_I2S_Type * p_i2s);
+__STATIC_INLINE void nrf_i2s_disable(NRF_I2S_Type * p_reg);
 
 /**
  * @brief Function for configuring I2S pins.
@@ -258,24 +258,24 @@ __STATIC_INLINE void nrf_i2s_disable(NRF_I2S_Type * p_i2s);
  * If a given signal is not needed, pass the @ref NRF_I2S_PIN_NOT_CONNECTED
  * value instead of its pin number.
  *
- * @param[in] p_i2s     I2S instance.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] sck_pin   SCK pin number.
  * @param[in] lrck_pin  LRCK pin number.
  * @param[in] mck_pin   MCK pin number.
  * @param[in] sdout_pin SDOUT pin number.
  * @param[in] sdin_pin  SDIN pin number.
  */
-__STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_i2s,
-                                      uint32_t sck_pin,
-                                      uint32_t lrck_pin,
-                                      uint32_t mck_pin,
-                                      uint32_t sdout_pin,
-                                      uint32_t sdin_pin);
+__STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_reg,
+                                      uint32_t       sck_pin,
+                                      uint32_t       lrck_pin,
+                                      uint32_t       mck_pin,
+                                      uint32_t       sdout_pin,
+                                      uint32_t       sdin_pin);
 
 /**
  * @brief Function for setting the I2S peripheral configuration.
  *
- * @param[in] p_i2s        I2S instance.
+ * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
  * @param[in] mode         Mode of operation (master or slave).
  * @param[in] format       I2S frame format.
  * @param[in] alignment    Alignment of sample within a frame.
@@ -287,7 +287,7 @@ __STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_i2s,
  * @retval true  If the configuration has been set successfully.
  * @retval false If the requested configuration is not allowed.
  */
-__STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type *     p_reg,
                                        nrf_i2s_mode_t     mode,
                                        nrf_i2s_format_t   format,
                                        nrf_i2s_align_t    alignment,
@@ -303,14 +303,14 @@ __STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type * p_i2s,
  * transmission accordingly. If the transfer in a given direction is not
  * required, pass NULL instead of the pointer to the corresponding buffer.
  *
- * @param[in] p_i2s       I2S instance.
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] size        Size of the buffers (in 32-bit words).
  * @param[in] p_rx_buffer Pointer to the receive buffer.
  *                        Pass NULL to disable reception.
  * @param[in] p_tx_buffer Pointer to the transmit buffer.
  *                        Pass NULL to disable transmission.
  */
-__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type *   p_reg,
                                           uint16_t         size,
                                           uint32_t *       p_rx_buffer,
                                           uint32_t const * p_tx_buffer);
@@ -321,20 +321,20 @@ __STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type * p_i2s,
  * @note The size of the buffer can be set only by calling
  *       @ref nrf_i2s_transfer_set.
  *
- * @param[in] p_i2s    I2S instance.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] p_buffer Pointer to the receive buffer.
  */
-__STATIC_INLINE void nrf_i2s_rx_buffer_set(NRF_I2S_Type * p_i2s,
-                                           uint32_t * p_buffer);
+__STATIC_INLINE void nrf_i2s_rx_buffer_set(NRF_I2S_Type * p_reg,
+                                           uint32_t *     p_buffer);
 
 /**
  * @brief Function for getting the pointer to the receive buffer.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Pointer to the receive buffer.
  */
-__STATIC_INLINE uint32_t * nrf_i2s_rx_buffer_get(NRF_I2S_Type const * p_i2s);
+__STATIC_INLINE uint32_t * nrf_i2s_rx_buffer_get(NRF_I2S_Type const * p_reg);
 
 /**
  * @brief Function for setting the pointer to the transmit buffer.
@@ -342,99 +342,99 @@ __STATIC_INLINE uint32_t * nrf_i2s_rx_buffer_get(NRF_I2S_Type const * p_i2s);
  * @note The size of the buffer can be set only by calling
  *       @ref nrf_i2s_transfer_set.
  *
- * @param[in] p_i2s    I2S instance.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] p_buffer Pointer to the transmit buffer.
  */
-__STATIC_INLINE void nrf_i2s_tx_buffer_set(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_tx_buffer_set(NRF_I2S_Type *   p_reg,
                                            uint32_t const * p_buffer);
 
 /**
  * @brief Function for getting the pointer to the transmit buffer.
  *
- * @param[in] p_i2s I2S instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Pointer to the transmit buffer.
  */
-__STATIC_INLINE uint32_t * nrf_i2s_tx_buffer_get(NRF_I2S_Type const * p_i2s);
+__STATIC_INLINE uint32_t * nrf_i2s_tx_buffer_get(NRF_I2S_Type const * p_reg);
 
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
-__STATIC_INLINE void nrf_i2s_task_trigger(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_task_trigger(NRF_I2S_Type * p_reg,
                                           nrf_i2s_task_t task)
 {
-    *((volatile uint32_t *)((uint8_t *)p_i2s + (uint32_t)task)) = 0x1UL;
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-__STATIC_INLINE uint32_t nrf_i2s_task_address_get(NRF_I2S_Type const * p_i2s,
-                                                  nrf_i2s_task_t task)
+__STATIC_INLINE uint32_t nrf_i2s_task_address_get(NRF_I2S_Type const * p_reg,
+                                                  nrf_i2s_task_t       task)
 {
-    return ((uint32_t)p_i2s + (uint32_t)task);
+    return ((uint32_t)p_reg + (uint32_t)task);
 }
 
-__STATIC_INLINE void nrf_i2s_event_clear(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_event_clear(NRF_I2S_Type *  p_reg,
                                          nrf_i2s_event_t event)
 {
-    *((volatile uint32_t *)((uint8_t *)p_i2s + (uint32_t)event)) = 0x0UL;
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)p_i2s + (uint32_t)event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event));
     (void)dummy;
 #endif
 }
 
-__STATIC_INLINE bool nrf_i2s_event_check(NRF_I2S_Type const * p_i2s,
-                                         nrf_i2s_event_t event)
+__STATIC_INLINE bool nrf_i2s_event_check(NRF_I2S_Type const * p_reg,
+                                         nrf_i2s_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_i2s + (uint32_t)event);
+    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE uint32_t nrf_i2s_event_address_get(NRF_I2S_Type const * p_i2s,
-                                                   nrf_i2s_event_t event)
+__STATIC_INLINE uint32_t nrf_i2s_event_address_get(NRF_I2S_Type const * p_reg,
+                                                   nrf_i2s_event_t      event)
 {
-    return ((uint32_t)p_i2s + (uint32_t)event);
+    return ((uint32_t)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE void nrf_i2s_int_enable(NRF_I2S_Type * p_i2s, uint32_t mask)
+__STATIC_INLINE void nrf_i2s_int_enable(NRF_I2S_Type * p_reg, uint32_t mask)
 {
-    p_i2s->INTENSET = mask;
+    p_reg->INTENSET = mask;
 }
 
-__STATIC_INLINE void nrf_i2s_int_disable(NRF_I2S_Type * p_i2s, uint32_t mask)
+__STATIC_INLINE void nrf_i2s_int_disable(NRF_I2S_Type * p_reg, uint32_t mask)
 {
-    p_i2s->INTENCLR = mask;
+    p_reg->INTENCLR = mask;
 }
 
-__STATIC_INLINE bool nrf_i2s_int_enable_check(NRF_I2S_Type const * p_i2s,
-                                              nrf_i2s_int_mask_t i2s_int)
+__STATIC_INLINE bool nrf_i2s_int_enable_check(NRF_I2S_Type const * p_reg,
+                                              nrf_i2s_int_mask_t   i2s_int)
 {
-    return (bool)(p_i2s->INTENSET & i2s_int);
+    return (bool)(p_reg->INTENSET & i2s_int);
 }
 
-__STATIC_INLINE void nrf_i2s_enable(NRF_I2S_Type * p_i2s)
+__STATIC_INLINE void nrf_i2s_enable(NRF_I2S_Type * p_reg)
 {
-    p_i2s->ENABLE = (I2S_ENABLE_ENABLE_Enabled << I2S_ENABLE_ENABLE_Pos);
+    p_reg->ENABLE = (I2S_ENABLE_ENABLE_Enabled << I2S_ENABLE_ENABLE_Pos);
 }
 
-__STATIC_INLINE void nrf_i2s_disable(NRF_I2S_Type * p_i2s)
+__STATIC_INLINE void nrf_i2s_disable(NRF_I2S_Type * p_reg)
 {
-    p_i2s->ENABLE = (I2S_ENABLE_ENABLE_Disabled << I2S_ENABLE_ENABLE_Pos);
+    p_reg->ENABLE = (I2S_ENABLE_ENABLE_Disabled << I2S_ENABLE_ENABLE_Pos);
 }
 
-__STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_i2s,
-                                      uint32_t sck_pin,
-                                      uint32_t lrck_pin,
-                                      uint32_t mck_pin,
-                                      uint32_t sdout_pin,
-                                      uint32_t sdin_pin)
+__STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_reg,
+                                      uint32_t       sck_pin,
+                                      uint32_t       lrck_pin,
+                                      uint32_t       mck_pin,
+                                      uint32_t       sdout_pin,
+                                      uint32_t       sdin_pin)
 {
-    p_i2s->PSEL.SCK   = sck_pin;
-    p_i2s->PSEL.LRCK  = lrck_pin;
-    p_i2s->PSEL.MCK   = mck_pin;
-    p_i2s->PSEL.SDOUT = sdout_pin;
-    p_i2s->PSEL.SDIN  = sdin_pin;
+    p_reg->PSEL.SCK   = sck_pin;
+    p_reg->PSEL.LRCK  = lrck_pin;
+    p_reg->PSEL.MCK   = mck_pin;
+    p_reg->PSEL.SDOUT = sdout_pin;
+    p_reg->PSEL.SDIN  = sdin_pin;
 }
 
-__STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type *     p_reg,
                                        nrf_i2s_mode_t     mode,
                                        nrf_i2s_format_t   format,
                                        nrf_i2s_align_t    alignment,
@@ -460,62 +460,62 @@ __STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type * p_i2s,
         }
     }
 
-    p_i2s->CONFIG.MODE     = mode;
-    p_i2s->CONFIG.FORMAT   = format;
-    p_i2s->CONFIG.ALIGN    = alignment;
-    p_i2s->CONFIG.SWIDTH   = sample_width;
-    p_i2s->CONFIG.CHANNELS = channels;
-    p_i2s->CONFIG.RATIO    = ratio;
+    p_reg->CONFIG.MODE     = mode;
+    p_reg->CONFIG.FORMAT   = format;
+    p_reg->CONFIG.ALIGN    = alignment;
+    p_reg->CONFIG.SWIDTH   = sample_width;
+    p_reg->CONFIG.CHANNELS = channels;
+    p_reg->CONFIG.RATIO    = ratio;
 
     if (mck_setup == NRF_I2S_MCK_DISABLED)
     {
-        p_i2s->CONFIG.MCKEN =
+        p_reg->CONFIG.MCKEN =
             (I2S_CONFIG_MCKEN_MCKEN_Disabled << I2S_CONFIG_MCKEN_MCKEN_Pos);
     }
     else
     {
-        p_i2s->CONFIG.MCKFREQ = mck_setup;
-        p_i2s->CONFIG.MCKEN =
+        p_reg->CONFIG.MCKFREQ = mck_setup;
+        p_reg->CONFIG.MCKEN =
             (I2S_CONFIG_MCKEN_MCKEN_Enabled << I2S_CONFIG_MCKEN_MCKEN_Pos);
     }
 
     return true;
 }
 
-__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type *   p_reg,
                                           uint16_t         size,
                                           uint32_t *       p_buffer_rx,
                                           uint32_t const * p_buffer_tx)
 {
-    p_i2s->RXTXD.MAXCNT = size;
+    p_reg->RXTXD.MAXCNT = size;
 
-    nrf_i2s_rx_buffer_set(p_i2s, p_buffer_rx);
-    p_i2s->CONFIG.RXEN = (p_buffer_rx != NULL) ? 1 : 0;
+    nrf_i2s_rx_buffer_set(p_reg, p_buffer_rx);
+    p_reg->CONFIG.RXEN = (p_buffer_rx != NULL) ? 1 : 0;
 
-    nrf_i2s_tx_buffer_set(p_i2s, p_buffer_tx);
-    p_i2s->CONFIG.TXEN = (p_buffer_tx != NULL) ? 1 : 0;
+    nrf_i2s_tx_buffer_set(p_reg, p_buffer_tx);
+    p_reg->CONFIG.TXEN = (p_buffer_tx != NULL) ? 1 : 0;
 }
 
-__STATIC_INLINE void nrf_i2s_rx_buffer_set(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_rx_buffer_set(NRF_I2S_Type * p_reg,
                                            uint32_t * p_buffer)
 {
-    p_i2s->RXD.PTR = (uint32_t)p_buffer;
+    p_reg->RXD.PTR = (uint32_t)p_buffer;
 }
 
-__STATIC_INLINE uint32_t * nrf_i2s_rx_buffer_get(NRF_I2S_Type const * p_i2s)
+__STATIC_INLINE uint32_t * nrf_i2s_rx_buffer_get(NRF_I2S_Type const * p_reg)
 {
-    return (uint32_t *)(p_i2s->RXD.PTR);
+    return (uint32_t *)(p_reg->RXD.PTR);
 }
 
-__STATIC_INLINE void nrf_i2s_tx_buffer_set(NRF_I2S_Type * p_i2s,
+__STATIC_INLINE void nrf_i2s_tx_buffer_set(NRF_I2S_Type * p_reg,
                                            uint32_t const * p_buffer)
 {
-    p_i2s->TXD.PTR = (uint32_t)p_buffer;
+    p_reg->TXD.PTR = (uint32_t)p_buffer;
 }
 
-__STATIC_INLINE uint32_t * nrf_i2s_tx_buffer_get(NRF_I2S_Type const * p_i2s)
+__STATIC_INLINE uint32_t * nrf_i2s_tx_buffer_get(NRF_I2S_Type const * p_reg)
 {
-    return (uint32_t *)(p_i2s->TXD.PTR);
+    return (uint32_t *)(p_reg->TXD.PTR);
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
