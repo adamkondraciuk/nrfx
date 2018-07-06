@@ -41,6 +41,7 @@ Driver           | nRF51 Series | nRF52810     | nRF52832     | nRF52840     | n
 @ref nrf_uart    |@tagGreenTick |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_uarte   |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_usbd    |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagGreenTick |@tagRedCross  |
+@ref nrf_vmc     |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagGreenTick |
 @ref nrf_wdt     |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 
 @}

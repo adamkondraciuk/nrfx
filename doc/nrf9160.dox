@@ -32,6 +32,8 @@
 
 @ref nrf_uarte
 
+@ref nrf_vmc
+
 @ref nrf_wdt
 
 @}

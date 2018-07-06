@@ -74,6 +74,8 @@
 
 @defgroup nrf_usbd USBD
 
+@defgroup nrf_vmc VMC
+
 @defgroup nrf_wdt WDT
 @}
 
