@@ -18,7 +18,7 @@ Driver           | nRF51 Series | nRF52810     | nRF52832     | nRF52840     | n
 @ref nrf_nfct    |@tagRedCross  |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_nvmc    |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_pdm     |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
-@ref nrf_power   |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
+@ref nrf_power   |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_ppi     |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_pwm     |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_qdec    |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |

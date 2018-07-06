@@ -10,6 +10,8 @@
 
 @ref nrf_pdm
 
+@ref nrf_power
+
 @ref nrf_pwm
 
 @ref nrf_rtc
