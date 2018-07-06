@@ -20,6 +20,8 @@
 
 @ref nrf_spis
 
+@ref nrf_spu
+
 @ref nrf_systick
 
 @ref nrf_timer

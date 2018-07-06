@@ -52,6 +52,8 @@
 
 @defgroup nrf_spis SPIS
 
+@defgroup nrf_spu SPU
+
 @defgroup nrf_systick Cortex-M Systick
 
 @defgroup nrf_swi_egu SWI/EGU
