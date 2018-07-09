@@ -8,6 +8,8 @@
 
 @ref nrf_i2s
 
+@ref nrf_kmu
+
 @ref nrf_pdm
 
 @ref nrf_power
