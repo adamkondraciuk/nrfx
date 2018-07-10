@@ -1,6 +1,6 @@
 /**
-@page nrfx_drv_supp_matrix Driver Support Matrix
-This matrix shows which drivers are supported by particular Nordic SoCs.
+@page nrfx_drv_supp_matrix Driver support matrix
+The following matrix shows which drivers are supported by specific Nordic SoCs.
 @{
 
 Driver           | nRF51 Series | nRF52810     | nRF52832     | nRF52840     | nRF9120      |
