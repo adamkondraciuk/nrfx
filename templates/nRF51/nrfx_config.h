@@ -1141,6 +1141,25 @@
 
 // </e>
 
+// <e> NRFX_TEMP_ENABLED - nrfx_temp - TEMP peripheral driver
+//==========================================================
+#ifndef NRFX_TEMP_ENABLED
+#define NRFX_TEMP_ENABLED 1
+#endif
+
+// <o> NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+
+#ifndef NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY 3
+#endif
+
+// </e>
+
 // <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver
 //==========================================================
 #ifndef NRFX_TIMER_ENABLED
