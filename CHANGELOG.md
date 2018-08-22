@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [Unreleased]
+### Added
+- HAL and driver for NFCT.
+
 ## [1.2.0] - 2018-09-06
 ### Added
 - Added function for checking if a specific channel is enabled in the GPIOTE HAL.
