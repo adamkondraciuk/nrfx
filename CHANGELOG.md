@@ -1,9 +1,19 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [Unreleased]
+## [1.2.0] - 2018-08-30
+### Added
+- Added function for checking if a specific task-event is enabled in nrfx_gpiote.
+- Added support for using the nrfx_qdec driver without LED.
+- Added functions for modifying only the event or task endpoints in nrfx_ppi.
+- Added function for reading pin pull mode in nrf_gpio.
+
 ### Fixed
+- Fixed double buffering bug when RX reception is aborted in the nrfx_uarte.
 - Fixed starting TWIM TXRX transfer after preceding transfer was without stop condition.
+
+### Changed
+- Improved USB HAL.
 
 ## [1.1.0] - 2018-06-15
 ### Added
