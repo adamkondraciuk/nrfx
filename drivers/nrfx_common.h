@@ -88,6 +88,15 @@ extern "C" {
  */
 #define NRFX_ROUNDED_DIV(a, b)  (((a) + ((b) / 2)) / (b))
 
+/**
+ * @brief Macro for getting the number of elements in an array.
+ *
+ * @param array  Name of the array.
+ *
+ * @return Array element count.
+ */
+#define NRFX_ARRAY_SIZE(array) (sizeof(array) / sizeof((array)[0]))
+
 /**@brief Macro for checking if given lengths of EasyDMA transfers do not exceed
  *        the limit of the specified peripheral.
  *
