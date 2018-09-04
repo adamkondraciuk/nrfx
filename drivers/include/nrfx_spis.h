@@ -57,11 +57,6 @@ enum {
  */
 #define NRFX_SPIS_PIN_NOT_USED  0xFF
 
-/** @brief Default pull-up configuration of the SPI CS. */
-#define NRFX_SPIS_DEFAULT_CSN_PULLUP  NRF_GPIO_PIN_NOPULL
-/** @brief Default drive configuration of the SPI MISO. */
-#define NRFX_SPIS_DEFAULT_MISO_DRIVE  NRF_GPIO_PIN_S0S1
-
 /** @brief SPI slave driver event types. */
 typedef enum
 {
@@ -78,20 +73,35 @@ typedef struct
     size_t               tx_amount; //!< Number of bytes transmitted in the last transaction. This parameter is only valid for @ref NRFX_SPIS_XFER_DONE events.
 } nrfx_spis_evt_t;
 
-/** @brief The default configuration of the SPI slave instance. */
-#define NRFX_SPIS_DEFAULT_CONFIG                           \
-{                                                          \
-    .miso_pin     = NRFX_SPIS_PIN_NOT_USED,                \
-    .mosi_pin     = NRFX_SPIS_PIN_NOT_USED,                \
-    .sck_pin      = NRFX_SPIS_PIN_NOT_USED,                \
-    .csn_pin      = NRFX_SPIS_PIN_NOT_USED,                \
-    .mode         = NRF_SPIS_MODE_0,                       \
-    .bit_order    = NRF_SPIS_BIT_ORDER_MSB_FIRST,          \
-    .csn_pullup   = NRFX_SPIS_DEFAULT_CSN_PULLUP,          \
-    .miso_drive   = NRFX_SPIS_DEFAULT_MISO_DRIVE,          \
-    .def          = NRFX_SPIS_DEFAULT_DEF,                 \
-    .orc          = NRFX_SPIS_DEFAULT_ORC,                 \
-    .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY, \
+/**
+ * @brief SPIS driver default configuration.
+ *
+ * This configuration sets up SPIS with the following options:
+ * - mode: 0 (SCK active high, sample on leading edge of the clock signal)
+ * - MSB shifted out first
+ * - CSN pull-up disabled
+ * - MISO pin drive set to standard '0' and standard '1'
+ * - default character set to 0xFF
+ * - over-read character set to 0xFE
+ *
+ * @param[in] _pin_sck  SCK pin.
+ * @param[in] _pin_mosi MOSI pin.
+ * @param[in] _pin_miso MISO pin.
+ * @param[in] _pin_csn  CSN pin.
+ */
+#define NRFX_SPIS_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_csn)  \
+{                                                                           \
+    .miso_pin     = _pin_miso,                                              \
+    .mosi_pin     = _pin_mosi,                                              \
+    .sck_pin      = _pin_sck,                                               \
+    .csn_pin      = _pin_csn,                                               \
+    .mode         = NRF_SPIS_MODE_0,                                        \
+    .bit_order    = NRF_SPIS_BIT_ORDER_MSB_FIRST,                           \
+    .csn_pullup   = NRF_GPIO_PIN_NOPULL,                                    \
+    .miso_drive   = NRF_GPIO_PIN_S0S1,                                      \
+    .def          = 0xFF,                                                   \
+    .orc          = 0xFE,                                                   \
+    .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
 }
 
 /** @brief SPI peripheral device configuration data. */
