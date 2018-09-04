@@ -49,22 +49,27 @@ typedef struct
 } nrfx_pdm_config_t;
 
 /**
- * @brief Macro for setting @ref nrfx_pdm_config_t to default settings
- *        in the single-ended mode.
+ * @brief PDM driver default configuration.
  *
- * @param _pin_clk  CLK output pin.
- * @param _pin_din  DIN input pin.
+ * This configuration sets up PDM with the following options:
+ * - mono mode
+ * - data sampled on the clock falling edge
+ * - frequency: 1.032 MHz
+ * - standard gain
+ *
+ * @param[in] _pin_clk CLK output pin.
+ * @param[in] _pin_din DIN input pin.
  */
-#define NRFX_PDM_DEFAULT_CONFIG(_pin_clk, _pin_din)                   \
-{                                                                     \
-    .mode               = (nrf_pdm_mode_t)NRFX_PDM_CONFIG_MODE,       \
-    .edge               = (nrf_pdm_edge_t)NRFX_PDM_CONFIG_EDGE,       \
-    .pin_clk            = _pin_clk,                                   \
-    .pin_din            = _pin_din,                                   \
-    .clock_freq         = (nrf_pdm_freq_t)NRFX_PDM_CONFIG_CLOCK_FREQ, \
-    .gain_l             = NRF_PDM_GAIN_DEFAULT,                       \
-    .gain_r             = NRF_PDM_GAIN_DEFAULT,                       \
-    .interrupt_priority = NRFX_PDM_CONFIG_IRQ_PRIORITY                \
+#define NRFX_PDM_DEFAULT_CONFIG(_pin_clk, _pin_din)     \
+{                                                       \
+    .mode               = NRF_PDM_MODE_MONO,            \
+    .edge               = NRF_PDM_EDGE_LEFTFALLING,     \
+    .pin_clk            = _pin_clk,                     \
+    .pin_din            = _pin_din,                     \
+    .clock_freq         = NRF_PDM_FREQ_1032K,           \
+    .gain_l             = NRF_PDM_GAIN_DEFAULT,         \
+    .gain_r             = NRF_PDM_GAIN_DEFAULT,         \
+    .interrupt_priority = NRFX_PDM_CONFIG_IRQ_PRIORITY  \
 }
 
 /**
