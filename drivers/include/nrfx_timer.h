@@ -66,14 +66,21 @@ typedef struct
     void *                p_context;          ///< Context passed to interrupt handler.
 } nrfx_timer_config_t;
 
-/** @brief Timer driver instance default configuration. */
-#define NRFX_TIMER_DEFAULT_CONFIG                                                    \
-{                                                                                    \
-    .frequency          = (nrf_timer_frequency_t)NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY,\
-    .mode               = (nrf_timer_mode_t)NRFX_TIMER_DEFAULT_CONFIG_MODE,          \
-    .bit_width          = (nrf_timer_bit_width_t)NRFX_TIMER_DEFAULT_CONFIG_BIT_WIDTH,\
-    .interrupt_priority = NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY,                    \
-    .p_context          = NULL                                                       \
+/**
+ * @brief TIMER driver default configuration.
+ *
+ * This configuration sets up TIMER with the following options:
+ * - frequency: 16 MHz
+ * - works as timer
+ * - width: 16 bit
+ */
+#define NRFX_TIMER_DEFAULT_CONFIG                                 \
+{                                                                 \
+    .frequency          = NRF_TIMER_FREQ_16MHz,                   \
+    .mode               = NRF_TIMER_MODE_TIMER,                   \
+    .bit_width          = NRF_TIMER_BIT_WIDTH_16,                 \
+    .interrupt_priority = NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY, \
+    .p_context          = NULL                                    \
 }
 
 /**
