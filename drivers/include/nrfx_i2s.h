@@ -17,7 +17,6 @@ extern "C" {
  * @brief   Inter-IC Sound (I2S) peripheral driver.
  */
 
-
 /**
  * @brief This value can be provided instead of a pin number for the signals
  *        SDOUT, SDIN, and MCK to specify that a given signal is not used
@@ -57,24 +56,40 @@ typedef struct
     uint32_t const * p_tx_buffer; ///< Pointer to the buffer with data to be sent.
 } nrfx_i2s_buffers_t;
 
-/** @brief I2S driver default configuration. */
-#define NRFX_I2S_DEFAULT_CONFIG                                   \
-{                                                                 \
-    .sck_pin      = NRFX_I2S_CONFIG_SCK_PIN,                      \
-    .lrck_pin     = NRFX_I2S_CONFIG_LRCK_PIN,                     \
-    .mck_pin      = NRFX_I2S_CONFIG_MCK_PIN,                      \
-    .sdout_pin    = NRFX_I2S_CONFIG_SDOUT_PIN,                    \
-    .sdin_pin     = NRFX_I2S_CONFIG_SDIN_PIN,                     \
-    .irq_priority = NRFX_I2S_CONFIG_IRQ_PRIORITY,                 \
-    .mode         = (nrf_i2s_mode_t)NRFX_I2S_CONFIG_MASTER,       \
-    .format       = (nrf_i2s_format_t)NRFX_I2S_CONFIG_FORMAT,     \
-    .alignment    = (nrf_i2s_align_t)NRFX_I2S_CONFIG_ALIGN,       \
-    .sample_width = (nrf_i2s_swidth_t)NRFX_I2S_CONFIG_SWIDTH,     \
-    .channels     = (nrf_i2s_channels_t)NRFX_I2S_CONFIG_CHANNELS, \
-    .mck_setup    = (nrf_i2s_mck_t)NRFX_I2S_CONFIG_MCK_SETUP,     \
-    .ratio        = (nrf_i2s_ratio_t)NRFX_I2S_CONFIG_RATIO,       \
+/**
+ * @brief I2S driver default configuration.
+ *
+ * This configuration sets up I2S with the following options:
+ * - master mode
+ * - i2s data format
+ * - left alignment
+ * - sample width 16 bit
+ * - left channel enabled
+ * - MCK frequency 4 MHz
+ * - LRCK frequency 125 kHz
+ *
+ * @param[in] _pin_sck   SCK pin number.
+ * @param[in] _pin_lrck  LRCK pin number.
+ * @param[in] _pin_mck   MCK pin number.
+ * @param[in] _pin_sdout SDOUT pin number.
+ * @param[in] _pin_sdin  SDIN pin number.
+ */
+#define NRFX_I2S_DEFAULT_CONFIG(_pin_sck, _pin_lrck, _pin_mck, _pin_sdout, _pin_sdin)   \
+{                                                                                       \
+    .sck_pin      = _pin_sck,                                                           \
+    .lrck_pin     = _pin_lrck,                                                          \
+    .mck_pin      = _pin_mck,                                                           \
+    .sdout_pin    = _pin_sdout,                                                         \
+    .sdin_pin     = _pin_sdin,                                                          \
+    .irq_priority = NRFX_I2S_CONFIG_IRQ_PRIORITY,                                       \
+    .mode         = NRF_I2S_MODE_MASTER,                                                \
+    .format       = NRF_I2S_FORMAT_I2S,                                                 \
+    .alignment    = NRF_I2S_ALIGN_LEFT,                                                 \
+    .sample_width = NRF_I2S_SWIDTH_16BIT,                                               \
+    .channels     = NRF_I2S_CHANNELS_LEFT,                                              \
+    .mck_setup    = NRF_I2S_MCK_32MDIV8,                                                \
+    .ratio        = NRF_I2S_RATIO_32X,                                                  \
 }
-
 
 #define NRFX_I2S_STATUS_NEXT_BUFFERS_NEEDED  (1UL << 0)
     /**< The application must provide buffers that are to be used in the next
@@ -122,7 +137,6 @@ typedef struct
  */
 typedef void (* nrfx_i2s_data_handler_t)(nrfx_i2s_buffers_t const * p_released,
                                          uint32_t                   status);
-
 
 /**
  * @brief Function for initializing the I2S driver.
