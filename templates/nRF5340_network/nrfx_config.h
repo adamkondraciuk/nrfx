@@ -305,15 +305,6 @@
 #define NRFX_POWER_CONFIG_IRQ_PRIORITY 7
 #endif
 
-// <q> NRFX_POWER_CONFIG_DEFAULT_DCDCEN  - The default configuration of the main DCDC regulator.
-
-
-// <i> This settings means only that components for DCDC regulator are installed and it can be enabled.
-
-#ifndef NRFX_POWER_CONFIG_DEFAULT_DCDCEN
-#define NRFX_POWER_CONFIG_DEFAULT_DCDCEN 0
-#endif
-
 // </e>
 
 // <e> NRFX_PRS_ENABLED - nrfx_prs - Peripheral Resource Sharing (PRS) module.
@@ -386,12 +377,6 @@
 //==========================================================
 #ifndef NRFX_RNG_ENABLED
 #define NRFX_RNG_ENABLED 1
-#endif
-// <q> NRFX_RNG_CONFIG_ERROR_CORRECTION  - Error correction
-
-
-#ifndef NRFX_RNG_CONFIG_ERROR_CORRECTION
-#define NRFX_RNG_CONFIG_ERROR_CORRECTION 1
 #endif
 
 // <o> NRFX_RNG_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -479,25 +464,6 @@
 
 #ifndef NRFX_RTC1_ENABLED
 #define NRFX_RTC1_ENABLED 1
-#endif
-
-// <o> NRFX_RTC_MAXIMUM_LATENCY_US - Maximum possible time in highest priority interrupt, in microseconds.
-#ifndef NRFX_RTC_MAXIMUM_LATENCY_US
-#define NRFX_RTC_MAXIMUM_LATENCY_US 2000
-#endif
-
-// <o> NRFX_RTC_DEFAULT_CONFIG_FREQUENCY - Frequency <16-32768>
-
-
-#ifndef NRFX_RTC_DEFAULT_CONFIG_FREQUENCY
-#define NRFX_RTC_DEFAULT_CONFIG_FREQUENCY 32768
-#endif
-
-// <q> NRFX_RTC_DEFAULT_CONFIG_RELIABLE  - Ensures safe compare event triggering.
-
-
-#ifndef NRFX_RTC_DEFAULT_CONFIG_RELIABLE
-#define NRFX_RTC_DEFAULT_CONFIG_RELIABLE 0
 #endif
 
 // <o> NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -676,20 +642,6 @@
 
 #ifndef NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY 7
-#endif
-
-// <o> NRFX_SPIS_DEFAULT_DEF - SPIS default DEF character <0-255>
-
-
-#ifndef NRFX_SPIS_DEFAULT_DEF
-#define NRFX_SPIS_DEFAULT_DEF 255
-#endif
-
-// <o> NRFX_SPIS_DEFAULT_ORC - SPIS default ORC character <0-255>
-
-
-#ifndef NRFX_SPIS_DEFAULT_ORC
-#define NRFX_SPIS_DEFAULT_ORC 255
 #endif
 
 // <e> NRFX_SPIS_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -885,43 +837,6 @@
 #define NRFX_TIMER2_ENABLED 1
 #endif
 
-// <o> NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY  - Timer frequency if in Timer mode.
-
-// <0=> 16 MHz
-// <1=> 8 MHz
-// <2=> 4 MHz
-// <3=> 2 MHz
-// <4=> 1 MHz
-// <5=> 500 kHz
-// <6=> 250 kHz
-// <7=> 125 kHz
-// <8=> 62.5 kHz
-// <9=> 31.25 kHz
-
-#ifndef NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY
-#define NRFX_TIMER_DEFAULT_CONFIG_FREQUENCY 0
-#endif
-
-// <o> NRFX_TIMER_DEFAULT_CONFIG_MODE  - Timer mode or operation.
-
-// <0=> Timer
-// <1=> Counter
-
-#ifndef NRFX_TIMER_DEFAULT_CONFIG_MODE
-#define NRFX_TIMER_DEFAULT_CONFIG_MODE 0
-#endif
-
-// <o> NRFX_TIMER_DEFAULT_CONFIG_BIT_WIDTH  - Timer counter bit width.
-
-// <0=> 16 bit
-// <1=> 8 bit
-// <2=> 24 bit
-// <3=> 32 bit
-
-#ifndef NRFX_TIMER_DEFAULT_CONFIG_BIT_WIDTH
-#define NRFX_TIMER_DEFAULT_CONFIG_BIT_WIDTH 0
-#endif
-
 // <o> NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
@@ -1002,24 +917,6 @@
 #define NRFX_TWIM0_ENABLED 1
 #endif
 
-
-// <o> NRFX_TWIM_DEFAULT_CONFIG_FREQUENCY  - Frequency.
-
-// <26738688=> 100k
-// <67108864=> 250k
-// <104857600=> 400k
-
-#ifndef NRFX_TWIM_DEFAULT_CONFIG_FREQUENCY
-#define NRFX_TWIM_DEFAULT_CONFIG_FREQUENCY 26738688
-#endif
-
-// <q> NRFX_TWIM_DEFAULT_CONFIG_HOLD_BUS_UNINIT  - Enables bus holding after uninit.
-
-
-#ifndef NRFX_TWIM_DEFAULT_CONFIG_HOLD_BUS_UNINIT
-#define NRFX_TWIM_DEFAULT_CONFIG_HOLD_BUS_UNINIT 0
-#endif
-
 // <o> NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
@@ -1093,8 +990,8 @@
 #ifndef NRFX_TWIS_ENABLED
 #define NRFX_TWIS_ENABLED 1
 #endif
-// <q> NRFX_TWIS0_ENABLED  - Enables TWIS0 instance.
 
+// <q> NRFX_TWIS0_ENABLED  - Enables TWIS0 instance.
 
 #ifndef NRFX_TWIS0_ENABLED
 #define NRFX_TWIS0_ENABLED 1
@@ -1102,7 +999,6 @@
 
 
 // <q> NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY  - Assumes that any instance would be initialized only once.
-
 
 // <i> Optimization flag. Registers used by TWIS are shared by other peripherals. Normally, during initialization driver tries to clear all registers to known state before doing the initialization itself. This gives initialization safe procedure, no matter when it would be called. If you activate TWIS only once and do never uninitialize it - set this flag to 1 what gives more optimal code.
 
@@ -1112,41 +1008,10 @@
 
 // <q> NRFX_TWIS_NO_SYNC_MODE  - Removes support for synchronous mode.
 
-
 // <i> Synchronous mode would be used in specific situations. And it uses some additional code and data memory to safely process state machine by polling it in status functions. If this functionality is not required it may be disabled to free some resources.
 
 #ifndef NRFX_TWIS_NO_SYNC_MODE
 #define NRFX_TWIS_NO_SYNC_MODE 0
-#endif
-
-// <o> NRFX_TWIS_DEFAULT_CONFIG_ADDR0 - Address0.
-#ifndef NRFX_TWIS_DEFAULT_CONFIG_ADDR0
-#define NRFX_TWIS_DEFAULT_CONFIG_ADDR0 0
-#endif
-
-// <o> NRFX_TWIS_DEFAULT_CONFIG_ADDR1 - Address1.
-#ifndef NRFX_TWIS_DEFAULT_CONFIG_ADDR1
-#define NRFX_TWIS_DEFAULT_CONFIG_ADDR1 0
-#endif
-
-// <o> NRFX_TWIS_DEFAULT_CONFIG_SCL_PULL  - SCL pin pull configuration.
-
-// <0=> Disabled
-// <1=> Pull down
-// <3=> Pull up
-
-#ifndef NRFX_TWIS_DEFAULT_CONFIG_SCL_PULL
-#define NRFX_TWIS_DEFAULT_CONFIG_SCL_PULL 0
-#endif
-
-// <o> NRFX_TWIS_DEFAULT_CONFIG_SDA_PULL  - SDA pin pull configuration.
-
-// <0=> Disabled
-// <1=> Pull down
-// <3=> Pull up
-
-#ifndef NRFX_TWIS_DEFAULT_CONFIG_SDA_PULL
-#define NRFX_TWIS_DEFAULT_CONFIG_SDA_PULL 0
 #endif
 
 // <o> NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1227,49 +1092,6 @@
 #define NRFX_UARTE0_ENABLED 1
 #endif
 
-// <o> NRFX_UARTE_DEFAULT_CONFIG_HWFC  - Hardware Flow Control.
-
-// <0=> Disabled
-// <1=> Enabled
-
-#ifndef NRFX_UARTE_DEFAULT_CONFIG_HWFC
-#define NRFX_UARTE_DEFAULT_CONFIG_HWFC 0
-#endif
-
-// <o> NRFX_UARTE_DEFAULT_CONFIG_PARITY  - Parity.
-
-// <0=> Excluded
-// <14=> Included
-
-#ifndef NRFX_UARTE_DEFAULT_CONFIG_PARITY
-#define NRFX_UARTE_DEFAULT_CONFIG_PARITY 0
-#endif
-
-// <o> NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE  - Default baud rate.
-
-// <323584=> 1200 baud
-// <643072=> 2400 baud
-// <1290240=> 4800 baud
-// <2576384=> 9600 baud
-// <3862528=> 14400 baud
-// <5152768=> 19200 baud
-// <7716864=> 28800 baud
-// <8388608=> 31250 baud
-// <10289152=> 38400 baud
-// <15007744=> 56000 baud
-// <15400960=> 57600 baud
-// <20615168=> 76800 baud
-// <30801920=> 115200 baud
-// <61865984=> 230400 baud
-// <67108864=> 250000 baud
-// <121634816=> 460800 baud
-// <251658240=> 921600 baud
-// <268435456=> 1000000 baud
-
-#ifndef NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE
-#define NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE 30801920
-#endif
-
 // <o> NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
@@ -1348,24 +1170,6 @@
 
 #ifndef NRFX_WDT0_ENABLED
 #define NRFX_WDT0_ENABLED 1
-#endif
-
-// <o> NRFX_WDT_CONFIG_BEHAVIOUR  - WDT behavior in CPU SLEEP or HALT mode.
-
-// <1=> Run in SLEEP, Pause in HALT
-// <8=> Pause in SLEEP, Run in HALT
-// <9=> Run in SLEEP and HALT
-// <0=> Pause in SLEEP and HALT
-
-#ifndef NRFX_WDT_CONFIG_BEHAVIOUR
-#define NRFX_WDT_CONFIG_BEHAVIOUR 1
-#endif
-
-// <o> NRFX_WDT_CONFIG_RELOAD_VALUE - Reload value <15-4294967295>
-
-
-#ifndef NRFX_WDT_CONFIG_RELOAD_VALUE
-#define NRFX_WDT_CONFIG_RELOAD_VALUE 2000
 #endif
 
 // <o> NRFX_WDT_CONFIG_NO_IRQ  - Remove WDT IRQ handling from WDT driver.
