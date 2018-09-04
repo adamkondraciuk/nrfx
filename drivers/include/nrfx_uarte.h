@@ -86,19 +86,30 @@ typedef struct
     #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
 #endif
 
-/** @brief UARTE default configuration. */
-#define NRFX_UARTE_DEFAULT_CONFIG                                                   \
+/**
+ * @brief UARTE driver default configuration.
+ *
+ * This configuration sets up UARTE with the following options:
+ * - hardware flow control disabled
+ * - no parity bit
+ * - one stop bit
+ * - baudrate: 115200
+ *
+ * @param[in] _pin_tx TX pin.
+ * @param[in] _pin_rx RX pin.
+ */
+#define NRFX_UARTE_DEFAULT_CONFIG(_pin_tx, _pin_rx)                                 \
 {                                                                                   \
-    .pseltxd            = NRF_UARTE_PSEL_DISCONNECTED,                              \
-    .pselrxd            = NRF_UARTE_PSEL_DISCONNECTED,                              \
+    .pseltxd            = _pin_tx,                                                  \
+    .pselrxd            = _pin_rx,                                                  \
     .pselcts            = NRF_UARTE_PSEL_DISCONNECTED,                              \
     .pselrts            = NRF_UARTE_PSEL_DISCONNECTED,                              \
     .p_context          = NULL,                                                     \
-    .baudrate           = (nrf_uarte_baudrate_t)NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE, \
+    .baudrate           = NRF_UARTE_BAUDRATE_115200,                                \
     .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY,                   \
     .hal_cfg            = {                                                         \
-        .hwfc           = (nrf_uarte_hwfc_t)NRFX_UARTE_DEFAULT_CONFIG_HWFC,         \
-        .parity         = (nrf_uarte_parity_t)NRFX_UARTE_DEFAULT_CONFIG_PARITY,     \
+        .hwfc           = NRF_UARTE_HWFC_DISABLED,                                  \
+        .parity         = NRF_UARTE_PARITY_EXCLUDED,                                \
         NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG                                     \
         NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG                               \
     }                                                                               \
