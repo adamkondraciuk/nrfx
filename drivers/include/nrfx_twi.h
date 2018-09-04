@@ -56,14 +56,23 @@ typedef struct
     bool                hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
 } nrfx_twi_config_t;
 
-/** @brief The default configuration of the TWI master driver instance. */
-#define NRFX_TWI_DEFAULT_CONFIG                                                   \
-{                                                                                 \
-    .frequency          = (nrf_twi_frequency_t)NRFX_TWI_DEFAULT_CONFIG_FREQUENCY, \
-    .scl                = 31,                                                     \
-    .sda                = 31,                                                     \
-    .interrupt_priority = NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY,                   \
-    .hold_bus_uninit    = NRFX_TWI_DEFAULT_CONFIG_HOLD_BUS_UNINIT,                \
+/**
+ * @brief TWI master driver instance default configuration.
+ *
+ * This configuration sets up TWI with the following options:
+ * - clock frequency: 100 kHz
+ * - disable bus holding after uninit
+ *
+ * @param[in] _pin_scl SCL pin.
+ * @param[in] _pin_sda SDA pin.
+ */
+#define NRFX_TWI_DEFAULT_CONFIG(_pin_scl, _pin_sda)              \
+{                                                                \
+    .scl                = _pin_scl,                              \
+    .sda                = _pin_sda,                              \
+    .frequency          = NRF_TWI_FREQ_100K,                     \
+    .interrupt_priority = NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY,  \
+    .hold_bus_uninit    = false,                                 \
 }
 
 /** @brief Flag indicating that the interrupt after each transfer will be suppressed, and the event handler will not be called. */
