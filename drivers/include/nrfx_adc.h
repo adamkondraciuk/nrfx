@@ -48,18 +48,28 @@ typedef struct
     } data;                           ///< Union to store event data.
 } nrfx_adc_evt_t;
 
-/** @brief Macro for initializing the ADC channel with the default configuration. */
+/**
+ * @brief ADC channel default configuration.
+ *
+ * This configuration sets up ADC channel with the following options:
+ * - 10 bits resolution
+ * - full scale input
+ * - reference voltage: 1.2 V
+ * - external reference input disabled
+ *
+ * @param[in] analog_input Analog input.
+ */
 #define NRFX_ADC_DEFAULT_CHANNEL(analog_input)                 \
- {                                                             \
-     NULL,                                                     \
-     {                                                         \
+{                                                              \
+    NULL,                                                      \
+    {                                                          \
         .resolution = NRF_ADC_CONFIG_RES_10BIT,                \
         .scaling    = NRF_ADC_CONFIG_SCALING_INPUT_FULL_SCALE, \
         .reference  = NRF_ADC_CONFIG_REF_VBG,                  \
-        .input      = (analog_input),                          \
+        .input      = (nrf_adc_config_input_t)analog_input,    \
         .extref     = NRF_ADC_CONFIG_EXTREFSEL_NONE            \
-     }                                                         \
- }
+    }                                                          \
+}
 
 /** @brief Forward declaration of the nrfx_adc_channel_t type. */
 typedef struct nrfx_adc_channel_s nrfx_adc_channel_t;
