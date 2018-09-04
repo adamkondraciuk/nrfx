@@ -77,19 +77,30 @@ typedef struct
     #define NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
 #endif
 
-/** @brief UART default configuration. */
-#define NRFX_UART_DEFAULT_CONFIG                                                  \
+/**
+ * @brief UART driver default configuration.
+ *
+ * This configuration sets up UART with the following options:
+ * - hardware flow control disabled
+ * - no parity bit
+ * - one stop bit
+ * - baudrate: 115200
+ *
+ * @param[in] _pin_tx TX pin.
+ * @param[in] _pin_rx RX pin.
+ */
+#define NRFX_UART_DEFAULT_CONFIG(_pin_tx, _pin_rx)                                \
 {                                                                                 \
-    .pseltxd            = NRF_UART_PSEL_DISCONNECTED,                             \
-    .pselrxd            = NRF_UART_PSEL_DISCONNECTED,                             \
+    .pseltxd            = _pin_tx,                                                \
+    .pselrxd            = _pin_rx,                                                \
     .pselcts            = NRF_UART_PSEL_DISCONNECTED,                             \
     .pselrts            = NRF_UART_PSEL_DISCONNECTED,                             \
     .p_context          = NULL,                                                   \
-    .baudrate           = (nrf_uart_baudrate_t)NRFX_UART_DEFAULT_CONFIG_BAUDRATE, \
+    .baudrate           = NRF_UART_BAUDRATE_115200,                               \
     .interrupt_priority = NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
     .hal_cfg            = {                                                       \
-        .hwfc           = (nrf_uart_hwfc_t)NRFX_UART_DEFAULT_CONFIG_HWFC,         \
-        .parity         = (nrf_uart_parity_t)NRFX_UART_DEFAULT_CONFIG_PARITY,     \
+        .hwfc           = NRF_UART_HWFC_DISABLED,                                 \
+        .parity         = NRF_UART_PARITY_EXCLUDED,                               \
         NRFX_UART_DEFAULT_EXTENDED_STOP_CONFIG                                    \
         NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG                              \
     }                                                                             \
