@@ -73,22 +73,37 @@ typedef struct
     nrf_pwm_dec_step_t step_mode;    ///< Mode of advancing the active sequence.
 } nrfx_pwm_config_t;
 
-/** @brief PWM driver default configuration. */
-#define NRFX_PWM_DEFAULT_CONFIG                                            \
-{                                                                          \
-    .output_pins  = { NRFX_PWM_DEFAULT_CONFIG_OUT0_PIN,                    \
-                      NRFX_PWM_DEFAULT_CONFIG_OUT1_PIN,                    \
-                      NRFX_PWM_DEFAULT_CONFIG_OUT2_PIN,                    \
-                      NRFX_PWM_DEFAULT_CONFIG_OUT3_PIN },                  \
-    .irq_priority = NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
-    .base_clock   = (nrf_pwm_clk_t)NRFX_PWM_DEFAULT_CONFIG_BASE_CLOCK,     \
-    .count_mode   = (nrf_pwm_mode_t)NRFX_PWM_DEFAULT_CONFIG_COUNT_MODE,    \
-    .top_value    = NRFX_PWM_DEFAULT_CONFIG_TOP_VALUE,                     \
-    .load_mode    = (nrf_pwm_dec_load_t)NRFX_PWM_DEFAULT_CONFIG_LOAD_MODE, \
-    .step_mode    = (nrf_pwm_dec_step_t)NRFX_PWM_DEFAULT_CONFIG_STEP_MODE, \
+/**
+ * @brief PWM driver default configuration.
+ *
+ * This configuration sets up PWM with the following options:
+ * - clock frequency: 1 MHz
+ * - count up
+ * - top value: 1000 clock ticks
+ * - load mode: common
+ * - step mode: auto
+ *
+ * @param[in] _out_0 PWM output 0 pin.
+ * @param[in] _out_1 PWM output 1 pin.
+ * @param[in] _out_2 PWM output 2 pin.
+ * @param[in] _out_3 PWM output 3 pin.
+ */
+#define NRFX_PWM_DEFAULT_CONFIG(_out_0, _out_1, _out_2, _out_3)  \
+{                                                                \
+    .output_pins  = { _out_0,                                    \
+                      _out_1,                                    \
+                      _out_2,                                    \
+                      _out_3                                     \
+                    },                                           \
+    .irq_priority = NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY,        \
+    .base_clock   = NRF_PWM_CLK_1MHz,                            \
+    .count_mode   = NRF_PWM_MODE_UP,                             \
+    .top_value    = 1000,                                        \
+    .load_mode    = NRF_PWM_LOAD_COMMON,                         \
+    .step_mode    = NRF_PWM_STEP_AUTO,                           \
 }
 
-/** @brief PWM flags that provide additional playback options. */
+/** @brief PWM flags providing additional playback options. */
 typedef enum
 {
     NRFX_PWM_FLAG_STOP = 0x01, /**< When the requested playback is finished,
