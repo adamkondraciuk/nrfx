@@ -73,14 +73,20 @@ typedef struct
     bool     reliable;           /**< Reliable mode flag. */
 } nrfx_rtc_config_t;
 
-/** @brief RTC instance default configuration. */
-#define NRFX_RTC_DEFAULT_CONFIG                                                     \
-{                                                                                   \
-    .prescaler          = RTC_FREQ_TO_PRESCALER(NRFX_RTC_DEFAULT_CONFIG_FREQUENCY), \
-    .interrupt_priority = NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY,                     \
-    .tick_latency       = NRFX_RTC_US_TO_TICKS(NRFX_RTC_MAXIMUM_LATENCY_US,         \
-                                               NRFX_RTC_DEFAULT_CONFIG_FREQUENCY),  \
-    .reliable           = NRFX_RTC_DEFAULT_CONFIG_RELIABLE,                         \
+/**
+ * @brief RTC driver default configuration.
+ *
+ * This configuration sets up RTC with the following options:
+ * - frequency 32.768 kHz
+ * - maximum latency 2000 us
+ * - reliability checks disabled
+ */
+#define NRFX_RTC_DEFAULT_CONFIG                                  \
+{                                                                \
+    .prescaler          = RTC_FREQ_TO_PRESCALER(32768),          \
+    .interrupt_priority = NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY,  \
+    .tick_latency       = NRFX_RTC_US_TO_TICKS(2000, 32768),     \
+    .reliable           = false,                                 \
 }
 
 /** @brief RTC driver instance handler type. */
