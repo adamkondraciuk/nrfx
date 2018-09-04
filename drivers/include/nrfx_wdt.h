@@ -70,13 +70,18 @@ typedef struct
 #endif
 } nrfx_wdt_config_t;
 
-
-/** @brief WDT driver default configuration. */
-#define NRFX_WDT_DEFAULT_CONFIG                                           \
-{                                                                         \
-    .behaviour          = (nrf_wdt_behaviour_t)NRFX_WDT_CONFIG_BEHAVIOUR, \
-    .reload_value       = NRFX_WDT_CONFIG_RELOAD_VALUE,                   \
-    NRFX_WDT_IRQ_CONFIG                                                   \
+/**
+ * @brief WDT driver default configuration.
+ *
+ * This configuration sets up WDT with the following options:
+ * - run when CPU is in SLEEP mode, pause when in HALT mode
+ * - reload value: 2000 ms
+ */
+#define NRFX_WDT_DEFAULT_CONFIG                          \
+{                                                        \
+    .behaviour          = NRF_WDT_BEHAVIOUR_RUN_SLEEP,   \
+    .reload_value       = 2000,                          \
+    NRFX_WDT_IRQ_CONFIG                                  \
 }
 
 /**
