@@ -78,19 +78,30 @@ typedef struct
     nrf_gpio_pin_pull_t miso_pull;  ///< MISO pull up configuration.
 } nrfx_spi_config_t;
 
-/** @brief SPI master instance default configuration. */
-#define NRFX_SPI_DEFAULT_CONFIG                           \
-{                                                         \
-    .sck_pin      = NRFX_SPI_PIN_NOT_USED,                \
-    .mosi_pin     = NRFX_SPI_PIN_NOT_USED,                \
-    .miso_pin     = NRFX_SPI_PIN_NOT_USED,                \
-    .ss_pin       = NRFX_SPI_PIN_NOT_USED,                \
-    .irq_priority = NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY, \
-    .orc          = 0xFF,                                 \
-    .frequency    = NRF_SPI_FREQ_4M,                      \
-    .mode         = NRF_SPI_MODE_0,                       \
-    .bit_order    = NRF_SPI_BIT_ORDER_MSB_FIRST,          \
-    .miso_pull    = NRF_GPIO_PIN_NOPULL,                  \
+/**
+ * @brief SPI master instance default configuration.
+ * This configuration sets up SPI with the following options:
+ * - over-run character set to 0xFF
+ * - clock frequency 4 MHz
+ * - mode 0 enabled (SCK active high, sample on leading edge of clock)
+ * - MSB shifted out first
+ *
+ * @param[in] _pin_sck  SCK pin.
+ * @param[in] _pin_mosi MOSI pin.
+ * @param[in] _pin_miso MISO pin.
+ * @param[in] _pin_ss   SS pin.
+ */
+#define NRFX_SPI_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_ss)    \
+{                                                                           \
+    .sck_pin      = _pin_sck,                                               \
+    .mosi_pin     = _pin_mosi,                                              \
+    .miso_pin     = _pin_miso,                                              \
+    .ss_pin       = _pin_ss,                                                \
+    .irq_priority = NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY,                   \
+    .orc          = 0xFF,                                                   \
+    .frequency    = NRF_SPI_FREQ_4M,                                        \
+    .mode         = NRF_SPI_MODE_0,                                         \
+    .bit_order    = NRF_SPI_BIT_ORDER_MSB_FIRST,                            \
 }
 
 /** @brief Single transfer descriptor structure. */
