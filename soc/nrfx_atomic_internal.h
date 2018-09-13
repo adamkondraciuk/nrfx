@@ -19,8 +19,8 @@ static __asm uint32_t nrfx_atomic_internal_mov(nrfx_atomic_u32_t * p_ptr,
                                                uint32_t value,
                                                uint32_t * p_new)
 {
-    /* The base standard provides for passing arguments in core registers (r0-r3) and on the stack.
-     * Registers r4 and r5 have to be saved on stack. Note that only even number of register push are
+    /* The base standard specifies that arguments are passed in core registers r0-r3 and on the stack.
+     * Registers r4 and r5 must be saved on the stack. Note that only even number of register pushes are
      * allowed. This is a requirement of the Procedure Call Standard for the ARM Architecture [AAPCS].
      */
     push  {r4, r5}
@@ -205,11 +205,12 @@ loop_sub_ge
 #elif defined ( __ICCARM__ ) || defined ( __GNUC__ )
 
 /**
- * @brief Atomic operation generic macro
- * @param[in] asm_op operation: mov, orr, and, eor, add, sub
- * @param[out] old_val atomic object output (uint32_t), value before operation
- * @param[out] new_val atomic object output (uint32_t), value after operation
- * @param[in] value atomic operation operand
+ * @brief Atomic operation generic macro.
+ *
+ * @param[in]  asm_op   Operation: mov, orr, and, eor, add, sub.
+ * @param[out] old_val  Atomic object output (uint32_t), value before operation.
+ * @param[out] new_val  Atomic object output (uint32_t), value after operation.
+ * @param[in]  value    Atomic operation operand.
  */
 #define NRFX_ATOMIC_OP(asm_op, old_val, new_val, ptr, value)                \
 {                                                                           \
