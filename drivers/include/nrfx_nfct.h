@@ -288,11 +288,16 @@ void nrfx_nfct_autocolres_enable(void);
  */
 void nrfx_nfct_autocolres_disable(void);
 
+
+void nrfx_nfct_irq_handler();
+
+
+/** @} */
+
 #ifdef __cplusplus
 }
 #endif
 
-/** @} */
 
 /**
  * @defgroup nrfx_nfct_fixes NFCT driver fixes and workarounds
@@ -326,8 +331,7 @@ void nrfx_nfct_autocolres_disable(void);
  *
  * The current code contains a patch for the anomaly 25 (NFCT: Reset value of 
  * SENSRES register is incorrect), so that the module now works on Windows Phone.
+ * @}
  */
 
-/** @} */
-
-#endif /* NRFX_NFCT_H__ */
+#endif // NRFX_NFCT_H__
