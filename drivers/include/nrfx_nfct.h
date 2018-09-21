@@ -289,7 +289,7 @@ void nrfx_nfct_autocolres_enable(void);
 void nrfx_nfct_autocolres_disable(void);
 
 
-void nrfx_nfct_irq_handler();
+void nrfx_nfct_irq_handler(void);
 
 
 /** @} */
