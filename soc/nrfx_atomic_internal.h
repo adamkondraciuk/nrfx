@@ -212,23 +212,24 @@ loop_sub_ge
  * @param[out] new_val  Atomic object output (uint32_t), value after operation.
  * @param[in]  value    Atomic operation operand.
  */
-#define NRFX_ATOMIC_OP(asm_op, old_val, new_val, ptr, value)                \
-{                                                                           \
-    uint32_t str_res;                                                       \
-            __ASM volatile(                                                 \
-    "1:     ldrex   %["#old_val"], [%["#ptr"]]\n"                           \
-    NRFX_ATOMIC_OP_##asm_op(new_val, old_val, value)                        \
-    "       strex   %[str_res], %["#new_val"], [%["#ptr"]]\n"               \
-    "       teq     %[str_res], #0\n"                                       \
-    "       bne.n     1b"                                                   \
-            :                                                               \
-        [old_val]"=&r" (old_val),                                           \
-        [new_val]"=&r" (new_val),                                           \
-        [str_res]"=&r" (str_res)                                            \
-            :                                                               \
-        [ptr]"r" (ptr),                                                     \
-        [value]"r" (value)                                                  \
-            : "cc");                                                        \
+#define NRFX_ATOMIC_OP(asm_op, old_val, new_val, ptr, value)    \
+{                                                               \
+    uint32_t tmp_reg;                                           \
+            __ASM volatile(                                     \
+    "1:     ldrex   %["#old_val"], [%["#ptr"]]\n"               \
+    NRFX_ATOMIC_OP_##asm_op(new_val, old_val, value)            \
+    "       strex   %[tmp_reg], %["#new_val"], [%["#ptr"]]\n"   \
+    "       teq     %[tmp_reg], #0\n"                           \
+    "       bne.n     1b"                                       \
+            :                                                   \
+        [old_val] "=&r" (old_val),                              \
+        [new_val] "=&r" (new_val),                              \
+        [tmp_reg] "=&r" (tmp_reg)                               \
+            :                                                   \
+        [ptr]   "r" (ptr),                                      \
+        [value] "r" (value)                                     \
+            : "cc");                                            \
+    (void)tmp_reg;                                              \
 }
 
 #define NRFX_ATOMIC_OP_mov(new_val, old_val, value) "mov %["#new_val"], %["#value"]\n"
@@ -248,7 +249,10 @@ static inline bool nrfx_atomic_internal_cmp_exch(nrfx_atomic_u32_t * p_data,
                                                 uint32_t           value)
 {
     bool res = false;
-    uint32_t str_res = 0;
+    /* Temporary register used in the inline asm code for getting the result
+     * of the strex* operations (no need to initialize it).
+     */
+    uint32_t tmp_reg;
     uint32_t act_val = 0;
     uint32_t exp_val = 0;
     __ASM volatile(
@@ -256,11 +260,11 @@ static inline bool nrfx_atomic_internal_cmp_exch(nrfx_atomic_u32_t * p_data,
     "       ldr     %[exp_val], [%[expc]]\n"
     "       cmp     %[act_val], %[exp_val]\n"
     "       ittee   eq\n"
-    "       strexeq %[str_res], %[value], [%[ptr]]\n"
+    "       strexeq %[tmp_reg], %[value], [%[ptr]]\n"
     "       moveq   %[res], #1\n"
-    "       strexne %[str_res], %[act_val], [%[ptr]]\n"
+    "       strexne %[tmp_reg], %[act_val], [%[ptr]]\n"
     "       strne   %[act_val], [%[expc]]\n"
-    "       cmp     %[str_res], #0\n"
+    "       cmp     %[tmp_reg], #0\n"
     "       itt     ne\n"
     "       movne   %[res], #0\n"
     "       bne.n   1b"
@@ -268,15 +272,16 @@ static inline bool nrfx_atomic_internal_cmp_exch(nrfx_atomic_u32_t * p_data,
         [res]     "=&r" (res),
         [exp_val] "=&r" (exp_val),
         [act_val] "=&r" (act_val),
-        [str_res] "=&r" (str_res)
+        [tmp_reg] "=&r" (tmp_reg)
             :
-        "0" (res),
-        "1" (exp_val),
-        "2" (act_val),
+                "0" (res),
+                "1" (exp_val),
+                "2" (act_val),
         [expc]  "r" (p_expected),
         [ptr]   "r" (p_data),
         [value] "r" (value)
             : "cc");
+    (void)tmp_reg;
     return res;
 }
 

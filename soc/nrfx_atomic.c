@@ -25,6 +25,7 @@ uint32_t nrfx_atomic_u32_fetch_store(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(mov, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -62,6 +63,7 @@ uint32_t nrfx_atomic_u32_fetch_or(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(orr, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -99,6 +101,7 @@ uint32_t nrfx_atomic_u32_fetch_and(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(and, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -136,6 +139,7 @@ uint32_t nrfx_atomic_u32_fetch_xor(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(eor, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -173,6 +177,7 @@ uint32_t nrfx_atomic_u32_fetch_add(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(add, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -210,6 +215,7 @@ uint32_t nrfx_atomic_u32_fetch_sub(nrfx_atomic_u32_t * p_data, uint32_t value)
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(sub, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
@@ -291,6 +297,7 @@ uint32_t nrfx_atomic_u32_fetch_sub_hs(nrfx_atomic_u32_t * p_data, uint32_t value
     uint32_t old_val;
     uint32_t new_val;
     NRFX_ATOMIC_OP(sub_hs, old_val, new_val, p_data, value);
+    (void) new_val;
     return old_val;
 #else
     NRFX_CRITICAL_SECTION_ENTER();
