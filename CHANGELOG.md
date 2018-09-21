@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [1.3.0] - 2018-09-20
+## [1.3.0] - 2018-09-21
 ### Added
 - Added HAL and driver for NFCT.
 - Added driver for USBD.
