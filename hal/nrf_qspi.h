@@ -525,6 +525,9 @@ __STATIC_INLINE void nrf_qspi_enable(NRF_QSPI_Type * p_reg)
 
 __STATIC_INLINE void nrf_qspi_disable(NRF_QSPI_Type * p_reg)
 {
+    // Workaround for nRF52840 anomaly 122: Current consumption is too high.
+    *(volatile uint32_t *)0x40029054ul = 1ul;
+
     p_reg->ENABLE = (QSPI_ENABLE_ENABLE_Disabled << QSPI_ENABLE_ENABLE_Pos);
 }
 
