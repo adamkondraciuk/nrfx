@@ -18,6 +18,8 @@
 
 @defgroup nrf_ecb ECB
 
+@defgroup nrf_ficr FICR
+
 @defgroup nrf_gpio GPIO
 
 @defgroup nrf_gpiote GPIOTE

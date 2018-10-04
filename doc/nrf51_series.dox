@@ -10,6 +10,8 @@
 
 @ref nrf_ecb
 
+@ref nrf_ficr
+
 @ref nrf_gpio
 
 @ref nrf_gpiote
