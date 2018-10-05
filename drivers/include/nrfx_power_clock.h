@@ -9,6 +9,9 @@
 extern "C" {
 #endif
 
+#ifdef NRF91_SERIES
+#define POWER_CLOCK_IRQn CLOCK_POWER_IRQn
+#endif
 
 __STATIC_INLINE void nrfx_power_clock_irq_init(void);
 

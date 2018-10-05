@@ -169,8 +169,11 @@ void nrfx_clock_disable(void)
     }
     nrf_clock_int_disable(CLOCK_INTENSET_HFCLKSTARTED_Msk |
                           CLOCK_INTENSET_LFCLKSTARTED_Msk |
+#if NRF_CLOCK_HAS_CALIBRATION
                           CLOCK_INTENSET_DONE_Msk |
-                          CLOCK_INTENSET_CTTO_Msk);
+                          CLOCK_INTENSET_CTTO_Msk |
+#endif
+                          0);
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
     nrfx_clock_irq_enabled = false;
 #endif
@@ -274,16 +277,20 @@ nrfx_err_t nrfx_clock_is_calibrating(void)
 
 void nrfx_clock_calibration_timer_start(uint8_t interval)
 {
+#if NRF_CLOCK_HAS_CALIBRATION
     nrf_clock_cal_timer_timeout_set(interval);
     nrf_clock_event_clear(NRF_CLOCK_EVENT_CTTO);
     nrf_clock_int_enable(NRF_CLOCK_INT_CTTO_MASK);
     nrf_clock_task_trigger(NRF_CLOCK_TASK_CTSTART);
+#endif
 }
 
 void nrfx_clock_calibration_timer_stop(void)
 {
+#if NRF_CLOCK_HAS_CALIBRATION
     nrf_clock_int_disable(NRF_CLOCK_INT_CTTO_MASK);
     nrf_clock_task_trigger(NRF_CLOCK_TASK_CTSTOP);
+#endif
 }
 
 void nrfx_clock_irq_handler(void)
