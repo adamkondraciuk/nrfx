@@ -11,6 +11,7 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SWI_ENABLED
+
 /** @brief Enable EGU support
  *
  *  Set to 1 to activate.
@@ -74,6 +75,7 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SWI_CONFIG_LOG_ENABLED
+
 /** @brief Default Severity level
  *
  *  Following options are available:

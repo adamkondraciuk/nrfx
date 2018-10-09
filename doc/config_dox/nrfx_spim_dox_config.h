@@ -11,6 +11,7 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SPIM_ENABLED
+
 /** @brief Enable SPIM0 instance
  *
  *  Set to 1 to activate.
@@ -74,6 +75,7 @@
  * @note This is an NRF_CONFIG macro.
  */
 #define NRFX_SPIM_CONFIG_LOG_ENABLED
+
 /** @brief Default Severity level
  *
  *  Following options are available:
