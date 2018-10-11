@@ -315,40 +315,43 @@ __STATIC_INLINE nrf_clock_start_task_status_t nrf_clock_hf_start_task_status_get
 __STATIC_INLINE void nrf_clock_cal_timer_timeout_set(uint32_t interval);
 #endif
 
-#if NRFX_CHECK(CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for enabling subscription for a given CLOCK task.
+ * @brief Function for setting the subscribe configuration for a given
+ *        CLOCK task.
  *
- * @param[in] task    Subscribed task.
- * @param[in] channel Channel to connect with subscripted task.
+ * @param[in] task    Task for which to set the configuration.
+ * @param[in] channel Channel through which to subscribe events.
  */
-__STATIC_INLINE void nrf_clock_subscribe_enable(nrf_clock_task_t task,
-                                                uint8_t          channel);
+__STATIC_INLINE void nrf_clock_subscribe_set(nrf_clock_task_t task,
+                                             uint8_t          channel);
 
 /**
- * @brief Function for disabling subscription for a given CLOCK task.
+ * @brief Function for clearing the subscribe configuration for a given
+ *        CLOCK task.
  *
- * @param[in] task  Subscribed task.
+ * @param[in] task Task for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_clock_subscribe_disable(nrf_clock_task_t task);
+__STATIC_INLINE void nrf_clock_subscribe_clear(nrf_clock_task_t task);
 
 /**
- * @brief Function for enabling publication of a given CLOCK event.
+ * @brief Function for setting the publish configuration for a given
+ *        CLOCK event.
  *
- * @param[in] event   Event to publish.
- * @param[in] channel Channel to connect with published event.
+ * @param[in] event   Event for which to set the configuration.
+ * @param[in] channel Channel through which to publish the event.
  */
-__STATIC_INLINE void nrf_clock_publish_enable(nrf_clock_event_t event,
-                                              uint8_t           channel);
+__STATIC_INLINE void nrf_clock_publish_set(nrf_clock_event_t event,
+                                           uint8_t           channel);
 
 /**
- * @brief Function for disabling publication of a given CLOCK event.
+ * @brief Function for clearing the publish configuration for a given
+ *        CLOCK event.
  *
- * @param[in] event Event to publish.
+ * @param[in] event Event for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_clock_publish_disable(nrf_clock_event_t event);
-#endif // NRFX_CHECK(CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk) || defined(__NRFX_DOXYGEN__)
-
+__STATIC_INLINE void nrf_clock_publish_clear(nrf_clock_event_t event);
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
@@ -455,31 +458,31 @@ __STATIC_INLINE void nrf_clock_cal_timer_timeout_set(uint32_t interval)
 }
 #endif
 
-#if NRFX_CHECK(CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk)
-__STATIC_INLINE void nrf_clock_subscribe_enable(nrf_clock_task_t task,
-                                                uint8_t          channel)
+#if defined(DPPI_PRESENT)
+__STATIC_INLINE void nrf_clock_subscribe_set(nrf_clock_task_t task,
+                                             uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_CLOCK + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_clock_subscribe_disable(nrf_clock_task_t task)
+__STATIC_INLINE void nrf_clock_subscribe_clear(nrf_clock_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_CLOCK + (uint32_t) task + 0x80uL)) = 0;
 }
 
-__STATIC_INLINE void nrf_clock_publish_enable(nrf_clock_event_t event,
-                                              uint8_t           channel)
+__STATIC_INLINE void nrf_clock_publish_set(nrf_clock_event_t event,
+                                           uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_CLOCK + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | CLOCK_PUBLISH_HFCLKSTARTED_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_clock_publish_disable(nrf_clock_event_t event)
+__STATIC_INLINE void nrf_clock_publish_clear(nrf_clock_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_CLOCK + (uint32_t) event + 0x80uL)) = 0;
 }
-#endif // NRFX_CHECK(CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk)
+#endif // defined(DPPI_PRESENT)
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
