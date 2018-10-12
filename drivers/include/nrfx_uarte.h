@@ -65,13 +65,24 @@ typedef struct
     uint32_t             pselcts;            ///< CTS pin number.
     uint32_t             pselrts;            ///< RTS pin number.
     void *               p_context;          ///< Context passed to interrupt handler.
-    nrf_uarte_hwfc_t     hwfc;               ///< Flow control configuration.
-    nrf_uarte_parity_t   parity;             ///< Parity configuration.
     nrf_uarte_baudrate_t baudrate;           ///< Baud rate.
     uint8_t              interrupt_priority; ///< Interrupt priority.
+    nrf_uarte_config_t   hal_cfg;            ///< Parity, flow control and stop bits settings.
 } nrfx_uarte_config_t;
 
-/** @brief UARTE default configuration. */
+#if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief UARTE additional stop bits configuration.
+ */
+    #define NRFX_UARTE_DEFAULT_EXTENDED_CONFIG   \
+        .stop = (nrf_uarte_stop_t)NRFX_UARTE_DEFAULT_CONFIG_STOP,
+#else
+    #define NRFX_UARTE_DEFAULT_EXTENDED_CONFIG
+#endif
+
+/**
+ * @brief UARTE default configuration.
+ */
 #define NRFX_UARTE_DEFAULT_CONFIG                                                   \
 {                                                                                   \
     .pseltxd            = NRF_UARTE_PSEL_DISCONNECTED,                              \
@@ -79,10 +90,13 @@ typedef struct
     .pselcts            = NRF_UARTE_PSEL_DISCONNECTED,                              \
     .pselrts            = NRF_UARTE_PSEL_DISCONNECTED,                              \
     .p_context          = NULL,                                                     \
-    .hwfc               = (nrf_uarte_hwfc_t)NRFX_UARTE_DEFAULT_CONFIG_HWFC,         \
-    .parity             = (nrf_uarte_parity_t)NRFX_UARTE_DEFAULT_CONFIG_PARITY,     \
     .baudrate           = (nrf_uarte_baudrate_t)NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE, \
     .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY,                   \
+    .hal_cfg            = {                                                         \
+        .hwfc           = (nrf_uarte_hwfc_t)NRFX_UARTE_DEFAULT_CONFIG_HWFC,         \
+        .parity         = (nrf_uarte_parity_t)NRFX_UARTE_DEFAULT_CONFIG_PARITY,     \
+        NRFX_UARTE_DEFAULT_EXTENDED_CONFIG                                          \
+    }                                                                               \
 }
 
 /** @brief Structure for the UARTE transfer completion event. */

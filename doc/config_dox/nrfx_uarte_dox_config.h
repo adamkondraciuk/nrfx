@@ -45,6 +45,16 @@
  */
 #define NRFX_UARTE_DEFAULT_CONFIG_PARITY
 
+/** @brief Stop bits
+ *
+ *  Following options are available:
+ * - 0 - One stop bit
+ * - 16 - Two stop bits
+ *
+ * @note This is an NRF_CONFIG macro.
+ */
+#define NRFX_UARTE_DEFAULT_CONFIG_STOP
+
 /** @brief Default Baudrate
  *
  *  Following options are available:

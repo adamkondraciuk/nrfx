@@ -114,9 +114,28 @@ typedef enum
     NRF_UARTE_HWFC_ENABLED  = UARTE_CONFIG_HWFC_Enabled  << UARTE_CONFIG_HWFC_Pos  ///< Hardware flow control enabled.
 } nrf_uarte_hwfc_t;
 
+#if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Types of UARTE stop bit modes. */
+typedef enum
+{
+    NRF_UARTE_STOP_ONE = UARTE_CONFIG_STOP_One << UARTE_CONFIG_STOP_Pos, ///< One stop bit.
+    NRF_UARTE_STOP_TWO = UARTE_CONFIG_STOP_Two << UARTE_CONFIG_STOP_Pos  ///< Two stop bits.
+} nrf_uarte_stop_t;
+#endif
+
+
+/** @brief Structure for UARTE transmission configuration. */
+typedef struct
+{
+    nrf_uarte_hwfc_t     hwfc;    ///< Flow control configuration.
+    nrf_uarte_parity_t   parity;  ///< Parity configuration.
+#if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+    nrf_uarte_stop_t     stop;    ///< Stop bits.
+#endif
+} nrf_uarte_config_t;
 
 /**
- * @brief Function for clearing the specified UARTE event.
+ * @brief Function for clearing a specific UARTE event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
@@ -354,9 +373,8 @@ __STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type * p_reg, nrf_
  * @param hwfc   Hardware flow control. Enabled if true.
  * @param parity Parity. Included if true.
  */
-__STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type   * p_reg,
-                                         nrf_uarte_parity_t parity,
-                                         nrf_uarte_hwfc_t   hwfc);
+__STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type           * p_reg,
+                                         nrf_uarte_config_t const * p_cfg);
 
 /**
  * @brief Function for setting UARTE baud rate.
@@ -551,11 +569,14 @@ __STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type * p_reg, nrf_
     return (uint32_t)p_reg + (uint32_t)task;
 }
 
-__STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type   * p_reg,
-                                         nrf_uarte_parity_t parity,
-                                         nrf_uarte_hwfc_t   hwfc)
+__STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type           * p_reg,
+                                         nrf_uarte_config_t const * p_cfg)
 {
-    p_reg->CONFIG = (uint32_t)parity | (uint32_t)hwfc;
+    p_reg->CONFIG = (uint32_t)p_cfg->parity
+#if defined(UARTE_CONFIG_STOP_Msk)
+                    | (uint32_t)p_cfg->stop
+#endif
+                    | (uint32_t)p_cfg->hwfc;
 }
 
 __STATIC_INLINE void nrf_uarte_baudrate_set(NRF_UARTE_Type   * p_reg, nrf_uarte_baudrate_t baudrate)
