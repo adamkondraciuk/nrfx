@@ -126,7 +126,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     I2S_IRQHandler
                 DCD     0                         ; Reserved
-                DCD     IPC_IRQHandler
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     FPU_IRQHandler
                 DCD     0                         ; Reserved
@@ -423,7 +423,6 @@ Default_Handler PROC
                 EXPORT   PWM3_IRQHandler [WEAK]
                 EXPORT   PDM_IRQHandler [WEAK]
                 EXPORT   I2S_IRQHandler [WEAK]
-                EXPORT   IPC_IRQHandler [WEAK]
                 EXPORT   FPU_IRQHandler [WEAK]
                 EXPORT   GPIOTE1_IRQHandler [WEAK]
                 EXPORT   KMU_IRQHandler [WEAK]
@@ -454,7 +453,6 @@ PWM2_IRQHandler
 PWM3_IRQHandler
 PDM_IRQHandler
 I2S_IRQHandler
-IPC_IRQHandler
 FPU_IRQHandler
 GPIOTE1_IRQHandler
 KMU_IRQHandler

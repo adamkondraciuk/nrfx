@@ -198,9 +198,6 @@ Dummy_Handler:
 .weak I2S_IRQHandler
 .thumb_set I2S_IRQHandler, Dummy_Handler
 
-.weak IPC_IRQHandler
-.thumb_set IPC_IRQHandler, Dummy_Handler
-
 .weak FPU_IRQHandler
 .thumb_set FPU_IRQHandler, Dummy_Handler
 
@@ -295,7 +292,7 @@ _vectors:
   .word   0                           /*Reserved */
   .word   I2S_IRQHandler
   .word   0                           /*Reserved */
-  .word   IPC_IRQHandler
+  .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   FPU_IRQHandler
   .word   0                           /*Reserved */

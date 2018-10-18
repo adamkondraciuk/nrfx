@@ -127,7 +127,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     I2S_IRQHandler
         DCD     0                         ; Reserved
-        DCD     IPC_IRQHandler
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     FPU_IRQHandler
         DCD     0                         ; Reserved
@@ -527,11 +527,6 @@ PDM_IRQHandler
         PUBWEAK  I2S_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 I2S_IRQHandler
-        B .
-
-        PUBWEAK  IPC_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-IPC_IRQHandler
         B .
 
         PUBWEAK  FPU_IRQHandler

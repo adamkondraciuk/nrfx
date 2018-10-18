@@ -26,12 +26,12 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
-#include "system_nrf9120.h"
+#include "system_nrf9160.h"
 
 /*lint ++flb "Enter library region" */
 
 
-#define __SYSTEM_CLOCK      (64000000UL)     /*!< nRF9120 Application core uses a fixed System Clock Frequency of 64MHz */
+#define __SYSTEM_CLOCK      (64000000UL)     /*!< nRF9160 Application core uses a fixed System Clock Frequency of 64MHz */
 
 
 #if defined ( __CC_ARM )
@@ -41,6 +41,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #elif defined ( __GNUC__ )
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
 #endif
+
 
 void SystemCoreClockUpdate(void)
 {
@@ -54,7 +55,28 @@ void SystemInit(void)
     #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
         SAU->CTRL |= (1 << SAU_CTRL_ALLNS_Pos);
     #endif
-
+    
+    /* Make sure UICR->HFXOSRC is set */
+    if ((NRF_UICR_S->HFXOSRC & UICR_HFXOSRC_HFXOSRC_Msk) != UICR_HFXOSRC_HFXOSRC_TCXO) {
+        /* Wait for pending NVMC operations to finish */
+        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+        
+        /* Enable write mode in NVMC */
+        NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Wen;
+        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+        
+        /* Write new value to UICR->HFXOSRC */
+        NRF_UICR_S->HFXOSRC = (NRF_UICR_S->HFXOSRC & ~UICR_HFXOSRC_HFXOSRC_Msk) | UICR_HFXOSRC_HFXOSRC_TCXO;
+        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+              
+        /* Enable read mode in NVMC */
+        NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Ren;
+        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+        
+        /* Reset to apply clock select update */
+        NVIC_SystemReset();
+    }
+    
     /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
      * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
      * operations are not used in your code. */

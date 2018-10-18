@@ -20,8 +20,8 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 */
 
-#ifndef SYSTEM_9120_H
-#define SYSTEM_9120_H
+#ifndef SYSTEM_9160_H
+#define SYSTEM_9160_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -58,4 +58,4 @@ extern void SystemCoreClockUpdate (void);
 }
 #endif
 
-#endif /* SYSTEM_9120_H */
+#endif /* SYSTEM_9160_H */
