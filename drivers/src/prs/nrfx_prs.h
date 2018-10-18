@@ -49,7 +49,7 @@ extern "C" {
     #define NRFX_PRS_BOX_3_ADDR     NRF_COMP
     // UARTE0, UART0
     #define NRFX_PRS_BOX_4_ADDR     NRF_UARTE0
-#elif defined(NRF9120_XXAA)
+#elif defined(NRF9160_XXAA)
     // UARTE0, SPIM0, SPIS0, TWIM0, TWIS0
     #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE0
     // UARTE1, SPIM1, SPIS1, TWIM1, TWIS1

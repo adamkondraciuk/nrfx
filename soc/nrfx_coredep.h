@@ -29,7 +29,7 @@
 #elif defined(NRF52840_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
-#elif defined(NRF9120_XXAA)
+#elif defined(NRF9160_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
 #else
@@ -114,7 +114,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     #elif  (defined(NRF52832_XXAA) || \
            defined (NRF52832_XXAB) || \
            defined(NRF52840_XXAA)  || \
-           defined(NRF9120_XXAA))
+           defined(NRF9160_XXAA))
     // The loop takes 3 cycles: 1 for SUBS, 2 for BHI.
     // Make sure that code is cached properly, so that no extra wait states appear.
     __ALIGN(16)

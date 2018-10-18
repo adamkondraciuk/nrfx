@@ -3,7 +3,7 @@
 The following matrix shows which drivers are supported by specific Nordic SoCs.
 @{
 
-Driver           | nRF51 Series | nRF52810     | nRF52832     | nRF52840     | nRF9120      |
+Driver           | nRF51 Series | nRF52810     | nRF52832     | nRF52840     | nRF9160      |
 -----------------|--------------|--------------| -------------| -------------| -------------|
 @ref nrf_adc     |@tagGreenTick |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_acl     |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagGreenTick |@tagRedCross  |
