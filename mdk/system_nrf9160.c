@@ -56,26 +56,28 @@ void SystemInit(void)
         SAU->CTRL |= (1 << SAU_CTRL_ALLNS_Pos);
     #endif
     
-    /* Make sure UICR->HFXOSRC is set */
-    if ((NRF_UICR_S->HFXOSRC & UICR_HFXOSRC_HFXOSRC_Msk) != UICR_HFXOSRC_HFXOSRC_TCXO) {
-        /* Wait for pending NVMC operations to finish */
-        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
-        
-        /* Enable write mode in NVMC */
-        NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Wen;
-        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
-        
-        /* Write new value to UICR->HFXOSRC */
-        NRF_UICR_S->HFXOSRC = (NRF_UICR_S->HFXOSRC & ~UICR_HFXOSRC_HFXOSRC_Msk) | UICR_HFXOSRC_HFXOSRC_TCXO;
-        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
-              
-        /* Enable read mode in NVMC */
-        NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Ren;
-        while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
-        
-        /* Reset to apply clock select update */
-        NVIC_SystemReset();
-    }
+    #if !defined(NRF_TRUSTZONE_NONSECURE)
+      /* Make sure UICR->HFXOSRC is set */
+      if ((NRF_UICR_S->HFXOSRC & UICR_HFXOSRC_HFXOSRC_Msk) != UICR_HFXOSRC_HFXOSRC_TCXO) {
+          /* Wait for pending NVMC operations to finish */
+          while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+          
+          /* Enable write mode in NVMC */
+          NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Wen;
+          while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+          
+          /* Write new value to UICR->HFXOSRC */
+          NRF_UICR_S->HFXOSRC = (NRF_UICR_S->HFXOSRC & ~UICR_HFXOSRC_HFXOSRC_Msk) | UICR_HFXOSRC_HFXOSRC_TCXO;
+          while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+                
+          /* Enable read mode in NVMC */
+          NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Ren;
+          while (NRF_NVMC_S->READY != NVMC_READY_READY_Ready);
+          
+          /* Reset to apply clock select update */
+          NVIC_SystemReset();
+      }
+    #endif
     
     /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
      * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit

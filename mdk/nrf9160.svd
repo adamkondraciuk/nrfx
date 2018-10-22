@@ -25841,6 +25841,1242 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
       </interrupt>
     </peripheral>
     <peripheral>
+      <name>IPC_NS</name>
+      <description>Inter Processor Communication 0</description>
+      <baseAddress>0x4002A000</baseAddress>
+      <headerStructName>IPC</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>IPC</name>
+        <value>42</value>
+      </interrupt>
+      <groupName>IPC</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>TASKS_SEND[%s]</name>
+          <description>Description collection: Trigger events on channel enabled in SEND_CNF[n].</description>
+          <addressOffset>0x000</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_SEND</name>
+              <description>Trigger events on channel enabled in SEND_CNF[n].</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>SUBSCRIBE_SEND[%s]</name>
+          <description>Description collection: Subscribe configuration for task SEND[n]</description>
+          <addressOffset>0x080</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task SEND[n] will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>EVENTS_RECEIVE[%s]</name>
+          <description>Description collection: Event received on one or more of the enabled channels in RECEIVE_CNF[n].</description>
+          <addressOffset>0x100</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_RECEIVE</name>
+              <description>Event received on one or more of the enabled channels in RECEIVE_CNF[n].</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>PUBLISH_RECEIVE[%s]</name>
+          <description>Description collection: Publish configuration for event RECEIVE[n]</description>
+          <addressOffset>0x180</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that event RECEIVE[n] will publish to.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTEN</name>
+          <description>Enable or disable interrupt</description>
+          <addressOffset>0x300</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>RECEIVE0</name>
+              <description>Enable or disable interrupt for event RECEIVE[0]</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE1</name>
+              <description>Enable or disable interrupt for event RECEIVE[1]</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE2</name>
+              <description>Enable or disable interrupt for event RECEIVE[2]</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE3</name>
+              <description>Enable or disable interrupt for event RECEIVE[3]</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE4</name>
+              <description>Enable or disable interrupt for event RECEIVE[4]</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE5</name>
+              <description>Enable or disable interrupt for event RECEIVE[5]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE6</name>
+              <description>Enable or disable interrupt for event RECEIVE[6]</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE7</name>
+              <description>Enable or disable interrupt for event RECEIVE[7]</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTENSET</name>
+          <description>Enable interrupt</description>
+          <addressOffset>0x304</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>RECEIVE0</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[0]</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE1</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[1]</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE2</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[2]</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE3</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[3]</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE4</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[4]</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE5</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[5]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE6</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[6]</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE7</name>
+              <description>Write '1' to enable interrupt for event RECEIVE[7]</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTENCLR</name>
+          <description>Disable interrupt</description>
+          <addressOffset>0x308</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>RECEIVE0</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[0]</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE1</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[1]</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE2</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[2]</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE3</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[3]</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE4</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[4]</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE5</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[5]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE6</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[6]</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE7</name>
+              <description>Write '1' to disable interrupt for event RECEIVE[7]</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTPEND</name>
+          <description>Pending interrupts</description>
+          <addressOffset>0x30C</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>RECEIVE0</name>
+              <description>Read pending status of interrupt for event RECEIVE[0]</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE1</name>
+              <description>Read pending status of interrupt for event RECEIVE[1]</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE2</name>
+              <description>Read pending status of interrupt for event RECEIVE[2]</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE3</name>
+              <description>Read pending status of interrupt for event RECEIVE[3]</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE4</name>
+              <description>Read pending status of interrupt for event RECEIVE[4]</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE5</name>
+              <description>Read pending status of interrupt for event RECEIVE[5]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE6</name>
+              <description>Read pending status of interrupt for event RECEIVE[6]</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RECEIVE7</name>
+              <description>Read pending status of interrupt for event RECEIVE[7]</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>SEND_CNF[%s]</name>
+          <description>Description collection: Send event configuration for TASKS_SEND[n].</description>
+          <addressOffset>0x510</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CHEN0</name>
+              <description>Enable broadcasting on channel 0.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN1</name>
+              <description>Enable broadcasting on channel 1.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN2</name>
+              <description>Enable broadcasting on channel 2.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN3</name>
+              <description>Enable broadcasting on channel 3.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN4</name>
+              <description>Enable broadcasting on channel 4.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN5</name>
+              <description>Enable broadcasting on channel 5.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN6</name>
+              <description>Enable broadcasting on channel 6.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN7</name>
+              <description>Enable broadcasting on channel 7.</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable broadcast.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable broadcast.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x8</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>RECEIVE_CNF[%s]</name>
+          <description>Description collection: Receive event configuration for EVENTS_RECEIVE[n].</description>
+          <addressOffset>0x590</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CHEN0</name>
+              <description>Enable subscription to channel 0.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN1</name>
+              <description>Enable subscription to channel 1.</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN2</name>
+              <description>Enable subscription to channel 2.</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN3</name>
+              <description>Enable subscription to channel 3.</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN4</name>
+              <description>Enable subscription to channel 4.</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN5</name>
+              <description>Enable subscription to channel 5.</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN6</name>
+              <description>Enable subscription to channel 6.</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CHEN7</name>
+              <description>Enable subscription to channel 7.</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable events.</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable events.</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <dim>0x4</dim>
+          <dimIncrement>0x4</dimIncrement>
+          <name>GPMEM[%s]</name>
+          <description>Description collection: General purpose memory.</description>
+          <addressOffset>0x610</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>GPMEM</name>
+              <description>General purpose memory</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="IPC_NS">
+      <name>IPC_S</name>
+      <description>Inter Processor Communication 1</description>
+      <baseAddress>0x5002A000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <interrupt>
+        <name>IPC</name>
+        <value>42</value>
+      </interrupt>
+    </peripheral>
+    <peripheral>
       <name>FPU_NS</name>
       <description>FPU 0</description>
       <baseAddress>0x4002C000</baseAddress>

@@ -132,7 +132,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   I2S_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   IPC_IRQHandler
     .long   0                           /*Reserved */
     .long   FPU_IRQHandler
     .long   0                           /*Reserved */
@@ -524,6 +524,7 @@ Default_Handler:
     IRQ  PWM3_IRQHandler
     IRQ  PDM_IRQHandler
     IRQ  I2S_IRQHandler
+    IRQ  IPC_IRQHandler
     IRQ  FPU_IRQHandler
     IRQ  GPIOTE1_IRQHandler
     IRQ  KMU_IRQHandler
