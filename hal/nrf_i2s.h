@@ -72,13 +72,23 @@ typedef enum
 typedef enum
 {
     NRF_I2S_MCK_DISABLED  = 0,                                       ///< MCK disabled.
+#if defined(I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV2) || defined(__NRFX_DOXYGEN__)
     // [conversion to 'int' needed to prevent compilers from complaining
     //  that the provided value (0x80000000UL) is out of range of "int"]
     NRF_I2S_MCK_32MDIV2   = (int)I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV2, ///< 32 MHz / 2 = 16.0 MHz.
+#endif
+#if defined(I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV3) || defined(__NRFX_DOXYGEN__)
     NRF_I2S_MCK_32MDIV3   = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV3,      ///< 32 MHz / 3 = 10.6666667 MHz.
+#endif
+#if defined(I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV4) || defined(__NRFX_DOXYGEN__)
     NRF_I2S_MCK_32MDIV4   = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV4,      ///< 32 MHz / 4 = 8.0 MHz.
+#endif
+#if defined(I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV5) || defined(__NRFX_DOXYGEN__)
     NRF_I2S_MCK_32MDIV5   = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV5,      ///< 32 MHz / 5 = 6.4 MHz.
+#endif
+#if defined(I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV6) || defined(__NRFX_DOXYGEN__)
     NRF_I2S_MCK_32MDIV6   = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV6,      ///< 32 MHz / 6 = 5.3333333 MHz.
+#endif
     NRF_I2S_MCK_32MDIV8   = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV8,      ///< 32 MHz / 8 = 4.0 MHz.
     NRF_I2S_MCK_32MDIV10  = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV10,     ///< 32 MHz / 10 = 3.2 MHz.
     NRF_I2S_MCK_32MDIV11  = I2S_CONFIG_MCKFREQ_MCKFREQ_32MDIV11,     ///< 32 MHz / 11 = 2.9090909 MHz.
