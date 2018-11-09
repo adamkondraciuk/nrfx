@@ -53,6 +53,11 @@ extern "C" {
 #define NRF_POWER_HAS_VDDH 0
 #endif // defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
 
+#if defined(POWER_DCDCEN_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
+#define NRF_POWER_HAS_DCDCEN 1
+#else
+#define NRF_POWER_HAS_DCDCEN 0
+#endif
 
 #if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
 #define NRF_POWER_HAS_POFCON 1

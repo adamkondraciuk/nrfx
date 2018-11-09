@@ -69,6 +69,37 @@ typedef enum
 }nrfx_power_usb_state_t;
 #endif /* NRF_POWER_HAS_USBREG */
 
+typedef enum
+{
+#if NRF_POWER_HAS_POFCON || defined(__NRFX_DOXYGEN__)
+    NRFX_POWER_POFTHR_V21 = NRF_POWER_POFTHR_V21, /**< Set threshold to 2.1&nbsp;V */
+    NRFX_POWER_POFTHR_V23 = NRF_POWER_POFTHR_V23, /**< Set threshold to 2.3&nbsp;V */
+    NRFX_POWER_POFTHR_V25 = NRF_POWER_POFTHR_V25, /**< Set threshold to 2.5&nbsp;V */
+    NRFX_POWER_POFTHR_V27 = NRF_POWER_POFTHR_V27, /**< Set threshold to 2.7&nbsp;V */
+#if defined(POWER_POFCON_THRESHOLD_V17) || defined(__NRFX_DOXYGEN__)
+    NRFX_POWER_POFTHR_V17 = NRF_POWER_POFTHR_V17, /**< Set threshold to 1.7&nbsp;V */
+    NRFX_POWER_POFTHR_V18 = NRF_POWER_POFTHR_V18, /**< Set threshold to 1.8&nbsp;V */
+    NRFX_POWER_POFTHR_V19 = NRF_POWER_POFTHR_V19, /**< Set threshold to 1.9&nbsp;V */
+    NRFX_POWER_POFTHR_V20 = NRF_POWER_POFTHR_V20, /**< Set threshold to 2.0&nbsp;V */
+    NRFX_POWER_POFTHR_V22 = NRF_POWER_POFTHR_V22, /**< Set threshold to 2.2&nbsp;V */
+    NRFX_POWER_POFTHR_V24 = NRF_POWER_POFTHR_V24, /**< Set threshold to 2.4&nbsp;V */
+    NRFX_POWER_POFTHR_V26 = NRF_POWER_POFTHR_V26, /**< Set threshold to 2.6&nbsp;V */
+    NRFX_POWER_POFTHR_V28 = NRF_POWER_POFTHR_V28, /**< Set threshold to 2.8&nbsp;V */
+#endif
+#else
+    NRFX_POWER_POFTHR_V19 = NRF_REGULATORS_POFTHR_V19, /**< Set threshold to 1.9&nbsp;V */
+    NRFX_POWER_POFTHR_V20 = NRF_REGULATORS_POFTHR_V20, /**< Set threshold to 2.0&nbsp;V */
+    NRFX_POWER_POFTHR_V21 = NRF_REGULATORS_POFTHR_V21, /**< Set threshold to 2.1&nbsp;V */
+    NRFX_POWER_POFTHR_V22 = NRF_REGULATORS_POFTHR_V22, /**< Set threshold to 2.2&nbsp;V */
+    NRFX_POWER_POFTHR_V23 = NRF_REGULATORS_POFTHR_V23, /**< Set threshold to 2.3&nbsp;V */
+    NRFX_POWER_POFTHR_V24 = NRF_REGULATORS_POFTHR_V24, /**< Set threshold to 2.4&nbsp;V */
+    NRFX_POWER_POFTHR_V25 = NRF_REGULATORS_POFTHR_V25, /**< Set threshold to 2.5&nbsp;V */
+    NRFX_POWER_POFTHR_V26 = NRF_REGULATORS_POFTHR_V26, /**< Set threshold to 2.6&nbsp;V */
+    NRFX_POWER_POFTHR_V27 = NRF_REGULATORS_POFTHR_V27, /**< Set threshold to 2.7&nbsp;V */
+    NRFX_POWER_POFTHR_V28 = NRF_REGULATORS_POFTHR_V28, /**< Set threshold to 2.8&nbsp;V */
+#endif // NRF_POWER_HAS_POFCON || defined(__NRFX_DOXYGEN__)
+} nrfx_power_pof_thr_t;
+
 /**
  * @name Callback types
  *
@@ -137,7 +168,7 @@ typedef struct
 typedef struct
 {
     nrfx_power_pofwarn_event_handler_t handler; //!< Event handler
-    nrf_power_pof_thr_t                thr;     //!< Threshold for power failure detection
+    nrfx_power_pof_thr_t               thr;     //!< Threshold for power failure detection
 #if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
     nrf_power_pof_thrvddh_t            thrvddh; //!< Threshold for power failure detection on VDDH pin
 #endif

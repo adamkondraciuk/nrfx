@@ -5,6 +5,9 @@
 #if NRFX_CHECK(NRFX_POWER_ENABLED)
 
 #include <nrfx_power.h>
+#if defined(REGULATORS_PRESENT)
+#include <hal/nrf_regulators.h>
+#endif
 
 #if NRFX_CHECK(NRFX_CLOCK_ENABLED)
 extern bool nrfx_clock_irq_enabled;
@@ -77,7 +80,11 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config)
 #if NRF_POWER_HAS_VDDH
     nrf_power_dcdcen_vddh_set(p_config->dcdcenhv);
 #endif
+#if NRF_POWER_HAS_DCDCEN
     nrf_power_dcdcen_set(p_config->dcdcen);
+#else
+    nrf_regulators_dcdcen_set(NRF_REGULATORS, p_config->dcdcen);
+#endif
 
     nrfx_power_clock_irq_init();
 
@@ -121,8 +128,12 @@ void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 
 void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config)
 {
-    nrf_power_pofcon_set(true, p_config->thr);
-#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_POFCON
+    nrf_power_pofcon_set(true, (nrf_power_pof_thr_t)p_config->thr);
+#else
+    nrf_regulators_pofcon_enable(NRF_REGULATORS, (nrf_regulators_pof_thr_t)p_config->thr);
+#endif
+#if NRF_POWER_HAS_VDDH
     nrf_power_pofcon_vddh_set(p_config->thrvddh);
 #endif
     if (m_pofwarn_handler != NULL)
@@ -133,6 +144,11 @@ void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config)
 
 void nrfx_power_pof_disable(void)
 {
+#if NRF_POWER_HAS_POFCON
+    nrf_power_pofcon_set(false, NRF_POWER_POFTHR_V27);
+#else
+    nrf_regulators_pofcon_disable(NRF_REGULATORS);
+#endif
     nrf_power_int_disable(NRF_POWER_INT_POFWARN_MASK);
 }
 
