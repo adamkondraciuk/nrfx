@@ -5147,19 +5147,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           </fields>
         </register>
         <register>
-          <name>EVENTS_PHYEND</name>
-          <description>Generated in Ble_LR125Kbit, Ble_LR500Kbit and BleIeee802154_250Kbit modes when last bit is sent on air.</description>
-          <addressOffset>0x16C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_PHYEND</name>
-              <lsb>0</lsb>
-              <msb>0</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>SHORTS</name>
           <description>Shortcut register</description>
           <addressOffset>0x200</addressOffset>
@@ -5458,42 +5445,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <description>Shortcut between RXREADY event and START task</description>
               <lsb>19</lsb>
               <msb>19</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PHYEND_DISABLE</name>
-              <description>Shortcut between PHYEND event and DISABLE task</description>
-              <lsb>20</lsb>
-              <msb>20</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PHYEND_START</name>
-              <description>Shortcut between PHYEND event and START task</description>
-              <lsb>21</lsb>
-              <msb>21</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -6060,33 +6011,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <description>Write '1' to enable interrupt for MHRMATCH event</description>
               <lsb>23</lsb>
               <msb>23</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PHYEND</name>
-              <description>Write '1' to enable interrupt for PHYEND event</description>
-              <lsb>27</lsb>
-              <msb>27</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -6684,33 +6608,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>PHYEND</name>
-              <description>Write '1' to disable interrupt for PHYEND event</description>
-              <lsb>27</lsb>
-              <msb>27</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -6782,50 +6679,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           </fields>
         </register>
         <register>
-          <name>PDUSTAT</name>
-          <description>Payload status</description>
-          <addressOffset>0x414</addressOffset>
-          <access>read-only</access>
-          <fields>
-            <field>
-              <name>PDUSTAT</name>
-              <description>Status on payload length vs. PCNF1.MAXLEN</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>LessThan</name>
-                  <description>Payload less than PCNF1.MAXLEN</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>GreaterThan</name>
-                  <description>Payload greater than PCNF1.MAXLEN</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CISTAT</name>
-              <description>Status on what rate packet is received with in Long Range</description>
-              <lsb>1</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>LR125kbit</name>
-                  <description>Frame is received at 125kbps</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LR500kbit</name>
-                  <description>Frame is received at 500kbps</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>PACKETPTR</name>
           <description>Packet pointer</description>
           <addressOffset>0x504</addressOffset>
@@ -6884,6 +6737,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <lsb>0</lsb>
               <msb>7</msb>
               <enumeratedValues>
+                <enumeratedValue>
+                  <name>Pos9dBm</name>
+                  <description>+9 dBm</description>
+                  <value>0x9</value>
+                </enumeratedValue>
                 <enumeratedValue>
                   <name>Pos8dBm</name>
                   <description>+8 dBm</description>
@@ -6984,6 +6842,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                   <name>Nrf_2Mbit</name>
                   <description>2 Mbit/s Nordic proprietary radio mode</description>
                   <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Nrf_250Kbit</name>
+                  <description>Deprecated enumerator -  250 kbit/s Nordic proprietary radio mode</description>
+                  <value>2</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Ble_1Mbit</name>
@@ -7292,7 +7155,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>ADDR0</name>
-              <description>Enable or disable reception on logical address 0.</description>
+              <description>Enable or disable reception on logical address 0</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -7310,7 +7173,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR1</name>
-              <description>Enable or disable reception on logical address 1.</description>
+              <description>Enable or disable reception on logical address 1</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -7328,7 +7191,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR2</name>
-              <description>Enable or disable reception on logical address 2.</description>
+              <description>Enable or disable reception on logical address 2</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
@@ -7346,7 +7209,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR3</name>
-              <description>Enable or disable reception on logical address 3.</description>
+              <description>Enable or disable reception on logical address 3</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
@@ -7364,7 +7227,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR4</name>
-              <description>Enable or disable reception on logical address 4.</description>
+              <description>Enable or disable reception on logical address 4</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
@@ -7382,7 +7245,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR5</name>
-              <description>Enable or disable reception on logical address 5.</description>
+              <description>Enable or disable reception on logical address 5</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
@@ -7400,7 +7263,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR6</name>
-              <description>Enable or disable reception on logical address 6.</description>
+              <description>Enable or disable reception on logical address 6</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -7418,7 +7281,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ADDR7</name>
-              <description>Enable or disable reception on logical address 7.</description>
+              <description>Enable or disable reception on logical address 7</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>

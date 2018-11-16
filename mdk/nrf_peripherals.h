@@ -51,7 +51,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(__APPLE__)
     /* Do not include nrf specific files when building for PC host */
 #else
-
+    
     #if defined(NRF51)
         #include "nrf51_peripherals.h"
         
@@ -59,10 +59,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52810_peripherals.h"
     #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
         #include "nrf52832_peripherals.h"
+    #elif defined (NRF52833_XXAA)
+        #include "nrf52833_peripherals.h"
     #elif defined(NRF52840_XXAA)
         #include "nrf52840_peripherals.h"
-
-    #elif defined (NRF9160_XXAA)
+        
+    #elif defined(NRF9160_XXAA)
         #include "nrf9160_peripherals.h"
         
     #else

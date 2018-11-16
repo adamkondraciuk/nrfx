@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8
-#define MDK_MINOR_VERSION   19
+#define MDK_MINOR_VERSION   20
 #define MDK_MICRO_VERSION   0
 
 /* Redefine "old" too-generic name NRF52 to NRF52832_XXAA to keep backwards compatibility. */
@@ -67,7 +67,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define NRF91_SERIES
     #endif
 #endif
-
 
 #if defined(_WIN32)
     /* Do not include nrf specific files when building for PC host */
@@ -98,7 +97,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52840_bitfields.h"
         #include "nrf51_to_nrf52840.h"
         #include "nrf52_to_nrf52840.h"
-    
+        
     #elif defined (NRF9160_XXAA)
         #include "nrf9160.h"
         #include "nrf9160_bitfields.h"
