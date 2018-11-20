@@ -27,6 +27,11 @@ extern "C" {
     #define NRFX_PRS_BOX_0_ADDR     NRF_TWIM0
     // SPIM0, SPIS0
     #define NRFX_PRS_BOX_1_ADDR     NRF_SPIM0
+#elif defined(NRF52811_XXAA)
+    // TWIM0, TWIS0, SPIM1, SPIS1
+    #define NRFX_PRS_BOX_0_ADDR     NRF_TWIM0
+    // SPIM0, SPIS0
+    #define NRFX_PRS_BOX_1_ADDR     NRF_SPIM0
 #elif defined(NRF52832_XXAA) || defined (NRF52832_XXAB)
     // SPIM0, SPIS0, TWIM0, TWIS0, SPI0, TWI0
     #define NRFX_PRS_BOX_0_ADDR     NRF_SPIM0
