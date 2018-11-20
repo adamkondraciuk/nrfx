@@ -7,6 +7,8 @@
     #include <soc/nrfx_irqs_nrf51.h>
 #elif defined(NRF52810_XXAA)
     #include <soc/nrfx_irqs_nrf52810.h>
+#elif defined(NRF52811_XXAA)
+    #include <soc/nrfx_irqs_nrf52811.h>
 #elif defined(NRF52832_XXAA) || defined (NRF52832_XXAB)
     #include <soc/nrfx_irqs_nrf52832.h>
 #elif defined(NRF52840_XXAA)
