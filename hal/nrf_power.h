@@ -78,7 +78,9 @@ typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
  */
 typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
 {
+#if defined(POWER_INTENSET_POFWARN_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_EVENT_POFWARN      = offsetof(NRF_POWER_Type, EVENTS_POFWARN    ), /**< Power failure warning */
+#endif
 #if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_EVENT_SLEEPENTER   = offsetof(NRF_POWER_Type, EVENTS_SLEEPENTER ), /**< CPU entered WFI/WFE sleep */
     NRF_POWER_EVENT_SLEEPEXIT    = offsetof(NRF_POWER_Type, EVENTS_SLEEPEXIT  ), /**< CPU exited WFI/WFE sleep */
@@ -95,7 +97,9 @@ typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
  */
 typedef enum
 {
+#if defined(POWER_INTENSET_POFWARN_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_INT_POFWARN_MASK     = POWER_INTENSET_POFWARN_Msk    , /**< Write '1' to Enable interrupt for POFWARN event */
+#endif
 #if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_POWER_INT_SLEEPENTER_MASK  = POWER_INTENSET_SLEEPENTER_Msk , /**< Write '1' to Enable interrupt for SLEEPENTER event */
     NRF_POWER_INT_SLEEPEXIT_MASK   = POWER_INTENSET_SLEEPEXIT_Msk  , /**< Write '1' to Enable interrupt for SLEEPEXIT event */
@@ -831,7 +835,7 @@ __STATIC_INLINE void nrf_power_publish_enable(nrf_power_event_t event,
                                               uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_POWER + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | POWER_PUBLISH_POFWARN_EN_Msk);
+            ((uint32_t)channel | POWER_PUBLISH_SLEEPENTER_EN_Msk);
 }
 
 __STATIC_INLINE void nrf_power_publish_disable(nrf_power_event_t event)

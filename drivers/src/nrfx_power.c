@@ -103,8 +103,9 @@ void nrfx_power_uninit(void)
     {
         NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
     }
-
+#if NRF_POWER_HAS_POFCON
     nrfx_power_pof_uninit();
+#endif
 #if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
     nrfx_power_sleepevt_uninit();
 #endif
@@ -114,6 +115,7 @@ void nrfx_power_uninit(void)
     m_initialized = false;
 }
 
+#if NRF_POWER_HAS_POFCON
 void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 {
     NRFX_ASSERT(p_config != NULL);
@@ -128,11 +130,7 @@ void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 
 void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config)
 {
-#if NRF_POWER_HAS_POFCON
-    nrf_power_pofcon_set(true, (nrf_power_pof_thr_t)p_config->thr);
-#else
-    nrf_regulators_pofcon_enable(NRF_REGULATORS, (nrf_regulators_pof_thr_t)p_config->thr);
-#endif
+    nrf_power_pofcon_set(true, p_config->thr);
 #if NRF_POWER_HAS_VDDH
     nrf_power_pofcon_vddh_set(p_config->thrvddh);
 #endif
@@ -144,11 +142,7 @@ void nrfx_power_pof_enable(nrfx_power_pofwarn_config_t const * p_config)
 
 void nrfx_power_pof_disable(void)
 {
-#if NRF_POWER_HAS_POFCON
     nrf_power_pofcon_set(false, NRF_POWER_POFTHR_V27);
-#else
-    nrf_regulators_pofcon_disable(NRF_REGULATORS);
-#endif
     nrf_power_int_disable(NRF_POWER_INT_POFWARN_MASK);
 }
 
@@ -156,6 +150,7 @@ void nrfx_power_pof_uninit(void)
 {
     m_pofwarn_handler = NULL;
 }
+#endif // NRF_POWER_HAS_POFCON
 
 #if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 void nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config)
@@ -234,6 +229,8 @@ void nrfx_power_usbevt_uninit(void)
 void nrfx_power_irq_handler(void)
 {
     uint32_t enabled = nrf_power_int_enable_get();
+
+#if NRF_POWER_HAS_POFCON
     if ((0 != (enabled & NRF_POWER_INT_POFWARN_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_POFWARN))
     {
@@ -241,6 +238,7 @@ void nrfx_power_irq_handler(void)
         NRFX_ASSERT(m_pofwarn_handler != NULL);
         m_pofwarn_handler();
     }
+#endif
 #if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
     if ((0 != (enabled & NRF_POWER_INT_SLEEPENTER_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_SLEEPENTER))
