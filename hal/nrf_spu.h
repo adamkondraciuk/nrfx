@@ -49,9 +49,9 @@ typedef enum
 /** @brief SPU memory region permissions. */
 typedef enum
 {
-    NRF_SPU_MEM_PERM_EXECUTE, ///< Allow code execution from particular memory region.
-    NRF_SPU_MEM_PERM_WRITE,   ///< Allow write operation on particular memory region.
-    NRF_SPU_MEM_PERM_READ     ///< Allow read operation from particular memory region.
+    NRF_SPU_MEM_PERM_EXECUTE = SPU_FLASHREGION_PERM_EXECUTE_Msk, ///< Allow code execution from particular memory region.
+    NRF_SPU_MEM_PERM_WRITE   = SPU_FLASHREGION_PERM_WRITE_Msk,   ///< Allow write operation on particular memory region.
+    NRF_SPU_MEM_PERM_READ    = SPU_FLASHREGION_PERM_READ_Msk     ///< Allow read operation from particular memory region.
 } nrf_spu_mem_perm_t;
 
 /**
@@ -200,12 +200,12 @@ __STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
 /**
  * @brief Function for configuring security for a particular flash region.
  *
- * Permissions parameter has to be set by using logical sum on nrf_spu_mem_perm_t values.
+ * Permissions parameter must be set by using the logical OR on the @ref nrf_spu_mem_perm_t values.
  *
  * @param[in] p_reg       Pointer to the peripheral registers structure.
  * @param[in] region_id   Flash region index.
  * @param[in] secure_attr Set region attribute to secure.
- * @param[in] permissions RAM region permissions.
+ * @param[in] permissions Flash region permissions.
  * @param[in] lock_conf   Lock configuration until next SoC reset.
  */
 __STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
@@ -217,7 +217,7 @@ __STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
 /**
  * @brief Function for configuring security for the RAM region.
  *
- * Permissions parameter has to be set by using logical sum on nrf_spu_mem_perm_t values.
+ * Permissions parameter must be set by using the logical OR on the @ref nrf_spu_mem_perm_t values.
  *
  * @param[in] p_reg       Pointer to the peripheral registers structure.
  * @param[in] region_id   RAM region index.
