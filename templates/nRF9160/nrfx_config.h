@@ -66,6 +66,11 @@
 #define NRF_SPU        NRF_SPU_S
 #define NRF_UICR       NRF_UICR_S
 
+/* Fixups for GPIOTE HAL and driver. */
+#define NRF_GPIOTE        NRF_GPIOTE0_S
+#define GPIOTE_IRQn       GPIOTE0_IRQn
+#define GPIOTE_IRQHandler GPIOTE0_IRQHandler
+
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
 // <h> nRF_Drivers
