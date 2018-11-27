@@ -41,14 +41,14 @@ bool nrfx_power_irq_enabled;
  */
 static nrfx_power_pofwarn_event_handler_t m_pofwarn_handler;
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
 /**
  * @brief The handler of sleep event handler
  */
 static nrfx_power_sleep_event_handler_t m_sleepevt_handler;
 #endif
 
-#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
 /**
  * @brief The handler of USB power events
  */
@@ -106,10 +106,10 @@ void nrfx_power_uninit(void)
 #if NRF_POWER_HAS_POFCON
     nrfx_power_pof_uninit();
 #endif
-#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
     nrfx_power_sleepevt_uninit();
 #endif
-#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
     nrfx_power_usbevt_uninit();
 #endif
     m_initialized = false;
@@ -152,7 +152,7 @@ void nrfx_power_pof_uninit(void)
 }
 #endif // NRF_POWER_HAS_POFCON
 
-#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
 void nrfx_power_sleepevt_init(nrfx_power_sleepevt_config_t const * p_config)
 {
     NRFX_ASSERT(p_config != NULL);
@@ -193,7 +193,7 @@ void nrfx_power_sleepevt_uninit(void)
 }
 #endif /* NRF_POWER_HAS_SLEEPEVT */
 
-#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
 void nrfx_power_usbevt_init(nrfx_power_usbevt_config_t const * p_config)
 {
     nrfx_power_usbevt_uninit();
@@ -239,7 +239,7 @@ void nrfx_power_irq_handler(void)
         m_pofwarn_handler();
     }
 #endif
-#if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
     if ((0 != (enabled & NRF_POWER_INT_SLEEPENTER_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_SLEEPENTER))
     {
@@ -255,7 +255,7 @@ void nrfx_power_irq_handler(void)
         m_sleepevt_handler(NRFX_POWER_SLEEP_EVT_EXIT);
     }
 #endif
-#if NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
     if ((0 != (enabled & NRF_POWER_INT_USBDETECTED_MASK)) &&
         nrf_power_event_get_and_clear(NRF_POWER_EVENT_USBDETECTED))
     {
