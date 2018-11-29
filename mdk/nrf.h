@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8
-#define MDK_MINOR_VERSION   20
+#define MDK_MINOR_VERSION   21
 #define MDK_MICRO_VERSION   0
 
 /* Redefine "old" too-generic name NRF52 to NRF52832_XXAA to keep backwards compatibility. */
@@ -63,11 +63,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
 #if defined (NRF9160_XXAA)
-    #ifndef NRF91_SERIES
+    #ifndef NRF91_SERIES    
         #define NRF91_SERIES
     #endif
 #endif
-
+   
 #if defined(_WIN32)
     /* Do not include nrf specific files when building for PC host */
 #elif defined(__unix)
