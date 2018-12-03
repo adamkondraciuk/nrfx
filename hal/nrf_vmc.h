@@ -13,7 +13,7 @@ extern "C" {
  * @defgroup nrf_vmc_hal VMC HAL
  * @{
  * @ingroup nrf_vmc
- * @brief   Hardware access layer for managing the Volatile Memory Controller peripheral.
+ * @brief   Hardware access layer for managing the Volatile Memory Controller (VMC) peripheral.
  */
 
 /** @brief Power configuration bits for each section in particular RAM block. */
@@ -139,10 +139,10 @@ __STATIC_INLINE void nrf_vmc_ram_block_config(NRF_VMC_Type * p_reg,
                 VMC_RAM_POWER_S2POWER_Msk |
                 VMC_RAM_POWER_S3POWER_Msk)) |
             (retention_mask & (
-                VMC_RAM_POWER_S0POWER_Msk |
-                VMC_RAM_POWER_S1POWER_Msk |
-                VMC_RAM_POWER_S2POWER_Msk |
-                VMC_RAM_POWER_S3POWER_Msk));
+                VMC_RAM_POWER_S0RETENTION_Msk |
+                VMC_RAM_POWER_S1RETENTION_Msk |
+                VMC_RAM_POWER_S2RETENTION_Msk |
+                VMC_RAM_POWER_S3RETENTION_Msk));
     // Perform dummy read of the POWER register to ensure that configuration of sections was
     // written to the VMC peripheral.
     volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWER;
@@ -204,10 +204,10 @@ __STATIC_INLINE uint32_t nrf_vmc_ram_block_retention_mask_get(NRF_VMC_Type const
                                                               uint8_t              ram_block_num)
 {
     return p_reg->RAM[ram_block_num].POWER & (
-                VMC_RAM_POWER_S0POWER_Msk |
-                VMC_RAM_POWER_S1POWER_Msk |
-                VMC_RAM_POWER_S2POWER_Msk |
-                VMC_RAM_POWER_S3POWER_Msk);
+                VMC_RAM_POWER_S0RETENTION_Msk |
+                VMC_RAM_POWER_S1RETENTION_Msk |
+                VMC_RAM_POWER_S2RETENTION_Msk |
+                VMC_RAM_POWER_S3RETENTION_Msk);
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
