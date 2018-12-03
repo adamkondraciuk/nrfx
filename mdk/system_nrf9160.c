@@ -42,7 +42,12 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
 #endif
 
-static bool errata_14(void);
+/* Errata are only handled in secure mode since they usually need access to FICR. */
+#if !defined(NRF_TRUSTZONE_NONSECURE)
+    static bool errata_6(void);
+    static bool errata_14(void);
+    static bool errata_15(void);
+#endif
 
 void SystemCoreClockUpdate(void)
 {
@@ -94,14 +99,18 @@ void SystemInit(void)
           NVIC_SystemReset();
         }
         
+        if (errata_6()){
+            NRF_POWER_S->EVENTS_SLEEPENTER = (POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_NotGenerated << POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_Pos);
+            NRF_POWER_S->EVENTS_SLEEPEXIT = (POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_NotGenerated << POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_Pos);
+        }
+        
         if (errata_14()){
-            if (*(uint32_t *)0x00FF0134 == 0x00ul){
-                *(uint32_t *)0x50004A38 = 0x00ul;
-            }
-            if (*(uint32_t *)0x00FF0134 == 0x01ul){
-                *(uint32_t *)0x50004A38 = 0x01ul;
-            }
-            
+            *(uint32_t *)0x50004A38 = 0x01ul;
+            NRF_REGULATORS_S->DCDCEN = REGULATORS_DCDCEN_DCDCEN_Enabled << REGULATORS_DCDCEN_DCDCEN_Pos;
+        }
+
+        if (errata_15()){
+            *(uint32_t *)0x50004A38 = 0x00ul;
             NRF_REGULATORS_S->DCDCEN = REGULATORS_DCDCEN_DCDCEN_Enabled << REGULATORS_DCDCEN_DCDCEN_Pos;
         }
 
@@ -123,18 +132,44 @@ void SystemInit(void)
 }
 
 
-bool errata_14()
-{
-    if (*(uint32_t *)0x00FF0130 == 0x9ul){
-        if (*(uint32_t *)0x00FF0134 == 0x01ul){
-            return true;
+#if !defined(NRF_TRUSTZONE_NONSECURE)
+    bool errata_6()
+    {
+        if (*(uint32_t *)0x00FF0130 == 0x9ul){
+            if (*(uint32_t *)0x00FF0134 == 0x01ul){
+                return true;
+            }
+            if (*(uint32_t *)0x00FF0134 == 0x02ul){
+                return true;
+            }
         }
-        if (*(uint32_t *)0x00FF0134 == 0x02ul){
-            return true;
-        }
+        
+        return false;
     }
-  
-    return false;
-}
+
+    
+    bool errata_14()
+    {
+        if (*(uint32_t *)0x00FF0130 == 0x9ul){
+            if (*(uint32_t *)0x00FF0134 == 0x01ul){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    bool errata_15()
+    {
+        if (*(uint32_t *)0x00FF0130 == 0x9ul){
+            if (*(uint32_t *)0x00FF0134 == 0x02ul){
+                return true;
+            }
+        }
+
+        return false;
+    }
+#endif
 
 /*lint --flb "Leave library region" */
