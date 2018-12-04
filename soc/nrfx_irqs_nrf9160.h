@@ -117,8 +117,6 @@ extern "C" {
 // I2S_IRQn
 #define nrfx_i2s_irq_handler        I2S_IRQHandler
 
-// IPC_IRQn
-
 // FPU_IRQn
 
 // GPIOTE1_IRQn
