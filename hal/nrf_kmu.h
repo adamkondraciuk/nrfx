@@ -145,7 +145,7 @@ __STATIC_INLINE uint32_t nrf_kmu_intpend_get(NRF_KMU_Type const * p_reg);
 __STATIC_INLINE uint32_t nrf_kmu_status_get(NRF_KMU_Type const * p_reg);
 
 /**
- * @brief Function for selecting the key slot id.
+ * @brief Function for selecting the key slot ID.
  *
  * @param[in] p_reg      Pointer to the peripheral registers structure.
  * @param[in] keyslot_id Key slot ID to be read over AHB or pushed over
@@ -154,9 +154,11 @@ __STATIC_INLINE uint32_t nrf_kmu_status_get(NRF_KMU_Type const * p_reg);
 __STATIC_INLINE void nrf_kmu_keyslot_set(NRF_KMU_Type * p_reg, uint8_t keyslot_id);
 
 /**
- * @brief Function for getting the key slot id.
+ * @brief Function for getting the key slot ID.
  *
- * @param[in] p_reg      Pointer to the peripheral registers structure.
+ * @param[in] p_reg Pointer to the peripheral registers structure.
+ *
+ * @return Key slot ID.
  */
 __STATIC_INLINE uint8_t nrf_kmu_keyslot_get(NRF_KMU_Type const * p_reg);
 
