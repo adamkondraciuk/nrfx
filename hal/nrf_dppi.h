@@ -31,18 +31,18 @@ typedef enum
 /** @brief DPPI tasks. */
 typedef enum
 {
-    NRF_DPPI_TASK_CHG0_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[0].EN),  /**< Task for enabling channel group 0. */
-    NRF_DPPI_TASK_CHG0_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[0].DIS), /**< Task for disabling channel group 0. */
-    NRF_DPPI_TASK_CHG1_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].EN),  /**< Task for enabling channel group 1. */
-    NRF_DPPI_TASK_CHG1_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].DIS), /**< Task for disabling channel group 1. */
-    NRF_DPPI_TASK_CHG2_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].EN),  /**< Task for enabling channel group 2. */
-    NRF_DPPI_TASK_CHG2_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].DIS), /**< Task for disabling channel group 2. */
-    NRF_DPPI_TASK_CHG3_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[3].EN),  /**< Task for enabling channel group 3. */
-    NRF_DPPI_TASK_CHG3_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[3].DIS), /**< Task for disabling channel group 3. */
-    NRF_DPPI_TASK_CHG4_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[4].EN),  /**< Task for enabling channel group 4. */
-    NRF_DPPI_TASK_CHG4_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[4].DIS), /**< Task for disabling channel group 4. */
-    NRF_DPPI_TASK_CHG5_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[5].EN),  /**< Task for enabling channel group 5. */
-    NRF_DPPI_TASK_CHG5_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[5].DIS)  /**< Task for disabling channel group 5. */
+    NRF_DPPI_TASK_CHG0_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[0].EN),  /**< Enable channel group 0. */
+    NRF_DPPI_TASK_CHG0_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[0].DIS), /**< Disable channel group 0. */
+    NRF_DPPI_TASK_CHG1_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].EN),  /**< Enable channel group 1. */
+    NRF_DPPI_TASK_CHG1_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].DIS), /**< Disable channel group 1. */
+    NRF_DPPI_TASK_CHG2_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].EN),  /**< Enable channel group 2. */
+    NRF_DPPI_TASK_CHG2_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].DIS), /**< Disable channel group 2. */
+    NRF_DPPI_TASK_CHG3_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[3].EN),  /**< Enable channel group 3. */
+    NRF_DPPI_TASK_CHG3_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[3].DIS), /**< Disable channel group 3. */
+    NRF_DPPI_TASK_CHG4_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[4].EN),  /**< Enable channel group 4. */
+    NRF_DPPI_TASK_CHG4_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[4].DIS), /**< Disable channel group 4. */
+    NRF_DPPI_TASK_CHG5_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[5].EN),  /**< Enable channel group 5. */
+    NRF_DPPI_TASK_CHG5_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[5].DIS)  /**< Disable channel group 5. */
 } nrf_dppi_task_t;
 
 /**
