@@ -414,7 +414,7 @@
 // <8=> 512x
 
 #ifndef NRFX_I2S_CONFIG_RATIO
-#define NRFX_I2S_CONFIG_RATIO 2000
+#define NRFX_I2S_CONFIG_RATIO 5
 #endif
 
 // <o> NRFX_I2S_CONFIG_IRQ_PRIORITY  - Interrupt priority.
