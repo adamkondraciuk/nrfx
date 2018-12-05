@@ -17,104 +17,82 @@ extern "C" {
  */
 
 #if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief The fact that sleep events are present
- *
- * In some MCUs there is possibility to process sleep entering and exiting
- * events.
- */
+/** @brief Auxiliary definition to mark the fact that sleep events are present */
 #define NRF_POWER_HAS_SLEEPEVT 1
 #else
 #define NRF_POWER_HAS_SLEEPEVT 0
 #endif // defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief The fact that power module manages USB regulator
- *
- * In devices that have USB, power peripheral manages also connection
- * detection and USB power regulator, that converts 5&nbsp;V to 3.3&nbsp;V
- * used by USBD peripheral.
- */
+/** @brief Auxiliary definition to mark the fact that power module manages USB regulator */
 #define NRF_POWER_HAS_USBREG 1
 #else
 #define NRF_POWER_HAS_USBREG 0
 #endif // defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Auxiliary definition to mark the fact that VDDH is present
- *
- * This definition can be used in a code to decide if the part with VDDH
- * related settings should be implemented.
- */
+/** @brief Auxiliary definition to mark the fact that VDDH is present */
 #define NRF_POWER_HAS_VDDH 1
 #else
 #define NRF_POWER_HAS_VDDH 0
 #endif // defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_DCDCEN_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Auxiliary definition to mark the fact that DCDCEN is present */
 #define NRF_POWER_HAS_DCDCEN 1
 #else
 #define NRF_POWER_HAS_DCDCEN 0
 #endif
 
 #if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Auxiliary definition to mark the fact that POFCON is present */
 #define NRF_POWER_HAS_POFCON 1
 #else
 #define NRF_POWER_HAS_POFCON 0
 #endif
-/**
- * @brief POWER tasks
- */
+
+/** @brief POWER tasks. */
 typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
 {
     NRF_POWER_TASK_CONSTLAT  = offsetof(NRF_POWER_Type, TASKS_CONSTLAT), /**< Enable constant latency mode */
     NRF_POWER_TASK_LOWPWR    = offsetof(NRF_POWER_Type, TASKS_LOWPWR  ), /**< Enable low power mode (variable latency) */
 } nrf_power_task_t; /*lint -restore */
 
-/**
- * @brief POWER events
- */
+/** @brief POWER events. */
 typedef enum /*lint -save -e30 -esym(628,__INTADDR__) */
 {
-#if defined(POWER_INTENSET_POFWARN_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_POFCON
     NRF_POWER_EVENT_POFWARN      = offsetof(NRF_POWER_Type, EVENTS_POFWARN    ), /**< Power failure warning */
 #endif
-#if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
     NRF_POWER_EVENT_SLEEPENTER   = offsetof(NRF_POWER_Type, EVENTS_SLEEPENTER ), /**< CPU entered WFI/WFE sleep */
     NRF_POWER_EVENT_SLEEPEXIT    = offsetof(NRF_POWER_Type, EVENTS_SLEEPEXIT  ), /**< CPU exited WFI/WFE sleep */
 #endif
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
     NRF_POWER_EVENT_USBDETECTED  = offsetof(NRF_POWER_Type, EVENTS_USBDETECTED), /**< Voltage supply detected on VBUS */
     NRF_POWER_EVENT_USBREMOVED   = offsetof(NRF_POWER_Type, EVENTS_USBREMOVED ), /**< Voltage supply removed from VBUS */
     NRF_POWER_EVENT_USBPWRRDY    = offsetof(NRF_POWER_Type, EVENTS_USBPWRRDY  ), /**< USB 3.3&nbsp;V supply ready */
 #endif
 } nrf_power_event_t; /*lint -restore */
 
-/**
- * @brief POWER interrupts
- */
+/** @brief POWER interrupts. */
 typedef enum
 {
-#if defined(POWER_INTENSET_POFWARN_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_POFCON
     NRF_POWER_INT_POFWARN_MASK     = POWER_INTENSET_POFWARN_Msk    , /**< Write '1' to Enable interrupt for POFWARN event */
 #endif
-#if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_SLEEPEVT
     NRF_POWER_INT_SLEEPENTER_MASK  = POWER_INTENSET_SLEEPENTER_Msk , /**< Write '1' to Enable interrupt for SLEEPENTER event */
     NRF_POWER_INT_SLEEPEXIT_MASK   = POWER_INTENSET_SLEEPEXIT_Msk  , /**< Write '1' to Enable interrupt for SLEEPEXIT event */
 #endif
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
     NRF_POWER_INT_USBDETECTED_MASK = POWER_INTENSET_USBDETECTED_Msk, /**< Write '1' to Enable interrupt for USBDETECTED event */
     NRF_POWER_INT_USBREMOVED_MASK  = POWER_INTENSET_USBREMOVED_Msk , /**< Write '1' to Enable interrupt for USBREMOVED event */
     NRF_POWER_INT_USBPWRRDY_MASK   = POWER_INTENSET_USBPWRRDY_Msk  , /**< Write '1' to Enable interrupt for USBPWRRDY event */
 #endif
 } nrf_power_int_mask_t;
 
-
-/**
- * @brief Reset reason
- */
+/** @brief Reset reason. */
 typedef enum
 {
     NRF_POWER_RESETREAS_RESETPIN_MASK = POWER_RESETREAS_RESETPIN_Msk, /*!< Bit mask of RESETPIN field. *///!< NRF_POWER_RESETREAS_RESETPIN_MASK
@@ -134,7 +112,7 @@ typedef enum
 #endif
 } nrf_power_resetreas_mask_t;
 
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
 /**
  * @brief USBREGSTATUS register bit masks
  *
@@ -145,7 +123,7 @@ typedef enum
     NRF_POWER_USBREGSTATUS_VBUSDETECT_MASK = POWER_USBREGSTATUS_VBUSDETECT_Msk, /**< USB detected or removed     */
     NRF_POWER_USBREGSTATUS_OUTPUTRDY_MASK  = POWER_USBREGSTATUS_OUTPUTRDY_Msk   /**< USB 3.3&nbsp;V supply ready */
 } nrf_power_usbregstatus_mask_t;
-#endif
+#endif // NRF_POWER_HAS_USBREG
 
 #if defined(POWER_RAMSTATUS_RAMBLOCK0_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -215,10 +193,8 @@ typedef enum
     NRF_POWER_OFFRAM3_MASK = 1U << NRF_POWER_OFFRAM3, /**< Keep retention on RAM block 3 when RAM block is switched off */
 } nrf_power_onoffram_mask_t;
 
-#if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Power failure comparator thresholds
- */
+#if NRF_POWER_HAS_POFCON
+/** @brief Power failure comparator thresholds. */
 typedef enum
 {
     NRF_POWER_POFTHR_V21 = POWER_POFCON_THRESHOLD_V21, /**< Set threshold to 2.1&nbsp;V */
@@ -236,12 +212,10 @@ typedef enum
     NRF_POWER_POFTHR_V28 = POWER_POFCON_THRESHOLD_V28, /**< Set threshold to 2.8&nbsp;V */
 #endif // defined(POWER_POFCON_THRESHOLD_V17) || defined(__NRFX_DOXYGEN__)
 } nrf_power_pof_thr_t;
-#endif // defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_POWER_HAS_POFCON
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Power failure comparator thresholds for VDDH
- */
+#if NRF_POWER_HAS_VDDH
+/** @brief Power failure comparator thresholds for VDDH. */
 typedef enum
 {
     NRF_POWER_POFTHRVDDH_V27 = POWER_POFCON_THRESHOLDVDDH_V27, /**< Set threshold to 2.7&nbsp;V */
@@ -262,16 +236,14 @@ typedef enum
     NRF_POWER_POFTHRVDDH_V42 = POWER_POFCON_THRESHOLDVDDH_V42, /**< Set threshold to 4.2&nbsp;V */
 } nrf_power_pof_thrvddh_t;
 
-/**
- * @brief Main regulator status
- */
+/** @brief Main regulator status. */
 typedef enum
 {
     NRF_POWER_MAINREGSTATUS_NORMAL = POWER_MAINREGSTATUS_MAINREGSTATUS_Normal, /**< Normal voltage mode. Voltage supplied on VDD. */
     NRF_POWER_MAINREGSTATUS_HIGH   = POWER_MAINREGSTATUS_MAINREGSTATUS_High    /**< High voltage mode. Voltage supplied on VDDH.  */
 } nrf_power_mainregstatus_t;
 
-#endif /* defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__) */
+#endif // NRF_POWER_HAS_VDDH
 
 #if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -444,39 +416,43 @@ __STATIC_INLINE uint32_t nrf_power_int_enable_get(void);
  */
 __STATIC_INLINE void nrf_power_int_disable(uint32_t int_mask);
 
-#if NRFX_CHECK(POWER_SUBSCRIBE_CONSTLAT_EN_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for enabling subscription for a given POWER task.
+ * @brief Function for setting the subscribe configuration for a given
+ *        POWER task.
  *
- * @param[in] task    Subscribed task.
- * @param[in] channel Channel to connect with subscripted task.
+ * @param[in] task    Task for which to set the configuration.
+ * @param[in] channel Channel through which to subscribe events.
  */
-__STATIC_INLINE void nrf_power_subscribe_enable(nrf_power_task_t task,
-                                                uint8_t          channel);
+__STATIC_INLINE void nrf_power_subscribe_set(nrf_power_task_t task,
+                                             uint8_t          channel);
 
 /**
- * @brief Function for disabling subscription for a given POWER task.
+ * @brief Function for clearing the subscribe configuration for a given
+ *        POWER task.
  *
- * @param[in] task  Subscribed task.
+ * @param[in] task Task for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_power_subscribe_disable(nrf_power_task_t task);
+__STATIC_INLINE void nrf_power_subscribe_clear(nrf_power_task_t task);
 
 /**
- * @brief Function for enabling publication of a given POWER event.
+ * @brief Function for setting the publish configuration for a given
+ *        POWER event.
  *
- * @param[in] event   Event to publish.
- * @param[in] channel Channel to connect with published event.
+ * @param[in] event   Event for which to set the configuration.
+ * @param[in] channel Channel through which to publish the event.
  */
-__STATIC_INLINE void nrf_power_publish_enable(nrf_power_event_t event,
-                                              uint8_t           channel);
+__STATIC_INLINE void nrf_power_publish_set(nrf_power_event_t event,
+                                           uint8_t           channel);
 
 /**
- * @brief Function for disabling publication of a given POWER event.
+ * @brief Function for clearing the publish configuration for a given
+ *        POWER event.
  *
- * @param[in] event Event to publish.
+ * @param[in] event Event for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_power_publish_disable(nrf_power_event_t event);
-#endif // NRFX_CHECK(POWER_SUBSCRIBE_CONSTLAT_EN_Msk) || defined(__NRFX_DOXYGEN__)
+__STATIC_INLINE void nrf_power_publish_clear(nrf_power_event_t event);
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Get reset reason mask
@@ -533,9 +509,9 @@ __STATIC_INLINE uint32_t nrf_power_ramstatus_get(void);
  * @note This function never returns.
  */
 __STATIC_INLINE void nrf_power_system_off(void) __attribute__((noreturn));
-#endif
+#endif // defined(POWER_SYSTEMOFF_SYSTEMOFF_Enter)
 
-#if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_POFCON
 /**
  * @brief Set power failure comparator configuration
  *
@@ -563,9 +539,9 @@ __STATIC_INLINE void nrf_power_pofcon_set(bool enabled, nrf_power_pof_thr_t thr)
  * @return Threshold setting for power failure comparator
  */
 __STATIC_INLINE nrf_power_pof_thr_t nrf_power_pofcon_get(bool * p_enabled);
-#endif // defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_POWER_HAS_POFCON
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH
 /**
  * @brief Set VDDH power failure comparator threshold
  *
@@ -579,7 +555,7 @@ __STATIC_INLINE void nrf_power_pofcon_vddh_set(nrf_power_pof_thrvddh_t thr);
  * @return VDDH threshold currently configured
  */
 __STATIC_INLINE nrf_power_pof_thrvddh_t nrf_power_pofcon_vddh_get(void);
-#endif
+#endif // NRF_POWER_HAS_VDDH
 
 /**
  * @brief Set general purpose retention register
@@ -613,7 +589,7 @@ __STATIC_INLINE void nrf_power_gpregret2_set(uint8_t val);
  * @return The value from the register
  */
 __STATIC_INLINE uint8_t nrf_power_gpregret2_get(void);
-#endif
+#endif // defined(POWER_GPREGRET2_GPREGRET_Msk) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for getting value of the particular general purpose retention register
@@ -633,7 +609,7 @@ __STATIC_INLINE uint8_t nrf_power_gpregret_ext_get(uint8_t reg_num);
 __STATIC_INLINE void nrf_power_gpregret_ext_set(uint8_t          reg_num,
                                                 uint8_t          val);
 
-#if defined(POWER_DCDCEN_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_DCDCEN
 /**
  * @brief Enable or disable DCDC converter
  *
@@ -656,7 +632,7 @@ __STATIC_INLINE void nrf_power_dcdcen_set(bool enable);
  * @retval false Converter is disabled
  */
 __STATIC_INLINE bool nrf_power_dcdcen_get(void);
-#endif // defined(POWER_DCDCEN_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_POWER_HAS_DCDCEN
 
 #if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -697,7 +673,7 @@ __STATIC_INLINE void nrf_power_rampower_mask_off(uint8_t block, uint32_t section
 __STATIC_INLINE uint32_t nrf_power_rampower_mask_get(uint8_t block);
 #endif /* defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__) */
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_VDDH
 /**
  * @brief Enable of disable DCDC converter on VDDH
  *
@@ -719,9 +695,9 @@ __STATIC_INLINE bool nrf_power_dcdcen_vddh_get(void);
  * @return Current main supply status
  */
 __STATIC_INLINE nrf_power_mainregstatus_t nrf_power_mainregstatus_get(void);
-#endif /* defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__) */
+#endif // NRF_POWER_HAS_VDDH
 
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_USBREG
 /**
  * @brief Get the whole USBREGSTATUS register
  *
@@ -755,7 +731,7 @@ __STATIC_INLINE bool nrf_power_usbregstatus_vbusdet_get(void);
  * @sa nrf_power_usbregstatus_get
  */
 __STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void);
-#endif /* defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__) */
+#endif // NRF_POWER_HAS_USBREG
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
@@ -818,31 +794,31 @@ __STATIC_INLINE void nrf_power_int_disable(uint32_t int_mask)
     NRF_POWER->INTENCLR = int_mask;
 }
 
-#if NRFX_CHECK(POWER_SUBSCRIBE_CONSTLAT_EN_Msk)
-__STATIC_INLINE void nrf_power_subscribe_enable(nrf_power_task_t task,
-                                                uint8_t          channel)
+#if defined(DPPI_PRESENT)
+__STATIC_INLINE void nrf_power_subscribe_set(nrf_power_task_t task,
+                                             uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_POWER + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | POWER_SUBSCRIBE_CONSTLAT_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_power_subscribe_disable(nrf_power_task_t task)
+__STATIC_INLINE void nrf_power_subscribe_clear(nrf_power_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_POWER + (uint32_t) task + 0x80uL)) = 0;
 }
 
-__STATIC_INLINE void nrf_power_publish_enable(nrf_power_event_t event,
-                                              uint8_t           channel)
+__STATIC_INLINE void nrf_power_publish_set(nrf_power_event_t event,
+                                           uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_POWER + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | POWER_PUBLISH_SLEEPENTER_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_power_publish_disable(nrf_power_event_t event)
+__STATIC_INLINE void nrf_power_publish_clear(nrf_power_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_POWER + (uint32_t) event + 0x80uL)) = 0;
 }
-#endif // NRFX_CHECK(POWER_SUBSCRIBE_CONSTLAT_EN_Msk)
+#endif // defined(DPPI_PRESENT)
 
 __STATIC_INLINE uint32_t nrf_power_resetreas_get(void)
 {
@@ -883,15 +859,15 @@ __STATIC_INLINE void nrf_power_system_off(void)
 }
 #endif // defined(POWER_SYSTEMOFF_SYSTEMOFF_Enter)
 
-#if defined(POWER_POFCON_THRESHOLD_Msk)
+#if NRF_POWER_HAS_POFCON
 __STATIC_INLINE void nrf_power_pofcon_set(bool enabled, nrf_power_pof_thr_t thr)
 {
     NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLD_Msk >> POWER_POFCON_THRESHOLD_Pos)));
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk)
+#if NRF_POWER_HAS_VDDH
     uint32_t pofcon = NRF_POWER->POFCON;
     pofcon &= ~(POWER_POFCON_THRESHOLD_Msk | POWER_POFCON_POF_Msk);
     pofcon |=
-#else /* defined(POWER_POFCON_THRESHOLDVDDH_Msk) */
+#else // NRF_POWER_HAS_VDDH
     NRF_POWER->POFCON =
 #endif
         (((uint32_t)thr) << POWER_POFCON_THRESHOLD_Pos) |
@@ -899,7 +875,7 @@ __STATIC_INLINE void nrf_power_pofcon_set(bool enabled, nrf_power_pof_thr_t thr)
         (POWER_POFCON_POF_Enabled << POWER_POFCON_POF_Pos)
         :
         (POWER_POFCON_POF_Disabled << POWER_POFCON_POF_Pos));
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk)
+#if NRF_POWER_HAS_VDDH
     NRF_POWER->POFCON = pofcon;
 #endif
 }
@@ -915,9 +891,9 @@ __STATIC_INLINE nrf_power_pof_thr_t nrf_power_pofcon_get(bool * p_enabled)
     return (nrf_power_pof_thr_t)((pofcon & POWER_POFCON_THRESHOLD_Msk) >>
         POWER_POFCON_THRESHOLD_Pos);
 }
-#endif // defined(POWER_POFCON_THRESHOLD_Msk)
+#endif // NRF_POWER_HAS_POFCON
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk)
+#if NRF_POWER_HAS_VDDH
 __STATIC_INLINE void nrf_power_pofcon_vddh_set(nrf_power_pof_thrvddh_t thr)
 {
     NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLDVDDH_Msk >> POWER_POFCON_THRESHOLDVDDH_Pos)));
@@ -932,7 +908,7 @@ __STATIC_INLINE nrf_power_pof_thrvddh_t nrf_power_pofcon_vddh_get(void)
     return (nrf_power_pof_thrvddh_t)((NRF_POWER->POFCON &
         POWER_POFCON_THRESHOLDVDDH_Msk) >> POWER_POFCON_THRESHOLDVDDH_Pos);
 }
-#endif /* defined(POWER_POFCON_THRESHOLDVDDH_Msk) */
+#endif // NRF_POWER_HAS_VDDH
 
 __STATIC_INLINE void nrf_power_gpregret_set(uint8_t val)
 {
@@ -994,7 +970,7 @@ __STATIC_INLINE uint8_t nrf_power_gpregret2_get(void)
 }
 #endif
 
-#if defined(POWER_DCDCEN_DCDCEN_Msk)
+#if NRF_POWER_HAS_DCDCEN
 __STATIC_INLINE void nrf_power_dcdcen_set(bool enable)
 {
     NRF_POWER->DCDCEN = (enable ?
@@ -1008,7 +984,7 @@ __STATIC_INLINE bool nrf_power_dcdcen_get(void)
             ==
            (POWER_DCDCEN_DCDCEN_Enabled << POWER_DCDCEN_DCDCEN_Pos);
 }
-#endif // defined(POWER_DCDCEN_DCDCEN_Msk)
+#endif // NRF_POWER_HAS_DCDCEN
 
 #if defined(POWER_RAM_POWER_S0POWER_Msk)
 __STATIC_INLINE void nrf_power_rampower_mask_on(uint8_t block, uint32_t section_mask)
@@ -1030,7 +1006,7 @@ __STATIC_INLINE uint32_t nrf_power_rampower_mask_get(uint8_t block)
 }
 #endif /* defined(POWER_RAM_POWER_S0POWER_Msk) */
 
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk)
+#if NRF_POWER_HAS_VDDH
 __STATIC_INLINE void nrf_power_dcdcen_vddh_set(bool enable)
 {
     NRF_POWER->DCDCEN0 = (enable ?
@@ -1051,9 +1027,9 @@ __STATIC_INLINE nrf_power_mainregstatus_t nrf_power_mainregstatus_get(void)
         POWER_MAINREGSTATUS_MAINREGSTATUS_Msk) >>
         POWER_MAINREGSTATUS_MAINREGSTATUS_Pos);
 }
-#endif /* defined(POWER_POFCON_THRESHOLDVDDH_Msk) */
+#endif // NRF_POWER_HAS_VDDH
 
-#if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk)
+#if NRF_POWER_HAS_USBREG
 __STATIC_INLINE uint32_t nrf_power_usbregstatus_get(void)
 {
     return NRF_POWER->USBREGSTATUS;
@@ -1070,7 +1046,7 @@ __STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void)
     return (nrf_power_usbregstatus_get() &
         NRF_POWER_USBREGSTATUS_OUTPUTRDY_MASK) != 0;
 }
-#endif /* defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) */
+#endif // NRF_POWER_HAS_USBREG
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
 
