@@ -54,26 +54,6 @@ typedef enum
 __STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t dppi_task);
 
 /**
- * @brief Function for enabling a given DPPI channel.
- *
- * @details This function enables only one channel.
- *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] channel Channel to enable.
- */
-__STATIC_INLINE void nrf_dppi_channel_enable(NRF_DPPIC_Type * p_reg, uint8_t channel);
-
-/**
- * @brief Function for disabling a given DPPI channel.
- *
- * @details This function disables only one channel.
- *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] channel Channel to disable.
- */
-__STATIC_INLINE void nrf_dppi_channel_disable(NRF_DPPIC_Type * p_reg, uint8_t channel);
-
-/**
  * @brief Function for checking the state of a specific DPPI channel.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
@@ -85,14 +65,10 @@ __STATIC_INLINE void nrf_dppi_channel_disable(NRF_DPPIC_Type * p_reg, uint8_t ch
 __STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel);
 
 /**
- * @brief Function for disabling all DPPI channels.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- */
-__STATIC_INLINE void nrf_dppi_channels_disable_all(NRF_DPPIC_Type * p_reg);
-
-/**
  * @brief Function for enabling multiple DPPI channels.
+ *
+ * The bits in @c mask value correspond to particular channels. It means that
+ * writing 1 to bit 0 enables channel 0, writing 1 to bit 1 enables channel 1 etc.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Channel mask.
@@ -102,10 +78,20 @@ __STATIC_INLINE void nrf_dppi_channels_enable(NRF_DPPIC_Type * p_reg, uint32_t m
 /**
  * @brief Function for disabling multiple DPPI channels.
  *
+ * The bits in @c mask value correspond to particular channels. It means that
+ * writing 1 to bit 0 disables channel 0, writing 1 to bit 1 disables channel 1 etc.
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Channel mask.
  */
 __STATIC_INLINE void nrf_dppi_channels_disable(NRF_DPPIC_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling all DPPI channels.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+__STATIC_INLINE void nrf_dppi_channels_disable_all(NRF_DPPIC_Type * p_reg);
 
 /**
  * @brief Function for setting the subscribe configuration for a given
@@ -129,22 +115,11 @@ __STATIC_INLINE void nrf_dppi_subscribe_set(NRF_DPPIC_Type * p_reg,
 __STATIC_INLINE void nrf_dppi_subscribe_clear(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t task);
 
 /**
- * @brief Function for including a DPPI channel in a channel group.
- *
- * @details This function adds only one channel to the group.
- *
- * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
- * @param[in] channel       Channel to be included in the group.
- * @param[in] channel_group Channel group.
- */
-__STATIC_INLINE void nrf_dppi_channel_include_in_group(NRF_DPPIC_Type *         p_reg,
-                                                       uint8_t                  channel,
-                                                       nrf_dppi_channel_group_t channel_group);
-
-/**
  * @brief Function for including multiple DPPI channels in a channel group.
  *
  * @details This function adds all specified channels to the group.
+ * The bits in @p channel_mask value correspond to particular channels. It means that
+ * writing 1 to bit 0 includes channel 0, writing 1 to bit 1 includes channel 1 etc.
  *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
  * @param[in] channel_mask  Channels to be included in the group.
@@ -155,22 +130,11 @@ __STATIC_INLINE void nrf_dppi_channels_include_in_group(NRF_DPPIC_Type *        
                                                         nrf_dppi_channel_group_t channel_group);
 
 /**
- * @brief Function for removing a DPPI channel from a channel group.
- *
- * @details This function removes only one channel from the group.
- *
- * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
- * @param[in] channel       Channel to be removed from the group.
- * @param[in] channel_group Channel group.
- */
-__STATIC_INLINE void nrf_dppi_channel_remove_from_group(NRF_DPPIC_Type *         p_reg,
-                                                        uint8_t                  channel,
-                                                        nrf_dppi_channel_group_t channel_group);
-
-/**
  * @brief Function for removing multiple DPPI channels from a channel group.
  *
  * @details This function removes all specified channels from the group.
+ * The bits in @c channel_mask value correspond to particular channels. It means that
+ * writing 1 to bit 0 removes channel 0, writing 1 to bit 1 removes channel 1 etc.
  *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
  * @param[in] channel_mask  Channels to be removed from the group.
@@ -215,16 +179,6 @@ __STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) dppi_task)) = 1;
 }
 
-__STATIC_INLINE void nrf_dppi_channel_enable(NRF_DPPIC_Type * p_reg, uint8_t channel)
-{
-    p_reg->CHENSET |= (DPPIC_CHENSET_CH0_Set << (DPPIC_CHEN_CH0_Pos + channel));
-}
-
-__STATIC_INLINE void nrf_dppi_channel_disable(NRF_DPPIC_Type * p_reg, uint8_t channel)
-{
-    p_reg->CHENCLR |= (DPPIC_CHENCLR_CH0_Clear << (DPPIC_CHEN_CH0_Pos + channel));
-}
-
 __STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel)
 {
     return ((p_reg->CHEN & (DPPIC_CHEN_CH0_Enabled << (DPPIC_CHEN_CH0_Pos + channel))) != 0);
@@ -258,30 +212,12 @@ __STATIC_INLINE void nrf_dppi_subscribe_clear(NRF_DPPIC_Type * p_reg, nrf_dppi_t
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
 
-__STATIC_INLINE void nrf_dppi_channel_include_in_group(NRF_DPPIC_Type *         p_reg,
-                                                       uint8_t                  channel,
-                                                       nrf_dppi_channel_group_t channel_group)
-{
-    p_reg->CHG[(uint32_t) channel_group] =
-        p_reg->CHG[(uint32_t) channel_group] |
-            (DPPIC_CHG_CH0_Included << (DPPIC_CHEN_CH0_Pos + channel));
-}
-
 __STATIC_INLINE void nrf_dppi_channels_include_in_group(NRF_DPPIC_Type *         p_reg,
                                                         uint32_t                 channel_mask,
                                                         nrf_dppi_channel_group_t channel_group)
 {
     p_reg->CHG[(uint32_t) channel_group] =
         p_reg->CHG[(uint32_t) channel_group] | (channel_mask);
-}
-
-__STATIC_INLINE void nrf_dppi_channel_remove_from_group(NRF_DPPIC_Type *         p_reg,
-                                                        uint8_t                  channel,
-                                                        nrf_dppi_channel_group_t channel_group)
-{
-    p_reg->CHG[(uint32_t) channel_group] =
-        p_reg->CHG[(uint32_t) channel_group] &
-            ~(DPPIC_CHG_CH0_Included << (DPPIC_CHEN_CH0_Pos + channel));
 }
 
 __STATIC_INLINE void nrf_dppi_channels_remove_from_group(NRF_DPPIC_Type *         p_reg,

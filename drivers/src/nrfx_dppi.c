@@ -108,7 +108,7 @@ nrfx_err_t nrfx_dppi_channel_free(uint8_t channel)
     else
     {
         // First disable this channel
-        nrf_dppi_channel_disable(NRF_DPPIC, channel);
+        nrf_dppi_channels_disable(NRF_DPPIC, DPPI_BIT_SET(channel));
         // Clear channel allocated indication.
         m_allocated_channels &= ~DPPI_BIT_SET(channel);
     }
@@ -126,7 +126,7 @@ nrfx_err_t nrfx_dppi_channel_enable(uint8_t channel)
     }
     else
     {
-        nrf_dppi_channel_enable(NRF_DPPIC, channel);
+        nrf_dppi_channels_enable(NRF_DPPIC, DPPI_BIT_SET(channel));
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -142,7 +142,7 @@ nrfx_err_t nrfx_dppi_channel_disable(uint8_t channel)
     }
     else
     {
-        nrf_dppi_channel_disable(NRF_DPPIC, channel);
+        nrf_dppi_channels_disable(NRF_DPPIC, DPPI_BIT_SET(channel));
         err_code = NRFX_SUCCESS;
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
