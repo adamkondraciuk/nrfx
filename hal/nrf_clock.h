@@ -228,11 +228,11 @@ __STATIC_INLINE void nrf_clock_lf_src_set(nrf_clock_lfclk_t source);
  * @brief Function for retrieving the selected source for the low-frequency clock.
  *
  * @retval NRF_CLOCK_LFCLK_RC    If the internal 32 kHz RC oscillator
- *         is the selected source for the low-frequency clock.
+ *                               is the selected source for the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Xtal  If an external 32 kHz crystal oscillator
- *         is the selected source for the low-frequency clock.
+ *                               is the selected source for the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Synth If the internal 32 kHz synthesizer from
- *         the HFCLK is the selected source for the low-frequency clock.
+ *                               the HFCLK is the selected source for the low-frequency clock.
  */
 __STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_src_get(void);
 
@@ -240,11 +240,11 @@ __STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_src_get(void);
  * @brief Function for retrieving the active source of the low-frequency clock.
  *
  * @retval NRF_CLOCK_LFCLK_RC    If the internal 32 kHz RC oscillator
- *         is the active source of the low-frequency clock.
+ *                               is the active source of the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Xtal  If an external 32 kHz crystal oscillator
- *         is the active source of the low-frequency clock.
+ *                               is the active source of the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Synth If the internal 32 kHz synthesizer from
- *         the HFCLK is the active source of the low-frequency clock.
+ *                               the HFCLK is the active source of the low-frequency clock.
  */
 __STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_actv_src_get(void);
 
