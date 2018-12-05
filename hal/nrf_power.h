@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2018>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
 
 #ifndef NRF_POWER_H__
 #define NRF_POWER_H__
