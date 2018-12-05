@@ -101,7 +101,7 @@ void nrfx_power_uninit(void)
     if (!nrfx_clock_irq_enabled)
 #endif
     {
-        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
+        NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_POWER));
     }
 #if NRF_POWER_HAS_POFCON
     nrfx_power_pof_uninit();

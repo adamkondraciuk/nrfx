@@ -163,7 +163,7 @@ void nrfx_clock_disable(void)
     if (!nrfx_power_irq_enabled)
 #endif
     {
-        NRFX_IRQ_DISABLE(POWER_CLOCK_IRQn);
+        NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_CLOCK));
     }
     nrf_clock_int_disable(CLOCK_INTENSET_HFCLKSTARTED_Msk |
                           CLOCK_INTENSET_LFCLKSTARTED_Msk |
