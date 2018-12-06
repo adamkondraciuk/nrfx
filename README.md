@@ -2,7 +2,7 @@
 
 ## Overview
 
-@em nrfx is a standalone set of drivers for peripherals present in Nordic
+nrfx is a standalone set of drivers for peripherals present in Nordic
 Semiconductor's SoCs. It originated as an extract from the nRF5 SDK.
 The intention was to provide drivers that can be used in various environments
 without the necessity to integrate other parts of the SDK into them.

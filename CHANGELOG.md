@@ -6,7 +6,7 @@ All notable changes to this project are documented in this file.
 - Added support for nRF9160.
 - Added allocator for DPPI.
 - Added HALs: DPPI, KMU, REGULATORS, SPU, VMC.
-- Added DPPI subcription and publish support in HALs related to nRF9160.
+- Added support for DPPI subscription and publishing in HALs related to nRF9160.
 - Added support for instances 2 and 3 in SPIS, TWIM, TWIS, and UARTE drivers.
 
 ### Changed
