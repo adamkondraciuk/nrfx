@@ -508,7 +508,7 @@ __STATIC_INLINE uint32_t nrf_power_ramstatus_get(void);
  *
  * @note This function never returns.
  */
-__STATIC_INLINE void nrf_power_system_off(void) __attribute__((noreturn));
+__STATIC_INLINE void nrf_power_system_off(void);
 #endif // defined(POWER_SYSTEMOFF_SYSTEMOFF_Enter)
 
 #if NRF_POWER_HAS_POFCON

@@ -34,8 +34,7 @@ __STATIC_INLINE void nrf_regulators_dcdcen_set(NRF_REGULATORS_Type * p_reg, bool
  *
  * @param[in] p_reg Pointer to the peripheral registers structure.
  */
-__STATIC_INLINE void nrf_regulators_system_off(NRF_REGULATORS_Type * p_reg)
-    __attribute__((noreturn));
+__STATIC_INLINE void nrf_regulators_system_off(NRF_REGULATORS_Type * p_reg);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
