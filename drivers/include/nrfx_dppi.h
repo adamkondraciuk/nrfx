@@ -85,40 +85,16 @@ nrfx_err_t nrfx_dppi_group_alloc(nrf_dppi_channel_group_t * p_group);
 nrfx_err_t nrfx_dppi_group_free(nrf_dppi_channel_group_t group);
 
 /**
- * @brief Function for including multiple DPPI channels in a channel group.
- *
- * @param[in] channel_mask Bitmask of the DPPI channels to be added.
- * @param[in] group        Channel group in which to include the channels.
- *
- * @retval NRFX_SUCCESS             If the channels were successfully included.
- * @retval NRFX_ERROR_INVALID_PARAM If group is not an allocated group.
- */
-nrfx_err_t nrfx_dppi_channels_include_in_group(uint32_t                 channel_mask,
-                                               nrf_dppi_channel_group_t group);
-
-/**
  * @brief Function for including a DPPI channel in a channel group.
  *
  * @param[in] channel DPPI channel to be added.
  * @param[in] group   Channel group in which to include the channel.
  *
  * @retval NRFX_SUCCESS             If the channel was successfully included.
- * @retval NRFX_ERROR_INVALID_PARAM If the specified group is not allocated.
+ * @retval NRFX_ERROR_INVALID_PARAM If the specified group or channel is not allocated.
  */
 nrfx_err_t nrfx_dppi_channel_include_in_group(uint8_t                  channel,
                                               nrf_dppi_channel_group_t group);
-
-/**
- * @brief Function for removing multiple DPPI channels from a channel group.
- *
- * @param[in] channel_mask Bitmask of the DPPI channels to be removed.
- * @param[in] group        Channel group from which to remove the channels.
- *
- * @retval NRFX_SUCCESS             If the channels were successfully removed.
- * @retval NRFX_ERROR_INVALID_PARAM If the specified group is not allocated.
- */
-nrfx_err_t nrfx_dppi_channels_remove_from_group(uint32_t                 channel_mask,
-                                                nrf_dppi_channel_group_t group);
 
 /**
  * @brief Function for removing a DPPI channel from a channel group.
@@ -127,7 +103,7 @@ nrfx_err_t nrfx_dppi_channels_remove_from_group(uint32_t                 channel
  * @param[in] group   Channel group from which to remove the channel.
  *
  * @retval NRFX_SUCCESS             If the channel was successfully removed.
- * @retval NRFX_ERROR_INVALID_PARAM If the specified group is not allocated.
+ * @retval NRFX_ERROR_INVALID_PARAM If the specified group or channel is not allocated.
  */
 nrfx_err_t nrfx_dppi_channel_remove_from_group(uint8_t                  channel,
                                                nrf_dppi_channel_group_t group);

@@ -196,55 +196,54 @@ nrfx_err_t nrfx_dppi_group_free(nrf_dppi_channel_group_t group)
     return err_code;
 }
 
-nrfx_err_t nrfx_dppi_channels_include_in_group(uint32_t                 channel_mask,
-                                               nrf_dppi_channel_group_t group)
-{
-    nrfx_err_t err_code = NRFX_SUCCESS;
-
-    if (!group_is_allocated(group))
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-    }
-    else
-    {
-        nrf_dppi_channels_include_in_group(NRF_DPPIC, channel_mask, group);
-    }
-    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
-    return err_code;
-}
-
-nrfx_err_t nrfx_dppi_channels_remove_from_group(uint32_t                 channel_mask,
-                                                nrf_dppi_channel_group_t group)
-{
-    nrfx_err_t err_code = NRFX_SUCCESS;
-
-    if (!group_is_allocated(group))
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-    }
-    else
-    {
-        nrf_dppi_channels_remove_from_group(NRF_DPPIC, channel_mask, group);
-    }
-    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
-    return err_code;
-}
-
 nrfx_err_t nrfx_dppi_channel_include_in_group(uint8_t                  channel,
                                               nrf_dppi_channel_group_t group)
 {
-    return nrfx_dppi_channels_include_in_group(DPPI_BIT_SET(channel), group);
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (!group_is_allocated(group) || !channel_is_allocated(channel))
+    {
+        err_code = NRFX_ERROR_INVALID_PARAM;
+    }
+    else
+    {
+        nrf_dppi_channels_include_in_group(NRF_DPPIC, DPPI_BIT_SET(channel), group);
+    }
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
+    return err_code;
 }
 
 nrfx_err_t nrfx_dppi_channel_remove_from_group(uint8_t                  channel,
                                                nrf_dppi_channel_group_t group)
 {
-    return nrfx_dppi_channels_remove_from_group(DPPI_BIT_SET(channel), group);
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (!group_is_allocated(group) || !channel_is_allocated(channel))
+    {
+        err_code = NRFX_ERROR_INVALID_PARAM;
+    }
+    else
+    {
+        nrf_dppi_channels_remove_from_group(NRF_DPPIC, DPPI_BIT_SET(channel), group);
+    }
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
+    return err_code;
 }
 
 nrfx_err_t nrfx_dppi_group_clear(nrf_dppi_channel_group_t group)
 {
-    return nrfx_dppi_channels_remove_from_group(DPPI_AVAILABLE_CHANNELS_MASK, group);
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (!group_is_allocated(group))
+    {
+        err_code = NRFX_ERROR_INVALID_PARAM;
+    }
+    else
+    {
+        nrf_dppi_channels_remove_from_group(NRF_DPPIC, DPPI_AVAILABLE_CHANNELS_MASK, group);
+    }
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
+    return err_code;
 }
 
 nrfx_err_t nrfx_dppi_group_enable(nrf_dppi_channel_group_t group)
