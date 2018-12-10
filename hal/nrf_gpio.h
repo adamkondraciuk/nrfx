@@ -297,6 +297,15 @@ __STATIC_INLINE nrf_gpio_pin_sense_t nrf_gpio_pin_sense_get(uint32_t pin_number)
 __STATIC_INLINE nrf_gpio_pin_dir_t nrf_gpio_pin_dir_get(uint32_t pin_number);
 
 /**
+ * @brief Function for reading the status of GPIO pin input buffer.
+ *
+ * @param pin_number Specifies the pin number to read
+ *
+ * @retval Input buffer configuration.
+ */
+__STATIC_INLINE nrf_gpio_pin_input_t nrf_gpio_pin_input_get(uint32_t pin_number);
+
+/**
  * @brief Function for reading the pull configuration of a GPIO pin.
  *
  * @param pin_number Specifies the pin number to read.
@@ -665,6 +674,13 @@ __STATIC_INLINE nrf_gpio_pin_dir_t nrf_gpio_pin_dir_get(uint32_t pin_number)
                                  GPIO_PIN_CNF_DIR_Msk) >> GPIO_PIN_CNF_DIR_Pos);
 }
 
+__STATIC_INLINE nrf_gpio_pin_input_t nrf_gpio_pin_input_get(uint32_t pin_number)
+{
+    NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+
+    return (nrf_gpio_pin_input_t)((reg->PIN_CNF[pin_number] &
+                                   GPIO_PIN_CNF_INPUT_Msk) >> GPIO_PIN_CNF_INPUT_Pos);
+}
 
 __STATIC_INLINE nrf_gpio_pin_pull_t nrf_gpio_pin_pull_get(uint32_t pin_number)
 {
