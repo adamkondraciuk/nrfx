@@ -19,6 +19,7 @@ extern "C" {
 #else
 #define nrfx_twim_0_irq_handler     TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
 #define nrfx_twis_0_irq_handler     TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
+#define nrfx_twi_0_irq_handler      TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
 #define nrfx_spim_1_irq_handler     TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
 #define nrfx_spis_1_irq_handler     TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
 #define nrfx_spi_1_irq_handler      TWIM0_TWIS0_TWI0_SPIM1_SPIS1_SPI1_IRQHandler
