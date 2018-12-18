@@ -180,8 +180,8 @@ void nrfx_twi_uninit(nrfx_twi_t const * p_instance)
 
     if (!p_cb->hold_bus_uninit)
     {
-        nrf_gpio_cfg_default(p_instance->p_twi->PSELSCL);
-        nrf_gpio_cfg_default(p_instance->p_twi->PSELSDA);
+        nrf_gpio_cfg_default(nrf_twi_scl_pin_get(p_instance->p_twi));
+        nrf_gpio_cfg_default(nrf_twi_sda_pin_get(p_instance->p_twi));
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
