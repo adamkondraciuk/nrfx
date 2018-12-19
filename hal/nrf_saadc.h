@@ -494,13 +494,13 @@ __STATIC_INLINE void nrf_saadc_oversample_set(nrf_saadc_oversample_t oversample)
 __STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void);
 
 /**
- * @brief Function for enabling the continuous sampling feature using internal timer.
+ * @brief Function for enabling the continuous sampling feature by using the internal timer feature.
  *
- * It configures SAADC internal timer to automatically take new samples at a fixed
- * sample rate. Trigger START task to begin continuous sampling. To stop it, trigger
+ * This function configures the SAADC internal timer to automatically take new samples at a fixed
+ * sample rate. Trigger the START task to begin continuous sampling. To stop the sampling, trigger
  * the STOP task.
  *
- * Note that the internal timer can only be used when a single input channel is enabled.
+ * @note The internal timer can only be used when a single input channel is enabled.
  *
  * @param[in] cc Capture and compare value. Sample rate is 16 MHz/cc. Valid CC range is
  *               from 80 to 2047.
@@ -508,9 +508,9 @@ __STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void);
 __STATIC_INLINE void nrf_saadc_continuous_mode_enable(uint16_t cc);
 
 /**
- * @brief Function for disabling the continuous sampling using internal timer feature.
+ * @brief Function for disabling the continuous sampling by using the internal timer feature.
  *
- * New samples can be still acquired by manually triggering SAMPLE task or by PPI.
+ * New samples can still be acquired by manually triggering the SAMPLE task or by PPI.
  */
 __STATIC_INLINE void nrf_saadc_continuous_mode_disable(void);
 
