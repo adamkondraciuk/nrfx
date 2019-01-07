@@ -53,7 +53,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* Interrupt service routines handlers. Note that handlers SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler and 
    SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler are not redefined since functionality is not equivalent. */
-#define     UARTE0_UART0_IRQHandler     UARTE0_IRQHandler
 #define     COMP_LPCOMP_IRQHandler      COMP_IRQHandler
 #define     SWI2_EGU2_IRQHandler        SWI2_IRQHandler
 #define     SWI3_EGU3_IRQHandler        SWI3_IRQHandler
@@ -62,7 +61,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* Interrupt service routines index. Note that indexes SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQn and 
    SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQn are not redefined since functionality is not equivalent. */
-#define     UARTE0_UART0_IRQn           UARTE0_IRQn
 #define     COMP_LPCOMP_IRQn            COMP_IRQn
 #define     SWI2_EGU2_IRQn              SWI2_IRQn
 #define     SWI3_EGU3_IRQn              SWI3_IRQn

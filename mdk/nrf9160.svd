@@ -3290,13 +3290,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
       <registers>
         <register>
           <name>TASKS_HFCLKSTART</name>
-          <description>Start HFCLK crystal oscillator</description>
+          <description>Start HFCLK source</description>
           <addressOffset>0x000</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKSTART</name>
-              <description>Start HFCLK crystal oscillator</description>
+              <description>Start HFCLK source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -3311,13 +3311,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>TASKS_HFCLKSTOP</name>
-          <description>Stop HFCLK crystal oscillator</description>
+          <description>Stop HFCLK source</description>
           <addressOffset>0x004</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKSTOP</name>
-              <description>Stop HFCLK crystal oscillator</description>
+              <description>Stop HFCLK source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
