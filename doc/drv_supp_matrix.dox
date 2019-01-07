@@ -7,6 +7,7 @@ Driver           | nRF51 Series | nRF52810/nRF52811 | nRF52832     | nRF52840   
 -----------------|--------------|-------------------| -------------| -------------| -------------|
 @ref nrf_adc     |@tagGreenTick |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_acl     |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagGreenTick |@tagRedCross  |
+@ref nrf_bprot   |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagRedCross  |@tagRedCross  |
 @ref nrf_ccm     |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_clock   |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_comp    |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagRedCross  |
@@ -17,6 +18,8 @@ Driver           | nRF51 Series | nRF52810/nRF52811 | nRF52832     | nRF52840   
 @ref nrf_i2s     |@tagRedCross  |@tagRedCross       |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_kmu     |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagGreenTick |
 @ref nrf_lpcomp  |@tagGreenTick |@tagRedCross       |@tagGreenTick |@tagGreenTick |@tagRedCross  |
+@ref nrf_mpu     |@tagGreenTick |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |
+@ref nrf_mwu     |@tagRedCross  |@tagRedCross       |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_nfct    |@tagRedCross  |@tagRedCross       |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_nvmc    |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_pdm     |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |
