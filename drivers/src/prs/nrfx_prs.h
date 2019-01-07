@@ -23,10 +23,12 @@ extern "C" {
     // SPI1, SPIS1, TWI1
     #define NRFX_PRS_BOX_1_ADDR     NRF_SPI1
 #elif defined(NRF52810_XXAA)
-    // TWIM0, TWIS0
+    // TWIM0, TWIS0, TWI0
     #define NRFX_PRS_BOX_0_ADDR     NRF_TWIM0
-    // SPIM0, SPIS0
+    // SPIM0, SPIS0, SPI0
     #define NRFX_PRS_BOX_1_ADDR     NRF_SPIM0
+    // UARTE0, UART0
+    #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE0
 #elif defined(NRF52811_XXAA)
     // TWIM0, TWIS0, TWI0, SPIM1, SPIS1, SPI1
     #define NRFX_PRS_BOX_0_ADDR     NRF_TWIM0

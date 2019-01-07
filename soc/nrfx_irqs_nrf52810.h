@@ -14,22 +14,29 @@ extern "C" {
 // RADIO_IRQn
 
 // UARTE0_IRQn
-#define nrfx_uarte_0_irq_handler    UARTE0_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
+#define nrfx_prs_box_2_irq_handler  UARTE0_UART0_IRQHandler
+#else
+#define nrfx_uarte_0_irq_handler    UARTE0_UART0_IRQHandler
+#define nrfx_uart_0_irq_handler     UARTE0_UART0_IRQHandler
+#endif
 
 // TWIM0_TWIS0_IRQn
 #if NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
-#define nrfx_prs_box_0_irq_handler  TWIM0_TWIS0_IRQHandler
+#define nrfx_prs_box_0_irq_handler  TWIM0_TWIS0_TWI0_IRQHandler
 #else
-#define nrfx_twim_0_irq_handler     TWIM0_TWIS0_IRQHandler
-#define nrfx_twis_0_irq_handler     TWIM0_TWIS0_IRQHandler
+#define nrfx_twim_0_irq_handler     TWIM0_TWIS0_TWI0_IRQHandler
+#define nrfx_twis_0_irq_handler     TWIM0_TWIS0_TWI0_IRQHandler
+#define nrfx_twi_0_irq_handler      TWIM0_TWIS0_TWI0_IRQHandler
 #endif
 
 // SPIM0_SPIS0_IRQn
 #if NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
-#define nrfx_prs_box_1_irq_handler  SPIM0_SPIS0_IRQHandler
+#define nrfx_prs_box_1_irq_handler  SPIM0_SPIS0_SPI0_IRQHandler
 #else
-#define nrfx_spim_0_irq_handler     SPIM0_SPIS0_IRQHandler
-#define nrfx_spis_0_irq_handler     SPIM0_SPIS0_IRQHandler
+#define nrfx_spim_0_irq_handler     SPIM0_SPIS0_SPI0_IRQHandler
+#define nrfx_spis_0_irq_handler     SPIM0_SPIS0_SPI0_IRQHandler
+#define nrfx_spi_0_irq_handler      SPIM0_SPIS0_SPI0_IRQHandler
 #endif
 
 // GPIOTE_IRQn
