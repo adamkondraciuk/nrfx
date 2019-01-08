@@ -126,12 +126,10 @@ static bool swi_is_available(nrfx_swi_t swi)
 
 static IRQn_Type swi_irq_number_get(nrfx_swi_t swi)
 {
-#if defined(SWI_PRESENT)
-    #if defined(NRF_SWI0)
-    return (IRQn_Type)(nrfx_get_irq_number(NRF_SWI0) + swi);
-    #else
+#if defined(NRF_SWI)
     return (IRQn_Type)(nrfx_get_irq_number(NRF_SWI) + swi);
-    #endif
+#elif defined(NRF_SWI0)
+    return (IRQn_Type)(nrfx_get_irq_number(NRF_SWI0) + swi);
 #else
     return (IRQn_Type)(nrfx_get_irq_number(NRF_EGU0) + swi);
 #endif
