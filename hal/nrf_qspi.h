@@ -441,6 +441,37 @@ __STATIC_INLINE void nrf_qspi_cinstrdata_get(NRF_QSPI_Type const * p_reg,
 __STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *                p_reg,
                                                     const nrf_qspi_cinstr_conf_t * p_config);
 
+/**
+ * @brief Function for starting a custom instruction long transfer.
+ *
+ * @param[in] p_reg    Pointer to the peripheral register structure.
+ * @param[in] p_config Pointer to the custom instruction configuration structure.
+ *                     See @ref nrf_qspi_cinstr_conf_t.
+ */
+__STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *                p_reg,
+                                                         const nrf_qspi_cinstr_conf_t * p_config);
+
+/**
+ * @brief Function for checking if a custom instruction long transfer is ongoing.
+ *
+ * @param[in] p_reg    Pointer to the peripheral register structure.
+ *
+ * @retval true  Custom instruction long transfer is ongoing.
+ * @retval false Custom instruction long transfer is not ongoing.
+ */
+__STATIC_INLINE bool nrf_qspi_cinstr_long_transfer_is_ongoing(NRF_QSPI_Type const * p_reg);
+
+/**
+ * @brief Function for continuing custom instruction long transfer.
+ *
+ * @param[in] p_reg    Pointer to the peripheral register structure.
+ * @param[in] length   Length of the custom instruction data.
+ * @param[in] finalize True if the custom instruction long transfer is to be finalized.
+ *                     False if the custom instruction long transfer is to be continued.
+ */
+__STATIC_INLINE void nrf_qspi_cinstr_long_transfer_continue(NRF_QSPI_Type *       p_reg,
+                                                            nrf_qspi_cinstr_len_t length,
+                                                            bool                  finalize);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
@@ -693,6 +724,34 @@ __STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *             
                          ((uint32_t)p_config->io3_level << QSPI_CINSTRCONF_LIO3_Pos) |
                          ((uint32_t)p_config->wipwait   << QSPI_CINSTRCONF_WIPWAIT_Pos) |
                          ((uint32_t)p_config->wren      << QSPI_CINSTRCONF_WREN_Pos));
+}
+
+__STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *                p_reg,
+                                                         const nrf_qspi_cinstr_conf_t * p_config)
+{
+    p_reg->CINSTRCONF = (((uint32_t)p_config->opcode    << QSPI_CINSTRCONF_OPCODE_Pos) |
+                         ((uint32_t)p_config->length    << QSPI_CINSTRCONF_LENGTH_Pos) |
+                         ((uint32_t)p_config->io2_level << QSPI_CINSTRCONF_LIO2_Pos) |
+                         ((uint32_t)p_config->io3_level << QSPI_CINSTRCONF_LIO3_Pos) |
+                         ((uint32_t)p_config->wipwait   << QSPI_CINSTRCONF_WIPWAIT_Pos) |
+                         ((uint32_t)p_config->wren      << QSPI_CINSTRCONF_WREN_Pos) |
+                         (QSPI_CINSTRCONF_LFEN_Msk));
+}
+
+__STATIC_INLINE bool nrf_qspi_cinstr_long_transfer_is_ongoing(NRF_QSPI_Type const * p_reg)
+{
+    return (bool)((p_reg->CINSTRCONF & (QSPI_CINSTRCONF_LFEN_Msk | QSPI_CINSTRCONF_LFSTOP_Msk))
+                   == QSPI_CINSTRCONF_LFEN_Msk);
+}
+
+__STATIC_INLINE void nrf_qspi_cinstr_long_transfer_continue(NRF_QSPI_Type *       p_reg,
+                                                            nrf_qspi_cinstr_len_t length,
+                                                            bool                  finalize)
+{
+    uint32_t mask = (((uint32_t)length << QSPI_CINSTRCONF_LENGTH_Pos) | (QSPI_CINSTRCONF_LFEN_Msk));
+    mask |= (finalize ? QSPI_CINSTRCONF_LFSTOP_Msk : 0);
+
+    p_reg->CINSTRCONF = mask;
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION

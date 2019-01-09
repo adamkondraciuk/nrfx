@@ -220,6 +220,7 @@ nrfx_err_t nrfx_qspi_mem_busy_check(void);
 nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
                                  void const *                   p_tx_buffer,
                                  void *                         p_rx_buffer);
+
 /**
  * @brief Function for sending operation code and data to the memory device with simpler configuration.
  *
@@ -236,6 +237,44 @@ nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
 nrfx_err_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
                                        nrf_qspi_cinstr_len_t length,
                                        void const *          p_tx_buffer);
+
+/**
+ * @brief Function for starting the long frame mode.
+ *
+ * The long frame mode is a mechanism that permits arbitrary byte length custom instructions.
+ * Use this function to initiate custom transaction by sending custom instruction opcode.
+ * To send and receive data, use @ref nrfx_qspi_lfm_xfer.
+ *
+ * @param[in] p_config Pointer to the structure with custom instruction opcode and transfer
+ *                     configuration. Transfer length must be set to @ref NRF_QSPI_CINSTR_LEN_1B.
+ *
+ * @retval NRFX_SUCCESS       Operation was successful.
+ * @retval NRFX_ERROR_BUSY    Driver currently handles other operation.
+ * @retval NRFX_ERROR_TIMEOUT External memory is busy or there are connection issues.
+ */
+nrfx_err_t nrfx_qspi_lfm_start(nrf_qspi_cinstr_conf_t const * p_config);
+
+/**
+ * @brief Function for sending and receiving data in long frame mode.
+ *
+ * Both specified buffers must be at least @ref transfer_length bytes in size.
+ *
+ * @param[in]  p_tx_buffer     Pointer to the array with data to send.
+ *                             Can be NULL if there is nothing to send.
+ * @param[out] p_rx_buffer     Pointer to the array for data to receive.
+ *                             Can be NULL if there is nothing to receive.
+ * @param[in]  transfer_length Number of bytes to send and receive.
+ * @param[in]  finalize        True if custom instruction long frame mode is to be finalized
+ *                             after this transfer.
+ *
+ * @retval NRFX_SUCCESS       Operation was successful.
+ * @retval NRFX_ERROR_TIMEOUT External memory is busy or there are connection issues.
+ *                            Long frame mode becomes deactivated.
+ */
+nrfx_err_t nrfx_qspi_lfm_xfer(void const * p_tx_buffer,
+                              void *       p_rx_buffer,
+                              size_t       transfer_length,
+                              bool         finalize);
 
 /** @} */
 
