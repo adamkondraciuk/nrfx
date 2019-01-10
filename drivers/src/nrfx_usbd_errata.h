@@ -21,34 +21,34 @@ static inline bool nrfx_usbd_errata_type_52840(void)
 
 static inline bool nrfx_usbd_errata_type_52840_eng_a(void)
 {
-    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL == 0x0UL));
+    return nrfx_usbd_errata_type_52840();
 }
 
 static inline bool nrfx_usbd_errata_type_52840_eng_b(void)
 {
-    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL == 0x1UL));
+    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL >= 0x1UL));
 }
 
 static inline bool nrfx_usbd_errata_type_52840_eng_c(void)
 {
-    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL == 0x2UL));
+    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL >= 0x2UL));
 }
 
 static inline bool nrfx_usbd_errata_type_52840_eng_d(void)
 {
-    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL == 0x3UL));
+    return (nrfx_usbd_errata_type_52840() && (*(uint32_t *)0x10000134UL >= 0x3UL));
 }
 
 /* Errata: USBD: EPDATA event is not always generated. */
 static inline bool nrfx_usbd_errata_104(void)
 {
-    return (NRFX_USBD_ERRATA_ENABLE && nrfx_usbd_errata_type_52840_eng_a());
+    return (NRFX_USBD_ERRATA_ENABLE && (!nrfx_usbd_errata_type_52840_eng_b()));
 }
 
 /* Errata: During setup read/write transfer USBD acknowledges setup stage without SETUP task. */
 static inline bool nrfx_usbd_errata_154(void)
 {
-    return (NRFX_USBD_ERRATA_ENABLE && nrfx_usbd_errata_type_52840_eng_a());
+    return (NRFX_USBD_ERRATA_ENABLE && (!nrfx_usbd_errata_type_52840_eng_b()));
 }
 
 /* Errata: ISO double buffering not functional. */
@@ -66,11 +66,7 @@ static inline bool nrfx_usbd_errata_171(void)
 /* Errata: USB cannot be enabled. */
 static inline bool nrfx_usbd_errata_187(void)
 {
-    return (NRFX_USBD_ERRATA_ENABLE && 
-            (nrfx_usbd_errata_type_52840_eng_b() ||
-             nrfx_usbd_errata_type_52840_eng_c() ||
-             nrfx_usbd_errata_type_52840_eng_d())
-           );
+    return (NRFX_USBD_ERRATA_ENABLE && nrfx_usbd_errata_type_52840_eng_b());
 }
 
 /* Errata: USBD cannot receive tasks during DMA. */
@@ -82,7 +78,7 @@ static inline bool nrfx_usbd_errata_199(void)
 /* Errata: SIZE.EPOUT not writable. */
 static inline bool nrfx_usbd_errata_200(void)
 {
-    return (NRFX_USBD_ERRATA_ENABLE && nrfx_usbd_errata_type_52840_eng_a());
+    return (NRFX_USBD_ERRATA_ENABLE && (!nrfx_usbd_errata_type_52840_eng_b()));
 }
 
 #endif // NRFX_USBD_ERRATA_H__
