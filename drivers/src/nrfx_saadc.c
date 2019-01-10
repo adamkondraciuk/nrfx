@@ -552,7 +552,7 @@ void nrfx_saadc_abort(void)
         {
             // Wait for ADC being stopped.
             bool result;
-            NRFX_WAIT_FOR((m_cb.adc_state != NRF_SAADC_STATE_IDLE), HW_TIMEOUT, 0, result);
+            NRFX_WAIT_FOR((m_cb.adc_state == NRF_SAADC_STATE_IDLE), HW_TIMEOUT, 0, result);
             NRFX_ASSERT(result);
         }
 
