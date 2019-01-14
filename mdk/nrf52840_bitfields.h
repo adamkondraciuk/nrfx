@@ -9886,9 +9886,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: QSPI_READ_CNT */
 /* Description: Read transfer length */
 
-/* Bits 20..0 : Read transfer length in number of bytes. The length must be a multiple of 4 bytes. */
+/* Bits 17..0 : Read transfer length in number of bytes. The length must be a multiple of 4 bytes. */
 #define QSPI_READ_CNT_CNT_Pos (0UL) /*!< Position of CNT field. */
-#define QSPI_READ_CNT_CNT_Msk (0x1FFFFFUL << QSPI_READ_CNT_CNT_Pos) /*!< Bit mask of CNT field. */
+#define QSPI_READ_CNT_CNT_Msk (0x3FFFFUL << QSPI_READ_CNT_CNT_Pos) /*!< Bit mask of CNT field. */
 
 /* Register: QSPI_WRITE_DST */
 /* Description: Flash destination address */
@@ -9907,9 +9907,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: QSPI_WRITE_CNT */
 /* Description: Write transfer length */
 
-/* Bits 20..0 : Write transfer length in number of bytes. The length must be a multiple of 4 bytes. */
+/* Bits 17..0 : Write transfer length in number of bytes. The length must be a multiple of 4 bytes. */
 #define QSPI_WRITE_CNT_CNT_Pos (0UL) /*!< Position of CNT field. */
-#define QSPI_WRITE_CNT_CNT_Msk (0x1FFFFFUL << QSPI_WRITE_CNT_CNT_Pos) /*!< Bit mask of CNT field. */
+#define QSPI_WRITE_CNT_CNT_Msk (0x3FFFFUL << QSPI_WRITE_CNT_CNT_Pos) /*!< Bit mask of CNT field. */
 
 /* Register: QSPI_ERASE_PTR */
 /* Description: Start address of flash block to be erased */
@@ -13434,6 +13434,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SPIS_RXD_AMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field. */
 #define SPIS_RXD_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIS_RXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field. */
 
+/* Register: SPIS_RXD_LIST */
+/* Description: EasyDMA list type */
+
+/* Bits 1..0 : List type */
+#define SPIS_RXD_LIST_LIST_Pos (0UL) /*!< Position of LIST field. */
+#define SPIS_RXD_LIST_LIST_Msk (0x3UL << SPIS_RXD_LIST_LIST_Pos) /*!< Bit mask of LIST field. */
+#define SPIS_RXD_LIST_LIST_Disabled (0UL) /*!< Disable EasyDMA list */
+#define SPIS_RXD_LIST_LIST_ArrayList (1UL) /*!< Use array list */
+
 /* Register: SPIS_TXD_PTR */
 /* Description: TXD data pointer */
 
@@ -13454,6 +13463,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Bits 15..0 : Number of bytes transmitted in last granted transaction */
 #define SPIS_TXD_AMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field. */
 #define SPIS_TXD_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIS_TXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field. */
+
+/* Register: SPIS_TXD_LIST */
+/* Description: EasyDMA list type */
+
+/* Bits 1..0 : List type */
+#define SPIS_TXD_LIST_LIST_Pos (0UL) /*!< Position of LIST field. */
+#define SPIS_TXD_LIST_LIST_Msk (0x3UL << SPIS_TXD_LIST_LIST_Pos) /*!< Bit mask of LIST field. */
+#define SPIS_TXD_LIST_LIST_Disabled (0UL) /*!< Disable EasyDMA list */
+#define SPIS_TXD_LIST_LIST_ArrayList (1UL) /*!< Use array list */
 
 /* Register: SPIS_CONFIG */
 /* Description: Configuration register */
@@ -14994,6 +15012,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TWIS_RXD_AMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field. */
 #define TWIS_RXD_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIS_RXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field. */
 
+/* Register: TWIS_RXD_LIST */
+/* Description: EasyDMA list type */
+
+/* Bits 1..0 : List type */
+#define TWIS_RXD_LIST_LIST_Pos (0UL) /*!< Position of LIST field. */
+#define TWIS_RXD_LIST_LIST_Msk (0x3UL << TWIS_RXD_LIST_LIST_Pos) /*!< Bit mask of LIST field. */
+#define TWIS_RXD_LIST_LIST_Disabled (0UL) /*!< Disable EasyDMA list */
+#define TWIS_RXD_LIST_LIST_ArrayList (1UL) /*!< Use array list */
+
 /* Register: TWIS_TXD_PTR */
 /* Description: TXD Data pointer */
 
@@ -15014,6 +15041,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Bits 15..0 : Number of bytes transferred in the last TXD transaction */
 #define TWIS_TXD_AMOUNT_AMOUNT_Pos (0UL) /*!< Position of AMOUNT field. */
 #define TWIS_TXD_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIS_TXD_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field. */
+
+/* Register: TWIS_TXD_LIST */
+/* Description: EasyDMA list type */
+
+/* Bits 1..0 : List type */
+#define TWIS_TXD_LIST_LIST_Pos (0UL) /*!< Position of LIST field. */
+#define TWIS_TXD_LIST_LIST_Msk (0x3UL << TWIS_TXD_LIST_LIST_Pos) /*!< Bit mask of LIST field. */
+#define TWIS_TXD_LIST_LIST_Disabled (0UL) /*!< Disable EasyDMA list */
+#define TWIS_TXD_LIST_LIST_ArrayList (1UL) /*!< Use array list */
 
 /* Register: TWIS_ADDRESS */
 /* Description: Description collection: TWI slave address n */

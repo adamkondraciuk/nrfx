@@ -19912,6 +19912,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               </field>
             </fields>
           </register>
+          <register>
+            <name>LIST</name>
+            <description>EasyDMA list type</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>LIST</name>
+                <description>List type</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Disable EasyDMA list</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ArrayList</name>
+                    <description>Use array list</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
         </cluster>
         <cluster>
           <name>TXD</name>
@@ -19958,6 +19984,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <description>Number of bytes transmitted in last granted transaction</description>
                 <lsb>0</lsb>
                 <msb>15</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LIST</name>
+            <description>EasyDMA list type</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>LIST</name>
+                <description>List type</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Disable EasyDMA list</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ArrayList</name>
+                    <description>Use array list</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -23307,6 +23359,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               </field>
             </fields>
           </register>
+          <register>
+            <name>LIST</name>
+            <description>EasyDMA list type</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>LIST</name>
+                <description>List type</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Disable EasyDMA list</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ArrayList</name>
+                    <description>Use array list</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
         </cluster>
         <cluster>
           <name>TXD</name>
@@ -23353,6 +23431,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <description>Number of bytes transferred in the last TXD transaction</description>
                 <lsb>0</lsb>
                 <msb>15</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>LIST</name>
+            <description>EasyDMA list type</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>LIST</name>
+                <description>List type</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Disable EasyDMA list</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ArrayList</name>
+                    <description>Use array list</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -52843,6 +52947,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <addressOffset>0x518</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
+          <readAction>modifyExternal</readAction>
           <fields>
             <field>
               <name>EP</name>
@@ -53505,7 +53610,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>CNT</name>
                 <description>Read transfer length in number of bytes. The length must be a multiple of 4 bytes.</description>
                 <lsb>0</lsb>
-                <msb>20</msb>
+                <msb>17</msb>
               </field>
             </fields>
           </register>
@@ -53554,7 +53659,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>CNT</name>
                 <description>Write transfer length in number of bytes. The length must be a multiple of 4 bytes.</description>
                 <lsb>0</lsb>
-                <msb>20</msb>
+                <msb>17</msb>
               </field>
             </fields>
           </register>
