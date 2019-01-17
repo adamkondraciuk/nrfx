@@ -25,6 +25,8 @@ __STATIC_INLINE void nrfx_power_clock_irq_init(void)
     priority = NRFX_POWER_CONFIG_IRQ_PRIORITY;
 #elif NRFX_CHECK(NRFX_CLOCK_ENABLED)
     priority = NRFX_CLOCK_CONFIG_IRQ_PRIORITY;
+#else
+    #error "This code is not supposed to be compiled when neither POWER nor CLOCK is enabled."
 #endif
 
     if (!NRFX_IRQ_IS_ENABLED(nrfx_get_irq_number(NRF_CLOCK)))
