@@ -299,7 +299,7 @@ __STATIC_INLINE nrf_gpio_pin_dir_t nrf_gpio_pin_dir_get(uint32_t pin_number);
 /**
  * @brief Function for reading the status of GPIO pin input buffer.
  *
- * @param pin_number Specifies the pin number to read
+ * @param pin_number Pin number to be read.
  *
  * @retval Input buffer configuration.
  */
