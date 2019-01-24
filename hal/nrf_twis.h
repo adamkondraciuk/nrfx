@@ -97,7 +97,7 @@ typedef enum
  * Defined to make it simple to change if EasyDMA would be updated to support more data in
  * the future devices to.
  */
-typedef uint8_t nrf_twis_amount_t;
+typedef size_t nrf_twis_amount_t;
 
 /**
  * @brief Smallest variable type to hold TWI address
@@ -109,7 +109,6 @@ typedef uint8_t nrf_twis_amount_t;
  * 10 bit addressing mode.
  */
 typedef uint8_t nrf_twis_address_t;
-
 
 /**
  * @brief Function for activating a specific TWIS task.
@@ -329,9 +328,9 @@ __STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * const p_reg, uint32_t scl
  * @param     length Maximum number of data bytes to receive.
  */
 __STATIC_INLINE void nrf_twis_rx_buffer_set(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t           * p_buf,
-        nrf_twis_amount_t   length);
+        NRF_TWIS_Type * const p_reg,
+        uint8_t       * p_buf,
+        size_t          length);
 
 /**
  * @brief Function that prepares TWIS for receiving
@@ -342,9 +341,9 @@ __STATIC_INLINE void nrf_twis_rx_buffer_set(
  * @param     length Maximum number of data bytes to receive.
  */
 __STATIC_INLINE void nrf_twis_rx_prepare(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t           * p_buf,
-        nrf_twis_amount_t   length);
+        NRF_TWIS_Type * const p_reg,
+        uint8_t       * p_buf,
+        size_t          length);
 
 /**
  * @brief Function for getting number of bytes received in the last transaction.
@@ -352,7 +351,7 @@ __STATIC_INLINE void nrf_twis_rx_prepare(
  * @param[in] p_reg TWIS instance.
  * @return Amount of bytes received.
  * */
-__STATIC_INLINE nrf_twis_amount_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * const p_reg);
+__STATIC_INLINE size_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * const p_reg);
 
 /**
  * @brief Function for setting the transmit buffer.
@@ -362,9 +361,9 @@ __STATIC_INLINE nrf_twis_amount_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * c
  * @param     length Maximum number of data bytes to transmit.
  */
 __STATIC_INLINE void nrf_twis_tx_buffer_set(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t const     * p_buf,
-        nrf_twis_amount_t   length);
+        NRF_TWIS_Type * const p_reg,
+        uint8_t const * p_buf,
+        size_t          length);
 
 /**
  * @brief Function that prepares TWIS for transmitting
@@ -375,9 +374,9 @@ __STATIC_INLINE void nrf_twis_tx_buffer_set(
  * @param     length Maximum number of data bytes to transmit.
  */
 __STATIC_INLINE void nrf_twis_tx_prepare(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t const     * p_buf,
-        nrf_twis_amount_t   length);
+        NRF_TWIS_Type * const p_reg,
+        uint8_t const * p_buf,
+        size_t          length);
 
 /**
  * @brief Function for getting number of bytes transmitted in the last transaction.
@@ -385,7 +384,7 @@ __STATIC_INLINE void nrf_twis_tx_prepare(
  * @param[in] p_reg Pointer to the peripheral registers structure.
  * @return Amount of bytes transmitted.
  */
-__STATIC_INLINE nrf_twis_amount_t nrf_twis_tx_amount_get(NRF_TWIS_Type const * const p_reg);
+__STATIC_INLINE size_t nrf_twis_tx_amount_get(NRF_TWIS_Type const * const p_reg);
 
 /**
  * @brief Function for setting slave address
@@ -398,9 +397,9 @@ __STATIC_INLINE nrf_twis_amount_t nrf_twis_tx_amount_get(NRF_TWIS_Type const * c
  * @sa nrf_twis_config_address_get
  */
 __STATIC_INLINE void nrf_twis_address_set(
-        NRF_TWIS_Type      * const p_reg,
-        uint_fast8_t         n,
-        nrf_twis_address_t   addr);
+        NRF_TWIS_Type * const p_reg,
+        uint_fast8_t          n,
+        nrf_twis_address_t    addr);
 
 /**
  * @brief Function for retrieving configured slave address
@@ -411,7 +410,7 @@ __STATIC_INLINE void nrf_twis_address_set(
  */
 __STATIC_INLINE nrf_twis_address_t nrf_twis_address_get(
         NRF_TWIS_Type const * const p_reg,
-        uint_fast8_t          n);
+        uint_fast8_t                n);
 
 /**
  * @brief Function for setting the device address configuration.
@@ -422,8 +421,8 @@ __STATIC_INLINE nrf_twis_address_t nrf_twis_address_get(
  * @sa nrf_twis_address_set
  */
 __STATIC_INLINE void nrf_twis_config_address_set(
-        NRF_TWIS_Type              * const p_reg,
-        nrf_twis_config_addr_mask_t        addr_mask);
+        NRF_TWIS_Type * const       p_reg,
+        nrf_twis_config_addr_mask_t addr_mask);
 
 /**
  * @brief Function for retrieving the device address configuration.
@@ -444,7 +443,7 @@ __STATIC_INLINE nrf_twis_config_addr_mask_t nrf_twis_config_address_get(
  */
 __STATIC_INLINE void nrf_twis_orc_set(
         NRF_TWIS_Type * const p_reg,
-        uint8_t         orc);
+        uint8_t               orc);
 
 /**
  * @brief Function for setting the over-read character.
@@ -507,14 +506,14 @@ void nrf_twis_task_trigger(NRF_TWIS_Type * const p_reg, nrf_twis_task_t task)
 
 uint32_t nrf_twis_task_address_get(
         NRF_TWIS_Type const * const p_reg,
-        nrf_twis_task_t       task)
+        nrf_twis_task_t             task)
 {
     return (uint32_t)nrf_twis_getRegPtr_c(p_reg, (uint32_t)task);
 }
 
 void nrf_twis_event_clear(
-        NRF_TWIS_Type     * const p_reg,
-        nrf_twis_event_t    event)
+        NRF_TWIS_Type * const p_reg,
+        nrf_twis_event_t      event)
 {
     *(nrf_twis_getRegPtr(p_reg, (uint32_t)event)) = 0UL;
 #if __CORTEX_M == 0x04
@@ -525,14 +524,14 @@ void nrf_twis_event_clear(
 
 bool nrf_twis_event_check(
         NRF_TWIS_Type const * const p_reg,
-        nrf_twis_event_t      event)
+        nrf_twis_event_t            event)
 {
     return (bool)*nrf_twis_getRegPtr_c(p_reg, (uint32_t)event);
 }
 
 bool nrf_twis_event_get_and_clear(
-        NRF_TWIS_Type    * const p_reg,
-        nrf_twis_event_t   event)
+        NRF_TWIS_Type * const p_reg,
+        nrf_twis_event_t      event)
 {
     bool ret = nrf_twis_event_check(p_reg, event);
     if (ret)
@@ -544,7 +543,7 @@ bool nrf_twis_event_get_and_clear(
 
 uint32_t nrf_twis_event_address_get(
         NRF_TWIS_Type const * const p_reg,
-        nrf_twis_event_t      event)
+        nrf_twis_event_t            event)
 {
     return (uint32_t)nrf_twis_getRegPtr_c(p_reg, (uint32_t)event);
 }
@@ -646,68 +645,68 @@ void nrf_twis_pins_set(NRF_TWIS_Type * const p_reg, uint32_t scl, uint32_t sda)
 }
 
 void nrf_twis_rx_buffer_set(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t           * p_buf,
-        nrf_twis_amount_t   length)
+        NRF_TWIS_Type * const p_reg,
+        uint8_t *             p_buf,
+        size_t                length)
 {
     p_reg->RXD.PTR    = (uint32_t)p_buf;
     p_reg->RXD.MAXCNT = length;
 }
 
 __STATIC_INLINE void nrf_twis_rx_prepare(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t           * p_buf,
-        nrf_twis_amount_t   length)
+        NRF_TWIS_Type * const p_reg,
+        uint8_t *             p_buf,
+        size_t                length)
 {
     nrf_twis_rx_buffer_set(p_reg, p_buf, length);
     nrf_twis_task_trigger(p_reg, NRF_TWIS_TASK_PREPARERX);
 }
 
-nrf_twis_amount_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * const p_reg)
+size_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * const p_reg)
 {
-    return (nrf_twis_amount_t)p_reg->RXD.AMOUNT;
+    return p_reg->RXD.AMOUNT;
 }
 
 void nrf_twis_tx_buffer_set(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t const     * p_buf,
-        nrf_twis_amount_t   length)
+        NRF_TWIS_Type * const p_reg,
+        uint8_t const *       p_buf,
+        size_t                length)
 {
     p_reg->TXD.PTR    = (uint32_t)p_buf;
     p_reg->TXD.MAXCNT = length;
 }
 
 __STATIC_INLINE void nrf_twis_tx_prepare(
-        NRF_TWIS_Type     * const p_reg,
-        uint8_t const     * p_buf,
-        nrf_twis_amount_t   length)
+        NRF_TWIS_Type * const p_reg,
+        uint8_t const *       p_buf,
+        size_t                length)
 {
     nrf_twis_tx_buffer_set(p_reg, p_buf, length);
     nrf_twis_task_trigger(p_reg, NRF_TWIS_TASK_PREPARETX);
 }
 
-nrf_twis_amount_t nrf_twis_tx_amount_get(NRF_TWIS_Type const * const p_reg)
+size_t nrf_twis_tx_amount_get(NRF_TWIS_Type const * const p_reg)
 {
-    return (nrf_twis_amount_t)p_reg->TXD.AMOUNT;
+    return p_reg->TXD.AMOUNT;
 }
 
 void nrf_twis_address_set(
-        NRF_TWIS_Type      * const p_reg,
-        uint_fast8_t         n,
-        nrf_twis_address_t   addr)
+        NRF_TWIS_Type * const p_reg,
+        uint_fast8_t          n,
+        nrf_twis_address_t    addr)
 {
     p_reg->ADDRESS[n] = addr;
 }
 
 nrf_twis_address_t nrf_twis_address_get(
         NRF_TWIS_Type const * const p_reg,
-        uint_fast8_t          n)
+        uint_fast8_t                n)
 {
     return (nrf_twis_address_t)p_reg->ADDRESS[n];
 }
 void nrf_twis_config_address_set(
-        NRF_TWIS_Type              * const p_reg,
-        nrf_twis_config_addr_mask_t        addr_mask)
+        NRF_TWIS_Type * const       p_reg,
+        nrf_twis_config_addr_mask_t addr_mask)
 {
     /* This is the only configuration in TWIS - just write it without masking */
     p_reg->CONFIG = addr_mask;
@@ -720,7 +719,7 @@ nrf_twis_config_addr_mask_t nrf_twis_config_address_get(NRF_TWIS_Type const * co
 
 void nrf_twis_orc_set(
         NRF_TWIS_Type * const p_reg,
-        uint8_t         orc)
+        uint8_t               orc)
 {
     p_reg->ORC = orc;
 }
