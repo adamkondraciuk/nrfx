@@ -9,15 +9,15 @@
 extern "C" {
 #endif
 
+#define MASK_SIGN           (0x00000200UL)
+#define MASK_SIGN_EXTENSION (0xFFFFFC00UL)
+
 /**
 * @defgroup nrf_temp_hal TEMP HAL
 * @{
 * @ingroup nrf_temp temperature_example
 * @brief   Temperature module init and read functions.
 */
-
-#define MASK_SIGN           (0x00000200UL)
-#define MASK_SIGN_EXTENSION (0xFFFFFC00UL)
 
 /**
  * @brief Function for preparing the temp module for temperature measurement.
