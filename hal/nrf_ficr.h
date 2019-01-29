@@ -61,17 +61,29 @@ __STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_reg,
 
 __STATIC_INLINE uint32_t nrf_ficr_codepagesize_get(NRF_FICR_Type const * p_reg)
 {
+#if defined(FICR_INFO_CODEPAGESIZE_CODEPAGESIZE_Msk)
+    return p_reg->INFO.CODEPAGESIZE;
+#else
     return p_reg->CODEPAGESIZE;
+#endif
 }
 
 __STATIC_INLINE uint32_t nrf_ficr_codesize_get(NRF_FICR_Type const * p_reg)
 {
+#if defined(FICR_INFO_CODESIZE_CODESIZE_Msk)
+    return p_reg->INFO.CODESIZE;
+#else
     return p_reg->CODESIZE;
+#endif
 }
 
 __STATIC_INLINE uint32_t nrf_ficr_deviceid_get(NRF_FICR_Type const * p_reg, uint32_t reg_id)
 {
+#if defined(FICR_INFO_DEVICEID_DEVICEID_Msk)
+    return p_reg->INFO.DEVICEID[reg_id];
+#else
     return p_reg->DEVICEID[reg_id];
+#endif
 }
 
 #if defined(FICR_NFC_TAGHEADER0_MFGID_Msk)
