@@ -17,7 +17,7 @@ extern "C" {
  * @brief   Quadrature Decoder (QDEC) peripheral driver.
  */
 
-/**@brief QDEC configuration structure.*/
+/** @brief QDEC configuration structure. */
 typedef struct
 {
     nrf_qdec_reportper_t reportper;          /**< Report period in samples. */
@@ -32,7 +32,7 @@ typedef struct
     uint8_t              interrupt_priority; /**< QDEC interrupt priority. */
 } nrfx_qdec_config_t;
 
-/**@brief QDEC default configuration. */
+/** @brief QDEC default configuration. */
 #define NRFX_QDEC_DEFAULT_CONFIG                                                \
     {                                                                           \
         .reportper          = (nrf_qdec_reportper_t)NRFX_QDEC_CONFIG_REPORTPER, \
@@ -47,77 +47,88 @@ typedef struct
         .sample_inten       = NRFX_QDEC_CONFIG_SAMPLE_INTEN                     \
     }
 
-/**@brief QDEC sample event data.*/
+/** @brief QDEC sample event data. */
 typedef struct
 {
     int8_t value; /**< Sample value. */
 } nrfx_qdec_sample_data_evt_t;
 
-/**@brief QDEC report event data.*/
+/** @brief QDEC report event data. */
 typedef struct
 {
     int16_t acc;     /**< Accumulated transitions. */
-    uint16_t accdbl;  /**< Accumulated double transitions. */
+    uint16_t accdbl; /**< Accumulated double transitions. */
 } nrfx_qdec_report_data_evt_t;
 
-/**@brief QDEC event handler structure. */
+/** @brief QDEC event handler structure. */
 typedef struct
 {
-    nrf_qdec_event_t  type;
+    nrf_qdec_event_t  type; /**< Event type. */
     union
     {
         nrfx_qdec_sample_data_evt_t sample; /**< Sample event data. */
         nrfx_qdec_report_data_evt_t report; /**< Report event data. */
-    } data;
+    } data;                                 /**< Union to store event data. */
 } nrfx_qdec_event_t;
 
-/**@brief QDEC event handler.
- * @param[in] event  QDEC event structure.
+/**
+ * @brief QDEC event handler.
+ *
+ * @param[in] event QDEC event structure.
  */
 typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event);
 
-/**@brief Function for initializing QDEC.
+/**
+ * @brief Function for initializing QDEC.
  *
- * @param[in] p_config      Pointer to the structure with initial configuration.
+ * @param[in] p_config      Pointer to the structure with the initial configuration.
  * @param[in] event_handler Event handler provided by the user.
  *                          Must not be NULL.
  *
- * @retval NRFX_SUCCESS             If initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE If QDEC was already initialized.
+ * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_INVALID_STATE The QDEC was already initialized.
  */
 nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  event_handler);
 
-/**@brief Function for uninitializing QDEC.
- * @note  Function asserts if module is uninitialized.
+/**
+ * @brief Function for uninitializing QDEC.
+ *
+ * @note Function asserts if module is uninitialized.
  */
 void nrfx_qdec_uninit(void);
 
-/**@brief Function for enabling QDEC.
- * @note  Function asserts if module is uninitialized or enabled.
+/**
+ * @brief Function for enabling QDEC.
+ *
+ * @note Function asserts if module is uninitialized or enabled.
  */
 void nrfx_qdec_enable(void);
 
-/**@brief Function for disabling QDEC.
- * @note  Function asserts if module is uninitialized or disabled.
+/**
+ * @brief Function for disabling QDEC.
+ *
+ * @note Function asserts if module is uninitialized or disabled.
  */
 void nrfx_qdec_disable(void);
 
-/**@brief Function for reading accumulated transitions QDEC.
- * @note  Function asserts if module is not enabled.
- * @note  Accumulators are cleared after reading.
+/**
+ * @brief Function for reading accumulated transitions from the QDEC peripheral.
  *
- * @param[out] p_acc      Pointer to store accumulated transitions.
- * @param[out] p_accdbl   Pointer to store accumulated double transitions.
+ * @note Function asserts if module is not enabled.
+ * @note Accumulators are cleared after reading.
+ *
+ * @param[out] p_acc    Pointer to store the accumulated transitions.
+ * @param[out] p_accdbl Pointer to store the accumulated double transitions.
  */
 void nrfx_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl);
 
 /**
- * @brief Function for returning the address of a specific QDEC task.
+ * @brief Function for returning the address of the specified QDEC task.
  *
- * @param   task    QDEC task.
+ * @param task QDEC task.
  *
- * @return  Task address.
+ * @return Task address.
  */
 __STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
 {
@@ -125,21 +136,22 @@ __STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
 }
 
 /**
- * @brief Function for returning the address of a specific QDEC event.
+ * @brief Function for returning the address of the specified QDEC event.
  *
- * @param   event   QDEC event.
+ * @param event QDEC event.
  *
- * @return  Event address.
+ * @return Event address.
  */
 __STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
 {
     return (uint32_t)nrf_qdec_event_address_get(event);
 }
 
+/** @} */
+
 
 void nrfx_qdec_irq_handler(void);
 
-/** @} */
 
 #ifdef __cplusplus
 }

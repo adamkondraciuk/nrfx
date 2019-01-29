@@ -14,18 +14,17 @@ extern "C" {
  * @defgroup nrfx_spim SPIM driver
  * @{
  * @ingroup nrf_spim
- * @brief   SPIM peripheral driver.
+ * @brief   Serial Peripheral Interface Master with EasyDMA (SPIM) driver.
  */
 
-/**
- * @brief SPIM master driver instance data structure.
- */
+/** @brief Data structure of the Serial Peripheral Interface Master with EasyDMA (SPIM) driver instance. */
 typedef struct
 {
     NRF_SPIM_Type * p_reg;        ///< Pointer to a structure with SPIM registers.
-    uint8_t         drv_inst_idx; ///< Driver instance index.
+    uint8_t         drv_inst_idx; ///< Index of the driver instance. For internal use only.
 } nrfx_spim_t;
 
+#ifndef __NRFX_DOXYGEN__
 enum {
 #if NRFX_CHECK(NRFX_SPIM0_ENABLED)
     NRFX_SPIM0_INST_IDX,
@@ -41,10 +40,9 @@ enum {
 #endif
     NRFX_SPIM_ENABLED_COUNT
 };
+#endif
 
-/**
- * @brief Macro for creating an SPIM master driver instance.
- */
+/** @brief Macro for creating an instance of the SPIM master driver. */
 #define NRFX_SPIM_INSTANCE(id)                               \
 {                                                            \
     .p_reg        = NRFX_CONCAT_2(NRF_SPIM, id),             \
@@ -58,9 +56,7 @@ enum {
  */
 #define NRFX_SPIM_PIN_NOT_USED  0xFF
 
-/**
- * @brief SPIM master driver instance configuration structure.
- */
+/** @brief Configuration structure of the SPIM master driver instance. */
 typedef struct
 {
     uint8_t sck_pin;      ///< SCK pin number.
@@ -75,7 +71,7 @@ typedef struct
                            *   if this signal is not needed. */
     bool ss_active_high;  ///< Polarity of the Slave Select pin during transmission.
     uint8_t irq_priority; ///< Interrupt priority.
-    uint8_t orc;          ///< Over-run character.
+    uint8_t orc;          ///< Overrun character.
                           /**< This character is used when all bytes from the TX buffer are sent,
                                but the transfer continues due to RX. */
     nrf_spim_frequency_t frequency; ///< SPI frequency.
@@ -87,19 +83,19 @@ typedef struct
                                       /**< The value specifies the delay, in number of 64 MHz clock cycles
                                        *   (15.625 ns), from the the sampling edge of SCK (leading edge for
                                        *   CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until
-                                       *   the input serial data is sampled.*/
+                                       *   the input serial data is sampled. */
     bool                 use_hw_ss;   ///< Indication to use software or hardware controlled Slave Select pin.
     uint8_t              ss_duration; ///< Slave Select duration before and after transmission.
                                       /**< Minimum duration between the edge of CSN and the edge of SCK and minimum
                                        *   duration of CSN must stay inactive between transactions.
                                        *   The value is specified in number of 64 MHz clock cycles (15.625 ns).
-                                       *   Supported only for hardware controlled Slave Select.*/
+                                       *   Supported only for hardware-controlled Slave Select. */
 #endif
 } nrfx_spim_config_t;
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief SPIM master instance extended default configuration.
+ * @brief Extended default configuration of the SPIM master instance.
  */
     #define NRFX_SPIM_DEFAULT_EXTENDED_CONFIG   \
         .dcx_pin      = NRFX_SPIM_PIN_NOT_USED, \
@@ -110,9 +106,7 @@ typedef struct
     #define NRFX_SPIM_DEFAULT_EXTENDED_CONFIG
 #endif
 
-/**
- * @brief SPIM master instance default configuration.
- */
+/** @brief The default configuration of the SPIM master instance. */
 #define NRFX_SPIM_DEFAULT_CONFIG                             \
 {                                                            \
     .sck_pin        = NRFX_SPIM_PIN_NOT_USED,                \
@@ -128,15 +122,18 @@ typedef struct
     NRFX_SPIM_DEFAULT_EXTENDED_CONFIG                        \
 }
 
-#define NRFX_SPIM_FLAG_TX_POSTINC          (1UL << 0) /**< TX buffer address incremented after transfer. */
-#define NRFX_SPIM_FLAG_RX_POSTINC          (1UL << 1) /**< RX buffer address incremented after transfer. */
-#define NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER (1UL << 2) /**< Interrupt after each transfer is suppressed, and the event handler is not called. */
-#define NRFX_SPIM_FLAG_HOLD_XFER           (1UL << 3) /**< Set up the transfer but do not start it. */
-#define NRFX_SPIM_FLAG_REPEATED_XFER       (1UL << 4) /**< Flag indicating that the transfer will be executed multiple times. */
+/** @brief Flag indicating that TX buffer address will be incremented after transfer. */
+#define NRFX_SPIM_FLAG_TX_POSTINC          (1UL << 0)
+/** @brief Flag indicating that RX buffer address will be incremented after transfer. */
+#define NRFX_SPIM_FLAG_RX_POSTINC          (1UL << 1)
+/** @brief Flag indicating that the interrupt after each transfer will be suppressed, and the event handler will not be called. */
+#define NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER (1UL << 2)
+/** @brief Flag indicating that the transfer will be set up, but not started. */
+#define NRFX_SPIM_FLAG_HOLD_XFER           (1UL << 3)
+/** @brief Flag indicating that the transfer will be executed multiple times. */
+#define NRFX_SPIM_FLAG_REPEATED_XFER       (1UL << 4)
 
-/**
- * @brief Single transfer descriptor structure.
- */
+/** @brief Single transfer descriptor structure. */
 typedef struct
 {
     uint8_t const * p_tx_buffer; ///< Pointer to TX buffer.
@@ -150,29 +147,23 @@ typedef struct
  *
  * This macro is for internal use only.
  */
-#define NRFX_SPIM_SINGLE_XFER(p_tx, tx_len, p_rx, rx_len)    \
-    {                                                        \
-    .p_tx_buffer = (uint8_t const *)(p_tx),                  \
-    .tx_length = (tx_len),                                   \
-    .p_rx_buffer = (p_rx),                                   \
-    .rx_length = (rx_len),                                   \
+#define NRFX_SPIM_SINGLE_XFER(p_tx, tx_len, p_rx, rx_len) \
+    {                                                     \
+    .p_tx_buffer = (uint8_t const *)(p_tx),               \
+    .tx_length = (tx_len),                                \
+    .p_rx_buffer = (p_rx),                                \
+    .rx_length = (rx_len),                                \
     }
 
-/**
- * @brief Macro for setting duplex TX RX transfer.
- */
-#define NRFX_SPIM_XFER_TRX(p_tx_buf, tx_length, p_rx_buf, rx_length)                    \
+/** @brief Macro for setting the duplex TX RX transfer. */
+#define NRFX_SPIM_XFER_TRX(p_tx_buf, tx_length, p_rx_buf, rx_length) \
         NRFX_SPIM_SINGLE_XFER(p_tx_buf, tx_length, p_rx_buf, rx_length)
 
-/**
- * @brief Macro for setting TX transfer.
- */
+/** @brief Macro for setting the TX transfer. */
 #define NRFX_SPIM_XFER_TX(p_buf, length) \
         NRFX_SPIM_SINGLE_XFER(p_buf, length, NULL, 0)
 
-/**
- * @brief Macro for setting RX transfer.
- */
+/** @brief Macro for setting the RX transfer. */
 #define NRFX_SPIM_XFER_RX(p_buf, length) \
         NRFX_SPIM_SINGLE_XFER(NULL, 0, p_buf, length)
 
@@ -185,15 +176,14 @@ typedef enum
     NRFX_SPIM_EVENT_DONE, ///< Transfer done.
 } nrfx_spim_evt_type_t;
 
+/** @brief SPIM master event description with transmission details. */
 typedef struct
 {
     nrfx_spim_evt_type_t  type;      ///< Event type.
     nrfx_spim_xfer_desc_t xfer_desc; ///< Transfer details.
 } nrfx_spim_evt_t;
 
-/**
- * @brief SPIM master driver event handler type.
- */
+/** @brief SPIM master driver event handler type. */
 typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
                                          void *                  p_context);
 
@@ -203,19 +193,18 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  * This function configures and enables the specified peripheral.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_config   Pointer to the structure with initial configuration.
- *
- * @param     handler    Event handler provided by the user. If NULL, transfers
+ * @param[in] p_config   Pointer to the structure with the initial configuration.
+ * @param[in] handler    Event handler provided by the user. If NULL, transfers
  *                       will be performed in blocking mode.
- * @param     p_context  Context passed to event handler.
+ * @param[in] p_context  Context passed to event handler.
  *
- * @retval NRFX_SUCCESS             If initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE If the driver was already initialized.
- * @retval NRFX_ERROR_BUSY          If some other peripheral with the same
+ * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_BUSY          Some other peripheral with the same
  *                                  instance ID is already in use. This is
  *                                  possible only if @ref nrfx_prs module
  *                                  is enabled.
- * @retval NRFX_ERROR_NOT_SUPPORTED If requested configuration is not supported
+ * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
  */
 nrfx_err_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
@@ -235,19 +224,19 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  *
  * Additional options are provided using the @c flags parameter:
  *
- * - @ref NRFX_SPIM_FLAG_TX_POSTINC and @ref NRFX_SPIM_FLAG_RX_POSTINC<span></span>:
- *   Post-incrementation of buffer addresses. Supported only by SPIM.
- * - @ref NRFX_SPIM_FLAG_HOLD_XFER<span></span>: Driver is not starting the transfer. Use this
- *   flag if the transfer is triggered externally by PPI. Supported only by SPIM. Use
+ * - @ref NRFX_SPIM_FLAG_TX_POSTINC and @ref NRFX_SPIM_FLAG_RX_POSTINC -
+ *   Post-incrementation of buffer addresses.
+ * - @ref NRFX_SPIM_FLAG_HOLD_XFER - Driver is not starting the transfer. Use this
+ *   flag if the transfer is triggered externally by PPI. Use
  *   @ref nrfx_spim_start_task_get to get the address of the start task.
- * - @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER<span></span>: No user event handler after transfer
- *   completion. This also means no interrupt at the end of the transfer. Supported only by SPIM.
+ * - @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER - No user event handler after transfer
+ *   completion. This also means no interrupt at the end of the transfer.
  *   If @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER is used, the driver does not set the instance into
  *   busy state, so you must ensure that the next transfers are set up when SPIM is not active.
  *   @ref nrfx_spim_end_event_get function can be used to detect end of transfer. Option can be used
  *   together with @ref NRFX_SPIM_FLAG_REPEATED_XFER to prepare a sequence of SPI transfers
  *   without interruptions.
- * - @ref NRFX_SPIM_FLAG_REPEATED_XFER<span></span>: Prepare for repeated transfers. You can set
+ * - @ref NRFX_SPIM_FLAG_REPEATED_XFER - Prepare for repeated transfers. You can set
  *   up a number of transfers that will be triggered externally (for example by PPI). An example is
  *   a TXRX transfer with the options @ref NRFX_SPIM_FLAG_RX_POSTINC,
  *   @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER, and @ref NRFX_SPIM_FLAG_REPEATED_XFER. After the
@@ -256,7 +245,7 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  *   @ref nrfx_spim_end_event_get can be used to get the address of the END event, which can be
  *   used to count the number of transfers. If @ref NRFX_SPIM_FLAG_REPEATED_XFER is used,
  *   the driver does not set the instance into busy state, so you must ensure that the next
- *   transfers are set up when SPIM is not active. Supported only by SPIM.
+ *   transfers are set up when SPIM is not active.
  *
  * @note Peripherals using EasyDMA (including SPIM) require the transfer buffers
  *       to be placed in the Data RAM region. If this condition is not met,
@@ -266,10 +255,10 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  * @param p_xfer_desc Pointer to the transfer descriptor.
  * @param flags       Transfer options (0 for default settings).
  *
- * @retval NRFX_SUCCESS             If the procedure was successful.
- * @retval NRFX_ERROR_BUSY          If the driver is not ready for a new transfer.
- * @retval NRFX_ERROR_NOT_SUPPORTED If the provided parameters are not supported.
- * @retval NRFX_ERROR_INVALID_ADDR  If the provided buffers are not placed in the Data
+ * @retval NRFX_SUCCESS             The procedure is successful.
+ * @retval NRFX_ERROR_BUSY          The driver is not ready for a new transfer.
+ * @retval NRFX_ERROR_NOT_SUPPORTED The provided parameters are not supported.
+ * @retval NRFX_ERROR_INVALID_ADDR  The provided buffers are not placed in the Data
  *                                  RAM region.
  */
 nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
@@ -299,11 +288,11 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
  *                    @c cmd_length parameter causes all transmitted bytes
  *                    to be marked as command bytes.
  *
- * @retval NRFX_SUCCESS              If the procedure was successful.
- * @retval NRFX_ERROR_BUSY           If the driver is not ready for a new transfer.
- * @retval NRFX_ERROR_NOT_SUPPORTED  If the provided parameters are not supported.
- * @retval NRFX_ERROR_INVALID_ADDR   If the provided buffers are not placed in the Data
- *                                   RAM region.
+ * @retval NRFX_SUCCESS             The procedure is successful.
+ * @retval NRFX_ERROR_BUSY          The driver is not ready for a new transfer.
+ * @retval NRFX_ERROR_NOT_SUPPORTED The provided parameters are not supported.
+ * @retval NRFX_ERROR_INVALID_ADDR  The provided buffers are not placed in the Data
+ *                                  RAM region.
  */
 nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const * const     p_instance,
                               nrfx_spim_xfer_desc_t const * p_xfer_desc,
@@ -314,12 +303,12 @@ nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const * const     p_instance,
 /**
  * @brief Function for returning the address of a SPIM start task.
  *
- * This function should be used if @ref nrfx_spim_xfer was called with the flag @ref NRFX_SPIM_FLAG_HOLD_XFER.
+ * This function is to be used if @ref nrfx_spim_xfer was called with the flag @ref NRFX_SPIM_FLAG_HOLD_XFER.
  * In that case, the transfer is not started by the driver, but it must be started externally by PPI.
  *
- * @param[in]  p_instance Pointer to the driver instance structure.
+ * @param[in] p_instance Pointer to the driver instance structure.
  *
- * @return     Start task address.
+ * @return Start task address.
  */
 uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance);
 
@@ -338,9 +327,11 @@ uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance);
 /**
  * @brief Function for aborting ongoing transfer.
  *
- * @param[in]  p_instance Pointer to the driver instance structure.
+ * @param[in] p_instance Pointer to the driver instance structure.
  */
 void nrfx_spim_abort(nrfx_spim_t const * p_instance);
+
+/** @} */
 
 
 void nrfx_spim_0_irq_handler(void);
@@ -348,8 +339,6 @@ void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
 void nrfx_spim_3_irq_handler(void);
 
-
-/** @} */
 
 #ifdef __cplusplus
 }
