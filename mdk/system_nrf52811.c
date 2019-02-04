@@ -35,6 +35,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 static bool errata_31(void);
 static bool errata_36(void);
 static bool errata_66(void);
+static bool errata_108(void);
 static bool errata_136(void);
 
 
@@ -88,6 +89,12 @@ void SystemInit(void)
         NRF_TEMP->T3 = NRF_FICR->TEMP.T3;
         NRF_TEMP->T4 = NRF_FICR->TEMP.T4;
     }
+
+    /* Workaround for Errata 108 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
+       for your device located at https://www.nordicsemi.com/DocLib  */
+    if (errata_108()){
+        *(volatile uint32_t *)0x40000EE4 = *(volatile uint32_t *)0x10000258 & 0x0000004F;
+    }
     
     /* Workaround for Errata 136 "System: Bits in RESETREAS are set when they should not be" found at the Errata document
        for your device located at https://www.nordicsemi.com/DocLib  */
@@ -120,46 +127,62 @@ void SystemInit(void)
 
 static bool errata_31(void)
 {
-    #if !defined (DISABLE_WORKAROUND_31)
-    if ((*(uint32_t *)0x10000130ul == 0xEul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
-        return true;
+    if (*(uint32_t *)0x10000130ul == 0xEul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return true;
+        }
     }
-    #endif
-    
-    return false;
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
 }
 
 static bool errata_36(void)
 {
-    #if !defined (DISABLE_WORKAROUND_36)
-    if ((*(uint32_t *)0x10000130ul == 0xEul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
-        return true;
+    if (*(uint32_t *)0x10000130ul == 0xEul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return true;
+        }
     }
-    #endif
-    
-    return false;
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
 }
 
 static bool errata_66(void)
 {
-    #if !defined (DISABLE_WORKAROUND_66)
-    if ((*(uint32_t *)0x10000130ul == 0xEul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
-        return true;
+    if (*(uint32_t *)0x10000130ul == 0xEul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return true;
+        }
     }
-    #endif
-    
-    return false;
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
+}
+
+static bool errata_108(void)
+{
+    if (*(uint32_t *)0x10000130ul == 0xEul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return true;
+        }
+    }
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
 }
 
 static bool errata_136(void)
 {
-    #if !defined (DISABLE_WORKAROUND_136)
-    if ((*(uint32_t *)0x10000130ul == 0xEul) && (*(uint32_t *)0x10000134ul == 0x0ul)){
-        return true;
+    if (*(uint32_t *)0x10000130ul == 0xEul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return true;
+        }
     }
-    #endif
-    
-    return false;
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
 }
 
 
