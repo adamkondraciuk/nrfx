@@ -124,14 +124,11 @@ Dummy_Handler:
 .weak UARTE0_UART0_IRQHandler
 .thumb_set UARTE0_UART0_IRQHandler, Dummy_Handler
 
-.weak SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler
-.thumb_set SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler, Dummy_Handler
+.weak TWIM0_TWIS0_TWI0_IRQHandler
+.thumb_set TWIM0_TWIS0_TWI0_IRQHandler, Dummy_Handler
 
-.weak SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler
-.thumb_set SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler, Dummy_Handler
-
-.weak NFCT_IRQHandler
-.thumb_set NFCT_IRQHandler, Dummy_Handler
+.weak SPIM0_SPIS0_SPI0_IRQHandler
+.thumb_set SPIM0_SPIS0_SPI0_IRQHandler, Dummy_Handler
 
 .weak GPIOTE_IRQHandler
 .thumb_set GPIOTE_IRQHandler, Dummy_Handler
@@ -169,62 +166,23 @@ Dummy_Handler:
 .weak RTC1_IRQHandler
 .thumb_set RTC1_IRQHandler, Dummy_Handler
 
-.weak QDEC_IRQHandler
-.thumb_set QDEC_IRQHandler, Dummy_Handler
-
-.weak COMP_LPCOMP_IRQHandler
-.thumb_set COMP_LPCOMP_IRQHandler, Dummy_Handler
-
 .weak SWI0_EGU0_IRQHandler
 .thumb_set SWI0_EGU0_IRQHandler, Dummy_Handler
 
 .weak SWI1_EGU1_IRQHandler
 .thumb_set SWI1_EGU1_IRQHandler, Dummy_Handler
 
-.weak SWI2_EGU2_IRQHandler
-.thumb_set SWI2_EGU2_IRQHandler, Dummy_Handler
+.weak SWI2_IRQHandler
+.thumb_set SWI2_IRQHandler, Dummy_Handler
 
-.weak SWI3_EGU3_IRQHandler
-.thumb_set SWI3_EGU3_IRQHandler, Dummy_Handler
+.weak SWI3_IRQHandler
+.thumb_set SWI3_IRQHandler, Dummy_Handler
 
-.weak SWI4_EGU4_IRQHandler
-.thumb_set SWI4_EGU4_IRQHandler, Dummy_Handler
+.weak SWI4_IRQHandler
+.thumb_set SWI4_IRQHandler, Dummy_Handler
 
-.weak SWI5_EGU5_IRQHandler
-.thumb_set SWI5_EGU5_IRQHandler, Dummy_Handler
-
-.weak TIMER3_IRQHandler
-.thumb_set TIMER3_IRQHandler, Dummy_Handler
-
-.weak TIMER4_IRQHandler
-.thumb_set TIMER4_IRQHandler, Dummy_Handler
-
-.weak PWM0_IRQHandler
-.thumb_set PWM0_IRQHandler, Dummy_Handler
-
-.weak PDM_IRQHandler
-.thumb_set PDM_IRQHandler, Dummy_Handler
-
-.weak MWU_IRQHandler
-.thumb_set MWU_IRQHandler, Dummy_Handler
-
-.weak PWM1_IRQHandler
-.thumb_set PWM1_IRQHandler, Dummy_Handler
-
-.weak PWM2_IRQHandler
-.thumb_set PWM2_IRQHandler, Dummy_Handler
-
-.weak SPIM2_SPIS2_SPI2_IRQHandler
-.thumb_set SPIM2_SPIS2_SPI2_IRQHandler, Dummy_Handler
-
-.weak RTC2_IRQHandler
-.thumb_set RTC2_IRQHandler, Dummy_Handler
-
-.weak I2S_IRQHandler
-.thumb_set I2S_IRQHandler, Dummy_Handler
-
-.weak FPU_IRQHandler
-.thumb_set FPU_IRQHandler, Dummy_Handler
+.weak SWI5_IRQHandler
+.thumb_set SWI5_IRQHandler, Dummy_Handler
 
 /************************************************************************************
  * Reset Handler Extensions                                                         *
@@ -270,9 +228,9 @@ _vectors:
   .word   POWER_CLOCK_IRQHandler
   .word   RADIO_IRQHandler
   .word   UARTE0_UART0_IRQHandler
-  .word   SPIM0_SPIS0_TWIM0_TWIS0_SPI0_TWI0_IRQHandler
-  .word   SPIM1_SPIS1_TWIM1_TWIS1_SPI1_TWI1_IRQHandler
-  .word   NFCT_IRQHandler
+  .word   TWIM0_TWIS0_TWI0_IRQHandler
+  .word   SPIM0_SPIS0_SPI0_IRQHandler
+  .word   0                           /*Reserved */
   .word   GPIOTE_IRQHandler
   .word   SAADC_IRQHandler
   .word   TIMER0_IRQHandler
@@ -285,27 +243,27 @@ _vectors:
   .word   CCM_AAR_IRQHandler
   .word   WDT_IRQHandler
   .word   RTC1_IRQHandler
-  .word   QDEC_IRQHandler
-  .word   COMP_LPCOMP_IRQHandler
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
   .word   SWI0_EGU0_IRQHandler
   .word   SWI1_EGU1_IRQHandler
-  .word   SWI2_EGU2_IRQHandler
-  .word   SWI3_EGU3_IRQHandler
-  .word   SWI4_EGU4_IRQHandler
-  .word   SWI5_EGU5_IRQHandler
-  .word   TIMER3_IRQHandler
-  .word   TIMER4_IRQHandler
-  .word   PWM0_IRQHandler
-  .word   PDM_IRQHandler
+  .word   SWI2_IRQHandler
+  .word   SWI3_IRQHandler
+  .word   SWI4_IRQHandler
+  .word   SWI5_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
-  .word   MWU_IRQHandler
-  .word   PWM1_IRQHandler
-  .word   PWM2_IRQHandler
-  .word   SPIM2_SPIS2_SPI2_IRQHandler
-  .word   RTC2_IRQHandler
-  .word   I2S_IRQHandler
-  .word   FPU_IRQHandler
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
+  .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */

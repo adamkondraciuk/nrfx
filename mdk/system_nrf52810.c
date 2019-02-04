@@ -36,8 +36,8 @@ static bool errata_31(void);
 static bool errata_36(void);
 static bool errata_66(void);
 static bool errata_103(void);
-static bool errata_108(void);
 static bool errata_136(void);
+static bool errata_217(void);
 
 /* Helper functions for Errata workarounds in nRF52832 */
 #if defined (DEVELOP_IN_NRF52832)
@@ -46,6 +46,7 @@ static bool errata_16(void);
 static bool errata_32(void);
 static bool errata_37(void);
 static bool errata_57(void);
+static bool errata_108(void);
 static bool errata_182(void);
 #endif
 
@@ -169,11 +170,13 @@ void SystemInit(void)
         NRF_CCM->MAXPACKETSIZE = 0xFBul;
     }
 
+    #if defined (DEVELOP_IN_NRF52832)
     /* Workaround for Errata 108 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
     if (errata_108()){
-        *(volatile uint32_t *)0x40000EE4 = *(volatile uint32_t *)0x10000258 & 0x0000004F;
+        *(volatile uint32_t *)0x40000EE4ul = *(volatile uint32_t *)0x10000258ul & 0x0000004Ful;
     }
+    #endif
     
     /* Workaround for Errata 136 "System: Bits in RESETREAS are set when they should not be" found at the Errata document
        for your device located at https://www.nordicsemi.com/DocLib  */
@@ -190,6 +193,12 @@ void SystemInit(void)
         *(volatile uint32_t *) 0x4000173C |= (0x1 << 10);
     }
     #endif
+
+    /* Workaround for Errata 217 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+    if (errata_217()){
+        *(volatile uint32_t *)0x40000EE4ul |= 0x0000000Ful;
+    }
 
     /* Configure GPIO pads as pPin Reset pin if Pin Reset capabilities desired. If CONFIG_GPIO_AS_PINRESET is not
       defined, pin reset will not be available. One GPIO (see Product Specification to see which one) will then be
@@ -379,6 +388,7 @@ static bool errata_103(void)
     return false;
 }
 
+#if defined (DEVELOP_IN_NRF52832)
 static bool errata_108(void)
 {
     if ((((*(uint32_t *)0xF0000FE0) & 0x000000FF) == 0x6) && (((*(uint32_t *)0xF0000FE4) & 0x0000000F) == 0x0)){
@@ -395,6 +405,7 @@ static bool errata_108(void)
 
     return false;
 }
+#endif
 
 static bool errata_136(void)
 {
@@ -438,6 +449,21 @@ static bool errata_182(void)
     return false;
 }
 #endif
+
+static bool errata_217(void)
+{
+    if (*(uint32_t *)0x10000130ul == 0xAul){
+        if (*(uint32_t *)0x10000134ul == 0x0ul){
+            return false;
+        }
+        if (*(uint32_t *)0x10000134ul == 0x1ul){
+            return true;
+        }
+    }
+
+    /* Apply by default for unknown devices until errata is confirmed fixed. */
+    return true;
+}
 
 
 /*lint --flb "Leave library region" */

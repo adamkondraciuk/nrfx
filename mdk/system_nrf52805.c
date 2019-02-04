@@ -26,7 +26,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
-#include "system_nrf52811.h"
+#include "system_nrf52805.h"
 
 /*lint ++flb "Enter library region" */
 
@@ -37,12 +37,6 @@ static bool errata_36(void);
 static bool errata_66(void);
 static bool errata_136(void);
 static bool errata_217(void);
-
-/* nRF52840 erratas */
-#ifdef DEVELOP_IN_NRF52840
-    static bool errata_103(void);
-    static bool errata_115(void);
-#endif
 
 #if defined ( __CC_ARM )
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_64M;
@@ -95,21 +89,6 @@ void SystemInit(void)
         NRF_TEMP->T4 = NRF_FICR->TEMP.T4;
     }
 
-    #ifdef DEVELOP_IN_NRF52840
-
-        /* Workaround for Errata 103 "CCM: Wrong reset value of CCM MAXPACKETSIZE" found at the Errata document
-           for your device located at https://www.nordicsemi.com/DocLib  */
-        if (errata_103()){
-            NRF_CCM->MAXPACKETSIZE = 0xFBul;
-        }
-
-        /* Workaround for Errata 115 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
-           for your device located at https://www.nordicsemi.com/DocLib  */
-        if (errata_115()){
-            *(volatile uint32_t *)0x40000EE4 = (*(volatile uint32_t *)0x40000EE4 & 0xFFFFFFF0) | (*(uint32_t *)0x10000258 & 0x0000000F);
-        }
-    #endif
-    
     /* Workaround for Errata 136 "System: Bits in RESETREAS are set when they should not be" found at the Errata document
        for your device located at https://www.nordicsemi.com/DocLib  */
     if (errata_136()){
@@ -117,7 +96,7 @@ void SystemInit(void)
             NRF_POWER->RESETREAS =  ~POWER_RESETREAS_RESETPIN_Msk;
         }
     }
-
+    
     /* Workaround for Errata 217 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
        for your device located at https://infocenter.nordicsemi.com/index.jsp  */
     if (errata_217()){
@@ -129,11 +108,7 @@ void SystemInit(void)
       reserved for PinReset and not available as normal GPIO. */
     #if defined (CONFIG_GPIO_AS_PINRESET)
 
-        #ifdef DEVELOP_IN_NRF52840
-            #define RESET_PIN 18
-        #else
-            #define RESET_PIN 21
-        #endif
+        #define RESET_PIN 21
 
         if (((NRF_UICR->PSELRESET[0] & UICR_PSELRESET_CONNECT_Msk) != (UICR_PSELRESET_CONNECT_Connected << UICR_PSELRESET_CONNECT_Pos)) ||
             ((NRF_UICR->PSELRESET[1] & UICR_PSELRESET_CONNECT_Msk) != (UICR_PSELRESET_CONNECT_Connected << UICR_PSELRESET_CONNECT_Pos))){
@@ -154,7 +129,7 @@ void SystemInit(void)
 
 static bool errata_31(void)
 {
-    if (*(uint32_t *)0x10000130ul == 0xEul){
+    if (*(uint32_t *)0x10000130ul == 0xFul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
@@ -166,28 +141,11 @@ static bool errata_31(void)
 
 static bool errata_36(void)
 {
-    if (*(uint32_t *)0x10000130ul == 0xEul){
+    if (*(uint32_t *)0x10000130ul == 0xFul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
-
-    #ifdef DEVELOP_IN_NRF52840
-        if (*(uint32_t *)0x10000130ul == 0x8ul){
-            if (*(uint32_t *)0x10000134ul == 0x0ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x1ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x2ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x3ul){
-                return true;
-            }
-        }
-    #endif
 
     /* Apply by default for unknown devices until errata is confirmed fixed. */
     return true;
@@ -195,28 +153,11 @@ static bool errata_36(void)
 
 static bool errata_66(void)
 {
-    if (*(uint32_t *)0x10000130ul == 0xEul){
+    if (*(uint32_t *)0x10000130ul == 0xFul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
-
-    #ifdef DEVELOP_IN_NRF52840
-        if (*(uint32_t *)0x10000130ul == 0x8ul){
-            if (*(uint32_t *)0x10000134ul == 0x0ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x1ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x2ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x3ul){
-                return true;
-            }
-        }
-    #endif
 
     /* Apply by default for unknown devices until errata is confirmed fixed. */
     return true;
@@ -224,62 +165,19 @@ static bool errata_66(void)
 
 static bool errata_136(void)
 {
-    if (*(uint32_t *)0x10000130ul == 0xEul){
+    if (*(uint32_t *)0x10000130ul == 0xFul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }
     }
 
-    #ifdef DEVELOP_IN_NRF52840
-        if (*(uint32_t *)0x10000130ul == 0x8ul){
-            if (*(uint32_t *)0x10000134ul == 0x0ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x1ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x2ul){
-                return true;
-            }
-            if (*(uint32_t *)0x10000134ul == 0x3ul){
-                return true;
-            }
-        }
-    #endif
-
     /* Apply by default for unknown devices until errata is confirmed fixed. */
     return true;
 }
 
-
-#ifdef DEVELOP_IN_NRF52840
-    static bool errata_103(void)
-    {
-        if (*(uint32_t *)0x10000130ul == 0x8ul){
-            if (*(uint32_t *)0x10000134ul == 0x0ul){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    static bool errata_115(void)
-    {
-        if (*(uint32_t *)0x10000130ul == 0x8ul){
-            if (*(uint32_t *)0x10000134ul == 0x0ul){
-                return true;
-            }
-        }
-
-        return false;
-    }
-#endif
-
 static bool errata_217(void)
 {
-    if (*(uint32_t *)0x10000130ul == 0xEul){
+    if (*(uint32_t *)0x10000130ul == 0xFul){
         if (*(uint32_t *)0x10000134ul == 0x0ul){
             return true;
         }

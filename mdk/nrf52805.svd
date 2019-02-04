@@ -3,10 +3,10 @@
 <device schemaVersion="1.1" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="CMSIS-SVD.xsd">
   <vendor>Nordic Semiconductor</vendor>
   <vendorID>Nordic</vendorID>
-  <name>nrf52810</name>
+  <name>nrf52805</name>
   <series>nrf52</series>
   <version>1</version>
-  <description>nRF52810 reference description for radio MCU with ARM 32-bit Cortex-M4 Microcontroller </description>
+  <description>nRF52805 reference description for radio MCU with ARM 32-bit Cortex-M4 Microcontroller </description>
   <licenseText>
 Copyright (c) 2010 - 2018, Nordic Semiconductor ASA\n
 \n
@@ -59,7 +59,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     <nvicPrioBits>3</nvicPrioBits>
     <vendorSystickConfig>0</vendorSystickConfig>
   </cpu>
-  <headerSystemFilename>system_nrf52810</headerSystemFilename>
+  <headerSystemFilename>system_nrf52805</headerSystemFilename>
   <headerDefinitionsPrefix>NRF_</headerDefinitionsPrefix>
   <vendorExtensions>
     <ExampleStackSize>2048</ExampleStackSize>
@@ -215,7 +215,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Part code</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00052810</resetValue>
+            <resetValue>0x00052805</resetValue>
             <fields>
               <field>
                 <name>PART</name>
@@ -223,6 +223,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <lsb>0</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
+                  <enumeratedValue>
+                    <name>N52805</name>
+                    <description>nRF52805</description>
+                    <value>0x52805</value>
+                  </enumeratedValue>
                   <enumeratedValue>
                     <name>N52810</name>
                     <description>nRF52810</description>
@@ -323,16 +328,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>QF</name>
-                    <description>QFxx - 48-pin QFN</description>
-                    <value>0x2000</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>QC</name>
-                    <description>QCxx - 32-pin QFN</description>
-                    <value>0x2003</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
                     <name>CA</name>
                     <description>CAxx - WLCSP</description>
                     <value>0x2004</value>
@@ -412,7 +407,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A0</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000320</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -427,7 +422,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A1</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000343</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -442,7 +437,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A2</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
-            <resetValue>0x0000035D</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -457,7 +452,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A3</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000400</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -472,7 +467,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A4</description>
             <addressOffset>0x010</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000452</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -487,7 +482,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A5</description>
             <addressOffset>0x014</addressOffset>
             <access>read-only</access>
-            <resetValue>0x0000037B</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -502,7 +497,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B0</description>
             <addressOffset>0x018</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00003FCC</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -517,7 +512,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B1</description>
             <addressOffset>0x01C</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00003F98</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -532,7 +527,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B2</description>
             <addressOffset>0x020</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00003F98</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -547,7 +542,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B3</description>
             <addressOffset>0x024</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000012</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -562,7 +557,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B4</description>
             <addressOffset>0x028</addressOffset>
             <access>read-only</access>
-            <resetValue>0x0000004D</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -577,7 +572,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B5</description>
             <addressOffset>0x02C</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00003E10</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -592,7 +587,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T0</description>
             <addressOffset>0x030</addressOffset>
             <access>read-only</access>
-            <resetValue>0x000000E2</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -607,7 +602,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T1</description>
             <addressOffset>0x034</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -622,7 +617,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T2</description>
             <addressOffset>0x038</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000014</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -637,7 +632,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T3</description>
             <addressOffset>0x03C</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000019</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -652,7 +647,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T4</description>
             <addressOffset>0x040</addressOffset>
             <access>read-only</access>
-            <resetValue>0x00000050</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -9298,7 +9293,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral>
       <name>RADIO</name>
-      <description>2.4 GHz Radio</description>
+      <description>2.4 GHz radio</description>
       <baseAddress>0x40001000</baseAddress>
       <addressBlock>
         <offset>0</offset>
@@ -9419,13 +9414,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>TASKS_RSSISTART</name>
-          <description>Start the RSSI and take one single sample of the receive signal strength.</description>
+          <description>Start the RSSI and take one single sample of the receive signal strength</description>
           <addressOffset>0x014</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_RSSISTART</name>
-              <description>Start the RSSI and take one single sample of the receive signal strength.</description>
+              <description>Start the RSSI and take one single sample of the receive signal strength</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -9685,13 +9680,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>EVENTS_RSSIEND</name>
-          <description>Sampling of receive signal strength complete.</description>
+          <description>Sampling of receive signal strength complete</description>
           <addressOffset>0x11C</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_RSSIEND</name>
-              <description>Sampling of receive signal strength complete.</description>
+              <description>Sampling of receive signal strength complete</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -9711,13 +9706,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>EVENTS_BCMATCH</name>
-          <description>Bit counter reached bit count value.</description>
+          <description>Bit counter reached bit count value</description>
           <addressOffset>0x128</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_BCMATCH</name>
-              <description>Bit counter reached bit count value.</description>
+              <description>Bit counter reached bit count value</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -9770,6 +9765,110 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <field>
               <name>EVENTS_CRCERROR</name>
               <description>Packet received with CRC error</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_TXREADY</name>
+          <description>RADIO has ramped up and is ready to be started TX path</description>
+          <addressOffset>0x154</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_TXREADY</name>
+              <description>RADIO has ramped up and is ready to be started TX path</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_RXREADY</name>
+          <description>RADIO has ramped up and is ready to be started RX path</description>
+          <addressOffset>0x158</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_RXREADY</name>
+              <description>RADIO has ramped up and is ready to be started RX path</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_MHRMATCH</name>
+          <description>MAC header match found</description>
+          <addressOffset>0x15C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_MHRMATCH</name>
+              <description>MAC header match found</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_PHYEND</name>
+          <description>Generated when last bit is sent on air</description>
+          <addressOffset>0x16C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_PHYEND</name>
+              <description>Generated when last bit is sent on air</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -9924,6 +10023,78 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <description>Shortcut between event DISABLED and task RSSISTOP</description>
               <lsb>8</lsb>
               <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TXREADY_START</name>
+              <description>Shortcut between event TXREADY and task START</description>
+              <lsb>18</lsb>
+              <msb>18</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXREADY_START</name>
+              <description>Shortcut between event RXREADY and task START</description>
+              <lsb>19</lsb>
+              <msb>19</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PHYEND_DISABLE</name>
+              <description>Shortcut between event PHYEND and task DISABLE</description>
+              <lsb>20</lsb>
+              <msb>20</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PHYEND_START</name>
+              <description>Shortcut between event PHYEND and task START</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -10220,6 +10391,114 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <description>Write '1' to enable interrupt for event CRCERROR</description>
               <lsb>13</lsb>
               <msb>13</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>TXREADY</name>
+              <description>Write '1' to enable interrupt for event TXREADY</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXREADY</name>
+              <description>Write '1' to enable interrupt for event RXREADY</description>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MHRMATCH</name>
+              <description>Write '1' to enable interrupt for event MHRMATCH</description>
+              <lsb>23</lsb>
+              <msb>23</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PHYEND</name>
+              <description>Write '1' to enable interrupt for event PHYEND</description>
+              <lsb>27</lsb>
+              <msb>27</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -10547,6 +10826,114 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>TXREADY</name>
+              <description>Write '1' to disable interrupt for event TXREADY</description>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>RXREADY</name>
+              <description>Write '1' to disable interrupt for event RXREADY</description>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>MHRMATCH</name>
+              <description>Write '1' to disable interrupt for event MHRMATCH</description>
+              <lsb>23</lsb>
+              <msb>23</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>PHYEND</name>
+              <description>Write '1' to disable interrupt for event PHYEND</description>
+              <lsb>27</lsb>
+              <msb>27</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -10618,10 +11005,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           </fields>
         </register>
         <register>
+          <name>PDUSTAT</name>
+          <description>Payload status</description>
+          <addressOffset>0x414</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>PDUSTAT</name>
+              <description>Status on payload length vs. PCNF1.MAXLEN</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>LessThan</name>
+                  <description>Payload less than PCNF1.MAXLEN</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>GreaterThan</name>
+                  <description>Payload greater than PCNF1.MAXLEN</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>PACKETPTR</name>
           <description>Packet pointer</description>
           <addressOffset>0x504</addressOffset>
           <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>PACKETPTR</name>
@@ -10672,24 +11086,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>TXPOWER</name>
-              <description>RADIO output power.</description>
+              <description>RADIO output power</description>
               <lsb>0</lsb>
               <msb>7</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Pos4dBm</name>
                   <description>+4 dBm</description>
-                  <value>0x04</value>
+                  <value>0x4</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Pos3dBm</name>
                   <description>+3 dBm</description>
-                  <value>0x03</value>
+                  <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>0dBm</name>
                   <description>0 dBm</description>
-                  <value>0x00</value>
+                  <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Neg4dBm</name>
@@ -10738,28 +11152,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>MODE</name>
-              <description>Radio data rate and modulation setting. The radio supports Frequency-shift Keying (FSK) modulation.</description>
+              <description>Radio data rate and modulation setting. The radio supports frequency-shift keying (FSK) modulation.</description>
               <lsb>0</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Nrf_1Mbit</name>
-                  <description>1 Mbit/s Nordic proprietary radio mode</description>
+                  <description>1 Mbps Nordic proprietary radio mode</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Nrf_2Mbit</name>
-                  <description>2 Mbit/s Nordic proprietary radio mode</description>
+                  <description>2 Mbps Nordic proprietary radio mode</description>
                   <value>1</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Ble_1Mbit</name>
-                  <description>1 Mbit/s Bluetooth Low Energy</description>
+                  <description>1 Mbps BLE</description>
                   <value>3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Ble_2Mbit</name>
-                  <description>2 Mbit/s Bluetooth Low Energy</description>
+                  <description>2 Mbps BLE</description>
                   <value>4</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -10812,7 +11226,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <name>PLEN</name>
               <description>Length of preamble on air. Decision point: TASKS_START task</description>
               <lsb>24</lsb>
-              <msb>24</msb>
+              <msb>25</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>8bit</name>
@@ -10822,6 +11236,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <enumeratedValue>
                   <name>16bit</name>
                   <description>16-bit preamble</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>CRCINC</name>
+              <description>Indicates if LENGTH field contains CRC or not</description>
+              <lsb>26</lsb>
+              <msb>26</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Exclude</name>
+                  <description>LENGTH does not contain CRC</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Include</name>
+                  <description>LENGTH includes CRC</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -10854,13 +11286,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>ENDIAN</name>
-              <description>On air endianness of packet, this applies to the S0, LENGTH, S1 and the PAYLOAD fields.</description>
+              <description>On-air endianness of packet, this applies to the S0, LENGTH, S1, and the PAYLOAD fields.</description>
               <lsb>24</lsb>
               <msb>24</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Little</name>
-                  <description>Least Significant bit on air first</description>
+                  <description>Least significant bit on air first</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -11186,7 +11618,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <name>SKIPADDR</name>
               <description>Include or exclude packet address field out of CRC calculation.</description>
               <lsb>8</lsb>
-              <msb>8</msb>
+              <msb>9</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Include</name>
@@ -11233,15 +11665,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>TIFS</name>
-          <description>Inter Frame Spacing in us</description>
+          <description>Interframe spacing in us</description>
           <addressOffset>0x544</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>TIFS</name>
-              <description>Inter Frame Spacing in us</description>
+              <description>Interframe spacing in us</description>
               <lsb>0</lsb>
-              <msb>7</msb>
+              <msb>9</msb>
             </field>
           </fields>
         </register>
@@ -11329,7 +11761,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>DATAWHITEIV</name>
-              <description>Data whitening initial value. Bit 6 is hard-wired to '1', writing '0' to it has no effect, and it will always be read back and used by the device as '1'.</description>
+              <description>Data whitening initial value. Bit 6 is hardwired to '1', writing '0' to it has no effect, and it will always be read back and used by the device as '1'.</description>
               <lsb>0</lsb>
               <msb>6</msb>
             </field>
@@ -11596,12 +12028,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
-                  <description>Default ramp-up time (tRXEN), compatible with firmware written for nRF51</description>
+                  <description>Default ramp-up time (tRXEN and tTXEN), compatible with firmware written for nRF51</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Fast</name>
-                  <description>Fast ramp-up (tRXEN,FAST), see electrical specification for more information</description>
+                  <description>Fast ramp-up (tRXEN,FAST and tTXEN,FAST), see electrical specification for more information</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -16637,7 +17069,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in receive buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -16651,7 +17083,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte.</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -16712,7 +17144,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in transmit buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -16726,7 +17158,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte.</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -17758,7 +18190,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in RXD buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -17772,7 +18204,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last RXD transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -17833,7 +18265,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in TXD buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -17847,7 +18279,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last TXD transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19103,7 +19535,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in receive buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19117,7 +19549,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19178,7 +19610,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in transmit buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19192,7 +19624,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transferred in the last transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19937,7 +20369,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in receive buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -19951,7 +20383,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes received in the last granted transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -20012,7 +20444,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>MAXCNT</name>
                 <description>Maximum number of bytes in transmit buffer</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -20026,7 +20458,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 <name>AMOUNT</name>
                 <description>Number of bytes transmitted in last granted transaction</description>
                 <lsb>0</lsb>
-                <msb>9</msb>
+                <msb>13</msb>
               </field>
             </fields>
           </register>
@@ -26585,7 +27017,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>SCRATCHPTR</name>
-              <description>Pointer to a scratch data area used for temporary storage during resolution.A space of minimum 3 bytes must be reserved.</description>
+              <description>Pointer to a scratch data area used for temporary storage during resolution. A space of minimum 3 bytes must be reserved.</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>
@@ -27770,1980 +28202,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         <name>RTC1</name>
         <value>17</value>
       </interrupt>
-    </peripheral>
-    <peripheral>
-      <name>QDEC</name>
-      <description>Quadrature Decoder</description>
-      <baseAddress>0x40012000</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>QDEC</name>
-        <value>18</value>
-      </interrupt>
-      <groupName>QDEC</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_START</name>
-          <description>Task starting the quadrature decoder</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_START</name>
-              <description>Task starting the quadrature decoder</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Task stopping the quadrature decoder</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_STOP</name>
-              <description>Task stopping the quadrature decoder</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_READCLRACC</name>
-          <description>Read and clear ACC and ACCDBL</description>
-          <addressOffset>0x008</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_READCLRACC</name>
-              <description>Read and clear ACC and ACCDBL</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_RDCLRACC</name>
-          <description>Read and clear ACC</description>
-          <addressOffset>0x00C</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_RDCLRACC</name>
-              <description>Read and clear ACC</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_RDCLRDBL</name>
-          <description>Read and clear ACCDBL</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_RDCLRDBL</name>
-              <description>Read and clear ACCDBL</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_SAMPLERDY</name>
-          <description>Event being generated for every new sample value written to the SAMPLE register</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_SAMPLERDY</name>
-              <description>Event being generated for every new sample value written to the SAMPLE register</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_REPORTRDY</name>
-          <description>Non-null report ready</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_REPORTRDY</name>
-              <description>Non-null report ready</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_ACCOF</name>
-          <description>ACC or ACCDBL register overflow</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_ACCOF</name>
-              <description>ACC or ACCDBL register overflow</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_DBLRDY</name>
-          <description>Double displacement(s) detected</description>
-          <addressOffset>0x10C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_DBLRDY</name>
-              <description>Double displacement(s) detected</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_STOPPED</name>
-          <description>QDEC has been stopped</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_STOPPED</name>
-              <description>QDEC has been stopped</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>REPORTRDY_READCLRACC</name>
-              <description>Shortcut between event REPORTRDY and task READCLRACC</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SAMPLERDY_STOP</name>
-              <description>Shortcut between event SAMPLERDY and task STOP</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>REPORTRDY_RDCLRACC</name>
-              <description>Shortcut between event REPORTRDY and task RDCLRACC</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>REPORTRDY_STOP</name>
-              <description>Shortcut between event REPORTRDY and task STOP</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DBLRDY_RDCLRDBL</name>
-              <description>Shortcut between event DBLRDY and task RDCLRDBL</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DBLRDY_STOP</name>
-              <description>Shortcut between event DBLRDY and task STOP</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SAMPLERDY_READCLRACC</name>
-              <description>Shortcut between event SAMPLERDY and task READCLRACC</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>SAMPLERDY</name>
-              <description>Write '1' to enable interrupt for event SAMPLERDY</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>REPORTRDY</name>
-              <description>Write '1' to enable interrupt for event REPORTRDY</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ACCOF</name>
-              <description>Write '1' to enable interrupt for event ACCOF</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DBLRDY</name>
-              <description>Write '1' to enable interrupt for event DBLRDY</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to enable interrupt for event STOPPED</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>SAMPLERDY</name>
-              <description>Write '1' to disable interrupt for event SAMPLERDY</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>REPORTRDY</name>
-              <description>Write '1' to disable interrupt for event REPORTRDY</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>ACCOF</name>
-              <description>Write '1' to disable interrupt for event ACCOF</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DBLRDY</name>
-              <description>Write '1' to disable interrupt for event DBLRDY</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to disable interrupt for event STOPPED</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>Enable the quadrature decoder</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable the quadrature decoder</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LEDPOL</name>
-          <description>LED output pin polarity</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>LEDPOL</name>
-              <description>LED output pin polarity</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ActiveLow</name>
-                  <description>Led active on output pin low</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ActiveHigh</name>
-                  <description>Led active on output pin high</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SAMPLEPER</name>
-          <description>Sample period</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>SAMPLEPER</name>
-              <description>Sample period. The SAMPLE register will be updated for every new sample</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>128us</name>
-                  <description>128 us</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>256us</name>
-                  <description>256 us</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>512us</name>
-                  <description>512 us</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1024us</name>
-                  <description>1024 us</description>
-                  <value>3</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>2048us</name>
-                  <description>2048 us</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>4096us</name>
-                  <description>4096 us</description>
-                  <value>5</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>8192us</name>
-                  <description>8192 us</description>
-                  <value>6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>16384us</name>
-                  <description>16384 us</description>
-                  <value>7</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>32ms</name>
-                  <description>32768 us</description>
-                  <value>8</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>65ms</name>
-                  <description>65536 us</description>
-                  <value>9</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>131ms</name>
-                  <description>131072 us</description>
-                  <value>10</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SAMPLE</name>
-          <description>Motion sample value</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-only</access>
-          <dataType>int32_t</dataType>
-          <fields>
-            <field>
-              <name>SAMPLE</name>
-              <description>Last motion sample</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>REPORTPER</name>
-          <description>Number of samples to be taken before REPORTRDY and DBLRDY events can be generated</description>
-          <addressOffset>0x510</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>REPORTPER</name>
-              <description>Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>10Smpl</name>
-                  <description>10 samples / report</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>40Smpl</name>
-                  <description>40 samples / report</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>80Smpl</name>
-                  <description>80 samples / report</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>120Smpl</name>
-                  <description>120 samples / report</description>
-                  <value>3</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>160Smpl</name>
-                  <description>160 samples / report</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>200Smpl</name>
-                  <description>200 samples / report</description>
-                  <value>5</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>240Smpl</name>
-                  <description>240 samples / report</description>
-                  <value>6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>280Smpl</name>
-                  <description>280 samples / report</description>
-                  <value>7</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1Smpl</name>
-                  <description>1 sample / report</description>
-                  <value>8</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ACC</name>
-          <description>Register accumulating the valid transitions</description>
-          <addressOffset>0x514</addressOffset>
-          <access>read-only</access>
-          <dataType>int32_t</dataType>
-          <fields>
-            <field>
-              <name>ACC</name>
-              <description>Register accumulating all valid samples (not double transition) read from the SAMPLE register</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ACCREAD</name>
-          <description>Snapshot of the ACC register, updated by the READCLRACC or RDCLRACC task</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-only</access>
-          <dataType>int32_t</dataType>
-          <fields>
-            <field>
-              <name>ACCREAD</name>
-              <description>Snapshot of the ACC register.</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>QDEC_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x51C</addressOffset>
-          <register>
-            <name>LED</name>
-            <description>Pin select for LED signal</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>A</name>
-            <description>Pin select for A signal</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>B</name>
-            <description>Pin select for B signal</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <register>
-          <name>DBFEN</name>
-          <description>Enable input debounce filters</description>
-          <addressOffset>0x528</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>DBFEN</name>
-              <description>Enable input debounce filters</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Debounce input filters disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Debounce input filters enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LEDPRE</name>
-          <description>Time period the LED is switched ON prior to sampling</description>
-          <addressOffset>0x540</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000010</resetValue>
-          <fields>
-            <field>
-              <name>LEDPRE</name>
-              <description>Period in us the LED is switched on prior to sampling</description>
-              <lsb>0</lsb>
-              <msb>8</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ACCDBL</name>
-          <description>Register accumulating the number of detected double transitions</description>
-          <addressOffset>0x544</addressOffset>
-          <access>read-only</access>
-          <fields>
-            <field>
-              <name>ACCDBL</name>
-              <description>Register accumulating the number of detected double or illegal transitions. ( SAMPLE = 2 ).</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ACCDBLREAD</name>
-          <description>Snapshot of the ACCDBL, updated by the READCLRACC or RDCLRDBL task</description>
-          <addressOffset>0x548</addressOffset>
-          <access>read-only</access>
-          <fields>
-            <field>
-              <name>ACCDBLREAD</name>
-              <description>Snapshot of the ACCDBL register. This field is updated when the READCLRACC or RDCLRDBL task is triggered.</description>
-              <lsb>0</lsb>
-              <msb>3</msb>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>COMP</name>
-      <description>Comparator</description>
-      <baseAddress>0x40013000</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>COMP</name>
-        <value>19</value>
-      </interrupt>
-      <groupName>COMP</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_START</name>
-          <description>Start comparator</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_START</name>
-              <description>Start comparator</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Stop comparator</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_STOP</name>
-              <description>Stop comparator</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_SAMPLE</name>
-          <description>Sample comparator value</description>
-          <addressOffset>0x008</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_SAMPLE</name>
-              <description>Sample comparator value</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_READY</name>
-          <description>COMP is ready and output is valid</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_READY</name>
-              <description>COMP is ready and output is valid</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_DOWN</name>
-          <description>Downward crossing</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_DOWN</name>
-              <description>Downward crossing</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_UP</name>
-          <description>Upward crossing</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_UP</name>
-              <description>Upward crossing</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_CROSS</name>
-          <description>Downward or upward crossing</description>
-          <addressOffset>0x10C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_CROSS</name>
-              <description>Downward or upward crossing</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>READY_SAMPLE</name>
-              <description>Shortcut between event READY and task SAMPLE</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>READY_STOP</name>
-              <description>Shortcut between event READY and task STOP</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOWN_STOP</name>
-              <description>Shortcut between event DOWN and task STOP</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>UP_STOP</name>
-              <description>Shortcut between event UP and task STOP</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CROSS_STOP</name>
-              <description>Shortcut between event CROSS and task STOP</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Enable or disable interrupt for event READY</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOWN</name>
-              <description>Enable or disable interrupt for event DOWN</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>UP</name>
-              <description>Enable or disable interrupt for event UP</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CROSS</name>
-              <description>Enable or disable interrupt for event CROSS</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to enable interrupt for event READY</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOWN</name>
-              <description>Write '1' to enable interrupt for event DOWN</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>UP</name>
-              <description>Write '1' to enable interrupt for event UP</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CROSS</name>
-              <description>Write '1' to enable interrupt for event CROSS</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>READY</name>
-              <description>Write '1' to disable interrupt for event READY</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOWN</name>
-              <description>Write '1' to disable interrupt for event DOWN</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>UP</name>
-              <description>Write '1' to disable interrupt for event UP</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>CROSS</name>
-              <description>Write '1' to disable interrupt for event CROSS</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>RESULT</name>
-          <description>Compare result</description>
-          <addressOffset>0x400</addressOffset>
-          <access>read-only</access>
-          <fields>
-            <field>
-              <name>RESULT</name>
-              <description>Result of last compare. Decision point SAMPLE task.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Below</name>
-                  <description>Input voltage is below the threshold (VIN+ &amp;lt; VIN-)</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Above</name>
-                  <description>Input voltage is above the threshold (VIN+ &amp;gt; VIN-)</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>COMP enable</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable COMP</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>2</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PSEL</name>
-          <description>Pin select</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>PSEL</name>
-              <description>Analog pin select</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>AnalogInput0</name>
-                  <description>AIN0 selected as analog input</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput1</name>
-                  <description>AIN1 selected as analog input</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput2</name>
-                  <description>AIN2 selected as analog input</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput3</name>
-                  <description>AIN3 selected as analog input</description>
-                  <value>3</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput4</name>
-                  <description>AIN4 selected as analog input</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput5</name>
-                  <description>AIN5 selected as analog input</description>
-                  <value>5</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogInput6</name>
-                  <description>AIN6 selected as analog input</description>
-                  <value>6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>VddDiv2</name>
-                  <description>VDD/2 selected as analog input</description>
-                  <value>7</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>REFSEL</name>
-          <description>Reference source select for single-ended mode</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000004</resetValue>
-          <fields>
-            <field>
-              <name>REFSEL</name>
-              <description>Reference select</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Int1V2</name>
-                  <description>VREF = internal 1.2 V reference (VDD &amp;gt;= 1.7 V)</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Int1V8</name>
-                  <description>VREF = internal 1.8 V reference (VDD &amp;gt;= VREF + 0.2 V)</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Int2V4</name>
-                  <description>VREF = internal 2.4 V reference (VDD &amp;gt;= VREF + 0.2 V)</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>VDD</name>
-                  <description>VREF = VDD</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>ARef</name>
-                  <description>VREF = AREF (VDD &amp;gt;= VREF &amp;gt;= AREFMIN)</description>
-                  <value>5</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EXTREFSEL</name>
-          <description>External reference select</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EXTREFSEL</name>
-              <description>External analog reference select</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>AnalogReference0</name>
-                  <description>Use AIN0 as external analog reference</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference1</name>
-                  <description>Use AIN1 as external analog reference</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference2</name>
-                  <description>Use AIN2 as external analog reference</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference3</name>
-                  <description>Use AIN3 as external analog reference</description>
-                  <value>3</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference4</name>
-                  <description>Use AIN4 as external analog reference</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference5</name>
-                  <description>Use AIN5 as external analog reference</description>
-                  <value>5</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference6</name>
-                  <description>Use AIN6 as external analog reference</description>
-                  <value>6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>AnalogReference7</name>
-                  <description>Use AIN7 as external analog reference</description>
-                  <value>7</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TH</name>
-          <description>Threshold configuration for hysteresis unit</description>
-          <addressOffset>0x530</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>THDOWN</name>
-              <description>VDOWN = (THDOWN+1)/64*VREF</description>
-              <lsb>0</lsb>
-              <msb>5</msb>
-            </field>
-            <field>
-              <name>THUP</name>
-              <description>VUP = (THUP+1)/64*VREF</description>
-              <lsb>8</lsb>
-              <msb>13</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>MODE</name>
-          <description>Mode configuration</description>
-          <addressOffset>0x534</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>SP</name>
-              <description>Speed and power modes</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Low</name>
-                  <description>Low-power mode</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Normal</name>
-                  <description>Normal mode</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>High</name>
-                  <description>High-speed mode</description>
-                  <value>2</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>MAIN</name>
-              <description>Main operation modes</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>SE</name>
-                  <description>Single-ended mode</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Diff</name>
-                  <description>Differential mode</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>HYST</name>
-          <description>Comparator hysteresis enable</description>
-          <addressOffset>0x538</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>HYST</name>
-              <description>Comparator hysteresis</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NoHyst</name>
-                  <description>Comparator hysteresis disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Hyst50mV</name>
-                  <description>Comparator hysteresis enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
     </peripheral>
     <peripheral>
       <name>EGU0</name>
@@ -31072,1832 +29530,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         <name>SWI5</name>
         <value>25</value>
       </interrupt>
-    </peripheral>
-    <peripheral>
-      <name>PWM0</name>
-      <description>Pulse width modulation unit</description>
-      <baseAddress>0x4001C000</baseAddress>
-      <headerStructName>PWM</headerStructName>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>PWM0</name>
-        <value>28</value>
-      </interrupt>
-      <groupName>PWM</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Stops PWM pulse generation on all channels at the end of current PWM period, and stops sequence playback</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_STOP</name>
-              <description>Stops PWM pulse generation on all channels at the end of current PWM period, and stops sequence playback</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x2</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>TASKS_SEQSTART[%s]</name>
-          <description>Description collection: Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ[n]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running.</description>
-          <addressOffset>0x008</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_SEQSTART</name>
-              <description>Loads the first PWM value on all enabled channels from sequence n, and starts playing that sequence at the rate defined in SEQ[n]REFRESH and/or DECODER.MODE. Causes PWM generation to start if not running.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_NEXTSTEP</name>
-          <description>Steps by one value in the current sequence on all enabled channels if DECODER.MODE=NextStep. Does not cause PWM generation to start if not running.</description>
-          <addressOffset>0x010</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_NEXTSTEP</name>
-              <description>Steps by one value in the current sequence on all enabled channels if DECODER.MODE=NextStep. Does not cause PWM generation to start if not running.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_STOPPED</name>
-          <description>Response to STOP task, emitted when PWM pulses are no longer generated</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_STOPPED</name>
-              <description>Response to STOP task, emitted when PWM pulses are no longer generated</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x2</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>EVENTS_SEQSTARTED[%s]</name>
-          <description>Description collection: First PWM period started on sequence n</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_SEQSTARTED</name>
-              <description>First PWM period started on sequence n</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <dim>0x2</dim>
-          <dimIncrement>0x4</dimIncrement>
-          <name>EVENTS_SEQEND[%s]</name>
-          <description>Description collection: Emitted at end of every sequence n, when last value from RAM has been applied to wave counter</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_SEQEND</name>
-              <description>Emitted at end of every sequence n, when last value from RAM has been applied to wave counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_PWMPERIODEND</name>
-          <description>Emitted at the end of each PWM period</description>
-          <addressOffset>0x118</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_PWMPERIODEND</name>
-              <description>Emitted at the end of each PWM period</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_LOOPSDONE</name>
-          <description>Concatenated sequences have been played the amount of times defined in LOOP.CNT</description>
-          <addressOffset>0x11C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_LOOPSDONE</name>
-              <description>Concatenated sequences have been played the amount of times defined in LOOP.CNT</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SHORTS</name>
-          <description>Shortcuts between local events and tasks</description>
-          <addressOffset>0x200</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>SEQEND0_STOP</name>
-              <description>Shortcut between event SEQEND[0] and task STOP</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND1_STOP</name>
-              <description>Shortcut between event SEQEND[1] and task STOP</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE_SEQSTART0</name>
-              <description>Shortcut between event LOOPSDONE and task SEQSTART[0]</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE_SEQSTART1</name>
-              <description>Shortcut between event LOOPSDONE and task SEQSTART[1]</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE_STOP</name>
-              <description>Shortcut between event LOOPSDONE and task STOP</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable shortcut</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable shortcut</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STOPPED</name>
-              <description>Enable or disable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED0</name>
-              <description>Enable or disable interrupt for event SEQSTARTED[0]</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED1</name>
-              <description>Enable or disable interrupt for event SEQSTARTED[1]</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND0</name>
-              <description>Enable or disable interrupt for event SEQEND[0]</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND1</name>
-              <description>Enable or disable interrupt for event SEQEND[1]</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PWMPERIODEND</name>
-              <description>Enable or disable interrupt for event PWMPERIODEND</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE</name>
-              <description>Enable or disable interrupt for event LOOPSDONE</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to enable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED0</name>
-              <description>Write '1' to enable interrupt for event SEQSTARTED[0]</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED1</name>
-              <description>Write '1' to enable interrupt for event SEQSTARTED[1]</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND0</name>
-              <description>Write '1' to enable interrupt for event SEQEND[0]</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND1</name>
-              <description>Write '1' to enable interrupt for event SEQEND[1]</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PWMPERIODEND</name>
-              <description>Write '1' to enable interrupt for event PWMPERIODEND</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE</name>
-              <description>Write '1' to enable interrupt for event LOOPSDONE</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to disable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED0</name>
-              <description>Write '1' to disable interrupt for event SEQSTARTED[0]</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQSTARTED1</name>
-              <description>Write '1' to disable interrupt for event SEQSTARTED[1]</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND0</name>
-              <description>Write '1' to disable interrupt for event SEQEND[0]</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>SEQEND1</name>
-              <description>Write '1' to disable interrupt for event SEQEND[1]</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>PWMPERIODEND</name>
-              <description>Write '1' to disable interrupt for event PWMPERIODEND</description>
-              <lsb>6</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOOPSDONE</name>
-              <description>Write '1' to disable interrupt for event LOOPSDONE</description>
-              <lsb>7</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>PWM module enable register</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable PWM module</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>MODE</name>
-          <description>Selects operating mode of the wave counter</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>UPDOWN</name>
-              <description>Selects up mode or up-and-down mode for the counter</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Up</name>
-                  <description>Up counter, edge-aligned PWM duty cycle</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>UpAndDown</name>
-                  <description>Up and down counter, center-aligned PWM duty cycle</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>COUNTERTOP</name>
-          <description>Value up to which the pulse generator counter counts</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x000003FF</resetValue>
-          <fields>
-            <field>
-              <name>COUNTERTOP</name>
-              <description>Value up to which the pulse generator counter counts. This register is ignored when DECODER.MODE=WaveForm and only values from RAM are used.</description>
-              <lsb>0</lsb>
-              <msb>14</msb>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PRESCALER</name>
-          <description>Configuration for PWM_CLK</description>
-          <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>PRESCALER</name>
-              <description>Prescaler of PWM_CLK</description>
-              <lsb>0</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>DIV_1</name>
-                  <description>Divide by 1 (16 MHz)</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_2</name>
-                  <description>Divide by 2 (8 MHz)</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_4</name>
-                  <description>Divide by 4 (4 MHz)</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_8</name>
-                  <description>Divide by 8 (2 MHz)</description>
-                  <value>3</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_16</name>
-                  <description>Divide by 16 (1 MHz)</description>
-                  <value>4</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_32</name>
-                  <description>Divide by 32 (500 kHz)</description>
-                  <value>5</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_64</name>
-                  <description>Divide by 64 (250 kHz)</description>
-                  <value>6</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DIV_128</name>
-                  <description>Divide by 128 (125 kHz)</description>
-                  <value>7</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>DECODER</name>
-          <description>Configuration of the decoder</description>
-          <addressOffset>0x510</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>LOAD</name>
-              <description>How a sequence is read from RAM and spread to the compare register</description>
-              <lsb>0</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Common</name>
-                  <description>1st half word (16-bit) used in all PWM channels 0..3</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Grouped</name>
-                  <description>1st half word (16-bit) used in channel 0..1; 2nd word in channel 2..3</description>
-                  <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Individual</name>
-                  <description>1st half word (16-bit) in ch.0; 2nd in ch.1; ...; 4th in ch.3</description>
-                  <value>2</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>WaveForm</name>
-                  <description>1st half word (16-bit) in ch.0; 2nd in ch.1; ...; 4th in COUNTERTOP</description>
-                  <value>3</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>MODE</name>
-              <description>Selects source for advancing the active sequence</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>RefreshCount</name>
-                  <description>SEQ[n].REFRESH is used to determine loading internal compare registers</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>NextStep</name>
-                  <description>NEXTSTEP task causes a new value to be loaded to internal compare registers</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>LOOP</name>
-          <description>Number of playbacks of a loop</description>
-          <addressOffset>0x514</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>CNT</name>
-              <description>Number of playbacks of pattern cycles</description>
-              <lsb>0</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Looping disabled (stop at the end of the sequence)</description>
-                  <value>0</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <dim>2</dim>
-          <dimIncrement>0x020</dimIncrement>
-          <name>SEQ[%s]</name>
-          <description>Unspecified</description>
-          <headerStructName>PWM_SEQ</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x520</addressOffset>
-          <register>
-            <name>PTR</name>
-            <description>Description cluster: Beginning address in RAM of this sequence</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>PTR</name>
-                <description>Beginning address in RAM of this sequence</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>CNT</name>
-            <description>Description cluster: Number of values (duty cycles) in this sequence</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>CNT</name>
-                <description>Number of values (duty cycles) in this sequence</description>
-                <lsb>0</lsb>
-                <msb>14</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Sequence is disabled, and shall not be started as it is empty</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REFRESH</name>
-            <description>Description cluster: Number of additional PWM periods between samples loaded into compare register</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000001</resetValue>
-            <fields>
-              <field>
-                <name>CNT</name>
-                <description>Number of additional PWM periods between samples loaded into compare register (load every REFRESH.CNT+1 PWM periods)</description>
-                <lsb>0</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Continuous</name>
-                    <description>Update every PWM period</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>ENDDELAY</name>
-            <description>Description cluster: Time added after the sequence</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>CNT</name>
-                <description>Time added after the sequence in PWM periods</description>
-                <lsb>0</lsb>
-                <msb>23</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>PWM_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x560</addressOffset>
-          <register>
-            <dim>0x4</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>OUT[%s]</name>
-            <description>Description collection: Output pin select for PWM channel n</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-      </registers>
-    </peripheral>
-    <peripheral>
-      <name>PDM</name>
-      <description>Pulse Density Modulation (Digital Microphone) Interface</description>
-      <baseAddress>0x4001D000</baseAddress>
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <interrupt>
-        <name>PDM</name>
-        <value>29</value>
-      </interrupt>
-      <groupName>PDM</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_START</name>
-          <description>Starts continuous PDM transfer</description>
-          <addressOffset>0x000</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_START</name>
-              <description>Starts continuous PDM transfer</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_STOP</name>
-          <description>Stops PDM transfer</description>
-          <addressOffset>0x004</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_STOP</name>
-              <description>Stops PDM transfer</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_STARTED</name>
-          <description>PDM transfer has started</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_STARTED</name>
-              <description>PDM transfer has started</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_STOPPED</name>
-          <description>PDM transfer has finished</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_STOPPED</name>
-              <description>PDM transfer has finished</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_END</name>
-          <description>The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been received) to Data RAM</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_END</name>
-              <description>The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been received) to Data RAM</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STARTED</name>
-              <description>Enable or disable interrupt for event STARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STOPPED</name>
-              <description>Enable or disable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>END</name>
-              <description>Enable or disable interrupt for event END</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STARTED</name>
-              <description>Write '1' to enable interrupt for event STARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to enable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>END</name>
-              <description>Write '1' to enable interrupt for event END</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>STARTED</name>
-              <description>Write '1' to disable interrupt for event STARTED</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>STOPPED</name>
-              <description>Write '1' to disable interrupt for event STOPPED</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>END</name>
-              <description>Write '1' to disable interrupt for event END</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>ENABLE</name>
-          <description>PDM module enable register</description>
-          <addressOffset>0x500</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>ENABLE</name>
-              <description>Enable or disable PDM module</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PDMCLKCTRL</name>
-          <description>PDM clock generator control</description>
-          <addressOffset>0x504</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x08400000</resetValue>
-          <fields>
-            <field>
-              <name>FREQ</name>
-              <description>PDM_CLK frequency</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>1000K</name>
-                  <description>PDM_CLK = 32 MHz / 32 = 1.000 MHz</description>
-                  <value>0x08000000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Default</name>
-                  <description>PDM_CLK = 32 MHz / 31 = 1.032 MHz</description>
-                  <value>0x08400000</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>1067K</name>
-                  <description>PDM_CLK = 32 MHz / 30 = 1.067 MHz</description>
-                  <value>0x08800000</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>MODE</name>
-          <description>Defines the routing of the connected PDM microphones' signals</description>
-          <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>OPERATION</name>
-              <description>Mono or stereo operation</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Stereo</name>
-                  <description>Sample and store one pair (Left + Right) of 16bit samples per RAM word R=[31:16]; L=[15:0]</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Mono</name>
-                  <description>Sample and store two successive Left samples (16 bit each) per RAM word L1=[31:16]; L0=[15:0]</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>EDGE</name>
-              <description>Defines on which PDM_CLK edge Left (or mono) is sampled</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>LeftFalling</name>
-                  <description>Left (or mono) is sampled on falling edge of PDM_CLK</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>LeftRising</name>
-                  <description>Left (or mono) is sampled on rising edge of PDM_CLK</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>GAINL</name>
-          <description>Left output gain adjustment</description>
-          <addressOffset>0x518</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000028</resetValue>
-          <fields>
-            <field>
-              <name>GAINL</name>
-              <description>Left output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters) 0x00    -20 dB gain adjust 0x01  -19.5 dB gain adjust (...) 0x27   -0.5 dB gain adjust 0x28      0 dB gain adjust 0x29   +0.5 dB gain adjust (...) 0x4F  +19.5 dB gain adjust 0x50    +20 dB gain adjust</description>
-              <lsb>0</lsb>
-              <msb>6</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MinGain</name>
-                  <description>-20dB gain adjustment (minimum)</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DefaultGain</name>
-                  <description>0dB gain adjustment ('2500 RMS' requirement)</description>
-                  <value>0x28</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>MaxGain</name>
-                  <description>+20dB gain adjustment (maximum)</description>
-                  <value>0x50</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>GAINR</name>
-          <description>Right output gain adjustment</description>
-          <addressOffset>0x51C</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000028</resetValue>
-          <fields>
-            <field>
-              <name>GAINR</name>
-              <description>Right output gain adjustment, in 0.5 dB steps, around the default module gain (see electrical parameters)</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>MinGain</name>
-                  <description>-20dB gain adjustment (minimum)</description>
-                  <value>0x00</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>DefaultGain</name>
-                  <description>0dB gain adjustment ('2500 RMS' requirement)</description>
-                  <value>0x28</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>MaxGain</name>
-                  <description>+20dB gain adjustment (maximum)</description>
-                  <value>0x50</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <name>PSEL</name>
-          <description>Unspecified</description>
-          <headerStructName>PDM_PSEL</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x540</addressOffset>
-          <register>
-            <name>CLK</name>
-            <description>Pin number configuration for PDM CLK signal</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>DIN</name>
-            <description>Pin number configuration for PDM DIN signal</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>PIN</name>
-                <description>Pin number</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>CONNECT</name>
-                <description>Connection</description>
-                <lsb>31</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Disconnect</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Connected</name>
-                    <description>Connect</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <name>SAMPLE</name>
-          <description>Unspecified</description>
-          <headerStructName>PDM_SAMPLE</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x560</addressOffset>
-          <register>
-            <name>PTR</name>
-            <description>RAM address pointer to write samples to with EasyDMA</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <fields>
-              <field>
-                <name>SAMPLEPTR</name>
-                <description>Address to write PDM samples to over DMA</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>MAXCNT</name>
-            <description>Number of samples to allocate memory for in EasyDMA mode</description>
-            <addressOffset>0x004</addressOffset>
-            <access>read-write</access>
-            <fields>
-              <field>
-                <name>BUFFSIZE</name>
-                <description>Length of DMA RAM allocation in number of samples</description>
-                <lsb>0</lsb>
-                <msb>14</msb>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-      </registers>
     </peripheral>
     <peripheral>
       <name>NVMC</name>

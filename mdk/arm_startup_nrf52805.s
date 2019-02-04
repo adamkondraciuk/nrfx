@@ -102,8 +102,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     CCM_AAR_IRQHandler
                 DCD     WDT_IRQHandler
                 DCD     RTC1_IRQHandler
-                DCD     QDEC_IRQHandler
-                DCD     COMP_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     SWI0_EGU0_IRQHandler
                 DCD     SWI1_EGU1_IRQHandler
                 DCD     SWI2_IRQHandler
@@ -112,8 +112,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SWI5_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     PWM0_IRQHandler
-                DCD     PDM_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -211,29 +211,6 @@ Reset_Handler   PROC
                 IMPORT  SystemInit
                 IMPORT  __main
 
-                                ; Workaround for Errata 185 RAM: RAM corruption at extreme corners 
-                ; found at the Errata document for your device located
-                ; at https://infocenter.nordicsemi.com/index.jsp 
-                
-                LDR     R0, =0x10000130
-                LDR     R0, [R0]
-                LDR     R1, =0x10000134
-                LDR     R1, [R1]
-                
-                CMP     R0, #0xA
-                BNE     skip
-                CMP     R1, #0x0
-                BNE     skip
-                
-                LDR     R0, =0x40000EE4
-                LDR     R2, [R0]
-                LDR     R3, =0xFFFFFF8F
-                ANDS    R2, R2, R3
-                LDR     R3, =0x00000040
-                ORRS    R2, R2, R3
-                STR     R2, [R0]
-                
-skip
 
                 LDR     R0, =SystemInit
                 BLX     R0
@@ -304,16 +281,12 @@ Default_Handler PROC
                 EXPORT   CCM_AAR_IRQHandler [WEAK]
                 EXPORT   WDT_IRQHandler [WEAK]
                 EXPORT   RTC1_IRQHandler [WEAK]
-                EXPORT   QDEC_IRQHandler [WEAK]
-                EXPORT   COMP_IRQHandler [WEAK]
                 EXPORT   SWI0_EGU0_IRQHandler [WEAK]
                 EXPORT   SWI1_EGU1_IRQHandler [WEAK]
                 EXPORT   SWI2_IRQHandler [WEAK]
                 EXPORT   SWI3_IRQHandler [WEAK]
                 EXPORT   SWI4_IRQHandler [WEAK]
                 EXPORT   SWI5_IRQHandler [WEAK]
-                EXPORT   PWM0_IRQHandler [WEAK]
-                EXPORT   PDM_IRQHandler [WEAK]
 POWER_CLOCK_IRQHandler
 RADIO_IRQHandler
 UARTE0_UART0_IRQHandler
@@ -331,16 +304,12 @@ ECB_IRQHandler
 CCM_AAR_IRQHandler
 WDT_IRQHandler
 RTC1_IRQHandler
-QDEC_IRQHandler
-COMP_IRQHandler
 SWI0_EGU0_IRQHandler
 SWI1_EGU1_IRQHandler
 SWI2_IRQHandler
 SWI3_IRQHandler
 SWI4_IRQHandler
 SWI5_IRQHandler
-PWM0_IRQHandler
-PDM_IRQHandler
                 B .
                 ENDP
                 ALIGN

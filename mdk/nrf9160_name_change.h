@@ -39,43 +39,27 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF_PERIPHERALS_H__
-#define NRF_PERIPHERALS_H__
+#ifndef NRF9160_NAME_CHANGE_H
+#define NRF9160_NAME_CHANGE_H
 
 /*lint ++flb "Enter library region */
 
-#if defined(_WIN32)
-    /* Do not include nrf specific files when building for PC host */
-#elif defined(__unix)
-    /* Do not include nrf specific files when building for PC host */
-#elif defined(__APPLE__)
-    /* Do not include nrf specific files when building for PC host */
-#else
-    
-    #if defined(NRF51)
-        #include "nrf51_peripherals.h"
+/* This file is given to prevent your SW from not compiling with the updates made to nrf9160.h and 
+ * nrf9160_bitfields.h. The macros defined in this file were available previously. Do not use these
+ * macros on purpose. Use the ones defined in nrf9160.h and nrf9160_bitfields.h instead.
+ */
+ 
+ /* SAADC enums */
+ /* Changes to enum names in SAADC */
+ #define SAADC_CH_PSELP_PSELP_VDD       SAADC_CH_PSELP_PSELP_VDDGPIO
+ #define SAADC_CH_PSELP_PSELN_VDD       SAADC_CH_PSELP_PSELN_VDDGPIO
+ 
+ /* CTRLAP PERI Fields */
+ #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Pos       CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Pos     
+ #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Msk       CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Msk     
+ #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Unlocked  CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Unlocked
+ #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Locked    CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Locked  
+ 
+ /*lint --flb "Leave library region" */
 
-    #elif defined (NRF52805_XXAA)
-        #include "nrf52805_peripherals.h"
-    #elif defined(NRF52810_XXAA)
-        #include "nrf52810_peripherals.h"
-    #elif defined(NRF52811_XXAA)
-        #include "nrf52811_peripherals.h"        
-    #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
-        #include "nrf52832_peripherals.h"
-    #elif defined (NRF52833_XXAA)
-        #include "nrf52833_peripherals.h"
-    #elif defined(NRF52840_XXAA)
-        #include "nrf52840_peripherals.h"
-            
-    #elif defined(NRF9160_XXAA)
-        #include "nrf9160_peripherals.h"
-        
-    #else
-        #error "Device must be defined. See nrf.h."
-    #endif
-#endif
-
-/*lint --flb "Leave library region" */
-
-#endif // NRF_PERIPHERALS_H__
+#endif /* NRF9160_NAME_CHANGE_H */

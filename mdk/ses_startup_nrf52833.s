@@ -226,6 +226,18 @@ Dummy_Handler:
 .weak FPU_IRQHandler
 .thumb_set FPU_IRQHandler, Dummy_Handler
 
+.weak USBD_IRQHandler
+.thumb_set USBD_IRQHandler, Dummy_Handler
+
+.weak UARTE1_IRQHandler
+.thumb_set UARTE1_IRQHandler, Dummy_Handler
+
+.weak PWM3_IRQHandler
+.thumb_set PWM3_IRQHandler, Dummy_Handler
+
+.weak SPIM3_IRQHandler
+.thumb_set SPIM3_IRQHandler, Dummy_Handler
+
 /************************************************************************************
  * Reset Handler Extensions                                                         *
  ************************************************************************************/
@@ -306,15 +318,15 @@ _vectors:
   .word   RTC2_IRQHandler
   .word   I2S_IRQHandler
   .word   FPU_IRQHandler
+  .word   USBD_IRQHandler
+  .word   UARTE1_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
+  .word   PWM3_IRQHandler
   .word   0                           /*Reserved */
-  .word   0                           /*Reserved */
-  .word   0                           /*Reserved */
-  .word   0                           /*Reserved */
-  .word   0                           /*Reserved */
+  .word   SPIM3_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */

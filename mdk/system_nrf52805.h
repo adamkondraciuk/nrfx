@@ -4,8 +4,8 @@
 
 */
 
-#ifndef SYSTEM_NRF52810_H
-#define SYSTEM_NRF52810_H
+#ifndef SYSTEM_NRF52805_H
+#define SYSTEM_NRF52805_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,4 +17,4 @@ extern "C" {
 }
 #endif
 
-#endif /* SYSTEM_NRF52810_H */
+#endif /* SYSTEM_NRF52805_H */
