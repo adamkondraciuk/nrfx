@@ -1,12 +1,12 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [1.6.2] - 2019-02-05
+## [1.6.2] - 2019-02-12
 ### Added
 - Added the possibility to use the macro NRFX_COREDEP_DELAY_US_LOOP_CYCLES to specify the number of cycles consumed by one iteration of the internal loop in the function nrfx_coredep_delay_us().
 
 ### Changed
-- Updated MDK to version 8.24.0.
+- Updated MDK to version 8.24.1.
 
 ## [1.6.1] - 2019-01-29
 ### Fixed
