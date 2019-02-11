@@ -16,6 +16,13 @@
 #define NRFX_DELAY_CPU_FREQ_MHZ
 /** @brief Availability of Data Watchpoint and Trace (DWT) unit in the given SoC. */
 #define NRFX_DELAY_DWT_PRESENT
+/**
+ * @brief Number of cycles consumed by one iteration of the internal loop
+ *        in the function @ref nrfx_coredep_delay_us.
+ *
+ * This value can be specified externally (for example, when the SoC is emulated).
+ */
+#define NRFX_COREDEP_DELAY_US_LOOP_CYCLES
 
 #elif defined(NRF51)
     #define NRFX_DELAY_CPU_FREQ_MHZ 16
@@ -43,6 +50,8 @@
  * maximum uint32_t capacity divided by frequency. For example:
  * - For SoCs working at 64MHz: 0xFFFFFFFF/64 = 0x03FFFFFF (67108863 microseconds)
  * - For SoCs working at 16MHz: 0xFFFFFFFF/16 = 0x0FFFFFFF (268435455 microseconds)
+ *
+ * @sa NRFX_COREDEP_DELAY_US_LOOP_CYCLES
  *
  * @param time_us Number of microseconds to wait.
  */
@@ -98,7 +107,8 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
     }
 
     // Allow overriding the number of cycles per loop iteration, in case it is
-    // needed to adjust it externally (for example when the SoC is emulated).
+    // needed to adjust this number externally (for example, when the SoC is
+    // emulated).
     #ifndef NRFX_COREDEP_DELAY_US_LOOP_CYCLES
         #if defined(NRF51)
             // The loop takes 4 cycles: 1 for SUBS, 3 for BHI.
@@ -112,7 +122,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
             #define NRFX_COREDEP_DELAY_US_LOOP_CYCLES  3
         #endif
     #endif // NRFX_COREDEP_DELAY_US_LOOP_CYCLES
-    // Align the machine code so that it can be cached properly and no extra
+    // Align the machine code, so that it can be cached properly and no extra
     // wait states appear.
     __ALIGN(16)
     static const uint16_t delay_machine_code[] = {
@@ -123,7 +133,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 
     typedef void (* delay_func_t)(uint32_t);
     const delay_func_t delay_cycles =
-        // Set LSB to 1 to execute the code in Thumb mode.
+        // Set LSB to 1 to execute the code in the Thumb mode.
         (delay_func_t)((((uint32_t)delay_machine_code) | 1));
     uint32_t cycles = time_us * NRFX_DELAY_CPU_FREQ_MHZ;
     delay_cycles(cycles);
