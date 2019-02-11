@@ -60,6 +60,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
     static bool errata_6(void);
     static bool errata_14(void);
     static bool errata_15(void);
+    static bool errata_20(void);
 #endif
 
 void SystemCoreClockUpdate(void)
@@ -121,24 +122,30 @@ void SystemInit(void)
         }
         
         /* Workaround for Errata 6 "POWER: SLEEPENTER and SLEEPEXIT events asserted after pin reset" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+            for your device located at https://www.nordicsemi.com/DocLib  */
         if (errata_6()){
             NRF_POWER_S->EVENTS_SLEEPENTER = (POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_NotGenerated << POWER_EVENTS_SLEEPENTER_EVENTS_SLEEPENTER_Pos);
             NRF_POWER_S->EVENTS_SLEEPEXIT = (POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_NotGenerated << POWER_EVENTS_SLEEPEXIT_EVENTS_SLEEPEXIT_Pos);
         }
-        
+
         /* Workaround for Errata 14 "REGULATORS: LDO mode at startup" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+            for your device located at https://www.nordicsemi.com/DocLib  */
         if (errata_14()){
-            *(uint32_t *)0x50004A38 = 0x01ul;
+            *((volatile uint32_t *)0x50004A38) = 0x01ul;
             NRF_REGULATORS_S->DCDCEN = REGULATORS_DCDCEN_DCDCEN_Enabled << REGULATORS_DCDCEN_DCDCEN_Pos;
         }
 
         /* Workaround for Errata 15 "REGULATORS: LDO mode at startup" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+            for your device located at https://www.nordicsemi.com/DocLib  */
         if (errata_15()){
-            *(uint32_t *)0x50004A38 = 0x00ul;
+            *((volatile uint32_t *)0x50004A38) = 0x00ul;
             NRF_REGULATORS_S->DCDCEN = REGULATORS_DCDCEN_DCDCEN_Enabled << REGULATORS_DCDCEN_DCDCEN_Pos;
+        }
+
+        /* Workaround for Errata 20 "RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
+            for your device located at https://www.nordicsemi.com/DocLib  */
+        if (errata_20()){
+            *((volatile uint32_t *)0x5003AEE4) = 0xC;
         }
 
         /* Enable SWO trace functionality. If ENABLE_SWO is not defined, SWO pin will be used as GPIO (see Product
@@ -238,6 +245,18 @@ void SystemInit(void)
 
 
     bool errata_15()
+    {
+        if (*(uint32_t *)0x00FF0130 == 0x9ul){
+            if (*(uint32_t *)0x00FF0134 == 0x02ul){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    bool errata_20()
     {
         if (*(uint32_t *)0x00FF0130 == 0x9ul){
             if (*(uint32_t *)0x00FF0134 == 0x02ul){
