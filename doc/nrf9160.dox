@@ -8,6 +8,8 @@
 
 @ref nrf_dppi
 
+@ref nrf_ficr
+
 @ref nrf_gpio
 
 @ref nrf_gpiote
