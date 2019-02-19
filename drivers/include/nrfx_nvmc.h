@@ -96,6 +96,8 @@ bool nrfx_nvmc_byte_writable_check(uint32_t address, uint8_t value);
 /**
  * @brief Function for writing a single byte to flash.
  *
+ * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ *
  * @param address Address to write to.
  * @param value   Value to write.
  */
@@ -121,6 +123,8 @@ bool nrfx_nvmc_word_writable_check(uint32_t address, uint32_t value);
 /**
  * @brief Function for writing a 32-bit word to flash.
  *
+ * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ *
  * @param address Address to write to. Must be word-aligned.
  * @param value   Value to write.
  */
@@ -128,6 +132,8 @@ void nrfx_nvmc_word_write(uint32_t address, uint32_t value);
 
 /**
  * @brief Function for writing consecutive bytes to flash.
+ *
+ * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
  *
  * @param address   Address to write to.
  * @param src       Pointer to the data to copy from.
@@ -138,11 +144,21 @@ void nrfx_nvmc_bytes_write(uint32_t address, void const * src, uint32_t num_byte
 /**
  * @brief Function for writing consecutive words to flash.
  *
+ * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ *
  * @param address   Address to write to. Must be word-aligned.
  * @param src       Pointer to data to copy from. Must be word-aligned.
  * @param num_words Number of words in src to write.
  */
 void nrfx_nvmc_words_write(uint32_t address, void const * src, uint32_t num_words);
+
+/**
+ * @brief Function for checking if the last flash write has been completed.
+ *
+ * @retval true  Last write completed successfully.
+ * @retval false Last write still in progress.
+ */
+__STATIC_INLINE bool nrfx_nvmc_write_done_check(void);
 
 #if defined(NRF_NVMC_ICACHE_PRESENT)
 /**
@@ -159,6 +175,11 @@ __STATIC_INLINE void nrfx_nvmc_icache_disable(void);
 #endif // defined(NRF_NVMC_ICACHE_PRESENT)
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
+__STATIC_INLINE bool nrfx_nvmc_write_done_check(void)
+{
+    return nrf_nvmc_ready_check(NRF_NVMC);
+}
+
 #if defined(NRF_NVMC_ICACHE_PRESENT)
 __STATIC_INLINE void nrfx_nvmc_icache_enable(void)
 {

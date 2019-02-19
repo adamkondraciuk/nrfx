@@ -129,16 +129,34 @@ static void nvmc_mode_set(nrf_nvmc_mode_t mode)
 #endif
 }
 
+static void nvmc_word_write(uint32_t addr, uint32_t value)
+{
+#if defined(NVMC_READYNEXT_READYNEXT_Msk)
+    while (!nrf_nvmc_write_ready_check(NRF_NVMC)){}
+#else
+    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+#endif
+
+    *(volatile uint32_t *)addr = value;
+    __DMB();
+}
+
+static void nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
+{
+    for (uint32_t i = 0; i < num_words; i++)
+    {
+        nvmc_word_write(addr + (NVMC_BYTES_IN_WORD * i), ((uint32_t const *)src)[i]);
+    }
+}
+
 void nrfx_nvmc_page_erase(uint32_t addr)
 {
     NRFX_ASSERT(addr < flash_total_size_get());
 
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_page_erase_start(NRF_NVMC, page_first_word_addr_get(addr));
-    while (!nrf_nvmc_ready_check(NRF_NVMC));
+    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
-    __DSB();
-    __ISB();
 }
 
 nrfx_err_t nrfx_nvmc_uicr_erase(void)
@@ -146,7 +164,7 @@ nrfx_err_t nrfx_nvmc_uicr_erase(void)
 #if defined(NVMC_ERASEUICR_ERASEUICR_Msk)
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_uicr_erase_start(NRF_NVMC);
-    while (!nrf_nvmc_ready_check(NRF_NVMC));
+    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
     return NRFX_SUCCESS;
 #else
@@ -158,7 +176,7 @@ void nrfx_nvmc_all_erase(void)
 {
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_erase_all_start(NRF_NVMC);
-    while (!nrf_nvmc_ready_check(NRF_NVMC));
+    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 }
 
@@ -185,10 +203,8 @@ bool nrfx_nvmc_page_partial_erase_continue(void)
 #endif
 
     nrf_nvmc_page_partial_erase_start(NRF_NVMC, m_partial_erase_page_addr);
-    while (!nrf_nvmc_ready_check(NRF_NVMC));
+    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
-    __DSB();
-    __ISB();
 
     m_partial_erase_time_elapsed += duration_ms;
     if (m_partial_erase_time_elapsed < NVMC_PAGE_ERASE_DURATION_MS)
@@ -235,37 +251,31 @@ void nrfx_nvmc_word_write(uint32_t addr, uint32_t value)
 
     nvmc_mode_set(NRF_NVMC_MODE_WRITE);
 
-    *(volatile uint32_t *)addr = value;
-#if defined(NVMC_READYNEXT_READYNEXT_Msk)
-    while (!nrf_nvmc_write_ready_check(NRF_NVMC));
-#else
-    while (!nrf_nvmc_ready_check(NRF_NVMC));
-#endif
+    nvmc_word_write(addr, value);
 
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
-    __DSB();
-    __ISB();
-
-    NRFX_ASSERT(*(volatile uint32_t const *)addr == value);
 }
 
 void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
 {
+    NRFX_ASSERT(addr < flash_total_size_get());
+
+    nvmc_mode_set(NRF_NVMC_MODE_WRITE);
+
     uint32_t leftover = addr % NVMC_BYTES_IN_WORD;
     uint8_t const * bytes_src = (uint8_t const *)src;
 
     if (leftover != 0)
     {
-        nrfx_nvmc_word_write(addr - leftover,
-                             partial_word_create(addr, bytes_src, NVMC_BYTES_IN_WORD - leftover));
+        /* Deal with unaligned leading bytes */
+        nvmc_word_write(addr - leftover,
+                        partial_word_create(addr, bytes_src, NVMC_BYTES_IN_WORD - leftover));
 
         leftover = NVMC_BYTES_IN_WORD - leftover;
         num_bytes -= leftover;
         addr += leftover;
         bytes_src += leftover;
     }
-
-    leftover = num_bytes % NVMC_BYTES_IN_WORD;
 
 #if defined(__CORTEX_M) && (__CORTEX_M == 0U)
     if (!nrfx_is_word_aligned((void const *)bytes_src))
@@ -280,7 +290,7 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
                             | ((uint32_t)bytes_src[2]) << 16
                             | ((uint32_t)bytes_src[3]) << 24;
 
-            nrfx_nvmc_word_write(addr, word);
+            nvmc_word_write(addr, word);
             bytes_src += NVMC_BYTES_IN_WORD;
             addr += NVMC_BYTES_IN_WORD;
         }
@@ -288,23 +298,35 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
     else
 #endif
     {
-        nrfx_nvmc_words_write(addr, (uint32_t const *)bytes_src, num_bytes / NVMC_BYTES_IN_WORD);
-        addr += num_bytes - leftover;
-        bytes_src += num_bytes - leftover;
+        uint32_t bytes_combined_count = num_bytes / NVMC_BYTES_IN_WORD;
+
+        nvmc_words_write(addr, (uint32_t const *)bytes_src, bytes_combined_count);
+
+        addr += bytes_combined_count * NVMC_BYTES_IN_WORD;
+        bytes_src += bytes_combined_count * NVMC_BYTES_IN_WORD;
     }
 
+    leftover = num_bytes % NVMC_BYTES_IN_WORD;
     if (leftover != 0)
     {
-        nrfx_nvmc_word_write(addr, partial_word_create(addr, bytes_src, leftover));
+        /* Deal with unaligned trailing bytes */
+        nvmc_word_write(addr, partial_word_create(addr, bytes_src, leftover));
     }
+
+    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 }
 
 void nrfx_nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
 {
-    for (uint32_t i = 0; i < num_words; i++)
-    {
-        nrfx_nvmc_word_write(addr + (NVMC_BYTES_IN_WORD * i), ((uint32_t const *)src)[i]);
-    }
+    NRFX_ASSERT(addr < flash_total_size_get());
+    NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
+    NRFX_ASSERT(nrfx_is_word_aligned(src));
+
+    nvmc_mode_set(NRF_NVMC_MODE_WRITE);
+
+    nvmc_words_write(addr, src, num_words);
+
+    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 }
 
 #endif // NRFX_CHECK(NRFX_NVMC_ENABLED)
