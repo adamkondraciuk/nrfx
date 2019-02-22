@@ -35,6 +35,14 @@
       defined(NRF9160_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
+#elif defined(NRF5340_XXAA_APPLICATION)
+    #define NRFX_DELAY_CPU_FREQ_MHZ 32
+//    #define NRFX_DELAY_CPU_FREQ_MHZ 64
+//    #define NRFX_DELAY_CPU_FREQ_MHZ 128
+    #define NRFX_DELAY_DWT_PRESENT  1
+#elif defined(NRF5340_XXAA_NETWORK)
+    #define NRFX_DELAY_CPU_FREQ_MHZ 64
+    #define NRFX_DELAY_DWT_PRESENT  1
 #else
     #error "Unknown device."
 #endif
