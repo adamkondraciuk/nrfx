@@ -312,13 +312,13 @@ __STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
      * Moreover, the page from CR0 can be written or erased only from code
      * running in CR0.*/
     uint32_t cr0_len = NRF_UICR->CLENR0 == 0xFFFFFFFF ? 0 : NRF_UICR->CLENR0;
-    if (page_addr > cr0_len)
+    if (page_addr < cr0_len)
     {
-        p_reg->ERASEPCR1 = page_addr;
+        p_reg->ERASEPCR0 = page_addr;
     }
     else
     {
-        p_reg->ERASEPCR0 = page_addr;
+        p_reg->ERASEPCR1 = page_addr;
     }
 #elif defined(NRF52_SERIES)
     p_reg->ERASEPAGE = page_addr;
