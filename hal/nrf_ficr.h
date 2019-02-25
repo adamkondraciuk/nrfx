@@ -13,11 +13,12 @@ extern "C" {
  * @defgroup nrf_ficr_hal FICR HAL
  * @{
  * @ingroup nrf_ficr
- * @brief   Hardware access layer for getting data from the Factory Information Configuration Registers (FICR).
+ * @brief   Hardware access layer (HAL) for getting data from
+ *          the Factory Information Configuration Registers (FICR).
  */
 
 /**
- * @brief Function for getting code memory page size.
+ * @brief Function for getting the size of code memory page.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  *
@@ -26,32 +27,32 @@ extern "C" {
 __STATIC_INLINE uint32_t nrf_ficr_codepagesize_get(NRF_FICR_Type const * p_reg);
 
 /**
- * @brief Function for getting code memory size in number of pages.
+ * @brief Function for getting the size of code memory rendered as number of pages.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  *
- * @return Code memory size in number of pages.
+ * @return Code memory size rendered as number of pages.
  */
 __STATIC_INLINE uint32_t nrf_ficr_codesize_get(NRF_FICR_Type const * p_reg);
 
 /**
- * @brief Function for getting unique device identifier number.
+ * @brief Function for getting the unique device identifier.
  *
  * @param[in] p_reg  Pointer to the peripheral register structure.
  * @param[in] reg_id Register index.
  *
- * @return Device unique identifier number.
+ * @return Unique device identifier.
  */
 __STATIC_INLINE uint32_t nrf_ficr_deviceid_get(NRF_FICR_Type const * p_reg, uint32_t reg_id);
 
 #if defined(FICR_NFC_TAGHEADER0_MFGID_Msk) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for getting default header values for the NFC tag.
+ * @brief Function for getting the default header values for the NFC tag.
  *
  * @param[in] p_reg        Pointer to the peripheral register structure.
  * @param[in] tagheader_id Tag header index.
  *
- * @return NFC tag default header value for the given header index.
+ * @return The default header value of the NFC tag for the specified header index.
  */
 __STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_reg,
                                                     uint32_t              tagheader_id);
@@ -87,7 +88,8 @@ __STATIC_INLINE uint32_t nrf_ficr_deviceid_get(NRF_FICR_Type const * p_reg, uint
 }
 
 #if defined(FICR_NFC_TAGHEADER0_MFGID_Msk)
-__STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_reg, uint32_t tagheader_id)
+__STATIC_INLINE uint32_t nrf_ficr_nfc_tagheader_get(NRF_FICR_Type const * p_reg,
+                                                    uint32_t              tagheader_id)
 {
     switch(tagheader_id) {
         case 0:

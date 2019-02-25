@@ -21,8 +21,11 @@ extern "C" {
 /**
  * @brief Function for erasing a page in flash.
  *
- * This function blocks until the erase operation finishes. The CPU is halted during
- * the erase operation.
+ * This function blocks until the erase operation finishes.
+ *
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
  *
  * @param address Address pointing to the memory location contained in
  *                the page to be erased.
@@ -32,10 +35,12 @@ void nrfx_nvmc_page_erase(uint32_t address);
 /**
  * @brief Function for erasing the user information configuration register (UICR).
  *
- * The CPU is halted during the erase operation.
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
  *
- * @retval NRFX_SUCCESS             If UICR has been successfully erased.
- * @retval NRFX_ERROR_NOT_SUPPORTED If UICR erase is not supported.
+ * @retval NRFX_SUCCESS             UICR has been successfully erased.
+ * @retval NRFX_ERROR_NOT_SUPPORTED UICR erase is not supported.
  */
 nrfx_err_t nrfx_nvmc_uicr_erase(void);
 
@@ -51,7 +56,7 @@ void nrfx_nvmc_all_erase(void);
  * @brief Function for initiating a split erase of a page in flash.
  *
  * This function initiates a partial erase with specified duration.
- * To execute the partial erase use @ref nrfx_nvmc_page_partial_erase_continue().
+ * To execute the partial erase, use @ref nrfx_nvmc_page_partial_erase_continue.
  *
  * @param address     Address pointing to the memory location contained in
  *                    the page to be erased.
@@ -62,15 +67,19 @@ void nrfx_nvmc_all_erase(void);
 void nrfx_nvmc_page_partial_erase_init(uint32_t address, uint32_t duration_ms);
 
 /**
- * @brief Function for performing a partial erase.
+ * @brief Function for performing a complete page erase split into parts.
  *
- * This function performs erase operation split into parts. Each part
- * takes time specified during initialization. It must be called several times
- * to erase the whole page. Using a page that was not completely erased
- * leads to undefined behavior. The CPU is halted during the erase operation.
+ * Each part takes time specified during initialization. It must be called several times
+ * to erase the whole page.
  *
- * @retval true  Partial erase finished.
- * @retval false Partial erase in progress. Call the function again.
+ * @note Using a page that was not completely erased leads to undefined behavior.
+ *       Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
+ *
+ * @retval true  Page erase split into parts finished.
+ * @retval false Page erase split into parts not finished.
+ *               Call the function again to process next part.
  */
 bool nrfx_nvmc_page_partial_erase_continue(void);
 
@@ -79,9 +88,9 @@ bool nrfx_nvmc_page_partial_erase_continue(void);
 /**
  * @brief Function for checking whether a byte is writable at the specified address.
  *
- * It is impossible to set bit '0' to '1' in a flash region without a page
- * erase. This function checks if the value currently residing
- * at the specified address can be transformed to the desired value
+ * The NVMC is only able to write '0' to bits in the Flash that are erased (set to '1').
+ * It cannot rewrite a bit back to '1'. This function checks if the value currently
+ * residing at the specified address can be transformed to the desired value
  * without any '0' to '1' transitions.
  *
  * @param address Address to be checked.
@@ -98,6 +107,10 @@ bool nrfx_nvmc_byte_writable_check(uint32_t address, uint8_t value);
  *
  * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
  *
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
+ *
  * @param address Address to write to.
  * @param value   Value to write.
  */
@@ -106,8 +119,8 @@ void nrfx_nvmc_byte_write(uint32_t address, uint8_t value);
 /**
  * @brief Function for checking whether a word is writable at the specified address.
  *
- * The NVMC is only able to write 0 to bits in the Flash that are erased (set to 1).
- * It cannot rewrite a bit back to 1. This function checks if the value currently
+ * The NVMC is only able to write '0' to bits in the Flash that are erased (set to '1').
+ * It cannot rewrite a bit back to '1'. This function checks if the value currently
  * residing at the specified address can be transformed to the desired value
  * without any '0' to '1' transitions.
  *
@@ -125,6 +138,10 @@ bool nrfx_nvmc_word_writable_check(uint32_t address, uint32_t value);
  *
  * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
  *
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
+ *
  * @param address Address to write to. Must be word-aligned.
  * @param value   Value to write.
  */
@@ -135,9 +152,13 @@ void nrfx_nvmc_word_write(uint32_t address, uint32_t value);
  *
  * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
  *
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
+ *
  * @param address   Address to write to.
  * @param src       Pointer to the data to copy from.
- * @param num_bytes Number of bytes in src to write.
+ * @param num_bytes Number of bytes to write.
  */
 void nrfx_nvmc_bytes_write(uint32_t address, void const * src, uint32_t num_bytes);
 
@@ -146,9 +167,13 @@ void nrfx_nvmc_bytes_write(uint32_t address, void const * src, uint32_t num_byte
  *
  * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
  *
+ * @note Depending on the source of the code being executed,
+ *       the CPU may be halted during the operation.
+ *       Refer to the Product Specification for more information.
+ *
  * @param address   Address to write to. Must be word-aligned.
  * @param src       Pointer to data to copy from. Must be word-aligned.
- * @param num_words Number of words in src to write.
+ * @param num_words Number of words to write.
  */
 void nrfx_nvmc_words_write(uint32_t address, void const * src, uint32_t num_words);
 
@@ -164,8 +189,8 @@ __STATIC_INLINE bool nrfx_nvmc_write_done_check(void);
 /**
  * @brief Function for enabling the instruction cache (ICache).
  *
- * Enabling ICache can result in performance boost and power consumption reduction, due
- * to fewer flash memory accesses.
+ * Enabling ICache reduces the amount of accesses to flash memory,
+ * which can result in performance boost and lower power consumption.
  */
 __STATIC_INLINE void nrfx_nvmc_icache_enable(void);
 

@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2018>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
 
 #include <nrfx.h>
 
@@ -106,7 +106,7 @@ static uint32_t partial_word_create(uint32_t addr, uint8_t const * bytes, uint32
     uint32_t value32;
     uint32_t byte_shift;
 
-    byte_shift = addr & 0x03UL;
+    byte_shift = addr % NVMC_BYTES_IN_WORD;
 
     NRFX_ASSERT(bytes_count <= (NVMC_BYTES_IN_WORD - byte_shift));
 
@@ -132,9 +132,11 @@ static void nvmc_mode_set(nrf_nvmc_mode_t mode)
 static void nvmc_word_write(uint32_t addr, uint32_t value)
 {
 #if defined(NVMC_READYNEXT_READYNEXT_Msk)
-    while (!nrf_nvmc_write_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_write_ready_check(NRF_NVMC))
+    {}
 #else
-    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_ready_check(NRF_NVMC))
+    {}
 #endif
 
     *(volatile uint32_t *)addr = value;
@@ -155,7 +157,8 @@ void nrfx_nvmc_page_erase(uint32_t addr)
 
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_page_erase_start(NRF_NVMC, page_first_word_addr_get(addr));
-    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_ready_check(NRF_NVMC))
+    {}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 }
 
@@ -164,7 +167,8 @@ nrfx_err_t nrfx_nvmc_uicr_erase(void)
 #if defined(NVMC_ERASEUICR_ERASEUICR_Msk)
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_uicr_erase_start(NRF_NVMC);
-    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_ready_check(NRF_NVMC))
+    {}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
     return NRFX_SUCCESS;
 #else
@@ -176,7 +180,8 @@ void nrfx_nvmc_all_erase(void)
 {
     nvmc_mode_set(NRF_NVMC_MODE_ERASE);
     nrf_nvmc_erase_all_start(NRF_NVMC);
-    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_ready_check(NRF_NVMC))
+    {}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 }
 
@@ -203,7 +208,8 @@ bool nrfx_nvmc_page_partial_erase_continue(void)
 #endif
 
     nrf_nvmc_page_partial_erase_start(NRF_NVMC, m_partial_erase_page_addr);
-    while (!nrf_nvmc_ready_check(NRF_NVMC)){}
+    while (!nrf_nvmc_ready_check(NRF_NVMC))
+    {}
     nvmc_mode_set(NRF_NVMC_MODE_READONLY);
 
     m_partial_erase_time_elapsed += duration_ms;
@@ -224,7 +230,6 @@ bool nrfx_nvmc_byte_writable_check(uint32_t addr, uint8_t val_to_check)
     NRFX_ASSERT(addr < flash_total_size_get());
 
     uint8_t val_on_addr = *(uint8_t const *)addr;
-
     return (val_to_check & val_on_addr) == val_to_check;
 }
 
@@ -298,12 +303,12 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
     else
 #endif
     {
-        uint32_t bytes_combined_count = num_bytes / NVMC_BYTES_IN_WORD;
+        uint32_t word_count = num_bytes / NVMC_BYTES_IN_WORD;
 
-        nvmc_words_write(addr, (uint32_t const *)bytes_src, bytes_combined_count);
+        nvmc_words_write(addr, (uint32_t const *)bytes_src, word_count);
 
-        addr += bytes_combined_count * NVMC_BYTES_IN_WORD;
-        bytes_src += bytes_combined_count * NVMC_BYTES_IN_WORD;
+        addr += word_count * NVMC_BYTES_IN_WORD;
+        bytes_src += word_count * NVMC_BYTES_IN_WORD;
     }
 
     leftover = num_bytes % NVMC_BYTES_IN_WORD;
