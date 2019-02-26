@@ -18,7 +18,7 @@ extern "C" {
  */
 
 /**
- * @brief Function for getting the size of code memory page.
+ * @brief Function for getting the size of the code memory page.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  *
@@ -27,7 +27,7 @@ extern "C" {
 __STATIC_INLINE uint32_t nrf_ficr_codepagesize_get(NRF_FICR_Type const * p_reg);
 
 /**
- * @brief Function for getting the size of code memory rendered as number of pages.
+ * @brief Function for getting the size of the code memory rendered as number of pages.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  *

@@ -27,8 +27,8 @@ extern "C" {
  *       the CPU may be halted during the operation.
  *       Refer to the Product Specification for more information.
  *
- * @param address Address pointing to the memory location contained in
- *                the page to be erased.
+ * @param address Address pointing to the memory location contained
+ *                in the page to be erased.
  */
 void nrfx_nvmc_page_erase(uint32_t address);
 
@@ -53,10 +53,10 @@ void nrfx_nvmc_all_erase(void);
 
 #if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
 /**
- * @brief Function for initiating a split erase of a page in flash.
+ * @brief Function for initiating a complete page erase split into parts (also known as partial erase).
  *
- * This function initiates a partial erase with specified duration.
- * To execute the partial erase, use @ref nrfx_nvmc_page_partial_erase_continue.
+ * This function initiates a partial erase with the specified duration.
+ * To execute each part of the partial erase, use @ref nrfx_nvmc_page_partial_erase_continue.
  *
  * @param address     Address pointing to the memory location contained in
  *                    the page to be erased.
@@ -67,19 +67,19 @@ void nrfx_nvmc_all_erase(void);
 void nrfx_nvmc_page_partial_erase_init(uint32_t address, uint32_t duration_ms);
 
 /**
- * @brief Function for performing a complete page erase split into parts.
+ * @brief Function for performing a part of the complete page erase (also known as partial erase).
  *
- * Each part takes time specified during initialization. It must be called several times
- * to erase the whole page.
+ * Each part takes the amount of time specified during the initialization.
+ * This function must be called several times to erase the whole page, once for each erase part.
  *
  * @note Using a page that was not completely erased leads to undefined behavior.
  *       Depending on the source of the code being executed,
  *       the CPU may be halted during the operation.
  *       Refer to the Product Specification for more information.
  *
- * @retval true  Page erase split into parts finished.
- * @retval false Page erase split into parts not finished.
- *               Call the function again to process next part.
+ * @retval true  Partial erase finished.
+ * @retval false Partial erase not finished.
+ *               Call the function again to process the next part.
  */
 bool nrfx_nvmc_page_partial_erase_continue(void);
 
@@ -105,7 +105,7 @@ bool nrfx_nvmc_byte_writable_check(uint32_t address, uint8_t value);
 /**
  * @brief Function for writing a single byte to flash.
  *
- * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ * To determine if the flash write has been completed, use @ref nrfx_nvmc_write_done_check().
  *
  * @note Depending on the source of the code being executed,
  *       the CPU may be halted during the operation.
@@ -136,7 +136,7 @@ bool nrfx_nvmc_word_writable_check(uint32_t address, uint32_t value);
 /**
  * @brief Function for writing a 32-bit word to flash.
  *
- * To determine if the flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ * To determine if the flash write has been completed, use @ref nrfx_nvmc_write_done_check().
  *
  * @note Depending on the source of the code being executed,
  *       the CPU may be halted during the operation.
@@ -150,7 +150,7 @@ void nrfx_nvmc_word_write(uint32_t address, uint32_t value);
 /**
  * @brief Function for writing consecutive bytes to flash.
  *
- * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ * To determine if the last flash write has been completed, use @ref nrfx_nvmc_write_done_check().
  *
  * @note Depending on the source of the code being executed,
  *       the CPU may be halted during the operation.
@@ -165,7 +165,7 @@ void nrfx_nvmc_bytes_write(uint32_t address, void const * src, uint32_t num_byte
 /**
  * @brief Function for writing consecutive words to flash.
  *
- * To determine if the last flash write has been completed use @ref nrfx_nvmc_write_done_check().
+ * To determine if the last flash write has been completed, use @ref nrfx_nvmc_write_done_check().
  *
  * @note Depending on the source of the code being executed,
  *       the CPU may be halted during the operation.
@@ -187,10 +187,10 @@ __STATIC_INLINE bool nrfx_nvmc_write_done_check(void);
 
 #if defined(NRF_NVMC_ICACHE_PRESENT)
 /**
- * @brief Function for enabling the instruction cache (ICache).
+ * @brief Function for enabling the Instruction Cache (ICache).
  *
  * Enabling ICache reduces the amount of accesses to flash memory,
- * which can result in performance boost and lower power consumption.
+ * which can boost performance and lower power consumption.
  */
 __STATIC_INLINE void nrfx_nvmc_icache_enable(void);
 

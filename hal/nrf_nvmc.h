@@ -97,9 +97,9 @@ typedef enum
 /** @brief NVMC ICache configuration. */
 typedef enum
 {
-    NRF_NVMC_ICACHE_DISABLE               = NVMC_ICACHECNF_CACHEEN_Disabled, ///< Instruction cache disabled.
-    NRF_NVMC_ICACHE_ENABLE                = NVMC_ICACHECNF_CACHEEN_Enabled,  ///< Instruction cache enabled.
-    NRF_NVMC_ICACHE_ENABLE_WITH_PROFILING = NVMC_ICACHECNF_CACHEEN_Enabled | ///< Instruction cache with cache profiling enabled.
+    NRF_NVMC_ICACHE_DISABLE               = NVMC_ICACHECNF_CACHEEN_Disabled, ///< Instruction Cache disabled.
+    NRF_NVMC_ICACHE_ENABLE                = NVMC_ICACHECNF_CACHEEN_Enabled,  ///< Instruction Cache enabled.
+    NRF_NVMC_ICACHE_ENABLE_WITH_PROFILING = NVMC_ICACHECNF_CACHEEN_Enabled | ///< Instruction Cache with cache profiling enabled.
                                             NVMC_ICACHECNF_CACHEPROFEN_Msk
 } nrf_nvmc_icache_config_t;
 #endif // defined(NRF_NVMC_ICACHE_PRESENT)
@@ -124,7 +124,7 @@ __STATIC_INLINE bool nrf_nvmc_ready_check(NRF_NVMC_Type const * p_reg);
  *
  * @retval true  NVMC can accept the next write. It will be buffered and will be taken
  *               into account as soon as the ongoing write operation is completed.
- * @retval false NVMC is busy and cannot accept next write yet.
+ * @retval false NVMC is busy and cannot accept the next write yet.
  */
 __STATIC_INLINE bool nrf_nvmc_write_ready_check(NRF_NVMC_Type const * p_reg);
 #endif // defined(NVMC_READYNEXT_READYNEXT_Msk) || defined(__NRFX_DOXYGEN__)
@@ -132,8 +132,8 @@ __STATIC_INLINE bool nrf_nvmc_write_ready_check(NRF_NVMC_Type const * p_reg);
 /**
  * @brief Function for setting the NVMC mode.
  *
- * It is strongly recommended to only activate erase and write modes when they are actively used.
- * If instruction cache (ICache) is present, enabling write or erase will
+ * Only activate erase and write modes when they are actively used.
+ * If Instruction Cache (ICache) is present, enabling write or erase will
  * invalidate the cache and keep it invalidated.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
@@ -216,7 +216,7 @@ __STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
 
 #if defined(NRF_NVMC_ICACHE_PRESENT)
 /**
- * @brief Function for applying instruction cache (ICache) configuration.
+ * @brief Function for applying the Instruction Cache (ICache) configuration.
  *
  * Enabling the cache can increase CPU performance and reduce power
  * consumption by reducing the number of wait cycles and the number
@@ -239,7 +239,7 @@ __STATIC_INLINE void nrf_nvmc_icache_config_set(NRF_NVMC_Type *          p_reg,
 __STATIC_INLINE bool nrf_nvmc_icache_enable_check(NRF_NVMC_Type const * p_reg);
 
 /**
- * @brief Function for checking if ICache profiling option is enabled.
+ * @brief Function for checking if the ICache profiling option is enabled.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  *
@@ -267,7 +267,7 @@ __STATIC_INLINE uint32_t nrf_nvmc_icache_hit_get(NRF_NVMC_Type const * p_reg);
 __STATIC_INLINE uint32_t nrf_nvmc_icache_miss_get(NRF_NVMC_Type const * p_reg);
 
 /**
- * @brief Function for resetting ICache hit and miss counters.
+ * @brief Function for resetting the ICache hit and miss counters.
  *
  * @param[in] p_reg Pointer to the peripheral register structure.
  */
@@ -306,7 +306,7 @@ __STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
                                                uint32_t        page_addr)
 {
 #if defined(NRF51)
-    /* On nRF51, the code area can be divided into two regions CR0 and CR1.
+    /* On nRF51, the code area can be divided into two regions: CR0 and CR1.
      * The length of CR0 is specified in the CLENR0 register of UICR.
      * If CLENR0 contains the 0xFFFFFFFF value,  CR0 is not set.
      * Moreover, the page from CR0 can be written or erased only from code
