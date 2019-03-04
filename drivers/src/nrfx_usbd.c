@@ -2040,7 +2040,7 @@ void nrfx_usbd_ep_default_config(void)
                                    NRF_USBD_INT_ENDISOOUT0_MASK
     );
     nrf_usbd_int_enable(NRF_USBD, NRF_USBD_INT_ENDEPIN0_MASK | NRF_USBD_INT_ENDEPOUT0_MASK);
-    nrf_usbd_ep_all_disable(NRF_USBD);
+    nrf_usbd_ep_default_config(NRF_USBD);
 }
 
 nrfx_err_t nrfx_usbd_ep_transfer(
