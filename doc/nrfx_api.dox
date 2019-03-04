@@ -2,6 +2,9 @@
 @defgroup nrfx_drivers Drivers
 @{
 @brief List of all drivers available in nrfx.
+
+@defgroup nrf_aar AAR
+
 @defgroup nrf_adc ADC
 
 @defgroup nrf_acl ACL
