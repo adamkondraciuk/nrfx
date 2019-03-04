@@ -93,6 +93,16 @@ typedef enum
 #endif
 } nrf_nvmc_mode_t;
 
+#if defined(NVMC_CONFIGNS_WEN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Non-secure NVMC modes. */
+typedef enum
+{
+    NRF_NVMC_NS_MODE_READONLY = NVMC_CONFIGNS_WEN_Ren, ///< Non-secure NVMC in read-only mode.
+    NRF_NVMC_NS_MODE_WRITE    = NVMC_CONFIGNS_WEN_Wen, ///< Non-secure NVMC in read and write mode.
+    NRF_NVMC_NS_MODE_ERASE    = NVMC_CONFIGNS_WEN_Een, ///< Non-secure NVMC in read and erase mode.
+} nrf_nvmc_ns_mode_t;
+#endif
+
 #if defined(NRF_NVMC_ICACHE_PRESENT)
 /** @brief NVMC ICache configuration. */
 typedef enum
@@ -149,8 +159,8 @@ __STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
  * @param[in] p_reg Pointer to the peripheral register structure.
  * @param[in] mode  Desired operating mode for NVMC.
  */
-__STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type * p_reg,
-                                                 nrf_nvmc_mode_t mode);
+__STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type *    p_reg,
+                                                 nrf_nvmc_ns_mode_t mode);
 #endif
 
 /**
@@ -295,8 +305,8 @@ __STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
 }
 
 #if defined(NVMC_CONFIGNS_WEN_Msk)
-__STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type * p_reg,
-                                                 nrf_nvmc_mode_t mode)
+__STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type *    p_reg,
+                                                 nrf_nvmc_ns_mode_t mode)
 {
     p_reg->CONFIGNS = (uint32_t)mode;
 }

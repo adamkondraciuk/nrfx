@@ -120,12 +120,30 @@ static uint32_t partial_word_create(uint32_t addr, uint8_t const * bytes, uint32
     return value32;
 }
 
-static void nvmc_mode_set(nrf_nvmc_mode_t mode)
+static void nvmc_readonly_mode_set(void)
 {
 #if defined(NRF_TRUSTZONE_NONSECURE)
-    nrf_nvmc_nonsecure_mode_set(NRF_NVMC, mode);
+    nrf_nvmc_nonsecure_mode_set(NRF_NVMC, NRF_NVMC_NS_MODE_READONLY);
 #else
-    nrf_nvmc_mode_set(NRF_NVMC, mode);
+    nrf_nvmc_mode_set(NRF_NVMC, NRF_NVMC_MODE_READONLY);
+#endif
+}
+
+static void nvmc_write_mode_set(void)
+{
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    nrf_nvmc_nonsecure_mode_set(NRF_NVMC, NRF_NVMC_NS_MODE_WRITE);
+#else
+    nrf_nvmc_mode_set(NRF_NVMC, NRF_NVMC_MODE_WRITE);
+#endif
+}
+
+static void nvmc_erase_mode_set(void)
+{
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    nrf_nvmc_nonsecure_mode_set(NRF_NVMC, NRF_NVMC_NS_MODE_ERASE);
+#else
+    nrf_nvmc_mode_set(NRF_NVMC, NRF_NVMC_MODE_ERASE);
 #endif
 }
 
@@ -155,21 +173,21 @@ void nrfx_nvmc_page_erase(uint32_t addr)
 {
     NRFX_ASSERT(addr < flash_total_size_get());
 
-    nvmc_mode_set(NRF_NVMC_MODE_ERASE);
+    nvmc_erase_mode_set();
     nrf_nvmc_page_erase_start(NRF_NVMC, page_first_word_addr_get(addr));
     while (!nrf_nvmc_ready_check(NRF_NVMC))
     {}
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 }
 
 nrfx_err_t nrfx_nvmc_uicr_erase(void)
 {
 #if defined(NVMC_ERASEUICR_ERASEUICR_Msk)
-    nvmc_mode_set(NRF_NVMC_MODE_ERASE);
+    nvmc_erase_mode_set();
     nrf_nvmc_uicr_erase_start(NRF_NVMC);
     while (!nrf_nvmc_ready_check(NRF_NVMC))
     {}
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
     return NRFX_SUCCESS;
 #else
     return NRFX_ERROR_NOT_SUPPORTED;
@@ -178,11 +196,11 @@ nrfx_err_t nrfx_nvmc_uicr_erase(void)
 
 void nrfx_nvmc_all_erase(void)
 {
-    nvmc_mode_set(NRF_NVMC_MODE_ERASE);
+    nvmc_erase_mode_set();
     nrf_nvmc_erase_all_start(NRF_NVMC);
     while (!nrf_nvmc_ready_check(NRF_NVMC))
     {}
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 }
 
 #if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
@@ -202,15 +220,15 @@ bool nrfx_nvmc_page_partial_erase_continue(void)
     uint32_t duration_ms = nrf_nvmc_partial_erase_duration_get(NRF_NVMC);
 
 #if defined(NVMC_CONFIG_WEN_PEen)
-    nvmc_mode_set(NRF_NVMC_MODE_PARTIAL_ERASE);
+    nrf_nvmc_mode_set(NRF_NVMC, NRF_NVMC_MODE_PARTIAL_ERASE);
 #else
-    nvmc_mode_set(NRF_NVMC_MODE_ERASE);
+    nrf_nvmc_mode_set(NRF_NVMC, NRF_NVMC_MODE_ERASE);
 #endif
 
     nrf_nvmc_page_partial_erase_start(NRF_NVMC, m_partial_erase_page_addr);
     while (!nrf_nvmc_ready_check(NRF_NVMC))
     {}
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 
     m_partial_erase_time_elapsed += duration_ms;
     if (m_partial_erase_time_elapsed < NVMC_PAGE_ERASE_DURATION_MS)
@@ -254,18 +272,18 @@ void nrfx_nvmc_word_write(uint32_t addr, uint32_t value)
     NRFX_ASSERT(addr < flash_total_size_get());
     NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
 
-    nvmc_mode_set(NRF_NVMC_MODE_WRITE);
+    nvmc_write_mode_set();
 
     nvmc_word_write(addr, value);
 
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 }
 
 void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
 {
     NRFX_ASSERT(addr < flash_total_size_get());
 
-    nvmc_mode_set(NRF_NVMC_MODE_WRITE);
+    nvmc_write_mode_set();
 
     uint32_t leftover = addr % NVMC_BYTES_IN_WORD;
     uint8_t const * bytes_src = (uint8_t const *)src;
@@ -318,7 +336,7 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
         nvmc_word_write(addr, partial_word_create(addr, bytes_src, leftover));
     }
 
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 }
 
 void nrfx_nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
@@ -327,11 +345,11 @@ void nrfx_nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
     NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
     NRFX_ASSERT(nrfx_is_word_aligned(src));
 
-    nvmc_mode_set(NRF_NVMC_MODE_WRITE);
+    nvmc_write_mode_set();
 
     nvmc_words_write(addr, src, num_words);
 
-    nvmc_mode_set(NRF_NVMC_MODE_READONLY);
+    nvmc_readonly_mode_set();
 }
 
 #endif // NRFX_CHECK(NRFX_NVMC_ENABLED)
