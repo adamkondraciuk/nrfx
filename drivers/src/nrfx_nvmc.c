@@ -86,7 +86,7 @@ static uint32_t flash_page_size_get(void)
 
 #if defined(NRF51) || defined(NRF52_SERIES)
     flash_page_size = nrf_ficr_codepagesize_get(NRF_FICR);
-#elif defined(NVMC_FLASH_TOTAL_SIZE)
+#elif defined(NVMC_FLASH_PAGE_SIZE)
     flash_page_size = NVMC_FLASH_PAGE_SIZE;
 #else
     #error "Cannot determine Flash page size for given SoC."
@@ -95,10 +95,10 @@ static uint32_t flash_page_size_get(void)
     return flash_page_size;
 }
 
-static uint32_t page_first_word_addr_get(uint32_t addr)
+static bool is_page_aligned_check(uint32_t addr)
 {
-    uint32_t page_size = flash_page_size_get();
-    return (addr - (addr % page_size));
+    /* If the modulo operation returns '0', then the address is aligned. */
+    return !(addr % flash_page_size_get());
 }
 
 static uint32_t partial_word_create(uint32_t addr, uint8_t const * bytes, uint32_t bytes_count)
@@ -169,15 +169,22 @@ static void nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words
     }
 }
 
-void nrfx_nvmc_page_erase(uint32_t addr)
+nrfx_err_t nrfx_nvmc_page_erase(uint32_t addr)
 {
     NRFX_ASSERT(addr < flash_total_size_get());
 
+    if (!is_page_aligned_check(addr))
+    {
+        return NRFX_ERROR_INVALID_ADDR;
+    }
+
     nvmc_erase_mode_set();
-    nrf_nvmc_page_erase_start(NRF_NVMC, page_first_word_addr_get(addr));
+    nrf_nvmc_page_erase_start(NRF_NVMC, addr);
     while (!nrf_nvmc_ready_check(NRF_NVMC))
     {}
     nvmc_readonly_mode_set();
+
+    return NRFX_SUCCESS;
 }
 
 nrfx_err_t nrfx_nvmc_uicr_erase(void)
@@ -204,13 +211,20 @@ void nrfx_nvmc_all_erase(void)
 }
 
 #if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
-void nrfx_nvmc_page_partial_erase_init(uint32_t addr, uint32_t duration_ms)
+nrfx_err_t nrfx_nvmc_page_partial_erase_init(uint32_t addr, uint32_t duration_ms)
 {
     NRFX_ASSERT(addr < flash_total_size_get());
 
+    if (!is_page_aligned_check(addr))
+    {
+        return NRFX_ERROR_INVALID_ADDR;
+    }
+
     m_partial_erase_time_elapsed = 0;
-    m_partial_erase_page_addr = page_first_word_addr_get(addr);
+    m_partial_erase_page_addr = addr;
     nrf_nvmc_partial_erase_duration_set(NRF_NVMC, duration_ms);
+
+    return NRFX_SUCCESS;
 }
 
 bool nrfx_nvmc_page_partial_erase_continue(void)

@@ -27,10 +27,12 @@ extern "C" {
  *       the CPU may be halted during the operation.
  *       Refer to the Product Specification for more information.
  *
- * @param address Address pointing to the memory location contained
- *                in the page to be erased.
+ * @param address Address of the first word in the page to erase.
+ *
+ * @retval NRFX_SUCCESS            Page erase complete.
+ * @retval NRFX_ERROR_INVALID_ADDR Address is not aligned to the size of the page.
  */
-void nrfx_nvmc_page_erase(uint32_t address);
+nrfx_err_t nrfx_nvmc_page_erase(uint32_t address);
 
 /**
  * @brief Function for erasing the user information configuration register (UICR).
@@ -58,13 +60,15 @@ void nrfx_nvmc_all_erase(void);
  * This function initiates a partial erase with the specified duration.
  * To execute each part of the partial erase, use @ref nrfx_nvmc_page_partial_erase_continue.
  *
- * @param address     Address pointing to the memory location contained in
- *                    the page to be erased.
+ * @param address     Address of the first word in the page to erase.
  * @param duration_ms Time in milliseconds that each partial erase will take.
+ *
+ * @retval NRFX_SUCCESS            Page erase complete.
+ * @retval NRFX_ERROR_INVALID_ADDR Address is not aligned to the size of the page.
  *
  * @sa nrfx_nvmc_page_partial_erase_continue()
  */
-void nrfx_nvmc_page_partial_erase_init(uint32_t address, uint32_t duration_ms);
+nrfx_err_t nrfx_nvmc_page_partial_erase_init(uint32_t address, uint32_t duration_ms);
 
 /**
  * @brief Function for performing a part of the complete page erase (also known as partial erase).
