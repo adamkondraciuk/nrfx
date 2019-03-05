@@ -55,7 +55,7 @@ __STATIC_INLINE bool nrf_aar_event_check(NRF_AAR_Type const * p_reg,
  * @brief Function for clearing the specified AAR event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Event to clear.
+ * @param[in] event Event to be cleared.
  */
 __STATIC_INLINE void nrf_aar_event_clear(NRF_AAR_Type *  p_reg,
                                          nrf_aar_event_t event);
@@ -64,7 +64,7 @@ __STATIC_INLINE void nrf_aar_event_clear(NRF_AAR_Type *  p_reg,
  * @brief Function for getting the address of the specified AAR event register.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Specified event.
+ * @param[in] event Event to get the address of.
  *
  * @return Address of the specified event register.
  */
@@ -80,13 +80,13 @@ __STATIC_INLINE uint32_t nrf_aar_event_address_get(NRF_AAR_Type const * p_reg,
 __STATIC_INLINE void nrf_aar_int_enable(NRF_AAR_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for retrieving the state of the specified interrupt.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupt to be checked.
+ * @param[in] mask  Mask of the interrupt to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @retval true  Interrupt is enabled.
+ * @retval false Interrupt is not enabled.
  */
 __STATIC_INLINE bool nrf_aar_int_enable_check(NRF_AAR_Type const * p_reg,
                                               nrf_aar_int_mask_t   mask);
@@ -111,7 +111,7 @@ __STATIC_INLINE void nrf_aar_task_trigger(NRF_AAR_Type * p_reg, nrf_aar_task_t t
  * @brief Function for getting the address of a specific AAR task register.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param task  Requested task.
+ * @param task  Requested AAR task.
  *
  * @return Address of the specified task register.
  */
@@ -135,7 +135,7 @@ __STATIC_INLINE void nrf_aar_disable(NRF_AAR_Type * p_reg);
 /**
  * @brief Function for setting the pointer to the Identity Resolving Keys (IRK) data structure.
  *
- * Size of the provided data structure must correspond to the number of keys available.
+ * The size of the provided data structure must correspond to the number of keys available.
  * Each key occupies 16 bytes.
  *
  * @param p_reg   Pointer to the structure of registers of the peripheral.
@@ -146,7 +146,7 @@ __STATIC_INLINE void nrf_aar_disable(NRF_AAR_Type * p_reg);
 __STATIC_INLINE void nrf_aar_irk_pointer_set(NRF_AAR_Type * p_reg, uint8_t const * irk_ptr);
 
 /**
- * @brief Function for getting the pointer to the provided Identity Resolving Keys (IRK)
+ * @brief Function for getting the pointer to the Identity Resolving Keys
  *        data structure.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
@@ -156,7 +156,8 @@ __STATIC_INLINE void nrf_aar_irk_pointer_set(NRF_AAR_Type * p_reg, uint8_t const
 __STATIC_INLINE uint8_t const * nrf_aar_irk_pointer_get(NRF_AAR_Type const * p_reg);
 
 /**
- * @brief Function for setting the number of keys available in the IRK data structure.
+ * @brief Function for setting the number of keys available in the Identity Resolving Keys
+ *        data structure.
  *
  * @param p_reg   Pointer to the structure of registers of the peripheral.
  * @param irk_num Number of keys available in the IRK data structure. Maximum is 16.
@@ -167,7 +168,8 @@ __STATIC_INLINE uint8_t const * nrf_aar_irk_pointer_get(NRF_AAR_Type const * p_r
 __STATIC_INLINE void nrf_aar_irk_number_set(NRF_AAR_Type * p_reg, uint8_t irk_num);
 
 /**
- * @brief Function for getting the number of keys available in the IRK data structure.
+ * @brief Function for getting the number of keys available in the Identity Resolving Keys
+ *        data structure.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -178,16 +180,16 @@ __STATIC_INLINE uint8_t nrf_aar_irk_number_get(NRF_AAR_Type const * p_reg);
 /**
  * @brief Function for setting the pointer to the resolvable address.
  *
- * Resolvable address must consist of 6 bytes.
+ * The resolvable address must consist of 6 bytes.
  *
  * @param p_reg    Pointer to the structure of registers of the peripheral.
- * @param addr_ptr Pointer to the address to resolve using available IRK keys.
+ * @param addr_ptr Pointer to the address to resolve using the available IRK keys.
  *                 Must point to the Data RAM region.
  */
 __STATIC_INLINE void nrf_aar_addr_pointer_set(NRF_AAR_Type * p_reg, uint8_t const * addr_ptr);
 
 /**
- * @brief Function for getting the pointer to the provided resolvable address.
+ * @brief Function for getting the pointer to the resolvable address.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -198,8 +200,8 @@ __STATIC_INLINE uint8_t const * nrf_aar_addr_pointer_get(NRF_AAR_Type const * p_
 /**
  * @brief Function for setting the pointer to the scratch data area.
  *
- * Scratch data area is used for temporary storage during address resolution procedure.
- * A space of minimum 3 bytes must be reserved for scratch data area.
+ * The scratch data area is used for temporary storage during the address resolution procedure.
+ * A space of minimum 3 bytes must be reserved for the scratch data area.
  *
  * @param p_reg       Pointer to the structure of registers of the peripheral.
  * @param scratch_ptr Pointer to the scratch data area. Must point to the Data RAM region.
@@ -207,7 +209,7 @@ __STATIC_INLINE uint8_t const * nrf_aar_addr_pointer_get(NRF_AAR_Type const * p_
 __STATIC_INLINE void nrf_aar_scratch_pointer_set(NRF_AAR_Type * p_reg, uint8_t * scratch_ptr);
 
 /**
- * @brief Function for getting the pointer to the provided scratch data area.
+ * @brief Function for getting the pointer to the scratch data area.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -216,16 +218,16 @@ __STATIC_INLINE void nrf_aar_scratch_pointer_set(NRF_AAR_Type * p_reg, uint8_t *
 __STATIC_INLINE uint8_t * nrf_aar_scratch_pointer_get(NRF_AAR_Type const * p_reg);
 
 /**
- * @brief Function for getting the index of the IRK that was used last time
- *        an address was resolved.
+ * @brief Function for getting the index of the Identity Resolving Key that was used
+ *        the last time an address was resolved.
  *
- * This function can be used to get the IRK index that matched resolvable address,
+ * This function can be used to get the IRK index that matched the resolvable address,
  * provided that @ref NRF_AAR_EVENT_RESOLVED occured. Otherwise, it will return
  * the index of the last IRK stored in the IRK data structure.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return The index of the IRK that was used last time an address was resolved.
+ * @return The index of the IRK that was used the last time an address was resolved.
  */
 __STATIC_INLINE uint8_t nrf_aar_resolution_status_get(NRF_AAR_Type const * p_reg);
 
