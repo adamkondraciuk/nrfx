@@ -29,6 +29,8 @@
 
 @defgroup nrf_i2s I2S
 
+@defgroup nrf_ipc IPC
+
 @defgroup nrf_kmu KMU
 
 @defgroup nrf_lpcomp LPCOMP
