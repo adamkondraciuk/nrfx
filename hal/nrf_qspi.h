@@ -452,7 +452,7 @@ __STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *        
                                                          const nrf_qspi_cinstr_conf_t * p_config);
 
 /**
- * @brief Function for checking if a custom instruction long transfer is ongoing.
+ * @brief Function for checking whether a custom instruction long transfer is ongoing.
  *
  * @param[in] p_reg    Pointer to the peripheral register structure.
  *
@@ -462,7 +462,7 @@ __STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *        
 __STATIC_INLINE bool nrf_qspi_cinstr_long_transfer_is_ongoing(NRF_QSPI_Type const * p_reg);
 
 /**
- * @brief Function for continuing custom instruction long transfer.
+ * @brief Function for continuing a custom instruction long transfer.
  *
  * @param[in] p_reg    Pointer to the peripheral register structure.
  * @param[in] length   Length of the custom instruction data.

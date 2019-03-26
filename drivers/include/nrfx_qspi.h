@@ -241,8 +241,8 @@ nrfx_err_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
 /**
  * @brief Function for starting the long frame mode.
  *
- * The long frame mode is a mechanism that permits arbitrary byte length custom instructions.
- * Use this function to initiate custom transaction by sending custom instruction opcode.
+ * The long frame mode is a mechanism that allows for arbitrary byte length custom instructions.
+ * Use this function to initiate a custom transaction by sending custom instruction opcode.
  * To send and receive data, use @ref nrfx_qspi_lfm_xfer.
  *
  * @param[in] p_config Pointer to the structure with custom instruction opcode and transfer
@@ -257,11 +257,11 @@ nrfx_err_t nrfx_qspi_lfm_start(nrf_qspi_cinstr_conf_t const * p_config);
 /**
  * @brief Function for sending and receiving data in long frame mode.
  *
- * Both specified buffers must be at least @ref transfer_length bytes in size.
+ * Both specified buffers must be at least @p transfer_length bytes in size.
  *
  * @param[in]  p_tx_buffer     Pointer to the array with data to send.
  *                             Can be NULL if there is nothing to send.
- * @param[out] p_rx_buffer     Pointer to the array for data to receive.
+ * @param[out] p_rx_buffer     Pointer to the array for receiving data.
  *                             Can be NULL if there is nothing to receive.
  * @param[in]  transfer_length Number of bytes to send and receive.
  * @param[in]  finalize        True if custom instruction long frame mode is to be finalized

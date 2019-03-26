@@ -35,7 +35,7 @@ typedef struct
 {
     nrfx_qspi_handler_t handler;   /**< Handler. */
     nrfx_drv_state_t    state;     /**< Driver state. */
-    volatile bool       is_busy;   /**< Information if the current operation is performed. */
+    volatile bool       is_busy;   /**< Whether the current operation is performed. */
     void *              p_context; /**< Driver context used in interrupt. */
 } qspi_control_block_t;
 
