@@ -976,7 +976,6 @@ uint32_t nrf_usbd_eventcause_get_and_clear(void)
     uint32_t ret;
     ret = nrf_usbd_eventcause_get();
     nrf_usbd_eventcause_clear(ret);
-    (void) NRF_USBD->EVENTCAUSE;
     return ret;
 }
 
@@ -1010,7 +1009,6 @@ uint32_t nrf_usbd_epstatus_get(void)
 void nrf_usbd_epstatus_clear(uint32_t flags)
 {
     NRF_USBD->EPSTATUS = flags;
-    (void) NRF_USBD->EPSTATUS;
 }
 
 uint32_t nrf_usbd_epstatus_get_and_clear(void)
@@ -1029,7 +1027,6 @@ uint32_t nrf_usbd_epdatastatus_get(void)
 void nrf_usbd_epdatastatus_clear(uint32_t flags)
 {
     NRF_USBD->EPDATASTATUS = flags;
-    (void) NRF_USBD->EPDATASTATUS;
 }
 
 uint32_t nrf_usbd_epdatastatus_get_and_clear(void)
@@ -1141,7 +1138,6 @@ void nrf_usbd_dtoggle_set(uint8_t ep, nrf_usbd_dtoggle_t op)
     NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->DTOGGLE = ep | (NRF_USBD_DTOGGLE_NOP << USBD_DTOGGLE_VALUE_Pos);
-    (void) NRF_USBD->DTOGGLE;
     NRF_USBD->DTOGGLE = ep | (op << USBD_DTOGGLE_VALUE_Pos);
     (void) NRF_USBD->DTOGGLE;
 }
@@ -1178,12 +1174,10 @@ void nrf_usbd_ep_enable(uint8_t ep)
     if (NRF_USBD_EPIN_CHECK(ep))
     {
         NRF_USBD->EPINEN |= 1UL << epnr;
-        (void) NRF_USBD->EPINEN;
     }
     else
     {
         NRF_USBD->EPOUTEN |= 1UL << epnr;
-        (void) NRF_USBD->EPOUTEN;
     }
 }
 
@@ -1195,35 +1189,29 @@ void nrf_usbd_ep_disable(uint8_t ep)
     if (NRF_USBD_EPIN_CHECK(ep))
     {
         NRF_USBD->EPINEN &= ~(1UL << epnr);
-        (void) NRF_USBD->EPINEN;
     }
     else
     {
         NRF_USBD->EPOUTEN &= ~(1UL << epnr);
-        (void) NRF_USBD->EPOUTEN;
     }
 }
 
 void nrf_usbd_ep_all_disable(void)
 {
     NRF_USBD->EPINEN  = USBD_EPINEN_IN0_Enable << USBD_EPINEN_IN0_Pos;
-    (void) NRF_USBD->EPINEN;
     NRF_USBD->EPOUTEN = USBD_EPOUTEN_OUT0_Enable << USBD_EPOUTEN_OUT0_Pos;
-    (void) NRF_USBD->EPOUTEN;
 }
 
 void nrf_usbd_ep_stall(uint8_t ep)
 {
     NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->EPSTALL = (USBD_EPSTALL_STALL_Stall << USBD_EPSTALL_STALL_Pos) | ep;
-    (void) NRF_USBD->EPSTALL;
 }
 
 void nrf_usbd_ep_unstall(uint8_t ep)
 {
     NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     NRF_USBD->EPSTALL = (USBD_EPSTALL_STALL_UnStall << USBD_EPSTALL_STALL_Pos) | ep;
-    (void) NRF_USBD->EPSTALL;
 }
 
 void nrf_usbd_isosplit_set(nrf_usbd_isosplit_t split)
