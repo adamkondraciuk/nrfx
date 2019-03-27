@@ -1,6 +1,23 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [1.7.0] - 2019-03-28
+### Added
+- Added drivers for NVMC and TEMP.
+- Added HALs: AAR and FICR.
+- Added support for the custom instruction long frame mode in the QSPI driver.
+
+### Changed
+- Reworked HAL for NVMC. Now it can be used for all SoCs supported by nrfx.
+- Reworked HAL for TEMP.
+- Improved documentation and doxygen configuration file. Now documentation is more precise and can be generated without warnings with newer doxygen versions.
+- Improved the UARTE driver to consume less current after the TX operation. Now at the end of the transmission the transmitter is turned off by the STOPTX task.
+- Improved C++ support in drivers. Now fields in structures are filled up in the correct order.
+- Changed the type used for the amount of data to 'size_t' in the TWIS driver.
+
+### Fixed
+- Fixed a race condition in the USBD driver. It could occur when an IN transfer was interrupted by an OUT transaction, which in turn was interrupted by a process with a higher priority.
+
 ## [1.6.2] - 2019-02-12
 ### Added
 - Added the possibility to use the macro NRFX_COREDEP_DELAY_US_LOOP_CYCLES to specify the number of cycles consumed by one iteration of the internal loop in the function nrfx_coredep_delay_us().
