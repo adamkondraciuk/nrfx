@@ -20,7 +20,7 @@ extern "C" {
 /** @brief Structure for TEMP configuration. */
 typedef struct
 {
-    uint8_t interrupt_priority;    /**< interrupt priority. */
+    uint8_t interrupt_priority;    /**< Interrupt priority. */
 } nrfx_temp_config_t;
 
 /** @brief TEMP default configuration. */
@@ -34,7 +34,7 @@ typedef struct
  *
  * @param temperature  Raw temperature in a 2's complement signed value
  *                     representation. This value can be converted to Celsius
- *                     scale using @ref nrfx_temp_calculate() function.
+ *                     scale using the @ref nrfx_temp_calculate() function.
  */
 typedef void (* nrfx_temp_data_handler_t)(int32_t raw_temperature);
 
@@ -42,7 +42,7 @@ typedef void (* nrfx_temp_data_handler_t)(int32_t raw_temperature);
  * @brief Function for initializing the TEMP driver.
  *
  * @param[in] p_config  Pointer to the structure with initial configuration.
- * @param[in] handler   Data handler provided by the user. If not provided
+ * @param[in] handler   Data handler provided by the user. If not provided,
  *                      the driver is initialized in blocking mode.
  *
  * @retval NRFX_SUCCESS                    Driver was successfully initialized.
@@ -57,21 +57,21 @@ void nrfx_temp_uninit(void);
  * @brief Function for getting the temperature measurement in a 2's complement
  *        signed value representation.
  *
- * This function returns last value prepared by the TEMP peripheral.
- * In blocking mode should be used after calling to the @ref nrfx_temp_measure()
- * function. In non blocking raw value is passed to handler. However
- * this function can be used to read value of last conversion.
+ * This function returns the last value prepared by the TEMP peripheral.
+ * In blocking mode, it should be used after calling the @ref nrfx_temp_measure()
+ * function. In non-blocking mode, it is called internally by the driver,
+ * and the value it returns is passed to the data handler.
  *
- * @retval Temperature measurement result in a 2's complement signed value
+ * @return Temperature measurement result in a 2's complement signed value
  *         representation.
  */
 __STATIC_INLINE int32_t nrfx_temp_result_get(void);
 
 /**
- * @brief Function for calculate temperature value in Celsius scale from raw data.
+ * @brief Function for calculating the temperature value in Celsius scale from raw data.
  *
- * Returned temperature value is in Celsius scale, multiplied by 100
- * (e.g. actual temperature 25.75[C] will be returned as 2575 signed integer).
+ * The returned temperature value is in Celsius scale, multiplied by 100
+ * For example, the actual temperature of 25.75[C] will be returned as a 2575 signed integer.
  * Measurement accuracy is 0.25[C].
  *
  * @param[in] raw_measurement Temperature value in a 2's complement signed
@@ -85,20 +85,20 @@ int32_t nrfx_temp_calculate(int32_t raw_measurement);
  * @brief Function for starting the temperature measurement.
  *
  * Non-blocking mode:
- * This function returns immediately. After measurement, handler specified
- * during initialization will be called, with measurement result as parameter.
+ * This function returns immediately. After a measurement, the handler specified
+ * during initialization is called, with measurement result as the parameter.
  *
  * Blocking mode:
- * This function is waiting until measurement finished. Value should be read
- * using @ref nrfx_temp_result_get() function.
+ * This function waits until the measurement is finished. The value should be read
+ * using the @ref nrfx_temp_result_get() function.
  *
  * @retval NRFX_SUCCESS        In non-blocking mode: Measurement was started.
- *                             Interrupt will be generated soon.
+ *                             An interrupt will be generated soon. <br>
  *                             In blocking mode:
  *                             Measurement was started and finished. Data can
- *                             be read using @ref nrfx_temp_result_get() function.
+ *                             be read using the @ref nrfx_temp_result_get() function.
  * @retval NRFX_ERROR_INTERNAL In non-blocking mode:
- *                             Not applicable.
+ *                             Not applicable. <br>
  *                             In blocking mode:
  *                             Measurement data ready event did not occur.
  */

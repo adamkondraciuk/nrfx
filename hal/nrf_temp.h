@@ -23,7 +23,7 @@ extern "C" {
 #define MASK_SIGN_EXTENSION (0xFFFFFC00UL)
 
 /**
- * @brief Function for preparing the temp module for temperature measurement.
+ * @brief Function for preparing the TEMP module for temperature measurement.
  *
  * This function initializes the TEMP module and writes to the hidden configuration register.
  */
@@ -36,7 +36,7 @@ static __INLINE void nrf_temp_init(void)
 /**
  * @brief Function for reading temperature measurement.
  *
- * The function reads the 10 bit 2's complement value and transforms it to a 32 bit 2's complement value.
+ * The function reads the 10-bit 2's complement value and transforms it to a 32-bit 2's complement value.
  */
 static __INLINE int32_t nrf_temp_read(void)
 {
@@ -157,7 +157,7 @@ __STATIC_INLINE bool nrf_temp_event_check(NRF_TEMP_Type const * p_reg, nrf_temp_
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @retval Temperature value register contents.
+ * @return Temperature value register contents.
  */
 __STATIC_INLINE int32_t nrf_temp_result_get(NRF_TEMP_Type const * p_reg);
 
