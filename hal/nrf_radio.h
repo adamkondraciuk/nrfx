@@ -208,7 +208,7 @@ typedef enum
 } nrf_radio_cca_mode_t;
 #endif // defined(RADIO_CCACTRL_CCAMODE_Msk) || defined(__NRFX_DOXYGEN__)
 
-/** @brief Types of RADIO States. */
+/** @brief Types of RADIO states. */
 typedef enum
 {
     NRF_RADIO_STATE_DISABLED  = RADIO_STATE_STATE_Disabled,  /**< No operations are going on inside the radio and the power consumption is at a minimum. */
@@ -433,7 +433,7 @@ __STATIC_INLINE bool nrf_radio_int_enable_check(nrf_radio_int_mask_t int_mask);
 /**
  * @brief Function for getting CRC status of last received packet.
  *
- * @retval true  The packet was received without CRC error .
+ * @retval true  The packet was received without CRC error.
  * @retval false The packet was received with CRC error.
  */
 __STATIC_INLINE bool nrf_radio_crc_status_check(void);
@@ -886,7 +886,7 @@ __STATIC_INLINE void nrf_radio_power_set(bool radio_power);
 
 __STATIC_INLINE void nrf_radio_task_trigger(nrf_radio_task_t task)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_RADIO + task)) = 0x1UL;
+    *((volatile uint32_t *)((uint8_t *)NRF_RADIO + (uint32_t)task)) = 0x1UL;
 }
 
 __STATIC_INLINE uint32_t nrf_radio_task_address_get(nrf_radio_task_t task)
@@ -896,16 +896,16 @@ __STATIC_INLINE uint32_t nrf_radio_task_address_get(nrf_radio_task_t task)
 
 __STATIC_INLINE void nrf_radio_event_clear(nrf_radio_event_t event)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_RADIO + event)) = 0x0UL;
+    *((volatile uint32_t *)((uint8_t *)NRF_RADIO + (uint32_t)event)) = 0x0UL;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_RADIO + event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_RADIO + (uint32_t)event));
     (void)dummy;
 #endif
 }
 
 __STATIC_INLINE bool nrf_radio_event_check(nrf_radio_event_t event)
 {
-    return (bool) *((volatile uint32_t *)((uint8_t *)NRF_RADIO + event));
+    return (bool) *((volatile uint32_t *)((uint8_t *)NRF_RADIO + (uint32_t)event));
 }
 
 __STATIC_INLINE uint32_t nrf_radio_event_address_get(nrf_radio_event_t event)

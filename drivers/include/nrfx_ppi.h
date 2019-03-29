@@ -18,12 +18,12 @@ extern "C" {
 #endif
 
 #if !defined (NRFX_PPI_CHANNELS_USED) || defined(__NRFX_DOXYGEN__)
-/** @brief Bitfield representing PPI channels used by external libraries or software. */
+/** @brief Bitfield representing PPI channels used by external modules. */
 #define NRFX_PPI_CHANNELS_USED 0
 #endif
 
 #if !defined(NRFX_PPI_GROUPS_USED) || defined(__NRFX_DOXYGEN__)
-/** @brief Bitfield representing PPI groups used by external libraries or software. */
+/** @brief Bitfield representing PPI groups used by external modules. */
 #define NRFX_PPI_GROUPS_USED 0
 #endif
 

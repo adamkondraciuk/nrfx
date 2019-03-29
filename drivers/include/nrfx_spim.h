@@ -42,7 +42,7 @@ enum {
 };
 #endif
 
-/** @brief Macro for creating an instance of the SPIM master driver. */
+/** @brief Macro for creating an instance of the SPIM driver. */
 #define NRFX_SPIM_INSTANCE(id)                               \
 {                                                            \
     .p_reg        = NRFX_CONCAT_2(NRF_SPIM, id),             \
@@ -56,7 +56,7 @@ enum {
  */
 #define NRFX_SPIM_PIN_NOT_USED  0xFF
 
-/** @brief Configuration structure of the SPIM master driver instance. */
+/** @brief Configuration structure of the SPIM driver instance. */
 typedef struct
 {
     uint8_t sck_pin;      ///< SCK pin number.
@@ -74,9 +74,9 @@ typedef struct
     uint8_t orc;          ///< Overrun character.
                           /**< This character is used when all bytes from the TX buffer are sent,
                                but the transfer continues due to RX. */
-    nrf_spim_frequency_t frequency; ///< SPI frequency.
-    nrf_spim_mode_t      mode;      ///< SPI mode.
-    nrf_spim_bit_order_t bit_order; ///< SPI bit order.
+    nrf_spim_frequency_t frequency; ///< SPIM frequency.
+    nrf_spim_mode_t      mode;      ///< SPIM mode.
+    nrf_spim_bit_order_t bit_order; ///< SPIM bit order.
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
     uint8_t              dcx_pin;     ///< D/CX pin number (optional).
     uint8_t              rx_delay;    ///< Sample delay for input serial data on MISO.
@@ -95,7 +95,7 @@ typedef struct
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Extended default configuration of the SPIM master instance.
+ * @brief Extended default configuration of the SPIM instance.
  */
     #define NRFX_SPIM_DEFAULT_EXTENDED_CONFIG   \
         .dcx_pin      = NRFX_SPIM_PIN_NOT_USED, \
@@ -176,19 +176,19 @@ typedef enum
     NRFX_SPIM_EVENT_DONE, ///< Transfer done.
 } nrfx_spim_evt_type_t;
 
-/** @brief SPIM master event description with transmission details. */
+/** @brief SPIM event description with transmission details. */
 typedef struct
 {
     nrfx_spim_evt_type_t  type;      ///< Event type.
     nrfx_spim_xfer_desc_t xfer_desc; ///< Transfer details.
 } nrfx_spim_evt_t;
 
-/** @brief SPIM master driver event handler type. */
+/** @brief SPIM driver event handler type. */
 typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
                                          void *                  p_context);
 
 /**
- * @brief Function for initializing the SPI master driver instance.
+ * @brief Function for initializing the SPIM driver instance.
  *
  * This function configures and enables the specified peripheral.
  *
@@ -213,14 +213,14 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
                           void *                     p_context);
 
 /**
- * @brief Function for uninitializing the SPI master driver instance.
+ * @brief Function for uninitializing the SPIM driver instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
 void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
 
 /**
- * @brief Function for starting the SPI data transfer.
+ * @brief Function for starting the SPIM data transfer.
  *
  * Additional options are provided using the @c flags parameter:
  *
@@ -267,7 +267,7 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for starting the SPI data transfer with DCX control.
+ * @brief Function for starting the SPIM data transfer with DCX control.
  *
  * See @ref nrfx_spim_xfer for description of additional options of transfer
  * provided by the @c flags parameter.

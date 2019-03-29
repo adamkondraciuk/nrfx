@@ -24,8 +24,8 @@ extern "C" {
  *
  * This function allocates memory for the ECBDATAPTR.
  *
- * @retval true   If the initialization was successful.
- * @retval false  If the power-on failed.
+ * @retval true  The initialization was successful.
+ * @retval false The power-on failed.
  */
 bool nrf_ecb_init(void);
 
@@ -35,18 +35,18 @@ bool nrf_ecb_init(void);
  * This function avoids unnecessary copying of data if the parameters point to the
  * correct locations in the ECB data structure.
  *
- * @param dst  Result of encryption, 16 bytes will be written.
- * @param src  Source with 16-byte data to be encrypted.
+ * @param dst Result of encryption, 16 bytes will be written.
+ * @param src Source with 16-byte data to be encrypted.
  *
- * @retval true   If the encryption operation completed.
- * @retval false  If the encryption operation did not complete.
+ * @retval true  The encryption operation completed.
+ * @retval false The encryption operation did not complete.
  */
 bool nrf_ecb_crypt(uint8_t * dst, const uint8_t * src);
 
 /**
  * @brief Function for setting the key to be used for encryption.
  *
- * @param key  Pointer to the key. 16 bytes will be read.
+ * @param key Pointer to the key. 16 bytes will be read.
  */
 void nrf_ecb_set_key(const uint8_t * key);
 

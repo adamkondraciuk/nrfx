@@ -115,7 +115,7 @@ __STATIC_INLINE void nrf_ccm_event_clear(NRF_CCM_Type *  p_reg,
                                          nrf_ccm_event_t event);
 
 /**
- * @brief Function for retrieving the state of the UARTE event.
+ * @brief Function for retrieving the state of a specific CCM event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to be checked.

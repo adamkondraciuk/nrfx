@@ -14,7 +14,7 @@ extern "C" {
  * @defgroup nrfx_twim TWIM driver
  * @{
  * @ingroup nrf_twim
- * @brief   Two-Wire Master Interface (TWIM) peripheral driver.
+ * @brief   Two Wire Interface Master with EasyDMA (TWIM) peripheral driver.
  */
 
 /** @brief Structure for the TWI master driver instance. */

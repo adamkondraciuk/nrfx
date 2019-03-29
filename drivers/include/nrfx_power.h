@@ -82,7 +82,7 @@ typedef void (*nrfx_power_pofwarn_event_handler_t)(void);
 
 #if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Event handler for entering and exiting sleep.
+ * @brief Event handler for the sleep events.
  *
  * @param event Event type
  */

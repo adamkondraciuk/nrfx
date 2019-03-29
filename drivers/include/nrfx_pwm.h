@@ -180,7 +180,7 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * const p_instance);
  * sequences must be used (single sequence can be played back only once by
  * the peripheral). Therefore, the provided sequence is internally set and
  * played back as both sequence 0 and sequence 1. Consequently, if the end of
- * sequence notifications is required, events for both sequences must be
+ * sequence notifications are required, events for both sequences must be
  * used (that is, both the @ref NRFX_PWM_FLAG_SIGNAL_END_SEQ0 flag
  * and the @ref NRFX_PWM_FLAG_SIGNAL_END_SEQ1 flag must be specified, and
  * the @ref NRFX_PWM_EVT_END_SEQ0 event and the @ref NRFX_PWM_EVT_END_SEQ1

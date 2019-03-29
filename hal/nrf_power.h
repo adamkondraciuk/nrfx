@@ -17,43 +17,35 @@ extern "C" {
  */
 
 #if defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Auxiliary definition to be used when sleep events are present.
- *
- * Some MCUs allow for processing events for entering and exiting sleep.
- */
+/** @brief Symbol indicating whether sleep events are present. */
 #define NRF_POWER_HAS_SLEEPEVT 1
 #else
 #define NRF_POWER_HAS_SLEEPEVT 0
 #endif // defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Auxiliary definition to mark the fact that power module manages USB regulator */
+/** @brief Symbol indicating whether the POWER peripheral controls the USB regulator. */
 #define NRF_POWER_HAS_USBREG 1
 #else
 #define NRF_POWER_HAS_USBREG 0
 #endif // defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Auxiliary definition to be used when VDDH is present.
- *
- * Use this definition when the part with VDDH-related settings is to be implemented.
- */
+/** @brief Symbol indicating whether VDDH is present. */
 #define NRF_POWER_HAS_VDDH 1
 #else
 #define NRF_POWER_HAS_VDDH 0
 #endif // defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(POWER_DCDCEN_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Auxiliary definition to mark the fact that DCDCEN is present */
+/** @brief Symbol indicating whether DCDCEN is present. */
 #define NRF_POWER_HAS_DCDCEN 1
 #else
 #define NRF_POWER_HAS_DCDCEN 0
 #endif
 
 #if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Auxiliary definition to mark the fact that POFCON is present */
+/** @brief Symbol indicating whether POFCON is present. */
 #define NRF_POWER_HAS_POFCON 1
 #else
 #define NRF_POWER_HAS_POFCON 0
@@ -139,11 +131,10 @@ typedef enum
  *
  * @sa nrf_power_ramblock_mask_t
  * @note
- * RAM blocks must be used in nrf51.
- * In the new CPU, RAM is divided into segments and this functionality is not supported.
- * For the newer MCU, see the PS for mapping between the internal RAM and RAM blocks,
- * because this mapping is not 1:1, and functions related to old style blocks
- * must not be used.
+ * RAM blocks must be used in nRF51.
+ * In newer SoCs, RAM is divided into segments and this functionality is not supported.
+ * See the PS for mapping between the internal RAM and RAM blocks, because this
+ * mapping is not 1:1, and functions related to old style blocks must not be used.
  */
 typedef enum
 {
@@ -535,8 +526,6 @@ __STATIC_INLINE void nrf_power_pofcon_set(bool enabled, nrf_power_pof_thr_t thr)
 
 /**
  * @brief Function for getting the power failure comparator configuration.
- *
- * This function gets the power failure comparator threshold and enables bit.
  *
  * @param[out] p_enabled Function sets this boolean variable to true
  *                       if power failure comparator is enabled.

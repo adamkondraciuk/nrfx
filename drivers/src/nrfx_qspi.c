@@ -6,36 +6,24 @@
 
 #include <nrfx_qspi.h>
 
-/**
- * @brief Command byte used to read status register.
- *
- */
+/** @brief Command byte used to read status register. */
 #define QSPI_STD_CMD_RDSR 0x05
 
-/**
- * @brief Byte used to mask status register and retrieve the write-in-progess bit.
- *
- */
+/** @brief Byte used to mask status register and retrieve the write-in-progess bit. */
 #define QSPI_MEM_STATUSREG_WIP_Pos 0x01
 
-/**
- * @brief Default time used in timeout function.
- */
+/** @brief Default time used in timeout function. */
 #define QSPI_DEF_WAIT_TIME_US 10
 
-/**
- * @brief Default number of tries in timeout function.
- */
+/** @brief Default number of tries in timeout function. */
 #define QSPI_DEF_WAIT_ATTEMPTS 100
 
-/**
-  * @brief Control block - driver instance local data.
-  */
+/** @brief Control block - driver instance local data. */
 typedef struct
 {
     nrfx_qspi_handler_t handler;   /**< Handler. */
     nrfx_drv_state_t    state;     /**< Driver state. */
-    volatile bool       is_busy;   /**< Whether the current operation is performed. */
+    volatile bool       is_busy;   /**< Flag indicating that an operation is currently being performed. */
     void *              p_context; /**< Driver context used in interrupt. */
 } qspi_control_block_t;
 

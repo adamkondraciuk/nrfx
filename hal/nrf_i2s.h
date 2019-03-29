@@ -19,7 +19,7 @@ extern "C" {
 /**
  * @brief This value can be provided as a parameter for the @ref nrf_i2s_pins_set
  *        function call to specify that the given I2S signal (SDOUT, SDIN, or MCK)
- *        will not be connected to a physical pin.
+ *        shall not be connected to a physical pin.
  */
 #define NRF_I2S_PIN_NOT_CONNECTED  0xFFFFFFFF
 
@@ -534,7 +534,7 @@ __STATIC_INLINE bool nrf_i2s_configure(NRF_I2S_Type *     p_reg,
     return true;
 }
 
-__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type * p_reg,
+__STATIC_INLINE void nrf_i2s_transfer_set(NRF_I2S_Type *   p_reg,
                                           uint16_t         size,
                                           uint32_t *       p_buffer_rx,
                                           uint32_t const * p_buffer_tx)

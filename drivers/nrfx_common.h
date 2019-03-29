@@ -114,8 +114,8 @@ extern "C" {
  * @param[in] length1    First length to be checked.
  * @param[in] length2    Second length to be checked (pass 0 if not needed).
  *
- * @retval true  If length of buffers do not exceed the limit of the specified peripheral
- * @retval false Otherwise.
+ * @retval true  The length of buffers does not exceed the limit of the specified peripheral.
+ * @retval false The length of buffers exceeds the limit of the specified peripheral.
  */
 #define NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, length1, length2)            \
     (((length1) < (1U << NRFX_CONCAT_2(peripheral, _EASYDMA_MAXCNT_SIZE))) && \
@@ -192,8 +192,8 @@ typedef enum
  *
  * @param[in] p_object Pointer to an object whose location is to be checked.
  *
- * @retval true  If the pointed object is located in the Data RAM region.
- * @retval false If the pointed object is not located in the Data RAM region.
+ * @retval true  The pointed object is located in the Data RAM region.
+ * @retval false The pointed object is not located in the Data RAM region.
  */
 __STATIC_INLINE bool nrfx_is_in_ram(void const * p_object);
 
@@ -206,8 +206,8 @@ __STATIC_INLINE bool nrfx_is_in_ram(void const * p_object);
  *
  * @param[in] p_object  Pointer to an object whose location is to be checked.
  *
- * @retval true  If the pointed object is aligned to a 32-bit word.
- * @retval false If the pointed object is not aligned to a 32-bit word.
+ * @retval true  The pointed object is aligned to a 32-bit word.
+ * @retval false The pointed object is not aligned to a 32-bit word.
  */
 __STATIC_INLINE bool nrfx_is_word_aligned(void const * p_object);
 

@@ -20,7 +20,7 @@ extern "C" {
 /**
  * @brief Function for getting the size of the code memory page.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Code memory page size in bytes.
  */
@@ -29,7 +29,7 @@ __STATIC_INLINE uint32_t nrf_ficr_codepagesize_get(NRF_FICR_Type const * p_reg);
 /**
  * @brief Function for getting the size of the code memory rendered as number of pages.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Code memory size rendered as number of pages.
  */
@@ -38,7 +38,7 @@ __STATIC_INLINE uint32_t nrf_ficr_codesize_get(NRF_FICR_Type const * p_reg);
 /**
  * @brief Function for getting the unique device identifier.
  *
- * @param[in] p_reg  Pointer to the peripheral register structure.
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] reg_id Register index.
  *
  * @return Unique device identifier.
@@ -49,7 +49,7 @@ __STATIC_INLINE uint32_t nrf_ficr_deviceid_get(NRF_FICR_Type const * p_reg, uint
 /**
  * @brief Function for getting the default header values for the NFC tag.
  *
- * @param[in] p_reg        Pointer to the peripheral register structure.
+ * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
  * @param[in] tagheader_id Tag header index.
  *
  * @return The default header value of the NFC tag for the specified header index.

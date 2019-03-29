@@ -326,7 +326,7 @@ void nrfx_gpiote_in_uninit(nrfx_gpiote_pin_t pin);
  *
  * @details If the input pin is configured as high-accuracy pin, the function
  * enables an IN_EVENT. Otherwise, the function enables the GPIO sense mechanism.
- * A PORT event is shared between multiple pins, therefore the interrupt is always enabled.
+ * The PORT event is shared between multiple pins, therefore the interrupt is always enabled.
  *
  * @param[in] pin        Pin.
  * @param[in] int_enable True to enable the interrupt. Always valid for a high-accuracy pin.

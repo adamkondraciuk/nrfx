@@ -19,7 +19,7 @@ extern "C" {
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spi_pins_set
  *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
- *        will not be connected to a physical pin.
+ *        shall not be connected to a physical pin.
  */
 #define NRF_SPI_PIN_NOT_CONNECTED  0xFFFFFFFF
 

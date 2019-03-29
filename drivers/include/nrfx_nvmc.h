@@ -63,7 +63,7 @@ void nrfx_nvmc_all_erase(void);
  * @param address     Address of the first word in the page to erase.
  * @param duration_ms Time in milliseconds that each partial erase will take.
  *
- * @retval NRFX_SUCCESS            Page erase complete.
+ * @retval NRFX_SUCCESS            Partial erase started.
  * @retval NRFX_ERROR_INVALID_ADDR Address is not aligned to the size of the page.
  *
  * @sa nrfx_nvmc_page_partial_erase_continue()
@@ -92,7 +92,7 @@ bool nrfx_nvmc_page_partial_erase_continue(void);
 /**
  * @brief Function for checking whether a byte is writable at the specified address.
  *
- * The NVMC is only able to write '0' to bits in the Flash that are erased (set to '1').
+ * The NVMC is only able to write '0' to bits in the flash that are erased (set to '1').
  * It cannot rewrite a bit back to '1'. This function checks if the value currently
  * residing at the specified address can be transformed to the desired value
  * without any '0' to '1' transitions.
@@ -185,7 +185,7 @@ void nrfx_nvmc_words_write(uint32_t address, void const * src, uint32_t num_word
  * @brief Function for checking if the last flash write has been completed.
  *
  * @retval true  Last write completed successfully.
- * @retval false Last write still in progress.
+ * @retval false Last write is still in progress.
  */
 __STATIC_INLINE bool nrfx_nvmc_write_done_check(void);
 

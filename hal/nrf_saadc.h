@@ -625,7 +625,7 @@ __STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limi
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     uint32_t mask = (limit_type == NRF_SAADC_LIMIT_LOW) ?
-                        NRF_SAADC_INT_CH0LIMITL : NRF_SAADC_INT_CH0LIMITH;
+                     NRF_SAADC_INT_CH0LIMITL : NRF_SAADC_INT_CH0LIMITH;
     return mask << (channel * 2);
 }
 

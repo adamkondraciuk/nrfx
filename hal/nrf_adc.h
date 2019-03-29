@@ -118,7 +118,7 @@ __STATIC_INLINE void nrf_adc_task_trigger(nrf_adc_task_t task);
 __STATIC_INLINE uint32_t nrf_adc_task_address_get(nrf_adc_task_t task);
 
 /**
- * @brief Function for retrieving the state of the UARTE event.
+ * @brief Function for retrieving the state of an ADC event.
  *
  * @param[in] event Event to be checked.
  *

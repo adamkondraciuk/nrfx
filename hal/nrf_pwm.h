@@ -18,7 +18,7 @@ extern "C" {
 
 /**
  * @brief This value can be provided as a parameter for the @ref nrf_pwm_pins_set
- *        function call to specify that a given output channel will not be
+ *        function call to specify that a given output channel shall not be
  *        connected to a physical pin.
  */
 #define NRF_PWM_PIN_NOT_CONNECTED  0xFFFFFFFF
@@ -118,7 +118,7 @@ typedef enum
  */
 typedef enum
 {
-    NRF_PWM_STEP_AUTO      = PWM_DECODER_MODE_RefreshCount, ///< Refreshes count automatically after the current value is played and repeated the specified number of times.
+    NRF_PWM_STEP_AUTO      = PWM_DECODER_MODE_RefreshCount, ///< Automatically after the current value is played and repeated the requested number of times.
     NRF_PWM_STEP_TRIGGERED = PWM_DECODER_MODE_NextStep      ///< When the @ref NRF_PWM_TASK_NEXTSTEP task is triggered.
 } nrf_pwm_dec_step_t;
 

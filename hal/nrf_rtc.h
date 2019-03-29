@@ -25,13 +25,13 @@ extern "C" {
 /** @brief Macro for converting expected frequency to prescaler setting. */
 #define RTC_FREQ_TO_PRESCALER(FREQ) (uint16_t)(((RTC_INPUT_FREQ) / (FREQ)) - 1)
 
-/** @brief Macro for wrapping values to RTC capacity. */
+/** @brief Macro for trimming values to the RTC bit width. */
 #define RTC_WRAP(val) ((val) & RTC_COUNTER_COUNTER_Msk)
 
-/** @brief Macro for creating mask with interrupt configuration for the specified compare channel. */
+/** @brief Macro for creating the interrupt bitmask for the specified compare channel. */
 #define RTC_CHANNEL_INT_MASK(ch)    ((uint32_t)(NRF_RTC_INT_COMPARE0_MASK) << (ch))
 
-/** @brief Macro for obtaining the event address of the specified compare channel. */
+/** @brief Macro for obtaining the compare event for the specified channel. */
 #define RTC_CHANNEL_EVENT_ADDR(ch)  (nrf_rtc_event_t)((NRF_RTC_EVENT_COMPARE_0) + (ch) * sizeof(uint32_t))
 
 

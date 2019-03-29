@@ -50,18 +50,17 @@ typedef struct
 }
 
 #ifndef __NRFX_DOXYGEN__
-/** @brief Indexes of RTC driver instances and the number of enabled instances. */
 enum {
 #if NRFX_CHECK(NRFX_RTC0_ENABLED)
-    NRFX_RTC0_INST_IDX,    ///< Index of RTC0 driver instance.
+    NRFX_RTC0_INST_IDX,
 #endif
 #if NRFX_CHECK(NRFX_RTC1_ENABLED)
-    NRFX_RTC1_INST_IDX,    ///< Index of RTC1 driver instance.
+    NRFX_RTC1_INST_IDX,
 #endif
 #if NRFX_CHECK(NRFX_RTC2_ENABLED)
-    NRFX_RTC2_INST_IDX,    ///< Index of RTC2 driver instance.
+    NRFX_RTC2_INST_IDX,
 #endif
-    NRFX_RTC_ENABLED_COUNT ///< Number of enabled RTC driver instances.
+    NRFX_RTC_ENABLED_COUNT
 };
 #endif
 
@@ -108,7 +107,7 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const * const  p_instance,
  * @brief Function for uninitializing the RTC driver instance.
  *
  * After uninitialization, the instance is in idle state. The hardware should return to the state
- * before initialization. The function asserts if the instance is in idle state.
+ * before initialization.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
@@ -117,16 +116,12 @@ void nrfx_rtc_uninit(nrfx_rtc_t const * const p_instance);
 /**
  * @brief Function for enabling the RTC driver instance.
  *
- * @note Function asserts if the instance is enabled.
- *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
 void nrfx_rtc_enable(nrfx_rtc_t const * const p_instance);
 
 /**
  * @brief Function for disabling the RTC driver instance.
- *
- * @note Function assert if the instance is disabled.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
@@ -135,14 +130,13 @@ void nrfx_rtc_disable(nrfx_rtc_t const * const p_instance);
 /**
  * @brief Function for setting a compare channel.
  *
- * The function asserts if the instance is not initialized or if the channel parameter is
- * wrong. The function powers on the instance if the instance was in power off state.
+ * The function powers on the instance if the instance was in power off state.
  *
  * The driver is not entering a critical section when configuring RTC, which means that it can be
  * preempted for a certain amount of time. When the driver was preempted and the value to be set
  * is short in time, there is a risk that the driver sets a compare value that is
- * behind. In this case, if RTCn_CONFIG_RELIABLE is 1 for the specified instance,
- * the Reliable mode handles the risk.
+ * behind. In this case, if the reliable mode is enabled for the specified instance,
+ * the risk is handled.
  * However, to detect if the requested value is behind, this mode makes the following assumptions:
  *  -  The maximum preemption time in ticks (8-bit value) is known and is less than 7.7 ms
  *   (for prescaler = 0, RTC frequency 32 kHz).
@@ -157,7 +151,7 @@ void nrfx_rtc_disable(nrfx_rtc_t const * const p_instance);
  * @retval NRFX_SUCCESS       The procedure is successful.
  * @retval NRFX_ERROR_TIMEOUT The compare is not set because the request value is behind the
  *                            current counter value. This error can only be reported
- *                            if RTCn_CONFIG_RELIABLE = 1.
+ *                            if the reliable mode is enabled.
  */
 nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
                            uint32_t                 channel,
@@ -167,8 +161,7 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
 /**
  * @brief Function for disabling a channel.
  *
- * This function disables channel events and channel interrupts. The function asserts if
- * the instance is not initialized or if the channel parameter is wrong.
+ * This function disables channel events and channel interrupts.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    One of the channels of the instance.
@@ -179,10 +172,9 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * const p_instance,
 nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t channel);
 
 /**
- * @brief Function for enabling the tick event.
+ * @brief Function for enabling the TICK event.
  *
- * This function enables the tick event and optionally the interrupt. The function asserts if
- * the instance is not powered on.
+ * This function enables the tick event and optionally the interrupt.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] enable_irq True to enable the interrupt. False to disable the interrupt.
@@ -190,9 +182,9 @@ nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * const p_instance, uint32_t cha
 void nrfx_rtc_tick_enable(nrfx_rtc_t const * const p_instance, bool enable_irq);
 
 /**
- * @brief Function for disabling the tick event.
+ * @brief Function for disabling the TICK event.
  *
- * This function disables the tick event and interrupt.
+ * This function disables the TICK event and interrupt.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
@@ -201,8 +193,7 @@ void nrfx_rtc_tick_disable(nrfx_rtc_t const * const p_instance);
 /**
  * @brief Function for enabling overflow.
  *
- * This function enables the overflow event and optionally the interrupt. The function asserts
- * if the instance is not powered on.
+ * This function enables the overflow event and optionally the interrupt.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] enable_irq True to enable the interrupt. False to disable the interrupt.
@@ -223,9 +214,9 @@ void nrfx_rtc_overflow_disable(nrfx_rtc_t const * const p_instance);
  *
  * When a stack (for example SoftDevice) is used and it occupies high priority interrupts,
  * the application code can be interrupted at any moment for a certain period of time.
- * If the Reliable mode is enabled, the provided maximum latency is taken into account
+ * If the reliable mode is enabled, the provided maximum latency is taken into account
  * and the return value is smaller than the RTC counter resolution.
- * If the Reliable mode is disabled, the return value equals the counter resolution.
+ * If the reliable mode is disabled, the return value equals the counter resolution.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  *
@@ -253,8 +244,6 @@ __STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, ui
 /**
  * @brief Function for retrieving the current counter value.
  *
- * This function asserts if the instance is not powered on or if p_val is NULL.
- *
  * @param[in] p_instance Pointer to the driver instance structure.
  *
  * @return Counter value.
@@ -264,8 +253,6 @@ __STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * const p_instanc
 /**
  * @brief Function for clearing the counter value.
  *
- * This function asserts if the instance is not powered on.
- *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
 __STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance);
@@ -273,7 +260,7 @@ __STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
 /**
  * @brief Function for returning a requested task address for the RTC driver instance.
  *
- * This function asserts if the output pointer is NULL. The task address can be used by the PPI module.
+ * The task address can be used by the PPI module.
  *
  * @param[in] p_instance Pointer to the instance.
  * @param[in] task       One of the peripheral tasks.
@@ -286,7 +273,7 @@ __STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_in
 /**
  * @brief Function for returning a requested event address for the RTC driver instance.
  *
- * This function asserts if the output pointer is NULL. The event address can be used by the PPI module.
+ * The event address can be used by the PPI module.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] event      One of the peripheral events.

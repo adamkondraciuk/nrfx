@@ -159,31 +159,31 @@ __STATIC_INLINE bool nrf_rng_int_get(nrf_rng_int_mask_t mask)
 
 __STATIC_INLINE uint32_t * nrf_rng_task_address_get(nrf_rng_task_t rng_task)
 {
-    return (uint32_t *)((uint8_t *)NRF_RNG + rng_task);
+    return (uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_task);
 }
 
 __STATIC_INLINE void nrf_rng_task_trigger(nrf_rng_task_t rng_task)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_RNG + rng_task)) = 0x1UL;
+    *((volatile uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_task)) = 0x1UL;
 }
 
 __STATIC_INLINE uint32_t * nrf_rng_event_address_get(nrf_rng_event_t rng_event)
 {
-    return (uint32_t *)((uint8_t *)NRF_RNG + rng_event);
+    return (uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_event);
 }
 
 __STATIC_INLINE void nrf_rng_event_clear(nrf_rng_event_t rng_event)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_RNG + rng_event)) = 0x0UL;
+    *((volatile uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_event)) = 0x0UL;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_RNG + rng_event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_event));
     (void)dummy;
 #endif
 }
 
 __STATIC_INLINE bool nrf_rng_event_get(nrf_rng_event_t rng_event)
 {
-    return (bool) * ((volatile uint32_t *)((uint8_t *)NRF_RNG + rng_event));
+    return (bool) * ((volatile uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_event));
 }
 
 __STATIC_INLINE void nrf_rng_shorts_enable(uint32_t mask)

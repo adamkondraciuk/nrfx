@@ -265,7 +265,8 @@ __STATIC_INLINE void nrf_lpcomp_configure(const nrf_lpcomp_config_t * p_config)
     if ((p_config->reference & LPCOMP_REFSEL_REFSEL_ARef)==LPCOMP_REFSEL_REFSEL_ARef)
     {
         uint32_t extref       = p_config->reference >> 16;
-        NRF_LPCOMP->EXTREFSEL = (extref << LPCOMP_EXTREFSEL_EXTREFSEL_Pos) & LPCOMP_EXTREFSEL_EXTREFSEL_Msk;
+        NRF_LPCOMP->EXTREFSEL = (extref << LPCOMP_EXTREFSEL_EXTREFSEL_Pos) &
+                                LPCOMP_EXTREFSEL_EXTREFSEL_Msk;
     }
 
     NRF_LPCOMP->ANADETECT   =
@@ -344,21 +345,21 @@ __STATIC_INLINE void nrf_lpcomp_shorts_disable(uint32_t short_mask)
 
 __STATIC_INLINE void nrf_lpcomp_task_trigger(nrf_lpcomp_task_t task)
 {
-    *( (volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + task) ) = 1;
+    *( (volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + (uint32_t)task) ) = 1;
 }
 
 __STATIC_INLINE void nrf_lpcomp_event_clear(nrf_lpcomp_event_t event)
 {
-    *( (volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + event) ) = 0;
+    *( (volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + (uint32_t)event) ) = 0;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_LPCOMP + event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_LPCOMP + (uint32_t)event));
     (void)dummy;
 #endif
 }
 
 __STATIC_INLINE bool nrf_lpcomp_event_check(nrf_lpcomp_event_t event)
 {
-    return (bool) (*(volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + event));
+    return (bool) (*(volatile uint32_t *)( (uint8_t *)NRF_LPCOMP + (uint32_t)event));
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION

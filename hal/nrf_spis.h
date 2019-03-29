@@ -108,7 +108,7 @@ __STATIC_INLINE uint32_t nrf_spis_task_address_get(NRF_SPIS_Type const * p_reg,
  * @brief Function for clearing the specified SPIS event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Event to clear.
+ * @param[in] event Event to be cleared.
  */
 __STATIC_INLINE void nrf_spis_event_clear(NRF_SPIS_Type *  p_reg,
                                           nrf_spis_event_t event);

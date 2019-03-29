@@ -220,7 +220,7 @@ __STATIC_INLINE void nrf_comp_int_disable(uint32_t mask);
  *
  * @param[in] mask Mask of interrupts to be checked.
  *
- * @retval true  Any interrupts of the specified mask are enabled.
+ * @retval true  At least one interrupt from the specified mask is enabled.
  * @retval false No interrupt provided by the specified mask are enabled.
  */
 __STATIC_INLINE bool nrf_comp_int_enable_check(uint32_t mask);
@@ -312,8 +312,8 @@ __STATIC_INLINE void nrf_comp_ext_ref_set(nrf_comp_ext_ref_t ext_ref)
 __STATIC_INLINE void nrf_comp_th_set(nrf_comp_th_t threshold)
 {
     NRF_COMP->TH =
-        ((threshold.th_down << COMP_TH_THDOWN_Pos) & COMP_TH_THDOWN_Msk) |
-        ((threshold.th_up << COMP_TH_THUP_Pos) & COMP_TH_THUP_Msk);
+        (((uint32_t)threshold.th_down << COMP_TH_THDOWN_Pos) & COMP_TH_THDOWN_Msk) |
+        (((uint32_t)threshold.th_up << COMP_TH_THUP_Pos) & COMP_TH_THUP_Msk);
 }
 
 __STATIC_INLINE void nrf_comp_main_mode_set(nrf_comp_main_mode_t main_mode)
@@ -385,7 +385,7 @@ __STATIC_INLINE void nrf_comp_shorts_disable(uint32_t mask)
 
 __STATIC_INLINE void nrf_comp_task_trigger(nrf_comp_task_t task)
 {
-    *( (volatile uint32_t *)( (uint8_t *)NRF_COMP + task) ) = 1;
+    *( (volatile uint32_t *)( (uint8_t *)NRF_COMP + (uint32_t)task) ) = 1;
 }
 
 __STATIC_INLINE void nrf_comp_event_clear(nrf_comp_event_t event)
@@ -399,7 +399,7 @@ __STATIC_INLINE void nrf_comp_event_clear(nrf_comp_event_t event)
 
 __STATIC_INLINE bool nrf_comp_event_check(nrf_comp_event_t event)
 {
-    return (bool) (*(volatile uint32_t *)( (uint8_t *)NRF_COMP + event));
+    return (bool) (*(volatile uint32_t *)( (uint8_t *)NRF_COMP + (uint32_t)event));
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION

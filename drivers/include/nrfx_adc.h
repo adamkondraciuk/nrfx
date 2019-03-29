@@ -31,7 +31,7 @@ typedef struct
     uint16_t          size;     ///< Number of samples in the buffer.
 } nrfx_adc_done_evt_t;
 
-/** @brief ADC driver SAMPLE event. */
+/** @brief SAMPLE event structure. */
 typedef struct
 {
     nrf_adc_value_t   sample; ///< Converted sample.
@@ -129,8 +129,7 @@ void nrfx_adc_uninit(void);
  * (the ADC is not busy).
  *
  * @note The channel instance variable @p p_channel is used by the driver as an item
- *       in a list. Therefore, it cannot be an automatic variable, and an assertion fails if it is
- *       an automatic variable (if asserts are enabled).
+ *       in a list. Therefore, it cannot be an automatic variable that is located on the stack.
  *
  * @param[in] p_channel Pointer to the channel instance.
  */

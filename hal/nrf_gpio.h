@@ -243,7 +243,7 @@ __STATIC_INLINE void nrf_gpio_pin_write(uint32_t pin_number, uint32_t value);
 /**
  * @brief Function for reading the input level of a GPIO pin.
  *
- * If the value returned by this function is to be valid, the pin must be configured as the input.
+ * If the value returned by this function is to be valid, the pin's input buffer must be connected.
  *
  * @param pin_number Specifies the pin number to read.
  *

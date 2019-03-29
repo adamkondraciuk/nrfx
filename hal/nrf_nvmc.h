@@ -117,7 +117,7 @@ typedef enum
 /**
  * @brief Function for checking if NVMC is ready to perform write or erase operation.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval true  NVMC can perform write or erase.
  * @retval false NVMC is busy and cannot perform next operation yet.
@@ -130,7 +130,7 @@ __STATIC_INLINE bool nrf_nvmc_ready_check(NRF_NVMC_Type const * p_reg);
  *
  * NVM writing time can be reduced by using this function.
  *
- * @param[in] p_reg  Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval true  NVMC can accept the next write. It will be buffered and will be taken
  *               into account as soon as the ongoing write operation is completed.
@@ -146,7 +146,7 @@ __STATIC_INLINE bool nrf_nvmc_write_ready_check(NRF_NVMC_Type const * p_reg);
  * If Instruction Cache (ICache) is present, enabling write or erase will
  * invalidate the cache and keep it invalidated.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mode  Desired operating mode for NVMC.
  */
 __STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
@@ -156,7 +156,7 @@ __STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
 /**
  * @brief Function for setting the NVMC mode for non-secure Flash page operations.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mode  Desired operating mode for NVMC.
  */
 __STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type *    p_reg,
@@ -169,7 +169,7 @@ __STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type *    p_reg,
  * The NVMC mode must be correctly configured with @ref nrf_nvmc_mode_set
  * before starting the erase operation.
  *
- * @param[in] p_reg     Pointer to the peripheral register structure.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] page_addr Address of the first word of the page to erase.
  */
 __STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
@@ -179,7 +179,7 @@ __STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
 /**
  * @brief Function for starting the user information configuration registers (UICR) erase.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 __STATIC_INLINE void nrf_nvmc_uicr_erase_start(NRF_NVMC_Type * p_reg);
 #endif
@@ -189,7 +189,7 @@ __STATIC_INLINE void nrf_nvmc_uicr_erase_start(NRF_NVMC_Type * p_reg);
  *
  * This function purges all user code.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 __STATIC_INLINE void nrf_nvmc_erase_all_start(NRF_NVMC_Type * p_reg);
 
@@ -197,7 +197,7 @@ __STATIC_INLINE void nrf_nvmc_erase_all_start(NRF_NVMC_Type * p_reg);
 /**
  * @brief Function for configuring the page partial erase duration in milliseconds.
  *
- * @param[in] p_reg       Pointer to the peripheral register structure.
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] duration_ms Page partial erase duration in milliseconds.
  */
 __STATIC_INLINE void nrf_nvmc_partial_erase_duration_set(NRF_NVMC_Type * p_reg,
@@ -206,7 +206,7 @@ __STATIC_INLINE void nrf_nvmc_partial_erase_duration_set(NRF_NVMC_Type * p_reg,
 /**
  * @brief Function for getting the current setting for the page partial erase duration.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval Interval duration setting in milliseconds.
  */
@@ -217,7 +217,7 @@ __STATIC_INLINE uint32_t nrf_nvmc_partial_erase_duration_get(NRF_NVMC_Type const
  *
  * It must be called successively until the page erase time is reached.
  *
- * @param[in] p_reg     Pointer to the peripheral register structure.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] page_addr Address of the first word of the page to erase.
  */
 __STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
@@ -232,7 +232,7 @@ __STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
  * consumption by reducing the number of wait cycles and the number
  * of flash accesses.
  *
- * @param[in] p_reg  Pointer to the peripheral register structure.
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] config ICache configuration.
  */
 __STATIC_INLINE void nrf_nvmc_icache_config_set(NRF_NVMC_Type *          p_reg,
@@ -241,7 +241,7 @@ __STATIC_INLINE void nrf_nvmc_icache_config_set(NRF_NVMC_Type *          p_reg,
 /**
  * @brief Function for checking if ICache is enabled.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval true  ICache enabled.
  * @retval false ICache disabled.
@@ -251,7 +251,7 @@ __STATIC_INLINE bool nrf_nvmc_icache_enable_check(NRF_NVMC_Type const * p_reg);
 /**
  * @brief Function for checking if the ICache profiling option is enabled.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval true  ICache profiling enabled.
  * @retval false ICache profiling disabled.
@@ -261,7 +261,7 @@ __STATIC_INLINE bool nrf_nvmc_icache_profiling_enable_check(NRF_NVMC_Type const 
 /**
  * @brief Function for getting the number of ICache hits.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval Number of the ICache hits.
  */
@@ -270,7 +270,7 @@ __STATIC_INLINE uint32_t nrf_nvmc_icache_hit_get(NRF_NVMC_Type const * p_reg);
 /**
  * @brief Function for getting the number of ICache misses.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @retval Number of the ICache misses.
  */
@@ -279,7 +279,7 @@ __STATIC_INLINE uint32_t nrf_nvmc_icache_miss_get(NRF_NVMC_Type const * p_reg);
 /**
  * @brief Function for resetting the ICache hit and miss counters.
  *
- * @param[in] p_reg Pointer to the peripheral register structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
  __STATIC_INLINE void nrf_nvmc_icache_hit_miss_reset(NRF_NVMC_Type * p_reg);
 #endif // defined(NRF_NVMC_ICACHE_PRESENT)

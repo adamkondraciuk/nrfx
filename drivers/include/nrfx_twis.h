@@ -15,7 +15,7 @@ extern "C" {
  * @defgroup nrfx_twis TWIS driver
  * @{
  * @ingroup nrf_twis
- * @brief   Two Wire Slave Interface (TWIS) peripheral driver.
+ * @brief   Two Wire Interface Slave with EasyDMA (TWIS) peripheral driver.
  */
 
 /** @brief TWIS driver instance data structure. */
@@ -74,7 +74,7 @@ typedef enum
  * This is flag enum - values from this enum can be connected using logical or operator.
  * @note
  * You can use directly @ref nrf_twis_error_t. Error type enum is redefined here because
- * of possible future extension (eg. supporting time-outs and synchronous mode).
+ * of possible future extension (eg. supporting timeouts and synchronous mode).
  */
 typedef enum
 {
@@ -248,10 +248,9 @@ __STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
  * @note Peripherals using EasyDMA (including TWIS) require the transfer buffers
  *       to be placed in the Data RAM region. If this condition is not met,
  *       this function fails with the error code NRFX_ERROR_INVALID_ADDR.
- * @attention Receiving buffer must be placed in RAM.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_buf      Buffer that will be filled with received data.
+ * @param[in] p_buf      Buffer that is to be filled with received data.
  * @param[in] size       Size of the buffer (maximum amount of data to receive).
  *
  * @retval NRFX_SUCCESS              The preparation finished properly.
@@ -267,7 +266,7 @@ nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
  * @brief Function for getting the number of received bytes.
  *
  * This function returns number of bytes received.
- * This function can be called after @ref NRFX_TWIS_EVT_WRITE_DONE or @ref NRFX_TWIS_EVT_WRITE_ERROR events.
+ * It can be called after @ref NRFX_TWIS_EVT_WRITE_DONE or @ref NRFX_TWIS_EVT_WRITE_ERROR events.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  *
@@ -302,7 +301,7 @@ bool nrfx_twis_is_busy(nrfx_twis_t const * p_instance);
 bool nrfx_twis_is_waiting_tx_buff(nrfx_twis_t const * p_instance);
 
 /**
- * @brief Function for checking if the driver is waiting for a RX buffer.
+ * @brief Function for checking if the driver is waiting for an RX buffer.
  *
  * If this function returns true, the driver is stalled expecting
  * of the @ref nrfx_twis_rx_prepare function call.
@@ -310,7 +309,7 @@ bool nrfx_twis_is_waiting_tx_buff(nrfx_twis_t const * p_instance);
  * @param[in] p_instance Pointer to the driver instance structure.
  *
  * @retval true  The driver is waiting for @ref nrfx_twis_rx_prepare.
- * @retval false The driver is not in the state where it is waiting for preparing a RX buffer.
+ * @retval false The driver is not in the state where it is waiting for preparing an RX buffer.
  */
 bool nrfx_twis_is_waiting_rx_buff(nrfx_twis_t const * p_instance);
 

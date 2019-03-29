@@ -60,7 +60,7 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_config_t const * p_config,
                          nrfx_wdt_event_handler_t  wdt_event_handler);
 
 /**
- * @brief Function for allocating the watchdog channel.
+ * @brief Function for allocating a watchdog channel.
  *
  * @note This function can not be called after nrfx_wdt_start(void).
  *

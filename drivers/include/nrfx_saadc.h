@@ -113,9 +113,9 @@ typedef struct
 } nrfx_saadc_evt_t;
 
 /**
- * @brief SAADC event handler.
+ * @brief SAADC driver event handler.
  *
- * @param[in] p_event Pointer to an SAADC event. The event structure is allocated on
+ * @param[in] p_event Pointer to an SAADC driver event. The event structure is allocated on
  *                    the stack, so it is valid only within the context of the event handler.
  */
 typedef void (* nrfx_saadc_event_handler_t)(nrfx_saadc_evt_t const * p_event);

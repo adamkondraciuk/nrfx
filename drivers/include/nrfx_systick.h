@@ -55,7 +55,7 @@ void nrfx_systick_init(void);
 void nrfx_systick_get(nrfx_systick_state_t * p_state);
 
 /**
- * @brief Function for testing if the specified time is higher in relation to the remembered state.
+ * @brief Function for testing if the current time is higher in relation to the remembered state.
  *
  * @param[in] p_state Remembered state set by @ref nrfx_systick_get
  * @param[in] us      Required time-out.
@@ -80,7 +80,7 @@ void nrfx_systick_delay_ticks(uint32_t ticks);
 void nrfx_systick_delay_us(uint32_t us);
 
 /**
- * @brief Function for delaying the execution for the specified amount of microseconds.
+ * @brief Function for delaying the execution for the specified amount of milliseconds.
  *
  * This delay function removes the limits of the highest possible delay value.
  *

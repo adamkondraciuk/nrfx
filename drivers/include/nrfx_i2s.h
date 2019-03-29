@@ -53,8 +53,8 @@ typedef struct
 /** @brief I2S driver buffers structure. */
 typedef struct
 {
-    uint32_t       * p_rx_buffer; ///< Pointer to the buffer with received data.
-    uint32_t const * p_tx_buffer; ///< Pointer to the buffer with data prepared to send.
+    uint32_t       * p_rx_buffer; ///< Pointer to the buffer for received data.
+    uint32_t const * p_tx_buffer; ///< Pointer to the buffer with data to be sent.
 } nrfx_i2s_buffers_t;
 
 /** @brief I2S driver default configuration. */
@@ -94,7 +94,7 @@ typedef struct
  * @note The @c p_released pointer passed to this function is temporary and
  *       will be invalid after the function returns, hence it cannot be stored
  *       and used later. If needed, the pointed content (that is, buffers pointers)
- *       can be copied instead.
+ *       must be copied instead.
  *
  * @param[in] p_released  Pointer to a structure with pointers to buffers
  *                        passed previously to the driver that will no longer

@@ -9,9 +9,6 @@
 extern "C" {
 #endif
 
-#define NRF_CLOCK_TASK_TRIGGER (1UL)
-#define NRF_CLOCK_EVENT_CLEAR  (0UL)
-
 /**
  * @defgroup nrf_clock_hal Clock HAL
  * @{
@@ -201,7 +198,7 @@ __STATIC_INLINE uint32_t nrf_clock_event_address_get(nrf_clock_event_t event);
 __STATIC_INLINE void nrf_clock_event_clear(nrf_clock_event_t event);
 
 /**
- * @brief Function for retrieving the state of the CLOCK event.
+ * @brief Function for retrieving the state of the specified event.
  *
  * @param[in] event Event to be checked.
  *
