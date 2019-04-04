@@ -299,19 +299,22 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
 
     nvmc_write_mode_set();
 
-    uint32_t leftover = addr % NVMC_BYTES_IN_WORD;
     uint8_t const * bytes_src = (uint8_t const *)src;
 
-    if (leftover != 0)
+    uint32_t unaligned_bytes = addr % NVMC_BYTES_IN_WORD;
+    if (unaligned_bytes != 0)
     {
-        /* Deal with unaligned leading bytes */
-        nvmc_word_write(addr - leftover,
-                        partial_word_create(addr, bytes_src, NVMC_BYTES_IN_WORD - leftover));
+        uint32_t leading_bytes = NVMC_BYTES_IN_WORD - unaligned_bytes;
+        if (leading_bytes > num_bytes)
+        {
+            leading_bytes = num_bytes;
+        }
 
-        leftover = NVMC_BYTES_IN_WORD - leftover;
-        num_bytes -= leftover;
-        addr += leftover;
-        bytes_src += leftover;
+        nvmc_word_write(addr - unaligned_bytes,
+                        partial_word_create(addr, bytes_src, leading_bytes));
+        num_bytes -= leading_bytes;
+        addr      += leading_bytes;
+        bytes_src += leading_bytes;
     }
 
 #if defined(__CORTEX_M) && (__CORTEX_M == 0U)
@@ -343,11 +346,10 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
         bytes_src += word_count * NVMC_BYTES_IN_WORD;
     }
 
-    leftover = num_bytes % NVMC_BYTES_IN_WORD;
-    if (leftover != 0)
+    uint32_t trailing_bytes = num_bytes % NVMC_BYTES_IN_WORD;
+    if (trailing_bytes != 0)
     {
-        /* Deal with unaligned trailing bytes */
-        nvmc_word_write(addr, partial_word_create(addr, bytes_src, leftover));
+        nvmc_word_write(addr, partial_word_create(addr, bytes_src, trailing_bytes));
     }
 
     nvmc_readonly_mode_set();
