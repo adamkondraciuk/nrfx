@@ -15,13 +15,13 @@
 #define NVMC_BYTES_IN_WORD  4
 
 /**
- * Value representing non-volatile memory (NVM) total size in bytes.
+ * Value representing non-volatile memory (NVM) page count.
  *
- * This symbol is needed to determine NVM total size for chips that cannot
+ * This symbol is needed to determine NVM page count for chips that cannot
  * always access FICR for this information.
  */
 #if defined(NRF9160_XXAA)
-    #define NVMC_FLASH_TOTAL_SIZE  0x100000 ///< 1024 kB
+    #define NVMC_FLASH_PAGE_COUNT  256
 #endif
 
 /**
@@ -65,21 +65,6 @@ static uint32_t m_partial_erase_page_addr = NVMC_PARTIAL_ERASE_INVALID_ADDR;
 
 #endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
 
-static uint32_t flash_total_size_get(void)
-{
-    uint32_t flash_total_size = 0;
-
-#if defined(NRF51) || defined(NRF52_SERIES)
-    flash_total_size = nrf_ficr_codepagesize_get(NRF_FICR) * nrf_ficr_codesize_get(NRF_FICR);
-#elif defined(NVMC_FLASH_TOTAL_SIZE)
-    flash_total_size = NVMC_FLASH_TOTAL_SIZE;
-#else
-    #error "Cannot determine Flash total size for given SoC."
-#endif
-
-    return flash_total_size;
-}
-
 static uint32_t flash_page_size_get(void)
 {
     uint32_t flash_page_size = 0;
@@ -89,11 +74,32 @@ static uint32_t flash_page_size_get(void)
 #elif defined(NVMC_FLASH_PAGE_SIZE)
     flash_page_size = NVMC_FLASH_PAGE_SIZE;
 #else
-    #error "Cannot determine Flash page size for given SoC."
+    #error "Cannot determine flash page size for a given SoC."
 #endif
 
     return flash_page_size;
 }
+
+static uint32_t flash_page_count_get(void)
+{
+    uint32_t page_count = 0;
+
+#if defined(NRF51) || defined(NRF52_SERIES)
+    page_count = nrf_ficr_codesize_get(NRF_FICR);
+#elif defined(NVMC_FLASH_PAGE_COUNT)
+    page_count = NVMC_FLASH_PAGE_COUNT;
+#else
+    #error "Cannot determine flash page count for a given SoC."
+#endif
+
+    return page_count;
+}
+
+static uint32_t flash_total_size_get(void)
+{
+    return flash_page_size_get() * flash_page_count_get();
+}
+
 
 static bool is_page_aligned_check(uint32_t addr)
 {
@@ -366,6 +372,21 @@ void nrfx_nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
     nvmc_words_write(addr, src, num_words);
 
     nvmc_readonly_mode_set();
+}
+
+uint32_t nrfx_nvmc_flash_size_get(void)
+{
+    return flash_total_size_get();
+}
+
+uint32_t nrfx_nvmc_flash_page_size_get(void)
+{
+    return flash_page_size_get();
+}
+
+uint32_t nrfx_nvmc_flash_page_count_get(void)
+{
+    return flash_page_count_get();
 }
 
 #endif // NRFX_CHECK(NRFX_NVMC_ENABLED)
