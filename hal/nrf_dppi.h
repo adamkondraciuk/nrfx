@@ -171,6 +171,24 @@ __STATIC_INLINE void nrf_dppi_group_enable(NRF_DPPIC_Type *         p_reg,
 __STATIC_INLINE void nrf_dppi_group_disable(NRF_DPPIC_Type *         p_reg,
                                             nrf_dppi_channel_group_t group);
 
+/**
+ * @brief Function for getting the ENABLE task associated with the specified channel group.
+ *
+ * @param[in] index Channel group index.
+ *
+ * @return Requested ENABLE task.
+ */
+__STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_enable_task_get(uint8_t index);
+
+/**
+ * @brief Function for getting the DISABLE task associated with the specified channel group.
+ *
+ * @param[in] index Channel group index.
+ *
+ * @return Requested DISABLE task.
+ */
+__STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index);
+
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
@@ -243,6 +261,18 @@ __STATIC_INLINE void nrf_dppi_group_disable(NRF_DPPIC_Type *         p_reg,
                                             nrf_dppi_channel_group_t group)
 {
     p_reg->TASKS_CHG[(uint32_t) group].DIS = 1;
+}
+
+__STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_enable_task_get(uint8_t index)
+{
+    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
+    return (nrf_dppi_task_t)(offsetof(NRF_DPPIC_Type, TASKS_CHG[index].EN));
+}
+
+__STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index)
+{
+    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
+    return (nrf_dppi_task_t)(offsetof(NRF_DPPIC_Type, TASKS_CHG[index].DIS));
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
