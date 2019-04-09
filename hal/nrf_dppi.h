@@ -54,6 +54,17 @@ typedef enum
 __STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t dppi_task);
 
 /**
+ * @brief Function for getting the address of the specified DPPI task register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Requested task.
+ *
+ * @return Address of the specified task register.
+ */
+__STATIC_INLINE uint32_t nrf_dppi_task_address_get(NRF_DPPIC_Type const * p_reg,
+                                                   nrf_dppi_task_t        task);
+
+/**
  * @brief Function for checking the state of a specific DPPI channel.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
@@ -195,6 +206,12 @@ __STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index);
 __STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t dppi_task)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) dppi_task)) = 1;
+}
+
+__STATIC_INLINE uint32_t nrf_dppi_task_address_get(NRF_DPPIC_Type const * p_reg,
+                                                   nrf_dppi_task_t        task)
+{
+    return (uint32_t) ((uint8_t *) p_reg + (uint32_t ) task);
 }
 
 __STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel)
