@@ -58,6 +58,13 @@ extern "C" {
 #define NRF_POWER_HAS_POFCON 0
 #endif
 
+#if defined(POWER_RESETREAS_RESETPIN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Auxiliary definition to mark the fact that RESETREAS register is present in POWER */
+#define NRF_POWER_HAS_RESETREAS 1
+#else
+#define NRF_POWER_HAS_RESETREAS 0
+#endif
+
 /** @brief POWER tasks. */
 typedef enum
 {
@@ -100,6 +107,7 @@ typedef enum
 } nrf_power_int_mask_t;
 
 /** @brief Reset reason. */
+#if NRF_POWER_HAS_RESETREAS
 typedef enum
 {
     NRF_POWER_RESETREAS_RESETPIN_MASK = POWER_RESETREAS_RESETPIN_Msk, /*!< Bit mask of RESETPIN field. *///!< NRF_POWER_RESETREAS_RESETPIN_MASK
@@ -118,6 +126,29 @@ typedef enum
     NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /*!< Bit mask of VBUS field. */
 #endif
 } nrf_power_resetreas_mask_t;
+
+#else // NRF_POWER_HAS_RESETREAS
+
+typedef enum
+{
+    NRF_POWER_RESETREAS_RESETPIN_MASK  = RESET_RESETREAS_RESETPIN_Msk,  /*!< Bit mask of RESETPIN field.*/   //!< NRF_POWER_RESETREAS_RESETPIN_MASK
+    NRF_POWER_RESETREAS_DOG0_MASK      = RESET_RESETREAS_DOG0_Msk,      /*!< Bit mask of DOG0 field. */      //!< NRF_POWER_RESETREAS_DOG0_MASK
+    NRF_POWER_RESETREAS_CTRLAP_MASK    = RESET_RESETREAS_CTRLAP_Msk,    /*!< Bit mask of CTRLAP field. */    //!< NRF_POWER_RESETREAS_CTRLAP_MASK
+    NRF_POWER_RESETREAS_SREQ_MASK      = RESET_RESETREAS_SREQ_Msk,      /*!< Bit mask of SREQ field. */      //!< NRF_POWER_RESETREAS_SREQ_MASK
+    NRF_POWER_RESETREAS_LOCKUP_MASK    = RESET_RESETREAS_LOCKUP_Msk,    /*!< Bit mask of LOCKUP field. */    //!< NRF_POWER_RESETREAS_LOCKUP_MASK
+    NRF_POWER_RESETREAS_OFF_MASK       = RESET_RESETREAS_OFF_Msk,       /*!< Bit mask of OFF field. */       //!< NRF_POWER_RESETREAS_OFF_MASK
+    NRF_POWER_RESETREAS_LPCOMP_MASK    = RESET_RESETREAS_LPCOMP_Msk,    /*!< Bit mask of LPCOMP field. */    //!< NRF_POWER_RESETREAS_LPCOMP_MASK
+    NRF_POWER_RESETREAS_DIF_MASK       = RESET_RESETREAS_DIF_Msk,       /*!< Bit mask of DIF field. */       //!< NRF_POWER_RESETREAS_DIF_MASK
+    NRF_POWER_RESETREAS_LSREQ_MASK     = RESET_RESETREAS_LSREQ_Msk,     /*!< Bit mask of LSREQ field. */     //!< NRF_POWER_RESETREAS_LSREQ_MASK
+    NRF_POWER_RESETREAS_LLOCKUP_MASK   = RESET_RESETREAS_LLOCKUP_Msk,   /*!< Bit mask of LLOCKUP field. */   //!< NRF_POWER_RESETREAS_LLOCKUP_MASK
+    NRF_POWER_RESETREAS_LDOG_MASK      = RESET_RESETREAS_LDOG_Msk,      /*!< Bit mask of LDOG field. */      //!< NRF_POWER_RESETREAS_LDOG_MASK
+    NRF_POWER_RESETREAS_MFORCEOFF_MASK = RESET_RESETREAS_MFORCEOFF_Msk, /*!< Bit mask of MFORCEOFF field. */ //!< NRF_POWER_RESETREAS_MFORCEOFF_MASK
+    NRF_POWER_RESETREAS_NFC_MASK       = RESET_RESETREAS_NFC_Msk,       /*!< Bit mask of NFC field. */       //!< NRF_POWER_RESETREAS_NFC_MASK
+    NRF_POWER_RESETREAS_DOG1_MASK      = RESET_RESETREAS_DOG1_Msk,      /*!< Bit mask of DOG1 field. */      //!< NRF_POWER_RESETREAS_DOG1_MASK
+    NRF_POWER_RESETREAS_VBUS_MASK      = RESET_RESETREAS_VBUS_Msk,      /*!< Bit mask of VBUS field. */      //!< NRF_POWER_RESETREAS_VBUS_MASK
+    NRF_POWER_RESETREAS_LCTRLAP_MASK   = RESET_RESETREAS_LCTRLAP_Msk,   /*!< Bit mask of LCTRLAP field. */   //!< NRF_POWER_RESETREAS_LCTRLAP_MASK
+} nrf_power_resetreas_mask_t;
+#endif // NRF_POWER_HAS_RESETREAS
 
 #if NRF_POWER_HAS_USBREG
 /**
@@ -825,12 +856,20 @@ NRF_STATIC_INLINE void nrf_power_publish_clear(nrf_power_event_t event)
 
 NRF_STATIC_INLINE uint32_t nrf_power_resetreas_get(void)
 {
+#if NRF_POWER_HAS_RESETREAS
     return NRF_POWER->RESETREAS;
+#else
+    return NRF_RESET->RESETREAS;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_power_resetreas_clear(uint32_t mask)
 {
+#if NRF_POWER_HAS_RESETREAS
     NRF_POWER->RESETREAS = mask;
+#else
+    NRF_RESET->RESETREAS = mask;
+#endif
 }
 
 #if defined(POWER_POWERSTATUS_LTEMODEM_Msk)
@@ -943,7 +982,7 @@ NRF_STATIC_INLINE uint8_t nrf_power_gpregret_get(void)
 
 NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(uint8_t reg_num, uint8_t val)
 {
-#ifdef NRF91_SERIES
+#if defined(NRF91_SERIES) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     NRF_POWER->GPREGRET[reg_num] = val;
 #else
     NRFX_ASSERT(reg_num < 1);
@@ -953,7 +992,7 @@ NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(uint8_t reg_num, uint8_t val)
 
 NRF_STATIC_INLINE uint8_t nrf_power_gpregret_ext_get(uint8_t reg_num)
 {
-#ifdef NRF91_SERIES
+#if defined(NRF91_SERIES) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     return NRF_POWER->GPREGRET[reg_num];
 #else
     NRFX_ASSERT(reg_num < 1);
