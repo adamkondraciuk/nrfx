@@ -20,7 +20,7 @@
 #endif
 
 #define DPPI_AVAILABLE_CHANNELS_MASK \
-    (((1UL << DPPI_CH_NUM) - 1) & (~NRFX_DPPI_CHANNELS_USED))
+    ((uint32_t)(((1ULL << DPPI_CH_NUM) - 1) & (~NRFX_DPPI_CHANNELS_USED)))
 
 #define DPPI_AVAILABLE_GROUPS_MASK   \
     (((1UL << DPPI_GROUP_NUM) - 1)   & (~NRFX_DPPI_GROUPS_USED))
