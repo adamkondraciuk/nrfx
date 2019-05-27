@@ -40,7 +40,11 @@ NRF_STATIC_INLINE void nrf_regulators_system_off(NRF_REGULATORS_Type * p_reg);
 
 NRF_STATIC_INLINE void nrf_regulators_dcdcen_set(NRF_REGULATORS_Type * p_reg, bool enable)
 {
+#if defined(REGULATORS_DCDCEN_DCDCEN_Msk)
     p_reg->DCDCEN = (enable ? REGULATORS_DCDCEN_DCDCEN_Msk : 0);
+#else
+    p_reg->VREGMAIN.DCDCEN = (enable ? REGULATORS_VREGMAIN_DCDCEN_DCDCEN_Msk : 0);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_regulators_system_off(NRF_REGULATORS_Type * p_reg)
