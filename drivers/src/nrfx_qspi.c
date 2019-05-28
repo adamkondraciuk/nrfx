@@ -150,6 +150,7 @@ nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
     {
         nrf_qspi_cinstrdata_set(NRF_QSPI, p_config->length, p_tx_buffer);
     }
+
     nrf_qspi_int_disable(NRF_QSPI, NRF_QSPI_INT_READY_MASK);
 
     nrf_qspi_cinstr_transfer_start(NRF_QSPI, p_config);
@@ -164,7 +165,6 @@ nrfx_err_t nrfx_qspi_cinstr_xfer(nrf_qspi_cinstr_conf_t const * p_config,
         return NRFX_ERROR_TIMEOUT;
     }
     nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
-    nrf_qspi_int_enable(NRF_QSPI, NRF_QSPI_INT_READY_MASK);
 
     if (p_rx_buffer)
     {
