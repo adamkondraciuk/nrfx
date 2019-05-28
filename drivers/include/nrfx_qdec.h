@@ -130,10 +130,7 @@ void nrfx_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
-{
-    return nrf_qdec_task_address_get(task);
-}
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task);
 
 /**
  * @brief Function for returning the address of the specified QDEC event.
@@ -142,10 +139,19 @@ __STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event);
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
+{
+    return nrf_qdec_task_address_get(task);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
 {
     return nrf_qdec_event_address_get(event);
 }
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

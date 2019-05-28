@@ -230,8 +230,8 @@ uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * const p_instance);
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_mask     Pointer to the location where the mask is filled.
  */
-__STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
-                                          uint32_t               * p_mask);
+NRFX_STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
+                                             uint32_t               * p_mask);
 
 /**
  * @brief Function for enabling instance interrupts.
@@ -239,7 +239,7 @@ __STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] mask       Mask of interrupts to enable.
  */
-__STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, uint32_t mask);
+NRFX_STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, uint32_t mask);
 
 /**
  * @brief Function for retrieving the current counter value.
@@ -248,14 +248,14 @@ __STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, ui
  *
  * @return Counter value.
  */
-__STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * const p_instance);
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * const p_instance);
 
 /**
  * @brief Function for clearing the counter value.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-__STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance);
+NRFX_STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance);
 
 /**
  * @brief Function for returning a requested task address for the RTC driver instance.
@@ -267,8 +267,8 @@ __STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
  *
  * @return Address of task register.
  */
-__STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
-                                                   nrf_rtc_task_t           task);
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
+                                                      nrf_rtc_task_t           task);
 
 /**
  * @brief Function for returning a requested event address for the RTC driver instance.
@@ -280,12 +280,11 @@ __STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_in
  *
  * @return Address of event register.
  */
-__STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
-                                                    nrf_rtc_event_t          event);
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
+                                                       nrf_rtc_event_t          event);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-
-__STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
                                           uint32_t               * p_mask)
 {
     *p_mask = nrf_rtc_int_get(p_instance->p_reg);
@@ -297,33 +296,33 @@ __STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * const p_instance,
                                            NRF_RTC_INT_COMPARE3_MASK);
 }
 
-__STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, uint32_t mask)
+NRFX_STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * const p_instance, uint32_t mask)
 {
     nrf_rtc_int_enable(p_instance->p_reg, mask);
 }
 
-__STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * const p_instance)
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * const p_instance)
 {
     return nrf_rtc_counter_get(p_instance->p_reg);
 }
 
-__STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
+NRFX_STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * const p_instance)
 {
     nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_CLEAR);
 }
 
-__STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
-                                                   nrf_rtc_task_t           task)
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * const p_instance,
+                                                      nrf_rtc_task_t           task)
 {
     return nrf_rtc_task_address_get(p_instance->p_reg, task);
 }
 
-__STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
-                                                    nrf_rtc_event_t          event)
+NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * const p_instance,
+                                                       nrf_rtc_event_t          event)
 {
     return nrf_rtc_event_address_get(p_instance->p_reg, event);
 }
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

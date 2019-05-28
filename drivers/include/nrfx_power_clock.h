@@ -10,10 +10,10 @@ extern "C" {
 #endif
 
 
-__STATIC_INLINE void nrfx_power_clock_irq_init(void);
+NRFX_STATIC_INLINE void nrfx_power_clock_irq_init(void);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
-__STATIC_INLINE void nrfx_power_clock_irq_init(void)
+NRFX_STATIC_INLINE void nrfx_power_clock_irq_init(void)
 {
     uint8_t priority;
 #if NRFX_CHECK(NRFX_POWER_ENABLED) && NRFX_CHECK(NRFX_CLOCK_ENABLED)

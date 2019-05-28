@@ -170,8 +170,8 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_uarte_task_address_get(nrfx_uarte_t const * p_instance,
-                                                     nrf_uarte_task_t     task);
+NRFX_STATIC_INLINE uint32_t nrfx_uarte_task_address_get(nrfx_uarte_t const * p_instance,
+                                                        nrf_uarte_task_t     task);
 
 /**
  * @brief Function for getting the address of the specified UARTE event.
@@ -181,8 +181,8 @@ __STATIC_INLINE uint32_t nrfx_uarte_task_address_get(nrfx_uarte_t const * p_inst
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_instance,
-                                                      nrf_uarte_event_t    event);
+NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_instance,
+                                                         nrf_uarte_event_t    event);
 
 /**
  * @brief Function for sending data over UARTE.
@@ -305,19 +305,19 @@ void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance);
 uint32_t nrfx_uarte_errorsrc_get(nrfx_uarte_t const * p_instance);
 
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-__STATIC_INLINE uint32_t nrfx_uarte_task_address_get(nrfx_uarte_t const * p_instance,
-                                                     nrf_uarte_task_t     task)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_uarte_task_address_get(nrfx_uarte_t const * p_instance,
+                                                        nrf_uarte_task_t     task)
 {
     return nrf_uarte_task_address_get(p_instance->p_reg, task);
 }
 
-__STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_instance,
-                                                      nrf_uarte_event_t    event)
+NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_instance,
+                                                         nrf_uarte_event_t    event)
 {
     return nrf_uarte_event_address_get(p_instance->p_reg, event);
 }
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

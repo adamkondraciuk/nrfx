@@ -127,7 +127,32 @@ bool nrfx_swi_is_allocated(nrfx_swi_t swi);
  * @return EGU base address or NULL if the specified SWI instance number
  *         is too high.
  */
-__STATIC_INLINE NRF_EGU_Type * nrfx_swi_egu_instance_get(nrfx_swi_t swi)
+NRFX_STATIC_INLINE NRF_EGU_Type * nrfx_swi_egu_instance_get(nrfx_swi_t swi);
+
+/**
+ * @brief Function for returning the EGU trigger task address.
+ *
+ * @param[in] swi     SWI instance.
+ * @param[in] channel Number of the EGU channel.
+ *
+ * @return Address of the EGU trigger task.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_swi_task_trigger_address_get(nrfx_swi_t swi,
+                                                              uint8_t    channel);
+
+/**
+ * @brief Function for returning the EGU-triggered event address.
+ *
+ * @param[in] swi     SWI instance.
+ * @param[in] channel Number of the EGU channel.
+ *
+ * @return Address of the EGU-triggered event.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
+                                                                 uint8_t    channel);
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE NRF_EGU_Type * nrfx_swi_egu_instance_get(nrfx_swi_t swi)
 {
 #if (EGU_COUNT < SWI_COUNT)
     if (swi >= EGU_COUNT)
@@ -139,16 +164,8 @@ __STATIC_INLINE NRF_EGU_Type * nrfx_swi_egu_instance_get(nrfx_swi_t swi)
     return (NRF_EGU_Type *)((uint32_t)NRF_EGU0 + offset);
 }
 
-/**
- * @brief Function for returning the EGU trigger task address.
- *
- * @param[in] swi     SWI instance.
- * @param[in] channel Number of the EGU channel.
- *
- * @return Address of the EGU trigger task.
- */
-__STATIC_INLINE uint32_t nrfx_swi_task_trigger_address_get(nrfx_swi_t swi,
-                                                           uint8_t    channel)
+NRFX_STATIC_INLINE uint32_t nrfx_swi_task_trigger_address_get(nrfx_swi_t swi,
+                                                              uint8_t    channel)
 {
     NRFX_ASSERT(nrfx_swi_is_allocated(swi));
 
@@ -163,16 +180,8 @@ __STATIC_INLINE uint32_t nrfx_swi_task_trigger_address_get(nrfx_swi_t swi,
     return nrf_egu_task_trigger_address_get(p_egu, channel);
 }
 
-/**
- * @brief Function for returning the EGU-triggered event address.
- *
- * @param[in] swi     SWI instance.
- * @param[in] channel Number of the EGU channel.
- *
- * @return Address of the EGU-triggered event.
- */
-__STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
-                                                              uint8_t    channel)
+NRFX_STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
+                                                                 uint8_t    channel)
 {
     NRFX_ASSERT(nrfx_swi_is_allocated(swi));
 
@@ -186,7 +195,7 @@ __STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
 
     return nrf_egu_event_triggered_address_get(p_egu, channel);
 }
-
+#endif // NRFX_DECLARE_ONLY
 #endif // NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__NRFX_DOXYGEN__)
 
 /** @} */

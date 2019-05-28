@@ -72,41 +72,41 @@ typedef struct
 
 static gpiote_control_block_t m_cb;
 
-__STATIC_INLINE bool pin_in_use(uint32_t pin)
+static bool pin_in_use(uint32_t pin)
 {
     return (m_cb.pin_assignments[pin] != PIN_NOT_USED);
 }
 
 
-__STATIC_INLINE bool pin_in_use_as_non_task_out(uint32_t pin)
+static bool pin_in_use_as_non_task_out(uint32_t pin)
 {
     return (m_cb.pin_assignments[pin] == PIN_USED);
 }
 
 
-__STATIC_INLINE bool pin_in_use_by_te(uint32_t pin)
+static bool pin_in_use_by_te(uint32_t pin)
 {
     return (m_cb.pin_assignments[pin] >= 0 && m_cb.pin_assignments[pin] < GPIOTE_CH_NUM) ?
             true : false;
 }
 
 
-__STATIC_INLINE bool pin_in_use_by_port(uint32_t pin)
+static bool pin_in_use_by_port(uint32_t pin)
 {
     return (m_cb.pin_assignments[pin] >= GPIOTE_CH_NUM);
 }
 
 
-__STATIC_INLINE bool pin_in_use_by_gpiote(uint32_t pin)
+static bool pin_in_use_by_gpiote(uint32_t pin)
 {
     return (m_cb.pin_assignments[pin] >= 0);
 }
 
 
-__STATIC_INLINE void pin_in_use_by_te_set(uint32_t                  pin,
-                                          uint32_t                  channel_id,
-                                          nrfx_gpiote_evt_handler_t handler,
-                                          bool                      is_channel)
+static void pin_in_use_by_te_set(uint32_t                  pin,
+                                 uint32_t                  channel_id,
+                                 nrfx_gpiote_evt_handler_t handler,
+                                 bool                      is_channel)
 {
     m_cb.pin_assignments[pin] = channel_id;
     m_cb.handlers[channel_id] = handler;
@@ -117,40 +117,40 @@ __STATIC_INLINE void pin_in_use_by_te_set(uint32_t                  pin,
 }
 
 
-__STATIC_INLINE void pin_in_use_set(uint32_t pin)
+static void pin_in_use_set(uint32_t pin)
 {
     m_cb.pin_assignments[pin] = PIN_USED;
 }
 
 
-__STATIC_INLINE void pin_in_use_clear(uint32_t pin)
+static void pin_in_use_clear(uint32_t pin)
 {
     m_cb.pin_assignments[pin] = PIN_NOT_USED;
 }
 
 
-__STATIC_INLINE void pin_configured_set(uint32_t pin)
+static void pin_configured_set(uint32_t pin)
 {
     nrf_bitmask_bit_set(pin, m_cb.configured_pins);
 }
 
-__STATIC_INLINE void pin_configured_clear(uint32_t pin)
+static void pin_configured_clear(uint32_t pin)
 {
     nrf_bitmask_bit_clear(pin, m_cb.configured_pins);
 }
 
-__STATIC_INLINE bool pin_configured_check(uint32_t pin)
+static bool pin_configured_check(uint32_t pin)
 {
     return 0 != nrf_bitmask_bit_is_set(pin, m_cb.configured_pins);
 }
 
-__STATIC_INLINE int8_t channel_port_get(uint32_t pin)
+static int8_t channel_port_get(uint32_t pin)
 {
     return m_cb.pin_assignments[pin];
 }
 
 
-__STATIC_INLINE nrfx_gpiote_evt_handler_t channel_handler_get(uint32_t channel)
+static nrfx_gpiote_evt_handler_t channel_handler_get(uint32_t channel)
 {
     return m_cb.handlers[channel];
 }

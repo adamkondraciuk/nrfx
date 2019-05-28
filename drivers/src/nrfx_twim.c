@@ -320,7 +320,7 @@ bool nrfx_twim_is_busy(nrfx_twim_t const * p_instance)
 }
 
 
-__STATIC_INLINE void twim_list_enable_handle(NRF_TWIM_Type * p_twim, uint32_t flags)
+static void twim_list_enable_handle(NRF_TWIM_Type * p_twim, uint32_t flags)
 {
     if (NRFX_TWIM_FLAG_TX_POSTINC & flags)
     {
@@ -340,10 +340,10 @@ __STATIC_INLINE void twim_list_enable_handle(NRF_TWIM_Type * p_twim, uint32_t fl
         nrf_twim_rx_list_disable(p_twim);
     }
 }
-__STATIC_INLINE nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
-                                     NRF_TWIM_Type               * p_twim,
-                                     nrfx_twim_xfer_desc_t const * p_xfer_desc,
-                                     uint32_t                      flags)
+static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
+                            NRF_TWIM_Type               * p_twim,
+                            nrfx_twim_xfer_desc_t const * p_xfer_desc,
+                            uint32_t                      flags)
 {
     nrfx_err_t err_code = NRFX_SUCCESS;
     nrf_twim_task_t  start_task = NRF_TWIM_TASK_STARTTX;

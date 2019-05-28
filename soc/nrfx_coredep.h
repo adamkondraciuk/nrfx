@@ -51,11 +51,11 @@
  *
  * @param time_us Number of microseconds to wait.
  */
-__STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us);
+NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us);
 
 /** @} */
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+#ifndef NRF_DECLARE_ONLY
 
 #if NRFX_CHECK(NRFX_DELAY_DWT_BASED)
 
@@ -63,7 +63,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us);
 #error "DWT unit not present in the SoC that is used."
 #endif
 
-__STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
+NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 {
     if (time_us == 0)
     {
@@ -95,7 +95,7 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 
 #else // NRFX_CHECK(NRFX_DELAY_DWT_BASED)
 
-__STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
+NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 {
     if (time_us == 0)
     {
@@ -137,6 +137,6 @@ __STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 
 #endif // !NRFX_CHECK(NRFX_DELAY_DWT_BASED_DELAY)
 
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRF_DECLARE_ONLY
 
 #endif // NRFX_COREDEP_H__

@@ -173,8 +173,8 @@ void nrfx_timer_increment(nrfx_timer_t const * const p_instance);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
-                                                     nrf_timer_task_t           timer_task);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
+                                                        nrf_timer_task_t           timer_task);
 
 /**
  * @brief Function for returning the address of the specified timer capture task.
@@ -184,8 +184,9 @@ __STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const 
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const * const p_instance,
-                                                             uint32_t                   channel);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(
+        nrfx_timer_t const * const p_instance,
+        uint32_t                   channel);
 
 /**
  * @brief Function for returning the address of the specified timer event.
@@ -195,8 +196,8 @@ __STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const 
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
-                                                      nrf_timer_event_t          timer_event);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
+                                                         nrf_timer_event_t          timer_event);
 
 /**
  * @brief Function for returning the address of the specified timer compare event.
@@ -206,8 +207,9 @@ __STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t const * const p_instance,
-                                                              uint32_t                   channel);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(
+        nrfx_timer_t const * const p_instance,
+        uint32_t                   channel);
 
 /**
  * @brief Function for capturing the timer value.
@@ -230,8 +232,8 @@ uint32_t nrfx_timer_capture(nrfx_timer_t const * const p_instance,
  *
  * @return Captured value.
  */
-__STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
-                                                nrf_timer_cc_channel_t     cc_channel);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
+                                                   nrf_timer_cc_channel_t     cc_channel);
 
 /**
  * @brief Function for setting the timer channel in compare mode.
@@ -270,8 +272,8 @@ void nrfx_timer_extended_compare(nrfx_timer_t const * const p_instance,
  *
  * @return Number of ticks.
  */
-__STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
-                                                uint32_t                   time_us);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
+                                                   uint32_t                   time_us);
 
 /**
  * @brief Function for converting time in milliseconds to timer ticks.
@@ -281,8 +283,8 @@ __STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_ins
  *
  * @return Number of ticks.
  */
-__STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
-                                                uint32_t                   time_ms);
+NRFX_STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
+                                                   uint32_t                   time_ms);
 
 /**
  * @brief Function for enabling timer compare interrupt.
@@ -303,53 +305,53 @@ void nrfx_timer_compare_int_disable(nrfx_timer_t const * const p_instance,
                                     uint32_t                   channel);
 
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-
-__STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
-                                                     nrf_timer_task_t           timer_task)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * const p_instance,
+                                                        nrf_timer_task_t           timer_task)
 {
     return nrf_timer_task_address_get(p_instance->p_reg, timer_task);
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const * const p_instance,
-                                                             uint32_t                   channel)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(
+        nrfx_timer_t const * const p_instance,
+        uint32_t                   channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
     return nrf_timer_task_address_get(p_instance->p_reg, nrf_timer_capture_task_get(channel));
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
-                                                      nrf_timer_event_t          timer_event)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * const p_instance,
+                                                         nrf_timer_event_t          timer_event)
 {
     return nrf_timer_event_address_get(p_instance->p_reg, timer_event);
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t const * const p_instance,
-                                                              uint32_t                   channel)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(
+        nrfx_timer_t const * const p_instance,
+        uint32_t                   channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
     return nrf_timer_event_address_get(p_instance->p_reg, nrf_timer_compare_event_get(channel));
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
-                                                nrf_timer_cc_channel_t     cc_channel)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const * const p_instance,
+                                                   nrf_timer_cc_channel_t     cc_channel)
 {
     return nrf_timer_cc_read(p_instance->p_reg, cc_channel);
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
-                                                uint32_t                   timer_us)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * const p_instance,
+                                                   uint32_t                   timer_us)
 {
     return nrf_timer_us_to_ticks(timer_us, nrf_timer_frequency_get(p_instance->p_reg));
 }
 
-__STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
-                                                uint32_t                   timer_ms)
+NRFX_STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * const p_instance,
+                                                   uint32_t                   timer_ms)
 {
     return nrf_timer_ms_to_ticks(timer_ms, nrf_timer_frequency_get(p_instance->p_reg));
 }
-
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

@@ -60,8 +60,8 @@ typedef enum
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
-__STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
-                                         nrf_spu_event_t event);
+NRF_STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
+                                           nrf_spu_event_t event);
 
 /**
  * @brief Function for retrieving the state of the SPU event.
@@ -72,8 +72,8 @@ __STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-__STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
-                                         nrf_spu_event_t      event);
+NRF_STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
+                                           nrf_spu_event_t      event);
 
 /**
  * @brief Function for enabling specified interrupts.
@@ -81,8 +81,8 @@ __STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Interrupts to be enabled.
  */
-__STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
-                                        uint32_t       mask);
+NRF_STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
+                                          uint32_t       mask);
 
 /**
  * @brief Function for disabling specified interrupts.
@@ -90,8 +90,8 @@ __STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Interrupts to be disabled.
  */
-__STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
-                                         uint32_t       mask);
+NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
+                                           uint32_t       mask);
 
 /**
  * @brief Function for retrieving the state of a given interrupt.
@@ -102,8 +102,8 @@ __STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-__STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
-                                              uint32_t             spu_int);
+NRF_STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
+                                                uint32_t             spu_int);
 
 /**
  * @brief Function for setting up publication configuration of a given SPU event.
@@ -112,9 +112,9 @@ __STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
  * @param[in] event   Event to configure.
  * @param[in] channel Channel to connect with published event.
  */
-__STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
-                                         nrf_spu_event_t event,
-                                         uint32_t        channel);
+NRF_STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
+                                           nrf_spu_event_t event,
+                                           uint32_t        channel);
 
 /**
  * @brief Function for clearing publication configuration of a given SPU event.
@@ -122,8 +122,8 @@ __STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
-__STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
-                                           nrf_spu_event_t event);
+NRF_STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
+                                             nrf_spu_event_t event);
 
 /**
  * @brief Function for retrieving the capabilities of the current device.
@@ -133,7 +133,7 @@ __STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
  * @retval true  ARM TrustZone support is available.
  * @retval false ARM TrustZone support is not available.
  */
-__STATIC_INLINE bool nrf_spu_tz_is_available(NRF_SPU_Type const * p_reg);
+NRF_STATIC_INLINE bool nrf_spu_tz_is_available(NRF_SPU_Type const * p_reg);
 
 /**
  * @brief Function for configuring the DPPI channels to be available in particular domains.
@@ -146,10 +146,10 @@ __STATIC_INLINE bool nrf_spu_tz_is_available(NRF_SPU_Type const * p_reg);
  * @param[in] channels_mask Bitmask with channels configuration.
  * @param[in] lock_conf     Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        dppi_id,
-                                             uint32_t       channels_mask,
-                                             bool           lock_conf);
+NRF_STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        dppi_id,
+                                               uint32_t       channels_mask,
+                                               bool           lock_conf);
 
 /**
  * @brief Function for configuring the GPIO pins to be available in particular domains.
@@ -162,10 +162,10 @@ __STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
  * @param[in] gpio_mask Bitmask with gpio configuration.
  * @param[in] lock_conf Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        gpio_port,
-                                             uint32_t       gpio_mask,
-                                             bool           lock_conf);
+NRF_STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        gpio_port,
+                                               uint32_t       gpio_mask,
+                                               bool           lock_conf);
 
 /**
  * @brief Function for configuring non-secure callable flash region.
@@ -176,11 +176,11 @@ __STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
  * @param[in] region_number  Flash region number.
  * @param[in] lock_conf      Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
-                                          uint8_t            flash_nsc_id,
-                                          nrf_spu_nsc_size_t flash_nsc_size,
-                                          uint8_t            region_number,
-                                          bool               lock_conf);
+NRF_STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
+                                            uint8_t            flash_nsc_id,
+                                            nrf_spu_nsc_size_t flash_nsc_size,
+                                            uint8_t            region_number,
+                                            bool               lock_conf);
 
 /**
  * @brief Function for configuring non-secure callable RAM region.
@@ -191,11 +191,11 @@ __STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
  * @param[in] region_number RAM region number.
  * @param[in] lock_conf     Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
-                                        uint8_t            ram_nsc_id,
-                                        nrf_spu_nsc_size_t ram_nsc_size,
-                                        uint8_t            region_number,
-                                        bool               lock_conf);
+NRF_STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
+                                          uint8_t            ram_nsc_id,
+                                          nrf_spu_nsc_size_t ram_nsc_size,
+                                          uint8_t            region_number,
+                                          bool               lock_conf);
 
 /**
  * @brief Function for configuring security for a particular flash region.
@@ -208,11 +208,11 @@ __STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
  * @param[in] permissions Flash region permissions.
  * @param[in] lock_conf   Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        region_id,
-                                             bool           secure_attr,
-                                             uint32_t       permissions,
-                                             bool           lock_conf);
+NRF_STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        region_id,
+                                               bool           secure_attr,
+                                               uint32_t       permissions,
+                                               bool           lock_conf);
 
 /**
  * @brief Function for configuring security for the RAM region.
@@ -225,11 +225,11 @@ __STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
  * @param[in] permissions RAM region permissions.
  * @param[in] lock_conf   Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
-                                           uint8_t        region_id,
-                                           bool           secure_attr,
-                                           uint32_t       permissions,
-                                           bool           lock_conf);
+NRF_STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
+                                             uint8_t        region_id,
+                                             bool           secure_attr,
+                                             uint32_t       permissions,
+                                             bool           lock_conf);
 
 /**
  * @brief Function for configuring access permissions of the peripheral.
@@ -240,70 +240,70 @@ __STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
  * @param[in] secure_dma    DMA transfers possible only from RAM memory in secure domain.
  * @param[in] lock_conf     Lock configuration until next SoC reset.
  */
-__STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
-                                            uint32_t       peripheral_id,
-                                            bool           secure_attr,
-                                            bool           secure_dma,
-                                            bool           lock_conf);
+NRF_STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
+                                              uint32_t       peripheral_id,
+                                              bool           secure_attr,
+                                              bool           secure_dma,
+                                              bool           lock_conf);
 
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+#ifndef NRF_DECLARE_ONLY
 
-__STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
-                                         nrf_spu_event_t event)
+NRF_STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
+                                           nrf_spu_event_t event)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
     volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event));
     (void)dummy;
 }
 
-__STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
-                                         nrf_spu_event_t      event)
+NRF_STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
+                                           nrf_spu_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
-                                        uint32_t       mask)
+NRF_STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,
+                                          uint32_t       mask)
 {
     p_reg->INTENSET = mask;
 }
 
-__STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
-                                         uint32_t       mask)
+NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
+                                           uint32_t       mask)
 {
     p_reg->INTENCLR = mask;
 }
 
-__STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
-                                              uint32_t             spu_int)
+NRF_STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
+                                                uint32_t             spu_int)
 {
     return (bool)(p_reg->INTENSET & spu_int);
 }
 
-__STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
-                                         nrf_spu_event_t event,
-                                         uint32_t        channel)
+NRF_STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
+                                           nrf_spu_event_t event,
+                                           uint32_t        channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
         (channel | (SPU_PUBLISH_RAMACCERR_EN_Msk));
 }
 
-__STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
-                                           nrf_spu_event_t event)
+NRF_STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
+                                             nrf_spu_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
 
-__STATIC_INLINE bool nrf_spu_tz_is_available(NRF_SPU_Type const * p_reg)
+NRF_STATIC_INLINE bool nrf_spu_tz_is_available(NRF_SPU_Type const * p_reg)
 {
     return (p_reg->CAP & SPU_CAP_TZM_Msk ? true : false);
 }
 
-__STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        dppi_id,
-                                             uint32_t       channels_mask,
-                                             bool           lock_conf)
+NRF_STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        dppi_id,
+                                               uint32_t       channels_mask,
+                                               bool           lock_conf)
 {
     NRFX_ASSERT(!(p_reg->DPPI[dppi_id].LOCK & SPU_DPPI_LOCK_LOCK_Msk));
 
@@ -315,10 +315,10 @@ __STATIC_INLINE void nrf_spu_dppi_config_set(NRF_SPU_Type * p_reg,
     }
 }
 
-__STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        gpio_port,
-                                             uint32_t       gpio_mask,
-                                             bool           lock_conf)
+NRF_STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        gpio_port,
+                                               uint32_t       gpio_mask,
+                                               bool           lock_conf)
 {
     NRFX_ASSERT(!(p_reg->GPIOPORT[gpio_port].LOCK & SPU_GPIOPORT_LOCK_LOCK_Msk));
 
@@ -330,11 +330,11 @@ __STATIC_INLINE void nrf_spu_gpio_config_set(NRF_SPU_Type * p_reg,
     }
 }
 
-__STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
-                                          uint8_t            flash_nsc_id,
-                                          nrf_spu_nsc_size_t flash_nsc_size,
-                                          uint8_t            region_number,
-                                          bool               lock_conf)
+NRF_STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
+                                            uint8_t            flash_nsc_id,
+                                            nrf_spu_nsc_size_t flash_nsc_size,
+                                            uint8_t            region_number,
+                                            bool               lock_conf)
 {
     NRFX_ASSERT(!(p_reg->FLASHNSC[flash_nsc_id].REGION & SPU_FLASHNSC_REGION_LOCK_Msk));
     NRFX_ASSERT(!(p_reg->FLASHNSC[flash_nsc_id].SIZE & SPU_FLASHNSC_SIZE_LOCK_Msk));
@@ -345,11 +345,11 @@ __STATIC_INLINE void nrf_spu_flashnsc_set(NRF_SPU_Type *     p_reg,
         (lock_conf ? SPU_FLASHNSC_SIZE_LOCK_Msk : 0);
 }
 
-__STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
-                                        uint8_t            ram_nsc_id,
-                                        nrf_spu_nsc_size_t ram_nsc_size,
-                                        uint8_t            region_number,
-                                        bool               lock_conf)
+NRF_STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
+                                          uint8_t            ram_nsc_id,
+                                          nrf_spu_nsc_size_t ram_nsc_size,
+                                          uint8_t            region_number,
+                                          bool               lock_conf)
 {
     NRFX_ASSERT(!(p_reg->RAMNSC[ram_nsc_id].REGION & SPU_RAMNSC_REGION_LOCK_Msk));
     NRFX_ASSERT(!(p_reg->RAMNSC[ram_nsc_id].SIZE & SPU_RAMNSC_SIZE_LOCK_Msk));
@@ -360,11 +360,11 @@ __STATIC_INLINE void nrf_spu_ramnsc_set(NRF_SPU_Type *     p_reg,
         (lock_conf ? SPU_RAMNSC_SIZE_LOCK_Msk : 0);
 }
 
-__STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
-                                             uint8_t        region_id,
-                                             bool           secure_attr,
-                                             uint32_t       permissions,
-                                             bool           lock_conf)
+NRF_STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
+                                               uint8_t        region_id,
+                                               bool           secure_attr,
+                                               uint32_t       permissions,
+                                               bool           lock_conf)
 {
     NRFX_ASSERT(!(p_reg->FLASHREGION[region_id].PERM & SPU_FLASHREGION_PERM_LOCK_Msk));
 
@@ -373,11 +373,11 @@ __STATIC_INLINE void nrf_spu_flashregion_set(NRF_SPU_Type * p_reg,
         (lock_conf   ? SPU_FLASHREGION_PERM_LOCK_Msk    : 0);
 }
 
-__STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
-                                           uint8_t        region_id,
-                                           bool           secure_attr,
-                                           uint32_t       permissions,
-                                           bool           lock_conf)
+NRF_STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
+                                             uint8_t        region_id,
+                                             bool           secure_attr,
+                                             uint32_t       permissions,
+                                             bool           lock_conf)
 {
     NRFX_ASSERT(!(p_reg->RAMREGION[region_id].PERM & SPU_RAMREGION_PERM_LOCK_Msk));
 
@@ -386,11 +386,11 @@ __STATIC_INLINE void nrf_spu_ramregion_set(NRF_SPU_Type * p_reg,
         (lock_conf   ? SPU_RAMREGION_PERM_LOCK_Msk    : 0);
 }
 
-__STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
-                                            uint32_t       peripheral_id,
-                                            bool           secure_attr,
-                                            bool           secure_dma,
-                                            bool           lock_conf)
+NRF_STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
+                                              uint32_t       peripheral_id,
+                                              bool           secure_attr,
+                                              bool           secure_dma,
+                                              bool           lock_conf)
 {
     NRFX_ASSERT(p_reg->PERIPHID[peripheral_id].PERM & SPU_PERIPHID_PERM_PRESENT_Msk);
     NRFX_ASSERT(!(p_reg->PERIPHID[peripheral_id].PERM & SPU_PERIPHID_PERM_LOCK_Msk));
@@ -401,7 +401,7 @@ __STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
          (lock_conf   ? SPU_PERIPHID_PERM_LOCK_Msk    : 0);
 }
 
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRF_DECLARE_ONLY
 
 /** @} */
 

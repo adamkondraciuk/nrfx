@@ -21,7 +21,7 @@ static uint8_t          m_groups_allocated;   /**< Bitmap representing groups av
  *
  * @retval Group mask.
  */
-__STATIC_INLINE uint32_t group_to_mask(nrf_ppi_channel_group_t group)
+static uint32_t group_to_mask(nrf_ppi_channel_group_t group)
 {
     return (1uL << (uint32_t) group);
 }
@@ -35,7 +35,7 @@ __STATIC_INLINE uint32_t group_to_mask(nrf_ppi_channel_group_t group)
  * @retval true  The channel is a programmable application channel.
  * @retval false The channel is used by a stack (for example SoftDevice) or is preprogrammed.
  */
-__STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
+static bool is_programmable_app_channel(nrf_ppi_channel_t channel)
 {
     return ((NRFX_PPI_PROG_APP_CHANNELS_MASK & nrfx_ppi_channel_to_mask(channel)) != 0);
 }
@@ -49,7 +49,7 @@ __STATIC_INLINE bool is_programmable_app_channel(nrf_ppi_channel_t channel)
  * @retval true  All specified channels can be used by an application.
  * @retval false At least one specified channel is used by a stack (for example SoftDevice).
  */
-__STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
+static bool are_app_channels(uint32_t channel_mask)
 {
     //lint -e(587)
     return ((~(NRFX_PPI_ALL_APP_CHANNELS_MASK) & channel_mask) == 0);
@@ -64,7 +64,7 @@ __STATIC_INLINE bool are_app_channels(uint32_t channel_mask)
  * @retval true  The channel can be used by an application.
  * @retval false The channel is used by a stack (for example SoftDevice).
  */
-__STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
+static bool is_app_channel(nrf_ppi_channel_t channel)
 {
     return are_app_channels(nrfx_ppi_channel_to_mask(channel));
 }
@@ -79,7 +79,7 @@ __STATIC_INLINE bool is_app_channel(nrf_ppi_channel_t channel)
  * @retval false The group is not an application group (this group either does not exist or
  *               it is used by a stack (for example SoftDevice)).
  */
-__STATIC_INLINE bool is_app_group(nrf_ppi_channel_group_t group)
+static bool is_app_group(nrf_ppi_channel_group_t group)
 {
     return ((NRFX_PPI_ALL_APP_GROUPS_MASK & group_to_mask(group)) != 0);
 }
@@ -93,7 +93,7 @@ __STATIC_INLINE bool is_app_group(nrf_ppi_channel_group_t group)
  * @retval true  The channel is allocated.
  * @retval false The channel is not allocated.
  */
-__STATIC_INLINE bool is_allocated_channel(nrf_ppi_channel_t channel)
+static bool is_allocated_channel(nrf_ppi_channel_t channel)
 {
     return ((m_channels_allocated & nrfx_ppi_channel_to_mask(channel)) != 0);
 }
@@ -104,7 +104,7 @@ __STATIC_INLINE bool is_allocated_channel(nrf_ppi_channel_t channel)
  *
  * @param[in] channel_num Specifies the channel to set the "allocated" indication.
  */
-__STATIC_INLINE void channel_allocated_set(nrf_ppi_channel_t channel)
+static void channel_allocated_set(nrf_ppi_channel_t channel)
 {
     m_channels_allocated |= nrfx_ppi_channel_to_mask(channel);
 }
@@ -115,7 +115,7 @@ __STATIC_INLINE void channel_allocated_set(nrf_ppi_channel_t channel)
  *
  * @param[in] channel_num Specifies the channel to clear the "allocated" indication.
  */
-__STATIC_INLINE void channel_allocated_clr(nrf_ppi_channel_t channel)
+static void channel_allocated_clr(nrf_ppi_channel_t channel)
 {
     m_channels_allocated &= ~nrfx_ppi_channel_to_mask(channel);
 }
@@ -124,7 +124,7 @@ __STATIC_INLINE void channel_allocated_clr(nrf_ppi_channel_t channel)
 /**
  * @brief Clear all allocated channels.
  */
-__STATIC_INLINE void channel_allocated_clr_all(void)
+static void channel_allocated_clr_all(void)
 {
     m_channels_allocated &= ~NRFX_PPI_ALL_APP_CHANNELS_MASK;
 }
@@ -138,7 +138,7 @@ __STATIC_INLINE void channel_allocated_clr_all(void)
  * @retval true  The group is allocated.
  *         false The group is not allocated.
  */
-__STATIC_INLINE bool is_allocated_group(nrf_ppi_channel_group_t group)
+static bool is_allocated_group(nrf_ppi_channel_group_t group)
 {
     return ((m_groups_allocated & group_to_mask(group)) != 0);
 }
@@ -149,7 +149,7 @@ __STATIC_INLINE bool is_allocated_group(nrf_ppi_channel_group_t group)
  *
  * @param[in] group_num Specifies the group to set the "allocated" indication.
  */
-__STATIC_INLINE void group_allocated_set(nrf_ppi_channel_group_t group)
+static void group_allocated_set(nrf_ppi_channel_group_t group)
 {
     m_groups_allocated |= group_to_mask(group);
 }
@@ -160,7 +160,7 @@ __STATIC_INLINE void group_allocated_set(nrf_ppi_channel_group_t group)
  *
  * @param[in] group_num Specifies the group to clear the "allocated" indication.
  */
-__STATIC_INLINE void group_allocated_clr(nrf_ppi_channel_group_t group)
+static void group_allocated_clr(nrf_ppi_channel_group_t group)
 {
     m_groups_allocated &= ~group_to_mask(group);
 }
@@ -169,7 +169,7 @@ __STATIC_INLINE void group_allocated_clr(nrf_ppi_channel_group_t group)
 /**
  * @brief Clear all allocated groups.
  */
-__STATIC_INLINE void group_allocated_clr_all()
+static void group_allocated_clr_all()
 {
     m_groups_allocated &= ~NRFX_PPI_ALL_APP_GROUPS_MASK;
 }

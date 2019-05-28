@@ -68,7 +68,7 @@ void nrfx_clock_lfclk_stop(void);
  * @retval true  The LFCLK is running.
  * @retval false The LFCLK is not running.
  */
-__STATIC_INLINE bool nrfx_clock_lfclk_is_running(void);
+NRFX_STATIC_INLINE bool nrfx_clock_lfclk_is_running(void);
 
 /** @brief Function for starting the high-accuracy source HFCLK. */
 void nrfx_clock_hfclk_start(void);
@@ -82,7 +82,7 @@ void nrfx_clock_hfclk_stop(void);
  * @retval true  The HFCLK is running (XTAL source).
  * @retval false The HFCLK is not running.
  */
-__STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
+NRFX_STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
 
 /**
  * @brief Function for starting the calibration of internal LFCLK.
@@ -122,7 +122,7 @@ void nrfx_clock_calibration_timer_stop(void);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task);
+NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task);
 
 /**@brief Function for returning a requested event address for the clock driver module.
  *
@@ -130,30 +130,30 @@ __STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task);
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event);
+NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event);
 
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-__STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task)
 {
     return nrf_clock_task_address_get(task);
 }
 
-__STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event)
+NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event)
 {
     return nrf_clock_event_address_get(event);
 }
 
-__STATIC_INLINE bool nrfx_clock_hfclk_is_running(void)
+NRFX_STATIC_INLINE bool nrfx_clock_hfclk_is_running(void)
 {
     return nrf_clock_hf_is_running(NRF_CLOCK_HFCLK_HIGH_ACCURACY);
 }
 
-__STATIC_INLINE bool nrfx_clock_lfclk_is_running(void)
+NRFX_STATIC_INLINE bool nrfx_clock_lfclk_is_running(void)
 {
     return nrf_clock_lf_is_running();
 }
-#endif //SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

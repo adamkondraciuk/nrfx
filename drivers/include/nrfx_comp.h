@@ -180,10 +180,7 @@ uint32_t nrfx_comp_sample(void);
  *
  * @return Address of the given COMP task.
  */
-__STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
-{
-    return nrf_comp_task_address_get(task);
-}
+NRFX_STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task);
 
 /**
  * @brief Function for getting the address of a COMP event.
@@ -192,10 +189,19 @@ __STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
  *
  * @return Address of the given COMP event.
  */
-__STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event)
+NRFX_STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event);
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
+{
+    return nrf_comp_task_address_get(task);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event)
 {
     return nrf_comp_event_address_get(event);
 }
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

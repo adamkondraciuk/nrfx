@@ -393,7 +393,7 @@ static void finish_transfer(spim_control_block_t * p_cb)
     p_cb->handler(&p_cb->evt, p_cb->p_context);
 }
 
-__STATIC_INLINE void spim_int_enable(NRF_SPIM_Type * p_spim, bool enable)
+static void spim_int_enable(NRF_SPIM_Type * p_spim, bool enable)
 {
     if (!enable)
     {
@@ -405,7 +405,7 @@ __STATIC_INLINE void spim_int_enable(NRF_SPIM_Type * p_spim, bool enable)
     }
 }
 
-__STATIC_INLINE void spim_list_enable_handle(NRF_SPIM_Type * p_spim, uint32_t flags)
+static void spim_list_enable_handle(NRF_SPIM_Type * p_spim, uint32_t flags)
 {
     if (NRFX_SPIM_FLAG_TX_POSTINC & flags)
     {

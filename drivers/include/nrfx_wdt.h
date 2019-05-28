@@ -99,10 +99,7 @@ void nrfx_wdt_channel_feed(nrfx_wdt_channel_id channel_id);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_wdt_ppi_task_addr(nrf_wdt_task_t task)
-{
-    return nrf_wdt_task_address_get(task);
-}
+NRFX_STATIC_INLINE uint32_t nrfx_wdt_ppi_task_addr(nrf_wdt_task_t task);
 
 /**
  * @brief Function for returning a requested event address for the wdt driver module.
@@ -111,10 +108,19 @@ __STATIC_INLINE uint32_t nrfx_wdt_ppi_task_addr(nrf_wdt_task_t task)
  *
  * @return Event address.
  */
-__STATIC_INLINE uint32_t nrfx_wdt_ppi_event_addr(nrf_wdt_event_t event)
+NRFX_STATIC_INLINE uint32_t nrfx_wdt_ppi_event_addr(nrf_wdt_event_t event);
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_wdt_ppi_task_addr(nrf_wdt_task_t task)
+{
+    return nrf_wdt_task_address_get(task);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_wdt_ppi_event_addr(nrf_wdt_event_t event)
 {
     return nrf_wdt_event_address_get(event);
 }
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

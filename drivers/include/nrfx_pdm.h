@@ -105,10 +105,7 @@ void nrfx_pdm_uninit(void);
  *
  * @return Task address.
  */
-__STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task)
-{
-    return nrf_pdm_task_address_get(task);
-}
+NRFX_STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task);
 
 /**
  * @brief Function for getting the state of the PDM interface.
@@ -116,10 +113,7 @@ __STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task)
  * @retval true  The PDM interface is enabled.
  * @retval false The PDM interface is disabled.
  */
-__STATIC_INLINE bool nrfx_pdm_enable_check(void)
-{
-    return nrf_pdm_enable_check();
-}
+NRFX_STATIC_INLINE bool nrfx_pdm_enable_check(void);
 
 /**
  * @brief Function for starting the PDM sampling.
@@ -155,6 +149,18 @@ nrfx_err_t nrfx_pdm_stop(void);
  * @retval NRFX_ERROR_INVALID_PARAM Invalid parameters were provided.
  */
 nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length);
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_pdm_task_address_get(nrf_pdm_task_t task)
+{
+    return nrf_pdm_task_address_get(task);
+}
+
+NRFX_STATIC_INLINE bool nrfx_pdm_enable_check(void)
+{
+    return nrf_pdm_enable_check();
+}
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

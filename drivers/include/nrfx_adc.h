@@ -227,16 +227,14 @@ bool nrfx_adc_is_busy(void);
  *
  * @return Start task address.
  */
-__STATIC_INLINE uint32_t nrfx_adc_start_task_get(void);
+NRFX_STATIC_INLINE uint32_t nrfx_adc_start_task_get(void);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-
-__STATIC_INLINE uint32_t nrfx_adc_start_task_get(void)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_adc_start_task_get(void)
 {
     return nrf_adc_task_address_get(NRF_ADC_TASK_START);
 }
-
-#endif
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

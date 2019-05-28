@@ -215,7 +215,7 @@ typedef struct
  *
  * @param[in] task SAADC task.
  */
-__STATIC_INLINE void nrf_saadc_task_trigger(nrf_saadc_task_t task);
+NRF_STATIC_INLINE void nrf_saadc_task_trigger(nrf_saadc_task_t task);
 
 /**
  * @brief Function for getting the address of the specified SAADC task register.
@@ -224,7 +224,7 @@ __STATIC_INLINE void nrf_saadc_task_trigger(nrf_saadc_task_t task);
  *
  * @return Address of the specified SAADC task.
  */
-__STATIC_INLINE uint32_t nrf_saadc_task_address_get(nrf_saadc_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_saadc_task_address_get(nrf_saadc_task_t task);
 
 /**
  * @brief Function for retrieving the state of the UARTE event.
@@ -234,14 +234,14 @@ __STATIC_INLINE uint32_t nrf_saadc_task_address_get(nrf_saadc_task_t task);
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-__STATIC_INLINE bool nrf_saadc_event_check(nrf_saadc_event_t event);
+NRF_STATIC_INLINE bool nrf_saadc_event_check(nrf_saadc_event_t event);
 
 /**
  * @brief Function for clearing the specific SAADC event.
  *
  * @param[in] event SAADC event.
  */
-__STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event);
+NRF_STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event);
 
 /**
  * @brief Function for getting the address of the specified SAADC event register.
@@ -250,7 +250,7 @@ __STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event);
  *
  * @return Address of the specified SAADC event.
  */
-__STATIC_INLINE uint32_t nrf_saadc_event_address_get(nrf_saadc_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_saadc_event_address_get(nrf_saadc_event_t event);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -260,8 +260,8 @@ __STATIC_INLINE uint32_t nrf_saadc_event_address_get(nrf_saadc_event_t event);
  * @param[in] task    Task for which to set the configuration.
  * @param[in] channel Channel through which to subscribe events.
  */
-__STATIC_INLINE void nrf_saadc_subscribe_set(nrf_saadc_task_t task,
-                                             uint8_t          channel);
+NRF_STATIC_INLINE void nrf_saadc_subscribe_set(nrf_saadc_task_t task,
+                                               uint8_t          channel);
 
 /**
  * @brief Function for clearing the subscribe configuration for a given
@@ -269,7 +269,7 @@ __STATIC_INLINE void nrf_saadc_subscribe_set(nrf_saadc_task_t task,
  *
  * @param[in] task Task for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_saadc_subscribe_clear(nrf_saadc_task_t task);
+NRF_STATIC_INLINE void nrf_saadc_subscribe_clear(nrf_saadc_task_t task);
 
 /**
  * @brief Function for setting the publish configuration for a given
@@ -278,8 +278,8 @@ __STATIC_INLINE void nrf_saadc_subscribe_clear(nrf_saadc_task_t task);
  * @param[in] event   Event for which to set the configuration.
  * @param[in] channel Channel through which to publish the event.
  */
-__STATIC_INLINE void nrf_saadc_publish_set(nrf_saadc_event_t event,
-                                           uint8_t           channel);
+NRF_STATIC_INLINE void nrf_saadc_publish_set(nrf_saadc_event_t event,
+                                             uint8_t           channel);
 
 /**
  * @brief Function for clearing the publish configuration for a given
@@ -287,7 +287,7 @@ __STATIC_INLINE void nrf_saadc_publish_set(nrf_saadc_event_t event,
  *
  * @param[in] event Event for which to clear the configuration.
  */
-__STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event);
+NRF_STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -299,8 +299,8 @@ __STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event);
  *
  * @return Address of the specified SAADC limit event.
  */
-__STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
-                                                           nrf_saadc_limit_t limit_type);
+NRF_STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
+                                                             nrf_saadc_limit_t limit_type);
 
 /**
  * @brief Function for getting the SAADC channel monitoring limit events.
@@ -310,8 +310,8 @@ __STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           cha
  *
  * @return The SAADC channel monitoring limit event.
  */
-__STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           channel,
-                                                            nrf_saadc_limit_t limit_type);
+NRF_STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           channel,
+                                                              nrf_saadc_limit_t limit_type);
 
 /**
  * @brief Function for configuring the input pins for the specified SAADC channel.
@@ -320,9 +320,9 @@ __STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           ch
  * @param[in] pselp   Positive input.
  * @param[in] pseln   Negative input. Set to NRF_SAADC_INPUT_DISABLED in single ended mode.
  */
-__STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t           channel,
-                                                 nrf_saadc_input_t pselp,
-                                                 nrf_saadc_input_t pseln);
+NRF_STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t           channel,
+                                                   nrf_saadc_input_t pselp,
+                                                   nrf_saadc_input_t pseln);
 
 /**
  * @brief Function for configuring the positive input pin for the specified SAADC channel.
@@ -330,8 +330,8 @@ __STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t           channel,
  * @param[in] channel Channel number.
  * @param[in] pselp   Positive input.
  */
-__STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t           channel,
-                                                     nrf_saadc_input_t pselp);
+NRF_STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t           channel,
+                                                       nrf_saadc_input_t pselp);
 
 /**
  * @brief Function for setting the SAADC channel monitoring limits.
@@ -340,14 +340,14 @@ __STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t           channel,
  * @param[in] low     Low limit.
  * @param[in] high    High limit.
  */
-__STATIC_INLINE void nrf_saadc_channel_limits_set(uint8_t channel, int16_t low, int16_t high);
+NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(uint8_t channel, int16_t low, int16_t high);
 
 /**
  * @brief Function for enabling specified SAADC interrupts.
  *
  * @param[in] saadc_int_mask Interrupt(s) to be enabled.
  */
-__STATIC_INLINE void nrf_saadc_int_enable(uint32_t saadc_int_mask);
+NRF_STATIC_INLINE void nrf_saadc_int_enable(uint32_t saadc_int_mask);
 
 /**
  * @brief Function for retrieving the state of specified SAADC interrupts.
@@ -357,14 +357,14 @@ __STATIC_INLINE void nrf_saadc_int_enable(uint32_t saadc_int_mask);
  * @retval true  All specified interrupts are enabled.
  * @retval false At least one of the given interrupts is not enabled.
  */
-__STATIC_INLINE bool nrf_saadc_int_enable_check(uint32_t saadc_int_mask);
+NRF_STATIC_INLINE bool nrf_saadc_int_enable_check(uint32_t saadc_int_mask);
 
 /**
  * @brief Function for disabling specified interrupts.
  *
  * @param saadc_int_mask Interrupt(s) to be disabled.
  */
-__STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask);
+NRF_STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask);
 
 /**
  * @brief Function for generating masks for SAADC channel limit interrupts.
@@ -374,7 +374,7 @@ __STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask);
  *
  * @return Interrupt mask.
  */
-__STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limit_t limit_type);
+NRF_STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limit_t limit_type);
 
 /**
  * @brief Function for checking whether the SAADC is busy.
@@ -384,19 +384,19 @@ __STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limi
  * @retval true  The SAADC is busy.
  * @retval false The SAADC is not busy.
  */
-__STATIC_INLINE bool nrf_saadc_busy_check(void);
+NRF_STATIC_INLINE bool nrf_saadc_busy_check(void);
 
 /**
  * @brief Function for enabling the SAADC.
  *
  * The analog-to-digital converter must be enabled before use.
  */
-__STATIC_INLINE void nrf_saadc_enable(void);
+NRF_STATIC_INLINE void nrf_saadc_enable(void);
 
 /**
  * @brief Function for disabling the SAADC.
  */
-__STATIC_INLINE void nrf_saadc_disable(void);
+NRF_STATIC_INLINE void nrf_saadc_disable(void);
 
 /**
  * @brief Function for checking if the SAADC is enabled.
@@ -404,7 +404,7 @@ __STATIC_INLINE void nrf_saadc_disable(void);
  * @retval true  The SAADC is enabled.
  * @retval false The SAADC is not enabled.
  */
-__STATIC_INLINE bool nrf_saadc_enable_check(void);
+NRF_STATIC_INLINE bool nrf_saadc_enable_check(void);
 
 /**
  * @brief Function for initializing the SAADC result buffer.
@@ -412,22 +412,22 @@ __STATIC_INLINE bool nrf_saadc_enable_check(void);
  * @param[in] p_buffer Pointer to the result buffer.
  * @param[in] size     Size of the buffer (in 16-bit samples).
  */
-__STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
-                                           uint32_t            size);
+NRF_STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
+                                             uint32_t            size);
 
 /**
  * @brief Function for setting the SAADC result buffer pointer.
  *
  * @param[in] p_buffer Pointer to the result buffer.
  */
-__STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer);
+NRF_STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer);
 
 /**
  * @brief Function for getting the SAADC result buffer pointer.
  *
  * @return Pointer to the result buffer.
  */
-__STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void);
+NRF_STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void);
 
 /**
  * @brief Function for getting the number of samples written to the result
@@ -435,28 +435,28 @@ __STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void);
  *
  * @returns Number of 16-bit samples written to the buffer.
  */
-__STATIC_INLINE uint16_t nrf_saadc_amount_get(void);
+NRF_STATIC_INLINE uint16_t nrf_saadc_amount_get(void);
 
 /**
  * @brief Function for setting the SAADC sample resolution.
  *
  * @param[in] resolution Bit resolution.
  */
-__STATIC_INLINE void nrf_saadc_resolution_set(nrf_saadc_resolution_t resolution);
+NRF_STATIC_INLINE void nrf_saadc_resolution_set(nrf_saadc_resolution_t resolution);
 
 /**
  * @brief Function for configuring the oversampling feature.
  *
  * @param[in] oversample Oversampling mode.
  */
-__STATIC_INLINE void nrf_saadc_oversample_set(nrf_saadc_oversample_t oversample);
+NRF_STATIC_INLINE void nrf_saadc_oversample_set(nrf_saadc_oversample_t oversample);
 
 /**
  * @brief Function for getting the oversampling feature configuration.
  *
  * @return Oversampling configuration.
  */
-__STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void);
+NRF_STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void);
 
 /**
  * @brief Function for enabling the continuous sampling.
@@ -470,14 +470,14 @@ __STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void);
  * @param[in] cc Capture and compare value. Sample rate is 16 MHz/cc. Valid CC range is
  *               from 80 to 2047.
  */
-__STATIC_INLINE void nrf_saadc_continuous_mode_enable(uint16_t cc);
+NRF_STATIC_INLINE void nrf_saadc_continuous_mode_enable(uint16_t cc);
 
 /**
  * @brief Function for disabling the continuous sampling.
  *
  * New samples can still be acquired by manually triggering the SAMPLE task or by PPI.
  */
-__STATIC_INLINE void nrf_saadc_continuous_mode_disable(void);
+NRF_STATIC_INLINE void nrf_saadc_continuous_mode_disable(void);
 
 /**
  * @brief Function for initializing the SAADC channel.
@@ -485,8 +485,8 @@ __STATIC_INLINE void nrf_saadc_continuous_mode_disable(void);
  * @param[in] channel Channel number.
  * @param[in] config  Pointer to the channel configuration structure.
  */
-__STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
-                                            nrf_saadc_channel_config_t const * const config);
+NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
+                                              nrf_saadc_channel_config_t const * const config);
 
 /**
  * @brief Function for configuring the burst mode for the specified channel.
@@ -494,27 +494,27 @@ __STATIC_INLINE void nrf_saadc_channel_init(uint8_t                             
  * @param[in] channel Channel number.
  * @param[in] burst   Burst mode setting.
  */
-__STATIC_INLINE void nrf_saadc_burst_set(uint8_t           channel,
-                                         nrf_saadc_burst_t burst);
+NRF_STATIC_INLINE void nrf_saadc_burst_set(uint8_t           channel,
+                                           nrf_saadc_burst_t burst);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+#ifndef NRF_DECLARE_ONLY
 
-__STATIC_INLINE void nrf_saadc_task_trigger(nrf_saadc_task_t task)
+NRF_STATIC_INLINE void nrf_saadc_task_trigger(nrf_saadc_task_t task)
 {
     *((volatile uint32_t *)((uint8_t *)NRF_SAADC + (uint32_t)task)) = 0x1UL;
 }
 
-__STATIC_INLINE uint32_t nrf_saadc_task_address_get(nrf_saadc_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_saadc_task_address_get(nrf_saadc_task_t task)
 {
     return (uint32_t)((uint8_t *)NRF_SAADC + (uint32_t)task);
 }
 
-__STATIC_INLINE bool nrf_saadc_event_check(nrf_saadc_event_t event)
+NRF_STATIC_INLINE bool nrf_saadc_event_check(nrf_saadc_event_t event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)NRF_SAADC + (uint32_t)event);
 }
 
-__STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event)
+NRF_STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event)
 {
     *((volatile uint32_t *)((uint8_t *)NRF_SAADC + (uint32_t)event)) = 0x0UL;
 #if __CORTEX_M == 0x04
@@ -523,39 +523,39 @@ __STATIC_INLINE void nrf_saadc_event_clear(nrf_saadc_event_t event)
 #endif
 }
 
-__STATIC_INLINE uint32_t  nrf_saadc_event_address_get(nrf_saadc_event_t event)
+NRF_STATIC_INLINE uint32_t  nrf_saadc_event_address_get(nrf_saadc_event_t event)
 {
     return (uint32_t )((uint8_t *)NRF_SAADC + (uint32_t)event);
 }
 
 #if defined(DPPI_PRESENT)
-__STATIC_INLINE void nrf_saadc_subscribe_set(nrf_saadc_task_t task,
-                                             uint8_t          channel)
+NRF_STATIC_INLINE void nrf_saadc_subscribe_set(nrf_saadc_task_t task,
+                                               uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_SAADC + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | SAADC_SUBSCRIBE_START_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_saadc_subscribe_clear(nrf_saadc_task_t task)
+NRF_STATIC_INLINE void nrf_saadc_subscribe_clear(nrf_saadc_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_SAADC + (uint32_t) task + 0x80uL)) = 0;
 }
 
-__STATIC_INLINE void nrf_saadc_publish_set(nrf_saadc_event_t event,
-                                           uint8_t           channel)
+NRF_STATIC_INLINE void nrf_saadc_publish_set(nrf_saadc_event_t event,
+                                             uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_SAADC + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | SAADC_PUBLISH_STARTED_EN_Msk);
 }
 
-__STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event)
+NRF_STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_SAADC + (uint32_t) event + 0x80uL)) = 0;
 }
 #endif // defined(DPPI_PRESENT)
 
-__STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
-                                                           nrf_saadc_limit_t limit_type)
+NRF_STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
+                                                             nrf_saadc_limit_t limit_type)
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     if (limit_type == NRF_SAADC_LIMIT_HIGH)
@@ -568,8 +568,8 @@ __STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           cha
     }
 }
 
-__STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           channel,
-                                                            nrf_saadc_limit_t limit_type)
+NRF_STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           channel,
+                                                              nrf_saadc_limit_t limit_type)
 {
     if (limit_type == NRF_SAADC_LIMIT_HIGH)
     {
@@ -585,43 +585,43 @@ __STATIC_INLINE nrf_saadc_event_t nrf_saadc_event_limit_get(uint8_t           ch
     }
 }
 
-__STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t           channel,
-                                                 nrf_saadc_input_t pselp,
-                                                 nrf_saadc_input_t pseln)
+NRF_STATIC_INLINE void nrf_saadc_channel_input_set(uint8_t           channel,
+                                                   nrf_saadc_input_t pselp,
+                                                   nrf_saadc_input_t pseln)
 {
     NRF_SAADC->CH[channel].PSELN = pseln;
     NRF_SAADC->CH[channel].PSELP = pselp;
 }
 
-__STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t           channel,
-                                                     nrf_saadc_input_t pselp)
+NRF_STATIC_INLINE void nrf_saadc_channel_pos_input_set(uint8_t           channel,
+                                                       nrf_saadc_input_t pselp)
 {
     NRF_SAADC->CH[channel].PSELP = pselp;
 }
 
-__STATIC_INLINE void nrf_saadc_channel_limits_set(uint8_t channel, int16_t low, int16_t high)
+NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(uint8_t channel, int16_t low, int16_t high)
 {
     NRF_SAADC->CH[channel].LIMIT = (
             (((uint32_t) low << SAADC_CH_LIMIT_LOW_Pos) & SAADC_CH_LIMIT_LOW_Msk)
           | (((uint32_t) high << SAADC_CH_LIMIT_HIGH_Pos) & SAADC_CH_LIMIT_HIGH_Msk));
 }
 
-__STATIC_INLINE void nrf_saadc_int_enable(uint32_t saadc_int_mask)
+NRF_STATIC_INLINE void nrf_saadc_int_enable(uint32_t saadc_int_mask)
 {
     NRF_SAADC->INTENSET = saadc_int_mask;
 }
 
-__STATIC_INLINE bool nrf_saadc_int_enable_check(uint32_t saadc_int_mask)
+NRF_STATIC_INLINE bool nrf_saadc_int_enable_check(uint32_t saadc_int_mask)
 {
     return (bool)(NRF_SAADC->INTENSET & saadc_int_mask);
 }
 
-__STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask)
+NRF_STATIC_INLINE void nrf_saadc_int_disable(uint32_t saadc_int_mask)
 {
     NRF_SAADC->INTENCLR = saadc_int_mask;
 }
 
-__STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limit_t limit_type)
+NRF_STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limit_t limit_type)
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     uint32_t mask = (limit_type == NRF_SAADC_LIMIT_LOW) ?
@@ -629,80 +629,80 @@ __STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t channel, nrf_saadc_limi
     return mask << (channel * 2);
 }
 
-__STATIC_INLINE bool nrf_saadc_busy_check(void)
+NRF_STATIC_INLINE bool nrf_saadc_busy_check(void)
 {
     //return ((NRF_SAADC->STATUS & SAADC_STATUS_STATUS_Msk) == SAADC_STATUS_STATUS_Msk);
     //simplified for performance
     return NRF_SAADC->STATUS;
 }
 
-__STATIC_INLINE void nrf_saadc_enable(void)
+NRF_STATIC_INLINE void nrf_saadc_enable(void)
 {
     NRF_SAADC->ENABLE = (SAADC_ENABLE_ENABLE_Enabled << SAADC_ENABLE_ENABLE_Pos);
 }
 
-__STATIC_INLINE void nrf_saadc_disable(void)
+NRF_STATIC_INLINE void nrf_saadc_disable(void)
 {
     NRF_SAADC->ENABLE = (SAADC_ENABLE_ENABLE_Disabled << SAADC_ENABLE_ENABLE_Pos);
 }
 
-__STATIC_INLINE bool nrf_saadc_enable_check(void)
+NRF_STATIC_INLINE bool nrf_saadc_enable_check(void)
 {
     //simplified for performance
     return NRF_SAADC->ENABLE;
 }
 
-__STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
-                                           uint32_t            size)
+NRF_STATIC_INLINE void nrf_saadc_buffer_init(nrf_saadc_value_t * p_buffer,
+                                             uint32_t            size)
 {
     NRF_SAADC->RESULT.PTR = (uint32_t)p_buffer;
     NRF_SAADC->RESULT.MAXCNT = size;
 }
 
-__STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer)
+NRF_STATIC_INLINE void nrf_saadc_buffer_pointer_set(nrf_saadc_value_t * p_buffer)
 {
     NRF_SAADC->RESULT.PTR = (uint32_t)p_buffer;
 }
 
-__STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void)
+NRF_STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(void)
 {
     return (nrf_saadc_value_t *)NRF_SAADC->RESULT.PTR;
 }
 
-__STATIC_INLINE uint16_t nrf_saadc_amount_get(void)
+NRF_STATIC_INLINE uint16_t nrf_saadc_amount_get(void)
 {
     return NRF_SAADC->RESULT.AMOUNT;
 }
 
-__STATIC_INLINE void nrf_saadc_resolution_set(nrf_saadc_resolution_t resolution)
+NRF_STATIC_INLINE void nrf_saadc_resolution_set(nrf_saadc_resolution_t resolution)
 {
     NRF_SAADC->RESOLUTION = resolution;
 }
 
-__STATIC_INLINE void nrf_saadc_oversample_set(nrf_saadc_oversample_t oversample)
+NRF_STATIC_INLINE void nrf_saadc_oversample_set(nrf_saadc_oversample_t oversample)
 {
     NRF_SAADC->OVERSAMPLE = oversample;
 }
 
-__STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void)
+NRF_STATIC_INLINE nrf_saadc_oversample_t nrf_saadc_oversample_get(void)
 {
     return (nrf_saadc_oversample_t)NRF_SAADC->OVERSAMPLE;
 }
 
-__STATIC_INLINE void nrf_saadc_continuous_mode_enable(uint16_t cc)
+NRF_STATIC_INLINE void nrf_saadc_continuous_mode_enable(uint16_t cc)
 {
     NRFX_ASSERT((cc >= 80) && (cc <= 2047));
     NRF_SAADC->SAMPLERATE = (SAADC_SAMPLERATE_MODE_Timers << SAADC_SAMPLERATE_MODE_Pos)
                             | ((uint32_t)cc << SAADC_SAMPLERATE_CC_Pos);
 }
 
-__STATIC_INLINE void nrf_saadc_continuous_mode_disable(void)
+NRF_STATIC_INLINE void nrf_saadc_continuous_mode_disable(void)
 {
     NRF_SAADC->SAMPLERATE = SAADC_SAMPLERATE_MODE_Task << SAADC_SAMPLERATE_MODE_Pos;
 }
 
-__STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
-                                            nrf_saadc_channel_config_t const * const config)
+NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
+                                              nrf_saadc_channel_config_t const * const config)
 {
     NRF_SAADC->CH[channel].CONFIG =
             ((config->resistor_p   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
@@ -715,15 +715,15 @@ __STATIC_INLINE void nrf_saadc_channel_init(uint8_t                             
     nrf_saadc_channel_input_set(channel, config->pin_p, config->pin_n);
 }
 
-__STATIC_INLINE void nrf_saadc_burst_set(uint8_t           channel,
-                                         nrf_saadc_burst_t burst)
+NRF_STATIC_INLINE void nrf_saadc_burst_set(uint8_t           channel,
+                                           nrf_saadc_burst_t burst)
 {
     NRF_SAADC->CH[channel].CONFIG =
         (NRF_SAADC->CH[channel].CONFIG & ~SAADC_CH_CONFIG_BURST_Msk) |
         (burst << SAADC_CH_CONFIG_BURST_Pos);
 }
 
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRF_DECLARE_ONLY
 
 /** @} */
 

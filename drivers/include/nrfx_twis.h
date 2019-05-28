@@ -238,7 +238,7 @@ nrfx_err_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
  *
  * @return Number of bytes sent.
  */
-__STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
+NRFX_STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance);
 
 /**
  * @brief Function for preparing the data for receiving.
@@ -272,7 +272,7 @@ nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
  *
  * @return Number of bytes received.
  */
-__STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance);
+NRFX_STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance);
 
 /**
  * @brief Function for checking if the driver is busy right now.
@@ -337,17 +337,17 @@ bool nrfx_twis_is_pending_tx(nrfx_twis_t const * p_instance);
  */
 bool nrfx_twis_is_pending_rx(nrfx_twis_t const * p_instance);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-__STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE size_t nrfx_twis_tx_amount(nrfx_twis_t const * p_instance)
 {
     return nrf_twis_tx_amount_get(p_instance->p_reg);
 }
 
-__STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance)
+NRFX_STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance)
 {
     return nrf_twis_rx_amount_get(p_instance->p_reg);
 }
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 
