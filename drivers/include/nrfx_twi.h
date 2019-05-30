@@ -69,6 +69,8 @@ typedef struct
 #define NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER (1UL << 2)
 /** @brief Flag indicating that the TX transfer will not end with a stop condition. */
 #define NRFX_TWI_FLAG_TX_NO_STOP          (1UL << 5)
+/** @brief Flag indicating that the transfer will be suspended. */
+#define NRFX_TWI_FLAG_SUSPEND             (1UL << 6)
 
 /** @brief TWI master driver event types. */
 typedef enum
@@ -212,8 +214,11 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance);
  * @retval NRFX_SUCCESS                 The procedure is successful.
  * @retval NRFX_ERROR_BUSY              The driver is not ready for a new transfer.
  * @retval NRFX_ERROR_INTERNAL          An error is detected by hardware.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK NACK is received after sending the address in polling mode.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK NACK is received after sending a data byte in polling mode.
+ * @retval NRFX_ERROR_INVALID_STATE     RX transaction is suspended on bus.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK Negative acknowledgement (NACK) is received after sending
+ *                                      the address in polling mode.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK Negative acknowledgement (NACK) is received after sending
+ *                                      a data byte in polling mode.
  */
 nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
@@ -235,14 +240,18 @@ nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
  * @retval NRFX_SUCCESS                   The procedure is successful.
  * @retval NRFX_ERROR_BUSY                The driver is not ready for a new transfer.
  * @retval NRFX_ERROR_INTERNAL            An error is detected by hardware.
+ * @retval NRFX_ERROR_INVALID_STATE       TX transaction is suspended on bus.
  * @retval NRFX_ERROR_DRV_TWI_ERR_OVERRUN The unread data is replaced by new data.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   NACK is received after sending the address in polling mode.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   NACK is received after sending a data byte in polling mode.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   Negative acknowledgement (NACK) is received after sending
+ *                                        the address in polling mode.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   Negative acknowledgement (NACK) is received after sending
+ *                                        a data byte in polling mode.
  */
 nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
                        uint8_t            address,
                        uint8_t *          p_data,
                        size_t             length);
+
 
 /**
  * @brief Function for preparing a TWI transfer.
@@ -258,6 +267,8 @@ nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * Additional options are provided using the flags parameter:
  * - @ref NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER - No user event handler after transfer completion. In most cases, this also means no interrupt at the end of the transfer.
  * - @ref NRFX_TWI_FLAG_TX_NO_STOP - No stop condition after TX transfer.
+ * - @ref NRFX_TWI_FLAG_SUSPEND - Transfer will be suspended. This allows for combining multiple transfers into one transaction.
+ *                                Only transactions with the same direction can be combined. To finish the transaction, call the function without this flag.
  *
  * @note
  * Some flag combinations are invalid:
@@ -271,9 +282,12 @@ nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
  * @retval NRFX_ERROR_BUSY                The driver is not ready for a new transfer.
  * @retval NRFX_ERROR_NOT_SUPPORTED       The provided parameters are not supported.
  * @retval NRFX_ERROR_INTERNAL            An error is detected by hardware.
+ * @retval NRFX_ERROR_INVALID_STATE       Other direction of transaction is suspended on the bus.
  * @retval NRFX_ERROR_DRV_TWI_ERR_OVERRUN The unread data is replaced by new data (TXRX and RX)
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   NACK is received after sending the address.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   NACK is received after sending a data byte.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   Negative acknowledgement (NACK) is received after sending
+ *                                        the address in polling mode.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   Negative acknowledgement (NACK) is received after sending
+ *                                        a data byte in polling mode.
  */
 nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
                          nrfx_twi_xfer_desc_t const * p_xfer_desc,

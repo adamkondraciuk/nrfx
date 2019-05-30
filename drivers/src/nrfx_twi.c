@@ -44,7 +44,19 @@
                                         NRF_GPIO_PIN_S0D1,          \
                                         NRF_GPIO_PIN_NOSENSE)
 
+#define TWI_FLAG_NO_STOP(flags)             (flags & NRFX_TWI_FLAG_TX_NO_STOP)
+#define TWI_FLAG_SUSPEND(flags)             (flags & NRFX_TWI_FLAG_SUSPEND)
+#define TWI_FLAG_NO_HANDLER_IN_USE(flags)   (flags & NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER)
+
 #define HW_TIMEOUT      100000
+
+/* TWI master driver suspend types. */
+typedef enum
+{
+    TWI_NO_SUSPEND, //< Last transfer was not suspended.
+    TWI_SUSPEND_TX, //< Last transfer was TX and was suspended.
+    TWI_SUSPEND_RX  //< Last transfer was RX and was suspended.
+} twi_suspend_t;
 
 // Control block - driver instance local data.
 typedef struct
@@ -56,7 +68,8 @@ typedef struct
     uint32_t                flags;
     uint8_t *               p_curr_buf;
     size_t                  curr_length;
-    bool                    curr_no_stop;
+    bool                    curr_tx_no_stop;
+    twi_suspend_t           prev_suspend;
     nrfx_drv_state_t        state;
     bool                    error;
     volatile bool           busy;
@@ -133,6 +146,7 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
     p_cb->handler         = event_handler;
     p_cb->p_context       = p_context;
     p_cb->int_mask        = 0;
+    p_cb->prev_suspend    = TWI_NO_SUSPEND;
     p_cb->repeated        = false;
     p_cb->busy            = false;
     p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
@@ -214,11 +228,13 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance)
     NRFX_LOG_INFO("Instance disabled: %d.", p_instance->drv_inst_idx);
 }
 
-static bool twi_send_byte(NRF_TWI_Type  * p_twi,
-                          uint8_t const * p_data,
-                          size_t          length,
-                          size_t        * p_bytes_transferred,
-                          bool            no_stop)
+static bool twi_send_byte(NRF_TWI_Type          * p_twi,
+                          twi_control_block_t   * p_cb,
+                          uint8_t const         * p_data,
+                          size_t                  length,
+                          size_t                * p_bytes_transferred,
+                          bool                    no_stop,
+                          uint32_t                flags)
 {
     if (*p_bytes_transferred < length)
     {
@@ -227,9 +243,15 @@ static bool twi_send_byte(NRF_TWI_Type  * p_twi,
     }
     else
     {
-        if (no_stop)
+        if (p_cb->curr_tx_no_stop)
         {
             nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_SUSPEND);
+            return false;
+        }
+        else if(TWI_FLAG_SUSPEND(p_cb->flags))
+        {
+            nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_SUSPEND);
+            p_cb->prev_suspend = TWI_SUSPEND_TX;
             return false;
         }
         else
@@ -240,10 +262,12 @@ static bool twi_send_byte(NRF_TWI_Type  * p_twi,
     return true;
 }
 
-static void twi_receive_byte(NRF_TWI_Type * p_twi,
-                             uint8_t      * p_data,
-                             size_t         length,
-                             size_t       * p_bytes_transferred)
+static bool twi_receive_byte(NRF_TWI_Type         * p_twi,
+                             twi_control_block_t  * p_cb,
+                             uint8_t              * p_data,
+                             size_t                 length,
+                             size_t               * p_bytes_transferred,
+                             uint32_t               flags)
 {
     if (*p_bytes_transferred < length)
     {
@@ -251,25 +275,33 @@ static void twi_receive_byte(NRF_TWI_Type * p_twi,
 
         ++(*p_bytes_transferred);
 
-        if (*p_bytes_transferred == length - 1)
+        if ((*p_bytes_transferred == length - 1) && (!TWI_FLAG_SUSPEND(flags)))
         {
             nrf_twi_shorts_set(p_twi, NRF_TWI_SHORT_BB_STOP_MASK);
         }
-        else if (*p_bytes_transferred == length)
+        else if (*p_bytes_transferred == length && (!TWI_FLAG_SUSPEND(flags)))
         {
-            return;
+            return true;
+        }
+        else if (*p_bytes_transferred == length && TWI_FLAG_SUSPEND(flags))
+        {
+            p_cb->prev_suspend = TWI_SUSPEND_RX;
+            return false;
         }
 
         nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_RESUME);
     }
+    return true;
 }
 
-static bool twi_transfer(NRF_TWI_Type  * p_twi,
-                         bool          * p_error,
-                         size_t        * p_bytes_transferred,
-                         uint8_t       * p_data,
-                         size_t          length,
-                         bool            no_stop)
+static bool twi_transfer(NRF_TWI_Type           * p_twi,
+                         twi_control_block_t    * p_cb,
+                         bool                   * p_error,
+                         size_t                 * p_bytes_transferred,
+                         uint8_t                * p_data,
+                         size_t                   length,
+                         bool                     no_stop,
+                         uint32_t                 flags)
 {
     bool do_stop_check = ((*p_error) || ((*p_bytes_transferred) == length));
 
@@ -301,7 +333,7 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
             }
             else
             {
-                if (!twi_send_byte(p_twi, p_data, length, p_bytes_transferred, no_stop))
+                if (!twi_send_byte(p_twi, p_cb, p_data, length, p_bytes_transferred, no_stop, flags))
                 {
                     return false;
                 }
@@ -320,7 +352,10 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
             }
             else
             {
-                twi_receive_byte(p_twi, p_data, length, p_bytes_transferred);
+                if (!twi_receive_byte(p_twi, p_cb, p_data, length, p_bytes_transferred, flags))
+                {
+                    return false;
+                }
             }
         }
     }
@@ -328,6 +363,7 @@ static bool twi_transfer(NRF_TWI_Type  * p_twi,
     if (do_stop_check && nrf_twi_event_check(p_twi, NRF_TWI_EVENT_STOPPED))
     {
         nrf_twi_event_clear(p_twi, NRF_TWI_EVENT_STOPPED);
+        p_cb->prev_suspend = TWI_NO_SUSPEND;
         NRFX_LOG_DEBUG("TWI: Event: %s.", EVT_TO_STR_TWI(NRF_TWI_EVENT_STOPPED));
         return false;
     }
@@ -357,9 +393,13 @@ static nrfx_err_t twi_tx_start_transfer(twi_control_block_t * p_cb,
 
     // In case TWI is suspended resume its operation.
     nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_RESUME);
-    nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STARTTX);
 
-    (void)twi_send_byte(p_twi, p_data, length, &p_cb->bytes_transferred, no_stop);
+    if (p_cb->prev_suspend != TWI_SUSPEND_TX)
+    {
+        nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STARTTX);
+    }
+
+    (void)twi_send_byte(p_twi, p_cb, p_data, length, &p_cb->bytes_transferred, no_stop, p_cb->flags);
 
     if (p_cb->handler)
     {
@@ -367,17 +407,20 @@ static nrfx_err_t twi_tx_start_transfer(twi_control_block_t * p_cb,
                          NRF_TWI_INT_ERROR_MASK     |
                          NRF_TWI_INT_TXDSENT_MASK   |
                          NRF_TWI_INT_RXDREADY_MASK;
+
         nrf_twi_int_enable(p_twi, p_cb->int_mask);
     }
     else
     {
         while ((hw_timeout > 0) &&
                twi_transfer(p_twi,
+                            p_cb,
                             &p_cb->error,
                             &p_cb->bytes_transferred,
                             (uint8_t *)p_data,
                             length,
-                            no_stop))
+                            no_stop,
+                            p_cb->flags))
         {
             hw_timeout--;
         }
@@ -421,7 +464,7 @@ static nrfx_err_t twi_rx_start_transfer(twi_control_block_t * p_cb,
     p_cb->bytes_transferred = 0;
     p_cb->error             = false;
 
-    if (length == 1)
+    if ((length == 1) && (!TWI_FLAG_SUSPEND(p_cb->flags)))
     {
         nrf_twi_shorts_set(p_twi, NRF_TWI_SHORT_BB_STOP_MASK);
     }
@@ -431,7 +474,11 @@ static nrfx_err_t twi_rx_start_transfer(twi_control_block_t * p_cb,
     }
     // In case TWI is suspended resume its operation.
     nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_RESUME);
-    nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STARTRX);
+
+    if (p_cb->prev_suspend != TWI_SUSPEND_RX)
+    {
+        nrf_twi_task_trigger(p_twi, NRF_TWI_TASK_STARTRX);
+    }
 
     if (p_cb->handler)
     {
@@ -445,11 +492,13 @@ static nrfx_err_t twi_rx_start_transfer(twi_control_block_t * p_cb,
     {
         while ((hw_timeout > 0) &&
                twi_transfer(p_twi,
+                            p_cb,
                             &p_cb->error,
                             &p_cb->bytes_transferred,
                             (uint8_t*)p_data,
                             length,
-                            false))
+                            false,
+                            p_cb->flags))
         {
                hw_timeout--;
         }
@@ -481,6 +530,17 @@ __STATIC_INLINE nrfx_err_t twi_xfer(twi_control_block_t        * p_cb,
 
     nrfx_err_t err_code = NRFX_SUCCESS;
 
+    if ((p_cb->prev_suspend == TWI_SUSPEND_TX) && (p_xfer_desc->type == NRFX_TWI_XFER_RX))
+    {
+        /* RX is invalid after TX suspend */
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    else if ((p_cb->prev_suspend == TWI_SUSPEND_RX) && (p_xfer_desc->type != NRFX_TWI_XFER_RX))
+    {
+        /* TX, TXRX and TXTX are invalid after RX suspend */
+        return NRFX_ERROR_INVALID_STATE;
+    }
+
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
     nrf_twi_int_disable(p_twi, NRF_TWI_ALL_INTS_MASK);
 
@@ -495,7 +555,7 @@ __STATIC_INLINE nrfx_err_t twi_xfer(twi_control_block_t        * p_cb,
     }
     else
     {
-        p_cb->busy = (NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER & flags) ? false : true;
+        p_cb->busy = (TWI_FLAG_NO_HANDLER_IN_USE(flags)) ? false : true;
     }
 
     p_cb->flags       = flags;
@@ -506,8 +566,8 @@ __STATIC_INLINE nrfx_err_t twi_xfer(twi_control_block_t        * p_cb,
 
     if (p_xfer_desc->type != NRFX_TWI_XFER_RX)
     {
-        p_cb->curr_no_stop = ((p_xfer_desc->type == NRFX_TWI_XFER_TX) &&
-                             !(flags & NRFX_TWI_FLAG_TX_NO_STOP)) ? false : true;
+        p_cb->curr_tx_no_stop = ((p_xfer_desc->type == NRFX_TWI_XFER_TX) &&
+                                 !(flags & NRFX_TWI_FLAG_TX_NO_STOP)) ? false : true;
 
         err_code = twi_tx_start_transfer(p_cb,
                                          p_twi,
@@ -517,8 +577,6 @@ __STATIC_INLINE nrfx_err_t twi_xfer(twi_control_block_t        * p_cb,
     }
     else
     {
-        p_cb->curr_no_stop = false;
-
         err_code = twi_rx_start_transfer(p_cb,
                                          p_twi,
                                          p_xfer_desc->p_primary_buf,
@@ -574,7 +632,6 @@ nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
                        bool               no_stop)
 {
     nrfx_twi_xfer_desc_t xfer = NRFX_TWI_XFER_DESC_TX(address, (uint8_t*)p_data, length);
-
     return nrfx_twi_xfer(p_instance, &xfer, no_stop ? NRFX_TWI_FLAG_TX_NO_STOP : 0);
 }
 
@@ -602,11 +659,13 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
     NRFX_ASSERT(p_cb->handler);
 
     if (twi_transfer(p_twi,
+                     p_cb,
                      &p_cb->error,
                      &p_cb->bytes_transferred,
                      p_cb->p_curr_buf,
                      p_cb->curr_length,
-                     p_cb->curr_no_stop ))
+                     p_cb->curr_no_stop,
+                     p_cb->flags))
     {
         return;
     }
@@ -616,9 +675,10 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
          (p_cb->xfer_desc.type == NRFX_TWI_XFER_TXTX)) &&
         p_cb->p_curr_buf == p_cb->xfer_desc.p_primary_buf)
     {
-        p_cb->p_curr_buf   = p_cb->xfer_desc.p_secondary_buf;
-        p_cb->curr_length  = p_cb->xfer_desc.secondary_length;
-        p_cb->curr_no_stop = (p_cb->flags & NRFX_TWI_FLAG_TX_NO_STOP);
+        p_cb->p_curr_buf      = p_cb->xfer_desc.p_secondary_buf;
+        p_cb->curr_length     = p_cb->xfer_desc.secondary_length;
+        p_cb->curr_tx_no_stop = (p_cb->flags & NRFX_TWI_FLAG_TX_NO_STOP);
+        p_cb->prev_suspend    = TWI_NO_SUSPEND;
 
         if (p_cb->xfer_desc.type == NRFX_TWI_XFER_TXTX)
         {
@@ -630,7 +690,10 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
         }
         else
         {
-            (void)twi_rx_start_transfer(p_cb, p_twi, p_cb->p_curr_buf, p_cb->curr_length);
+            (void)twi_rx_start_transfer(p_cb,
+                                        p_twi,
+                                        p_cb->p_curr_buf,
+                                        p_cb->curr_length);
         }
     }
     else
@@ -660,7 +723,7 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
 
         p_cb->busy = false;
 
-        if (!(NRFX_TWI_FLAG_NO_XFER_EVT_HANDLER & p_cb->flags))
+        if (!(TWI_FLAG_NO_HANDLER_IN_USE(p_cb->flags)))
         {
             p_cb->handler(&event, p_cb->p_context);
         }
