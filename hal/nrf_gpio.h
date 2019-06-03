@@ -80,6 +80,17 @@ typedef enum
     NRF_GPIO_PIN_SENSE_HIGH = GPIO_PIN_CNF_SENSE_High,     ///<  Pin sense high level.
 } nrf_gpio_pin_sense_t;
 
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Enumerator used for selecting the MCU to control the specified pin
+ */
+typedef enum
+{
+    NRF_GPIO_PIN_MCUSEL_APP     = GPIO_PIN_CNF_MCUSEL_AppMCU,     ///< Pin controlled by Application MCU.
+    NRF_GPIO_PIN_MCUSEL_NETWORK = GPIO_PIN_CNF_MCUSEL_NetworkMCU, ///< Pin controlled by Network MCU.
+    NRF_GPIO_PIN_MCUSEL_TND     = GPIO_PIN_CNF_MCUSEL_TND,        ///< Pin controlled by Trace and Debug Subsystem
+} nrf_gpio_pin_mcusel_t;
+#endif
 
 /**
  * @brief Function for configuring the GPIO pin range as output pins with normal drive strength.
@@ -412,6 +423,15 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_pin_latch_get(uint32_t pin_number);
 NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
 #endif
 
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for selecting the MCU to control a GPIO pin.
+ *
+ * @param pin_number Pin_number.
+ * @param mcu        MCU to control the pin.
+ */
+__STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu);
+#endif
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -772,9 +792,17 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number)
 
     reg->LATCH = (1 << pin_number);
 }
-
-
 #endif
+
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+__STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu)
+{
+    NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+    uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_MCUSEL_Msk;
+    reg->PIN_CNF[pin_number] = cnf | (mcu << GPIO_PIN_CNF_MCUSEL_Pos);
+}
+#endif
+
 #endif // NRF_DECLARE_ONLY
 
 /** @} */
