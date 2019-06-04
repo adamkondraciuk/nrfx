@@ -203,6 +203,8 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance);
  * The transmission will be stopped when an error occurs. If a transfer is ongoing,
  * the function returns the error code @ref NRFX_ERROR_BUSY.
  *
+ * @note This function is deprecated. Use @ref nrfx_twi_xfer instead.
+ *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
  * @param[in] p_data     Pointer to a transmit buffer.
@@ -231,6 +233,8 @@ nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
  *
  * The transmission will be stopped when an error occurs. If a transfer is ongoing,
  * the function returns the error code @ref NRFX_ERROR_BUSY.
+ *
+ * @note This function is deprecated. Use @ref nrfx_twi_xfer instead.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
