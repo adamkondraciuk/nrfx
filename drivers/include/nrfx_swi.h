@@ -160,7 +160,11 @@ NRFX_STATIC_INLINE NRF_EGU_Type * nrfx_swi_egu_instance_get(nrfx_swi_t swi)
         return NULL;
     }
 #endif
+#if (EGU_COUNT > 1)
     uint32_t offset = ((uint32_t)swi) * ((uint32_t)NRF_EGU1 - (uint32_t)NRF_EGU0);
+#else
+    uint32_t offset = 0;
+#endif
     return (NRF_EGU_Type *)((uint32_t)NRF_EGU0 + offset);
 }
 

@@ -276,9 +276,11 @@ NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * NRF_EGUx)
     if (NRF_EGUx == NRF_EGU0){
         return EGU0_CH_NUM;
     }
+#if EGU_COUNT > 1
     if (NRF_EGUx ==  NRF_EGU1){
         return EGU1_CH_NUM;
     }
+#endif
 #if EGU_COUNT > 2
     if (NRF_EGUx ==  NRF_EGU2){
         return EGU2_CH_NUM;
