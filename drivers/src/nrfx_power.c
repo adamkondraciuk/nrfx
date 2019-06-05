@@ -82,7 +82,7 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config)
 #endif
 #if NRF_POWER_HAS_DCDCEN
     nrf_power_dcdcen_set(p_config->dcdcen);
-#else
+#elif defined(REGULATORS_PRESENT)
     nrf_regulators_dcdcen_set(NRF_REGULATORS, p_config->dcdcen);
 #endif
 
