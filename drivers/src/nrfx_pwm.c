@@ -43,6 +43,7 @@ typedef struct
     uint32_t                  starting_task_address;
 #endif
     nrfx_pwm_handler_t        handler;
+    void *                    p_context;
     nrfx_drv_state_t volatile state;
     uint8_t                   flags;
 } pwm_control_block_t;
@@ -85,7 +86,8 @@ static void configure_pins(nrfx_pwm_t const * const p_instance,
 
 nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
                          nrfx_pwm_config_t const * p_config,
-                         nrfx_pwm_handler_t        handler)
+                         nrfx_pwm_handler_t        handler,
+                         void *                    p_context)
 {
     NRFX_ASSERT(p_config);
 
@@ -103,6 +105,7 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
     }
 
     p_cb->handler = handler;
+    p_cb->p_context = p_context;
 
     configure_pins(p_instance, p_config);
 
@@ -391,7 +394,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
         nrf_pwm_event_clear(p_pwm, NRF_PWM_EVENT_SEQEND0);
         if ((p_cb->flags & NRFX_PWM_FLAG_SIGNAL_END_SEQ0) && p_cb->handler)
         {
-            p_cb->handler(NRFX_PWM_EVT_END_SEQ0);
+            p_cb->handler(NRFX_PWM_EVT_END_SEQ0, p_cb->p_context);
         }
     }
     if (nrf_pwm_event_check(p_pwm, NRF_PWM_EVENT_SEQEND1))
@@ -399,7 +402,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
         nrf_pwm_event_clear(p_pwm, NRF_PWM_EVENT_SEQEND1);
         if ((p_cb->flags & NRFX_PWM_FLAG_SIGNAL_END_SEQ1) && p_cb->handler)
         {
-            p_cb->handler(NRFX_PWM_EVT_END_SEQ1);
+            p_cb->handler(NRFX_PWM_EVT_END_SEQ1, p_cb->p_context);
         }
     }
     // For LOOPSDONE the handler is called by default, but the user can disable
@@ -409,7 +412,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
         nrf_pwm_event_clear(p_pwm, NRF_PWM_EVENT_LOOPSDONE);
         if (!(p_cb->flags & NRFX_PWM_FLAG_NO_EVT_FINISHED) && p_cb->handler)
         {
-            p_cb->handler(NRFX_PWM_EVT_FINISHED);
+            p_cb->handler(NRFX_PWM_EVT_FINISHED, p_cb->p_context);
         }
     }
 
@@ -421,7 +424,7 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
         p_cb->state = NRFX_DRV_STATE_INITIALIZED;
         if (p_cb->handler)
         {
-            p_cb->handler(NRFX_PWM_EVT_STOPPED);
+            p_cb->handler(NRFX_PWM_EVT_STOPPED, p_cb->p_context);
         }
     }
 }

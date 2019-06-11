@@ -146,7 +146,7 @@ typedef enum
 } nrfx_pwm_evt_type_t;
 
 /** @brief PWM driver event handler type. */
-typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type);
+typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type, void * p_context);
 
 /**
  * @brief Function for initializing the PWM driver.
@@ -156,13 +156,15 @@ typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type);
  * @param[in] handler    Event handler provided by the user. If NULL is passed
  *                       instead, event notifications are not done and PWM
  *                       interrupts are disabled.
+ * @param[in] p_context  Context passed to the event handler.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
  */
 nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const  p_instance,
                          nrfx_pwm_config_t const * p_config,
-                         nrfx_pwm_handler_t        handler);
+                         nrfx_pwm_handler_t        handler,
+                         void *                    p_context);
 
 /**
  * @brief Function for uninitializing the PWM driver.
