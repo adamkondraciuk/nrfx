@@ -75,7 +75,7 @@ __STATIC_INLINE bool nrf_rng_int_get(nrf_rng_int_mask_t mask);
  *
  * @return Address of the specified task.
  */
-__STATIC_INLINE uint32_t * nrf_rng_task_address_get(nrf_rng_task_t rng_task);
+__STATIC_INLINE uint32_t nrf_rng_task_address_get(nrf_rng_task_t rng_task);
 
 /**
  * @brief Function for triggering the specified task.
@@ -93,7 +93,7 @@ __STATIC_INLINE void nrf_rng_task_trigger(nrf_rng_task_t rng_task);
  *
  * @return Address of the specified event.
  */
-__STATIC_INLINE uint32_t * nrf_rng_event_address_get(nrf_rng_event_t rng_event);
+__STATIC_INLINE uint32_t nrf_rng_event_address_get(nrf_rng_event_t rng_event);
 
 /**
  * @brief Function for clearing the specified event.
@@ -157,9 +157,9 @@ __STATIC_INLINE bool nrf_rng_int_get(nrf_rng_int_mask_t mask)
     return (bool)(NRF_RNG->INTENCLR & mask);
 }
 
-__STATIC_INLINE uint32_t * nrf_rng_task_address_get(nrf_rng_task_t rng_task)
+__STATIC_INLINE uint32_t nrf_rng_task_address_get(nrf_rng_task_t task)
 {
-    return (uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_task);
+    return (uint32_t)((uint8_t *)NRF_RNG + (uint32_t)task);
 }
 
 __STATIC_INLINE void nrf_rng_task_trigger(nrf_rng_task_t rng_task)
@@ -167,9 +167,9 @@ __STATIC_INLINE void nrf_rng_task_trigger(nrf_rng_task_t rng_task)
     *((volatile uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_task)) = 0x1UL;
 }
 
-__STATIC_INLINE uint32_t * nrf_rng_event_address_get(nrf_rng_event_t rng_event)
+__STATIC_INLINE uint32_t nrf_rng_event_address_get(nrf_rng_event_t event)
 {
-    return (uint32_t *)((uint8_t *)NRF_RNG + (uint32_t)rng_event);
+    return (uint32_t)((uint8_t *)NRF_RNG + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_rng_event_clear(nrf_rng_event_t rng_event)

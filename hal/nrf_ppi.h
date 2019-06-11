@@ -284,7 +284,7 @@ __STATIC_INLINE void nrf_ppi_task_trigger(nrf_ppi_task_t ppi_task);
  *
  * @return Address of the requested PPI task register.
  */
-__STATIC_INLINE uint32_t * nrf_ppi_task_address_get(nrf_ppi_task_t ppi_task);
+__STATIC_INLINE uint32_t nrf_ppi_task_address_get(nrf_ppi_task_t ppi_task);
 
 /**
  * @brief Function for getting the PPI enable task address of the specified group.
@@ -293,7 +293,7 @@ __STATIC_INLINE uint32_t * nrf_ppi_task_address_get(nrf_ppi_task_t ppi_task);
  *
  * @return PPI enable task address of the specified group.
  */
-__STATIC_INLINE uint32_t * nrf_ppi_task_group_enable_address_get(nrf_ppi_channel_group_t group);
+__STATIC_INLINE uint32_t nrf_ppi_task_group_enable_address_get(nrf_ppi_channel_group_t group);
 
 /**
  * @brief Function for getting the PPI disable task address of the specified group.
@@ -302,7 +302,7 @@ __STATIC_INLINE uint32_t * nrf_ppi_task_group_enable_address_get(nrf_ppi_channel
  *
  * @return PPI disable task address of the specified group.
  */
-__STATIC_INLINE uint32_t * nrf_ppi_task_group_disable_address_get(nrf_ppi_channel_group_t group);
+__STATIC_INLINE uint32_t nrf_ppi_task_group_disable_address_get(nrf_ppi_channel_group_t group);
 
 /**
  * @brief Function for getting the ENABLE task associated with the specified channel group.
@@ -448,19 +448,19 @@ __STATIC_INLINE void nrf_ppi_task_trigger(nrf_ppi_task_t ppi_task)
     *((volatile uint32_t *) ((uint8_t *) NRF_PPI_BASE + (uint32_t) ppi_task)) = 1UL;
 }
 
-__STATIC_INLINE uint32_t * nrf_ppi_task_address_get(nrf_ppi_task_t ppi_task)
+__STATIC_INLINE uint32_t nrf_ppi_task_address_get(nrf_ppi_task_t ppi_task)
 {
-    return (uint32_t *) ((uint8_t *) NRF_PPI_BASE + (uint32_t) ppi_task);
+    return (uint32_t) ((uint8_t *) NRF_PPI_BASE + (uint32_t) ppi_task);
 }
 
-__STATIC_INLINE uint32_t * nrf_ppi_task_group_enable_address_get(nrf_ppi_channel_group_t group)
+__STATIC_INLINE uint32_t nrf_ppi_task_group_enable_address_get(nrf_ppi_channel_group_t group)
 {
-    return (uint32_t *) &NRF_PPI->TASKS_CHG[(uint32_t) group].EN;
+    return (uint32_t) &NRF_PPI->TASKS_CHG[(uint32_t) group].EN;
 }
 
-__STATIC_INLINE uint32_t * nrf_ppi_task_group_disable_address_get(nrf_ppi_channel_group_t group)
+__STATIC_INLINE uint32_t nrf_ppi_task_group_disable_address_get(nrf_ppi_channel_group_t group)
 {
-    return (uint32_t *) &NRF_PPI->TASKS_CHG[(uint32_t) group].DIS;
+    return (uint32_t) &NRF_PPI->TASKS_CHG[(uint32_t) group].DIS;
 }
 
 __STATIC_INLINE nrf_ppi_task_t nrf_ppi_group_enable_task_get(uint8_t index)

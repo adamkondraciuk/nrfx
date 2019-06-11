@@ -232,7 +232,7 @@ __STATIC_INLINE bool nrf_comp_int_enable_check(uint32_t mask);
  *
  * @return Address of the specified COMP task.
  */
-__STATIC_INLINE uint32_t * nrf_comp_task_address_get(nrf_comp_task_t task);
+__STATIC_INLINE uint32_t nrf_comp_task_address_get(nrf_comp_task_t task);
 
 /**
  * @brief Function for getting the address of the specified COMP event register.
@@ -241,7 +241,7 @@ __STATIC_INLINE uint32_t * nrf_comp_task_address_get(nrf_comp_task_t task);
  *
  * @return Address of the specified COMP event.
  */
-__STATIC_INLINE uint32_t * nrf_comp_event_address_get(nrf_comp_event_t event);
+__STATIC_INLINE uint32_t nrf_comp_event_address_get(nrf_comp_event_t event);
 
 /**
  * @brief  Function for setting COMP shortcuts.
@@ -363,14 +363,14 @@ __STATIC_INLINE bool nrf_comp_int_enable_check(uint32_t mask)
     return (NRF_COMP->INTENSET & mask); // When read, this register returns the value of INTEN.
 }
 
-__STATIC_INLINE uint32_t * nrf_comp_task_address_get(nrf_comp_task_t task)
+__STATIC_INLINE uint32_t nrf_comp_task_address_get(nrf_comp_task_t task)
 {
-    return (uint32_t *)((uint8_t *)NRF_COMP + (uint32_t)task);
+    return (uint32_t)((uint8_t *)NRF_COMP + (uint32_t)task);
 }
 
-__STATIC_INLINE uint32_t * nrf_comp_event_address_get(nrf_comp_event_t event)
+__STATIC_INLINE uint32_t nrf_comp_event_address_get(nrf_comp_event_t event)
 {
-    return (uint32_t *)((uint8_t *)NRF_COMP + (uint32_t)event);
+    return (uint32_t)((uint8_t *)NRF_COMP + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_comp_shorts_enable(uint32_t mask)

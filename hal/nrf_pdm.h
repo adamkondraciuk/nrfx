@@ -112,7 +112,7 @@ __STATIC_INLINE void nrf_pdm_event_clear(nrf_pdm_event_t event);
  *
  * @return Address of the specified PDM event.
  */
-__STATIC_INLINE volatile uint32_t * nrf_pdm_event_address_get(nrf_pdm_event_t event);
+__STATIC_INLINE uint32_t nrf_pdm_event_address_get(nrf_pdm_event_t event);
 
 /**
  * @brief Function for enabling PDM interrupts.
@@ -295,9 +295,9 @@ __STATIC_INLINE void nrf_pdm_event_clear(nrf_pdm_event_t event)
 #endif
 }
 
-__STATIC_INLINE volatile uint32_t * nrf_pdm_event_address_get(nrf_pdm_event_t event)
+__STATIC_INLINE uint32_t nrf_pdm_event_address_get(nrf_pdm_event_t event)
 {
-    return (volatile uint32_t *)((uint8_t *)NRF_PDM + (uint32_t)event);
+    return (uint32_t)((uint8_t *)NRF_PDM + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_pdm_int_enable(uint32_t int_mask)

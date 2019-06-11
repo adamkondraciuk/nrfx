@@ -236,8 +236,8 @@ __STATIC_INLINE bool nrf_qspi_event_check(NRF_QSPI_Type const * p_reg, nrf_qspi_
  *
  * @return Address of the specified event register.
  */
-__STATIC_INLINE uint32_t * nrf_qspi_event_address_get(NRF_QSPI_Type const * p_reg,
-                                                      nrf_qspi_event_t      event);
+__STATIC_INLINE uint32_t nrf_qspi_event_address_get(NRF_QSPI_Type const * p_reg,
+                                                    nrf_qspi_event_t      event);
 
 /**
  * @brief Function for enabling specified interrupts.
@@ -496,10 +496,10 @@ __STATIC_INLINE bool nrf_qspi_event_check(NRF_QSPI_Type const * p_reg, nrf_qspi_
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE uint32_t * nrf_qspi_event_address_get(NRF_QSPI_Type const * p_reg,
-                                                      nrf_qspi_event_t      event)
+__STATIC_INLINE uint32_t nrf_qspi_event_address_get(NRF_QSPI_Type const * p_reg,
+                                                    nrf_qspi_event_t      event)
 {
-    return (uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_qspi_int_enable(NRF_QSPI_Type * p_reg, uint32_t mask)

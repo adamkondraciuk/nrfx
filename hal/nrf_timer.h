@@ -223,8 +223,7 @@ __STATIC_INLINE void nrf_timer_task_trigger(NRF_TIMER_Type * p_reg,
  *
  * @return Address of the specified task register.
  */
-__STATIC_INLINE uint32_t * nrf_timer_task_address_get(NRF_TIMER_Type * p_reg,
-                                                      nrf_timer_task_t task);
+__STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type * p_reg, nrf_timer_task_t task);
 
 /**
  * @brief Function for clearing the specified timer event.
@@ -255,8 +254,8 @@ __STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-__STATIC_INLINE uint32_t * nrf_timer_event_address_get(NRF_TIMER_Type *  p_reg,
-                                                       nrf_timer_event_t event);
+__STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type * p_reg,
+                                                     nrf_timer_event_t event);
 
 /**
  * @brief Function for enabling the specified shortcuts.
@@ -488,10 +487,9 @@ __STATIC_INLINE void nrf_timer_task_trigger(NRF_TIMER_Type * p_reg,
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-__STATIC_INLINE uint32_t * nrf_timer_task_address_get(NRF_TIMER_Type * p_reg,
-                                                      nrf_timer_task_t task)
+__STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type * p_reg, nrf_timer_task_t task)
 {
-    return (uint32_t *)((uint8_t *)p_reg + (uint32_t)task);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
 }
 
 __STATIC_INLINE void nrf_timer_event_clear(NRF_TIMER_Type * p_reg,
@@ -510,10 +508,10 @@ __STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type * p_reg,
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE uint32_t * nrf_timer_event_address_get(NRF_TIMER_Type * p_reg,
-                                                       nrf_timer_event_t event)
+__STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type * p_reg,
+                                                     nrf_timer_event_t event)
 {
-    return (uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_timer_shorts_enable(NRF_TIMER_Type * p_reg,

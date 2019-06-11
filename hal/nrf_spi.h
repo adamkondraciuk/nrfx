@@ -97,8 +97,8 @@ __STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-__STATIC_INLINE uint32_t * nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
-                                                     nrf_spi_event_t event);
+__STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
+                                                   nrf_spi_event_t event);
 
 /**
  * @brief Function for enabling the specified interrupts.
@@ -216,10 +216,10 @@ __STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type *  p_reg,
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-__STATIC_INLINE uint32_t * nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
-                                                     nrf_spi_event_t event)
+__STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
+                                                   nrf_spi_event_t event)
 {
-    return (uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_spi_int_enable(NRF_SPI_Type * p_reg,

@@ -299,8 +299,8 @@ __STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event);
  *
  * @return Address of the specified SAADC limit event.
  */
-__STATIC_INLINE volatile uint32_t * nrf_saadc_event_limit_address_get(uint8_t           channel,
-                                                                      nrf_saadc_limit_t limit_type);
+__STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
+                                                           nrf_saadc_limit_t limit_type);
 
 /**
  * @brief Function for getting the SAADC channel monitoring limit events.
@@ -554,17 +554,17 @@ __STATIC_INLINE void nrf_saadc_publish_clear(nrf_saadc_event_t event)
 }
 #endif // defined(DPPI_PRESENT)
 
-__STATIC_INLINE volatile uint32_t * nrf_saadc_event_limit_address_get(uint8_t           channel,
-                                                                      nrf_saadc_limit_t limit_type)
+__STATIC_INLINE uint32_t nrf_saadc_event_limit_address_get(uint8_t           channel,
+                                                           nrf_saadc_limit_t limit_type)
 {
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);
     if (limit_type == NRF_SAADC_LIMIT_HIGH)
     {
-        return &NRF_SAADC->EVENTS_CH[channel].LIMITH;
+        return (uint32_t)&NRF_SAADC->EVENTS_CH[channel].LIMITH;
     }
     else
     {
-        return &NRF_SAADC->EVENTS_CH[channel].LIMITL;
+        return (uint32_t)&NRF_SAADC->EVENTS_CH[channel].LIMITL;
     }
 }
 

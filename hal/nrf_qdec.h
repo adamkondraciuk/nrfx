@@ -174,7 +174,7 @@ __STATIC_INLINE void nrf_qdec_task_trigger(nrf_qdec_task_t task);
  *
  * @return Address of the specified QDEC task.
  */
-__STATIC_INLINE uint32_t * nrf_qdec_task_address_get(nrf_qdec_task_t task);
+__STATIC_INLINE uint32_t nrf_qdec_task_address_get(nrf_qdec_task_t task);
 
 /**
  * @brief Function for clearing the specified QDEC event.
@@ -199,7 +199,7 @@ __STATIC_INLINE uint32_t nrf_qdec_event_check(nrf_qdec_event_t event);
  *
  * @return Address of the specified QDEC event.
  */
-__STATIC_INLINE uint32_t * nrf_qdec_event_address_get(nrf_qdec_event_t event);
+__STATIC_INLINE uint32_t nrf_qdec_event_address_get(nrf_qdec_event_t event);
 
 /**
  * @brief Function for setting QDEC shortcuts.
@@ -400,9 +400,9 @@ __STATIC_INLINE void nrf_qdec_task_trigger(nrf_qdec_task_t task)
     *( (volatile uint32_t *)( (uint8_t *)NRF_QDEC + (uint32_t)task) ) = 1;
 }
 
-__STATIC_INLINE uint32_t * nrf_qdec_task_address_get(nrf_qdec_task_t task)
+__STATIC_INLINE uint32_t nrf_qdec_task_address_get(nrf_qdec_task_t task)
 {
-    return (uint32_t *)( (uint8_t *)NRF_QDEC + (uint32_t)task);
+    return (uint32_t)( (uint8_t *)NRF_QDEC + (uint32_t)task);
 }
 
 __STATIC_INLINE void nrf_qdec_event_clear(nrf_qdec_event_t event)
@@ -419,9 +419,9 @@ __STATIC_INLINE uint32_t nrf_qdec_event_check(nrf_qdec_event_t event)
     return *(volatile uint32_t *)( (uint8_t *)NRF_QDEC + (uint32_t)event);
 }
 
-__STATIC_INLINE uint32_t * nrf_qdec_event_address_get(nrf_qdec_event_t event)
+__STATIC_INLINE uint32_t nrf_qdec_event_address_get(nrf_qdec_event_t event)
 {
-    return (uint32_t *)( (uint8_t *)NRF_QDEC + (uint32_t)event);
+    return (uint32_t)( (uint8_t *)NRF_QDEC + (uint32_t)event);
 }
 
 __STATIC_INLINE void nrf_qdec_shorts_enable(uint32_t mask)

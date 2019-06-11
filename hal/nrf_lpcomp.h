@@ -203,7 +203,7 @@ __STATIC_INLINE bool nrf_lpcomp_int_enable_check(uint32_t int_mask);
  *
  * @return The address of the specified LPCOMP task.
  */
-__STATIC_INLINE uint32_t * nrf_lpcomp_task_address_get(nrf_lpcomp_task_t task);
+__STATIC_INLINE uint32_t nrf_lpcomp_task_address_get(nrf_lpcomp_task_t task);
 
 /**
  * @brief Function for getting the address of the specified LPCOMP event register.
@@ -212,7 +212,7 @@ __STATIC_INLINE uint32_t * nrf_lpcomp_task_address_get(nrf_lpcomp_task_t task);
  *
  * @return The address of the specified LPCOMP event.
  */
-__STATIC_INLINE uint32_t * nrf_lpcomp_event_address_get(nrf_lpcomp_event_t event);
+__STATIC_INLINE uint32_t nrf_lpcomp_event_address_get(nrf_lpcomp_event_t event);
 
 /**
  * @brief  Function for setting LPCOMP shorts.
@@ -323,14 +323,14 @@ __STATIC_INLINE bool nrf_lpcomp_int_enable_check(uint32_t int_mask)
     return (NRF_LPCOMP->INTENSET & int_mask); // when read this register will return the value of INTEN.
 }
 
-__STATIC_INLINE uint32_t * nrf_lpcomp_task_address_get(nrf_lpcomp_task_t task)
+__STATIC_INLINE uint32_t nrf_lpcomp_task_address_get(nrf_lpcomp_task_t task)
 {
-    return (uint32_t *)((uint8_t *)NRF_LPCOMP + task);
+    return (uint32_t)((uint8_t *)NRF_LPCOMP + task);
 }
 
-__STATIC_INLINE uint32_t * nrf_lpcomp_event_address_get(nrf_lpcomp_event_t event)
+__STATIC_INLINE uint32_t nrf_lpcomp_event_address_get(nrf_lpcomp_event_t event)
 {
-    return (uint32_t *)((uint8_t *)NRF_LPCOMP + event);
+    return (uint32_t)((uint8_t *)NRF_LPCOMP + event);
 }
 
 __STATIC_INLINE void nrf_lpcomp_shorts_enable(uint32_t short_mask)

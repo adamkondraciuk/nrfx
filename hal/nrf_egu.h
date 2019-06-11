@@ -106,8 +106,7 @@ __STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_
  *
  * @return Address of the specified EGU task register.
  */
-__STATIC_INLINE uint32_t * nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                    nrf_egu_task_t egu_task);
+__STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_t egu_task);
 
 /**
  * @brief Function for returning the address of the specified EGU TRIGGER task register.
@@ -117,8 +116,7 @@ __STATIC_INLINE uint32_t * nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx,
  *
  * @return Address of the specified EGU TRIGGER task register.
  */
-__STATIC_INLINE uint32_t * nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                            uint8_t        channel);
+__STATIC_INLINE uint32_t nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_EGUx, uint8_t channel);
 
 /**
  * @brief Function for returning the specified EGU TRIGGER task.
@@ -159,8 +157,8 @@ __STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type *  NRF_EGUx,
  *
  * @return Address of the specified EGU event register.
  */
-__STATIC_INLINE uint32_t * nrf_egu_event_address_get(NRF_EGU_Type *  NRF_EGUx,
-                                                     nrf_egu_event_t egu_event);
+__STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type * NRF_EGUx,
+                                                   nrf_egu_event_t egu_event);
 
 /**
  * @brief Function for returning address of the specified EGU TRIGGERED event register.
@@ -170,8 +168,8 @@ __STATIC_INLINE uint32_t * nrf_egu_event_address_get(NRF_EGU_Type *  NRF_EGUx,
  *
  * @return Address of the specified EGU TRIGGERED event register.
  */
-__STATIC_INLINE uint32_t * nrf_egu_event_triggered_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                               uint8_t        channel);
+__STATIC_INLINE uint32_t nrf_egu_event_triggered_address_get(NRF_EGU_Type * NRF_EGUx,
+                                                             uint8_t        channel);
 
 /**
  * @brief Function for returning the specified EGU TRIGGERED event.
@@ -300,19 +298,17 @@ __STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_
     *((volatile uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_task)) = 0x1UL;
 }
 
-__STATIC_INLINE uint32_t * nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                    nrf_egu_task_t egu_task)
+__STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_t egu_task)
 {
     NRFX_ASSERT(NRF_EGUx);
-    return (uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_task);
+    return (uint32_t)((uint8_t *)NRF_EGUx + (uint32_t)egu_task);
 }
 
-__STATIC_INLINE uint32_t * nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                            uint8_t channel)
+__STATIC_INLINE uint32_t nrf_egu_task_trigger_address_get(NRF_EGU_Type * NRF_EGUx, uint8_t channel)
 {
     NRFX_ASSERT(NRF_EGUx);
     NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (uint32_t*)&NRF_EGUx->TASKS_TRIGGER[channel];
+    return (uint32_t)&NRF_EGUx->TASKS_TRIGGER[channel];
 }
 
 __STATIC_INLINE nrf_egu_task_t nrf_egu_task_trigger_get(NRF_EGU_Type * NRF_EGUx, uint8_t channel)
@@ -340,19 +336,19 @@ __STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type * NRF_EGUx,
 #endif
 }
 
-__STATIC_INLINE uint32_t * nrf_egu_event_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                     nrf_egu_event_t egu_event)
+__STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type * NRF_EGUx,
+                                                   nrf_egu_event_t egu_event)
 {
     NRFX_ASSERT(NRF_EGUx);
-    return (uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_event);
+    return (uint32_t)((uint8_t *)NRF_EGUx + (uint32_t)egu_event);
 }
 
-__STATIC_INLINE uint32_t * nrf_egu_event_triggered_address_get(NRF_EGU_Type * NRF_EGUx,
-                                                               uint8_t channel)
+__STATIC_INLINE uint32_t nrf_egu_event_triggered_address_get(NRF_EGU_Type * NRF_EGUx,
+                                                             uint8_t        channel)
 {
     NRFX_ASSERT(NRF_EGUx);
     NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (uint32_t*)&NRF_EGUx->EVENTS_TRIGGERED[channel];
+    return (uint32_t)&NRF_EGUx->EVENTS_TRIGGERED[channel];
 }
 
 __STATIC_INLINE nrf_egu_event_t nrf_egu_event_triggered_get(NRF_EGU_Type * NRF_EGUx,
