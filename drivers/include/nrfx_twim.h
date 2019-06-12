@@ -4,6 +4,7 @@
 #define NRFX_TWIM_H__
 
 #include <nrfx.h>
+#include <nrfx_twi_twim.h>
 #include <hal/nrf_twim.h>
 
 #ifdef __cplusplus
@@ -359,6 +360,30 @@ uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer
  * @return STOPPED event address.
  */
 uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance);
+
+/**
+ * @brief Function for recovering the bus.
+ *
+ * This function checks if the bus is not stuck because of a slave holding the SDA line in the low state,
+ * and if needed it performs required number of pulses on the SCL line to make the slave release the SDA line.
+ * Finally, the function generates a STOP condition on the bus to put it into a known state.
+ *
+ * @note This function can be used only if the TWIM driver is uninitialized.
+ *
+ * @param[in] scl_pin SCL pin number.
+ * @param[in] sda_pin SDA pin number.
+ *
+ * @retval NRFX_SUCCESS        Bus recovery was successful.
+ * @retval NRFX_ERROR_INTERNAL Bus recovery failed.
+ */
+__STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin);
+
+#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+__STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin)
+{
+    return nrfx_twi_twim_bus_recover(scl_pin, sda_pin);
+}
+#endif
 
 /** @} */
 
