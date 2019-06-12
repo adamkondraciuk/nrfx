@@ -5,6 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_spim.h>
+#include <hal/nrf_gpio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -77,6 +78,7 @@ typedef struct
     nrf_spim_frequency_t frequency; ///< SPIM frequency.
     nrf_spim_mode_t      mode;      ///< SPIM mode.
     nrf_spim_bit_order_t bit_order; ///< SPIM bit order.
+    nrf_gpio_pin_pull_t  miso_pull; ///< MISO pull up configuration.
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
     uint8_t              dcx_pin;     ///< D/CX pin number (optional).
     uint8_t              rx_delay;    ///< Sample delay for input serial data on MISO.
@@ -119,6 +121,7 @@ typedef struct
     .frequency      = NRF_SPIM_FREQ_4M,                      \
     .mode           = NRF_SPIM_MODE_0,                       \
     .bit_order      = NRF_SPIM_BIT_ORDER_MSB_FIRST,          \
+    .miso_pull      = NRFX_SPIM_MISO_PULL_CFG,               \
     NRFX_SPIM_DEFAULT_EXTENDED_CONFIG                        \
 }
 

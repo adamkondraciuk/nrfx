@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [2.0.0] - 2019-xx-xx
+
+### Added
+- Added per instance configuration of MISO pin pull setting in nrfx_spi and nrfx_spim drivers.
+
 ## [1.8.1] - 2019-10-21
 ### Added
 - Added functions in the GPIOTE driver for getting task or event for the specified GPIO pin.

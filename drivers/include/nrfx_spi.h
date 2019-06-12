@@ -5,6 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_spi.h>
+#include <hal/nrf_gpio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,6 +75,7 @@ typedef struct
     nrf_spi_frequency_t frequency;  ///< SPI frequency.
     nrf_spi_mode_t      mode;       ///< SPI mode.
     nrf_spi_bit_order_t bit_order;  ///< SPI bit order.
+    nrf_gpio_pin_pull_t miso_pull;  ///< MISO pull up configuration.
 } nrfx_spi_config_t;
 
 /** @brief SPI master instance default configuration. */
@@ -88,6 +90,7 @@ typedef struct
     .frequency    = NRF_SPI_FREQ_4M,                      \
     .mode         = NRF_SPI_MODE_0,                       \
     .bit_order    = NRF_SPI_BIT_ORDER_MSB_FIRST,          \
+    .miso_pull    = NRFX_SPI_MISO_PULL_CFG,               \
 }
 
 /** @brief Single transfer descriptor structure. */
