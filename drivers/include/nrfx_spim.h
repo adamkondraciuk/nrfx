@@ -121,7 +121,7 @@ typedef struct
     .frequency      = NRF_SPIM_FREQ_4M,                      \
     .mode           = NRF_SPIM_MODE_0,                       \
     .bit_order      = NRF_SPIM_BIT_ORDER_MSB_FIRST,          \
-    .miso_pull      = NRFX_SPIM_MISO_PULL_CFG,               \
+    .miso_pull      = NRF_GPIO_PIN_NOPULL,                   \
     NRFX_SPIM_DEFAULT_EXTENDED_CONFIG                        \
 }
 

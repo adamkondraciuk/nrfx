@@ -1808,16 +1808,6 @@
 #define NRFX_SPIM_EXTENDED_ENABLED 0
 #endif
 
-// <o> NRFX_SPIM_MISO_PULL_CFG  - MISO pin pull configuration.
-
-// <0=> NRF_GPIO_PIN_NOPULL
-// <1=> NRF_GPIO_PIN_PULLDOWN
-// <3=> NRF_GPIO_PIN_PULLUP
-
-#ifndef NRFX_SPIM_MISO_PULL_CFG
-#define NRFX_SPIM_MISO_PULL_CFG 1
-#endif
-
 // <o> NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
