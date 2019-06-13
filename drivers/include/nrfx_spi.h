@@ -90,7 +90,7 @@ typedef struct
     .frequency    = NRF_SPI_FREQ_4M,                      \
     .mode         = NRF_SPI_MODE_0,                       \
     .bit_order    = NRF_SPI_BIT_ORDER_MSB_FIRST,          \
-    .miso_pull    = NRFX_SPI_MISO_PULL_CFG,               \
+    .miso_pull    = NRF_GPIO_PIN_NOPULL,                  \
 }
 
 /** @brief Single transfer descriptor structure. */
