@@ -132,7 +132,7 @@ void nrfx_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl);
  */
 __STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
 {
-    return (uint32_t)nrf_qdec_task_address_get(task);
+    return nrf_qdec_task_address_get(task);
 }
 
 /**
@@ -144,7 +144,7 @@ __STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
  */
 __STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
 {
-    return (uint32_t)nrf_qdec_event_address_get(event);
+    return nrf_qdec_event_address_get(event);
 }
 
 /** @} */

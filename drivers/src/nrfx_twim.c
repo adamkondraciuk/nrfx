@@ -570,13 +570,13 @@ nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
 uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance,
                                   nrfx_twim_xfer_type_t xfer_type)
 {
-    return (uint32_t)nrf_twim_task_address_get(p_instance->p_twim,
+    return nrf_twim_task_address_get(p_instance->p_twim,
         (xfer_type != NRFX_TWIM_XFER_RX) ? NRF_TWIM_TASK_STARTTX : NRF_TWIM_TASK_STARTRX);
 }
 
 uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance)
 {
-    return (uint32_t)nrf_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
+    return nrf_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
 }
 
 static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb)

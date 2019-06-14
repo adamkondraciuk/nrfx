@@ -611,7 +611,7 @@ size_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance)
 
 uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance)
 {
-    return (uint32_t)nrf_twi_event_address_get(p_instance->p_twi, NRF_TWI_EVENT_STOPPED);
+    return nrf_twi_event_address_get(p_instance->p_twi, NRF_TWI_EVENT_STOPPED);
 }
 
 static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)

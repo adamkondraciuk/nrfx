@@ -182,7 +182,7 @@ uint32_t nrfx_comp_sample(void);
  */
 __STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
 {
-    return (uint32_t)nrf_comp_task_address_get(task);
+    return nrf_comp_task_address_get(task);
 }
 
 /**
@@ -194,7 +194,7 @@ __STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
  */
 __STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event)
 {
-    return (uint32_t)nrf_comp_event_address_get(event);
+    return nrf_comp_event_address_get(event);
 }
 
 /** @} */

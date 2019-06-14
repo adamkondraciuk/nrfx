@@ -257,7 +257,7 @@ nrfx_err_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group);
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_get(nrf_ppi_task_t task)
 {
-    return (uint32_t) nrf_ppi_task_address_get(task);
+    return nrf_ppi_task_address_get(task);
 }
 
 /**
@@ -269,7 +269,7 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_get(nrf_ppi_task_t task)
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_enable_get(nrf_ppi_channel_group_t group)
 {
-    return (uint32_t) nrf_ppi_task_group_enable_address_get(group);
+    return nrf_ppi_task_group_enable_address_get(group);
 }
 
 /**
@@ -281,7 +281,7 @@ __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_enable_get(nrf_ppi_channel_gro
  */
 __STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_disable_get(nrf_ppi_channel_group_t group)
 {
-    return (uint32_t) nrf_ppi_task_group_disable_address_get(group);
+    return nrf_ppi_task_group_disable_address_get(group);
 }
 
 /** @} */

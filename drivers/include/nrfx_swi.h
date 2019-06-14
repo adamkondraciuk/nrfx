@@ -160,7 +160,7 @@ __STATIC_INLINE uint32_t nrfx_swi_task_trigger_address_get(nrfx_swi_t swi,
     }
 #endif
 
-    return (uint32_t)nrf_egu_task_trigger_address_get(p_egu, channel);
+    return nrf_egu_task_trigger_address_get(p_egu, channel);
 }
 
 /**
@@ -184,7 +184,7 @@ __STATIC_INLINE uint32_t nrfx_swi_event_triggered_address_get(nrfx_swi_t swi,
     }
 #endif
 
-    return (uint32_t)nrf_egu_event_triggered_address_get(p_egu, channel);
+    return nrf_egu_event_triggered_address_get(p_egu, channel);
 }
 
 #endif // NRFX_CHECK(NRFX_EGU_ENABLED) || defined(__NRFX_DOXYGEN__)
