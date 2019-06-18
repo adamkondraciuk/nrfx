@@ -115,10 +115,10 @@ typedef struct
 #define NRFX_TWIM_XFER_DESC_TX(addr, p_data, length) \
 {                                                    \
     .type             = NRFX_TWIM_XFER_TX,           \
-    .address          = addr,                        \
-    .primary_length   = length,                      \
+    .address          = (addr),                      \
+    .primary_length   = (length),                    \
     .secondary_length = 0,                           \
-    .p_primary_buf    = p_data,                      \
+    .p_primary_buf    = (p_data),                    \
     .p_secondary_buf  = NULL,                        \
 }
 
@@ -126,10 +126,10 @@ typedef struct
 #define NRFX_TWIM_XFER_DESC_RX(addr, p_data, length) \
 {                                                    \
     .type             = NRFX_TWIM_XFER_RX,           \
-    .address          = addr,                        \
-    .primary_length   = length,                      \
+    .address          = (addr),                      \
+    .primary_length   = (length),                    \
     .secondary_length = 0,                           \
-    .p_primary_buf    = p_data,                      \
+    .p_primary_buf    = (p_data),                    \
     .p_secondary_buf  = NULL,                        \
 }
 
@@ -137,22 +137,22 @@ typedef struct
 #define NRFX_TWIM_XFER_DESC_TXRX(addr, p_tx, tx_len, p_rx, rx_len) \
 {                                                                  \
     .type             = NRFX_TWIM_XFER_TXRX,                       \
-    .address          = addr,                                      \
-    .primary_length   = tx_len,                                    \
-    .secondary_length = rx_len,                                    \
-    .p_primary_buf    = p_tx,                                      \
-    .p_secondary_buf  = p_rx,                                      \
+    .address          = (addr),                                    \
+    .primary_length   = (tx_len),                                  \
+    .secondary_length = (rx_len),                                  \
+    .p_primary_buf    = (p_tx),                                    \
+    .p_secondary_buf  = (p_rx),                                    \
 }
 
 /** @brief Macro for setting the TX-TX transfer descriptor. */
 #define NRFX_TWIM_XFER_DESC_TXTX(addr, p_tx, tx_len, p_tx2, tx_len2) \
 {                                                                    \
     .type             = NRFX_TWIM_XFER_TXTX,                         \
-    .address          = addr,                                        \
-    .primary_length   = tx_len,                                      \
-    .secondary_length = tx_len2,                                     \
-    .p_primary_buf    = p_tx,                                        \
-    .p_secondary_buf  = p_tx2,                                       \
+    .address          = (addr),                                      \
+    .primary_length   = (tx_len),                                    \
+    .secondary_length = (tx_len2),                                   \
+    .p_primary_buf    = (p_tx),                                      \
+    .p_secondary_buf  = (p_tx2),                                     \
 }
 
 /** @brief Structure for a TWI event. */
