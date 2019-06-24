@@ -60,6 +60,8 @@
 
 /* Unchangable configuration. */
 #define NRF_CACHE      NRF_CACHE_S
+#define NRF_CACHEINFO  NRF_CACHEINFO_S
+#define NRF_CACHEDATA  NRF_CACHEDATA_S
 #define NRF_CRYPTOCELL NRF_CRYPTOCELL_S
 #define NRF_FICR       NRF_FICR_S
 #define NRF_GPIOTE0    NRF_GPIOTE0_S
