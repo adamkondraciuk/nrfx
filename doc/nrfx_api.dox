@@ -11,6 +11,8 @@
 
 @defgroup nrf_bprot BPROT
 
+@defgroup nrf_cache CACHE
+
 @defgroup nrf_ccm CCM
 
 @defgroup nrf_clock CLOCK

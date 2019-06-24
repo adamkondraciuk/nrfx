@@ -2,6 +2,8 @@
 @page nrf5340_drivers nRF5340 drivers
 @{
 
+@ref nrf_cache
+
 @ref nrf_clock
 
 @ref nrf_systick

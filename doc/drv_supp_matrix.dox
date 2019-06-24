@@ -9,6 +9,7 @@ Driver           | nRF51 Series | nRF52810/nRF52811 | nRF52832     | nRF52833   
 @ref nrf_adc     |@tagGreenTick |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_acl     |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagRedCross  |@tagRedCross  |
 @ref nrf_bprot   |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
+@ref nrf_cache   |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagGreenTick |@tagRedCross  |
 @ref nrf_ccm     |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
 @ref nrf_clock   |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |
 @ref nrf_comp    |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
