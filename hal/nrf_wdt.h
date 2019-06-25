@@ -67,290 +67,329 @@ typedef enum
 /**
  * @brief Function for configuring the watchdog behavior when the CPU is sleeping or halted.
  *
- * @param behaviour Watchdog behavior when CPU is in SLEEP or HALT mode.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] behaviour Watchdog behavior when CPU is in SLEEP or HALT mode.
  */
-NRF_STATIC_INLINE void nrf_wdt_behaviour_set(nrf_wdt_behaviour_t behaviour);
+NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behaviour_t behaviour);
 
 /**
  * @brief Function for starting the WDT task.
  *
- * @param[in] task Task.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
  */
-NRF_STATIC_INLINE void nrf_wdt_task_trigger(nrf_wdt_task_t task);
+NRF_STATIC_INLINE void nrf_wdt_task_trigger(NRF_WDT_Type * p_reg, nrf_wdt_task_t task);
 
 /**
  * @brief Function for clearing the WDT event register.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event.
  */
-NRF_STATIC_INLINE void nrf_wdt_event_clear(nrf_wdt_event_t event);
+NRF_STATIC_INLINE void nrf_wdt_event_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t event);
 
 /**
  * @brief Function for retrieving the state of the WDT event.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to be checked.
  *
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_wdt_event_check(nrf_wdt_event_t event);
+NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_event_t event);
 
 /**
  * @brief Function for enabling the specified interrupt.
  *
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] int_mask Interrupt.
  */
-NRF_STATIC_INLINE void nrf_wdt_int_enable(uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t int_mask);
 
 /**
  * @brief Function for retrieving the state of given interrupt.
  *
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] int_mask Interrupt.
  *
  * @retval true  Interrupt is enabled.
  * @retval false Interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(uint32_t int_mask);
+NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t int_mask);
 
 /**
  * @brief Function for disabling a specific interrupt.
  *
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] int_mask Interrupt.
  */
-NRF_STATIC_INLINE void nrf_wdt_int_disable(uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t int_mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the subscribe configuration for a given
  *        WDT task.
  *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] task    Task for which to set the configuration.
  * @param[in] channel Channel through which to subscribe events.
  */
-NRF_STATIC_INLINE void nrf_wdt_subscribe_set(nrf_wdt_task_t task,
+NRF_STATIC_INLINE void nrf_wdt_subscribe_set(NRF_WDT_Type * p_reg,
+                                             nrf_wdt_task_t task,
                                              uint8_t        channel);
 
 /**
  * @brief Function for clearing the subscribe configuration for a given
  *        WDT task.
  *
- * @param[in] task Task for which to clear the configuration.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_wdt_subscribe_clear(nrf_wdt_task_t task);
+NRF_STATIC_INLINE void nrf_wdt_subscribe_clear(NRF_WDT_Type * p_reg, nrf_wdt_task_t task);
 
 /**
  * @brief Function for setting the publish configuration for a given
  *        WDT event.
  *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] event   Event for which to set the configuration.
  * @param[in] channel Channel through which to publish the event.
  */
-NRF_STATIC_INLINE void nrf_wdt_publish_set(nrf_wdt_event_t event,
+NRF_STATIC_INLINE void nrf_wdt_publish_set(NRF_WDT_Type *  p_reg,
+                                           nrf_wdt_event_t event,
                                            uint8_t         channel);
 
 /**
  * @brief Function for clearing the publish configuration for a given
  *        WDT event.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_wdt_publish_clear(nrf_wdt_event_t event);
+NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for returning the address of a specific WDT task register.
  *
- * @param[in] task Task.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
  */
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(nrf_wdt_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
+                                                    nrf_wdt_task_t       task);
 
 /**
  * @brief Function for returning the address of a specific WDT event register.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event.
  *
  * @return Address of requested event register
  */
-NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(nrf_wdt_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
+                                                     nrf_wdt_event_t      event);
 
 /**
  * @brief Function for retrieving the watchdog status.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
  * @retval true  The watchdog is started.
  * @retval false The watchdog is not started.
  */
-NRF_STATIC_INLINE bool nrf_wdt_started(void);
+NRF_STATIC_INLINE bool nrf_wdt_started(NRF_WDT_Type const * p_reg);
 
 /**
  * @brief Function for retrieving the watchdog reload request status.
  *
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] rr_register Reload request register to be checked.
  *
  * @retval true  Reload request is running.
  * @retval false No reload requests are running.
  */
-NRF_STATIC_INLINE bool nrf_wdt_request_status(nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE bool nrf_wdt_request_status(NRF_WDT_Type const *  p_reg,
+                                              nrf_wdt_rr_register_t rr_register);
 
 /**
  * @brief Function for setting the watchdog reload value.
  *
+ * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
  * @param[in] reload_value Watchdog counter initial value.
  */
-NRF_STATIC_INLINE void nrf_wdt_reload_value_set(uint32_t reload_value);
+NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t reload_value);
 
 /**
  * @brief Function for retrieving the watchdog reload value.
  *
  * @return Reload value.
  */
-NRF_STATIC_INLINE uint32_t nrf_wdt_reload_value_get(void);
+NRF_STATIC_INLINE uint32_t nrf_wdt_reload_value_get(NRF_WDT_Type const * p_reg);
 
 /**
  * @brief Function for enabling a specific reload request register.
  *
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] rr_register Reload request register to be enabled.
  */
-NRF_STATIC_INLINE void nrf_wdt_reload_request_enable(nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE void nrf_wdt_reload_request_enable(NRF_WDT_Type *        p_reg,
+                                                     nrf_wdt_rr_register_t rr_register);
 
 /**
  * @brief Function for disabling a specific reload request register.
  *
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] rr_register Reload request register to be disabled.
  */
-NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(NRF_WDT_Type *        p_reg,
+                                                      nrf_wdt_rr_register_t rr_register);
 
 /**
  * @brief Function for retrieving the status of a specific reload request register.
  *
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] rr_register Reload request register to be checked.
  *
  * @retval true  The reload request register is enabled.
  * @retval false The reload request register is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(NRF_WDT_Type const *  p_reg,
+                                                         nrf_wdt_rr_register_t rr_register);
 
 /**
  * @brief Function for setting a specific reload request register.
  *
- * @param[in]  rr_register       Reload request register to set.
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
+ * @param[in] rr_register Reload request register to set.
  */
-NRF_STATIC_INLINE void nrf_wdt_reload_request_set(nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
+                                                  nrf_wdt_rr_register_t rr_register);
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_wdt_behaviour_set(nrf_wdt_behaviour_t behaviour)
+NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behaviour_t behaviour)
 {
-    NRF_WDT->CONFIG = behaviour;
+    p_reg->CONFIG = behaviour;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_task_trigger(nrf_wdt_task_t task)
+NRF_STATIC_INLINE void nrf_wdt_task_trigger(NRF_WDT_Type * p_reg, nrf_wdt_task_t task)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_WDT + (uint32_t)task)) = 0x01UL;
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x01UL;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_event_clear(nrf_wdt_event_t event)
+NRF_STATIC_INLINE void nrf_wdt_event_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t event)
 {
-    *((volatile uint32_t *)((uint8_t *)NRF_WDT + (uint32_t)event)) = 0x0UL;
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_WDT + (uint32_t)event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event));
     (void)dummy;
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_event_check(nrf_wdt_event_t event)
+NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_event_t event)
 {
-    return (bool)*((volatile uint32_t *)((uint8_t *)NRF_WDT + (uint32_t)event));
+    return (bool)*((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event));
 }
 
-NRF_STATIC_INLINE void nrf_wdt_int_enable(uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t int_mask)
 {
-    NRF_WDT->INTENSET = int_mask;
+    p_reg->INTENSET = int_mask;
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(uint32_t int_mask)
+NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t int_mask)
 {
-    return (bool)(NRF_WDT->INTENSET & int_mask);
+    return (bool)(p_reg->INTENSET & int_mask);
 }
 
-NRF_STATIC_INLINE void nrf_wdt_int_disable(uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t int_mask)
 {
-    NRF_WDT->INTENCLR = int_mask;
+    p_reg->INTENCLR = int_mask;
 }
 
 #if defined(DPPI_PRESENT)
-NRF_STATIC_INLINE void nrf_wdt_subscribe_set(nrf_wdt_task_t task,
+NRF_STATIC_INLINE void nrf_wdt_subscribe_set(NRF_WDT_Type * p_reg,
+                                             nrf_wdt_task_t task,
                                              uint8_t        channel)
 {
-    *((volatile uint32_t *) ((uint8_t *) NRF_WDT + (uint32_t) task + 0x80uL)) =
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | WDT_SUBSCRIBE_START_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_wdt_subscribe_clear(nrf_wdt_task_t task)
+NRF_STATIC_INLINE void nrf_wdt_subscribe_clear(NRF_WDT_Type * p_reg, nrf_wdt_task_t task)
 {
-    *((volatile uint32_t *) ((uint8_t *) NRF_WDT + (uint32_t) task + 0x80uL)) = 0;
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_publish_set(nrf_wdt_event_t event,
+NRF_STATIC_INLINE void nrf_wdt_publish_set(NRF_WDT_Type *  p_reg,
+                                           nrf_wdt_event_t event,
                                            uint8_t         channel)
 {
-    *((volatile uint32_t *) ((uint8_t *) NRF_WDT + (uint32_t) event + 0x80uL)) =
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | WDT_PUBLISH_TIMEOUT_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_wdt_publish_clear(nrf_wdt_event_t event)
+NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t event)
 {
-    *((volatile uint32_t *) ((uint8_t *) NRF_WDT + (uint32_t) event + 0x80uL)) = 0;
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
 #endif // defined(DPPI_PRESENT)
 
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(nrf_wdt_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
+                                                    nrf_wdt_task_t       task)
 {
-    return ((uint32_t)NRF_WDT + (uint32_t)task);
+    return ((uint32_t)p_reg + (uint32_t)task);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(nrf_wdt_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
+                                                     nrf_wdt_event_t      event)
 {
-    return ((uint32_t)NRF_WDT + (uint32_t)event);
+    return ((uint32_t)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_started(void)
+NRF_STATIC_INLINE bool nrf_wdt_started(NRF_WDT_Type const * p_reg)
 {
-    return (bool)(NRF_WDT->RUNSTATUS);
+    return (bool)(p_reg->RUNSTATUS);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_request_status(nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE bool nrf_wdt_request_status(NRF_WDT_Type const *  p_reg,
+                                              nrf_wdt_rr_register_t rr_register)
 {
-    return (bool)(((NRF_WDT->REQSTATUS) >> rr_register) & 0x1UL);
+    return (bool)(((p_reg->REQSTATUS) >> rr_register) & 0x1UL);
 }
 
-NRF_STATIC_INLINE void nrf_wdt_reload_value_set(uint32_t reload_value)
+NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t reload_value)
 {
-    NRF_WDT->CRV = reload_value;
+    p_reg->CRV = reload_value;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_wdt_reload_value_get(void)
+NRF_STATIC_INLINE uint32_t nrf_wdt_reload_value_get(NRF_WDT_Type const * p_reg)
 {
-    return (uint32_t)NRF_WDT->CRV;
+    return (uint32_t)p_reg->CRV;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_reload_request_enable(nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE void nrf_wdt_reload_request_enable(NRF_WDT_Type *        p_reg,
+                                                     nrf_wdt_rr_register_t rr_register)
 {
-    NRF_WDT->RREN |= 0x1UL << rr_register;
+    p_reg->RREN |= 0x1UL << rr_register;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(NRF_WDT_Type *        p_reg,
+                                                      nrf_wdt_rr_register_t rr_register)
 {
-    NRF_WDT->RREN &= ~(0x1UL << rr_register);
+    p_reg->RREN &= ~(0x1UL << rr_register);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(NRF_WDT_Type const *  p_reg,
+                                                         nrf_wdt_rr_register_t rr_register)
 {
-    return (bool)(NRF_WDT->RREN & (0x1UL << rr_register));
+    return (bool)(p_reg->RREN & (0x1UL << rr_register));
 }
 
-NRF_STATIC_INLINE void nrf_wdt_reload_request_set(nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
+                                                  nrf_wdt_rr_register_t rr_register)
 {
-    NRF_WDT->RR[rr_register] = NRF_WDT_RR_VALUE;
+    p_reg->RR[rr_register] = NRF_WDT_RR_VALUE;
 }
 
 #endif // NRF_DECLARE_ONLY
