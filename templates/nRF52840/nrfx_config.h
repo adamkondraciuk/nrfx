@@ -3069,6 +3069,13 @@
 #ifndef NRFX_WDT_ENABLED
 #define NRFX_WDT_ENABLED 1
 #endif
+// <q> NRFX_WDT0_ENABLED  - Enable WDT0 instance
+
+
+#ifndef NRFX_WDT0_ENABLED
+#define NRFX_WDT0_ENABLED 1
+#endif
+
 // <o> NRFX_WDT_CONFIG_BEHAVIOUR  - WDT behavior in CPU SLEEP or HALT mode
 
 // <1=> Run in SLEEP, Pause in HALT
