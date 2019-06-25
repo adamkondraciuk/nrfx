@@ -44,8 +44,9 @@ static nrfx_nfct_timer_workaround_t m_timer_workaround =
 };
 #endif // USE_TIMER_WORKAROUND
 
-#define NRFX_NFCT_FRAMEDELAYMAX_52840S (0xFFFFUL) /**< Bit mask of the FRAMEDELAYMAX field for the first sample of 52840.*/
-#define NRFX_NFCT_FWT_MAX_DIFF         1u         /**< The maximal difference between the requested FWT and HW-limited FWT settings.*/
+#define NRFX_NFCT_FRAMEDELAYMAX_52840S (0xFFFFUL)     /**< Bit mask of the FRAMEDELAYMAX field for the first sample of 52840.*/
+#define NRFX_NFCT_FWT_MAX_DIFF         1u             /**< The maximal difference between the requested FWT and HW-limited FWT settings.*/
+#define NFCT_FRAMEDELAYMAX_DEFAULT     (0x00001000UL) /**< Default value of the FRAMEDELAYMAX. */
 
 /* Mask of all possible interrupts that are relevant for data reception. */
 #define NRFX_NFCT_RX_INT_MASK (NRF_NFCT_INT_RXFRAMESTART_MASK | \
@@ -150,6 +151,7 @@ typedef struct
     nrfx_nfct_config_t config;
     nrfx_drv_state_t   state;
     volatile bool      field_on;
+    uint32_t           frame_delay_max;
 } nrfx_nfct_control_block_t;
 
 static nrfx_nfct_control_block_t m_nfct_cb;
@@ -181,6 +183,18 @@ static void nrfx_nfct_hw_init_setup(void)
        because it is required to operate with Windows Phone */
     nrf_nfct_sensres_bit_frame_sdd_set(NRF_NFCT_SENSRES_BIT_FRAME_SDD_00100);
     /* End: Bugfix for FTPAN-25 (IC-9929) */
+}
+
+static void nrfx_nfct_frame_delay_max_set(bool default_delay)
+{
+    if (default_delay)
+    {
+        nrf_nfct_frame_delay_max_set(NFCT_FRAMEDELAYMAX_DEFAULT);
+    }
+    else
+    {
+        nrf_nfct_frame_delay_max_set(m_nfct_cb.frame_delay_max);
+    }
 }
 
 /**@brief Function for evaluating and handling the NFC field events.
@@ -247,6 +261,10 @@ static void nrfx_nfct_field_event_handler(volatile nrfx_nfct_field_state_t field
             nrf_nfct_int_disable(NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
             m_nfct_cb.field_on = false;
             nfct_evt.evt_id    = NRFX_NFCT_EVT_FIELD_LOST;
+
+            /* Begin: Bugfix for FTPAN-218 */
+            nrfx_nfct_frame_delay_max_set(true);
+            /* End: Bugfix for FTPAN-218 */
 
             NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
             break;
@@ -336,6 +354,10 @@ static void nrfx_nfct_field_poll(void)
 
             nrfx_timer_disable(&m_timer_workaround.timer);
             m_nfct_cb.field_on = false;
+
+            /* Begin: Bugfix for FTPAN-218 */
+            nrfx_nfct_frame_delay_max_set(true);
+            /* End: Bugfix for FTPAN-218 */
 
             /* Begin: Bugfix for FTPAN-116 */
             // resume the NFCT to initialized state
@@ -597,6 +619,10 @@ void nrfx_nfct_init_substate_force(nrfx_nfct_active_state_t sub_state)
         nrf_nfct_task_trigger((nrf_nfct_task_t) sub_state);
     }
 
+    /* Begin: Bugfix for FTPAN-218 */
+    nrfx_nfct_frame_delay_max_set(true);
+    /* End: Bugfix for FTPAN-218 */
+
     /* Disable TX/RX here (will be enabled at SELECTED) */
     nrf_nfct_int_disable(NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
 }
@@ -623,7 +649,7 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
             }
 
             delay = (delay > delay_thr) ? delay_thr : delay;
-            nrf_nfct_frame_delay_max_set(delay);
+            m_nfct_cb.frame_delay_max = delay;
             break;
         }
 
@@ -803,6 +829,10 @@ void nrfx_nfct_irq_handler(void)
         nrf_nfct_event_clear(NRF_NFCT_EVENT_RXERROR);
         nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMESTART);
         nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMEEND);
+
+        /* Begin: Bugfix for FTPAN-218 */
+        nrfx_nfct_frame_delay_max_set(false);
+        /* End: Bugfix for FTPAN-218 */
 
         /* At this point any previous error status can be ignored. */
         nrf_nfct_rx_frame_status_clear(NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
