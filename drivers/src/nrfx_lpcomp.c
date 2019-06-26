@@ -92,8 +92,8 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
     }
     nrf_lpcomp_shorts_enable(NRF_LPCOMP_SHORT_READY_SAMPLE_MASK);
 
-    NRFX_IRQ_PRIORITY_SET(LPCOMP_IRQn, p_config->interrupt_priority);
-    NRFX_IRQ_ENABLE(LPCOMP_IRQn);
+    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(NRF_LPCOMP), p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(NRF_LPCOMP));
 
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
@@ -105,7 +105,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
 void nrfx_lpcomp_uninit(void)
 {
     NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
-    NRFX_IRQ_DISABLE(LPCOMP_IRQn);
+    NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_LPCOMP));
     nrfx_lpcomp_disable();
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(NRF_LPCOMP);

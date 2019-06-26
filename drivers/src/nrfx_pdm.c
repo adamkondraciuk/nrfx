@@ -184,8 +184,8 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
     nrf_pdm_event_clear(NRF_PDM_EVENT_END);
     nrf_pdm_event_clear(NRF_PDM_EVENT_STOPPED);
     nrf_pdm_int_enable(NRF_PDM_INT_STARTED | NRF_PDM_INT_STOPPED);
-    NRFX_IRQ_PRIORITY_SET(PDM_IRQn, p_config->interrupt_priority);
-    NRFX_IRQ_ENABLE(PDM_IRQn);
+    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(NRF_PDM), p_config->interrupt_priority);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(NRF_PDM));
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -214,7 +214,7 @@ static void pdm_start()
 static void pdm_buf_request()
 {
     m_cb.irq_buff_request = 1;
-    NRFX_IRQ_PENDING_SET(PDM_IRQn);
+    NRFX_IRQ_PENDING_SET(nrfx_get_irq_number(NRF_PDM));
 }
 
 nrfx_err_t nrfx_pdm_start(void)
@@ -267,7 +267,7 @@ nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     // Enter the PDM critical section.
-    NRFX_IRQ_DISABLE(PDM_IRQn);
+    NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_PDM));
 
     uint8_t next_buffer = (~m_cb.active_buffer) & 0x01;
     if (m_cb.op_state == NRFX_PDM_STATE_STARTING)
@@ -292,7 +292,7 @@ nrfx_err_t nrfx_pdm_buffer_set(int16_t * buffer, uint16_t buffer_length)
         }
     }
 
-    NRFX_IRQ_ENABLE(PDM_IRQn);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(NRF_PDM));
     return err_code;
 }
 

@@ -99,12 +99,20 @@ typedef enum
     NRF_LPCOMP_SHORT_READY_SAMPLE_MASK = LPCOMP_SHORTS_READY_SAMPLE_Msk /*!< Shortcut between READY event and SAMPLE task. */
 } nrf_lpcomp_short_mask_t;
 
-#ifdef LPCOMP_FEATURE_HYST_PRESENT
+#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
 /** @brief LPCOMP hysteresis. */
 typedef enum
 {
-    NRF_LPCOMP_HYST_NOHYST              = LPCOMP_HYST_HYST_NoHyst,      /**< Comparator hysteresis disabled. */
-    NRF_LPCOMP_HYST_50mV                = LPCOMP_HYST_HYST_Hyst50mV     /**< Comparator hysteresis enabled (typically 50 mV). */
+#ifdef LPCOMP_HYST_HYST_NoHyst
+    NRF_LPCOMP_HYST_NOHYST              = LPCOMP_HYST_HYST_NoHyst,   /**< Comparator hysteresis disabled. */
+#else
+    NRF_LPCOMP_HYST_NOHYST              = LPCOMP_HYST_HYST_Disabled, /**< Comparator hysteresis disabled. */
+#endif
+#ifdef LPCOMP_HYST_HYST_Hyst50mV
+    NRF_LPCOMP_HYST_ENABLED             = LPCOMP_HYST_HYST_Hyst50mV  /**< Comparator hysteresis enabled (typically 50 mV). */
+#else
+    NRF_LPCOMP_HYST_ENABLED             = LPCOMP_HYST_HYST_Enabled   /**< Comparator hysteresis enabled (typically 50 mV). */
+#endif
 }nrf_lpcomp_hysteresis_t;
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 
@@ -113,7 +121,7 @@ typedef struct
 {
     nrf_lpcomp_ref_t            reference; /**< LPCOMP reference. */
     nrf_lpcomp_detect_t         detection; /**< LPCOMP detection type. */
-#ifdef LPCOMP_FEATURE_HYST_PRESENT
+#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
     nrf_lpcomp_hysteresis_t     hyst;      /**< LPCOMP hysteresis. */
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 } nrf_lpcomp_config_t;

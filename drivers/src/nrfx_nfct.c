@@ -589,10 +589,16 @@ nrfx_err_t nrfx_nfct_nfcid1_default_bytes_get(uint8_t * const p_nfcid1_buff,
         return NRFX_ERROR_INVALID_LENGTH;
     }
 
+#if defined(FICR_NFC_TAGHEADER0_MFGID_Msk)
     uint32_t nfc_tag_header0 = NRF_FICR->NFC.TAGHEADER0;
     uint32_t nfc_tag_header1 = NRF_FICR->NFC.TAGHEADER1;
     uint32_t nfc_tag_header2 = NRF_FICR->NFC.TAGHEADER2;
+#else
+    uint32_t nfc_tag_header0 = 0x5F;
+    uint32_t nfc_tag_header1 = 0;
+    uint32_t nfc_tag_header2 = 0;
 
+#endif
     p_nfcid1_buff[0] = (uint8_t) (nfc_tag_header0 >> 0);
     p_nfcid1_buff[1] = (uint8_t) (nfc_tag_header0 >> 8);
     p_nfcid1_buff[2] = (uint8_t) (nfc_tag_header0 >> 16);
