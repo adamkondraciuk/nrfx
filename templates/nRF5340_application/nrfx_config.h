@@ -630,6 +630,14 @@
 
 // </e>
 
+// <e> NRFX_IPC_ENABLED - nrfx_ipc - IPC peripheral driver
+//==========================================================
+#ifndef NRFX_IPC_ENABLED
+#define NRFX_IPC_ENABLED 1
+#endif
+
+// </e>
+
 // <e> NRFX_NVMC_ENABLED - nrfx_nvmc - NVMC peripheral driver
 //==========================================================
 #ifndef NRFX_NVMC_ENABLED
