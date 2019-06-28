@@ -369,9 +369,8 @@ __STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type * p_reg, nrf_
 /**
  * @brief Function for configuring UARTE.
  *
- * @param p_reg  Pointer to the structure of registers of the peripheral.
- * @param hwfc   Hardware flow control. Enabled if true.
- * @param parity Parity. Included if true.
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param p_cfg Pointer to UARTE settings structure.
  */
 __STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type           * p_reg,
                                          nrf_uarte_config_t const * p_cfg);
