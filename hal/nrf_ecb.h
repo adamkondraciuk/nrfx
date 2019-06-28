@@ -10,49 +10,6 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrf_ecb_drv AES ECB encryption driver
- * @{
- * @ingroup nrf_ecb
- * @brief   Driver for the Advanced Encryption Standard (AES) Electronic Code Book (ECB) peripheral.
- *
- * To encrypt data, the peripheral must first be powered on
- * using @ref nrf_ecb_init. Next, the key must be set using @ref nrf_ecb_set_key.
- */
-
-/**
- * @brief Function for initializing and powering on the ECB peripheral.
- *
- * This function allocates memory for the ECBDATAPTR.
- *
- * @retval true  The initialization was successful.
- * @retval false The power-on failed.
- */
-bool nrf_ecb_init(void);
-
-/**
- * @brief Function for encrypting 16-byte data using current key.
- *
- * This function avoids unnecessary copying of data if the parameters point to the
- * correct locations in the ECB data structure.
- *
- * @param dst Result of encryption, 16 bytes will be written.
- * @param src Source with 16-byte data to be encrypted.
- *
- * @retval true  The encryption operation completed.
- * @retval false The encryption operation did not complete.
- */
-bool nrf_ecb_crypt(uint8_t * dst, const uint8_t * src);
-
-/**
- * @brief Function for setting the key to be used for encryption.
- *
- * @param key Pointer to the key. 16 bytes will be read.
- */
-void nrf_ecb_set_key(const uint8_t * key);
-
-/** @} */
-
-/**
  * @defgroup nrf_ecb_hal AES ECB encryption HAL
  * @{
  * @ingroup nrf_ecb
