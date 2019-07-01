@@ -1,8 +1,10 @@
 /*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
 
-#include <nrfx_ipc.h>
+#include <nrfx.h>
 
 #if NRFX_CHECK(NRFX_IPC_ENABLED)
+
+#include <nrfx_ipc.h>
 
 // Control block - driver instance local data.
 typedef struct
