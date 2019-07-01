@@ -20,6 +20,8 @@
 
 @ref nrf_kmu
 
+@ref nrf_mutex
+
 @ref nrf_pdm
 
 @ref nrf_power

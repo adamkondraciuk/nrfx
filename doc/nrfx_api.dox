@@ -39,6 +39,8 @@
 
 @defgroup nrf_mpu MPU
 
+@defgroup nrf_mutex MUTEX
+
 @defgroup nrf_mwu MWU
 
 @defgroup nrf_nfct NFCT
