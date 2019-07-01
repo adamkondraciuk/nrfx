@@ -200,19 +200,19 @@ void nrfx_ipc_send_task_channels_config(uint8_t  send_task_index,
 
 __STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
+    NRFX_ASSERT(mem_index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
     nrf_ipc_gpmem_set(NRF_IPC, mem_index, data);
 }
 
 __STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
+    NRFX_ASSERT(mem_index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
     return nrf_ipc_gpmem_get(NRF_IPC, mem_index);
 }
 
 __STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_IPC->TASKS_SEND));
+    NRFX_ASSERT(send_task_index < NRFX_ARRAY_SIZE(NRF_IPC->TASKS_SEND));
     nrf_ipc_task_trigger(NRF_IPC, nrf_ipc_send_task_get(send_task_index));
 }
 
