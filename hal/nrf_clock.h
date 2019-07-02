@@ -19,9 +19,7 @@ extern "C" {
  * (HFCLK) settings.
  */
 
-#if defined(NRF52810_XXAA) || \
-    defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || \
-    defined(NRF52840_XXAA)
+#if defined(CLOCK_LFCLKSRC_BYPASS_Msk) && defined(CLOCK_LFCLKSRC_EXTERNAL_Msk)
 // Enable support for external LFCLK sources. Read more in the Product Specification.
 #define NRF_CLOCK_USE_EXTERNAL_LFCLK_SOURCES
 #endif
