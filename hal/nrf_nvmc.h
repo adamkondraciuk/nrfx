@@ -276,7 +276,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
     }
 #elif defined(NRF52_SERIES)
     p_reg->ERASEPAGE = page_addr;
-#elif defined(NRF9160_XXAA)
+#elif defined(NRF9160_XXAA) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     *(volatile uint32_t *)page_addr = 0xFFFFFFFF;
     (void)p_reg;
 #else
@@ -313,7 +313,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
 {
 #if defined(NVMC_ERASEPAGEPARTIAL_ERASEPAGEPARTIAL_Msk)
     p_reg->ERASEPAGEPARTIAL = page_addr;
-#elif defined(NRF9160_XXAA)
+#elif defined(NRF9160_XXAA) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     nrf_nvmc_page_erase_start(p_reg, page_addr);
 #else
     #error "Unknown device."

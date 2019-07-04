@@ -20,8 +20,10 @@
  * This symbol is needed to determine NVM page count for chips that cannot
  * always access FICR for this information.
  */
-#if defined(NRF9160_XXAA)
+#if defined(NRF9160_XXAA) || defined(NRF5340_XXAA_APPLICATION)
     #define NVMC_FLASH_PAGE_COUNT  256
+#elif defined(NRF5340_XXAA_NETWORK)
+    #define NVMC_FLASH_PAGE_COUNT  128
 #endif
 
 /**
@@ -30,8 +32,10 @@
  * This symbol is needed to determine NVM page size for chips that cannot
  * always access FICR for this information.
  */
-#if defined(NRF9160_XXAA)
+#if defined(NRF9160_XXAA) || defined(NRF5340_XXAA_APPLICATION)
     #define NVMC_FLASH_PAGE_SIZE  0x1000 ///< 4 kB
+#elif defined(NRF5340_XXAA_NETWORK)
+    #define NVMC_FLASH_PAGE_SIZE  0x800  ///< 2 kB
 #endif
 
 #if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
@@ -42,7 +46,8 @@
  */
 #if defined(NRF52810_XXAA) || defined(NRF52811_XXAA) || defined(NRF52840_XXAA)
     #define NVMC_PAGE_ERASE_DURATION_MS  85
-#elif defined(NRF52833_XXAA) || defined(NRF9160_XXAA)
+#elif defined(NRF52833_XXAA) || defined(NRF9160_XXAA) || \
+      defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     #define NVMC_PAGE_ERASE_DURATION_MS  87
 #else
     #error "Page partial erase present but could not determine its total duration for given SoC"
