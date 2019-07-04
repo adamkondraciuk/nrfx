@@ -216,28 +216,28 @@ __STATIC_INLINE void nrf_qdec_shorts_enable(uint32_t mask);
 __STATIC_INLINE void nrf_qdec_shorts_disable(uint32_t mask);
 
 /**
- * @brief Function for retrieving value of the sampling period.
- *
- * @return Sample period @ref nrf_qdec_sampleper_t.
- */
-__STATIC_INLINE int32_t nrf_qdec_sampleper_reg_get(void);
-
-/**
- * @brief Function for converting return value of the @p nrf_qdec_sampleper_reg_get() function
+ * @brief Function for converting return value of the @ref nrf_qdec_sampleper_get function
  *        to microseconds.
  *
  * @param[in] sampleper The sampling period.
  *
  * @return Period in microseconds.
  */
-__STATIC_INLINE uint32_t nrf_qdec_sampleper_to_value(uint32_t sampleper);
+__STATIC_INLINE uint32_t nrf_qdec_sampleper_to_value(nrf_qdec_sampleper_t sampleper);
 
 /**
  * @brief Function for setting value of the QDEC sampling period.
  *
- * @param[in] sample_per The sampling period.
+ * @param[in] sampleper The sampling period.
  */
-__STATIC_INLINE void nrf_qdec_sampleper_set(nrf_qdec_sampleper_t sample_per);
+__STATIC_INLINE void nrf_qdec_sampleper_set(nrf_qdec_sampleper_t sampleper);
+
+/**
+ * @brief Function for retrieving value of the QDEC sampling period.
+ *
+ * @return Sampling period.
+ */
+__STATIC_INLINE nrf_qdec_sampleper_t nrf_qdec_sampleper_get(void);
 
 /**
  * @brief Function for retrieving value of the QDEC SAMPLE register.
@@ -434,19 +434,19 @@ __STATIC_INLINE void nrf_qdec_shorts_disable(uint32_t mask)
     NRF_QDEC->SHORTS &= ~mask;
 }
 
-__STATIC_INLINE int32_t nrf_qdec_sampleper_reg_get(void)
-{
-    return NRF_QDEC->SAMPLEPER;
-}
-
-__STATIC_INLINE uint32_t nrf_qdec_sampleper_to_value(uint32_t sampleper)
+__STATIC_INLINE uint32_t nrf_qdec_sampleper_to_value(nrf_qdec_sampleper_t sampleper)
 {
     return (1 << (7 + sampleper));
 }
 
-__STATIC_INLINE void nrf_qdec_sampleper_set(nrf_qdec_sampleper_t sample_per)
+__STATIC_INLINE void nrf_qdec_sampleper_set(nrf_qdec_sampleper_t sampleper)
 {
-    NRF_QDEC->SAMPLEPER = sample_per;
+    NRF_QDEC->SAMPLEPER = sampleper;
+}
+
+__STATIC_INLINE nrf_qdec_sampleper_t nrf_qdec_sampleper_get(void)
+{
+    return (nrf_qdec_sampleper_t)(NRF_QDEC->SAMPLEPER);
 }
 
 __STATIC_INLINE int32_t nrf_qdec_sample_get(void)
