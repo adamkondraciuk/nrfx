@@ -73,16 +73,6 @@ typedef enum
 } nrf_twis_config_addr_mask_t;
 
 /**
- * @brief Variable type to hold the amount of data for EasyDMA.
- *
- * Variable of the minimum size that can hold the amount of data to transfer.
- *
- * @note Defined to make it simple to change if EasyDMA is updated to support more data in
- *       the future devices.
- */
-typedef uint8_t nrf_twis_amount_t;
-
-/**
  * @brief Smallest variable type to hold the TWI address.
  *
  * Variable of the minimum size that can hold a single TWI address.
@@ -91,7 +81,6 @@ typedef uint8_t nrf_twis_amount_t;
  *       10 bit addressing mode.
  */
 typedef uint8_t nrf_twis_address_t;
-
 
 /**
  * @brief Function for activating the specified TWIS task.
