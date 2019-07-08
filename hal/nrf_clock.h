@@ -103,7 +103,11 @@ typedef enum
     NRF_CLOCK_INT_LF_STARTED_MASK = CLOCK_INTENSET_LFCLKSTARTED_Msk, /**< Interrupt on LFCLKSTARTED event. */
 #if (NRF_CLOCK_HAS_CALIBRATION) || defined(__NRFX_DOXYGEN__)
     NRF_CLOCK_INT_DONE_MASK       = CLOCK_INTENSET_DONE_Msk,         /**< Interrupt on DONE event. */
-    NRF_CLOCK_INT_CTTO_MASK       = CLOCK_INTENSET_CTTO_Msk          /**< Interrupt on CTTO event. */
+    NRF_CLOCK_INT_CTTO_MASK       = CLOCK_INTENSET_CTTO_Msk,         /**< Interrupt on CTTO event. */
+#endif
+#if defined(CLOCK_INTENSET_CTSTARTED_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_CLOCK_INT_CTSTARTED_MASK  = CLOCK_INTENSET_CTSTARTED_Msk,    /**< Interrupt on CTSTARTED event. */
+    NRF_CLOCK_INT_CTSTOPPED_MASK  = CLOCK_INTENSET_CTSTOPPED_Msk     /**< Interrupt on CTSTOPPED event. */
 #endif
 } nrf_clock_int_mask_t;
 
@@ -133,7 +137,11 @@ typedef enum
     NRF_CLOCK_EVENT_LFCLKSTARTED = offsetof(NRF_CLOCK_Type, EVENTS_LFCLKSTARTED), /**< LFCLK oscillator started.*/
 #if (NRF_CLOCK_HAS_CALIBRATION) || defined(__NRFX_DOXYGEN__)
     NRF_CLOCK_EVENT_DONE         = offsetof(NRF_CLOCK_Type, EVENTS_DONE),         /**< Calibration of LFCLK RC oscillator completed.*/
-    NRF_CLOCK_EVENT_CTTO         = offsetof(NRF_CLOCK_Type, EVENTS_CTTO)          /**< Calibration timer time-out.*/
+    NRF_CLOCK_EVENT_CTTO         = offsetof(NRF_CLOCK_Type, EVENTS_CTTO),         /**< Calibration timer time-out.*/
+#endif
+#if defined(CLOCK_INTENSET_CTSTARTED_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_CLOCK_EVENT_CTSTARTED    = offsetof(NRF_CLOCK_Type, EVENTS_CTSTARTED),    /**< Calibration timer started.*/
+    NRF_CLOCK_EVENT_CTSTOPPED    = offsetof(NRF_CLOCK_Type, EVENTS_CTSTOPPED)     /**< Calibration timer stopped.*/
 #endif
 } nrf_clock_event_t;
 
