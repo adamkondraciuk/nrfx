@@ -1969,7 +1969,9 @@ void nrfx_usbd_force_bus_wakeup(void)
 void nrfx_usbd_ep_max_packet_size_set(nrfx_usbd_ep_t ep, uint16_t size)
 {
     /* Only power of 2 size allowed */
-    NRFX_ASSERT((size != 0) && (size & (size - 1)) == 0);
+    NRFX_ASSERT((size & 0x01) == 0);
+    /* 0 allowed only for ISO endpoints */
+    NRFX_ASSERT((size != 0) || NRF_USBD_EPISO_CHECK(ep));
     /* Packet size cannot be higher than maximum buffer size */
     NRFX_ASSERT((NRF_USBD_EPISO_CHECK(ep) && (size <= usbd_ep_iso_capacity(ep))) ||
                 (!NRF_USBD_EPISO_CHECK(ep) && (size <= NRFX_USBD_EPSIZE)));
