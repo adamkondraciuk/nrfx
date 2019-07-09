@@ -203,6 +203,15 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type * p_reg);
 NRF_STATIC_INLINE void nrf_rtc_prescaler_set(NRF_RTC_Type * p_reg, uint32_t val);
 
 /**
+ * @brief Function for getting a prescaler value.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Prescaler value.
+ */
+NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type * p_reg);
+
+/**
  * @brief Function for returning the address of an event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -341,7 +350,8 @@ NRF_STATIC_INLINE void nrf_rtc_prescaler_set(NRF_RTC_Type * p_reg, uint32_t val)
     NRFX_ASSERT(val <= (RTC_PRESCALER_PRESCALER_Msk >> RTC_PRESCALER_PRESCALER_Pos));
     p_reg->PRESCALER = val;
 }
-NRF_STATIC_INLINE uint32_t rtc_prescaler_get(NRF_RTC_Type * p_reg)
+
+NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type * p_reg)
 {
     return p_reg->PRESCALER;
 }
