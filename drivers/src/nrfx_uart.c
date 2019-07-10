@@ -213,7 +213,8 @@ static void tx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 
 static bool tx_blocking(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 {
-    while (p_cb->tx_counter < p_cb->tx_buffer_length)
+    size_t const tx_buffer_length = p_cb->tx_buffer_length;
+    while (p_cb->tx_counter < tx_buffer_length)
     {
         // Wait until the transmitter is ready to accept a new byte.
         // Exit immediately if the transfer has been aborted.
@@ -569,8 +570,8 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
 
     if (nrf_uart_event_check(p_uart, NRF_UART_EVENT_TXDRDY))
     {
-        if (p_cb->tx_counter < p_cb->tx_buffer_length &&
-            !p_cb->tx_abort)
+        size_t tx_buffer_length = p_cb->tx_buffer_length;
+        if (p_cb->tx_counter < tx_buffer_length && !p_cb->tx_abort)
         {
             tx_byte(p_uart, p_cb);
         }
