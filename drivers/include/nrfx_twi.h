@@ -200,66 +200,6 @@ void nrfx_twi_enable(nrfx_twi_t const * p_instance);
 void nrfx_twi_disable(nrfx_twi_t const * p_instance);
 
 /**
- * @brief Function for sending data to a TWI slave.
- *
- * The transmission will be stopped when an error occurs. If a transfer is ongoing,
- * the function returns the error code @ref NRFX_ERROR_BUSY.
- *
- * @note This function is deprecated. Use @ref nrfx_twi_xfer instead.
- *
- * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] address    Address of a specific slave device (only 7 LSB).
- * @param[in] p_data     Pointer to a transmit buffer.
- * @param[in] length     Number of bytes to send.
- * @param[in] no_stop    If set, the stop condition is not generated on the bus
- *                       after the transfer has completed successfully (allowing
- *                       for a repeated start in the next transfer).
- *
- * @retval NRFX_SUCCESS                 The procedure is successful.
- * @retval NRFX_ERROR_BUSY              The driver is not ready for a new transfer.
- * @retval NRFX_ERROR_INTERNAL          An error is detected by hardware.
- * @retval NRFX_ERROR_INVALID_STATE     RX transaction is suspended on bus.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK Negative acknowledgement (NACK) is received after sending
- *                                      the address in polling mode.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK Negative acknowledgement (NACK) is received after sending
- *                                      a data byte in polling mode.
- */
-nrfx_err_t nrfx_twi_tx(nrfx_twi_t const * p_instance,
-                       uint8_t            address,
-                       uint8_t const *    p_data,
-                       size_t             length,
-                       bool               no_stop);
-
-/**
- * @brief Function for reading data from a TWI slave.
- *
- * The transmission will be stopped when an error occurs. If a transfer is ongoing,
- * the function returns the error code @ref NRFX_ERROR_BUSY.
- *
- * @note This function is deprecated. Use @ref nrfx_twi_xfer instead.
- *
- * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] address    Address of a specific slave device (only 7 LSB).
- * @param[in] p_data     Pointer to a receive buffer.
- * @param[in] length     Number of bytes to be received.
- *
- * @retval NRFX_SUCCESS                   The procedure is successful.
- * @retval NRFX_ERROR_BUSY                The driver is not ready for a new transfer.
- * @retval NRFX_ERROR_INTERNAL            An error is detected by hardware.
- * @retval NRFX_ERROR_INVALID_STATE       TX transaction is suspended on bus.
- * @retval NRFX_ERROR_DRV_TWI_ERR_OVERRUN The unread data is replaced by new data.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   Negative acknowledgement (NACK) is received after sending
- *                                        the address in polling mode.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   Negative acknowledgement (NACK) is received after sending
- *                                        a data byte in polling mode.
- */
-nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
-                       uint8_t            address,
-                       uint8_t *          p_data,
-                       size_t             length);
-
-
-/**
  * @brief Function for performing a TWI transfer.
  *
  * The following transfer types can be configured (@ref nrfx_twi_xfer_desc_t::type):
