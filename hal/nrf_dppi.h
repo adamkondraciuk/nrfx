@@ -283,13 +283,15 @@ __STATIC_INLINE void nrf_dppi_group_disable(NRF_DPPIC_Type *         p_reg,
 __STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_enable_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
-    return (nrf_dppi_task_t)(offsetof(NRF_DPPIC_Type, TASKS_CHG[index].EN));
+    return (nrf_dppi_task_t)((uint32_t) NRF_DPPI_TASK_CHG0_EN +
+                             (index * (NRF_DPPI_TASK_CHG1_EN - NRF_DPPI_TASK_CHG0_EN)));
 }
 
 __STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
-    return (nrf_dppi_task_t)(offsetof(NRF_DPPIC_Type, TASKS_CHG[index].DIS));
+    return (nrf_dppi_task_t)((uint32_t) NRF_DPPI_TASK_CHG0_DIS +
+                             (index * (NRF_DPPI_TASK_CHG1_DIS - NRF_DPPI_TASK_CHG0_DIS)));
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION

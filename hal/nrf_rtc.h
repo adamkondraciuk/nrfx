@@ -374,7 +374,8 @@ __STATIC_INLINE void nrf_rtc_event_disable(NRF_RTC_Type * p_reg, uint32_t mask)
 
 __STATIC_INLINE nrf_rtc_event_t nrf_rtc_compare_event_get(uint8_t index)
 {
-    return (nrf_rtc_event_t)(offsetof(NRF_RTC_Type, EVENTS_COMPARE[index]));
+    return (nrf_rtc_event_t)((uint32_t) NRF_RTC_EVENT_COMPARE_0 +
+                             (index * (NRF_RTC_EVENT_COMPARE_1 - NRF_RTC_EVENT_COMPARE_0)));
 }
 
 #endif
