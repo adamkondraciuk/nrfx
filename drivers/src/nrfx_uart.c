@@ -213,6 +213,8 @@ static void tx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 
 static bool tx_blocking(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 {
+    // Use a local variable to avoid undefined order of accessing two volatile variables
+    // in one statement.
     size_t const tx_buffer_length = p_cb->tx_buffer_length;
     while (p_cb->tx_counter < tx_buffer_length)
     {
