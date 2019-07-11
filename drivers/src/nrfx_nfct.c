@@ -487,7 +487,8 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
         return err_code;
     }
 
-    m_nfct_cb.state = NRFX_DRV_STATE_INITIALIZED;
+    m_nfct_cb.state           = NRFX_DRV_STATE_INITIALIZED;
+    m_nfct_cb.frame_delay_max = NFCT_FRAMEDELAYMAX_DEFAULT;
 
     NRFX_LOG_INFO("Initialized");
     return err_code;
