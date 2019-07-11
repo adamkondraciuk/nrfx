@@ -466,15 +466,13 @@ __STATIC_INLINE uint32_t * nrf_ppi_task_group_disable_address_get(nrf_ppi_channe
 __STATIC_INLINE nrf_ppi_task_t nrf_ppi_group_enable_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_PPI->TASKS_CHG));
-    return (nrf_ppi_task_t)((uint32_t) NRF_PPI_TASK_CHG0_EN +
-                            (index * (NRF_PPI_TASK_CHG1_EN - NRF_PPI_TASK_CHG0_EN)));
+    return (nrf_ppi_task_t)NRFX_OFFSETOF(NRF_PPI_Type, TASKS_CHG[index].EN);
 }
 
 __STATIC_INLINE nrf_ppi_task_t nrf_ppi_group_disable_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_PPI->TASKS_CHG));
-    return (nrf_ppi_task_t)((uint32_t) NRF_PPI_TASK_CHG0_DIS +
-                            (index * (NRF_PPI_TASK_CHG1_DIS - NRF_PPI_TASK_CHG0_DIS)));
+    return (nrf_ppi_task_t)NRFX_OFFSETOF(NRF_PPI_Type, TASKS_CHG[index].DIS);
 }
 
 #endif // SUPPRESS_INLINE_IMPLEMENTATION
