@@ -213,6 +213,8 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  * The transmission will be stopped when an error occurs. If a transfer is ongoing,
  * the function returns the error code @ref NRFX_ERROR_BUSY.
  *
+ * @note This function is deprecated. Use @ref nrfx_twim_xfer instead.
+ *
  * @note Peripherals using EasyDMA (including TWIM) require the transfer buffers
  *       to be placed in the Data RAM region. If this condition is not met,
  *       this function fails with the error code NRFX_ERROR_INVALID_ADDR.
@@ -247,6 +249,8 @@ nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
  * The transmission will be stopped when an error occurs. If a transfer is ongoing,
  * the function returns the error code @ref NRFX_ERROR_BUSY.
  *
+ * @note This function is deprecated. Use @ref nrfx_twim_xfer instead.
+ *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] address    Address of a specific slave device (only 7 LSB).
  * @param[in] p_data     Pointer to a receive buffer.
@@ -267,7 +271,7 @@ nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
                         size_t              length);
 
 /**
- * @brief Function for preparing a TWI transfer.
+ * @brief Function for performing a TWI transfer.
  *
  * The following transfer types can be configured (@ref nrfx_twim_xfer_desc_t::type):
  * - @ref NRFX_TWIM_XFER_TXRX - Write operation followed by a read operation (without STOP condition in between).

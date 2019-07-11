@@ -258,7 +258,7 @@ nrfx_err_t nrfx_twi_rx(nrfx_twi_t const * p_instance,
 
 
 /**
- * @brief Function for preparing a TWI transfer.
+ * @brief Function for performing a TWI transfer.
  *
  * The following transfer types can be configured (@ref nrfx_twi_xfer_desc_t::type):
  * - @ref NRFX_TWI_XFER_TXRX - Write operation followed by a read operation (without STOP condition in between).
