@@ -108,11 +108,11 @@ extern "C" {
 #define NRFX_ARRAY_SIZE(array) (sizeof(array) / sizeof((array)[0]))
 
 /**
- * @brief Macro for getting the offset, in bytes, from the beginning of a structure of specified type
- *        to its specified member.
+ * @brief Macro for getting the offset (in bytes) from the beginning of a structure
+ *        of the specified type to its specified member.
  *
  * @param[in] type   Structure type.
- * @param[in] member Structure member whose offset is looked for.
+ * @param[in] member Structure member whose offset is searched for.
  *
  * @return Member offset in bytes.
  */
