@@ -572,7 +572,9 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
 
     if (nrf_uart_event_check(p_uart, NRF_UART_EVENT_TXDRDY))
     {
-        size_t tx_buffer_length = p_cb->tx_buffer_length;
+        // Use a local variable to avoid undefined order of accessing two volatile variables
+        // in one statement.
+        size_t const tx_buffer_length = p_cb->tx_buffer_length;
         if (p_cb->tx_counter < tx_buffer_length && !p_cb->tx_abort)
         {
             tx_byte(p_uart, p_cb);
