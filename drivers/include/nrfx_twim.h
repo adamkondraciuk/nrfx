@@ -88,7 +88,9 @@ typedef enum
 {
     NRFX_TWIM_EVT_DONE,         ///< Transfer completed event.
     NRFX_TWIM_EVT_ADDRESS_NACK, ///< Error event: NACK received after sending the address.
-    NRFX_TWIM_EVT_DATA_NACK     ///< Error event: NACK received after sending a data byte.
+    NRFX_TWIM_EVT_DATA_NACK,    ///< Error event: NACK received after sending a data byte.
+    NRFX_TWIM_EVT_OVERRUN,      ///< Error event: The unread data is replaced by new data.
+    NRFX_TWIM_EVT_BUS_ERROR     ///< Error event: An unexpected transition occurred on the bus.
 } nrfx_twim_evt_type_t;
 
 /** @brief TWI master driver transfer types. */
@@ -233,7 +235,7 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  *
  * @retval NRFX_SUCCESS                 The procedure is successful.
  * @retval NRFX_ERROR_BUSY              The driver is not ready for a new transfer.
- * @retval NRFX_ERROR_INTERNAL          Error is detected by hardware.
+ * @retval NRFX_ERROR_INTERNAL          An unexpected transition occurred on the bus.
  * @retval NRFX_ERROR_INVALID_ADDR      The provided buffer is not placed in the Data RAM region.
  * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK NACK is received after sending the address in polling mode.
  * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK NACK is received after sending a data byte in polling mode.
@@ -260,11 +262,12 @@ nrfx_err_t nrfx_twim_tx(nrfx_twim_t const * p_instance,
  *                       description in the Product Specification). The driver
  *                       checks it with assertion.
  *
- * @retval NRFX_SUCCESS                 The procedure is successful.
- * @retval NRFX_ERROR_BUSY              The driver is not ready for a new transfer.
- * @retval NRFX_ERROR_INTERNAL          Error is detected by hardware.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK NACK is received after sending the address in polling mode.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK NACK is received after sending a data byte in polling mode.
+ * @retval NRFX_SUCCESS                   The procedure is successful.
+ * @retval NRFX_ERROR_BUSY                The driver is not ready for a new transfer.
+ * @retval NRFX_ERROR_INTERNAL            An unexpected transition occurred on the bus.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_OVERRUN The unread data is replaced by new data.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   NACK is received after sending the address in polling mode.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   NACK is received after sending a data byte in polling mode.
  */
 nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
                         uint8_t             address,
@@ -313,13 +316,14 @@ nrfx_err_t nrfx_twim_rx(nrfx_twim_t const * p_instance,
  * @param[in] p_xfer_desc Pointer to the transfer descriptor.
  * @param[in] flags       Transfer options (0 for default settings).
  *
- * @retval NRFX_SUCCESS                 The procedure is successful.
- * @retval NRFX_ERROR_BUSY              The driver is not ready for a new transfer.
- * @retval NRFX_ERROR_NOT_SUPPORTED     The provided parameters are not supported.
- * @retval NRFX_ERROR_INTERNAL          Error is detected by hardware.
- * @retval NRFX_ERROR_INVALID_ADDR      The provided buffers are not placed in the Data RAM region.
- * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK NACK is received after sending the address.
- * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK NACK is received after sending a data byte.
+ * @retval NRFX_SUCCESS                   The procedure is successful.
+ * @retval NRFX_ERROR_BUSY                The driver is not ready for a new transfer.
+ * @retval NRFX_ERROR_NOT_SUPPORTED       The provided parameters are not supported.
+ * @retval NRFX_ERROR_INTERNAL            An unexpected transition occurred on the bus.
+ * @retval NRFX_ERROR_INVALID_ADDR        The provided buffers are not placed in the Data RAM region.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_OVERRUN The unread data is replaced by new data.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_ANACK   NACK is received after sending the address.
+ * @retval NRFX_ERROR_DRV_TWI_ERR_DNACK   NACK is received after sending a data byte.
  */
 nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
                           nrfx_twim_xfer_desc_t const * p_xfer_desc,
