@@ -99,8 +99,8 @@ NRF_STATIC_INLINE void nrf_twi_task_trigger(NRF_TWI_Type * p_reg,
  *
  * @return Address of the specified task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_twi_task_address_get(NRF_TWI_Type * p_reg,
-                                                    nrf_twi_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_twi_task_address_get(NRF_TWI_Type const * p_reg,
+                                                    nrf_twi_task_t       task);
 
 /**
  * @brief Function for clearing the specified TWI event.
@@ -120,8 +120,8 @@ NRF_STATIC_INLINE void nrf_twi_event_clear(NRF_TWI_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_twi_event_check(NRF_TWI_Type  * p_reg,
-                                           nrf_twi_event_t event);
+NRF_STATIC_INLINE bool nrf_twi_event_check(NRF_TWI_Type const * p_reg,
+                                           nrf_twi_event_t      event);
 
 /**
  * @brief Function for getting the address of the specified TWI event register.
@@ -131,8 +131,8 @@ NRF_STATIC_INLINE bool nrf_twi_event_check(NRF_TWI_Type  * p_reg,
  *
  * @return Address of the specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_twi_event_address_get(NRF_TWI_Type  * p_reg,
-                                                     nrf_twi_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_twi_event_address_get(NRF_TWI_Type const * p_reg,
+                                                     nrf_twi_event_t      event);
 
 /**
  * @brief Function for enabling the specified shortcuts.
@@ -179,8 +179,8 @@ NRF_STATIC_INLINE void nrf_twi_int_disable(NRF_TWI_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_twi_int_enable_check(NRF_TWI_Type *     p_reg,
-                                                nrf_twi_int_mask_t twi_int);
+NRF_STATIC_INLINE bool nrf_twi_int_enable_check(NRF_TWI_Type const * p_reg,
+                                                nrf_twi_int_mask_t   twi_int);
 
 /**
  * @brief Function for enabling the TWI peripheral.
@@ -214,7 +214,7 @@ NRF_STATIC_INLINE void nrf_twi_pins_set(NRF_TWI_Type * p_reg,
  *
  * @return SCL pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type const * p_reg);
 
 /**
  * @brief Function for retrieving the SDA pin number.
@@ -223,7 +223,7 @@ NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type * p_reg);
  *
  * @return SDA pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_twi_sda_pin_get(NRF_TWI_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_twi_sda_pin_get(NRF_TWI_Type const * p_reg);
 
 /**
  * @brief Function for setting the TWI master clock frequency.
@@ -260,7 +260,7 @@ NRF_STATIC_INLINE void nrf_twi_address_set(NRF_TWI_Type * p_reg, uint8_t address
  *
  * @return Received data.
  */
-NRF_STATIC_INLINE uint8_t nrf_twi_rxd_get(NRF_TWI_Type * p_reg);
+NRF_STATIC_INLINE uint8_t nrf_twi_rxd_get(NRF_TWI_Type const * p_reg);
 
 /**
  * @brief Function for writing data to be transmitted by TWI.
@@ -287,8 +287,8 @@ NRF_STATIC_INLINE void nrf_twi_task_trigger(NRF_TWI_Type * p_reg,
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twi_task_address_get(NRF_TWI_Type * p_reg,
-                                                    nrf_twi_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_twi_task_address_get(NRF_TWI_Type const * p_reg,
+                                                    nrf_twi_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
 }
@@ -303,14 +303,14 @@ NRF_STATIC_INLINE void nrf_twi_event_clear(NRF_TWI_Type  * p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_twi_event_check(NRF_TWI_Type  * p_reg,
-                                           nrf_twi_event_t event)
+NRF_STATIC_INLINE bool nrf_twi_event_check(NRF_TWI_Type const * p_reg,
+                                           nrf_twi_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twi_event_address_get(NRF_TWI_Type  * p_reg,
-                                                     nrf_twi_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_twi_event_address_get(NRF_TWI_Type const * p_reg,
+                                                     nrf_twi_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -339,8 +339,8 @@ NRF_STATIC_INLINE void nrf_twi_int_disable(NRF_TWI_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_twi_int_enable_check(NRF_TWI_Type *     p_reg,
-                                                nrf_twi_int_mask_t twi_int)
+NRF_STATIC_INLINE bool nrf_twi_int_enable_check(NRF_TWI_Type const * p_reg,
+                                                nrf_twi_int_mask_t   twi_int)
 {
     return (bool)(p_reg->INTENSET & twi_int);
 }
@@ -372,7 +372,7 @@ NRF_STATIC_INLINE void nrf_twi_pins_set(NRF_TWI_Type * p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type const * p_reg)
 {
 #if defined(TWI_PSEL_SCL_CONNECT_Pos)
     return p_reg->PSEL.SCL;
@@ -381,7 +381,7 @@ NRF_STATIC_INLINE uint32_t nrf_twi_scl_pin_get(NRF_TWI_Type * p_reg)
 #endif
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twi_sda_pin_get(NRF_TWI_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_twi_sda_pin_get(NRF_TWI_Type const * p_reg)
 {
 #if defined(TWI_PSEL_SDA_CONNECT_Pos)
     return p_reg->PSEL.SDA;
@@ -411,7 +411,7 @@ NRF_STATIC_INLINE void nrf_twi_address_set(NRF_TWI_Type * p_reg, uint8_t address
     p_reg->ADDRESS = address;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_twi_rxd_get(NRF_TWI_Type * p_reg)
+NRF_STATIC_INLINE uint8_t nrf_twi_rxd_get(NRF_TWI_Type const * p_reg)
 {
     return (uint8_t)p_reg->RXD;
 }

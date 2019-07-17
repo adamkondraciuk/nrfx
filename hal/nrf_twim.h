@@ -108,8 +108,8 @@ NRF_STATIC_INLINE void nrf_twim_task_trigger(NRF_TWIM_Type * p_reg,
  *
  * @return Address of the specified task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_twim_task_address_get(NRF_TWIM_Type * p_reg,
-                                                     nrf_twim_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_twim_task_address_get(NRF_TWIM_Type const * p_reg,
+                                                     nrf_twim_task_t       task);
 
 /**
  * @brief Function for clearing the specified TWIM event.
@@ -129,8 +129,8 @@ NRF_STATIC_INLINE void nrf_twim_event_clear(NRF_TWIM_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_twim_event_check(NRF_TWIM_Type *  p_reg,
-                                            nrf_twim_event_t event);
+NRF_STATIC_INLINE bool nrf_twim_event_check(NRF_TWIM_Type const * p_reg,
+                                            nrf_twim_event_t      event);
 
 /**
  * @brief Function for getting the address of the specified TWIM event register.
@@ -140,8 +140,8 @@ NRF_STATIC_INLINE bool nrf_twim_event_check(NRF_TWIM_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_twim_event_address_get(NRF_TWIM_Type  * p_reg,
-                                                      nrf_twim_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_twim_event_address_get(NRF_TWIM_Type const * p_reg,
+                                                      nrf_twim_event_t      event);
 
 /**
  * @brief Function for enabling the specified shortcuts.
@@ -188,8 +188,8 @@ NRF_STATIC_INLINE void nrf_twim_int_disable(NRF_TWIM_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type *     p_reg,
-                                                 nrf_twim_int_mask_t twim_int);
+NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg,
+                                                 nrf_twim_int_mask_t   twim_int);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -329,7 +329,7 @@ NRF_STATIC_INLINE void nrf_twim_shorts_set(NRF_TWIM_Type * p_reg,
  *
  * @return Amount of transmitted bytes.
  */
-NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type * p_reg);
+NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type const * p_reg);
 
 /**
  * @brief Function for getting the amount of received bytes.
@@ -338,7 +338,7 @@ NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type * p_reg);
  *
  * @return Amount of received bytes.
  */
-NRF_STATIC_INLINE size_t nrf_twim_rxd_amount_get(NRF_TWIM_Type * p_reg);
+NRF_STATIC_INLINE size_t nrf_twim_rxd_amount_get(NRF_TWIM_Type const * p_reg);
 
 /**
  * @brief Function for enabling the TX list feature.
@@ -377,8 +377,8 @@ NRF_STATIC_INLINE void nrf_twim_task_trigger(NRF_TWIM_Type * p_reg,
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twim_task_address_get(NRF_TWIM_Type * p_reg,
-                                                     nrf_twim_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_twim_task_address_get(NRF_TWIM_Type const * p_reg,
+                                                     nrf_twim_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
 }
@@ -393,14 +393,14 @@ NRF_STATIC_INLINE void nrf_twim_event_clear(NRF_TWIM_Type * p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_twim_event_check(NRF_TWIM_Type * p_reg,
-                                            nrf_twim_event_t event)
+NRF_STATIC_INLINE bool nrf_twim_event_check(NRF_TWIM_Type const * p_reg,
+                                            nrf_twim_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_twim_event_address_get(NRF_TWIM_Type  * p_reg,
-                                                      nrf_twim_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_twim_event_address_get(NRF_TWIM_Type const * p_reg,
+                                                      nrf_twim_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -429,8 +429,8 @@ NRF_STATIC_INLINE void nrf_twim_int_disable(NRF_TWIM_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type * p_reg,
-                                                 nrf_twim_int_mask_t twim_int)
+NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg,
+                                                 nrf_twim_int_mask_t   twim_int)
 {
     return (bool)(p_reg->INTENSET & twim_int);
 }
@@ -527,12 +527,12 @@ NRF_STATIC_INLINE void nrf_twim_shorts_set(NRF_TWIM_Type * p_reg,
     p_reg->SHORTS = mask;
 }
 
-NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type * p_reg)
+NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type const * p_reg)
 {
     return p_reg->TXD.AMOUNT;
 }
 
-NRF_STATIC_INLINE size_t nrf_twim_rxd_amount_get(NRF_TWIM_Type * p_reg)
+NRF_STATIC_INLINE size_t nrf_twim_rxd_amount_get(NRF_TWIM_Type const * p_reg)
 {
     return p_reg->RXD.AMOUNT;
 }

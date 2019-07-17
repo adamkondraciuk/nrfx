@@ -251,7 +251,7 @@ NRF_STATIC_INLINE void nrf_spis_disable(NRF_SPIS_Type * p_reg);
  *
  * @returns Current semaphore status.
  */
-NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type * p_reg);
+NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type const * p_reg);
 
 /**
  * @brief Function for retrieving the SPIS status.
@@ -260,7 +260,7 @@ NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type
  *
  * @returns Current SPIS status.
  */
-NRF_STATIC_INLINE nrf_spis_status_mask_t nrf_spis_status_get(NRF_SPIS_Type * p_reg);
+NRF_STATIC_INLINE nrf_spis_status_mask_t nrf_spis_status_get(NRF_SPIS_Type const * p_reg);
 
 /**
  * @brief Function for configuring SPIS pins.
@@ -460,13 +460,13 @@ NRF_STATIC_INLINE void nrf_spis_disable(NRF_SPIS_Type * p_reg)
     p_reg->ENABLE = (SPIS_ENABLE_ENABLE_Disabled << SPIS_ENABLE_ENABLE_Pos);
 }
 
-NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type * p_reg)
+NRF_STATIC_INLINE nrf_spis_semstat_t nrf_spis_semaphore_status_get(NRF_SPIS_Type const * p_reg)
 {
     return (nrf_spis_semstat_t) ((p_reg->SEMSTAT & SPIS_SEMSTAT_SEMSTAT_Msk)
                                  >> SPIS_SEMSTAT_SEMSTAT_Pos);
 }
 
-NRF_STATIC_INLINE nrf_spis_status_mask_t nrf_spis_status_get(NRF_SPIS_Type * p_reg)
+NRF_STATIC_INLINE nrf_spis_status_mask_t nrf_spis_status_get(NRF_SPIS_Type const * p_reg)
 {
     return (nrf_spis_status_mask_t) p_reg->STATUS;
 }

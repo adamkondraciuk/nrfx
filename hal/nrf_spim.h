@@ -148,8 +148,8 @@ NRF_STATIC_INLINE void nrf_spim_task_trigger(NRF_SPIM_Type * p_reg,
  *
  * @return Address of the specified task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_spim_task_address_get(NRF_SPIM_Type * p_reg,
-                                                     nrf_spim_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_spim_task_address_get(NRF_SPIM_Type const * p_reg,
+                                                     nrf_spim_task_t       task);
 
 /**
  * @brief Function for clearing the specified SPIM event.
@@ -169,8 +169,8 @@ NRF_STATIC_INLINE void nrf_spim_event_clear(NRF_SPIM_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_spim_event_check(NRF_SPIM_Type *  p_reg,
-                                            nrf_spim_event_t event);
+NRF_STATIC_INLINE bool nrf_spim_event_check(NRF_SPIM_Type const * p_reg,
+                                            nrf_spim_event_t      event);
 
 /**
  * @brief Function for getting the address of the specified SPIM event register.
@@ -180,8 +180,9 @@ NRF_STATIC_INLINE bool nrf_spim_event_check(NRF_SPIM_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_spim_event_address_get(NRF_SPIM_Type  * p_reg,
-                                                      nrf_spim_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_spim_event_address_get(NRF_SPIM_Type const * p_reg,
+                                                      nrf_spim_event_t      event);
+
 /**
  * @brief Function for enabling the specified shortcuts.
  *
@@ -207,7 +208,7 @@ NRF_STATIC_INLINE void nrf_spim_shorts_disable(NRF_SPIM_Type * p_reg,
  *
  * @return Current shortcut configuration.
  */
-NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg);
 
 /**
  * @brief Function for enabling the specified interrupts.
@@ -236,8 +237,8 @@ NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type *     p_reg,
-                                                 nrf_spim_int_mask_t spim_int);
+NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg,
+                                                 nrf_spim_int_mask_t   spim_int);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -390,7 +391,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg);
  *
  * @return Stall status of RX EasyDMA RAM accesses.
  */
-NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type * p_reg);
+NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type const * p_reg);
 #endif // defined(SPIM_STALLSTAT_RX_Msk) || defined(__NRFX_DOXYGEN__)
 
 #if defined(SPIM_STALLSTAT_TX_Msk) || defined(__NRFX_DOXYGEN__)
@@ -408,7 +409,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_tx_clear(NRF_SPIM_Type * p_reg);
  *
  * @return Stall status of TX EasyDMA RAM accesses.
  */
-NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type * p_reg);
+NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg);
 #endif // defined(SPIM_STALLSTAT_TX_Msk) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -500,8 +501,8 @@ NRF_STATIC_INLINE void nrf_spim_task_trigger(NRF_SPIM_Type * p_reg,
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_spim_task_address_get(NRF_SPIM_Type * p_reg,
-                                                     nrf_spim_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_spim_task_address_get(NRF_SPIM_Type const * p_reg,
+                                                     nrf_spim_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
 }
@@ -516,14 +517,14 @@ NRF_STATIC_INLINE void nrf_spim_event_clear(NRF_SPIM_Type *  p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_spim_event_check(NRF_SPIM_Type *  p_reg,
-                                            nrf_spim_event_t event)
+NRF_STATIC_INLINE bool nrf_spim_event_check(NRF_SPIM_Type const * p_reg,
+                                            nrf_spim_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_spim_event_address_get(NRF_SPIM_Type *  p_reg,
-                                                      nrf_spim_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_spim_event_address_get(NRF_SPIM_Type const * p_reg,
+                                                      nrf_spim_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -540,7 +541,7 @@ NRF_STATIC_INLINE void nrf_spim_shorts_disable(NRF_SPIM_Type * p_reg,
     p_reg->SHORTS &= ~(mask);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg)
 {
     return p_reg->SHORTS;
 }
@@ -557,8 +558,8 @@ NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type *     p_reg,
-                                                 nrf_spim_int_mask_t spim_int)
+NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg,
+                                                 nrf_spim_int_mask_t   spim_int)
 {
     return (bool)(p_reg->INTENSET & spim_int);
 }
@@ -653,7 +654,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg)
     p_reg->STALLSTAT &= ~(SPIM_STALLSTAT_RX_Msk);
 }
 
-NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type * p_reg)
+NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type const * p_reg)
 {
     return (p_reg->STALLSTAT & SPIM_STALLSTAT_RX_Msk) != 0;
 }
@@ -665,7 +666,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_tx_clear(NRF_SPIM_Type * p_reg)
     p_reg->STALLSTAT &= ~(SPIM_STALLSTAT_TX_Msk);
 }
 
-NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type * p_reg)
+NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg)
 {
     return (p_reg->STALLSTAT & SPIM_STALLSTAT_TX_Msk) != 0;
 }

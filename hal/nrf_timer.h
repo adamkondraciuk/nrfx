@@ -223,8 +223,8 @@ NRF_STATIC_INLINE void nrf_timer_task_trigger(NRF_TIMER_Type * p_reg,
  *
  * @return Address of the specified task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type * p_reg,
-                                                      nrf_timer_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type const * p_reg,
+                                                      nrf_timer_task_t       task);
 
 /**
  * @brief Function for clearing the specified timer event.
@@ -244,8 +244,8 @@ NRF_STATIC_INLINE void nrf_timer_event_clear(NRF_TIMER_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type *  p_reg,
-                                             nrf_timer_event_t event);
+NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type const * p_reg,
+                                             nrf_timer_event_t      event);
 
 /**
  * @brief Function for getting the address of the specified timer event register.
@@ -255,8 +255,8 @@ NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type *  p_reg,
-                                                       nrf_timer_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type const * p_reg,
+                                                       nrf_timer_event_t      event);
 
 /**
  * @brief Function for enabling the specified shortcuts.
@@ -303,8 +303,8 @@ NRF_STATIC_INLINE void nrf_timer_int_disable(NRF_TIMER_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_timer_int_enable_check(NRF_TIMER_Type * p_reg,
-                                                  uint32_t         timer_int);
+NRF_STATIC_INLINE bool nrf_timer_int_enable_check(NRF_TIMER_Type const * p_reg,
+                                                  uint32_t               timer_int);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -368,7 +368,7 @@ NRF_STATIC_INLINE void nrf_timer_mode_set(NRF_TIMER_Type * p_reg,
  *
  * @return Timer mode.
  */
-NRF_STATIC_INLINE nrf_timer_mode_t nrf_timer_mode_get(NRF_TIMER_Type * p_reg);
+NRF_STATIC_INLINE nrf_timer_mode_t nrf_timer_mode_get(NRF_TIMER_Type const * p_reg);
 
 /**
  * @brief Function for setting the timer bit width.
@@ -386,7 +386,7 @@ NRF_STATIC_INLINE void nrf_timer_bit_width_set(NRF_TIMER_Type *      p_reg,
  *
  * @return Timer bit width.
  */
-NRF_STATIC_INLINE nrf_timer_bit_width_t nrf_timer_bit_width_get(NRF_TIMER_Type * p_reg);
+NRF_STATIC_INLINE nrf_timer_bit_width_t nrf_timer_bit_width_get(NRF_TIMER_Type const * p_reg);
 
 /**
  * @brief Function for setting the timer frequency.
@@ -404,7 +404,7 @@ NRF_STATIC_INLINE void nrf_timer_frequency_set(NRF_TIMER_Type *      p_reg,
  *
  * @return Timer frequency.
  */
-NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type * p_reg);
+NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type const * p_reg);
 
 /**
  * @brief Function for writing the capture/compare register for the specified channel.
@@ -425,7 +425,7 @@ NRF_STATIC_INLINE void nrf_timer_cc_write(NRF_TIMER_Type *       p_reg,
  *
  * @return Value from the specified capture/compare register.
  */
-NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type *       p_reg,
+NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type const * p_reg,
                                              nrf_timer_cc_channel_t cc_channel);
 
 /**
@@ -488,8 +488,8 @@ NRF_STATIC_INLINE void nrf_timer_task_trigger(NRF_TIMER_Type * p_reg,
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type * p_reg,
-                                                      nrf_timer_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type const * p_reg,
+                                                      nrf_timer_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
 }
@@ -504,14 +504,14 @@ NRF_STATIC_INLINE void nrf_timer_event_clear(NRF_TIMER_Type *  p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type *  p_reg,
-                                             nrf_timer_event_t event)
+NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type const * p_reg,
+                                             nrf_timer_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type * p_reg,
-                                                       nrf_timer_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type const * p_reg,
+                                                       nrf_timer_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -540,8 +540,8 @@ NRF_STATIC_INLINE void nrf_timer_int_disable(NRF_TIMER_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_timer_int_enable_check(NRF_TIMER_Type * p_reg,
-                                                  uint32_t         timer_int)
+NRF_STATIC_INLINE bool nrf_timer_int_enable_check(NRF_TIMER_Type const * p_reg,
+                                                  uint32_t               timer_int)
 {
     return (bool)(p_reg->INTENSET & timer_int);
 }
@@ -583,7 +583,7 @@ NRF_STATIC_INLINE void nrf_timer_mode_set(NRF_TIMER_Type * p_reg,
                     ((mode << TIMER_MODE_MODE_Pos) & TIMER_MODE_MODE_Msk);
 }
 
-NRF_STATIC_INLINE nrf_timer_mode_t nrf_timer_mode_get(NRF_TIMER_Type * p_reg)
+NRF_STATIC_INLINE nrf_timer_mode_t nrf_timer_mode_get(NRF_TIMER_Type const * p_reg)
 {
     return (nrf_timer_mode_t)(p_reg->MODE);
 }
@@ -596,7 +596,7 @@ NRF_STATIC_INLINE void nrf_timer_bit_width_set(NRF_TIMER_Type *      p_reg,
                             TIMER_BITMODE_BITMODE_Msk);
 }
 
-NRF_STATIC_INLINE nrf_timer_bit_width_t nrf_timer_bit_width_get(NRF_TIMER_Type * p_reg)
+NRF_STATIC_INLINE nrf_timer_bit_width_t nrf_timer_bit_width_get(NRF_TIMER_Type const * p_reg)
 {
     return (nrf_timer_bit_width_t)(p_reg->BITMODE);
 }
@@ -609,7 +609,7 @@ NRF_STATIC_INLINE void nrf_timer_frequency_set(NRF_TIMER_Type *      p_reg,
                               TIMER_PRESCALER_PRESCALER_Msk);
 }
 
-NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type * p_reg)
+NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type const * p_reg)
 {
     return (nrf_timer_frequency_t)(p_reg->PRESCALER);
 }
@@ -621,7 +621,7 @@ NRF_STATIC_INLINE void nrf_timer_cc_write(NRF_TIMER_Type *       p_reg,
     p_reg->CC[cc_channel] = cc_value;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type *       p_reg,
+NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type const * p_reg,
                                              nrf_timer_cc_channel_t cc_channel)
 {
     return (uint32_t)p_reg->CC[cc_channel];

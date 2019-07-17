@@ -84,7 +84,7 @@ NRF_STATIC_INLINE  void nrf_rtc_cc_set(NRF_RTC_Type * p_reg, uint32_t ch, uint32
  *
  * @return COMPARE[ch] value.
  */
-NRF_STATIC_INLINE  uint32_t nrf_rtc_cc_get(NRF_RTC_Type * p_reg, uint32_t ch);
+NRF_STATIC_INLINE  uint32_t nrf_rtc_cc_get(NRF_RTC_Type const * p_reg, uint32_t ch);
 
 /**
  * @brief Function for enabling interrupts.
@@ -119,7 +119,7 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_int_is_enabled(NRF_RTC_Type * p_reg, uint32_t
  *
  * @return Value in INTEN register.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type const * p_reg);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -192,7 +192,7 @@ NRF_STATIC_INLINE void nrf_rtc_event_clear(NRF_RTC_Type * p_reg, nrf_rtc_event_t
  *
  * @return Counter value.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type const * p_reg);
 
 /**
  * @brief Function for setting a prescaler value.
@@ -209,7 +209,7 @@ NRF_STATIC_INLINE void nrf_rtc_prescaler_set(NRF_RTC_Type * p_reg, uint32_t val)
  *
  * @return Prescaler value.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type const * p_reg);
 
 /**
  * @brief Function for returning the address of an event.
@@ -219,7 +219,8 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type * p_reg);
  *
  * @return Address of the requested event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type * p_reg, nrf_rtc_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type const * p_reg,
+                                                     nrf_rtc_event_t      event);
 
 /**
  * @brief Function for returning the address of a task.
@@ -229,7 +230,8 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type * p_reg, nrf_r
  *
  * @return Address of the requested task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type * p_reg, nrf_rtc_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type const * p_reg,
+                                                    nrf_rtc_task_t       task);
 
 /**
  * @brief Function for starting a task.
@@ -271,7 +273,7 @@ NRF_STATIC_INLINE  void nrf_rtc_cc_set(NRF_RTC_Type * p_reg, uint32_t ch, uint32
     p_reg->CC[ch] = cc_val;
 }
 
-NRF_STATIC_INLINE  uint32_t nrf_rtc_cc_get(NRF_RTC_Type * p_reg, uint32_t ch)
+NRF_STATIC_INLINE  uint32_t nrf_rtc_cc_get(NRF_RTC_Type const * p_reg, uint32_t ch)
 {
     return p_reg->CC[ch];
 }
@@ -291,7 +293,7 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_int_is_enabled(NRF_RTC_Type * p_reg, uint32_t
     return (p_reg->INTENSET & mask);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type const * p_reg)
 {
     return p_reg->INTENSET;
 }
@@ -340,7 +342,7 @@ NRF_STATIC_INLINE void nrf_rtc_event_clear(NRF_RTC_Type * p_reg, nrf_rtc_event_t
 #endif
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_rtc_counter_get(NRF_RTC_Type const * p_reg)
 {
      return p_reg->COUNTER;
 }
@@ -351,17 +353,19 @@ NRF_STATIC_INLINE void nrf_rtc_prescaler_set(NRF_RTC_Type * p_reg, uint32_t val)
     p_reg->PRESCALER = val;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_rtc_prescaler_get(NRF_RTC_Type const * p_reg)
 {
     return p_reg->PRESCALER;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type * p_reg, nrf_rtc_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type const * p_reg,
+                                                     nrf_rtc_event_t      event)
 {
     return (uint32_t)p_reg + event;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type * p_reg, nrf_rtc_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type const * p_reg,
+                                                    nrf_rtc_task_t       task)
 {
     return (uint32_t)p_reg + task;
 }

@@ -151,7 +151,8 @@ NRF_STATIC_INLINE void nrf_uarte_event_clear(NRF_UARTE_Type * p_reg, nrf_uarte_e
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_uarte_event_check(NRF_UARTE_Type * p_reg, nrf_uarte_event_t event);
+NRF_STATIC_INLINE bool nrf_uarte_event_check(NRF_UARTE_Type const * p_reg,
+                                             nrf_uarte_event_t      event);
 
 /**
  * @brief Function for returning the address of the specified UARTE event register.
@@ -161,8 +162,8 @@ NRF_STATIC_INLINE bool nrf_uarte_event_check(NRF_UARTE_Type * p_reg, nrf_uarte_e
  *
  * @return Address of specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type *  p_reg,
-                                                       nrf_uarte_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type const * p_reg,
+                                                       nrf_uarte_event_t      event);
 
 /**
  * @brief Function for enabling UARTE shortcuts.
@@ -197,8 +198,8 @@ NRF_STATIC_INLINE void nrf_uarte_int_enable(NRF_UARTE_Type * p_reg, uint32_t mas
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_uarte_int_enable_check(NRF_UARTE_Type *     p_reg,
-                                                  nrf_uarte_int_mask_t mask);
+NRF_STATIC_INLINE bool nrf_uarte_int_enable_check(NRF_UARTE_Type const * p_reg,
+                                                  nrf_uarte_int_mask_t   mask);
 
 /**
  * @brief Function for disabling the specified interrupts.
@@ -302,7 +303,7 @@ NRF_STATIC_INLINE void nrf_uarte_txrx_pins_disconnect(NRF_UARTE_Type * p_reg);
  *
  * @return TX pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_tx_pin_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_tx_pin_get(NRF_UARTE_Type const * p_reg);
 
 /**
  * @brief Function for getting RX pin.
@@ -311,7 +312,7 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_tx_pin_get(NRF_UARTE_Type * p_reg);
  *
  * @return RX pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_rx_pin_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_rx_pin_get(NRF_UARTE_Type const * p_reg);
 
 /**
  * @brief Function for getting RTS pin.
@@ -320,7 +321,7 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_rx_pin_get(NRF_UARTE_Type * p_reg);
  *
  * @return RTS pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_rts_pin_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_rts_pin_get(NRF_UARTE_Type const * p_reg);
 
 /**
  * @brief Function for getting CTS pin.
@@ -329,7 +330,7 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_rts_pin_get(NRF_UARTE_Type * p_reg);
  *
  * @return CTS pin number.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_cts_pin_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_cts_pin_get(NRF_UARTE_Type const * p_reg);
 
 /**
  * @brief Function for configuring flow control pins.
@@ -365,8 +366,8 @@ NRF_STATIC_INLINE void nrf_uarte_task_trigger(NRF_UARTE_Type * p_reg, nrf_uarte_
  *
  * @return Task address.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type * p_reg,
-                                                      nrf_uarte_task_t task);
+NRF_STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type const * p_reg,
+                                                      nrf_uarte_task_t       task);
 
 /**
  * @brief Function for configuring UARTE.
@@ -404,7 +405,7 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
  *
  * @retval Amount of bytes transmitted.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type const * p_reg);
 
 /**
  * @brief Function for setting the receive buffer.
@@ -424,7 +425,7 @@ NRF_STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
  *
  * @retval Amount of bytes received.
  */
-NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type const * p_reg);
 
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE void nrf_uarte_event_clear(NRF_UARTE_Type * p_reg, nrf_uarte_event_t event)
@@ -436,13 +437,14 @@ NRF_STATIC_INLINE void nrf_uarte_event_clear(NRF_UARTE_Type * p_reg, nrf_uarte_e
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_uarte_event_check(NRF_UARTE_Type * p_reg, nrf_uarte_event_t event)
+NRF_STATIC_INLINE bool nrf_uarte_event_check(NRF_UARTE_Type const * p_reg,
+                                             nrf_uarte_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type  * p_reg,
-                                                       nrf_uarte_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type const * p_reg,
+                                                       nrf_uarte_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -462,8 +464,8 @@ NRF_STATIC_INLINE void nrf_uarte_int_enable(NRF_UARTE_Type * p_reg, uint32_t mas
     p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_uarte_int_enable_check(NRF_UARTE_Type *     p_reg,
-                                                  nrf_uarte_int_mask_t mask)
+NRF_STATIC_INLINE bool nrf_uarte_int_enable_check(NRF_UARTE_Type const * p_reg,
+                                                  nrf_uarte_int_mask_t   mask)
 {
     return (bool)(p_reg->INTENSET & mask);
 }
@@ -533,22 +535,22 @@ NRF_STATIC_INLINE void nrf_uarte_txrx_pins_disconnect(NRF_UARTE_Type * p_reg)
     nrf_uarte_txrx_pins_set(p_reg, NRF_UARTE_PSEL_DISCONNECTED, NRF_UARTE_PSEL_DISCONNECTED);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_tx_pin_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_tx_pin_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->PSEL.TXD;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_rx_pin_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_rx_pin_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->PSEL.RXD;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_rts_pin_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_rts_pin_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->PSEL.RTS;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_cts_pin_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_cts_pin_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->PSEL.CTS;
 }
@@ -571,7 +573,8 @@ NRF_STATIC_INLINE void nrf_uarte_task_trigger(NRF_UARTE_Type * p_reg, nrf_uarte_
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type * p_reg, nrf_uarte_task_t task)
+NRF_STATIC_INLINE uint32_t nrf_uarte_task_address_get(NRF_UARTE_Type const * p_reg,
+                                                      nrf_uarte_task_t       task)
 {
     return (uint32_t)p_reg + (uint32_t)task;
 }
@@ -599,7 +602,7 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
     p_reg->TXD.MAXCNT = length;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->TXD.AMOUNT;
 }
@@ -612,7 +615,7 @@ NRF_STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
     p_reg->RXD.MAXCNT = length;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type const * p_reg)
 {
     return p_reg->RXD.AMOUNT;
 }

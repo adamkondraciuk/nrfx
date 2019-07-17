@@ -86,8 +86,8 @@ NRF_STATIC_INLINE void nrf_spi_event_clear(NRF_SPI_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type *  p_reg,
-                                           nrf_spi_event_t event);
+NRF_STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type const * p_reg,
+                                           nrf_spi_event_t      event);
 
 /**
  * @brief Function for getting the address of the specified SPI event register.
@@ -97,8 +97,8 @@ NRF_STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type *  p_reg,
  *
  * @return Address of the specified event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
-                                                     nrf_spi_event_t event);
+NRF_STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type const * p_reg,
+                                                     nrf_spi_event_t      event);
 
 /**
  * @brief Function for enabling the specified interrupts.
@@ -127,8 +127,8 @@ NRF_STATIC_INLINE void nrf_spi_int_disable(NRF_SPI_Type * p_reg,
  * @retval true  The interrupt is enabled.
  * @retval false The interrupt is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_spi_int_enable_check(NRF_SPI_Type *     p_reg,
-                                                nrf_spi_int_mask_t spi_int);
+NRF_STATIC_INLINE bool nrf_spi_int_enable_check(NRF_SPI_Type const * p_reg,
+                                                nrf_spi_int_mask_t   spi_int);
 
 /**
  * @brief Function for enabling the SPI peripheral.
@@ -175,7 +175,7 @@ NRF_STATIC_INLINE void nrf_spi_txd_set(NRF_SPI_Type * p_reg, uint8_t data);
  *
  * @return RX data received.
  */
-NRF_STATIC_INLINE uint8_t nrf_spi_rxd_get(NRF_SPI_Type * p_reg);
+NRF_STATIC_INLINE uint8_t nrf_spi_rxd_get(NRF_SPI_Type const * p_reg);
 
 /**
  * @brief Function for setting the SPI master data rate.
@@ -210,14 +210,14 @@ NRF_STATIC_INLINE void nrf_spi_event_clear(NRF_SPI_Type *  p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type *  p_reg,
-                                           nrf_spi_event_t event)
+NRF_STATIC_INLINE bool nrf_spi_event_check(NRF_SPI_Type const * p_reg,
+                                           nrf_spi_event_t      event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type *  p_reg,
-                                                     nrf_spi_event_t event)
+NRF_STATIC_INLINE uint32_t nrf_spi_event_address_get(NRF_SPI_Type const * p_reg,
+                                                     nrf_spi_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -234,8 +234,8 @@ NRF_STATIC_INLINE void nrf_spi_int_disable(NRF_SPI_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_spi_int_enable_check(NRF_SPI_Type *     p_reg,
-                                                nrf_spi_int_mask_t spi_int)
+NRF_STATIC_INLINE bool nrf_spi_int_enable_check(NRF_SPI_Type const * p_reg,
+                                                nrf_spi_int_mask_t   spi_int)
 {
     return (bool)(p_reg->INTENSET & spi_int);
 }
@@ -279,7 +279,7 @@ NRF_STATIC_INLINE void nrf_spi_txd_set(NRF_SPI_Type * p_reg, uint8_t data)
     p_reg->TXD = data;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_spi_rxd_get(NRF_SPI_Type * p_reg)
+NRF_STATIC_INLINE uint8_t nrf_spi_rxd_get(NRF_SPI_Type const * p_reg)
 {
     return p_reg->RXD;
 }

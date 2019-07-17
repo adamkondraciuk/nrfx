@@ -291,7 +291,7 @@ NRF_STATIC_INLINE void nrf_qspi_disable(NRF_QSPI_Type * p_reg);
  * @param[in] p_pins Pointer to the pins configuration structure. See @ref nrf_qspi_pins_t.
  */
 NRF_STATIC_INLINE void nrf_qspi_pins_set(NRF_QSPI_Type *         p_reg,
-                                         const nrf_qspi_pins_t * p_pins);
+                                         nrf_qspi_pins_t const * p_pins);
 
 /**
  * @brief Function for setting the QSPI XIPOFFSET register.
@@ -310,7 +310,7 @@ NRF_STATIC_INLINE void nrf_qspi_xip_offset_set(NRF_QSPI_Type * p_reg,
  *                     See @ref nrf_qspi_prot_conf_t.
  */
 NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg,
-                                              const nrf_qspi_prot_conf_t * p_config);
+                                              nrf_qspi_prot_conf_t const * p_config);
 
 /**
  * @brief Function for setting the QSPI IFCONFIG1 register.
@@ -320,7 +320,7 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg
  *                     See @ref nrf_qspi_phy_conf_t.
  */
 NRF_STATIC_INLINE void nrf_qspi_ifconfig1_set(NRF_QSPI_Type *             p_reg,
-                                              const nrf_qspi_phy_conf_t * p_config);
+                                              nrf_qspi_phy_conf_t const * p_config);
 
 /**
  * @brief Function for setting the QSPI ADDRCONF register.
@@ -338,7 +338,7 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig1_set(NRF_QSPI_Type *             p_reg,
  *                     See @ref nrf_qspi_addrconfig_conf_t.
 */
 NRF_STATIC_INLINE void nrf_qspi_addrconfig_set(NRF_QSPI_Type *                    p_reg,
-                                               const nrf_qspi_addrconfig_conf_t * p_config);
+                                               nrf_qspi_addrconfig_conf_t const * p_config);
 
 /**
  * @brief Function for setting write data into the peripheral register (without starting the process).
@@ -437,9 +437,8 @@ NRF_STATIC_INLINE void nrf_qspi_cinstrdata_get(NRF_QSPI_Type const * p_reg,
  * @param[in] p_config Pointer to the custom instruction configuration structure.
  *                     See @ref nrf_qspi_cinstr_conf_t.
  */
-
 NRF_STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *                p_reg,
-                                                      const nrf_qspi_cinstr_conf_t * p_config);
+                                                      nrf_qspi_cinstr_conf_t const * p_config);
 
 /**
  * @brief Function for starting a custom instruction long transfer.
@@ -449,7 +448,7 @@ NRF_STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *           
  *                     See @ref nrf_qspi_cinstr_conf_t.
  */
 NRF_STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *                p_reg,
-                                                           const nrf_qspi_cinstr_conf_t * p_config);
+                                                           nrf_qspi_cinstr_conf_t const * p_config);
 
 /**
  * @brief Function for checking whether a custom instruction long transfer is ongoing.
@@ -531,7 +530,7 @@ NRF_STATIC_INLINE void nrf_qspi_disable(NRF_QSPI_Type * p_reg)
     p_reg->ENABLE = (QSPI_ENABLE_ENABLE_Disabled << QSPI_ENABLE_ENABLE_Pos);
 }
 
-NRF_STATIC_INLINE void nrf_qspi_pins_set(NRF_QSPI_Type * p_reg, const nrf_qspi_pins_t * p_pins)
+NRF_STATIC_INLINE void nrf_qspi_pins_set(NRF_QSPI_Type * p_reg, nrf_qspi_pins_t const * p_pins)
 {
     p_reg->PSEL.SCK = NRF_QSPI_PIN_VAL(p_pins->sck_pin);
     p_reg->PSEL.CSN = NRF_QSPI_PIN_VAL(p_pins->csn_pin);
@@ -548,7 +547,7 @@ NRF_STATIC_INLINE void nrf_qspi_xip_offset_set(NRF_QSPI_Type * p_reg,
 }
 
 NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg,
-                                              const nrf_qspi_prot_conf_t * p_config)
+                                              nrf_qspi_prot_conf_t const * p_config)
 {
     uint32_t config = p_config->readoc;
     config |= ((uint32_t)p_config->writeoc)    << QSPI_IFCONFIG0_WRITEOC_Pos;
@@ -559,7 +558,7 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg
 }
 
 NRF_STATIC_INLINE void nrf_qspi_ifconfig1_set(NRF_QSPI_Type *             p_reg,
-                                              const nrf_qspi_phy_conf_t * p_config)
+                                              nrf_qspi_phy_conf_t const * p_config)
 {
     // IFCONFIG1 mask for reserved fields in the register.
     uint32_t config = p_reg->IFCONFIG1 & 0x00FFFF00;
@@ -572,7 +571,7 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig1_set(NRF_QSPI_Type *             p_reg,
 }
 
 NRF_STATIC_INLINE void nrf_qspi_addrconfig_set(NRF_QSPI_Type *                    p_reg,
-                                               const nrf_qspi_addrconfig_conf_t * p_config)
+                                               nrf_qspi_addrconfig_conf_t const * p_config)
 {
     uint32_t config = p_config->opcode;
     config |= ((uint32_t)p_config->byte0)   << QSPI_ADDRCONF_BYTE0_Pos;
@@ -716,7 +715,7 @@ NRF_STATIC_INLINE void nrf_qspi_cinstrdata_get(NRF_QSPI_Type const * p_reg,
 }
 
 NRF_STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *                p_reg,
-                                                      const nrf_qspi_cinstr_conf_t * p_config)
+                                                      nrf_qspi_cinstr_conf_t const * p_config)
 {
     p_reg->CINSTRCONF = (((uint32_t)p_config->opcode    << QSPI_CINSTRCONF_OPCODE_Pos) |
                          ((uint32_t)p_config->length    << QSPI_CINSTRCONF_LENGTH_Pos) |
@@ -727,7 +726,7 @@ NRF_STATIC_INLINE void nrf_qspi_cinstr_transfer_start(NRF_QSPI_Type *           
 }
 
 NRF_STATIC_INLINE void nrf_qspi_cinstr_long_transfer_start(NRF_QSPI_Type *                p_reg,
-                                                           const nrf_qspi_cinstr_conf_t * p_config)
+                                                           nrf_qspi_cinstr_conf_t const * p_config)
 {
     p_reg->CINSTRCONF = (((uint32_t)p_config->opcode    << QSPI_CINSTRCONF_OPCODE_Pos) |
                          ((uint32_t)p_config->length    << QSPI_CINSTRCONF_LENGTH_Pos) |
