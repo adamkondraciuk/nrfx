@@ -49,7 +49,7 @@ typedef struct
 } pwm_control_block_t;
 static pwm_control_block_t m_cb[NRFX_PWM_ENABLED_COUNT];
 
-static void configure_pins(nrfx_pwm_t const * const p_instance,
+static void configure_pins(nrfx_pwm_t const *        p_instance,
                            nrfx_pwm_config_t const * p_config)
 {
     uint32_t out_pins[NRF_PWM_CHANNEL_COUNT];
@@ -84,7 +84,7 @@ static void configure_pins(nrfx_pwm_t const * const p_instance,
 }
 
 
-nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
+nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
                          nrfx_pwm_config_t const * p_config,
                          nrfx_pwm_handler_t        handler,
                          void *                    p_context)
@@ -147,7 +147,7 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const * const p_instance,
 }
 
 
-void nrfx_pwm_uninit(nrfx_pwm_t const * const p_instance)
+void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -163,7 +163,7 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * const p_instance)
 }
 
 
-static uint32_t start_playback(nrfx_pwm_t const * const p_instance,
+static uint32_t start_playback(nrfx_pwm_t const * p_instance,
                                pwm_control_block_t * p_cb,
                                uint8_t               flags,
                                nrf_pwm_task_t        starting_task)
@@ -237,7 +237,7 @@ static uint32_t start_playback(nrfx_pwm_t const * const p_instance,
 }
 
 
-uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const * const p_instance,
+uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const *         p_instance,
                                   nrf_pwm_sequence_t const * p_sequence,
                                   uint16_t                   playback_count,
                                   uint32_t                   flags)
@@ -282,7 +282,7 @@ uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const * const p_instance,
 }
 
 
-uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const * const p_instance,
+uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const *         p_instance,
                                    nrf_pwm_sequence_t const * p_sequence_0,
                                    nrf_pwm_sequence_t const * p_sequence_1,
                                    uint16_t                   playback_count,
@@ -329,8 +329,8 @@ uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const * const p_instance,
 }
 
 
-bool nrfx_pwm_stop(nrfx_pwm_t const * const p_instance,
-                   bool wait_until_stopped)
+bool nrfx_pwm_stop(nrfx_pwm_t const * p_instance,
+                   bool               wait_until_stopped)
 {
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
 
@@ -358,7 +358,7 @@ bool nrfx_pwm_stop(nrfx_pwm_t const * const p_instance,
 }
 
 
-bool nrfx_pwm_is_stopped(nrfx_pwm_t const * const p_instance)
+bool nrfx_pwm_is_stopped(nrfx_pwm_t const * p_instance)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);

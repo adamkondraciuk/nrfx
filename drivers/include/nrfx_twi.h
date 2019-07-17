@@ -256,7 +256,7 @@ bool nrfx_twi_is_busy(nrfx_twi_t const * p_instance);
  *
  * @return Data count.
  */
-size_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance);
+size_t nrfx_twi_data_count_get(nrfx_twi_t const * p_instance);
 
 /**
  * @brief Function for returning the address of a STOPPED TWI event.

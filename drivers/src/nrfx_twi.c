@@ -555,7 +555,7 @@ bool nrfx_twi_is_busy(nrfx_twi_t const * p_instance)
     return p_cb->busy;
 }
 
-nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
+nrfx_err_t nrfx_twi_xfer(nrfx_twi_t const *           p_instance,
                          nrfx_twi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags)
 {
@@ -585,7 +585,7 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t           const * p_instance,
     return err_code;
 }
 
-size_t nrfx_twi_data_count_get(nrfx_twi_t const * const p_instance)
+size_t nrfx_twi_data_count_get(nrfx_twi_t const * p_instance)
 {
     return m_cb[p_instance->drv_inst_idx].bytes_transferred;
 }

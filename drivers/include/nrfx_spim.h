@@ -210,7 +210,7 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
  */
-nrfx_err_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
+nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
                           void *                     p_context);
@@ -220,7 +220,7 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const * const  p_instance,
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
+void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
 
 /**
  * @brief Function for starting the SPIM data transfer.
@@ -264,7 +264,7 @@ void       nrfx_spim_uninit(nrfx_spim_t const * const p_instance);
  * @retval NRFX_ERROR_INVALID_ADDR  The provided buffers are not placed in the Data
  *                                  RAM region.
  */
-nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
+nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const *           p_instance,
                           nrfx_spim_xfer_desc_t const * p_xfer_desc,
                           uint32_t                      flags);
 
@@ -297,7 +297,7 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const * const     p_instance,
  * @retval NRFX_ERROR_INVALID_ADDR  The provided buffers are not placed in the Data
  *                                  RAM region.
  */
-nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const * const     p_instance,
+nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const *           p_instance,
                               nrfx_spim_xfer_desc_t const * p_xfer_desc,
                               uint32_t                      flags,
                               uint8_t                       cmd_length);

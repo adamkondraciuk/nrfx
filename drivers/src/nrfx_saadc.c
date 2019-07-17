@@ -247,8 +247,8 @@ void nrfx_saadc_uninit(void)
 }
 
 
-nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  channel,
-                                   nrf_saadc_channel_config_t const * const p_config)
+nrfx_err_t nrfx_saadc_channel_init(uint8_t                            channel,
+                                   nrf_saadc_channel_config_t const * p_config)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < NRF_SAADC_CHANNEL_COUNT);

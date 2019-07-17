@@ -127,10 +127,10 @@ static void anomaly_198_disable(void)
 }
 #endif // NRFX_CHECK(NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED)
 
-nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
+nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
-                          void                     * p_context)
+                          void *                     p_context)
 {
     NRFX_ASSERT(p_config);
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -309,7 +309,7 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t  const * const p_instance,
     return err_code;
 }
 
-void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
+void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -354,7 +354,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * const p_instance)
 }
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const * const     p_instance,
+nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const *           p_instance,
                               nrfx_spim_xfer_desc_t const * p_xfer_desc,
                               uint32_t                      flags,
                               uint8_t                       cmd_length)
@@ -516,7 +516,7 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
     return err_code;
 }
 
-nrfx_err_t nrfx_spim_xfer(nrfx_spim_t     const * const p_instance,
+nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const *           p_instance,
                           nrfx_spim_xfer_desc_t const * p_xfer_desc,
                           uint32_t                      flags)
 {

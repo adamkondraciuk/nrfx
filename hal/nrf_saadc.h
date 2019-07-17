@@ -485,8 +485,8 @@ NRF_STATIC_INLINE void nrf_saadc_continuous_mode_disable(void);
  * @param[in] channel Channel number.
  * @param[in] config  Pointer to the channel configuration structure.
  */
-NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
-                                              nrf_saadc_channel_config_t const * const config);
+NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                            channel,
+                                              nrf_saadc_channel_config_t const * config);
 
 /**
  * @brief Function for configuring the burst mode for the specified channel.
@@ -701,8 +701,8 @@ NRF_STATIC_INLINE void nrf_saadc_continuous_mode_disable(void)
     NRF_SAADC->SAMPLERATE = SAADC_SAMPLERATE_MODE_Task << SAADC_SAMPLERATE_MODE_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                                  channel,
-                                              nrf_saadc_channel_config_t const * const config)
+NRF_STATIC_INLINE void nrf_saadc_channel_init(uint8_t                            channel,
+                                              nrf_saadc_channel_config_t const * config)
 {
     NRF_SAADC->CH[channel].CONFIG =
             ((config->resistor_p   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)

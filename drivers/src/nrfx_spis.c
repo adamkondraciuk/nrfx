@@ -94,7 +94,7 @@ typedef struct
 
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
-nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
+nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
                           nrfx_spis_config_t const * p_config,
                           nrfx_spis_event_handler_t  event_handler,
                           void *                     p_context)
@@ -261,7 +261,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t  const * const p_instance,
 }
 
 
-void nrfx_spis_uninit(nrfx_spis_t const * const p_instance)
+void nrfx_spis_uninit(nrfx_spis_t const * p_instance)
 {
     spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -336,11 +336,11 @@ static void spis_state_change(NRF_SPIS_Type   * p_spis,
     spis_state_entry_action_execute(p_spis, p_cb);
 }
 
-nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
-                                 uint8_t           const * p_tx_buffer,
-                                 size_t                    tx_buffer_length,
-                                 uint8_t                 * p_rx_buffer,
-                                 size_t                    rx_buffer_length)
+nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * p_instance,
+                                 uint8_t const *     p_tx_buffer,
+                                 size_t              tx_buffer_length,
+                                 uint8_t *           p_rx_buffer,
+                                 size_t              rx_buffer_length)
 {
     NRFX_ASSERT(p_tx_buffer != NULL || tx_buffer_length == 0);
     NRFX_ASSERT(p_rx_buffer != NULL || rx_buffer_length == 0);

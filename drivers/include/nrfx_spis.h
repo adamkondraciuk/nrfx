@@ -150,7 +150,7 @@ typedef void (*nrfx_spis_event_handler_t)(nrfx_spis_evt_t const * p_event,
  *                                  on CSN pin cannot be initialized. Possible
  *                                  only when using nRF52 Anomaly 109 workaround.
  */
-nrfx_err_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
+nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
                           nrfx_spis_config_t const * p_config,
                           nrfx_spis_event_handler_t  event_handler,
                           void *                     p_context);
@@ -160,7 +160,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const * const  p_instance,
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrfx_spis_uninit(nrfx_spis_t const * const p_instance);
+void nrfx_spis_uninit(nrfx_spis_t const * p_instance);
 
 /**
  * @brief Function for preparing the SPI slave instance for a single SPI transaction.
@@ -195,11 +195,11 @@ void nrfx_spis_uninit(nrfx_spis_t const * const p_instance);
  * @retval NRFX_ERROR_INVALID_LENGTH Provided lengths exceed the EasyDMA limits for the peripheral.
  * @retval NRFX_ERROR_INTERNAL       The operation failed because of an internal error.
  */
-nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * const p_instance,
-                                 uint8_t const *           p_tx_buffer,
-                                 size_t                    tx_buffer_length,
-                                 uint8_t *                 p_rx_buffer,
-                                 size_t                    rx_buffer_length);
+nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * p_instance,
+                                 uint8_t const *     p_tx_buffer,
+                                 size_t              tx_buffer_length,
+                                 uint8_t *           p_rx_buffer,
+                                 size_t              rx_buffer_length);
 
 /** @} */
 

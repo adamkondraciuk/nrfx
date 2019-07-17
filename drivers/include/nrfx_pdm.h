@@ -75,7 +75,7 @@ typedef struct
  *
  * @param[in] p_evt Pointer to the PDM event structure.
  */
-typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * const p_evt);
+typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * p_evt);
 
 
 /**

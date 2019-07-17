@@ -160,8 +160,8 @@ uint32_t nrfx_saadc_sample_task_get(void);
  * @retval NRFX_ERROR_INVALID_STATE The SAADC was not initialized.
  * @retval NRFX_ERROR_NO_MEM        The specified channel was already allocated.
  */
-nrfx_err_t nrfx_saadc_channel_init(uint8_t                                  channel,
-                                   nrf_saadc_channel_config_t const * const p_config);
+nrfx_err_t nrfx_saadc_channel_init(uint8_t                            channel,
+                                   nrf_saadc_channel_config_t const * p_config);
 
 /**
  * @brief Function for uninitializing an SAADC channel.

@@ -130,8 +130,8 @@ void nrfx_adc_sample(void)
     nrf_adc_task_trigger(NRF_ADC_TASK_START);
 }
 
-nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * const p_channel,
-                                   nrf_adc_value_t                * p_value)
+nrfx_err_t nrfx_adc_sample_convert(nrfx_adc_channel_t const * p_channel,
+                                   nrf_adc_value_t *          p_value)
 {
     nrfx_err_t err_code;
 
