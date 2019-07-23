@@ -59,7 +59,7 @@ __STATIC_INLINE void nrf_cache_erase(NRF_CACHE_Type * p_reg);
  * @retval true  Erase is finished.
  * @retval false Erase is not complete or has not started.
  */
-__STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type * p_reg);
+__STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type const * p_reg);
 
 /**
  * @brief Function for clearing the status of the cache erase.
@@ -94,8 +94,8 @@ __STATIC_INLINE void nrf_cache_profiling_counters_clear(NRF_CACHE_Type * p_reg);
  *
  * @return Number of instruction fetch cache hits.
  */
-__STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type *   p_reg,
-                                                               nrf_cache_region_t region);
+__STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type const * p_reg,
+                                                               nrf_cache_region_t     region);
 
 /**
  * @brief Function for getting the number of instruction fetch cache misses.
@@ -107,8 +107,8 @@ __STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type * 
  *
  * @return Number of instruction fetch cache misses.
  */
-__STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type *   p_reg,
-                                                                nrf_cache_region_t region);
+__STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type const * p_reg,
+                                                                nrf_cache_region_t     region);
 
 /**
  * @brief Function for getting the number of data fetch cache hits.
@@ -120,8 +120,8 @@ __STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type *
  *
  * @return Number of data fetch cache hits.
  */
-__STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type *   p_reg,
-                                                        nrf_cache_region_t region);
+__STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type const * p_reg,
+                                                        nrf_cache_region_t     region);
 
 /**
  * @brief Function for getting the number of data fetch cache misses.
@@ -133,8 +133,8 @@ __STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type *   p_reg
  *
  * @return Number of data fetch cache misses.
  */
-__STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type *   p_reg,
-                                                         nrf_cache_region_t region);
+__STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type const * p_reg,
+                                                         nrf_cache_region_t     region);
 
 /**
  * @brief Function for setting the cache RAM mode.
@@ -193,10 +193,10 @@ __STATIC_INLINE void nrf_cache_update_lock_set(NRF_CACHE_Type * p_reg, bool enab
  *
  * @return Data word.
  */
-__STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type * p_reg,
-                                            uint32_t             set,
-                                            uint8_t              way,
-                                            uint8_t              word);
+__STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
+                                            uint32_t                   set,
+                                            uint8_t                    way,
+                                            uint8_t                    word);
 
 /**
  * @brief Function for getting the tag associated with the specified set and way.
@@ -209,9 +209,9 @@ __STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type * p_reg,
  *
  * @return Tag value.
  */
-__STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type * p_reg,
-                                           uint32_t             set,
-                                           uint8_t              way);
+__STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
+                                           uint32_t                   set,
+                                           uint8_t                    way);
 
 /**
  * @brief Function for checking the validity of a cache line associated with the specified set and way.
@@ -223,9 +223,9 @@ __STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type * p_reg,
  * @retval true  Cache line is valid.
  * @retval false Cache line is invalid.
  */
-__STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type * p_reg,
-                                                   uint32_t             set,
-                                                   uint8_t              way);
+__STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type const * p_reg,
+                                                   uint32_t                   set,
+                                                   uint8_t                    way);
 
 /**
  * @brief Function for getting the most recently used way in the specified set.
@@ -237,7 +237,7 @@ __STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type * p_reg,
  *
  * @return The most recently used way in the specified set.
  */
-__STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type * p_reg, uint32_t set);
+__STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, uint32_t set);
 
 #ifndef SUPPRESS_INLINE_IMPLEMENTATION
 
@@ -261,7 +261,7 @@ __STATIC_INLINE void nrf_cache_erase(NRF_CACHE_Type * p_reg)
     p_reg->ERASE = CACHE_ERASE_ERASE_Erase;
 }
 
-__STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type * p_reg)
+__STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type const * p_reg)
 {
     return (bool)(p_reg->ERASESTATUS & CACHE_ERASESTATUS_ERASESTATUS_Msk);
 }
@@ -282,26 +282,26 @@ __STATIC_INLINE void nrf_cache_profiling_counters_clear(NRF_CACHE_Type * p_reg)
     p_reg->PROFILINGCLEAR = CACHE_PROFILINGCLEAR_ENABLE_Clear;
 }
 
-__STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type *   p_reg,
-                                                               nrf_cache_region_t region)
+__STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type const * p_reg,
+                                                               nrf_cache_region_t     region)
 {
     return p_reg->PROFILING[region].IHIT;
 }
 
-__STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type *   p_reg,
-                                                                nrf_cache_region_t region)
+__STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type const * p_reg,
+                                                                nrf_cache_region_t     region)
 {
     return p_reg->PROFILING[region].IMISS;
 }
 
-__STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type *   p_reg,
-                                                        nrf_cache_region_t region)
+__STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type const * p_reg,
+                                                        nrf_cache_region_t     region)
 {
     return p_reg->PROFILING[region].DHIT;
 }
 
-__STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type *   p_reg,
-                                                         nrf_cache_region_t region)
+__STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type const * p_reg,
+                                                         nrf_cache_region_t     region)
 {
     return p_reg->PROFILING[region].DMISS;
 }
@@ -322,10 +322,10 @@ __STATIC_INLINE void nrf_cache_update_lock_set(NRF_CACHE_Type * p_reg, bool enab
         (enable ? CACHE_WRITELOCK_WRITELOCK_Locked : CACHE_WRITELOCK_WRITELOCK_Unlocked);
 }
 
-__STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type * p_reg,
-                                            uint32_t             set,
-                                            uint8_t              way,
-                                            uint8_t              word)
+__STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
+                                            uint32_t                   set,
+                                            uint8_t                    way,
+                                            uint8_t                    word)
 {
     NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET));
     NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET[0].WAY));
@@ -343,25 +343,25 @@ __STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type * p_reg,
     }
 }
 
-__STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type * p_reg,
-                                                uint32_t             set,
-                                                uint8_t              way)
+__STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
+                                                uint32_t              set,
+                                                uint8_t               way)
 {
     NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
     NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET[0].WAY));
     return (p_reg->SET[set].WAY[way] & CACHEINFO_SET_WAY_TAG_Msk);
 }
 
-__STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type * p_reg,
-                                                   uint32_t             set,
-                                                   uint8_t              way)
+__STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type const * p_reg,
+                                                   uint32_t                   set,
+                                                   uint8_t                    way)
 {
     NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
     NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET[0].WAY));
     return (bool)(p_reg->SET[set].WAY[way] & CACHEINFO_SET_WAY_V_Msk);
 }
 
-__STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type * p_reg, uint32_t set)
+__STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, uint32_t set)
 {
     NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
     return ((p_reg->SET[set].WAY[0] & CACHEINFO_SET_WAY_MRU_Msk) >> CACHEINFO_SET_WAY_MRU_Pos);
