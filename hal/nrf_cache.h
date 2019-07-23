@@ -13,7 +13,7 @@ extern "C" {
  * @defgroup nrf_cache_hal CACHE HAL
  * @{
  * @ingroup nrf_cache
- * @brief   Hardware access layer for managing the CACHE peripheral.
+ * @brief   The hardware access layer for managing the CACHE peripheral.
  */
 
 /** @brief Cache regions. */
@@ -24,35 +24,35 @@ typedef enum
 } nrf_cache_region_t;
 
 /**
- * @brief Function for enabling CACHE.
+ * @brief Function for enabling the CACHE peripheral.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_cache_enable(NRF_CACHE_Type * p_reg);
 
 /**
- * @brief Function for disabling CACHE.
+ * @brief Function for disabling the CACHE peripheral.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_cache_disable(NRF_CACHE_Type * p_reg);
 
 /**
- * @brief Function for invalidating cache content.
+ * @brief Function for invalidating the cache content.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_cache_invalidate(NRF_CACHE_Type * p_reg);
 
 /**
- * @brief Function for erasing cache content.
+ * @brief Function for erasing the cache content.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_cache_erase(NRF_CACHE_Type * p_reg);
 
 /**
- * @brief Function for checking the status of the cache erase.
+ * @brief Function for checking the status of @ref nrf_cache_erase().
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -85,8 +85,10 @@ NRF_STATIC_INLINE void nrf_cache_profiling_set(NRF_CACHE_Type * p_reg, bool enab
 NRF_STATIC_INLINE void nrf_cache_profiling_counters_clear(NRF_CACHE_Type * p_reg);
 
 /**
- * @brief Function for getting the number of instruction fetch cache hits.
+ * @brief Function for getting the number of cache hits for instruction fetch from the specified
+ *        cache region.
  *
+ * @note Separate counters are used for flash region and XIP region.
  * @note Cache profiling must be enabled first. See @ref nrf_cache_profiling_set.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -98,8 +100,10 @@ NRF_STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type 
                                                                  nrf_cache_region_t     region);
 
 /**
- * @brief Function for getting the number of instruction fetch cache misses.
+ * @brief Function for getting the number of cache misses for instruction fetch from the specified
+ *        cache region.
  *
+ * @note Separate counters are used for flash region and XIP region.
  * @note Cache profiling must be enabled first. See @ref nrf_cache_profiling_set.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -111,8 +115,10 @@ NRF_STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type
                                                                   nrf_cache_region_t     region);
 
 /**
- * @brief Function for getting the number of data fetch cache hits.
+ * @brief Function for getting the number of cache hits for data fetch from the specified
+ *        cache region.
  *
+ * @note Separate counters are used for flash region and XIP region.
  * @note Cache profiling must be enabled first. See @ref nrf_cache_profiling_set.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -124,8 +130,10 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type const *
                                                           nrf_cache_region_t     region);
 
 /**
- * @brief Function for getting the number of data fetch cache misses.
+ * @brief Function for getting the number of cache misses for data fetch from the specified
+ *        cache region.
  *
+ * @note Separate counters are used for flash region and XIP region.
  * @note Cache profiling must be enabled first. See @ref nrf_cache_profiling_set.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -139,15 +147,15 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type const 
 /**
  * @brief Function for setting the cache RAM mode.
  *
- * When configured in RAM mode, the accesses to internal or external flash will not be cached.
- * In this mode, the cache data contents can be used as read/write RAM.
+ * When configured in the RAM mode, the accesses to internal or external flash will not be cached.
+ * In this mode, the cache data contents can be used as the read/write RAM.
  * Only the data content of the cache is available as RAM.
  *
- * @note Enabling the RAM mode causes the RAM to be cleared.
- *       Disabling the RAM to Cache mode causes the cache to be invalidated.
+ * @note -Enabling the RAM mode causes the RAM to be cleared.
+ * @note -Disabling the RAM mode causes the cache to be invalidated.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable True if cache RAM mode is to be enabled.
+ * @param[in] enable True if the cache RAM mode is to be enabled.
  *                   False if otherwise.
  */
 NRF_STATIC_INLINE void nrf_cache_ram_mode_set(NRF_CACHE_Type * p_reg, bool enable);
@@ -155,9 +163,9 @@ NRF_STATIC_INLINE void nrf_cache_ram_mode_set(NRF_CACHE_Type * p_reg, bool enabl
 /**
  * @brief Function for blocking the cache content access.
  *
- * Cache content access can only be unlocked by a reset.
+ * To unlock the cache content access, a reset has to be performed.
  *
- * @note Blockade is ignored in RAM mode.
+ * @note Blocking is ignored in the RAM mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
@@ -166,10 +174,11 @@ NRF_STATIC_INLINE void nrf_cache_read_lock_enable(NRF_CACHE_Type * p_reg);
 /**
  * @brief Function for blocking the cache content updates.
  *
- * Update lock prevents updating of cache content on cache misses,
- * but will continue to lookup instruction/data fetches in content already present in the cache.
+ * Blocking of updates prevents updating of cache content on cache misses,
+ * but the peripheral will continue to check for instruction/data fetches
+ * in the content already present in the cache.
  *
- * @note Blockade is ignored in RAM mode.
+ * @note Blocking is ignored in the RAM mode.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] enable True if cache content update lock is to be enabled.
@@ -178,20 +187,16 @@ NRF_STATIC_INLINE void nrf_cache_read_lock_enable(NRF_CACHE_Type * p_reg);
 NRF_STATIC_INLINE void nrf_cache_update_lock_set(NRF_CACHE_Type * p_reg, bool enable);
 
 /**
- * @brief Function for getting the cache data content.
+ * @brief Function for getting the cache data word.
  *
- * Cache data is organized into evenly-sized chunks called sets.
- * Each set consists of two ways and a way contains 128-bit data.
- * The 128-bit data is available as 4x32-bit words in sequential order.
- *
- * @note When operating in RAM mode, the cache data is accessible as general purpose RAM.
+ * @note When operating in the RAM mode, the cache data is accessible as a general purpose RAM.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] set   Set containing the data to get.
- * @param[in] way   Way containing the data to get.
- * @param[in] word  Data word to get.
+ * @param[in] set   Set that contains the data to get.
+ * @param[in] way   Way that contains the data to get.
+ * @param[in] word  Data word index to get.
  *
- * @return Data word.
+ * @return 32-bit data word.
  */
 NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
                                               uint32_t                   set,
@@ -201,11 +206,11 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
 /**
  * @brief Function for getting the tag associated with the specified set and way.
  *
- * The tag is used to check if an entry in the cache matches the address being fetched.
+ * The tag is used to check if an entry in the cache matches the address that is being fetched.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] set   Set containing the tag to get.
- * @param[in] way   Way containing the tag to get.
+ * @param[in] set   Set that contains the tag to get.
+ * @param[in] way   Way that contains the tag to get.
  *
  * @return Tag value.
  */
@@ -217,8 +222,8 @@ NRF_STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
  * @brief Function for checking the validity of a cache line associated with the specified set and way.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] set   Set containing the cache line to check.
- * @param[in] way   Way containing the cache line to check.
+ * @param[in] set   Set that contains the cache line to check.
+ * @param[in] way   Way that contains the cache line to check.
  *
  * @retval true  Cache line is valid.
  * @retval false Cache line is invalid.
