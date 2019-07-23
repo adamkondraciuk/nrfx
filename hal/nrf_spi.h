@@ -287,7 +287,7 @@ NRF_STATIC_INLINE uint8_t nrf_spi_rxd_get(NRF_SPI_Type * p_reg)
 NRF_STATIC_INLINE void nrf_spi_frequency_set(NRF_SPI_Type *      p_reg,
                                              nrf_spi_frequency_t frequency)
 {
-    p_reg->FREQUENCY = frequency;
+    p_reg->FREQUENCY = (uint32_t)frequency;
 }
 
 NRF_STATIC_INLINE void nrf_spi_configure(NRF_SPI_Type *      p_reg,
