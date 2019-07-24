@@ -27,7 +27,6 @@
 #define NRF_MUTEX        NRF_MUTEX_S
 #define NRF_NFCT         NRF_NFCT_S
 #define NRF_NVMC         NRF_NVMC_S
-#define NRF_PDM          NRF_PDM0_S
 #define NRF_POWER        NRF_POWER_S
 #define NRF_PWM0         NRF_PWM0_S
 #define NRF_PWM1         NRF_PWM1_S
@@ -69,7 +68,7 @@
 #define NRF_SPU        NRF_SPU_S
 #define NRF_UICR       NRF_UICR_S
 
-/* Fixups for GPIOTE/WDT HAL and driver. */
+/* Fixups for GPIOTE/WDT/PDM HAL and driver. */
 #define NRF_GPIOTE        NRF_GPIOTE0_S
 #define GPIOTE_IRQn       GPIOTE0_IRQn
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
@@ -77,6 +76,10 @@
 #define NRF_WDT        NRF_WDT0_S
 #define WDT_IRQn       WDT0_IRQn
 #define WDT_IRQHandler WDT0_IRQHandler
+
+#define NRF_PDM        NRF_PDM0_S
+#define PDM_IRQn       PDM0_IRQn
+#define PDM_IRQHandler PDM0_IRQHandler
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
