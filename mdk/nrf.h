@@ -97,10 +97,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52810_name_change.h"
     #elif defined (NRF52811_XXAA)
         #include "nrf52811.h"
-        #include "nrf52811_bitfields.h"  
-        #include "nrf51_to_nrf52.h"
-        #include "nrf52_to_nrf52810.h"   
-        #include "nrf52810_to_nrf52811.h"     
+        #include "nrf52811_bitfields.h"
+        #include "nrf51_to_nrf52810.h"
+        #include "nrf52_to_nrf52810.h"
+        #include "nrf52810_to_nrf52811.h"
     #elif defined (NRF52832_XXAA) || defined (NRF52832_XXAB)
         #include "nrf52.h"
         #include "nrf52_bitfields.h"
