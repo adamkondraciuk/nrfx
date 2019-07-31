@@ -20,6 +20,13 @@ extern "C" {
 #define NRF_NFCT_CRC_SIZE 2                 /**< CRC size in bytes. */
 #define NRF_NFCT_DISABLE_ALL_INT 0xFFFFFFFF /**< Value to disable all interrupts. */
 
+/**
+ * @brief This value can be used as a parameter for the @ref nrf_nfct_mod_ctrl_pin_set
+ *        function to specify that a given NFCT signal (MODULATION CONTROL)
+ *        must not be connected to a physical pin.
+ */
+#define NRF_NFCT_MOD_CTRL_PIN_NOT_CONNECTED  0xFFFFFFFF
+
 /** @brief NFCT tasks. */
 typedef enum
 {
@@ -229,6 +236,17 @@ typedef enum
     NRF_NFCT_SELRES_PROTOCOL_NFCDEP_T4AT = 3,  /**< NFC-DEP Protocol and Type 4A Tag platform). */
 } nrf_nfct_selres_protocol_t;
 
+#if defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Modulation output configuration. */
+typedef enum
+{
+    NRF_NFCT_MODULATION_CTRL_INVALID       = NFCT_MODULATIONCTRL_MODULATIONCTRL_Invalid,             /**< Invalid configuration. Defaults to the same behavior as NRF_NFCT_MODULATION_CTRL_INTERNAL. */
+    NRF_NFCT_MODULATION_CTRL_INTERNAL      = NFCT_MODULATIONCTRL_MODULATIONCTRL_Internal,            /**< Use internal modulator only. */
+    NRF_NFCT_MODULATION_CTRL_GPIO          = NFCT_MODULATIONCTRL_MODULATIONCTRL_ModToGpio,           /**< Transmit output digital modulation signal to a GPIO pin. */
+    NRF_NFCT_MODULATION_CTRL_INTERNAL_GPIO = NFCT_MODULATIONCTRL_MODULATIONCTRL_InternalAndModToGpio /**< Use internal modulator and transmit output digital modulation signal to a GPIO pin. */
+} nrf_nfct_modulation_ctrl_t;
+#endif // defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk) || defined(__NRFX_DOXYGEN__)
+
 /**
  * @brief Function for activating a specific NFCT task.
  *
@@ -329,6 +347,43 @@ NRF_STATIC_INLINE uint32_t nrf_nfct_int_enable_get(void);
  * @param[in] int_mask Interrupt mask.
  */
 NRF_STATIC_INLINE void nrf_nfct_int_disable(uint32_t int_mask);
+
+#if defined(NFCT_MODULATIONPSEL_PIN_Msk) || defined(__NRFX_DOXYGEN__)
+
+/**
+ * @brief Function for configuring the NFCT modulation control pin.
+ * 
+ * If a given signal is not needed, pass the @ref NRF_NFCT_MOD_CTRL_PIN_NOT_CONNECTED
+ * value instead of its pin number.
+ * 
+ * @param[in] mod_ctrl_pin Modulation control pin.
+ */
+NRF_STATIC_INLINE void nrf_nfct_mod_ctrl_pin_set(uint32_t mod_ctrl_pin);
+
+/**
+ * @brief Function for getting the modulation control pin.
+ * 
+ * @return Modulation control pin number.
+ */
+NRF_STATIC_INLINE uint32_t nrf_nfct_mod_ctrl_pin_get(void);
+#endif // defined(NFCT_MODULATIONPSEL_PIN_Msk) || defined(__NRFX_DOXYGEN__)
+
+#if defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the modulation output. It enables the
+ *        output to a GPIO pin which can be connected to a second external.
+ * 
+ * @param[in] mod_ctrl Modulation control field configuration.
+ */
+NRF_STATIC_INLINE void nrf_nfct_modulation_output_set(nrf_nfct_modulation_ctrl_t mod_ctrl);
+
+/**
+ * @brief Function for getting the modulation output configuration.
+ * 
+ * @return The configured modulation output.
+ */
+NRF_STATIC_INLINE nrf_nfct_modulation_ctrl_t nrf_nfct_modulation_output_get(void);
+#endif // defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for getting the NFCT error status.
@@ -761,6 +816,31 @@ NRF_STATIC_INLINE void nrf_nfct_int_disable(uint32_t int_mask)
 {
     NRF_NFCT->INTENCLR = int_mask;
 }
+
+#if defined(NFCT_MODULATIONPSEL_PIN_Msk)
+NRF_STATIC_INLINE void nrf_nfct_mod_ctrl_pin_set(uint32_t mod_ctrl_pin)
+{
+    NFC_NFCT->MODULATIONPSEL = mod_ctrl_pin;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_nfct_mod_ctrl_pin_get(void)
+{
+    return NFC_NFCT->MODULATIONPSEL;
+}
+#endif // (NFCT_MODULATIONPSEL_PIN_Msk)
+
+#if defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk)
+NRF_STATIC_INLINE void nrf_nfct_modulation_output_set(nrf_nfct_modulation_ctrl_t mod_ctrl)
+{
+    NRF_NFCT->MODULATIONCTRL = (uint32_t)mod_ctrl;
+}
+
+NRF_STATIC_INLINE nrf_nfct_modulation_ctrl_t nrf_nfct_modulation_output_get(void)
+{
+    return (nrf_nfct_modulation_ctrl_t)(NRF_NFCT->MODULATIONCTRL &
+                                        NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk);
+}
+#endif // defined(NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk)
 
 NRF_STATIC_INLINE uint32_t nrf_nfct_error_status_get(void)
 {
