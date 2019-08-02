@@ -335,7 +335,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
     NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET));
     NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET[0].WAY));
 
-    volatile CACHEDATA_SET_WAY_Type * reg = &p_reg->SET[set].WAY[way];
+    volatile CACHEDATA_SET_WAY_Type const * reg = &p_reg->SET[set].WAY[way];
     switch (word)
     {
         case 0: return reg->DATA0;
