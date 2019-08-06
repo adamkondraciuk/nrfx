@@ -68,7 +68,7 @@ extern "C" {
 // CCM_AAR_IRQn
 
 // WDT_IRQn
-#define nrfx_wdt_irq_handler        WDT_IRQHandler
+#define nrfx_wdt_0_irq_handler      WDT_IRQHandler
 
 // RTC1_IRQn
 #define nrfx_rtc_1_irq_handler      RTC1_IRQHandler

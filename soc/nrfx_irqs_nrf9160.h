@@ -79,7 +79,7 @@ extern "C" {
 #define nrfx_rtc_1_irq_handler      RTC1_IRQHandler
 
 // WDT_IRQn
-#define nrfx_wdt_irq_handler        WDT_IRQHandler
+#define nrfx_wdt_0_irq_handler      WDT_IRQHandler
 
 // EGU0_IRQn
 #define nrfx_swi_0_irq_handler      EGU0_IRQHandler

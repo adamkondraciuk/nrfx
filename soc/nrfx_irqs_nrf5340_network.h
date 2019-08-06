@@ -19,7 +19,7 @@ extern "C" {
 #define nrfx_gpiote_irq_handler     GPIOTE_IRQHandler
 
 // WDT_IRQn
-#define nrfx_wdt_irq_handler        WDT_IRQHandler
+#define nrfx_wdt_0_irq_handler      WDT_IRQHandler
 
 // TIMER0_IRQn
 #define nrfx_timer_0_irq_handler    TIMER0_IRQHandler
