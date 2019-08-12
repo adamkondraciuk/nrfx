@@ -83,8 +83,11 @@ typedef enum
 /** @brief TWIM error source. */
 typedef enum
 {
-    NRF_TWIM_ERROR_ADDRESS_NACK = TWIM_ERRORSRC_ANACK_Msk, ///< NACK received after sending the address.
-    NRF_TWIM_ERROR_DATA_NACK    = TWIM_ERRORSRC_DNACK_Msk  ///< NACK received after sending a data byte.
+    NRF_TWIM_ERROR_ADDRESS_NACK = TWIM_ERRORSRC_ANACK_Msk,  ///< NACK received after sending the address.
+    NRF_TWIM_ERROR_DATA_NACK    = TWIM_ERRORSRC_DNACK_Msk,  ///< NACK received after sending a data byte.
+    NRF_TWIM_ERROR_OVERRUN      = TWIM_ERRORSRC_OVERRUN_Msk ///< Overrun error.
+                                                            /**< A new byte was received before the previous byte was
+                                                             *   handled by peripheral. (previous data is lost). */
 } nrf_twim_error_t;
 
 
