@@ -78,7 +78,8 @@ typedef enum
 {
     NRFX_TWI_EVT_DONE,         ///< Transfer completed event.
     NRFX_TWI_EVT_ADDRESS_NACK, ///< Error event: NACK received after sending the address.
-    NRFX_TWI_EVT_DATA_NACK     ///< Error event: NACK received after sending a data byte.
+    NRFX_TWI_EVT_DATA_NACK,    ///< Error event: NACK received after sending a data byte.
+    NRFX_TWI_EVT_OVERRUN       ///< Error event: The unread data is replaced by new data.
 } nrfx_twi_evt_type_t;
 
 /** @brief TWI master driver transfer types. */
