@@ -69,7 +69,7 @@ typedef enum
                                   TWIM_INTENSET_RXSTARTED_Msk |
                                   TWIM_INTENSET_TXSTARTED_Msk |
                                   TWIM_INTENSET_LASTRX_Msk    |
-                                  TWIM_INTENSET_LASTTX_Msk     ///< Interrupt on LASTTX event.
+                                  TWIM_INTENSET_LASTTX_Msk     ///< All TWIM interrupts.
 } nrf_twim_int_mask_t;
 
 /** @brief TWIM master clock frequency. */
