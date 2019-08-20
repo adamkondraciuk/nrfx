@@ -23,7 +23,28 @@ extern "C" {
  */
 #define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
-#if defined(SPIM_DCXCNT_DCXCNT_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Macro for checking if the hardware chip select function is available. */
+#define NRF_SPIM_HW_CSN_PRESENT                        \
+    (NRFX_CHECK(SPIM0_FEATURE_HARDWARE_CSN_PRESENT) || \
+     NRFX_CHECK(SPIM1_FEATURE_HARDWARE_CSN_PRESENT) || \
+     NRFX_CHECK(SPIM2_FEATURE_HARDWARE_CSN_PRESENT) || \
+     NRFX_CHECK(SPIM3_FEATURE_HARDWARE_CSN_PRESENT))
+
+/** @brief Macro for checking if the DCX pin control is available. */
+#define NRF_SPIM_DCX_PRESENT                  \
+    (NRFX_CHECK(SPIM0_FEATURE_DCX_PRESENT) || \
+     NRFX_CHECK(SPIM1_FEATURE_DCX_PRESENT) || \
+     NRFX_CHECK(SPIM2_FEATURE_DCX_PRESENT) || \
+     NRFX_CHECK(SPIM3_FEATURE_DCX_PRESENT))
+
+/** @brief Macro for checking if the RXDELAY function is available. */
+#define NRF_SPIM_RXDELAY_PRESENT                  \
+    (NRFX_CHECK(SPIM0_FEATURE_RXDELAY_PRESENT) || \
+     NRFX_CHECK(SPIM1_FEATURE_RXDELAY_PRESENT) || \
+     NRFX_CHECK(SPIM2_FEATURE_RXDELAY_PRESENT) || \
+     NRFX_CHECK(SPIM3_FEATURE_RXDELAY_PRESENT))
+
+#if defined(NRF_SPIM_DCX_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief This value specified in the DCX line configuration causes this line
  *        to be set low during whole transmission (all transmitted bytes are
@@ -33,14 +54,6 @@ extern "C" {
  */
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
 #endif
-
-/** @brief Macro for checking if the hardware chip select function is available. */
-#define NRF_SPIM_HW_CSN_PRESENT                        \
-    (NRFX_CHECK(SPIM0_FEATURE_HARDWARE_CSN_PRESENT) || \
-     NRFX_CHECK(SPIM1_FEATURE_HARDWARE_CSN_PRESENT) || \
-     NRFX_CHECK(SPIM2_FEATURE_HARDWARE_CSN_PRESENT) || \
-     NRFX_CHECK(SPIM3_FEATURE_HARDWARE_CSN_PRESENT))
-
 
 /** @brief SPIM tasks. */
 typedef enum
@@ -336,7 +349,7 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               uint32_t           duration);
 #endif // (NRF_SPIM_HW_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if defined(SPIM_PSELDCX_CONNECT_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_DCX_PRESENT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for configuring the SPIM DCX pin.
  *
@@ -362,9 +375,9 @@ NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
  */
 NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        count);
-#endif // defined(SPIM_PSELDCX_CONNECT_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_DCX_PRESENT || defined(__NRFX_DOXYGEN__)
 
-#if defined(SPIM_IFTIMING_RXDELAY_RXDELAY_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_RXDELAY_PRESENT || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for configuring the extended SPIM interface.
  *
@@ -374,7 +387,7 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
  */
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
                                              uint32_t        rxdelay);
-#endif // defined(SPIM_IFTIMING_RXDELAY_RXDELAY_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_RXDELAY_PRESENT || defined(__NRFX_DOXYGEN__)
 
 #if defined(SPIM_STALLSTAT_RX_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -614,7 +627,7 @@ NRF_STATIC_INLINE void nrf_spim_pins_set(NRF_SPIM_Type * p_reg,
     p_reg->PSEL.MISO = miso_pin;
 }
 
-#if (NRF_SPIM_HW_CSN_PRESENT)
+#if NRF_SPIM_HW_CSN_PRESENT
 NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               uint32_t           pin,
                                               nrf_spim_csn_pol_t polarity,
@@ -624,9 +637,9 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
     p_reg->CSNPOL = polarity;
     p_reg->IFTIMING.CSNDUR = duration;
 }
-#endif // defined(NRF_SPIM_HW_CSN_PRESENT)
+#endif // NRF_SPIM_HW_CSN_PRESENT
 
-#if defined(SPIM_PSELDCX_CONNECT_Msk)
+#if NRF_SPIM_DCX_PRESENT
 NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        dcx_pin)
 {
@@ -638,15 +651,15 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
 {
     p_reg->DCXCNT = dcx_cnt;
 }
-#endif // defined(SPIM_PSELDCX_CONNECT_Msk)
+#endif // NRF_SPIM_DCX_PRESENT
 
-#if defined(SPIM_IFTIMING_RXDELAY_RXDELAY_Msk)
+#if NRF_SPIM_RXDELAY_PRESENT
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
                                              uint32_t        rxdelay)
 {
     p_reg->IFTIMING.RXDELAY = rxdelay;
 }
-#endif // defined(SPIM_IFTIMING_RXDELAY_RXDELAY_Msk)
+#endif // NRF_SPIM_RXDELAY_PRESENT
 
 #if defined(SPIM_STALLSTAT_RX_Msk)
 NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg)
