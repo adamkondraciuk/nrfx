@@ -84,9 +84,7 @@ typedef struct
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE Driver is already initialized.
  */
-nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler,
-                         uint8_t            irq_priority,
-                         void *             p_context);
+nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler, uint8_t irq_priority, void * p_context);
 
 /**
  * @brief Function for loading configuration directly into IPC peripheral.
@@ -163,17 +161,15 @@ void nrfx_ipc_receive_events_set_disable(uint32_t events_bitmask);
  * @param event_index   Index of the event to be configured.
  * @param channel_index Index of the channel to which event will be connected.
  */
-void nrfx_ipc_receive_event_channel_assign(uint8_t event_index,
-                                           uint8_t channel_index);
+void nrfx_ipc_receive_event_channel_assign(uint8_t event_index, uint8_t channel_index);
 
 /**
  * @brief Function for assigning signal to the IPC channel.
  *
- * @param signal_index  Index of the signal to be configured.
+ * @param send_index    Index of the signal to be configured.
  * @param channel_index Index of the instance of channel.
  */
-void nrfx_ipc_send_task_channel_assign(uint8_t send_task_index,
-                                       uint8_t channel_index);
+void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index);
 
 /**
  * @brief nrfx_ipc_event_channels_config
@@ -181,17 +177,15 @@ void nrfx_ipc_send_task_channel_assign(uint8_t send_task_index,
  * @param event_index      Index of the event to be configured.
  * @param channels_bitmask Bitmask with channels to which event will be connected.
  */
-void nrfx_ipc_receive_event_channels_config(uint8_t  event_index,
-                                            uint32_t channels_bitmask);
+void nrfx_ipc_receive_event_channels_config(uint8_t event_index, uint32_t channels_bitmask);
 
 /**
  * @brief Function for assigning signal to the IPC channels.
  *
- * @param signal_index     Index of the signal to be configured.
+ * @param send_index       Index of the signal to be configured.
  * @param channels_bitmask Bitmask with channels to which signal will be connected.
  */
-void nrfx_ipc_send_task_channels_config(uint8_t  send_task_index,
-                                        uint32_t channels_bitmask);
+void nrfx_ipc_send_task_channels_config(uint8_t send_index, uint32_t channels_bitmask);
 
 /** @} */
 

@@ -16,9 +16,7 @@ typedef struct
 
 static ipc_control_block_t m_ipc_cb;
 
-nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler,
-                         uint8_t            irq_priority,
-                         void *             p_context)
+nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler, uint8_t irq_priority, void * p_context)
 {
     NRFX_ASSERT(handler);
     if (m_ipc_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -111,36 +109,30 @@ void nrfx_ipc_receive_events_set_disable(uint32_t events_bitmask)
     nrf_ipc_int_disable(NRF_IPC, events_bitmask);
 }
 
-void nrfx_ipc_receive_event_channel_assign(uint8_t event_index,
-                                      uint8_t channel_index)
+void nrfx_ipc_receive_event_channel_assign(uint8_t event_index, uint8_t channel_index)
 {
     nrf_ipc_receive_channel_config(NRF_IPC,
                                    nrf_ipc_receive_event_get(event_index),
                                    (nrf_ipc_channel_t)(1 << channel_index));
 }
 
-void nrfx_ipc_send_task_channel_assign(uint8_t send_task_index,
-                                       uint8_t channel_index)
+void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index)
 {
     nrf_ipc_send_channel_config(NRF_IPC,
-                                nrf_ipc_send_task_get(send_task_index),
+                                nrf_ipc_send_task_get(send_index),
                                 (nrf_ipc_channel_t)(1 << channel_index));
 }
 
-void nrfx_ipc_receive_event_channels_config(uint8_t  event_index,
-                                            uint32_t channels_bitmask)
+void nrfx_ipc_receive_event_channels_config(uint8_t  event_index, uint32_t channels_bitmask)
 {
     nrf_ipc_receive_config(NRF_IPC,
                            nrf_ipc_receive_event_get(event_index),
                            channels_bitmask);
 }
 
-void nrfx_ipc_send_task_channels_config(uint8_t  send_task_index,
-                                        uint32_t channels_bitmask)
+void nrfx_ipc_send_task_channels_config(uint8_t  send_index, uint32_t channels_bitmask)
 {
-    nrf_ipc_send_config(NRF_IPC,
-                        nrf_ipc_send_task_get(send_task_index),
-                        channels_bitmask);
+    nrf_ipc_send_config(NRF_IPC, nrf_ipc_send_task_get(send_index), channels_bitmask);
 }
 
 void nrfx_ipc_irq_handler(void)
