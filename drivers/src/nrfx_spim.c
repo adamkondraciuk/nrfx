@@ -9,9 +9,6 @@
 #error "No enabled SPIM instances. Check <nrfx_config.h>."
 #endif
 
-#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) && !NRFX_CHECK(NRFX_SPIM3_ENABLED)
-#error "Extended options are available only in SPIM3 on the nRF52840 SoC."
-#endif
 
 #include <nrfx_spim.h>
 #include "prs/nrfx_prs.h"
@@ -20,32 +17,79 @@
 #define NRFX_LOG_MODULE SPIM
 #include <nrfx_log.h>
 
+#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) && \
+    ((!NRF_SPIM_HW_CSN_PRESENT) || !(NRF_SPIM_DCX_PRESENT) || !(NRF_SPIM_RXDELAY_PRESENT))
+#error "Extended options are not available in the SoC currently in use."
+#endif
+
 #define SPIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len) \
     (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
      NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, rx_len, tx_len))
 
+#define SPIMX_HW_CSN_PRESENT_VALIDATE(peripheral, drv_inst_idx)         \
+    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
+     NRFX_CONCAT_2(peripheral, _FEATURE_HARDWARE_CSN_PRESENT))
+
+#define SPIMX_DCX_PRESENT_VALIDATE(peripheral, drv_inst_idx)            \
+    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
+    NRFX_CONCAT_2(peripheral, _FEATURE_DCX_PRESENT))
+
+#define SPIMX_SUPPORTED_FREQ_VALIDATE(peripheral, drv_inst_idx, freq)                            \
+    (                                                                                            \
+    ((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) &&                           \
+    (                                                                                            \
+        (((freq) != NRF_SPIM_FREQ_16M) && ((freq) != NRF_SPIM_FREQ_32M)) ||                      \
+        (((freq) == NRF_SPIM_FREQ_16M) && ((NRFX_CONCAT_2(peripheral, _MAX_DATARATE) >= 16))) || \
+        (((freq) == NRF_SPIM_FREQ_32M) && ((NRFX_CONCAT_2(peripheral, _MAX_DATARATE) >= 32)))    \
+    )                                                                                            \
+    )
+
 #if NRFX_CHECK(NRFX_SPIM0_ENABLED)
-#define SPIM0_LENGTH_VALIDATE(...)  SPIMX_LENGTH_VALIDATE(SPIM0, __VA_ARGS__)
+#define SPIM0_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM0, __VA_ARGS__)
+#define SPIM0_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM0, __VA_ARGS__)
+#define SPIM0_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM0, __VA_ARGS__)
+#define SPIM0_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM0, __VA_ARGS__)
 #else
-#define SPIM0_LENGTH_VALIDATE(...)  0
+#define SPIM0_LENGTH_VALIDATE(...)          0
+#define SPIM0_HW_CSN_PRESENT_VALIDATE(...)  0
+#define SPIM0_DCX_PRESENT_VALIDATE(...)     0
+#define SPIM0_SUPPORTED_FREQ_VALIDATE(...)  0
 #endif
 
 #if NRFX_CHECK(NRFX_SPIM1_ENABLED)
-#define SPIM1_LENGTH_VALIDATE(...)  SPIMX_LENGTH_VALIDATE(SPIM1, __VA_ARGS__)
+#define SPIM1_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM1, __VA_ARGS__)
+#define SPIM1_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM1, __VA_ARGS__)
+#define SPIM1_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM1, __VA_ARGS__)
+#define SPIM1_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM1, __VA_ARGS__)
 #else
-#define SPIM1_LENGTH_VALIDATE(...)  0
+#define SPIM1_LENGTH_VALIDATE(...)          0
+#define SPIM1_HW_CSN_PRESENT_VALIDATE(...)  0
+#define SPIM1_DCX_PRESENT_VALIDATE(...)     0
+#define SPIM1_SUPPORTED_FREQ_VALIDATE(...)  0
 #endif
 
 #if NRFX_CHECK(NRFX_SPIM2_ENABLED)
-#define SPIM2_LENGTH_VALIDATE(...)  SPIMX_LENGTH_VALIDATE(SPIM2, __VA_ARGS__)
+#define SPIM2_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM2, __VA_ARGS__)
+#define SPIM2_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM2, __VA_ARGS__)
+#define SPIM2_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM2, __VA_ARGS__)
+#define SPIM2_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM2, __VA_ARGS__)
 #else
-#define SPIM2_LENGTH_VALIDATE(...)  0
+#define SPIM2_LENGTH_VALIDATE(...)          0
+#define SPIM2_HW_CSN_PRESENT_VALIDATE(...)  0
+#define SPIM2_DCX_PRESENT_VALIDATE(...)     0
+#define SPIM2_SUPPORTED_FREQ_VALIDATE(...)  0
 #endif
 
 #if NRFX_CHECK(NRFX_SPIM3_ENABLED)
-#define SPIM3_LENGTH_VALIDATE(...)  SPIMX_LENGTH_VALIDATE(SPIM3, __VA_ARGS__)
+#define SPIM3_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM3, __VA_ARGS__)
+#define SPIM3_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM3, __VA_ARGS__)
+#define SPIM3_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM3, __VA_ARGS__)
+#define SPIM3_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM3, __VA_ARGS__)
 #else
-#define SPIM3_LENGTH_VALIDATE(...)  0
+#define SPIM3_LENGTH_VALIDATE(...)          0
+#define SPIM3_HW_CSN_PRESENT_VALIDATE(...)  0
+#define SPIM3_DCX_PRESENT_VALIDATE(...)     0
+#define SPIM3_SUPPORTED_FREQ_VALIDATE(...)  0
 #endif
 
 #define SPIM_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)  \
@@ -54,10 +98,29 @@
      SPIM2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
      SPIM3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
 
+#define SPIM_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)  \
+    (SPIM0_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM1_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM2_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM3_HW_CSN_PRESENT_VALIDATE(drv_inst_idx))
+
+#define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx)  \
+    (SPIM0_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM1_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM2_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
+     SPIM3_DCX_PRESENT_VALIDATE(drv_inst_idx))
+
+#define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)  \
+    (SPIM0_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
+     SPIM1_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
+     SPIM2_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
+     SPIM3_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq))
+
 #if defined(NRF52840_XXAA) && (NRFX_CHECK(NRFX_SPIM3_ENABLED))
 // Enable workaround for nRF52840 anomaly 195 (SPIM3 continues to draw current after disable).
 #define USE_WORKAROUND_FOR_ANOMALY_195
 #endif
+
 
 // Control block - driver instance local data.
 typedef struct
@@ -146,13 +209,14 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     }
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-    // Currently, only SPIM3 in nRF52840 supports the extended features.
-    // Other instances must be checked.
-    if ((p_instance->drv_inst_idx != NRFX_SPIM3_INST_IDX) &&
-        ((p_config->dcx_pin   != NRFX_SPIM_PIN_NOT_USED) ||
-         (p_config->frequency == NRF_SPIM_FREQ_16M)      ||
-         (p_config->frequency == NRF_SPIM_FREQ_32M)      ||
-         (p_config->use_hw_ss)))
+    // Check if SPIM instance supports the extended features.
+    if (
+        (!SPIM_SUPPORTED_FREQ_VALIDATE(p_instance->drv_inst_idx, p_config->frequency)) ||
+        ((p_config->use_hw_ss) &&
+         !SPIM_HW_CSN_PRESENT_VALIDATE(p_instance->drv_inst_idx)) ||
+        ((p_config->dcx_pin != NRFX_SPIM_PIN_NOT_USED) &&
+         !SPIM_DCX_PRESENT_VALIDATE(p_instance->drv_inst_idx))
+        )
     {
         err_code = NRFX_ERROR_NOT_SUPPORTED;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
