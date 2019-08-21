@@ -430,7 +430,7 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
  * @param pin_number Pin_number.
  * @param mcu        MCU to control the pin.
  */
-__STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu);
+NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu);
 #endif
 
 #ifndef NRF_DECLARE_ONLY
