@@ -51,7 +51,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(__APPLE__)
     /* Do not include nrf specific files when building for PC host */
 #else
-    
+
     #if defined(NRF51)
         #include "nrf51_peripherals.h"
 

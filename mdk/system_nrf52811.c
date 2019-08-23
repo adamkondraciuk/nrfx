@@ -60,13 +60,13 @@ void SystemCoreClockUpdate(void)
 void SystemInit(void)
 {
     /* Workaround for Errata 31 "CLOCK: Calibration values are not correctly loaded from FICR at reset" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib */
+       for your device located at https://infocenter.nordicsemi.com/index.jsp */
     if (errata_31()){
         *(volatile uint32_t *)0x4000053C = ((*(volatile uint32_t *)0x10000244) & 0x0000E000) >> 13;
     }
 
     /* Workaround for Errata 36 "CLOCK: Some registers are not reset when expected" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
     if (errata_36()){
         NRF_CLOCK->EVENTS_DONE = 0;
         NRF_CLOCK->EVENTS_CTTO = 0;
@@ -74,7 +74,7 @@ void SystemInit(void)
     }
     
     /* Workaround for Errata 66 "TEMP: Linearity specification not met with default settings" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
     if (errata_66()){
         NRF_TEMP->A0 = NRF_FICR->TEMP.A0;
         NRF_TEMP->A1 = NRF_FICR->TEMP.A1;
@@ -98,20 +98,20 @@ void SystemInit(void)
     #ifdef DEVELOP_IN_NRF52840
 
         /* Workaround for Errata 103 "CCM: Wrong reset value of CCM MAXPACKETSIZE" found at the Errata document
-           for your device located at https://www.nordicsemi.com/DocLib  */
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
         if (errata_103()){
             NRF_CCM->MAXPACKETSIZE = 0xFBul;
         }
 
         /* Workaround for Errata 115 "RAM: RAM content cannot be trusted upon waking up from System ON Idle or System OFF mode" found at the Errata document
-           for your device located at https://www.nordicsemi.com/DocLib  */
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
         if (errata_115()){
             *(volatile uint32_t *)0x40000EE4 = (*(volatile uint32_t *)0x40000EE4 & 0xFFFFFFF0) | (*(uint32_t *)0x10000258 & 0x0000000F);
         }
     #endif
     
     /* Workaround for Errata 136 "System: Bits in RESETREAS are set when they should not be" found at the Errata document
-       for your device located at https://www.nordicsemi.com/DocLib  */
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
     if (errata_136()){
         if (NRF_POWER->RESETREAS & POWER_RESETREAS_RESETPIN_Msk){
             NRF_POWER->RESETREAS =  ~POWER_RESETREAS_RESETPIN_Msk;

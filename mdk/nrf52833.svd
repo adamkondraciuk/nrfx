@@ -261,6 +261,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                     <value>0x41414141</value>
                   </enumeratedValue>
                   <enumeratedValue>
+                    <name>AAAB</name>
+                    <description>AAAB</description>
+                    <value>0x41414142</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
                     <name>Unspecified</name>
                     <description>Unspecified</description>
                     <value>0xFFFFFFFF</value>
@@ -441,7 +446,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A0</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF320</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -456,7 +461,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A1</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF343</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -471,7 +476,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A2</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF35D</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -486,7 +491,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A3</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF400</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -501,7 +506,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A4</description>
             <addressOffset>0x010</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF452</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -516,7 +521,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Slope definition A5</description>
             <addressOffset>0x014</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFF37B</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>A</name>
@@ -531,7 +536,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B0</description>
             <addressOffset>0x018</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF3FCC</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -546,7 +551,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B1</description>
             <addressOffset>0x01C</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF3F98</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -561,7 +566,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B2</description>
             <addressOffset>0x020</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF3F98</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -576,7 +581,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B3</description>
             <addressOffset>0x024</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF0012</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -591,7 +596,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B4</description>
             <addressOffset>0x028</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF004D</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -606,7 +611,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Y-intercept B5</description>
             <addressOffset>0x02C</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFF3E10</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>B</name>
@@ -621,7 +626,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T0</description>
             <addressOffset>0x030</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFFE2</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -636,7 +641,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T1</description>
             <addressOffset>0x034</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFF00</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -651,7 +656,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T2</description>
             <addressOffset>0x038</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFF14</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -666,7 +671,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T3</description>
             <addressOffset>0x03C</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFF19</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -681,7 +686,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <description>Segment end T4</description>
             <addressOffset>0x040</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFF50</resetValue>
+            <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
                 <name>T</name>
@@ -13314,12 +13319,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <enumeratedValues>
                 <enumeratedValue>
                   <name>LR125kbit</name>
-                  <description>Frame is received at 125kbps</description>
+                  <description>Frame is received at 125 kbps</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>LR500kbit</name>
-                  <description>Frame is received at 500kbps</description>
+                  <description>Frame is received at 500 kbps</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26368,6 +26373,82 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           </register>
         </cluster>
         <register>
+          <name>MODULATIONCTRL</name>
+          <description>Enables the modulation output to a GPIO pin which can be connected to a second external antenna.</description>
+          <addressOffset>0x52C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>MODULATIONCTRL</name>
+              <description>Configuration of modulation control.</description>
+              <lsb>0</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Invalid</name>
+                  <description>Invalid, defaults to same behaviour as for Internal</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Internal</name>
+                  <description>Use internal modulator only</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ModToGpio</name>
+                  <description>Output digital modulation signal to a GPIO pin.</description>
+                  <value>0x2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>InternalAndModToGpio</name>
+                  <description>Use internal modulator and output digital modulation signal to a GPIO pin.</description>
+                  <value>0x3</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>MODULATIONPSEL</name>
+          <description>Pin select for Modulation control.</description>
+          <addressOffset>0x538</addressOffset>
+          <access>read-write</access>
+          <resetValue>0xFFFFFFFF</resetValue>
+          <fields>
+            <field>
+              <name>PIN</name>
+              <description>Pin number</description>
+              <lsb>0</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>PORT</name>
+              <description>Port number</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+            </field>
+            <field>
+              <name>CONNECT</name>
+              <description>Connection</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disconnected</name>
+                  <description>Disconnect</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Connected</name>
+                  <description>Connect</description>
+                  <value>0</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>NFCID1_LAST</name>
           <description>Last NFCID1 part (4, 7 or 10 bytes ID)</description>
           <addressOffset>0x590</addressOffset>
@@ -26454,7 +26535,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>AUTOCOLRESCONFIG</name>
-          <description>Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is enabled.</description>
+          <description>Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated.</description>
           <addressOffset>0x59C</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000002</resetValue>
@@ -33059,7 +33140,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>SCRATCHPTR</name>
-              <description>Pointer to a scratch data area used for temporary storage during resolution.A space of minimum 3 bytes must be reserved.</description>
+              <description>Pointer to a scratch data area used for temporary storage during resolution. A space of minimum 3 bytes must be reserved.</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>
@@ -40357,7 +40438,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <fields>
               <field>
                 <name>SIZE</name>
-                <description>Size of flash region n in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512kB.</description>
+                <description>Size of flash region n in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512 kB.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -40456,6 +40537,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <description>Ready flag</description>
           <addressOffset>0x408</addressOffset>
           <access>read-only</access>
+          <resetValue>0x00000001</resetValue>
           <fields>
             <field>
               <name>READYNEXT</name>
@@ -40512,7 +40594,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <name>ERASEPAGE</name>
           <description>Register for erasing a page in code area</description>
           <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <fields>
             <field>
               <name>ERASEPAGE</name>
@@ -40524,14 +40606,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>ERASEPCR1</name>
-          <description>Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE.</description>
+          <description>Deprecated register - Register for erasing a page in code area, equivalent to ERASEPAGE</description>
           <addressOffset>0x508</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <alternateRegister>ERASEPAGE</alternateRegister>
           <fields>
             <field>
               <name>ERASEPCR1</name>
-              <description>Register for erasing a page in code area. Equivalent to ERASEPAGE.</description>
+              <description>Register for erasing a page in code area, equivalent to ERASEPAGE</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>
@@ -40541,7 +40623,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <name>ERASEALL</name>
           <description>Register for erasing all non-volatile user memory</description>
           <addressOffset>0x50C</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <fields>
             <field>
               <name>ERASEALL</name>
@@ -40565,13 +40647,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>ERASEPCR0</name>
-          <description>Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE.</description>
+          <description>Deprecated register - Register for erasing a page in code area, equivalent to ERASEPAGE</description>
           <addressOffset>0x510</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <fields>
             <field>
               <name>ERASEPCR0</name>
-              <description>Register for starting erase of a page in code area. Equivalent to ERASEPAGE.</description>
+              <description>Register for starting erase of a page in code area, equivalent to ERASEPAGE</description>
               <lsb>0</lsb>
               <msb>31</msb>
             </field>
@@ -40581,7 +40663,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <name>ERASEUICR</name>
           <description>Register for erasing user information configuration registers</description>
           <addressOffset>0x514</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <fields>
             <field>
               <name>ERASEUICR</name>
@@ -40607,7 +40689,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <name>ERASEPAGEPARTIAL</name>
           <description>Register for partial erase of a page in code area</description>
           <addressOffset>0x518</addressOffset>
-          <access>read-write</access>
+          <access>write-only</access>
           <fields>
             <field>
               <name>ERASEPAGEPARTIAL</name>
@@ -40634,7 +40716,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>ICACHECNF</name>
-          <description>I-code cache configuration register.</description>
+          <description>I-code cache configuration register</description>
           <addressOffset>0x540</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -40679,7 +40761,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>IHIT</name>
-          <description>I-code cache hit counter.</description>
+          <description>I-code cache hit counter</description>
           <addressOffset>0x548</addressOffset>
           <access>read-write</access>
           <fields>
@@ -40693,7 +40775,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
         </register>
         <register>
           <name>IMISS</name>
-          <description>I-code cache miss counter.</description>
+          <description>I-code cache miss counter</description>
           <addressOffset>0x54C</addressOffset>
           <access>read-write</access>
           <fields>

@@ -178,7 +178,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: AAR_SCRATCHPTR */
 /* Description: Pointer to data area used for temporary storage */
 
-/* Bits 31..0 : Pointer to a scratch data area used for temporary storage during resolution.A space of minimum 3 bytes must be reserved. */
+/* Bits 31..0 : Pointer to a scratch data area used for temporary storage during resolution. A space of minimum 3 bytes must be reserved. */
 #define AAR_SCRATCHPTR_SCRATCHPTR_Pos (0UL) /*!< Position of SCRATCHPTR field. */
 #define AAR_SCRATCHPTR_SCRATCHPTR_Msk (0xFFFFFFFFUL << AAR_SCRATCHPTR_SCRATCHPTR_Pos) /*!< Bit mask of SCRATCHPTR field. */
 
@@ -196,7 +196,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: ACL_ACL_SIZE */
 /* Description: Description cluster: Size of region to protect counting from address ACL[n].ADDR. Write '0' as no effect. */
 
-/* Bits 31..0 : Size of flash region n in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512kB. */
+/* Bits 31..0 : Size of flash region n in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512 kB. */
 #define ACL_ACL_SIZE_SIZE_Pos (0UL) /*!< Position of SIZE field. */
 #define ACL_ACL_SIZE_SIZE_Msk (0xFFFFFFFFUL << ACL_ACL_SIZE_SIZE_Pos) /*!< Bit mask of SIZE field. */
 
@@ -1534,6 +1534,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FICR_INFO_VARIANT_VARIANT_Pos (0UL) /*!< Position of VARIANT field. */
 #define FICR_INFO_VARIANT_VARIANT_Msk (0xFFFFFFFFUL << FICR_INFO_VARIANT_VARIANT_Pos) /*!< Bit mask of VARIANT field. */
 #define FICR_INFO_VARIANT_VARIANT_AAAA (0x41414141UL) /*!< AAAA */
+#define FICR_INFO_VARIANT_VARIANT_AAAB (0x41414142UL) /*!< AAAB */
 #define FICR_INFO_VARIANT_VARIANT_Unspecified (0xFFFFFFFFUL) /*!< Unspecified */
 
 /* Register: FICR_INFO_PACKAGE */
@@ -4676,6 +4677,34 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NFCT_RXD_AMOUNT_RXDATABITS_Pos (0UL) /*!< Position of RXDATABITS field. */
 #define NFCT_RXD_AMOUNT_RXDATABITS_Msk (0x7UL << NFCT_RXD_AMOUNT_RXDATABITS_Pos) /*!< Bit mask of RXDATABITS field. */
 
+/* Register: NFCT_MODULATIONCTRL */
+/* Description: Enables the modulation output to a GPIO pin which can be connected to a second external antenna. */
+
+/* Bits 1..0 : Configuration of modulation control. */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_Pos (0UL) /*!< Position of MODULATIONCTRL field. */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_Msk (0x3UL << NFCT_MODULATIONCTRL_MODULATIONCTRL_Pos) /*!< Bit mask of MODULATIONCTRL field. */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_Invalid (0x0UL) /*!< Invalid, defaults to same behaviour as for Internal */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_Internal (0x1UL) /*!< Use internal modulator only */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_ModToGpio (0x2UL) /*!< Output digital modulation signal to a GPIO pin. */
+#define NFCT_MODULATIONCTRL_MODULATIONCTRL_InternalAndModToGpio (0x3UL) /*!< Use internal modulator and output digital modulation signal to a GPIO pin. */
+
+/* Register: NFCT_MODULATIONPSEL */
+/* Description: Pin select for Modulation control. */
+
+/* Bit 31 : Connection */
+#define NFCT_MODULATIONPSEL_CONNECT_Pos (31UL) /*!< Position of CONNECT field. */
+#define NFCT_MODULATIONPSEL_CONNECT_Msk (0x1UL << NFCT_MODULATIONPSEL_CONNECT_Pos) /*!< Bit mask of CONNECT field. */
+#define NFCT_MODULATIONPSEL_CONNECT_Connected (0UL) /*!< Connect */
+#define NFCT_MODULATIONPSEL_CONNECT_Disconnected (1UL) /*!< Disconnect */
+
+/* Bit 5 : Port number */
+#define NFCT_MODULATIONPSEL_PORT_Pos (5UL) /*!< Position of PORT field. */
+#define NFCT_MODULATIONPSEL_PORT_Msk (0x1UL << NFCT_MODULATIONPSEL_PORT_Pos) /*!< Bit mask of PORT field. */
+
+/* Bits 4..0 : Pin number */
+#define NFCT_MODULATIONPSEL_PIN_Pos (0UL) /*!< Position of PIN field. */
+#define NFCT_MODULATIONPSEL_PIN_Msk (0x1FUL << NFCT_MODULATIONPSEL_PIN_Pos) /*!< Bit mask of PIN field. */
+
 /* Register: NFCT_NFCID1_LAST */
 /* Description: Last NFCID1 part (4, 7 or 10 bytes ID) */
 
@@ -4726,7 +4755,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NFCT_NFCID1_3RD_LAST_NFCID1_S_Msk (0xFFUL << NFCT_NFCID1_3RD_LAST_NFCID1_S_Pos) /*!< Bit mask of NFCID1_S field. */
 
 /* Register: NFCT_AUTOCOLRESCONFIG */
-/* Description: Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is enabled. */
+/* Description: Controls the auto collision resolution function. This setting must be done before the NFCT peripheral is activated. */
 
 /* Bit 0 : Enables/disables auto collision resolution */
 #define NFCT_AUTOCOLRESCONFIG_MODE_Pos (0UL) /*!< Position of MODE field. */
@@ -4829,9 +4858,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ERASEPAGE_ERASEPAGE_Msk (0xFFFFFFFFUL << NVMC_ERASEPAGE_ERASEPAGE_Pos) /*!< Bit mask of ERASEPAGE field. */
 
 /* Register: NVMC_ERASEPCR1 */
-/* Description: Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE. */
+/* Description: Deprecated register - Register for erasing a page in code area, equivalent to ERASEPAGE */
 
-/* Bits 31..0 : Register for erasing a page in code area. Equivalent to ERASEPAGE. */
+/* Bits 31..0 : Register for erasing a page in code area, equivalent to ERASEPAGE */
 #define NVMC_ERASEPCR1_ERASEPCR1_Pos (0UL) /*!< Position of ERASEPCR1 field. */
 #define NVMC_ERASEPCR1_ERASEPCR1_Msk (0xFFFFFFFFUL << NVMC_ERASEPCR1_ERASEPCR1_Pos) /*!< Bit mask of ERASEPCR1 field. */
 
@@ -4845,9 +4874,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ERASEALL_ERASEALL_Erase (1UL) /*!< Start chip erase */
 
 /* Register: NVMC_ERASEPCR0 */
-/* Description: Deprecated register - Register for erasing a page in code area. Equivalent to ERASEPAGE. */
+/* Description: Deprecated register - Register for erasing a page in code area, equivalent to ERASEPAGE */
 
-/* Bits 31..0 : Register for starting erase of a page in code area. Equivalent to ERASEPAGE. */
+/* Bits 31..0 : Register for starting erase of a page in code area, equivalent to ERASEPAGE */
 #define NVMC_ERASEPCR0_ERASEPCR0_Pos (0UL) /*!< Position of ERASEPCR0 field. */
 #define NVMC_ERASEPCR0_ERASEPCR0_Msk (0xFFFFFFFFUL << NVMC_ERASEPCR0_ERASEPCR0_Pos) /*!< Bit mask of ERASEPCR0 field. */
 
@@ -4875,7 +4904,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk (0x7FUL << NVMC_ERASEPAGEPARTIALCFG_DURATION_Pos) /*!< Bit mask of DURATION field. */
 
 /* Register: NVMC_ICACHECNF */
-/* Description: I-code cache configuration register. */
+/* Description: I-code cache configuration register */
 
 /* Bit 8 : Cache profiling enable */
 #define NVMC_ICACHECNF_CACHEPROFEN_Pos (8UL) /*!< Position of CACHEPROFEN field. */
@@ -4890,14 +4919,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_ICACHECNF_CACHEEN_Enabled (1UL) /*!< Enable cache */
 
 /* Register: NVMC_IHIT */
-/* Description: I-code cache hit counter. */
+/* Description: I-code cache hit counter */
 
 /* Bits 31..0 : Number of cache hits */
 #define NVMC_IHIT_HITS_Pos (0UL) /*!< Position of HITS field. */
 #define NVMC_IHIT_HITS_Msk (0xFFFFFFFFUL << NVMC_IHIT_HITS_Pos) /*!< Bit mask of HITS field. */
 
 /* Register: NVMC_IMISS */
-/* Description: I-code cache miss counter. */
+/* Description: I-code cache miss counter */
 
 /* Bits 31..0 : Number of cache misses */
 #define NVMC_IMISS_MISSES_Pos (0UL) /*!< Position of MISSES field. */
@@ -10156,8 +10185,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Bits 2..1 : Status on what rate packet is received with in Long Range */
 #define RADIO_PDUSTAT_CISTAT_Pos (1UL) /*!< Position of CISTAT field. */
 #define RADIO_PDUSTAT_CISTAT_Msk (0x3UL << RADIO_PDUSTAT_CISTAT_Pos) /*!< Bit mask of CISTAT field. */
-#define RADIO_PDUSTAT_CISTAT_LR125kbit (0UL) /*!< Frame is received at 125kbps */
-#define RADIO_PDUSTAT_CISTAT_LR500kbit (1UL) /*!< Frame is received at 500kbps */
+#define RADIO_PDUSTAT_CISTAT_LR125kbit (0UL) /*!< Frame is received at 125 kbps */
+#define RADIO_PDUSTAT_CISTAT_LR500kbit (1UL) /*!< Frame is received at 500 kbps */
 
 /* Bit 0 : Status on payload length vs. PCNF1.MAXLEN */
 #define RADIO_PDUSTAT_PDUSTAT_Pos (0UL) /*!< Position of PDUSTAT field. */

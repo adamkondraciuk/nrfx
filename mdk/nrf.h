@@ -44,8 +44,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   25 
-#define MDK_MICRO_VERSION   1 
+#define MDK_MINOR_VERSION   27 
+#define MDK_MICRO_VERSION   0 
+
+/* Define NRF51_SERIES for common use in nRF51 series devices. Only if not previously defined. */
+#if defined (NRF51422_XXAA) ||\
+    defined (NRF51422_XXAB) ||\
+    defined (NRF51422_XXAC) ||\
+    defined (NRF51801_XXAB) ||\
+    defined (NRF51802_XXAA) ||\
+    defined (NRF51822_XXAA) ||\
+    defined (NRF51822_XXAB) ||\
+    defined (NRF51822_XXAC) ||\
+    defined (NRF51824_XXAA)
+    #ifndef NRF51_SERIES
+        #define NRF51_SERIES
+    #endif
+    #ifndef NRF51
+        #define NRF51
+    #endif
+#endif
 
 /* Redefine "old" too-generic name NRF52 to NRF52832_XXAA to keep backwards compatibility. */
 #if defined (NRF52)
@@ -97,10 +115,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52810_name_change.h"
     #elif defined (NRF52811_XXAA)
         #include "nrf52811.h"
-        #include "nrf52811_bitfields.h"
+        #include "nrf52811_bitfields.h"  
         #include "nrf51_to_nrf52810.h"
-        #include "nrf52_to_nrf52810.h"
-        #include "nrf52810_to_nrf52811.h"
+        #include "nrf52_to_nrf52810.h"   
+        #include "nrf52810_to_nrf52811.h"     
     #elif defined (NRF52832_XXAA) || defined (NRF52832_XXAB)
         #include "nrf52.h"
         #include "nrf52_bitfields.h"

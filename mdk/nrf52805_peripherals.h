@@ -98,7 +98,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PPI_PRESENT
 #define PPI_COUNT 1
 
-#define PPI_CH_NUM 20
+#define PPI_CH_NUM 10
 #define PPI_FIXED_CH_NUM 12
 #define PPI_GROUP_NUM 6
 #define PPI_FEATURE_FORKS_PRESENT
@@ -197,10 +197,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define UARTE0_EASYDMA_MAXCNT_SIZE 14
 
-/* Quadrature Decoder */
-#define QDEC_PRESENT
-#define QDEC_COUNT 1
-
 /* Successive Approximation Analog to Digital Converter */
 #define SAADC_PRESENT
 #define SAADC_COUNT 1
@@ -217,24 +213,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define GPIOTE_FEATURE_SET_PRESENT
 #define GPIOTE_FEATURE_CLR_PRESENT
-
-/* Comparator */
-#define COMP_PRESENT
-#define COMP_COUNT 1
-
-/* Pulse Width Modulator */
-#define PWM_PRESENT
-#define PWM_COUNT 1
-
-#define PWM0_CH_NUM 4
-
-#define PWM0_EASYDMA_MAXCNT_SIZE 15
-
-/* Pulse Density Modulator */
-#define PDM_PRESENT
-#define PDM_COUNT 1
-
-#define PDM_EASYDMA_MAXCNT_SIZE 15
 
 
 #endif      // _NRF52805_PERIPHERALS_H
