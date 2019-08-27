@@ -99,6 +99,12 @@ typedef enum
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_TASK_CAPTURE5 = offsetof(NRF_TIMER_Type, TASKS_CAPTURE[5]), ///< Task for capturing the timer value on channel 5.
 #endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_TASK_CAPTURE6 = offsetof(NRF_TIMER_Type, TASKS_CAPTURE[6]), ///< Task for capturing the timer value on channel 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_TASK_CAPTURE7 = offsetof(NRF_TIMER_Type, TASKS_CAPTURE[7]), ///< Task for capturing the timer value on channel 7.
+#endif
 } nrf_timer_task_t;
 
 /** @brief Timer events. */
@@ -113,6 +119,12 @@ typedef enum
 #endif
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_EVENT_COMPARE5 = offsetof(NRF_TIMER_Type, EVENTS_COMPARE[5]), ///< Event from compare channel 5.
+#endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_EVENT_COMPARE6 = offsetof(NRF_TIMER_Type, EVENTS_COMPARE[6]), ///< Event from compare channel 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_EVENT_COMPARE7 = offsetof(NRF_TIMER_Type, EVENTS_COMPARE[7]), ///< Event from compare channel 7.
 #endif
 } nrf_timer_event_t;
 
