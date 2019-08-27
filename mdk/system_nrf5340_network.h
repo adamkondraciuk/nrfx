@@ -39,48 +39,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF_PERIPHERALS_H__
-#define NRF_PERIPHERALS_H__
+#ifndef SYSTEM_NRF5340_NETWORK_H
+#define SYSTEM_NRF5340_NETWORK_H
 
-/*lint ++flb "Enter library region */
-
-#if defined(_WIN32)
-    /* Do not include nrf specific files when building for PC host */
-#elif defined(__unix)
-    /* Do not include nrf specific files when building for PC host */
-#elif defined(__APPLE__)
-    /* Do not include nrf specific files when building for PC host */
-#else
-
-    #if defined(NRF51)
-        #include "nrf51_peripherals.h"
-
-    #elif defined (NRF52805_XXAA)
-        #include "nrf52805_peripherals.h"
-    #elif defined(NRF52810_XXAA)
-        #include "nrf52810_peripherals.h"
-    #elif defined(NRF52811_XXAA)
-        #include "nrf52811_peripherals.h"        
-    #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
-        #include "nrf52832_peripherals.h"
-    #elif defined (NRF52833_XXAA)
-        #include "nrf52833_peripherals.h"
-    #elif defined(NRF52840_XXAA)
-        #include "nrf52840_peripherals.h"
-    
-    #elif defined (NRF5340_XXAA_APPLICATION)
-        #include "nrf5340_application_peripherals.h"      
-    #elif defined (NRF5340_XXAA_NETWORK)
-        #include "nrf5340_network_peripherals.h"
-        
-    #elif defined(NRF9160_XXAA)
-        #include "nrf9160_peripherals.h"
-        
-    #else
-        #error "Device must be defined. See nrf.h."
-    #endif
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-/*lint --flb "Leave library region" */
+#include "system_nrf.h"
 
-#endif // NRF_PERIPHERALS_H__
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* SYSTEM_NRF5340_NETWORK_H */
