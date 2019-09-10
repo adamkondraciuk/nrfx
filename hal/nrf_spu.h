@@ -246,6 +246,18 @@ NRF_STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
                                               bool           secure_dma,
                                               bool           lock_conf);
 
+/**
+ * @brief Function for configuring bus access permissions of the specified external domain.
+ *
+ * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
+ * @param[in] domain_id   ID number of a particular external domain.
+ * @param[in] secure_attr Specifies if the bus accesses from this domain have the secure attribute set.
+ * @param[in] lock_conf   Specifies if the configuration should be locked until next SoC reset.
+ */
+NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
+                                             uint32_t       domain_id,
+                                             bool           secure_attr,
+                                             bool           lock_conf);
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -399,6 +411,18 @@ NRF_STATIC_INLINE void nrf_spu_peripheral_set(NRF_SPU_Type * p_reg,
          (secure_attr ? SPU_PERIPHID_PERM_SECATTR_Msk : 0) |
          (secure_dma  ? SPU_PERIPHID_PERM_DMASEC_Msk  : 0) |
          (lock_conf   ? SPU_PERIPHID_PERM_LOCK_Msk    : 0);
+}
+
+NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
+                                             uint32_t       domain_id,
+                                             bool           secure_attr,
+                                             bool           lock_conf)
+{
+    NRFX_ASSERT(!(p_reg->EXTDOMAIN[domain_id].PERM & SPU_EXTDOMAIN_PERM_LOCK_Msk));
+
+    p_reg->EXTDOMAIN[domain_id].PERM =
+        (secure_attr ? SPU_EXTDOMAIN_PERM_SECATTR_Msk : 0) |
+        (lock_conf   ? SPU_EXTDOMAIN_PERM_LOCK_Msk    : 0);
 }
 
 #endif // NRF_DECLARE_ONLY
