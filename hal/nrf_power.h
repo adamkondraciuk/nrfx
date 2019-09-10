@@ -767,6 +767,18 @@ NRF_STATIC_INLINE bool nrf_power_usbregstatus_vbusdet_get(void);
 NRF_STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void);
 #endif // NRF_POWER_HAS_USBREG
 
+#if defined(RESET_NETWORK_FORCEOFF_FORCEOFF_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the force off signal for the Network core.
+ *
+ * A force off will reset the Network core and switch off its power and clocks.
+ *
+ * @param[in] hold True if the force off signal is to be held.
+ *                 False if the force off signal is to be released.
+ */
+NRF_STATIC_INLINE void nrf_power_network_force_off(bool hold);
+#endif
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_power_task_trigger(nrf_power_task_t task)
@@ -1091,6 +1103,15 @@ NRF_STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(void)
         NRF_POWER_USBREGSTATUS_OUTPUTRDY_MASK) != 0;
 }
 #endif // NRF_POWER_HAS_USBREG
+
+#if defined(RESET_NETWORK_FORCEOFF_FORCEOFF_Msk)
+NRF_STATIC_INLINE void nrf_power_network_force_off(bool hold)
+{
+    NRF_RESET->NETWORK.FORCEOFF =
+        (hold ? RESET_NETWORK_FORCEOFF_FORCEOFF_Hold :
+                RESET_NETWORK_FORCEOFF_FORCEOFF_Release);
+}
+#endif
 
 #endif // NRF_DECLARE_ONLY
 
