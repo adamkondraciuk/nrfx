@@ -218,8 +218,8 @@ nrfx_err_t nrfx_gpiote_init(void)
 
     memset(m_cb.configured_pins, 0, sizeof(m_cb.configured_pins));
 
-    NRFX_IRQ_PRIORITY_SET(GPIOTE_IRQn, NRFX_GPIOTE_CONFIG_IRQ_PRIORITY);
-    NRFX_IRQ_ENABLE(GPIOTE_IRQn);
+    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(NRF_GPIOTE), NRFX_GPIOTE_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_ENABLE(nrfx_get_irq_number(NRF_GPIOTE));
     nrf_gpiote_event_clear(NRF_GPIOTE_EVENTS_PORT);
     nrf_gpiote_int_enable(GPIOTE_INTENSET_PORT_Msk);
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;

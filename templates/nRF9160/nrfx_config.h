@@ -57,7 +57,7 @@
 #define NRF_VMC        NRF_VMC_S
 #define NRF_WDT        NRF_WDT_S
 
-/* Unchangable configuration. */
+/* Unchangeable configuration. */
 #define NRF_CRYPTOCELL NRF_CRYPTOCELL_S
 #define NRF_FICR       NRF_FICR_S
 #define NRF_GPIOTE0    NRF_GPIOTE0_S
@@ -67,7 +67,6 @@
 
 /* Fixups for GPIOTE HAL and driver. */
 #define NRF_GPIOTE        NRF_GPIOTE0_S
-#define GPIOTE_IRQn       GPIOTE0_IRQn
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
