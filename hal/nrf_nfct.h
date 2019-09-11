@@ -352,17 +352,17 @@ NRF_STATIC_INLINE void nrf_nfct_int_disable(uint32_t int_mask);
 
 /**
  * @brief Function for configuring the NFCT modulation control pin.
- * 
+ *
  * If a given signal is not needed, pass the @ref NRF_NFCT_MOD_CTRL_PIN_NOT_CONNECTED
  * value instead of its pin number.
- * 
+ *
  * @param[in] mod_ctrl_pin Modulation control pin.
  */
 NRF_STATIC_INLINE void nrf_nfct_mod_ctrl_pin_set(uint32_t mod_ctrl_pin);
 
 /**
  * @brief Function for getting the modulation control pin.
- * 
+ *
  * @return Modulation control pin number.
  */
 NRF_STATIC_INLINE uint32_t nrf_nfct_mod_ctrl_pin_get(void);
@@ -372,14 +372,14 @@ NRF_STATIC_INLINE uint32_t nrf_nfct_mod_ctrl_pin_get(void);
 /**
  * @brief Function for setting the modulation output. It enables the
  *        output to a GPIO pin which can be connected to a second external.
- * 
+ *
  * @param[in] mod_ctrl Modulation control field configuration.
  */
 NRF_STATIC_INLINE void nrf_nfct_modulation_output_set(nrf_nfct_modulation_ctrl_t mod_ctrl);
 
 /**
  * @brief Function for getting the modulation output configuration.
- * 
+ *
  * @return The configured modulation output.
  */
 NRF_STATIC_INLINE nrf_nfct_modulation_ctrl_t nrf_nfct_modulation_output_get(void);
@@ -820,12 +820,12 @@ NRF_STATIC_INLINE void nrf_nfct_int_disable(uint32_t int_mask)
 #if defined(NFCT_MODULATIONPSEL_PIN_Msk)
 NRF_STATIC_INLINE void nrf_nfct_mod_ctrl_pin_set(uint32_t mod_ctrl_pin)
 {
-    NFC_NFCT->MODULATIONPSEL = mod_ctrl_pin;
+    NRF_NFCT->MODULATIONPSEL = mod_ctrl_pin;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_nfct_mod_ctrl_pin_get(void)
 {
-    return NFC_NFCT->MODULATIONPSEL;
+    return NRF_NFCT->MODULATIONPSEL;
 }
 #endif // (NFCT_MODULATIONPSEL_PIN_Msk)
 
