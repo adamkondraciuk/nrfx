@@ -42,7 +42,7 @@ typedef void (*nrfx_ipc_handler_t)(uint8_t event_index, void * p_context);
  * {
  *     .tx_signals_channels_cfg =
  *     {
- *         // [SIGNAL_ID] = CHANNELS_WHERE_SIGNAL_WILL_BROADCAST,
+ *         // [SIGNAL_ID] = IPC_CHANNELS_TO_BROADCAST_TO,
  *
  *         // Broadcast signal number 0 on channels 0 and 4
  *         [0] = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(4),
@@ -53,7 +53,7 @@ typedef void (*nrfx_ipc_handler_t)(uint8_t event_index, void * p_context);
  *
  *     .rx_events_channels_cfg =
  *     {
- *         // [EVENT_RECEIVE_ID] = CHANNELS_ON_WHICH_EVENT_RECEIVE_WILL_RECEIVE_BROADCASTED_SIGNAL,
+ *         // [EVENT_RECEIVE_ID] = IPC_CHANNELS_TO_LISTEN_ON,
  *
  *         // Generate event recive number 0 when signal is set on channels 0 and 4
  *         [0] = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(4),
@@ -61,7 +61,7 @@ typedef void (*nrfx_ipc_handler_t)(uint8_t event_index, void * p_context);
  *         ...
  *         [n] = NRFX_IPC_BITPOS(4) | NRFX_IPC_BITPOS(10)
  *     },
- *     // Enable configured events to generate interrupts:
+ *     // Enable interrupts for events:
  *     .rx_events_enable_cfg = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(3) |
  *                             NRFX_IPC_BITPOS(4) | NRFX_IPC_BITPOS(5) |
  *                             NRFX_IPC_BITPOS(10),
@@ -172,7 +172,7 @@ void nrfx_ipc_receive_event_channel_assign(uint8_t event_index, uint8_t channel_
 void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index);
 
 /**
- * @brief nrfx_ipc_event_channels_config
+ * @brief Function for assigning event to the IPC channels.
  *
  * @param event_index      Index of the event to be configured.
  * @param channels_bitmask Bitmask with channels to which event will be connected.

@@ -88,23 +88,23 @@ typedef enum
 /** @brief IPC interrupts. */
 typedef enum
 {
-    NRF_IPC_INT_RECEIVE_CH0  = IPC_INTEN_RECEIVE0_Msk,  ///< Interrupt on receive event 0.
-    NRF_IPC_INT_RECEIVE_CH1  = IPC_INTEN_RECEIVE1_Msk,  ///< Interrupt on receive event 1.
-    NRF_IPC_INT_RECEIVE_CH2  = IPC_INTEN_RECEIVE2_Msk,  ///< Interrupt on receive event 2.
-    NRF_IPC_INT_RECEIVE_CH3  = IPC_INTEN_RECEIVE3_Msk,  ///< Interrupt on receive event 3.
-    NRF_IPC_INT_RECEIVE_CH4  = IPC_INTEN_RECEIVE4_Msk,  ///< Interrupt on receive event 4.
-    NRF_IPC_INT_RECEIVE_CH5  = IPC_INTEN_RECEIVE5_Msk,  ///< Interrupt on receive event 5.
-    NRF_IPC_INT_RECEIVE_CH6  = IPC_INTEN_RECEIVE6_Msk,  ///< Interrupt on receive event 6.
-    NRF_IPC_INT_RECEIVE_CH7  = IPC_INTEN_RECEIVE7_Msk,  ///< Interrupt on receive event 7.
+    NRF_IPC_INT_RECEIVE_0  = IPC_INTEN_RECEIVE0_Msk,  ///< Interrupt on receive event 0.
+    NRF_IPC_INT_RECEIVE_1  = IPC_INTEN_RECEIVE1_Msk,  ///< Interrupt on receive event 1.
+    NRF_IPC_INT_RECEIVE_2  = IPC_INTEN_RECEIVE2_Msk,  ///< Interrupt on receive event 2.
+    NRF_IPC_INT_RECEIVE_3  = IPC_INTEN_RECEIVE3_Msk,  ///< Interrupt on receive event 3.
+    NRF_IPC_INT_RECEIVE_4  = IPC_INTEN_RECEIVE4_Msk,  ///< Interrupt on receive event 4.
+    NRF_IPC_INT_RECEIVE_5  = IPC_INTEN_RECEIVE5_Msk,  ///< Interrupt on receive event 5.
+    NRF_IPC_INT_RECEIVE_6  = IPC_INTEN_RECEIVE6_Msk,  ///< Interrupt on receive event 6.
+    NRF_IPC_INT_RECEIVE_7  = IPC_INTEN_RECEIVE7_Msk,  ///< Interrupt on receive event 7.
 #if (IPC_EVENTS_NUM > 8) || defined(__NRFX_DOXYGEN__)
-    NRF_IPC_INT_RECEIVE_CH8  = IPC_INTEN_RECEIVE8_Msk,  ///< Interrupt on receive event 8.
-    NRF_IPC_INT_RECEIVE_CH9  = IPC_INTEN_RECEIVE9_Msk,  ///< Interrupt on receive event 9.
-    NRF_IPC_INT_RECEIVE_CH10 = IPC_INTEN_RECEIVE10_Msk, ///< Interrupt on receive event 10.
-    NRF_IPC_INT_RECEIVE_CH11 = IPC_INTEN_RECEIVE11_Msk, ///< Interrupt on receive event 11.
-    NRF_IPC_INT_RECEIVE_CH12 = IPC_INTEN_RECEIVE12_Msk, ///< Interrupt on receive event 12.
-    NRF_IPC_INT_RECEIVE_CH13 = IPC_INTEN_RECEIVE13_Msk, ///< Interrupt on receive event 13.
-    NRF_IPC_INT_RECEIVE_CH14 = IPC_INTEN_RECEIVE14_Msk, ///< Interrupt on receive event 14.
-    NRF_IPC_INT_RECEIVE_CH15 = IPC_INTEN_RECEIVE15_Msk, ///< Interrupt on receive event 15.
+    NRF_IPC_INT_RECEIVE_8  = IPC_INTEN_RECEIVE8_Msk,  ///< Interrupt on receive event 8.
+    NRF_IPC_INT_RECEIVE_9  = IPC_INTEN_RECEIVE9_Msk,  ///< Interrupt on receive event 9.
+    NRF_IPC_INT_RECEIVE_10 = IPC_INTEN_RECEIVE10_Msk, ///< Interrupt on receive event 10.
+    NRF_IPC_INT_RECEIVE_11 = IPC_INTEN_RECEIVE11_Msk, ///< Interrupt on receive event 11.
+    NRF_IPC_INT_RECEIVE_12 = IPC_INTEN_RECEIVE12_Msk, ///< Interrupt on receive event 12.
+    NRF_IPC_INT_RECEIVE_13 = IPC_INTEN_RECEIVE13_Msk, ///< Interrupt on receive event 13.
+    NRF_IPC_INT_RECEIVE_14 = IPC_INTEN_RECEIVE14_Msk, ///< Interrupt on receive event 14.
+    NRF_IPC_INT_RECEIVE_15 = IPC_INTEN_RECEIVE15_Msk, ///< Interrupt on receive event 15.
 #endif // (IPC_EVENTS_NUM > 8) || defined(__NRFX_DOXYGEN__)
 } nrf_ipc_int_mask_t;
 
@@ -113,7 +113,7 @@ typedef enum
  * @brief Function for triggering the specified IPC task.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] task  Task to be activated.
+ * @param[in] task  Task to be triggered.
  */
 __STATIC_INLINE void nrf_ipc_task_trigger(NRF_IPC_Type * p_reg,
                                           nrf_ipc_task_t task);
@@ -178,7 +178,7 @@ __STATIC_INLINE void nrf_ipc_int_enable(NRF_IPC_Type * p_reg, uint32_t mask);
 __STATIC_INLINE void nrf_ipc_int_disable(NRF_IPC_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for checking whether a given interrupt is enabled.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] ipc_int Interrupt to be checked.
@@ -305,10 +305,7 @@ __STATIC_INLINE void nrf_ipc_receive_config(NRF_IPC_Type *  p_reg,
                                             uint32_t        channels_mask);
 
 /**
- * @brief Function for storing data in general purpose memory.
- *
- * General purpose memory is shared between MCUs in SoC. The number of its
- * cells depends on particular SoC.
+ * @brief Function for storing data in general purpose memory cell.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] index Index of the general purpose memory cell.
