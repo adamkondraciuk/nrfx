@@ -123,14 +123,25 @@ typedef enum
 } nrf_uarte_stop_t;
 #endif
 
+#if defined(UARTE_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Types of UARTE parity types. */
+typedef enum
+{
+    NRF_UARTE_PARITYTYPE_EVEN = UARTE_CONFIG_PARITYTYPE_Even << UARTE_CONFIG_PARITYTYPE_Pos, ///< Parity even.
+    NRF_UARTE_PARITYTYPE_ODD  = UARTE_CONFIG_PARITYTYPE_Odd << UARTE_CONFIG_PARITYTYPE_Pos,  ///< Parity odd.
+} nrf_uarte_paritytype_t;
+#endif
 
 /** @brief Structure for UARTE transmission configuration. */
 typedef struct
 {
-    nrf_uarte_hwfc_t     hwfc;    ///< Flow control configuration.
-    nrf_uarte_parity_t   parity;  ///< Parity configuration.
+    nrf_uarte_hwfc_t       hwfc;       ///< Flow control configuration.
+    nrf_uarte_parity_t     parity;     ///< Parity configuration.
 #if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
-    nrf_uarte_stop_t     stop;    ///< Stop bits.
+    nrf_uarte_stop_t       stop;       ///< Stop bits.
+#endif
+#if defined(UARTE_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+    nrf_uarte_paritytype_t paritytype; ///< Parity type.
 #endif
 } nrf_uarte_config_t;
 
@@ -585,6 +596,9 @@ NRF_STATIC_INLINE void nrf_uarte_configure(NRF_UARTE_Type           * p_reg,
     p_reg->CONFIG = (uint32_t)p_cfg->parity
 #if defined(UARTE_CONFIG_STOP_Msk)
                     | (uint32_t)p_cfg->stop
+#endif
+#if defined(UARTE_CONFIG_PARITYTYPE_Msk)
+                    | (uint32_t)p_cfg->paritytype
 #endif
                     | (uint32_t)p_cfg->hwfc;
 }

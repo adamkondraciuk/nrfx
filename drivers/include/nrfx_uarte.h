@@ -71,13 +71,19 @@ typedef struct
 } nrfx_uarte_config_t;
 
 #if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief UARTE additional stop bits configuration.
- */
-    #define NRFX_UARTE_DEFAULT_EXTENDED_CONFIG   \
-        .stop = (nrf_uarte_stop_t)NRFX_UARTE_DEFAULT_CONFIG_STOP,
+/** @brief UARTE additional stop bits configuration. */
+    #define NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG   \
+        .stop = (nrf_uarte_stop_t)NRF_UARTE_STOP_ONE,
 #else
-    #define NRFX_UARTE_DEFAULT_EXTENDED_CONFIG
+    #define NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG
+#endif
+
+#if defined(UARTE_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief UARTE additional parity type configuration. */
+    #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG   \
+        .paritytype = NRF_UARTE_PARITYTYPE_EVEN,
+#else
+    #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
 #endif
 
 /**
@@ -95,7 +101,8 @@ typedef struct
     .hal_cfg            = {                                                         \
         .hwfc           = (nrf_uarte_hwfc_t)NRFX_UARTE_DEFAULT_CONFIG_HWFC,         \
         .parity         = (nrf_uarte_parity_t)NRFX_UARTE_DEFAULT_CONFIG_PARITY,     \
-        NRFX_UARTE_DEFAULT_EXTENDED_CONFIG                                          \
+        NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG                                     \
+        NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG                               \
     }                                                                               \
 }
 
