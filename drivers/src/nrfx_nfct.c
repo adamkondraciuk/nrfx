@@ -9,8 +9,9 @@
 #define NRFX_LOG_MODULE NFCT
 #include <nrfx_log.h>
 
-#if !defined(USE_WORKAROUND_FOR_ANOMALY_190) && \
-    (defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || defined(NRF52840_XXAA))
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_190) &&          \
+    (defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || \
+     defined(NRF52833_XXAA) || defined(NRF52840_XXAA))
 #define USE_WORKAROUND_FOR_ANOMALY_190 1
 #endif
 
