@@ -56,11 +56,30 @@ typedef struct
     uint32_t            pselcts;            ///< CTS pin number.
     uint32_t            pselrts;            ///< RTS pin number.
     void *              p_context;          ///< Context passed to interrupt handler.
-    nrf_uart_hwfc_t     hwfc;               ///< Flow control configuration.
-    nrf_uart_parity_t   parity;             ///< Parity configuration.
     nrf_uart_baudrate_t baudrate;           ///< Baud rate.
     uint8_t             interrupt_priority; ///< Interrupt priority.
+    nrf_uart_config_t   hal_cfg;            ///< Parity, flow control and stop bits settings.
 } nrfx_uart_config_t;
+
+#if defined(UART_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief UART additional stop bits configuration.
+ */
+    #define NRFX_UART_DEFAULT_EXTENDED_STOP_CONFIG   \
+        .stop = NRF_UART_STOP_ONE,
+#else
+    #define NRFX_UART_DEFAULT_EXTENDED_STOP_CONFIG
+#endif
+
+#if defined(UART_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief UART additional parity type configuration.
+ */
+    #define NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG   \
+        .paritytype = NRF_UART_PARITYTYPE_EVEN,
+#else
+    #define NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
+#endif
 
 /** @brief UART default configuration. */
 #define NRFX_UART_DEFAULT_CONFIG                                                  \
@@ -70,10 +89,14 @@ typedef struct
     .pselcts            = NRF_UART_PSEL_DISCONNECTED,                             \
     .pselrts            = NRF_UART_PSEL_DISCONNECTED,                             \
     .p_context          = NULL,                                                   \
-    .hwfc               = (nrf_uart_hwfc_t)NRFX_UART_DEFAULT_CONFIG_HWFC,         \
-    .parity             = (nrf_uart_parity_t)NRFX_UART_DEFAULT_CONFIG_PARITY,     \
     .baudrate           = (nrf_uart_baudrate_t)NRFX_UART_DEFAULT_CONFIG_BAUDRATE, \
     .interrupt_priority = NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
+    .hal_cfg            = {                                                       \
+        .hwfc           = (nrf_uart_hwfc_t)NRFX_UART_DEFAULT_CONFIG_HWFC,         \
+        .parity         = (nrf_uart_parity_t)NRFX_UART_DEFAULT_CONFIG_PARITY,     \
+        NRFX_UART_DEFAULT_EXTENDED_STOP_CONFIG                                    \
+        NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG                              \
+    }                                                                             \
 }
 
 /** @brief Structure for the UART transfer completion event. */

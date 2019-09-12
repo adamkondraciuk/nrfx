@@ -97,6 +97,37 @@ typedef enum
     NRF_UART_HWFC_ENABLED  = UART_CONFIG_HWFC_Enabled,  /**< Hardware flow control enabled. */
 } nrf_uart_hwfc_t;
 
+#if defined(UART_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Types of UART stop bit modes. */
+typedef enum
+{
+    NRF_UART_STOP_ONE = UART_CONFIG_STOP_One << UART_CONFIG_STOP_Pos, ///< One stop bit.
+    NRF_UART_STOP_TWO = UART_CONFIG_STOP_Two << UART_CONFIG_STOP_Pos  ///< Two stop bits.
+} nrf_uart_stop_t;
+#endif
+
+#if defined(UART_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Types of UART parity types. */
+typedef enum
+{
+    NRF_UART_PARITYTYPE_EVEN = UART_CONFIG_PARITYTYPE_Even << UART_CONFIG_PARITYTYPE_Pos, /**< Parity even. */
+    NRF_UART_PARITYTYPE_ODD  = UART_CONFIG_PARITYTYPE_Odd << UART_CONFIG_PARITYTYPE_Pos,  /**< Parity odd. */
+} nrf_uart_paritytype_t;
+#endif
+
+/** @brief Structure for UART transmission configuration. */
+typedef struct
+{
+    nrf_uart_hwfc_t       hwfc;       ///< Flow control configuration.
+    nrf_uart_parity_t     parity;     ///< Parity configuration.
+#if defined(UART_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
+    nrf_uart_stop_t       stop;       ///< Stop bits.
+#endif
+#if defined(UART_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
+    nrf_uart_paritytype_t paritytype; ///< Parity type.
+#endif
+} nrf_uart_config_t;
+
 /**
  * @brief Function for clearing the specified UART event.
  *
@@ -288,13 +319,11 @@ NRF_STATIC_INLINE uint32_t nrf_uart_task_address_get(NRF_UART_Type const * p_reg
 /**
  * @brief Function for configuring UART.
  *
- * @param p_reg  Pointer to the structure of registers of the peripheral.
- * @param hwfc   Hardware flow control. Enabled if true.
- * @param parity Parity. Included if true.
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param p_cfg Pointer to UART settings structure.
  */
-NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type   * p_reg,
-                                          nrf_uart_parity_t parity,
-                                          nrf_uart_hwfc_t   hwfc);
+NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type           * p_reg,
+                                          nrf_uart_config_t const * p_cfg);
 
 /**
  * @brief Function for setting UART baud rate.
@@ -459,11 +488,17 @@ NRF_STATIC_INLINE uint32_t nrf_uart_task_address_get(NRF_UART_Type const * p_reg
     return (uint32_t)p_reg + (uint32_t)task;
 }
 
-NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type   * p_reg,
-                                          nrf_uart_parity_t parity,
-                                          nrf_uart_hwfc_t   hwfc)
+NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type           * p_reg,
+                                          nrf_uart_config_t const * p_cfg)
 {
-    p_reg->CONFIG = (uint32_t)parity | (uint32_t)hwfc;
+    p_reg->CONFIG = (uint32_t)p_cfg->parity
+#if defined(UART_CONFIG_STOP_Msk)
+                    | (uint32_t)p_cfg->stop
+#endif
+#if defined(UART_CONFIG_PARITYTYPE_Msk)
+                    | (uint32_t)p_cfg->paritytype
+#endif
+                    | (uint32_t)p_cfg->hwfc;
 }
 
 NRF_STATIC_INLINE void nrf_uart_baudrate_set(NRF_UART_Type * p_reg, nrf_uart_baudrate_t baudrate)
