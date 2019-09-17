@@ -7,6 +7,8 @@
 extern "C" {
 #endif
 
+// DCNF_IRQn
+
 // CACHE_IRQn
 
 // SPU_IRQn
@@ -101,8 +103,8 @@ extern "C" {
 // PWM2_IRQn
 #define nrfx_pwm_2_irq_handler      PWM2_IRQHandler
 
-// PDM_IRQn
-#define nrfx_pdm_irq_handler        PDM_IRQHandler
+// PDM0_IRQn
+#define nrfx_pdm_irq_handler        PDM0_IRQHandler
 
 // I2S0_IRQn
 #define nrfx_i2s_irq_handler        I2S0_IRQHandler
