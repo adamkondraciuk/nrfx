@@ -81,14 +81,12 @@ typedef enum
 } nrf_gpio_pin_sense_t;
 
 #if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Enumerator used for selecting the MCU to control the specified pin
- */
+/** @brief Enumerator used for selecting the MCU/Subsystem to control the specified pin. */
 typedef enum
 {
     NRF_GPIO_PIN_MCUSEL_APP     = GPIO_PIN_CNF_MCUSEL_AppMCU,     ///< Pin controlled by Application MCU.
     NRF_GPIO_PIN_MCUSEL_NETWORK = GPIO_PIN_CNF_MCUSEL_NetworkMCU, ///< Pin controlled by Network MCU.
-    NRF_GPIO_PIN_MCUSEL_TND     = GPIO_PIN_CNF_MCUSEL_TND,        ///< Pin controlled by Trace and Debug Subsystem
+    NRF_GPIO_PIN_MCUSEL_TND     = GPIO_PIN_CNF_MCUSEL_TND,        ///< Pin controlled by Trace and Debug Subsystem.
 } nrf_gpio_pin_mcusel_t;
 #endif
 
