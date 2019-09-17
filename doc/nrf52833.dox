@@ -12,6 +12,8 @@
 
 @ref nrf_comp
 
+@ref nrf_systick
+
 @ref nrf_ecb
 
 @ref nrf_ficr
@@ -53,8 +55,6 @@
 @ref nrf_spim
 
 @ref nrf_spis
-
-@ref nrf_systick
 
 @ref nrf_swi_egu
 
