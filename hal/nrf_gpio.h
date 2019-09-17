@@ -573,10 +573,10 @@ NRF_STATIC_INLINE void nrf_gpio_cfg_sense_set(uint32_t             pin_number,
                                               nrf_gpio_pin_sense_t sense_config)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
-
     /*lint -e{845} // A zero has been given as right argument to operator '|'" */
-    reg->PIN_CNF[pin_number] &= ~GPIO_PIN_CNF_SENSE_Msk;
-    reg->PIN_CNF[pin_number] |= (sense_config << GPIO_PIN_CNF_SENSE_Pos);
+    uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_SENSE_Msk;
+
+    reg->PIN_CNF[pin_number] = cnf | (sense_config << GPIO_PIN_CNF_SENSE_Pos);
 }
 
 
