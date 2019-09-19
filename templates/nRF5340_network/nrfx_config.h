@@ -1245,15 +1245,6 @@
 #define NRFX_UARTE_DEFAULT_CONFIG_PARITY 0
 #endif
 
-// <o> NRFX_UARTE_DEFAULT_CONFIG_STOP  - Stop bits
-
-// <0=> One stop bit
-// <16=> Two stop bits
-
-#ifndef NRFX_UARTE_DEFAULT_CONFIG_STOP
-#define NRFX_UARTE_DEFAULT_CONFIG_STOP 0
-#endif
-
 // <o> NRFX_UARTE_DEFAULT_CONFIG_BAUDRATE  - Default baud rate.
 
 // <323584=> 1200 baud
