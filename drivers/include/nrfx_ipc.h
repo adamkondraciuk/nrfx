@@ -105,7 +105,7 @@ nrfx_err_t nrfx_ipc_config_load(nrfx_ipc_config_t const * p_config);
  *
  * @param send_task_index Index of the SEND task to trigger.
  */
-__STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index);
+NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index);
 
 /**
  * @brief Function for storing data in GPMEM register in the IPC peripheral.
@@ -113,7 +113,7 @@ __STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index);
  * @param mem_index Index of the memory cell.
  * @param data      Data to be saved.
  */
-__STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data);
+NRFX_STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data);
 
 /**
  * @brief Function for getting data from the GPMEM register in the IPC peripheral.
@@ -122,7 +122,7 @@ __STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data);
  *
  * @return Saved data.
  */
-__STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index);
+NRFX_STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index);
 
 /** @brief Function for uninitializing the IPC module. */
 void nrfx_ipc_uninit(void);
@@ -190,27 +190,27 @@ void nrfx_ipc_send_task_channels_config(uint8_t send_index, uint32_t channels_bi
 /** @} */
 
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+#ifndef NRFX_DECLARE_ONLY
 
-__STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data)
+NRFX_STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data)
 {
     NRFX_ASSERT(mem_index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
     nrf_ipc_gpmem_set(NRF_IPC, mem_index, data);
 }
 
-__STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index)
+NRFX_STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index)
 {
     NRFX_ASSERT(mem_index < NRFX_ARRAY_SIZE(NRF_IPC->GPMEM));
     return nrf_ipc_gpmem_get(NRF_IPC, mem_index);
 }
 
-__STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index)
+NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index)
 {
     NRFX_ASSERT(send_task_index < NRFX_ARRAY_SIZE(NRF_IPC->TASKS_SEND));
     nrf_ipc_task_trigger(NRF_IPC, nrf_ipc_send_task_get(send_task_index));
 }
 
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRFX_DECLARE_ONLY
 
 
 void nrfx_ipc_irq_handler(void);
