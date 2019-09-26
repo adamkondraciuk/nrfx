@@ -730,7 +730,7 @@ NRF_STATIC_INLINE void nrf_nfct_sensres_platform_config_set(
  * @retval true  If NFCID1 read procedure is not complete.
  * @retval false If NFCID1 read procedure is complete.
  */
-NRF_STATIC_INLINE bool nrf_nfct_selsres_cascade_check(void);
+NRF_STATIC_INLINE bool nrf_nfct_selres_cascade_check(void);
 
 /**
  * @brief Function for getting the Protocol field in the SEL_RES frame.
@@ -739,7 +739,7 @@ NRF_STATIC_INLINE bool nrf_nfct_selsres_cascade_check(void);
  *
  * @return Value of the Protocol field in the SEL_RES frame.
  */
-NRF_STATIC_INLINE nrf_nfct_selres_protocol_t nrf_nfct_selsres_protocol_get(void);
+NRF_STATIC_INLINE nrf_nfct_selres_protocol_t nrf_nfct_selres_protocol_get(void);
 
 /**
  * @brief Function for setting the Protocol field in the SEL_RES frame configuration.
@@ -1097,12 +1097,12 @@ NRF_STATIC_INLINE void nrf_nfct_sensres_platform_config_set(
                          (uint32_t)platform_config);
 }
 
-NRF_STATIC_INLINE bool nrf_nfct_selsres_cascade_check(void)
+NRF_STATIC_INLINE bool nrf_nfct_selres_cascade_check(void)
 {
     return (bool)(NRF_NFCT->SELRES & NFCT_SELRES_CASCADE_Msk);
 }
 
-NRF_STATIC_INLINE nrf_nfct_selres_protocol_t nrf_nfct_selsres_protocol_get(void)
+NRF_STATIC_INLINE nrf_nfct_selres_protocol_t nrf_nfct_selres_protocol_get(void)
 {
     return (nrf_nfct_selres_protocol_t)((NRF_NFCT->SELRES & NFCT_SELRES_PROTOCOL_Msk) >>
                                         NFCT_SELRES_PROTOCOL_Pos);

@@ -242,7 +242,7 @@ static inline void nrfx_nfct_reset(void)
     // Save parameter settings before the reset of the NFCT peripheral.
     fdm         = nrf_nfct_frame_delay_max_get();
     nfcid1_size = nrf_nfct_nfcid1_get(nfcid1);
-    protocol    = nrf_nfct_selsres_protocol_get();
+    protocol    = nrf_nfct_selres_protocol_get();
     int_enabled = nrf_nfct_int_enable_get();
 
     // Reset the NFCT peripheral.
