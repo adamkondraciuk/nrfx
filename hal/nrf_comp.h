@@ -48,7 +48,13 @@ typedef enum
 typedef enum
 {
     NRF_COMP_EXT_REF_0 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference0, /*!< Use AIN0 as external analog reference. */
-    NRF_COMP_EXT_REF_1 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference1  /*!< Use AIN1 as external analog reference. */
+    NRF_COMP_EXT_REF_1 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference1, /*!< Use AIN1 as external analog reference. */
+    NRF_COMP_EXT_REF_2 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference2, /*!< Use AIN2 as external analog reference. */
+    NRF_COMP_EXT_REF_3 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference3, /*!< Use AIN3 as external analog reference. */
+    NRF_COMP_EXT_REF_4 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference4, /*!< Use AIN4 as external analog reference. */
+    NRF_COMP_EXT_REF_5 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference5, /*!< Use AIN5 as external analog reference. */
+    NRF_COMP_EXT_REF_6 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference6, /*!< Use AIN6 as external analog reference. */
+    NRF_COMP_EXT_REF_7 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference7  /*!< Use AIN7 as external analog reference. */
 } nrf_comp_ext_ref_t;
 
 /** @brief COMP THDOWN and THUP values that are used to calculate the threshold voltages VDOWN and VUP. */
