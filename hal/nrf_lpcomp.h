@@ -44,10 +44,10 @@ typedef enum
     NRF_LPCOMP_REF_SUPPLY_13_16 = LPCOMP_REFSEL_REFSEL_Ref13_16Vdd, /**< Use supply with a 13/16 prescaler as reference. */
     NRF_LPCOMP_REF_SUPPLY_15_16 = LPCOMP_REFSEL_REFSEL_Ref15_16Vdd, /**< Use supply with a 15/16 prescaler as reference. */
 #endif
-    NRF_LPCOMP_REF_EXT_REF0        = LPCOMP_REFSEL_REFSEL_ARef |
-                       (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16),  /**< External reference 0. */
-    NRF_LPCOMP_CONFIG_REF_EXT_REF1 = LPCOMP_REFSEL_REFSEL_ARef |
-                        (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), /**< External reference 1. */
+    NRF_LPCOMP_REF_EXT_REF0     = LPCOMP_REFSEL_REFSEL_ARef |
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16), /**< External reference 0. */
+    NRF_LPCOMP_REF_EXT_REF1     = LPCOMP_REFSEL_REFSEL_ARef |
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), /**< External reference 1. */
 } nrf_lpcomp_ref_t;
 
 /** @brief LPCOMP input selection. */
@@ -104,14 +104,14 @@ typedef enum
 typedef enum
 {
 #ifdef LPCOMP_HYST_HYST_NoHyst
-    NRF_LPCOMP_HYST_NOHYST              = LPCOMP_HYST_HYST_NoHyst,   /**< Comparator hysteresis disabled. */
+    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_NoHyst,   /**< Comparator hysteresis disabled. */
 #else
-    NRF_LPCOMP_HYST_NOHYST              = LPCOMP_HYST_HYST_Disabled, /**< Comparator hysteresis disabled. */
+    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_Disabled, /**< Comparator hysteresis disabled. */
 #endif
 #ifdef LPCOMP_HYST_HYST_Hyst50mV
-    NRF_LPCOMP_HYST_ENABLED             = LPCOMP_HYST_HYST_Hyst50mV  /**< Comparator hysteresis enabled (typically 50 mV). */
+    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Hyst50mV  /**< Comparator hysteresis enabled (typically 50 mV). */
 #else
-    NRF_LPCOMP_HYST_ENABLED             = LPCOMP_HYST_HYST_Enabled   /**< Comparator hysteresis enabled (typically 50 mV). */
+    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Enabled   /**< Comparator hysteresis enabled (typically 50 mV). */
 #endif
 }nrf_lpcomp_hysteresis_t;
 #endif // LPCOMP_FEATURE_HYST_PRESENT
@@ -119,10 +119,10 @@ typedef enum
 /** @brief LPCOMP configuration. */
 typedef struct
 {
-    nrf_lpcomp_ref_t            reference; /**< LPCOMP reference. */
-    nrf_lpcomp_detect_t         detection; /**< LPCOMP detection type. */
+    nrf_lpcomp_ref_t        reference; /**< LPCOMP reference. */
+    nrf_lpcomp_detect_t     detection; /**< LPCOMP detection type. */
 #if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
-    nrf_lpcomp_hysteresis_t     hyst;      /**< LPCOMP hysteresis. */
+    nrf_lpcomp_hysteresis_t hyst;      /**< LPCOMP hysteresis. */
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 } nrf_lpcomp_config_t;
 
