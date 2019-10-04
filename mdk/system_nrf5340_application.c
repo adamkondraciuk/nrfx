@@ -47,7 +47,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define TRACE_TRACEDATA3_PIN TAD_PSEL_TRACEDATA3_PIN_Tracedata1
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
 #elif defined ( __ICCARM__ )
     __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
 #elif defined   ( __GNUC__ )
@@ -56,7 +56,11 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 void SystemCoreClockUpdate(void)
 {
-    SystemCoreClock = __SYSTEM_CLOCK;
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    SystemCoreClock = __SYSTEM_CLOCK >> (NRF_CLOCK_NS->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
+#else
+    SystemCoreClock = __SYSTEM_CLOCK >> (NRF_CLOCK_S->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
+#endif
 }
 
 void SystemInit(void)
