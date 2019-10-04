@@ -36,23 +36,21 @@
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
 #elif defined(NRF5340_XXAA_APPLICATION)
-    #define NRFX_DELAY_CPU_FREQ_MHZ 128
+    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  1
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
 #else
-    #error "Unknown device."
+    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+    #define NRFX_DELAY_DWT_PRESENT  0
 #endif
 
 /**
  * @brief Function for delaying execution for a number of microseconds.
  *
- * The value of @p time_us is multiplied by the frequency in MHz. Therefore, the delay is limited to
- * maximum uint32_t capacity divided by frequency. For example:
- * - For SoCs working at 64MHz: 0xFFFFFFFF/64 = 0x03FFFFFF (67108863 microseconds)
- * - For SoCs working at 16MHz: 0xFFFFFFFF/16 = 0x0FFFFFFF (268435455 microseconds)
- *
+ * The value of @p time_us is multiplied by the CPU frequency in MHz. Therefore, the delay
+ * is limited to the maximum value of the uint32_t type divided by the frequency.
  * @sa NRFX_COREDEP_DELAY_US_LOOP_CYCLES
  *
  * @param time_us Number of microseconds to wait.
