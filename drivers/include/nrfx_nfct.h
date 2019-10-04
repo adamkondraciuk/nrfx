@@ -87,9 +87,9 @@ typedef struct
     nrfx_nfct_param_id_t   id;               ///< Type of parameter.
     union
     {
-        uint32_t           fdt;              ///< NFC-A Frame Delay Time. Filled when nrfx_nfct_param_t::id is @ref NRFX_NFCT_PARAM_ID_FDT.
-        uint8_t            sel_res_protocol; ///< NFC-A value of the 'Protocol' field in the SEL_RES frame. Filled when nrfx_nfct_param_t::id is @ref NRFX_NFCT_PARAM_ID_SEL_RES.
-        nrfx_nfct_nfcid1_t nfcid1;           ///< NFC-A NFCID1 value (tag identifier). Filled when nrfx_nfct_param_t::id is @ref NRFX_NFCT_PARAM_ID_NFCID1.
+        uint32_t           fdt;              ///< NFC-A Frame Delay Time. Filled when nrfx_nfct_param_t.id is @ref NRFX_NFCT_PARAM_ID_FDT.
+        uint8_t            sel_res_protocol; ///< NFC-A value of the 'Protocol' field in the SEL_RES frame. Filled when nrfx_nfct_param_t.id is @ref NRFX_NFCT_PARAM_ID_SEL_RES.
+        nrfx_nfct_nfcid1_t nfcid1;           ///< NFC-A NFCID1 value (tag identifier). Filled when nrfx_nfct_param_t.id is @ref NRFX_NFCT_PARAM_ID_NFCID1.
     } data;                                  ///< Union to store parameter data.
 } nrfx_nfct_param_t;
 
@@ -125,9 +125,9 @@ typedef struct
     nrfx_nfct_evt_id_t evt_id;                       ///< Type of event.
     union
     {
-        nrfx_nfct_evt_rx_frameend_t   rx_frameend;   ///< End of the RX frame data. Filled when nrfx_nfct_evt_t::evt_id is @ref NRFX_NFCT_EVT_RX_FRAMEEND.
-        nrfx_nfct_evt_tx_framestart_t tx_framestart; ///< Start of the TX frame data. Filled when nrfx_nfct_evt_t::evt_id is @ref NRFX_NFCT_EVT_TX_FRAMESTART.
-        nrfx_nfct_evt_error_t         error;         ///< Error data. Filled when nrfx_nfct_evt_t::evt_id is @ref NRFX_NFCT_EVT_ERROR.
+        nrfx_nfct_evt_rx_frameend_t   rx_frameend;   ///< End of the RX frame data. Filled when nrfx_nfct_evt_t.evt_id is @ref NRFX_NFCT_EVT_RX_FRAMEEND.
+        nrfx_nfct_evt_tx_framestart_t tx_framestart; ///< Start of the TX frame data. Filled when nrfx_nfct_evt_t.evt_id is @ref NRFX_NFCT_EVT_TX_FRAMESTART.
+        nrfx_nfct_evt_error_t         error;         ///< Error data. Filled when nrfx_nfct_evt_t.evt_id is @ref NRFX_NFCT_EVT_ERROR.
     } params;                                        ///< Union to store event data.
 } nrfx_nfct_evt_t;
 

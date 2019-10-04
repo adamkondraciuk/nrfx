@@ -213,7 +213,7 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
 /**
  * @brief Function for performing a TWI transfer.
  *
- * The following transfer types can be configured (@ref nrfx_twim_xfer_desc_t::type):
+ * The following transfer types can be configured (@ref nrfx_twim_xfer_desc_t.type):
  * - @ref NRFX_TWIM_XFER_TXRX - Write operation followed by a read operation (without STOP condition in between).
  * - @ref NRFX_TWIM_XFER_TXTX - Write operation followed by a write operation (without STOP condition in between).
  * - @ref NRFX_TWIM_XFER_TX - Write operation (with or without STOP condition).
@@ -237,10 +237,10 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  *
  * @note
  * Some flag combinations are invalid:
- * - @ref NRFX_TWIM_FLAG_TX_NO_STOP with @ref nrfx_twim_xfer_desc_t::type different than @ref NRFX_TWIM_XFER_TX
- * - @ref NRFX_TWIM_FLAG_REPEATED_XFER with @ref nrfx_twim_xfer_desc_t::type set to @ref NRFX_TWIM_XFER_TXTX
+ * - @ref NRFX_TWIM_FLAG_TX_NO_STOP with @ref nrfx_twim_xfer_desc_t.type different than @ref NRFX_TWIM_XFER_TX
+ * - @ref NRFX_TWIM_FLAG_REPEATED_XFER with @ref nrfx_twim_xfer_desc_t.type set to @ref NRFX_TWIM_XFER_TXTX
  *
- * If @ref nrfx_twim_xfer_desc_t::type is set to @ref NRFX_TWIM_XFER_TX and the @ref NRFX_TWIM_FLAG_TX_NO_STOP and @ref NRFX_TWIM_FLAG_REPEATED_XFER
+ * If @ref nrfx_twim_xfer_desc_t.type is set to @ref NRFX_TWIM_XFER_TX and the @ref NRFX_TWIM_FLAG_TX_NO_STOP and @ref NRFX_TWIM_FLAG_REPEATED_XFER
  * flags are set, two tasks must be used to trigger a transfer: TASKS_RESUME followed by TASKS_STARTTX. If no stop condition is generated,
  * TWIM is in SUSPENDED state. Therefore, it must be resumed before the transfer can be started.
  *

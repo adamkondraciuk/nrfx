@@ -202,7 +202,7 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance);
 /**
  * @brief Function for performing a TWI transfer.
  *
- * The following transfer types can be configured (@ref nrfx_twi_xfer_desc_t::type):
+ * The following transfer types can be configured (@ref nrfx_twi_xfer_desc_t.type):
  * - @ref NRFX_TWI_XFER_TXRX - Write operation followed by a read operation (without STOP condition in between).
  * - @ref NRFX_TWI_XFER_TXTX - Write operation followed by a write operation (without STOP condition in between).
  * - @ref NRFX_TWI_XFER_TX - Write operation (with or without STOP condition).
@@ -218,7 +218,7 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance);
  *
  * @note
  * Some flag combinations are invalid:
- * - @ref NRFX_TWI_FLAG_TX_NO_STOP with @ref nrfx_twi_xfer_desc_t::type different than @ref NRFX_TWI_XFER_TX
+ * - @ref NRFX_TWI_FLAG_TX_NO_STOP with @ref nrfx_twi_xfer_desc_t.type different than @ref NRFX_TWI_XFER_TX
  *
  * @param[in] p_instance  Pointer to the driver instance structure.
  * @param[in] p_xfer_desc Pointer to the transfer descriptor.
