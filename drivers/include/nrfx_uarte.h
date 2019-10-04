@@ -71,7 +71,7 @@ typedef struct
 } nrfx_uarte_config_t;
 
 #if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief UARTE additional stop bits configuration. */
+    /** @brief UARTE additional stop bits configuration. */
     #define NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG   \
         .stop = (nrf_uarte_stop_t)NRF_UARTE_STOP_ONE,
 #else
@@ -79,16 +79,14 @@ typedef struct
 #endif
 
 #if defined(UARTE_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief UARTE additional parity type configuration. */
+    /** @brief UARTE additional parity type configuration. */
     #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG   \
         .paritytype = NRF_UARTE_PARITYTYPE_EVEN,
 #else
     #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
 #endif
 
-/**
- * @brief UARTE default configuration.
- */
+/** @brief UARTE default configuration. */
 #define NRFX_UARTE_DEFAULT_CONFIG                                                   \
 {                                                                                   \
     .pseltxd            = NRF_UARTE_PSEL_DISCONNECTED,                              \

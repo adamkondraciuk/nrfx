@@ -62,9 +62,7 @@ typedef struct
 } nrfx_uart_config_t;
 
 #if defined(UART_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief UART additional stop bits configuration.
- */
+    /** @brief UART additional stop bits configuration. */
     #define NRFX_UART_DEFAULT_EXTENDED_STOP_CONFIG   \
         .stop = NRF_UART_STOP_ONE,
 #else
@@ -72,9 +70,7 @@ typedef struct
 #endif
 
 #if defined(UART_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief UART additional parity type configuration.
- */
+    /**  @brief UART additional parity type configuration. */
     #define NRFX_UART_DEFAULT_EXTENDED_PARITYTYPE_CONFIG   \
         .paritytype = NRF_UART_PARITYTYPE_EVEN,
 #else
