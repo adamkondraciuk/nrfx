@@ -242,7 +242,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_adc_start_task_get(void);
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_adc_start_task_get(void)
 {
-    return nrf_adc_task_address_get(NRF_ADC_TASK_START);
+    return nrf_adc_task_address_get(NRF_ADC, NRF_ADC_TASK_START);
 }
 #endif // NRFX_DECLARE_ONLY
 
