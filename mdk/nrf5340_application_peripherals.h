@@ -262,7 +262,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* Secure Peripheral Unit */
 #define SPU_PRESENT
-#define SPU_PRESENT 1
+#define SPU_COUNT 1
 
 /* Inter-IC Sound Interface */
 #define I2S_PRESENT
