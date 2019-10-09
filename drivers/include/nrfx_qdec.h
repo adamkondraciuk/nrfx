@@ -158,12 +158,12 @@ NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event);
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
 {
-    return nrf_qdec_task_address_get(task);
+    return nrf_qdec_task_address_get(NRF_QDEC, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
 {
-    return nrf_qdec_event_address_get(event);
+    return nrf_qdec_event_address_get(NRF_QDEC, event);
 }
 #endif // NRFX_DECLARE_ONLY
 
