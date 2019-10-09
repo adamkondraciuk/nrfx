@@ -136,22 +136,22 @@ NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event);
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_task_addr(nrf_clock_task_t task)
 {
-    return nrf_clock_task_address_get(task);
+    return nrf_clock_task_address_get(NRF_CLOCK, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_clock_ppi_event_addr(nrf_clock_event_t event)
 {
-    return nrf_clock_event_address_get(event);
+    return nrf_clock_event_address_get(NRF_CLOCK, event);
 }
 
 NRFX_STATIC_INLINE bool nrfx_clock_hfclk_is_running(void)
 {
-    return nrf_clock_hf_is_running(NRF_CLOCK_HFCLK_HIGH_ACCURACY);
+    return nrf_clock_hf_is_running(NRF_CLOCK, NRF_CLOCK_HFCLK_HIGH_ACCURACY);
 }
 
 NRFX_STATIC_INLINE bool nrfx_clock_lfclk_is_running(void)
 {
-    return nrf_clock_lf_is_running();
+    return nrf_clock_lf_is_running(NRF_CLOCK);
 }
 #endif // NRFX_DECLARE_ONLY
 
