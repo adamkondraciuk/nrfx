@@ -78,8 +78,9 @@ static nrfx_nfct_timer_workaround_t m_timer_workaround =
 #define NRFX_NFCT_BITS_TO_BYTES(_bits)  ((_bits)  >> 3)
 
 /* Macro for checking whether the NFCT interrupt is active. */
-#define NRFX_NFCT_EVT_ACTIVE(_name) (nrf_nfct_event_check(NRFX_CONCAT_2(NRF_NFCT_EVENT_, _name)) &&        \
-                                     nrf_nfct_int_enable_check(NRFX_CONCAT_3(NRF_NFCT_INT_, _name, _MASK)))
+#define NRFX_NFCT_EVT_ACTIVE(_name) \
+    (nrf_nfct_event_check(NRF_NFCT, NRFX_CONCAT_2(NRF_NFCT_EVENT_, _name)) && \
+     nrf_nfct_int_enable_check(NRF_NFCT, NRFX_CONCAT_3(NRF_NFCT_INT_, _name, _MASK)))
 
 /* Macro for callback execution. */
 #define NRFX_NFCT_CB_HANDLE(_cb, _evt) \
@@ -113,12 +114,12 @@ static nrfx_nfct_control_block_t m_nfct_cb;
 static void nrfx_nfct_hw_init_setup(void)
 {
     // Use Window Grid frame delay mode.
-    nrf_nfct_frame_delay_mode_set(NRF_NFCT_FRAME_DELAY_MODE_WINDOWGRID);
+    nrf_nfct_frame_delay_mode_set(NRF_NFCT, NRF_NFCT_FRAME_DELAY_MODE_WINDOWGRID);
 
     /* Begin: Bugfix for FTPAN-25 (IC-9929) */
     /* Workaround for wrong SENSRES values require using SDD00001, but here SDD00100 is used
        because it is required to operate with Windows Phone */
-    nrf_nfct_sensres_bit_frame_sdd_set(NRF_NFCT_SENSRES_BIT_FRAME_SDD_00100);
+    nrf_nfct_sensres_bit_frame_sdd_set(NRF_NFCT, NRF_NFCT_SENSRES_BIT_FRAME_SDD_00100);
     /* End: Bugfix for FTPAN-25 (IC-9929) */
 }
 
@@ -126,11 +127,11 @@ static void nrfx_nfct_frame_delay_max_set(bool default_delay)
 {
     if (default_delay)
     {
-        nrf_nfct_frame_delay_max_set(NFCT_FRAMEDELAYMAX_DEFAULT);
+        nrf_nfct_frame_delay_max_set(NRF_NFCT, NFCT_FRAMEDELAYMAX_DEFAULT);
     }
     else
     {
-        nrf_nfct_frame_delay_max_set(m_nfct_cb.frame_delay_max);
+        nrf_nfct_frame_delay_max_set(NRF_NFCT, m_nfct_cb.frame_delay_max);
     }
 }
 
@@ -152,7 +153,8 @@ static void nrfx_nfct_field_event_handler(volatile nrfx_nfct_field_state_t field
     if (field_state == NRFX_NFC_FIELD_STATE_UNKNOWN)
     {
         /* Probe NFC field */
-        field_state = (nrfx_nfct_field_check()) ? NRFX_NFC_FIELD_STATE_ON : NRFX_NFC_FIELD_STATE_OFF;
+        field_state = (nrfx_nfct_field_check()) ? NRFX_NFC_FIELD_STATE_ON :
+                                                  NRFX_NFC_FIELD_STATE_OFF;
     }
 
     /* Field event service */
@@ -186,7 +188,7 @@ static void nrfx_nfct_field_event_handler(volatile nrfx_nfct_field_state_t field
 
         case NRFX_NFC_FIELD_STATE_OFF:
             nrfx_nfct_state_force(NRFX_NFCT_STATE_SENSING);
-            nrf_nfct_int_disable(NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
+            nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
             m_nfct_cb.field_on = false;
             nfct_evt.evt_id    = NRFX_NFCT_EVT_FIELD_LOST;
 
@@ -220,7 +222,7 @@ static void nrfx_nfct_activate_check(void)
 
     if ((m_timer_workaround.is_hfclk_on) && (m_timer_workaround.is_delayed))
     {
-        nrf_nfct_task_trigger(NRF_NFCT_TASK_ACTIVATE);
+        nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_ACTIVATE);
         is_field_validation_pending = true;
 
         // Start the timer second time to validate whether the tag has locked to the field.
@@ -240,10 +242,10 @@ static inline void nrfx_nfct_reset(void)
     nrf_nfct_selres_protocol_t     protocol;
 
     // Save parameter settings before the reset of the NFCT peripheral.
-    fdm         = nrf_nfct_frame_delay_max_get();
-    nfcid1_size = nrf_nfct_nfcid1_get(nfcid1);
-    protocol    = nrf_nfct_selres_protocol_get();
-    int_enabled = nrf_nfct_int_enable_get();
+    fdm         = nrf_nfct_frame_delay_max_get(NRF_NFCT);
+    nfcid1_size = nrf_nfct_nfcid1_get(NRF_NFCT, nfcid1);
+    protocol    = nrf_nfct_selres_protocol_get(NRF_NFCT);
+    int_enabled = nrf_nfct_int_enable_get(NRF_NFCT);
 
     // Reset the NFCT peripheral.
     *(volatile uint32_t *)0x40005FFC = 0;
@@ -251,18 +253,18 @@ static inline void nrfx_nfct_reset(void)
     *(volatile uint32_t *)0x40005FFC = 1;
 
     // Restore parameter settings after the reset of the NFCT peripheral.
-    nrf_nfct_frame_delay_max_set(fdm);
-    nrf_nfct_nfcid1_set(nfcid1, nfcid1_size);
-    nrf_nfct_selres_protocol_set(protocol);
+    nrf_nfct_frame_delay_max_set(NRF_NFCT, fdm);
+    nrf_nfct_nfcid1_set(NRF_NFCT, nfcid1, nfcid1_size);
+    nrf_nfct_selres_protocol_set(NRF_NFCT, protocol);
 
     // Restore general HW configuration.
     nrfx_nfct_hw_init_setup();
 
     // Restore interrupts.
-    nrf_nfct_int_enable(int_enabled);
+    nrf_nfct_int_enable(NRF_NFCT, int_enabled);
 
     // Disable interrupts associated with data exchange.
-    nrf_nfct_int_disable(NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
+    nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
 
     NRFX_LOG_INFO("Reinitialize");
 }
@@ -327,7 +329,9 @@ static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
         .interrupt_priority = NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY
     };
 
-    err_code = nrfx_timer_init(&m_timer_workaround.timer, &timer_cfg, nrfx_nfct_field_timer_handler);
+    err_code = nrfx_timer_init(&m_timer_workaround.timer,
+                               &timer_cfg,
+                               nrfx_nfct_field_timer_handler);
     if (err_code != NRFX_SUCCESS)
     {
         return err_code;
@@ -335,7 +339,8 @@ static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
 
     nrfx_timer_extended_compare(&m_timer_workaround.timer,
                                 NRF_TIMER_CC_CHANNEL0,
-                                nrfx_timer_us_to_ticks(&m_timer_workaround.timer, NRFX_NFCT_TIMER_PERIOD),
+                                nrfx_timer_us_to_ticks(&m_timer_workaround.timer,
+                                                       NRFX_NFCT_TIMER_PERIOD),
                                 NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK,
                                 true);
     return err_code;
@@ -343,7 +348,8 @@ static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
 
 #endif // USE_WORKAROUND_FOR_ANOMALY_190
 
-static inline nrf_nfct_sensres_nfcid1_size_t nrf_nfct_nfcid1_size_to_sensres_size(uint8_t nfcid1_size)
+static inline
+nrf_nfct_sensres_nfcid1_size_t nrf_nfct_nfcid1_size_to_sensres_size(uint8_t nfcid1_size)
 {
     switch (nfcid1_size)
     {
@@ -363,7 +369,7 @@ static inline nrf_nfct_sensres_nfcid1_size_t nrf_nfct_nfcid1_size_to_sensres_siz
 
 static inline void nrfx_nfct_rxtx_int_enable(uint32_t rxtx_int_mask)
 {
-    nrf_nfct_int_enable(rxtx_int_mask & m_nfct_cb.config.rxtx_int_mask);
+    nrf_nfct_int_enable(NRF_NFCT, rxtx_int_mask & m_nfct_cb.config.rxtx_int_mask);
 }
 
 nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
@@ -394,7 +400,7 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
         uint8_t default_nfcid1[NRFX_NFCT_NFCID1_DEFAULT_LEN];
         err_code = nrfx_nfct_nfcid1_default_bytes_get(default_nfcid1, sizeof(default_nfcid1));
         NRFX_ASSERT(err_code == NRFX_SUCCESS);
-        nrf_nfct_nfcid1_set(default_nfcid1, NRF_NFCT_SENSRES_NFCID1_SIZE_DEFAULT);
+        nrf_nfct_nfcid1_set(NRF_NFCT, default_nfcid1, NRF_NFCT_SENSRES_NFCID1_SIZE_DEFAULT);
     }
     else
     {
@@ -425,13 +431,14 @@ void nrfx_nfct_uninit(void)
 
 void nrfx_nfct_enable(void)
 {
-    nrf_nfct_error_status_clear(NRFX_NFCT_ERROR_STATUS_ALL_MASK);
-    nrf_nfct_task_trigger(NRF_NFCT_TASK_SENSE);
+    nrf_nfct_error_status_clear(NRF_NFCT, NRFX_NFCT_ERROR_STATUS_ALL_MASK);
+    nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_SENSE);
 
-    nrf_nfct_int_enable(NRF_NFCT_INT_FIELDDETECTED_MASK | NRF_NFCT_INT_ERROR_MASK |
-                        NRF_NFCT_INT_SELECTED_MASK);
+    nrf_nfct_int_enable(NRF_NFCT, NRF_NFCT_INT_FIELDDETECTED_MASK |
+                                  NRF_NFCT_INT_ERROR_MASK         |
+                                  NRF_NFCT_INT_SELECTED_MASK);
 #if !defined(NRF52832_XXAA) && !defined(NRF52832_XXAB)
-    nrf_nfct_int_enable(NRF_NFCT_INT_FIELDLOST_MASK);
+    nrf_nfct_int_enable(NRF_NFCT, NRF_NFCT_INT_FIELDLOST_MASK);
 #endif //!defined(NRF52832_XXAA) && !defined(NRF52832_XXAB)
 
     NRFX_LOG_INFO("Start");
@@ -439,15 +446,15 @@ void nrfx_nfct_enable(void)
 
 void nrfx_nfct_disable(void)
 {
-    nrf_nfct_int_disable(NRF_NFCT_DISABLE_ALL_INT);
-    nrf_nfct_task_trigger(NRF_NFCT_TASK_DISABLE);
+    nrf_nfct_int_disable(NRF_NFCT, NRF_NFCT_DISABLE_ALL_INT);
+    nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_DISABLE);
 
     NRFX_LOG_INFO("Stop");
 }
 
 bool nrfx_nfct_field_check(void)
 {
-    uint32_t const field_state = nrf_nfct_field_status_get();
+    uint32_t const field_state = nrf_nfct_field_status_get(NRF_NFCT);
 
     if (((field_state & NRF_NFCT_FIELD_STATE_PRESENT_MASK) == 0) &&
         ((field_state & NRF_NFCT_FIELD_STATE_LOCK_MASK) == 0))
@@ -463,10 +470,10 @@ void nrfx_nfct_rx(nrfx_nfct_data_desc_t const * p_tx_data)
 {
     NRFX_ASSERT(p_tx_data);
 
-    nrf_nfct_rxtx_buffer_set((uint8_t *) p_tx_data->p_data, p_tx_data->data_size);
+    nrf_nfct_rxtx_buffer_set(NRF_NFCT, (uint8_t *) p_tx_data->p_data, p_tx_data->data_size);
 
     nrfx_nfct_rxtx_int_enable(NRFX_NFCT_RX_INT_MASK);
-    nrf_nfct_task_trigger(NRF_NFCT_TASK_ENABLERXDATA);
+    nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_ENABLERXDATA);
 }
 
 nrfx_err_t nrfx_nfct_tx(nrfx_nfct_data_desc_t const * p_tx_data,
@@ -480,12 +487,12 @@ nrfx_err_t nrfx_nfct_tx(nrfx_nfct_data_desc_t const * p_tx_data,
         return NRFX_ERROR_INVALID_LENGTH;
     }
 
-    nrf_nfct_rxtx_buffer_set((uint8_t *) p_tx_data->p_data, p_tx_data->data_size);
-    nrf_nfct_tx_bits_set(NRFX_NFCT_BYTES_TO_BITS(p_tx_data->data_size));
-    nrf_nfct_frame_delay_mode_set((nrf_nfct_frame_delay_mode_t) delay_mode);
+    nrf_nfct_rxtx_buffer_set(NRF_NFCT, (uint8_t *) p_tx_data->p_data, p_tx_data->data_size);
+    nrf_nfct_tx_bits_set(NRF_NFCT, NRFX_NFCT_BYTES_TO_BITS(p_tx_data->data_size));
+    nrf_nfct_frame_delay_mode_set(NRF_NFCT, (nrf_nfct_frame_delay_mode_t) delay_mode);
 
     nrfx_nfct_rxtx_int_enable(NRFX_NFCT_TX_INT_MASK);
-    nrf_nfct_task_trigger(NRF_NFCT_TASK_STARTTX);
+    nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_STARTTX);
 
     NRFX_LOG_INFO("Tx start");
     return NRFX_SUCCESS;
@@ -500,7 +507,7 @@ void nrfx_nfct_state_force(nrfx_nfct_state_t state)
         nrfx_nfct_activate_check();
     }
 #endif // defined(NRF52833_XXAA) || defined(NRF52840_XXAA)
-    nrf_nfct_task_trigger((nrf_nfct_task_t) state);
+    nrf_nfct_task_trigger(NRF_NFCT, (nrf_nfct_task_t) state);
 }
 
 void nrfx_nfct_init_substate_force(nrfx_nfct_active_state_t sub_state)
@@ -510,27 +517,27 @@ void nrfx_nfct_init_substate_force(nrfx_nfct_active_state_t sub_state)
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
         if (((*(uint32_t volatile *)(0x40005420)) & 0x1UL) == (1UL))
 #else
-        if (nrf_nfct_sleep_state_get() == NRF_NFCT_SLEEP_STATE_SLEEP_A)
+        if (nrf_nfct_sleep_state_get(NRF_NFCT) == NRF_NFCT_SLEEP_STATE_SLEEP_A)
 #endif //defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
         {
             // Default state is SLEEP_A
-            nrf_nfct_task_trigger(NRF_NFCT_TASK_GOSLEEP);
+            nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_GOSLEEP);
         }
         else
         {
             // Default state is IDLE
-            nrf_nfct_task_trigger(NRF_NFCT_TASK_GOIDLE);
+            nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_GOIDLE);
         }
     }
     else
     {
-        nrf_nfct_task_trigger((nrf_nfct_task_t) sub_state);
+        nrf_nfct_task_trigger(NRF_NFCT, (nrf_nfct_task_t) sub_state);
     }
 
     nrfx_nfct_frame_delay_max_set(true);
 
     /* Disable TX/RX here (will be enabled at SELECTED) */
-    nrf_nfct_int_disable(NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
+    nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
 }
 
 nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
@@ -561,7 +568,8 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
                 return NRFX_ERROR_INVALID_PARAM;
             }
 
-            nrf_nfct_selres_protocol_set((nrf_nfct_selres_protocol_t) p_param->data.sel_res_protocol);
+            nrf_nfct_selres_protocol_set(NRF_NFCT,
+                    (nrf_nfct_selres_protocol_t) p_param->data.sel_res_protocol);
             break;
 
         case NRFX_NFCT_PARAM_ID_NFCID1:
@@ -569,7 +577,7 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
             nrf_nfct_sensres_nfcid1_size_t id_size_mask;
 
             id_size_mask = nrf_nfct_nfcid1_size_to_sensres_size(p_param->data.nfcid1.id_size);
-            nrf_nfct_nfcid1_set(p_param->data.nfcid1.p_id, id_size_mask);
+            nrf_nfct_nfcid1_set(NRF_NFCT, p_param->data.nfcid1.p_id, id_size_mask);
             break;
         }
 
@@ -635,7 +643,7 @@ void nrfx_nfct_autocolres_enable(void)
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     (*(uint32_t *)(0x4000559C)) &= (~(0x1UL));
 #else
-    nrf_nfct_autocolres_enable();
+    nrf_nfct_autocolres_enable(NRF_NFCT);
 #endif //defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
 }
 
@@ -644,7 +652,7 @@ void nrfx_nfct_autocolres_disable(void)
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     (*(uint32_t *)(0x4000559C)) |= (0x1UL);
 #else
-    nrf_nfct_autocolres_disable();
+    nrf_nfct_autocolres_disable(NRF_NFCT);
 #endif //defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
 }
 
@@ -654,7 +662,7 @@ void nrfx_nfct_irq_handler(void)
 
     if (NRFX_NFCT_EVT_ACTIVE(FIELDDETECTED))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_FIELDDETECTED);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_FIELDDETECTED);
         current_field = NRFX_NFC_FIELD_STATE_ON;
 
         NRFX_LOG_DEBUG("Field detected");
@@ -663,7 +671,7 @@ void nrfx_nfct_irq_handler(void)
 #if !defined(NRF52832_XXAA) && !defined(NRF52832_XXAB)
     if (NRFX_NFCT_EVT_ACTIVE(FIELDLOST))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_FIELDLOST);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_FIELDLOST);
         current_field = (current_field == NRFX_NFC_FIELD_STATE_NONE) ?
                         NRFX_NFC_FIELD_STATE_OFF : NRFX_NFC_FIELD_STATE_UNKNOWN;
 
@@ -679,7 +687,7 @@ void nrfx_nfct_irq_handler(void)
 
     if (NRFX_NFCT_EVT_ACTIVE(RXFRAMEEND))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_RXFRAMEEND);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_RXFRAMEEND);
 
         nrfx_nfct_evt_t nfct_evt =
         {
@@ -688,32 +696,33 @@ void nrfx_nfct_irq_handler(void)
 
         /* Take into account only the number of whole bytes. */
         nfct_evt.params.rx_frameend.rx_status         = 0;
-        nfct_evt.params.rx_frameend.rx_data.p_data    = nrf_nfct_rxtx_buffer_get();
-        nfct_evt.params.rx_frameend.rx_data.data_size = NRFX_NFCT_BITS_TO_BYTES(nrf_nfct_rx_bits_get(true));
+        nfct_evt.params.rx_frameend.rx_data.p_data    = nrf_nfct_rxtx_buffer_get(NRF_NFCT);
+        nfct_evt.params.rx_frameend.rx_data.data_size =
+            NRFX_NFCT_BITS_TO_BYTES(nrf_nfct_rx_bits_get(NRF_NFCT, true));
 
         if (NRFX_NFCT_EVT_ACTIVE(RXERROR))
         {
             nfct_evt.params.rx_frameend.rx_status =
-                (nrf_nfct_rx_frame_status_get() & NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
-            nrf_nfct_event_clear(NRF_NFCT_EVENT_RXERROR);
+                (nrf_nfct_rx_frame_status_get(NRF_NFCT) & NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
+            nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_RXERROR);
 
             NRFX_LOG_DEBUG("Rx error (0x%x)", (unsigned int) nfct_evt.params.rx_frameend.rx_status);
 
             /* Clear rx frame status */
-            nrf_nfct_rx_frame_status_clear(NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
+            nrf_nfct_rx_frame_status_clear(NRF_NFCT, NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
         }
 
         NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
 
         /* Clear TXFRAMESTART EVENT so it can be checked in hal_nfc_send */
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMESTART);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMESTART);
 
         NRFX_LOG_DEBUG("Rx fend");
     }
 
     if (NRFX_NFCT_EVT_ACTIVE(TXFRAMEEND))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMEEND);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMEEND);
 
         nrfx_nfct_evt_t nfct_evt =
         {
@@ -721,7 +730,7 @@ void nrfx_nfct_irq_handler(void)
         };
 
         /* Disable TX END event to ignore frame transmission other than READ response */
-        nrf_nfct_int_disable(NRFX_NFCT_TX_INT_MASK);
+        nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_TX_INT_MASK);
 
         NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
 
@@ -730,19 +739,19 @@ void nrfx_nfct_irq_handler(void)
 
     if (NRFX_NFCT_EVT_ACTIVE(SELECTED))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_SELECTED);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_SELECTED);
         /* Clear also RX END and RXERROR events because SW does not take care of
            commands that were received before selecting the tag. */
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_RXFRAMEEND);
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_RXERROR);
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMESTART);
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMEEND);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_RXFRAMEEND);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_RXERROR);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMESTART);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMEEND);
 
         nrfx_nfct_frame_delay_max_set(false);
 
         /* At this point any previous error status can be ignored. */
-        nrf_nfct_rx_frame_status_clear(NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
-        nrf_nfct_error_status_clear(NRFX_NFCT_ERROR_STATUS_ALL_MASK);
+        nrf_nfct_rx_frame_status_clear(NRF_NFCT, NRFX_NFCT_FRAME_STATUS_RX_ALL_MASK);
+        nrf_nfct_error_status_clear(NRF_NFCT, NRFX_NFCT_ERROR_STATUS_ALL_MASK);
 
         nrfx_nfct_evt_t nfct_evt =
         {
@@ -755,8 +764,8 @@ void nrfx_nfct_irq_handler(void)
 
     if (NRFX_NFCT_EVT_ACTIVE(ERROR))
     {
-        uint32_t err_status = nrf_nfct_error_status_get();
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_ERROR);
+        uint32_t err_status = nrf_nfct_error_status_get(NRF_NFCT);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_ERROR);
 
         nrfx_nfct_evt_t nfct_evt =
         {
@@ -766,7 +775,7 @@ void nrfx_nfct_irq_handler(void)
         /* Clear FRAMEDELAYTIMEOUT error (expected HW behaviour) when SLP_REQ command was received. */
         if (err_status & NRF_NFCT_ERROR_FRAMEDELAYTIMEOUT_MASK)
         {
-            nrf_nfct_error_status_clear(NRF_NFCT_ERROR_FRAMEDELAYTIMEOUT_MASK);
+            nrf_nfct_error_status_clear(NRF_NFCT, NRF_NFCT_ERROR_FRAMEDELAYTIMEOUT_MASK);
 
             nfct_evt.params.error.reason = NRFX_NFCT_ERROR_FRAMEDELAYTIMEOUT;
             NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
@@ -780,20 +789,21 @@ void nrfx_nfct_irq_handler(void)
         }
 
         /* Clear error status. */
-        nrf_nfct_error_status_clear(NRFX_NFCT_ERROR_STATUS_ALL_MASK);
+        nrf_nfct_error_status_clear(NRF_NFCT, NRFX_NFCT_ERROR_STATUS_ALL_MASK);
     }
 
     if (NRFX_NFCT_EVT_ACTIVE(TXFRAMESTART))
     {
-        nrf_nfct_event_clear(NRF_NFCT_EVENT_TXFRAMESTART);
+        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMESTART);
 
         if (m_nfct_cb.config.cb != NULL)
         {
             nrfx_nfct_evt_t nfct_evt;
 
             nfct_evt.evt_id                                 = NRFX_NFCT_EVT_TX_FRAMESTART;
-            nfct_evt.params.tx_framestart.tx_data.p_data    = nrf_nfct_rxtx_buffer_get();
-            nfct_evt.params.tx_framestart.tx_data.data_size = NRFX_NFCT_BITS_TO_BYTES(nrf_nfct_tx_bits_get());
+            nfct_evt.params.tx_framestart.tx_data.p_data    = nrf_nfct_rxtx_buffer_get(NRF_NFCT);
+            nfct_evt.params.tx_framestart.tx_data.data_size =
+                NRFX_NFCT_BITS_TO_BYTES(nrf_nfct_tx_bits_get(NRF_NFCT));
 
             m_nfct_cb.config.cb(&nfct_evt);
         }
