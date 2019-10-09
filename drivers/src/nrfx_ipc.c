@@ -47,14 +47,14 @@ nrfx_err_t nrfx_ipc_config_load(const nrfx_ipc_config_t *p_config)
     }
 
     uint32_t i;
-    for (i = 0; i < IPC_TASKS_NUM; ++i)
+    for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_send_config(NRF_IPC,
                             nrf_ipc_send_task_get(i),
                             p_config->tx_signals_channels_cfg[i]);
     }
 
-    for (i = 0; i < IPC_EVENTS_NUM; ++i)
+    for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_receive_config(NRF_IPC,
                                nrf_ipc_receive_event_get(i),
@@ -71,12 +71,12 @@ void nrfx_ipc_uninit(void)
     NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
     uint32_t i;
-    for (i = 0; i < IPC_TASKS_NUM; ++i)
+    for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_send_config(NRF_IPC, nrf_ipc_send_task_get(i), 0);
     }
 
-    for (i = 0; i < IPC_EVENTS_NUM; ++i)
+    for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_receive_config(NRF_IPC, nrf_ipc_receive_event_get(i), 0);
     }

@@ -31,6 +31,7 @@
 #define NRF_PWM0         NRF_PWM0_S
 #define NRF_PWM1         NRF_PWM1_S
 #define NRF_PWM2         NRF_PWM2_S
+#define NRF_QDEC         NRF_QDEC_S
 #define NRF_QSPI         NRF_QSPI_S
 #define NRF_REGULATORS   NRF_REGULATORS_S
 #define NRF_RESET        NRF_RESET_S
@@ -1228,6 +1229,158 @@
 
 #ifndef NRFX_PWM_CONFIG_DEBUG_COLOR
 #define NRFX_PWM_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> NRFX_QDEC_ENABLED - nrfx_qdec - QDEC peripheral driver
+//==========================================================
+#ifndef NRFX_QDEC_ENABLED
+#define NRFX_QDEC_ENABLED 1
+#endif
+// <o> NRFX_QDEC_CONFIG_REPORTPER  - Report period
+
+// <0=> 10 Samples
+// <1=> 40 Samples
+// <2=> 80 Samples
+// <3=> 120 Samples
+// <4=> 160 Samples
+// <5=> 200 Samples
+// <6=> 240 Samples
+// <7=> 280 Samples
+
+#ifndef NRFX_QDEC_CONFIG_REPORTPER
+#define NRFX_QDEC_CONFIG_REPORTPER 0
+#endif
+
+// <o> NRFX_QDEC_CONFIG_SAMPLEPER  - Sample period
+
+// <0=> 128 us
+// <1=> 256 us
+// <2=> 512 us
+// <3=> 1024 us
+// <4=> 2048 us
+// <5=> 4096 us
+// <6=> 8192 us
+// <7=> 16384 us
+
+#ifndef NRFX_QDEC_CONFIG_SAMPLEPER
+#define NRFX_QDEC_CONFIG_SAMPLEPER 7
+#endif
+
+// <o> NRFX_QDEC_CONFIG_PIO_A - A pin  <0-31>
+
+
+#ifndef NRFX_QDEC_CONFIG_PIO_A
+#define NRFX_QDEC_CONFIG_PIO_A 31
+#endif
+
+// <o> NRFX_QDEC_CONFIG_PIO_B - B pin  <0-31>
+
+
+#ifndef NRFX_QDEC_CONFIG_PIO_B
+#define NRFX_QDEC_CONFIG_PIO_B 31
+#endif
+
+// <o> NRFX_QDEC_CONFIG_PIO_LED - LED pin  <0-31>
+
+
+#ifndef NRFX_QDEC_CONFIG_PIO_LED
+#define NRFX_QDEC_CONFIG_PIO_LED 31
+#endif
+
+// <o> NRFX_QDEC_CONFIG_LEDPRE - LED pre
+#ifndef NRFX_QDEC_CONFIG_LEDPRE
+#define NRFX_QDEC_CONFIG_LEDPRE 511
+#endif
+
+// <o> NRFX_QDEC_CONFIG_LEDPOL  - LED polarity
+
+// <0=> Active low
+// <1=> Active high
+
+#ifndef NRFX_QDEC_CONFIG_LEDPOL
+#define NRFX_QDEC_CONFIG_LEDPOL 1
+#endif
+
+// <q> NRFX_QDEC_CONFIG_DBFEN  - Debouncing enable
+
+
+#ifndef NRFX_QDEC_CONFIG_DBFEN
+#define NRFX_QDEC_CONFIG_DBFEN 0
+#endif
+
+// <q> NRFX_QDEC_CONFIG_SAMPLE_INTEN  - Sample ready interrupt enable
+
+
+#ifndef NRFX_QDEC_CONFIG_SAMPLE_INTEN
+#define NRFX_QDEC_CONFIG_SAMPLE_INTEN 0
+#endif
+
+// <o> NRFX_QDEC_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_QDEC_CONFIG_IRQ_PRIORITY
+#define NRFX_QDEC_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> NRFX_QDEC_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_QDEC_CONFIG_LOG_ENABLED
+#define NRFX_QDEC_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_QDEC_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_QDEC_CONFIG_LOG_LEVEL
+#define NRFX_QDEC_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_QDEC_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_QDEC_CONFIG_INFO_COLOR
+#define NRFX_QDEC_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_QDEC_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_QDEC_CONFIG_DEBUG_COLOR
+#define NRFX_QDEC_CONFIG_DEBUG_COLOR 0
 #endif
 
 // </e>

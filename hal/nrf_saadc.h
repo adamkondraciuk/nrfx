@@ -9,11 +9,6 @@
 extern "C" {
 #endif
 
-#ifndef SAADC_CH_NUM
-/* Workaround for missing definition in <nrf9160_peripherals.h>. To be removed. */
-#define SAADC_CH_NUM 8
-#endif
-
 /**
  * @defgroup nrf_saadc_hal SAADC HAL
  * @{

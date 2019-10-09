@@ -120,7 +120,8 @@ extern "C" {
 
 // GPIOTE1_IRQn
 
-// RCOSC32K_IRQn
+// QDEC_IRQn
+#define nrfx_qdec_irq_handler       QDEC_IRQHandler
 
 // USBD_IRQn
 #define nrfx_usbd_irq_handler       USBD_IRQHandler

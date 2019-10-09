@@ -69,9 +69,9 @@ typedef void (*nrfx_ipc_handler_t)(uint8_t event_index, void * p_context);
  */
 typedef struct
 {
-    uint32_t tx_signals_channels_cfg[IPC_TASKS_NUM]; ///< Configuration of the connection between signals and IPC channels.
-    uint32_t rx_events_channels_cfg[IPC_EVENTS_NUM]; ///< Configuration of the connection between events and IPC channels.
-    uint32_t rx_events_enable_cfg;                   ///< Bitmask with events to be enabled to generate interrupt.
+    uint32_t tx_signals_channels_cfg[IPC_CONF_NUM]; ///< Configuration of the connection between signals and IPC channels.
+    uint32_t rx_events_channels_cfg[IPC_CONF_NUM];  ///< Configuration of the connection between events and IPC channels.
+    uint32_t rx_events_enable_cfg;                  ///< Bitmask with events to be enabled to generate interrupt.
 } nrfx_ipc_config_t;
 
 /**
