@@ -6,7 +6,7 @@
   <name>nrf5340_application</name>
   <series>nrf53</series>
   <version>1</version>
-  <description>nRF53 reference description for radio MCU with ARM 32-bit Cortex-M33 Microcontroller</description>
+  <description>nRF53 reference description for system-on-chip with dual ARM 32-bit Cortex-M33 microcontrollers</description>
   <licenseText>
 Copyright (c) 2010 - 2018, Nordic Semiconductor ASA
 
@@ -194,7 +194,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <description>Cache tag.</description>
                 <lsb>0</lsb>
                 <msb>16</msb>
-                <access>read-only</access>
               </field>
               <field>
                 <name>V</name>
@@ -297,7 +296,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Part code</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
+            <resetValue>0x00005340</resetValue>
             <fields>
               <field>
                 <name>PART</name>
@@ -360,9 +359,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>CK</name>
-                    <description>CKxx - 7x8 WLCSP 56 balls with backside coating for light protection</description>
-                    <value>0x2005</value>
+                    <name>QF</name>
+                    <description>QFxx - 94 pin QFN</description>
+                    <value>0x2000</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Unspecified</name>
@@ -477,13 +476,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Code memory page size in bytes</description>
             <addressOffset>0x020</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
+            <resetValue>0x00001000</resetValue>
             <fields>
               <field>
                 <name>CODEPAGESIZE</name>
                 <description>Code memory page size in bytes</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>K4096</name>
+                    <description>4 kByte</description>
+                    <value>0x1000</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -492,13 +498,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Code memory size</description>
             <addressOffset>0x024</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
+            <resetValue>0x00000100</resetValue>
             <fields>
               <field>
                 <name>CODESIZE</name>
                 <description>Code memory size in number of pages</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>P256</name>
+                    <description>256 pages</description>
+                    <value>256</value>
+                  </enumeratedValue>
+                </enumeratedValues>
               </field>
             </fields>
           </register>
@@ -507,7 +520,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Device type</description>
             <addressOffset>0x028</addressOffset>
             <access>read-only</access>
-            <resetValue>0xFFFFFFFF</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>DEVICETYPE</name>
@@ -540,7 +553,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x300</addressOffset>
           <register>
             <name>ADDR</name>
-            <description>Description cluster: Address</description>
+            <description>Description cluster: Address of the PAR register which will be written</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
@@ -563,8 +576,147 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>Data</name>
-                <description>Data</description>
+                <description>Data to be written into the PAR register</description>
                 <lsb>0</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <cluster>
+          <name>NFC</name>
+          <description>Unspecified</description>
+          <headerStructName>FICR_NFC</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x450</addressOffset>
+          <register>
+            <name>TAGHEADER0</name>
+            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFF5F</resetValue>
+            <fields>
+              <field>
+                <name>MFGID</name>
+                <description>Default Manufacturer ID: Nordic Semiconductor ASA has ICM 0x5F</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+              </field>
+              <field>
+                <name>UD1</name>
+                <description>Unique identifier byte 1</description>
+                <lsb>8</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>UD2</name>
+                <description>Unique identifier byte 2</description>
+                <lsb>16</lsb>
+                <msb>23</msb>
+              </field>
+              <field>
+                <name>UD3</name>
+                <description>Unique identifier byte 3</description>
+                <lsb>24</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>TAGHEADER1</name>
+            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>UD4</name>
+                <description>Unique identifier byte 4</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+              </field>
+              <field>
+                <name>UD5</name>
+                <description>Unique identifier byte 5</description>
+                <lsb>8</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>UD6</name>
+                <description>Unique identifier byte 6</description>
+                <lsb>16</lsb>
+                <msb>23</msb>
+              </field>
+              <field>
+                <name>UD7</name>
+                <description>Unique identifier byte 7</description>
+                <lsb>24</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>TAGHEADER2</name>
+            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>UD8</name>
+                <description>Unique identifier byte 8</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+              </field>
+              <field>
+                <name>UD9</name>
+                <description>Unique identifier byte 9</description>
+                <lsb>8</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>UD10</name>
+                <description>Unique identifier byte 10</description>
+                <lsb>16</lsb>
+                <msb>23</msb>
+              </field>
+              <field>
+                <name>UD11</name>
+                <description>Unique identifier byte 11</description>
+                <lsb>24</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>TAGHEADER3</name>
+            <description>Default header for NFC Tag. Software can read these values to populate NFCID1_3RD_LAST, NFCID1_2ND_LAST and NFCID1_LAST.</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-only</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>UD12</name>
+                <description>Unique identifier byte 12</description>
+                <lsb>0</lsb>
+                <msb>7</msb>
+              </field>
+              <field>
+                <name>UD13</name>
+                <description>Unique identifier byte 13</description>
+                <lsb>8</lsb>
+                <msb>15</msb>
+              </field>
+              <field>
+                <name>UD14</name>
+                <description>Unique identifier byte 14</description>
+                <lsb>16</lsb>
+                <msb>23</msb>
+              </field>
+              <field>
+                <name>UD15</name>
+                <description>Unique identifier byte 15</description>
+                <lsb>24</lsb>
                 <msb>31</msb>
               </field>
             </fields>
@@ -699,14 +851,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </cluster>
         <register>
           <name>XOSC32MTRIM</name>
-          <description>XOSC32M capacitor selection values for OSCILLATORS-&amp;gt;XOSC32MCAPS register</description>
+          <description>XOSC32M capacitor selection trim values</description>
           <addressOffset>0xC20</addressOffset>
           <access>read-only</access>
           <resetValue>0xFFFFFFFF</resetValue>
           <fields>
             <field>
               <name>SLOPE</name>
-              <description>Slope trim factor on 2's complement form</description>
+              <description>Slope trim factor on twos complement form</description>
               <lsb>0</lsb>
               <msb>4</msb>
             </field>
@@ -837,6 +989,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>DEFAULT</name>
                   <description>Default voltage: 1.8 V</description>
                   <value>7</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>HFXOCNT</name>
+          <description>HFXO startup counter</description>
+          <addressOffset>0x014</addressOffset>
+          <access>read-write</access>
+          <resetValue>0xFFFFFFFF</resetValue>
+          <fields>
+            <field>
+              <name>HFXOCNT</name>
+              <description>HFXO startup counter. Total debounce time = HFXOCNT*64 us + 0.5 us</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>MinDebounceTime</name>
+                  <description>Min debounce time = (0*64 us + 0.5 us)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>MaxDebounceTime</name>
+                  <description>Max debounce time = (255*64 us + 0.5 us)</description>
+                  <value>255</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -3488,13 +3667,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <msb>7</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>ApplicationMCU</name>
-                  <description>Application MCU</description>
+                  <name>ApplicationCore</name>
+                  <description>Application core</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>NetworkMCU</name>
-                  <description>Network MCU</description>
+                  <name>NetworkCore</name>
+                  <description>Network core</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -3666,7 +3845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x400</addressOffset>
           <register>
             <name>IHIT</name>
-            <description>Description cluster: Instruction fetch cache hit counter for cache region n.</description>
+            <description>Description cluster: Instruction fetch cache hit counter for cache region n, where n=0 means Flash and n=1 means XIP.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-only</access>
             <fields>
@@ -3680,7 +3859,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>IMISS</name>
-            <description>Description cluster: Instruction fetch cache miss counter for cache region n.</description>
+            <description>Description cluster: Instruction fetch cache miss counter for cache region n, where n=0 means Flash and n=1 means XIP.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-only</access>
             <fields>
@@ -3694,7 +3873,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>DHIT</name>
-            <description>Description cluster: Data fetch cache hit counter for cache region n.</description>
+            <description>Description cluster: Data fetch cache hit counter for cache region n, where n=0 means Flash and n=1 means XIP.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <fields>
@@ -3708,7 +3887,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
           <register>
             <name>DMISS</name>
-            <description>Description cluster: Data fetch cache miss counter for cache region n.</description>
+            <description>Description cluster: Data fetch cache miss counter for cache region n, where n=0 means Flash and n=1 means XIP.</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <fields>
@@ -3822,8 +4001,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>write-only</access>
           <fields>
             <field>
-              <name>ENABLE</name>
-              <description>Clear the profiling counters</description>
+              <name>CLEAR</name>
+              <description>Clearing the profiling counters</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6057,7 +6236,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <dim>32</dim>
+          <dim>64</dim>
           <dimIncrement>0x004</dimIncrement>
           <name>FLASHREGION[%s]</name>
           <description>Unspecified</description>
@@ -6271,7 +6450,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <dim>27</dim>
+          <dim>256</dim>
           <dimIncrement>0x004</dimIncrement>
           <name>PERIPHID[%s]</name>
           <description>Unspecified</description>
@@ -6416,9 +6595,128 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </registers>
     </peripheral>
     <peripheral>
+      <name>OSCILLATORS_NS</name>
+      <description>Oscillator control 0</description>
+      <baseAddress>0x40004000</baseAddress>
+      <headerStructName>OSCILLATORS</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <groupName>OSCILLATORS</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>XOSC32MCAPS</name>
+          <description>Programmable capacitance of XC1 and XC2</description>
+          <addressOffset>0x5C4</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CAPVALUE</name>
+              <description>Value representing capacitance, calculated using provided equation</description>
+              <lsb>0</lsb>
+              <msb>4</msb>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable on-chip capacitors on XC1 and XC2</description>
+              <lsb>8</lsb>
+              <msb>8</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Capacitor disabled (use external caps)</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Capacitor enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <cluster>
+          <name>XOSC32KI</name>
+          <description>Unspecified</description>
+          <headerStructName>OSCILLATORS_XOSC32KI</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x6C0</addressOffset>
+          <register>
+            <name>BYPASS</name>
+            <description>Enable or disable bypass of LFCLK crystal oscillator with external clock source</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>BYPASS</name>
+                <description>Enable or disable bypass of LFCLK crystal oscillator with external clock source</description>
+                <lsb>0</lsb>
+                <msb>0</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Disable (use with xtal or low-swing external source)</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>Enable (use with rail-to-rail external source)</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>INTCAP</name>
+            <description>Control usage of internal load capacitors</description>
+            <addressOffset>0x010</addressOffset>
+            <access>read-write</access>
+            <fields>
+              <field>
+                <name>INTCAP</name>
+                <description>Control usage of internal load capacitors</description>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>External</name>
+                    <description>Use external load capacitors</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>C6PF</name>
+                    <description>6 pF internal load capacitance</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>C7PF</name>
+                    <description>7 pF internal load capacitance</description>
+                    <value>2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>C11PF</name>
+                    <description>11 pF internal load capacitance</description>
+                    <value>3</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+      </registers>
+    </peripheral>
+    <peripheral>
       <name>REGULATORS_NS</name>
       <description>Voltage regulators 0</description>
       <baseAddress>0x40004000</baseAddress>
+      <alternatePeripheral>OSCILLATORS_NS</alternatePeripheral>
       <headerStructName>REGULATORS</headerStructName>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
@@ -6751,10 +7049,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral derivedFrom="OSCILLATORS_NS">
+      <name>OSCILLATORS_S</name>
+      <description>Oscillator control 1</description>
+      <baseAddress>0x50004000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
     <peripheral derivedFrom="REGULATORS_NS">
       <name>REGULATORS_S</name>
       <description>Voltage regulators 1</description>
       <baseAddress>0x50004000</baseAddress>
+      <alternatePeripheral>OSCILLATORS_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
     </peripheral>
@@ -6779,13 +7085,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <registers>
         <register>
           <name>TASKS_HFCLKSTART</name>
-          <description>Start HFCLK crystal oscillator</description>
+          <description>Start HFCLK source</description>
           <addressOffset>0x000</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKSTART</name>
-              <description>Start HFCLK crystal oscillator</description>
+              <description>Start HFCLK source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6800,13 +7106,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_HFCLKSTOP</name>
-          <description>Stop HFCLK crystal oscillator</description>
+          <description>Stop HFCLK source</description>
           <addressOffset>0x004</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKSTOP</name>
-              <description>Stop HFCLK crystal oscillator</description>
+              <description>Stop HFCLK source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6884,13 +7190,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_HFCLKAUDIOSTART</name>
-          <description>Start HFCLKAUDIO crystal oscillator</description>
+          <description>Start HFCLKAUDIO source</description>
           <addressOffset>0x018</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKAUDIOSTART</name>
-              <description>Start HFCLKAUDIO crystal oscillator</description>
+              <description>Start HFCLKAUDIO source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6905,13 +7211,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_HFCLKAUDIOSTOP</name>
-          <description>Stop HFCLKAUDIO crystal oscillator</description>
+          <description>Stop HFCLKAUDIO source</description>
           <addressOffset>0x01C</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLKAUDIOSTOP</name>
-              <description>Stop HFCLKAUDIO crystal oscillator</description>
+              <description>Stop HFCLKAUDIO source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6926,13 +7232,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_HFCLK192MSTART</name>
-          <description>Start HFCLK192M crystal oscillator</description>
+          <description>Start HFCLK192M source</description>
           <addressOffset>0x020</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLK192MSTART</name>
-              <description>Start HFCLK192M crystal oscillator</description>
+              <description>Start HFCLK192M source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -6947,13 +7253,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>TASKS_HFCLK192MSTOP</name>
-          <description>Stop HFCLK192M crystal oscillator</description>
+          <description>Stop HFCLK192M source</description>
           <addressOffset>0x024</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_HFCLK192MSTOP</name>
-              <description>Stop HFCLK192M crystal oscillator</description>
+              <description>Stop HFCLK192M source</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -7247,13 +7553,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_HFCLKSTARTED</name>
-          <description>HFCLK oscillator started</description>
+          <description>HFCLK source started</description>
           <addressOffset>0x100</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_HFCLKSTARTED</name>
-              <description>HFCLK oscillator started</description>
+              <description>HFCLK source started</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -7273,13 +7579,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_LFCLKSTARTED</name>
-          <description>LFCLK started</description>
+          <description>LFCLK source started</description>
           <addressOffset>0x104</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_LFCLKSTARTED</name>
-              <description>LFCLK started</description>
+              <description>LFCLK source started</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -7299,13 +7605,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_HFCLKAUDIOSTARTED</name>
-          <description>HFCLKAUDIO oscillator started</description>
+          <description>HFCLKAUDIO source started</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_HFCLKAUDIOSTARTED</name>
-              <description>HFCLKAUDIO oscillator started</description>
+              <description>HFCLKAUDIO source started</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -7325,13 +7631,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_HFCLK192MSTARTED</name>
-          <description>HFCLK192M oscillator started</description>
+          <description>HFCLK192M source started</description>
           <addressOffset>0x124</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_HFCLK192MSTARTED</name>
-              <description>HFCLK192M oscillator started</description>
+              <description>HFCLK192M source started</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -8319,13 +8625,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>HFCLK frequency configuration</description>
           <addressOffset>0x558</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000002</resetValue>
+          <resetValue>0x00000001</resetValue>
           <fields>
             <field>
               <name>HCLK</name>
               <description>High frequency clock HCLK</description>
               <lsb>0</lsb>
-              <msb>1</msb>
+              <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Div1</name>
@@ -8336,11 +8642,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>Div2</name>
                   <description>Divide HFCLK by 2</description>
                   <value>1</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Div4</name>
-                  <description>Divide HFCLK by 4</description>
-                  <value>2</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
@@ -8504,6 +8805,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>HFCLK192M frequency configuration</description>
           <addressOffset>0x5B8</addressOffset>
           <access>read-write</access>
+          <resetValue>0x00000002</resetValue>
           <fields>
             <field>
               <name>HCLK192M</name>
@@ -9307,7 +9609,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>MFORCEOFF</name>
-              <description>Force off reset from application MCU detected</description>
+              <description>Force off reset from Application core detected</description>
               <lsb>23</lsb>
               <msb>23</msb>
               <enumeratedValues>
@@ -9399,20 +9701,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <cluster>
           <name>NETWORK</name>
-          <description>ULP network MCU control</description>
+          <description>ULP Network core control</description>
           <headerStructName>RESET_NETWORK</headerStructName>
           <access>read-write</access>
           <addressOffset>0x610</addressOffset>
           <register>
             <name>FORCEOFF</name>
-            <description>Force off power and clock in network MCU</description>
+            <description>Force off power and clock in Network core</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000001</resetValue>
             <fields>
               <field>
                 <name>FORCEOFF</name>
-                <description>Force off power and clock in network MCU</description>
+                <description>Force off power and clock in Network core</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -18858,7 +19160,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>CONFIG[%s]</name>
-          <description>Description collection: Configuration for OUT[n], SET[n] and CLR[n] tasks and IN[n] event</description>
+          <description>Description collection: Configuration for OUT[n], SET[n], and CLR[n] tasks and IN[n] event</description>
           <addressOffset>0x510</addressOffset>
           <access>read-write</access>
           <fields>
@@ -18887,7 +19189,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>PSEL</name>
-              <description>GPIO number associated with SET[n], CLR[n] and OUT[n] tasks and IN[n] event</description>
+              <description>GPIO number associated with SET[n], CLR[n], and OUT[n] tasks and IN[n] event</description>
               <lsb>8</lsb>
               <msb>12</msb>
             </field>
@@ -21275,7 +21577,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Busy</name>
-                  <description>ADC is busy. Conversion in progress.</description>
+                  <description>ADC is busy. Single conversion in progress.</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -21379,6 +21681,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <description>VDD</description>
                     <value>9</value>
                   </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VDDHDIV5</name>
+                    <description>VDDH/5</description>
+                    <value>0xD</value>
+                  </enumeratedValue>
                 </enumeratedValues>
               </field>
             </fields>
@@ -21445,6 +21752,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <name>VDD</name>
                     <description>VDD</description>
                     <value>9</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VDDHDIV5</name>
+                    <description>VDDH/5</description>
+                    <value>0xD</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -24543,7 +24855,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </peripheral>
     <peripheral>
       <name>DPPIC_NS</name>
-      <description>Distributed Programmable Peripheral Interconnect Controller 0</description>
+      <description>Distributed programmable peripheral interconnect controller 0</description>
       <baseAddress>0x40017000</baseAddress>
       <headerStructName>DPPIC</headerStructName>
       <!--Security dma=NA-->
@@ -25271,19 +25583,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>CH0</name>
-              <description>Channel 0 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 0 enable set register. Writing 0 has no effect.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25298,19 +25610,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH1</name>
-              <description>Channel 1 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 1 enable set register. Writing 0 has no effect.</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25325,19 +25637,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH2</name>
-              <description>Channel 2 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 2 enable set register. Writing 0 has no effect.</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25352,19 +25664,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH3</name>
-              <description>Channel 3 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 3 enable set register. Writing 0 has no effect.</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25379,19 +25691,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH4</name>
-              <description>Channel 4 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 4 enable set register. Writing 0 has no effect.</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25406,19 +25718,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH5</name>
-              <description>Channel 5 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 5 enable set register. Writing 0 has no effect.</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25433,19 +25745,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH6</name>
-              <description>Channel 6 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 6 enable set register. Writing 0 has no effect.</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25460,19 +25772,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH7</name>
-              <description>Channel 7 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 7 enable set register. Writing 0 has no effect.</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25487,19 +25799,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH8</name>
-              <description>Channel 8 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 8 enable set register. Writing 0 has no effect.</description>
               <lsb>8</lsb>
               <msb>8</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25514,19 +25826,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH9</name>
-              <description>Channel 9 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 9 enable set register. Writing 0 has no effect.</description>
               <lsb>9</lsb>
               <msb>9</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25541,19 +25853,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH10</name>
-              <description>Channel 10 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 10 enable set register. Writing 0 has no effect.</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25568,19 +25880,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH11</name>
-              <description>Channel 11 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 11 enable set register. Writing 0 has no effect.</description>
               <lsb>11</lsb>
               <msb>11</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25595,19 +25907,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH12</name>
-              <description>Channel 12 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 12 enable set register. Writing 0 has no effect.</description>
               <lsb>12</lsb>
               <msb>12</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25622,19 +25934,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH13</name>
-              <description>Channel 13 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 13 enable set register. Writing 0 has no effect.</description>
               <lsb>13</lsb>
               <msb>13</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25649,19 +25961,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH14</name>
-              <description>Channel 14 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 14 enable set register. Writing 0 has no effect.</description>
               <lsb>14</lsb>
               <msb>14</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25676,19 +25988,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH15</name>
-              <description>Channel 15 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 15 enable set register. Writing 0 has no effect.</description>
               <lsb>15</lsb>
               <msb>15</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25703,19 +26015,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH16</name>
-              <description>Channel 16 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 16 enable set register. Writing 0 has no effect.</description>
               <lsb>16</lsb>
               <msb>16</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25730,19 +26042,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH17</name>
-              <description>Channel 17 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 17 enable set register. Writing 0 has no effect.</description>
               <lsb>17</lsb>
               <msb>17</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25757,19 +26069,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH18</name>
-              <description>Channel 18 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 18 enable set register. Writing 0 has no effect.</description>
               <lsb>18</lsb>
               <msb>18</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25784,19 +26096,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH19</name>
-              <description>Channel 19 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 19 enable set register. Writing 0 has no effect.</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25811,19 +26123,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH20</name>
-              <description>Channel 20 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 20 enable set register. Writing 0 has no effect.</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25838,19 +26150,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH21</name>
-              <description>Channel 21 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 21 enable set register. Writing 0 has no effect.</description>
               <lsb>21</lsb>
               <msb>21</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25865,19 +26177,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH22</name>
-              <description>Channel 22 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 22 enable set register. Writing 0 has no effect.</description>
               <lsb>22</lsb>
               <msb>22</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25892,19 +26204,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH23</name>
-              <description>Channel 23 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 23 enable set register. Writing 0 has no effect.</description>
               <lsb>23</lsb>
               <msb>23</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25919,19 +26231,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH24</name>
-              <description>Channel 24 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 24 enable set register. Writing 0 has no effect.</description>
               <lsb>24</lsb>
               <msb>24</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25946,19 +26258,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH25</name>
-              <description>Channel 25 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 25 enable set register. Writing 0 has no effect.</description>
               <lsb>25</lsb>
               <msb>25</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -25973,19 +26285,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH26</name>
-              <description>Channel 26 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 26 enable set register. Writing 0 has no effect.</description>
               <lsb>26</lsb>
               <msb>26</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26000,19 +26312,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH27</name>
-              <description>Channel 27 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 27 enable set register. Writing 0 has no effect.</description>
               <lsb>27</lsb>
               <msb>27</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26027,19 +26339,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH28</name>
-              <description>Channel 28 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 28 enable set register. Writing 0 has no effect.</description>
               <lsb>28</lsb>
               <msb>28</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26054,19 +26366,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH29</name>
-              <description>Channel 29 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 29 enable set register. Writing 0 has no effect.</description>
               <lsb>29</lsb>
               <msb>29</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26081,19 +26393,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH30</name>
-              <description>Channel 30 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 30 enable set register. Writing 0 has no effect.</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26108,19 +26420,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>CH31</name>
-              <description>Channel 31 enable set register.  Writing '0' has no effect</description>
+              <description>Channel 31 enable set register. Writing 0 has no effect.</description>
               <lsb>31</lsb>
               <msb>31</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26144,19 +26456,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>CH0</name>
-              <description>Channel 0 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 0 enable clear register.  Writing 0 has no effect.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26164,26 +26476,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH1</name>
-              <description>Channel 1 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 1 enable clear register.  Writing 0 has no effect.</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26191,26 +26503,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH2</name>
-              <description>Channel 2 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 2 enable clear register.  Writing 0 has no effect.</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26218,26 +26530,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH3</name>
-              <description>Channel 3 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 3 enable clear register.  Writing 0 has no effect.</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26245,26 +26557,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH4</name>
-              <description>Channel 4 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 4 enable clear register.  Writing 0 has no effect.</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26272,26 +26584,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH5</name>
-              <description>Channel 5 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 5 enable clear register.  Writing 0 has no effect.</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26299,26 +26611,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH6</name>
-              <description>Channel 6 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 6 enable clear register.  Writing 0 has no effect.</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26326,26 +26638,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH7</name>
-              <description>Channel 7 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 7 enable clear register.  Writing 0 has no effect.</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26353,26 +26665,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH8</name>
-              <description>Channel 8 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 8 enable clear register.  Writing 0 has no effect.</description>
               <lsb>8</lsb>
               <msb>8</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26380,26 +26692,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH9</name>
-              <description>Channel 9 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 9 enable clear register.  Writing 0 has no effect.</description>
               <lsb>9</lsb>
               <msb>9</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26407,26 +26719,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH10</name>
-              <description>Channel 10 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 10 enable clear register.  Writing 0 has no effect.</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26434,26 +26746,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH11</name>
-              <description>Channel 11 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 11 enable clear register.  Writing 0 has no effect.</description>
               <lsb>11</lsb>
               <msb>11</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26461,26 +26773,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH12</name>
-              <description>Channel 12 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 12 enable clear register.  Writing 0 has no effect.</description>
               <lsb>12</lsb>
               <msb>12</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26488,26 +26800,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH13</name>
-              <description>Channel 13 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 13 enable clear register.  Writing 0 has no effect.</description>
               <lsb>13</lsb>
               <msb>13</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26515,26 +26827,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH14</name>
-              <description>Channel 14 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 14 enable clear register.  Writing 0 has no effect.</description>
               <lsb>14</lsb>
               <msb>14</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26542,26 +26854,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH15</name>
-              <description>Channel 15 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 15 enable clear register.  Writing 0 has no effect.</description>
               <lsb>15</lsb>
               <msb>15</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26569,26 +26881,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH16</name>
-              <description>Channel 16 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 16 enable clear register.  Writing 0 has no effect.</description>
               <lsb>16</lsb>
               <msb>16</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26596,26 +26908,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH17</name>
-              <description>Channel 17 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 17 enable clear register.  Writing 0 has no effect.</description>
               <lsb>17</lsb>
               <msb>17</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26623,26 +26935,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH18</name>
-              <description>Channel 18 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 18 enable clear register.  Writing 0 has no effect.</description>
               <lsb>18</lsb>
               <msb>18</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26650,26 +26962,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH19</name>
-              <description>Channel 19 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 19 enable clear register.  Writing 0 has no effect.</description>
               <lsb>19</lsb>
               <msb>19</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26677,26 +26989,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH20</name>
-              <description>Channel 20 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 20 enable clear register.  Writing 0 has no effect.</description>
               <lsb>20</lsb>
               <msb>20</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26704,26 +27016,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH21</name>
-              <description>Channel 21 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 21 enable clear register.  Writing 0 has no effect.</description>
               <lsb>21</lsb>
               <msb>21</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26731,26 +27043,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH22</name>
-              <description>Channel 22 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 22 enable clear register.  Writing 0 has no effect.</description>
               <lsb>22</lsb>
               <msb>22</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26758,26 +27070,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH23</name>
-              <description>Channel 23 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 23 enable clear register.  Writing 0 has no effect.</description>
               <lsb>23</lsb>
               <msb>23</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26785,26 +27097,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH24</name>
-              <description>Channel 24 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 24 enable clear register.  Writing 0 has no effect.</description>
               <lsb>24</lsb>
               <msb>24</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26812,26 +27124,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH25</name>
-              <description>Channel 25 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 25 enable clear register.  Writing 0 has no effect.</description>
               <lsb>25</lsb>
               <msb>25</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26839,26 +27151,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH26</name>
-              <description>Channel 26 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 26 enable clear register.  Writing 0 has no effect.</description>
               <lsb>26</lsb>
               <msb>26</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26866,26 +27178,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH27</name>
-              <description>Channel 27 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 27 enable clear register.  Writing 0 has no effect.</description>
               <lsb>27</lsb>
               <msb>27</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26893,26 +27205,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH28</name>
-              <description>Channel 28 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 28 enable clear register.  Writing 0 has no effect.</description>
               <lsb>28</lsb>
               <msb>28</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26920,26 +27232,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH29</name>
-              <description>Channel 29 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 29 enable clear register.  Writing 0 has no effect.</description>
               <lsb>29</lsb>
               <msb>29</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26947,26 +27259,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH30</name>
-              <description>Channel 30 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 30 enable clear register.  Writing 0 has no effect.</description>
               <lsb>30</lsb>
               <msb>30</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -26974,26 +27286,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>CH31</name>
-              <description>Channel 31 enable clear register.  Writing '0' has no effect</description>
+              <description>Channel 31 enable clear register.  Writing 0 has no effect.</description>
               <lsb>31</lsb>
               <msb>31</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Read: channel disabled</description>
+                  <description>Read: Channel disabled</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Read: channel enabled</description>
+                  <description>Read: Channel enabled</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -27001,7 +27313,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <usage>write</usage>
                 <enumeratedValue>
                   <name>Clear</name>
-                  <description>Write: disable channel</description>
+                  <description>Write: Disable channel</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -27012,7 +27324,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <dim>0x6</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>CHG[%s]</name>
-          <description>Description collection: Channel group n Note: Writes to this register is ignored if either SUBSCRIBE_CHG[n].EN/DIS are enabled.</description>
+          <description>Description collection: Channel group n Note: Writes to this register are ignored if either SUBSCRIBE_CHG[n].EN or SUBSCRIBE_CHG[n].DIS is enabled</description>
           <addressOffset>0x800</addressOffset>
           <access>read-write</access>
           <fields>
@@ -27598,7 +27910,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </peripheral>
     <peripheral derivedFrom="DPPIC_NS">
       <name>DPPIC_S</name>
-      <description>Distributed Programmable Peripheral Interconnect Controller 1</description>
+      <description>Distributed programmable peripheral interconnect controller 1</description>
       <baseAddress>0x50017000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=SPLIT-->
@@ -34272,7 +34584,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>FREQ</name>
-              <description>PDM_CLK frequency configuration NOTE: Enumerations are deprecated, use PDMCLKCTRL equation. NOTE: The 12 least significant bits of the register are ignored and shall be set to zero.</description>
+              <description>PDM_CLK frequency configuration Enumerations are deprecated, use
+        PDMCLKCTRL equation to find the register value. The 12 least significant bits of the
+        register are ignored and shall be set to zero.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -34325,19 +34639,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Stereo</name>
-                  <description>Sample and store one pair (Left + Right) of 16bit samples per RAM word R=[31:16]; L=[15:0]</description>
+                  <description>Sample and store one pair (left + right) of 16-bit samples per RAM word R=[31:16]; L=[15:0]</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Mono</name>
-                  <description>Sample and store two successive Left samples (16 bit each) per RAM word L1=[31:16]; L0=[15:0]</description>
+                  <description>Sample and store two successive left samples (16 bits each) per RAM word L1=[31:16]; L0=[15:0]</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>EDGE</name>
-              <description>Defines on which PDM_CLK edge Left (or mono) is sampled</description>
+              <description>Defines on which PDM_CLK edge left (or mono) is sampled</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -34759,13 +35073,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>EVENTS_STOPPED</name>
-          <description>I2S transfer stopped</description>
+          <description>I2S transfer stopped.</description>
           <addressOffset>0x108</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>EVENTS_STOPPED</name>
-              <description>I2S transfer stopped</description>
+              <description>I2S transfer stopped.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -35780,7 +36094,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x538</addressOffset>
           <register>
             <name>PTR</name>
-            <description>Receive buffer RAM start addres.</description>
+            <description>Receive buffer RAM start address.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -43356,64 +43670,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>RCOSC32K</name>
-        <value>50</value>
-      </interrupt>
       <groupName>RCOSC32K</groupName>
       <size>0x20</size>
       <registers>
         <register>
           <name>TASKS_CAL</name>
-          <description>Start calibration of LFRC or LFULP oscillator</description>
+          <description>Start calibration of LFRC oscillator</description>
           <addressOffset>0x0</addressOffset>
           <access>write-only</access>
           <fields>
             <field>
               <name>TASKS_CAL</name>
-              <description>Start calibration of LFRC or LFULP oscillator</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_CTSTART</name>
-          <description>Start calibration timer</description>
-          <addressOffset>0x4</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_CTSTART</name>
-              <description>Start calibration timer</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>TASKS_CTSTOP</name>
-          <description>Stop calibration timer</description>
-          <addressOffset>0x8</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_CTSTOP</name>
-              <description>Stop calibration timer</description>
+              <description>Start calibration of LFRC oscillator</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -43458,94 +43726,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>SUBSCRIBE_CTSTART</name>
-          <description>Subscribe configuration for task CTSTART</description>
-          <addressOffset>0x84</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>Channel that task CTSTART will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_CTSTOP</name>
-          <description>Subscribe configuration for task CTSTOP</description>
-          <addressOffset>0x88</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>Channel that task CTSTOP will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_CTTO</name>
-          <description>Calibration timer timeout</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_CTTO</name>
-              <description>Calibration timer timeout</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>EVENTS_DONE</name>
           <description>Calibration of LFCLK RC oscillator complete event</description>
           <addressOffset>0x104</addressOffset>
@@ -43565,89 +43745,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <enumeratedValue>
                   <name>Generated</name>
                   <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_CTSTARTED</name>
-          <description>Calibration timer started</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_CTSTARTED</name>
-              <description>Calibration timer started</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_CTSTOPPED</name>
-          <description>Calibration timer stopped</description>
-          <addressOffset>0x10C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_CTSTOPPED</name>
-              <description>Calibration timer stopped</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_CTTO</name>
-          <description>Publish configuration for event CTTO</description>
-          <addressOffset>0x180</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>Channel that event CTTO will publish to.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -43685,15 +43782,495 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
           </fields>
         </register>
+      </registers>
+    </peripheral>
+    <peripheral derivedFrom="RCOSC32K_NS">
+      <name>RCOSC32K_S</name>
+      <description>32.768 kHz RC oscillator 1</description>
+      <baseAddress>0x50032000</baseAddress>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral>
+      <name>QDEC_NS</name>
+      <description>Quadrature Decoder 0</description>
+      <baseAddress>0x40033000</baseAddress>
+      <headerStructName>QDEC</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>QDEC</name>
+        <value>51</value>
+      </interrupt>
+      <groupName>QDEC</groupName>
+      <size>0x20</size>
+      <registers>
         <register>
-          <name>PUBLISH_CTSTARTED</name>
-          <description>Publish configuration for event CTSTARTED</description>
+          <name>TASKS_START</name>
+          <description>Task starting the quadrature decoder</description>
+          <addressOffset>0x000</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_START</name>
+              <description>Task starting the quadrature decoder</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TASKS_STOP</name>
+          <description>Task stopping the quadrature decoder</description>
+          <addressOffset>0x004</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_STOP</name>
+              <description>Task stopping the quadrature decoder</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TASKS_READCLRACC</name>
+          <description>Read and clear ACC and ACCDBL</description>
+          <addressOffset>0x008</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_READCLRACC</name>
+              <description>Read and clear ACC and ACCDBL</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TASKS_RDCLRACC</name>
+          <description>Read and clear ACC</description>
+          <addressOffset>0x00C</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_RDCLRACC</name>
+              <description>Read and clear ACC</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>TASKS_RDCLRDBL</name>
+          <description>Read and clear ACCDBL</description>
+          <addressOffset>0x010</addressOffset>
+          <access>write-only</access>
+          <fields>
+            <field>
+              <name>TASKS_RDCLRDBL</name>
+              <description>Read and clear ACCDBL</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SUBSCRIBE_START</name>
+          <description>Subscribe configuration for task START</description>
+          <addressOffset>0x080</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task START will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SUBSCRIBE_STOP</name>
+          <description>Subscribe configuration for task STOP</description>
+          <addressOffset>0x084</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task STOP will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SUBSCRIBE_READCLRACC</name>
+          <description>Subscribe configuration for task READCLRACC</description>
+          <addressOffset>0x088</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task READCLRACC will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SUBSCRIBE_RDCLRACC</name>
+          <description>Subscribe configuration for task RDCLRACC</description>
+          <addressOffset>0x08C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task RDCLRACC will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SUBSCRIBE_RDCLRDBL</name>
+          <description>Subscribe configuration for task RDCLRDBL</description>
+          <addressOffset>0x090</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that task RDCLRDBL will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_SAMPLERDY</name>
+          <description>Event being generated for every new sample value written to the SAMPLE register</description>
+          <addressOffset>0x100</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_SAMPLERDY</name>
+              <description>Event being generated for every new sample value written to the SAMPLE register</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_REPORTRDY</name>
+          <description>Non-null report ready</description>
+          <addressOffset>0x104</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_REPORTRDY</name>
+              <description>Non-null report ready</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_ACCOF</name>
+          <description>ACC or ACCDBL register overflow</description>
+          <addressOffset>0x108</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_ACCOF</name>
+              <description>ACC or ACCDBL register overflow</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_DBLRDY</name>
+          <description>Double displacement(s) detected</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_DBLRDY</name>
+              <description>Double displacement(s) detected</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_STOPPED</name>
+          <description>QDEC has been stopped</description>
+          <addressOffset>0x110</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_STOPPED</name>
+              <description>QDEC has been stopped</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_SAMPLERDY</name>
+          <description>Publish configuration for event SAMPLERDY</description>
+          <addressOffset>0x180</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that event SAMPLERDY will publish to.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_REPORTRDY</name>
+          <description>Publish configuration for event REPORTRDY</description>
+          <addressOffset>0x184</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that event REPORTRDY will publish to.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_ACCOF</name>
+          <description>Publish configuration for event ACCOF</description>
           <addressOffset>0x188</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>CHIDX</name>
-              <description>Channel that event CTSTARTED will publish to.</description>
+              <description>Channel that event ACCOF will publish to.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -43717,14 +44294,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>PUBLISH_CTSTOPPED</name>
-          <description>Publish configuration for event CTSTOPPED</description>
+          <name>PUBLISH_DBLRDY</name>
+          <description>Publish configuration for event DBLRDY</description>
           <addressOffset>0x18C</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
               <name>CHIDX</name>
-              <description>Channel that event CTSTOPPED will publish to.</description>
+              <description>Channel that event DBLRDY will publish to.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -43748,79 +44325,164 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
+          <name>PUBLISH_STOPPED</name>
+          <description>Publish configuration for event STOPPED</description>
+          <addressOffset>0x190</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
-              <name>CTTO</name>
-              <description>Enable or disable interrupt for event CTTO</description>
+              <name>CHIDX</name>
+              <description>Channel that event STOPPED will publish to.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SHORTS</name>
+          <description>Shortcuts between local events and tasks</description>
+          <addressOffset>0x200</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>REPORTRDY_READCLRACC</name>
+              <description>Shortcut between event REPORTRDY and task READCLRACC</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Disable</description>
+                  <description>Disable shortcut</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Enable</description>
+                  <description>Enable shortcut</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
-              <name>DONE</name>
-              <description>Enable or disable interrupt for event DONE</description>
+              <name>SAMPLERDY_STOP</name>
+              <description>Shortcut between event SAMPLERDY and task STOP</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Disable</description>
+                  <description>Disable shortcut</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Enable</description>
+                  <description>Enable shortcut</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTARTED</name>
-              <description>Enable or disable interrupt for event CTSTARTED</description>
+              <name>REPORTRDY_RDCLRACC</name>
+              <description>Shortcut between event REPORTRDY and task RDCLRACC</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Disable</description>
+                  <description>Disable shortcut</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Enable</description>
+                  <description>Enable shortcut</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTOPPED</name>
-              <description>Enable or disable interrupt for event CTSTOPPED</description>
+              <name>REPORTRDY_STOP</name>
+              <description>Shortcut between event REPORTRDY and task STOP</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>Disable</description>
+                  <description>Disable shortcut</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>Enable</description>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DBLRDY_RDCLRDBL</name>
+              <description>Shortcut between event DBLRDY and task RDCLRDBL</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DBLRDY_STOP</name>
+              <description>Shortcut between event DBLRDY and task STOP</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>SAMPLERDY_READCLRACC</name>
+              <description>Shortcut between event SAMPLERDY and task READCLRACC</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable shortcut</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable shortcut</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -43834,8 +44496,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-write</access>
           <fields>
             <field>
-              <name>CTTO</name>
-              <description>Write '1' to enable interrupt for event CTTO</description>
+              <name>SAMPLERDY</name>
+              <description>Write '1' to enable interrupt for event SAMPLERDY</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -43861,8 +44523,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>DONE</name>
-              <description>Write '1' to enable interrupt for event DONE</description>
+              <name>REPORTRDY</name>
+              <description>Write '1' to enable interrupt for event REPORTRDY</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -43888,8 +44550,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTARTED</name>
-              <description>Write '1' to enable interrupt for event CTSTARTED</description>
+              <name>ACCOF</name>
+              <description>Write '1' to enable interrupt for event ACCOF</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
@@ -43915,10 +44577,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTOPPED</name>
-              <description>Write '1' to enable interrupt for event CTSTOPPED</description>
+              <name>DBLRDY</name>
+              <description>Write '1' to enable interrupt for event DBLRDY</description>
               <lsb>3</lsb>
               <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPPED</name>
+              <description>Write '1' to enable interrupt for event STOPPED</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -43950,8 +44639,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <access>read-write</access>
           <fields>
             <field>
-              <name>CTTO</name>
-              <description>Write '1' to disable interrupt for event CTTO</description>
+              <name>SAMPLERDY</name>
+              <description>Write '1' to disable interrupt for event SAMPLERDY</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -43977,8 +44666,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>DONE</name>
-              <description>Write '1' to disable interrupt for event DONE</description>
+              <name>REPORTRDY</name>
+              <description>Write '1' to disable interrupt for event REPORTRDY</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -44004,8 +44693,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTARTED</name>
-              <description>Write '1' to disable interrupt for event CTSTARTED</description>
+              <name>ACCOF</name>
+              <description>Write '1' to disable interrupt for event ACCOF</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
@@ -44031,10 +44720,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
-              <name>CTSTOPPED</name>
-              <description>Write '1' to disable interrupt for event CTSTOPPED</description>
+              <name>DBLRDY</name>
+              <description>Write '1' to disable interrupt for event DBLRDY</description>
               <lsb>3</lsb>
               <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPPED</name>
+              <description>Write '1' to disable interrupt for event STOPPED</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -44060,30 +44776,438 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
-          <name>CTIV</name>
-          <description>Calibration timer interval NOTE: This register should not be written to while the RCOSC source is running.</description>
-          <addressOffset>0x538</addressOffset>
+          <name>ENABLE</name>
+          <description>Enable the quadrature decoder</description>
+          <addressOffset>0x500</addressOffset>
           <access>read-write</access>
           <fields>
             <field>
-              <name>CTIV</name>
-              <description>Calibration timer interval in multiple of 0.25 seconds. Range: 0.25 seconds to 31.75 seconds.</description>
+              <name>ENABLE</name>
+              <description>Enable or disable the quadrature decoder</description>
               <lsb>0</lsb>
-              <msb>6</msb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LEDPOL</name>
+          <description>LED output pin polarity</description>
+          <addressOffset>0x504</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>LEDPOL</name>
+              <description>LED output pin polarity</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>ActiveLow</name>
+                  <description>Led active on output pin low</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>ActiveHigh</name>
+                  <description>Led active on output pin high</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SAMPLEPER</name>
+          <description>Sample period</description>
+          <addressOffset>0x508</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>SAMPLEPER</name>
+              <description>Sample period. The SAMPLE register will be updated for every new sample</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>128us</name>
+                  <description>128 us</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>256us</name>
+                  <description>256 us</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>512us</name>
+                  <description>512 us</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1024us</name>
+                  <description>1024 us</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>2048us</name>
+                  <description>2048 us</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>4096us</name>
+                  <description>4096 us</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>8192us</name>
+                  <description>8192 us</description>
+                  <value>6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>16384us</name>
+                  <description>16384 us</description>
+                  <value>7</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>32ms</name>
+                  <description>32768 us</description>
+                  <value>8</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>65ms</name>
+                  <description>65536 us</description>
+                  <value>9</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>131ms</name>
+                  <description>131072 us</description>
+                  <value>10</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>SAMPLE</name>
+          <description>Motion sample value</description>
+          <addressOffset>0x50C</addressOffset>
+          <access>read-only</access>
+          <dataType>int32_t</dataType>
+          <fields>
+            <field>
+              <name>SAMPLE</name>
+              <description>Last motion sample</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>REPORTPER</name>
+          <description>Number of samples to be taken before REPORTRDY and DBLRDY events can be generated</description>
+          <addressOffset>0x510</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>REPORTPER</name>
+              <description>Specifies the number of samples to be accumulated in the ACC register before the REPORTRDY and DBLRDY events can be generated</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>10Smpl</name>
+                  <description>10 samples / report</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>40Smpl</name>
+                  <description>40 samples / report</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>80Smpl</name>
+                  <description>80 samples / report</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>120Smpl</name>
+                  <description>120 samples / report</description>
+                  <value>3</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>160Smpl</name>
+                  <description>160 samples / report</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>200Smpl</name>
+                  <description>200 samples / report</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>240Smpl</name>
+                  <description>240 samples / report</description>
+                  <value>6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>280Smpl</name>
+                  <description>280 samples / report</description>
+                  <value>7</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>1Smpl</name>
+                  <description>1 sample / report</description>
+                  <value>8</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACC</name>
+          <description>Register accumulating the valid transitions</description>
+          <addressOffset>0x514</addressOffset>
+          <access>read-only</access>
+          <dataType>int32_t</dataType>
+          <fields>
+            <field>
+              <name>ACC</name>
+              <description>Register accumulating all valid samples (not double transition) read from the SAMPLE register</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACCREAD</name>
+          <description>Snapshot of the ACC register, updated by the READCLRACC or RDCLRACC task</description>
+          <addressOffset>0x518</addressOffset>
+          <access>read-only</access>
+          <dataType>int32_t</dataType>
+          <fields>
+            <field>
+              <name>ACCREAD</name>
+              <description>Snapshot of the ACC register.</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
+        <cluster>
+          <name>PSEL</name>
+          <description>Unspecified</description>
+          <headerStructName>QDEC_PSEL</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x51C</addressOffset>
+          <register>
+            <name>LED</name>
+            <description>Pin select for LED signal</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>PIN</name>
+                <description>Pin number</description>
+                <lsb>0</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PORT</name>
+                <description>Port number</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+              </field>
+              <field>
+                <name>CONNECT</name>
+                <description>Connection</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disconnected</name>
+                    <description>Disconnect</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Connected</name>
+                    <description>Connect</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>A</name>
+            <description>Pin select for A signal</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>PIN</name>
+                <description>Pin number</description>
+                <lsb>0</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PORT</name>
+                <description>Port number</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+              </field>
+              <field>
+                <name>CONNECT</name>
+                <description>Connection</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disconnected</name>
+                    <description>Disconnect</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Connected</name>
+                    <description>Connect</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>B</name>
+            <description>Pin select for B signal</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>PIN</name>
+                <description>Pin number</description>
+                <lsb>0</lsb>
+                <msb>4</msb>
+              </field>
+              <field>
+                <name>PORT</name>
+                <description>Port number</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+              </field>
+              <field>
+                <name>CONNECT</name>
+                <description>Connection</description>
+                <lsb>31</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disconnected</name>
+                    <description>Disconnect</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Connected</name>
+                    <description>Connect</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
+        <register>
+          <name>DBFEN</name>
+          <description>Enable input debounce filters</description>
+          <addressOffset>0x528</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>DBFEN</name>
+              <description>Enable input debounce filters</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Debounce input filters disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Debounce input filters enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>LEDPRE</name>
+          <description>Time period the LED is switched ON prior to sampling</description>
+          <addressOffset>0x540</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000010</resetValue>
+          <fields>
+            <field>
+              <name>LEDPRE</name>
+              <description>Period in us the LED is switched on prior to sampling</description>
+              <lsb>0</lsb>
+              <msb>8</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACCDBL</name>
+          <description>Register accumulating the number of detected double transitions</description>
+          <addressOffset>0x544</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>ACCDBL</name>
+              <description>Register accumulating the number of detected double or illegal transitions. ( SAMPLE = 2 ).</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ACCDBLREAD</name>
+          <description>Snapshot of the ACCDBL, updated by the READCLRACC or RDCLRDBL task</description>
+          <addressOffset>0x548</addressOffset>
+          <access>read-only</access>
+          <fields>
+            <field>
+              <name>ACCDBLREAD</name>
+              <description>Snapshot of the ACCDBL register. This field is updated when the READCLRACC or RDCLRDBL task is triggered.</description>
+              <lsb>0</lsb>
+              <msb>3</msb>
             </field>
           </fields>
         </register>
       </registers>
     </peripheral>
-    <peripheral derivedFrom="RCOSC32K_NS">
-      <name>RCOSC32K_S</name>
-      <description>32.768 kHz RC oscillator 1</description>
-      <baseAddress>0x50032000</baseAddress>
+    <peripheral derivedFrom="QDEC_NS">
+      <name>QDEC_S</name>
+      <description>Quadrature Decoder 1</description>
+      <baseAddress>0x50033000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
       <interrupt>
-        <name>RCOSC32K</name>
-        <value>50</value>
+        <name>QDEC</name>
+        <value>51</value>
       </interrupt>
     </peripheral>
     <peripheral>
@@ -56403,7 +57527,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </field>
             <field>
               <name>MCUSEL</name>
-              <description>Select which MCU control this pin Note: this field is only accessible from secure code.</description>
+              <description>Select which MCU/Subsystem controls this pin Note: this field is only accessible from secure code.</description>
               <lsb>28</lsb>
               <msb>30</msb>
               <enumeratedValues>
@@ -56416,6 +57540,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <name>NetworkMCU</name>
                   <description>Network MCU</description>
                   <value>0x1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Peripheral</name>
+                  <description>Peripheral with dedicated pins</description>
+                  <value>0x3</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>TND</name>

@@ -168,17 +168,17 @@ Dummy_Handler:
 .weak TIMER2_IRQHandler
 .thumb_set TIMER2_IRQHandler, Dummy_Handler
 
-.weak SWIRQ0_IRQHandler
-.thumb_set SWIRQ0_IRQHandler, Dummy_Handler
+.weak SWI0_IRQHandler
+.thumb_set SWI0_IRQHandler, Dummy_Handler
 
-.weak SWIRQ1_IRQHandler
-.thumb_set SWIRQ1_IRQHandler, Dummy_Handler
+.weak SWI1_IRQHandler
+.thumb_set SWI1_IRQHandler, Dummy_Handler
 
-.weak SWIRQ2_IRQHandler
-.thumb_set SWIRQ2_IRQHandler, Dummy_Handler
+.weak SWI2_IRQHandler
+.thumb_set SWI2_IRQHandler, Dummy_Handler
 
-.weak SWIRQ3_IRQHandler
-.thumb_set SWIRQ3_IRQHandler, Dummy_Handler
+.weak SWI3_IRQHandler
+.thumb_set SWI3_IRQHandler, Dummy_Handler
 
 /************************************************************************************
  * Reset Handler Extensions                                                         *
@@ -247,10 +247,10 @@ _vectors:
   .word   0                           /*Reserved */
   .word   TIMER1_IRQHandler
   .word   TIMER2_IRQHandler
-  .word   SWIRQ0_IRQHandler
-  .word   SWIRQ1_IRQHandler
-  .word   SWIRQ2_IRQHandler
-  .word   SWIRQ3_IRQHandler
+  .word   SWI0_IRQHandler
+  .word   SWI1_IRQHandler
+  .word   SWI2_IRQHandler
+  .word   SWI3_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */

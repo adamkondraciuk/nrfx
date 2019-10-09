@@ -135,8 +135,8 @@ __vector_table
         DCD     GPIOTE1_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     RCOSC32K_IRQHandler
         DCD     0                         ; Reserved
+        DCD     QDEC_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     USBD_IRQHandler
@@ -559,9 +559,9 @@ NFCT_IRQHandler
 GPIOTE1_IRQHandler
         B .
 
-        PUBWEAK  RCOSC32K_IRQHandler
+        PUBWEAK  QDEC_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-RCOSC32K_IRQHandler
+QDEC_IRQHandler
         B .
 
         PUBWEAK  USBD_IRQHandler

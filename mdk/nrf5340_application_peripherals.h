@@ -51,6 +51,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define POWER_PRESENT
 #define POWER_COUNT 1
 
+/* Non-Volatile Memory Controller */
+#define NVMC_PRESENT
+#define NVMC_COUNT 1
+
+/* NVM instruction  and data cache */
+#define CACHE_PRESENT
+#define CACHE_COUNT 1
+
 /* Regulators Peripheral */
 #define REGULATORS_PRESENT
 #define REGULATORS_COUNT 1
@@ -77,8 +85,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IPC_COUNT 1
 
 #define IPC_CH_NUM 16
-#define IPC_TASKS_NUM 16
-#define IPC_EVENTS_NUM 16
+#define IPC_CONF_NUM 16
+#define IPC_GPMEM_NUM 4
 
 /* GPIO */
 #define GPIO_PRESENT
@@ -186,17 +194,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UARTE0_EASYDMA_MAXCNT_SIZE 16
 #define UARTE1_EASYDMA_MAXCNT_SIZE 16
 
+/* Quadrature Decoder */
+#define QDEC_PRESENT
+#define QDEC_COUNT 1
+
 /* Successive Approximation Analog to Digital Converter */
 #define SAADC_PRESENT
 #define SAADC_COUNT 1
 
-#define SAADC_EASYDMA_MAXCNT_SIZE 15
-
 #define SAADC_CH_NUM 8
+#define SAADC_EASYDMA_MAXCNT_SIZE 15
 
 /* GPIO Tasks and Events */
 #define GPIOTE_PRESENT
-#define GPIOTE_COUNT 1
+#define GPIOTE_COUNT 2
 
 #define GPIOTE_CH_NUM 8
 
@@ -240,5 +251,29 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Mutex*/
 #define MUTEX_PRESENT
 #define MUTEX_COUNT 1
+
+/* Key management Unit */
+#define KMU_PRESENT
+#define KMU_COUNT 1
+
+/* Pulse density modulation */
+#define PDM_PRESENT
+#define PDM_COUNT 1
+
+/* Secure Peripheral Unit */
+#define SPU_PRESENT
+#define SPU_PRESENT 1
+
+/* Inter-IC Sound Interface */
+#define I2S_PRESENT
+#define I2S_COUNT 1
+
+#define I2S_EASYDMA_MAXCNT_SIZE 14
+
+/* Universal Serial Bus Device */
+#define USBD_PRESENT
+#define USBD_COUNT 1
+
+#define USBD_EASYDMA_MAXCNT_SIZE 7
 
 #endif      // _NRF5340_PERIPHERALS_H

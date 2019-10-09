@@ -43,11 +43,11 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define TRACE_TRACECLK_PIN   TAD_PSEL_TRACECLK_PIN_Traceclk
 #define TRACE_TRACEDATA0_PIN TAD_PSEL_TRACEDATA0_PIN_Tracedata0
 #define TRACE_TRACEDATA1_PIN TAD_PSEL_TRACEDATA1_PIN_Tracedata1
-#define TRACE_TRACEDATA2_PIN TAD_PSEL_TRACEDATA2_PIN_Tracedata1
-#define TRACE_TRACEDATA3_PIN TAD_PSEL_TRACEDATA3_PIN_Tracedata1
+#define TRACE_TRACEDATA2_PIN TAD_PSEL_TRACEDATA2_PIN_Tracedata2
+#define TRACE_TRACEDATA3_PIN TAD_PSEL_TRACEDATA3_PIN_Tracedata3
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
 #elif defined ( __ICCARM__ )
     __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
 #elif defined   ( __GNUC__ )

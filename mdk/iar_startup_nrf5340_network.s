@@ -111,10 +111,10 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     TIMER1_IRQHandler
         DCD     TIMER2_IRQHandler
-        DCD     SWIRQ0_IRQHandler
-        DCD     SWIRQ1_IRQHandler
-        DCD     SWIRQ2_IRQHandler
-        DCD     SWIRQ3_IRQHandler
+        DCD     SWI0_IRQHandler
+        DCD     SWI1_IRQHandler
+        DCD     SWI2_IRQHandler
+        DCD     SWI3_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -368,24 +368,24 @@ TIMER1_IRQHandler
 TIMER2_IRQHandler
         B .
 
-        PUBWEAK  SWIRQ0_IRQHandler
+        PUBWEAK  SWI0_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SWIRQ0_IRQHandler
+SWI0_IRQHandler
         B .
 
-        PUBWEAK  SWIRQ1_IRQHandler
+        PUBWEAK  SWI1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SWIRQ1_IRQHandler
+SWI1_IRQHandler
         B .
 
-        PUBWEAK  SWIRQ2_IRQHandler
+        PUBWEAK  SWI2_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SWIRQ2_IRQHandler
+SWI2_IRQHandler
         B .
 
-        PUBWEAK  SWIRQ3_IRQHandler
+        PUBWEAK  SWI3_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SWIRQ3_IRQHandler
+SWI3_IRQHandler
         B .
 
         END

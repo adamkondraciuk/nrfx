@@ -140,8 +140,8 @@ __isr_vector:
     .long   GPIOTE1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   RCOSC32K_IRQHandler
     .long   0                           /*Reserved */
+    .long   QDEC_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   USBD_IRQHandler
@@ -530,7 +530,7 @@ Default_Handler:
     IRQ  QSPI_IRQHandler
     IRQ  NFCT_IRQHandler
     IRQ  GPIOTE1_IRQHandler
-    IRQ  RCOSC32K_IRQHandler
+    IRQ  QDEC_IRQHandler
     IRQ  USBD_IRQHandler
     IRQ  USBREGULATOR_IRQHandler
     IRQ  KMU_IRQHandler

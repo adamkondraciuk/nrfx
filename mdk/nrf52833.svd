@@ -27333,7 +27333,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>CONFIG[%s]</name>
-          <description>Description collection: Configuration for OUT[n], SET[n] and CLR[n] tasks and IN[n] event</description>
+          <description>Description collection: Configuration for OUT[n], SET[n], and CLR[n] tasks and IN[n] event</description>
           <addressOffset>0x510</addressOffset>
           <access>read-write</access>
           <fields>
@@ -27362,7 +27362,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             </field>
             <field>
               <name>PSEL</name>
-              <description>GPIO number associated with SET[n], CLR[n] and OUT[n] tasks and IN[n] event</description>
+              <description>GPIO number associated with SET[n], CLR[n], and OUT[n] tasks and IN[n] event</description>
               <lsb>8</lsb>
               <msb>12</msb>
             </field>
@@ -36157,7 +36157,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>ARef</name>
-                  <description>VREF = AREF (VDD &amp;gt;= VREF &amp;gt;= AREFMIN)</description>
+                  <description>VREF = AREF</description>
                   <value>5</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -36320,7 +36320,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral>
       <name>LPCOMP</name>
-      <description>Low Power Comparator</description>
+      <description>Low-power comparator</description>
       <baseAddress>0x40013000</baseAddress>
       <alternatePeripheral>COMP</alternatePeripheral>
       <addressBlock>
@@ -36846,12 +36846,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Below</name>
-                  <description>Input voltage is below the reference threshold (VIN+ &amp;lt; VIN-).</description>
+                  <description>Input voltage is below the reference threshold (VIN+ &amp;lt; VIN-)</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Above</name>
-                  <description>Input voltage is above the reference threshold (VIN+ &amp;gt; VIN-).</description>
+                  <description>Input voltage is above the reference threshold (VIN+ &amp;gt; VIN-)</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -37124,7 +37124,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral>
       <name>EGU0</name>
-      <description>Event Generator Unit 0</description>
+      <description>Event generator unit 0</description>
       <baseAddress>0x40014000</baseAddress>
       <headerStructName>EGU</headerStructName>
       <addressBlock>
@@ -38397,7 +38397,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral derivedFrom="EGU0">
       <name>EGU1</name>
-      <description>Event Generator Unit 1</description>
+      <description>Event generator unit 1</description>
       <baseAddress>0x40015000</baseAddress>
       <interrupt>
         <name>SWI1_EGU1</name>
@@ -38416,7 +38416,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral derivedFrom="EGU0">
       <name>EGU2</name>
-      <description>Event Generator Unit 2</description>
+      <description>Event generator unit 2</description>
       <baseAddress>0x40016000</baseAddress>
       <interrupt>
         <name>SWI2_EGU2</name>
@@ -38435,7 +38435,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral derivedFrom="EGU0">
       <name>EGU3</name>
-      <description>Event Generator Unit 3</description>
+      <description>Event generator unit 3</description>
       <baseAddress>0x40017000</baseAddress>
       <interrupt>
         <name>SWI3_EGU3</name>
@@ -38454,7 +38454,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral derivedFrom="EGU0">
       <name>EGU4</name>
-      <description>Event Generator Unit 4</description>
+      <description>Event generator unit 4</description>
       <baseAddress>0x40018000</baseAddress>
       <interrupt>
         <name>SWI4_EGU4</name>
@@ -38473,7 +38473,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
     </peripheral>
     <peripheral derivedFrom="EGU0">
       <name>EGU5</name>
-      <description>Event Generator Unit 5</description>
+      <description>Event generator unit 5</description>
       <baseAddress>0x40019000</baseAddress>
       <interrupt>
         <name>SWI5_EGU5</name>
@@ -40098,7 +40098,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
           <fields>
             <field>
               <name>FREQ</name>
-              <description>PDM_CLK frequency</description>
+              <description>PDM_CLK frequency configuration</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -40151,19 +40151,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Stereo</name>
-                  <description>Sample and store one pair (Left + Right) of 16bit samples per RAM word R=[31:16]; L=[15:0]</description>
+                  <description>Sample and store one pair (left + right) of 16-bit samples per RAM word R=[31:16]; L=[15:0]</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Mono</name>
-                  <description>Sample and store two successive Left samples (16 bit each) per RAM word L1=[31:16]; L0=[15:0]</description>
+                  <description>Sample and store two successive left samples (16 bits each) per RAM word L1=[31:16]; L0=[15:0]</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>EDGE</name>
-              <description>Defines on which PDM_CLK edge Left (or mono) is sampled</description>
+              <description>Defines on which PDM_CLK edge left (or mono) is sampled</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -40438,7 +40438,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\
             <fields>
               <field>
                 <name>SIZE</name>
-                <description>Size of flash region n in bytes. Must be a multiple of the flash page size, and the maximum region size is limited to 512 kB.</description>
+                <description>Size of flash region n in bytes. Must be a multiple of the flash page size.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>

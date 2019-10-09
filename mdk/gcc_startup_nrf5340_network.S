@@ -116,10 +116,10 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   TIMER1_IRQHandler
     .long   TIMER2_IRQHandler
-    .long   SWIRQ0_IRQHandler
-    .long   SWIRQ1_IRQHandler
-    .long   SWIRQ2_IRQHandler
-    .long   SWIRQ3_IRQHandler
+    .long   SWI0_IRQHandler
+    .long   SWI1_IRQHandler
+    .long   SWI2_IRQHandler
+    .long   SWI3_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -403,9 +403,9 @@ Default_Handler:
     IRQ  RTC1_IRQHandler
     IRQ  TIMER1_IRQHandler
     IRQ  TIMER2_IRQHandler
-    IRQ  SWIRQ0_IRQHandler
-    IRQ  SWIRQ1_IRQHandler
-    IRQ  SWIRQ2_IRQHandler
-    IRQ  SWIRQ3_IRQHandler
+    IRQ  SWI0_IRQHandler
+    IRQ  SWI1_IRQHandler
+    IRQ  SWI2_IRQHandler
+    IRQ  SWI3_IRQHandler
 
   .end

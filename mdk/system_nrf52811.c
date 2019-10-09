@@ -149,6 +149,21 @@ void SystemInit(void)
         }
     #endif
 
+    /* When developing on an nrf52840, make sure NFC pins are mapped as GPIO. */
+    #if defined (DEVELOP_IN_NRF52840)
+        if (((*((uint32_t *)0x10001200) & (1 << 0)) != 0) || ((*((uint32_t *)0x10001204) & (1 << 0)) != 0)){
+            NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            *((uint32_t *)0x10001200) = 0;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            *((uint32_t *)0x10001204) = 0;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            NVIC_SystemReset();
+        }
+    #endif
+
     SystemCoreClockUpdate();
 }
 

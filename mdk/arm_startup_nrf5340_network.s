@@ -110,10 +110,10 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     TIMER1_IRQHandler
                 DCD     TIMER2_IRQHandler
-                DCD     SWIRQ0_IRQHandler
-                DCD     SWIRQ1_IRQHandler
-                DCD     SWIRQ2_IRQHandler
-                DCD     SWIRQ3_IRQHandler
+                DCD     SWI0_IRQHandler
+                DCD     SWI1_IRQHandler
+                DCD     SWI2_IRQHandler
+                DCD     SWI3_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -302,10 +302,10 @@ Default_Handler PROC
                 EXPORT   RTC1_IRQHandler [WEAK]
                 EXPORT   TIMER1_IRQHandler [WEAK]
                 EXPORT   TIMER2_IRQHandler [WEAK]
-                EXPORT   SWIRQ0_IRQHandler [WEAK]
-                EXPORT   SWIRQ1_IRQHandler [WEAK]
-                EXPORT   SWIRQ2_IRQHandler [WEAK]
-                EXPORT   SWIRQ3_IRQHandler [WEAK]
+                EXPORT   SWI0_IRQHandler [WEAK]
+                EXPORT   SWI1_IRQHandler [WEAK]
+                EXPORT   SWI2_IRQHandler [WEAK]
+                EXPORT   SWI3_IRQHandler [WEAK]
 CLOCK_POWER_IRQHandler
 RADIO_IRQHandler
 RNG_IRQHandler
@@ -322,10 +322,10 @@ EGU0_IRQHandler
 RTC1_IRQHandler
 TIMER1_IRQHandler
 TIMER2_IRQHandler
-SWIRQ0_IRQHandler
-SWIRQ1_IRQHandler
-SWIRQ2_IRQHandler
-SWIRQ3_IRQHandler
+SWI0_IRQHandler
+SWI1_IRQHandler
+SWI2_IRQHandler
+SWI3_IRQHandler
                 B .
                 ENDP
                 ALIGN

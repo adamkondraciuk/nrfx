@@ -216,8 +216,8 @@ Dummy_Handler:
 .weak GPIOTE1_IRQHandler
 .thumb_set GPIOTE1_IRQHandler, Dummy_Handler
 
-.weak RCOSC32K_IRQHandler
-.thumb_set RCOSC32K_IRQHandler, Dummy_Handler
+.weak QDEC_IRQHandler
+.thumb_set QDEC_IRQHandler, Dummy_Handler
 
 .weak USBD_IRQHandler
 .thumb_set USBD_IRQHandler, Dummy_Handler
@@ -322,8 +322,8 @@ _vectors:
   .word   GPIOTE1_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
-  .word   RCOSC32K_IRQHandler
   .word   0                           /*Reserved */
+  .word   QDEC_IRQHandler
   .word   0                           /*Reserved */
   .word   0                           /*Reserved */
   .word   USBD_IRQHandler

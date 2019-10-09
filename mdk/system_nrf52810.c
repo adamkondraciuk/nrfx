@@ -65,26 +65,6 @@ void SystemCoreClockUpdate(void)
 
 void SystemInit(void)
 {
-    /* Enable SWO trace functionality. If ENABLE_SWO is not defined, SWO pin will be used as GPIO (see Product
-       Specification to see which one). Only available if the developing environment is an nRF52832 device. */
-    #if defined (DEVELOP_IN_NRF52832) && defined (ENABLE_SWO)
-        CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-        NRF_CLOCK->TRACECONFIG |= CLOCK_TRACECONFIG_TRACEMUX_Serial << CLOCK_TRACECONFIG_TRACEMUX_Pos;
-        NRF_P0->PIN_CNF[18] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-    #endif
-    
-    /* Enable Trace functionality. If ENABLE_TRACE is not defined, TRACE pins will be used as GPIOs (see Product
-       Specification to see which ones). Only available if the developing environment is an nRF52832 device. */
-    #if defined (DEVELOP_IN_NRF52832) && defined (ENABLE_TRACE)
-        CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-        NRF_CLOCK->TRACECONFIG |= CLOCK_TRACECONFIG_TRACEMUX_Parallel << CLOCK_TRACECONFIG_TRACEMUX_Pos;
-        NRF_P0->PIN_CNF[14] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-        NRF_P0->PIN_CNF[15] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-        NRF_P0->PIN_CNF[16] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-        NRF_P0->PIN_CNF[18] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-        NRF_P0->PIN_CNF[20] = (GPIO_PIN_CNF_DRIVE_H0H1 << GPIO_PIN_CNF_DRIVE_Pos) | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos);
-    #endif
-    
     #if defined (DEVELOP_IN_NRF52832)
     /* Workaround for Errata 12 "COMP: Reference ladder not correctly calibrated" found at the Errata document
        for nRF52832 device located at https://infocenter.nordicsemi.com/index.jsp */
@@ -211,6 +191,21 @@ void SystemInit(void)
             NRF_UICR->PSELRESET[0] = 21;
             while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
             NRF_UICR->PSELRESET[1] = 21;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            NVIC_SystemReset();
+        }
+    #endif
+
+    /* When developing on an nrf52832, make sure NFC pins are mapped as GPIO. */
+    #if defined (DEVELOP_IN_NRF52832)
+        if (((*((uint32_t *)0x10001200) & (1 << 0)) != 0) || ((*((uint32_t *)0x10001204) & (1 << 0)) != 0)){
+            NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            *((uint32_t *)0x10001200) = 0;
+            while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
+            *((uint32_t *)0x10001204) = 0;
             while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}
             NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
             while (NRF_NVMC->READY == NVMC_READY_READY_Busy){}

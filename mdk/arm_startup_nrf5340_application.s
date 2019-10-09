@@ -134,8 +134,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     GPIOTE1_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     RCOSC32K_IRQHandler
                 DCD     0                         ; Reserved
+                DCD     QDEC_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     USBD_IRQHandler
@@ -429,7 +429,7 @@ Default_Handler PROC
                 EXPORT   QSPI_IRQHandler [WEAK]
                 EXPORT   NFCT_IRQHandler [WEAK]
                 EXPORT   GPIOTE1_IRQHandler [WEAK]
-                EXPORT   RCOSC32K_IRQHandler [WEAK]
+                EXPORT   QDEC_IRQHandler [WEAK]
                 EXPORT   USBD_IRQHandler [WEAK]
                 EXPORT   USBREGULATOR_IRQHandler [WEAK]
                 EXPORT   KMU_IRQHandler [WEAK]
@@ -466,7 +466,7 @@ IPC_IRQHandler
 QSPI_IRQHandler
 NFCT_IRQHandler
 GPIOTE1_IRQHandler
-RCOSC32K_IRQHandler
+QDEC_IRQHandler
 USBD_IRQHandler
 USBREGULATOR_IRQHandler
 KMU_IRQHandler
