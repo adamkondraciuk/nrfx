@@ -205,12 +205,12 @@ NRFX_STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event);
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_comp_task_address_get(nrf_comp_task_t task)
 {
-    return nrf_comp_task_address_get(task);
+    return nrf_comp_task_address_get(NRF_COMP, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_comp_event_address_get(nrf_comp_event_t event)
 {
-    return nrf_comp_event_address_get(event);
+    return nrf_comp_event_address_get(NRF_COMP, event);
 }
 #endif // NRFX_DECLARE_ONLY
 
