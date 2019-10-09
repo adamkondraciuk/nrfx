@@ -313,7 +313,7 @@ NRFX_STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void);
 #if NRF_POWER_HAS_USBREG
 NRFX_STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void)
 {
-    uint32_t status = nrf_power_usbregstatus_get();
+    uint32_t status = nrf_power_usbregstatus_get(NRF_POWER);
     if(0 == (status & NRF_POWER_USBREGSTATUS_VBUSDETECT_MASK))
     {
         return NRFX_POWER_USB_STATE_DISCONNECTED;
