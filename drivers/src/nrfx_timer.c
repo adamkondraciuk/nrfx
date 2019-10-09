@@ -158,7 +158,7 @@ uint32_t nrfx_timer_capture(nrfx_timer_t const *   p_instance,
 
     nrf_timer_task_trigger(p_instance->p_reg,
         nrf_timer_capture_task_get(cc_channel));
-    return nrf_timer_cc_read(p_instance->p_reg, cc_channel);
+    return nrf_timer_cc_get(p_instance->p_reg, cc_channel);
 }
 
 void nrfx_timer_compare(nrfx_timer_t const *   p_instance,
@@ -178,7 +178,7 @@ void nrfx_timer_compare(nrfx_timer_t const *   p_instance,
         nrf_timer_int_disable(p_instance->p_reg, timer_int);
     }
 
-    nrf_timer_cc_write(p_instance->p_reg, cc_channel, cc_value);
+    nrf_timer_cc_set(p_instance->p_reg, cc_channel, cc_value);
     NRFX_LOG_INFO("Timer id: %d, capture value set: %lu, channel: %d.",
                   p_instance->instance_id,
                   cc_value,

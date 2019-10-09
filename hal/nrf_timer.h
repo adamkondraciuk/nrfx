@@ -419,15 +419,15 @@ NRF_STATIC_INLINE void nrf_timer_frequency_set(NRF_TIMER_Type *      p_reg,
 NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type const * p_reg);
 
 /**
- * @brief Function for writing the capture/compare register for the specified channel.
+ * @brief Function for setting the capture/compare register for the specified channel.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] cc_channel The specified capture/compare channel.
  * @param[in] cc_value   Value to write to the capture/compare register.
  */
-NRF_STATIC_INLINE void nrf_timer_cc_write(NRF_TIMER_Type *       p_reg,
-                                          nrf_timer_cc_channel_t cc_channel,
-                                          uint32_t               cc_value);
+NRF_STATIC_INLINE void nrf_timer_cc_set(NRF_TIMER_Type *       p_reg,
+                                        nrf_timer_cc_channel_t cc_channel,
+                                        uint32_t               cc_value);
 
 /**
  * @brief Function for retrieving the capture/compare value for a specified channel.
@@ -437,8 +437,8 @@ NRF_STATIC_INLINE void nrf_timer_cc_write(NRF_TIMER_Type *       p_reg,
  *
  * @return Value from the specified capture/compare register.
  */
-NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type const * p_reg,
-                                             nrf_timer_cc_channel_t cc_channel);
+NRF_STATIC_INLINE uint32_t nrf_timer_cc_get(NRF_TIMER_Type const * p_reg,
+                                            nrf_timer_cc_channel_t cc_channel);
 
 /**
  * @brief Function for getting the specified timer capture task.
@@ -646,15 +646,15 @@ NRF_STATIC_INLINE nrf_timer_frequency_t nrf_timer_frequency_get(NRF_TIMER_Type c
     return (nrf_timer_frequency_t)(p_reg->PRESCALER);
 }
 
-NRF_STATIC_INLINE void nrf_timer_cc_write(NRF_TIMER_Type *       p_reg,
-                                          nrf_timer_cc_channel_t cc_channel,
-                                          uint32_t               cc_value)
+NRF_STATIC_INLINE void nrf_timer_cc_set(NRF_TIMER_Type *       p_reg,
+                                        nrf_timer_cc_channel_t cc_channel,
+                                        uint32_t               cc_value)
 {
     p_reg->CC[cc_channel] = cc_value;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_timer_cc_read(NRF_TIMER_Type const * p_reg,
-                                             nrf_timer_cc_channel_t cc_channel)
+NRF_STATIC_INLINE uint32_t nrf_timer_cc_get(NRF_TIMER_Type const * p_reg,
+                                            nrf_timer_cc_channel_t cc_channel)
 {
     return (uint32_t)p_reg->CC[cc_channel];
 }

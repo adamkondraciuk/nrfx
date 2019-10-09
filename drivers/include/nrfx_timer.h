@@ -339,7 +339,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t co
 NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const *   p_instance,
                                                    nrf_timer_cc_channel_t cc_channel)
 {
-    return nrf_timer_cc_read(p_instance->p_reg, cc_channel);
+    return nrf_timer_cc_get(p_instance->p_reg, cc_channel);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance,
