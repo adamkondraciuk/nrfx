@@ -288,17 +288,17 @@ NRFX_STATIC_INLINE nrfx_err_t nrfx_ppi_group_clear(nrf_ppi_channel_group_t group
 
 NRFX_STATIC_INLINE uint32_t nrfx_ppi_task_addr_get(nrf_ppi_task_t task)
 {
-    return nrf_ppi_task_address_get(task);
+    return nrf_ppi_task_address_get(NRF_PPI, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_enable_get(nrf_ppi_channel_group_t group)
 {
-    return nrf_ppi_task_group_enable_address_get(group);
+    return nrf_ppi_task_group_enable_address_get(NRF_PPI, group);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_ppi_task_addr_group_disable_get(nrf_ppi_channel_group_t group)
 {
-    return nrf_ppi_task_group_disable_address_get(group);
+    return nrf_ppi_task_group_disable_address_get(NRF_PPI, group);
 }
 #endif // NRFX_DECLARE_ONLY
 

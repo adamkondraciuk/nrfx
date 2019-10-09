@@ -181,13 +181,13 @@ void nrfx_ppi_free_all(void)
     nrf_ppi_channel_group_t group;
 
     // Disable all channels and groups
-    nrf_ppi_channels_disable(NRFX_PPI_ALL_APP_CHANNELS_MASK);
+    nrf_ppi_channels_disable(NRF_PPI, NRFX_PPI_ALL_APP_CHANNELS_MASK);
 
     for (group = NRF_PPI_CHANNEL_GROUP0; mask != 0; mask &= ~group_to_mask(group), group++)
     {
         if (mask & group_to_mask(group))
         {
-            nrf_ppi_channel_group_clear(group);
+            nrf_ppi_group_clear(NRF_PPI, group);
         }
     }
     channel_allocated_clr_all();
@@ -238,7 +238,7 @@ nrfx_err_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
     else
     {
         // First disable this channel
-        nrf_ppi_channel_disable(channel);
+        nrf_ppi_channel_disable(NRF_PPI, channel);
         NRFX_CRITICAL_SECTION_ENTER();
         channel_allocated_clr(channel);
         NRFX_CRITICAL_SECTION_EXIT();
@@ -267,7 +267,7 @@ nrfx_err_t nrfx_ppi_channel_assign(nrf_ppi_channel_t channel, uint32_t eep, uint
     }
     else
     {
-        nrf_ppi_channel_endpoint_setup(channel, eep, tep);
+        nrf_ppi_channel_endpoint_setup(NRF_PPI, channel, eep, tep);
         NRFX_LOG_INFO("Assigned channel: %d, event end point: %x, task end point: %x.",
                       channel,
                       eep,
@@ -287,7 +287,7 @@ nrfx_err_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork
     }
     else
     {
-        nrf_ppi_fork_endpoint_setup(channel, fork_tep);
+        nrf_ppi_fork_endpoint_setup(NRF_PPI, channel, fork_tep);
         NRFX_LOG_INFO("Fork assigned channel: %d, task end point: %d.", channel, fork_tep);
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -315,7 +315,7 @@ nrfx_err_t nrfx_ppi_channel_enable(nrf_ppi_channel_t channel)
     }
     else
     {
-        nrf_ppi_channel_enable(channel);
+        nrf_ppi_channel_enable(NRF_PPI, channel);
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -336,7 +336,7 @@ nrfx_err_t nrfx_ppi_channel_disable(nrf_ppi_channel_t channel)
     }
     else
     {
-        nrf_ppi_channel_disable(channel);
+        nrf_ppi_channel_disable(NRF_PPI, channel);
         err_code = NRFX_SUCCESS;
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -389,7 +389,7 @@ nrfx_err_t nrfx_ppi_group_free(nrf_ppi_channel_group_t group)
     }
     else
     {
-        nrf_ppi_group_disable(group);
+        nrf_ppi_group_disable(NRF_PPI, group);
         NRFX_CRITICAL_SECTION_ENTER();
         group_allocated_clr(group);
         NRFX_CRITICAL_SECTION_EXIT();
@@ -413,7 +413,7 @@ nrfx_err_t nrfx_ppi_group_enable(nrf_ppi_channel_group_t group)
     }
     else
     {
-        nrf_ppi_group_enable(group);
+        nrf_ppi_group_enable(NRF_PPI, group);
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -430,7 +430,7 @@ nrfx_err_t nrfx_ppi_group_disable(nrf_ppi_channel_group_t group)
     }
     else
     {
-        nrf_ppi_group_disable(group);
+        nrf_ppi_group_disable(NRF_PPI, group);
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -456,7 +456,7 @@ nrfx_err_t nrfx_ppi_channels_remove_from_group(uint32_t                channel_m
     else
     {
         NRFX_CRITICAL_SECTION_ENTER();
-        nrf_ppi_channels_remove_from_group(channel_mask, group);
+        nrf_ppi_channels_remove_from_group(NRF_PPI, channel_mask, group);
         NRFX_CRITICAL_SECTION_EXIT();
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
@@ -483,7 +483,7 @@ nrfx_err_t nrfx_ppi_channels_include_in_group(uint32_t                channel_ma
     else
     {
         NRFX_CRITICAL_SECTION_ENTER();
-        nrf_ppi_channels_include_in_group(channel_mask, group);
+        nrf_ppi_channels_include_in_group(NRF_PPI, channel_mask, group);
         NRFX_CRITICAL_SECTION_EXIT();
     }
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
