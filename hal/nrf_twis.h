@@ -256,7 +256,7 @@ NRF_STATIC_INLINE void nrf_twis_publish_clear(NRF_TWIS_Type *  p_reg,
  *
  * @return Error source mask with values from @ref nrf_twis_error_t.
  */
-NRF_STATIC_INLINE uint32_t nrf_twis_error_source_get_and_clear(NRF_TWIS_Type * const p_reg);
+NRF_STATIC_INLINE uint32_t nrf_twis_error_source_get_and_clear(NRF_TWIS_Type * p_reg);
 
 /**
  * @brief Function for getting information about which of the addresses matched.
@@ -548,7 +548,7 @@ NRF_STATIC_INLINE bool nrf_twis_int_enable_check(NRF_TWIS_Type const * p_reg, ui
     return (bool)(p_reg->INTENSET & mask);
 }
 
-NRF_STATIC_INLINE void nrf_twis_int_disable(NRF_TWIS_Type * const p_reg, uint32_t mask)
+NRF_STATIC_INLINE void nrf_twis_int_disable(NRF_TWIS_Type * p_reg, uint32_t mask)
 {
     p_reg->INTENCLR = mask;
 }
