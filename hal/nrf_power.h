@@ -110,43 +110,21 @@ typedef enum
 #if NRF_POWER_HAS_RESETREAS
 typedef enum
 {
-    NRF_POWER_RESETREAS_RESETPIN_MASK = POWER_RESETREAS_RESETPIN_Msk, /*!< Bit mask of RESETPIN field. *///!< NRF_POWER_RESETREAS_RESETPIN_MASK
-    NRF_POWER_RESETREAS_DOG_MASK      = POWER_RESETREAS_DOG_Msk     , /*!< Bit mask of DOG field. */     //!< NRF_POWER_RESETREAS_DOG_MASK
-    NRF_POWER_RESETREAS_SREQ_MASK     = POWER_RESETREAS_SREQ_Msk    , /*!< Bit mask of SREQ field. */    //!< NRF_POWER_RESETREAS_SREQ_MASK
-    NRF_POWER_RESETREAS_LOCKUP_MASK   = POWER_RESETREAS_LOCKUP_Msk  , /*!< Bit mask of LOCKUP field. */  //!< NRF_POWER_RESETREAS_LOCKUP_MASK
-    NRF_POWER_RESETREAS_OFF_MASK      = POWER_RESETREAS_OFF_Msk     , /*!< Bit mask of OFF field. */     //!< NRF_POWER_RESETREAS_OFF_MASK
+    NRF_POWER_RESETREAS_RESETPIN_MASK = POWER_RESETREAS_RESETPIN_Msk, /**< Bit mask of RESETPIN field. */
+    NRF_POWER_RESETREAS_DOG_MASK      = POWER_RESETREAS_DOG_Msk     , /**< Bit mask of DOG field. */
+    NRF_POWER_RESETREAS_SREQ_MASK     = POWER_RESETREAS_SREQ_Msk    , /**< Bit mask of SREQ field. */
+    NRF_POWER_RESETREAS_LOCKUP_MASK   = POWER_RESETREAS_LOCKUP_Msk  , /**< Bit mask of LOCKUP field. */
+    NRF_POWER_RESETREAS_OFF_MASK      = POWER_RESETREAS_OFF_Msk     , /**< Bit mask of OFF field. */
 #if defined(POWER_RESETREAS_LPCOMP_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_POWER_RESETREAS_LPCOMP_MASK   = POWER_RESETREAS_LPCOMP_Msk  , /*!< Bit mask of LPCOMP field. */  //!< NRF_POWER_RESETREAS_LPCOMP_MASK
+    NRF_POWER_RESETREAS_LPCOMP_MASK   = POWER_RESETREAS_LPCOMP_Msk  , /**< Bit mask of LPCOMP field. */
 #endif
-    NRF_POWER_RESETREAS_DIF_MASK      = POWER_RESETREAS_DIF_Msk     , /*!< Bit mask of DIF field. */     //!< NRF_POWER_RESETREAS_DIF_MASK
+    NRF_POWER_RESETREAS_DIF_MASK      = POWER_RESETREAS_DIF_Msk     , /**< Bit mask of DIF field. */
 #if defined(POWER_RESETREAS_NFC_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_POWER_RESETREAS_NFC_MASK      = POWER_RESETREAS_NFC_Msk     , /*!< Bit mask of NFC field. */
+    NRF_POWER_RESETREAS_NFC_MASK      = POWER_RESETREAS_NFC_Msk     , /**< Bit mask of NFC field. */
 #endif
 #if defined(POWER_RESETREAS_VBUS_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /*!< Bit mask of VBUS field. */
+    NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /**< Bit mask of VBUS field. */
 #endif
-} nrf_power_resetreas_mask_t;
-
-#else // NRF_POWER_HAS_RESETREAS
-
-typedef enum
-{
-    NRF_POWER_RESETREAS_RESETPIN_MASK  = RESET_RESETREAS_RESETPIN_Msk,  /*!< Bit mask of RESETPIN field.*/   //!< NRF_POWER_RESETREAS_RESETPIN_MASK
-    NRF_POWER_RESETREAS_DOG0_MASK      = RESET_RESETREAS_DOG0_Msk,      /*!< Bit mask of DOG0 field. */      //!< NRF_POWER_RESETREAS_DOG0_MASK
-    NRF_POWER_RESETREAS_CTRLAP_MASK    = RESET_RESETREAS_CTRLAP_Msk,    /*!< Bit mask of CTRLAP field. */    //!< NRF_POWER_RESETREAS_CTRLAP_MASK
-    NRF_POWER_RESETREAS_SREQ_MASK      = RESET_RESETREAS_SREQ_Msk,      /*!< Bit mask of SREQ field. */      //!< NRF_POWER_RESETREAS_SREQ_MASK
-    NRF_POWER_RESETREAS_LOCKUP_MASK    = RESET_RESETREAS_LOCKUP_Msk,    /*!< Bit mask of LOCKUP field. */    //!< NRF_POWER_RESETREAS_LOCKUP_MASK
-    NRF_POWER_RESETREAS_OFF_MASK       = RESET_RESETREAS_OFF_Msk,       /*!< Bit mask of OFF field. */       //!< NRF_POWER_RESETREAS_OFF_MASK
-    NRF_POWER_RESETREAS_LPCOMP_MASK    = RESET_RESETREAS_LPCOMP_Msk,    /*!< Bit mask of LPCOMP field. */    //!< NRF_POWER_RESETREAS_LPCOMP_MASK
-    NRF_POWER_RESETREAS_DIF_MASK       = RESET_RESETREAS_DIF_Msk,       /*!< Bit mask of DIF field. */       //!< NRF_POWER_RESETREAS_DIF_MASK
-    NRF_POWER_RESETREAS_LSREQ_MASK     = RESET_RESETREAS_LSREQ_Msk,     /*!< Bit mask of LSREQ field. */     //!< NRF_POWER_RESETREAS_LSREQ_MASK
-    NRF_POWER_RESETREAS_LLOCKUP_MASK   = RESET_RESETREAS_LLOCKUP_Msk,   /*!< Bit mask of LLOCKUP field. */   //!< NRF_POWER_RESETREAS_LLOCKUP_MASK
-    NRF_POWER_RESETREAS_LDOG_MASK      = RESET_RESETREAS_LDOG_Msk,      /*!< Bit mask of LDOG field. */      //!< NRF_POWER_RESETREAS_LDOG_MASK
-    NRF_POWER_RESETREAS_MFORCEOFF_MASK = RESET_RESETREAS_MFORCEOFF_Msk, /*!< Bit mask of MFORCEOFF field. */ //!< NRF_POWER_RESETREAS_MFORCEOFF_MASK
-    NRF_POWER_RESETREAS_NFC_MASK       = RESET_RESETREAS_NFC_Msk,       /*!< Bit mask of NFC field. */       //!< NRF_POWER_RESETREAS_NFC_MASK
-    NRF_POWER_RESETREAS_DOG1_MASK      = RESET_RESETREAS_DOG1_Msk,      /*!< Bit mask of DOG1 field. */      //!< NRF_POWER_RESETREAS_DOG1_MASK
-    NRF_POWER_RESETREAS_VBUS_MASK      = RESET_RESETREAS_VBUS_Msk,      /*!< Bit mask of VBUS field. */      //!< NRF_POWER_RESETREAS_VBUS_MASK
-    NRF_POWER_RESETREAS_LCTRLAP_MASK   = RESET_RESETREAS_LCTRLAP_Msk,   /*!< Bit mask of LCTRLAP field. */   //!< NRF_POWER_RESETREAS_LCTRLAP_MASK
 } nrf_power_resetreas_mask_t;
 #endif // NRF_POWER_HAS_RESETREAS
 
@@ -510,6 +488,7 @@ NRF_STATIC_INLINE void nrf_power_publish_set(NRF_POWER_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_power_publish_clear(NRF_POWER_Type * p_reg, nrf_power_event_t event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
+#if NRF_POWER_HAS_RESETREAS
 /**
  * @brief Function for getting the reset reason bitmask.
  *
@@ -537,6 +516,7 @@ NRF_STATIC_INLINE uint32_t nrf_power_resetreas_get(NRF_POWER_Type const * p_reg)
  * @sa nrf_power_resetreas_get
  */
 NRF_STATIC_INLINE void nrf_power_resetreas_clear(NRF_POWER_Type * p_reg, uint32_t mask);
+#endif // NRF_POWER_HAS_RESETREAS
 
 #if defined(POWER_POWERSTATUS_LTEMODEM_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -834,19 +814,6 @@ NRF_STATIC_INLINE bool nrf_power_usbregstatus_vbusdet_get(NRF_POWER_Type const *
 NRF_STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(NRF_POWER_Type const * p_reg);
 #endif // NRF_POWER_HAS_USBREG
 
-#if defined(RESET_NETWORK_FORCEOFF_FORCEOFF_Msk) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Function for setting the force off signal for the Network core.
- *
- * A force off will reset the Network core and switch off its power and clocks.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] hold  True if the force off signal is to be held.
- *                  False if the force off signal is to be released.
- */
-NRF_STATIC_INLINE void nrf_power_network_force_off(NRF_POWER_Type * p_reg, bool hold);
-#endif
-
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_power_task_trigger(NRF_POWER_Type * p_reg, nrf_power_task_t task)
@@ -939,23 +906,17 @@ NRF_STATIC_INLINE void nrf_power_publish_clear(NRF_POWER_Type * p_reg, nrf_power
 }
 #endif // defined(DPPI_PRESENT)
 
+#if NRF_POWER_HAS_RESETREAS
 NRF_STATIC_INLINE uint32_t nrf_power_resetreas_get(NRF_POWER_Type const * p_reg)
 {
-#if NRF_POWER_HAS_RESETREAS
     return p_reg->RESETREAS;
-#else
-    return NRF_RESET->RESETREAS;
-#endif
 }
 
 NRF_STATIC_INLINE void nrf_power_resetreas_clear(NRF_POWER_Type * p_reg, uint32_t mask)
 {
-#if NRF_POWER_HAS_RESETREAS
     p_reg->RESETREAS = mask;
-#else
-    NRF_RESET->RESETREAS = mask;
-#endif
 }
+#endif // NRF_POWER_HAS_RESETREAS
 
 #if defined(POWER_POWERSTATUS_LTEMODEM_Msk)
 NRF_STATIC_INLINE bool nrf_power_powerstatus_get(NRF_POWER_Type const * p_reg)
@@ -1183,14 +1144,6 @@ NRF_STATIC_INLINE bool nrf_power_usbregstatus_outrdy_get(NRF_POWER_Type const * 
     return (nrf_power_usbregstatus_get(p_reg) & NRF_POWER_USBREGSTATUS_OUTPUTRDY_MASK) != 0;
 }
 #endif // NRF_POWER_HAS_USBREG
-
-#if defined(RESET_NETWORK_FORCEOFF_FORCEOFF_Msk)
-NRF_STATIC_INLINE void nrf_power_network_force_off(NRF_POWER_Type * p_reg, bool hold)
-{
-    NRF_RESET->NETWORK.FORCEOFF = (hold ? RESET_NETWORK_FORCEOFF_FORCEOFF_Hold :
-                                          RESET_NETWORK_FORCEOFF_FORCEOFF_Release);
-}
-#endif
 
 #endif // NRF_DECLARE_ONLY
 
