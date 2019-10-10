@@ -50,6 +50,8 @@
 
 @ref nrf_radio
 
+@ref nrf_reset
+
 @ref nrf_rng
 
 @ref nrf_rtc
