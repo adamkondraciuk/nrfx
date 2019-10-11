@@ -93,7 +93,7 @@
 #define NRFX_CLOCK_CONFIG_LF_SRC 2
 #endif
 
-// <o> NRFX_CLOCK_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -104,8 +104,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_CLOCK_CONFIG_IRQ_PRIORITY
-#define NRFX_CLOCK_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_CLOCK_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -229,7 +229,7 @@
 #define NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 1
 #endif
 
-// <o> NRFX_GPIOTE_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -240,8 +240,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_GPIOTE_CONFIG_IRQ_PRIORITY
-#define NRFX_GPIOTE_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_GPIOTE_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -303,7 +303,7 @@
 #define NRFX_I2S_ENABLED 1
 #endif
 
-// <o> NRFX_I2S_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -314,8 +314,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_I2S_CONFIG_IRQ_PRIORITY
-#define NRFX_I2S_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_I2S_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -393,7 +393,7 @@
 #define NRFX_PDM_ENABLED 1
 #endif
 
-// <o> NRFX_PDM_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -404,8 +404,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_PDM_CONFIG_IRQ_PRIORITY
-#define NRFX_PDM_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_PDM_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -466,7 +466,7 @@
 #ifndef NRFX_POWER_ENABLED
 #define NRFX_POWER_ENABLED 1
 #endif
-// <o> NRFX_POWER_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -477,8 +477,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_POWER_CONFIG_IRQ_PRIORITY
-#define NRFX_POWER_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // </e>
@@ -763,7 +763,7 @@
 #define NRFX_SAADC_ENABLED 1
 #endif
 
-// <o> NRFX_SAADC_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -774,8 +774,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_SAADC_CONFIG_IRQ_PRIORITY
-#define NRFX_SAADC_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_SAADC_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -1572,7 +1572,7 @@
 #define NRFX_WDT_CONFIG_NO_IRQ 0
 #endif
 
-// <o> NRFX_WDT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1583,8 +1583,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_WDT_CONFIG_IRQ_PRIORITY
-#define NRFX_WDT_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_WDT_CONFIG_LOG_ENABLED - Enables logging in the module.
