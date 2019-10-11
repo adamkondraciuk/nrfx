@@ -19,11 +19,19 @@ extern "C" {
 
 
 /**
- * @brief Macro for setting @ref nrfx_saadc_channel_t to default settings
- *        in the single-ended mode.
+ * @brief SAADC channel default configuration for the single-ended mode.
+ *
+ * This configuration sets up single-ended SAADC channel with the following options:
+ * - resistor ladder disabled
+ * - gain: 1/6
+ * - reference voltage: internal 0.6 V
+ * - sample acquisition time: 10 us
+ * - burst disabled
  *
  * @param[in] _pin_p Positive input analog pin.
  * @param[in] _index Channel index.
+ *
+ * @sa nrfx_saadc_channel_t
  */
 #define NRFX_SAADC_DEFAULT_CHANNEL_SE(_pin_p, _index)       \
 {                                                           \
@@ -43,12 +51,20 @@ extern "C" {
 }
 
 /**
- * @brief Macro for setting @ref nrfx_saadc_channel_t to default settings
- *        in the differential mode.
+ * @brief SAADC channel default configuration for the differential mode.
+ *
+ * This configuration sets up differential SAADC channel with the following options:
+ * - resistor ladder disabled
+ * - gain: 1/6
+ * - reference voltage: internal 0.6 V
+ * - sample acquisition time: 10 us
+ * - burst disabled
  *
  * @param[in] _pin_p Positive input analog pin.
  * @param[in] _pin_n Negative input analog pin.
  * @param[in] _index Channel index.
+ *
+ * @sa nrfx_saadc_channel_t
  */
 #define NRFX_SAADC_DEFAULT_CHANNEL_DIFFERENTIAL(_pin_p, _pin_n, _index) \
 {                                                                       \
@@ -67,7 +83,21 @@ extern "C" {
     .channel_index  = _index,                                           \
 }
 
-/** @brief Macro for setting @ref nrfx_saadc_adv_config_t to default settings. */
+/**
+ * @brief SAADC driver advanced mode default configuration.
+ *
+ * This configuration sets up advanced mode of the SAADC driver with the following options:
+ * - oversampling disabled
+ * - burst disabled
+ * - internal sampling timer disabled
+ * - triggering of the START task on the END event disabled
+ *
+ * @param[in] _pin_p Positive input analog pin.
+ * @param[in] _pin_n Negative input analog pin.
+ * @param[in] _index Channel index.
+ *
+ * @sa nrfx_saadc_adv_config_t
+ */
 #define NRFX_SAADC_DEFAULT_ADV_CONFIG                                           \
 {                                                                               \
     .oversampling      = NRF_SAADC_OVERSAMPLE_DISABLED,                         \
