@@ -90,27 +90,27 @@ typedef struct
  * @param[in] _input Analog input.
  */
 #if defined (COMP_ISOURCE_ISOURCE_Msk) || defined (__NRFX_DOXYGEN__)
-#define NRFX_COMP_DEFAULT_CONFIG(_input)                 \
-{                                                        \
-    .reference          = NRF_COMP_REF_Int1V8,           \
-    .main_mode          = NRF_COMP_MAIN_MODE_SE,         \
-    .threshold          = NRFX_COMP_CONFIG_TH,           \
-    .speed_mode         = NRF_COMP_SP_MODE_High,         \
-    .hyst               = NRF_COMP_HYST_NoHyst,          \
-    .isource            = NRF_COMP_ISOURCE_Off,          \
-    .input              = (nrf_comp_input_t)_input,      \
-    .interrupt_priority = NRFX_COMP_CONFIG_IRQ_PRIORITY  \
+#define NRFX_COMP_DEFAULT_CONFIG(_input)                         \
+{                                                                \
+    .reference          = NRF_COMP_REF_Int1V8,                   \
+    .main_mode          = NRF_COMP_MAIN_MODE_SE,                 \
+    .threshold          = NRFX_COMP_CONFIG_TH,                   \
+    .speed_mode         = NRF_COMP_SP_MODE_High,                 \
+    .hyst               = NRF_COMP_HYST_NoHyst,                  \
+    .isource            = NRF_COMP_ISOURCE_Off,                  \
+    .input              = (nrf_comp_input_t)_input,              \
+    .interrupt_priority = NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY  \
 }
 #else
-#define NRFX_COMP_DEFAULT_CONFIG(_input)                 \
-{                                                        \
-    .reference          = NRF_COMP_REF_Int1V8,           \
-    .main_mode          = NRF_COMP_MAIN_MODE_SE,         \
-    .threshold          = NRFX_COMP_CONFIG_TH,           \
-    .speed_mode         = NRF_COMP_SP_MODE_High,         \
-    .hyst               = NRF_COMP_HYST_NoHyst,          \
-    .input              = (nrf_comp_input_t)_input,      \
-    .interrupt_priority = NRFX_COMP_CONFIG_IRQ_PRIORITY  \
+#define NRFX_COMP_DEFAULT_CONFIG(_input)                         \
+{                                                                \
+    .reference          = NRF_COMP_REF_Int1V8,                   \
+    .main_mode          = NRF_COMP_MAIN_MODE_SE,                 \
+    .threshold          = NRFX_COMP_CONFIG_TH,                   \
+    .speed_mode         = NRF_COMP_SP_MODE_High,                 \
+    .hyst               = NRF_COMP_HYST_NoHyst,                  \
+    .input              = (nrf_comp_input_t)_input,              \
+    .interrupt_priority = NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY  \
 }
 #endif
 

@@ -228,7 +228,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
     // [the GPIOTE driver may be already initialized at this point (by this
     //  driver when another SPIS instance is used, or by an application code),
     //  so just ignore the returned value]
-    (void)nrfx_gpiote_init(NRFX_GPIOTE_CONFIG_IRQ_PRIORITY);
+    (void)nrfx_gpiote_init(NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
     static nrfx_gpiote_in_config_t const csn_gpiote_config =
         NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(true);
     nrfx_err_t gpiote_err_code = nrfx_gpiote_in_init(p_config->csn_pin,

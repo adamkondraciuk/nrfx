@@ -81,7 +81,7 @@ typedef struct
     .mck_pin      = _pin_mck,                                                           \
     .sdout_pin    = _pin_sdout,                                                         \
     .sdin_pin     = _pin_sdin,                                                          \
-    .irq_priority = NRFX_I2S_CONFIG_IRQ_PRIORITY,                                       \
+    .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
     .mode         = NRF_I2S_MODE_MASTER,                                                \
     .format       = NRF_I2S_FORMAT_I2S,                                                 \
     .alignment    = NRF_I2S_ALIGN_LEFT,                                                 \

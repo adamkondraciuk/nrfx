@@ -1840,7 +1840,7 @@ void nrfx_usbd_start(bool enable_sof)
    nrf_usbd_int_enable(ints_to_enable);
 
    /* Enable interrupt globally */
-   NRFX_IRQ_PRIORITY_SET(USBD_IRQn, NRFX_USBD_CONFIG_IRQ_PRIORITY);
+   NRFX_IRQ_PRIORITY_SET(USBD_IRQn, NRFX_USBD_DEFAULT_CONFIG_IRQ_PRIORITY);
    NRFX_IRQ_ENABLE(USBD_IRQn);
 
    /* Enable pullups */

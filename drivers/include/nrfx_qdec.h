@@ -47,18 +47,18 @@ typedef struct
  * @param[in] _pin_b   Pin for B encoder channel input.
  * @param[in] _pin_led Pin for LED output.
  */
-#define NRFX_QDEC_DEFAULT_CONFIG(_pin_a, _pin_b, _pin_led)   \
-    {                                                        \
-        .reportper          = NRF_QDEC_REPORTPER_10,         \
-        .sampleper          = NRF_QDEC_SAMPLEPER_16384us,    \
-        .psela              = _pin_a,                        \
-        .pselb              = _pin_b,                        \
-        .pselled            = _pin_led,                      \
-        .ledpre             = 500,                           \
-        .ledpol             = NRF_QDEC_LEPOL_ACTIVE_HIGH,    \
-        .dbfen              = NRF_QDEC_DBFEN_DISABLE,        \
-        .sample_inten       = false,                         \
-        .interrupt_priority = NRFX_QDEC_CONFIG_IRQ_PRIORITY  \
+#define NRFX_QDEC_DEFAULT_CONFIG(_pin_a, _pin_b, _pin_led)           \
+    {                                                                \
+        .reportper          = NRF_QDEC_REPORTPER_10,                 \
+        .sampleper          = NRF_QDEC_SAMPLEPER_16384us,            \
+        .psela              = _pin_a,                                \
+        .pselb              = _pin_b,                                \
+        .pselled            = _pin_led,                              \
+        .ledpre             = 500,                                   \
+        .ledpol             = NRF_QDEC_LEPOL_ACTIVE_HIGH,            \
+        .dbfen              = NRF_QDEC_DBFEN_DISABLE,                \
+        .sample_inten       = false,                                 \
+        .interrupt_priority = NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY  \
     }
 
 /** @brief QDEC sample event data. */

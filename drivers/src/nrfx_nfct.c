@@ -324,7 +324,7 @@ static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
         .frequency          = NRF_TIMER_FREQ_1MHz,
         .mode               = NRF_TIMER_MODE_TIMER,
         .bit_width          = NRF_TIMER_BIT_WIDTH_16,
-        .interrupt_priority = NRFX_NFCT_CONFIG_IRQ_PRIORITY
+        .interrupt_priority = NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY
     };
 
     err_code = nrfx_timer_init(&m_timer_workaround.timer, &timer_cfg, nrfx_nfct_field_timer_handler);
@@ -381,7 +381,7 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
     nrfx_nfct_hw_init_setup();
 
     NRFX_IRQ_PENDING_CLEAR(NFCT_IRQn);
-    NRFX_IRQ_PRIORITY_SET(NFCT_IRQn, NRFX_NFCT_CONFIG_IRQ_PRIORITY);
+    NRFX_IRQ_PRIORITY_SET(NFCT_IRQn, NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY);
     NRFX_IRQ_ENABLE(NFCT_IRQn);
 
 #if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_190)

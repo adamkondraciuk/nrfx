@@ -72,7 +72,7 @@ typedef struct
         .spi_mode  = NRF_QSPI_MODE_0,                                  \
         .sck_freq  = NRF_QSPI_FREQ_32MDIV16,                           \
     },                                                                 \
-    .irq_priority  = (uint8_t)NRFX_QSPI_CONFIG_IRQ_PRIORITY,           \
+    .irq_priority  = (uint8_t)NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY,   \
 }
 
 /** @brief QSPI custom instruction helper with the default configuration. */

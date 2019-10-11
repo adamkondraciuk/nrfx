@@ -23,7 +23,7 @@ extern "C" {
 
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ) || defined(__NRFX_DOXYGEN__)
 /** @brief WDT instance interrupt priority configuration. */
-    #define NRFX_WDT_IRQ_CONFIG .interrupt_priority = NRFX_WDT_CONFIG_IRQ_PRIORITY
+    #define NRFX_WDT_IRQ_CONFIG .interrupt_priority = NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
 #else
     #define NRFX_WDT_IRQ_CONFIG
 #endif
