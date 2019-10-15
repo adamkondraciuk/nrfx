@@ -267,7 +267,7 @@ void nrfx_gpiote_out_task_disable(nrfx_gpiote_pin_t pin);
  *
  * @return OUT task associated with the specified output pin.
  */
-nrf_gpiote_tasks_t nrfx_gpiote_out_task_get(nrfx_gpiote_pin_t pin);
+nrf_gpiote_task_t nrfx_gpiote_out_task_get(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for getting the address of the OUT task for the specified output pin.
@@ -289,7 +289,7 @@ uint32_t nrfx_gpiote_out_task_addr_get(nrfx_gpiote_pin_t pin);
  *
  * @return SET task associated with the specified output pin.
  */
-nrf_gpiote_tasks_t nrfx_gpiote_set_task_get(nrfx_gpiote_pin_t pin);
+nrf_gpiote_task_t nrfx_gpiote_set_task_get(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for getting the address of the SET task for the specified output pin.
@@ -312,7 +312,7 @@ uint32_t nrfx_gpiote_set_task_addr_get(nrfx_gpiote_pin_t pin);
  *
  * @return CLR task associated with the specified output pin.
  */
-nrf_gpiote_tasks_t nrfx_gpiote_clr_task_get(nrfx_gpiote_pin_t pin);
+nrf_gpiote_task_t nrfx_gpiote_clr_task_get(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for getting the address of the SET task for the specified output pin.
@@ -400,7 +400,7 @@ bool nrfx_gpiote_in_is_set(nrfx_gpiote_pin_t pin);
  *
  * @return Event associated with the specified input pin.
  */
-nrf_gpiote_events_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin);
+nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for getting the address of a GPIOTE input pin event.

@@ -42,53 +42,53 @@ typedef enum
 /** @brief GPIOTE tasks. */
 typedef enum
 {
-    NRF_GPIOTE_TASKS_OUT_0     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), /**< Out task 0. */
-    NRF_GPIOTE_TASKS_OUT_1     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), /**< Out task 1. */
-    NRF_GPIOTE_TASKS_OUT_2     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), /**< Out task 2. */
-    NRF_GPIOTE_TASKS_OUT_3     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), /**< Out task 3. */
+    NRF_GPIOTE_TASK_OUT_0     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), /**< Out task 0. */
+    NRF_GPIOTE_TASK_OUT_1     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), /**< Out task 1. */
+    NRF_GPIOTE_TASK_OUT_2     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), /**< Out task 2. */
+    NRF_GPIOTE_TASK_OUT_3     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), /**< Out task 3. */
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASKS_OUT_4     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), /**< Out task 4. */
-    NRF_GPIOTE_TASKS_OUT_5     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), /**< Out task 5. */
-    NRF_GPIOTE_TASKS_OUT_6     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), /**< Out task 6. */
-    NRF_GPIOTE_TASKS_OUT_7     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), /**< Out task 7. */
+    NRF_GPIOTE_TASK_OUT_4     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), /**< Out task 4. */
+    NRF_GPIOTE_TASK_OUT_5     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), /**< Out task 5. */
+    NRF_GPIOTE_TASK_OUT_6     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), /**< Out task 6. */
+    NRF_GPIOTE_TASK_OUT_7     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), /**< Out task 7. */
 #endif
 #if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASKS_SET_0     = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), /**< Set task 0. */
-    NRF_GPIOTE_TASKS_SET_1     = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), /**< Set task 1. */
-    NRF_GPIOTE_TASKS_SET_2     = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), /**< Set task 2. */
-    NRF_GPIOTE_TASKS_SET_3     = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), /**< Set task 3. */
-    NRF_GPIOTE_TASKS_SET_4     = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), /**< Set task 4. */
-    NRF_GPIOTE_TASKS_SET_5     = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), /**< Set task 5. */
-    NRF_GPIOTE_TASKS_SET_6     = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), /**< Set task 6. */
-    NRF_GPIOTE_TASKS_SET_7     = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), /**< Set task 7. */
+    NRF_GPIOTE_TASK_SET_0     = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), /**< Set task 0. */
+    NRF_GPIOTE_TASK_SET_1     = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), /**< Set task 1. */
+    NRF_GPIOTE_TASK_SET_2     = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), /**< Set task 2. */
+    NRF_GPIOTE_TASK_SET_3     = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), /**< Set task 3. */
+    NRF_GPIOTE_TASK_SET_4     = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), /**< Set task 4. */
+    NRF_GPIOTE_TASK_SET_5     = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), /**< Set task 5. */
+    NRF_GPIOTE_TASK_SET_6     = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), /**< Set task 6. */
+    NRF_GPIOTE_TASK_SET_7     = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), /**< Set task 7. */
 #endif
 #if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASKS_CLR_0     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), /**< Clear task 0. */
-    NRF_GPIOTE_TASKS_CLR_1     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), /**< Clear task 1. */
-    NRF_GPIOTE_TASKS_CLR_2     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), /**< Clear task 2. */
-    NRF_GPIOTE_TASKS_CLR_3     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), /**< Clear task 3. */
-    NRF_GPIOTE_TASKS_CLR_4     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), /**< Clear task 4. */
-    NRF_GPIOTE_TASKS_CLR_5     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), /**< Clear task 5. */
-    NRF_GPIOTE_TASKS_CLR_6     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), /**< Clear task 6. */
-    NRF_GPIOTE_TASKS_CLR_7     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), /**< Clear task 7. */
+    NRF_GPIOTE_TASK_CLR_0     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), /**< Clear task 0. */
+    NRF_GPIOTE_TASK_CLR_1     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), /**< Clear task 1. */
+    NRF_GPIOTE_TASK_CLR_2     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), /**< Clear task 2. */
+    NRF_GPIOTE_TASK_CLR_3     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), /**< Clear task 3. */
+    NRF_GPIOTE_TASK_CLR_4     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), /**< Clear task 4. */
+    NRF_GPIOTE_TASK_CLR_5     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), /**< Clear task 5. */
+    NRF_GPIOTE_TASK_CLR_6     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), /**< Clear task 6. */
+    NRF_GPIOTE_TASK_CLR_7     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), /**< Clear task 7. */
 #endif
-} nrf_gpiote_tasks_t;
+} nrf_gpiote_task_t;
 
 /** @brief GPIOTE events. */
 typedef enum
 {
-    NRF_GPIOTE_EVENTS_IN_0     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[0]), /**< In event 0. */
-    NRF_GPIOTE_EVENTS_IN_1     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[1]), /**< In event 1. */
-    NRF_GPIOTE_EVENTS_IN_2     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[2]), /**< In event 2. */
-    NRF_GPIOTE_EVENTS_IN_3     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[3]), /**< In event 3. */
+    NRF_GPIOTE_EVENT_IN_0     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[0]), /**< In event 0. */
+    NRF_GPIOTE_EVENT_IN_1     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[1]), /**< In event 1. */
+    NRF_GPIOTE_EVENT_IN_2     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[2]), /**< In event 2. */
+    NRF_GPIOTE_EVENT_IN_3     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[3]), /**< In event 3. */
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_EVENTS_IN_4     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[4]), /**< In event 4. */
-    NRF_GPIOTE_EVENTS_IN_5     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[5]), /**< In event 5. */
-    NRF_GPIOTE_EVENTS_IN_6     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[6]), /**< In event 6. */
-    NRF_GPIOTE_EVENTS_IN_7     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[7]), /**< In event 7. */
+    NRF_GPIOTE_EVENT_IN_4     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[4]), /**< In event 4. */
+    NRF_GPIOTE_EVENT_IN_5     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[5]), /**< In event 5. */
+    NRF_GPIOTE_EVENT_IN_6     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[6]), /**< In event 6. */
+    NRF_GPIOTE_EVENT_IN_7     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[7]), /**< In event 7. */
 #endif
-    NRF_GPIOTE_EVENTS_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT), /**<  Port event. */
-} nrf_gpiote_events_t;
+    NRF_GPIOTE_EVENT_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT), /**<  Port event. */
+} nrf_gpiote_event_t;
 
 /** @brief GPIOTE interrupts. */
 typedef enum
@@ -122,7 +122,7 @@ typedef enum
  *
  * @param[in] task Task.
  */
-NRF_STATIC_INLINE void nrf_gpiote_task_set(nrf_gpiote_tasks_t task);
+NRF_STATIC_INLINE void nrf_gpiote_task_set(nrf_gpiote_task_t task);
 
 /**
  * @brief Function for getting the address of the specified GPIOTE task.
@@ -131,7 +131,7 @@ NRF_STATIC_INLINE void nrf_gpiote_task_set(nrf_gpiote_tasks_t task);
  *
  * @return Address of the specified task.
  */
-NRF_STATIC_INLINE uint32_t nrf_gpiote_task_addr_get(nrf_gpiote_tasks_t task);
+NRF_STATIC_INLINE uint32_t nrf_gpiote_task_addr_get(nrf_gpiote_task_t task);
 
 /**
  * @brief Function for getting the state of the specified GPIOTE event.
@@ -141,14 +141,14 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_task_addr_get(nrf_gpiote_tasks_t task);
  * @retval true  The event is set.
  * @retval false The event is not set.
  */
-NRF_STATIC_INLINE bool nrf_gpiote_event_is_set(nrf_gpiote_events_t event);
+NRF_STATIC_INLINE bool nrf_gpiote_event_is_set(nrf_gpiote_event_t event);
 
 /**
  * @brief Function for clearing the specified GPIOTE event.
  *
  * @param[in] event Event.
  */
-NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_events_t event);
+NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_event_t event);
 
 /**
  * @brief Function for getting the address of the specified GPIOTE event.
@@ -157,7 +157,7 @@ NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_events_t event);
  *
  * @return Address of the specified event.
  */
-NRF_STATIC_INLINE uint32_t nrf_gpiote_event_addr_get(nrf_gpiote_events_t event);
+NRF_STATIC_INLINE uint32_t nrf_gpiote_event_addr_get(nrf_gpiote_event_t event);
 
 /**
  * @brief Function for enabling interrupts.
@@ -190,8 +190,8 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_int_is_enabled(uint32_t mask);
  * @param[in] task    Task for which to set the configuration.
  * @param[in] channel Channel through which to subscribe events.
  */
-NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(nrf_gpiote_tasks_t task,
-                                                uint8_t            channel);
+NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(nrf_gpiote_task_t task,
+                                                uint8_t           channel);
 
 /**
  * @brief Function for clearing the subscribe configuration for a given
@@ -199,7 +199,7 @@ NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(nrf_gpiote_tasks_t task,
  *
  * @param[in] task Task for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_gpiote_subscribe_clear(nrf_gpiote_tasks_t task);
+NRF_STATIC_INLINE void nrf_gpiote_subscribe_clear(nrf_gpiote_task_t task);
 
 /**
  * @brief Function for setting the publish configuration for a given
@@ -208,8 +208,8 @@ NRF_STATIC_INLINE void nrf_gpiote_subscribe_clear(nrf_gpiote_tasks_t task);
  * @param[in] event   Event for which to set the configuration.
  * @param[in] channel Channel through which to publish the event.
  */
-NRF_STATIC_INLINE void nrf_gpiote_publish_set(nrf_gpiote_events_t event,
-                                              uint8_t             channel);
+NRF_STATIC_INLINE void nrf_gpiote_publish_set(nrf_gpiote_event_t event,
+                                              uint8_t            channel);
 
 /**
  * @brief Function for clearing the publish configuration for a given
@@ -217,7 +217,7 @@ NRF_STATIC_INLINE void nrf_gpiote_publish_set(nrf_gpiote_events_t event,
  *
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_gpiote_publish_clear(nrf_gpiote_events_t event);
+NRF_STATIC_INLINE void nrf_gpiote_publish_clear(nrf_gpiote_event_t event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -323,7 +323,7 @@ NRF_STATIC_INLINE bool nrf_gpiote_te_is_enabled(uint32_t idx);
  *
  * @return Requested OUT task.
  */
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_out_task_get(uint8_t index);
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_out_task_get(uint8_t index);
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -333,7 +333,7 @@ NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_out_task_get(uint8_t index);
  *
  * @return Requested SET task.
  */
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_set_task_get(uint8_t index);
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_set_task_get(uint8_t index);
 #endif
 
 #if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
@@ -344,7 +344,7 @@ NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_set_task_get(uint8_t index);
  *
  * @return Requested CLR task.
  */
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_clr_task_get(uint8_t index);
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_clr_task_get(uint8_t index);
 #endif
 
 /**
@@ -354,26 +354,26 @@ NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_clr_task_get(uint8_t index);
  *
  * @return Requested IN event.
  */
-NRF_STATIC_INLINE nrf_gpiote_events_t nrf_gpiote_in_event_get(uint8_t index);
+NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index);
 
 #ifndef NRF_DECLARE_ONLY
 
-__STATIC_INLINE void nrf_gpiote_task_set(nrf_gpiote_tasks_t task)
+__STATIC_INLINE void nrf_gpiote_task_set(nrf_gpiote_task_t task)
 {
     *(__IO uint32_t *)((uint32_t)NRF_GPIOTE + task) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_gpiote_task_addr_get(nrf_gpiote_tasks_t task)
+NRF_STATIC_INLINE uint32_t nrf_gpiote_task_addr_get(nrf_gpiote_task_t task)
 {
     return ((uint32_t)NRF_GPIOTE + task);
 }
 
-NRF_STATIC_INLINE bool nrf_gpiote_event_is_set(nrf_gpiote_events_t event)
+NRF_STATIC_INLINE bool nrf_gpiote_event_is_set(nrf_gpiote_event_t event)
 {
     return (*(uint32_t *)nrf_gpiote_event_addr_get(event) == 0x1UL) ? true : false;
 }
 
-NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_events_t event)
+NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_event_t event)
 {
     *(uint32_t *)nrf_gpiote_event_addr_get(event) = 0;
 #if __CORTEX_M == 0x04
@@ -382,7 +382,7 @@ NRF_STATIC_INLINE void nrf_gpiote_event_clear(nrf_gpiote_events_t event)
 #endif
 }
 
-NRF_STATIC_INLINE uint32_t nrf_gpiote_event_addr_get(nrf_gpiote_events_t event)
+NRF_STATIC_INLINE uint32_t nrf_gpiote_event_addr_get(nrf_gpiote_event_t event)
 {
     return ((uint32_t)NRF_GPIOTE + event);
 }
@@ -403,26 +403,26 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_int_is_enabled(uint32_t mask)
 }
 
 #if defined(DPPI_PRESENT)
-NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(nrf_gpiote_tasks_t task,
-                                                uint8_t            channel)
+NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(nrf_gpiote_task_t task,
+                                                uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_GPIOTE + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | GPIOTE_SUBSCRIBE_OUT_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_gpiote_subscribe_clear(nrf_gpiote_tasks_t task)
+NRF_STATIC_INLINE void nrf_gpiote_subscribe_clear(nrf_gpiote_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_GPIOTE + (uint32_t) task + 0x80uL)) = 0;
 }
 
-NRF_STATIC_INLINE void nrf_gpiote_publish_set(nrf_gpiote_events_t event,
-                                              uint8_t             channel)
+NRF_STATIC_INLINE void nrf_gpiote_publish_set(nrf_gpiote_event_t event,
+                                              uint8_t            channel)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_GPIOTE + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | GPIOTE_PUBLISH_IN_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_gpiote_publish_clear(nrf_gpiote_events_t event)
+NRF_STATIC_INLINE void nrf_gpiote_publish_clear(nrf_gpiote_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) NRF_GPIOTE + (uint32_t) event + 0x80uL)) = 0;
 }
@@ -508,32 +508,32 @@ NRF_STATIC_INLINE bool nrf_gpiote_te_is_enabled(uint32_t idx)
     return (NRF_GPIOTE->CONFIG[idx] & GPIOTE_CONFIG_MODE_Msk) != GPIOTE_CONFIG_MODE_Disabled;
 }
 
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_out_task_get(uint8_t index)
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_out_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_GPIOTE->TASKS_OUT));
-    return (nrf_gpiote_tasks_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_OUT[index]);
+    return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_OUT[index]);
 }
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT)
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_set_task_get(uint8_t index)
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_set_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_GPIOTE->TASKS_SET));
-    return (nrf_gpiote_tasks_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_SET[index]);
+    return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_SET[index]);
 }
 #endif
 
 #if defined(GPIOTE_FEATURE_CLR_PRESENT)
-NRF_STATIC_INLINE nrf_gpiote_tasks_t nrf_gpiote_clr_task_get(uint8_t index)
+NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_clr_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_GPIOTE->TASKS_CLR));
-    return (nrf_gpiote_tasks_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_CLR[index]);
+    return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_CLR[index]);
 }
 #endif
 
-NRF_STATIC_INLINE nrf_gpiote_events_t nrf_gpiote_in_event_get(uint8_t index)
+NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_GPIOTE->EVENTS_IN));
-    return (nrf_gpiote_events_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_IN[index]);
+    return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_IN[index]);
 }
 
 #endif // NRF_DECLARE_ONLY
