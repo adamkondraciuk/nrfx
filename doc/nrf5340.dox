@@ -74,8 +74,6 @@
 
 @ref nrf_uarte
 
-@ref nrf_usbd
-
 @ref nrf_vmc
 
 @ref nrf_wdt
