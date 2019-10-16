@@ -293,7 +293,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * p_inst
 NRFX_STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * p_instance,
                                              uint32_t *         p_mask)
 {
-    *p_mask = nrf_rtc_int_get(p_instance->p_reg);
+    *p_mask = nrf_rtc_int_enable_check(p_instance->p_reg, ~0uL);
     nrf_rtc_int_disable(p_instance->p_reg, NRF_RTC_INT_TICK_MASK |
                                            NRF_RTC_INT_OVERFLOW_MASK |
                                            NRF_RTC_INT_COMPARE0_MASK |
