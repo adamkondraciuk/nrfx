@@ -28,10 +28,10 @@
 #define NRF_RTC1       NRF_RTC1_NS
 #define NRF_SPIM0      NRF_SPIM0_NS
 #define NRF_SPIS0      NRF_SPIS0_NS
-#define NRF_SWI0       NRF_SWIRQ0_NS
-#define NRF_SWI1       NRF_SWIRQ1_NS
-#define NRF_SWI2       NRF_SWIRQ2_NS
-#define NRF_SWI3       NRF_SWIRQ3_NS
+#define NRF_SWI0       NRF_SWI0_NS
+#define NRF_SWI1       NRF_SWI1_NS
+#define NRF_SWI2       NRF_SWI2_NS
+#define NRF_SWI3       NRF_SWI3_NS
 #define NRF_TEMP       NRF_TEMP_NS
 #define NRF_TIMER0     NRF_TIMER0_NS
 #define NRF_TIMER1     NRF_TIMER1_NS
@@ -702,12 +702,9 @@
 #ifndef NRFX_SWI_ENABLED
 #define NRFX_SWI_ENABLED 1
 #endif
-// <q> NRFX_EGU_ENABLED  - Enables EGU support.
 
-
-#ifndef NRFX_EGU_ENABLED
-#define NRFX_EGU_ENABLED 1
-#endif
+// EGU peripheral of the Network core is currently not supported by the nrfx_swi driver.
+#define NRFX_EGU_ENABLED 0
 
 // <q> NRFX_SWI0_DISABLED  - Excludes SWI0 from being utilized by the driver.
 
@@ -735,20 +732,6 @@
 
 #ifndef NRFX_SWI3_DISABLED
 #define NRFX_SWI3_DISABLED 0
-#endif
-
-// <q> NRFX_SWI4_DISABLED  - Excludes SWI4 from being utilized by the driver.
-
-
-#ifndef NRFX_SWI4_DISABLED
-#define NRFX_SWI4_DISABLED 0
-#endif
-
-// <q> NRFX_SWI5_DISABLED  - Excludes SWI5 from being utilized by the driver.
-
-
-#ifndef NRFX_SWI5_DISABLED
-#define NRFX_SWI5_DISABLED 0
 #endif
 
 // <e> NRFX_SWI_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -810,6 +793,29 @@
 #ifndef NRFX_SYSTICK_ENABLED
 #define NRFX_SYSTICK_ENABLED 1
 #endif
+
+// <e> NRFX_TEMP_ENABLED - nrfx_temp - TEMP peripheral driver
+//==========================================================
+#ifndef NRFX_TEMP_ENABLED
+#define NRFX_TEMP_ENABLED 1
+#endif
+
+// <o> NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// </e>
 
 // <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver.
 //==========================================================
