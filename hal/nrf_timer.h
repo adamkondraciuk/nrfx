@@ -491,6 +491,26 @@ NRF_STATIC_INLINE uint32_t nrf_timer_us_to_ticks(uint32_t              time_us,
 NRF_STATIC_INLINE uint32_t nrf_timer_ms_to_ticks(uint32_t              time_ms,
                                                  nrf_timer_frequency_t frequency);
 
+#if defined(TIMER_ONESHOTEN_ONESHOTEN_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling one-shot operation for the specified capture/compare channel.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Capture/compare channel.
+ */
+NRF_STATIC_INLINE void nrf_timer_one_shot_enable(NRF_TIMER_Type *       p_reg,
+                                                 nrf_timer_cc_channel_t cc_channel);
+
+/**
+ * @brief Function for disabling one-shot operation for the specified capture/compare channel.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Capture/compare channel.
+ */
+NRF_STATIC_INLINE void nrf_timer_one_shot_disable(NRF_TIMER_Type *       p_reg,
+                                                  nrf_timer_cc_channel_t cc_channel);
+
+#endif // defined(TIMER_ONESHOTEN_ONESHOTEN_Msk) || defined(__NRFX_DOXYGEN__)
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -676,6 +696,20 @@ NRF_STATIC_INLINE uint32_t nrf_timer_ms_to_ticks(uint32_t              time_ms,
     NRFX_ASSERT(ticks <= UINT32_MAX);
     return (uint32_t)ticks;
 }
+
+#if defined(TIMER_ONESHOTEN_ONESHOTEN_Msk)
+NRF_STATIC_INLINE void nrf_timer_one_shot_enable(NRF_TIMER_Type *       p_reg,
+                                                 nrf_timer_cc_channel_t cc_channel)
+{
+    p_reg->ONESHOTEN[cc_channel] = TIMER_ONESHOTEN_ONESHOTEN_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_timer_one_shot_disable(NRF_TIMER_Type *       p_reg,
+                                                  nrf_timer_cc_channel_t cc_channel)
+{
+    p_reg->ONESHOTEN[cc_channel] = 0;
+}
+#endif // defined(TIMER_ONESHOTEN_ONESHOTEN_Msk)
 
 #endif // NRF_DECLARE_ONLY
 
