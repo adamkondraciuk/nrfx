@@ -447,8 +447,7 @@ NRF_STATIC_INLINE uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * p_reg);
  * @attention Offset must be modulo 4 value. In other case, hardware fault can occur.
  * @return Pointer to the register.
  */
-NRF_STATIC_INLINE volatile uint32_t* nrf_twis_getRegPtr(NRF_TWIS_Type const * p_reg,
-                                                        uint32_t              offset)
+NRF_STATIC_INLINE volatile uint32_t* nrf_twis_getRegPtr(NRF_TWIS_Type * p_reg, uint32_t offset)
 {
     return (volatile uint32_t*)((uint8_t *)p_reg + (uint32_t)offset);
 }
