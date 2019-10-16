@@ -103,23 +103,14 @@ NRF_STATIC_INLINE void nrf_rtc_int_enable(NRF_RTC_Type * p_reg, uint32_t mask);
 NRF_STATIC_INLINE void nrf_rtc_int_disable(NRF_RTC_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for checking if interrupts are enabled.
+ * @brief Function for checking if given interrupts are enabled.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupt flags to be checked.
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param mask  Mask of interrupts to be checked.
  *
  * @return Mask with enabled interrupts.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_is_enabled(NRF_RTC_Type * p_reg, uint32_t mask);
-
-/**
- * @brief Function for returning the status of currently enabled interrupts.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Value in INTEN register.
- */
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_rtc_int_enable_check(NRF_RTC_Type const * p_reg, uint32_t mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -168,14 +159,15 @@ NRF_STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
- * @brief Function for checking if an event is pending.
+ * @brief Function for retrieving the state of the RTC event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Address of the event.
+ * @param[in] event Event to be checked.
  *
- * @return Mask of pending events.
+ * @retval true  The event has been generated.
+ * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE uint32_t nrf_rtc_event_pending(NRF_RTC_Type * p_reg, nrf_rtc_event_t event);
+NRF_STATIC_INLINE bool nrf_rtc_event_check(NRF_RTC_Type const * p_reg, nrf_rtc_event_t event);
 
 /**
  * @brief Function for clearing an event.
@@ -288,14 +280,9 @@ NRF_STATIC_INLINE void nrf_rtc_int_disable(NRF_RTC_Type * p_reg, uint32_t mask)
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_is_enabled(NRF_RTC_Type * p_reg, uint32_t mask)
+NRF_STATIC_INLINE uint32_t nrf_rtc_int_enable_check(NRF_RTC_Type const * p_reg, uint32_t mask)
 {
     return (p_reg->INTENSET & mask);
-}
-
-NRF_STATIC_INLINE uint32_t nrf_rtc_int_get(NRF_RTC_Type const * p_reg)
-{
-    return p_reg->INTENSET;
 }
 
 #if defined(DPPI_PRESENT)
@@ -328,9 +315,9 @@ NRF_STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,
 }
 #endif // defined(DPPI_PRESENT)
 
-NRF_STATIC_INLINE uint32_t nrf_rtc_event_pending(NRF_RTC_Type * p_reg, nrf_rtc_event_t event)
+NRF_STATIC_INLINE bool nrf_rtc_event_check(NRF_RTC_Type const * p_reg, nrf_rtc_event_t event)
 {
-    return *(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
 NRF_STATIC_INLINE void nrf_rtc_event_clear(NRF_RTC_Type * p_reg, nrf_rtc_event_t event)
