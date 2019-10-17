@@ -427,6 +427,37 @@ NRF_STATIC_INLINE void nrf_twis_orc_set(NRF_TWIS_Type * p_reg,
  */
 NRF_STATIC_INLINE uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * p_reg);
 
+#if defined(TWIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling the TX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_twis_tx_list_enable(NRF_TWIS_Type * p_reg);
+
+/**
+ * @brief Function for disabling the TX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_twis_tx_list_disable(NRF_TWIS_Type * p_reg);
+#endif // defined(TWIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+
+#if defined(TWIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling the RX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_twis_rx_list_enable(NRF_TWIS_Type * p_reg);
+
+/**
+ * @brief Function for disabling the RX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_twis_rx_list_disable(NRF_TWIS_Type * p_reg);
+#endif // defined(TWIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
 
 /** @} */ /*  End of nrf_twis_hal */
 
@@ -686,6 +717,31 @@ NRF_STATIC_INLINE uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * p_reg)
 {
     return (uint8_t)p_reg->ORC;
 }
+
+#if defined(TWIS_TXD_LIST_LIST_Msk)
+NRF_STATIC_INLINE void nrf_twis_tx_list_enable(NRF_TWIS_Type * p_reg)
+{
+    p_reg->TXD.LIST = TWIS_TXD_LIST_LIST_ArrayList << TWIS_TXD_LIST_LIST_Pos;
+}
+
+NRF_STATIC_INLINE void nrf_twis_tx_list_disable(NRF_TWIS_Type * p_reg)
+{
+    p_reg->TXD.LIST = TWIS_TXD_LIST_LIST_Disabled << TWIS_TXD_LIST_LIST_Pos;
+}
+
+#endif // defined(TWIS_TXD_LIST_LIST_Msk)
+
+#if defined(TWIS_RXD_LIST_LIST_Msk)
+NRF_STATIC_INLINE void nrf_twis_rx_list_enable(NRF_TWIS_Type * p_reg)
+{
+    p_reg->RXD.LIST = TWIS_RXD_LIST_LIST_ArrayList << TWIS_RXD_LIST_LIST_Pos;
+}
+
+NRF_STATIC_INLINE void nrf_twis_rx_list_disable(NRF_TWIS_Type * p_reg)
+{
+    p_reg->RXD.LIST = TWIS_RXD_LIST_LIST_Disabled << TWIS_RXD_LIST_LIST_Pos;
+}
+#endif // defined(TWIS_RXD_LIST_LIST_Msk)
 
 #endif /* NRF_DECLARE_ONLY */
 

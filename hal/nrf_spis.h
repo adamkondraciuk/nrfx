@@ -351,6 +351,37 @@ NRF_STATIC_INLINE void nrf_spis_def_set(NRF_SPIS_Type * p_reg,
 NRF_STATIC_INLINE void nrf_spis_orc_set(NRF_SPIS_Type * p_reg,
                                         uint8_t         orc);
 
+#if defined(SPIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling the TX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spis_tx_list_enable(NRF_SPIS_Type * p_reg);
+
+/**
+ * @brief Function for disabling the TX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spis_tx_list_disable(NRF_SPIS_Type * p_reg);
+#endif // defined(SPIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+
+#if defined(SPIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling the RX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spis_rx_list_enable(NRF_SPIS_Type * p_reg);
+
+/**
+ * @brief Function for disabling the RX list feature.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spis_rx_list_disable(NRF_SPIS_Type * p_reg);
+#endif // defined(SPIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -575,6 +606,30 @@ NRF_STATIC_INLINE void nrf_spis_def_set(NRF_SPIS_Type * p_reg,
 {
     p_reg->DEF = def;
 }
+
+#if defined(SPIS_TXD_LIST_LIST_Msk)
+NRF_STATIC_INLINE void nrf_spis_tx_list_enable(NRF_SPIS_Type * p_reg)
+{
+    p_reg->TXD.LIST = SPIS_TXD_LIST_LIST_ArrayList << SPIS_TXD_LIST_LIST_Pos;
+}
+
+NRF_STATIC_INLINE void nrf_spis_tx_list_disable(NRF_SPIS_Type * p_reg)
+{
+    p_reg->TXD.LIST = SPIS_TXD_LIST_LIST_Disabled << SPIS_TXD_LIST_LIST_Pos;
+}
+#endif // defined(SPIS_TXD_LIST_LIST_Msk)
+
+#if defined(SPIS_RXD_LIST_LIST_Msk)
+NRF_STATIC_INLINE void nrf_spis_rx_list_enable(NRF_SPIS_Type * p_reg)
+{
+    p_reg->RXD.LIST = SPIS_RXD_LIST_LIST_ArrayList << SPIS_RXD_LIST_LIST_Pos;
+}
+
+NRF_STATIC_INLINE void nrf_spis_rx_list_disable(NRF_SPIS_Type * p_reg)
+{
+    p_reg->RXD.LIST = SPIS_RXD_LIST_LIST_Disabled << SPIS_RXD_LIST_LIST_Pos;
+}
+#endif // defined(SPIS_RXD_LIST_LIST_Msk)
 
 #endif // NRF_DECLARE_ONLY
 
