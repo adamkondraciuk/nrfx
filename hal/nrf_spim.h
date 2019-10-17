@@ -242,16 +242,14 @@ NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
                                             uint32_t        mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] spim_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg,
-                                                 nrf_spim_int_mask_t   spim_int);
+NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg, uint32_t mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -381,9 +379,9 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
 /**
  * @brief Function for configuring the extended SPIM interface.
  *
- * @param p_reg   Pointer to the structure of registers of the peripheral.
- * @param rxdelay Sample delay for input serial data on MISO,
- *                specified in 64 MHz clock cycles (15.625 ns) from the sampling edge of SCK.
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] rxdelay Sample delay for input serial data on MISO,
+ *                    specified in 64 MHz clock cycles (15.625 ns) from the sampling edge of SCK.
  */
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
                                              uint32_t        rxdelay);
@@ -393,14 +391,14 @@ NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
 /**
  * @brief Function for clearing stall status for RX EasyDMA RAM accesses.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg);
 
 /**
  * @brief Function for getting stall status for RX EasyDMA RAM accesses.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Stall status of RX EasyDMA RAM accesses.
  */
@@ -411,14 +409,14 @@ NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type const * p_reg);
 /**
  * @brief Function for clearing stall status for TX EasyDMA RAM accesses.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_spim_stallstat_tx_clear(NRF_SPIM_Type * p_reg);
 
 /**
  * @brief Function for getting stall status for TX EasyDMA RAM accesses.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Stall status of TX EasyDMA RAM accesses.
  */
@@ -437,9 +435,9 @@ NRF_STATIC_INLINE void nrf_spim_frequency_set(NRF_SPIM_Type *      p_reg,
 /**
  * @brief Function for setting the transmit buffer.
  *
- * @param[in]  p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in]  p_buffer Pointer to the buffer with data to send.
- * @param[in]  length   Maximum number of data bytes to transmit.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[in] p_buffer Pointer to the buffer with data to send.
+ * @param[in] length   Maximum number of data bytes to transmit.
  */
 NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
                                               uint8_t const * p_buffer,
@@ -571,10 +569,9 @@ NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg,
-                                                 nrf_spim_int_mask_t   spim_int)
+NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & spim_int);
+    return p_reg->INTENSET & mask;
 }
 
 #if defined(DPPI_PRESENT)
