@@ -59,15 +59,14 @@ NRF_STATIC_INLINE void nrf_rng_int_enable(NRF_RNG_Type * p_reg, uint32_t mask);
 NRF_STATIC_INLINE void nrf_rng_int_disable(NRF_RNG_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for getting the state of the specified interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Interrupts to be checked.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is not enabled.
- * @retval false The interrupt is enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_rng_int_get(NRF_RNG_Type const * p_reg, nrf_rng_int_mask_t mask);
+NRF_STATIC_INLINE uint32_t nrf_rng_int_enable_check(NRF_RNG_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for getting the address of the specified task.
@@ -174,9 +173,9 @@ NRF_STATIC_INLINE void nrf_rng_int_disable(NRF_RNG_Type * p_reg, uint32_t mask)
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_rng_int_get(NRF_RNG_Type const * p_reg, nrf_rng_int_mask_t mask)
+NRF_STATIC_INLINE uint32_t nrf_rng_int_enable_check(NRF_RNG_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENCLR & mask);
+    return p_reg->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_rng_task_address_get(NRF_RNG_Type const * p_reg,
