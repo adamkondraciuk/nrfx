@@ -256,16 +256,14 @@ NRF_STATIC_INLINE void nrf_qspi_int_enable(NRF_QSPI_Type * p_reg, uint32_t mask)
 NRF_STATIC_INLINE void nrf_qspi_int_disable(NRF_QSPI_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] qspi_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_qspi_int_enable_check(NRF_QSPI_Type const * p_reg,
-                                                 nrf_qspi_int_mask_t   qspi_int);
+NRF_STATIC_INLINE uint32_t nrf_qspi_int_enable_check(NRF_QSPI_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for enabling the QSPI peripheral.
@@ -511,10 +509,9 @@ NRF_STATIC_INLINE void nrf_qspi_int_disable(NRF_QSPI_Type * p_reg, uint32_t mask
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_qspi_int_enable_check(NRF_QSPI_Type const * p_reg,
-                                                 nrf_qspi_int_mask_t   qspi_int)
+NRF_STATIC_INLINE uint32_t nrf_qspi_int_enable_check(NRF_QSPI_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & qspi_int);
+    return p_reg->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE void nrf_qspi_enable(NRF_QSPI_Type * p_reg)
