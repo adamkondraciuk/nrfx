@@ -204,11 +204,14 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_buffers_t const * p_initial_buffers,
  * but it has to be done before the I2S peripheral finishes processing the
  * buffers supplied previously. Otherwise, data corruption will occur.
  *
- * @sa nrfx_i2s_data_handler_t
+ * @param[in] p_buffers Pointer to a structure specifying the buffers
+ *                      to be used in the upcoming part of the transfer.
  *
  * @retval NRFX_SUCCESS             If the operation was successful.
  * @retval NRFX_ERROR_INVALID_STATE If the buffers were already supplied or
  *                                  the peripheral is currently being stopped.
+ *
+ * @sa nrfx_i2s_data_handler_t
  */
 nrfx_err_t nrfx_i2s_next_buffers_set(nrfx_i2s_buffers_t const * p_buffers);
 
