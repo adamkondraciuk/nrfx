@@ -183,15 +183,14 @@ NRF_STATIC_INLINE uint32_t nrf_twis_shorts_get(NRF_TWIS_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_twis_int_enable(NRF_TWIS_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of the specified interrupts.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  Any of the specified interrupts is enabled.
- * @retval false None of the specified interrupts is enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_twis_int_enable_check(NRF_TWIS_Type const * p_reg, uint32_t mask);
+NRF_STATIC_INLINE uint32_t nrf_twis_int_enable_check(NRF_TWIS_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling the specified interrupts.
@@ -543,9 +542,9 @@ NRF_STATIC_INLINE void nrf_twis_int_enable(NRF_TWIS_Type * p_reg, uint32_t mask)
     p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_twis_int_enable_check(NRF_TWIS_Type const * p_reg, uint32_t mask)
+NRF_STATIC_INLINE uint32_t nrf_twis_int_enable_check(NRF_TWIS_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & mask);
+    return p_reg->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE void nrf_twis_int_disable(NRF_TWIS_Type * p_reg, uint32_t mask)
