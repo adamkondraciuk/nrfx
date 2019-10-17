@@ -353,32 +353,28 @@ NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(NRF_SAADC_Type * p_reg,
 /**
  * @brief Function for enabling specified SAADC interrupts.
  *
- * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
- * @param[in] saadc_int_mask Interrupt(s) to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
-NRF_STATIC_INLINE void nrf_saadc_int_enable(NRF_SAADC_Type * p_reg,
-                                            uint32_t         saadc_int_mask);
+NRF_STATIC_INLINE void nrf_saadc_int_enable(NRF_SAADC_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of specified SAADC interrupts.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
- * @param[in] saadc_int_mask Interrupt(s) to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  All specified interrupts are enabled.
- * @retval false At least one of the given interrupts is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_saadc_int_enable_check(NRF_SAADC_Type const * p_reg,
-                                                  uint32_t               saadc_int_mask);
+NRF_STATIC_INLINE uint32_t nrf_saadc_int_enable_check(NRF_SAADC_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling specified interrupts.
  *
- * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
- * @param saadc_int_mask Interrupt(s) to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
-NRF_STATIC_INLINE void nrf_saadc_int_disable(NRF_SAADC_Type * p_reg,
-                                             uint32_t         saadc_int_mask);
+NRF_STATIC_INLINE void nrf_saadc_int_disable(NRF_SAADC_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for generating masks for SAADC channel limit interrupts.
@@ -576,7 +572,9 @@ NRF_STATIC_INLINE void nrf_saadc_burst_set(NRF_SAADC_Type *  p_reg,
  *
  * The minimum value of the conversion result depends on the configured resolution.
  *
-* @param[in] resolution Bit resolution.
+ * @param[in] resolution Bit resolution.
+ *
+ * @return Minimum value of the conversion result.
  */
 NRF_STATIC_INLINE nrf_saadc_value_t nrf_saadc_value_min_get(nrf_saadc_resolution_t resolution);
 
@@ -585,7 +583,9 @@ NRF_STATIC_INLINE nrf_saadc_value_t nrf_saadc_value_min_get(nrf_saadc_resolution
  *
  * The maximum value of the conversion result depends on the configured resolution.
  *
-* @param[in] resolution Bit resolution.
+ * @param[in] resolution Bit resolution.
+ *
+ * @return Maximum value of the conversion result.
  */
 NRF_STATIC_INLINE nrf_saadc_value_t nrf_saadc_value_max_get(nrf_saadc_resolution_t resolution);
 
@@ -689,20 +689,19 @@ NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(NRF_SAADC_Type * p_reg,
           | (((uint32_t) high << SAADC_CH_LIMIT_HIGH_Pos) & SAADC_CH_LIMIT_HIGH_Msk));
 }
 
-NRF_STATIC_INLINE void nrf_saadc_int_enable(NRF_SAADC_Type * p_reg, uint32_t saadc_int_mask)
+NRF_STATIC_INLINE void nrf_saadc_int_enable(NRF_SAADC_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENSET = saadc_int_mask;
+    p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_saadc_int_enable_check(NRF_SAADC_Type const * p_reg,
-                                                  uint32_t               saadc_int_mask)
+NRF_STATIC_INLINE uint32_t nrf_saadc_int_enable_check(NRF_SAADC_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & saadc_int_mask);
+    return p_reg->INTENSET & mask;
 }
 
-NRF_STATIC_INLINE void nrf_saadc_int_disable(NRF_SAADC_Type * p_reg, uint32_t saadc_int_mask)
+NRF_STATIC_INLINE void nrf_saadc_int_disable(NRF_SAADC_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENCLR = saadc_int_mask;
+    p_reg->INTENCLR = mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_saadc_limit_int_get(uint8_t           channel,
