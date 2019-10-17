@@ -94,16 +94,14 @@ NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
                                            uint32_t       mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] spu_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
-                                                uint32_t             spu_int);
+NRF_STATIC_INLINE uint32_t nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for setting up publication configuration of a given SPU event.
@@ -287,10 +285,9 @@ NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg,
-                                                uint32_t             spu_int)
+NRF_STATIC_INLINE uint32_t nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & spu_int);
+    return p_reg->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
