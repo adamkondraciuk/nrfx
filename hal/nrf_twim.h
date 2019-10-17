@@ -180,16 +180,14 @@ NRF_STATIC_INLINE void nrf_twim_int_disable(NRF_TWIM_Type * p_reg,
                                             uint32_t        mask);
 
 /**
- * @brief Function for checking the state of a given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] twim_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg,
-                                                 nrf_twim_int_mask_t   twim_int);
+NRF_STATIC_INLINE uint32_t nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg, uint32_t mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -429,10 +427,9 @@ NRF_STATIC_INLINE void nrf_twim_int_disable(NRF_TWIM_Type * p_reg,
     p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg,
-                                                 nrf_twim_int_mask_t   twim_int)
+NRF_STATIC_INLINE uint32_t nrf_twim_int_enable_check(NRF_TWIM_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & twim_int);
+    return p_reg->INTENSET & mask;
 }
 
 #if defined(DPPI_PRESENT)
