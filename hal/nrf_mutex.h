@@ -23,7 +23,7 @@ extern "C" {
  *
  * @note Faults are not managed by the MUTEX peripheral.
  *       One consequence is that if a mutex is locked and a fault happens,
- *       it is the responsability of the fault handler to release the mutex.
+ *       it is the responsibility of the fault handler to release the mutex.
  *       If a fault handler is not managing the mutex release, the mutex will remain locked.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -48,13 +48,11 @@ __STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
 
 __STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
 {
-    NRFX_ASSERT(mutex < NRFX_ARRAY_SIZE(NRF_MUTEX->MUTEX));
     return (p_reg->MUTEX[mutex] == MUTEX_MUTEX_MUTEX_Unlocked);
 }
 
 __STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
 {
-    NRFX_ASSERT(mutex < NRFX_ARRAY_SIZE(NRF_MUTEX->MUTEX));
     p_reg->MUTEX[mutex] = MUTEX_MUTEX_MUTEX_Unlocked;
 }
 

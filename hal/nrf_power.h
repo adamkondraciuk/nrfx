@@ -1084,7 +1084,6 @@ NRF_STATIC_INLINE void nrf_power_rampower_mask_on(NRF_POWER_Type * p_reg,
                                                   uint8_t          block,
                                                   uint32_t         section_mask)
 {
-    NRFX_ASSERT(block < NRFX_ARRAY_SIZE(p_reg->RAM));
     p_reg->RAM[block].POWERSET = section_mask;
 }
 
@@ -1092,13 +1091,11 @@ NRF_STATIC_INLINE void nrf_power_rampower_mask_off(NRF_POWER_Type * p_reg,
                                                    uint8_t          block,
                                                    uint32_t         section_mask)
 {
-    NRFX_ASSERT(block < NRFX_ARRAY_SIZE(p_reg->RAM));
     p_reg->RAM[block].POWERCLR = section_mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_power_rampower_mask_get(NRF_POWER_Type const * p_reg, uint8_t block)
 {
-    NRFX_ASSERT(block < NRFX_ARRAY_SIZE(p_reg->RAM));
     return p_reg->RAM[block].POWER;
 }
 #endif /* defined(POWER_RAM_POWER_S0POWER_Msk) */

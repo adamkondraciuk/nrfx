@@ -311,7 +311,6 @@ NRF_STATIC_INLINE void nrf_mwu_user_region_range_set(NRF_MWU_Type * p_reg,
                                                      uint32_t       start_addr,
                                                      uint32_t       end_addr)
 {
-    NRFX_ASSERT(region_idx < NRFX_ARRAY_SIZE(NRF_MWU->REGION));
     NRFX_ASSERT(end_addr >= start_addr);
 
     p_reg->REGION[region_idx].START = start_addr;
@@ -337,16 +336,12 @@ NRF_STATIC_INLINE void nrf_mwu_subregions_configure(NRF_MWU_Type * p_reg,
                                                     uint8_t        per_reg_idx,
                                                     uint32_t       subregion_mask)
 {
-    NRFX_ASSERT(per_reg_idx < NRFX_ARRAY_SIZE(NRF_MWU->PREGION));
-
     p_reg->PREGION[per_reg_idx].SUBS = subregion_mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mwu_subregions_write_accesses_get(NRF_MWU_Type const * p_reg,
                                                                  uint8_t              per_reg_idx)
 {
-    NRFX_ASSERT(per_reg_idx < NRFX_ARRAY_SIZE(NRF_MWU->PREGION));
-
     return p_reg->PERREGION[per_reg_idx].SUBSTATWA;
 }
 
@@ -354,16 +349,12 @@ NRF_STATIC_INLINE void nrf_mwu_subregions_write_accesses_clear(NRF_MWU_Type * p_
                                                                uint8_t        per_reg_idx,
                                                                uint32_t       subregion_mask)
 {
-    NRFX_ASSERT(per_reg_idx < NRFX_ARRAY_SIZE(NRF_MWU->PREGION));
-
     p_reg->PERREGION[per_reg_idx].SUBSTATWA = subregion_mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mwu_subregions_read_accesses_get(NRF_MWU_Type const * p_reg,
                                                                 uint8_t              per_reg_idx)
 {
-    NRFX_ASSERT(per_reg_idx < NRFX_ARRAY_SIZE(NRF_MWU->PREGION));
-
     return p_reg->PERREGION[per_reg_idx].SUBSTATRA;
 }
 
@@ -371,8 +362,6 @@ NRF_STATIC_INLINE void nrf_mwu_subregions_read_accesses_clear(NRF_MWU_Type * p_r
                                                               uint8_t        per_reg_idx,
                                                               uint32_t       subregion_mask)
 {
-    NRFX_ASSERT(per_reg_idx < NRFX_ARRAY_SIZE(NRF_MWU->PREGION));
-
     p_reg->PERREGION[per_reg_idx].SUBSTATRA = subregion_mask;
 }
 

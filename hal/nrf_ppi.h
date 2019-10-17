@@ -517,14 +517,14 @@ NRF_STATIC_INLINE uint32_t nrf_ppi_task_group_disable_address_get(NRF_PPI_Type c
 NRF_STATIC_INLINE nrf_ppi_task_t nrf_ppi_group_enable_task_get(NRF_PPI_Type const * p_reg,
                                                                uint8_t              index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(p_reg->TASKS_CHG));
+    NRFX_ASSERT(index < PPI_GROUP_NUM);
     return (nrf_ppi_task_t)NRFX_OFFSETOF(NRF_PPI_Type, TASKS_CHG[index].EN);
 }
 
 NRF_STATIC_INLINE nrf_ppi_task_t nrf_ppi_group_disable_task_get(NRF_PPI_Type const * p_reg,
                                                                 uint8_t              index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(p_reg->TASKS_CHG));
+    NRFX_ASSERT(index < PPI_GROUP_NUM);
     return (nrf_ppi_task_t)NRFX_OFFSETOF(NRF_PPI_Type, TASKS_CHG[index].DIS);
 }
 

@@ -215,6 +215,7 @@ NRF_STATIC_INLINE uint32_t nrf_dppi_task_address_get(NRF_DPPIC_Type const * p_re
 
 NRF_STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel)
 {
+    NRFX_ASSERT(channel < DPPI_CH_NUM);
     return ((p_reg->CHEN & (DPPIC_CHEN_CH0_Enabled << (DPPIC_CHEN_CH0_Pos + channel))) != 0);
 }
 
@@ -237,6 +238,7 @@ NRF_STATIC_INLINE void nrf_dppi_subscribe_set(NRF_DPPIC_Type * p_reg,
                                               nrf_dppi_task_t  task,
                                               uint8_t          channel)
 {
+    NRFX_ASSERT(channel < DPPI_CH_NUM);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | DPPIC_SUBSCRIBE_CHG_EN_EN_Msk);
 }
@@ -281,13 +283,13 @@ NRF_STATIC_INLINE void nrf_dppi_group_disable(NRF_DPPIC_Type *         p_reg,
 
 NRF_STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_enable_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
+    NRFX_ASSERT(index < DPPI_GROUP_NUM);
     return (nrf_dppi_task_t)NRFX_OFFSETOF(NRF_DPPIC_Type, TASKS_CHG[index].EN);
 }
 
 NRF_STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_DPPIC->TASKS_CHG));
+    NRFX_ASSERT(index < DPPI_GROUP_NUM);
     return (nrf_dppi_task_t)NRFX_OFFSETOF(NRF_DPPIC_Type, TASKS_CHG[index].DIS);
 }
 

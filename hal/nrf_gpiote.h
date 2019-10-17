@@ -557,14 +557,14 @@ NRF_STATIC_INLINE bool nrf_gpiote_te_is_enabled(NRF_GPIOTE_Type const * p_reg, u
 
 NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_out_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(((NRF_GPIOTE_Type *)0)->TASKS_OUT));
+    NRFX_ASSERT(index < GPIOTE_CH_NUM);
     return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_OUT[index]);
 }
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT)
 NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_set_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(((NRF_GPIOTE_Type *)0)->TASKS_SET));
+    NRFX_ASSERT(index < GPIOTE_CH_NUM);
     return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_SET[index]);
 }
 #endif
@@ -572,14 +572,14 @@ NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_set_task_get(uint8_t index)
 #if defined(GPIOTE_FEATURE_CLR_PRESENT)
 NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_clr_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(((NRF_GPIOTE_Type *)0)->TASKS_CLR));
+    NRFX_ASSERT(index < GPIOTE_CH_NUM);
     return (nrf_gpiote_task_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, TASKS_CLR[index]);
 }
 #endif
 
 NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(((NRF_GPIOTE_Type *)0)->EVENTS_IN));
+    NRFX_ASSERT(index < GPIOTE_CH_NUM);
     return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_IN[index]);
 }
 

@@ -458,24 +458,26 @@ NRF_STATIC_INLINE void nrf_ipc_gpmem_set(NRF_IPC_Type * p_reg,
                                          uint8_t        index,
                                          uint32_t       data)
 {
+    NRFX_ASSERT(index < IPC_GPMEM_NUM);
     p_reg->GPMEM[index] = data;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg,
                                              uint8_t              index)
 {
+    NRFX_ASSERT(index < IPC_GPMEM_NUM);
     return p_reg->GPMEM[index];
 }
 
 NRF_STATIC_INLINE nrf_ipc_task_t nrf_ipc_send_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_IPC->TASKS_SEND));
+    NRFX_ASSERT(index < IPC_CH_NUM);
     return (nrf_ipc_task_t)(offsetof(NRF_IPC_Type, TASKS_SEND[index]));
 }
 
 NRF_STATIC_INLINE nrf_ipc_event_t nrf_ipc_receive_event_get(uint8_t index)
 {
-    NRFX_ASSERT(index < NRFX_ARRAY_SIZE(NRF_IPC->EVENTS_RECEIVE));
+    NRFX_ASSERT(index < IPC_CH_NUM);
     return (nrf_ipc_event_t)(offsetof(NRF_IPC_Type, EVENTS_RECEIVE[index]));
 }
 

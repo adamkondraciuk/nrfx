@@ -332,9 +332,6 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
                                               uint8_t                    way,
                                               uint8_t                    word)
 {
-    NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET));
-    NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEDATA->SET[0].WAY));
-
     volatile CACHEDATA_SET_WAY_Type const * reg = &p_reg->SET[set].WAY[way];
     switch (word)
     {
@@ -352,8 +349,6 @@ NRF_STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
                                              uint32_t                   set,
                                              uint8_t                    way)
 {
-    NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
-    NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET[0].WAY));
     return (p_reg->SET[set].WAY[way] & CACHEINFO_SET_WAY_TAG_Msk);
 }
 
@@ -361,14 +356,11 @@ NRF_STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type const * 
                                                      uint32_t                   set,
                                                      uint8_t                    way)
 {
-    NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
-    NRFX_ASSERT(way < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET[0].WAY));
     return (bool)(p_reg->SET[set].WAY[way] & CACHEINFO_SET_WAY_V_Msk);
 }
 
 NRF_STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, uint32_t set)
 {
-    NRFX_ASSERT(set < NRFX_ARRAY_SIZE(NRF_CACHEINFO->SET));
     return ((p_reg->SET[set].WAY[0] & CACHEINFO_SET_WAY_MRU_Msk) >> CACHEINFO_SET_WAY_MRU_Pos);
 }
 
