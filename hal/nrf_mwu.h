@@ -102,58 +102,54 @@ NRF_STATIC_INLINE uint32_t nrf_mwu_event_address_get(NRF_MWU_Type const * p_reg,
 /**
  * @brief Function for enabling specified interrupts.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
-NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a specific interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] mwu_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_mwu_int_enable_check(NRF_MWU_Type const * p_reg,
-                                                nrf_mwu_int_mask_t   mwu_int);
+NRF_STATIC_INLINE uint32_t nrf_mwu_int_enable_check(NRF_MWU_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling specified interrupts.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
-NRF_STATIC_INLINE void nrf_mwu_int_disable(NRF_MWU_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_mwu_int_disable(NRF_MWU_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for enabling specified non-maskable interrupts.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
-NRF_STATIC_INLINE void nrf_mwu_nmi_enable(NRF_MWU_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_mwu_nmi_enable(NRF_MWU_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a specific non-maskable interrupt.
+ * @brief Function for checking if the specified non-maskable interrupts are enabled.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] mwu_int Interrupt to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_mwu_nmi_enable_check(NRF_MWU_Type const * p_reg,
-                                                nrf_mwu_int_mask_t   mwu_int);
+NRF_STATIC_INLINE uint32_t nrf_mwu_nmi_enable_check(NRF_MWU_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling specified non-maskable interrupts.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
-NRF_STATIC_INLINE void nrf_mwu_nmi_disable(NRF_MWU_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_mwu_nmi_disable(NRF_MWU_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for setting address range of the specified user region.
@@ -274,36 +270,34 @@ NRF_STATIC_INLINE uint32_t nrf_mwu_event_address_get(NRF_MWU_Type const * p_reg,
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_mwu_int_enable(NRF_MWU_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENSET = int_mask;
+    p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_mwu_int_enable_check(NRF_MWU_Type const * p_reg,
-                                                nrf_mwu_int_mask_t   mwu_int)
+NRF_STATIC_INLINE uint32_t nrf_mwu_int_enable_check(NRF_MWU_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & mwu_int);
+    return p_reg->INTENSET & mask;
 }
 
-NRF_STATIC_INLINE void nrf_mwu_int_disable(NRF_MWU_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_mwu_int_disable(NRF_MWU_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENCLR = int_mask;
+    p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE void nrf_mwu_nmi_enable(NRF_MWU_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_mwu_nmi_enable(NRF_MWU_Type * p_reg, uint32_t mask)
 {
-    p_reg->NMIENSET = int_mask;
+    p_reg->NMIENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_mwu_nmi_enable_check(NRF_MWU_Type const * p_reg,
-                                                nrf_mwu_int_mask_t   mwu_int)
+NRF_STATIC_INLINE uint32_t nrf_mwu_nmi_enable_check(NRF_MWU_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->NMIENSET & mwu_int);
+    return p_reg->NMIENSET & mask;
 }
 
-NRF_STATIC_INLINE void nrf_mwu_nmi_disable(NRF_MWU_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_mwu_nmi_disable(NRF_MWU_Type * p_reg, uint32_t mask)
 {
-    p_reg->NMIENCLR = int_mask;
+    p_reg->NMIENCLR = mask;
 }
 
 NRF_STATIC_INLINE void nrf_mwu_user_region_range_set(NRF_MWU_Type * p_reg,
