@@ -102,29 +102,28 @@ NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_e
 /**
  * @brief Function for enabling the specified interrupt.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupt.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
-NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupt.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  Interrupt is enabled.
- * @retval false Interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE uint32_t nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling a specific interrupt.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] int_mask Interrupt.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
-NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t int_mask);
+NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t mask);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -175,6 +174,8 @@ NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task.
+ *
+ * @return Address of requested task register
  */
 NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
                                                     nrf_wdt_task_t       task);
@@ -222,6 +223,8 @@ NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t r
 
 /**
  * @brief Function for retrieving the watchdog reload value.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Reload value.
  */
@@ -292,19 +295,19 @@ NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_e
     return (bool)*((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event));
 }
 
-NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_wdt_int_enable(NRF_WDT_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENSET = int_mask;
+    p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE uint32_t nrf_wdt_int_enable_check(NRF_WDT_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & int_mask);
+    return p_reg->INTENSET & mask;
 }
 
-NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t int_mask)
+NRF_STATIC_INLINE void nrf_wdt_int_disable(NRF_WDT_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENCLR = int_mask;
+    p_reg->INTENCLR = mask;
 }
 
 #if defined(DPPI_PRESENT)
