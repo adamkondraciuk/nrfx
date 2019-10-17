@@ -84,7 +84,7 @@ typedef enum
 /**
  * @brief Function for getting the maximum channel number of the given EGU.
  *
- * @param NRF_EGUx EGU instance.
+ * @param[in] NRF_EGUx EGU instance.
  *
  * @return Number of available channels.
  */
@@ -93,16 +93,16 @@ NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * NRF_EGUx);
 /**
  * @brief Function for triggering the specified EGU task.
  *
- * @param NRF_EGUx EGU instance.
- * @param egu_task EGU task.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] egu_task EGU task.
  */
 NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_t egu_task);
 
 /**
  * @brief Function for returning the address of the specified EGU task register.
  *
- * @param NRF_EGUx EGU instance.
- * @param egu_task EGU task.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] egu_task EGU task.
  *
  * @return Address of the specified EGU task register.
  */
@@ -112,8 +112,8 @@ NRF_STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type const * NRF_EGU
 /**
  * @brief Function for returning the address of the specified EGU TRIGGER task register.
  *
- * @param NRF_EGUx EGU instance.
- * @param channel  Channel number.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] channel  Channel number.
  *
  * @return Address of the specified EGU TRIGGER task register.
  */
@@ -123,8 +123,8 @@ NRF_STATIC_INLINE uint32_t nrf_egu_task_trigger_address_get(NRF_EGU_Type const *
 /**
  * @brief Function for returning the specified EGU TRIGGER task.
  *
- * @param NRF_EGUx EGU instance.
- * @param channel  Channel number.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] channel  Channel number.
  *
  * @return The specified EGU TRIGGER task.
  */
@@ -134,8 +134,8 @@ NRF_STATIC_INLINE nrf_egu_task_t nrf_egu_task_trigger_get(NRF_EGU_Type const * N
 /**
  * @brief Function for retrieving the state of the UARTE event.
  *
- * @param NRF_EGUx  EGU instance.
- * @param egu_event EGU event to be checked.
+ * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] egu_event EGU event to be checked.
  *
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
@@ -146,8 +146,8 @@ NRF_STATIC_INLINE bool nrf_egu_event_check(NRF_EGU_Type const * NRF_EGUx,
 /**
  * @brief Function for clearing the specified EGU event.
  *
- * @param NRF_EGUx  EGU instance.
- * @param egu_event EGU event to clear.
+ * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] egu_event EGU event to clear.
  */
 NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type *  NRF_EGUx,
                                            nrf_egu_event_t egu_event);
@@ -155,8 +155,8 @@ NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type *  NRF_EGUx,
 /**
  * @brief Function for returning the address of the specified EGU event register.
  *
- * @param NRF_EGUx  EGU instance.
- * @param egu_event EGU event.
+ * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] egu_event EGU event.
  *
  * @return Address of the specified EGU event register.
  */
@@ -166,8 +166,8 @@ NRF_STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type const * NRF_EG
 /**
  * @brief Function for returning address of the specified EGU TRIGGERED event register.
  *
- * @param NRF_EGUx EGU instance.
- * @param channel  Channel number.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] channel  Channel number.
  *
  * @return Address of the specified EGU TRIGGERED event register.
  */
@@ -177,8 +177,8 @@ NRF_STATIC_INLINE uint32_t nrf_egu_event_triggered_address_get(NRF_EGU_Type cons
 /**
  * @brief Function for returning the specified EGU TRIGGERED event.
  *
- * @param NRF_EGUx EGU instance.
- * @param channel  Channel number.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] channel  Channel number.
  *
  * @return The specified EGU TRIGGERED event.
  */
@@ -188,40 +188,39 @@ NRF_STATIC_INLINE nrf_egu_event_t nrf_egu_event_triggered_get(NRF_EGU_Type const
 /**
  * @brief Function for enabling one or more of the EGU interrupts.
  *
- * @param NRF_EGUx EGU instance.
- * @param mask     Mask of interrupts to be enabled.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] mask     Mask of interrupts to be enabled.
  */
 NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * NRF_EGUx, uint32_t mask);
 
 /**
  * @brief Function for retrieving the state of one or more of the EGU interrupts.
  *
- * @param NRF_EGUx EGU instance.
- * @param mask     Mask of interrupts to be checked.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] mask     Mask of interrupts to be checked.
  *
- * @retval true  All of the specified interrupts are enabled.
- * @retval false At least one of the specified interrupts is disabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask);
+NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask);
 
 /**
  * @brief Function for disabling one or more of the EGU interrupts.
  *
- * @param NRF_EGUx EGU instance.
- * @param mask     Mask of interrupts to be disabled.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] mask     Mask of interrupts to be disabled.
  */
 NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t mask);
 
 /**
- * @brief Function for retrieving one or more of the EGU interrupts.
+ * @brief Function for retrieving the state of interrupt of the specified EGU channel.
  *
- * @param NRF_EGUx EGU instance.
- * @param channel  Channel number.
+ * @param[in] NRF_EGUx EGU instance.
+ * @param[in] channel  Channel number.
  *
  * @return EGU interrupt mask.
  */
-NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_int_get(NRF_EGU_Type const * NRF_EGUx,
-                                                     uint8_t              channel);
+NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(NRF_EGU_Type const * NRF_EGUx,
+                                                             uint8_t              channel);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -374,10 +373,10 @@ NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * NRF_EGUx, uint32_t mask
     NRF_EGUx->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask)
+NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask)
 {
     NRFX_ASSERT(NRF_EGUx);
-    return (bool)(NRF_EGUx->INTENSET & mask);
+    return NRF_EGUx->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t mask)
@@ -386,8 +385,8 @@ NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t mas
     NRF_EGUx->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_int_get(NRF_EGU_Type const * NRF_EGUx,
-                                                     uint8_t              channel)
+NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(NRF_EGU_Type const * NRF_EGUx,
+                                                             uint8_t              channel)
 {
     NRFX_ASSERT(NRF_EGUx);
     NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
