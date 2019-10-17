@@ -161,34 +161,33 @@ NRF_STATIC_INLINE uint32_t nrf_uart_event_address_get(NRF_UART_Type const * p_re
 /**
  * @brief Function for enabling the specified interrupt.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param mask  Mask of interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
 NRF_STATIC_INLINE void nrf_uart_int_enable(NRF_UART_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of a given interrupt.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param mask  Mask of interrupts to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @retval true  The interrupt is enabled.
- * @retval false The interrupt is not enabled.
+ * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE bool nrf_uart_int_enable_check(NRF_UART_Type const * p_reg, uint32_t mask);
+NRF_STATIC_INLINE uint32_t nrf_uart_int_enable_check(NRF_UART_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling the specified interrupts.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param mask  Mask of interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
 NRF_STATIC_INLINE void nrf_uart_int_disable(NRF_UART_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for getting error source mask. Function is clearing error source flags after reading.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Mask with error source flags.
  */
@@ -197,23 +196,23 @@ NRF_STATIC_INLINE uint32_t nrf_uart_errorsrc_get_and_clear(NRF_UART_Type * p_reg
 /**
  * @brief Function for enabling UART.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_uart_enable(NRF_UART_Type * p_reg);
 
 /**
  * @brief Function for disabling UART.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_uart_disable(NRF_UART_Type * p_reg);
 
 /**
  * @brief Function for configuring TX/RX pins.
  *
- * @param p_reg   Pointer to the structure of registers of the peripheral.
- * @param pseltxd TXD pin number.
- * @param pselrxd RXD pin number.
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] pseltxd TXD pin number.
+ * @param[in] pselrxd RXD pin number.
  */
 NRF_STATIC_INLINE void nrf_uart_txrx_pins_set(NRF_UART_Type * p_reg,
                                               uint32_t        pseltxd,
@@ -222,14 +221,14 @@ NRF_STATIC_INLINE void nrf_uart_txrx_pins_set(NRF_UART_Type * p_reg,
 /**
  * @brief Function for disconnecting TX/RX pins.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_uart_txrx_pins_disconnect(NRF_UART_Type * p_reg);
 
 /**
  * @brief Function for getting TX pin.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return TX pin number.
  */
@@ -238,7 +237,7 @@ NRF_STATIC_INLINE uint32_t nrf_uart_tx_pin_get(NRF_UART_Type const * p_reg);
 /**
  * @brief Function for getting RX pin.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return RX pin number.
  */
@@ -247,7 +246,7 @@ NRF_STATIC_INLINE uint32_t nrf_uart_rx_pin_get(NRF_UART_Type const * p_reg);
 /**
  * @brief Function for getting RTS pin.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return RTS pin number.
  */
@@ -256,7 +255,7 @@ NRF_STATIC_INLINE uint32_t nrf_uart_rts_pin_get(NRF_UART_Type const * p_reg);
 /**
  * @brief Function for getting CTS pin.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return CTS pin number.
  */
@@ -265,9 +264,9 @@ NRF_STATIC_INLINE uint32_t nrf_uart_cts_pin_get(NRF_UART_Type const * p_reg);
 /**
  * @brief Function for configuring flow control pins.
  *
- * @param p_reg   Pointer to the structure of registers of the peripheral.
- * @param pselrts RTS pin number.
- * @param pselcts CTS pin number.
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] pselrts RTS pin number.
+ * @param[in] pselcts CTS pin number.
  */
 NRF_STATIC_INLINE void nrf_uart_hwfc_pins_set(NRF_UART_Type * p_reg,
                                               uint32_t        pselrts,
@@ -276,14 +275,14 @@ NRF_STATIC_INLINE void nrf_uart_hwfc_pins_set(NRF_UART_Type * p_reg,
 /**
  * @brief Function for disconnecting flow control pins.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_uart_hwfc_pins_disconnect(NRF_UART_Type * p_reg);
 
 /**
  * @brief Function for reading RX data.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Received byte.
  */
@@ -292,24 +291,24 @@ NRF_STATIC_INLINE uint8_t nrf_uart_rxd_get(NRF_UART_Type const * p_reg);
 /**
  * @brief Function for setting Tx data.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param txd   Byte.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] txd   Byte.
  */
 NRF_STATIC_INLINE void nrf_uart_txd_set(NRF_UART_Type * p_reg, uint8_t txd);
 
 /**
  * @brief Function for starting an UART task.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param task  Task.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
  */
 NRF_STATIC_INLINE void nrf_uart_task_trigger(NRF_UART_Type * p_reg, nrf_uart_task_t task);
 
 /**
  * @brief Function for returning the address of the specified task register.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param task  Task.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
  *
  * @return Task address.
  */
@@ -319,8 +318,8 @@ NRF_STATIC_INLINE uint32_t nrf_uart_task_address_get(NRF_UART_Type const * p_reg
 /**
  * @brief Function for configuring UART.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param p_cfg Pointer to UART settings structure.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_cfg Pointer to UART settings structure.
  */
 NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type           * p_reg,
                                           nrf_uart_config_t const * p_cfg);
@@ -328,8 +327,8 @@ NRF_STATIC_INLINE void nrf_uart_configure(NRF_UART_Type           * p_reg,
 /**
  * @brief Function for setting UART baud rate.
  *
- * @param p_reg    Pointer to the structure of registers of the peripheral.
- * @param baudrate Baud rate.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[in] baudrate Baud rate.
  */
 NRF_STATIC_INLINE void nrf_uart_baudrate_set(NRF_UART_Type * p_reg, nrf_uart_baudrate_t baudrate);
 
@@ -361,9 +360,9 @@ NRF_STATIC_INLINE void nrf_uart_int_enable(NRF_UART_Type * p_reg, uint32_t mask)
     p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE bool nrf_uart_int_enable_check(NRF_UART_Type const * p_reg, uint32_t mask)
+NRF_STATIC_INLINE uint32_t nrf_uart_int_enable_check(NRF_UART_Type const * p_reg, uint32_t mask)
 {
-    return (bool)(p_reg->INTENSET & mask);
+    return p_reg->INTENSET & mask;
 }
 
 NRF_STATIC_INLINE void nrf_uart_int_disable(NRF_UART_Type * p_reg, uint32_t mask)
