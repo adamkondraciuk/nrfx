@@ -103,12 +103,12 @@ NRF_STATIC_INLINE void nrf_rtc_int_enable(NRF_RTC_Type * p_reg, uint32_t mask);
 NRF_STATIC_INLINE void nrf_rtc_int_disable(NRF_RTC_Type * p_reg, uint32_t mask);
 
 /**
- * @brief Function for checking if given interrupts are enabled.
+ * @brief Function for checking if the specified interrupts are enabled.
  *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param mask  Mask of interrupts to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
- * @return Mask with enabled interrupts.
+ * @return Mask of enabled interrupts.
  */
 NRF_STATIC_INLINE uint32_t nrf_rtc_int_enable_check(NRF_RTC_Type const * p_reg, uint32_t mask);
 
@@ -282,7 +282,7 @@ NRF_STATIC_INLINE void nrf_rtc_int_disable(NRF_RTC_Type * p_reg, uint32_t mask)
 
 NRF_STATIC_INLINE uint32_t nrf_rtc_int_enable_check(NRF_RTC_Type const * p_reg, uint32_t mask)
 {
-    return (p_reg->INTENSET & mask);
+    return p_reg->INTENSET & mask;
 }
 
 #if defined(DPPI_PRESENT)
