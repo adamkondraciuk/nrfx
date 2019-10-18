@@ -38,11 +38,10 @@ typedef struct
     #define NRFX_NFCT_FIELD_TIMER_PERIOD 100  /**< Field polling period in us. */
     #define NRFX_NFCT_TIMER_PERIOD       NRFX_NFCT_FIELD_TIMER_PERIOD
 #endif // defined(NRF52833_XXAA) || defined(NRF52840_XXAA)
-#define NRFX_NFCT_TIMER_INSTANCE         4    /**< Timer instance used for various workarounds for the NFCT HW issues.*/
 
 static nrfx_nfct_timer_workaround_t m_timer_workaround =
 {
-    .timer = NRFX_TIMER_INSTANCE(NRFX_NFCT_TIMER_INSTANCE),
+    .timer = NRFX_TIMER_INSTANCE(NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID),
 };
 #endif // NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_190)
 

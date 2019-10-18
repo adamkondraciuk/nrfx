@@ -416,6 +416,18 @@
 #define NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
+// <o> NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID - Timer instance used for workarounds in the driver.
+
+// <0=> 0
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+
+#ifndef NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID
+#define NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID 4
+#endif
+
 // <e> NRFX_NFCT_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
 #ifndef NRFX_NFCT_CONFIG_LOG_ENABLED
