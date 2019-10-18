@@ -225,7 +225,7 @@ static uint32_t start_playback(nrfx_pwm_t const * p_instance,
         // it is not safe to do it directly via PPI.
         p_cb->starting_task_address = starting_task_address;
         nrf_egu_int_enable(DMA_ISSUE_EGU,
-            nrf_egu_int_get(DMA_ISSUE_EGU, p_instance->drv_inst_idx));
+                           nrf_egu_channel_int_get(DMA_ISSUE_EGU, p_instance->drv_inst_idx));
         return nrf_egu_task_trigger_address_get(DMA_ISSUE_EGU, p_instance->drv_inst_idx);
 #else
         return starting_task_address;
