@@ -745,22 +745,22 @@ NRF_STATIC_INLINE void nrf_spim_orc_set(NRF_SPIM_Type * p_reg,
 
 NRF_STATIC_INLINE void nrf_spim_tx_list_enable(NRF_SPIM_Type * p_reg)
 {
-    p_reg->TXD.LIST = 1;
+    p_reg->TXD.LIST = SPIM_TXD_LIST_LIST_ArrayList << SPIM_TXD_LIST_LIST_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_spim_tx_list_disable(NRF_SPIM_Type * p_reg)
 {
-    p_reg->TXD.LIST = 0;
+    p_reg->TXD.LIST = SPIM_TXD_LIST_LIST_Disabled << SPIM_TXD_LIST_LIST_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_spim_rx_list_enable(NRF_SPIM_Type * p_reg)
 {
-    p_reg->RXD.LIST = 1;
+    p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_ArrayList << SPIM_RXD_LIST_LIST_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
 {
-    p_reg->RXD.LIST = 0;
+    p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_Disabled << SPIM_RXD_LIST_LIST_Pos;
 }
 
 #endif // NRF_DECLARE_ONLY
