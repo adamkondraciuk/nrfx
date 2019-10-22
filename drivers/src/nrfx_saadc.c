@@ -22,10 +22,9 @@
     #define USE_WORKAROUND_FOR_ANOMALY_212 1
 #endif
 
-#if (defined(NRF91_SERIES) && !defined(USE_WORKAROUND_FOR_ANOMALY_28)) || defined(NRF53_SERIES)
-    // ANOMALY 28 - Missing events when switching from scan mode
-    // to no-scan mode with burst enabled or TACQ<10us
-    #define USE_WORKAROUND_FOR_ANOMALY_28 1
+#if defined(NRF91_SERIES) || defined(NRF53_SERIES)
+    // Make sure that SAADC is stopped before channel configuration.
+    #define STOP_SAADC_ON_CHANNEL_CONFIG 1
 #endif
 
 /** @brief SAADC driver states.*/
@@ -153,7 +152,9 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
     saadc_anomaly_212_workaround_apply();
 #endif
 
-#if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_28)
+#if NRFX_CHECK(STOP_SAADC_ON_CHANNEL_CONFIG)
+    nrf_saadc_int_disable(NRF_SAADC, NRF_SAADC_INT_STOPPED);
+    nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STOPPED);
     nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_STOP);
     while (!nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STOPPED))
     {
