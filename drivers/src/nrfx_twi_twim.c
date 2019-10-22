@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
 
 #include <nrfx.h>
-#include <nrf_gpio.h>
+#include <hal/nrf_gpio.h>
 
 #define TWI_TWIM_PIN_CONFIGURE(_pin) nrf_gpio_cfg((_pin),                     \
                                                   NRF_GPIO_PIN_DIR_OUTPUT,    \
