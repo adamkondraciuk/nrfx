@@ -215,7 +215,7 @@ uint32_t nrfx_nvmc_flash_page_count_get(void);
  */
 NRFX_STATIC_INLINE bool nrfx_nvmc_write_done_check(void);
 
-#if defined(NRF_NVMC_ICACHE_PRESENT)
+#if defined(NVMC_FEATURE_CACHE_PRESENT)
 /**
  * @brief Function for enabling the Instruction Cache (ICache).
  *
@@ -227,7 +227,7 @@ NRFX_STATIC_INLINE void nrfx_nvmc_icache_enable(void);
 /** @brief Function for disabling ICache. */
 NRFX_STATIC_INLINE void nrfx_nvmc_icache_disable(void);
 
-#endif // defined(NRF_NVMC_ICACHE_PRESENT)
+#endif // defined(NVMC_FEATURE_CACHE_PRESENT)
 
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE bool nrfx_nvmc_write_done_check(void)
@@ -235,7 +235,7 @@ NRFX_STATIC_INLINE bool nrfx_nvmc_write_done_check(void)
     return nrf_nvmc_ready_check(NRF_NVMC);
 }
 
-#if defined(NRF_NVMC_ICACHE_PRESENT)
+#if defined(NVMC_FEATURE_CACHE_PRESENT)
 NRFX_STATIC_INLINE void nrfx_nvmc_icache_enable(void)
 {
     nrf_nvmc_icache_config_set(NRF_NVMC, NRF_NVMC_ICACHE_ENABLE_WITH_PROFILING);
@@ -245,7 +245,7 @@ NRFX_STATIC_INLINE void nrfx_nvmc_icache_disable(void)
 {
     nrf_nvmc_icache_config_set(NRF_NVMC, NRF_NVMC_ICACHE_DISABLE);
 }
-#endif // defined(NRF_NVMC_ICACHE_PRESENT)
+#endif // defined(NVMC_FEATURE_CACHE_PRESENT)
 #endif // NRFX_DECLARE_ONLY
 
 /** @} */

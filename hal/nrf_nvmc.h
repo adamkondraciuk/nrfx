@@ -16,11 +16,6 @@ extern "C" {
  * @brief   Hardware access layer (HAL) for managing the Non-Volatile Memory Controller (NVMC) peripheral.
  */
 
-#if defined(NVMC_ICACHECNF_CACHEEN_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether Instruction Cache (ICache) is present. */
-#define NRF_NVMC_ICACHE_PRESENT
-#endif
-
 #if defined(NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the option of page partial erase is present. */
 #define NRF_NVMC_PARTIAL_ERASE_PRESENT
@@ -47,7 +42,7 @@ typedef enum
 } nrf_nvmc_ns_mode_t;
 #endif
 
-#if defined(NRF_NVMC_ICACHE_PRESENT)
+#if defined(NVMC_FEATURE_CACHE_PRESENT)
 /** @brief NVMC ICache configuration. */
 typedef enum
 {
@@ -56,7 +51,7 @@ typedef enum
     NRF_NVMC_ICACHE_ENABLE_WITH_PROFILING = NVMC_ICACHECNF_CACHEEN_Enabled | ///< Instruction Cache with cache profiling enabled.
                                             NVMC_ICACHECNF_CACHEPROFEN_Msk
 } nrf_nvmc_icache_config_t;
-#endif // defined(NRF_NVMC_ICACHE_PRESENT)
+#endif // defined(NVMC_FEATURE_CACHE_PRESENT)
 
 /**
  * @brief Function for checking if NVMC is ready to perform write or erase operation.
@@ -168,7 +163,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
                                                          uint32_t        page_addr);
 #endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
 
-#if defined(NRF_NVMC_ICACHE_PRESENT)
+#if defined(NVMC_FEATURE_CACHE_PRESENT)
 /**
  * @brief Function for applying the Instruction Cache (ICache) configuration.
  *
@@ -226,7 +221,7 @@ NRF_STATIC_INLINE uint32_t nrf_nvmc_icache_miss_get(NRF_NVMC_Type const * p_reg)
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
  NRF_STATIC_INLINE void nrf_nvmc_icache_hit_miss_reset(NRF_NVMC_Type * p_reg);
-#endif // defined(NRF_NVMC_ICACHE_PRESENT)
+#endif // defined(NVMC_FEATURE_CACHE_PRESENT)
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -321,7 +316,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
 }
 #endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
 
-#if defined(NRF_NVMC_ICACHE_PRESENT)
+#if defined(NVMC_FEATURE_CACHE_PRESENT)
 NRF_STATIC_INLINE void nrf_nvmc_icache_config_set(NRF_NVMC_Type *          p_reg,
                                                   nrf_nvmc_icache_config_t config)
 {
@@ -353,7 +348,7 @@ NRF_STATIC_INLINE void nrf_nvmc_icache_hit_miss_reset(NRF_NVMC_Type * p_reg)
     p_reg->IHIT = 0;
     p_reg->IMISS = 0;
 }
-#endif // defined(NRF_NVMC_ICACHE_PRESENT)
+#endif // defined(NVMC_FEATURE_CACHE_PRESENT)
 
 #endif // NRF_DECLARE_ONLY
 
