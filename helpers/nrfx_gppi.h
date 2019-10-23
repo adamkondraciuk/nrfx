@@ -381,38 +381,42 @@ __STATIC_INLINE void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t for
 __STATIC_INLINE void nrfx_gppi_channels_include_in_group(uint32_t                  channel_mask,
                                                          nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_ppi_channels_include_in_group(NRF_PPI, channel_mask, channel_group);
+    nrf_ppi_channels_include_in_group(NRF_PPI,
+                                      channel_mask,
+                                      (nrf_ppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_remove_from_group(uint32_t                  channel_mask,
                                                           nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_ppi_channels_remove_from_group(NRF_PPI, channel_mask, channel_group);
+    nrf_ppi_channels_remove_from_group(NRF_PPI,
+                                       channel_mask,
+                                       (nrf_ppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_clear(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_ppi_group_clear(NRF_PPI, channel_group);
+    nrf_ppi_group_clear(NRF_PPI, (nrf_ppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_enable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_ppi_group_enable(NRF_PPI, channel_group);
+    nrf_ppi_group_enable(NRF_PPI, (nrf_ppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_disable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_ppi_group_disable(NRF_PPI, channel_group);
+    nrf_ppi_group_disable(NRF_PPI, (nrf_ppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_task_trigger(nrfx_gppi_task_t task)
 {
-    nrf_ppi_task_trigger(NRF_PPI, task);
+    nrf_ppi_task_trigger(NRF_PPI, (nrf_ppi_task_t)task);
 }
 
 __STATIC_INLINE uint32_t nrfx_gppi_task_address_get(nrfx_gppi_task_t task)
 {
-    return (uint32_t)nrf_ppi_task_address_get(NRF_PPI, task);
+    return (uint32_t)nrf_ppi_task_address_get(NRF_PPI, (nrf_ppi_task_t)task);
 }
 
 __STATIC_INLINE nrfx_gppi_task_t nrfx_gppi_group_disable_task_get(nrfx_gppi_channel_group_t group)
@@ -449,7 +453,7 @@ __STATIC_INLINE void nrfx_gppi_channels_disable(uint32_t mask)
 
 __STATIC_INLINE void nrfx_gppi_task_trigger(nrfx_gppi_task_t task)
 {
-    nrf_dppi_task_trigger(NRF_DPPIC, task);
+    nrf_dppi_task_trigger(NRF_DPPIC, (nrf_dppi_task_t)task);
 }
 
 __STATIC_INLINE void nrfx_gppi_event_endpoint_setup(uint8_t channel, uint32_t eep)
@@ -499,28 +503,32 @@ __STATIC_INLINE void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t for
 __STATIC_INLINE void nrfx_gppi_channels_include_in_group(uint32_t                  channel_mask,
                                                          nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_channels_include_in_group(NRF_DPPIC, channel_mask, channel_group);
+    nrf_dppi_channels_include_in_group(NRF_DPPIC,
+                                       channel_mask,
+                                       (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_remove_from_group(uint32_t                  channel_mask,
                                                           nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_channels_remove_from_group(NRF_DPPIC, channel_mask, channel_group);
+    nrf_dppi_channels_remove_from_group(NRF_DPPIC,
+                                        channel_mask,
+                                        (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_clear(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_clear(NRF_DPPIC, channel_group);
+    nrf_dppi_group_clear(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_enable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_enable(NRF_DPPIC, channel_group);
+    nrf_dppi_group_enable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_disable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_disable(NRF_DPPIC, channel_group);
+    nrf_dppi_group_disable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE uint32_t nrfx_gppi_task_address_get(nrfx_gppi_task_t gppi_task)
