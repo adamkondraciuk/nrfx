@@ -533,7 +533,7 @@ __STATIC_INLINE void nrfx_gppi_group_disable(nrfx_gppi_channel_group_t channel_g
 
 __STATIC_INLINE uint32_t nrfx_gppi_task_address_get(nrfx_gppi_task_t gppi_task)
 {
-    return (uint32_t) ((uint8_t *) NRF_DPPIC + (uint32_t) gppi_task);
+    return nrf_dppi_task_address_get(NRF_DPPIC, (nrf_dppi_task_t)gppi_task);
 }
 
 __STATIC_INLINE nrfx_gppi_task_t nrfx_gppi_group_disable_task_get(nrfx_gppi_channel_group_t group)
