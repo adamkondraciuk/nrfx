@@ -291,21 +291,12 @@ void nrfx_nfct_irq_handler(void);
  * To implement the second workaround, power reset is used to release the clock acquired by NFCT
  * after the field is turned off. Note that the NFCT register configuration is restored to defaults.
  *
- * If you are using the nRF52840 chip, rev. Engineering A, the workarounds for the following anomalies
- * are applied:
- * - 98. NFCT: The NFCT is not able to communicate with the peer.
- * - 116. NFCT does not release HFCLK when switching from ACTIVATED to SENSE mode.
- * - 144. NFCT: Not optimal NFC performance
- *
- * If you are using the nRF52840 chip, rev. 1, or rev. Engineering B or C, the workarounds for the following
+ * If you are using the nRF52833, nRF52840 or nRF5340 chips, the workarounds for the following
  * anomalies are applied:
  * - 190. NFCT: Event FIELDDETECTED can be generated too early.
  * To implement this workaround, an instance of NRF_TIMER is used. After the NFC field is detected,
  * the timing module measures the necessary waiting period after which NFCT can be activated.
  * This debouncing technique is used to filter possible field instabilities.
- *
- * The application of the implemented workarounds for the nRF52840 chip is determined at runtime and depends
- * on the chip variant.
  *
  * The current code contains a patch for the anomaly 25 (NFCT: Reset value of
  * SENSRES register is incorrect), so that the module now works on Windows Phone.
