@@ -419,6 +419,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_NotGenerated (0UL) /*!< Event not generated */
 #define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_Generated (1UL) /*!< Event generated */
 
+/* Register: CLOCK_EVENTS_DONE */
+/* Description: Calibration of LFCLK RC oscillator complete event */
+
+/* Bit 0 : Calibration of LFCLK RC oscillator complete event */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Pos (0UL) /*!< Position of EVENTS_DONE field. */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Msk (0x1UL << CLOCK_EVENTS_DONE_EVENTS_DONE_Pos) /*!< Bit mask of EVENTS_DONE field. */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_NotGenerated (0UL) /*!< Event not generated */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Generated (1UL) /*!< Event generated */
+
 /* Register: CLOCK_EVENTS_HFCLKAUDIOSTARTED */
 /* Description: HFCLKAUDIO source started */
 
@@ -463,6 +472,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
 #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
 
+/* Register: CLOCK_PUBLISH_DONE */
+/* Description: Publish configuration for event DONE */
+
+/* Bit 31 :   */
+#define CLOCK_PUBLISH_DONE_EN_Pos (31UL) /*!< Position of EN field. */
+#define CLOCK_PUBLISH_DONE_EN_Msk (0x1UL << CLOCK_PUBLISH_DONE_EN_Pos) /*!< Bit mask of EN field. */
+#define CLOCK_PUBLISH_DONE_EN_Disabled (0UL) /*!< Disable publishing */
+#define CLOCK_PUBLISH_DONE_EN_Enabled (1UL) /*!< Enable publishing */
+
+/* Bits 7..0 : Channel that event DONE will publish to. */
+#define CLOCK_PUBLISH_DONE_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
+#define CLOCK_PUBLISH_DONE_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_DONE_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
+
 /* Register: CLOCK_PUBLISH_HFCLKAUDIOSTARTED */
 /* Description: Publish configuration for event HFCLKAUDIOSTARTED */
 
@@ -504,6 +526,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTEN_HFCLKAUDIOSTARTED_Disabled (0UL) /*!< Disable */
 #define CLOCK_INTEN_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Enable */
 
+/* Bit 7 : Enable or disable interrupt for event DONE */
+#define CLOCK_INTEN_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTEN_DONE_Msk (0x1UL << CLOCK_INTEN_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTEN_DONE_Disabled (0UL) /*!< Disable */
+#define CLOCK_INTEN_DONE_Enabled (1UL) /*!< Enable */
+
 /* Bit 1 : Enable or disable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTEN_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTEN_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTEN_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -532,6 +560,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Disabled (0UL) /*!< Read: Disabled */
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Read: Enabled */
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Set (1UL) /*!< Enable */
+
+/* Bit 7 : Write '1' to enable interrupt for event DONE */
+#define CLOCK_INTENSET_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTENSET_DONE_Msk (0x1UL << CLOCK_INTENSET_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTENSET_DONE_Disabled (0UL) /*!< Read: Disabled */
+#define CLOCK_INTENSET_DONE_Enabled (1UL) /*!< Read: Enabled */
+#define CLOCK_INTENSET_DONE_Set (1UL) /*!< Enable */
 
 /* Bit 1 : Write '1' to enable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTENSET_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
@@ -564,6 +599,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTENCLR_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Read: Enabled */
 #define CLOCK_INTENCLR_HFCLKAUDIOSTARTED_Clear (1UL) /*!< Disable */
 
+/* Bit 7 : Write '1' to disable interrupt for event DONE */
+#define CLOCK_INTENCLR_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTENCLR_DONE_Msk (0x1UL << CLOCK_INTENCLR_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTENCLR_DONE_Disabled (0UL) /*!< Read: Disabled */
+#define CLOCK_INTENCLR_DONE_Enabled (1UL) /*!< Read: Enabled */
+#define CLOCK_INTENCLR_DONE_Clear (1UL) /*!< Disable */
+
 /* Bit 1 : Write '1' to disable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTENCLR_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTENCLR_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTENCLR_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -593,6 +635,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTPEND_HFCLKAUDIOSTARTED_NotPending (0UL) /*!< Read: Not pending */
 #define CLOCK_INTPEND_HFCLKAUDIOSTARTED_Pending (1UL) /*!< Read: Pending */
 
+/* Bit 7 : Read pending status of interrupt for event DONE */
+#define CLOCK_INTPEND_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTPEND_DONE_Msk (0x1UL << CLOCK_INTPEND_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTPEND_DONE_NotPending (0UL) /*!< Read: Not pending */
+#define CLOCK_INTPEND_DONE_Pending (1UL) /*!< Read: Pending */
+
 /* Bit 1 : Read pending status of interrupt for event LFCLKSTARTED */
 #define CLOCK_INTPEND_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTPEND_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTPEND_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -615,7 +663,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_HFCLKRUN_STATUS_Triggered (1UL) /*!< Task triggered */
 
 /* Register: CLOCK_HFCLKSTAT */
-/* Description: Which HFCLK source is running */
+/* Description: Status indicating which HFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance. */
 
 /* Bit 16 : HFCLK state */
 #define CLOCK_HFCLKSTAT_STATE_Pos (16UL) /*!< Position of STATE field. */
@@ -645,7 +693,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_LFCLKRUN_STATUS_Triggered (1UL) /*!< Task triggered */
 
 /* Register: CLOCK_LFCLKSTAT */
-/* Description: Which LFCLK source is running */
+/* Description: Status indicating which LFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance. */
 
 /* Bit 16 : LFCLK state */
 #define CLOCK_LFCLKSTAT_STATE_Pos (16UL) /*!< Position of STATE field. */
@@ -1212,13 +1260,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Description: ARM TrustZone CryptoCell register interface */
 
 /* Register: CRYPTOCELL_ENABLE */
-/* Description: Enable CRYPTOCELL subsystem */
+/* Description: Enable CRYPTOCELL subsystem. */
 
-/* Bit 0 : Enable or disable the CRYPTOCELL subsystem */
+/* Bit 0 : Enable or disable the CRYPTOCELL subsystem. */
 #define CRYPTOCELL_ENABLE_ENABLE_Pos (0UL) /*!< Position of ENABLE field. */
 #define CRYPTOCELL_ENABLE_ENABLE_Msk (0x1UL << CRYPTOCELL_ENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field. */
-#define CRYPTOCELL_ENABLE_ENABLE_Disabled (0UL) /*!< CRYPTOCELL subsystem disabled */
-#define CRYPTOCELL_ENABLE_ENABLE_Enabled (1UL) /*!< CRYPTOCELL subsystem enabled */
+#define CRYPTOCELL_ENABLE_ENABLE_Disabled (0UL) /*!< CRYPTOCELL subsystem disabled. */
+#define CRYPTOCELL_ENABLE_ENABLE_Enabled (1UL) /*!< CRYPTOCELL subsystem enabled. */
 
 
 /* Peripheral: CTI */
@@ -1814,209 +1862,60 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: DCNF */
 /* Description: Domain configuration management 0 */
 
-/* Register: DCNF_EVENTS_FPUIOC */
-/* Description: Invalid operation exception */
-
-/* Bit 0 : Invalid operation exception */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Pos (0UL) /*!< Position of EVENTS_FPUIOC field. */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Msk (0x1UL << DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Pos) /*!< Bit mask of EVENTS_FPUIOC field. */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUDZC */
-/* Description: Division by zero exception */
-
-/* Bit 0 : Division by zero exception */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Pos (0UL) /*!< Position of EVENTS_FPUDZC field. */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Msk (0x1UL << DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Pos) /*!< Bit mask of EVENTS_FPUDZC field. */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUOFC */
-/* Description: Overflow exception */
-
-/* Bit 0 : Overflow exception */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Pos (0UL) /*!< Position of EVENTS_FPUOFC field. */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Msk (0x1UL << DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Pos) /*!< Bit mask of EVENTS_FPUOFC field. */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUUFC */
-/* Description: Underflow exception */
-
-/* Bit 0 : Underflow exception */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Pos (0UL) /*!< Position of EVENTS_FPUUFC field. */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Msk (0x1UL << DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Pos) /*!< Bit mask of EVENTS_FPUUFC field. */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUIXC */
-/* Description: Inexact exception */
-
-/* Bit 0 : Inexact exception */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Pos (0UL) /*!< Position of EVENTS_FPUIXC field. */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Msk (0x1UL << DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Pos) /*!< Bit mask of EVENTS_FPUIXC field. */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUIDC */
-/* Description: Input denormal exception */
-
-/* Bit 0 : Input denormal exception */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Pos (0UL) /*!< Position of EVENTS_FPUIDC field. */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Msk (0x1UL << DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Pos) /*!< Bit mask of EVENTS_FPUIDC field. */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_INTEN */
-/* Description: Enable or disable interrupt */
-
-/* Bit 5 : Enable or disable interrupt for event FPUIDC */
-#define DCNF_INTEN_FPUIDC_Pos (5UL) /*!< Position of FPUIDC field. */
-#define DCNF_INTEN_FPUIDC_Msk (0x1UL << DCNF_INTEN_FPUIDC_Pos) /*!< Bit mask of FPUIDC field. */
-#define DCNF_INTEN_FPUIDC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUIDC_Enabled (1UL) /*!< Enable */
-
-/* Bit 4 : Enable or disable interrupt for event FPUIXC */
-#define DCNF_INTEN_FPUIXC_Pos (4UL) /*!< Position of FPUIXC field. */
-#define DCNF_INTEN_FPUIXC_Msk (0x1UL << DCNF_INTEN_FPUIXC_Pos) /*!< Bit mask of FPUIXC field. */
-#define DCNF_INTEN_FPUIXC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUIXC_Enabled (1UL) /*!< Enable */
-
-/* Bit 3 : Enable or disable interrupt for event FPUUFC */
-#define DCNF_INTEN_FPUUFC_Pos (3UL) /*!< Position of FPUUFC field. */
-#define DCNF_INTEN_FPUUFC_Msk (0x1UL << DCNF_INTEN_FPUUFC_Pos) /*!< Bit mask of FPUUFC field. */
-#define DCNF_INTEN_FPUUFC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUUFC_Enabled (1UL) /*!< Enable */
-
-/* Bit 2 : Enable or disable interrupt for event FPUOFC */
-#define DCNF_INTEN_FPUOFC_Pos (2UL) /*!< Position of FPUOFC field. */
-#define DCNF_INTEN_FPUOFC_Msk (0x1UL << DCNF_INTEN_FPUOFC_Pos) /*!< Bit mask of FPUOFC field. */
-#define DCNF_INTEN_FPUOFC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUOFC_Enabled (1UL) /*!< Enable */
-
-/* Bit 1 : Enable or disable interrupt for event FPUDZC */
-#define DCNF_INTEN_FPUDZC_Pos (1UL) /*!< Position of FPUDZC field. */
-#define DCNF_INTEN_FPUDZC_Msk (0x1UL << DCNF_INTEN_FPUDZC_Pos) /*!< Bit mask of FPUDZC field. */
-#define DCNF_INTEN_FPUDZC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUDZC_Enabled (1UL) /*!< Enable */
-
-/* Bit 0 : Enable or disable interrupt for event FPUIOC */
-#define DCNF_INTEN_FPUIOC_Pos (0UL) /*!< Position of FPUIOC field. */
-#define DCNF_INTEN_FPUIOC_Msk (0x1UL << DCNF_INTEN_FPUIOC_Pos) /*!< Bit mask of FPUIOC field. */
-#define DCNF_INTEN_FPUIOC_Disabled (0UL) /*!< Disable */
-#define DCNF_INTEN_FPUIOC_Enabled (1UL) /*!< Enable */
-
-/* Register: DCNF_INTENSET */
-/* Description: Enable interrupt */
-
-/* Bit 5 : Write '1' to enable interrupt for event FPUIDC */
-#define DCNF_INTENSET_FPUIDC_Pos (5UL) /*!< Position of FPUIDC field. */
-#define DCNF_INTENSET_FPUIDC_Msk (0x1UL << DCNF_INTENSET_FPUIDC_Pos) /*!< Bit mask of FPUIDC field. */
-#define DCNF_INTENSET_FPUIDC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUIDC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUIDC_Set (1UL) /*!< Enable */
-
-/* Bit 4 : Write '1' to enable interrupt for event FPUIXC */
-#define DCNF_INTENSET_FPUIXC_Pos (4UL) /*!< Position of FPUIXC field. */
-#define DCNF_INTENSET_FPUIXC_Msk (0x1UL << DCNF_INTENSET_FPUIXC_Pos) /*!< Bit mask of FPUIXC field. */
-#define DCNF_INTENSET_FPUIXC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUIXC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUIXC_Set (1UL) /*!< Enable */
-
-/* Bit 3 : Write '1' to enable interrupt for event FPUUFC */
-#define DCNF_INTENSET_FPUUFC_Pos (3UL) /*!< Position of FPUUFC field. */
-#define DCNF_INTENSET_FPUUFC_Msk (0x1UL << DCNF_INTENSET_FPUUFC_Pos) /*!< Bit mask of FPUUFC field. */
-#define DCNF_INTENSET_FPUUFC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUUFC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUUFC_Set (1UL) /*!< Enable */
-
-/* Bit 2 : Write '1' to enable interrupt for event FPUOFC */
-#define DCNF_INTENSET_FPUOFC_Pos (2UL) /*!< Position of FPUOFC field. */
-#define DCNF_INTENSET_FPUOFC_Msk (0x1UL << DCNF_INTENSET_FPUOFC_Pos) /*!< Bit mask of FPUOFC field. */
-#define DCNF_INTENSET_FPUOFC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUOFC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUOFC_Set (1UL) /*!< Enable */
-
-/* Bit 1 : Write '1' to enable interrupt for event FPUDZC */
-#define DCNF_INTENSET_FPUDZC_Pos (1UL) /*!< Position of FPUDZC field. */
-#define DCNF_INTENSET_FPUDZC_Msk (0x1UL << DCNF_INTENSET_FPUDZC_Pos) /*!< Bit mask of FPUDZC field. */
-#define DCNF_INTENSET_FPUDZC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUDZC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUDZC_Set (1UL) /*!< Enable */
-
-/* Bit 0 : Write '1' to enable interrupt for event FPUIOC */
-#define DCNF_INTENSET_FPUIOC_Pos (0UL) /*!< Position of FPUIOC field. */
-#define DCNF_INTENSET_FPUIOC_Msk (0x1UL << DCNF_INTENSET_FPUIOC_Pos) /*!< Bit mask of FPUIOC field. */
-#define DCNF_INTENSET_FPUIOC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENSET_FPUIOC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENSET_FPUIOC_Set (1UL) /*!< Enable */
-
-/* Register: DCNF_INTENCLR */
-/* Description: Disable interrupt */
-
-/* Bit 5 : Write '1' to disable interrupt for event FPUIDC */
-#define DCNF_INTENCLR_FPUIDC_Pos (5UL) /*!< Position of FPUIDC field. */
-#define DCNF_INTENCLR_FPUIDC_Msk (0x1UL << DCNF_INTENCLR_FPUIDC_Pos) /*!< Bit mask of FPUIDC field. */
-#define DCNF_INTENCLR_FPUIDC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUIDC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUIDC_Clear (1UL) /*!< Disable */
-
-/* Bit 4 : Write '1' to disable interrupt for event FPUIXC */
-#define DCNF_INTENCLR_FPUIXC_Pos (4UL) /*!< Position of FPUIXC field. */
-#define DCNF_INTENCLR_FPUIXC_Msk (0x1UL << DCNF_INTENCLR_FPUIXC_Pos) /*!< Bit mask of FPUIXC field. */
-#define DCNF_INTENCLR_FPUIXC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUIXC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUIXC_Clear (1UL) /*!< Disable */
-
-/* Bit 3 : Write '1' to disable interrupt for event FPUUFC */
-#define DCNF_INTENCLR_FPUUFC_Pos (3UL) /*!< Position of FPUUFC field. */
-#define DCNF_INTENCLR_FPUUFC_Msk (0x1UL << DCNF_INTENCLR_FPUUFC_Pos) /*!< Bit mask of FPUUFC field. */
-#define DCNF_INTENCLR_FPUUFC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUUFC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUUFC_Clear (1UL) /*!< Disable */
-
-/* Bit 2 : Write '1' to disable interrupt for event FPUOFC */
-#define DCNF_INTENCLR_FPUOFC_Pos (2UL) /*!< Position of FPUOFC field. */
-#define DCNF_INTENCLR_FPUOFC_Msk (0x1UL << DCNF_INTENCLR_FPUOFC_Pos) /*!< Bit mask of FPUOFC field. */
-#define DCNF_INTENCLR_FPUOFC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUOFC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUOFC_Clear (1UL) /*!< Disable */
-
-/* Bit 1 : Write '1' to disable interrupt for event FPUDZC */
-#define DCNF_INTENCLR_FPUDZC_Pos (1UL) /*!< Position of FPUDZC field. */
-#define DCNF_INTENCLR_FPUDZC_Msk (0x1UL << DCNF_INTENCLR_FPUDZC_Pos) /*!< Bit mask of FPUDZC field. */
-#define DCNF_INTENCLR_FPUDZC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUDZC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUDZC_Clear (1UL) /*!< Disable */
-
-/* Bit 0 : Write '1' to disable interrupt for event FPUIOC */
-#define DCNF_INTENCLR_FPUIOC_Pos (0UL) /*!< Position of FPUIOC field. */
-#define DCNF_INTENCLR_FPUIOC_Msk (0x1UL << DCNF_INTENCLR_FPUIOC_Pos) /*!< Bit mask of FPUIOC field. */
-#define DCNF_INTENCLR_FPUIOC_Disabled (0UL) /*!< Read: Disabled */
-#define DCNF_INTENCLR_FPUIOC_Enabled (1UL) /*!< Read: Enabled */
-#define DCNF_INTENCLR_FPUIOC_Clear (1UL) /*!< Disable */
-
 /* Register: DCNF_CPUID */
-/* Description: CPU ID number in the system */
+/* Description: CPU ID of this subsystem */
 
-/* Bits 7..0 : CPU ID number in the system */
+/* Bits 7..0 : CPU ID */
 #define DCNF_CPUID_CPUID_Pos (0UL) /*!< Position of CPUID field. */
 #define DCNF_CPUID_CPUID_Msk (0xFFUL << DCNF_CPUID_CPUID_Pos) /*!< Bit mask of CPUID field. */
-#define DCNF_CPUID_CPUID_ApplicationCore (0UL) /*!< Application core */
-#define DCNF_CPUID_CPUID_NetworkCore (1UL) /*!< Network core */
 
 /* Register: DCNF_EXTPERI_PROTECT */
 /* Description: Description cluster: Control access for master connected to AMLI master port EXTPERI[n] */
 
-/* Bits 2..0 : Control access to peripherals from master EXTPERI[n] */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Pos (0UL) /*!< Position of SLAVE field. */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Msk (0x7UL << DCNF_EXTPERI_PROTECT_SLAVE_Pos) /*!< Bit mask of SLAVE field. */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Allowed (0UL) /*!< Access to peripherals is allowed */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Blocked (0x7UL) /*!< Access to peripherals is blocked */
+/* Bit 0 : Control access to slave 0 of master EXTPERI[n] */
+#define DCNF_EXTPERI_PROTECT_SLAVE0_Pos (0UL) /*!< Position of SLAVE0 field. */
+#define DCNF_EXTPERI_PROTECT_SLAVE0_Msk (0x1UL << DCNF_EXTPERI_PROTECT_SLAVE0_Pos) /*!< Bit mask of SLAVE0 field. */
+#define DCNF_EXTPERI_PROTECT_SLAVE0_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTPERI_PROTECT_SLAVE0_Blocked (1UL) /*!< Access to slave is blocked */
 
 /* Register: DCNF_EXTRAM_PROTECT */
 /* Description: Description cluster: Control access from master connected to AMLI master port EXTRAM[n] */
+
+/* Bit 7 : Control access to slave 7 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE7_Pos (7UL) /*!< Position of SLAVE7 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE7_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE7_Pos) /*!< Bit mask of SLAVE7 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE7_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE7_Blocked (1UL) /*!< Access to slave is blocked */
+
+/* Bit 6 : Control access to slave 6 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE6_Pos (6UL) /*!< Position of SLAVE6 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE6_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE6_Pos) /*!< Bit mask of SLAVE6 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE6_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE6_Blocked (1UL) /*!< Access to slave is blocked */
+
+/* Bit 5 : Control access to slave 5 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE5_Pos (5UL) /*!< Position of SLAVE5 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE5_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE5_Pos) /*!< Bit mask of SLAVE5 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE5_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE5_Blocked (1UL) /*!< Access to slave is blocked */
+
+/* Bit 4 : Control access to slave 4 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE4_Pos (4UL) /*!< Position of SLAVE4 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE4_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE4_Pos) /*!< Bit mask of SLAVE4 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE4_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE4_Blocked (1UL) /*!< Access to slave is blocked */
+
+/* Bit 3 : Control access to slave 3 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE3_Pos (3UL) /*!< Position of SLAVE3 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE3_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE3_Pos) /*!< Bit mask of SLAVE3 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE3_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE3_Blocked (1UL) /*!< Access to slave is blocked */
+
+/* Bit 2 : Control access to slave 2 of master EXTRAM[n] */
+#define DCNF_EXTRAM_PROTECT_SLAVE2_Pos (2UL) /*!< Position of SLAVE2 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE2_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE2_Pos) /*!< Bit mask of SLAVE2 field. */
+#define DCNF_EXTRAM_PROTECT_SLAVE2_Allowed (0UL) /*!< Access to slave is allowed */
+#define DCNF_EXTRAM_PROTECT_SLAVE2_Blocked (1UL) /*!< Access to slave is blocked */
 
 /* Bit 1 : Control access to slave 1 of master EXTRAM[n] */
 #define DCNF_EXTRAM_PROTECT_SLAVE1_Pos (1UL) /*!< Position of SLAVE1 field. */
@@ -3558,6 +3457,193 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Bits 4..0 : Slope trim factor on twos complement form */
 #define FICR_XOSC32MTRIM_SLOPE_Pos (0UL) /*!< Position of SLOPE field. */
 #define FICR_XOSC32MTRIM_SLOPE_Msk (0x1FUL << FICR_XOSC32MTRIM_SLOPE_Pos) /*!< Bit mask of SLOPE field. */
+
+
+/* Peripheral: FPU */
+/* Description: FPU control peripheral 0 */
+
+/* Register: FPU_EVENTS_INVALIDOPERATION */
+/* Description: An FPUIOC exception triggered by an invalid operation has occurred in the FPU */
+
+/* Bit 0 : An FPUIOC exception triggered by an invalid operation has occurred in the FPU */
+#define FPU_EVENTS_INVALIDOPERATION_EVENTS_INVALIDOPERATION_Pos (0UL) /*!< Position of EVENTS_INVALIDOPERATION field. */
+#define FPU_EVENTS_INVALIDOPERATION_EVENTS_INVALIDOPERATION_Msk (0x1UL << FPU_EVENTS_INVALIDOPERATION_EVENTS_INVALIDOPERATION_Pos) /*!< Bit mask of EVENTS_INVALIDOPERATION field. */
+#define FPU_EVENTS_INVALIDOPERATION_EVENTS_INVALIDOPERATION_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_INVALIDOPERATION_EVENTS_INVALIDOPERATION_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_EVENTS_DIVIDEBYZERO */
+/* Description: An FPUDZC exception triggered by a floating-point divide-by-zero operation has occurred in the FPU */
+
+/* Bit 0 : An FPUDZC exception triggered by a floating-point divide-by-zero operation has occurred in the FPU */
+#define FPU_EVENTS_DIVIDEBYZERO_EVENTS_DIVIDEBYZERO_Pos (0UL) /*!< Position of EVENTS_DIVIDEBYZERO field. */
+#define FPU_EVENTS_DIVIDEBYZERO_EVENTS_DIVIDEBYZERO_Msk (0x1UL << FPU_EVENTS_DIVIDEBYZERO_EVENTS_DIVIDEBYZERO_Pos) /*!< Bit mask of EVENTS_DIVIDEBYZERO field. */
+#define FPU_EVENTS_DIVIDEBYZERO_EVENTS_DIVIDEBYZERO_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_DIVIDEBYZERO_EVENTS_DIVIDEBYZERO_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_EVENTS_OVERFLOW */
+/* Description: An FPUOFC exception triggered by a floating-point overflow has occurred in the FPU */
+
+/* Bit 0 : An FPUOFC exception triggered by a floating-point overflow has occurred in the FPU */
+#define FPU_EVENTS_OVERFLOW_EVENTS_OVERFLOW_Pos (0UL) /*!< Position of EVENTS_OVERFLOW field. */
+#define FPU_EVENTS_OVERFLOW_EVENTS_OVERFLOW_Msk (0x1UL << FPU_EVENTS_OVERFLOW_EVENTS_OVERFLOW_Pos) /*!< Bit mask of EVENTS_OVERFLOW field. */
+#define FPU_EVENTS_OVERFLOW_EVENTS_OVERFLOW_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_OVERFLOW_EVENTS_OVERFLOW_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_EVENTS_UNDERFLOW */
+/* Description: An FPUUFC exception triggered by a floating-point underflow has occurred in the FPU */
+
+/* Bit 0 : An FPUUFC exception triggered by a floating-point underflow has occurred in the FPU */
+#define FPU_EVENTS_UNDERFLOW_EVENTS_UNDERFLOW_Pos (0UL) /*!< Position of EVENTS_UNDERFLOW field. */
+#define FPU_EVENTS_UNDERFLOW_EVENTS_UNDERFLOW_Msk (0x1UL << FPU_EVENTS_UNDERFLOW_EVENTS_UNDERFLOW_Pos) /*!< Bit mask of EVENTS_UNDERFLOW field. */
+#define FPU_EVENTS_UNDERFLOW_EVENTS_UNDERFLOW_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_UNDERFLOW_EVENTS_UNDERFLOW_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_EVENTS_INEXACT */
+/* Description: An FPUIXC exception triggered by an inexact floating-point operation has occurred in the FPU */
+
+/* Bit 0 : An FPUIXC exception triggered by an inexact floating-point operation has occurred in the FPU */
+#define FPU_EVENTS_INEXACT_EVENTS_INEXACT_Pos (0UL) /*!< Position of EVENTS_INEXACT field. */
+#define FPU_EVENTS_INEXACT_EVENTS_INEXACT_Msk (0x1UL << FPU_EVENTS_INEXACT_EVENTS_INEXACT_Pos) /*!< Bit mask of EVENTS_INEXACT field. */
+#define FPU_EVENTS_INEXACT_EVENTS_INEXACT_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_INEXACT_EVENTS_INEXACT_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_EVENTS_DENORMALINPUT */
+/* Description: An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU */
+
+/* Bit 0 : An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU */
+#define FPU_EVENTS_DENORMALINPUT_EVENTS_DENORMALINPUT_Pos (0UL) /*!< Position of EVENTS_DENORMALINPUT field. */
+#define FPU_EVENTS_DENORMALINPUT_EVENTS_DENORMALINPUT_Msk (0x1UL << FPU_EVENTS_DENORMALINPUT_EVENTS_DENORMALINPUT_Pos) /*!< Bit mask of EVENTS_DENORMALINPUT field. */
+#define FPU_EVENTS_DENORMALINPUT_EVENTS_DENORMALINPUT_NotGenerated (0UL) /*!< Event not generated */
+#define FPU_EVENTS_DENORMALINPUT_EVENTS_DENORMALINPUT_Generated (1UL) /*!< Event generated */
+
+/* Register: FPU_INTEN */
+/* Description: Enable or disable interrupt */
+
+/* Bit 5 : Enable or disable interrupt for event DENORMALINPUT */
+#define FPU_INTEN_DENORMALINPUT_Pos (5UL) /*!< Position of DENORMALINPUT field. */
+#define FPU_INTEN_DENORMALINPUT_Msk (0x1UL << FPU_INTEN_DENORMALINPUT_Pos) /*!< Bit mask of DENORMALINPUT field. */
+#define FPU_INTEN_DENORMALINPUT_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_DENORMALINPUT_Enabled (1UL) /*!< Enable */
+
+/* Bit 4 : Enable or disable interrupt for event INEXACT */
+#define FPU_INTEN_INEXACT_Pos (4UL) /*!< Position of INEXACT field. */
+#define FPU_INTEN_INEXACT_Msk (0x1UL << FPU_INTEN_INEXACT_Pos) /*!< Bit mask of INEXACT field. */
+#define FPU_INTEN_INEXACT_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_INEXACT_Enabled (1UL) /*!< Enable */
+
+/* Bit 3 : Enable or disable interrupt for event UNDERFLOW */
+#define FPU_INTEN_UNDERFLOW_Pos (3UL) /*!< Position of UNDERFLOW field. */
+#define FPU_INTEN_UNDERFLOW_Msk (0x1UL << FPU_INTEN_UNDERFLOW_Pos) /*!< Bit mask of UNDERFLOW field. */
+#define FPU_INTEN_UNDERFLOW_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_UNDERFLOW_Enabled (1UL) /*!< Enable */
+
+/* Bit 2 : Enable or disable interrupt for event OVERFLOW */
+#define FPU_INTEN_OVERFLOW_Pos (2UL) /*!< Position of OVERFLOW field. */
+#define FPU_INTEN_OVERFLOW_Msk (0x1UL << FPU_INTEN_OVERFLOW_Pos) /*!< Bit mask of OVERFLOW field. */
+#define FPU_INTEN_OVERFLOW_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_OVERFLOW_Enabled (1UL) /*!< Enable */
+
+/* Bit 1 : Enable or disable interrupt for event DIVIDEBYZERO */
+#define FPU_INTEN_DIVIDEBYZERO_Pos (1UL) /*!< Position of DIVIDEBYZERO field. */
+#define FPU_INTEN_DIVIDEBYZERO_Msk (0x1UL << FPU_INTEN_DIVIDEBYZERO_Pos) /*!< Bit mask of DIVIDEBYZERO field. */
+#define FPU_INTEN_DIVIDEBYZERO_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_DIVIDEBYZERO_Enabled (1UL) /*!< Enable */
+
+/* Bit 0 : Enable or disable interrupt for event INVALIDOPERATION */
+#define FPU_INTEN_INVALIDOPERATION_Pos (0UL) /*!< Position of INVALIDOPERATION field. */
+#define FPU_INTEN_INVALIDOPERATION_Msk (0x1UL << FPU_INTEN_INVALIDOPERATION_Pos) /*!< Bit mask of INVALIDOPERATION field. */
+#define FPU_INTEN_INVALIDOPERATION_Disabled (0UL) /*!< Disable */
+#define FPU_INTEN_INVALIDOPERATION_Enabled (1UL) /*!< Enable */
+
+/* Register: FPU_INTENSET */
+/* Description: Enable interrupt */
+
+/* Bit 5 : Write '1' to enable interrupt for event DENORMALINPUT */
+#define FPU_INTENSET_DENORMALINPUT_Pos (5UL) /*!< Position of DENORMALINPUT field. */
+#define FPU_INTENSET_DENORMALINPUT_Msk (0x1UL << FPU_INTENSET_DENORMALINPUT_Pos) /*!< Bit mask of DENORMALINPUT field. */
+#define FPU_INTENSET_DENORMALINPUT_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_DENORMALINPUT_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_DENORMALINPUT_Set (1UL) /*!< Enable */
+
+/* Bit 4 : Write '1' to enable interrupt for event INEXACT */
+#define FPU_INTENSET_INEXACT_Pos (4UL) /*!< Position of INEXACT field. */
+#define FPU_INTENSET_INEXACT_Msk (0x1UL << FPU_INTENSET_INEXACT_Pos) /*!< Bit mask of INEXACT field. */
+#define FPU_INTENSET_INEXACT_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_INEXACT_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_INEXACT_Set (1UL) /*!< Enable */
+
+/* Bit 3 : Write '1' to enable interrupt for event UNDERFLOW */
+#define FPU_INTENSET_UNDERFLOW_Pos (3UL) /*!< Position of UNDERFLOW field. */
+#define FPU_INTENSET_UNDERFLOW_Msk (0x1UL << FPU_INTENSET_UNDERFLOW_Pos) /*!< Bit mask of UNDERFLOW field. */
+#define FPU_INTENSET_UNDERFLOW_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_UNDERFLOW_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_UNDERFLOW_Set (1UL) /*!< Enable */
+
+/* Bit 2 : Write '1' to enable interrupt for event OVERFLOW */
+#define FPU_INTENSET_OVERFLOW_Pos (2UL) /*!< Position of OVERFLOW field. */
+#define FPU_INTENSET_OVERFLOW_Msk (0x1UL << FPU_INTENSET_OVERFLOW_Pos) /*!< Bit mask of OVERFLOW field. */
+#define FPU_INTENSET_OVERFLOW_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_OVERFLOW_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_OVERFLOW_Set (1UL) /*!< Enable */
+
+/* Bit 1 : Write '1' to enable interrupt for event DIVIDEBYZERO */
+#define FPU_INTENSET_DIVIDEBYZERO_Pos (1UL) /*!< Position of DIVIDEBYZERO field. */
+#define FPU_INTENSET_DIVIDEBYZERO_Msk (0x1UL << FPU_INTENSET_DIVIDEBYZERO_Pos) /*!< Bit mask of DIVIDEBYZERO field. */
+#define FPU_INTENSET_DIVIDEBYZERO_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_DIVIDEBYZERO_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_DIVIDEBYZERO_Set (1UL) /*!< Enable */
+
+/* Bit 0 : Write '1' to enable interrupt for event INVALIDOPERATION */
+#define FPU_INTENSET_INVALIDOPERATION_Pos (0UL) /*!< Position of INVALIDOPERATION field. */
+#define FPU_INTENSET_INVALIDOPERATION_Msk (0x1UL << FPU_INTENSET_INVALIDOPERATION_Pos) /*!< Bit mask of INVALIDOPERATION field. */
+#define FPU_INTENSET_INVALIDOPERATION_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENSET_INVALIDOPERATION_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENSET_INVALIDOPERATION_Set (1UL) /*!< Enable */
+
+/* Register: FPU_INTENCLR */
+/* Description: Disable interrupt */
+
+/* Bit 5 : Write '1' to disable interrupt for event DENORMALINPUT */
+#define FPU_INTENCLR_DENORMALINPUT_Pos (5UL) /*!< Position of DENORMALINPUT field. */
+#define FPU_INTENCLR_DENORMALINPUT_Msk (0x1UL << FPU_INTENCLR_DENORMALINPUT_Pos) /*!< Bit mask of DENORMALINPUT field. */
+#define FPU_INTENCLR_DENORMALINPUT_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_DENORMALINPUT_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_DENORMALINPUT_Clear (1UL) /*!< Disable */
+
+/* Bit 4 : Write '1' to disable interrupt for event INEXACT */
+#define FPU_INTENCLR_INEXACT_Pos (4UL) /*!< Position of INEXACT field. */
+#define FPU_INTENCLR_INEXACT_Msk (0x1UL << FPU_INTENCLR_INEXACT_Pos) /*!< Bit mask of INEXACT field. */
+#define FPU_INTENCLR_INEXACT_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_INEXACT_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_INEXACT_Clear (1UL) /*!< Disable */
+
+/* Bit 3 : Write '1' to disable interrupt for event UNDERFLOW */
+#define FPU_INTENCLR_UNDERFLOW_Pos (3UL) /*!< Position of UNDERFLOW field. */
+#define FPU_INTENCLR_UNDERFLOW_Msk (0x1UL << FPU_INTENCLR_UNDERFLOW_Pos) /*!< Bit mask of UNDERFLOW field. */
+#define FPU_INTENCLR_UNDERFLOW_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_UNDERFLOW_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_UNDERFLOW_Clear (1UL) /*!< Disable */
+
+/* Bit 2 : Write '1' to disable interrupt for event OVERFLOW */
+#define FPU_INTENCLR_OVERFLOW_Pos (2UL) /*!< Position of OVERFLOW field. */
+#define FPU_INTENCLR_OVERFLOW_Msk (0x1UL << FPU_INTENCLR_OVERFLOW_Pos) /*!< Bit mask of OVERFLOW field. */
+#define FPU_INTENCLR_OVERFLOW_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_OVERFLOW_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_OVERFLOW_Clear (1UL) /*!< Disable */
+
+/* Bit 1 : Write '1' to disable interrupt for event DIVIDEBYZERO */
+#define FPU_INTENCLR_DIVIDEBYZERO_Pos (1UL) /*!< Position of DIVIDEBYZERO field. */
+#define FPU_INTENCLR_DIVIDEBYZERO_Msk (0x1UL << FPU_INTENCLR_DIVIDEBYZERO_Pos) /*!< Bit mask of DIVIDEBYZERO field. */
+#define FPU_INTENCLR_DIVIDEBYZERO_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_DIVIDEBYZERO_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_DIVIDEBYZERO_Clear (1UL) /*!< Disable */
+
+/* Bit 0 : Write '1' to disable interrupt for event INVALIDOPERATION */
+#define FPU_INTENCLR_INVALIDOPERATION_Pos (0UL) /*!< Position of INVALIDOPERATION field. */
+#define FPU_INTENCLR_INVALIDOPERATION_Msk (0x1UL << FPU_INTENCLR_INVALIDOPERATION_Pos) /*!< Bit mask of INVALIDOPERATION field. */
+#define FPU_INTENCLR_INVALIDOPERATION_Disabled (0UL) /*!< Read: Disabled */
+#define FPU_INTENCLR_INVALIDOPERATION_Enabled (1UL) /*!< Read: Enabled */
+#define FPU_INTENCLR_INVALIDOPERATION_Clear (1UL) /*!< Disable */
 
 
 /* Peripheral: GPIOTE */
@@ -10665,53 +10751,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define QSPI_IFTIMING_RXDELAY_Msk (0x7UL << QSPI_IFTIMING_RXDELAY_Pos) /*!< Bit mask of RXDELAY field. */
 
 
-/* Peripheral: RCOSC32K */
-/* Description: 32.768 kHz RC oscillator 0 */
-
-/* Register: RCOSC32K_TASKS_CAL */
-/* Description: Start calibration of LFRC oscillator */
-
-/* Bit 0 : Start calibration of LFRC oscillator */
-#define RCOSC32K_TASKS_CAL_TASKS_CAL_Pos (0UL) /*!< Position of TASKS_CAL field. */
-#define RCOSC32K_TASKS_CAL_TASKS_CAL_Msk (0x1UL << RCOSC32K_TASKS_CAL_TASKS_CAL_Pos) /*!< Bit mask of TASKS_CAL field. */
-#define RCOSC32K_TASKS_CAL_TASKS_CAL_Trigger (1UL) /*!< Trigger task */
-
-/* Register: RCOSC32K_SUBSCRIBE_CAL */
-/* Description: Subscribe configuration for task CAL */
-
-/* Bit 31 :   */
-#define RCOSC32K_SUBSCRIBE_CAL_EN_Pos (31UL) /*!< Position of EN field. */
-#define RCOSC32K_SUBSCRIBE_CAL_EN_Msk (0x1UL << RCOSC32K_SUBSCRIBE_CAL_EN_Pos) /*!< Bit mask of EN field. */
-#define RCOSC32K_SUBSCRIBE_CAL_EN_Disabled (0UL) /*!< Disable subscription */
-#define RCOSC32K_SUBSCRIBE_CAL_EN_Enabled (1UL) /*!< Enable subscription */
-
-/* Bits 7..0 : Channel that task CAL will subscribe to */
-#define RCOSC32K_SUBSCRIBE_CAL_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
-#define RCOSC32K_SUBSCRIBE_CAL_CHIDX_Msk (0xFFUL << RCOSC32K_SUBSCRIBE_CAL_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
-
-/* Register: RCOSC32K_EVENTS_DONE */
-/* Description: Calibration of LFCLK RC oscillator complete event */
-
-/* Bit 0 : Calibration of LFCLK RC oscillator complete event */
-#define RCOSC32K_EVENTS_DONE_EVENTS_DONE_Pos (0UL) /*!< Position of EVENTS_DONE field. */
-#define RCOSC32K_EVENTS_DONE_EVENTS_DONE_Msk (0x1UL << RCOSC32K_EVENTS_DONE_EVENTS_DONE_Pos) /*!< Bit mask of EVENTS_DONE field. */
-#define RCOSC32K_EVENTS_DONE_EVENTS_DONE_NotGenerated (0UL) /*!< Event not generated */
-#define RCOSC32K_EVENTS_DONE_EVENTS_DONE_Generated (1UL) /*!< Event generated */
-
-/* Register: RCOSC32K_PUBLISH_DONE */
-/* Description: Publish configuration for event DONE */
-
-/* Bit 31 :   */
-#define RCOSC32K_PUBLISH_DONE_EN_Pos (31UL) /*!< Position of EN field. */
-#define RCOSC32K_PUBLISH_DONE_EN_Msk (0x1UL << RCOSC32K_PUBLISH_DONE_EN_Pos) /*!< Bit mask of EN field. */
-#define RCOSC32K_PUBLISH_DONE_EN_Disabled (0UL) /*!< Disable publishing */
-#define RCOSC32K_PUBLISH_DONE_EN_Enabled (1UL) /*!< Enable publishing */
-
-/* Bits 7..0 : Channel that event DONE will publish to. */
-#define RCOSC32K_PUBLISH_DONE_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
-#define RCOSC32K_PUBLISH_DONE_CHIDX_Msk (0xFFUL << RCOSC32K_PUBLISH_DONE_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
-
-
 /* Peripheral: REGULATORS */
 /* Description: Voltage regulators 0 */
 
@@ -10776,7 +10815,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define REGULATORS_POFCON_POF_Enabled (1UL) /*!< Enable */
 
 /* Register: REGULATORS_VREGMAIN_DCDCEN */
-/* Description: Register enabling DC/DC for main regulator */
+/* Description: DC/DC enable register for VREGMAIN */
 
 /* Bit 0 : Enable or disable DC/DC converter */
 #define REGULATORS_VREGMAIN_DCDCEN_DCDCEN_Pos (0UL) /*!< Position of DCDCEN field. */
@@ -16387,7 +16426,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Description: Access port protection */
 
 /* Bits 31..0 : Blocks debugger read/write access to all CPU registers and
-          memory mapped addresses */
+          memory mapped addresses Using any value not listed below will yield unexpected results. */
 #define UICR_APPROTECT_PALL_Pos (0UL) /*!< Position of PALL field. */
 #define UICR_APPROTECT_PALL_Msk (0xFFFFFFFFUL << UICR_APPROTECT_PALL_Pos) /*!< Bit mask of PALL field. */
 #define UICR_APPROTECT_PALL_Protected (0x00000000UL) /*!< Protected */
@@ -16423,13 +16462,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define UICR_HFXOCNT_HFXOCNT_Pos (0UL) /*!< Position of HFXOCNT field. */
 #define UICR_HFXOCNT_HFXOCNT_Msk (0xFFUL << UICR_HFXOCNT_HFXOCNT_Pos) /*!< Bit mask of HFXOCNT field. */
 #define UICR_HFXOCNT_HFXOCNT_MinDebounceTime (0UL) /*!< Min debounce time = (0*64 us + 0.5 us) */
-#define UICR_HFXOCNT_HFXOCNT_MaxDebounceTime (255UL) /*!< Max debounce time = (255*64 us + 0.5 us) */
+#define UICR_HFXOCNT_HFXOCNT_MaxDebounceTime (254UL) /*!< Max debounce time = (254*64 us + 0.5 us) */
+#define UICR_HFXOCNT_HFXOCNT_DefaultDebounceTime (255UL) /*!< Default debounce time for erased UICR = 4*64 us + 0.5 us */
 
 /* Register: UICR_SECUREAPPROTECT */
 /* Description: Secure access port protection */
 
-/* Bits 31..0 : Blocks debugger read/write access to all secure CPU registers and secure
-          memory mapped addresses */
+/* Bits 31..0 : Blocks debugger read/write access to all secure CPU registers and secure memory
+        mapped addresses. Using any value not listed below will yield unexpected results. */
 #define UICR_SECUREAPPROTECT_PALL_Pos (0UL) /*!< Position of PALL field. */
 #define UICR_SECUREAPPROTECT_PALL_Msk (0xFFFFFFFFUL << UICR_SECUREAPPROTECT_PALL_Pos) /*!< Bit mask of PALL field. */
 #define UICR_SECUREAPPROTECT_PALL_Protected (0x00000000UL) /*!< Protected */
@@ -16438,7 +16478,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: UICR_ERASEPROTECT */
 /* Description: Erase protection */
 
-/* Bits 31..0 : Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality */
+/* Bits 31..0 : Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality. Using any value not listed below will yield unexpected results. */
 #define UICR_ERASEPROTECT_PALL_Pos (0UL) /*!< Position of PALL field. */
 #define UICR_ERASEPROTECT_PALL_Msk (0xFFFFFFFFUL << UICR_ERASEPROTECT_PALL_Pos) /*!< Bit mask of PALL field. */
 #define UICR_ERASEPROTECT_PALL_Protected (0x00000000UL) /*!< Protected */

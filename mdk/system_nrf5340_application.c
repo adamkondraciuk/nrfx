@@ -26,6 +26,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
+#include "nrf_erratas.h"
 #include "system_nrf5340_application.h"
 
 /*lint ++flb "Enter library region" */
@@ -47,7 +48,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define TRACE_TRACEDATA3_PIN TAD_PSEL_TRACEDATA3_PIN_Tracedata3
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
 #elif defined ( __ICCARM__ )
     __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
 #elif defined   ( __GNUC__ )
@@ -74,7 +75,7 @@ void SystemInit(void)
           SAU->CTRL |= (1 << SAU_CTRL_ALLNS_Pos);
         #endif
 
-        /* Trimming of the device. Copy all the trimming values from FICR into the target addresses. Trim 
+        /* Trimming of the device. Copy all the trimming values from FICR into the target addresses. Trim
          until one ADDR is not initialized. */
         uint32_t index = 0;
         for (index = 0; index < 256ul && NRF_FICR_S->TRIMCNF[index].ADDR != (uint32_t *)0xFFFFFFFFul; index++){
@@ -88,19 +89,66 @@ void SystemInit(void)
             #endif
         }
 
+        /* Workaround for Errata 64 "VREGMAIN has invalid configuration when CPU is running at 128 MHz" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (errata_64())
+        {
+            *((volatile uint32_t *)0x50004708ul) = 0x3;
+        }
+
+        /* Workaround for Errata 42 "Reset value of HFCLKCTRL is invalid" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (errata_42())
+        {
+            *((volatile uint32_t *)0x50039530ul) = 0xBEEF0044ul;
+            NRF_CLOCK_S->HFCLKCTRL = CLOCK_HFCLKCTRL_HCLK_Div2 << CLOCK_HFCLKCTRL_HCLK_Pos;
+
+            if (errata_64())
+            {
+                *((volatile uint32_t *)0x50004710ul) = 0x0;
+            }
+        }
+
+        /* Workaround for Errata 46 "Higher power consumption of LFRC" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (errata_46())
+        {
+            *((volatile uint32_t *)0x5003254Cul) = 0;
+        }
+
+        /* Workaround for Errata 49 "SLEEPENTER and SLEEPEXIT events asserted after pin reset" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (errata_49())
+        {
+            if (NRF_RESET_S->RESETREAS & RESET_RESETREAS_RESETPIN_Msk)
+            {
+                NRF_POWER_S->EVENTS_SLEEPENTER = 0;
+                NRF_POWER_S->EVENTS_SLEEPEXIT = 0;
+            }
+        }
+
+        /* Workaround for Errata 55 "Bits in RESETREAS are set when they should not be" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (errata_55())
+        {
+            if (NRF_RESET_S->RESETREAS & RESET_RESETREAS_RESETPIN_Msk){
+                NRF_RESET_S->RESETREAS = ~RESET_RESETREAS_RESETPIN_Msk;
+            }
+        }
+        
         #if defined(CONFIG_NFCT_PINS_AS_GPIOS)
 
             if ((NRF_UICR_S->NFCPINS & UICR_NFCPINS_PROTECT_Msk) == (UICR_NFCPINS_PROTECT_NFC << UICR_NFCPINS_PROTECT_Pos))
             {
-                NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
+                NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Wen << NVMC_CONFIG_WEN_Pos;
 
-                while (NRF_NVMC->READY == NVMC_READY_READY_Busy);
-                NRF_UICR->NFCPINS &= ~UICR_NFCPINS_PROTECT_Msk;
+                while (NRF_NVMC_S->READY == NVMC_READY_READY_Busy);
+                NRF_UICR_S->NFCPINS &= ~UICR_NFCPINS_PROTECT_Msk;
 
-                while (NRF_NVMC->READY == NVMC_READY_READY_Busy);
-                NRF_NVMC->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
+                while (NRF_NVMC_S->READY == NVMC_READY_READY_Busy);
+                NRF_NVMC_S->CONFIG = NVMC_CONFIG_WEN_Ren << NVMC_CONFIG_WEN_Pos;
 
-                while (NRF_NVMC->READY == NVMC_READY_READY_Busy);
+                while (NRF_NVMC_S->READY == NVMC_READY_READY_Busy);
                 NVIC_SystemReset();
             }
 
@@ -159,11 +207,11 @@ void SystemInit(void)
 
         #endif
 
-        /* Allow Non-Secure code to run FPU instructions. 
+        /* Allow Non-Secure code to run FPU instructions.
          * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
         SCB->NSACR |= (3UL << 10);
     #endif
-    
+
     /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
     * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
     * operations are not used in your code. */
@@ -172,7 +220,7 @@ void SystemInit(void)
         __DSB();
         __ISB();
     #endif
-    
+
     SystemCoreClockUpdate();
 }
 

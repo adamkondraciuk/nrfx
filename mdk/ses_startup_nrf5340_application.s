@@ -120,8 +120,8 @@ Dummy_Handler:
  * Default Interrupt Handlers                                                       *
  ************************************************************************************/
  
-.weak DCNF_IRQHandler
-.thumb_set DCNF_IRQHandler, Dummy_Handler
+.weak FPU_IRQHandler
+.thumb_set FPU_IRQHandler, Dummy_Handler
 
 .weak CACHE_IRQHandler
 .thumb_set CACHE_IRQHandler, Dummy_Handler
@@ -272,7 +272,7 @@ _vectors:
   .word SysTick_Handler
 
 /* External Interrupts */
-  .word   DCNF_IRQHandler
+  .word   FPU_IRQHandler
   .word   CACHE_IRQHandler
   .word   0                           /*Reserved */
   .word   SPU_IRQHandler

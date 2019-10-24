@@ -84,7 +84,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SysTick_Handler
 
                 ; External Interrupts
-                DCD     DCNF_IRQHandler
+                DCD     FPU_IRQHandler
                 DCD     CACHE_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     SPU_IRQHandler
@@ -397,7 +397,7 @@ SysTick_Handler PROC
 
 Default_Handler PROC
 
-                EXPORT   DCNF_IRQHandler [WEAK]
+                EXPORT   FPU_IRQHandler [WEAK]
                 EXPORT   CACHE_IRQHandler [WEAK]
                 EXPORT   SPU_IRQHandler [WEAK]
                 EXPORT   CLOCK_POWER_IRQHandler [WEAK]
@@ -434,7 +434,7 @@ Default_Handler PROC
                 EXPORT   USBREGULATOR_IRQHandler [WEAK]
                 EXPORT   KMU_IRQHandler [WEAK]
                 EXPORT   CRYPTOCELL_IRQHandler [WEAK]
-DCNF_IRQHandler
+FPU_IRQHandler
 CACHE_IRQHandler
 SPU_IRQHandler
 CLOCK_POWER_IRQHandler

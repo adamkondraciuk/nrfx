@@ -516,8 +516,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>PALL</name>
-              <description>Blocks debugger read/write access to all CPU registers and
-          memory mapped addresses</description>
+              <description>Blocks debugger read/write access to all CPU registers and memory mapped
+        addresses Any value except for the enumerations will yield unexpected results.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -544,7 +544,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>PALL</name>
-              <description>Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality</description>
+              <description>Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality. Any value except for the enumerations will yield unexpected results.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -2024,311 +2024,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <size>0x20</size>
       <registers>
         <register>
-          <name>EVENTS_FPUIOC</name>
-          <description>Invalid operation exception</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIOC</name>
-              <description>Invalid operation exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUDZC</name>
-          <description>Division by zero exception</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUDZC</name>
-              <description>Division by zero exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUOFC</name>
-          <description>Overflow exception</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUOFC</name>
-              <description>Overflow exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUUFC</name>
-          <description>Underflow exception</description>
-          <addressOffset>0x10C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUUFC</name>
-              <description>Underflow exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUIXC</name>
-          <description>Inexact exception</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIXC</name>
-              <description>Inexact exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUIDC</name>
-          <description>Input denormal exception</description>
-          <addressOffset>0x114</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIDC</name>
-              <description>Input denormal exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>CPUID</name>
-          <description>CPU ID number in the system</description>
+          <description>CPU ID of this subsystem</description>
           <addressOffset>0x420</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000001</resetValue>
           <fields>
             <field>
               <name>CPUID</name>
-              <description>CPU ID number in the system</description>
+              <description>CPU ID</description>
               <lsb>0</lsb>
               <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ApplicationCore</name>
-                  <description>Application core</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>NetworkCore</name>
-                  <description>Network core</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <cluster>
-          <dim>1</dim>
-          <dimIncrement>0x004</dimIncrement>
-          <name>EXTPERI[%s]</name>
-          <description>Unspecified</description>
-          <headerStructName>DCNF_EXTPERI</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x440</addressOffset>
-          <register>
-            <name>PROTECT</name>
-            <description>Description cluster: Control access for master connected to AMLI master port EXTPERI[n]</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <fields>
-              <field>
-                <name>SLAVE</name>
-                <description>Control access to peripherals from master EXTPERI[n]</description>
-                <lsb>0</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Allowed</name>
-                    <description>Access to peripherals is allowed</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Blocked</name>
-                    <description>Access to peripherals is blocked</description>
-                    <value>0x7</value>
-                  </enumeratedValue>
-                </enumeratedValues>
               </field>
             </fields>
           </register>
-        </cluster>
-        <cluster>
-          <dim>1</dim>
-          <dimIncrement>0x004</dimIncrement>
-          <name>EXTRAM[%s]</name>
-          <description>Unspecified</description>
-          <headerStructName>DCNF_EXTRAM</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x460</addressOffset>
-          <register>
-            <name>PROTECT</name>
-            <description>Description cluster: Control access from master connected to AMLI master port EXTRAM[n]</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <fields>
-              <field>
-                <name>SLAVE0</name>
-                <description>Control access to slave 0 of master EXTRAM[n]</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Allowed</name>
-                    <description>Access to slave is allowed</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Blocked</name>
-                    <description>Access to slave is blocked</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>SLAVE1</name>
-                <description>Control access to slave 1 of master EXTRAM[n]</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Allowed</name>
-                    <description>Access to slave is allowed</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Blocked</name>
-                    <description>Access to slave is blocked</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <dim>1</dim>
-          <dimIncrement>0x004</dimIncrement>
-          <name>EXTCODE[%s]</name>
-          <description>Unspecified</description>
-          <headerStructName>DCNF_EXTCODE</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x480</addressOffset>
-          <register>
-            <name>PROTECT</name>
-            <description>Description cluster: Control access from master connected to AMLI master port EXTCODE[n]</description>
-            <addressOffset>0x000</addressOffset>
-            <access>read-write</access>
-            <fields>
-              <field>
-                <name>SLAVE0</name>
-                <description>Control access to slave 0 of master EXTCODE[n]</description>
-                <lsb>0</lsb>
-                <msb>0</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Allowed</name>
-                    <description>Access to slave is allowed</description>
-                    <value>0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Blocked</name>
-                    <description>Access to slave is blocked</description>
-                    <value>1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
       </registers>
     </peripheral>
     <peripheral>
@@ -2947,6 +2656,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
+          <name>EVENTS_DONE</name>
+          <description>Calibration of LFCLK RC oscillator complete event</description>
+          <addressOffset>0x11C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_DONE</name>
+              <description>Calibration of LFCLK RC oscillator complete event</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>EVENTS_HFCLKAUDIOSTARTED</name>
           <description>HFCLKAUDIO source started</description>
           <addressOffset>0x120</addressOffset>
@@ -3038,6 +2773,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>CHIDX</name>
               <description>Channel that event LFCLKSTARTED will publish to.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_DONE</name>
+          <description>Publish configuration for event DONE</description>
+          <addressOffset>0x19C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that event DONE will publish to.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -3165,6 +2931,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Enable or disable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Enable or disable interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -3240,6 +3024,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Write '1' to enable interrupt for event LFCLKSTARTED</description>
               <lsb>1</lsb>
               <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DONE</name>
+              <description>Write '1' to enable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -3379,6 +3190,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Write '1' to disable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Write '1' to disable interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -3479,6 +3317,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Read pending status of interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Read pending status of interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -3546,7 +3403,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>HFCLKSTAT</name>
-          <description>Which HFCLK source is running</description>
+          <description>Status indicating which HFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance.</description>
           <addressOffset>0x40C</addressOffset>
           <access>read-only</access>
           <fields>
@@ -3634,7 +3491,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>LFCLKSTAT</name>
-          <description>Which LFCLK source is running</description>
+          <description>Status indicating which LFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance.</description>
           <addressOffset>0x418</addressOffset>
           <access>read-only</access>
           <fields>

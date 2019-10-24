@@ -85,7 +85,7 @@ __vector_table
         DCD     SysTick_Handler
 
         ; External Interrupts
-        DCD     DCNF_IRQHandler
+        DCD     FPU_IRQHandler
         DCD     CACHE_IRQHandler
         DCD     0                         ; Reserved
         DCD     SPU_IRQHandler
@@ -399,9 +399,9 @@ SysTick_Handler
 
        ; Dummy interrupt handlers
 
-        PUBWEAK  DCNF_IRQHandler
+        PUBWEAK  FPU_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-DCNF_IRQHandler
+FPU_IRQHandler
         B .
 
         PUBWEAK  CACHE_IRQHandler

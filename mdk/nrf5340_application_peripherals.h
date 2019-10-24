@@ -59,6 +59,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CACHE_PRESENT
 #define CACHE_COUNT 1
 
+/* Memory Protection Unit */
+#define MPU_REGION_NUM 8
+
 /* Regulators Peripheral */
 #define REGULATORS_PRESENT
 #define REGULATORS_COUNT 1

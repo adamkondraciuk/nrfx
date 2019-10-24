@@ -897,7 +897,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>PALL</name>
               <description>Blocks debugger read/write access to all CPU registers and
-          memory mapped addresses</description>
+          memory mapped addresses Using any value not listed below will yield unexpected results.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -1014,7 +1014,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>MaxDebounceTime</name>
-                  <description>Max debounce time = (255*64 us + 0.5 us)</description>
+                  <description>Max debounce time = (254*64 us + 0.5 us)</description>
+                  <value>254</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>DefaultDebounceTime</name>
+                  <description>Default debounce time for erased UICR = 4*64 us + 0.5 us</description>
                   <value>255</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -1030,8 +1035,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>PALL</name>
-              <description>Blocks debugger read/write access to all secure CPU registers and secure
-          memory mapped addresses</description>
+              <description>Blocks debugger read/write access to all secure CPU registers and secure memory
+        mapped addresses. Using any value not listed below will yield unexpected results.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -1058,7 +1063,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>PALL</name>
-              <description>Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality</description>
+              <description>Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality. Using any value not listed below will yield unexpected results.</description>
               <lsb>0</lsb>
               <msb>31</msb>
               <enumeratedValues>
@@ -3034,649 +3039,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <size>0x1000</size>
         <usage>registers</usage>
       </addressBlock>
-      <interrupt>
-        <name>DCNF</name>
-        <value>0</value>
-      </interrupt>
       <groupName>DCNF</groupName>
       <size>0x20</size>
       <registers>
         <register>
-          <name>EVENTS_FPUIOC</name>
-          <description>Invalid operation exception</description>
-          <addressOffset>0x100</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIOC</name>
-              <description>Invalid operation exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUDZC</name>
-          <description>Division by zero exception</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUDZC</name>
-              <description>Division by zero exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUOFC</name>
-          <description>Overflow exception</description>
-          <addressOffset>0x108</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUOFC</name>
-              <description>Overflow exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUUFC</name>
-          <description>Underflow exception</description>
-          <addressOffset>0x10C</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUUFC</name>
-              <description>Underflow exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUIXC</name>
-          <description>Inexact exception</description>
-          <addressOffset>0x110</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIXC</name>
-              <description>Inexact exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_FPUIDC</name>
-          <description>Input denormal exception</description>
-          <addressOffset>0x114</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_FPUIDC</name>
-              <description>Input denormal exception</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTEN</name>
-          <description>Enable or disable interrupt</description>
-          <addressOffset>0x300</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>FPUIOC</name>
-              <description>Enable or disable interrupt for event FPUIOC</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUDZC</name>
-              <description>Enable or disable interrupt for event FPUDZC</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUOFC</name>
-              <description>Enable or disable interrupt for event FPUOFC</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUUFC</name>
-              <description>Enable or disable interrupt for event FPUUFC</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIXC</name>
-              <description>Enable or disable interrupt for event FPUIXC</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIDC</name>
-              <description>Enable or disable interrupt for event FPUIDC</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENSET</name>
-          <description>Enable interrupt</description>
-          <addressOffset>0x304</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>FPUIOC</name>
-              <description>Write '1' to enable interrupt for event FPUIOC</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUDZC</name>
-              <description>Write '1' to enable interrupt for event FPUDZC</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUOFC</name>
-              <description>Write '1' to enable interrupt for event FPUOFC</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUUFC</name>
-              <description>Write '1' to enable interrupt for event FPUUFC</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIXC</name>
-              <description>Write '1' to enable interrupt for event FPUIXC</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIDC</name>
-              <description>Write '1' to enable interrupt for event FPUIDC</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>INTENCLR</name>
-          <description>Disable interrupt</description>
-          <addressOffset>0x308</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>FPUIOC</name>
-              <description>Write '1' to disable interrupt for event FPUIOC</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUDZC</name>
-              <description>Write '1' to disable interrupt for event FPUDZC</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUOFC</name>
-              <description>Write '1' to disable interrupt for event FPUOFC</description>
-              <lsb>2</lsb>
-              <msb>2</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUUFC</name>
-              <description>Write '1' to disable interrupt for event FPUUFC</description>
-              <lsb>3</lsb>
-              <msb>3</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIXC</name>
-              <description>Write '1' to disable interrupt for event FPUIXC</description>
-              <lsb>4</lsb>
-              <msb>4</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>FPUIDC</name>
-              <description>Write '1' to disable interrupt for event FPUIDC</description>
-              <lsb>5</lsb>
-              <msb>5</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
           <name>CPUID</name>
-          <description>CPU ID number in the system</description>
+          <description>CPU ID of this subsystem</description>
           <addressOffset>0x420</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>CPUID</name>
-              <description>CPU ID number in the system</description>
+              <description>CPU ID</description>
               <lsb>0</lsb>
               <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>ApplicationCore</name>
-                  <description>Application core</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>NetworkCore</name>
-                  <description>Network core</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
             </field>
           </fields>
         </register>
@@ -3695,20 +3072,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <access>read-write</access>
             <fields>
               <field>
-                <name>SLAVE</name>
-                <description>Control access to peripherals from master EXTPERI[n]</description>
+                <name>SLAVE0</name>
+                <description>Control access to slave 0 of master EXTPERI[n]</description>
                 <lsb>0</lsb>
-                <msb>2</msb>
+                <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Allowed</name>
-                    <description>Access to peripherals is allowed</description>
+                    <description>Access to slave is allowed</description>
                     <value>0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Blocked</name>
-                    <description>Access to peripherals is blocked</description>
-                    <value>0x7</value>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -3765,6 +3142,114 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
+              <field>
+                <name>SLAVE2</name>
+                <description>Control access to slave 2 of master EXTRAM[n]</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SLAVE3</name>
+                <description>Control access to slave 3 of master EXTRAM[n]</description>
+                <lsb>3</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SLAVE4</name>
+                <description>Control access to slave 4 of master EXTRAM[n]</description>
+                <lsb>4</lsb>
+                <msb>4</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SLAVE5</name>
+                <description>Control access to slave 5 of master EXTRAM[n]</description>
+                <lsb>5</lsb>
+                <msb>5</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SLAVE6</name>
+                <description>Control access to slave 6 of master EXTRAM[n]</description>
+                <lsb>6</lsb>
+                <msb>6</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>SLAVE7</name>
+                <description>Control access to slave 7 of master EXTRAM[n]</description>
+                <lsb>7</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Allowed</name>
+                    <description>Access to slave is allowed</description>
+                    <value>0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Blocked</name>
+                    <description>Access to slave is blocked</description>
+                    <value>1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
             </fields>
           </register>
         </cluster>
@@ -3805,14 +3290,656 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </cluster>
       </registers>
     </peripheral>
+    <peripheral>
+      <name>FPU_NS</name>
+      <description>FPU control peripheral 0</description>
+      <baseAddress>0x40000000</baseAddress>
+      <alternatePeripheral>DCNF_NS</alternatePeripheral>
+      <headerStructName>FPU</headerStructName>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
+      <addressBlock>
+        <offset>0</offset>
+        <size>0x1000</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <interrupt>
+        <name>FPU</name>
+        <value>0</value>
+      </interrupt>
+      <groupName>FPU</groupName>
+      <size>0x20</size>
+      <registers>
+        <register>
+          <name>EVENTS_INVALIDOPERATION</name>
+          <description>An FPUIOC exception triggered by an invalid operation has occurred in the FPU</description>
+          <addressOffset>0x100</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_INVALIDOPERATION</name>
+              <description>An FPUIOC exception triggered by an invalid operation has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_DIVIDEBYZERO</name>
+          <description>An FPUDZC exception triggered by a floating-point divide-by-zero operation has occurred in the FPU</description>
+          <addressOffset>0x104</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_DIVIDEBYZERO</name>
+              <description>An FPUDZC exception triggered by a floating-point divide-by-zero operation has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_OVERFLOW</name>
+          <description>An FPUOFC exception triggered by a floating-point overflow has occurred in the FPU</description>
+          <addressOffset>0x108</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_OVERFLOW</name>
+              <description>An FPUOFC exception triggered by a floating-point overflow has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_UNDERFLOW</name>
+          <description>An FPUUFC exception triggered by a floating-point underflow has occurred in the FPU</description>
+          <addressOffset>0x10C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_UNDERFLOW</name>
+              <description>An FPUUFC exception triggered by a floating-point underflow has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_INEXACT</name>
+          <description>An FPUIXC exception triggered by an inexact floating-point operation has occurred in the FPU</description>
+          <addressOffset>0x110</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_INEXACT</name>
+              <description>An FPUIXC exception triggered by an inexact floating-point operation has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>EVENTS_DENORMALINPUT</name>
+          <description>An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU</description>
+          <addressOffset>0x114</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_DENORMALINPUT</name>
+              <description>An FPUIDC exception triggered by a denormal floating-point input has occurred in the FPU</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTEN</name>
+          <description>Enable or disable interrupt</description>
+          <addressOffset>0x300</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>INVALIDOPERATION</name>
+              <description>Enable or disable interrupt for event INVALIDOPERATION</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIVIDEBYZERO</name>
+              <description>Enable or disable interrupt for event DIVIDEBYZERO</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>OVERFLOW</name>
+              <description>Enable or disable interrupt for event OVERFLOW</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>UNDERFLOW</name>
+              <description>Enable or disable interrupt for event UNDERFLOW</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>INEXACT</name>
+              <description>Enable or disable interrupt for event INEXACT</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DENORMALINPUT</name>
+              <description>Enable or disable interrupt for event DENORMALINPUT</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTENSET</name>
+          <description>Enable interrupt</description>
+          <addressOffset>0x304</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>INVALIDOPERATION</name>
+              <description>Write '1' to enable interrupt for event INVALIDOPERATION</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIVIDEBYZERO</name>
+              <description>Write '1' to enable interrupt for event DIVIDEBYZERO</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>OVERFLOW</name>
+              <description>Write '1' to enable interrupt for event OVERFLOW</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>UNDERFLOW</name>
+              <description>Write '1' to enable interrupt for event UNDERFLOW</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>INEXACT</name>
+              <description>Write '1' to enable interrupt for event INEXACT</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DENORMALINPUT</name>
+              <description>Write '1' to enable interrupt for event DENORMALINPUT</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>INTENCLR</name>
+          <description>Disable interrupt</description>
+          <addressOffset>0x308</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>INVALIDOPERATION</name>
+              <description>Write '1' to disable interrupt for event INVALIDOPERATION</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DIVIDEBYZERO</name>
+              <description>Write '1' to disable interrupt for event DIVIDEBYZERO</description>
+              <lsb>1</lsb>
+              <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>OVERFLOW</name>
+              <description>Write '1' to disable interrupt for event OVERFLOW</description>
+              <lsb>2</lsb>
+              <msb>2</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>UNDERFLOW</name>
+              <description>Write '1' to disable interrupt for event UNDERFLOW</description>
+              <lsb>3</lsb>
+              <msb>3</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>INEXACT</name>
+              <description>Write '1' to disable interrupt for event INEXACT</description>
+              <lsb>4</lsb>
+              <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DENORMALINPUT</name>
+              <description>Write '1' to disable interrupt for event DENORMALINPUT</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+      </registers>
+    </peripheral>
     <peripheral derivedFrom="DCNF_NS">
       <name>DCNF_S</name>
       <description>Domain configuration management 1</description>
       <baseAddress>0x50000000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=US-->
+    </peripheral>
+    <peripheral derivedFrom="FPU_NS">
+      <name>FPU_S</name>
+      <description>FPU control peripheral 1</description>
+      <baseAddress>0x50000000</baseAddress>
+      <alternatePeripheral>DCNF_S</alternatePeripheral>
+      <!--Security dma=NA-->
+      <!--Security securemapping=US-->
       <interrupt>
-        <name>DCNF</name>
+        <name>FPU</name>
         <value>0</value>
       </interrupt>
     </peripheral>
@@ -6956,9 +7083,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <addressOffset>0x704</addressOffset>
           <register>
             <name>DCDCEN</name>
-            <description>Register enabling DC/DC for main regulator</description>
+            <description>DC/DC enable register for VREGMAIN</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>DCDCEN</name>
@@ -7604,6 +7732,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </fields>
         </register>
         <register>
+          <name>EVENTS_DONE</name>
+          <description>Calibration of LFCLK RC oscillator complete event</description>
+          <addressOffset>0x11C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>EVENTS_DONE</name>
+              <description>Calibration of LFCLK RC oscillator complete event</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>EVENTS_HFCLKAUDIOSTARTED</name>
           <description>HFCLKAUDIO source started</description>
           <addressOffset>0x120</addressOffset>
@@ -7695,6 +7849,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>CHIDX</name>
               <description>Channel that event LFCLKSTARTED will publish to.</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>PUBLISH_DONE</name>
+          <description>Publish configuration for event DONE</description>
+          <addressOffset>0x19C</addressOffset>
+          <access>read-write</access>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>Channel that event DONE will publish to.</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -7822,6 +8007,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Enable or disable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Enable or disable interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -7897,6 +8100,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Write '1' to enable interrupt for event LFCLKSTARTED</description>
               <lsb>1</lsb>
               <msb>1</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>DONE</name>
+              <description>Write '1' to enable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -8036,6 +8266,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Write '1' to disable interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Write '1' to disable interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -8136,6 +8393,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </enumeratedValues>
             </field>
             <field>
+              <name>DONE</name>
+              <description>Read pending status of interrupt for event DONE</description>
+              <lsb>7</lsb>
+              <msb>7</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
               <name>HFCLKAUDIOSTARTED</name>
               <description>Read pending status of interrupt for event HFCLKAUDIOSTARTED</description>
               <lsb>8</lsb>
@@ -8203,7 +8479,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>HFCLKSTAT</name>
-          <description>Which HFCLK source is running</description>
+          <description>Status indicating which HFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance.</description>
           <addressOffset>0x40C</addressOffset>
           <access>read-only</access>
           <fields>
@@ -8291,7 +8567,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </register>
         <register>
           <name>LFCLKSTAT</name>
-          <description>Which LFCLK source is running</description>
+          <description>Status indicating which LFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance.</description>
           <addressOffset>0x418</addressOffset>
           <access>read-only</access>
           <fields>
@@ -43659,139 +43935,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security securemapping=US-->
     </peripheral>
     <peripheral>
-      <name>RCOSC32K_NS</name>
-      <description>32.768 kHz RC oscillator 0</description>
-      <baseAddress>0x40032000</baseAddress>
-      <headerStructName>RCOSC32K</headerStructName>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-      <addressBlock>
-        <offset>0</offset>
-        <size>0x1000</size>
-        <usage>registers</usage>
-      </addressBlock>
-      <groupName>RCOSC32K</groupName>
-      <size>0x20</size>
-      <registers>
-        <register>
-          <name>TASKS_CAL</name>
-          <description>Start calibration of LFRC oscillator</description>
-          <addressOffset>0x0</addressOffset>
-          <access>write-only</access>
-          <fields>
-            <field>
-              <name>TASKS_CAL</name>
-              <description>Start calibration of LFRC oscillator</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Trigger</name>
-                  <description>Trigger task</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>SUBSCRIBE_CAL</name>
-          <description>Subscribe configuration for task CAL</description>
-          <addressOffset>0x80</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>Channel that task CAL will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable subscription</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable subscription</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>EVENTS_DONE</name>
-          <description>Calibration of LFCLK RC oscillator complete event</description>
-          <addressOffset>0x104</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>EVENTS_DONE</name>
-              <description>Calibration of LFCLK RC oscillator complete event</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>NotGenerated</name>
-                  <description>Event not generated</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Generated</name>
-                  <description>Event generated</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-        <register>
-          <name>PUBLISH_DONE</name>
-          <description>Publish configuration for event DONE</description>
-          <addressOffset>0x184</addressOffset>
-          <access>read-write</access>
-          <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>Channel that event DONE will publish to.</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-            </field>
-            <field>
-              <name>EN</name>
-              <lsb>31</lsb>
-              <msb>31</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable publishing</description>
-                  <value>0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable publishing</description>
-                  <value>1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-          </fields>
-        </register>
-      </registers>
-    </peripheral>
-    <peripheral derivedFrom="RCOSC32K_NS">
-      <name>RCOSC32K_S</name>
-      <description>32.768 kHz RC oscillator 1</description>
-      <baseAddress>0x50032000</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=US-->
-    </peripheral>
-    <peripheral>
       <name>QDEC_NS</name>
       <description>Quadrature Decoder 0</description>
       <baseAddress>0x40033000</baseAddress>
@@ -57599,25 +57742,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <registers>
         <register>
           <name>ENABLE</name>
-          <description>Enable CRYPTOCELL subsystem</description>
+          <description>Enable CRYPTOCELL subsystem.</description>
           <addressOffset>0x500</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>ENABLE</name>
-              <description>Enable or disable the CRYPTOCELL subsystem</description>
+              <description>Enable or disable the CRYPTOCELL subsystem.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
-                  <description>CRYPTOCELL subsystem disabled</description>
+                  <description>CRYPTOCELL subsystem disabled.</description>
                   <value>0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Enabled</name>
-                  <description>CRYPTOCELL subsystem enabled</description>
+                  <description>CRYPTOCELL subsystem enabled.</description>
                   <value>1</value>
                 </enumeratedValue>
               </enumeratedValues>

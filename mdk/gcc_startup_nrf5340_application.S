@@ -90,7 +90,7 @@ __isr_vector:
     .long   SysTick_Handler
 
   /* External Interrupts */
-    .long   DCNF_IRQHandler
+    .long   FPU_IRQHandler
     .long   CACHE_IRQHandler
     .long   0                           /*Reserved */
     .long   SPU_IRQHandler
@@ -498,7 +498,7 @@ Default_Handler:
     .set    \handler, Default_Handler
     .endm
 
-    IRQ  DCNF_IRQHandler
+    IRQ  FPU_IRQHandler
     IRQ  CACHE_IRQHandler
     IRQ  SPU_IRQHandler
     IRQ  CLOCK_POWER_IRQHandler

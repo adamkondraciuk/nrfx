@@ -44,11 +44,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   28 
+#define MDK_MINOR_VERSION   29 
 #define MDK_MICRO_VERSION   0 
 
 /* Define NRF51_SERIES for common use in nRF51 series devices. Only if not previously defined. */
-#if defined (NRF51422_XXAA) ||\
+#if defined (NRF51) ||\
+    defined (NRF51422_XXAA) ||\
     defined (NRF51422_XXAB) ||\
     defined (NRF51422_XXAC) ||\
     defined (NRF51801_XXAB) ||\
@@ -123,8 +124,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52811.h"
         #include "nrf52811_bitfields.h"  
         #include "nrf51_to_nrf52810.h"
-        #include "nrf52_to_nrf52810.h"
-        #include "nrf52810_to_nrf52811.h" 
+        #include "nrf52_to_nrf52810.h"   
+        #include "nrf52810_to_nrf52811.h"     
     #elif defined (NRF52832_XXAA) || defined (NRF52832_XXAB)
         #include "nrf52.h"
         #include "nrf52_bitfields.h"

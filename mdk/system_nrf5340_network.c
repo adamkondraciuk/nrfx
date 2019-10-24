@@ -26,13 +26,13 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
+#include "nrf_erratas.h"
 #include "system_nrf5340_network.h"
 
 /*lint ++flb "Enter library region" */
 
 
 #define __SYSTEM_CLOCK      (64000000UL)     /*!< NRF5340 network core uses a fixed System Clock Frequency of 32MHz */
-
 
 #if defined ( __CC_ARM )
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
@@ -62,6 +62,26 @@ void SystemInit(void)
             #pragma diag_default=Pa082
         #endif
     }
+
+    /* Workaround for Errata 49 "SLEEPENTER and SLEEPEXIT events asserted after pin reset" found at the Errata document
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+    if (errata_49())
+    {
+        if (NRF_RESET_NS->RESETREAS & RESET_RESETREAS_RESETPIN_Msk)
+        {
+            NRF_POWER_NS->EVENTS_SLEEPENTER = 0;
+            NRF_POWER_NS->EVENTS_SLEEPEXIT = 0;
+        }
+    }
+
+    /* Workaround for Errata 55 "Bits in RESETREAS are set when they should not be" found at the Errata document
+       for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+    if (errata_55())
+    {
+        if (NRF_RESET_NS->RESETREAS & RESET_RESETREAS_RESETPIN_Msk){
+            NRF_RESET_NS->RESETREAS = ~RESET_RESETREAS_RESETPIN_Msk;
+        }
+    }    
 
     SystemCoreClockUpdate();
 }

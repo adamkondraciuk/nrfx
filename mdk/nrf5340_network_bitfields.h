@@ -810,6 +810,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_NotGenerated (0UL) /*!< Event not generated */
 #define CLOCK_EVENTS_LFCLKSTARTED_EVENTS_LFCLKSTARTED_Generated (1UL) /*!< Event generated */
 
+/* Register: CLOCK_EVENTS_DONE */
+/* Description: Calibration of LFCLK RC oscillator complete event */
+
+/* Bit 0 : Calibration of LFCLK RC oscillator complete event */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Pos (0UL) /*!< Position of EVENTS_DONE field. */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Msk (0x1UL << CLOCK_EVENTS_DONE_EVENTS_DONE_Pos) /*!< Bit mask of EVENTS_DONE field. */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_NotGenerated (0UL) /*!< Event not generated */
+#define CLOCK_EVENTS_DONE_EVENTS_DONE_Generated (1UL) /*!< Event generated */
+
 /* Register: CLOCK_EVENTS_HFCLKAUDIOSTARTED */
 /* Description: HFCLKAUDIO source started */
 
@@ -854,6 +863,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
 #define CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_LFCLKSTARTED_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
 
+/* Register: CLOCK_PUBLISH_DONE */
+/* Description: Publish configuration for event DONE */
+
+/* Bit 31 :   */
+#define CLOCK_PUBLISH_DONE_EN_Pos (31UL) /*!< Position of EN field. */
+#define CLOCK_PUBLISH_DONE_EN_Msk (0x1UL << CLOCK_PUBLISH_DONE_EN_Pos) /*!< Bit mask of EN field. */
+#define CLOCK_PUBLISH_DONE_EN_Disabled (0UL) /*!< Disable publishing */
+#define CLOCK_PUBLISH_DONE_EN_Enabled (1UL) /*!< Enable publishing */
+
+/* Bits 7..0 : Channel that event DONE will publish to. */
+#define CLOCK_PUBLISH_DONE_CHIDX_Pos (0UL) /*!< Position of CHIDX field. */
+#define CLOCK_PUBLISH_DONE_CHIDX_Msk (0xFFUL << CLOCK_PUBLISH_DONE_CHIDX_Pos) /*!< Bit mask of CHIDX field. */
+
 /* Register: CLOCK_PUBLISH_HFCLKAUDIOSTARTED */
 /* Description: Publish configuration for event HFCLKAUDIOSTARTED */
 
@@ -895,6 +917,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTEN_HFCLKAUDIOSTARTED_Disabled (0UL) /*!< Disable */
 #define CLOCK_INTEN_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Enable */
 
+/* Bit 7 : Enable or disable interrupt for event DONE */
+#define CLOCK_INTEN_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTEN_DONE_Msk (0x1UL << CLOCK_INTEN_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTEN_DONE_Disabled (0UL) /*!< Disable */
+#define CLOCK_INTEN_DONE_Enabled (1UL) /*!< Enable */
+
 /* Bit 1 : Enable or disable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTEN_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTEN_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTEN_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -923,6 +951,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Disabled (0UL) /*!< Read: Disabled */
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Read: Enabled */
 #define CLOCK_INTENSET_HFCLKAUDIOSTARTED_Set (1UL) /*!< Enable */
+
+/* Bit 7 : Write '1' to enable interrupt for event DONE */
+#define CLOCK_INTENSET_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTENSET_DONE_Msk (0x1UL << CLOCK_INTENSET_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTENSET_DONE_Disabled (0UL) /*!< Read: Disabled */
+#define CLOCK_INTENSET_DONE_Enabled (1UL) /*!< Read: Enabled */
+#define CLOCK_INTENSET_DONE_Set (1UL) /*!< Enable */
 
 /* Bit 1 : Write '1' to enable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTENSET_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
@@ -955,6 +990,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTENCLR_HFCLKAUDIOSTARTED_Enabled (1UL) /*!< Read: Enabled */
 #define CLOCK_INTENCLR_HFCLKAUDIOSTARTED_Clear (1UL) /*!< Disable */
 
+/* Bit 7 : Write '1' to disable interrupt for event DONE */
+#define CLOCK_INTENCLR_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTENCLR_DONE_Msk (0x1UL << CLOCK_INTENCLR_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTENCLR_DONE_Disabled (0UL) /*!< Read: Disabled */
+#define CLOCK_INTENCLR_DONE_Enabled (1UL) /*!< Read: Enabled */
+#define CLOCK_INTENCLR_DONE_Clear (1UL) /*!< Disable */
+
 /* Bit 1 : Write '1' to disable interrupt for event LFCLKSTARTED */
 #define CLOCK_INTENCLR_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTENCLR_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTENCLR_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -984,6 +1026,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_INTPEND_HFCLKAUDIOSTARTED_NotPending (0UL) /*!< Read: Not pending */
 #define CLOCK_INTPEND_HFCLKAUDIOSTARTED_Pending (1UL) /*!< Read: Pending */
 
+/* Bit 7 : Read pending status of interrupt for event DONE */
+#define CLOCK_INTPEND_DONE_Pos (7UL) /*!< Position of DONE field. */
+#define CLOCK_INTPEND_DONE_Msk (0x1UL << CLOCK_INTPEND_DONE_Pos) /*!< Bit mask of DONE field. */
+#define CLOCK_INTPEND_DONE_NotPending (0UL) /*!< Read: Not pending */
+#define CLOCK_INTPEND_DONE_Pending (1UL) /*!< Read: Pending */
+
 /* Bit 1 : Read pending status of interrupt for event LFCLKSTARTED */
 #define CLOCK_INTPEND_LFCLKSTARTED_Pos (1UL) /*!< Position of LFCLKSTARTED field. */
 #define CLOCK_INTPEND_LFCLKSTARTED_Msk (0x1UL << CLOCK_INTPEND_LFCLKSTARTED_Pos) /*!< Bit mask of LFCLKSTARTED field. */
@@ -1006,7 +1054,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_HFCLKRUN_STATUS_Triggered (1UL) /*!< Task triggered */
 
 /* Register: CLOCK_HFCLKSTAT */
-/* Description: Which HFCLK source is running */
+/* Description: Status indicating which HFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance. */
 
 /* Bit 16 : HFCLK state */
 #define CLOCK_HFCLKSTAT_STATE_Pos (16UL) /*!< Position of STATE field. */
@@ -1036,7 +1084,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define CLOCK_LFCLKRUN_STATUS_Triggered (1UL) /*!< Task triggered */
 
 /* Register: CLOCK_LFCLKSTAT */
-/* Description: Which LFCLK source is running */
+/* Description: Status indicating which LFCLK source is running Note: Value of this register in any CLOCK instance reflects status only due to configurations/actions in that CLOCK instance. */
 
 /* Bit 16 : LFCLK state */
 #define CLOCK_LFCLKSTAT_STATE_Pos (16UL) /*!< Position of STATE field. */
@@ -1808,101 +1856,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Peripheral: DCNF */
 /* Description: Domain configuration management */
 
-/* Register: DCNF_EVENTS_FPUIOC */
-/* Description: Invalid operation exception */
-
-/* Bit 0 : Invalid operation exception */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Pos (0UL) /*!< Position of EVENTS_FPUIOC field. */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Msk (0x1UL << DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Pos) /*!< Bit mask of EVENTS_FPUIOC field. */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIOC_EVENTS_FPUIOC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUDZC */
-/* Description: Division by zero exception */
-
-/* Bit 0 : Division by zero exception */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Pos (0UL) /*!< Position of EVENTS_FPUDZC field. */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Msk (0x1UL << DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Pos) /*!< Bit mask of EVENTS_FPUDZC field. */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUDZC_EVENTS_FPUDZC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUOFC */
-/* Description: Overflow exception */
-
-/* Bit 0 : Overflow exception */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Pos (0UL) /*!< Position of EVENTS_FPUOFC field. */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Msk (0x1UL << DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Pos) /*!< Bit mask of EVENTS_FPUOFC field. */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUOFC_EVENTS_FPUOFC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUUFC */
-/* Description: Underflow exception */
-
-/* Bit 0 : Underflow exception */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Pos (0UL) /*!< Position of EVENTS_FPUUFC field. */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Msk (0x1UL << DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Pos) /*!< Bit mask of EVENTS_FPUUFC field. */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUUFC_EVENTS_FPUUFC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUIXC */
-/* Description: Inexact exception */
-
-/* Bit 0 : Inexact exception */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Pos (0UL) /*!< Position of EVENTS_FPUIXC field. */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Msk (0x1UL << DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Pos) /*!< Bit mask of EVENTS_FPUIXC field. */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIXC_EVENTS_FPUIXC_Generated (1UL) /*!< Event generated */
-
-/* Register: DCNF_EVENTS_FPUIDC */
-/* Description: Input denormal exception */
-
-/* Bit 0 : Input denormal exception */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Pos (0UL) /*!< Position of EVENTS_FPUIDC field. */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Msk (0x1UL << DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Pos) /*!< Bit mask of EVENTS_FPUIDC field. */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_NotGenerated (0UL) /*!< Event not generated */
-#define DCNF_EVENTS_FPUIDC_EVENTS_FPUIDC_Generated (1UL) /*!< Event generated */
-
 /* Register: DCNF_CPUID */
-/* Description: CPU ID number in the system */
+/* Description: CPU ID of this subsystem */
 
-/* Bits 7..0 : CPU ID number in the system */
+/* Bits 7..0 : CPU ID */
 #define DCNF_CPUID_CPUID_Pos (0UL) /*!< Position of CPUID field. */
 #define DCNF_CPUID_CPUID_Msk (0xFFUL << DCNF_CPUID_CPUID_Pos) /*!< Bit mask of CPUID field. */
-#define DCNF_CPUID_CPUID_ApplicationCore (0UL) /*!< Application core */
-#define DCNF_CPUID_CPUID_NetworkCore (1UL) /*!< Network core */
-
-/* Register: DCNF_EXTPERI_PROTECT */
-/* Description: Description cluster: Control access for master connected to AMLI master port EXTPERI[n] */
-
-/* Bits 2..0 : Control access to peripherals from master EXTPERI[n] */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Pos (0UL) /*!< Position of SLAVE field. */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Msk (0x7UL << DCNF_EXTPERI_PROTECT_SLAVE_Pos) /*!< Bit mask of SLAVE field. */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Allowed (0UL) /*!< Access to peripherals is allowed */
-#define DCNF_EXTPERI_PROTECT_SLAVE_Blocked (0x7UL) /*!< Access to peripherals is blocked */
-
-/* Register: DCNF_EXTRAM_PROTECT */
-/* Description: Description cluster: Control access from master connected to AMLI master port EXTRAM[n] */
-
-/* Bit 1 : Control access to slave 1 of master EXTRAM[n] */
-#define DCNF_EXTRAM_PROTECT_SLAVE1_Pos (1UL) /*!< Position of SLAVE1 field. */
-#define DCNF_EXTRAM_PROTECT_SLAVE1_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE1_Pos) /*!< Bit mask of SLAVE1 field. */
-#define DCNF_EXTRAM_PROTECT_SLAVE1_Allowed (0UL) /*!< Access to slave is allowed */
-#define DCNF_EXTRAM_PROTECT_SLAVE1_Blocked (1UL) /*!< Access to slave is blocked */
-
-/* Bit 0 : Control access to slave 0 of master EXTRAM[n] */
-#define DCNF_EXTRAM_PROTECT_SLAVE0_Pos (0UL) /*!< Position of SLAVE0 field. */
-#define DCNF_EXTRAM_PROTECT_SLAVE0_Msk (0x1UL << DCNF_EXTRAM_PROTECT_SLAVE0_Pos) /*!< Bit mask of SLAVE0 field. */
-#define DCNF_EXTRAM_PROTECT_SLAVE0_Allowed (0UL) /*!< Access to slave is allowed */
-#define DCNF_EXTRAM_PROTECT_SLAVE0_Blocked (1UL) /*!< Access to slave is blocked */
-
-/* Register: DCNF_EXTCODE_PROTECT */
-/* Description: Description cluster: Control access from master connected to AMLI master port EXTCODE[n] */
-
-/* Bit 0 : Control access to slave 0 of master EXTCODE[n] */
-#define DCNF_EXTCODE_PROTECT_SLAVE0_Pos (0UL) /*!< Position of SLAVE0 field. */
-#define DCNF_EXTCODE_PROTECT_SLAVE0_Msk (0x1UL << DCNF_EXTCODE_PROTECT_SLAVE0_Pos) /*!< Bit mask of SLAVE0 field. */
-#define DCNF_EXTCODE_PROTECT_SLAVE0_Allowed (0UL) /*!< Access to slave is allowed */
-#define DCNF_EXTCODE_PROTECT_SLAVE0_Blocked (1UL) /*!< Access to slave is blocked */
 
 
 /* Peripheral: DPPIC */
@@ -12134,8 +12093,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: UICR_APPROTECT */
 /* Description: Access port protection */
 
-/* Bits 31..0 : Blocks debugger read/write access to all CPU registers and
-          memory mapped addresses */
+/* Bits 31..0 : Blocks debugger read/write access to all CPU registers and memory mapped
+        addresses Any value except for the enumerations will yield unexpected results. */
 #define UICR_APPROTECT_PALL_Pos (0UL) /*!< Position of PALL field. */
 #define UICR_APPROTECT_PALL_Msk (0xFFFFFFFFUL << UICR_APPROTECT_PALL_Pos) /*!< Bit mask of PALL field. */
 #define UICR_APPROTECT_PALL_Protected (0x00000000UL) /*!< Protected */
@@ -12144,7 +12103,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Register: UICR_ERASEPROTECT */
 /* Description: Erase protection */
 
-/* Bits 31..0 : Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality */
+/* Bits 31..0 : Blocks NVMC ERASEALL and CTRLAP ERASEALL functionality. Any value except for the enumerations will yield unexpected results. */
 #define UICR_ERASEPROTECT_PALL_Pos (0UL) /*!< Position of PALL field. */
 #define UICR_ERASEPROTECT_PALL_Msk (0xFFFFFFFFUL << UICR_ERASEPROTECT_PALL_Pos) /*!< Bit mask of PALL field. */
 #define UICR_ERASEPROTECT_PALL_Protected (0x00000000UL) /*!< Protected */
