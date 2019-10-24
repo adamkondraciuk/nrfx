@@ -25,6 +25,7 @@ typedef struct
     uint8_t        drv_inst_idx; ///< Index of the driver instance. For internal use only.
 } nrfx_spi_t;
 
+#ifndef __NRFX_DOXYGEN__
 enum {
 #if NRFX_CHECK(NRFX_SPI0_ENABLED)
     NRFX_SPI0_INST_IDX,
@@ -37,6 +38,7 @@ enum {
 #endif
     NRFX_SPI_ENABLED_COUNT
 };
+#endif
 
 /** @brief Macro for creating an instance of the SPI master driver. */
 #define NRFX_SPI_INSTANCE(id)                               \
