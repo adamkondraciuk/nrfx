@@ -900,86 +900,8 @@
 #ifndef NRFX_QDEC_ENABLED
 #define NRFX_QDEC_ENABLED 1
 #endif
-// <o> NRFX_QDEC_CONFIG_REPORTPER  - Report period
 
-// <0=> 10 Samples
-// <1=> 40 Samples
-// <2=> 80 Samples
-// <3=> 120 Samples
-// <4=> 160 Samples
-// <5=> 200 Samples
-// <6=> 240 Samples
-// <7=> 280 Samples
-
-#ifndef NRFX_QDEC_CONFIG_REPORTPER
-#define NRFX_QDEC_CONFIG_REPORTPER 0
-#endif
-
-// <o> NRFX_QDEC_CONFIG_SAMPLEPER  - Sample period
-
-// <0=> 128 us
-// <1=> 256 us
-// <2=> 512 us
-// <3=> 1024 us
-// <4=> 2048 us
-// <5=> 4096 us
-// <6=> 8192 us
-// <7=> 16384 us
-
-#ifndef NRFX_QDEC_CONFIG_SAMPLEPER
-#define NRFX_QDEC_CONFIG_SAMPLEPER 7
-#endif
-
-// <o> NRFX_QDEC_CONFIG_PIO_A - A pin  <0-31>
-
-
-#ifndef NRFX_QDEC_CONFIG_PIO_A
-#define NRFX_QDEC_CONFIG_PIO_A 31
-#endif
-
-// <o> NRFX_QDEC_CONFIG_PIO_B - B pin  <0-31>
-
-
-#ifndef NRFX_QDEC_CONFIG_PIO_B
-#define NRFX_QDEC_CONFIG_PIO_B 31
-#endif
-
-// <o> NRFX_QDEC_CONFIG_PIO_LED - LED pin  <0-31>
-
-
-#ifndef NRFX_QDEC_CONFIG_PIO_LED
-#define NRFX_QDEC_CONFIG_PIO_LED 31
-#endif
-
-// <o> NRFX_QDEC_CONFIG_LEDPRE - LED pre
-#ifndef NRFX_QDEC_CONFIG_LEDPRE
-#define NRFX_QDEC_CONFIG_LEDPRE 511
-#endif
-
-// <o> NRFX_QDEC_CONFIG_LEDPOL  - LED polarity
-
-// <0=> Active low
-// <1=> Active high
-
-#ifndef NRFX_QDEC_CONFIG_LEDPOL
-#define NRFX_QDEC_CONFIG_LEDPOL 1
-#endif
-
-// <q> NRFX_QDEC_CONFIG_DBFEN  - Debouncing enable
-
-
-#ifndef NRFX_QDEC_CONFIG_DBFEN
-#define NRFX_QDEC_CONFIG_DBFEN 0
-#endif
-
-// <q> NRFX_QDEC_CONFIG_SAMPLE_INTEN  - Sample ready interrupt enable
-
-
-#ifndef NRFX_QDEC_CONFIG_SAMPLE_INTEN
-#define NRFX_QDEC_CONFIG_SAMPLE_INTEN 0
-#endif
-
-// <o> NRFX_QDEC_CONFIG_IRQ_PRIORITY  - Interrupt priority
+// <o> NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -990,8 +912,8 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_QDEC_CONFIG_IRQ_PRIORITY
-#define NRFX_QDEC_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY 7
 #endif
 
 // <e> NRFX_QDEC_CONFIG_LOG_ENABLED - Enables logging in the module.
