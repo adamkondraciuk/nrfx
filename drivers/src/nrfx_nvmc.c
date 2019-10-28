@@ -53,7 +53,7 @@
  */
 #if defined(NRF52810_XXAA) || defined(NRF52811_XXAA) || defined(NRF52840_XXAA)
     #define NVMC_PAGE_ERASE_DURATION_MS  85
-#elif defined(NRF52833_XXAA) || defined(NRF9160_XXAA) || \
+#elif defined(NRF52820_XXAA) || defined(NRF52833_XXAA) || defined(NRF9160_XXAA) || \
       defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
     #define NVMC_PAGE_ERASE_DURATION_MS  87
 #else
