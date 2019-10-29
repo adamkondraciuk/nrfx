@@ -207,9 +207,9 @@ void nrfx_gpiote_uninit(void);
  * @param[in] pin      Pin.
  * @param[in] p_config Initial configuration.
  *
- * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver is not initialized or the pin is already used.
- * @retval NRFX_ERROR_NO_MEM        No GPIOTE channel is available.
+ * @retval NRFX_SUCCESS      Initialization was successful.
+ * @retval NRFX_ERROR_BUSY   The pin is already used.
+ * @retval NRFX_ERROR_NO_MEM No GPIOTE channel is available.
  */
 nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
                                 nrfx_gpiote_out_config_t const * p_config);
@@ -343,9 +343,9 @@ uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin);
  * @param[in] p_config    Initial configuration.
  * @param[in] evt_handler User function to be called when the configured transition occurs.
  *
- * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver is not initialized or the pin is already used.
- * @retval NRFX_ERROR_NO_MEM        No GPIOTE channel is available.
+ * @retval NRFX_SUCCESS      Initialization was successful.
+ * @retval NRFX_ERROR_BUSY   The pin is already used.
+ * @retval NRFX_ERROR_NO_MEM No GPIOTE channel is available.
  */
 nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
                                nrfx_gpiote_in_config_t const * p_config,

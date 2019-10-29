@@ -233,7 +233,7 @@ nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
 
     if (pin_in_use(pin))
     {
-        err_code = NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_BUSY;
     }
     else
     {
@@ -463,7 +463,7 @@ nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
     /* Only one GPIOTE channel can be assigned to one physical pin. */
     if (pin_in_use_by_gpiote(pin))
     {
-        err_code = NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_BUSY;
     }
     else
     {
