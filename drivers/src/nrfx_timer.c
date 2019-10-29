@@ -10,6 +10,22 @@
 #error "No enabled TIMER instances. Check <nrfx_config.h>."
 #endif
 
+#if NRFX_CHECK(NRFX_TIMER0_ENABLED) && ((1 << 0) & NRFX_TIMERS_USED)
+    #error "TIMER instance 0 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER1_ENABLED) && ((1 << 1) & NRFX_TIMERS_USED)
+    #error "TIMER instance 1 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER2_ENABLED) && ((1 << 2) & NRFX_TIMERS_USED)
+    #error "TIMER instance 2 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER3_ENABLED) && ((1 << 3) & NRFX_TIMERS_USED)
+    #error "TIMER instance 3 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER4_ENABLED) && ((1 << 4) & NRFX_TIMERS_USED)
+    #error "TIMER instance 4 is reserved for use outside of nrfx."
+#endif
+
 #include <nrfx_timer.h>
 
 #define NRFX_LOG_MODULE TIMER
