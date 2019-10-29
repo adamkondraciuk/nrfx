@@ -458,6 +458,9 @@ nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
                                nrfx_gpiote_evt_handler_t       evt_handler)
 {
     NRFX_ASSERT(pin < NUMBER_OF_PINS);
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(p_config);
+
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     /* Only one GPIOTE channel can be assigned to one physical pin. */
