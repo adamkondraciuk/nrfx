@@ -28,8 +28,8 @@ extern "C" {
  * @param[in] bit    Bit index.
  * @param[in] p_mask Pointer to mask with bit fields.
  *
- * @retval true   If the specified bit is set.
- * @retval false  If the specified bit is cleared.
+ * @retval true  If the specified bit is set.
+ * @retval false If the specified bit is cleared.
  */
 __STATIC_INLINE bool nrf_bitmask_bit_is_set(uint32_t bit, void const * p_mask)
 {
@@ -42,8 +42,8 @@ __STATIC_INLINE bool nrf_bitmask_bit_is_set(uint32_t bit, void const * p_mask)
 /**
  * @brief Function for setting a bit in the multi-byte bit mask.
  *
- * @param[in] bit    Bit index.
- * @param[in] p_mask Pointer to mask with bit fields.
+ * @param[in]     bit    Bit index.
+ * @param[in,out] p_mask Pointer to mask with bit fields.
  */
 __STATIC_INLINE void nrf_bitmask_bit_set(uint32_t bit, void * p_mask)
 {
@@ -56,8 +56,8 @@ __STATIC_INLINE void nrf_bitmask_bit_set(uint32_t bit, void * p_mask)
 /**
  * @brief Function for clearing a bit in the multi-byte bit mask.
  *
- * @param[in] bit    Bit index.
- * @param[in] p_mask Pointer to mask with bit fields.
+ * @param[in]     bit    Bit index.
+ * @param[in,out] p_mask Pointer to mask with bit fields.
  */
 __STATIC_INLINE void nrf_bitmask_bit_clear(uint32_t bit, void * p_mask)
 {
@@ -70,21 +70,20 @@ __STATIC_INLINE void nrf_bitmask_bit_clear(uint32_t bit, void * p_mask)
 /**
  * @brief Function for performing bitwise OR operation on two multi-byte bit masks.
  *
- * @param[in] p_mask1    Pointer to the first bit mask.
- * @param[in] p_mask2    Pointer to the second bit mask.
- * @param[in] p_out_mask Pointer to the output bit mask.
- * @param[in] length     Length of output mask in bytes.
+ * @param[in]  p_mask1    Pointer to the first bit mask.
+ * @param[in]  p_mask2    Pointer to the second bit mask.
+ * @param[out] p_out_mask Pointer to the output bit mask.
+ * @param[in]  length     Length of output mask in bytes.
  */
-__STATIC_INLINE void nrf_bitmask_masks_or(void const *   p_mask1,
-                                          void const *   p_mask2,
-                                          void *         p_out_mask,
-                                          uint32_t       length)
+__STATIC_INLINE void nrf_bitmask_masks_or(void const * p_mask1,
+                                          void const * p_mask2,
+                                          void *       p_out_mask,
+                                          size_t       length)
 {
     uint8_t const * p_mask8_1 = (uint8_t const *)p_mask1;
     uint8_t const * p_mask8_2 = (uint8_t const *)p_mask2;
     uint8_t * p_mask8_out = (uint8_t *)p_out_mask;
-    uint32_t i;
-    for (i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
         p_mask8_out[i] = p_mask8_1[i] | p_mask8_2[i];
     }
@@ -93,21 +92,20 @@ __STATIC_INLINE void nrf_bitmask_masks_or(void const *   p_mask1,
 /**
  * @brief Function for performing bitwise AND operation on two multi-byte bit masks.
  *
- * @param[in] p_mask1    Pointer to the first bit mask.
- * @param[in] p_mask2    Pointer to the second bit mask.
- * @param[in] p_out_mask Pointer to the output bit mask.
- * @param[in] length     Length of output mask in bytes.
+ * @param[in]  p_mask1    Pointer to the first bit mask.
+ * @param[in]  p_mask2    Pointer to the second bit mask.
+ * @param[out] p_out_mask Pointer to the output bit mask.
+ * @param[in]  length     Length of output mask in bytes.
  */
-__STATIC_INLINE void nrf_bitmask_masks_and(void const *   p_mask1,
-                                           void const *   p_mask2,
-                                           void *         p_out_mask,
-                                           uint32_t       length)
+__STATIC_INLINE void nrf_bitmask_masks_and(void const * p_mask1,
+                                           void const * p_mask2,
+                                           void *       p_out_mask,
+                                           size_t       length)
 {
     uint8_t const * p_mask8_1 = (uint8_t const *)p_mask1;
     uint8_t const * p_mask8_2 = (uint8_t const *)p_mask2;
     uint8_t * p_mask8_out = (uint8_t *)p_out_mask;
-    uint32_t i;
-    for (i = 0; i < length; i++)
+    for (size_t i = 0; i < length; i++)
     {
         p_mask8_out[i] = p_mask8_1[i] & p_mask8_2[i];
     }
