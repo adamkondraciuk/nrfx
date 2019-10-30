@@ -81,8 +81,6 @@
 
 @defgroup nrf_spu SPU
 
-@defgroup nrf_swi_egu SWI/EGU
-
 @defgroup nrf_temp TEMP
 
 @defgroup nrf_timer TIMER

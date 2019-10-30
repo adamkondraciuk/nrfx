@@ -38,8 +38,6 @@
 
 @ref nrf_spu
 
-@ref nrf_swi_egu
-
 @ref nrf_timer
 
 @ref nrf_twim

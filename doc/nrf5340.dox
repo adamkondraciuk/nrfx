@@ -66,8 +66,6 @@
 
 @ref nrf_spu
 
-@ref nrf_swi_egu
-
 @ref nrf_temp
 
 @ref nrf_timer
