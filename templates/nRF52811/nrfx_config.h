@@ -170,6 +170,41 @@
 
 // </e>
 
+// <e> NRFX_EGU_ENABLED - nrfx_egu - EGU peripheral driver.
+//==========================================================
+#ifndef NRFX_EGU_ENABLED
+#define NRFX_EGU_ENABLED 1
+#endif
+
+// <q> NRFX_EGU0_ENABLED  - Enable EGU0 instance.
+
+#ifndef NRFX_EGU0_ENABLED
+#define NRFX_EGU0_ENABLED 1
+#endif
+
+// <q> NRFX_EGU1_ENABLED  - Enable EGU1 instance.
+
+#ifndef NRFX_EGU1_ENABLED
+#define NRFX_EGU1_ENABLED 1
+#endif
+
+// <o> NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// </e>
+
 // <e> NRFX_GPIOTE_ENABLED - nrfx_gpiote - GPIOTE peripheral driver
 //==========================================================
 #ifndef NRFX_GPIOTE_ENABLED

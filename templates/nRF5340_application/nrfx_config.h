@@ -301,6 +301,65 @@
 
 // </e>
 
+// <e> NRFX_EGU_ENABLED - nrfx_egu - EGU peripheral driver.
+//==========================================================
+#ifndef NRFX_EGU_ENABLED
+#define NRFX_EGU_ENABLED 1
+#endif
+
+// <q> NRFX_EGU0_ENABLED  - Enable EGU0 instance.
+
+#ifndef NRFX_EGU0_ENABLED
+#define NRFX_EGU0_ENABLED 1
+#endif
+
+// <q> NRFX_EGU1_ENABLED  - Enable EGU1 instance.
+
+#ifndef NRFX_EGU1_ENABLED
+#define NRFX_EGU1_ENABLED 1
+#endif
+
+// <q> NRFX_EGU2_ENABLED  - Enable EGU2 instance.
+
+#ifndef NRFX_EGU2_ENABLED
+#define NRFX_EGU2_ENABLED 1
+#endif
+
+// <q> NRFX_EGU3_ENABLED  - Enable EGU3 instance.
+
+#ifndef NRFX_EGU3_ENABLED
+#define NRFX_EGU3_ENABLED 1
+#endif
+
+// <q> NRFX_EGU4_ENABLED  - Enable EGU4 instance.
+
+#ifndef NRFX_EGU4_ENABLED
+#define NRFX_EGU4_ENABLED 1
+#endif
+
+// <q> NRFX_EGU5_ENABLED  - Enable EGU5 instance.
+
+#ifndef NRFX_EGU5_ENABLED
+#define NRFX_EGU5_ENABLED 1
+#endif
+
+// <o> NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// </e>
+
 // <e> NRFX_GPIOTE_ENABLED - nrfx_gpiote - GPIOTE peripheral driver.
 //==========================================================
 #ifndef NRFX_GPIOTE_ENABLED
