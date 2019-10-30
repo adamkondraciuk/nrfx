@@ -6,8 +6,8 @@ The following matrix shows which drivers are supported by specific Nordic SoCs.
 Driver           | nRF51 Series | nRF52810/nRF52811 | nRF52832     | nRF52833     | nRF52840     | nRF5340      | nRF9160      |
 -----------------|--------------|-------------------| -------------| -------------| -------------| -------------| -------------|
 @ref nrf_aar     |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
-@ref nrf_adc     |@tagGreenTick |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_acl     |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |
+@ref nrf_adc     |@tagGreenTick |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_bprot   |@tagRedCross  |@tagGreenTick      |@tagGreenTick |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagRedCross  |
 @ref nrf_cache   |@tagRedCross  |@tagRedCross       |@tagRedCross  |@tagRedCross  |@tagRedCross  |@tagGreenTick |@tagRedCross  |
 @ref nrf_ccm     |@tagGreenTick |@tagGreenTick      |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagGreenTick |@tagRedCross  |

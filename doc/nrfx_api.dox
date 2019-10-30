@@ -5,9 +5,9 @@
 
 @defgroup nrf_aar AAR
 
-@defgroup nrf_adc ADC
-
 @defgroup nrf_acl ACL
+
+@defgroup nrf_adc ADC
 
 @defgroup nrf_bprot BPROT
 
@@ -18,6 +18,8 @@
 @defgroup nrf_clock CLOCK
 
 @defgroup nrf_comp COMP
+
+@defgroup nrf_systick Cortex-M Systick
 
 @defgroup nrf_dppi DPPI
 
@@ -76,8 +78,6 @@
 @defgroup nrf_spis SPIS
 
 @defgroup nrf_spu SPU
-
-@defgroup nrf_systick Cortex-M Systick
 
 @defgroup nrf_swi_egu SWI/EGU
 
