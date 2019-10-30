@@ -214,6 +214,9 @@ extern "C" {
 /** @brief Bitmask that defines PPI groups that are reserved for use outside of the nrfx library. */
 #define NRFX_PPI_GROUPS_USED    0
 
+/** @brief Bitmask that defines EGU instances that are reserved for use outside of the nrfx library. */
+#define NRFX_EGUS_USED          0
+
 /** @brief Bitmask that defines TIMER instances that are reserved for use outside of the nrfx library. */
 #define NRFX_TIMERS_USED        0
 
