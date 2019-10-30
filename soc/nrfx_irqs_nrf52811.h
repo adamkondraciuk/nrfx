@@ -83,22 +83,16 @@ extern "C" {
 #define nrfx_comp_irq_handler       COMP_IRQHandler
 
 // SWI0_EGU0_IRQn
-#define nrfx_swi_0_irq_handler      SWI0_EGU0_IRQHandler
 
 // SWI1_EGU1_IRQn
-#define nrfx_swi_1_irq_handler      SWI1_EGU1_IRQHandler
 
 // SWI2_IRQn
-#define nrfx_swi_2_irq_handler      SWI2_IRQHandler
 
 // SWI3_IRQn
-#define nrfx_swi_3_irq_handler      SWI3_IRQHandler
 
 // SWI4_IRQn
-#define nrfx_swi_4_irq_handler      SWI4_IRQHandler
 
 // SWI5_IRQn
-#define nrfx_swi_5_irq_handler      SWI5_IRQHandler
 
 // PWM0_IRQn
 #define nrfx_pwm_0_irq_handler      PWM0_IRQHandler

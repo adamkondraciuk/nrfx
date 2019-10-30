@@ -60,16 +60,12 @@ extern "C" {
 #define nrfx_timer_2_irq_handler    TIMER2_IRQHandler
 
 // SWI0_IRQn
-#define nrfx_swi_0_irq_handler      SWI0_IRQHandler
 
 // SWI1_IRQn
-#define nrfx_swi_1_irq_handler      SWI1_IRQHandler
 
 // SWI2_IRQn
-#define nrfx_swi_2_irq_handler      SWI2_IRQHandler
 
 // SWI3_IRQn
-#define nrfx_swi_3_irq_handler      SWI3_IRQHandler
 
 #ifdef __cplusplus
 }
