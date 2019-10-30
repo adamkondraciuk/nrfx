@@ -80,8 +80,10 @@ extern "C" {
 #define nrfx_comp_irq_handler       COMP_IRQHandler
 
 // SWI0_EGU0_IRQn
+#define nrfx_egu_0_irq_handler      SWI0_EGU0_IRQHandler
 
 // SWI1_EGU1_IRQn
+#define nrfx_egu_1_irq_handler      SWI1_EGU1_IRQHandler
 
 // SWI2_IRQn
 

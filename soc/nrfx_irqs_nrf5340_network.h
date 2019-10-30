@@ -49,6 +49,7 @@ extern "C" {
 #endif
 
 // EGU0_IRQn
+#define nrfx_egu_0_irq_handler      EGU0_IRQHandler
 
 // RTC1_IRQn
 #define nrfx_rtc_1_irq_handler      RTC1_IRQHandler
