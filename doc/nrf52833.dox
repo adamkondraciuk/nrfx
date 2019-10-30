@@ -16,6 +16,8 @@
 
 @ref nrf_ecb
 
+@ref nrf_egu
+
 @ref nrf_ficr
 
 @ref nrf_gpio

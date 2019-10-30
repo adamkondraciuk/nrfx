@@ -25,6 +25,8 @@
 
 @defgroup nrf_ecb ECB
 
+@defgroup nrf_egu EGU
+
 @defgroup nrf_ficr FICR
 
 @defgroup nrf_fpu FPU
