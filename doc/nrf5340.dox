@@ -22,6 +22,8 @@
 
 @ref nrf_ficr
 
+@ref nrf_fpu
+
 @ref nrf_gpio
 
 @ref nrf_gpiote

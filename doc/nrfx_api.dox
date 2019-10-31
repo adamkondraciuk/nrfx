@@ -27,6 +27,8 @@
 
 @defgroup nrf_ficr FICR
 
+@defgroup nrf_fpu FPU
+
 @defgroup nrf_gpio GPIO
 
 @defgroup nrf_gpiote GPIOTE
