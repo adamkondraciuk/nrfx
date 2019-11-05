@@ -469,13 +469,13 @@ NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg,
 NRF_STATIC_INLINE nrf_ipc_task_t nrf_ipc_send_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < IPC_CH_NUM);
-    return (nrf_ipc_task_t)(offsetof(NRF_IPC_Type, TASKS_SEND[index]));
+    return (nrf_ipc_task_t)(NRFX_OFFSETOF(NRF_IPC_Type, TASKS_SEND[index]));
 }
 
 NRF_STATIC_INLINE nrf_ipc_event_t nrf_ipc_receive_event_get(uint8_t index)
 {
     NRFX_ASSERT(index < IPC_CH_NUM);
-    return (nrf_ipc_event_t)(offsetof(NRF_IPC_Type, EVENTS_RECEIVE[index]));
+    return (nrf_ipc_event_t)(NRFX_OFFSETOF(NRF_IPC_Type, EVENTS_RECEIVE[index]));
 }
 
 #endif // NRF_DECLARE_ONLY
