@@ -3,10 +3,11 @@
 
 /*
  * The MDK provides macros for accessing the peripheral register structures
- * by using their secure and non-secure address mappings (with the names containing
- * the suffix _S or _NS, respectively). Because the nrfx drivers use the macros without
- * any suffixes, you must translate the names. The following section provides configuration
- * for the name translation. It must be modified to reflect the actual configuration set in NRF_SPU.
+ * by using their secure and non-secure address mappings (with the names
+ * containing the suffix _S or _NS, respectively). Because the nrfx drivers
+ * use the macros without any suffixes, you must translate the names.
+ * The following section provides configuration for the name translation.
+ * It must be modified to reflect the actual configuration set in NRF_SPU.
  */
 #define NRF_COMP         NRF_COMP_S
 #define NRF_CLOCK        NRF_CLOCK_S

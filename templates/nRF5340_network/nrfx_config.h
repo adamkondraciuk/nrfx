@@ -3,21 +3,22 @@
 
 /*
  * The MDK provides macros for accessing the peripheral register structures
- * by using their secure and non-secure address mappings (with the names containing
- * the suffix _S or _NS, respectively). Because the nrfx drivers use the macros without
- * any suffixes, you must translate the names. The following section provides configuration
- * for the name translation. It must be modified to reflect the actual configuration set in NRF_SPU.
+ * by using their secure and non-secure address mappings (with the names
+ * containing the suffix _S or _NS, respectively). Because the nrfx drivers
+ * use the macros without any suffixes, you must translate the names.
+ * The following section provides configuration for the name translation.
  */
 #define NRF_ACL        NRF_ACL_NS
+#define NRF_AAR        NRF_AAR_NS
 #define NRF_CCM        NRF_CCM_NS
 #define NRF_CLOCK      NRF_CLOCK_NS
 #define NRF_DPPIC      NRF_DPPIC_NS
+#define NRF_ECB        NRF_ECB_NS
 #define NRF_EGU0       NRF_EGU0_NS
 #define NRF_FICR       NRF_FICR_NS
 #define NRF_GPIOTE     NRF_GPIOTE_NS
 #define NRF_IPC        NRF_IPC_NS
 #define NRF_NVMC       NRF_NVMC_NS
-#define NRF_OTP        NRF_OTP_NS
 #define NRF_P0         NRF_P0_NS
 #define NRF_P1         NRF_P1_NS
 #define NRF_POWER      NRF_POWER_NS
