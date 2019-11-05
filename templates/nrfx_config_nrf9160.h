@@ -1,5 +1,5 @@
-#ifndef NRFX_CONFIG_H__
-#define NRFX_CONFIG_H__
+#ifndef NRFX_CONFIG_NRF9160_H__
+#define NRFX_CONFIG_NRF9160_H__
 
 /*
  * The MDK provides macros for accessing the peripheral register structures
@@ -1594,4 +1594,4 @@
 
 // </h>
 
-#endif // NRFX_CONFIG_H__
+#endif // NRFX_CONFIG_NRF9160_H__

@@ -1,95 +1,16 @@
-#ifndef NRFX_CONFIG_H__
-#define NRFX_CONFIG_H__
-
-/*
- * The MDK provides macros for accessing the peripheral register structures
- * by using their secure and non-secure address mappings (with the names
- * containing the suffix _S or _NS, respectively). Because the nrfx drivers
- * use the macros without any suffixes, you must translate the names.
- * The following section provides configuration for the name translation.
- * It must be modified to reflect the actual configuration set in NRF_SPU.
- */
-#define NRF_COMP         NRF_COMP_S
-#define NRF_CLOCK        NRF_CLOCK_S
-#define NRF_DPPIC        NRF_DPPIC_S
-#define NRF_EGU0         NRF_EGU0_S
-#define NRF_EGU1         NRF_EGU1_S
-#define NRF_EGU2         NRF_EGU2_S
-#define NRF_EGU3         NRF_EGU3_S
-#define NRF_EGU4         NRF_EGU4_S
-#define NRF_EGU5         NRF_EGU5_S
-#define NRF_FPU          NRF_FPU_S
-#define NRF_P0           NRF_P0_S
-#define NRF_P1           NRF_P1_S
-#define NRF_I2S          NRF_I2S0_S
-#define NRF_IPC          NRF_IPC_S
-#define NRF_KMU          NRF_KMU_S
-#define NRF_LPCOMP       NRF_LPCOMP_S
-#define NRF_MUTEX        NRF_MUTEX_S
-#define NRF_NFCT         NRF_NFCT_S
-#define NRF_NVMC         NRF_NVMC_S
-#define NRF_POWER        NRF_POWER_S
-#define NRF_PWM0         NRF_PWM0_S
-#define NRF_PWM1         NRF_PWM1_S
-#define NRF_PWM2         NRF_PWM2_S
-#define NRF_QDEC         NRF_QDEC_S
-#define NRF_QSPI         NRF_QSPI_S
-#define NRF_REGULATORS   NRF_REGULATORS_S
-#define NRF_RESET        NRF_RESET_S
-#define NRF_RTC0         NRF_RTC0_S
-#define NRF_RTC1         NRF_RTC1_S
-#define NRF_SAADC        NRF_SAADC_S
-#define NRF_SPIM0        NRF_SPIM0_S
-#define NRF_SPIM1        NRF_SPIM1_S
-#define NRF_SPIM2        NRF_SPIM2_S
-#define NRF_SPIS0        NRF_SPIS0_S
-#define NRF_SPIS1        NRF_SPIS1_S
-#define NRF_TIMER0       NRF_TIMER0_S
-#define NRF_TIMER1       NRF_TIMER1_S
-#define NRF_TIMER2       NRF_TIMER2_S
-#define NRF_TWIM0        NRF_TWIM0_S
-#define NRF_TWIM1        NRF_TWIM1_S
-#define NRF_TWIS0        NRF_TWIS0_S
-#define NRF_TWIS1        NRF_TWIS1_S
-#define NRF_UARTE0       NRF_UARTE0_S
-#define NRF_UARTE1       NRF_UARTE1_S
-#define NRF_USBD         NRF_USBD_S
-#define NRF_USBREGULATOR NRF_USBREGULATOR_S
-#define NRF_VMC          NRF_VMC_S
-#define NRF_WDT0         NRF_WDT0_S
-#define NRF_WDT1         NRF_WDT1_S
-
-/* Unchangable configuration. */
-#define NRF_CACHE      NRF_CACHE_S
-#define NRF_CACHEINFO  NRF_CACHEINFO_S
-#define NRF_CACHEDATA  NRF_CACHEDATA_S
-#define NRF_CRYPTOCELL NRF_CRYPTOCELL_S
-#define NRF_FICR       NRF_FICR_S
-#define NRF_GPIOTE0    NRF_GPIOTE0_S
-#define NRF_GPIOTE1    NRF_GPIOTE1_NS
-#define NRF_SPU        NRF_SPU_S
-#define NRF_UICR       NRF_UICR_S
-
-/* Fixups for GPIOTE/WDT/PDM HAL and driver. */
-#define NRF_GPIOTE        NRF_GPIOTE0_S
-#define GPIOTE_IRQn       GPIOTE0_IRQn
-#define GPIOTE_IRQHandler GPIOTE0_IRQHandler
-
-
-#define NRF_PDM        NRF_PDM0_S
-#define PDM_IRQn       PDM0_IRQn
-#define PDM_IRQHandler PDM0_IRQHandler
+#ifndef NRFX_CONFIG_NRF52832_H__
+#define NRFX_CONFIG_NRF52832_H__
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
 // <h> nRF_Drivers
 
-// <e> NRFX_CLOCK_ENABLED - nrfx_clock - CLOCK peripheral driver.
+// <e> NRFX_CLOCK_ENABLED - nrfx_clock - CLOCK peripheral driver
 //==========================================================
 #ifndef NRFX_CLOCK_ENABLED
 #define NRFX_CLOCK_ENABLED 1
 #endif
-// <o> NRFX_CLOCK_CONFIG_LF_SRC  - LF clock source.
+// <o> NRFX_CLOCK_CONFIG_LF_SRC  - LF Clock Source
 
 // <0=> RC
 // <1=> XTAL
@@ -101,7 +22,13 @@
 #define NRFX_CLOCK_CONFIG_LF_SRC 1
 #endif
 
-// <o> NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <q> NRFX_CLOCK_CONFIG_LF_CAL_ENABLED  - Enables LF Clock Calibration Support
+
+#ifndef NRFX_CLOCK_CONFIG_LF_CAL_ENABLED
+#define NRFX_CLOCK_CONFIG_LF_CAL_ENABLED 0
+#endif
+
+// <o> NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -121,7 +48,7 @@
 #ifndef NRFX_CLOCK_CONFIG_LOG_ENABLED
 #define NRFX_CLOCK_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_CLOCK_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_CLOCK_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -243,64 +170,6 @@
 
 // </e>
 
-// <e> NRFX_DPPI_ENABLED - nrfx_dppi - DPPI allocator.
-//==========================================================
-#ifndef NRFX_DPPI_ENABLED
-#define NRFX_DPPI_ENABLED 1
-#endif
-// <e> NRFX_DPPI_CONFIG_LOG_ENABLED - Enables logging in the module.
-//==========================================================
-#ifndef NRFX_DPPI_CONFIG_LOG_ENABLED
-#define NRFX_DPPI_CONFIG_LOG_ENABLED 0
-#endif
-// <o> NRFX_DPPI_CONFIG_LOG_LEVEL  - Default severity level.
-
-// <0=> Off
-// <1=> Error
-// <2=> Warning
-// <3=> Info
-// <4=> Debug
-
-#ifndef NRFX_DPPI_CONFIG_LOG_LEVEL
-#define NRFX_DPPI_CONFIG_LOG_LEVEL 3
-#endif
-
-// <o> NRFX_DPPI_CONFIG_INFO_COLOR  - ANSI escape code prefix.
-
-// <0=> Default
-// <1=> Black
-// <2=> Red
-// <3=> Green
-// <4=> Yellow
-// <5=> Blue
-// <6=> Magenta
-// <7=> Cyan
-// <8=> White
-
-#ifndef NRFX_DPPI_CONFIG_INFO_COLOR
-#define NRFX_DPPI_CONFIG_INFO_COLOR 0
-#endif
-
-// <o> NRFX_DPPI_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
-
-// <0=> Default
-// <1=> Black
-// <2=> Red
-// <3=> Green
-// <4=> Yellow
-// <5=> Blue
-// <6=> Magenta
-// <7=> Cyan
-// <8=> White
-
-#ifndef NRFX_DPPI_CONFIG_DEBUG_COLOR
-#define NRFX_DPPI_CONFIG_DEBUG_COLOR 0
-#endif
-
-// </e>
-
-// </e>
-
 // <e> NRFX_EGU_ENABLED - nrfx_egu - EGU peripheral driver.
 //==========================================================
 #ifndef NRFX_EGU_ENABLED
@@ -360,17 +229,17 @@
 
 // </e>
 
-// <e> NRFX_GPIOTE_ENABLED - nrfx_gpiote - GPIOTE peripheral driver.
+// <e> NRFX_GPIOTE_ENABLED - nrfx_gpiote - GPIOTE peripheral driver
 //==========================================================
 #ifndef NRFX_GPIOTE_ENABLED
 #define NRFX_GPIOTE_ENABLED 1
 #endif
-// <o> NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS - Number of lower power input pins.
+// <o> NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS - Number of lower power input pins
 #ifndef NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS 1
 #endif
 
-// <o> NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -390,7 +259,7 @@
 #ifndef NRFX_GPIOTE_CONFIG_LOG_ENABLED
 #define NRFX_GPIOTE_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_GPIOTE_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_GPIOTE_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -438,13 +307,13 @@
 
 // </e>
 
-// <e> NRFX_I2S_ENABLED - nrfx_i2s - I2S peripheral driver.
+// <e> NRFX_I2S_ENABLED - nrfx_i2s - I2S peripheral driver
 //==========================================================
 #ifndef NRFX_I2S_ENABLED
 #define NRFX_I2S_ENABLED 1
 #endif
 
-// <o> NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -464,7 +333,7 @@
 #ifndef NRFX_I2S_CONFIG_LOG_ENABLED
 #define NRFX_I2S_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_I2S_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_I2S_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -509,14 +378,6 @@
 #endif
 
 // </e>
-
-// </e>
-
-// <e> NRFX_IPC_ENABLED - nrfx_ipc - IPC peripheral driver
-//==========================================================
-#ifndef NRFX_IPC_ENABLED
-#define NRFX_IPC_ENABLED 1
-#endif
 
 // </e>
 
@@ -619,9 +480,11 @@
 // <0=> 0
 // <1=> 1
 // <2=> 2
+// <3=> 3
+// <4=> 4
 
 #ifndef NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID
-#define NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID 2
+#define NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID 4
 #endif
 
 // <e> NRFX_NFCT_CONFIG_LOG_ENABLED - Enables logging in the module.
@@ -685,13 +548,13 @@
 
 // </e>
 
-// <e> NRFX_PDM_ENABLED - nrfx_pdm - PDM peripheral driver.
+// <e> NRFX_PDM_ENABLED - nrfx_pdm - PDM peripheral driver
 //==========================================================
 #ifndef NRFX_PDM_ENABLED
 #define NRFX_PDM_ENABLED 1
 #endif
 
-// <o> NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -711,7 +574,7 @@
 #ifndef NRFX_PDM_CONFIG_LOG_ENABLED
 #define NRFX_PDM_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_PDM_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_PDM_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -759,12 +622,12 @@
 
 // </e>
 
-// <e> NRFX_POWER_ENABLED - nrfx_power - POWER peripheral driver.
+// <e> NRFX_POWER_ENABLED - nrfx_power - POWER peripheral driver
 //==========================================================
 #ifndef NRFX_POWER_ENABLED
 #define NRFX_POWER_ENABLED 1
 #endif
-// <o> NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -781,7 +644,65 @@
 
 // </e>
 
-// <e> NRFX_PRS_ENABLED - nrfx_prs - Peripheral Resource Sharing (PRS) module.
+// <e> NRFX_PPI_ENABLED - nrfx_ppi - PPI peripheral allocator
+//==========================================================
+#ifndef NRFX_PPI_ENABLED
+#define NRFX_PPI_ENABLED 1
+#endif
+// <e> NRFX_PPI_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_PPI_CONFIG_LOG_ENABLED
+#define NRFX_PPI_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_PPI_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_PPI_CONFIG_LOG_LEVEL
+#define NRFX_PPI_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_PPI_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_PPI_CONFIG_INFO_COLOR
+#define NRFX_PPI_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_PPI_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_PPI_CONFIG_DEBUG_COLOR
+#define NRFX_PPI_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> NRFX_PRS_ENABLED - nrfx_prs - Peripheral Resource Sharing module
 //==========================================================
 #ifndef NRFX_PRS_ENABLED
 #define NRFX_PRS_ENABLED 1
@@ -807,13 +728,26 @@
 #define NRFX_PRS_BOX_2_ENABLED 1
 #endif
 
+// <q> NRFX_PRS_BOX_3_ENABLED  - Enables box 3 in the module.
+
+
+#ifndef NRFX_PRS_BOX_3_ENABLED
+#define NRFX_PRS_BOX_3_ENABLED 1
+#endif
+
+// <q> NRFX_PRS_BOX_4_ENABLED  - Enables box 4 in the module.
+
+
+#ifndef NRFX_PRS_BOX_4_ENABLED
+#define NRFX_PRS_BOX_4_ENABLED 1
+#endif
 
 // <e> NRFX_PRS_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
 #ifndef NRFX_PRS_CONFIG_LOG_ENABLED
 #define NRFX_PRS_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_PRS_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_PRS_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -861,33 +795,31 @@
 
 // </e>
 
-// <e> NRFX_PWM_ENABLED - nrfx_pwm - PWM peripheral driver.
+// <e> NRFX_PWM_ENABLED - nrfx_pwm - PWM peripheral driver
 //==========================================================
 #ifndef NRFX_PWM_ENABLED
 #define NRFX_PWM_ENABLED 1
 #endif
-// <q> NRFX_PWM0_ENABLED  - Enables PWM0 instance.
 
+// <q> NRFX_PWM0_ENABLED  - Enable PWM0 instance
 
 #ifndef NRFX_PWM0_ENABLED
 #define NRFX_PWM0_ENABLED 1
 #endif
 
-// <q> NRFX_PWM1_ENABLED  - Enables PWM1 instance.
-
+// <q> NRFX_PWM1_ENABLED  - Enable PWM1 instance
 
 #ifndef NRFX_PWM1_ENABLED
 #define NRFX_PWM1_ENABLED 1
 #endif
 
-// <q> NRFX_PWM2_ENABLED  - Enables PWM2 instance.
-
+// <q> NRFX_PWM2_ENABLED  - Enable PWM2 instance
 
 #ifndef NRFX_PWM2_ENABLED
 #define NRFX_PWM2_ENABLED 1
 #endif
 
-// <o> NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -907,7 +839,7 @@
 #ifndef NRFX_PWM_CONFIG_LOG_ENABLED
 #define NRFX_PWM_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_PWM_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_PWM_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -949,6 +881,34 @@
 
 #ifndef NRFX_PWM_CONFIG_DEBUG_COLOR
 #define NRFX_PWM_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// <e> NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED - Enables nRF52 Anomaly 109 workaround for PWM.
+
+// <i> The workaround uses interrupts to wake up the CPU and ensure
+// <i> it is active when PWM is about to start a DMA transfer. For
+// <i> initial transfer, done when a playback is started via PPI,
+// <i> a specific EGU instance is used to generate the interrupt.
+// <i> During the playback, the PWM interrupt triggered on SEQEND
+// <i> event of a preceding sequence is used to protect the transfer
+// <i> done for the next sequence to be played.
+//==========================================================
+#ifndef NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+// <o> NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE  - EGU instance used by the nRF52 Anomaly 109 workaround for PWM.
+
+// <0=> EGU0
+// <1=> EGU1
+// <2=> EGU2
+// <3=> EGU3
+// <4=> EGU4
+// <5=> EGU5
+
+#ifndef NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
+#define NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE 5
 #endif
 
 // </e>
@@ -1029,13 +989,13 @@
 
 // </e>
 
-// <e> NRFX_QSPI_ENABLED - nrfx_qspi - QSPI peripheral driver
+// <e> NRFX_RNG_ENABLED - nrfx_rng - RNG peripheral driver
 //==========================================================
-#ifndef NRFX_QSPI_ENABLED
-#define NRFX_QSPI_ENABLED 1
+#ifndef NRFX_RNG_ENABLED
+#define NRFX_RNG_ENABLED 1
 #endif
 
-// <o> NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+// <o> NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1046,32 +1006,87 @@
 // <6=> 6
 // <7=> 7
 
-#ifndef NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY
-#define NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#ifndef NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> NRFX_RNG_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_RNG_CONFIG_LOG_ENABLED
+#define NRFX_RNG_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_RNG_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_RNG_CONFIG_LOG_LEVEL
+#define NRFX_RNG_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_RNG_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_RNG_CONFIG_INFO_COLOR
+#define NRFX_RNG_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_RNG_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_RNG_CONFIG_DEBUG_COLOR
+#define NRFX_RNG_CONFIG_DEBUG_COLOR 0
 #endif
 
 // </e>
 
-// <e> NRFX_RTC_ENABLED - nrfx_rtc - RTC peripheral driver.
+// </e>
+
+// <e> NRFX_RTC_ENABLED - nrfx_rtc - RTC peripheral driver
 //==========================================================
 #ifndef NRFX_RTC_ENABLED
 #define NRFX_RTC_ENABLED 1
 #endif
-// <q> NRFX_RTC0_ENABLED  - Enables RTC0 instance.
-
+// <q> NRFX_RTC0_ENABLED  - Enable RTC0 instance
 
 #ifndef NRFX_RTC0_ENABLED
 #define NRFX_RTC0_ENABLED 1
 #endif
 
-// <q> NRFX_RTC1_ENABLED  - Enables RTC1 instance.
-
+// <q> NRFX_RTC1_ENABLED  - Enable RTC1 instance
 
 #ifndef NRFX_RTC1_ENABLED
 #define NRFX_RTC1_ENABLED 1
 #endif
 
-// <o> NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <q> NRFX_RTC2_ENABLED  - Enable RTC2 instance
+
+#ifndef NRFX_RTC2_ENABLED
+#define NRFX_RTC2_ENABLED 1
+#endif
+
+// <o> NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1091,7 +1106,7 @@
 #ifndef NRFX_RTC_CONFIG_LOG_ENABLED
 #define NRFX_RTC_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_RTC_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_RTC_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1139,13 +1154,13 @@
 
 // </e>
 
-// <e> NRFX_SAADC_ENABLED - nrfx_saadc - SAADC peripheral driver.
+// <e> NRFX_SAADC_ENABLED - nrfx_saadc - SAADC peripheral driver
 //==========================================================
 #ifndef NRFX_SAADC_ENABLED
 #define NRFX_SAADC_ENABLED 1
 #endif
 
-// <o> NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1165,7 +1180,7 @@
 #ifndef NRFX_SAADC_CONFIG_LOG_ENABLED
 #define NRFX_SAADC_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_SAADC_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_SAADC_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1213,34 +1228,33 @@
 
 // </e>
 
-// <e> NRFX_SPIM_ENABLED - nrfx_spim - SPIM peripheral driver.
+// <e> NRFX_SPIM_ENABLED - nrfx_spim - SPIM peripheral driver
 //==========================================================
 #ifndef NRFX_SPIM_ENABLED
 #define NRFX_SPIM_ENABLED 1
 #endif
-// <q> NRFX_SPIM0_ENABLED  - Enables SPIM0 instance.
+// <q> NRFX_SPIM0_ENABLED  - Enable SPIM0 instance
 
 
 #ifndef NRFX_SPIM0_ENABLED
 #define NRFX_SPIM0_ENABLED 1
 #endif
 
-// <q> NRFX_SPIM1_ENABLED  - Enables SPIM1 instance.
+// <q> NRFX_SPIM1_ENABLED  - Enable SPIM1 instance
 
 
 #ifndef NRFX_SPIM1_ENABLED
 #define NRFX_SPIM1_ENABLED 1
 #endif
 
-// <q> NRFX_SPIM2_ENABLED  - Enables SPIM2 instance.
+// <q> NRFX_SPIM2_ENABLED  - Enable SPIM2 instance
 
 
 #ifndef NRFX_SPIM2_ENABLED
 #define NRFX_SPIM2_ENABLED 1
 #endif
 
-
-// <o> NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1260,7 +1274,7 @@
 #ifndef NRFX_SPIM_CONFIG_LOG_ENABLED
 #define NRFX_SPIM_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_SPIM_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_SPIM_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1306,28 +1320,49 @@
 
 // </e>
 
+// <q> NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED  - Enables nRF52 anomaly 109 workaround for SPIM.
+
+
+// <i> The workaround uses interrupts to wake up the CPU by catching
+// <i> a start event of zero-length transmission to start the clock. This
+// <i> ensures that the DMA transfer will be executed without issues and
+// <i> that the proper transfer will be started. See more in the Errata
+// <i> document or Anomaly 109 Addendum located at
+// <i> https://infocenter.nordicsemi.com/
+
+#ifndef NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
 // </e>
 
-// <e> NRFX_SPIS_ENABLED - nrfx_spis - SPIS peripheral driver.
+// <e> NRFX_SPIS_ENABLED - nrfx_spis - SPIS peripheral driver
 //==========================================================
 #ifndef NRFX_SPIS_ENABLED
 #define NRFX_SPIS_ENABLED 1
 #endif
-// <q> NRFX_SPIS0_ENABLED  - Enables SPIS0 instance.
+// <q> NRFX_SPIS0_ENABLED  - Enable SPIS0 instance
 
 
 #ifndef NRFX_SPIS0_ENABLED
 #define NRFX_SPIS0_ENABLED 1
 #endif
 
-// <q> NRFX_SPIS1_ENABLED  - Enables SPIS1 instance.
+// <q> NRFX_SPIS1_ENABLED  - Enable SPIS1 instance
 
 
 #ifndef NRFX_SPIS1_ENABLED
 #define NRFX_SPIS1_ENABLED 1
 #endif
 
-// <o> NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <q> NRFX_SPIS2_ENABLED  - Enable SPIS2 instance
+
+
+#ifndef NRFX_SPIS2_ENABLED
+#define NRFX_SPIS2_ENABLED 1
+#endif
+
+// <o> NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1347,7 +1382,7 @@
 #ifndef NRFX_SPIS_CONFIG_LOG_ENABLED
 #define NRFX_SPIS_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_SPIS_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_SPIS_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1393,42 +1428,183 @@
 
 // </e>
 
+// <q> NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED  - Enables nRF52 Anomaly 109 workaround for SPIS.
+
+
+// <i> The workaround uses a GPIOTE channel to generate interrupts
+// <i> on falling edges detected on the CSN line. This will make
+// <i> the CPU active for the moment when SPIS starts DMA transfers,
+// <i> and this way the transfers will be protected.
+// <i> This workaround uses GPIOTE driver, so this driver must be
+// <i> enabled as well.
+
+#ifndef NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
 // </e>
 
-// <q> NRFX_SYSTICK_ENABLED  - nrfx_systick - ARM(R) SysTick driver.
+// <e> NRFX_SPI_ENABLED - nrfx_spi - SPI peripheral driver
+//==========================================================
+#ifndef NRFX_SPI_ENABLED
+#define NRFX_SPI_ENABLED 1
+#endif
+// <q> NRFX_SPI0_ENABLED  - Enable SPI0 instance
+
+
+#ifndef NRFX_SPI0_ENABLED
+#define NRFX_SPI0_ENABLED 1
+#endif
+
+// <q> NRFX_SPI1_ENABLED  - Enable SPI1 instance
+
+
+#ifndef NRFX_SPI1_ENABLED
+#define NRFX_SPI1_ENABLED 1
+#endif
+
+// <q> NRFX_SPI2_ENABLED  - Enable SPI2 instance
+
+
+#ifndef NRFX_SPI2_ENABLED
+#define NRFX_SPI2_ENABLED 1
+#endif
+
+// <o> NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> NRFX_SPI_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_SPI_CONFIG_LOG_ENABLED
+#define NRFX_SPI_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_SPI_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_SPI_CONFIG_LOG_LEVEL
+#define NRFX_SPI_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_SPI_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_SPI_CONFIG_INFO_COLOR
+#define NRFX_SPI_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_SPI_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_SPI_CONFIG_DEBUG_COLOR
+#define NRFX_SPI_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <q> NRFX_SYSTICK_ENABLED  - nrfx_systick - ARM(R) SysTick driver
 
 
 #ifndef NRFX_SYSTICK_ENABLED
 #define NRFX_SYSTICK_ENABLED 1
 #endif
 
-// <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver.
+// <e> NRFX_TEMP_ENABLED - nrfx_temp - TEMP peripheral driver
+//==========================================================
+#ifndef NRFX_TEMP_ENABLED
+#define NRFX_TEMP_ENABLED 1
+#endif
+
+// <o> NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// </e>
+
+// <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver
 //==========================================================
 #ifndef NRFX_TIMER_ENABLED
 #define NRFX_TIMER_ENABLED 1
 #endif
-// <q> NRFX_TIMER0_ENABLED  - Enables TIMER0 instance.
 
+// <q> NRFX_TIMER0_ENABLED  - Enable TIMER0 instance
 
 #ifndef NRFX_TIMER0_ENABLED
 #define NRFX_TIMER0_ENABLED 1
 #endif
 
-// <q> NRFX_TIMER1_ENABLED  - Enables TIMER1 instance.
-
+// <q> NRFX_TIMER1_ENABLED  - Enable TIMER1 instance
 
 #ifndef NRFX_TIMER1_ENABLED
 #define NRFX_TIMER1_ENABLED 1
 #endif
 
-// <q> NRFX_TIMER2_ENABLED  - Enables TIMER2 instance.
-
+// <q> NRFX_TIMER2_ENABLED  - Enable TIMER2 instance
 
 #ifndef NRFX_TIMER2_ENABLED
 #define NRFX_TIMER2_ENABLED 1
 #endif
 
-// <o> NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <q> NRFX_TIMER3_ENABLED  - Enable TIMER3 instance
+
+#ifndef NRFX_TIMER3_ENABLED
+#define NRFX_TIMER3_ENABLED 1
+#endif
+
+// <q> NRFX_TIMER4_ENABLED  - Enable TIMER4 instance
+
+#ifndef NRFX_TIMER4_ENABLED
+#define NRFX_TIMER4_ENABLED 1
+#endif
+
+// <o> NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1448,7 +1624,7 @@
 #ifndef NRFX_TIMER_CONFIG_LOG_ENABLED
 #define NRFX_TIMER_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_TIMER_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_TIMER_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1496,26 +1672,25 @@
 
 // </e>
 
-// <e> NRFX_TWIM_ENABLED - nrfx_twim - TWIM peripheral driver.
+// <e> NRFX_TWIM_ENABLED - nrfx_twim - TWIM peripheral driver
 //==========================================================
 #ifndef NRFX_TWIM_ENABLED
 #define NRFX_TWIM_ENABLED 1
 #endif
-// <q> NRFX_TWIM0_ENABLED  - Enables TWIM0 instance.
 
+// <q> NRFX_TWIM0_ENABLED  - Enable TWIM0 instance
 
 #ifndef NRFX_TWIM0_ENABLED
 #define NRFX_TWIM0_ENABLED 1
 #endif
 
-// <q> NRFX_TWIM1_ENABLED  - Enables TWIM1 instance.
-
+// <q> NRFX_TWIM1_ENABLED  - Enable TWIM1 instance
 
 #ifndef NRFX_TWIM1_ENABLED
 #define NRFX_TWIM1_ENABLED 1
 #endif
 
-// <o> NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1535,7 +1710,7 @@
 #ifndef NRFX_TWIM_CONFIG_LOG_ENABLED
 #define NRFX_TWIM_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_TWIM_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_TWIM_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1581,27 +1756,40 @@
 
 // </e>
 
+// <q> NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED  - Enables nRF52 anomaly 109 workaround for TWIM.
+
+
+// <i> The workaround uses interrupts to wake up the CPU by catching
+// <i> the start event of zero-frequency transmission, clear the
+// <i> peripheral, set desired frequency, start the peripheral, and
+// <i> the proper transmission. See more in the Errata document or
+// <i> Anomaly 109 Addendum located at https://infocenter.nordicsemi.com/
+
+#ifndef NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
 // </e>
 
-// <e> NRFX_TWIS_ENABLED - nrfx_twis - TWIS peripheral driver.
+// <e> NRFX_TWIS_ENABLED - nrfx_twis - TWIS peripheral driver
 //==========================================================
 #ifndef NRFX_TWIS_ENABLED
 #define NRFX_TWIS_ENABLED 1
 #endif
 
-// <q> NRFX_TWIS0_ENABLED  - Enables TWIS0 instance.
+// <q> NRFX_TWIS0_ENABLED  - Enable TWIS0 instance
 
 #ifndef NRFX_TWIS0_ENABLED
 #define NRFX_TWIS0_ENABLED 1
 #endif
 
-// <q> NRFX_TWIS1_ENABLED  - Enables TWIS1 instance.
+// <q> NRFX_TWIS1_ENABLED  - Enable TWIS1 instance
 
 #ifndef NRFX_TWIS1_ENABLED
 #define NRFX_TWIS1_ENABLED 1
 #endif
 
-// <q> NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY  - Assumes that any instance would be initialized only once.
+// <q> NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY  - Assume that any instance would be initialized only once
 
 // <i> Optimization flag. Registers used by TWIS are shared by other peripherals. Normally, during initialization driver tries to clear all registers to known state before doing the initialization itself. This gives initialization safe procedure, no matter when it would be called. If you activate TWIS only once and do never uninitialize it - set this flag to 1 what gives more optimal code.
 
@@ -1609,7 +1797,7 @@
 #define NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY 0
 #endif
 
-// <q> NRFX_TWIS_NO_SYNC_MODE  - Removes support for synchronous mode.
+// <q> NRFX_TWIS_NO_SYNC_MODE  - Remove support for synchronous mode
 
 // <i> Synchronous mode would be used in specific situations. And it uses some additional code and data memory to safely process state machine by polling it in status functions. If this functionality is not required it may be disabled to free some resources.
 
@@ -1617,7 +1805,7 @@
 #define NRFX_TWIS_NO_SYNC_MODE 0
 #endif
 
-// <o> NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1637,7 +1825,7 @@
 #ifndef NRFX_TWIS_CONFIG_LOG_ENABLED
 #define NRFX_TWIS_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_TWIS_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_TWIS_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1685,22 +1873,105 @@
 
 // </e>
 
-// <e> NRFX_UARTE_ENABLED - nrfx_uarte - UARTE peripheral driver.
+// <e> NRFX_TWI_ENABLED - nrfx_twi - TWI peripheral driver
+//==========================================================
+#ifndef NRFX_TWI_ENABLED
+#define NRFX_TWI_ENABLED 1
+#endif
+
+// <q> NRFX_TWI0_ENABLED  - Enable TWI0 instance
+
+#ifndef NRFX_TWI0_ENABLED
+#define NRFX_TWI0_ENABLED 1
+#endif
+
+// <q> NRFX_TWI1_ENABLED  - Enable TWI1 instance
+
+#ifndef NRFX_TWI1_ENABLED
+#define NRFX_TWI1_ENABLED 1
+#endif
+
+// <o> NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> NRFX_TWI_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_TWI_CONFIG_LOG_ENABLED
+#define NRFX_TWI_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_TWI_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_TWI_CONFIG_LOG_LEVEL
+#define NRFX_TWI_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_TWI_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_TWI_CONFIG_INFO_COLOR
+#define NRFX_TWI_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_TWI_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_TWI_CONFIG_DEBUG_COLOR
+#define NRFX_TWI_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> NRFX_UARTE_ENABLED - nrfx_uarte - UARTE peripheral driver
 //==========================================================
 #ifndef NRFX_UARTE_ENABLED
 #define NRFX_UARTE_ENABLED 1
 #endif
-// <o> NRFX_UARTE0_ENABLED - Enables UARTE0 instances
+
+// <q> NRFX_UARTE0_ENABLED - Enable UARTE0 instance
+
 #ifndef NRFX_UARTE0_ENABLED
 #define NRFX_UARTE0_ENABLED 1
 #endif
 
-// <o> NRFX_UARTE1_ENABLED - Enables UARTE1 instance.
-#ifndef NRFX_UARTE1_ENABLED
-#define NRFX_UARTE1_ENABLED 1
-#endif
-
-// <o> NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1720,7 +1991,7 @@
 #ifndef NRFX_UARTE_CONFIG_LOG_ENABLED
 #define NRFX_UARTE_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_UARTE_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_UARTE_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1768,26 +2039,99 @@
 
 // </e>
 
-// <e> NRFX_WDT_ENABLED - nrfx_wdt - WDT peripheral driver.
+// <e> NRFX_UART_ENABLED - nrfx_uart - UART peripheral driver
+//==========================================================
+#ifndef NRFX_UART_ENABLED
+#define NRFX_UART_ENABLED 1
+#endif
+
+// <q> NRFX_UART0_ENABLED - Enable UART0 instance
+
+#ifndef NRFX_UART0_ENABLED
+#define NRFX_UART0_ENABLED 1
+#endif
+
+// <o> NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// <e> NRFX_UART_CONFIG_LOG_ENABLED - Enables logging in the module.
+//==========================================================
+#ifndef NRFX_UART_CONFIG_LOG_ENABLED
+#define NRFX_UART_CONFIG_LOG_ENABLED 0
+#endif
+// <o> NRFX_UART_CONFIG_LOG_LEVEL  - Default Severity level
+
+// <0=> Off
+// <1=> Error
+// <2=> Warning
+// <3=> Info
+// <4=> Debug
+
+#ifndef NRFX_UART_CONFIG_LOG_LEVEL
+#define NRFX_UART_CONFIG_LOG_LEVEL 3
+#endif
+
+// <o> NRFX_UART_CONFIG_INFO_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_UART_CONFIG_INFO_COLOR
+#define NRFX_UART_CONFIG_INFO_COLOR 0
+#endif
+
+// <o> NRFX_UART_CONFIG_DEBUG_COLOR  - ANSI escape code prefix.
+
+// <0=> Default
+// <1=> Black
+// <2=> Red
+// <3=> Green
+// <4=> Yellow
+// <5=> Blue
+// <6=> Magenta
+// <7=> Cyan
+// <8=> White
+
+#ifndef NRFX_UART_CONFIG_DEBUG_COLOR
+#define NRFX_UART_CONFIG_DEBUG_COLOR 0
+#endif
+
+// </e>
+
+// </e>
+
+// <e> NRFX_WDT_ENABLED - nrfx_wdt - WDT peripheral driver
 //==========================================================
 #ifndef NRFX_WDT_ENABLED
 #define NRFX_WDT_ENABLED 1
 #endif
-// <q> NRFX_WDT0_ENABLED  - Enable WDT0 instance.
 
+// <q> NRFX_WDT0_ENABLED  - Enable WDT0 instance
 
 #ifndef NRFX_WDT0_ENABLED
 #define NRFX_WDT0_ENABLED 1
 #endif
 
-// <q> NRFX_WDT1_ENABLED  - Enable WDT1 instance.
-
-
-#ifndef NRFX_WDT1_ENABLED
-#define NRFX_WDT1_ENABLED 1
-#endif
-
-// <o> NRFX_WDT_CONFIG_NO_IRQ  - Remove WDT IRQ handling from WDT driver.
+// <o> NRFX_WDT_CONFIG_NO_IRQ  - Remove WDT IRQ handling from WDT driver
 
 // <0=> Include WDT IRQ handling
 // <1=> Remove WDT IRQ handling
@@ -1796,7 +2140,7 @@
 #define NRFX_WDT_CONFIG_NO_IRQ 0
 #endif
 
-// <o> NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
+// <o> NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)
 // <1=> 1
@@ -1816,7 +2160,7 @@
 #ifndef NRFX_WDT_CONFIG_LOG_ENABLED
 #define NRFX_WDT_CONFIG_LOG_ENABLED 0
 #endif
-// <o> NRFX_WDT_CONFIG_LOG_LEVEL  - Default severity level.
+// <o> NRFX_WDT_CONFIG_LOG_LEVEL  - Default Severity level
 
 // <0=> Off
 // <1=> Error
@@ -1866,4 +2210,4 @@
 
 // </h>
 
-#endif // NRFX_CONFIG_H__
+#endif // NRFX_CONFIG_NRF52832_H__

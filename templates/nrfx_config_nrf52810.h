@@ -1,5 +1,5 @@
-#ifndef NRFX_CONFIG_H__
-#define NRFX_CONFIG_H__
+#ifndef NRFX_CONFIG_NRF52810_H__
+#define NRFX_CONFIG_NRF52810_H__
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
@@ -1782,4 +1782,4 @@
 
 // </h>
 
-#endif // NRFX_CONFIG_H__
+#endif // NRFX_CONFIG_NRF52810_H__
