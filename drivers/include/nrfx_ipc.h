@@ -26,10 +26,10 @@ extern "C" {
 /**
  * @brief IPC driver handler type.
  *
- * @param[in] event_index Index of the receive event that triggered the interrupt.
+ * @param[in] events_mask Bitmask with events that triggered the interrupt.
  * @param[in] p_context   Context passed to the interrupt handler, set on initialization.
  */
-typedef void (*nrfx_ipc_handler_t)(uint8_t event_index, void * p_context);
+typedef void (*nrfx_ipc_handler_t)(uint32_t events_mask, void * p_context);
 
 /**
  * @brief IPC configuration structure.

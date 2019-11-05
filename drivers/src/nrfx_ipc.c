@@ -142,17 +142,15 @@ void nrfx_ipc_irq_handler(void)
 
     // Clear these events
     uint32_t bitmask = events_map;
-    uint32_t bitpos = 0;
-    while (bitmask) {
-        if (bitmask & 0x01)
-        {
-            nrf_ipc_event_clear(NRF_IPC, nrfx_bitpos_to_event(bitpos));
-            // Execute interrupt handler to provide information about events to app
-            m_ipc_cb.handler(bitpos, m_ipc_cb.p_context);
-        }
-        bitmask >>= 1;
-        bitpos++;
+    while (bitmask)
+    {
+        uint8_t event_idx = __CLZ(__RBIT(bitmask));
+        bitmask &= ~(1 << event_idx);
+        nrf_ipc_event_clear(NRF_IPC, nrf_ipc_receive_event_get(event_idx));
     }
+
+    // Execute interrupt handler to provide information about events to app
+    m_ipc_cb.handler(events_map, m_ipc_cb.p_context);
 
 }
 
