@@ -84,143 +84,113 @@ typedef enum
 /**
  * @brief Function for getting the maximum channel number of the given EGU.
  *
- * @param[in] NRF_EGUx EGU instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Number of available channels.
  */
-NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * NRF_EGUx);
+NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg);
 
 /**
  * @brief Function for triggering the specified EGU task.
  *
- * @param[in] NRF_EGUx EGU instance.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] egu_task EGU task.
  */
-NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_t egu_task);
+NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * p_reg, nrf_egu_task_t egu_task);
 
 /**
  * @brief Function for returning the address of the specified EGU task register.
  *
- * @param[in] NRF_EGUx EGU instance.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] egu_task EGU task.
  *
  * @return Address of the specified EGU task register.
  */
-NRF_STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type const * NRF_EGUx,
+NRF_STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type const * p_reg,
                                                     nrf_egu_task_t       egu_task);
-
-/**
- * @brief Function for returning the address of the specified EGU TRIGGER task register.
- *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] channel  Channel number.
- *
- * @return Address of the specified EGU TRIGGER task register.
- */
-NRF_STATIC_INLINE uint32_t nrf_egu_task_trigger_address_get(NRF_EGU_Type const * NRF_EGUx,
-                                                            uint8_t              channel);
 
 /**
  * @brief Function for returning the specified EGU TRIGGER task.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] channel  Channel number.
+ * @param[in] channel Channel number.
  *
  * @return The specified EGU TRIGGER task.
  */
-NRF_STATIC_INLINE nrf_egu_task_t nrf_egu_task_trigger_get(NRF_EGU_Type const * NRF_EGUx,
-                                                          uint8_t              channel);
+NRF_STATIC_INLINE nrf_egu_task_t nrf_egu_trigger_task_get(uint8_t channel);
 
 /**
  * @brief Function for retrieving the state of the UARTE event.
  *
- * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] egu_event EGU event to be checked.
  *
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_egu_event_check(NRF_EGU_Type const * NRF_EGUx,
-                                           nrf_egu_event_t      egu_event);
+NRF_STATIC_INLINE bool nrf_egu_event_check(NRF_EGU_Type const * p_reg, nrf_egu_event_t egu_event);
 
 /**
  * @brief Function for clearing the specified EGU event.
  *
- * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] egu_event EGU event to clear.
  */
-NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type *  NRF_EGUx,
-                                           nrf_egu_event_t egu_event);
+NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type * p_reg, nrf_egu_event_t egu_event);
 
 /**
  * @brief Function for returning the address of the specified EGU event register.
  *
- * @param[in] NRF_EGUx  EGU instance.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] egu_event EGU event.
  *
  * @return Address of the specified EGU event register.
  */
-NRF_STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type const * NRF_EGUx,
+NRF_STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type const * p_reg,
                                                      nrf_egu_event_t      egu_event);
-
-/**
- * @brief Function for returning address of the specified EGU TRIGGERED event register.
- *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] channel  Channel number.
- *
- * @return Address of the specified EGU TRIGGERED event register.
- */
-NRF_STATIC_INLINE uint32_t nrf_egu_event_triggered_address_get(NRF_EGU_Type const * NRF_EGUx,
-                                                               uint8_t              channel);
 
 /**
  * @brief Function for returning the specified EGU TRIGGERED event.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] channel  Channel number.
+ * @param[in] channel Channel number.
  *
  * @return The specified EGU TRIGGERED event.
  */
-NRF_STATIC_INLINE nrf_egu_event_t nrf_egu_event_triggered_get(NRF_EGU_Type const * NRF_EGUx,
-                                                              uint8_t              channel);
+NRF_STATIC_INLINE nrf_egu_event_t nrf_egu_triggered_event_get(uint8_t channel);
 
 /**
  * @brief Function for enabling one or more of the EGU interrupts.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] mask     Mask of interrupts to be enabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
  */
-NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * NRF_EGUx, uint32_t mask);
+NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for retrieving the state of one or more of the EGU interrupts.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] mask     Mask of interrupts to be checked.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
  *
  * @return Mask of enabled interrupts.
  */
-NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask);
+NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling one or more of the EGU interrupts.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] mask     Mask of interrupts to be disabled.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
  */
-NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t mask);
+NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for retrieving the state of interrupt of the specified EGU channel.
  *
- * @param[in] NRF_EGUx EGU instance.
- * @param[in] channel  Channel number.
+ * @param[in] channel Channel number.
  *
  * @return EGU interrupt mask.
  */
-NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(NRF_EGU_Type const * NRF_EGUx,
-                                                             uint8_t              channel);
+NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(uint8_t channel);
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -270,126 +240,99 @@ NRF_STATIC_INLINE void nrf_egu_publish_clear(NRF_EGU_Type *  p_reg,
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * NRF_EGUx)
+NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg)
 {
-    if (NRF_EGUx == NRF_EGU0){
+    if (p_reg == NRF_EGU0){
         return EGU0_CH_NUM;
     }
 #if EGU_COUNT > 1
-    if (NRF_EGUx ==  NRF_EGU1){
+    if (p_reg == NRF_EGU1){
         return EGU1_CH_NUM;
     }
 #endif
 #if EGU_COUNT > 2
-    if (NRF_EGUx ==  NRF_EGU2){
+    if (p_reg == NRF_EGU2){
         return EGU2_CH_NUM;
     }
-    if (NRF_EGUx ==  NRF_EGU3){
+    if (p_reg == NRF_EGU3){
         return EGU3_CH_NUM;
     }
-    if (NRF_EGUx ==  NRF_EGU4){
+    if (p_reg == NRF_EGU4){
         return EGU4_CH_NUM;
     }
-    if (NRF_EGUx ==  NRF_EGU5){
+    if (p_reg == NRF_EGU5){
         return EGU5_CH_NUM;
     }
 #endif
     return 0;
 }
 
-NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * NRF_EGUx, nrf_egu_task_t egu_task)
+NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * p_reg, nrf_egu_task_t egu_task)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    *((volatile uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_task)) = 0x1UL;
+    NRFX_ASSERT(p_reg);
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)egu_task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type const * NRF_EGUx,
+NRF_STATIC_INLINE uint32_t nrf_egu_task_address_get(NRF_EGU_Type const * p_reg,
                                                     nrf_egu_task_t       egu_task)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    return (uint32_t)((uint8_t *)NRF_EGUx + (uint32_t)egu_task);
+    NRFX_ASSERT(p_reg);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)egu_task);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_egu_task_trigger_address_get(NRF_EGU_Type const * NRF_EGUx,
-                                                            uint8_t              channel)
+NRF_STATIC_INLINE nrf_egu_task_t nrf_egu_trigger_task_get(uint8_t channel)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (uint32_t)&NRF_EGUx->TASKS_TRIGGER[channel];
+    return (nrf_egu_task_t)NRFX_OFFSETOF(NRF_EGU_Type, TASKS_TRIGGER[channel]);
 }
 
-NRF_STATIC_INLINE nrf_egu_task_t nrf_egu_task_trigger_get(NRF_EGU_Type const * NRF_EGUx,
-                                                          uint8_t              channel)
+NRF_STATIC_INLINE bool nrf_egu_event_check(NRF_EGU_Type const * p_reg, nrf_egu_event_t egu_event)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (nrf_egu_task_t)((uint32_t) NRF_EGU_TASK_TRIGGER0 + (channel * sizeof(uint32_t)));
+    NRFX_ASSERT(p_reg);
+    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)egu_event);
 }
 
-NRF_STATIC_INLINE bool nrf_egu_event_check(NRF_EGU_Type const * NRF_EGUx,
-                                           nrf_egu_event_t      egu_event)
+NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type * p_reg, nrf_egu_event_t egu_event)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    return (bool)*(volatile uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_event);
-}
-
-NRF_STATIC_INLINE void nrf_egu_event_clear(NRF_EGU_Type *  NRF_EGUx,
-                                           nrf_egu_event_t egu_event)
-{
-    NRFX_ASSERT(NRF_EGUx);
-    *((volatile uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_event)) = 0x0UL;
+    NRFX_ASSERT(p_reg);
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)egu_event)) = 0x0UL;
 #if __CORTEX_M == 0x04
-    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)NRF_EGUx + (uint32_t)egu_event));
+    volatile uint32_t dummy = *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)egu_event));
     (void)dummy;
 #endif
 }
 
-NRF_STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type const * NRF_EGUx,
+NRF_STATIC_INLINE uint32_t nrf_egu_event_address_get(NRF_EGU_Type const * p_reg,
                                                      nrf_egu_event_t      egu_event)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    return (uint32_t)((uint8_t *)NRF_EGUx + (uint32_t)egu_event);
+    NRFX_ASSERT(p_reg);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)egu_event);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_egu_event_triggered_address_get(NRF_EGU_Type const * NRF_EGUx,
-                                                               uint8_t              channel)
+NRF_STATIC_INLINE nrf_egu_event_t nrf_egu_triggered_event_get(uint8_t channel)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (uint32_t)&NRF_EGUx->EVENTS_TRIGGERED[channel];
+    return (nrf_egu_event_t)NRFX_OFFSETOF(NRF_EGU_Type, EVENTS_TRIGGERED[channel]);
 }
 
-NRF_STATIC_INLINE nrf_egu_event_t nrf_egu_event_triggered_get(NRF_EGU_Type const * NRF_EGUx,
-                                                              uint8_t              channel)
+NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * p_reg, uint32_t mask)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
-    return (nrf_egu_event_t)((uint32_t) NRF_EGU_EVENT_TRIGGERED0 + (channel * sizeof(uint32_t)));
+    NRFX_ASSERT(p_reg);
+    p_reg->INTENSET = mask;
 }
 
-NRF_STATIC_INLINE void nrf_egu_int_enable(NRF_EGU_Type * NRF_EGUx, uint32_t mask)
+NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * p_reg, uint32_t mask)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRF_EGUx->INTENSET = mask;
+    NRFX_ASSERT(p_reg);
+    return p_reg->INTENSET & mask;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_egu_int_enable_check(NRF_EGU_Type const * NRF_EGUx, uint32_t mask)
+NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * p_reg, uint32_t mask)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    return NRF_EGUx->INTENSET & mask;
+    NRFX_ASSERT(p_reg);
+    p_reg->INTENCLR = mask;
 }
 
-NRF_STATIC_INLINE void nrf_egu_int_disable(NRF_EGU_Type * NRF_EGUx, uint32_t mask)
+NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(uint8_t channel)
 {
-    NRFX_ASSERT(NRF_EGUx);
-    NRF_EGUx->INTENCLR = mask;
-}
-
-NRF_STATIC_INLINE nrf_egu_int_mask_t nrf_egu_channel_int_get(NRF_EGU_Type const * NRF_EGUx,
-                                                             uint8_t              channel)
-{
-    NRFX_ASSERT(NRF_EGUx);
-    NRFX_ASSERT(channel < nrf_egu_channel_count(NRF_EGUx));
     return (nrf_egu_int_mask_t)((uint32_t) (EGU_INTENSET_TRIGGERED0_Msk << channel));
 }
 
