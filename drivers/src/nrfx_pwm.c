@@ -29,7 +29,7 @@
 #define EGU_IRQn(i)         EGU_IRQn_(i)
 #define EGU_IRQn_(i)        SWI##i##_EGU##i##_IRQn
 #define EGU_IRQHandler(i)   EGU_IRQHandler_(i)
-#define EGU_IRQHandler_(i)  nrfx_swi_##i##_irq_handler
+#define EGU_IRQHandler_(i)  nrfx_egu_##i##_irq_handler
 #define DMA_ISSUE_EGU_IDX           NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
 #define DMA_ISSUE_EGU               NRFX_CONCAT_2(NRF_EGU, DMA_ISSUE_EGU_IDX)
 #define DMA_ISSUE_EGU_IRQn          EGU_IRQn(DMA_ISSUE_EGU_IDX)
@@ -224,9 +224,9 @@ static uint32_t start_playback(nrfx_pwm_t const * p_instance,
         // the PWM by triggering the proper task from EGU interrupt handler,
         // it is not safe to do it directly via PPI.
         p_cb->starting_task_address = starting_task_address;
-        nrf_egu_int_enable(DMA_ISSUE_EGU,
-                           nrf_egu_channel_int_get(DMA_ISSUE_EGU, p_instance->drv_inst_idx));
-        return nrf_egu_task_trigger_address_get(DMA_ISSUE_EGU, p_instance->drv_inst_idx);
+        nrf_egu_int_enable(DMA_ISSUE_EGU, nrf_egu_channel_int_get(p_instance->drv_inst_idx));
+        return nrf_egu_task_address_get(DMA_ISSUE_EGU,
+                                        nrf_egu_trigger_task_get(p_instance->drv_inst_idx));
 #else
         return starting_task_address;
 #endif
@@ -433,14 +433,12 @@ static void irq_handler(NRF_PWM_Type * p_pwm, pwm_control_block_t * p_cb)
 // See 'start_playback' why this is needed.
 void DMA_ISSUE_EGU_IRQHandler(void)
 {
-    int i;
-    for (i = 0; i < NRFX_PWM_ENABLED_COUNT; ++i)
+    for (uint8_t i = 0; i < NRFX_PWM_ENABLED_COUNT; i++)
     {
-        volatile uint32_t * p_event_reg =
-            nrf_egu_event_triggered_address_get(DMA_ISSUE_EGU, i);
-        if (*p_event_reg)
+        nrf_egu_event_t event = nrf_egu_triggered_event_get(i);
+        if (nrf_egu_event_check(DMA_ISSUE_EGU, event))
         {
-            *p_event_reg = 0;
+            nrf_egu_event_clear(DMA_ISSUE_EGU, event);
             *(volatile uint32_t *)(m_cb[i].starting_task_address) = 1;
         }
     }
