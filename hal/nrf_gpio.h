@@ -793,7 +793,7 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number)
 #endif
 
 #if defined(GPIO_PIN_CNF_MCUSEL_Msk)
-__STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu)
+NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
     uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_MCUSEL_Msk;

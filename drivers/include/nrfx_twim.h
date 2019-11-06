@@ -325,10 +325,10 @@ uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance);
  * @retval NRFX_SUCCESS        Bus recovery was successful.
  * @retval NRFX_ERROR_INTERNAL Bus recovery failed.
  */
-__STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin);
+NRFX_STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
-__STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin)
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t sda_pin)
 {
     return nrfx_twi_twim_bus_recover(scl_pin, sda_pin);
 }

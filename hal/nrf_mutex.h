@@ -32,7 +32,7 @@ extern "C" {
  * @retval true  Mutex is successfully locked.
  * @retval false Mutex was already locked.
  */
-__STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
+NRF_STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
 
 /**
  * @brief Function for unlocking the specified mutex.
@@ -42,21 +42,21 @@ __STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mutex Index of the mutex to be locked.
  */
-__STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
+NRF_STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex);
 
-#ifndef SUPPRESS_INLINE_IMPLEMENTATION
+#ifndef NRF_DECLARE_ONLY
 
-__STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
+NRF_STATIC_INLINE bool nrf_mutex_lock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
 {
     return (p_reg->MUTEX[mutex] == MUTEX_MUTEX_MUTEX_Unlocked);
 }
 
-__STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
+NRF_STATIC_INLINE void nrf_mutex_unlock(NRF_MUTEX_Type * p_reg, uint8_t mutex)
 {
     p_reg->MUTEX[mutex] = MUTEX_MUTEX_MUTEX_Unlocked;
 }
 
-#endif // SUPPRESS_INLINE_IMPLEMENTATION
+#endif // NRF_DECLARE_ONLY
 
 /** @} */
 
