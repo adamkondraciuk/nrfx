@@ -16,7 +16,7 @@ typedef struct
 
 static ipc_control_block_t m_ipc_cb;
 
-nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler, uint8_t irq_priority, void * p_context)
+nrfx_err_t nrfx_ipc_init(uint8_t irq_priority, nrfx_ipc_handler_t handler, void * p_context)
 {
     NRFX_ASSERT(handler);
     if (m_ipc_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -34,36 +34,23 @@ nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler, uint8_t irq_priority, void 
     return NRFX_SUCCESS;
 }
 
-nrfx_err_t nrfx_ipc_config_load(const nrfx_ipc_config_t *p_config)
+void nrfx_ipc_config_load(const nrfx_ipc_config_t * p_config)
 {
-    if (m_ipc_cb.state == NRFX_DRV_STATE_UNINITIALIZED)
-    {
-        return NRFX_ERROR_INVALID_STATE;
-    }
-
-    if (!p_config)
-    {
-        return NRFX_ERROR_INVALID_PARAM;
-    }
+    NRFX_ASSERT(p_config);
+    NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
     uint32_t i;
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
-        nrf_ipc_send_config(NRF_IPC,
-                            nrf_ipc_send_task_get(i),
-                            p_config->tx_signals_channels_cfg[i]);
+        nrf_ipc_send_config_set(NRF_IPC, i, p_config->send_task_config[i]);
     }
 
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
-        nrf_ipc_receive_config(NRF_IPC,
-                               nrf_ipc_receive_event_get(i),
-                               p_config->rx_events_channels_cfg[i]);
+        nrf_ipc_receive_config_set(NRF_IPC, i, p_config->receive_event_config[i]);
     }
 
-    nrf_ipc_int_enable(NRF_IPC, p_config->rx_events_enable_cfg);
-
-    return NRFX_SUCCESS;
+    nrf_ipc_int_enable(NRF_IPC, p_config->receive_events_enabled);
 }
 
 void nrfx_ipc_uninit(void)
@@ -73,12 +60,12 @@ void nrfx_ipc_uninit(void)
     uint32_t i;
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
-        nrf_ipc_send_config(NRF_IPC, nrf_ipc_send_task_get(i), 0);
+        nrf_ipc_send_config_set(NRF_IPC, i, 0);
     }
 
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
-        nrf_ipc_receive_config(NRF_IPC, nrf_ipc_receive_event_get(i), 0);
+        nrf_ipc_receive_config_set(NRF_IPC, i, 0);
     }
 
     nrf_ipc_int_disable(NRF_IPC, 0xFFFFFFFF);
@@ -88,51 +75,41 @@ void nrfx_ipc_uninit(void)
 void nrfx_ipc_receive_event_enable(uint8_t event_index)
 {
     NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_ipc_int_enable(NRF_IPC, (1 << event_index));
+    nrf_ipc_int_enable(NRF_IPC, (1UL << event_index));
 }
 
 void nrfx_ipc_receive_event_disable(uint8_t event_index)
 {
     NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_ipc_int_disable(NRF_IPC, (1 << event_index));
+    nrf_ipc_int_disable(NRF_IPC, (1UL << event_index));
 }
 
-void nrfx_ipc_receive_events_set_enable(uint32_t events_bitmask)
+void nrfx_ipc_receive_event_group_enable(uint32_t event_bitmask)
 {
     NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_ipc_int_enable(NRF_IPC, events_bitmask);
+    nrf_ipc_int_enable(NRF_IPC, event_bitmask);
 }
 
-void nrfx_ipc_receive_events_set_disable(uint32_t events_bitmask)
+void nrfx_ipc_receive_event_group_disable(uint32_t event_bitmask)
 {
     NRFX_ASSERT(m_ipc_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_ipc_int_disable(NRF_IPC, events_bitmask);
+    nrf_ipc_int_disable(NRF_IPC, event_bitmask);
 }
 
 void nrfx_ipc_receive_event_channel_assign(uint8_t event_index, uint8_t channel_index)
 {
-    nrf_ipc_receive_channel_config(NRF_IPC,
-                                   nrf_ipc_receive_event_get(event_index),
-                                   (nrf_ipc_channel_t)(1 << channel_index));
+    NRFX_ASSERT(channel_index < IPC_CH_NUM);
+    uint32_t channel_bitmask = (1UL << channel_index);
+    channel_bitmask |= nrf_ipc_receive_config_get(NRF_IPC, event_index);
+    nrf_ipc_receive_config_set(NRF_IPC, event_index, channel_bitmask);
 }
 
 void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index)
 {
-    nrf_ipc_send_channel_config(NRF_IPC,
-                                nrf_ipc_send_task_get(send_index),
-                                (nrf_ipc_channel_t)(1 << channel_index));
-}
-
-void nrfx_ipc_receive_event_channels_config(uint8_t  event_index, uint32_t channels_bitmask)
-{
-    nrf_ipc_receive_config(NRF_IPC,
-                           nrf_ipc_receive_event_get(event_index),
-                           channels_bitmask);
-}
-
-void nrfx_ipc_send_task_channels_config(uint8_t  send_index, uint32_t channels_bitmask)
-{
-    nrf_ipc_send_config(NRF_IPC, nrf_ipc_send_task_get(send_index), channels_bitmask);
+    NRFX_ASSERT(channel_index < IPC_CH_NUM);
+    uint32_t channel_bitmask = (1UL << channel_index);
+    channel_bitmask |= nrf_ipc_send_config_get(NRF_IPC, send_index);
+    nrf_ipc_send_config_set(NRF_IPC, send_index, channel_bitmask);
 }
 
 void nrfx_ipc_irq_handler(void)
@@ -145,13 +122,12 @@ void nrfx_ipc_irq_handler(void)
     while (bitmask)
     {
         uint8_t event_idx = __CLZ(__RBIT(bitmask));
-        bitmask &= ~(1 << event_idx);
+        bitmask &= ~(1UL << event_idx);
         nrf_ipc_event_clear(NRF_IPC, nrf_ipc_receive_event_get(event_idx));
     }
 
     // Execute interrupt handler to provide information about events to app
     m_ipc_cb.handler(events_map, m_ipc_cb.p_context);
-
 }
 
 #endif // NRFX_CHECK(NRFX_IPC_ENABLED)

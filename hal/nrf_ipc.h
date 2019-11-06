@@ -19,23 +19,23 @@ extern "C" {
 /** @brief IPC tasks. */
 typedef enum
 {
-    NRF_IPC_TASK_SEND_0  = offsetof(NRF_IPC_Type, TASKS_SEND[0]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[0].
-    NRF_IPC_TASK_SEND_1  = offsetof(NRF_IPC_Type, TASKS_SEND[1]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[1].
-    NRF_IPC_TASK_SEND_2  = offsetof(NRF_IPC_Type, TASKS_SEND[2]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[2].
-    NRF_IPC_TASK_SEND_3  = offsetof(NRF_IPC_Type, TASKS_SEND[3]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[3].
-    NRF_IPC_TASK_SEND_4  = offsetof(NRF_IPC_Type, TASKS_SEND[4]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[4].
-    NRF_IPC_TASK_SEND_5  = offsetof(NRF_IPC_Type, TASKS_SEND[5]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[5].
-    NRF_IPC_TASK_SEND_6  = offsetof(NRF_IPC_Type, TASKS_SEND[6]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[6].
-    NRF_IPC_TASK_SEND_7  = offsetof(NRF_IPC_Type, TASKS_SEND[7]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[7].
+    NRF_IPC_TASK_SEND_0  = offsetof(NRF_IPC_Type, TASKS_SEND[0]),  ///< Trigger events on channels enabled in SEND_CNF[0].
+    NRF_IPC_TASK_SEND_1  = offsetof(NRF_IPC_Type, TASKS_SEND[1]),  ///< Trigger events on channels enabled in SEND_CNF[1].
+    NRF_IPC_TASK_SEND_2  = offsetof(NRF_IPC_Type, TASKS_SEND[2]),  ///< Trigger events on channels enabled in SEND_CNF[2].
+    NRF_IPC_TASK_SEND_3  = offsetof(NRF_IPC_Type, TASKS_SEND[3]),  ///< Trigger events on channels enabled in SEND_CNF[3].
+    NRF_IPC_TASK_SEND_4  = offsetof(NRF_IPC_Type, TASKS_SEND[4]),  ///< Trigger events on channels enabled in SEND_CNF[4].
+    NRF_IPC_TASK_SEND_5  = offsetof(NRF_IPC_Type, TASKS_SEND[5]),  ///< Trigger events on channels enabled in SEND_CNF[5].
+    NRF_IPC_TASK_SEND_6  = offsetof(NRF_IPC_Type, TASKS_SEND[6]),  ///< Trigger events on channels enabled in SEND_CNF[6].
+    NRF_IPC_TASK_SEND_7  = offsetof(NRF_IPC_Type, TASKS_SEND[7]),  ///< Trigger events on channels enabled in SEND_CNF[7].
 #if (IPC_TASKS_NUM > 8) || defined(__NRFX_DOXYGEN__)
-    NRF_IPC_TASK_SEND_8  = offsetof(NRF_IPC_Type, TASKS_SEND[8]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[8].
-    NRF_IPC_TASK_SEND_9  = offsetof(NRF_IPC_Type, TASKS_SEND[9]),  ///< Trigger events on channels enabled in task configuration register SEND_CNF[9].
-    NRF_IPC_TASK_SEND_10 = offsetof(NRF_IPC_Type, TASKS_SEND[10]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[10].
-    NRF_IPC_TASK_SEND_11 = offsetof(NRF_IPC_Type, TASKS_SEND[11]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[11].
-    NRF_IPC_TASK_SEND_12 = offsetof(NRF_IPC_Type, TASKS_SEND[12]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[12].
-    NRF_IPC_TASK_SEND_13 = offsetof(NRF_IPC_Type, TASKS_SEND[13]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[13].
-    NRF_IPC_TASK_SEND_14 = offsetof(NRF_IPC_Type, TASKS_SEND[14]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[14].
-    NRF_IPC_TASK_SEND_15 = offsetof(NRF_IPC_Type, TASKS_SEND[15]), ///< Trigger events on channels enabled in task configuration register SEND_CNF[15].
+    NRF_IPC_TASK_SEND_8  = offsetof(NRF_IPC_Type, TASKS_SEND[8]),  ///< Trigger events on channels enabled in SEND_CNF[8].
+    NRF_IPC_TASK_SEND_9  = offsetof(NRF_IPC_Type, TASKS_SEND[9]),  ///< Trigger events on channels enabled in SEND_CNF[9].
+    NRF_IPC_TASK_SEND_10 = offsetof(NRF_IPC_Type, TASKS_SEND[10]), ///< Trigger events on channels enabled in SEND_CNF[10].
+    NRF_IPC_TASK_SEND_11 = offsetof(NRF_IPC_Type, TASKS_SEND[11]), ///< Trigger events on channels enabled in SEND_CNF[11].
+    NRF_IPC_TASK_SEND_12 = offsetof(NRF_IPC_Type, TASKS_SEND[12]), ///< Trigger events on channels enabled in SEND_CNF[12].
+    NRF_IPC_TASK_SEND_13 = offsetof(NRF_IPC_Type, TASKS_SEND[13]), ///< Trigger events on channels enabled in SEND_CNF[13].
+    NRF_IPC_TASK_SEND_14 = offsetof(NRF_IPC_Type, TASKS_SEND[14]), ///< Trigger events on channels enabled in SEND_CNF[14].
+    NRF_IPC_TASK_SEND_15 = offsetof(NRF_IPC_Type, TASKS_SEND[15]), ///< Trigger events on channels enabled in SEND_CNF[15].
 #endif // (IPC_TASKS_NUM > 8) || defined(__NRFX_DOXYGEN__)
 } nrf_ipc_task_t;
 
@@ -115,8 +115,7 @@ typedef enum
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task to be triggered.
  */
-NRF_STATIC_INLINE void nrf_ipc_task_trigger(NRF_IPC_Type * p_reg,
-                                            nrf_ipc_task_t task);
+NRF_STATIC_INLINE void nrf_ipc_task_trigger(NRF_IPC_Type * p_reg, nrf_ipc_task_t task);
 
 /**
  * @brief Function for getting the address of the specified IPC task register.
@@ -135,8 +134,7 @@ NRF_STATIC_INLINE uint32_t nrf_ipc_task_address_get(NRF_IPC_Type const * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
-NRF_STATIC_INLINE void nrf_ipc_event_clear(NRF_IPC_Type *  p_reg,
-                                           nrf_ipc_event_t event);
+NRF_STATIC_INLINE void nrf_ipc_event_clear(NRF_IPC_Type * p_reg, nrf_ipc_event_t event);
 
 /**
  * @brief Function for retrieving the state of the IPC event.
@@ -147,8 +145,7 @@ NRF_STATIC_INLINE void nrf_ipc_event_clear(NRF_IPC_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_ipc_event_check(NRF_IPC_Type const * p_reg,
-                                           nrf_ipc_event_t      event);
+NRF_STATIC_INLINE bool nrf_ipc_event_check(NRF_IPC_Type const * p_reg, nrf_ipc_event_t event);
 
 /**
  * @brief Function for getting the address of the specified IPC event register.
@@ -219,8 +216,7 @@ NRF_STATIC_INLINE void nrf_ipc_subscribe_set(NRF_IPC_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_ipc_subscribe_clear(NRF_IPC_Type * p_reg,
-                                               nrf_ipc_task_t task);
+NRF_STATIC_INLINE void nrf_ipc_subscribe_clear(NRF_IPC_Type * p_reg, nrf_ipc_task_t task);
 
 /**
  * @brief Function for setting the DPPI publish configuration for a given
@@ -241,24 +237,10 @@ NRF_STATIC_INLINE void nrf_ipc_publish_set(NRF_IPC_Type *  p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_ipc_publish_clear(NRF_IPC_Type *  p_reg,
-                                             nrf_ipc_event_t event);
+NRF_STATIC_INLINE void nrf_ipc_publish_clear(NRF_IPC_Type * p_reg, nrf_ipc_event_t event);
 
 /**
- * @brief Function for assigning send task to the IPC channel.
- *
- * Function does not clear current configuration of a send event task.
- *
- * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
- * @param[in] task        Task to be configured.
- * @param[in] ipc_channel IPC channel to which the send event task will generate the event.
- */
-NRF_STATIC_INLINE void nrf_ipc_send_channel_config(NRF_IPC_Type *    p_reg,
-                                                   nrf_ipc_task_t    task,
-                                                   nrf_ipc_channel_t ipc_channel);
-
-/**
- * @brief Function for assigning send event task to the IPC channels.
+ * @brief Function for setting the configuration of the specified send task.
  *
  * @p channels_mask bitmask must be created with @ref nrf_ipc_channel_t values:
  * NRF_IPC_CHANNEL_0 | NRF_IPC_CHANNEL_1 | ... | NRF_IPC_CHANNEL_n
@@ -266,24 +248,22 @@ NRF_STATIC_INLINE void nrf_ipc_send_channel_config(NRF_IPC_Type *    p_reg,
  * @note This function overrides current configuration.
  *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
- * @param[in] task          Task to be configured.
- * @param[in] channels_mask Bitmask with IPC channels to which the send event task
- *                          will generate the event.
+ * @param[in] index         Index of the send task.
+ * @param[in] channels_mask Bitmask specifying channels that are to be enabled for this task.
  */
-NRF_STATIC_INLINE void nrf_ipc_send_config(NRF_IPC_Type * p_reg,
-                                           nrf_ipc_task_t task,
-                                           uint32_t       channels_mask);
+NRF_STATIC_INLINE void nrf_ipc_send_config_set(NRF_IPC_Type * p_reg,
+                                               uint8_t        index,
+                                               uint32_t       channels_mask);
 
 /**
- * @brief Function for assigning receive event to additional IPC channel.
+ * @brief Function for getting the configuration of the specified send task.
  *
- * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
- * @param[in] event       Event to be configured.
- * @param[in] ipc_channel IPC channel from which the receive event will generate interrupts.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of the send event configuration.
+ *
+ * @retval Bitmask of channels enabled for this task.
  */
-NRF_STATIC_INLINE void nrf_ipc_receive_channel_config(NRF_IPC_Type *    p_reg,
-                                                      nrf_ipc_event_t   event,
-                                                      nrf_ipc_channel_t ipc_channel);
+NRF_STATIC_INLINE uint32_t nrf_ipc_send_config_get(NRF_IPC_Type * const p_reg, uint8_t index);
 
 /**
  * @brief Function for assigning receive event to the IPC channels.
@@ -294,13 +274,23 @@ NRF_STATIC_INLINE void nrf_ipc_receive_channel_config(NRF_IPC_Type *    p_reg,
  * @note This function overrides current configuration.
  *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
- * @param[in] event         Event to be configured.
+ * @param[in] index         Index of the receive event configuration.
  * @param[in] channels_mask Bitmask with IPC channels from which the receive event
  *                          will generate interrupts.
  */
-NRF_STATIC_INLINE void nrf_ipc_receive_config(NRF_IPC_Type *  p_reg,
-                                              nrf_ipc_event_t event,
-                                              uint32_t        channels_mask);
+NRF_STATIC_INLINE void nrf_ipc_receive_config_set(NRF_IPC_Type * p_reg,
+                                                  uint8_t        index,
+                                                  uint32_t       channels_mask);
+
+/**
+ * @brief Function for getting receive event configuration.
+ *
+ * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
+ * @param[in] index         Index of the receive event configuration.
+ *
+ * @return Mask of channels connected with receive event.
+ */
+NRF_STATIC_INLINE uint32_t nrf_ipc_receive_config_get(NRF_IPC_Type * const p_reg, uint8_t index);
 
 /**
  * @brief Function for storing data in general purpose memory cell.
@@ -321,8 +311,7 @@ NRF_STATIC_INLINE void nrf_ipc_gpmem_set(NRF_IPC_Type * p_reg,
  *
  * @return Stored data.
  */
-NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg,
-                                             uint8_t              index);
+NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg, uint8_t index);
 
 /**
  * @brief Function for getting SEND task by its index.
@@ -344,8 +333,7 @@ NRF_STATIC_INLINE nrf_ipc_event_t nrf_ipc_receive_event_get(uint8_t index);
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_ipc_task_trigger(NRF_IPC_Type * p_reg,
-                                            nrf_ipc_task_t task)
+NRF_STATIC_INLINE void nrf_ipc_task_trigger(NRF_IPC_Type * p_reg, nrf_ipc_task_t task)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
@@ -356,14 +344,12 @@ NRF_STATIC_INLINE uint32_t nrf_ipc_task_address_get(NRF_IPC_Type const * p_reg,
     return ((uint32_t)p_reg + (uint32_t)task);
 }
 
-NRF_STATIC_INLINE void nrf_ipc_event_clear(NRF_IPC_Type *  p_reg,
-                                           nrf_ipc_event_t event)
+NRF_STATIC_INLINE void nrf_ipc_event_clear(NRF_IPC_Type * p_reg, nrf_ipc_event_t event)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
 }
 
-NRF_STATIC_INLINE bool nrf_ipc_event_check(NRF_IPC_Type const * p_reg,
-                                           nrf_ipc_event_t      event)
+NRF_STATIC_INLINE bool nrf_ipc_event_check(NRF_IPC_Type const * p_reg, nrf_ipc_event_t event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -402,8 +388,7 @@ NRF_STATIC_INLINE void nrf_ipc_subscribe_set(NRF_IPC_Type * p_reg,
             ((uint32_t)channel | IPC_SUBSCRIBE_SEND_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_ipc_subscribe_clear(NRF_IPC_Type * p_reg,
-                                               nrf_ipc_task_t task)
+NRF_STATIC_INLINE void nrf_ipc_subscribe_clear(NRF_IPC_Type * p_reg, nrf_ipc_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
@@ -416,39 +401,34 @@ NRF_STATIC_INLINE void nrf_ipc_publish_set(NRF_IPC_Type *  p_reg,
             ((uint32_t)channel | IPC_PUBLISH_RECEIVE_EN_Msk);
 }
 
-NRF_STATIC_INLINE void nrf_ipc_publish_clear(NRF_IPC_Type *  p_reg,
-                                             nrf_ipc_event_t event)
+NRF_STATIC_INLINE void nrf_ipc_publish_clear(NRF_IPC_Type *  p_reg, nrf_ipc_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
 
-
-NRF_STATIC_INLINE void nrf_ipc_send_channel_config(NRF_IPC_Type *    p_reg,
-                                                   nrf_ipc_task_t    task,
-                                                   nrf_ipc_channel_t ipc_channel)
+NRF_STATIC_INLINE void nrf_ipc_send_config_set(NRF_IPC_Type * p_reg,
+                                               uint8_t        index,
+                                               uint32_t       channels_mask)
 {
-    p_reg->SEND_CNF[task >> 2] |= ipc_channel;
+    p_reg->SEND_CNF[index] = channels_mask;
 }
 
-NRF_STATIC_INLINE void nrf_ipc_send_config(NRF_IPC_Type * p_reg,
-                                           nrf_ipc_task_t task,
-                                           uint32_t       channels_mask)
+NRF_STATIC_INLINE uint32_t nrf_ipc_send_config_get(NRF_IPC_Type * const p_reg, uint8_t index)
 {
-    p_reg->SEND_CNF[task >> 2] = channels_mask;
+    return p_reg->SEND_CNF[index];
 }
 
-NRF_STATIC_INLINE void nrf_ipc_receive_channel_config(NRF_IPC_Type *    p_reg,
-                                                      nrf_ipc_event_t   event,
-                                                      nrf_ipc_channel_t ipc_channel)
+NRF_STATIC_INLINE void nrf_ipc_receive_config_set(NRF_IPC_Type * p_reg,
+                                                  uint8_t        index,
+                                                  uint32_t       channels_mask)
 {
-    p_reg->RECEIVE_CNF[(event & 0xFFuL) >> 2] |= ipc_channel;
+    p_reg->RECEIVE_CNF[index] = channels_mask;
 }
 
-NRF_STATIC_INLINE void nrf_ipc_receive_config(NRF_IPC_Type *  p_reg,
-                                              nrf_ipc_event_t event,
-                                              uint32_t        channels_mask)
+
+NRF_STATIC_INLINE uint32_t nrf_ipc_receive_config_get(NRF_IPC_Type * const p_reg, uint8_t index)
 {
-    p_reg->RECEIVE_CNF[(event & 0xFFuL) >> 2] = channels_mask;
+    return p_reg->RECEIVE_CNF[index];
 }
 
 NRF_STATIC_INLINE void nrf_ipc_gpmem_set(NRF_IPC_Type * p_reg,
@@ -459,8 +439,7 @@ NRF_STATIC_INLINE void nrf_ipc_gpmem_set(NRF_IPC_Type * p_reg,
     p_reg->GPMEM[index] = data;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg,
-                                             uint8_t              index)
+NRF_STATIC_INLINE uint32_t nrf_ipc_gpmem_get(NRF_IPC_Type const * p_reg,  uint8_t index)
 {
     NRFX_ASSERT(index < IPC_GPMEM_NUM);
     return p_reg->GPMEM[index];

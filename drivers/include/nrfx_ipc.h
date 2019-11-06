@@ -17,85 +17,39 @@ extern "C" {
  */
 
 /**
- * @brief IPC macro to set bit at particular position.
- *
- * @param[in] idx Position of the bit to be set.
- */
-#define NRFX_IPC_BITPOS(idx) (1 << idx)
-
-/**
  * @brief IPC driver handler type.
  *
- * @param[in] events_mask Bitmask with events that triggered the interrupt.
- * @param[in] p_context   Context passed to the interrupt handler, set on initialization.
+ * @param[in] event_mask Bitmask with events that triggered the interrupt.
+ * @param[in] p_context  Context passed to the interrupt handler, set on initialization.
  */
-typedef void (*nrfx_ipc_handler_t)(uint32_t events_mask, void * p_context);
+typedef void (*nrfx_ipc_handler_t)(uint32_t event_mask, void * p_context);
 
-/**
- * @brief IPC configuration structure.
- *
- * The settings can be saved in flash memory by declaring it as const.
- *
- * Use snippet below to create initialized structure in flash memory.
- *
- * const nrfx_ipc_config_t ipc_cfg =
- * {
- *     .tx_signals_channels_cfg =
- *     {
- *         // [SIGNAL_ID] = IPC_CHANNELS_TO_BROADCAST_TO,
- *
- *         // Broadcast signal number 0 on channels 0 and 4
- *         [0] = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(4),
- *         [1] = NRFX_IPC_BITPOS(3) | NRFX_IPC_BITPOS(5),
- *         ...
- *         [n] = NRFX_IPC_BITPOS(4) | NRFX_IPC_BITPOS(10)
- *     },
- *
- *     .rx_events_channels_cfg =
- *     {
- *         // [EVENT_RECEIVE_ID] = IPC_CHANNELS_TO_LISTEN_ON,
- *
- *         // Generate event recive number 0 when signal is set on channels 0 and 4
- *         [0] = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(4),
- *         [1] = NRFX_IPC_BITPOS(3) | NRFX_IPC_BITPOS(5),
- *         ...
- *         [n] = NRFX_IPC_BITPOS(4) | NRFX_IPC_BITPOS(10)
- *     },
- *     // Enable interrupts for events:
- *     .rx_events_enable_cfg = NRFX_IPC_BITPOS(0) | NRFX_IPC_BITPOS(3) |
- *                             NRFX_IPC_BITPOS(4) | NRFX_IPC_BITPOS(5) |
- *                             NRFX_IPC_BITPOS(10),
- * }
- */
+/** @brief IPC configuration structure. */
 typedef struct
 {
-    uint32_t tx_signals_channels_cfg[IPC_CONF_NUM]; ///< Configuration of the connection between signals and IPC channels.
-    uint32_t rx_events_channels_cfg[IPC_CONF_NUM];  ///< Configuration of the connection between events and IPC channels.
-    uint32_t rx_events_enable_cfg;                  ///< Bitmask with events to be enabled to generate interrupt.
+    uint32_t send_task_config[IPC_CONF_NUM];     ///< Configuration of the connection between signals and IPC channels.
+    uint32_t receive_event_config[IPC_CONF_NUM]; ///< Configuration of the connection between events and IPC channels.
+    uint32_t receive_events_enabled;             ///< Bitmask with events to be enabled to generate interrupt.
 } nrfx_ipc_config_t;
 
 /**
  * @brief Function for initializing the IPC driver.
  *
- * @param handler      Event handler provided by the user. Cannot be NULL.
  * @param irq_priority Interrupt priority.
+ * @param handler      Event handler provided by the user. Cannot be NULL.
  * @param p_context    Context passed to event handler.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE Driver is already initialized.
  */
-nrfx_err_t nrfx_ipc_init(nrfx_ipc_handler_t handler, uint8_t irq_priority, void * p_context);
+nrfx_err_t nrfx_ipc_init(uint8_t irq_priority, nrfx_ipc_handler_t handler, void * p_context);
 
 /**
  * @brief Function for loading configuration directly into IPC peripheral.
  *
  * @param p_config Pointer to the structure with the initial configuration.
- *
- * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE Driver is not initialized.
- * @retval NRFX_ERROR_INVALID_PARAM Data points to NULL pointer.
  */
-nrfx_err_t nrfx_ipc_config_load(nrfx_ipc_config_t const * p_config);
+void nrfx_ipc_config_load(nrfx_ipc_config_t const * p_config);
 
 /**
  * @brief Function for convey signal on configured channels.
@@ -103,9 +57,9 @@ nrfx_err_t nrfx_ipc_config_load(nrfx_ipc_config_t const * p_config);
  * Events connected to the IPC channels configured within this signal will
  * be set and can generate interrupts when configured.
  *
- * @param send_task_index Index of the SEND task to trigger.
+ * @param send_index Index of the SEND task to trigger.
  */
-NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index);
+NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_index);
 
 /**
  * @brief Function for storing data in GPMEM register in the IPC peripheral.
@@ -144,16 +98,16 @@ void nrfx_ipc_receive_event_disable(uint8_t event_index);
 /**
  * @brief Function for enabling set of events to generate interrupt.
  *
- * @param events_bitmask Bitmask with events to be enabled.
+ * @param event_bitmask Bitmask with events to be enabled.
  */
-void nrfx_ipc_receive_events_set_enable(uint32_t events_bitmask);
+void nrfx_ipc_receive_event_group_enable(uint32_t event_bitmask);
 
 /**
  * @brief Function for disabling set of events from generate interrupt.
  *
- * @param events_bitmask Bitmask with events to be disabled.
+ * @param event_bitmask Bitmask with events to be disabled.
  */
-void nrfx_ipc_receive_events_set_disable(uint32_t events_bitmask);
+void nrfx_ipc_receive_event_group_disable(uint32_t event_bitmask);
 
 /**
  * @brief Function for assigning event to the IPC channel.
@@ -174,18 +128,18 @@ void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index
 /**
  * @brief Function for assigning event to the IPC channels.
  *
- * @param event_index      Index of the event to be configured.
- * @param channels_bitmask Bitmask with channels to which event will be connected.
+ * @param event_index     Index of the event to be configured.
+ * @param channel_bitmask Bitmask with channels to which event will be connected.
  */
-void nrfx_ipc_receive_event_channels_config(uint8_t event_index, uint32_t channels_bitmask);
+NRFX_STATIC_INLINE void nrfx_ipc_receive_config_set(uint8_t event_index, uint32_t channel_bitmask);
 
 /**
  * @brief Function for assigning signal to the IPC channels.
  *
- * @param send_index       Index of the signal to be configured.
- * @param channels_bitmask Bitmask with channels to which signal will be connected.
+ * @param send_index      Index of the signal to be configured.
+ * @param channel_bitmask Bitmask with channels to which signal will be connected.
  */
-void nrfx_ipc_send_task_channels_config(uint8_t send_index, uint32_t channels_bitmask);
+NRFX_STATIC_INLINE void nrfx_ipc_send_config_set(uint8_t send_index, uint32_t channel_bitmask);
 
 /** @} */
 
@@ -204,10 +158,22 @@ NRFX_STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index)
     return nrf_ipc_gpmem_get(NRF_IPC, mem_index);
 }
 
-NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_task_index)
+NRFX_STATIC_INLINE void nrfx_ipc_signal(uint8_t send_index)
 {
-    NRFX_ASSERT(send_task_index < NRFX_ARRAY_SIZE(NRF_IPC->TASKS_SEND));
-    nrf_ipc_task_trigger(NRF_IPC, nrf_ipc_send_task_get(send_task_index));
+    NRFX_ASSERT(send_index < IPC_CONF_NUM);
+    nrf_ipc_task_trigger(NRF_IPC, nrf_ipc_send_task_get(send_index));
+}
+
+NRFX_STATIC_INLINE void nrfx_ipc_receive_config_set(uint8_t event_index, uint32_t channel_bitmask)
+{
+    NRFX_ASSERT(event_index < IPC_CONF_NUM);
+    nrf_ipc_receive_config_set(NRF_IPC, event_index, channel_bitmask);
+}
+
+NRFX_STATIC_INLINE void nrfx_ipc_send_config_set(uint8_t send_index, uint32_t channel_bitmask)
+{
+    NRFX_ASSERT(send_index < IPC_CONF_NUM);
+    nrf_ipc_send_config_set(NRF_IPC, send_index, channel_bitmask);
 }
 
 #endif // NRFX_DECLARE_ONLY
