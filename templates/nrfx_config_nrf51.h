@@ -1,3 +1,5 @@
+/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+
 #ifndef NRFX_CONFIG_NRF51_H__
 #define NRFX_CONFIG_NRF51_H__
 

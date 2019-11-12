@@ -1,3 +1,5 @@
+/*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
+
 #ifndef NRFX_CONFIG_H__
 #define NRFX_CONFIG_H__
 
