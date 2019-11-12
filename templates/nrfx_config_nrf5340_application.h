@@ -87,7 +87,7 @@
 // <e> NRFX_CLOCK_ENABLED - nrfx_clock - CLOCK peripheral driver.
 //==========================================================
 #ifndef NRFX_CLOCK_ENABLED
-#define NRFX_CLOCK_ENABLED 1
+#define NRFX_CLOCK_ENABLED 0
 #endif
 // <o> NRFX_CLOCK_CONFIG_LF_SRC  - LF clock source.
 
@@ -172,7 +172,7 @@
 // <e> NRFX_COMP_ENABLED - nrfx_comp - COMP peripheral driver
 //==========================================================
 #ifndef NRFX_COMP_ENABLED
-#define NRFX_COMP_ENABLED 1
+#define NRFX_COMP_ENABLED 0
 #endif
 
 // <o> NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -246,7 +246,7 @@
 // <e> NRFX_DPPI_ENABLED - nrfx_dppi - DPPI allocator.
 //==========================================================
 #ifndef NRFX_DPPI_ENABLED
-#define NRFX_DPPI_ENABLED 1
+#define NRFX_DPPI_ENABLED 0
 #endif
 // <e> NRFX_DPPI_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
@@ -304,43 +304,43 @@
 // <e> NRFX_EGU_ENABLED - nrfx_egu - EGU peripheral driver.
 //==========================================================
 #ifndef NRFX_EGU_ENABLED
-#define NRFX_EGU_ENABLED 1
+#define NRFX_EGU_ENABLED 0
 #endif
 
 // <q> NRFX_EGU0_ENABLED  - Enable EGU0 instance.
 
 #ifndef NRFX_EGU0_ENABLED
-#define NRFX_EGU0_ENABLED 1
+#define NRFX_EGU0_ENABLED 0
 #endif
 
 // <q> NRFX_EGU1_ENABLED  - Enable EGU1 instance.
 
 #ifndef NRFX_EGU1_ENABLED
-#define NRFX_EGU1_ENABLED 1
+#define NRFX_EGU1_ENABLED 0
 #endif
 
 // <q> NRFX_EGU2_ENABLED  - Enable EGU2 instance.
 
 #ifndef NRFX_EGU2_ENABLED
-#define NRFX_EGU2_ENABLED 1
+#define NRFX_EGU2_ENABLED 0
 #endif
 
 // <q> NRFX_EGU3_ENABLED  - Enable EGU3 instance.
 
 #ifndef NRFX_EGU3_ENABLED
-#define NRFX_EGU3_ENABLED 1
+#define NRFX_EGU3_ENABLED 0
 #endif
 
 // <q> NRFX_EGU4_ENABLED  - Enable EGU4 instance.
 
 #ifndef NRFX_EGU4_ENABLED
-#define NRFX_EGU4_ENABLED 1
+#define NRFX_EGU4_ENABLED 0
 #endif
 
 // <q> NRFX_EGU5_ENABLED  - Enable EGU5 instance.
 
 #ifndef NRFX_EGU5_ENABLED
-#define NRFX_EGU5_ENABLED 1
+#define NRFX_EGU5_ENABLED 0
 #endif
 
 // <o> NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -363,7 +363,7 @@
 // <e> NRFX_GPIOTE_ENABLED - nrfx_gpiote - GPIOTE peripheral driver.
 //==========================================================
 #ifndef NRFX_GPIOTE_ENABLED
-#define NRFX_GPIOTE_ENABLED 1
+#define NRFX_GPIOTE_ENABLED 0
 #endif
 // <o> NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS - Number of lower power input pins.
 #ifndef NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
@@ -441,7 +441,7 @@
 // <e> NRFX_I2S_ENABLED - nrfx_i2s - I2S peripheral driver.
 //==========================================================
 #ifndef NRFX_I2S_ENABLED
-#define NRFX_I2S_ENABLED 1
+#define NRFX_I2S_ENABLED 0
 #endif
 
 // <o> NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -515,7 +515,7 @@
 // <e> NRFX_IPC_ENABLED - nrfx_ipc - IPC peripheral driver
 //==========================================================
 #ifndef NRFX_IPC_ENABLED
-#define NRFX_IPC_ENABLED 1
+#define NRFX_IPC_ENABLED 0
 #endif
 
 // </e>
@@ -523,7 +523,7 @@
 // <e> NRFX_LPCOMP_ENABLED - nrfx_lpcomp - LPCOMP peripheral driver
 //==========================================================
 #ifndef NRFX_LPCOMP_ENABLED
-#define NRFX_LPCOMP_ENABLED 1
+#define NRFX_LPCOMP_ENABLED 0
 #endif
 
 // <o> NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -597,7 +597,7 @@
 // <e> NRFX_NFCT_ENABLED - nrfx_nfct - NFCT peripheral driver
 //==========================================================
 #ifndef NRFX_NFCT_ENABLED
-#define NRFX_NFCT_ENABLED 1
+#define NRFX_NFCT_ENABLED 0
 #endif
 // <o> NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
@@ -680,7 +680,7 @@
 // <e> NRFX_NVMC_ENABLED - nrfx_nvmc - NVMC peripheral driver
 //==========================================================
 #ifndef NRFX_NVMC_ENABLED
-#define NRFX_NVMC_ENABLED 1
+#define NRFX_NVMC_ENABLED 0
 #endif
 
 // </e>
@@ -688,7 +688,7 @@
 // <e> NRFX_PDM_ENABLED - nrfx_pdm - PDM peripheral driver.
 //==========================================================
 #ifndef NRFX_PDM_ENABLED
-#define NRFX_PDM_ENABLED 1
+#define NRFX_PDM_ENABLED 0
 #endif
 
 // <o> NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -762,7 +762,7 @@
 // <e> NRFX_POWER_ENABLED - nrfx_power - POWER peripheral driver.
 //==========================================================
 #ifndef NRFX_POWER_ENABLED
-#define NRFX_POWER_ENABLED 1
+#define NRFX_POWER_ENABLED 0
 #endif
 // <o> NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
@@ -784,27 +784,27 @@
 // <e> NRFX_PRS_ENABLED - nrfx_prs - Peripheral Resource Sharing (PRS) module.
 //==========================================================
 #ifndef NRFX_PRS_ENABLED
-#define NRFX_PRS_ENABLED 1
+#define NRFX_PRS_ENABLED 0
 #endif
 // <q> NRFX_PRS_BOX_0_ENABLED  - Enables box 0 in the module.
 
 
 #ifndef NRFX_PRS_BOX_0_ENABLED
-#define NRFX_PRS_BOX_0_ENABLED 1
+#define NRFX_PRS_BOX_0_ENABLED 0
 #endif
 
 // <q> NRFX_PRS_BOX_1_ENABLED  - Enables box 1 in the module.
 
 
 #ifndef NRFX_PRS_BOX_1_ENABLED
-#define NRFX_PRS_BOX_1_ENABLED 1
+#define NRFX_PRS_BOX_1_ENABLED 0
 #endif
 
 // <q> NRFX_PRS_BOX_2_ENABLED  - Enables box 2 in the module.
 
 
 #ifndef NRFX_PRS_BOX_2_ENABLED
-#define NRFX_PRS_BOX_2_ENABLED 1
+#define NRFX_PRS_BOX_2_ENABLED 0
 #endif
 
 
@@ -864,27 +864,27 @@
 // <e> NRFX_PWM_ENABLED - nrfx_pwm - PWM peripheral driver.
 //==========================================================
 #ifndef NRFX_PWM_ENABLED
-#define NRFX_PWM_ENABLED 1
+#define NRFX_PWM_ENABLED 0
 #endif
 // <q> NRFX_PWM0_ENABLED  - Enables PWM0 instance.
 
 
 #ifndef NRFX_PWM0_ENABLED
-#define NRFX_PWM0_ENABLED 1
+#define NRFX_PWM0_ENABLED 0
 #endif
 
 // <q> NRFX_PWM1_ENABLED  - Enables PWM1 instance.
 
 
 #ifndef NRFX_PWM1_ENABLED
-#define NRFX_PWM1_ENABLED 1
+#define NRFX_PWM1_ENABLED 0
 #endif
 
 // <q> NRFX_PWM2_ENABLED  - Enables PWM2 instance.
 
 
 #ifndef NRFX_PWM2_ENABLED
-#define NRFX_PWM2_ENABLED 1
+#define NRFX_PWM2_ENABLED 0
 #endif
 
 // <o> NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -958,7 +958,7 @@
 // <e> NRFX_QDEC_ENABLED - nrfx_qdec - QDEC peripheral driver
 //==========================================================
 #ifndef NRFX_QDEC_ENABLED
-#define NRFX_QDEC_ENABLED 1
+#define NRFX_QDEC_ENABLED 0
 #endif
 
 // <o> NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -1032,7 +1032,7 @@
 // <e> NRFX_QSPI_ENABLED - nrfx_qspi - QSPI peripheral driver
 //==========================================================
 #ifndef NRFX_QSPI_ENABLED
-#define NRFX_QSPI_ENABLED 1
+#define NRFX_QSPI_ENABLED 0
 #endif
 
 // <o> NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -1055,20 +1055,20 @@
 // <e> NRFX_RTC_ENABLED - nrfx_rtc - RTC peripheral driver.
 //==========================================================
 #ifndef NRFX_RTC_ENABLED
-#define NRFX_RTC_ENABLED 1
+#define NRFX_RTC_ENABLED 0
 #endif
 // <q> NRFX_RTC0_ENABLED  - Enables RTC0 instance.
 
 
 #ifndef NRFX_RTC0_ENABLED
-#define NRFX_RTC0_ENABLED 1
+#define NRFX_RTC0_ENABLED 0
 #endif
 
 // <q> NRFX_RTC1_ENABLED  - Enables RTC1 instance.
 
 
 #ifndef NRFX_RTC1_ENABLED
-#define NRFX_RTC1_ENABLED 1
+#define NRFX_RTC1_ENABLED 0
 #endif
 
 // <o> NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1142,7 +1142,7 @@
 // <e> NRFX_SAADC_ENABLED - nrfx_saadc - SAADC peripheral driver.
 //==========================================================
 #ifndef NRFX_SAADC_ENABLED
-#define NRFX_SAADC_ENABLED 1
+#define NRFX_SAADC_ENABLED 0
 #endif
 
 // <o> NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1216,27 +1216,27 @@
 // <e> NRFX_SPIM_ENABLED - nrfx_spim - SPIM peripheral driver.
 //==========================================================
 #ifndef NRFX_SPIM_ENABLED
-#define NRFX_SPIM_ENABLED 1
+#define NRFX_SPIM_ENABLED 0
 #endif
 // <q> NRFX_SPIM0_ENABLED  - Enables SPIM0 instance.
 
 
 #ifndef NRFX_SPIM0_ENABLED
-#define NRFX_SPIM0_ENABLED 1
+#define NRFX_SPIM0_ENABLED 0
 #endif
 
 // <q> NRFX_SPIM1_ENABLED  - Enables SPIM1 instance.
 
 
 #ifndef NRFX_SPIM1_ENABLED
-#define NRFX_SPIM1_ENABLED 1
+#define NRFX_SPIM1_ENABLED 0
 #endif
 
 // <q> NRFX_SPIM2_ENABLED  - Enables SPIM2 instance.
 
 
 #ifndef NRFX_SPIM2_ENABLED
-#define NRFX_SPIM2_ENABLED 1
+#define NRFX_SPIM2_ENABLED 0
 #endif
 
 
@@ -1311,20 +1311,20 @@
 // <e> NRFX_SPIS_ENABLED - nrfx_spis - SPIS peripheral driver.
 //==========================================================
 #ifndef NRFX_SPIS_ENABLED
-#define NRFX_SPIS_ENABLED 1
+#define NRFX_SPIS_ENABLED 0
 #endif
 // <q> NRFX_SPIS0_ENABLED  - Enables SPIS0 instance.
 
 
 #ifndef NRFX_SPIS0_ENABLED
-#define NRFX_SPIS0_ENABLED 1
+#define NRFX_SPIS0_ENABLED 0
 #endif
 
 // <q> NRFX_SPIS1_ENABLED  - Enables SPIS1 instance.
 
 
 #ifndef NRFX_SPIS1_ENABLED
-#define NRFX_SPIS1_ENABLED 1
+#define NRFX_SPIS1_ENABLED 0
 #endif
 
 // <o> NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1399,33 +1399,33 @@
 
 
 #ifndef NRFX_SYSTICK_ENABLED
-#define NRFX_SYSTICK_ENABLED 1
+#define NRFX_SYSTICK_ENABLED 0
 #endif
 
 // <e> NRFX_TIMER_ENABLED - nrfx_timer - TIMER periperal driver.
 //==========================================================
 #ifndef NRFX_TIMER_ENABLED
-#define NRFX_TIMER_ENABLED 1
+#define NRFX_TIMER_ENABLED 0
 #endif
 // <q> NRFX_TIMER0_ENABLED  - Enables TIMER0 instance.
 
 
 #ifndef NRFX_TIMER0_ENABLED
-#define NRFX_TIMER0_ENABLED 1
+#define NRFX_TIMER0_ENABLED 0
 #endif
 
 // <q> NRFX_TIMER1_ENABLED  - Enables TIMER1 instance.
 
 
 #ifndef NRFX_TIMER1_ENABLED
-#define NRFX_TIMER1_ENABLED 1
+#define NRFX_TIMER1_ENABLED 0
 #endif
 
 // <q> NRFX_TIMER2_ENABLED  - Enables TIMER2 instance.
 
 
 #ifndef NRFX_TIMER2_ENABLED
-#define NRFX_TIMER2_ENABLED 1
+#define NRFX_TIMER2_ENABLED 0
 #endif
 
 // <o> NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1499,20 +1499,20 @@
 // <e> NRFX_TWIM_ENABLED - nrfx_twim - TWIM peripheral driver.
 //==========================================================
 #ifndef NRFX_TWIM_ENABLED
-#define NRFX_TWIM_ENABLED 1
+#define NRFX_TWIM_ENABLED 0
 #endif
 // <q> NRFX_TWIM0_ENABLED  - Enables TWIM0 instance.
 
 
 #ifndef NRFX_TWIM0_ENABLED
-#define NRFX_TWIM0_ENABLED 1
+#define NRFX_TWIM0_ENABLED 0
 #endif
 
 // <q> NRFX_TWIM1_ENABLED  - Enables TWIM1 instance.
 
 
 #ifndef NRFX_TWIM1_ENABLED
-#define NRFX_TWIM1_ENABLED 1
+#define NRFX_TWIM1_ENABLED 0
 #endif
 
 // <o> NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1586,19 +1586,19 @@
 // <e> NRFX_TWIS_ENABLED - nrfx_twis - TWIS peripheral driver.
 //==========================================================
 #ifndef NRFX_TWIS_ENABLED
-#define NRFX_TWIS_ENABLED 1
+#define NRFX_TWIS_ENABLED 0
 #endif
 
 // <q> NRFX_TWIS0_ENABLED  - Enables TWIS0 instance.
 
 #ifndef NRFX_TWIS0_ENABLED
-#define NRFX_TWIS0_ENABLED 1
+#define NRFX_TWIS0_ENABLED 0
 #endif
 
 // <q> NRFX_TWIS1_ENABLED  - Enables TWIS1 instance.
 
 #ifndef NRFX_TWIS1_ENABLED
-#define NRFX_TWIS1_ENABLED 1
+#define NRFX_TWIS1_ENABLED 0
 #endif
 
 // <q> NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY  - Assumes that any instance would be initialized only once.
@@ -1688,16 +1688,16 @@
 // <e> NRFX_UARTE_ENABLED - nrfx_uarte - UARTE peripheral driver.
 //==========================================================
 #ifndef NRFX_UARTE_ENABLED
-#define NRFX_UARTE_ENABLED 1
+#define NRFX_UARTE_ENABLED 0
 #endif
 // <o> NRFX_UARTE0_ENABLED - Enables UARTE0 instances
 #ifndef NRFX_UARTE0_ENABLED
-#define NRFX_UARTE0_ENABLED 1
+#define NRFX_UARTE0_ENABLED 0
 #endif
 
 // <o> NRFX_UARTE1_ENABLED - Enables UARTE1 instance.
 #ifndef NRFX_UARTE1_ENABLED
-#define NRFX_UARTE1_ENABLED 1
+#define NRFX_UARTE1_ENABLED 0
 #endif
 
 // <o> NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1771,20 +1771,20 @@
 // <e> NRFX_WDT_ENABLED - nrfx_wdt - WDT peripheral driver.
 //==========================================================
 #ifndef NRFX_WDT_ENABLED
-#define NRFX_WDT_ENABLED 1
+#define NRFX_WDT_ENABLED 0
 #endif
 // <q> NRFX_WDT0_ENABLED  - Enable WDT0 instance.
 
 
 #ifndef NRFX_WDT0_ENABLED
-#define NRFX_WDT0_ENABLED 1
+#define NRFX_WDT0_ENABLED 0
 #endif
 
 // <q> NRFX_WDT1_ENABLED  - Enable WDT1 instance.
 
 
 #ifndef NRFX_WDT1_ENABLED
-#define NRFX_WDT1_ENABLED 1
+#define NRFX_WDT1_ENABLED 0
 #endif
 
 // <o> NRFX_WDT_CONFIG_NO_IRQ  - Remove WDT IRQ handling from WDT driver.
