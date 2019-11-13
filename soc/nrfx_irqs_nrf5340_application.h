@@ -42,7 +42,7 @@ extern "C" {
 #define nrfx_spim_2_irq_handler     SPIM2_IRQHandler
 
 // GPIOTE0_IRQn
-#define nrfx_gpiote_irq_handler     GPIOTE0_IRQHandler
+#define nrfx_gpiote_irq_handler     GPIOTE_IRQHandler
 
 // SAADC_IRQn
 #define nrfx_saadc_irq_handler      SAADC_IRQHandler

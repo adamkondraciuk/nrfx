@@ -21,8 +21,6 @@
 #define NRF_EGU4         NRF_EGU4_S
 #define NRF_EGU5         NRF_EGU5_S
 #define NRF_FPU          NRF_FPU_S
-#define NRF_P0           NRF_P0_S
-#define NRF_P1           NRF_P1_S
 #define NRF_I2S          NRF_I2S0_S
 #define NRF_IPC          NRF_IPC_S
 #define NRF_KMU          NRF_KMU_S
@@ -30,6 +28,9 @@
 #define NRF_MUTEX        NRF_MUTEX_S
 #define NRF_NFCT         NRF_NFCT_S
 #define NRF_NVMC         NRF_NVMC_S
+#define NRF_P0           NRF_P0_S
+#define NRF_P1           NRF_P1_S
+#define NRF_PDM0         NRF_PDM0_S
 #define NRF_POWER        NRF_POWER_S
 #define NRF_PWM0         NRF_PWM0_S
 #define NRF_PWM1         NRF_PWM1_S
@@ -61,7 +62,11 @@
 #define NRF_WDT0         NRF_WDT0_S
 #define NRF_WDT1         NRF_WDT1_S
 
-/* Unchangable configuration. */
+/*
+ * The following section provides the name translation for peripherals with
+ * only one type of access available. For these peripherals, you cannot choose
+ * between secure and non-secure mapping.
+ */
 #define NRF_CACHE      NRF_CACHE_S
 #define NRF_CACHEINFO  NRF_CACHEINFO_S
 #define NRF_CACHEDATA  NRF_CACHEDATA_S
@@ -72,15 +77,12 @@
 #define NRF_SPU        NRF_SPU_S
 #define NRF_UICR       NRF_UICR_S
 
-/* Fixups for GPIOTE/WDT/PDM HAL and driver. */
-#define NRF_GPIOTE        NRF_GPIOTE0_S
-#define GPIOTE_IRQn       GPIOTE0_IRQn
+/* Fixups for GPIOTE driver. */
+#define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
-
-#define NRF_PDM        NRF_PDM0_S
-#define PDM_IRQn       PDM0_IRQn
-#define PDM_IRQHandler PDM0_IRQHandler
+/* Fixup for PDM driver. */
+#define NRF_PDM NRF_PDM0
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
