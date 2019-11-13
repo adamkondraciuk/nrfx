@@ -20,11 +20,11 @@
 #define NRF_EGU4       NRF_EGU4_S
 #define NRF_EGU5       NRF_EGU5_S
 #define NRF_FPU        NRF_FPU_S
-#define NRF_P0         NRF_P0_S
 #define NRF_I2S        NRF_I2S_S
 #define NRF_IPC        NRF_IPC_S
 #define NRF_KMU        NRF_KMU_S
 #define NRF_NVMC       NRF_NVMC_S
+#define NRF_P0         NRF_P0_S
 #define NRF_PDM        NRF_PDM_S
 #define NRF_POWER      NRF_POWER_S
 #define NRF_PWM0       NRF_PWM0_S
@@ -73,8 +73,8 @@
 #define NRF_SPU        NRF_SPU_S
 #define NRF_UICR       NRF_UICR_S
 
-/* Fixups for GPIOTE HAL and driver. */
-#define NRF_GPIOTE        NRF_GPIOTE0_S
+/* Fixups for GPIOTE driver. */
+#define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
