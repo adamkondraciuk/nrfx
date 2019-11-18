@@ -8,6 +8,10 @@
 extern "C" {
 #endif
 
+#ifndef NRF_PDM0
+#define NRF_PDM0 NRF_PDM
+#endif
+
 /**
  * @defgroup nrf_pdm_hal PDM HAL
  * @{

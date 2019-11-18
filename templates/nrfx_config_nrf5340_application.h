@@ -81,9 +81,6 @@
 #define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
-/* Fixup for PDM driver. */
-#define NRF_PDM NRF_PDM0
-
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
 // <h> nRF_Drivers
