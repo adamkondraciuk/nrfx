@@ -10,10 +10,6 @@
 extern "C" {
 #endif
 
-#ifndef NRF_WDT0
-#define NRF_WDT0 NRF_WDT
-#endif
-
 /**
  * @defgroup nrfx_wdt WDT driver
  * @{

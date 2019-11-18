@@ -9,6 +9,10 @@
 extern "C" {
 #endif
 
+#ifndef NRF_WDT0
+#define NRF_WDT0 NRF_WDT
+#endif
+
 /**
  * @defgroup nrf_wdt_hal WDT HAL
  * @{
