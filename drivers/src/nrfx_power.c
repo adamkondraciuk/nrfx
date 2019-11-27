@@ -109,7 +109,7 @@ void nrfx_power_uninit(void)
 #if NRF_POWER_HAS_SLEEPEVT
     nrfx_power_sleepevt_uninit();
 #endif
-#if NRF_POWER_HAS_USBREG
+#if NRF_POWER_HAS_USBREG || NRF_USBREG_CONTROL
     nrfx_power_usbevt_uninit();
 #endif
     m_initialized = false;
@@ -220,8 +220,11 @@ void nrfx_power_usbevt_disable(void)
 
 void nrfx_power_usbevt_uninit(void)
 {
+    nrfx_power_usbevt_disable();
     m_usbevt_handler = NULL;
 }
+
+
 #endif /* NRF_POWER_HAS_USBREG */
 
 

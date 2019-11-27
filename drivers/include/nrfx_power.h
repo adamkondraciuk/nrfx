@@ -6,6 +6,7 @@
 #include <nrfx.h>
 #include <hal/nrf_power.h>
 #include <nrfx_power_clock.h>
+#include "nrfx_power_compat.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -67,7 +68,7 @@ typedef enum
     NRFX_POWER_USB_STATE_CONNECTED,    /**< The USB power is detected, but USB power regulator is not ready. */
     NRFX_POWER_USB_STATE_READY         /**< From the power viewpoint, USB is ready for working. */
 }nrfx_power_usb_state_t;
-#endif /* NRF_POWER_HAS_USBREG */
+#endif // NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 
 /**
  * @name Callback types
@@ -169,7 +170,7 @@ typedef struct
 {
     nrfx_power_usb_event_handler_t handler; //!< Event processing.
 }nrfx_power_usbevt_config_t;
-#endif /* NRF_POWER_HAS_USBREG */
+#endif // NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for getting the handler of the power failure comparator.
@@ -183,7 +184,7 @@ nrfx_power_pofwarn_event_handler_t nrfx_power_pof_handler_get(void);
  * @return Handler of the USB power.
  */
 nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
-#endif
+#endif // NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for initializing the power module driver.
@@ -307,7 +308,7 @@ void nrfx_power_usbevt_uninit(void);
  */
 NRFX_STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void);
 
-#endif /* NRF_POWER_HAS_USBREG */
+#endif // NRF_POWER_HAS_USBREG || defined(__NRFX_DOXYGEN__)
 
 #ifndef NRFX_DECLARE_ONLY
 #if NRF_POWER_HAS_USBREG
@@ -324,8 +325,8 @@ NRFX_STATIC_INLINE nrfx_power_usb_state_t nrfx_power_usbstatus_get(void)
     }
     return NRFX_POWER_USB_STATE_READY;
 }
-#endif /* NRF_POWER_HAS_USBREG */
-#endif /* NRFX_DECLARE_ONLY */
+#endif // NRF_POWER_HAS_USBREG
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 
