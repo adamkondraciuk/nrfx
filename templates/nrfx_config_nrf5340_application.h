@@ -1769,6 +1769,30 @@
 
 // </e>
 
+// <e> NRFX_USBREG_ENABLED - nrfx_usbreg - USBREG peripheral driver
+//==========================================================
+#ifndef NRFX_USBREG_ENABLED
+#define NRFX_USBREG_ENABLED 0
+#endif
+// <o> NRFX_USBREG_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
+
+// <0=> 0 (highest)
+// <1=> 1
+// <2=> 2
+// <3=> 3
+// <4=> 4
+// <5=> 5
+// <6=> 6
+// <7=> 7
+
+#ifndef NRFX_USBREG_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_USBREG_DEFAULT_CONFIG_IRQ_PRIORITY 7
+#endif
+
+// </e>
+
+// </e>
+
 // <e> NRFX_WDT_ENABLED - nrfx_wdt - WDT peripheral driver.
 //==========================================================
 #ifndef NRFX_WDT_ENABLED
