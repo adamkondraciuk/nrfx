@@ -21,21 +21,14 @@ extern "C" {
 #define NRF_POWER_HAS_SLEEPEVT 1
 #else
 #define NRF_POWER_HAS_SLEEPEVT 0
-#endif // defined(POWER_INTENSET_SLEEPENTER_Msk) || defined(__NRFX_DOXYGEN__)
+#endif
 
 #if defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the POWER peripheral controls the USB regulator. */
 #define NRF_POWER_HAS_USBREG 1
 #else
 #define NRF_POWER_HAS_USBREG 0
-#endif // defined(POWER_USBREGSTATUS_VBUSDETECT_Msk) || defined(__NRFX_DOXYGEN__)
-
-#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether VDDH is present. */
-#define NRF_POWER_HAS_VDDH 1
-#else
-#define NRF_POWER_HAS_VDDH 0
-#endif // defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
+#endif
 
 #if defined(POWER_DCDCEN0_DCDCEN_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether DCDCEN for REG0 is present. */
@@ -51,11 +44,25 @@ extern "C" {
 #define NRF_POWER_HAS_DCDCEN 0
 #endif
 
+#if defined(POWER_INTENSET_POFWARN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether power failure event is present. */
+#define NRF_POWER_HAS_POFWARN 1
+#else
+#define NRF_POWER_HAS_POFWARN 0
+#endif
+
 #if defined(POWER_POFCON_THRESHOLD_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether POFCON is present. */
+/** @brief Symbol indicating whether power failure comparator is present. */
 #define NRF_POWER_HAS_POFCON 1
 #else
 #define NRF_POWER_HAS_POFCON 0
+#endif
+
+#if defined(POWER_POFCON_THRESHOLDVDDH_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether power failure comparator for VDDH is present. */
+#define NRF_POWER_HAS_POFCON_VDDH 1
+#else
+#define NRF_POWER_HAS_POFCON_VDDH 0
 #endif
 
 #if defined(POWER_RESETREAS_RESETPIN_Msk) || defined(__NRFX_DOXYGEN__)
@@ -63,6 +70,13 @@ extern "C" {
 #define NRF_POWER_HAS_RESETREAS 1
 #else
 #define NRF_POWER_HAS_RESETREAS 0
+#endif
+
+#if defined(POWER_MAINREGSTATUS_MAINREGSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether MAINREGSTATUS register is present. */
+#define NRF_POWER_HAS_MAINREGSTATUS 1
+#else
+#define NRF_POWER_HAS_MAINREGSTATUS 0
 #endif
 
 /** @brief POWER tasks. */
@@ -75,7 +89,7 @@ typedef enum
 /** @brief POWER events. */
 typedef enum
 {
-#if NRF_POWER_HAS_POFCON
+#if NRF_POWER_HAS_POFWARN
     NRF_POWER_EVENT_POFWARN      = offsetof(NRF_POWER_Type, EVENTS_POFWARN    ), /**< Power failure warning. */
 #endif
 #if NRF_POWER_HAS_SLEEPEVT
@@ -92,7 +106,7 @@ typedef enum
 /** @brief POWER interrupts. */
 typedef enum
 {
-#if NRF_POWER_HAS_POFCON
+#if NRF_POWER_HAS_POFWARN
     NRF_POWER_INT_POFWARN_MASK     = POWER_INTENSET_POFWARN_Msk    , /**< Write '1' to Enable interrupt for POFWARN event. */
 #endif
 #if NRF_POWER_HAS_SLEEPEVT
@@ -229,7 +243,7 @@ typedef enum
 } nrf_power_pof_thr_t;
 #endif // NRF_POWER_HAS_POFCON
 
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_POFCON_VDDH
 /** @brief Power failure comparator thresholds for VDDH. */
 typedef enum
 {
@@ -250,15 +264,16 @@ typedef enum
     NRF_POWER_POFTHRVDDH_V41 = POWER_POFCON_THRESHOLDVDDH_V41, /**< Set threshold to 4.1&nbsp;V. */
     NRF_POWER_POFTHRVDDH_V42 = POWER_POFCON_THRESHOLDVDDH_V42, /**< Set threshold to 4.2&nbsp;V. */
 } nrf_power_pof_thrvddh_t;
+#endif // NRF_POWER_HAS_POFCON_VDDH
 
+#if NRF_POWER_HAS_MAINREGSTATUS
 /** @brief Main regulator status. */
 typedef enum
 {
     NRF_POWER_MAINREGSTATUS_NORMAL = POWER_MAINREGSTATUS_MAINREGSTATUS_Normal, /**< Normal voltage mode. Voltage supplied on VDD. */
     NRF_POWER_MAINREGSTATUS_HIGH   = POWER_MAINREGSTATUS_MAINREGSTATUS_High    /**< High voltage mode. Voltage supplied on VDDH.  */
 } nrf_power_mainregstatus_t;
-
-#endif // NRF_POWER_HAS_VDDH
+#endif
 
 #if defined(POWER_RAM_POWER_S0POWER_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -559,15 +574,9 @@ NRF_STATIC_INLINE void nrf_power_system_off(NRF_POWER_Type * p_reg);
 /**
  * @brief Function for setting the power failure comparator configuration.
  *
- * This function sets the power failure comparator threshold and enables or disables flag.
- *
- * @note If VDDH settings are present in the device, this function will
- *       clear its settings (set to the lowest voltage).
- *       Use @ref nrf_power_pofcon_vddh_set function to set new value.
- *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] enabled Sets to true if power failure comparator is to be enabled.
- * @param[in] thr     Sets the voltage threshold value.
+ * @param[in] enabled True if the power failure comparator is to be enabled.
+ * @param[in] thr     voltage threshold value.
  */
 NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
                                             bool                enabled,
@@ -587,7 +596,7 @@ NRF_STATIC_INLINE nrf_power_pof_thr_t nrf_power_pofcon_get(NRF_POWER_Type const 
                                                            bool *                 p_enabled);
 #endif // NRF_POWER_HAS_POFCON
 
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_POFCON_VDDH
 /**
  * @brief Function for setting the VDDH power failure comparator threshold.
  *
@@ -605,7 +614,7 @@ NRF_STATIC_INLINE void nrf_power_pofcon_vddh_set(NRF_POWER_Type *        p_reg,
  * @return VDDH threshold currently configured.
  */
 NRF_STATIC_INLINE nrf_power_pof_thrvddh_t nrf_power_pofcon_vddh_get(NRF_POWER_Type const * p_reg);
-#endif // NRF_POWER_HAS_VDDH
+#endif // NRF_POWER_HAS_POFCON_VDDH
 
 /**
  * @brief Function for setting the general purpose retention register.
@@ -760,7 +769,7 @@ NRF_STATIC_INLINE void nrf_power_dcdcen_vddh_set(NRF_POWER_Type * p_reg, bool en
 NRF_STATIC_INLINE bool nrf_power_dcdcen_vddh_get(NRF_POWER_Type const * p_reg);
 #endif // NRF_POWER_HAS_DCDCEN_VDDH
 
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_MAINREGSTATUS
 /**
  * @brief Function for getting the main supply status.
  *
@@ -770,7 +779,7 @@ NRF_STATIC_INLINE bool nrf_power_dcdcen_vddh_get(NRF_POWER_Type const * p_reg);
  */
 NRF_STATIC_INLINE
 nrf_power_mainregstatus_t nrf_power_mainregstatus_get(NRF_POWER_Type const * p_reg);
-#endif // NRF_POWER_HAS_VDDH
+#endif // NRF_POWER_HAS_MAINREGSTATUS
 
 #if NRF_POWER_HAS_USBREG
 /**
@@ -953,11 +962,11 @@ NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
                                             nrf_power_pof_thr_t thr)
 {
     NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLD_Msk >> POWER_POFCON_THRESHOLD_Pos)));
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_POFCON_VDDH
     uint32_t pofcon = p_reg->POFCON;
     pofcon &= ~(POWER_POFCON_THRESHOLD_Msk | POWER_POFCON_POF_Msk);
     pofcon |=
-#else // NRF_POWER_HAS_VDDH
+#else // NRF_POWER_HAS_POFCON_VDDH
     p_reg->POFCON =
 #endif
         (((uint32_t)thr) << POWER_POFCON_THRESHOLD_Pos) |
@@ -965,7 +974,7 @@ NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
         (POWER_POFCON_POF_Enabled << POWER_POFCON_POF_Pos)
         :
         (POWER_POFCON_POF_Disabled << POWER_POFCON_POF_Pos));
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_POFCON_VDDH
     p_reg->POFCON = pofcon;
 #endif
 }
@@ -984,7 +993,7 @@ NRF_STATIC_INLINE nrf_power_pof_thr_t nrf_power_pofcon_get(NRF_POWER_Type const 
 }
 #endif // NRF_POWER_HAS_POFCON
 
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_POFCON_VDDH
 NRF_STATIC_INLINE void nrf_power_pofcon_vddh_set(NRF_POWER_Type *        p_reg,
                                                  nrf_power_pof_thrvddh_t thr)
 {
@@ -1000,7 +1009,7 @@ NRF_STATIC_INLINE nrf_power_pof_thrvddh_t nrf_power_pofcon_vddh_get(NRF_POWER_Ty
     return (nrf_power_pof_thrvddh_t)((p_reg->POFCON & POWER_POFCON_THRESHOLDVDDH_Msk) >>
                                      POWER_POFCON_THRESHOLDVDDH_Pos);
 }
-#endif // NRF_POWER_HAS_VDDH
+#endif // NRF_POWER_HAS_POFCON_VDDH
 
 NRF_STATIC_INLINE void nrf_power_gpregret_set(NRF_POWER_Type * p_reg, uint8_t val)
 {
@@ -1098,7 +1107,7 @@ NRF_STATIC_INLINE uint32_t nrf_power_rampower_mask_get(NRF_POWER_Type const * p_
 {
     return p_reg->RAM[block].POWER;
 }
-#endif /* defined(POWER_RAM_POWER_S0POWER_Msk) */
+#endif // defined(POWER_RAM_POWER_S0POWER_Msk)
 
 #if NRF_POWER_HAS_DCDCEN_VDDH
 NRF_STATIC_INLINE void nrf_power_dcdcen_vddh_set(NRF_POWER_Type * p_reg, bool enable)
@@ -1115,7 +1124,7 @@ NRF_STATIC_INLINE bool nrf_power_dcdcen_vddh_get(NRF_POWER_Type const * p_reg)
 }
 #endif // NRF_POWER_HAS_DCDCEN_VDDH
 
-#if NRF_POWER_HAS_VDDH
+#if NRF_POWER_HAS_MAINREGSTATUS
 NRF_STATIC_INLINE
 nrf_power_mainregstatus_t nrf_power_mainregstatus_get(NRF_POWER_Type const * p_reg)
 {
@@ -1123,7 +1132,7 @@ nrf_power_mainregstatus_t nrf_power_mainregstatus_get(NRF_POWER_Type const * p_r
         POWER_MAINREGSTATUS_MAINREGSTATUS_Msk) >>
         POWER_MAINREGSTATUS_MAINREGSTATUS_Pos);
 }
-#endif // NRF_POWER_HAS_VDDH
+#endif // NRF_POWER_HAS_MAINREGSTATUS
 
 #if NRF_POWER_HAS_USBREG
 NRF_STATIC_INLINE uint32_t nrf_power_usbregstatus_get(NRF_POWER_Type const * p_reg)
