@@ -60,15 +60,30 @@
 #endif
 // <o> NRFX_CLOCK_CONFIG_LF_SRC  - LF clock source.
 
-// <0=> RC
-// <1=> XTAL
-// <2=> Synth
-// <131073=> External Low Swing
-// <196609=> External Full Swing
+// <0=> ULP
+// <1=> RC
+// <2=> XTAL
+// <3=> Synth
 
 #ifndef NRFX_CLOCK_CONFIG_LF_SRC
-#define NRFX_CLOCK_CONFIG_LF_SRC 1
+#define NRFX_CLOCK_CONFIG_LF_SRC 2
 #endif
+
+// <q> NRFX_CLOCK_CONFIG_LF_CAL_ENABLED  - Enables LF Clock Calibration Support
+
+#ifndef NRFX_CLOCK_CONFIG_LF_CAL_ENABLED
+#define NRFX_CLOCK_CONFIG_LF_CAL_ENABLED 0
+#endif
+
+// <o> NRFX_CLOCK_CONFIG_HFCLK192M_SRC  - HFCLK192M source.
+
+// <0=> HFINT
+// <1=> HFXO
+
+#ifndef NRFX_CLOCK_CONFIG_HFCLK192M_SRC
+#define NRFX_CLOCK_CONFIG_HFCLK192M_SRC 1
+#endif
+
 
 // <o> NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
