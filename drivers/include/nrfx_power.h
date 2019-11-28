@@ -5,6 +5,9 @@
 
 #include <nrfx.h>
 #include <hal/nrf_power.h>
+#if defined(REGULATORS_PRESENT)
+#include <hal/nrf_regulators.h>
+#endif
 #include <nrfx_power_clock.h>
 #include "nrfx_power_compat.h"
 
@@ -18,6 +21,29 @@ extern "C" {
  * @ingroup nrf_power
  * @brief   POWER peripheral driver.
  */
+
+#if NRF_POWER_HAS_POFCON || NRFX_CHECK(NRF_REGULATORS_HAS_POFCON) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the power failure comparator is supported. */
+#define NRFX_POWER_SUPPORTS_POFCON 1
+#else
+#define NRFX_POWER_SUPPORTS_POFCON 0
+#endif
+
+#if NRF_POWER_HAS_POFCON_VDDH || NRFX_CHECK(NRF_REGULATORS_HAS_POFCON_VDDH) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the power failure comparator for VDDH is supported. */
+#define NRFX_POWER_SUPPORTS_POFCON_VDDH 1
+#else
+#define NRFX_POWER_SUPPORTS_POFCON_VDDH 0
+#endif
+
+#if NRF_POWER_HAS_DCDCEN_VDDH || NRFX_CHECK(NRF_REGULATORS_HAS_DCDCEN_VDDH) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the VDDH regulator is supported. */
+#define NRFX_POWER_SUPPORTS_DCDCEN_VDDH 1
+#else
+#define NRFX_POWER_SUPPORTS_DCDCEN_VDDH 0
+#endif
 
 /**
  * @brief Power mode possible configurations
@@ -117,7 +143,7 @@ typedef struct
      */
     bool dcdcen:1;
 
-#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
+#if NRFX_POWER_SUPPORTS_DCDCEN_VDDH
     /**
      * @brief Enable HV DCDC regulator.
      *
@@ -138,10 +164,10 @@ typedef struct
 typedef struct
 {
     nrfx_power_pofwarn_event_handler_t handler; //!< Event handler.
-#if NRF_POWER_HAS_POFCON || defined(__NRFX_DOXYGEN__)
+#if NRFX_POWER_SUPPORTS_POFCON
     nrf_power_pof_thr_t                thr;     //!< Threshold for power failure detection
 #endif
-#if NRF_POWER_HAS_VDDH || defined(__NRFX_DOXYGEN__)
+#if NRFX_POWER_SUPPORTS_POFCON_VDDH
     nrf_power_pof_thrvddh_t            thrvddh; //!< Threshold for power failure detection on the VDDH pin.
 #endif
 }nrfx_power_pofwarn_config_t;
@@ -207,7 +233,7 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config);
  */
 void nrfx_power_uninit(void);
 
-#if NRF_POWER_HAS_POFCON || defined(__NRFX_DOXYGEN__)
+#if NRFX_POWER_SUPPORTS_POFCON
 /**
  * @brief Function for initializing the power failure comparator.
  *
@@ -243,7 +269,7 @@ void nrfx_power_pof_disable(void);
  * Clears the settings of the power failure comparator.
  */
 void nrfx_power_pof_uninit(void);
-#endif // NRF_POWER_HAS_POFCON || defined(__NRFX_DOXYGEN__)
+#endif // NRFX_POWER_SUPPORTS_POFCON
 
 #if NRF_POWER_HAS_SLEEPEVT || defined(__NRFX_DOXYGEN__)
 /**
