@@ -169,7 +169,7 @@ void nrfx_i2s_uninit(void);
  * word can either contain four 8-bit samples, two 16-bit samples, or one
  * right-aligned 24-bit sample sign-extended to a 32-bit value.
  * For a detailed memory mapping for different supported configurations,
- * see the @linkProductSpecification52.
+ * see the Product Specification.
  *
  * @note Peripherals using EasyDMA (including I2S) require the transfer buffers
  *       to be placed in the Data RAM region. If this condition is not met,
