@@ -17,9 +17,9 @@ extern "C" {
  */
 
 /**
- * @brief Function for getting the value of CPU ID.
+ * @brief Function for getting the value of the CPU ID.
  *
- * CPU ID can be used to identify the CPU.
+ * CPU ID can be used to identify the specific CPU in the multi-core environment.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -28,8 +28,8 @@ extern "C" {
 NRF_STATIC_INLINE uint32_t nrf_dcnf_cpuid_get(NRF_DCNF_Type const * p_reg);
 
 /**
- * @brief Function for configuring the control access to local peripheral memory regions
- *        for external master connected to specified AMLI master port.
+ * @brief Function for configuring the control access to local peripheral memory regions.
+ *        Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
@@ -42,7 +42,7 @@ NRF_STATIC_INLINE void nrf_dcnf_peripheral_access_set(NRF_DCNF_Type * p_reg,
 
 /**
  * @brief Function for getting the configuration of control access to local peripheral
- *        memory regions for external master connected to specified AMLI master port.
+ *        memory regions. Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
@@ -53,8 +53,8 @@ NRF_STATIC_INLINE uint32_t nrf_dcnf_peripheral_access_get(NRF_DCNF_Type const * 
                                                           uint8_t               port_idx);
 
 /**
- * @brief Function for configuring the control access to local RAM memory regions
- *        for external master connected to specified AMLI master port.
+ * @brief Function for configuring the control access to local RAM memory regions.
+ *        Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
@@ -67,7 +67,7 @@ NRF_STATIC_INLINE void nrf_dcnf_ram_access_set(NRF_DCNF_Type * p_reg,
 
 /**
  * @brief Function for getting the configuration of control access to local RAM
- *        memory regions for external master connected to specified AMLI master port.
+ *        memory regions. Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
@@ -78,8 +78,8 @@ NRF_STATIC_INLINE uint32_t nrf_dcnf_ram_access_get(NRF_DCNF_Type const * p_reg,
                                                    uint8_t               port_idx);
 
 /**
- * @brief Function for configuring the control access to local code memory regions
- *        for external master connected to specified AMLI master port.
+ * @brief Function for configuring the control access to local code memory regions.
+ *        Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
@@ -92,7 +92,7 @@ NRF_STATIC_INLINE void nrf_dcnf_code_access_set(NRF_DCNF_Type * p_reg,
 
 /**
  * @brief Function for getting the configuration of control access to local code
- *        memory regions for external master connected to specified AMLI master port.
+ *        memory regions. Intended for external master connected to specified AMLI master port.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] port_idx Index of the master port to configure.
