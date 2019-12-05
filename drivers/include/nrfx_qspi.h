@@ -27,6 +27,11 @@ typedef struct
     uint8_t              irq_priority; /**< Interrupt priority. */
 } nrfx_qspi_config_t;
 
+#if defined(NRF5340_XXAA_APPLICATION)
+#define NRF_QSPI_DEFAULT_FREQUENCY NRF_QSPI_FREQ_96MDIV16
+#else
+#define NRF_QSPI_DEFAULT_FREQUENCY NRF_QSPI_FREQ_32MDIV16
+#endif
 /**
  * @brief QSPI instance default configuration.
  *
@@ -37,7 +42,7 @@ typedef struct
  * - PP opcode for writing
  * - 24 bit addressing mode
  * - Deep Power-down disabled
- * - clock frequency 2 MHz
+ * - clock frequency 2 MHz at nRF52 series, 6 Mhz at nRF53 series
  * - SCK delay 5 clock ticks
  * - mode 0 (data captured on the clock rising edge and transmitted on a falling edge. Clock base level is '0')
  *
@@ -70,7 +75,7 @@ typedef struct
         .sck_delay = 0x05,                                             \
         .dpmen     = false,                                            \
         .spi_mode  = NRF_QSPI_MODE_0,                                  \
-        .sck_freq  = NRF_QSPI_FREQ_32MDIV16,                           \
+        .sck_freq  = NRF_QSPI_DEFAULT_FREQUENCY,                       \
     },                                                                 \
     .irq_priority  = (uint8_t)NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY,   \
 }
@@ -299,6 +304,26 @@ nrfx_err_t nrfx_qspi_lfm_xfer(void const * p_tx_buffer,
                               void *       p_rx_buffer,
                               size_t       transfer_length,
                               bool         finalize);
+
+#ifdef QSPI_XIP_ENC_ENABLE_ENABLE_Msk
+/**
+ * @brief Configure and enable XIP encyption.
+ *
+ * @param[in] p_config XIP encryption configuration structure.
+ *                     To disable encryption, pass NULL pointer as argument.
+ */
+nrfx_err_t nrfx_qspi_xip_encrypt(nrf_qspi_encryption_t const * p_config);
+#endif
+
+#ifdef QSPI_DMA_ENC_ENABLE_ENABLE_Msk
+/**
+ * @brief Configure and enable DMA encyption.
+ *
+ * @param[in] p_config DMA encryption configuration structure.
+ *                     To disable encryption, pass NULL pointer as argument.
+ */
+nrfx_err_t nrfx_qspi_dma_encrypt(nrf_qspi_encryption_t const * p_config);
+#endif
 
 /** @} */
 
