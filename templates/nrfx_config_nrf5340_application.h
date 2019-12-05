@@ -13,6 +13,7 @@
  */
 #define NRF_COMP         NRF_COMP_S
 #define NRF_CLOCK        NRF_CLOCK_S
+#define NRF_DCNF         NRF_DCNF_S
 #define NRF_DPPIC        NRF_DPPIC_S
 #define NRF_EGU0         NRF_EGU0_S
 #define NRF_EGU1         NRF_EGU1_S
