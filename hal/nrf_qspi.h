@@ -50,6 +50,27 @@ typedef enum
 } nrf_qspi_int_mask_t;
 
 /** @brief QSPI frequency divider values. */
+#if defined(NRF5340_XXAA_APPLICATION)
+typedef enum
+{
+    NRF_QSPI_FREQ_96MDIV1,  /**< 96.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV2,  /**< 48.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV3,  /**< 32.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV4,  /**< 24.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV5,  /**< 19.2 MHz. */
+    NRF_QSPI_FREQ_96MDIV6,  /**< 16.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV7,  /**< 13.7 MHz. */
+    NRF_QSPI_FREQ_96MDIV8,  /**< 12.0 MHz. */
+    NRF_QSPI_FREQ_96MDIV9,  /**< 10.7 MHz. */
+    NRF_QSPI_FREQ_96MDIV10, /**< 9.60 MHz. */
+    NRF_QSPI_FREQ_96MDIV11, /**< 8.72 MHz. */
+    NRF_QSPI_FREQ_96MDIV12, /**< 8.00 MHz. */
+    NRF_QSPI_FREQ_96MDIV13, /**< 7.38 MHz. */
+    NRF_QSPI_FREQ_96MDIV14, /**< 6.86 MHz. */
+    NRF_QSPI_FREQ_96MDIV15, /**< 6.40 MHz. */
+    NRF_QSPI_FREQ_96MDIV16, /**< 6.00 MHz. */
+} nrf_qspi_frequency_t;
+#else
 typedef enum
 {
     NRF_QSPI_FREQ_32MDIV1,  /**< 32.0 MHz. */
@@ -69,6 +90,7 @@ typedef enum
     NRF_QSPI_FREQ_32MDIV15, /**< 2.13 MHz. */
     NRF_QSPI_FREQ_32MDIV16, /**< 2.00 MHz. */
 } nrf_qspi_frequency_t;
+#endif
 
 /** @brief Interface configuration for a read operation. */
 typedef enum
@@ -189,6 +211,16 @@ typedef struct
     nrf_qspi_frequency_t sck_freq;  /**< SCK frequency given as enum @ref nrf_qspi_frequency_t. */
 } nrf_qspi_phy_conf_t;
 
+
+#if defined(QSPI_XIP_ENC_ENABLE_ENABLE_Msk) || defined(QSPI_DMA_ENC_ENABLE_ENABLE_Msk)
+/** @brief QSPI encryption settings for XIP and DMA transfers. */
+typedef struct
+{
+    uint32_t key[4];
+    uint32_t nonce[3];
+
+} nrf_qspi_encryption_t;
+#endif
 
 /**
  * @brief Function for activating the specified QSPI task.
@@ -470,6 +502,44 @@ NRF_STATIC_INLINE void nrf_qspi_cinstr_long_transfer_continue(NRF_QSPI_Type *   
                                                               nrf_qspi_cinstr_len_t length,
                                                               bool                  finalize);
 
+#ifdef QSPI_XIP_ENC_ENABLE_ENABLE_Msk
+/**
+ * @brief Function for configuring XIP encryption.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_cfg Pointer to encryption configuration structure.
+ */
+NRF_STATIC_INLINE void nrf_qspi_xip_encryption_cfg(NRF_QSPI_Type * p_reg,
+                                                   nrf_qspi_encryption_t const * p_cfg);
+
+/**
+ * @brief Function for enabling XIP encryption.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable Enable XIP encryption.
+ */
+NRF_STATIC_INLINE void nrf_qspi_xip_encryption_enable(NRF_QSPI_Type * p_reg, bool enable);
+#endif
+
+#ifdef QSPI_DMA_ENC_ENABLE_ENABLE_Msk
+/**
+ * @brief Function for configuring DMA encryption.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_cfg Pointer to encryption configuration structure.
+ */
+NRF_STATIC_INLINE void nrf_qspi_dma_encryption_cfg(NRF_QSPI_Type * p_reg,
+                                                   nrf_qspi_encryption_t const * p_cfg);
+
+/**
+ * @brief Function for enabling DMA encryption.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable Enable DMA encryption.
+ */
+NRF_STATIC_INLINE void nrf_qspi_dma_encryption_enable(NRF_QSPI_Type * p_reg, bool enable);
+#endif
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_qspi_task_trigger(NRF_QSPI_Type * p_reg, nrf_qspi_task_t task)
@@ -750,6 +820,46 @@ NRF_STATIC_INLINE void nrf_qspi_cinstr_long_transfer_continue(NRF_QSPI_Type *   
     p_reg->CINSTRCONF = mask;
 }
 
+#ifdef QSPI_XIP_ENC_ENABLE_ENABLE_Msk
+NRF_STATIC_INLINE void nrf_qspi_xip_encryption_cfg(NRF_QSPI_Type *               p_reg,
+                                                   nrf_qspi_encryption_t const * p_cfg)
+{
+    p_reg->XIP_ENC.KEY0 = p_cfg->key[0];
+    p_reg->XIP_ENC.KEY1 = p_cfg->key[1];
+    p_reg->XIP_ENC.KEY2 = p_cfg->key[2];
+    p_reg->XIP_ENC.KEY3 = p_cfg->key[3];
+    p_reg->XIP_ENC.NONCE0 = p_cfg->nonce[0];
+    p_reg->XIP_ENC.NONCE1 = p_cfg->nonce[1];
+    p_reg->XIP_ENC.NONCE2 = p_cfg->nonce[2];
+}
+
+NRF_STATIC_INLINE void nrf_qspi_xip_encryption_enable(NRF_QSPI_Type * p_reg, bool enable)
+{
+    p_reg->XIP_ENC.ENABLE = enable
+                            ? QSPI_XIP_ENC_ENABLE_ENABLE_Enabled << QSPI_XIP_ENC_ENABLE_ENABLE_Pos
+                            : QSPI_XIP_ENC_ENABLE_ENABLE_Disabled << QSPI_XIP_ENC_ENABLE_ENABLE_Pos;
+}
+#endif
+
+#ifdef QSPI_DMA_ENC_ENABLE_ENABLE_Msk
+NRF_STATIC_INLINE void nrf_qspi_dma_encryption_cfg(NRF_QSPI_Type * p_reg,
+                                                   nrf_qspi_encryption_t const * p_cfg)
+{
+    p_reg->DMA_ENC.KEY0 = p_cfg->key[0];
+    p_reg->DMA_ENC.KEY1 = p_cfg->key[1];
+    p_reg->DMA_ENC.KEY2 = p_cfg->key[2];
+    p_reg->DMA_ENC.KEY3 = p_cfg->key[3];
+    p_reg->DMA_ENC.NONCE0 = p_cfg->nonce[0];
+    p_reg->DMA_ENC.NONCE1 = p_cfg->nonce[1];
+    p_reg->DMA_ENC.NONCE2 = p_cfg->nonce[2];
+}
+NRF_STATIC_INLINE void nrf_qspi_dma_encryption_enable(NRF_QSPI_Type * p_reg, bool enable)
+{
+    p_reg->DMA_ENC.ENABLE = enable
+                            ? QSPI_XIP_ENC_ENABLE_ENABLE_Enabled << QSPI_XIP_ENC_ENABLE_ENABLE_Pos
+                            : QSPI_XIP_ENC_ENABLE_ENABLE_Disabled << QSPI_XIP_ENC_ENABLE_ENABLE_Pos;
+}
+#endif
 #endif // NRF_DECLARE_ONLY
 
 /** @} */
