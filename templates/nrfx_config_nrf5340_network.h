@@ -14,6 +14,7 @@
 #define NRF_AAR        NRF_AAR_NS
 #define NRF_CCM        NRF_CCM_NS
 #define NRF_CLOCK      NRF_CLOCK_NS
+#define NRF_DCNF       NRF_DCNF_NS
 #define NRF_DPPIC      NRF_DPPIC_NS
 #define NRF_ECB        NRF_ECB_NS
 #define NRF_EGU0       NRF_EGU0_NS
