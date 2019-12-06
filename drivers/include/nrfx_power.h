@@ -5,9 +5,6 @@
 
 #include <nrfx.h>
 #include <hal/nrf_power.h>
-#if defined(REGULATORS_PRESENT)
-#include <hal/nrf_regulators.h>
-#endif
 #include <nrfx_power_clock.h>
 #include "nrfx_power_compat.h"
 
