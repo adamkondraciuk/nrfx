@@ -30,6 +30,11 @@ extern "C" {
  * @brief   Hardware access layer for managing the GPIO peripheral.
  */
 
+#if defined(GPIO_LATCH_PIN0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the functionality of latching GPIO state change is present. */
+#define NRF_GPIO_LATCH_PRESENT
+#endif
+
 /** @brief Macro for mapping port and pin numbers to values understandable for nrf_gpio functions. */
 #define NRF_GPIO_PIN_MAP(port, pin) (((port) << 5) | ((pin) & 0x1F))
 
@@ -392,7 +397,7 @@ NRF_STATIC_INLINE void nrf_gpio_ports_read(uint32_t   start_port,
                                            uint32_t   length,
                                            uint32_t * p_masks);
 
-#if defined(GPIO_DETECTMODE_DETECTMODE_LDETECT) || defined(__NRF_DOXYGEN__)
+#if defined(NRF_GPIO_LATCH_PRESENT)
 /**
  * @brief Function for reading latch state of multiple consecutive ports.
  *
@@ -403,6 +408,17 @@ NRF_STATIC_INLINE void nrf_gpio_ports_read(uint32_t   start_port,
 NRF_STATIC_INLINE void nrf_gpio_latches_read(uint32_t   start_port,
                                              uint32_t   length,
                                              uint32_t * p_masks);
+
+/**
+ * @brief Function for reading and immediate clearing latch state of multiple consecutive ports.
+ *
+ * @param start_port Index of the first port to read and clear.
+ * @param length     Number of ports to read and clear.
+ * @param p_masks    Pointer to output array where latch states will be stored.
+ */
+NRF_STATIC_INLINE void nrf_gpio_latches_read_and_clear(uint32_t   start_port,
+                                                       uint32_t   length,
+                                                       uint32_t * p_masks);
 
 /**
  * @brief Function for reading latch state of single pin.
@@ -419,7 +435,7 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_pin_latch_get(uint32_t pin_number);
  * @param pin_number Pin number.
  */
 NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
-#endif
+#endif // defined(NRF_GPIO_LATCH_PRESENT)
 
 #if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
 /**
@@ -760,7 +776,7 @@ NRF_STATIC_INLINE void nrf_gpio_ports_read(uint32_t   start_port,
 }
 
 
-#ifdef GPIO_DETECTMODE_DETECTMODE_LDETECT
+#if defined(NRF_GPIO_LATCH_PRESENT)
 NRF_STATIC_INLINE void nrf_gpio_latches_read(uint32_t   start_port,
                                              uint32_t   length,
                                              uint32_t * p_masks)
@@ -775,6 +791,23 @@ NRF_STATIC_INLINE void nrf_gpio_latches_read(uint32_t   start_port,
     }
 }
 
+NRF_STATIC_INLINE void nrf_gpio_latches_read_and_clear(uint32_t   start_port,
+                                                       uint32_t   length,
+                                                       uint32_t * p_masks)
+{
+    NRF_GPIO_Type * gpio_regs[GPIO_COUNT] = GPIO_REG_LIST;
+    uint32_t        i;
+
+    for (i = start_port; i < (start_port + length); i++)
+    {
+        *p_masks = gpio_regs[i]->LATCH;
+
+        // The LATCH register is cleared by writing a '1' to the bit that shall be cleared.
+        gpio_regs[i]->LATCH = *p_masks;
+
+        p_masks++;
+    }
+}
 
 NRF_STATIC_INLINE uint32_t nrf_gpio_pin_latch_get(uint32_t pin_number)
 {
@@ -790,7 +823,7 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number)
 
     reg->LATCH = (1 << pin_number);
 }
-#endif
+#endif // defined(NRF_GPIO_LATCH_PRESENT)
 
 #if defined(GPIO_PIN_CNF_MCUSEL_Msk)
 NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu)
