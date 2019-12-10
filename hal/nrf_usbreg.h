@@ -17,14 +17,6 @@ extern "C" {
  * @brief   Hardware access layer for managing the USB regulator peripheral.
  */
 
-#if defined(USBREG_EVENTS_USBDETECTED_EVENTS_USBDETECTED_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether the USBREG peripheral controls the USB regulator. */
-#define NRF_USBREG_CONTROL 1
-#else
-#define NRF_USBREG_CONTROL 0
-#endif
-
-#if NRFX_CHECK(NRF_USBREG_CONTROL) || defined(__NRFX_DOXYGEN__)
 /** @brief USBREG events. */
 typedef enum
 {
@@ -142,8 +134,6 @@ NRF_STATIC_INLINE uint32_t nrf_usbreg_status_get(NRF_USBREG_Type const * p_reg)
 }
 
 #endif // NRF_DECLARE_ONLY
-
-#endif // NRFX_CHECK(NRF_USBREG_CONTROL) || defined(__NRFX_DOXYGEN__)
 
 /** @} */
 
