@@ -29,6 +29,7 @@
 #define NRF_MUTEX        NRF_MUTEX_S
 #define NRF_NFCT         NRF_NFCT_S
 #define NRF_NVMC         NRF_NVMC_S
+#define NRF_OSCILLATORS  NRF_OSCILLATORS_S
 #define NRF_P0           NRF_P0_S
 #define NRF_P1           NRF_P1_S
 #define NRF_PDM0         NRF_PDM0_S
