@@ -45,6 +45,7 @@
 #define NRF_UARTE0     NRF_UARTE0_NS
 #define NRF_UICR       NRF_UICR_NS
 #define NRF_VMC        NRF_VMC_NS
+#define NRF_VREQCTRL   NRF_VREQCTRL_NS
 #define NRF_WDT        NRF_WDT_NS
 
 
