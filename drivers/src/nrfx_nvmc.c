@@ -14,6 +14,13 @@
  */
 #define NVMC_BYTES_IN_WORD  4
 
+/** Value representing non-volatile memory (NVM) base address. */
+#if defined(NRF5340_XXAA_NETWORK)
+    #define NVMC_FLASH_BASE_ADDRESS  0x01000000uL
+#else
+    #define NVMC_FLASH_BASE_ADDRESS  0
+#endif
+
 /**
  * Value representing non-volatile memory (NVM) page count.
  *
