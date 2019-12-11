@@ -7,15 +7,6 @@
 #define NRFX_LOG_MODULE SAADC
 #include <nrfx_log.h>
 
-#define EVT_TO_STR(event)                                                       \
-    (event == NRF_SAADC_EVENT_STARTED       ? "NRF_SAADC_EVENT_STARTED"       : \
-    (event == NRF_SAADC_EVENT_END           ? "NRF_SAADC_EVENT_END"           : \
-    (event == NRF_SAADC_EVENT_DONE          ? "NRF_SAADC_EVENT_DONE"          : \
-    (event == NRF_SAADC_EVENT_RESULTDONE    ? "NRF_SAADC_EVENT_RESULTDONE"    : \
-    (event == NRF_SAADC_EVENT_CALIBRATEDONE ? "NRF_SAADC_EVENT_CALIBRATEDONE" : \
-    (event == NRF_SAADC_EVENT_STOPPED       ? "NRF_SAADC_EVENT_STOPPED"       : \
-                                              "UNKNOWN EVENT"))))))
-
 #if defined(NRF52_SERIES) && !defined(USE_WORKAROUND_FOR_ANOMALY_212)
     // ANOMALY 212 - SAADC events are missing when switching from single channel
     //               to multi channel configuration with burst enabled.
