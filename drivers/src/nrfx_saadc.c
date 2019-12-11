@@ -214,12 +214,14 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
 
 nrfx_err_t nrfx_saadc_init(uint8_t interrupt_priority)
 {
+    nrfx_err_t err_code;
     if (m_cb.saadc_state != NRF_SAADC_STATE_UNINITIALIZED)
     {
+        err_code = NRFX_ERROR_INVALID_STATE;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
-        return NRFX_ERROR_INVALID_STATE;
+        return err_code;
     }
     m_cb.saadc_state = NRF_SAADC_STATE_IDLE;
 
@@ -227,9 +229,10 @@ nrfx_err_t nrfx_saadc_init(uint8_t interrupt_priority)
     NRFX_IRQ_ENABLE(SAADC_IRQn);
     NRFX_IRQ_PRIORITY_SET(SAADC_IRQn, interrupt_priority);
 
+    err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
 
-    return NRFX_SUCCESS;
+    return err_code;
 }
 
 void nrfx_saadc_uninit(void)
