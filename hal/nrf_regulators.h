@@ -104,7 +104,7 @@ typedef enum
  * @brief Function for enabling or disabling DCDC converter.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable Set true to enable or false to disable DCDC converter.
+ * @param[in] enable True if DCDC converter is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_regulators_dcdcen_set(NRF_REGULATORS_Type * p_reg, bool enable);
 
@@ -137,7 +137,7 @@ nrf_regulators_mainregstatus_t nrf_regulators_mainregstatus_get(NRF_REGULATORS_T
  * @brief Function for setting the power failure comparator configuration.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable True if power failure comparator is to be enabled.
+ * @param[in] enable True if power failure comparator is to be enabled, false otherwise.
  * @param[in] thr    Voltage threshold value.
  */
 NRF_STATIC_INLINE void nrf_regulators_pofcon_set(NRF_REGULATORS_Type *    p_reg,
@@ -185,7 +185,7 @@ nrf_regulators_pof_thrvddh_t nrf_regulators_pofcon_vddh_get(NRF_REGULATORS_Type 
  * @brief Function for enabling or disabling the high voltage regulator.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable True if the high voltage regulator is to be enabled.
+ * @param[in] enable True if the high voltage regulator is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_regulators_dcdcen_vddh_set(NRF_REGULATORS_Type * p_reg, bool enable);
 #endif
@@ -195,7 +195,7 @@ NRF_STATIC_INLINE void nrf_regulators_dcdcen_vddh_set(NRF_REGULATORS_Type * p_re
  * @brief Function for enabling or disabling the radio regulator.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable True if the radio regulator is to be enabled.
+ * @param[in] enable True if the radio regulator is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_regulators_dcdcen_radio_set(NRF_REGULATORS_Type * p_reg, bool enable);
 #endif

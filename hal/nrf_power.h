@@ -574,12 +574,12 @@ NRF_STATIC_INLINE void nrf_power_system_off(NRF_POWER_Type * p_reg);
 /**
  * @brief Function for setting the power failure comparator configuration.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] enabled True if the power failure comparator is to be enabled.
- * @param[in] thr     voltage threshold value.
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if the power failure comparator is to be enabled, false otherwise.
+ * @param[in] thr    voltage threshold value.
  */
 NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
-                                            bool                enabled,
+                                            bool                enable,
                                             nrf_power_pof_thr_t thr);
 
 /**
@@ -685,7 +685,7 @@ NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(NRF_POWER_Type * p_reg,
  *       will relate to the converter on low voltage side (1.3&nbsp;V output).
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable Set true to enable the DCDC converter or false to disable the DCDC converter.
+ * @param[in] enable True if DCDC converter is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_power_dcdcen_set(NRF_POWER_Type * p_reg, bool enable);
 
@@ -754,7 +754,7 @@ NRF_STATIC_INLINE uint32_t nrf_power_rampower_mask_get(NRF_POWER_Type const * p_
  * @brief Function for enabling or disabling the DCDC converter on VDDH.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] enable Set true to enable the DCDC converter or false to disable the DCDC converter.
+ * @param[in] enable True if DCDC converter on VDDH is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_power_dcdcen_vddh_set(NRF_POWER_Type * p_reg, bool enable);
 
@@ -958,7 +958,7 @@ NRF_STATIC_INLINE void nrf_power_system_off(NRF_POWER_Type * p_reg)
 
 #if NRF_POWER_HAS_POFCON
 NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
-                                            bool                enabled,
+                                            bool                enable,
                                             nrf_power_pof_thr_t thr)
 {
     NRFX_ASSERT(thr == (thr & (POWER_POFCON_THRESHOLD_Msk >> POWER_POFCON_THRESHOLD_Pos)));
@@ -970,7 +970,7 @@ NRF_STATIC_INLINE void nrf_power_pofcon_set(NRF_POWER_Type *    p_reg,
     p_reg->POFCON =
 #endif
         (((uint32_t)thr) << POWER_POFCON_THRESHOLD_Pos) |
-        (enabled ?
+        (enable ?
         (POWER_POFCON_POF_Enabled << POWER_POFCON_POF_Pos)
         :
         (POWER_POFCON_POF_Disabled << POWER_POFCON_POF_Pos));
