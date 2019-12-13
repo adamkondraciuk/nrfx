@@ -171,6 +171,13 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
     m_cb.event_handler = event_handler;
     m_cb.op_state = NRFX_PDM_STATE_IDLE;
 
+#if NRF_PDM_HAS_RATIO_CONFIG
+    nrf_pdm_ratio_set(NRF_PDM0, p_config->ratio);
+#endif
+
+#if NRF_PDM_HAS_MCLKCONFIG
+    nrf_pdm_mclksrc_configure(NRF_PDM0, p_config->mclksrc);
+#endif
     nrf_pdm_clock_set(NRF_PDM0, p_config->clock_freq);
     nrf_pdm_mode_set(NRF_PDM0, p_config->mode, p_config->edge);
     nrf_pdm_gain_set(NRF_PDM0, p_config->gain_l, p_config->gain_r);
