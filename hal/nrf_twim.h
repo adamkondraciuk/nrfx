@@ -75,9 +75,12 @@ typedef enum
 /** @brief TWIM master clock frequency. */
 typedef enum
 {
-    NRF_TWIM_FREQ_100K = TWIM_FREQUENCY_FREQUENCY_K100, ///< 100 kbps.
-    NRF_TWIM_FREQ_250K = TWIM_FREQUENCY_FREQUENCY_K250, ///< 250 kbps.
-    NRF_TWIM_FREQ_400K = TWIM_FREQUENCY_FREQUENCY_K400  ///< 400 kbps.
+    NRF_TWIM_FREQ_100K  = TWIM_FREQUENCY_FREQUENCY_K100, ///< 100 kbps.
+    NRF_TWIM_FREQ_250K  = TWIM_FREQUENCY_FREQUENCY_K250, ///< 250 kbps.
+    NRF_TWIM_FREQ_400K  = TWIM_FREQUENCY_FREQUENCY_K400, ///< 400 kbps.
+#if defined(TWIM_FREQUENCY_FREQUENCY_K1000) || defined(__NRFX_DOXYGEN__)
+    NRF_TWIM_FREQ_1000K = TWIM_FREQUENCY_FREQUENCY_K1000 ///< 1000 kbps.
+#endif
 } nrf_twim_frequency_t;
 
 /** @brief TWIM error source. */
