@@ -47,7 +47,7 @@ NRF_STATIC_INLINE void nrf_oscillators_lfxo_cap_set(NRF_OSCILLATORS_Type *     p
  * @brief Function for configuring the internal capacitors of HXFO.
  *
  * The capacitance of internal capacitors ranges from 7 pF to 20 pF in 0.5 pF steps.
- * To calculate the correct @cap_value, use the following equation:
+ * To calculate the correct @p cap_value, use the following equation:
  * CAPVALUE = (1+FICR->XOSC32MTRIM.SLOPE/16) * (CAPACITANCE*2-14) + FICR->XOSC32MTRIM.OFFSET
  *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
