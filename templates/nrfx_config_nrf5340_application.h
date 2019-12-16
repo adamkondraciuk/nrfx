@@ -37,6 +37,7 @@
 #define NRF_PWM0         NRF_PWM0_S
 #define NRF_PWM1         NRF_PWM1_S
 #define NRF_PWM2         NRF_PWM2_S
+#define NRF_PWM3         NRF_PWM3_S
 #define NRF_QDEC0        NRF_QDEC0_S
 #define NRF_QDEC1        NRF_QDEC1_S
 #define NRF_QSPI         NRF_QSPI_S
@@ -48,17 +49,27 @@
 #define NRF_SPIM0        NRF_SPIM0_S
 #define NRF_SPIM1        NRF_SPIM1_S
 #define NRF_SPIM2        NRF_SPIM2_S
+#define NRF_SPIM3        NRF_SPIM3_S
+#define NRF_SPIM4        NRF_SPIM4_S
 #define NRF_SPIS0        NRF_SPIS0_S
 #define NRF_SPIS1        NRF_SPIS1_S
+#define NRF_SPIS2        NRF_SPIS2_S
+#define NRF_SPIS3        NRF_SPIS3_S
 #define NRF_TIMER0       NRF_TIMER0_S
 #define NRF_TIMER1       NRF_TIMER1_S
 #define NRF_TIMER2       NRF_TIMER2_S
 #define NRF_TWIM0        NRF_TWIM0_S
 #define NRF_TWIM1        NRF_TWIM1_S
+#define NRF_TWIM2        NRF_TWIM2_S
+#define NRF_TWIM3        NRF_TWIM3_S
 #define NRF_TWIS0        NRF_TWIS0_S
 #define NRF_TWIS1        NRF_TWIS1_S
+#define NRF_TWIS2        NRF_TWIS2_S
+#define NRF_TWIS3        NRF_TWIS3_S
 #define NRF_UARTE0       NRF_UARTE0_S
 #define NRF_UARTE1       NRF_UARTE1_S
+#define NRF_UARTE2       NRF_UARTE2_S
+#define NRF_UARTE3       NRF_UARTE3_S
 #define NRF_USBD         NRF_USBD_S
 #define NRF_USBREGULATOR NRF_USBREGULATOR_S
 #define NRF_VMC          NRF_VMC_S
@@ -815,6 +826,20 @@
 #define NRFX_PRS_BOX_2_ENABLED 0
 #endif
 
+// <q> NRFX_PRS_BOX_3_ENABLED  - Enables box 3 in the module.
+
+
+#ifndef NRFX_PRS_BOX_3_ENABLED
+#define NRFX_PRS_BOX_3_ENABLED 0
+#endif
+
+// <q> NRFX_PRS_BOX_4_ENABLED  - Enables box 4 in the module.
+
+
+#ifndef NRFX_PRS_BOX_4_ENABLED
+#define NRFX_PRS_BOX_4_ENABLED 0
+#endif
+
 
 // <e> NRFX_PRS_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
@@ -893,6 +918,13 @@
 
 #ifndef NRFX_PWM2_ENABLED
 #define NRFX_PWM2_ENABLED 0
+#endif
+
+// <q> NRFX_PWM3_ENABLED  - Enables PWM3 instance.
+
+
+#ifndef NRFX_PWM3_ENABLED
+#define NRFX_PWM3_ENABLED 0
 #endif
 
 // <o> NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1247,6 +1279,26 @@
 #define NRFX_SPIM2_ENABLED 0
 #endif
 
+// <q> NRFX_SPIM3_ENABLED  - Enables SPIM3 instance.
+
+
+#ifndef NRFX_SPIM3_ENABLED
+#define NRFX_SPIM3_ENABLED 0
+#endif
+
+// <q> NRFX_SPIM4_ENABLED  - Enables SPIM4 instance.
+
+
+#ifndef NRFX_SPIM4_ENABLED
+#define NRFX_SPIM4_ENABLED 0
+#endif
+
+// <q> NRFX_SPIM_EXTENDED_ENABLED  - Enable extended SPIM features
+
+
+#ifndef NRFX_SPIM_EXTENDED_ENABLED
+#define NRFX_SPIM_EXTENDED_ENABLED 0
+#endif
 
 // <o> NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
@@ -1333,6 +1385,20 @@
 
 #ifndef NRFX_SPIS1_ENABLED
 #define NRFX_SPIS1_ENABLED 0
+#endif
+
+// <q> NRFX_SPIS2_ENABLED  - Enables SPIS2 instance.
+
+
+#ifndef NRFX_SPIS2_ENABLED
+#define NRFX_SPIS2_ENABLED 0
+#endif
+
+// <q> NRFX_SPIS3_ENABLED  - Enables SPIS3 instance.
+
+
+#ifndef NRFX_SPIS3_ENABLED
+#define NRFX_SPIS3_ENABLED 0
 #endif
 
 // <o> NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
@@ -1523,6 +1589,20 @@
 #define NRFX_TWIM1_ENABLED 0
 #endif
 
+// <q> NRFX_TWIM2_ENABLED  - Enables TWIM2 instance.
+
+
+#ifndef NRFX_TWIM2_ENABLED
+#define NRFX_TWIM2_ENABLED 0
+#endif
+
+// <q> NRFX_TWIM3_ENABLED  - Enables TWIM3 instance.
+
+
+#ifndef NRFX_TWIM3_ENABLED
+#define NRFX_TWIM3_ENABLED 0
+#endif
+
 // <o> NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
 
 // <0=> 0 (highest)
@@ -1607,6 +1687,18 @@
 
 #ifndef NRFX_TWIS1_ENABLED
 #define NRFX_TWIS1_ENABLED 0
+#endif
+
+// <q> NRFX_TWIS2_ENABLED  - Enables TWIS2 instance.
+
+#ifndef NRFX_TWIS2_ENABLED
+#define NRFX_TWIS2_ENABLED 0
+#endif
+
+// <q> NRFX_TWIS3_ENABLED  - Enables TWIS3 instance.
+
+#ifndef NRFX_TWIS3_ENABLED
+#define NRFX_TWIS3_ENABLED 0
 #endif
 
 // <q> NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY  - Assumes that any instance would be initialized only once.
@@ -1706,6 +1798,16 @@
 // <o> NRFX_UARTE1_ENABLED - Enables UARTE1 instance.
 #ifndef NRFX_UARTE1_ENABLED
 #define NRFX_UARTE1_ENABLED 0
+#endif
+
+// <o> NRFX_UARTE2_ENABLED - Enables UARTE2 instance.
+#ifndef NRFX_UARTE2_ENABLED
+#define NRFX_UARTE2_ENABLED 0
+#endif
+
+// <o> NRFX_UARTE3_ENABLED - Enables UARTE3 instance.
+#ifndef NRFX_UARTE3_ENABLED
+#define NRFX_UARTE3_ENABLED 0
 #endif
 
 // <o> NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority.
