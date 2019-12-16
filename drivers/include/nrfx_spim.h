@@ -39,6 +39,9 @@ enum {
 #if NRFX_CHECK(NRFX_SPIM3_ENABLED)
     NRFX_SPIM3_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_SPIM4_ENABLED)
+    NRFX_SPIM4_INST_IDX,
+#endif
     NRFX_SPIM_ENABLED_COUNT
 };
 #endif
@@ -362,6 +365,7 @@ void nrfx_spim_0_irq_handler(void);
 void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
 void nrfx_spim_3_irq_handler(void);
+void nrfx_spim_4_irq_handler(void);
 
 
 #ifdef __cplusplus
