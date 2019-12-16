@@ -37,7 +37,8 @@
 #define NRF_PWM0         NRF_PWM0_S
 #define NRF_PWM1         NRF_PWM1_S
 #define NRF_PWM2         NRF_PWM2_S
-#define NRF_QDEC         NRF_QDEC_S
+#define NRF_QDEC0        NRF_QDEC0_S
+#define NRF_QDEC1        NRF_QDEC1_S
 #define NRF_QSPI         NRF_QSPI_S
 #define NRF_REGULATORS   NRF_REGULATORS_S
 #define NRF_RESET        NRF_RESET_S
@@ -82,6 +83,10 @@
 /* Fixups for GPIOTE driver. */
 #define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
+
+/* Fixups for QDEC driver. */
+#define NRF_QDEC        NRF_QDEC0
+#define QDEC_IRQHandler QDEC0_IRQHandler
 
 // <<< Use Configuration Wizard in Context Menu >>>\n
 
