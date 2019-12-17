@@ -11,11 +11,6 @@
  * are located in the POWER peripheral or in separate peripherals like USBREG and REGULATORS.
  */
 
-#if defined(USBREG_EVENTS_USBDETECTED_EVENTS_USBDETECTED_Msk)
-/** Temporary symbol indicating whether the USBREG peripheral is present. */
-#define USBREG_PRESENT
-#endif
-
 #if defined(REGULATORS_PRESENT)
 #include <hal/nrf_regulators.h>
 #endif
