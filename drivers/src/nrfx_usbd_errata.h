@@ -19,71 +19,43 @@
 /* Errata: USBD: EPDATA event is not always generated. **/
 static inline bool nrfx_usbd_errata_104(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_104();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_104();
 }
 
 /* Errata: During setup read/write transfer USBD acknowledges setup stage without SETUP task. **/
 static inline bool nrfx_usbd_errata_154(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_154();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_154();
 }
 
 /* Errata: ISO double buffering not functional. **/
 static inline bool nrfx_usbd_errata_166(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_166();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_166();
 }
 
 /* Errata: USBD might not reach its active state. **/
 static inline bool nrfx_usbd_errata_171(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_171();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_171();
 }
 
 /* Errata: USB cannot be enabled. **/
 static inline bool nrfx_usbd_errata_187(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_187();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_187();
 }
 
 /* Errata: USBD cannot receive tasks during DMA. **/
 static inline bool nrfx_usbd_errata_199(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_199();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_199();
 }
 
 /* Errata: SIZE.EPOUT not writable. **/
 static inline bool nrfx_usbd_errata_200(void)
 {
-#if defined(NRF52_SERIES) && NRFX_USBD_ERRATA_ENABLE
-    return errata_200();
-#else
-    return false;
-#endif
+    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_200();
 }
 
 #endif // NRFX_USBD_ERRATA_H__
