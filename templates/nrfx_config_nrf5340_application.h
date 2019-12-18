@@ -92,7 +92,7 @@
 #define NRF_UICR       NRF_UICR_S
 
 /* Fixups for GPIOTE driver. */
-#define NRF_GPIOTE        NRF_GPIOTE0
+#define NRF_GPIOTE        NRF_GPIOTE0_S
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
 /* Fixups for QDEC driver. */
