@@ -392,7 +392,12 @@ NRF_STATIC_INLINE void nrf_ccm_cnfptr_set(NRF_CCM_Type *   p_reg,
 
 NRF_STATIC_INLINE uint32_t * nrf_ccm_cnfptr_get(NRF_CCM_Type const * p_reg)
 {
+#if defined(NRF5340_XXAA_NETWORK)
+    // Apply workaround for anomaly 10.
+    return (uint32_t *)(p_reg->CNFPTR | 0x01000000);
+#else
     return (uint32_t *)(p_reg->CNFPTR);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_ccm_inptr_set(NRF_CCM_Type *   p_reg,
@@ -403,7 +408,12 @@ NRF_STATIC_INLINE void nrf_ccm_inptr_set(NRF_CCM_Type *   p_reg,
 
 NRF_STATIC_INLINE uint32_t * nrf_ccm_inptr_get(NRF_CCM_Type const * p_reg)
 {
+#if defined(NRF5340_XXAA_NETWORK)
+    // Apply workaround for anomaly 10.
+    return (uint32_t *)(p_reg->INPTR | 0x01000000);
+#else
     return (uint32_t *)(p_reg->INPTR);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_ccm_outptr_set(NRF_CCM_Type *   p_reg,
@@ -414,7 +424,12 @@ NRF_STATIC_INLINE void nrf_ccm_outptr_set(NRF_CCM_Type *   p_reg,
 
 NRF_STATIC_INLINE uint32_t * nrf_ccm_outptr_get(NRF_CCM_Type const * p_reg)
 {
+#if defined(NRF5340_XXAA_NETWORK)
+    // Apply workaround for anomaly 10.
+    return (uint32_t *)(p_reg->OUTPTR | 0x01000000);
+#else
     return (uint32_t *)(p_reg->OUTPTR);
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_ccm_scratchptr_set(NRF_CCM_Type *   p_reg,
@@ -425,7 +440,12 @@ NRF_STATIC_INLINE void nrf_ccm_scratchptr_set(NRF_CCM_Type *   p_reg,
 
 NRF_STATIC_INLINE uint32_t * nrf_ccm_stratchptr_get(NRF_CCM_Type const * p_reg)
 {
+#if defined(NRF5340_XXAA_NETWORK)
+    // Apply workaround for anomaly 10.
+    return (uint32_t *)(p_reg->SCRATCHPTR | 0x01000000);
+#else
     return (uint32_t *)(p_reg->SCRATCHPTR);
+#endif
 }
 
 #if defined(CCM_RATEOVERRIDE_RATEOVERRIDE_Pos)
