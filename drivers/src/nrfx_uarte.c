@@ -162,6 +162,38 @@ static void pins_to_default(nrfx_uarte_t const * p_instance)
     }
 }
 
+static void apply_workaround_for_enable_anomaly(nrfx_uarte_t const * p_instance)
+{
+#if defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK) || defined(NRF9160_XXAA)
+    // Apply workaround for anomalies:
+    // - nRF9160 - anomaly 23
+    // - nRF5340 - anomaly 44
+    volatile uint32_t const * rxenable_reg =
+        (volatile uint32_t *)(((uint32_t)p_instance->p_reg) + 0x564);
+    volatile uint32_t const * txenable_reg =
+        (volatile uint32_t *)(((uint32_t)p_instance->p_reg) + 0x568);
+
+    if (*txenable_reg == 1)
+    {
+        nrf_uarte_task_trigger(p_instance->p_reg, NRF_UARTE_TASK_STOPTX);
+    }
+
+    if (*rxenable_reg == 1)
+    {
+        nrf_uarte_enable(p_instance->p_reg);
+        nrf_uarte_task_trigger(p_instance->p_reg, NRF_UARTE_TASK_STOPRX);
+
+        while (*rxenable_reg)
+        {}
+
+        (void)nrf_uarte_errorsrc_get_and_clear(p_instance->p_reg);
+        nrf_uarte_disable(p_instance->p_reg);
+    }
+#else
+    (void)(p_instance);
+#endif // defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK) || defined(NRF9160_XXAA)
+}
+
 nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
                            nrfx_uarte_config_t const * p_config,
                            nrfx_uarte_event_handler_t  event_handler)
@@ -206,6 +238,8 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
 
     apply_config(p_instance, p_config);
+
+    apply_workaround_for_enable_anomaly(p_instance);
 
     p_cb->handler   = event_handler;
     p_cb->p_context = p_config->p_context;
