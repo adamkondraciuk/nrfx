@@ -89,36 +89,33 @@ void SystemInit(void)
             #endif
         }
 
+        /* errata 64 must be before errata 42, as errata 42 is dependant on the changes in errata 64*/
         /* Workaround for Errata 64 "VREGMAIN has invalid configuration when CPU is running at 128 MHz" found at the Errata document
            for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-        if (errata_64())
+        if (nrf53_errata_64())
         {
-            *((volatile uint32_t *)0x50004708ul) = 0x3;
+            *((volatile uint32_t *)0x5000470Cul) = 0x29ul;
+            *((volatile uint32_t *)0x5000473Cul) = 0x3ul;
         }
 
         /* Workaround for Errata 42 "Reset value of HFCLKCTRL is invalid" found at the Errata document
            for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-        if (errata_42())
+        if (nrf53_errata_42())
         {
             *((volatile uint32_t *)0x50039530ul) = 0xBEEF0044ul;
             NRF_CLOCK_S->HFCLKCTRL = CLOCK_HFCLKCTRL_HCLK_Div2 << CLOCK_HFCLKCTRL_HCLK_Pos;
-
-            if (errata_64())
-            {
-                *((volatile uint32_t *)0x50004710ul) = 0x0;
-            }
         }
 
         /* Workaround for Errata 46 "Higher power consumption of LFRC" found at the Errata document
            for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-        if (errata_46())
+        if (nrf53_errata_46())
         {
             *((volatile uint32_t *)0x5003254Cul) = 0;
         }
 
         /* Workaround for Errata 49 "SLEEPENTER and SLEEPEXIT events asserted after pin reset" found at the Errata document
            for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-        if (errata_49())
+        if (nrf53_errata_49())
         {
             if (NRF_RESET_S->RESETREAS & RESET_RESETREAS_RESETPIN_Msk)
             {
@@ -129,11 +126,18 @@ void SystemInit(void)
 
         /* Workaround for Errata 55 "Bits in RESETREAS are set when they should not be" found at the Errata document
            for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-        if (errata_55())
+        if (nrf53_errata_55())
         {
             if (NRF_RESET_S->RESETREAS & RESET_RESETREAS_RESETPIN_Msk){
                 NRF_RESET_S->RESETREAS = ~RESET_RESETREAS_RESETPIN_Msk;
             }
+        }
+
+        /* Workaround for Errata 69 "VREGMAIN configuration is not retained in System OFF" found at the Errata document
+           for your device located at https://infocenter.nordicsemi.com/index.jsp  */
+        if (nrf53_errata_69())
+        {
+            *((volatile uint32_t *)0x5000470Cul) =0x65ul;
         }
         
         #if defined(CONFIG_NFCT_PINS_AS_GPIOS)

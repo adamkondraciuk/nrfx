@@ -65,7 +65,7 @@ void SystemInit(void)
 
     /* Workaround for Errata 49 "SLEEPENTER and SLEEPEXIT events asserted after pin reset" found at the Errata document
        for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-    if (errata_49())
+    if (nrf53_errata_49())
     {
         if (NRF_RESET_NS->RESETREAS & RESET_RESETREAS_RESETPIN_Msk)
         {
@@ -76,7 +76,7 @@ void SystemInit(void)
 
     /* Workaround for Errata 55 "Bits in RESETREAS are set when they should not be" found at the Errata document
        for your device located at https://infocenter.nordicsemi.com/index.jsp  */
-    if (errata_55())
+    if (nrf53_errata_55())
     {
         if (NRF_RESET_NS->RESETREAS & RESET_RESETREAS_RESETPIN_Msk){
             NRF_RESET_NS->RESETREAS = ~RESET_RESETREAS_RESETPIN_Msk;

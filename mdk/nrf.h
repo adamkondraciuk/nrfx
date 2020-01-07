@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   29 
-#define MDK_MICRO_VERSION   0 
+#define MDK_MINOR_VERSION   30 
+#define MDK_MICRO_VERSION   1 
 
 /* Define NRF51_SERIES for common use in nRF51 series devices. Only if not previously defined. */
 #if defined (NRF51) ||\
@@ -91,6 +91,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined (NRF9160_XXAA)
     #ifndef NRF91_SERIES    
         #define NRF91_SERIES
+    #endif
+#endif
+   
+/* Define coprocessor domains */
+#if defined (NRF5340_XXAA_APPLICATION)
+    #ifndef NRF_APPLICATION
+        #define NRF_APPLICATION
+    #endif
+#endif
+#if defined (NRF5340_XXAA_NETWORK)
+    #ifndef NRF_NETWORK
+        #define NRF_NETWORK
     #endif
 #endif
    
