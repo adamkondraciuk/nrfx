@@ -228,7 +228,7 @@ NRF_STATIC_INLINE uint32_t nrf_saadc_task_address_get(NRF_SAADC_Type const * p_r
                                                       nrf_saadc_task_t       task);
 
 /**
- * @brief Function for retrieving the state of the UARTE event.
+ * @brief Function for retrieving the state of the SAADC event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to be checked.
@@ -352,6 +352,14 @@ NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(NRF_SAADC_Type * p_reg,
                                                     uint8_t          channel,
                                                     int16_t          low,
                                                     int16_t          high);
+
+/**
+ * @brief Function for setting the configuration of SAADC interrupts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Interrupts configuration to be set.
+ */
+NRF_STATIC_INLINE void nrf_saadc_int_set(NRF_SAADC_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for enabling specified SAADC interrupts.
@@ -690,6 +698,11 @@ NRF_STATIC_INLINE void nrf_saadc_channel_limits_set(NRF_SAADC_Type * p_reg,
     p_reg->CH[channel].LIMIT = (
             (((uint32_t) low << SAADC_CH_LIMIT_LOW_Pos) & SAADC_CH_LIMIT_LOW_Msk)
           | (((uint32_t) high << SAADC_CH_LIMIT_HIGH_Pos) & SAADC_CH_LIMIT_HIGH_Msk));
+}
+
+NRF_STATIC_INLINE void nrf_saadc_int_set(NRF_SAADC_Type * p_reg, uint32_t mask)
+{
+    p_reg->INTEN = mask;
 }
 
 NRF_STATIC_INLINE void nrf_saadc_int_enable(NRF_SAADC_Type * p_reg, uint32_t mask)
