@@ -45,7 +45,7 @@ typedef struct
 #endif
     uint16_t                   size_primary;                 ///< Size of the primary result buffer.
     uint16_t                   size_secondary;               ///< Size of the secondary result buffer.
-    uint16_t                   samples_per_trigger;          ///< Samples to take per one trigger in the blocking mode.
+    uint16_t                   samples_converted;            ///< Number of samples present in result buffer when in the blocking mode.
     nrf_saadc_input_t          channels_pselp[SAADC_CH_NUM]; ///< Array holding each channel positive input.
     nrf_saadc_input_t          channels_pseln[SAADC_CH_NUM]; ///< Array holding each channel negative input.
     nrf_saadc_state_t          saadc_state;                  ///< State of the SAADC driver.
@@ -55,6 +55,7 @@ typedef struct
     uint8_t                    limits_low_activated;         ///< Bitmask of the activated low limits.
     uint8_t                    limits_high_activated;        ///< Bitmask of the activated high limits.
     bool                       start_on_end;                 ///< Flag indicating if the START task is to be triggered on the END event.
+    bool                       oversampling_without_burst;   ///< Flag indicating whether oversampling without burst is configured.
 } nrfx_saadc_cb_t;
 
 static nrfx_saadc_cb_t m_cb;
@@ -90,14 +91,23 @@ static void saadc_anomaly_212_workaround_apply(void)
 }
 #endif // NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_212)
 
-static void saadc_enabled_channels_sample(void)
+static void saadc_enabled_channels_sample(nrf_saadc_event_t sample_finished_event,
+                                          uint32_t          sample_tasks_per_trigger)
 {
-    for (uint32_t sample_idx = 0; sample_idx < m_cb.samples_per_trigger; sample_idx++)
+    nrf_saadc_event_clear(NRF_SAADC, sample_finished_event);
+    for (uint32_t sample_idx = 0; sample_idx < sample_tasks_per_trigger; sample_idx++)
     {
+        // If oversampling without burst is enabled,
+        // then more than one SAMPLE task per single conversion is needed.
         nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_SAMPLE);
-        while (!nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_DONE))
-        {}
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_DONE);
+
+        for (uint32_t channel_idx = 0; channel_idx < m_cb.channels_activated_count; channel_idx++)
+        {
+            // Event appear for each activated channel.
+            while (!nrf_saadc_event_check(NRF_SAADC, sample_finished_event))
+            {}
+            nrf_saadc_event_clear(NRF_SAADC, sample_finished_event);
+        }
     }
 }
 
@@ -165,6 +175,7 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
     m_cb.p_buffer_secondary = NULL;
     m_cb.event_handler = event_handler;
     m_cb.channels_activated = ch_to_activate_mask;
+    m_cb.samples_converted = 0;
 
     nrf_saadc_resolution_set(NRF_SAADC, resolution);
     nrf_saadc_oversample_set(NRF_SAADC, oversampling);
@@ -305,6 +316,7 @@ nrfx_err_t nrfx_saadc_simple_mode_set(uint32_t                   channel_mask,
     }
     else
     {
+        // Burst is implicitly enabled if oversampling is enabled.
         burst = NRF_SAADC_BURST_ENABLED;
     }
 
@@ -314,17 +326,6 @@ nrfx_err_t nrfx_saadc_simple_mode_set(uint32_t                   channel_mask,
                            burst,
                            event_handler);
 
-    if (event_handler)
-    {
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_RESULTDONE);
-        nrf_saadc_int_enable(NRF_SAADC, NRF_SAADC_INT_RESULTDONE);
-    }
-    else
-    {
-        nrf_saadc_int_disable(NRF_SAADC, NRF_SAADC_INT_RESULTDONE);
-    }
-
-    m_cb.samples_per_trigger = active_ch_count;
     m_cb.channels_activated_count = active_ch_count;
     m_cb.saadc_state = NRF_SAADC_STATE_SIMPLE_MODE;
 
@@ -356,23 +357,18 @@ nrfx_err_t nrfx_saadc_advanced_mode_set(uint32_t                        channel_
         return NRFX_ERROR_NOT_SUPPORTED;
     }
 
+    bool oversampling_without_burst = false;
     if ((p_config->oversampling != NRF_SAADC_OVERSAMPLE_DISABLED) &&
         (p_config->burst == NRF_SAADC_BURST_DISABLED))
     {
-        // Oversampling without burst
         if (active_ch_count > 1)
         {
             return NRFX_ERROR_NOT_SUPPORTED;
         }
         else
         {
-            m_cb.samples_per_trigger =
-                nrf_saadc_oversample_sample_count_get(p_config->oversampling);
+            oversampling_without_burst = true;
         }
-    }
-    else
-    {
-        m_cb.samples_per_trigger = active_ch_count;
     }
 
     saadc_generic_mode_set(channel_mask,
@@ -392,6 +388,7 @@ nrfx_err_t nrfx_saadc_advanced_mode_set(uint32_t                        channel_
 
     m_cb.channels_activated_count = active_ch_count;
     m_cb.start_on_end = p_config->start_on_end;
+    m_cb.oversampling_without_burst = oversampling_without_burst;
 
     m_cb.saadc_state = NRF_SAADC_STATE_ADV_MODE;
 
@@ -485,7 +482,7 @@ nrfx_err_t nrfx_saadc_mode_trigger(void)
                 {}
                 nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
 
-                saadc_enabled_channels_sample();
+                saadc_enabled_channels_sample(NRF_SAADC_EVENT_RESULTDONE, 1);
                 while (!nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_END))
                 {}
                 nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
@@ -516,10 +513,24 @@ nrfx_err_t nrfx_saadc_mode_trigger(void)
                 break;
             }
 
-            saadc_enabled_channels_sample();
-            if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_END))
+            if (m_cb.oversampling_without_burst)
             {
+                saadc_enabled_channels_sample(NRF_SAADC_EVENT_DONE,
+                        nrf_saadc_oversample_sample_count_get(nrf_saadc_oversample_get(NRF_SAADC)));
+            }
+            else
+            {
+                saadc_enabled_channels_sample(NRF_SAADC_EVENT_RESULTDONE, 1);
+            }
+            m_cb.samples_converted += m_cb.channels_activated_count;
+            if (m_cb.samples_converted == m_cb.size_primary)
+            {
+                m_cb.samples_converted = 0;
+
+                while (!nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_END))
+                {}
                 nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
+
                 m_cb.saadc_state = NRF_SAADC_STATE_ADV_MODE;
                 m_cb.p_buffer_primary = m_cb.p_buffer_secondary;
                 m_cb.size_primary     = m_cb.size_secondary;
@@ -586,6 +597,7 @@ void nrfx_saadc_abort(void)
                 /* fall-through */
 
             case NRF_SAADC_STATE_ADV_MODE_SAMPLE_STARTED:
+                m_cb.samples_converted = 0;
                 m_cb.saadc_state = NRF_SAADC_STATE_ADV_MODE;
                 break;
 
@@ -812,16 +824,6 @@ void nrfx_saadc_irq_handler(void)
     {
         nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
         saadc_event_started_handle();
-    }
-
-    if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_RESULTDONE))
-    {
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_RESULTDONE);
-
-        if (m_cb.saadc_state == NRF_SAADC_STATE_SIMPLE_MODE_SAMPLE)
-        {
-            nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_SAMPLE);
-        }
     }
 
     if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STOPPED))
