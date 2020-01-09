@@ -698,8 +698,13 @@ static void saadc_event_started_handle(void)
             /* fall-through */
 
         case NRF_SAADC_STATE_ADV_MODE_SAMPLE_STARTED:
-            evt_data.type = NRFX_SAADC_EVT_BUF_REQ;
-            m_cb.event_handler(&evt_data);
+            if (!m_cb.p_buffer_secondary)
+            {
+                // Send next buffer request only if it was not provided earlier,
+                // before conversion start or outside of user's callback context.
+                evt_data.type = NRFX_SAADC_EVT_BUF_REQ;
+                m_cb.event_handler(&evt_data);
+            }
             break;
 
         case NRF_SAADC_STATE_SIMPLE_MODE_SAMPLE:
