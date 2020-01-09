@@ -141,7 +141,6 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
 
 #if NRFX_CHECK(STOP_SAADC_ON_CHANNEL_CONFIG)
     nrf_saadc_int_disable(NRF_SAADC, NRF_SAADC_INT_STOPPED);
-    nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STOPPED);
     nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_STOP);
     while (!nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STOPPED))
     {}
@@ -161,20 +160,14 @@ static void saadc_generic_mode_set(uint32_t                   ch_to_activate_mas
     nrf_saadc_oversample_set(NRF_SAADC, oversampling);
     if (event_handler)
     {
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STOPPED);
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
-        nrf_saadc_int_enable(NRF_SAADC,
-                             NRF_SAADC_INT_STARTED |
-                             NRF_SAADC_INT_STOPPED |
-                             NRF_SAADC_INT_END);
+        nrf_saadc_int_set(NRF_SAADC,
+                          NRF_SAADC_INT_STARTED |
+                          NRF_SAADC_INT_STOPPED |
+                          NRF_SAADC_INT_END);
     }
     else
     {
-        nrf_saadc_int_disable(NRF_SAADC,
-                              NRF_SAADC_INT_STARTED |
-                              NRF_SAADC_INT_STOPPED |
-                              NRF_SAADC_INT_END);
+        nrf_saadc_int_set(NRF_SAADC, 0);
     }
 
     for (uint32_t ch_pos = 0; ch_pos < SAADC_CH_NUM; ch_pos++)
@@ -212,7 +205,10 @@ nrfx_err_t nrfx_saadc_init(uint8_t interrupt_priority)
     }
     m_cb.saadc_state = NRF_SAADC_STATE_IDLE;
 
-    nrf_saadc_int_disable(NRF_SAADC, NRF_SAADC_INT_ALL);
+    nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
+    nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STOPPED);
+    nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
+    nrf_saadc_int_set(NRF_SAADC, 0);
     NRFX_IRQ_ENABLE(SAADC_IRQn);
     NRFX_IRQ_PRIORITY_SET(SAADC_IRQn, interrupt_priority);
 
