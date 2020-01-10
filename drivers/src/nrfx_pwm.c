@@ -65,16 +65,16 @@ static void configure_pins(nrfx_pwm_t const *        p_instance,
 
             if (!p_config->skip_gpio_cfg)
             {
-               if (inverted)
-               {
-                   nrf_gpio_pin_set(out_pins[i]);
-               }
-               else
-               {
-                   nrf_gpio_pin_clear(out_pins[i]);
-               }
+                if (inverted)
+                {
+                    nrf_gpio_pin_set(out_pins[i]);
+                }
+                else
+                {
+                    nrf_gpio_pin_clear(out_pins[i]);
+                }
 
-               nrf_gpio_cfg_output(out_pins[i]);
+                nrf_gpio_cfg_output(out_pins[i]);
             }
         }
         else
