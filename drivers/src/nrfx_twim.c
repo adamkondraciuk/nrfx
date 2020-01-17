@@ -487,15 +487,30 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
     }
     else
     {
-        while (!nrf_twim_event_check(p_twim, evt_to_wait))
+        bool transmission_finished = false;
+        while (!transmission_finished)
         {
+            if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_SUSPENDED))
+            {
+                nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
+                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
+                transmission_finished = true;
+            }
+
+            if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
+            {
+                nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
+                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
+                transmission_finished = true;
+            }
+
             if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_ERROR))
             {
-                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
                 nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
+                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
                 nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
                 nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
-                evt_to_wait = NRF_TWIM_EVENT_STOPPED;
+                transmission_finished = false;
             }
         }
 
