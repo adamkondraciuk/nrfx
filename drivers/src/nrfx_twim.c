@@ -22,7 +22,9 @@
     (event == NRFX_TWIM_EVT_DONE         ? "EVT_DONE"         : \
     (event == NRFX_TWIM_EVT_ADDRESS_NACK ? "EVT_ADDRESS_NACK" : \
     (event == NRFX_TWIM_EVT_DATA_NACK    ? "EVT_DATA_NACK"    : \
-                                           "UNKNOWN ERROR")))
+    (event == NRFX_TWIM_EVT_OVERRUN      ? "EVT_OVERRUN"      : \
+    (event == NRFX_TWIM_EVT_BUS_ERROR    ? "EVT_BUS_ERROR"    : \
+                                           "UNKNOWN ERROR")))))
 
 #define EVT_TO_STR_TWIM(event)                                        \
     (event == NRF_TWIM_EVENT_STOPPED   ? "NRF_TWIM_EVENT_STOPPED"   : \
@@ -677,19 +679,17 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     }
     else if (errorsrc & NRF_TWIM_ERROR_OVERRUN)
     {
-        event.type = NRFX_TWIM_EVT_DATA_NACK;
-        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_DATA_NACK));
+        event.type = NRFX_TWIM_EVT_OVERRUN;
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_OVERRUN));
+    }
+    else if (p_cb->error)
+    {
+        event.type = NRFX_TWIM_EVT_BUS_ERROR;
+        NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_BUS_ERROR));
     }
     else
     {
-        if (p_cb->error)
-        {
-            event.type = NRFX_TWIM_EVT_BUS_ERROR;
-        }
-        else
-        {
-            event.type = NRFX_TWIM_EVT_DONE;
-        }
+        event.type = NRFX_TWIM_EVT_DONE;
         NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(NRFX_TWIM_EVT_DONE));
     }
 
