@@ -379,9 +379,9 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
                       (NRFX_TWIM_FLAG_REPEATED_XFER & flags)) ? false: true;
     }
 
-    p_cb->int_mask = 0;
     p_cb->xfer_desc = *p_xfer_desc;
     p_cb->repeated = (flags & NRFX_TWIM_FLAG_REPEATED_XFER) ? true : false;
+    p_cb->flags = flags;
     nrf_twim_address_set(p_twim, p_xfer_desc->address);
 
     nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
@@ -429,6 +429,7 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         nrf_twim_rx_buffer_set(p_twim, p_xfer_desc->p_secondary_buf, p_xfer_desc->secondary_length);
         nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STARTRX_MASK |
                                     NRF_TWIM_SHORT_LASTRX_STOP_MASK);
+        p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
         break;
     case NRFX_TWIM_XFER_TX:
@@ -442,12 +443,14 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         else
         {
             nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
+            p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
         }
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
         break;
     case NRFX_TWIM_XFER_RX:
         nrf_twim_rx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
         nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTRX_STOP_MASK);
+        p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
         start_task = NRF_TWIM_TASK_STARTRX;
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
         break;
@@ -463,10 +466,18 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
 
     if (p_cb->handler)
     {
-        p_cb->flags = flags;
-        // Interrupts for STOP and ERROR are implicitly enabled,
-        // to be able to react to misbehaving slave device regardless of driver configuration.
-        p_cb->int_mask |= NRF_TWIM_INT_STOPPED_MASK | NRF_TWIM_INT_ERROR_MASK;
+        if (flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER)
+        {
+            p_cb->int_mask = 0;
+        }
+
+        if (!(flags & NRFX_TWIM_FLAG_NO_SPURIOUS_STOP_CHECK))
+        {
+            p_cb->int_mask |= NRF_TWIM_INT_STOPPED_MASK;
+        }
+
+        // Interrupts for ERROR are implicitly enabled, regardless of driver configuration.
+        p_cb->int_mask |= NRF_TWIM_INT_ERROR_MASK;
         nrf_twim_int_enable(p_twim, p_cb->int_mask);
 
 #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
@@ -522,7 +533,8 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         }
         else
         {
-            if (!xfer_completeness_check(p_twim, p_cb))
+            if (!(flags & NRFX_TWIM_FLAG_NO_SPURIOUS_STOP_CHECK) &&
+                !xfer_completeness_check(p_twim, p_cb))
             {
                 err_code = NRFX_ERROR_INTERNAL;
             }
@@ -629,7 +641,8 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     {
         NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
-        if (!p_cb->error)
+
+        if (!(p_cb->flags & NRFX_TWIM_FLAG_NO_SPURIOUS_STOP_CHECK) && !p_cb->error)
         {
             p_cb->error = !xfer_completeness_check(p_twim, p_cb);
         }
