@@ -45,7 +45,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
 #define MDK_MINOR_VERSION   30 
-#define MDK_MICRO_VERSION   1 
+#define MDK_MICRO_VERSION   2 
 
 /* Define NRF51_SERIES for common use in nRF51 series devices. Only if not previously defined. */
 #if defined (NRF51) ||\

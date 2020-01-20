@@ -32,7 +32,9 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 /*lint ++flb "Enter library region" */
 
 
-#define __SYSTEM_CLOCK      (128000000UL)     /*!< NRF5340 application core uses a fixed System Clock Frequency of 128MHz */
+/* NRF5340 application core uses a variable System Clock Frequency that starts at 64MHz */
+#define __SYSTEM_CLOCK_MAX      (128000000UL)
+#define __SYSTEM_CLOCK_INITIAL  ( 64000000UL)
 
 #define TRACE_PIN_CNF_VALUE (   (GPIO_PIN_CNF_DIR_Output << GPIO_PIN_CNF_DIR_Pos) | \
                                 (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos) | \
@@ -48,19 +50,19 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define TRACE_TRACEDATA3_PIN TAD_PSEL_TRACEDATA3_PIN_Tracedata3
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_INITIAL;  
 #elif defined ( __ICCARM__ )
-    __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
+    __root uint32_t SystemCoreClock = __SYSTEM_CLOCK_INITIAL;
 #elif defined   ( __GNUC__ )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_INITIAL;
 #endif
 
 void SystemCoreClockUpdate(void)
 {
 #if defined(NRF_TRUSTZONE_NONSECURE)
-    SystemCoreClock = __SYSTEM_CLOCK >> (NRF_CLOCK_NS->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
+    SystemCoreClock = __SYSTEM_CLOCK_MAX >> (NRF_CLOCK_NS->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
 #else
-    SystemCoreClock = __SYSTEM_CLOCK >> (NRF_CLOCK_S->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
+    SystemCoreClock = __SYSTEM_CLOCK_MAX >> (NRF_CLOCK_S->HFCLKCTRL & (CLOCK_HFCLKCTRL_HCLK_Msk));
 #endif
 }
 
@@ -78,7 +80,7 @@ void SystemInit(void)
         /* Trimming of the device. Copy all the trimming values from FICR into the target addresses. Trim
          until one ADDR is not initialized. */
         uint32_t index = 0;
-        for (index = 0; index < 256ul && NRF_FICR_S->TRIMCNF[index].ADDR != (uint32_t *)0xFFFFFFFFul; index++){
+        for (index = 0; index < 32ul && NRF_FICR_S->TRIMCNF[index].ADDR != (uint32_t *)0xFFFFFFFFul; index++){
             #if defined ( __ICCARM__ )
                 /* IAR will complain about the order of volatile pointer accesses. */
                 #pragma diag_suppress=Pa082
