@@ -386,6 +386,8 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
 
     nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
     nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
+    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
+    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
 
     twim_list_enable_handle(p_twim, flags);
     switch (p_xfer_desc->type)
@@ -405,8 +407,6 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
         nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
         nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
         nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
         while (!nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_TXSTARTED))
@@ -438,7 +438,6 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         {
             nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
             p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK;
-            nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
         }
         else
         {
@@ -497,11 +496,9 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
     else
     {
         bool transmission_finished = false;
-        while (!transmission_finished)
-        {
+        do {
             if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_SUSPENDED))
             {
-                nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
                 NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
                 transmission_finished = true;
             }
@@ -517,11 +514,43 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             {
                 nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
                 NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
-                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
-                transmission_finished = false;
+
+                bool lasttx_triggered = nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_LASTTX);
+                uint32_t shorts_mask = nrf_twim_shorts_get(p_twim);
+
+                if (!(lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
+                {
+                    // Unless LASTTX event arrived and LASTTX_STOP shortcut is active,
+                    // triggering of STOP task in case of error has to be done manually.
+                    nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+                    nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+
+                    // Mark transmission as not finished yet,
+                    // as STOPPED event is expected to arrive.
+                    // If LASTTX_SUSPENDED shortcut is active,
+                    // NACK has been received on last byte sent
+                    // and SUSPENDED event happened to be checked before ERROR,
+                    // transmission will be marked as finished.
+                    // In such case this flag has to be overwritten.
+                    transmission_finished = false;
+                }
+
+                if (lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK))
+                {
+                    // When STOP task was triggered just before SUSPEND task has taken effect,
+                    // SUSPENDED event may not arrive.
+                    // However if SUSPENDED arrives it always arrives after ERROR.
+                    // Therefore SUSPENDED has to be cleared
+                    // so it does not cause premature termination of busy loop
+                    // waiting for STOPPED event to arrive.
+                    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
+
+                    // Mark transmission as not finished yet,
+                    // for same reasons as above.
+                    transmission_finished = false;
+                }
             }
-        }
+        } while (!transmission_finished);
 
         uint32_t errorsrc =  nrf_twim_errorsrc_get_and_clear(p_twim);
 
@@ -627,8 +656,12 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
             nrf_twim_int_enable(p_twim, p_cb->int_mask);
 
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+            if (!(nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_LASTTX) &&
+                 (nrf_twim_shorts_get(p_twim) & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
+            {
+                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+            }
 
             p_cb->error = true;
             return;
@@ -659,6 +692,13 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
                 nrf_twim_shorts_set(p_twim, 0);
                 p_cb->int_mask = 0;
                 nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+
+                // At this point interrupt handler should not be invoked again for current transfer.
+                // If STOPPED arrived during ERROR processing,
+                // its pending interrupt should be ignored.
+                // Otherwise spurious NRFX_TWIM_EVT_DONE or NRFX_TWIM_EVT_BUS_ERROR
+                // would be passed to user's handler.
+                NRFX_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
             }
         }
 
@@ -684,6 +724,13 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
                 nrf_twim_shorts_set(p_twim, 0);
                 p_cb->int_mask = 0;
                 nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+
+                // At this point interrupt handler should not be invoked again for current transfer.
+                // If STOPPED arrived during SUSPENDED processing,
+                // its pending interrupt should be ignored.
+                // Otherwise spurious NRFX_TWIM_EVT_DONE or NRFX_TWIM_EVT_BUS_ERROR
+                // would be passed to user's handler.
+                NRFX_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
             }
         }
         else
