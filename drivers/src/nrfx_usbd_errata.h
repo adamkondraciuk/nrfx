@@ -16,12 +16,6 @@
 #define NRFX_USBD_ERRATA_ENABLE 1
 #endif
 
-/* Errata: During setup read/write transfer USBD acknowledges setup stage without SETUP task. **/
-static inline bool nrfx_usbd_errata_154(void)
-{
-    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_154();
-}
-
 /* Errata: ISO double buffering not functional. **/
 static inline bool nrfx_usbd_errata_166(void)
 {
