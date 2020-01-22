@@ -16,12 +16,6 @@
 #define NRFX_USBD_ERRATA_ENABLE 1
 #endif
 
-/* Errata: USBD: EPDATA event is not always generated. **/
-static inline bool nrfx_usbd_errata_104(void)
-{
-    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_104();
-}
-
 /* Errata: During setup read/write transfer USBD acknowledges setup stage without SETUP task. **/
 static inline bool nrfx_usbd_errata_154(void)
 {
