@@ -469,14 +469,17 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
         nrf_twim_int_enable(p_twim, p_cb->int_mask);
 
 #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
-        if ((flags & NRFX_TWIM_FLAG_HOLD_XFER) && ((p_xfer_desc->type == NRFX_TWIM_XFER_TX) ||
-                                                   (p_xfer_desc->type == NRFX_TWIM_XFER_TXRX)))
+        if ((flags & NRFX_TWIM_FLAG_HOLD_XFER) && (p_xfer_desc->type != NRFX_TWIM_XFER_RX))
         {
             p_cb->flags = flags;
             twim_list_enable_handle(p_twim, 0);
             p_twim->FREQUENCY = 0;
             nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
             nrf_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
+        } 
+        else
+        {
+            nrf_twim_frequency_set(p_twim, p_cb->bus_frequency);
         }
 #endif
     }
@@ -624,6 +627,16 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
             p_cb->int_mask = 0;
             nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
         }
+
+#if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
+        else if (p_cb->xfer_desc.type != NRFX_TWIM_XFER_RX)
+        {
+            /* Add Anomaly 109 workaround for each potential repeated transfer starting from TX. */
+            twim_list_enable_handle(p_twim, 0);
+            p_twim->FREQUENCY = 0;
+            nrf_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
+        }
+#endif
     }
     else
     {
