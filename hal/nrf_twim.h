@@ -324,6 +324,15 @@ NRF_STATIC_INLINE void nrf_twim_shorts_set(NRF_TWIM_Type * p_reg,
                                            uint32_t        mask);
 
 /**
+ * @brief Function for getting the shortcut setting.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Current shortcut configuration.
+ */
+NRF_STATIC_INLINE uint32_t nrf_twim_shorts_get(NRF_TWIM_Type const * p_reg);
+
+/**
  * @brief Function for getting the amount of transmitted bytes.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -525,6 +534,11 @@ NRF_STATIC_INLINE void nrf_twim_shorts_set(NRF_TWIM_Type * p_reg,
                                            uint32_t mask)
 {
     p_reg->SHORTS = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_twim_shorts_get(NRF_TWIM_Type const * p_reg)
+{
+    return p_reg->SHORTS;
 }
 
 NRF_STATIC_INLINE size_t nrf_twim_txd_amount_get(NRF_TWIM_Type const * p_reg)
