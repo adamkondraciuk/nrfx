@@ -40,10 +40,4 @@ static inline bool nrfx_usbd_errata_199(void)
     return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_199();
 }
 
-/* Errata: SIZE.EPOUT not writable. **/
-static inline bool nrfx_usbd_errata_200(void)
-{
-    return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_200();
-}
-
 #endif // NRFX_USBD_ERRATA_H__

@@ -2140,25 +2140,13 @@ void nrfx_usbd_transfer_out_drop(nrfx_usbd_ep_t ep)
 {
     NRFX_ASSERT(NRF_USBD_EPOUT_CHECK(ep));
 
-    if (nrfx_usbd_errata_200())
+    NRFX_CRITICAL_SECTION_ENTER();
+    m_ep_ready &= ~(1U << ep2bit(ep));
+    if (!NRF_USBD_EPISO_CHECK(ep))
     {
-        NRFX_CRITICAL_SECTION_ENTER();
-        m_ep_ready &= ~(1U << ep2bit(ep));
-        *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x800)) = 0x7C5 + (2u * NRF_USBD_EP_NR_GET(ep));
-        *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)) = 0;
-        (void)(*((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)));
-        NRFX_CRITICAL_SECTION_EXIT();
+        nrf_usbd_epout_clear(NRF_USBD, ep);
     }
-    else
-    {
-        NRFX_CRITICAL_SECTION_ENTER();
-        m_ep_ready &= ~(1U << ep2bit(ep));
-        if (!NRF_USBD_EPISO_CHECK(ep))
-        {
-            nrf_usbd_epout_clear(NRF_USBD, ep);
-        }
-        NRFX_CRITICAL_SECTION_EXIT();
-    }
+    NRFX_CRITICAL_SECTION_EXIT();
 }
 
 #endif // NRFX_CHECK(NRFX_USBD_ENABLED)
