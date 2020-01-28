@@ -371,11 +371,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 
     nrf_spim_orc_set(p_spim, p_config->orc);
 
-    if (p_cb->handler)
-    {
-        nrf_spim_int_enable(p_spim, NRF_SPIM_INT_END_MASK);
-    }
-
     nrf_spim_enable(p_spim);
 
     if (p_cb->handler)
