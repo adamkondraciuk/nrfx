@@ -3,6 +3,10 @@
 #ifndef NRFX_CONFIG_NRF5340_APPLICATION_H__
 #define NRFX_CONFIG_NRF5340_APPLICATION_H__
 
+#ifndef NRFX_CONFIG_H__
+#error "This file should not be included directly. Include nrfx_config.h instead."
+#endif
+
 /*
  * The MDK provides macros for accessing the peripheral register structures
  * by using their secure and non-secure address mappings (with the names
