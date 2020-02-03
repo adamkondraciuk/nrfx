@@ -127,6 +127,16 @@ void nrfx_qdec_uninit(void)
     NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
     nrfx_qdec_disable();
     NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_QDEC));
+
+    nrf_gpio_cfg_default(nrf_qdec_phase_a_pin_get(NRF_QDEC));
+    nrf_gpio_cfg_default(nrf_qdec_phase_b_pin_get(NRF_QDEC));
+
+    uint32_t led_pin = nrf_qdec_led_pin_get(NRF_QDEC);
+    if (led_pin != NRF_QDEC_LED_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(led_pin);
+    }
+
     m_state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.");
 }
