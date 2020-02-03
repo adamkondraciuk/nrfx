@@ -156,7 +156,6 @@ typedef struct
     //  are not concurrently used in IRQ handlers and main line code]
     bool            ss_active_high;
     uint8_t         ss_pin;
-    uint8_t         miso_pin;
     uint8_t         orc;
 
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
@@ -319,7 +318,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     {
         miso_pin = NRF_SPIM_PIN_NOT_CONNECTED;
     }
-    p_cb->miso_pin = p_config->miso_pin;
     // - Slave Select (optional) - output with initial value 1 (inactive).
 
     // 'p_cb->ss_pin' variable is used during transfers to check if SS pin should be toggled,
@@ -392,15 +390,11 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRF_SPIM_Type * p_spim = p_instance->p_reg;
 
     if (p_cb->handler)
     {
         NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_instance->p_reg));
-    }
-
-    NRF_SPIM_Type * p_spim = (NRF_SPIM_Type *)p_instance->p_reg;
-    if (p_cb->handler)
-    {
         nrf_spim_int_disable(p_spim, NRF_SPIM_ALL_INTS_MASK);
         if (p_cb->transfer_in_progress)
         {
@@ -412,11 +406,34 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
         }
     }
 
-    if (p_cb->miso_pin != NRFX_SPIM_PIN_NOT_USED)
-    {
-        nrf_gpio_cfg_default(p_cb->miso_pin);
-    }
     nrf_spim_disable(p_spim);
+
+    nrf_gpio_cfg_default(nrf_spim_sck_pin_get(p_spim));
+
+    uint32_t miso_pin = nrf_spim_miso_pin_get(p_spim);
+    if (miso_pin != NRF_SPIM_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(miso_pin);
+    }
+
+    uint32_t mosi_pin = nrf_spim_mosi_pin_get(p_spim);
+    if (mosi_pin != NRF_SPIM_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(mosi_pin);
+    }
+
+    if (p_cb->ss_pin != NRFX_SPIM_PIN_NOT_USED)
+    {
+        nrf_gpio_cfg_default(p_cb->ss_pin);
+    }
+
+#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
+    uint32_t dcx_pin = nrf_spim_dcx_pin_get(p_spim);
+    if (dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(mosi_pin);
+    }
+#endif
 
 #ifdef USE_WORKAROUND_FOR_ANOMALY_195
     if (p_spim == NRF_SPIM3)
