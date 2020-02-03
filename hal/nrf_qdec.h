@@ -188,6 +188,33 @@ NRF_STATIC_INLINE void nrf_qdec_pio_assign(NRF_QDEC_Type * p_reg,
                                            uint32_t        pselled);
 
 /**
+ * @brief Function for getting the Phase A pin number.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Phase A pin number.
+ */
+NRF_STATIC_INLINE uint32_t nrf_qdec_phase_a_pin_get(NRF_QDEC_Type const * p_reg);
+
+/**
+ * @brief Function for getting the Phase B pin number.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Phase B pin number.
+ */
+NRF_STATIC_INLINE uint32_t nrf_qdec_phase_b_pin_get(NRF_QDEC_Type const * p_reg);
+
+/**
+ * @brief Function for getting the LED pin number.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return LED pin number.
+ */
+NRF_STATIC_INLINE uint32_t nrf_qdec_led_pin_get(NRF_QDEC_Type const * p_reg);
+
+/**
  * @brief Function for setting the specified QDEC task.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -455,6 +482,33 @@ NRF_STATIC_INLINE void nrf_qdec_pio_assign(NRF_QDEC_Type * p_reg,
     p_reg->PSEL.LED = pselled;
 #else
     p_reg->PSELLED = pselled;
+#endif
+}
+
+NRF_STATIC_INLINE uint32_t nrf_qdec_phase_a_pin_get(NRF_QDEC_Type const * p_reg)
+{
+#if defined(QDEC_PSEL_A_CONNECT_Pos)
+    return p_reg->PSEL.A;
+#else
+    return p_reg->PSELA;
+#endif
+}
+
+NRF_STATIC_INLINE uint32_t nrf_qdec_phase_b_pin_get(NRF_QDEC_Type const * p_reg)
+{
+#if defined(QDEC_PSEL_B_CONNECT_Pos)
+    return p_reg->PSEL.B;
+#else
+    return p_reg->PSELB;
+#endif
+}
+
+NRF_STATIC_INLINE uint32_t nrf_qdec_led_pin_get(NRF_QDEC_Type const * p_reg)
+{
+#if defined(QDEC_PSEL_LED_CONNECT_Pos)
+    return p_reg->PSEL.LED;
+#else
+    return p_reg->PSELLED;
 #endif
 }
 
