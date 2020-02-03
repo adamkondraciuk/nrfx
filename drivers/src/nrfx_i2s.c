@@ -105,6 +105,29 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
                      sdin_pin);
 }
 
+static void deconfigure_pins(void)
+{
+    nrf_gpio_cfg_default(nrf_i2s_sck_pin_get(NRF_I2S));
+    nrf_gpio_cfg_default(nrf_i2s_lrck_pin_get(NRF_I2S));
+
+    uint32_t mck_pin = nrf_i2s_mck_pin_get(NRF_I2S);
+    if (mck_pin != NRF_I2S_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(mck_pin);
+    }
+
+    uint32_t sdout_pin = nrf_i2s_sdout_pin_get(NRF_I2S);
+    if (sdout_pin != NRF_I2S_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(sdout_pin);
+    }
+
+    uint32_t sdin_pin = nrf_i2s_sdin_pin_get(NRF_I2S);
+    if (sdin_pin != NRF_I2S_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(sdin_pin);
+    }
+}
 
 nrfx_err_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
                          nrfx_i2s_data_handler_t   handler)
@@ -164,6 +187,12 @@ void nrfx_i2s_uninit(void)
 
     NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_I2S));
 
+    nrf_i2s_disable(NRF_I2S);
+
+    deconfigure_pins();
+
+    // Disabling I2S is insufficent to release pins acquired by the peripheral.
+    // Explicit disconnect is needed.
     nrf_i2s_pins_set(NRF_I2S,
                      NRF_I2S_PIN_NOT_CONNECTED,
                      NRF_I2S_PIN_NOT_CONNECTED,
