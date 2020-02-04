@@ -277,7 +277,8 @@ bool nrfx_nvmc_page_partial_erase_continue(void)
 
 bool nrfx_nvmc_byte_writable_check(uint32_t addr, uint8_t val_to_check)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
 
     uint8_t val_on_addr = *(uint8_t const *)addr;
     return (val_to_check & val_on_addr) == val_to_check;
@@ -285,7 +286,8 @@ bool nrfx_nvmc_byte_writable_check(uint32_t addr, uint8_t val_to_check)
 
 bool nrfx_nvmc_word_writable_check(uint32_t addr, uint32_t val_to_check)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
     NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
 
     uint32_t val_on_addr = *(uint32_t const *)addr;
@@ -301,7 +303,8 @@ void nrfx_nvmc_byte_write(uint32_t addr, uint8_t value)
 
 void nrfx_nvmc_word_write(uint32_t addr, uint32_t value)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
     NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
 
     nvmc_write_mode_set();
@@ -313,7 +316,8 @@ void nrfx_nvmc_word_write(uint32_t addr, uint32_t value)
 
 void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
 
     nvmc_write_mode_set();
 
@@ -375,7 +379,8 @@ void nrfx_nvmc_bytes_write(uint32_t addr, void const * src, uint32_t num_bytes)
 
 void nrfx_nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
     NRFX_ASSERT(nrfx_is_word_aligned((void const *)addr));
     NRFX_ASSERT(nrfx_is_word_aligned(src));
 
