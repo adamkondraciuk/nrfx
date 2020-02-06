@@ -24,6 +24,19 @@
 #define USE_WORKAROUND_FOR_I2S_STOP_ANOMALY 1
 #endif
 
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_170) && defined(NRF52_SERIES)
+// Enable workaround for nRF52832, nRF52833 and nRF52840 anomaly 170
+// (when reading the value of PSEL registers, the CONNECT field might not
+//  return the same value that has been written to it).
+#define USE_WORKAROUND_FOR_ANOMALY_170 1
+#endif
+
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_196) && defined(NRF52_SERIES)
+// Enable workaround for nRF52832, nRF52833 and nRF52840 anomaly 196
+// (PSEL acquires GPIO regardless of ENABLE).
+#define USE_WORKAROUND_FOR_ANOMALY_196 1
+#endif
+
 // Control block - driver instance local data.
 typedef struct
 {
@@ -107,25 +120,39 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
 
 static void deconfigure_pins(void)
 {
-    nrf_gpio_cfg_default(nrf_i2s_sck_pin_get(NRF_I2S));
-    nrf_gpio_cfg_default(nrf_i2s_lrck_pin_get(NRF_I2S));
+    uint32_t sck_pin   = nrf_i2s_sck_pin_get(NRF_I2S);
+    uint32_t lrck_pin  = nrf_i2s_lrck_pin_get(NRF_I2S);
+    uint32_t mck_pin   = nrf_i2s_mck_pin_get(NRF_I2S);
+    uint32_t sdout_pin = nrf_i2s_sdout_pin_get(NRF_I2S);
+    uint32_t sdin_pin  = nrf_i2s_sdin_pin_get(NRF_I2S);
 
-    uint32_t mck_pin = nrf_i2s_mck_pin_get(NRF_I2S);
+#if USE_WORKAROUND_FOR_ANOMALY_170
+    // Create bitmask for extracting pin number from PSEL register.
+    uint32_t pin_mask = I2S_PSEL_SCK_PIN_Msk;
+#if defined(I2S_PSEL_SCK_PORT_Msk)
+    // If device supports more than one GPIO port, take port number into account as well.
+    pin_mask |= I2S_PSEL_SCK_PORT_Msk;
+#endif
+#else
+    uint32_t pin_mask = 0xFFFFFFFF;
+#endif // USE_WORKAROUND_FOR_ANOMALY_170
+
+    nrf_gpio_cfg_default(sck_pin & pin_mask);
+    nrf_gpio_cfg_default(lrck_pin & pin_mask);
+
     if (mck_pin != NRF_I2S_PIN_NOT_CONNECTED)
     {
-        nrf_gpio_cfg_default(mck_pin);
+        nrf_gpio_cfg_default(mck_pin & pin_mask);
     }
 
-    uint32_t sdout_pin = nrf_i2s_sdout_pin_get(NRF_I2S);
     if (sdout_pin != NRF_I2S_PIN_NOT_CONNECTED)
     {
-        nrf_gpio_cfg_default(sdout_pin);
+        nrf_gpio_cfg_default(sdout_pin & pin_mask);
     }
 
-    uint32_t sdin_pin = nrf_i2s_sdin_pin_get(NRF_I2S);
     if (sdin_pin != NRF_I2S_PIN_NOT_CONNECTED)
     {
-        nrf_gpio_cfg_default(sdin_pin);
+        nrf_gpio_cfg_default(sdin_pin & pin_mask);
     }
 }
 
@@ -191,6 +218,7 @@ void nrfx_i2s_uninit(void)
 
     deconfigure_pins();
 
+#if USE_WORKAROUND_FOR_ANOMALY_196
     // Disabling I2S is insufficent to release pins acquired by the peripheral.
     // Explicit disconnect is needed.
     nrf_i2s_pins_set(NRF_I2S,
@@ -199,6 +227,7 @@ void nrfx_i2s_uninit(void)
                      NRF_I2S_PIN_NOT_CONNECTED,
                      NRF_I2S_PIN_NOT_CONNECTED,
                      NRF_I2S_PIN_NOT_CONNECTED);
+#endif
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.");
