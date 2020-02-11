@@ -139,11 +139,6 @@ nrfx_err_t nrfx_spi_init(nrfx_spi_t const *        p_instance,
 
     m_cb[p_instance->drv_inst_idx].orc = p_config->orc;
 
-    if (p_cb->handler)
-    {
-        nrf_spi_int_enable(p_spi, NRF_SPI_INT_READY_MASK);
-    }
-
     nrf_spi_enable(p_spi);
 
     if (p_cb->handler)
