@@ -16,23 +16,22 @@
     (event == NRF_I2S_EVENT_STOPPED  ? "NRF_I2S_EVENT_STOPPED"  : \
                                        "UNKNOWN EVENT")))
 
-#if !defined(USE_WORKAROUND_FOR_I2S_STOP_ANOMALY) &&                               \
-    (defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || defined(NRF52840_XXAA) || \
-     defined(NRF9160_XXAA))
-// Enable workaround for nRF52832 and nRF52840 anomaly 194 / nrf9160 anomaly 1
+#if !defined(USE_WORKAROUND_FOR_I2S_STOP_ANOMALY) && \
+    (defined(NRF52_SERIES) || defined(NRF9160_XXAA))
+// Enable workaround for nRF52 Series anomaly 194 / nRF9160 anomaly 1
 // (STOP task does not switch off all resources).
 #define USE_WORKAROUND_FOR_I2S_STOP_ANOMALY 1
 #endif
 
 #if !defined(USE_WORKAROUND_FOR_ANOMALY_170) && defined(NRF52_SERIES)
-// Enable workaround for nRF52832, nRF52833 and nRF52840 anomaly 170
+// Enable workaround for nRF52 Series anomaly 170
 // (when reading the value of PSEL registers, the CONNECT field might not
 //  return the same value that has been written to it).
 #define USE_WORKAROUND_FOR_ANOMALY_170 1
 #endif
 
 #if !defined(USE_WORKAROUND_FOR_ANOMALY_196) && defined(NRF52_SERIES)
-// Enable workaround for nRF52832, nRF52833 and nRF52840 anomaly 196
+// Enable workaround for nRF52 Series anomaly 196
 // (PSEL acquires GPIO regardless of ENABLE).
 #define USE_WORKAROUND_FOR_ANOMALY_196 1
 #endif
