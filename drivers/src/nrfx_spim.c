@@ -206,6 +206,18 @@ static void anomaly_198_disable(void)
 }
 #endif // NRFX_CHECK(NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED)
 
+static void spim_abort(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
+{
+    nrf_spim_task_trigger(p_spim, NRF_SPIM_TASK_STOP);
+    bool stopped;
+    NRFX_WAIT_FOR(nrf_spim_event_check(p_spim, NRF_SPIM_EVENT_STOPPED), 100, 1, stopped);
+    if (!stopped)
+    {
+        NRFX_LOG_ERROR("Failed to stop instance with base address: %p.", (void *)p_instance->p_reg);
+    }
+    p_cb->transfer_in_progress = false;
+}
+
 nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
@@ -399,10 +411,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
         if (p_cb->transfer_in_progress)
         {
             // Ensure that SPI is not performing any transfer.
-            nrf_spim_task_trigger(p_spim, NRF_SPIM_TASK_STOP);
-            while (!nrf_spim_event_check(p_spim, NRF_SPIM_EVENT_STOPPED))
-            {}
-            p_cb->transfer_in_progress = false;
+            spim_abort(p_spim, p_cb);
         }
     }
 
@@ -670,10 +679,7 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance)
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    nrf_spim_task_trigger(p_instance->p_reg, NRF_SPIM_TASK_STOP);
-    while (!nrf_spim_event_check(p_instance->p_reg, NRF_SPIM_EVENT_STOPPED))
-    {}
-    p_cb->transfer_in_progress = false;
+    spim_abort(p_instance->p_reg, p_cb);
 }
 
 uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance)
