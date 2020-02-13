@@ -269,18 +269,24 @@ void nrfx_clock_stop(nrf_clock_domain_t domain)
             NRFX_ASSERT(0);
             return;
     }
+
+    bool stopped;
     if (domain == NRF_CLOCK_DOMAIN_HFCLK)
     {
         nrf_clock_hfclk_t clk_src = NRF_CLOCK_HFCLK_HIGH_ACCURACY;
-        while (nrfx_clock_is_running(domain, &clk_src) &&
-               (clk_src == NRF_CLOCK_HFCLK_HIGH_ACCURACY))
-        {}
+        NRFX_WAIT_FOR((!nrfx_clock_is_running(domain, &clk_src) ||
+                       (clk_src != NRF_CLOCK_HFCLK_HIGH_ACCURACY)), 10000, 1, stopped);
     }
     else
     {
-        while (nrfx_clock_is_running(domain, NULL))
-        {}
+        NRFX_WAIT_FOR(!nrfx_clock_is_running(domain, NULL), 10000, 1, stopped);
     }
+
+    if (!stopped)
+    {
+        NRFX_LOG_ERROR("Failed to stop clock domain: %d.", domain);
+    }
+
 #if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_201)
     if (domain == NRF_CLOCK_DOMAIN_HFCLK)
     {
