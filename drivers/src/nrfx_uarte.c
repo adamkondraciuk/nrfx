@@ -67,6 +67,7 @@ typedef struct
     size_t                     rx_buffer_length;
     size_t                     rx_secondary_buffer_length;
     nrfx_drv_state_t           state;
+    bool                       rx_aborted;
 } uarte_control_block_t;
 static uarte_control_block_t m_cb[NRFX_UARTE_ENABLED_COUNT];
 
@@ -484,6 +485,7 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
     }
     else
     {
+        p_cb->rx_aborted = false;
         nrf_uarte_int_enable(p_instance->p_reg, NRF_UARTE_INT_ERROR_MASK |
                                                 NRF_UARTE_INT_ENDRX_MASK);
     }
@@ -553,6 +555,7 @@ void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance)
     {
         nrf_uarte_shorts_disable(p_instance->p_reg, NRF_UARTE_SHORT_ENDRX_STARTRX);
     }
+    p_cb->rx_aborted = true;
     nrf_uarte_task_trigger(p_instance->p_reg, NRF_UARTE_TASK_STOPRX);
     NRFX_LOG_INFO("RX transaction aborted.");
 }
@@ -580,11 +583,11 @@ static void uarte_irq_handler(NRF_UARTE_Type *        p_uarte,
     else if (nrf_uarte_event_check(p_uarte, NRF_UARTE_EVENT_ENDRX))
     {
         nrf_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_ENDRX);
-        size_t amount = nrf_uarte_rx_amount_get(p_uarte);
-        // If the transfer was stopped before completion, amount of transfered bytes
-        // will not be equal to the buffer length. Interrupted transfer is ignored.
-        if (amount == p_cb->rx_buffer_length)
+
+        // Aborted transfers are handled in RXTO event processing.
+        if (!p_cb->rx_aborted)
         {
+            size_t amount = p_cb->rx_buffer_length;
             if (p_cb->rx_secondary_buffer_length != 0)
             {
                 uint8_t * p_data = p_cb->p_rx_buffer;
