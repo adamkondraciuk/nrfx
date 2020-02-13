@@ -86,7 +86,7 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
         nrf_qdec_ledpre_set(NRF_QDEC, p_config->ledpre);
         nrf_qdec_ledpol_set(NRF_QDEC, p_config->ledpol);
     }
-    nrf_qdec_pio_assign(NRF_QDEC, p_config->psela, p_config->pselb, p_config->pselled);
+    nrf_qdec_pins_set(NRF_QDEC, p_config->psela, p_config->pselb, p_config->pselled);
     nrf_qdec_shorts_enable(NRF_QDEC, NRF_QDEC_SHORT_REPORTRDY_READCLRACC_MASK);
 
     if (p_config->dbfen)
