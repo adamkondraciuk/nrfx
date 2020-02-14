@@ -313,20 +313,20 @@ NRF_STATIC_INLINE void nrf_pdm_psel_connect(NRF_PDM_Type * p_reg,
                                             uint32_t       psel_din);
 
 /**
- * @brief Function for getting the CLK pin number.
+ * @brief Function for getting the CLK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return CLK pin number;
+ * @return CLK pin selection;
  */
 NRF_STATIC_INLINE uint32_t nrf_pdm_clk_pin_get(NRF_PDM_Type const * p_reg);
 
 /**
- * @brief Function for getting the DIN pin number.
+ * @brief Function for getting the DIN pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return DIN pin number;
+ * @return DIN pin selection;
  */
 NRF_STATIC_INLINE uint32_t nrf_pdm_din_pin_get(NRF_PDM_Type const * p_reg);
 

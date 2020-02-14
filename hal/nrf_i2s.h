@@ -331,47 +331,47 @@ NRF_STATIC_INLINE void nrf_i2s_pins_set(NRF_I2S_Type * p_reg,
                                         uint32_t       sdin_pin);
 
 /**
- * @brief Function for getting the SCK pin number.
+ * @brief Function for getting the SCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SCK pin number.
+ * @return SCK pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_i2s_sck_pin_get(NRF_I2S_Type const * p_reg);
 
 /**
- * @brief Function for getting the LRCK pin number.
+ * @brief Function for getting the LRCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return LRCK pin number.
+ * @return LRCK pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_i2s_lrck_pin_get(NRF_I2S_Type const * p_reg);
 
 /**
- * @brief Function for getting the MCK pin number.
+ * @brief Function for getting the MCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return MCK pin number.
+ * @return MCK pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_i2s_mck_pin_get(NRF_I2S_Type const * p_reg);
 
 /**
- * @brief Function for getting the SDOUT pin number.
+ * @brief Function for getting the SDOUT pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SDOUT pin number.
+ * @return SDOUT pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_i2s_sdout_pin_get(NRF_I2S_Type const * p_reg);
 
 /**
- * @brief Function for getting the SDIN pin number.
+ * @brief Function for getting the SDIN pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SDIN pin number.
+ * @return SDIN pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_i2s_sdin_pin_get(NRF_I2S_Type const * p_reg);
 

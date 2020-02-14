@@ -331,29 +331,29 @@ NRF_STATIC_INLINE void nrf_spim_pins_set(NRF_SPIM_Type * p_reg,
                                          uint32_t        miso_pin);
 
 /**
- * @brief Function for getting the SCK pin number.
+ * @brief Function for getting the SCK pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SCK pin number.
+ * @return SCK pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_sck_pin_get(NRF_SPIM_Type const * p_reg);
 
 /**
- * @brief Function for getting the MOSI pin number.
+ * @brief Function for getting the MOSI pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return MOSI pin number.
+ * @return MOSI pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_mosi_pin_get(NRF_SPIM_Type const * p_reg);
 
 /**
- * @brief Function for getting the MISO pin number.
+ * @brief Function for getting the MISO pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return MISO pin number.
+ * @return MISO pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_miso_pin_get(NRF_SPIM_Type const * p_reg);
 
@@ -391,11 +391,11 @@ NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        dcx_pin);
 
 /**
- * @brief Function for getting the DCX pin number.
+ * @brief Function for getting the DCX pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return DCX pin number.
+ * @return DCX pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_dcx_pin_get(NRF_SPIM_Type const * p_reg);
 

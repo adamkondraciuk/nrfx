@@ -203,29 +203,29 @@ NRF_STATIC_INLINE void nrf_qdec_pio_assign(NRF_QDEC_Type * p_reg,
                                            uint32_t        pselled);
 
 /**
- * @brief Function for getting the Phase A pin number.
+ * @brief Function for getting the Phase A pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Phase A pin number.
+ * @return Phase A pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_qdec_phase_a_pin_get(NRF_QDEC_Type const * p_reg);
 
 /**
- * @brief Function for getting the Phase B pin number.
+ * @brief Function for getting the Phase B pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Phase B pin number.
+ * @return Phase B pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_qdec_phase_b_pin_get(NRF_QDEC_Type const * p_reg);
 
 /**
- * @brief Function for getting the LED pin number.
+ * @brief Function for getting the LED pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return LED pin number.
+ * @return LED pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_qdec_led_pin_get(NRF_QDEC_Type const * p_reg);
 

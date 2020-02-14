@@ -293,20 +293,20 @@ NRF_STATIC_INLINE void nrf_twis_disable(NRF_TWIS_Type * p_reg);
 NRF_STATIC_INLINE void nrf_twis_pins_set(NRF_TWIS_Type * p_reg, uint32_t scl, uint32_t sda);
 
 /**
- * @brief Function for retrieving the SCL pin number.
+ * @brief Function for retrieving the SCL pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SCL pin number.
+ * @return SCL pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_twis_scl_pin_get(NRF_TWIS_Type const * p_reg);
 
 /**
- * @brief Function for retrieving the SDA pin number.
+ * @brief Function for retrieving the SDA pin selection.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return SDA pin number.
+ * @return SDA pin selection.
  */
 NRF_STATIC_INLINE uint32_t nrf_twis_sda_pin_get(NRF_TWIS_Type const * p_reg);
 
