@@ -528,19 +528,10 @@ void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    TWIS_PSEL_Type psel = p_reg->PSEL;
-
     nrfx_twis_swreset(p_reg);
 
-    /* Clear pins state if */
-    if (!(TWIS_PSEL_SCL_CONNECT_Msk & psel.SCL))
-    {
-        nrf_gpio_cfg_default(psel.SCL);
-    }
-    if (!(TWIS_PSEL_SDA_CONNECT_Msk & psel.SDA))
-    {
-        nrf_gpio_cfg_default(psel.SDA);
-    }
+    nrf_gpio_cfg_default(nrf_twis_scl_pin_get(p_reg));
+    nrf_gpio_cfg_default(nrf_twis_sda_pin_get(p_reg));
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_reg);
