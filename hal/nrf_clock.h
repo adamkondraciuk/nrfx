@@ -345,18 +345,19 @@ NRF_STATIC_INLINE bool nrf_clock_start_task_check(NRF_CLOCK_Type const * p_reg,
 /**
  * @brief Function for retrieving the state of the clock.
  *
- * @param[in]  p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in]  domain  Clock domain.
- * @param[out] clk_src Clock source that is running. Set to NULL if not needed.
- *                     Ignored for HFCLKAUDIO domain. Typecast it to @ref nrf_clock_lfclk_t for
- *                     LFCLK and @ref nrf_clock_hfclk_t for HFCLK and HFCLK192M.
+ * @param[in]  p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in]  domain    Clock domain.
+ * @param[out] p_clk_src Pointer to clock source that is running. Set to NULL if not needed.
+ *                       Ignored for HFCLKAUDIO domain. Variable pointed by @p p_clk_src
+ *                       must be of either @ref nrf_clock_lfclk_t type for LFCLK
+ *                       or @ref nrf_clock_hfclk_t type for HFCLK and HFCLK192M.
  *
  * @retval false The clock is not running.
  * @retval true  The clock is running.
  */
 NRF_STATIC_INLINE bool nrf_clock_is_running(NRF_CLOCK_Type const * p_reg,
                                             nrf_clock_domain_t     domain,
-                                            void *                 clk_src);
+                                            void *                 p_clk_src);
 
 /**
  * @brief Function for changing the low-frequency clock source.
@@ -749,15 +750,16 @@ NRF_STATIC_INLINE bool nrf_clock_start_task_check(NRF_CLOCK_Type const * p_reg,
 
 NRF_STATIC_INLINE bool nrf_clock_is_running(NRF_CLOCK_Type const * p_reg,
                                             nrf_clock_domain_t     domain,
-                                            void *                 clk_src)
+                                            void *                 p_clk_src)
 {
     switch (domain)
     {
         case NRF_CLOCK_DOMAIN_LFCLK:
-            if (clk_src != NULL)
+            if (p_clk_src != NULL)
             {
-                (*(uint32_t *)clk_src) = ((p_reg->LFCLKSTAT & CLOCK_LFCLKSTAT_SRC_Msk)
-                                          >> CLOCK_LFCLKSTAT_SRC_Pos);
+                (*(nrf_clock_lfclk_t *)p_clk_src) =
+                    (nrf_clock_lfclk_t)((p_reg->LFCLKSTAT & CLOCK_LFCLKSTAT_SRC_Msk)
+                                        >> CLOCK_LFCLKSTAT_SRC_Pos);
             }
             if ((p_reg->LFCLKSTAT & CLOCK_LFCLKSTAT_STATE_Msk)
                 >> CLOCK_LFCLKSTAT_STATE_Pos)
@@ -766,10 +768,11 @@ NRF_STATIC_INLINE bool nrf_clock_is_running(NRF_CLOCK_Type const * p_reg,
             }
             break;
         case NRF_CLOCK_DOMAIN_HFCLK:
-            if (clk_src != NULL)
+            if (p_clk_src != NULL)
             {
-                (*(uint32_t *)clk_src) = ((p_reg->HFCLKSTAT & CLOCK_HFCLKSTAT_SRC_Msk)
-                                          >> CLOCK_HFCLKSTAT_SRC_Pos);
+                (*(nrf_clock_hfclk_t *)p_clk_src) =
+                    (nrf_clock_hfclk_t)((p_reg->HFCLKSTAT & CLOCK_HFCLKSTAT_SRC_Msk)
+                                        >> CLOCK_HFCLKSTAT_SRC_Pos);
             }
             if ((p_reg->HFCLKSTAT & CLOCK_HFCLKSTAT_STATE_Msk)
                 >> CLOCK_HFCLKSTAT_STATE_Pos)
@@ -779,10 +782,11 @@ NRF_STATIC_INLINE bool nrf_clock_is_running(NRF_CLOCK_Type const * p_reg,
             break;
 #if NRF_CLOCK_HAS_HFCLK192M
         case NRF_CLOCK_DOMAIN_HFCLK192M:
-            if (clk_src != NULL)
+            if (p_clk_src != NULL)
             {
-                (*(uint32_t *)clk_src) = ((p_reg->HFCLK192MSTAT & CLOCK_HFCLK192MSTAT_SRC_Msk)
-                                          >> CLOCK_HFCLK192MSTAT_SRC_Pos);
+                (*(nrf_clock_hfclk_t *)p_clk_src) =
+                    (nrf_clock_hfclk_t)((p_reg->HFCLK192MSTAT & CLOCK_HFCLK192MSTAT_SRC_Msk)
+                                        >> CLOCK_HFCLK192MSTAT_SRC_Pos);
             }
             if ((p_reg->HFCLK192MSTAT & CLOCK_HFCLK192MSTAT_STATE_Msk)
                 >> CLOCK_HFCLK192MSTAT_STATE_Pos)
