@@ -272,7 +272,8 @@ void nrfx_clock_stop(nrf_clock_domain_t domain)
     if (domain == NRF_CLOCK_DOMAIN_HFCLK)
     {
         nrf_clock_hfclk_t clk_src = NRF_CLOCK_HFCLK_HIGH_ACCURACY;
-        while (nrfx_clock_is_running(domain, &clk_src) && (clk_src == NRF_CLOCK_HFCLK_HIGH_ACCURACY))
+        while (nrfx_clock_is_running(domain, &clk_src) &&
+               (clk_src == NRF_CLOCK_HFCLK_HIGH_ACCURACY))
         {}
     }
     else
