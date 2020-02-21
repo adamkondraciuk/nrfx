@@ -528,10 +528,13 @@ void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
+    uint32_t scl_pin = nrf_twis_scl_pin_get(p_reg);
+    uint32_t sda_pin = nrf_twis_sda_pin_get(p_reg);
+
     nrfx_twis_swreset(p_reg);
 
-    nrf_gpio_cfg_default(nrf_twis_scl_pin_get(p_reg));
-    nrf_gpio_cfg_default(nrf_twis_sda_pin_get(p_reg));
+    nrf_gpio_cfg_default(scl_pin);
+    nrf_gpio_cfg_default(sda_pin);
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_reg);
