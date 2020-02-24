@@ -403,18 +403,6 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
     err_code = nrfx_nfct_field_timer_config();
 #endif // NFCT_WORKAROUND_USES_TIMER
 
-    if (err_code == NRFX_SUCCESS)
-    {
-        uint8_t default_nfcid1[NRFX_NFCT_NFCID1_DEFAULT_LEN];
-        err_code = nrfx_nfct_nfcid1_default_bytes_get(default_nfcid1, sizeof(default_nfcid1));
-        NRFX_ASSERT(err_code == NRFX_SUCCESS);
-        nrf_nfct_nfcid1_set(NRF_NFCT, default_nfcid1, NRF_NFCT_SENSRES_NFCID1_SIZE_DEFAULT);
-    }
-    else
-    {
-        return err_code;
-    }
-
     m_nfct_cb.state           = NRFX_DRV_STATE_INITIALIZED;
     m_nfct_cb.frame_delay_max = NFCT_FRAMEDELAYMAX_DEFAULT;
 

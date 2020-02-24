@@ -236,6 +236,9 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param);
 /**
  * @brief Function for getting default bytes for NFCID1.
  *
+ * @note This function cannot be used from the non-secure code because it requires access
+ *       to FICR registers.
+ *
  * @param[in,out] p_nfcid1_buff    In:  empty buffer for data;
  *                                 Out: buffer with the NFCID1 default data. These values
  *                                      can be used to fill the Type 2 Tag Internal Bytes.
