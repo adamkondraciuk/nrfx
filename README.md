@@ -27,7 +27,7 @@ SoCs, as well as startup and initialization files for them.
  .
  ├── doc             # Project documentation files
  ├── drivers         # nrfx driver files
- │   └── include     # nrfx driver headers
+ │   ├── include     # nrfx driver headers
  │   └── src         # nrfx driver sources
  ├── hal             # Hardware Access Layer files
  ├── helpers         # nrfx driver helper files
