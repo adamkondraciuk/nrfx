@@ -3,7 +3,6 @@
 #ifndef NRFX_USBD_ERRATA_H__
 #define NRFX_USBD_ERRATA_H__
 
-#include <stdbool.h>
 #include <nrfx.h>
 #include <nrf_erratas.h>
 
