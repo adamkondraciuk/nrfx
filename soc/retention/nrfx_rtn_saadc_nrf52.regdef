@@ -1,0 +1,6 @@
+NRF_RTN_REG_ITEM(0x510, 32) // Channels configuration
+NRF_RTN_REG_ITEM(0x5F0, 1)  // Resolution configuration
+NRF_RTN_REG_ITEM(0x640, 1)  // Internal register that needs to be preserved
+NRF_RTN_REG_ITEM(0x644, 1)  // Internal register that needs to be preserved
+NRF_RTN_REG_ITEM(0x648, 1)  // Internal register that needs to be preserved
+NRF_RTN_REG_FINISH
