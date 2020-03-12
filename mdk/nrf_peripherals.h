@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2018, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -61,6 +61,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52810_peripherals.h"
     #elif defined(NRF52811_XXAA)
         #include "nrf52811_peripherals.h"        
+    #elif defined(NRF52820_XXAA)
+        #include "nrf52820_peripherals.h"        
     #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
         #include "nrf52832_peripherals.h"
     #elif defined (NRF52833_XXAA)

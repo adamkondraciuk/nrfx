@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2018, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -93,17 +93,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #define IPC_CH_NUM 16
 #define IPC_CONF_NUM 16
-#define IPC_GPMEM_NUM 4
+#define IPC_GPMEM_NUM 2
 
 /* GPIO */
 #define GPIO_PRESENT
 #define GPIO_COUNT 2
 
 #define P0_PIN_NUM 32
-#define P1_PIN_NUM 12
+#define P1_PIN_NUM 16
 
 #define P0_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P1_FEATURE_PINS_PRESENT 0x00000FFFUL
+#define P1_FEATURE_PINS_PRESENT 0x0000FFFFUL
 
 /* NFC Tag */
 #define NFCT_PRESENT

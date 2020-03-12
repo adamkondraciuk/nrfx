@@ -3,7 +3,7 @@
 
 /*
 
-Copyright (c) 2010 - 2018, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -69,6 +69,8 @@ static bool nrf91_errata_28(void) __UNUSED;
 static bool nrf91_errata_29(void) __UNUSED;
 static bool nrf91_errata_30(void) __UNUSED;
 static bool nrf91_errata_31(void) __UNUSED;
+static bool nrf91_errata_32(void) __UNUSED;
+static bool nrf91_errata_33(void) __UNUSED;
 
 static bool nrf91_errata_1(void)
 {
@@ -621,6 +623,56 @@ static bool nrf91_errata_30(void)
 }
 
 static bool nrf91_errata_31(void)
+{
+    #ifndef NRF91_SERIES
+        return false;
+    #else
+        #if defined (NRF9160_XXAA) || defined (DEVELOP_IN_NRF9160)
+            uint32_t var1 = *(uint32_t *)0x00FF0130ul;
+            uint32_t var2 = *(uint32_t *)0x00FF0134ul;
+        #endif
+        #if defined (NRF9160_XXAA) || defined (DEVELOP_IN_NRF9160)
+            if (var1 == 0x09)
+            {
+                switch(var2)
+                {
+                    case 0x01ul:
+                        return true;
+                    case 0x02ul:
+                        return true;
+                }
+            }
+        #endif
+        return false;
+    #endif
+}
+
+static bool nrf91_errata_32(void)
+{
+    #ifndef NRF91_SERIES
+        return false;
+    #else
+        #if defined (NRF9160_XXAA) || defined (DEVELOP_IN_NRF9160)
+            uint32_t var1 = *(uint32_t *)0x00FF0130ul;
+            uint32_t var2 = *(uint32_t *)0x00FF0134ul;
+        #endif
+        #if defined (NRF9160_XXAA) || defined (DEVELOP_IN_NRF9160)
+            if (var1 == 0x09)
+            {
+                switch(var2)
+                {
+                    case 0x01ul:
+                        return true;
+                    case 0x02ul:
+                        return true;
+                }
+            }
+        #endif
+        return false;
+    #endif
+}
+
+static bool nrf91_errata_33(void)
 {
     #ifndef NRF91_SERIES
         return false;
