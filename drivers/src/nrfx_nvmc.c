@@ -189,7 +189,8 @@ static void nvmc_words_write(uint32_t addr, void const * src, uint32_t num_words
 
 nrfx_err_t nrfx_nvmc_page_erase(uint32_t addr)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
 
     if (!is_page_aligned_check(addr))
     {
@@ -231,7 +232,8 @@ void nrfx_nvmc_all_erase(void)
 #if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
 nrfx_err_t nrfx_nvmc_page_partial_erase_init(uint32_t addr, uint32_t duration_ms)
 {
-    NRFX_ASSERT((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get());
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
 
     if (!is_page_aligned_check(addr))
     {
@@ -296,6 +298,9 @@ bool nrfx_nvmc_word_writable_check(uint32_t addr, uint32_t val_to_check)
 
 void nrfx_nvmc_byte_write(uint32_t addr, uint8_t value)
 {
+    NRFX_ASSERT(((addr - NVMC_FLASH_BASE_ADDRESS) < flash_total_size_get()) ||
+                ((addr - (uint32_t)NRF_UICR) < sizeof(NRF_UICR_Type)));
+
     uint32_t aligned_addr = addr & ~(0x03UL);
 
     nrfx_nvmc_word_write(aligned_addr, partial_word_create(addr, &value, 1));
