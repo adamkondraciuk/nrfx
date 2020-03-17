@@ -53,6 +53,8 @@
 
 @defgroup nrf_mutex MUTEX
 
+@defgroup nrf_mvdma MVDMA
+
 @defgroup nrf_mwu MWU
 
 @defgroup nrf_nfct NFCT
