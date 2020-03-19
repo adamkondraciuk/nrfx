@@ -43,6 +43,8 @@
 
 @defgroup nrf_ipcmap IPCMAP
 
+@defgroup nrf_ipct IPCT
+
 @defgroup nrf_kmu KMU
 
 @defgroup nrf_lpcomp LPCOMP
