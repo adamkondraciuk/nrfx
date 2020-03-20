@@ -41,6 +41,8 @@
 
 @defgroup nrf_ipc IPC
 
+@defgroup nrf_ipcmap IPCMAP
+
 @defgroup nrf_kmu KMU
 
 @defgroup nrf_lpcomp LPCOMP
