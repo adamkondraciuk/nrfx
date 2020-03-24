@@ -587,7 +587,11 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
 
     if (!p_cb->handler)
     {
-        while (!nrf_spim_event_check(p_spim, NRF_SPIM_EVENT_END)){}
+        if (!(flags & NRFX_SPIM_FLAG_HOLD_XFER))
+        {
+            while (!nrf_spim_event_check(p_spim, NRF_SPIM_EVENT_END))
+            {}
+        }
 
 #if NRFX_CHECK(NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED)
         if (p_spim == NRF_SPIM3)
@@ -632,6 +636,8 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const *           p_instance,
     NRFX_ASSERT(SPIM_LENGTH_VALIDATE(p_instance->drv_inst_idx,
                                      p_xfer_desc->rx_length,
                                      p_xfer_desc->tx_length));
+    NRFX_ASSERT(!(flags & NRFX_SPIM_FLAG_HOLD_XFER) ||
+                (p_cb->ss_pin == NRFX_SPIM_PIN_NOT_USED));
 
     nrfx_err_t err_code = NRFX_SUCCESS;
 
