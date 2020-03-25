@@ -164,7 +164,9 @@ static void nrfx_nfct_field_event_handler(volatile nrfx_nfct_field_state_t field
                                                   NRFX_NFC_FIELD_STATE_OFF;
     }
 
-    /* Field event service */
+    /* Field event service. Only take action on field transition -
+     * based on the value of m_nfct_cb.field_on
+     */
     switch (field_state)
     {
         case NRFX_NFC_FIELD_STATE_ON:
@@ -192,16 +194,19 @@ static void nrfx_nfct_field_event_handler(volatile nrfx_nfct_field_state_t field
             break;
 
         case NRFX_NFC_FIELD_STATE_OFF:
-            nrfx_nfct_state_force(NRFX_NFCT_STATE_SENSING);
-            nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
-            m_nfct_cb.field_on = false;
-            nfct_evt.evt_id    = NRFX_NFCT_EVT_FIELD_LOST;
+            if (m_nfct_cb.field_on)
+            {
+                nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_SENSE);
+                nrf_nfct_int_disable(NRF_NFCT, NRFX_NFCT_RX_INT_MASK | NRFX_NFCT_TX_INT_MASK);
+                m_nfct_cb.field_on = false;
+                nfct_evt.evt_id    = NRFX_NFCT_EVT_FIELD_LOST;
 
-            /* Begin: Workaround for anomaly 218 */
-            nrfx_nfct_frame_delay_max_set(true);
-            /* End: Workaround for anomaly 218 */
+                /* Begin: Workaround for anomaly 218 */
+                nrfx_nfct_frame_delay_max_set(true);
+                /* End: Workaround for anomaly 218 */
 
-            NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
+                NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
+            }
             break;
 
         default:
@@ -500,7 +505,9 @@ void nrfx_nfct_state_force(nrfx_nfct_state_t state)
     if (state == NRFX_NFCT_STATE_ACTIVATED)
     {
         m_timer_workaround.is_hfclk_on = true;
+        /* NFCT will be activated based on additional conditions */
         nrfx_nfct_activate_check();
+        return;
     }
 #endif // NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_190)
     nrf_nfct_task_trigger(NRF_NFCT, (nrf_nfct_task_t) state);
