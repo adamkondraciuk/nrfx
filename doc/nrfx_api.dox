@@ -19,6 +19,8 @@
 
 @defgroup nrf_comp COMP
 
+@defgroup nrf_cpuconf CPUCONF
+
 @defgroup nrf_systick Cortex-M Systick
 
 @defgroup nrf_dcnf DCNF
