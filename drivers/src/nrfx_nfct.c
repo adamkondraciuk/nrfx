@@ -485,6 +485,7 @@ nrfx_err_t nrfx_nfct_tx(nrfx_nfct_data_desc_t const * p_tx_data,
     nrf_nfct_rxtx_buffer_set(NRF_NFCT, (uint8_t *) p_tx_data->p_data, p_tx_data->data_size);
     nrf_nfct_tx_bits_set(NRF_NFCT, NRFX_NFCT_BYTES_TO_BITS(p_tx_data->data_size));
     nrf_nfct_frame_delay_mode_set(NRF_NFCT, (nrf_nfct_frame_delay_mode_t) delay_mode);
+    nrfx_nfct_frame_delay_max_set(false);
 
     nrfx_nfct_rxtx_int_enable(NRFX_NFCT_TX_INT_MASK);
     nrf_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_STARTTX);
