@@ -54,7 +54,6 @@ static nrfx_nfct_timer_workaround_t m_timer_workaround =
 };
 #endif // NRFX_CHECK(NFCT_WORKAROUND_USES_TIMER)
 
-#define NRFX_NFCT_FWT_MAX_DIFF         1u             /**< The maximal difference between the requested FWT and HW-limited FWT settings.*/
 #define NFCT_FRAMEDELAYMAX_DEFAULT     (0x00001000UL) /**< Default value of the FRAMEDELAYMAX. */
 
 /* Mask of all possible interrupts that are relevant for data reception. */
@@ -547,14 +546,7 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
             uint32_t delay     = p_param->data.fdt;
             uint32_t delay_thr = NFCT_FRAMEDELAYMAX_FRAMEDELAYMAX_Msk;
 
-            // Delay validation.
-            if (delay > (delay_thr + NRFX_NFCT_FWT_MAX_DIFF))
-            {
-                return NRFX_ERROR_INVALID_PARAM;
-            }
-
-            delay = (delay > delay_thr) ? delay_thr : delay;
-            m_nfct_cb.frame_delay_max = delay;
+            m_nfct_cb.frame_delay_max = (delay > delay_thr) ? delay_thr : delay;
             break;
         }
 
