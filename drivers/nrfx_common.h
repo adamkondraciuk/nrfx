@@ -231,7 +231,7 @@ do {                                                         \
  *
  * @return ID number associated with the specified peripheral.
  */
-#define NRFX_PERIPHERAL_ID_GET(base_addr)  (uint8_t)((uint32_t)(base_addr) >> 12)
+#define NRFX_PERIPHERAL_ID_GET(base_addr)  (uint16_t)(((uint32_t)(base_addr) >> 12) & 0x000001FF)
 
 /**
  * @brief Macro for getting the interrupt number assigned to a specific
