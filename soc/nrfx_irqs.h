@@ -25,6 +25,8 @@
     #include <soc/nrfx_irqs_nrf5340_network.h>
 #elif defined(NRF91_SERIES)
     #include <soc/nrfx_irqs_nrf91.h>
+#elif defined(HALTIUM_XXAA)
+    #include <soc/nrfx_irqs_haltium.h>
 #else
     #error "Unknown device."
 #endif
