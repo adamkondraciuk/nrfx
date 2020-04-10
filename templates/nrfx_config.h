@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
 
 #ifndef NRFX_CONFIG_H__
 #define NRFX_CONFIG_H__
@@ -26,8 +26,16 @@
     #include <nrfx_config_nrf5340_network.h>
 #elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
     #include <nrfx_config_nrf91.h>
+#elif defined(HALTIUM_XXAA_APPLICATION)
+    #include <nrfx_config_haltium_application.h>
+#elif defined(HALTIUM_XXAA_NETWORK)
+    #include <nrfx_config_haltium_network.h>
 #else
     #error "Unknown device."
+#endif
+
+#if defined(HALTIUM_XXAA)
+    #include <nrfx_config_haltium_global.h>
 #endif
 
 #endif // NRFX_CONFIG_H__
