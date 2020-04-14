@@ -26,9 +26,9 @@
     #include <nrfx_config_nrf5340_network.h>
 #elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
     #include <nrfx_config_nrf91.h>
-#elif defined(HALTIUM_XXAA_APPLICATION)
+#elif defined(HALTIUM_XXAA) && defined(NRF_APPLICATION)
     #include <nrfx_config_haltium_application.h>
-#elif defined(HALTIUM_XXAA_NETWORK)
+#elif defined(HALTIUM_XXAA) && defined(NRF_NETWORK)
     #include <nrfx_config_haltium_network.h>
 #else
     #error "Unknown device."
