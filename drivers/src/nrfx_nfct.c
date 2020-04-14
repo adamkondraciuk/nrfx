@@ -710,9 +710,6 @@ void nrfx_nfct_irq_handler(void)
 
         NRFX_NFCT_CB_HANDLE(m_nfct_cb.config.cb, nfct_evt);
 
-        /* Clear TXFRAMESTART EVENT so it can be checked in hal_nfc_send */
-        nrf_nfct_event_clear(NRF_NFCT, NRF_NFCT_EVENT_TXFRAMESTART);
-
         NRFX_LOG_DEBUG("Rx fend");
     }
 
