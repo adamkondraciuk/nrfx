@@ -15,8 +15,8 @@
  * The following section provides configuration for the name translation.
  * It must be modified to reflect the actual configuration set in NRF_SPU.
  */
-#define NRF_COMP         NRF_COMP_S
 #define NRF_CLOCK        NRF_CLOCK_S
+#define NRF_COMP         NRF_COMP_S
 #define NRF_DCNF         NRF_DCNF_S
 #define NRF_DPPIC        NRF_DPPIC_S
 #define NRF_EGU0         NRF_EGU0_S
