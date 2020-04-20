@@ -44,8 +44,14 @@ typedef enum
     NRF_RESET_RESETREAS_DIF_MASK       = RESET_RESETREAS_DIF_Msk,       ///< Bit mask of DIF field.
 #if NRF_RESET_HAS_NETWORK
     NRF_RESET_RESETREAS_LSREQ_MASK     = RESET_RESETREAS_LSREQ_Msk,     ///< Bit mask of LSREQ field.
+#endif
+#if defined(RESET_RESETREAS_LLOCKUP_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_RESET_RESETREAS_LLOCKUP_MASK   = RESET_RESETREAS_LLOCKUP_Msk,   ///< Bit mask of LLOCKUP field.
+#endif
+#if defined(RESET_RESETREAS_LDOG_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_RESET_RESETREAS_LDOG_MASK      = RESET_RESETREAS_LDOG_Msk,      ///< Bit mask of LDOG field.
+#endif
+#if defined(RESET_RESETREAS_MFORCEOFF_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_RESET_RESETREAS_MFORCEOFF_MASK = RESET_RESETREAS_MFORCEOFF_Msk, ///< Bit mask of MFORCEOFF field.
 #endif
     NRF_RESET_RESETREAS_NFC_MASK       = RESET_RESETREAS_NFC_Msk,       ///< Bit mask of NFC field.
