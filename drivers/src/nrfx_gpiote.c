@@ -4,7 +4,7 @@
 #if NRFX_CHECK(NRFX_GPIOTE_ENABLED)
 
 #include <nrfx_gpiote.h>
-#include <helpers/nrfx_flag32_allocator.h>
+#include <helpers/include/nrfx_flag32_allocator.h>
 #include "nrf_bitmask.h"
 #include <string.h>
 

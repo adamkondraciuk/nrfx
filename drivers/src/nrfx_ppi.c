@@ -5,7 +5,7 @@
 #if NRFX_CHECK(NRFX_PPI_ENABLED)
 
 #include <nrfx_ppi.h>
-#include <helpers/nrfx_flag32_allocator.h>
+#include <helpers/include/nrfx_flag32_allocator.h>
 
 #define NRFX_LOG_MODULE PPI
 #include <nrfx_log.h>

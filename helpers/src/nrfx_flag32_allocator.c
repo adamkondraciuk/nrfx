@@ -1,5 +1,5 @@
 /*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
-#include <helpers/nrfx_flag32_allocator.h>
+#include <helpers/include/nrfx_flag32_allocator.h>
 
 #if !defined(NRFX_ATOMIC_CAS)
 static bool nrfx_flag32_atomic_cas(nrfx_atomic_t * p_data, uint32_t old_value, uint32_t new_value)
