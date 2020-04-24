@@ -337,8 +337,7 @@ void nrfx_nvmc_halfword_write(uint32_t addr, uint16_t value)
 
     uint32_t aligned_addr = addr & ~(0x03UL);
 
-    nrfx_nvmc_word_write(aligned_addr,
-                    partial_word_create(addr, (const uint8_t *)&value, 2));
+    nrfx_nvmc_word_write(aligned_addr, partial_word_create(addr, (const uint8_t *)&value, 2));
 }
 
 void nrfx_nvmc_word_write(uint32_t addr, uint32_t value)

@@ -220,10 +220,11 @@ void nrfx_nvmc_words_write(uint32_t address, void const * src, uint32_t num_word
 /**
  * @brief Function for reading a 16-bit aligned halfword from the OTP (UICR)
  *
- * OTP is a region of UICR present in some chips. This must be used since
- * unaligned accesses are not supported on the OTP flash area.
+ * OTP is a region of the UICR present in some chips. This function must be used
+ * to read halfword data from this region since unaligned accesses are not
+ * available on the OTP flash area.
  *
- * @param address   Address to read from. Must be halfword-aligned.
+ * @param address Address to read from. Must be halfword-aligned.
  *
  * @retval The contents at @p address.
  */
