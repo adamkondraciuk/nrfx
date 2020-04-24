@@ -9,6 +9,7 @@ All notable changes to this project are documented in this file.
 - Implemented workarounds for nRF52 Series anomalies 170 and 196 in the I2S driver.
 - Added implicit casting of uint32_t to unsigned long in log messages, to prevent compiler warnings.
 - Added missing secure and non-secure peripheral symbol translations for nRF5340 and nRF9160.
+- Added functions in the NVMC driver for reading and writing halfword data from the OTP region of the UICR.
 
 ### Changed
 - Updated MDK to 8.32.1.
