@@ -136,8 +136,8 @@ void nrfx_nvmc_byte_write(uint32_t address, uint8_t value);
  * @param address Address to be checked. Must be halfword-aligned.
  * @param value   Value to be checked.
  *
- * @retval true  Word can be written at the specified address.
- * @retval false Word cannot be written at the specified address.
+ * @retval true  Halfword can be written at the specified address.
+ * @retval false Halfword cannot be written at the specified address.
  *               Erase page or change address.
  */
 bool nrfx_nvmc_halfword_writable_check(uint32_t address, uint16_t value);

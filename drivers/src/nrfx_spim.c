@@ -440,7 +440,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
     uint32_t dcx_pin = nrf_spim_dcx_pin_get(p_spim);
     if (dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
     {
-        nrf_gpio_cfg_default(mosi_pin);
+        nrf_gpio_cfg_default(dcx_pin);
     }
 #endif
 
