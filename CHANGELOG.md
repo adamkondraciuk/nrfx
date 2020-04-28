@@ -27,6 +27,7 @@ All notable changes to this project are documented in this file.
 - Fixed missing workaround for I2S STOP anomaly for nRF52833.
 - Fixed handling of NRFX_SPIM_FLAG_HOLD_XFER setting in the blocking mode of the SPIM driver.
 - Fixed void pointer cast in the CLOCK HAL, which could cause memory corruption with specific compiler settings.
+- Fixed definition of the NRF_CLOCK_LFCLK_Synth value, to make it available also in builds for nRF5340.
 
 ## [2.1.0] - 2020-01-24
 ### Added

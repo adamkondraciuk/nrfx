@@ -84,23 +84,27 @@ extern "C" {
 typedef enum
 {
 #if defined(CLOCK_LFCLKSRC_SRC_LFULP) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_LFULP = CLOCK_LFCLKSRC_SRC_LFULP, /**< Internal 32 kHz Ultra-low power oscillator. */
+    NRF_CLOCK_LFCLK_LFULP = CLOCK_LFCLKSRC_SRC_LFULP,  /**< Internal 32 kHz Ultra-low power oscillator. */
 #endif
+
 #if defined(CLOCK_LFCLKSRC_SRC_RC) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_RC    = CLOCK_LFCLKSRC_SRC_RC,    /**< Internal 32 kHz RC oscillator. */
+    NRF_CLOCK_LFCLK_RC    = CLOCK_LFCLKSRC_SRC_RC,     /**< Internal 32 kHz RC oscillator. */
 #else
-    NRF_CLOCK_LFCLK_RC    = CLOCK_LFCLKSRC_SRC_LFRC,  /**< Internal 32 kHz RC oscillator. */
+    NRF_CLOCK_LFCLK_RC    = CLOCK_LFCLKSRC_SRC_LFRC,   /**< Internal 32 kHz RC oscillator. */
 #endif
 
 #if defined(CLOCK_LFCLKSRC_SRC_Xtal) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_Xtal,  /**< External 32 kHz crystal. */
+    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_Xtal,   /**< External 32 kHz crystal. */
 #else
-    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_LFXO,  /**< External 32 kHz crystal. */
+    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_LFXO,   /**< External 32 kHz crystal. */
 #endif
 
 #if defined(CLOCK_LFCLKSRC_SRC_Synth) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_Synth = CLOCK_LFCLKSRC_SRC_Synth, /**< Internal 32 kHz synthesizer from HFCLK system clock. */
+    NRF_CLOCK_LFCLK_Synth = CLOCK_LFCLKSRC_SRC_Synth,  /**< Internal 32 kHz synthesized from HFCLK system clock. */
+#elif defined(CLOCK_LFCLKSRC_SRC_LFSYNT)
+    NRF_CLOCK_LFCLK_Synth = CLOCK_LFCLKSRC_SRC_LFSYNT, /**< Internal 32 kHz synthesized from HFCLK system clock. */
 #endif
+
 #if defined(NRF_CLOCK_USE_EXTERNAL_LFCLK_SOURCES) || defined(__NRFX_DOXYGEN__)
     /**
      * External 32 kHz low swing signal. Used only with the LFCLKSRC register.
@@ -378,7 +382,7 @@ NRF_STATIC_INLINE void nrf_clock_lf_src_set(NRF_CLOCK_Type * p_reg, nrf_clock_lf
  *                               is the selected source for the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Xtal  An external 32 kHz crystal oscillator
  *                               is the selected source for the low-frequency clock.
- * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesizer from
+ * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesized from
  *                               the HFCLK is the selected source for the low-frequency clock.
  */
 NRF_STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_src_get(NRF_CLOCK_Type const * p_reg);
@@ -394,7 +398,7 @@ NRF_STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_src_get(NRF_CLOCK_Type const * 
  *                               is the active source of the low-frequency clock.
  * @retval NRF_CLOCK_LFCLK_Xtal  An external 32 kHz crystal oscillator
  *                               is the active source of the low-frequency clock.
- * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesizer from
+ * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesized from
  *                               the HFCLK is the active source of the low-frequency clock.
  */
 NRF_STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_actv_src_get(NRF_CLOCK_Type const * p_reg);
@@ -409,7 +413,7 @@ NRF_STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_actv_src_get(NRF_CLOCK_Type con
  *                               is running and generating the LFCLK clock.
  * @retval NRF_CLOCK_LFCLK_Xtal  An external 32 kHz crystal oscillator
  *                               is running and generating the LFCLK clock.
- * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesizer from
+ * @retval NRF_CLOCK_LFCLK_Synth The internal 32 kHz synthesized from
  *                               the HFCLK is running and generating the LFCLK clock.
  */
 NRF_STATIC_INLINE nrf_clock_lfclk_t nrf_clock_lf_srccopy_get(NRF_CLOCK_Type const * p_reg);
