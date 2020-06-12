@@ -295,6 +295,15 @@ NRF_STATIC_INLINE void nrf_timer_shorts_disable(NRF_TIMER_Type * p_reg,
                                                 uint32_t         mask);
 
 /**
+ * @brief Function for setting the specified shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be set.
+ */
+NRF_STATIC_INLINE void nrf_timer_shorts_set(NRF_TIMER_Type * p_reg,
+                                            uint32_t         mask);
+
+/**
  * @brief Function for enabling the specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -562,6 +571,12 @@ NRF_STATIC_INLINE void nrf_timer_shorts_disable(NRF_TIMER_Type * p_reg,
                                                 uint32_t         mask)
 {
     p_reg->SHORTS &= ~(mask);
+}
+
+NRF_STATIC_INLINE void nrf_timer_shorts_set(NRF_TIMER_Type * p_reg,
+                                            uint32_t         mask)
+{
+    p_reg->SHORTS = mask;
 }
 
 NRF_STATIC_INLINE void nrf_timer_int_enable(NRF_TIMER_Type * p_reg,
