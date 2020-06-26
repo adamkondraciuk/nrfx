@@ -37,6 +37,13 @@ extern "C" {
 #define NRF_QSPI_HAS_DMA_ENC 0
 #endif
 
+#if defined(QSPI_IFCONFIG1_SPIMODE_MODE3) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether support for QSPI mode 1 is present. */
+#define NRF_QSPI_HAS_MODE_1 1
+#else
+#define NRF_QSPI_HAS_MODE_1 0
+#endif
+
 #if defined(NRF53_SERIES) || defined(__NRFX_DOXYGEN__)
 /** @brief Value representing QSPI base clock frequency. */
 #define NRF_QSPI_BASE_CLOCK_FREQ 96000000uL
@@ -148,7 +155,9 @@ typedef enum
 typedef enum
 {
     NRF_QSPI_MODE_0 = QSPI_IFCONFIG1_SPIMODE_MODE0, /**< Mode 0 (CPOL=0, CPHA=0). */
+#if NRF_QSPI_HAS_MODE_1
     NRF_QSPI_MODE_1 = QSPI_IFCONFIG1_SPIMODE_MODE3  /**< Mode 1 (CPOL=1, CPHA=1). */
+#endif
 } nrf_qspi_spi_mode_t;
 
 /** @brief Addressing configuration mode. */
