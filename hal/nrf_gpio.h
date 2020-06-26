@@ -482,31 +482,42 @@ NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin
  */
 NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number);
 
+/**
+ * @brief Function for extracting port number and the relative pin number
+ *        from the absolute pin number.
+ *
+ * @param[in,out] p_pin Pointer to the absolute pin number overriden by the pin number
+ *                      that is relative to the port.
+ *
+ * @return Port number.
+*/
+NRF_STATIC_INLINE uint32_t nrf_gpio_pin_port_number_extract(uint32_t * p_pin);
+
 #ifndef NRF_DECLARE_ONLY
 
 /**
  * @brief Function for extracting port and the relative pin number from the absolute pin number.
  *
- * @param[in,out] p_pin Pointer to the absolute pin number overriden by the pin number that is relative to the port.
+ * @param[in,out] p_pin Pointer to the absolute pin number overriden by the pin number
+ *                      that is relative to the port.
  *
  * @return Pointer to port register set.
  */
 NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 {
     NRFX_ASSERT(nrf_gpio_pin_present_check(*p_pin));
-#if (GPIO_COUNT == 1)
-    return NRF_P0;
-#else
-    if (*p_pin < P0_PIN_NUM)
+
+    switch (nrf_gpio_pin_port_number_extract(p_pin))
     {
-        return NRF_P0;
-    }
-    else
-    {
-        *p_pin = *p_pin & 0x1F;
-        return NRF_P1;
-    }
+        default:
+            NRFX_ASSERT(0);
+#if defined(P0_FEATURE_PINS_PRESENT)
+        case 0: return NRF_P0;
 #endif
+#if defined(P1_FEATURE_PINS_PRESENT)
+        case 1: return NRF_P1;
+#endif
+    }
 }
 
 
@@ -902,6 +913,14 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
     pin_number &= 0x1F;
 
     return (mask & (1UL << pin_number)) ? true : false;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_gpio_pin_port_number_extract(uint32_t * p_pin)
+{
+    uint32_t pin_number = *p_pin;
+    *p_pin = pin_number & 0x1F;
+
+    return pin_number >> 5;
 }
 
 #endif // NRF_DECLARE_ONLY
