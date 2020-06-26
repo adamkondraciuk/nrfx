@@ -149,8 +149,8 @@ NRF_STATIC_INLINE uint32_t nrf_ccm_event_address_get(NRF_CCM_Type const * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Shortcuts to be enabled.
  */
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_enable(NRF_CCM_Type * p_reg,
-                                                 uint32_t       mask);
+NRF_STATIC_INLINE void nrf_ccm_shorts_enable(NRF_CCM_Type * p_reg,
+                                             uint32_t       mask);
 
 /**
  * @brief Function for disabling the specified shortcuts.
@@ -158,8 +158,8 @@ NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_enable(NRF_CCM_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Shortcuts to be disabled.
  */
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_disable(NRF_CCM_Type * p_reg,
-                                                  uint32_t       mask);
+NRF_STATIC_INLINE void nrf_ccm_shorts_disable(NRF_CCM_Type * p_reg,
+                                              uint32_t       mask);
 
 /**
  * @brief Function for setting the specified shortcuts.
@@ -167,8 +167,8 @@ NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_disable(NRF_CCM_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Shortcuts to be set.
  */
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_set(NRF_CCM_Type * p_reg,
-                                              uint32_t       mask);
+NRF_STATIC_INLINE void nrf_ccm_shorts_set(NRF_CCM_Type * p_reg,
+                                          uint32_t       mask);
 
 /**
  * @brief Function for enabling specified interrupts.
@@ -365,20 +365,20 @@ NRF_STATIC_INLINE uint32_t nrf_ccm_event_address_get(NRF_CCM_Type const * p_reg,
 }
 
 
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_enable(NRF_CCM_Type * p_reg,
-                                                 uint32_t       mask)
+NRF_STATIC_INLINE void nrf_ccm_shorts_enable(NRF_CCM_Type * p_reg,
+                                             uint32_t       mask)
 {
     p_reg->SHORTS |= mask;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_disable(NRF_CCM_Type * p_reg,
-                                                  uint32_t       mask)
+NRF_STATIC_INLINE void nrf_ccm_shorts_disable(NRF_CCM_Type * p_reg,
+                                              uint32_t       mask)
 {
     p_reg->SHORTS &= ~(mask);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_ccm_shorts_set(NRF_CCM_Type * p_reg,
-                                              uint32_t       mask)
+NRF_STATIC_INLINE void nrf_ccm_shorts_set(NRF_CCM_Type * p_reg,
+                                          uint32_t       mask)
 {
     p_reg->SHORTS = mask;
 }
