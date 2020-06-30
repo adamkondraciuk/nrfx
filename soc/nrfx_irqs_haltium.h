@@ -16,6 +16,7 @@ extern "C" {
 // GENERIC2_IRQn
 
 // MVDMA_IRQn
+#define nrfx_mvdma_irq_handler        MVDMA_IRQHandler
 
 // RAMC_IRQn
 
