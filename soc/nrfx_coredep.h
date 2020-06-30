@@ -42,6 +42,9 @@
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
+#elif defined(BOARD_PALLADIUM)
+    #define NRFX_DELAY_CPU_FREQ_MHZ 0
+    #define NRFX_DELAY_DWT_PRESENT  0
 #else
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  0
