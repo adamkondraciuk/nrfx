@@ -20,8 +20,8 @@ extern "C" {
 typedef struct __PACKED
 {
     uint8_t * p_buffer;   ///< Pointer to the job buffer.
-    uint8_t   attributes; ///< Attributes of the job.
     uint32_t  size : 24;  ///< Size of the job buffer.
+    uint8_t   attributes; ///< Attributes of the job.
 } nrfx_vdma_job_t;
 
 typedef enum
