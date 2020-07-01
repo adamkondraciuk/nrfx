@@ -523,7 +523,6 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 
 NRF_STATIC_INLINE void nrf_gpio_range_cfg_output(uint32_t pin_range_start, uint32_t pin_range_end)
 {
-    /*lint -e{845} // A zero has been given as right argument to operator '|'" */
     for (; pin_range_start <= pin_range_end; pin_range_start++)
     {
         nrf_gpio_cfg_output(pin_range_start);
@@ -535,7 +534,6 @@ NRF_STATIC_INLINE void nrf_gpio_range_cfg_input(uint32_t            pin_range_st
                                                 uint32_t            pin_range_end,
                                                 nrf_gpio_pin_pull_t pull_config)
 {
-    /*lint -e{845} // A zero has been given as right argument to operator '|'" */
     for (; pin_range_start <= pin_range_end; pin_range_start++)
     {
         nrf_gpio_cfg_input(pin_range_start, pull_config);
@@ -600,7 +598,6 @@ NRF_STATIC_INLINE void nrf_gpio_cfg_default(uint32_t pin_number)
 NRF_STATIC_INLINE void nrf_gpio_cfg_watcher(uint32_t pin_number)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
-    /*lint -e{845} // A zero has been given as right argument to operator '|'" */
     uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_INPUT_Msk;
 
     reg->PIN_CNF[pin_number] = cnf | (GPIO_PIN_CNF_INPUT_Connect << GPIO_PIN_CNF_INPUT_Pos);
@@ -610,7 +607,6 @@ NRF_STATIC_INLINE void nrf_gpio_cfg_watcher(uint32_t pin_number)
 NRF_STATIC_INLINE void nrf_gpio_input_disconnect(uint32_t pin_number)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
-    /*lint -e{845} // A zero has been given as right argument to operator '|'" */
     uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_INPUT_Msk;
 
     reg->PIN_CNF[pin_number] = cnf | (GPIO_PIN_CNF_INPUT_Disconnect << GPIO_PIN_CNF_INPUT_Pos);
@@ -635,7 +631,6 @@ NRF_STATIC_INLINE void nrf_gpio_cfg_sense_set(uint32_t             pin_number,
                                               nrf_gpio_pin_sense_t sense_config)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
-    /*lint -e{845} // A zero has been given as right argument to operator '|'" */
     uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_SENSE_Msk;
 
     reg->PIN_CNF[pin_number] = cnf | (sense_config << GPIO_PIN_CNF_SENSE_Pos);
