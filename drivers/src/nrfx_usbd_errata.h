@@ -45,4 +45,10 @@ static inline bool nrfx_usbd_errata_223(void)
     return NRFX_USBD_ERRATA_ENABLE && nrf52_errata_223();
 }
 
+/* Errata: Device remains in SUSPEND too long. */
+static inline bool nrfx_usbd_errata_211(void)
+{
+    return NRFX_USBD_ERRATA_ENABLE && (nrf52_errata_211());
+}
+
 #endif // NRFX_USBD_ERRATA_H__

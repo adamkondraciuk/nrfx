@@ -54,6 +54,11 @@
 #define NRFX_USBD_DMAREQ_PROCESS_DEBUG 1
 #endif
 
+#ifndef NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
+/* Anomaly 211 - Device remains in SUSPEND too long when host resumes
+   bus activity (sending SOF packets) without a RESUME condition. */
+#define NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211 1
+#endif
 
 /**
  * @defgroup nrfx_usbd_int USB Device driver internal part
@@ -1475,9 +1480,9 @@ static inline void usbd_errata_171_end(void)
 }
 
 /**
- * @brief Begin errata 187.
+ * @brief Begin erratas 187 and 211.
  */
-static inline void usbd_errata_187_begin(void)
+static inline void usbd_errata_187_211_begin(void)
 {
     NRFX_CRITICAL_SECTION_ENTER();
     if (*((volatile uint32_t *)(0x4006EC00)) == 0x00000000)
@@ -1494,9 +1499,9 @@ static inline void usbd_errata_187_begin(void)
 }
 
 /**
- * @brief End errata 187.
+ * @brief End erratas 187 and 211.
  */
-static inline void usbd_errata_187_end(void)
+static inline void usbd_errata_187_211_end(void)
 {
     NRFX_CRITICAL_SECTION_ENTER();
     if (*((volatile uint32_t *)(0x4006EC00)) == 0x00000000)
@@ -1519,7 +1524,7 @@ static inline void usbd_enable(void)
 {
     if (nrfx_usbd_errata_187())
     {
-        usbd_errata_187_begin();
+        usbd_errata_187_211_begin();
     }
 
     if (nrfx_usbd_errata_171())
@@ -1540,7 +1545,7 @@ static inline void usbd_enable(void)
 
     if (nrfx_usbd_errata_187())
     {
-        usbd_errata_187_end();
+        usbd_errata_187_211_end();
     }
 }
 /** @} */
@@ -1687,6 +1692,15 @@ void nrfx_usbd_enable(void)
          m_first_enable = false;
     }
 
+#if NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
+    if (nrfx_usbd_errata_187() || nrfx_usbd_errata_211())
+#else
+    if (nrfx_usbd_errata_187())
+#endif
+    {
+        usbd_errata_187_211_begin();
+    }
+
     if (nrfx_usbd_errata_166())
     {
         *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x800)) = 0x7E3;
@@ -1713,6 +1727,14 @@ void nrfx_usbd_enable(void)
 
     m_drv_state = NRFX_DRV_STATE_POWERED_ON;
 
+#if NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
+    if (nrfx_usbd_errata_187() && !nrfx_usbd_errata_211())
+#else
+    if (nrfx_usbd_errata_187())
+#endif
+    {
+        usbd_errata_187_211_end();
+    }
 }
 
 void nrfx_usbd_disable(void)
@@ -1727,6 +1749,13 @@ void nrfx_usbd_disable(void)
     nrf_usbd_disable(NRF_USBD);
     usbd_dma_pending_clear();
     m_drv_state = NRFX_DRV_STATE_INITIALIZED;
+
+#if NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
+    if (nrfx_usbd_errata_211())
+    {
+        usbd_errata_187_211_end();
+    }
+#endif
 }
 
 void nrfx_usbd_start(bool enable_sof)
