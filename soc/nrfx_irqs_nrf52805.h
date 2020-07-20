@@ -1,7 +1,7 @@
-/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
 
-#ifndef NRFX_IRQS_NRF52810_H__
-#define NRFX_IRQS_NRF52810_H__
+#ifndef NRFX_IRQS_NRF52805_H__
+#define NRFX_IRQS_NRF52805_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,9 +76,6 @@ extern "C" {
 // QDEC_IRQn
 #define nrfx_qdec_irq_handler       QDEC_IRQHandler
 
-// COMP_IRQn
-#define nrfx_comp_irq_handler       COMP_IRQHandler
-
 // SWI0_EGU0_IRQn
 #define nrfx_egu_0_irq_handler      SWI0_EGU0_IRQHandler
 
@@ -93,15 +90,9 @@ extern "C" {
 
 // SWI5_IRQn
 
-// PWM0_IRQn
-#define nrfx_pwm_0_irq_handler      PWM0_IRQHandler
-
-// PDM_IRQn
-#define nrfx_pdm_irq_handler        PDM_IRQHandler
-
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif // NRFX_IRQS_NRF52810_H__
+#endif // NRFX_IRQS_NRF52805_H__
