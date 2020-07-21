@@ -24,6 +24,7 @@ typedef struct __PACKED
     uint8_t   attributes; ///< Attributes of the job.
 } nrfx_vdma_job_t;
 
+/** @brief VDMA attributes. */
 typedef enum
 {
     NRFX_VDMA_ATTRIBUTE_NEWJOBLISTPTR = 0x55, ///< Job buffer contains pointer to the new list.

@@ -112,7 +112,7 @@ NRF_STATIC_INLINE void nrf_exmif_strobe_delay_set(NRF_EXMIF_Type *  p_reg,
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] device_idx Device number to configure.
- * @param[in] device     p_device Pointer to the configuration structure of the memory device.
+ * @param[in] p_device   Pointer to the configuration structure of the memory device.
  */
 NRF_STATIC_INLINE void nrf_exmif_device_config(NRF_EXMIF_Type *           p_reg,
                                                uint8_t                    device_idx,

@@ -58,6 +58,7 @@ NRF_STATIC_INLINE void nrf_cpuconf_cpu_wait_set(NRF_CPUCONF_Type * p_reg, bool w
  * @brief Function for setting initial value of the secure Vector Table Offset Register after CPU reset.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] vtor  Value of the secure Vector Table Offset Register to be set.
  */
 NRF_STATIC_INLINE void nrf_cpuconf_secure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor);
 
@@ -65,6 +66,7 @@ NRF_STATIC_INLINE void nrf_cpuconf_secure_vtor_set(NRF_CPUCONF_Type * p_reg, uin
  * @brief Function for setting initial value of the non-secure Vector Table Offset Register after CPU reset.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] vtor  Value of the non-secure Vector Table Offset Register to be set.
  */
 NRF_STATIC_INLINE void nrf_cpuconf_nonsecure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor);
 

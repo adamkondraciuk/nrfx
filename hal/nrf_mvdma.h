@@ -109,6 +109,7 @@ NRF_STATIC_INLINE uint32_t nrf_mvdma_task_address_get(NRF_MVDMA_Type const * p_r
 /**
  * @brief Function for getting START task by its index.
  *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] index Index of the START task.
  *
  * @return START task.
