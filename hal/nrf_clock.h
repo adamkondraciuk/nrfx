@@ -55,6 +55,14 @@ extern "C" {
 #define NRF_CLOCK_HAS_HFCLKAUDIO 0
 #endif
 
+#if (defined(CLOCK_HFCLKCTRL_HCLK_Div1) && !defined(NRF5340_XXAA_NETWORK)) \
+    || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of HFCLK frequency configuration. */
+#define NRF_CLOCK_HAS_HFCLK_DIV 1
+#else
+#define NRF_CLOCK_HAS_HFCLK_DIV 0
+#endif
+
 #if defined(CLOCK_LFCLKALWAYSRUN_ALWAYSRUN_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of ALWAYSRUN registers. */
 #define NRF_CLOCK_HAS_ALWAYSRUN 1
