@@ -501,7 +501,9 @@ NRF_STATIC_INLINE uint8_t nrf_radio_dai_get(NRF_RADIO_Type const * p_reg);
  * @retval 1 The payload is greater than PCNF1.MAXLEN.
  */
 NRF_STATIC_INLINE uint8_t nrf_radio_pdustat_get(NRF_RADIO_Type const * p_reg);
+#endif // defined(RADIO_PDUSTAT_PDUSTAT_Msk) || defined(__NRFX_DOXYGEN__)
 
+#if defined(RADIO_PDUSTAT_CISTAT_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting status on what rate packet is received with in Long Range.
  *
@@ -511,7 +513,7 @@ NRF_STATIC_INLINE uint8_t nrf_radio_pdustat_get(NRF_RADIO_Type const * p_reg);
  * @retval 1 The frame is received at 500kbps.
  */
 NRF_STATIC_INLINE uint8_t nrf_radio_cistat_get(NRF_RADIO_Type const * p_reg);
-#endif // defined(RADIO_PDUSTAT_PDUSTAT_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // defined(RADIO_PDUSTAT_CISTAT_Msk) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for setting packet pointer to given location in memory.
@@ -1097,12 +1099,14 @@ NRF_STATIC_INLINE uint8_t nrf_radio_pdustat_get(NRF_RADIO_Type const * p_reg)
 {
     return (uint8_t)(p_reg->PDUSTAT & RADIO_PDUSTAT_PDUSTAT_Msk);
 }
+#endif
 
+#if defined(RADIO_PDUSTAT_CISTAT_Msk)
 NRF_STATIC_INLINE uint8_t nrf_radio_cistat_get(NRF_RADIO_Type const * p_reg)
 {
     return (uint8_t)((p_reg->PDUSTAT & RADIO_PDUSTAT_CISTAT_Msk) >> RADIO_PDUSTAT_CISTAT_Pos);
 }
-#endif // defined(RADIO_PDUSTAT_PDUSTAT_Msk)
+#endif
 
 NRF_STATIC_INLINE void nrf_radio_packetptr_set(NRF_RADIO_Type * p_reg, void const * p_packet)
 {
