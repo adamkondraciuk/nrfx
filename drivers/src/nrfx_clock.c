@@ -14,11 +14,17 @@
 extern bool nrfx_power_irq_enabled;
 #endif
 
+#if defined(CLOCK_LFCLKSRC_SRC_RC) || defined(__NRFX_DOXYGEN__)
+    #define LF_SRC_RC CLOCK_LFCLKSRC_SRC_RC
+#else
+    #define LF_SRC_RC CLOCK_LFCLKSRC_SRC_LFRC
+#endif
+
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
     #if (NRF_CLOCK_HAS_CALIBRATION == 0)
         #error "Calibration is not available in the SoC that is used."
     #endif
-    #if (NRFX_CLOCK_CONFIG_LF_SRC != CLOCK_LFCLKSRC_SRC_RC)
+    #if (NRFX_CLOCK_CONFIG_LF_SRC != LF_SRC_RC)
         #error "Calibration can be performed only for the RC Oscillator."
     #endif
 #endif
