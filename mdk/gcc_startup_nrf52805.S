@@ -108,7 +108,7 @@ __isr_vector:
     .long   CCM_AAR_IRQHandler
     .long   WDT_IRQHandler
     .long   RTC1_IRQHandler
-    .long   0                           /*Reserved */
+    .long   QDEC_IRQHandler
     .long   0                           /*Reserved */
     .long   SWI0_EGU0_IRQHandler
     .long   SWI1_EGU1_IRQHandler
@@ -382,6 +382,7 @@ Default_Handler:
     IRQ  CCM_AAR_IRQHandler
     IRQ  WDT_IRQHandler
     IRQ  RTC1_IRQHandler
+    IRQ  QDEC_IRQHandler
     IRQ  SWI0_EGU0_IRQHandler
     IRQ  SWI1_EGU1_IRQHandler
     IRQ  SWI2_IRQHandler

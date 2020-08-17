@@ -108,6 +108,8 @@ Reset_Handler:
 
   /* Perform prestart tasks. */
   b nRFInitialize
+
+.thumb_func
 afterInitialize:
   
 #ifndef NO_STACK_INIT
