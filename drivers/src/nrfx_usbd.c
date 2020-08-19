@@ -57,7 +57,7 @@
 #ifndef NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
 /* Anomaly 211 - Device remains in SUSPEND too long when host resumes
    bus activity (sending SOF packets) without a RESUME condition. */
-#define NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211 1
+#define NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211 0
 #endif
 
 /**
