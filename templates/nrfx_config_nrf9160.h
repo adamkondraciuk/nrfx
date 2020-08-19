@@ -112,7 +112,7 @@
 
 // <q> NRFX_CLOCK_CONFIG_LFXO_TWO_STAGE_ENABLED - Enables two-stage LFXO start procedure
 
-// <i> If set to non-zero value, LFRC will be started before LFXO and corresponding
+// <i> If set to a non-zero value, LFRC will be started before LFXO and corresponding
 // <i> event will be generated. It means that CPU will be woken up when LFRC
 // <i> oscillator starts, but user callback will be invoked only after LFXO
 // <i> finally starts.

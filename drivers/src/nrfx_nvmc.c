@@ -136,6 +136,8 @@ __STATIC_INLINE bool is_valid_address(uint32_t addr, bool uicr_allowed)
     {
         return true;
     }
+#else
+    (void)uicr_allowed;
 #endif
 
     return false;

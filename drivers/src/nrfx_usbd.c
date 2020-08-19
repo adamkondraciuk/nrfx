@@ -56,7 +56,7 @@
 
 #ifndef NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211
 /* Anomaly 211 - Device remains in SUSPEND too long when host resumes
-   bus activity (sending SOF packets) without a RESUME condition. */
+   a bus activity (sending SOF packets) without a RESUME condition. */
 #define NRFX_USBD_USE_WORKAROUND_FOR_ANOMALY_211 0
 #endif
 
@@ -1430,7 +1430,7 @@ static void usbd_dmareq_process(void)
 }
 
 /**
- * @brief Wait for specified eventcause and clear it afterwards.
+ * @brief Wait for a specified eventcause and clear it afterwards.
  */
 static inline void usbd_eventcause_wait_and_clear(nrf_usbd_eventcause_mask_t eventcause)
 {
@@ -1520,7 +1520,7 @@ static inline void usbd_errata_187_211_end(void)
 /**
  * @brief Enable USBD peripheral.
  */
-static inline void usbd_enable(void)
+static void usbd_enable(void)
 {
     if (nrfx_usbd_errata_187())
     {

@@ -487,7 +487,7 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number);
  * @brief Function for extracting port number and the relative pin number
  *        from the absolute pin number.
  *
- * @param[in,out] p_pin Pointer to the absolute pin number overriden by the pin number
+ * @param[in,out] p_pin Pointer to the absolute pin number overridden by the pin number
  *                      that is relative to the port.
  *
  * @return Port number.
@@ -499,7 +499,7 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_pin_port_number_extract(uint32_t * p_pin);
 /**
  * @brief Function for extracting port and the relative pin number from the absolute pin number.
  *
- * @param[in,out] p_pin Pointer to the absolute pin number overriden by the pin number
+ * @param[in,out] p_pin Pointer to the absolute pin number overridden by the pin number
  *                      that is relative to the port.
  *
  * @return Pointer to port register set.

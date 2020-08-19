@@ -78,7 +78,7 @@ void nrfx_clock_stop(nrf_clock_domain_t domain);
  * XTAL source is assumed for domains with multiple sources.
  *
  * @param[in]  domain    Clock domain.
- * @param[out] p_clk_src Pointer to clock source that is running. Set to NULL if not needed.
+ * @param[out] p_clk_src Pointer to a clock source that is running. Set to NULL if not needed.
  *                       Ignored for HFCLKAUDIO domain. Variable pointed by @p p_clk_src
  *                       must be of either @ref nrf_clock_lfclk_t type for LFCLK
  *                       or @ref nrf_clock_hfclk_t type for HFCLK and HFCLK192M.
