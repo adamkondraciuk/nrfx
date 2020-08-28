@@ -293,6 +293,9 @@ nrfx_err_t nrfx_ppi_channel_fork_assign(nrf_ppi_channel_t channel, uint32_t fork
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 #else
+    (void)channel;
+    (void)fork_tep;
+
     err_code = NRFX_ERROR_NOT_SUPPORTED;
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
                      __func__,
