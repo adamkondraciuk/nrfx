@@ -407,6 +407,8 @@ void nrfx_clock_calibration_timer_start(uint8_t interval)
     nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
     nrf_clock_int_enable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
     nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTART);
+#else
+    (void)interval;
 #endif
 }
 
