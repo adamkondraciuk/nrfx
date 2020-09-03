@@ -7,9 +7,19 @@
 #include <nrfx_power.h>
 
 #if NRFX_CHECK(NRFX_CLOCK_ENABLED)
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern bool nrfx_clock_irq_enabled;
 extern void nrfx_clock_irq_handler(void);
+
+#ifdef __cplusplus
+}
 #endif
+
+#endif // NRFX_CHECK(NRFX_CLOCK_ENABLED)
 
 /**
  * @internal
