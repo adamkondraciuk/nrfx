@@ -94,6 +94,10 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config)
     nrf_power_dcdcen_set(NRF_POWER, p_config->dcdcen);
 #elif defined(REGULATORS_PRESENT)
     nrf_regulators_dcdcen_set(NRF_REGULATORS, p_config->dcdcen);
+    if (nrf53_errata_53() && p_config->dcdcen)
+    {
+        *((volatile uint32_t *)0x50004728ul) = 0x1;
+    }
 #endif
 
     nrfx_power_clock_irq_init();
