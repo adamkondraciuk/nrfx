@@ -523,8 +523,42 @@ void nrfx_gpiote_set_task_trigger(nrfx_gpiote_pin_t pin);
 void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_pin_t pin);
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-/** @} */
+#if NRF_GPIOTE_HAS_LATENCY
+/**
+ * @brief Function for setting the latency setting.
+ *
+ * @note Available for event mode with rising or falling edge detection on the pin.
+ *       Toggle task mode can only be used with low latency setting.
+ *
+ * @param[in] latency Latency setting to be set.
+ */
+NRFX_STATIC_INLINE void nrfx_gpiote_latency_set(nrf_gpiote_latency_t latency);
 
+/**
+ * @brief Function for retrieving the latency setting.
+ *
+ * @return Latency setting.
+ */
+NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void);
+#endif
+
+#ifndef NRFX_DECLARE_ONLY
+
+#if NRF_GPIOTE_HAS_LATENCY
+NRFX_STATIC_INLINE void nrfx_gpiote_latency_set(nrf_gpiote_latency_t latency)
+{
+    nrf_gpiote_latency_set(NRF_GPIOTE, latency);
+}
+
+NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void)
+{
+    return nrf_gpiote_latency_get(NRF_GPIOTE);
+}
+#endif // NRF_GPIOTE_HAS_LATENCY
+
+#endif // NRFX_DECLARE_ONLY
+
+/** @} */
 
 void nrfx_gpiote_irq_handler(void);
 
