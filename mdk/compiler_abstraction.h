@@ -50,11 +50,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef NRF_STRING_CONCATENATE
     #define NRF_STRING_CONCATENATE(lhs, rhs) NRF_STRING_CONCATENATE_IMPL(lhs, rhs)
 #endif
-#if  __LINT__ == 1
-    #ifndef NRF_STATIC_ASSERT
-        #define NRF_STATIC_ASSERT(cond, msg)
-    #endif
-#endif
 
 #if defined ( __CC_ARM )
 
@@ -118,6 +113,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #define GET_SP()                __current_sp()
 
     #ifndef NRF_STATIC_ASSERT
+        #ifdef __cplusplus
+            #ifndef _Static_assert
+                #define _Static_assert static_assert
+            #endif
+        #endif
         #define NRF_STATIC_ASSERT(cond, msg) _Static_assert(cond, msg)
     #endif
 
@@ -190,6 +190,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     }
 
     #ifndef NRF_STATIC_ASSERT
+        #ifdef __cplusplus
+            #ifndef _Static_assert
+                #define _Static_assert static_assert
+            #endif
+        #endif
         #define NRF_STATIC_ASSERT(cond, msg) _Static_assert(cond, msg)
     #endif
 
