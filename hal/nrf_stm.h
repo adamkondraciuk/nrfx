@@ -735,7 +735,7 @@ NRF_STATIC_INLINE uint8_t nrf_stm_spfeat3r_nummast_get(NRF_STM_Type const * p_re
 
 NRF_STATIC_INLINE void nrf_stm_lar_access_set(NRF_STM_Type * p_reg, uint32_t value)
 {
-    p_reg->LAR = ((value << STM_LAR_ACCESS_W_Pos) & STM_LAR_ACCESS_W_Msk);
+    p_reg->LAR = ((value << STM_LAR_ACCESS_Pos) & STM_LAR_ACCESS_Msk);
 }
 
 NRF_STATIC_INLINE nrf_stm_lsr_type_t nrf_stm_lsr_type_get(NRF_STM_Type const * p_reg)
