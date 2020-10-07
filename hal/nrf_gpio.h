@@ -78,6 +78,7 @@ typedef enum
 /** @brief Enumerator used for selecting output drive mode. */
 typedef enum
 {
+#if defined(GPIO_PIN_CNF_DRIVE_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_GPIO_PIN_S0S1 = GPIO_PIN_CNF_DRIVE_S0S1, ///< Standard '0', standard '1'.
     NRF_GPIO_PIN_H0S1 = GPIO_PIN_CNF_DRIVE_H0S1, ///< High drive '0', standard '1'.
     NRF_GPIO_PIN_S0H1 = GPIO_PIN_CNF_DRIVE_S0H1, ///< Standard '0', high drive '1'.
@@ -107,6 +108,23 @@ typedef enum
 #if defined(GPIO_PIN_CNF_DRIVE_E0D1) || defined(__NRFX_DOXYGEN__)
     NRF_GPIO_PIN_E0D1 = GPIO_PIN_CNF_DRIVE_E0D1, ///< Extra high drive '0', disconnect '1'.
 #endif
+#else
+    NRF_GPIO_PIN_S0S1 = GPIO_PIN_CNF_DRIVE0_S0 | GPIO_PIN_CNF_DRIVE1_S1,
+    NRF_GPIO_PIN_H0S1 = GPIO_PIN_CNF_DRIVE0_H0 | GPIO_PIN_CNF_DRIVE1_S1,
+    NRF_GPIO_PIN_S0H1 = GPIO_PIN_CNF_DRIVE0_S0 | GPIO_PIN_CNF_DRIVE1_H1,
+    NRF_GPIO_PIN_H0H1 = GPIO_PIN_CNF_DRIVE0_H0 | GPIO_PIN_CNF_DRIVE1_H1,
+    NRF_GPIO_PIN_D0S1 = GPIO_PIN_CNF_DRIVE0_D0 | GPIO_PIN_CNF_DRIVE1_S1,
+    NRF_GPIO_PIN_D0H1 = GPIO_PIN_CNF_DRIVE0_D0 | GPIO_PIN_CNF_DRIVE1_H1,
+    NRF_GPIO_PIN_S0D1 = GPIO_PIN_CNF_DRIVE0_S0 | GPIO_PIN_CNF_DRIVE1_D1,
+    NRF_GPIO_PIN_H0D1 = GPIO_PIN_CNF_DRIVE0_H0 | GPIO_PIN_CNF_DRIVE1_D1,
+    NRF_GPIO_PIN_E0S1 = GPIO_PIN_CNF_DRIVE0_E0 | GPIO_PIN_CNF_DRIVE1_S1,
+    NRF_GPIO_PIN_S0E1 = GPIO_PIN_CNF_DRIVE0_S0 | GPIO_PIN_CNF_DRIVE1_E1,
+    NRF_GPIO_PIN_E0E1 = GPIO_PIN_CNF_DRIVE0_E0 | GPIO_PIN_CNF_DRIVE1_E1,
+    NRF_GPIO_PIN_E0H1 = GPIO_PIN_CNF_DRIVE0_E0 | GPIO_PIN_CNF_DRIVE1_H1,
+    NRF_GPIO_PIN_H0E1 = GPIO_PIN_CNF_DRIVE0_H0 | GPIO_PIN_CNF_DRIVE1_E1,
+    NRF_GPIO_PIN_D0E1 = GPIO_PIN_CNF_DRIVE0_D0 | GPIO_PIN_CNF_DRIVE1_E1,
+    NRF_GPIO_PIN_E0D1 = GPIO_PIN_CNF_DRIVE0_E0 | GPIO_PIN_CNF_DRIVE1_D1,
+#endif // defined(GPIO_PIN_CNF_DRIVE_Msk) || defined(__NRFX_DOXYGEN__)
 } nrf_gpio_pin_drive_t;
 
 /** @brief Enumerator used for selecting the pin to sense high or low level on the pin input. */
@@ -603,10 +621,14 @@ NRF_STATIC_INLINE void nrf_gpio_cfg(
 #else
     uint32_t cnf = 0;
 #endif
-    cnf |= ((uint32_t)dir << GPIO_PIN_CNF_DIR_Pos)     |
-           ((uint32_t)input << GPIO_PIN_CNF_INPUT_Pos) |
-           ((uint32_t)pull << GPIO_PIN_CNF_PULL_Pos)   |
-           ((uint32_t)drive << GPIO_PIN_CNF_DRIVE_Pos) |
+    cnf |= ((uint32_t)dir << GPIO_PIN_CNF_DIR_Pos)      |
+           ((uint32_t)input << GPIO_PIN_CNF_INPUT_Pos)  |
+           ((uint32_t)pull << GPIO_PIN_CNF_PULL_Pos)    |
+#if defined(GPIO_PIN_CNF_DRIVE_Pos)
+           ((uint32_t)drive << GPIO_PIN_CNF_DRIVE_Pos)  |
+#else
+           ((uint32_t)drive << GPIO_PIN_CNF_DRIVE0_Pos) |
+#endif
            ((uint32_t)sense << GPIO_PIN_CNF_SENSE_Pos);
 
     reg->PIN_CNF[pin_number] = cnf;
@@ -621,18 +643,26 @@ NRF_STATIC_INLINE void nrf_gpio_reconfigure(uint32_t                     pin_num
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
     uint32_t cnf = reg->PIN_CNF[pin_number];
-    uint32_t to_update = (p_dir   ? GPIO_PIN_CNF_DIR_Msk   : 0) |
-                         (p_input ? GPIO_PIN_CNF_INPUT_Msk : 0) |
-                         (p_pull  ? GPIO_PIN_CNF_PULL_Msk  : 0) |
-                         (p_drive ? GPIO_PIN_CNF_DRIVE_Msk : 0) |
-                         (p_sense ? GPIO_PIN_CNF_SENSE_Msk : 0);
+    uint32_t to_update = (p_dir   ? GPIO_PIN_CNF_DIR_Msk                                : 0) |
+                         (p_input ? GPIO_PIN_CNF_INPUT_Msk                              : 0) |
+                         (p_pull  ? GPIO_PIN_CNF_PULL_Msk                               : 0) |
+#if defined(GPIO_PIN_CNF_DRIVE_Msk)
+                         (p_drive ? GPIO_PIN_CNF_DRIVE_Msk                              : 0) |
+#else
+                         (p_drive ? (GPIO_PIN_CNF_DRIVE0_Msk | GPIO_PIN_CNF_DRIVE1_Msk) : 0) |
+#endif
+                         (p_sense ? GPIO_PIN_CNF_SENSE_Msk                              : 0);
 
     /* Clear fields that will be updated. */
     cnf &= ~to_update;
-    cnf |= ((uint32_t)(p_dir   ? *p_dir   : 0) << GPIO_PIN_CNF_DIR_Pos)   |
-           ((uint32_t)(p_input ? *p_input : 0) << GPIO_PIN_CNF_INPUT_Pos) |
-           ((uint32_t)(p_pull  ? *p_pull  : 0) << GPIO_PIN_CNF_PULL_Pos)  |
-           ((uint32_t)(p_drive ? *p_drive : 0) << GPIO_PIN_CNF_DRIVE_Pos) |
+    cnf |= ((uint32_t)(p_dir   ? *p_dir   : 0) << GPIO_PIN_CNF_DIR_Pos)    |
+           ((uint32_t)(p_input ? *p_input : 0) << GPIO_PIN_CNF_INPUT_Pos)  |
+           ((uint32_t)(p_pull  ? *p_pull  : 0) << GPIO_PIN_CNF_PULL_Pos)   |
+#if defined(GPIO_PIN_CNF_DRIVE_Pos)
+           ((uint32_t)(p_drive ? *p_drive : 0) << GPIO_PIN_CNF_DRIVE_Pos)  |
+#else
+           ((uint32_t)(p_drive ? *p_drive : 0) << GPIO_PIN_CNF_DRIVE0_Pos) |
+#endif
            ((uint32_t)(p_sense ? *p_sense : 0)<< GPIO_PIN_CNF_SENSE_Pos);
 
     reg->PIN_CNF[pin_number] = cnf;
