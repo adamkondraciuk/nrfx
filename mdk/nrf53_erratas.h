@@ -137,6 +137,7 @@ static bool nrf53_errata_115(void) __UNUSED;
 static bool nrf53_errata_116(void) __UNUSED;
 static bool nrf53_errata_117(void) __UNUSED;
 static bool nrf53_errata_119(void) __UNUSED;
+static bool nrf53_errata_121(void) __UNUSED;
 
 /* ========= Errata 1 ========= */
 #if    defined (NRF5340_XXAA) || defined (DEVELOP_IN_NRF5340)
@@ -175,6 +176,8 @@ static bool nrf53_errata_1(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -224,6 +227,8 @@ static bool nrf53_errata_2(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -271,6 +276,8 @@ static bool nrf53_errata_3(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -320,6 +327,8 @@ static bool nrf53_errata_4(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -367,6 +376,8 @@ static bool nrf53_errata_5(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -416,6 +427,8 @@ static bool nrf53_errata_6(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -463,6 +476,8 @@ static bool nrf53_errata_7(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -512,6 +527,8 @@ static bool nrf53_errata_8(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -559,6 +576,8 @@ static bool nrf53_errata_9(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -608,6 +627,8 @@ static bool nrf53_errata_10(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -656,6 +677,8 @@ static bool nrf53_errata_11(void)
                             return true;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -703,6 +726,8 @@ static bool nrf53_errata_12(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -757,6 +782,8 @@ static bool nrf53_errata_13(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -804,6 +831,8 @@ static bool nrf53_errata_14(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -858,6 +887,8 @@ static bool nrf53_errata_15(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -905,6 +936,8 @@ static bool nrf53_errata_16(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -954,6 +987,8 @@ static bool nrf53_errata_18(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1001,6 +1036,8 @@ static bool nrf53_errata_19(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1055,6 +1092,8 @@ static bool nrf53_errata_20(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1108,6 +1147,8 @@ static bool nrf53_errata_21(void)
                             return true;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1156,6 +1197,8 @@ static bool nrf53_errata_22(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1203,6 +1246,8 @@ static bool nrf53_errata_23(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1257,6 +1302,8 @@ static bool nrf53_errata_26(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1309,6 +1356,8 @@ static bool nrf53_errata_27(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1363,6 +1412,8 @@ static bool nrf53_errata_28(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1411,6 +1462,8 @@ static bool nrf53_errata_29(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1458,6 +1511,8 @@ static bool nrf53_errata_30(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1512,6 +1567,8 @@ static bool nrf53_errata_31(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1559,6 +1616,8 @@ static bool nrf53_errata_32(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1608,6 +1667,8 @@ static bool nrf53_errata_33(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1656,6 +1717,8 @@ static bool nrf53_errata_34(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1703,6 +1766,8 @@ static bool nrf53_errata_36(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -1757,6 +1822,8 @@ static bool nrf53_errata_37(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -1805,6 +1872,8 @@ static bool nrf53_errata_42(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -1852,6 +1921,8 @@ static bool nrf53_errata_43(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -1906,6 +1977,8 @@ static bool nrf53_errata_44(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -1954,6 +2027,8 @@ static bool nrf53_errata_45(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2001,6 +2076,8 @@ static bool nrf53_errata_46(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -2055,6 +2132,8 @@ static bool nrf53_errata_47(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2108,6 +2187,8 @@ static bool nrf53_errata_49(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2156,6 +2237,8 @@ static bool nrf53_errata_50(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2203,6 +2286,8 @@ static bool nrf53_errata_51(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2257,6 +2342,8 @@ static bool nrf53_errata_52(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2305,6 +2392,8 @@ static bool nrf53_errata_53(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2352,6 +2441,8 @@ static bool nrf53_errata_54(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2406,6 +2497,8 @@ static bool nrf53_errata_55(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2453,6 +2546,8 @@ static bool nrf53_errata_57(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2502,6 +2597,8 @@ static bool nrf53_errata_58(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2549,6 +2646,8 @@ static bool nrf53_errata_59(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2603,6 +2702,8 @@ static bool nrf53_errata_62(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -2650,6 +2751,8 @@ static bool nrf53_errata_64(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2699,6 +2802,8 @@ static bool nrf53_errata_65(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2746,6 +2851,8 @@ static bool nrf53_errata_66(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2800,6 +2907,8 @@ static bool nrf53_errata_67(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2847,6 +2956,8 @@ static bool nrf53_errata_69(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -2896,6 +3007,8 @@ static bool nrf53_errata_70(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2944,6 +3057,8 @@ static bool nrf53_errata_71(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -2991,6 +3106,8 @@ static bool nrf53_errata_72(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3045,6 +3162,8 @@ static bool nrf53_errata_73(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3098,6 +3217,8 @@ static bool nrf53_errata_74(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3146,6 +3267,8 @@ static bool nrf53_errata_75(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -3193,6 +3316,8 @@ static bool nrf53_errata_76(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -3247,6 +3372,8 @@ static bool nrf53_errata_77(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3294,6 +3421,8 @@ static bool nrf53_errata_79(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3343,6 +3472,8 @@ static bool nrf53_errata_80(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3390,6 +3521,8 @@ static bool nrf53_errata_81(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3439,6 +3572,8 @@ static bool nrf53_errata_82(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3486,6 +3621,8 @@ static bool nrf53_errata_83(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3535,6 +3672,8 @@ static bool nrf53_errata_84(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3582,6 +3721,8 @@ static bool nrf53_errata_85(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3636,6 +3777,8 @@ static bool nrf53_errata_86(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3683,6 +3826,8 @@ static bool nrf53_errata_87(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -3732,6 +3877,8 @@ static bool nrf53_errata_90(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3779,6 +3926,8 @@ static bool nrf53_errata_91(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3828,6 +3977,8 @@ static bool nrf53_errata_93(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3875,6 +4026,8 @@ static bool nrf53_errata_95(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -3929,6 +4082,8 @@ static bool nrf53_errata_97(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -3976,6 +4131,8 @@ static bool nrf53_errata_99(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -4025,6 +4182,8 @@ static bool nrf53_errata_103(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -4072,6 +4231,8 @@ static bool nrf53_errata_105(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -4121,6 +4282,8 @@ static bool nrf53_errata_106(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -4168,6 +4331,8 @@ static bool nrf53_errata_107(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -4217,6 +4382,8 @@ static bool nrf53_errata_109(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -4264,6 +4431,8 @@ static bool nrf53_errata_110(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -4313,6 +4482,8 @@ static bool nrf53_errata_112(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -4360,6 +4531,8 @@ static bool nrf53_errata_113(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
@@ -4409,6 +4582,8 @@ static bool nrf53_errata_114(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -4456,6 +4631,8 @@ static bool nrf53_errata_115(void)
                         case 0x03ul:
                             return false;
                         case 0x04ul:
+                            return false;
+                        case 0x05ul:
                             return false;
                         default:
                             return false;
@@ -4505,6 +4682,8 @@ static bool nrf53_errata_116(void)
                             return false;
                         case 0x04ul:
                             return false;
+                        case 0x05ul:
+                            return false;
                         default:
                             return false;
                     }
@@ -4553,6 +4732,8 @@ static bool nrf53_errata_117(void)
                             return true;
                         case 0x04ul:
                             return true;
+                        case 0x05ul:
+                            return true;
                         default:
                             return true;
                     }
@@ -4600,6 +4781,58 @@ static bool nrf53_errata_119(void)
                         case 0x03ul:
                             return true;
                         case 0x04ul:
+                            return true;
+                        case 0x05ul:
+                            return true;
+                        default:
+                            return true;
+                    }
+                }
+            #endif
+        #endif
+        return false;
+    #endif
+}
+
+/* ========= Errata 121 ========= */
+#if    defined (NRF5340_XXAA) || defined (DEVELOP_IN_NRF5340)
+    #if defined(NRF_APPLICATION)
+        #define NRF53_ERRATA_121_PRESENT 1
+    #else
+        #define NRF53_ERRATA_121_PRESENT 0
+    #endif
+#else
+    #define NRF53_ERRATA_121_PRESENT 0
+#endif
+
+#ifndef NRF53_ERRATA_121_ENABLE_WORKAROUND
+    #define NRF53_ERRATA_121_ENABLE_WORKAROUND NRF53_ERRATA_121_PRESENT
+#endif
+
+static bool nrf53_errata_121(void)
+{
+    #ifndef NRF53_SERIES
+        return false;
+    #else
+        #if defined (NRF5340_XXAA) || defined (DEVELOP_IN_NRF5340)
+            #if defined(NRF_APPLICATION)
+                uint32_t var1 = *(uint32_t *)0x00FF0130ul;
+                uint32_t var2 = *(uint32_t *)0x00FF0134ul;
+            #endif
+        #endif
+        #if defined (NRF5340_XXAA) || defined (DEVELOP_IN_NRF5340)
+            #if defined (NRF_APPLICATION)
+                if (var1 == 0x07)
+                {
+                    switch(var2)
+                    {
+                        case 0x02ul:
+                            return false;
+                        case 0x03ul:
+                            return true;
+                        case 0x04ul:
+                            return true;
+                        case 0x05ul:
                             return true;
                         default:
                             return true;
