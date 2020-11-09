@@ -33,24 +33,24 @@ extern "C" {
  /** @brief Polarity for the GPIOTE channel. */
 typedef enum
 {
-    NRF_GPIOTE_POLARITY_LOTOHI = GPIOTE_CONFIG_POLARITY_LoToHi, ///<  Low to high.
-    NRF_GPIOTE_POLARITY_HITOLO = GPIOTE_CONFIG_POLARITY_HiToLo, ///<  High to low.
-    NRF_GPIOTE_POLARITY_TOGGLE = GPIOTE_CONFIG_POLARITY_Toggle, ///<  Toggle.
+    NRF_GPIOTE_POLARITY_LOTOHI = GPIOTE_CONFIG_POLARITY_LoToHi, /**< Low to high. */
+    NRF_GPIOTE_POLARITY_HITOLO = GPIOTE_CONFIG_POLARITY_HiToLo, /**< High to low. */
+    NRF_GPIOTE_POLARITY_TOGGLE = GPIOTE_CONFIG_POLARITY_Toggle, /**< Toggle. */
 } nrf_gpiote_polarity_t;
 
 /** @brief Initial output value for the GPIOTE channel. */
 typedef enum
 {
-    NRF_GPIOTE_INITIAL_VALUE_LOW  = GPIOTE_CONFIG_OUTINIT_Low,  ///<  Low to high.
-    NRF_GPIOTE_INITIAL_VALUE_HIGH = GPIOTE_CONFIG_OUTINIT_High, ///<  High to low.
+    NRF_GPIOTE_INITIAL_VALUE_LOW  = GPIOTE_CONFIG_OUTINIT_Low,  /**< Low to high. */
+    NRF_GPIOTE_INITIAL_VALUE_HIGH = GPIOTE_CONFIG_OUTINIT_High, /**< High to low. */
 } nrf_gpiote_outinit_t;
 
 #if NRF_GPIOTE_HAS_LATENCY
 /** @brief Latency setting. */
 typedef enum
 {
-    NRF_GPIOTE_LATENCY_LOWPOWER   = GPIOTE_LATENCY_LATENCY_LowPower,   ///< Low Power
-    NRF_GPIOTE_LATENCY_LOWLATENCY = GPIOTE_LATENCY_LATENCY_LowLatency, ///< Low Latency
+    NRF_GPIOTE_LATENCY_LOWPOWER   = GPIOTE_LATENCY_LATENCY_LowPower,   /**< Low Power. */
+    NRF_GPIOTE_LATENCY_LOWLATENCY = GPIOTE_LATENCY_LATENCY_LowLatency, /**< Low Latency. */
 } nrf_gpiote_latency_t;
 #endif
 
