@@ -18,6 +18,7 @@ All notable changes to this project are documented in this file.
 - Fixed minor C++ compilation warnings in the drivers.
 - Fixed implementation of workaround for nRF52 Series anomaly 197 in the POWER HAL, which was applied in incorrect configuration.
 - Fixed implementation of workaround for nRF53 Series anomaly 4 in the CLOCK driver, which was applied in incorrect configuration.
+- Fixed the incorrect signature of the nrf_clock_alwaysrun_set() function.
 
 ## [2.3.0] - 2020-08-19
 ### Added
