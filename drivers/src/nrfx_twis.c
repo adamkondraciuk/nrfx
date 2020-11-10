@@ -587,7 +587,6 @@ void nrfx_twis_disable(nrfx_twis_t const * p_instance)
  *
  * This is the reason for the function below to be implemented in assembly.
  */
-//lint -save -e578
 #if defined (__CC_ARM )
 static __ASM uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perror)
 {
@@ -646,7 +645,6 @@ static uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perro
 #else
     #error Unknown compiler
 #endif
-//lint -restore
 
 uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance)
 {

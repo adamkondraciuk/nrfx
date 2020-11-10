@@ -51,7 +51,6 @@ static bool is_programmable_app_channel(nrf_ppi_channel_t channel)
  */
 static bool are_app_channels(uint32_t channel_mask)
 {
-    //lint -e(587)
     return ((~(NRFX_PPI_ALL_APP_CHANNELS_MASK) & channel_mask) == 0);
 }
 

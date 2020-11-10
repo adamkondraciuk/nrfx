@@ -29,7 +29,6 @@
 /* Check if every pin can be encoded on provided number of bits. */
 NRFX_STATIC_ASSERT(MAX_PIN_NUMBER <= (1 << POLARITY_FIELD_POS));
 
-/*lint -save -e571*/ /* Suppress "Warning 571: Suspicious cast" */
 typedef struct
 {
     nrfx_gpiote_evt_handler_t handlers[GPIOTE_CH_NUM + NRFX_GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS];
@@ -1038,6 +1037,4 @@ void nrfx_gpiote_irq_handler(void)
     }
 }
 
-
-/*lint -restore*/
 #endif // NRFX_CHECK(NRFX_GPIOTE_ENABLED)
