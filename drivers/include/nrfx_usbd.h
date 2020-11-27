@@ -31,7 +31,7 @@ extern "C" {
  * @sa nrf_usbd_isosplit_set
  * @sa nrf_usbd_isosplit_get
  */
-#define NRFX_USBD_ISOSIZE 1024
+#define NRFX_USBD_ISOSIZE 1023
 
 /**
  * @brief The size of internal feeder buffer.
