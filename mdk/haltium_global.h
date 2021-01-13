@@ -149,8 +149,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_P5_NS_BASE                    0x4F938A00UL
 #define NRF_P6_NS_BASE                    0x4F938C00UL
 #define NRF_P7_NS_BASE                    0x4F938E00UL
-#define NRF_P0_S_BASE                     0x5F938000UL
-#define NRF_P1_S_BASE                     0x5F938200UL
+#define NRF_P0_S_BASE                     0x5F938500UL
+#define NRF_P1_S_BASE                     0x5F938800UL
 #define NRF_P2_S_BASE                     0x5F938400UL
 #define NRF_P3_S_BASE                     0x5F938600UL
 #define NRF_P4_S_BASE                     0x5F938800UL
