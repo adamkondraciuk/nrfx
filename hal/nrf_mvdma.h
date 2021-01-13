@@ -390,6 +390,7 @@ NRF_STATIC_INLINE uint32_t nrf_mvdma_task_address_get(NRF_MVDMA_Type const * p_r
 NRF_STATIC_INLINE nrf_mvdma_task_t nrf_mvdma_start_task_get(NRF_MVDMA_Type const * p_reg,
                                                             uint8_t                index)
 {
+    (void)p_reg;
     return (nrf_mvdma_task_t)(NRFX_OFFSETOF(NRF_MVDMA_Type, TASKS_START[index]));
 }
 
@@ -517,7 +518,7 @@ NRF_STATIC_INLINE nrf_mvdma_source_error_t nrf_mvdma_source_error_get(NRF_MVDMA_
 
 NRF_STATIC_INLINE nrf_mvdma_sink_error_t nrf_mvdma_sink_error_get(NRF_MVDMA_Type const * p_reg)
 {
-    return (nrf_mvdma_source_error_t)(p_reg->STATUS.SINKBUSERROR);
+    return (nrf_mvdma_sink_error_t)(p_reg->STATUS.SINKBUSERROR);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mvdma_last_source_address_get(NRF_MVDMA_Type const * p_reg)
