@@ -9,4 +9,8 @@
 #include <hal/nrf_common.h>
 #include <drivers/nrfx_errors.h>
 
+#if NRFX_CHECK(NRFX_PM_ENABLED)
+#include <helpers/include/nrfx_pm.h>
+#endif
+
 #endif // NRFX_H__

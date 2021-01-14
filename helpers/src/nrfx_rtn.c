@@ -39,7 +39,7 @@ void nrfx_rtn_backup(void const *                 p_reg,
         p_regs_addr = (uint32_t)p_reg + p_ctrl_list[i].offset;
         for (elem_in_off = 0; elem_in_off < p_ctrl_list[i].number; ++elem_in_off)
         {
-            NRFX_LOG_DEBUG("Backup 0x%08x at address 0x%08x",
+            NRFX_LOG_DEBUG("Backup 0x%08x at address %p",
                            *(volatile uint32_t *)(p_regs_addr + (elem_in_off * sizeof(uint32_t))),
                            &p_dest_u32[dest_off]);
             p_dest_u32[dest_off++] =
@@ -62,7 +62,7 @@ void nrfx_rtn_restore(void *                       p_reg,
         p_regs_addr = (uint32_t)p_reg + p_ctrl_list[i].offset;
         for (elem_in_off = 0; elem_in_off < p_ctrl_list[i].number; ++elem_in_off)
         {
-            NRFX_LOG_DEBUG("Restore 0x%08x at address 0x%08x",
+            NRFX_LOG_DEBUG("Restore 0x%08x at address %p",
                            p_src_u32[dest_off],
                            (volatile uint32_t *)(p_regs_addr + (elem_in_off * sizeof(uint32_t))));
             *(volatile uint32_t *)(p_regs_addr + (elem_in_off * sizeof(uint32_t))) =
