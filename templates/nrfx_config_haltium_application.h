@@ -13,6 +13,38 @@
 
 // </e>
 
+// <e> NRFX_BELLBOARD_ENABLED - nrfx_bellbaord - BELLBOARD peripheral driver
+//==========================================================
+#ifndef NRFX_BELLBOARD_ENABLED
+#define NRFX_BELLBOARD_ENABLED 0
+#endif
+
+// <q> NRFX_BELLBOARD0_ENABLED  - Enable BELLBOARD0 instance.
+
+#ifndef NRFX_BELLBOARD0_ENABLED
+#define NRFX_BELLBOARD0_ENABLED 0
+#endif
+
+// <q> NRFX_BELLBOARD1_ENABLED  - Enable BELLBOARD1 instance.
+
+#ifndef NRFX_BELLBOARD1_ENABLED
+#define NRFX_BELLBOARD1_ENABLED 0
+#endif
+
+// <q> NRFX_BELLBOARD2_ENABLED  - Enable BELLBOARD2 instance.
+
+#ifndef NRFX_BELLBOARD2_ENABLED
+#define NRFX_BELLBOARD2_ENABLED 0
+#endif
+
+// <q> NRFX_BELLBOARD3_ENABLED  - Enable BELLBOARD3 instance.
+
+#ifndef NRFX_BELLBOARD3_ENABLED
+#define NRFX_BELLBOARD3_ENABLED 0
+#endif
+
+// </e>
+
 // <e> NRFX_WDT_ENABLED - nrfx_wdt - WDT peripheral driver.
 //==========================================================
 #ifndef NRFX_WDT_ENABLED

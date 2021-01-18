@@ -36,6 +36,18 @@ extern "C" {
 // WDT1_IRQn
 #define nrfx_wdt_1_irq_handler        WDT1_IRQHandler
 
+// BELLBOARD0_IRQn
+#define nrfx_bellboard_0_irq_handler  BELLBOARD0_IRQHandler
+
+// BELLBOARD1_IRQn
+#define nrfx_bellboard_1_irq_handler  BELLBOARD1_IRQHandler
+
+// BELLBOARD2_IRQn
+#define nrfx_bellboard_2_irq_handler  BELLBOARD2_IRQHandler
+
+// BELLBOARD3_IRQn
+#define nrfx_bellboard_3_irq_handler  BELLBOARD3_IRQHandler
+
 // SPU2_IRQn
 
 // GENERIC6_IRQn
