@@ -420,13 +420,13 @@ void nrfx_clock_calibration_timer_stop(void)
 #endif
 }
 
-#if NRF_CLOCK_HAS_HFCLK_DIV || NRF_CLOCK_HAS_HFCLK192M
+#if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M
 nrfx_err_t nrfx_clock_divider_set(nrf_clock_domain_t domain,
                                   nrf_clock_hfclk_div_t div)
 {
     switch(domain)
     {
-#if NRF_CLOCK_HAS_HFCLK_DIV
+#if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT)
         case NRF_CLOCK_DOMAIN_HFCLK:
             switch (div)
             {
