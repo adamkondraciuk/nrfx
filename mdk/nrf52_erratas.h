@@ -3,7 +3,7 @@
 
 /*
 
-Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -4471,9 +4471,9 @@ static bool nrf52_errata_87(void)
                     case 0x01ul:
                         return true;
                     case 0x02ul:
-                        return true;
+                        return false;
                     default:
-                        return true;
+                        return false;
                 }
             }
         #endif

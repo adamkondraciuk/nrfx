@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   37 
+#define MDK_MINOR_VERSION   38 
 #define MDK_MICRO_VERSION   0 
 
    
@@ -176,9 +176,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_APPLICATION)
         #include "nrf5340_application.h"
         #include "nrf5340_application_bitfields.h"
+        #include "nrf5340_application_name_change.h"
     #elif defined (NRF_NETWORK)
         #include "nrf5340_network.h"
         #include "nrf5340_network_bitfields.h"
+        #include "nrf5340_network_name_change.h"
     #endif
 
 #elif defined (NRF9160_XXAA)

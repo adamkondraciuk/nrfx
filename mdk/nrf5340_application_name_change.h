@@ -39,27 +39,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef NRF9160_NAME_CHANGE_H
-#define NRF9160_NAME_CHANGE_H
+#ifndef NRF5340_APPLICATION_NAME_CHANGE_H
+#define NRF5340_APPLICATION_NAME_CHANGE_H
 
 /*lint ++flb "Enter library region */
 
-/* This file is given to prevent your SW from not compiling with the updates made to nrf9160.h and 
- * nrf9160_bitfields.h. The macros defined in this file were available previously. Do not use these
- * macros on purpose. Use the ones defined in nrf9160.h and nrf9160_bitfields.h instead.
+/* This file is given to prevent your SW from not compiling with the updates made to nrf5340_application.h and
+ * nrf5340_application_bitfields.h. The macros defined in this file were available previously. Do not use these
+ * macros on purpose. Use the ones defined in nrf5340_application.h and nrf5340_application_bitfields.h instead.
  */
  
- /* SAADC enums */
- /* Changes to enum names in SAADC */
- #define SAADC_CH_PSELP_PSELP_VDD       SAADC_CH_PSELP_PSELP_VDDGPIO
- #define SAADC_CH_PSELP_PSELN_VDD       SAADC_CH_PSELP_PSELN_VDDGPIO
- 
- /* CTRLAP PERI Fields */
- #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Pos       CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Pos     
- #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Msk       CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Msk     
- #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Unlocked  CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Unlocked
- #define CTRLAPPERI_ERASEPROTECT_LOCK_ERASEPROTECTLOCK_Locked    CTRLAPPERI_ERASEPROTECT_LOCK_LOCK_Locked  
+/* The serial box interrupt ISRs were renamed. Adding old names as macros. */
+#define SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler          SERIAL0_IRQHandler
+#define SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQn                SERIAL0_IRQn
+#define SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler          SERIAL1_IRQHandler
+#define SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQn                SERIAL1_IRQn
+#define SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler          SERIAL2_IRQHandler
+#define SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQn                SERIAL2_IRQn
+#define SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler          SERIAL3_IRQHandler
+#define SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQn                SERIAL3_IRQn
  
  /*lint --flb "Leave library region" */
 
-#endif /* NRF9160_NAME_CHANGE_H */
+#endif /* NRF5340_APPLICATION_NAME_CHANGE_H */
