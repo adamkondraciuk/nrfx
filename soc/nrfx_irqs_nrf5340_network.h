@@ -37,15 +37,15 @@ extern "C" {
 // IPC_IRQn
 #define nrfx_ipc_irq_handler        IPC_IRQHandler
 
-// SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQn
+// SERIAL0_IRQn
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
-#define nrfx_prs_box_0_irq_handler  SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
+#define nrfx_prs_box_0_irq_handler  SERIAL0_IRQHandler
 #else
-#define nrfx_spim_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_spis_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_twim_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_twis_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_uarte_0_irq_handler    SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
+#define nrfx_spim_0_irq_handler     SERIAL0_IRQHandler
+#define nrfx_spis_0_irq_handler     SERIAL0_IRQHandler
+#define nrfx_twim_0_irq_handler     SERIAL0_IRQHandler
+#define nrfx_twis_0_irq_handler     SERIAL0_IRQHandler
+#define nrfx_uarte_0_irq_handler    SERIAL0_IRQHandler
 #endif
 
 // EGU0_IRQn
