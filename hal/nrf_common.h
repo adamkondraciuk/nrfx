@@ -17,6 +17,18 @@ extern "C" {
 #define NRFX_CONFIG_API_VER_2_9 1
 #endif
 
+#if defined(__CM33_REV) || defined(__CM4_REV) || defined(__CM0_REV)
+#define ISA_ARM 1
+#elif defined(__VPR_REV)
+#define ISA_RISCV 1
+#else
+#error "Unsupported ISA"
+#endif
+
+#if defined(ISA_RISCV)
+#define RISCV_FENCE(p, s) __asm__ __volatile__ ("fence " #p "," #s : : : "memory")
+#endif
+
 #if defined(NRFX_CLZ)
 #define NRF_CLZ(value) NRFX_CLZ(value)
 #else
@@ -37,6 +49,27 @@ NRF_STATIC_INLINE void nrf_event_readback(void * p_event_reg)
     (void)*((volatile uint32_t *)(p_event_reg));
 #else
     (void)p_event_reg;
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_barrier_w(void)
+{
+#if defined(ISA_RISCV)
+    RISCV_FENCE(ow, ow);
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_barrier_r(void)
+{
+#if defined(ISA_RISCV)
+    RISCV_FENCE(ir, ir);
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_barrier_rw(void)
+{
+#if defined(ISA_RISCV)
+    RISCV_FENCE(iorw, iorw);
 #endif
 }
 
