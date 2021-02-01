@@ -31,9 +31,9 @@ typedef enum
     NRFX_RESET_REASON_RESETPIN_MASK  = RESET_RESETREAS_RESETPIN_Msk,
     /**< Reset from pin-reset detected. */
     NRFX_RESET_REASON_DOG0_MASK      = RESET_RESETREAS_DOG0_Msk,
-    /**< Reset from watchdog/application watchdong timer 0 detected. */
+    /**< Reset from watchdog/application watchdog timer 0 detected. */
     NRFX_RESET_REASON_DOG_MASK       = NRFX_RESET_REASON_DOG0_MASK,
-    /**< Reset from watchdog/application watchdong timer 0 detected. */
+    /**< Reset from watchdog/application watchdog timer 0 detected. */
     NRFX_RESET_REASON_CTRLAP_MASK    = RESET_RESETREAS_CTRLAP_Msk,
     /**< Reset from application CTRL-AP detected. */
     NRFX_RESETREAS_SREQ_MASK         = RESET_RESETREAS_SREQ_Msk,
