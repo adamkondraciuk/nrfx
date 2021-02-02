@@ -157,6 +157,9 @@ typedef struct
     bool            ss_active_high;
     uint8_t         ss_pin;
     uint8_t         orc;
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+    bool            mcusel;
+#endif
 
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     size_t          tx_length;
@@ -303,18 +306,49 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     {
         nrf_gpio_pin_set(p_config->sck_pin);
     }
+
+    nrf_gpio_pin_drive_t pin_drive;
+    // Configure pin drive - high drive for frequency of 32 MHz and more.
+#if defined(SPIM_FREQUENCY_FREQUENCY_M32)
+    pin_drive = (p_config->frequency >= NRF_SPIM_FREQ_32M) ?
+                NRF_GPIO_PIN_H0H1 : NRF_GPIO_PIN_S0S1;
+#else
+    pin_drive = NRF_GPIO_PIN_S0S1;
+#endif
+
+    // Configure MCU selection to Peripheral for frequency of 32 MHz and more.
+    // Note that only dedicated pins can be used for this case.
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+    if (pin_drive == NRF_GPIO_PIN_H0H1)
+    {
+        nrf_gpio_pin_mcu_select(p_config->sck_pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+        nrf_gpio_pin_mcu_select(p_config->mosi_pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+        nrf_gpio_pin_mcu_select(p_config->miso_pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+        nrf_gpio_pin_mcu_select(p_config->ss_pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
+        nrf_gpio_pin_mcu_select(p_config->dcx_pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+#endif
+        p_cb->mcusel = true;
+    }
+#endif
+
     nrf_gpio_cfg(p_config->sck_pin,
                  NRF_GPIO_PIN_DIR_OUTPUT,
                  NRF_GPIO_PIN_INPUT_CONNECT,
                  NRF_GPIO_PIN_NOPULL,
-                 NRF_GPIO_PIN_S0S1,
+                 pin_drive,
                  NRF_GPIO_PIN_NOSENSE);
     // - MOSI (optional) - output with initial value 0,
     if (p_config->mosi_pin != NRFX_SPIM_PIN_NOT_USED)
     {
         mosi_pin = p_config->mosi_pin;
         nrf_gpio_pin_clear(mosi_pin);
-        nrf_gpio_cfg_output(mosi_pin);
+        nrf_gpio_cfg(mosi_pin,
+                     NRF_GPIO_PIN_DIR_OUTPUT,
+                     NRF_GPIO_PIN_INPUT_DISCONNECT,
+                     NRF_GPIO_PIN_NOPULL,
+                     pin_drive,
+                     NRF_GPIO_PIN_NOSENSE);
     }
     else
     {
@@ -324,7 +358,12 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     if (p_config->miso_pin != NRFX_SPIM_PIN_NOT_USED)
     {
         miso_pin = p_config->miso_pin;
-        nrf_gpio_cfg_input(miso_pin, p_config->miso_pull);
+        nrf_gpio_cfg(miso_pin,
+                     NRF_GPIO_PIN_DIR_INPUT,
+                     NRF_GPIO_PIN_INPUT_CONNECT,
+                     p_config->miso_pull,
+                     pin_drive,
+                     NRF_GPIO_PIN_NOSENSE);
     }
     else
     {
@@ -346,7 +385,12 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
         {
             nrf_gpio_pin_set(p_config->ss_pin);
         }
-        nrf_gpio_cfg_output(p_config->ss_pin);
+        nrf_gpio_cfg(p_config->ss_pin,
+                     NRF_GPIO_PIN_DIR_OUTPUT,
+                     NRF_GPIO_PIN_INPUT_DISCONNECT,
+                     NRF_GPIO_PIN_NOPULL,
+                     pin_drive,
+                     NRF_GPIO_PIN_NOSENSE);
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
         if (p_config->use_hw_ss)
         {
@@ -367,6 +411,12 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     {
         nrf_gpio_pin_set(p_config->dcx_pin);
         nrf_gpio_cfg_output(p_config->dcx_pin);
+        nrf_gpio_cfg(p_config->dcx_pin,
+                     NRF_GPIO_PIN_DIR_OUTPUT,
+                     NRF_GPIO_PIN_INPUT_DISCONNECT,
+                     NRF_GPIO_PIN_NOPULL,
+                     pin_drive,
+                     NRF_GPIO_PIN_NOSENSE);
         nrf_spim_dcx_pin_set(p_spim, p_config->dcx_pin);
     }
 
@@ -398,6 +448,25 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     return err_code;
 }
 
+static void spim_pin_uninit(uint32_t pin, spim_control_block_t * p_cb)
+{
+    if (pin == NRF_SPIM_PIN_NOT_CONNECTED)
+    {
+        return;
+    }
+
+    nrf_gpio_cfg_default(pin);
+
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+    if (p_cb->mcusel)
+    {
+        nrf_gpio_pin_mcu_select(pin, NRF_GPIO_PIN_MCUSEL_APP);
+    }
+#else
+    (void)p_cb;
+#endif
+}
+
 void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -417,31 +486,16 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 
     nrf_spim_disable(p_spim);
 
-    nrf_gpio_cfg_default(nrf_spim_sck_pin_get(p_spim));
-
-    uint32_t miso_pin = nrf_spim_miso_pin_get(p_spim);
-    if (miso_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-    {
-        nrf_gpio_cfg_default(miso_pin);
-    }
-
-    uint32_t mosi_pin = nrf_spim_mosi_pin_get(p_spim);
-    if (mosi_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-    {
-        nrf_gpio_cfg_default(mosi_pin);
-    }
-
-    if (p_cb->ss_pin != NRFX_SPIM_PIN_NOT_USED)
-    {
-        nrf_gpio_cfg_default(p_cb->ss_pin);
-    }
-
+    spim_pin_uninit(nrf_spim_sck_pin_get(p_spim), p_cb);
+    spim_pin_uninit(nrf_spim_miso_pin_get(p_spim), p_cb);
+    spim_pin_uninit(nrf_spim_mosi_pin_get(p_spim), p_cb);
+    spim_pin_uninit(p_cb->ss_pin, p_cb);
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-    uint32_t dcx_pin = nrf_spim_dcx_pin_get(p_spim);
-    if (dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-    {
-        nrf_gpio_cfg_default(dcx_pin);
-    }
+    spim_pin_uninit(nrf_spim_dcx_pin_get(p_spim), p_cb);
+#endif
+
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+    p_cb->mcusel = false;
 #endif
 
 #ifdef USE_WORKAROUND_FOR_ANOMALY_195
