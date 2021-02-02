@@ -5,6 +5,7 @@
 #if NRFX_CHECK(NRFX_QSPI_ENABLED)
 
 #include <nrfx_qspi.h>
+#include <hal/nrf_gpio.h>
 
 /** @brief Command byte used to read status register. */
 #define QSPI_STD_CMD_RDSR 0x05
@@ -55,6 +56,20 @@ static nrfx_err_t qspi_task_perform(nrf_qspi_task_t task)
     return NRFX_SUCCESS;
 }
 
+static void qspi_pin_configure(uint8_t pin)
+{
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
+    nrf_gpio_pin_mcu_select(pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
+#endif
+
+    nrf_gpio_cfg(pin,
+                 NRF_GPIO_PIN_DIR_INPUT,
+                 NRF_GPIO_PIN_INPUT_DISCONNECT,
+                 NRF_GPIO_PIN_NOPULL,
+                 NRF_GPIO_PIN_H0H1,
+                 NRF_GPIO_PIN_NOSENSE);
+}
+
 static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
 {
     // Check if the user set meaningful values to struct fields. If not, return false.
@@ -64,6 +79,19 @@ static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
         (p_config->io1_pin == NRF_QSPI_PIN_NOT_CONNECTED))
     {
         return false;
+    }
+
+    qspi_pin_configure(p_config->sck_pin);
+    qspi_pin_configure(p_config->csn_pin);
+    qspi_pin_configure(p_config->io0_pin);
+    qspi_pin_configure(p_config->io1_pin);
+    if (p_config->io2_pin != NRF_QSPI_PIN_NOT_CONNECTED)
+    {
+        qspi_pin_configure(p_config->io2_pin);
+    }
+    if (p_config->io3_pin != NRF_QSPI_PIN_NOT_CONNECTED)
+    {
+        qspi_pin_configure(p_config->io3_pin);
     }
 
     nrf_qspi_pins_set(NRF_QSPI, p_config);
