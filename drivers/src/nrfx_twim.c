@@ -43,11 +43,11 @@
     (type == NRFX_TWIM_XFER_TXTX ? "XFER_TXTX" : \
                                    "UNKNOWN TRANSFER TYPE"))))
 
-#define TWIM_PIN_INIT(_pin) nrf_gpio_cfg((_pin),                     \
+#define TWIM_PIN_INIT(_pin, _drive) nrf_gpio_cfg((_pin),             \
                                          NRF_GPIO_PIN_DIR_INPUT,     \
                                          NRF_GPIO_PIN_INPUT_CONNECT, \
                                          NRF_GPIO_PIN_PULLUP,        \
-                                         NRF_GPIO_PIN_S0D1,          \
+                                         (_drive),                   \
                                          NRF_GPIO_PIN_NOSENSE)
 
 #define TWIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, len1, len2)     \
@@ -240,12 +240,20 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->frequency;
 #endif
 
+    nrf_gpio_pin_drive_t drive;
+#if defined(TWIM_FREQUENCY_FREQUENCY_K1000) && defined(GPIO_PIN_CNF_DRIVE_E0E1)
+    /* When using 1 Mbps mode, two high-speed pins have to be used with extra high drive. */
+    drive = (p_config->frequency >= NRF_TWIM_FREQ_1000K) ? NRF_GPIO_PIN_E0E1 : NRF_GPIO_PIN_S0D1;
+#else
+    drive = NRF_GPIO_PIN_S0D1;
+#endif
+
     /* To secure correct signal levels on the pins used by the TWI
        master when the system is in OFF mode, and when the TWI master is
        disabled, these pins must be configured in the GPIO peripheral.
     */
-    TWIM_PIN_INIT(p_config->scl);
-    TWIM_PIN_INIT(p_config->sda);
+    TWIM_PIN_INIT(p_config->scl, drive);
+    TWIM_PIN_INIT(p_config->sda, drive);
 
     NRF_TWIM_Type * p_twim = p_instance->p_twim;
     nrf_twim_pins_set(p_twim, p_config->scl, p_config->sda);
@@ -486,7 +494,7 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             p_twim->FREQUENCY = 0;
             nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
             nrf_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
-        } 
+        }
         else
         {
             nrf_twim_frequency_set(p_twim, p_cb->bus_frequency);
