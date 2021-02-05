@@ -1990,7 +1990,11 @@ NRF_STATIC_INLINE void nrf_radio_dfe_buffer_set(NRF_RADIO_Type * p_reg,
                                                 size_t           length)
 {
     p_reg->DFEPACKET.PTR    = (uint32_t)p_buffer;
+#if defined(RADIO_DFEPACKET_MAX_MAX_Msk)
+    p_reg->DFEPACKET.MAX    = length;
+#else
     p_reg->DFEPACKET.MAXCNT = length;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_radio_dfe_amount_get(NRF_RADIO_Type const * p_reg)
