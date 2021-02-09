@@ -29,6 +29,10 @@ extern "C" {
 #define RISCV_FENCE(p, s) __asm__ __volatile__ ("fence " #p "," #s : : : "memory")
 #endif
 
+#if defined(HALTIUM_XXAA)
+typedef NRF_DOMAINS_t nrf_domain_t;
+#endif
+
 #if defined(NRFX_CLZ)
 #define NRF_CLZ(value) NRFX_CLZ(value)
 #else
