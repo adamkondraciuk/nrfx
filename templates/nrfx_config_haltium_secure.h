@@ -1,0 +1,10 @@
+/*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
+
+#ifndef NRFX_CONFIG_HALTIUM_SECURE_H__
+#define NRFX_CONFIG_HALTIUM_SECURE_H__
+
+// <h> nRF_Drivers
+
+// </h>
+
+#endif // NRFX_CONFIG_HALTIUM_SECURE_H__
