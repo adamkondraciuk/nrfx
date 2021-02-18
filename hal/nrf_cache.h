@@ -16,6 +16,13 @@ extern "C" {
  * @brief   The hardware access layer for managing the CACHE peripheral.
  */
 
+#if defined(CACHEDATA_SET_WAY_DATA0_Data_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the CACHEDATA feature. */
+#define NRF_CACHE_HAS_CACHEDATA 1
+#else
+#define NRF_CACHE_HAS_CACHEDATA 0
+#endif
+
 /** @brief Cache regions. */
 typedef enum
 {
@@ -183,6 +190,7 @@ NRF_STATIC_INLINE void nrf_cache_read_lock_enable(NRF_CACHE_Type * p_reg);
  */
 NRF_STATIC_INLINE void nrf_cache_update_lock_set(NRF_CACHE_Type * p_reg, bool enable);
 
+#if NRF_CACHE_HAS_CACHEDATA
 /**
  * @brief Function for getting the cache data word.
  *
@@ -199,6 +207,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
                                               uint32_t                   set,
                                               uint8_t                    way,
                                               uint8_t                    word);
+#endif
 
 /**
  * @brief Function for getting the tag associated with the specified set and way.
@@ -255,57 +264,117 @@ NRF_STATIC_INLINE void nrf_cache_disable(NRF_CACHE_Type * p_reg)
 
 NRF_STATIC_INLINE void nrf_cache_invalidate(NRF_CACHE_Type * p_reg)
 {
+#if defined(CACHE_INVALIDATE_INVALIDATE_Msk)
     p_reg->INVALIDATE = CACHE_INVALIDATE_INVALIDATE_Invalidate;
+#elif defined(CACHE_TASKS_INVALIDATECACHE_TASKS_INVALIDATECACHE_Msk)
+    /* TODO: Use task */
+    (void)p_reg;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_erase(NRF_CACHE_Type * p_reg)
 {
+#if defined(CACHE_ERASE_ERASE_Msk)
     p_reg->ERASE = CACHE_ERASE_ERASE_Erase;
+#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
+    /* TODO: Use task */
+    (void)p_reg;
+#endif
 }
 
 NRF_STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type const * p_reg)
 {
+#if defined(CACHE_ERASESTATUS_ERASESTATUS_Msk)
     return (bool)(p_reg->ERASESTATUS & CACHE_ERASESTATUS_ERASESTATUS_Msk);
+#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
+    /* TODO: Use task */
+    (void)p_reg;
+    return false;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_erase_status_clear(NRF_CACHE_Type * p_reg)
 {
+#if defined(CACHE_ERASESTATUS_ERASESTATUS_Msk)
     p_reg->ERASESTATUS = 0;
+#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
+    /* TODO: Use task */
+    (void)p_reg;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_profiling_set(NRF_CACHE_Type * p_reg, bool enable)
 {
+#if defined(CACHE_PROFILINGENABLE_ENABLE_Msk)
     p_reg->PROFILINGENABLE =
         (enable ? CACHE_PROFILINGENABLE_ENABLE_Enable : CACHE_PROFILINGENABLE_ENABLE_Disable);
+#elif defined(CACHE_PROFILING_ENABLE_ENABLE_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+    (void)enable;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_profiling_counters_clear(NRF_CACHE_Type * p_reg)
 {
+#if defined(CACHE_PROFILINGCLEAR_CLEAR_Msk)
     p_reg->PROFILINGCLEAR = (CACHE_PROFILINGCLEAR_CLEAR_Clear << CACHE_PROFILINGCLEAR_CLEAR_Pos);
+#elif defined(CACHE_PROFILING_CLEAR_CLEAR_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type const * p_reg,
                                                                  nrf_cache_region_t     region)
 {
+#if defined(CACHE_PROFILING_IHIT_HITS_Msk)
     return p_reg->PROFILING[region].IHIT;
+#elif defined(CACHE_PROFILING_HIT_HITS_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+    (void)region;
+    return 0;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type const * p_reg,
                                                                   nrf_cache_region_t     region)
 {
+#if defined(CACHE_PROFILING_IMISS_MISSES_Msk)
     return p_reg->PROFILING[region].IMISS;
+#elif defined(CACHE_PROFILING_MISS_MISSES_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+    (void)region;
+    return 0;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type const * p_reg,
                                                           nrf_cache_region_t     region)
 {
+#if defined(CACHE_PROFILING_DHIT_HITS_Msk)
     return p_reg->PROFILING[region].DHIT;
+#elif defined(CACHE_PROFILING_HIT_HITS_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+    (void)region;
+    return 0;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type const * p_reg,
                                                            nrf_cache_region_t     region)
 {
+#if defined(CACHE_PROFILING_DMISS_MISSES_Msk)
     return p_reg->PROFILING[region].DMISS;
+#elif defined(CACHE_PROFILING_MISS_MISSES_Msk)
+    /* TODO: Use new register */
+    (void)p_reg;
+    (void)region;
+    return 0;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_ram_mode_set(NRF_CACHE_Type * p_reg, bool enable)
@@ -324,6 +393,7 @@ NRF_STATIC_INLINE void nrf_cache_update_lock_set(NRF_CACHE_Type * p_reg, bool en
         (enable ? CACHE_WRITELOCK_WRITELOCK_Locked : CACHE_WRITELOCK_WRITELOCK_Unlocked);
 }
 
+#if NRF_CACHE_HAS_CACHEDATA
 NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
                                               uint32_t                   set,
                                               uint8_t                    way,
@@ -341,6 +411,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
             return 0;
     }
 }
+#endif
 
 NRF_STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
                                              uint32_t                   set,
