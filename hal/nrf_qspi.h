@@ -477,6 +477,24 @@ NRF_STATIC_INLINE void nrf_qspi_erase_ptr_set(NRF_QSPI_Type *      p_reg,
                                               nrf_qspi_erase_len_t len);
 
 /**
+ * @brief Function for getting the currently configured erase pointer.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Erase pointer.
+ */
+NRF_STATIC_INLINE uint32_t nrf_qspi_erase_ptr_get(NRF_QSPI_Type const * p_reg);
+
+/**
+ * @brief Function for getting the currently configured erase length.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Erase length.
+ */
+NRF_STATIC_INLINE nrf_qspi_erase_len_t nrf_qspi_erase_len_get(NRF_QSPI_Type const * p_reg);
+
+/**
  * @brief Function for getting the peripheral status register.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -789,6 +807,16 @@ NRF_STATIC_INLINE void nrf_qspi_erase_ptr_set(NRF_QSPI_Type *      p_reg,
 {
     p_reg->ERASE.PTR = erase_addr;
     p_reg->ERASE.LEN = len;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_qspi_erase_ptr_get(NRF_QSPI_Type const * p_reg)
+{
+    return p_reg->ERASE.PTR;
+}
+
+NRF_STATIC_INLINE nrf_qspi_erase_len_t nrf_qspi_erase_len_get(NRF_QSPI_Type const * p_reg)
+{
+    return (nrf_qspi_erase_len_t)p_reg->ERASE.LEN;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_qspi_status_reg_get(NRF_QSPI_Type const * p_reg)
