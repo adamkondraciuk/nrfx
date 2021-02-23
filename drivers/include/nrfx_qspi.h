@@ -95,6 +95,44 @@ typedef enum
     NRFX_QSPI_EVENT_DONE, /**< Transfer done. */
 } nrfx_qspi_evt_t;
 
+/**
+ * @brief QSPI master driver extended event types,
+ *        obtained using @ref nrfx_qspi_event_extended_get() function.
+ */
+typedef enum
+{
+    NRFX_QSPI_EVENT_NONE,       /**< No event occurence. */
+    NRFX_QSPI_EVENT_WRITE_DONE, /**< Write done. */
+    NRFX_QSPI_EVENT_READ_DONE,  /**< Read done. */
+    NRFX_QSPI_EVENT_ERASE_DONE, /**< Erase done. */
+} nrfx_qspi_evt_ext_type_t;
+
+/** @brief QSPI driver erase event data. */
+typedef struct
+{
+    uint32_t             addr; /**< Erase start address. */
+    nrf_qspi_erase_len_t len;  /**< Erase length. */
+} nrfx_qspi_evt_ext_erase_t;
+
+/** @brief QSPI driver transfer event data. */
+typedef struct
+{
+    void *   p_buffer; /**< Pointer to the data buffer associated with transfer. */
+    size_t   size;     /**< Data buffer size. */
+    uint32_t addr;     /**< Transfer start address. */
+} nrfx_qspi_evt_ext_xfer_t;
+
+/** @brief QSPI driver extended event structure. */
+typedef struct
+{
+    nrfx_qspi_evt_ext_type_t type;       ///< Extended event type.
+    union
+    {
+        nrfx_qspi_evt_ext_xfer_t  xfer;  ///< Data for write or read transfer event.
+        nrfx_qspi_evt_ext_erase_t erase; ///< Data for erase event.
+    } data;                              ///< Union to store event data.
+} nrfx_qspi_evt_ext_t;
+
 /** @brief QSPI driver event handler type. */
 typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
 
@@ -143,6 +181,9 @@ void nrfx_qspi_uninit(void);
  *    until the operation data is being read.
  *  - interrupt mode (with handler) - event emission occurs after the last operation
  *    and reading of data are finished.
+ * In interrupt mode read operations can be double-buffered by calling the function again.
+ * To utilize double-buffering feature, @ref NRF_QSPI_TASK_READSTART needs to be triggered
+ * on @ref NRF_QSPI_EVENT_READY externally (for example by using the PPI/DPPI).
  *
  * @param[out] p_rx_buffer      Pointer to the receive buffer.
  * @param[in]  rx_buffer_length Size of the data to read.
@@ -169,8 +210,11 @@ nrfx_err_t nrfx_qspi_read(void *   p_rx_buffer,
  *    and sending of operation data are finished.
  * To manually control operation execution in the memory device, use @ref nrfx_qspi_mem_busy_check
  * after executing the write function.
- * Remember that an incoming event signalizes only that data was sent to the memory device and the periheral
+ * Remember that an incoming event signalizes only that data was sent to the memory device and the peripheral
  * before the write operation checked if memory was busy.
+ * In interrupt mode write operations can be double-buffered by calling the function again.
+ * To utilize double-buffering feature, @ref NRF_QSPI_TASK_WRITESTART needs to be triggered
+ * on @ref NRF_QSPI_EVENT_READY externally (for example by using the PPI/DPPI).
  *
  * @param[in] p_tx_buffer      Pointer to the writing buffer.
  * @param[in] tx_buffer_length Size of the data to write.
@@ -220,6 +264,23 @@ nrfx_err_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
  * @retval NRFX_ERROR_BUSY The driver currently handles another operation.
  */
 nrfx_err_t nrfx_qspi_chip_erase(void);
+
+/**
+ * @brief Function for getting the extended event associated with finished operation.
+ *
+ * @warning This function shall be used only in the context of event handler
+            passed by the user during driver initialization.
+ *
+ * @return Pointer to the extended event associated with finished operation.
+ */
+nrfx_qspi_evt_ext_t const * nrfx_qspi_event_extended_get(void);
+
+/**
+ * @brief Function for checking whether any write or read data transfer is buffered.
+ *
+ * @return True if there is a transfer buffered, false otherwise.
+ */
+bool nrfx_qspi_xfer_buffered_check(void);
 
 /**
  * @brief Function for getting the current driver status and status byte of memory device with
