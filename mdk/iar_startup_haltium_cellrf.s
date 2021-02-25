@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2020 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2021 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -117,102 +117,6 @@ __vector_table
         DCD     IPCT2_IRQHandler
         DCD     IPCT3_IRQHandler
         DCD     IPCT4_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     RAMCTX_IRQHandler
-        DCD     RAMCRX_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
 
 __Vectors_End
 __Vectors                           EQU   __vector_table
@@ -400,16 +304,6 @@ IPCT3_IRQHandler
         PUBWEAK  IPCT4_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 IPCT4_IRQHandler
-        B .
-
-        PUBWEAK  RAMCTX_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-RAMCTX_IRQHandler
-        B .
-
-        PUBWEAK  RAMCRX_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-RAMCRX_IRQHandler
         B .
 
         END

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -42,7 +42,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef _CORE_VPR_H
 #define _CORE_VPR_H
 
-#include <stdint.h>
+#ifndef __ASSEMBLY__
+    #include <stdint.h>
+#endif
+
 #include "riscv_encoding.h"
 
 /* =========================================================================================================================== */

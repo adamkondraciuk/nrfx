@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2020 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2021 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -191,26 +191,26 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GPIOTE00_IRQHandler
-        DCD     GPIOTE01_IRQHandler
-        DCD     GPIOTE10_IRQHandler
-        DCD     GPIOTE11_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     GPIOTE1300_IRQHandler
+        DCD     GPIOTE1301_IRQHandler
+        DCD     GPIOTE1310_IRQHandler
+        DCD     GPIOTE1311_IRQHandler
+        DCD     GRTC0_IRQHandler
+        DCD     GRTC1_IRQHandler
+        DCD     GRTC2_IRQHandler
+        DCD     GRTC3_IRQHandler
+        DCD     GRTC4_IRQHandler
+        DCD     GRTC5_IRQHandler
+        DCD     GRTC6_IRQHandler
+        DCD     GRTC7_IRQHandler
+        DCD     GRTC8_IRQHandler
+        DCD     GRTC9_IRQHandler
+        DCD     GRTC10_IRQHandler
+        DCD     GRTC11_IRQHandler
+        DCD     GRTC12_IRQHandler
+        DCD     GRTC13_IRQHandler
+        DCD     GRTC14_IRQHandler
+        DCD     GRTC15_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -296,10 +296,11 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GIPCT00_IRQHandler
+        DCD     IPCT1200_IRQHandler
         DCD     0                         ; Reserved
-        DCD     I3C0_IRQHandler
-        DCD     I3C1_IRQHandler
+        DCD     I3C120_IRQHandler
+        DCD     I3C121_IRQHandler
+        DCD     CAN_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -312,13 +313,15 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     TIMER120_IRQHandler
+        DCD     TIMER121_IRQHandler
+        DCD     PWM120_IRQHandler
+        DCD     SPIS120_IRQHandler
+        DCD     SPIM120_IRQHandler
+        DCD     SPIM121_IRQHandler
+        DCD     TWIM120_IRQHandler
         DCD     0                         ; Reserved
-        DCD     GTIMER0_IRQHandler
-        DCD     GTIMER1_IRQHandler
-        DCD     PWM0_IRQHandler
         DCD     0                         ; Reserved
-        DCD     HSSPIM0_IRQHandler
-        DCD     HSSPIM1_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -373,22 +376,19 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     IPCT1300_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GIPCT10_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     RTC130_IRQHandler
+        DCD     RTC131_IRQHandler
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     GRTC0_IRQHandler
-        DCD     GRTC1_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     GWDT1_IRQHandler
-        DCD     GWDT2_IRQHandler
-        DCD     0                         ; Reserved
+        DCD     WDT131_IRQHandler
+        DCD     WDT132_IRQHandler
+        DCD     EGU130_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -489,13 +489,13 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     I2S_IRQHandler
+        DCD     I2S130_IRQHandler
         DCD     PDM_IRQHandler
-        DCD     QDEC0_IRQHandler
-        DCD     QDEC1_IRQHandler
+        DCD     QDEC130_IRQHandler
+        DCD     QDEC131_IRQHandler
         DCD     SIMIF_IRQHandler
-        DCD     GMIPIRFFE_IRQHandler
-        DCD     TWIM8_IRQHandler
+        DCD     I2S131_IRQHandler
+        DCD     MIPIRFFE_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -505,9 +505,9 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GTIMER2_IRQHandler
-        DCD     GTIMER3_IRQHandler
-        DCD     PWM1_IRQHandler
+        DCD     TIMER130_IRQHandler
+        DCD     TIMER131_IRQHandler
+        DCD     PWM130_IRQHandler
         DCD     SERIAL0_IRQHandler
         DCD     SERIAL1_IRQHandler
         DCD     0                         ; Reserved
@@ -521,9 +521,9 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GTIMER4_IRQHandler
-        DCD     GTIMER5_IRQHandler
-        DCD     PWM2_IRQHandler
+        DCD     TIMER132_IRQHandler
+        DCD     TIMER133_IRQHandler
+        DCD     PWM131_IRQHandler
         DCD     SERIAL2_IRQHandler
         DCD     SERIAL3_IRQHandler
         DCD     0                         ; Reserved
@@ -537,9 +537,9 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GTIMER6_IRQHandler
-        DCD     GTIMER7_IRQHandler
-        DCD     PWM3_IRQHandler
+        DCD     TIMER134_IRQHandler
+        DCD     TIMER135_IRQHandler
+        DCD     PWM132_IRQHandler
         DCD     SERIAL4_IRQHandler
         DCD     SERIAL5_IRQHandler
         DCD     0                         ; Reserved
@@ -553,9 +553,9 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     GTIMER8_IRQHandler
-        DCD     GTIMER9_IRQHandler
-        DCD     PWM4_IRQHandler
+        DCD     TIMER136_IRQHandler
+        DCD     TIMER137_IRQHandler
+        DCD     PWM133_IRQHandler
         DCD     SERIAL6_IRQHandler
         DCD     SERIAL7_IRQHandler
         DCD     0                         ; Reserved
@@ -642,74 +642,24 @@ CLICSoftware_Handler
 VPR_IRQHandler
         j .
 
-        PUBWEAK  GPIOTE00_IRQHandler
+        PUBWEAK  GPIOTE1300_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GPIOTE00_IRQHandler
+GPIOTE1300_IRQHandler
         j .
 
-        PUBWEAK  GPIOTE01_IRQHandler
+        PUBWEAK  GPIOTE1301_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GPIOTE01_IRQHandler
+GPIOTE1301_IRQHandler
         j .
 
-        PUBWEAK  GPIOTE10_IRQHandler
+        PUBWEAK  GPIOTE1310_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GPIOTE10_IRQHandler
+GPIOTE1310_IRQHandler
         j .
 
-        PUBWEAK  GPIOTE11_IRQHandler
+        PUBWEAK  GPIOTE1311_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GPIOTE11_IRQHandler
-        j .
-
-        PUBWEAK  USBHS_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-USBHS_IRQHandler
-        j .
-
-        PUBWEAK  GIPCT00_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GIPCT00_IRQHandler
-        j .
-
-        PUBWEAK  I3C0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-I3C0_IRQHandler
-        j .
-
-        PUBWEAK  I3C1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-I3C1_IRQHandler
-        j .
-
-        PUBWEAK  GTIMER0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER0_IRQHandler
-        j .
-
-        PUBWEAK  GTIMER1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER1_IRQHandler
-        j .
-
-        PUBWEAK  PWM0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-PWM0_IRQHandler
-        j .
-
-        PUBWEAK  HSSPIM0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-HSSPIM0_IRQHandler
-        j .
-
-        PUBWEAK  HSSPIM1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-HSSPIM1_IRQHandler
-        j .
-
-        PUBWEAK  GIPCT10_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GIPCT10_IRQHandler
+GPIOTE1311_IRQHandler
         j .
 
         PUBWEAK  GRTC0_IRQHandler
@@ -722,14 +672,164 @@ GRTC0_IRQHandler
 GRTC1_IRQHandler
         j .
 
-        PUBWEAK  GWDT1_IRQHandler
+        PUBWEAK  GRTC2_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GWDT1_IRQHandler
+GRTC2_IRQHandler
         j .
 
-        PUBWEAK  GWDT2_IRQHandler
+        PUBWEAK  GRTC3_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GWDT2_IRQHandler
+GRTC3_IRQHandler
+        j .
+
+        PUBWEAK  GRTC4_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC4_IRQHandler
+        j .
+
+        PUBWEAK  GRTC5_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC5_IRQHandler
+        j .
+
+        PUBWEAK  GRTC6_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC6_IRQHandler
+        j .
+
+        PUBWEAK  GRTC7_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC7_IRQHandler
+        j .
+
+        PUBWEAK  GRTC8_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC8_IRQHandler
+        j .
+
+        PUBWEAK  GRTC9_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC9_IRQHandler
+        j .
+
+        PUBWEAK  GRTC10_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC10_IRQHandler
+        j .
+
+        PUBWEAK  GRTC11_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC11_IRQHandler
+        j .
+
+        PUBWEAK  GRTC12_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC12_IRQHandler
+        j .
+
+        PUBWEAK  GRTC13_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC13_IRQHandler
+        j .
+
+        PUBWEAK  GRTC14_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC14_IRQHandler
+        j .
+
+        PUBWEAK  GRTC15_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GRTC15_IRQHandler
+        j .
+
+        PUBWEAK  USBHS_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+USBHS_IRQHandler
+        j .
+
+        PUBWEAK  IPCT1200_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+IPCT1200_IRQHandler
+        j .
+
+        PUBWEAK  I3C120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+I3C120_IRQHandler
+        j .
+
+        PUBWEAK  I3C121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+I3C121_IRQHandler
+        j .
+
+        PUBWEAK  CAN_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+CAN_IRQHandler
+        j .
+
+        PUBWEAK  TIMER120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+TIMER120_IRQHandler
+        j .
+
+        PUBWEAK  TIMER121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+TIMER121_IRQHandler
+        j .
+
+        PUBWEAK  PWM120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+PWM120_IRQHandler
+        j .
+
+        PUBWEAK  SPIS120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+SPIS120_IRQHandler
+        j .
+
+        PUBWEAK  SPIM120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+SPIM120_IRQHandler
+        j .
+
+        PUBWEAK  SPIM121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+SPIM121_IRQHandler
+        j .
+
+        PUBWEAK  TWIM120_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+TWIM120_IRQHandler
+        j .
+
+        PUBWEAK  IPCT1300_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+IPCT1300_IRQHandler
+        j .
+
+        PUBWEAK  RTC130_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+RTC130_IRQHandler
+        j .
+
+        PUBWEAK  RTC131_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+RTC131_IRQHandler
+        j .
+
+        PUBWEAK  WDT131_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+WDT131_IRQHandler
+        j .
+
+        PUBWEAK  WDT132_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+WDT132_IRQHandler
+        j .
+
+        PUBWEAK  EGU130_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+EGU130_IRQHandler
         j .
 
         PUBWEAK  SAADC_IRQHandler
@@ -752,9 +852,9 @@ TEMP_IRQHandler
 NFCT_IRQHandler
         j .
 
-        PUBWEAK  I2S_IRQHandler
+        PUBWEAK  I2S130_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-I2S_IRQHandler
+I2S130_IRQHandler
         j .
 
         PUBWEAK  PDM_IRQHandler
@@ -762,14 +862,14 @@ I2S_IRQHandler
 PDM_IRQHandler
         j .
 
-        PUBWEAK  QDEC0_IRQHandler
+        PUBWEAK  QDEC130_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-QDEC0_IRQHandler
+QDEC130_IRQHandler
         j .
 
-        PUBWEAK  QDEC1_IRQHandler
+        PUBWEAK  QDEC131_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-QDEC1_IRQHandler
+QDEC131_IRQHandler
         j .
 
         PUBWEAK  SIMIF_IRQHandler
@@ -777,29 +877,29 @@ QDEC1_IRQHandler
 SIMIF_IRQHandler
         j .
 
-        PUBWEAK  GMIPIRFFE_IRQHandler
+        PUBWEAK  I2S131_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GMIPIRFFE_IRQHandler
+I2S131_IRQHandler
         j .
 
-        PUBWEAK  TWIM8_IRQHandler
+        PUBWEAK  MIPIRFFE_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-TWIM8_IRQHandler
+MIPIRFFE_IRQHandler
         j .
 
-        PUBWEAK  GTIMER2_IRQHandler
+        PUBWEAK  TIMER130_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER2_IRQHandler
+TIMER130_IRQHandler
         j .
 
-        PUBWEAK  GTIMER3_IRQHandler
+        PUBWEAK  TIMER131_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER3_IRQHandler
+TIMER131_IRQHandler
         j .
 
-        PUBWEAK  PWM1_IRQHandler
+        PUBWEAK  PWM130_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-PWM1_IRQHandler
+PWM130_IRQHandler
         j .
 
         PUBWEAK  SERIAL0_IRQHandler
@@ -812,19 +912,19 @@ SERIAL0_IRQHandler
 SERIAL1_IRQHandler
         j .
 
-        PUBWEAK  GTIMER4_IRQHandler
+        PUBWEAK  TIMER132_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER4_IRQHandler
+TIMER132_IRQHandler
         j .
 
-        PUBWEAK  GTIMER5_IRQHandler
+        PUBWEAK  TIMER133_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER5_IRQHandler
+TIMER133_IRQHandler
         j .
 
-        PUBWEAK  PWM2_IRQHandler
+        PUBWEAK  PWM131_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-PWM2_IRQHandler
+PWM131_IRQHandler
         j .
 
         PUBWEAK  SERIAL2_IRQHandler
@@ -837,19 +937,19 @@ SERIAL2_IRQHandler
 SERIAL3_IRQHandler
         j .
 
-        PUBWEAK  GTIMER6_IRQHandler
+        PUBWEAK  TIMER134_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER6_IRQHandler
+TIMER134_IRQHandler
         j .
 
-        PUBWEAK  GTIMER7_IRQHandler
+        PUBWEAK  TIMER135_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER7_IRQHandler
+TIMER135_IRQHandler
         j .
 
-        PUBWEAK  PWM3_IRQHandler
+        PUBWEAK  PWM132_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-PWM3_IRQHandler
+PWM132_IRQHandler
         j .
 
         PUBWEAK  SERIAL4_IRQHandler
@@ -862,19 +962,19 @@ SERIAL4_IRQHandler
 SERIAL5_IRQHandler
         j .
 
-        PUBWEAK  GTIMER8_IRQHandler
+        PUBWEAK  TIMER136_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER8_IRQHandler
+TIMER136_IRQHandler
         j .
 
-        PUBWEAK  GTIMER9_IRQHandler
+        PUBWEAK  TIMER137_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GTIMER9_IRQHandler
+TIMER137_IRQHandler
         j .
 
-        PUBWEAK  PWM4_IRQHandler
+        PUBWEAK  PWM133_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-PWM4_IRQHandler
+PWM133_IRQHandler
         j .
 
         PUBWEAK  SERIAL6_IRQHandler

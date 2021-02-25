@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -123,6 +123,8 @@ typedef enum {
 
 /* ========================================= Start of section using anonymous unions ========================================= */
 
+#include "compiler_abstraction.h"
+
 #if defined (__CC_ARM)
   #pragma anon_unions
 #elif defined (__ICCARM__)
@@ -151,6 +153,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_PCGCS0_BASE            0x46000000UL
 #define NRF_CELLRF_TXDFE_BASE             0x46020000UL
 #define NRF_CELLRF_RAMCM0_BASE            0x46001000UL
 #define NRF_CELLRF_RFTIMERTX_BASE         0x46021000UL
@@ -158,8 +161,10 @@ typedef enum {
 #define NRF_CELLRF_EGUTX_BASE             0x46022000UL
 #define NRF_CELLRF_RAMCIPC_BASE           0x46003000UL
 #define NRF_CELLRF_RXDFE_BASE             0x46030000UL
+#define NRF_CELLRF_PCGCS1_BASE            0x46004000UL
 #define NRF_CELLRF_MUTEX_BASE             0x46005000UL
 #define NRF_CELLRF_RFTIMERRX_BASE         0x46032000UL
+#define NRF_CELLRF_PCGCM0_BASE            0x46006000UL
 #define NRF_CELLRF_EGURX_BASE             0x46033000UL
 #define NRF_CELLRF_LRCCONF0_BASE          0x46007000UL
 #define NRF_CELLRF_DSA2TX_BASE            0x46040000UL
@@ -171,6 +176,7 @@ typedef enum {
 #define NRF_CELLRF_RFTIMERSTC_BASE        0x46048000UL
 #define NRF_CELLRF_MIPIRFFE0_BASE         0x46049000UL
 #define NRF_CELLRF_MIPIRFFE1_BASE         0x4604A000UL
+#define NRF_CELLRF_PCGCM1_BASE            0x46010000UL
 #define NRF_CELLRF_RFSERVICES_BASE        0x46045000UL
 #define NRF_CELLRF_LRCCONF1_BASE          0x46011000UL
 #define NRF_CELLRF_RFCORESERVICES_BASE    0x46009000UL
@@ -183,6 +189,7 @@ typedef enum {
 #define NRF_CELLRF_DPPIC_BASE             0x46050000UL
 #define NRF_CELLRF_RAMCTX_BASE            0x46051000UL
 #define NRF_CELLRF_RAMCRX_BASE            0x46052000UL
+#define NRF_CELLRF_PCGCM2_BASE            0x46053000UL
 #define NRF_CELLRF_LRCCONF2_BASE          0x46054000UL
 #define NRF_CELLRF_GPIO_BASE              0x46055000UL
 
@@ -190,6 +197,7 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_PCGCS0                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS0_BASE)
 #define NRF_CELLRF_TXDFE                  ((NRF_TXDFE_Type*)                    NRF_CELLRF_TXDFE_BASE)
 #define NRF_CELLRF_RAMCM0                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCM0_BASE)
 #define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
@@ -197,8 +205,10 @@ typedef enum {
 #define NRF_CELLRF_EGUTX                  ((NRF_EGU_Type*)                      NRF_CELLRF_EGUTX_BASE)
 #define NRF_CELLRF_RAMCIPC                ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCIPC_BASE)
 #define NRF_CELLRF_RXDFE                  ((NRF_RXDFE_Type*)                    NRF_CELLRF_RXDFE_BASE)
+#define NRF_CELLRF_PCGCS1                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS1_BASE)
 #define NRF_CELLRF_MUTEX                  ((NRF_MUTEX_Type*)                    NRF_CELLRF_MUTEX_BASE)
 #define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
+#define NRF_CELLRF_PCGCM0                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM0_BASE)
 #define NRF_CELLRF_EGURX                  ((NRF_EGU_Type*)                      NRF_CELLRF_EGURX_BASE)
 #define NRF_CELLRF_LRCCONF0               ((NRF_LRCCONF_Type*)                  NRF_CELLRF_LRCCONF0_BASE)
 #define NRF_CELLRF_DSA2TX                 ((NRF_DSA2_Type*)                     NRF_CELLRF_DSA2TX_BASE)
@@ -210,6 +220,7 @@ typedef enum {
 #define NRF_CELLRF_RFTIMERSTC             ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERSTC_BASE)
 #define NRF_CELLRF_MIPIRFFE0              ((NRF_MIPIRFFE_Type*)                 NRF_CELLRF_MIPIRFFE0_BASE)
 #define NRF_CELLRF_MIPIRFFE1              ((NRF_MIPIRFFE_Type*)                 NRF_CELLRF_MIPIRFFE1_BASE)
+#define NRF_CELLRF_PCGCM1                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM1_BASE)
 #define NRF_CELLRF_RFSERVICES             ((NRF_RFSERVICES_Type*)               NRF_CELLRF_RFSERVICES_BASE)
 #define NRF_CELLRF_LRCCONF1               ((NRF_LRCCONF_Type*)                  NRF_CELLRF_LRCCONF1_BASE)
 #define NRF_CELLRF_RFCORESERVICES         ((NRF_RFCORESERVICES_Type*)           NRF_CELLRF_RFCORESERVICES_BASE)
@@ -222,6 +233,7 @@ typedef enum {
 #define NRF_CELLRF_DPPIC                  ((NRF_DPPIC_Type*)                    NRF_CELLRF_DPPIC_BASE)
 #define NRF_CELLRF_RAMCTX                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCTX_BASE)
 #define NRF_CELLRF_RAMCRX                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCRX_BASE)
+#define NRF_CELLRF_PCGCM2                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM2_BASE)
 #define NRF_CELLRF_LRCCONF2               ((NRF_LRCCONF_Type*)                  NRF_CELLRF_LRCCONF2_BASE)
 #define NRF_CELLRF_GPIO                   ((NRF_GPIO_Type*)                     NRF_CELLRF_GPIO_BASE)
 
@@ -230,6 +242,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_PCGCS0                              NRF_CELLRF_PCGCS0
   #define NRF_TXDFE                               NRF_CELLRF_TXDFE
   #define NRF_RAMCM0                              NRF_CELLRF_RAMCM0
   #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
@@ -237,8 +250,10 @@ typedef enum {
   #define NRF_EGUTX                               NRF_CELLRF_EGUTX
   #define NRF_RAMCIPC                             NRF_CELLRF_RAMCIPC
   #define NRF_RXDFE                               NRF_CELLRF_RXDFE
+  #define NRF_PCGCS1                              NRF_CELLRF_PCGCS1
   #define NRF_MUTEX                               NRF_CELLRF_MUTEX
   #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX
+  #define NRF_PCGCM0                              NRF_CELLRF_PCGCM0
   #define NRF_EGURX                               NRF_CELLRF_EGURX
   #define NRF_LRCCONF0                            NRF_CELLRF_LRCCONF0
   #define NRF_DSA2TX                              NRF_CELLRF_DSA2TX
@@ -250,6 +265,7 @@ typedef enum {
   #define NRF_RFTIMERSTC                          NRF_CELLRF_RFTIMERSTC
   #define NRF_MIPIRFFE0                           NRF_CELLRF_MIPIRFFE0
   #define NRF_MIPIRFFE1                           NRF_CELLRF_MIPIRFFE1
+  #define NRF_PCGCM1                              NRF_CELLRF_PCGCM1
   #define NRF_RFSERVICES                          NRF_CELLRF_RFSERVICES
   #define NRF_LRCCONF1                            NRF_CELLRF_LRCCONF1
   #define NRF_RFCORESERVICES                      NRF_CELLRF_RFCORESERVICES
@@ -262,6 +278,7 @@ typedef enum {
   #define NRF_DPPIC                               NRF_CELLRF_DPPIC
   #define NRF_RAMCTX                              NRF_CELLRF_RAMCTX
   #define NRF_RAMCRX                              NRF_CELLRF_RAMCRX
+  #define NRF_PCGCM2                              NRF_CELLRF_PCGCM2
   #define NRF_LRCCONF2                            NRF_CELLRF_LRCCONF2
   #define NRF_GPIO                                NRF_CELLRF_GPIO
 #endif                                               /*!< NRF_CELLRF                                                           */
@@ -272,7 +289,7 @@ typedef enum {
   #pragma pop
 #elif defined (__ICCARM__)
   /* leave anonymous unions enabled */
-#elif (__ARMCC_VERSION >= 6010050)
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
   #pragma clang diagnostic pop
 #elif defined (__GNUC__)
   /* anonymous unions are enabled by default */

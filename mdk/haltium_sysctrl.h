@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2020, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -67,101 +67,126 @@ typedef enum {
   MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
   CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  GPIOTE00_IRQn                          = 104,      /*!< 104 GPIOTE00                                                         */
-  GPIOTE01_IRQn                          = 105,      /*!< 105 GPIOTE01                                                         */
-  GPIOTE10_IRQn                          = 106,      /*!< 106 GPIOTE10                                                         */
-  GPIOTE11_IRQn                          = 107,      /*!< 107 GPIOTE11                                                         */
+  GPIOTE1300_IRQn                        = 104,      /*!< 104 GPIOTE1300                                                       */
+  GPIOTE1301_IRQn                        = 105,      /*!< 105 GPIOTE1301                                                       */
+  GPIOTE1310_IRQn                        = 106,      /*!< 106 GPIOTE1310                                                       */
+  GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
+  GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
+  GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
+  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
+  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
+  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
+  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
+  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
+  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
+  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
+  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
+  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
+  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
+  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
+  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
+  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
+  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   L2CACHE_IRQn                           = 130,      /*!< 130 L2CACHE                                                          */
-  GRAMC00_IRQn                           = 131,      /*!< 131 GRAMC00                                                          */
-  GRAMC01_IRQn                           = 132,      /*!< 132 GRAMC01                                                          */
-  AXI0_IRQn                              = 133,      /*!< 133 AXI0                                                             */
+  RAMC100_IRQn                           = 131,      /*!< 131 RAMC100                                                          */
+  RAMC101_IRQn                           = 132,      /*!< 132 RAMC101                                                          */
+  AXI100_IRQn                            = 133,      /*!< 133 AXI100                                                           */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   SHA3_IRQn                              = 136,      /*!< 136 SHA3                                                             */
-  MRAMC00_IRQn                           = 146,      /*!< 146 MRAMC00                                                          */
-  MRAMC01_IRQn                           = 147,      /*!< 147 MRAMC01                                                          */
+  RAMC102_IRQn                           = 138,      /*!< 138 RAMC102                                                          */
+  RAMC103_IRQn                           = 139,      /*!< 139 RAMC103                                                          */
+  MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
+  MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMEE_IRQn                             = 148,      /*!< 148 EXMEE                                                            */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  AXI1_IRQn                              = 150,      /*!< 150 AXI1                                                             */
+  AXI110_IRQn                            = 150,      /*!< 150 AXI110                                                           */
   MVDMA_IRQn                             = 151,      /*!< 151 MVDMA                                                            */
-  GRAMC10_IRQn                           = 195,      /*!< 195 GRAMC10                                                          */
-  GRAMC11_IRQn                           = 196,      /*!< 196 GRAMC11                                                          */
-  OTPC00_IRQn                            = 197,      /*!< 197 OTPC00                                                           */
-  GROMC00_IRQn                           = 198,      /*!< 198 GROMC00                                                          */
+  RAMC120_IRQn                           = 195,      /*!< 195 RAMC120                                                          */
+  RAMC121_IRQn                           = 196,      /*!< 196 RAMC121                                                          */
+  OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
+  ROMC_IRQn                              = 198,      /*!< 198 ROMC                                                             */
   VPR_IRQn                               = 200,      /*!< 200 VPR                                                              */
+  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
   HSFLL_IRQn                             = 205,      /*!< 205 HSFLL                                                            */
-  LRCCONF0_IRQn                          = 206,      /*!< 206 LRCCONF0                                                         */
-  GIPCT00_IRQn                           = 209,      /*!< 209 GIPCT00                                                          */
-  I3C0_IRQn                              = 211,      /*!< 211 I3C0                                                             */
-  I3C1_IRQn                              = 212,      /*!< 212 I3C1                                                             */
-  GTIMER0_IRQn                           = 226,      /*!< 226 GTIMER0                                                          */
-  GTIMER1_IRQn                           = 227,      /*!< 227 GTIMER1                                                          */
-  PWM0_IRQn                              = 228,      /*!< 228 PWM0                                                             */
-  HSSPIM0_IRQn                           = 230,      /*!< 230 HSSPIM0                                                          */
-  HSSPIM1_IRQn                           = 231,      /*!< 231 HSSPIM1                                                          */
-  GRAMC20_IRQn                           = 259,      /*!< 259 GRAMC20                                                          */
-  GRAMC21_IRQn                           = 260,      /*!< 260 GRAMC21                                                          */
-  GIPCT10_IRQn                           = 289,      /*!< 289 GIPCT10                                                          */
-  GRTC0_IRQn                             = 296,      /*!< 296 GRTC0                                                            */
-  GRTC1_IRQn                             = 297,      /*!< 297 GRTC1                                                            */
-  GWDT0_IRQn                             = 298,      /*!< 298 GWDT0                                                            */
-  GWDT1_IRQn                             = 299,      /*!< 299 GWDT1                                                            */
-  GWDT2_IRQn                             = 300,      /*!< 300 GWDT2                                                            */
-  LRCCONF1_IRQn                          = 318,      /*!< 318 LRCCONF1                                                         */
-  GRTC_IRQn                              = 320,      /*!< 320 GRTC                                                             */
-  GGENERIC13_IRQn                        = 322,      /*!< 322 GGENERIC13                                                       */
-  RESETHUB_IRQn                          = 323,      /*!< 323 RESETHUB                                                         */
-  GRCCONF_IRQn                           = 327,      /*!< 327 GRCCONF                                                          */
+  LRCCONF120_IRQn                        = 206,      /*!< 206 LRCCONF120                                                       */
+  IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
+  I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
+  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
+  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
+  TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
+  PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
+  SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
+  SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
+  SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
+  TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
+  RAMC130_IRQn                           = 259,      /*!< 259 RAMC130                                                          */
+  RAMC131_IRQn                           = 260,      /*!< 260 RAMC131                                                          */
+  IPCT1300_IRQn                          = 289,      /*!< 289 IPCT1300                                                         */
+  RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
+  RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
+  WDT130_IRQn                            = 298,      /*!< 298 WDT130                                                           */
+  WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
+  WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
+  EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
+  LRCCONF130_IRQn                        = 318,      /*!< 318 LRCCONF130                                                       */
+  GRCCONF_IRQn                           = 320,      /*!< 320 GRCCONF                                                          */
+  RESETHUB_IRQn                          = 322,      /*!< 322 RESETHUB                                                         */
+  GGENERIC13_IRQn                        = 328,      /*!< 328 GGENERIC13                                                       */
   CLOCK_IRQn                             = 336,      /*!< 336 CLOCK                                                            */
   LFRC_IRQn                              = 337,      /*!< 337 LFRC                                                             */
   GGENERIC18_IRQn                        = 338,      /*!< 338 GGENERIC18                                                       */
-  GGENERIC19_IRQn                        = 339,      /*!< 339 GGENERIC19                                                       */
+  LFXO_IRQn                              = 339,      /*!< 339 LFXO                                                             */
   GGENERIC20_IRQn                        = 341,      /*!< 341 GGENERIC20                                                       */
-  GGENERIC22_IRQn                        = 343,      /*!< 343 GGENERIC22                                                       */
+  AUDIOPLL_IRQn                          = 343,      /*!< 343 AUDIOPLL                                                         */
+  USBHSPLL_IRQn                          = 344,      /*!< 344 USBHSPLL                                                         */
   POWER_IRQn                             = 352,      /*!< 352 POWER                                                            */
+  VREGAO1V8_IRQn                         = 354,      /*!< 354 VREGAO1V8                                                        */
+  VREG1V0_IRQn                           = 355,      /*!< 355 VREG1V0                                                          */
+  VREGAO0V8_IRQn                         = 356,      /*!< 356 VREGAO0V8                                                        */
+  VREGVS0V8_IRQn                         = 357,      /*!< 357 VREGVS0V8                                                        */
   GGENERIC29_IRQn                        = 359,      /*!< 359 GGENERIC29                                                       */
   GGENERIC30_IRQn                        = 360,      /*!< 360 GGENERIC30                                                       */
-  VREGMRAM00_IRQn                        = 361,      /*!< 361 VREGMRAM00                                                       */
-  VREGMRAM01_IRQn                        = 362,      /*!< 362 VREGMRAM01                                                       */
-  MBIAS_IRQn                             = 368,      /*!< 368 MBIAS                                                            */
-  VDETAO1V8_IRQn                         = 369,      /*!< 369 VDETAO1V8                                                        */
-  VDETAO0V8_IRQn                         = 370,      /*!< 370 VDETAO0V8                                                        */
-  VDETVS0V8_IRQn                         = 371,      /*!< 371 VDETVS0V8                                                        */
-  GGENERIC36_IRQn                        = 372,      /*!< 372 GGENERIC36                                                       */
-  GGENERIC38_IRQn                        = 374,      /*!< 374 GGENERIC38                                                       */
-  GGENERIC39_IRQn                        = 375,      /*!< 375 GGENERIC39                                                       */
-  GGENERIC40_IRQn                        = 376,      /*!< 376 GGENERIC40                                                       */
-  GGENERIC41_IRQn                        = 377,      /*!< 377 GGENERIC41                                                       */
-  GGENERIC42_IRQn                        = 378,      /*!< 378 GGENERIC42                                                       */
+  VREGMRAM130_IRQn                       = 361,      /*!< 361 VREGMRAM130                                                      */
+  VREGMRAM131_IRQn                       = 362,      /*!< 362 VREGMRAM131                                                      */
+  MBIAS_IRQn                             = 365,      /*!< 365 MBIAS                                                            */
+  VDETAO1V8_IRQn                         = 368,      /*!< 368 VDETAO1V8                                                        */
+  VDETAO0V8_IRQn                         = 369,      /*!< 369 VDETAO0V8                                                        */
+  VDETVS0V8_IRQn                         = 370,      /*!< 370 VDETVS0V8                                                        */
+  GGENERIC36_IRQn                        = 371,      /*!< 371 GGENERIC36                                                       */
+  GGENERIC38_IRQn                        = 372,      /*!< 372 GGENERIC38                                                       */
+  GGENERIC41_IRQn                        = 373,      /*!< 373 GGENERIC41                                                       */
+  GGENERIC42_IRQn                        = 374,      /*!< 374 GGENERIC42                                                       */
   GGENERIC43_IRQn                        = 379,      /*!< 379 GGENERIC43                                                       */
   SAADC_IRQn                             = 386,      /*!< 386 SAADC                                                            */
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
   TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
   NFCT_IRQn                              = 389,      /*!< 389 NFCT                                                             */
-  I2S_IRQn                               = 402,      /*!< 402 I2S                                                              */
+  I2S130_IRQn                            = 402,      /*!< 402 I2S130                                                           */
   PDM_IRQn                               = 403,      /*!< 403 PDM                                                              */
-  QDEC0_IRQn                             = 404,      /*!< 404 QDEC0                                                            */
-  QDEC1_IRQn                             = 405,      /*!< 405 QDEC1                                                            */
+  QDEC130_IRQn                           = 404,      /*!< 404 QDEC130                                                          */
+  QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF_IRQn                             = 406,      /*!< 406 SIMIF                                                            */
-  GMIPIRFFE_IRQn                         = 407,      /*!< 407 GMIPIRFFE                                                        */
-  TWIM8_IRQn                             = 408,      /*!< 408 TWIM8                                                            */
-  GTIMER2_IRQn                           = 418,      /*!< 418 GTIMER2                                                          */
-  GTIMER3_IRQn                           = 419,      /*!< 419 GTIMER3                                                          */
-  PWM1_IRQn                              = 420,      /*!< 420 PWM1                                                             */
+  I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
+  MIPIRFFE_IRQn                          = 408,      /*!< 408 MIPIRFFE                                                         */
+  TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
+  TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
+  PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
   SERIAL0_IRQn                           = 421,      /*!< 421 SERIAL0                                                          */
   SERIAL1_IRQn                           = 422,      /*!< 422 SERIAL1                                                          */
-  GTIMER4_IRQn                           = 434,      /*!< 434 GTIMER4                                                          */
-  GTIMER5_IRQn                           = 435,      /*!< 435 GTIMER5                                                          */
-  PWM2_IRQn                              = 436,      /*!< 436 PWM2                                                             */
+  TIMER132_IRQn                          = 434,      /*!< 434 TIMER132                                                         */
+  TIMER133_IRQn                          = 435,      /*!< 435 TIMER133                                                         */
+  PWM131_IRQn                            = 436,      /*!< 436 PWM131                                                           */
   SERIAL2_IRQn                           = 437,      /*!< 437 SERIAL2                                                          */
   SERIAL3_IRQn                           = 438,      /*!< 438 SERIAL3                                                          */
-  GTIMER6_IRQn                           = 450,      /*!< 450 GTIMER6                                                          */
-  GTIMER7_IRQn                           = 451,      /*!< 451 GTIMER7                                                          */
-  PWM3_IRQn                              = 452,      /*!< 452 PWM3                                                             */
+  TIMER134_IRQn                          = 450,      /*!< 450 TIMER134                                                         */
+  TIMER135_IRQn                          = 451,      /*!< 451 TIMER135                                                         */
+  PWM132_IRQn                            = 452,      /*!< 452 PWM132                                                           */
   SERIAL4_IRQn                           = 453,      /*!< 453 SERIAL4                                                          */
   SERIAL5_IRQn                           = 454,      /*!< 454 SERIAL5                                                          */
-  GTIMER8_IRQn                           = 466,      /*!< 466 GTIMER8                                                          */
-  GTIMER9_IRQn                           = 467,      /*!< 467 GTIMER9                                                          */
-  PWM4_IRQn                              = 468,      /*!< 468 PWM4                                                             */
+  TIMER136_IRQn                          = 466,      /*!< 466 TIMER136                                                         */
+  TIMER137_IRQn                          = 467,      /*!< 467 TIMER137                                                         */
+  PWM133_IRQn                            = 468,      /*!< 468 PWM133                                                           */
   SERIAL6_IRQn                           = 469,      /*!< 469 SERIAL6                                                          */
   SERIAL7_IRQn                           = 470,      /*!< 470 SERIAL7                                                          */
 } IRQn_Type;
@@ -187,6 +212,8 @@ typedef enum {
 
 
 /* ========================================= Start of section using anonymous unions ========================================= */
+
+#include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
   #pragma anon_unions
@@ -220,57 +247,60 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEINFO_S_BASE    0x2F680000UL
 #define NRF_SYSCTRL_OICR_S_BASE           0x2F840000UL
 #define NRF_SYSCTRL_L2CACHE_S_BASE        0x5F082000UL
-#define NRF_SYSCTRL_GRAMC00_S_BASE        0x5F083000UL
-#define NRF_SYSCTRL_GRAMC01_S_BASE        0x5F084000UL
-#define NRF_SYSCTRL_AXI0_S_BASE           0x5F085000UL
-#define NRF_SYSCTRL_SHA3_NS_BASE          0x4F088000UL
+#define NRF_SYSCTRL_RAMC100_S_BASE        0x5F083000UL
+#define NRF_SYSCTRL_RAMC101_S_BASE        0x5F084000UL
+#define NRF_SYSCTRL_AXI100_S_BASE         0x5F085000UL
 #define NRF_SYSCTRL_SHA3_S_BASE           0x5F088000UL
-#define NRF_SYSCTRL_SHA3CORE_NS_BASE      0x4F089000UL
 #define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
-#define NRF_SYSCTRL_MRAMC00_S_BASE        0x5F092000UL
-#define NRF_SYSCTRL_MRAMC01_S_BASE        0x5F093000UL
+#define NRF_SYSCTRL_RAMC102_S_BASE        0x5F08A000UL
+#define NRF_SYSCTRL_RAMC103_S_BASE        0x5F08B000UL
+#define NRF_SYSCTRL_MRAMC110_S_BASE       0x5F092000UL
+#define NRF_SYSCTRL_MRAMC111_S_BASE       0x5F093000UL
 #define NRF_SYSCTRL_EXMEE_S_BASE          0x5F094000UL
 #define NRF_SYSCTRL_EXMIF_NS_BASE         0x4F095000UL
 #define NRF_SYSCTRL_EXMIF_S_BASE          0x5F095000UL
-#define NRF_SYSCTRL_AXI1_S_BASE           0x5F096000UL
+#define NRF_SYSCTRL_AXI110_S_BASE         0x5F096000UL
 #define NRF_SYSCTRL_MVDMA_S_BASE          0x5F097000UL
-#define NRF_SYSCTRL_GPPIB0_S_BASE         0x5F098000UL
-#define NRF_SYSCTRL_GAMBIX0_S_BASE        0x5F8C2000UL
-#define NRF_SYSCTRL_GRAMC10_S_BASE        0x5F8C3000UL
-#define NRF_SYSCTRL_GRAMC11_S_BASE        0x5F8C4000UL
-#define NRF_SYSCTRL_OTPC00_S_BASE         0x5F8C5000UL
-#define NRF_SYSCTRL_GROMC00_S_BASE        0x5F8C6000UL
-#define NRF_SYSCTRL_MEMCONF0_S_BASE       0x5F8C7000UL
+#define NRF_SYSCTRL_PPIB110_S_BASE        0x5F098000UL
+#define NRF_SYSCTRL_AMBIX120_S_BASE       0x5F8C2000UL
+#define NRF_SYSCTRL_RAMC120_S_BASE        0x5F8C3000UL
+#define NRF_SYSCTRL_RAMC121_S_BASE        0x5F8C4000UL
+#define NRF_SYSCTRL_OTPC_S_BASE           0x5F8C5000UL
+#define NRF_SYSCTRL_ROMC_S_BASE           0x5F8C6000UL
+#define NRF_SYSCTRL_MEMCONF120_S_BASE     0x5F8C7000UL
 #define NRF_SYSCTRL_VPR_S_BASE            0x5F8C8000UL
+#define NRF_SYSCTRL_CANPLL_NS_BASE        0x5F8CC000UL
+#define NRF_SYSCTRL_CANPLL_S_BASE         0x5F8CC000UL
 #define NRF_SYSCTRL_HSFLL_S_BASE          0x5F8CD000UL
-#define NRF_SYSCTRL_LRCCONF0_S_BASE       0x5F8CE000UL
-#define NRF_SYSCTRL_PCGCM0_S_BASE         0x5F8CF000UL
-#define NRF_SYSCTRL_GPPIB1_S_BASE         0x5F8EF000UL
-#define NRF_SYSCTRL_GAMBIX1_S_BASE        0x5F902000UL
-#define NRF_SYSCTRL_GRAMC20_S_BASE        0x5F903000UL
-#define NRF_SYSCTRL_GRAMC21_S_BASE        0x5F904000UL
-#define NRF_SYSCTRL_MEMCONF1_S_BASE       0x5F905000UL
-#define NRF_SYSCTRL_PCGCS0_S_BASE         0x5F90E000UL
-#define NRF_SYSCTRL_PCGCM1_S_BASE         0x5F90F000UL
-#define NRF_SYSCTRL_GPPIB2_S_BASE         0x5F925000UL
-#define NRF_SYSCTRL_GPPIB3_S_BASE         0x5F926000UL
-#define NRF_SYSCTRL_GWDT0_S_BASE          0x5F92A000UL
-#define NRF_SYSCTRL_PCGCS1_S_BASE         0x5F93C000UL
-#define NRF_SYSCTRL_LRCCONF1_S_BASE       0x5F93E000UL
-#define NRF_SYSCTRL_PCGCM2_S_BASE         0x5F93F000UL
-#define NRF_SYSCTRL_GRTC_S_BASE           0x5F940000UL
-#define NRF_SYSCTRL_GGENERIC13_S_BASE     0x5F942000UL
-#define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F943000UL
-#define NRF_SYSCTRL_PCGCS2_S_BASE         0x5F945000UL
-#define NRF_SYSCTRL_PCGCM3_S_BASE         0x5F946000UL
-#define NRF_SYSCTRL_GRCCONF_S_BASE        0x5F947000UL
+#define NRF_SYSCTRL_LRCCONF120_S_BASE     0x5F8CE000UL
+#define NRF_SYSCTRL_PCGCM120_S_BASE       0x5F8CF000UL
+#define NRF_SYSCTRL_PPIB120_S_BASE        0x5F8EE000UL
+#define NRF_SYSCTRL_PPIB121_S_BASE        0x5F8EF000UL
+#define NRF_SYSCTRL_AMBIX130_S_BASE       0x5F902000UL
+#define NRF_SYSCTRL_RAMC130_S_BASE        0x5F903000UL
+#define NRF_SYSCTRL_RAMC131_S_BASE        0x5F904000UL
+#define NRF_SYSCTRL_MEMCONF130_S_BASE     0x5F905000UL
+#define NRF_SYSCTRL_PCGCS130_S_BASE       0x5F90E000UL
+#define NRF_SYSCTRL_PCGCM130_S_BASE       0x5F90F000UL
+#define NRF_SYSCTRL_PPIB130_S_BASE        0x5F925000UL
+#define NRF_SYSCTRL_PPIB131_S_BASE        0x5F926000UL
+#define NRF_SYSCTRL_WDT130_S_BASE         0x5F92A000UL
+#define NRF_SYSCTRL_PCGCS131_S_BASE       0x5F93C000UL
+#define NRF_SYSCTRL_LRCCONF130_S_BASE     0x5F93E000UL
+#define NRF_SYSCTRL_PCGCM131_S_BASE       0x5F93F000UL
+#define NRF_SYSCTRL_GRCCONF_S_BASE        0x5F940000UL
+#define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F942000UL
+#define NRF_SYSCTRL_GGENERIC13_S_BASE     0x5F948000UL
+#define NRF_SYSCTRL_PCGCS132_S_BASE       0x5F94E000UL
+#define NRF_SYSCTRL_PCGCM132_S_BASE       0x5F94F000UL
 #define NRF_SYSCTRL_CLOCK_S_BASE          0x5F950000UL
 #define NRF_SYSCTRL_LFRC_S_BASE           0x5F951000UL
 #define NRF_SYSCTRL_GGENERIC18_S_BASE     0x5F952000UL
-#define NRF_SYSCTRL_GGENERIC19_S_BASE     0x5F953000UL
+#define NRF_SYSCTRL_LFXO_S_BASE           0x5F953000UL
 #define NRF_SYSCTRL_FLL16M_S_BASE         0x5F954000UL
 #define NRF_SYSCTRL_GGENERIC20_S_BASE     0x5F955000UL
-#define NRF_SYSCTRL_GGENERIC22_S_BASE     0x5F957000UL
+#define NRF_SYSCTRL_AUDIOPLL_S_BASE       0x5F957000UL
+#define NRF_SYSCTRL_USBHSPLL_S_BASE       0x5F958000UL
 #define NRF_SYSCTRL_POWER_S_BASE          0x5F960000UL
 #define NRF_SYSCTRL_VREGMAIN_S_BASE       0x5F961000UL
 #define NRF_SYSCTRL_VREGAO1V8_S_BASE      0x5F962000UL
@@ -280,39 +310,37 @@ typedef enum {
 #define NRF_SYSCTRL_VREGSU_S_BASE         0x5F966000UL
 #define NRF_SYSCTRL_GGENERIC29_S_BASE     0x5F967000UL
 #define NRF_SYSCTRL_GGENERIC30_S_BASE     0x5F968000UL
-#define NRF_SYSCTRL_VREGMRAM00_S_BASE     0x5F969000UL
-#define NRF_SYSCTRL_VREGMRAM01_S_BASE     0x5F96A000UL
+#define NRF_SYSCTRL_VREGMRAM130_S_BASE    0x5F969000UL
+#define NRF_SYSCTRL_VREGMRAM131_S_BASE    0x5F96A000UL
 #define NRF_SYSCTRL_OSCRFR_S_BASE         0x5F96B000UL
-#define NRF_SYSCTRL_MBIAS_S_BASE          0x5F970000UL
-#define NRF_SYSCTRL_VDETAO1V8_S_BASE      0x5F971000UL
-#define NRF_SYSCTRL_VDETAO0V8_S_BASE      0x5F972000UL
-#define NRF_SYSCTRL_VDETVS0V8_S_BASE      0x5F973000UL
-#define NRF_SYSCTRL_GGENERIC36_S_BASE     0x5F974000UL
-#define NRF_SYSCTRL_SWEXT_S_BASE          0x5F975000UL
-#define NRF_SYSCTRL_GGENERIC38_S_BASE     0x5F976000UL
-#define NRF_SYSCTRL_GGENERIC39_S_BASE     0x5F977000UL
-#define NRF_SYSCTRL_GGENERIC40_S_BASE     0x5F978000UL
-#define NRF_SYSCTRL_GGENERIC41_S_BASE     0x5F979000UL
-#define NRF_SYSCTRL_GGENERIC42_S_BASE     0x5F97A000UL
+#define NRF_SYSCTRL_SWEXT_S_BASE          0x5F96C000UL
+#define NRF_SYSCTRL_MBIAS_S_BASE          0x5F96D000UL
+#define NRF_SYSCTRL_VDETAO1V8_S_BASE      0x5F970000UL
+#define NRF_SYSCTRL_VDETAO0V8_S_BASE      0x5F971000UL
+#define NRF_SYSCTRL_VDETVS0V8_S_BASE      0x5F972000UL
+#define NRF_SYSCTRL_GGENERIC36_S_BASE     0x5F973000UL
+#define NRF_SYSCTRL_GGENERIC38_S_BASE     0x5F974000UL
+#define NRF_SYSCTRL_GGENERIC41_S_BASE     0x5F975000UL
+#define NRF_SYSCTRL_GGENERIC42_S_BASE     0x5F976000UL
 #define NRF_SYSCTRL_GGENERIC43_S_BASE     0x5F97B000UL
-#define NRF_SYSCTRL_GPPIB4_S_BASE         0x5F98D000UL
-#define NRF_SYSCTRL_PCGCS3_S_BASE         0x5F98E000UL
-#define NRF_SYSCTRL_PCGCM4_S_BASE         0x5F98F000UL
-#define NRF_SYSCTRL_GPPIB5_S_BASE         0x5F99D000UL
-#define NRF_SYSCTRL_PCGCS4_S_BASE         0x5F99E000UL
-#define NRF_SYSCTRL_PCGCM5_S_BASE         0x5F99F000UL
-#define NRF_SYSCTRL_GPPIB6_S_BASE         0x5F9AD000UL
-#define NRF_SYSCTRL_PCGCS5_S_BASE         0x5F9AE000UL
-#define NRF_SYSCTRL_PCGCM6_S_BASE         0x5F9AF000UL
-#define NRF_SYSCTRL_GPPIB7_S_BASE         0x5F9BD000UL
-#define NRF_SYSCTRL_PCGCS6_S_BASE         0x5F9BE000UL
-#define NRF_SYSCTRL_PCGCM7_S_BASE         0x5F9BF000UL
-#define NRF_SYSCTRL_GPPIB8_S_BASE         0x5F9CD000UL
-#define NRF_SYSCTRL_PCGCS7_S_BASE         0x5F9CE000UL
-#define NRF_SYSCTRL_PCGCM8_S_BASE         0x5F9CF000UL
-#define NRF_SYSCTRL_GPPIB9_S_BASE         0x5F9DD000UL
-#define NRF_SYSCTRL_PCGCS8_S_BASE         0x5F9DE000UL
-#define NRF_SYSCTRL_PCGCM9_S_BASE         0x5F9DF000UL
+#define NRF_SYSCTRL_PPIB132_S_BASE        0x5F98D000UL
+#define NRF_SYSCTRL_PCGCS133_S_BASE       0x5F98E000UL
+#define NRF_SYSCTRL_PCGCM133_S_BASE       0x5F98F000UL
+#define NRF_SYSCTRL_PPIB133_S_BASE        0x5F99D000UL
+#define NRF_SYSCTRL_PCGCS134_S_BASE       0x5F99E000UL
+#define NRF_SYSCTRL_PCGCM134_S_BASE       0x5F99F000UL
+#define NRF_SYSCTRL_PPIB134_S_BASE        0x5F9AD000UL
+#define NRF_SYSCTRL_PCGCS135_S_BASE       0x5F9AE000UL
+#define NRF_SYSCTRL_PCGCM135_S_BASE       0x5F9AF000UL
+#define NRF_SYSCTRL_PPIB135_S_BASE        0x5F9BD000UL
+#define NRF_SYSCTRL_PCGCS136_S_BASE       0x5F9BE000UL
+#define NRF_SYSCTRL_PCGCM136_S_BASE       0x5F9BF000UL
+#define NRF_SYSCTRL_PPIB136_S_BASE        0x5F9CD000UL
+#define NRF_SYSCTRL_PCGCS137_S_BASE       0x5F9CE000UL
+#define NRF_SYSCTRL_PCGCM137_S_BASE       0x5F9CF000UL
+#define NRF_SYSCTRL_PPIB137_S_BASE        0x5F9DD000UL
+#define NRF_SYSCTRL_PCGCS138_S_BASE       0x5F9DE000UL
+#define NRF_SYSCTRL_PCGCM138_S_BASE       0x5F9DF000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
@@ -322,57 +350,60 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_SYSCTRL_L2CACHEINFO_S_BASE)
 #define NRF_SYSCTRL_OICR_S                ((NRF_OICR_Type*)                     NRF_SYSCTRL_OICR_S_BASE)
 #define NRF_SYSCTRL_L2CACHE_S             ((NRF_CACHE_Type*)                    NRF_SYSCTRL_L2CACHE_S_BASE)
-#define NRF_SYSCTRL_GRAMC00_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC00_S_BASE)
-#define NRF_SYSCTRL_GRAMC01_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC01_S_BASE)
-#define NRF_SYSCTRL_AXI0_S                ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI0_S_BASE)
-#define NRF_SYSCTRL_SHA3_NS               ((NRF_CRACEN_Type*)                   NRF_SYSCTRL_SHA3_NS_BASE)
+#define NRF_SYSCTRL_RAMC100_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC100_S_BASE)
+#define NRF_SYSCTRL_RAMC101_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC101_S_BASE)
+#define NRF_SYSCTRL_AXI100_S              ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI100_S_BASE)
 #define NRF_SYSCTRL_SHA3_S                ((NRF_CRACEN_Type*)                   NRF_SYSCTRL_SHA3_S_BASE)
-#define NRF_SYSCTRL_SHA3CORE_NS           ((NRF_CRACENCORE_Type*)               NRF_SYSCTRL_SHA3CORE_NS_BASE)
-#define NRF_SYSCTRL_SHA3CORE_S            ((NRF_CRACENCORE_Type*)               NRF_SYSCTRL_SHA3CORE_S_BASE)
-#define NRF_SYSCTRL_MRAMC00_S             ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC00_S_BASE)
-#define NRF_SYSCTRL_MRAMC01_S             ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC01_S_BASE)
+#define NRF_SYSCTRL_SHA3CORE_S            ((NRF_SHA3CORE_Type*)                 NRF_SYSCTRL_SHA3CORE_S_BASE)
+#define NRF_SYSCTRL_RAMC102_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC102_S_BASE)
+#define NRF_SYSCTRL_RAMC103_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC103_S_BASE)
+#define NRF_SYSCTRL_MRAMC110_S            ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC110_S_BASE)
+#define NRF_SYSCTRL_MRAMC111_S            ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC111_S_BASE)
 #define NRF_SYSCTRL_EXMEE_S               ((NRF_EXMEE_Type*)                    NRF_SYSCTRL_EXMEE_S_BASE)
 #define NRF_SYSCTRL_EXMIF_NS              ((NRF_EXMIF_Type*)                    NRF_SYSCTRL_EXMIF_NS_BASE)
 #define NRF_SYSCTRL_EXMIF_S               ((NRF_EXMIF_Type*)                    NRF_SYSCTRL_EXMIF_S_BASE)
-#define NRF_SYSCTRL_AXI1_S                ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI1_S_BASE)
+#define NRF_SYSCTRL_AXI110_S              ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI110_S_BASE)
 #define NRF_SYSCTRL_MVDMA_S               ((NRF_MVDMA_Type*)                    NRF_SYSCTRL_MVDMA_S_BASE)
-#define NRF_SYSCTRL_GPPIB0_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB0_S_BASE)
-#define NRF_SYSCTRL_GAMBIX0_S             ((NRF_AMBIX_Type*)                    NRF_SYSCTRL_GAMBIX0_S_BASE)
-#define NRF_SYSCTRL_GRAMC10_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC10_S_BASE)
-#define NRF_SYSCTRL_GRAMC11_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC11_S_BASE)
-#define NRF_SYSCTRL_OTPC00_S              ((NRF_OTPC_Type*)                     NRF_SYSCTRL_OTPC00_S_BASE)
-#define NRF_SYSCTRL_GROMC00_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GROMC00_S_BASE)
-#define NRF_SYSCTRL_MEMCONF0_S            ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF0_S_BASE)
+#define NRF_SYSCTRL_PPIB110_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB110_S_BASE)
+#define NRF_SYSCTRL_AMBIX120_S            ((NRF_AMBIX_Type*)                    NRF_SYSCTRL_AMBIX120_S_BASE)
+#define NRF_SYSCTRL_RAMC120_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC120_S_BASE)
+#define NRF_SYSCTRL_RAMC121_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC121_S_BASE)
+#define NRF_SYSCTRL_OTPC_S                ((NRF_OTPC_Type*)                     NRF_SYSCTRL_OTPC_S_BASE)
+#define NRF_SYSCTRL_ROMC_S                ((NRF_ROMC_Type*)                     NRF_SYSCTRL_ROMC_S_BASE)
+#define NRF_SYSCTRL_MEMCONF120_S          ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF120_S_BASE)
 #define NRF_SYSCTRL_VPR_S                 ((NRF_VPR_Type*)                      NRF_SYSCTRL_VPR_S_BASE)
+#define NRF_SYSCTRL_CANPLL_NS             ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_CANPLL_NS_BASE)
+#define NRF_SYSCTRL_CANPLL_S              ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_CANPLL_S_BASE)
 #define NRF_SYSCTRL_HSFLL_S               ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL_S_BASE)
-#define NRF_SYSCTRL_LRCCONF0_S            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF0_S_BASE)
-#define NRF_SYSCTRL_PCGCM0_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM0_S_BASE)
-#define NRF_SYSCTRL_GPPIB1_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB1_S_BASE)
-#define NRF_SYSCTRL_GAMBIX1_S             ((NRF_AMBIX_Type*)                    NRF_SYSCTRL_GAMBIX1_S_BASE)
-#define NRF_SYSCTRL_GRAMC20_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC20_S_BASE)
-#define NRF_SYSCTRL_GRAMC21_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_GRAMC21_S_BASE)
-#define NRF_SYSCTRL_MEMCONF1_S            ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF1_S_BASE)
-#define NRF_SYSCTRL_PCGCS0_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS0_S_BASE)
-#define NRF_SYSCTRL_PCGCM1_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM1_S_BASE)
-#define NRF_SYSCTRL_GPPIB2_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB2_S_BASE)
-#define NRF_SYSCTRL_GPPIB3_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB3_S_BASE)
-#define NRF_SYSCTRL_GWDT0_S               ((NRF_WDT_Type*)                      NRF_SYSCTRL_GWDT0_S_BASE)
-#define NRF_SYSCTRL_PCGCS1_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS1_S_BASE)
-#define NRF_SYSCTRL_LRCCONF1_S            ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF1_S_BASE)
-#define NRF_SYSCTRL_PCGCM2_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM2_S_BASE)
-#define NRF_SYSCTRL_GRTC_S                ((NRF_GRTC_Type*)                     NRF_SYSCTRL_GRTC_S_BASE)
-#define NRF_SYSCTRL_GGENERIC13_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC13_S_BASE)
-#define NRF_SYSCTRL_RESETHUB_S            ((NRF_RESETHUB_Type*)                 NRF_SYSCTRL_RESETHUB_S_BASE)
-#define NRF_SYSCTRL_PCGCS2_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS2_S_BASE)
-#define NRF_SYSCTRL_PCGCM3_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM3_S_BASE)
+#define NRF_SYSCTRL_LRCCONF120_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_S_BASE)
+#define NRF_SYSCTRL_PCGCM120_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM120_S_BASE)
+#define NRF_SYSCTRL_PPIB120_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB120_S_BASE)
+#define NRF_SYSCTRL_PPIB121_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB121_S_BASE)
+#define NRF_SYSCTRL_AMBIX130_S            ((NRF_AMBIX_Type*)                    NRF_SYSCTRL_AMBIX130_S_BASE)
+#define NRF_SYSCTRL_RAMC130_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC130_S_BASE)
+#define NRF_SYSCTRL_RAMC131_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC131_S_BASE)
+#define NRF_SYSCTRL_MEMCONF130_S          ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF130_S_BASE)
+#define NRF_SYSCTRL_PCGCS130_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS130_S_BASE)
+#define NRF_SYSCTRL_PCGCM130_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM130_S_BASE)
+#define NRF_SYSCTRL_PPIB130_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB130_S_BASE)
+#define NRF_SYSCTRL_PPIB131_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB131_S_BASE)
+#define NRF_SYSCTRL_WDT130_S              ((NRF_WDT_Type*)                      NRF_SYSCTRL_WDT130_S_BASE)
+#define NRF_SYSCTRL_PCGCS131_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS131_S_BASE)
+#define NRF_SYSCTRL_LRCCONF130_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF130_S_BASE)
+#define NRF_SYSCTRL_PCGCM131_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM131_S_BASE)
 #define NRF_SYSCTRL_GRCCONF_S             ((NRF_GRCCONF_Type*)                  NRF_SYSCTRL_GRCCONF_S_BASE)
+#define NRF_SYSCTRL_RESETHUB_S            ((NRF_RESETHUB_Type*)                 NRF_SYSCTRL_RESETHUB_S_BASE)
+#define NRF_SYSCTRL_GGENERIC13_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC13_S_BASE)
+#define NRF_SYSCTRL_PCGCS132_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS132_S_BASE)
+#define NRF_SYSCTRL_PCGCM132_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM132_S_BASE)
 #define NRF_SYSCTRL_CLOCK_S               ((NRF_CLOCK_Type*)                    NRF_SYSCTRL_CLOCK_S_BASE)
 #define NRF_SYSCTRL_LFRC_S                ((NRF_LFRC_Type*)                     NRF_SYSCTRL_LFRC_S_BASE)
 #define NRF_SYSCTRL_GGENERIC18_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC18_S_BASE)
-#define NRF_SYSCTRL_GGENERIC19_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC19_S_BASE)
+#define NRF_SYSCTRL_LFXO_S                ((NRF_LFXO_Type*)                     NRF_SYSCTRL_LFXO_S_BASE)
 #define NRF_SYSCTRL_FLL16M_S              ((NRF_FLL16M_Type*)                   NRF_SYSCTRL_FLL16M_S_BASE)
 #define NRF_SYSCTRL_GGENERIC20_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC20_S_BASE)
-#define NRF_SYSCTRL_GGENERIC22_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC22_S_BASE)
+#define NRF_SYSCTRL_AUDIOPLL_S            ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_AUDIOPLL_S_BASE)
+#define NRF_SYSCTRL_USBHSPLL_S            ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_USBHSPLL_S_BASE)
 #define NRF_SYSCTRL_POWER_S               ((NRF_POWER_Type*)                    NRF_SYSCTRL_POWER_S_BASE)
 #define NRF_SYSCTRL_VREGMAIN_S            ((NRF_VREGMAIN_Type*)                 NRF_SYSCTRL_VREGMAIN_S_BASE)
 #define NRF_SYSCTRL_VREGAO1V8_S           ((NRF_VREGAO1V8_Type*)                NRF_SYSCTRL_VREGAO1V8_S_BASE)
@@ -382,101 +413,102 @@ typedef enum {
 #define NRF_SYSCTRL_VREGSU_S              ((NRF_VREGSU_Type*)                   NRF_SYSCTRL_VREGSU_S_BASE)
 #define NRF_SYSCTRL_GGENERIC29_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC29_S_BASE)
 #define NRF_SYSCTRL_GGENERIC30_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC30_S_BASE)
-#define NRF_SYSCTRL_VREGMRAM00_S          ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM00_S_BASE)
-#define NRF_SYSCTRL_VREGMRAM01_S          ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM01_S_BASE)
+#define NRF_SYSCTRL_VREGMRAM130_S         ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM130_S_BASE)
+#define NRF_SYSCTRL_VREGMRAM131_S         ((NRF_VREGMRAM_Type*)                 NRF_SYSCTRL_VREGMRAM131_S_BASE)
 #define NRF_SYSCTRL_OSCRFR_S              ((NRF_OSCRFR_Type*)                   NRF_SYSCTRL_OSCRFR_S_BASE)
+#define NRF_SYSCTRL_SWEXT_S               ((NRF_SWEXT_Type*)                    NRF_SYSCTRL_SWEXT_S_BASE)
 #define NRF_SYSCTRL_MBIAS_S               ((NRF_MBIAS_Type*)                    NRF_SYSCTRL_MBIAS_S_BASE)
 #define NRF_SYSCTRL_VDETAO1V8_S           ((NRF_VDETAO1V8_Type*)                NRF_SYSCTRL_VDETAO1V8_S_BASE)
 #define NRF_SYSCTRL_VDETAO0V8_S           ((NRF_VDETAO0V8_Type*)                NRF_SYSCTRL_VDETAO0V8_S_BASE)
 #define NRF_SYSCTRL_VDETVS0V8_S           ((NRF_VDETVS0V8_Type*)                NRF_SYSCTRL_VDETVS0V8_S_BASE)
 #define NRF_SYSCTRL_GGENERIC36_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC36_S_BASE)
-#define NRF_SYSCTRL_SWEXT_S               ((NRF_SWEXT_Type*)                    NRF_SYSCTRL_SWEXT_S_BASE)
 #define NRF_SYSCTRL_GGENERIC38_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC38_S_BASE)
-#define NRF_SYSCTRL_GGENERIC39_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC39_S_BASE)
-#define NRF_SYSCTRL_GGENERIC40_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC40_S_BASE)
 #define NRF_SYSCTRL_GGENERIC41_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC41_S_BASE)
 #define NRF_SYSCTRL_GGENERIC42_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC42_S_BASE)
 #define NRF_SYSCTRL_GGENERIC43_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC43_S_BASE)
-#define NRF_SYSCTRL_GPPIB4_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB4_S_BASE)
-#define NRF_SYSCTRL_PCGCS3_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS3_S_BASE)
-#define NRF_SYSCTRL_PCGCM4_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM4_S_BASE)
-#define NRF_SYSCTRL_GPPIB5_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB5_S_BASE)
-#define NRF_SYSCTRL_PCGCS4_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS4_S_BASE)
-#define NRF_SYSCTRL_PCGCM5_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM5_S_BASE)
-#define NRF_SYSCTRL_GPPIB6_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB6_S_BASE)
-#define NRF_SYSCTRL_PCGCS5_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS5_S_BASE)
-#define NRF_SYSCTRL_PCGCM6_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM6_S_BASE)
-#define NRF_SYSCTRL_GPPIB7_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB7_S_BASE)
-#define NRF_SYSCTRL_PCGCS6_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS6_S_BASE)
-#define NRF_SYSCTRL_PCGCM7_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM7_S_BASE)
-#define NRF_SYSCTRL_GPPIB8_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB8_S_BASE)
-#define NRF_SYSCTRL_PCGCS7_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS7_S_BASE)
-#define NRF_SYSCTRL_PCGCM8_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM8_S_BASE)
-#define NRF_SYSCTRL_GPPIB9_S              ((NRF_PPIB_Type*)                     NRF_SYSCTRL_GPPIB9_S_BASE)
-#define NRF_SYSCTRL_PCGCS8_S              ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS8_S_BASE)
-#define NRF_SYSCTRL_PCGCM9_S              ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM9_S_BASE)
+#define NRF_SYSCTRL_PPIB132_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB132_S_BASE)
+#define NRF_SYSCTRL_PCGCS133_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS133_S_BASE)
+#define NRF_SYSCTRL_PCGCM133_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM133_S_BASE)
+#define NRF_SYSCTRL_PPIB133_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB133_S_BASE)
+#define NRF_SYSCTRL_PCGCS134_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS134_S_BASE)
+#define NRF_SYSCTRL_PCGCM134_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM134_S_BASE)
+#define NRF_SYSCTRL_PPIB134_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB134_S_BASE)
+#define NRF_SYSCTRL_PCGCS135_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS135_S_BASE)
+#define NRF_SYSCTRL_PCGCM135_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM135_S_BASE)
+#define NRF_SYSCTRL_PPIB135_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB135_S_BASE)
+#define NRF_SYSCTRL_PCGCS136_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS136_S_BASE)
+#define NRF_SYSCTRL_PCGCM136_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM136_S_BASE)
+#define NRF_SYSCTRL_PPIB136_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB136_S_BASE)
+#define NRF_SYSCTRL_PCGCS137_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS137_S_BASE)
+#define NRF_SYSCTRL_PCGCM137_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM137_S_BASE)
+#define NRF_SYSCTRL_PPIB137_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB137_S_BASE)
+#define NRF_SYSCTRL_PCGCS138_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS138_S_BASE)
+#define NRF_SYSCTRL_PCGCM138_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM138_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
 /* =========================================================================================================================== */
 
 #ifdef NRF_NONSECURE                                 /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_SYSCTRL_SHA3                        NRF_SYSCTRL_SHA3_NS
-  #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_NS
   #define NRF_SYSCTRL_EXMIF                       NRF_SYSCTRL_EXMIF_NS
+  #define NRF_SYSCTRL_CANPLL                      NRF_SYSCTRL_CANPLL_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SYSCTRL_L2CACHEDATA                 NRF_SYSCTRL_L2CACHEDATA_S
   #define NRF_SYSCTRL_L2CACHEINFO                 NRF_SYSCTRL_L2CACHEINFO_S
   #define NRF_SYSCTRL_OICR                        NRF_SYSCTRL_OICR_S
   #define NRF_SYSCTRL_L2CACHE                     NRF_SYSCTRL_L2CACHE_S
-  #define NRF_SYSCTRL_GRAMC00                     NRF_SYSCTRL_GRAMC00_S
-  #define NRF_SYSCTRL_GRAMC01                     NRF_SYSCTRL_GRAMC01_S
-  #define NRF_SYSCTRL_AXI0                        NRF_SYSCTRL_AXI0_S
+  #define NRF_SYSCTRL_RAMC100                     NRF_SYSCTRL_RAMC100_S
+  #define NRF_SYSCTRL_RAMC101                     NRF_SYSCTRL_RAMC101_S
+  #define NRF_SYSCTRL_AXI100                      NRF_SYSCTRL_AXI100_S
   #define NRF_SYSCTRL_SHA3                        NRF_SYSCTRL_SHA3_S
   #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_S
-  #define NRF_SYSCTRL_MRAMC00                     NRF_SYSCTRL_MRAMC00_S
-  #define NRF_SYSCTRL_MRAMC01                     NRF_SYSCTRL_MRAMC01_S
+  #define NRF_SYSCTRL_RAMC102                     NRF_SYSCTRL_RAMC102_S
+  #define NRF_SYSCTRL_RAMC103                     NRF_SYSCTRL_RAMC103_S
+  #define NRF_SYSCTRL_MRAMC110                    NRF_SYSCTRL_MRAMC110_S
+  #define NRF_SYSCTRL_MRAMC111                    NRF_SYSCTRL_MRAMC111_S
   #define NRF_SYSCTRL_EXMEE                       NRF_SYSCTRL_EXMEE_S
   #define NRF_SYSCTRL_EXMIF                       NRF_SYSCTRL_EXMIF_S
-  #define NRF_SYSCTRL_AXI1                        NRF_SYSCTRL_AXI1_S
+  #define NRF_SYSCTRL_AXI110                      NRF_SYSCTRL_AXI110_S
   #define NRF_SYSCTRL_MVDMA                       NRF_SYSCTRL_MVDMA_S
-  #define NRF_SYSCTRL_GPPIB0                      NRF_SYSCTRL_GPPIB0_S
-  #define NRF_SYSCTRL_GAMBIX0                     NRF_SYSCTRL_GAMBIX0_S
-  #define NRF_SYSCTRL_GRAMC10                     NRF_SYSCTRL_GRAMC10_S
-  #define NRF_SYSCTRL_GRAMC11                     NRF_SYSCTRL_GRAMC11_S
-  #define NRF_SYSCTRL_OTPC00                      NRF_SYSCTRL_OTPC00_S
-  #define NRF_SYSCTRL_GROMC00                     NRF_SYSCTRL_GROMC00_S
-  #define NRF_SYSCTRL_MEMCONF0                    NRF_SYSCTRL_MEMCONF0_S
+  #define NRF_SYSCTRL_PPIB110                     NRF_SYSCTRL_PPIB110_S
+  #define NRF_SYSCTRL_AMBIX120                    NRF_SYSCTRL_AMBIX120_S
+  #define NRF_SYSCTRL_RAMC120                     NRF_SYSCTRL_RAMC120_S
+  #define NRF_SYSCTRL_RAMC121                     NRF_SYSCTRL_RAMC121_S
+  #define NRF_SYSCTRL_OTPC                        NRF_SYSCTRL_OTPC_S
+  #define NRF_SYSCTRL_ROMC                        NRF_SYSCTRL_ROMC_S
+  #define NRF_SYSCTRL_MEMCONF120                  NRF_SYSCTRL_MEMCONF120_S
   #define NRF_SYSCTRL_VPR                         NRF_SYSCTRL_VPR_S
+  #define NRF_SYSCTRL_CANPLL                      NRF_SYSCTRL_CANPLL_S
   #define NRF_SYSCTRL_HSFLL                       NRF_SYSCTRL_HSFLL_S
-  #define NRF_SYSCTRL_LRCCONF0                    NRF_SYSCTRL_LRCCONF0_S
-  #define NRF_SYSCTRL_PCGCM0                      NRF_SYSCTRL_PCGCM0_S
-  #define NRF_SYSCTRL_GPPIB1                      NRF_SYSCTRL_GPPIB1_S
-  #define NRF_SYSCTRL_GAMBIX1                     NRF_SYSCTRL_GAMBIX1_S
-  #define NRF_SYSCTRL_GRAMC20                     NRF_SYSCTRL_GRAMC20_S
-  #define NRF_SYSCTRL_GRAMC21                     NRF_SYSCTRL_GRAMC21_S
-  #define NRF_SYSCTRL_MEMCONF1                    NRF_SYSCTRL_MEMCONF1_S
-  #define NRF_SYSCTRL_PCGCS0                      NRF_SYSCTRL_PCGCS0_S
-  #define NRF_SYSCTRL_PCGCM1                      NRF_SYSCTRL_PCGCM1_S
-  #define NRF_SYSCTRL_GPPIB2                      NRF_SYSCTRL_GPPIB2_S
-  #define NRF_SYSCTRL_GPPIB3                      NRF_SYSCTRL_GPPIB3_S
-  #define NRF_SYSCTRL_GWDT0                       NRF_SYSCTRL_GWDT0_S
-  #define NRF_SYSCTRL_PCGCS1                      NRF_SYSCTRL_PCGCS1_S
-  #define NRF_SYSCTRL_LRCCONF1                    NRF_SYSCTRL_LRCCONF1_S
-  #define NRF_SYSCTRL_PCGCM2                      NRF_SYSCTRL_PCGCM2_S
-  #define NRF_SYSCTRL_GRTC                        NRF_SYSCTRL_GRTC_S
-  #define NRF_SYSCTRL_GGENERIC13                  NRF_SYSCTRL_GGENERIC13_S
-  #define NRF_SYSCTRL_RESETHUB                    NRF_SYSCTRL_RESETHUB_S
-  #define NRF_SYSCTRL_PCGCS2                      NRF_SYSCTRL_PCGCS2_S
-  #define NRF_SYSCTRL_PCGCM3                      NRF_SYSCTRL_PCGCM3_S
+  #define NRF_SYSCTRL_LRCCONF120                  NRF_SYSCTRL_LRCCONF120_S
+  #define NRF_SYSCTRL_PCGCM120                    NRF_SYSCTRL_PCGCM120_S
+  #define NRF_SYSCTRL_PPIB120                     NRF_SYSCTRL_PPIB120_S
+  #define NRF_SYSCTRL_PPIB121                     NRF_SYSCTRL_PPIB121_S
+  #define NRF_SYSCTRL_AMBIX130                    NRF_SYSCTRL_AMBIX130_S
+  #define NRF_SYSCTRL_RAMC130                     NRF_SYSCTRL_RAMC130_S
+  #define NRF_SYSCTRL_RAMC131                     NRF_SYSCTRL_RAMC131_S
+  #define NRF_SYSCTRL_MEMCONF130                  NRF_SYSCTRL_MEMCONF130_S
+  #define NRF_SYSCTRL_PCGCS130                    NRF_SYSCTRL_PCGCS130_S
+  #define NRF_SYSCTRL_PCGCM130                    NRF_SYSCTRL_PCGCM130_S
+  #define NRF_SYSCTRL_PPIB130                     NRF_SYSCTRL_PPIB130_S
+  #define NRF_SYSCTRL_PPIB131                     NRF_SYSCTRL_PPIB131_S
+  #define NRF_SYSCTRL_WDT130                      NRF_SYSCTRL_WDT130_S
+  #define NRF_SYSCTRL_PCGCS131                    NRF_SYSCTRL_PCGCS131_S
+  #define NRF_SYSCTRL_LRCCONF130                  NRF_SYSCTRL_LRCCONF130_S
+  #define NRF_SYSCTRL_PCGCM131                    NRF_SYSCTRL_PCGCM131_S
   #define NRF_SYSCTRL_GRCCONF                     NRF_SYSCTRL_GRCCONF_S
+  #define NRF_SYSCTRL_RESETHUB                    NRF_SYSCTRL_RESETHUB_S
+  #define NRF_SYSCTRL_GGENERIC13                  NRF_SYSCTRL_GGENERIC13_S
+  #define NRF_SYSCTRL_PCGCS132                    NRF_SYSCTRL_PCGCS132_S
+  #define NRF_SYSCTRL_PCGCM132                    NRF_SYSCTRL_PCGCM132_S
   #define NRF_SYSCTRL_CLOCK                       NRF_SYSCTRL_CLOCK_S
   #define NRF_SYSCTRL_LFRC                        NRF_SYSCTRL_LFRC_S
   #define NRF_SYSCTRL_GGENERIC18                  NRF_SYSCTRL_GGENERIC18_S
-  #define NRF_SYSCTRL_GGENERIC19                  NRF_SYSCTRL_GGENERIC19_S
+  #define NRF_SYSCTRL_LFXO                        NRF_SYSCTRL_LFXO_S
   #define NRF_SYSCTRL_FLL16M                      NRF_SYSCTRL_FLL16M_S
   #define NRF_SYSCTRL_GGENERIC20                  NRF_SYSCTRL_GGENERIC20_S
-  #define NRF_SYSCTRL_GGENERIC22                  NRF_SYSCTRL_GGENERIC22_S
+  #define NRF_SYSCTRL_AUDIOPLL                    NRF_SYSCTRL_AUDIOPLL_S
+  #define NRF_SYSCTRL_USBHSPLL                    NRF_SYSCTRL_USBHSPLL_S
   #define NRF_SYSCTRL_POWER                       NRF_SYSCTRL_POWER_S
   #define NRF_SYSCTRL_VREGMAIN                    NRF_SYSCTRL_VREGMAIN_S
   #define NRF_SYSCTRL_VREGAO1V8                   NRF_SYSCTRL_VREGAO1V8_S
@@ -486,39 +518,37 @@ typedef enum {
   #define NRF_SYSCTRL_VREGSU                      NRF_SYSCTRL_VREGSU_S
   #define NRF_SYSCTRL_GGENERIC29                  NRF_SYSCTRL_GGENERIC29_S
   #define NRF_SYSCTRL_GGENERIC30                  NRF_SYSCTRL_GGENERIC30_S
-  #define NRF_SYSCTRL_VREGMRAM00                  NRF_SYSCTRL_VREGMRAM00_S
-  #define NRF_SYSCTRL_VREGMRAM01                  NRF_SYSCTRL_VREGMRAM01_S
+  #define NRF_SYSCTRL_VREGMRAM130                 NRF_SYSCTRL_VREGMRAM130_S
+  #define NRF_SYSCTRL_VREGMRAM131                 NRF_SYSCTRL_VREGMRAM131_S
   #define NRF_SYSCTRL_OSCRFR                      NRF_SYSCTRL_OSCRFR_S
+  #define NRF_SYSCTRL_SWEXT                       NRF_SYSCTRL_SWEXT_S
   #define NRF_SYSCTRL_MBIAS                       NRF_SYSCTRL_MBIAS_S
   #define NRF_SYSCTRL_VDETAO1V8                   NRF_SYSCTRL_VDETAO1V8_S
   #define NRF_SYSCTRL_VDETAO0V8                   NRF_SYSCTRL_VDETAO0V8_S
   #define NRF_SYSCTRL_VDETVS0V8                   NRF_SYSCTRL_VDETVS0V8_S
   #define NRF_SYSCTRL_GGENERIC36                  NRF_SYSCTRL_GGENERIC36_S
-  #define NRF_SYSCTRL_SWEXT                       NRF_SYSCTRL_SWEXT_S
   #define NRF_SYSCTRL_GGENERIC38                  NRF_SYSCTRL_GGENERIC38_S
-  #define NRF_SYSCTRL_GGENERIC39                  NRF_SYSCTRL_GGENERIC39_S
-  #define NRF_SYSCTRL_GGENERIC40                  NRF_SYSCTRL_GGENERIC40_S
   #define NRF_SYSCTRL_GGENERIC41                  NRF_SYSCTRL_GGENERIC41_S
   #define NRF_SYSCTRL_GGENERIC42                  NRF_SYSCTRL_GGENERIC42_S
   #define NRF_SYSCTRL_GGENERIC43                  NRF_SYSCTRL_GGENERIC43_S
-  #define NRF_SYSCTRL_GPPIB4                      NRF_SYSCTRL_GPPIB4_S
-  #define NRF_SYSCTRL_PCGCS3                      NRF_SYSCTRL_PCGCS3_S
-  #define NRF_SYSCTRL_PCGCM4                      NRF_SYSCTRL_PCGCM4_S
-  #define NRF_SYSCTRL_GPPIB5                      NRF_SYSCTRL_GPPIB5_S
-  #define NRF_SYSCTRL_PCGCS4                      NRF_SYSCTRL_PCGCS4_S
-  #define NRF_SYSCTRL_PCGCM5                      NRF_SYSCTRL_PCGCM5_S
-  #define NRF_SYSCTRL_GPPIB6                      NRF_SYSCTRL_GPPIB6_S
-  #define NRF_SYSCTRL_PCGCS5                      NRF_SYSCTRL_PCGCS5_S
-  #define NRF_SYSCTRL_PCGCM6                      NRF_SYSCTRL_PCGCM6_S
-  #define NRF_SYSCTRL_GPPIB7                      NRF_SYSCTRL_GPPIB7_S
-  #define NRF_SYSCTRL_PCGCS6                      NRF_SYSCTRL_PCGCS6_S
-  #define NRF_SYSCTRL_PCGCM7                      NRF_SYSCTRL_PCGCM7_S
-  #define NRF_SYSCTRL_GPPIB8                      NRF_SYSCTRL_GPPIB8_S
-  #define NRF_SYSCTRL_PCGCS7                      NRF_SYSCTRL_PCGCS7_S
-  #define NRF_SYSCTRL_PCGCM8                      NRF_SYSCTRL_PCGCM8_S
-  #define NRF_SYSCTRL_GPPIB9                      NRF_SYSCTRL_GPPIB9_S
-  #define NRF_SYSCTRL_PCGCS8                      NRF_SYSCTRL_PCGCS8_S
-  #define NRF_SYSCTRL_PCGCM9                      NRF_SYSCTRL_PCGCM9_S
+  #define NRF_SYSCTRL_PPIB132                     NRF_SYSCTRL_PPIB132_S
+  #define NRF_SYSCTRL_PCGCS133                    NRF_SYSCTRL_PCGCS133_S
+  #define NRF_SYSCTRL_PCGCM133                    NRF_SYSCTRL_PCGCM133_S
+  #define NRF_SYSCTRL_PPIB133                     NRF_SYSCTRL_PPIB133_S
+  #define NRF_SYSCTRL_PCGCS134                    NRF_SYSCTRL_PCGCS134_S
+  #define NRF_SYSCTRL_PCGCM134                    NRF_SYSCTRL_PCGCM134_S
+  #define NRF_SYSCTRL_PPIB134                     NRF_SYSCTRL_PPIB134_S
+  #define NRF_SYSCTRL_PCGCS135                    NRF_SYSCTRL_PCGCS135_S
+  #define NRF_SYSCTRL_PCGCM135                    NRF_SYSCTRL_PCGCM135_S
+  #define NRF_SYSCTRL_PPIB135                     NRF_SYSCTRL_PPIB135_S
+  #define NRF_SYSCTRL_PCGCS136                    NRF_SYSCTRL_PCGCS136_S
+  #define NRF_SYSCTRL_PCGCM136                    NRF_SYSCTRL_PCGCM136_S
+  #define NRF_SYSCTRL_PPIB136                     NRF_SYSCTRL_PPIB136_S
+  #define NRF_SYSCTRL_PCGCS137                    NRF_SYSCTRL_PCGCS137_S
+  #define NRF_SYSCTRL_PCGCM137                    NRF_SYSCTRL_PCGCM137_S
+  #define NRF_SYSCTRL_PPIB137                     NRF_SYSCTRL_PPIB137_S
+  #define NRF_SYSCTRL_PCGCS138                    NRF_SYSCTRL_PCGCS138_S
+  #define NRF_SYSCTRL_PCGCM138                    NRF_SYSCTRL_PCGCM138_S
 #endif                                               /*!<  NRF_NONSECURE                                                       */
 
 /* =========================================================================================================================== */
@@ -530,54 +560,58 @@ typedef enum {
   #define NRF_L2CACHEINFO                         NRF_SYSCTRL_L2CACHEINFO
   #define NRF_OICR                                NRF_SYSCTRL_OICR
   #define NRF_L2CACHE                             NRF_SYSCTRL_L2CACHE
-  #define NRF_GRAMC00                             NRF_SYSCTRL_GRAMC00
-  #define NRF_GRAMC01                             NRF_SYSCTRL_GRAMC01
-  #define NRF_AXI0                                NRF_SYSCTRL_AXI0
+  #define NRF_RAMC100                             NRF_SYSCTRL_RAMC100
+  #define NRF_RAMC101                             NRF_SYSCTRL_RAMC101
+  #define NRF_AXI100                              NRF_SYSCTRL_AXI100
   #define NRF_SHA3                                NRF_SYSCTRL_SHA3
   #define NRF_SHA3CORE                            NRF_SYSCTRL_SHA3CORE
-  #define NRF_MRAMC00                             NRF_SYSCTRL_MRAMC00
-  #define NRF_MRAMC01                             NRF_SYSCTRL_MRAMC01
+  #define NRF_RAMC102                             NRF_SYSCTRL_RAMC102
+  #define NRF_RAMC103                             NRF_SYSCTRL_RAMC103
+  #define NRF_MRAMC110                            NRF_SYSCTRL_MRAMC110
+  #define NRF_MRAMC111                            NRF_SYSCTRL_MRAMC111
   #define NRF_EXMEE                               NRF_SYSCTRL_EXMEE
   #define NRF_EXMIF                               NRF_SYSCTRL_EXMIF
-  #define NRF_AXI1                                NRF_SYSCTRL_AXI1
+  #define NRF_AXI110                              NRF_SYSCTRL_AXI110
   #define NRF_MVDMA                               NRF_SYSCTRL_MVDMA
-  #define NRF_GPPIB0                              NRF_SYSCTRL_GPPIB0
-  #define NRF_GAMBIX0                             NRF_SYSCTRL_GAMBIX0
-  #define NRF_GRAMC10                             NRF_SYSCTRL_GRAMC10
-  #define NRF_GRAMC11                             NRF_SYSCTRL_GRAMC11
-  #define NRF_OTPC00                              NRF_SYSCTRL_OTPC00
-  #define NRF_GROMC00                             NRF_SYSCTRL_GROMC00
-  #define NRF_MEMCONF0                            NRF_SYSCTRL_MEMCONF0
+  #define NRF_PPIB110                             NRF_SYSCTRL_PPIB110
+  #define NRF_AMBIX120                            NRF_SYSCTRL_AMBIX120
+  #define NRF_RAMC120                             NRF_SYSCTRL_RAMC120
+  #define NRF_RAMC121                             NRF_SYSCTRL_RAMC121
+  #define NRF_OTPC                                NRF_SYSCTRL_OTPC
+  #define NRF_ROMC                                NRF_SYSCTRL_ROMC
+  #define NRF_MEMCONF120                          NRF_SYSCTRL_MEMCONF120
   #define NRF_VPR                                 NRF_SYSCTRL_VPR
+  #define NRF_CANPLL                              NRF_SYSCTRL_CANPLL
   #define NRF_HSFLL                               NRF_SYSCTRL_HSFLL
-  #define NRF_LRCCONF0                            NRF_SYSCTRL_LRCCONF0
-  #define NRF_PCGCM0                              NRF_SYSCTRL_PCGCM0
-  #define NRF_GPPIB1                              NRF_SYSCTRL_GPPIB1
-  #define NRF_GAMBIX1                             NRF_SYSCTRL_GAMBIX1
-  #define NRF_GRAMC20                             NRF_SYSCTRL_GRAMC20
-  #define NRF_GRAMC21                             NRF_SYSCTRL_GRAMC21
-  #define NRF_MEMCONF1                            NRF_SYSCTRL_MEMCONF1
-  #define NRF_PCGCS0                              NRF_SYSCTRL_PCGCS0
-  #define NRF_PCGCM1                              NRF_SYSCTRL_PCGCM1
-  #define NRF_GPPIB2                              NRF_SYSCTRL_GPPIB2
-  #define NRF_GPPIB3                              NRF_SYSCTRL_GPPIB3
-  #define NRF_GWDT0                               NRF_SYSCTRL_GWDT0
-  #define NRF_PCGCS1                              NRF_SYSCTRL_PCGCS1
-  #define NRF_LRCCONF1                            NRF_SYSCTRL_LRCCONF1
-  #define NRF_PCGCM2                              NRF_SYSCTRL_PCGCM2
-  #define NRF_GRTC                                NRF_SYSCTRL_GRTC
-  #define NRF_GGENERIC13                          NRF_SYSCTRL_GGENERIC13
-  #define NRF_RESETHUB                            NRF_SYSCTRL_RESETHUB
-  #define NRF_PCGCS2                              NRF_SYSCTRL_PCGCS2
-  #define NRF_PCGCM3                              NRF_SYSCTRL_PCGCM3
+  #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
+  #define NRF_PCGCM120                            NRF_SYSCTRL_PCGCM120
+  #define NRF_PPIB120                             NRF_SYSCTRL_PPIB120
+  #define NRF_PPIB121                             NRF_SYSCTRL_PPIB121
+  #define NRF_AMBIX130                            NRF_SYSCTRL_AMBIX130
+  #define NRF_RAMC130                             NRF_SYSCTRL_RAMC130
+  #define NRF_RAMC131                             NRF_SYSCTRL_RAMC131
+  #define NRF_MEMCONF130                          NRF_SYSCTRL_MEMCONF130
+  #define NRF_PCGCS130                            NRF_SYSCTRL_PCGCS130
+  #define NRF_PCGCM130                            NRF_SYSCTRL_PCGCM130
+  #define NRF_PPIB130                             NRF_SYSCTRL_PPIB130
+  #define NRF_PPIB131                             NRF_SYSCTRL_PPIB131
+  #define NRF_WDT130                              NRF_SYSCTRL_WDT130
+  #define NRF_PCGCS131                            NRF_SYSCTRL_PCGCS131
+  #define NRF_LRCCONF130                          NRF_SYSCTRL_LRCCONF130
+  #define NRF_PCGCM131                            NRF_SYSCTRL_PCGCM131
   #define NRF_GRCCONF                             NRF_SYSCTRL_GRCCONF
+  #define NRF_RESETHUB                            NRF_SYSCTRL_RESETHUB
+  #define NRF_GGENERIC13                          NRF_SYSCTRL_GGENERIC13
+  #define NRF_PCGCS132                            NRF_SYSCTRL_PCGCS132
+  #define NRF_PCGCM132                            NRF_SYSCTRL_PCGCM132
   #define NRF_CLOCK                               NRF_SYSCTRL_CLOCK
   #define NRF_LFRC                                NRF_SYSCTRL_LFRC
   #define NRF_GGENERIC18                          NRF_SYSCTRL_GGENERIC18
-  #define NRF_GGENERIC19                          NRF_SYSCTRL_GGENERIC19
+  #define NRF_LFXO                                NRF_SYSCTRL_LFXO
   #define NRF_FLL16M                              NRF_SYSCTRL_FLL16M
   #define NRF_GGENERIC20                          NRF_SYSCTRL_GGENERIC20
-  #define NRF_GGENERIC22                          NRF_SYSCTRL_GGENERIC22
+  #define NRF_AUDIOPLL                            NRF_SYSCTRL_AUDIOPLL
+  #define NRF_USBHSPLL                            NRF_SYSCTRL_USBHSPLL
   #define NRF_POWER                               NRF_SYSCTRL_POWER
   #define NRF_VREGMAIN                            NRF_SYSCTRL_VREGMAIN
   #define NRF_VREGAO1V8                           NRF_SYSCTRL_VREGAO1V8
@@ -587,39 +621,37 @@ typedef enum {
   #define NRF_VREGSU                              NRF_SYSCTRL_VREGSU
   #define NRF_GGENERIC29                          NRF_SYSCTRL_GGENERIC29
   #define NRF_GGENERIC30                          NRF_SYSCTRL_GGENERIC30
-  #define NRF_VREGMRAM00                          NRF_SYSCTRL_VREGMRAM00
-  #define NRF_VREGMRAM01                          NRF_SYSCTRL_VREGMRAM01
+  #define NRF_VREGMRAM130                         NRF_SYSCTRL_VREGMRAM130
+  #define NRF_VREGMRAM131                         NRF_SYSCTRL_VREGMRAM131
   #define NRF_OSCRFR                              NRF_SYSCTRL_OSCRFR
+  #define NRF_SWEXT                               NRF_SYSCTRL_SWEXT
   #define NRF_MBIAS                               NRF_SYSCTRL_MBIAS
   #define NRF_VDETAO1V8                           NRF_SYSCTRL_VDETAO1V8
   #define NRF_VDETAO0V8                           NRF_SYSCTRL_VDETAO0V8
   #define NRF_VDETVS0V8                           NRF_SYSCTRL_VDETVS0V8
   #define NRF_GGENERIC36                          NRF_SYSCTRL_GGENERIC36
-  #define NRF_SWEXT                               NRF_SYSCTRL_SWEXT
   #define NRF_GGENERIC38                          NRF_SYSCTRL_GGENERIC38
-  #define NRF_GGENERIC39                          NRF_SYSCTRL_GGENERIC39
-  #define NRF_GGENERIC40                          NRF_SYSCTRL_GGENERIC40
   #define NRF_GGENERIC41                          NRF_SYSCTRL_GGENERIC41
   #define NRF_GGENERIC42                          NRF_SYSCTRL_GGENERIC42
   #define NRF_GGENERIC43                          NRF_SYSCTRL_GGENERIC43
-  #define NRF_GPPIB4                              NRF_SYSCTRL_GPPIB4
-  #define NRF_PCGCS3                              NRF_SYSCTRL_PCGCS3
-  #define NRF_PCGCM4                              NRF_SYSCTRL_PCGCM4
-  #define NRF_GPPIB5                              NRF_SYSCTRL_GPPIB5
-  #define NRF_PCGCS4                              NRF_SYSCTRL_PCGCS4
-  #define NRF_PCGCM5                              NRF_SYSCTRL_PCGCM5
-  #define NRF_GPPIB6                              NRF_SYSCTRL_GPPIB6
-  #define NRF_PCGCS5                              NRF_SYSCTRL_PCGCS5
-  #define NRF_PCGCM6                              NRF_SYSCTRL_PCGCM6
-  #define NRF_GPPIB7                              NRF_SYSCTRL_GPPIB7
-  #define NRF_PCGCS6                              NRF_SYSCTRL_PCGCS6
-  #define NRF_PCGCM7                              NRF_SYSCTRL_PCGCM7
-  #define NRF_GPPIB8                              NRF_SYSCTRL_GPPIB8
-  #define NRF_PCGCS7                              NRF_SYSCTRL_PCGCS7
-  #define NRF_PCGCM8                              NRF_SYSCTRL_PCGCM8
-  #define NRF_GPPIB9                              NRF_SYSCTRL_GPPIB9
-  #define NRF_PCGCS8                              NRF_SYSCTRL_PCGCS8
-  #define NRF_PCGCM9                              NRF_SYSCTRL_PCGCM9
+  #define NRF_PPIB132                             NRF_SYSCTRL_PPIB132
+  #define NRF_PCGCS133                            NRF_SYSCTRL_PCGCS133
+  #define NRF_PCGCM133                            NRF_SYSCTRL_PCGCM133
+  #define NRF_PPIB133                             NRF_SYSCTRL_PPIB133
+  #define NRF_PCGCS134                            NRF_SYSCTRL_PCGCS134
+  #define NRF_PCGCM134                            NRF_SYSCTRL_PCGCM134
+  #define NRF_PPIB134                             NRF_SYSCTRL_PPIB134
+  #define NRF_PCGCS135                            NRF_SYSCTRL_PCGCS135
+  #define NRF_PCGCM135                            NRF_SYSCTRL_PCGCM135
+  #define NRF_PPIB135                             NRF_SYSCTRL_PPIB135
+  #define NRF_PCGCS136                            NRF_SYSCTRL_PCGCS136
+  #define NRF_PCGCM136                            NRF_SYSCTRL_PCGCM136
+  #define NRF_PPIB136                             NRF_SYSCTRL_PPIB136
+  #define NRF_PCGCS137                            NRF_SYSCTRL_PCGCS137
+  #define NRF_PCGCM137                            NRF_SYSCTRL_PCGCM137
+  #define NRF_PPIB137                             NRF_SYSCTRL_PPIB137
+  #define NRF_PCGCS138                            NRF_SYSCTRL_PCGCS138
+  #define NRF_PCGCM138                            NRF_SYSCTRL_PCGCM138
 #endif                                               /*!< NRF_SYSCTRL                                                          */
 
 /* ========================================== End of section using anonymous unions ========================================== */
@@ -628,7 +660,7 @@ typedef enum {
   #pragma pop
 #elif defined (__ICCARM__)
   /* leave anonymous unions enabled */
-#elif (__ARMCC_VERSION >= 6010050)
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
   #pragma clang diagnostic pop
 #elif defined (__GNUC__)
   /* anonymous unions are enabled by default */
