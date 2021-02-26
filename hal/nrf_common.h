@@ -31,6 +31,17 @@ extern "C" {
 
 #if defined(HALTIUM_XXAA)
 typedef NRF_DOMAINS_t nrf_domain_t;
+
+/* TODO: This should be in MDK */
+typedef enum {
+    NRF_OWNER_NONE        = 0,
+    NRF_OWNER_SECURE      = 1,
+    NRF_OWNER_APPLICATION = 2,
+    NRF_OWNER_RADIOCORE   = 3,
+    NRF_OWNER_CELLCORE    = 4,
+    NRF_OWNER_ISIMCORE    = 5,
+    NRF_OWNER_SYSCTRL     = 8,
+} nrf_owner_t;
 #endif
 
 #if defined(NRFX_CLZ)
