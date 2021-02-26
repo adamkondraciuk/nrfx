@@ -16,22 +16,54 @@ extern "C" {
  * @brief   Hardware access layer for managing the System Protection Unit (SPU) peripheral.
  */
 
+#if defined(SPU_PERIPH_PERM_OWNERPROG_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of ownership feature. */
+#define NRF_SPU_HAS_OWNERSHIP 1
+#else
+#define NRF_SPU_HAS_OWNERSHIP 0
+#endif
+
+#if defined(SPU_FLASHREGION_PERM_EXECUTE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of memory feature. */
+#define NRF_SPU_HAS_MEMORY 1
+#else
+#define NRF_SPU_HAS_MEMORY 0
+#endif
+
+#if NRF_SPU_HAS_OWNERSHIP
+
+/** @brief Number of peripherals. */
+#define NRF_SPU_PERIPH_COUNT           SPU_PERIPH_MaxCount
+
+/** @brief Number of GPIOs. */
+#define NRF_SPU_FEATURE_GPIO_COUNT     SPU_FEATURE_GPIO_MaxCount
+
+/** @brief Number of GPIO pins. */
+#define NRF_SPU_FEATURE_GPIO_PIN_COUNT SPU_FEATURE_GPIO_PIN_MaxCount
+
+#endif
+
 /** @brief SPU events. */
 typedef enum
 {
-    NRF_SPU_EVENT_RAMACCERR    = offsetof(NRF_SPU_Type, EVENTS_RAMACCERR),   ///< A security violation has been detected for the RAM memory space.
-    NRF_SPU_EVENT_FLASHACCERR  = offsetof(NRF_SPU_Type, EVENTS_FLASHACCERR), ///< A security violation has been detected for the Flash memory space.
-    NRF_SPU_EVENT_PERIPHACCERR = offsetof(NRF_SPU_Type, EVENTS_PERIPHACCERR) ///< A security violation has been detected on one or several peripherals.
+#if NRF_SPU_HAS_MEMORY
+    NRF_SPU_EVENT_RAMACCERR    = offsetof(NRF_SPU_Type, EVENTS_RAMACCERR),    ///< A security violation has been detected for the RAM memory space.
+    NRF_SPU_EVENT_FLASHACCERR  = offsetof(NRF_SPU_Type, EVENTS_FLASHACCERR),  ///< A security violation has been detected for the Flash memory space.
+#endif
+    NRF_SPU_EVENT_PERIPHACCERR = offsetof(NRF_SPU_Type, EVENTS_PERIPHACCERR), ///< A security violation has been detected on one or several peripherals.
 } nrf_spu_event_t;
 
 /** @brief SPU interrupts. */
 typedef enum
 {
+#if NRF_SPU_HAS_MEMORY
     NRF_SPU_INT_RAMACCERR_MASK     = SPU_INTENSET_RAMACCERR_Msk,   ///< Interrupt on RAMACCERR event.
     NRF_SPU_INT_FLASHACCERR_MASK   = SPU_INTENSET_FLASHACCERR_Msk, ///< Interrupt on FLASHACCERR event.
+#endif
     NRF_SPU_INT_PERIPHACCERR_MASK  = SPU_INTENSET_PERIPHACCERR_Msk ///< Interrupt on PERIPHACCERR event.
 } nrf_spu_int_mask_t;
 
+#if NRF_SPU_HAS_MEMORY
 /** @brief SPU Non-Secure Callable (NSC) region size. */
 typedef enum
 {
@@ -53,6 +85,17 @@ typedef enum
     NRF_SPU_MEM_PERM_WRITE   = SPU_FLASHREGION_PERM_WRITE_Msk,   ///< Allow write operation on particular memory region.
     NRF_SPU_MEM_PERM_READ    = SPU_FLASHREGION_PERM_READ_Msk     ///< Allow read operation from particular memory region.
 } nrf_spu_mem_perm_t;
+#endif
+
+#if NRF_SPU_HAS_OWNERSHIP
+/** @brief SPU permissions for the peripheral slave. */
+typedef enum
+{
+    /* TODO: other permissions */
+    NRF_SPU_PERIPH_PERM_OWNERPROG = SPU_PERIPH_PERM_OWNERPROG_Msk, /**< OWNERID is programmable. */
+    NRF_SPU_PERIPH_PERM_PRESENT   = SPU_PERIPH_PERM_PRESENT_Msk,   /**< Peripheral is present with peripheral slave. */
+} nrf_spu_periph_perm_t;
+#endif
 
 /**
  * @brief Function for clearing a specific SPU event.
@@ -103,6 +146,7 @@ NRF_STATIC_INLINE void nrf_spu_int_disable(NRF_SPU_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg, uint32_t mask);
 
+#if NRF_SPU_HAS_MEMORY
 /**
  * @brief Function for setting up publication configuration of a given SPU event.
  *
@@ -256,6 +300,47 @@ NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
                                              uint32_t       domain_id,
                                              bool           secure_attr,
                                              bool           lock_conf);
+#endif
+
+#if NRF_SPU_HAS_OWNERSHIP
+/**
+ * @brief Function for setting the peripheral owner ID of the specified slave.
+ *
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[in] index    Peripheral slave index.
+ * @param[in] owner_id Owner ID to be set.
+ */
+NRF_STATIC_INLINE void nrf_spu_periph_perm_ownerid_set(NRF_SPU_Type * p_reg,
+                                                       uint8_t        index,
+                                                       nrf_owner_t    owner_id);
+
+/**
+ * @brief Function for getting the access permissions of the specified slave.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] index   Peripheral slave index.
+ * @param[in] setting Peripheral permission to be retrieved.
+ *
+ * @retval true  Permission is enabled.
+ * @retval false Permission is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_spu_periph_perm_get(NRF_SPU_Type const *  p_reg,
+                                               uint8_t               index,
+                                               nrf_spu_periph_perm_t setting);
+
+/**
+ * @brief Function for setting the peripheral owner ID of the specified GPIO pin.
+ *
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[in] port     Port number.
+ * @param[in] pin      Pin number.
+ * @param[in] owner_id Owner ID to be set.
+ */
+NRF_STATIC_INLINE void nrf_spu_feature_gpio_pin_ownerid_set(NRF_SPU_Type * p_reg,
+                                                            uint8_t        port,
+                                                            uint8_t        pin,
+                                                            nrf_owner_t    owner_id);
+#endif
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -289,6 +374,7 @@ NRF_STATIC_INLINE uint32_t nrf_spu_int_enable_check(NRF_SPU_Type const * p_reg, 
     return p_reg->INTENSET & mask;
 }
 
+#if NRF_SPU_HAS_MEMORY
 NRF_STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
                                            nrf_spu_event_t event,
                                            uint32_t        channel)
@@ -420,6 +506,52 @@ NRF_STATIC_INLINE void nrf_spu_extdomain_set(NRF_SPU_Type * p_reg,
         (secure_attr ? SPU_EXTDOMAIN_PERM_SECATTR_Msk : 0) |
         (lock_conf   ? SPU_EXTDOMAIN_PERM_LOCK_Msk    : 0);
 }
+#endif
+
+#if NRF_SPU_HAS_OWNERSHIP
+NRF_STATIC_INLINE void nrf_spu_periph_perm_ownerid_set(NRF_SPU_Type * p_reg,
+                                                       uint8_t        index,
+                                                       nrf_owner_t    owner_id)
+{
+    NRFX_ASSERT(index < 16); /* TODO: this value should come from MDK */
+
+    p_reg->PERIPH[index].PERM = ((p_reg->PERIPH[index].PERM & ~SPU_PERIPH_PERM_OWNERID_Msk) |
+                                 owner_id << SPU_PERIPH_PERM_OWNERID_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_spu_periph_perm_get(NRF_SPU_Type const *  p_reg,
+                                               uint8_t               index,
+                                               nrf_spu_periph_perm_t setting)
+{
+    NRFX_ASSERT(index < 16); /* TODO: this value should come from MDK */
+
+    switch (setting)
+    {
+        case NRF_SPU_PERIPH_PERM_OWNERPROG:
+            return (p_reg->PERIPH[index].PERM & SPU_PERIPH_PERM_OWNERPROG_Msk) >>
+                   SPU_PERIPH_PERM_OWNERPROG_Pos;
+        case NRF_SPU_PERIPH_PERM_PRESENT:
+            return (p_reg->PERIPH[index].PERM & SPU_PERIPH_PERM_PRESENT_Msk) >>
+                   SPU_PERIPH_PERM_PRESENT_Pos;
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_spu_feature_gpio_pin_ownerid_set(NRF_SPU_Type * p_reg,
+                                                            uint8_t        port,
+                                                            uint8_t        pin,
+                                                            nrf_owner_t    owner_id)
+{
+    NRFX_ASSERT(port < 10); /* TODO: this value should come from MDK */
+    NRFX_ASSERT(pin < 32); /* TODO: this value should come from MDK */
+
+    p_reg->FEATURE.GPIO[port].PIN[pin] = ((p_reg->FEATURE.GPIO[port].PIN[pin] &
+                                           ~SPU_FEATURE_GPIO_PIN_OWNERID_Msk) |
+                                          owner_id << SPU_FEATURE_GPIO_PIN_OWNERID_Pos);
+}
+#endif
 
 #endif // NRF_DECLARE_ONLY
 
