@@ -146177,7 +146177,580 @@ typedef struct {                                     /*!< SWEXT Structure       
 /* ================                                           TAMPC                                           ================ */
 /* =========================================================================================================================== */
 
+#if defined(RTL_DOMINOZ)
 
+/* =============================================== Struct TAMPC_PROTECT_DOMAIN =============================================== */
+/**
+  * @brief DOMAIN [TAMPC_PROTECT_DOMAIN] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  DBGEN;                             /*!< (@ 0x00000000) Invasive (halting) debug enable for domain n          */
+  __IOM uint32_t  NIDEN;                             /*!< (@ 0x00000004) Non-invasive debug enable for domain n                */
+  __IOM uint32_t  SPIDEN;                            /*!< (@ 0x00000008) Secure priviliged invasive (halting) debug enable for
+                                                                         domain n*/                                               
+  __IOM uint32_t  SPNIDEN;                           /*!< (@ 0x0000000C) Secure priviliged non-invasive debug enable for domain
+                                                                         n*/                                                      
+}NRF_TAMPC_PROTECT_DOMAIN_Type;                      /*!< Size = 16 (0x010)                                                    */
+/* TAMPC_PROTECT_DOMAIN_DBGEN: Invasive (halting) debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of dbgen signal */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Pos (0UL)   /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Pos) /*!< Bit mask of VALUE field.     */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                   */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_LOCK_Pos (1UL)    /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_DBGEN_LOCK_Pos) /*!< Bit mask of LOCK field.        */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                   */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                     */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                       */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_DBGEN_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_DOMAIN_DBGEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                             */
+#define TAMPC_PROTECT_DOMAIN_DBGEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                */
+
+
+/* TAMPC_PROTECT_DOMAIN_NIDEN: Non-invasive debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of niden signal */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Pos (0UL)   /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Pos) /*!< Bit mask of VALUE field.     */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                   */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_LOCK_Pos (1UL)    /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_NIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.        */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                   */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                     */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                       */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_NIDEN_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_DOMAIN_NIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                             */
+#define TAMPC_PROTECT_DOMAIN_NIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                */
+
+
+/* TAMPC_PROTECT_DOMAIN_SPIDEN: Secure priviliged invasive (halting) debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of spiden signal */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Pos (0UL)  /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Pos) /*!< Bit mask of VALUE field.   */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                   */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                  */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_LOCK_Pos (1UL)   /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.      */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                  */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                    */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                      */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPIDEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                            */
+#define TAMPC_PROTECT_DOMAIN_SPIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                               */
+
+
+/* TAMPC_PROTECT_DOMAIN_SPNIDEN: Secure priviliged non-invasive debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of spniden signal */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Pos) /*!< Bit mask of VALUE field. */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                  */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                 */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_LOCK_Pos (1UL)  /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPNIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.    */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                 */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                   */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                     */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_DOMAIN_SPNIDEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                           */
+#define TAMPC_PROTECT_DOMAIN_SPNIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                              */
+
+
+
+/* ================================================= Struct TAMPC_PROTECT_AP ================================================= */
+/**
+  * @brief AP [TAMPC_PROTECT_AP] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  DBGEN;                             /*!< (@ 0x00000000) Invasive (halting) debug enable for domain n          */
+  __IOM uint32_t  SPIDEN;                            /*!< (@ 0x00000004) Secure priviliged invasive (halting) debug enable for
+                                                                         domain n*/                                               
+}NRF_TAMPC_PROTECT_AP_Type;                          /*!< Size = 8 (0x008)                                                     */
+/* TAMPC_PROTECT_AP_DBGEN: Invasive (halting) debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of dbgen signal */
+#define TAMPC_PROTECT_AP_DBGEN_VALUE_Pos (0UL)       /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_AP_DBGEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_AP_DBGEN_VALUE_Pos) /*!< Bit mask of VALUE field.             */
+#define TAMPC_PROTECT_AP_DBGEN_VALUE_Low (0x0UL)     /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_AP_DBGEN_VALUE_High (0x1UL)    /*!< Signal is logic 1                                                    */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_AP_DBGEN_LOCK_Pos (1UL)        /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_AP_DBGEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_AP_DBGEN_LOCK_Pos) /*!< Bit mask of LOCK field.                */
+#define TAMPC_PROTECT_AP_DBGEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                       */
+#define TAMPC_PROTECT_AP_DBGEN_LOCK_Enabled (0x1UL)  /*!< Lock enabled.                                                        */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_AP_DBGEN_FAULTTEST_Pos (2UL)   /*!< Position of FAULTTEST field.                                         */
+#define TAMPC_PROTECT_AP_DBGEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_AP_DBGEN_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST field. */
+#define TAMPC_PROTECT_AP_DBGEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                                 */
+#define TAMPC_PROTECT_AP_DBGEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                    */
+
+
+/* TAMPC_PROTECT_AP_SPIDEN: Secure priviliged invasive (halting) debug enable for domain n */
+
+/* VALUE @Bit 0 : Set value of spiden signal */
+#define TAMPC_PROTECT_AP_SPIDEN_VALUE_Pos (0UL)      /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_AP_SPIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_AP_SPIDEN_VALUE_Pos) /*!< Bit mask of VALUE field.           */
+#define TAMPC_PROTECT_AP_SPIDEN_VALUE_Low (0x0UL)    /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_AP_SPIDEN_VALUE_High (0x1UL)   /*!< Signal is logic 1                                                    */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_AP_SPIDEN_LOCK_Pos (1UL)       /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_AP_SPIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_AP_SPIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.              */
+#define TAMPC_PROTECT_AP_SPIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                      */
+#define TAMPC_PROTECT_AP_SPIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                        */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_AP_SPIDEN_FAULTTEST_Pos (2UL)  /*!< Position of FAULTTEST field.                                         */
+#define TAMPC_PROTECT_AP_SPIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_AP_SPIDEN_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_AP_SPIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                                */
+#define TAMPC_PROTECT_AP_SPIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                   */
+
+
+
+/* ============================================= Struct TAMPC_PROTECT_CORESIGHT ============================================== */
+/**
+  * @brief CORESIGHT [TAMPC_PROTECT_CORESIGHT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  DEVICEEN;                          /*!< (@ 0x00000000) Enable coresight domain circuitry                     */
+  __IOM uint32_t  DBGEN;                             /*!< (@ 0x00000004) Invasive (halting) debug enable for coresight domain  */
+  __IOM uint32_t  NIDEN;                             /*!< (@ 0x00000008) Non-invasive debug enable for coresight domain        */
+  __IOM uint32_t  SPIDEN;                            /*!< (@ 0x0000000C) Secure priviliged invasive (halting) debug enable for
+                                                                         coresight domain*/                                       
+  __IOM uint32_t  SPNIDEN;                           /*!< (@ 0x00000010) Secure priviliged non-invasive debug enable for
+                                                                         coresight domain*/                                       
+}NRF_TAMPC_PROTECT_CORESIGHT_Type;                   /*!< Size = 20 (0x014)                                                    */
+/* TAMPC_PROTECT_CORESIGHT_DEVICEEN: Enable coresight domain circuitry */
+
+/* VALUE @Bit 0 : Set value of deviceen signal */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                              */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                             */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_LOCK_Pos (1UL) /*!< Position of LOCK field.                                           */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_LOCK_Pos) /*!< Bit mask of LOCK
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                             */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                               */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                 */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DEVICEEN_FAULTTEST_Pos) /*!< Bit mask
+                                                                            of FAULTTEST field.*/                                 
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                       */
+#define TAMPC_PROTECT_CORESIGHT_DEVICEEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                          */
+
+
+/* TAMPC_PROTECT_CORESIGHT_DBGEN: Invasive (halting) debug enable for coresight domain */
+
+/* VALUE @Bit 0 : Set value of dbgen signal */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                 */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_LOCK_Pos (1UL) /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_LOCK_Pos) /*!< Bit mask of LOCK field.  */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                  */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                    */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_DBGEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                          */
+#define TAMPC_PROTECT_CORESIGHT_DBGEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                             */
+
+
+/* TAMPC_PROTECT_CORESIGHT_NIDEN: Non-invasive debug enable for coresight domain */
+
+/* VALUE @Bit 0 : Set value of niden signal */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                 */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                                */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_LOCK_Pos (1UL) /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.  */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                  */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                    */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_NIDEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                          */
+#define TAMPC_PROTECT_CORESIGHT_NIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                             */
+
+
+/* TAMPC_PROTECT_CORESIGHT_SPIDEN: Secure priviliged invasive (halting) debug enable for coresight domain */
+
+/* VALUE @Bit 0 : Set value of spiden signal */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                                */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                               */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_LOCK_Pos (1UL) /*!< Position of LOCK field.                                             */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_LOCK_Pos) /*!< Bit mask of LOCK field.*/
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                               */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                 */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                   */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPIDEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                         */
+#define TAMPC_PROTECT_CORESIGHT_SPIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                            */
+
+
+/* TAMPC_PROTECT_CORESIGHT_SPNIDEN: Secure priviliged non-invasive debug enable for coresight domain */
+
+/* VALUE @Bit 0 : Set value of spniden signal */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                          */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_VALUE_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_VALUE_Pos) /*!< Bit mask of VALUE
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_VALUE_Low (0x0UL) /*!< Signal is logic 0                                               */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_VALUE_High (0x1UL) /*!< Signal is logic 1                                              */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_LOCK_Pos (1UL) /*!< Position of LOCK field.                                            */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_LOCK_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_LOCK_Pos) /*!< Bit mask of LOCK
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                              */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                  */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_CORESIGHT_SPNIDEN_FAULTTEST_Pos) /*!< Bit mask of
+                                                                            FAULTTEST field.*/                                    
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                        */
+#define TAMPC_PROTECT_CORESIGHT_SPNIDEN_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                           */
+
+
+
+/* ================================================ Struct TAMPC_PROTECT_DFT ================================================= */
+/**
+  * @brief DFT [TAMPC_PROTECT_DFT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000000) Enable DFT mode                                       */
+}NRF_TAMPC_PROTECT_DFT_Type;                         /*!< Size = 4 (0x004)                                                     */
+/* TAMPC_PROTECT_DFT_ENABLE: Enable DFT mode */
+
+/* VALUE @Bit 0 : Set value of dft_enable signal */
+#define TAMPC_PROTECT_DFT_ENABLE_VALUE_Pos (0UL)     /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_DFT_ENABLE_VALUE_Msk (0x1UL << TAMPC_PROTECT_DFT_ENABLE_VALUE_Pos) /*!< Bit mask of VALUE field.         */
+#define TAMPC_PROTECT_DFT_ENABLE_VALUE_Low (0x0UL)   /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_DFT_ENABLE_VALUE_High (0x1UL)  /*!< Signal is logic 1                                                    */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_DFT_ENABLE_LOCK_Pos (1UL)      /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_DFT_ENABLE_LOCK_Msk (0x1UL << TAMPC_PROTECT_DFT_ENABLE_LOCK_Pos) /*!< Bit mask of LOCK field.            */
+#define TAMPC_PROTECT_DFT_ENABLE_LOCK_Disabled (0x0UL) /*!< Lock disabled.                                                     */
+#define TAMPC_PROTECT_DFT_ENABLE_LOCK_Enabled (0x1UL) /*!< Lock enabled.                                                       */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_DFT_ENABLE_FAULTTEST_Pos (2UL) /*!< Position of FAULTTEST field.                                         */
+#define TAMPC_PROTECT_DFT_ENABLE_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_DFT_ENABLE_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST
+                                                                            field.*/                                              
+#define TAMPC_PROTECT_DFT_ENABLE_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                               */
+#define TAMPC_PROTECT_DFT_ENABLE_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                  */
+
+
+
+/* ================================================== Struct TAMPC_PROTECT =================================================== */
+/**
+  * @brief PROTECT [TAMPC_PROTECT] (unspecified)
+  */
+typedef union {
+  __IOM uint32_t  ARRAY[128];                        /*!< (@ 0x00000000) Control register for tampc signal n                   */
+  struct {
+    __IOM NRF_TAMPC_PROTECT_DOMAIN_Type DOMAIN[16];  /*!< (@ 0x00000000) (unspecified)                                         */
+    __IOM NRF_TAMPC_PROTECT_AP_Type AP[16];          /*!< (@ 0x00000100) (unspecified)                                         */
+    __IOM NRF_TAMPC_PROTECT_CORESIGHT_Type CORESIGHT; /*!< (@ 0x00000180) (unspecified)                                        */
+    __IOM NRF_TAMPC_PROTECT_DFT_Type DFT;            /*!< (@ 0x00000194) (unspecified)                                         */
+  };
+}NRF_TAMPC_PROTECT_Type;                             /*!< Size = 512 (0x200)                                                   */
+/* TAMPC_PROTECT_ARRAY: Control register for tampc signal n */
+
+/* VALUE @Bit 0 : Set value of tampc signal n */
+#define TAMPC_PROTECT_ARRAY_VALUE_Pos (0UL)          /*!< Position of VALUE field.                                             */
+#define TAMPC_PROTECT_ARRAY_VALUE_Msk (0x1UL << TAMPC_PROTECT_ARRAY_VALUE_Pos) /*!< Bit mask of VALUE field.                   */
+#define TAMPC_PROTECT_ARRAY_VALUE_Low (0x0UL)        /*!< Signal is logic 0                                                    */
+#define TAMPC_PROTECT_ARRAY_VALUE_High (0x1UL)       /*!< Signal is logic 1                                                    */
+
+/* LOCK @Bit 1 : Lock this register to prevent changes */
+#define TAMPC_PROTECT_ARRAY_LOCK_Pos (1UL)           /*!< Position of LOCK field.                                              */
+#define TAMPC_PROTECT_ARRAY_LOCK_Msk (0x1UL << TAMPC_PROTECT_ARRAY_LOCK_Pos) /*!< Bit mask of LOCK field.                      */
+#define TAMPC_PROTECT_ARRAY_LOCK_Disabled (0x0UL)    /*!< Lock disabled.                                                       */
+#define TAMPC_PROTECT_ARRAY_LOCK_Enabled (0x1UL)     /*!< Lock enabled.                                                        */
+
+/* FAULTTEST @Bit 2 : Injects a fault in the protected signal. */
+#define TAMPC_PROTECT_ARRAY_FAULTTEST_Pos (2UL)      /*!< Position of FAULTTEST field.                                         */
+#define TAMPC_PROTECT_ARRAY_FAULTTEST_Msk (0x1UL << TAMPC_PROTECT_ARRAY_FAULTTEST_Pos) /*!< Bit mask of FAULTTEST field.       */
+#define TAMPC_PROTECT_ARRAY_FAULTTEST_NoOperation (0x0UL) /*!< No operation                                                    */
+#define TAMPC_PROTECT_ARRAY_FAULTTEST_Trigger (0x1UL) /*!< Trigger fault                                                       */
+
+
+
+/* ================================================ Struct TAMPC_ACTIVESHIELD ================================================ */
+/**
+  * @brief ACTIVESHIELD [TAMPC_ACTIVESHIELD] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  MASK;                              /*!< (@ 0x00000000) Active shield channel mask.                           */
+}NRF_TAMPC_ACTIVESHIELD_Type;                        /*!< Size = 4 (0x004)                                                     */
+/* TAMPC_ACTIVESHIELD_MASK: Active shield channel mask. */
+
+/* CH0 @Bit 0 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH0_Pos (0UL)        /*!< Position of CH0 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH0_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH0_Pos) /*!< Bit mask of CH0 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH0_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH0_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH1 @Bit 1 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH1_Pos (1UL)        /*!< Position of CH1 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH1_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH1_Pos) /*!< Bit mask of CH1 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH1_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH1_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH2 @Bit 2 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH2_Pos (2UL)        /*!< Position of CH2 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH2_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH2_Pos) /*!< Bit mask of CH2 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH2_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH2_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH3 @Bit 3 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH3_Pos (3UL)        /*!< Position of CH3 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH3_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH3_Pos) /*!< Bit mask of CH3 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH3_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH3_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH4 @Bit 4 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH4_Pos (4UL)        /*!< Position of CH4 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH4_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH4_Pos) /*!< Bit mask of CH4 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH4_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH4_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH5 @Bit 5 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH5_Pos (5UL)        /*!< Position of CH5 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH5_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH5_Pos) /*!< Bit mask of CH5 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH5_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH5_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH6 @Bit 6 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH6_Pos (6UL)        /*!< Position of CH6 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH6_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH6_Pos) /*!< Bit mask of CH6 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH6_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH6_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+/* CH7 @Bit 7 : Channel mask. */
+#define TAMPC_ACTIVESHIELD_MASK_CH7_Pos (7UL)        /*!< Position of CH7 field.                                               */
+#define TAMPC_ACTIVESHIELD_MASK_CH7_Msk (0x1UL << TAMPC_ACTIVESHIELD_MASK_CH7_Pos) /*!< Bit mask of CH7 field.                 */
+#define TAMPC_ACTIVESHIELD_MASK_CH7_Mask (0x1UL)     /*!< channel masked                                                       */
+#define TAMPC_ACTIVESHIELD_MASK_CH7_Unmask (0x0UL)   /*!< channel unmasked                                                     */
+
+
+
+/* =================================================== Struct TAMPC_GLITCH =================================================== */
+/**
+  * @brief GLITCH [TAMPC_GLITCH] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CONFIG[2];                         /*!< (@ 0x00000000) Configuration for the glitch detector n.              */
+}NRF_TAMPC_GLITCH_Type;                              /*!< Size = 8 (0x008)                                                     */
+/* TAMPC_GLITCH_CONFIG: Configuration for the glitch detector n. */
+
+/* EXTRADELAY @Bits 0..1 : Extra delay configuration. */
+#define TAMPC_GLITCH_CONFIG_EXTRADELAY_Pos (0UL)     /*!< Position of EXTRADELAY field.                                        */
+#define TAMPC_GLITCH_CONFIG_EXTRADELAY_Msk (0x3UL << TAMPC_GLITCH_CONFIG_EXTRADELAY_Pos) /*!< Bit mask of EXTRADELAY field.    */
+
+
+/* ====================================================== Struct TAMPC ======================================================= */
+/**
+  * @brief Tamper controller
+  */
+typedef struct {                                     /*!< TAMPC Structure                                                      */
+  __IM  uint32_t  RESERVED[64];
+  __IOM uint32_t  EVENTS_TAMPER;                     /*!< (@ 0x00000100) Tamper controller detected an error.                  */
+  __IM  uint32_t  RESERVED1[31];
+  __IOM uint32_t  PUBLISH_TAMPER;                    /*!< (@ 0x00000180) Publish configuration for event TAMPER                */
+  __IM  uint32_t  RESERVED2[95];
+  __IOM uint32_t  INTEN;                             /*!< (@ 0x00000300) Enable or disable interrupt                           */
+  __IOM uint32_t  INTENSET;                          /*!< (@ 0x00000304) Enable interrupt                                      */
+  __IOM uint32_t  INTENCLR;                          /*!< (@ 0x00000308) Disable interrupt                                     */
+  __IM  uint32_t  INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+  __IM  uint32_t  RESERVED3[60];
+  __IOM uint32_t  STATUS;                            /*!< (@ 0x00000400) The tamper controller status.                         */
+  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000404) Enable the tamper detectors.                          */
+  __IOM NRF_TAMPC_PROTECT_Type PROTECT;              /*!< (@ 0x00000408) (unspecified)                                         */
+  __IOM NRF_TAMPC_ACTIVESHIELD_Type ACTIVESHIELD;    /*!< (@ 0x00000608) (unspecified)                                         */
+  __IOM NRF_TAMPC_GLITCH_Type GLITCH;                /*!< (@ 0x0000060C) (unspecified)                                         */
+}NRF_TAMPC_Type;                                     /*!< Size = 1556 (0x614)                                                  */
+
+/* TAMPC_EVENTS_TAMPER: Tamper controller detected an error. */
+
+/* EVENTS_TAMPER @Bit 0 : Tamper controller detected an error. */
+#define TAMPC_EVENTS_TAMPER_EVENTS_TAMPER_Pos (0UL)  /*!< Position of EVENTS_TAMPER field.                                     */
+#define TAMPC_EVENTS_TAMPER_EVENTS_TAMPER_Msk (0x1UL << TAMPC_EVENTS_TAMPER_EVENTS_TAMPER_Pos) /*!< Bit mask of EVENTS_TAMPER
+                                                                            field.*/                                              
+#define TAMPC_EVENTS_TAMPER_EVENTS_TAMPER_NotGenerated (0x0UL) /*!< Event not generated                                        */
+#define TAMPC_EVENTS_TAMPER_EVENTS_TAMPER_Generated (0x1UL) /*!< Event generated                                               */
+
+
+/* TAMPC_PUBLISH_TAMPER: Publish configuration for event TAMPER */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event TAMPER will publish to */
+#define TAMPC_PUBLISH_TAMPER_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
+#define TAMPC_PUBLISH_TAMPER_CHIDX_Msk (0xFFUL << TAMPC_PUBLISH_TAMPER_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
+
+/* EN @Bit 31 : (unspecified) */
+#define TAMPC_PUBLISH_TAMPER_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+#define TAMPC_PUBLISH_TAMPER_EN_Msk (0x1UL << TAMPC_PUBLISH_TAMPER_EN_Pos) /*!< Bit mask of EN field.                          */
+#define TAMPC_PUBLISH_TAMPER_EN_Disabled (0x0UL)     /*!< Disable publishing                                                   */
+#define TAMPC_PUBLISH_TAMPER_EN_Enabled (0x1UL)      /*!< Enable publishing                                                    */
+
+
+/* TAMPC_INTEN: Enable or disable interrupt */
+
+/* TAMPER @Bit 0 : Enable or disable interrupt for event TAMPER */
+#define TAMPC_INTEN_TAMPER_Pos (0UL)                 /*!< Position of TAMPER field.                                            */
+#define TAMPC_INTEN_TAMPER_Msk (0x1UL << TAMPC_INTEN_TAMPER_Pos) /*!< Bit mask of TAMPER field.                                */
+#define TAMPC_INTEN_TAMPER_Disabled (0x0UL)          /*!< Disable                                                              */
+#define TAMPC_INTEN_TAMPER_Enabled (0x1UL)           /*!< Enable                                                               */
+
+
+/* TAMPC_INTENSET: Enable interrupt */
+
+/* TAMPER @Bit 0 : Write '1' to enable interrupt for event TAMPER */
+#define TAMPC_INTENSET_TAMPER_Pos (0UL)              /*!< Position of TAMPER field.                                            */
+#define TAMPC_INTENSET_TAMPER_Msk (0x1UL << TAMPC_INTENSET_TAMPER_Pos) /*!< Bit mask of TAMPER field.                          */
+#define TAMPC_INTENSET_TAMPER_Set (0x1UL)            /*!< Enable                                                               */
+#define TAMPC_INTENSET_TAMPER_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
+#define TAMPC_INTENSET_TAMPER_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
+
+
+/* TAMPC_INTENCLR: Disable interrupt */
+
+/* TAMPER @Bit 0 : Write '1' to disable interrupt for event TAMPER */
+#define TAMPC_INTENCLR_TAMPER_Pos (0UL)              /*!< Position of TAMPER field.                                            */
+#define TAMPC_INTENCLR_TAMPER_Msk (0x1UL << TAMPC_INTENCLR_TAMPER_Pos) /*!< Bit mask of TAMPER field.                          */
+#define TAMPC_INTENCLR_TAMPER_Clear (0x1UL)          /*!< Disable                                                              */
+#define TAMPC_INTENCLR_TAMPER_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
+#define TAMPC_INTENCLR_TAMPER_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
+
+
+/* TAMPC_INTPEND: Pending interrupts */
+
+/* TAMPER @Bit 0 : Read pending status of interrupt for event TAMPER */
+#define TAMPC_INTPEND_TAMPER_Pos (0UL)               /*!< Position of TAMPER field.                                            */
+#define TAMPC_INTPEND_TAMPER_Msk (0x1UL << TAMPC_INTPEND_TAMPER_Pos) /*!< Bit mask of TAMPER field.                            */
+#define TAMPC_INTPEND_TAMPER_NotPending (0x0UL)      /*!< Read: Not pending                                                    */
+#define TAMPC_INTPEND_TAMPER_Pending (0x1UL)         /*!< Read: Pending                                                        */
+
+
+/* TAMPC_STATUS: The tamper controller status. */
+
+/* FEATURE @Bit 0 : Error detected for the feature protection. */
+#define TAMPC_STATUS_FEATURE_Pos (0UL)               /*!< Position of FEATURE field.                                           */
+#define TAMPC_STATUS_FEATURE_Msk (0x1UL << TAMPC_STATUS_FEATURE_Pos) /*!< Bit mask of FEATURE field.                           */
+#define TAMPC_STATUS_FEATURE_NotDetected (0x0UL)     /*!< Not detected                                                         */
+#define TAMPC_STATUS_FEATURE_Detected (0x1UL)        /*!< Detected                                                             */
+
+/* EXT @Bit 1 : External tamper detector detected an error. */
+#define TAMPC_STATUS_EXT_Pos (1UL)                   /*!< Position of EXT field.                                               */
+#define TAMPC_STATUS_EXT_Msk (0x1UL << TAMPC_STATUS_EXT_Pos) /*!< Bit mask of EXT field.                                       */
+#define TAMPC_STATUS_EXT_NotDetected (0x0UL)         /*!< Not detected                                                         */
+#define TAMPC_STATUS_EXT_Detected (0x1UL)            /*!< Detected                                                             */
+
+/* ACTIVESHIELD @Bit 2 : Active shield detector detected an error. */
+#define TAMPC_STATUS_ACTIVESHIELD_Pos (2UL)          /*!< Position of ACTIVESHIELD field.                                      */
+#define TAMPC_STATUS_ACTIVESHIELD_Msk (0x1UL << TAMPC_STATUS_ACTIVESHIELD_Pos) /*!< Bit mask of ACTIVESHIELD field.            */
+#define TAMPC_STATUS_ACTIVESHIELD_NotDetected (0x0UL) /*!< Not detected                                                        */
+#define TAMPC_STATUS_ACTIVESHIELD_Detected (0x1UL)   /*!< Detected                                                             */
+
+/* GLITCH0 @Bit 4 : Glitch detector 0 detected an error. */
+#define TAMPC_STATUS_GLITCH0_Pos (4UL)               /*!< Position of GLITCH0 field.                                           */
+#define TAMPC_STATUS_GLITCH0_Msk (0x1UL << TAMPC_STATUS_GLITCH0_Pos) /*!< Bit mask of GLITCH0 field.                           */
+#define TAMPC_STATUS_GLITCH0_NotDetected (0x0UL)     /*!< Not detected                                                         */
+#define TAMPC_STATUS_GLITCH0_Detected (0x1UL)        /*!< Detected                                                             */
+
+/* GLITCH1 @Bit 5 : Glitch detector 1 detected an error. */
+#define TAMPC_STATUS_GLITCH1_Pos (5UL)               /*!< Position of GLITCH1 field.                                           */
+#define TAMPC_STATUS_GLITCH1_Msk (0x1UL << TAMPC_STATUS_GLITCH1_Pos) /*!< Bit mask of GLITCH1 field.                           */
+#define TAMPC_STATUS_GLITCH1_NotDetected (0x0UL)     /*!< Not detected                                                         */
+#define TAMPC_STATUS_GLITCH1_Detected (0x1UL)        /*!< Detected                                                             */
+
+
+/* TAMPC_ENABLE: Enable the tamper detectors. */
+
+/* FEATURE @Bit 0 : Enable the detector for feature. */
+#define TAMPC_ENABLE_FEATURE_Pos (0UL)               /*!< Position of FEATURE field.                                           */
+#define TAMPC_ENABLE_FEATURE_Msk (0x1UL << TAMPC_ENABLE_FEATURE_Pos) /*!< Bit mask of FEATURE field.                           */
+#define TAMPC_ENABLE_FEATURE_Disabled (0x0UL)        /*!< Disabled                                                             */
+#define TAMPC_ENABLE_FEATURE_Enabled (0x1UL)         /*!< Enabled                                                              */
+
+/* EXT @Bit 1 : Enable external tamper detector. */
+#define TAMPC_ENABLE_EXT_Pos (1UL)                   /*!< Position of EXT field.                                               */
+#define TAMPC_ENABLE_EXT_Msk (0x1UL << TAMPC_ENABLE_EXT_Pos) /*!< Bit mask of EXT field.                                       */
+#define TAMPC_ENABLE_EXT_Disabled (0x0UL)            /*!< Disabled                                                             */
+#define TAMPC_ENABLE_EXT_Enabled (0x1UL)             /*!< Enabled                                                              */
+
+/* ACTIVESHIELD @Bit 2 : Enable active shield detector. */
+#define TAMPC_ENABLE_ACTIVESHIELD_Pos (2UL)          /*!< Position of ACTIVESHIELD field.                                      */
+#define TAMPC_ENABLE_ACTIVESHIELD_Msk (0x1UL << TAMPC_ENABLE_ACTIVESHIELD_Pos) /*!< Bit mask of ACTIVESHIELD field.            */
+#define TAMPC_ENABLE_ACTIVESHIELD_Disabled (0x0UL)   /*!< Disabled                                                             */
+#define TAMPC_ENABLE_ACTIVESHIELD_Enabled (0x1UL)    /*!< Enabled                                                              */
+
+/* GLITCH0 @Bit 4 : Enable glitch detector 0. */
+#define TAMPC_ENABLE_GLITCH0_Pos (4UL)               /*!< Position of GLITCH0 field.                                           */
+#define TAMPC_ENABLE_GLITCH0_Msk (0x1UL << TAMPC_ENABLE_GLITCH0_Pos) /*!< Bit mask of GLITCH0 field.                           */
+#define TAMPC_ENABLE_GLITCH0_Disabled (0x0UL)        /*!< Disabled                                                             */
+#define TAMPC_ENABLE_GLITCH0_Enabled (0x1UL)         /*!< Enabled                                                              */
+
+/* GLITCH1 @Bit 5 : Enable glitch detector 1. */
+#define TAMPC_ENABLE_GLITCH1_Pos (5UL)               /*!< Position of GLITCH1 field.                                           */
+#define TAMPC_ENABLE_GLITCH1_Msk (0x1UL << TAMPC_ENABLE_GLITCH1_Pos) /*!< Bit mask of GLITCH1 field.                           */
+#define TAMPC_ENABLE_GLITCH1_Disabled (0x0UL)        /*!< Disabled                                                             */
+#define TAMPC_ENABLE_GLITCH1_Enabled (0x1UL)         /*!< Enabled                                                              */
+
+#else
 /* ================================================ Struct TAMPC_ACTIVESHIELD ================================================ */
 /**
   * @brief ACTIVESHIELD [TAMPC_ACTIVESHIELD] (unspecified)
@@ -147616,7 +148189,7 @@ typedef struct {                                     /*!< TAMPC Structure       
   #define TAMPC_ENABLE_INTRESETEN_Disabled (0x0UL)   /*!< Disabled.                                                            */
   #define TAMPC_ENABLE_INTRESETEN_Enabled (0x1UL)    /*!< Enabled.                                                             */
 
-
+#endif // defined(RTL_DOMINOZ)
 
 /* =========================================================================================================================== */
 /* ================                                            TBM                                            ================ */
