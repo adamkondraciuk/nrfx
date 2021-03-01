@@ -99,32 +99,64 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.DOMAIN[domain].DBGEN = ((p_reg->PROTECT.DOMAIN[domain].DBGEN &
+                                                    ~TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Msk) |
+                                                   ((enable ? TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_High
+                                                     : TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Low)
+                                                    << TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Pos));
+#else
             p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL &
                                                     ~TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Msk) |
                                                    ((enable ? TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_High
                                                      : TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Low)
                                                     << TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Pos));
+#endif
             break;
         case NRF_TAMPC_CTRL_NIDEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.DOMAIN[domain].NIDEN = ((p_reg->PROTECT.DOMAIN[domain].NIDEN &
+                                                    ~TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Msk) |
+                                                   ((enable ? TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_High
+                                                     : TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Low)
+                                                    << TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Pos));
+#else
             p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL &
                                                     ~TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Msk) |
                                                    ((enable ? TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_High
                                                      : TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Low)
                                                     << TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Pos));
+#endif
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.DOMAIN[domain].SPIDEN = ((p_reg->PROTECT.DOMAIN[domain].SPIDEN &
+                                                     ~TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Msk) |
+                                                    ((enable ? TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_High
+                                                      : TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Low)
+                                                     << TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Pos));
+#else
             p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL &
                                                      ~TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Msk) |
                                                     ((enable ? TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_High
                                                       : TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Low)
                                                      << TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Pos));
+#endif
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.DOMAIN[domain].SPNIDEN = ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN &
+                                                      ~TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Msk) |
+                                                     ((enable ? TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_High
+                                                       : TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Low)
+                                                      << TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Pos));
+#else
             p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL &
                                                       ~TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_Msk) |
                                                      ((enable ? TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_High
                                                        : TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_Low)
                                                       << TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_Pos));
+#endif
             break;
         default:
             NRFX_ASSERT(0);
@@ -141,17 +173,37 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.DOMAIN[domain].DBGEN & TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL & TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Pos);
+#endif
         case NRF_TAMPC_CTRL_NIDEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.DOMAIN[domain].NIDEN & TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL & TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Pos);
+#endif
         case NRF_TAMPC_CTRL_SPIDEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.DOMAIN[domain].SPIDEN & TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL & TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Pos);
+#endif
         case NRF_TAMPC_CTRL_SPNIDEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN & TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL & TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_VALUE_Pos);
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -169,18 +221,34 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.AP[domain].DBGEN = ((p_reg->PROTECT.AP[domain].DBGEN &
+                                                ~TAMPC_PROTECT_AP_DBGEN_VALUE_Msk) |
+                                               ((enable ? TAMPC_PROTECT_AP_DBGEN_VALUE_High :
+                                                 TAMPC_PROTECT_AP_DBGEN_VALUE_Low)
+                                                << TAMPC_PROTECT_AP_DBGEN_VALUE_Pos));
+#else
             p_reg->PROTECT.AP[domain].DBGEN.CTRL = ((p_reg->PROTECT.AP[domain].DBGEN.CTRL &
                                                 ~TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Msk) |
                                                ((enable ? TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_High :
                                                  TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Low)
                                                 << TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Pos));
+#endif
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
+#if defined(RTL_DOMINOZ)
+            p_reg->PROTECT.AP[domain].SPIDEN = ((p_reg->PROTECT.AP[domain].SPIDEN &
+                                                 ~TAMPC_PROTECT_AP_SPIDEN_VALUE_Msk) |
+                                                ((enable ? TAMPC_PROTECT_AP_SPIDEN_VALUE_High :
+                                                  TAMPC_PROTECT_AP_SPIDEN_VALUE_Low)
+                                                 << TAMPC_PROTECT_AP_SPIDEN_VALUE_Pos));
+#else
             p_reg->PROTECT.AP[domain].SPIDEN.CTRL = ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL &
                                                  ~TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Msk) |
                                                 ((enable ? TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_High :
                                                   TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Low)
                                                  << TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Pos));
+#endif
             break;
         default:
             NRFX_ASSERT(0);
@@ -197,11 +265,21 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.AP[domain].DBGEN & TAMPC_PROTECT_AP_DBGEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_AP_DBGEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.AP[domain].DBGEN.CTRL & TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Pos);
+#endif
         case NRF_TAMPC_CTRL_SPIDEN:
+#if defined(RTL_DOMINOZ)
+            return ((p_reg->PROTECT.AP[domain].SPIDEN & TAMPC_PROTECT_AP_SPIDEN_VALUE_Msk)
+                    >> TAMPC_PROTECT_AP_SPIDEN_VALUE_Pos);
+#else
             return ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL & TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Pos);
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
