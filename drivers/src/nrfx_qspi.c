@@ -124,8 +124,9 @@ static nrfx_err_t qspi_xfer(void *            p_buffer,
     }
     else if (is_first_buffer)
     {
-        nrf_qspi_task_trigger(NRF_QSPI, task);
+        nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
         nrf_qspi_int_enable(NRF_QSPI, NRF_QSPI_INT_READY_MASK);
+        nrf_qspi_task_trigger(NRF_QSPI, task);
     }
 
     return NRFX_SUCCESS;
