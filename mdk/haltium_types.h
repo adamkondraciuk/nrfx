@@ -180955,7 +180955,7 @@ typedef struct {                                     /*!< VPR Structure         
   #define VPR_CPURUN_ResetValue (0x00000000UL)       /*!< Reset value of CPURUN register.                                      */
 
 /* EN @Bit 1 : Controls CPU running state after a core reset. */
-  #define VPR_CPURUN_EN_Pos (1UL)                    /*!< Position of EN field.                                                */
+  #define VPR_CPURUN_EN_Pos (0UL)                    /*!< Position of EN field.                                                */
   #define VPR_CPURUN_EN_Msk (0x1UL << VPR_CPURUN_EN_Pos) /*!< Bit mask of EN field.                                            */
   #define VPR_CPURUN_EN_Min (0x0UL)                  /*!< Min enumerator value of EN field.                                    */
   #define VPR_CPURUN_EN_Max (0x1UL)                  /*!< Max enumerator value of EN field.                                    */
