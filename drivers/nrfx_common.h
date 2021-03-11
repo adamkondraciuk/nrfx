@@ -14,11 +14,25 @@
 extern "C" {
 #endif
 
+#if defined(__CORTEX_M)
+#define ISA_ARM 1
+#elif defined(__VPR_REV)
+#define ISA_RISCV 1
+#else
+#error "Unsupported ISA"
+#endif
+
+#if defined(ISA_ARM)
+#define STATIC_INLINE __STATIC_INLINE
+#elif defined(ISA_RISCV)
+#define STATIC_INLINE static inline
+#endif
+
 #ifndef NRFX_STATIC_INLINE
 #ifdef NRFX_DECLARE_ONLY
 #define NRFX_STATIC_INLINE
 #else
-#define NRFX_STATIC_INLINE __STATIC_INLINE
+#define NRFX_STATIC_INLINE STATIC_INLINE
 #endif
 #endif // NRFX_STATIC_INLINE
 
@@ -26,7 +40,7 @@ extern "C" {
 #ifdef NRF_DECLARE_ONLY
 #define NRF_STATIC_INLINE
 #else
-#define NRF_STATIC_INLINE __STATIC_INLINE
+#define NRF_STATIC_INLINE STATIC_INLINE
 #endif
 #endif // NRF_STATIC_INLINE
 

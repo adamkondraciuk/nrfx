@@ -17,14 +17,6 @@ extern "C" {
 #define NRFX_CONFIG_API_VER_2_9 1
 #endif
 
-#if defined(__CM33_REV) || defined(__CM4_REV) || defined(__CM0_REV)
-#define ISA_ARM 1
-#elif defined(__VPR_REV)
-#define ISA_RISCV 1
-#else
-#error "Unsupported ISA"
-#endif
-
 #if defined(ISA_RISCV)
 #define RISCV_FENCE(p, s) __asm__ __volatile__ ("fence " #p "," #s : : : "memory")
 #endif
