@@ -63,13 +63,23 @@ typedef struct
 } nrf_mpc_override_config_t;
 
 /**
+ * @brief Function for retrieving the state of the specified MPC event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event to be checked.
+ *
+ * @retval true  The event has been generated.
+ * @retval false The event has not been generated.
+ */
+NRF_STATIC_INLINE bool nrf_mpc_event_check(NRF_MPC_Type const * p_reg, nrf_mpc_event_t event);
+
+/**
  * @brief Function for clearing the specified MPC event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to be cleared.
  */
-NRF_STATIC_INLINE void nrf_mpc_event_clear(NRF_MPC_Type *  p_reg,
-                                           nrf_mpc_event_t event);
+NRF_STATIC_INLINE void nrf_mpc_event_clear(NRF_MPC_Type * p_reg, nrf_mpc_event_t event);
 
 /**
  * @brief Function for getting the address of the specified MPC event register.
@@ -249,23 +259,21 @@ NRF_STATIC_INLINE nrf_mpc_errorsource_t
 nrf_mpc_memaccerr_info_errorsource_get(NRF_MPC_Type const * p_reg);
 
 #ifndef NRF_DECLARE_ONLY
-NRF_STATIC_INLINE bool nrf_mpc_event_check(NRF_MPC_Type const * p_reg,
-                                           nrf_mpc_event_t      mpc_event)
+NRF_STATIC_INLINE bool nrf_mpc_event_check(NRF_MPC_Type const * p_reg, nrf_mpc_event_t event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)mpc_event);
+    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE void nrf_mpc_event_clear(NRF_MPC_Type *  p_reg,
-                                           nrf_mpc_event_t mpc_event)
+NRF_STATIC_INLINE void nrf_mpc_event_clear(NRF_MPC_Type * p_reg, nrf_mpc_event_t event)
 {
-    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)mpc_event)) = 0;
-    nrf_event_readback((uint8_t *)p_reg + (uint32_t)mpc_event);
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0;
+    nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mpc_event_address_get(NRF_MPC_Type const * p_reg,
-                                                     nrf_mpc_event_t      mpc_event)
+                                                     nrf_mpc_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)mpc_event);
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
 }
 
 NRF_STATIC_INLINE void nrf_mpc_int_enable(NRF_MPC_Type * p_reg, uint32_t mask)
