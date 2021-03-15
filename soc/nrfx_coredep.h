@@ -108,6 +108,7 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 
 NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 {
+#if ISA_ARM
     if (time_us == 0)
     {
         return;
@@ -145,6 +146,8 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
         (delay_func_t)((((uint32_t)delay_machine_code) | 1));
     uint32_t cycles = time_us * NRFX_DELAY_CPU_FREQ_MHZ;
     delay_cycles(cycles);
+#endif
+    /* TODO: ISA_RISCV */
 }
 
 #endif // !NRFX_CHECK(NRFX_DELAY_DWT_BASED_DELAY)
