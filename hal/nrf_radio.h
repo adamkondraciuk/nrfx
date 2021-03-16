@@ -1864,7 +1864,8 @@ NRF_STATIC_INLINE void nrf_radio_cca_configure(NRF_RADIO_Type *     p_reg,
 
 NRF_STATIC_INLINE void nrf_radio_power_set(NRF_RADIO_Type * p_reg, bool radio_power)
 {
-    p_reg->POWER = (uint32_t) radio_power;
+    p_reg->POWER = (radio_power ? RADIO_POWER_POWER_Enabled : RADIO_POWER_POWER_Disabled)
+                   << RADIO_POWER_POWER_Pos;
 }
 
 #if defined(RADIO_CTESTATUS_CTETIME_Msk)
