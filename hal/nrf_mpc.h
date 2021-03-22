@@ -553,8 +553,8 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_memaccerr_address_get(NRF_MPC_Type const * p_
 
 NRF_STATIC_INLINE nrf_owner_t nrf_mpc_memaccerr_info_ownerid_get(NRF_MPC_Type const * p_reg)
 {
-    return ((p_reg->MEMACCERR.INFO & MPC_MEMACCERR_INFO_OWNERID_Msk)
-            >> MPC_MEMACCERR_INFO_OWNERID_Pos);
+    return (nrf_owner_t)((p_reg->MEMACCERR.INFO & MPC_MEMACCERR_INFO_OWNERID_Msk)
+                         >> MPC_MEMACCERR_INFO_OWNERID_Pos);
 }
 
 NRF_STATIC_INLINE uint8_t nrf_mpc_memaccerr_info_masterport_get(NRF_MPC_Type const * p_reg)
@@ -574,8 +574,8 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_memaccerr_info_perm_get(NRF_MPC_Type const * 
 NRF_STATIC_INLINE nrf_mpc_errorsource_t
 nrf_mpc_memaccerr_info_errorsource_get(NRF_MPC_Type const * p_reg)
 {
-    return ((p_reg->MEMACCERR.INFO & MPC_MEMACCERR_INFO_ERRORSOURCE_Msk)
-            >> MPC_MEMACCERR_INFO_ERRORSOURCE_Pos);
+    return (nrf_mpc_errorsource_t)((p_reg->MEMACCERR.INFO & MPC_MEMACCERR_INFO_ERRORSOURCE_Msk)
+                                   >> MPC_MEMACCERR_INFO_ERRORSOURCE_Pos);
 }
 
 #endif // NRF_DECLARE_ONLY
