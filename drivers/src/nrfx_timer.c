@@ -6,7 +6,7 @@
 
 #if !(NRFX_CHECK(NRFX_TIMER0_ENABLED) || NRFX_CHECK(NRFX_TIMER1_ENABLED) || \
       NRFX_CHECK(NRFX_TIMER2_ENABLED) || NRFX_CHECK(NRFX_TIMER3_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER4_ENABLED))
+      NRFX_CHECK(NRFX_TIMER4_ENABLED) || NRFX_CHECK(NRFX_TIMER120_ENABLED))
 #error "No enabled TIMER instances. Check <nrfx_config.h>."
 #endif
 
@@ -296,6 +296,14 @@ void nrfx_timer_4_irq_handler(void)
 {
     irq_handler(NRF_TIMER4, &m_cb[NRFX_TIMER4_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(4));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER120_ENABLED)
+void nrfx_timer_120_irq_handler(void)
+{
+    irq_handler(NRF_TIMER120, &m_cb[NRFX_TIMER120_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(120));
 }
 #endif
 
