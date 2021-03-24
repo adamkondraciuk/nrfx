@@ -16,6 +16,16 @@ extern "C" {
  * @brief   Hardware access layer (HAL) for managing the reset hub (RESETHUB) peripheral.
  */
 
+/** @brief RESETHUB domains. */
+typedef enum
+{
+    NRF_RESETHUB_DOMAIN_DEBUG       = 0, /**< Debug domain. */
+    NRF_RESETHUB_DOMAIN_GLOBAL      = 1, /**< Global domain. */
+    NRF_RESETHUB_DOMAIN_APPLICATION = 2, /**< Application domain. */
+    NRF_RESETHUB_DOMAIN_SECURE      = 3, /**< Secure domain. */
+    NRF_RESETHUB_DOMAIN_RADIO       = 4, /**< Radio domain. */
+} nrf_resethub_domain_t;
+
 /** @brief Tasks. */
 typedef enum
 {
@@ -36,11 +46,16 @@ typedef enum
     NRF_RESETHUB_TASK_RESET_DOMAIN_14 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[14]), /**< Reset domain 14. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_15 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[15]), /**< Reset domain 15. */
 
-    NRF_RESETHUB_TASK_RESET_DOMAIN_DEBUG       = NRF_RESETHUB_TASK_RESET_DOMAIN_0, /**< Reset debug domain. */
-    NRF_RESETHUB_TASK_RESET_DOMAIN_GLOBAL      = NRF_RESETHUB_TASK_RESET_DOMAIN_1, /**< Reset global domain. */
-    NRF_RESETHUB_TASK_RESET_DOMAIN_APPLICATION = NRF_RESETHUB_TASK_RESET_DOMAIN_2, /**< Reset application domain. */
-    NRF_RESETHUB_TASK_RESET_DOMAIN_SECURE      = NRF_RESETHUB_TASK_RESET_DOMAIN_3, /**< Reset secure domain. */
-    NRF_RESETHUB_TASK_RESET_DOMAIN_RADIO       = NRF_RESETHUB_TASK_RESET_DOMAIN_4, /**< Reset radio domain. */
+    NRF_RESETHUB_TASK_RESET_DOMAIN_DEBUG =
+        offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_RESETHUB_DOMAIN_DEBUG]),          /**< Reset debug domain. */
+    NRF_RESETHUB_TASK_RESET_DOMAIN_GLOBAL =
+        offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_RESETHUB_DOMAIN_GLOBAL]),         /**< Reset global domain. */
+    NRF_RESETHUB_TASK_RESET_DOMAIN_APPLICATION =
+        offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_RESETHUB_DOMAIN_APPLICATION]),    /**< Reset application domain. */
+    NRF_RESETHUB_TASK_RESET_DOMAIN_SECURE =
+        offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_RESETHUB_DOMAIN_SECURE]),         /**< Reset secure domain. */
+    NRF_RESETHUB_TASK_RESET_DOMAIN_RADIO =
+        offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[NRF_RESETHUB_DOMAIN_RADIO]),          /**< Reset radio domain. */
 } nrf_resethub_task_t;
 
 /** @brief Events. */
@@ -63,12 +78,27 @@ typedef enum
     NRF_RESETHUB_EVENT_DOMAIN_RESET_14 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[14]), /**< Domain 14 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_15 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[15]), /**< Domain 15 was reset. */
 
-    NRF_RESETHUB_EVENT_DOMAIN_RESET_DEBUG       = NRF_RESETHUB_EVENT_DOMAIN_RESET_0, /**< Debug domain was reset. */
-    NRF_RESETHUB_EVENT_DOMAIN_RESET_GLOBAL      = NRF_RESETHUB_EVENT_DOMAIN_RESET_1, /**< Global domain was reset. */
-    NRF_RESETHUB_EVENT_DOMAIN_RESET_APPLICATION = NRF_RESETHUB_EVENT_DOMAIN_RESET_2, /**< Application domain was reset. */
-    NRF_RESETHUB_EVENT_DOMAIN_RESET_SECURE      = NRF_RESETHUB_EVENT_DOMAIN_RESET_3, /**< Secure domain was reset. */
-    NRF_RESETHUB_EVENT_DOMAIN_RESET_RADIO       = NRF_RESETHUB_EVENT_DOMAIN_RESET_4, /**< Radio domain was reset. */
+    NRF_RESETHUB_EVENT_DOMAIN_RESET_DEBUG =
+        offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_RESETHUB_DOMAIN_DEBUG]),           /**< Debug domain was reset. */
+    NRF_RESETHUB_EVENT_DOMAIN_RESET_GLOBAL =
+        offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_RESETHUB_DOMAIN_GLOBAL]),          /**< Global domain was reset. */
+    NRF_RESETHUB_EVENT_DOMAIN_RESET_APPLICATION =
+        offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_RESETHUB_DOMAIN_APPLICATION]),     /**< Application domain was reset. */
+    NRF_RESETHUB_EVENT_DOMAIN_RESET_SECURE =
+        offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_RESETHUB_DOMAIN_SECURE]),          /**< Secure domain was reset. */
+    NRF_RESETHUB_EVENT_DOMAIN_RESET_RADIO =
+        offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_RESETHUB_DOMAIN_RADIO]),           /**< Radio domain was reset. */
 } nrf_resethub_event_t;
+
+/** @brief Domain reset reason bit masks. */
+typedef enum
+{
+    NRF_RESETHUB_DOMAIN_RESETREAS_DOG_MASK    = RESETHUB_RESETREAS_DOMAIN_DOG_Msk,         /**< Bit mask of DOG field. */
+    NRF_RESETHUB_DOMAIN_RESETREAS_DOGNS_MASK  = RESETHUB_RESETREAS_DOMAIN_DOGNS_Msk,       /**< Bit mask of DOGNS field. */
+    NRF_RESETHUB_DOMAIN_RESETREAS_SREQ_MASK   = RESETHUB_RESETREAS_DOMAIN_SREQ_Msk,        /**< Bit mask of SREQ field. */
+    NRF_RESETHUB_DOMAIN_RESETREAS_LOCKUP_MASK = RESETHUB_RESETREAS_DOMAIN_LOCKUP_Msk,      /**< Bit mask of LOCKUP field. */
+    NRF_RESETHUB_DOMAIN_RESETREAS_CROSS_MASK  = RESETHUB_RESETREAS_DOMAIN_CROSSDOMAIN_Msk, /**< Bit mask of CROSSDOMAIN field. */
+} nrf_resethub_domain_resetreas_t;
 
 /**
  * @brief Function for activating the specified RESETHUB task.
@@ -76,7 +106,8 @@ typedef enum
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task to be activated.
  */
-NRF_STATIC_INLINE void nrf_resethub_task_trigger(NRF_RESETHUB_Type * p_reg, nrf_resethub_task_t task);
+NRF_STATIC_INLINE void nrf_resethub_task_trigger(NRF_RESETHUB_Type * p_reg,
+                                                 nrf_resethub_task_t task);
 
 /**
  * @brief Function for clearing the specified event.
@@ -84,7 +115,8 @@ NRF_STATIC_INLINE void nrf_resethub_task_trigger(NRF_RESETHUB_Type * p_reg, nrf_
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event to clear.
  */
-NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type * p_reg, nrf_resethub_event_t event);
+NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type *  p_reg,
+                                                nrf_resethub_event_t event);
 
 /**
  * @brief Function for retrieving the state of the specified event.
@@ -95,24 +127,66 @@ NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type * p_reg, nrf_r
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_resethub_event_check(NRF_RESETHUB_Type const * p_reg, nrf_resethub_event_t event);
+NRF_STATIC_INLINE bool nrf_resethub_event_check(NRF_RESETHUB_Type const * p_reg,
+                                                nrf_resethub_event_t      event);
+
+/**
+ * @brief Function for getting the reset reason bitmask associated with specified domain.
+ *
+ * @note Unless cleared, the RESETREAS register is cumulative.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] domain Domain to have reset reason returned.
+ *
+ * @return The mask of reset reasons constructed with @ref nrf_resethub_domain_resetreas_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_resethub_domain_resetreas_get(NRF_RESETHUB_Type const * p_reg,
+                                                             nrf_resethub_domain_t     domain);
+
+/**
+ * @brief Function for clearing the selected reset reason field associated with specified domain.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] domain Domain to have reset reason cleared.
+ * @param[in] mask   The mask constructed from @ref nrf_resethub_domain_resetreas_t enumerator values.
+ */
+NRF_STATIC_INLINE void nrf_resethub_domain_resetreas_clear(NRF_RESETHUB_Type *   p_reg,
+                                                           nrf_resethub_domain_t domain,
+                                                           uint32_t              mask);
+
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_resethub_task_trigger(NRF_RESETHUB_Type * p_reg, nrf_resethub_task_t task)
+NRF_STATIC_INLINE void nrf_resethub_task_trigger(NRF_RESETHUB_Type * p_reg,
+                                                 nrf_resethub_task_t task)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type * p_reg, nrf_resethub_event_t event)
+NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type *  p_reg,
+                                                nrf_resethub_event_t event)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0x0UL;
     nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE bool nrf_resethub_event_check(NRF_RESETHUB_Type const * p_reg, nrf_resethub_event_t event)
+NRF_STATIC_INLINE bool nrf_resethub_event_check(NRF_RESETHUB_Type const * p_reg,
+                                                nrf_resethub_event_t      event)
 {
     return (bool)*((volatile uint32_t *)((uint8_t *)p_reg + event));
+}
+
+NRF_STATIC_INLINE uint32_t nrf_resethub_domain_resetreas_get(NRF_RESETHUB_Type const * p_reg,
+                                                             nrf_resethub_domain_t     domain)
+{
+    return p_reg->RESETREAS.DOMAIN[domain];
+}
+
+NRF_STATIC_INLINE void nrf_resethub_domain_resetreas_clear(NRF_RESETHUB_Type *   p_reg,
+                                                           nrf_resethub_domain_t domain,
+                                                           uint32_t              mask)
+{
+    p_reg->RESETREAS.DOMAIN[domain] = mask;
 }
 
 #endif
