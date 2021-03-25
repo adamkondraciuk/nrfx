@@ -4,7 +4,7 @@
 #define NRFX_SAADC_H__
 
 #include <nrfx.h>
-#include <hal/nrf_saadc.h>
+#include <haly/nrfy_saadc.h>
 
 #ifdef __cplusplus
 extern "C" {
