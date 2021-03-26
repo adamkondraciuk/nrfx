@@ -245,16 +245,12 @@ NRF_STATIC_INLINE void nrf_gpio_pin_dir_set(uint32_t pin_number, nrf_gpio_pin_di
 /**
  * @brief Function for setting a GPIO pin.
  *
- * For this function to have any effect, the pin must be configured as an output.
- *
  * @param pin_number Specifies the pin number to be set.
  */
 NRF_STATIC_INLINE void nrf_gpio_pin_set(uint32_t pin_number);
 
 /**
  * @brief Function for clearing a GPIO pin.
- *
- * For this function to have any effect, the pin must be configured as an output.
  *
  * @param pin_number Specifies the pin number to clear.
  */
@@ -263,16 +259,12 @@ NRF_STATIC_INLINE void nrf_gpio_pin_clear(uint32_t pin_number);
 /**
  * @brief Function for toggling a GPIO pin.
  *
- * For this function to have any effect, the pin must be configured as an output.
- *
  * @param pin_number Specifies the pin number to toggle.
  */
 NRF_STATIC_INLINE void nrf_gpio_pin_toggle(uint32_t pin_number);
 
 /**
  * @brief Function for writing a value to a GPIO pin.
- *
- * For this function to have any effect, the pin must be configured as an output.
  *
  * @param pin_number Specifies the pin number to write.
  * @param value      Specifies the value to be written to the pin.
