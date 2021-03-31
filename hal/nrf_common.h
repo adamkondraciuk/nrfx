@@ -47,6 +47,8 @@ typedef enum
 #define ADDRESS_BUS_Msk      (0x00FF0000UL)
 #define ADDRESS_SLAVE_Pos    (12UL)
 #define ADDRESS_SLAVE_Msk    (0x0000F000UL)
+#define ADDRESS_PERIPHID_Pos (12UL)
+#define ADDRESS_PERIPHID_Msk (0x007FF000UL)
 
 typedef enum
 {
@@ -129,6 +131,11 @@ NRF_STATIC_INLINE uint8_t nrf_address_bus_get(uint32_t addr)
 NRF_STATIC_INLINE uint8_t nrf_address_slave_get(uint32_t addr)
 {
     return (uint8_t)((addr & ADDRESS_SLAVE_Msk) >> ADDRESS_SLAVE_Pos);
+}
+
+NRF_STATIC_INLINE uint16_t nrf_address_periphid_get(uint32_t addr)
+{
+    return (uint16_t)((addr & ADDRESS_PERIPHID_Msk) >> ADDRESS_PERIPHID_Pos);
 }
 #endif // defined(HALTIUM_XXAA)
 
