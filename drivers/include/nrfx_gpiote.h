@@ -160,7 +160,7 @@ typedef struct
     }
 
 #if !defined (NRFX_GPIOTE_CHANNELS_USED) || defined(__NRFX_DOXYGEN__)
-/** @brief Bitmask that defines GPIOTE channels that are reserved for use outside of the nrfx library. */
+/* Bitmask that defines GPIOTE channels that are reserved for use outside of the nrfx library. */
 #define NRFX_GPIOTE_CHANNELS_USED 0
 #endif
 
