@@ -190,6 +190,7 @@ typedef void (* nrfx_twim_evt_handler_t)(nrfx_twim_evt_t const * p_event,
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The driver is in invalid state.
+ * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.
  * @retval NRFX_ERROR_BUSY          Some other peripheral with the same
  *                                  instance ID is already in use. This is
  *                                  possible only if @ref nrfx_prs module

@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the TWIM peripheral.
  */
 
+#if defined(TWIM_FREQUENCY_FREQUENCY_K1000) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether 1000 kHz clock frequency is available. */
+#define NRF_TWIM_HAS_1000_KHZ_FREQ 1
+#else
+#define NRF_TWIM_HAS_1000_KHZ_FREQ 0
+#endif
+
 /** @brief TWIM tasks. */
 typedef enum
 {
@@ -78,7 +85,7 @@ typedef enum
     NRF_TWIM_FREQ_100K  = TWIM_FREQUENCY_FREQUENCY_K100, ///< 100 kbps.
     NRF_TWIM_FREQ_250K  = TWIM_FREQUENCY_FREQUENCY_K250, ///< 250 kbps.
     NRF_TWIM_FREQ_400K  = TWIM_FREQUENCY_FREQUENCY_K400, ///< 400 kbps.
-#if defined(TWIM_FREQUENCY_FREQUENCY_K1000) || defined(__NRFX_DOXYGEN__)
+#if NRF_TWIM_HAS_1000_KHZ_FREQ
     NRF_TWIM_FREQ_1000K = TWIM_FREQUENCY_FREQUENCY_K1000 ///< 1000 kbps.
 #endif
 } nrf_twim_frequency_t;

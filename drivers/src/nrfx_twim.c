@@ -43,12 +43,12 @@
     (type == NRFX_TWIM_XFER_TXTX ? "XFER_TXTX" : \
                                    "UNKNOWN TRANSFER TYPE"))))
 
-#define TWIM_PIN_INIT(_pin, _drive) nrf_gpio_cfg((_pin),             \
-                                         NRF_GPIO_PIN_DIR_INPUT,     \
-                                         NRF_GPIO_PIN_INPUT_CONNECT, \
-                                         NRF_GPIO_PIN_PULLUP,        \
-                                         (_drive),                   \
-                                         NRF_GPIO_PIN_NOSENSE)
+#define TWIM_PIN_INIT(_pin, _drive) nrf_gpio_cfg((_pin),                     \
+                                                 NRF_GPIO_PIN_DIR_INPUT,     \
+                                                 NRF_GPIO_PIN_INPUT_CONNECT, \
+                                                 NRF_GPIO_PIN_PULLUP,        \
+                                                 (_drive),                   \
+                                                 NRF_GPIO_PIN_NOSENSE)
 
 #define TWIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, len1, len2)     \
     (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
@@ -185,6 +185,44 @@ static bool xfer_completeness_check(NRF_TWIM_Type * p_twim, twim_control_block_t
     return transfer_complete;
 }
 
+static bool twim_pins_configure(NRF_TWIM_Type * p_twim, nrfx_twim_config_t const * p_config)
+{
+    nrf_gpio_pin_drive_t drive;
+
+#if NRF_TWIM_HAS_1000_KHZ_FREQ && defined(NRF5340_XXAA)
+    if (p_config->frequency >= NRF_TWIM_FREQ_1000K)
+    {
+        /* When using 1 Mbps mode, two high-speed pins have to be used with extra high drive. */
+        drive = NRF_GPIO_PIN_E0E1;
+
+        uint32_t e0e1_pin_1 = NRF_GPIO_PIN_MAP(1, 2);
+        uint32_t e0e1_pin_2 = NRF_GPIO_PIN_MAP(1, 3);
+
+        /* Check whether provided pins have the extra high drive capabilities. */
+        if (((p_config->scl != e0e1_pin_1) || (p_config->sda != e0e1_pin_2)) &&
+            ((p_config->scl != e0e1_pin_2) || (p_config->sda != e0e1_pin_1)))
+        {
+            return false;
+        }
+    }
+    else
+#endif
+    {
+        drive = NRF_GPIO_PIN_S0D1;
+    }
+
+    /* To secure correct signal levels on the pins used by the TWI
+       master when the system is in OFF mode, and when the TWI master is
+       disabled, these pins must be configured in the GPIO peripheral.
+    */
+    TWIM_PIN_INIT(p_config->scl, drive);
+    TWIM_PIN_INIT(p_config->sda, drive);
+
+    nrf_twim_pins_set(p_twim, p_config->scl, p_config->sda);
+
+    return true;
+}
+
 nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           nrfx_twim_config_t const * p_config,
                           nrfx_twim_evt_handler_t    event_handler,
@@ -240,25 +278,13 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->frequency;
 #endif
 
-    nrf_gpio_pin_drive_t drive;
-#if defined(TWIM_FREQUENCY_FREQUENCY_K1000) && defined(GPIO_PIN_CNF_DRIVE_E0E1)
-    /* When using 1 Mbps mode, two high-speed pins have to be used with extra high drive. */
-    drive = (p_config->frequency >= NRF_TWIM_FREQ_1000K) ? NRF_GPIO_PIN_E0E1 : NRF_GPIO_PIN_S0D1;
-#else
-    drive = NRF_GPIO_PIN_S0D1;
-#endif
-
-    /* To secure correct signal levels on the pins used by the TWI
-       master when the system is in OFF mode, and when the TWI master is
-       disabled, these pins must be configured in the GPIO peripheral.
-    */
-    TWIM_PIN_INIT(p_config->scl, drive);
-    TWIM_PIN_INIT(p_config->sda, drive);
-
     NRF_TWIM_Type * p_twim = p_instance->p_twim;
-    nrf_twim_pins_set(p_twim, p_config->scl, p_config->sda);
-    nrf_twim_frequency_set(p_twim,
-        (nrf_twim_frequency_t)p_config->frequency);
+    if (!twim_pins_configure(p_twim, p_config))
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+
+    nrf_twim_frequency_set(p_twim, (nrf_twim_frequency_t)p_config->frequency);
 
     if (p_cb->handler)
     {
