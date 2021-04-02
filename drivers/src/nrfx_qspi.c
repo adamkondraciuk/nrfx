@@ -19,6 +19,18 @@
 /** @brief Default number of tries in timeout function. */
 #define QSPI_DEF_WAIT_ATTEMPTS 100
 
+/**
+ * @brief Macro for initializing a QSPI pin.
+ *
+ * QSPI peripheral expects high drive pin strength.
+ */
+#define QSPI_PIN_INIT(_pin) nrf_gpio_cfg((_pin),                        \
+                                         NRF_GPIO_PIN_DIR_INPUT,        \
+                                         NRF_GPIO_PIN_INPUT_DISCONNECT, \
+                                         NRF_GPIO_PIN_NOPULL,           \
+                                         NRF_GPIO_PIN_H0H1,             \
+                                         NRF_GPIO_PIN_NOSENSE)
+
 /** @brief Control block - driver instance local data. */
 typedef struct
 {
@@ -56,20 +68,6 @@ static nrfx_err_t qspi_task_perform(nrf_qspi_task_t task)
     return NRFX_SUCCESS;
 }
 
-static void qspi_pin_configure(uint8_t pin)
-{
-#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
-    nrf_gpio_pin_mcu_select(pin, NRF_GPIO_PIN_MCUSEL_PERIPHERAL);
-#endif
-
-    nrf_gpio_cfg(pin,
-                 NRF_GPIO_PIN_DIR_INPUT,
-                 NRF_GPIO_PIN_INPUT_DISCONNECT,
-                 NRF_GPIO_PIN_NOPULL,
-                 NRF_GPIO_PIN_H0H1,
-                 NRF_GPIO_PIN_NOSENSE);
-}
-
 static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
 {
     // Check if the user set meaningful values to struct fields. If not, return false.
@@ -81,22 +79,65 @@ static bool qspi_pins_configure(nrf_qspi_pins_t const * p_config)
         return false;
     }
 
-    qspi_pin_configure(p_config->sck_pin);
-    qspi_pin_configure(p_config->csn_pin);
-    qspi_pin_configure(p_config->io0_pin);
-    qspi_pin_configure(p_config->io1_pin);
+#if defined(NRF5340_XXAA)
+    // Check if dedicated QSPI pins are used.
+    enum {
+        QSPI_IO0_DEDICATED = NRF_GPIO_PIN_MAP(0, 13),
+        QSPI_IO1_DEDICATED = NRF_GPIO_PIN_MAP(0, 14),
+        QSPI_IO2_DEDICATED = NRF_GPIO_PIN_MAP(0, 15),
+        QSPI_IO3_DEDICATED = NRF_GPIO_PIN_MAP(0, 16),
+        QSPI_SCK_DEDICATED = NRF_GPIO_PIN_MAP(0, 17),
+        QSPI_CSN_DEDICATED = NRF_GPIO_PIN_MAP(0, 18)
+    };
+
+    if ((p_config->sck_pin != QSPI_SCK_DEDICATED) ||
+        (p_config->csn_pin != QSPI_CSN_DEDICATED) ||
+        (p_config->io0_pin != QSPI_IO0_DEDICATED) ||
+        (p_config->io1_pin != QSPI_IO1_DEDICATED) ||
+        (p_config->io2_pin != NRF_QSPI_PIN_NOT_CONNECTED &&
+         p_config->io2_pin != QSPI_IO2_DEDICATED) ||
+        (p_config->io3_pin != NRF_QSPI_PIN_NOT_CONNECTED &&
+         p_config->io3_pin != QSPI_IO3_DEDICATED))
+    {
+        return false;
+    }
+#endif
+
+    QSPI_PIN_INIT(p_config->sck_pin);
+    QSPI_PIN_INIT(p_config->csn_pin);
+    QSPI_PIN_INIT(p_config->io0_pin);
+    QSPI_PIN_INIT(p_config->io1_pin);
     if (p_config->io2_pin != NRF_QSPI_PIN_NOT_CONNECTED)
     {
-        qspi_pin_configure(p_config->io2_pin);
+        QSPI_PIN_INIT(p_config->io2_pin);
     }
     if (p_config->io3_pin != NRF_QSPI_PIN_NOT_CONNECTED)
     {
-        qspi_pin_configure(p_config->io3_pin);
+        QSPI_PIN_INIT(p_config->io3_pin);
     }
 
     nrf_qspi_pins_set(NRF_QSPI, p_config);
 
     return true;
+}
+
+static void qspi_pins_deconfigure(void)
+{
+    nrf_qspi_pins_t pins;
+    nrf_qspi_pins_get(NRF_QSPI, &pins);
+
+    nrf_gpio_cfg_default(pins.sck_pin);
+    nrf_gpio_cfg_default(pins.csn_pin);
+    nrf_gpio_cfg_default(pins.io0_pin);
+    nrf_gpio_cfg_default(pins.io1_pin);
+    if (pins.io2_pin != NRF_QSPI_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(pins.io2_pin);
+    }
+    if (pins.io3_pin != NRF_QSPI_PIN_NOT_CONNECTED)
+    {
+        nrf_gpio_cfg_default(pins.io3_pin);
+    }
 }
 
 static nrfx_err_t qspi_ready_wait(void)
@@ -329,15 +370,17 @@ void nrfx_qspi_uninit(void)
         nrf_qspi_cinstr_long_transfer_continue(NRF_QSPI, NRF_QSPI_CINSTR_LEN_1B, true);
     }
 
+    NRFX_IRQ_DISABLE(QSPI_IRQn);
+
     nrf_qspi_int_disable(NRF_QSPI, NRF_QSPI_INT_READY_MASK);
 
     nrf_qspi_task_trigger(NRF_QSPI, NRF_QSPI_TASK_DEACTIVATE);
 
     nrf_qspi_disable(NRF_QSPI);
 
-    NRFX_IRQ_DISABLE(QSPI_IRQn);
-
     nrf_qspi_event_clear(NRF_QSPI, NRF_QSPI_EVENT_READY);
+
+    qspi_pins_deconfigure();
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }

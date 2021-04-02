@@ -367,6 +367,15 @@ NRF_STATIC_INLINE void nrf_qspi_pins_set(NRF_QSPI_Type *         p_reg,
                                          nrf_qspi_pins_t const * p_pins);
 
 /**
+ * @brief Function for getting the currently configured QSPI pins.
+ *
+ * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[out] p_pins Pointer to the pins configuration structure to be filled with QSPI pins.
+ */
+NRF_STATIC_INLINE void nrf_qspi_pins_get(NRF_QSPI_Type const * p_reg,
+                                         nrf_qspi_pins_t *     p_pins);
+
+/**
  * @brief Function for setting the QSPI XIPOFFSET register.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
@@ -662,6 +671,17 @@ NRF_STATIC_INLINE void nrf_qspi_pins_set(NRF_QSPI_Type * p_reg, nrf_qspi_pins_t 
     p_reg->PSEL.IO1 = NRF_QSPI_PIN_VAL(p_pins->io1_pin);
     p_reg->PSEL.IO2 = NRF_QSPI_PIN_VAL(p_pins->io2_pin);
     p_reg->PSEL.IO3 = NRF_QSPI_PIN_VAL(p_pins->io3_pin);
+}
+
+NRF_STATIC_INLINE void nrf_qspi_pins_get(NRF_QSPI_Type const * p_reg,
+                                         nrf_qspi_pins_t *     p_pins)
+{
+    p_pins->sck_pin = (uint8_t)p_reg->PSEL.SCK;
+    p_pins->csn_pin = (uint8_t)p_reg->PSEL.CSN;
+    p_pins->io0_pin = (uint8_t)p_reg->PSEL.IO0;
+    p_pins->io1_pin = (uint8_t)p_reg->PSEL.IO1;
+    p_pins->io2_pin = (uint8_t)p_reg->PSEL.IO2;
+    p_pins->io3_pin = (uint8_t)p_reg->PSEL.IO3;
 }
 
 NRF_STATIC_INLINE void nrf_qspi_xip_offset_set(NRF_QSPI_Type * p_reg,
