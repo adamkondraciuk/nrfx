@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the SPIM peripheral.
  */
 
+#if defined(SPIM_FREQUENCY_FREQUENCY_M32) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether 32 MHz clock frequency is available. */
+#define NRF_SPIM_HAS_32_MHZ_FREQ 1
+#else
+#define NRF_SPIM_HAS_32_MHZ_FREQ 0
+#endif
+
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
  *        function to specify that a given SPI signal (SCK, MOSI, or MISO)

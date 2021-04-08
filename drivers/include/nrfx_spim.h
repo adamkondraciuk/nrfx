@@ -233,6 +233,7 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *                                  is enabled.
  * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
+ * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.
  */
 nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_config_t const * p_config,
