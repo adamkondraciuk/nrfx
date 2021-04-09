@@ -225,6 +225,10 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *                       will be performed in blocking mode.
  * @param[in] p_context  Context passed to event handler.
  *
+ * @warning On nRF5340, 32 MHz setting for SPIM4 peripheral instance is supported
+ *          only on the dedicated pins with @ref NRF_GPIO_PIN_MCUSEL_PERIPHERAL configuration.
+ *          See the chapter <a href=@nRF5340pinAssignmentsURL>Pin assignments</a> in the Product Specification.
+ *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
  * @retval NRFX_ERROR_BUSY          Some other peripheral with the same

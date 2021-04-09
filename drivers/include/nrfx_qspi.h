@@ -118,6 +118,10 @@ typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
  *                      will be performed in blocking mode.
  * @param[in] p_context Pointer to context. Use in the interrupt handler.
  *
+ * @warning On nRF5340, only the dedicated pins with @ref NRF_GPIO_PIN_MCUSEL_PERIPHERAL configuration
+ *          are supported. See the chapter <a href=@nRF5340pinAssignmentsURL>Pin assignments</a>
+ *          in the Product Specification.
+ *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_TIMEOUT       The peripheral cannot connect with external memory.
  * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
