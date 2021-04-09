@@ -108,6 +108,9 @@ NRF_STATIC_INLINE void nrf_dppi_channels_disable_all(NRF_DPPIC_Type * p_reg);
  * @brief Function for setting the subscribe configuration for a given
  *        DPPI task.
  *
+ * @warning After setting the subscription for a given task, channel group configuration
+ *          associated with this task cannot be modified until @ref nrf_dppi_subscribe_clear is used.
+ *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] task    Task for which to set the configuration.
  * @param[in] channel Channel through which to subscribe events.
@@ -132,6 +135,9 @@ NRF_STATIC_INLINE void nrf_dppi_subscribe_clear(NRF_DPPIC_Type * p_reg, nrf_dppi
  * The bits in @p channel_mask value correspond to particular channels. It means that
  * writing 1 to bit 0 includes channel 0, writing 1 to bit 1 includes channel 1 etc.
  *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
+ *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
  * @param[in] channel_mask  Channels to be included in the group.
  * @param[in] channel_group Channel group.
@@ -147,6 +153,9 @@ NRF_STATIC_INLINE void nrf_dppi_channels_include_in_group(NRF_DPPIC_Type *      
  * The bits in @c channel_mask value correspond to particular channels. It means that
  * writing 1 to bit 0 removes channel 0, writing 1 to bit 1 removes channel 1 etc.
  *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
+ *
  * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
  * @param[in] channel_mask  Channels to be removed from the group.
  * @param[in] channel_group Channel group.
@@ -157,6 +166,9 @@ NRF_STATIC_INLINE void nrf_dppi_channels_remove_from_group(NRF_DPPIC_Type *     
 
 /**
  * @brief Function for removing all DPPI channels from a channel group.
+ *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] group Channel group.

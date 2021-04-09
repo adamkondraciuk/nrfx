@@ -90,6 +90,9 @@ nrfx_err_t nrfx_dppi_group_free(nrf_dppi_channel_group_t group);
  * @param[in] channel DPPI channel to be added.
  * @param[in] group   Channel group in which to include the channel.
  *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
+ *
  * @retval NRFX_SUCCESS             The channel was successfully included.
  * @retval NRFX_ERROR_INVALID_PARAM The specified group or channel is not allocated.
  */
@@ -102,6 +105,9 @@ nrfx_err_t nrfx_dppi_channel_include_in_group(uint8_t                  channel,
  * @param[in] channel DPPI channel to be removed.
  * @param[in] group   Channel group from which to remove the channel.
  *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
+ *
  * @retval NRFX_SUCCESS             The channel was successfully removed.
  * @retval NRFX_ERROR_INVALID_PARAM The specified group or channel is not allocated.
  */
@@ -112,6 +118,9 @@ nrfx_err_t nrfx_dppi_channel_remove_from_group(uint8_t                  channel,
  * @brief Function for clearing a DPPI channel group.
  *
  * @param[in] group Channel group to be cleared.
+ *
+ * @warning Channel group configuration can be modified only if subscriptions for tasks
+ *          associated with this group are disabled.
  *
  * @retval NRFX_SUCCESS             The group was successfully cleared.
  * @retval NRFX_ERROR_INVALID_PARAM The specified group is not allocated.
