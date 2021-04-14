@@ -31,6 +31,11 @@
                                          NRF_GPIO_PIN_H0H1,             \
                                          NRF_GPIO_PIN_NOSENSE)
 
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_121) && defined(NRF53_SERIES)
+    // ANOMALY 121 - Configuration of QSPI peripheral requires additional steps.
+    #define USE_WORKAROUND_FOR_ANOMALY_121 1
+#endif
+
 /** @brief Control block - driver instance local data. */
 typedef struct
 {
@@ -171,7 +176,22 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
     }
 
     nrf_qspi_xip_offset_set(NRF_QSPI, p_config->xip_offset);
+
     nrf_qspi_ifconfig0_set(NRF_QSPI, &p_config->prot_if);
+#if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_121)
+    uint32_t regval = nrf_qspi_ifconfig0_raw_get(NRF_QSPI);
+    if (p_config->phy_if.sck_freq == NRF_QSPI_FREQ_DIV1)
+    {
+        regval |= ((1 << 16) | (1 << 17));
+    }
+    else
+    {
+        regval &= ~(1 << 17);
+        regval |=  (1 << 16);
+    }
+    nrf_qspi_ifconfig0_raw_set(NRF_QSPI, regval);
+    nrf_qspi_iftiming_set(NRF_QSPI, 6);
+#endif
     nrf_qspi_ifconfig1_set(NRF_QSPI, &p_config->phy_if);
 
     m_cb.is_busy = false;

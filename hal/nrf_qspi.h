@@ -395,6 +395,23 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg
                                               nrf_qspi_prot_conf_t const * p_config);
 
 /**
+ * @brief Function for setting the explicit value of the QSPI IFCONFIG0 register.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] regval Register value to be set.
+ */
+NRF_STATIC_INLINE void nrf_qspi_ifconfig0_raw_set(NRF_QSPI_Type * p_reg, uint32_t regval);
+
+/**
+ * @brief Function for getting the explicit value of the QSPI IFCONFIG0 register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Value of IFCONFIG0 register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_qspi_ifconfig0_raw_get(NRF_QSPI_Type const * p_reg);
+
+/**
  * @brief Function for setting the QSPI IFCONFIG1 register.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
@@ -604,6 +621,15 @@ NRF_STATIC_INLINE void nrf_qspi_dma_encryption_configure(NRF_QSPI_Type *        
 NRF_STATIC_INLINE void nrf_qspi_dma_encryption_set(NRF_QSPI_Type * p_reg, bool enable);
 #endif
 
+/**
+ * @brief Function for setting the timing related to sampling of the input serial data.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] rxdelay Number of 64 MHz cycles (15.625 ns) delay from the the rising edge of the clock
+ *                    until the input serial data is sampled.
+ */
+NRF_STATIC_INLINE void nrf_qspi_iftiming_set(NRF_QSPI_Type * p_reg, uint8_t rxdelay);
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_qspi_task_trigger(NRF_QSPI_Type * p_reg, nrf_qspi_task_t task)
@@ -699,6 +725,16 @@ NRF_STATIC_INLINE void nrf_qspi_ifconfig0_set(NRF_QSPI_Type *              p_reg
     config |= (p_config->dpmconfig ? 1U : 0U ) << QSPI_IFCONFIG0_DPMENABLE_Pos;
 
     p_reg->IFCONFIG0 = config;
+}
+
+NRF_STATIC_INLINE void nrf_qspi_ifconfig0_raw_set(NRF_QSPI_Type * p_reg, uint32_t regval)
+{
+    p_reg->IFCONFIG0 = regval;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_qspi_ifconfig0_raw_get(NRF_QSPI_Type const * p_reg)
+{
+    return p_reg->IFCONFIG0;
 }
 
 NRF_STATIC_INLINE void nrf_qspi_ifconfig1_set(NRF_QSPI_Type *             p_reg,
@@ -946,6 +982,12 @@ NRF_STATIC_INLINE void nrf_qspi_dma_encryption_set(NRF_QSPI_Type * p_reg, bool e
                 : QSPI_DMA_ENC_ENABLE_ENABLE_Disabled << QSPI_DMA_ENC_ENABLE_ENABLE_Pos);
 }
 #endif
+
+NRF_STATIC_INLINE void nrf_qspi_iftiming_set(NRF_QSPI_Type * p_reg, uint8_t rxdelay)
+{
+    p_reg->IFTIMING = ((uint32_t)rxdelay << QSPI_IFTIMING_RXDELAY_Pos) & QSPI_IFTIMING_RXDELAY_Msk;
+}
+
 #endif // NRF_DECLARE_ONLY
 
 /** @} */
