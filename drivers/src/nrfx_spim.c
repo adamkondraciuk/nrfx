@@ -492,7 +492,10 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
     spim_pin_uninit(nrf_spim_miso_pin_get(p_spim));
     spim_pin_uninit(nrf_spim_mosi_pin_get(p_spim));
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
-    spim_pin_uninit(nrf_spim_dcx_pin_get(p_spim));
+    if (SPIM_DCX_PRESENT_VALIDATE(p_instance->drv_inst_idx))
+    {
+        spim_pin_uninit(nrf_spim_dcx_pin_get(p_spim));
+    }
 #endif
     if (p_cb->ss_pin != NRFX_SPIM_PIN_NOT_USED)
     {
