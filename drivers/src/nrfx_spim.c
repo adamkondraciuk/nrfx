@@ -137,9 +137,10 @@
 #define SPIM_DEDICATED_PIN_VALIDATE(requested_pin, supported_pin) \
     (((requested_pin) == NRFX_SPIM_PIN_NOT_USED) || ((requested_pin) == (supported_pin)))
 
-#if defined(NRF52840_XXAA) && (NRFX_CHECK(NRFX_SPIM3_ENABLED))
+#if !defined(USE_WORKAROUND_FOR_ANOMALY_195) && \
+    defined(NRF52840_XXAA) && NRFX_CHECK(NRFX_SPIM3_ENABLED)
 // Enable workaround for nRF52840 anomaly 195 (SPIM3 continues to draw current after disable).
-#define USE_WORKAROUND_FOR_ANOMALY_195
+#define USE_WORKAROUND_FOR_ANOMALY_195 1
 #endif
 
 
@@ -502,7 +503,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
         nrf_gpio_cfg_default(p_cb->ss_pin);
     }
 
-#ifdef USE_WORKAROUND_FOR_ANOMALY_195
+#if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_195)
     if (p_spim == NRF_SPIM3)
     {
         *(volatile uint32_t *)0x4002F004 = 1;
