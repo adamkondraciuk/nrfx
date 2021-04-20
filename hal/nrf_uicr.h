@@ -110,7 +110,7 @@ typedef struct
 {
     bool         secattr; /**< Security mapping. */
     bool         dmasec;  /**< Security attribution for the DMA transfer. */
-    nrf_domain_t domain;  /**< Owner identifier. */
+    nrf_domain_t domain;  /**< Domain ID. */
     uint32_t     address; /**< Peripheral address. */
 } nrf_uicr_periph_config_t;
 
