@@ -9570,13 +9570,13 @@ static bool nrf52_errata_192(void)
                     case 0x02ul:
                         return true;
                     case 0x03ul:
-                        return true;
+                        return false;
                     case 0x04ul:
-                        return true;
+                        return false;
                     case 0x05ul:
-                        return true;
+                        return false;
                     default:
-                        return true;
+                        return false;
                 }
             }
         #endif
@@ -9966,13 +9966,13 @@ static bool nrf52_errata_197(void)
                     case 0x02ul:
                         return true;
                     case 0x03ul:
-                        return true;
+                        return false;
                     case 0x04ul:
-                        return true;
+                        return false;
                     case 0x05ul:
-                        return true;
+                        return false;
                     default:
-                        return true;
+                        return false;
                 }
             }
         #endif
@@ -10190,13 +10190,13 @@ static bool nrf52_errata_201(void)
                     case 0x02ul:
                         return true;
                     case 0x03ul:
-                        return true;
+                        return false;
                     case 0x04ul:
-                        return true;
+                        return false;
                     case 0x05ul:
-                        return true;
+                        return false;
                     default:
-                        return true;
+                        return false;
                 }
             }
         #endif
@@ -10250,13 +10250,13 @@ static bool nrf52_errata_202(void)
                     case 0x02ul:
                         return true;
                     case 0x03ul:
-                        return true;
+                        return false;
                     case 0x04ul:
-                        return true;
+                        return false;
                     case 0x05ul:
-                        return true;
+                        return false;
                     default:
-                        return true;
+                        return false;
                 }
             }
         #endif
