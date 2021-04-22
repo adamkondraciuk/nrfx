@@ -24,6 +24,11 @@ void nrfx_dppi_free(void);
  * @brief Function for allocating a DPPI channel.
  * @details This function allocates the first unused DPPI channel.
  *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
+ *
  * @param[out] p_channel Pointer to the DPPI channel number that has been allocated.
  *
  * @retval NRFX_SUCCESS      The channel was successfully allocated.
@@ -34,6 +39,11 @@ nrfx_err_t nrfx_dppi_channel_alloc(uint8_t * p_channel);
 /**
  * @brief Function for freeing a DPPI channel.
  * @details This function also disables the chosen channel.
+ *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
  *
  * @param[in] channel DPPI channel to be freed.
  *
@@ -66,6 +76,11 @@ nrfx_err_t nrfx_dppi_channel_disable(uint8_t channel);
  * @brief Function for allocating a DPPI channel group.
  * @details This function allocates the first unused DPPI group.
  *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
+ *
  * @param[out] p_group Pointer to the DPPI channel group that has been allocated.
  *
  * @retval NRFX_SUCCESS      The channel group was successfully allocated.
@@ -76,6 +91,11 @@ nrfx_err_t nrfx_dppi_group_alloc(nrf_dppi_channel_group_t * p_group);
 /**
  * @brief Function for freeing a DPPI channel group.
  * @details This function also disables the chosen group.
+ *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
  *
  * @param[in] group DPPI channel group to be freed.
  *

@@ -216,9 +216,17 @@ void nrfx_gpiote_uninit(void);
  * @details This function allocates the first unused GPIOTE channel from
  *          pool defined in @ref NRFX_GPIOTE_APP_CHANNELS_MASK.
  *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
+ * @note Routines that allocate and free the GPIOTE channels are independent
+ *       from the rest of the driver. In particular, the driver does not need
+ *       to be initialized when this function is called.
+ *
  * @param[out] p_channel Pointer to the GPIOTE channel that has been allocated.
  *
- * @retval NRFX_SUCCESS      The channel was successfuly allocated.
+ * @retval NRFX_SUCCESS      The channel was successfully allocated.
  * @retval NRFX_ERROR_NO_MEM There is no available channel to be used.
  */
 nrfx_err_t nrfx_gpiote_channel_alloc(uint8_t * p_channel);
@@ -227,6 +235,14 @@ nrfx_err_t nrfx_gpiote_channel_alloc(uint8_t * p_channel);
  * @brief Function for freeing a GPIOTE channel.
  * @details This function frees a GPIOTE channel that was allocated using
  *          @ref nrfx_gpiote_channel_alloc.
+ *
+ * @note To ensure the thread safety of the operation, this function uses the
+ *       @ref NRFX_CRITICAL_SECTION_ENTER and @ref NRFX_CRITICAL_SECTION_EXIT
+ *       macros. No further synchronization mechanism is needed, provided the
+ *       macros are properly implemented (see @ref nrfx_glue).
+ * @note Routines that allocate and free the GPIOTE channels are independent
+ *       from the rest of the driver. In particular, the driver does not need
+ *       to be initialized when this function is called.
  *
  * @param[in] channel GPIOTE channel to be freed.
  *
