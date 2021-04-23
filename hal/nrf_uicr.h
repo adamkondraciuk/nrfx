@@ -144,6 +144,13 @@ typedef struct
     nrf_uicr_ipcmap_pair_t sink;   /**< Sink side. */
 } nrf_uicr_ipcmap_config_t;
 
+/** @brief DPPI link. */
+typedef struct
+{
+    uint32_t source; /**< Source side. */
+    uint32_t sink;   /**< Sink side. */
+} nrf_uicr_dppi_link_t;
+
 /** @brief MAILBOX configuration. */
 typedef struct
 {
@@ -217,11 +224,11 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_secure_get(NRF_UICR_Type const * p_r
  * @param[in] feature Feature to be accessed.
  * @param[in] index   Index of the feature. Only used for applicable features, otherwise skipped.
  *
- * @return Linking requests mask of the specified feature.
+ * @return Linking requests masks for source and sink of the specified feature.
  */
-NRF_STATIC_INLINE uint32_t nrf_uicr_feature_link_get(NRF_UICR_Type const * p_reg,
-                                                     nrf_uicr_feature_t    feature,
-                                                     uint8_t               index);
+NRF_STATIC_INLINE nrf_uicr_dppi_link_t nrf_uicr_feature_link_get(NRF_UICR_Type const * p_reg,
+                                                                 nrf_uicr_feature_t    feature,
+                                                                 uint8_t               index);
 
 /**
  * @brief Function for getting the configuration of the IPCMAP channel.
@@ -446,24 +453,31 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_secure_get(NRF_UICR_Type const * p_r
     }
 }
 
-NRF_STATIC_INLINE uint32_t nrf_uicr_feature_link_get(NRF_UICR_Type const * p_reg,
-                                                     nrf_uicr_feature_t    feature,
-                                                     uint8_t               index)
+NRF_STATIC_INLINE nrf_uicr_dppi_link_t nrf_uicr_feature_link_get(NRF_UICR_Type const * p_reg,
+                                                                 nrf_uicr_feature_t    feature,
+                                                                 uint8_t               index)
 {
+    nrf_uicr_dppi_link_t link;
+
     switch (feature)
     {
         case NRF_UICR_FEATURE_DPPI_LOCAL_CH:
             NRFX_ASSERT(index < NRF_UICR_DPPI_LOCAL_COUNT);
-            return p_reg->DPPI.LOCAL[index].CH.LINK;
+            link.source = p_reg->DPPI.LOCAL[index].CH.LINK.SOURCE;
+            link.sink = p_reg->DPPI.LOCAL[index].CH.LINK.SINK;
+            break;
 
         case NRF_UICR_FEATURE_DPPI_GLOBAL_CH:
-            NRFX_ASSERT(index < NRF_UICR_DPPI_GLOBAL_COUNT);
-            return p_reg->DPPI.GLOBAL[index].CH.LINK;
+            link.source = p_reg->DPPI.GLOBAL[index].CH.LINK.SOURCE;
+            link.sink = p_reg->DPPI.GLOBAL[index].CH.LINK.SINK;
+            break;
 
         default:
             NRFX_ASSERT(false);
-            return 0;
+            break;
     }
+
+    return link;
 }
 
 NRF_STATIC_INLINE nrf_uicr_ipcmap_config_t nrf_uicr_ipcmap_config_get(NRF_UICR_Type const * p_reg,
