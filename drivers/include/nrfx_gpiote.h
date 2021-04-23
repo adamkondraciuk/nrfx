@@ -187,9 +187,6 @@ typedef void (*nrfx_gpiote_evt_handler_t)(nrfx_gpiote_pin_t pin, nrf_gpiote_pola
 /**
  * @brief Function for initializing the GPIOTE module.
  *
- * @details Only static configuration is supported to prevent the shared
- * resource being customized by the initiator.
- *
  * @param[in] interrupt_priority Interrupt priority.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
