@@ -226,6 +226,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #ifndef __ASSEMBLY__
 
+#ifndef csr_swap
 #define csr_swap(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
@@ -234,7 +235,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_read
 #define csr_read(csr)							\
 ({									\
 	register unsigned long __v;					\
@@ -243,7 +246,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_write
 #define csr_write(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
@@ -251,7 +256,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
 })
+#endif
 
+#ifndef csr_read_and_set_bits
 #define csr_read_and_set_bits(csr, mask)				\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
@@ -260,7 +267,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_set_bits
 #define csr_set_bits(csr, mask)						\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
@@ -268,7 +277,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
 })
+#endif
 
+#ifndef csr_read_and_clear_bits
 #define csr_read_and_clear_bits(csr, mask)				\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
@@ -277,7 +288,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_clear_bits
 #define csr_clear_bits(csr, mask)					\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
@@ -285,6 +298,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
 })
+#endif
 
 #endif /* __ASSEMBLY__ */
 

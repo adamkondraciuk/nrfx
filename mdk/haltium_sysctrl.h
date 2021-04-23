@@ -118,9 +118,15 @@ typedef enum {
   LRCCONF130_IRQn                        = 318,      /*!< 318 LRCCONF130                                                       */
   GRCCONF0_IRQn                          = 320,      /*!< 320 GRCCONF0                                                         */
   GRCCONF1_IRQn                          = 321,      /*!< 321 GRCCONF1                                                         */
+#if !defined(RTL_DOMINOZ)
   GRCCONF2_IRQn                          = 322,      /*!< 322 GRCCONF2                                                         */
+#endif
   PCRM_IRQn                              = 323,      /*!< 323 PCRM                                                             */
+#if defined(RTL_DOMINOZ)
+  RESETHUB_IRQn                          = 322,      /*!< 322 RESETHUB                                                         */
+#else
   RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
+#endif
   CLOCK_IRQn                             = 336,      /*!< 336 CLOCK                                                            */
   LFRC_IRQn                              = 337,      /*!< 337 LFRC                                                             */
   GGENERIC18_IRQn                        = 338,      /*!< 338 GGENERIC18                                                       */
@@ -276,7 +282,11 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCM131_S_BASE       0x5F93F000UL
 #define NRF_SYSCTRL_GRCCONF_S_BASE        0x5F940000UL
 #define NRF_SYSCTRL_PCRM_S_BASE           0x5F943000UL
+#if defined(RTL_DOMINOZ)
+#define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F943000UL
+#else
 #define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F949000UL
+#endif
 #define NRF_SYSCTRL_PCGCS132_S_BASE       0x5F94E000UL
 #define NRF_SYSCTRL_PCGCM132_S_BASE       0x5F94F000UL
 #define NRF_SYSCTRL_CLOCK_S_BASE          0x5F950000UL
