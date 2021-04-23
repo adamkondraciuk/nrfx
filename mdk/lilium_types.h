@@ -94,6 +94,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended
@@ -8649,15 +8650,15 @@ typedef struct {
   */
 typedef struct {
   #if defined(_GNUC_)
-    #pragma GCC diagnostic push
-    #pragma GCC diagnostic ignored "-Wpedantic"
+   #pragma GCC diagnostic push
+   #pragma GCC diagnostic ignored "-Wpedantic"
   #endif
   union {
     __OM uint32_t PCP0;                              /*!< (@ 0x00000000) (unspecified)                                         */
     __OM uint32_t PCP[4];                            /*!< (@ 0x00000000) (unspecified)                                         */
   };
   #if defined(_GNUC_)
-    #pragma GCC diagnostic pop
+   #pragma GCC diagnostic pop
   #endif
 } NRF_RADIO_PENALTYREG_Type;                         /*!< Size = 20 (0x014)                                                    */
 

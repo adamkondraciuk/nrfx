@@ -197,20 +197,20 @@ __vector_table
         DCD     GPIOTE1311_IRQHandler
         DCD     GRTC0_IRQHandler
         DCD     GRTC1_IRQHandler
-        DCD     GRTC2_IRQHandler
-        DCD     GRTC3_IRQHandler
-        DCD     GRTC4_IRQHandler
-        DCD     GRTC5_IRQHandler
-        DCD     GRTC6_IRQHandler
-        DCD     GRTC7_IRQHandler
-        DCD     GRTC8_IRQHandler
-        DCD     GRTC9_IRQHandler
-        DCD     GRTC10_IRQHandler
-        DCD     GRTC11_IRQHandler
-        DCD     GRTC12_IRQHandler
-        DCD     GRTC13_IRQHandler
-        DCD     GRTC14_IRQHandler
-        DCD     GRTC15_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -236,6 +236,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     EXMIF_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -290,8 +291,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     CANPLL_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -299,17 +299,17 @@ __vector_table
         DCD     IPCT1200_IRQHandler
         DCD     0                         ; Reserved
         DCD     I3C120_IRQHandler
-        DCD     I3C121_IRQHandler
-        DCD     CAN_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
         DCD     VPR_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     CAN_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     I3C121_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -667,79 +667,19 @@ GRTC0_IRQHandler
 GRTC1_IRQHandler
         j .
 
-        PUBWEAK  GRTC2_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC2_IRQHandler
-        j .
-
-        PUBWEAK  GRTC3_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC3_IRQHandler
-        j .
-
-        PUBWEAK  GRTC4_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC4_IRQHandler
-        j .
-
-        PUBWEAK  GRTC5_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC5_IRQHandler
-        j .
-
-        PUBWEAK  GRTC6_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC6_IRQHandler
-        j .
-
-        PUBWEAK  GRTC7_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC7_IRQHandler
-        j .
-
-        PUBWEAK  GRTC8_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC8_IRQHandler
-        j .
-
-        PUBWEAK  GRTC9_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC9_IRQHandler
-        j .
-
-        PUBWEAK  GRTC10_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC10_IRQHandler
-        j .
-
-        PUBWEAK  GRTC11_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC11_IRQHandler
-        j .
-
-        PUBWEAK  GRTC12_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC12_IRQHandler
-        j .
-
-        PUBWEAK  GRTC13_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC13_IRQHandler
-        j .
-
-        PUBWEAK  GRTC14_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC14_IRQHandler
-        j .
-
-        PUBWEAK  GRTC15_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC15_IRQHandler
-        j .
-
         PUBWEAK  USBHS_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 USBHS_IRQHandler
+        j .
+
+        PUBWEAK  EXMIF_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+EXMIF_IRQHandler
+        j .
+
+        PUBWEAK  CANPLL_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+CANPLL_IRQHandler
         j .
 
         PUBWEAK  IPCT1200_IRQHandler
@@ -752,9 +692,9 @@ IPCT1200_IRQHandler
 I3C120_IRQHandler
         j .
 
-        PUBWEAK  I3C121_IRQHandler
+        PUBWEAK  VPR_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-I3C121_IRQHandler
+VPR_IRQHandler
         j .
 
         PUBWEAK  CAN_IRQHandler
@@ -762,9 +702,9 @@ I3C121_IRQHandler
 CAN_IRQHandler
         j .
 
-        PUBWEAK  VPR_IRQHandler
+        PUBWEAK  I3C121_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-VPR_IRQHandler
+I3C121_IRQHandler
         j .
 
         PUBWEAK  TIMER120_IRQHandler

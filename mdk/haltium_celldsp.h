@@ -92,25 +92,13 @@ typedef enum {
   GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
   GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
   GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
-  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
-  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
-  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
-  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
-  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
-  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
-  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
-  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
-  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
-  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
-  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
-  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
-  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
-  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
+  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
-  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
@@ -179,6 +167,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended

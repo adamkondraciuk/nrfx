@@ -126,6 +126,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended

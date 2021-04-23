@@ -251,20 +251,20 @@ _vectors:
   ISR_HANDLER   GPIOTE1311_IRQHandler
   ISR_HANDLER   GRTC0_IRQHandler
   ISR_HANDLER   GRTC1_IRQHandler
-  ISR_HANDLER   GRTC2_IRQHandler
-  ISR_HANDLER   GRTC3_IRQHandler
-  ISR_HANDLER   GRTC4_IRQHandler
-  ISR_HANDLER   GRTC5_IRQHandler
-  ISR_HANDLER   GRTC6_IRQHandler
-  ISR_HANDLER   GRTC7_IRQHandler
-  ISR_HANDLER   GRTC8_IRQHandler
-  ISR_HANDLER   GRTC9_IRQHandler
-  ISR_HANDLER   GRTC10_IRQHandler
-  ISR_HANDLER   GRTC11_IRQHandler
-  ISR_HANDLER   GRTC12_IRQHandler
-  ISR_HANDLER   GRTC13_IRQHandler
-  ISR_HANDLER   GRTC14_IRQHandler
-  ISR_HANDLER   GRTC15_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -272,15 +272,15 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   L2CACHE_IRQHandler
-  ISR_HANDLER   RAMC100_IRQHandler
-  ISR_HANDLER   RAMC101_IRQHandler
-  ISR_HANDLER   AXI100_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   USBHS_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   SHA3_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   RAMC102_IRQHandler
-  ISR_HANDLER   RAMC103_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -291,7 +291,7 @@ _vectors:
   ISR_HANDLER   MRAMC111_IRQHandler
   ISR_HANDLER   EXMEE_IRQHandler
   ISR_HANDLER   EXMIF_IRQHandler
-  ISR_HANDLER   AXI110_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   MVDMA_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -336,10 +336,10 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   RAMC120_IRQHandler
-  ISR_HANDLER   RAMC121_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   OTPC_IRQHandler
-  ISR_HANDLER   ROMC_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   VPR_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -347,23 +347,23 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   CANPLL_IRQHandler
   ISR_HANDLER   HSFLL_IRQHandler
-  ISR_HANDLER   LRCCONF120_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   IPCT1200_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   I3C120_IRQHandler
-  ISR_HANDLER   I3C121_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   CAN_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   I3C121_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -400,8 +400,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   RAMC130_IRQHandler
-  ISR_HANDLER   RAMC131_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -459,18 +459,18 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   LRCCONF130_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   GRCCONF_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   GRCCONF0_IRQHandler
+  ISR_HANDLER   GRCCONF1_IRQHandler
+  ISR_HANDLER   GRCCONF2_IRQHandler
+  ISR_HANDLER   PCRM_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   RESETHUB_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   GGENERIC13_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -481,8 +481,8 @@ _vectors:
   ISR_HANDLER   LFRC_IRQHandler
   ISR_HANDLER   GGENERIC18_IRQHandler
   ISR_HANDLER   LFXO_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   GGENERIC20_IRQHandler
+  ISR_HANDLER   FLL16M_IRQHandler
+  ISR_HANDLER   HFXO_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   AUDIOPLL_IRQHandler
   ISR_HANDLER   USBHSPLL_IRQHandler
@@ -495,15 +495,15 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   POWER_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   VREGAO1V8_IRQHandler
-  ISR_HANDLER   VREG1V0_IRQHandler
-  ISR_HANDLER   VREGAO0V8_IRQHandler
-  ISR_HANDLER   VREGVS0V8_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   GGENERIC29_IRQHandler
   ISR_HANDLER   GGENERIC30_IRQHandler
-  ISR_HANDLER   VREGMRAM130_IRQHandler
-  ISR_HANDLER   VREGMRAM131_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   MBIAS_IRQHandler

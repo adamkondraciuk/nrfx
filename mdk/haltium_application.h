@@ -75,12 +75,12 @@ typedef enum {
   AXI_IRQn                               = 2,        /*!< 2 AXI                                                                */
   MVDMA_IRQn                             = 3,        /*!< 3 MVDMA                                                              */
   RAMC_IRQn                              = 4,        /*!< 4 RAMC                                                               */
-  ABB_IRQn                               = 12,       /*!< 12 ABB                                                               */
   HSFLL_IRQn                             = 13,       /*!< 13 HSFLL                                                             */
   LRCCONF000_IRQn                        = 14,       /*!< 14 LRCCONF000                                                        */
   SPU010_IRQn                            = 16,       /*!< 16 SPU010                                                            */
   WDT010_IRQn                            = 20,       /*!< 20 WDT010                                                            */
   WDT011_IRQn                            = 21,       /*!< 21 WDT011                                                            */
+  ABB_IRQn                               = 28,       /*!< 28 ABB                                                               */
   LRCCONF010_IRQn                        = 30,       /*!< 30 LRCCONF010                                                        */
   IPCT0_IRQn                             = 64,       /*!< 64 IPCT0                                                             */
   IPCT1_IRQn                             = 65,       /*!< 65 IPCT1                                                             */
@@ -94,25 +94,13 @@ typedef enum {
   GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
   GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
   GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
-  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
-  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
-  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
-  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
-  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
-  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
-  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
-  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
-  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
-  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
-  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
-  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
-  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
-  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
+  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
-  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
@@ -186,6 +174,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended
@@ -231,8 +220,8 @@ typedef enum {
 #define NRF_APPLICATION_MVDMA_S_BASE      0x52003000UL
 #define NRF_APPLICATION_RAMC_NS_BASE      0x42004000UL
 #define NRF_APPLICATION_RAMC_S_BASE       0x52004000UL
+#define NRF_APPLICATION_BILS_S_BASE       0x5200A000UL
 #define NRF_APPLICATION_PCGCS000_S_BASE   0x5200B000UL
-#define NRF_APPLICATION_ABB_S_BASE        0x5200C000UL
 #define NRF_APPLICATION_HSFLL_S_BASE      0x5200D000UL
 #define NRF_APPLICATION_LRCCONF000_S_BASE 0x5200E000UL
 #define NRF_APPLICATION_PCGCM000_S_BASE   0x5200F000UL
@@ -245,8 +234,10 @@ typedef enum {
 #define NRF_APPLICATION_WDT010_S_BASE     0x52014000UL
 #define NRF_APPLICATION_WDT011_NS_BASE    0x42015000UL
 #define NRF_APPLICATION_WDT011_S_BASE     0x52015000UL
-#define NRF_APPLICATION_PCGCS010_S_BASE   0x5201D000UL
+#define NRF_APPLICATION_PCGCS010_S_BASE   0x5201B000UL
+#define NRF_APPLICATION_ABB_S_BASE        0x5201C000UL
 #define NRF_APPLICATION_LRCCONF010_S_BASE 0x5201E000UL
+#define NRF_APPLICATION_RESETINFO_S_BASE  0x5201E000UL
 #define NRF_APPLICATION_PCGCM010_S_BASE   0x5201F000UL
 #define NRF_APPLICATION_IPCT_NS_BASE      0x42013000UL
 #define NRF_APPLICATION_IPCT_S_BASE       0x52013000UL
@@ -275,8 +266,8 @@ typedef enum {
 #define NRF_APPLICATION_MVDMA_S           ((NRF_MVDMA_Type*)                    NRF_APPLICATION_MVDMA_S_BASE)
 #define NRF_APPLICATION_RAMC_NS           ((NRF_RAMC_Type*)                     NRF_APPLICATION_RAMC_NS_BASE)
 #define NRF_APPLICATION_RAMC_S            ((NRF_RAMC_Type*)                     NRF_APPLICATION_RAMC_S_BASE)
+#define NRF_APPLICATION_BILS_S            ((NRF_BILS_Type*)                     NRF_APPLICATION_BILS_S_BASE)
 #define NRF_APPLICATION_PCGCS000_S        ((NRF_PCGCSLAVE_Type*)                NRF_APPLICATION_PCGCS000_S_BASE)
-#define NRF_APPLICATION_ABB_S             ((NRF_ABB_Type*)                      NRF_APPLICATION_ABB_S_BASE)
 #define NRF_APPLICATION_HSFLL_S           ((NRF_HSFLL_Type*)                    NRF_APPLICATION_HSFLL_S_BASE)
 #define NRF_APPLICATION_LRCCONF000_S      ((NRF_LRCCONF_Type*)                  NRF_APPLICATION_LRCCONF000_S_BASE)
 #define NRF_APPLICATION_PCGCM000_S        ((NRF_PCGCMASTER_Type*)               NRF_APPLICATION_PCGCM000_S_BASE)
@@ -290,7 +281,9 @@ typedef enum {
 #define NRF_APPLICATION_WDT011_NS         ((NRF_WDT_Type*)                      NRF_APPLICATION_WDT011_NS_BASE)
 #define NRF_APPLICATION_WDT011_S          ((NRF_WDT_Type*)                      NRF_APPLICATION_WDT011_S_BASE)
 #define NRF_APPLICATION_PCGCS010_S        ((NRF_PCGCSLAVE_Type*)                NRF_APPLICATION_PCGCS010_S_BASE)
+#define NRF_APPLICATION_ABB_S             ((NRF_ABB_Type*)                      NRF_APPLICATION_ABB_S_BASE)
 #define NRF_APPLICATION_LRCCONF010_S      ((NRF_LRCCONF_Type*)                  NRF_APPLICATION_LRCCONF010_S_BASE)
+#define NRF_APPLICATION_RESETINFO_S       ((NRF_RESETINFO_Type*)                NRF_APPLICATION_RESETINFO_S_BASE)
 #define NRF_APPLICATION_PCGCM010_S        ((NRF_PCGCMASTER_Type*)               NRF_APPLICATION_PCGCM010_S_BASE)
 #define NRF_APPLICATION_IPCT_NS           ((NRF_IPCT_Type*)                     NRF_APPLICATION_IPCT_NS_BASE)
 #define NRF_APPLICATION_IPCT_S            ((NRF_IPCT_Type*)                     NRF_APPLICATION_IPCT_S_BASE)
@@ -330,8 +323,8 @@ typedef enum {
   #define NRF_APPLICATION_AXI                     NRF_APPLICATION_AXI_S
   #define NRF_APPLICATION_MVDMA                   NRF_APPLICATION_MVDMA_S
   #define NRF_APPLICATION_RAMC                    NRF_APPLICATION_RAMC_S
+  #define NRF_APPLICATION_BILS                    NRF_APPLICATION_BILS_S
   #define NRF_APPLICATION_PCGCS000                NRF_APPLICATION_PCGCS000_S
-  #define NRF_APPLICATION_ABB                     NRF_APPLICATION_ABB_S
   #define NRF_APPLICATION_HSFLL                   NRF_APPLICATION_HSFLL_S
   #define NRF_APPLICATION_LRCCONF000              NRF_APPLICATION_LRCCONF000_S
   #define NRF_APPLICATION_PCGCM000                NRF_APPLICATION_PCGCM000_S
@@ -341,7 +334,9 @@ typedef enum {
   #define NRF_APPLICATION_WDT010                  NRF_APPLICATION_WDT010_S
   #define NRF_APPLICATION_WDT011                  NRF_APPLICATION_WDT011_S
   #define NRF_APPLICATION_PCGCS010                NRF_APPLICATION_PCGCS010_S
+  #define NRF_APPLICATION_ABB                     NRF_APPLICATION_ABB_S
   #define NRF_APPLICATION_LRCCONF010              NRF_APPLICATION_LRCCONF010_S
+  #define NRF_APPLICATION_RESETINFO               NRF_APPLICATION_RESETINFO_S
   #define NRF_APPLICATION_PCGCM010                NRF_APPLICATION_PCGCM010_S
   #define NRF_APPLICATION_IPCT                    NRF_APPLICATION_IPCT_S
   #define NRF_APPLICATION_BELLBOARD               NRF_APPLICATION_BELLBOARD_S
@@ -368,8 +363,8 @@ typedef enum {
   #define NRF_AXI                                 NRF_APPLICATION_AXI
   #define NRF_MVDMA                               NRF_APPLICATION_MVDMA
   #define NRF_RAMC                                NRF_APPLICATION_RAMC
+  #define NRF_BILS                                NRF_APPLICATION_BILS
   #define NRF_PCGCS000                            NRF_APPLICATION_PCGCS000
-  #define NRF_ABB                                 NRF_APPLICATION_ABB
   #define NRF_HSFLL                               NRF_APPLICATION_HSFLL
   #define NRF_LRCCONF000                          NRF_APPLICATION_LRCCONF000
   #define NRF_PCGCM000                            NRF_APPLICATION_PCGCM000
@@ -379,7 +374,9 @@ typedef enum {
   #define NRF_WDT010                              NRF_APPLICATION_WDT010
   #define NRF_WDT011                              NRF_APPLICATION_WDT011
   #define NRF_PCGCS010                            NRF_APPLICATION_PCGCS010
+  #define NRF_ABB                                 NRF_APPLICATION_ABB
   #define NRF_LRCCONF010                          NRF_APPLICATION_LRCCONF010
+  #define NRF_RESETINFO                           NRF_APPLICATION_RESETINFO
   #define NRF_PCGCM010                            NRF_APPLICATION_PCGCM010
   #define NRF_IPCT                                NRF_APPLICATION_IPCT
   #define NRF_BELLBOARD                           NRF_APPLICATION_BELLBOARD

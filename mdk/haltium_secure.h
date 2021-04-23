@@ -78,13 +78,13 @@ typedef enum {
   ROMC_IRQn                              = 5,        /*!< 5 ROMC                                                               */
   CRACEN_IRQn                            = 6,        /*!< 6 CRACEN                                                             */
   RAMC001_IRQn                           = 7,        /*!< 7 RAMC001                                                            */
-  ABB_IRQn                               = 12,       /*!< 12 ABB                                                               */
   HSFLL_IRQn                             = 13,       /*!< 13 HSFLL                                                             */
   LRCCONF000_IRQn                        = 14,       /*!< 14 LRCCONF000                                                        */
   SPU010_IRQn                            = 16,       /*!< 16 SPU010                                                            */
   WDT010_IRQn                            = 20,       /*!< 20 WDT010                                                            */
   WDT011_IRQn                            = 21,       /*!< 21 WDT011                                                            */
   TAMPC_IRQn                             = 22,       /*!< 22 TAMPC                                                             */
+  ABB_IRQn                               = 28,       /*!< 28 ABB                                                               */
   LRCCONF010_IRQn                        = 30,       /*!< 30 LRCCONF010                                                        */
   IPCT0_IRQn                             = 64,       /*!< 64 IPCT0                                                             */
   IPCT1_IRQn                             = 65,       /*!< 65 IPCT1                                                             */
@@ -98,32 +98,20 @@ typedef enum {
   GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
   GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
   GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
-  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
-  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
-  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
-  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
-  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
-  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
-  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
-  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
-  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
-  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
-  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
-  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
-  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
-  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   SPU100_IRQn                            = 128,      /*!< 128 SPU100                                                           */
   MPC100_IRQn                            = 129,      /*!< 129 MPC100                                                           */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   SPU110_IRQn                            = 144,      /*!< 144 SPU110                                                           */
   MPC110_IRQn                            = 145,      /*!< 145 MPC110                                                           */
+  EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
   SPU120_IRQn                            = 192,      /*!< 192 SPU120                                                           */
   MPC120_IRQn                            = 193,      /*!< 193 MPC120                                                           */
+  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
   SPU121_IRQn                            = 208,      /*!< 208 SPU121                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
-  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   SPU122_IRQn                            = 224,      /*!< 224 SPU122                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
@@ -207,6 +195,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended
@@ -269,7 +258,6 @@ typedef enum {
 #define NRF_SECURE_RAMC001_S_BASE         0x51007000UL
 #define NRF_SECURE_PCGCS000_S_BASE        0x5100A000UL
 #define NRF_SECURE_PCGCM000_S_BASE        0x5100B000UL
-#define NRF_SECURE_ABB_S_BASE             0x5100C000UL
 #define NRF_SECURE_HSFLL_S_BASE           0x5100D000UL
 #define NRF_SECURE_LRCCONF000_S_BASE      0x5100E000UL
 #define NRF_SECURE_PCGCM001_S_BASE        0x5100F000UL
@@ -285,9 +273,11 @@ typedef enum {
 #define NRF_SECURE_TAMPC_S_BASE           0x51016000UL
 #define NRF_SECURE_MUTEX_NS_BASE          0x41017000UL
 #define NRF_SECURE_MUTEX_S_BASE           0x51017000UL
-#define NRF_SECURE_PCGCS010_S_BASE        0x5101C000UL
-#define NRF_SECURE_PCGCM010_S_BASE        0x5101D000UL
+#define NRF_SECURE_PCGCS010_S_BASE        0x5101A000UL
+#define NRF_SECURE_PCGCM010_S_BASE        0x5101B000UL
+#define NRF_SECURE_ABB_S_BASE             0x5101C000UL
 #define NRF_SECURE_LRCCONF010_S_BASE      0x5101E000UL
+#define NRF_SECURE_RESETINFO_S_BASE       0x5101E000UL
 #define NRF_SECURE_PCGCM011_S_BASE        0x5101F000UL
 #define NRF_SECURE_IPCT_NS_BASE           0x41013000UL
 #define NRF_SECURE_IPCT_S_BASE            0x51013000UL
@@ -352,7 +342,6 @@ typedef enum {
 #define NRF_SECURE_RAMC001_S              ((NRF_RAMC_Type*)                     NRF_SECURE_RAMC001_S_BASE)
 #define NRF_SECURE_PCGCS000_S             ((NRF_PCGCSLAVE_Type*)                NRF_SECURE_PCGCS000_S_BASE)
 #define NRF_SECURE_PCGCM000_S             ((NRF_PCGCMASTER_Type*)               NRF_SECURE_PCGCM000_S_BASE)
-#define NRF_SECURE_ABB_S                  ((NRF_ABB_Type*)                      NRF_SECURE_ABB_S_BASE)
 #define NRF_SECURE_HSFLL_S                ((NRF_HSFLL_Type*)                    NRF_SECURE_HSFLL_S_BASE)
 #define NRF_SECURE_LRCCONF000_S           ((NRF_LRCCONF_Type*)                  NRF_SECURE_LRCCONF000_S_BASE)
 #define NRF_SECURE_PCGCM001_S             ((NRF_PCGCMASTER_Type*)               NRF_SECURE_PCGCM001_S_BASE)
@@ -370,7 +359,9 @@ typedef enum {
 #define NRF_SECURE_MUTEX_S                ((NRF_MUTEX_Type*)                    NRF_SECURE_MUTEX_S_BASE)
 #define NRF_SECURE_PCGCS010_S             ((NRF_PCGCSLAVE_Type*)                NRF_SECURE_PCGCS010_S_BASE)
 #define NRF_SECURE_PCGCM010_S             ((NRF_PCGCMASTER_Type*)               NRF_SECURE_PCGCM010_S_BASE)
+#define NRF_SECURE_ABB_S                  ((NRF_ABB_Type*)                      NRF_SECURE_ABB_S_BASE)
 #define NRF_SECURE_LRCCONF010_S           ((NRF_LRCCONF_Type*)                  NRF_SECURE_LRCCONF010_S_BASE)
+#define NRF_SECURE_RESETINFO_S            ((NRF_RESETINFO_Type*)                NRF_SECURE_RESETINFO_S_BASE)
 #define NRF_SECURE_PCGCM011_S             ((NRF_PCGCMASTER_Type*)               NRF_SECURE_PCGCM011_S_BASE)
 #define NRF_SECURE_IPCT_NS                ((NRF_IPCT_Type*)                     NRF_SECURE_IPCT_NS_BASE)
 #define NRF_SECURE_IPCT_S                 ((NRF_IPCT_Type*)                     NRF_SECURE_IPCT_S_BASE)
@@ -445,7 +436,6 @@ typedef enum {
   #define NRF_SECURE_RAMC001                      NRF_SECURE_RAMC001_S
   #define NRF_SECURE_PCGCS000                     NRF_SECURE_PCGCS000_S
   #define NRF_SECURE_PCGCM000                     NRF_SECURE_PCGCM000_S
-  #define NRF_SECURE_ABB                          NRF_SECURE_ABB_S
   #define NRF_SECURE_HSFLL                        NRF_SECURE_HSFLL_S
   #define NRF_SECURE_LRCCONF000                   NRF_SECURE_LRCCONF000_S
   #define NRF_SECURE_PCGCM001                     NRF_SECURE_PCGCM001_S
@@ -458,7 +448,9 @@ typedef enum {
   #define NRF_SECURE_MUTEX                        NRF_SECURE_MUTEX_S
   #define NRF_SECURE_PCGCS010                     NRF_SECURE_PCGCS010_S
   #define NRF_SECURE_PCGCM010                     NRF_SECURE_PCGCM010_S
+  #define NRF_SECURE_ABB                          NRF_SECURE_ABB_S
   #define NRF_SECURE_LRCCONF010                   NRF_SECURE_LRCCONF010_S
+  #define NRF_SECURE_RESETINFO                    NRF_SECURE_RESETINFO_S
   #define NRF_SECURE_PCGCM011                     NRF_SECURE_PCGCM011_S
   #define NRF_SECURE_IPCT                         NRF_SECURE_IPCT_S
   #define NRF_SECURE_BELLBOARD                    NRF_SECURE_BELLBOARD_S
@@ -517,7 +509,6 @@ typedef enum {
   #define NRF_RAMC001                             NRF_SECURE_RAMC001
   #define NRF_PCGCS000                            NRF_SECURE_PCGCS000
   #define NRF_PCGCM000                            NRF_SECURE_PCGCM000
-  #define NRF_ABB                                 NRF_SECURE_ABB
   #define NRF_HSFLL                               NRF_SECURE_HSFLL
   #define NRF_LRCCONF000                          NRF_SECURE_LRCCONF000
   #define NRF_PCGCM001                            NRF_SECURE_PCGCM001
@@ -530,7 +521,9 @@ typedef enum {
   #define NRF_MUTEX                               NRF_SECURE_MUTEX
   #define NRF_PCGCS010                            NRF_SECURE_PCGCS010
   #define NRF_PCGCM010                            NRF_SECURE_PCGCM010
+  #define NRF_ABB                                 NRF_SECURE_ABB
   #define NRF_LRCCONF010                          NRF_SECURE_LRCCONF010
+  #define NRF_RESETINFO                           NRF_SECURE_RESETINFO
   #define NRF_PCGCM011                            NRF_SECURE_PCGCM011
   #define NRF_IPCT                                NRF_SECURE_IPCT
   #define NRF_BELLBOARD                           NRF_SECURE_BELLBOARD

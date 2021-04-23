@@ -110,25 +110,13 @@ typedef enum {
   GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
   GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
   GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
-  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
-  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
-  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
-  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
-  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
-  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
-  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
-  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
-  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
-  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
-  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
-  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
-  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
-  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
+  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
-  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
@@ -202,6 +190,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended
@@ -231,8 +220,7 @@ typedef enum {
 
 #define NRF_CELLCORE_ICACHEDATA_S_BASE    0x04F00000UL
 #define NRF_CELLCORE_ICACHEINFO_S_BASE    0x04F10000UL
-#define NRF_CELLCORE_UICR_NS_BASE         0x0E200000UL
-#define NRF_CELLCORE_BICR_NS_BASE         0x0E2007B0UL
+#define NRF_CELLCORE_UICR_NS_BASE         0x0E3FF800UL
 #define NRF_CELLCORE_DCACHEDATA_S_BASE    0x24F00000UL
 #define NRF_CELLCORE_DCACHEINFO_S_BASE    0x24F10000UL
 #define NRF_CELLCORE_ETM_NS_BASE          0xE0041000UL
@@ -261,6 +249,7 @@ typedef enum {
 #define NRF_CELLCORE_PCGCM0_S_BASE        0x5400D000UL
 #define NRF_CELLCORE_SPU1_S_BASE          0x54010000UL
 #define NRF_CELLCORE_LRCCONF1_S_BASE      0x54011000UL
+#define NRF_CELLCORE_RESETINFO_S_BASE     0x54011000UL
 #define NRF_CELLCORE_CPUCONF_NS_BASE      0x44012000UL
 #define NRF_CELLCORE_CPUCONF_S_BASE       0x54012000UL
 #define NRF_CELLCORE_MEMCONF_NS_BASE      0x44013000UL
@@ -310,7 +299,6 @@ typedef enum {
 #define NRF_CELLCORE_ICACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_CELLCORE_ICACHEDATA_S_BASE)
 #define NRF_CELLCORE_ICACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_ICACHEINFO_S_BASE)
 #define NRF_CELLCORE_UICR_NS              ((NRF_UICR_Type*)                     NRF_CELLCORE_UICR_NS_BASE)
-#define NRF_CELLCORE_BICR_NS              ((NRF_BICR_Type*)                     NRF_CELLCORE_BICR_NS_BASE)
 #define NRF_CELLCORE_DCACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_CELLCORE_DCACHEDATA_S_BASE)
 #define NRF_CELLCORE_DCACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_DCACHEINFO_S_BASE)
 #define NRF_CELLCORE_ETM_NS               ((NRF_ETM_Type*)                      NRF_CELLCORE_ETM_NS_BASE)
@@ -339,6 +327,7 @@ typedef enum {
 #define NRF_CELLCORE_PCGCM0_S             ((NRF_PCGCMASTER_Type*)               NRF_CELLCORE_PCGCM0_S_BASE)
 #define NRF_CELLCORE_SPU1_S               ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU1_S_BASE)
 #define NRF_CELLCORE_LRCCONF1_S           ((NRF_LRCCONF_Type*)                  NRF_CELLCORE_LRCCONF1_S_BASE)
+#define NRF_CELLCORE_RESETINFO_S          ((NRF_RESETINFO_Type*)                NRF_CELLCORE_RESETINFO_S_BASE)
 #define NRF_CELLCORE_CPUCONF_NS           ((NRF_CPUCONF_Type*)                  NRF_CELLCORE_CPUCONF_NS_BASE)
 #define NRF_CELLCORE_CPUCONF_S            ((NRF_CPUCONF_Type*)                  NRF_CELLCORE_CPUCONF_S_BASE)
 #define NRF_CELLCORE_MEMCONF_NS           ((NRF_MEMCONF_Type*)                  NRF_CELLCORE_MEMCONF_NS_BASE)
@@ -387,7 +376,6 @@ typedef enum {
 
 #ifdef NRF_NONSECURE                                 /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
-  #define NRF_CELLCORE_BICR                       NRF_CELLCORE_BICR_NS
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
   #define NRF_CELLCORE_MVDMA                      NRF_CELLCORE_MVDMA_NS
   #define NRF_CELLCORE_RAMC00                     NRF_CELLCORE_RAMC00_NS
@@ -416,7 +404,6 @@ typedef enum {
   #define NRF_CELLCORE_ICACHEDATA                 NRF_CELLCORE_ICACHEDATA_S
   #define NRF_CELLCORE_ICACHEINFO                 NRF_CELLCORE_ICACHEINFO_S
   #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
-  #define NRF_CELLCORE_BICR                       NRF_CELLCORE_BICR_NS
   #define NRF_CELLCORE_DCACHEDATA                 NRF_CELLCORE_DCACHEDATA_S
   #define NRF_CELLCORE_DCACHEINFO                 NRF_CELLCORE_DCACHEINFO_S
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
@@ -439,6 +426,7 @@ typedef enum {
   #define NRF_CELLCORE_PCGCM0                     NRF_CELLCORE_PCGCM0_S
   #define NRF_CELLCORE_SPU1                       NRF_CELLCORE_SPU1_S
   #define NRF_CELLCORE_LRCCONF1                   NRF_CELLCORE_LRCCONF1_S
+  #define NRF_CELLCORE_RESETINFO                  NRF_CELLCORE_RESETINFO_S
   #define NRF_CELLCORE_CPUCONF                    NRF_CELLCORE_CPUCONF_S
   #define NRF_CELLCORE_MEMCONF                    NRF_CELLCORE_MEMCONF_S
   #define NRF_CELLCORE_WDT0                       NRF_CELLCORE_WDT0_S
@@ -473,7 +461,6 @@ typedef enum {
   #define NRF_ICACHEDATA                          NRF_CELLCORE_ICACHEDATA
   #define NRF_ICACHEINFO                          NRF_CELLCORE_ICACHEINFO
   #define NRF_UICR                                NRF_CELLCORE_UICR
-  #define NRF_BICR                                NRF_CELLCORE_BICR
   #define NRF_DCACHEDATA                          NRF_CELLCORE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_CELLCORE_DCACHEINFO
   #define NRF_ETM                                 NRF_CELLCORE_ETM
@@ -496,6 +483,7 @@ typedef enum {
   #define NRF_PCGCM0                              NRF_CELLCORE_PCGCM0
   #define NRF_SPU1                                NRF_CELLCORE_SPU1
   #define NRF_LRCCONF1                            NRF_CELLCORE_LRCCONF1
+  #define NRF_RESETINFO                           NRF_CELLCORE_RESETINFO
   #define NRF_CPUCONF                             NRF_CELLCORE_CPUCONF
   #define NRF_MEMCONF                             NRF_CELLCORE_MEMCONF
   #define NRF_WDT0                                NRF_CELLCORE_WDT0

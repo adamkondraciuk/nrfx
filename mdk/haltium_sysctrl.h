@@ -73,20 +73,6 @@ typedef enum {
   GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
   GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
   GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
-  GRTC2_IRQn                             = 110,      /*!< 110 GRTC2                                                            */
-  GRTC3_IRQn                             = 111,      /*!< 111 GRTC3                                                            */
-  GRTC4_IRQn                             = 112,      /*!< 112 GRTC4                                                            */
-  GRTC5_IRQn                             = 113,      /*!< 113 GRTC5                                                            */
-  GRTC6_IRQn                             = 114,      /*!< 114 GRTC6                                                            */
-  GRTC7_IRQn                             = 115,      /*!< 115 GRTC7                                                            */
-  GRTC8_IRQn                             = 116,      /*!< 116 GRTC8                                                            */
-  GRTC9_IRQn                             = 117,      /*!< 117 GRTC9                                                            */
-  GRTC10_IRQn                            = 118,      /*!< 118 GRTC10                                                           */
-  GRTC11_IRQn                            = 119,      /*!< 119 GRTC11                                                           */
-  GRTC12_IRQn                            = 120,      /*!< 120 GRTC12                                                           */
-  GRTC13_IRQn                            = 121,      /*!< 121 GRTC13                                                           */
-  GRTC14_IRQn                            = 122,      /*!< 122 GRTC14                                                           */
-  GRTC15_IRQn                            = 123,      /*!< 123 GRTC15                                                           */
   L2CACHE_IRQn                           = 130,      /*!< 130 L2CACHE                                                          */
   RAMC100_IRQn                           = 131,      /*!< 131 RAMC100                                                          */
   RAMC101_IRQn                           = 132,      /*!< 132 RAMC101                                                          */
@@ -111,8 +97,8 @@ typedef enum {
   LRCCONF120_IRQn                        = 206,      /*!< 206 LRCCONF120                                                       */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
-  I3C121_IRQn                            = 212,      /*!< 212 I3C121                                                           */
-  CAN_IRQn                               = 213,      /*!< 213 CAN                                                              */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
@@ -130,14 +116,17 @@ typedef enum {
   WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
   EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
   LRCCONF130_IRQn                        = 318,      /*!< 318 LRCCONF130                                                       */
-  GRCCONF_IRQn                           = 320,      /*!< 320 GRCCONF                                                          */
-  RESETHUB_IRQn                          = 322,      /*!< 322 RESETHUB                                                         */
-  GGENERIC13_IRQn                        = 328,      /*!< 328 GGENERIC13                                                       */
+  GRCCONF0_IRQn                          = 320,      /*!< 320 GRCCONF0                                                         */
+  GRCCONF1_IRQn                          = 321,      /*!< 321 GRCCONF1                                                         */
+  GRCCONF2_IRQn                          = 322,      /*!< 322 GRCCONF2                                                         */
+  PCRM_IRQn                              = 323,      /*!< 323 PCRM                                                             */
+  RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
   CLOCK_IRQn                             = 336,      /*!< 336 CLOCK                                                            */
   LFRC_IRQn                              = 337,      /*!< 337 LFRC                                                             */
   GGENERIC18_IRQn                        = 338,      /*!< 338 GGENERIC18                                                       */
   LFXO_IRQn                              = 339,      /*!< 339 LFXO                                                             */
-  GGENERIC20_IRQn                        = 341,      /*!< 341 GGENERIC20                                                       */
+  FLL16M_IRQn                            = 340,      /*!< 340 FLL16M                                                           */
+  HFXO_IRQn                              = 341,      /*!< 341 HFXO                                                             */
   AUDIOPLL_IRQn                          = 343,      /*!< 343 AUDIOPLL                                                         */
   USBHSPLL_IRQn                          = 344,      /*!< 344 USBHSPLL                                                         */
   POWER_IRQn                             = 352,      /*!< 352 POWER                                                            */
@@ -216,6 +205,7 @@ typedef enum {
 #include "compiler_abstraction.h"
 
 #if defined (__CC_ARM)
+  #pragma push
   #pragma anon_unions
 #elif defined (__ICCARM__)
   #pragma language=extended
@@ -246,19 +236,17 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEDATA_S_BASE    0x2F640000UL
 #define NRF_SYSCTRL_L2CACHEINFO_S_BASE    0x2F680000UL
 #define NRF_SYSCTRL_OICR_S_BASE           0x2F840000UL
+#define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
 #define NRF_SYSCTRL_L2CACHE_S_BASE        0x5F082000UL
 #define NRF_SYSCTRL_RAMC100_S_BASE        0x5F083000UL
 #define NRF_SYSCTRL_RAMC101_S_BASE        0x5F084000UL
 #define NRF_SYSCTRL_AXI100_S_BASE         0x5F085000UL
 #define NRF_SYSCTRL_SHA3_S_BASE           0x5F088000UL
-#define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
 #define NRF_SYSCTRL_RAMC102_S_BASE        0x5F08A000UL
 #define NRF_SYSCTRL_RAMC103_S_BASE        0x5F08B000UL
 #define NRF_SYSCTRL_MRAMC110_S_BASE       0x5F092000UL
 #define NRF_SYSCTRL_MRAMC111_S_BASE       0x5F093000UL
 #define NRF_SYSCTRL_EXMEE_S_BASE          0x5F094000UL
-#define NRF_SYSCTRL_EXMIF_NS_BASE         0x4F095000UL
-#define NRF_SYSCTRL_EXMIF_S_BASE          0x5F095000UL
 #define NRF_SYSCTRL_AXI110_S_BASE         0x5F096000UL
 #define NRF_SYSCTRL_MVDMA_S_BASE          0x5F097000UL
 #define NRF_SYSCTRL_PPIB110_S_BASE        0x5F098000UL
@@ -269,8 +257,6 @@ typedef enum {
 #define NRF_SYSCTRL_ROMC_S_BASE           0x5F8C6000UL
 #define NRF_SYSCTRL_MEMCONF120_S_BASE     0x5F8C7000UL
 #define NRF_SYSCTRL_VPR_S_BASE            0x5F8C8000UL
-#define NRF_SYSCTRL_CANPLL_NS_BASE        0x5F8CC000UL
-#define NRF_SYSCTRL_CANPLL_S_BASE         0x5F8CC000UL
 #define NRF_SYSCTRL_HSFLL_S_BASE          0x5F8CD000UL
 #define NRF_SYSCTRL_LRCCONF120_S_BASE     0x5F8CE000UL
 #define NRF_SYSCTRL_PCGCM120_S_BASE       0x5F8CF000UL
@@ -289,8 +275,8 @@ typedef enum {
 #define NRF_SYSCTRL_LRCCONF130_S_BASE     0x5F93E000UL
 #define NRF_SYSCTRL_PCGCM131_S_BASE       0x5F93F000UL
 #define NRF_SYSCTRL_GRCCONF_S_BASE        0x5F940000UL
-#define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F943000UL
-#define NRF_SYSCTRL_GGENERIC13_S_BASE     0x5F948000UL
+#define NRF_SYSCTRL_PCRM_S_BASE           0x5F943000UL
+#define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F949000UL
 #define NRF_SYSCTRL_PCGCS132_S_BASE       0x5F94E000UL
 #define NRF_SYSCTRL_PCGCM132_S_BASE       0x5F94F000UL
 #define NRF_SYSCTRL_CLOCK_S_BASE          0x5F950000UL
@@ -298,7 +284,7 @@ typedef enum {
 #define NRF_SYSCTRL_GGENERIC18_S_BASE     0x5F952000UL
 #define NRF_SYSCTRL_LFXO_S_BASE           0x5F953000UL
 #define NRF_SYSCTRL_FLL16M_S_BASE         0x5F954000UL
-#define NRF_SYSCTRL_GGENERIC20_S_BASE     0x5F955000UL
+#define NRF_SYSCTRL_HFXO_S_BASE           0x5F955000UL
 #define NRF_SYSCTRL_AUDIOPLL_S_BASE       0x5F957000UL
 #define NRF_SYSCTRL_USBHSPLL_S_BASE       0x5F958000UL
 #define NRF_SYSCTRL_POWER_S_BASE          0x5F960000UL
@@ -349,19 +335,17 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_SYSCTRL_L2CACHEDATA_S_BASE)
 #define NRF_SYSCTRL_L2CACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_SYSCTRL_L2CACHEINFO_S_BASE)
 #define NRF_SYSCTRL_OICR_S                ((NRF_OICR_Type*)                     NRF_SYSCTRL_OICR_S_BASE)
+#define NRF_SYSCTRL_SHA3CORE_S            ((NRF_CRACENCORE_Type*)               NRF_SYSCTRL_SHA3CORE_S_BASE)
 #define NRF_SYSCTRL_L2CACHE_S             ((NRF_CACHE_Type*)                    NRF_SYSCTRL_L2CACHE_S_BASE)
 #define NRF_SYSCTRL_RAMC100_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC100_S_BASE)
 #define NRF_SYSCTRL_RAMC101_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC101_S_BASE)
 #define NRF_SYSCTRL_AXI100_S              ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI100_S_BASE)
 #define NRF_SYSCTRL_SHA3_S                ((NRF_CRACEN_Type*)                   NRF_SYSCTRL_SHA3_S_BASE)
-#define NRF_SYSCTRL_SHA3CORE_S            ((NRF_SHA3CORE_Type*)                 NRF_SYSCTRL_SHA3CORE_S_BASE)
 #define NRF_SYSCTRL_RAMC102_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC102_S_BASE)
 #define NRF_SYSCTRL_RAMC103_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC103_S_BASE)
 #define NRF_SYSCTRL_MRAMC110_S            ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC110_S_BASE)
 #define NRF_SYSCTRL_MRAMC111_S            ((NRF_MRAMC_Type*)                    NRF_SYSCTRL_MRAMC111_S_BASE)
 #define NRF_SYSCTRL_EXMEE_S               ((NRF_EXMEE_Type*)                    NRF_SYSCTRL_EXMEE_S_BASE)
-#define NRF_SYSCTRL_EXMIF_NS              ((NRF_EXMIF_Type*)                    NRF_SYSCTRL_EXMIF_NS_BASE)
-#define NRF_SYSCTRL_EXMIF_S               ((NRF_EXMIF_Type*)                    NRF_SYSCTRL_EXMIF_S_BASE)
 #define NRF_SYSCTRL_AXI110_S              ((NRF_AXI_Type*)                      NRF_SYSCTRL_AXI110_S_BASE)
 #define NRF_SYSCTRL_MVDMA_S               ((NRF_MVDMA_Type*)                    NRF_SYSCTRL_MVDMA_S_BASE)
 #define NRF_SYSCTRL_PPIB110_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB110_S_BASE)
@@ -372,8 +356,6 @@ typedef enum {
 #define NRF_SYSCTRL_ROMC_S                ((NRF_ROMC_Type*)                     NRF_SYSCTRL_ROMC_S_BASE)
 #define NRF_SYSCTRL_MEMCONF120_S          ((NRF_MEMCONF_Type*)                  NRF_SYSCTRL_MEMCONF120_S_BASE)
 #define NRF_SYSCTRL_VPR_S                 ((NRF_VPR_Type*)                      NRF_SYSCTRL_VPR_S_BASE)
-#define NRF_SYSCTRL_CANPLL_NS             ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_CANPLL_NS_BASE)
-#define NRF_SYSCTRL_CANPLL_S              ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_CANPLL_S_BASE)
 #define NRF_SYSCTRL_HSFLL_S               ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL_S_BASE)
 #define NRF_SYSCTRL_LRCCONF120_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_S_BASE)
 #define NRF_SYSCTRL_PCGCM120_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM120_S_BASE)
@@ -392,8 +374,8 @@ typedef enum {
 #define NRF_SYSCTRL_LRCCONF130_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF130_S_BASE)
 #define NRF_SYSCTRL_PCGCM131_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM131_S_BASE)
 #define NRF_SYSCTRL_GRCCONF_S             ((NRF_GRCCONF_Type*)                  NRF_SYSCTRL_GRCCONF_S_BASE)
+#define NRF_SYSCTRL_PCRM_S                ((NRF_PCRM_Type*)                     NRF_SYSCTRL_PCRM_S_BASE)
 #define NRF_SYSCTRL_RESETHUB_S            ((NRF_RESETHUB_Type*)                 NRF_SYSCTRL_RESETHUB_S_BASE)
-#define NRF_SYSCTRL_GGENERIC13_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC13_S_BASE)
 #define NRF_SYSCTRL_PCGCS132_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS132_S_BASE)
 #define NRF_SYSCTRL_PCGCM132_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM132_S_BASE)
 #define NRF_SYSCTRL_CLOCK_S               ((NRF_CLOCK_Type*)                    NRF_SYSCTRL_CLOCK_S_BASE)
@@ -401,7 +383,7 @@ typedef enum {
 #define NRF_SYSCTRL_GGENERIC18_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC18_S_BASE)
 #define NRF_SYSCTRL_LFXO_S                ((NRF_LFXO_Type*)                     NRF_SYSCTRL_LFXO_S_BASE)
 #define NRF_SYSCTRL_FLL16M_S              ((NRF_FLL16M_Type*)                   NRF_SYSCTRL_FLL16M_S_BASE)
-#define NRF_SYSCTRL_GGENERIC20_S          ((NRF_GENERIC_Type*)                  NRF_SYSCTRL_GGENERIC20_S_BASE)
+#define NRF_SYSCTRL_HFXO_S                ((NRF_HFXO_Type*)                     NRF_SYSCTRL_HFXO_S_BASE)
 #define NRF_SYSCTRL_AUDIOPLL_S            ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_AUDIOPLL_S_BASE)
 #define NRF_SYSCTRL_USBHSPLL_S            ((NRF_AUXPLL_Type*)                   NRF_SYSCTRL_USBHSPLL_S_BASE)
 #define NRF_SYSCTRL_POWER_S               ((NRF_POWER_Type*)                    NRF_SYSCTRL_POWER_S_BASE)
@@ -450,24 +432,21 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_NONSECURE                                 /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_SYSCTRL_EXMIF                       NRF_SYSCTRL_EXMIF_NS
-  #define NRF_SYSCTRL_CANPLL                      NRF_SYSCTRL_CANPLL_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SYSCTRL_L2CACHEDATA                 NRF_SYSCTRL_L2CACHEDATA_S
   #define NRF_SYSCTRL_L2CACHEINFO                 NRF_SYSCTRL_L2CACHEINFO_S
   #define NRF_SYSCTRL_OICR                        NRF_SYSCTRL_OICR_S
+  #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_S
   #define NRF_SYSCTRL_L2CACHE                     NRF_SYSCTRL_L2CACHE_S
   #define NRF_SYSCTRL_RAMC100                     NRF_SYSCTRL_RAMC100_S
   #define NRF_SYSCTRL_RAMC101                     NRF_SYSCTRL_RAMC101_S
   #define NRF_SYSCTRL_AXI100                      NRF_SYSCTRL_AXI100_S
   #define NRF_SYSCTRL_SHA3                        NRF_SYSCTRL_SHA3_S
-  #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_S
   #define NRF_SYSCTRL_RAMC102                     NRF_SYSCTRL_RAMC102_S
   #define NRF_SYSCTRL_RAMC103                     NRF_SYSCTRL_RAMC103_S
   #define NRF_SYSCTRL_MRAMC110                    NRF_SYSCTRL_MRAMC110_S
   #define NRF_SYSCTRL_MRAMC111                    NRF_SYSCTRL_MRAMC111_S
   #define NRF_SYSCTRL_EXMEE                       NRF_SYSCTRL_EXMEE_S
-  #define NRF_SYSCTRL_EXMIF                       NRF_SYSCTRL_EXMIF_S
   #define NRF_SYSCTRL_AXI110                      NRF_SYSCTRL_AXI110_S
   #define NRF_SYSCTRL_MVDMA                       NRF_SYSCTRL_MVDMA_S
   #define NRF_SYSCTRL_PPIB110                     NRF_SYSCTRL_PPIB110_S
@@ -478,7 +457,6 @@ typedef enum {
   #define NRF_SYSCTRL_ROMC                        NRF_SYSCTRL_ROMC_S
   #define NRF_SYSCTRL_MEMCONF120                  NRF_SYSCTRL_MEMCONF120_S
   #define NRF_SYSCTRL_VPR                         NRF_SYSCTRL_VPR_S
-  #define NRF_SYSCTRL_CANPLL                      NRF_SYSCTRL_CANPLL_S
   #define NRF_SYSCTRL_HSFLL                       NRF_SYSCTRL_HSFLL_S
   #define NRF_SYSCTRL_LRCCONF120                  NRF_SYSCTRL_LRCCONF120_S
   #define NRF_SYSCTRL_PCGCM120                    NRF_SYSCTRL_PCGCM120_S
@@ -497,8 +475,8 @@ typedef enum {
   #define NRF_SYSCTRL_LRCCONF130                  NRF_SYSCTRL_LRCCONF130_S
   #define NRF_SYSCTRL_PCGCM131                    NRF_SYSCTRL_PCGCM131_S
   #define NRF_SYSCTRL_GRCCONF                     NRF_SYSCTRL_GRCCONF_S
+  #define NRF_SYSCTRL_PCRM                        NRF_SYSCTRL_PCRM_S
   #define NRF_SYSCTRL_RESETHUB                    NRF_SYSCTRL_RESETHUB_S
-  #define NRF_SYSCTRL_GGENERIC13                  NRF_SYSCTRL_GGENERIC13_S
   #define NRF_SYSCTRL_PCGCS132                    NRF_SYSCTRL_PCGCS132_S
   #define NRF_SYSCTRL_PCGCM132                    NRF_SYSCTRL_PCGCM132_S
   #define NRF_SYSCTRL_CLOCK                       NRF_SYSCTRL_CLOCK_S
@@ -506,7 +484,7 @@ typedef enum {
   #define NRF_SYSCTRL_GGENERIC18                  NRF_SYSCTRL_GGENERIC18_S
   #define NRF_SYSCTRL_LFXO                        NRF_SYSCTRL_LFXO_S
   #define NRF_SYSCTRL_FLL16M                      NRF_SYSCTRL_FLL16M_S
-  #define NRF_SYSCTRL_GGENERIC20                  NRF_SYSCTRL_GGENERIC20_S
+  #define NRF_SYSCTRL_HFXO                        NRF_SYSCTRL_HFXO_S
   #define NRF_SYSCTRL_AUDIOPLL                    NRF_SYSCTRL_AUDIOPLL_S
   #define NRF_SYSCTRL_USBHSPLL                    NRF_SYSCTRL_USBHSPLL_S
   #define NRF_SYSCTRL_POWER                       NRF_SYSCTRL_POWER_S
@@ -559,18 +537,17 @@ typedef enum {
   #define NRF_L2CACHEDATA                         NRF_SYSCTRL_L2CACHEDATA
   #define NRF_L2CACHEINFO                         NRF_SYSCTRL_L2CACHEINFO
   #define NRF_OICR                                NRF_SYSCTRL_OICR
+  #define NRF_SHA3CORE                            NRF_SYSCTRL_SHA3CORE
   #define NRF_L2CACHE                             NRF_SYSCTRL_L2CACHE
   #define NRF_RAMC100                             NRF_SYSCTRL_RAMC100
   #define NRF_RAMC101                             NRF_SYSCTRL_RAMC101
   #define NRF_AXI100                              NRF_SYSCTRL_AXI100
   #define NRF_SHA3                                NRF_SYSCTRL_SHA3
-  #define NRF_SHA3CORE                            NRF_SYSCTRL_SHA3CORE
   #define NRF_RAMC102                             NRF_SYSCTRL_RAMC102
   #define NRF_RAMC103                             NRF_SYSCTRL_RAMC103
   #define NRF_MRAMC110                            NRF_SYSCTRL_MRAMC110
   #define NRF_MRAMC111                            NRF_SYSCTRL_MRAMC111
   #define NRF_EXMEE                               NRF_SYSCTRL_EXMEE
-  #define NRF_EXMIF                               NRF_SYSCTRL_EXMIF
   #define NRF_AXI110                              NRF_SYSCTRL_AXI110
   #define NRF_MVDMA                               NRF_SYSCTRL_MVDMA
   #define NRF_PPIB110                             NRF_SYSCTRL_PPIB110
@@ -581,7 +558,6 @@ typedef enum {
   #define NRF_ROMC                                NRF_SYSCTRL_ROMC
   #define NRF_MEMCONF120                          NRF_SYSCTRL_MEMCONF120
   #define NRF_VPR                                 NRF_SYSCTRL_VPR
-  #define NRF_CANPLL                              NRF_SYSCTRL_CANPLL
   #define NRF_HSFLL                               NRF_SYSCTRL_HSFLL
   #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
   #define NRF_PCGCM120                            NRF_SYSCTRL_PCGCM120
@@ -600,8 +576,8 @@ typedef enum {
   #define NRF_LRCCONF130                          NRF_SYSCTRL_LRCCONF130
   #define NRF_PCGCM131                            NRF_SYSCTRL_PCGCM131
   #define NRF_GRCCONF                             NRF_SYSCTRL_GRCCONF
+  #define NRF_PCRM                                NRF_SYSCTRL_PCRM
   #define NRF_RESETHUB                            NRF_SYSCTRL_RESETHUB
-  #define NRF_GGENERIC13                          NRF_SYSCTRL_GGENERIC13
   #define NRF_PCGCS132                            NRF_SYSCTRL_PCGCS132
   #define NRF_PCGCM132                            NRF_SYSCTRL_PCGCM132
   #define NRF_CLOCK                               NRF_SYSCTRL_CLOCK
@@ -609,7 +585,7 @@ typedef enum {
   #define NRF_GGENERIC18                          NRF_SYSCTRL_GGENERIC18
   #define NRF_LFXO                                NRF_SYSCTRL_LFXO
   #define NRF_FLL16M                              NRF_SYSCTRL_FLL16M
-  #define NRF_GGENERIC20                          NRF_SYSCTRL_GGENERIC20
+  #define NRF_HFXO                                NRF_SYSCTRL_HFXO
   #define NRF_AUDIOPLL                            NRF_SYSCTRL_AUDIOPLL
   #define NRF_USBHSPLL                            NRF_SYSCTRL_USBHSPLL
   #define NRF_POWER                               NRF_SYSCTRL_POWER
