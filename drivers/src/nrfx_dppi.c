@@ -103,7 +103,9 @@ nrfx_err_t nrfx_dppi_channel_alloc(uint8_t * p_channel)
     }
     else
     {
-        NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_INFO("Function: %s, error code: %s.",
+                      __func__,
+                      NRFX_LOG_ERROR_STRING_GET(err_code));
     }
     return err_code;
 }
@@ -193,11 +195,13 @@ nrfx_err_t nrfx_dppi_group_alloc(nrf_dppi_channel_group_t * p_group)
 
     if (err_code == NRFX_SUCCESS)
     {
-        NRFX_LOG_INFO("Allocated channel: %d.", group);
+        NRFX_LOG_INFO("Allocated channel: %d.", *p_group);
     }
     else
     {
-        NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
+        NRFX_LOG_INFO("Function: %s, error code: %s.",
+                      __func__,
+                      NRFX_LOG_ERROR_STRING_GET(err_code));
     }
     return err_code;
 }
