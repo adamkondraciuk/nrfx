@@ -159,7 +159,7 @@ typedef struct
         .task_pin   = true,                                                                     \
     }
 
-#if !defined (NRFX_GPIOTE_CHANNELS_USED) || defined(__NRFX_DOXYGEN__)
+#if !defined (NRFX_GPIOTE_CHANNELS_USED) && !defined(__NRFX_DOXYGEN__)
 /* Bitmask that defines GPIOTE channels that are reserved for use outside of the nrfx library. */
 #define NRFX_GPIOTE_CHANNELS_USED 0
 #endif
