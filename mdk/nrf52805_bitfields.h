@@ -183,6 +183,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define AAR_SCRATCHPTR_SCRATCHPTR_Msk (0xFFFFFFFFUL << AAR_SCRATCHPTR_SCRATCHPTR_Pos) /*!< Bit mask of SCRATCHPTR field. */
 
 
+/* Peripheral: APPROTECT */
+/* Description: Only for emulation on devices that support hardened AP-PROTECT. */
+
+/* Register: APPROTECT_FORCEPROTECT */
+/* Description: Software force enable APPROTECT mechanism until next reset. */
+
+/* Bits 7..0 : Write 0x0 to force enable APPROTECT mechanism */
+#define APPROTECT_FORCEPROTECT_FORCEPROTECT_Pos (0UL) /*!< Position of FORCEPROTECT field. */
+#define APPROTECT_FORCEPROTECT_FORCEPROTECT_Msk (0xFFUL << APPROTECT_FORCEPROTECT_FORCEPROTECT_Pos) /*!< Bit mask of FORCEPROTECT field. */
+#define APPROTECT_FORCEPROTECT_FORCEPROTECT_Force (0x0UL) /*!< Software force enable APPROTECT mechanism */
+
+/* Register: APPROTECT_DISABLE */
+/* Description: Software disable APPROTECT mechanism */
+
+/* Bits 7..0 : Software disable APPROTECT mechanism */
+#define APPROTECT_DISABLE_DISABLE_Pos (0UL) /*!< Position of DISABLE field. */
+#define APPROTECT_DISABLE_DISABLE_Msk (0xFFUL << APPROTECT_DISABLE_DISABLE_Pos) /*!< Bit mask of DISABLE field. */
+#define APPROTECT_DISABLE_DISABLE_SwDisable (0x5AUL) /*!< Software disable APPROTECT mechanism */
+
+
 /* Peripheral: BPROT */
 /* Description: Block Protect */
 
