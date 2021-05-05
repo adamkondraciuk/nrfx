@@ -9,6 +9,13 @@
 extern "C" {
 #endif
 
+/**
+ * @defgroup nrf_reset_hal RESET HAL
+ * @{
+ * @ingroup nrf_power
+ * @brief   Hardware access layer for managing the RESET peripheral.
+ */
+
 #if defined(NRF5340_XXAA_NETWORK) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of Network core RESET functionality. */
 #define NRF_RESET_HAS_NETWORK 1
@@ -22,13 +29,6 @@ extern "C" {
 #else
 #define NRF_RESET_HAS_APPLICATION 0
 #endif
-
-/**
- * @defgroup nrf_reset_hal RESET HAL
- * @{
- * @ingroup nrf_reset
- * @brief   Hardware access layer for managing the RESET peripheral.
- */
 
 /** @brief Reset reason bit masks. */
 typedef enum
