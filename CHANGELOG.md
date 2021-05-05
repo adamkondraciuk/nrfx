@@ -15,7 +15,6 @@ All notable changes to this project are documented in this file.
 - Updated MDK to version 8.40.2.
 - Removed implicit channel deallocation during initialization in the GPIOTE driver.
 - Restricted pins that are supported for specific configuration on nRF5340 in the QSPI, TWIM, and SPIM drivers.
-- Converted line endings to UNIX format in several files.
 - Aligned IRQ handler symbols to new naming scheme for nRF53 Series.
 
 ### Fixed
