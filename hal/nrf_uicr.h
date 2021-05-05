@@ -478,8 +478,8 @@ NRF_STATIC_INLINE nrf_uicr_ipcmap_config_t nrf_uicr_ipcmap_config_get(NRF_UICR_T
     map.source.domain = (nrf_domain_t)((p_reg->IPCMAP[index] & UICR_IPCMAP_DOMAINIDSOURCE_Msk)
                                        >> UICR_IPCMAP_DOMAINIDSOURCE_Pos);
 
-    map.sink.ipct_channel = (p_reg->IPCMAP[index] & UICR_IPCMAP_IPCTCHSOURCE_Msk)
-                            >> UICR_IPCMAP_IPCTCHSOURCE_Pos;
+    map.sink.ipct_channel = (p_reg->IPCMAP[index] & UICR_IPCMAP_IPCTCHSINK_Msk)
+                            >> UICR_IPCMAP_IPCTCHSINK_Pos;
 
     map.sink.domain = (nrf_domain_t)((p_reg->IPCMAP[index] & UICR_IPCMAP_DOMAINIDSINK_Msk)
                                      >> UICR_IPCMAP_DOMAINIDSINK_Pos);
