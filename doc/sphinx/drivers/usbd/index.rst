@@ -7,3 +7,5 @@ USBD
    :glob:
 
    *
+   ../usbreg/driver.rst
+   ../usbreg/hal.rst

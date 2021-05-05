@@ -6,4 +6,5 @@ DPPI
 .. toctree::
    :glob:
 
+   ../../nrfx_api/gppi.rst
    *

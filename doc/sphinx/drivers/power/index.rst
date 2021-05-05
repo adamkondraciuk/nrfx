@@ -6,4 +6,9 @@ POWER
 .. toctree::
    :glob:
 
+   ../../nrfx_api/reset_reason.rst
    *
+   ../usbreg/driver.rst
+   ../usbreg/hal.rst
+   ../regulators/hal.rst
+   ../vreqctrl/hal.rst
