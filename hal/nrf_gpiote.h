@@ -30,7 +30,25 @@ extern "C" {
 #define NRF_GPIOTE_HAS_LATENCY 0
 #endif
 
- /** @brief Polarity for the GPIOTE channel. */
+#if defined(GPIOTE_INTEN0_IN0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of multiple interrupt registers. */
+#define NRF_GPIOTE_HAS_MULTIPLE_INT 1
+#else
+#define NRF_GPIOTE_HAS_MULTIPLE_INT 0
+#endif
+
+#if NRF_GPIOTE_HAS_MULTIPLE_INT
+/** @brief Number of interrupt registers. */
+/* TODO: This magic number should come from MDK. */
+#define NRF_GPIOTE_INT_COUNT 7
+#endif
+
+#if defined(HALTIUM_XXAA)
+/* TODO: Remove once haltium has peripheral.h support. */
+#define GPIOTE_CH_NUM 8
+#endif
+
+/** @brief Polarity for the GPIOTE channel. */
 typedef enum
 {
     NRF_GPIOTE_POLARITY_NONE   = GPIOTE_CONFIG_POLARITY_None,   /**< None. */
@@ -109,6 +127,32 @@ typedef enum
 /** @brief GPIOTE interrupts. */
 typedef enum
 {
+#if NRF_GPIOTE_HAS_MULTIPLE_INT
+    NRF_GPIOTE_INT_IN0_MASK    = GPIOTE_INTENSET0_IN0_Msk,    /**< GPIOTE interrupt from IN0. */
+    NRF_GPIOTE_INT_IN1_MASK    = GPIOTE_INTENSET0_IN1_Msk,    /**< GPIOTE interrupt from IN1. */
+    NRF_GPIOTE_INT_IN2_MASK    = GPIOTE_INTENSET0_IN2_Msk,    /**< GPIOTE interrupt from IN2. */
+    NRF_GPIOTE_INT_IN3_MASK    = GPIOTE_INTENSET0_IN3_Msk,    /**< GPIOTE interrupt from IN3. */
+    NRF_GPIOTE_INT_IN4_MASK    = GPIOTE_INTENSET0_IN4_Msk,    /**< GPIOTE interrupt from IN4. */
+    NRF_GPIOTE_INT_IN5_MASK    = GPIOTE_INTENSET0_IN5_Msk,    /**< GPIOTE interrupt from IN5. */
+    NRF_GPIOTE_INT_IN6_MASK    = GPIOTE_INTENSET0_IN6_Msk,    /**< GPIOTE interrupt from IN6. */
+    NRF_GPIOTE_INT_IN7_MASK    = GPIOTE_INTENSET0_IN7_Msk,    /**< GPIOTE interrupt from IN7. */
+    NRF_GPIOTE_INT_PORT0_MASK  = GPIOTE_INTENSET0_PORT0_Msk,  /**< GPIOTE interrupt from PORT0 event. */
+    NRF_GPIOTE_INT_PORT1_MASK  = GPIOTE_INTENSET0_PORT1_Msk,  /**< GPIOTE interrupt from PORT1 event. */
+    NRF_GPIOTE_INT_PORT2_MASK  = GPIOTE_INTENSET0_PORT2_Msk,  /**< GPIOTE interrupt from PORT2 event. */
+    NRF_GPIOTE_INT_PORT3_MASK  = GPIOTE_INTENSET0_PORT3_Msk,  /**< GPIOTE interrupt from PORT3 event. */
+    NRF_GPIOTE_INT_PORT4_MASK  = GPIOTE_INTENSET0_PORT4_Msk,  /**< GPIOTE interrupt from PORT4 event. */
+    NRF_GPIOTE_INT_PORT5_MASK  = GPIOTE_INTENSET0_PORT5_Msk,  /**< GPIOTE interrupt from PORT5 event. */
+    NRF_GPIOTE_INT_PORT6_MASK  = GPIOTE_INTENSET0_PORT6_Msk,  /**< GPIOTE interrupt from PORT6 event. */
+    NRF_GPIOTE_INT_PORT7_MASK  = GPIOTE_INTENSET0_PORT7_Msk,  /**< GPIOTE interrupt from PORT7 event. */
+    NRF_GPIOTE_INT_PORT8_MASK  = GPIOTE_INTENSET0_PORT8_Msk,  /**< GPIOTE interrupt from PORT8 event. */
+    NRF_GPIOTE_INT_PORT9_MASK  = GPIOTE_INTENSET0_PORT9_Msk,  /**< GPIOTE interrupt from PORT9 event. */
+    NRF_GPIOTE_INT_PORT10_MASK = GPIOTE_INTENSET0_PORT10_Msk, /**< GPIOTE interrupt from PORT10 event. */
+    NRF_GPIOTE_INT_PORT11_MASK = GPIOTE_INTENSET0_PORT11_Msk, /**< GPIOTE interrupt from PORT11 event. */
+    NRF_GPIOTE_INT_PORT12_MASK = GPIOTE_INTENSET0_PORT12_Msk, /**< GPIOTE interrupt from PORT12 event. */
+    NRF_GPIOTE_INT_PORT13_MASK = GPIOTE_INTENSET0_PORT13_Msk, /**< GPIOTE interrupt from PORT13 event. */
+    NRF_GPIOTE_INT_PORT14_MASK = GPIOTE_INTENSET0_PORT14_Msk, /**< GPIOTE interrupt from PORT14 event. */
+    NRF_GPIOTE_INT_PORT15_MASK = GPIOTE_INTENSET0_PORT15_Msk, /**< GPIOTE interrupt from PORT15 event. */
+#else
     NRF_GPIOTE_INT_IN0_MASK  = GPIOTE_INTENSET_IN0_Msk,  /**< GPIOTE interrupt from IN0. */
     NRF_GPIOTE_INT_IN1_MASK  = GPIOTE_INTENSET_IN1_Msk,  /**< GPIOTE interrupt from IN1. */
     NRF_GPIOTE_INT_IN2_MASK  = GPIOTE_INTENSET_IN2_Msk,  /**< GPIOTE interrupt from IN2. */
@@ -120,6 +164,7 @@ typedef enum
     NRF_GPIOTE_INT_IN7_MASK  = GPIOTE_INTENSET_IN7_Msk,  /**< GPIOTE interrupt from IN7. */
 #endif
     NRF_GPIOTE_INT_PORT_MASK = (int)GPIOTE_INTENSET_PORT_Msk, /**< GPIOTE interrupt from PORT event. */
+#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 } nrf_gpiote_int_t;
 
 #if (GPIOTE_CH_NUM == 4) || defined(__NRFX_DOXYGEN__)
@@ -183,6 +228,42 @@ NRF_STATIC_INLINE void nrf_gpiote_event_clear(NRF_GPIOTE_Type * p_reg, nrf_gpiot
 NRF_STATIC_INLINE uint32_t nrf_gpiote_event_address_get(NRF_GPIOTE_Type const * p_reg,
                                                         nrf_gpiote_event_t      event);
 
+#if NRF_GPIOTE_HAS_MULTIPLE_INT
+/**
+ * @brief Function for enabling interrupts.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be enabled.
+ * @param[in] mask      Mask of interrupts to be enabled.
+ */
+NRF_STATIC_INLINE void nrf_gpiote_int_group_enable(NRF_GPIOTE_Type * p_reg,
+                                                   uint8_t           group_idx,
+                                                   uint32_t          mask);
+
+/**
+ * @brief Function for disabling interrupts.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be disabled.
+ * @param[in] mask      Mask of interrupts to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_gpiote_int_group_disable(NRF_GPIOTE_Type * p_reg,
+                                                    uint8_t           group_idx,
+                                                    uint32_t          mask);
+
+/**
+ * @brief Function for checking if the specified interrupts are enabled.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] group_idx Index of interrupt group to be checked.
+ * @param[in] mask      Mask of interrupts to be checked.
+ *
+ * @return Mask of enabled interrupts.
+ */
+NRF_STATIC_INLINE uint32_t nrf_gpiote_int_group_enable_check(NRF_GPIOTE_Type const * p_reg,
+                                                             uint8_t                 group_idx,
+                                                             uint32_t                mask);
+#else
 /**
  * @brief Function for enabling interrupts.
  *
@@ -209,6 +290,7 @@ NRF_STATIC_INLINE void nrf_gpiote_int_disable(NRF_GPIOTE_Type * p_reg, uint32_t 
  */
 NRF_STATIC_INLINE uint32_t nrf_gpiote_int_enable_check(NRF_GPIOTE_Type const * p_reg,
                                                        uint32_t                mask);
+#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -460,6 +542,104 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_event_address_get(NRF_GPIOTE_Type const * 
     return ((uint32_t)p_reg + event);
 }
 
+#if NRF_GPIOTE_HAS_MULTIPLE_INT
+NRF_STATIC_INLINE void nrf_gpiote_int_group_enable(NRF_GPIOTE_Type * p_reg,
+                                                   uint8_t           group_idx,
+                                                   uint32_t          mask)
+{
+    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENSET0 = mask;
+            break;
+        case 1:
+            p_reg->INTENSET1 = mask;
+            break;
+        case 2:
+            p_reg->INTENSET2 = mask;
+            break;
+        case 3:
+            p_reg->INTENSET3 = mask;
+            break;
+        case 4:
+            p_reg->INTENSET4 = mask;
+            break;
+        case 5:
+            p_reg->INTENSET5 = mask;
+            break;
+        case 6:
+            p_reg->INTENSET6 = mask;
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+
+}
+
+NRF_STATIC_INLINE void nrf_gpiote_int_group_disable(NRF_GPIOTE_Type * p_reg,
+                                                    uint8_t           group_idx,
+                                                    uint32_t          mask)
+{
+    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
+    switch (group_idx)
+    {
+        case 0:
+            p_reg->INTENCLR0 = mask;
+            break;
+        case 1:
+            p_reg->INTENCLR1 = mask;
+            break;
+        case 2:
+            p_reg->INTENCLR2 = mask;
+            break;
+        case 3:
+            p_reg->INTENCLR3 = mask;
+            break;
+        case 4:
+            p_reg->INTENCLR4 = mask;
+            break;
+        case 5:
+            p_reg->INTENCLR5 = mask;
+            break;
+        case 6:
+            p_reg->INTENCLR6 = mask;
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE uint32_t nrf_gpiote_int_group_enable_check(NRF_GPIOTE_Type const * p_reg,
+                                                             uint8_t                 group_idx,
+                                                             uint32_t                mask)
+{
+    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
+    switch (group_idx)
+    {
+        case 0:
+            return p_reg->INTENSET0 & mask;
+        case 1:
+            return p_reg->INTENSET1 & mask;
+        case 2:
+            return p_reg->INTENSET2 & mask;
+        case 3:
+            return p_reg->INTENSET3 & mask;
+        case 4:
+            return p_reg->INTENSET4 & mask;
+        case 5:
+            return p_reg->INTENSET5 & mask;
+        case 6:
+            return p_reg->INTENSET6 & mask;
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+#else
+
 NRF_STATIC_INLINE void nrf_gpiote_int_enable(NRF_GPIOTE_Type * p_reg, uint32_t mask)
 {
     p_reg->INTENSET = mask;
@@ -474,6 +654,7 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_int_enable_check(NRF_GPIOTE_Type const * p
 {
     return p_reg->INTENSET & mask;
 }
+#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 
 #if defined(DPPI_PRESENT)
 NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(NRF_GPIOTE_Type * p_reg,
