@@ -19,6 +19,12 @@ extern "C" {
 #elif (GPIO_COUNT == 2)
 #define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM)
 #define GPIO_REG_LIST  {NRF_P0, NRF_P1}
+#elif defined(HALTIUM_XXAA)
+/* TODO: Remove this once Haltium targets have peripherals support. */
+#define NUMBER_OF_PINS 512
+#define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P3, NRF_P4, NRF_P5, NRF_P6, NRF_P7, \
+                        NRF_P8, NRF_P9, NRF_P10, NRF_P11, NRF_P12, NRF_P13, NRF_P14, NRF_P15}
+#define GPIO_COUNT     16
 #else
 #error "Not supported."
 #endif
@@ -39,8 +45,9 @@ extern "C" {
 #define NRF_GPIO_LATCH_PRESENT
 #endif
 
-#if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating presence of MCU/Subsystem control selection. */
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(GPIO_PIN_CNF_CTRLSEL_Msk) \
+    || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of MCU/Subsystem control selection. */
 #define NRF_GPIO_HAS_SEL 1
 #else
 #define NRF_GPIO_HAS_SEL 0
@@ -139,25 +146,29 @@ typedef enum
 /** @brief Enumerator used for selecting the MCU/Subsystem to control the specified pin. */
 typedef enum
 {
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_GPIO_PIN_SEL_APP        = GPIO_PIN_CNF_MCUSEL_AppMCU,     ///< Pin controlled by Application MCU.
     NRF_GPIO_PIN_SEL_NETWORK    = GPIO_PIN_CNF_MCUSEL_NetworkMCU, ///< Pin controlled by Network MCU.
     NRF_GPIO_PIN_SEL_PERIPHERAL = GPIO_PIN_CNF_MCUSEL_Peripheral, ///< Pin controlled by dedicated peripheral.
     NRF_GPIO_PIN_SEL_TND        = GPIO_PIN_CNF_MCUSEL_TND,        ///< Pin controlled by Trace and Debug Subsystem.
-} nrf_gpio_pin_sel_t;
-
-/**
- * @brief Enumerator used for selecting the MCU to control the specified pin.
- *
- * @note This enumerator is deprecated. Use @ref nrf_gpio_pin_sel_t instead.
- */
-typedef enum
-{
-    NRF_GPIO_PIN_MCUSEL_APP        = NRF_GPIO_PIN_SEL_APP,        ///< Pin controlled by Application MCU.
-    NRF_GPIO_PIN_MCUSEL_NETWORK    = NRF_GPIO_PIN_SEL_NETWORK,    ///< Pin controlled by Network MCU.
-    NRF_GPIO_PIN_MCUSEL_PERIPHERAL = NRF_GPIO_PIN_SEL_PERIPHERAL, ///< Pin controlled by dedicated peripheral.
-    NRF_GPIO_PIN_MCUSEL_TND        = NRF_GPIO_PIN_SEL_TND,        ///< Pin controlled by Trace and Debug Subsystem.
-} nrf_gpio_pin_mcusel_t;
 #endif
+#if defined(GPIO_PIN_CNF_CTRLSEL_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         ///< Pin controlled by GPIO peripheral.
+    NRF_GPIO_PIN_SEL_VPR      = GPIO_PIN_CNF_CTRLSEL_VPR,          ///< Pin controlled by VPR processor.
+    NRF_GPIO_PIN_SEL_GRC      = GPIO_PIN_CNF_CTRLSEL_GRC,          ///< Pin controlled by GRC system.
+    NRF_GPIO_PIN_SEL_SECURE   = GPIO_PIN_CNF_CTRLSEL_SecureDomain, ///< Pin controlled by Secure core.
+    NRF_GPIO_PIN_SEL_PWM      = GPIO_PIN_CNF_CTRLSEL_PWM,          ///< Pin controlled by PWM peripheral.
+    NRF_GPIO_PIN_SEL_I3C      = GPIO_PIN_CNF_CTRLSEL_I3C,          ///< Pin controlled by I3C peripheral.
+    NRF_GPIO_PIN_SEL_SERIAL   = GPIO_PIN_CNF_CTRLSEL_Serial,       ///< Pin controlled by SPIM/SPIS/TWIM/TWIS/UARTE peripheral.
+    NRF_GPIO_PIN_SEL_HS_SPI   = GPIO_PIN_CNF_CTRLSEL_HSSPI,        ///< Pin controlled by High-speed SPI peripheral.
+    NRF_GPIO_PIN_SEL_NETWORK  = GPIO_PIN_CNF_CTRLSEL_RadioCore,    ///< Pin controlled by Network core.
+    NRF_GPIO_PIN_SEL_EXMIF    = GPIO_PIN_CNF_CTRLSEL_EXMIF,        ///< Pin controlled by EXMIF peripheral.
+    NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         ///< Pin controlled by Cellular core.
+    NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,          ///< Pin controlled by Digital Test Bus.
+    NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          ///< Pin controlled by Trace and Debug Subsystem          ///< Pin controlled by Trace and Debug Subsystem..
+#endif
+} nrf_gpio_pin_sel_t;
+#endif // NRF_GPIO_HAS_SEL
 
 /**
  * @brief Function for configuring the GPIO pin range as output pins with normal drive strength.
@@ -522,16 +533,6 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
  * @param ctrl       MCU/Subsystem to control the pin.
  */
 NRF_STATIC_INLINE void nrf_gpio_pin_control_select(uint32_t pin_number, nrf_gpio_pin_sel_t ctrl);
-
-/**
- * @brief Function for selecting the MCU to control a GPIO pin.
- *
- * @note This function is deprecated. Use @ref nrf_gpio_pin_control_select instead.
- *
- * @param pin_number Pin_number.
- * @param mcu        MCU to control the pin.
- */
-NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu);
 #endif
 
 /**
@@ -573,13 +574,69 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
     {
         default:
             NRFX_ASSERT(0);
-#if defined(P0_FEATURE_PINS_PRESENT)
+#if defined(NRF_P0)
         /* FALLTHROUGH */
         case 0: return NRF_P0;
 #endif
-#if defined(P1_FEATURE_PINS_PRESENT)
+#if defined(NRF_P1)
         /* FALLTHROUGH */
         case 1: return NRF_P1;
+#endif
+#if defined(NRF_P2)
+        /* FALLTHROUGH */
+        case 2: return NRF_P2;
+#endif
+#if defined(NRF_P3)
+        /* FALLTHROUGH */
+        case 3: return NRF_P3;
+#endif
+#if defined(NRF_P4)
+        /* FALLTHROUGH */
+        case 4: return NRF_P4;
+#endif
+#if defined(NRF_P5)
+        /* FALLTHROUGH */
+        case 5: return NRF_P5;
+#endif
+#if defined(NRF_P6)
+        /* FALLTHROUGH */
+        case 6: return NRF_P6;
+#endif
+#if defined(NRF_P7)
+        /* FALLTHROUGH */
+        case 7: return NRF_P7;
+#endif
+#if defined(NRF_P8)
+        /* FALLTHROUGH */
+        case 8: return NRF_P8;
+#endif
+#if defined(NRF_P9)
+        /* FALLTHROUGH */
+        case 9: return NRF_P9;
+#endif
+#if defined(NRF_P10)
+        /* FALLTHROUGH */
+        case 10: return NRF_P10;
+#endif
+#if defined(NRF_P11)
+        /* FALLTHROUGH */
+        case 11: return NRF_P11;
+#endif
+#if defined(NRF_P12)
+        /* FALLTHROUGH */
+        case 12: return NRF_P12;
+#endif
+#if defined(NRF_P13)
+        /* FALLTHROUGH */
+        case 13: return NRF_P13;
+#endif
+#if defined(NRF_P14)
+        /* FALLTHROUGH */
+        case 14: return NRF_P14;
+#endif
+#if defined(NRF_P15)
+        /* FALLTHROUGH */
+        case 15: return NRF_P15;
 #endif
     }
 }
@@ -615,7 +672,7 @@ NRF_STATIC_INLINE void nrf_gpio_cfg(
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
 
-#if NRF_GPIO_HAS_SEL
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
     /* Preserve MCUSEL setting. */
     uint32_t cnf = reg->PIN_CNF[pin_number] & GPIO_PIN_CNF_MCUSEL_Msk;
 #else
@@ -973,17 +1030,15 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number)
 NRF_STATIC_INLINE void nrf_gpio_pin_control_select(uint32_t pin_number, nrf_gpio_pin_sel_t ctrl)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
     uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_MCUSEL_Msk;
     reg->PIN_CNF[pin_number] = cnf | (ctrl << GPIO_PIN_CNF_MCUSEL_Pos);
-}
-
-NRF_STATIC_INLINE void nrf_gpio_pin_mcu_select(uint32_t pin_number, nrf_gpio_pin_mcusel_t mcu)
-{
-    NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
-    uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_MCUSEL_Msk;
-    reg->PIN_CNF[pin_number] = cnf | (mcu << GPIO_PIN_CNF_MCUSEL_Pos);
-}
+#else
+    uint32_t cnf = reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_CTRLSEL_Msk;
+    reg->PIN_CNF[pin_number] = cnf | (ctrl << GPIO_PIN_CNF_CTRLSEL_Pos);
 #endif
+}
+#endif // NRF_GPIO_HAS_SEL
 
 NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 {
