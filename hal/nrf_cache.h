@@ -23,6 +23,34 @@ extern "C" {
 #define NRF_CACHE_HAS_CACHEDATA 0
 #endif
 
+#if defined(CACHE_TASKS_INVALIDATECACHE_TASKS_INVALIDATECACHE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether cache/line tasks are supported */
+#define NRF_CACHE_HAS_TASKS 1
+#else
+#define NRF_CACHE_HAS_TASKS 0
+#endif
+
+#if defined(CACHE_STATUS_READY_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether status/busy check is supported */
+#define NRF_CACHE_HAS_STATUS 1
+#else
+#define NRF_CACHE_HAS_STATUS 0
+#endif
+
+#if NRF_CACHE_HAS_TASKS
+/** @brief CACHE tasks. */
+typedef enum
+{
+    NRF_CACHE_TASK_INVALIDATECACHE = offsetof(NRF_CACHE_Type, TASKS_INVALIDATECACHE), /**< Invalidate the whole cache. */
+    NRF_CACHE_TASK_CLEANCACHE      = offsetof(NRF_CACHE_Type, TASKS_CLEANCACHE),      /**< Clean the whole cache. */
+    NRF_CACHE_TASK_FLUSHCACHE      = offsetof(NRF_CACHE_Type, TASKS_FLUSHCACHE),      /**< Flush the whole cache. */
+    NRF_CACHE_TASK_INVALIDATELINE  = offsetof(NRF_CACHE_Type, TASKS_INVALIDATELINE),  /**< Invalidate the cache line. */
+    NRF_CACHE_TASK_CLEANLINE       = offsetof(NRF_CACHE_Type, TASKS_CLEANLINE),       /**< Clean the cache line. */
+    NRF_CACHE_TASK_FLUSHLINE       = offsetof(NRF_CACHE_Type, TASKS_FLUSHLINE),       /**< Flush the cache line. */
+    NRF_CACHE_TASK_ERASE           = offsetof(NRF_CACHE_Type, TASKS_ERASE),           /**< Erase the whole cache. */
+} nrf_cache_task_t;
+#endif
+
 /** @brief Cache regions. */
 typedef enum
 {
@@ -250,6 +278,46 @@ NRF_STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type const * 
  */
 NRF_STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, uint32_t set);
 
+#if NRF_CACHE_HAS_TASKS
+/**
+ * @brief Function to set the memory address covered by the line to be maintained.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] addr  Cache line adress.
+ */
+NRF_STATIC_INLINE void nrf_cache_lineaddr_set(NRF_CACHE_Type * p_reg, uint32_t addr);
+
+/**
+ * @brief Function for triggering the specified CACHE task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
+ */
+NRF_STATIC_INLINE void nrf_cache_task_trigger(NRF_CACHE_Type * p_reg, nrf_cache_task_t task);
+
+/**
+ * @brief Function for returning the address of the specified task register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
+ *
+ * @return Task address.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cache_task_address_get(NRF_CACHE_Type const * p_reg,
+                                                      nrf_cache_task_t       task);
+#endif
+
+#if NRF_CACHE_HAS_STATUS
+/**
+ * @brief Function for checking if the cache is busy or not.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return True if the cache is busy, false otherwise.
+ */
+NRF_STATIC_INLINE bool nrf_cache_busy_check(NRF_CACHE_Type const * p_reg);
+#endif
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_cache_enable(NRF_CACHE_Type * p_reg)
@@ -264,42 +332,38 @@ NRF_STATIC_INLINE void nrf_cache_disable(NRF_CACHE_Type * p_reg)
 
 NRF_STATIC_INLINE void nrf_cache_invalidate(NRF_CACHE_Type * p_reg)
 {
-#if defined(CACHE_INVALIDATE_INVALIDATE_Msk)
+#if NRF_CACHE_HAS_TASKS
+    nrf_cache_task_trigger(p_reg, NRF_CACHE_TASK_INVALIDATECACHE);
+#else
     p_reg->INVALIDATE = CACHE_INVALIDATE_INVALIDATE_Invalidate;
-#elif defined(CACHE_TASKS_INVALIDATECACHE_TASKS_INVALIDATECACHE_Msk)
-    /* TODO: Use task */
-    (void)p_reg;
 #endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_erase(NRF_CACHE_Type * p_reg)
 {
-#if defined(CACHE_ERASE_ERASE_Msk)
+#if NRF_CACHE_HAS_TASKS
+    nrf_cache_task_trigger(p_reg, NRF_CACHE_TASK_ERASE);
+#else
     p_reg->ERASE = CACHE_ERASE_ERASE_Erase;
-#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
-    /* TODO: Use task */
-    (void)p_reg;
 #endif
 }
 
 NRF_STATIC_INLINE bool nrf_cache_erase_status_check(NRF_CACHE_Type const * p_reg)
 {
-#if defined(CACHE_ERASESTATUS_ERASESTATUS_Msk)
+#if NRF_CACHE_HAS_STATUS
+    return (!nrf_cache_busy_check(p_reg));
+#else
     return (bool)(p_reg->ERASESTATUS & CACHE_ERASESTATUS_ERASESTATUS_Msk);
-#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
-    /* TODO: Use task */
-    (void)p_reg;
-    return false;
 #endif
 }
 
 NRF_STATIC_INLINE void nrf_cache_erase_status_clear(NRF_CACHE_Type * p_reg)
 {
-#if defined(CACHE_ERASESTATUS_ERASESTATUS_Msk)
-    p_reg->ERASESTATUS = 0;
-#elif defined(CACHE_TASKS_ERASE_TASKS_ERASE_Msk)
-    /* TODO: Use task */
+#if NRF_CACHE_HAS_TASKS
+    /* No task for erasing the status */
     (void)p_reg;
+#else
+    p_reg->ERASESTATUS = 0;
 #endif
 }
 
@@ -309,9 +373,8 @@ NRF_STATIC_INLINE void nrf_cache_profiling_set(NRF_CACHE_Type * p_reg, bool enab
     p_reg->PROFILINGENABLE =
         (enable ? CACHE_PROFILINGENABLE_ENABLE_Enable : CACHE_PROFILINGENABLE_ENABLE_Disable);
 #elif defined(CACHE_PROFILING_ENABLE_ENABLE_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
-    (void)enable;
+    p_reg->PROFILING.ENABLE =
+        (enable ? CACHE_PROFILING_ENABLE_ENABLE_Enable : CACHE_PROFILING_ENABLE_ENABLE_Disable);
 #endif
 }
 
@@ -320,8 +383,7 @@ NRF_STATIC_INLINE void nrf_cache_profiling_counters_clear(NRF_CACHE_Type * p_reg
 #if defined(CACHE_PROFILINGCLEAR_CLEAR_Msk)
     p_reg->PROFILINGCLEAR = (CACHE_PROFILINGCLEAR_CLEAR_Clear << CACHE_PROFILINGCLEAR_CLEAR_Pos);
 #elif defined(CACHE_PROFILING_CLEAR_CLEAR_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
+    p_reg->PROFILING.CLEAR = (CACHE_PROFILING_CLEAR_CLEAR_Clear << CACHE_PROFILING_CLEAR_CLEAR_Pos);
 #endif
 }
 
@@ -331,10 +393,8 @@ NRF_STATIC_INLINE uint32_t nrf_cache_instruction_hit_counter_get(NRF_CACHE_Type 
 #if defined(CACHE_PROFILING_IHIT_HITS_Msk)
     return p_reg->PROFILING[region].IHIT;
 #elif defined(CACHE_PROFILING_HIT_HITS_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
     (void)region;
-    return 0;
+    return p_reg->PROFILING.HIT;
 #endif
 }
 
@@ -344,10 +404,8 @@ NRF_STATIC_INLINE uint32_t nrf_cache_instruction_miss_counter_get(NRF_CACHE_Type
 #if defined(CACHE_PROFILING_IMISS_MISSES_Msk)
     return p_reg->PROFILING[region].IMISS;
 #elif defined(CACHE_PROFILING_MISS_MISSES_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
     (void)region;
-    return 0;
+    return p_reg->PROFILING.MISS;
 #endif
 }
 
@@ -357,10 +415,8 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_hit_counter_get(NRF_CACHE_Type const *
 #if defined(CACHE_PROFILING_DHIT_HITS_Msk)
     return p_reg->PROFILING[region].DHIT;
 #elif defined(CACHE_PROFILING_HIT_HITS_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
     (void)region;
-    return 0;
+    return p_reg->PROFILING.HIT;
 #endif
 }
 
@@ -370,10 +426,8 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_miss_counter_get(NRF_CACHE_Type const 
 #if defined(CACHE_PROFILING_DMISS_MISSES_Msk)
     return p_reg->PROFILING[region].DMISS;
 #elif defined(CACHE_PROFILING_MISS_MISSES_Msk)
-    /* TODO: Use new register */
-    (void)p_reg;
     (void)region;
-    return 0;
+    return p_reg->PROFILING.MISS;
 #endif
 }
 
@@ -431,6 +485,31 @@ NRF_STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, ui
 {
     return ((p_reg->SET[set].WAY[0] & CACHEINFO_SET_WAY_MRU_Msk) >> CACHEINFO_SET_WAY_MRU_Pos);
 }
+
+#if NRF_CACHE_HAS_TASKS
+NRF_STATIC_INLINE void nrf_cache_lineaddr_set(NRF_CACHE_Type * p_reg, uint32_t addr)
+{
+    p_reg->LINEADDR = addr;
+}
+
+NRF_STATIC_INLINE void nrf_cache_task_trigger(NRF_CACHE_Type * p_reg, nrf_cache_task_t task)
+{
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_cache_task_address_get(NRF_CACHE_Type const * p_reg,
+                                                      nrf_cache_task_t       task)
+{
+    return (uint32_t)p_reg + (uint32_t)task;
+}
+#endif
+
+#if NRF_CACHE_HAS_STATUS
+NRF_STATIC_INLINE bool nrf_cache_busy_check(NRF_CACHE_Type const * p_reg)
+{
+    return (bool)(p_reg->STATUS & CACHE_STATUS_READY_Msk);
+}
+#endif
 
 #endif // NRF_DECLARE_ONLY
 
