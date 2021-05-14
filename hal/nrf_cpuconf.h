@@ -13,7 +13,7 @@ extern "C" {
  * @defgroup nrf_cpuconf_hal CPUCONF HAL
  * @{
  * @ingroup nrf_cpuconf
- * @brief   Hardware access layer (HAL) for managing the CPU configuration.
+ * @brief   Hardware access layer (HAL) for managing the CPU configuration (CPUCONF) peripheral.
  */
 
 /** @brief CPU configuration tasks. */
@@ -31,18 +31,22 @@ typedef enum
 NRF_STATIC_INLINE void nrf_cpuconf_task_trigger(NRF_CPUCONF_Type * p_reg, nrf_cpuconf_task_t task);
 
 /**
- * @brief Function for starting the CPU.
+ * @brief Function for setting the CPU start enable.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if CPU should be started, false if it should be stopped.
  */
-NRF_STATIC_INLINE void nrf_cpuconf_cpu_start(NRF_CPUCONF_Type * p_reg);
+NRF_STATIC_INLINE void nrf_cpuconf_cpu_start_set(NRF_CPUCONF_Type * p_reg, bool enable);
 
 /**
- * @brief Function for stopping the CPU.
+ * @brief Function for checking whether the CPU start is enabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  CPU is started.
+ * @retval false CPU is stopped.
  */
-NRF_STATIC_INLINE void nrf_cpuconf_cpu_stop(NRF_CPUCONF_Type * p_reg);
+NRF_STATIC_INLINE bool nrf_cpuconf_cpu_start_check(NRF_CPUCONF_Type const * p_reg);
 
 /**
  * @brief Function for setting the CPU wait state.
@@ -55,7 +59,17 @@ NRF_STATIC_INLINE void nrf_cpuconf_cpu_stop(NRF_CPUCONF_Type * p_reg);
 NRF_STATIC_INLINE void nrf_cpuconf_cpu_wait_set(NRF_CPUCONF_Type * p_reg, bool wait);
 
 /**
- * @brief Function for setting initial value of the secure Vector Table Offset Register after CPU reset.
+ * @brief Function for checking whether the CPU wait is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  CPU is waiting.
+ * @retval false CPU is not waiting.
+ */
+NRF_STATIC_INLINE bool nrf_cpuconf_cpu_wait_check(NRF_CPUCONF_Type const * p_reg);
+
+/**
+ * @brief Function for setting the initial value of the secure Vector Table Offset Register after CPU reset.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] vtor  Value of the secure Vector Table Offset Register to be set.
@@ -63,13 +77,30 @@ NRF_STATIC_INLINE void nrf_cpuconf_cpu_wait_set(NRF_CPUCONF_Type * p_reg, bool w
 NRF_STATIC_INLINE void nrf_cpuconf_secure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor);
 
 /**
- * @brief Function for setting initial value of the non-secure Vector Table Offset Register after CPU reset.
+ * @brief Function for getting the initial value of the secure Vector Table Offset Register after CPU reset.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Initial value of the secure VTOR.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cpuconf_secure_vtor_get(NRF_CPUCONF_Type const * p_reg);
+
+/**
+ * @brief Function for setting the initial value of the non-secure Vector Table Offset Register after CPU reset.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] vtor  Value of the non-secure Vector Table Offset Register to be set.
  */
 NRF_STATIC_INLINE void nrf_cpuconf_nonsecure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor);
 
+/**
+ * @brief Function for getting the initial value of the non-secure Vector Table Offset Register after CPU reset.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Initial value of the non-secure VTOR.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cpuconf_nonsecure_vtor_get(NRF_CPUCONF_Type const * p_reg);
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -78,14 +109,16 @@ NRF_STATIC_INLINE void nrf_cpuconf_task_trigger(NRF_CPUCONF_Type * p_reg, nrf_cp
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE void nrf_cpuconf_cpu_start(NRF_CPUCONF_Type * p_reg)
+NRF_STATIC_INLINE void nrf_cpuconf_cpu_start_set(NRF_CPUCONF_Type * p_reg, bool enable)
 {
-    p_reg->CPUSTART = CPUCONF_CPUSTART_EN_Started << CPUCONF_CPUSTART_EN_Pos;
+    p_reg->CPUSTART = (enable ? CPUCONF_CPUSTART_EN_Started : CPUCONF_CPUSTART_EN_Stopped)
+                      << CPUCONF_CPUSTART_EN_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_cpuconf_cpu_stop(NRF_CPUCONF_Type * p_reg)
+NRF_STATIC_INLINE bool nrf_cpuconf_cpu_start_check(NRF_CPUCONF_Type const * p_reg)
 {
-    p_reg->CPUSTART = CPUCONF_CPUSTART_EN_Stopped << CPUCONF_CPUSTART_EN_Pos;
+    return ((p_reg->CPUSTART & CPUCONF_CPUSTART_EN_Msk) >> CPUCONF_CPUSTART_EN_Pos)
+           == CPUCONF_CPUSTART_EN_Started;
 }
 
 NRF_STATIC_INLINE void nrf_cpuconf_cpu_wait_set(NRF_CPUCONF_Type * p_reg, bool wait)
@@ -94,9 +127,20 @@ NRF_STATIC_INLINE void nrf_cpuconf_cpu_wait_set(NRF_CPUCONF_Type * p_reg, bool w
                      << CPUCONF_CPUWAIT_EN_Pos;
 }
 
+NRF_STATIC_INLINE bool nrf_cpuconf_cpu_wait_check(NRF_CPUCONF_Type const * p_reg)
+{
+    return ((p_reg->CPUWAIT & CPUCONF_CPUWAIT_EN_Msk) >> CPUCONF_CPUWAIT_EN_Pos)
+           == CPUCONF_CPUWAIT_EN_Enabled;
+}
+
 NRF_STATIC_INLINE void nrf_cpuconf_secure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor)
 {
     p_reg->INITSVTOR = vtor;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_cpuconf_secure_vtor_get(NRF_CPUCONF_Type const * p_reg)
+{
+    return p_reg->INITSVTOR;
 }
 
 NRF_STATIC_INLINE void nrf_cpuconf_nonsecure_vtor_set(NRF_CPUCONF_Type * p_reg, uint32_t vtor)
@@ -104,6 +148,10 @@ NRF_STATIC_INLINE void nrf_cpuconf_nonsecure_vtor_set(NRF_CPUCONF_Type * p_reg, 
     p_reg->INITNSVTOR = vtor;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_cpuconf_nonsecure_vtor_get(NRF_CPUCONF_Type const * p_reg)
+{
+    return p_reg->INITNSVTOR;
+}
 #endif
 
 /** @} */
