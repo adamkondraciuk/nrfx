@@ -23,6 +23,9 @@ extern "C" {
 /** @brief Number of override regions. */
 #define NRF_MPC_OVERRIDE_COUNT MPC_OVERRIDE_MaxCount
 
+/** @brief Number of Real Time Choke slaves. */
+#define NRF_MPC_RTCHOKE_COUNT  MPC_RTCHOKE_DELAY_MaxCount
+
 /** @brief MPC events. */
 typedef enum
 {
@@ -58,38 +61,38 @@ typedef enum
 /** @brief Masterport mask. */
 typedef enum
 {
-    NRF_MPC_MASTERPORT_0_MASK  = MPC_REGION_MASTERPORT_ENABLE0_Msk,  /**< Enable region for master port 0. */
-    NRF_MPC_MASTERPORT_1_MASK  = MPC_REGION_MASTERPORT_ENABLE1_Msk,  /**< Enable region for master port 1. */
-    NRF_MPC_MASTERPORT_2_MASK  = MPC_REGION_MASTERPORT_ENABLE2_Msk,  /**< Enable region for master port 2. */
-    NRF_MPC_MASTERPORT_3_MASK  = MPC_REGION_MASTERPORT_ENABLE3_Msk,  /**< Enable region for master port 3. */
-    NRF_MPC_MASTERPORT_4_MASK  = MPC_REGION_MASTERPORT_ENABLE4_Msk,  /**< Enable region for master port 4. */
-    NRF_MPC_MASTERPORT_5_MASK  = MPC_REGION_MASTERPORT_ENABLE5_Msk,  /**< Enable region for master port 5. */
-    NRF_MPC_MASTERPORT_6_MASK  = MPC_REGION_MASTERPORT_ENABLE6_Msk,  /**< Enable region for master port 6. */
-    NRF_MPC_MASTERPORT_7_MASK  = MPC_REGION_MASTERPORT_ENABLE7_Msk,  /**< Enable region for master port 7. */
-    NRF_MPC_MASTERPORT_8_MASK  = MPC_REGION_MASTERPORT_ENABLE8_Msk,  /**< Enable region for master port 8. */
-    NRF_MPC_MASTERPORT_9_MASK  = MPC_REGION_MASTERPORT_ENABLE9_Msk,  /**< Enable region for master port 9. */
-    NRF_MPC_MASTERPORT_10_MASK = MPC_REGION_MASTERPORT_ENABLE10_Msk, /**< Enable region for master port 10. */
-    NRF_MPC_MASTERPORT_11_MASK = MPC_REGION_MASTERPORT_ENABLE11_Msk, /**< Enable region for master port 11. */
-    NRF_MPC_MASTERPORT_12_MASK = MPC_REGION_MASTERPORT_ENABLE12_Msk, /**< Enable region for master port 12. */
-    NRF_MPC_MASTERPORT_13_MASK = MPC_REGION_MASTERPORT_ENABLE13_Msk, /**< Enable region for master port 13. */
-    NRF_MPC_MASTERPORT_14_MASK = MPC_REGION_MASTERPORT_ENABLE14_Msk, /**< Enable region for master port 14. */
-    NRF_MPC_MASTERPORT_15_MASK = MPC_REGION_MASTERPORT_ENABLE15_Msk, /**< Enable region for master port 15. */
-    NRF_MPC_MASTERPORT_16_MASK = MPC_REGION_MASTERPORT_ENABLE16_Msk, /**< Enable region for master port 16. */
-    NRF_MPC_MASTERPORT_17_MASK = MPC_REGION_MASTERPORT_ENABLE17_Msk, /**< Enable region for master port 17. */
-    NRF_MPC_MASTERPORT_18_MASK = MPC_REGION_MASTERPORT_ENABLE18_Msk, /**< Enable region for master port 18. */
-    NRF_MPC_MASTERPORT_19_MASK = MPC_REGION_MASTERPORT_ENABLE19_Msk, /**< Enable region for master port 19. */
-    NRF_MPC_MASTERPORT_20_MASK = MPC_REGION_MASTERPORT_ENABLE20_Msk, /**< Enable region for master port 20. */
-    NRF_MPC_MASTERPORT_21_MASK = MPC_REGION_MASTERPORT_ENABLE21_Msk, /**< Enable region for master port 21. */
-    NRF_MPC_MASTERPORT_22_MASK = MPC_REGION_MASTERPORT_ENABLE22_Msk, /**< Enable region for master port 22. */
-    NRF_MPC_MASTERPORT_23_MASK = MPC_REGION_MASTERPORT_ENABLE23_Msk, /**< Enable region for master port 23. */
-    NRF_MPC_MASTERPORT_24_MASK = MPC_REGION_MASTERPORT_ENABLE24_Msk, /**< Enable region for master port 24. */
-    NRF_MPC_MASTERPORT_25_MASK = MPC_REGION_MASTERPORT_ENABLE25_Msk, /**< Enable region for master port 25. */
-    NRF_MPC_MASTERPORT_26_MASK = MPC_REGION_MASTERPORT_ENABLE26_Msk, /**< Enable region for master port 26. */
-    NRF_MPC_MASTERPORT_27_MASK = MPC_REGION_MASTERPORT_ENABLE27_Msk, /**< Enable region for master port 27. */
-    NRF_MPC_MASTERPORT_28_MASK = MPC_REGION_MASTERPORT_ENABLE28_Msk, /**< Enable region for master port 28. */
-    NRF_MPC_MASTERPORT_29_MASK = MPC_REGION_MASTERPORT_ENABLE29_Msk, /**< Enable region for master port 29. */
-    NRF_MPC_MASTERPORT_30_MASK = MPC_REGION_MASTERPORT_ENABLE30_Msk, /**< Enable region for master port 30. */
-    NRF_MPC_MASTERPORT_31_MASK = MPC_REGION_MASTERPORT_ENABLE31_Msk, /**< Enable region for master port 31. */
+    NRF_MPC_MASTERPORT_0_MASK  = MPC_REGION_MASTERPORT_ENABLE0_Msk,  /**< Enable master port 0. */
+    NRF_MPC_MASTERPORT_1_MASK  = MPC_REGION_MASTERPORT_ENABLE1_Msk,  /**< Enable master port 1. */
+    NRF_MPC_MASTERPORT_2_MASK  = MPC_REGION_MASTERPORT_ENABLE2_Msk,  /**< Enable master port 2. */
+    NRF_MPC_MASTERPORT_3_MASK  = MPC_REGION_MASTERPORT_ENABLE3_Msk,  /**< Enable master port 3. */
+    NRF_MPC_MASTERPORT_4_MASK  = MPC_REGION_MASTERPORT_ENABLE4_Msk,  /**< Enable master port 4. */
+    NRF_MPC_MASTERPORT_5_MASK  = MPC_REGION_MASTERPORT_ENABLE5_Msk,  /**< Enable master port 5. */
+    NRF_MPC_MASTERPORT_6_MASK  = MPC_REGION_MASTERPORT_ENABLE6_Msk,  /**< Enable master port 6. */
+    NRF_MPC_MASTERPORT_7_MASK  = MPC_REGION_MASTERPORT_ENABLE7_Msk,  /**< Enable master port 7. */
+    NRF_MPC_MASTERPORT_8_MASK  = MPC_REGION_MASTERPORT_ENABLE8_Msk,  /**< Enable master port 8. */
+    NRF_MPC_MASTERPORT_9_MASK  = MPC_REGION_MASTERPORT_ENABLE9_Msk,  /**< Enable master port 9. */
+    NRF_MPC_MASTERPORT_10_MASK = MPC_REGION_MASTERPORT_ENABLE10_Msk, /**< Enable master port 10. */
+    NRF_MPC_MASTERPORT_11_MASK = MPC_REGION_MASTERPORT_ENABLE11_Msk, /**< Enable master port 11. */
+    NRF_MPC_MASTERPORT_12_MASK = MPC_REGION_MASTERPORT_ENABLE12_Msk, /**< Enable master port 12. */
+    NRF_MPC_MASTERPORT_13_MASK = MPC_REGION_MASTERPORT_ENABLE13_Msk, /**< Enable master port 13. */
+    NRF_MPC_MASTERPORT_14_MASK = MPC_REGION_MASTERPORT_ENABLE14_Msk, /**< Enable master port 14. */
+    NRF_MPC_MASTERPORT_15_MASK = MPC_REGION_MASTERPORT_ENABLE15_Msk, /**< Enable master port 15. */
+    NRF_MPC_MASTERPORT_16_MASK = MPC_REGION_MASTERPORT_ENABLE16_Msk, /**< Enable master port 16. */
+    NRF_MPC_MASTERPORT_17_MASK = MPC_REGION_MASTERPORT_ENABLE17_Msk, /**< Enable master port 17. */
+    NRF_MPC_MASTERPORT_18_MASK = MPC_REGION_MASTERPORT_ENABLE18_Msk, /**< Enable master port 18. */
+    NRF_MPC_MASTERPORT_19_MASK = MPC_REGION_MASTERPORT_ENABLE19_Msk, /**< Enable master port 19. */
+    NRF_MPC_MASTERPORT_20_MASK = MPC_REGION_MASTERPORT_ENABLE20_Msk, /**< Enable master port 20. */
+    NRF_MPC_MASTERPORT_21_MASK = MPC_REGION_MASTERPORT_ENABLE21_Msk, /**< Enable master port 21. */
+    NRF_MPC_MASTERPORT_22_MASK = MPC_REGION_MASTERPORT_ENABLE22_Msk, /**< Enable master port 22. */
+    NRF_MPC_MASTERPORT_23_MASK = MPC_REGION_MASTERPORT_ENABLE23_Msk, /**< Enable master port 23. */
+    NRF_MPC_MASTERPORT_24_MASK = MPC_REGION_MASTERPORT_ENABLE24_Msk, /**< Enable master port 24. */
+    NRF_MPC_MASTERPORT_25_MASK = MPC_REGION_MASTERPORT_ENABLE25_Msk, /**< Enable master port 25. */
+    NRF_MPC_MASTERPORT_26_MASK = MPC_REGION_MASTERPORT_ENABLE26_Msk, /**< Enable master port 26. */
+    NRF_MPC_MASTERPORT_27_MASK = MPC_REGION_MASTERPORT_ENABLE27_Msk, /**< Enable master port 27. */
+    NRF_MPC_MASTERPORT_28_MASK = MPC_REGION_MASTERPORT_ENABLE28_Msk, /**< Enable master port 28. */
+    NRF_MPC_MASTERPORT_29_MASK = MPC_REGION_MASTERPORT_ENABLE29_Msk, /**< Enable master port 29. */
+    NRF_MPC_MASTERPORT_30_MASK = MPC_REGION_MASTERPORT_ENABLE30_Msk, /**< Enable master port 30. */
+    NRF_MPC_MASTERPORT_31_MASK = MPC_REGION_MASTERPORT_ENABLE31_Msk, /**< Enable master port 31. */
 } nrf_mpc_masterport_mask_t;
 
 /** @brief Region configuration. */
@@ -180,6 +183,17 @@ NRF_STATIC_INLINE void nrf_mpc_region_config_set(NRF_MPC_Type *                 
                                                  nrf_mpc_region_config_t const * p_config);
 
 /**
+ * @brief Function for getting configuration of the region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Region index.
+ *
+ * @return Structure with configuration of the region.
+ */
+NRF_STATIC_INLINE nrf_mpc_region_config_t nrf_mpc_region_config_get(NRF_MPC_Type const * p_reg,
+                                                                    uint8_t              index);
+
+/**
  * @brief Function for setting start address of the region.
  *
  * @note Address must be on a 4kB memory boundary.
@@ -193,28 +207,60 @@ NRF_STATIC_INLINE void nrf_mpc_region_startaddr_set(NRF_MPC_Type * p_reg,
                                                     uint32_t       address);
 
 /**
- * @brief Function for setting addres mask of the region.
+ * @brief Function for getting start address of the region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Region index.
+ *
+ * @return Start address of the region.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_startaddr_get(NRF_MPC_Type const * p_reg, uint8_t index);
+
+/**
+ * @brief Function for setting address mask of the region.
  *
  * @note Mask must be on a 4kB memory boundary.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] index   Region index.
- * @param[in] address Mask to be set.
+ * @param[in] address Address to be set.
  */
 NRF_STATIC_INLINE void nrf_mpc_region_addrmask_set(NRF_MPC_Type * p_reg,
                                                    uint8_t        index,
                                                    uint32_t       address);
 
 /**
+ * @brief Function for getting address mask of the region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Region index.
+ *
+ * @return Address mask of the region.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_addrmask_get(NRF_MPC_Type const * p_reg, uint8_t index);
+
+/**
  * @brief Function for enabling the specified master ports of the region.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] index Region index.
- * @param[in] mask  Mask of master ports to be enabled.
+ * @param[in] mask  Mask of master ports to be enabled,
+ *                  constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
  */
 NRF_STATIC_INLINE void nrf_mpc_region_masterport_set(NRF_MPC_Type * p_reg,
                                                      uint8_t        index,
                                                      uint32_t       mask);
+
+/**
+ * @brief Function for getting enabled master ports of the region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Region index.
+ *
+ * @return Mask of enabled master ports,
+ *         constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_masterport_get(NRF_MPC_Type const * p_reg, uint8_t index);
 
 /**
  * @brief Function for setting configuration of the override region.
@@ -226,6 +272,17 @@ NRF_STATIC_INLINE void nrf_mpc_region_masterport_set(NRF_MPC_Type * p_reg,
 NRF_STATIC_INLINE void nrf_mpc_override_config_set(NRF_MPC_Type *                    p_reg,
                                                    uint8_t                           index,
                                                    nrf_mpc_override_config_t const * p_config);
+
+/**
+ * @brief Function for getting configuration of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Structure with configuration of the override region.
+ */
+NRF_STATIC_INLINE nrf_mpc_override_config_t nrf_mpc_override_config_get(NRF_MPC_Type const * p_reg,
+                                                                        uint8_t              index);
 
 /**
  * @brief Function for setting start address of the override region.
@@ -241,6 +298,17 @@ NRF_STATIC_INLINE void nrf_mpc_override_startaddr_set(NRF_MPC_Type * p_reg,
                                                       uint32_t       address);
 
 /**
+ * @brief Function for getting start address of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Start address of the override region.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_startaddr_get(NRF_MPC_Type const * p_reg,
+                                                          uint8_t              index);
+
+/**
  * @brief Function for setting end address of the override region.
  *
  * @note Address must be on a 4kB memory boundary.
@@ -252,6 +320,17 @@ NRF_STATIC_INLINE void nrf_mpc_override_startaddr_set(NRF_MPC_Type * p_reg,
 NRF_STATIC_INLINE void nrf_mpc_override_endaddr_set(NRF_MPC_Type * p_reg,
                                                     uint8_t        index,
                                                     uint32_t       address);
+
+/**
+ * @brief Function for getting end address of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return End address of the override region.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_endaddr_get(NRF_MPC_Type const * p_reg,
+                                                        uint8_t              index);
 
 /**
  * @brief Function for setting offset of the override region.
@@ -267,26 +346,64 @@ NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
                                                    uint32_t       offset);
 
 /**
+ * @brief Function for getting offset of the override region.
+ *
+ * @note Offset is left shifted before applying, creating a 33-bit signed integer.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Address offset value divided by 2.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_reg,
+                                                       uint8_t              index);
+
+/**
  * @brief Function for setting permission settings for the override region.
  *
  * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] index       Override region index.
- * @param[in] permissions Mask of permissions to be set.
+ * @param[in] permissions Mask of permissions to be set,
+ *                        constructed from @ref nrf_mpc_permission_mask_t enumerator values.
  */
 NRF_STATIC_INLINE void nrf_mpc_override_perm_set(NRF_MPC_Type * p_reg,
                                                  uint8_t        index,
                                                  uint32_t       permissions);
 
 /**
+ * @brief Function for getting permission settings of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Mask of permissions, constructed from @ref nrf_mpc_permission_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_perm_get(NRF_MPC_Type const * p_reg,
+                                                     uint8_t              index);
+
+/**
  * @brief Function for setting permission settings mask for the override region.
  *
  * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] index       Override region index.
- * @param[in] permissions Mask of permissions settings mask to be set.
+ * @param[in] permissions Mask of permissions settings mask to be set,
+ *                        constructed from @ref nrf_mpc_permission_mask_t enumerator values.
  */
 NRF_STATIC_INLINE void nrf_mpc_override_permmask_set(NRF_MPC_Type * p_reg,
                                                      uint8_t        index,
                                                      uint32_t       permissions);
+
+/**
+ * @brief Function for getting permission settings mask of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Mask of permissions settings mask,
+ *         constructed from @ref nrf_mpc_permission_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_permmask_get(NRF_MPC_Type const * p_reg,
+                                                         uint8_t              index);
 
 /**
  * @brief Function for setting owner ID for the override region.
@@ -300,15 +417,38 @@ NRF_STATIC_INLINE void nrf_mpc_override_ownerid_set(NRF_MPC_Type * p_reg,
                                                     nrf_owner_t    owner_id);
 
 /**
+ * @brief Function for getting owner ID of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Owner ID of the overridde region.
+ */
+NRF_STATIC_INLINE nrf_owner_t nrf_mpc_override_ownerid_get(NRF_MPC_Type * p_reg, uint8_t index);
+
+/**
  * @brief Function for enabling the specified master ports of the override region.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] index Override region index.
- * @param[in] mask  Mask of master ports to be enabled.
+ * @param[in] mask  Mask of master ports to be enabled,
+ *                  constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
  */
 NRF_STATIC_INLINE void nrf_mpc_override_masterport_set(NRF_MPC_Type * p_reg,
                                                        uint8_t        index,
                                                        uint32_t       mask);
+
+/**
+ * @brief Function for getting enabled master ports of the override region.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Override region index.
+ *
+ * @return Mask of enabled master ports,
+ *         constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_masterport_get(NRF_MPC_Type const * p_reg,
+                                                           uint8_t              index);
 
 /**
  * @brief Function for getting the memory address of memory access error.
@@ -365,6 +505,107 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_memaccerr_info_perm_get(NRF_MPC_Type const * 
  */
 NRF_STATIC_INLINE nrf_mpc_errorsource_t
 nrf_mpc_memaccerr_info_errorsource_get(NRF_MPC_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the specified master ports connection to global slave.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of master ports to be connected,
+ *                  constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE void nrf_mpc_globalslave_masterport_set(NRF_MPC_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for getting enabled master ports connection to global slave.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of master ports connected,
+ *         constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_globalslave_masterport_get(NRF_MPC_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the global slave registers lock.
+ *
+ * @note When global slave registers is enabled, modifying the global slave configuration
+ *       is not possible.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_mpc_globalslave_lock_enable(NRF_MPC_Type * p_reg);
+
+/**
+ * @brief Function for getting the status of the global slave registers lock.
+ *
+ * @note When global slave registers is enabled, modifying the global slave configuration
+ *       is not possible.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return True if global slave registers are locked, false otherwise.
+ */
+NRF_STATIC_INLINE bool nrf_mpc_globalslave_lock_check(NRF_MPC_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the AXI Write Address Channel Real Time Choke for specified master ports.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of master ports to have the Write Real Time Choke enabled,
+ *                  constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_writeaccess_set(NRF_MPC_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for getting master ports with enabled AXI Write Address Channel Real Time Choke.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of master ports with the Write Real Time Choke enabled,
+ *         constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_rtchoke_writeaccess_get(NRF_MPC_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the AXI Read Address Channel Real Time Choke for specified master ports.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of master ports to have the Read Real Time Choke enabled,
+ *                  constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_readaccess_set(NRF_MPC_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for getting master ports with enabled AXI Read Address Channel Real Time Choke.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of master ports with the Read Real Time Choke enabled,
+ *         constructed from @ref nrf_mpc_masterport_mask_t enumerator values.
+ */
+NRF_STATIC_INLINE uint32_t nrf_mpc_rtchoke_readaccess_get(NRF_MPC_Type const * p_reg);
+
+/**
+ * @brief Function for setting the Real Time Choke delay for the specified slave.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] slave Slave number.
+ * @param[in] delay Delay value to be set.
+ */
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_delay_set(NRF_MPC_Type * p_reg,
+                                                 uint8_t        slave,
+                                                 uint8_t        delay);
+
+/**
+ * @brief Function for getting the Real Time Choke delay for the specified slave.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] slave Slave number.
+ *
+ * @return Delay value for slave.
+ */
+NRF_STATIC_INLINE uint8_t nrf_mpc_rtchoke_delay_get(NRF_MPC_Type const * p_reg, uint8_t slave);
+
 
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE bool nrf_mpc_event_check(NRF_MPC_Type const * p_reg, nrf_mpc_event_t event)
@@ -424,6 +665,33 @@ NRF_STATIC_INLINE void nrf_mpc_region_config_set(NRF_MPC_Type *                 
                                     MPC_REGION_CONFIG_OWNERID_Msk));
 }
 
+NRF_STATIC_INLINE nrf_mpc_region_config_t nrf_mpc_region_config_get(NRF_MPC_Type const * p_reg,
+                                                                    uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_REGION_COUNT);
+
+    nrf_mpc_region_config_t ret;
+
+    ret.slave_number = (p_reg->REGION[index].CONFIG & MPC_REGION_CONFIG_SLAVENUMBER_Msk)
+                        >> MPC_REGION_CONFIG_SLAVENUMBER_Pos;
+
+    ret.lock = ((p_reg->REGION[index].CONFIG & MPC_REGION_CONFIG_LOCK_Msk)
+                >> MPC_REGION_CONFIG_LOCK_Pos) ==  MPC_REGION_CONFIG_LOCK_Locked;
+
+    ret.enable = ((p_reg->REGION[index].CONFIG & MPC_REGION_CONFIG_ENABLE_Msk)
+                  >> MPC_REGION_CONFIG_ENABLE_Pos) == MPC_REGION_CONFIG_ENABLE_Enabled;
+
+    ret.permissions = (p_reg->REGION[index].CONFIG &
+                       (MPC_REGION_CONFIG_READ_Msk | MPC_REGION_CONFIG_WRITE_Msk |
+                        MPC_REGION_CONFIG_EXECUTE_Msk | MPC_REGION_CONFIG_SECATTR_Msk))
+                      >> MPC_REGION_CONFIG_READ_Pos;
+
+    ret.owner = (nrf_owner_t)((p_reg->REGION[index].CONFIG & MPC_REGION_CONFIG_OWNERID_Msk)
+                              >> MPC_REGION_CONFIG_OWNERID_Pos);
+
+    return ret;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_region_startaddr_set(NRF_MPC_Type * p_reg,
                                                     uint8_t        index,
                                                     uint32_t       address)
@@ -432,6 +700,13 @@ NRF_STATIC_INLINE void nrf_mpc_region_startaddr_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT((address & 0xFFFUL) == 0);
 
     p_reg->REGION[index].STARTADDR = address;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_startaddr_get(NRF_MPC_Type const * p_reg, uint8_t index)
+{
+    NRFX_ASSERT(index < NRF_MPC_REGION_COUNT);
+
+    return p_reg->REGION[index].STARTADDR;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_region_addrmask_set(NRF_MPC_Type * p_reg,
@@ -444,6 +719,13 @@ NRF_STATIC_INLINE void nrf_mpc_region_addrmask_set(NRF_MPC_Type * p_reg,
     p_reg->REGION[index].ADDRMASK = address;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_addrmask_get(NRF_MPC_Type const * p_reg, uint8_t index)
+{
+    NRFX_ASSERT(index < NRF_MPC_REGION_COUNT);
+
+    return p_reg->REGION[index].ADDRMASK;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_region_masterport_set(NRF_MPC_Type * p_reg,
                                                      uint8_t        index,
                                                      uint32_t       mask)
@@ -451,6 +733,13 @@ NRF_STATIC_INLINE void nrf_mpc_region_masterport_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT(index < NRF_MPC_REGION_COUNT);
 
     p_reg->REGION[index].MASTERPORT = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_region_masterport_get(NRF_MPC_Type const * p_reg, uint8_t index)
+{
+    NRFX_ASSERT(index < NRF_MPC_REGION_COUNT);
+
+    return p_reg->REGION[index].MASTERPORT;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_override_config_set(NRF_MPC_Type *                    p_reg,
@@ -479,6 +768,33 @@ NRF_STATIC_INLINE void nrf_mpc_override_config_set(NRF_MPC_Type *               
                                       MPC_OVERRIDE_CONFIG_SECUREMASK_Pos));
 }
 
+NRF_STATIC_INLINE nrf_mpc_override_config_t nrf_mpc_override_config_get(NRF_MPC_Type const * p_reg,
+                                                                        uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    nrf_mpc_override_config_t ret;
+
+    ret.slave_number = (p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_SLAVENUMBER_Msk)
+                        >> MPC_OVERRIDE_CONFIG_SLAVENUMBER_Pos;
+
+    ret.lock = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_LOCK_Msk)
+                >> MPC_OVERRIDE_CONFIG_LOCK_Pos) == MPC_OVERRIDE_CONFIG_LOCK_Locked;
+
+    ret.enable = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_ENABLE_Msk)
+                  >> MPC_OVERRIDE_CONFIG_ENABLE_Pos) == MPC_OVERRIDE_CONFIG_ENABLE_Enabled;
+
+    ret.secdom_enable = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_SECDOMENABLE_Msk)
+                         >> MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos)
+                        == MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled;
+
+    ret.secure_mask = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_SECUREMASK_Msk)
+                       >> MPC_OVERRIDE_CONFIG_SECUREMASK_Pos) ==
+                      MPC_OVERRIDE_CONFIG_SECUREMASK_Enabled;
+
+    return ret;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_override_startaddr_set(NRF_MPC_Type * p_reg,
                                                       uint8_t        index,
                                                       uint32_t       address)
@@ -487,6 +803,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_startaddr_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT((address & 0xFFFUL) == 0);
 
     p_reg->OVERRIDE[index].STARTADDR = address;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_startaddr_get(NRF_MPC_Type const * p_reg,
+                                                          uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].STARTADDR;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_override_endaddr_set(NRF_MPC_Type * p_reg,
@@ -499,6 +823,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_endaddr_set(NRF_MPC_Type * p_reg,
     p_reg->OVERRIDE[index].ENDADDR = address;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_endaddr_get(NRF_MPC_Type const * p_reg,
+                                                        uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].ENDADDR;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
                                                    uint8_t        index,
                                                    uint32_t       offset)
@@ -507,6 +839,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT((offset & 0x3FFUL) == 0);
 
     p_reg->OVERRIDE[index].OFFSET = offset;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_reg,
+                                                       uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].OFFSET;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_override_perm_set(NRF_MPC_Type * p_reg,
@@ -518,6 +858,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_perm_set(NRF_MPC_Type * p_reg,
     p_reg->OVERRIDE[index].PERM = permissions;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_perm_get(NRF_MPC_Type const * p_reg,
+                                                     uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].PERM;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_override_permmask_set(NRF_MPC_Type * p_reg,
                                                      uint8_t        index,
                                                      uint32_t       permissions)
@@ -525,6 +873,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_permmask_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
 
     p_reg->OVERRIDE[index].PERMMASK = permissions;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_permmask_get(NRF_MPC_Type const * p_reg,
+                                                         uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].PERMMASK;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_override_ownerid_set(NRF_MPC_Type * p_reg,
@@ -537,6 +893,13 @@ NRF_STATIC_INLINE void nrf_mpc_override_ownerid_set(NRF_MPC_Type * p_reg,
                                    MPC_OVERRIDE_OWNER_OWNERID_Msk;
 }
 
+NRF_STATIC_INLINE nrf_owner_t nrf_mpc_override_ownerid_get(NRF_MPC_Type * p_reg, uint8_t index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return (nrf_owner_t)p_reg->OVERRIDE[index].OWNER;
+}
+
 NRF_STATIC_INLINE void nrf_mpc_override_masterport_set(NRF_MPC_Type * p_reg,
                                                        uint8_t        index,
                                                        uint32_t       mask)
@@ -544,6 +907,14 @@ NRF_STATIC_INLINE void nrf_mpc_override_masterport_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
 
     p_reg->OVERRIDE[index].MASTERPORT = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_override_masterport_get(NRF_MPC_Type const * p_reg,
+                                                           uint8_t              index)
+{
+    NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
+
+    return p_reg->OVERRIDE[index].MASTERPORT;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mpc_memaccerr_address_get(NRF_MPC_Type const * p_reg)
@@ -576,6 +947,63 @@ nrf_mpc_memaccerr_info_errorsource_get(NRF_MPC_Type const * p_reg)
 {
     return (nrf_mpc_errorsource_t)((p_reg->MEMACCERR.INFO & MPC_MEMACCERR_INFO_ERRORSOURCE_Msk)
                                    >> MPC_MEMACCERR_INFO_ERRORSOURCE_Pos);
+}
+
+NRF_STATIC_INLINE void nrf_mpc_globalslave_masterport_set(NRF_MPC_Type * p_reg, uint32_t mask)
+{
+    p_reg->GLOBALSLAVE.MASTERPORT = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_globalslave_masterport_get(NRF_MPC_Type const * p_reg)
+{
+    return p_reg->GLOBALSLAVE.MASTERPORT;
+}
+
+NRF_STATIC_INLINE void nrf_mpc_globalslave_lock_enable(NRF_MPC_Type * p_reg)
+{
+    p_reg->GLOBALSLAVE.LOCK = (MPC_GLOBALSLAVE_LOCK_LOCK_Enabled << MPC_GLOBALSLAVE_LOCK_LOCK_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_mpc_globalslave_lock_check(NRF_MPC_Type const * p_reg)
+{
+    return ((p_reg->GLOBALSLAVE.LOCK & MPC_GLOBALSLAVE_LOCK_LOCK_Msk)
+            >> MPC_GLOBALSLAVE_LOCK_LOCK_Pos) == MPC_GLOBALSLAVE_LOCK_LOCK_Enabled;
+}
+
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_writeaccess_set(NRF_MPC_Type * p_reg, uint32_t mask)
+{
+    p_reg->RTCHOKE.WRITEACCESS = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_rtchoke_writeaccess_get(NRF_MPC_Type const * p_reg)
+{
+    return p_reg->RTCHOKE.WRITEACCESS;
+}
+
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_readaccess_set(NRF_MPC_Type * p_reg, uint32_t mask)
+{
+    p_reg->RTCHOKE.READACCESS = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_mpc_rtchoke_readaccess_get(NRF_MPC_Type const * p_reg)
+{
+    return p_reg->RTCHOKE.READACCESS;
+}
+
+NRF_STATIC_INLINE void nrf_mpc_rtchoke_delay_set(NRF_MPC_Type * p_reg,
+                                                 uint8_t        slave,
+                                                 uint8_t        delay)
+{
+    NRFX_ASSERT(slave < NRF_MPC_RTCHOKE_COUNT);
+
+    p_reg->RTCHOKE.DELAY[slave] = delay;
+}
+
+NRF_STATIC_INLINE uint8_t nrf_mpc_rtchoke_delay_get(NRF_MPC_Type const * p_reg, uint8_t slave)
+{
+    NRFX_ASSERT(slave < NRF_MPC_RTCHOKE_COUNT);
+
+    return p_reg->RTCHOKE.DELAY[slave];
 }
 
 #endif // NRF_DECLARE_ONLY
