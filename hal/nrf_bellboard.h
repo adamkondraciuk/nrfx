@@ -148,6 +148,15 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_task_address_get(NRF_BELLBOARD_Type con
                                                           nrf_bellboard_task_t       task);
 
 /**
+ * @brief Function for getting the specified BELLBOARD TRIGGER task.
+ *
+ * @param[in] index Task index.
+ *
+ * @return The specified BELLBOARD TRIGGER task.
+ */
+NRF_STATIC_INLINE nrf_bellboard_task_t nrf_bellboard_trigger_task_get(uint8_t index);
+
+/**
  * @brief Function for clearing the specified BELLBOARD event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -240,6 +249,11 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_task_address_get(NRF_BELLBOARD_Type con
                                                           nrf_bellboard_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+}
+
+NRF_STATIC_INLINE nrf_bellboard_task_t nrf_bellboard_trigger_task_get(uint8_t index)
+{
+    return (nrf_bellboard_task_t)NRFX_OFFSETOF(NRF_BELLBOARD_Type, TASKS_TRIGGER[index]);
 }
 
 NRF_STATIC_INLINE void nrf_bellboard_event_clear(NRF_BELLBOARD_Type *  p_reg,
