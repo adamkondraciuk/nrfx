@@ -22,65 +22,69 @@ extern "C" {
 /** @brief Global reset reason mask. */
 typedef enum
 {
-    NRF_RESETINFO_REASON_GLOBAL_POR_MASK       = RESETINFO_RESETREAS_GLOBAL_RESETPOR_Msk,  /**< Reset from power on reset. */
-    NRF_RESETINFO_REASON_GLOBAL_PIN_MASK       = RESETINFO_RESETREAS_GLOBAL_RESETPIN_Msk,  /**< Reset from pin reset. */
-    NRF_RESETINFO_REASON_GLOBAL_DOG_MASK       = RESETINFO_RESETREAS_GLOBAL_DOG_Msk,       /**< Reset from the SysCtrl watchdog timer. */
-    NRF_RESETINFO_REASON_GLOBAL_CTRLAP_MASK    = RESETINFO_RESETREAS_GLOBAL_CTRLAP_Msk,    /**< Reset from CTRL-AP. */
-    NRF_RESETINFO_REASON_GLOBAL_SECSREQ_MASK   = RESETINFO_RESETREAS_GLOBAL_SECSREQ_Msk,   /**< Reset due to secure domain system reset request. */
-    NRF_RESETINFO_REASON_GLOBAL_SECWDT_MASK    = RESETINFO_RESETREAS_GLOBAL_SECWDT_Msk,    /**< Reset due to secure domain watchdog timer. */
-    NRF_RESETINFO_REASON_GLOBAL_SECLOCKUP_MASK = RESETINFO_RESETREAS_GLOBAL_SECLOCKUP_Msk, /**< Reset due to secure domain lockup. */
-    NRF_RESETINFO_REASON_GLOBAL_SECTAMPER_MASK = RESETINFO_RESETREAS_GLOBAL_SECTAMPER_Msk, /**< Reset due to secure domain tamper detected. */
-    NRF_RESETINFO_REASON_GLOBAL_GPIO_MASK      = RESETINFO_RESETREAS_GLOBAL_OFF_Msk,       /**< Reset due to wakeup from System OFF triggered by DETECT signal from GPIO. */
-    NRF_RESETINFO_REASON_GLOBAL_LPCOMP_MASK    = RESETINFO_RESETREAS_GLOBAL_LPCOMP_Msk,    /**< Reset due to wakeup from System OFF triggered by LPCOMP. */
-    NRF_RESETINFO_REASON_GLOBAL_DIF_MASK       = RESETINFO_RESETREAS_GLOBAL_DIF_Msk,       /**< Reset due to wakeup from System OFF triggered by entering debug interface mode. */ 
-    NRF_RESETINFO_REASON_GLOBAL_GRTC_MASK      = RESETINFO_RESETREAS_GLOBAL_GRTC_Msk,      /**< Reset due to wakeup from System OFF triggered by GRTC interrupt. */
-    NRF_RESETINFO_REASON_GLOBAL_NFC_MASK       = RESETINFO_RESETREAS_GLOBAL_NFC_Msk,       /**< Reset due to wakeup from System OFF triggered by NRF field detection in sense mode. */
-} nrf_resetinfo_reason_global_mask_t;
+    NRF_RESETINFO_RESETREAS_GLOBAL_POR_MASK       = RESETINFO_RESETREAS_GLOBAL_RESETPOR_Msk,  /**< Reset from power on reset. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_PIN_MASK       = RESETINFO_RESETREAS_GLOBAL_RESETPIN_Msk,  /**< Reset from pin reset. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_DOG_MASK       = RESETINFO_RESETREAS_GLOBAL_DOG_Msk,       /**< Reset from the SysCtrl watchdog timer. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_CTRLAP_MASK    = RESETINFO_RESETREAS_GLOBAL_CTRLAP_Msk,    /**< Reset from CTRL-AP. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECSREQ_MASK   = RESETINFO_RESETREAS_GLOBAL_SECSREQ_Msk,   /**< Reset due to secure domain system reset request. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECWDT_MASK    = RESETINFO_RESETREAS_GLOBAL_SECWDT_Msk,    /**< Reset due to secure domain watchdog timer. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECLOCKUP_MASK = RESETINFO_RESETREAS_GLOBAL_SECLOCKUP_Msk, /**< Reset due to secure domain lockup. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_SECTAMPER_MASK = RESETINFO_RESETREAS_GLOBAL_SECTAMPER_Msk, /**< Reset due to secure domain tamper detected. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_GPIO_MASK      = RESETINFO_RESETREAS_GLOBAL_OFF_Msk,       /**< Reset due to wakeup from System OFF triggered by DETECT signal from GPIO. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_LPCOMP_MASK    = RESETINFO_RESETREAS_GLOBAL_LPCOMP_Msk,    /**< Reset due to wakeup from System OFF triggered by LPCOMP. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_DIF_MASK       = RESETINFO_RESETREAS_GLOBAL_DIF_Msk,       /**< Reset due to wakeup from System OFF triggered by entering debug interface mode. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_GRTC_MASK      = RESETINFO_RESETREAS_GLOBAL_GRTC_Msk,      /**< Reset due to wakeup from System OFF triggered by GRTC interrupt. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_NFC_MASK       = RESETINFO_RESETREAS_GLOBAL_NFC_Msk,       /**< Reset due to wakeup from System OFF triggered by NRF field detection in sense mode. */
+} nrf_resetinfo_resetreas_global_mask_t;
 
 /** @brief Local reset reason mask. */
 typedef enum
 {
-    NRF_RESETINFO_REASON_LOCAL_DOG_MASK         = RESETINFO_RESETREAS_LOCAL_DOG_Msk,            /**< Reset from the local watchdog timer. */
-    NRF_RESETINFO_REASON_LOCAL_DOGNS_MASK       = RESETINFO_RESETREAS_LOCAL_DOGNS_Msk,          /**< Reset from the local non-secure watchdog timer. */
-    NRF_RESETINFO_REASON_LOCAL_SREQ_MASK        = RESETINFO_RESETREAS_LOCAL_SREQ_Msk,           /**< Reset from the local soft reset request. */
-    NRF_RESETINFO_REASON_LOCAL_LOCKUP_MASK      = RESETINFO_RESETREAS_LOCAL_LOCKUP_Msk,         /**< Reset from local CPU lockup. */
-    NRF_RESETINFO_REASON_LOCAL_CROSSDOMAIN_MASK = RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Msk,    /**< Reset due to cross domain reset source. */
-    NRF_RESETINFO_REASON_LOCAL_UNRETAINED_MASK  = RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Msk, /**< Reset due to wake from unretained state. */
-} nrf_resetinfo_reason_local_mask_t;
+    NRF_RESETINFO_RESETREAS_LOCAL_DOG_MASK         = RESETINFO_RESETREAS_LOCAL_DOG_Msk,            /**< Reset from the local watchdog timer. */
+    NRF_RESETINFO_RESETREAS_LOCAL_DOGNS_MASK       = RESETINFO_RESETREAS_LOCAL_DOGNS_Msk,          /**< Reset from the local non-secure watchdog timer. */
+    NRF_RESETINFO_RESETREAS_LOCAL_SREQ_MASK        = RESETINFO_RESETREAS_LOCAL_SREQ_Msk,           /**< Reset from the local soft reset request. */
+    NRF_RESETINFO_RESETREAS_LOCAL_LOCKUP_MASK      = RESETINFO_RESETREAS_LOCAL_LOCKUP_Msk,         /**< Reset from local CPU lockup. */
+    NRF_RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_MASK = RESETINFO_RESETREAS_LOCAL_CROSSDOMAIN_Msk,    /**< Reset due to cross domain reset source. */
+    NRF_RESETINFO_RESETREAS_LOCAL_UNRETAINED_MASK  = RESETINFO_RESETREAS_LOCAL_UNRETAINEDWAKE_Msk, /**< Reset due to wake from unretained state. */
+} nrf_resetinfo_resetreas_local_mask_t;
 
 /**
  * @brief Function for setting the global reset reason.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of reasons to be set.
+ * @param[in] mask  Mask of reasons to be set,
+ *                  constructed from @ref nrf_resetinfo_resetreas_global_mask_t enumerator values.
  */
-NRF_STATIC_INLINE void nrf_resetinfo_reason_global_set(NRF_RESETINFO_Type * p_reg, uint32_t mask);
+NRF_STATIC_INLINE void nrf_resetinfo_resetreas_global_set(NRF_RESETINFO_Type * p_reg,
+                                                          uint32_t             mask);
 
 /**
  * @brief Function for getting the global reset reason.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Mask of detected global reset reasons.
+ * @return Mask of detected global reset reasons constructed with @ref nrf_resetinfo_resetreas_global_mask_t.
  */
-NRF_STATIC_INLINE uint32_t nrf_resetinfo_reason_global_get(NRF_RESETINFO_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_resetinfo_resetreas_global_get(NRF_RESETINFO_Type const * p_reg);
 
 /**
  * @brief Function for setting the local reset reason.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of reasons to be set.
+ * @param[in] mask  Mask of reasons to be set,
+ *                  constructed from @ref nrf_resetinfo_resetreas_local_mask_t enumerator values.
  */
-NRF_STATIC_INLINE void nrf_resetinfo_reason_local_set(NRF_RESETINFO_Type * p_reg, uint32_t mask);
+NRF_STATIC_INLINE void nrf_resetinfo_resetreas_local_set(NRF_RESETINFO_Type * p_reg,
+                                                         uint32_t             mask);
 
 /**
  * @brief Function for getting the local reset reason.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Mask of detected local reset reasons.
+ * @return Mask of detected local reset reasons constructed with @ref nrf_resetinfo_resetreas_local_mask_t.
  */
-NRF_STATIC_INLINE uint32_t nrf_resetinfo_reason_local_get(NRF_RESETINFO_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_resetinfo_resetreas_local_get(NRF_RESETINFO_Type const * p_reg);
 
 /**
  * @brief Function for setting the reset error status.
@@ -161,21 +165,24 @@ NRF_STATIC_INLINE bool nrf_resetinfo_mask_lockup_check(NRF_RESETINFO_Type const 
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_resetinfo_reason_global_set(NRF_RESETINFO_Type * p_reg, uint32_t mask)
+NRF_STATIC_INLINE void nrf_resetinfo_resetreas_global_set(NRF_RESETINFO_Type * p_reg,
+                                                          uint32_t             mask)
 {
     p_reg->RESETREAS.GLOBAL = mask;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_resetinfo_reason_global_get(NRF_RESETINFO_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_resetinfo_resetreas_global_get(NRF_RESETINFO_Type const * p_reg)
 {
     return p_reg->RESETREAS.GLOBAL;
 }
-NRF_STATIC_INLINE void nrf_resetinfo_reason_local_set(NRF_RESETINFO_Type * p_reg, uint32_t mask)
+
+NRF_STATIC_INLINE void nrf_resetinfo_resetreas_local_set(NRF_RESETINFO_Type * p_reg,
+                                                         uint32_t             mask)
 {
     p_reg->RESETREAS.LOCAL = mask;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_resetinfo_reason_local_get(NRF_RESETINFO_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_resetinfo_resetreas_local_get(NRF_RESETINFO_Type const * p_reg)
 {
     return p_reg->RESETREAS.LOCAL;
 }
