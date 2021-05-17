@@ -1,0 +1,113 @@
+@Library("CI_LIB") _
+HashMap CI_STATE = lib_State.getConfig(JOB_NAME)
+
+pipeline {
+    options{
+        timestamps()
+        timeout(time: CI_STATE.CFG.TIMEOUT.time, unit: CI_STATE.CFG.TIMEOUT.unit)
+        buildDiscarder(logRotator(numToKeepStr: '25'))
+    }
+    environment {
+        DEFAULT_NOTIF_EMAIL = "bartlomiej.buczek@nordicsemi.no"
+    }
+    parameters {
+        string(name: 'nrfx_build_branch', defaultValue: "nrfx2.6-dev", description: 'Branch for nrfx_build repository')
+        string(name: 'nrfx_verification_branch', defaultValue: "nrfx2.6-dev", description: 'Branch for nrfx_verification repository')
+        string(name: 'filtered_unittests', defaultValue: "", description: 'Unit tests filtered from execution (space separated)')
+        string(name: 'filtered_ontargettests', defaultValue: "", description: 'On-target tests filtered from execution (space separated)')
+        booleanParam(name: 'NRFX_BUILD_TYPE_DEBUG', defaultValue: false, description: 'Set NRFX_BUILD_TYPE to debug')
+    }
+    agent {
+        docker {
+            label "linux"
+            image "docker-dtr.nordicsemi.no/babu/ncs-int-wine:v2.6.0"
+            args ' --privileged -e HOME=/home/buran_ci'
+        }
+    }
+    stages{
+        stage('Run dependent jobs') {
+            steps {
+                script {
+                    currentBuild.setDisplayName("(#${BUILD_NUMBER}) [nrfx]: ${env.BRANCH_NAME}, [nrfx-build]: ${params.nrfx_build_branch}, [nrfx_verification]: ${params.nrfx_verification_branch}")
+                    if (env.CHANGE_BRANCH != null && env.CHANGE_BRANCH != env.BRANCH_NAME) {
+                        nrfx_branch= env.CHANGE_BRANCH
+                    }
+                    else {
+                        nrfx_branch= env.BRANCH_NAME
+                    }
+                    def nrfx_build_branch = params.nrfx_build_branch.replaceAll('/','%2F')
+                    def nrfx_verification_branch = params.nrfx_verification_branch.replaceAll('/','%2F')
+                    echo "[nrfx branch]: ${nrfx_branch}"
+                    echo "[nrfx-build branch]: ${nrfx_build_branch}"
+                    echo "[nrfx-verification branch]: ${nrfx_verification_branch}"
+
+                    def job_name = "NRFX/nrfx-build-runner/"
+                    build job: "${job_name}${nrfx_build_branch}",
+                        parameters: [string(name: 'nrfx_branch', value: nrfx_branch),
+                                     string(name: 'nrfx_build_branch', value: nrfx_build_branch),
+                                     string(name: 'nrfx_verification_branch', value: nrfx_verification_branch),
+                                     string(name: 'filtered_unittests', value: params.filtered_unittests),
+                                     string(name: 'filtered_ontargettests', value: params.filtered_ontargettests),
+                                     booleanParam(name: 'NRFX_BUILD_TYPE_DEBUG', value: params.NRFX_BUILD_TYPE_DEBUG)],
+                        propagate: true,
+                        wait: true
+
+                copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
+                copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
+                copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
+                }
+            archiveArtifacts "work/nrfx-verification/outcomes/*/*"
+            }
+        }
+        stage('Generate documentation') {
+            steps {
+                script {
+                    dir("doc") {
+                        sh "./generate_sphinx_doc.sh"
+                    }
+                    def output_file = readFile("doc/warnings_nrfx.txt")
+                    if (output_file.size() != 0) {
+                        unstable 'Documentation building generated warnings.'
+                    }
+                    zip archive: true, dir: 'doc/html_sphinx', glob: '', zipFile: 'html_sphinx.zip'
+                }
+            }
+        }
+        stage('Check results'){
+            steps {
+                junit 'work/nrfx-verification/outcomes/*/*.xml'
+            }
+        }
+    }
+    post {
+        always {
+            node('krakow') {
+                script {
+                    def result = currentBuild.currentResult
+                    emailext recipientProviders: [requestor()],
+                        to: env.DEFAULT_NOTIF_EMAIL,
+                        subject: "${result} - NRFX build ${BUILD_DISPLAY_NAME}",
+                        body: """
+Hello,
+NRFX #${BUILD_NUMBER} build finished with result ${result}.
+
+Used branches:
+[nrfx]: ${env.BRANCH_NAME}.
+[nrfx_build]: ${params.nrfx_build_branch}.
+[nrfx_verification]: ${params.nrfx_verification_branch}.
+
+Filtered tests:
+Unit tests: ${params.filtered_unittests}
+On-target tests: ${params.filtered_ontargettests}
+
+Have a look at the build:
+${BUILD_URL}
+
+Cheers,
+Jenkins
+"""
+                }
+            }
+        }
+    }
+}
