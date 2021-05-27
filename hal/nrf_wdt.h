@@ -70,20 +70,24 @@ typedef enum
     NRF_WDT_RR7      /**< Reload request register 7. */
 } nrf_wdt_rr_register_t;
 
+/** @brief WDT reload request registers mask. */
+typedef enum
+{
+    NRF_WDT_RR0_MASK = (1UL << NRF_WDT_RR0), /**< Mask for reload request register 0. */
+    NRF_WDT_RR1_MASK = (1UL << NRF_WDT_RR1), /**< Mask for reload request register 1. */
+    NRF_WDT_RR2_MASK = (1UL << NRF_WDT_RR2), /**< Mask for reload request register 2. */
+    NRF_WDT_RR3_MASK = (1UL << NRF_WDT_RR3), /**< Mask for reload request register 3. */
+    NRF_WDT_RR4_MASK = (1UL << NRF_WDT_RR4), /**< Mask for reload request register 4. */
+    NRF_WDT_RR5_MASK = (1UL << NRF_WDT_RR5), /**< Mask for reload request register 5. */
+    NRF_WDT_RR6_MASK = (1UL << NRF_WDT_RR6), /**< Mask for reload request register 6. */
+    NRF_WDT_RR7_MASK = (1UL << NRF_WDT_RR7), /**< Mask for reload request register 7. */
+} nrf_wdt_rr_register_mask_t;
+
 /** @brief WDT interrupts. */
 typedef enum
 {
     NRF_WDT_INT_TIMEOUT_MASK = WDT_INTENSET_TIMEOUT_Msk, /**< WDT interrupt from time-out event. */
 } nrf_wdt_int_mask_t;
-
-
-/**
- * @brief Function for configuring the watchdog behavior when the CPU is sleeping or halted.
- *
- * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
- * @param[in] behaviour Watchdog behavior when CPU is in SLEEP or HALT mode.
- */
-NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behaviour_t behaviour);
 
 /**
  * @brief Function for starting the WDT task.
@@ -92,6 +96,17 @@ NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behav
  * @param[in] task  Task.
  */
 NRF_STATIC_INLINE void nrf_wdt_task_trigger(NRF_WDT_Type * p_reg, nrf_wdt_task_t task);
+
+/**
+ * @brief Function for returning the address of a specific WDT task register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task.
+ *
+ * @return Address of requested task register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
+                                                    nrf_wdt_task_t       task);
 
 /**
  * @brief Function for clearing the WDT event register.
@@ -111,6 +126,17 @@ NRF_STATIC_INLINE void nrf_wdt_event_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t
  * @retval false The event has not been generated.
  */
 NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_event_t event);
+
+/**
+ * @brief Function for returning the address of a specific WDT event register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event.
+ *
+ * @return Address of requested event register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
+                                                     nrf_wdt_event_t      event);
 
 /**
  * @brief Function for enabling the specified interrupt.
@@ -183,26 +209,12 @@ NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
- * @brief Function for returning the address of a specific WDT task register.
+ * @brief Function for configuring the watchdog behavior when the CPU is sleeping or halted.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] task  Task.
- *
- * @return Address of requested task register
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] behaviour Watchdog behavior when CPU is in SLEEP or HALT mode.
  */
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
-                                                    nrf_wdt_task_t       task);
-
-/**
- * @brief Function for returning the address of a specific WDT event register.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Event.
- *
- * @return Address of requested event register
- */
-NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
-                                                     nrf_wdt_event_t      event);
+NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behaviour_t behaviour);
 
 /**
  * @brief Function for retrieving the watchdog status.
@@ -212,10 +224,10 @@ NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
  * @retval true  The watchdog is started.
  * @retval false The watchdog is not started.
  */
-NRF_STATIC_INLINE bool nrf_wdt_started(NRF_WDT_Type const * p_reg);
+NRF_STATIC_INLINE bool nrf_wdt_started_check(NRF_WDT_Type const * p_reg);
 
 /**
- * @brief Function for retrieving the watchdog reload request status.
+ * @brief Function for retrieving the watchdog reload request status for specified register.
  *
  * @param[in] p_reg       Pointer to the structure of registers of the peripheral.
  * @param[in] rr_register Reload request register to be checked.
@@ -223,8 +235,17 @@ NRF_STATIC_INLINE bool nrf_wdt_started(NRF_WDT_Type const * p_reg);
  * @retval true  Reload request is running.
  * @retval false No reload requests are running.
  */
-NRF_STATIC_INLINE bool nrf_wdt_request_status(NRF_WDT_Type const *  p_reg,
-                                              nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE bool nrf_wdt_request_status_check(NRF_WDT_Type const *  p_reg,
+                                                    nrf_wdt_rr_register_t rr_register);
+
+/**
+ * @brief Function for retrieving the watchdog reload requests status mask.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Running reload requests mask, constructed with @ref nrf_wdt_rr_register_mask_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_wdt_request_status_get(NRF_WDT_Type const * p_reg);
 
 /**
  * @brief Function for setting the watchdog reload value.
@@ -270,8 +291,8 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(NRF_WDT_Type *        p_re
  * @retval true  The reload request register is enabled.
  * @retval false The reload request register is not enabled.
  */
-NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(NRF_WDT_Type const *  p_reg,
-                                                         nrf_wdt_rr_register_t rr_register);
+NRF_STATIC_INLINE bool nrf_wdt_reload_request_enable_check(NRF_WDT_Type const *  p_reg,
+                                                           nrf_wdt_rr_register_t rr_register);
 
 /**
  * @brief Function for setting a specific reload request register.
@@ -360,15 +381,20 @@ NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
     return ((uint32_t)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_started(NRF_WDT_Type const * p_reg)
+NRF_STATIC_INLINE bool nrf_wdt_started_check(NRF_WDT_Type const * p_reg)
 {
     return (bool)(p_reg->RUNSTATUS);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_request_status(NRF_WDT_Type const *  p_reg,
-                                              nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE bool nrf_wdt_request_status_check(NRF_WDT_Type const *  p_reg,
+                                                    nrf_wdt_rr_register_t rr_register)
 {
     return (bool)(((p_reg->REQSTATUS) >> rr_register) & 0x1UL);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_wdt_request_status_get(NRF_WDT_Type const * p_reg)
+{
+    return p_reg->REQSTATUS;
 }
 
 NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t reload_value)
@@ -393,8 +419,8 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_disable(NRF_WDT_Type *        p_re
     p_reg->RREN &= ~(0x1UL << rr_register);
 }
 
-NRF_STATIC_INLINE bool nrf_wdt_reload_request_is_enabled(NRF_WDT_Type const *  p_reg,
-                                                         nrf_wdt_rr_register_t rr_register)
+NRF_STATIC_INLINE bool nrf_wdt_reload_request_enable_check(NRF_WDT_Type const *  p_reg,
+                                                           nrf_wdt_rr_register_t rr_register)
 {
     return (bool)(p_reg->RREN & (0x1UL << rr_register));
 }
