@@ -39,31 +39,50 @@ extern "C" {
  */
 #define NRF_SPIM_PIN_NOT_CONNECTED  0xFFFFFFFF
 
-/** @brief Macro for checking if the hardware chip select function is available. */
-#define NRF_SPIM_HW_CSN_PRESENT                        \
-    (NRFX_CHECK(SPIM0_FEATURE_HARDWARE_CSN_PRESENT) || \
+#if (NRFX_CHECK(SPIM0_FEATURE_HARDWARE_CSN_PRESENT) || \
      NRFX_CHECK(SPIM1_FEATURE_HARDWARE_CSN_PRESENT) || \
      NRFX_CHECK(SPIM2_FEATURE_HARDWARE_CSN_PRESENT) || \
      NRFX_CHECK(SPIM3_FEATURE_HARDWARE_CSN_PRESENT) || \
-     NRFX_CHECK(SPIM4_FEATURE_HARDWARE_CSN_PRESENT))
+     NRFX_CHECK(SPIM4_FEATURE_HARDWARE_CSN_PRESENT) || \
+     defined(__NRFX_DOXYGEN__))
+/** @brief Macro for checking if the hardware chip select function is available. */
+#define NRF_SPIM_HAS_HW_CSN 1
+#else
+#define NRF_SPIM_HAS_HW_CSN 0
+#endif
 
-/** @brief Macro for checking if the DCX pin control is available. */
-#define NRF_SPIM_DCX_PRESENT                  \
-    (NRFX_CHECK(SPIM0_FEATURE_DCX_PRESENT) || \
+#if (NRFX_CHECK(SPIM0_FEATURE_DCX_PRESENT) || \
      NRFX_CHECK(SPIM1_FEATURE_DCX_PRESENT) || \
      NRFX_CHECK(SPIM2_FEATURE_DCX_PRESENT) || \
      NRFX_CHECK(SPIM3_FEATURE_DCX_PRESENT) || \
-     NRFX_CHECK(SPIM4_FEATURE_DCX_PRESENT))
+     NRFX_CHECK(SPIM4_FEATURE_DCX_PRESENT) || \
+     defined(__NRFX_DOXYGEN__))
+/** @brief Macro for checking if the DCX pin control is available. */
+#define NRF_SPIM_HAS_DCX 1
+#else
+#define NRF_SPIM_HAS_DCX 0
+#endif
 
-/** @brief Macro for checking if the RXDELAY function is available. */
-#define NRF_SPIM_RXDELAY_PRESENT                  \
-    (NRFX_CHECK(SPIM0_FEATURE_RXDELAY_PRESENT) || \
+#if (NRFX_CHECK(SPIM0_FEATURE_RXDELAY_PRESENT) || \
      NRFX_CHECK(SPIM1_FEATURE_RXDELAY_PRESENT) || \
      NRFX_CHECK(SPIM2_FEATURE_RXDELAY_PRESENT) || \
      NRFX_CHECK(SPIM3_FEATURE_RXDELAY_PRESENT) || \
-     NRFX_CHECK(SPIM4_FEATURE_RXDELAY_PRESENT))
+     NRFX_CHECK(SPIM4_FEATURE_RXDELAY_PRESENT) || \
+     defined(__NRFX_DOXYGEN__))
+/** @brief Macro for checking if the RXDELAY function is available. */
+#define NRF_SPIM_HAS_RXDELAY 1
+#else
+#define NRF_SPIM_HAS_RXDELAY 0
+#endif
 
-#if defined(NRF_SPIM_DCX_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if defined(SPIM_STALLSTAT_RX_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Macro for checking if the STALLSTAT feature is available. */
+#define NRF_SPIM_HAS_STALLSTAT 1
+#else
+#define NRF_SPIM_HAS_STALLSTAT 0
+#endif
+
+#if NRF_SPIM_HAS_DCX
 /**
  * @brief This value specified in the DCX line configuration causes this line
  *        to be set low during whole transmission (all transmitted bytes are
@@ -72,6 +91,13 @@ extern "C" {
  *        (all remaining bytes are marked as data bytes).
  */
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
+#endif
+
+#if NRF_SPIM_HAS_HW_CSN || NRF_SPIM_HAS_DCX || NRF_SPIM_HAS_RXDELAY
+/** @brief Symbol indicating whether any of the SPIM extended features is available. */
+#define NRF_SPIM_HAS_EXTENDED 1
+#else
+#define NRF_SPIM_HAS_EXTENDED 0
 #endif
 
 /** @brief SPIM tasks. */
@@ -153,14 +179,14 @@ typedef enum
     NRF_SPIM_BIT_ORDER_LSB_FIRST = SPIM_CONFIG_ORDER_LsbFirst  ///< Least significant bit shifted out first.
 } nrf_spim_bit_order_t;
 
-#if (NRF_SPIM_HW_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_HW_CSN
 /** @brief SPI CSN pin polarity. */
 typedef enum
 {
     NRF_SPIM_CSN_POL_LOW  = SPIM_CSNPOL_CSNPOL_LOW, ///< Active low (idle state high).
     NRF_SPIM_CSN_POL_HIGH = SPIM_CSNPOL_CSNPOL_HIGH ///< Active high (idle state low).
 } nrf_spim_csn_pol_t;
-#endif // (NRF_SPIM_HW_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_HAS_HW_CSN
 
 
 /**
@@ -250,6 +276,14 @@ NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg);
  */
 NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
                                            uint32_t        mask);
+
+/**
+ * @brief Function for setting the configuration of interrupts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be set.
+ */
+NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for disabling the specified interrupts.
@@ -373,7 +407,7 @@ NRF_STATIC_INLINE uint32_t nrf_spim_mosi_pin_get(NRF_SPIM_Type const * p_reg);
  */
 NRF_STATIC_INLINE uint32_t nrf_spim_miso_pin_get(NRF_SPIM_Type const * p_reg);
 
-#if (NRF_SPIM_HW_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_HW_CSN
 /**
  * @brief Function for configuring the SPIM hardware CSN pin.
  *
@@ -391,9 +425,18 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               uint32_t           pin,
                                               nrf_spim_csn_pol_t polarity,
                                               uint32_t           duration);
-#endif // (NRF_SPIM_HW_CSN_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if NRF_SPIM_DCX_PRESENT || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for getting the CSN pin selection.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return CSN pin selection.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg);
+#endif // NRF_SPIM_HAS_HW_CSN
+
+#if NRF_SPIM_HAS_DCX
 /**
  * @brief Function for configuring the SPIM DCX pin.
  *
@@ -428,9 +471,9 @@ NRF_STATIC_INLINE uint32_t nrf_spim_dcx_pin_get(NRF_SPIM_Type const * p_reg);
  */
 NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        count);
-#endif // NRF_SPIM_DCX_PRESENT || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_HAS_DCX
 
-#if NRF_SPIM_RXDELAY_PRESENT || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_RXDELAY
 /**
  * @brief Function for configuring the extended SPIM interface.
  *
@@ -440,9 +483,9 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
  */
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
                                              uint32_t        rxdelay);
-#endif // NRF_SPIM_RXDELAY_PRESENT || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_HAS_RXDELAY
 
-#if defined(SPIM_STALLSTAT_RX_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_STALLSTAT
 /**
  * @brief Function for clearing stall status for RX EasyDMA RAM accesses.
  *
@@ -458,9 +501,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg);
  * @return Stall status of RX EasyDMA RAM accesses.
  */
 NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type const * p_reg);
-#endif // defined(SPIM_STALLSTAT_RX_Msk) || defined(__NRFX_DOXYGEN__)
 
-#if defined(SPIM_STALLSTAT_TX_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for clearing stall status for TX EasyDMA RAM accesses.
  *
@@ -476,7 +517,7 @@ NRF_STATIC_INLINE void nrf_spim_stallstat_tx_clear(NRF_SPIM_Type * p_reg);
  * @return Stall status of TX EasyDMA RAM accesses.
  */
 NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg);
-#endif // defined(SPIM_STALLSTAT_TX_Msk) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_SPIM_HAS_STALLSTAT
 
 /**
  * @brief Function for setting the SPI master data rate.
@@ -499,6 +540,24 @@ NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
                                               size_t          length);
 
 /**
+ * @brief Function for getting number of bytes transmitted in the last transaction.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Amount of bytes transmitted.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_tx_amount_get(NRF_SPIM_Type const * p_reg);
+
+/**
+ * @brief Function for getting number of bytes to be transmitted in the next transaction.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Amount of bytes to be transmitted.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_tx_maxcnt_get(NRF_SPIM_Type const * p_reg);
+
+/**
  * @brief Function for setting the receive buffer.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
@@ -508,6 +567,24 @@ NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
 NRF_STATIC_INLINE void nrf_spim_rx_buffer_set(NRF_SPIM_Type * p_reg,
                                               uint8_t *       p_buffer,
                                               size_t          length);
+
+/**
+ * @brief Function for getting number of bytes received in the last transaction.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Amount of bytes received.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_amount_get(NRF_SPIM_Type const * p_reg);
+
+/**
+ * @brief Function for getting number of bytes to be received in the next transaction.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Amount of bytes to be received.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_maxcnt_get(NRF_SPIM_Type const * p_reg);
 
 /**
  * @brief Function for setting the SPI configuration.
@@ -557,7 +634,6 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_enable(NRF_SPIM_Type * p_reg);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg);
-
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -613,6 +689,11 @@ NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
                                            uint32_t        mask)
 {
     p_reg->INTENSET = mask;
+}
+
+NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask)
+{
+    p_reg->INTEN = mask;
 }
 
 NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
@@ -691,7 +772,7 @@ NRF_STATIC_INLINE uint32_t nrf_spim_miso_pin_get(NRF_SPIM_Type const * p_reg)
     return p_reg->PSEL.MISO;
 }
 
-#if NRF_SPIM_HW_CSN_PRESENT
+#if NRF_SPIM_HAS_HW_CSN
 NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               uint32_t           pin,
                                               nrf_spim_csn_pol_t polarity,
@@ -701,9 +782,14 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
     p_reg->CSNPOL = polarity;
     p_reg->IFTIMING.CSNDUR = duration;
 }
-#endif // NRF_SPIM_HW_CSN_PRESENT
 
-#if NRF_SPIM_DCX_PRESENT
+NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->PSEL.CSN;
+}
+#endif // NRF_SPIM_HAS_HW_CSN
+
+#if NRF_SPIM_HAS_DCX
 NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        dcx_pin)
 {
@@ -720,17 +806,17 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
 {
     p_reg->DCXCNT = dcx_cnt;
 }
-#endif // NRF_SPIM_DCX_PRESENT
+#endif // NRF_SPIM_HAS_DCX
 
-#if NRF_SPIM_RXDELAY_PRESENT
+#if NRF_SPIM_HAS_RXDELAY
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg,
                                              uint32_t        rxdelay)
 {
     p_reg->IFTIMING.RXDELAY = rxdelay;
 }
-#endif // NRF_SPIM_RXDELAY_PRESENT
+#endif // NRF_SPIM_HAS_RXDELAY
 
-#if defined(SPIM_STALLSTAT_RX_Msk)
+#if NRF_SPIM_HAS_STALLSTAT
 NRF_STATIC_INLINE void nrf_spim_stallstat_rx_clear(NRF_SPIM_Type * p_reg)
 {
     p_reg->STALLSTAT &= ~(SPIM_STALLSTAT_RX_Msk);
@@ -740,9 +826,7 @@ NRF_STATIC_INLINE bool nrf_spim_stallstat_rx_get(NRF_SPIM_Type const * p_reg)
 {
     return (p_reg->STALLSTAT & SPIM_STALLSTAT_RX_Msk) != 0;
 }
-#endif // defined(SPIM_STALLSTAT_RX_Msk)
 
-#if defined(SPIM_STALLSTAT_TX_Msk)
 NRF_STATIC_INLINE void nrf_spim_stallstat_tx_clear(NRF_SPIM_Type * p_reg)
 {
     p_reg->STALLSTAT &= ~(SPIM_STALLSTAT_TX_Msk);
@@ -752,7 +836,7 @@ NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg)
 {
     return (p_reg->STALLSTAT & SPIM_STALLSTAT_TX_Msk) != 0;
 }
-#endif // defined(SPIM_STALLSTAT_TX_Msk)
+#endif // NRF_SPIM_HAS_STALLSTAT
 
 NRF_STATIC_INLINE void nrf_spim_frequency_set(NRF_SPIM_Type *      p_reg,
                                               nrf_spim_frequency_t frequency)
@@ -768,12 +852,32 @@ NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
     p_reg->TXD.MAXCNT = length;
 }
 
+NRF_STATIC_INLINE uint32_t nrf_spim_tx_amount_get(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->TXD.AMOUNT;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_spim_tx_maxcnt_get(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->TXD.MAXCNT;
+}
+
 NRF_STATIC_INLINE void nrf_spim_rx_buffer_set(NRF_SPIM_Type * p_reg,
                                               uint8_t * p_buffer,
                                               size_t    length)
 {
     p_reg->RXD.PTR    = (uint32_t)p_buffer;
     p_reg->RXD.MAXCNT = length;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_amount_get(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->RXD.AMOUNT;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_maxcnt_get(NRF_SPIM_Type const * p_reg)
+{
+    return p_reg->RXD.MAXCNT;
 }
 
 NRF_STATIC_INLINE void nrf_spim_configure(NRF_SPIM_Type *      p_reg,
@@ -813,7 +917,6 @@ NRF_STATIC_INLINE void nrf_spim_orc_set(NRF_SPIM_Type * p_reg,
 {
     p_reg->ORC = orc;
 }
-
 
 NRF_STATIC_INLINE void nrf_spim_tx_list_enable(NRF_SPIM_Type * p_reg)
 {
