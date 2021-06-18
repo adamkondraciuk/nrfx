@@ -118,11 +118,11 @@ typedef enum {
   LRCCONF130_IRQn                        = 318,      /*!< 318 LRCCONF130                                                       */
   GRCCONF0_IRQn                          = 320,      /*!< 320 GRCCONF0                                                         */
   GRCCONF1_IRQn                          = 321,      /*!< 321 GRCCONF1                                                         */
-#if !defined(RTL_DOMINOZ)
+#if !(defined(RTL_DOMINOZ) || defined(RTL_DANNY))
   GRCCONF2_IRQn                          = 322,      /*!< 322 GRCCONF2                                                         */
 #endif
   PCRM_IRQn                              = 323,      /*!< 323 PCRM                                                             */
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
   RESETHUB_IRQn                          = 322,      /*!< 322 RESETHUB                                                         */
 #else
   RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
@@ -282,7 +282,7 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCM131_S_BASE       0x5F93F000UL
 #define NRF_SYSCTRL_GRCCONF_S_BASE        0x5F940000UL
 #define NRF_SYSCTRL_PCRM_S_BASE           0x5F943000UL
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
 #define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F943000UL
 #else
 #define NRF_SYSCTRL_RESETHUB_S_BASE       0x5F949000UL

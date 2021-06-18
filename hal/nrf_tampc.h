@@ -99,7 +99,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.DOMAIN[domain].DBGEN = ((p_reg->PROTECT.DOMAIN[domain].DBGEN &
                                                     ~TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Msk) |
                                                    ((enable ? TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_High
@@ -114,7 +114,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
 #endif
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.DOMAIN[domain].NIDEN = ((p_reg->PROTECT.DOMAIN[domain].NIDEN &
                                                     ~TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Msk) |
                                                    ((enable ? TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_High
@@ -129,7 +129,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
 #endif
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.DOMAIN[domain].SPIDEN = ((p_reg->PROTECT.DOMAIN[domain].SPIDEN &
                                                      ~TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Msk) |
                                                     ((enable ? TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_High
@@ -144,7 +144,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
 #endif
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.DOMAIN[domain].SPNIDEN = ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN &
                                                       ~TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Msk) |
                                                      ((enable ? TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_High
@@ -173,7 +173,7 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.DOMAIN[domain].DBGEN & TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_DBGEN_VALUE_Pos);
 #else
@@ -181,7 +181,7 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
                     >> TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_VALUE_Pos);
 #endif
         case NRF_TAMPC_CTRL_NIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.DOMAIN[domain].NIDEN & TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_NIDEN_VALUE_Pos);
 #else
@@ -189,7 +189,7 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
                     >> TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_VALUE_Pos);
 #endif
         case NRF_TAMPC_CTRL_SPIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.DOMAIN[domain].SPIDEN & TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_SPIDEN_VALUE_Pos);
 #else
@@ -197,7 +197,7 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
                     >> TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_VALUE_Pos);
 #endif
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN & TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Msk)
                     >> TAMPC_PROTECT_DOMAIN_SPNIDEN_VALUE_Pos);
 #else
@@ -221,7 +221,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.AP[domain].DBGEN = ((p_reg->PROTECT.AP[domain].DBGEN &
                                                 ~TAMPC_PROTECT_AP_DBGEN_VALUE_Msk) |
                                                ((enable ? TAMPC_PROTECT_AP_DBGEN_VALUE_High :
@@ -236,7 +236,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
 #endif
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             p_reg->PROTECT.AP[domain].SPIDEN = ((p_reg->PROTECT.AP[domain].SPIDEN &
                                                  ~TAMPC_PROTECT_AP_SPIDEN_VALUE_Msk) |
                                                 ((enable ? TAMPC_PROTECT_AP_SPIDEN_VALUE_High :
@@ -265,7 +265,7 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.AP[domain].DBGEN & TAMPC_PROTECT_AP_DBGEN_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_DBGEN_VALUE_Pos);
 #else
@@ -273,7 +273,7 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                     >> TAMPC_PROTECT_AP_DBGEN_CTRL_VALUE_Pos);
 #endif
         case NRF_TAMPC_CTRL_SPIDEN:
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
             return ((p_reg->PROTECT.AP[domain].SPIDEN & TAMPC_PROTECT_AP_SPIDEN_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_SPIDEN_VALUE_Pos);
 #else

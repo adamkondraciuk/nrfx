@@ -146177,7 +146177,7 @@ typedef struct {                                     /*!< SWEXT Structure       
 /* ================                                           TAMPC                                           ================ */
 /* =========================================================================================================================== */
 
-#if defined(RTL_DOMINOZ)
+#if defined(RTL_DOMINOZ) || defined(RTL_DANNY)
 
 /* =============================================== Struct TAMPC_PROTECT_DOMAIN =============================================== */
 /**
@@ -148189,7 +148189,7 @@ typedef struct {                                     /*!< TAMPC Structure       
   #define TAMPC_ENABLE_INTRESETEN_Disabled (0x0UL)   /*!< Disabled.                                                            */
   #define TAMPC_ENABLE_INTRESETEN_Enabled (0x1UL)    /*!< Enabled.                                                             */
 
-#endif // defined(RTL_DOMINOZ)
+#endif // defined(RTL_DOMINOZ) || defined(RTL_DANNY)
 
 /* =========================================================================================================================== */
 /* ================                                            TBM                                            ================ */
