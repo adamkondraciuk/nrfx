@@ -30,6 +30,8 @@
     #include <nrfx_config_haltium_application.h>
 #elif defined(HALTIUM_XXAA) && defined(NRF_NETWORK)
     #include <nrfx_config_haltium_network.h>
+#elif defined(HALTIUM_XXAA) && defined(NRF_CELLCORE)
+    #include <nrfx_config_haltium_cellular.h>
 #elif defined(HALTIUM_XXAA) && defined(NRF_SECURE)
     #include <nrfx_config_haltium_secure.h>
 #elif defined(HALTIUM_XXAA) && defined(NRF_FLPR)
