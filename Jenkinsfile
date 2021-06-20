@@ -33,10 +33,10 @@ pipeline {
                         nrfx_branch= env.CHANGE_BRANCH
                     }
                     else {
-                        nrfx_branch= env.BRANCH_NAME
+                        nrfx_branch = env.BRANCH_NAME
                     }
-                    def nrfx_build_branch = params.nrfx_build_branch.replaceAll('/','%2F')
-                    def nrfx_verification_branch = params.nrfx_verification_branch.replaceAll('/','%2F')
+                    nrfx_build_branch = params.nrfx_build_branch.replaceAll('/','%2F')
+                    nrfx_verification_branch = params.nrfx_verification_branch.replaceAll('/','%2F')
                     echo "[nrfx branch]: ${nrfx_branch}"
                     echo "[nrfx-build branch]: ${nrfx_build_branch}"
                     echo "[nrfx-verification branch]: ${nrfx_verification_branch}"
@@ -51,12 +51,7 @@ pipeline {
                                      booleanParam(name: 'NRFX_BUILD_TYPE_DEBUG', value: params.NRFX_BUILD_TYPE_DEBUG)],
                         propagate: true,
                         wait: true
-
-                copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
-                copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
-                copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
                 }
-            archiveArtifacts "work/nrfx-verification/outcomes/*/*"
             }
         }
         stage('Generate documentation') {
@@ -73,21 +68,20 @@ pipeline {
                 }
             }
         }
-        stage('Check results'){
-            steps {
-                junit 'work/nrfx-verification/outcomes/*/*.xml'
-            }
-        }
     }
     post {
         always {
-            node('krakow') {
-                script {
-                    def result = currentBuild.currentResult
-                    emailext recipientProviders: [requestor()],
-                        to: env.DEFAULT_NOTIF_EMAIL,
-                        subject: "${result} - NRFX build ${BUILD_DISPLAY_NAME}",
-                        body: """
+            copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
+            copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
+            copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
+            archiveArtifacts "work/nrfx-verification/outcomes/*/*"
+            junit 'work/nrfx-verification/outcomes/*/*.xml'
+            script {
+                def result = currentBuild.currentResult
+                emailext recipientProviders: [requestor()],
+                    to: env.DEFAULT_NOTIF_EMAIL,
+                    subject: "${result} - NRFX build ${BUILD_DISPLAY_NAME}",
+                    body: """
 Hello,
 NRFX #${BUILD_NUMBER} build finished with result ${result}.
 
@@ -106,7 +100,6 @@ ${BUILD_URL}
 Cheers,
 Jenkins
 """
-                }
             }
         }
     }
