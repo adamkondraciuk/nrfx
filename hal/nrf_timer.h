@@ -589,7 +589,7 @@ NRF_STATIC_INLINE uint32_t nrf_timer_cc_get(NRF_TIMER_Type const * p_reg,
  *
  * @return Capture task.
  */
-NRF_STATIC_INLINE nrf_timer_task_t nrf_timer_capture_task_get(uint32_t channel);
+NRF_STATIC_INLINE nrf_timer_task_t nrf_timer_capture_task_get(uint8_t channel);
 
 /**
  * @brief Function for getting the specified timer compare event.
@@ -598,7 +598,7 @@ NRF_STATIC_INLINE nrf_timer_task_t nrf_timer_capture_task_get(uint32_t channel);
  *
  * @return Compare event.
  */
-NRF_STATIC_INLINE nrf_timer_event_t nrf_timer_compare_event_get(uint32_t channel);
+NRF_STATIC_INLINE nrf_timer_event_t nrf_timer_compare_event_get(uint8_t channel);
 
 /**
  * @brief Function for getting the specified timer compare interrupt.
@@ -607,7 +607,7 @@ NRF_STATIC_INLINE nrf_timer_event_t nrf_timer_compare_event_get(uint32_t channel
  *
  * @return Compare interrupt.
  */
-NRF_STATIC_INLINE nrf_timer_int_mask_t nrf_timer_compare_int_get(uint32_t channel);
+NRF_STATIC_INLINE nrf_timer_int_mask_t nrf_timer_compare_int_get(uint8_t channel);
 
 /**
  * @brief Function for calculating the number of timer ticks for a given time
@@ -811,17 +811,17 @@ NRF_STATIC_INLINE uint32_t nrf_timer_cc_get(NRF_TIMER_Type const * p_reg,
     return (uint32_t)p_reg->CC[cc_channel];
 }
 
-NRF_STATIC_INLINE nrf_timer_task_t nrf_timer_capture_task_get(uint32_t channel)
+NRF_STATIC_INLINE nrf_timer_task_t nrf_timer_capture_task_get(uint8_t channel)
 {
     return (nrf_timer_task_t)NRFX_OFFSETOF(NRF_TIMER_Type, TASKS_CAPTURE[channel]);
 }
 
-NRF_STATIC_INLINE nrf_timer_event_t nrf_timer_compare_event_get(uint32_t channel)
+NRF_STATIC_INLINE nrf_timer_event_t nrf_timer_compare_event_get(uint8_t channel)
 {
     return (nrf_timer_event_t)NRFX_OFFSETOF(NRF_TIMER_Type, EVENTS_COMPARE[channel]);
 }
 
-NRF_STATIC_INLINE nrf_timer_int_mask_t nrf_timer_compare_int_get(uint32_t channel)
+NRF_STATIC_INLINE nrf_timer_int_mask_t nrf_timer_compare_int_get(uint8_t channel)
 {
     return (nrf_timer_int_mask_t)
         ((uint32_t)NRF_TIMER_INT_COMPARE0_MASK << channel);

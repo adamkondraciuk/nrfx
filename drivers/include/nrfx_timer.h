@@ -4,7 +4,7 @@
 #define NRFX_TIMER_H__
 
 #include <nrfx.h>
-#include <hal/nrf_timer.h>
+#include <haly/nrfy_timer.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -315,45 +315,45 @@ void nrfx_timer_compare_int_disable(nrfx_timer_t const * p_instance,
 NRFX_STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * p_instance,
                                                         nrf_timer_task_t     timer_task)
 {
-    return nrf_timer_task_address_get(p_instance->p_reg, timer_task);
+    return nrfy_timer_task_address_get(p_instance->p_reg, timer_task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t const * p_instance,
                                                                 uint32_t             channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
-    return nrf_timer_task_address_get(p_instance->p_reg, nrf_timer_capture_task_get(channel));
+    return nrfy_timer_task_address_get(p_instance->p_reg, nrfy_timer_capture_task_get(channel));
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * p_instance,
                                                          nrf_timer_event_t    timer_event)
 {
-    return nrf_timer_event_address_get(p_instance->p_reg, timer_event);
+    return nrfy_timer_event_address_get(p_instance->p_reg, timer_event);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t const * p_instance,
                                                                  uint32_t             channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
-    return nrf_timer_event_address_get(p_instance->p_reg, nrf_timer_compare_event_get(channel));
+    return nrfy_timer_event_address_get(p_instance->p_reg, nrfy_timer_compare_event_get(channel));
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const *   p_instance,
                                                    nrf_timer_cc_channel_t cc_channel)
 {
-    return nrf_timer_cc_get(p_instance->p_reg, cc_channel);
+    return nrfy_timer_cc_get(p_instance->p_reg, cc_channel);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance,
                                                    uint32_t             timer_us)
 {
-    return nrf_timer_us_to_ticks(timer_us, nrf_timer_frequency_get(p_instance->p_reg));
+    return nrfy_timer_us_to_ticks(timer_us, nrfy_timer_frequency_get(p_instance->p_reg));
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance,
                                                    uint32_t             timer_ms)
 {
-    return nrf_timer_ms_to_ticks(timer_ms, nrf_timer_frequency_get(p_instance->p_reg));
+    return nrfy_timer_ms_to_ticks(timer_ms, nrfy_timer_frequency_get(p_instance->p_reg));
 }
 #endif // NRFX_DECLARE_ONLY
 
