@@ -19,7 +19,7 @@ pipeline {
     }
     agent {
         docker {
-            label "linux"
+            label 'linux && build-node'
             image "docker-dtr.nordicsemi.no/babu/ncs-int-wine:v2.6.0"
             args ' --privileged -e HOME=/home/buran_ci'
         }
@@ -60,9 +60,11 @@ pipeline {
                     dir("doc") {
                         sh "./generate_sphinx_doc.sh"
                     }
-                    def output_file = readFile("doc/warnings_nrfx.txt")
-                    if (output_file.size() != 0) {
-                        unstable 'Documentation building generated warnings.'
+                    if (fileExists('doc/warnings_nrfx.txt')){
+                        def output_file = readFile("doc/warnings_nrfx.txt")
+                        if (output_file.size() != 0) {
+                            unstable 'Documentation building generated warnings.'
+                        }
                     }
                     zip archive: true, dir: 'doc/html_sphinx', glob: '', zipFile: 'html_sphinx.zip'
                 }
@@ -75,6 +77,7 @@ pipeline {
             copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "doc/warnings_nrfx.txt"
             junit 'work/nrfx-verification/outcomes/*/*.xml'
             script {
                 def result = currentBuild.currentResult
