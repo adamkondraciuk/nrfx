@@ -384,8 +384,8 @@ NRF_STATIC_INLINE void nrf_vpr_debugif_dmcontrol_set(NRF_VPR_Type *      p_reg,
         case NRF_VPR_DMCONTROL_NDMRESET:
             p_reg->DEBUGIF.DMCONTROL = ((p_reg->DEBUGIF.DMCONTROL &
                                          ~VPR_DEBUGIF_DMCONTROL_NDMRESET_Msk) |
-                                        ((enable ? VPR_DEBUGIF_DMCONTROL_NDMRESET_Inactive :
-                                          VPR_DEBUGIF_DMCONTROL_NDMRESET_Active)
+                                        ((enable ? VPR_DEBUGIF_DMCONTROL_NDMRESET_Active :
+                                          VPR_DEBUGIF_DMCONTROL_NDMRESET_Inactive)
                                          << VPR_DEBUGIF_DMCONTROL_NDMRESET_Pos));
             break;
         default:
