@@ -496,8 +496,8 @@ NRF_STATIC_INLINE void nrf_pdm_mode_set(NRF_PDM_Type * p_reg,
 }
 
 NRF_STATIC_INLINE void nrf_pdm_mode_get(NRF_PDM_Type const * p_reg,
-                                        nrf_pdm_mode_t * p_pdm_mode,
-                                        nrf_pdm_edge_t * p_pdm_edge)
+                                        nrf_pdm_mode_t *     p_pdm_mode,
+                                        nrf_pdm_edge_t *     p_pdm_edge)
 {
     uint32_t mode = p_reg->MODE;
     *p_pdm_mode = (nrf_pdm_mode_t)((mode & PDM_MODE_OPERATION_Msk ) >> PDM_MODE_OPERATION_Pos);

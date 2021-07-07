@@ -49,14 +49,14 @@ typedef struct
 /** @brief PDM configuration structure. */
 typedef struct
 {
-    nrf_pdm_mode_t    mode;           ///< Interface operation mode.
-    nrf_pdm_edge_t    edge;           ///< Sampling mode.
-    nrfy_pdm_pins_t   pins;           ///< Pin configuration structure.
-    nrf_pdm_freq_t    clock_freq;     ///< Clock frequency.
-    nrf_pdm_gain_t    gain_l;         ///< Left channel gain.
-    nrf_pdm_gain_t    gain_r;         ///< Right channel gain.
+    nrf_pdm_mode_t    mode;          ///< Interface operation mode.
+    nrf_pdm_edge_t    edge;          ///< Sampling mode.
+    nrfy_pdm_pins_t   pins;          ///< Pin configuration structure.
+    nrf_pdm_freq_t    clock_freq;    ///< Clock frequency.
+    nrf_pdm_gain_t    gain_l;        ///< Left channel gain.
+    nrf_pdm_gain_t    gain_r;        ///< Right channel gain.
 #if NRF_PDM_HAS_RATIO_CONFIG
-    nrf_pdm_ratio_t   ratio;          ///< Ratio between PDM_CLK and output sample rate.
+    nrf_pdm_ratio_t   ratio;         ///< Ratio between PDM_CLK and output sample rate.
 #endif
 #if NRF_PDM_HAS_MCLKCONFIG
     nrf_pdm_mclksrc_t mclksrc;       ///< Master clock source selection.
