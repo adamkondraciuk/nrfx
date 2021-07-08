@@ -54,10 +54,15 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
+                    
+    nrfy_rtc_int_init(p_instance->p_reg, 0, p_config->interrupt_priority, false);
 
-    NRFX_IRQ_PRIORITY_SET(p_instance->irq, p_config->interrupt_priority);
-    NRFX_IRQ_ENABLE(p_instance->irq);
-    nrf_rtc_prescaler_set(p_instance->p_reg, p_config->prescaler);
+    nrfy_rtc_config_t config = 
+    {
+        .prescaler = p_config->prescaler
+    };
+
+    nrfy_rtc_periph_configure(p_instance->p_reg, &config);
     m_cb[p_instance->instance_id].reliable     = p_config->reliable;
     m_cb[p_instance->instance_id].tick_latency = p_config->tick_latency;
     m_cb[p_instance->instance_id].state        = NRFX_DRV_STATE_INITIALIZED;
@@ -77,11 +82,8 @@ void nrfx_rtc_uninit(nrfx_rtc_t const * p_instance)
                     NRF_RTC_INT_COMPARE3_MASK;
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    NRFX_IRQ_DISABLE(p_instance->irq);
-
-    nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
-    nrf_rtc_event_disable(p_instance->p_reg, mask);
-    nrf_rtc_int_disable(p_instance->p_reg, mask);
+    nrfy_rtc_int_uninit(p_instance->p_reg);
+    nrfy_rtc_stop(p_instance->p_reg, mask);
 
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.");
@@ -91,7 +93,7 @@ void nrfx_rtc_enable(nrfx_rtc_t const * p_instance)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_START);
+    nrfy_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_START);
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.");
 }
@@ -100,7 +102,7 @@ void nrfx_rtc_disable(nrfx_rtc_t const * p_instance)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
+    nrfy_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled.");
 }
@@ -112,21 +114,18 @@ nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * p_instance, uint32_t channel)
 
     nrfx_err_t err_code;
     uint32_t int_mask = RTC_CHANNEL_INT_MASK(channel);
-    nrf_rtc_event_t event = RTC_CHANNEL_EVENT_ADDR(channel);
 
-    nrf_rtc_event_disable(p_instance->p_reg, int_mask);
-    if (nrf_rtc_int_enable_check(p_instance->p_reg, int_mask))
+    nrfy_rtc_event_disable(p_instance->p_reg, int_mask);
+
+    uint32_t event_mask = nrfy_rtc_events_process(p_instance->p_reg, int_mask, p_instance->cc_channel_count);
+
+    if (event_mask & int_mask)
     {
-        nrf_rtc_int_disable(p_instance->p_reg, int_mask);
-        if (nrf_rtc_event_check(p_instance->p_reg, event))
-        {
-            nrf_rtc_event_clear(p_instance->p_reg, event);
-            err_code = NRFX_ERROR_TIMEOUT;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             __func__,
-                             NRFX_LOG_ERROR_STRING_GET(err_code));
-            return err_code;
-        }
+        err_code = NRFX_ERROR_TIMEOUT;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
     NRFX_LOG_INFO("RTC id: %d, channel disabled: %lu.",
                   p_instance->instance_id,
@@ -148,14 +147,13 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
     uint32_t int_mask = RTC_CHANNEL_INT_MASK(channel);
     nrf_rtc_event_t event = RTC_CHANNEL_EVENT_ADDR(channel);
 
-    nrf_rtc_event_disable(p_instance->p_reg, int_mask);
-    nrf_rtc_int_disable(p_instance->p_reg, int_mask);
+    nrfy_rtc_event_disable(p_instance->p_reg, int_mask);
 
     val = RTC_WRAP(val);
     if (m_cb[p_instance->instance_id].reliable)
     {
-        nrf_rtc_cc_set(p_instance->p_reg,channel, val);
-        uint32_t cnt = nrf_rtc_counter_get(p_instance->p_reg);
+        nrfy_rtc_cc_set(p_instance->p_reg, channel, val);
+        uint32_t cnt = nrfy_rtc_counter_get(p_instance->p_reg);
         int32_t diff = cnt - val;
         if (cnt < val)
         {
@@ -172,15 +170,10 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
     }
     else
     {
-        nrf_rtc_cc_set(p_instance->p_reg,channel,val);
+        nrfy_rtc_cc_set(p_instance->p_reg, channel, val);
     }
 
-    if (enable_irq)
-    {
-        nrf_rtc_event_clear(p_instance->p_reg, event);
-        nrf_rtc_int_enable(p_instance->p_reg, int_mask);
-    }
-    nrf_rtc_event_enable(p_instance->p_reg,int_mask);
+    nrfy_rtc_event_int_clear_enable(p_instance->p_reg, event, enable_irq);
 
     NRFX_LOG_INFO("RTC id: %d, channel enabled: %lu, compare value: %lu.",
                   p_instance->instance_id,
@@ -193,45 +186,30 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
 
 void nrfx_rtc_tick_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 {
-    nrf_rtc_event_t event = NRF_RTC_EVENT_TICK;
-    uint32_t mask = NRF_RTC_INT_TICK_MASK;
-
-    nrf_rtc_event_clear(p_instance->p_reg, event);
-    nrf_rtc_event_enable(p_instance->p_reg, mask);
-    if (enable_irq)
-    {
-        nrf_rtc_int_enable(p_instance->p_reg, mask);
-    }
+    nrfy_rtc_event_int_clear_enable(p_instance->p_reg,
+                                    NRF_RTC_EVENT_TICK, 
+                                    enable_irq);
     NRFX_LOG_INFO("Tick events enabled.");
 }
 
 void nrfx_rtc_tick_disable(nrfx_rtc_t const * p_instance)
 {
-    uint32_t mask = NRF_RTC_INT_TICK_MASK;
-
-    nrf_rtc_event_disable(p_instance->p_reg, mask);
-    nrf_rtc_int_disable(p_instance->p_reg, mask);
+    nrfy_rtc_event_disable(p_instance->p_reg,
+                           NRF_RTC_INT_TICK_MASK);
     NRFX_LOG_INFO("Tick events disabled.");
 }
 
 void nrfx_rtc_overflow_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 {
-    nrf_rtc_event_t event = NRF_RTC_EVENT_OVERFLOW;
-    uint32_t mask = NRF_RTC_INT_OVERFLOW_MASK;
-
-    nrf_rtc_event_clear(p_instance->p_reg, event);
-    nrf_rtc_event_enable(p_instance->p_reg, mask);
-    if (enable_irq)
-    {
-        nrf_rtc_int_enable(p_instance->p_reg, mask);
-    }
+    nrfy_rtc_event_int_clear_enable(p_instance->p_reg,
+                                    NRF_RTC_EVENT_OVERFLOW, 
+                                    enable_irq);
 }
 
 void nrfx_rtc_overflow_disable(nrfx_rtc_t const * p_instance)
 {
-    uint32_t mask = NRF_RTC_INT_OVERFLOW_MASK;
-    nrf_rtc_event_disable(p_instance->p_reg, mask);
-    nrf_rtc_int_disable(p_instance->p_reg, mask);
+    nrfy_rtc_event_disable(p_instance->p_reg,
+                           NRF_RTC_INT_OVERFLOW_MASK);
 }
 
 uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * p_instance)
@@ -256,13 +234,20 @@ static void irq_handler(NRF_RTC_Type * p_reg,
     uint32_t int_mask = (uint32_t)NRF_RTC_INT_COMPARE0_MASK;
     nrf_rtc_event_t event = NRF_RTC_EVENT_COMPARE_0;
 
+    uint32_t event_mask = nrfy_rtc_events_process(p_reg,
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_TICK)      |
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_OVERFLOW)  |
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_COMPARE_0) |
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_COMPARE_1) |
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_COMPARE_2) |
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_COMPARE_3),
+                                                  channel_count);
+
     for (i = 0; i < channel_count; i++)
     {
-        if (nrf_rtc_int_enable_check(p_reg, int_mask) && nrf_rtc_event_check(p_reg, event))
+        if (event_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
-            nrf_rtc_event_disable(p_reg, int_mask);
-            nrf_rtc_int_disable(p_reg, int_mask);
-            nrf_rtc_event_clear(p_reg, event);
+            nrfy_rtc_event_disable(p_reg, int_mask);
             NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
                            EVT_TO_STR(event),
                            (unsigned long)instance_id);
@@ -272,21 +257,16 @@ static void irq_handler(NRF_RTC_Type * p_reg,
         event = (nrf_rtc_event_t)((uint32_t)event + sizeof(uint32_t));
     }
 
-    event = NRF_RTC_EVENT_TICK;
-    if (nrf_rtc_int_enable_check(p_reg, NRF_RTC_INT_TICK_MASK) && nrf_rtc_event_check(p_reg, event))
+    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_TICK))
     {
-        nrf_rtc_event_clear(p_reg, event);
         NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
                        EVT_TO_STR(event),
                        (unsigned long)instance_id);
         m_handlers[instance_id](NRFX_RTC_INT_TICK);
     }
 
-    event = NRF_RTC_EVENT_OVERFLOW;
-    if (nrf_rtc_int_enable_check(p_reg, NRF_RTC_INT_OVERFLOW_MASK) &&
-        nrf_rtc_event_check(p_reg, event))
+    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_OVERFLOW))
     {
-        nrf_rtc_event_clear(p_reg, event);
         NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
                        EVT_TO_STR(event),
                        (unsigned long)instance_id);

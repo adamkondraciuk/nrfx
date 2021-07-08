@@ -4,7 +4,7 @@
 #define NRFX_RTC_H__
 
 #include <nrfx.h>
-#include <hal/nrf_rtc.h>
+#include <haly/nrfy_rtc.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -293,40 +293,40 @@ NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * p_inst
 NRFX_STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * p_instance,
                                              uint32_t *         p_mask)
 {
-    *p_mask = nrf_rtc_int_enable_check(p_instance->p_reg, ~0uL);
-    nrf_rtc_int_disable(p_instance->p_reg, NRF_RTC_INT_TICK_MASK |
-                                           NRF_RTC_INT_OVERFLOW_MASK |
-                                           NRF_RTC_INT_COMPARE0_MASK |
-                                           NRF_RTC_INT_COMPARE1_MASK |
-                                           NRF_RTC_INT_COMPARE2_MASK |
-                                           NRF_RTC_INT_COMPARE3_MASK);
+    *p_mask = nrfy_rtc_int_enable_check(p_instance->p_reg, ~0uL);
+    nrfy_rtc_int_disable(p_instance->p_reg, NRF_RTC_INT_TICK_MASK |
+                                            NRF_RTC_INT_OVERFLOW_MASK |
+                                            NRF_RTC_INT_COMPARE0_MASK |
+                                            NRF_RTC_INT_COMPARE1_MASK |
+                                            NRF_RTC_INT_COMPARE2_MASK |
+                                            NRF_RTC_INT_COMPARE3_MASK);
 }
 
 NRFX_STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * p_instance, uint32_t mask)
 {
-    nrf_rtc_int_enable(p_instance->p_reg, mask);
+    nrfy_rtc_int_enable(p_instance->p_reg, mask);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_rtc_counter_get(nrfx_rtc_t const * p_instance)
 {
-    return nrf_rtc_counter_get(p_instance->p_reg);
+    return nrfy_rtc_counter_get(p_instance->p_reg);
 }
 
 NRFX_STATIC_INLINE void nrfx_rtc_counter_clear(nrfx_rtc_t const * p_instance)
 {
-    nrf_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_CLEAR);
+    nrfy_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_CLEAR);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_rtc_task_address_get(nrfx_rtc_t const * p_instance,
                                                       nrf_rtc_task_t     task)
 {
-    return nrf_rtc_task_address_get(p_instance->p_reg, task);
+    return nrfy_rtc_task_address_get(p_instance->p_reg, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * p_instance,
                                                        nrf_rtc_event_t    event)
 {
-    return nrf_rtc_event_address_get(p_instance->p_reg, event);
+    return nrfy_rtc_event_address_get(p_instance->p_reg, event);
 }
 #endif // NRFX_DECLARE_ONLY
 
