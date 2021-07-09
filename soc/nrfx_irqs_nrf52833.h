@@ -144,7 +144,7 @@ extern "C" {
 #define nrfx_rtc_2_irq_handler      RTC2_IRQHandler
 
 // I2S_IRQn
-#define nrfx_i2s_irq_handler        I2S_IRQHandler
+#define nrfx_i2s_0_irq_handler      I2S_IRQHandler
 
 // FPU_IRQn
 

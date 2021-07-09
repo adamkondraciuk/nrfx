@@ -74,6 +74,40 @@ typedef struct
     uint32_t const * p_tx_buffer; ///< Pointer to the buffer with data to be sent.
 } nrfx_i2s_buffers_t;
 
+/** @brief I2S driver instance structure. */
+typedef struct
+{
+    NRF_I2S_Type  *    p_reg;       /**< Pointer to instance register set. */
+    IRQn_Type          irq;         /**< Instance IRQ ID. */
+    uint8_t            instance_id; /**< Index of the driver instance. For internal use only. */
+} nrfx_i2s_t;
+
+/** @brief Macro for creating an I2S driver instance. */
+#if defined(NRF_I2S)
+#define NRFX_I2S_INSTANCE(id)          \
+{                                      \
+    .p_reg       = NRF_I2S,            \
+    .irq         = I2S_IRQn,           \
+    .instance_id = NRFX_I2S0_INST_IDX, \
+}
+#else
+#define NRFX_I2S_INSTANCE(id)                              \
+{                                                          \
+    .p_reg       = NRFX_CONCAT_2(NRF_I2S, id),             \
+    .irq         = NRFX_CONCAT_3(I2S, id, _IRQn),          \
+    .instance_id = NRFX_CONCAT_3(NRFX_I2S, id, _INST_IDX), \
+}
+#endif
+
+#ifndef __NRFX_DOXYGEN__
+enum {
+#if NRFX_CHECK(NRFX_I2S0_ENABLED)
+    NRFX_I2S0_INST_IDX,
+#endif
+    NRFX_I2S_ENABLED_COUNT
+};
+#endif
+
 #if NRF_I2S_HAS_CLKCONFIG || defined(__NRFX_DOXYGEN__)
     /** @brief I2S additional clock source configuration. */
     #define NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG \
@@ -180,19 +214,25 @@ typedef void (* nrfx_i2s_data_handler_t)(nrfx_i2s_buffers_t const * p_released,
 /**
  * @brief Function for initializing the I2S driver.
  *
- * @param[in] p_config Pointer to the structure with the initial configuration.
- * @param[in] handler  Data handler provided by the user. Must not be NULL.
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the initial configuration.
+ * @param[in] handler    Data handler provided by the user. Must not be NULL.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
  * @retval NRFX_ERROR_INVALID_PARAM The requested combination of configuration
  *                                  options is not allowed by the I2S peripheral.
  */
-nrfx_err_t nrfx_i2s_init(nrfx_i2s_config_t const * p_config,
+nrfx_err_t nrfx_i2s_init(nrfx_i2s_t const *        p_instance,
+                         nrfx_i2s_config_t const * p_config,
                          nrfx_i2s_data_handler_t   handler);
 
-/** @brief Function for uninitializing the I2S driver. */
-void nrfx_i2s_uninit(void);
+/**
+ * @brief Function for uninitializing the I2S driver.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ */
+void nrfx_i2s_uninit(nrfx_i2s_t const * p_instance);
 
 /**
  * @brief Function for starting the continuous I2S transfer.
@@ -214,6 +254,7 @@ void nrfx_i2s_uninit(void);
  *       to be placed in the Data RAM region. If this condition is not met,
  *       this function will fail with the error code NRFX_ERROR_INVALID_ADDR.
  *
+ * @param[in] p_instance        Pointer to the driver instance structure.
  * @param[in] p_initial_buffers Pointer to a structure specifying the buffers
  *                              to be used in the initial part of the transfer
  *                              (buffers for all consecutive parts are provided
@@ -229,7 +270,8 @@ void nrfx_i2s_uninit(void);
  * @retval NRFX_ERROR_INVALID_ADDR  The provided buffers are not placed
  *                                  in the Data RAM region.
  */
-nrfx_err_t nrfx_i2s_start(nrfx_i2s_buffers_t const * p_initial_buffers,
+nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
+                          nrfx_i2s_buffers_t const * p_initial_buffers,
                           uint16_t                   buffer_size,
                           uint8_t                    flags);
 
@@ -243,8 +285,9 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_buffers_t const * p_initial_buffers,
  * but it has to be done before the I2S peripheral finishes processing the
  * buffers supplied previously. Otherwise, data corruption will occur.
  *
- * @param[in] p_buffers Pointer to a structure specifying the buffers
- *                      to be used in the upcoming part of the transfer.
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_buffers  Pointer to a structure specifying the buffers
+ *                       to be used in the upcoming part of the transfer.
  *
  * @retval NRFX_SUCCESS             If the operation was successful.
  * @retval NRFX_ERROR_INVALID_STATE If the buffers were already supplied or
@@ -252,15 +295,20 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_buffers_t const * p_initial_buffers,
  *
  * @sa nrfx_i2s_data_handler_t
  */
-nrfx_err_t nrfx_i2s_next_buffers_set(nrfx_i2s_buffers_t const * p_buffers);
+nrfx_err_t nrfx_i2s_next_buffers_set(nrfx_i2s_t const *         p_instance,
+                                     nrfx_i2s_buffers_t const * p_buffers);
 
-/** @brief Function for stopping the I2S transfer. */
-void nrfx_i2s_stop(void);
+/**
+ * @brief Function for stopping the I2S transfer.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ */
+void nrfx_i2s_stop(nrfx_i2s_t const * p_instance);
 
 /** @} */
 
 
-void nrfx_i2s_irq_handler(void);
+void nrfx_i2s_0_irq_handler(void);
 
 
 #ifdef __cplusplus
