@@ -4,7 +4,7 @@
 #define NRFX_I2S_H__
 
 #include <nrfx.h>
-#include <hal/nrf_i2s.h>
+#include <haly/nrfy_i2s.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,92 +17,45 @@ extern "C" {
  * @brief   Inter-IC Sound (I2S) peripheral driver.
  */
 
-/**
- * @brief This value can be provided instead of a pin number for the signals
- *        SDOUT, SDIN, and MCK to specify that a given signal is not used
- *        and therefore does not need to be connected to a pin.
- */
-#define NRFX_I2S_PIN_NOT_USED  0xFF
-
 /** @brief I2S driver configuration structure. */
 typedef struct
 {
-    uint8_t sck_pin;      ///< SCK pin number.
-    uint8_t lrck_pin;     ///< LRCK pin number.
-    uint8_t mck_pin;      ///< MCK pin number.
-                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
-                           *   if this signal is not needed. */
-    uint8_t sdout_pin;    ///< SDOUT pin number.
-                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
-                           *   if this signal is not needed. */
-    uint8_t sdin_pin;     ///< SDIN pin number.
-                          /**< Optional. Use @ref NRFX_I2S_PIN_NOT_USED
-                           *   if this signal is not needed. */
-    uint8_t irq_priority; ///< Interrupt priority.
-
-    nrf_i2s_mode_t     mode;          ///< Mode of operation.
-    nrf_i2s_format_t   format;        ///< Frame format.
-    nrf_i2s_align_t    alignment;     ///< Alignment of sample within a frame.
-    nrf_i2s_swidth_t   sample_width;  ///< Sample width.
-    nrf_i2s_channels_t channels;      ///< Enabled channels.
-    nrf_i2s_mck_t      mck_setup;     ///< Master clock setup.
-    nrf_i2s_ratio_t    ratio;         ///< MCK/LRCK ratio.
-#if NRF_I2S_HAS_CLKCONFIG || defined(__NRFX_DOXYGEN__)
-    nrf_i2s_clksrc_t   clksrc;        ///< Clock source selection.
-    bool               enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
-#endif
-    bool               skip_gpio_cfg; ///< Skip GPIO configuration of pins.
-                                      /**< When set to true, the driver does not modify
-                                       *   any GPIO parameters of the used pins. Those
-                                       *   parameters are supposed to be configured
-                                       *   externally before the driver is initialized. */
-    bool               skip_psel_cfg; ///< Skip pin selection configuration.
-                                      /**< When set to true, the driver does not modify
-                                       *   pin select registers in the peripheral.
-                                       *   Those registers are supposed to be set up
-                                       *   externally before the driver is initialized.
-                                       *   @note When both GPIO configuration and pin
-                                       *   selection are to be skipped, the structure
-                                       *   fields that specify pins can be omitted,
-                                       *   as they are ignored anyway. */
+    nrfy_i2s_config_t nrfy_config;   ///< PWM configuration structure.
+    uint8_t           irq_priority;  ///< Interrupt priority.
+    bool              skip_gpio_cfg; ///< Skip GPIO configuration of pins.
+                                     /**< When set to true, the driver does not modify
+                                      *   any GPIO parameters of the used pins. Those
+                                      *   parameters are supposed to be configured
+                                      *   externally before the driver is initialized. */
 } nrfx_i2s_config_t;
 
 /** @brief I2S driver buffers structure. */
-typedef struct
-{
-    uint32_t       * p_rx_buffer; ///< Pointer to the buffer for received data.
-    uint32_t const * p_tx_buffer; ///< Pointer to the buffer with data to be sent.
-} nrfx_i2s_buffers_t;
+typedef nrfy_i2s_buffers_t nrfx_i2s_buffers_t;
 
 /** @brief I2S driver instance structure. */
 typedef struct
 {
-    NRF_I2S_Type  *    p_reg;       /**< Pointer to instance register set. */
-    IRQn_Type          irq;         /**< Instance IRQ ID. */
-    uint8_t            instance_id; /**< Index of the driver instance. For internal use only. */
+    NRF_I2S_Type  * p_reg;        ///< Pointer to a structure with I2S registers.
+    uint8_t         drv_inst_idx; ///< Index of the driver instance. For internal use only.
 } nrfx_i2s_t;
 
 /** @brief Macro for creating an I2S driver instance. */
-#if defined(NRF_I2S)
-#define NRFX_I2S_INSTANCE(id)          \
-{                                      \
-    .p_reg       = NRF_I2S,            \
-    .irq         = I2S_IRQn,           \
-    .instance_id = NRFX_I2S0_INST_IDX, \
+#define NRFX_I2S_INSTANCE(id)                               \
+{                                                           \
+    .p_reg        = NRF_I2S##id ,                           \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_I2S, id, _INST_IDX), \
 }
-#else
-#define NRFX_I2S_INSTANCE(id)                              \
-{                                                          \
-    .p_reg       = NRFX_CONCAT_2(NRF_I2S, id),             \
-    .irq         = NRFX_CONCAT_3(I2S, id, _IRQn),          \
-    .instance_id = NRFX_CONCAT_3(NRFX_I2S, id, _INST_IDX), \
-}
-#endif
 
 #ifndef __NRFX_DOXYGEN__
 enum {
 #if NRFX_CHECK(NRFX_I2S0_ENABLED)
     NRFX_I2S0_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_I2S130_ENABLED)
+    NRFX_I2S130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_I2S131_ENABLED)
+    NRFX_I2S131_INST_IDX,
 #endif
     NRFX_I2S_ENABLED_COUNT
 };
@@ -136,20 +89,26 @@ enum {
  */
 #define NRFX_I2S_DEFAULT_CONFIG(_pin_sck, _pin_lrck, _pin_mck, _pin_sdout, _pin_sdin)   \
 {                                                                                       \
-    .sck_pin      = _pin_sck,                                                           \
-    .lrck_pin     = _pin_lrck,                                                          \
-    .mck_pin      = _pin_mck,                                                           \
-    .sdout_pin    = _pin_sdout,                                                         \
-    .sdin_pin     = _pin_sdin,                                                          \
+    .nrfy_config = {                                                                    \
+        .config = {                                                                     \
+            .mode         = NRF_I2S_MODE_MASTER,                                        \
+            .format       = NRF_I2S_FORMAT_I2S,                                         \
+            .alignment    = NRF_I2S_ALIGN_LEFT,                                         \
+            .sample_width = NRF_I2S_SWIDTH_16BIT,                                       \
+            .channels     = NRF_I2S_CHANNELS_LEFT,                                      \
+            .mck_setup    = NRF_I2S_MCK_32MDIV8,                                        \
+            .ratio        = NRF_I2S_RATIO_32X,                                          \
+        },                                                                              \
+        .pins = {                                                                       \
+            .sck_pin      = _pin_sck,                                                   \
+            .lrck_pin     = _pin_lrck,                                                  \
+            .mck_pin      = _pin_mck,                                                   \
+            .sdout_pin    = _pin_sdout,                                                 \
+            .sdin_pin     = _pin_sdin,                                                  \
+        },                                                                              \
+        NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG                                          \
+    },                                                                                  \
     .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
-    .mode         = NRF_I2S_MODE_MASTER,                                                \
-    .format       = NRF_I2S_FORMAT_I2S,                                                 \
-    .alignment    = NRF_I2S_ALIGN_LEFT,                                                 \
-    .sample_width = NRF_I2S_SWIDTH_16BIT,                                               \
-    .channels     = NRF_I2S_CHANNELS_LEFT,                                              \
-    .mck_setup    = NRF_I2S_MCK_32MDIV8,                                                \
-    .ratio        = NRF_I2S_RATIO_32X,                                                  \
-    NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG                                              \
 }
 
 #define NRFX_I2S_STATUS_NEXT_BUFFERS_NEEDED (1UL << 0)
@@ -309,7 +268,8 @@ void nrfx_i2s_stop(nrfx_i2s_t const * p_instance);
 
 
 void nrfx_i2s_0_irq_handler(void);
-
+void nrfx_i2s_130_irq_handler(void);
+void nrfx_i2s_131_irq_handler(void);
 
 #ifdef __cplusplus
 }
