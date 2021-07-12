@@ -127,7 +127,7 @@ static void deconfigure_pins(nrfx_i2s_t const * p_instance)
 #if USE_WORKAROUND_FOR_ANOMALY_170
     // Create bitmask for extracting pin number from PSEL register.
     uint32_t pin_mask = I2S_PSEL_SCK_PIN_Msk;
-#if defined(I2S_PSEL_SCK_PORT_Msk)
+#if NRF_I2S_HAS_GPIO_PORT
     // If device supports more than one GPIO port, take port number into account as well.
     pin_mask |= I2S_PSEL_SCK_PORT_Msk;
 #endif
