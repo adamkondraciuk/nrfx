@@ -7,6 +7,7 @@
 #include <drivers/nrfx_common.h>
 #include <nrfx_glue.h>
 #include <hal/nrf_common.h>
+#include <haly/nrfy_common.h>
 #include <drivers/nrfx_errors.h>
 
 #if NRFX_CHECK(NRFX_PM_ENABLED)
