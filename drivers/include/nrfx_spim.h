@@ -4,8 +4,8 @@
 #define NRFX_SPIM_H__
 
 #include <nrfx.h>
-#include <hal/nrf_spim.h>
-#include <hal/nrf_gpio.h>
+#include <haly/nrfy_spim.h>
+#include <haly/nrfy_gpio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -183,13 +183,7 @@ typedef struct
 #define NRFX_SPIM_FLAG_REPEATED_XFER       (1UL << 4)
 
 /** @brief Single transfer descriptor structure. */
-typedef struct
-{
-    uint8_t const * p_tx_buffer; ///< Pointer to TX buffer.
-    size_t          tx_length;   ///< TX buffer length.
-    uint8_t       * p_rx_buffer; ///< Pointer to RX buffer.
-    size_t          rx_length;   ///< RX buffer length.
-} nrfx_spim_xfer_desc_t;
+typedef nrfy_spim_xfer_desc_t nrfx_spim_xfer_desc_t;
 
 /**
  * @brief Macro for setting up single transfer descriptor.
@@ -365,7 +359,7 @@ nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const *           p_instance,
  *
  * @return Start task address.
  */
-uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance);
+NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance);
 
 /**
  * @brief Function for returning the address of a END SPIM event.
@@ -377,7 +371,7 @@ uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance);
  *
  * @return END event address.
  */
-uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance);
+NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance);
 
 /**
  * @brief Function for aborting ongoing transfer.
@@ -395,6 +389,17 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance);
  */
 #define NRFX_SPIM_INST_HANDLER_GET(idx) NRFX_CONCAT_3(nrfx_spim_, idx, _irq_handler)
 
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance)
+{
+    return nrfy_spim_task_address_get(p_instance->p_reg, NRF_SPIM_TASK_START);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance)
+{
+    return nrfy_spim_event_address_get(p_instance->p_reg, NRF_SPIM_EVENT_END);
+}
+#endif // NRFX_DECLARE_ONLY
 /** @} */
 
 
