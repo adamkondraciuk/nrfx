@@ -314,7 +314,7 @@ NRF_STATIC_INLINE void nrf_ccm_scratchptr_set(NRF_CCM_Type *   p_reg,
  *
  * @return Pointer to the scratch area.
  */
-NRF_STATIC_INLINE uint32_t * nrf_ccm_stratchptr_get(NRF_CCM_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t * nrf_ccm_scratchptr_get(NRF_CCM_Type const * p_reg);
 
 #if defined(CCM_RATEOVERRIDE_RATEOVERRIDE_Pos) || defined(__NRFX_DOXYGEN__)
 /**
@@ -533,7 +533,7 @@ NRF_STATIC_INLINE void nrf_ccm_scratchptr_set(NRF_CCM_Type *   p_reg,
     p_reg->SCRATCHPTR = (uint32_t)p_area;
 }
 
-NRF_STATIC_INLINE uint32_t * nrf_ccm_stratchptr_get(NRF_CCM_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t * nrf_ccm_scratchptr_get(NRF_CCM_Type const * p_reg)
 {
 #if defined(NRF5340_XXAA_NETWORK)
     // Apply workaround for anomaly 10.
