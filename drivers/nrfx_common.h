@@ -36,6 +36,8 @@ extern "C" {
 #endif
 #endif // NRFX_STATIC_INLINE
 
+#define NRFY_STATIC_INLINE STATIC_INLINE
+
 #ifndef NRF_STATIC_INLINE
 #ifdef NRF_DECLARE_ONLY
 #define NRF_STATIC_INLINE
