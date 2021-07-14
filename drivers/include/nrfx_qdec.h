@@ -17,6 +17,13 @@ extern "C" {
  * @brief   Quadrature Decoder (QDEC) peripheral driver.
  */
 
+/** @brief Data structure of the Quadrature Decoder (QDEC) driver instance. */
+typedef struct
+{
+    NRF_QDEC_Type * p_reg;        ///< Pointer to a structure with QDEC registers.
+    uint8_t         drv_inst_idx; ///< Index of the driver instance. For internal use only.
+} nrfx_qdec_t;
+
 /** @brief QDEC configuration structure. */
 typedef struct
 {
@@ -45,6 +52,25 @@ typedef struct
                                               *   fields that specify pins can be omitted,
                                               *   as they are ignored anyway. */
 } nrfx_qdec_config_t;
+
+#ifndef __NRFX_DOXYGEN__
+enum {
+#if NRFX_CHECK(NRFX_QDEC0_ENABLED)
+    NRFX_QDEC0_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_QDEC1_ENABLED)
+    NRFX_QDEC1_INST_IDX,
+#endif
+    NRFX_QDEC_ENABLED_COUNT
+};
+#endif
+
+/** @brief Macro for creating an instance of the QDEC driver. */
+#define NRFX_QDEC_INSTANCE(id)                               \
+{                                                            \
+    .p_reg        = NRF_QDEC##id,                            \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_QDEC, id, _INST_IDX), \
+}
 
 /**
  * @brief QDEC driver default configuration.
@@ -104,41 +130,50 @@ typedef struct
  *
  * @param[in] event QDEC event structure.
  */
-typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event);
+typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event, void * p_context);
 
 /**
  * @brief Function for initializing QDEC.
  *
- * @param[in] p_config      Pointer to the structure with the initial configuration.
- * @param[in] event_handler Event handler provided by the user.
- *                          Must not be NULL.
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the initial configuration.
+ * @param[in] handler    Event handler provided by the user. Must not be NULL.
+ * @param[in] p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The QDEC was already initialized.
  */
-nrfx_err_t nrfx_qdec_init(nrfx_qdec_config_t const * p_config,
-                          nrfx_qdec_event_handler_t  event_handler);
+nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
+                          nrfx_qdec_config_t const * p_config,
+                          nrfx_qdec_event_handler_t  handler,
+                          void *                     p_context);
 
 /**
  * @brief Function for uninitializing QDEC.
  *
  * @note Function asserts if module is uninitialized.
+ *
+ * @param[in]  p_instance Pointer to the driver instance structure.
  */
-void nrfx_qdec_uninit(void);
+void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance);
 
 /**
  * @brief Function for enabling QDEC.
  *
  * @note Function asserts if module is uninitialized or enabled.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrfx_qdec_enable(void);
+void nrfx_qdec_enable(nrfx_qdec_t const * p_instance);
 
 /**
  * @brief Function for disabling QDEC.
  *
  * @note Function asserts if module is uninitialized or disabled.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
  */
-void nrfx_qdec_disable(void);
+void nrfx_qdec_disable(nrfx_qdec_t const * p_instance);
 
 /**
  * @brief Function for reading accumulated transitions from the QDEC peripheral.
@@ -146,46 +181,54 @@ void nrfx_qdec_disable(void);
  * @note Function asserts if module is not enabled.
  * @note Accumulators are cleared after reading.
  *
- * @param[out] p_acc    Pointer to store the accumulated transitions.
- * @param[out] p_accdbl Pointer to store the accumulated double transitions.
+ * @param[in]  p_instance Pointer to the driver instance structure.
+ * @param[out] p_acc      Pointer to store the accumulated transitions.
+ * @param[out] p_accdbl   Pointer to store the accumulated double transitions.
  */
-void nrfx_qdec_accumulators_read(int16_t * p_acc, int16_t * p_accdbl);
+void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
+                                 int16_t *           p_acc,
+                                 int16_t *           p_accdbl);
 
 /**
  * @brief Function for returning the address of the specified QDEC task.
  *
- * @param task QDEC task.
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] task       QDEC task.
  *
  * @return Task address.
  */
-NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task);
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrfx_qdec_t const * p_instance,
+                                                       nrf_qdec_task_t     task);
 
 /**
  * @brief Function for returning the address of the specified QDEC event.
  *
- * @param event QDEC event.
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] event      QDEC event.
  *
  * @return Event address.
  */
-NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event);
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_instance,
+                                                        nrf_qdec_event_t    event);
 
 #ifndef NRFX_DECLARE_ONLY
-NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrf_qdec_task_t task)
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrfx_qdec_t const * p_instance,
+                                                       nrf_qdec_task_t     task)
 {
-    return nrf_qdec_task_address_get(NRF_QDEC, task);
+    return nrf_qdec_task_address_get(p_instance->p_reg, task);
 }
 
-NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrf_qdec_event_t event)
+NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_instance,
+                                                        nrf_qdec_event_t    event)
 {
-    return nrf_qdec_event_address_get(NRF_QDEC, event);
+    return nrf_qdec_event_address_get(p_instance->p_reg, event);
 }
 #endif // NRFX_DECLARE_ONLY
 
 /** @} */
 
-
-void nrfx_qdec_irq_handler(void);
-
+void nrfx_qdec_0_irq_handler(void);
+void nrfx_qdec_1_irq_handler(void);
 
 #ifdef __cplusplus
 }

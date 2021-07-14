@@ -146,9 +146,10 @@ extern "C" {
 // GPIOTE1_IRQn
 
 // QDEC0_IRQn
-#define nrfx_qdec_irq_handler       QDEC_IRQHandler
+#define nrfx_qdec_0_irq_handler     QDEC0_IRQHandler
 
 // QDEC1_IRQn
+#define nrfx_qdec_1_irq_handler     QDEC1_IRQHandler
 
 // USBD_IRQn
 #define nrfx_usbd_irq_handler       USBD_IRQHandler

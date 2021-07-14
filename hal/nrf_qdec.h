@@ -8,6 +8,10 @@
 extern "C" {
 #endif
 
+#ifndef NRF_QDEC0
+#define NRF_QDEC0 NRF_QDEC
+#endif
+
 /**
  * @defgroup nrf_qdec_hal QDEC HAL
  * @{
