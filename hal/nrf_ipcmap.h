@@ -27,7 +27,7 @@ extern "C" {
 NRF_STATIC_INLINE void nrf_ipcmap_source_config_set(NRF_IPCMAP_Type * p_reg,
                                                     uint16_t          index,
                                                     uint8_t           source,
-                                                    uint8_t           domain);
+                                                    nrf_domain_t      domain);
 
 /**
  * @brief Function for setting the configuration of channel sink.
@@ -40,7 +40,7 @@ NRF_STATIC_INLINE void nrf_ipcmap_source_config_set(NRF_IPCMAP_Type * p_reg,
 NRF_STATIC_INLINE void nrf_ipcmap_sink_config_set(NRF_IPCMAP_Type * p_reg,
                                                   uint16_t          index,
                                                   uint8_t           sink,
-                                                  uint8_t           domain);
+                                                  nrf_domain_t      domain);
 
 /**
  * @brief Function for enabling the channel source.
@@ -58,11 +58,10 @@ NRF_STATIC_INLINE void nrf_ipcmap_source_enable_set(NRF_IPCMAP_Type * p_reg,
 NRF_STATIC_INLINE void nrf_ipcmap_source_config_set(NRF_IPCMAP_Type * p_reg,
                                                     uint16_t          index,
                                                     uint8_t           source,
-                                                    uint8_t           domain)
+                                                    nrf_domain_t      domain)
 {
-    NRFX_ASSERT(domain <= 0xF);
-    /* TODO: When MDK adds a define for number of channels, replace magic number below
-     *       and in other functions. */
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
     NRFX_ASSERT(index < 16);
 
     p_reg->CHANNEL[index].SOURCE =
@@ -73,9 +72,10 @@ NRF_STATIC_INLINE void nrf_ipcmap_source_config_set(NRF_IPCMAP_Type * p_reg,
 NRF_STATIC_INLINE void nrf_ipcmap_sink_config_set(NRF_IPCMAP_Type * p_reg,
                                                   uint16_t          index,
                                                   uint8_t           sink,
-                                                  uint8_t           domain)
+                                                  nrf_domain_t      domain)
 {
-    NRFX_ASSERT(domain <= 0xF);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
     NRFX_ASSERT(index < 16);
 
     p_reg->CHANNEL[index].SINK =

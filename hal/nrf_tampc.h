@@ -94,7 +94,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
                                                        bool                   enable)
 {
     NRFX_ASSERT(domain > 0);
-    NRFX_ASSERT(domain < 16); //TODO: replace with MDK symbol?
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
 
     switch (type)
     {
@@ -168,7 +168,7 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
                                                        nrf_domain_t           domain)
 {
     NRFX_ASSERT(domain > 0);
-    NRFX_ASSERT(domain < 16); //TODO: replace with MDK symbol?
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
 
     switch (type)
     {
@@ -216,7 +216,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
                                                    bool                   enable)
 {
     NRFX_ASSERT(domain > 0);
-    NRFX_ASSERT(domain < 16); //TODO: replace with MDK symbol?
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
 
     switch (type)
     {
@@ -260,7 +260,7 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                                                    nrf_domain_t           domain)
 {
     NRFX_ASSERT(domain > 0);
-    NRFX_ASSERT(domain < 16); //TODO: replace with MDK symbol?
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
 
     switch (type)
     {

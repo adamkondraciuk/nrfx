@@ -494,7 +494,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg,
  * @param[in] enable True if the automatic mode is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Type * p_reg,
-                                                                     uint8_t         domain,
+                                                                     nrf_domain_t    domain,
                                                                      bool            enable);
 
 /**
@@ -508,7 +508,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Ty
  */
 NRF_STATIC_INLINE
 bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg,
-                                                     uint8_t               domain);
+                                                     nrf_domain_t          domain);
 
 /**
  * @brief Function for getting the domains that requested the SYSCTOUNER to remain active.
@@ -975,10 +975,12 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg,
 }
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Type * p_reg,
-                                                                     uint8_t         domain,
+                                                                     nrf_domain_t    domain,
                                                                      bool            enable)
 {
-    NRFX_ASSERT(domain <= 0xF);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
     p_reg->KEEPRUNNING = ((p_reg->KEEPRUNNING & ~(GRTC_KEEPRUNNING_DOMAIN0_Active  << domain)) |
                          ((enable ? GRTC_KEEPRUNNING_DOMAIN0_Active :
                          GRTC_KEEPRUNNING_DOMAIN0_NotActive) << domain));
@@ -986,9 +988,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_state_request_set(NRF_GRTC_Ty
 
 NRF_STATIC_INLINE
 bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg,
-                                                     uint8_t               domain)
+                                                     nrf_domain_t          domain)
 {
-    NRFX_ASSERT(domain <= 0xF);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
     return (p_reg->KEEPRUNNING & (GRTC_KEEPRUNNING_DOMAIN0_Active << domain)) ? true : false;
 }
 

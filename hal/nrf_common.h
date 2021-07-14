@@ -24,6 +24,8 @@ extern "C" {
 #if defined(HALTIUM_XXAA)
 typedef NRF_DOMAINS_t nrf_domain_t;
 
+#define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
+
 /* TODO: This should be in MDK (MDK-2070) */
 typedef enum
 {

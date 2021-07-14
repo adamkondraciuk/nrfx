@@ -48,6 +48,9 @@ NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type * p_reg,
                                            nrf_domain_t      domain)
 {
     NRFX_ASSERT(index < NRF_IRQMAP_IRQ_COUNT);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
     p_reg->IRQ[index].SINK = (domain << IRQMAP_IRQ_SINK_DOMAIN_Pos) 
                              & IRQMAP_IRQ_SINK_DOMAIN_Msk;
 }

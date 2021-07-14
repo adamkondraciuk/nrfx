@@ -382,7 +382,9 @@ NRF_STATIC_INLINE uint32_t nrf_resethub_int_enable_check(NRF_RESETHUB_Type const
 NRF_STATIC_INLINE uint32_t nrf_resethub_resetreas_domain_get(NRF_RESETHUB_Type const * p_reg,
                                                              nrf_resethub_domain_t     domain)
 {
-    NRFX_ASSERT(domain <= 0xF);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
     return p_reg->RESETREAS.DOMAIN[domain];
 }
 
@@ -390,7 +392,9 @@ NRF_STATIC_INLINE void nrf_resethub_resetreas_domain_clear(NRF_RESETHUB_Type *  
                                                            nrf_resethub_domain_t domain,
                                                            uint32_t              mask)
 {
-    NRFX_ASSERT(domain <= 0xF);
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
     p_reg->RESETREAS.DOMAIN[domain] = mask;
 }
 
