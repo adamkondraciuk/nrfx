@@ -16,6 +16,10 @@ extern "C" {
  * @brief   Hardware access layer for managing the BELLBOARD peripheral.
  */
 
+/** @brief Symbol specifying maximum number of available events triggered. */
+#define NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT \
+    NRFX_ARRAY_SIZE(((NRF_BELLBOARD_Type*)0)->EVENTS_TRIGGERED)
+
 /** @brief BELLBOARD events. */
 typedef enum
 {
@@ -148,6 +152,15 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_task_address_get(NRF_BELLBOARD_Type con
                                                           nrf_bellboard_task_t       task);
 
 /**
+ * @brief Function for getting the specified BELLBOARD TRIGGERED event.
+ *
+ * @param[in] index Event index.
+ *
+ * @return The specified BELLBOARD TRIGGERED event.
+ */
+NRF_STATIC_INLINE nrf_bellboard_event_t nrf_bellboard_triggered_event_get(uint8_t index);
+
+/**
  * @brief Function for getting the specified BELLBOARD TRIGGER task.
  *
  * @param[in] index Task index.
@@ -249,6 +262,11 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_task_address_get(NRF_BELLBOARD_Type con
                                                           nrf_bellboard_task_t       task)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+}
+
+NRF_STATIC_INLINE nrf_bellboard_event_t nrf_bellboard_triggered_event_get(uint8_t index)
+{
+    return (nrf_bellboard_event_t)NRFX_OFFSETOF(NRF_BELLBOARD_Type, EVENTS_TRIGGERED[index]);
 }
 
 NRF_STATIC_INLINE nrf_bellboard_task_t nrf_bellboard_trigger_task_get(uint8_t index)
