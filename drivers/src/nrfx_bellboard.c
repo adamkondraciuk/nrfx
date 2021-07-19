@@ -5,13 +5,7 @@
 #if NRFX_CHECK(NRFX_BELLBOARD_ENABLED)
 
 #include <nrfx_bellboard.h>
-
-static const IRQn_Type m_int_number[] = {
-    BELLBOARD0_IRQn,
-    BELLBOARD1_IRQn,
-    BELLBOARD2_IRQn,
-    BELLBOARD3_IRQn,
-};
+#include <nrf_bitmask.h>
 
 typedef struct
 {
@@ -52,15 +46,17 @@ nrfx_err_t nrfx_bellboard_trigger(nrfx_bellboard_domain_t domain, uint8_t task_i
     }
 
     /* TODO: Check if domain has access to given task, return NRFX_ERROR_FORBIDDEN if not */
-    nrf_bellboard_task_trigger(p_reg, offsetof(NRF_BELLBOARD_Type, TASKS_TRIGGER[task_id]));
+    nrfy_bellboard_task_trigger(p_reg, nrf_bellboard_trigger_task_get(task_id));
     return NRFX_SUCCESS;
 }
 
 nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
+                               uint8_t                        interrupt_priority,
                                nrfx_bellboard_event_handler_t event_handler,
                                void *                         p_context)
 {
     NRFX_ASSERT(p_instance);
+
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     if (p_cb->state == NRFX_DRV_STATE_INITIALIZED) {
         return NRFX_ERROR_ALREADY_INITIALIZED;
@@ -70,7 +66,12 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
     p_cb->handler = event_handler;
     p_cb->context = p_context;
     p_cb->int_idx = p_instance->int_idx;
-    NVIC_EnableIRQ(m_int_number[p_instance->int_idx]);
+
+    nrfy_bellboard_int_init(NRF_BELLBOARD,
+                            0,
+                            interrupt_priority,
+                            false,
+                            p_instance->int_idx);
 
     return NRFX_SUCCESS;
 }
@@ -79,9 +80,11 @@ void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
 {
     NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
+
+    nrfy_bellboard_int_uninit(p_instance->int_idx);
+
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NVIC_DisableIRQ(m_int_number[p_instance->int_idx]);
     p_cb->handler = NULL;
     p_cb->int_idx = 0;
 }
@@ -91,7 +94,7 @@ void nrfx_bellboard_int_enable(nrfx_bellboard_t const * p_instance, uint32_t mas
     NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrf_bellboard_int_enable(NRF_BELLBOARD, p_instance->int_idx, mask);
+    nrfy_bellboard_int_enable(NRF_BELLBOARD, p_instance->int_idx, mask);
 }
 
 void nrfx_bellboard_int_disable(nrfx_bellboard_t const * p_instance, uint32_t mask)
@@ -99,43 +102,43 @@ void nrfx_bellboard_int_disable(nrfx_bellboard_t const * p_instance, uint32_t ma
     NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrf_bellboard_int_disable(NRF_BELLBOARD, p_instance->int_idx, mask);
+    nrfy_bellboard_int_disable(NRF_BELLBOARD, p_instance->int_idx, mask);
 }
 
 static void bellboard_irq_handler(uint8_t interrupt_idx)
 {
     uint8_t inst_idx = NRFX_BELLBOARD_ENABLED_COUNT;
+
     /* Pending interrupts registers are cleared when event is cleared.
      * Add current pending interrupts to be processed later.
      */
     for (int i = 0; i < NRFX_BELLBOARD_ENABLED_COUNT; i++)
     {
-        if (m_cb[i].handler != NULL)
+        if (m_cb[i].state == NRFX_DRV_STATE_INITIALIZED)
         {
-            m_cb[i].int_pend |= nrf_bellboard_int_pending_get(NRF_BELLBOARD, m_cb[i].int_idx);
-        }
-        if (m_cb[i].int_idx == interrupt_idx && inst_idx == NRFX_BELLBOARD_ENABLED_COUNT)
-        {
-            inst_idx = i;
+            m_cb[i].int_pend |= nrfy_bellboard_int_pending_get(NRF_BELLBOARD, m_cb[i].int_idx);
+
+            if (m_cb[i].int_idx == interrupt_idx)
+            {
+                inst_idx = i;
+            }
         }
     }
-    NRFX_ASSERT(inst_idx != NRFX_BELLBOARD_ENABLED_COUNT);
 
-    uint32_t event_num = __CLZ(__RBIT(m_cb[inst_idx].int_pend));
-    nrf_bellboard_event_t event = offsetof(NRF_BELLBOARD_Type, EVENTS_TRIGGERED[event_num]);
+    uint32_t int_pend = m_cb[inst_idx].int_pend;
+    m_cb[inst_idx].int_pend = 0;
 
-    /* Even if current event is cleared, interrupts for other handlers are already pending in NVIC. */
-    if (nrf_bellboard_event_check(NRF_BELLBOARD, event))
-    {
-        nrf_bellboard_event_clear(NRF_BELLBOARD, event);
-    }
-    m_cb[inst_idx].int_pend &= ~(1 << event_num);
+    (void)nrfy_bellboard_events_process(NRF_BELLBOARD, int_pend);
 
     if (m_cb[inst_idx].handler != NULL)
     {
-        m_cb[inst_idx].handler(event_num, m_cb[inst_idx].context);
+        while (int_pend)
+        {
+            uint32_t event_no = nrf_bitmask_trailing_zeros_get(int_pend);
+            m_cb[inst_idx].handler(event_no, m_cb[inst_idx].context);
+            nrf_bitmask_bit_clear(event_no, (void *)&int_pend);
+        }
     }
-
 }
 
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)

@@ -4,7 +4,7 @@
 #define NRFX_BELLBOARD_H__
 
 #include <nrfx.h>
-#include <hal/nrf_bellboard.h>
+#include <haly/nrfy_bellboard.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -84,6 +84,7 @@ nrfx_err_t nrfx_bellboard_trigger(nrfx_bellboard_domain_t domain, uint8_t task_i
  * @brief Initialize BELLBOARD driver instance.
  *
  * @param[in] p_instance    Pointer to BELLBOARD driver instance.
+ * @param[in] irq_priority  Interrupt priority.
  * @param[in] event_handler Function to be called on bellboard interrupt.
  * @param[in] p_context     User context passed to event handler.
  *
@@ -91,6 +92,7 @@ nrfx_err_t nrfx_bellboard_trigger(nrfx_bellboard_domain_t domain, uint8_t task_i
  * @retval NRFX_ERROR_ALREADY_INITIALIZED Instance already initialized.
  */
 nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
+                               uint8_t                        irq_priority,
                                nrfx_bellboard_event_handler_t event_handler,
                                void *                         p_context);
 
