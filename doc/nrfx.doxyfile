@@ -920,6 +920,7 @@ WARN_LOGFILE           = warnings_nrfx.txt
 INPUT                  = ../helpers \
                          ../drivers \
                          ../hal \
+                         ../haly \
                          ../soc \
                          ../templates/nrfx_glue.h \
                          ../templates/nrfx_log.h \
