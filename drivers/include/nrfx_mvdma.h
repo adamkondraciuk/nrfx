@@ -4,8 +4,7 @@
 #define NRFX_MVDMA_H__
 
 #include <nrfx.h>
-#include <hal/nrf_mvdma.h>
-#include <helpers/include/nrfx_vdma.h>
+#include <haly/nrfy_mvdma.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -59,12 +58,7 @@ typedef struct
 } nrfx_mvdma_copy_request_t;
 
 /** @brief Structure describing list execution request for the MVDMA driver. */
-typedef struct
-{
-    nrfx_vdma_job_t * p_source_job_list; ///< Pointer to the source job list.
-    nrfx_vdma_job_t * p_sink_job_list;   ///< Pointer to the sink job list.
-    void *            p_context;         ///< Request context.
-} nrfx_mvdma_list_request_t;
+typedef nrfy_mvdma_list_request_t nrfx_mvdma_list_request_t;
 
 /** @brief MVDMA driver event types. */
 typedef enum
@@ -74,12 +68,7 @@ typedef enum
 } nrfx_mvdma_evt_type_t;
 
 /** @brief Auxiliary structure describing the MVDMA event for job list with unspecified direction. */
-typedef struct
-{
-    nrfx_vdma_job_t * p_jobs;    ///< Pointer to the job list.
-    size_t            job_count; ///< Number of jobs executed, including terminating job.
-    uint32_t          last_addr; ///< Last source address accessed by the peripheral when the list was processed.
-} nrfx_mvdma_list_evt_t;
+typedef nrfy_mvdma_list_desc_t nrfx_mvdma_list_evt_t;
 
 /** @brief Stucture describing the MVDMA event for the source job list. */
 typedef struct
@@ -152,12 +141,14 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_request  Pointer to the structure that decribe the request.
+ * @param[in] p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS    Execution of job list requested successfully.
  * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
  */
 nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
-                                   nrfx_mvdma_list_request_t const * p_request);
+                                   nrfx_mvdma_list_request_t const * p_request,
+                                   void *                            p_context);
 
 /**
  * @brief Function for checking if the specified driver instance is busy.

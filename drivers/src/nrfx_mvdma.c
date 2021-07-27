@@ -25,11 +25,8 @@ static mvdma_control_block_t m_cb[NRFX_MVDMA_ENABLED_COUNT];
 static void mvdma_config_reset(NRF_MVDMA_Type * p_reg)
 {
     // Event RESET arrives immediately after triggering the corresponding task.
-    nrf_mvdma_task_trigger(p_reg, NRF_MVDMA_TASK_RESET);
-    while (!nrf_mvdma_event_check(p_reg, NRF_MVDMA_EVENT_RESET))
-    {}
-    nrf_mvdma_event_clear(p_reg, NRF_MVDMA_EVENT_RESET);
-    nrf_mvdma_mode_set(p_reg, NRF_MVDMA_MODE_SINGLE);
+    nrfy_mvdma_reset(p_reg, true);
+    nrfy_mvdma_mode_set(p_reg, NRF_MVDMA_MODE_SINGLE);
 }
 
 nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
@@ -51,12 +48,13 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
     }
 
     mvdma_config_reset(p_instance->p_reg);
-    nrf_mvdma_int_enable(p_instance->p_reg, NRF_MVDMA_INT_END_MASK |
-                                            NRF_MVDMA_INT_STOPPED_MASK |
-                                            NRF_MVDMA_INT_SOURCEBUSERROR_MASK |
-                                            NRF_MVDMA_INT_SINKBUSERROR_MASK);
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number((void *)p_instance->p_reg), interrupt_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number((void *)p_instance->p_reg));
+    nrfy_mvdma_int_init(p_instance->p_reg,
+                        NRF_MVDMA_INT_END_MASK |
+                        NRF_MVDMA_INT_STOPPED_MASK |
+                        NRF_MVDMA_INT_SOURCEBUSERROR_MASK |
+                        NRF_MVDMA_INT_SINKBUSERROR_MASK,
+                        interrupt_priority,
+                        true);
 
     p_cb->busy = false;
     p_cb->handler = event_handler;
@@ -89,15 +87,20 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
     nrfx_vdma_job_fill(&p_cb->sink_job, p_request->p_sink, p_request->size, 0);
     p_cb->p_context = p_request->p_context;
 
-    nrf_mvdma_source_address_set(p_instance->p_reg, (uint32_t)&p_cb->source_job);
-    nrf_mvdma_sink_address_set(p_instance->p_reg, (uint32_t)&p_cb->sink_job);
-    nrf_mvdma_task_trigger(p_instance->p_reg, NRF_MVDMA_TASK_START0);
+    nrfx_mvdma_list_request_t p_list_request =
+    {
+        .p_source_job_list = &p_cb->source_job,
+        .p_sink_job_list   = &p_cb->sink_job
+    };
+    nrfy_mvdma_job_list_set(p_instance->p_reg, &p_list_request);
+    nrfy_mvdma_start(p_instance->p_reg, NULL);
 
     return NRFX_SUCCESS;
 }
 
 nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
-                                   nrfx_mvdma_list_request_t const * p_job_list)
+                                   nrfx_mvdma_list_request_t const * p_request,
+                                   void *                            p_context)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
@@ -111,11 +114,10 @@ nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
     // MVDMA reset is needed in case of starting new transfer after abort or error.
     mvdma_config_reset(p_instance->p_reg);
 
-    p_cb->p_context = p_job_list->p_context;
+    p_cb->p_context = p_context;
 
-    nrf_mvdma_source_address_set(p_instance->p_reg, (uint32_t)p_job_list->p_source_job_list);
-    nrf_mvdma_sink_address_set(p_instance->p_reg, (uint32_t)p_job_list->p_sink_job_list);
-    nrf_mvdma_task_trigger(p_instance->p_reg, NRF_MVDMA_TASK_START0);
+    nrfy_mvdma_job_list_set(p_instance->p_reg, p_request);
+    nrfy_mvdma_start(p_instance->p_reg, NULL);
 
     return NRFX_SUCCESS;
 }
@@ -133,7 +135,7 @@ void nrfx_mvdma_abort(nrfx_mvdma_t const * p_instance)
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrf_mvdma_task_trigger(p_instance->p_reg, NRF_MVDMA_TASK_STOP);
+    nrfy_mvdma_abort(p_instance->p_reg, NULL);
 }
 
 void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
@@ -141,8 +143,8 @@ void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
-    NRFX_IRQ_DISABLE(nrfx_get_irq_number((void *)p_instance->p_reg));
-    nrf_mvdma_task_trigger(p_instance->p_reg, NRF_MVDMA_TASK_RESET);
+    nrfy_mvdma_reset(p_instance->p_reg, false);
+
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
@@ -150,42 +152,37 @@ static void mvdma_irq_handler(NRF_MVDMA_Type * p_reg, mvdma_control_block_t * p_
 {
     nrfx_mvdma_event_t event;
 
-    event.source.list.p_jobs    = (nrfx_vdma_job_t *)nrf_mvdma_source_address_get(p_reg);
-    event.source.list.job_count = nrf_mvdma_source_job_count_get(p_reg);
-    event.source.list.last_addr = nrf_mvdma_last_source_address_get(p_reg);
-    event.source.error          = NRF_MVDMA_SOURCE_ERROR_NONE;
+    nrfy_mvdma_source_job_description_get(p_reg, (nrfy_mvdma_list_desc_t*)&event.source.list);
+    event.source.error = NRF_MVDMA_SOURCE_ERROR_NONE;
 
-    event.sink.list.p_jobs    = (nrfx_vdma_job_t *)nrf_mvdma_sink_address_get(p_reg);
-    event.sink.list.job_count = nrf_mvdma_sink_job_count_get(p_reg);
-    event.sink.list.last_addr = nrf_mvdma_last_sink_address_get(p_reg);
-    event.sink.error          = NRF_MVDMA_SINK_ERROR_NONE;
+    nrfy_mvdma_sink_job_description_get(p_reg, (nrfy_mvdma_list_desc_t*)&event.sink.list);
+    event.sink.error = NRF_MVDMA_SINK_ERROR_NONE;
+
+    nrfx_mvdma_list_request_t list_request =
+    {
+        .p_source_job_list = event.source.list.p_jobs,
+        .p_sink_job_list   = event.sink.list.p_jobs
+    };
+
+    uint32_t mask = NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR) |
+                    NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR) |
+                    NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_STOPPED) |
+                    NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_END);
+
+    uint32_t event_mask = nrfy_mvdma_events_process(p_reg, mask, &list_request);
 
     event.type = NRFX_MVDMA_EVT_REQUEST_DONE;
 
-    if (nrf_mvdma_event_check(p_reg, NRF_MVDMA_EVENT_SOURCEBUSERROR))
+    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR))
     {
-        nrf_mvdma_event_clear(p_reg, NRF_MVDMA_EVENT_SOURCEBUSERROR);
         event.type = NRFX_MVDMA_EVT_ERROR;
-        event.source.error = nrf_mvdma_source_error_get(p_reg);
+        event.source.error = nrfy_mvdma_source_error_get(p_reg);
     }
 
-    if (nrf_mvdma_event_check(p_reg, NRF_MVDMA_EVENT_SINKBUSERROR))
+    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR))
     {
-        nrf_mvdma_event_clear(p_reg, NRF_MVDMA_EVENT_SINKBUSERROR);
         event.type = NRFX_MVDMA_EVT_ERROR;
-        event.sink.error = nrf_mvdma_sink_error_get(p_reg);
-    }
-
-    if (event.type != NRFX_MVDMA_EVT_ERROR)
-    {
-        if (nrf_mvdma_event_check(p_reg, NRF_MVDMA_EVENT_STOPPED))
-        {
-            nrf_mvdma_event_clear(p_reg, NRF_MVDMA_EVENT_STOPPED);
-        }
-        else
-        {
-            nrf_mvdma_event_clear(p_reg, NRF_MVDMA_EVENT_END);
-        }
+        event.sink.error = nrfy_mvdma_sink_error_get(p_reg);
     }
 
     p_cb->busy = false;
