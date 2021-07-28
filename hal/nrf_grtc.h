@@ -32,6 +32,20 @@ extern "C" {
 /** @brief Bitmask of the higher 32-bits of capture/compare register for the RTCOUNTER. */
 #define NRF_GRTC_RTCOUNTER_CCH_MASK GRTC_RTCOMPAREH_VALUE_Msk
 
+/**
+ * @brief Symbol describing number of interrupt groups.
+ *
+ * @todo Remove magic numbers when corresponding defines will be available in MDK.
+ */
+#define NRF_GRTC_INTERRUPT_GROUPS_COUNT 15
+
+/**
+ * @brief Symbol describing interrupt mask.
+ *
+ * @todo Remove magic numbers when corresponding defines will be available in MDK.
+ */
+#define NRF_GRTC_INTEN_MASK 0x7FFFFFF
+
 /** @brief GRTC tasks. */
 typedef enum
 {
@@ -148,24 +162,24 @@ typedef enum
  *       Disable the corresponding compare event before, or use
  *       @ref nrf_grtc_sys_counter_cc_add_set instead.
  *
- * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] channel  The specified capture/compare channel.
- * @param[in] cc_value Compare value to be set in 1 MHz units.
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel The specified capture/compare channel.
+ * @param[in] cc_value   Compare value to be set in 1 MHz units.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
-                                                   uint32_t        channel,
+                                                   uint8_t         cc_channel,
                                                    uint64_t        cc_value);
 
 /**
  * @brief Function for getting the compare value of channel for the SYSCOUNTER.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] channel The specified capture/compare channel.
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel The specified capture/compare channel.
  *
  * @return Value from the specified capture/compare register in 1MHz units.
  */
 NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_cc_get(NRF_GRTC_Type const * p_reg,
-                                                       uint32_t              channel);
+                                                       uint8_t               cc_channel);
 
 /**
  * @brief Function for setting the value to be added to capture/compare register for
@@ -181,13 +195,13 @@ NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_cc_get(NRF_GRTC_Type const * p_r
  *       If the capture/compare register overflows after this write, then the corresponding event
  *       is generated immediately.
  *
- * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
- * @param[in] channel   The specified capture/compare channel.
- * @param[in] value     Value to be added in 1 MHz units.
- * @param[in] reference Configuration of adding mode.
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel The specified capture/compare channel.
+ * @param[in] value      Value to be added in 1 MHz units.
+ * @param[in] reference  Configuration of adding mode.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *             p_reg,
-                                                       uint32_t                    channel,
+                                                       uint8_t                     cc_channel,
                                                        uint32_t                    value,
                                                        nrf_grtc_cc_add_reference_t reference);
 
@@ -433,32 +447,42 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_task_address_get(NRF_GRTC_Type const * p_reg
 NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_task_t task);
 
 /**
+ * @brief Function for getting the 1 MHz SYSCOUNTER timer capture task associated with the
+ *        specified channel.
+ *
+ * @param[in] cc_channel Capture channel.
+ *
+ * @return Capture task.
+ */
+NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_capture_task_get(uint8_t cc_channel);
+
+/**
  * @brief Function for enabling SYSCOUNTER compare event.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] channel Channel number of compare event to be enabled.
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Channel number of compare event to be enabled.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_enable(NRF_GRTC_Type * p_reg,
-                                                                 uint8_t         channel);
+                                                                 uint8_t         cc_channel);
 
 /**
  * @brief Function for disabling SYSCOUNTER compare event.
  *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] channel Channel number of compare event to be disabled.
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Channel number of compare event to be disabled.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type * p_reg,
-                                                                  uint8_t         channel);
+                                                                  uint8_t         cc_channel);
 
 /**
  * @brief Function for getting the SYSCOUNTER compare event associated with the specified
- *        compare channel.
+ *        compare cc_channel.
  *
- * @param[in] channel Compare channel number.
+ * @param[in] cc_channel Compare channel number.
  *
  * @return Requested compare event.
  */
-NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t channel);
+NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t cc_channel);
 
 /**
  * @brief Function for setting the SYSCOUNTER.
@@ -562,35 +586,35 @@ NRF_STATIC_INLINE uint16_t nrf_grtc_timeout_get(NRF_GRTC_Type const * p_reg);
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
-                                                   uint32_t        channel,
+                                                   uint8_t         cc_channel,
                                                    uint64_t        cc_value)
 {
-    NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
+    NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
     uint32_t cc_h = (uint32_t)(cc_value >> 32);
     NRFX_ASSERT(cc_h <= NRF_GRTC_SYSCOUNTER_CCH_MASK);
 
-    p_reg->CC[channel].CCL = (uint32_t)cc_value;
-    p_reg->CC[channel].CCH = cc_h & NRF_GRTC_SYSCOUNTER_CCH_MASK;
+    p_reg->CC[cc_channel].CCL = (uint32_t)cc_value;
+    p_reg->CC[cc_channel].CCH = cc_h & NRF_GRTC_SYSCOUNTER_CCH_MASK;
 }
 
 NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_cc_get(NRF_GRTC_Type const * p_reg,
-                                                       uint32_t              channel)
+                                                       uint8_t               cc_channel)
 {
-    NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
-    uint32_t cc_h = p_reg->CC[channel].CCH;
+    NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
+    uint32_t cc_h = p_reg->CC[cc_channel].CCH;
 
-    return (uint64_t)p_reg->CC[channel].CCL | ((uint64_t)cc_h << 32);
+    return (uint64_t)p_reg->CC[cc_channel].CCL | ((uint64_t)cc_h << 32);
 }
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *             p_reg,
-                                                       uint32_t                    channel,
+                                                       uint8_t                     cc_channel,
                                                        uint32_t                    value,
                                                        nrf_grtc_cc_add_reference_t reference)
 {
-    NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
+    NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
     NRFX_ASSERT(value <= NRF_GRTC_SYSCOUNTER_CCADD_MASK);
 
-    p_reg->CC[channel].CCADD = ((uint32_t)reference << GRTC_CC_CCADD_REFERENCE_Pos) |
+    p_reg->CC[cc_channel].CCADD = ((uint32_t)reference << GRTC_CC_CCADD_REFERENCE_Pos) |
                                (value & NRF_GRTC_SYSCOUNTER_CCADD_MASK);
 }
 
@@ -943,21 +967,26 @@ NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_tas
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
 
-NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_enable(NRF_GRTC_Type * p_reg,
-                                                                 uint8_t         channel)
+NRF_STATIC_INLINE nrf_grtc_task_t nrf_grtc_capture_task_get(uint8_t cc_channel)
 {
-    p_reg->CC[channel].CCEN = GRTC_CC_CCEN_ACTIVE_Enable;
+    return (nrf_grtc_task_t)NRFX_OFFSETOF(NRF_GRTC_Type, TASKS_CAPTURE[cc_channel]);
+}
+
+NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_enable(NRF_GRTC_Type * p_reg,
+                                                                 uint8_t         cc_channel)
+{
+    p_reg->CC[cc_channel].CCEN = GRTC_CC_CCEN_ACTIVE_Enable;
 }
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type * p_reg,
-                                                                  uint8_t         channel)
+                                                                  uint8_t         cc_channel)
 {
-    p_reg->CC[channel].CCEN = GRTC_CC_CCEN_ACTIVE_Disable;
+    p_reg->CC[cc_channel].CCEN = GRTC_CC_CCEN_ACTIVE_Disable;
 }
 
-NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t channel)
+NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t cc_channel)
 {
-    return (nrf_grtc_event_t)NRFX_OFFSETOF(NRF_GRTC_Type, EVENTS_COMPARE[channel]);
+    return (nrf_grtc_event_t)NRFX_OFFSETOF(NRF_GRTC_Type, EVENTS_COMPARE[cc_channel]);
 }
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enable)
