@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(int32_t irq_number);
+NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(IRQn_Type irq_number);
 
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(int32_t irq_number);
+NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number);
 
 /**
  * @defgroup nrfy_common Common module
@@ -76,7 +76,7 @@ NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(int32_t irq_number);
 
 /** @} */
 
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(int32_t irq_number)
+NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(IRQn_Type irq_number)
 {
     nrf_barrier_rw();
     bool is_enabled = NRFX_IRQ_IS_ENABLED(irq_number);
@@ -84,7 +84,7 @@ NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(int32_t irq_number)
     return is_enabled;
 }
 
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(int32_t irq_number)
+NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number)
 {
     nrf_barrier_rw();
     bool is_pending = NRFX_IRQ_IS_PENDING(irq_number);
