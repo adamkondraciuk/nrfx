@@ -92,7 +92,7 @@ typedef enum
  * @param[in] ch     Channel.
  * @param[in] cc_val Compare value to be set.
  */
-NRF_STATIC_INLINE  void nrf_rtc_cc_set(NRF_RTC_Type * p_reg, uint32_t ch, uint32_t cc_val);
+NRF_STATIC_INLINE void nrf_rtc_cc_set(NRF_RTC_Type * p_reg, uint32_t ch, uint32_t cc_val);
 
 /**
  * @brief Function for returning the compare value for a channel.
@@ -102,7 +102,7 @@ NRF_STATIC_INLINE  void nrf_rtc_cc_set(NRF_RTC_Type * p_reg, uint32_t ch, uint32
  *
  * @return COMPARE[ch] value.
  */
-NRF_STATIC_INLINE  uint32_t nrf_rtc_cc_get(NRF_RTC_Type const * p_reg, uint32_t ch);
+NRF_STATIC_INLINE uint32_t nrf_rtc_cc_get(NRF_RTC_Type const * p_reg, uint32_t ch);
 
 /**
  * @brief Function for enabling interrupts.
