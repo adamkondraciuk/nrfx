@@ -147,6 +147,12 @@ typedef enum
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_SHORT_COMPARE5_STOP_MASK = TIMER_SHORTS_COMPARE5_STOP_Msk,   ///< Shortcut for stopping the timer based on compare 5.
 #endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_SHORT_COMPARE6_STOP_MASK = TIMER_SHORTS_COMPARE6_STOP_Msk,   ///< Shortcut for stopping the timer based on compare 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_SHORT_COMPARE7_STOP_MASK = TIMER_SHORTS_COMPARE7_STOP_Msk,   ///< Shortcut for stopping the timer based on compare 7.
+#endif
     NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK = TIMER_SHORTS_COMPARE0_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 0.
     NRF_TIMER_SHORT_COMPARE1_CLEAR_MASK = TIMER_SHORTS_COMPARE1_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 1.
     NRF_TIMER_SHORT_COMPARE2_CLEAR_MASK = TIMER_SHORTS_COMPARE2_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 2.
@@ -156,6 +162,12 @@ typedef enum
 #endif
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_SHORT_COMPARE5_CLEAR_MASK = TIMER_SHORTS_COMPARE5_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 5.
+#endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_SHORT_COMPARE6_CLEAR_MASK = TIMER_SHORTS_COMPARE6_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_SHORT_COMPARE7_CLEAR_MASK = TIMER_SHORTS_COMPARE7_CLEAR_Msk, ///< Shortcut for clearing the timer based on compare 7.
 #endif
 } nrf_timer_short_mask_t;
 
@@ -206,6 +218,12 @@ typedef enum
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_CC_CHANNEL5,     ///< Timer capture/compare channel 5.
 #endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_CC_CHANNEL6,     ///< Timer capture/compare channel 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_CC_CHANNEL7,     ///< Timer capture/compare channel 7.
+#endif
 } nrf_timer_cc_channel_t;
 
 /** @brief Timer interrupts. */
@@ -220,6 +238,12 @@ typedef enum
 #endif
 #if defined(TIMER_INTENSET_COMPARE5_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_TIMER_INT_COMPARE5_MASK = TIMER_INTENSET_COMPARE5_Msk, ///< Timer interrupt from compare event on channel 5.
+#endif
+#if defined(TIMER_INTENSET_COMPARE6_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_INT_COMPARE6_MASK = TIMER_INTENSET_COMPARE6_Msk, ///< Timer interrupt from compare event on channel 6.
+#endif
+#if defined(TIMER_INTENSET_COMPARE7_Msk) || defined(__NRFX_DOXYGEN__)
+    NRF_TIMER_INT_COMPARE7_MASK = TIMER_INTENSET_COMPARE7_Msk, ///< Timer interrupt from compare event on channel 7.
 #endif
 } nrf_timer_int_mask_t;
 
