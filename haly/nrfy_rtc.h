@@ -16,8 +16,7 @@ NRFY_STATIC_INLINE bool __nrfy_internal_rtc_event_handle(NRF_RTC_Type *  p_reg,
                                                          uint32_t *      p_event_mask);
 
 NRFY_STATIC_INLINE uint32_t __nrfy_internal_rtc_events_process(NRF_RTC_Type * p_reg,
-                                                               uint32_t       mask,
-                                                               uint32_t       channel_count);
+                                                               uint32_t       mask);
 
 NRFY_STATIC_INLINE void __nrfy_internal_rtc_event_enabled_clear(NRF_RTC_Type *  p_reg,
                                                                 uint32_t        mask,
@@ -64,10 +63,12 @@ NRFY_STATIC_INLINE void nrfy_rtc_int_init(NRF_RTC_Type * p_reg,
 {
     __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_TICK);
     __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_OVERFLOW);
-    __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_COMPARE_0);
-    __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_COMPARE_1);
-    __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_COMPARE_2);
-    __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, NRF_RTC_EVENT_COMPARE_3);
+
+    for (size_t i = 0; i < NRF_RTC_CC_COUNT_MAX; i++)
+    {
+        __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, nrf_rtc_compare_event_get(i));
+    }
+    
     nrf_barrier_w();
 
     NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), irq_priority);
@@ -93,21 +94,17 @@ NRFY_STATIC_INLINE void nrfy_rtc_int_uninit(NRF_RTC_Type * p_reg)
 /**
  * @brief Function for processing the specified RTC events.
  *
- * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
- * @param[in] mask          Mask of events to be processed, created by @ref NRFY_EVENT_TO_INT_BITMASK().
- * @param[in] channel_count Number of RTC compare channels available for given peripheral instance.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of events to be processed, created by @ref NRFY_EVENT_TO_INT_BITMASK().
  * 
  * @return Mask of events that were generated and processed.
  *         To be checked against the result of @ref NRFY_EVENT_TO_INT_BITMASK().
  */
 NRFY_STATIC_INLINE uint32_t nrfy_rtc_events_process(NRF_RTC_Type * p_reg,
-                                                    uint32_t       mask,
-                                                    uint32_t       channel_count)
+                                                    uint32_t       mask)
 {
     nrf_barrier_r();
-    uint32_t evt_mask = __nrfy_internal_rtc_events_process(p_reg,
-                                                           mask,
-                                                           channel_count);
+    uint32_t evt_mask = __nrfy_internal_rtc_events_process(p_reg, mask);
     nrf_barrier_w();
     return evt_mask;
 }
@@ -167,19 +164,19 @@ NRFY_STATIC_INLINE void nrfy_rtc_event_int_disable(NRF_RTC_Type * p_reg,
 
 /** @refhal{nrf_rtc_cc_set} */
 NRFY_STATIC_INLINE void nrfy_rtc_cc_set(NRF_RTC_Type * p_reg,
-                                        uint32_t       channel,
+                                        uint32_t       ch,
                                         uint32_t       cc_val)
 {
-    nrf_rtc_cc_set(p_reg, channel, cc_val);
+    nrf_rtc_cc_set(p_reg, ch, cc_val);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_rtc_cc_get} */
 NRFY_STATIC_INLINE uint32_t nrfy_rtc_cc_get(NRF_RTC_Type const * p_reg,
-                                            uint32_t             channel)
+                                            uint32_t             ch)
 {
     nrf_barrier_rw();
-    uint32_t cc = nrf_rtc_cc_get(p_reg, channel);
+    uint32_t cc = nrf_rtc_cc_get(p_reg, ch);
     nrf_barrier_r();
     return cc;
 }
@@ -275,7 +272,7 @@ NRFY_STATIC_INLINE uint32_t nrfy_rtc_counter_get(NRF_RTC_Type const * p_reg)
 
 /** @refhal{nrf_rtc_prescaler_set} */
 NRFY_STATIC_INLINE void nrfy_rtc_prescaler_set(NRF_RTC_Type * p_reg,
-                                               uint32_t             val)
+                                               uint32_t       val)
 {
     nrf_rtc_prescaler_set(p_reg, val);
     nrf_barrier_w();
@@ -354,12 +351,11 @@ NRFY_STATIC_INLINE bool __nrfy_internal_rtc_event_handle(NRF_RTC_Type *  p_reg,
 }
 
 NRFY_STATIC_INLINE uint32_t __nrfy_internal_rtc_events_process(NRF_RTC_Type * p_reg,
-                                                               uint32_t       mask,
-                                                               uint32_t       channel_count)
+                                                               uint32_t       mask)
 {
     uint32_t event_mask = 0;
 
-    for (uint32_t i = 0; i < channel_count; i++)
+    for (uint32_t i = 0; i < NRF_RTC_CC_COUNT_MAX; i++)
     {
         (void)__nrfy_internal_rtc_event_handle(p_reg,
                                                mask,

@@ -83,7 +83,7 @@ typedef struct
  */
 #define NRFX_RTC_DEFAULT_CONFIG                                  \
 {                                                                \
-    .prescaler          = RTC_FREQ_TO_PRESCALER(32768),          \
+    .prescaler          = NRF_RTC_FREQ_TO_PRESCALER(32768),      \
     .interrupt_priority = NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY,  \
     .tick_latency       = NRFX_RTC_US_TO_TICKS(2000, 32768),     \
     .reliable           = false,                                 \
@@ -296,10 +296,7 @@ NRFX_STATIC_INLINE void nrfx_rtc_int_disable(nrfx_rtc_t const * p_instance,
     *p_mask = nrfy_rtc_int_enable_check(p_instance->p_reg, ~0uL);
     nrfy_rtc_int_disable(p_instance->p_reg, NRF_RTC_INT_TICK_MASK |
                                             NRF_RTC_INT_OVERFLOW_MASK |
-                                            NRF_RTC_INT_COMPARE0_MASK |
-                                            NRF_RTC_INT_COMPARE1_MASK |
-                                            NRF_RTC_INT_COMPARE2_MASK |
-                                            NRF_RTC_INT_COMPARE3_MASK);
+                                            NRF_RTC_ALL_CHANNELS_INT_MASK);
 }
 
 NRFX_STATIC_INLINE void nrfx_rtc_int_enable(nrfx_rtc_t const * p_instance, uint32_t mask)
