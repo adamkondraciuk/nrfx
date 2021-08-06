@@ -416,26 +416,30 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 
     nrfy_spim_config_t config =
     {
-        .pins.sck_pin  = p_config->sck_pin,
-        .pins.mosi_pin = p_config->mosi_pin == NRFX_SPIM_PIN_NOT_USED ?
+        .pins = {
+            .sck_pin   = p_config->sck_pin,
+            .mosi_pin  = p_config->mosi_pin == NRFX_SPIM_PIN_NOT_USED ?
                          NRF_SPIM_PIN_NOT_CONNECTED : p_config->mosi_pin,
-        .pins.miso_pin = p_config->miso_pin == NRFX_SPIM_PIN_NOT_USED ?
+            .miso_pin  = p_config->miso_pin == NRFX_SPIM_PIN_NOT_USED ?
                          NRF_SPIM_PIN_NOT_CONNECTED : p_config->miso_pin,
+        },
         .orc           = p_config->orc,
         .frequency     = p_config->frequency,
         .mode          = p_config->mode,
         .bit_order     = p_config->bit_order,
 #if NRFY_SPIM_HAS_EXTENDED
-        .p_ext_config  = NULL
+        .p_ext_config = NULL
 #endif
     };
 #if NRFX_SPIM_EXTENDED_ENABLED
     nrfy_spim_ext_config_t ext_config =
     {
-        .pins.dcx_pin  = p_config->dcx_pin == NRFX_SPIM_PIN_NOT_USED ?
+        .pins = {
+            .dcx_pin   = p_config->dcx_pin == NRFX_SPIM_PIN_NOT_USED ?
                          NRF_SPIM_PIN_NOT_CONNECTED : p_config->dcx_pin,
-        .pins.csn_pin  = p_config->use_hw_ss ?
+            .csn_pin   = p_config->use_hw_ss ?
                          p_config->csn_pin : NRF_SPIM_PIN_NOT_CONNECTED,
+        },
         .csn_duration  = p_config->use_hw_ss ? p_config->ss_duration : 0,
         .csn_pol       = p_config->use_hw_ss ?
                          (p_config->ss_active_high == true ?

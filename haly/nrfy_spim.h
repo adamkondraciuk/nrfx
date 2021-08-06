@@ -71,10 +71,10 @@ NRFY_STATIC_INLINE void __nrfy_internal_spim_event_enabled_clear(NRF_SPIM_Type *
 /** @brief Structure describing single SPIM transfer. */
 struct nrfy_spim_xfer_desc_t
 {
-    void const * p_tx_buffer; ///< Pointer to the TX data buffer.
-    size_t       tx_length;   ///< TX data buffer length.
-    void *       p_rx_buffer; ///< Pointer to the RX data buffer.
-    size_t       rx_length;   ///< RX data buffer length.
+    uint8_t const * p_tx_buffer; ///< Pointer to the TX data buffer.
+    size_t          tx_length;   ///< TX data buffer length.
+    uint8_t *       p_rx_buffer; ///< Pointer to the RX data buffer.
+    size_t          rx_length;   ///< RX data buffer length.
 };
 
 #if NRFY_SPIM_HAS_EXTENDED
