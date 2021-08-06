@@ -208,7 +208,7 @@ static void spim_abort(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
     nrfy_spim_abort(p_spim, NULL);
     bool stopped;
     uint32_t stopped_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_STOPPED);
-    NRFX_WAIT_FOR(nrfy_spim_events_process(p_spim, NULL, stopped_mask), 100, 1, stopped);
+    NRFX_WAIT_FOR(nrfy_spim_events_process(p_spim, stopped_mask, NULL), 100, 1, stopped);
     if (!stopped)
     {
         NRFX_LOG_ERROR("Failed to stop instance with base address: %p.", (void *)p_spim);
@@ -690,11 +690,12 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance)
 
 static void irq_handler(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
 {
-    uint32_t evt_mask = nrfy_spim_events_process(p_spim, &p_cb->evt.xfer_desc,
+    uint32_t evt_mask = nrfy_spim_events_process(p_spim,
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_STARTED) |
 #endif
-                                                 NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END));
+                                                 NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END),
+                                                 &p_cb->evt.xfer_desc);
 
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
     if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_STARTED))

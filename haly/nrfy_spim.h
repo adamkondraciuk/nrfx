@@ -19,8 +19,8 @@ NRFY_STATIC_INLINE bool __nrfy_internal_spim_event_handle(NRF_SPIM_Type *  p_reg
 
 NRFY_STATIC_INLINE
 uint32_t __nrfy_internal_spim_events_process(NRF_SPIM_Type *               p_reg,
-                                             nrfy_spim_xfer_desc_t const * p_xfer,
-                                             uint32_t                      mask);
+                                             uint32_t                      mask,
+                                             nrfy_spim_xfer_desc_t const * p_xfer);
 
 NRFY_STATIC_INLINE void __nrfy_internal_spim_event_enabled_clear(NRF_SPIM_Type *  p_reg,
                                                                  uint32_t         mask,
@@ -244,11 +244,11 @@ NRFY_STATIC_INLINE void nrfy_spim_int_uninit(NRF_SPIM_Type * p_reg)
  *         To be checked against the result of @ref NRFY_EVENT_TO_INT_BITMASK().
  */
 NRFY_STATIC_INLINE uint32_t nrfy_spim_events_process(NRF_SPIM_Type *               p_reg,
-                                                     nrfy_spim_xfer_desc_t const * p_xfer,
-                                                     uint32_t                      mask)
+                                                     uint32_t                      mask,
+                                                     nrfy_spim_xfer_desc_t const * p_xfer)
 {
     nrf_barrier_r();
-    uint32_t evt_mask = __nrfy_internal_spim_events_process(p_reg, p_xfer, mask);
+    uint32_t evt_mask = __nrfy_internal_spim_events_process(p_reg, mask, p_xfer);
     nrf_barrier_w();
     return evt_mask;
 }
@@ -287,8 +287,9 @@ NRFY_STATIC_INLINE void nrfy_spim_xfer_start(NRF_SPIM_Type *               p_reg
         nrf_barrier_w();
         while (!nrf_spim_event_check(p_reg, NRF_SPIM_EVENT_END))
         {}
-        (void)__nrfy_internal_spim_events_process(p_reg, p_xfer,
-                    NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END));
+        (void)__nrfy_internal_spim_events_process(p_reg,
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END),
+                                                  p_xfer);
     }
     nrf_barrier_w();
 }
@@ -306,11 +307,12 @@ NRFY_STATIC_INLINE void nrfy_spim_abort(NRF_SPIM_Type * p_reg, nrfy_spim_xfer_de
     if (p_xfer)
     {
         nrf_barrier_w();
-        while (!nrf_spim_event_check(p_reg, NRF_SPIM_EVENT_STOPPED))
+        uint32_t evt_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_STOPPED);
+        while (!__nrfy_internal_spim_events_process(p_reg, evt_mask, p_xfer))
         {}
-        (void)__nrfy_internal_spim_events_process(p_reg, p_xfer,
-                    NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_STOPPED) |
-                    NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END));
+        (void)__nrfy_internal_spim_events_process(p_reg,
+                                                  NRFY_EVENT_TO_INT_BITMASK(NRF_SPIM_EVENT_END),
+                                                  NULL);
     }
     nrf_barrier_w();
 }
@@ -688,8 +690,8 @@ NRFY_STATIC_INLINE bool __nrfy_internal_spim_event_handle(NRF_SPIM_Type *  p_reg
 
 NRFY_STATIC_INLINE
 uint32_t __nrfy_internal_spim_events_process(NRF_SPIM_Type *               p_reg,
-                                             nrfy_spim_xfer_desc_t const * p_xfer,
-                                             uint32_t                      mask)
+                                             uint32_t                      mask,
+                                             nrfy_spim_xfer_desc_t const * p_xfer)
 {
     uint32_t evt_mask = 0;
 
