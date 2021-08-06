@@ -77,6 +77,12 @@ typedef enum
 #define NRF_CTZ(value) __CLZ(__RBIT(value))
 #endif
 
+NRF_STATIC_INLINE void nrf_barrier_w(void);
+
+NRF_STATIC_INLINE void nrf_barrier_r(void);
+
+NRF_STATIC_INLINE void nrf_barrier_rw(void);
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_event_readback(void * p_event_reg)
