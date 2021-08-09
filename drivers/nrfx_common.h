@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#if defined(__CORTEX_M)
+#if defined(__CORTEX_M) || defined(__NRFX_DOXYGEN__)
 #define ISA_ARM 1
 #elif defined(__VPR_REV)
 #define ISA_RISCV 1

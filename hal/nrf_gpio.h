@@ -152,6 +152,10 @@ typedef enum
     NRF_GPIO_PIN_SEL_PERIPHERAL = GPIO_PIN_CNF_MCUSEL_Peripheral, ///< Pin controlled by dedicated peripheral.
     NRF_GPIO_PIN_SEL_TND        = GPIO_PIN_CNF_MCUSEL_TND,        ///< Pin controlled by Trace and Debug Subsystem.
 #endif
+#if defined(GPIO_PIN_CNF_CTRLSEL_Msk)
+    NRF_GPIO_PIN_SEL_NETWORK  = GPIO_PIN_CNF_CTRLSEL_RadioCore,    ///< Pin controlled by Network core.
+    NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          ///< Pin controlled by Trace and Debug Subsystem.
+#endif
 #if defined(GPIO_PIN_CNF_CTRLSEL_Msk) || defined(__NRFX_DOXYGEN__)
     NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         ///< Pin controlled by GPIO peripheral.
     NRF_GPIO_PIN_SEL_VPR      = GPIO_PIN_CNF_CTRLSEL_VPR,          ///< Pin controlled by VPR processor.
@@ -161,11 +165,9 @@ typedef enum
     NRF_GPIO_PIN_SEL_I3C      = GPIO_PIN_CNF_CTRLSEL_I3C,          ///< Pin controlled by I3C peripheral.
     NRF_GPIO_PIN_SEL_SERIAL   = GPIO_PIN_CNF_CTRLSEL_Serial,       ///< Pin controlled by SPIM/SPIS/TWIM/TWIS/UARTE peripheral.
     NRF_GPIO_PIN_SEL_HS_SPI   = GPIO_PIN_CNF_CTRLSEL_HSSPI,        ///< Pin controlled by High-speed SPI peripheral.
-    NRF_GPIO_PIN_SEL_NETWORK  = GPIO_PIN_CNF_CTRLSEL_RadioCore,    ///< Pin controlled by Network core.
     NRF_GPIO_PIN_SEL_EXMIF    = GPIO_PIN_CNF_CTRLSEL_EXMIF,        ///< Pin controlled by EXMIF peripheral.
     NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         ///< Pin controlled by Cellular core.
     NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,          ///< Pin controlled by Digital Test Bus.
-    NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          ///< Pin controlled by Trace and Debug Subsystem          ///< Pin controlled by Trace and Debug Subsystem..
 #endif
 } nrf_gpio_pin_sel_t;
 #endif // NRF_GPIO_HAS_SEL

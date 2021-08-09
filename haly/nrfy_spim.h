@@ -524,7 +524,7 @@ NRFY_STATIC_INLINE void nrfy_spim_disable(NRF_SPIM_Type * p_reg)
     nrf_barrier_w();
 }
 
-/** @refhal{nrfy_spim_pins_set} */
+/** @refhal{nrf_spim_pins_set} */
 NRFY_STATIC_INLINE void nrfy_spim_pins_set(NRF_SPIM_Type * p_reg,
                                            uint32_t        sck_pin,
                                            uint32_t        mosi_pin,
