@@ -128,7 +128,8 @@ typedef struct
 /**
  * @brief QDEC event handler.
  *
- * @param[in] event QDEC event structure.
+ * @param[in] event 	 QDEC event structure.
+ * @param[in] p_context  Context passed to event handler.
  */
 typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event, void * p_context);
 
