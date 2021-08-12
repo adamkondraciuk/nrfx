@@ -20,18 +20,52 @@ extern "C" {
  */
 
 /**
- * @brief This value can be provided as a parameter for the @ref nrf_qdec_pio_assign
+ * @brief This value can be provided as a parameter for the @ref nrf_qdec_pins_set
  *        function call to specify that a LED signal shall not be use by the QDEC and
  *        connected to a physical pin.
  */
 #define NRF_QDEC_LED_NOT_CONNECTED  0xFFFFFFFF
 
+#if defined(QDEC_TASKS_RDCLRACC_TASKS_RDCLRACC_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the RDCLRACC task. */
+#define NRF_QDEC_HAS_TASK_RDCLRACC 1
+#else
+#define NRF_QDEC_HAS_TASK_RDCLRACC 0
+#endif
+
+#if defined(QDEC_TASKS_RDCLRDBL_TASKS_RDCLRDBL_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the RDCLRDBL task. */
+#define NRF_QDEC_HAS_RDCLRDBL 1
+#else
+#define NRF_QDEC_HAS_RDCLRDBL 0
+#endif
+
+#if defined(QDEC_EVENTS_DBLRDY_EVENTS_DBLRDY_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the DBLRDY event. */
+#define NRF_QDEC_HAS_EVENT_DBLRDY 1
+#else
+#define NRF_QDEC_HAS_EVENT_DBLRDY 0
+#endif
+
+#if defined(QDEC_EVENTS_STOPPED_EVENTS_STOPPED_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the STOPPED event. */
+#define NRF_QDEC_HAS_EVENT_STOPPED 1
+#else
+#define NRF_QDEC_HAS_EVENT_STOPPED 0
+#endif
+
 /** @brief QDEC tasks. */
 typedef enum
 {
-    NRF_QDEC_TASK_START      = offsetof(NRF_QDEC_Type, TASKS_START),     /**< Starting the quadrature decoder. */
-    NRF_QDEC_TASK_STOP       = offsetof(NRF_QDEC_Type, TASKS_STOP),      /**< Stopping the quadrature decoder. */
-    NRF_QDEC_TASK_READCLRACC = offsetof(NRF_QDEC_Type, TASKS_READCLRACC) /**< Reading and clearing ACC and ACCDBL registers. */
+    NRF_QDEC_TASK_START      = offsetof(NRF_QDEC_Type, TASKS_START),      /**< Starting the quadrature decoder. */
+    NRF_QDEC_TASK_STOP       = offsetof(NRF_QDEC_Type, TASKS_STOP),       /**< Stopping the quadrature decoder. */
+    NRF_QDEC_TASK_READCLRACC = offsetof(NRF_QDEC_Type, TASKS_READCLRACC), /**< Reading and clearing ACC and ACCDBL registers. */
+#if NRF_QDEC_HAS_TASK_RDCLRACC
+    NRF_QDEC_TASK_RDCLRACC   = offsetof(NRF_QDEC_Type, TASKS_RDCLRACC),   /**< Reading and clearing ACC register. */
+#endif
+#if NRF_QDEC_HAS_TASK_RDCLRDBL
+    NRF_QDEC_TASK_RDCLRDBL   = offsetof(NRF_QDEC_Type, TASKS_RDCLRDBL)    /**< Reading and clearing ACCDBL register. */
+#endif
 } nrf_qdec_task_t;
 
 /** @brief QDEC events. */
@@ -39,7 +73,13 @@ typedef enum
 {
     NRF_QDEC_EVENT_SAMPLERDY = offsetof(NRF_QDEC_Type, EVENTS_SAMPLERDY), /**< Event generated for every new sample.  */
     NRF_QDEC_EVENT_REPORTRDY = offsetof(NRF_QDEC_Type, EVENTS_REPORTRDY), /**< Event generated for every new report.  */
-    NRF_QDEC_EVENT_ACCOF     = offsetof(NRF_QDEC_Type, EVENTS_ACCOF)      /**< Event generated for every accumulator overflow. */
+    NRF_QDEC_EVENT_ACCOF     = offsetof(NRF_QDEC_Type, EVENTS_ACCOF),     /**< Event generated for every accumulator overflow. */
+#if NRF_QDEC_HAS_EVENT_DBLRDY
+    NRF_QDEC_EVENT_DBLRDY    = offsetof(NRF_QDEC_Type, EVENTS_DBLRDY),    /**< Event generated for every double displacement(s) detected. */
+#endif
+#if NRF_QDEC_HAS_EVENT_STOPPED
+    NRF_QDEC_EVENT_STOPPED   = offsetof(NRF_QDEC_Type, EVENTS_STOPPED)    /**< Event generated for every QDEC stop. */
+#endif
 } nrf_qdec_event_t;
 
 /** @brief QDEC shortcuts. */
@@ -105,7 +145,6 @@ typedef enum
     NRF_QDEC_REPORTPER_200      = QDEC_REPORTPER_REPORTPER_200Smpl,                                  /**< QDEC report period 200 samples. */
     NRF_QDEC_REPORTPER_240      = QDEC_REPORTPER_REPORTPER_240Smpl,                                  /**< QDEC report period 240 samples. */
     NRF_QDEC_REPORTPER_280      = QDEC_REPORTPER_REPORTPER_280Smpl,                                  /**< QDEC report period 280 samples. */
-    NRF_QDEC_REPORTPER_DISABLED = (QDEC_REPORTPER_REPORTPER_Msk >> QDEC_REPORTPER_REPORTPER_Pos) + 1 /**< QDEC reporting disabled. Deprecated. */
 } nrf_qdec_reportper_t;
 
 /**
@@ -193,21 +232,6 @@ NRF_STATIC_INLINE void nrf_qdec_pins_set(NRF_QDEC_Type * p_reg,
                                          uint32_t        phase_a_pin,
                                          uint32_t        phase_b_pin,
                                          uint32_t        led_pin);
-
-/**
- * @brief Function for assigning QDEC pins.
- *
- * @note This function is deprecated. Use @ref nrf_qdec_pins_set instead.
- *
- * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
- * @param[in] psela   Pin number.
- * @param[in] pselb   Pin number.
- * @param[in] pselled Pin number.
- */
-NRF_STATIC_INLINE void nrf_qdec_pio_assign(NRF_QDEC_Type * p_reg,
-                                           uint32_t        psela,
-                                           uint32_t        pselb,
-                                           uint32_t        pselled);
 
 /**
  * @brief Function for getting the Phase A pin selection.
@@ -344,7 +368,7 @@ NRF_STATIC_INLINE int32_t nrf_qdec_sample_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACC register.
  */
-NRF_STATIC_INLINE int32_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE int16_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCREAD register.
@@ -353,7 +377,7 @@ NRF_STATIC_INLINE int32_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCREAD register.
  */
-NRF_STATIC_INLINE int32_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE int16_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCDBL register.
@@ -362,7 +386,7 @@ NRF_STATIC_INLINE int32_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCDBL register.
  */
-NRF_STATIC_INLINE uint32_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE uint8_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCDBLREAD register.
@@ -371,7 +395,7 @@ NRF_STATIC_INLINE uint32_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCDBLREAD register.
  */
-NRF_STATIC_INLINE uint32_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE uint8_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for setting delay time between setting LED active state and start sampling.
@@ -407,7 +431,7 @@ NRF_STATIC_INLINE void nrf_qdec_reportper_set(NRF_QDEC_Type *      p_reg,
  *
  * @return The report period.
  */
-NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE nrf_qdec_reportper_t nrf_qdec_reportper_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving the value of QDEC SAMPLEPER register.
@@ -416,7 +440,7 @@ NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Number of samples per report.
  */
-NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_to_value(uint32_t reportper);
+NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_to_value(nrf_qdec_reportper_t reportper);
 
 /**
  * @brief Function for setting the active level for the LED.
@@ -507,14 +531,6 @@ NRF_STATIC_INLINE void nrf_qdec_pins_set(NRF_QDEC_Type * p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE void nrf_qdec_pio_assign(NRF_QDEC_Type * p_reg,
-                                           uint32_t        psela,
-                                           uint32_t        pselb,
-                                           uint32_t        pselled)
-{
-    nrf_qdec_pins_set(p_reg, psela, pselb, pselled);
-}
-
 NRF_STATIC_INLINE uint32_t nrf_qdec_phase_a_pin_get(NRF_QDEC_Type const * p_reg)
 {
 #if defined(QDEC_PSEL_A_CONNECT_Pos)
@@ -601,22 +617,22 @@ NRF_STATIC_INLINE int32_t nrf_qdec_sample_get(NRF_QDEC_Type const * p_reg)
     return p_reg->SAMPLE;
 }
 
-NRF_STATIC_INLINE int32_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE int16_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACC;
 }
 
-NRF_STATIC_INLINE int32_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE int16_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCREAD;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE uint8_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCDBL;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE uint8_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCDBLREAD;
 }
@@ -637,12 +653,12 @@ NRF_STATIC_INLINE void nrf_qdec_reportper_set(NRF_QDEC_Type *      p_reg,
     p_reg->REPORTPER = reportper;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE nrf_qdec_reportper_t nrf_qdec_reportper_get(NRF_QDEC_Type const * p_reg)
 {
-    return p_reg->REPORTPER;
+    return (nrf_qdec_reportper_t)(p_reg->REPORTPER);
 }
 
-NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_to_value(uint32_t reportper)
+NRF_STATIC_INLINE uint32_t nrf_qdec_reportper_to_value(nrf_qdec_reportper_t reportper)
 {
     return (reportper == NRF_QDEC_REPORTPER_10) ? 10 : reportper * 40;
 }
