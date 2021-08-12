@@ -4,7 +4,7 @@
 #define NRFX_DPPI_H__
 
 #include <nrfx.h>
-#include <hal/nrf_dppi.h>
+#include <haly/nrfy_dppi.h>
 
 /**
  * @defgroup nrfx_dppi DPPI allocator
