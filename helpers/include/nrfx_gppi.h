@@ -82,7 +82,7 @@ typedef enum
 } nrfx_gppi_task_t;
 
 #elif defined(DPPI_PRESENT)
-#include <hal/nrf_dppi.h>
+#include <haly/nrfy_dppi.h>
 
 typedef enum
 {
@@ -525,27 +525,27 @@ __STATIC_INLINE nrfx_err_t nrfx_gppi_group_free(nrfx_gppi_channel_group_t group)
 
 __STATIC_INLINE bool nrfx_gppi_channel_check(uint8_t channel)
 {
-    return nrf_dppi_channel_check(NRF_DPPIC, channel);
+    return nrfy_dppi_channel_check(NRF_DPPIC, channel);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_disable_all(void)
 {
-    nrf_dppi_channels_disable_all(NRF_DPPIC);
+    nrfy_dppi_channels_disable_all(NRF_DPPIC);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_enable(uint32_t mask)
 {
-    nrf_dppi_channels_enable(NRF_DPPIC, mask);
+    nrfy_dppi_channels_enable(NRF_DPPIC, mask);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_disable(uint32_t mask)
 {
-    nrf_dppi_channels_disable(NRF_DPPIC, mask);
+    nrfy_dppi_channels_disable(NRF_DPPIC, mask);
 }
 
 __STATIC_INLINE void nrfx_gppi_task_trigger(nrfx_gppi_task_t task)
 {
-    nrf_dppi_task_trigger(NRF_DPPIC, (nrf_dppi_task_t)task);
+    nrfy_dppi_task_trigger(NRF_DPPIC, (nrf_dppi_task_t)task);
 }
 
 __STATIC_INLINE void nrfx_gppi_event_endpoint_setup(uint8_t channel, uint32_t eep)
@@ -595,47 +595,47 @@ __STATIC_INLINE void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t for
 __STATIC_INLINE void nrfx_gppi_channels_include_in_group(uint32_t                  channel_mask,
                                                          nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_channels_include_in_group(NRF_DPPIC,
-                                       channel_mask,
-                                       (nrf_dppi_channel_group_t)channel_group);
+    nrfy_dppi_channels_include_in_group(NRF_DPPIC,
+                                        channel_mask,
+                                        (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_channels_remove_from_group(uint32_t                  channel_mask,
                                                           nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_channels_remove_from_group(NRF_DPPIC,
-                                        channel_mask,
-                                        (nrf_dppi_channel_group_t)channel_group);
+    nrfy_dppi_channels_remove_from_group(NRF_DPPIC,
+                                         channel_mask,
+                                         (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_clear(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_clear(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
+    nrfy_dppi_group_clear(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_enable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_enable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
+    nrfy_dppi_group_enable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE void nrfx_gppi_group_disable(nrfx_gppi_channel_group_t channel_group)
 {
-    nrf_dppi_group_disable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
+    nrfy_dppi_group_disable(NRF_DPPIC, (nrf_dppi_channel_group_t)channel_group);
 }
 
 __STATIC_INLINE uint32_t nrfx_gppi_task_address_get(nrfx_gppi_task_t gppi_task)
 {
-    return nrf_dppi_task_address_get(NRF_DPPIC, (nrf_dppi_task_t)gppi_task);
+    return nrfy_dppi_task_address_get(NRF_DPPIC, (nrf_dppi_task_t)gppi_task);
 }
 
 __STATIC_INLINE nrfx_gppi_task_t nrfx_gppi_group_disable_task_get(nrfx_gppi_channel_group_t group)
 {
-    return (nrfx_gppi_task_t) nrf_dppi_group_disable_task_get((uint8_t)group);
+    return (nrfx_gppi_task_t) nrfy_dppi_group_disable_task_get((uint8_t)group);
 }
 
 __STATIC_INLINE nrfx_gppi_task_t nrfx_gppi_group_enable_task_get(nrfx_gppi_channel_group_t group)
 {
-    return (nrfx_gppi_task_t) nrf_dppi_group_enable_task_get((uint8_t)group);
+    return (nrfx_gppi_task_t) nrfy_dppi_group_enable_task_get((uint8_t)group);
 }
 
 __STATIC_INLINE nrfx_err_t nrfx_gppi_channel_alloc(uint8_t * p_channel)
