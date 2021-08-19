@@ -405,7 +405,7 @@ NRF_STATIC_INLINE void nrf_pwm_disable(NRF_PWM_Type * p_reg);
  * @param[in] out_pins Array with pin numbers for individual PWM output channels.
  */
 NRF_STATIC_INLINE void nrf_pwm_pins_set(NRF_PWM_Type * p_reg,
-                                        uint32_t       out_pins[NRF_PWM_CHANNEL_COUNT]);
+                                        uint32_t const out_pins[NRF_PWM_CHANNEL_COUNT]);
 
 /**
  * @brief Function for getting pin selection associated with specified PWM output channel.
@@ -623,7 +623,7 @@ NRF_STATIC_INLINE void nrf_pwm_disable(NRF_PWM_Type * p_reg)
 }
 
 NRF_STATIC_INLINE void nrf_pwm_pins_set(NRF_PWM_Type * p_reg,
-                                        uint32_t       out_pins[NRF_PWM_CHANNEL_COUNT])
+                                        uint32_t const out_pins[NRF_PWM_CHANNEL_COUNT])
 {
     uint8_t i;
     for (i = 0; i < NRF_PWM_CHANNEL_COUNT; ++i)
