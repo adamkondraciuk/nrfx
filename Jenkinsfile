@@ -78,6 +78,7 @@ pipeline {
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
             archiveArtifacts allowEmptyArchive: true, artifacts: "doc/warnings_nrfx.txt"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
             junit 'work/nrfx-verification/outcomes/*/*.xml'
             script {
                 def result = currentBuild.currentResult
