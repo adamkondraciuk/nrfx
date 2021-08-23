@@ -4,7 +4,7 @@
 #define NRFX_QDEC_H__
 
 #include <nrfx.h>
-#include <hal/nrf_qdec.h>
+#include <haly/nrfy_qdec.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,33 +24,17 @@ typedef struct
     uint8_t         drv_inst_idx; ///< Index of the driver instance. For internal use only.
 } nrfx_qdec_t;
 
-/** @brief QDEC configuration structure. */
 typedef struct
 {
-    nrf_qdec_reportper_t reportper;          ///< Report period in samples.
-    nrf_qdec_sampleper_t sampleper;          ///< Sampling period in microseconds.
-    uint32_t             psela;              ///< Pin number for A input.
-    uint32_t             pselb;              ///< Pin number for B input.
-    uint32_t             pselled;            ///< Pin number for LED output.
-    uint32_t             ledpre;             ///< Time (in microseconds) how long LED is switched on before sampling.
-    nrf_qdec_ledpol_t    ledpol;             ///< Active LED polarity.
-    bool                 dbfen;              ///< State of debouncing filter.
-    bool                 sample_inten;       ///< Enabling sample ready interrupt.
-    uint8_t              interrupt_priority; ///< QDEC interrupt priority.
-    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                             /**< When set to true, the driver does not modify
-                                              *   any GPIO parameters of the used pins. Those
-                                              *   parameters are supposed to be configured
-                                              *   externally before the driver is initialized. */
-    bool                 skip_psel_cfg;      ///< Skip pin selection configuration.
-                                             /**< When set to true, the driver does not modify
-                                              *   pin select registers in the peripheral.
-                                              *   Those registers are supposed to be set up
-                                              *   externally before the driver is initialized.
-                                              *   @note When both GPIO configuration and pin
-                                              *   selection are to be skipped, the structure
-                                              *   fields that specify pins can be omitted,
-                                              *   as they are ignored anyway. */
+    nrfy_qdec_config_t nrfy_config;        /**< QDEC configuration structure. */
+    uint8_t            interrupt_priority; /**< QDEC interrupt priority. */
+    bool               sample_inten;       /**< Enabling sample ready interrupt. */
+    bool               reportper_inten;    /**< Enabling report ready interrupt. */
+    bool               skip_gpio_cfg;      /**< Skip GPIO configuration of pins.
+                                                When set to true, the driver does not modify
+                                                any GPIO parameters of the used pins. Those
+                                                parameters are supposed to be configured
+                                                externally before the driver is initialized. */
 } nrfx_qdec_config_t;
 
 #ifndef __NRFX_DOXYGEN__
@@ -87,19 +71,26 @@ enum {
  * @param[in] _pin_b   Pin for B encoder channel input.
  * @param[in] _pin_led Pin for LED output.
  */
-#define NRFX_QDEC_DEFAULT_CONFIG(_pin_a, _pin_b, _pin_led)           \
-    {                                                                \
-        .reportper          = NRF_QDEC_REPORTPER_10,                 \
-        .sampleper          = NRF_QDEC_SAMPLEPER_16384us,            \
-        .psela              = _pin_a,                                \
-        .pselb              = _pin_b,                                \
-        .pselled            = _pin_led,                              \
-        .ledpre             = 500,                                   \
-        .ledpol             = NRF_QDEC_LEPOL_ACTIVE_HIGH,            \
-        .dbfen              = NRF_QDEC_DBFEN_DISABLE,                \
-        .sample_inten       = false,                                 \
-        .interrupt_priority = NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY  \
-    }
+#define NRFX_QDEC_DEFAULT_CONFIG(_pin_a, _pin_b, _pin_led)          \
+{                                                                   \
+    .nrfy_config =                                                  \
+    {                                                               \
+        .reportper = NRF_QDEC_REPORTPER_10,                         \
+        .sampleper = NRF_QDEC_SAMPLEPER_16384us,                    \
+        .pins =                                                     \
+        {                                                           \
+            .a_pin   = _pin_a,                                      \
+            .b_pin   = _pin_b,                                      \
+            .led_pin = _pin_led                                     \
+        },                                                          \
+        .ledpre    = 500,                                           \
+        .ledpol    = NRF_QDEC_LEPOL_ACTIVE_HIGH,                    \
+        .dbfen     = NRF_QDEC_DBFEN_DISABLE,                        \
+    },                                                              \
+    .interrupt_priority    = NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY, \
+    .sample_inten          = false,                                 \
+    .reportper_inten       = true                                   \
+}
 
 /** @brief QDEC sample event data. */
 typedef struct
@@ -111,7 +102,7 @@ typedef struct
 typedef struct
 {
     int16_t acc;     /**< Accumulated transitions. */
-    uint16_t accdbl; /**< Accumulated double transitions. */
+    uint8_t accdbl;  /**< Accumulated double transitions. */
 } nrfx_qdec_report_data_evt_t;
 
 /** @brief QDEC event handler structure. */
@@ -128,8 +119,8 @@ typedef struct
 /**
  * @brief QDEC event handler.
  *
- * @param[in] event 	 QDEC event structure.
- * @param[in] p_context  Context passed to event handler.
+ * @param[in] event     QDEC event structure.
+ * @param[in] p_context Context passed to event handler.
  */
 typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event, void * p_context);
 
@@ -188,7 +179,7 @@ void nrfx_qdec_disable(nrfx_qdec_t const * p_instance);
  */
 void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
                                  int16_t *           p_acc,
-                                 int16_t *           p_accdbl);
+                                 uint8_t *           p_accdbl);
 
 /**
  * @brief Function for returning the address of the specified QDEC task.
@@ -216,13 +207,13 @@ NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_in
 NRFX_STATIC_INLINE uint32_t nrfx_qdec_task_address_get(nrfx_qdec_t const * p_instance,
                                                        nrf_qdec_task_t     task)
 {
-    return nrf_qdec_task_address_get(p_instance->p_reg, task);
+    return nrfy_qdec_task_address_get(p_instance->p_reg, task);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_instance,
                                                         nrf_qdec_event_t    event)
 {
-    return nrf_qdec_event_address_get(p_instance->p_reg, event);
+    return nrfy_qdec_event_address_get(p_instance->p_reg, event);
 }
 #endif // NRFX_DECLARE_ONLY
 
