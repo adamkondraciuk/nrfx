@@ -906,6 +906,16 @@
 #define NRFX_QDEC_ENABLED 0
 #endif
 
+// <q> NRFX_QDEC130_ENABLED  - Enable QDEC130 instance
+#ifndef NRFX_QDEC130_ENABLED
+#define NRFX_QDEC130_ENABLED 0
+#endif
+
+// <q> NRFX_QDEC131_ENABLED  - Enable QDEC131 instance
+#ifndef NRFX_QDEC131_ENABLED
+#define NRFX_QDEC131_ENABLED 0
+#endif
+
 // <o> NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
 
 // <0=> 0 (highest)

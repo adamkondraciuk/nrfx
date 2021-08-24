@@ -208,8 +208,10 @@ extern "C" {
 #define nrfx_pdm_irq_handler         PDM_IRQHandler
 
 // QDEC0_IRQn
+#define nrfx_qdec_130_irq_handler     QDEC130_IRQHandler
 
 // QDEC1_IRQn
+#define nrfx_qdec_131_irq_handler     QDEC131_IRQHandler
 
 // RTC0_IRQn
 #define nrfx_rtc_0_irq_handler        RTC0_IRQHandler

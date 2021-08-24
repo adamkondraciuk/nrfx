@@ -45,6 +45,12 @@ enum {
 #if NRFX_CHECK(NRFX_QDEC1_ENABLED)
     NRFX_QDEC1_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_QDEC130_ENABLED)
+    NRFX_QDEC130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_QDEC131_ENABLED)
+    NRFX_QDEC131_INST_IDX,
+#endif
     NRFX_QDEC_ENABLED_COUNT
 };
 #endif
@@ -221,6 +227,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_in
 
 void nrfx_qdec_0_irq_handler(void);
 void nrfx_qdec_1_irq_handler(void);
+void nrfx_qdec_130_irq_handler(void);
+void nrfx_qdec_131_irq_handler(void);
 
 #ifdef __cplusplus
 }

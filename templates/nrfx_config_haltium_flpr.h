@@ -93,10 +93,6 @@
 #define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
 
-/* Fixups for QDEC driver. */
-#define NRF_QDEC        NRF_QDEC0
-#define QDEC_IRQHandler QDEC0_IRQHandler
-
 /* Disable EVERYTHING */
 
 #ifndef NRFX_CLOCK_ENABLED

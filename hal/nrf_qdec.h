@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-#ifndef NRF_QDEC0
+#if !defined(NRF_QDEC0) && defined(NRF_QDEC)
 #define NRF_QDEC0 NRF_QDEC
 #endif
 

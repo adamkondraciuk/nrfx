@@ -4,7 +4,8 @@
 
 #if NRFX_CHECK(NRFX_QDEC_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_QDEC0_ENABLED) || NRFX_CHECK(NRFX_QDEC1_ENABLED))
+#if !(NRFX_CHECK(NRFX_QDEC0_ENABLED) || NRFX_CHECK(NRFX_QDEC1_ENABLED) || \
+      NRFX_CHECK(NRFX_QDEC130_ENABLED) || NRFX_CHECK(NRFX_QDEC131_ENABLED))
 #error "No enabled QDEC instances. Check <nrfx_config.h>."
 #endif
 
@@ -212,6 +213,20 @@ void nrfx_qdec_0_irq_handler(void)
 void nrfx_qdec_1_irq_handler(void)
 {
     irq_handler(NRF_QDEC1, &m_cb[NRFX_QDEC1_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_QDEC130_ENABLED)
+void nrfx_qdec_130_irq_handler(void)
+{
+    irq_handler(NRF_QDEC130, &m_cb[NRFX_QDEC130_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_QDEC131_ENABLED)
+void nrfx_qdec_131_irq_handler(void)
+{
+    irq_handler(NRF_QDEC131, &m_cb[NRFX_QDEC131_INST_IDX]);
 }
 #endif
 
