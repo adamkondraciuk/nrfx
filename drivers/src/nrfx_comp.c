@@ -23,9 +23,8 @@ static nrfx_drv_state_t             m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
 static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
 {
-    if (nrf_comp_event_check(NRF_COMP, event) && nrf_comp_int_enable_check(NRF_COMP, event_mask))
+    if (event_mask & nrfy_comp_int_enable_check(NRF_COMP, NRFY_EVENT_TO_INT_BITMASK(event)))
     {
-        nrf_comp_event_clear(NRF_COMP, event);
         NRFX_LOG_DEBUG("Event: %s.", EVT_TO_STR(event));
 
         m_comp_event_handler(event);
@@ -34,10 +33,15 @@ static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
 
 void nrfx_comp_irq_handler(void)
 {
-    comp_execute_handler(NRF_COMP_EVENT_READY, COMP_INTENSET_READY_Msk);
-    comp_execute_handler(NRF_COMP_EVENT_DOWN,  COMP_INTENSET_DOWN_Msk);
-    comp_execute_handler(NRF_COMP_EVENT_UP,    COMP_INTENSET_UP_Msk);
-    comp_execute_handler(NRF_COMP_EVENT_CROSS, COMP_INTENSET_CROSS_Msk);
+    uint32_t evt_mask = nrfy_comp_events_process(NRF_COMP,
+                                                 COMP_INTENSET_READY_Msk |
+                                                 COMP_INTENSET_DOWN_Msk |
+                                                 COMP_INTENSET_UP_Msk |
+                                                 COMP_INTENSET_CROSS_Msk);
+    comp_execute_handler(NRF_COMP_EVENT_READY, evt_mask);
+    comp_execute_handler(NRF_COMP_EVENT_DOWN,  evt_mask);
+    comp_execute_handler(NRF_COMP_EVENT_UP,    evt_mask);
+    comp_execute_handler(NRF_COMP_EVENT_CROSS, evt_mask);
 }
 
 
@@ -70,44 +74,25 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
     }
 #endif
 
-    nrf_comp_ref_set(NRF_COMP, p_config->reference);
+    nrfy_comp_periph_configure(NRF_COMP, &p_config->nrfy_config);
+    nrfy_comp_shorts_disable(NRF_COMP,
+                             NRFX_COMP_SHORT_STOP_AFTER_CROSS_EVT |
+                             NRFX_COMP_SHORT_STOP_AFTER_UP_EVT |
+                             NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT);
+    nrfy_comp_int_disable(NRF_COMP,
+                          COMP_INTENCLR_CROSS_Msk |
+                          COMP_INTENCLR_UP_Msk |
+                          COMP_INTENCLR_DOWN_Msk |
+                          COMP_INTENCLR_READY_Msk);
+    nrfy_comp_enable(NRF_COMP);
+    nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
 
-    //If external source is chosen, write to appropriate register.
-    if (p_config->reference == COMP_REFSEL_REFSEL_ARef)
-    {
-        nrf_comp_ext_ref_set(NRF_COMP, p_config->ext_ref);
-    }
-
-    nrf_comp_th_set(NRF_COMP, p_config->threshold);
-    nrf_comp_main_mode_set(NRF_COMP, p_config->main_mode);
-    nrf_comp_speed_mode_set(NRF_COMP, p_config->speed_mode);
-    nrf_comp_hysteresis_set(NRF_COMP, p_config->hyst);
-#if defined (COMP_ISOURCE_ISOURCE_Msk)
-    nrf_comp_isource_set(NRF_COMP, p_config->isource);
-#endif
-    nrf_comp_shorts_disable(NRF_COMP, NRFX_COMP_SHORT_STOP_AFTER_CROSS_EVT |
-                            NRFX_COMP_SHORT_STOP_AFTER_UP_EVT |
-                            NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT);
-    nrf_comp_int_disable(NRF_COMP, COMP_INTENCLR_CROSS_Msk |
-                         COMP_INTENCLR_UP_Msk |
-                         COMP_INTENCLR_DOWN_Msk |
-                         COMP_INTENCLR_READY_Msk);
-
-    nrf_comp_input_select(NRF_COMP, p_config->input);
-
-    nrf_comp_enable(NRF_COMP);
-
-    nrf_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
-
-    // Clear events to be sure there are no leftovers.
-    nrf_comp_event_clear(NRF_COMP, NRF_COMP_EVENT_READY);
-    nrf_comp_event_clear(NRF_COMP, NRF_COMP_EVENT_DOWN);
-    nrf_comp_event_clear(NRF_COMP, NRF_COMP_EVENT_UP);
-    nrf_comp_event_clear(NRF_COMP, NRF_COMP_EVENT_CROSS);
-
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(NRF_COMP), p_config->interrupt_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(NRF_COMP));
-
+    nrfy_comp_int_init(NRF_COMP, NRF_COMP_EVENT_READY |
+                       NRF_COMP_EVENT_DOWN |
+                       NRF_COMP_EVENT_UP |
+                       NRF_COMP_EVENT_CROSS,
+                       p_config->interrupt_priority,
+                       false);
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -118,8 +103,8 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
 void nrfx_comp_uninit(void)
 {
     NRFX_ASSERT(m_state != NRFX_DRV_STATE_UNINITIALIZED);
-    NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_COMP));
-    nrf_comp_disable(NRF_COMP);
+    nrfy_comp_int_uninit(NRF_COMP);
+    nrfy_comp_disable(NRF_COMP);
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(NRF_COMP);
 #endif
@@ -130,36 +115,36 @@ void nrfx_comp_uninit(void)
 
 void nrfx_comp_pin_select(nrf_comp_input_t psel)
 {
-    bool comp_enable_state = nrf_comp_enable_check(NRF_COMP);
-    nrf_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
+    bool comp_enable_state = nrfy_comp_enable_check(NRF_COMP);
+    nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
     if (m_state == NRFX_DRV_STATE_POWERED_ON)
     {
         m_state = NRFX_DRV_STATE_INITIALIZED;
     }
-    nrf_comp_disable(NRF_COMP);
-    nrf_comp_input_select(NRF_COMP, psel);
+    nrfy_comp_disable(NRF_COMP);
+    nrfy_comp_input_select(NRF_COMP, psel);
     if (comp_enable_state == true)
     {
-        nrf_comp_enable(NRF_COMP);
+        nrfy_comp_enable(NRF_COMP);
     }
 }
 
 void nrfx_comp_start(uint32_t comp_int_mask, uint32_t comp_shorts_mask)
 {
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_comp_int_enable(NRF_COMP, comp_int_mask);
-    nrf_comp_shorts_enable(NRF_COMP, comp_shorts_mask);
+    nrfy_comp_int_enable(NRF_COMP, comp_int_mask);
+    nrfy_comp_shorts_enable(NRF_COMP, comp_shorts_mask);
     m_state = NRFX_DRV_STATE_POWERED_ON;
-    nrf_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_START);
+    nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_START);
     NRFX_LOG_INFO("Enabled.");
 }
 
 void nrfx_comp_stop(void)
 {
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
-    nrf_comp_shorts_disable(NRF_COMP, UINT32_MAX);
-    nrf_comp_int_disable(NRF_COMP, UINT32_MAX);
-    nrf_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
+    nrfy_comp_shorts_disable(NRF_COMP, UINT32_MAX);
+    nrfy_comp_int_disable(NRF_COMP, UINT32_MAX);
+    nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
     m_state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_INFO("Disabled.");
 }
@@ -167,8 +152,7 @@ void nrfx_comp_stop(void)
 uint32_t nrfx_comp_sample()
 {
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_POWERED_ON);
-    nrf_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_SAMPLE);
-    return nrf_comp_result_get(NRF_COMP);
+    return nrfy_comp_sample(NRF_COMP);
 }
 
 #endif // NRFX_CHECK(NRFX_COMP_ENABLED)

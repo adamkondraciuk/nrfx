@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer (HAL) for managing the Comparator (COMP) peripheral.
  */
 
+#if defined(COMP_ISOURCE_ISOURCE_Msk) || defined (__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether COMP has ISOURCE register. */
+#define NRF_COMP_HAS_ISOURCE 1
+#else
+#define NRF_COMP_HAS_ISOURCE 0
+#endif
+
 /** @brief COMP analog pin selection. */
 typedef enum
 {
@@ -46,11 +53,19 @@ typedef enum
 /** @brief COMP reference selection. */
 typedef enum
 {
-    NRF_COMP_REF_Int1V2 = COMP_REFSEL_REFSEL_Int1V2, /*!< VREF = internal 1.2 V reference (VDD >= 1.7 V). */
-    NRF_COMP_REF_Int1V8 = COMP_REFSEL_REFSEL_Int1V8, /*!< VREF = internal 1.8 V reference (VDD >= VREF + 0.2 V). */
-    NRF_COMP_REF_Int2V4 = COMP_REFSEL_REFSEL_Int2V4, /*!< VREF = internal 2.4 V reference (VDD >= VREF + 0.2 V). */
-    NRF_COMP_REF_VDD = COMP_REFSEL_REFSEL_VDD,       /*!< VREF = VDD. */
-    NRF_COMP_REF_ARef = COMP_REFSEL_REFSEL_ARef      /*!< VREF = AREF (VDD >= VREF >= AREFMIN). */
+    NRF_COMP_REF_Int1V2    = COMP_REFSEL_REFSEL_Int1V2,    /*!< VREF = internal 1.2 V reference (VDD >= 1.7 V). */
+    NRF_COMP_REF_Int1V8    = COMP_REFSEL_REFSEL_Int1V8,    /*!< VREF = internal 1.8 V reference (VDD >= VREF + 0.2 V). */
+    NRF_COMP_REF_Int2V4    = COMP_REFSEL_REFSEL_Int2V4,    /*!< VREF = internal 2.4 V reference (VDD >= VREF + 0.2 V). */
+#if defined(COMP_REFSEL_REFSEL_AVDDAO1V8) || defined(__NRFX_DOXYGEN__)
+    NRF_COMP_REF_AVDDAO1V8 = COMP_REFSEL_REFSEL_AVDDAO1V8, /*!< VREF = AVDD_AO_1V8. */
+#endif
+#if defined(COMP_REFSEL_REFSEL_Diff) || defined(__NRFX_DOXYGEN__)
+    NRF_COMP_REF_DIFF      = COMP_REFSEL_REFSEL_Diff,      /*!< VREF = power down built-in reference with disconnected resistor ladder. */
+#endif
+#if defined(COMP_REFSEL_REFSEL_VDD) || defined(__NRFX_DOXYGEN__)
+    NRF_COMP_REF_VDD       = COMP_REFSEL_REFSEL_VDD,       /*!< VREF = VDD. */
+#endif
+    NRF_COMP_REF_ARef      = COMP_REFSEL_REFSEL_ARef       /*!< VREF = AREF (VDD >= VREF >= AREFMIN). */
 } nrf_comp_ref_t;
 
 /** @brief COMP external analog reference selection. */
@@ -84,35 +99,54 @@ typedef struct
 /** @brief COMP main operation mode. */
 typedef enum
 {
-    NRF_COMP_MAIN_MODE_SE = COMP_MODE_MAIN_SE,    /*!< Single-ended mode. */
+    NRF_COMP_MAIN_MODE_SE   = COMP_MODE_MAIN_SE,  /*!< Single-ended mode. */
     NRF_COMP_MAIN_MODE_Diff = COMP_MODE_MAIN_Diff /*!< Differential mode. */
 } nrf_comp_main_mode_t;
 
 /** @brief COMP speed and power mode. */
 typedef enum
 {
-    NRF_COMP_SP_MODE_Low = COMP_MODE_SP_Low,       /*!< Low power mode. */
+    NRF_COMP_SP_MODE_Low    = COMP_MODE_SP_Low,    /*!< Low power mode. */
+#if defined (COMP_MODE_SP_Normal) || defined (__NRFX_DOXYGEN__)
     NRF_COMP_SP_MODE_Normal = COMP_MODE_SP_Normal, /*!< Normal mode. */
-    NRF_COMP_SP_MODE_High = COMP_MODE_SP_High      /*!< High-speed mode. */
+#endif
+    NRF_COMP_SP_MODE_High   = COMP_MODE_SP_High    /*!< High-speed mode. */
 } nrf_comp_sp_mode_t;
 
 /** @brief COMP comparator hysteresis. */
 typedef enum
 {
-    NRF_COMP_HYST_NoHyst = COMP_HYST_HYST_NoHyst, /*!< Comparator hysteresis disabled. */
-    NRF_COMP_HYST_50mV = COMP_HYST_HYST_Hyst50mV  /*!< Comparator hysteresis enabled. */
+    NRF_COMP_HYST_NoHyst = COMP_HYST_HYST_NoHyst,   /*!< Comparator hysteresis disabled. */
+#if defined (COMP_HYST_HYST_Hyst40mV) || defined (__NRFX_DOXYGEN__)
+    NRF_COMP_HYST_40mV   = COMP_HYST_HYST_Hyst40mV, /*!< Comparator hysteresis enabled at 40 mV level. */
+#endif
+#if defined (COMP_HYST_HYST_Hyst50mV) || defined (__NRFX_DOXYGEN__)
+    NRF_COMP_HYST_50mV   = COMP_HYST_HYST_Hyst50mV  /*!< Comparator hysteresis enabled at 50 mV level. */
+#endif
 } nrf_comp_hyst_t;
 
-#if defined (COMP_ISOURCE_ISOURCE_Msk) || defined (__NRFX_DOXYGEN__)
+#if NRF_COMP_HAS_ISOURCE
 /** @brief COMP current source selection on analog input. */
 typedef enum
 {
-    NRF_COMP_ISOURCE_Off = COMP_ISOURCE_ISOURCE_Off,         /*!< Current source disabled. */
+    NRF_COMP_ISOURCE_Off     = COMP_ISOURCE_ISOURCE_Off,     /*!< Current source disabled. */
+#if defined (COMP_ISOURCE_ISOURCE_Ien2uA5) || defined (__NRFX_DOXYGEN__)
+    NRF_COMP_ISOURCE_Ien2uA5 = COMP_ISOURCE_ISOURCE_Ien2uA5, /*!< Current source enabled (+/- 2.5 uA). */
+#else
     NRF_COMP_ISOURCE_Ien2uA5 = COMP_ISOURCE_ISOURCE_Ien2mA5, /*!< Current source enabled (+/- 2.5 uA). */
-    NRF_COMP_ISOURCE_Ien5uA = COMP_ISOURCE_ISOURCE_Ien5mA,   /*!< Current source enabled (+/- 5 uA). */
-    NRF_COMP_ISOURCE_Ien10uA = COMP_ISOURCE_ISOURCE_Ien10mA  /*!< Current source enabled (+/- 10 uA). */
-} nrf_isource_t;
 #endif
+#if defined (COMP_ISOURCE_ISOURCE_Ien5uA) || defined (__NRFX_DOXYGEN__)
+    NRF_COMP_ISOURCE_Ien5uA  = COMP_ISOURCE_ISOURCE_Ien5uA,  /*!< Current source enabled (+/- 5 uA). */
+#else
+    NRF_COMP_ISOURCE_Ien5uA  = COMP_ISOURCE_ISOURCE_Ien5mA,  /*!< Current source enabled (+/- 5 uA). */
+#endif
+#if defined (COMP_ISOURCE_ISOURCE_Ien10uA) || defined (__NRFX_DOXYGEN__)
+    NRF_COMP_ISOURCE_Ien10uA = COMP_ISOURCE_ISOURCE_Ien10uA, /*!< Current source enabled (+/- 10 uA). */
+#else
+    NRF_COMP_ISOURCE_Ien10uA = COMP_ISOURCE_ISOURCE_Ien10mA, /*!< Current source enabled (+/- 10 uA). */
+#endif
+} nrf_isource_t;
+#endif // NRF_COMP_HAS_ISOURCE
 
 /** @brief COMP tasks. */
 typedef enum
@@ -213,7 +247,7 @@ NRF_STATIC_INLINE void nrf_comp_speed_mode_set(NRF_COMP_Type *    p_reg,
  */
 NRF_STATIC_INLINE void nrf_comp_hysteresis_set(NRF_COMP_Type * p_reg, nrf_comp_hyst_t hyst);
 
-#if defined (COMP_ISOURCE_ISOURCE_Msk) || defined (__NRFX_DOXYGEN__)
+#if NRF_COMP_HAS_ISOURCE
 /**
  * @brief Function for setting the current source on the analog input.
  *
@@ -398,7 +432,7 @@ NRF_STATIC_INLINE void nrf_comp_isource_set(NRF_COMP_Type * p_reg, nrf_isource_t
 
 NRF_STATIC_INLINE void nrf_comp_input_select(NRF_COMP_Type * p_reg, nrf_comp_input_t input)
 {
-    p_reg->PSEL   = ((uint32_t)input << COMP_PSEL_PSEL_Pos);
+    p_reg->PSEL = ((uint32_t)input << COMP_PSEL_PSEL_Pos);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_comp_result_get(NRF_COMP_Type const * p_reg)
