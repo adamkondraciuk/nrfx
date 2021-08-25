@@ -40,7 +40,7 @@ typedef enum
  * @param[in] domain  Domain to be signalled.
  * @param[in] channel Inter-domain channel for conveying the signal.
  */
-STATIC_INLINE void nrfx_idc_signal(nrfx_idc_domain_t domain, uint8_t channel)
+__STATIC_INLINE void nrfx_idc_signal(nrfx_idc_domain_t domain, uint8_t channel)
 {
 #if defined(NRF5340_XXAA)
     (void)domain;
