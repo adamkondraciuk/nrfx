@@ -16,13 +16,76 @@ extern "C" {
  * @brief   Hardware access layer for managing the AES CCM peripheral.
  */
 
+#if defined(CCM_TASKS_KSGEN_TASKS_KSGEN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the KSGEN task. */
+#define NRF_CCM_HAS_TASK_KSGEN 1
+#else
+#define NRF_CCM_HAS_TASK_KSGEN 0
+#endif
+
+#if defined(CCM_TASKS_CRYPT_TASKS_CRYPT_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the CRYPT task. */
+#define NRF_CCM_HAS_TASK_CRYPT 1
+#else
+#define NRF_CCM_HAS_TASK_CRYPT 0
+#endif
+
+#if defined(CCM_TASKS_START_TASKS_START_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the START task. */
+#define NRF_CCM_HAS_TASK_START 1
+#else
+#define NRF_CCM_HAS_TASK_START 0
+#endif
+
+#if defined(CCM_TASKS_RATEOVERRIDE_TASKS_RATEOVERRIDE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the RATEOVERRIDE task. */
+#define NRF_CCM_HAS_TASK_RATEOVERRIDE 1
+#else
+#define NRF_CCM_HAS_TASK_RATEOVERRIDE 0
+#endif
+
+#if defined(CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the ENDKSGEN event. */
+#define NRF_CCM_HAS_EVENT_ENDKSGEN 1
+#else
+#define NRF_CCM_HAS_EVENT_ENDKSGEN 0
+#endif
+
+#if defined(CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the ENDCRYPT event. */
+#define NRF_CCM_HAS_EVENT_ENDCRYPT 1
+#else
+#define NRF_CCM_HAS_EVENT_ENDCRYPT 0
+#endif
+
+#if defined(CCM_EVENTS_ENDCONFIG_EVENTS_ENDCONFIG_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the ENDCONFIG event. */
+#define NRF_CCM_HAS_EVENT_ENDCONFIG 1
+#else
+#define NRF_CCM_HAS_EVENT_ENDCONFIG 0
+#endif
+
+#if defined(CCM_EVENTS_END_EVENTS_END_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the END event. */
+#define NRF_CCM_HAS_EVENT_END 1
+#else
+#define NRF_CCM_HAS_EVENT_END 0
+#endif
+
 /** @brief CCM tasks. */
 typedef enum
 {
+#if NRF_CCM_HAS_TASK_KSGEN
     NRF_CCM_TASK_KSGEN        = offsetof(NRF_CCM_Type, TASKS_KSGEN),        ///< Start generation of key-stream.
+#endif
+#if NRF_CCM_HAS_TASK_CRYPT
     NRF_CCM_TASK_CRYPT        = offsetof(NRF_CCM_Type, TASKS_CRYPT),        ///< Start encryption/decryption.
+#endif
     NRF_CCM_TASK_STOP         = offsetof(NRF_CCM_Type, TASKS_STOP),         ///< Stop encryption/decryption.
-#if defined(CCM_RATEOVERRIDE_RATEOVERRIDE_Pos) || defined(__NRFX_DOXYGEN__)
+#if NRF_CCM_HAS_TASK_START
+    NRF_CCM_TASK_START        = offsetof(NRF_CCM_Type, TASKS_START),        ///< Start encryption/decryption.
+#endif
+#if NRF_CCM_HAS_TASK_RATEOVERRIDE
     NRF_CCM_TASK_RATEOVERRIDE = offsetof(NRF_CCM_Type, TASKS_RATEOVERRIDE), ///< Override DATARATE setting in MODE register.
 #endif
 } nrf_ccm_task_t;
@@ -30,9 +93,19 @@ typedef enum
 /** @brief CCM events. */
 typedef enum
 {
-    NRF_CCM_EVENT_ENDKSGEN = offsetof(NRF_CCM_Type, EVENTS_ENDKSGEN), ///< Keystream generation complete.
-    NRF_CCM_EVENT_ENDCRYPT = offsetof(NRF_CCM_Type, EVENTS_ENDCRYPT), ///< Encrypt/decrypt complete.
-    NRF_CCM_EVENT_ERROR    = offsetof(NRF_CCM_Type, EVENTS_ERROR),    ///< CCM error event.
+#if NRF_CCM_HAS_EVENT_ENDKSGEN
+    NRF_CCM_EVENT_ENDKSGEN  = offsetof(NRF_CCM_Type, EVENTS_ENDKSGEN),  ///< Keystream generation complete.
+#endif
+#if NRF_CCM_HAS_EVENT_ENDCRYPT
+    NRF_CCM_EVENT_ENDCRYPT  = offsetof(NRF_CCM_Type, EVENTS_ENDCRYPT),  ///< Encrypt/decrypt complete.
+#endif
+    NRF_CCM_EVENT_ERROR     = offsetof(NRF_CCM_Type, EVENTS_ERROR),     ///< CCM error event.
+#if NRF_CCM_HAS_EVENT_ENDCONFIG
+    NRF_CCM_EVENT_ENDCONFIG = offsetof(NRF_CCM_Type, EVENTS_ENDCONFIG), ///< Configuration data has been loaded.
+#endif
+#if NRF_CCM_HAS_EVENT_END
+    NRF_CCM_EVENT_END       = offsetof(NRF_CCM_Type, EVENTS_END),       ///< Encrypt/decrypt complete.
+#endif
 } nrf_ccm_event_t;
 
 /** @brief Types of CCM shorts. */
@@ -44,9 +117,19 @@ typedef enum
 /** @brief CCM interrupts. */
 typedef enum
 {
-    NRF_CCM_INT_ENDKSGEN_MASK  = CCM_INTENSET_ENDKSGEN_Msk, ///< Interrupt on ENDKSGEN event.
-    NRF_CCM_INT_ENDCRYPT_MASK  = CCM_INTENSET_ENDCRYPT_Msk, ///< Interrupt on ENDCRYPT event.
-    NRF_CCM_INT_ERROR_MASK     = CCM_INTENSET_ERROR_Msk,    ///< Interrupt on ERROR event.
+#if NRF_CCM_HAS_EVENT_ENDKSGEN
+    NRF_CCM_INT_ENDKSGEN_MASK  = CCM_INTENSET_ENDKSGEN_Msk,  ///< Interrupt on ENDKSGEN event.
+#endif
+#if NRF_CCM_HAS_EVENT_ENDCRYPT
+    NRF_CCM_INT_ENDCRYPT_MASK  = CCM_INTENSET_ENDCRYPT_Msk,  ///< Interrupt on ENDCRYPT event.
+#endif
+    NRF_CCM_INT_ERROR_MASK     = CCM_INTENSET_ERROR_Msk,     ///< Interrupt on ERROR event.
+#if NRF_CCM_HAS_EVENT_ENDCONFIG
+    NRF_CCM_INT_ENDCONFIG_MASK = CCM_INTENSET_ENDCONFIG_Msk, ///< Interrupt on ENDCONFIG event.
+#endif
+#if NRF_CCM_HAS_EVENT_END
+    NRF_CCM_INT_END_MASK       = CCM_INTENSET_END_Msk,       ///< Interrupt on END event.
+#endif
 } nrf_ccm_int_mask_t;
 
 /** @brief CCM modes of operation. */
