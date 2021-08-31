@@ -20,7 +20,7 @@ pipeline {
     agent {
         docker {
             label 'linux && build-node'
-            image "docker-dtr.nordicsemi.no/babu/ncs-int-wine:v2.6.0"
+            image "docker-dtr.nordicsemi.no/babu/ncs-riscv-wine:2.7.0"
             args ' --privileged -e HOME=/home/buran_ci'
         }
     }
