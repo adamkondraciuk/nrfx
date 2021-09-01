@@ -12,7 +12,7 @@
 #endif
 
 #include <nrfx_twim.h>
-#include <hal/nrf_gpio.h>
+#include <haly/nrfy_gpio.h>
 #include "prs/nrfx_prs.h"
 
 #define NRFX_LOG_MODULE TWIM
@@ -43,12 +43,12 @@
     (type == NRFX_TWIM_XFER_TXTX ? "XFER_TXTX" : \
                                    "UNKNOWN TRANSFER TYPE"))))
 
-#define TWIM_PIN_INIT(_pin, _drive) nrf_gpio_cfg((_pin),                     \
-                                                 NRF_GPIO_PIN_DIR_INPUT,     \
-                                                 NRF_GPIO_PIN_INPUT_CONNECT, \
-                                                 NRF_GPIO_PIN_PULLUP,        \
-                                                 (_drive),                   \
-                                                 NRF_GPIO_PIN_NOSENSE)
+#define TWIM_PIN_INIT(_pin, _drive) nrfy_gpio_cfg((_pin),                     \
+                                                  NRF_GPIO_PIN_DIR_INPUT,     \
+                                                  NRF_GPIO_PIN_INPUT_CONNECT, \
+                                                  NRF_GPIO_PIN_PULLUP,        \
+                                                  (_drive),                   \
+                                                  NRF_GPIO_PIN_NOSENSE)
 
 #define TWIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, len1, len2)     \
     (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
@@ -142,45 +142,45 @@ static bool xfer_completeness_check(NRF_TWIM_Type * p_twim, twim_control_block_t
     bool transfer_complete = true;
     switch (p_cb->xfer_desc.type)
     {
-    case NRFX_TWIM_XFER_TXTX:
+        case NRFX_TWIM_XFER_TXTX:
             // int_mask variable is used to determine which length should be checked
             // against number of bytes latched in EasyDMA.
             // NRF_TWIM_INT_SUSPENDED_MASK is configured only in first TX of TXTX transfer.
             if (((p_cb->int_mask & NRF_TWIM_INT_SUSPENDED_MASK) &&
-                 (nrf_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_length)) ||
+                 (nrfy_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_buffer.length)) ||
                 (!(p_cb->int_mask & NRF_TWIM_INT_SUSPENDED_MASK) &&
-                 (nrf_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.secondary_length)))
+                 (nrfy_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.secondary_buffer.length)))
             {
                 transfer_complete = false;
             }
-        break;
-    case NRFX_TWIM_XFER_TXRX:
-            if ((nrf_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_length) ||
-                (nrf_twim_rxd_amount_get(p_twim) != p_cb->xfer_desc.secondary_length))
+            break;
+        case NRFX_TWIM_XFER_TXRX:
+            if ((nrfy_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_buffer.length) ||
+                (nrfy_twim_rxd_amount_get(p_twim) != p_cb->xfer_desc.secondary_buffer.length))
             {
                 transfer_complete = false;
             }
-        break;
-    case NRFX_TWIM_XFER_TX:
-            if (nrf_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_length)
+            break;
+        case NRFX_TWIM_XFER_TX:
+            if (nrfy_twim_txd_amount_get(p_twim) != p_cb->xfer_desc.primary_buffer.length)
             {
                 transfer_complete = false;
             }
-        break;
-    case NRFX_TWIM_XFER_RX:
-            if (nrf_twim_rxd_amount_get(p_twim) != p_cb->xfer_desc.primary_length)
+            break;
+        case NRFX_TWIM_XFER_RX:
+            if (nrfy_twim_rxd_amount_get(p_twim) != p_cb->xfer_desc.primary_buffer.length)
             {
                 transfer_complete = false;
             }
-        break;
-    default:
-        break;
+            break;
+        default:
+            break;
     }
 
     if (!transfer_complete)
     {
-        nrf_twim_disable(p_twim);
-        nrf_twim_enable(p_twim);
+        nrfy_twim_disable(p_twim);
+        nrfy_twim_enable(p_twim);
     }
 
     return transfer_complete;
@@ -191,7 +191,7 @@ static bool twim_pins_configure(NRF_TWIM_Type * p_twim, nrfx_twim_config_t const
     // If both GPIO configuration and pin selection are to be skipped,
     // the pin numbers may be not specified at all, so even validation
     // of those numbers cannot be performed.
-    if (p_config->skip_gpio_cfg && p_config->skip_psel_cfg)
+    if (p_config->skip_gpio_cfg && p_config->nrfy_config.skip_psel_cfg)
     {
         return true;
     }
@@ -226,13 +226,8 @@ static bool twim_pins_configure(NRF_TWIM_Type * p_twim, nrfx_twim_config_t const
     */
     if (!p_config->skip_gpio_cfg)
     {
-        TWIM_PIN_INIT(p_config->scl, drive);
-        TWIM_PIN_INIT(p_config->sda, drive);
-    }
-
-    if (!p_config->skip_psel_cfg)
-    {
-        nrf_twim_pins_set(p_twim, p_config->scl, p_config->sda);
+        TWIM_PIN_INIT(p_config->nrfy_config.pins.scl_pin, drive);
+        TWIM_PIN_INIT(p_config->nrfy_config.pins.sda_pin, drive);
     }
 
     return true;
@@ -244,6 +239,7 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           void *                     p_context)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(p_config->nrfy_config.pins.scl_pin != p_config->nrfy_config.pins.sda_pin);
     twim_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     NRF_TWIM_Type * p_twim = p_instance->p_twim;
     nrfx_err_t err_code;
@@ -291,7 +287,7 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
     p_cb->skip_gpio_cfg   = p_config->skip_gpio_cfg;
 #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
-    p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->frequency;
+    p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->nrfy_config.frequency;
 #endif
 
     if (!twim_pins_configure(p_twim, p_config))
@@ -299,14 +295,8 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
         return NRFX_ERROR_INVALID_PARAM;
     }
 
-    nrf_twim_frequency_set(p_twim, (nrf_twim_frequency_t)p_config->frequency);
-
-    if (p_cb->handler)
-    {
-        NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_twim),
-            p_config->interrupt_priority);
-        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_twim));
-    }
+    nrfy_twim_periph_configure(p_instance->p_twim, &p_config->nrfy_config);
+    nrfy_twim_int_init(p_instance->p_twim, 0, p_config->interrupt_priority, false);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
@@ -320,10 +310,8 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    if (p_cb->handler)
-    {
-        NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_instance->p_twim));
-    }
+
+    nrfy_twim_int_uninit(p_instance->p_twim);
     nrfx_twim_disable(p_instance);
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
@@ -332,8 +320,11 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 
     if (!p_cb->skip_gpio_cfg && !p_cb->hold_bus_uninit)
     {
-        nrf_gpio_cfg_default(nrf_twim_scl_pin_get(p_instance->p_twim));
-        nrf_gpio_cfg_default(nrf_twim_sda_pin_get(p_instance->p_twim));
+        nrfy_twim_pins_t pins;
+
+        nrfy_twim_pins_get(p_instance->p_twim, &pins);
+        nrfy_gpio_cfg_default(pins.scl_pin);
+        nrfy_gpio_cfg_default(pins.sda_pin);
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
@@ -345,7 +336,7 @@ void nrfx_twim_enable(nrfx_twim_t const * p_instance)
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrf_twim_enable(p_instance->p_twim);
+    nrfy_twim_enable(p_instance->p_twim);
 
     p_cb->state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Instance enabled: %d.", p_instance->drv_inst_idx);
@@ -356,17 +347,12 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance)
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    NRF_TWIM_Type * p_twim = p_instance->p_twim;
     p_cb->int_mask = 0;
-    nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
-    nrf_twim_shorts_disable(p_twim, NRF_TWIM_ALL_SHORTS_MASK);
-    nrf_twim_disable(p_twim);
-
+    nrfy_twim_stop(p_instance->p_twim);
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
     p_cb->busy = false;
     NRFX_LOG_INFO("Instance disabled: %d.", p_instance->drv_inst_idx);
 }
-
 
 bool nrfx_twim_is_busy(nrfx_twim_t const * p_instance)
 {
@@ -374,37 +360,16 @@ bool nrfx_twim_is_busy(nrfx_twim_t const * p_instance)
     return p_cb->busy;
 }
 
-
-static void twim_list_enable_handle(NRF_TWIM_Type * p_twim, uint32_t flags)
-{
-    if (NRFX_TWIM_FLAG_TX_POSTINC & flags)
-    {
-        nrf_twim_tx_list_enable(p_twim);
-    }
-    else
-    {
-        nrf_twim_tx_list_disable(p_twim);
-    }
-
-    if (NRFX_TWIM_FLAG_RX_POSTINC & flags)
-    {
-        nrf_twim_rx_list_enable(p_twim);
-    }
-    else
-    {
-        nrf_twim_rx_list_disable(p_twim);
-    }
-}
 static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
                             NRF_TWIM_Type               * p_twim,
                             nrfx_twim_xfer_desc_t const * p_xfer_desc,
                             uint32_t                      flags)
 {
     nrfx_err_t err_code = NRFX_SUCCESS;
-    nrf_twim_task_t  start_task = NRF_TWIM_TASK_STARTTX;
     p_cb->error = false;
 
-    if (p_xfer_desc->primary_length != 0 && !nrfx_is_in_ram(p_xfer_desc->p_primary_buf))
+    if (p_xfer_desc->primary_buffer.length != 0 &&
+        !nrfx_is_in_ram(p_xfer_desc->primary_buffer.p_buffer))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -412,11 +377,23 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
+
+    if ((p_xfer_desc->type == NRFX_TWIM_XFER_TXTX ||
+         p_xfer_desc->type == NRFX_TWIM_XFER_TXRX) &&
+         !nrfx_is_in_ram(p_xfer_desc->secondary_buffer.p_buffer))
+    {
+            err_code = NRFX_ERROR_INVALID_ADDR;
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
+            return err_code;
+    }
+
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
-    nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+    nrfy_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
     if (p_cb->busy)
     {
-        nrf_twim_int_enable(p_twim, p_cb->int_mask);
+        nrfy_twim_int_enable(p_twim, p_cb->int_mask);
         err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
@@ -426,94 +403,74 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
     else
     {
         p_cb->busy = ((NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER & flags) ||
-                      (NRFX_TWIM_FLAG_REPEATED_XFER & flags)) ? false: true;
+                      (NRFX_TWIM_FLAG_REPEATED_XFER & flags)) ? false : true;
     }
 
     p_cb->xfer_desc = *p_xfer_desc;
     p_cb->repeated = (flags & NRFX_TWIM_FLAG_REPEATED_XFER) ? true : false;
     p_cb->flags = flags;
-    nrf_twim_address_set(p_twim, p_xfer_desc->address);
+    nrfy_twim_address_set(p_twim, p_xfer_desc->address);
 
-    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
-    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
-    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
-    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
+    nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
+    nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
+    nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
+    nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
 
-    twim_list_enable_handle(p_twim, flags);
+    nrfy_twim_tx_list_set(p_twim, NRFX_TWIM_FLAG_TX_POSTINC & flags);
+    nrfy_twim_rx_list_set(p_twim, NRFX_TWIM_FLAG_RX_POSTINC & flags);
     switch (p_xfer_desc->type)
     {
-    case NRFX_TWIM_XFER_TXTX:
-        NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_REPEATED_XFER));
-        NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_HOLD_XFER));
-        NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER));
-        if (!nrfx_is_in_ram(p_xfer_desc->p_secondary_buf))
-        {
-            err_code = NRFX_ERROR_INVALID_ADDR;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             __func__,
-                             NRFX_LOG_ERROR_STRING_GET(err_code));
-            return err_code;
-        }
-        nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
-        nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
-        nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-        nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
-        while (!nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_TXSTARTED))
-        {}
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_TXSTARTED));
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
-        nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_secondary_buf, p_xfer_desc->secondary_length);
-        p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK;
-        break;
-    case NRFX_TWIM_XFER_TXRX:
-        nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
-        if (!nrfx_is_in_ram(p_xfer_desc->p_secondary_buf))
-        {
-            err_code = NRFX_ERROR_INVALID_ADDR;
-            NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                             __func__,
-                             NRFX_LOG_ERROR_STRING_GET(err_code));
-            return err_code;
-        }
-        nrf_twim_rx_buffer_set(p_twim, p_xfer_desc->p_secondary_buf, p_xfer_desc->secondary_length);
-        nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STARTRX_MASK |
-                                    NRF_TWIM_SHORT_LASTRX_STOP_MASK);
-        p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
-        nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-        break;
-    case NRFX_TWIM_XFER_TX:
-        nrf_twim_tx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
-        if (NRFX_TWIM_FLAG_TX_NO_STOP & flags)
-        {
-            nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
+        case NRFX_TWIM_XFER_TXTX:
+            NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_REPEATED_XFER));
+            NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_HOLD_XFER));
+            NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER));
+            nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, true, true);
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer, false, false);
+            NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_TXSTARTED));
             p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK;
-        }
-        else
-        {
-            nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
+            break;
+        case NRFX_TWIM_XFER_TXRX:
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
+            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer, false, false);
+            nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STARTRX_MASK |
+                                    NRF_TWIM_SHORT_LASTRX_STOP_MASK);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
-        }
-        nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-        break;
-    case NRFX_TWIM_XFER_RX:
-        nrf_twim_rx_buffer_set(p_twim, p_xfer_desc->p_primary_buf, p_xfer_desc->primary_length);
-        nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTRX_STOP_MASK);
-        p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
-        start_task = NRF_TWIM_TASK_STARTRX;
-        nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-        break;
-    default:
-        err_code = NRFX_ERROR_INVALID_PARAM;
-        break;
+            break;
+        case NRFX_TWIM_XFER_TX:
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
+            if (NRFX_TWIM_FLAG_TX_NO_STOP & flags)
+            {
+                nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
+                p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK;
+            }
+            else
+            {
+                nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
+                p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
+            }
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+            break;
+        case NRFX_TWIM_XFER_RX:
+            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
+            nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTRX_STOP_MASK);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+            p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
+            break;
+        default:
+            err_code = NRFX_ERROR_INVALID_PARAM;
+            break;
     }
 
     if (!(flags & NRFX_TWIM_FLAG_HOLD_XFER) && (p_xfer_desc->type != NRFX_TWIM_XFER_TXTX))
     {
-        nrf_twim_task_trigger(p_twim, start_task);
-        if (p_xfer_desc->primary_length == 0)
+        nrfy_twim_task_trigger(p_twim,
+                               p_xfer_desc->type == NRFX_TWIM_XFER_RX ?
+                               NRF_TWIM_TASK_STARTRX : NRF_TWIM_TASK_STARTTX);
+        if (p_xfer_desc->primary_buffer.length == 0)
         {
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
         }
     }
 
@@ -531,53 +488,62 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
 
         // Interrupts for ERROR are implicitly enabled, regardless of driver configuration.
         p_cb->int_mask |= NRF_TWIM_INT_ERROR_MASK;
-        nrf_twim_int_enable(p_twim, p_cb->int_mask);
+        nrfy_twim_int_enable(p_twim, p_cb->int_mask);
 
 #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
         if ((flags & NRFX_TWIM_FLAG_HOLD_XFER) && (p_xfer_desc->type != NRFX_TWIM_XFER_RX))
         {
-            twim_list_enable_handle(p_twim, 0);
+            nrfy_twim_tx_list_set(p_twim, false);
+            nrfy_twim_rx_list_set(p_twim, false);
             p_twim->FREQUENCY = 0;
-            nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
-            nrf_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
+            nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
+            nrfy_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
         }
         else
         {
-            nrf_twim_frequency_set(p_twim, p_cb->bus_frequency);
+            nrfy_twim_frequency_set(p_twim, p_cb->bus_frequency);
         }
 #endif
     }
     else
     {
+        nrfy_twim_xfer_desc_t * p_xfer = p_cb->xfer_desc.type == NRFX_TWIM_XFER_RX ?
+                            &p_cb->xfer_desc.primary_buffer : &p_cb->xfer_desc.secondary_buffer;
         bool transmission_finished = false;
         do {
-            if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_SUSPENDED))
+            if (nrfy_twim_events_process(p_twim,
+                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
+                                         p_xfer))
             {
                 NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
                 transmission_finished = true;
             }
 
-            if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
+            if (nrfy_twim_events_process(p_twim,
+                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED),
+                                         p_xfer))
             {
-                nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
                 NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
                 transmission_finished = true;
             }
 
-            if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_ERROR))
+            if (nrfy_twim_events_process(p_twim,
+                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR),
+                                         p_xfer))
             {
-                nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
                 NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
 
-                bool lasttx_triggered = nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_LASTTX);
-                uint32_t shorts_mask = nrf_twim_shorts_get(p_twim);
+                bool lasttx_triggered = nrfy_twim_events_process(p_twim,
+                                                NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_LASTTX),
+                                                NULL);
+                uint32_t shorts_mask = nrfy_twim_shorts_get(p_twim);
 
                 if (!(lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
                 {
                     // Unless LASTTX event arrived and LASTTX_STOP shortcut is active,
                     // triggering of STOP task in case of error has to be done manually.
-                    nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-                    nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+                    nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+                    nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
 
                     // Mark transmission as not finished yet,
                     // as STOPPED event is expected to arrive.
@@ -597,8 +563,9 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
                     // Therefore SUSPENDED has to be cleared
                     // so it does not cause premature termination of busy loop
                     // waiting for STOPPED event to arrive.
-                    nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
-
+                    (void)nrfy_twim_events_process(p_twim,
+                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
+                                            p_xfer);
                     // Mark transmission as not finished yet,
                     // for same reasons as above.
                     transmission_finished = false;
@@ -606,7 +573,7 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             }
         } while (!transmission_finished);
 
-        uint32_t errorsrc =  nrf_twim_errorsrc_get_and_clear(p_twim);
+        uint32_t errorsrc = nrfy_twim_errorsrc_get_and_clear(p_twim);
 
         p_cb->busy = false;
 
@@ -632,8 +599,8 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
                           uint32_t                      flags)
 {
     NRFX_ASSERT(TWIM_LENGTH_VALIDATE(p_instance->drv_inst_idx,
-                                     p_xfer_desc->primary_length,
-                                     p_xfer_desc->secondary_length));
+                                     p_xfer_desc->primary_buffer.length,
+                                     p_xfer_desc->secondary_buffer.length));
 
     nrfx_err_t err_code = NRFX_SUCCESS;
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -644,14 +611,16 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
 
     NRFX_LOG_INFO("Transfer type: %s.", TRANSFER_TO_STR(p_xfer_desc->type));
     NRFX_LOG_INFO("Transfer buffers length: primary: %d, secondary: %d.",
-                  p_xfer_desc->primary_length,
-                  p_xfer_desc->secondary_length);
+                  p_xfer_desc->primary_buffer.length,
+                  p_xfer_desc->secondary_buffer.length);
     NRFX_LOG_DEBUG("Primary buffer data:");
-    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->p_primary_buf,
-                           p_xfer_desc->primary_length * sizeof(p_xfer_desc->p_primary_buf[0]));
+    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->primary_buffer.p_buffer,
+                           p_xfer_desc->primary_buffer.length *
+                           sizeof(p_xfer_desc->primary_buffer.p_buffer[0]));
     NRFX_LOG_DEBUG("Secondary buffer data:");
-    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->p_secondary_buf,
-                           p_xfer_desc->secondary_length * sizeof(p_xfer_desc->p_secondary_buf[0]));
+    NRFX_LOG_HEXDUMP_DEBUG(p_xfer_desc->secondary_buffer.p_buffer,
+                           p_xfer_desc->secondary_buffer.length *
+                           sizeof(p_xfer_desc->primary_buffer.p_buffer[0]));
 
     err_code = twim_xfer(p_cb, (NRF_TWIM_Type *)p_instance->p_twim, p_xfer_desc, flags);
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -663,58 +632,65 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
 uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance,
                                   nrfx_twim_xfer_type_t xfer_type)
 {
-    return nrf_twim_task_address_get(p_instance->p_twim,
+    return nrfy_twim_task_address_get(p_instance->p_twim,
         (xfer_type != NRFX_TWIM_XFER_RX) ? NRF_TWIM_TASK_STARTTX : NRF_TWIM_TASK_STARTRX);
 }
 
 uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance)
 {
-    return nrf_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
+    return nrfy_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
 }
 
 static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb)
 {
-
+    nrfy_twim_xfer_desc_t * p_xfer = p_cb->xfer_desc.type == NRFX_TWIM_XFER_RX ?
+                            &p_cb->xfer_desc.primary_buffer : &p_cb->xfer_desc.secondary_buffer;
 #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
-    /* Handle only workaround case. Can be used without TWIM handler in IRQs. */
-    if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_TXSTARTED))
+    if (nrfy_twim_events_process(p_twim,
+                                 NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_TXSTARTED),
+                                 NULL))
     {
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_TXSTARTED);
-        nrf_twim_int_disable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
+        nrfy_twim_int_disable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
         if (p_twim->FREQUENCY == 0)
         {
             // Set enable to zero to reset TWIM internal state.
-            nrf_twim_disable(p_twim);
-            nrf_twim_enable(p_twim);
+            nrfy_twim_disable(p_twim);
+            nrfy_twim_enable(p_twim);
 
             // Set proper frequency.
-            nrf_twim_frequency_set(p_twim, p_cb->bus_frequency);
-            twim_list_enable_handle(p_twim, p_cb->flags);
-
+            nrfy_twim_frequency_set(p_twim, p_cb->bus_frequency);
+            nrfy_twim_tx_list_set(p_twim, NRFX_TWIM_FLAG_TX_POSTINC & p_cb->flags);
+            nrfy_twim_rx_list_set(p_twim, NRFX_TWIM_FLAG_RX_POSTINC & p_cb->flags);
             // Start proper transmission.
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
             return;
         }
     }
 #endif
-
     NRFX_ASSERT(p_cb->handler);
 
-    if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_ERROR))
-    {
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
-        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
-        if (!nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
-        {
-            nrf_twim_int_disable(p_twim, p_cb->int_mask);
-            p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
-            nrf_twim_int_enable(p_twim, p_cb->int_mask);
+    bool stopped = nrfy_twim_events_process(p_twim,
+                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED),
+                                            p_xfer);
 
-            if (!(nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_LASTTX) &&
-                 (nrf_twim_shorts_get(p_twim) & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
+    if (nrfy_twim_events_process(p_twim,
+                                 NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR),
+                                 p_xfer))
+    {
+        NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
+        if (!stopped)
+        {
+            nrfy_twim_int_disable(p_twim, p_cb->int_mask);
+            p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
+            nrfy_twim_int_enable(p_twim, p_cb->int_mask);
+
+            if (!(nrfy_twim_events_process(p_twim,
+                                           NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_LASTTX),
+                                           NULL) &&
+                 (nrfy_twim_shorts_get(p_twim) & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
             {
-                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-                nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
+                nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+                nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
             }
 
             p_cb->error = true;
@@ -724,10 +700,9 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
 
     nrfx_twim_evt_t event;
 
-    if (nrf_twim_event_check(p_twim, NRF_TWIM_EVENT_STOPPED))
+    if (stopped)
     {
         NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
 
         if (!(p_cb->flags & NRFX_TWIM_FLAG_NO_SPURIOUS_STOP_CHECK) && !p_cb->error)
         {
@@ -739,20 +714,20 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
         if (!(p_cb->flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER))
         {
             event.xfer_desc = p_cb->xfer_desc;
-            nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
-            nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTRX);
+            nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTTX);
+            nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_LASTRX);
             if (!p_cb->repeated || p_cb->error)
             {
-                nrf_twim_shorts_set(p_twim, 0);
+                nrfy_twim_shorts_set(p_twim, 0);
                 p_cb->int_mask = 0;
-                nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+                nrfy_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
 
                 // At this point interrupt handler should not be invoked again for current transfer.
                 // If STOPPED arrived during ERROR processing,
                 // its pending interrupt should be ignored.
                 // Otherwise spurious NRFX_TWIM_EVT_DONE or NRFX_TWIM_EVT_BUS_ERROR
                 // would be passed to user's handler.
-                NRFX_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
+                NRFY_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
             }
         }
 
@@ -760,46 +735,49 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
         else if (p_cb->xfer_desc.type != NRFX_TWIM_XFER_RX)
         {
             /* Add Anomaly 109 workaround for each potential repeated transfer starting from TX. */
-            twim_list_enable_handle(p_twim, 0);
+            nrfy_twim_tx_list_set(p_twim, false);
+            nrfy_twim_rx_list_set(p_twim, false);
             p_twim->FREQUENCY = 0;
-            nrf_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
+            nrfy_twim_int_enable(p_twim, NRF_TWIM_INT_TXSTARTED_MASK);
         }
 #endif
     }
     else
     {
-        nrf_twim_event_clear(p_twim, NRF_TWIM_EVENT_SUSPENDED);
+        (void)nrfy_twim_events_process(p_twim,
+                                       NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
+                                       p_xfer);
         NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
         if (p_cb->xfer_desc.type == NRFX_TWIM_XFER_TX)
         {
             event.xfer_desc = p_cb->xfer_desc;
             if (!p_cb->repeated)
             {
-                nrf_twim_shorts_set(p_twim, 0);
+                nrfy_twim_shorts_set(p_twim, 0);
                 p_cb->int_mask = 0;
-                nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+                nrfy_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
 
                 // At this point interrupt handler should not be invoked again for current transfer.
                 // If STOPPED arrived during SUSPENDED processing,
                 // its pending interrupt should be ignored.
                 // Otherwise spurious NRFX_TWIM_EVT_DONE or NRFX_TWIM_EVT_BUS_ERROR
                 // would be passed to user's handler.
-                NRFX_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
+                NRFY_IRQ_PENDING_CLEAR(nrfx_get_irq_number(p_twim));
             }
         }
         else
         {
-            nrf_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
+            nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STOP_MASK);
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK | NRF_TWIM_INT_ERROR_MASK;
-            nrf_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
-            nrf_twim_int_enable(p_twim, p_cb->int_mask);
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
-            nrf_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
+            nrfy_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
+            nrfy_twim_int_enable(p_twim, p_cb->int_mask);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
             return;
         }
     }
 
-    uint32_t errorsrc = nrf_twim_errorsrc_get_and_clear(p_twim);
+    uint32_t errorsrc = nrfy_twim_errorsrc_get_and_clear(p_twim);
     if (errorsrc & NRF_TWIM_ERROR_ADDRESS_NACK)
     {
         event.type = NRFX_TWIM_EVT_ADDRESS_NACK;

@@ -5,7 +5,7 @@
 
 #include <nrfx.h>
 #include <nrfx_twi_twim.h>
-#include <hal/nrf_twim.h>
+#include <haly/nrfy_twim.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,25 +53,14 @@ enum {
 /** @brief Structure for the TWI master driver instance configuration. */
 typedef struct
 {
-    uint32_t             scl;                ///< SCL pin number.
-    uint32_t             sda;                ///< SDA pin number.
-    nrf_twim_frequency_t frequency;          ///< TWIM frequency.
-    uint8_t              interrupt_priority; ///< Interrupt priority.
-    bool                 hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
-    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                             /**< When set to true, the driver does not modify
-                                              *   any GPIO parameters of the used pins. Those
-                                              *   parameters are supposed to be configured
-                                              *   externally before the driver is initialized. */
-    bool                 skip_psel_cfg;      ///< Skip pin selection configuration.
-                                             /**< When set to true, the driver does not modify
-                                              *   pin select registers in the peripheral.
-                                              *   Those registers are supposed to be set up
-                                              *   externally before the driver is initialized.
-                                              *   @note When both GPIO configuration and pin
-                                              *   selection are to be skipped, the structure
-                                              *   fields that specify pins can be omitted,
-                                              *   as they are ignored anyway. */
+    nrfy_twim_config_t nrfy_config;        ///< TWIM configuration.
+    uint8_t            interrupt_priority; ///< Interrupt priority.
+    bool               hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
+    bool               skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
+                                           /**< When set to true, the driver does not modify
+                                            *   any GPIO parameters of the used pins. Those
+                                            *   parameters are supposed to be configured
+                                            *   externally before the driver is initialized. */
 } nrfx_twim_config_t;
 
 /**
@@ -84,13 +73,19 @@ typedef struct
  * @param[in] _pin_scl SCL pin.
  * @param[in] _pin_sda SDA pin.
  */
-#define NRFX_TWIM_DEFAULT_CONFIG(_pin_scl, _pin_sda)              \
-{                                                                 \
-    .scl                = _pin_scl,                               \
-    .sda                = _pin_sda,                               \
-    .frequency          = NRF_TWIM_FREQ_100K,                     \
-    .interrupt_priority = NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY,  \
-    .hold_bus_uninit    = false,                                  \
+#define NRFX_TWIM_DEFAULT_CONFIG(_pin_scl, _pin_sda)             \
+{                                                                \
+    .nrfy_config =                                               \
+    {                                                            \
+        .pins =                                                  \
+        {                                                        \
+            .scl_pin    = _pin_scl,                              \
+            .sda_pin    = _pin_sda                               \
+        },                                                       \
+        .frequency      = NRF_TWIM_FREQ_100K                     \
+    },                                                           \
+    .interrupt_priority = NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY, \
+    .hold_bus_uninit    = false,                                 \
 }
 
 /** @brief Flag indicating that TX buffer address will be incremented after the transfer. */
@@ -132,56 +127,42 @@ typedef struct
 {
     nrfx_twim_xfer_type_t type;             ///< Type of transfer.
     uint8_t               address;          ///< Slave address.
-    size_t                primary_length;   ///< Number of bytes transferred.
-    size_t                secondary_length; ///< Number of bytes transferred.
-    uint8_t *             p_primary_buf;    ///< Pointer to transferred data.
-    uint8_t *             p_secondary_buf;  ///< Pointer to transferred data.
+    nrfy_twim_xfer_desc_t primary_buffer;   ///< Primary structure describing a TWIM transfer.
+    nrfy_twim_xfer_desc_t secondary_buffer; ///< Secondary structure describing a TWIM transfer.
 } nrfx_twim_xfer_desc_t;
 
+/** @brief Macro for setting the transfer descriptor. */
+#define NRFX_TWIM_XFER_DESC(transfer, addr, p_buf1, buf_len1, p_buf2, buf_len2) \
+{                                                                               \
+    .type             = (transfer),                                             \
+    .address          = (addr),                                                 \
+    .primary_buffer   =                                                         \
+    {                                                                           \
+            .p_buffer = (p_buf1),                                               \
+            .length   = (buf_len1)                                              \
+    },                                                                          \
+    .secondary_buffer =                                                         \
+    {                                                                           \
+            .p_buffer = (p_buf2),                                               \
+            .length   = (buf_len2)                                              \
+    }                                                                           \
+}
 
 /** @brief Macro for setting the TX transfer descriptor. */
 #define NRFX_TWIM_XFER_DESC_TX(addr, p_data, length) \
-{                                                    \
-    .type             = NRFX_TWIM_XFER_TX,           \
-    .address          = (addr),                      \
-    .primary_length   = (length),                    \
-    .secondary_length = 0,                           \
-    .p_primary_buf    = (p_data),                    \
-    .p_secondary_buf  = NULL,                        \
-}
+        NRFX_TWIM_XFER_DESC(NRFX_TWIM_XFER_TX, addr, p_data, length, NULL, 0)
 
 /** @brief Macro for setting the RX transfer descriptor. */
 #define NRFX_TWIM_XFER_DESC_RX(addr, p_data, length) \
-{                                                    \
-    .type             = NRFX_TWIM_XFER_RX,           \
-    .address          = (addr),                      \
-    .primary_length   = (length),                    \
-    .secondary_length = 0,                           \
-    .p_primary_buf    = (p_data),                    \
-    .p_secondary_buf  = NULL,                        \
-}
+        NRFX_TWIM_XFER_DESC(NRFX_TWIM_XFER_RX, addr, p_data, length, NULL, 0)
 
 /** @brief Macro for setting the TX-RX transfer descriptor. */
 #define NRFX_TWIM_XFER_DESC_TXRX(addr, p_tx, tx_len, p_rx, rx_len) \
-{                                                                  \
-    .type             = NRFX_TWIM_XFER_TXRX,                       \
-    .address          = (addr),                                    \
-    .primary_length   = (tx_len),                                  \
-    .secondary_length = (rx_len),                                  \
-    .p_primary_buf    = (p_tx),                                    \
-    .p_secondary_buf  = (p_rx),                                    \
-}
+        NRFX_TWIM_XFER_DESC(NRFX_TWIM_XFER_TXRX, addr, p_tx, tx_len, p_rx, rx_len)
 
 /** @brief Macro for setting the TX-TX transfer descriptor. */
 #define NRFX_TWIM_XFER_DESC_TXTX(addr, p_tx, tx_len, p_tx2, tx_len2) \
-{                                                                    \
-    .type             = NRFX_TWIM_XFER_TXTX,                         \
-    .address          = (addr),                                      \
-    .primary_length   = (tx_len),                                    \
-    .secondary_length = (tx_len2),                                   \
-    .p_primary_buf    = (p_tx),                                      \
-    .p_secondary_buf  = (p_tx2),                                     \
-}
+        NRFX_TWIM_XFER_DESC(NRFX_TWIM_XFER_TXTX, addr, p_tx, tx_len, p_tx2, tx_len2)
 
 /** @brief Structure for a TWI event. */
 typedef struct
