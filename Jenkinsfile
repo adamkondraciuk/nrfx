@@ -30,20 +30,24 @@ pipeline {
                 script {
                     currentBuild.setDisplayName("(#${BUILD_NUMBER}) [nrfx]: ${env.BRANCH_NAME}, [nrfx-build]: ${params.nrfx_build_branch}, [nrfx_verification]: ${params.nrfx_verification_branch}")
                     if (env.CHANGE_BRANCH != null && env.CHANGE_BRANCH != env.BRANCH_NAME) {
-                        nrfx_branch= env.CHANGE_BRANCH
+                        nrfx_branch = env.CHANGE_BRANCH
+                        nrfx_target_branch = env.CHANGE_TARGET
                     }
                     else {
                         nrfx_branch = env.BRANCH_NAME
+                        nrfx_target_branch = ''
                     }
                     nrfx_build_branch = params.nrfx_build_branch.replaceAll('/','%2F')
                     nrfx_verification_branch = params.nrfx_verification_branch.replaceAll('/','%2F')
                     echo "[nrfx branch]: ${nrfx_branch}"
+                    echo "[nrfx target branch]: ${nrfx_target_branch}"
                     echo "[nrfx-build branch]: ${nrfx_build_branch}"
                     echo "[nrfx-verification branch]: ${nrfx_verification_branch}"
 
                     def job_name = "NRFX/nrfx-build-runner/"
                     build job: "${job_name}${nrfx_build_branch}",
                         parameters: [string(name: 'nrfx_branch', value: nrfx_branch),
+                                     string(name: 'nrfx_target_branch', value: nrfx_target_branch),
                                      string(name: 'nrfx_build_branch', value: nrfx_build_branch),
                                      string(name: 'nrfx_verification_branch', value: nrfx_verification_branch),
                                      string(name: 'filtered_unittests', value: params.filtered_unittests),
