@@ -24,6 +24,7 @@ typedef struct
     uint8_t         drv_inst_idx; ///< Index of the driver instance. For internal use only.
 } nrfx_qdec_t;
 
+/** @brief QDEC driver instance configuration structure. */
 typedef struct
 {
     nrfy_qdec_config_t nrfy_config;        /**< QDEC configuration structure. */
