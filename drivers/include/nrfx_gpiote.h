@@ -422,6 +422,17 @@ void nrfx_gpiote_global_callback_set(nrfx_gpiote_interrupt_handler_t handler,
                                      void *                          p_context);
 
 /**
+ * @brief Function for retrieving Task/Event channel index associated with the given pin.
+ *
+ * @param[in]  pin       Absolute pin number.
+ * @param[out] p_channel Location to write the channel index.
+ *
+ * @retval NRFX_SUCCESS             Channel successfully written.
+ * @retval NRFX_ERROR_INVALID_PARAM Pin is not using Task or Event.
+ */
+nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel);
+
+/**
  * @brief Function for initializing a GPIOTE output pin.
  * @details The output pin can be controlled by the CPU or by PPI. The initial
  * configuration specifies which mode is used. If PPI mode is used, the driver

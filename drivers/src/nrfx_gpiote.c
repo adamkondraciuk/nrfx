@@ -529,6 +529,22 @@ void nrfx_gpiote_global_callback_set(nrfx_gpiote_interrupt_handler_t handler, vo
     m_cb.global_handler.p_context = p_context;
 }
 
+nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel)
+{
+    NRFX_ASSERT(pin_in_use(pin));
+    NRFX_ASSERT(p_channel);
+
+    if (pin_in_use_by_te(pin))
+    {
+        *p_channel = PIN_GET_TE_ID(m_cb.pin_flags[pin]);
+        return NRFX_SUCCESS;
+    }
+    else
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+}
+
 /* Return handler associated with given pin or null. */
 static nrfx_gpiote_handler_config_t const * channel_handler_get(nrfx_gpiote_pin_t pin)
 {
