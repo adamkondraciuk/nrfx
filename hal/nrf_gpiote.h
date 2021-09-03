@@ -510,7 +510,7 @@ NRF_STATIC_INLINE void nrf_gpiote_event_enable(NRF_GPIOTE_Type * p_reg, uint32_t
 
 NRF_STATIC_INLINE void nrf_gpiote_event_disable(NRF_GPIOTE_Type * p_reg, uint32_t idx)
 {
-   p_reg->CONFIG[idx] &= ~GPIOTE_CONFIG_MODE_Event;
+   p_reg->CONFIG[idx] &= ~GPIOTE_CONFIG_MODE_Msk;
 }
 
 NRF_STATIC_INLINE void nrf_gpiote_event_configure(NRF_GPIOTE_Type *     p_reg,
@@ -555,7 +555,7 @@ NRF_STATIC_INLINE void nrf_gpiote_task_enable(NRF_GPIOTE_Type * p_reg, uint32_t 
 
 NRF_STATIC_INLINE void nrf_gpiote_task_disable(NRF_GPIOTE_Type * p_reg, uint32_t idx)
 {
-    p_reg->CONFIG[idx] &= ~GPIOTE_CONFIG_MODE_Task;
+    p_reg->CONFIG[idx] &= ~GPIOTE_CONFIG_MODE_Msk;
 }
 
 NRF_STATIC_INLINE void nrf_gpiote_task_configure(NRF_GPIOTE_Type *     p_reg,
