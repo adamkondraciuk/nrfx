@@ -85,6 +85,51 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                                                    nrf_tampc_debug_type_t type,
                                                    nrf_domain_t           domain);
 
+/**
+ * @brief Function for setting signal value of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be modified.
+ * @param[in] enable True if signal is to be logic 1, false if logic 0.
+ */
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
+                                                          nrf_tampc_debug_type_t type,
+                                                          bool                   enable);
+
+/**
+ * @brief Function for getting the signal value of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] type  Debug type that will be retrieved.
+ *
+ * @retval true  Signal is logic 1.
+ * @retval false Signal is logic 0.
+ */
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
+                                                          nrf_tampc_debug_type_t type);
+
+/**
+ * @brief Function for setting fault injection of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be modified.
+ * @param[in] enable True if fault is to be injected, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *       p_reg,
+                                                          nrf_tampc_debug_type_t type,
+                                                          bool                   enable);
+
+/**
+ * @brief Function for getting the fault injection of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] type  Debug type that will be retrieved.
+ *
+ * @retval true  Fault is to be injected.
+ * @retval false No operation.
+ */
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_fault_get(NRF_TAMPC_Type const * p_reg,
+                                                          nrf_tampc_debug_type_t type);
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -280,6 +325,170 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
             return ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL & TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Pos);
 #endif
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
+                                                          nrf_tampc_debug_type_t type,
+                                                          bool                   enable)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_High :
+                   TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Low)
+                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Pos));
+            break;
+        case NRF_TAMPC_CTRL_DBGEN:
+            p_reg->PROTECT.CORESIGHT.DBGEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_High :
+                   TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Low)
+                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Pos));
+            break;
+        case NRF_TAMPC_CTRL_NIDEN:
+            p_reg->PROTECT.CORESIGHT.NIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_High :
+                   TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Low)
+                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPIDEN:
+            p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_High :
+                   TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Low)
+                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_High :
+                   TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Low)
+                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Pos));
+            break;
+        default:
+            NRFX_ASSERT(0);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
+                                                          nrf_tampc_debug_type_t type)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            return ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_VALUE_Pos);
+        case NRF_TAMPC_CTRL_DBGEN:
+            return ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_VALUE_Pos);
+        case NRF_TAMPC_CTRL_NIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_VALUE_Pos);
+        case NRF_TAMPC_CTRL_SPIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_VALUE_Pos);
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Pos);
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *       p_reg,
+                                                          nrf_tampc_debug_type_t type,
+                                                          bool                   enable)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL = 
+                ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Trigger :
+                   TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_NoOperation)
+                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Pos));
+            break;
+        case NRF_TAMPC_CTRL_DBGEN:
+            p_reg->PROTECT.CORESIGHT.DBGEN.CTRL = 
+                ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Trigger :
+                   TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_NoOperation)
+                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Pos));
+            break;
+        case NRF_TAMPC_CTRL_NIDEN:
+            p_reg->PROTECT.CORESIGHT.NIDEN.CTRL = 
+                ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Trigger :
+                   TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_NoOperation)
+                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPIDEN:
+            p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL = 
+                ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Trigger :
+                   TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_NoOperation)
+                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL = 
+                ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Trigger :
+                   TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_NoOperation)
+                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Pos));
+            break;
+        default:
+            NRFX_ASSERT(0);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_fault_get(NRF_TAMPC_Type const * p_reg,
+                                                          nrf_tampc_debug_type_t type)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            return ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_FAULTTEST_Pos);
+        case NRF_TAMPC_CTRL_DBGEN:
+            return ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_FAULTTEST_Pos);
+        case NRF_TAMPC_CTRL_NIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_FAULTTEST_Pos);
+        case NRF_TAMPC_CTRL_SPIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_FAULTTEST_Pos);
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_FAULTTEST_Pos);
         default:
             NRFX_ASSERT(0);
             return false;
