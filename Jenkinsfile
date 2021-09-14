@@ -80,6 +80,7 @@ pipeline {
             copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
+            copyArtifacts projectName: "NRFX/sub-on-target-power-tests/${nrfx_verification_branch}", selector: lastCompleted()
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
             archiveArtifacts allowEmptyArchive: true, artifacts: "doc/warnings_nrfx.txt"
             archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
