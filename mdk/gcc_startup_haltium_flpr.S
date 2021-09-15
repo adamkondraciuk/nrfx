@@ -107,7 +107,7 @@ Reset_Handler:
 #endif
 
 
-#if !defined(NO_MTVT_CONFIG) && defined(__MTVT_PRESENT) && __MTVT_PRESENT
+#if !defined(NO_MTVT_CONFIG)
     /* Configure machine trap vector table register */
     la t0, __isr_vector
     csrw CSR_MTVT, t0
