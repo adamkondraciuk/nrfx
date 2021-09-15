@@ -1,0 +1,429 @@
+/*
+
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form, except as embedded into a Nordic
+   Semiconductor ASA integrated circuit in a product or a software update for
+   such product, must reproduce the above copyright notice, this list of
+   conditions and the following disclaimer in the documentation and/or other
+   materials provided with the distribution.
+
+3. Neither the name of Nordic Semiconductor ASA nor the names of its
+   contributors may be used to endorse or promote products derived from this
+   software without specific prior written permission.
+
+4. This software, with or without modification, must only be used with a
+   Nordic Semiconductor ASA integrated circuit.
+
+5. Any software provided in binary form under this license must not be reverse
+   engineered, decompiled, modified and/or disassembled.
+
+THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*/
+
+#ifndef HALTIUM_SYSCTRL_PERIPHERALS_H
+#define HALTIUM_SYSCTRL_PERIPHERALS_H
+
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
+/*VPR CSR registers*/
+#define VPRCSR_PRESENT
+#define VPRCSR_COUNT 1
+
+#define VPRCSR_MCLICBASERESET 4096
+#define VPRCSR_MULDIV 0
+#define VPRCSR_POWEROFFSLEEP 0
+#define VPRCSR_DBG 0
+#define VPRCSR_REMAP 0
+#define VPRCSR_BUSWIDTH 0
+#define VPRCSR_BKPT 0
+#define VPRCSR_HARTNUM 0
+#define VPRCSR_BEXT 0
+#define VPRCSR_RTVIOPINS 0
+#define VPRCSR_RTSPLITSEC 0
+
+/*One time programmable Information Configuration Registers*/
+#define OICR_PRESENT
+#define OICR_COUNT 1
+
+/*CACHEDATA*/
+#define CACHEDATA_PRESENT
+#define CACHEDATA_COUNT 1
+
+/*CACHEINFO*/
+#define CACHEINFO_PRESENT
+#define CACHEINFO_COUNT 1
+
+/*CRACENCORE*/
+#define CRACENCORE_PRESENT
+#define CRACENCORE_COUNT 1
+
+#define SHA3CORE_CRYPTMSTRDMAREGS 1
+#define SHA3CORE_CRYPTMSTRHWREGS 1
+#define SHA3CORE_RNGCONTROLREGS 0
+#define SHA3CORE_PKREGS 0
+#define SHA3CORE_IKGREGS 0
+#define SHA3CORE_RNGDATAREGS 0
+#define SHA3CORE_PKDATAMEMORYREGS 0
+#define SHA3CORE_PKUCODEREGS 0
+#define SHA3CORE_CRACENRESETVALUES 0
+#define SHA3CORE_SHA3RESETVALUES 0
+
+/*HSFLL*/
+#define HSFLL_PRESENT
+#define HSFLL_COUNT 3
+
+/*VPR APB registers*/
+#define VPR_PRESENT
+#define VPR_COUNT 1
+
+#define VPR_INITPCRESETVALUE 0
+#define VPR_MCLICBASE 4096
+#define VPR_IRQNUM 480
+#define VPR_VEVIF_NUMCHANNELS 32
+
+/*Cache*/
+#define CACHE_PRESENT
+#define CACHE_COUNT 1
+
+#define L2CACHE_VIRTUALCACHE 1
+#define L2CACHE_FLUSH 0
+#define L2CACHE_CLEAN 0
+
+/*RAM Controller*/
+#define RAMC_PRESENT
+#define RAMC_COUNT 8
+
+#define RAMC110_ECC 0
+#define RAMC110_SEC 0
+
+#define RAMC111_ECC 0
+#define RAMC111_SEC 0
+
+#define RAMC112_ECC 0
+#define RAMC112_SEC 0
+
+#define RAMC113_ECC 0
+#define RAMC113_SEC 0
+
+#define RAMC120_ECC 0
+#define RAMC120_SEC 0
+
+#define RAMC121_ECC 0
+#define RAMC121_SEC 0
+
+#define RAMC130_ECC 0
+#define RAMC130_SEC 0
+
+#define RAMC131_ECC 0
+#define RAMC131_SEC 0
+
+/*CRACEN*/
+#define CRACEN_PRESENT
+#define CRACEN_COUNT 1
+
+#define SHA3_CRYPTOACCELERATOR 0
+
+/*PCGCSlave*/
+#define PCGCSLAVE_PRESENT
+#define PCGCSLAVE_COUNT 13
+
+#define PCGCS110_PENALTYTASKS 1
+
+#define PCGCS120_PENALTYTASKS 1
+
+#define PCGCS121_PENALTYTASKS 1
+
+#define PCGCS122_PENALTYTASKS 1
+
+#define PCGCS130_PENALTYTASKS 1
+
+#define PCGCS131_PENALTYTASKS 1
+
+#define PCGCS132_PENALTYTASKS 1
+
+#define PCGCS133_PENALTYTASKS 1
+
+#define PCGCS134_PENALTYTASKS 1
+
+#define PCGCS135_PENALTYTASKS 1
+
+#define PCGCS136_PENALTYTASKS 1
+
+#define PCGCS137_PENALTYTASKS 1
+
+#define PCGCS138_PENALTYTASKS 1
+
+/*PCGC Master*/
+#define PCGCMASTER_PRESENT
+#define PCGCMASTER_COUNT 14
+
+#define PCGCM110_POWERCONSUMPTIONCALC 1
+#define PCGCM110_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM110_CLOCKFORCEREG 1
+#define PCGCM110_MASTERFORCEREG 1
+
+#define PCGCM120_POWERCONSUMPTIONCALC 1
+#define PCGCM120_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM120_CLOCKFORCEREG 1
+#define PCGCM120_MASTERFORCEREG 1
+
+#define PCGCM121_POWERCONSUMPTIONCALC 1
+#define PCGCM121_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM121_CLOCKFORCEREG 1
+#define PCGCM121_MASTERFORCEREG 1
+
+#define PCGCM122_POWERCONSUMPTIONCALC 1
+#define PCGCM122_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM122_CLOCKFORCEREG 1
+#define PCGCM122_MASTERFORCEREG 1
+
+#define PCGCM130_POWERCONSUMPTIONCALC 1
+#define PCGCM130_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM130_CLOCKFORCEREG 1
+#define PCGCM130_MASTERFORCEREG 1
+
+#define PCGCM139_POWERCONSUMPTIONCALC 1
+#define PCGCM139_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM139_CLOCKFORCEREG 1
+#define PCGCM139_MASTERFORCEREG 1
+
+#define PCGCM131_POWERCONSUMPTIONCALC 1
+#define PCGCM131_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM131_CLOCKFORCEREG 1
+#define PCGCM131_MASTERFORCEREG 1
+
+#define PCGCM132_POWERCONSUMPTIONCALC 1
+#define PCGCM132_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM132_CLOCKFORCEREG 1
+#define PCGCM132_MASTERFORCEREG 1
+
+#define PCGCM133_POWERCONSUMPTIONCALC 1
+#define PCGCM133_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM133_CLOCKFORCEREG 1
+#define PCGCM133_MASTERFORCEREG 1
+
+#define PCGCM134_POWERCONSUMPTIONCALC 1
+#define PCGCM134_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM134_CLOCKFORCEREG 1
+#define PCGCM134_MASTERFORCEREG 1
+
+#define PCGCM135_POWERCONSUMPTIONCALC 1
+#define PCGCM135_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM135_CLOCKFORCEREG 1
+#define PCGCM135_MASTERFORCEREG 1
+
+#define PCGCM136_POWERCONSUMPTIONCALC 1
+#define PCGCM136_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM136_CLOCKFORCEREG 1
+#define PCGCM136_MASTERFORCEREG 1
+
+#define PCGCM137_POWERCONSUMPTIONCALC 1
+#define PCGCM137_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM137_CLOCKFORCEREG 1
+#define PCGCM137_MASTERFORCEREG 1
+
+#define PCGCM138_POWERCONSUMPTIONCALC 1
+#define PCGCM138_SETPWRCONTHRESHOLDBASE 1
+#define PCGCM138_CLOCKFORCEREG 1
+#define PCGCM138_MASTERFORCEREG 1
+
+/*MRAM controller*/
+#define MRAMC_PRESENT
+#define MRAMC_COUNT 2
+
+/*EXternal Memory Encryption Engine*/
+#define EXMEE_PRESENT
+#define EXMEE_COUNT 1
+
+/*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
+                                                                                                                                  
+#define MVDMA_PRESENT
+#define MVDMA_COUNT 1
+
+/*PPIB APB registers*/
+#define PPIB_PRESENT
+#define PPIB_COUNT 11
+
+/*OTP controller*/
+#define OTPC_PRESENT
+#define OTPC_COUNT 1
+
+/*ROM Controller*/
+#define ROMC_PRESENT
+#define ROMC_COUNT 1
+
+/*Memory configuration*/
+#define MEMCONF_PRESENT
+#define MEMCONF_COUNT 2
+
+#define MEMCONF120_RETTRIM 1
+#define MEMCONF120_REPAIR 1
+#define MEMCONF120_POWER 1
+
+#define MEMCONF130_RETTRIM 1
+#define MEMCONF130_REPAIR 1
+#define MEMCONF130_POWER 1
+
+/*LRCCONF*/
+#define LRCCONF_PRESENT
+#define LRCCONF_COUNT 2
+
+#define LRCCONF120_POWERON 1
+#define LRCCONF120_RETAIN 1
+#define LRCCONF120_OTHERON 0
+#define LRCCONF120_AX2XWAITSTATES 1
+#define LRCCONF120_SYSTEMOFF 0
+#define LRCCONF120_PDACT 1
+#define LRCCONF120_CLKCTRL 1
+
+#define LRCCONF130_POWERON 1
+#define LRCCONF130_RETAIN 1
+#define LRCCONF130_OTHERON 1
+#define LRCCONF130_AX2XWAITSTATES 0
+#define LRCCONF130_SYSTEMOFF 1
+#define LRCCONF130_PDACT 1
+#define LRCCONF130_CLKCTRL 0
+
+/*Watchdog Timer*/
+#define WDT_PRESENT
+#define WDT_COUNT 1
+
+/*GRCCONF*/
+#define GRCCONF_PRESENT
+#define GRCCONF_COUNT 1
+
+/*PCRM*/
+#define PCRM_PRESENT
+#define PCRM_COUNT 1
+
+/*Reset hub*/
+#define RESETHUB_PRESENT
+#define RESETHUB_COUNT 1
+
+/*CLOCK*/
+#define CLOCK_PRESENT
+#define CLOCK_COUNT 1
+
+/*LFRC peripheral*/
+#define LFRC_PRESENT
+#define LFRC_COUNT 1
+
+/*LFXO peripheral*/
+#define LFXO_PRESENT
+#define LFXO_COUNT 1
+
+/*FLL16M*/
+#define FLL16M_PRESENT
+#define FLL16M_COUNT 1
+
+/*HFXO peripheral*/
+#define HFXO_PRESENT
+#define HFXO_COUNT 1
+
+/*AUXPLL*/
+#define AUXPLL_PRESENT
+#define AUXPLL_COUNT 2
+
+/*POWER*/
+#define POWER_PRESENT
+#define POWER_COUNT 1
+
+/*VREGMAIN peripheral*/
+#define VREGMAIN_PRESENT
+#define VREGMAIN_COUNT 1
+
+/*VREGAO1V8 peripheral*/
+#define VREGAO1V8_PRESENT
+#define VREGAO1V8_COUNT 1
+
+/*VREG1V0*/
+#define VREG1V0_PRESENT
+#define VREG1V0_COUNT 1
+
+/*VREGAO0V8 peripheral*/
+#define VREGAO0V8_PRESENT
+#define VREGAO0V8_COUNT 1
+
+/*VREGVS0V8 peripheral*/
+#define VREGVS0V8_PRESENT
+#define VREGVS0V8_COUNT 1
+
+/*VREGSU peripheral*/
+#define VREGSU_PRESENT
+#define VREGSU_COUNT 1
+
+/*VREGUSB peripheral*/
+#define VREGUSB_PRESENT
+#define VREGUSB_COUNT 1
+
+/*AUXPM*/
+#define AUXPM_PRESENT
+#define AUXPM_COUNT 1
+
+/*VREGMRAM peripheral*/
+#define VREGMRAM_PRESENT
+#define VREGMRAM_COUNT 2
+
+/*OSCRFR peripheral*/
+#define OSCRFR_PRESENT
+#define OSCRFR_COUNT 1
+
+/*SWEXT peripheral*/
+#define SWEXT_PRESENT
+#define SWEXT_COUNT 1
+
+/*MBIAS peripheral*/
+#define MBIAS_PRESENT
+#define MBIAS_COUNT 1
+
+/*VDETAO1V8 peripheral*/
+#define VDETAO1V8_PRESENT
+#define VDETAO1V8_COUNT 1
+
+/*VDETAO0V8 peripheral*/
+#define VDETAO0V8_PRESENT
+#define VDETAO0V8_COUNT 1
+
+/*VDETVS0V8 peripheral*/
+#define VDETVS0V8_PRESENT
+#define VDETVS0V8_COUNT 1
+
+/*VDETIO peripheral*/
+#define VDETIO_PRESENT
+#define VDETIO_COUNT 1
+
+/*VDETAO5V0 peripheral*/
+#define VDETAO5V0_PRESENT
+#define VDETAO5V0_COUNT 1
+
+/*VDET1V0 peripheral*/
+#define VDET1V0_PRESENT
+#define VDET1V0_COUNT 1
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif /* HALTIUM_SYSCTRL_PERIPHERALS_H */
+

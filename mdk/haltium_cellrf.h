@@ -64,14 +64,14 @@ typedef enum {
   SysTick_IRQn                           = -1,       /*!<  -1 System Tick Timer                                                */
 /* ============================================== Processor Specific Interrupts ============================================== */
   TXDFE_IRQn                             = 0,        /*!< 0 TXDFE                                                              */
-  RAMCM0_RFTIMERTX_IRQn                  = 1,        /*!< 1 RAMCM0_RFTIMERTX                                                   */
-  EGUTX_RAMCDATA_IRQn                    = 2,        /*!< 2 EGUTX_RAMCDATA                                                     */
-  RAMCIPC_RXDFE0_IRQn                    = 3,        /*!< 3 RAMCIPC_RXDFE0                                                     */
-  RXDFE1_IRQn                            = 4,        /*!< 4 RXDFE1                                                             */
-  RFTIMERRX_IRQn                         = 5,        /*!< 5 RFTIMERRX                                                          */
-  EGURX_IRQn                             = 6,        /*!< 6 EGURX                                                              */
+  EGUTX_RAMCM0_IRQn                      = 1,        /*!< 1 EGUTX_RAMCM0                                                       */
+  RAMCDATA_RXDFE0_IRQn                   = 2,        /*!< 2 RAMCDATA_RXDFE0                                                    */
+  RAMCIPC_RXDFE1_IRQn                    = 3,        /*!< 3 RAMCIPC_RXDFE1                                                     */
+  EGURX_IRQn                             = 4,        /*!< 4 EGURX                                                              */
+  RXDFEGNSS0_IRQn                        = 5,        /*!< 5 RXDFEGNSS0                                                         */
+  RXDFEGNSS1_IRQn                        = 6,        /*!< 6 RXDFEGNSS1                                                         */
   DSA2TX0_LRCCONF0_IRQn                  = 7,        /*!< 7 DSA2TX0_LRCCONF0                                                   */
-  DSA2TX1_HSFLL_IRQn                     = 8,        /*!< 8 DSA2TX1_HSFLL                                                      */
+  DSA2TX1_IRQn                           = 8,        /*!< 8 DSA2TX1                                                            */
   DSA2RX0_IRQn                           = 9,        /*!< 9 DSA2RX0                                                            */
   DSA2RX1_MPC_IRQn                       = 10,       /*!< 10 DSA2RX1_MPC                                                       */
   GPIOTE0_IRQn                           = 11,       /*!< 11 GPIOTE0                                                           */
@@ -85,18 +85,20 @@ typedef enum {
   MVDMA_IRQn                             = 20,       /*!< 20 MVDMA                                                             */
   GPIOTE_1_GD_IRQn                       = 21,       /*!< 21 GPIOTE_1_GD                                                       */
   MIPIRFFE_GD_IRQn                       = 22,       /*!< 22 MIPIRFFE_GD                                                       */
-  BELLBOARD0_IRQn                        = 23,       /*!< 23 BELLBOARD0                                                        */
-  BELLBOARD1_IRQn                        = 24,       /*!< 24 BELLBOARD1                                                        */
-  BELLBOARD2_IRQn                        = 25,       /*!< 25 BELLBOARD2                                                        */
-  BELLBOARD3_IRQn                        = 26,       /*!< 26 BELLBOARD3                                                        */
-  IPCT0_IRQn                             = 27,       /*!< 27 IPCT0                                                             */
-  IPCT1_IRQn                             = 28,       /*!< 28 IPCT1                                                             */
-  IPCT2_IRQn                             = 29,       /*!< 29 IPCT2                                                             */
-  IPCT3_IRQn                             = 30,       /*!< 30 IPCT3                                                             */
-  IPCT4_IRQn                             = 31,       /*!< 31 IPCT4                                                             */
+  BELLBOARD_0_IRQn                      = 23,       /*!< 23 BELLBOARD0_0                                                      */
+  BELLBOARD_1_IRQn                      = 24,       /*!< 24 BELLBOARD0_1                                                      */
+  BELLBOARD_2_IRQn                      = 25,       /*!< 25 BELLBOARD0_2                                                      */
+  BELLBOARD_3_IRQn                      = 26,       /*!< 26 BELLBOARD0_3                                                      */
+  IPCT_0_IRQn                           = 27,       /*!< 27 IPCT0_0                                                           */
+  IPCT_1_IRQn                           = 28,       /*!< 28 IPCT0_1                                                           */
+  IPCT_2_IRQn                           = 29,       /*!< 29 IPCT0_2                                                           */
+  IPCT_3_IRQn                           = 30,       /*!< 30 IPCT0_3                                                           */
+  IPCT_4_IRQn                           = 31,       /*!< 31 IPCT0_4                                                           */
+  IPCT_5_IRQn                           = 32,       /*!< 32 IPCT0_5                                                           */
   RAMCTX_IRQn                            = 81,       /*!< 81 RAMCTX                                                            */
   RAMCRX_IRQn                            = 82,       /*!< 82 RAMCRX                                                            */
   LRCCONF2_IRQn                          = 84,       /*!< 84 LRCCONF2                                                          */
+  RAMCGNSS_IRQn                          = 86,       /*!< 86 RAMCGNSS                                                          */
 } IRQn_Type;
 
 
@@ -113,7 +115,7 @@ typedef enum {
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
-#define __SAU_REGION_PRESENT           0             /*!< SAU present                                                          */
+#define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 
 #include "core_cm0.h"                                /*!< ARM Cortex-M0 processor and core peripherals                         */
 #include "system_haltium_cellrf.h"                   /*!< haltium_cellrf System Library                                        */
@@ -154,22 +156,23 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_HSFLL_BASE             0x46008000UL
+#define NRF_CELLRF_RFTIMERTX_BASE         0x46021000UL
+#define NRF_CELLRF_RFTIMERRX_BASE         0x46032000UL
 #define NRF_CELLRF_PCGCS0_BASE            0x46000000UL
 #define NRF_CELLRF_TXDFE_BASE             0x46020000UL
 #define NRF_CELLRF_RAMCM0_BASE            0x46001000UL
-#define NRF_CELLRF_RFTIMERTX_BASE         0x46021000UL
-#define NRF_CELLRF_RAMCDATA_BASE          0x46002000UL
 #define NRF_CELLRF_EGUTX_BASE             0x46022000UL
-#define NRF_CELLRF_RAMCIPC_BASE           0x46003000UL
+#define NRF_CELLRF_RAMCDATA_BASE          0x46002000UL
 #define NRF_CELLRF_RXDFE_BASE             0x46030000UL
+#define NRF_CELLRF_RAMCIPC_BASE           0x46003000UL
 #define NRF_CELLRF_PCGCS1_BASE            0x46004000UL
-#define NRF_CELLRF_MUTEX_BASE             0x46005000UL
-#define NRF_CELLRF_RFTIMERRX_BASE         0x46032000UL
-#define NRF_CELLRF_PCGCM0_BASE            0x46006000UL
 #define NRF_CELLRF_EGURX_BASE             0x46033000UL
+#define NRF_CELLRF_MUTEX_BASE             0x46005000UL
+#define NRF_CELLRF_RXDFEGNSS_BASE         0x46034000UL
+#define NRF_CELLRF_PCGCM0_BASE            0x46006000UL
 #define NRF_CELLRF_LRCCONF0_BASE          0x46007000UL
 #define NRF_CELLRF_DSA2TX_BASE            0x46040000UL
-#define NRF_CELLRF_HSFLL_BASE             0x46008000UL
 #define NRF_CELLRF_DSA2RX_BASE            0x46042000UL
 #define NRF_CELLRF_MPC_BASE               0x4600A000UL
 #define NRF_CELLRF_GPIOTE_BASE            0x46044000UL
@@ -193,27 +196,29 @@ typedef enum {
 #define NRF_CELLRF_PCGCM2_BASE            0x46053000UL
 #define NRF_CELLRF_LRCCONF2_BASE          0x46054000UL
 #define NRF_CELLRF_GPIO_BASE              0x46055000UL
+#define NRF_CELLRF_RAMCGNSS_BASE          0x46056000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_HSFLL                  ((NRF_HSFLL_Type*)                    NRF_CELLRF_HSFLL_BASE)
+#define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
+#define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
 #define NRF_CELLRF_PCGCS0                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS0_BASE)
 #define NRF_CELLRF_TXDFE                  ((NRF_TXDFE_Type*)                    NRF_CELLRF_TXDFE_BASE)
 #define NRF_CELLRF_RAMCM0                 ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCM0_BASE)
-#define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
-#define NRF_CELLRF_RAMCDATA               ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCDATA_BASE)
 #define NRF_CELLRF_EGUTX                  ((NRF_EGU_Type*)                      NRF_CELLRF_EGUTX_BASE)
-#define NRF_CELLRF_RAMCIPC                ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCIPC_BASE)
+#define NRF_CELLRF_RAMCDATA               ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCDATA_BASE)
 #define NRF_CELLRF_RXDFE                  ((NRF_RXDFE_Type*)                    NRF_CELLRF_RXDFE_BASE)
+#define NRF_CELLRF_RAMCIPC                ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCIPC_BASE)
 #define NRF_CELLRF_PCGCS1                 ((NRF_PCGCSLAVE_Type*)                NRF_CELLRF_PCGCS1_BASE)
-#define NRF_CELLRF_MUTEX                  ((NRF_MUTEX_Type*)                    NRF_CELLRF_MUTEX_BASE)
-#define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
-#define NRF_CELLRF_PCGCM0                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM0_BASE)
 #define NRF_CELLRF_EGURX                  ((NRF_EGU_Type*)                      NRF_CELLRF_EGURX_BASE)
+#define NRF_CELLRF_MUTEX                  ((NRF_MUTEX_Type*)                    NRF_CELLRF_MUTEX_BASE)
+#define NRF_CELLRF_RXDFEGNSS              ((NRF_RXDFE_Type*)                    NRF_CELLRF_RXDFEGNSS_BASE)
+#define NRF_CELLRF_PCGCM0                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM0_BASE)
 #define NRF_CELLRF_LRCCONF0               ((NRF_LRCCONF_Type*)                  NRF_CELLRF_LRCCONF0_BASE)
 #define NRF_CELLRF_DSA2TX                 ((NRF_DSA2_Type*)                     NRF_CELLRF_DSA2TX_BASE)
-#define NRF_CELLRF_HSFLL                  ((NRF_HSFLL_Type*)                    NRF_CELLRF_HSFLL_BASE)
 #define NRF_CELLRF_DSA2RX                 ((NRF_DSA2_Type*)                     NRF_CELLRF_DSA2RX_BASE)
 #define NRF_CELLRF_MPC                    ((NRF_MPC_Type*)                      NRF_CELLRF_MPC_BASE)
 #define NRF_CELLRF_GPIOTE                 ((NRF_GPIOTE_Type*)                   NRF_CELLRF_GPIOTE_BASE)
@@ -237,28 +242,30 @@ typedef enum {
 #define NRF_CELLRF_PCGCM2                 ((NRF_PCGCMASTER_Type*)               NRF_CELLRF_PCGCM2_BASE)
 #define NRF_CELLRF_LRCCONF2               ((NRF_LRCCONF_Type*)                  NRF_CELLRF_LRCCONF2_BASE)
 #define NRF_CELLRF_GPIO                   ((NRF_GPIO_Type*)                     NRF_CELLRF_GPIO_BASE)
+#define NRF_CELLRF_RAMCGNSS               ((NRF_RAMC_Type*)                     NRF_CELLRF_RAMCGNSS_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_HSFLL                               NRF_CELLRF_HSFLL
+  #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
+  #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX
   #define NRF_PCGCS0                              NRF_CELLRF_PCGCS0
   #define NRF_TXDFE                               NRF_CELLRF_TXDFE
   #define NRF_RAMCM0                              NRF_CELLRF_RAMCM0
-  #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
-  #define NRF_RAMCDATA                            NRF_CELLRF_RAMCDATA
   #define NRF_EGUTX                               NRF_CELLRF_EGUTX
-  #define NRF_RAMCIPC                             NRF_CELLRF_RAMCIPC
+  #define NRF_RAMCDATA                            NRF_CELLRF_RAMCDATA
   #define NRF_RXDFE                               NRF_CELLRF_RXDFE
+  #define NRF_RAMCIPC                             NRF_CELLRF_RAMCIPC
   #define NRF_PCGCS1                              NRF_CELLRF_PCGCS1
-  #define NRF_MUTEX                               NRF_CELLRF_MUTEX
-  #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX
-  #define NRF_PCGCM0                              NRF_CELLRF_PCGCM0
   #define NRF_EGURX                               NRF_CELLRF_EGURX
+  #define NRF_MUTEX                               NRF_CELLRF_MUTEX
+  #define NRF_RXDFEGNSS                           NRF_CELLRF_RXDFEGNSS
+  #define NRF_PCGCM0                              NRF_CELLRF_PCGCM0
   #define NRF_LRCCONF0                            NRF_CELLRF_LRCCONF0
   #define NRF_DSA2TX                              NRF_CELLRF_DSA2TX
-  #define NRF_HSFLL                               NRF_CELLRF_HSFLL
   #define NRF_DSA2RX                              NRF_CELLRF_DSA2RX
   #define NRF_MPC                                 NRF_CELLRF_MPC
   #define NRF_GPIOTE                              NRF_CELLRF_GPIOTE
@@ -282,6 +289,7 @@ typedef enum {
   #define NRF_PCGCM2                              NRF_CELLRF_PCGCM2
   #define NRF_LRCCONF2                            NRF_CELLRF_LRCCONF2
   #define NRF_GPIO                                NRF_CELLRF_GPIO
+  #define NRF_RAMCGNSS                            NRF_CELLRF_RAMCGNSS
 #endif                                               /*!< NRF_CELLRF                                                           */
 
 /* ========================================== End of section using anonymous unions ========================================== */

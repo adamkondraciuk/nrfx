@@ -90,29 +90,29 @@ typedef enum {
   SPU3_IRQn                              = 48,       /*!< 48 SPU3                                                              */
   LRCCONF3_IRQn                          = 49,       /*!< 49 LRCCONF3                                                          */
   MCPLL_IRQn                             = 53,       /*!< 53 MCPLL                                                             */
-  IPCT0_IRQn                             = 64,       /*!< 64 IPCT0                                                             */
-  IPCT1_IRQn                             = 65,       /*!< 65 IPCT1                                                             */
-  IPCT2_IRQn                             = 66,       /*!< 66 IPCT2                                                             */
-  IPCT3_IRQn                             = 67,       /*!< 67 IPCT3                                                             */
+  IPCT_0_IRQn                           = 64,       /*!< 64 IPCT0_0                                                           */
+  IPCT_1_IRQn                           = 65,       /*!< 65 IPCT0_1                                                           */
+  IPCT_2_IRQn                           = 66,       /*!< 66 IPCT0_2                                                           */
+  IPCT_3_IRQn                           = 67,       /*!< 67 IPCT0_3                                                           */
   SYSTEMTIMER0_IRQn                      = 68,       /*!< 68 SYSTEMTIMER0                                                      */
   SYSTEMTIMER1_IRQn                      = 69,       /*!< 69 SYSTEMTIMER1                                                      */
   LTETIMER0_IRQn                         = 70,       /*!< 70 LTETIMER0                                                         */
   LTETIMER1_IRQn                         = 71,       /*!< 71 LTETIMER1                                                         */
   GNSSTIMER0_IRQn                        = 72,       /*!< 72 GNSSTIMER0                                                        */
   GNSSTIMER1_IRQn                        = 73,       /*!< 73 GNSSTIMER1                                                        */
-  BELLBOARD0_IRQn                        = 96,       /*!< 96 BELLBOARD0                                                        */
-  BELLBOARD1_IRQn                        = 97,       /*!< 97 BELLBOARD1                                                        */
-  BELLBOARD2_IRQn                        = 98,       /*!< 98 BELLBOARD2                                                        */
-  BELLBOARD3_IRQn                        = 99,       /*!< 99 BELLBOARD3                                                        */
-  GPIOTE1300_IRQn                        = 104,      /*!< 104 GPIOTE1300                                                       */
-  GPIOTE1301_IRQn                        = 105,      /*!< 105 GPIOTE1301                                                       */
-  GPIOTE1310_IRQn                        = 106,      /*!< 106 GPIOTE1310                                                       */
-  GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
-  GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
-  GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
+  BELLBOARD_0_IRQn                      = 96,       /*!< 96 BELLBOARD0_0                                                      */
+  BELLBOARD_1_IRQn                      = 97,       /*!< 97 BELLBOARD0_1                                                      */
+  BELLBOARD_2_IRQn                      = 98,       /*!< 98 BELLBOARD0_2                                                      */
+  BELLBOARD_3_IRQn                      = 99,       /*!< 99 BELLBOARD0_3                                                      */
+  GPIOTE130_0_IRQn                      = 104,      /*!< 104 GPIOTE1300_0                                                     */
+  GPIOTE130_1_IRQn                      = 105,      /*!< 105 GPIOTE1300_1                                                     */
+  GPIOTE131_0_IRQn                      = 106,      /*!< 106 GPIOTE1310_0                                                     */
+  GPIOTE131_1_IRQn                      = 107,      /*!< 107 GPIOTE1310_1                                                     */
+  GRTC_0_IRQn                           = 108,      /*!< 108 GRTC0_0                                                          */
+  GRTC_1_IRQn                           = 109,      /*!< 109 GRTC0_1                                                          */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
+  CANPLL_CANPLLPM_IRQn                   = 194,      /*!< 194 CANPLL_CANPLLPM                                                  */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
@@ -120,7 +120,7 @@ typedef enum {
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
-  SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
+  SPIS120_UARTE120_IRQn                  = 229,      /*!< 229 SPIS120_UARTE120                                                 */
   SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
@@ -177,7 +177,7 @@ typedef enum {
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
-#define __SAU_REGION_PRESENT           0             /*!< SAU present                                                          */
+#define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_haltium_cellcore.h"                 /*!< haltium_cellcore System Library                                      */
@@ -218,11 +218,11 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLCORE_ICACHEDATA_S_BASE    0x04F00000UL
-#define NRF_CELLCORE_ICACHEINFO_S_BASE    0x04F10000UL
 #define NRF_CELLCORE_UICR_NS_BASE         0x0E3FF800UL
-#define NRF_CELLCORE_DCACHEDATA_S_BASE    0x24F00000UL
-#define NRF_CELLCORE_DCACHEINFO_S_BASE    0x24F10000UL
+#define NRF_CELLCORE_ICACHEDATA_S_BASE    0x14F00000UL
+#define NRF_CELLCORE_ICACHEINFO_S_BASE    0x14F10000UL
+#define NRF_CELLCORE_DCACHEDATA_S_BASE    0x34F00000UL
+#define NRF_CELLCORE_DCACHEINFO_S_BASE    0x34F10000UL
 #define NRF_CELLCORE_ETM_NS_BASE          0xE0041000UL
 #define NRF_CELLCORE_CTI_S_BASE           0xE0042000UL
 #define NRF_CELLCORE_CPUC_S_BASE          0xE0080000UL
@@ -296,9 +296,9 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLCORE_UICR_NS              ((NRF_UICR_Type*)                     NRF_CELLCORE_UICR_NS_BASE)
 #define NRF_CELLCORE_ICACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_CELLCORE_ICACHEDATA_S_BASE)
 #define NRF_CELLCORE_ICACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_ICACHEINFO_S_BASE)
-#define NRF_CELLCORE_UICR_NS              ((NRF_UICR_Type*)                     NRF_CELLCORE_UICR_NS_BASE)
 #define NRF_CELLCORE_DCACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_CELLCORE_DCACHEDATA_S_BASE)
 #define NRF_CELLCORE_DCACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_DCACHEINFO_S_BASE)
 #define NRF_CELLCORE_ETM_NS               ((NRF_ETM_Type*)                      NRF_CELLCORE_ETM_NS_BASE)
@@ -374,7 +374,7 @@ typedef enum {
 /* ================                                    TrustZone Remapping                                    ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_NONSECURE                                 /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
   #define NRF_CELLCORE_MVDMA                      NRF_CELLCORE_MVDMA_NS
@@ -401,9 +401,9 @@ typedef enum {
   #define NRF_CELLCORE_GNSSTIMER                  NRF_CELLCORE_GNSSTIMER_NS
   #define NRF_CELLCORE_BELLBOARD                  NRF_CELLCORE_BELLBOARD_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
+  #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
   #define NRF_CELLCORE_ICACHEDATA                 NRF_CELLCORE_ICACHEDATA_S
   #define NRF_CELLCORE_ICACHEINFO                 NRF_CELLCORE_ICACHEINFO_S
-  #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
   #define NRF_CELLCORE_DCACHEDATA                 NRF_CELLCORE_DCACHEDATA_S
   #define NRF_CELLCORE_DCACHEINFO                 NRF_CELLCORE_DCACHEINFO_S
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
@@ -451,16 +451,16 @@ typedef enum {
   #define NRF_CELLCORE_LTETIMER                   NRF_CELLCORE_LTETIMER_S
   #define NRF_CELLCORE_GNSSTIMER                  NRF_CELLCORE_GNSSTIMER_S
   #define NRF_CELLCORE_BELLBOARD                  NRF_CELLCORE_BELLBOARD_S
-#endif                                               /*!<  NRF_NONSECURE                                                       */
+#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLCORE                                  /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_UICR                                NRF_CELLCORE_UICR
   #define NRF_ICACHEDATA                          NRF_CELLCORE_ICACHEDATA
   #define NRF_ICACHEINFO                          NRF_CELLCORE_ICACHEINFO
-  #define NRF_UICR                                NRF_CELLCORE_UICR
   #define NRF_DCACHEDATA                          NRF_CELLCORE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_CELLCORE_DCACHEINFO
   #define NRF_ETM                                 NRF_CELLCORE_ETM

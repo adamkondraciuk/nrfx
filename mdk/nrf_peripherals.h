@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,10 +44,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*lint ++flb "Enter library region */
 
-#if defined(NRF51)
+#if defined (NRF5001_XXAA)
+    #include "nrf5001_peripherals.h"
+#elif defined(NRF5002_XXAA)
+    #include "nrf5002_peripherals.h"
+
+#elif defined (NRF51422_XXAA) || defined (NRF51422_XXAB) || defined (NRF51422_XXAC)
+    #include "nrf51422_peripherals.h"
+#elif defined (NRF51801_XXAB)
+    #include "nrf51801_peripherals.h"
+#elif defined (NRF51802_XXAA)
+    #include "nrf51802_peripherals.h"
+#elif defined (NRF51822_XXAA) || defined (NRF51822_XXAB) || defined (NRF51822_XXAC)
+    #include "nrf51822_peripherals.h"
+#elif defined (NRF51824_XXAA)
+    #include "nrf51824_peripherals.h"
+
+#elif defined(NRF51)
     #include "nrf51_peripherals.h"
 
-#elif defined (NRF52805_XXAA)
+#elif defined(NRF52805_XXAA)
     #include "nrf52805_peripherals.h"
 #elif defined(NRF52810_XXAA)
     #include "nrf52810_peripherals.h"
@@ -57,7 +73,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf52820_peripherals.h"
 #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     #include "nrf52832_peripherals.h"
-#elif defined (NRF52833_XXAA)
+#elif defined(NRF52833_XXAA)
     #include "nrf52833_peripherals.h"
 #elif defined(NRF52840_XXAA)
     #include "nrf52840_peripherals.h"
@@ -72,6 +88,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_peripherals.h"
 
+#elif defined (LILIUM_XXAA)
+    // No header file available yet.
+#elif defined (HALTIUM_XXAA)
+    #if defined (NRF_APPLICATION)
+        #include "haltium_application_peripherals.h"
+    #elif defined (NRF_BBPR)
+        #include "haltium_bbpr_peripherals.h"
+    #elif defined (NRF_CELLCORE)
+        #include "haltium_cellcore_peripherals.h"
+    #elif defined (NRF_CELLDSP)
+        #include "haltium_celldsp_peripherals.h"
+    #elif defined (NRF_CELLRF)
+        #include "haltium_cellrf_peripherals.h"
+    #elif defined (NRF_FLPR)
+        #include "haltium_flpr_peripherals.h"
+    #elif defined (NRF_ISIMCORE)
+        #include "haltium_isimcore_peripherals.h"
+    #elif defined (NRF_PPR)
+        #include "haltium_ppr_peripherals.h"
+    #elif defined (NRF_RADIOCORE)
+        #include "haltium_radiocore_peripherals.h"
+    #elif defined(NRF_SECURE)
+        #include "haltium_secure_peripherals.h"
+    #elif defined (NRF_SYSCTRL)
+        #include "haltium_sysctrl_peripherals.h"
+    #endif
+    #include "haltium_global_peripherals.h"
 #else
     #error "Device must be defined. See nrf_peripherals.h."
 #endif

@@ -199,14 +199,14 @@ _vectors:
   ISR_HANDLER   TIMER021_IRQHandler
   ISR_HANDLER   TIMER022_IRQHandler
   ISR_HANDLER   RTC_IRQHandler
-  ISR_HANDLER   RADIO0_IRQHandler
-  ISR_HANDLER   RADIO1_IRQHandler
+  ISR_HANDLER   RADIO0_0_IRQHandler
+  ISR_HANDLER   RADIO0_1_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   SPU030_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   APB3_HWACC_IRQHandler
+  ISR_HANDLER   RADIOACC_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -219,8 +219,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   IPCT0_IRQHandler
-  ISR_HANDLER   IPCT1_IRQHandler
+  ISR_HANDLER   IPCT0_0_IRQHandler
+  ISR_HANDLER   IPCT0_1_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -251,20 +251,20 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   BELLBOARD0_IRQHandler
-  ISR_HANDLER   BELLBOARD1_IRQHandler
-  ISR_HANDLER   BELLBOARD2_IRQHandler
-  ISR_HANDLER   BELLBOARD3_IRQHandler
+  ISR_HANDLER   BELLBOARD0_0_IRQHandler
+  ISR_HANDLER   BELLBOARD0_1_IRQHandler
+  ISR_HANDLER   BELLBOARD0_2_IRQHandler
+  ISR_HANDLER   BELLBOARD0_3_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   GPIOTE1300_IRQHandler
-  ISR_HANDLER   GPIOTE1301_IRQHandler
-  ISR_HANDLER   GPIOTE1310_IRQHandler
-  ISR_HANDLER   GPIOTE1311_IRQHandler
-  ISR_HANDLER   GRTC0_IRQHandler
-  ISR_HANDLER   GRTC1_IRQHandler
+  ISR_HANDLER   GPIOTE1300_0_IRQHandler
+  ISR_HANDLER   GPIOTE1300_1_IRQHandler
+  ISR_HANDLER   GPIOTE1310_0_IRQHandler
+  ISR_HANDLER   GPIOTE1310_1_IRQHandler
+  ISR_HANDLER   GRTC0_0_IRQHandler
+  ISR_HANDLER   GRTC0_1_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -349,6 +349,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   CANPLL_CANPLLPM_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -359,7 +360,6 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   CANPLL_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -384,7 +384,7 @@ _vectors:
   ISR_HANDLER   TIMER120_IRQHandler
   ISR_HANDLER   TIMER121_IRQHandler
   ISR_HANDLER   PWM120_IRQHandler
-  ISR_HANDLER   SPIS120_IRQHandler
+  ISR_HANDLER   SPIS120_UARTE120_IRQHandler
   ISR_HANDLER   SPIM120_IRQHandler
   ISR_HANDLER   SPIM121_IRQHandler
   ISR_HANDLER   TWIM120_IRQHandler

@@ -26,7 +26,6 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
-#include "nrf_erratas.h"
 #include "system_haltium_cellcore.h"
 
 /*lint ++flb "Enter library region" */

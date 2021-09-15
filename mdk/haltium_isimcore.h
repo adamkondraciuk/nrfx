@@ -71,6 +71,7 @@ typedef enum {
   SysTick_IRQn                           = -1,       /*!<  -1 System Tick Timer                                                */
 /* ============================================== Processor Specific Interrupts ============================================== */
   SPU0_IRQn                              = 0,        /*!< 0 SPU0                                                               */
+  CICTRL_IRQn                            = 2,        /*!< 2 CICTRL                                                             */
   LRCCONF0_IRQn                          = 3,        /*!< 3 LRCCONF0                                                           */
   SPU1_IRQn                              = 16,       /*!< 16 SPU1                                                              */
   MPC_IRQn                               = 17,       /*!< 17 MPC                                                               */
@@ -81,15 +82,15 @@ typedef enum {
   GENERIC7_IRQn                          = 34,       /*!< 34 GENERIC7                                                          */
   GENERIC8_IRQn                          = 35,       /*!< 35 GENERIC8                                                          */
   GENERIC9_IRQn                          = 36,       /*!< 36 GENERIC9                                                          */
-  GPIOTE1300_IRQn                        = 104,      /*!< 104 GPIOTE1300                                                       */
-  GPIOTE1301_IRQn                        = 105,      /*!< 105 GPIOTE1301                                                       */
-  GPIOTE1310_IRQn                        = 106,      /*!< 106 GPIOTE1310                                                       */
-  GPIOTE1311_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
-  GRTC0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
-  GRTC1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
+  GPIOTE130_0_IRQn                      = 104,      /*!< 104 GPIOTE1300_0                                                     */
+  GPIOTE130_1_IRQn                      = 105,      /*!< 105 GPIOTE1300_1                                                     */
+  GPIOTE131_0_IRQn                      = 106,      /*!< 106 GPIOTE1310_0                                                     */
+  GPIOTE131_1_IRQn                      = 107,      /*!< 107 GPIOTE1310_1                                                     */
+  GRTC_0_IRQn                           = 108,      /*!< 108 GRTC0_0                                                          */
+  GRTC_1_IRQn                           = 109,      /*!< 109 GRTC0_1                                                          */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  CANPLL_IRQn                            = 204,      /*!< 204 CANPLL                                                           */
+  CANPLL_CANPLLPM_IRQn                   = 194,      /*!< 194 CANPLL_CANPLLPM                                                  */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
@@ -97,7 +98,7 @@ typedef enum {
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
-  SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
+  SPIS120_UARTE120_IRQn                  = 229,      /*!< 229 SPIS120_UARTE120                                                 */
   SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
@@ -154,7 +155,7 @@ typedef enum {
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
-#define __SAU_REGION_PRESENT           0             /*!< SAU present                                                          */
+#define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_haltium_isimcore.h"                 /*!< haltium_isimcore System Library                                      */
@@ -249,7 +250,7 @@ typedef enum {
 /* ================                                    TrustZone Remapping                                    ================ */
 /* =========================================================================================================================== */
 
-#ifdef NRF_NONSECURE                                 /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_ISIMCORE_CPUCONF                    NRF_ISIMCORE_CPUCONF_NS
   #define NRF_ISIMCORE_CICTRL                     NRF_ISIMCORE_CICTRL_NS
   #define NRF_ISIMCORE_PCGCM0                     NRF_ISIMCORE_PCGCM0_NS
@@ -276,7 +277,7 @@ typedef enum {
   #define NRF_ISIMCORE_GENERIC7                   NRF_ISIMCORE_GENERIC7_S
   #define NRF_ISIMCORE_GENERIC8                   NRF_ISIMCORE_GENERIC8_S
   #define NRF_ISIMCORE_GENERIC9                   NRF_ISIMCORE_GENERIC9_S
-#endif                                               /*!<  NRF_NONSECURE                                                       */
+#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
