@@ -232,20 +232,6 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
                                                nrf_mvdma_event_t event);
 
 /**
- * @brief Function for enabling the MVDMA peripheral.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- */
-NRF_STATIC_INLINE void nrf_mvdma_enable(NRF_MVDMA_Type * p_reg);
-
-/**
- * @brief Function for disabling the MVDMA peripheral.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- */
-NRF_STATIC_INLINE void nrf_mvdma_disable(NRF_MVDMA_Type * p_reg);
-
-/**
  * @brief Function for setting the MVDMA mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -458,16 +444,6 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
                                                nrf_mvdma_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
-}
-
-NRF_STATIC_INLINE void nrf_mvdma_enable(NRF_MVDMA_Type * p_reg)
-{
-    p_reg->ENABLE = (MVDMA_ENABLE_ENABLE_Enabled << MVDMA_ENABLE_ENABLE_Pos);
-}
-
-NRF_STATIC_INLINE void nrf_mvdma_disable(NRF_MVDMA_Type * p_reg)
-{
-    p_reg->ENABLE = (MVDMA_ENABLE_ENABLE_Disabled << MVDMA_ENABLE_ENABLE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode_t mode)

@@ -344,20 +344,6 @@ NRFY_STATIC_INLINE void nrfy_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
 }
 #endif
 
-/** @refhal{nrf_mvdma_enable} */
-NRFY_STATIC_INLINE void nrfy_mvdma_enable(NRF_MVDMA_Type * p_reg)
-{
-    nrf_mvdma_enable(p_reg);
-    nrf_barrier_w();
-}
-
-/** @refhal{nrf_mvdma_disable} */
-NRFY_STATIC_INLINE void nrfy_mvdma_disable(NRF_MVDMA_Type * p_reg)
-{
-    nrf_mvdma_disable(p_reg);
-    nrf_barrier_w();
-}
-
 /** @refhal{nrf_mvdma_mode_set} */
 NRFY_STATIC_INLINE void nrfy_mvdma_mode_set(NRF_MVDMA_Type * p_reg,
                                             nrf_mvdma_mode_t mode)
