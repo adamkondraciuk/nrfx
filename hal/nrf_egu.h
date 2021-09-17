@@ -251,26 +251,39 @@ NRF_STATIC_INLINE void nrf_egu_publish_clear(NRF_EGU_Type *  p_reg,
 
 NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg)
 {
+#if defined(NRF_EGU0)
     if (p_reg == NRF_EGU0){
         return EGU0_CH_NUM;
     }
-#if EGU_COUNT > 1
+#endif
+#if defined(NRF_EGU1)
     if (p_reg == NRF_EGU1){
         return EGU1_CH_NUM;
     }
 #endif
-#if EGU_COUNT > 2
+#if defined(NRF_EGU2)
     if (p_reg == NRF_EGU2){
         return EGU2_CH_NUM;
     }
+#endif
+#if defined(NRF_EGU3)
     if (p_reg == NRF_EGU3){
         return EGU3_CH_NUM;
     }
+#endif
+#if defined(NRF_EGU4)
     if (p_reg == NRF_EGU4){
         return EGU4_CH_NUM;
     }
+#endif
+#if defined(NRF_EGU5)
     if (p_reg == NRF_EGU5){
         return EGU5_CH_NUM;
+    }
+#endif
+#if defined(NRF_EGU020)
+    if (p_reg == NRF_EGU020){
+        return EGU020_CH_NUM;
     }
 #endif
     return 0;
