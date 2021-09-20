@@ -11,6 +11,9 @@ extern "C" {
 
 #define NRF_UARTE_PSEL_DISCONNECTED 0xFFFFFFFF
 
+/* TODO: remove after the symbol is available in the MDK. */
+#define UARTE136_EASYDMA_MAXCNT_SIZE 8
+
 /**
  * @defgroup nrf_uarte_hal UARTE HAL
  * @{
