@@ -439,6 +439,9 @@ nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel);
  * attempts to allocate one of the available GPIOTE channels. If no channel is
  * available, an error is returned.
  *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_output_configure
+ *       preceded by @ref nrfx_gpiote_channel_alloc (provided that GPIOTE task is to be utilized) instead.
+ *
  * @param[in] pin      Pin.
  * @param[in] p_config Initial configuration.
  *
@@ -457,6 +460,8 @@ nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
  * @param[in] p_config Initial configuration.
  * @param[in] channel  GPIOTE channel allocated with @ref nrfx_gpiote_channel_alloc.
  *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_output_configure instead.
+ *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_BUSY          The pin is already used.
  * @retval NRFX_ERROR_INVALID_PARAM Pin is configured to not be controlled by
@@ -471,6 +476,9 @@ nrfx_err_t nrfx_gpiote_out_prealloc_init(nrfx_gpiote_pin_t                pin,
 /**
  * @brief Function for uninitializing a GPIOTE output pin.
  * @details The driver frees the GPIOTE channel if the output pin was using one.
+ *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_pin_uninit,
+ *       followed by @ref nrfx_gpiote_channel_free (provided that GPIOTE task was utilized) instead.
  *
  * @param[in] pin Pin.
  */
@@ -593,6 +601,9 @@ uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin);
  * low accuracy pins to toggle mode.
  * For more information about SENSE functionality, refer to Product Specification.
  *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_input_configure
+ *       preceded by @ref nrfx_gpiote_channel_alloc (provided that IN event is to be utilized) instead.
+ *
  * @param[in] pin         Pin.
  * @param[in] p_config    Initial configuration.
  * @param[in] evt_handler User function to be called when the configured transition occurs.
@@ -615,6 +626,8 @@ nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
  * @param[in] channel     GPIOTE channel allocated with @ref nrfx_gpiote_channel_alloc.
  * @param[in] evt_handler User function to be called when the configured transition occurs.
  *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_input_configure instead.
+ *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_BUSY          The pin is already used.
  * @retval NRFX_ERROR_INVALID_PARAM Pin is configured to not be controlled by
@@ -626,34 +639,40 @@ nrfx_err_t nrfx_gpiote_in_prealloc_init(nrfx_gpiote_pin_t               pin,
                                         nrfx_gpiote_in_config_t const * p_config,
                                         uint8_t                         channel,
                                         nrfx_gpiote_evt_handler_t       evt_handler);
+
 /**
  * @brief Function for uninitializing a GPIOTE input pin.
  * @details The driver frees the GPIOTE channel if the input pin was using one.
+ *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_pin_uninit,
+ *       followed by @ref nrfx_gpiote_channel_free (provided that IN event was utilized) instead.
  *
  * @param[in] pin Pin.
  */
 void nrfx_gpiote_in_uninit(nrfx_gpiote_pin_t pin);
 
 /**
- * @brief Macro for enabling sensing of a GPIOTE input pin.
+ * @brief Function for enabling sensing of a GPIOTE input pin.
  *
  * @details If the input pin is configured as high-accuracy pin, the function
  * enables an IN_EVENT. Otherwise, the function enables the GPIO sense mechanism.
  * The PORT event is shared between multiple pins, therefore the interrupt is always enabled.
  *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_trigger_enable instead.
+ *
  * @param[in] pin        Pin.
  * @param[in] int_enable True to enable the interrupt. Always valid for a high-accuracy pin.
  */
-#define nrfx_gpiote_in_event_enable(pin, int_enable) \
-    nrfx_gpiote_trigger_enable(pin, int_enable)
+NRFX_STATIC_INLINE void nrfx_gpiote_in_event_enable(nrfx_gpiote_pin_t pin, bool int_enable);
 
 /**
- * @brief Macro for disabling a GPIOTE input pin.
+ * @brief Function for disabling a GPIOTE input pin.
+ *
+ * @note This function is deprecated. Use @ref nrfx_gpiote_trigger_disable instead.
  *
  * @param[in] pin Pin.
  */
-#define nrfx_gpiote_in_event_disable(pin) \
-    nrfx_gpiote_trigger_disable(pin)
+NRFX_STATIC_INLINE void nrfx_gpiote_in_event_disable(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for checking if a GPIOTE input pin is set.
@@ -742,6 +761,16 @@ NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void);
 #endif
 
 #ifndef NRFX_DECLARE_ONLY
+
+NRFX_STATIC_INLINE void nrfx_gpiote_in_event_enable(nrfx_gpiote_pin_t pin, bool int_enable)
+{
+    nrfx_gpiote_trigger_enable(pin, int_enable);
+}
+
+NRFX_STATIC_INLINE void nrfx_gpiote_in_event_disable(nrfx_gpiote_pin_t pin)
+{
+    nrfx_gpiote_trigger_disable(pin);
+}
 
 #if NRF_GPIOTE_HAS_LATENCY
 NRFX_STATIC_INLINE void nrfx_gpiote_latency_set(nrf_gpiote_latency_t latency)
