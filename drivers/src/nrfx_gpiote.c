@@ -608,11 +608,11 @@ void nrfx_gpiote_uninit(void)
                 m_cb.pin_flags[i] &= ~PIN_FLAG_LEGACY_API_PIN;
                 if (pin_has_trigger(i))
                 {
-                        nrfx_gpiote_in_uninit(i);
+                    nrfx_gpiote_in_uninit(i);
                 }
                 else
                 {
-                        nrfx_gpiote_out_uninit(i);
+                    nrfx_gpiote_out_uninit(i);
                 }
             }
             else
@@ -708,7 +708,7 @@ void nrfx_gpiote_out_uninit(nrfx_gpiote_pin_t pin)
     uint8_t ch = pin_in_use_by_te(pin) ? pin_te_get(pin) : 0xFF;
 
     nrfx_err_t err = nrfx_gpiote_pin_uninit(pin);
-    NRFX_ASSERT(err = NRFX_SUCCESS);
+    NRFX_ASSERT(err == NRFX_SUCCESS);
 
     if (ch != 0xFF)
     {
@@ -1015,7 +1015,7 @@ void nrfx_gpiote_in_uninit(nrfx_gpiote_pin_t pin)
     else
     {
         err = nrfx_gpiote_pin_uninit(pin);
-        NRFX_ASSERT(err = NRFX_SUCCESS);
+        NRFX_ASSERT(err == NRFX_SUCCESS);
     }
 
     if (ch != 0xFF)
