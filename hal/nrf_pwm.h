@@ -513,6 +513,24 @@ NRF_STATIC_INLINE void nrf_pwm_decoder_set(NRF_PWM_Type *     p_reg,
  */
 NRF_STATIC_INLINE void nrf_pwm_loop_set(NRF_PWM_Type * p_reg, uint16_t loop_count);
 
+/**
+ * @brief Function for getting the specified PWM SEQSTART task.
+ *
+ * @param[in] seq_id Sequence index.
+ *
+ * @return The specified PWM SEQSTART task.
+ */
+NRF_STATIC_INLINE nrf_pwm_task_t nrf_pwm_seqstart_task_get(uint8_t seq_id);
+
+/**
+ * @brief Function for getting the specified PWM SEQEND event.
+ *
+ * @param[in] seq_id Sequence index.
+ *
+ * @return The specified PWM SEQEND event.
+ */
+NRF_STATIC_INLINE nrf_pwm_event_t nrf_pwm_seqend_event_get(uint8_t seq_id);
+
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -711,6 +729,18 @@ NRF_STATIC_INLINE void nrf_pwm_loop_set(NRF_PWM_Type * p_reg,
                                         uint16_t       loop_count)
 {
     p_reg->LOOP = loop_count;
+}
+
+NRF_STATIC_INLINE nrf_pwm_task_t nrf_pwm_seqstart_task_get(uint8_t seq_id)
+{
+    NRFX_ASSERT(seq_id <= 1);
+    return (nrf_pwm_task_t)NRFX_OFFSETOF(NRF_PWM_Type, TASKS_SEQSTART[seq_id]);
+}
+
+NRF_STATIC_INLINE nrf_pwm_event_t nrf_pwm_seqend_event_get(uint8_t seq_id)
+{
+    NRFX_ASSERT(seq_id <= 1);
+    return (nrf_pwm_event_t)NRFX_OFFSETOF(NRF_PWM_Type, EVENTS_SEQEND[seq_id]);
 }
 
 #endif // NRF_DECLARE_ONLY
