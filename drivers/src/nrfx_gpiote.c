@@ -531,7 +531,6 @@ void nrfx_gpiote_global_callback_set(nrfx_gpiote_interrupt_handler_t handler, vo
 
 nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel)
 {
-    NRFX_ASSERT(pin_in_use(pin));
     NRFX_ASSERT(p_channel);
 
     if (pin_in_use_by_te(pin))

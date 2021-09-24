@@ -428,7 +428,7 @@ void nrfx_gpiote_global_callback_set(nrfx_gpiote_interrupt_handler_t handler,
  * @param[out] p_channel Location to write the channel index.
  *
  * @retval NRFX_SUCCESS             Channel successfully written.
- * @retval NRFX_ERROR_INVALID_PARAM Pin is not using Task or Event.
+ * @retval NRFX_ERROR_INVALID_PARAM Pin is not configured or not using Task or Event.
  */
 nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel);
 
