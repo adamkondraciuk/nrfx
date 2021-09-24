@@ -13,7 +13,7 @@ nrfx_err_t nrfx_flag32_alloc(nrfx_atomic_t *p_mask, uint8_t *p_flag)
 
     do {
         prev_mask = *p_mask;
-        idx = 31 - __CLZ(prev_mask);
+        idx = 31 - NRFX_CLZ(prev_mask);
         if (idx < 0) {
             return NRFX_ERROR_NO_MEM;
         }

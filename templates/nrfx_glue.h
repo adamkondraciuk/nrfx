@@ -204,6 +204,26 @@ extern "C" {
  */
 #define NRFX_ATOMIC_CAS(p_data, old_value, new_value)
 
+/**
+ * @brief Macro for counting leading zeros.
+ *
+ * @param[in] value A word value.
+ *
+ * @return Number of leading 0-bits in @p value, starting at the most significant bit position.
+ *         If x is 0, the result is undefined.
+ */
+#define NRFX_CLZ(value)
+
+/**
+ * @brief Macro for counting trailing zeros.
+ *
+ * @param[in] value A word value.
+ *
+ * @return Number of trailing 0-bits in @p value, starting at the least significant bit position.
+ *         If x is 0, the result is undefined.
+ */
+#define NRFX_CTZ(value)
+
 //------------------------------------------------------------------------------
 
 /**
