@@ -46,8 +46,8 @@
     #define NRFX_DELAY_CPU_FREQ_MHZ 0
     #define NRFX_DELAY_DWT_PRESENT  0
 #elif defined(BOARD_PROFPGA)
-    #define NRFX_DELAY_CPU_FREQ_MHZ 1
-    #define NRFX_DELAY_DWT_PRESENT  0
+    #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / 30)
+    #define NRFX_DELAY_DWT_PRESENT  1
 #else
     #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
     #define NRFX_DELAY_DWT_PRESENT  0
