@@ -196,7 +196,7 @@ NRFY_STATIC_INLINE void nrfy_i2s_xfer_start(NRF_I2S_Type *               p_reg,
     {
         nrf_barrier_w();
 
-        bool tx_done, rx_done = false;
+        bool tx_done = false, rx_done = false;
 
         while (!((tx_done || (p_xfer->p_buffers->p_tx_buffer == NULL)) &&
                  (rx_done || (p_xfer->p_buffers->p_rx_buffer == NULL))))
