@@ -110,7 +110,6 @@ NRFY_STATIC_INLINE uint32_t nrfy_mvdma_events_process(NRF_MVDMA_Type *          
                                                       uint32_t                    mask,
                                                       nrfy_mvdma_list_request_t * p_list_request)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_mvdma_events_process(p_reg, mask, p_list_request);
     nrf_barrier_w();
     return evt_mask;
@@ -195,7 +194,7 @@ NRFY_STATIC_INLINE void nrfy_mvdma_abort(NRF_MVDMA_Type *                  p_reg
 
 /**
  * @brief Function for getting the MVDMA source job details
- * 
+ *
  * @param[in] p_reg           Pointer to the structure of registers of the peripheral.
  * @param[in] p_job_list_desc Pointer to the structure to be filled with job list description.
  */
@@ -212,7 +211,7 @@ void nrfy_mvdma_source_job_description_get(NRF_MVDMA_Type const *   p_reg,
 
 /**
  * @brief Function for getting the MVDMA sink job details
- * 
+ *
  * @param[in] p_reg           Pointer to the structure of registers of the peripheral.
  * @param[in] p_job_list_desc Pointer to the structure to be filled with job list description.
  */
@@ -506,6 +505,7 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
 {
     uint32_t evt_mask = 0;
 
+    nrf_barrier_r();
     (void)__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_RESET, &evt_mask);
     (void)__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_STARTED, &evt_mask);
     (void)__nrfy_internal_mvdma_event_process(p_reg,

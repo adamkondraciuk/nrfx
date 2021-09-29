@@ -86,7 +86,6 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
 NRFY_STATIC_INLINE uint32_t nrfy_grtc_events_process(NRF_GRTC_Type * p_reg,
                                                      uint32_t        mask)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_grtc_events_process(p_reg, mask);
     nrf_barrier_w();
     return evt_mask;
@@ -549,7 +548,6 @@ NRFY_STATIC_INLINE bool __nrfy_internal_grtc_event_handle(NRF_GRTC_Type *  p_reg
 {
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_grtc_event_check(p_reg, event))
     {
-        nrf_barrier_r();
         nrf_grtc_event_clear(p_reg, event);
         if (p_evt_mask)
         {
@@ -565,6 +563,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
 {
     uint32_t event_mask = 0;
 
+    nrf_barrier_r();
     for (uint8_t cc_channel = 0; cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT; cc_channel++)
     {
         nrf_grtc_event_t event = nrf_grtc_sys_counter_compare_event_get(cc_channel);

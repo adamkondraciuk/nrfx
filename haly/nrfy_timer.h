@@ -111,7 +111,6 @@ NRFY_STATIC_INLINE void nrfy_timer_int_uninit(NRF_TIMER_Type * p_reg)
 NRFY_STATIC_INLINE uint32_t nrfy_timer_events_process(NRF_TIMER_Type * p_reg,
                                                       uint32_t         mask)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_timer_events_process(p_reg, mask);
     nrf_barrier_w();
     return evt_mask;
@@ -403,7 +402,6 @@ NRFY_STATIC_INLINE bool __nrfy_internal_timer_event_handle(NRF_TIMER_Type *  p_r
 {
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_timer_event_check(p_reg, event))
     {
-        nrf_barrier_r();
         nrf_timer_event_clear(p_reg, event);
         if (p_evt_mask)
         {
@@ -419,6 +417,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_timer_events_process(NRF_TIMER_Type 
 {
     uint32_t event_mask = 0;
 
+    nrf_barrier_r();
     for (uint32_t i = 0; i < NRF_TIMER_CC_COUNT_MAX; i++)
     {
         __nrfy_internal_timer_event_handle(p_reg,

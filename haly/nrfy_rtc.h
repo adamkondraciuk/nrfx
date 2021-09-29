@@ -39,7 +39,7 @@ typedef struct
  * @brief Function for configuring the RTC.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] p_config Pointer to the peripheral configuration structure. 
+ * @param[in] p_config Pointer to the peripheral configuration structure.
  */
 NRFY_STATIC_INLINE void nrfy_rtc_periph_configure(NRF_RTC_Type *            p_reg,
                                                   nrfy_rtc_config_t const * p_config)
@@ -68,7 +68,7 @@ NRFY_STATIC_INLINE void nrfy_rtc_int_init(NRF_RTC_Type * p_reg,
     {
         __nrfy_internal_rtc_event_enabled_clear(p_reg, mask, nrf_rtc_compare_event_get(i));
     }
-    
+
     nrf_barrier_w();
 
     NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), irq_priority);
@@ -96,14 +96,13 @@ NRFY_STATIC_INLINE void nrfy_rtc_int_uninit(NRF_RTC_Type * p_reg)
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Mask of events to be processed, created by @ref NRFY_EVENT_TO_INT_BITMASK().
- * 
+ *
  * @return Mask of events that were generated and processed.
  *         To be checked against the result of @ref NRFY_EVENT_TO_INT_BITMASK().
  */
 NRFY_STATIC_INLINE uint32_t nrfy_rtc_events_process(NRF_RTC_Type * p_reg,
                                                     uint32_t       mask)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_rtc_events_process(p_reg, mask);
     nrf_barrier_w();
     return evt_mask;
@@ -127,7 +126,7 @@ NRFY_STATIC_INLINE void nrfy_rtc_stop(NRF_RTC_Type * p_reg,
 
 /**
  * @brief Function for enabling the RTC event and optionally associated interrupt.
- * 
+ *
  * @note Event is implicitly cleared before enabling the associated interrupt.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -248,7 +247,7 @@ NRFY_STATIC_INLINE bool nrfy_rtc_event_check(NRF_RTC_Type *  p_reg,
                                              nrf_rtc_event_t event)
 {
     nrf_barrier_r();
-    bool check = nrf_rtc_event_check(p_reg, event); 
+    bool check = nrf_rtc_event_check(p_reg, event);
     nrf_barrier_r();
     return check;
 }
@@ -355,6 +354,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_rtc_events_process(NRF_RTC_Type * p_
 {
     uint32_t event_mask = 0;
 
+    nrf_barrier_r();
     for (uint32_t i = 0; i < NRF_RTC_CC_COUNT_MAX; i++)
     {
         (void)__nrfy_internal_rtc_event_handle(p_reg,
@@ -362,7 +362,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_rtc_events_process(NRF_RTC_Type * p_
                                                nrf_rtc_compare_event_get(i),
                                                &event_mask);
     }
-    
+
     (void)__nrfy_internal_rtc_event_handle(p_reg, mask, NRF_RTC_EVENT_TICK, &event_mask);
 
     (void)__nrfy_internal_rtc_event_handle(p_reg, mask, NRF_RTC_EVENT_OVERFLOW, &event_mask);

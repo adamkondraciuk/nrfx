@@ -151,7 +151,6 @@ NRFY_STATIC_INLINE uint32_t nrfy_pdm_events_process(NRF_PDM_Type *      p_reg,
                                                     uint32_t            mask,
                                                     nrfy_pdm_buffer_t * p_buffer)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_pdm_events_process(p_reg, mask, p_buffer);
     nrf_barrier_w();
     return evt_mask;
@@ -480,6 +479,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_pdm_events_process(NRF_PDM_Type *   
 {
     uint32_t evt_mask = 0;
 
+    nrf_barrier_r();
     (void)__nrfy_internal_pdm_event_handle(p_reg, mask, NRF_PDM_EVENT_STARTED, &evt_mask);
 
     if (__nrfy_internal_pdm_event_handle(p_reg, mask, NRF_PDM_EVENT_STOPPED, &evt_mask) &&

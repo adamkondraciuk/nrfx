@@ -128,7 +128,6 @@ NRFY_STATIC_INLINE void nrfy_comp_int_init(NRF_COMP_Type * p_reg,
 NRFY_STATIC_INLINE uint32_t nrfy_comp_events_process(NRF_COMP_Type * p_reg,
                                                      uint32_t        mask)
 {
-    nrf_barrier_r();
     uint32_t evt_mask = __nrfy_internal_comp_events_process(p_reg, mask);
     nrf_barrier_w();
     return evt_mask;
@@ -336,7 +335,6 @@ NRFY_STATIC_INLINE bool __nrfy_internal_comp_event_handle(NRF_COMP_Type *  p_reg
 {
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_comp_event_check(p_reg, event))
     {
-        nrf_barrier_r();
         nrf_comp_event_clear(p_reg, event);
         if (p_evt_mask)
         {
@@ -352,6 +350,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_comp_events_process(NRF_COMP_Type * 
 {
     uint32_t event_mask = 0;
 
+    nrf_barrier_r();
     (void)__nrfy_internal_comp_event_handle(p_reg,
                                             mask,
                                             NRF_COMP_EVENT_READY,
