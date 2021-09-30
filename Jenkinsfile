@@ -81,10 +81,14 @@ pipeline {
             copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/sub-on-target-power-tests/${nrfx_verification_branch}", selector: lastCompleted()
+            copyArtifacts projectName: "NRFX/nrfx-coverity/${nrfx_verification_branch}", selector: lastCompleted(), target: 'work/nrfx-verification/'
+
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
             archiveArtifacts allowEmptyArchive: true, artifacts: "doc/warnings_nrfx.txt"
             archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
+
             junit 'work/nrfx-verification/outcomes/*/*.xml'
+
             script {
                 def result = currentBuild.currentResult
                 emailext recipientProviders: [requestor()],
@@ -105,6 +109,16 @@ On-target tests: ${params.filtered_ontargettests}
 
 Have a look at the build:
 ${BUILD_URL}
+
+In case of errors in:
+- api tests - check out artifact work/nrfx-verification/outcomes/results/pre-compile.log
+- coverity tests - check out artifact work/nrfx-verification/outcomes/reports/coverity_test_results.xml
+- on-target tests - check out artifact work/nrfx-verification/outcomes/reports/test_results.html
+- on-target power tests - check out artifact work/nrfx-verification/outcomes/reports/power_test_results.html
+- unit tests - check out artifacts from work/nrfx-verification/outcomes/reports/ut_results*.xml
+- generate documentation stage - check out artifact doc/warnings_nrfx.txt
+
+If you still have question please contact bartlomiej.buczek@nordicsemi.no or nikodem.kastelik@nordicsemi.no
 
 Cheers,
 Jenkins
