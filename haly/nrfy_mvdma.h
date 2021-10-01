@@ -13,10 +13,10 @@ extern "C" {
 
 typedef struct nrfy_mvdma_list_request_t nrfy_mvdma_list_request_t;
 
-NRFY_STATIC_INLINE bool __nrfy_internal_mvdma_event_process(NRF_MVDMA_Type *  p_reg,
-                                                            uint32_t          mask,
-                                                            nrf_mvdma_event_t event,
-                                                            uint32_t *        p_event_mask);
+NRFY_STATIC_INLINE bool __nrfy_internal_mvdma_event_handle(NRF_MVDMA_Type *  p_reg,
+                                                           uint32_t          mask,
+                                                           nrf_mvdma_event_t event,
+                                                           uint32_t *        p_event_mask);
 
 NRFY_STATIC_INLINE
 uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  p_reg,
@@ -481,10 +481,10 @@ NRFY_STATIC_INLINE uint32_t nrfy_mvdma_sink_job_count_get(NRF_MVDMA_Type const *
 
 /** @} */
 
-NRFY_STATIC_INLINE bool __nrfy_internal_mvdma_event_process(NRF_MVDMA_Type *  p_reg,
-                                                            uint32_t          mask,
-                                                            nrf_mvdma_event_t event,
-                                                            uint32_t *        p_event_mask)
+NRFY_STATIC_INLINE bool __nrfy_internal_mvdma_event_handle(NRF_MVDMA_Type *  p_reg,
+                                                           uint32_t          mask,
+                                                           nrf_mvdma_event_t event,
+                                                           uint32_t *        p_event_mask)
 {
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_mvdma_event_check(p_reg, event))
     {
@@ -506,20 +506,17 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
     uint32_t evt_mask = 0;
 
     nrf_barrier_r();
-    (void)__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_RESET, &evt_mask);
-    (void)__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_STARTED, &evt_mask);
-    (void)__nrfy_internal_mvdma_event_process(p_reg,
-                                              mask,
-                                              NRF_MVDMA_EVENT_SINKBUSERROR,
-                                              &evt_mask);
-    (void)__nrfy_internal_mvdma_event_process(p_reg,
-                                              mask,
-                                              NRF_MVDMA_EVENT_SOURCEBUSERROR,
-                                              &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_RESET, &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_STARTED, &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_SINKBUSERROR, &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg,
+                                             mask,
+                                             NRF_MVDMA_EVENT_SOURCEBUSERROR,
+                                             &evt_mask);
 
     bool invalidated = false;
 
-    if (__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_STOPPED, &evt_mask))
+    if (__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_STOPPED, &evt_mask))
     {
         size_t job_count = __nrfy_internal_mvdma_sink_job_count_get(p_reg);
         for (size_t i = 0; i < job_count; i++)
@@ -530,7 +527,7 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
         invalidated = true;
     }
 
-    if (__nrfy_internal_mvdma_event_process(p_reg, mask, NRF_MVDMA_EVENT_END, &evt_mask) &&
+    if (__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_END, &evt_mask) &&
         !invalidated)
     {
         for (nrfx_vdma_job_t * p_job = p_list_request->p_sink_job_list;
