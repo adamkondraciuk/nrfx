@@ -150,10 +150,8 @@ void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
     NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_accdbl);
     NRFX_ASSERT(p_acc);
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_POWERED_ON);
 
-    qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
-
-    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
     nrfy_qdec_task_trigger(p_instance->p_reg, NRF_QDEC_TASK_READCLRACC);
     nrfy_qdec_accumulators_read(p_instance->p_reg, p_acc, p_accdbl);
 
