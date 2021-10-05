@@ -48,7 +48,7 @@ NRFY_STATIC_INLINE void nrfy_bellboard_int_init(NRF_BELLBOARD_Type * p_reg,
                                                 bool                 enable,
                                                 uint8_t              group_idx)
 {
-    IRQn_Type interrupt_index = (IRQn_Type)((uint32_t)BELLBOARD0_IRQn + group_idx);
+    IRQn_Type interrupt_index = (IRQn_Type)((uint32_t)BELLBOARD_0_IRQn + group_idx);
 
     for (uint32_t i = 0; i < NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT; i++)
     {
@@ -76,7 +76,7 @@ NRFY_STATIC_INLINE void nrfy_bellboard_int_init(NRF_BELLBOARD_Type * p_reg,
  */
 NRFY_STATIC_INLINE void nrfy_bellboard_int_uninit(uint8_t group_idx)
 {
-    IRQn_Type interrupt_index = (IRQn_Type)((uint32_t)BELLBOARD0_IRQn + group_idx);
+    IRQn_Type interrupt_index = (IRQn_Type)((uint32_t)BELLBOARD_0_IRQn + group_idx);
 
     NRFX_IRQ_DISABLE(interrupt_index);
     nrf_barrier_w();
