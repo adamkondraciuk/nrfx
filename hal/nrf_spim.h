@@ -32,6 +32,13 @@ extern "C" {
 #define NRF_SPIM_HAS_32_MHZ_FREQ 0
 #endif
 
+#if defined(SPIM_INTEN_STARTED_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether INTEN register is available. */
+#define NRF_SPIM_HAS_INTEN 1
+#else
+#define NRF_SPIM_HAS_INTEN 0
+#endif
+
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
  *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
@@ -82,6 +89,13 @@ extern "C" {
 #define NRF_SPIM_HAS_STALLSTAT 0
 #endif
 
+#if NRF_SPIM_HAS_HW_CSN || NRF_SPIM_HAS_DCX || NRF_SPIM_HAS_RXDELAY
+/** @brief Symbol indicating whether any of the SPIM extended features is available. */
+#define NRF_SPIM_HAS_EXTENDED 1
+#else
+#define NRF_SPIM_HAS_EXTENDED 0
+#endif
+
 #if NRF_SPIM_HAS_DCX
 /**
  * @brief This value specified in the DCX line configuration causes this line
@@ -91,13 +105,6 @@ extern "C" {
  *        (all remaining bytes are marked as data bytes).
  */
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
-#endif
-
-#if NRF_SPIM_HAS_HW_CSN || NRF_SPIM_HAS_DCX || NRF_SPIM_HAS_RXDELAY
-/** @brief Symbol indicating whether any of the SPIM extended features is available. */
-#define NRF_SPIM_HAS_EXTENDED 1
-#else
-#define NRF_SPIM_HAS_EXTENDED 0
 #endif
 
 /** @brief SPIM tasks. */
@@ -277,6 +284,7 @@ NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
                                            uint32_t        mask);
 
+#if NRF_SPIM_HAS_INTEN
 /**
  * @brief Function for setting the configuration of interrupts.
  *
@@ -284,6 +292,7 @@ NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
  * @param[in] mask  Mask of interrupts to be set.
  */
 NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask);
+#endif // NRF_SPIM_HAS_INTEN
 
 /**
  * @brief Function for disabling the specified interrupts.
@@ -691,10 +700,12 @@ NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg,
     p_reg->INTENSET = mask;
 }
 
+#if NRF_SPIM_HAS_INTEN
 NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask)
 {
     p_reg->INTEN = mask;
 }
+#endif // NRF_SPIM_HAS_INTEN
 
 NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg,
                                             uint32_t        mask)

@@ -68,6 +68,13 @@ NRFY_STATIC_INLINE void __nrfy_internal_spim_event_enabled_clear(NRF_SPIM_Type *
 #define NRFY_SPIM_HAS_EXTENDED 0
 #endif
 
+#if NRF_SPIM_HAS_INTEN || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_SPIM_HAS_INTEN} */
+#define NRFY_SPIM_HAS_INTEN 1
+#else
+#define NRFY_SPIM_HAS_INTEN 0
+#endif
+
 /** @brief Structure describing single SPIM transfer. */
 struct nrfy_spim_xfer_desc_t
 {
@@ -216,7 +223,7 @@ NRFY_STATIC_INLINE void nrfy_spim_int_init(NRF_SPIM_Type * p_reg,
     NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
     if (enable)
     {
-        nrf_spim_int_set(p_reg, mask);
+        nrf_spim_int_enable(p_reg, mask);
     }
     nrf_barrier_w();
 }
@@ -450,12 +457,14 @@ NRFY_STATIC_INLINE void nrfy_spim_int_enable(NRF_SPIM_Type * p_reg, uint32_t mas
     nrf_barrier_w();
 }
 
+#if NRFY_SPIM_HAS_INTEN
 /** @refhal{nrf_spim_int_set} */
 NRFY_STATIC_INLINE void nrfy_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask)
 {
     nrf_spim_int_set(p_reg, mask);
     nrf_barrier_w();
 }
+#endif
 
 /** @refhal{nrf_spim_int_disable} */
 NRFY_STATIC_INLINE void nrfy_spim_int_disable(NRF_SPIM_Type * p_reg, uint32_t mask)
