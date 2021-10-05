@@ -16,6 +16,11 @@ extern "C" {
  * @brief   Hardware access layer for managing the Low Power Comparator (LPCOMP) peripheral.
  */
 
+/* TODO: Remove when in peripherals. */
+#if defined(HALTIUM_XXAA)
+#define LPCOMP_REFSEL_RESOLUTION 16
+#endif
+
 /** @brief LPCOMP reference selection. */
 typedef enum
 {
