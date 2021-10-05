@@ -25,6 +25,12 @@ extern "C" {
  */
 #define NRF_EGU_INST_GET(idx) NRFX_CONCAT_2(NRF_EGU, idx)
 
+#if defined(HALTIUM_XXAA)
+/* TODO: Delete when added to MDK. */
+#define EGU130_CH_NUM 8
+#define EGU020_CH_NUM 16
+#endif
+
 /** @brief EGU tasks. */
 typedef enum
 {
@@ -284,6 +290,11 @@ NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg)
 #if defined(NRF_EGU020)
     if (p_reg == NRF_EGU020){
         return EGU020_CH_NUM;
+    }
+#endif
+#if defined(NRF_EGU130)
+    if (p_reg == NRF_EGU130){
+        return EGU130_CH_NUM;
     }
 #endif
     return 0;

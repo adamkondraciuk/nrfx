@@ -4,12 +4,14 @@
 
 #if NRFX_CHECK(NRFX_EGU_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_EGU0_ENABLED) || \
-      NRFX_CHECK(NRFX_EGU1_ENABLED) || \
-      NRFX_CHECK(NRFX_EGU2_ENABLED) || \
-      NRFX_CHECK(NRFX_EGU3_ENABLED) || \
-      NRFX_CHECK(NRFX_EGU4_ENABLED) || \
-      NRFX_CHECK(NRFX_EGU5_ENABLED))
+#if !(NRFX_CHECK(NRFX_EGU0_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU1_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU2_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU3_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU4_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU5_ENABLED)   || \
+      NRFX_CHECK(NRFX_EGU020_ENABLED) || \
+      NRFX_CHECK(NRFX_EGU130_ENABLED))
 #error "No enabled EGU instances. Check <nrfx_config.h>."
 #endif
 
@@ -30,6 +32,12 @@
 #endif
 #if NRFX_CHECK(NRFX_EGU5_ENABLED) && ((1 << 5) & NRFX_EGUS_USED)
     #error "EGU instance 5 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_EGU020_ENABLED) && ((1 << 6) & NRFX_EGUS_USED)
+    #error "EGU instance 020 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_EGU130_ENABLED) && ((1 << 7) & NRFX_EGUS_USED)
+    #error "EGU instance 130 is reserved for use outside of nrfx."
 #endif
 
 #include <nrfx_egu.h>
@@ -180,6 +188,20 @@ void nrfx_egu_4_irq_handler(void)
 void nrfx_egu_5_irq_handler(void)
 {
     egu_irq_handler(NRF_EGU5, &m_cb[NRFX_EGU5_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_EGU020_ENABLED)
+void nrfx_egu_020_irq_handler(void)
+{
+    egu_irq_handler(NRF_EGU020, &m_cb[NRFX_EGU020_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_EGU130_ENABLED)
+void nrfx_egu_130_irq_handler(void)
+{
+    egu_irq_handler(NRF_EGU130, &m_cb[NRFX_EGU130_INST_IDX]);
 }
 #endif
 

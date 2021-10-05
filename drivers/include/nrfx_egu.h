@@ -45,6 +45,12 @@ enum {
 #if NRFX_CHECK(NRFX_EGU5_ENABLED)
     NRFX_EGU5_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_EGU020_ENABLED)
+    NRFX_EGU020_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_EGU130_ENABLED)
+    NRFX_EGU130_INST_IDX,
+#endif
     NRFX_EGU_ENABLED_COUNT
 };
 #endif
@@ -129,6 +135,8 @@ void nrfx_egu_2_irq_handler(void);
 void nrfx_egu_3_irq_handler(void);
 void nrfx_egu_4_irq_handler(void);
 void nrfx_egu_5_irq_handler(void);
+void nrfx_egu_020_irq_handler(void);
+void nrfx_egu_130_irq_handler(void);
 
 #ifdef __cplusplus
 }
