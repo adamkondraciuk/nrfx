@@ -24,6 +24,23 @@ extern "C" {
 #define NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK \
     ((uint32_t)(((1 << SAADC_CH_NUM) - 1) << NRF_SAADC_LIMITS_INT_OFFSET))
 
+#if defined(HALTIUM_XXAA)
+/* TODO: delete when in MDK */
+#define SAADC_CH_NUM 8
+#endif
+
+#if defined(SAADC_CH_CONFIG_TACQ_3us) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the Acquisition Time enum. */
+#define NRF_SAADC_HAS_ACQTIME_ENUM 1
+#else
+#define NRF_SAADC_HAS_ACQTIME_ENUM 0
+#endif
+
+#if !NRF_SAADC_HAS_ACQTIME_ENUM
+/** @brief Maximum value of acquire time. */
+#define NRF_SAADC_ACQTIME_MAX SAADC_CH_CONFIG_TACQ_Max
+#endif
+
 /** @brief Resolution of the analog-to-digital converter. */
 typedef enum
 {
@@ -36,18 +53,38 @@ typedef enum
 /** @brief Input selection for the analog-to-digital converter. */
 typedef enum
 {
-    NRF_SAADC_INPUT_DISABLED = SAADC_CH_PSELP_PSELP_NC,           ///< Not connected.
-    NRF_SAADC_INPUT_AIN0     = SAADC_CH_PSELP_PSELP_AnalogInput0, ///< Analog input 0 (AIN0).
-    NRF_SAADC_INPUT_AIN1     = SAADC_CH_PSELP_PSELP_AnalogInput1, ///< Analog input 1 (AIN1).
-    NRF_SAADC_INPUT_AIN2     = SAADC_CH_PSELP_PSELP_AnalogInput2, ///< Analog input 2 (AIN2).
-    NRF_SAADC_INPUT_AIN3     = SAADC_CH_PSELP_PSELP_AnalogInput3, ///< Analog input 3 (AIN3).
-    NRF_SAADC_INPUT_AIN4     = SAADC_CH_PSELP_PSELP_AnalogInput4, ///< Analog input 4 (AIN4).
-    NRF_SAADC_INPUT_AIN5     = SAADC_CH_PSELP_PSELP_AnalogInput5, ///< Analog input 5 (AIN5).
-    NRF_SAADC_INPUT_AIN6     = SAADC_CH_PSELP_PSELP_AnalogInput6, ///< Analog input 6 (AIN6).
-    NRF_SAADC_INPUT_AIN7     = SAADC_CH_PSELP_PSELP_AnalogInput7, ///< Analog input 7 (AIN7).
-    NRF_SAADC_INPUT_VDD      = SAADC_CH_PSELP_PSELP_VDD,          ///< VDD as input.
+    NRF_SAADC_INPUT_DISABLED = SAADC_CH_PSELP_PSELP_NC,            ///< Not connected.
+    NRF_SAADC_INPUT_AIN0     = SAADC_CH_PSELP_PSELP_AnalogInput0,  ///< Analog input 0 (AIN0).
+    NRF_SAADC_INPUT_AIN1     = SAADC_CH_PSELP_PSELP_AnalogInput1,  ///< Analog input 1 (AIN1).
+    NRF_SAADC_INPUT_AIN2     = SAADC_CH_PSELP_PSELP_AnalogInput2,  ///< Analog input 2 (AIN2).
+    NRF_SAADC_INPUT_AIN3     = SAADC_CH_PSELP_PSELP_AnalogInput3,  ///< Analog input 3 (AIN3).
+    NRF_SAADC_INPUT_AIN4     = SAADC_CH_PSELP_PSELP_AnalogInput4,  ///< Analog input 4 (AIN4).
+    NRF_SAADC_INPUT_AIN5     = SAADC_CH_PSELP_PSELP_AnalogInput5,  ///< Analog input 5 (AIN5).
+    NRF_SAADC_INPUT_AIN6     = SAADC_CH_PSELP_PSELP_AnalogInput6,  ///< Analog input 6 (AIN6).
+    NRF_SAADC_INPUT_AIN7     = SAADC_CH_PSELP_PSELP_AnalogInput7,  ///< Analog input 7 (AIN7).
+#if defined(SAADC_CH_PSELP_PSELP_VDD) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_VDD      = SAADC_CH_PSELP_PSELP_VDD,           ///< VDD as input.
+#endif
 #if defined(SAADC_CH_PSELP_PSELP_VDDHDIV5) || defined(__NRFX_DOXYGEN__)
-    NRF_SAADC_INPUT_VDDHDIV5 = SAADC_CH_PSELP_PSELP_VDDHDIV5      ///< VDDH/5 as input.
+    NRF_SAADC_INPUT_VDDHDIV5 = SAADC_CH_PSELP_PSELP_VDDHDIV5       ///< VDDH/5 as input.
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput8) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN8     = SAADC_CH_PSELP_PSELP_AnalogInput8,  ///< Analog input 8 (AIN8).
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput9) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN9     = SAADC_CH_PSELP_PSELP_AnalogInput9,  ///< Analog input 9 (AIN9).
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput10) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN10    = SAADC_CH_PSELP_PSELP_AnalogInput10, ///< Analog input 10 (AIN10).
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput11) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN11    = SAADC_CH_PSELP_PSELP_AnalogInput11, ///< Analog input 11 (AIN11).
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput12) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN12    = SAADC_CH_PSELP_PSELP_AnalogInput12, ///< Analog input 12 (AIN12).
+#endif
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput13) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_INPUT_AIN13    = SAADC_CH_PSELP_PSELP_AnalogInput13, ///< Analog input 13 (AIN13).
 #endif
 } nrf_saadc_input_t;
 
@@ -68,20 +105,38 @@ typedef enum
 /** @brief Analog-to-digital converter channel resistor control. */
 typedef enum
 {
-    NRF_SAADC_RESISTOR_DISABLED = SAADC_CH_CONFIG_RESP_Bypass,   ///< Bypass resistor ladder.
-    NRF_SAADC_RESISTOR_PULLDOWN = SAADC_CH_CONFIG_RESP_Pulldown, ///< Pull-down to GND.
-    NRF_SAADC_RESISTOR_PULLUP   = SAADC_CH_CONFIG_RESP_Pullup,   ///< Pull-up to VDD.
-    NRF_SAADC_RESISTOR_VDD1_2   = SAADC_CH_CONFIG_RESP_VDD1_2    ///< Set input at VDD/2.
+    NRF_SAADC_RESISTOR_DISABLED = SAADC_CH_CONFIG_RESP_Bypass,       ///< Bypass resistor ladder.
+    NRF_SAADC_RESISTOR_PULLDOWN = SAADC_CH_CONFIG_RESP_Pulldown,     ///< Pull-down to GND.
+    NRF_SAADC_RESISTOR_PULLUP   = SAADC_CH_CONFIG_RESP_Pullup,       ///< Pull-up to VDD.
+#if defined(SAADC_CH_CONFIG_RESP_VDD1_2) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_RESISTOR_VDD1_2   = SAADC_CH_CONFIG_RESP_VDD1_2,       ///< Set input at VDD/2.
+#endif
+#if defined(SAADC_CH_CONFIG_RESP_VDDAO1V8div2)
+    NRF_SAADC_RESISTOR_VDD1_2   = SAADC_CH_CONFIG_RESP_VDDAO1V8div2, ///< Set input at VDD/2.
+#endif
 } nrf_saadc_resistor_t;
 
 /** @brief Gain factor of the analog-to-digital converter input. */
 typedef enum
 {
+#if defined(SAADC_CH_CONFIG_GAIN_Gain1_6) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN1_6 = SAADC_CH_CONFIG_GAIN_Gain1_6, ///< Gain factor 1/6.
+#endif
+#if defined(SAADC_CH_CONFIG_GAIN_Gain1_5) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN1_5 = SAADC_CH_CONFIG_GAIN_Gain1_5, ///< Gain factor 1/5.
+#endif
+#if defined(SAADC_CH_CONFIG_GAIN_Gain1_4) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN1_4 = SAADC_CH_CONFIG_GAIN_Gain1_4, ///< Gain factor 1/4.
+#endif
+#if defined(SAADC_CH_CONFIG_GAIN_Gain1_3) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN1_3 = SAADC_CH_CONFIG_GAIN_Gain1_3, ///< Gain factor 1/3.
+#endif
+#if defined(SAADC_CH_CONFIG_GAIN_Gain1_2) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_GAIN1_2 = SAADC_CH_CONFIG_GAIN_Gain1_2, ///< Gain factor 1/2.
+#endif
+#if defined(SAADC_CH_CONFIG_GAIN_Gain2_3) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_GAIN2_3 = SAADC_CH_CONFIG_GAIN_Gain2_3, ///< Gain factor 2/3.
+#endif
     NRF_SAADC_GAIN1   = SAADC_CH_CONFIG_GAIN_Gain1,   ///< Gain factor 1.
     NRF_SAADC_GAIN2   = SAADC_CH_CONFIG_GAIN_Gain2,   ///< Gain factor 2.
     NRF_SAADC_GAIN4   = SAADC_CH_CONFIG_GAIN_Gain4,   ///< Gain factor 4.
@@ -90,11 +145,19 @@ typedef enum
 /** @brief Reference selection for the analog-to-digital converter. */
 typedef enum
 {
-    NRF_SAADC_REFERENCE_INTERNAL = SAADC_CH_CONFIG_REFSEL_Internal, ///< Internal reference (0.6 V).
+#if defined(SAADC_CH_CONFIG_REFSEL_Internal) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_REFERENCE_INTERNAL = SAADC_CH_CONFIG_REFSEL_Internal, ///< Internal reference.
+#endif
+#if defined(SAADC_CH_CONFIG_REFSEL_VDD1_4) || defined(__NRFX_DOXYGEN__)
     NRF_SAADC_REFERENCE_VDD4     = SAADC_CH_CONFIG_REFSEL_VDD1_4    ///< VDD/4 as reference.
+#endif
+#if defined(SAADC_CH_CONFIG_REFSEL_External) || defined(__NRFX_DOXYGEN__)
+    NRF_SAADC_REFERENCE_EXTERNAL = SAADC_CH_CONFIG_REFSEL_External, ///< External reference.
+#endif
 } nrf_saadc_reference_t;
 
 /** @brief Analog-to-digital converter acquisition time. */
+#if NRF_SAADC_HAS_ACQTIME_ENUM
 typedef enum
 {
     NRF_SAADC_ACQTIME_3US  = SAADC_CH_CONFIG_TACQ_3us,  ///< 3 us.
@@ -104,6 +167,7 @@ typedef enum
     NRF_SAADC_ACQTIME_20US = SAADC_CH_CONFIG_TACQ_20us, ///< 20 us.
     NRF_SAADC_ACQTIME_40US = SAADC_CH_CONFIG_TACQ_40us  ///< 40 us.
 } nrf_saadc_acqtime_t;
+#endif
 
 /** @brief Analog-to-digital converter channel mode. */
 typedef enum
@@ -209,7 +273,11 @@ typedef struct
     nrf_saadc_resistor_t  resistor_n; ///< Resistor value on negative input.
     nrf_saadc_gain_t      gain;       ///< Gain control value.
     nrf_saadc_reference_t reference;  ///< Reference control value.
+#if NRF_SAADC_HAS_ACQTIME_ENUM
     nrf_saadc_acqtime_t   acq_time;   ///< Acquisition time.
+#else
+    uint16_t              acq_time;   ///< Acquisition time.
+#endif
     nrf_saadc_mode_t      mode;       ///< SAADC mode. Single-ended or differential.
     nrf_saadc_burst_t     burst;      ///< Burst mode configuration.
 } nrf_saadc_channel_config_t;
@@ -827,6 +895,9 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
                                               uint8_t                            channel,
                                               nrf_saadc_channel_config_t const * config)
 {
+#if !NRF_SAADC_HAS_ACQTIME_ENUM
+    NRFX_ASSERT(config->acq_time <= NRF_SAADC_ACQTIME_MAX);
+#endif
     p_reg->CH[channel].CONFIG =
             ((config->resistor_p   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
             | ((config->resistor_n << SAADC_CH_CONFIG_RESN_Pos)   & SAADC_CH_CONFIG_RESN_Msk)
