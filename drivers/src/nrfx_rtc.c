@@ -4,8 +4,9 @@
 
 #if NRFX_CHECK(NRFX_RTC_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_RTC0_ENABLED) || NRFX_CHECK(NRFX_RTC1_ENABLED) || \
-      NRFX_CHECK(NRFX_RTC2_ENABLED))
+#if !(NRFX_CHECK(NRFX_RTC0_ENABLED) || NRFX_CHECK(NRFX_RTC1_ENABLED)   || \
+      NRFX_CHECK(NRFX_RTC2_ENABLED) || NRFX_CHECK(NRFX_RTC130_ENABLED) || \
+      NRFX_CHECK(NRFX_RTC131_ENABLED))
 #error "No enabled RTC instances. Check <nrfx_config.h>."
 #endif
 
@@ -288,6 +289,20 @@ void nrfx_rtc_1_irq_handler(void)
 void nrfx_rtc_2_irq_handler(void)
 {
     irq_handler(NRF_RTC2, NRFX_RTC2_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(2));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_RTC130_ENABLED)
+void nrfx_rtc_130_irq_handler(void)
+{
+    irq_handler(NRF_RTC130, NRFX_RTC130_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(130));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_RTC131_ENABLED)
+void nrfx_rtc_131_irq_handler(void)
+{
+    irq_handler(NRF_RTC131, NRFX_RTC131_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(131));
 }
 #endif
 

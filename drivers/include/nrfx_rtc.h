@@ -60,6 +60,12 @@ enum {
 #if NRFX_CHECK(NRFX_RTC2_ENABLED)
     NRFX_RTC2_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_RTC130_ENABLED)
+    NRFX_RTC130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_RTC131_ENABLED)
+    NRFX_RTC131_INST_IDX,
+#endif
     NRFX_RTC_ENABLED_COUNT
 };
 #endif
@@ -342,6 +348,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_rtc_event_address_get(nrfx_rtc_t const * p_inst
 void nrfx_rtc_0_irq_handler(void);
 void nrfx_rtc_1_irq_handler(void);
 void nrfx_rtc_2_irq_handler(void);
+void nrfx_rtc_130_irq_handler(void);
+void nrfx_rtc_131_irq_handler(void);
 
 
 #ifdef __cplusplus
