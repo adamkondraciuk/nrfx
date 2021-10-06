@@ -4,8 +4,11 @@
 
 #if NRFX_CHECK(NRFX_PWM_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_PWM0_ENABLED) || NRFX_CHECK(NRFX_PWM1_ENABLED) || \
-      NRFX_CHECK(NRFX_PWM2_ENABLED) || NRFX_CHECK(NRFX_PWM3_ENABLED))
+#if !(NRFX_CHECK(NRFX_PWM0_ENABLED)   || NRFX_CHECK(NRFX_PWM1_ENABLED)   || \
+      NRFX_CHECK(NRFX_PWM2_ENABLED)   || NRFX_CHECK(NRFX_PWM3_ENABLED)   || \
+      NRFX_CHECK(NRFX_PWM120_ENABLED) || NRFX_CHECK(NRFX_PWM130_ENABLED) || \
+      NRFX_CHECK(NRFX_PWM131_ENABLED) || NRFX_CHECK(NRFX_PWM132_ENABLED) || \
+      NRFX_CHECK(NRFX_PWM133_ENABLED))
 #error "No enabled PWM instances. Check <nrfx_config.h>."
 #endif
 
@@ -484,6 +487,41 @@ void nrfx_pwm_2_irq_handler(void)
 void nrfx_pwm_3_irq_handler(void)
 {
     irq_handler(NRF_PWM3, &m_cb[NRFX_PWM3_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_PWM120_ENABLED)
+void nrfx_pwm_120_irq_handler(void)
+{
+    irq_handler(NRF_PWM120, &m_cb[NRFX_PWM120_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_PWM130_ENABLED)
+void nrfx_pwm_130_irq_handler(void)
+{
+    irq_handler(NRF_PWM130, &m_cb[NRFX_PWM130_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_PWM131_ENABLED)
+void nrfx_pwm_131_irq_handler(void)
+{
+    irq_handler(NRF_PWM131, &m_cb[NRFX_PWM131_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_PWM132_ENABLED)
+void nrfx_pwm_132_irq_handler(void)
+{
+    irq_handler(NRF_PWM132, &m_cb[NRFX_PWM132_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_PWM133_ENABLED)
+void nrfx_pwm_133_irq_handler(void)
+{
+    irq_handler(NRF_PWM133, &m_cb[NRFX_PWM133_INST_IDX]);
 }
 #endif
 

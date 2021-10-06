@@ -45,6 +45,21 @@ enum {
 #if NRFX_CHECK(NRFX_PWM3_ENABLED)
     NRFX_PWM3_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_PWM120_ENABLED)
+    NRFX_PWM120_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_PWM130_ENABLED)
+    NRFX_PWM130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_PWM131_ENABLED)
+    NRFX_PWM131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_PWM132_ENABLED)
+    NRFX_PWM132_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_PWM133_ENABLED)
+    NRFX_PWM133_INST_IDX,
+#endif
     NRFX_PWM_ENABLED_COUNT
 };
 #endif
@@ -387,6 +402,11 @@ void nrfx_pwm_0_irq_handler(void);
 void nrfx_pwm_1_irq_handler(void);
 void nrfx_pwm_2_irq_handler(void);
 void nrfx_pwm_3_irq_handler(void);
+void nrfx_pwm_120_irq_handler(void);
+void nrfx_pwm_130_irq_handler(void);
+void nrfx_pwm_131_irq_handler(void);
+void nrfx_pwm_132_irq_handler(void);
+void nrfx_pwm_133_irq_handler(void);
 
 
 #ifdef __cplusplus
