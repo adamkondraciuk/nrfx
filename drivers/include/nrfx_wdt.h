@@ -50,6 +50,15 @@ enum {
 #if NRFX_CHECK(NRFX_WDT1_ENABLED)
     NRFX_WDT1_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_WDT130_ENABLED)
+    NRFX_WDT130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_WDT131_ENABLED)
+    NRFX_WDT131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_WDT132_ENABLED)
+    NRFX_WDT132_INST_IDX,
+#endif
     NRFX_WDT_ENABLED_COUNT
 };
 #endif
@@ -205,6 +214,9 @@ NRFX_STATIC_INLINE uint32_t nrfx_wdt_event_address_get(nrfx_wdt_t const * p_inst
 
 void nrfx_wdt_0_irq_handler(void);
 void nrfx_wdt_1_irq_handler(void);
+void nrfx_wdt_130_irq_handler(void);
+void nrfx_wdt_131_irq_handler(void);
+void nrfx_wdt_132_irq_handler(void);
 
 
 #ifdef __cplusplus

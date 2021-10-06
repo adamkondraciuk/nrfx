@@ -4,7 +4,9 @@
 
 #if NRFX_CHECK(NRFX_WDT_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_WDT0_ENABLED) || NRFX_CHECK(NRFX_WDT1_ENABLED))
+#if !(NRFX_CHECK(NRFX_WDT0_ENABLED)   || NRFX_CHECK(NRFX_WDT1_ENABLED)   || \
+      NRFX_CHECK(NRFX_WDT130_ENABLED) || NRFX_CHECK(NRFX_WDT131_ENABLED) || \
+      NRFX_CHECK(NRFX_WDT132_ENABLED))
 #error "No enabled WDT instances. Check <nrfx_config.h>."
 #endif
 
@@ -168,11 +170,28 @@ void nrfx_wdt_0_irq_handler(void)
     irq_handler(NRF_WDT0, NRFX_WDT0_INST_IDX);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_WDT1_ENABLED)
 void nrfx_wdt_1_irq_handler(void)
 {
     irq_handler(NRF_WDT1, NRFX_WDT1_INST_IDX);
+}
+#endif
+#if NRFX_CHECK(NRFX_WDT130_ENABLED)
+void nrfx_wdt_130_irq_handler(void)
+{
+    irq_handler(NRF_WDT130, NRFX_WDT130_INST_IDX);
+}
+#endif
+#if NRFX_CHECK(NRFX_WDT131_ENABLED)
+void nrfx_wdt_131_irq_handler(void)
+{
+    irq_handler(NRF_WDT131, NRFX_WDT131_INST_IDX);
+}
+#endif
+#if NRFX_CHECK(NRFX_WDT132_ENABLED)
+void nrfx_wdt_132_irq_handler(void)
+{
+    irq_handler(NRF_WDT132, NRFX_WDT132_INST_IDX);
 }
 #endif
 
