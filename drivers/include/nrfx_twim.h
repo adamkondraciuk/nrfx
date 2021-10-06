@@ -46,6 +46,30 @@ enum {
 #if NRFX_CHECK(NRFX_TWIM3_ENABLED)
     NRFX_TWIM3_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_TWIM130_ENABLED)
+    NRFX_TWIM130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM131_ENABLED)
+    NRFX_TWIM131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM132_ENABLED)
+    NRFX_TWIM132_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM133_ENABLED)
+    NRFX_TWIM133_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM134_ENABLED)
+    NRFX_TWIM134_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM135_ENABLED)
+    NRFX_TWIM135_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM136_ENABLED)
+    NRFX_TWIM136_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TWIM137_ENABLED)
+    NRFX_TWIM137_INST_IDX,
+#endif
     NRFX_TWIM_ENABLED_COUNT
 };
 #endif
@@ -354,6 +378,14 @@ void nrfx_twim_0_irq_handler(void);
 void nrfx_twim_1_irq_handler(void);
 void nrfx_twim_2_irq_handler(void);
 void nrfx_twim_3_irq_handler(void);
+void nrfx_twim_130_irq_handler(void);
+void nrfx_twim_131_irq_handler(void);
+void nrfx_twim_132_irq_handler(void);
+void nrfx_twim_133_irq_handler(void);
+void nrfx_twim_134_irq_handler(void);
+void nrfx_twim_135_irq_handler(void);
+void nrfx_twim_136_irq_handler(void);
+void nrfx_twim_137_irq_handler(void);
 
 
 #ifdef __cplusplus

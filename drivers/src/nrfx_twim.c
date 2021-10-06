@@ -4,10 +4,18 @@
 
 #if NRFX_CHECK(NRFX_TWIM_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_TWIM0_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM1_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM2_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM3_ENABLED))
+#if !(NRFX_CHECK(NRFX_TWIM0_ENABLED)   || \
+      NRFX_CHECK(NRFX_TWIM1_ENABLED)   || \
+      NRFX_CHECK(NRFX_TWIM2_ENABLED)   || \
+      NRFX_CHECK(NRFX_TWIM3_ENABLED)   || \
+      NRFX_CHECK(NRFX_TWIM130_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM131_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM132_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM133_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM134_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM135_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM136_ENABLED) || \
+      NRFX_CHECK(NRFX_TWIM137_ENABLED))
 #error "No enabled TWIM instances. Check <nrfx_config.h>."
 #endif
 
@@ -821,26 +829,72 @@ void nrfx_twim_0_irq_handler(void)
     twim_irq_handler(NRF_TWIM0, &m_cb[NRFX_TWIM0_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_TWIM1_ENABLED)
 void nrfx_twim_1_irq_handler(void)
 {
     twim_irq_handler(NRF_TWIM1, &m_cb[NRFX_TWIM1_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_TWIM2_ENABLED)
 void nrfx_twim_2_irq_handler(void)
 {
     twim_irq_handler(NRF_TWIM2, &m_cb[NRFX_TWIM2_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_TWIM3_ENABLED)
 void nrfx_twim_3_irq_handler(void)
 {
     twim_irq_handler(NRF_TWIM3, &m_cb[NRFX_TWIM3_INST_IDX]);
 }
 #endif
+#if NRFX_CHECK(NRFX_TWIM130_ENABLED)
+void nrfx_twim_130_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM130, &m_cb[NRFX_TWIM130_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM131_ENABLED)
+void nrfx_twim_131_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM131, &m_cb[NRFX_TWIM131_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM132_ENABLED)
+void nrfx_twim_132_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM132, &m_cb[NRFX_TWIM132_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM133_ENABLED)
+void nrfx_twim_133_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM133, &m_cb[NRFX_TWIM133_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM134_ENABLED)
+void nrfx_twim_134_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM134, &m_cb[NRFX_TWIM134_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM135_ENABLED)
+void nrfx_twim_135_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM135, &m_cb[NRFX_TWIM135_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM136_ENABLED)
+void nrfx_twim_136_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM136, &m_cb[NRFX_TWIM136_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_TWIM137_ENABLED)
+void nrfx_twim_137_irq_handler(void)
+{
+    twim_irq_handler(NRF_TWIM137, &m_cb[NRFX_TWIM137_INST_IDX]);
+}
+#endif
+
 
 #endif // NRFX_CHECK(NRFX_TWIM_ENABLED)
