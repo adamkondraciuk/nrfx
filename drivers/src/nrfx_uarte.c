@@ -4,10 +4,19 @@
 
 #if NRFX_CHECK(NRFX_UARTE_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_UARTE0_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE1_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE2_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE3_ENABLED))
+#if !(NRFX_CHECK(NRFX_UARTE0_ENABLED)   || \
+      NRFX_CHECK(NRFX_UARTE1_ENABLED)   || \
+      NRFX_CHECK(NRFX_UARTE2_ENABLED)   || \
+      NRFX_CHECK(NRFX_UARTE3_ENABLED)   || \
+      NRFX_CHECK(NRFX_UARTE120_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE130_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE131_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE132_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE133_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE134_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE135_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE136_ENABLED) || \
+      NRFX_CHECK(NRFX_UARTE137_ENABLED))
 #error "No enabled UARTE instances. Check <nrfx_config.h>."
 #endif
 
@@ -610,25 +619,76 @@ void nrfx_uarte_0_irq_handler(void)
     uarte_irq_handler(NRF_UARTE0, &m_cb[NRFX_UARTE0_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_UARTE1_ENABLED)
 void nrfx_uarte_1_irq_handler(void)
 {
     uarte_irq_handler(NRF_UARTE1, &m_cb[NRFX_UARTE1_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_UARTE2_ENABLED)
 void nrfx_uarte_2_irq_handler(void)
 {
     uarte_irq_handler(NRF_UARTE2, &m_cb[NRFX_UARTE2_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_UARTE3_ENABLED)
 void nrfx_uarte_3_irq_handler(void)
 {
     uarte_irq_handler(NRF_UARTE3, &m_cb[NRFX_UARTE3_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE120_ENABLED)
+void nrfx_uarte_120_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE120, &m_cb[NRFX_UARTE120_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE130_ENABLED)
+void nrfx_uarte_130_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE130, &m_cb[NRFX_UARTE130_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE131_ENABLED)
+void nrfx_uarte_131_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE131, &m_cb[NRFX_UARTE131_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE132_ENABLED)
+void nrfx_uarte_132_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE132, &m_cb[NRFX_UARTE132_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE133_ENABLED)
+void nrfx_uarte_133_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE133, &m_cb[NRFX_UARTE133_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE134_ENABLED)
+void nrfx_uarte_134_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE134, &m_cb[NRFX_UARTE134_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE135_ENABLED)
+void nrfx_uarte_135_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE135, &m_cb[NRFX_UARTE135_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE136_ENABLED)
+void nrfx_uarte_136_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE136, &m_cb[NRFX_UARTE136_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_UARTE137_ENABLED)
+void nrfx_uarte_137_irq_handler(void)
+{
+    uarte_irq_handler(NRF_UARTE137, &m_cb[NRFX_UARTE137_INST_IDX]);
 }
 #endif
 

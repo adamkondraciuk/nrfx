@@ -38,6 +38,33 @@ enum {
 #if NRFX_CHECK(NRFX_UARTE3_ENABLED)
     NRFX_UARTE3_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_UARTE120_ENABLED)
+    NRFX_UARTE120_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE130_ENABLED)
+    NRFX_UARTE130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE131_ENABLED)
+    NRFX_UARTE131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE132_ENABLED)
+    NRFX_UARTE132_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE133_ENABLED)
+    NRFX_UARTE133_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE134_ENABLED)
+    NRFX_UARTE134_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE135_ENABLED)
+    NRFX_UARTE135_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE136_ENABLED)
+    NRFX_UARTE136_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_UARTE137_ENABLED)
+    NRFX_UARTE137_INST_IDX,
+#endif
     NRFX_UARTE_ENABLED_COUNT
 };
 #endif
@@ -377,7 +404,15 @@ void nrfx_uarte_0_irq_handler(void);
 void nrfx_uarte_1_irq_handler(void);
 void nrfx_uarte_2_irq_handler(void);
 void nrfx_uarte_3_irq_handler(void);
-
+void nrfx_uarte_120_irq_handler(void);
+void nrfx_uarte_130_irq_handler(void);
+void nrfx_uarte_131_irq_handler(void);
+void nrfx_uarte_132_irq_handler(void);
+void nrfx_uarte_133_irq_handler(void);
+void nrfx_uarte_134_irq_handler(void);
+void nrfx_uarte_135_irq_handler(void);
+void nrfx_uarte_136_irq_handler(void);
+void nrfx_uarte_137_irq_handler(void);
 
 #ifdef __cplusplus
 }
