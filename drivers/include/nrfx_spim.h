@@ -42,6 +42,36 @@ enum {
 #if NRFX_CHECK(NRFX_SPIM4_ENABLED)
     NRFX_SPIM4_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_SPIM120_ENABLED)
+    NRFX_SPIM120_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM121_ENABLED)
+    NRFX_SPIM121_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM130_ENABLED)
+    NRFX_SPIM130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM131_ENABLED)
+    NRFX_SPIM131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM132_ENABLED)
+    NRFX_SPIM132_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM133_ENABLED)
+    NRFX_SPIM133_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM134_ENABLED)
+    NRFX_SPIM134_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM135_ENABLED)
+    NRFX_SPIM135_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM136_ENABLED)
+    NRFX_SPIM136_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_SPIM137_ENABLED)
+    NRFX_SPIM137_INST_IDX,
+#endif
     NRFX_SPIM_ENABLED_COUNT
 };
 #endif
@@ -452,6 +482,16 @@ void nrfx_spim_1_irq_handler(void);
 void nrfx_spim_2_irq_handler(void);
 void nrfx_spim_3_irq_handler(void);
 void nrfx_spim_4_irq_handler(void);
+void nrfx_spim_120_irq_handler(void);
+void nrfx_spim_121_irq_handler(void);
+void nrfx_spim_130_irq_handler(void);
+void nrfx_spim_131_irq_handler(void);
+void nrfx_spim_132_irq_handler(void);
+void nrfx_spim_133_irq_handler(void);
+void nrfx_spim_134_irq_handler(void);
+void nrfx_spim_135_irq_handler(void);
+void nrfx_spim_136_irq_handler(void);
+void nrfx_spim_137_irq_handler(void);
 
 
 #ifdef __cplusplus

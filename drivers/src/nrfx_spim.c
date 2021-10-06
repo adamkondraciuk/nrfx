@@ -4,9 +4,14 @@
 
 #if NRFX_CHECK(NRFX_SPIM_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_SPIM0_ENABLED) || NRFX_CHECK(NRFX_SPIM1_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM2_ENABLED) || NRFX_CHECK(NRFX_SPIM3_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM4_ENABLED))
+#if !(NRFX_CHECK(NRFX_SPIM0_ENABLED)   || NRFX_CHECK(NRFX_SPIM1_ENABLED)   || \
+      NRFX_CHECK(NRFX_SPIM2_ENABLED)   || NRFX_CHECK(NRFX_SPIM3_ENABLED)   || \
+      NRFX_CHECK(NRFX_SPIM4_ENABLED)   || NRFX_CHECK(NRFX_SPIM120_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIM121_ENABLED) || NRFX_CHECK(NRFX_SPIM130_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIM131_ENABLED) || NRFX_CHECK(NRFX_SPIM132_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIM133_ENABLED) || NRFX_CHECK(NRFX_SPIM134_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIM135_ENABLED) || NRFX_CHECK(NRFX_SPIM136_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIM137_ENABLED))
 #error "No enabled SPIM instances. Check <nrfx_config.h>."
 #endif
 
@@ -810,5 +815,76 @@ void nrfx_spim_4_irq_handler(void)
     irq_handler(NRF_SPIM4, &m_cb[NRFX_SPIM4_INST_IDX]);
 }
 #endif
+
+#if NRFX_CHECK(NRFX_SPIM120_ENABLED)
+void nrfx_spim_120_irq_handler(void)
+{
+    irq_handler(NRF_SPIM120, &m_cb[NRFX_SPIM120_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM121_ENABLED)
+void nrfx_spim_121_irq_handler(void)
+{
+    irq_handler(NRF_SPIM121, &m_cb[NRFX_SPIM121_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM130_ENABLED)
+void nrfx_spim_130_irq_handler(void)
+{
+    irq_handler(NRF_SPIM130, &m_cb[NRFX_SPIM130_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM131_ENABLED)
+void nrfx_spim_131_irq_handler(void)
+{
+    irq_handler(NRF_SPIM131, &m_cb[NRFX_SPIM131_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM132_ENABLED)
+void nrfx_spim_132_irq_handler(void)
+{
+    irq_handler(NRF_SPIM132, &m_cb[NRFX_SPIM132_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM133_ENABLED)
+void nrfx_spim_133_irq_handler(void)
+{
+    irq_handler(NRF_SPIM133, &m_cb[NRFX_SPIM133_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM134_ENABLED)
+void nrfx_spim_134_irq_handler(void)
+{
+    irq_handler(NRF_SPIM134, &m_cb[NRFX_SPIM134_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM135_ENABLED)
+void nrfx_spim_135_irq_handler(void)
+{
+    irq_handler(NRF_SPIM135, &m_cb[NRFX_SPIM135_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM136_ENABLED)
+void nrfx_spim_136_irq_handler(void)
+{
+    irq_handler(NRF_SPIM136, &m_cb[NRFX_SPIM136_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_SPIM137_ENABLED)
+void nrfx_spim_137_irq_handler(void)
+{
+    irq_handler(NRF_SPIM137, &m_cb[NRFX_SPIM137_INST_IDX]);
+}
+#endif
+
 
 #endif // NRFX_CHECK(NRFX_SPIM_ENABLED)
