@@ -7,7 +7,16 @@
 #if !(NRFX_CHECK(NRFX_SPIS0_ENABLED) || \
       NRFX_CHECK(NRFX_SPIS1_ENABLED) || \
       NRFX_CHECK(NRFX_SPIS2_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS3_ENABLED))
+      NRFX_CHECK(NRFX_SPIS3_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS120_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS130_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS131_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS132_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS133_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS134_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS135_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS136_ENABLED) || \
+      NRFX_CHECK(NRFX_SPIS137_ENABLED))
 #error "No enabled SPIS instances. Check <nrfx_config.h>."
 #endif
 
@@ -480,25 +489,76 @@ void nrfx_spis_0_irq_handler(void)
     spis_irq_handler(NRF_SPIS0, &m_cb[NRFX_SPIS0_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_SPIS1_ENABLED)
 void nrfx_spis_1_irq_handler(void)
 {
     spis_irq_handler(NRF_SPIS1, &m_cb[NRFX_SPIS1_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_SPIS2_ENABLED)
 void nrfx_spis_2_irq_handler(void)
 {
     spis_irq_handler(NRF_SPIS2, &m_cb[NRFX_SPIS2_INST_IDX]);
 }
 #endif
-
 #if NRFX_CHECK(NRFX_SPIS3_ENABLED)
 void nrfx_spis_3_irq_handler(void)
 {
     spis_irq_handler(NRF_SPIS3, &m_cb[NRFX_SPIS3_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS120_ENABLED)
+void nrfx_spis_120_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS120, &m_cb[NRFX_SPIS120_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS130_ENABLED)
+void nrfx_spis_130_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS130, &m_cb[NRFX_SPIS130_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS131_ENABLED)
+void nrfx_spis_131_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS131, &m_cb[NRFX_SPIS131_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS132_ENABLED)
+void nrfx_spis_132_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS132, &m_cb[NRFX_SPIS132_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS133_ENABLED)
+void nrfx_spis_133_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS133, &m_cb[NRFX_SPIS133_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS134_ENABLED)
+void nrfx_spis_134_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS134, &m_cb[NRFX_SPIS134_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS135_ENABLED)
+void nrfx_spis_135_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS135, &m_cb[NRFX_SPIS135_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS136_ENABLED)
+void nrfx_spis_136_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS136, &m_cb[NRFX_SPIS136_INST_IDX]);
+}
+#endif
+#if NRFX_CHECK(NRFX_SPIS137_ENABLED)
+void nrfx_spis_137_irq_handler(void)
+{
+    spis_irq_handler(NRF_SPIS137, &m_cb[NRFX_SPIS137_INST_IDX]);
 }
 #endif
 
