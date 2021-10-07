@@ -32,19 +32,19 @@ typedef enum
 /** @brief EXMIF incoming data strobe delay settings. */
 typedef enum
 {
-    NRF_EXMIF_DELAY_NONE   = EXMIF_PROGDELAY_DELAY_NoDelay,     ///< No delay.
-    NRF_EXMIF_DELAY_250PS  = EXMIF_PROGDELAY_DELAY_Delay250ps,  ///< Delay is 250 ps.
-    NRF_EXMIF_DELAY_500PS  = EXMIF_PROGDELAY_DELAY_Delay500ps,  ///< Delay is 500 ps.
-    NRF_EXMIF_DELAY_750PS  = EXMIF_PROGDELAY_DELAY_Delay750ps,  ///< Delay is 750 ps.
-    NRF_EXMIF_DELAY_1000PS = EXMIF_PROGDELAY_DELAY_Delay1000ps, ///< Delay is 1 ns.
-    NRF_EXMIF_DELAY_1250PS = EXMIF_PROGDELAY_DELAY_Delay1250ps, ///< Delay is 1.25 ns.
-    NRF_EXMIF_DELAY_1500PS = EXMIF_PROGDELAY_DELAY_Delay1500ps, ///< Delay is 1.50 ns.
-    NRF_EXMIF_DELAY_1750PS = EXMIF_PROGDELAY_DELAY_Delay1750ps, ///< Delay is 1.75 ns.
-    NRF_EXMIF_DELAY_2000PS = EXMIF_PROGDELAY_DELAY_Delay2000ps, ///< Delay is 2 ns.
-    NRF_EXMIF_DELAY_2250PS = EXMIF_PROGDELAY_DELAY_Delay2250ps, ///< Delay is 2.25 ns.
-    NRF_EXMIF_DELAY_2500PS = EXMIF_PROGDELAY_DELAY_Delay2500ps, ///< Delay is 2.50 ns.
-    NRF_EXMIF_DELAY_2750PS = EXMIF_PROGDELAY_DELAY_Delay2750ps, ///< Delay is 2.75 ns.
-    NRF_EXMIF_DELAY_3000PS = EXMIF_PROGDELAY_DELAY_Delay3000ps  ///< Delay is 3 ns.
+    NRF_EXMIF_DELAY_NONE = EXMIF_PROGDELAY_DELAY_NoDelay, ///< No delay.
+    NRF_EXMIF_DELAY_1    = EXMIF_PROGDELAY_DELAY_Delay1,  ///< 1 delay element.
+    NRF_EXMIF_DELAY_2    = EXMIF_PROGDELAY_DELAY_Delay2,  ///< 2 delay elements.
+    NRF_EXMIF_DELAY_3    = EXMIF_PROGDELAY_DELAY_Delay3,  ///< 3 delay elements.
+    NRF_EXMIF_DELAY_4    = EXMIF_PROGDELAY_DELAY_Delay4,  ///< 4 delay elements.
+    NRF_EXMIF_DELAY_5    = EXMIF_PROGDELAY_DELAY_Delay5,  ///< 5 delay elements.
+    NRF_EXMIF_DELAY_6    = EXMIF_PROGDELAY_DELAY_Delay6,  ///< 6 delay elements.
+    NRF_EXMIF_DELAY_7    = EXMIF_PROGDELAY_DELAY_Delay7,  ///< 7 delay elements.
+    NRF_EXMIF_DELAY_8    = EXMIF_PROGDELAY_DELAY_Delay8,  ///< 8 delay elements.
+    NRF_EXMIF_DELAY_9    = EXMIF_PROGDELAY_DELAY_Delay9,  ///< 9 delay elements.
+    NRF_EXMIF_DELAY_10   = EXMIF_PROGDELAY_DELAY_Delay10, ///< 10 delay elements.
+    NRF_EXMIF_DELAY_11   = EXMIF_PROGDELAY_DELAY_Delay11, ///< 11 delay elements.
+    NRF_EXMIF_DELAY_12   = EXMIF_PROGDELAY_DELAY_Delay12, ///< 12 delay elements.
 } nrf_exmif_delay_t;
 
 /**
