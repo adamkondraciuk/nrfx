@@ -54,8 +54,13 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_SYSCOUNTERVALID);
     nrf_barrier_w();
 
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), irq_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
+#if defined(BOARD_PALLADIUM)
+    // TODO: Remove later
+    NRFY_IRQ_PENDING_CLEAR(GRTC0_IRQn);
+#endif
+
+    NRFX_IRQ_PRIORITY_SET(GRTC0_IRQn, irq_priority);
+    NRFX_IRQ_ENABLE(GRTC0_IRQn);
     if (enable)
     {
         nrf_grtc_int_enable(p_reg, group, mask);
@@ -70,7 +75,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
  */
  NRFY_STATIC_INLINE void nrfy_grtc_int_uninit(NRF_GRTC_Type * p_reg)
  {
-    NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_reg));
+    NRFX_IRQ_DISABLE(GRTC0_IRQn);
     nrf_barrier_w();
  }
 
