@@ -5,6 +5,7 @@
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
 
 #include <nrfx_vevif.h>
+#include <nrf_bitmask.h>
 
 typedef struct
 {
@@ -14,24 +15,6 @@ typedef struct
 } nrfx_vevif_cb_t;
 
 static nrfx_vevif_cb_t m_cb;
-
-static uint32_t vevif_event_mask_get_and_clear(uint32_t int_mask)
-{
-    uint32_t event_mask = 0;
-    for (uint8_t event_idx = 0; event_idx < NRFX_ARRAY_SIZE(NRF_VPR->EVENTS_TRIGGERED); event_idx++)
-    {
-        if (int_mask & (1UL << event_idx))
-        {
-            nrf_vpr_event_t event = nrf_vpr_triggered_event_get(event_idx);
-            if (nrf_vpr_event_check(NRF_VPR, event))
-            {
-                nrf_vpr_event_clear(NRF_VPR, event);
-                event_mask |= (1UL << event_idx);
-            }
-        }
-    }
-    return event_mask;
-}
 
 nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
                            nrfx_vevif_event_handler_t event_handler,
@@ -46,11 +29,8 @@ nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
     m_cb.p_context = p_context;
     m_cb.state     = NRFX_DRV_STATE_INITIALIZED;
 
-    if (event_handler)
-    {
-        NRFX_IRQ_ENABLE(VPR_IRQn);
-        NRFX_IRQ_PRIORITY_SET(VPR_IRQn, interrupt_priority);
-    }
+    nrfy_vpr_int_init(NRF_VPR, 0, interrupt_priority, false);
+
     return NRFX_SUCCESS;
 }
 
@@ -58,38 +38,35 @@ void nrfx_vevif_uninit(void)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
-    NRFX_IRQ_DISABLE(VPR_IRQn);
+    nrfy_vpr_int_uninit(NRF_VPR);
+
     m_cb.handler = NULL;
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
-void nrfx_vpr_int_enable(uint32_t mask)
+void nrfx_vevif_int_enable(uint32_t mask)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
-    (void)vevif_event_mask_get_and_clear(mask);
-    nrf_vpr_int_enable(NRF_VPR, mask);
+    nrfy_vpr_int_enable(NRF_VPR, mask);
 }
 
-void nrfx_vpr_int_disable(uint32_t mask)
+void nrfx_vevif_int_disable(uint32_t mask)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
-    nrf_vpr_int_disable(NRF_VPR, mask);
+
+    nrfy_vpr_int_disable(NRF_VPR, mask);
 }
 
 void nrfx_vevif_irq_handler(void)
 {
-    uint32_t int_mask = nrf_vpr_int_enable_check(NRF_VPR, ~0uL);
+    uint32_t evt_mask = nrfy_vpr_events_process(NRF_VPR, NRF_VPR_ALL_CHANNELS_INT_MASK);
 
-    /* Check (and clear) only the events that are set to generate interrupts.
-       Leave the other ones untouched. */
-    uint32_t event_mask = vevif_event_mask_get_and_clear(int_mask);
-    for (uint8_t event_idx = 0; event_idx < NRFX_ARRAY_SIZE(NRF_VPR->EVENTS_TRIGGERED); event_idx++)
+    while (evt_mask)
     {
-        if (event_mask & (1UL << event_idx))
-        {
-            m_cb.handler(event_idx, m_cb.p_context);
-        }
+        uint8_t event_index = nrf_bitmask_trailing_zeros_get(evt_mask);
+        m_cb.handler(event_index, m_cb.p_context);
+        evt_mask &= ~(1UL << event_index);
     }
 }
 

@@ -4,7 +4,7 @@
 #define NRFX_VEVIF_H__
 
 #include <nrfx.h>
-#include <hal/nrf_vpr.h>
+#include <haly/nrfy_vpr.h>
 
 #ifdef __cplusplus
 extern "C" {

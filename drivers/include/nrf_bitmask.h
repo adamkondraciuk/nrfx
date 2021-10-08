@@ -133,8 +133,7 @@ __STATIC_INLINE uint32_t nrf_bitmask_trailing_zeros_get(uint32_t mask)
     return __CLZ(__RBIT(mask));
 #else
     /* CTZ for Cortex-M0/RISCV */
-    (void)mask;
-    return 0;
+    return __builtin_ctz(mask);
 #endif
 }
 
