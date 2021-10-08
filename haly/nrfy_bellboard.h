@@ -29,6 +29,10 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_bellboard_events_process(NRF_BELLBOA
  * @brief   Hardware access layer with cache and barrier support for managing the BELLBOARD peripheral.
  */
 
+/* BELLBOARD0_IRQn is not defined for RISC-V targets, so the interrupt (un)init functions need to be excluded from compilation.
+ * RISC-V targets should use (and initialize) VEVIF for receiving inter-core signals.
+ */
+#if defined(ISA_ARM)
 /**
  * @brief Function for initializing the specified BELLBOARD interupts.
  *
@@ -77,6 +81,7 @@ NRFY_STATIC_INLINE void nrfy_bellboard_int_uninit(uint8_t group_idx)
     NRFX_IRQ_DISABLE(interrupt_index);
     nrf_barrier_w();
 }
+#endif // ISA_ARM
 
 /**
  * @brief Function for processing the specified BELLBOARD events.

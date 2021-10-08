@@ -9,8 +9,8 @@
     #include <hal/nrf_ipc.h>
 #endif
 #if defined(HALTIUM_XXAA)
-    #include <hal/nrf_vpr.h>
-    #include <hal/nrf_bellboard.h>
+    #include <haly/nrfy_vpr.h>
+    #include <haly/nrfy_bellboard.h>
 #endif
 
 #ifdef __cplusplus
@@ -27,11 +27,13 @@ extern "C" {
 /** @brief IDC domains. */
 typedef enum
 {
-    NRFX_IDC_DOMAIN_APP,    /**< Application domain. */
-    NRFX_IDC_DOMAIN_NET,    /**< Network domain. */
-    NRFX_IDC_DOMAIN_SEC,    /**< Secure domain. */
-    NRFX_IDC_DOMAIN_CELL,   /**< Cellular domain. */
-    NRFX_IDC_DOMAIN_SYSCTRL /**< System Controller domain. */
+    NRFX_IDC_DOMAIN_APP,     /**< Application domain. */
+    NRFX_IDC_DOMAIN_NET,     /**< Network domain. */
+    NRFX_IDC_DOMAIN_SEC,     /**< Secure domain. */
+    NRFX_IDC_DOMAIN_CELL,    /**< Cellular domain. */
+    NRFX_IDC_DOMAIN_SYSCTRL, /**< System Controller domain. */
+    NRFX_IDC_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
+    NRFX_IDC_DOMAIN_PPR      /**< Peripheral Processor */
 } nrfx_idc_domain_t;
 
 /**
@@ -70,6 +72,14 @@ __STATIC_INLINE void nrfx_idc_signal(nrfx_idc_domain_t domain, uint8_t channel)
             p_vpr = NRF_SYSCTRL_VPR;
             break;
 
+        case NRFX_IDC_DOMAIN_FLPR:
+            p_vpr = NRF_FLPR_VPR;
+            break;
+
+        case NRFX_IDC_DOMAIN_PPR:
+            p_vpr = NRF_PPR_VPR;
+            break;
+
         default:
             NRFX_ASSERT(0);
             break;
@@ -77,11 +87,11 @@ __STATIC_INLINE void nrfx_idc_signal(nrfx_idc_domain_t domain, uint8_t channel)
 
     if (p_bell)
     {
-        nrf_bellboard_task_trigger(p_bell, nrf_bellboard_trigger_task_get(channel));
+        nrfy_bellboard_task_trigger(p_bell, nrf_bellboard_trigger_task_get(channel));
     }
     else
     {
-        nrf_vpr_task_trigger(p_vpr, nrf_vpr_trigger_task_get(channel));
+        nrfy_vpr_task_trigger(p_vpr, nrf_vpr_trigger_task_get(channel));
     }
 #endif
 }

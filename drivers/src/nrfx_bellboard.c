@@ -18,38 +18,6 @@ typedef struct
 
 static nrfx_bellboard_cb_t m_cb[NRFX_BELLBOARD_ENABLED_COUNT];
 
-nrfx_err_t nrfx_bellboard_trigger(nrfx_bellboard_domain_t domain, uint8_t task_id)
-{
-    NRFX_ASSERT(task_id < NRFX_ARRAY_SIZE(NRF_BELLBOARD->TASKS_TRIGGER));
-    NRF_BELLBOARD_Type * p_reg;
-    switch (domain) {
-        case NRFX_BELLBOARD_DOMAIN_APPLICATION:
-            p_reg = NRF_APPLICATION_BELLBOARD;
-            break;
-        case NRFX_BELLBOARD_DOMAIN_CELLCORE:
-            p_reg = NRF_CELLCORE_BELLBOARD;
-            break;
-        case NRFX_BELLBOARD_DOMAIN_CELLDSP:
-            p_reg = NRF_CELLDSP_BELLBOARD;
-            break;
-        case NRFX_BELLBOARD_DOMAIN_CELLRF:
-            p_reg = NRF_CELLRF_BELLBOARD;
-            break;
-        case NRFX_BELLBOARD_DOMAIN_RADIOCORE:
-            p_reg = NRF_RADIOCORE_BELLBOARD;
-            break;
-        case NRFX_BELLBOARD_DOMAIN_SECURE:
-            p_reg = NRF_SECURE_BELLBOARD;
-            break;
-        default:
-            return NRFX_ERROR_INVALID_PARAM;
-    }
-
-    /* TODO: Check if domain has access to given task, return NRFX_ERROR_FORBIDDEN if not */
-    nrfy_bellboard_task_trigger(p_reg, nrf_bellboard_trigger_task_get(task_id));
-    return NRFX_SUCCESS;
-}
-
 nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
                                uint8_t                        interrupt_priority,
                                nrfx_bellboard_event_handler_t event_handler,

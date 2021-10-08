@@ -69,18 +69,6 @@ enum {
 typedef void (*nrfx_bellboard_event_handler_t)(uint8_t event_idx, void * p_context);
 
 /**
- * @brief Trigger bellboard task in given domain.
- *
- * @param[in] domain  Domain ID.
- * @param[in] task_id Task index to trigger.
- *
- * @retval NRFX_SUCCESS             Task successfully triggered.
- * @retval NRFX_ERROR_INVALID_PARAM Wrong domain or task.
- * @retval NRFX_ERROR_FORBIDDEN     No access to given task on given domain.
- */
-nrfx_err_t nrfx_bellboard_trigger(nrfx_bellboard_domain_t domain, uint8_t task_id);
-
-/**
  * @brief Initialize BELLBOARD driver instance.
  *
  * @param[in] p_instance    Pointer to BELLBOARD driver instance.

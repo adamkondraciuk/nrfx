@@ -33,25 +33,6 @@ static uint32_t vevif_event_mask_get_and_clear(uint32_t int_mask)
     return event_mask;
 }
 
-nrfx_err_t nrfx_vevif_trigger(nrfx_vevif_domain_t domain, uint8_t task_id)
-{
-    NRF_VPR_Type * p_reg;
-    switch (domain) {
-        case NRFX_VEVIF_DOMAIN_SYSCTRL:
-            p_reg = NRF_SYSCTRL_VPR;
-            break;
-        case NRFX_VEVIF_DOMAIN_FLPR:
-            p_reg = NRF_FLPR_VPR;
-            break;
-        default:
-            return NRFX_ERROR_INVALID_PARAM;
-    }
-
-    /* TODO: Check if domain has access to given task, return NRFX_ERROR_FORBIDDEN if not */
-    nrf_vpr_task_trigger(p_reg, nrf_vpr_trigger_task_get(task_id));
-    return NRFX_SUCCESS;
-}
-
 nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
                            nrfx_vevif_event_handler_t event_handler,
                            void *                     p_context)
