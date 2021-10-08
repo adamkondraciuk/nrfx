@@ -52,6 +52,8 @@ NRFY_STATIC_INLINE void nrfy_bellboard_int_init(NRF_BELLBOARD_Type * p_reg,
          __nrfy_internal_bellboard_event_enabled_clear(p_reg, mask, event);
     }
 
+    nrf_barrier_w();
+
     NRFX_IRQ_PRIORITY_SET(interrupt_index, irq_priority);
     NRFX_IRQ_ENABLE(interrupt_index);
 
@@ -106,10 +108,7 @@ NRFY_STATIC_INLINE void nrfy_bellboard_task_trigger(NRF_BELLBOARD_Type * p_reg,
 NRF_STATIC_INLINE uint32_t nrfy_bellboard_task_address_get(NRF_BELLBOARD_Type const * p_reg,
                                                            nrf_bellboard_task_t       task)
 {
-    uint32_t ret = nrf_bellboard_task_address_get(p_reg, task);
-    nrf_barrier_r();
-
-    return ret;
+    return nrf_bellboard_task_address_get(p_reg, task);
 }
 
 /** @refhal{nrf_bellboard_event_clear} */
@@ -134,10 +133,7 @@ NRF_STATIC_INLINE bool nrfy_bellboard_event_check(NRF_BELLBOARD_Type const * p_r
 NRF_STATIC_INLINE uint32_t nrfy_bellboard_event_address_get(NRF_BELLBOARD_Type const * p_reg,
                                                             nrf_bellboard_event_t      event)
 {
-    uint32_t ret = nrf_bellboard_event_address_get(p_reg, event);
-    nrf_barrier_r();
-
-    return ret;
+    return nrf_bellboard_event_address_get(p_reg, event);
 }
 
 /** @refhal{nrf_bellboard_int_enable} */
@@ -204,7 +200,6 @@ NRFY_STATIC_INLINE bool __nrfy_internal_bellboard_event_handle(NRF_BELLBOARD_Typ
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_bellboard_event_check(p_reg, event))
     {
         nrf_bellboard_event_clear(p_reg, event);
-        nrf_barrier_w();
 
         if (p_evt_mask)
         {
@@ -223,9 +218,7 @@ NRFY_STATIC_INLINE void __nrfy_internal_bellboard_event_enabled_clear(NRF_BELLBO
 {
     if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)))
     {
-        nrf_barrier_r();
         nrf_bellboard_event_clear(p_reg, event);
-        nrf_barrier_w();
     }
 }
 

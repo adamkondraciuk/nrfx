@@ -17,8 +17,7 @@ extern "C" {
  */
 
 /** @brief Symbol specifying maximum number of available events triggered. */
-#define NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT \
-    NRFX_ARRAY_SIZE(((NRF_BELLBOARD_Type*)0)->EVENTS_TRIGGERED)
+#define NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT BELLBOARD_EVENTS_TRIGGERED_MaxCount
 
 /** @brief BELLBOARD events. */
 typedef enum

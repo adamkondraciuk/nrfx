@@ -16,6 +16,14 @@ extern "C" {
  * @brief   Hardware access layer for managing the VPR RISC-V CPU unit (VPR).
  */
 
+/** @brief Symbol specifying maximum number of available events triggered. */
+#define NRF_VPR_EVENTS_TRIGGERED_COUNT VPR_EVENTS_TRIGGERED_MaxCount
+
+/** @brief Macro for creating the interrupt bitmask for all event channels */
+#define NRF_VPR_ALL_CHANNELS_INT_MASK \
+    ((uint32_t) (((1ULL << NRF_VPR_EVENTS_TRIGGERED_COUNT) - 1) \
+    << VPR_EVENTS_TRIGGERED_EVENTS_TRIGGERED_Pos))
+
 /** @brief VPR events. */
 typedef enum
 {
