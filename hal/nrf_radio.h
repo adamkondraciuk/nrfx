@@ -1262,6 +1262,16 @@ NRF_STATIC_INLINE uint8_t nrf_radio_sfd_get(NRF_RADIO_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_radio_ed_loop_count_set(NRF_RADIO_Type * p_reg, uint32_t ed_loop_count);
 #endif // defined(RADIO_EDCNT_EDCNT_Msk) || defined(RADIO_EDCTRL_EDCNT_Msk) || defined(__NRFX_DOXYGEN__)
 
+#if defined(RADIO_EDCTRL_EDPERIOD_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the period of a ED/CCA iteration.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] ed_period Duration of a single ED/CCA iteration.
+ */
+NRF_STATIC_INLINE void nrf_radio_ed_cca_period_set(NRF_RADIO_Type * p_reg, uint8_t ed_period);
+#endif // defined(RADIO_EDCTRL_EDPERIOD_Msk) || defined(__NRFX_DOXYGEN__)
+
 #if defined(RADIO_EDSAMPLE_EDLVL_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting Energy Detection level.
@@ -1964,8 +1974,17 @@ NRF_STATIC_INLINE void nrf_radio_ed_loop_count_set(NRF_RADIO_Type * p_reg, uint3
 #if defined(RADIO_EDCNT_EDCNT_Msk)
     p_reg->EDCNT = (ed_loop_count & RADIO_EDCNT_EDCNT_Msk);
 #elif defined(RADIO_EDCTRL_EDCNT_Msk)
-    p_reg->EDCTRL = (ed_loop_count & RADIO_EDCTRL_EDCNT_Msk);
+    p_reg->EDCTRL = ((p_reg->EDCTRL & ~RADIO_EDCTRL_EDCNT_Msk) |
+                     ((ed_loop_count << RADIO_EDCTRL_EDCNT_Pos) & RADIO_EDCTRL_EDCNT_Msk));
 #endif
+}
+#endif
+
+#if defined(RADIO_EDCTRL_EDPERIOD_Msk)
+NRF_STATIC_INLINE void nrf_radio_ed_cca_period_set(NRF_RADIO_Type * p_reg, uint8_t ed_period)
+{
+    p_reg->EDCTRL = ((p_reg->EDCTRL & ~RADIO_EDCTRL_EDPERIOD_Msk) |
+                     ((ed_period << RADIO_EDCTRL_EDPERIOD_Pos) & RADIO_EDCTRL_EDPERIOD_Msk));
 }
 #endif
 
