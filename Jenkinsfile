@@ -1,10 +1,6 @@
-@Library("CI_LIB") _
-HashMap CI_STATE = lib_State.getConfig(JOB_NAME)
-
 pipeline {
     options{
         timestamps()
-        timeout(time: CI_STATE.CFG.TIMEOUT.time, unit: CI_STATE.CFG.TIMEOUT.unit)
         buildDiscarder(logRotator(numToKeepStr: '25'))
     }
     environment {
@@ -19,7 +15,7 @@ pipeline {
     }
     agent {
         docker {
-            label 'linux && build-node'
+            label 'linux && build-node && !nrfx-coverity'
             image "docker-dtr.nordicsemi.no/babu/ncs-riscv-wine:2.7.0"
             args ' --privileged -e HOME=/home/buran_ci'
         }
