@@ -37,6 +37,15 @@ static void wdt_configure(nrfx_wdt_t const *        p_instance,
     };
 
     nrfy_wdt_periph_configure(p_instance->p_reg, &nrfy_conf);
+
+#if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
+    wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    if (p_cb->wdt_event_handler)
+    {
+        nrfy_wdt_int_init(p_instance->p_reg, NRF_WDT_INT_TIMEOUT_MASK,
+                          p_config->interrupt_priority, true);
+    }
+#endif
 }
 
 nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
@@ -71,14 +80,6 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
     {
         wdt_configure(p_instance, p_config);
     }
-
-#if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
-    if (wdt_event_handler)
-    {
-        nrfy_wdt_int_init(p_instance->p_reg, NRF_WDT_INT_TIMEOUT_MASK,
-                          p_config->interrupt_priority, true);
-    }
-#endif
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
