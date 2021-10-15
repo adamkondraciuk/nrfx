@@ -222,6 +222,24 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type const * p_
                                                        nrf_uarte_event_t      event);
 
 /**
+ * @brief Function for configuring UARTE shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be set.
+ */
+NRF_STATIC_INLINE void nrf_uarte_shorts_set(NRF_UARTE_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for getting UARTE shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be checked.
+ *
+ * @return Mask of requested shorts which were enabled.
+ */
+NRF_STATIC_INLINE uint32_t nrf_uarte_shorts_get(NRF_UARTE_Type * p_reg, uint32_t mask);
+
+/**
  * @brief Function for enabling UARTE shortcuts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -498,6 +516,16 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_event_address_get(NRF_UARTE_Type const * p_
                                                        nrf_uarte_event_t      event)
 {
     return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+}
+
+NRF_STATIC_INLINE void nrf_uarte_shorts_set(NRF_UARTE_Type * p_reg, uint32_t mask)
+{
+    p_reg->SHORTS = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_uarte_shorts_get(NRF_UARTE_Type * p_reg, uint32_t mask)
+{
+    return p_reg->SHORTS & mask;
 }
 
 NRF_STATIC_INLINE void nrf_uarte_shorts_enable(NRF_UARTE_Type * p_reg, uint32_t mask)
