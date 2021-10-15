@@ -242,22 +242,22 @@ NRFY_STATIC_INLINE void nrfy_i2s_abort(NRF_I2S_Type * p_reg, nrfy_i2s_xfer_desc_
 /**
  * @brief Function for getting the pins selection.
  *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] p_pins Pointer to the I2S pin configuration structure.
  *
- * @return Pins selection.
  */
-NRFY_STATIC_INLINE nrf_i2s_pins_t nrfy_i2s_pins_get(NRF_I2S_Type const * p_reg)
+NRFY_STATIC_INLINE void nrfy_i2s_pins_get(NRF_I2S_Type const * p_reg,
+                                          nrf_i2s_pins_t *     p_pins)
 {
     nrf_barrier_rw();
-    nrf_i2s_pins_t pins = {
-        .sck_pin   = nrf_i2s_sck_pin_get(p_reg),
-        .lrck_pin  = nrf_i2s_lrck_pin_get(p_reg),
-        .mck_pin   = nrf_i2s_mck_pin_get(p_reg),
-        .sdout_pin = nrf_i2s_sdout_pin_get(p_reg),
-        .sdin_pin  = nrf_i2s_sdin_pin_get(p_reg),
-    };
+
+    p_pins->sck_pin   = nrf_i2s_sck_pin_get(p_reg),
+    p_pins->lrck_pin  = nrf_i2s_lrck_pin_get(p_reg),
+    p_pins->mck_pin   = nrf_i2s_mck_pin_get(p_reg),
+    p_pins->sdout_pin = nrf_i2s_sdout_pin_get(p_reg),
+    p_pins->sdin_pin  = nrf_i2s_sdin_pin_get(p_reg),
+
     nrf_barrier_r();
-    return pins;
 }
 
 /** @refhal{nrf_i2s_task_trigger} */

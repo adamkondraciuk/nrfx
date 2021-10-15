@@ -97,7 +97,9 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
 
 static void deconfigure_pins(nrfx_i2s_t const * p_instance)
 {
-    nrf_i2s_pins_t pins = nrfy_i2s_pins_get(p_instance->p_reg);
+    nrf_i2s_pins_t pins;
+
+    nrfy_i2s_pins_get(p_instance->p_reg, &pins);
 
 #if USE_WORKAROUND_FOR_ANOMALY_170
     // Create bitmask for extracting pin number from PSEL register.
