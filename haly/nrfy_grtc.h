@@ -75,6 +75,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
  */
  NRFY_STATIC_INLINE void nrfy_grtc_int_uninit(NRF_GRTC_Type * p_reg)
  {
+    (void)p_reg;
     NRFX_IRQ_DISABLE(GRTC0_IRQn);
     nrf_barrier_w();
  }
