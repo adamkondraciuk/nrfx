@@ -32,6 +32,9 @@ extern "C" {
 /** @brief Bitmask of the higher 32-bits of capture/compare register for the RTCOUNTER. */
 #define NRF_GRTC_RTCOUNTER_CCH_MASK GRTC_RTCOMPAREH_VALUE_Msk
 
+/** @brief Macro for creating the interrupt bitmask for the specified compare channel. */
+#define NRF_GRTC_CHANNEL_INT_MASK(ch) ((uint32_t)(NRF_GRTC_INT_COMPARE0_MASK) << (ch))
+
 /**
  * @brief Symbol describing number of interrupt groups.
  *
