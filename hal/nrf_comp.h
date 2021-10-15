@@ -165,6 +165,15 @@ typedef enum
     NRF_COMP_EVENT_CROSS = offsetof(NRF_COMP_Type, EVENTS_CROSS)  /*!< Input voltage crossed the threshold in any direction. */
 } nrf_comp_event_t;
 
+/** @brief COMP interrupts. */
+typedef enum
+{
+    NRF_COMP_INT_READY_MASK = COMP_INTENSET_READY_Msk, /**< Interrupt on READY event. */
+    NRF_COMP_INT_DOWN_MASK  = COMP_INTENSET_DOWN_Msk,  /**< Interrupt on DOWN event. */
+    NRF_COMP_INT_UP_MASK    = COMP_INTENSET_UP_Msk,    /**< Interrupt on UP event. */
+    NRF_COMP_INT_CROSS_MASK = COMP_INTENSET_CROSS_Msk  /**< Interrupt on CROSS event. */
+} nrf_comp_int_mask_t;
+
 /** @brief COMP reference configuration. */
 typedef struct
 {

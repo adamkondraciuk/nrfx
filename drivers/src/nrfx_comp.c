@@ -34,10 +34,10 @@ static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
 void nrfx_comp_irq_handler(void)
 {
     uint32_t evt_mask = nrfy_comp_events_process(NRF_COMP,
-                                                 COMP_INTENSET_READY_Msk |
-                                                 COMP_INTENSET_DOWN_Msk |
-                                                 COMP_INTENSET_UP_Msk |
-                                                 COMP_INTENSET_CROSS_Msk);
+                                                 NRF_COMP_INT_READY_MASK |
+                                                 NRF_COMP_INT_DOWN_MASK |
+                                                 NRF_COMP_INT_UP_MASK |
+                                                 NRF_COMP_INT_CROSS_MASK);
     comp_execute_handler(NRF_COMP_EVENT_READY, evt_mask);
     comp_execute_handler(NRF_COMP_EVENT_DOWN,  evt_mask);
     comp_execute_handler(NRF_COMP_EVENT_UP,    evt_mask);
@@ -80,17 +80,18 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                              NRFX_COMP_SHORT_STOP_AFTER_UP_EVT |
                              NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT);
     nrfy_comp_int_disable(NRF_COMP,
-                          COMP_INTENCLR_CROSS_Msk |
-                          COMP_INTENCLR_UP_Msk |
-                          COMP_INTENCLR_DOWN_Msk |
-                          COMP_INTENCLR_READY_Msk);
+                          NRF_COMP_INT_READY_MASK |
+                          NRF_COMP_INT_DOWN_MASK |
+                          NRF_COMP_INT_UP_MASK |
+                          NRF_COMP_INT_CROSS_MASK);
     nrfy_comp_enable(NRF_COMP);
     nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
 
-    nrfy_comp_int_init(NRF_COMP, NRF_COMP_EVENT_READY |
-                       NRF_COMP_EVENT_DOWN |
-                       NRF_COMP_EVENT_UP |
-                       NRF_COMP_EVENT_CROSS,
+    nrfy_comp_int_init(NRF_COMP,
+                       NRF_COMP_INT_READY_MASK |
+                       NRF_COMP_INT_DOWN_MASK |
+                       NRF_COMP_INT_UP_MASK |
+                       NRF_COMP_INT_CROSS_MASK,
                        p_config->interrupt_priority,
                        false);
     m_state = NRFX_DRV_STATE_INITIALIZED;
