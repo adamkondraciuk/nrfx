@@ -122594,6 +122594,8 @@ typedef struct {                                     /*!< RADIO Structure       
                                                                                                                                   
   #define RADIO_FREQUENCY_MAP_Pos (8UL)              /*!< Position of MAP field.                                               */
   #define RADIO_FREQUENCY_MAP_Msk (0x1UL << RADIO_FREQUENCY_MAP_Pos) /*!< Bit mask of MAP field.                               */
+  #define RADIO_FREQUENCY_MAP_Default (0UL)
+  #define RADIO_FREQUENCY_MAP_Low     (1UL)
 
 
 /* RADIO_FREQUENCYCONFIG: Configuration of frequency control */
@@ -124633,6 +124635,7 @@ typedef struct {                                     /*!< RADIO Structure       
   #define RADIO_CLEARPATTERN_CLEARPATTERN_Pos (0UL)  /*!< Position of CLEARPATTERN field.                                      */
   #define RADIO_CLEARPATTERN_CLEARPATTERN_Msk (0x1UL << RADIO_CLEARPATTERN_CLEARPATTERN_Pos) /*!< Bit mask of CLEARPATTERN
                                                                             field.*/                                              
+  #define RADIO_CLEARPATTERN_CLEARPATTERN_Clear (1UL)
 
 
 /* RADIO_DFEDMASTART: Manually start DmaChannelPeripheral for DFE */
