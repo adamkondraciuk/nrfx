@@ -63,6 +63,10 @@ typedef enum
     NRF_REGION_CPU_INTERNAL = 7,
 } nrf_region_t;
 
+/* TODO: Those should be in MDK */
+#define GLOBAL_IRQN_START (96)
+#define GLOBAL_IRQN_MAX   (480)
+
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(NRFX_CLZ)
