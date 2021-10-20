@@ -246,12 +246,12 @@ extern "C" {
 //------------------------------------------------------------------------------
 
 /**
- * @brief Macro for flushing cache lines associated with the specified buffer.
+ * @brief Macro for writing back cache lines associated with the specified buffer.
  *
  * @param[in] p_buffer Pointer to the buffer.
  * @param[in] size     Size of the buffer.
  */
-#define NRFY_CACHE_FLUSH(p_buffer, size)
+#define NRFY_CACHE_WB(p_buffer, size)
 
 /**
  * @brief Macro for invalidating cache lines associated with the specified buffer.
@@ -259,7 +259,16 @@ extern "C" {
  * @param[in] p_buffer Pointer to the buffer.
  * @param[in] size     Size of the buffer.
  */
-#define NRFY_CACHE_INVALIDATE(p_buffer, size)
+#define NRFY_CACHE_INV(p_buffer, size)
+
+/**
+ * @brief Macro for writing back and invalidating cache lines associated with
+ *        the specified buffer.
+ *
+ * @param[in] p_buffer Pointer to the buffer.
+ * @param[in] size     Size of the buffer.
+ */
+#define NRFY_CACHE_WBINV(p_buffer, size)
 
 //------------------------------------------------------------------------------
 

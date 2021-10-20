@@ -485,7 +485,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_pdm_events_process(NRF_PDM_Type *   
     if (__nrfy_internal_pdm_event_handle(p_reg, mask, NRF_PDM_EVENT_STOPPED, &evt_mask) &&
         p_buffer->p_buff)
     {
-        NRFY_CACHE_INVALIDATE(p_buffer->p_buff, p_buffer->length);
+        NRFY_CACHE_INV(p_buffer->p_buff, p_buffer->length);
     }
 
     (void)__nrfy_internal_pdm_event_handle(p_reg, mask, NRF_PDM_EVENT_END, &evt_mask);

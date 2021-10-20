@@ -263,7 +263,7 @@ NRFY_STATIC_INLINE void nrfy_spim_buffers_set(NRF_SPIM_Type *               p_re
 {
     if (p_xfer->p_tx_buffer)
     {
-        NRFY_CACHE_FLUSH(p_xfer->p_tx_buffer, p_xfer->tx_length);
+        NRFY_CACHE_WB(p_xfer->p_tx_buffer, p_xfer->tx_length);
     }
     nrf_spim_tx_buffer_set(p_reg, p_xfer->p_tx_buffer, p_xfer->tx_length);
     nrf_spim_rx_buffer_set(p_reg, p_xfer->p_rx_buffer, p_xfer->rx_length);
@@ -702,7 +702,7 @@ uint32_t __nrfy_internal_spim_events_process(NRF_SPIM_Type *               p_reg
     if (__nrfy_internal_spim_event_handle(p_reg, mask, NRF_SPIM_EVENT_END, &evt_mask) && p_xfer)
     {
         size_t size = stop ? nrf_spim_rx_amount_get(p_reg) : p_xfer->rx_length;
-        NRFY_CACHE_INVALIDATE(p_xfer->p_rx_buffer, size);
+        NRFY_CACHE_INV(p_xfer->p_rx_buffer, size);
         invalidated = true;
     }
 
@@ -710,7 +710,7 @@ uint32_t __nrfy_internal_spim_events_process(NRF_SPIM_Type *               p_reg
         p_xfer && !invalidated)
     {
         size_t size = stop ? nrf_spim_rx_amount_get(p_reg) : p_xfer->rx_length;
-        NRFY_CACHE_INVALIDATE(p_xfer->p_rx_buffer, size);
+        NRFY_CACHE_INV(p_xfer->p_rx_buffer, size);
     }
 
     (void)__nrfy_internal_spim_event_handle(p_reg, mask, NRF_SPIM_EVENT_ENDTX, &evt_mask);

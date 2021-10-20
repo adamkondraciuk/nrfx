@@ -521,8 +521,8 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
         size_t job_count = __nrfy_internal_mvdma_sink_job_count_get(p_reg);
         for (size_t i = 0; i < job_count; i++)
         {
-            NRFY_CACHE_INVALIDATE(p_list_request->p_sink_job_list[i].p_buffer,
-                                  p_list_request->p_sink_job_list[i].size);
+            NRFY_CACHE_INV(p_list_request->p_sink_job_list[i].p_buffer,
+                           p_list_request->p_sink_job_list[i].size);
         }
         invalidated = true;
     }
@@ -534,7 +534,7 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
              p_job->p_buffer != NULL;
              p_job++)
         {
-            NRFY_CACHE_INVALIDATE(p_job->p_buffer, p_job->size);
+            NRFY_CACHE_INV(p_job->p_buffer, p_job->size);
         }
     }
 
@@ -555,7 +555,7 @@ NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrfx_vdma_job
 {
     for (nrfx_vdma_job_t * p_job = p_source_job; p_job->p_buffer != NULL; p_job++)
     {
-        NRFY_CACHE_FLUSH(p_job->p_buffer, p_job->size);
+        NRFY_CACHE_WB(p_job->p_buffer, p_job->size);
     }
 }
 

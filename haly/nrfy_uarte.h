@@ -511,7 +511,7 @@ NRFY_STATIC_INLINE void nrfy_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
 {
     if (p_buffer)
     {
-        NRFY_CACHE_FLUSH(p_buffer, length);
+        NRFY_CACHE_WB(p_buffer, length);
         nrf_uarte_tx_buffer_set(p_reg, p_buffer, length);
         nrf_barrier_w();
     }
@@ -594,13 +594,13 @@ uint32_t __nrfy_internal_uarte_events_process(NRF_UARTE_Type *               p_r
 
     if (mask & NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX))
     {
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffer, p_xfer->length);
+        NRFY_CACHE_INV(p_xfer->p_buffer, p_xfer->length);
     }
     else if (mask & NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXTO))
     {
         size_t size = nrf_uarte_rx_amount_get(p_reg);
         nrf_barrier_rw();
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffer, size);
+        NRFY_CACHE_INV(p_xfer->p_buffer, size);
     }
     nrf_barrier_w();
     return evt_mask;

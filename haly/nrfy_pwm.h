@@ -353,7 +353,7 @@ NRFY_STATIC_INLINE void nrfy_pwm_sequence_set(NRF_PWM_Type *             p_reg,
                                               uint8_t                    seq_id,
                                               nrf_pwm_sequence_t const * p_seq)
 {
-    NRFY_CACHE_FLUSH(p_seq->values.p_raw, p_seq->length);
+    NRFY_CACHE_WB(p_seq->values.p_raw, p_seq->length);
     nrf_pwm_sequence_set(p_reg, seq_id, p_seq);
     nrf_barrier_w();
 }

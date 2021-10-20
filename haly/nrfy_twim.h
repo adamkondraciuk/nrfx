@@ -163,7 +163,7 @@ NRFY_STATIC_INLINE void nrfy_twim_tx_buffer_set(NRF_TWIM_Type *               p_
 {
     if (p_xfer->p_buffer)
     {
-        NRFY_CACHE_FLUSH(p_xfer->p_buffer, p_xfer->length);
+        NRFY_CACHE_WB(p_xfer->p_buffer, p_xfer->length);
     }
     nrf_twim_tx_buffer_set(p_reg, p_xfer->p_buffer, p_xfer->length);
     nrf_barrier_w();
@@ -602,11 +602,11 @@ uint32_t __nrfy_internal_twim_events_process(NRF_TWIM_Type *               p_reg
 
     if (p_xfer && (mask & NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED)))
     {
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffer, p_xfer->length);
+        NRFY_CACHE_INV(p_xfer->p_buffer, p_xfer->length);
     }
     else if (p_xfer && (mask & NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_LASTRX)))
     {
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffer, p_xfer->length);
+        NRFY_CACHE_INV(p_xfer->p_buffer, p_xfer->length);
     }
     nrf_barrier_w();
     return evt_mask;

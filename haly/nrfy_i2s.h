@@ -165,7 +165,7 @@ NRFY_STATIC_INLINE void nrfy_i2s_buffers_set(NRF_I2S_Type *               p_reg,
 {
     if (p_xfer->p_buffers->p_tx_buffer != NULL)
     {
-        NRFY_CACHE_FLUSH(p_xfer->p_buffers->p_tx_buffer, (p_xfer->buffer_size * sizeof(uint32_t)));
+        NRFY_CACHE_WB(p_xfer->p_buffers->p_tx_buffer, (p_xfer->buffer_size * sizeof(uint32_t)));
     }
 
     nrf_i2s_transfer_set(p_reg,
@@ -511,16 +511,16 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_i2s_events_process(NRF_I2S_Type *   
     if (__nrfy_internal_i2s_event_handle(p_reg, mask, NRF_I2S_EVENT_RXPTRUPD, &event_mask) &&
         p_xfer)
     {
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffers->p_rx_buffer,
-                              (p_xfer->buffer_size * sizeof(uint32_t)));
+        NRFY_CACHE_INV(p_xfer->p_buffers->p_rx_buffer,
+                       (p_xfer->buffer_size * sizeof(uint32_t)));
         invalidated = true;
     }
 
     if (__nrfy_internal_i2s_event_handle(p_reg, mask, NRF_I2S_EVENT_STOPPED, &event_mask) &&
         p_xfer && !invalidated)
     {
-        NRFY_CACHE_INVALIDATE(p_xfer->p_buffers->p_rx_buffer,
-                              (p_xfer->buffer_size * sizeof(uint32_t)));
+        NRFY_CACHE_INV(p_xfer->p_buffers->p_rx_buffer,
+                       (p_xfer->buffer_size * sizeof(uint32_t)));
     }
 
     return event_mask;
