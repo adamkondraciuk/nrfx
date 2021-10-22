@@ -259,6 +259,8 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_config   Pointer to the structure with the initial configuration.
+ *                       NULL if configuration is to be skipped and will be done later
+ *                       using @ref nrfx_spim_reconfigure.
  * @param[in] handler    Event handler provided by the user. If NULL, transfers
  *                       will be performed in blocking mode.
  * @param[in] p_context  Context passed to event handler.
@@ -283,6 +285,24 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_config_t const * p_config,
                           nrfx_spim_evt_handler_t    handler,
                           void *                     p_context);
+
+/**
+ * @brief Function for reconfiguring the SPIM driver instance.
+ *
+ * @note This function can not be called during transmission.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
+ *                                  by the SPIM instance.
+ * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.
+ * @retval NRFX_ERROR_FORBIDDEN     Software-controlled Slave Select and hardware-controlled Slave Select
+                                    cannot be active at the same time.
+ */
+nrfx_err_t nrfx_spim_reconfigure(nrfx_spim_t const *        p_instance,
+                                 nrfx_spim_config_t const * p_config);
 
 /**
  * @brief Function for uninitializing the SPIM driver instance.

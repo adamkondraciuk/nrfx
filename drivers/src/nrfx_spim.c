@@ -480,6 +480,25 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
     return err_code;
 }
 
+nrfx_err_t nrfx_spim_reconfigure(nrfx_spim_t const *        p_instance,
+                                 nrfx_spim_config_t const * p_config)
+{
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(p_config);
+
+    nrfx_err_t err_code = spim_configuration_verify(p_instance, p_config);
+    if (err_code != NRFX_SUCCESS)
+    {
+        return err_code;
+    }
+
+    nrfy_spim_disable(p_instance->p_reg);
+    spim_configure(p_instance, p_config);
+    nrfy_spim_enable(p_instance->p_reg);
+
+    return NRFX_SUCCESS;
+}
+
 static void spim_pin_uninit(uint32_t pin)
 {
     if (pin == NRF_SPIM_PIN_NOT_CONNECTED)
