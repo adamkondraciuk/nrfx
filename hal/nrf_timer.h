@@ -16,6 +16,31 @@ extern "C" {
  * @brief   Hardware access layer for managing the TIMER peripheral.
  */
 
+#if defined(HALTIUM_XXAA)
+/* TODO: Remove when in MDK */
+#define TIMER120_CC_NUM 6
+#define TIMER121_CC_NUM 6
+#define TIMER130_CC_NUM 6
+#define TIMER131_CC_NUM 6
+#define TIMER132_CC_NUM 6
+#define TIMER133_CC_NUM 6
+#define TIMER134_CC_NUM 6
+#define TIMER135_CC_NUM 6
+#define TIMER136_CC_NUM 6
+#define TIMER137_CC_NUM 6
+
+#define TIMER120_MAX_SIZE 32
+#define TIMER121_MAX_SIZE 32
+#define TIMER130_MAX_SIZE 32
+#define TIMER131_MAX_SIZE 32
+#define TIMER132_MAX_SIZE 32
+#define TIMER133_MAX_SIZE 32
+#define TIMER134_MAX_SIZE 32
+#define TIMER135_MAX_SIZE 32
+#define TIMER136_MAX_SIZE 32
+#define TIMER137_MAX_SIZE 32
+#endif
+
 /**
  * @brief Macro getting pointer to the structure of registers of the TIMER peripheral.
  *

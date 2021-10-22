@@ -55,6 +55,33 @@ enum {
 #if NRFX_CHECK(NRFX_TIMER120_ENABLED)
     NRFX_TIMER120_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_TIMER121_ENABLED)
+    NRFX_TIMER121_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER130_ENABLED)
+    NRFX_TIMER130_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER131_ENABLED)
+    NRFX_TIMER131_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER132_ENABLED)
+    NRFX_TIMER132_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER133_ENABLED)
+    NRFX_TIMER133_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER134_ENABLED)
+    NRFX_TIMER134_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER135_ENABLED)
+    NRFX_TIMER135_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER136_ENABLED)
+    NRFX_TIMER136_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_TIMER137_ENABLED)
+    NRFX_TIMER137_INST_IDX,
+#endif
     NRFX_TIMER_ENABLED_COUNT
 };
 #endif
@@ -374,6 +401,16 @@ void nrfx_timer_1_irq_handler(void);
 void nrfx_timer_2_irq_handler(void);
 void nrfx_timer_3_irq_handler(void);
 void nrfx_timer_4_irq_handler(void);
+void nrfx_timer_120_irq_handler(void);
+void nrfx_timer_121_irq_handler(void);
+void nrfx_timer_130_irq_handler(void);
+void nrfx_timer_131_irq_handler(void);
+void nrfx_timer_132_irq_handler(void);
+void nrfx_timer_133_irq_handler(void);
+void nrfx_timer_134_irq_handler(void);
+void nrfx_timer_135_irq_handler(void);
+void nrfx_timer_136_irq_handler(void);
+void nrfx_timer_137_irq_handler(void);
 
 
 #ifdef __cplusplus

@@ -4,9 +4,14 @@
 
 #if NRFX_CHECK(NRFX_TIMER_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_TIMER0_ENABLED) || NRFX_CHECK(NRFX_TIMER1_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER2_ENABLED) || NRFX_CHECK(NRFX_TIMER3_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER4_ENABLED) || NRFX_CHECK(NRFX_TIMER120_ENABLED))
+#if !(NRFX_CHECK(NRFX_TIMER0_ENABLED)   || NRFX_CHECK(NRFX_TIMER1_ENABLED)   || \
+      NRFX_CHECK(NRFX_TIMER2_ENABLED)   || NRFX_CHECK(NRFX_TIMER3_ENABLED)   || \
+      NRFX_CHECK(NRFX_TIMER4_ENABLED)   || NRFX_CHECK(NRFX_TIMER120_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER121_ENABLED) || NRFX_CHECK(NRFX_TIMER130_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER131_ENABLED) || NRFX_CHECK(NRFX_TIMER132_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER133_ENABLED) || NRFX_CHECK(NRFX_TIMER134_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER135_ENABLED) || NRFX_CHECK(NRFX_TIMER136_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER137_ENABLED))
 #error "No enabled TIMER instances. Check <nrfx_config.h>."
 #endif
 
@@ -24,6 +29,36 @@
 #endif
 #if NRFX_CHECK(NRFX_TIMER4_ENABLED) && ((1 << 4) & NRFX_TIMERS_USED)
     #error "TIMER instance 4 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER120_ENABLED) && ((1 << 5) & NRFX_TIMERS_USED)
+    #error "TIMER instance 120 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER121_ENABLED) && ((1 << 6) & NRFX_TIMERS_USED)
+    #error "TIMER instance 121 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER130_ENABLED) && ((1 << 7) & NRFX_TIMERS_USED)
+    #error "TIMER instance 130 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER131_ENABLED) && ((1 << 8) & NRFX_TIMERS_USED)
+    #error "TIMER instance 131 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER132_ENABLED) && ((1 << 9) & NRFX_TIMERS_USED)
+    #error "TIMER instance 132 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER133_ENABLED) && ((1 << 10) & NRFX_TIMERS_USED)
+    #error "TIMER instance 133 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER134_ENABLED) && ((1 << 11) & NRFX_TIMERS_USED)
+    #error "TIMER instance 134 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER135_ENABLED) && ((1 << 12) & NRFX_TIMERS_USED)
+    #error "TIMER instance 135 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER136_ENABLED) && ((1 << 13) & NRFX_TIMERS_USED)
+    #error "TIMER instance 136 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER137_ENABLED) && ((1 << 14) & NRFX_TIMERS_USED)
+    #error "TIMER instance 137 is reserved for use outside of nrfx."
 #endif
 
 #include <nrfx_timer.h>
@@ -294,6 +329,78 @@ void nrfx_timer_120_irq_handler(void)
 {
     irq_handler(NRF_TIMER120, &m_cb[NRFX_TIMER120_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(120));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER121_ENABLED)
+void nrfx_timer_121_irq_handler(void)
+{
+    irq_handler(NRF_TIMER121, &m_cb[NRFX_TIMER121_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(121));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER130_ENABLED)
+void nrfx_timer_130_irq_handler(void)
+{
+    irq_handler(NRF_TIMER130, &m_cb[NRFX_TIMER130_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(130));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER131_ENABLED)
+void nrfx_timer_131_irq_handler(void)
+{
+    irq_handler(NRF_TIMER131, &m_cb[NRFX_TIMER131_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(131));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER132_ENABLED)
+void nrfx_timer_132_irq_handler(void)
+{
+    irq_handler(NRF_TIMER132, &m_cb[NRFX_TIMER132_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(132));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER133_ENABLED)
+void nrfx_timer_133_irq_handler(void)
+{
+    irq_handler(NRF_TIMER133, &m_cb[NRFX_TIMER133_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(133));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER134_ENABLED)
+void nrfx_timer_134_irq_handler(void)
+{
+    irq_handler(NRF_TIMER134, &m_cb[NRFX_TIMER134_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(134));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER135_ENABLED)
+void nrfx_timer_135_irq_handler(void)
+{
+    irq_handler(NRF_TIMER135, &m_cb[NRFX_TIMER135_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(135));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER136_ENABLED)
+void nrfx_timer_136_irq_handler(void)
+{
+    irq_handler(NRF_TIMER136, &m_cb[NRFX_TIMER136_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(136));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER137_ENABLED)
+void nrfx_timer_137_irq_handler(void)
+{
+    irq_handler(NRF_TIMER137, &m_cb[NRFX_TIMER137_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(137));
 }
 #endif
 
