@@ -83,11 +83,11 @@ typedef struct
 {
 #if NRFY_SPIM_HAS_DCX
     uint32_t dcx_pin; ///< D/CX pin number.
-                      /**< Set to @ref NRFX_SPIM_PIN_NOT_USED if this signal is not needed. */
+                      /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED if this signal is not needed. */
 #endif
 #if NRFY_SPIM_HAS_HW_CSN
     uint32_t csn_pin; ///< CSN pin number.
-                      /**< Set to @ref NRFX_SPIM_PIN_NOT_USED if this signal is not needed. */
+                      /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED if this signal is not needed. */
 #endif
 } nrfy_spim_ext_pins_t;
 
@@ -115,35 +115,35 @@ typedef struct
 {
     uint32_t sck_pin;  ///< SCK pin number.
     uint32_t mosi_pin; ///< MOSI pin number.
-                       /**< Set to @ref NRFX_SPIM_PIN_NOT_USED if this signal is not needed. */
+                       /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED if this signal is not needed. */
     uint32_t miso_pin; ///< MISO pin number.
-                       /**< Set to @ref NRFX_SPIM_PIN_NOT_USED if this signal is not needed. */
+                       /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED if this signal is not needed. */
 } nrfy_spim_pins_t;
 
 /** @brief SPIM configuration structure. */
 typedef struct
 {
-    nrfy_spim_pins_t         pins;          ///< Pin configuration structure.
-    uint8_t                  orc;           ///< Overrun character.
-                                            /**< This character is transmitted when the TX buffer gets exhausted,
-                                                 but the transaction continues due to RX. */
-    nrf_spim_frequency_t     frequency;     ///< SPIM frequency.
-    nrf_spim_mode_t          mode;          ///< SPIM mode.
-    nrf_spim_bit_order_t     bit_order;     ///< SPIM bit order.
+    nrfy_spim_pins_t       pins;          ///< Pin configuration structure.
+    uint8_t                orc;           ///< Overrun character.
+                                          /**< This character is transmitted when the TX buffer gets exhausted,
+                                               but the transaction continues due to RX. */
+    nrf_spim_frequency_t   frequency;     ///< SPIM frequency.
+    nrf_spim_mode_t        mode;          ///< SPIM mode.
+    nrf_spim_bit_order_t   bit_order;     ///< SPIM bit order.
 #if NRFY_SPIM_HAS_EXTENDED
-    nrfy_spim_ext_config_t * p_ext_config;  ///< Pointer to the extended features configuration structure.
-                                            /**< Can be NULL when extended features are not needed
-                                             *   or are not supported by the given instance. */
+    nrfy_spim_ext_config_t ext_config;    ///< Extended features configuration structure.
+                                          /**< Used only if @p ext_enable is true. */
+    bool                   ext_enable;    ///< True if extended features are to be configured, false otherwise.
 #endif
-    bool                     skip_psel_cfg; ///< Skip pin selection configuration.
-                                            /**< When set to true, the driver does not modify
-                                             *   pin select registers in the peripheral.
-                                             *   Those registers are supposed to be set up
-                                             *   externally before the driver is initialized.
-                                             *   @note When both GPIO configuration and pin
-                                             *   selection are to be skipped, the structure
-                                             *   fields that specify pins can be omitted,
-                                             *   as they are ignored anyway. */
+    bool                   skip_psel_cfg; ///< Skip pin selection configuration.
+                                          /**< When set to true, the driver does not modify
+                                           *   pin select registers in the peripheral.
+                                           *   Those registers are supposed to be set up
+                                           *   externally before the driver is initialized.
+                                           *   @note When both GPIO configuration and pin
+                                           *   selection are to be skipped, the structure
+                                           *   fields that specify pins can be omitted,
+                                           *   as they are ignored anyway. */
 } nrfy_spim_config_t;
 
 /**
@@ -164,28 +164,28 @@ NRFY_STATIC_INLINE void nrfy_spim_periph_configure(NRF_SPIM_Type *            p_
     nrf_spim_frequency_set(p_reg, p_config->frequency);
     nrf_spim_configure(p_reg, p_config->mode, p_config->bit_order);
 #if NRFY_SPIM_HAS_EXTENDED
-    if (p_config->p_ext_config)
+    if (p_config->ext_enable)
     {
         if (!p_config->skip_psel_cfg)
         {
 #if NRFY_SPIM_HAS_DCX
-            if (p_config->p_ext_config->pins.dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
+            if (p_config->ext_config.pins.dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
             {
-                nrf_spim_dcx_pin_set(p_reg, p_config->p_ext_config->pins.dcx_pin);
+                nrf_spim_dcx_pin_set(p_reg, p_config->ext_config.pins.dcx_pin);
             }
 #endif
 #if NRFY_SPIM_HAS_HW_CSN
-            if (p_config->p_ext_config->pins.csn_pin != NRF_SPIM_PIN_NOT_CONNECTED)
+            if (p_config->ext_config.pins.csn_pin != NRF_SPIM_PIN_NOT_CONNECTED)
             {
                 nrf_spim_csn_configure(p_reg,
-                                       p_config->p_ext_config->pins.csn_pin,
-                                       p_config->p_ext_config->csn_pol,
-                                       p_config->p_ext_config->csn_duration);
+                                       p_config->ext_config.pins.csn_pin,
+                                       p_config->ext_config.csn_pol,
+                                       p_config->ext_config.csn_duration);
             }
 #endif
         }
 #if NRFY_SPIM_HAS_RXDELAY
-        nrf_spim_iftiming_set(p_reg, p_config->p_ext_config->rx_delay);
+        nrf_spim_iftiming_set(p_reg, p_config->ext_config.rx_delay);
 #endif
     }
 #endif // NRFY_SPIM_HAS_EXTENDED
@@ -533,6 +533,34 @@ NRFY_STATIC_INLINE void nrfy_spim_pins_set(NRF_SPIM_Type * p_reg,
     nrf_barrier_w();
 }
 
+/** @refhal{nrf_spim_sck_pin_get} */
+NRFY_STATIC_INLINE uint32_t nrfy_spim_sck_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t pin = nrf_spim_sck_pin_get(p_reg);
+    nrf_barrier_r();
+    return pin;
+}
+
+/** @refhal{nrf_spim_mosi_pin_get} */
+NRFY_STATIC_INLINE uint32_t nrfy_spim_mosi_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t pin = nrf_spim_mosi_pin_get(p_reg);
+    nrf_barrier_r();
+    return pin;
+}
+
+/** @refhal{nrf_spim_miso_pin_get} */
+NRFY_STATIC_INLINE uint32_t nrfy_spim_miso_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t pin = nrf_spim_miso_pin_get(p_reg);
+    nrf_barrier_r();
+    return pin;
+}
+
+
 #if NRFY_SPIM_HAS_HW_CSN
 /** @refhal{nrf_spim_csn_configure} */
 NRFY_STATIC_INLINE void nrfy_spim_csn_configure(NRF_SPIM_Type *    p_reg,
@@ -543,6 +571,15 @@ NRFY_STATIC_INLINE void nrfy_spim_csn_configure(NRF_SPIM_Type *    p_reg,
     nrf_spim_csn_configure(p_reg, pin, polarity, duration);
     nrf_barrier_w();
 }
+
+/** @refhal{nrf_spim_csn_pin_get} */
+NRFY_STATIC_INLINE uint32_t nrfy_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t pin = nrf_spim_csn_pin_get(p_reg);
+    nrf_barrier_r();
+    return pin;
+}
 #endif
 
 #if NRFY_SPIM_HAS_DCX
@@ -552,6 +589,15 @@ NRFY_STATIC_INLINE void nrfy_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
 {
     nrf_spim_dcx_pin_set(p_reg, dcx_pin);
     nrf_barrier_w();
+}
+
+/** @refhal{nrf_spim_dcx_pin_get} */
+NRFY_STATIC_INLINE uint32_t nrfy_spim_dcx_pin_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t pin = nrf_spim_dcx_pin_get(p_reg);
+    nrf_barrier_r();
+    return pin;
 }
 
 /** @refhal{nrf_spim_dcx_cnt_set} */
@@ -614,6 +660,15 @@ NRFY_STATIC_INLINE void nrfy_spim_frequency_set(NRF_SPIM_Type *      p_reg,
     nrf_barrier_w();
 }
 
+/** @refhal{nrf_spim_tx_buffer_set} */
+NRFY_STATIC_INLINE void nrfy_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
+                                                uint8_t const * p_buffer,
+                                                size_t          length)
+{
+    nrf_spim_tx_buffer_set(p_reg, p_buffer, length);
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_spim_tx_amount_get} */
 NRFY_STATIC_INLINE uint32_t nrfy_spim_tx_amount_get(NRF_SPIM_Type const * p_reg)
 {
@@ -630,6 +685,15 @@ NRFY_STATIC_INLINE uint32_t nrfy_spim_tx_maxcnt_get(NRF_SPIM_Type const * p_reg)
     uint32_t maxcnt = nrf_spim_tx_maxcnt_get(p_reg);
     nrf_barrier_r();
     return maxcnt;
+}
+
+/** @refhal{nrf_spim_rx_buffer_set} */
+NRFY_STATIC_INLINE void nrfy_spim_rx_buffer_set(NRF_SPIM_Type * p_reg,
+                                                uint8_t *       p_buffer,
+                                                size_t          length)
+{
+    nrf_spim_rx_buffer_set(p_reg, p_buffer, length);
+    nrf_barrier_w();
 }
 
 /** @refhal{nrf_spim_tx_amount_get} */
