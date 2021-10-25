@@ -16,6 +16,14 @@ extern "C" {
  * @brief   Hardware access layer for managing the SAADC peripheral.
  */
 
+/** @brief Symbol specifying the offset of interrupt bitmask for limits of all channels. */
+#define NRF_SAADC_LIMITS_INT_OFFSET \
+    NRFX_MIN(SAADC_INTENSET_CH0LIMITH_Pos, SAADC_INTENSET_CH0LIMITL_Pos)
+
+/** @brief Symbol specifying the interrupt bitmask for limits of all channels. */
+#define NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK \
+    ((uint32_t)(((1 << SAADC_CH_NUM) - 1) << NRF_SAADC_LIMITS_INT_OFFSET))
+
 /** @brief Resolution of the analog-to-digital converter. */
 typedef enum
 {
@@ -322,7 +330,7 @@ NRF_STATIC_INLINE nrf_saadc_event_t nrf_saadc_limit_event_get(uint8_t           
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] channel Channel number.
  * @param[in] pselp   Positive input.
- * @param[in] pseln   Negative input. Set to NRF_SAADC_INPUT_DISABLED in single ended mode.
+ * @param[in] pseln   Negative input. Set to @ref NRF_SAADC_INPUT_DISABLED in single ended mode.
  */
 NRF_STATIC_INLINE void nrf_saadc_channel_input_set(NRF_SAADC_Type *  p_reg,
                                                    uint8_t           channel,
