@@ -89,9 +89,8 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
 void nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
                           nrfx_wdt_config_t const * p_config)
 {
-    wdt_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
     wdt_configure(p_instance, p_config);
 }
@@ -105,7 +104,6 @@ void nrfx_wdt_enable(nrfx_wdt_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_POWERED_ON;
     NRFX_LOG_INFO("Enabled.");
 }
-
 
 void nrfx_wdt_feed(nrfx_wdt_t const * p_instance)
 {
