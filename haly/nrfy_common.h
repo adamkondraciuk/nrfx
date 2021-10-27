@@ -19,13 +19,22 @@ NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number);
  */
 
 /**
+ * @brief Macro for calculating interrupt bit position associated with the specified event.
+ *
+ * @param[in] event Event.
+ *
+ * @return Interrupt bit position.
+ */
+#define NRFY_EVENT_TO_INT_BITPOS(event) ((((uint32_t)event) - 0x100) >> 2)
+
+/**
  * @brief Macro for calculating interrupt bitmask associated with the specified event.
  *
  * @param[in] event Event.
  *
  * @return Interrupt bitmask.
  */
-#define NRFY_EVENT_TO_INT_BITMASK(event) (1 << ((((uint32_t)event) - 0x100) >> 2))
+#define NRFY_EVENT_TO_INT_BITMASK(event) (1 << NRFY_EVENT_TO_INT_BITPOS(event))
 
 /** @sa NRFX_IRQ_PRIORITY_SET */
 #define NRFY_IRQ_PRIORITY_SET(irq_number, priority)  \
