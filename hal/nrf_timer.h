@@ -328,6 +328,24 @@ NRF_STATIC_INLINE void nrf_timer_shorts_set(NRF_TIMER_Type * p_reg,
                                             uint32_t         mask);
 
 /**
+ * @brief Function for getting COMPARE_CLEAR short mask for the specified channel.
+ *
+ * @param[in] channel Channel.
+ *
+ * @return Short mask.
+ */
+NRF_STATIC_INLINE nrf_timer_short_mask_t nrf_timer_short_compare_clear_get(uint8_t channel);
+
+/**
+ * @brief Function for getting COMPARE_STOP short mask for the specified channel.
+ *
+ * @param[in] channel Channel.
+ *
+ * @return Short mask.
+ */
+NRF_STATIC_INLINE nrf_timer_short_mask_t nrf_timer_short_compare_stop_get(uint8_t channel);
+
+/**
  * @brief Function for enabling the specified interrupts.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -598,6 +616,16 @@ NRF_STATIC_INLINE void nrf_timer_shorts_set(NRF_TIMER_Type * p_reg,
                                             uint32_t         mask)
 {
     p_reg->SHORTS = mask;
+}
+
+NRF_STATIC_INLINE nrf_timer_short_mask_t nrf_timer_short_compare_clear_get(uint8_t channel)
+{
+    return (nrf_timer_short_mask_t)((uint32_t)NRF_TIMER_SHORT_COMPARE0_CLEAR_MASK << channel);
+}
+
+NRF_STATIC_INLINE nrf_timer_short_mask_t nrf_timer_short_compare_stop_get(uint8_t channel)
+{
+    return (nrf_timer_short_mask_t)((uint32_t)NRF_TIMER_SHORT_COMPARE0_STOP_MASK << channel);
 }
 
 NRF_STATIC_INLINE void nrf_timer_int_enable(NRF_TIMER_Type * p_reg,
