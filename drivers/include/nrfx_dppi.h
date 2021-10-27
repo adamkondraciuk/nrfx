@@ -35,7 +35,8 @@ nrfx_err_t nrfx_dppi_channel_alloc(uint8_t * p_channel);
 
 /**
  * @brief Function for freeing a DPPI channel.
- * @details This function also disables the chosen channel.
+ * @details This function also disables the chosen channel. Configuration in
+ *          PUBLISH/SUBSCRIBE registers used for the channel is not cleared.
  *
  * @note Function is thread safe as it uses @ref nrfx_flag32_free.
  *
@@ -58,6 +59,9 @@ nrfx_err_t nrfx_dppi_channel_enable(uint8_t channel);
 
 /**
  * @brief Function for disabling a DPPI channel.
+ *
+ * @note Disabling channel does not modify PUBLISH/SUBSCRIBE registers configured to use
+ *       that channel.
  *
  * @param[in] channel DPPI channel to be disabled.
  *
