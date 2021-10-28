@@ -433,21 +433,26 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_HOLD_XFER));
             NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER));
             nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
-            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, true, true);
-            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer, false, false);
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer);
+            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
+            while (nrfy_twim_events_process(p_twim,
+                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_TXSTARTED),
+                                            NULL))
+            {}
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer);
             NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_TXSTARTED));
             p_cb->int_mask = NRF_TWIM_INT_SUSPENDED_MASK;
             break;
         case NRFX_TWIM_XFER_TXRX:
-            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
-            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer, false, false);
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer);
+            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->secondary_buffer);
             nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_STARTRX_MASK |
                                     NRF_TWIM_SHORT_LASTRX_STOP_MASK);
             nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;
             break;
         case NRFX_TWIM_XFER_TX:
-            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
+            nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer);
             if (NRFX_TWIM_FLAG_TX_NO_STOP & flags)
             {
                 nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
@@ -461,7 +466,7 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
             break;
         case NRFX_TWIM_XFER_RX:
-            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->primary_buffer, false, false);
+            nrfy_twim_rx_buffer_set(p_twim, &p_xfer_desc->primary_buffer);
             nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTRX_STOP_MASK);
             nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
             p_cb->int_mask = NRF_TWIM_INT_STOPPED_MASK;

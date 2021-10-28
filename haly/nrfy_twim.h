@@ -26,12 +26,6 @@ uint32_t __nrfy_internal_twim_events_process(NRF_TWIM_Type *               p_reg
                                              uint32_t                      mask,
                                              nrfy_twim_xfer_desc_t const * p_xfer);
 
-NRFY_STATIC_INLINE void __nrfy_internal_twim_tx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                             bool            wait);
-
-NRFY_STATIC_INLINE void __nrfy_internal_twim_rx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                             bool            wait);
-
 /**
  * @defgroup nrfy_twim TWIM HALY
  * @{
@@ -153,13 +147,9 @@ NRFY_STATIC_INLINE uint32_t nrfy_twim_events_process(NRF_TWIM_Type *            
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] p_xfer Pointer to the structure containing transaction buffer.
- * @param[in] latch  True if buffer should be latched in the periferal.
- * @param[in] wait   True if CPU should wait for buffer to be latched, false otherwise.
  */
 NRFY_STATIC_INLINE void nrfy_twim_tx_buffer_set(NRF_TWIM_Type *               p_reg,
-                                                nrfy_twim_xfer_desc_t const * p_xfer,
-                                                bool                          latch,
-                                                bool                          wait)
+                                                nrfy_twim_xfer_desc_t const * p_xfer)
 {
     if (p_xfer->p_buffer)
     {
@@ -167,55 +157,19 @@ NRFY_STATIC_INLINE void nrfy_twim_tx_buffer_set(NRF_TWIM_Type *               p_
     }
     nrf_twim_tx_buffer_set(p_reg, p_xfer->p_buffer, p_xfer->length);
     nrf_barrier_w();
-    if (latch)
-    {
-        __nrfy_internal_twim_tx_buffer_latch(p_reg, wait);
-    }
-}
-
-/**
- * @brief Function for latching the TWIM transaction buffer.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] wait  True if CPU should wait for buffer to be latched, false otherwise.
- */
-NRFY_STATIC_INLINE void nrfy_twim_tx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                  bool            wait)
-{
-    __nrfy_internal_twim_tx_buffer_latch(p_reg, wait);
 }
 
 /**
  * @brief Function for setting the TWIM reception buffer.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_xfer Pointer to the structure containing transaction buffer.
- * @param[in] latch  True if buffer should be latched in the periferal.
- * @param[in] wait   True if CPU should wait for buffer to be latched, false otherwise.
+ * @param[in] p_xfer Pointer to the structure containing reception buffer.
  */
 NRFY_STATIC_INLINE void nrfy_twim_rx_buffer_set(NRF_TWIM_Type *               p_reg,
-                                                nrfy_twim_xfer_desc_t const * p_xfer,
-                                                bool                          latch,
-                                                bool                          wait)
+                                                nrfy_twim_xfer_desc_t const * p_xfer)
 {
     nrf_twim_rx_buffer_set(p_reg, p_xfer->p_buffer, p_xfer->length);
     nrf_barrier_w();
-    if (latch)
-    {
-        __nrfy_internal_twim_rx_buffer_latch(p_reg, wait);
-    }
-}
-
-/**
- * @brief Function for latching the TWIM reception buffer.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] wait  True if CPU should wait for buffer to be latched, false otherwise.
- */
-NRFY_STATIC_INLINE void nrfy_twim_rx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                  bool            wait)
-{
-    __nrfy_internal_twim_rx_buffer_latch(p_reg, wait);
 }
 
 /**
@@ -610,34 +564,6 @@ uint32_t __nrfy_internal_twim_events_process(NRF_TWIM_Type *               p_reg
     }
     nrf_barrier_w();
     return evt_mask;
-}
-
-NRFY_STATIC_INLINE void __nrfy_internal_twim_tx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                             bool            wait)
-{
-    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STARTTX);
-    if (wait)
-    {
-        nrf_barrier_w();
-        while (!__nrfy_internal_twim_events_process(p_reg,
-                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_TXSTARTED),
-                                            NULL))
-        {}
-    }
-    nrf_barrier_w();
-}
-
-NRFY_STATIC_INLINE void __nrfy_internal_twim_rx_buffer_latch(NRF_TWIM_Type * p_reg,
-                                                             bool            wait)
-{
-    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STARTRX);
-    if (wait)
-    {
-        nrf_barrier_w();
-        while (!__nrfy_internal_twim_events_process(p_reg, NRF_TWIM_EVENT_RXSTARTED, NULL))
-        {}
-    }
-    nrf_barrier_w();
 }
 
 #ifdef __cplusplus
