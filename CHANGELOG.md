@@ -1,6 +1,27 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [3.0.0-beta-milestone-2]
+### Added
+- Added support for Haltium Eldoradoz FPGA and Z1 emulator.
+- Added initial support for RISC-V architecture.
+- Added HALs for: BELLBOARD, CPUCONF, EXMIF, GRTC, IPCMAP, IRQMAP, LRCCONF, MPC, MVDMA, PPIB, RESETHUB, RESETINFO, STM, TAMPC, UICR and VPR.
+- Added support for Haltium-specific features in the following HALs: CACHE, CCM, COMP, DCNF, GPIO, RADIO and SPU.
+- Added support for hardware access layers with cache and barrier support (HALY).
+- Added HALYs for: BELLBOARD, COMP, DPPI, GPIO, GRTC, I2S, LPCOMP, MVDMA, PDM, PWM, QDEC, RTC, SAADC, SPIM, TIMER, TWIM, UARTE, VPR and WDT.
+- Added drivers for: BELLBOARD, MVDMA and VEVIF.
+- Added support for Haltium peripheral instances in the following drivers: EGU, I2S, QDEC and TIMER.
+- Added data cache management macros to glue layer.
+- Added the nrfx_vdma helper layer, to facilitate developing code that uses the EasyVectorDMA.
+- Added the nrfx_idc helper layer, to facilitate developing generic code that uses inter-processor signalling.
+- Added initial support for the retention of the drivers.
+
+### Changed
+- Updated MDK to version 8.40.1 Internal Eldoradoz.
+- Updated NRFX_PERIPHERAL_ID_GET macro to support Haltium IRQ numbers.
+- Modified following drivers to use HALY instead of HAL: COMP, DPPI, I2S, LPCOMP, PDM, PWM, QDEC, RTC, SAADC, SPIM, TIMER, TWIM, UARTE and WDT.
+- Refactored the QDEC and I2S drivers to support multiple instances.
+
 ## [2.11.0] - 2023-04-07
 ### Added
 - Added support for the nRF9161 and nRF9131 SiPs. Use `NRF9120_XXAA` as the compilation symbol.
