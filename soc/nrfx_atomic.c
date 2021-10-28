@@ -27,8 +27,9 @@ uint32_t nrfx_atomic_u32_fetch_store(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data = value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -65,8 +66,9 @@ uint32_t nrfx_atomic_u32_fetch_or(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data |= value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -84,11 +86,12 @@ uint32_t nrfx_atomic_u32_or(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data |= value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
@@ -103,8 +106,9 @@ uint32_t nrfx_atomic_u32_fetch_and(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data &= value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -122,11 +126,12 @@ uint32_t nrfx_atomic_u32_and(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data &= value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
@@ -141,8 +146,9 @@ uint32_t nrfx_atomic_u32_fetch_xor(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data ^= value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -160,11 +166,12 @@ uint32_t nrfx_atomic_u32_xor(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data ^= value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
@@ -179,8 +186,9 @@ uint32_t nrfx_atomic_u32_fetch_add(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data += value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -198,11 +206,12 @@ uint32_t nrfx_atomic_u32_add(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data += value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
@@ -217,8 +226,9 @@ uint32_t nrfx_atomic_u32_fetch_sub(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data -= value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -236,11 +246,12 @@ uint32_t nrfx_atomic_u32_sub(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data -= value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
@@ -299,8 +310,9 @@ uint32_t nrfx_atomic_u32_fetch_sub_hs(nrfx_atomic_u32_t * p_data, uint32_t value
     (void) new_val;
     return old_val;
 #else
+    uint32_t old_val;
     NRFX_CRITICAL_SECTION_ENTER();
-    uint32_t old_val = *p_data;
+    old_val = *p_data;
     *p_data -= value;
     NRFX_CRITICAL_SECTION_EXIT();
     return old_val;
@@ -331,11 +343,12 @@ uint32_t nrfx_atomic_u32_sub_hs(nrfx_atomic_u32_t * p_data, uint32_t value)
     (void) old_val;
     return new_val;
 #else
+    uint32_t new_val;
     NRFX_CRITICAL_SECTION_ENTER();
     *p_data -= value;
-    uint32_t new_value = *p_data;
+    new_val = *p_data;
     NRFX_CRITICAL_SECTION_EXIT();
-    return new_value;
+    return new_val;
 #endif //NRFX_ATOMIC_USE_BUILT_IN
 }
 
