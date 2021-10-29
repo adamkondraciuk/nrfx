@@ -434,7 +434,7 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             NRFX_ASSERT(!(flags & NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER));
             nrfy_twim_shorts_set(p_twim, NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK);
             nrfy_twim_tx_buffer_set(p_twim, &p_xfer_desc->primary_buffer);
-            nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STARTTX);
+            nrfy_twim_tx_start(p_twim, NULL);
             while (nrfy_twim_events_process(p_twim,
                                             NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_TXSTARTED),
                                             NULL))
@@ -478,10 +478,19 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
 
     if (!(flags & NRFX_TWIM_FLAG_HOLD_XFER) && (p_xfer_desc->type != NRFX_TWIM_XFER_TXTX))
     {
-        nrfy_twim_task_trigger(p_twim,
-                               p_xfer_desc->type == NRFX_TWIM_XFER_RX ?
-                               NRF_TWIM_TASK_STARTRX : NRF_TWIM_TASK_STARTTX);
-        if (p_xfer_desc->primary_buffer.length == 0)
+        if (p_xfer_desc->type == NRFX_TWIM_XFER_RX)
+        {
+            nrfy_twim_rx_start(p_twim, p_cb->handler ? NULL : &p_xfer_desc->primary_buffer);
+        }
+        else
+        {
+            nrfy_twim_tx_start(p_twim, p_cb->handler ? NULL : &p_xfer_desc->primary_buffer);
+        }
+        /* Handling zero length transfers in non-blocking mode.
+           In blocking mode zero length transfer is handled in
+           @ref{nrfy_twim_tx_start} and @ref{nrfy_twim_rx_start}
+        */
+        if (p_xfer_desc->primary_buffer.length == 0 && p_cb->handler)
         {
             nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
         }
@@ -520,72 +529,6 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
     }
     else
     {
-        nrfy_twim_xfer_desc_t * p_xfer = p_cb->xfer_desc.type == NRFX_TWIM_XFER_RX ?
-                            &p_cb->xfer_desc.primary_buffer : &p_cb->xfer_desc.secondary_buffer;
-        bool transmission_finished = false;
-        do {
-            if (nrfy_twim_events_process(p_twim,
-                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
-                                         p_xfer))
-            {
-                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_SUSPENDED));
-                transmission_finished = true;
-            }
-
-            if (nrfy_twim_events_process(p_twim,
-                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED),
-                                         p_xfer))
-            {
-                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_STOPPED));
-                transmission_finished = true;
-            }
-
-            if (nrfy_twim_events_process(p_twim,
-                                         NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR),
-                                         p_xfer))
-            {
-                NRFX_LOG_DEBUG("TWIM: Event: %s.", EVT_TO_STR_TWIM(NRF_TWIM_EVENT_ERROR));
-
-                bool lasttx_triggered = nrfy_twim_events_process(p_twim,
-                                                NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_LASTTX),
-                                                NULL);
-                uint32_t shorts_mask = nrfy_twim_shorts_get(p_twim);
-
-                if (!(lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
-                {
-                    // Unless LASTTX event arrived and LASTTX_STOP shortcut is active,
-                    // triggering of STOP task in case of error has to be done manually.
-                    nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_RESUME);
-                    nrfy_twim_task_trigger(p_twim, NRF_TWIM_TASK_STOP);
-
-                    // Mark transmission as not finished yet,
-                    // as STOPPED event is expected to arrive.
-                    // If LASTTX_SUSPENDED shortcut is active,
-                    // NACK has been received on last byte sent
-                    // and SUSPENDED event happened to be checked before ERROR,
-                    // transmission will be marked as finished.
-                    // In such case this flag has to be overwritten.
-                    transmission_finished = false;
-                }
-
-                if (lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK))
-                {
-                    // When STOP task was triggered just before SUSPEND task has taken effect,
-                    // SUSPENDED event may not arrive.
-                    // However if SUSPENDED arrives it always arrives after ERROR.
-                    // Therefore SUSPENDED has to be cleared
-                    // so it does not cause premature termination of busy loop
-                    // waiting for STOPPED event to arrive.
-                    (void)nrfy_twim_events_process(p_twim,
-                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
-                                            p_xfer);
-                    // Mark transmission as not finished yet,
-                    // for same reasons as above.
-                    transmission_finished = false;
-                }
-            }
-        } while (!transmission_finished);
-
         uint32_t errorsrc = nrfy_twim_errorsrc_get_and_clear(p_twim);
 
         p_cb->busy = false;

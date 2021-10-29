@@ -173,6 +173,116 @@ NRFY_STATIC_INLINE void nrfy_twim_rx_buffer_set(NRF_TWIM_Type *               p_
 }
 
 /**
+ * @brief Function for starting TWIM transaction.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] p_xfer Pointer to the structure containing transaction buffer.
+ */
+NRFY_STATIC_INLINE void nrfy_twim_tx_start(NRF_TWIM_Type *               p_reg,
+                                           nrfy_twim_xfer_desc_t const * p_xfer)
+{
+    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STARTTX);
+    if (p_xfer)
+    {
+        if (p_xfer->length == 0)
+        {
+            nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STOP);
+        }
+        nrf_barrier_w();
+        uint32_t mask = NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR);
+        uint32_t evt_mask = 0;
+        while (!(evt_mask & (NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED) |
+                             NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED))))
+        {
+            evt_mask = __nrfy_internal_twim_events_process(p_reg, mask, p_xfer);
+            if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR))
+            {
+                bool lasttx_triggered = __nrfy_internal_twim_events_process(p_reg,
+                                                NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_LASTTX),
+                                                NULL);
+                nrf_barrier_rw();
+                uint32_t shorts_mask = nrf_twim_shorts_get(p_reg);
+                nrf_barrier_r();
+
+                if (!(lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_STOP_MASK)))
+                {
+                    // Unless LASTTX event arrived and LASTTX_STOP shortcut is active,
+                    // triggering of STOP task in case of error has to be done manually.
+                    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_RESUME);
+                    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STOP);
+                    nrf_barrier_w();
+
+                    // Mark transmission as not finished yet,
+                    // as STOPPED event is expected to arrive.
+                    // If LASTTX_SUSPENDED shortcut is active,
+                    // NACK has been received on last byte sent
+                    // and SUSPENDED event happened to be checked before ERROR,
+                    // transmission will be marked as finished.
+                    // In such case this flag has to be overwritten.
+                    evt_mask = 0;
+                }
+
+                if (lasttx_triggered && (shorts_mask & NRF_TWIM_SHORT_LASTTX_SUSPEND_MASK))
+                {
+                    // When STOP task was triggered just before SUSPEND task has taken effect,
+                    // SUSPENDED event may not arrive.
+                    // However if SUSPENDED arrives it always arrives after ERROR.
+                    // Therefore SUSPENDED has to be cleared
+                    // so it does not cause premature termination of busy loop
+                    // waiting for STOPPED event to arrive.
+                    (void)__nrfy_internal_twim_events_process(p_reg,
+                                            NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED),
+                                            p_xfer);
+                    // Mark transmission as not finished yet,
+                    // for same reasons as above.
+                    evt_mask = 0;
+                }
+            }
+        }
+    }
+    nrf_barrier_w();
+}
+
+/**
+ * @brief Function for starting TWIM reception.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] p_xfer Pointer to the structure containing reception buffer.
+ */
+NRFY_STATIC_INLINE void nrfy_twim_rx_start(NRF_TWIM_Type *               p_reg,
+                                           nrfy_twim_xfer_desc_t const * p_xfer)
+{
+    nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STARTRX);
+    if (p_xfer)
+    {
+        if (p_xfer->length == 0)
+        {
+            nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STOP);
+        }
+
+        nrf_barrier_w();
+        uint32_t mask = NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR);
+        uint32_t evt_mask = 0;
+        while (!(evt_mask & (NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_SUSPENDED) |
+                             NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_STOPPED))))
+        {
+            evt_mask = __nrfy_internal_twim_events_process(p_reg, mask, p_xfer);
+            if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_TWIM_EVENT_ERROR))
+            {
+                // triggering of STOP task in case of error has to be done manually.
+                nrf_twim_task_trigger(p_reg, NRF_TWIM_TASK_STOP);
+                nrf_barrier_w();
+            }
+        }
+    }
+    nrf_barrier_w();
+}
+
+/**
  * @brief Function for aborting the ongoing TWIM transaction.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
