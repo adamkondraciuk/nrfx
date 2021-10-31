@@ -33,7 +33,8 @@ typedef enum
     NRFX_IDC_DOMAIN_CELL,    /**< Cellular domain. */
     NRFX_IDC_DOMAIN_SYSCTRL, /**< System Controller domain. */
     NRFX_IDC_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
-    NRFX_IDC_DOMAIN_PPR      /**< Peripheral Processor */
+    NRFX_IDC_DOMAIN_PPR,     /**< Peripheral Processor */
+    NRFX_IDC_DOMAIN_COUNT    /**< Total number of possible IDC domains. */
 } nrfx_idc_domain_t;
 
 /**
