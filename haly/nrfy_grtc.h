@@ -134,28 +134,6 @@ void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
 }
 
 /**
- * @brief Function for setting a compare value of channel for the SYSCOUNTER.
- *
- * @note This function disables the corresponding event before modifying specified CC register.
- *       The event is enabled immediately after setting the compare value.
- *
- * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
- * @param[in] cc_channel The specified capture/compare channel.
- * @param[in] cc_value   Compare value to be set in 1 MHz units.
- */
-NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
-                                                     uint8_t         cc_channel,
-                                                     uint64_t        cc_value)
-{
-    nrf_grtc_sys_counter_compare_event_disable(p_reg, cc_channel);
-    nrf_barrier_w();
-    nrf_grtc_sys_counter_cc_set(p_reg, cc_channel, cc_value);
-    nrf_barrier_w();
-    nrf_grtc_sys_counter_compare_event_enable(p_reg, cc_channel);
-    nrf_barrier_w();
-}
-
-/**
  * @brief Function for returning the SYSCOUNTER 1 MHz value.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -251,6 +229,15 @@ NRFY_STATIC_INLINE void nrfy_grtc_compare_publish_set(NRF_GRTC_Type * p_reg,
 NRFY_STATIC_INLINE void nrfy_grtc_compare_publish_clear(NRF_GRTC_Type * p_reg, uint8_t cc_channel)
 {
     nrf_grtc_publish_clear(p_reg, nrf_grtc_sys_counter_compare_event_get(cc_channel));
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_grtc_sys_counter_cc_set} */
+NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
+                                                     uint8_t         cc_channel,
+                                                     uint64_t        cc_value)
+{
+    nrf_grtc_sys_counter_cc_set(p_reg, cc_channel, cc_value);
     nrf_barrier_w();
 }
 

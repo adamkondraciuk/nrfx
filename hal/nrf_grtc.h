@@ -161,9 +161,7 @@ typedef enum
 /**
  * @brief Function for setting a compare value of channel for the SYSCOUNTER.
  *
- * @note Setting registers inside this function is non-atomic.
- *       Disable the corresponding compare event before, or use
- *       @ref nrf_grtc_sys_counter_cc_add_set instead.
+ * @note The corresponding event is automatically disabled by hardware during the operation.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] cc_channel The specified capture/compare channel.
