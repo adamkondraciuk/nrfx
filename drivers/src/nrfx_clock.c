@@ -402,7 +402,8 @@ nrfx_err_t nrfx_clock_is_calibrating(void)
 
 void nrfx_clock_calibration_timer_start(uint8_t interval)
 {
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && NRF_CLOCK_HAS_CALIBRATION_TIMER
+#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && \
+    NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED) &&  NRF_CLOCK_HAS_CALIBRATION_TIMER
     nrf_clock_cal_timer_timeout_set(NRF_CLOCK, interval);
     nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
     nrf_clock_int_enable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
@@ -414,7 +415,8 @@ void nrfx_clock_calibration_timer_start(uint8_t interval)
 
 void nrfx_clock_calibration_timer_stop(void)
 {
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && NRF_CLOCK_HAS_CALIBRATION_TIMER
+#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && \
+    NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED) && NRF_CLOCK_HAS_CALIBRATION_TIMER
     nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
     nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTOP);
 #endif
@@ -539,8 +541,9 @@ void nrfx_clock_irq_handler(void)
     }
 
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
-#if NRF_CLOCK_HAS_CALIBRATION_TIMER
-    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO))
+#if NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
+    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO) &&
+        nrf_clock_int_enable_check(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK))
     {
         nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
         NRFX_LOG_DEBUG("Event: NRF_CLOCK_EVENT_CTTO");
@@ -548,9 +551,10 @@ void nrfx_clock_irq_handler(void)
 
         m_clock_cb.event_handler(NRFX_CLOCK_EVT_CTTO);
     }
-#endif // NRF_CLOCK_HAS_CALIBRATION_TIMER
+#endif // NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
 
-    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_DONE))
+    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_DONE) &&
+        nrf_clock_int_enable_check(NRF_CLOCK, NRF_CLOCK_INT_DONE_MASK))
     {
 #if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_192)
         *(volatile uint32_t *)0x40000C34 = 0x00000000;

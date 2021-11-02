@@ -34,6 +34,12 @@
 #define NRFX_CLOCK_CONFIG_LF_CAL_ENABLED 0
 #endif
 
+// <q> NRFX_CLOCK_CONFIG_CT_ENABLED  - Enables Calibration Timer Support
+
+#ifndef NRFX_CLOCK_CONFIG_CT_ENABLED
+#define NRFX_CLOCK_CONFIG_CT_ENABLED 1
+#endif
+
 // <q> NRFX_CLOCK_CONFIG_LFXO_TWO_STAGE_ENABLED - Enables two-stage LFXO start procedure
 
 // <i> If set to a non-zero value, LFRC will be started before LFXO and corresponding
