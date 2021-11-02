@@ -57,6 +57,35 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
                                                        nrf_domain_t           domain);
 
 /**
+ * @brief Function for setting lock value of the domain control register for 
+ *        given debug type and domain.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be modified.
+ * @param[in] domain Domain for which the value will be modified.
+ * @param[in] enable True if register is to be locked, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                      nrf_tampc_debug_type_t type,
+                                                      nrf_domain_t           domain,
+                                                      bool                   enable);
+
+/**
+ * @brief Function for getting the lock value of the domain control register for
+ *        given debug type and domain.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be retrieved.
+ * @param[in] domain Domain for which the value will be retrieved.
+ *
+ * @retval true  Register is locked.
+ * @retval false Register is unlocked.
+ */
+NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                      nrf_tampc_debug_type_t type,
+                                                      nrf_domain_t           domain);
+
+/**
  * @brief Function for setting signal value of the access port control register for 
  *        given debug type and domain.
  *
@@ -86,6 +115,35 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                                                    nrf_domain_t           domain);
 
 /**
+ * @brief Function for setting lock value of the access port control register for 
+ *        given debug type and domain.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be modified.
+ * @param[in] domain Domain for which the value will be modified.
+ * @param[in] enable True if register is to be locked, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                  nrf_tampc_debug_type_t type,
+                                                  nrf_domain_t           domain,
+                                                  bool                   enable);
+
+/**
+ * @brief Function for getting the lock value of the access port control register for
+ *        given debug type and domain.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be retrieved.
+ * @param[in] domain Domain for which the value will be retrieved.
+ *
+ * @retval true  Register is locked.
+ * @retval false Register is unlocked.
+ */
+NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                  nrf_tampc_debug_type_t type,
+                                                  nrf_domain_t           domain);
+
+/**
  * @brief Function for setting signal value of the Coresight register for given debug type.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
@@ -107,6 +165,29 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
  */
 NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                                                           nrf_tampc_debug_type_t type);
+
+/**
+ * @brief Function for setting lock value of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] type   Debug type that will be modified.
+ * @param[in] enable True if register is to be locked, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                         nrf_tampc_debug_type_t type,
+                                                         bool                   enable);
+
+/**
+ * @brief Function for getting the lock value of the Coresight register for given debug type.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] type  Debug type that will be retrieved.
+ *
+ * @retval true  Register is locked.
+ * @retval false Register is unlocked.
+ */
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                         nrf_tampc_debug_type_t type);
 
 /**
  * @brief Function for setting fault injection of the Coresight register for given debug type.
@@ -203,6 +284,76 @@ NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_value_get(NRF_TAMPC_Type const * p_
     }
 }
 
+NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                      nrf_tampc_debug_type_t type,
+                                                      nrf_domain_t           domain,
+                                                      bool                   enable)
+{
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DBGEN:
+            p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL &
+                                                    ~TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Msk) |
+                                                   ((enable ? TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Enabled
+                                                     : TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Disabled)
+                                                    << TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_NIDEN:
+            p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL &
+                                                    ~TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Msk) |
+                                                   ((enable ? TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Enabled
+                                                     : TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Disabled)
+                                                    << TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPIDEN:
+            p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL &
+                                                     ~TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Msk) |
+                                                    ((enable ? TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Enabled
+                                                      : TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Disabled)
+                                                     << TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL = ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL &
+                                                      ~TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Msk) |
+                                                     ((enable ? TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Enabled
+                                                       : TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Disabled)
+                                                      << TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Pos));
+            break;
+        default:
+            NRFX_ASSERT(0);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_tampc_domain_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                      nrf_tampc_debug_type_t type,
+                                                      nrf_domain_t           domain)
+{
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DBGEN:
+            return ((p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL & TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_NIDEN:
+            return ((p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL & TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_SPIDEN:
+            return ((p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL & TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            return ((p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL & TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_LOCK_Pos);
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
 NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
                                                    nrf_tampc_debug_type_t type,
                                                    nrf_domain_t           domain,
@@ -247,6 +398,56 @@ NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
         case NRF_TAMPC_CTRL_SPIDEN:
             return ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL & TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_AP_SPIDEN_CTRL_VALUE_Pos);
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                  nrf_tampc_debug_type_t type,
+                                                  nrf_domain_t           domain,
+                                                  bool                   enable)
+{
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DBGEN:
+            p_reg->PROTECT.AP[domain].DBGEN.CTRL = ((p_reg->PROTECT.AP[domain].DBGEN.CTRL &
+                                                ~TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Msk) |
+                                               ((enable ? TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Enabled :
+                                                 TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Disabled)
+                                                << TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPIDEN:
+            p_reg->PROTECT.AP[domain].SPIDEN.CTRL = ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL &
+                                                 ~TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Msk) |
+                                                ((enable ? TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Enabled :
+                                                  TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Disabled)
+                                                 << TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Pos));
+            break;
+        default:
+            NRFX_ASSERT(0);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_tampc_ap_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                  nrf_tampc_debug_type_t type,
+                                                  nrf_domain_t           domain)
+{
+    NRFX_ASSERT(domain > 0);
+    NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
+
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DBGEN:
+            return ((p_reg->PROTECT.AP[domain].DBGEN.CTRL & TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_AP_DBGEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_SPIDEN:
+            return ((p_reg->PROTECT.AP[domain].SPIDEN.CTRL & TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_AP_SPIDEN_CTRL_LOCK_Pos);
         default:
             NRFX_ASSERT(0);
             return false;
@@ -329,6 +530,88 @@ NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_value_get(NRF_TAMPC_Type const *
             return ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
                      TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Msk)
                     >> TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_VALUE_Pos);
+        default:
+            NRFX_ASSERT(0);
+            return false;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
+                                                         nrf_tampc_debug_type_t type,
+                                                         bool                   enable)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Enabled :
+                   TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Disabled)
+                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_DBGEN:
+            p_reg->PROTECT.CORESIGHT.DBGEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Enabled :
+                   TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Disabled)
+                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_NIDEN:
+            p_reg->PROTECT.CORESIGHT.NIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Enabled :
+                   TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Disabled)
+                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPIDEN:
+            p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Enabled :
+                   TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Disabled)
+                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Pos));
+            break;
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL =
+                ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                  ~TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Msk) |
+                 ((enable ? TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Enabled :
+                   TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Disabled)
+                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Pos));
+            break;
+        default:
+            NRFX_ASSERT(0);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_tampc_coresight_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
+                                                         nrf_tampc_debug_type_t type)
+{
+    switch (type)
+    {
+        case NRF_TAMPC_CTRL_DEVICEEN:
+            return ((p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_DBGEN:
+            return ((p_reg->PROTECT.CORESIGHT.DBGEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_NIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.NIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_SPIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_LOCK_Pos);
+        case NRF_TAMPC_CTRL_SPNIDEN:
+            return ((p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL &
+                     TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Msk)
+                    >> TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_LOCK_Pos);
         default:
             NRFX_ASSERT(0);
             return false;
