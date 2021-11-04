@@ -56,11 +56,11 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
 
 #if defined(BOARD_PALLADIUM)
     // TODO: Remove later
-    NRFY_IRQ_PENDING_CLEAR(GRTC0_IRQn);
+    NRFY_IRQ_PENDING_CLEAR(GRTC_0_IRQn);
 #endif
 
-    NRFX_IRQ_PRIORITY_SET(GRTC0_IRQn, irq_priority);
-    NRFX_IRQ_ENABLE(GRTC0_IRQn);
+    NRFX_IRQ_PRIORITY_SET(GRTC_0_IRQn, irq_priority);
+    NRFX_IRQ_ENABLE(GRTC_0_IRQn);
     if (enable)
     {
         nrf_grtc_int_enable(p_reg, group, mask);
@@ -76,7 +76,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
  NRFY_STATIC_INLINE void nrfy_grtc_int_uninit(NRF_GRTC_Type * p_reg)
  {
     (void)p_reg;
-    NRFX_IRQ_DISABLE(GRTC0_IRQn);
+    NRFX_IRQ_DISABLE(GRTC_0_IRQn);
     nrf_barrier_w();
  }
 
