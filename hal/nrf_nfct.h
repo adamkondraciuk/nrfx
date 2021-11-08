@@ -879,7 +879,7 @@ NRF_STATIC_INLINE uint32_t nrf_nfct_task_address_get(NRF_NFCT_Type const * p_reg
 NRF_STATIC_INLINE void nrf_nfct_event_clear(NRF_NFCT_Type * p_reg, nrf_nfct_event_t event)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0UL;
-    __DSB();
+    nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
 NRF_STATIC_INLINE bool nrf_nfct_event_check(NRF_NFCT_Type const * p_reg, nrf_nfct_event_t event)
