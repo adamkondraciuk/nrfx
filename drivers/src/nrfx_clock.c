@@ -80,6 +80,14 @@ extern bool nrfx_power_irq_enabled;
     #error "Two-stage LFXO start procedure enabled but LFCLK source is not set to LFXO!"
 #endif
 
+#if !defined(NRFX_CLOCK_CONFIG_CT_ENABLED) && NRF_CLOCK_HAS_CALIBRATION_TIMER
+#define NRFX_CLOCK_CONFIG_CT_ENABLED 1
+#endif
+
+#if NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED) && !NRF_CLOCK_HAS_CALIBRATION_TIMER
+    #error "Calibration timer is not available in the SoC that is used."
+#endif
+
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 typedef enum
 {
