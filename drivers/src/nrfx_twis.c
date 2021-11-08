@@ -613,7 +613,7 @@ nrfx_twis_error_get_and_clear_internal_try
     bne   nrfx_twis_error_get_and_clear_internal_try /* no - try again          */
     bx    lr
 }
-#elif defined ( __GNUC__ )
+#elif defined ( __GNUC__ ) && defined(ISA_ARM)
 static uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perror)
 {
     uint32_t ret;
@@ -634,6 +634,13 @@ static uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perro
     );
     (void)temp;
     return ret;
+}
+#elif defined ( __GNUC__ ) && defined(ISA_RISCV)
+static uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perror)
+{
+    uint32_t error = *perror;
+    *perror = 0;
+    return error;
 }
 #elif defined ( __ICCARM__ )
 static uint32_t nrfx_twis_error_get_and_clear_internal(uint32_t volatile * perror)
