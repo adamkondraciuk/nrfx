@@ -17,10 +17,11 @@ extern "C" {
  * @brief   Successive Approximation Analog-to-Digital Converter (SAADC) peripheral driver.
  */
 
-#if NRF_SAADC_HAS_ACQTIME_ENUM
-#define NRFX_SAAADC_DEFAULT_ACQTIME NRF_SAADC_ACQTIME_10US
+#if NRF_SAADC_HAS_ACQTIME_ENUM || defined(__NRFX_DOXYGEN__)
+/** @brief Auxiliary symbol specifying default value for the SAADC acquisition time. */
+#define NRFX_SAADC_DEFAULT_ACQTIME NRF_SAADC_ACQTIME_10US
 #else
-#define NRFX_SAAADC_DEFAULT_ACQTIME 79
+#define NRFX_SAADC_DEFAULT_ACQTIME 79
 #endif
 
 /**
@@ -46,7 +47,7 @@ extern "C" {
         .resistor_n = NRF_SAADC_RESISTOR_DISABLED,          \
         .gain       = NRF_SAADC_GAIN1,                      \
         .reference  = NRF_SAADC_REFERENCE_INTERNAL,         \
-        .acq_time   = NRFX_SAAADC_DEFAULT_ACQTIME,          \
+        .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,           \
         .mode       = NRF_SAADC_MODE_SINGLE_ENDED,          \
         .burst      = NRF_SAADC_BURST_DISABLED,             \
     },                                                      \
@@ -79,7 +80,7 @@ extern "C" {
         .resistor_n = NRF_SAADC_RESISTOR_DISABLED,                      \
         .gain       = NRF_SAADC_GAIN1,                                  \
         .reference  = NRF_SAADC_REFERENCE_INTERNAL,                     \
-        .acq_time   = NRFX_SAAADC_DEFAULT_ACQTIME,                      \
+        .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,                       \
         .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                      \
         .burst      = NRF_SAADC_BURST_DISABLED,                         \
     },                                                                  \
