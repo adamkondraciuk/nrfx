@@ -5,7 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_mvdma.h>
-#include <helpers/include/nrfx_vdma.h>
+#include <helpers/include/nrf_vdma.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,7 +27,7 @@ NRFY_STATIC_INLINE void __nrfy_internal_mvdma_event_enabled_clear(NRF_MVDMA_Type
                                                                   uint32_t          mask,
                                                                   nrf_mvdma_event_t event);
 
-NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrfx_vdma_job_t * p_source_job);
+NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrf_vdma_job_t * p_source_job);
 
 NRFY_STATIC_INLINE uint32_t __nrfy_internal_mvdma_sink_job_count_get(NRF_MVDMA_Type const * p_reg);
 
@@ -41,16 +41,16 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_mvdma_sink_job_count_get(NRF_MVDMA_T
 /** @brief Structure describing list execution request for the MVDMA.*/
 struct nrfy_mvdma_list_request_t
 {
-    nrfx_vdma_job_t * p_source_job_list; ///< Pointer to the source job list.
-    nrfx_vdma_job_t * p_sink_job_list;   ///< Pointer to the sink job list.
+    nrf_vdma_job_t * p_source_job_list; ///< Pointer to the source job list.
+    nrf_vdma_job_t * p_sink_job_list;   ///< Pointer to the sink job list.
 };
 
 /** @brief Auxiliary structure describing the MVDMA job list with unspecified direction. */
 typedef struct
 {
-    nrfx_vdma_job_t * p_jobs;    ///< Pointer to the job list.
-    size_t            job_count; ///< Number of jobs executed, including terminating job.
-    uint32_t          last_addr; ///< Last sink or source address accessed by the peripheral when the list was processed.
+    nrf_vdma_job_t * p_jobs;    ///< Pointer to the job list.
+    size_t           job_count; ///< Number of jobs executed, including terminating job.
+    uint32_t         last_addr; ///< Last sink or source address accessed by the peripheral when the list was processed.
 } nrfy_mvdma_list_desc_t;
 
 /**
@@ -203,7 +203,7 @@ void nrfy_mvdma_source_job_description_get(NRF_MVDMA_Type const *   p_reg,
                                            nrfy_mvdma_list_desc_t * p_job_list_desc)
 {
     nrf_barrier_rw();
-    p_job_list_desc->p_jobs    = (nrfx_vdma_job_t *)nrf_mvdma_source_address_get(p_reg);
+    p_job_list_desc->p_jobs    = (nrf_vdma_job_t *)nrf_mvdma_source_address_get(p_reg);
     p_job_list_desc->job_count = nrf_mvdma_source_job_count_get(p_reg);
     p_job_list_desc->last_addr = nrf_mvdma_last_source_address_get(p_reg);
     nrf_barrier_r();
@@ -220,7 +220,7 @@ void nrfy_mvdma_sink_job_description_get(NRF_MVDMA_Type const *   p_reg,
                                          nrfy_mvdma_list_desc_t * p_job_list_desc)
 {
     nrf_barrier_rw();
-    p_job_list_desc->p_jobs    = (nrfx_vdma_job_t *)nrf_mvdma_sink_address_get(p_reg);
+    p_job_list_desc->p_jobs    = (nrf_vdma_job_t *)nrf_mvdma_sink_address_get(p_reg);
     p_job_list_desc->job_count = nrf_mvdma_sink_job_count_get(p_reg);
     p_job_list_desc->last_addr = nrf_mvdma_last_sink_address_get(p_reg);
     nrf_barrier_r();
@@ -516,7 +516,7 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
     if (__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_END, &evt_mask) &&
         !invalidated)
     {
-        for (nrfx_vdma_job_t * p_job = p_list_request->p_sink_job_list;
+        for (nrf_vdma_job_t * p_job = p_list_request->p_sink_job_list;
              p_job->p_buffer != NULL;
              p_job++)
         {
@@ -537,9 +537,9 @@ NRFY_STATIC_INLINE void __nrfy_internal_mvdma_event_enabled_clear(NRF_MVDMA_Type
     }
 }
 
-NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrfx_vdma_job_t * p_source_job)
+NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrf_vdma_job_t * p_source_job)
 {
-    for (nrfx_vdma_job_t * p_job = p_source_job; p_job->p_buffer != NULL; p_job++)
+    for (nrf_vdma_job_t * p_job = p_source_job; p_job->p_buffer != NULL; p_job++)
     {
         NRFY_CACHE_WB(p_job->p_buffer, p_job->size);
     }

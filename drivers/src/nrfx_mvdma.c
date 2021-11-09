@@ -12,10 +12,10 @@
 typedef struct
 {
     nrfx_mvdma_event_handler_t handler;
-    nrfx_vdma_job_t            source_job;
-    nrfx_vdma_job_t            source_terminating_job;
-    nrfx_vdma_job_t            sink_job;
-    nrfx_vdma_job_t            sink_terminating_job;
+    nrf_vdma_job_t             source_job;
+    nrf_vdma_job_t             source_terminating_job;
+    nrf_vdma_job_t             sink_job;
+    nrf_vdma_job_t             sink_terminating_job;
     void *                     p_context;
     nrfx_drv_state_t           state;
     bool                       busy;
@@ -58,8 +58,8 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
 
     p_cb->busy = false;
     p_cb->handler = event_handler;
-    nrfx_vdma_job_terminate(&p_cb->source_terminating_job);
-    nrfx_vdma_job_terminate(&p_cb->sink_terminating_job);
+    nrf_vdma_job_terminate(&p_cb->source_terminating_job);
+    nrf_vdma_job_terminate(&p_cb->sink_terminating_job);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -83,8 +83,8 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
     // MVDMA reset is needed in case of starting new transfer after abort or error.
     mvdma_config_reset(p_instance->p_reg);
 
-    nrfx_vdma_job_fill(&p_cb->source_job, p_request->p_source, p_request->size, 0);
-    nrfx_vdma_job_fill(&p_cb->sink_job, p_request->p_sink, p_request->size, 0);
+    nrf_vdma_job_fill(&p_cb->source_job, p_request->p_source, p_request->size, 0);
+    nrf_vdma_job_fill(&p_cb->sink_job, p_request->p_sink, p_request->size, 0);
     p_cb->p_context = p_request->p_context;
 
     nrfx_mvdma_list_request_t p_list_request =
