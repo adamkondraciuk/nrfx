@@ -132,7 +132,7 @@ static void saadc_channels_deconfig(uint32_t channel_mask)
 {
     while (channel_mask)
     {
-        uint8_t channel = NRFX_CTZ(channel_mask);
+        uint8_t channel = NRF_CTZ(channel_mask);
 
         channel_mask             &= ~(1 << channel);
         m_cb.channels_configured &= ~(1 << channel);
@@ -806,7 +806,7 @@ static void saadc_event_limits_handle(uint8_t limits_activated, nrf_saadc_limit_
 {
     while (limits_activated)
     {
-        uint8_t channel = NRFX_CTZ((uint32_t)limits_activated);
+        uint8_t channel = NRF_CTZ((uint32_t)limits_activated);
         limits_activated &= ~(1 << channel);
 
         nrf_saadc_event_t event = nrf_saadc_limit_event_get(channel, limit_type);

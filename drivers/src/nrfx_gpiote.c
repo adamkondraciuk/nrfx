@@ -1134,7 +1134,7 @@ static void port_event_handle(void)
         {
             while (latch[i])
             {
-                uint32_t pin = NRFX_CTZ(latch[i]);
+                uint32_t pin = NRF_CTZ(latch[i]);
 
                 /* Convert to absolute value. */
                 pin += 32 * i;
@@ -1212,7 +1212,7 @@ static void port_event_handle(void)
                 nrf_gpio_pin_sense_t sense;
                 bool pin_state;
 
-                rel_pin = NRFX_CTZ(pins_to_check[i]);
+                rel_pin = NRF_CTZ(pins_to_check[i]);
                 pins_to_check[i] &= ~NRFX_BIT(rel_pin);
                 /* Absolute */
                 pin = rel_pin + 32 * i;
@@ -1246,7 +1246,7 @@ static void port_event_handle(void)
 
             while (pin_mask)
             {
-                rel_pin = NRFX_CTZ(pin_mask);
+                rel_pin = NRF_CTZ(pin_mask);
                 pin_mask &= ~NRFX_BIT(rel_pin);
                 pin = rel_pin + 32 * i;
                 if (nrf_gpio_pin_sense_get(pin) != NRF_GPIO_PIN_NOSENSE)
@@ -1273,7 +1273,7 @@ static void gpiote_evt_handle(uint32_t mask)
 {
     while (mask)
     {
-        uint32_t ch = NRFX_CTZ(mask);
+        uint32_t ch = NRF_CTZ(mask);
         mask &= ~NRFX_BIT(ch);
         nrfx_gpiote_pin_t pin = nrf_gpiote_event_pin_get(NRF_GPIOTE, ch);
         nrf_gpiote_polarity_t polarity = nrf_gpiote_event_polarity_get(NRF_GPIOTE, ch);
