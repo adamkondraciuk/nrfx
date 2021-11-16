@@ -4,6 +4,7 @@
 #define NRF_MVDMA_H__
 
 #include <nrfx.h>
+#include <helpers/include/nrf_vdma.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -240,42 +241,48 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode_t mode);
 
 /**
- * @brief Function for setting the start address of source descriptor list
- *        or list of descriptor list pointers, depending on configured @ref nrf_mvdma_mode_t mode.
+ * @brief Function for setting the pointer to the source descriptor list
+ *        or pointer to the list of descriptor list pointers,
+ *        depending on configured @ref nrf_mvdma_mode_t mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] addr  Address to be set.
+ * @param[in] p_job Pointer to a job list.
  */
-NRF_STATIC_INLINE void nrf_mvdma_source_address_set(NRF_MVDMA_Type * p_reg, uint32_t addr);
+NRF_STATIC_INLINE void nrf_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                     nrf_vdma_job_t const * p_job);
 
 /**
- * @brief Function for getting the start address of source descriptor list
- *        or list of descriptor list pointers, depending on configured @ref nrf_mvdma_mode_t mode.
+ * @brief Function for getting the pointer to the source descriptor list
+ *        or pointer to the list of descriptor list pointers,
+ *        depending on configured @ref nrf_mvdma_mode_t mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Source start address.
+ * @return Pointer to a job list.
  */
-NRF_STATIC_INLINE uint32_t nrf_mvdma_source_address_get(NRF_MVDMA_Type const * p_reg);
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_mvdma_source_list_ptr_get(NRF_MVDMA_Type const * p_reg);
 
 /**
- * @brief Function for setting the start address of sink descriptor list
- *        or list of descriptor list pointers, depending on configured @ref nrf_mvdma_mode_t mode.
+ * @brief Function for getting the pointer to the sink descriptor list
+ *        or pointer to the list of descriptor list pointers,
+ *        depending on configured @ref nrf_mvdma_mode_t mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] addr  Address to be set.
+ * @param[in] p_job Pointer to a job list.
  */
-NRF_STATIC_INLINE void nrf_mvdma_sink_address_set(NRF_MVDMA_Type * p_reg, uint32_t addr);
+NRF_STATIC_INLINE void nrf_mvdma_sink_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                   nrf_vdma_job_t const * p_job);
 
 /**
- * @brief Function for getting the start address of sink descriptor list
- *        or list of descriptor list pointers, depending on configured @ref nrf_mvdma_mode_t mode.
+ * @brief Function for getting the pointer to the sink descriptor list
+ *        or pointer to the list of descriptor list pointers,
+ *        depending on configured @ref nrf_mvdma_mode_t mode.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Sink start address.
+ * @return Pointer to a job list.
  */
-NRF_STATIC_INLINE uint32_t nrf_mvdma_sink_address_get(NRF_MVDMA_Type const * p_reg);
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_mvdma_sink_list_ptr_get(NRF_MVDMA_Type const * p_reg);
 
 /**
  * @brief Function for getting the result of CRC checksum calculation.
@@ -451,24 +458,26 @@ NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode
     p_reg->CONFIG.MODE = ((uint32_t)mode << MVDMA_CONFIG_MODE_MODE_Pos);
 }
 
-NRF_STATIC_INLINE void nrf_mvdma_source_address_set(NRF_MVDMA_Type * p_reg, uint32_t addr)
+NRF_STATIC_INLINE void nrf_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                     nrf_vdma_job_t const * p_job)
 {
-    p_reg->CONFIG.SOURCELISTPTR = addr;
+    p_reg->CONFIG.SOURCELISTPTR = (uint32_t)p_job;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_mvdma_source_address_get(NRF_MVDMA_Type const * p_reg)
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_mvdma_source_list_ptr_get(NRF_MVDMA_Type const * p_reg)
 {
-    return p_reg->CONFIG.SOURCELISTPTR;
+    return (nrf_vdma_job_t *)(p_reg->CONFIG.SOURCELISTPTR);
 }
 
-NRF_STATIC_INLINE void nrf_mvdma_sink_address_set(NRF_MVDMA_Type * p_reg, uint32_t addr)
+NRF_STATIC_INLINE void nrf_mvdma_sink_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                   nrf_vdma_job_t const * p_job)
 {
-    p_reg->CONFIG.SINKLISTPTR = addr;
+    p_reg->CONFIG.SINKLISTPTR = (uint32_t)p_job;
 }
 
-NRF_STATIC_INLINE uint32_t nrf_mvdma_sink_address_get(NRF_MVDMA_Type const * p_reg)
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_mvdma_sink_list_ptr_get(NRF_MVDMA_Type const * p_reg)
 {
-    return p_reg->CONFIG.SINKLISTPTR;
+    return (nrf_vdma_job_t *)(p_reg->CONFIG.SINKLISTPTR);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mvdma_crc_result_get(NRF_MVDMA_Type const * p_reg)
