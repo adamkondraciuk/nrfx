@@ -4,6 +4,7 @@
 #define NRF_CCM_H__
 
 #include <nrfx.h>
+#include <helpers/include/nrf_vdma.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -736,11 +737,11 @@ NRF_STATIC_INLINE uint32_t * nrf_ccm_inptr_get(NRF_CCM_Type const * p_reg);
  *        CCM data structure in Encryption mode or encrypted CCM data structure
  *        in Decryption mode.
  *
- * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_data Pointer to a job list.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_job Pointer to a job list.
  */
-NRF_STATIC_INLINE void nrf_ccm_in_ptr_set(NRF_CCM_Type *   p_reg,
-                                          uint32_t const * p_data);
+NRF_STATIC_INLINE void nrf_ccm_in_ptr_set(NRF_CCM_Type *         p_reg,
+                                          nrf_vdma_job_t const * p_job);
 
 /**
  * @brief Function for getting the pointer to job list containing unencrypted
@@ -751,7 +752,7 @@ NRF_STATIC_INLINE void nrf_ccm_in_ptr_set(NRF_CCM_Type *   p_reg,
  *
  * @return Pointer to a job list.
  */
-NRF_STATIC_INLINE uint32_t * nrf_ccm_in_ptr_get(NRF_CCM_Type const * p_reg);
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_ccm_in_ptr_get(NRF_CCM_Type const * p_reg);
 #endif // NRF_CCM_HAS_IN_PTR
 
 #if NRF_CCM_HAS_OUTPTR
@@ -780,11 +781,11 @@ NRF_STATIC_INLINE uint32_t * nrf_ccm_outptr_get(NRF_CCM_Type const * p_reg);
  *        CCM data structure in Encryption mode or decrypted CCM data structure
  *        in Decryption mode.
  *
- * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_data Pointer to a job list.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] p_job Pointer to a job list.
  */
-NRF_STATIC_INLINE void nrf_ccm_out_ptr_set(NRF_CCM_Type *   p_reg,
-                                           uint32_t const * p_data);
+NRF_STATIC_INLINE void nrf_ccm_out_ptr_set(NRF_CCM_Type *         p_reg,
+                                           nrf_vdma_job_t const * p_job);
 
 /**
  * @brief Function for getting the pointer to a job list containing encrypted
@@ -795,7 +796,7 @@ NRF_STATIC_INLINE void nrf_ccm_out_ptr_set(NRF_CCM_Type *   p_reg,
  *
  * @return Pointer to the job list.
  */
-NRF_STATIC_INLINE uint32_t * nrf_ccm_out_ptr_get(NRF_CCM_Type const * p_reg);
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_ccm_out_ptr_get(NRF_CCM_Type const * p_reg);
 #endif // NRF_CCM_HAS_OUT_PTR
 
 #if NRF_CCM_HAS_OUT_AMOUNT
@@ -1150,15 +1151,15 @@ NRF_STATIC_INLINE uint32_t * nrf_ccm_inptr_get(NRF_CCM_Type const * p_reg)
 #endif // NRF_CCM_HAS_INPTR
 
 #if NRF_CCM_HAS_IN_PTR
-NRF_STATIC_INLINE void nrf_ccm_in_ptr_set(NRF_CCM_Type *   p_reg,
-                                          uint32_t const * p_data)
+NRF_STATIC_INLINE void nrf_ccm_in_ptr_set(NRF_CCM_Type *         p_reg,
+                                          nrf_vdma_job_t const * p_job)
 {
-    p_reg->IN.PTR = (uint32_t)p_data;
+    p_reg->IN.PTR = (uint32_t)p_job;
 }
 
-NRF_STATIC_INLINE uint32_t * nrf_ccm_in_ptr_get(NRF_CCM_Type const * p_reg)
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_ccm_in_ptr_get(NRF_CCM_Type const * p_reg)
 {
-    return (uint32_t *)(p_reg->IN.PTR);
+    return (nrf_vdma_job_t *)(p_reg->IN.PTR);
 }
 #endif // NRF_CCM_HAS_IN_PTR
 
@@ -1181,15 +1182,15 @@ NRF_STATIC_INLINE uint32_t * nrf_ccm_outptr_get(NRF_CCM_Type const * p_reg)
 #endif // NRF_CCM_HAS_OUTPTR
 
 #if NRF_CCM_HAS_OUT_PTR
-NRF_STATIC_INLINE void nrf_ccm_out_ptr_set(NRF_CCM_Type *   p_reg,
-                                           uint32_t const * p_data)
+NRF_STATIC_INLINE void nrf_ccm_out_ptr_set(NRF_CCM_Type *         p_reg,
+                                           nrf_vdma_job_t const * p_job)
 {
-    p_reg->OUT.PTR = (uint32_t)p_data;
+    p_reg->OUT.PTR = (uint32_t)p_job;
 }
 
-NRF_STATIC_INLINE uint32_t * nrf_ccm_out_ptr_get(NRF_CCM_Type const * p_reg)
+NRF_STATIC_INLINE nrf_vdma_job_t * nrf_ccm_out_ptr_get(NRF_CCM_Type const * p_reg)
 {
-    return (uint32_t *)(p_reg->OUT.PTR);
+    return (nrf_vdma_job_t *)(p_reg->OUT.PTR);
 }
 #endif // NRF_CCM_HAS_OUT_PTR
 
