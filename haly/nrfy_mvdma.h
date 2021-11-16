@@ -147,8 +147,8 @@ NRFY_STATIC_INLINE void nrfy_mvdma_job_list_set(NRF_MVDMA_Type *                
 {
     __nrfy_internal_mvdma_source_buffers_flush(p_list_request->p_source_job_list);
 
-    nrf_mvdma_source_address_set(p_reg, (uint32_t)(p_list_request->p_source_job_list));
-    nrf_mvdma_sink_address_set(p_reg, (uint32_t)(p_list_request->p_sink_job_list));
+    nrf_mvdma_source_list_ptr_set(p_reg, p_list_request->p_source_job_list);
+    nrf_mvdma_sink_list_ptr_set(p_reg, p_list_request->p_sink_job_list);
     nrf_barrier_w();
 }
 
@@ -203,7 +203,7 @@ void nrfy_mvdma_source_job_description_get(NRF_MVDMA_Type const *   p_reg,
                                            nrfy_mvdma_list_desc_t * p_job_list_desc)
 {
     nrf_barrier_rw();
-    p_job_list_desc->p_jobs    = (nrf_vdma_job_t *)nrf_mvdma_source_address_get(p_reg);
+    p_job_list_desc->p_jobs    = nrf_mvdma_source_list_ptr_get(p_reg);
     p_job_list_desc->job_count = nrf_mvdma_source_job_count_get(p_reg);
     p_job_list_desc->last_addr = nrf_mvdma_last_source_address_get(p_reg);
     nrf_barrier_r();
@@ -220,7 +220,7 @@ void nrfy_mvdma_sink_job_description_get(NRF_MVDMA_Type const *   p_reg,
                                          nrfy_mvdma_list_desc_t * p_job_list_desc)
 {
     nrf_barrier_rw();
-    p_job_list_desc->p_jobs    = (nrf_vdma_job_t *)nrf_mvdma_sink_address_get(p_reg);
+    p_job_list_desc->p_jobs    = nrf_mvdma_sink_list_ptr_get(p_reg);
     p_job_list_desc->job_count = nrf_mvdma_sink_job_count_get(p_reg);
     p_job_list_desc->last_addr = nrf_mvdma_last_sink_address_get(p_reg);
     nrf_barrier_r();
@@ -352,38 +352,38 @@ NRFY_STATIC_INLINE void nrfy_mvdma_mode_set(NRF_MVDMA_Type * p_reg,
     nrf_barrier_w();
 }
 
-/** @refhal{nrf_mvdma_source_address_set} */
-NRFY_STATIC_INLINE void nrfy_mvdma_source_address_set(NRF_MVDMA_Type * p_reg,
-                                                      uint32_t         addr)
+/** @refhal{nrf_mvdma_source_list_ptr_set} */
+NRFY_STATIC_INLINE void nrfy_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                       nrf_vdma_job_t const * p_job)
 {
-    nrf_mvdma_source_address_set(p_reg, addr);
+    nrf_mvdma_source_list_ptr_set(p_reg, p_job);
     nrf_barrier_w();
 }
 
-/** @refhal{nrf_mvdma_source_address_get} */
-NRFY_STATIC_INLINE uint32_t nrfy_mvdma_source_address_get(NRF_MVDMA_Type const * p_reg)
+/** @refhal{nrf_mvdma_source_list_ptr_get} */
+NRFY_STATIC_INLINE nrf_vdma_job_t * nrfy_mvdma_source_list_ptr_get(NRF_MVDMA_Type const * p_reg)
 {
     nrf_barrier_rw();
-    uint32_t address = nrf_mvdma_source_address_get(p_reg);
+    nrf_vdma_job_t * p_job = nrf_mvdma_source_list_ptr_get(p_reg);
     nrf_barrier_r();
-    return address;
+    return p_job;
 }
 
-/** @refhal{nrf_mvdma_sink_address_set} */
-NRFY_STATIC_INLINE void nrfy_mvdma_sink_address_set(NRF_MVDMA_Type * p_reg,
-                                                    uint32_t         addr)
+/** @refhal{nrf_mvdma_sink_list_ptr_set} */
+NRFY_STATIC_INLINE void nrfy_mvdma_sink_list_ptr_set(NRF_MVDMA_Type *       p_reg,
+                                                     nrf_vdma_job_t const * p_job)
 {
-    nrf_mvdma_sink_address_set(p_reg, addr);
+    nrf_mvdma_sink_list_ptr_set(p_reg, p_job);
     nrf_barrier_w();
 }
 
-/** @refhal{nrf_mvdma_sink_address_get} */
-NRFY_STATIC_INLINE uint32_t nrfy_mvdma_sink_address_get(NRF_MVDMA_Type const * p_reg)
+/** @refhal{nrf_mvdma_sink_list_ptr_get} */
+NRFY_STATIC_INLINE nrf_vdma_job_t * nrfy_mvdma_sink_list_ptr_get(NRF_MVDMA_Type const * p_reg)
 {
     nrf_barrier_rw();
-    uint32_t address = nrf_mvdma_sink_address_get(p_reg);
+    nrf_vdma_job_t * p_job = nrf_mvdma_sink_list_ptr_get(p_reg);
     nrf_barrier_r();
-    return address;
+    return p_job;
 }
 
 /** @refhal{nrf_mvdma_crc_result_get} */
