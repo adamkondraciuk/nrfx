@@ -11,6 +11,7 @@ All notable changes to this project are documented in this file.
 - Added the nrf_gpio_reconfigure() function for selective reconfiguration of the specified pin.
 - Introduced the NRFX_CLOCK_CONFIG_CT_ENABLED symbol for enabling the calibration timer support in the CLOCK driver. The symbol is enabled by default on supported SoCs.
 - Introduced the NRFX_CTZ and NRFX_CLZ macros to allow providing custom implementation for these functionalities. By default `__RBIT()` and `__CLZ()` CMSIS macros are used.
+- Introduced the NRFX_ATOMIC_CAS macro to allow providing custom implementation for atomic compare-and-swap functionality.
 - Implemented workaround for the nRF9160 anomaly 7 in the NVMC driver.
 
 ### Changed
