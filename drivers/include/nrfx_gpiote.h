@@ -30,8 +30,7 @@ typedef enum
     NRFX_GPIOTE_TRIGGER_TOGGLE,                                 ///< Edge toggle trigger.
     NRFX_GPIOTE_TRIGGER_LOW,                                    ///< Level low trigger.
     NRFX_GPIOTE_TRIGGER_HIGH,                                   ///< Level high trigger.
-
-    NRFX_GPIOTE_TRIGGER_MAX,
+    NRFX_GPIOTE_TRIGGER_MAX,                                    ///< Triggering options count.
 } nrfx_gpiote_trigger_t;
 
 /**
@@ -61,11 +60,11 @@ typedef struct
 /** @brief Structure for configuring an output pin. */
 typedef struct
 {
-    nrf_gpio_pin_drive_t   drive;         ///< Drive configuration.
-    nrf_gpio_pin_input_t   input_connect; ///< Input buffer connection.
-    nrf_gpio_pin_pull_t    pull;          ///< Pull configuration.
-                                          /**< Pull setting is used together with
-                                           *   drive configurations D0 and D1. */
+    nrf_gpio_pin_drive_t drive;         ///< Drive configuration.
+    nrf_gpio_pin_input_t input_connect; ///< Input buffer connection.
+    nrf_gpio_pin_pull_t  pull;          ///< Pull configuration.
+                                        /**< Pull setting is used together with
+                                         *   drive configurations D0 and D1. */
 } nrfx_gpiote_output_config_t;
 
 /** @brief Structure for configuring an input pin. */

@@ -195,9 +195,9 @@ extern "C" {
  *
  * Value is updated to the new value only if it previously equaled old value.
  *
- * @param[in,out] p_data      Atomic memory pointer.
- * @param[in]     old_value   Expected old value.
- * @param[in]     new_value   New value.
+ * @param[in,out] p_data    Atomic memory pointer.
+ * @param[in]     old_value Expected old value.
+ * @param[in]     new_value New value.
  *
  * @retval true  If value was updated.
  * @retval false If value was not updated because location was not equal to @p old_value.

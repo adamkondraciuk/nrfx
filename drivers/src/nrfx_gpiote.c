@@ -1068,9 +1068,9 @@ static void call_handler(nrfx_gpiote_pin_t pin, nrfx_gpiote_trigger_t trigger)
     }
 }
 
-static void next_sense_cond_call_handler(nrfx_gpiote_pin_t pin,
+static void next_sense_cond_call_handler(nrfx_gpiote_pin_t     pin,
                                          nrfx_gpiote_trigger_t trigger,
-                                         nrf_gpio_pin_sense_t sense)
+                                         nrf_gpio_pin_sense_t  sense)
 {
     if (is_level(trigger))
     {

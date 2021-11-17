@@ -10,10 +10,11 @@
 #define NRFX_LOG_MODULE PPI
 #include <nrfx_log.h>
 
-/**< Bitmap representing channels availability. */
-static nrfx_atomic_t   m_channels_allocated = NRFX_PPI_PROG_APP_CHANNELS_MASK;
-/**< Bitmap representing groups availability. */
-static nrfx_atomic_t   m_groups_allocated = NRFX_PPI_ALL_APP_GROUPS_MASK;
+/** @brief Bitmask representing channels availability. */
+static nrfx_atomic_t m_channels_allocated = NRFX_PPI_PROG_APP_CHANNELS_MASK;
+
+/** @brief Bitmask representing groups availability. */
+static nrfx_atomic_t m_groups_allocated = NRFX_PPI_ALL_APP_GROUPS_MASK;
 
 
 /**
@@ -115,8 +116,9 @@ nrfx_err_t nrfx_ppi_channel_alloc(nrf_ppi_channel_t * p_channel)
 
 nrfx_err_t nrfx_ppi_channel_free(nrf_ppi_channel_t channel)
 {
-    if (!is_programmable_app_channel(channel)) {
-	    return NRFX_ERROR_INVALID_PARAM;
+    if (!is_programmable_app_channel(channel))
+    {
+        return NRFX_ERROR_INVALID_PARAM;
     }
 
     nrf_ppi_channel_disable(NRF_PPI, channel);

@@ -24,7 +24,7 @@ bool nrfx_flag32_is_allocated(nrfx_atomic_t mask, uint8_t bitpos)
     return (mask & NRFX_BIT(bitpos)) ? false : true;
 }
 
-nrfx_err_t nrfx_flag32_alloc(nrfx_atomic_t *p_mask, uint8_t *p_flag)
+nrfx_err_t nrfx_flag32_alloc(nrfx_atomic_t * p_mask, uint8_t *p_flag)
 {
     int8_t idx;
     uint32_t new_mask, prev_mask;
@@ -44,7 +44,7 @@ nrfx_err_t nrfx_flag32_alloc(nrfx_atomic_t *p_mask, uint8_t *p_flag)
     return NRFX_SUCCESS;
 }
 
-nrfx_err_t nrfx_flag32_free(nrfx_atomic_t *p_mask, uint8_t flag)
+nrfx_err_t nrfx_flag32_free(nrfx_atomic_t * p_mask, uint8_t flag)
 {
     uint32_t new_mask, prev_mask;
 
@@ -60,4 +60,3 @@ nrfx_err_t nrfx_flag32_free(nrfx_atomic_t *p_mask, uint8_t flag)
 
     return NRFX_SUCCESS;
 }
-

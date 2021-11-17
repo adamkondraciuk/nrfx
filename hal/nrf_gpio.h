@@ -172,16 +172,16 @@ NRF_STATIC_INLINE void nrf_gpio_cfg(
 /**
  * @brief Function for reconfiguring pin.
  *
- * This function selectively updates fields in PIN_CNF register. Reconfiguration
- * is performed in single register write. Fields for which new configuration is
- * not provided remain unchanged.
+ * @note This function selectively updates fields in PIN_CNF register. Reconfiguration
+ *       is performed in single register write. Fields for which new configuration is
+ *       not provided remain unchanged.
  *
- * @param pin_number   Specifies the pin number.
- * @param p_dir        Pin direction. If NULL, previous setting remains.
- * @param p_input      Connect or disconnect the input buffer. If NULL, previous setting remains.
- * @param p_pull       Pull configuration. If NULL, previous setting remains.
- * @param p_drive      Drive configuration. If NULL, previous setting remains.
- * @param p_sense      Pin sensing mechanism. If NULL, previous setting remains.
+ * @param pin_number Specifies the pin number.
+ * @param p_dir      Pin direction. If NULL, previous setting remains.
+ * @param p_input    Connect or disconnect the input buffer. If NULL, previous setting remains.
+ * @param p_pull     Pull configuration. If NULL, previous setting remains.
+ * @param p_drive    Drive configuration. If NULL, previous setting remains.
+ * @param p_sense    Pin sensing mechanism. If NULL, previous setting remains.
  */
 NRF_STATIC_INLINE void nrf_gpio_reconfigure(uint32_t                     pin_number,
                                             const nrf_gpio_pin_dir_t *   p_dir,
