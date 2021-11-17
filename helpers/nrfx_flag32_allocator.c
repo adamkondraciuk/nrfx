@@ -1,6 +1,24 @@
 /*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
 #include <helpers/nrfx_flag32_allocator.h>
 
+#if !defined(NRFX_ATOMIC_CAS)
+static bool nrfx_flag32_atomic_cas(nrfx_atomic_t * p_data, uint32_t old_value, uint32_t new_value)
+{
+    bool status = false;
+    NRFX_CRITICAL_SECTION_ENTER();
+    if (*p_data == old_value)
+    {
+        *p_data = new_value;
+        status = true;
+    }
+    NRFX_CRITICAL_SECTION_EXIT();
+    return status;
+}
+
+#define NRFX_ATOMIC_CAS(p_data, old_value, new_value) \
+    nrfx_flag32_atomic_cas(p_data, old_value, new_value)
+#endif // !defined(NRFX_ATOMIC_CAS)
+
 bool nrfx_flag32_is_allocated(nrfx_atomic_t mask, uint8_t bitpos)
 {
     return (mask & NRFX_BIT(bitpos)) ? false : true;
