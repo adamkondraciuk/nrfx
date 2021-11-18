@@ -24,61 +24,60 @@ extern "C" {
 /** @brief Tasks. */
 typedef enum
 {
-    NRF_LRCCONF_TASK_CLKSTART_0       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[0]),      /**< Request the clock source for clock 0. */
-    NRF_LRCCONF_TASK_CLKSTART_1       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[1]),      /**< Request the clock source for clock 1. */
-    NRF_LRCCONF_TASK_CLKSTART_2       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[2]),      /**< Request the clock source for clock 2. */
-    NRF_LRCCONF_TASK_CLKSTART_3       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[3]),      /**< Request the clock source for clock 3. */
-    NRF_LRCCONF_TASK_CLKSTART_4       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[4]),      /**< Request the clock source for clock 4. */
-    NRF_LRCCONF_TASK_CLKSTART_5       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[5]),      /**< Request the clock source for clock 5. */
-    NRF_LRCCONF_TASK_CLKSTART_6       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[6]),      /**< Request the clock source for clock 6. */
-    NRF_LRCCONF_TASK_CLKSTART_7       = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTART[7]),      /**< Request the clock source for clock 7. */
-    NRF_LRCCONF_TASK_CLKSTOP_0        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[0]),       /**< Stop requesting the clock source for clock 0. */
-    NRF_LRCCONF_TASK_CLKSTOP_1        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[1]),       /**< Stop requesting the clock source for clock 1. */
-    NRF_LRCCONF_TASK_CLKSTOP_2        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[2]),       /**< Stop requesting the clock source for clock 2. */
-    NRF_LRCCONF_TASK_CLKSTOP_3        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[3]),       /**< Stop requesting the clock source for clock 3. */
-    NRF_LRCCONF_TASK_CLKSTOP_4        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[4]),       /**< Stop requesting the clock source for clock 4. */
-    NRF_LRCCONF_TASK_CLKSTOP_5        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[5]),       /**< Stop requesting the clock source for clock 5. */
-    NRF_LRCCONF_TASK_CLKSTOP_6        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[6]),       /**< Stop requesting the clock source for clock 6. */
-    NRF_LRCCONF_TASK_CLKSTOP_7        = offsetof(NRF_LRCCONF_Type, TASKS_CLKSTOP[7]),       /**< Stop requesting the clock source for clock 7. */
-    NRF_LRCCONF_TASK_CONSTLAT         = offsetof(NRF_LRCCONF_Type, TASKS_CONSTLAT),         /**< Enable constant latency mode. */
-    NRF_LRCCONF_TASK_LOWPWR           = offsetof(NRF_LRCCONF_Type, TASKS_LOWPWR),           /**< Disable constant latency mode, enable low power mode. */
-    NRF_LRCCONF_TASK_SYSTEMOFFPREVENT = offsetof(NRF_LRCCONF_Type, TASKS_SYSTEMOFFPREVENT), /**< Request to prevent from going into System OFF .*/
-    NRF_LRCCONF_TASK_SYSTEMOFFREADY   = offsetof(NRF_LRCCONF_Type, TASKS_SYSTEMOFFREADY),   /**< Cancel the previous request to prevent from going sleep .*/
+    NRF_LRCCONF_TASK_CLKSTART_0        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[0]),       /**< Request the clock source for clock 0. */
+    NRF_LRCCONF_TASK_CLKSTART_1        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[1]),       /**< Request the clock source for clock 1. */
+    NRF_LRCCONF_TASK_CLKSTART_2        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[2]),       /**< Request the clock source for clock 2. */
+    NRF_LRCCONF_TASK_CLKSTART_3        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[3]),       /**< Request the clock source for clock 3. */
+    NRF_LRCCONF_TASK_CLKSTART_4        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[4]),       /**< Request the clock source for clock 4. */
+    NRF_LRCCONF_TASK_CLKSTART_5        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[5]),       /**< Request the clock source for clock 5. */
+    NRF_LRCCONF_TASK_CLKSTART_6        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[6]),       /**< Request the clock source for clock 6. */
+    NRF_LRCCONF_TASK_CLKSTART_7        = offsetof(NRF_LRCCONF_Type, TASKS_REQCLKSRC[7]),       /**< Request the clock source for clock 7. */
+    NRF_LRCCONF_TASK_CLKSTOP_0         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[0]),   /**< Stop requesting the clock source for clock 0. */
+    NRF_LRCCONF_TASK_CLKSTOP_1         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[1]),   /**< Stop requesting the clock source for clock 1. */
+    NRF_LRCCONF_TASK_CLKSTOP_2         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[2]),   /**< Stop requesting the clock source for clock 2. */
+    NRF_LRCCONF_TASK_CLKSTOP_3         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[3]),   /**< Stop requesting the clock source for clock 3. */
+    NRF_LRCCONF_TASK_CLKSTOP_4         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[4]),   /**< Stop requesting the clock source for clock 4. */
+    NRF_LRCCONF_TASK_CLKSTOP_5         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[5]),   /**< Stop requesting the clock source for clock 5. */
+    NRF_LRCCONF_TASK_CLKSTOP_6         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[6]),   /**< Stop requesting the clock source for clock 6. */
+    NRF_LRCCONF_TASK_CLKSTOP_7         = offsetof(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[7]),   /**< Stop requesting the clock source for clock 7. */
+    NRF_LRCCONF_TASK_CONSTLAT_ENABLE   = offsetof(NRF_LRCCONF_Type, TASKS_CONSTLAT.ENABLE),    /**< Enable constant latency mode. */
+    NRF_LRCCONF_TASK_CONSTLAT_DISABLE  = offsetof(NRF_LRCCONF_Type, TASKS_CONSTLAT.DISABLE),   /**< Disable constant latency mode. */
+    NRF_LRCCONF_TASK_SYSTEMOFFNOTREADY = offsetof(NRF_LRCCONF_Type, TASKS_SYSTEMOFF.NOTREADY), /**< Indicate being not ready to system off .*/
+    NRF_LRCCONF_TASK_SYSTEMOFFREADY    = offsetof(NRF_LRCCONF_Type, TASKS_SYSTEMOFF.READY),    /**< Indicate being ready to system off .*/
 } nrf_lrcconf_task_t;
 
 /** @brief Events. */
 typedef enum
 {
-    NRF_LRCCONF_EVENT_CLKSTARTED_0 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[0]), /**< Clock 0 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_1 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[1]), /**< Clock 1 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_2 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[2]), /**< Clock 2 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_3 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[3]), /**< Clock 3 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_4 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[4]), /**< Clock 4 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_5 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[5]), /**< Clock 5 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_6 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[6]), /**< Clock 6 started. */
-    NRF_LRCCONF_EVENT_CLKSTARTED_7 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[7]), /**< Clock 7 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_0 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[0]), /**< Clock 0 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_1 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[1]), /**< Clock 1 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_2 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[2]), /**< Clock 2 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_3 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[3]), /**< Clock 3 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_4 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[4]), /**< Clock 4 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_5 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[5]), /**< Clock 5 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_6 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[6]), /**< Clock 6 started. */
+    NRF_LRCCONF_EVENT_CLKSTARTED_7 = offsetof(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[7]), /**< Clock 7 started. */
 } nrf_lrcconf_event_t;
 
 /** @brief Clock sources. */
 typedef enum
 {
-    NRF_LRCCONF_CLK_SRC_OPEN_LOOP   = LRCCONF_CLKSTAT_SRC_MODE_OpenLoop,   /**< Open loop mode. */
-    NRF_LRCCONF_CLK_SRC_CLOSED_LOOP = LRCCONF_CLKSTAT_SRC_MODE_ClosedLoop, /**< Closed loop mode. */
-    NRF_LRCCONF_CLK_SRC_BYPASS      = LRCCONF_CLKSTAT_SRC_MODE_Bypass,     /**< Bypass mode. */
+    NRF_LRCCONF_CLK_SRC_OPEN_LOOP   = LRCCONF_CLKSTAT_SRC_SRC_OpenLoop,   /**< Open loop mode. */
+    NRF_LRCCONF_CLK_SRC_CLOSED_LOOP = LRCCONF_CLKSTAT_SRC_SRC_ClosedLoop, /**< Closed loop mode. */
 } nrf_lrcconf_clk_src_t;
 
 /** @brief Power domain mask. */
 typedef enum
 {
-    NRF_LRCCONF_POWER_MAIN     = LRCCONF_POWERON_MAIN_Msk, /**< Mask for main power domain. */
-    NRF_LRCCONF_POWER_DOMAIN_0 = LRCCONF_POWERON_ACT0_Msk, /**< Mask for power domain 0. */
-    NRF_LRCCONF_POWER_DOMAIN_1 = LRCCONF_POWERON_ACT1_Msk, /**< Mask for power domain 1. */
-    NRF_LRCCONF_POWER_DOMAIN_2 = LRCCONF_POWERON_ACT2_Msk, /**< Mask for power domain 2. */
-    NRF_LRCCONF_POWER_DOMAIN_3 = LRCCONF_POWERON_ACT3_Msk, /**< Mask for power domain 3. */
-    NRF_LRCCONF_POWER_DOMAIN_4 = LRCCONF_POWERON_ACT4_Msk, /**< Mask for power domain 4. */
-    NRF_LRCCONF_POWER_DOMAIN_5 = LRCCONF_POWERON_ACT5_Msk, /**< Mask for power domain 5. */
-    NRF_LRCCONF_POWER_DOMAIN_6 = LRCCONF_POWERON_ACT6_Msk, /**< Mask for power domain 6. */
-    NRF_LRCCONF_POWER_DOMAIN_7 = LRCCONF_POWERON_ACT7_Msk, /**< Mask for power domain 7. */
+    NRF_LRCCONF_POWER_MAIN     = LRCCONF_POWERON_MAIN_Msk,    /**< Mask for main power domain. */
+    NRF_LRCCONF_POWER_DOMAIN_0 = LRCCONF_POWERON_ACTIVE0_Msk, /**< Mask for power domain 0. */
+    NRF_LRCCONF_POWER_DOMAIN_1 = LRCCONF_POWERON_ACTIVE1_Msk, /**< Mask for power domain 1. */
+    NRF_LRCCONF_POWER_DOMAIN_2 = LRCCONF_POWERON_ACTIVE2_Msk, /**< Mask for power domain 2. */
+    NRF_LRCCONF_POWER_DOMAIN_3 = LRCCONF_POWERON_ACTIVE3_Msk, /**< Mask for power domain 3. */
+    NRF_LRCCONF_POWER_DOMAIN_4 = LRCCONF_POWERON_ACTIVE4_Msk, /**< Mask for power domain 4. */
+    NRF_LRCCONF_POWER_DOMAIN_5 = LRCCONF_POWERON_ACTIVE5_Msk, /**< Mask for power domain 5. */
+    NRF_LRCCONF_POWER_DOMAIN_6 = LRCCONF_POWERON_ACTIVE6_Msk, /**< Mask for power domain 6. */
+    NRF_LRCCONF_POWER_DOMAIN_7 = LRCCONF_POWERON_ACTIVE7_Msk, /**< Mask for power domain 7. */
 } nrf_lrcconf_power_domain_mask_t;
 
 /** @brief Request other power domain on mask.*/
@@ -201,6 +200,17 @@ nrf_lrcconf_power_domain_mask_t nrf_lrcconf_power_domain_on_get(uint8_t index);
  */
 NRF_STATIC_INLINE bool nrf_lrcconf_clock_run_status_check(NRF_LRCCONF_Type const * p_reg,
                                                           uint8_t                  clock);
+/**
+ * @brief Function for checking bypass for the specified clock.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] clock Clock index.
+ *
+ * @retval true  Bypass is enabled.
+ * @retval false Bypass is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_lrcconf_clock_bypass_check(NRF_LRCCONF_Type const * p_reg,
+                                                      uint8_t                  clock);
 
 /**
  * @brief Function for retrieving the source of the specified clock.
@@ -246,6 +256,17 @@ NRF_STATIC_INLINE bool nrf_lrcconf_clock_always_run_check(NRF_LRCCONF_Type const
 NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                                                     uint8_t               clock,
                                                     nrf_lrcconf_clk_src_t source);
+
+/**
+ * @brief Function for enabling or disabling bypass for the specified clock.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] clock  Clock index.
+ * @param[in] enable True if bypass is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_lrcconf_clock_bypass_set(NRF_LRCCONF_Type * p_reg,
+                                                    uint8_t            clock,
+                                                    bool               enable);
 
 /**
  * @brief Function for checking the status of constant latency.
@@ -391,19 +412,19 @@ NRF_STATIC_INLINE bool nrf_lrcconf_event_check(NRF_LRCCONF_Type const * p_reg,
 NRF_STATIC_INLINE nrf_lrcconf_task_t nrf_lrcconf_clkstart_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRF_LRCCONF_CLK_COUNT);
-    return (nrf_lrcconf_task_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, TASKS_CLKSTART[index]));
+    return (nrf_lrcconf_task_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, TASKS_REQCLKSRC[index]));
 }
 
 NRF_STATIC_INLINE nrf_lrcconf_task_t nrf_lrcconf_clkstop_task_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRF_LRCCONF_CLK_COUNT);
-    return (nrf_lrcconf_task_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, TASKS_CLKSTOP[index]));
+    return (nrf_lrcconf_task_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, TASKS_STOPREQCLKSRC[index]));
 }
 
 NRF_STATIC_INLINE nrf_lrcconf_event_t nrf_lrcconf_clkstarted_event_get(uint8_t index)
 {
     NRFX_ASSERT(index < NRF_LRCCONF_CLK_COUNT);
-    return (nrf_lrcconf_event_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, EVENTS_CLKSTARTED[index]));
+    return (nrf_lrcconf_event_t)(NRFX_OFFSETOF(NRF_LRCCONF_Type, EVENTS_CLKSRCSTARTED[index]));
 }
 
 NRF_STATIC_INLINE
@@ -412,7 +433,14 @@ nrf_lrcconf_power_domain_mask_t nrf_lrcconf_power_domain_on_get(uint8_t index)
     /* TODO: When MDK adds a define for number of domains, replace magic numbers
      *       in assertions below. */
     NRFX_ASSERT(index < 8);
-    return (nrf_lrcconf_power_domain_mask_t)(LRCCONF_POWERON_ACT0_Msk << index);
+    return (nrf_lrcconf_power_domain_mask_t)(LRCCONF_POWERON_ACTIVE0_Msk << index);
+}
+
+NRF_STATIC_INLINE bool nrf_lrcconf_clock_bypass_check(NRF_LRCCONF_Type const * p_reg,
+                                                      uint8_t                  clock)
+{
+    NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
+    return p_reg->CLKSTAT[clock].SRC & LRCCONF_CLKSTAT_SRC_BYPASS_Msk;
 }
 
 NRF_STATIC_INLINE bool nrf_lrcconf_clock_run_status_check(NRF_LRCCONF_Type const * p_reg,
@@ -427,8 +455,8 @@ nrf_lrcconf_clk_src_t nrf_lrcconf_clock_source_get(NRF_LRCCONF_Type const * p_re
                                                    uint8_t                  clock)
 {
     NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
-    return (nrf_lrcconf_clk_src_t)((p_reg->CLKSTAT[clock].SRC & LRCCONF_CLKSTAT_SRC_MODE_Msk) >>
-                                  LRCCONF_CLKSTAT_SRC_MODE_Pos);
+    return (nrf_lrcconf_clk_src_t)((p_reg->CLKSTAT[clock].SRC & LRCCONF_CLKSTAT_SRC_SRC_Msk) >>
+                                  LRCCONF_CLKSTAT_SRC_SRC_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_lrcconf_clock_always_run_force_set(NRF_LRCCONF_Type * p_reg,
@@ -453,7 +481,18 @@ NRF_STATIC_INLINE void nrf_lrcconf_clock_source_set(NRF_LRCCONF_Type *    p_reg,
                                                     nrf_lrcconf_clk_src_t source)
 {
     NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
-    p_reg->CLKCTRL[clock].SRC = ((uint32_t)source << LRCCONF_CLKCTRL_SRC_MODE_Pos);
+    p_reg->CLKCTRL[clock].SRC = ((p_reg->CLKCTRL[clock].SRC & ~LRCCONF_CLKCTRL_SRC_SRC_Msk) |
+                  ((source << LRCCONF_CLKCTRL_SRC_SRC_Pos) & LRCCONF_CLKCTRL_SRC_SRC_Msk));
+}
+
+NRF_STATIC_INLINE void nrf_lrcconf_clock_bypass_set(NRF_LRCCONF_Type * p_reg,
+                                                    uint8_t            clock,
+                                                    bool               enable)
+{
+    NRFX_ASSERT(clock < NRF_LRCCONF_CLK_COUNT);
+    p_reg->CLKCTRL[clock].SRC = ((p_reg->CLKCTRL[clock].SRC & ~LRCCONF_CLKCTRL_SRC_BYPASS_Msk) |
+                  ((enable ? LRCCONF_CLKCTRL_SRC_BYPASS_Enable :
+                             LRCCONF_CLKCTRL_SRC_BYPASS_Disable) << LRCCONF_CLKCTRL_SRC_BYPASS_Pos));
 }
 
 NRF_STATIC_INLINE bool nrf_lrcconf_constlatstat_check(NRF_LRCCONF_Type const * p_reg)
