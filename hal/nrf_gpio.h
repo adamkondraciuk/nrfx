@@ -53,9 +53,53 @@ extern "C" {
 #define NRF_GPIO_HAS_SEL 0
 #endif
 
+#if defined(GPIO_PIN_CNF_CLOCKPIN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of clock pin enable. */
+#define NRF_GPIO_HAS_CLOCKPIN 1
+#else
+#define NRF_GPIO_HAS_CLOCKPIN 0
+#endif
+
+#if defined(GPIO_PORTCNF_DRIVECTRL_IMPEDANCE50_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of drive control for impedance. */
+#define NRF_GPIO_HAS_PORT_IMPEDANCE 1
+#else
+#define NRF_GPIO_HAS_PORT_IMPEDANCE 0
+#endif
+
+#if defined(GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of power control. */
+#define NRF_GPIO_HAS_PORT_POWER 1
+#else
+#define NRF_GPIO_HAS_PORT_POWER 0
+#endif
+
+#if defined(GPIO_RETAIN_APPLICAION_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of register retention. */
+#define NRF_GPIO_HAS_RETENTION 1
+#else
+#define NRF_GPIO_HAS_RETENTION 0
+#endif
+
+#if defined(GPIO_DETECTMODE_DETECTMODE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of detect mode. */
+#define NRF_GPIO_HAS_DETECT_MODE 1
+#else
+#define NRF_GPIO_HAS_DETECT_MODE 0
+#endif
+
 /** @brief Macro for mapping port and pin numbers to values understandable for nrf_gpio functions. */
 #define NRF_GPIO_PIN_MAP(port, pin) (((port) << 5) | ((pin) & 0x1F))
 
+#if NRF_GPIO_HAS_PORT_IMPEDANCE
+/** @brief Mask of all impedances. */
+#define NRF_GPIO_PORT_IMPEDANCE_ALL_MASK (GPIO_PORTCNF_DRIVECTRL_IMPEDANCE50_Msk  | \
+                                          GPIO_PORTCNF_DRIVECTRL_IMPEDANCE100_Msk | \
+                                          GPIO_PORTCNF_DRIVECTRL_IMPEDANCE200_Msk | \
+                                          GPIO_PORTCNF_DRIVECTRL_IMPEDANCE400_Msk | \
+                                          GPIO_PORTCNF_DRIVECTRL_IMPEDANCE800_Msk | \
+                                          GPIO_PORTCNF_DRIVECTRL_IMPEDANCE1600_Msk)
+#endif
 
 /** @brief Pin direction definitions. */
 typedef enum
@@ -171,6 +215,50 @@ typedef enum
 #endif
 } nrf_gpio_pin_sel_t;
 #endif // NRF_GPIO_HAS_SEL
+
+#if NRF_GPIO_HAS_PORT_IMPEDANCE
+/** @brief Port impedance enable mask. */
+typedef enum
+{
+    NRF_GPIO_PORT_IMPEDANCE_50_MASK   = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE50_Msk,   //< Enable 50 Ohm impedance.
+    NRF_GPIO_PORT_IMPEDANCE_100_MASK  = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE100_Msk,  //< Enable 100 Ohm impedance.
+    NRF_GPIO_PORT_IMPEDANCE_200_MASK  = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE200_Msk,  //< Enable 200 Ohm impedance.
+    NRF_GPIO_PORT_IMPEDANCE_400_MASK  = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE400_Msk,  //< Enable 400 Ohm impedance.
+    NRF_GPIO_PORT_IMPEDANCE_800_MASK  = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE800_Msk,  //< Enable 800 Ohm impedance.
+    NRF_GPIO_PORT_IMPEDANCE_1600_MASK = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE1600_Msk, //< Enable 1600 Ohm impedance.
+} nrf_gpio_port_impedance_mask_t;
+#endif
+
+#if NRF_GPIO_HAS_PORT_POWER
+/** @brief Port power control. */
+typedef enum
+{
+    NRF_GPIO_PORT_POWER_OFF     = GPIO_PORTCNF_PWRCTRL_PWRCTRL_Off,            //< Power off.
+    NRF_GPIO_PORT_POWER_GND_0V  = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGND0V,  //< Static floating GND of the pin, connected to 0V.
+    NRF_GPIO_PORT_POWER_GND_1V8 = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGND1V8, //< Static floating GND of the pin, connected to 1.8V.
+    NRF_GPIO_PORT_POWER_GND_BUF = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGNDBuf, //< Buffered floating GND of the pin, generating VDDIO - 1.8V.
+} nrf_gpio_port_power_t;
+#endif
+
+#if NRF_GPIO_HAS_RETENTION
+/** @brief Retention enable mask. */
+typedef enum
+{
+    NRF_GPIO_RETAIN_APPLICATION_MASK     = GPIO_RETAIN_APPLICAION_Msk,    //< Enable retention for Application domain.
+    NRF_GPIO_RETAIN_NETWORK_MASK         = GPIO_RETAIN_RADIOCORE_Msk,     //< Enable retention for Network domain.
+    NRF_GPIO_RETAIN_SECURE_MASK          = GPIO_RETAIN_SECURE_Msk,        //< Enable retention for Secure domain.
+    NRF_GPIO_RETAIN_CELLULAR_MASK        = GPIO_RETAIN_CELLCORE_Msk,      //< Enable retention for Cellular domain.
+    NRF_GPIO_RETAIN_CELL_DSP_MASK        = GPIO_RETAIN_CELLDSP_Msk,       //< Enable retention for Cellular DSP domain..
+    NRF_GPIO_RETAIN_CELL_RF_MASK         = GPIO_RETAIN_CELLRF_Msk,        //< Enable retention for Cellular RF domain.
+    NRF_GPIO_RETAIN_GLOBAL_SLOW_MASK     = GPIO_RETAIN_GDMAINSLOW_Msk,    //< Enable retention for Global Domain Active Core 1.
+    NRF_GPIO_RETAIN_GLOBAL_FAST_MASK     = GPIO_RETAIN_GDMAINFAST_Msk,    //< Enable retention for Global Domain Active Core 1.
+    NRF_GPIO_RETAIN_GLOBAL_ACTIVE_1_MASK = GPIO_RETAIN_GDACTIVECORE1_Msk, //< Enable retention for Global Domain Active Core 1.
+    NRF_GPIO_RETAIN_GLOBAL_ACTIVE_2_MASK = GPIO_RETAIN_GDACTIVECORE2_Msk, //< Enable retention for Global Domain Active Core 2.
+    NRF_GPIO_RETAIN_GLOBAL_ACTIVE_3_MASK = GPIO_RETAIN_GDACTIVECORE3_Msk, //< Enable retention for Global Domain Active Core 3.
+    NRF_GPIO_RETAIN_DISPLAY_MASK         = GPIO_RETAIN_DISPLAYSS_Msk,     //< Enable retention for Display subsystem.
+    NRF_GPIO_RETAIN_DEBUG_MASK           = GPIO_RETAIN_TDD_Msk,           //< Enable retention for TDD.
+} nrf_gpio_retain_mask_t;
+#endif
 
 /**
  * @brief Function for configuring the GPIO pin range as output pins with normal drive strength.
@@ -420,6 +508,8 @@ NRF_STATIC_INLINE void nrf_gpio_port_dir_input_set(NRF_GPIO_Type * p_reg, uint32
 /**
  * @brief Function for writing the direction configuration of the GPIO pins in the given port.
  *
+ * @warning This register is retained when retention is enabled.
+ *
  * @param p_reg    Pointer to the structure of registers of the peripheral.
  * @param dir_mask Mask that specifies the direction of pins. Bit set means that the given pin is configured as output.
  */
@@ -427,6 +517,8 @@ NRF_STATIC_INLINE void nrf_gpio_port_dir_write(NRF_GPIO_Type * p_reg, uint32_t d
 
 /**
  * @brief Function for reading the direction configuration of a GPIO port.
+ *
+ * @warning This register is retained when retention is enabled.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -446,6 +538,8 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_port_in_read(NRF_GPIO_Type const * p_reg);
 /**
  * @brief Function for reading the output signals of the GPIO pins on the given port.
  *
+ * @warning This register is retained when retention is enabled.
+ *
  * @param p_reg Pointer to the peripheral registers structure.
  *
  * @return Port output values.
@@ -454,6 +548,8 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_port_out_read(NRF_GPIO_Type const * p_reg);
 
 /**
  * @brief Function for writing the GPIO pins output on a given port.
+ *
+ * @warning This register is retained when retention is enabled.
  *
  * @param p_reg Pointer to the structure of registers of the peripheral.
  * @param value Output port mask.
@@ -487,9 +583,101 @@ NRF_STATIC_INLINE void nrf_gpio_ports_read(uint32_t   start_port,
                                            uint32_t   length,
                                            uint32_t * p_masks);
 
+#if NRF_GPIO_HAS_PORT_IMPEDANCE
+/**
+ * @brief Function for setting the impedance matching of the pins on the given port.
+ *
+ * @note Each bit sets certain impedance and have them in parallel when more than one bit is set.
+ *       High impedance is set for the pin when all bits are disabled.
+ *       When all bits are enabled, the resulting impedance is about 25 Ohm.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param mask  Mask of impedances to be set, created using @ref nrf_gpio_port_impedance_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_impedance_set(NRF_GPIO_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for geting the impedance matching of the pins on the given port.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of impedances set, created using @ref nrf_gpio_port_impedance_mask_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_gpio_port_impedance_get(NRF_GPIO_Type const * p_reg);
+#endif
+
+#if NRF_GPIO_HAS_PORT_POWER
+/**
+ * @brief Function for setting the power control of the pins on the given port.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param power Power control to be set.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_power_set(NRF_GPIO_Type * p_reg, nrf_gpio_port_power_t power);
+
+/**
+ * @brief Function for geting the power control of the pins on the given port.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Power control that is active.
+ */
+NRF_STATIC_INLINE nrf_gpio_port_power_t nrf_gpio_port_power_get(NRF_GPIO_Type const * p_reg);
+#endif
+
+#if NRF_GPIO_HAS_RETENTION
+/**
+ * @brief Function for setting the retention of the registers.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ * @param mask  Mask of retention domains to be enabled, created using @ref nrf_gpio_retain_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_retain_set(NRF_GPIO_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for geting the retention setting of the registers.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of retention domains set, created using @ref nrf_gpio_retain_mask_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_gpio_port_retain_get(NRF_GPIO_Type const * p_reg);
+#endif
+
+#if NRF_GPIO_HAS_DETECT_MODE
+/**
+ * @brief Function for setting the latched detect behaviour.
+ *
+ * @param p_reg  Pointer to the structure of registers of the peripheral.
+ * @param enable True if the latched LDETECT behaviour is to be used, false if DETECT is to be
+ *               directly connected to PIN DETECT signals.
+ */
+NRF_STATIC_INLINE void nrf_gpio_port_detect_latch_set(NRF_GPIO_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for checking the latched detect behaviour.
+ *
+ * @param p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  Latched LDETECT behaviour is used.
+ * @retval false DETECT is directly connected to PIN DETECT signals.
+ */
+NRF_STATIC_INLINE bool nrf_gpio_port_detect_latch_check(NRF_GPIO_Type const * p_reg);
+#endif
+
 #if defined(NRF_GPIO_LATCH_PRESENT)
 /**
  * @brief Function for reading latch state of multiple consecutive ports.
+ *
+ * @warning This register is retained when retention is enabled.
  *
  * @param start_port Index of the first port to read.
  * @param length     Number of ports to read.
@@ -502,6 +690,8 @@ NRF_STATIC_INLINE void nrf_gpio_latches_read(uint32_t   start_port,
 /**
  * @brief Function for reading and immediate clearing latch state of multiple consecutive ports.
  *
+ * @warning This register is retained when retention is enabled.
+ *
  * @param start_port Index of the first port to read and clear.
  * @param length     Number of ports to read and clear.
  * @param p_masks    Pointer to output array where latch states will be stored.
@@ -513,6 +703,8 @@ NRF_STATIC_INLINE void nrf_gpio_latches_read_and_clear(uint32_t   start_port,
 /**
  * @brief Function for reading latch state of single pin.
  *
+ * @warning This register is retained when retention is enabled.
+ *
  * @param pin_number Pin number.
  *
  * @return 0 if latch is not set. Positive value otherwise.
@@ -521,6 +713,8 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_pin_latch_get(uint32_t pin_number);
 
 /**
  * @brief Function for clearing latch state of a single pin.
+ *
+ * @warning This register is retained when retention is enabled.
  *
  * @param pin_number Pin number.
  */
@@ -531,10 +725,36 @@ NRF_STATIC_INLINE void nrf_gpio_pin_latch_clear(uint32_t pin_number);
 /**
  * @brief Function for selecting the MCU or Subsystem to control a GPIO pin.
  *
+ * @warning This register is retained when retention is enabled.
+ *
  * @param pin_number Pin_number.
  * @param ctrl       MCU/Subsystem to control the pin.
  */
 NRF_STATIC_INLINE void nrf_gpio_pin_control_select(uint32_t pin_number, nrf_gpio_pin_sel_t ctrl);
+#endif
+
+#if NRF_GPIO_HAS_CLOCKPIN
+/**
+ * @brief Function for setting whether the clock should be enabled for the specified GPIO pin.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param[in] pin_number Pin number.
+ * @param[in] enable     True if clock is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_gpio_pin_clock_set(uint32_t pin_number, bool enable);
+
+/**
+ * @brief Function for getting the clock enable setting for the specified GPIO pin.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param[in] pin_number Pin number.
+ *
+ * @retval true  Clock is enabled.
+ * @retval false Clock is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_gpio_pin_clock_check(uint32_t pin_number);
 #endif
 
 /**
@@ -978,6 +1198,57 @@ NRF_STATIC_INLINE void nrf_gpio_ports_read(uint32_t   start_port,
     }
 }
 
+#if NRF_GPIO_HAS_PORT_IMPEDANCE
+NRF_STATIC_INLINE void nrf_gpio_port_impedance_set(NRF_GPIO_Type * p_reg, uint32_t mask)
+{
+    p_reg->PORTCNF.DRIVECTRL = ((p_reg->PORTCNF.DRIVECTRL & ~NRF_GPIO_PORT_IMPEDANCE_ALL_MASK) |
+                                (mask & NRF_GPIO_PORT_IMPEDANCE_ALL_MASK));
+}
+
+NRF_STATIC_INLINE uint32_t nrf_gpio_port_impedance_get(NRF_GPIO_Type const * p_reg)
+{
+    return p_reg->PORTCNF.DRIVECTRL & NRF_GPIO_PORT_IMPEDANCE_ALL_MASK;
+}
+#endif
+
+#if NRF_GPIO_HAS_PORT_POWER
+NRF_STATIC_INLINE void nrf_gpio_port_power_set(NRF_GPIO_Type * p_reg, nrf_gpio_port_power_t power)
+{
+    p_reg->PORTCNF.PWRCTRL = ((p_reg->PORTCNF.PWRCTRL & ~GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk) |
+                              power << GPIO_PORTCNF_PWRCTRL_PWRCTRL_Pos);
+}
+
+NRF_STATIC_INLINE nrf_gpio_port_power_t nrf_gpio_port_power_get(NRF_GPIO_Type const * p_reg)
+{
+    return (nrf_gpio_port_power_t)((p_reg->PORTCNF.PWRCTRL & GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk)
+                                   >> GPIO_PORTCNF_PWRCTRL_PWRCTRL_Pos);
+}
+#endif
+
+#if NRF_GPIO_HAS_RETENTION
+NRF_STATIC_INLINE void nrf_gpio_port_retain_set(NRF_GPIO_Type * p_reg, uint32_t mask)
+{
+    p_reg->RETAIN = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_gpio_port_retain_get(NRF_GPIO_Type const * p_reg)
+{
+    return p_reg->RETAIN;
+}
+#endif
+
+#if NRF_GPIO_HAS_DETECT_MODE
+NRF_STATIC_INLINE void nrf_gpio_port_detect_latch_set(NRF_GPIO_Type * p_reg, bool enable)
+{
+    p_reg->DETECTMODE = (enable ? GPIO_DETECTMODE_DETECTMODE_LDETECT :
+                                  GPIO_DETECTMODE_DETECTMODE_Default);
+}
+
+NRF_STATIC_INLINE bool nrf_gpio_port_detect_latch_check(NRF_GPIO_Type const * p_reg)
+{
+    return (p_reg->DETECTMODE == GPIO_DETECTMODE_DETECTMODE_LDETECT);
+}
+#endif
 
 #if defined(NRF_GPIO_LATCH_PRESENT)
 NRF_STATIC_INLINE void nrf_gpio_latches_read(uint32_t   start_port,
@@ -1041,6 +1312,25 @@ NRF_STATIC_INLINE void nrf_gpio_pin_control_select(uint32_t pin_number, nrf_gpio
 #endif
 }
 #endif // NRF_GPIO_HAS_SEL
+
+#if NRF_GPIO_HAS_CLOCKPIN
+NRF_STATIC_INLINE void nrf_gpio_pin_clock_set(uint32_t pin_number, bool enable)
+{
+    NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+
+    reg->PIN_CNF[pin_number] = ((reg->PIN_CNF[pin_number] & ~GPIO_PIN_CNF_CLOCKPIN_Msk) |
+                                ((enable ? GPIO_PIN_CNF_CLOCKPIN_Enabled :
+                                  GPIO_PIN_CNF_CLOCKPIN_Disabled) << GPIO_PIN_CNF_CLOCKPIN_Pos));
+}
+
+NRF_STATIC_INLINE bool nrf_gpio_pin_clock_check(uint32_t pin_number)
+{
+    NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+
+    return (((reg->PIN_CNF[pin_number] & GPIO_PIN_CNF_CLOCKPIN_Msk) >> GPIO_PIN_CNF_CLOCKPIN_Pos)
+            == GPIO_PIN_CNF_CLOCKPIN_Enabled);
+}
+#endif
 
 NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 {
