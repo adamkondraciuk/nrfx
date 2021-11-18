@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2021>$$$*/
 
-#ifndef NRFX_IDC_H__
-#define NRFX_IDC_H__
+#ifndef NRFX_IDS_H__
+#define NRFX_IDS_H__
 
 #include <nrfx.h>
 
@@ -11,7 +11,7 @@
     #include <nrfx_vevif.h>
     #include <nrfx_bellboard.h>
 #else
-    #error "No inter-domain communication supported."
+    #error "No inter-domain signalling supported."
 #endif
 
 #ifdef __cplusplus
@@ -19,97 +19,97 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfx_idc Generic inter-domain communication layer.
+ * @defgroup nrfx_ids Generic inter-domain signalling layer.
  * @{
  * @ingroup nrfx_ipc
  * @ingroup nrfx_vevif
  * @ingroup nrfx_bellboard
- * @brief   Helper layer that provides the common functionality for the inter-domain communication mechanisms.
+ * @brief   Helper layer that provides the common functionality for the inter-domain signalling (IDS) mechanisms.
  */
 
 /**
- * @brief IDC event handler callback.
+ * @brief IDS event handler callback.
  *
- * @param[in] event_idx IDC event index.
+ * @param[in] event_idx IDS event index.
  * @param[in] p_context User context.
  */
-typedef void (*nrfx_idc_event_handler_t) (uint8_t event_idx, void * p_context);
+typedef void (*nrfx_ids_event_handler_t)(uint8_t event_idx, void * p_context);
 
-/** @brief Structure for the IDC instance. */
+/** @brief Structure for the IDS instance. */
 typedef struct
 {
-    uint8_t  drv_inst_idx; ///< Index of the instance. For internal use only.
-    uint8_t  int_idx;      ///< Interrupt index. For internal use only.
-} nrfx_idc_t;
+    uint8_t drv_inst_idx; ///< Index of the instance. For internal use only.
+    uint8_t int_idx;      ///< Interrupt index. For internal use only.
+} nrfx_ids_t;
 
 #ifndef __NRFX_DOXYGEN__
 enum {
 #if defined(NRF5340_XXAA)
 #if NRFX_CHECK(NRFX_IPC_ENABLED)
-    NRFX_IDC0_INST_IDX,
+    NRFX_IDS0_INST_IDX,
 #endif
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_RISCV)
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
-    NRFX_IDC0_INST_IDX,
+    NRFX_IDS0_INST_IDX,
 #endif
 #elif defined(ISA_ARM)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
-    NRFX_IDC0_INST_IDX,
+    NRFX_IDS0_INST_IDX,
 #endif
 #if NRFX_CHECK(NRFX_BELLBOARD1_ENABLED)
-    NRFX_IDC1_INST_IDX,
+    NRFX_IDS1_INST_IDX,
 #endif
 #if NRFX_CHECK(NRFX_BELLBOARD2_ENABLED)
-    NRFX_IDC2_INST_IDX,
+    NRFX_IDS2_INST_IDX,
 #endif
 #if NRFX_CHECK(NRFX_BELLBOARD3_ENABLED)
-    NRFX_IDC3_INST_IDX,
+    NRFX_IDS3_INST_IDX,
 #endif
 #endif /* HALTIUM_XXAA */
 #endif
-    NRFX_IDC_ENABLED_COUNT
+    NRFX_IDS_ENABLED_COUNT
 };
 #endif /* __NRFX_DOXYGEN__ */
 
-/** @brief Macro for creating a IDC instance. */
-#define NRFX_IDC_INSTANCE(id)                               \
+/** @brief Macro for creating a IDS instance. */
+#define NRFX_IDS_INSTANCE(id)                               \
 {                                                           \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_IDC, id, _INST_IDX), \
+    .drv_inst_idx = NRFX_CONCAT_3(NRFX_IDS, id, _INST_IDX), \
     .int_idx      = id,                                     \
 }
 
 /** @brief Macro for creating channel bitmask associated with specified channel index. */
-#define NRFX_IDC_CHANNEL(channel) (0x1UL << (channel))
+#define NRFX_IDS_CHANNEL(channel) (0x1UL << (channel))
 
-/** @brief IDC domains. */
+/** @brief IDS domains. */
 typedef enum
 {
-    NRFX_IDC_DOMAIN_APP,     /**< Application domain. */
-    NRFX_IDC_DOMAIN_NET,     /**< Network domain. */
-    NRFX_IDC_DOMAIN_SEC,     /**< Secure domain. */
-    NRFX_IDC_DOMAIN_CELL,    /**< Cellular domain. */
-    NRFX_IDC_DOMAIN_SYSCTRL, /**< System Controller domain. */
-    NRFX_IDC_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
-    NRFX_IDC_DOMAIN_PPR,     /**< Peripheral Processor */
-    NRFX_IDC_DOMAIN_COUNT    /**< Total number of possible IDC domains. */
-} nrfx_idc_domain_t;
+    NRFX_IDS_DOMAIN_APP,     /**< Application domain. */
+    NRFX_IDS_DOMAIN_NET,     /**< Network domain. */
+    NRFX_IDS_DOMAIN_SEC,     /**< Secure domain. */
+    NRFX_IDS_DOMAIN_CELL,    /**< Cellular domain. */
+    NRFX_IDS_DOMAIN_SYSCTRL, /**< System Controller domain. */
+    NRFX_IDS_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
+    NRFX_IDS_DOMAIN_PPR,     /**< Peripheral Processor */
+    NRFX_IDS_DOMAIN_COUNT    /**< Total number of possible IDS domains. */
+} nrfx_ids_domain_t;
 
 /** @brief Symbol specifying maximum number of available events triggered. */
 #if defined(NRF5340_XXAA)
-#define NRFX_IDC_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
+#define NRFX_IDS_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM)
-#define NRFX_IDC_EVENTS_TRIGGERED_COUNT NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT
+#define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT
 #else /* ISA_RISCV */
-#define NRFX_IDC_EVENTS_TRIGGERED_COUNT NRF_VPR_EVENTS_TRIGGERED_COUNT
+#define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_VPR_EVENTS_TRIGGERED_COUNT
 #endif
 #endif
 
 /**
- * @brief Function for initializing the IDC instance.
+ * @brief Function for initializing the IDS instance.
  *
- * @param[in] p_instance         Pointer to IDC instance.
+ * @param[in] p_instance         Pointer to IDS instance.
  * @param[in] interrupt_priority Interrupt priority.
  * @param[in] event_handler      Function to be called on interrupt.
  * @param[in] p_context          Context passed to the event handler.
@@ -118,9 +118,9 @@ typedef enum
  * @retval NRFX_SUCCESS                   Driver successfully initialized.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED Driver already initialized.
  */
-__STATIC_INLINE nrfx_err_t nrfx_idc_init(nrfx_idc_t const *       p_instance,
+__STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
                                          uint8_t                  interrupt_priority,
-                                         nrfx_idc_event_handler_t event_handler,
+                                         nrfx_ids_event_handler_t event_handler,
                                          void *                   p_context,
                                          void const *             p_config)
 {
@@ -129,7 +129,10 @@ __STATIC_INLINE nrfx_err_t nrfx_idc_init(nrfx_idc_t const *       p_instance,
     nrfx_err_t err_code = nrfx_ipc_init(interrupt_priority,
                                         (nrfx_ipc_handler_t)event_handler,
                                         p_context);
-    nrfx_ipc_config_load((nrfx_ipc_config_t const *)p_config);
+    if (err_code == NRFX_SUCCESS)
+    {
+        nrfx_ipc_config_load((nrfx_ipc_config_t const *)p_config);
+    }
     return err_code;
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM)
@@ -147,11 +150,11 @@ __STATIC_INLINE nrfx_err_t nrfx_idc_init(nrfx_idc_t const *       p_instance,
 }
 
 /**
- * @brief Function for uninitializing the IDC instance.
+ * @brief Function for uninitializing the IDS instance.
  *
- * @param[in] p_instance Pointer to IPC instance.
+ * @param[in] p_instance Pointer to IDS instance.
  */
-__STATIC_INLINE void nrfx_idc_uninit(nrfx_idc_t const * p_instance)
+__STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
 {
 #if defined(NRF5340_XXAA)
     (void)p_instance;
@@ -169,10 +172,10 @@ __STATIC_INLINE void nrfx_idc_uninit(nrfx_idc_t const * p_instance)
 /**
  * @brief Function for enabling specified interrupts in the IDS instance.
  *
- * @param[in] p_instance Pointer to IDC instance.
+ * @param[in] p_instance Pointer to IDS instance.
  * @param[in] mask       Mask of interrupts to be enabled.
  */
-__STATIC_INLINE void nrfx_idc_int_enable(nrfx_idc_t const * p_instance, uint32_t mask)
+__STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t mask)
 {
 #if defined(NRF5340_XXAA)
     (void)p_instance;
@@ -183,17 +186,17 @@ __STATIC_INLINE void nrfx_idc_int_enable(nrfx_idc_t const * p_instance, uint32_t
 #else /* ISA_RISCV */
     (void)p_instance;
     nrfx_vevif_int_enable(mask);
-#endif  /* HALTIUM_XXAA */
 #endif
+#endif /* HALTIUM_XXAA */
 }
 
 /**
- * @brief Function for disabling interrupt in the IDC instance.
+ * @brief Function for disabling interrupt in the IDS instance.
  *
- * @param[in] p_instance Pointer to IDC instance.
+ * @param[in] p_instance Pointer to IDS instance.
  * @param[in] mask       Mask of interrupts to be disabled.
  */
-__STATIC_INLINE void nrfx_idc_int_disable(nrfx_idc_t const * p_instance, uint32_t mask)
+__STATIC_INLINE void nrfx_ids_int_disable(nrfx_ids_t const * p_instance, uint32_t mask)
 {
 #if defined(NRF5340_XXAA)
     (void)p_instance;
@@ -211,49 +214,50 @@ __STATIC_INLINE void nrfx_idc_int_disable(nrfx_idc_t const * p_instance, uint32_
 /**
  * @brief Function for conveying the inter-domain signal to the specified domain.
  *
- * @param[in] p_instance Pointer to IDC instance.
- * @param[in] domain     Domain to be signalled.
+ * @param[in] p_instance Pointer to IDS instance.
+ * @param[in] domain     Domain to be signalled. May be NULL for peripherals that have only one connection.
  * @param[in] channel    Inter-domain channel for conveying the signal.
  */
-__STATIC_INLINE void nrfx_idc_signal(nrfx_idc_t *      p_instance,
-                                     nrfx_idc_domain_t domain,
+__STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
+                                     nrfx_ids_domain_t domain,
                                      uint8_t           channel)
 {
+    NRFX_ASSERT(channel < NRFX_IDS_EVENTS_TRIGGERED_COUNT);
 #if defined(NRF5340_XXAA)
     (void)domain;
     (void)p_instance;
-    nrf_ipc_task_trigger(NRF_IPC, nrf_ipc_send_task_get(channel));
+    nrfx_ipc_signal(channel);
 #elif defined(HALTIUM_XXAA)
     (void)p_instance;
     NRF_BELLBOARD_Type * p_bell = NULL;
     NRF_VPR_Type       * p_vpr  = NULL;
     switch (domain)
     {
-        case NRFX_IDC_DOMAIN_APP:
+        case NRFX_IDS_DOMAIN_APP:
             p_bell = NRF_APPLICATION_BELLBOARD;
             break;
 
-        case NRFX_IDC_DOMAIN_NET:
+        case NRFX_IDS_DOMAIN_NET:
             p_bell = NRF_RADIOCORE_BELLBOARD;
             break;
 
-        case NRFX_IDC_DOMAIN_SEC:
+        case NRFX_IDS_DOMAIN_SEC:
             p_bell = NRF_SECURE_BELLBOARD;
             break;
 
-        case NRFX_IDC_DOMAIN_CELL:
+        case NRFX_IDS_DOMAIN_CELL:
             p_bell = NRF_CELLCORE_BELLBOARD;
             break;
 
-        case NRFX_IDC_DOMAIN_SYSCTRL:
+        case NRFX_IDS_DOMAIN_SYSCTRL:
             p_vpr = NRF_SYSCTRL_VPR;
             break;
 
-        case NRFX_IDC_DOMAIN_FLPR:
+        case NRFX_IDS_DOMAIN_FLPR:
             p_vpr = NRF_FLPR_VPR;
             break;
 
-        case NRFX_IDC_DOMAIN_PPR:
+        case NRFX_IDS_DOMAIN_PPR:
             p_vpr = NRF_PPR_VPR;
             break;
 
@@ -275,8 +279,33 @@ __STATIC_INLINE void nrfx_idc_signal(nrfx_idc_t *      p_instance,
 
 /** @} */
 
+#if defined(NRF5340_XXAA)
+#if NRFX_CHECK(NRFX_IPC_ENABLED)
+#define nrfx_ids_0_irq_handler nrfx_ipc_irq_handler
+#endif
+#elif defined(HALTIUM_XXAA)
+#if defined(ISA_RISCV)
+#if NRFX_CHECK(NRFX_VEVIF_ENABLED)
+#define nrfx_ids_0_irq_handler nrfx_vevif_irq_handler
+#endif
+#elif defined(ISA_ARM)
+#if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
+#define nrfx_ids_0_irq_handler nrfx_bellboard_0_irq_handler
+#endif
+#if NRFX_CHECK(NRFX_BELLBOARD1_ENABLED)
+#define nrfx_ids_1_irq_handler nrfx_bellboard_1_irq_handler
+#endif
+#if NRFX_CHECK(NRFX_BELLBOARD2_ENABLED)
+#define nrfx_ids_2_irq_handler nrfx_bellboard_2_irq_handler
+#endif
+#if NRFX_CHECK(NRFX_BELLBOARD3_ENABLED)
+#define nrfx_ids_3_irq_handler nrfx_bellboard_3_irq_handler
+#endif
+#endif
+#endif /* HALTIUM_XXAA */
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // NRFX_IDC_H__
+#endif // NRFX_IDS_H__
