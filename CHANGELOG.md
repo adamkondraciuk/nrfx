@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [2.6.0] - 2021-11-16
+## [2.6.0] - 2021-11-22
 ### Added
 - Added new functions for the GPIOTE peripheral management in the GPIOTE driver. Legacy API is now deprecated.
 - Added support for the TIMER CC channels 6 and 7.
@@ -15,7 +15,7 @@ All notable changes to this project are documented in this file.
 - Implemented workaround for the nRF9160 anomaly 7 in the NVMC driver.
 
 ### Changed
-- Updated MDK to version 8.43.0.
+- Updated MDK to version 8.44.1.
 
 ### Fixed
 - Fixed missing disabling of interrupts in the nrfx_qspi_lfm_start() and nrfx_qspi_lfm_xfer() functions.
