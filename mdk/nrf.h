@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   40 
-#define MDK_MICRO_VERSION   2 
+#define MDK_MINOR_VERSION   44 
+#define MDK_MICRO_VERSION   1 
 
    
 /* Define coprocessor domains */
@@ -177,6 +177,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf5340_application.h"
         #include "nrf5340_application_bitfields.h"
         #include "nrf5340_application_name_change.h"
+
+        /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
+        #if !defined(NRF_FICR_NS)
+            #define NRF_FICR_NS_BASE 0x2007F000
+            #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
+        #endif
     #elif defined (NRF_NETWORK)
         #include "nrf5340_network.h"
         #include "nrf5340_network_bitfields.h"
@@ -187,6 +193,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9160.h"
     #include "nrf9160_bitfields.h"
     #include "nrf9160_name_change.h"
+
+    /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
+    #if !defined(NRF_FICR_NS)
+        #define NRF_FICR_NS_BASE 0x2003E000
+        #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
+    #endif
 
 #else
     #error "Device must be defined. See nrf.h."
