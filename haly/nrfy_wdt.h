@@ -31,8 +31,8 @@ NRFY_STATIC_INLINE void __nrfy_internal_wdt_event_enabled_clear(NRF_WDT_Type *  
 /** @brief WDT configuration structure. */
 typedef struct
 {
-    nrf_wdt_behaviour_t behaviour;    ///< Watchdog behavior when CPU is in SLEEP or HALT mode.
-    uint32_t            reload_value; ///< Watchdog counter initial value.
+    uint32_t behaviour;    ///< Watchdog behaviour flags bitmask, constructed from @ref nrf_wdt_behaviour_mask_t.
+    uint32_t reload_value; ///< Watchdog counter initial value.
 } nrfy_wdt_config_t;
 
 /**
@@ -197,9 +197,9 @@ NRFY_STATIC_INLINE void nrfy_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_eve
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /** @refhal{nrf_wdt_behaviour_set} */
-NRFY_STATIC_INLINE void nrfy_wdt_behaviour_set(NRF_WDT_Type * p_reg, nrf_wdt_behaviour_t behaviour)
+NRFY_STATIC_INLINE void nrfy_wdt_behaviour_set(NRF_WDT_Type * p_reg, uint32_t mask)
 {
-    nrf_wdt_behaviour_set(p_reg, behaviour);
+    nrf_wdt_behaviour_set(p_reg, mask);
     nrf_barrier_w();
 }
 

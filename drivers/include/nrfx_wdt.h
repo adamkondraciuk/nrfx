@@ -73,10 +73,10 @@ enum {
 /** @brief Struct for WDT initialization. */
 typedef struct
 {
-    nrf_wdt_behaviour_t    behaviour;          /**< WDT behaviour when CPU in sleep/halt mode. */
-    uint32_t               reload_value;       /**< WDT reload value in ms. */
+    uint32_t behaviour;          /**< WDT behaviour flags bitmask, constructed from @ref nrf_wdt_behaviour_mask_t. */
+    uint32_t reload_value;       /**< WDT reload value in ms. */
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ) || defined(__NRFX_DOXYGEN__)
-    uint8_t                interrupt_priority; /**< WDT interrupt priority */
+    uint8_t  interrupt_priority; /**< WDT interrupt priority */
 #endif
 } nrfx_wdt_config_t;
 
@@ -87,11 +87,11 @@ typedef struct
  * - run when CPU is in SLEEP mode, pause when in HALT mode
  * - reload value: 2000 ms
  */
-#define NRFX_WDT_DEFAULT_CONFIG                          \
-{                                                        \
-    .behaviour          = NRF_WDT_BEHAVIOUR_RUN_SLEEP,   \
-    .reload_value       = 2000,                          \
-    NRFX_WDT_IRQ_CONFIG                                  \
+#define NRFX_WDT_DEFAULT_CONFIG                             \
+{                                                           \
+    .behaviour          = NRF_WDT_BEHAVIOUR_RUN_SLEEP_MASK, \
+    .reload_value       = 2000,                             \
+    NRFX_WDT_IRQ_CONFIG                                     \
 }
 
 /**
