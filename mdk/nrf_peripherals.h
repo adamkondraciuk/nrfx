@@ -93,6 +93,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (HALTIUM_XXAA)
     #if defined (NRF_APPLICATION)
         #include "haltium_application_peripherals.h"
+    #elif defined (NRF_SYSTEMC_APPLICATION)
+        #include "haltium_application_peripherals.h"
     #elif defined (NRF_BBPR)
         #include "haltium_bbpr_peripherals.h"
     #elif defined (NRF_CELLCORE)
@@ -110,6 +112,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #elif defined (NRF_RADIOCORE)
         #include "haltium_radiocore_peripherals.h"
     #elif defined(NRF_SECURE)
+        #include "haltium_secure_peripherals.h"
+    #elif defined(NRF_SYSTEMC_SECURE)
         #include "haltium_secure_peripherals.h"
     #elif defined (NRF_SYSCTRL)
         #include "haltium_sysctrl_peripherals.h"

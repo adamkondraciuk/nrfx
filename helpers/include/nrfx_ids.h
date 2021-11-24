@@ -49,11 +49,11 @@ enum {
     NRFX_IDS0_INST_IDX,
 #endif
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_RISCV)
+#if defined(ISA_RISCV) && !defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
     NRFX_IDS0_INST_IDX,
 #endif
-#elif defined(ISA_ARM)
+#elif defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
     NRFX_IDS0_INST_IDX,
 #endif
@@ -99,7 +99,7 @@ typedef enum
 #if defined(NRF5340_XXAA)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM)
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV) 
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT
 #else /* ISA_RISCV */
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_VPR_EVENTS_TRIGGERED_COUNT
@@ -135,7 +135,7 @@ __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
     }
     return err_code;
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM)
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
     (void)p_config;
     return nrfx_bellboard_init((nrfx_bellboard_t const *)p_instance,
                                interrupt_priority,
@@ -160,7 +160,7 @@ __STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
     (void)p_instance;
     nrfx_ipc_uninit();
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM)
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
     nrfx_bellboard_uninit((nrfx_bellboard_t *)p_instance);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -181,7 +181,7 @@ __STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t
     (void)p_instance;
     nrfx_ipc_receive_event_group_enable(mask);
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM)
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
     nrfx_bellboard_int_enable((nrfx_bellboard_t *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -202,7 +202,7 @@ __STATIC_INLINE void nrfx_ids_int_disable(nrfx_ids_t const * p_instance, uint32_
     (void)p_instance;
     nrfx_ipc_receive_event_group_disable(mask);
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM)
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
     nrfx_bellboard_int_disable((nrfx_bellboard_t *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
@@ -288,7 +288,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
 #define nrfx_ids_0_irq_handler nrfx_vevif_irq_handler
 #endif
-#elif defined(ISA_ARM)
+#elif defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
 #define nrfx_ids_0_irq_handler nrfx_bellboard_0_irq_handler
 #endif

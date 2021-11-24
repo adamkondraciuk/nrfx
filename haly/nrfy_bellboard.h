@@ -32,7 +32,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_bellboard_events_process(NRF_BELLBOA
 /* BELLBOARD0_IRQn is not defined for RISC-V targets, so the interrupt (un)init functions need to be excluded from compilation.
  * RISC-V targets should use (and initialize) VEVIF for receiving inter-core signals.
  */
-#if defined(ISA_ARM) || defined(__NRFX_DOXYGEN__)
+#if defined(ISA_ARM) || defined(__NRFX_DOXYGEN__) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 /**
  * @brief Function for initializing the specified BELLBOARD interupts.
  *
