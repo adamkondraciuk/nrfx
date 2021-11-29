@@ -183,6 +183,17 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
                           nrfx_qspi_handler_t        handler,
                           void *                     p_context);
 
+/**
+ * @brief Function for reconfiguring the QSPI driver instance.
+ *
+ * @param[in] p_config Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is during transaction.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_qspi_reconfigure(nrfx_qspi_config_t const * p_config);
+
 /** @brief Function for uninitializing the QSPI driver instance. */
 void nrfx_qspi_uninit(void);
 

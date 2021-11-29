@@ -413,7 +413,10 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
     configure_pins(p_instance, p_config);
 
     nrfy_spim_periph_configure(p_instance->p_reg, p_nrfy_config);
-    nrfy_spim_int_init(p_instance->p_reg, 0, p_config->irq_priority, false);
+    if (m_cb[p_instance->drv_inst_idx].handler)
+    {
+        nrfy_spim_int_init(p_instance->p_reg, 0, p_config->irq_priority, false);
+    }
 }
 
 nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
@@ -431,12 +434,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-
-    err_code = spim_configuration_verify(p_instance, p_config);
-    if (err_code != NRFX_SUCCESS)
-    {
         return err_code;
     }
 
@@ -473,6 +470,15 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 
     if (p_config)
     {
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        p_cb->ss_active_high = p_config->sw_ss_active_high;
+        p_cb->ss_pin = p_config->sw_ss_pin;
+
+        err_code = spim_configuration_verify(p_instance, p_config);
+        if (err_code != NRFX_SUCCESS)
+        {
+            return err_code;
+        }
         spim_configure(p_instance, p_config);
         nrfy_spim_enable(p_instance->p_reg);
     }
@@ -488,9 +494,17 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 nrfx_err_t nrfx_spim_reconfigure(nrfx_spim_t const *        p_instance,
                                  nrfx_spim_config_t const * p_config)
 {
-    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_config);
+    spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (p_cb->transfer_in_progress)
+    {
+        return NRFX_ERROR_BUSY;
+    }
     nrfx_err_t err_code = spim_configuration_verify(p_instance, p_config);
     if (err_code != NRFX_SUCCESS)
     {

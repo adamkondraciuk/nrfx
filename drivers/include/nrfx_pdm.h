@@ -119,6 +119,19 @@ typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * p_evt);
 nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler);
 
+
+/**
+ * @brief Function for reconfiguring the PDM interface.
+ *
+ * @param[in] p_config Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          There is ongoing sampling and driver cannot be reconfigured.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is not initialized.
+ * @retval NRFX_ERROR_INVALID_PARAM Invalid configuration was specified.
+ */
+nrfx_err_t nrfx_pdm_reconfigure(nrfx_pdm_config_t const * p_config);
+
 /**
  * @brief Function for uninitializing the PDM interface.
  *

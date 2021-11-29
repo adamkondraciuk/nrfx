@@ -148,6 +148,19 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
                           void *                     p_context);
 
 /**
+ * @brief Function for reconfiguring QDEC.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is enabled and cannot be reconfigured.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
+                                 nrfx_qdec_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing QDEC.
  *
  * @note Function asserts if module is uninitialized.

@@ -325,6 +325,8 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
  * @param[in] p_config   Pointer to the structure with the configuration.
  *
  * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is during transfer.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
  * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
  * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.

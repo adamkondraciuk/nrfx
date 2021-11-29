@@ -53,7 +53,7 @@ typedef struct
 } pwm_control_block_t;
 static pwm_control_block_t m_cb[NRFX_PWM_ENABLED_COUNT];
 
-static void configure_pins(nrfx_pwm_config_t const * p_config)
+static void pins_configure(nrfx_pwm_config_t const * p_config)
 {
     // Nothing to do here if both GPIO configuration and pin selection are
     // to be skipped (the pin numbers may be then even not specified).
@@ -81,7 +81,7 @@ static void configure_pins(nrfx_pwm_config_t const * p_config)
     }
 }
 
-static void deconfigure_pins(nrfx_pwm_t const * p_instance)
+static void pins_deconfigure(nrfx_pwm_t const * p_instance)
 {
     for (uint8_t ch_idx = 0; ch_idx < NRF_PWM_CHANNEL_COUNT; ch_idx++)
     {
@@ -107,11 +107,11 @@ static void apply_errata_109(nrfx_pwm_config_t const * p_config)
 }
 #endif
 
-static void configure_pwm(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
+static void pwm_configure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
 {
     if (!p_config->skip_gpio_cfg)
     {
-        configure_pins(p_config);
+        pins_configure(p_config);
     }
 
     nrfy_pwm_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
@@ -144,11 +144,11 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
 
     p_cb->handler = handler;
     p_cb->p_context = p_context;
-    p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
 
     if (p_config)
     {
-        configure_pwm(p_instance, p_config);
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        pwm_configure(p_instance, p_config);
     }
 
     nrfy_pwm_enable(p_instance->p_reg);
@@ -160,14 +160,23 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
     return err_code;
 }
 
-void nrfx_pwm_reconfigure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
+nrfx_err_t nrfx_pwm_reconfigure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
 {
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_config);
+    pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (p_cb->state == NRFX_DRV_STATE_POWERED_ON)
+    {
+        return NRFX_ERROR_BUSY;
+    }
     nrfy_pwm_disable(p_instance->p_reg);
-    configure_pwm(p_instance, p_config);
+    pwm_configure(p_instance, p_config);
     nrfy_pwm_enable(p_instance->p_reg);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
@@ -184,7 +193,7 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
 
     if (!p_cb->skip_gpio_cfg)
     {
-        deconfigure_pins(p_instance);
+        pins_deconfigure(p_instance);
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;

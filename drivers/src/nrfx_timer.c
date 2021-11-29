@@ -76,6 +76,23 @@ typedef struct
 
 static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 
+static void timer_configure(nrfx_timer_t const *        p_instance,
+                            nrfx_timer_config_t const * p_config)
+{
+    nrfy_timer_config_t config =
+    {
+        .frequency = p_config->frequency,
+        .mode      = p_config->mode,
+        .bit_width = p_config->bit_width,
+    };
+    nrfy_timer_periph_configure(p_instance->p_reg, &config);
+
+    nrfy_timer_int_init(p_instance->p_reg,
+                        NRF_TIMER_ALL_CHANNELS_INT_MASK,
+                        p_config->interrupt_priority,
+                        false);
+}
+
 nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
                            nrfx_timer_config_t const * p_config,
                            nrfx_timer_event_handler_t  timer_event_handler)
@@ -97,24 +114,14 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
         return err_code;
     }
 
-    NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
-
     p_cb->handler = timer_event_handler;
-    p_cb->context = p_config->p_context;
 
-    nrfy_timer_int_init(p_instance->p_reg,
-                        NRF_TIMER_ALL_CHANNELS_INT_MASK,
-                        p_config->interrupt_priority,
-                        false);
-
-    nrfy_timer_config_t config =
+    if (p_config)
     {
-        .frequency = p_config->frequency,
-        .mode      = p_config->mode,
-        .bit_width = p_config->bit_width,
-    };
-    nrfy_timer_periph_configure(p_instance->p_reg, &config);
-
+        p_cb->context = p_config->p_context;
+        NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
+        timer_configure(p_instance, p_config);
+    }
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -122,6 +129,25 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
                   __func__,
                   NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
+}
+
+nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
+                                  nrfx_timer_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (p_cb->state == NRFX_DRV_STATE_POWERED_ON)
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    p_cb->context = p_config->p_context;
+    timer_configure(p_instance, p_config);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_timer_uninit(nrfx_timer_t const * p_instance)

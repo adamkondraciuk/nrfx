@@ -177,6 +177,19 @@ nrfx_err_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
                           nrfx_uart_event_handler_t  event_handler);
 
 /**
+ * @brief Function for reconfiguring the UART driver.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is during transfer.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_uart_reconfigure(nrfx_uart_t const *        p_instance,
+                                 nrfx_uart_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing the UART driver.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

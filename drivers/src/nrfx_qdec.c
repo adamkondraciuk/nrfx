@@ -32,6 +32,34 @@ typedef struct
 
 static qdec_control_block_t m_cb[NRFX_QDEC_ENABLED_COUNT];
 
+static void qdec_configure(nrfx_qdec_t const *        p_instance,
+                           nrfx_qdec_config_t const * p_config)
+{
+    if (!p_config->skip_gpio_cfg)
+    {
+        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.a_pin, NRF_GPIO_PIN_NOPULL);
+        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.b_pin, NRF_GPIO_PIN_NOPULL);
+        if (p_config->nrfy_config.pins.led_pin != NRF_QDEC_LED_NOT_CONNECTED)
+        {
+            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.led_pin, NRF_GPIO_PIN_NOPULL);
+        }
+    }
+    nrfy_qdec_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+    nrfy_qdec_shorts_enable(p_instance->p_reg, NRF_QDEC_SHORT_REPORTRDY_READCLRACC_MASK);
+
+    uint32_t int_mask = NRF_QDEC_INT_ACCOF_MASK;
+
+    if (p_config->reportper_inten)
+    {
+        int_mask |= NRF_QDEC_INT_REPORTRDY_MASK;
+    }
+    if (p_config->sample_inten)
+    {
+        int_mask |= NRF_QDEC_INT_SAMPLERDY_MASK;
+    }
+    nrfy_qdec_int_init(p_instance->p_reg, int_mask, p_config->interrupt_priority, true);
+}
+
 nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
                           nrfx_qdec_config_t const * p_config,
                           nrfx_qdec_event_handler_t  handler,
@@ -42,7 +70,7 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
     NRFX_ASSERT(handler);
 
     qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
-    uint32_t int_mask = NRF_QDEC_INT_ACCOF_MASK;
+
     nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -56,35 +84,37 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
 
     p_cb->handler = handler;
     p_cb->p_context = p_context;
-    p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
 
-    if (!p_config->skip_gpio_cfg)
+    if (p_config)
     {
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.a_pin, NRF_GPIO_PIN_NOPULL);
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.b_pin, NRF_GPIO_PIN_NOPULL);
-        if (p_config->nrfy_config.pins.led_pin != NRF_QDEC_LED_NOT_CONNECTED)
-        {
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.led_pin, NRF_GPIO_PIN_NOPULL);
-        }
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        qdec_configure(p_instance, p_config);
     }
-    nrfy_qdec_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
-    nrfy_qdec_shorts_enable(p_instance->p_reg, NRF_QDEC_SHORT_REPORTRDY_READCLRACC_MASK);
-
-    if (p_config->reportper_inten)
-    {
-        int_mask |= NRF_QDEC_INT_REPORTRDY_MASK;
-    }
-    if (p_config->sample_inten)
-    {
-        int_mask |= NRF_QDEC_INT_SAMPLERDY_MASK;
-    }
-    nrfy_qdec_int_init(p_instance->p_reg, int_mask, p_config->interrupt_priority, true);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
+}
+
+nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
+                                 nrfx_qdec_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    qdec_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (p_cb->state == NRFX_DRV_STATE_POWERED_ON)
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    qdec_configure(p_instance, p_config);
+    nrfy_qdec_enable(p_instance->p_reg);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)

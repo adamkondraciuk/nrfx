@@ -206,6 +206,19 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
                            nrfx_uarte_event_handler_t  event_handler);
 
 /**
+ * @brief Function for reconfiguring the UARTE driver.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is during transfer.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_uarte_reconfigure(nrfx_uarte_t const *        p_instance,
+                                  nrfx_uarte_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing the UARTE driver.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

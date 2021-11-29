@@ -114,13 +114,15 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
 /**
  * @brief Function for reconfiguring the watchdog.
  *
- * @note This function can not be called after @ref nrfx_wdt_enable.
- *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] p_config   Pointer to the structure with the initial configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The watchdog is already active.
+ * @retval NRFX_ERROR_INVALID_STATE The watchdog is uninitialized.
  */
-void nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
-                          nrfx_wdt_config_t const * p_config);
+nrfx_err_t nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
+                                nrfx_wdt_config_t const * p_config);
 
 /**
  * @brief Function for allocating a watchdog channel.

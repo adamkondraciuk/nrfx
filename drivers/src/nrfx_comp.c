@@ -21,6 +21,18 @@
 static nrfx_comp_event_handler_t    m_comp_event_handler = NULL;
 static nrfx_drv_state_t             m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
+static void comp_configure(nrfx_comp_config_t const * p_config)
+{
+    nrfy_comp_periph_configure(NRF_COMP, &p_config->nrfy_config);
+    nrfy_comp_int_init(NRF_COMP,
+                       NRF_COMP_INT_READY_MASK |
+                       NRF_COMP_INT_DOWN_MASK |
+                       NRF_COMP_INT_UP_MASK |
+                       NRF_COMP_INT_CROSS_MASK,
+                       p_config->interrupt_priority,
+                       false);
+}
+
 static void comp_execute_handler(nrf_comp_event_t event, uint32_t event_mask)
 {
     if (event_mask & nrfy_comp_int_enable_check(NRF_COMP, NRFY_EVENT_TO_INT_BITMASK(event)))
@@ -73,8 +85,6 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
         return err_code;
     }
 #endif
-
-    nrfy_comp_periph_configure(NRF_COMP, &p_config->nrfy_config);
     nrfy_comp_shorts_disable(NRF_COMP,
                              NRFX_COMP_SHORT_STOP_AFTER_CROSS_EVT |
                              NRFX_COMP_SHORT_STOP_AFTER_UP_EVT |
@@ -84,21 +94,37 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           NRF_COMP_INT_DOWN_MASK |
                           NRF_COMP_INT_UP_MASK |
                           NRF_COMP_INT_CROSS_MASK);
+
+    if (p_config)
+    {
+        comp_configure(p_config);
+    }
+
     nrfy_comp_enable(NRF_COMP);
     nrfy_comp_task_trigger(NRF_COMP, NRF_COMP_TASK_STOP);
 
-    nrfy_comp_int_init(NRF_COMP,
-                       NRF_COMP_INT_READY_MASK |
-                       NRF_COMP_INT_DOWN_MASK |
-                       NRF_COMP_INT_UP_MASK |
-                       NRF_COMP_INT_CROSS_MASK,
-                       p_config->interrupt_priority,
-                       false);
     m_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
+}
+
+nrfx_err_t nrfx_comp_reconfigure(nrfx_comp_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    if (m_state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (m_state == NRFX_DRV_STATE_POWERED_ON)
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    nrfy_comp_disable(NRF_COMP);
+    comp_configure(p_config);
+    nrfy_comp_enable(NRF_COMP);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_comp_uninit(void)

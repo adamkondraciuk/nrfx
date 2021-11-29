@@ -140,6 +140,19 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
                            nrfx_timer_event_handler_t  timer_event_handler);
 
 /**
+ * @brief Function for reconfiguring the timer.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is enabled and cannot be reconfigured.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
+                                  nrfx_timer_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

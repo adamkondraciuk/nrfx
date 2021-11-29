@@ -422,6 +422,44 @@ static inline void nrfx_twis_preprocess_status(nrfx_twis_t const * p_instance)
     }
 }
 
+static void twis_configure(nrfx_twis_t const *        p_instance,
+                           nrfx_twis_config_t const * p_config)
+{
+    uint32_t addr_mask = 0;
+    if (0 == (p_config->addr[0] | p_config->addr[1]))
+    {
+        addr_mask = NRF_TWIS_CONFIG_ADDRESS0_MASK;
+    }
+    else
+    {
+        if (0 != p_config->addr[0])
+        {
+            addr_mask |= NRF_TWIS_CONFIG_ADDRESS0_MASK;
+        }
+        if (0 != p_config->addr[1])
+        {
+            addr_mask |= NRF_TWIS_CONFIG_ADDRESS1_MASK;
+        }
+    }
+
+    if (!p_config->skip_psel_cfg)
+    {
+        nrf_twis_pins_set(p_instance->p_reg, p_config->scl, p_config->sda);
+    }
+    nrf_twis_address_set(p_instance->p_reg, 0, p_config->addr[0]);
+    nrf_twis_address_set(p_instance->p_reg, 1, p_config->addr[1]);
+    nrf_twis_config_address_set(p_instance->p_reg, (nrf_twis_config_addr_mask_t)addr_mask);
+
+    if (m_cb[p_instance->drv_inst_idx].ev_handler)
+    {
+        /* Peripheral interrupt configure
+        * (note - interrupts still needs to be configured in INTEN register.
+        * This is done in enable function) */
+        NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_instance->p_reg),
+                              p_config->interrupt_priority);
+        NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_instance->p_reg));
+    }
+}
 
 /* -------------------------------------------------------------------------
  * Implementation of interface functions
@@ -479,47 +517,18 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
         nrfx_twis_swreset(p_reg);
     }
 
-    p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
-
-    if (!p_config->skip_gpio_cfg)
+    p_cb->ev_handler = event_handler;
+    if (p_config)
     {
-        nrfx_twis_config_pin(p_config->scl, p_config->scl_pull);
-        nrfx_twis_config_pin(p_config->sda, p_config->sda_pull);
-    }
-
-    if (!p_config->skip_psel_cfg)
-    {
-        nrf_twis_pins_set(p_reg, p_config->scl, p_config->sda);
-    }
-
-    uint32_t addr_mask = 0;
-    if (0 == (p_config->addr[0] | p_config->addr[1]))
-    {
-        addr_mask = NRF_TWIS_CONFIG_ADDRESS0_MASK;
-    }
-    else
-    {
-        if (0 != p_config->addr[0])
+        NRFX_ASSERT(p_config->scl != p_config->sda);
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        if (!p_config->skip_gpio_cfg)
         {
-            addr_mask |= NRF_TWIS_CONFIG_ADDRESS0_MASK;
+            nrfx_twis_config_pin(p_config->scl, p_config->scl_pull);
+            nrfx_twis_config_pin(p_config->sda, p_config->sda_pull);
         }
-        if (0 != p_config->addr[1])
-        {
-            addr_mask |= NRF_TWIS_CONFIG_ADDRESS1_MASK;
-        }
+        twis_configure(p_instance, p_config);
     }
-
-    /* Peripheral interrupt configure
-     * (note - interrupts still needs to be configured in INTEN register.
-     * This is done in enable function) */
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg),
-                          p_config->interrupt_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
-
-    /* Configure */
-    nrf_twis_address_set       (p_reg, 0, p_config->addr[0]);
-    nrf_twis_address_set       (p_reg, 1, p_config->addr[1]);
-    nrf_twis_config_address_set(p_reg, (nrf_twis_config_addr_mask_t)addr_mask);
 
     /* Clear semaphore */
     if (!NRFX_TWIS_NO_SYNC_MODE)
@@ -528,13 +537,29 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
     }
     /* Set internal instance variables */
     p_cb->substate   = NRFX_TWIS_SUBSTATE_IDLE;
-    p_cb->ev_handler = event_handler;
     p_cb->state      = NRFX_DRV_STATE_INITIALIZED;
     err_code = NRFX_SUCCESS;
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
+nrfx_err_t nrfx_twis_reconfigure(nrfx_twis_t const *        p_instance,
+                                 nrfx_twis_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    if (m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (nrfx_twis_is_busy(p_instance))
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    nrf_twis_disable(p_instance->p_reg);
+    twis_configure(p_instance, p_config);
+    nrf_twis_enable(p_instance->p_reg);
+    return NRFX_SUCCESS;
+}
 
 void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
 {

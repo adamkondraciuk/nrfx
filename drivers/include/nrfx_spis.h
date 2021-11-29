@@ -207,6 +207,19 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
                           void *                     p_context);
 
 /**
+ * @brief Function for reconfiguring the SPI slave driver instance.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_config   Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is during transfer.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_spis_reconfigure(nrfx_spis_t const *        p_instance,
+                                 nrfx_spis_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing the SPI slave driver instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

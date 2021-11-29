@@ -123,6 +123,17 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
                           nrfx_comp_event_handler_t  event_handler);
 
 /**
+ * @brief Function for reconfiguring the COMP driver.
+ *
+ * @param[in] p_config Pointer to the structure with the configuration.
+ *
+ * @retval NRFX_SUCCESS             Reconfiguration was successful.
+ * @retval NRFX_ERROR_BUSY          The driver is running and cannot be reconfigured.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ */
+nrfx_err_t nrfx_comp_reconfigure(nrfx_comp_config_t const * p_config);
+
+/**
  * @brief Function for uninitializing the COMP driver.
  *
  * This function uninitializes the COMP driver. The COMP peripheral and

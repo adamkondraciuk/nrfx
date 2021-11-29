@@ -43,6 +43,28 @@ typedef struct
 
 static nrfx_pdm_cb_t m_cb;
 
+static void pdm_configure(nrfx_pdm_config_t const * p_config)
+{
+    if (!p_config->skip_gpio_cfg)
+    {
+        nrfy_gpio_pin_clear(p_config->nrfy_config.pins.clk_pin);
+        nrfy_gpio_cfg_output(p_config->nrfy_config.pins.clk_pin);
+        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.din_pin, NRF_GPIO_PIN_NOPULL);
+    }
+    if (!p_config->nrfy_config.skip_psel_cfg)
+    {
+        nrf_pdm_psel_connect(NRF_PDM0,
+                             p_config->nrfy_config.pins.clk_pin,
+                             p_config->nrfy_config.pins.din_pin);
+    }
+    nrfy_pdm_periph_configure(NRF_PDM0, &p_config->nrfy_config);
+
+    nrfy_pdm_int_init(NRF_PDM0,
+                      NRF_PDM_INT_STARTED | NRF_PDM_INT_STOPPED,
+                      p_config->interrupt_priority,
+                      true);
+}
+
 nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler)
 {
@@ -59,43 +81,29 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
         return err_code;
     }
 
-    if (p_config->nrfy_config.gain_l > NRF_PDM_GAIN_MAXIMUM ||
-        p_config->nrfy_config.gain_r > NRF_PDM_GAIN_MAXIMUM)
-    {
-        err_code = NRFX_ERROR_INVALID_PARAM;
-        NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                         __func__,
-                         NRFX_LOG_ERROR_STRING_GET(err_code));
-        return err_code;
-    }
-
     m_cb.buff_address[0] = 0;
     m_cb.buff_address[1] = 0;
     m_cb.active_buffer = 0;
     m_cb.error = 0;
     m_cb.event_handler = event_handler;
     m_cb.op_state = NRFX_PDM_STATE_IDLE;
-    m_cb.skip_gpio_cfg = p_config->skip_gpio_cfg;
 
-    if (!p_config->skip_gpio_cfg)
+    if (p_config)
     {
-        nrfy_gpio_pin_clear(p_config->nrfy_config.pins.clk_pin);
-        nrfy_gpio_cfg_output(p_config->nrfy_config.pins.clk_pin);
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.din_pin, NRF_GPIO_PIN_NOPULL);
-    }
-    if (!p_config->nrfy_config.skip_psel_cfg)
-    {
-        nrf_pdm_psel_connect(NRF_PDM0,
-                             p_config->nrfy_config.pins.clk_pin,
-                             p_config->nrfy_config.pins.din_pin);
+        m_cb.skip_gpio_cfg = p_config->skip_gpio_cfg;
+
+        if (p_config->nrfy_config.gain_l > NRF_PDM_GAIN_MAXIMUM ||
+            p_config->nrfy_config.gain_r > NRF_PDM_GAIN_MAXIMUM)
+        {
+            err_code = NRFX_ERROR_INVALID_PARAM;
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                             __func__,
+                             NRFX_LOG_ERROR_STRING_GET(err_code));
+            return err_code;
+        }
+        pdm_configure(p_config);
     }
 
-    nrfy_pdm_periph_configure(NRF_PDM0, &p_config->nrfy_config);
-
-    nrfy_pdm_int_init(NRF_PDM0,
-                      NRF_PDM_INT_STARTED | NRF_PDM_INT_STOPPED,
-                      p_config->interrupt_priority,
-                      true);
     m_cb.drv_state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -103,6 +111,30 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                   __func__,
                   NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
+}
+
+nrfx_err_t nrfx_pdm_reconfigure(nrfx_pdm_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    if (m_cb.drv_state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+
+    if (p_config->nrfy_config.gain_l > NRF_PDM_GAIN_MAXIMUM ||
+        p_config->nrfy_config.gain_r > NRF_PDM_GAIN_MAXIMUM)
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+
+    if (m_cb.op_state != NRFX_PDM_STATE_IDLE)
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    nrfy_pdm_disable(NRF_PDM0);
+    pdm_configure(p_config);
+    nrfy_pdm_enable(NRF_PDM0);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_pdm_uninit(void)

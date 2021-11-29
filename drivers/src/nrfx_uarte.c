@@ -82,8 +82,10 @@ typedef struct
 } uarte_control_block_t;
 static uarte_control_block_t m_cb[NRFX_UARTE_ENABLED_COUNT];
 
-static void apply_config(nrfx_uarte_t        const * p_instance,
-                         nrfx_uarte_config_t const * p_config)
+static void apply_workaround_for_enable_anomaly(nrfx_uarte_t const * p_instance);
+
+static void uarte_configure(nrfx_uarte_t        const * p_instance,
+                            nrfx_uarte_config_t const * p_config)
 {
     if (!p_config->skip_gpio_cfg)
     {
@@ -114,6 +116,20 @@ static void apply_config(nrfx_uarte_t        const * p_instance,
         }
     }
     nrfy_uarte_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+
+    apply_workaround_for_enable_anomaly(p_instance);
+
+    if (m_cb[p_instance->drv_inst_idx].handler)
+    {
+        nrfy_uarte_int_init(p_instance->p_reg,
+                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX) |
+                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDTX) |
+                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR) |
+                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXTO)  |
+                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_TXSTOPPED),
+                            p_config->interrupt_priority,
+                            true);
+    }
 }
 
 static void pins_to_default(nrfx_uarte_t const * p_instance)
@@ -231,27 +247,16 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     }
 #endif // NRFX_CHECK(NRFX_PRS_ENABLED)
 
-    p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
-    p_cb->skip_psel_cfg = p_config->nrfy_config.skip_psel_cfg;
+    p_cb->handler = event_handler;
 
-    apply_config(p_instance, p_config);
-
-    apply_workaround_for_enable_anomaly(p_instance);
-
-    p_cb->handler   = event_handler;
-    p_cb->p_context = p_config->p_context;
-
-    if (p_cb->handler)
+    if (p_config)
     {
-        nrfy_uarte_int_init(p_instance->p_reg,
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDTX) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXTO)  |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_TXSTOPPED),
-                            p_config->interrupt_priority,
-                            true);
+        p_cb->p_context = p_config->p_context;
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        p_cb->skip_psel_cfg = p_config->nrfy_config.skip_psel_cfg;
+        uarte_configure(p_instance, p_config);
     }
+
     nrfy_uarte_enable(p_instance->p_reg);
     p_cb->rx_buffer_length           = 0;
     p_cb->rx_secondary_buffer_length = 0;
@@ -261,6 +266,30 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
                   __func__,
                   NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
+}
+
+nrfx_err_t nrfx_uarte_reconfigure(nrfx_uarte_t const *        p_instance,
+                                  nrfx_uarte_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (nrfx_uarte_tx_in_progress(p_instance))
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    nrf_uarte_disable(p_instance->p_reg);
+    if (p_cb->handler)
+    {
+        p_cb->p_context = p_config->p_context;
+    }
+    uarte_configure(p_instance, p_config);
+    nrf_uarte_enable(p_instance->p_reg);
+    return NRFX_SUCCESS;
 }
 
 void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)

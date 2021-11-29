@@ -194,30 +194,34 @@ static bool xfer_completeness_check(NRF_TWIM_Type * p_twim, twim_control_block_t
     return transfer_complete;
 }
 
-static bool twim_pins_configure(NRF_TWIM_Type * p_twim, nrfx_twim_config_t const * p_config)
+static void twim_configure(nrfx_twim_t const *        p_instance,
+                           nrfx_twim_config_t const * p_config)
 {
-    // If both GPIO configuration and pin selection are to be skipped,
-    // the pin numbers may be not specified at all, so even validation
-    // of those numbers cannot be performed.
-    if (p_config->skip_gpio_cfg && p_config->nrfy_config.skip_psel_cfg)
+    nrfy_twim_periph_configure(p_instance->p_twim, &p_config->nrfy_config);
+    if (m_cb[p_instance->drv_inst_idx].handler)
     {
-        return true;
+        nrfy_twim_int_init(p_instance->p_twim, 0, p_config->interrupt_priority, false);
     }
+}
 
-    nrf_gpio_pin_drive_t drive;
+static bool pins_configure(nrfx_twim_config_t const * p_config)
+{
+    nrf_gpio_pin_drive_t pin_drive;
 
 #if NRF_TWIM_HAS_1000_KHZ_FREQ && defined(NRF5340_XXAA)
-    if (p_config->frequency >= NRF_TWIM_FREQ_1000K)
+    if (p_config->nrfy_config.frequency >= NRF_TWIM_FREQ_1000K)
     {
         /* When using 1 Mbps mode, two high-speed pins have to be used with extra high drive. */
-        drive = NRF_GPIO_PIN_E0E1;
+        pin_drive = NRF_GPIO_PIN_E0E1;
 
         uint32_t e0e1_pin_1 = NRF_GPIO_PIN_MAP(1, 2);
         uint32_t e0e1_pin_2 = NRF_GPIO_PIN_MAP(1, 3);
 
         /* Check whether provided pins have the extra high drive capabilities. */
-        if (((p_config->scl != e0e1_pin_1) || (p_config->sda != e0e1_pin_2)) &&
-            ((p_config->scl != e0e1_pin_2) || (p_config->sda != e0e1_pin_1)))
+        if (((p_config->nrfy_config.pins.scl_pin != e0e1_pin_1) ||
+             (p_config->nrfy_config.pins.sda_pin != e0e1_pin_2)) &&
+            ((p_config->nrfy_config.pins.scl_pin != e0e1_pin_2) ||
+             (p_config->nrfy_config.pins.sda_pin != e0e1_pin_1)))
         {
             return false;
         }
@@ -225,19 +229,18 @@ static bool twim_pins_configure(NRF_TWIM_Type * p_twim, nrfx_twim_config_t const
     else
 #endif
     {
-        drive = NRF_GPIO_PIN_S0D1;
+        pin_drive = NRF_GPIO_PIN_S0D1;
     }
 
     /* To secure correct signal levels on the pins used by the TWI
        master when the system is in OFF mode, and when the TWI master is
        disabled, these pins must be configured in the GPIO peripheral.
     */
-    if (!p_config->skip_gpio_cfg)
-    {
-        TWIM_PIN_INIT(p_config->nrfy_config.pins.scl_pin, drive);
-        TWIM_PIN_INIT(p_config->nrfy_config.pins.sda_pin, drive);
-    }
-
+   if (!p_config->skip_gpio_cfg)
+   {
+        TWIM_PIN_INIT(p_config->nrfy_config.pins.scl_pin, pin_drive);
+        TWIM_PIN_INIT(p_config->nrfy_config.pins.sda_pin, pin_drive);
+   }
     return true;
 }
 
@@ -247,9 +250,7 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           void *                     p_context)
 {
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(p_config->nrfy_config.pins.scl_pin != p_config->nrfy_config.pins.sda_pin);
     twim_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
-    NRF_TWIM_Type * p_twim = p_instance->p_twim;
     nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -292,19 +293,24 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     p_cb->int_mask        = 0;
     p_cb->repeated        = false;
     p_cb->busy            = false;
-    p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
-    p_cb->skip_gpio_cfg   = p_config->skip_gpio_cfg;
-#if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
-    p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->nrfy_config.frequency;
-#endif
 
-    if (!twim_pins_configure(p_twim, p_config))
+    if (p_config)
     {
-        return NRFX_ERROR_INVALID_PARAM;
-    }
+        NRFX_ASSERT(p_config->nrfy_config.pins.scl_pin != p_config->nrfy_config.pins.sda_pin);
 
-    nrfy_twim_periph_configure(p_instance->p_twim, &p_config->nrfy_config);
-    nrfy_twim_int_init(p_instance->p_twim, 0, p_config->interrupt_priority, false);
+        p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
+        if (!pins_configure(p_config))
+        {
+            return NRFX_ERROR_INVALID_PARAM;
+        }
+
+        p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
+        #if NRFX_CHECK(NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
+        p_cb->bus_frequency   = (nrf_twim_frequency_t)p_config->nrfy_config.frequency;
+        #endif
+
+        twim_configure(p_instance, p_config);
+    }
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
@@ -313,11 +319,30 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
     return err_code;
 }
 
+nrfx_err_t nrfx_twim_reconfigure(nrfx_twim_t const *        p_instance,
+                                 nrfx_twim_config_t const * p_config)
+{
+    NRFX_ASSERT(p_config);
+    twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
+    {
+        return NRFX_ERROR_INVALID_STATE;
+    }
+    if (p_cb->busy)
+    {
+        return NRFX_ERROR_BUSY;
+    }
+    nrfy_twim_disable(p_instance->p_twim);
+    twim_configure(p_instance, p_config);
+    nrfy_twim_enable(p_instance->p_twim);
+    return NRFX_SUCCESS;
+}
+
 void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
-
 
     nrfy_twim_int_uninit(p_instance->p_twim);
     nrfx_twim_disable(p_instance);
