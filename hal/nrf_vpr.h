@@ -24,6 +24,9 @@ extern "C" {
     ((uint32_t) (((1ULL << NRF_VPR_EVENTS_TRIGGERED_COUNT) - 1) \
     << VPR_EVENTS_TRIGGERED_EVENTS_TRIGGERED_Pos))
 
+/** @brief Macro used as an mask to clear all triggered interrupts within CSR */
+#define NRF_VPR_TASK_TRIGGER_ALL_MASK UINT32_MAX
+
 /** @brief VPR events. */
 typedef enum
 {
@@ -142,6 +145,40 @@ typedef enum
     NRF_VPR_DMCONTROL_NDMRESET, /** Negative system reset signal. */
     /* TODO: other values */
 } nrf_vpr_dmcontrol_t;
+
+/**
+ * @brief Function for enabling or disabling the Real-Time Peripherals.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if RT Perhiperals are to be enabled, false if they are to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_vpr_rtperiph_enable_set(NRF_VPR_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for checking whether the Real-Time Peripherals are enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  RT Peripherals are enabled.
+ * @retval false RT Peripherals are disabled
+ */
+NRF_STATIC_INLINE bool nrf_vpr_rtperiph_enable_check(NRF_VPR_Type const * p_reg);
+
+/**
+ * @brief Function for setting the global interrupt enable for machine privilege mode.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if interrupts are to be enabled, false if they are to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_vpr_machine_mode_enable_global_interrupt(NRF_VPR_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for clearing the specified VEVIF TRIGGER tasks from CSR perspective.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask which disables events - if triggered.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_task_trigger_clear(NRF_VPR_Type * p_reg, uint32_t mask);
 
 /**
  * @brief Function for triggering the specified VPR task.
@@ -300,6 +337,72 @@ NRF_STATIC_INLINE bool nrf_vpr_debugif_dmcontrol_get(NRF_VPR_Type const * p_reg,
                                                      nrf_vpr_dmcontrol_t  signal);
 
 #ifndef NRF_DECLARE_ONLY
+NRF_STATIC_INLINE void nrf_vpr_rtperiph_enable_set(NRF_VPR_Type * p_reg, bool enable)
+{
+#if defined(ISA_ARM)
+    (void)p_reg;
+    (void)enable;
+#else
+    (void)p_reg;
+
+    if (enable)
+    {
+        csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, (VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Enabled <<
+                                                VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Pos) |
+                                                VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk);
+    }
+    else
+    {
+        csr_clear_bits(VPRCSR_NORDIC_VPRNORDICCTRL,
+                       VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk);
+    }
+#endif // defined(ISA_ARM)
+}
+
+NRF_STATIC_INLINE bool nrf_vpr_rtperiph_enable_check(NRF_VPR_Type const * p_reg)
+{
+#if defined(ISA_ARM)
+    (void)p_reg;
+
+    return false;
+#else
+    (void)p_reg;
+
+    return (csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk);
+#endif // defined(ISA_ARM)
+}
+
+NRF_STATIC_INLINE void nrf_vpr_machine_mode_enable_global_interrupt(NRF_VPR_Type * p_reg, bool enable)
+{
+#if defined(ISA_ARM)
+    (void)p_reg;
+    (void)enable;
+#else
+    (void)p_reg;
+
+    if (enable)
+    {
+        csr_set_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
+    }
+    else
+    {
+        csr_clear_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
+    }
+#endif // defined(ISA_ARM)
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_task_trigger_clear(NRF_VPR_Type * p_reg, uint32_t mask)
+{
+#if defined(ISA_ARM)
+    (void)p_reg;
+    (void)mask;
+#else
+    (void)p_reg;
+
+    csr_clear_bits(VPRCSR_NORDIC_TASKS, mask);
+#endif // defined(ISA_ARM)
+}
+
 NRF_STATIC_INLINE void nrf_vpr_task_trigger(NRF_VPR_Type * p_reg, nrf_vpr_task_t task)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;

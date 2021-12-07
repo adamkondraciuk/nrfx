@@ -10,25 +10,13 @@
 extern "C" {
 #endif
 
-NRFY_STATIC_INLINE void __nrfy_internal_vpr_event_enabled_clear(NRF_VPR_Type *  p_reg,
-                                                                uint32_t        mask,
-                                                                nrf_vpr_event_t event);
-
-NRFY_STATIC_INLINE bool __nrfy_internal_vpr_event_handle(NRF_VPR_Type *  p_reg,
-                                                         uint32_t        mask,
-                                                         nrf_vpr_event_t event,
-                                                         uint32_t *      p_evt_mask);
-
-NRFY_STATIC_INLINE uint32_t __nrfy_internal_vpr_events_process(NRF_VPR_Type * p_reg,
-                                                               uint32_t       mask);
-
 /**
  * @defgroup nrfy_vpr VPR HALY
  * @{
  * @ingroup nrf_vpr
  * @brief   Hardware access layer with cache and barrier support for managing the VPR peripheral.
  */
-
+#if defined(ISA_RISCV)
 /**
  * @brief Function for initializing the specified VPR interupts.
  *
@@ -42,20 +30,18 @@ NRFY_STATIC_INLINE void nrfy_vpr_int_init(NRF_VPR_Type * p_reg,
                                           uint8_t        irq_priority,
                                           bool           enable)
 {
+    nrf_vpr_machine_mode_enable_global_interrupt(p_reg, true);
+    nrf_vpr_rtperiph_enable_set(p_reg, true);
+    nrf_vpr_csr_task_trigger_clear(p_reg,NRF_VPR_TASK_TRIGGER_ALL_MASK);
+
     for (uint32_t i = 0; i < NRF_VPR_EVENTS_TRIGGERED_COUNT; i++)
     {
-        nrf_vpr_event_t event = nrf_vpr_triggered_event_get(i);
-        __nrfy_internal_vpr_event_enabled_clear(p_reg, mask, event);
-    }
+        NRFX_IRQ_PRIORITY_SET((VPR_0_IRQn + i), irq_priority);
 
-    nrf_barrier_w();
-
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), irq_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
-
-    if (enable)
-    {
-        nrf_vpr_int_enable(p_reg, mask);
+        if (enable)
+        {
+            NRFX_IRQ_ENABLE(VPR_0_IRQn + i);
+        }
     }
 
     nrf_barrier_w();
@@ -68,41 +54,42 @@ NRFY_STATIC_INLINE void nrfy_vpr_int_init(NRF_VPR_Type * p_reg,
  */
 NRFY_STATIC_INLINE void nrfy_vpr_int_uninit(NRF_VPR_Type * p_reg)
 {
-    NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_reg));
+    (void)p_reg;
+    for (uint32_t i = 0; i < NRF_VPR_EVENTS_TRIGGERED_COUNT; i++)
+    {
+        NRFX_IRQ_DISABLE(VPR_0_IRQn + i);
+    }
+
     nrf_barrier_w();
 }
-
-/**
- * @brief Function for processing the specified VPR events.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of events to be processed, created by @ref NRFY_EVENT_TO_INT_BITMASK.
- *
- * @return Mask of events that were generated and processed.
- *         To be checked against the result of @ref NRFY_EVENT_TO_INT_BITMASK().
- */
-NRFY_STATIC_INLINE uint32_t nrfy_vpr_events_process(NRF_VPR_Type * p_reg, uint32_t mask)
-{
-    uint32_t evt_mask = __nrfy_internal_vpr_events_process(p_reg, mask);
-    nrf_barrier_w();
-
-    return evt_mask;
-}
+#endif // defined(ISA_RISCV)
 
 /** @refhal{nrf_vpr_int_enable} */
 NRFY_STATIC_INLINE void nrfy_vpr_int_enable(NRF_VPR_Type * p_reg,
                                             uint32_t       mask)
 {
-    nrf_vpr_int_enable(p_reg, mask);
+#if defined(ISA_ARM)
+    (void)p_reg;
+    (void)mask;
+#else
+    (void)p_reg;
+    NRFX_IRQ_ENABLE(VPR_0_IRQn + mask);
     nrf_barrier_w();
+#endif // defined(ISA_ARM)
 }
 
 /** @refhal{nrf_vpr_int_disable} */
 NRFY_STATIC_INLINE void nrfy_vpr_int_disable(NRF_VPR_Type * p_reg,
                                              uint32_t       mask)
 {
-    nrf_vpr_int_disable(p_reg, mask);
+#if defined(ISA_ARM)
+    (void)p_reg;
+    (void)mask;
+#else
+    (void)p_reg;
+    NRFX_IRQ_DISABLE(VPR_0_IRQn + mask);
     nrf_barrier_w();
+#endif // defined(ISA_ARM)
 }
 
 /** @refhal{nrf_vpr_task_trigger} */
@@ -211,51 +198,6 @@ NRF_STATIC_INLINE bool nrfy_vpr_debugif_dmcontrol_get(NRF_VPR_Type const * p_reg
 }
 
 /** @} */
-
-NRFY_STATIC_INLINE uint32_t  __nrfy_internal_vpr_events_process(NRF_VPR_Type * p_reg, uint32_t mask)
-{
-    uint32_t evt_mask = 0;
-
-    nrf_barrier_r();
-
-    for (uint8_t i = 0; i < NRF_VPR_EVENTS_TRIGGERED_COUNT; i++)
-    {
-        nrf_vpr_event_t event = nrf_vpr_triggered_event_get(i);
-        (void)__nrfy_internal_vpr_event_handle(p_reg, mask, event, &evt_mask);
-    }
-
-    return evt_mask;
-}
-
-NRFY_STATIC_INLINE bool __nrfy_internal_vpr_event_handle(NRF_VPR_Type *  p_reg,
-                                                         uint32_t        mask,
-                                                         nrf_vpr_event_t event,
-                                                         uint32_t *      p_evt_mask)
-{
-    if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)) && nrf_vpr_event_check(p_reg, event))
-    {
-        nrf_vpr_event_clear(p_reg, event);
-
-        if (p_evt_mask)
-        {
-            *p_evt_mask |= NRFY_EVENT_TO_INT_BITMASK(event);
-        }
-
-        return true;
-    }
-
-    return false;
-}
-
-NRFY_STATIC_INLINE void __nrfy_internal_vpr_event_enabled_clear(NRF_VPR_Type *  p_reg,
-                                                                uint32_t        mask,
-                                                                nrf_vpr_event_t event)
-{
-    if ((mask & NRFY_EVENT_TO_INT_BITMASK(event)))
-    {
-        nrf_vpr_event_clear(p_reg, event);
-    }
-}
 
 #ifdef __cplusplus
 }
