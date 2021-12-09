@@ -213,6 +213,7 @@ extern "C" {
 // GSPU7_IRQn
 
 // GRTC_IRQn
+#define nrfx_grtc_irq_handler       GRTC_IRQHandler
 
 // RESETHUB_IRQn
 
