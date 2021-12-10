@@ -45,7 +45,8 @@ extern "C" {
 
 #if defined(HALTIUM_XXAA)
 /* TODO: Remove once haltium has peripheral.h support. */
-#define GPIOTE_CH_NUM 8
+#define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
+#define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
 #endif
 
 /** @brief Polarity for the GPIOTE channel. */
@@ -121,7 +122,27 @@ typedef enum
     NRF_GPIOTE_EVENT_IN_6     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[6]), /**< In event 6. */
     NRF_GPIOTE_EVENT_IN_7     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[7]), /**< In event 7. */
 #endif
-    NRF_GPIOTE_EVENT_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT), /**<  Port event. */
+#if !defined(GPIOTE_PORT_NUM)
+    NRF_GPIOTE_EVENT_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT),  /**<  Port event. */
+#endif
+#if defined(GPIOTE_PORT_NUM) || defined(__NRFX_DOXYGEN__)
+    NRF_GPIOTE_EVENT_PORT_0   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0]),  /**<  Port event 0. */
+    NRF_GPIOTE_EVENT_PORT_1   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1]),  /**<  Port event 1. */
+    NRF_GPIOTE_EVENT_PORT_2   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2]),  /**<  Port event 2. */
+    NRF_GPIOTE_EVENT_PORT_3   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3]),  /**<  Port event 3. */
+    NRF_GPIOTE_EVENT_PORT_4   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4]),  /**<  Port event 4. */
+    NRF_GPIOTE_EVENT_PORT_5   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5]),  /**<  Port event 5. */
+    NRF_GPIOTE_EVENT_PORT_6   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6]),  /**<  Port event 6. */
+    NRF_GPIOTE_EVENT_PORT_7   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7]),  /**<  Port event 7. */
+    NRF_GPIOTE_EVENT_PORT_8   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[8]),  /**<  Port event 8. */
+    NRF_GPIOTE_EVENT_PORT_9   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[9]),  /**<  Port event 9. */
+    NRF_GPIOTE_EVENT_PORT_10  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[10]), /**<  Port event 10. */
+    NRF_GPIOTE_EVENT_PORT_11  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[11]), /**<  Port event 11. */
+    NRF_GPIOTE_EVENT_PORT_12  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[12]), /**<  Port event 12. */
+    NRF_GPIOTE_EVENT_PORT_13  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[13]), /**<  Port event 13. */
+    NRF_GPIOTE_EVENT_PORT_14  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[14]), /**<  Port event 14. */
+    NRF_GPIOTE_EVENT_PORT_15  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[15]), /**<  Port event 15. */
+#endif
 } nrf_gpiote_event_t;
 
 /** @brief GPIOTE interrupts. */
@@ -176,6 +197,17 @@ typedef enum
                                 NRF_GPIOTE_INT_IN2_MASK | NRF_GPIOTE_INT_IN3_MASK |\
                                 NRF_GPIOTE_INT_IN4_MASK | NRF_GPIOTE_INT_IN5_MASK |\
                                 NRF_GPIOTE_INT_IN6_MASK | NRF_GPIOTE_INT_IN7_MASK)
+#endif
+#if (NRF_GPIOTE_HAS_MULTIPLE_INT)
+/** @brief Mask holding positions of available GPIOTE port interrupts. */
+#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_MASK  | NRF_GPIOTE_INT_PORT1_MASK  |\
+                                  NRF_GPIOTE_INT_PORT2_MASK  | NRF_GPIOTE_INT_PORT3_MASK  |\
+                                  NRF_GPIOTE_INT_PORT4_MASK  | NRF_GPIOTE_INT_PORT5_MASK  |\
+                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT7_MASK  |\
+                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT9_MASK  |\
+                                  NRF_GPIOTE_INT_PORT10_MASK | NRF_GPIOTE_INT_PORT11_MASK |\
+                                  NRF_GPIOTE_INT_PORT12_MASK | NRF_GPIOTE_INT_PORT13_MASK |\
+                                  NRF_GPIOTE_INT_PORT14_MASK | NRF_GPIOTE_INT_PORT15_MASK)
 #endif
 
 /**
@@ -487,6 +519,17 @@ NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_clr_task_get(uint8_t index);
  * @return Requested IN event.
  */
 NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index);
+
+#if defined(GPIOTE_PORT_NUM) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for getting the PORT event associated with the specified GPIOTE port.
+ *
+ * @param[in] index Port index.
+ *
+ * @return Requested PORT event.
+ */
+NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_port_event_get(uint8_t index);
+#endif
 
 #if NRF_GPIOTE_HAS_LATENCY
 /**
@@ -802,6 +845,14 @@ NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index)
     NRFX_ASSERT(index < GPIOTE_CH_NUM);
     return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_IN[index]);
 }
+
+#if defined(GPIOTE_PORT_NUM)
+NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_port_event_get(uint8_t index)
+{
+    NRFX_ASSERT(index < GPIOTE_PORT_NUM);
+    return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_PORT[index]);
+}
+#endif
 
 #if NRF_GPIOTE_HAS_LATENCY
 NRF_STATIC_INLINE void nrf_gpiote_latency_set(NRF_GPIOTE_Type *    p_reg,
