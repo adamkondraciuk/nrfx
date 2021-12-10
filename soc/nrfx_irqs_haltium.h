@@ -21,6 +21,38 @@ extern "C" {
 // RAMC_IRQn
 
 // VPR_IRQn
+#define nrfx_vevif_0_irq_handler       VPR0_IRQ_0_IRQHandler
+#define nrfx_vevif_1_irq_handler       VPR0_IRQ_1_IRQHandler
+#define nrfx_vevif_2_irq_handler       VPR0_IRQ_2_IRQHandler
+#define nrfx_vevif_3_irq_handler       VPR0_IRQ_3_IRQHandler
+#define nrfx_vevif_4_irq_handler       VPR0_IRQ_4_IRQHandler
+#define nrfx_vevif_5_irq_handler       VPR0_IRQ_5_IRQHandler
+#define nrfx_vevif_6_irq_handler       VPR0_IRQ_6_IRQHandler
+#define nrfx_vevif_7_irq_handler       VPR0_IRQ_7_IRQHandler
+#define nrfx_vevif_8_irq_handler       VPR0_IRQ_8_IRQHandler
+#define nrfx_vevif_9_irq_handler       VPR0_IRQ_9_IRQHandler
+#define nrfx_vevif_10_irq_handler      VPR0_IRQ_10_IRQHandler
+#define nrfx_vevif_11_irq_handler      VPR0_IRQ_11_IRQHandler
+#define nrfx_vevif_12_irq_handler      VPR0_IRQ_12_IRQHandler
+#define nrfx_vevif_13_irq_handler      VPR0_IRQ_13_IRQHandler
+#define nrfx_vevif_14_irq_handler      VPR0_IRQ_14_IRQHandler
+#define nrfx_vevif_15_irq_handler      VPR0_IRQ_15_IRQHandler
+#define nrfx_vevif_16_irq_handler      VPR0_IRQ_16_IRQHandler
+#define nrfx_vevif_17_irq_handler      VPR0_IRQ_17_IRQHandler
+#define nrfx_vevif_18_irq_handler      VPR0_IRQ_18_IRQHandler
+#define nrfx_vevif_19_irq_handler      VPR0_IRQ_19_IRQHandler
+#define nrfx_vevif_20_irq_handler      VPR0_IRQ_20_IRQHandler
+#define nrfx_vevif_21_irq_handler      VPR0_IRQ_21_IRQHandler
+#define nrfx_vevif_22_irq_handler      VPR0_IRQ_22_IRQHandler
+#define nrfx_vevif_23_irq_handler      VPR0_IRQ_23_IRQHandler
+#define nrfx_vevif_24_irq_handler      VPR0_IRQ_24_IRQHandler
+#define nrfx_vevif_25_irq_handler      VPR0_IRQ_25_IRQHandler
+#define nrfx_vevif_26_irq_handler      VPR0_IRQ_26_IRQHandler
+#define nrfx_vevif_27_irq_handler      VPR0_IRQ_27_IRQHandler
+#define nrfx_vevif_28_irq_handler      VPR0_IRQ_28_IRQHandler
+#define nrfx_vevif_29_irq_handler      VPR0_IRQ_29_IRQHandler
+#define nrfx_vevif_30_irq_handler      VPR0_IRQ_30_IRQHandler
+#define nrfx_vevif_31_irq_handler      VPR0_IRQ_31_IRQHandler
 
 // SPU1_IRQn
 
