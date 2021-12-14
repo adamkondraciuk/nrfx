@@ -16,7 +16,7 @@ pipeline {
     agent {
         docker {
             label 'linux && build-ncs && !nrfx-coverity'
-            image "docker-dtr.nordicsemi.no/babu/ncs-riscv-wine:2.7.0"
+            image "docker-dtr.nordicsemi.no/babu/ncs-riscv-wine:2.8.2"
             args ' --privileged -e HOME=/home/buran_ci'
         }
     }
