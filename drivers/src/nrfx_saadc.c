@@ -774,10 +774,10 @@ static void saadc_event_end_handle(void)
         case NRF_SAADC_STATE_SIMPLE_MODE_SAMPLE:
             nrf_saadc_disable(NRF_SAADC);
             m_cb.saadc_state = NRF_SAADC_STATE_SIMPLE_MODE;
-	    /* In the simple, non-blocking mode the event handler must be
-	     * called after the internal driver state is updated. This will
-	     * allow starting a new conversion from the event handler context.
-	     */
+            /* In the simple, non-blocking mode the event handler must be
+             * called after the internal driver state is updated. This will
+             * allow starting a new conversion from the event handler context.
+             */
             m_cb.event_handler(&evt_data);
             break;
 
