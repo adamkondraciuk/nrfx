@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [2.7.0] - 2021-12-15
+## [2.7.0] - 2021-12-16
 ### Added
 - Added new fields in the driver configuration structures to allow skipping GPIO and/or PSEL register configuration. Affected drivers: I2S, PDM, PWM, QDEC, QSPI, SPI, SPIM, SPIS, TWI, TWIM, TWIS, UART, UARTE.
 
