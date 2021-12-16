@@ -763,7 +763,7 @@ NRF_STATIC_INLINE void nrf_timer_subscribe_set(NRF_TIMER_Type * p_reg,
                                                uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | TIMER_SUBSCRIBE_START_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_timer_subscribe_clear(NRF_TIMER_Type * p_reg,
@@ -777,7 +777,7 @@ NRF_STATIC_INLINE void nrf_timer_publish_set(NRF_TIMER_Type *  p_reg,
                                              uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | TIMER_PUBLISH_COMPARE_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_timer_publish_clear(NRF_TIMER_Type *  p_reg,

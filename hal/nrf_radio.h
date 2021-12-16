@@ -1557,7 +1557,7 @@ NRF_STATIC_INLINE void nrf_radio_subscribe_set(NRF_RADIO_Type * p_reg,
                                                uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + NRF_RADIO_DPPI_OFFSET)) =
-            ((uint32_t)channel | RADIO_SUBSCRIBE_TXEN_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_radio_subscribe_clear(NRF_RADIO_Type * p_reg,
@@ -1571,7 +1571,7 @@ NRF_STATIC_INLINE void nrf_radio_publish_set(NRF_RADIO_Type *  p_reg,
                                              uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + NRF_RADIO_DPPI_OFFSET)) =
-            ((uint32_t)channel | RADIO_PUBLISH_READY_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_radio_publish_clear(NRF_RADIO_Type *  p_reg,

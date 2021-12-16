@@ -899,7 +899,7 @@ NRF_STATIC_INLINE void nrf_power_subscribe_set(NRF_POWER_Type * p_reg,
                                                uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | POWER_SUBSCRIBE_CONSTLAT_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_power_subscribe_clear(NRF_POWER_Type * p_reg, nrf_power_task_t task)
@@ -912,7 +912,7 @@ NRF_STATIC_INLINE void nrf_power_publish_set(NRF_POWER_Type *  p_reg,
                                              uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | POWER_PUBLISH_SLEEPENTER_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_power_publish_clear(NRF_POWER_Type * p_reg, nrf_power_event_t event)

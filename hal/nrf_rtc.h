@@ -321,7 +321,7 @@ NRF_STATIC_INLINE void nrf_rtc_subscribe_set(NRF_RTC_Type * p_reg,
                                              uint8_t        channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | RTC_SUBSCRIBE_START_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_rtc_subscribe_clear(NRF_RTC_Type * p_reg,
@@ -335,7 +335,7 @@ NRF_STATIC_INLINE void nrf_rtc_publish_set(NRF_RTC_Type *  p_reg,
                                            uint8_t         channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | RTC_PUBLISH_TICK_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,

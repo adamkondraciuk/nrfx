@@ -537,7 +537,7 @@ NRF_STATIC_INLINE void nrf_wdt_subscribe_set(NRF_WDT_Type * p_reg,
                                              uint8_t        channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | WDT_SUBSCRIBE_START_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_wdt_subscribe_clear(NRF_WDT_Type * p_reg, nrf_wdt_task_t task)
@@ -550,7 +550,7 @@ NRF_STATIC_INLINE void nrf_wdt_publish_set(NRF_WDT_Type *  p_reg,
                                            uint8_t         channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | WDT_PUBLISH_TIMEOUT_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t event)

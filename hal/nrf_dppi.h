@@ -252,7 +252,7 @@ NRF_STATIC_INLINE void nrf_dppi_subscribe_set(NRF_DPPIC_Type * p_reg,
 {
     NRFX_ASSERT(channel < DPPI_CH_NUM);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | DPPIC_SUBSCRIBE_CHG_EN_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_dppi_subscribe_clear(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t task)

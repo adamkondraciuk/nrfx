@@ -730,7 +730,7 @@ NRF_STATIC_INLINE void nrf_spu_publish_set(NRF_SPU_Type *  p_reg,
                                            uint32_t        channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-        (channel | (SPU_PUBLISH_RAMACCERR_EN_Msk));
+        (channel | (NRF_SUBSCRIBE_PUBLISH_ENABLE));
 }
 
 NRF_STATIC_INLINE void nrf_spu_publish_clear(NRF_SPU_Type *  p_reg,
@@ -1315,7 +1315,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
     {
         case NRF_SPU_FEATURE_IPCT_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_CHANNEL_COUNT);
-            p_reg->FEATURE.IPCT.CH[index] = 
+            p_reg->FEATURE.IPCT.CH[index] =
                 ((p_reg->FEATURE.IPCT.CH[index] &
                   ~SPU_FEATURE_IPCT_CH_SECATTR_Msk) |
                  ((enable ?
@@ -1326,7 +1326,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
 
         case NRF_SPU_FEATURE_IPCT_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_INTERRUPT_COUNT);
-            p_reg->FEATURE.IPCT.INTERRUPT[index] = 
+            p_reg->FEATURE.IPCT.INTERRUPT[index] =
                 ((p_reg->FEATURE.IPCT.INTERRUPT[index] &
                   ~SPU_FEATURE_IPCT_INTERRUPT_SECATTR_Msk) |
                  ((enable ?
@@ -1360,7 +1360,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_CHANNEL_COUNT);
-            p_reg->FEATURE.GPIOTE[index].CH[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].CH[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].CH[subindex] &
                   ~SPU_FEATURE_GPIOTE_CH_SECATTR_Msk) |
                  ((enable ?
@@ -1372,7 +1372,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_INTERRUPT_COUNT);
-            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] &
                   ~SPU_FEATURE_GPIOTE_INTERRUPT_SECATTR_Msk) |
                  ((enable ?
@@ -1442,7 +1442,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
     {
         case NRF_SPU_FEATURE_IPCT_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_CHANNEL_COUNT);
-            p_reg->FEATURE.IPCT.CH[index] = 
+            p_reg->FEATURE.IPCT.CH[index] =
                 ((p_reg->FEATURE.IPCT.CH[index] &
                   ~SPU_FEATURE_IPCT_CH_LOCK_Msk) |
                  (SPU_FEATURE_IPCT_CH_LOCK_Locked
@@ -1451,7 +1451,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
 
         case NRF_SPU_FEATURE_IPCT_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_INTERRUPT_COUNT);
-            p_reg->FEATURE.IPCT.INTERRUPT[index] = 
+            p_reg->FEATURE.IPCT.INTERRUPT[index] =
                 ((p_reg->FEATURE.IPCT.INTERRUPT[index] &
                   ~SPU_FEATURE_IPCT_INTERRUPT_LOCK_Msk) |
                  (SPU_FEATURE_IPCT_INTERRUPT_LOCK_Locked
@@ -1479,7 +1479,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_CHANNEL_COUNT);
-            p_reg->FEATURE.GPIOTE[index].CH[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].CH[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].CH[subindex] &
                   ~SPU_FEATURE_GPIOTE_CH_LOCK_Msk) |
                  (SPU_FEATURE_GPIOTE_CH_LOCK_Locked
@@ -1489,7 +1489,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_INTERRUPT_COUNT);
-            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] &
                   ~SPU_FEATURE_GPIOTE_INTERRUPT_LOCK_Msk) |
                  (SPU_FEATURE_GPIOTE_INTERRUPT_LOCK_Locked
@@ -1549,7 +1549,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
     {
         case NRF_SPU_FEATURE_IPCT_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_CHANNEL_COUNT);
-            p_reg->FEATURE.IPCT.CH[index] = 
+            p_reg->FEATURE.IPCT.CH[index] =
                 ((p_reg->FEATURE.IPCT.CH[index] &
                   ~SPU_FEATURE_IPCT_CH_BLOCK_Msk) |
                  (SPU_FEATURE_IPCT_CH_BLOCK_Blocked
@@ -1558,7 +1558,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
 
         case NRF_SPU_FEATURE_IPCT_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_IPCT_INTERRUPT_COUNT);
-            p_reg->FEATURE.IPCT.INTERRUPT[index] = 
+            p_reg->FEATURE.IPCT.INTERRUPT[index] =
                 ((p_reg->FEATURE.IPCT.INTERRUPT[index] &
                   ~SPU_FEATURE_IPCT_INTERRUPT_BLOCK_Msk) |
                  (SPU_FEATURE_IPCT_INTERRUPT_BLOCK_Blocked
@@ -1586,7 +1586,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_CHANNEL_COUNT);
-            p_reg->FEATURE.GPIOTE[index].CH[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].CH[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].CH[subindex] &
                   ~SPU_FEATURE_GPIOTE_CH_BLOCK_Msk) |
                  (SPU_FEATURE_GPIOTE_CH_BLOCK_Blocked
@@ -1596,7 +1596,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_INTERRUPT_COUNT);
-            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] &
                   ~SPU_FEATURE_GPIOTE_INTERRUPT_BLOCK_Msk) |
                  (SPU_FEATURE_GPIOTE_INTERRUPT_BLOCK_Blocked
@@ -1698,7 +1698,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_CHANNEL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_CHANNEL_COUNT);
-            p_reg->FEATURE.GPIOTE[index].CH[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].CH[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].CH[subindex] &
                   ~SPU_FEATURE_GPIOTE_CH_OWNERID_Msk) |
                  ((owner_id
@@ -1709,7 +1709,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
         case NRF_SPU_FEATURE_GPIOTE_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GPIOTE_COUNT);
             NRFX_ASSERT(subindex < NRF_SPU_FEATURE_GPIOTE_INTERRUPT_COUNT);
-            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] = 
+            p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] =
                 ((p_reg->FEATURE.GPIOTE[index].INTERRUPT[subindex] &
                   ~SPU_FEATURE_GPIOTE_INTERRUPT_OWNERID_Msk) |
                  ((owner_id

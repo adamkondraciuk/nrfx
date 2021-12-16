@@ -517,7 +517,7 @@ NRF_STATIC_INLINE void nrf_ipct_subscribe_set(NRF_IPCT_Type * p_reg,
                                              uint8_t        channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
-            ((uint32_t)channel | IPCT_SUBSCRIBE_SEND_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_ipct_subscribe_clear(NRF_IPCT_Type * p_reg, nrf_ipct_task_t task)
@@ -530,7 +530,7 @@ NRF_STATIC_INLINE void nrf_ipct_publish_set(NRF_IPCT_Type *  p_reg,
                                            uint8_t         channel)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
-            ((uint32_t)channel | IPCT_PUBLISH_RECEIVE_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_ipct_publish_clear(NRF_IPCT_Type *  p_reg, nrf_ipct_event_t event)

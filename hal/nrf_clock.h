@@ -1049,7 +1049,7 @@ NRF_STATIC_INLINE void nrf_clock_subscribe_set(NRF_CLOCK_Type * p_reg,
                                                uint8_t          channel)
 {
     *((volatile uint32_t *) ((uint8_t *)p_reg+ (uint32_t)task + 0x80uL)) =
-            ((uint32_t)channel | CLOCK_SUBSCRIBE_HFCLKSTART_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_clock_subscribe_clear(NRF_CLOCK_Type * p_reg, nrf_clock_task_t task)
@@ -1062,7 +1062,7 @@ NRF_STATIC_INLINE void nrf_clock_publish_set(NRF_CLOCK_Type *  p_reg,
                                              uint8_t           channel)
 {
     *((volatile uint32_t *) ((uint8_t *)p_reg + (uint32_t)event + 0x80uL)) =
-            ((uint32_t)channel | CLOCK_PUBLISH_HFCLKSTARTED_EN_Msk);
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_clock_publish_clear(NRF_CLOCK_Type * p_reg, nrf_clock_event_t event)
