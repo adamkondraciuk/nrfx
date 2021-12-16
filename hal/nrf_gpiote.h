@@ -16,6 +16,86 @@ extern "C" {
 * @brief   Hardware access layer (HAL) for managing the GPIOTE peripheral.
 */
 
+#if defined(HALTIUM_XXAA)
+#if !defined(NRF_CELLCORE)
+#define NRF_GPIOTE        NRF_GPIOTE130
+#else
+#define NRF_GPIOTE        NRF_GPIOTE131
+#endif
+#endif // defined(HALTIUM_XXAA)
+
+#if defined(HALTIUM_XXAA) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Group number definition for domain.
+ * @todo Remove when added to MDK
+ */
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    #if defined(NRF_SECURE)
+        #define NRF_GPIOTE_IRQ_GROUP 0
+    #elif defined(NRF_APPLICATION)
+        #define NRF_GPIOTE_IRQ_GROUP 2
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_GPIOTE_IRQ_GROUP 4
+    #elif defined(NRF_CELLCORE)
+        #define NRF_GPIOTE_IRQ_GROUP 4
+    #else
+        #error Unknown core.
+    #endif
+#elif defined(NRF_SYSCTRL)
+    #define NRF_GPIOTE_IRQ_GROUP 6
+#else
+    #if defined(NRF_SECURE)
+        #define NRF_GPIOTE_IRQ_GROUP 1
+    #elif defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION)
+        #define NRF_GPIOTE_IRQ_GROUP 3
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_GPIOTE_IRQ_GROUP 5
+    #elif defined(NRF_CELLCORE)
+        #define NRF_GPIOTE_IRQ_GROUP 5
+    #else
+        #error Unknown core.
+    #endif
+#endif // defined(NRF_TRUSTZONE_NONSECURE)
+
+
+/** @brief Fixups for the GPIOTE IRQn lines. */
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#if !defined(NRF_CELLCORE)
+#define nrfx_gpiote_irq_handler      GPIOTE1300_0_IRQHandler
+#else
+#define nrfx_gpiote_irq_handler      GPIOTE1310_0_IRQHandler
+#endif
+
+#else
+
+#if !defined(NRF_CELLCORE)
+#define nrfx_gpiote_irq_handler      GPIOTE1300_1_IRQHandler
+#else
+#define nrfx_gpiote_irq_handler      GPIOTE1310_1_IRQHandler
+#endif
+#endif // defined(NRF_TRUSTZONE_NONSECURE)
+
+/** @brief Enable or disable interrupt register definition. */
+#define GPIOTE_INTEN    NRFX_CONCAT_2(INTEN,    NRF_GPIOTE_IRQ_GROUP)
+
+/** @brief Interrupt enable set register definition. */
+#define GPIOTE_INTENSET NRFX_CONCAT_2(INTENSET, NRF_GPIOTE_IRQ_GROUP)
+
+/** @brief Interrupt enable clear register definition. */
+#define GPIOTE_INTENCLR NRFX_CONCAT_2(INTENCLR, NRF_GPIOTE_IRQ_GROUP)
+
+#else
+
+/** @brief Enable or disable interrupt register definition. */
+#define GPIOTE_INTEN    INTEN
+
+/** @brief Interrupt enable set register definition. */
+#define GPIOTE_INTENSET INTENSET
+
+/** @brief Interrupt enable clear register definition. */
+#define GPIOTE_INTENCLR INTENCLR
+#endif // defined(HALTIUM_XXAA)
+
 #if defined(GPIOTE_CONFIG_PORT_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Mask for covering port and pin bits in registers. */
 #define GPIOTE_CONFIG_PORT_PIN_Msk (GPIOTE_CONFIG_PORT_Msk | GPIOTE_CONFIG_PSEL_Msk)
@@ -198,7 +278,7 @@ typedef enum
                                 NRF_GPIOTE_INT_IN4_MASK | NRF_GPIOTE_INT_IN5_MASK |\
                                 NRF_GPIOTE_INT_IN6_MASK | NRF_GPIOTE_INT_IN7_MASK)
 #endif
-#if (NRF_GPIOTE_HAS_MULTIPLE_INT)
+#if NRF_GPIOTE_HAS_MULTIPLE_INT || defined(__NRFX_DOXYGEN__)
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
 #define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_MASK  | NRF_GPIOTE_INT_PORT1_MASK  |\
                                   NRF_GPIOTE_INT_PORT2_MASK  | NRF_GPIOTE_INT_PORT3_MASK  |\
@@ -260,42 +340,6 @@ NRF_STATIC_INLINE void nrf_gpiote_event_clear(NRF_GPIOTE_Type * p_reg, nrf_gpiot
 NRF_STATIC_INLINE uint32_t nrf_gpiote_event_address_get(NRF_GPIOTE_Type const * p_reg,
                                                         nrf_gpiote_event_t      event);
 
-#if NRF_GPIOTE_HAS_MULTIPLE_INT
-/**
- * @brief Function for enabling interrupts.
- *
- * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
- * @param[in] group_idx Index of interrupt group to be enabled.
- * @param[in] mask      Mask of interrupts to be enabled.
- */
-NRF_STATIC_INLINE void nrf_gpiote_int_group_enable(NRF_GPIOTE_Type * p_reg,
-                                                   uint8_t           group_idx,
-                                                   uint32_t          mask);
-
-/**
- * @brief Function for disabling interrupts.
- *
- * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
- * @param[in] group_idx Index of interrupt group to be disabled.
- * @param[in] mask      Mask of interrupts to be disabled.
- */
-NRF_STATIC_INLINE void nrf_gpiote_int_group_disable(NRF_GPIOTE_Type * p_reg,
-                                                    uint8_t           group_idx,
-                                                    uint32_t          mask);
-
-/**
- * @brief Function for checking if the specified interrupts are enabled.
- *
- * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
- * @param[in] group_idx Index of interrupt group to be checked.
- * @param[in] mask      Mask of interrupts to be checked.
- *
- * @return Mask of enabled interrupts.
- */
-NRF_STATIC_INLINE uint32_t nrf_gpiote_int_group_enable_check(NRF_GPIOTE_Type const * p_reg,
-                                                             uint8_t                 group_idx,
-                                                             uint32_t                mask);
-#else
 /**
  * @brief Function for enabling interrupts.
  *
@@ -322,7 +366,6 @@ NRF_STATIC_INLINE void nrf_gpiote_int_disable(NRF_GPIOTE_Type * p_reg, uint32_t 
  */
 NRF_STATIC_INLINE uint32_t nrf_gpiote_int_enable_check(NRF_GPIOTE_Type const * p_reg,
                                                        uint32_t                mask);
-#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -585,119 +628,20 @@ NRF_STATIC_INLINE uint32_t nrf_gpiote_event_address_get(NRF_GPIOTE_Type const * 
     return ((uint32_t)p_reg + event);
 }
 
-#if NRF_GPIOTE_HAS_MULTIPLE_INT
-NRF_STATIC_INLINE void nrf_gpiote_int_group_enable(NRF_GPIOTE_Type * p_reg,
-                                                   uint8_t           group_idx,
-                                                   uint32_t          mask)
-{
-    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
-    switch (group_idx)
-    {
-        case 0:
-            p_reg->INTENSET0 = mask;
-            break;
-        case 1:
-            p_reg->INTENSET1 = mask;
-            break;
-        case 2:
-            p_reg->INTENSET2 = mask;
-            break;
-        case 3:
-            p_reg->INTENSET3 = mask;
-            break;
-        case 4:
-            p_reg->INTENSET4 = mask;
-            break;
-        case 5:
-            p_reg->INTENSET5 = mask;
-            break;
-        case 6:
-            p_reg->INTENSET6 = mask;
-            break;
-        default:
-            NRFX_ASSERT(false);
-            break;
-    }
-
-}
-
-NRF_STATIC_INLINE void nrf_gpiote_int_group_disable(NRF_GPIOTE_Type * p_reg,
-                                                    uint8_t           group_idx,
-                                                    uint32_t          mask)
-{
-    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
-    switch (group_idx)
-    {
-        case 0:
-            p_reg->INTENCLR0 = mask;
-            break;
-        case 1:
-            p_reg->INTENCLR1 = mask;
-            break;
-        case 2:
-            p_reg->INTENCLR2 = mask;
-            break;
-        case 3:
-            p_reg->INTENCLR3 = mask;
-            break;
-        case 4:
-            p_reg->INTENCLR4 = mask;
-            break;
-        case 5:
-            p_reg->INTENCLR5 = mask;
-            break;
-        case 6:
-            p_reg->INTENCLR6 = mask;
-            break;
-        default:
-            NRFX_ASSERT(false);
-            break;
-    }
-}
-
-NRF_STATIC_INLINE uint32_t nrf_gpiote_int_group_enable_check(NRF_GPIOTE_Type const * p_reg,
-                                                             uint8_t                 group_idx,
-                                                             uint32_t                mask)
-{
-    NRFX_ASSERT(group_idx < NRF_GPIOTE_INT_COUNT);
-    switch (group_idx)
-    {
-        case 0:
-            return p_reg->INTENSET0 & mask;
-        case 1:
-            return p_reg->INTENSET1 & mask;
-        case 2:
-            return p_reg->INTENSET2 & mask;
-        case 3:
-            return p_reg->INTENSET3 & mask;
-        case 4:
-            return p_reg->INTENSET4 & mask;
-        case 5:
-            return p_reg->INTENSET5 & mask;
-        case 6:
-            return p_reg->INTENSET6 & mask;
-        default:
-            NRFX_ASSERT(false);
-            return 0;
-    }
-}
-#else
-
 NRF_STATIC_INLINE void nrf_gpiote_int_enable(NRF_GPIOTE_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENSET = mask;
+    p_reg->GPIOTE_INTENSET = mask;
 }
 
 NRF_STATIC_INLINE void nrf_gpiote_int_disable(NRF_GPIOTE_Type * p_reg, uint32_t mask)
 {
-    p_reg->INTENCLR = mask;
+    p_reg->GPIOTE_INTENCLR = mask;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_gpiote_int_enable_check(NRF_GPIOTE_Type const * p_reg, uint32_t mask)
 {
-    return p_reg->INTENSET & mask;
+    return p_reg->GPIOTE_INTENSET & mask;
 }
-#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 
 #if defined(DPPI_PRESENT)
 NRF_STATIC_INLINE void nrf_gpiote_subscribe_set(NRF_GPIOTE_Type * p_reg,
