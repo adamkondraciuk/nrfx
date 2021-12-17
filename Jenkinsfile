@@ -11,7 +11,10 @@ pipeline {
         string(name: 'nrfx_verification_branch', defaultValue: "nrfx2.8-dev", description: 'Branch for nrfx_verification repository')
         string(name: 'filtered_unittests', defaultValue: "", description: 'Unit tests filtered from execution (space separated)')
         string(name: 'filtered_ontargettests', defaultValue: "", description: 'On-target tests filtered from execution (space separated)')
-        booleanParam(name: 'NRFX_BUILD_TYPE_DEBUG', defaultValue: false, description: 'Set NRFX_BUILD_TYPE to debug')
+        string(name: 'filtered_power_ontargettests', defaultValue: "", description: 'Power on-target tests filtered from execution (space separated)')
+        choice(name: 'NRFX_BUILD_TYPE', choices: ['release', 'debug'], description: 'Allow you to run debug build')
+        booleanParam(name: 'NRFX_MDK_NIGHTLY', defaultValue: false, description: 'Run build with MDK nightly')
+        string(name: 'MDK_NIGHTLY_BRANCH', defaultValue: "develop", description: 'MDK nightly branch')
     }
     agent {
         docker {
@@ -48,7 +51,10 @@ pipeline {
                                      string(name: 'nrfx_verification_branch', value: nrfx_verification_branch),
                                      string(name: 'filtered_unittests', value: params.filtered_unittests),
                                      string(name: 'filtered_ontargettests', value: params.filtered_ontargettests),
-                                     booleanParam(name: 'NRFX_BUILD_TYPE_DEBUG', value: params.NRFX_BUILD_TYPE_DEBUG)],
+                                     string(name: 'filtered_power_ontargettests', value: params.filtered_power_ontargettests),
+                                     string(name: 'NRFX_BUILD_TYPE', value: params.NRFX_BUILD_TYPE),
+                                     booleanParam(name: 'NRFX_MDK_NIGHTLY', value: params.NRFX_MDK_NIGHTLY),
+                                     string(name: 'MDK_NIGHTLY_BRANCH', value: params.MDK_NIGHTLY_BRANCH)],
                         propagate: true,
                         wait: true
                 }
@@ -102,6 +108,9 @@ Used branches:
 Filtered tests:
 Unit tests: ${params.filtered_unittests}
 On-target tests: ${params.filtered_ontargettests}
+
+Build type: ${params.NRFX_BUILD_TYPE}
+Build with fetched mdk: ${params.NRFX_MDK_NIGHTLY}, branch: ${params.MDK_NIGHTLY_BRANCH}
 
 Have a look at the build:
 ${BUILD_URL}
