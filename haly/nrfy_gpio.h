@@ -46,6 +46,18 @@ NRFY_STATIC_INLINE void nrfy_gpio_cfg(uint32_t             pin_number,
     nrf_barrier_w();
 }
 
+/** @refhal{nrf_gpio_reconfigure} */
+NRFY_STATIC_INLINE void nrfy_gpio_reconfigure(uint32_t                     pin_number,
+                                              const nrf_gpio_pin_dir_t *   p_dir,
+                                              const nrf_gpio_pin_input_t * p_input,
+                                              const nrf_gpio_pin_pull_t *  p_pull,
+                                              const nrf_gpio_pin_drive_t * p_drive,
+                                              const nrf_gpio_pin_sense_t * p_sense)
+{
+    nrf_gpio_reconfigure(pin_number, p_dir, p_input, p_pull, p_drive, p_sense);
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_gpio_cfg_output} */
 NRFY_STATIC_INLINE void nrfy_gpio_cfg_output(uint32_t pin_number)
 {
