@@ -471,6 +471,16 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
                                                size_t           length);
 
 /**
+ * @brief Function for getting the transmit buffer address.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Pointer to the transmit buffer.
+ *
+ */
+NRF_STATIC_INLINE uint8_t const * nrf_uarte_tx_buffer_get(NRF_UARTE_Type * p_reg);
+
+/**
  * @brief Function for getting number of bytes transmitted in the last transaction.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -489,6 +499,15 @@ NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
                                                uint8_t *        p_buffer,
                                                size_t           length);
+
+/**
+ * @brief Function for getting the reception buffer address.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Pointer to the reception buffer.
+ */
+NRF_STATIC_INLINE uint8_t * nrf_uarte_rx_buffer_get(NRF_UARTE_Type * p_reg);
 
 /**
  * @brief Function for getting number of bytes received in the last transaction.
@@ -688,6 +707,11 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
 #endif
 }
 
+NRF_STATIC_INLINE uint8_t const * nrf_uarte_tx_buffer_get(NRF_UARTE_Type * p_reg)
+{
+    return (uint8_t const *)p_reg->TXD.PTR;
+}
+
 NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type const * p_reg)
 {
 #if NRF_UARTE_HAS_DMA_REG
@@ -708,6 +732,11 @@ NRF_STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
     p_reg->RXD.PTR    = (uint32_t)p_buffer;
     p_reg->RXD.MAXCNT = length;
 #endif
+}
+
+NRF_STATIC_INLINE uint8_t * nrf_uarte_rx_buffer_get(NRF_UARTE_Type * p_reg)
+{
+    return (uint8_t *)p_reg->RXD.PTR;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type const * p_reg)
