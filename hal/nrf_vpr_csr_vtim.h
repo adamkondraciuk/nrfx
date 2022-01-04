@@ -1,0 +1,342 @@
+/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+
+#ifndef NRF_VPR_CSR_VTIM_H__
+#define NRF_VPR_CSR_VTIM_H__
+
+#include <nrfx.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @defgroup nrf_vpr_csr_vtim_hal VPR CSR VTIM HAL
+ * @{
+ * @ingroup nrf_vpr
+ * @brief   Hardware access layer for managing the VPR RISC-V CPU Control
+ *          and Status Registers for VPR Timer (VPR CSR VTIM).
+ */
+
+/** @brief Counter modes. */
+typedef enum
+{
+    NRF_VPR_CSR_VTIM_COUNT_STOP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE_STOP,     ///< Counter stops at 0.
+    NRF_VPR_CSR_VTIM_COUNT_WRAP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE_WRAP,     ///< Counter will continue counting from 0xFFF.
+    NRF_VPR_CSR_VTIM_COUNT_RELOAD           = VPRCSR_NORDIC_CNTMODE0_CNTMODE_RELOAD,   ///< Counter will continue counting from the value in counter top.
+    NRF_VPR_CSR_VTIM_COUNT_TRIGGER_COMBINED = VPRCSR_NORDIC_CNTMODE0_CNTMODE_TRIGCOMB, ///< Trigger (counter 0) or combined (counter 1) mode.
+                                                                                       /**< Trigger (applies to counter 0): Counter stops at 0.
+                                                                                        *   Counting will restart when a VIO event happens.
+                                                                                        *   Combined (applies to counter 1): Counter 1 acts as an extension of counter 0.
+                                                                                        *   (16 most significant bits of a 32-bit counter.) */
+} nrf_vpr_csr_vtim_count_t;
+
+/**
+ * @brief Function for getting the counter mode.
+ *
+ * @param[in] counter Index of the counter.
+ *
+ * @return Counter mode.
+ */
+NRF_STATIC_INLINE nrf_vpr_csr_vtim_count_t nrf_vpr_cst_vtim_count_mode_get(uint8_t counter);
+
+/**
+ * @brief Function for setting the counter mode.
+ *
+ * @param[in] counter Index of the counter.
+ * @param[in] mode    Counter mode to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_count_mode_set(uint8_t                  counter,
+                                                       nrf_vpr_csr_vtim_count_t mode);
+
+/**
+ * @brief Function for getting the counter value.
+ *
+ * @param[in] counter Index of the counter.
+ *
+ * @return Counter value.
+ */
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_get(uint8_t counter);
+
+/**
+ * @brief Function for setting the counter value.
+ *
+ * @param[in] counter Index of the counter.
+ * @param[in] value   Value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_set(uint8_t counter, uint16_t value);
+
+/**
+ * @brief Function for getting the counter top.
+ *
+ * @param[in] counter Index of the counter.
+ *
+ * @return Counter top.
+ */
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_top_get(uint8_t counter);
+
+/**
+ * @brief Function for setting the counter top.
+ *
+ * @param[in] counter Index of the counter.
+ * @param[in] value   Top value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_top_set(uint8_t counter, uint16_t value);
+
+/**
+ * @brief Function for setting the counter add.
+ *
+ * @param[in] counter Index of the counter.
+ * @param[in] value   Add value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_add_set(uint8_t counter, uint16_t value);
+
+/**
+ * @brief Function for setting the wait register.
+ *
+ * Writing to this register will stall the CPU until counter reaches 0.
+ *
+ * @param[in] counter Index of the counter.
+ * @param[in] write   True if @p value is to be writtten to the counter value before starting the wait.
+ *                    False otherwise.
+ * @param[in] value   Value to be written to the counter if @p write is true.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_wait_set(uint8_t  counter,
+                                                        bool     write,
+                                                        uint16_t value);
+
+/**
+ * @brief Function for getting the combined counter value.
+ *
+ * @note Lower 16 bits represent counter 0, while higher 16 bits represent counter 1.
+ *
+ * @return Counter value.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_get(void);
+
+/**
+ * @brief Function for setting the combined counter value.
+ *
+ * @note Lower 16 bits represent counter 0, while higher 16 bits represent counter 1.
+ *
+ * @param[in] value Value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_set(uint32_t value);
+
+/**
+ * @brief Function for getting the combined counter top.
+ *
+ * @note Lower 16 bits represent counter 0, while higher 16 bits represent counter 1.
+ *
+ * @return Counter top.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_top_get(void);
+
+/**
+ * @brief Function for setting the combined counter top.
+ *
+ * @note Lower 16 bits represent counter 0, while higher 16 bits represent counter 1.
+ *
+ * @param[in] value Top value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_top_set(uint32_t value);
+
+/**
+ * @brief Function for setting the combined counter add.
+ *
+ * @note This function should be used in 32-bit counter mode.
+ *
+ * @param[in] value Add value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_add_set(uint32_t value);
+
+/**
+ * @brief Function for triggering the wait.
+ *
+ * Writing to this register will stall the CPU until 32-bit counter reaches 0.
+ *
+ * @note This function should be used in 32-bit counter mode.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_wait_trigger(void);
+
+#ifndef NRF_DECLARE_ONLY
+
+NRF_STATIC_INLINE nrf_vpr_csr_vtim_count_t nrf_vpr_cst_vtim_count_mode_get(uint8_t counter)
+{
+    switch (counter)
+    {
+        case 0:
+            return csr_read(VPRCSR_NORDIC_CNTMODE0);
+        case 1:
+            return csr_read(VPRCSR_NORDIC_CNTMODE1);
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_count_mode_set(uint8_t                  counter,
+                                                       nrf_vpr_csr_vtim_count_t mode)
+{
+    switch (counter)
+    {
+        case 0:
+            csr_write(VPRCSR_NORDIC_CNTMODE0, mode);
+            break;
+        case 1:
+            csr_write(VPRCSR_NORDIC_CNTMODE1, mode);
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_get(uint8_t counter)
+{
+    switch (counter)
+    {
+        case 0:
+            return csr_read(VPRCSR_NORDIC_CNT0);
+        case 1:
+            return csr_read(VPRCSR_NORDIC_CNT1);
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_set(uint8_t counter, uint16_t value)
+{
+    switch (counter)
+    {
+        case 0:
+            csr_write(VPRCSR_NORDIC_CNT0, value);
+            break;
+        case 1:
+            csr_write(VPRCSR_NORDIC_CNT1, value);
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_top_get(uint8_t counter)
+{
+    switch (counter)
+    {
+        case 0:
+            return (csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Msk)
+                   >> VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Pos;
+        case 1:
+            return (csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Msk)
+                   >> VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Pos;
+        default:
+            return 0;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_top_set(uint8_t counter, uint16_t value)
+{
+    uint32_t reg;
+
+    switch (counter)
+    {
+        case 0:
+            reg = csr_read(VPRCSR_NORDIC_CNTTOP);
+            reg &= ~VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Msk;
+            reg |= value << VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Pos;
+            csr_write(VPRCSR_NORDIC_CNTTOP, reg);
+            break;
+        case 1:
+            reg = csr_read(VPRCSR_NORDIC_CNTTOP);
+            reg &= ~VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Msk;
+            reg |= value << VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Pos;
+            csr_write(VPRCSR_NORDIC_CNTTOP, reg);
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_add_set(uint8_t counter, uint16_t value)
+{
+    switch (counter)
+    {
+        case 0:
+            csr_write(VPRCSR_NORDIC_CNTADD0, value);
+            break;
+        case 1:
+            csr_write(VPRCSR_NORDIC_CNTADD1, value);
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_wait_set(uint8_t counter, bool write, uint16_t value)
+{
+    switch (counter)
+    {
+        case 0:
+            csr_write(VPRCSR_NORDIC_WAIT0,
+                      ((write ? VPRCSR_NORDIC_WAIT0_WRITEDATA_WRITE :
+                                VPRCSR_NORDIC_WAIT0_WRITEDATA_WAIT)
+                       << VPRCSR_NORDIC_WAIT0_WRITEDATA_Pos) |
+                      (value << VPRCSR_NORDIC_WAIT0_DATA_Pos));
+            break;
+        case 1:
+            csr_write(VPRCSR_NORDIC_WAIT1,
+                      ((write ? VPRCSR_NORDIC_WAIT1_WRITEDATA_WRITE :
+                                VPRCSR_NORDIC_WAIT1_WRITEDATA_WAIT)
+                       << VPRCSR_NORDIC_WAIT1_WRITEDATA_Pos) |
+                      (value << VPRCSR_NORDIC_WAIT1_DATA_Pos));
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_CNT);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_CNT, value);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_top_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_CNTTOP);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_top_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_CNTTOP, value);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_add_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_CNTADD, value);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_wait_trigger(void)
+{
+    /* Writing any value will trigger wait. */
+    csr_write(VPRCSR_NORDIC_WAIT, VPRCSR_NORDIC_WAIT_VAL_Msk);
+}
+
+#endif // NRF_DECLARE_ONLY
+
+/** @} */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NRF_VPR_CSR_VTIM_H__
