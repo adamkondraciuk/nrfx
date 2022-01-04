@@ -1,0 +1,217 @@
+/*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
+
+#ifndef NRF_VPR_CSR_VEVIF_H__
+#define NRF_VPR_CSR_VEVIF_H__
+
+#include <nrfx.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @defgroup nrf_vpr_csr_vevif_hal VPR CSR VEVIF HAL
+ * @{
+ * @ingroup nrf_vpr
+ * @brief   Hardware access layer for managing the VPR RISC-V CPU Control
+ *          and Status Registers for VPR Event Interface (VPR CSR VEVIF).
+ */
+
+/** @brief Number of VEVIF events/tasks. */
+/* @todo Use MDK when available. */
+#define NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT 32
+
+/**
+ * @brief Function for getting mask of pending VEVIF tasks.
+ *
+ * @return Mask of pending VEVIF tasks.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_tasks_get(void);
+
+/**
+ * @brief Function for clearing mask of pending VEVIF tasks.
+ *
+ * @param[in] mask Mask of VEVIF tasks to be cleared.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_clear(uint32_t mask);
+
+/**
+ * @brief Function for setting pending VEVIF tasks.
+ *
+ * @param[in] value VEVIF tasks value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_set(uint32_t value);
+
+/**
+ * @brief Function for getting mask of triggered VEVIF events.
+ *
+ * @return Mask of triggered VEVIF events.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_events_get(void);
+
+/**
+ * @brief Function for setting triggered VEVIF events.
+ *
+ * @param[in] value VEVIF events value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_set(uint32_t value);
+
+/**
+ * @brief Function for triggering VEVIF events.
+ *
+ * @param[in] mask Mask of VEVIF events to be triggered.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_trigger(uint32_t mask);
+
+/**
+ * @brief Function for setting buffered triggered VEVIF events.
+ *
+ * @param[in] value Buffered VEVIF events value to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_buffered_set(uint32_t value);
+
+/**
+ * @brief Function for retrieving the dirty status of buffered VEVIF events.
+ *
+ * @retval true  Buffer is dirty.
+ * @retval false Buffer is clean.
+ */
+NRF_STATIC_INLINE bool nrf_vpr_csr_vevif_events_buffered_dirty_check(void);
+
+/**
+ * @brief Function for getting the subscribe configuration for VEVIF.
+ *
+ * @return Mask of tasks with enabled subscription.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_subscribe_get(void);
+
+/**
+ * @brief Function for setting the subscribe configuration for VEVIF.
+ *
+ * @param[in] value VEVIF subscription configuration mask to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_subscribe_set(uint32_t value);
+
+/**
+ * @brief Function for getting the publish configuration for VEVIF.
+ *
+ * @return Mask of events with enabled publication.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_publish_get(void);
+
+/**
+ * @brief Function for setting the publish configuration for VEVIF.
+ *
+ * @param[in] value VEVIF publication configuration mask to be set.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_publish_set(uint32_t value);
+
+/**
+ * @brief Function for enabling the specified interrupts.
+ *
+ * @param[in] mask Mask of interrupts to be enabled.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_enable(uint32_t mask);
+
+/**
+ * @brief Function for disabling the specified interrupts.
+ *
+ * @param[in] mask Mask of interrupts to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_disable(uint32_t mask);
+
+/**
+ * @brief Function for checking it the specified interrupts are enabled.
+ *
+ * @param[in] mask Mask of interrupts to be checked.
+ *
+ * @return Mask of enabled interrupts.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_int_enable_check(uint32_t mask);
+
+#ifndef NRF_DECLARE_ONLY
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_tasks_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_TASKS);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_clear(uint32_t mask)
+{
+    csr_clear_bits(VPRCSR_NORDIC_TASKS, mask);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_TASKS, value);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_events_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_EVENTS);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_EVENTS, value);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_trigger(uint32_t mask)
+{
+    csr_set_bits(VPRCSR_NORDIC_EVENTS, mask);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_buffered_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_EVENTSB, value);
+}
+
+NRF_STATIC_INLINE bool nrf_vpr_csr_vevif_events_buffered_dirty_check(void)
+{
+    return ((csr_read(VPRCSR_NORDIC_EVENTSBS) & VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_Msk)
+            >> VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_Pos) == VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_DIRTY;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_subscribe_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_SUBCRIBE);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_subscribe_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_SUBCRIBE, value);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_publish_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_PUBLISH);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_publish_set(uint32_t value)
+{
+    csr_write(VPRCSR_NORDIC_PUBLISH, value);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_enable(uint32_t mask)
+{
+    csr_set_bits(VPRCSR_NORDIC_INTEN, mask);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_disable(uint32_t mask)
+{
+    csr_clear_bits(VPRCSR_NORDIC_INTEN, mask);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_int_enable_check(uint32_t mask)
+{
+    return csr_read(VPRCSR_NORDIC_INTEN) & mask;
+}
+
+#endif // NRF_DECLARE_ONLY
+
+/** @} */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NRF_VPR_CSR_VEVIF_H__
