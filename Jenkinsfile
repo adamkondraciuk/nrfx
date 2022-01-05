@@ -16,13 +16,7 @@ pipeline {
         booleanParam(name: 'NRFX_MDK_NIGHTLY', defaultValue: false, description: 'Run build with MDK nightly')
         string(name: 'MDK_NIGHTLY_BRANCH', defaultValue: "develop", description: 'MDK nightly branch')
     }
-    agent {
-        docker {
-            label 'linux && build-ncs && !nrfx-coverity'
-            image "docker-dtr.nordicsemi.no/babu/ncs-riscv-wine:2.8.2"
-            args ' --privileged -e HOME=/home/buran_ci'
-        }
-    }
+    agent none
     stages{
         stage('Run dependent jobs') {
             steps {
@@ -61,24 +55,40 @@ pipeline {
             }
         }
         stage('Generate documentation') {
+            agent {
+                docker {
+                    label 'linux && build-ncs && !nrfx-coverity'
+                        image "docker-dtr.nordicsemi.no/sw-production/ncs-int:2.8.2"
+                        args ' --privileged -e HOME=/home/buran_ci'
+                }
+            }
             steps {
                 script {
                     dir("doc") {
                         sh "./generate_sphinx_doc.sh"
-                    }
-                    if (fileExists('doc/warnings_nrfx.txt')){
-                        def output_file = readFile("doc/warnings_nrfx.txt")
-                        if (output_file.size() != 0) {
-                            unstable 'Documentation building generated warnings.'
+                        if (fileExists('warnings_nrfx.txt')){
+                            def output_file = readFile("warnings_nrfx.txt")
+                            if (output_file.size() != 0) {
+                                unstable 'Documentation building generated warnings.'
+                            }
                         }
+                        zip archive: true, dir: 'html_sphinx', glob: '', zipFile: 'html_sphinx.zip'
+                        stash allowEmpty: true, name: 'documentation_stash'
                     }
-                    zip archive: true, dir: 'doc/html_sphinx', glob: '', zipFile: 'html_sphinx.zip'
                 }
             }
         }
     }
     post {
-        always {
+        always { node (null) {
+            // unstash built documentation (if exists)
+            script { try {
+               unstash name: 'documentation_stash'
+            } catch (error) {
+               echo "error unstashing: ${error}"
+            } }
+            
+            // copy & archive results from downstream jobs
             copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/nrfx-api-check/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
@@ -86,11 +96,14 @@ pipeline {
             copyArtifacts projectName: "NRFX/nrfx-coverity/${nrfx_verification_branch}", selector: lastCompleted(), target: 'work/nrfx-verification/'
 
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
-            archiveArtifacts allowEmptyArchive: true, artifacts: "doc/warnings_nrfx.txt"
+            archiveArtifacts allowEmptyArchive: true, artifacts: "warnings_nrfx.txt"
             archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
 
+            // process results
             junit 'work/nrfx-verification/outcomes/*/*.xml'
-
+            
+            
+            // send an e-mail with build result
             script {
                 def result = currentBuild.currentResult
                 emailext recipientProviders: [requestor()],
@@ -129,6 +142,6 @@ Cheers,
 Jenkins
 """
             }
-        }
+        } }
     }
 }
