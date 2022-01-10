@@ -39,7 +39,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_timer_events_process(NRF_TIMER_Type 
 /** @brief TIMER configuration structure. */
 typedef struct
 {
-    nrf_timer_frequency_t frequency; ///< Frequency.
+    uint32_t              prescaler; ///< Prescaler value.
     nrf_timer_mode_t      mode;      ///< Mode of operation.
     nrf_timer_bit_width_t bit_width; ///< Bit width.
 } nrfy_timer_config_t;
@@ -55,7 +55,7 @@ NRFY_STATIC_INLINE void nrfy_timer_periph_configure(NRF_TIMER_Type *            
 {
     nrf_timer_mode_set(p_reg, p_config->mode);
     nrf_timer_bit_width_set(p_reg, p_config->bit_width);
-    nrf_timer_frequency_set(p_reg, p_config->frequency);
+    nrf_timer_prescaler_set(p_reg, p_config->prescaler);
     nrf_barrier_w();
 }
 
@@ -297,21 +297,20 @@ NRFY_STATIC_INLINE nrf_timer_bit_width_t nrfy_timer_bit_width_get(NRF_TIMER_Type
     return bit_width;
 }
 
-/** @refhal{nrf_timer_frequency_set} */
-NRFY_STATIC_INLINE void nrfy_timer_frequency_set(NRF_TIMER_Type *      p_reg,
-                                                 nrf_timer_frequency_t frequency)
+/** @refhal{nrf_timer_prescaler_set} */
+NRF_STATIC_INLINE void nrfy_timer_prescaler_set(NRF_TIMER_Type * p_reg, uint32_t prescaler_factor)
 {
-    nrf_timer_frequency_set(p_reg, frequency);
+    nrf_timer_prescaler_set(p_reg, prescaler_factor);
     nrf_barrier_w();
 }
 
-/** @refhal{nrf_timer_frequency_get} */
-NRFY_STATIC_INLINE nrf_timer_frequency_t nrfy_timer_frequency_get(NRF_TIMER_Type const * p_reg)
+/** @refhal{nrf_timer_prescaler_get} */
+NRF_STATIC_INLINE uint32_t nrfy_timer_prescaler_get(NRF_TIMER_Type const * p_reg)
 {
     nrf_barrier_rw();
-    nrf_timer_frequency_t frequency = nrf_timer_frequency_get(p_reg);
+    uint32_t prescaler = nrf_timer_prescaler_get(p_reg);
     nrf_barrier_r();
-    return frequency;
+    return prescaler;
 }
 
 /** @refhal{nrf_timer_cc_set} */
@@ -349,20 +348,6 @@ NRFY_STATIC_INLINE nrf_timer_event_t nrfy_timer_compare_event_get(uint8_t channe
 NRFY_STATIC_INLINE nrf_timer_int_mask_t nrfy_timer_compare_int_get(uint8_t channel)
 {
     return nrf_timer_compare_int_get(channel);
-}
-
-/** @refhal{nrf_timer_us_to_ticks} */
-NRFY_STATIC_INLINE uint32_t nrfy_timer_us_to_ticks(uint32_t              time_us,
-                                                   nrf_timer_frequency_t frequency)
-{
-    return nrf_timer_us_to_ticks(time_us, frequency);
-}
-
-/** @refhal{nrf_timer_ms_to_ticks} */
-NRFY_STATIC_INLINE uint32_t nrfy_timer_ms_to_ticks(uint32_t              time_ms,
-                                                   nrf_timer_frequency_t frequency)
-{
-    return nrf_timer_ms_to_ticks(time_ms, frequency);
 }
 
 #if NRFY_TIMER_HAS_ONE_SHOT

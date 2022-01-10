@@ -197,6 +197,16 @@ extern "C" {
 #define NRFX_OFFSETOF(type, member)  ((size_t)&(((type *)0)->member))
 
 /**
+ * @brief Macro for checking whether given number is power of 2.
+ *
+ * @param[in] val Tested value.
+ *
+ * @retval true  The value is power of 2.
+ * @retval false The value is not power of 2.
+ */
+#define NRFX_IS_POWER_OF_TWO(val) ((val != 0) && (val & (val - 1)) == 0)
+
+/**
  * @brief Macro for checking if given lengths of EasyDMA transfers do not exceed
  *        the limit of the specified peripheral.
  *

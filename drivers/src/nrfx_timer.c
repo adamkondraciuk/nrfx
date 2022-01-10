@@ -6,12 +6,13 @@
 
 #if !(NRFX_CHECK(NRFX_TIMER0_ENABLED)   || NRFX_CHECK(NRFX_TIMER1_ENABLED)   || \
       NRFX_CHECK(NRFX_TIMER2_ENABLED)   || NRFX_CHECK(NRFX_TIMER3_ENABLED)   || \
-      NRFX_CHECK(NRFX_TIMER4_ENABLED)   || NRFX_CHECK(NRFX_TIMER120_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER121_ENABLED) || NRFX_CHECK(NRFX_TIMER130_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER131_ENABLED) || NRFX_CHECK(NRFX_TIMER132_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER133_ENABLED) || NRFX_CHECK(NRFX_TIMER134_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER135_ENABLED) || NRFX_CHECK(NRFX_TIMER136_ENABLED) || \
-      NRFX_CHECK(NRFX_TIMER137_ENABLED))
+      NRFX_CHECK(NRFX_TIMER4_ENABLED)   || NRFX_CHECK(NRFX_TIMER020_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER021_ENABLED) || NRFX_CHECK(NRFX_TIMER022_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER120_ENABLED) || NRFX_CHECK(NRFX_TIMER121_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER130_ENABLED) || NRFX_CHECK(NRFX_TIMER131_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER132_ENABLED) || NRFX_CHECK(NRFX_TIMER133_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER134_ENABLED) || NRFX_CHECK(NRFX_TIMER135_ENABLED) || \
+      NRFX_CHECK(NRFX_TIMER136_ENABLED) || NRFX_CHECK(NRFX_TIMER137_ENABLED))
 #error "No enabled TIMER instances. Check <nrfx_config.h>."
 #endif
 
@@ -36,28 +37,37 @@
 #if NRFX_CHECK(NRFX_TIMER121_ENABLED) && ((1 << 6) & NRFX_TIMERS_USED)
     #error "TIMER instance 121 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER130_ENABLED) && ((1 << 7) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER020_ENABLED) && ((1 << 7) & NRFX_TIMERS_USED)
+    #error "TIMER instance 020 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER021_ENABLED) && ((1 << 8) & NRFX_TIMERS_USED)
+    #error "TIMER instance 021 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER022_ENABLED) && ((1 << 9) & NRFX_TIMERS_USED)
+    #error "TIMER instance 022 is reserved for use outside of nrfx."
+#endif
+#if NRFX_CHECK(NRFX_TIMER130_ENABLED) && ((1 << 10) & NRFX_TIMERS_USED)
     #error "TIMER instance 130 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER131_ENABLED) && ((1 << 8) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER131_ENABLED) && ((1 << 11) & NRFX_TIMERS_USED)
     #error "TIMER instance 131 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER132_ENABLED) && ((1 << 9) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER132_ENABLED) && ((1 << 12) & NRFX_TIMERS_USED)
     #error "TIMER instance 132 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER133_ENABLED) && ((1 << 10) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER133_ENABLED) && ((1 << 13) & NRFX_TIMERS_USED)
     #error "TIMER instance 133 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER134_ENABLED) && ((1 << 11) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER134_ENABLED) && ((1 << 14) & NRFX_TIMERS_USED)
     #error "TIMER instance 134 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER135_ENABLED) && ((1 << 12) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER135_ENABLED) && ((1 << 15) & NRFX_TIMERS_USED)
     #error "TIMER instance 135 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER136_ENABLED) && ((1 << 13) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER136_ENABLED) && ((1 << 16) & NRFX_TIMERS_USED)
     #error "TIMER instance 136 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER137_ENABLED) && ((1 << 14) & NRFX_TIMERS_USED)
+#if NRFX_CHECK(NRFX_TIMER137_ENABLED) && ((1 << 17) & NRFX_TIMERS_USED)
     #error "TIMER instance 137 is reserved for use outside of nrfx."
 #endif
 
@@ -79,29 +89,25 @@ static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 static void timer_configure(nrfx_timer_t const *        p_instance,
                             nrfx_timer_config_t const * p_config)
 {
-    nrfy_timer_config_t config =
-    {
-        .frequency = p_config->frequency,
-        .mode      = p_config->mode,
-        .bit_width = p_config->bit_width,
-    };
-    nrfy_timer_periph_configure(p_instance->p_reg, &config);
+    nrfy_timer_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
 
     nrfy_timer_int_init(p_instance->p_reg,
                         NRF_TIMER_ALL_CHANNELS_INT_MASK,
                         p_config->interrupt_priority,
                         false);
 }
+static uint32_t prescaler_calculate(uint32_t base_frequency, uint32_t frequency)
+{
+    NRFX_ASSERT(base_frequency / frequency > 0);
+    return 31 - NRF_CLZ(base_frequency / frequency);
+}
 
 nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
                            nrfx_timer_config_t const * p_config,
                            nrfx_timer_event_handler_t  timer_event_handler)
 {
-    timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
-#ifdef SOFTDEVICE_PRESENT
-    NRFX_ASSERT(p_instance->p_reg != NRF_TIMER0);
-#endif
     NRFX_ASSERT(p_config);
+    timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
     nrfx_err_t err_code;
 
@@ -119,9 +125,11 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
     if (p_config)
     {
         p_cb->context = p_config->p_context;
-        NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
+        NRFX_ASSERT(p_config->nrfy_config.prescaler <= NRF_TIMER_PRESCALER_MAX);
+        NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->nrfy_config.bit_width));
         timer_configure(p_instance, p_config);
     }
+
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
     err_code = NRFX_SUCCESS;
@@ -135,6 +143,8 @@ nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
                                   nrfx_timer_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(p_config->nrfy_config.prescaler <= NRF_TIMER_PRESCALER_MAX);
+    NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->nrfy_config.bit_width));
     timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -161,6 +171,32 @@ void nrfx_timer_uninit(nrfx_timer_t const * p_instance)
 
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized instance: %d.", p_instance->instance_id);
+}
+
+nrfx_err_t nrfx_timer_prescaler_calculate(nrfx_timer_t const * p_instance,
+                                          uint32_t             frequency,
+                                          uint32_t *           prescaler)
+{
+    NRFX_ASSERT(prescaler);
+    (void)p_instance;
+    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
+
+    if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+    *prescaler = prescaler_calculate(base_frequency, frequency);
+    return NRFX_SUCCESS;
+}
+
+bool nrfx_timer_frequency_vaild_check(nrfx_timer_t const * p_instance,
+                                      uint32_t             frequency)
+{
+    (void)p_instance;
+    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
+
+    return NRFX_IS_POWER_OF_TWO(base_frequency / (uint32_t)frequency) &&
+               ((base_frequency / frequency) <= (1 << NRF_TIMER_PRESCALER_MAX));
 }
 
 void nrfx_timer_enable(nrfx_timer_t const * p_instance)
@@ -220,6 +256,24 @@ uint32_t nrfx_timer_capture(nrfx_timer_t const *   p_instance,
     NRFX_ASSERT(cc_channel < p_instance->cc_channel_count);
 
     return nrfy_timer_capture_get(p_instance->p_reg, cc_channel);
+}
+
+uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance,
+                                uint32_t             time_us)
+{
+    uint32_t prescaler = nrfy_timer_prescaler_get(p_instance->p_reg);
+    uint32_t freq_base_mhz = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / 1000000;
+    uint64_t ticks = (((uint64_t)time_us * freq_base_mhz) >> prescaler);
+    return (uint32_t)ticks;
+}
+
+uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance,
+                                uint32_t             time_ms)
+{
+    uint32_t prescaler = nrfy_timer_prescaler_get(p_instance->p_reg);
+    uint32_t freq_base_khz = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / 1000;
+    uint64_t ticks = (((uint64_t)time_ms * freq_base_khz) >> prescaler);
+    return (uint32_t)ticks;
 }
 
 void nrfx_timer_compare(nrfx_timer_t const *   p_instance,
@@ -347,6 +401,30 @@ void nrfx_timer_4_irq_handler(void)
 {
     irq_handler(NRF_TIMER4, &m_cb[NRFX_TIMER4_INST_IDX],
         NRF_TIMER_CC_CHANNEL_COUNT(4));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER020_ENABLED)
+void nrfx_timer_020_irq_handler(void)
+{
+    irq_handler(NRF_TIMER020, &m_cb[NRFX_TIMER020_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(020));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER021_ENABLED)
+void nrfx_timer_021_irq_handler(void)
+{
+    irq_handler(NRF_TIMER021, &m_cb[NRFX_TIMER021_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(021));
+}
+#endif
+
+#if NRFX_CHECK(NRFX_TIMER022_ENABLED)
+void nrfx_timer_022_irq_handler(void)
+{
+    irq_handler(NRF_TIMER022, &m_cb[NRFX_TIMER022_INST_IDX],
+        NRF_TIMER_CC_CHANNEL_COUNT(022));
 }
 #endif
 

@@ -39,7 +39,19 @@ extern "C" {
 #define TIMER135_MAX_SIZE 32
 #define TIMER136_MAX_SIZE 32
 #define TIMER137_MAX_SIZE 32
-#endif
+
+#if defined(NRF_RADIOCORE)
+/* TODO: Verify values below when appear in PS. */
+#define TIMER020_CC_NUM 6
+#define TIMER021_CC_NUM 6
+#define TIMER022_CC_NUM 6
+
+#define TIMER020_MAX_SIZE 32
+#define TIMER021_MAX_SIZE 32
+#define TIMER022_MAX_SIZE 32
+#endif //defined(NRF_RADIOCORE)
+
+#endif //defined(HALTIUM_XXAA)
 
 /**
  * @brief Macro getting pointer to the structure of registers of the TIMER peripheral.
@@ -92,11 +104,20 @@ extern "C" {
 #define NRF_TIMER_HAS_ONE_SHOT 0
 #endif
 
-/** @brief Base frequency value 16 MHz for timer. */
-#define NRF_TIMER_BASE_FREQUENCY_16MHZ (16000000UL)
+// TODO: Replace magic numbers with MDK symbols when available.
+/** @brief Base frequency value 320 MHz for TIMER. */
+#define NRF_TIMER_BASE_FREQUENCY_320MHZ (320000000UL)
+/** @brief Base frequency value 32 MHz for TIMER. */
+#define NRF_TIMER_BASE_FREQUENCY_32MHZ  (32000000UL)
+/** @brief Base frequency value 16 MHz for TIMER. */
+#define NRF_TIMER_BASE_FREQUENCY_16MHZ  (16000000UL)
 
 /** @brief Maximum value of PRESCALER register. */
+#if defined(HALTIUM_XXAA)
+#define NRF_TIMER_PRESCALER_MAX TIMER_PRESCALER_PRESCALER_Max
+#else
 #define NRF_TIMER_PRESCALER_MAX 9
+#endif
 
 /**
  * @brief Macro for getting the maximum bit resolution of the specified timer instance.
@@ -139,9 +160,31 @@ extern "C" {
  * @retval false Timer instance does not support the specified bit width resolution value.
  */
 #if defined(HALTIUM_XXAA)
-    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) \
-        (p_reg == NRF_TIMER120 && TIMER_BIT_WIDTH_MAX(120, bit_width))
-#else
+    #if defined(NRF_RADIOCORE)
+        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) (                 \
+               (p_reg == NRF_TIMER020 && TIMER_BIT_WIDTH_MAX(020, bit_width)) \
+            || (p_reg == NRF_TIMER021 && TIMER_BIT_WIDTH_MAX(021, bit_width)) \
+            || (p_reg == NRF_TIMER022 && TIMER_BIT_WIDTH_MAX(022, bit_width)))
+    #else
+        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) 0
+    #endif
+
+    #define NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width) (                \
+           (p_reg == NRF_TIMER120 && TIMER_BIT_WIDTH_MAX(120, bit_width)) \
+        || (p_reg == NRF_TIMER121 && TIMER_BIT_WIDTH_MAX(121, bit_width)) \
+        || (p_reg == NRF_TIMER130 && TIMER_BIT_WIDTH_MAX(130, bit_width)) \
+        || (p_reg == NRF_TIMER131 && TIMER_BIT_WIDTH_MAX(131, bit_width)) \
+        || (p_reg == NRF_TIMER132 && TIMER_BIT_WIDTH_MAX(132, bit_width)) \
+        || (p_reg == NRF_TIMER133 && TIMER_BIT_WIDTH_MAX(133, bit_width)) \
+        || (p_reg == NRF_TIMER134 && TIMER_BIT_WIDTH_MAX(134, bit_width)) \
+        || (p_reg == NRF_TIMER135 && TIMER_BIT_WIDTH_MAX(135, bit_width)) \
+        || (p_reg == NRF_TIMER136 && TIMER_BIT_WIDTH_MAX(136, bit_width)) \
+        || (p_reg == NRF_TIMER137 && TIMER_BIT_WIDTH_MAX(137, bit_width)))
+
+    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width)      \
+                (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) || \
+                NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
+#else // defined(HALTIUM_XXAA)
     #if (TIMER_COUNT == 3) || defined(__NRFX_DOXYGEN__)
         #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
                ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width))   \
@@ -166,11 +209,44 @@ extern "C" {
 #endif // defined(HALTIUM_XXAA)
 
 /**
+ * @brief Macros for checking whether the specified instance represents high-speed (320 MHz),
+ *        higher-speed (32 MHz), or normal-speed timer (16 MHz).
+ */
+#if defined(HALTIUM_XXAA)
+    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) ( \
+           (p_reg == NRF_TIMER120)             \
+        || (p_reg == NRF_TIMER121))
+    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
+           (p_reg == NRF_TIMER130)             \
+        || (p_reg == NRF_TIMER131)             \
+        || (p_reg == NRF_TIMER132)             \
+        || (p_reg == NRF_TIMER133)             \
+        || (p_reg == NRF_TIMER134)             \
+        || (p_reg == NRF_TIMER135)             \
+        || (p_reg == NRF_TIMER136)             \
+        || (p_reg == NRF_TIMER137))
+    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
+           (p_reg == NRF_TIMER020)             \
+        || (p_reg == NRF_TIMER021)             \
+        || (p_reg == NRF_TIMER022))
+#else
+    /** @brief Macro for checking whether the base frequency for the specified timer is 320 MHz. */
+    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
+    /** @brief Macro for checking whether the base frequency for the specified timer is 16 MHz. */
+    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg)  true
+    /** @brief Macro for checking whether the base frequency for the specified timer is 32 MHz. */
+    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg)  false
+#endif // defined(HALTIUM_XXAA)
+
+/**
  * @brief Macro for getting base frequency value in Hz for the specified timer.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-#define NRF_TIMER_BASE_FREQUENCY_GET(p_reg) NRF_TIMER_BASE_FREQUENCY_16MHZ
+#define NRF_TIMER_BASE_FREQUENCY_GET(p_reg)                               \
+    (NRF_TIMER_IS_320MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_320MHZ): \
+    ((NRF_TIMER_IS_16MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_16MHZ) : \
+    (NRF_TIMER_BASE_FREQUENCY_32MHZ))
 
 /**
  * @brief Macro for computing prescaler value for given base frequency and desired frequency.
@@ -189,7 +265,7 @@ extern "C" {
  *
  * @param[in] id Index of the specified timer instance.
  */
-#define NRF_TIMER_CC_CHANNEL_COUNT(id)  NRFX_CONCAT_3(TIMER, id, _CC_NUM)
+#define NRF_TIMER_CC_CHANNEL_COUNT(id) NRFX_CONCAT_3(TIMER, id, _CC_NUM)
 
 /** @brief Symbol specifying maximum number of available compare channels. */
 #define NRF_TIMER_CC_COUNT_MAX NRFX_ARRAY_SIZE(((NRF_TIMER_Type*)0)->EVENTS_COMPARE)
