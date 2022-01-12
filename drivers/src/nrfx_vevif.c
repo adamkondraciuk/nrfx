@@ -6,6 +6,8 @@
 
 #include <nrfx_vevif.h>
 #include <nrf_bitmask.h>
+#include <hal/nrf_vpr_csr.h>
+#include <hal/nrf_vpr_csr_vevif.h>
 
 #define NRFX_VEVIF_IRQ_HANDLER(idx)       \
 void nrfx_vevif_##idx##_irq_handler(void) \
@@ -35,7 +37,16 @@ nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
     m_cb.p_context = p_context;
     m_cb.state     = NRFX_DRV_STATE_INITIALIZED;
 
-    nrfy_vpr_int_init(NRF_VPR, 0, interrupt_priority, false);
+    /* @todo This should be done in startup */
+    nrf_vpr_csr_machine_interrupts_enable();
+
+    nrf_vpr_csr_rtperiph_enable_set(true);
+    nrf_vpr_csr_vevif_tasks_set(0);
+
+    for (uint8_t i = 0; i < NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT; i++)
+    {
+        NRFY_IRQ_PRIORITY_SET((VPR_0_IRQn + i), interrupt_priority);
+    }
 
     return NRFX_SUCCESS;
 }
@@ -44,7 +55,10 @@ void nrfx_vevif_uninit(void)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
-    nrfy_vpr_int_uninit(NRF_VPR);
+    for (uint8_t i = 0; i < NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT; i++)
+    {
+        NRFY_IRQ_DISABLE(VPR_0_IRQn + i);
+    }
 
     m_cb.handler = NULL;
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
@@ -57,7 +71,7 @@ void nrfx_vevif_int_enable(uint32_t mask)
     while (mask != 0)
     {
         uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
-        nrfy_vpr_int_enable(NRF_VPR, event_no);
+        NRFY_IRQ_ENABLE(VPR_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
 }
@@ -69,18 +83,17 @@ void nrfx_vevif_int_disable(uint32_t mask)
     while (mask != 0)
     {
         uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
-        nrfy_vpr_int_disable(NRF_VPR, event_no);
+        NRFY_IRQ_DISABLE(VPR_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
 }
 
-static void nrfx_vevif_irq_handler(uint32_t irq_idx)
+static void nrfx_vevif_irq_handler(uint8_t irq_idx)
 {
-    m_cb.handler((uint8_t)irq_idx, m_cb.p_context);
+    nrf_vpr_csr_vevif_tasks_clear(1UL << irq_idx);
 
-    nrf_vpr_csr_task_trigger_clear(NRF_VPR, (1UL << irq_idx));
+    m_cb.handler(irq_idx, m_cb.p_context);
 }
-
 
 NRFX_VEVIF_IRQ_HANDLER(0)
 NRFX_VEVIF_IRQ_HANDLER(1)

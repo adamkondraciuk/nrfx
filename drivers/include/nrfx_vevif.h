@@ -4,7 +4,6 @@
 #define NRFX_VEVIF_H__
 
 #include <nrfx.h>
-#include <haly/nrfy_vpr.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -14,15 +13,8 @@ extern "C" {
  * @defgroup nrfx_vevif VEVIF driver
  * @{
  * @ingroup nrf_vpr
- * @brief   VEVIF mechanism driver.
+ * @brief   VPR Event Interface (VEVIF) mechanism driver.
  */
-
-/** @brief VEVIF domains. */
-typedef enum
-{
-    NRFX_VEVIF_DOMAIN_SYSCTRL, /**< System Controller domain. */
-    NRFX_VEVIF_DOMAIN_FLPR,    /**< Fast Lightweight Processor domain. */
-} nrfx_vevif_domain_t;
 
 /**
  * @brief VEVIF event handler callback.
