@@ -10,6 +10,7 @@
 #elif defined(HALTIUM_XXAA)
     #include <nrfx_vevif.h>
     #include <nrfx_bellboard.h>
+    #include <haly/nrfy_vpr.h>
 #else
     #error "No inter-domain signalling supported."
 #endif
@@ -272,7 +273,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
     }
     else
     {
-        nrfy_vpr_task_trigger(p_vpr, nrf_vpr_trigger_task_get(channel));
+        nrfy_vpr_task_trigger(p_vpr, nrfy_vpr_trigger_task_get(channel));
     }
 #endif
 }
