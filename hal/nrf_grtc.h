@@ -361,6 +361,34 @@ NRF_STATIC_INLINE void nrf_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mask)
 #endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 
 /**
+ * @brief Function for setting the subscribe configuration for a given
+ *        GRTC task.
+ *
+ * @note Not every task has its corresponding subscribe register.
+ *       Refer to the Product Specification for more information.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] task    Task for which to set the configuration.
+ * @param[in] channel Channel through which to subscribe events.
+ */
+NRF_STATIC_INLINE void nrf_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
+                                              nrf_grtc_task_t task,
+                                              uint8_t         channel);
+
+/**
+ * @brief Function for clearing the subscribe configuration for a given
+ *        GRTC task.
+ *
+ * @note Not every task has its corresponding subscribe register.
+ *       Refer to the Product Specification for more information.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which to clear the configuration.
+ */
+NRF_STATIC_INLINE void nrf_grtc_subscribe_clear(NRF_GRTC_Type * p_reg,
+                                                nrf_grtc_task_t task);
+
+/**
  * @brief Function for setting the publish configuration for a given
  *        GRTC event.
  *
@@ -385,7 +413,8 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg, nrf_grtc_event_t event);
+NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
+                                              nrf_grtc_event_t event);
 
 /**
  * @brief Function for retrieving the state of the GRTC event.
@@ -786,24 +815,58 @@ NRF_STATIC_INLINE void nrf_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mask)
 }
 #endif //defined(NRF_SYSCTRL)
 
+NRF_STATIC_INLINE void nrf_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
+                                              nrf_grtc_task_t task,
+                                              uint8_t         channel)
+{
+    NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
+                (task != NRF_GRTC_TASK_CLEAR) &&
+                (task != NRF_GRTC_TASK_STOP));
+
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
+}
+
+NRF_STATIC_INLINE void nrf_grtc_subscribe_clear(NRF_GRTC_Type * p_reg,
+                                                nrf_grtc_task_t task)
+{
+    NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
+                (task != NRF_GRTC_TASK_CLEAR) &&
+                (task != NRF_GRTC_TASK_STOP));
+
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
+}
+
 NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
                                             nrf_grtc_event_t event,
                                             uint8_t          channel)
 {
+    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
+                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
+#if !defined(NRF_SYSCTRL)
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
+#endif
+
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80UL)) =
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
 NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
-                                             nrf_grtc_event_t event)
+                                              nrf_grtc_event_t event)
 {
+    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
+                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
+#if !defined(NRF_SYSCTRL)
+    NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
+#endif
+
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80UL)) = 0x0UL;
 }
 
 NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grtc_event_t event)
 {
 #if !defined(NRF_SYSCTRL)
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     && 
+    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
                 (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
 #endif
@@ -813,7 +876,7 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event)
 {
 #if !defined(NRF_SYSCTRL)
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     && 
+    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
                 (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
 #endif

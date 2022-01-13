@@ -116,6 +116,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
     for (uint8_t cc_channel = 0; cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT; cc_channel ++)
     {
         nrf_grtc_publish_clear(p_reg, nrf_grtc_sys_counter_compare_event_get(cc_channel));
+        nrf_grtc_subscribe_clear(p_reg, nrf_grtc_capture_task_get(cc_channel));
     }
     nrf_grtc_publish_clear(p_reg, NRF_GRTC_EVENT_RTCOMPARE);
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_CLEAR);
@@ -225,11 +226,38 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_compare_event_clear(NRF_GRTC_Type 
 }
 
 /**
+ * @brief Function for setting the subscribe configuration for a given
+ *        GRTC capture channel.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Compare channel for which to set the configuration.
+ * @param[in] channel    Channel through which to subscribe events.
+ */
+NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_capture_subscribe_set(NRF_GRTC_Type * p_reg,
+                                                                    uint8_t         cc_channel,
+                                                                    uint8_t         channel)
+{
+    nrf_grtc_subscribe_set(p_reg, nrf_grtc_capture_task_get(cc_channel), channel);
+    nrf_barrier_w();
+}
+
+/**
+ * @brief Function for clearing the subscribe configuration for a given
+ *        GRTC capture channel.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Compare channel for which to clear the configuration.
+ */
+NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_capture_subscribe_clear(NRF_GRTC_Type * p_reg,
+                                                                      uint8_t         cc_channel)
+{
+    nrf_grtc_subscribe_clear(p_reg, nrf_grtc_capture_task_get(cc_channel));
+    nrf_barrier_w();
+}
+
+/**
  * @brief Function for setting the publish configuration for a given
  *        GRTC compare channel.
- *
- * @note Not every event has its corresponding publish register.
- *       Refer to the Product Specification for more information.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] cc_channel Compare channel for which to set the configuration.
@@ -246,9 +274,6 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_compare_publish_set(NRF_GRTC_Type 
 /**
  * @brief Function for clearing the publish configuration for a given
  *        GRTC compare channel.
- *
- * @note Not every event has its corresponding publish register.
- *       Refer to the Product Specification for more information.
  *
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] cc_channel Compare channel for which to clear the configuration.
@@ -364,10 +389,26 @@ NRFY_STATIC_INLINE void nrfy_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mas
 }
 #endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 
+/** @refhal{nrf_grtc_subscribe_set} */
+NRFY_STATIC_INLINE void nrfy_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
+                                                nrf_grtc_task_t task,
+                                                uint8_t         channel)
+{
+    nrf_grtc_subscribe_set(p_reg, task, channel);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_grtc_subscribe_clear} */
+NRFY_STATIC_INLINE void nrfy_grtc_subscribe_clear(NRF_GRTC_Type * p_reg, nrf_grtc_task_t task)
+{
+    nrf_grtc_subscribe_clear(p_reg, task);
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_grtc_publish_set} */
-NRFY_STATIC_INLINE void nrfy_grtc_publish_set(NRF_GRTC_Type * p_reg,
-                                            nrf_grtc_event_t  event,
-                                            uint8_t           channel)
+NRFY_STATIC_INLINE void nrfy_grtc_publish_set(NRF_GRTC_Type *  p_reg,
+                                              nrf_grtc_event_t event,
+                                              uint8_t          channel)
 {
     nrf_grtc_publish_set(p_reg, event, channel);
     nrf_barrier_w();
