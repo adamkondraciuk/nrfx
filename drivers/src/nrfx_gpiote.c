@@ -15,6 +15,8 @@
 #define MAX_PIN_NUMBER 32
 #elif (GPIO_COUNT == 2)
 #define MAX_PIN_NUMBER (32 + P1_PIN_NUM)
+#elif (GPIO_COUNT == 16)
+#define MAX_PIN_NUMBER 512
 #else
 #error "Not supported."
 #endif
@@ -1050,7 +1052,7 @@ nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin)
     }
 
 #if defined(HALTIUM_XXAA)
-    return nrfy_gpiote_port_event_get(nrfy_gpio_pin_port_number_extract(pin));
+    return nrfy_gpiote_port_event_get((uint8_t)nrfy_gpio_pin_port_number_extract(&pin));
 #else
     return NRF_GPIOTE_EVENT_PORT;
 #endif
