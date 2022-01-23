@@ -54,30 +54,6 @@ pipeline {
                 }
             }
         }
-        stage('Generate documentation') {
-            agent {
-                docker {
-                    label 'linux && build-ncs && !nrfx-coverity'
-                        image "docker-dtr.nordicsemi.no/sw-production/ncs-int:2.8.2"
-                        args ' --privileged -e HOME=/home/buran_ci'
-                }
-            }
-            steps {
-                script {
-                    dir("doc") {
-                        sh "./generate_sphinx_doc.sh"
-                        if (fileExists('warnings_nrfx.txt')){
-                            def output_file = readFile("warnings_nrfx.txt")
-                            if (output_file.size() != 0) {
-                                unstable 'Documentation building generated warnings.'
-                            }
-                        }
-                        zip archive: true, dir: 'html_sphinx', glob: '', zipFile: 'html_sphinx.zip'
-                        stash allowEmpty: true, name: 'documentation_stash'
-                    }
-                }
-            }
-        }
     }
     post {
         always { node (null) {
@@ -94,9 +70,11 @@ pipeline {
             copyArtifacts projectName: "NRFX/x/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/sub-on-target-power-tests/${nrfx_verification_branch}", selector: lastCompleted()
             copyArtifacts projectName: "NRFX/nrfx-coverity/${nrfx_verification_branch}", selector: lastCompleted(), target: 'work/nrfx-verification/'
+            copyArtifacts projectName: "NRFX/sub-documentation-building/${nrfx_verification_branch}", selector: lastCompleted()
 
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
             archiveArtifacts allowEmptyArchive: true, artifacts: "warnings_nrfx.txt"
+            archiveArtifacts artifacts: "html_sphinx.zip"
             archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
 
             // process results
