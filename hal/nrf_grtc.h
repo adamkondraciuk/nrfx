@@ -55,12 +55,29 @@ extern "C" {
 
 #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 /** @brief Fixup for the GRTC IRQn lines. */
-#define GRTC_IRQn       GRTC_0_IRQn
-/** @brief Fixup for the GRTC IRQHandler. */
-#define GRTC_IRQHandler GRTC0_IRQHandler
+    #define GRTC_IRQn       GRTC_0_IRQn
+    /** @todo Remove when fix in MDK will appear. */
+    #if defined(NRF_CELLCORE)            || \
+        defined(NRF_SECURE)              || \
+        defined(NRF_SYSCTRL)             || \
+        defined(NRF_SYSTEMC_APPLICATION) || \
+        defined(NRF_SYSTEMC_SECURE)
+        /** @brief Fixup for the GRTC IRQHandler. */
+        #define GRTC_IRQHandler GRTC0_IRQHandler
+    #else
+        /** @brief Fixup for the GRTC IRQHandler. */
+        #define GRTC_IRQHandler GRTC0_0_IRQHandler
+    #endif
 #else
-#define GRTC_IRQn       GRTC_1_IRQn
-#define GRTC_IRQHandler GRTC1_IRQHandler
+    #define GRTC_IRQn       GRTC_1_IRQn
+    #if defined(NRF_CELLCORE)            || \
+        defined(NRF_SECURE)              || \
+        defined(NRF_SYSTEMC_APPLICATION) || \
+        defined(NRF_SYSTEMC_SECURE)
+        #define GRTC_IRQHandler GRTC1_IRQHandler
+    #else
+        #define GRTC_IRQHandler GRTC0_1_IRQHandler
+    #endif
 #endif
 
 /** @brief Interrupts INTEN register definition. */
