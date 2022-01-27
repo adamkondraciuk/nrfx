@@ -121,14 +121,14 @@ typedef enum
 /** @brief Available sampling periods. */
 typedef enum
 {
-    NRF_QDEC_SAMPLEPER_128us   = QDEC_SAMPLEPER_SAMPLEPER_128us,  /**< QDEC sampling period 128 microseconds.  */
-    NRF_QDEC_SAMPLEPER_256us   = QDEC_SAMPLEPER_SAMPLEPER_256us,  /**< QDEC sampling period 256 microseconds.  */
-    NRF_QDEC_SAMPLEPER_512us   = QDEC_SAMPLEPER_SAMPLEPER_512us,  /**< QDEC sampling period 512 microseconds.  */
-    NRF_QDEC_SAMPLEPER_1024us  = QDEC_SAMPLEPER_SAMPLEPER_1024us, /**< QDEC sampling period 1024 microseconds.  */
-    NRF_QDEC_SAMPLEPER_2048us  = QDEC_SAMPLEPER_SAMPLEPER_2048us, /**< QDEC sampling period 2048 microseconds.  */
-    NRF_QDEC_SAMPLEPER_4096us  = QDEC_SAMPLEPER_SAMPLEPER_4096us, /**< QDEC sampling period 4096 microseconds.  */
-    NRF_QDEC_SAMPLEPER_8192us  = QDEC_SAMPLEPER_SAMPLEPER_8192us, /**< QDEC sampling period 8192 microseconds.  */
-    NRF_QDEC_SAMPLEPER_16384us = QDEC_SAMPLEPER_SAMPLEPER_16384us /**< QDEC sampling period 16384 microseconds.  */
+    NRF_QDEC_SAMPLEPER_128US   = QDEC_SAMPLEPER_SAMPLEPER_128us,  /**< QDEC sampling period 128 microseconds.  */
+    NRF_QDEC_SAMPLEPER_256US   = QDEC_SAMPLEPER_SAMPLEPER_256us,  /**< QDEC sampling period 256 microseconds.  */
+    NRF_QDEC_SAMPLEPER_512US   = QDEC_SAMPLEPER_SAMPLEPER_512us,  /**< QDEC sampling period 512 microseconds.  */
+    NRF_QDEC_SAMPLEPER_1024US  = QDEC_SAMPLEPER_SAMPLEPER_1024us, /**< QDEC sampling period 1024 microseconds.  */
+    NRF_QDEC_SAMPLEPER_2048US  = QDEC_SAMPLEPER_SAMPLEPER_2048us, /**< QDEC sampling period 2048 microseconds.  */
+    NRF_QDEC_SAMPLEPER_4096US  = QDEC_SAMPLEPER_SAMPLEPER_4096us, /**< QDEC sampling period 4096 microseconds.  */
+    NRF_QDEC_SAMPLEPER_8192US  = QDEC_SAMPLEPER_SAMPLEPER_8192us, /**< QDEC sampling period 8192 microseconds.  */
+    NRF_QDEC_SAMPLEPER_16384US = QDEC_SAMPLEPER_SAMPLEPER_16384us /**< QDEC sampling period 16384 microseconds.  */
 } nrf_qdec_sampleper_t;
 
 /** @brief Available report periods. */

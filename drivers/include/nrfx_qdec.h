@@ -83,7 +83,7 @@ enum {
     .nrfy_config =                                                  \
     {                                                               \
         .reportper = NRF_QDEC_REPORTPER_10,                         \
-        .sampleper = NRF_QDEC_SAMPLEPER_16384us,                    \
+        .sampleper = NRF_QDEC_SAMPLEPER_16384US,                    \
         .pins =                                                     \
         {                                                           \
             .a_pin   = _pin_a,                                      \
