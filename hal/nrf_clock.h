@@ -94,29 +94,29 @@ typedef enum
 #endif
 
 #if defined(CLOCK_LFCLKSRC_SRC_Xtal) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_Xtal,   /**< External 32 kHz crystal. */
+    NRF_CLOCK_LFCLK_XTAL  = CLOCK_LFCLKSRC_SRC_Xtal,   /**< External 32 kHz crystal. */
 #else
-    NRF_CLOCK_LFCLK_Xtal  = CLOCK_LFCLKSRC_SRC_LFXO,   /**< External 32 kHz crystal. */
+    NRF_CLOCK_LFCLK_XTAL  = CLOCK_LFCLKSRC_SRC_LFXO,   /**< External 32 kHz crystal. */
 #endif
 
 #if defined(CLOCK_LFCLKSRC_SRC_Synth) || defined(__NRFX_DOXYGEN__)
-    NRF_CLOCK_LFCLK_Synth = CLOCK_LFCLKSRC_SRC_Synth,  /**< Internal 32 kHz synthesized from HFCLK system clock. */
+    NRF_CLOCK_LFCLK_SYNTH = CLOCK_LFCLKSRC_SRC_Synth,  /**< Internal 32 kHz synthesized from HFCLK system clock. */
 #elif defined(CLOCK_LFCLKSRC_SRC_LFSYNT)
-    NRF_CLOCK_LFCLK_Synth = CLOCK_LFCLKSRC_SRC_LFSYNT, /**< Internal 32 kHz synthesized from HFCLK system clock. */
+    NRF_CLOCK_LFCLK_SYNTH = CLOCK_LFCLKSRC_SRC_LFSYNT, /**< Internal 32 kHz synthesized from HFCLK system clock. */
 #endif
 
 #if defined(NRF_CLOCK_USE_EXTERNAL_LFCLK_SOURCES) || defined(__NRFX_DOXYGEN__)
     /**
      * External 32 kHz low swing signal. Used only with the LFCLKSRC register.
-     * For the others @ref NRF_CLOCK_LFCLK_Xtal is returned for this setting.
+     * For the others @ref NRF_CLOCK_LFCLK_XTAL is returned for this setting.
      */
-    NRF_CLOCK_LFCLK_Xtal_Low_Swing = (CLOCK_LFCLKSRC_SRC_Xtal |
+    NRF_CLOCK_LFCLK_XTAL_LOW_SWING = (CLOCK_LFCLKSRC_SRC_Xtal |
         (CLOCK_LFCLKSRC_EXTERNAL_Enabled << CLOCK_LFCLKSRC_EXTERNAL_Pos)),
     /**
      * External 32 kHz full swing signal. Used only with the LFCLKSRC register.
-     * For the others @ref NRF_CLOCK_LFCLK_Xtal is returned for this setting.
+     * For the others @ref NRF_CLOCK_LFCLK_XTAL is returned for this setting.
      */
-    NRF_CLOCK_LFCLK_Xtal_Full_Swing = (CLOCK_LFCLKSRC_SRC_Xtal |
+    NRF_CLOCK_LFCLK_XTAL_FULL_SWING = (CLOCK_LFCLKSRC_SRC_Xtal |
         (CLOCK_LFCLKSRC_BYPASS_Enabled   << CLOCK_LFCLKSRC_BYPASS_Pos) |
         (CLOCK_LFCLKSRC_EXTERNAL_Enabled << CLOCK_LFCLKSRC_EXTERNAL_Pos)),
 #endif // defined(NRF_CLOCK_USE_EXTERNAL_LFCLK_SOURCES) || defined(__NRFX_DOXYGEN__)
