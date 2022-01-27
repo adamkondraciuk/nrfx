@@ -61,7 +61,7 @@ NRFY_STATIC_INLINE void nrfy_comp_periph_configure(NRF_COMP_Type *            p_
                                                    nrfy_comp_config_t const * p_config)
 {
     nrf_comp_ref_set(p_reg, p_config->reference);
-    if (p_config->reference == NRF_COMP_REF_ARef)
+    if (p_config->reference == NRF_COMP_REF_AREF)
     {
         nrf_comp_ext_ref_set(p_reg, p_config->ext_ref);
     }

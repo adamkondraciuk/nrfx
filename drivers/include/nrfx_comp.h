@@ -39,16 +39,16 @@ typedef void (* nrfx_comp_event_handler_t)(nrf_comp_event_t event);
 typedef enum
 {
     NRFX_COMP_SHORT_STOP_AFTER_CROSS_EVT = COMP_SHORTS_CROSS_STOP_Msk, /*!< Shortcut between the CROSS event and the STOP task. */
-    NRFX_COMP_SHORT_STOP_AFTER_UP_EVT = COMP_SHORTS_UP_STOP_Msk,       /*!< Shortcut between the UP event and the STOP task. */
-    NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT = COMP_SHORTS_DOWN_STOP_Msk    /*!< Shortcut between the DOWN event and the STOP task. */
+    NRFX_COMP_SHORT_STOP_AFTER_UP_EVT    = COMP_SHORTS_UP_STOP_Msk,    /*!< Shortcut between the UP event and the STOP task. */
+    NRFX_COMP_SHORT_STOP_AFTER_DOWN_EVT  = COMP_SHORTS_DOWN_STOP_Msk   /*!< Shortcut between the DOWN event and the STOP task. */
 } nrfx_comp_short_mask_t;
 
 /** @brief COMP events masks. */
 typedef enum
 {
     NRFX_COMP_EVT_EN_CROSS_MASK = COMP_INTENSET_CROSS_Msk, /*!< CROSS event (generated after VIN+ == VIN-). */
-    NRFX_COMP_EVT_EN_UP_MASK = COMP_INTENSET_UP_Msk,       /*!< UP event (generated when VIN+ crosses VIN- while increasing). */
-    NRFX_COMP_EVT_EN_DOWN_MASK = COMP_INTENSET_DOWN_Msk,   /*!< DOWN event (generated when VIN+ crosses VIN- while decreasing). */
+    NRFX_COMP_EVT_EN_UP_MASK    = COMP_INTENSET_UP_Msk,    /*!< UP event (generated when VIN+ crosses VIN- while increasing). */
+    NRFX_COMP_EVT_EN_DOWN_MASK  = COMP_INTENSET_DOWN_Msk,  /*!< DOWN event (generated when VIN+ crosses VIN- while decreasing). */
     NRFX_COMP_EVT_EN_READY_MASK = COMP_INTENSET_READY_Msk  /*!< READY event (generated when the module is ready). */
 } nrfx_comp_evt_en_mask_t;
 
@@ -69,7 +69,7 @@ typedef struct
 #if NRF_COMP_HAS_ISOURCE || defined (__NRFX_DOXYGEN__)
     /** @brief COMP additional ISOURCE configuration. */
     #define NRFX_COMP_ISOURCE_CONFIG    \
-        .isource = NRF_COMP_ISOURCE_Off,
+        .isource = NRF_COMP_ISOURCE_OFF,
 #else
     #define NRFX_COMP_ISOURCE_CONFIG
 #endif
@@ -92,11 +92,11 @@ typedef struct
 {                                                               \
     .nrfy_config =                                              \
     {                                                           \
-        .reference  = NRF_COMP_REF_Int1V8,                      \
+        .reference  = NRF_COMP_REF_INT_1V8,                     \
         .main_mode  = NRF_COMP_MAIN_MODE_SE,                    \
         .threshold  = NRFX_COMP_CONFIG_TH,                      \
-        .speed_mode = NRF_COMP_SP_MODE_High,                    \
-        .hyst       = NRF_COMP_HYST_NoHyst,                     \
+        .speed_mode = NRF_COMP_SP_MODE_HIGH,                    \
+        .hyst       = NRF_COMP_HYST_NO_HYST,                    \
         NRFX_COMP_ISOURCE_CONFIG                                \
         .input      = (nrf_comp_input_t)_input                  \
     },                                                          \
