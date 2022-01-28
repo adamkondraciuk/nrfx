@@ -7,10 +7,6 @@
 extern "C" {
 #endif
 
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(IRQn_Type irq_number);
-
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number);
-
 /**
  * @defgroup nrfy_common Common module
  * @{
@@ -37,45 +33,25 @@ NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number);
 #define NRFY_EVENT_TO_INT_BITMASK(event) (1 << NRFY_EVENT_TO_INT_BITPOS(event))
 
 /** @sa NRFX_IRQ_PRIORITY_SET */
-#define NRFY_IRQ_PRIORITY_SET(irq_number, priority)  \
-    do {                                             \
-        NRFX_IRQ_PRIORITY_SET(irq_number, priority); \
-        nrf_barrier_w();                             \
-    } while (0)
+#define NRFY_IRQ_PRIORITY_SET(irq_number, priority) NRFX_IRQ_PRIORITY_SET(irq_number, priority)
 
 /** @sa NRFX_IRQ_ENABLE */
-#define NRFY_IRQ_ENABLE(irq_number)  \
-    do {                             \
-        NRFX_IRQ_ENABLE(irq_number); \
-        nrf_barrier_w();             \
-    } while (0)
+#define NRFY_IRQ_ENABLE(irq_number) NRFX_IRQ_ENABLE(irq_number)
 
 /** @sa NRFX_IRQ_IS_ENABLED */
-#define NRFY_IRQ_IS_ENABLED(irq_number) __nrfy_internal_irq_is_enabled(irq_number)
+#define NRFY_IRQ_IS_ENABLED(irq_number) NRFX_IRQ_IS_ENABLED(irq_number)
 
 /** @sa NRFX_IRQ_DISABLE */
-#define NRFY_IRQ_DISABLE(irq_number)  \
-    do {                              \
-        NRFX_IRQ_DISABLE(irq_number); \
-        nrf_barrier_w();              \
-    } while (0)
+#define NRFY_IRQ_DISABLE(irq_number) NRFX_IRQ_DISABLE(irq_number)
 
 /** @sa NRFX_IRQ_PENDING_SET */
-#define NRFY_IRQ_PENDING_SET(irq_number)  \
-    do {                                  \
-        NRFX_IRQ_PENDING_SET(irq_number); \
-        nrf_barrier_w();                  \
-    } while (0)
+#define NRFY_IRQ_PENDING_SET(irq_number) NRFX_IRQ_PENDING_SET(irq_number)
 
 /** @sa NRFX_IRQ_PENDING_CLEAR */
-#define NRFY_IRQ_PENDING_CLEAR(irq_number)  \
-    do {                                    \
-        NRFX_IRQ_PENDING_CLEAR(irq_number); \
-        nrf_barrier_w();                    \
-    } while (0)
+#define NRFY_IRQ_PENDING_CLEAR(irq_number) NRFX_IRQ_PENDING_CLEAR(irq_number)
 
 /** @sa NRFX_IRQ_IS_PENDING */
-#define NRFY_IRQ_IS_PENDING(irq_number) __nrfy_internal_irq_is_pending(irq_number)
+#define NRFY_IRQ_IS_PENDING(irq_number) NRFX_IRQ_IS_PENDING(irq_number)
 
 /** @sa NRFX_CRITICAL_SECTION_ENTER */
 #define NRFY_CRITICAL_SECTION_ENTER() NRFX_CRITICAL_SECTION_ENTER()
@@ -84,22 +60,6 @@ NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number);
 #define NRFY_CRITICAL_SECTION_EXIT() NRFX_CRITICAL_SECTION_EXIT()
 
 /** @} */
-
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_enabled(IRQn_Type irq_number)
-{
-    nrf_barrier_rw();
-    bool is_enabled = NRFX_IRQ_IS_ENABLED(irq_number);
-    nrf_barrier_r();
-    return is_enabled;
-}
-
-NRFY_STATIC_INLINE bool __nrfy_internal_irq_is_pending(IRQn_Type irq_number)
-{
-    nrf_barrier_rw();
-    bool is_pending = NRFX_IRQ_IS_PENDING(irq_number);
-    nrf_barrier_r();
-    return is_pending;
-}
 
 #ifdef __cplusplus
 }
