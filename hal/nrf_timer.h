@@ -243,10 +243,10 @@ extern "C" {
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-#define NRF_TIMER_BASE_FREQUENCY_GET(p_reg)                               \
-    (NRF_TIMER_IS_320MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_320MHZ): \
-    ((NRF_TIMER_IS_16MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_16MHZ) : \
-    (NRF_TIMER_BASE_FREQUENCY_32MHZ))
+#define NRF_TIMER_BASE_FREQUENCY_GET(p_reg)                                  \
+    ((NRF_TIMER_IS_320MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_320MHZ): \
+    ((NRF_TIMER_IS_16MHZ_TIMER(p_reg))  ? (NRF_TIMER_BASE_FREQUENCY_16MHZ) : \
+    (NRF_TIMER_BASE_FREQUENCY_32MHZ)))
 
 /**
  * @brief Macro for computing prescaler value for given base frequency and desired frequency.
