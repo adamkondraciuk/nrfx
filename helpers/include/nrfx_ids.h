@@ -285,9 +285,40 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
 #define nrfx_ids_0_irq_handler nrfx_ipc_irq_handler
 #endif
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_RISCV)
+#if defined(ISA_RISCV) && !defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #if NRFX_CHECK(NRFX_VEVIF_ENABLED)
-#define nrfx_ids_0_irq_handler nrfx_vevif_irq_handler
+#define nrfx_ids_0_irq_handler nrfx_vevif_0_irq_handler
+#define nrfx_ids_1_irq_handler nrfx_vevif_1_irq_handler
+#define nrfx_ids_2_irq_handler nrfx_vevif_2_irq_handler
+#define nrfx_ids_3_irq_handler nrfx_vevif_3_irq_handler
+#define nrfx_ids_4_irq_handler nrfx_vevif_4_irq_handler
+#define nrfx_ids_5_irq_handler nrfx_vevif_5_irq_handler
+#define nrfx_ids_6_irq_handler nrfx_vevif_6_irq_handler
+#define nrfx_ids_7_irq_handler nrfx_vevif_7_irq_handler
+#define nrfx_ids_8_irq_handler nrfx_vevif_8_irq_handler
+#define nrfx_ids_9_irq_handler nrfx_vevif_9_irq_handler
+#define nrfx_ids_10_irq_handler nrfx_vevif_10_irq_handler
+#define nrfx_ids_11_irq_handler nrfx_vevif_11_irq_handler
+#define nrfx_ids_12_irq_handler nrfx_vevif_12_irq_handler
+#define nrfx_ids_13_irq_handler nrfx_vevif_13_irq_handler
+#define nrfx_ids_14_irq_handler nrfx_vevif_14_irq_handler
+#define nrfx_ids_15_irq_handler nrfx_vevif_15_irq_handler
+#define nrfx_ids_16_irq_handler nrfx_vevif_16_irq_handler
+#define nrfx_ids_17_irq_handler nrfx_vevif_17_irq_handler
+#define nrfx_ids_18_irq_handler nrfx_vevif_18_irq_handler
+#define nrfx_ids_19_irq_handler nrfx_vevif_19_irq_handler
+#define nrfx_ids_20_irq_handler nrfx_vevif_20_irq_handler
+#define nrfx_ids_21_irq_handler nrfx_vevif_21_irq_handler
+#define nrfx_ids_22_irq_handler nrfx_vevif_22_irq_handler
+#define nrfx_ids_23_irq_handler nrfx_vevif_23_irq_handler
+#define nrfx_ids_24_irq_handler nrfx_vevif_24_irq_handler
+#define nrfx_ids_25_irq_handler nrfx_vevif_25_irq_handler
+#define nrfx_ids_26_irq_handler nrfx_vevif_26_irq_handler
+#define nrfx_ids_27_irq_handler nrfx_vevif_27_irq_handler
+#define nrfx_ids_28_irq_handler nrfx_vevif_28_irq_handler
+#define nrfx_ids_29_irq_handler nrfx_vevif_29_irq_handler
+#define nrfx_ids_30_irq_handler nrfx_vevif_30_irq_handler
+#define nrfx_ids_31_irq_handler nrfx_vevif_31_irq_handler
 #endif
 #elif defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
