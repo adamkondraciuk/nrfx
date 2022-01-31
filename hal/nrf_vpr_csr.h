@@ -381,12 +381,22 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_value_get(void)
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(nrf_vpr_csr_threshold_t th)
 {
+    // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
+#if defined(BOARD_SYSTEMC)
+    csr_write(VPRCSR_MINTTRESH, th);
+#else
     csr_write(VPRCSR_MINTTRESH, (th << VPRCSR_MINTTRESH_TH_Pos));
+#endif
 }
 
 NRF_STATIC_INLINE nrf_vpr_csr_threshold_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 {
+    // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
+#if defined(BOARD_SYSTEMC)
+    return csr_read(VPRCSR_MINTTRESH);
+#else
     return (csr_read(VPRCSR_MINTTRESH) & VPRCSR_MINTTRESH_TH_Msk) >> VPRCSR_MINTTRESH_TH_Pos;
+#endif
 }
 
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_cycle_counter_get(void)

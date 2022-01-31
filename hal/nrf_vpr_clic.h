@@ -234,7 +234,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_VPR_Type * p_reg,
     p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~VPR_CLIC_CLICINT_IE_Msk) |
                                    ((enable ? VPR_CLIC_CLICINT_IE_Enabled :
                                               VPR_CLIC_CLICINT_IE_Disabled)
-                                    << VPR_CLIC_CLICINT_IP_Pos);
+                                    << VPR_CLIC_CLICINT_IE_Pos);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_VPR_Type const * p_reg, uint32_t irq_num)
