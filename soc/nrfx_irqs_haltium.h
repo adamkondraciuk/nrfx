@@ -69,16 +69,32 @@ extern "C" {
 #define nrfx_wdt_1_irq_handler        WDT1_IRQHandler
 
 // BELLBOARD0_IRQn
+#if defined(NRF_RADIOCORE) || defined(NRF_APPLICATION)
+#define nrfx_bellboard_0_irq_handler  BELLBOARD0_0_IRQHandler
+#else
 #define nrfx_bellboard_0_irq_handler  BELLBOARD0_IRQHandler
+#endif
 
 // BELLBOARD1_IRQn
+#if defined(NRF_RADIOCORE) || defined(NRF_APPLICATION)
+#define nrfx_bellboard_1_irq_handler  BELLBOARD0_1_IRQHandler
+#else
 #define nrfx_bellboard_1_irq_handler  BELLBOARD1_IRQHandler
+#endif
 
 // BELLBOARD2_IRQn
+#if defined(NRF_RADIOCORE) || defined(NRF_APPLICATION)
+#define nrfx_bellboard_2_irq_handler  BELLBOARD0_2_IRQHandler
+#else
 #define nrfx_bellboard_2_irq_handler  BELLBOARD2_IRQHandler
+#endif
 
 // BELLBOARD3_IRQn
+#if defined(NRF_RADIOCORE) || defined(NRF_APPLICATION)
+#define nrfx_bellboard_3_irq_handler  BELLBOARD0_3_IRQHandler
+#else
 #define nrfx_bellboard_3_irq_handler  BELLBOARD3_IRQHandler
+#endif
 
 // SPU2_IRQn
 
