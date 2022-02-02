@@ -22,6 +22,9 @@ extern "C" {
 #define NRF_VPR_CSR_NORDIC_KEY_MASK \
     (VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Enabled << VPRCSR_NORDIC_VPRNORDICCTRL_NORDICKEY_Pos)
 
+/** @brief Symbol specifying maximum interrupt threshold. */
+#define NRF_VPR_CSR_INT_THRESHOLD_MAX VPRCSR_MINTTRESH_TH_Max
+
 /** @brief Trap causes. */
 typedef enum
 {
@@ -48,15 +51,6 @@ typedef enum
     NRF_VPR_CSR_TRAP_CAUSE_LOAD_TIMEOUT_FAULT    = VPRCSR_MCAUSE_EXECPTIONCODE_LOADTIMEOUTFAULT,   ///< Load timeout fault.
     NRF_VPR_CSR_TRAP_CAUSE_STACKING_UNALIGNED_EX = VPRCSR_MCAUSE_EXECPTIONCODE_UNALIGNSTACKINGEXC, ///< Unaligned stacking exception fault.
 } nrf_vpr_csr_trap_cause_t;
-
-/** @brief Interrupt thresholds. */
-typedef enum
-{
-    NRF_VPR_CSR_THRESHOLD_LEVEL_0 = VPRCSR_MINTTRESH_TH_LEVEL0, ///< Threshold level 0.
-    NRF_VPR_CSR_THRESHOLD_LEVEL_1 = VPRCSR_MINTTRESH_TH_LEVEL1, ///< Threshold level 1.
-    NRF_VPR_CSR_THRESHOLD_LEVEL_2 = VPRCSR_MINTTRESH_TH_LEVEL2, ///< Threshold level 2.
-    NRF_VPR_CSR_THRESHOLD_LEVEL_3 = VPRCSR_MINTTRESH_TH_LEVEL3, ///< Threshold level 3.
-} nrf_vpr_csr_threshold_t;
 
 /** @brief Sleep states. */
 typedef enum
@@ -140,14 +134,14 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_value_get(void);
  *
  * @param[in] th Machine mode interrupt level threshold to be set.
  */
-NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(nrf_vpr_csr_threshold_t th);
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th);
 
 /**
  * @brief Function for getting the machine mode interrupt level threshold.
  *
  * @return Machine mode interrupt level threshold.
  */
-NRF_STATIC_INLINE nrf_vpr_csr_threshold_t nrf_vpr_csr_machine_interrupt_threshold_get(void);
+NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void);
 
 /**
  * @brief Function for getting the machine cycle counter.
@@ -379,7 +373,7 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_value_get(void)
     return csr_read(VPRCSR_MTVAL);
 }
 
-NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(nrf_vpr_csr_threshold_t th)
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th)
 {
     // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
@@ -389,7 +383,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(nrf_vpr_csr_t
 #endif
 }
 
-NRF_STATIC_INLINE nrf_vpr_csr_threshold_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
+NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 {
     // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
