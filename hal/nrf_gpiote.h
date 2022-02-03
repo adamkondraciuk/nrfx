@@ -127,6 +127,8 @@ extern "C" {
 /* TODO: Remove once haltium has peripheral.h support. */
 #define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
 #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+#define GPIOTE_FEATURE_SET_PRESENT
+#define GPIOTE_FEATURE_CLR_PRESENT
 #endif
 
 /** @brief Polarity for the GPIOTE channel. */

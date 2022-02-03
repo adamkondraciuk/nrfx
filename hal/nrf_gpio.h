@@ -19,12 +19,23 @@ extern "C" {
 #elif (GPIO_COUNT == 2)
 #define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM)
 #define GPIO_REG_LIST  {NRF_P0, NRF_P1}
-#elif defined(HALTIUM_XXAA)
+#elif (GPIO_COUNT == 16)
 /* TODO: Remove this once Haltium targets have peripherals support. */
+#define P0_PIN_NUM (12)
+#define P1_PIN_NUM (12)
+#define P2_PIN_NUM (12)
+#define P6_PIN_NUM (14)
+#define P7_PIN_NUM (8)
+#define P9_PIN_NUM (6)
+#define P0_FEATURE_PINS_PRESENT 0xFFFUL
+#define P1_FEATURE_PINS_PRESENT 0xFFFUL
+#define P2_FEATURE_PINS_PRESENT 0xFFFUL
+#define P6_FEATURE_PINS_PRESENT 0x3FFFUL
+#define P7_FEATURE_PINS_PRESENT 0xFFUL
+#define P9_FEATURE_PINS_PRESENT 0x3FUL
 #define NUMBER_OF_PINS 512
 #define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P3, NRF_P4, NRF_P5, NRF_P6, NRF_P7, \
                         NRF_P8, NRF_P9, NRF_P10, NRF_P11, NRF_P12, NRF_P13, NRF_P14, NRF_P15}
-#define GPIO_COUNT     16
 #else
 #error "Not supported."
 #endif
@@ -55,6 +66,13 @@ extern "C" {
 #define NRF_GPIO_HAS_SEL 1
 #else
 #define NRF_GPIO_HAS_SEL 0
+#endif
+
+#if defined(GPIO_PIN_CNF_CTRLSEL_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of MCU/Subsystem control selection for multiple peripherals. */
+#define NRF_GPIO_HAS_MULTIPERIPH_SEL 1
+#else
+#define NRF_GPIO_HAS_MULTIPERIPH_SEL 0
 #endif
 
 #if defined(GPIO_PIN_CNF_CLOCKPIN_Msk) || defined(__NRFX_DOXYGEN__)
@@ -220,16 +238,18 @@ typedef enum
     NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          ///< Pin controlled by Trace and Debug Subsystem.
 #endif
 #if defined(GPIO_PIN_CNF_CTRLSEL_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         ///< Pin controlled by GPIO peripheral.
     NRF_GPIO_PIN_SEL_VPR      = GPIO_PIN_CNF_CTRLSEL_VPR,          ///< Pin controlled by VPR processor.
-    NRF_GPIO_PIN_SEL_GRC      = GPIO_PIN_CNF_CTRLSEL_GRC,          ///< Pin controlled by GRC system.
     NRF_GPIO_PIN_SEL_SECURE   = GPIO_PIN_CNF_CTRLSEL_SecureDomain, ///< Pin controlled by Secure core.
+    NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         ///< Pin controlled by Cellular core.
+#endif
+#if NRF_GPIO_HAS_MULTIPERIPH_SEL
+    NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         ///< Pin controlled by GPIO peripheral.
+    NRF_GPIO_PIN_SEL_GRC      = GPIO_PIN_CNF_CTRLSEL_GRC,          ///< Pin controlled by GRC system.
     NRF_GPIO_PIN_SEL_PWM      = GPIO_PIN_CNF_CTRLSEL_PWM,          ///< Pin controlled by PWM peripheral.
     NRF_GPIO_PIN_SEL_I3C      = GPIO_PIN_CNF_CTRLSEL_I3C,          ///< Pin controlled by I3C peripheral.
     NRF_GPIO_PIN_SEL_SERIAL   = GPIO_PIN_CNF_CTRLSEL_Serial,       ///< Pin controlled by SPIM/SPIS/TWIM/TWIS/UARTE peripheral.
     NRF_GPIO_PIN_SEL_HS_SPI   = GPIO_PIN_CNF_CTRLSEL_HSSPI,        ///< Pin controlled by High-speed SPI peripheral.
     NRF_GPIO_PIN_SEL_EXMIF    = GPIO_PIN_CNF_CTRLSEL_EXMIF,        ///< Pin controlled by EXMIF peripheral.
-    NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         ///< Pin controlled by Cellular core.
     NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,          ///< Pin controlled by Digital Test Bus.
 #endif
 } nrf_gpio_pin_sel_t;
@@ -1377,6 +1397,26 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 #ifdef P1_FEATURE_PINS_PRESENT
         case 1:
             mask = P1_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P2_FEATURE_PINS_PRESENT
+        case 2:
+            mask = P2_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P6_FEATURE_PINS_PRESENT
+        case 6:
+            mask = P6_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P7_FEATURE_PINS_PRESENT
+        case 7:
+            mask = P7_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P9_FEATURE_PINS_PRESENT
+        case 9:
+            mask = P9_FEATURE_PINS_PRESENT;
             break;
 #endif
     }
