@@ -202,6 +202,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLDSP_STMESP_BASE           0xA5000000UL
 #define NRF_CELLDSP_LSTMDATA_BASE         0x26000000UL
 #define NRF_CELLDSP_HSFLL_BASE            0x45000000UL
 #define NRF_CELLDSP_LRCCONF0_BASE         0x45001000UL
@@ -239,6 +240,7 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLDSP_STMESP                ((NRF_STMESP_Type*)                   NRF_CELLDSP_STMESP_BASE)
 #define NRF_CELLDSP_LSTMDATA              ((NRF_STMDATA_Type*)                  NRF_CELLDSP_LSTMDATA_BASE)
 #define NRF_CELLDSP_HSFLL                 ((NRF_HSFLL_Type*)                    NRF_CELLDSP_HSFLL_BASE)
 #define NRF_CELLDSP_LRCCONF0              ((NRF_LRCCONF_Type*)                  NRF_CELLDSP_LRCCONF0_BASE)
@@ -277,6 +279,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLDSP                                   /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_STMESP                              NRF_CELLDSP_STMESP
   #define NRF_LSTMDATA                            NRF_CELLDSP_LSTMDATA
   #define NRF_HSFLL                               NRF_CELLDSP_HSFLL
   #define NRF_LRCCONF0                            NRF_CELLDSP_LRCCONF0

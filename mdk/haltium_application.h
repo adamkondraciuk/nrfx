@@ -214,6 +214,7 @@ typedef enum {
 #define NRF_APPLICATION_ICACHEINFO_S_BASE 0x12F10000UL
 #define NRF_APPLICATION_DCACHEDATA_S_BASE 0x32F00000UL
 #define NRF_APPLICATION_DCACHEINFO_S_BASE 0x32F10000UL
+#define NRF_APPLICATION_STMESP_NS_BASE    0xA2000000UL
 #define NRF_APPLICATION_ETM_NS_BASE       0xE0041000UL
 #define NRF_APPLICATION_CTI_S_BASE        0xE0042000UL
 #define NRF_APPLICATION_CPUC_S_BASE       0xE0080000UL
@@ -259,6 +260,7 @@ typedef enum {
 #define NRF_APPLICATION_ICACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_ICACHEINFO_S_BASE)
 #define NRF_APPLICATION_DCACHEDATA_S      ((NRF_CACHEDATA_Type*)                NRF_APPLICATION_DCACHEDATA_S_BASE)
 #define NRF_APPLICATION_DCACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_DCACHEINFO_S_BASE)
+#define NRF_APPLICATION_STMESP_NS         ((NRF_STMESP_Type*)                   NRF_APPLICATION_STMESP_NS_BASE)
 #define NRF_APPLICATION_ETM_NS            ((NRF_ETM_Type*)                      NRF_APPLICATION_ETM_NS_BASE)
 #define NRF_APPLICATION_CTI_S             ((NRF_CTI_Type*)                      NRF_APPLICATION_CTI_S_BASE)
 #define NRF_APPLICATION_CPUC_S            ((NRF_CM33SS_Type*)                   NRF_APPLICATION_CPUC_S_BASE)
@@ -301,6 +303,7 @@ typedef enum {
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
+  #define NRF_APPLICATION_STMESP                  NRF_APPLICATION_STMESP_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_MVDMA                   NRF_APPLICATION_MVDMA_NS
   #define NRF_APPLICATION_RAMC                    NRF_APPLICATION_RAMC_NS
@@ -317,6 +320,7 @@ typedef enum {
   #define NRF_APPLICATION_ICACHEINFO              NRF_APPLICATION_ICACHEINFO_S
   #define NRF_APPLICATION_DCACHEDATA              NRF_APPLICATION_DCACHEDATA_S
   #define NRF_APPLICATION_DCACHEINFO              NRF_APPLICATION_DCACHEINFO_S
+  #define NRF_APPLICATION_STMESP                  NRF_APPLICATION_STMESP_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_CTI                     NRF_APPLICATION_CTI_S
   #define NRF_APPLICATION_CPUC                    NRF_APPLICATION_CPUC_S
@@ -356,6 +360,7 @@ typedef enum {
   #define NRF_ICACHEINFO                          NRF_APPLICATION_ICACHEINFO
   #define NRF_DCACHEDATA                          NRF_APPLICATION_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_APPLICATION_DCACHEINFO
+  #define NRF_STMESP                              NRF_APPLICATION_STMESP
   #define NRF_ETM                                 NRF_APPLICATION_ETM
   #define NRF_CTI                                 NRF_APPLICATION_CTI
   #define NRF_CPUC                                NRF_APPLICATION_CPUC

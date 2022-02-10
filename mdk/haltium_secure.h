@@ -242,6 +242,7 @@ typedef enum {
 #define NRF_SECURE_CRACENCORE_S_BASE      0x51800000UL
 #define NRF_SECURE_PCGCM200_S_BASE        0xBF006000UL
 #define NRF_SECURE_MEMCONF200_S_BASE      0xBF008000UL
+#define NRF_SECURE_STMESP_NS_BASE         0xA1000000UL
 #define NRF_SECURE_ETM_NS_BASE            0xE0041000UL
 #define NRF_SECURE_CTI_S_BASE             0xE0042000UL
 #define NRF_SECURE_CPUC_S_BASE            0xE0080000UL
@@ -324,6 +325,7 @@ typedef enum {
 #define NRF_SECURE_CRACENCORE_S           ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_S_BASE)
 #define NRF_SECURE_PCGCM200_S             ((NRF_PCGCMASTER_Type*)               NRF_SECURE_PCGCM200_S_BASE)
 #define NRF_SECURE_MEMCONF200_S           ((NRF_MEMCONF_Type*)                  NRF_SECURE_MEMCONF200_S_BASE)
+#define NRF_SECURE_STMESP_NS              ((NRF_STMESP_Type*)                   NRF_SECURE_STMESP_NS_BASE)
 #define NRF_SECURE_ETM_NS                 ((NRF_ETM_Type*)                      NRF_SECURE_ETM_NS_BASE)
 #define NRF_SECURE_CTI_S                  ((NRF_CTI_Type*)                      NRF_SECURE_CTI_S_BASE)
 #define NRF_SECURE_CPUC_S                 ((NRF_CM33SS_Type*)                   NRF_SECURE_CPUC_S_BASE)
@@ -398,6 +400,7 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_NS
+  #define NRF_SECURE_STMESP                       NRF_SECURE_STMESP_NS
   #define NRF_SECURE_ETM                          NRF_SECURE_ETM_NS
   #define NRF_SECURE_MVDMA                        NRF_SECURE_MVDMA_NS
   #define NRF_SECURE_RAMC000                      NRF_SECURE_RAMC000_NS
@@ -421,6 +424,7 @@ typedef enum {
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_S
   #define NRF_SECURE_PCGCM200                     NRF_SECURE_PCGCM200_S
   #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_S
+  #define NRF_SECURE_STMESP                       NRF_SECURE_STMESP_NS
   #define NRF_SECURE_ETM                          NRF_SECURE_ETM_NS
   #define NRF_SECURE_CTI                          NRF_SECURE_CTI_S
   #define NRF_SECURE_CPUC                         NRF_SECURE_CPUC_S
@@ -492,6 +496,7 @@ typedef enum {
   #define NRF_CRACENCORE                          NRF_SECURE_CRACENCORE
   #define NRF_PCGCM200                            NRF_SECURE_PCGCM200
   #define NRF_MEMCONF200                          NRF_SECURE_MEMCONF200
+  #define NRF_STMESP                              NRF_SECURE_STMESP
   #define NRF_ETM                                 NRF_SECURE_ETM
   #define NRF_CTI                                 NRF_SECURE_CTI
   #define NRF_CPUC                                NRF_SECURE_CPUC

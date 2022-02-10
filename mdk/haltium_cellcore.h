@@ -230,6 +230,7 @@ typedef enum {
 #define NRF_CELLCORE_ICACHEINFO_S_BASE    0x14F10000UL
 #define NRF_CELLCORE_DCACHEDATA_S_BASE    0x34F00000UL
 #define NRF_CELLCORE_DCACHEINFO_S_BASE    0x34F10000UL
+#define NRF_CELLCORE_STMESP_NS_BASE       0xA4000000UL
 #define NRF_CELLCORE_ETM_NS_BASE          0xE0041000UL
 #define NRF_CELLCORE_CTI_S_BASE           0xE0042000UL
 #define NRF_CELLCORE_CPUC_S_BASE          0xE0080000UL
@@ -308,6 +309,7 @@ typedef enum {
 #define NRF_CELLCORE_ICACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_ICACHEINFO_S_BASE)
 #define NRF_CELLCORE_DCACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_CELLCORE_DCACHEDATA_S_BASE)
 #define NRF_CELLCORE_DCACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_CELLCORE_DCACHEINFO_S_BASE)
+#define NRF_CELLCORE_STMESP_NS            ((NRF_STMESP_Type*)                   NRF_CELLCORE_STMESP_NS_BASE)
 #define NRF_CELLCORE_ETM_NS               ((NRF_ETM_Type*)                      NRF_CELLCORE_ETM_NS_BASE)
 #define NRF_CELLCORE_CTI_S                ((NRF_CTI_Type*)                      NRF_CELLCORE_CTI_S_BASE)
 #define NRF_CELLCORE_CPUC_S               ((NRF_CM33SS_Type*)                   NRF_CELLCORE_CPUC_S_BASE)
@@ -383,6 +385,7 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
+  #define NRF_CELLCORE_STMESP                     NRF_CELLCORE_STMESP_NS
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
   #define NRF_CELLCORE_MVDMA                      NRF_CELLCORE_MVDMA_NS
   #define NRF_CELLCORE_RAMC00                     NRF_CELLCORE_RAMC00_NS
@@ -413,6 +416,7 @@ typedef enum {
   #define NRF_CELLCORE_ICACHEINFO                 NRF_CELLCORE_ICACHEINFO_S
   #define NRF_CELLCORE_DCACHEDATA                 NRF_CELLCORE_DCACHEDATA_S
   #define NRF_CELLCORE_DCACHEINFO                 NRF_CELLCORE_DCACHEINFO_S
+  #define NRF_CELLCORE_STMESP                     NRF_CELLCORE_STMESP_NS
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
   #define NRF_CELLCORE_CTI                        NRF_CELLCORE_CTI_S
   #define NRF_CELLCORE_CPUC                       NRF_CELLCORE_CPUC_S
@@ -470,6 +474,7 @@ typedef enum {
   #define NRF_ICACHEINFO                          NRF_CELLCORE_ICACHEINFO
   #define NRF_DCACHEDATA                          NRF_CELLCORE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_CELLCORE_DCACHEINFO
+  #define NRF_STMESP                              NRF_CELLCORE_STMESP
   #define NRF_ETM                                 NRF_CELLCORE_ETM
   #define NRF_CTI                                 NRF_CELLCORE_CTI
   #define NRF_CPUC                                NRF_CELLCORE_CPUC
