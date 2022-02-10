@@ -156,6 +156,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_STMESP_BASE            0xA6000000UL
 #define NRF_CELLRF_HSFLL_BASE             0x46008000UL
 #define NRF_CELLRF_RFTIMERTX_BASE         0x46021000UL
 #define NRF_CELLRF_RFTIMERRX_BASE         0x46032000UL
@@ -202,6 +203,7 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_CELLRF_STMESP                 ((NRF_STMESP_Type*)                   NRF_CELLRF_STMESP_BASE)
 #define NRF_CELLRF_HSFLL                  ((NRF_HSFLL_Type*)                    NRF_CELLRF_HSFLL_BASE)
 #define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
 #define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
@@ -249,6 +251,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_STMESP                              NRF_CELLRF_STMESP
   #define NRF_HSFLL                               NRF_CELLRF_HSFLL
   #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
   #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX
