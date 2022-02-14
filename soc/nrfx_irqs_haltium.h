@@ -62,11 +62,11 @@ extern "C" {
 
 // IPCT_IRQn
 
-// WDT0_IRQn
-#define nrfx_wdt_0_irq_handler        WDT0_IRQHandler
+// WDT010_IRQn
+#define nrfx_wdt_010_irq_handler        WDT0_IRQHandler
 
-// WDT1_IRQn
-#define nrfx_wdt_1_irq_handler        WDT1_IRQHandler
+// WDT011_IRQn
+#define nrfx_wdt_011_irq_handler        WDT1_IRQHandler
 
 // BELLBOARD0_IRQn
 #if defined(NRF_RADIOCORE) || defined(NRF_APPLICATION)
@@ -95,6 +95,12 @@ extern "C" {
 #else
 #define nrfx_bellboard_3_irq_handler  BELLBOARD3_IRQHandler
 #endif
+
+// TIMER120_IRQn
+#define nrfx_timer_120_irq_handler    TIMER120_IRQHandler
+
+// TIMER121_IRQn
+#define nrfx_timer_120_irq_handler    TIMER120_IRQHandler
 
 // SPU2_IRQn
 
@@ -182,25 +188,26 @@ extern "C" {
 
 // GSPU4_IRQn
 
-// TIMER0_IRQn
-#define nrfx_timer_0_irq_handler      TIMER0_IRQHandler
+// PWM120_IRQn
+#define nrfx_pwm_120_irq_handler      PWM120_IRQHandler
 
-// TIMER1_IRQn
-#define nrfx_timer_1_irq_handler      TIMER1_IRQHandler
+// SPIS120_UARTE120_IRQn
+#define nrfx_spis_120_irq_handler     SPIS120_UARTE120_IRQHandler
 
-// PWM0_IRQn
-#define nrfx_pwm_0_irq_handler        PWM0_IRQHandler
+// SPIM120_IRQn
+#define nrfx_spim_120_irq_handler     SPIM120_IRQHandler
 
-// SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQn
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
-#define nrfx_prs_box_0_irq_handler  SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#else
-#define nrfx_spim_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_spis_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_twim_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_twis_0_irq_handler     SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#define nrfx_uarte_0_irq_handler    SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQHandler
-#endif
+// SPIM121_IRQn
+#define nrfx_spim_121_irq_handler     SPIM121_IRQHandler
+
+// TWIM120_IRQn
+#define nrfx_twim_120_irq_handler     TWIM120_IRQHandler
+
+// RTC130_IRQn
+#define nrfx_rtc_130_irq_handler      RTC130_IRQHandler
+
+// RTC131_IRQn
+#define nrfx_rtc_131_irq_handler      RTC131_IRQHandler
 
 // HSSPIM0_IRQn
 
@@ -237,6 +244,12 @@ extern "C" {
 
 // GSPU8_IRQn
 
+// WDT131_IRQn
+#define nrfx_wdt_131_irq_handler      WDT131_IRQHandler
+
+// WDT132_IRQn
+#define nrfx_wdt_132_irq_handler      WDT132_IRQHandler
+
 // SAADC_IRQn
 #define nrfx_saadc_irq_handler       SAADC_IRQHandler
 
@@ -262,103 +275,142 @@ extern "C" {
 // QDEC1_IRQn
 #define nrfx_qdec_131_irq_handler     QDEC131_IRQHandler
 
-// RTC0_IRQn
-#define nrfx_rtc_0_irq_handler        RTC0_IRQHandler
-
-// RTC1_IRQn
-#define nrfx_rtc_1_irq_handler        RTC1_IRQHandler
-
 // GGENERIC22_IRQn
 
 // GMIPIRFFE_IRQn
 
-// TWIM9_IRQn
-
 // GSPU10_IRQn
 
-// TIMER2_IRQn
-#define nrfx_timer_2_irq_handler      TIMER2_IRQHandler
+// TIMER130_IRQn
+#define nrfx_timer_130_irq_handler    TIMER130_IRQHandler
 
-// TIMER3_IRQn
-#define nrfx_timer_3_irq_handler      TIMER3_IRQHandler
+// TIMER131_IRQn
+#define nrfx_timer_131_irq_handler    TIMER131_IRQHandler
 
-// PWM1_IRQn
-#define nrfx_pwm_1_irq_handler        PWM1_IRQHandler
+// PWM130_IRQn
+#define nrfx_pwm_130_irq_handler      PWM130_IRQHandler
+
+// SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
+#define nrfx_prs_box_0_irq_handler    SERIAL0_IRQHandler
+#else
+#define nrfx_spim_130_irq_handler     SERIAL0_IRQHandler
+#define nrfx_spis_130_irq_handler     SERIAL0_IRQHandler
+#define nrfx_twim_130_irq_handler     SERIAL0_IRQHandler
+#define nrfx_twis_130_irq_handler     SERIAL0_IRQHandler
+#define nrfx_uarte_130_irq_handler    SERIAL0_IRQHandler
+#endif
 
 // SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQn
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
-#define nrfx_prs_box_1_irq_handler  SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
+#define nrfx_prs_box_1_irq_handler    SERIAL1_IRQHandler
 #else
-#define nrfx_spim_1_irq_handler     SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
-#define nrfx_spis_1_irq_handler     SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
-#define nrfx_twim_1_irq_handler     SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
-#define nrfx_twis_1_irq_handler     SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
-#define nrfx_uarte_1_irq_handler    SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQHandler
+#define nrfx_spim_131_irq_handler     SERIAL1_IRQHandler
+#define nrfx_spis_131_irq_handler     SERIAL1_IRQHandler
+#define nrfx_twim_131_irq_handler     SERIAL1_IRQHandler
+#define nrfx_twis_131_irq_handler     SERIAL1_IRQHandler
+#define nrfx_uarte_131_irq_handler    SERIAL1_IRQHandler
 #endif
+
+// TIMER132_IRQn
+#define nrfx_timer_132_irq_handler    TIMER132_IRQHandler
+
+// TIMER133_IRQn
+#define nrfx_timer_133_irq_handler    TIMER133_IRQHandler
+
+// PWM131_IRQn
+#define nrfx_pwm_131_irq_handler      PWM131_IRQHandler
 
 // SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQn
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
-#define nrfx_prs_box_2_irq_handler  SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
+#define nrfx_prs_box_2_irq_handler    SERIAL2_IRQHandler
 #else
-#define nrfx_spim_2_irq_handler     SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
-#define nrfx_spis_2_irq_handler     SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
-#define nrfx_twim_2_irq_handler     SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
-#define nrfx_twis_2_irq_handler     SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
-#define nrfx_uarte_2_irq_handler    SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQHandler
+#define nrfx_spim_132_irq_handler     SERIAL2_IRQHandler
+#define nrfx_spis_132_irq_handler     SERIAL2_IRQHandler
+#define nrfx_twim_132_irq_handler     SERIAL2_IRQHandler
+#define nrfx_twis_132_irq_handler     SERIAL2_IRQHandler
+#define nrfx_uarte_132_irq_handler    SERIAL2_IRQHandler
 #endif
 
 // GSPU11_IRQn
 
-// TIMER4_IRQn
-#define nrfx_timer_4_irq_handler      TIMER4_IRQHandler
-
-// TIMER5_IRQn
-
-// PWM2_IRQn
-#define nrfx_pwm_2_irq_handler        PWM2_IRQHandler
-
 // SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQn
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
-#define nrfx_prs_box_3_irq_handler  SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
+#define nrfx_prs_box_3_irq_handler    SERIAL3_IRQHandler
 #else
-#define nrfx_spim_3_irq_handler     SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
-#define nrfx_spis_3_irq_handler     SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
-#define nrfx_twim_3_irq_handler     SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
-#define nrfx_twis_3_irq_handler     SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
-#define nrfx_uarte_3_irq_handler    SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQHandler
+#define nrfx_spim_133_irq_handler     SERIAL3_IRQHandler
+#define nrfx_spis_133_irq_handler     SERIAL3_IRQHandler
+#define nrfx_twim_133_irq_handler     SERIAL3_IRQHandler
+#define nrfx_twis_133_irq_handler     SERIAL3_IRQHandler
+#define nrfx_uarte_133_irq_handler    SERIAL3_IRQHandler
 #endif
+
+// TIMER134_IRQn
+#define nrfx_timer_134_irq_handler    TIMER134_IRQHandler
+
+// TIMER135_IRQn
+#define nrfx_timer_135_irq_handler    TIMER135_IRQHandler
+
+// PWM132_IRQn
+#define nrfx_pwm_132_irq_handler      PWM132_IRQHandler
+
 
 // SPIM4_SPIS4_TWIM4_TWIS4_UARTE4_IRQn
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
-#define nrfx_prs_box_4_irq_handler  SPIM4_SPIS4_TWIM4_TWIS4_UARTE4_IRQHandler
+#define nrfx_prs_box_4_irq_handler    SERIAL4_IRQHandler
 #else
-#define nrfx_spim_4_irq_handler     SPIM4_SPIS4_TWIM4_TWIS4_UARTE4_IRQHandler
+#define nrfx_spim_134_irq_handler     SERIAL4_IRQHandler
+#define nrfx_spis_134_irq_handler     SERIAL4_IRQHandler
+#define nrfx_twim_134_irq_handler     SERIAL4_IRQHandler
+#define nrfx_twis_134_irq_handler     SERIAL4_IRQHandler
+#define nrfx_uarte_134_irq_handler    SERIAL4_IRQHandler
 #endif
 
 // GSPU12_IRQn
 
-// TIMER6_IRQn
-
-// TIMER7_IRQn
-
-// PWM3_IRQn
-#define nrfx_pwm_3_irq_handler        PWM3_IRQHandler
-
 // SPIM5_SPIS5_TWIM5_TWIS5_UARTE5_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#define nrfx_prs_box_5_irq_handler    SERIAL5_IRQHandler
+#else
+#define nrfx_spim_135_irq_handler     SERIAL5_IRQHandler
+#define nrfx_spis_135_irq_handler     SERIAL5_IRQHandler
+#define nrfx_twim_135_irq_handler     SERIAL5_IRQHandler
+#define nrfx_twis_135_irq_handler     SERIAL5_IRQHandler
+#define nrfx_uarte_135_irq_handler    SERIAL5_IRQHandler
+#endif
+
+// TIMER136_IRQn
+#define nrfx_timer_136_irq_handler    TIMER136_IRQHandler
+
+// TIMER137_IRQn
+#define nrfx_timer_137_irq_handler    TIMER137_IRQHandler
+
+// PWM133_IRQn
+#define nrfx_pwm_133_irq_handler      PWM133_IRQHandler
 
 // SPIM6_SPIS6_TWIM6_TWIS6_UARTE6_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#define nrfx_prs_box_6_irq_handler    SERIAL6_IRQHandler
+#else
+#define nrfx_spim_136_irq_handler     SERIAL6_IRQHandler
+#define nrfx_spis_136_irq_handler     SERIAL6_IRQHandler
+#define nrfx_twim_136_irq_handler     SERIAL6_IRQHandler
+#define nrfx_twis_136_irq_handler     SERIAL6_IRQHandler
+#define nrfx_uarte_136_irq_handler    SERIAL6_IRQHandler
+#endif
 
 // GSPU13_IRQn
 
-// TIMER8_IRQn
-
-// TIMER9_IRQn
-
-// PWM4_IRQn
-
 // SPIM7_SPIS7_TWIM7_TWIS7_UARTE7_IRQn
-
-// SPIM8_SPIS8_TWIM8_TWIS8_UARTE8_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+#define nrfx_prs_box_7_irq_handler    SERIAL7_IRQHandler
+#else
+#define nrfx_spim_137_irq_handler     SERIAL7_IRQHandler
+#define nrfx_spis_137_irq_handler     SERIAL7_IRQHandler
+#define nrfx_twim_137_irq_handler     SERIAL7_IRQHandler
+#define nrfx_twis_137_irq_handler     SERIAL7_IRQHandler
+#define nrfx_uarte_137_irq_handler    SERIAL7_IRQHandler
+#endif
 
 #ifdef __cplusplus
 }
