@@ -59,11 +59,74 @@
 #define SPIS3_LENGTH_VALIDATE(...)  0
 #endif
 
-#define SPIS_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)  \
-    (SPIS0_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS1_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
+#if NRFX_CHECK(NRFX_SPIS120_ENABLED)
+#define SPIS120_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS120, __VA_ARGS__)
+#else
+#define SPIS120_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS130_ENABLED)
+#define SPIS130_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS130, __VA_ARGS__)
+#else
+#define SPIS130_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS131_ENABLED)
+#define SPIS131_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS131, __VA_ARGS__)
+#else
+#define SPIS131_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS132_ENABLED)
+#define SPIS132_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS132, __VA_ARGS__)
+#else
+#define SPIS132_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS133_ENABLED)
+#define SPIS133_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS133, __VA_ARGS__)
+#else
+#define SPIS133_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS134_ENABLED)
+#define SPIS134_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS134, __VA_ARGS__)
+#else
+#define SPIS134_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS135_ENABLED)
+#define SPIS135_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS135, __VA_ARGS__)
+#else
+#define SPIS135_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS136_ENABLED)
+#define SPIS136_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS136, __VA_ARGS__)
+#else
+#define SPIS136_LENGTH_VALIDATE(...)  0
+#endif
+
+#if NRFX_CHECK(NRFX_SPIS137_ENABLED)
+#define SPIS137_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS137, __VA_ARGS__)
+#else
+#define SPIS137_LENGTH_VALIDATE(...)  0
+#endif
+
+#define SPIS_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)    \
+    (SPIS0_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
+     SPIS1_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
+     SPIS2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
+     SPIS3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
+     SPIS120_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS130_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS131_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS132_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS133_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS134_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS135_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS136_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
+     SPIS137_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
 
 
 #if NRFX_CHECK(NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
