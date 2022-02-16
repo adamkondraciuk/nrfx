@@ -177,6 +177,9 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
                      NRF_GPIO_PIN_NOPULL,
                      NRF_GPIO_PIN_S0S1,
                      NRF_GPIO_PIN_NOSENSE);
+#if NRF_GPIO_HAS_CLOCKPIN
+        nrfy_gpio_pin_clock_set(p_config->sck_pin, true);
+#endif
 
         if (p_config->mosi_pin != NRFX_SPIS_PIN_NOT_USED)
         {

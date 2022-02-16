@@ -5,7 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_spis.h>
-#include <hal/nrf_gpio.h>
+#include <haly/nrfy_gpio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -116,19 +116,21 @@ typedef struct
  * @param[in] _pin_miso MISO pin.
  * @param[in] _pin_csn  CSN pin.
  */
-#define NRFX_SPIS_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_csn)  \
-{                                                                           \
-    .miso_pin     = _pin_miso,                                              \
-    .mosi_pin     = _pin_mosi,                                              \
-    .sck_pin      = _pin_sck,                                               \
-    .csn_pin      = _pin_csn,                                               \
-    .mode         = NRF_SPIS_MODE_0,                                        \
-    .bit_order    = NRF_SPIS_BIT_ORDER_MSB_FIRST,                           \
-    .csn_pullup   = NRF_GPIO_PIN_NOPULL,                                    \
-    .miso_drive   = NRF_GPIO_PIN_S0S1,                                      \
-    .def          = 0xFF,                                                   \
-    .orc          = 0xFE,                                                   \
-    .irq_priority = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
+#define NRFX_SPIS_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_csn)   \
+{                                                                            \
+    .miso_pin      = _pin_miso,                                              \
+    .mosi_pin      = _pin_mosi,                                              \
+    .sck_pin       = _pin_sck,                                               \
+    .csn_pin       = _pin_csn,                                               \
+    .mode          = NRF_SPIS_MODE_0,                                        \
+    .bit_order     = NRF_SPIS_BIT_ORDER_MSB_FIRST,                           \
+    .csn_pullup    = NRF_GPIO_PIN_NOPULL,                                    \
+    .miso_drive    = NRF_GPIO_PIN_S0S1,                                      \
+    .def           = 0xFF,                                                   \
+    .orc           = 0xFE,                                                   \
+    .irq_priority  = NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY,                  \
+    .skip_gpio_cfg = false,                                                  \
+    .skip_psel_cfg = false,                                                  \
 }
 
 /** @brief SPI peripheral device configuration data. */
