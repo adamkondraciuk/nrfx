@@ -215,12 +215,14 @@ typedef struct
         .frequency     = NRF_SPIM_FREQ_4M,                                \
         .mode          = NRF_SPIM_MODE_0,                                 \
         .bit_order     = NRF_SPIM_BIT_ORDER_MSB_FIRST,                    \
+        .skip_psel_cfg = false,                                           \
         NRFX_SPIM_DEFAULT_CONFIG_EXTENDED_PART                            \
     },                                                                    \
     .sw_ss_pin         = _pin_ss,                                         \
     .sw_ss_active_high = false,                                           \
     .irq_priority      = NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY,           \
     .miso_pull         = NRF_GPIO_PIN_NOPULL,                             \
+    .skip_gpio_cfg     = false                                            \
 }
 
 /** @brief Flag indicating that TX buffer address will be incremented after transfer. */

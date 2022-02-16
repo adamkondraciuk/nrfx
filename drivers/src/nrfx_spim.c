@@ -424,6 +424,9 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
                       NRF_GPIO_PIN_NOPULL,
                       pin_drive,
                       NRF_GPIO_PIN_NOSENSE);
+#if NRF_GPIO_HAS_CLOCKPIN
+        nrfy_gpio_pin_clock_set(p_nrfy_config->pins.sck_pin, true);
+#endif
         // - MOSI (optional) - output with initial value 0
         if (p_nrfy_config->pins.mosi_pin != NRF_SPIM_PIN_NOT_CONNECTED)
         {
@@ -833,6 +836,8 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
     }
 #endif
     nrfy_spim_buffers_set(p_spim, &xfer_desc);
+
+    nrfy_spim_event_clear(p_spim, NRF_SPIM_EVENT_END);
 
     if (!(flags & NRFX_SPIM_FLAG_HOLD_XFER))
     {
