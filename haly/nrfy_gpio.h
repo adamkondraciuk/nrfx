@@ -329,6 +329,24 @@ NRFY_STATIC_INLINE void nrfy_gpio_pin_control_select(uint32_t pin_number, nrf_gp
 }
 #endif
 
+#if NRF_GPIO_HAS_CLOCKPIN
+/** @refhal{nrf_gpio_pin_clock_set} */
+NRFY_STATIC_INLINE void nrfy_gpio_pin_clock_set(uint32_t pin_number, bool enable)
+{
+    nrf_gpio_pin_clock_set(pin_number, enable);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_gpio_pin_clock_check} */
+NRFY_STATIC_INLINE bool nrfy_gpio_pin_clock_check(uint32_t pin_number)
+{
+    nrf_barrier_rw();
+    bool pin_clock = nrf_gpio_pin_clock_check(pin_number);
+    nrf_barrier_r();
+    return pin_clock;
+}
+#endif
+
 /** @refhal{nrf_gpio_pin_present_check} */
 NRFY_STATIC_INLINE bool nrfy_gpio_pin_present_check(uint32_t pin_number)
 {
