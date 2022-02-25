@@ -259,7 +259,8 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
     NRFX_ASSERT(p_main_cc_channel);
     NRFX_ASSERT(m_cb.channel_data[0].channel == NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
     nrfx_err_t err_code = NRFX_SUCCESS;
-    uint32_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+    uint32_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL) &
+                         m_cb.available_channels;
 
     if (m_cb.state != NRFX_DRV_STATE_INITIALIZED)
     {

@@ -110,6 +110,8 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_events_process(NRF_GRTC_Type * p_reg,
  */
 NRFY_STATIC_INLINE void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
 {
+    nrf_grtc_sys_counter_set(p_reg, false);
+    nrf_barrier_w();
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_STOP);
     nrf_grtc_shorts_disable(p_reg, NRF_GRTC_SHORT_RTCOMPARE_CLEAR_MASK);
     nrf_grtc_int_disable(p_reg, NRF_GRTC_INTEN_MASK);
@@ -122,6 +124,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_CLEAR);
     nrf_barrier_w();
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_START);
+    nrf_barrier_w();
     nrf_grtc_sys_counter_set(p_reg, true);
     nrf_barrier_w();
     if (busy_wait)
