@@ -79,14 +79,24 @@ extern "C" {
     // UARTE3, SPIM3, SPIS3, TWIM3, TWIS3
     #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE3
 #elif defined(HALTIUM_XXAA)
-    // SPIM0, SPIS0, TWIM0, TWIS0, UARTE0
-    #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE0
-    // SPIM1, SPIS1, TWIM1, TWIS1, UARTE1
-    #define NRFX_PRS_BOX_1_ADDR     NRF_UARTE1
-    // SPIM2, SPIS2, TWIM2, TWIS2, UARTE2
-    #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE2
-    // SPIM3, SPIS3, TWIM3, TWIS3, UARTE3
-    #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE3
+    // SPIM130, SPIS130, TWIM130, TWIS130, UARTE130
+    #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE130
+    // SPIM131, SPIS131, TWIM131, TWIS131, UARTE131
+    #define NRFX_PRS_BOX_1_ADDR     NRF_UARTE131
+    // SPIM132, SPIS132, TWIM132, TWIS132, UARTE132
+    #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE132
+    // SPIM133, SPIS133, TWIM133, TWIS133, UARTE133
+    #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE133
+    // SPIM134, SPIS134, TWIM134, TWIS134, UARTE134
+    #define NRFX_PRS_BOX_4_ADDR     NRF_UARTE134
+    // SPIM135, SPIS135, TWIM135, TWIS135, UARTE135
+    #define NRFX_PRS_BOX_5_ADDR     NRF_UARTE135
+    // SPIM136, SPIS136, TWIM136, TWIS136, UARTE136
+    #define NRFX_PRS_BOX_6_ADDR     NRF_UARTE136
+    // SPIM137, SPIS137, TWIM137, TWIS137, UARTE137
+    #define NRFX_PRS_BOX_7_ADDR     NRF_UARTE137
+    // SPIS120, UARTE120
+    #define NRFX_PRS_BOX_8_ADDR     NRF_UARTE120
 #else
     #error "Unknown device."
 #endif
@@ -131,6 +141,10 @@ void nrfx_prs_box_1_irq_handler(void);
 void nrfx_prs_box_2_irq_handler(void);
 void nrfx_prs_box_3_irq_handler(void);
 void nrfx_prs_box_4_irq_handler(void);
+void nrfx_prs_box_5_irq_handler(void);
+void nrfx_prs_box_6_irq_handler(void);
+void nrfx_prs_box_7_irq_handler(void);
+void nrfx_prs_box_8_irq_handler(void);
 
 
 #ifdef __cplusplus

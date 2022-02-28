@@ -192,7 +192,12 @@ extern "C" {
 #define nrfx_pwm_120_irq_handler      PWM120_IRQHandler
 
 // SPIS120_UARTE120_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_8_ENABLED)
+#define nrfx_prs_box_8_irq_handler    SPIS120_UARTE120_IRQHandler
+#else
 #define nrfx_spis_120_irq_handler     SPIS120_UARTE120_IRQHandler
+#define nrfx_uarte_120_irq_handler    SPIS120_UARTE120_IRQHandler
+#endif
 
 // SPIM120_IRQn
 #define nrfx_spim_120_irq_handler     SPIM120_IRQHandler
@@ -290,7 +295,7 @@ extern "C" {
 // PWM130_IRQn
 #define nrfx_pwm_130_irq_handler      PWM130_IRQHandler
 
-// SPIM0_SPIS0_TWIM0_TWIS0_UARTE0_IRQn
+// SERIAL0_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_0_ENABLED)
 #define nrfx_prs_box_0_irq_handler    SERIAL0_IRQHandler
 #else
@@ -301,7 +306,7 @@ extern "C" {
 #define nrfx_uarte_130_irq_handler    SERIAL0_IRQHandler
 #endif
 
-// SPIM1_SPIS1_TWIM1_TWIS1_UARTE1_IRQn
+// SERIAL1_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_1_ENABLED)
 #define nrfx_prs_box_1_irq_handler    SERIAL1_IRQHandler
 #else
@@ -321,7 +326,7 @@ extern "C" {
 // PWM131_IRQn
 #define nrfx_pwm_131_irq_handler      PWM131_IRQHandler
 
-// SPIM2_SPIS2_TWIM2_TWIS2_UARTE2_IRQn
+// SERIAL2_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_2_ENABLED)
 #define nrfx_prs_box_2_irq_handler    SERIAL2_IRQHandler
 #else
@@ -334,7 +339,7 @@ extern "C" {
 
 // GSPU11_IRQn
 
-// SPIM3_SPIS3_TWIM3_TWIS3_UARTE3_IRQn
+// SERIAL3_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_3_ENABLED)
 #define nrfx_prs_box_3_irq_handler    SERIAL3_IRQHandler
 #else
@@ -354,8 +359,7 @@ extern "C" {
 // PWM132_IRQn
 #define nrfx_pwm_132_irq_handler      PWM132_IRQHandler
 
-
-// SPIM4_SPIS4_TWIM4_TWIS4_UARTE4_IRQn
+// SERIAL4_IRQHandler
 #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
 #define nrfx_prs_box_4_irq_handler    SERIAL4_IRQHandler
 #else
@@ -368,8 +372,8 @@ extern "C" {
 
 // GSPU12_IRQn
 
-// SPIM5_SPIS5_TWIM5_TWIS5_UARTE5_IRQn
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+// SERIAL5_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_5_ENABLED)
 #define nrfx_prs_box_5_irq_handler    SERIAL5_IRQHandler
 #else
 #define nrfx_spim_135_irq_handler     SERIAL5_IRQHandler
@@ -388,8 +392,8 @@ extern "C" {
 // PWM133_IRQn
 #define nrfx_pwm_133_irq_handler      PWM133_IRQHandler
 
-// SPIM6_SPIS6_TWIM6_TWIS6_UARTE6_IRQn
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+// SERIAL6_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_6_ENABLED)
 #define nrfx_prs_box_6_irq_handler    SERIAL6_IRQHandler
 #else
 #define nrfx_spim_136_irq_handler     SERIAL6_IRQHandler
@@ -401,8 +405,8 @@ extern "C" {
 
 // GSPU13_IRQn
 
-// SPIM7_SPIS7_TWIM7_TWIS7_UARTE7_IRQn
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_4_ENABLED)
+// SERIAL7_IRQHandler
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_7_ENABLED)
 #define nrfx_prs_box_7_irq_handler    SERIAL7_IRQHandler
 #else
 #define nrfx_spim_137_irq_handler     SERIAL7_IRQHandler
