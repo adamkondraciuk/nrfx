@@ -311,6 +311,33 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
         #if NRFX_CHECK(NRFX_SPIS3_ENABLED)
         nrfx_spis_3_irq_handler,
         #endif
+        #if NRFX_CHECK(NRFX_SPIS120_ENABLED)
+        nrfx_spis_120_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS130_ENABLED)
+        nrfx_spis_130_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS131_ENABLED)
+        nrfx_spis_131_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS132_ENABLED)
+        nrfx_spis_132_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS133_ENABLED)
+        nrfx_spis_133_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS134_ENABLED)
+        nrfx_spis_134_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS135_ENABLED)
+        nrfx_spis_135_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS136_ENABLED)
+        nrfx_spis_136_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIS137_ENABLED)
+        nrfx_spis_137_irq_handler,
+        #endif
     };
     if (nrfx_prs_acquire(p_spis,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)

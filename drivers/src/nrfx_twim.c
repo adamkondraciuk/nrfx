@@ -276,6 +276,30 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
         #if NRFX_CHECK(NRFX_TWIM3_ENABLED)
         nrfx_twim_3_irq_handler,
         #endif
+        #if NRFX_CHECK(NRFX_TWIM130_ENABLED)
+        nrfx_twim_130_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM131_ENABLED)
+        nrfx_twim_131_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM132_ENABLED)
+        nrfx_twim_132_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM133_ENABLED)
+        nrfx_twim_133_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM134_ENABLED)
+        nrfx_twim_134_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM135_ENABLED)
+        nrfx_twim_135_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM136_ENABLED)
+        nrfx_twim_136_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIM137_ENABLED)
+        nrfx_twim_137_irq_handler,
+        #endif
     };
     if (nrfx_prs_acquire(p_instance->p_twim,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)

@@ -615,6 +615,36 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
         #if NRFX_CHECK(NRFX_SPIM4_ENABLED)
         nrfx_spim_4_irq_handler,
         #endif
+        #if NRFX_CHECK(NRFX_SPIM120_ENABLED)
+        nrfx_spim_120_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM121_ENABLED)
+        nrfx_spim_121_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM130_ENABLED)
+        nrfx_spim_130_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM131_ENABLED)
+        nrfx_spim_131_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM132_ENABLED)
+        nrfx_spim_132_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM133_ENABLED)
+        nrfx_spim_133_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM134_ENABLED)
+        nrfx_spim_134_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM135_ENABLED)
+        nrfx_spim_135_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM136_ENABLED)
+        nrfx_spim_136_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_SPIM137_ENABLED)
+        nrfx_spim_137_irq_handler,
+        #endif
     };
     if (nrfx_prs_acquire(p_instance->p_reg, irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {

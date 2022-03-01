@@ -500,6 +500,30 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
         #if NRFX_CHECK(NRFX_TWIS3_ENABLED)
         nrfx_twis_3_irq_handler,
         #endif
+        #if NRFX_CHECK(NRFX_TWIS130_ENABLED)
+        nrfx_twis_130_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS131_ENABLED)
+        nrfx_twis_131_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS132_ENABLED)
+        nrfx_twis_132_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS133_ENABLED)
+        nrfx_twis_133_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS134_ENABLED)
+        nrfx_twis_134_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS135_ENABLED)
+        nrfx_twis_135_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS136_ENABLED)
+        nrfx_twis_136_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_TWIS137_ENABLED)
+        nrfx_twis_137_irq_handler,
+        #endif
     };
     if (nrfx_prs_acquire(p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)

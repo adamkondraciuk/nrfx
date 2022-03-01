@@ -235,6 +235,33 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
         #if NRFX_CHECK(NRFX_UARTE3_ENABLED)
         nrfx_uarte_3_irq_handler,
         #endif
+        #if NRFX_CHECK(NRFX_UARTE120_ENABLED)
+        nrfx_uarte_120_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE130_ENABLED)
+        nrfx_uarte_130_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE131_ENABLED)
+        nrfx_uarte_131_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE132_ENABLED)
+        nrfx_uarte_132_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE133_ENABLED)
+        nrfx_uarte_133_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE134_ENABLED)
+        nrfx_uarte_134_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE135_ENABLED)
+        nrfx_uarte_135_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE136_ENABLED)
+        nrfx_uarte_136_irq_handler,
+        #endif
+        #if NRFX_CHECK(NRFX_UARTE137_ENABLED)
+        nrfx_uarte_137_irq_handler,
+        #endif
     };
     if (nrfx_prs_acquire(p_instance->p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
