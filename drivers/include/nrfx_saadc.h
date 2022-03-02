@@ -229,6 +229,15 @@ nrfx_err_t nrfx_saadc_channels_config(nrfx_saadc_channel_t const * p_channels,
 nrfx_err_t nrfx_saadc_channel_config(nrfx_saadc_channel_t const * p_channel);
 
 /**
+ * @brief Function for checking whether specified SAADC channel is configured.
+ *
+ * @param[in] channel_index Channel to check.
+ *
+ * @return True if channel is configured, false otherwise.
+ */
+bool nrfx_saadc_channel_configured_check(uint8_t channel_index);
+
+/**
  * @brief Function for deconfiguring the specified SAADC channels.
  *
  * @param[in] channel_mask Bitmask of channels to be deconfigured.

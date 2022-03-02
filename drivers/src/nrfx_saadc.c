@@ -296,6 +296,13 @@ nrfx_err_t nrfx_saadc_channel_config(nrfx_saadc_channel_t const * p_channel)
     return NRFX_SUCCESS;
 }
 
+bool nrfx_saadc_channel_configured_check(uint8_t channel_index)
+{
+    NRFX_ASSERT(m_cb.saadc_state != NRF_SAADC_STATE_UNINITIALIZED);
+
+    return (m_cb.channels_configured & (1UL << channel_index));
+}
+
 nrfx_err_t nrfx_saadc_channels_deconfig(uint32_t channel_mask)
 {
     NRFX_ASSERT(m_cb.saadc_state != NRF_SAADC_STATE_UNINITIALIZED);
