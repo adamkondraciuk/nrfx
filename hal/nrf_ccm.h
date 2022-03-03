@@ -47,14 +47,16 @@ extern "C" {
 #define NRF_CCM_HAS_TASK_RATEOVERRIDE 0
 #endif
 
-#if defined(CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(CCM_EVENTS_ENDKSGEN_EVENTS_ENDKSGEN_Msk) || defined(CCM_INTENSET_ENDKSGEN_Msk) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Presence of the ENDKSGEN event. */
 #define NRF_CCM_HAS_EVENT_ENDKSGEN 1
 #else
 #define NRF_CCM_HAS_EVENT_ENDKSGEN 0
 #endif
 
-#if defined(CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(CCM_EVENTS_ENDCRYPT_EVENTS_ENDCRYPT_Msk) || defined(CCM_INTENSET_ENDCRYPT_Msk) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Presence of the ENDCRYPT event. */
 #define NRF_CCM_HAS_EVENT_ENDCRYPT 1
 #else
