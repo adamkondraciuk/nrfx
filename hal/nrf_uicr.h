@@ -262,29 +262,6 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_mailbox_address_get(NRF_UICR_Type const * p_
 NRF_STATIC_INLINE
 nrf_uicr_mailbox_config_t nrf_uicr_mailbox_config_get(NRF_UICR_Type const * p_reg,
                                                       uint8_t               index);
-
-/**
- * @brief Function for getting the MAILBOX bells local mask.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index Index of the MAILBOX.
- *
- * @return Local domain bell mask of the specified MAILBOX.
- */
-NRF_STATIC_INLINE uint32_t nrf_uicr_mailbox_bells_localmask_get(NRF_UICR_Type const * p_reg,
-                                                                uint8_t               index);
-
-/**
- * @brief Function for getting the MAILBOX bells remote mask.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index Index of the MAILBOX.
- *
- * @return Remote domain bell mask of the specified MAILBOX.
- */
-NRF_STATIC_INLINE uint32_t nrf_uicr_mailbox_bells_remotemask_get(NRF_UICR_Type const * p_reg,
-                                                                 uint8_t               index);
-
 /**
  * @brief Function for getting the initial value of the secure VTOR (Vector Table Offset Register).
  *
@@ -346,14 +323,14 @@ NRF_STATIC_INLINE nrf_uicr_periph_config_t nrf_uicr_periph_config_get(NRF_UICR_T
     NRFX_ASSERT(index < NRF_UICR_PERIPH_COUNT);
     nrf_uicr_periph_config_t config;
 
-    config.secattr = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_SECATTR_Msk) >>
-                     UICR_PERIPH_CONFIG_SECATTR_Pos;
+    config.secattr = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_SECURE_Msk) >>
+                     UICR_PERIPH_CONFIG_SECURE_Pos;
 
     config.dmasec = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_DMASEC_Msk) >>
                     UICR_PERIPH_CONFIG_DMASEC_Pos;
 
-    config.domain = (nrf_domain_t)((p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_DOMAINID_Msk)
-                                   >> UICR_PERIPH_CONFIG_DOMAINID_Pos);
+    config.domain = (nrf_domain_t)((p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_PROCESSOR_Msk)
+                                   >> UICR_PERIPH_CONFIG_PROCESSOR_Pos);
 
     /* Address should not be bit-shifted, as it contains bits [31:12]. The rest should be all zeroes. */
     config.address = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_ADDRESS_Msk);
@@ -525,22 +502,6 @@ nrf_uicr_mailbox_config_t nrf_uicr_mailbox_config_get(NRF_UICR_Type const * p_re
                     >> UICR_MAILBOX_CONFIG_SECURE_Pos;
 
     return config;
-}
-
-NRF_STATIC_INLINE uint32_t nrf_uicr_mailbox_bells_localmask_get(NRF_UICR_Type const * p_reg,
-                                                                uint8_t               index)
-{
-    NRFX_ASSERT(index < NRF_UICR_MAILBOX_COUNT);
-
-    return p_reg->MAILBOX[index].BELLS.LOCALMASK;
-}
-
-NRF_STATIC_INLINE uint32_t nrf_uicr_mailbox_bells_remotemask_get(NRF_UICR_Type const * p_reg,
-                                                                 uint8_t               index)
-{
-    NRFX_ASSERT(index < NRF_UICR_MAILBOX_COUNT);
-
-    return p_reg->MAILBOX[index].BELLS.REMOTEMASK;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_uicr_initsvtor_get(NRF_UICR_Type const * p_reg)
