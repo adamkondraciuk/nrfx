@@ -173,12 +173,12 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_vevif_events_buffered_dirty_check(void)
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_subscribe_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_SUBCRIBE);
+    return csr_read(VPRCSR_NORDIC_SUBSCRIBE);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_subscribe_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_SUBCRIBE, value);
+    csr_write(VPRCSR_NORDIC_SUBSCRIBE, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_publish_get(void)

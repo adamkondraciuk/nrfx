@@ -17,7 +17,7 @@ extern "C" {
  */
 
 /** @brief Interrupts count. */
-#define NRF_VPR_CLIC_IRQ_COUNT VPR_CLIC_CLICINT_MaxCount
+#define NRF_VPR_CLIC_IRQ_COUNT CLIC_CLIC_CLICINT_MaxCount
 
 /** @brief Interupt priorities count. */
 /* @todo Replace with MDK value when available. */
@@ -27,9 +27,9 @@ extern "C" {
 /* @todo Replace with MDK values when IPS fixed. */
 typedef enum
 {
-    NRF_VPR_CLIC_MODE_M   = VPR_CLIC_CLICCFG_NMBITS_ModeM, /**< All interrupts are M-mode only. */
-    NRF_VPR_CLIC_MODE_MU  = 1,                             /**< Interrupts can be M-mode or U-mode. */
-    NRF_VPR_CLIC_MODE_MSU = 2,                             /**< Interrupts can be M/S/U-mode. */
+    NRF_VPR_CLIC_MODE_M   = CLIC_CLIC_CLICCFG_NMBITS_ModeM, /**< All interrupts are M-mode only. */
+    NRF_VPR_CLIC_MODE_MU  = 1,                              /**< Interrupts can be M-mode or U-mode. */
+    NRF_VPR_CLIC_MODE_MSU = 2,                              /**< Interrupts can be M/S/U-mode. */
 } nrf_vpr_clic_mode_t;
 
 /** @brief VPR CLIC configuration structure. */
@@ -52,18 +52,18 @@ typedef struct
 /** @brief Interrupt trigger and polarity types. */
 typedef enum
 {
-    NRF_VPR_CLIC_TRIGGER_LEVEL_POS = VPR_CLIC_CLICINT_TRIG_LevelTriggered, /**< Interrupts are positive level-triggered. */
-    NRF_VPR_CLIC_TRIGGER_EDGE_POS  = VPR_CLIC_CLICINT_TRIG_EdgeTriggered,  /**< Interrupts are positive edge-triggered. */
-    NRF_VPR_CLIC_TRIGGER_LEVEL_NEG = VPR_CLIC_CLICINT_TRIG_NegativeLevel,  /**< Interrupts are negative level-triggered. */
-    NRF_VPR_CLIC_TRIGGER_EDGE_NEG  = VPR_CLIC_CLICINT_TRIG_NegativeEdge,   /**< Interrupts are negative edge-triggered. */
+    NRF_VPR_CLIC_TRIGGER_LEVEL_POS = CLIC_CLIC_CLICINT_TRIG_LevelTriggered, /**< Interrupts are positive level-triggered. */
+    NRF_VPR_CLIC_TRIGGER_EDGE_POS  = CLIC_CLIC_CLICINT_TRIG_EdgeTriggered,  /**< Interrupts are positive edge-triggered. */
+    NRF_VPR_CLIC_TRIGGER_LEVEL_NEG = CLIC_CLIC_CLICINT_TRIG_NegativeLevel,  /**< Interrupts are negative level-triggered. */
+    NRF_VPR_CLIC_TRIGGER_EDGE_NEG  = CLIC_CLIC_CLICINT_TRIG_NegativeEdge,   /**< Interrupts are negative edge-triggered. */
 } nrf_vpr_clic_trigger_t;
 
 /** @brief Interrupt privilege. */
 typedef enum
 {
-    NRF_VPR_CLIC_PRIV_USER       = VPR_CLIC_CLICINT_MODE_UserMode,       /**< User mode. */
-    NRF_VPR_CLIC_PRIV_SUPERVISOR = VPR_CLIC_CLICINT_MODE_SupervisorMode, /**< Supervisor mode. */
-    NRF_VPR_CLIC_PRIV_MACHINE    = VPR_CLIC_CLICINT_MODE_MachineMode,    /**< Machine mode. */
+    NRF_VPR_CLIC_PRIV_USER       = CLIC_CLIC_CLICINT_MODE_UserMode,       /**< User mode. */
+    NRF_VPR_CLIC_PRIV_SUPERVISOR = CLIC_CLIC_CLICINT_MODE_SupervisorMode, /**< Supervisor mode. */
+    NRF_VPR_CLIC_PRIV_MACHINE    = CLIC_CLIC_CLICINT_MODE_MachineMode,    /**< Machine mode. */
 } nrf_vpr_clic_priv_t;
 
 /** @brief Interrupt attributes structure. */
@@ -80,7 +80,7 @@ typedef struct
  * @param[in]  p_reg    Pointer to the structure of registers of the peripheral.
  * @param[out] p_config Pointer to the VPR CLIC configuration structure.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_config_get(NRF_VPR_Type const *    p_reg,
+NRF_STATIC_INLINE void nrf_vpr_clic_config_get(NRF_CLIC_Type const *   p_reg,
                                                nrf_vpr_clic_config_t * p_config);
 
 /**
@@ -89,7 +89,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_config_get(NRF_VPR_Type const *    p_reg,
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
  * @param[out] p_info Pointer to the VPR CLIC information structure.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_VPR_Type const *  p_reg,
+NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_CLIC_Type const * p_reg,
                                              nrf_vpr_clic_info_t * p_info);
 
 /**
@@ -98,7 +98,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_VPR_Type const *  p_reg,
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] irq_num Number of interrupt to be triggered.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_set(NRF_VPR_Type * p_reg, uint32_t irq_num);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_set(NRF_CLIC_Type * p_reg, uint32_t irq_num);
 
 /**
  * @brief Function for clearing the pending status for the specified interrupt.
@@ -106,7 +106,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_set(NRF_VPR_Type * p_reg, uint32
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] irq_num Number of interrupt to be cleared.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_clear(NRF_VPR_Type * p_reg, uint32_t irq_num);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_clear(NRF_CLIC_Type * p_reg, uint32_t irq_num);
 
 /**
  * @brief Function for checking if the specified interrupt is pending.
@@ -117,7 +117,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_clear(NRF_VPR_Type * p_reg, uint
  * @retval true  Interrupt is pending.
  * @retval false Interrupt is not pending.
  */
-NRF_STATIC_INLINE bool nrf_vpr_clic_int_pending_check(NRF_VPR_Type const * p_reg, uint32_t irq_num);
+NRF_STATIC_INLINE bool nrf_vpr_clic_int_pending_check(NRF_CLIC_Type const * p_reg, uint32_t irq_num);
 
 /**
  * @brief Function for enabling or disabling the specified interrupt.
@@ -126,9 +126,9 @@ NRF_STATIC_INLINE bool nrf_vpr_clic_int_pending_check(NRF_VPR_Type const * p_reg
  * @param[in] irq_num Number of interrupt to be enabled or disabled.
  * @param[in] enable  True if interrupt is to be enabled, false otherwise.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_VPR_Type * p_reg,
-                                                   uint32_t       irq_num,
-                                                   bool           enable);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_CLIC_Type * p_reg,
+                                                   uint32_t        irq_num,
+                                                   bool            enable);
 
 /**
  * @brief Function for checking if the specified interrupt is enabled.
@@ -139,7 +139,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_VPR_Type * p_reg,
  * @retval true  Interrupt is enabled.
  * @retval false Interrupt is disabled.
  */
-NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_VPR_Type const * p_reg, uint32_t irq_num);
+NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_CLIC_Type const * p_reg, uint32_t irq_num);
 
 /**
  * @brief Function for setting the priority of the specified interrupt.
@@ -148,9 +148,9 @@ NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_VPR_Type const * p_reg,
  * @param[in] irq_num  Number of interrupt.
  * @param[in] priority Priority to be set.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_VPR_Type * p_reg,
-                                                     uint32_t       irq_num,
-                                                     uint8_t        priority);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type * p_reg,
+                                                     uint32_t        irq_num,
+                                                     uint8_t         priority);
 
 /**
  * @brief Function for getting the priority of the specified interrupt.
@@ -160,8 +160,8 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_VPR_Type * p_reg,
  *
  * @return Priority of the specified interrupt.
  */
-NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_VPR_Type const * p_reg,
-                                                        uint32_t             irq_num);
+NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
+                                                        uint32_t              irq_num);
 
 /**
  * @brief Function for getting the CLIC attributes.
@@ -170,115 +170,118 @@ NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_VPR_Type const * p_r
  * @param[in]  irq_num Number of interrupt.
  * @param[out] p_attr  Pointer to the structure to be filled with VPR CLIC attributes.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_attr_get(NRF_VPR_Type const *  p_reg,
-                                                 uint32_t              irq_num,
-                                                 nrf_vpr_clic_attr_t * p_attr);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_attr_get(NRF_CLIC_Type const *  p_reg,
+                                                 uint32_t               irq_num,
+                                                 nrf_vpr_clic_attr_t *  p_attr);
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_vpr_clic_config_get(NRF_VPR_Type const *    p_reg,
+NRF_STATIC_INLINE void nrf_vpr_clic_config_get(NRF_CLIC_Type const *   p_reg,
                                                nrf_vpr_clic_config_t * p_config)
 {
     NRFX_ASSERT(p_config);
     uint32_t cfg = p_reg->CLIC.CLICCFG;
 
-    p_config->hw_vectoring   = (cfg & VPR_CLIC_CLICCFG_NVBITS_Msk) >> VPR_CLIC_CLICCFG_NVBITS_Pos;
-    p_config->level_encoding = (cfg & VPR_CLIC_CLICCFG_NLBITS_Msk) >> VPR_CLIC_CLICCFG_NLBITS_Pos;
-    p_config->privilege_mode = (nrf_vpr_clic_mode_t)((cfg & VPR_CLIC_CLICCFG_NMBITS_Msk)
-                                                     >> VPR_CLIC_CLICCFG_NMBITS_Pos);
+    p_config->hw_vectoring   = (cfg & CLIC_CLIC_CLICCFG_NVBITS_Msk) >> CLIC_CLIC_CLICCFG_NVBITS_Pos;
+    p_config->level_encoding = (cfg & CLIC_CLIC_CLICCFG_NLBITS_Msk) >> CLIC_CLIC_CLICCFG_NLBITS_Pos;
+    p_config->privilege_mode = (nrf_vpr_clic_mode_t)((cfg & CLIC_CLIC_CLICCFG_NMBITS_Msk)
+                                                     >> CLIC_CLIC_CLICCFG_NMBITS_Pos);
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_VPR_Type const *  p_reg,
+NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_CLIC_Type const * p_reg,
                                              nrf_vpr_clic_info_t * p_info)
 {
     NRFX_ASSERT(p_info);
     uint32_t inf = p_reg->CLIC.CLICINFO;
 
-    p_info->interrupt_count = (inf & VPR_CLIC_CLICINFO_NUMINTERRUPTS_Msk)
-                              >> VPR_CLIC_CLICINFO_NUMINTERRUPTS_Pos;
-    p_info->version         = (inf & VPR_CLIC_CLICINFO_VERSION_Msk)
-                              >> VPR_CLIC_CLICINFO_VERSION_Pos;
-    p_info->ctl_bits        = (inf & VPR_CLIC_CLICINFO_CLICINTCTLBITS_Msk)
-                              >> VPR_CLIC_CLICINFO_CLICINTCTLBITS_Pos;
-    p_info->trigger_count   = (inf & VPR_CLIC_CLICINFO_NUMTRIGGER_Msk)
-                              >> VPR_CLIC_CLICINFO_NUMTRIGGER_Pos;
+    p_info->interrupt_count = (inf & CLIC_CLIC_CLICINFO_NUMINTERRUPTS_Msk)
+                              >> CLIC_CLIC_CLICINFO_NUMINTERRUPTS_Pos;
+    p_info->version         = (inf & CLIC_CLIC_CLICINFO_VERSION_Msk)
+                              >> CLIC_CLIC_CLICINFO_VERSION_Pos;
+    p_info->ctl_bits        = (inf & CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Msk)
+                              >> CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Pos;
+    p_info->trigger_count   = (inf & CLIC_CLIC_CLICINFO_NUMTRIGGER_Msk)
+                              >> CLIC_CLIC_CLICINFO_NUMTRIGGER_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_set(NRF_VPR_Type * p_reg, uint32_t irq_num)
+NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_set(NRF_CLIC_Type * p_reg, uint32_t irq_num)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
-    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~VPR_CLIC_CLICINT_IP_Msk) |
-                                   (VPR_CLIC_CLICINT_IP_Pending << VPR_CLIC_CLICINT_IP_Pos);
+    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_IP_Msk) |
+                                   (CLIC_CLIC_CLICINT_IP_Pending << CLIC_CLIC_CLICINT_IP_Pos);
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_clear(NRF_VPR_Type * p_reg, uint32_t irq_num)
+NRF_STATIC_INLINE void nrf_vpr_clic_int_pending_clear(NRF_CLIC_Type * p_reg, uint32_t irq_num)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
-    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~VPR_CLIC_CLICINT_IP_Msk) |
-                                   (VPR_CLIC_CLICINT_IP_NotPending << VPR_CLIC_CLICINT_IP_Pos);
+    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_IP_Msk) |
+                                   (CLIC_CLIC_CLICINT_IP_NotPending << CLIC_CLIC_CLICINT_IP_Pos);
 }
 
-NRF_STATIC_INLINE bool nrf_vpr_clic_int_pending_check(NRF_VPR_Type const * p_reg, uint32_t irq_num)
-{
-    NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
-
-    return ((p_reg->CLIC.CLICINT[irq_num] & VPR_CLIC_CLICINT_IP_Msk) >> VPR_CLIC_CLICINT_IP_Pos) ==
-           VPR_CLIC_CLICINT_IP_Pending ? true : false;
-}
-
-NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_VPR_Type * p_reg,
-                                                   uint32_t       irq_num,
-                                                   bool           enable)
-{
-    NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
-    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~VPR_CLIC_CLICINT_IE_Msk) |
-                                   ((enable ? VPR_CLIC_CLICINT_IE_Enabled :
-                                              VPR_CLIC_CLICINT_IE_Disabled)
-                                    << VPR_CLIC_CLICINT_IE_Pos);
-}
-
-NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_VPR_Type const * p_reg, uint32_t irq_num)
+NRF_STATIC_INLINE bool nrf_vpr_clic_int_pending_check(NRF_CLIC_Type const * p_reg, uint32_t irq_num)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
 
-    return ((p_reg->CLIC.CLICINT[irq_num] & VPR_CLIC_CLICINT_IE_Msk) >> VPR_CLIC_CLICINT_IE_Pos) ==
-           VPR_CLIC_CLICINT_IE_Enabled ? true : false;
+    return ((p_reg->CLIC.CLICINT[irq_num] & CLIC_CLIC_CLICINT_IP_Msk) >> CLIC_CLIC_CLICINT_IP_Pos)
+           ==
+           CLIC_CLIC_CLICINT_IP_Pending ? true : false;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_VPR_Type * p_reg,
-                                                     uint32_t       irq_num,
-                                                     uint8_t        priority)
+NRF_STATIC_INLINE void nrf_vpr_clic_int_enable_set(NRF_CLIC_Type * p_reg,
+                                                   uint32_t        irq_num,
+                                                   bool            enable)
+{
+    NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
+    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_IE_Msk) |
+                                   ((enable ? CLIC_CLIC_CLICINT_IE_Enabled :
+                                              CLIC_CLIC_CLICINT_IE_Disabled)
+                                    << CLIC_CLIC_CLICINT_IE_Pos);
+}
+
+NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_CLIC_Type const * p_reg, uint32_t irq_num)
+{
+    NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
+
+    return ((p_reg->CLIC.CLICINT[irq_num] & CLIC_CLIC_CLICINT_IE_Msk) >> CLIC_CLIC_CLICINT_IE_Pos)
+           ==
+           CLIC_CLIC_CLICINT_IE_Enabled ? true : false;
+}
+
+NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type * p_reg,
+                                                     uint32_t        irq_num,
+                                                     uint8_t         priority)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
     NRFX_ASSERT(priority < NRF_VPR_CLIC_PRIO_COUNT);
 
-    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~VPR_CLIC_CLICINT_PRIORITY_Msk) |
-                                   (priority << VPR_CLIC_CLICINT_PRIORITY_Pos);
+    p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_PRIORITY_Msk)
+                                   |
+                                   (priority << CLIC_CLIC_CLICINT_PRIORITY_Pos);
 }
 
 
-NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_VPR_Type const * p_reg,
-                                                        uint32_t             irq_num)
+NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
+                                                        uint32_t              irq_num)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
 
-    return (p_reg->CLIC.CLICINT[irq_num] & VPR_CLIC_CLICINT_PRIORITY_Msk)
-           >> VPR_CLIC_CLICINT_PRIORITY_Pos;
+    return (p_reg->CLIC.CLICINT[irq_num] & CLIC_CLIC_CLICINT_PRIORITY_Msk)
+           >> CLIC_CLIC_CLICINT_PRIORITY_Pos;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_int_attr_get(NRF_VPR_Type const *  p_reg,
-                                                 uint32_t              irq_num,
-                                                 nrf_vpr_clic_attr_t * p_attr)
+NRF_STATIC_INLINE void nrf_vpr_clic_int_attr_get(NRF_CLIC_Type const *  p_reg,
+                                                 uint32_t               irq_num,
+                                                 nrf_vpr_clic_attr_t *  p_attr)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
     NRFX_ASSERT(p_attr);
     uint32_t att = p_reg->CLIC.CLICINT[irq_num];
 
-    p_attr->hw_vectoring = (att & VPR_CLIC_CLICINT_SHV_Msk) >> VPR_CLIC_CLICINT_SHV_Pos;
-    p_attr->trigger      = (nrf_vpr_clic_trigger_t)((att & VPR_CLIC_CLICINT_TRIG_Msk)
-                                                    >> VPR_CLIC_CLICINT_TRIG_Pos);
-    p_attr->privilege    = (nrf_vpr_clic_priv_t)((att & VPR_CLIC_CLICINT_MODE_Msk)
-                                                 >> VPR_CLIC_CLICINT_MODE_Pos);
+    p_attr->hw_vectoring = (att & CLIC_CLIC_CLICINT_SHV_Msk) >> CLIC_CLIC_CLICINT_SHV_Pos;
+    p_attr->trigger      = (nrf_vpr_clic_trigger_t)((att & CLIC_CLIC_CLICINT_TRIG_Msk)
+                                                    >> CLIC_CLIC_CLICINT_TRIG_Pos);
+    p_attr->privilege    = (nrf_vpr_clic_priv_t)((att & CLIC_CLIC_CLICINT_MODE_Msk)
+                                                    >> CLIC_CLIC_CLICINT_MODE_Pos);
 }
 
 #endif // NRF_DECLARE_ONLY

@@ -20,14 +20,14 @@ extern "C" {
 /** @brief Counter modes. */
 typedef enum
 {
-    NRF_VPR_CSR_VTIM_COUNT_STOP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE_STOP,     ///< Counter stops at 0.
-    NRF_VPR_CSR_VTIM_COUNT_WRAP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE_WRAP,     ///< Counter will continue counting from 0xFFF.
-    NRF_VPR_CSR_VTIM_COUNT_RELOAD           = VPRCSR_NORDIC_CNTMODE0_CNTMODE_RELOAD,   ///< Counter will continue counting from the value in counter top.
-    NRF_VPR_CSR_VTIM_COUNT_TRIGGER_COMBINED = VPRCSR_NORDIC_CNTMODE0_CNTMODE_TRIGCOMB, ///< Trigger (counter 0) or combined (counter 1) mode.
-                                                                                       /**< Trigger (applies to counter 0): Counter stops at 0.
-                                                                                        *   Counting will restart when a VIO event happens.
-                                                                                        *   Combined (applies to counter 1): Counter 1 acts as an extension of counter 0.
-                                                                                        *   (16 most significant bits of a 32-bit counter.) */
+    NRF_VPR_CSR_VTIM_COUNT_STOP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE0_STOP,     ///< Counter stops at 0.
+    NRF_VPR_CSR_VTIM_COUNT_WRAP             = VPRCSR_NORDIC_CNTMODE0_CNTMODE0_WRAP,     ///< Counter will continue counting from 0xFFF.
+    NRF_VPR_CSR_VTIM_COUNT_RELOAD           = VPRCSR_NORDIC_CNTMODE0_CNTMODE0_RELOAD,   ///< Counter will continue counting from the value in counter top.
+    NRF_VPR_CSR_VTIM_COUNT_TRIGGER_COMBINED = VPRCSR_NORDIC_CNTMODE0_CNTMODE0_TRIGCOMB, ///< Trigger (counter 0) or combined (counter 1) mode.
+                                                                                        /**< Trigger (applies to counter 0): Counter stops at 0.
+                                                                                         *   Counting will restart when a VIO event happens.
+                                                                                         *   Combined (applies to counter 1): Counter 1 acts as an extension of counter 0.
+                                                                                         *   (16 most significant bits of a 32-bit counter.) */
 } nrf_vpr_csr_vtim_count_t;
 
 /**
