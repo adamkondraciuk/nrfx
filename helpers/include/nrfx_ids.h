@@ -100,7 +100,7 @@ typedef enum
 #if defined(NRF5340_XXAA)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
 #elif defined(HALTIUM_XXAA)
-#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV) 
+#if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_BELLBOARD_EVENTS_TRIGGERED_COUNT
 #else /* ISA_RISCV */
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT NRF_VPR_EVENTS_TRIGGERED_COUNT
@@ -251,15 +251,15 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
             break;
 
         case NRFX_IDS_DOMAIN_SYSCTRL:
-            p_vpr = NRF_SYSCTRL_VPR;
+            p_vpr = NRF_VPR120;
             break;
 
         case NRFX_IDS_DOMAIN_FLPR:
-            p_vpr = NRF_FLPR_VPR;
+            p_vpr = NRF_VPR120;
             break;
 
         case NRFX_IDS_DOMAIN_PPR:
-            p_vpr = NRF_PPR_VPR;
+            p_vpr = NRF_VPR120;
             break;
 
         default:
