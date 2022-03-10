@@ -308,6 +308,14 @@ NRFY_STATIC_INLINE void nrfy_rtc_task_trigger(NRF_RTC_Type * p_reg,
     nrf_barrier_w();
 }
 
+#if defined(RTC_TASKS_CAPTURE_TASKS_CAPTURE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @refhal{nrf_rtc_capture_task_get} */
+NRFY_STATIC_INLINE nrf_rtc_task_t nrfy_rtc_capture_task_get(uint8_t index)
+{
+    return nrf_rtc_capture_task_get(index);
+}
+#endif
+
 /** @refhal{nrf_rtc_event_enable} */
 NRFY_STATIC_INLINE void nrfy_rtc_event_enable(NRF_RTC_Type * p_reg,
                                               uint32_t       mask)
