@@ -255,6 +255,17 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_event_address_get(NRF_RTC_Type const * p_reg,
 NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type const * p_reg,
                                                     nrf_rtc_task_t       task);
 
+#if defined(RTC_TASKS_CAPTURE_TASKS_CAPTURE_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for getting the CAPTURE task associated with the specified capture channel.
+ *
+ * @param[in] index Capture channel index.
+ *
+ * @return Requested CAPTURE task.
+ */
+NRF_STATIC_INLINE nrf_rtc_task_t nrf_rtc_capture_task_get(uint8_t index);
+#endif
+
 /**
  * @brief Function for starting a task.
  *
@@ -383,6 +394,13 @@ NRF_STATIC_INLINE uint32_t nrf_rtc_task_address_get(NRF_RTC_Type const * p_reg,
 {
     return (uint32_t)p_reg + task;
 }
+
+#if defined(RTC_TASKS_CAPTURE_TASKS_CAPTURE_Msk)
+NRF_STATIC_INLINE nrf_rtc_task_t nrf_rtc_capture_task_get(uint8_t index)
+{
+    return (nrf_rtc_task_t)NRFX_OFFSETOF(NRF_RTC_Type, TASKS_CAPTURE[index]);
+}
+#endif
 
 NRF_STATIC_INLINE void nrf_rtc_task_trigger(NRF_RTC_Type * p_reg, nrf_rtc_task_t task)
 {
