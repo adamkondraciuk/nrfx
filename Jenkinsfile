@@ -57,12 +57,6 @@ pipeline {
     }
     post {
         always { node (null) {
-            // unstash built documentation (if exists)
-            script { try {
-               unstash name: 'documentation_stash'
-            } catch (error) {
-               echo "error unstashing: ${error}"
-            } }
             
             // copy & archive results from downstream jobs
             copyArtifacts projectName: "NRFX/nrfx-verification-unittests-gcc/${nrfx_verification_branch}", selector: lastCompleted()
@@ -73,14 +67,14 @@ pipeline {
             copyArtifacts projectName: "NRFX/sub-documentation-building/${nrfx_verification_branch}", selector: lastCompleted()
 
             archiveArtifacts "work/nrfx-verification/outcomes/*/*"
-            archiveArtifacts allowEmptyArchive: true, artifacts: "warnings_nrfx.txt"
+            archiveArtifacts artifacts: "work/nrfx/doc/warnings_nrfx.txt"
             archiveArtifacts artifacts: "html_sphinx.zip"
             archiveArtifacts allowEmptyArchive: true, artifacts: "work/nrfx-verification/source/tests/api/**/**/compile_result.txt"
 
             // process results
             junit 'work/nrfx-verification/outcomes/*/*.xml'
-            
-            
+
+
             // send an e-mail with build result
             script {
                 def result = currentBuild.currentResult
