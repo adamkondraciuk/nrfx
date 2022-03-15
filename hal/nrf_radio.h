@@ -1636,13 +1636,11 @@ NRF_STATIC_INLINE void nrf_radio_frequency_set(NRF_RADIO_Type * p_reg, uint16_t 
     uint32_t delta;
     if (radio_frequency < 2400)
     {
-        delta = ((uint32_t)(radio_frequency - 2360)) |
-                (RADIO_FREQUENCY_MAP_Low << RADIO_FREQUENCY_MAP_Pos);
+        delta = (uint32_t)(radio_frequency - 2360) | RADIO_FREQUENCY_MAP_Msk;
     }
     else
     {
-        delta = ((uint32_t)(radio_frequency - 2400)) |
-                (RADIO_FREQUENCY_MAP_Default << RADIO_FREQUENCY_MAP_Pos);
+        delta = (uint32_t)(radio_frequency - 2400);
     }
 
     p_reg->FREQUENCY = delta;
@@ -1657,8 +1655,7 @@ NRF_STATIC_INLINE uint16_t nrf_radio_frequency_get(NRF_RADIO_Type const * p_reg)
     uint32_t freq;
 
 #if defined(RADIO_FREQUENCY_MAP_Msk)
-    if (((p_reg->FREQUENCY & RADIO_FREQUENCY_MAP_Msk) >> RADIO_FREQUENCY_MAP_Pos) ==
-        RADIO_FREQUENCY_MAP_Low)
+    if ((p_reg->FREQUENCY & RADIO_FREQUENCY_MAP_Msk) == RADIO_FREQUENCY_MAP_Msk)
     {
         freq = 2360;
     }
@@ -2128,8 +2125,7 @@ NRF_STATIC_INLINE uint32_t nrf_radio_dfe_pattern_cnt_get(NRF_RADIO_Type const * 
 
 NRF_STATIC_INLINE void nrf_radio_dfe_pattern_clear(NRF_RADIO_Type * p_reg)
 {
-    p_reg->CLEARPATTERN = RADIO_CLEARPATTERN_CLEARPATTERN_Clear <<
-                          RADIO_CLEARPATTERN_CLEARPATTERN_Pos;
+    p_reg->CLEARPATTERN = RADIO_CLEARPATTERN_CLEARPATTERN_Msk;
 }
 #endif
 
