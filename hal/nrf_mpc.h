@@ -112,7 +112,8 @@ typedef struct
     bool    lock;          /**< Lock region until next reset. */
     bool    enable;        /**< Enable region. */
     bool    secdom_enable; /**< Enable overriding of secure domain permissions. */
-    bool    secure_mask;   /**< Enable secure mask. If set, the bit 28 of the transaction is ignored while address matching. */
+    bool    secure_mask;   /**< Secure mask. Read only.
+                            *   If set, the bit 28 of the transaction is ignored while address matching. */
 } nrf_mpc_override_config_t;
 
 /**
@@ -761,11 +762,7 @@ NRF_STATIC_INLINE void nrf_mpc_override_config_set(NRF_MPC_Type *               
                                      ((p_config->secdom_enable ?
                                        MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled :
                                        MPC_OVERRIDE_CONFIG_SECDOMENABLE_Disabled) <<
-                                      MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos) |
-                                     ((p_config->secure_mask ?
-                                       MPC_OVERRIDE_CONFIG_SECUREMASK_Enabled :
-                                       MPC_OVERRIDE_CONFIG_SECUREMASK_Disabled) <<
-                                      MPC_OVERRIDE_CONFIG_SECUREMASK_Pos));
+                                      MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos));
 }
 
 NRF_STATIC_INLINE nrf_mpc_override_config_t nrf_mpc_override_config_get(NRF_MPC_Type const * p_reg,
