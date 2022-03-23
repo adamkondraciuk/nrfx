@@ -291,7 +291,7 @@ extern "C" {
 #define NRC_CCM_PKTCTR_SIZE 9
 
 /** @brief CCM data structure. */
-typedef struct
+typedef struct __PACKED
 {
     uint8_t key[NRF_CCM_KEY_SIZE];       ///< 16-byte AES key.
     uint8_t pktctr[NRC_CCM_PKTCTR_SIZE]; ///< Packet counter configuration.
