@@ -25,7 +25,7 @@ extern "C" {
  *                must not be smaller than reference voltage divided by 64.
  * @param[in] ref Reference voltage.
  */
-#define NRFX_VOLTAGE_THRESHOLD_TO_INT(vol, ref) \
+#define NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT(vol, ref) \
     (uint8_t)(((vol) > ((ref) / 64)) ? (NRFX_ROUNDED_DIV((vol) * 64,(ref)) - 1) : 0)
 
 /**
@@ -60,10 +60,10 @@ typedef struct
 } nrfx_comp_config_t;
 
 /** @brief COMP threshold default configuration. */
-#define NRFX_COMP_CONFIG_TH                             \
-{                                                       \
-    .th_down = NRFX_VOLTAGE_THRESHOLD_TO_INT(0.5, 1.8), \
-    .th_up   = NRFX_VOLTAGE_THRESHOLD_TO_INT(1.5, 1.8)  \
+#define NRFX_COMP_CONFIG_TH                                  \
+{                                                            \
+    .th_down = NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT(0.5, 1.8), \
+    .th_up   = NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT(1.5, 1.8)  \
 }
 
 #if NRF_COMP_HAS_ISOURCE || defined (__NRFX_DOXYGEN__)
