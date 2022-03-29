@@ -42,6 +42,22 @@ typedef enum
     NRF_OWNER_SYSCTRL     = 8,
 } nrf_owner_t;
 
+/* TODO: Create tag for internal cores and remove them from public release. */
+typedef enum
+{
+    NRF_PROCESSOR_ID_SECURE      = 1,
+    NRF_PROCESSOR_ID_APPLICATION = 2,
+    NRF_PROCESSOR_ID_RADIOCORE   = 3,
+    NRF_PROCESSOR_ID_CELLCORE    = 4,
+    NRF_PROCESSOR_ID_CELLDSP     = 5,
+    NRF_PROCESSOR_ID_CELLRF      = 6,
+    NRF_PROCESSOR_ID_ISIMCORE    = 7,
+    NRF_PROCESSOR_ID_BBPR        = 11,
+    NRF_PROCESSOR_ID_SYSCTRL     = 12,
+    NRF_PROCESSOR_ID_PPR         = 13,
+    NRF_PROCESSOR_ID_FLPR        = 14,
+} nrf_processor_id_t;
+
 /* TODO: Those should be in MDK (MDK-2059) */
 #define ADDRESS_REGION_Pos   (29UL)
 #define ADDRESS_REGION_Msk   (0xE0000000UL)
