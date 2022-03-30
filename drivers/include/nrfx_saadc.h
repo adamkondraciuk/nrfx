@@ -240,6 +240,9 @@ bool nrfx_saadc_channel_configured_check(uint8_t channel_index);
 /**
  * @brief Function for deconfiguring the specified SAADC channels.
  *
+ * @warning Pins associated with the deconfigured channels will be released after
+ *          next @ref nrfx_saadc_simple_mode_set() or @ref nrfx_saadc_advanced_mode_set() call.
+ *
  * @param[in] channel_mask Bitmask of channels to be deconfigured.
  *
  * @retval NRFX_SUCCESS    Deconfiguration was successful.

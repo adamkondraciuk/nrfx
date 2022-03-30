@@ -139,6 +139,17 @@ static void saadc_channels_deconfig(uint32_t channel_mask)
     }
 }
 
+static void saadc_channels_disable(uint32_t channel_mask)
+{
+    while (channel_mask)
+    {
+        uint8_t channel = NRF_CTZ(channel_mask);
+        channel_mask &= ~(1 << channel);
+        nrf_saadc_channel_input_set(NRF_SAADC, channel,
+                                    NRF_SAADC_INPUT_DISABLED, NRF_SAADC_INPUT_DISABLED);
+    }
+}
+
 static bool saadc_busy_check(void)
 {
     if ((m_cb.saadc_state == NRF_SAADC_STATE_IDLE)     ||
@@ -250,6 +261,7 @@ void nrfx_saadc_uninit(void)
     nrfx_saadc_abort();
     NRFX_IRQ_DISABLE(SAADC_IRQn);
     nrf_saadc_disable(NRF_SAADC);
+    saadc_channels_disable(m_cb.channels_configured | m_cb.channels_activated);
     m_cb.saadc_state = NRF_SAADC_STATE_UNINITIALIZED;
 }
 
