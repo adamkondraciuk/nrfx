@@ -255,11 +255,11 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
             break;
 
         case NRFX_IDS_DOMAIN_FLPR:
-            p_vpr = NRF_VPR120;
+            p_vpr = NRF_VPR121;
             break;
 
         case NRFX_IDS_DOMAIN_PPR:
-            p_vpr = NRF_VPR120;
+            p_vpr = NRF_VPR130;
             break;
 
         default:
