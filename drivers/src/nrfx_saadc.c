@@ -821,18 +821,15 @@ static void saadc_event_end_handle(void)
             break;
 
         case NRF_SAADC_STATE_ADV_MODE_SAMPLE_STARTED:
+            if (m_cb.start_on_end && m_cb.p_buffer_secondary)
+            {
+                nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_START);
+            }
             m_cb.event_handler(&evt_data);
             m_cb.p_buffer_primary = m_cb.p_buffer_secondary;
             m_cb.size_primary     = m_cb.size_secondary;
             m_cb.p_buffer_secondary = NULL;
-            if (m_cb.p_buffer_primary)
-            {
-                if (m_cb.start_on_end)
-                {
-                    nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_START);
-                }
-            }
-            else
+            if (!m_cb.p_buffer_primary)
             {
                 nrf_saadc_disable(NRF_SAADC);
                 m_cb.saadc_state = NRF_SAADC_STATE_ADV_MODE;
