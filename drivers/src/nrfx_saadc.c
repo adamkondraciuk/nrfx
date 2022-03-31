@@ -885,12 +885,6 @@ void nrfx_saadc_irq_handler(void)
         nrf_saadc_task_trigger(NRF_SAADC, NRF_SAADC_TASK_START);
     }
 
-    if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STARTED))
-    {
-        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
-        saadc_event_started_handle();
-    }
-
     if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STOPPED))
     {
         nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STOPPED);
@@ -916,6 +910,12 @@ void nrfx_saadc_irq_handler(void)
     {
         nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_END);
         saadc_event_end_handle();
+    }
+
+    if (nrf_saadc_event_check(NRF_SAADC, NRF_SAADC_EVENT_STARTED))
+    {
+        nrf_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_STARTED);
+        saadc_event_started_handle();
     }
 
     if (m_cb.saadc_state != NRF_SAADC_STATE_CALIBRATION)
