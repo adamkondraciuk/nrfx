@@ -285,8 +285,8 @@ typedef enum {
 #define NRF_APPLICATION_IPCT_S            ((NRF_IPCT_Type*)                     NRF_APPLICATION_IPCT_S_BASE)
 #define NRF_APPLICATION_BELLBOARD_NS      ((NRF_BELLBOARD_Type*)                NRF_APPLICATION_BELLBOARD_NS_BASE)
 #define NRF_APPLICATION_BELLBOARD_S       ((NRF_BELLBOARD_Type*)                NRF_APPLICATION_BELLBOARD_S_BASE)
-#define NRF_APPLICATION_VPR_NS            ((NRF_VPR_Type*)                      NRF_APPLICATION_VPR_NS_BASE)
-#define NRF_APPLICATION_VPR_S             ((NRF_VPR_Type*)                      NRF_APPLICATION_VPR_S_BASE)
+#define NRF_APPLICATION_VPR_NS            ((NRF_CLIC_Type*)                     NRF_APPLICATION_VPR_NS_BASE)
+#define NRF_APPLICATION_VPR_S             ((NRF_CLIC_Type*)                     NRF_APPLICATION_VPR_S_BASE)
 
 
 
