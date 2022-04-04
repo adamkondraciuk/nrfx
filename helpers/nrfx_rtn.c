@@ -3,7 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_CHECK(NRFX_RTN_ENABLED)
-#include <helpers/include/nrfx_rtn.h>
+#include <helpers/nrfx_rtn.h>
 
 #define NRFX_LOG_MODULE NRFX_RTN
 #include <nrfx_log.h>

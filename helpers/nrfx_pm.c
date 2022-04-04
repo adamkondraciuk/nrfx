@@ -3,7 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_CHECK(NRFX_PM_ENABLED)
-#include <helpers/include/nrfx_pm_driver.h>
+#include <helpers/nrfx_pm_driver.h>
 
 #define NRFX_LOG_MODULE PM
 #include <nrfx_log.h>

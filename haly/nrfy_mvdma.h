@@ -5,7 +5,7 @@
 
 #include <nrfx.h>
 #include <hal/nrf_mvdma.h>
-#include <helpers/include/nrf_vdma.h>
+#include <helpers/nrf_vdma.h>
 
 #ifdef __cplusplus
 extern "C" {

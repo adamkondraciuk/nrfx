@@ -5,7 +5,7 @@
 #if NRFX_CHECK(NRFX_GRTC_ENABLED)
 
 #include <nrfx_grtc.h>
-#include <helpers/include/nrfx_flag32_allocator.h>
+#include <helpers/nrfx_flag32_allocator.h>
 
 #define NRFX_LOG_MODULE GRTC
 #include <nrfx_log.h>

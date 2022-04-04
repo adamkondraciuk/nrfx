@@ -3,7 +3,7 @@
 #ifndef NRFX_PM_DRIVER_H__
 #define NRFX_PM_DRIVER_H__
 
-#include <helpers/include/nrfx_pm.h>
+#include <helpers/nrfx_pm.h>
 
 #ifdef __cplusplus
 extern "C" {
