@@ -39,6 +39,8 @@ extern "C" {
     #endif
 #elif defined(NRF_SYSCTRL)
     #define NRF_GRTC_IRQ_GROUP 6
+#elif defined(NRF_PPR)
+    #define NRF_GRTC_IRQ_GROUP 4
 #else
     #if defined(NRF_SECURE)
         #define NRF_GRTC_IRQ_GROUP 1
@@ -53,13 +55,14 @@ extern "C" {
     #endif
 #endif
 
-#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
     /** @todo Remove when fix in MDK will appear. */
     #if defined(NRF_CELLCORE)            || \
         defined(NRF_SECURE)              || \
         defined(NRF_SYSCTRL)             || \
+        defined(NRF_PPR)                 || \
         defined(NRF_SYSTEMC_APPLICATION) || \
         defined(NRF_SYSTEMC_SECURE)
         /** @brief Fixup for the GRTC IRQHandler. */
