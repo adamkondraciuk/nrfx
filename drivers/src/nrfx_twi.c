@@ -192,13 +192,13 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
         p_cb->hold_bus_uninit = p_config->hold_bus_uninit;
         p_cb->skip_gpio_cfg   = p_config->skip_gpio_cfg;
 
-        NRFX_ASSERT(p_config->scl != p_config->sda);
         /* To secure correct signal levels on the pins used by the TWI
            master when the system is in OFF mode, and when the TWI master is
            disabled, these pins must be configured in the GPIO peripheral.
         */
         if (!p_config->skip_gpio_cfg)
         {
+            NRFX_ASSERT(p_config->scl != p_config->sda);
             TWI_PIN_INIT(p_config->scl);
             TWI_PIN_INIT(p_config->sda);
         }

@@ -238,6 +238,7 @@ static bool pins_configure(nrfx_twim_config_t const * p_config)
     */
    if (!p_config->skip_gpio_cfg)
    {
+        NRFX_ASSERT(p_config->nrfy_config.pins.scl_pin != p_config->nrfy_config.pins.sda_pin);
         TWIM_PIN_INIT(p_config->nrfy_config.pins.scl_pin, pin_drive);
         TWIM_PIN_INIT(p_config->nrfy_config.pins.sda_pin, pin_drive);
    }
@@ -320,8 +321,6 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 
     if (p_config)
     {
-        NRFX_ASSERT(p_config->nrfy_config.pins.scl_pin != p_config->nrfy_config.pins.sda_pin);
-
         p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
         if (!pins_configure(p_config))
         {

@@ -544,10 +544,10 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
     p_cb->ev_handler = event_handler;
     if (p_config)
     {
-        NRFX_ASSERT(p_config->scl != p_config->sda);
         p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
         if (!p_config->skip_gpio_cfg)
         {
+            NRFX_ASSERT(p_config->scl != p_config->sda);
             nrfx_twis_config_pin(p_config->scl, p_config->scl_pull);
             nrfx_twis_config_pin(p_config->sda, p_config->sda_pull);
         }
