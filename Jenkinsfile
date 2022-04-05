@@ -7,8 +7,8 @@ pipeline {
         DEFAULT_NOTIF_EMAIL = "bartlomiej.buczek@nordicsemi.no"
     }
     parameters {
-        string(name: 'nrfx_build_branch', defaultValue: "nrfx2.8-dev", description: 'Branch for nrfx_build repository')
-        string(name: 'nrfx_verification_branch', defaultValue: "nrfx2.8-dev", description: 'Branch for nrfx_verification repository')
+        string(name: 'nrfx_build_branch', defaultValue: "master", description: 'Branch for nrfx_build repository')
+        string(name: 'nrfx_verification_branch', defaultValue: "master", description: 'Branch for nrfx_verification repository')
         string(name: 'filtered_unittests', defaultValue: "", description: 'Unit tests filtered from execution (space separated)')
         string(name: 'filtered_ontargettests', defaultValue: "", description: 'On-target tests filtered from execution (space separated)')
         string(name: 'filtered_power_ontargettests', defaultValue: "", description: 'Power on-target tests filtered from execution (space separated)')
