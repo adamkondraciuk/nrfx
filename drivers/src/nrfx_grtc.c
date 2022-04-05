@@ -254,6 +254,24 @@ nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority)
 }
 
 #if defined(NRF_SYSCTRL)
+nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait)
+{
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (is_syscounter_running())
+    {
+        err_code = NRFX_ERROR_INTERNAL;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
+    nrfy_grtc_rt_counter_start(NRF_GRTC, busy_wait);
+    
+    NRFX_LOG_INFO("GRTC RTCOUNTER started.");
+    return err_code;
+}
+
 nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel)
 {
     NRFX_ASSERT(p_main_cc_channel);
@@ -293,7 +311,7 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
-    nrfy_grtc_start(NRF_GRTC, busy_wait);
+    nrfy_grtc_sys_counter_start(NRF_GRTC, busy_wait);
 
     NRFX_LOG_INFO("GRTC SYSCOUNTER started.");
     return err_code;

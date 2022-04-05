@@ -22,6 +22,9 @@ NRFY_STATIC_INLINE bool __nrfy_internal_grtc_event_handle(NRF_GRTC_Type *  p_reg
 NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * p_reg,
                                                                 uint32_t        mask);
 
+#if defined(NRF_SYSCTRL)
+NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type const * p_reg);
+#endif
 /**
  * @defgroup nrfy_grtc GRTC HALY
  * @{
@@ -99,20 +102,19 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_events_process(NRF_GRTC_Type * p_reg,
 
 #if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for starting the GRTC timer.
+ * @brief Function for starting the RTCOUNTER.
  *
- * @note This function clears all shorts, interrupts and enables both
- *       32 kHz and 1 MHz counters.
+ * @note This function clears all shorts, interrupts and RTCOUNTER value then enables the 32 kHz
+ *       counter.
  *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
  * @param[in] busy_wait True if wait for synchronization operation is to be performed,
  *                      false otherwise.
  */
-NRFY_STATIC_INLINE void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
+NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_start(NRF_GRTC_Type * p_reg, bool busy_wait)
 {
     nrf_grtc_sys_counter_set(p_reg, false);
     nrf_barrier_w();
-    nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_STOP);
     nrf_grtc_shorts_disable(p_reg, NRF_GRTC_SHORT_RTCOMPARE_CLEAR_MASK);
     nrf_grtc_int_disable(p_reg, NRF_GRTC_INTEN_MASK);
     for (uint8_t cc_channel = 0; cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT; cc_channel ++)
@@ -125,6 +127,34 @@ NRFY_STATIC_INLINE void nrfy_grtc_start(NRF_GRTC_Type * p_reg, bool busy_wait)
     nrf_barrier_w();
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_START);
     nrf_barrier_w();
+    if (busy_wait)
+    {
+        uint64_t t = __nrfy_internal_grtc_rt_counter_read(p_reg);
+        if (t != 0)
+        {
+            while (__nrfy_internal_grtc_rt_counter_read(p_reg) >= t)
+            {}
+        }
+        else
+        {
+            while (__nrfy_internal_grtc_rt_counter_read(p_reg) == t)
+            {}
+        }
+    }
+}
+
+/**
+ * @brief Function for starting the SYSCOUNTER.
+ *
+ * @note This function enables the 1 MHz counter and set it as always active.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] busy_wait True if wait for synchronization operation is to be performed,
+ *                      false otherwise.
+ */
+NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool busy_wait)
+{
+    nrf_grtc_sys_counter_auto_mode_set(p_reg, true);
     nrf_grtc_sys_counter_set(p_reg, true);
     nrf_barrier_w();
     if (busy_wait)
@@ -165,10 +195,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_re
  */
 NRFY_STATIC_INLINE uint64_t nrfy_grtc_rt_counter_get(NRF_GRTC_Type const * p_reg)
 {
-    uint32_t counter_l = nrf_grtc_rt_counter_low_get(p_reg);
-    uint32_t counter_h = nrf_grtc_rt_counter_high_get(p_reg);
-    nrf_barrier_r();
-    return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
+    return __nrfy_internal_grtc_rt_counter_read(p_reg);
 }
 #endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 
@@ -657,6 +684,16 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
 #endif
     return event_mask;
 }
+
+#if defined(NRF_SYSCTRL)
+NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type const * p_reg)
+{
+    uint32_t counter_l = nrf_grtc_rt_counter_low_get(p_reg);
+    uint32_t counter_h = nrf_grtc_rt_counter_high_get(p_reg);
+    nrf_barrier_r();
+    return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
+}
+#endif
 
 #ifdef __cplusplus
 }

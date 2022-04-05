@@ -120,10 +120,23 @@ nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority);
 
 #if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for starting the GRTC.
+ * @brief Function for starting the 32 kHz RTCOUNTER.
+ *
+ * @param[in] busy_wait True if wait for synchronization operation is to be performed,
+ *                      false otherwise.
+ *
+ * @retval NRFX_SUCCESS        Starting was successful.
+ * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is running and the operation is not allowed.
+ */
+nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
+
+/**
+ * @brief Function for starting the 1 MHz SYSCOUNTER.
  *
  * @note This function automatically alocates and marks as used the special-purpose main
  *       capture/compare channel. It should be owned only by the SysCtrl.
+ *
+ * @note Use auxiliary structure of type @ref nrfx_grtc_channel_t when working with SYSCOUNTER.
  *
  * @param[in]  busy_wait         True if wait for synchronization operation is to be performed,
  *                               false otherwise.
@@ -173,7 +186,7 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
                                                uint64_t                             val,
                                                bool                                 enable_irq,
                                                bool                                 sync);
-#endif
+#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for uninitializing the GRTC.
