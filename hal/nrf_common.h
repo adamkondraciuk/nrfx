@@ -56,6 +56,7 @@ typedef enum
     NRF_PROCESSOR_ID_SYSCTRL     = 12,
     NRF_PROCESSOR_ID_PPR         = 13,
     NRF_PROCESSOR_ID_FLPR        = 14,
+    NRF_PROCESSOR_ID_COUNT,
 } nrf_processor_id_t;
 
 /* TODO: Those should be in MDK (MDK-2059) */
