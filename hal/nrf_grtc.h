@@ -59,11 +59,7 @@ extern "C" {
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
     /** @todo Remove when fix in MDK will appear. */
-    #if defined(NRF_CELLCORE)            || \
-        defined(NRF_SECURE)              || \
-        defined(NRF_SYSCTRL)             || \
-        defined(NRF_PPR)                 || \
-        defined(NRF_SYSTEMC_APPLICATION) || \
+    #if defined(NRF_SYSTEMC_APPLICATION) || \
         defined(NRF_SYSTEMC_SECURE)
         /** @brief Fixup for the GRTC IRQHandler. */
         #define GRTC_IRQHandler GRTC0_IRQHandler
@@ -73,9 +69,7 @@ extern "C" {
     #endif
 #else
     #define GRTC_IRQn       GRTC_1_IRQn
-    #if defined(NRF_CELLCORE)            || \
-        defined(NRF_SECURE)              || \
-        defined(NRF_SYSTEMC_APPLICATION) || \
+    #if defined(NRF_SYSTEMC_APPLICATION) || \
         defined(NRF_SYSTEMC_SECURE)
         #define GRTC_IRQHandler GRTC1_IRQHandler
     #else
