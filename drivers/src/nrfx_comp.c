@@ -159,6 +159,7 @@ void nrfx_comp_pin_select(nrf_comp_input_t psel)
 void nrfx_comp_start(uint32_t comp_int_mask, uint32_t comp_shorts_mask)
 {
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);
+    (void)nrfy_comp_events_process(NRF_COMP, comp_int_mask);
     nrfy_comp_int_enable(NRF_COMP, comp_int_mask);
     nrfy_comp_shorts_enable(NRF_COMP, comp_shorts_mask);
     m_state = NRFX_DRV_STATE_POWERED_ON;
