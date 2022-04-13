@@ -181,7 +181,8 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_re
         counter_l = nrf_grtc_sys_counter_low_get(p_reg);
         counter_h = nrf_grtc_sys_counter_high_get(p_reg);
         nrf_barrier_r();
-    } while(counter_h & GRTC_SYSCOUNTERH_OVERFLOW_Msk);
+    } while ((!nrf_grtc_event_check(p_reg, NRF_GRTC_EVENT_SYSCOUNTERVALID)) ||
+             (counter_h & GRTC_SYSCOUNTERH_OVERFLOW_Msk));
     return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
 }
 

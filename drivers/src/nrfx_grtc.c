@@ -29,7 +29,7 @@
 
 #define GRTC_NON_SYSCOMPARE_INT_MASK   (NRF_GRTC_INT_RTCOMPARE_MASK     | \
                                         NRF_GRTC_INT_RTCOMPARESYNC_MASK | \
-                                        NRF_GRTC_INT_RSYSCOUNTERVALID_MASK)
+                                        NRF_GRTC_INT_SYSCOUNTERVALID_MASK)
 #define GRTC_ALL_INT_MASK              (NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK | \
                                         GRTC_NON_SYSCOMPARE_INT_MASK)
 #define GRTC_RTCOUNTER_CC_HANDLER_IDX  NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
@@ -382,12 +382,13 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_disable(void)
     return err_code;
 }
 
-nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_t * handler_data,
+nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_t * p_handler_data,
                                                uint64_t                             val,
                                                bool                                 enable_irq,
                                                bool                                 sync)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_handler_data);
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     if (is_syscounter_running())
@@ -401,14 +402,17 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
     nrfx_grtc_channel_t * p_chan_data = &m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX];
     nrf_grtc_event_t event = sync ? NRF_GRTC_EVENT_RTCOMPARESYNC : NRF_GRTC_EVENT_RTCOMPARE;
 
-    p_chan_data->handler = handler_data->handler;
-    p_chan_data->p_context = handler_data->p_context;
+    p_chan_data->handler = p_handler_data->handler;
+    p_chan_data->p_context = p_handler_data->p_context;
     p_chan_data->channel = GRTC_RTCOUNTER_COMPARE_CHANNEL;
 
     nrfy_grtc_rt_counter_cc_set(NRF_GRTC, val, sync);
 
     nrfy_grtc_event_clear(NRF_GRTC, event);
-    nrfy_grtc_int_enable(NRF_GRTC, NRFY_EVENT_TO_INT_BITMASK(event));
+    if (enable_irq)
+    {
+        nrfy_grtc_int_enable(NRF_GRTC, NRFY_EVENT_TO_INT_BITMASK(event));
+    }
 
     NRFX_LOG_INFO("GRTC RTCOUNTER compare set to %llu.", val);
     return err_code;
@@ -477,7 +481,7 @@ void nrfx_grtc_syscountervalid_int_disable(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_RSYSCOUNTERVALID_MASK);
+    nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
     NRFX_LOG_INFO("GRTC SYSCOUNTERVALID interrupt disabled.");
 }
 
@@ -527,6 +531,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_absolute_set(nrfx_grtc_channel_t * p_chan_dat
                                                 bool                  enable_irq)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_chan_data);
     nrfx_err_t err_code = syscounter_check(p_chan_data->channel, false);
     if (err_code != NRFX_SUCCESS)
     {
@@ -553,6 +558,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_relative_set(nrfx_grtc_channel_t *           
                                                 nrfx_grtc_cc_relative_reference_t reference)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_chan_data);
     nrfx_err_t err_code = syscounter_check(p_chan_data->channel, false);
     if (err_code != NRFX_SUCCESS)
     {
@@ -614,7 +620,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_int_enable(uint8_t channel)
         return err_code;
     }
     channel_used_mark(channel);
-    nrfy_grtc_int_enable(NRF_GRTC, NRF_GRTC_CHANNEL_INT_MASK(channel));
+    nrfy_grtc_sys_counter_compare_event_int_clear_enable(NRF_GRTC, channel, true);
     NRFX_LOG_INFO("GRTC SYSCOUNTER compare interrupt for channel %u enabled.", (uint32_t)channel);
     return err_code;
 }
@@ -668,19 +674,23 @@ static void grtc_irq_handler(void)
 {
     uint32_t evt_to_process = GRTC_CHANNEL_MASK_TO_INT_MASK(allocated_channels_mask_get() &
                                                             used_channels_mask_get()) |
-                              GRTC_NON_SYSCOMPARE_INT_MASK;
-
+                              (GRTC_NON_SYSCOMPARE_INT_MASK & ~NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
     uint32_t event_mask = nrfy_grtc_events_process(NRF_GRTC, evt_to_process);
-
+    uint32_t active_int_mask = nrfy_grtc_int_enable_check(NRF_GRTC, event_mask);
     nrf_grtc_event_t event;
-    uint32_t active_cc_mask = nrfy_grtc_int_enable_check(NRF_GRTC, allocated_channels_mask_get());
 
     for (uint32_t i = 0; i < NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS; i++)
     {
         uint8_t channel = m_cb.channel_data[i].channel;
+
+        //TODO: Remove when HM-15402 is fixed.
+        if (channel == NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL)
+        {
+            nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
+        }
+
         event = nrfy_grtc_sys_counter_compare_event_get(channel);
-        if ((active_cc_mask & NRFY_EVENT_TO_INT_BITMASK(event)) &&
-            (event_mask & NRFY_EVENT_TO_INT_BITMASK(event)))
+        if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
             NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_COMPARE_%d.", channel);
             if (m_cb.channel_data[i].handler)
@@ -692,7 +702,7 @@ static void grtc_irq_handler(void)
         }
     }
 
-    if (event_mask & (NRF_GRTC_INT_RTCOMPARE_MASK | NRF_GRTC_INT_RTCOMPARESYNC_MASK))
+    if (active_int_mask & (NRF_GRTC_INT_RTCOMPARE_MASK| NRF_GRTC_INT_RTCOMPARESYNC_MASK))
     {
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARE/NRF_GRTC_EVENT_RTCOMPARESYNC.");
         if (m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].handler)
@@ -703,8 +713,14 @@ static void grtc_irq_handler(void)
         }
     }
 
-    if (event_mask & NRF_GRTC_INT_RSYSCOUNTERVALID_MASK)
+    /* The SYSCOUNTERVALID bit is automatically cleared when GRTC goes into sleep state and set
+       when returning from this state. It can't be cleared inside the ISR procedure because we rely
+       on it during SYSCOUNTER value reading procedure. */
+    if (nrfy_grtc_event_check(NRF_GRTC, NRF_GRTC_EVENT_SYSCOUNTERVALID) &&
+        nrfy_grtc_int_enable_check(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK))
     {
+        //TODO: Check whether such procedure is valid when HM-15400 is fixed.
+        nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_SYSCOUNTERVALID.");
         if (m_cb.syscountervalid_handler)
         {

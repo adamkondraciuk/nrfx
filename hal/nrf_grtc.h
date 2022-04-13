@@ -203,33 +203,33 @@ typedef enum
 /** @brief GRTC interrupts. */
 typedef enum
 {
-    NRF_GRTC_INT_COMPARE0_MASK         = GRTC_INTENSET0_COMPARE0_Msk,        /**< GRTC interrupt from compare event on channel 0. */
-    NRF_GRTC_INT_COMPARE1_MASK         = GRTC_INTENSET0_COMPARE1_Msk,        /**< GRTC interrupt from compare event on channel 1. */
-    NRF_GRTC_INT_COMPARE2_MASK         = GRTC_INTENSET0_COMPARE2_Msk,        /**< GRTC interrupt from compare event on channel 2. */
-    NRF_GRTC_INT_COMPARE3_MASK         = GRTC_INTENSET0_COMPARE3_Msk,        /**< GRTC interrupt from compare event on channel 3. */
-    NRF_GRTC_INT_COMPARE4_MASK         = GRTC_INTENSET0_COMPARE4_Msk,        /**< GRTC interrupt from compare event on channel 4. */
-    NRF_GRTC_INT_COMPARE5_MASK         = GRTC_INTENSET0_COMPARE5_Msk,        /**< GRTC interrupt from compare event on channel 5. */
-    NRF_GRTC_INT_COMPARE6_MASK         = GRTC_INTENSET0_COMPARE6_Msk,        /**< GRTC interrupt from compare event on channel 6. */
-    NRF_GRTC_INT_COMPARE7_MASK         = GRTC_INTENSET0_COMPARE7_Msk,        /**< GRTC interrupt from compare event on channel 7. */
-    NRF_GRTC_INT_COMPARE8_MASK         = GRTC_INTENSET0_COMPARE8_Msk,        /**< GRTC interrupt from compare event on channel 8. */
-    NRF_GRTC_INT_COMPARE9_MASK         = GRTC_INTENSET0_COMPARE9_Msk,        /**< GRTC interrupt from compare event on channel 9. */
-    NRF_GRTC_INT_COMPARE10_MASK        = GRTC_INTENSET0_COMPARE10_Msk,       /**< GRTC interrupt from compare event on channel 10. */
-    NRF_GRTC_INT_COMPARE11_MASK        = GRTC_INTENSET0_COMPARE11_Msk,       /**< GRTC interrupt from compare event on channel 11. */
-    NRF_GRTC_INT_COMPARE12_MASK        = GRTC_INTENSET0_COMPARE12_Msk,       /**< GRTC interrupt from compare event on channel 12. */
-    NRF_GRTC_INT_COMPARE13_MASK        = GRTC_INTENSET0_COMPARE13_Msk,       /**< GRTC interrupt from compare event on channel 13. */
-    NRF_GRTC_INT_COMPARE14_MASK        = GRTC_INTENSET0_COMPARE14_Msk,       /**< GRTC interrupt from compare event on channel 14. */
-    NRF_GRTC_INT_COMPARE15_MASK        = GRTC_INTENSET0_COMPARE15_Msk,       /**< GRTC interrupt from compare event on channel 15. */
-    NRF_GRTC_INT_COMPARE16_MASK        = GRTC_INTENSET0_COMPARE16_Msk,       /**< GRTC interrupt from compare event on channel 16. */
-    NRF_GRTC_INT_COMPARE17_MASK        = GRTC_INTENSET0_COMPARE17_Msk,       /**< GRTC interrupt from compare event on channel 17. */
-    NRF_GRTC_INT_COMPARE18_MASK        = GRTC_INTENSET0_COMPARE18_Msk,       /**< GRTC interrupt from compare event on channel 18. */
-    NRF_GRTC_INT_COMPARE19_MASK        = GRTC_INTENSET0_COMPARE19_Msk,       /**< GRTC interrupt from compare event on channel 19. */
-    NRF_GRTC_INT_COMPARE20_MASK        = GRTC_INTENSET0_COMPARE20_Msk,       /**< GRTC interrupt from compare event on channel 20. */
-    NRF_GRTC_INT_COMPARE21_MASK        = GRTC_INTENSET0_COMPARE21_Msk,       /**< GRTC interrupt from compare event on channel 21. */
-    NRF_GRTC_INT_COMPARE22_MASK        = GRTC_INTENSET0_COMPARE22_Msk,       /**< GRTC interrupt from compare event on channel 22. */
-    NRF_GRTC_INT_COMPARE23_MASK        = GRTC_INTENSET0_COMPARE23_Msk,       /**< GRTC interrupt from compare event on channel 23. */
-    NRF_GRTC_INT_RTCOMPARE_MASK        = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
-    NRF_GRTC_INT_RTCOMPARESYNC_MASK    = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
-    NRF_GRTC_INT_RSYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
+    NRF_GRTC_INT_COMPARE0_MASK        = GRTC_INTENSET0_COMPARE0_Msk,        /**< GRTC interrupt from compare event on channel 0. */
+    NRF_GRTC_INT_COMPARE1_MASK        = GRTC_INTENSET0_COMPARE1_Msk,        /**< GRTC interrupt from compare event on channel 1. */
+    NRF_GRTC_INT_COMPARE2_MASK        = GRTC_INTENSET0_COMPARE2_Msk,        /**< GRTC interrupt from compare event on channel 2. */
+    NRF_GRTC_INT_COMPARE3_MASK        = GRTC_INTENSET0_COMPARE3_Msk,        /**< GRTC interrupt from compare event on channel 3. */
+    NRF_GRTC_INT_COMPARE4_MASK        = GRTC_INTENSET0_COMPARE4_Msk,        /**< GRTC interrupt from compare event on channel 4. */
+    NRF_GRTC_INT_COMPARE5_MASK        = GRTC_INTENSET0_COMPARE5_Msk,        /**< GRTC interrupt from compare event on channel 5. */
+    NRF_GRTC_INT_COMPARE6_MASK        = GRTC_INTENSET0_COMPARE6_Msk,        /**< GRTC interrupt from compare event on channel 6. */
+    NRF_GRTC_INT_COMPARE7_MASK        = GRTC_INTENSET0_COMPARE7_Msk,        /**< GRTC interrupt from compare event on channel 7. */
+    NRF_GRTC_INT_COMPARE8_MASK        = GRTC_INTENSET0_COMPARE8_Msk,        /**< GRTC interrupt from compare event on channel 8. */
+    NRF_GRTC_INT_COMPARE9_MASK        = GRTC_INTENSET0_COMPARE9_Msk,        /**< GRTC interrupt from compare event on channel 9. */
+    NRF_GRTC_INT_COMPARE10_MASK       = GRTC_INTENSET0_COMPARE10_Msk,       /**< GRTC interrupt from compare event on channel 10. */
+    NRF_GRTC_INT_COMPARE11_MASK       = GRTC_INTENSET0_COMPARE11_Msk,       /**< GRTC interrupt from compare event on channel 11. */
+    NRF_GRTC_INT_COMPARE12_MASK       = GRTC_INTENSET0_COMPARE12_Msk,       /**< GRTC interrupt from compare event on channel 12. */
+    NRF_GRTC_INT_COMPARE13_MASK       = GRTC_INTENSET0_COMPARE13_Msk,       /**< GRTC interrupt from compare event on channel 13. */
+    NRF_GRTC_INT_COMPARE14_MASK       = GRTC_INTENSET0_COMPARE14_Msk,       /**< GRTC interrupt from compare event on channel 14. */
+    NRF_GRTC_INT_COMPARE15_MASK       = GRTC_INTENSET0_COMPARE15_Msk,       /**< GRTC interrupt from compare event on channel 15. */
+    NRF_GRTC_INT_COMPARE16_MASK       = GRTC_INTENSET0_COMPARE16_Msk,       /**< GRTC interrupt from compare event on channel 16. */
+    NRF_GRTC_INT_COMPARE17_MASK       = GRTC_INTENSET0_COMPARE17_Msk,       /**< GRTC interrupt from compare event on channel 17. */
+    NRF_GRTC_INT_COMPARE18_MASK       = GRTC_INTENSET0_COMPARE18_Msk,       /**< GRTC interrupt from compare event on channel 18. */
+    NRF_GRTC_INT_COMPARE19_MASK       = GRTC_INTENSET0_COMPARE19_Msk,       /**< GRTC interrupt from compare event on channel 19. */
+    NRF_GRTC_INT_COMPARE20_MASK       = GRTC_INTENSET0_COMPARE20_Msk,       /**< GRTC interrupt from compare event on channel 20. */
+    NRF_GRTC_INT_COMPARE21_MASK       = GRTC_INTENSET0_COMPARE21_Msk,       /**< GRTC interrupt from compare event on channel 21. */
+    NRF_GRTC_INT_COMPARE22_MASK       = GRTC_INTENSET0_COMPARE22_Msk,       /**< GRTC interrupt from compare event on channel 22. */
+    NRF_GRTC_INT_COMPARE23_MASK       = GRTC_INTENSET0_COMPARE23_Msk,       /**< GRTC interrupt from compare event on channel 23. */
+    NRF_GRTC_INT_RTCOMPARE_MASK       = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
+    NRF_GRTC_INT_RTCOMPARESYNC_MASK   = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
+    NRF_GRTC_INT_SYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
 } nrf_grtc_int_mask_t;
 
 /**
