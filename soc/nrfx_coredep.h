@@ -42,16 +42,23 @@
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
-#elif defined(BOARD_PALLADIUM)
-    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
-    #define NRFX_DELAY_DWT_PRESENT  0
-#elif defined(BOARD_PROFPGA)
-    /* We are running tests on FPGA that uses clock divider == 8 */
-    #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / 8)
-    #define NRFX_DELAY_DWT_PRESENT  1
-#else
-    #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
-    #define NRFX_DELAY_DWT_PRESENT  0
+#elif defined(HALTIUM_XXAA)
+    #if defined(BOARD_PALLADIUM)
+        #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+        #define NRFX_DELAY_DWT_PRESENT  0
+    #elif defined(BOARD_PROFPGA)
+        /* We are running tests on FPGA that uses clock divider == 8 */
+        #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / 8)
+        #define NRFX_DELAY_DWT_PRESENT  1
+    #else
+        #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
+        #define NRFX_DELAY_DWT_PRESENT  0
+    #endif
+#endif
+
+#if ISA_RISCV
+/** @brief Slowdown for RISCV cores. */
+#define NRFX_DELAY_RISCV_SLOWDOWN 63
 #endif
 
 /**
@@ -109,12 +116,12 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 
 NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
 {
-#if ISA_ARM
     if (time_us == 0)
     {
         return;
     }
 
+#if ISA_ARM
     // Allow overriding the number of cycles per loop iteration, in case it is
     // needed to adjust this number externally (for example, when the SoC is
     // emulated).
@@ -147,8 +154,12 @@ NRF_STATIC_INLINE void nrfx_coredep_delay_us(uint32_t time_us)
         (delay_func_t)((((uint32_t)delay_machine_code) | 1));
     uint32_t cycles = time_us * NRFX_DELAY_CPU_FREQ_MHZ;
     delay_cycles(cycles);
+#elif ISA_RISCV
+    for (volatile uint32_t i = 0;
+         i < ((NRFX_DELAY_CPU_FREQ_MHZ * time_us) / NRFX_DELAY_RISCV_SLOWDOWN);
+         i++)
+    {}
 #endif
-    /* TODO: ISA_RISCV */
 }
 
 #endif // !NRFX_CHECK(NRFX_DELAY_DWT_BASED_DELAY)
