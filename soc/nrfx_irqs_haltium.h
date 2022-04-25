@@ -416,6 +416,11 @@ extern "C" {
 #define nrfx_uarte_137_irq_handler    SERIAL7_IRQHandler
 #endif
 
+// Trace Buffer Monitor (TBM)
+#if NRFX_CHECK(NRFX_TBM_ENABLED)
+#define nrfx_tbm_irq_handler TBM_IRQHandler
+#endif
+
 #ifdef __cplusplus
 }
 #endif
