@@ -52,6 +52,16 @@ struct nrfy_mvdma_list_request_t
     nrf_vdma_job_t * p_sink_job_list;   ///< Pointer to the sink job list.
 };
 
+#if NRF_MVDMA_HAS_MULTIMODE
+/** @brief Structure describing lists of job list execution requests for the MVDMA. */
+typedef struct
+{
+    nrf_vdma_job_t ** pp_source_job_lists; ///< Pointer to the list of the source job lists.
+    nrf_vdma_job_t ** pp_sink_job_lists;   ///< Pointer to the list of the sink job lists.
+    uint8_t           length;              ///< Length of the list of the sink/source job lists.
+} nrfy_mvdma_multi_list_request_t;
+#endif
+
 /** @brief Auxiliary structure describing the MVDMA job list with unspecified direction. */
 typedef struct
 {
@@ -131,7 +141,7 @@ NRFY_STATIC_INLINE uint32_t nrfy_mvdma_events_process(NRF_MVDMA_Type *          
 }
 
 /**
- * @brief Function for starting the MVDMA jobs.
+ * @brief Function for starting the MVDMA jobs in single-mode.
  *
  * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
  * @param[in] p_list_request Pointer to the structure of list execution request if the transaction
@@ -150,6 +160,57 @@ NRFY_STATIC_INLINE void nrfy_mvdma_start(NRF_MVDMA_Type *                  p_reg
     }
     nrf_barrier_w();
 }
+
+#if NRF_MVDMA_HAS_MULTIMODE || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for starting the MVDMA jobs in multi-mode.
+ *
+ * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
+ * @param[in] idx            Index of the job list that will be executed.
+ * @param[in] p_list_request Pointer to the structure of lists execution request if the transaction
+ *                           is to be blocking. NULL for non-blocking transactions.
+ */
+NRFY_STATIC_INLINE
+void nrfy_mvdma_multi_start(NRF_MVDMA_Type *                        p_reg,
+                            uint8_t                                 idx,
+                            nrfy_mvdma_multi_list_request_t const * p_list_request)
+{
+    nrf_mvdma_task_trigger(p_reg, nrf_mvdma_start_task_get(p_reg, idx));
+    if (p_list_request)
+    {
+        nrfy_mvdma_list_request_t list_req =
+        {
+            .p_source_job_list = p_list_request->pp_source_job_lists[idx],
+            .p_sink_job_list   = p_list_request->pp_sink_job_lists[idx],
+        };
+
+        nrf_barrier_w();
+        uint32_t evt_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_END);
+        while (!__nrfy_internal_mvdma_events_process(p_reg, evt_mask, &list_req))
+        {}
+    }
+    nrf_barrier_w();
+}
+
+/**
+ * @brief Function for setting the MVDMA job lists in multi-mode.
+ *
+ * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
+ * @param[in] p_list_request Pointer to the structure of list execution request.
+ */
+NRFY_STATIC_INLINE
+void nrfy_mvdma_multi_job_list_set(NRF_MVDMA_Type *                        p_reg,
+                                   nrfy_mvdma_multi_list_request_t const * p_list_request)
+{
+    for (size_t i = 0; i < p_list_request->length; i++)
+    {
+        __nrfy_internal_mvdma_source_buffers_flush(p_list_request->pp_source_job_lists[i]);
+    }
+
+    nrf_mvdma_source_list_ptr_set(p_reg, (nrf_vdma_job_t *)p_list_request->pp_source_job_lists);
+    nrf_mvdma_sink_list_ptr_set(p_reg, (nrf_vdma_job_t *)p_list_request->pp_sink_job_lists);
+}
+#endif // NRF_MVDMA_HAS_MULTIMODE || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for setting the MVDMA jobs.
@@ -524,8 +585,14 @@ uint32_t __nrfy_internal_mvdma_events_process(NRF_MVDMA_Type *                  
                                              NRF_MVDMA_EVENT_SOURCEBUSERROR,
                                              &evt_mask);
 #if NRF_MVDMA_HAS_NEW_VER
-    (void)__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_SINKSELECTJOBDONE, &evt_mask);
-    (void)__nrfy_internal_mvdma_event_handle(p_reg, mask, NRF_MVDMA_EVENT_SOURCESELECTJOBDONE, &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg,
+                                             mask,
+                                             NRF_MVDMA_EVENT_SINKSELECTJOBDONE,
+                                             &evt_mask);
+    (void)__nrfy_internal_mvdma_event_handle(p_reg,
+                                             mask,
+                                             NRF_MVDMA_EVENT_SOURCESELECTJOBDONE,
+                                             &evt_mask);
 #endif
 
     bool invalidated = false;
@@ -571,9 +638,26 @@ NRFY_STATIC_INLINE void __nrfy_internal_mvdma_event_enabled_clear(NRF_MVDMA_Type
 
 NRFY_STATIC_INLINE void __nrfy_internal_mvdma_source_buffers_flush(nrf_vdma_job_t * p_source_job)
 {
-    for (nrf_vdma_job_t * p_job = p_source_job; p_job->p_buffer != NULL; p_job++)
+    // Recognize if nrf_vdma_reduced_job_t is being used.
+    if (p_source_job->attributes & NRF_VDMA_ATTRIBUTE_FIXED_ATTR)
     {
-        NRFY_CACHE_WB(p_job->p_buffer, p_job->size);
+        size_t size = p_source_job->size;
+        nrf_vdma_job_reduced_t * p_job_reduced = (nrf_vdma_job_reduced_t *)
+                                                 (p_source_job + 1)->p_buffer;
+
+        NRFY_CACHE_WB(p_source_job->p_buffer, size);
+
+        for (nrf_vdma_job_reduced_t * p_buffer = p_job_reduced; p_buffer != NULL; p_buffer++)
+        {
+            NRFY_CACHE_WB(p_buffer, size);
+        }
+    }
+    else
+    {
+        for (nrf_vdma_job_t * p_job = p_source_job; p_job->p_buffer != NULL; p_job++)
+        {
+            NRFY_CACHE_WB(p_job->p_buffer, p_job->size);
+        }
     }
 }
 

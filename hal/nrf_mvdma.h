@@ -24,6 +24,13 @@ extern "C" {
 #define NRF_MVDMA_HAS_NEW_VER 0
 #endif
 
+#if (MVDMA_JOBLISTCOUNT > 1) || defined(__NRFX_DOXYGEN__)
+/** @brief Macro for checking if multi-mode operation is available. */
+#define NRF_MVDMA_HAS_MULTIMODE 1
+#else
+#define NRF_MVDMA_HAS_MULTIMODE 0
+#endif
+
 /** @brief MVDMA tasks. */
 typedef enum
 {
@@ -239,6 +246,7 @@ NRF_STATIC_INLINE uint32_t nrf_mvdma_int_enable_check(NRF_MVDMA_Type const * p_r
  */
 NRF_STATIC_INLINE uint32_t nrf_mvdma_int_pending_get(NRF_MVDMA_Type const * p_reg);
 
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the subscribe configuration for a given
  *        MVDMA task.
@@ -282,6 +290,7 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_set(NRF_MVDMA_Type *  p_reg,
  */
 NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
                                                nrf_mvdma_event_t event);
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for setting the MVDMA mode.
@@ -476,6 +485,7 @@ NRF_STATIC_INLINE uint32_t nrf_mvdma_int_pending_get(NRF_MVDMA_Type const * p_re
     return p_reg->INTPEND;
 }
 
+#if defined(DPPI_PRESENT)
 NRF_STATIC_INLINE void nrf_mvdma_subscribe_set(NRF_MVDMA_Type * p_reg,
                                                nrf_mvdma_task_t task,
                                                uint8_t          channel)
@@ -503,6 +513,7 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
+#endif // defined(DPPI_PRESENT)
 
 NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode_t mode)
 {

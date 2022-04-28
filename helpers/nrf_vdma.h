@@ -24,11 +24,48 @@ typedef struct __PACKED
     uint8_t   attributes; ///< Attributes of the job.
 } nrf_vdma_job_t;
 
-/** @brief VDMA attributes. */
+/** @brief Type describing VDMA job with fixed attributes and length. */
+typedef uint32_t nrf_vdma_job_reduced_t;
+
+/**
+ * @brief VDMA attributes.
+ *
+ * @note Only one attribute can be set for the job.
+ */
 typedef enum
 {
-    NRF_VDMA_ATTRIBUTE_NEWJOBLISTPTR = 0x55, ///< Job buffer contains pointer to the new list.
+    NRF_VDMA_ATTRIBUTE_PLAIN_DATA           = 0x00, ///< Data is not modified.
+    NRF_VDMA_ATTRIBUTE_BYTE_SWAP            = 0x07, ///< Data bytes are swapped.
+    NRF_VDMA_ATTRIBUTE_JOB_LIST             = 0x08, ///< Allows chaining of joblists.
+    NRF_VDMA_ATTRIBUTE_BUFFER_FILL          = 0x09, ///< Insters zeros into sink data buffers. Sink job attribute only.
+    NRF_VDMA_ATTRIBUTE_FIXED_ATTR           = 0x0A, ///< Identical job attributes and sizes for all jobs in the list.
+    NRF_VDMA_ATTRIBUTE_CRC                  = 0x0B, ///< CRC checksum is calculated on all data in the source list.
+    NRF_VDMA_ATTRIBUTE_STATIC_ADDR          = 0x0C, ///< Memory address is fixed for the entirety of the job.
+    NRF_VDMA_ATTRIBUTE_PLAIN_DATA_BUF_WRITE = 0x0D, ///< Used to get better write performance when many short bursts are beiing sent.
 } nrf_vdma_attributes_t;
+
+/**
+ * @brief VDMA extended attributes.
+ *
+ * @note This attributes can be combined with each other and with standard attribute
+ */
+typedef enum
+{
+    NRF_VDMA_EXT_ATTRIBUTE_PERIPHERAL_MODE = 0x40, //< Job contains a pointer to a peripheral address.
+    NRF_VDMA_EXT_ATTRIBUTE_EVENT_ENABLE    = 0x80, //< Enable event on job completion.
+} nrf_vdma_ext_attribute_t;
+
+/**
+ * @brief Macro for computing size of the array of reduced job structures.
+ *
+ * @param[in] count Number of jobs to be stored in reduced job list.
+ */
+#define NRF_VDMA_REDUCED_JOB_SIZE(count) (count + 2)
+
+/** @brief Macro for defining initial element of reduced job list. */
+#define NRF_VDMA_REDUCED_JOB_INIT_ELEMENT(p_buffer, size, attribute)                         \
+        (uint32_t)p_buffer,                                                                  \
+        (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attribute) << 24) | (size & 0x00FFFFFF))
 
 /**
  * @brief Function for filling the specified structure of the job with given job parameters.
@@ -46,6 +83,40 @@ __STATIC_INLINE void nrf_vdma_job_fill(nrf_vdma_job_t * p_job,
     p_job->p_buffer   = (uint8_t *)p_buffer;
     p_job->size       = (uint32_t)size;
     p_job->attributes = attributes;
+}
+
+/**
+ * @brief Function for initializing the specified structure of the job with fixed attributes.
+ *
+ * First element of reduced job list occupies space for two elements.
+ *
+ * @note Use @ref nrf_vdma_job_terminate() to terminate reduced job list.
+ *
+ * @param[out] p_job      Pointer to the reduced structure of the job to be filled.
+ * @param[in]  p_buffer   Job buffer.
+ * @param[in]  size       Size of the job buffer.
+ * @param[in]  attributes Additional attribute of the job.
+ */
+__STATIC_INLINE void nrf_vdma_job_reduced_init(nrf_vdma_job_reduced_t * p_job,
+                                               void const *             p_buffer,
+                                               size_t                   size,
+                                               uint8_t                  attributes)
+{
+    *p_job       = (uint32_t)p_buffer;
+    *(p_job + 1) = (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attributes) << 24) |
+                              (size & 0x00FFFFFF));
+}
+
+/**
+ * @brief Function for filling the specified reduced structure of the job with given buffer pointer.
+ *
+ * @param[out] p_job    Pointer to the reduced structure of the job to be filled.
+ * @param[in]  p_buffer Job buffer.
+ */
+__STATIC_INLINE void nrf_vdma_job_reduced_fill(nrf_vdma_job_reduced_t * p_job,
+                                               void const *             p_buffer)
+{
+    *p_job = (uint32_t)p_buffer;
 }
 
 /**
@@ -97,7 +168,7 @@ __STATIC_INLINE void nrf_vdma_job_link(nrf_vdma_job_t *       p_job,
                                        nrf_vdma_job_t const * p_job_linked)
 {
     p_job->p_buffer   = (uint8_t *)p_job_linked;
-    p_job->attributes = NRF_VDMA_ATTRIBUTE_NEWJOBLISTPTR;
+    p_job->attributes = NRF_VDMA_ATTRIBUTE_JOB_LIST;
 }
 
 /** @} */
