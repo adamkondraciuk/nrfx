@@ -60460,7 +60460,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </register>
             </cluster>
             <cluster>
-              <dim>16</dim>
+              <dim>10</dim>
               <dimIncrement>0x080</dimIncrement>
               <name>GPIO[%s]</name>
               <description>Unspecified</description>
