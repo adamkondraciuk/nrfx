@@ -296,7 +296,7 @@ typedef enum
 
 #define VPR_VEVIF_EVENT_MaxCount 32
 
-
+#define CSR_MINTTRESH 0x347
 
 
 
