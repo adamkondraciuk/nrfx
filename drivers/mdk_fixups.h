@@ -298,11 +298,266 @@ typedef enum
 
 #define CSR_MINTTRESH 0x347
 
+/* NCSDK-10983 */
 
+typedef struct {
+  __IOM uint32_t  CPWRUPREQ;
+  __IM  uint32_t  CPWRUPACK;
+  __IM  uint32_t  RESERVED0[958];
+  __IOM uint32_t  ITCTRL;
+  __IM  uint32_t  RESERVED1[43];
+  __IOM uint32_t  LAR;
+  __IOM uint32_t  LSR;
+  __IOM uint32_t  AUTHSTATUS;
+  __IM  uint32_t  RESERVED2[3];
+  __IM  uint32_t  DEVID;
+  __IM  uint32_t  DEVTYPE;
+  __IOM uint32_t  PIDR4;
+  __IM  uint32_t  RESERVED3[3];
+  __IOM uint32_t  PIDR0;
+  __IOM uint32_t  PIDR1;
+  __IOM uint32_t  PIDR2;
+  __IOM uint32_t  PIDR3;
+  __IOM uint32_t  CIDR0;
+  __IOM uint32_t  CIDR1;
+  __IOM uint32_t  CIDR2;
+  __IOM uint32_t  CIDR3;
+} NRF_GPR_Type;
 
+#define NRF_GPR_NS_BASE 0xBF050000UL
+#define NRF_GPR_NS ((NRF_GPR_Type*) NRF_GPR_NS_BASE)
 
+typedef struct {
+  __IOM uint32_t  STMSTIMR[32];
+  __IM  uint32_t  RESERVED0[737];
+  __OM  uint32_t  STMDMASTARTR;
+  __OM  uint32_t  STMDMASTOPR;
+  __IM  uint32_t  STMDMASTATR;
+  __IOM uint32_t  STMDMACTLR;
+  __IM  uint32_t  RESERVED1[58];
+  __IM  uint32_t  STMDMAIDR;
+  __IOM uint32_t  STMHEER;
+  __IM  uint32_t  RESERVED2[7];
+  __IOM uint32_t  STMHETER;
+  __IM  uint32_t  RESERVED3[16];
+  __IOM uint32_t  STMHEMCR;
+  __IM  uint32_t  RESERVED4[35];
+  __IM  uint32_t  STMHEMASTR;
+  __IM  uint32_t  STMHEFEAT1R;
+  __IM  uint32_t  STMHEIDR;
+  __IOM uint32_t  STMSPER;
+  __IM  uint32_t  RESERVED5[7];
+  __IOM uint32_t  STMSPTER;
+  __IM  uint32_t  RESERVED6[15];
+  __IOM uint32_t  STMSPSCR;
+  __IOM uint32_t  STMSPMSCR;
+  __IOM uint32_t  STMSPOVERRIDER;
+  __IOM uint32_t  STMSPMOVERRIDER;
+  __IOM uint32_t  STMSPTRIGCSR;
+  __IM  uint32_t  RESERVED7[3];
+  __IOM uint32_t  STMTCSR;
+  __OM  uint32_t  STMTSSTIMR;
+  __IM  uint32_t  RESERVED8;
+  __IOM uint32_t  STMTSFREQR;
+  __IOM uint32_t  STMSYNCR;
+  __IOM uint32_t  STMAUXCR;
+  __IM  uint32_t  RESERVED9[2];
+  __IOM uint32_t  STMSPFEAT1R;
+  __IOM uint32_t  STMSPFEAT2R;
+  __IOM uint32_t  STMSPFEAT3R;
+  __IM  uint32_t  RESERVED10[15];
+  __OM  uint32_t  STMITTRIGGER;
+  __OM  uint32_t  STMITATBDATA0;
+  __OM  uint32_t  STMITATBCTR2;
+  __OM  uint32_t  STMITATBID;
+  __OM  uint32_t  STMITATBCTR0;
+  __IM  uint32_t  RESERVED11;
+  __IOM uint32_t  ITCTRL;
+  __IM  uint32_t  RESERVED12[43];
+  __IOM uint32_t  LAR;
+  __IOM uint32_t  LSR;
+  __IOM uint32_t  AUTHSTATUS;
+  __IM  uint32_t  RESERVED13[3];
+  __IM  uint32_t  DEVID;
+  __IM  uint32_t  DEVTYPE;
+  __IOM uint32_t  PIDR4;
+  __IM  uint32_t  RESERVED14[3];
+  __IOM uint32_t  PIDR0;
+  __IOM uint32_t  PIDR1;
+  __IOM uint32_t  PIDR2;
+  __IOM uint32_t  PIDR3;
+  __IOM uint32_t  CIDR0;
+  __IOM uint32_t  CIDR1;
+  __IOM uint32_t  CIDR2;
+  __IOM uint32_t  CIDR3;
+} NRF_STM_Type_fixed;
 
+#if defined(NRF_STM_NS)
+#undef NRF_STM_NS
+#define NRF_STM_NS ((NRF_STM_Type_fixed*) NRF_STM_NS_BASE)
+#endif
 
+#define NRF_STM_Type NRF_STM_Type_fixed
+
+typedef struct {
+  __IM  uint32_t  RESERVED0[1];
+  __IOM uint32_t  RSZ;
+  __IM  uint32_t  RESERVED1[1];
+  __IM  uint32_t  STS;
+  __IM  uint32_t  RRD;
+  __IOM uint32_t  RRP;
+  __IOM uint32_t  RWP;
+  __IOM uint32_t  TRG;
+  __IOM uint32_t  CTL;
+  __OM  uint32_t  RWD;
+  __IOM uint32_t  MODE;
+  __IM  uint32_t  LBUFLEVEL;
+  __IM  uint32_t  CBUFLEVEL;
+  __IOM uint32_t  BUFWM;
+  __IOM uint32_t  RRPHI; 
+  __IOM uint32_t  RWPHI;
+  __IM  uint32_t  RESERVED2[52];
+  __IOM uint32_t  AXICTL;
+  __IM  uint32_t  RESERVED3[1];
+  __IOM uint32_t  DBALO;
+  __IOM uint32_t  DBAHI;
+  __IM  uint32_t  RESERVED4[120];
+  __IM  uint32_t  FFSR;
+  __IOM uint32_t  FFCR;
+  __IOM uint32_t  PSCR;
+  __IM  uint32_t  RESERVED5[753];
+  __OM  uint32_t  ITATBMDATA0;
+  __IM  uint32_t  ITATBMCTR2;
+  __OM  uint32_t  ITATBMCTR1;
+  __OM  uint32_t  ITATBMCTR0;
+  __OM  uint32_t  ITMISCOP0;
+  __IM  uint32_t  RESERVED6[1];
+  __IM  uint32_t  ITTRFLIN;
+  __IM  uint32_t  ITATBDATA0;
+  __OM  uint32_t  ITATBCTR2;
+  __IM  uint32_t  ITATBCTR1;
+  __IM  uint32_t  ITATBCTR0;
+  __IM  uint32_t  RESERVED7[1];
+  __IOM uint32_t  ITCTRL;
+  __IM  uint32_t  RESERVED8[43];
+  __IOM uint32_t  LAR;
+  __IOM uint32_t  LSR;
+  __IOM uint32_t  AUTHSTATUS;
+  __IM  uint32_t  RESERVED9[3];
+  __IM  uint32_t  DEVID;
+  __IM  uint32_t  DEVTYPE;
+  __IOM uint32_t  PIDR4;
+  __IM  uint32_t  RESERVED10[3];
+  __IOM uint32_t  PIDR0;
+  __IOM uint32_t  PIDR1;
+  __IOM uint32_t  PIDR2;
+  __IOM uint32_t  PIDR3;
+  __IOM uint32_t  CIDR0;
+  __IOM uint32_t  CIDR1;
+  __IOM uint32_t  CIDR2;
+  __IOM uint32_t  CIDR3;
+} NRF_TMC_Type;
+
+#if defined(NRF_ETB_NS)
+#undef NRF_ETB_NS
+#define NRF_ETB_NS ((NRF_TMC_Type*) NRF_ETB_NS_BASE)
+#endif
+
+typedef struct {
+  __IOM uint32_t  CNTCR;
+  __IM  uint32_t  CNTSR;
+  __IOM uint32_t  CNTCVL;
+  __IOM uint32_t  CNTCVU;
+  __IM  uint32_t  RESERVED0[4];
+  __IOM uint32_t  CNTFID0;
+  __IM  uint32_t  RESERVED1[1003];
+  __IM  uint32_t  PIDR4;
+  __IM  uint32_t  PIDR5;
+  __IM  uint32_t  PIDR6;
+  __IM  uint32_t  PIDR7;
+  __IM  uint32_t  PIDR0;
+  __IM  uint32_t  PIDR1;
+  __IM  uint32_t  PIDR2;
+  __IM  uint32_t  PIDR3;
+  __IM  uint32_t  CIDR0;
+  __IM  uint32_t  CIDR1;
+  __IM  uint32_t  CIDR2;
+  __IM  uint32_t  CIDR3;
+} NRF_TSGEN_Type;
+
+#if defined(NRF_TSGEN_NS)
+#undef NRF_TSGEN_NS
+#define NRF_TSGEN_NS ((NRF_TSGEN_Type*) NRF_TSGEN_NS_BASE)
+#endif
+
+typedef struct {
+  __OM  uint32_t G_DMTS[2];
+  __OM  uint32_t G_DM[2];
+  __OM  uint32_t G_DTS[2];
+  __OM  uint32_t G_D[2];
+  __IM  uint32_t RESERVED0[16];
+  __OM  uint32_t G_FLAGTS[2];
+  __OM  uint32_t G_FLAG[2];
+  __OM  uint32_t G_TRIGTS[2];
+  __OM  uint32_t G_TRIG[2];
+  __OM  uint32_t I_DMTS[2];
+  __OM  uint32_t I_DM[2];
+  __OM  uint32_t I_DTS[2];
+  __OM  uint32_t I_D[2];
+  __IM  uint32_t RESERVED1[16];
+  __OM  uint32_t I_FLAGTS[2];
+  __OM  uint32_t I_FLAG[2];
+  __OM  uint32_t I_TRIGTS[2];
+  __OM  uint32_t I_TRIG[2];
+} NRF_STMESP_Type;
+
+#define NRF_APPLICATION_STMESP_NS_BASE 0xA2000000UL
+#define NRF_APPLICATION_STMESP_NS      ((NRF_STMESP_Type*) NRF_APPLICATION_STMESP_NS_BASE)
+#define NRF_APPLICATION_STMESP         NRF_APPLICATION_STMESP_NS
+
+#define NRF_CELLCORE_STMESP_NS_BASE 0xA4000000UL
+#define NRF_CELLCORE_STMESP_NS      ((NRF_STMESP_Type*) NRF_CELLCORE_STMESP_NS_BASE)
+#define NRF_CELLCORE_STMESP         NRF_CELLCORE_STMESP_NS
+
+#define NRF_CELLDSP_STMESP_NS_BASE 0xA5000000UL
+#define NRF_CELLDSP_STMESP_NS      ((NRF_STMESP_Type*) NRF_CELLDSP_STMESP_NS_BASE)
+#define NRF_CELLDSP_STMESP         NRF_CELLDSP_STMESP_NS
+
+#define NRF_CELLRF_STMESP_NS_BASE 0xA6000000UL
+#define NRF_CELLRF_STMESP_NS      ((NRF_STMESP_Type*) NRF_CELLRF_STMESP_NS_BASE)
+#define NRF_CELLRF_STMESP         NRF_CELLRF_STMESP_NS
+
+#define NRF_RADIOCORE_STMESP_NS_BASE 0xA3000000UL
+#define NRF_RADIOCORE_STMESP_NS      ((NRF_STMESP_Type*) NRF_RADIOCORE_STMESP_NS_BASE)
+#define NRF_RADIOCORE_STMESP         NRF_RADIOCORE_STMESP_NS
+
+#define NRF_SECURE_STMESP_NS_BASE 0xA1000000UL
+#define NRF_SECURE_STMESP_NS      ((NRF_STMESP_Type*) NRF_SECURE_STMESP_NS_BASE)
+#define NRF_SECURE_STMESP         NRF_SECURE_STMESP_NS
+
+#if defined(NRF_APPLICATION)
+#define NRF_STMESP NRF_APPLICATION_STMESP
+#endif
+
+#if defined(NRF_CELLCORE)
+#define NRF_STMESP NRF_CELLCORE_STMESP
+#endif
+
+#if defined(NRF_CELLDSP)
+#define NRF_STMESP NRF_CELLDSP_STMESP
+#endif
+
+#if defined(NRF_CELLRF)
+#define NRF_STMESP NRF_CELLRF_STMESP
+#endif
+
+#if defined(NRF_RADIOCORE)
+#define NRF_STMESP NRF_RADIOCORE_STMESP
+#endif
+
+#if defined(NRF_SECURE)
+#define NRF_STMESP NRF_SECURE_STMESP
+#endif
 
 #endif // defined(HALTIUM_XXAA)
 

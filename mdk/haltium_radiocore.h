@@ -229,7 +229,6 @@ typedef enum {
 #define NRF_RADIOCORE_ICACHEINFO_S_BASE   0x13F10000UL
 #define NRF_RADIOCORE_DCACHEDATA_S_BASE   0x33F00000UL
 #define NRF_RADIOCORE_DCACHEINFO_S_BASE   0x33F10000UL
-#define NRF_RADIOCORE_STMESP_NS_BASE      0xA3000000UL
 #define NRF_RADIOCORE_ETM_NS_BASE         0xE0041000UL
 #define NRF_RADIOCORE_CTI_S_BASE          0xE0042000UL
 #define NRF_RADIOCORE_CPUC_S_BASE         0xE0080000UL
@@ -316,7 +315,6 @@ typedef enum {
 #define NRF_RADIOCORE_ICACHEINFO_S        ((NRF_CACHEINFO_Type*)                NRF_RADIOCORE_ICACHEINFO_S_BASE)
 #define NRF_RADIOCORE_DCACHEDATA_S        ((NRF_CACHEDATA_Type*)                NRF_RADIOCORE_DCACHEDATA_S_BASE)
 #define NRF_RADIOCORE_DCACHEINFO_S        ((NRF_CACHEINFO_Type*)                NRF_RADIOCORE_DCACHEINFO_S_BASE)
-#define NRF_RADIOCORE_STMESP_NS           ((NRF_STMESP_Type*)                   NRF_RADIOCORE_STMESP_NS_BASE)
 #define NRF_RADIOCORE_ETM_NS              ((NRF_ETM_Type*)                      NRF_RADIOCORE_ETM_NS_BASE)
 #define NRF_RADIOCORE_CTI_S               ((NRF_CTI_Type*)                      NRF_RADIOCORE_CTI_S_BASE)
 #define NRF_RADIOCORE_CPUC_S              ((NRF_CM33SS_Type*)                   NRF_RADIOCORE_CPUC_S_BASE)
@@ -400,7 +398,6 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_RADIOCORE_UICR                      NRF_RADIOCORE_UICR_NS
-  #define NRF_RADIOCORE_STMESP                    NRF_RADIOCORE_STMESP_NS
   #define NRF_RADIOCORE_ETM                       NRF_RADIOCORE_ETM_NS
   #define NRF_RADIOCORE_MVDMA                     NRF_RADIOCORE_MVDMA_NS
   #define NRF_RADIOCORE_RAMC000                   NRF_RADIOCORE_RAMC000_NS
@@ -433,7 +430,6 @@ typedef enum {
   #define NRF_RADIOCORE_ICACHEINFO                NRF_RADIOCORE_ICACHEINFO_S
   #define NRF_RADIOCORE_DCACHEDATA                NRF_RADIOCORE_DCACHEDATA_S
   #define NRF_RADIOCORE_DCACHEINFO                NRF_RADIOCORE_DCACHEINFO_S
-  #define NRF_RADIOCORE_STMESP                    NRF_RADIOCORE_STMESP_NS
   #define NRF_RADIOCORE_ETM                       NRF_RADIOCORE_ETM_NS
   #define NRF_RADIOCORE_CTI                       NRF_RADIOCORE_CTI_S
   #define NRF_RADIOCORE_CPUC                      NRF_RADIOCORE_CPUC_S
@@ -497,7 +493,6 @@ typedef enum {
   #define NRF_ICACHEINFO                          NRF_RADIOCORE_ICACHEINFO
   #define NRF_DCACHEDATA                          NRF_RADIOCORE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_RADIOCORE_DCACHEINFO
-  #define NRF_STMESP                              NRF_RADIOCORE_STMESP
   #define NRF_ETM                                 NRF_RADIOCORE_ETM
   #define NRF_CTI                                 NRF_RADIOCORE_CTI
   #define NRF_CPUC                                NRF_RADIOCORE_CPUC

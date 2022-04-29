@@ -104,7 +104,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ATBFUNNEL211_NS_BASE          0xBF04D000UL
 #define NRF_ATBFUNNEL212_NS_BASE          0xBF04E000UL
 #define NRF_ATBFUNNEL213_NS_BASE          0xBF04F000UL
-#define NRF_GPR_NS_BASE                   0xBF050000UL
 #define NRF_GPIOTE130_NS_BASE             0x4F934000UL
 #define NRF_GPIOTE130_S_BASE              0x5F934000UL
 #define NRF_GPIOTE131_NS_BASE             0x4F935000UL
@@ -359,10 +358,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_STMDATA_S                     ((NRF_STMDATA_Type*)                  NRF_STMDATA_S_BASE)
 #define NRF_TDDCONF_NS                    ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_NS_BASE)
 #define NRF_TDDCONF_S                     ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_S_BASE)
-#define NRF_TSGEN_NS                      ((NRF_TSGEN_Type*)                    NRF_TSGEN_NS_BASE)
+#define NRF_TSGEN_NS                      ((NRF_GENERIC_Type*)                  NRF_TSGEN_NS_BASE)
 #define NRF_STM_NS                        ((NRF_STM_Type*)                      NRF_STM_NS_BASE)
 #define NRF_TPIU_NS                       ((NRF_TPIU_Type*)                     NRF_TPIU_NS_BASE)
-#define NRF_ETB_NS                        ((NRF_TMC_Type*)                      NRF_ETB_NS_BASE)
+#define NRF_ETB_NS                        ((NRF_GENERIC_Type*)                  NRF_ETB_NS_BASE)
 #define NRF_ETR_NS                        ((NRF_GENERIC_Type*)                  NRF_ETR_NS_BASE)
 #define NRF_CTI210_NS                     ((NRF_CTI_Type*)                      NRF_CTI210_NS_BASE)
 #define NRF_CTI211_NS                     ((NRF_CTI_Type*)                      NRF_CTI211_NS_BASE)
@@ -374,7 +373,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ATBFUNNEL211_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL211_NS_BASE)
 #define NRF_ATBFUNNEL212_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL212_NS_BASE)
 #define NRF_ATBFUNNEL213_NS               ((NRF_ATBFUNNEL_Type*)                NRF_ATBFUNNEL213_NS_BASE)
-#define NRF_GPR_NS                        ((NRF_GPR_Type*)                      NRF_GPR_NS_BASE)
 #define NRF_GPIOTE130_NS                  ((NRF_GPIOTE_Type*)                   NRF_GPIOTE130_NS_BASE)
 #define NRF_GPIOTE130_S                   ((NRF_GPIOTE_Type*)                   NRF_GPIOTE130_S_BASE)
 #define NRF_GPIOTE131_NS                  ((NRF_GPIOTE_Type*)                   NRF_GPIOTE131_NS_BASE)
