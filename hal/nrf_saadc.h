@@ -24,11 +24,6 @@ extern "C" {
 #define NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK \
     ((uint32_t)(((1 << SAADC_CH_NUM) - 1) << NRF_SAADC_LIMITS_INT_OFFSET))
 
-#if defined(HALTIUM_XXAA)
-/* TODO: delete when in MDK */
-#define SAADC_CH_NUM 8
-#endif
-
 #if defined(SAADC_CH_CONFIG_TACQ_3us) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of the Acquisition Time enum. */
 #define NRF_SAADC_HAS_ACQTIME_ENUM 1

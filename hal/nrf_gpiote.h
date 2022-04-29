@@ -25,56 +25,6 @@ extern "C" {
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(HALTIUM_XXAA) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Group number definition for domain.
- * @todo Remove when added to MDK
- */
-#if defined(NRF_TRUSTZONE_NONSECURE)
-    #if defined(NRF_SECURE)
-        #define NRF_GPIOTE_IRQ_GROUP 0
-    #elif defined(NRF_APPLICATION)
-        #define NRF_GPIOTE_IRQ_GROUP 2
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_GPIOTE_IRQ_GROUP 4
-    #elif defined(NRF_CELLCORE)
-        #define NRF_GPIOTE_IRQ_GROUP 4
-    #else
-        #error Unknown core.
-    #endif
-#elif defined(NRF_SYSCTRL)
-    #define NRF_GPIOTE_IRQ_GROUP 6
-#else
-    #if defined(NRF_SECURE)
-        #define NRF_GPIOTE_IRQ_GROUP 1
-    #elif defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION)
-        #define NRF_GPIOTE_IRQ_GROUP 3
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_GPIOTE_IRQ_GROUP 5
-    #elif defined(NRF_CELLCORE)
-        #define NRF_GPIOTE_IRQ_GROUP 5
-    #else
-        #error Unknown core.
-    #endif
-#endif // defined(NRF_TRUSTZONE_NONSECURE)
-
-
-/** @brief Fixups for the GPIOTE IRQn lines. */
-#if defined(NRF_TRUSTZONE_NONSECURE)
-#if !defined(NRF_CELLCORE)
-#define nrfx_gpiote_irq_handler      GPIOTE1300_0_IRQHandler
-#else
-#define nrfx_gpiote_irq_handler      GPIOTE1310_0_IRQHandler
-#endif
-
-#else
-
-#if !defined(NRF_CELLCORE)
-#define nrfx_gpiote_irq_handler      GPIOTE1300_1_IRQHandler
-#else
-#define nrfx_gpiote_irq_handler      GPIOTE1310_1_IRQHandler
-#endif
-#endif // defined(NRF_TRUSTZONE_NONSECURE)
-
 /** @brief Enable or disable interrupt register definition. */
 #define GPIOTE_INTEN    NRFX_CONCAT_2(INTEN,    NRF_GPIOTE_IRQ_GROUP)
 
@@ -115,20 +65,6 @@ extern "C" {
 #define NRF_GPIOTE_HAS_MULTIPLE_INT 1
 #else
 #define NRF_GPIOTE_HAS_MULTIPLE_INT 0
-#endif
-
-#if NRF_GPIOTE_HAS_MULTIPLE_INT
-/** @brief Number of interrupt registers. */
-/* TODO: This magic number should come from MDK. */
-#define NRF_GPIOTE_INT_COUNT 7
-#endif
-
-#if defined(HALTIUM_XXAA)
-/* TODO: Remove once haltium has peripheral.h support. */
-#define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
-#define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
-#define GPIOTE_FEATURE_SET_PRESENT
-#define GPIOTE_FEATURE_CLR_PRESENT
 #endif
 
 /** @brief Polarity for the GPIOTE channel. */

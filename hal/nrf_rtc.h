@@ -54,12 +54,6 @@ extern "C" {
 #define NRF_RTC_CHANNEL_EVENT_ADDR(ch) \
     (nrf_rtc_event_t)((NRF_RTC_EVENT_COMPARE_0) + (ch) * sizeof(uint32_t))
 
-#if defined(HALTIUM_XXAA)
-/* TODO: Remove when in MDK */
-#define RTC130_CC_NUM 4
-#define RTC131_CC_NUM 4
-#endif
-
 /** @brief RTC tasks. */
 typedef enum
 {

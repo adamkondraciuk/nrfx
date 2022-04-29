@@ -16,43 +16,6 @@ extern "C" {
  * @brief   Hardware access layer for managing the TIMER peripheral.
  */
 
-#if defined(HALTIUM_XXAA)
-/* TODO: Remove when in MDK */
-#define TIMER120_CC_NUM 6
-#define TIMER121_CC_NUM 6
-#define TIMER130_CC_NUM 6
-#define TIMER131_CC_NUM 6
-#define TIMER132_CC_NUM 6
-#define TIMER133_CC_NUM 6
-#define TIMER134_CC_NUM 6
-#define TIMER135_CC_NUM 6
-#define TIMER136_CC_NUM 6
-#define TIMER137_CC_NUM 6
-
-#define TIMER120_MAX_SIZE 32
-#define TIMER121_MAX_SIZE 32
-#define TIMER130_MAX_SIZE 32
-#define TIMER131_MAX_SIZE 32
-#define TIMER132_MAX_SIZE 32
-#define TIMER133_MAX_SIZE 32
-#define TIMER134_MAX_SIZE 32
-#define TIMER135_MAX_SIZE 32
-#define TIMER136_MAX_SIZE 32
-#define TIMER137_MAX_SIZE 32
-
-#if defined(NRF_RADIOCORE)
-/* TODO: Verify values below when appear in PS. */
-#define TIMER020_CC_NUM 6
-#define TIMER021_CC_NUM 6
-#define TIMER022_CC_NUM 6
-
-#define TIMER020_MAX_SIZE 32
-#define TIMER021_MAX_SIZE 32
-#define TIMER022_MAX_SIZE 32
-#endif //defined(NRF_RADIOCORE)
-
-#endif //defined(HALTIUM_XXAA)
-
 /**
  * @brief Macro getting pointer to the structure of registers of the TIMER peripheral.
  *
@@ -104,7 +67,6 @@ extern "C" {
 #define NRF_TIMER_HAS_ONE_SHOT 0
 #endif
 
-// TODO: Replace magic numbers with MDK symbols when available.
 /** @brief Base frequency value 320 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_320MHZ (320000000UL)
 /** @brief Base frequency value 32 MHz for TIMER. */

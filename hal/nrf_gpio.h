@@ -20,19 +20,6 @@ extern "C" {
 #define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM)
 #define GPIO_REG_LIST  {NRF_P0, NRF_P1}
 #elif (GPIO_COUNT == 16)
-/* TODO: Remove this once Haltium targets have peripherals support. */
-#define P0_PIN_NUM (12)
-#define P1_PIN_NUM (12)
-#define P2_PIN_NUM (12)
-#define P6_PIN_NUM (14)
-#define P7_PIN_NUM (8)
-#define P9_PIN_NUM (6)
-#define P0_FEATURE_PINS_PRESENT 0xFFFUL
-#define P1_FEATURE_PINS_PRESENT 0xFFFUL
-#define P2_FEATURE_PINS_PRESENT 0xFFFUL
-#define P6_FEATURE_PINS_PRESENT 0x3FFFUL
-#define P7_FEATURE_PINS_PRESENT 0xFFUL
-#define P9_FEATURE_PINS_PRESENT 0x3FUL
 #define NUMBER_OF_PINS 512
 #define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P3, NRF_P4, NRF_P5, NRF_P6, NRF_P7, \
                         NRF_P8, NRF_P9, NRF_P10, NRF_P11, NRF_P12, NRF_P13, NRF_P14, NRF_P15}

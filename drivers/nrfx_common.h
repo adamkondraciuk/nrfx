@@ -9,6 +9,7 @@
 
 #include <nrf.h>
 #include <nrf_peripherals.h>
+#include <mdk_fixups.h>
 
 #ifdef __cplusplus
 extern "C" {

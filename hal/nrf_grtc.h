@@ -20,63 +20,6 @@ extern "C" {
  *         1 MHz system counter (marked as 'SYSCOUNTER').
  */
 
-/**
- * @brief Group number definition for domain.
- *
- * @todo Remove when provided by MDK.
- */
-#if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
-    #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
-        #define NRF_GRTC_IRQ_GROUP 0
-    #elif defined(NRF_APPLICATION)
-        #define NRF_GRTC_IRQ_GROUP 2
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_GRTC_IRQ_GROUP 4
-    #elif defined(NRF_CELLCORE)
-        #define NRF_GRTC_IRQ_GROUP 8
-    #else
-        #error Unknown core.
-    #endif
-#elif defined(NRF_SYSCTRL) || defined(NRF_SECURE)
-    #define NRF_GRTC_IRQ_GROUP 6
-#elif defined(NRF_PPR)
-    #define NRF_GRTC_IRQ_GROUP 4
-#else
-    #if defined(NRF_SECURE)
-        #define NRF_GRTC_IRQ_GROUP 1
-    #elif defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION)
-        #define NRF_GRTC_IRQ_GROUP 3
-    #elif defined(NRF_RADIOCORE)
-        #define NRF_GRTC_IRQ_GROUP 5
-    #elif defined(NRF_CELLCORE)
-        #define NRF_GRTC_IRQ_GROUP 7
-    #else
-        #error Unknown core.
-    #endif
-#endif
-
-#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
-/** @brief Fixup for the GRTC IRQn lines. */
-    #define GRTC_IRQn       GRTC_0_IRQn
-    /** @todo Remove when fix in MDK will appear. */
-    #if defined(NRF_SYSTEMC_APPLICATION) || \
-        defined(NRF_SYSTEMC_SECURE)
-        /** @brief Fixup for the GRTC IRQHandler. */
-        #define GRTC_IRQHandler GRTC0_IRQHandler
-    #else
-        /** @brief Fixup for the GRTC IRQHandler. */
-        #define GRTC_IRQHandler GRTC0_0_IRQHandler
-    #endif
-#else
-    #define GRTC_IRQn       GRTC_1_IRQn
-    #if defined(NRF_SYSTEMC_APPLICATION) || \
-        defined(NRF_SYSTEMC_SECURE)
-        #define GRTC_IRQHandler GRTC1_IRQHandler
-    #else
-        #define GRTC_IRQHandler GRTC0_1_IRQHandler
-    #endif
-#endif
-
 /** @brief Interrupts INTEN register definition. */
 #define GRTC_INTEN        NRFX_CONCAT_2(INTEN, NRF_GRTC_IRQ_GROUP)
 /** @brief Interrupts INTENSET register definition. */
@@ -116,12 +59,6 @@ extern "C" {
 /** @brief Mask for all channels represented by CC channels. */
 #define NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK \
     ((uint32_t)(((1 << NRF_GRTC_SYSCOUNTER_CC_COUNT) - 1) << GRTC_INTEN0_COMPARE0_Pos))
-/**
- * @brief Symbol describing interrupt mask.
- *
- * @todo Remove magic numbers when corresponding defines will be available in MDK.
- */
-#define NRF_GRTC_INTEN_MASK 0x7FFFFFF
 
 /** @brief GRTC tasks. */
 typedef enum

@@ -16,14 +16,6 @@ extern "C" {
  * @brief   Hardware access layer for managing the Distributed Programmable Peripheral
  *          Interconnect Controller (DPPIC).
  */
-
-#if defined(HALTIUM_XXAA)
-/* TODO: Delete when added to MDK. */
-#define DPPI_PRESENT 1
-#define DPPI_CH_NUM 8
-#define DPPI_GROUP_NUM 2
-#endif
-
 /** @brief DPPI channel groups. */
 typedef enum
 {

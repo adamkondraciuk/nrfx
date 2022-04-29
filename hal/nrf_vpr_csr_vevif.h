@@ -18,8 +18,7 @@ extern "C" {
  */
 
 /** @brief Number of VEVIF events/tasks. */
-/* @todo Use MDK when available. */
-#define NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT 32
+#define NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT VPR_VEVIF_EVENT_MaxCount
 
 /**
  * @brief Function for getting mask of pending VEVIF tasks.

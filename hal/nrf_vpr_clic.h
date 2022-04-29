@@ -19,17 +19,12 @@ extern "C" {
 /** @brief Interrupts count. */
 #define NRF_VPR_CLIC_IRQ_COUNT CLIC_CLIC_CLICINT_MaxCount
 
-/** @brief Interupt priorities count. */
-/* @todo Replace with MDK value when available. */
-#define NRF_VPR_CLIC_PRIO_COUNT 4
-
 /** @brief Interrupt privilege modes available. */
-/* @todo Replace with MDK values when IPS fixed. */
 typedef enum
 {
-    NRF_VPR_CLIC_MODE_M   = CLIC_CLIC_CLICCFG_NMBITS_ModeM, /**< All interrupts are M-mode only. */
-    NRF_VPR_CLIC_MODE_MU  = 1,                              /**< Interrupts can be M-mode or U-mode. */
-    NRF_VPR_CLIC_MODE_MSU = 2,                              /**< Interrupts can be M/S/U-mode. */
+    NRF_VPR_CLIC_MODE_M   = CLIC_CLIC_CLICCFG_NMBITS_ModeM,   /**< All interrupts are M-mode only. */
+    NRF_VPR_CLIC_MODE_MU  = CLIC_CLIC_CLICCFG_NMBITS_ModeMU,  /**< Interrupts can be M-mode or U-mode. */
+    NRF_VPR_CLIC_MODE_MSU = CLIC_CLIC_CLICCFG_NMBITS_ModeMSU, /**< Interrupts can be M/S/U-mode. */
 } nrf_vpr_clic_mode_t;
 
 /** @brief VPR CLIC configuration structure. */
