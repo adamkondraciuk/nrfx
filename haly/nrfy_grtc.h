@@ -22,7 +22,7 @@ NRFY_STATIC_INLINE bool __nrfy_internal_grtc_event_handle(NRF_GRTC_Type *  p_reg
 NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * p_reg,
                                                                 uint32_t        mask);
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type const * p_reg);
 #endif
 /**
@@ -50,7 +50,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
         nrf_grtc_event_t event = nrf_grtc_sys_counter_compare_event_get(cc_channel);
         __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, event);
     }
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_RTCOMPARE);
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_RTCOMPARESYNC);
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_SYSCOUNTERVALID);
@@ -100,7 +100,7 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_events_process(NRF_GRTC_Type * p_reg,
     return evt_mask;
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for starting the RTCOUNTER.
  *
@@ -164,7 +164,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
         {}
     }
 }
-#endif// defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif// defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for returning the SYSCOUNTER 1 MHz value.
@@ -186,7 +186,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_re
     return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for returning the RTCOUNTER 32 kHz value.
  *
@@ -198,7 +198,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_rt_counter_get(NRF_GRTC_Type const * p_reg
 {
     return __nrfy_internal_grtc_rt_counter_read(p_reg);
 }
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for enabling the GRTC compare event and optionally associated interrupt.
@@ -345,7 +345,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *        
     nrf_barrier_w();
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /** @refhal{nrf_grtc_rt_counter_cc_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_cc_set(NRF_GRTC_Type * p_reg,
                                                     uint64_t        cc_value,
@@ -363,7 +363,7 @@ NRFY_STATIC_INLINE uint64_t nrfy_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_
     nrf_barrier_r();
     return cc;
 }
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /** @refhal{nrf_grtc_int_enable} */
 NRFY_STATIC_INLINE void nrfy_grtc_int_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
@@ -397,7 +397,7 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_int_pending_get(NRF_GRTC_Type const * p_re
     return pending;
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /** @refhal{nrf_grtc_shorts_enable} */
 NRFY_STATIC_INLINE void nrfy_grtc_shorts_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
@@ -418,7 +418,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mas
     nrf_grtc_shorts_set(p_reg, mask);
     nrf_barrier_w();
 }
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /** @refhal{nrf_grtc_subscribe_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
@@ -526,7 +526,7 @@ NRFY_STATIC_INLINE nrf_grtc_event_t nrfy_grtc_sys_counter_compare_event_get(uint
     return nrf_grtc_sys_counter_compare_event_get(cc_channel);
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /** @refhal{nrf_grtc_sys_counter_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enable)
 {
@@ -540,7 +540,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_re
     nrf_grtc_sys_counter_auto_mode_set(p_reg, enable);
     nrf_barrier_w();
 }
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /** @refhal{nrf_grtc_sys_counter_check} */
 NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_check(NRF_GRTC_Type * p_reg)
@@ -579,7 +579,7 @@ uint32_t nrfy_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_
     return request;
 }
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /** @refhal{nrf_grtc_sys_counter_interval_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_interval_set(NRF_GRTC_Type * p_reg, uint32_t value)
 {
@@ -627,7 +627,7 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_waketime_get(NRF_GRTC_Type const * p_reg)
     nrf_barrier_r();
     return waketime;
 }
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /** @} */
 
@@ -669,7 +669,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
         nrf_grtc_event_t event = nrf_grtc_sys_counter_compare_event_get(cc_channel);
         (void)__nrfy_internal_grtc_event_handle(p_reg, mask, event, &event_mask);
     }
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     (void)__nrfy_internal_grtc_event_handle(p_reg,
                                             mask,
                                             NRF_GRTC_EVENT_RTCOMPARE,
@@ -686,7 +686,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
     return event_mask;
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type const * p_reg)
 {
     uint32_t counter_l = nrf_grtc_rt_counter_low_get(p_reg);

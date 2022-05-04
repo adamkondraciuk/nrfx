@@ -35,13 +35,13 @@
 #define GRTC_RTCOUNTER_CC_HANDLER_IDX  NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS
 #define GRTC_RTCOUNTER_COMPARE_CHANNEL NRF_GRTC_SYSCOUNTER_CC_COUNT
 
-/* Verify that only SysCtrl possesses main cc channel. */
-#if defined(NRF_SYSCTRL)
+/* Verify that only System Controller or Secure Domain possesses main capture/compare channel. */
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRFX_STATIC_ASSERT(NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK &
-                   GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL));
+                   GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL));
 #else
 NRFX_STATIC_ASSERT(!(NRFX_GRTC_CONFIG_ALLOWED_CC_CHANNELS_MASK &
-                     GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL)));
+                     GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL)));
 #endif
 
 typedef struct
@@ -188,7 +188,7 @@ nrfx_err_t nrfx_grtc_channel_alloc(uint8_t * p_channel)
 nrfx_err_t nrfx_grtc_channel_free(uint8_t channel)
 {
     NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
-    NRFX_ASSERT(channel != NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+    NRFX_ASSERT(channel != NRF_GRTC_MAIN_CC_CHANNEL);
     nrfx_err_t err_code;
 
     channel_used_unmark(channel);
@@ -253,7 +253,7 @@ nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority)
     return err_code;
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait)
 {
     nrfx_err_t err_code = NRFX_SUCCESS;
@@ -275,9 +275,9 @@ nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait)
 nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel)
 {
     NRFX_ASSERT(p_main_cc_channel);
-    NRFX_ASSERT(m_cb.channel_data[0].channel == NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+    NRFX_ASSERT(m_cb.channel_data[0].channel == NRF_GRTC_MAIN_CC_CHANNEL);
     nrfx_err_t err_code = NRFX_SUCCESS;
-    uint32_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL) &
+    uint32_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL) &
                          m_cb.available_channels;
 
     if (m_cb.state != NRFX_DRV_STATE_INITIALIZED)
@@ -298,9 +298,9 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
         return err_code;
     }
 
-    *p_main_cc_channel = NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL;
-    m_cb.available_channels &= ~GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
-    channel_used_mark(NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+    *p_main_cc_channel = NRF_GRTC_MAIN_CC_CHANNEL;
+    m_cb.available_channels &= ~GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL);
+    channel_used_mark(NRF_GRTC_MAIN_CC_CHANNEL);
     NRFX_LOG_INFO("GRTC channel %u allocated.", m_cb.channel_data[0].channel);
 
     if (is_syscounter_running())
@@ -417,7 +417,7 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
     NRFX_LOG_INFO("GRTC RTCOUNTER compare set to %llu.", val);
     return err_code;
 }
-#endif // defined(NRF_SYSCTRL)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 void nrfx_grtc_uninit(void)
 {
@@ -684,7 +684,7 @@ static void grtc_irq_handler(void)
         uint8_t channel = m_cb.channel_data[i].channel;
 
         //TODO: Remove when HM-15402 is fixed.
-        if (channel == NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL)
+        if (channel == NRF_GRTC_MAIN_CC_CHANNEL)
         {
             nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
         }

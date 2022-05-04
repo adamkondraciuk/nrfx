@@ -37,7 +37,7 @@ extern "C" {
     #else
         #error Unknown core.
     #endif
-#elif defined(NRF_SYSCTRL)
+#elif defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     #define NRF_GRTC_IRQ_GROUP 6
 #elif defined(NRF_PPR)
     #define NRF_GRTC_IRQ_GROUP 4
@@ -111,7 +111,7 @@ extern "C" {
 #define NRF_GRTC_CHANNEL_INT_MASK(ch) ((uint32_t)(NRF_GRTC_INT_COMPARE0_MASK) << (ch))
 
 /** @brief Main channel that can be used only by SysCtrl. */
-#define NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL 0
+#define NRF_GRTC_MAIN_CC_CHANNEL 0
 
 /** @brief Mask for all channels represented by CC channels. */
 #define NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK \
@@ -280,7 +280,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *          
                                                        uint32_t                    value,
                                                        nrf_grtc_cc_add_reference_t reference);
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting a compare value for the RTCOUNTER.
  *
@@ -308,7 +308,7 @@ NRF_STATIC_INLINE void nrf_grtc_rt_counter_cc_set(NRF_GRTC_Type * p_reg,
  * @return Value from the capture/compare register in 32 kHz units.
  */
 NRF_STATIC_INLINE uint64_t nrf_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_reg);
-#endif //defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for enabling specified interrupts.
@@ -348,7 +348,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_enable_check(NRF_GRTC_Type const * p_reg
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg);
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for enabling the specified shortcuts.
  *
@@ -372,7 +372,7 @@ NRF_STATIC_INLINE void nrf_grtc_shorts_disable(NRF_GRTC_Type * p_reg, uint32_t m
  * @param[in] mask  Bitmask of shortcuts to be set.
  */
 NRF_STATIC_INLINE void nrf_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mask);
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for setting the subscribe configuration for a given
@@ -449,7 +449,7 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
  */
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event);
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for returning the lower 32-bits of RTCOUNTER value.
  *
@@ -475,7 +475,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_low_get(NRF_GRTC_Type const * p_r
  * @return Higher part of RTCOUNTER value.
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_reg);
-#endif //defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for returning the lower 32-bits of SYSCOUNTER value.
@@ -583,7 +583,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type 
  */
 NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t cc_channel);
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the SYSCOUNTER.
  *
@@ -606,7 +606,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enab
  * @param[in] enable True if the automatic mode is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg, bool enable);
-#endif //defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for checking whether the SYSCOUNTER is in active state.
@@ -655,7 +655,7 @@ bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg
 NRF_STATIC_INLINE
 uint32_t nrf_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_reg,
                                                        uint32_t              mask);
-#if defined(NRF_SYSCTRL)  || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the periodic compare event for capture/compare channel 0.
  *
@@ -712,7 +712,7 @@ NRF_STATIC_INLINE void nrf_grtc_waketime_set(NRF_GRTC_Type * p_reg, uint32_t val
  * @retval Value of wake time in 32 kHz units.
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_waketime_get(NRF_GRTC_Type const * p_reg);
-#endif //defined(NRF_SYSCTRL)  || defined(__NRFX_DOXYGEN__)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -720,11 +720,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
                                                    uint8_t         cc_channel,
                                                    uint64_t        cc_value)
 {
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
 #else
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT &&
-                cc_channel > NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+                cc_channel > NRF_GRTC_MAIN_CC_CHANNEL);
 #endif
     uint32_t cc_h = (uint32_t)(cc_value >> 32);
     NRFX_ASSERT(cc_h <= NRF_GRTC_SYSCOUNTER_CCH_MASK);
@@ -736,11 +736,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
 NRF_STATIC_INLINE uint64_t nrf_grtc_sys_counter_cc_get(NRF_GRTC_Type const * p_reg,
                                                        uint8_t               cc_channel)
 {
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
 #else
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT &&
-                cc_channel > NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+                cc_channel > NRF_GRTC_MAIN_CC_CHANNEL);
 #endif
     uint32_t cc_h = p_reg->CC[cc_channel].CCH;
 
@@ -752,11 +752,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *          
                                                        uint32_t                    value,
                                                        nrf_grtc_cc_add_reference_t reference)
 {
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
 #else
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT &&
-                cc_channel > NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+                cc_channel > NRF_GRTC_MAIN_CC_CHANNEL);
 #endif
     NRFX_ASSERT(value <= NRF_GRTC_SYSCOUNTER_CCADD_MASK);
 
@@ -764,7 +764,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_add_set(NRF_GRTC_Type *          
                                (value & NRF_GRTC_SYSCOUNTER_CCADD_MASK);
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE void nrf_grtc_rt_counter_cc_set(NRF_GRTC_Type * p_reg,
                                                   uint64_t        cc_value,
                                                   bool            sync)
@@ -790,7 +790,7 @@ NRF_STATIC_INLINE uint64_t nrf_grtc_rt_counter_cc_get(NRF_GRTC_Type const * p_re
 
     return (uint64_t)p_reg->RTCOMPAREL | ((uint64_t)cc_h << 32);
 }
-#endif //defined(NRF_SYSCTRL)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 NRF_STATIC_INLINE void nrf_grtc_int_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
@@ -812,7 +812,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg)
     return p_reg->GRTC_INTPEND;
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE void nrf_grtc_shorts_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
     p_reg->SHORTS |= mask;
@@ -827,7 +827,7 @@ NRF_STATIC_INLINE void nrf_grtc_shorts_set(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
     p_reg->SHORTS = mask;
 }
-#endif //defined(NRF_SYSCTRL)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 NRF_STATIC_INLINE void nrf_grtc_subscribe_set(NRF_GRTC_Type * p_reg,
                                               nrf_grtc_task_t task,
@@ -857,7 +857,7 @@ NRF_STATIC_INLINE void nrf_grtc_publish_set(NRF_GRTC_Type *  p_reg,
 {
     NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
-#if !defined(NRF_SYSCTRL)
+#if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
     NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
 #endif
 
@@ -870,7 +870,7 @@ NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
 {
     NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
-#if !defined(NRF_SYSCTRL)
+#if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
     NRFX_ASSERT(event != NRF_GRTC_EVENT_RTCOMPARE);
 #endif
 
@@ -879,7 +879,7 @@ NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
 
 NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grtc_event_t event)
 {
-#if !defined(NRF_SYSCTRL)
+#if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
     NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
                 (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
@@ -889,7 +889,7 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
 
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event)
 {
-#if !defined(NRF_SYSCTRL)
+#if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
     NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
                 (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
                 (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
@@ -898,7 +898,7 @@ NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_even
     nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_low_get(NRF_GRTC_Type const * p_reg)
 {
     return p_reg->RTCOUNTERL;
@@ -908,7 +908,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
 {
     return p_reg->RTCOUNTERH;
 }
-#endif //defined(NRF_SYSCTRL)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg)
 {
@@ -939,7 +939,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_task_address_get(NRF_GRTC_Type const * p_reg
 
 NRF_STATIC_INLINE void nrf_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_task_t task)
 {
-#if !defined(NRF_SYSCTRL)
+#if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
     NRFX_ASSERT((task != NRF_GRTC_TASK_START) &&
                 (task != NRF_GRTC_TASK_STOP)  &&
                 (task != NRF_GRTC_TASK_CLEAR));
@@ -956,11 +956,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_enable(NRF_GRTC_Type *
                                                                  uint8_t         cc_channel)
 {
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
 #else
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT &&
-                cc_channel > NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+                cc_channel > NRF_GRTC_MAIN_CC_CHANNEL);
 #endif
     p_reg->CC[cc_channel].CCEN = GRTC_CC_CCEN_ACTIVE_Enable;
 }
@@ -968,11 +968,11 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_enable(NRF_GRTC_Type *
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type * p_reg,
                                                                   uint8_t         cc_channel)
 {
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
 #else
     NRFX_ASSERT(cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT &&
-                cc_channel > NRF_GRTC_MAIN_SYSCTRL_CC_CHANNEL);
+                cc_channel > NRF_GRTC_MAIN_CC_CHANNEL);
 #endif
     p_reg->CC[cc_channel].CCEN = GRTC_CC_CCEN_ACTIVE_Disable;
 }
@@ -982,7 +982,7 @@ NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_
     return (nrf_grtc_event_t)NRFX_OFFSETOF(NRF_GRTC_Type, EVENTS_COMPARE[cc_channel]);
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enable)
 {
     p_reg->MODE = ((p_reg->MODE & ~GRTC_MODE_SYSCOUNTEREN_Msk) |
@@ -997,7 +997,7 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_auto_mode_set(NRF_GRTC_Type * p_reg,
                   GRTC_MODE_AUTOEN_Default) << GRTC_MODE_AUTOEN_Pos));
 }
 
-#endif //defined(NRF_SYSCTRL)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 NRF_STATIC_INLINE bool nrf_grtc_sys_counter_check(NRF_GRTC_Type const * p_reg)
 {
@@ -1033,7 +1033,7 @@ uint32_t nrf_grtc_sys_counter_active_state_request_get(NRF_GRTC_Type const * p_r
     return p_reg->KEEPRUNNING & mask;
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_interval_set(NRF_GRTC_Type * p_reg, uint32_t value)
 {
     p_reg->INTERVAL = value;
@@ -1065,7 +1065,7 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_waketime_get(NRF_GRTC_Type const * p_reg)
 {
     return (p_reg->WAKETIME >> GRTC_WAKETIME_VALUE_Pos);
 }
-#endif //defined(NRF_SYSCTRL)
+#endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
 #endif // NRF_DECLARE_ONLY
 

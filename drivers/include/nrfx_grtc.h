@@ -118,7 +118,7 @@ bool nrfx_grtc_is_channel_used(uint8_t channel);
  */
 nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority);
 
-#if defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for starting the 32 kHz RTCOUNTER.
  *
@@ -133,8 +133,9 @@ nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
 /**
  * @brief Function for starting the 1 MHz SYSCOUNTER.
  *
- * @note This function automatically alocates and marks as used the special-purpose main
- *       capture/compare channel. It should be owned only by the SysCtrl.
+ * @note This function automatically allocates and marks as used the special-purpose main
+ *       capture/compare channel. It should be owned only by the System Controller or
+ *       Secure Domain.
  *
  * @note Use auxiliary structure of type @ref nrfx_grtc_channel_t when working with SYSCOUNTER.
  *
@@ -189,7 +190,7 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
                                                uint64_t                             val,
                                                bool                                 enable_irq,
                                                bool                                 sync);
-#endif // defined(NRF_SYSCTRL) || defined(__NRFX_DOXYGEN__)
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for uninitializing the GRTC.
@@ -360,7 +361,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_task_address_get(nrf_grtc_task_t task);
  */
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_address_get(nrf_grtc_event_t event);
 
-#if defined(NRF_SYSCTRL)  || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for reading the GRTC RTCOUNTER value.
  *
@@ -385,7 +386,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_address_get(nrf_grtc_event_t event)
     return nrfy_grtc_event_address_get(NRF_GRTC, event);
 }
 
-#if defined(NRF_SYSCTRL)
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRFX_STATIC_INLINE uint64_t nrfx_grtc_rtcounter_get(void)
 {
     return nrfy_grtc_rt_counter_get(NRF_GRTC);
