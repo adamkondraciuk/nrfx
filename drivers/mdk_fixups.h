@@ -32,8 +32,9 @@ typedef enum
     NRF_PROCESSOR_ID_SYSCTRL     = 12,
     NRF_PROCESSOR_ID_PPR         = 13,
     NRF_PROCESSOR_ID_FLPR        = 14,
-    NRF_PROCESSOR_ID_COUNT,
 } nrf_processor_id_t;
+
+#define NRF_PROCESSOR_ID_COUNT NRF_PROCESSOR_ID_FLPR + 1
 
 /* MDK-2059 */
 #define ADDRESS_REGION_Pos   (29UL)
