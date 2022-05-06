@@ -46,7 +46,7 @@
     #if defined(BOARD_PALLADIUM)
         #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
         #define NRFX_DELAY_DWT_PRESENT  0
-    #elif defined(BOARD_PROFPGA)
+    #elif defined(BOARD_FPGA)
         /* We are running tests on FPGA that uses clock divider == 8 */
         #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / 8)
         #define NRFX_DELAY_DWT_PRESENT  1
