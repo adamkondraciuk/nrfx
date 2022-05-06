@@ -802,6 +802,7 @@ Default_Handler:
     IRQ  WDT131_IRQHandler
     IRQ  WDT132_IRQHandler
     IRQ  EGU130_IRQHandler
+    IRQ  RESETHUB_IRQHandler
     IRQ  SPU132_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler
