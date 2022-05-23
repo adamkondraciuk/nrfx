@@ -98,6 +98,9 @@ typedef enum
     #endif
 #elif defined(NRF_SYSCTRL)
     #define NRF_GPIOTE_IRQ_GROUP 6
+#elif defined(NRF_PPR)
+/* TODO: PPR can use group shared with either APP or NET core. Investigate this further */
+    #define NRF_GPIOTE_IRQ_GROUP 2
 #else
     #if defined(NRF_SECURE)
         #define NRF_GPIOTE_IRQ_GROUP 1
