@@ -68,9 +68,11 @@ typedef enum
 #define GLOBAL_IRQN_START (96)
 #define GLOBAL_IRQN_MAX   (480)
 
-#define DPPI_PRESENT 1
-#define DPPI_CH_NUM 8
+#if defined(DPPIC_PRESENT)
+#define DPPI_PRESENT
+#define DPPI_CH_NUM DPPIC_COUNT
 #define DPPI_GROUP_NUM 2
+#endif
 
 #define EGU130_CH_NUM 8
 #define EGU020_CH_NUM 16
