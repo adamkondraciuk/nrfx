@@ -311,6 +311,14 @@ typedef enum
 
 #define CSR_MINTTRESH 0x347
 
+#if defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(NRF_FLPR)
+    #define MVDMA_JOBLISTCOUNT 4
+#else
+    #define MVDMA_JOBLISTCOUNT 1
+#endif
+
+#define MVDMA_AXI_BUS_WIDTH 8
+
 /* NCSDK-10983 */
 
 typedef struct {
