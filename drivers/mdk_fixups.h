@@ -1,6 +1,10 @@
 #ifndef MDK_FIXUPS_H__
 #define MDK_FIXUPS_H__
 
+#if defined(LILIUMFP1_XXAA) || defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA)
+#define HALTIUM_XXAA 1
+#endif
+
 #if defined(HALTIUM_XXAA)
 typedef NRF_DOMAINS_t nrf_domain_t;
 
