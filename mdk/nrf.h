@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   44 
-#define MDK_MICRO_VERSION   2 
+#define MDK_MINOR_VERSION   46 
+#define MDK_MICRO_VERSION   0 
 
 
 /* Define coprocessor domains */
@@ -79,7 +79,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
-#if defined(NRF9160_XXAA)
+#if defined (NRF9160_XXAA)
     #if defined (NRF_APPLICATION)
         #ifndef NRF9160_XXAA_APPLICATION
             #define NRF9160_XXAA_APPLICATION
@@ -106,6 +106,38 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 #if defined (NRF9160_XXAA_MODEM)
+    #ifndef NRF_MODEM
+        #define NRF_MODEM
+    #endif
+#endif
+
+#if defined (NRF9120_XXAA)
+    #if defined (NRF_APPLICATION)
+        #ifndef NRF9120_XXAA_APPLICATION
+            #define NRF9120_XXAA_APPLICATION
+        #endif
+    #elif defined (NRF_MODEM)
+        #ifndef NRF9120_XXAA_MODEM
+            #define NRF9120_XXAA_MODEM
+        #endif
+    #else
+        #ifndef NRF9120_XXAA_APPLICATION
+            #define NRF9120_XXAA_APPLICATION
+        #endif
+    #endif
+#endif
+
+#if defined (NRF9120_XXAA_APPLICATION) || defined (NRF9120_XXAA_MODEM)
+    #ifndef NRF9120_XXAA
+        #define NRF9120_XXAA
+    #endif
+#endif
+#if defined (NRF9120_XXAA_APPLICATION)
+    #ifndef NRF_APPLICATION
+        #define NRF_APPLICATION
+    #endif
+#endif
+#if defined (NRF9120_XXAA_MODEM)
     #ifndef NRF_MODEM
         #define NRF_MODEM
     #endif
@@ -146,7 +178,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF52_SERIES for common use in nRF52 series devices. Only if not previously defined. */
-#if defined (NRF52805_XXAA) || defined (NRF52810_XXAA) || defined (NRF52811_XXAA) || defined (NRF52820_XXAA) || defined (NRF52832_XXAA) || defined (NRF52832_XXAB) || defined (NRF52833_XXAA) || defined (NRF52840_XXAA)
+#if defined (NRF52805_XXAA) || defined (NRF52810_XXAA) || defined (NRF52811_XXAA) || defined (NRF52820_XXAA) || defined (NRF52832_XXAA) || defined (NRF52832_XXAB) || defined (NRF52833_XXAA) || defined (NRF52834_XXAA) || defined (NRF52840_XXAA)
     #ifndef NRF52_SERIES
         #define NRF52_SERIES
     #endif
@@ -163,6 +195,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if defined (NRF9160_XXAA) ||  defined (NRF9120_XXAA)
     #ifndef NRF91_SERIES    
         #define NRF91_SERIES
+    #endif
+#endif
+
+/* Define NRF92_SERIES for common use in nRF91 series devices. */
+#if defined (NRF9230_XXAA)
+    #ifndef NRF92_SERIES
+        #define NRF92_SERIES
     #endif
 #endif
 
@@ -279,6 +318,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf52_to_nrf52833.h"
     #endif
 
+#elif defined (NRF52834_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf52834.h"
+    #endif
+    #if !defined(EXCLUDE_BITFIELDS)
+        #include "nrf52834_bitfields.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "nrf51_to_nrf52.h"
+        #include "nrf52_to_nrf52833.h"
+    #endif
+
 #elif defined (NRF52840_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf52840.h"
@@ -325,9 +376,24 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "lilium.h"
     #endif
 
+#elif defined (LILIUMFP1_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "liliumfp1.h"
+    #endif
+
+#elif defined (LILIUMSOC1_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "liliumsoc1.h"
+    #endif
+
 #elif defined (HALTIUM_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "haltium.h"
+    #endif
+    
+#elif defined (MOONLIGHT_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "moonlight.h"
     #endif
 
 #elif defined (NRF9160_XXAA)
@@ -352,10 +418,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
     #endif
 
+#elif defined (NRF9230_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf9230.h"
+    #endif
 #else
     #error "Device must be defined. See nrf.h."
-#endif /* NRF5001_XXAA, NRF5002_XXAA, NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9160_XXAA_MODEM*/
-
+#endif /* NRF5001_XXAA, NRF5002_XXAA, NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9160_XXAA_MODEM, NRF9280_XXAA */
 #include "compiler_abstraction.h"
 
 #endif /* NRF_H */

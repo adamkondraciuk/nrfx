@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -75,6 +75,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf52832_peripherals.h"
 #elif defined(NRF52833_XXAA)
     #include "nrf52833_peripherals.h"
+#elif defined(NRF52834_XXAA)
+    #include "nrf52834_peripherals.h"
 #elif defined(NRF52840_XXAA)
     #include "nrf52840_peripherals.h"
 
@@ -88,37 +90,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_peripherals.h"
 
-#elif defined (LILIUM_XXAA)
-    // No header file available yet.
+#elif defined (NRF9230_XXAA)
+    #include "nrf9230_peripherals.h"
+
+#elif defined (LILIUMFP1_XXAA)
+    #include "liliumfp1_peripherals.h"
+
+#elif defined (LILIUMSOC1_XXAA)
+    #include "liliumsoc1_peripherals.h"
+
 #elif defined (HALTIUM_XXAA)
-    #if defined (NRF_APPLICATION)
-        #include "haltium_application_peripherals.h"
-    #elif defined (NRF_SYSTEMC_APPLICATION)
-        #include "haltium_application_peripherals.h"
-    #elif defined (NRF_BBPR)
-        #include "haltium_bbpr_peripherals.h"
-    #elif defined (NRF_CELLCORE)
-        #include "haltium_cellcore_peripherals.h"
-    #elif defined (NRF_CELLDSP)
-        #include "haltium_celldsp_peripherals.h"
-    #elif defined (NRF_CELLRF)
-        #include "haltium_cellrf_peripherals.h"
-    #elif defined (NRF_FLPR)
-        #include "haltium_flpr_peripherals.h"
-    #elif defined (NRF_ISIMCORE)
-        #include "haltium_isimcore_peripherals.h"
-    #elif defined (NRF_PPR)
-        #include "haltium_ppr_peripherals.h"
-    #elif defined (NRF_RADIOCORE)
-        #include "haltium_radiocore_peripherals.h"
-    #elif defined(NRF_SECURE)
-        #include "haltium_secure_peripherals.h"
-    #elif defined(NRF_SYSTEMC_SECURE)
-        #include "haltium_secure_peripherals.h"
-    #elif defined (NRF_SYSCTRL)
-        #include "haltium_sysctrl_peripherals.h"
-    #endif
     #include "haltium_peripherals.h"
+    
+#elif defined (MOONLIGHT_XXAA)
+    #include "moonlight_peripherals.h"
 #else
     #error "Device must be defined. See nrf_peripherals.h."
 #endif

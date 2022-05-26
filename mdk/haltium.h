@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -50,7 +50,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "haltium_global.h"
 #include "haltium_application.h"
-#include "haltium_systemc_application.h"
 #include "haltium_bbpr.h"
 #include "haltium_cellcore.h"
 #include "haltium_celldsp.h"
@@ -60,7 +59,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "haltium_ppr.h"
 #include "haltium_radiocore.h"
 #include "haltium_secure.h"
-#include "haltium_systemc_secure.h"
 #include "haltium_sysctrl.h"
 
 #ifdef __cplusplus

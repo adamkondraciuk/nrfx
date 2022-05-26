@@ -14,8 +14,8 @@ MEMORY
   FLASH6 (rx) : ORIGIN = 0x3F840000, LENGTH = 0x4000 /* OTP0 (secure) */
   FLASH7 (rx) : ORIGIN = 0x2F840000, LENGTH = 0x4000 /* OTP0 (non-secure) */
   EXTFLASH (rx) : ORIGIN = 0x70000000, LENGTH = 0x20000000
-  RAM (rwx) : ORIGIN = 0x33000000, LENGTH = 0xC000 /* Inside network RAM0 (secure) */
-  RAM1 (rwx) : ORIGIN = 0x23000000, LENGTH = 0xC000 /* Inside network RAM0 (non-secure) */
+  RAM (rwx) : ORIGIN = 0x33000000, LENGTH = 0x30000 /* Inside network RAM0 (secure) */
+  RAM1 (rwx) : ORIGIN = 0x23000000, LENGTH = 0x30000 /* Inside network RAM0 (non-secure) */
   RAM2 (rwx) : ORIGIN = 0x3F000000, LENGTH = 0x80000 /* GRAM00 (secure) */
   RAM3 (rwx) : ORIGIN = 0x2F000000, LENGTH = 0x80000 /* GRAM00 (non-secure) */
   RAM4 (rwx) : ORIGIN = 0x3F080000, LENGTH = 0x60000 /* GRAM01 (secure) */

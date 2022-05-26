@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2009-2021 ARM Limited. All rights reserved.
+Copyright (c) 2009-2022 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -48,6 +48,15 @@ void SystemCoreClockUpdate(void)
 
 void SystemInit(void)
 {
+    /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
+    * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
+    * operations are not used in your code. */
+    #if (__FPU_USED == 1)
+        SCB->CPACR |= (3UL << 20) | (3UL << 22);
+        __DSB();
+        __ISB();
+    #endif
+    
     SystemCoreClockUpdate();
 }
 

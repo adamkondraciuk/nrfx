@@ -1,0 +1,257 @@
+/*
+
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form, except as embedded into a Nordic
+   Semiconductor ASA integrated circuit in a product or a software update for
+   such product, must reproduce the above copyright notice, this list of
+   conditions and the following disclaimer in the documentation and/or other
+   materials provided with the distribution.
+
+3. Neither the name of Nordic Semiconductor ASA nor the names of its
+   contributors may be used to endorse or promote products derived from this
+   software without specific prior written permission.
+
+4. This software, with or without modification, must only be used with a
+   Nordic Semiconductor ASA integrated circuit.
+
+5. Any software provided in binary form under this license must not be reverse
+   engineered, decompiled, modified and/or disassembled.
+
+THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
+OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL NORDIC SEMICONDUCTOR ASA OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*/
+
+#ifndef MOONLIGHT_FLPR_H
+#define MOONLIGHT_FLPR_H
+
+#ifdef __cplusplus
+    extern "C" {
+#endif
+
+
+#ifdef NRF_FLPR                                      /*!< Processor information is domain local.                               */
+
+
+/* =========================================================================================================================== */
+/* ================                                Interrupt Number Definition                                ================ */
+/* =========================================================================================================================== */
+
+typedef enum {
+/* ===================================================== Core Interrupts ===================================================== */
+  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
+  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
+  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
+  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
+  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
+  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
+  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
+  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
+  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
+  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
+/* ============================================== Processor Specific Interrupts ============================================== */
+  VPR_0_IRQn                             = 0,        /*!< 0 VPR_0                                                              */
+  VPR_1_IRQn                             = 1,        /*!< 1 VPR_1                                                              */
+  VPR_2_IRQn                             = 2,        /*!< 2 VPR_2                                                              */
+  VPR_3_IRQn                             = 3,        /*!< 3 VPR_3                                                              */
+  VPR_4_IRQn                             = 4,        /*!< 4 VPR_4                                                              */
+  VPR_5_IRQn                             = 5,        /*!< 5 VPR_5                                                              */
+  VPR_6_IRQn                             = 6,        /*!< 6 VPR_6                                                              */
+  VPR_7_IRQn                             = 7,        /*!< 7 VPR_7                                                              */
+  VPR_8_IRQn                             = 8,        /*!< 8 VPR_8                                                              */
+  VPR_9_IRQn                             = 9,        /*!< 9 VPR_9                                                              */
+  VPR_10_IRQn                            = 10,       /*!< 10 VPR_10                                                            */
+  VPR_11_IRQn                            = 11,       /*!< 11 VPR_11                                                            */
+  VPR_12_IRQn                            = 12,       /*!< 12 VPR_12                                                            */
+  VPR_13_IRQn                            = 13,       /*!< 13 VPR_13                                                            */
+  VPR_14_IRQn                            = 14,       /*!< 14 VPR_14                                                            */
+  VPR_15_IRQn                            = 15,       /*!< 15 VPR_15                                                            */
+  VPR_16_IRQn                            = 16,       /*!< 16 VPR_16                                                            */
+  VPR_17_IRQn                            = 17,       /*!< 17 VPR_17                                                            */
+  VPR_18_IRQn                            = 18,       /*!< 18 VPR_18                                                            */
+  VPR_19_IRQn                            = 19,       /*!< 19 VPR_19                                                            */
+  VPR_20_IRQn                            = 20,       /*!< 20 VPR_20                                                            */
+  VPR_21_IRQn                            = 21,       /*!< 21 VPR_21                                                            */
+  VPR_22_IRQn                            = 22,       /*!< 22 VPR_22                                                            */
+  VPR_23_IRQn                            = 23,       /*!< 23 VPR_23                                                            */
+  VPR_24_IRQn                            = 24,       /*!< 24 VPR_24                                                            */
+  VPR_25_IRQn                            = 25,       /*!< 25 VPR_25                                                            */
+  VPR_26_IRQn                            = 26,       /*!< 26 VPR_26                                                            */
+  VPR_27_IRQn                            = 27,       /*!< 27 VPR_27                                                            */
+  VPR_28_IRQn                            = 28,       /*!< 28 VPR_28                                                            */
+  VPR_29_IRQn                            = 29,       /*!< 29 VPR_29                                                            */
+  VPR_30_IRQn                            = 30,       /*!< 30 VPR_30                                                            */
+  VPR_31_IRQn                            = 31,       /*!< 31 VPR_31                                                            */
+  SPU00_IRQn                             = 32,       /*!< 32 SPU00                                                             */
+  MPC00_IRQn                             = 33,       /*!< 33 MPC00                                                             */
+  AAR00_CCM00_IRQn                       = 38,       /*!< 38 AAR00_CCM00                                                       */
+  ECB00_IRQn                             = 39,       /*!< 39 ECB00                                                             */
+  CRACEN_IRQn                            = 40,       /*!< 40 CRACEN                                                            */
+  SERIAL00_IRQn                          = 42,       /*!< 42 SERIAL00                                                          */
+  VPR_IRQn                               = 44,       /*!< 44 VPR                                                               */
+  SPU10_IRQn                             = 64,       /*!< 64 SPU10                                                             */
+  TIMER10_IRQn                           = 69,       /*!< 69 TIMER10                                                           */
+  RTC10_IRQn                             = 70,       /*!< 70 RTC10                                                             */
+  EGU10_IRQn                             = 71,       /*!< 71 EGU10                                                             */
+  AAR30_CCM30_IRQn                       = 72,       /*!< 72 AAR30_CCM30                                                       */
+  ECB30_IRQn                             = 73,       /*!< 73 ECB30                                                             */
+  RADIO_0_IRQn                           = 74,       /*!< 74 RADIO_0                                                           */
+  RADIO_1_IRQn                           = 75,       /*!< 75 RADIO_1                                                           */
+  GPIOTE20_0_IRQn                        = 104,      /*!< 104 GPIOTE20_0                                                       */
+  GPIOTE20_1_IRQn                        = 105,      /*!< 105 GPIOTE20_1                                                       */
+  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
+  GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
+  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
+  SPU20_IRQn                             = 128,      /*!< 128 SPU20                                                            */
+  SERIAL20_IRQn                          = 134,      /*!< 134 SERIAL20                                                         */
+  SERIAL21_IRQn                          = 135,      /*!< 135 SERIAL21                                                         */
+  SERIAL22_IRQn                          = 136,      /*!< 136 SERIAL22                                                         */
+  EGU20_IRQn                             = 137,      /*!< 137 EGU20                                                            */
+  TIMER20_IRQn                           = 138,      /*!< 138 TIMER20                                                          */
+  TIMER21_IRQn                           = 139,      /*!< 139 TIMER21                                                          */
+  TIMER22_IRQn                           = 140,      /*!< 140 TIMER22                                                          */
+  TIMER23_IRQn                           = 141,      /*!< 141 TIMER23                                                          */
+  TIMER24_IRQn                           = 142,      /*!< 142 TIMER24                                                          */
+  PDM20_IRQn                             = 144,      /*!< 144 PDM20                                                            */
+  PDM21_IRQn                             = 145,      /*!< 145 PDM21                                                            */
+  PWM20_IRQn                             = 146,      /*!< 146 PWM20                                                            */
+  PWM21_IRQn                             = 147,      /*!< 147 PWM21                                                            */
+  PWM22_IRQn                             = 148,      /*!< 148 PWM22                                                            */
+  SAADC_IRQn                             = 149,      /*!< 149 SAADC                                                            */
+  NFCT_IRQn                              = 150,      /*!< 150 NFCT                                                             */
+  TEMP_IRQn                              = 151,      /*!< 151 TEMP                                                             */
+  TAMPC_IRQn                             = 155,      /*!< 155 TAMPC                                                            */
+  I2S_IRQn                               = 156,      /*!< 156 I2S                                                              */
+  QDEC20_IRQn                            = 160,      /*!< 160 QDEC20                                                           */
+  QDEC21_IRQn                            = 161,      /*!< 161 QDEC21                                                           */
+  SPU30_IRQn                             = 192,      /*!< 192 SPU30                                                            */
+  SERIAL30_IRQn                          = 196,      /*!< 196 SERIAL30                                                         */
+  RTC30_IRQn                             = 197,      /*!< 197 RTC30                                                            */
+  COMP_IRQn                              = 198,      /*!< 198 COMP                                                             */
+  LPCOMP_IRQn                            = 199,      /*!< 199 LPCOMP                                                           */
+  WDT30_IRQn                             = 200,      /*!< 200 WDT30                                                            */
+  WDT31_IRQn                             = 201,      /*!< 201 WDT31                                                            */
+  GPIOTE30_0_IRQn                        = 203,      /*!< 203 GPIOTE30_0                                                       */
+  GPIOTE30_1_IRQn                        = 204,      /*!< 204 GPIOTE30_1                                                       */
+} IRQn_Type;
+
+
+/* =========================================================================================================================== */
+/* ================                           Processor and Core Peripheral Section                           ================ */
+/* =========================================================================================================================== */
+
+/* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
+#define __VPR_REV                    0.7             /*!< VPR Core Revision                                                    */
+#define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
+#define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
+#define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
+#define __MPU_PRESENT                  1             /*!< MPU present                                                          */
+#define __FPU_PRESENT                  0             /*!< FPU present                                                          */
+#define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+
+#include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
+#include "system_nrf.h"                              /*!< moonlight_flpr System Library                                        */
+
+#endif                                               /*!< NRF_FLPR                                                             */
+
+
+/* ========================================= Start of section using anonymous unions ========================================= */
+
+#include "compiler_abstraction.h"
+
+#if defined (__CC_ARM)
+  #pragma push
+  #pragma anon_unions
+#elif defined (__ICCARM__)
+  #pragma language=extended
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wc11-extensions"
+  #pragma clang diagnostic ignored "-Wreserved-id-macro"
+  #pragma clang diagnostic ignored "-Wgnu-anonymous-struct"
+  #pragma clang diagnostic ignored "-Wnested-anon-types"
+#elif defined (__GNUC__)
+  /* anonymous unions are enabled by default */
+#elif defined (__TMS470__)
+  /* anonymous unions are enabled by default */
+#elif defined (__TASKING__)
+  #pragma warning 586
+#elif defined (__CSMC__)
+  /* anonymous unions are enabled by default */
+#else
+  #warning Unsupported compiler type
+#endif
+
+/* =========================================================================================================================== */
+/* ================                                  Peripheral Address Map                                  ================ */
+/* =========================================================================================================================== */
+
+#define NRF_FLPR_VPR_NS_BASE              0x4002C000UL
+#define NRF_FLPR_VPR_S_BASE               0x5002C000UL
+
+/* =========================================================================================================================== */
+/* ================                                  Peripheral Declaration                                  ================ */
+/* =========================================================================================================================== */
+
+#define NRF_FLPR_VPR_NS                   ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_NS_BASE)
+#define NRF_FLPR_VPR_S                    ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_S_BASE)
+
+/* =========================================================================================================================== */
+/* ================                                    TrustZone Remapping                                    ================ */
+/* =========================================================================================================================== */
+
+#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_NS
+#else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
+  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_S
+#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+
+/* =========================================================================================================================== */
+/* ================                                  Local Domain Remapping                                  ================ */
+/* =========================================================================================================================== */
+
+#ifdef NRF_FLPR                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_VPR                                 NRF_FLPR_VPR
+#endif                                               /*!< NRF_FLPR                                                             */
+
+/* ========================================== End of section using anonymous unions ========================================== */
+
+#if defined (__CC_ARM)
+  #pragma pop
+#elif defined (__ICCARM__)
+  /* leave anonymous unions enabled */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+  #pragma clang diagnostic pop
+#elif defined (__GNUC__)
+  /* anonymous unions are enabled by default */
+#elif defined (__TMS470__)
+  /* anonymous unions are enabled by default */
+#elif defined (__TASKING__)
+  #pragma warning restore
+#elif defined (__CSMC__)
+  /* anonymous unions are enabled by default */
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif /* MOONLIGHT_FLPR_H */
+

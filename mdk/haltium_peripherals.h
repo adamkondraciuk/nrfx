@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -47,8 +47,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #if defined(NRF_APPLICATION)
-  #include "haltium_application_peripherals.h"
-#elif defined(NRF_SYSTEMC_APPLICATION)
   #include "haltium_application_peripherals.h"
 #elif defined(NRF_BBPR)
   #include "haltium_bbpr_peripherals.h"
