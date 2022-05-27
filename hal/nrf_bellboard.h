@@ -309,19 +309,7 @@ NRF_STATIC_INLINE void nrf_bellboard_int_enable(NRF_BELLBOARD_Type * p_reg,
         case 3:
             p_reg->INTENSET3 = mask;
             break;
-        case 4:
-            p_reg->INTENSET4 = mask;
-            break;
-        case 5:
-            p_reg->INTENSET5 = mask;
-            break;
-        case 6:
-            p_reg->INTENSET6 = mask;
-            break;
-        case 7:
-            p_reg->INTENSET7 = mask;
-            break;
-        default:
+       default:
             NRFX_ASSERT(false);
             break;
     }
@@ -345,19 +333,7 @@ NRF_STATIC_INLINE void nrf_bellboard_int_disable(NRF_BELLBOARD_Type * p_reg,
         case 3:
             p_reg->INTENCLR3 = mask;
             break;
-        case 4:
-            p_reg->INTENCLR4 = mask;
-            break;
-        case 5:
-            p_reg->INTENCLR5 = mask;
-            break;
-        case 6:
-            p_reg->INTENCLR6 = mask;
-            break;
-        case 7:
-            p_reg->INTENCLR7 = mask;
-            break;
-        default:
+       default:
             NRFX_ASSERT(false);
             break;
     }
@@ -377,15 +353,7 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_int_enable_check(NRF_BELLBOARD_Type con
             return p_reg->INTENSET2 & mask;
         case 3:
             return p_reg->INTENSET3 & mask;
-        case 4:
-            return p_reg->INTENSET4 & mask;
-        case 5:
-            return p_reg->INTENSET5 & mask;
-        case 6:
-            return p_reg->INTENSET6 & mask;
-        case 7:
-            return p_reg->INTENSET7 & mask;
-        default:
+       default:
             NRFX_ASSERT(false);
             return 0;
     }
@@ -404,15 +372,7 @@ NRF_STATIC_INLINE uint32_t nrf_bellboard_int_pending_get(NRF_BELLBOARD_Type cons
             return p_reg->INTPEND2;
         case 3:
             return p_reg->INTPEND3;
-        case 4:
-            return p_reg->INTPEND4;
-        case 5:
-            return p_reg->INTPEND5;
-        case 6:
-            return p_reg->INTPEND6;
-        case 7:
-            return p_reg->INTPEND7;
-        default:
+       default:
             NRFX_ASSERT(false);
             return 0;
     }
