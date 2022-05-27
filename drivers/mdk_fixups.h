@@ -77,6 +77,9 @@ typedef enum
 #define EGU130_CH_NUM 8
 #define EGU020_CH_NUM 16
 
+#if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
+      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
+       || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
 #define P0_PIN_NUM (12)
 #define P1_PIN_NUM (12)
 #define P2_PIN_NUM (12)
@@ -89,6 +92,7 @@ typedef enum
 #define P6_FEATURE_PINS_PRESENT 0x3FFFUL
 #define P7_FEATURE_PINS_PRESENT 0xFFUL
 #define P9_FEATURE_PINS_PRESENT 0x3FUL
+#endif
 
 #if defined(NRF_TRUSTZONE_NONSECURE)
     #if defined(NRF_SECURE)
@@ -203,8 +207,13 @@ typedef enum
 
 #define SAADC_CH_NUM 8
 
+#if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
+      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
+       || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
 #define SPIM120_MAX_DATARATE 32
 #define SPIM121_MAX_DATARATE 32
+#endif
+
 #define SPIM130_MAX_DATARATE 8
 #define SPIM131_MAX_DATARATE 8
 #define SPIM132_MAX_DATARATE 8
