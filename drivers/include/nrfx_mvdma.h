@@ -60,6 +60,11 @@ typedef struct
 /** @brief Structure describing list execution request for the MVDMA driver. */
 typedef nrfy_mvdma_list_request_t nrfx_mvdma_list_request_t;
 
+#if NRF_MVDMA_HAS_MULTIMODE
+/** @brief Structure describing lists of job list execution requests for the MVDMA. */
+typedef nrfy_mvdma_multi_list_request_t nrfx_mvdma_multi_list_request_t;
+#endif
+
 /** @brief MVDMA driver event types. */
 typedef enum
 {
@@ -126,7 +131,7 @@ void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance);
  * @brief Function for requesting a single copy operation.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_request  Pointer to the structure that decribe the request.
+ * @param[in] p_request  Pointer to the structure that decribes the request.
  *
  * @retval NRFX_SUCCESS    Copy operation requested successfully.
  * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
@@ -135,12 +140,26 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
                            nrfx_mvdma_copy_request_t const * p_request);
 
 /**
+ * @brief Function for requesting filling buffer with zeros.
+ *
+ * @param p_instance Pointer to the driver instance structure.
+ * @param p_buffer   Pointer to the buffer to fill with zeros.
+ * @param size       Size of the buffer
+ *
+ * @retval NRFX_SUCCESS    Clear operation requested successfully.
+ * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
+ */
+nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
+                                   void const *         p_buffer,
+                                   size_t               size);
+
+/**
  * @brief Function for executing the specified source and sink job lists.
  *
  * @warning Job lists must remain valid while being processed by the MVDMA peripheral.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_request  Pointer to the structure that decribe the request.
+ * @param[in] p_request  Pointer to the structure that decribes the request.
  * @param[in] p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS    Execution of job list requested successfully.
@@ -149,6 +168,34 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
 nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
                                    nrfx_mvdma_list_request_t const * p_request,
                                    void *                            p_context);
+
+#if NRF_MVDMA_HAS_MULTIMODE || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the specified source and sink job lists.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_request  Pointer to the structure that decribes  list of requests.
+ *
+ * @retval NRFX_SUCCESS             Job lists assignment successful.
+ * @retval NRFX_ERROR_BUSY          Different request is executed at the moment.
+ */
+nrfx_err_t nrfx_mvdma_multi_list_set(nrfx_mvdma_t const *                    p_instance,
+                                     nrfx_mvdma_multi_list_request_t const * p_request);
+
+/**
+ * @brief Function for executing the specified source and sink job lists.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] idx        Index of the job list to be executed.
+ * @param[in] p_context  Context passed to event handler.
+ *
+ * @retval NRFX_SUCCESS             Job lists assignment successful.
+ * @retval NRFX_ERROR_BUSY          Different request is executed at the moment.
+ */
+nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
+                                       uint8_t              idx,
+                                       void *               p_context);
+#endif // NRF_MVDMA_HAS_MULTIMODE || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for checking if the specified driver instance is busy.
