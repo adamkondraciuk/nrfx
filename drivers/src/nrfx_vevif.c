@@ -45,7 +45,7 @@ nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
 
     for (uint8_t i = 0; i < NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT; i++)
     {
-        NRFY_IRQ_PRIORITY_SET((VPR_0_IRQn + i), interrupt_priority);
+        NRFY_IRQ_PRIORITY_SET((VPRCLIC_0_IRQn + i), interrupt_priority);
     }
 
     return NRFX_SUCCESS;
@@ -57,7 +57,7 @@ void nrfx_vevif_uninit(void)
 
     for (uint8_t i = 0; i < NRF_VPR_CSR_VEVIF_EVENT_TASK_COUNT; i++)
     {
-        NRFY_IRQ_DISABLE(VPR_0_IRQn + i);
+        NRFY_IRQ_DISABLE(VPRCLIC_0_IRQn + i);
     }
 
     m_cb.handler = NULL;
@@ -71,7 +71,7 @@ void nrfx_vevif_int_enable(uint32_t mask)
     while (mask != 0)
     {
         uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
-        NRFY_IRQ_ENABLE(VPR_0_IRQn + event_no);
+        NRFY_IRQ_ENABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
 }
@@ -83,7 +83,7 @@ void nrfx_vevif_int_disable(uint32_t mask)
     while (mask != 0)
     {
         uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
-        NRFY_IRQ_DISABLE(VPR_0_IRQn + event_no);
+        NRFY_IRQ_DISABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
 }
