@@ -21,10 +21,12 @@ typedef enum
 {
     NRF_DPPI_CHANNEL_GROUP0 = 0, /**< Channel group 0. */
     NRF_DPPI_CHANNEL_GROUP1 = 1, /**< Channel group 1. */
+#if DPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRF_DPPI_CHANNEL_GROUP2 = 2, /**< Channel group 2. */
     NRF_DPPI_CHANNEL_GROUP3 = 3, /**< Channel group 3. */
     NRF_DPPI_CHANNEL_GROUP4 = 4, /**< Channel group 4. */
     NRF_DPPI_CHANNEL_GROUP5 = 5  /**< Channel group 5. */
+#endif
 } nrf_dppi_channel_group_t;
 
 /** @brief DPPI tasks. */
@@ -34,7 +36,7 @@ typedef enum
     NRF_DPPI_TASK_CHG0_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[0].DIS), /**< Disable channel group 0. */
     NRF_DPPI_TASK_CHG1_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].EN),  /**< Enable channel group 1. */
     NRF_DPPI_TASK_CHG1_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[1].DIS), /**< Disable channel group 1. */
-#if DPPI_GROUP_NUM > 2
+#if DPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRF_DPPI_TASK_CHG2_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].EN),  /**< Enable channel group 2. */
     NRF_DPPI_TASK_CHG2_DIS = offsetof(NRF_DPPIC_Type, TASKS_CHG[2].DIS), /**< Disable channel group 2. */
     NRF_DPPI_TASK_CHG3_EN  = offsetof(NRF_DPPIC_Type, TASKS_CHG[3].EN),  /**< Enable channel group 3. */

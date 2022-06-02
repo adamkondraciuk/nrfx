@@ -51,6 +51,8 @@ extern "C" {
 #if defined(PPI_PRESENT)
 #include <hal/nrf_ppi.h>
 
+#define GPPI_GROUP_NUM PPI_GROUP_NUM
+
 typedef enum
 {
     NRFX_GPPI_CHANNEL_GROUP0 = NRF_PPI_CHANNEL_GROUP0,
@@ -84,14 +86,18 @@ typedef enum
 #elif defined(DPPI_PRESENT)
 #include <haly/nrfy_dppi.h>
 
+#define GPPI_GROUP_NUM DPPI_GROUP_NUM
+
 typedef enum
 {
     NRFX_GPPI_CHANNEL_GROUP0 = NRF_DPPI_CHANNEL_GROUP0,
     NRFX_GPPI_CHANNEL_GROUP1 = NRF_DPPI_CHANNEL_GROUP1,
+#if DPPI_GROUP_NUM > 2
     NRFX_GPPI_CHANNEL_GROUP2 = NRF_DPPI_CHANNEL_GROUP2,
     NRFX_GPPI_CHANNEL_GROUP3 = NRF_DPPI_CHANNEL_GROUP3,
     NRFX_GPPI_CHANNEL_GROUP4 = NRF_DPPI_CHANNEL_GROUP4,
     NRFX_GPPI_CHANNEL_GROUP5 = NRF_DPPI_CHANNEL_GROUP5,
+#endif
 } nrfx_gppi_channel_group_t;
 
 typedef enum
@@ -100,6 +106,7 @@ typedef enum
     NRFX_GPPI_TASK_CHG0_DIS = NRF_DPPI_TASK_CHG0_DIS,
     NRFX_GPPI_TASK_CHG1_EN  = NRF_DPPI_TASK_CHG1_EN,
     NRFX_GPPI_TASK_CHG1_DIS = NRF_DPPI_TASK_CHG1_DIS,
+#if DPPI_GROUP_NUM > 2
     NRFX_GPPI_TASK_CHG2_EN  = NRF_DPPI_TASK_CHG2_EN,
     NRFX_GPPI_TASK_CHG2_DIS = NRF_DPPI_TASK_CHG2_DIS,
     NRFX_GPPI_TASK_CHG3_EN  = NRF_DPPI_TASK_CHG3_EN,
@@ -108,6 +115,7 @@ typedef enum
     NRFX_GPPI_TASK_CHG4_DIS = NRF_DPPI_TASK_CHG4_DIS,
     NRFX_GPPI_TASK_CHG5_EN  = NRF_DPPI_TASK_CHG5_EN,
     NRFX_GPPI_TASK_CHG5_DIS = NRF_DPPI_TASK_CHG5_DIS
+#endif
 } nrfx_gppi_task_t;
 
 #elif defined(__NRFX_DOXYGEN__)
@@ -117,10 +125,12 @@ typedef enum
 {
     NRFX_GPPI_CHANNEL_GROUP0, /**< Channel group 0.*/
     NRFX_GPPI_CHANNEL_GROUP1, /**< Channel group 1.*/
+#if GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRFX_GPPI_CHANNEL_GROUP2, /**< Channel group 2.*/
     NRFX_GPPI_CHANNEL_GROUP3, /**< Channel group 3.*/
     NRFX_GPPI_CHANNEL_GROUP4, /**< Channel group 4.*/
     NRFX_GPPI_CHANNEL_GROUP5, /**< Channel group 5.*/
+#endif
 } nrfx_gppi_channel_group_t;
 
 /** @brief Generic PPI tasks. */
@@ -130,6 +140,7 @@ typedef enum
     NRFX_GPPI_TASK_CHG0_DIS, /**< Task for disabling channel group 0 */
     NRFX_GPPI_TASK_CHG1_EN,  /**< Task for enabling channel group 1 */
     NRFX_GPPI_TASK_CHG1_DIS, /**< Task for disabling channel group 1 */
+#if GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRFX_GPPI_TASK_CHG2_EN,  /**< Task for enabling channel group 2 */
     NRFX_GPPI_TASK_CHG2_DIS, /**< Task for disabling channel group 2 */
     NRFX_GPPI_TASK_CHG3_EN,  /**< Task for enabling channel group 3 */
@@ -138,6 +149,7 @@ typedef enum
     NRFX_GPPI_TASK_CHG4_DIS, /**< Task for disabling channel group 4 */
     NRFX_GPPI_TASK_CHG5_EN,  /**< Task for enabling channel group 5 */
     NRFX_GPPI_TASK_CHG5_DIS, /**< Task for disabling channel group 5 */
+#endif
 } nrfx_gppi_task_t;
 #endif // defined(__NRFX_DOXYGEN__)
 
