@@ -40,6 +40,13 @@ extern "C" {
 #define NRF_SPIM_HAS_INTEN 0
 #endif
 
+#if defined(SPIM_FREQUENCY_FREQUENCY_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether frequency is used. */
+#define NRF_SPIM_HAS_FREQUENCY 1
+#else
+#define NRF_SPIM_HAS_FREQUENCY 0
+#endif
+
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
  *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
@@ -108,6 +115,13 @@ extern "C" {
 #define NRF_SPIM_DCX_CNT_ALL_CMD 0xF
 #endif
 
+#if !NRF_SPIM_HAS_FREQUENCY
+/* Temporary define for API tests.
+ * TODO: proper support for prescaler.
+ */
+#define NRF_SPIM_FREQ_4M 0
+#endif
+
 /** @brief SPIM tasks. */
 typedef enum
 {
@@ -152,6 +166,7 @@ typedef enum
 } nrf_spim_int_mask_t;
 
 /** @brief SPI master data rates. */
+#if NRF_SPIM_HAS_FREQUENCY
 typedef enum
 {
     NRF_SPIM_FREQ_125K = SPIM_FREQUENCY_FREQUENCY_K125,    ///< 125 kbps.
@@ -170,6 +185,10 @@ typedef enum
     NRF_SPIM_FREQ_32M  = SPIM_FREQUENCY_FREQUENCY_M32      ///< 32 Mbps.
 #endif
 } nrf_spim_frequency_t;
+#else
+/* TODO: Support for prescaler. */
+typedef uint32_t nrf_spim_frequency_t;
+#endif
 
 /** @brief SPI modes. */
 typedef enum
@@ -853,7 +872,13 @@ NRF_STATIC_INLINE bool nrf_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_spim_frequency_set(NRF_SPIM_Type *      p_reg,
                                               nrf_spim_frequency_t frequency)
 {
+#if NRF_SPIM_HAS_FREQUENCY
     p_reg->FREQUENCY = (uint32_t)frequency;
+#else
+    /* TODO: support for prescaler. */
+    (void)p_reg;
+    (void)frequency;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
