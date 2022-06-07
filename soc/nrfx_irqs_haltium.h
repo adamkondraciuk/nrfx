@@ -188,6 +188,12 @@ extern "C" {
 
 // GSPU4_IRQn
 
+// EGU020
+#define nrfx_egu_020_irq_handler      EGU020_IRQHandler
+
+// EGU130
+#define nrfx_egu_130_irq_handler      EGU130_IRQHandler
+
 // PWM120_IRQn
 #define nrfx_pwm_120_irq_handler      PWM120_IRQHandler
 
