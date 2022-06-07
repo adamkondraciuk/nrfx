@@ -31,6 +31,13 @@ extern "C" {
 #define NRF_SAADC_HAS_ACQTIME_ENUM 0
 #endif
 
+#if defined(SAADC_CH_PSELP_PSELP_AnalogInput1) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC uses enum for pins. */
+#define NRF_SAADC_HAS_PIN_ENUM 1
+#else
+#define NRF_SAADC_HAS_PIN_ENUM 0
+#endif
+
 #if !NRF_SAADC_HAS_ACQTIME_ENUM
 /** @brief Maximum value of acquire time. */
 #define NRF_SAADC_ACQTIME_MAX SAADC_CH_CONFIG_TACQ_Max
@@ -46,6 +53,7 @@ typedef enum
 } nrf_saadc_resolution_t;
 
 /** @brief Input selection for the analog-to-digital converter. */
+#if NRF_SAADC_HAS_PIN_ENUM
 typedef enum
 {
     NRF_SAADC_INPUT_DISABLED = SAADC_CH_PSELP_PSELP_NC,            ///< Not connected.
@@ -82,6 +90,11 @@ typedef enum
     NRF_SAADC_INPUT_AIN13    = SAADC_CH_PSELP_PSELP_AnalogInput13, ///< Analog input 13 (AIN13).
 #endif
 } nrf_saadc_input_t;
+#else
+/* TODO: Support for non-enum pin select. */
+#define NRF_SAADC_INPUT_DISABLED 0
+typedef uint32_t nrf_saadc_input_t;
+#endif
 
 /** @brief Analog-to-digital converter oversampling mode. */
 typedef enum
