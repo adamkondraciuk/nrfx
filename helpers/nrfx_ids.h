@@ -89,7 +89,9 @@ typedef enum
     NRFX_IDS_DOMAIN_APP,     /**< Application domain. */
     NRFX_IDS_DOMAIN_NET,     /**< Network domain. */
     NRFX_IDS_DOMAIN_SEC,     /**< Secure domain. */
+#if defined(NRF_CELLCORE_BELLBOARD)
     NRFX_IDS_DOMAIN_CELL,    /**< Cellular domain. */
+#endif
     NRFX_IDS_DOMAIN_SYSCTRL, /**< System Controller domain. */
     NRFX_IDS_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
     NRFX_IDS_DOMAIN_PPR,     /**< Peripheral Processor */
@@ -246,9 +248,11 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
             p_bell = NRF_SECURE_BELLBOARD;
             break;
 
+#if defined(NRF_CELLCORE_BELLBOARD)
         case NRFX_IDS_DOMAIN_CELL:
             p_bell = NRF_CELLCORE_BELLBOARD;
             break;
+#endif
 
         case NRFX_IDS_DOMAIN_SYSCTRL:
             p_vpr = NRF_VPR120;
