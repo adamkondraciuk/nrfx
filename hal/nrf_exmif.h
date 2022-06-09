@@ -180,12 +180,12 @@ NRF_STATIC_INLINE void nrf_exmif_device_config(NRF_EXMIF_Type *           p_reg,
     switch (device_idx)
     {
         case 0:
-            p_reg->ADDRESS1LO = p_device->offset;
-            p_reg->ADDRESS1HI = p_device->size;
+            p_reg->EXTCONF1.OFFSET = p_device->offset;
+            p_reg->EXTCONF1.SIZE   = p_device->size;
             break;
         case 1:
-            p_reg->ADDRESS2LO = p_device->offset;
-            p_reg->ADDRESS2HI = p_device->size;
+            p_reg->EXTCONF2.OFFSET = p_device->offset;
+            p_reg->EXTCONF2.SIZE   = p_device->size;
             break;
         default:
             NRFX_ASSERT(false);
@@ -200,10 +200,10 @@ NRF_STATIC_INLINE void nrf_exmif_device_enable(NRF_EXMIF_Type * p_reg,
     switch (device_idx)
     {
         case 0:
-            p_reg->EXTMEMEN = (EXMIF_EXTMEMEN_ENABLE_Enabled << EXMIF_EXTMEMEN_ENABLE_Pos);
+            p_reg->EXTCONF1.ENABLE = (EXMIF_EXTCONF1_ENABLE_ENABLE_Enabled << EXMIF_EXTCONF1_ENABLE_ENABLE_Pos);
             break;
         case 1:
-            p_reg->EXTMEM2 = (EXMIF_EXTMEM2_ENABLE_Enabled << EXMIF_EXTMEM2_ENABLE_Pos);
+            p_reg->EXTCONF2.ENABLE = (EXMIF_EXTCONF2_ENABLE_ENABLE_Enabled << EXMIF_EXTCONF2_ENABLE_ENABLE_Pos);
             break;
         default:
             NRFX_ASSERT(false);
@@ -218,10 +218,10 @@ NRF_STATIC_INLINE void nrf_exmif_device_disable(NRF_EXMIF_Type * p_reg,
     switch (device_idx)
     {
         case 0:
-            p_reg->EXTMEMEN = (EXMIF_EXTMEMEN_ENABLE_Disabled << EXMIF_EXTMEMEN_ENABLE_Pos);
+            p_reg->EXTCONF1.ENABLE = (EXMIF_EXTCONF1_ENABLE_ENABLE_Disabled << EXMIF_EXTCONF1_ENABLE_ENABLE_Pos);
             break;
         case 1:
-            p_reg->EXTMEM2 = (EXMIF_EXTMEM2_ENABLE_Disabled << EXMIF_EXTMEM2_ENABLE_Pos);
+            p_reg->EXTCONF2.ENABLE = (EXMIF_EXTCONF2_ENABLE_ENABLE_Disabled << EXMIF_EXTCONF2_ENABLE_ENABLE_Pos);
             break;
         default:
             NRFX_ASSERT(false);
