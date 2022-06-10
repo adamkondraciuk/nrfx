@@ -62,8 +62,13 @@ NRFY_STATIC_INLINE void nrfy_gpiote_int_init(NRF_GPIOTE_Type * p_reg,
     __nrfy_internal_gpiote_event_enabled_clear(p_reg, mask, NRF_GPIOTE_EVENT_PORT);
 #endif
 
-    NRFX_IRQ_PRIORITY_SET(nrfx_get_irq_number(p_reg), irq_priority);
-    NRFX_IRQ_ENABLE(nrfx_get_irq_number(p_reg));
+#if defined(HALTIUM_XXAA)
+    IRQn_Type irqn = NRF_GPIOTE130_IRQn;
+#else
+    IRQn_Type irqn = nrfx_get_irq_number(p_reg);
+#endif
+    NRFX_IRQ_PRIORITY_SET(irqn, irq_priority);
+    NRFX_IRQ_ENABLE(irqn);
     if (enable)
     {
         nrf_gpiote_int_enable(p_reg, mask);

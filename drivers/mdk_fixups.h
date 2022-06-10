@@ -126,17 +126,11 @@ typedef enum
 #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
 #if defined(NRF_TRUSTZONE_NONSECURE)
-#if !defined(NRF_CELLCORE)
-#define nrfx_gpiote_irq_handler      GPIOTE1300_0_IRQHandler
+#define NRF_GPIOTE130_IRQn      GPIOTE130_0_IRQn
+#define nrfx_gpiote_irq_handler GPIOTE130_0_IRQHandler
 #else
-#define nrfx_gpiote_irq_handler      GPIOTE1310_0_IRQHandler
-#endif
-#else
-#if !defined(NRF_CELLCORE)
-#define nrfx_gpiote_irq_handler      GPIOTE1300_1_IRQHandler
-#else
-#define nrfx_gpiote_irq_handler      GPIOTE1310_1_IRQHandler
-#endif
+#define NRF_GPIOTE130_IRQn      GPIOTE130_1_IRQn
+#define nrfx_gpiote_irq_handler GPIOTE130_1_IRQHandler
 #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
 #define NRF_GPIOTE_INT_COUNT 7
