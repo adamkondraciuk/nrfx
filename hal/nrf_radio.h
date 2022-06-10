@@ -31,7 +31,9 @@ typedef enum
     NRF_RADIO_TASK_STOP      = offsetof(NRF_RADIO_Type, TASKS_STOP),      /**< Stop RADIO. */
     NRF_RADIO_TASK_DISABLE   = offsetof(NRF_RADIO_Type, TASKS_DISABLE),   /**< Disable RADIO. */
     NRF_RADIO_TASK_RSSISTART = offsetof(NRF_RADIO_Type, TASKS_RSSISTART), /**< Start the RSSI and take one single sample of the receive signal strength. */
-#if defined(RADIO_TASKS_RSSISTOP_TASKS_RSSISTOP_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(RADIO_TASKS_RSSISTOP_TASKS_RSSISTOP_Msk) || \
+    defined(RADIO_SHORTS_DISABLED_RSSISTOP_Msk) || \
+    defined(__NRFX_DOXYGEN__)
     NRF_RADIO_TASK_RSSISTOP  = offsetof(NRF_RADIO_Type, TASKS_RSSISTOP),  /**< Stop the RSSI measurement. */
 #endif
     NRF_RADIO_TASK_BCSTART   = offsetof(NRF_RADIO_Type, TASKS_BCSTART),   /**< Start the bit counter. */
