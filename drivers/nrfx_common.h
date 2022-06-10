@@ -20,7 +20,7 @@ extern "C" {
 #elif defined(__VPR_REV)
 #define ISA_RISCV 1
 #else
-#error "Unsupported ISA"
+#define ISA_UNKNOWN 1
 #endif
 
 #if defined(ISA_RISCV)
