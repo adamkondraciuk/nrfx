@@ -30,6 +30,13 @@ extern "C" {
 #define NRF_SPU_HAS_MEMORY 0
 #endif
 
+#if defined(SPU_FEATURE_BELLS_DOMAIN_MaxCount) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SPU uses DOMAIN register name. */
+#define NRF_SPU_HAS_DOMAIN 1
+#else
+#define NRF_SPU_HAS_DOMAIN 0
+#endif
+
 #if NRF_SPU_HAS_OWNERSHIP
 
 /** @brief Number of peripherals. */
@@ -69,10 +76,18 @@ extern "C" {
 #define NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT     SPU_FEATURE_GRTC_INTERRUPT_MaxCount
 
 /** @brief Number of BELL domains. */
-#define NRF_SPU_FEATURE_BELL_DOMAIN_COUNT        SPU_FEATURE_BELLS_DOMAIN_MaxCount
+#if NRF_SPU_HAS_DOMAIN
+#define NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT     SPU_FEATURE_BELLS_DOMAIN_MaxCount
+#else
+#define NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT     SPU_FEATURE_BELLS_PROCESSOR_MaxCount
+#endif
 
 /** @brief Number of BELL bells. */
+#if NRF_SPU_HAS_DOMAIN
 #define NRF_SPU_FEATURE_BELL_BELL_COUNT          SPU_FEATURE_BELLS_DOMAIN_BELL_MaxCount
+#else
+#define NRF_SPU_FEATURE_BELL_BELL_COUNT          SPU_FEATURE_BELLS_PROCESSOR_INTEN_MaxCount
+#endif
 
 #endif
 
@@ -1062,11 +1077,16 @@ NRF_STATIC_INLINE bool nrf_spu_feature_secattr_get(NRF_SPU_Type const * p_reg,
                    >> SPU_FEATURE_GRTC_INTERRUPT_SECATTR_Pos;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Pos;
+#else
+            /* TODO: Align to FP1 */
+            return 0;
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -1139,12 +1159,16 @@ NRF_STATIC_INLINE bool nrf_spu_feature_lock_get(NRF_SPU_Type const * p_reg,
                    >> SPU_FEATURE_GRTC_INTERRUPT_LOCK_Pos;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Pos;
-
+#else
+           /* TODO: Align to FP1 */
+           return 0;
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1216,11 +1240,16 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
                    >> SPU_FEATURE_GRTC_INTERRUPT_BLOCK_Pos;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Pos;
+#else
+           /* TODO: Align to FP1 */
+           return 0;
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -1293,12 +1322,16 @@ NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p
                                  >> SPU_FEATURE_GRTC_INTERRUPT_OWNERID_Pos);
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (nrf_owner_t)((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                                   & SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Msk)
                                  >> SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Pos);
-
+#else
+            /* Align to FP1. */
+            return (nrf_owner_t)0;
+#endif
         default:
             NRFX_ASSERT(0);
             return (nrf_owner_t)0;
@@ -1416,7 +1449,8 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
             break;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
@@ -1425,6 +1459,9 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
                    SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Secure :
                    SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_NonSecure)
                   <<  SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Pos));
+#else
+/* TODO: Align to FP1 */
+#endif
             break;
 
         default:
@@ -1525,13 +1562,17 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
             break;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
                   ~SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Msk) |
                  (SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Locked
                   << SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Pos));
+#else
+/* TODO: Align to FP1 */
+#endif
             break;
 
         default:
@@ -1632,13 +1673,17 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
             break;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
                   ~SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Msk) |
                  (SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Blocked
                   << SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Pos));
+#else
+/* TODO: Align to FP1 */
+#endif
             break;
 
         default:
@@ -1749,7 +1794,8 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
             break;
 
         case NRF_SPU_FEATURE_BELLS_BELL:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_DOMAIN_COUNT);
+#if NRF_SPU_HAS_DOMAIN
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
@@ -1757,6 +1803,9 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                  ((owner_id
                    << SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Pos) &
                   SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Msk));
+#else
+/* TODO: Align FP1 */
+#endif
             break;
 
         default:
