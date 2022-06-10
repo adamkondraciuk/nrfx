@@ -17,6 +17,13 @@ extern "C" {
  *          (IPCT) peripheral.
  */
 
+/** @brief Symbol indicating presence of ACK task and ACKED event. */
+#if defined(IPCT_INTEN0_ACKED0_Msk) || defined(__NRFX_DOXYGEN__)
+#define NRF_IPCT_HAS_ACK 1
+#else
+#define NRF_IPCT_HAS_ACK 0
+#endif
+
 /** @brief Number of send tasks. */
 #define NRF_IPCT_TASKS_SEND_COUNT IPCT_TASKS_SEND_MaxCount
 
@@ -39,6 +46,7 @@ typedef enum
     NRF_IPCT_TASK_SEND_13 = offsetof(NRF_IPCT_Type, TASKS_SEND[13]), /**< Send [13] task. */
     NRF_IPCT_TASK_SEND_14 = offsetof(NRF_IPCT_Type, TASKS_SEND[14]), /**< Send [14] task. */
     NRF_IPCT_TASK_SEND_15 = offsetof(NRF_IPCT_Type, TASKS_SEND[15]), /**< Send [15] task. */
+#if NRF_IPCT_HAS_ACK
     NRF_IPCT_TASK_ACK_0   = offsetof(NRF_IPCT_Type, TASKS_ACK[0]),   /**< Acknowledge the RECEIVE[0] task. */
     NRF_IPCT_TASK_ACK_1   = offsetof(NRF_IPCT_Type, TASKS_ACK[1]),   /**< Acknowledge the RECEIVE[1] task. */
     NRF_IPCT_TASK_ACK_2   = offsetof(NRF_IPCT_Type, TASKS_ACK[2]),   /**< Acknowledge the RECEIVE[2] task. */
@@ -55,6 +63,9 @@ typedef enum
     NRF_IPCT_TASK_ACK_13  = offsetof(NRF_IPCT_Type, TASKS_ACK[13]),  /**< Acknowledge the RECEIVE[13] task. */
     NRF_IPCT_TASK_ACK_14  = offsetof(NRF_IPCT_Type, TASKS_ACK[14]),  /**< Acknowledge the RECEIVE[14] task. */
     NRF_IPCT_TASK_ACK_15  = offsetof(NRF_IPCT_Type, TASKS_ACK[15]),  /**< Acknowledge the RECEIVE[15] task. */
+#else
+    /* TODO: Align to FP1 */
+#endif
 } nrf_ipct_task_t;
 
 /** @brief IPCT events. */
@@ -76,6 +87,7 @@ typedef enum
     NRF_IPCT_EVENT_RECEIVE_13 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[13]), /**< Receive [13] event. */
     NRF_IPCT_EVENT_RECEIVE_14 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[14]), /**< Receive [14] event. */
     NRF_IPCT_EVENT_RECEIVE_15 = offsetof(NRF_IPCT_Type, EVENTS_RECEIVE[15]), /**< Receive [15] event. */
+#if NRF_IPCT_HAS_ACK
     NRF_IPCT_EVENT_ACKED_0    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[0]),    /**< Acknowledged event for the SEND[0] task. */
     NRF_IPCT_EVENT_ACKED_1    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[1]),    /**< Acknowledged event for the SEND[1] task. */
     NRF_IPCT_EVENT_ACKED_2    = offsetof(NRF_IPCT_Type, EVENTS_ACKED[2]),    /**< Acknowledged event for the SEND[2] task. */
@@ -92,11 +104,15 @@ typedef enum
     NRF_IPCT_EVENT_ACKED_13   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[13]),   /**< Acknowledged event for the SEND[13] task. */
     NRF_IPCT_EVENT_ACKED_14   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[14]),   /**< Acknowledged event for the SEND[14] task. */
     NRF_IPCT_EVENT_ACKED_15   = offsetof(NRF_IPCT_Type, EVENTS_ACKED[15]),   /**< Acknowledged event for the SEND[15] task. */
+#else
+    /* TODO: Algin to FP1 */
+#endif
 } nrf_ipct_event_t;
 
 /** @brief IPCT shortcuts. */
 typedef enum
 {
+#if NRF_IPCT_HAS_ACK
     NRF_IPCT_SHORT_RECEIVE0_ACK0_MASK   = IPCT_SHORTS_RECEIVE0_ACK0_Msk,   /**< Shortcut between event RECEIVE[0] and task ACK[0]. */
     NRF_IPCT_SHORT_RECEIVE1_ACK1_MASK   = IPCT_SHORTS_RECEIVE1_ACK1_Msk,   /**< Shortcut between event RECEIVE[1] and task ACK[1]. */
     NRF_IPCT_SHORT_RECEIVE2_ACK2_MASK   = IPCT_SHORTS_RECEIVE2_ACK2_Msk,   /**< Shortcut between event RECEIVE[2] and task ACK[2]. */
@@ -129,6 +145,9 @@ typedef enum
                                           NRF_IPCT_SHORT_RECEIVE13_ACK13_MASK |
                                           NRF_IPCT_SHORT_RECEIVE14_ACK14_MASK |
                                           NRF_IPCT_SHORT_RECEIVE15_ACK15_MASK, /**< All IPCT shortcuts. */
+#else
+    TODO = 0, /* TODO: Align to FP1 */
+#endif
 } nrf_ipct_short_mask_t;
 
 /** @brief IPCT interrupts. */
@@ -150,6 +169,7 @@ typedef enum
     NRF_IPCT_INT_RECEIVE_13 = IPCT_INTEN0_RECEIVE13_Msk, /**< Interrupt for event RECEIVE[13]. */
     NRF_IPCT_INT_RECEIVE_14 = IPCT_INTEN0_RECEIVE14_Msk, /**< Interrupt for event RECEIVE[14]. */
     NRF_IPCT_INT_RECEIVE_15 = IPCT_INTEN0_RECEIVE15_Msk, /**< Interrupt for event RECEIVE[15]. */
+#if NRF_IPCT_HAS_ACK
     NRF_IPCT_INT_ACKED_0    = IPCT_INTEN0_ACKED0_Msk,    /**< Interrupt for event ACKED[0]. */
     NRF_IPCT_INT_ACKED_1    = IPCT_INTEN0_ACKED1_Msk,    /**< Interrupt for event ACKED[1]. */
     NRF_IPCT_INT_ACKED_2    = IPCT_INTEN0_ACKED2_Msk,    /**< Interrupt for event ACKED[2]. */
@@ -166,6 +186,7 @@ typedef enum
     NRF_IPCT_INT_ACKED_13   = IPCT_INTEN0_ACKED13_Msk,   /**< Interrupt for event ACKED[13]. */
     NRF_IPCT_INT_ACKED_14   = IPCT_INTEN0_ACKED14_Msk,   /**< Interrupt for event ACKED[14]. */
     NRF_IPCT_INT_ACKED_15   = IPCT_INTEN0_ACKED15_Msk,   /**< Interrupt for event ACKED[15]. */
+#endif
 } nrf_ipct_int_mask_t;
 
 /**
@@ -551,7 +572,13 @@ NRF_STATIC_INLINE nrf_ipct_task_t nrf_ipct_send_task_get(uint8_t index)
 
 NRF_STATIC_INLINE nrf_ipct_task_t nrf_ipct_ack_task_get(uint8_t index)
 {
+#if NRF_IPCT_HAS_ACK
     return (nrf_ipct_task_t)(NRFX_OFFSETOF(NRF_IPCT_Type, TASKS_ACK[index]));
+#else
+    (void)index;
+    /* TODO: Align to FP1 */
+    return (nrf_ipct_task_t)0;
+#endif
 }
 
 NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_receive_event_get(uint8_t index)
@@ -561,7 +588,13 @@ NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_receive_event_get(uint8_t index)
 
 NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_acked_event_get(uint8_t index)
 {
+#if NRF_IPCT_HAS_ACK
     return (nrf_ipct_event_t)(NRFX_OFFSETOF(NRF_IPCT_Type, EVENTS_ACKED[index]));
+#else
+    (void)index;
+    /* TODO: Align to FP1 */
+    return (nrf_ipct_event_t)0;
+#endif
 }
 
 #endif // NRF_DECLARE_ONLY
