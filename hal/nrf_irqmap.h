@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the Interrupt Mapper peripheral (IRQMAP).
  */
 
+#if defined(IRQMAP_IRQ_SINK_DOMAIN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether IRQMAP uses DOMAIN field. */
+#define NRF_IRQMAP_HAS_DOMAIN 1
+#else
+#define NRF_IRQMAP_HAS_DOMAIN 0
+#endif
+
 /** @brief Number of interrupts. */
 #define NRF_IRQMAP_IRQ_COUNT IRQMAP_IRQ_MaxCount
 
@@ -51,16 +58,26 @@ NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type *  p_reg,
     NRFX_ASSERT(processor > 0);
     NRFX_ASSERT(processor < NRF_PROCESSOR_ID_COUNT);
 
-    p_reg->IRQ[index].SINK = (processor << IRQMAP_IRQ_SINK_DOMAIN_Pos) 
+#if NRF_IRQMAP_HAS_DOMAIN
+    p_reg->IRQ[index].SINK = (processor << IRQMAP_IRQ_SINK_DOMAIN_Pos)
                              & IRQMAP_IRQ_SINK_DOMAIN_Msk;
+#else
+    p_reg->IRQ[index].SINK = (processor << IRQMAP_IRQ_SINK_PROCESSORID_Pos)
+                             & IRQMAP_IRQ_SINK_PROCESSORID_Msk;
+#endif
 }
 
 NRF_STATIC_INLINE nrf_processor_id_t nrf_irqmap_sink_get(NRF_IRQMAP_Type const * p_reg,
                                                          uint32_t                index)
 {
     NRFX_ASSERT(index < NRF_IRQMAP_IRQ_COUNT);
+#if NRF_IRQMAP_HAS_DOMAIN
     return (nrf_processor_id_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_DOMAIN_Msk)
                                 >> IRQMAP_IRQ_SINK_DOMAIN_Pos);
+#else
+    return (nrf_processor_id_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_PROCESSORID_Msk)
+                                >> IRQMAP_IRQ_SINK_PROCESSORID_Pos);
+#endif
 }
 #endif // NRF_DECLARE_ONLY
 
