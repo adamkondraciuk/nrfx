@@ -35,6 +35,7 @@ typedef enum
     NRF_RESETINFO_RESETREAS_GLOBAL_DIF_MASK       = RESETINFO_RESETREAS_GLOBAL_DIF_Msk,       /**< Reset due to wakeup from System OFF triggered by entering debug interface mode. */
     NRF_RESETINFO_RESETREAS_GLOBAL_GRTC_MASK      = RESETINFO_RESETREAS_GLOBAL_GRTC_Msk,      /**< Reset due to wakeup from System OFF triggered by GRTC interrupt. */
     NRF_RESETINFO_RESETREAS_GLOBAL_NFC_MASK       = RESETINFO_RESETREAS_GLOBAL_NFC_Msk,       /**< Reset due to wakeup from System OFF triggered by NRF field detection in sense mode. */
+    NRF_RESETINFO_RESETREAS_GLOBAL_VUSB_MASK      = RESETINFO_RESETREAS_GLOBAL_VUSB_Msk,      /**< Reset due to wakeup from System OFF triggered by VBUS rising into valid range. */
 } nrf_resetinfo_resetreas_global_mask_t;
 
 /** @brief Local reset reason mask. */
