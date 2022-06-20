@@ -175,6 +175,7 @@ typedef enum
     NRF_RESETHUB_RESETREAS_GLOBAL_DIF_MASK       = RESETHUB_RESETREAS_GLOBAL_DIF_Msk,       /**< Reset due to wakeup from System OFF triggered by entering debug interface mode. */
     NRF_RESETHUB_RESETREAS_GLOBAL_GRTC_MASK      = RESETHUB_RESETREAS_GLOBAL_GRTC_Msk,      /**< Reset due to wakeup from System OFF triggered by GRTC interrupt. */
     NRF_RESETHUB_RESETREAS_GLOBAL_NFC_MASK       = RESETHUB_RESETREAS_GLOBAL_NFC_Msk,       /**< Reset due to wakeup from System OFF triggered by NRF field detection in sense mode. */
+    NRF_RESETHUB_RESETREAS_GLOBAL_VUSB_MASK      = RESETHUB_RESETREAS_GLOBAL_VUSB_Msk,      /**< Reset due to wakeup from System OFF triggered by VBUS rising into valid range. */
 } nrf_resethub_resetreas_global_mask_t;
 
 /**
