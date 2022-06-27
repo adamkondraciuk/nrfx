@@ -277,8 +277,8 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
     NRFX_ASSERT(p_main_cc_channel);
     NRFX_ASSERT(m_cb.channel_data[0].channel == NRF_GRTC_MAIN_CC_CHANNEL);
     nrfx_err_t err_code = NRFX_SUCCESS;
-    uint32_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL) &
-                         m_cb.available_channels;
+    nrfx_atomic_t init_mask = GRTC_CHANNEL_TO_BITMASK(NRF_GRTC_MAIN_CC_CHANNEL) &
+                              m_cb.available_channels;
 
     if (m_cb.state != NRFX_DRV_STATE_INITIALIZED)
     {
@@ -672,6 +672,7 @@ nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val)
 
 static void grtc_irq_handler(void)
 {
+    uint64_t current_time = is_syscounter_running() ? nrfy_grtc_sys_counter_get(NRF_GRTC) : 0;
     uint32_t evt_to_process = GRTC_CHANNEL_MASK_TO_INT_MASK(allocated_channels_mask_get() &
                                                             used_channels_mask_get()) |
                               (GRTC_NON_SYSCOMPARE_INT_MASK & ~NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
@@ -708,7 +709,7 @@ static void grtc_irq_handler(void)
         if (m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].handler)
         {
             m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].handler((int32_t)GRTC_RTCOUNTER_COMPARE_CHANNEL,
-                                0,
+                                current_time,
                                 m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].p_context);
         }
     }
