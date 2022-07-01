@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2021, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   44 
-#define MDK_MICRO_VERSION   2 
+#define MDK_MINOR_VERSION   47 
+#define MDK_MICRO_VERSION   0 
 
    
 /* Define coprocessor domains */
