@@ -16,7 +16,7 @@
 #define NRFX_TEMP_TIME_US 4
 
 /** @brief Maximum attempts to check whether conversion passed.*/
-#define NRFX_TEMP_ATTEMPTS 10
+#define NRFX_TEMP_ATTEMPTS 100
 
 /** @brief Internal state of TEMP driver. */
 static nrfx_drv_state_t m_temp_state = NRFX_DRV_STATE_UNINITIALIZED;
