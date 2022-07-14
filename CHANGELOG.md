@@ -9,6 +9,7 @@ All notable changes to this project are documented in this file.
 - Added NRF_TIMER_CC_COUNT_MAX symbol that specifies maximum number of available compare channels.
 - Added NRF_TIMER_ALL_CHANNELS_INT_MASK symbol that is used for creating the interrupt bitmask for all compare channels.
 - Added nrf_timer_prescaler_set() and nrf_timer_prescaler_get() functions that are used for setting and retrieving the prescaler factor. They should be now used instead of nrf_timer_frequency_set() and nrf_timer_frequency_get(), which are deprecated.
+- Added NRFX_MAX(), NRFX_MIN() and NRFX_ABS() macros.
 
 ### Changed
 - Updated MDK to version 8.47.0.
