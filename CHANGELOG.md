@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [2.9.0] - 2022-07-20
+## [2.9.0] - 2022-07-19
 ### Added
 - Added configuration parameter NRFX_NFCT_PARAM_ID_FDT_MIN that allows settting the value of the FRAMEDELAYMIN register.
 - Added nrf_gpio_pin_sel_t enumerator. It should be now used instead of nrf_gpio_pin_mcusel_t, which is deprecated.
