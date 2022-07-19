@@ -21,38 +21,38 @@ extern "C" {
 // RAMC_IRQn
 
 // VPR_IRQn
-#define nrfx_vevif_0_irq_handler       VPR0_0_IRQHandler
-#define nrfx_vevif_1_irq_handler       VPR0_1_IRQHandler
-#define nrfx_vevif_2_irq_handler       VPR0_2_IRQHandler
-#define nrfx_vevif_3_irq_handler       VPR0_3_IRQHandler
-#define nrfx_vevif_4_irq_handler       VPR0_4_IRQHandler
-#define nrfx_vevif_5_irq_handler       VPR0_5_IRQHandler
-#define nrfx_vevif_6_irq_handler       VPR0_6_IRQHandler
-#define nrfx_vevif_7_irq_handler       VPR0_7_IRQHandler
-#define nrfx_vevif_8_irq_handler       VPR0_8_IRQHandler
-#define nrfx_vevif_9_irq_handler       VPR0_9_IRQHandler
-#define nrfx_vevif_10_irq_handler      VPR0_10_IRQHandler
-#define nrfx_vevif_11_irq_handler      VPR0_11_IRQHandler
-#define nrfx_vevif_12_irq_handler      VPR0_12_IRQHandler
-#define nrfx_vevif_13_irq_handler      VPR0_13_IRQHandler
-#define nrfx_vevif_14_irq_handler      VPR0_14_IRQHandler
-#define nrfx_vevif_15_irq_handler      VPR0_15_IRQHandler
-#define nrfx_vevif_16_irq_handler      VPR0_16_IRQHandler
-#define nrfx_vevif_17_irq_handler      VPR0_17_IRQHandler
-#define nrfx_vevif_18_irq_handler      VPR0_18_IRQHandler
-#define nrfx_vevif_19_irq_handler      VPR0_19_IRQHandler
-#define nrfx_vevif_20_irq_handler      VPR0_20_IRQHandler
-#define nrfx_vevif_21_irq_handler      VPR0_21_IRQHandler
-#define nrfx_vevif_22_irq_handler      VPR0_22_IRQHandler
-#define nrfx_vevif_23_irq_handler      VPR0_23_IRQHandler
-#define nrfx_vevif_24_irq_handler      VPR0_24_IRQHandler
-#define nrfx_vevif_25_irq_handler      VPR0_25_IRQHandler
-#define nrfx_vevif_26_irq_handler      VPR0_26_IRQHandler
-#define nrfx_vevif_27_irq_handler      VPR0_27_IRQHandler
-#define nrfx_vevif_28_irq_handler      VPR0_28_IRQHandler
-#define nrfx_vevif_29_irq_handler      VPR0_29_IRQHandler
-#define nrfx_vevif_30_irq_handler      VPR0_30_IRQHandler
-#define nrfx_vevif_31_irq_handler      VPR0_31_IRQHandler
+#define nrfx_vevif_0_irq_handler       VPRCLIC_0_IRQHandler
+#define nrfx_vevif_1_irq_handler       VPRCLIC_1_IRQHandler
+#define nrfx_vevif_2_irq_handler       VPRCLIC_2_IRQHandler
+#define nrfx_vevif_3_irq_handler       VPRCLIC_3_IRQHandler
+#define nrfx_vevif_4_irq_handler       VPRCLIC_4_IRQHandler
+#define nrfx_vevif_5_irq_handler       VPRCLIC_5_IRQHandler
+#define nrfx_vevif_6_irq_handler       VPRCLIC_6_IRQHandler
+#define nrfx_vevif_7_irq_handler       VPRCLIC_7_IRQHandler
+#define nrfx_vevif_8_irq_handler       VPRCLIC_8_IRQHandler
+#define nrfx_vevif_9_irq_handler       VPRCLIC_9_IRQHandler
+#define nrfx_vevif_10_irq_handler      VPRCLIC_10_IRQHandler
+#define nrfx_vevif_11_irq_handler      VPRCLIC_11_IRQHandler
+#define nrfx_vevif_12_irq_handler      VPRCLIC_12_IRQHandler
+#define nrfx_vevif_13_irq_handler      VPRCLIC_13_IRQHandler
+#define nrfx_vevif_14_irq_handler      VPRCLIC_14_IRQHandler
+#define nrfx_vevif_15_irq_handler      VPRCLIC_15_IRQHandler
+#define nrfx_vevif_16_irq_handler      VPRCLIC_16_IRQHandler
+#define nrfx_vevif_17_irq_handler      VPRCLIC_17_IRQHandler
+#define nrfx_vevif_18_irq_handler      VPRCLIC_18_IRQHandler
+#define nrfx_vevif_19_irq_handler      VPRCLIC_19_IRQHandler
+#define nrfx_vevif_20_irq_handler      VPRCLIC_20_IRQHandler
+#define nrfx_vevif_21_irq_handler      VPRCLIC_21_IRQHandler
+#define nrfx_vevif_22_irq_handler      VPRCLIC_22_IRQHandler
+#define nrfx_vevif_23_irq_handler      VPRCLIC_23_IRQHandler
+#define nrfx_vevif_24_irq_handler      VPRCLIC_24_IRQHandler
+#define nrfx_vevif_25_irq_handler      VPRCLIC_25_IRQHandler
+#define nrfx_vevif_26_irq_handler      VPRCLIC_26_IRQHandler
+#define nrfx_vevif_27_irq_handler      VPRCLIC_27_IRQHandler
+#define nrfx_vevif_28_irq_handler      VPRCLIC_28_IRQHandler
+#define nrfx_vevif_29_irq_handler      VPRCLIC_29_IRQHandler
+#define nrfx_vevif_30_irq_handler      VPRCLIC_30_IRQHandler
+#define nrfx_vevif_31_irq_handler      VPRCLIC_31_IRQHandler
 
 // SPU1_IRQn
 
