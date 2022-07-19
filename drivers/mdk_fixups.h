@@ -22,6 +22,21 @@ typedef enum
     NRF_OWNER_SYSCTRL     = 8,
 } nrf_owner_t;
 
+/* TODO: Create ticket for MDK. */
+#if defined(NRF_SECURE)
+#define NRF_DOMAIN NRF_DOMAIN_SECURE
+#elif defined(NRF_APPLICATION)
+#define NRF_DOMAIN NRF_DOMAIN_APPLICATION
+#elif defined(NRF_RADIOCORE)
+#define NRF_DOMAIN NRF_DOMAIN_RADIOCORE
+#elif defined(NRF_CELLCORE)
+#define NRF_DOMAIN NRF_DOMAIN_CELLCORE
+#elif defined(NRF_SYSCTRL)
+#define NRF_DOMAIN NRF_DOMAIN_GLOBAL
+#elif defined(NRF_PPR)
+#define NRF_DOMAIN NRF_DOMAIN_PPR
+#endif
+
 /* TODO: Create tag for internal cores and remove them from public release. */
 typedef enum
 {
@@ -41,18 +56,20 @@ typedef enum
 #define NRF_PROCESSOR_ID_COUNT NRF_PROCESSOR_ID_FLPR + 1
 
 /* MDK-2059 */
-#define ADDRESS_REGION_Pos   (29UL)
-#define ADDRESS_REGION_Msk   (0xE0000000UL)
-#define ADDRESS_SECURITY_Pos (28UL)
-#define ADDRESS_SECURITY_Msk (0x10000000UL)
-#define ADDRESS_DOMAIN_Pos   (24UL)
-#define ADDRESS_DOMAIN_Msk   (0x0F000000UL)
-#define ADDRESS_BUS_Pos      (16UL)
-#define ADDRESS_BUS_Msk      (0x00FF0000UL)
-#define ADDRESS_SLAVE_Pos    (12UL)
-#define ADDRESS_SLAVE_Msk    (0x0000F000UL)
-#define ADDRESS_PERIPHID_Pos (12UL)
-#define ADDRESS_PERIPHID_Msk (0x007FF000UL)
+#define ADDRESS_REGION_Pos       (29UL)
+#define ADDRESS_REGION_Msk       (0xE0000000UL)
+#define ADDRESS_SECURITY_Pos     (28UL)
+#define ADDRESS_SECURITY_Msk     (0x10000000UL)
+#define ADDRESS_DOMAIN_Pos       (24UL)
+#define ADDRESS_DOMAIN_Msk       (0x0F000000UL)
+#define ADDRESS_BUS_Pos          (16UL)
+#define ADDRESS_BUS_Msk          (0x00FF0000UL)
+#define ADDRESS_BRIDGE_GROUP_Pos (20UL)
+#define ADDRESS_BRIDGE_GROUP_Msk (0x00F00000UL)
+#define ADDRESS_SLAVE_Pos        (12UL)
+#define ADDRESS_SLAVE_Msk        (0x0000F000UL)
+#define ADDRESS_PERIPHID_Pos     (12UL)
+#define ADDRESS_PERIPHID_Msk     (0x007FF000UL)
 
 typedef enum
 {
@@ -64,6 +81,15 @@ typedef enum
     NRF_REGION_STM          = 5,
     NRF_REGION_CPU_INTERNAL = 7,
 } nrf_region_t;
+
+/* TODO: Create ticket for MDK. */
+#define NRF_SYSCTRL_APB32_TO_APB38_CHANNELS 0x000000FF
+#define NRF_SYSCTRL_APB32_TO_APB39_CHANNELS 0x0000FF00
+#define NRF_SYSCTRL_APB32_TO_APB3A_CHANNELS 0x00FF0000
+#define NRF_SYSCTRL_APB32_TO_APB3B_CHANNELS 0xFF000000
+#define NRF_SYSCTRL_APB32_TO_APB3C_CHANNELS 0x000000FF
+#define NRF_SYSCTRL_APB32_TO_APB3D_CHANNELS 0x0000FF00
+#define NRF_SYSCTRL_APB32_TO_APB22_CHANNELS 0x00FF0000
 
 #define GLOBAL_IRQN_START (96)
 #define GLOBAL_IRQN_MAX   (480)

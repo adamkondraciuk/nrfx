@@ -16,6 +16,27 @@ extern "C" {
  * @brief   Hardware access layer for managing the Distributed Programmable Peripheral
  *          Interconnect Controller (DPPIC).
  */
+
+/**
+ * @brief Macro for setting publish/subscribe register corresponding to specified event/task.
+ *
+ * @param[in] task_or_event Address of the event or task for which publish/subscribe
+ *                          register is to be set.
+ * @param[in] dppi_chan     DPPIC channel number.
+ */
+#define NRFX_DPPIC_ENDPOINT_SETUP(task_or_event, dppi_chan) \
+        (*((volatile uint32_t *)(task_or_event + 0x80uL)) = \
+        ((uint32_t)dppi_chan | NRF_SUBSCRIBE_PUBLISH_ENABLE))
+
+/**
+ * @brief Macro for clearing publish/subscribe register corresponding to specified event/task.
+ *
+ * @param[in] task_or_event Address of the event or task for which publish/subscribe
+ *                          register is to be cleared.
+ */
+#define NRFX_DPPIC_ENDPOINT_CLEAR(task_or_event) \
+        (*((volatile uint32_t *)(task_or_event + 0x80uL)) = 0)
+
 /** @brief DPPI channel groups. */
 typedef enum
 {

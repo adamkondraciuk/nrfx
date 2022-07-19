@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
+#include <limits.h>
 
 #include <nrf.h>
 #include <nrf_peripherals.h>
@@ -80,7 +81,8 @@ extern "C" {
  *
  * @return Bit mask.
  */
-#define NRFX_BIT_MASK(x) (NRFX_BIT(x) - 1UL)
+#define NRFX_BIT_MASK(x) ((uint32_t)(((uint64_t) (-((x) != 0))) & \
+        (((uint64_t) -1) >> ((sizeof(uint64_t) * CHAR_BIT) - (x)))))
 
 /**
  * @brief Macro for concatenating two tokens in macro expansion.
@@ -282,7 +284,6 @@ typedef enum
     NRFX_DRV_STATE_INITIALIZED,   ///< Initialized but powered off.
     NRFX_DRV_STATE_POWERED_ON,    ///< Initialized and powered on.
 } nrfx_drv_state_t;
-
 
 /**
  * @brief Function for checking if an object is placed in the Data RAM region.
