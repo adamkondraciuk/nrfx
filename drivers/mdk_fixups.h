@@ -156,7 +156,7 @@ typedef enum
 #elif defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     #define NRF_GRTC_IRQ_GROUP 6
 #elif defined(NRF_PPR)
-    #define NRF_GRTC_IRQ_GROUP 4
+    #define NRF_GRTC_IRQ_GROUP 2
 #else
     #if defined(NRF_SECURE)
         #define NRF_GRTC_IRQ_GROUP 1
