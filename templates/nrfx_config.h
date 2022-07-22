@@ -37,8 +37,6 @@
         #include <nrfx_config_haltium_cellular.h>
     #elif defined(NRF_SECURE)
         #include <nrfx_config_haltium_secure.h>
-    #elif defined(NRF_SYSTEMC_SECURE)
-        #include <nrfx_config_haltium_secure.h>
     #elif defined(NRF_FLPR)
         #include <nrfx_config_haltium_flpr.h>
     #elif defined(NRF_PPR)

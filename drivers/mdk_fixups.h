@@ -78,7 +78,8 @@ typedef enum
 #define EGU020_CH_NUM 16
 
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
-      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
+      (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
+       || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
        || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
 #define P0_PIN_NUM (12)
 #define P1_PIN_NUM (12)
@@ -174,8 +175,7 @@ typedef enum
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
     /** @todo Remove when fix in MDK will appear. */
-    #if defined(NRF_SYSTEMC_APPLICATION) || \
-        defined(NRF_SYSTEMC_SECURE)
+    #if defined(NRF_SYSTEMC_APPLICATION) 
         /** @brief Fixup for the GRTC IRQHandler. */
         #define GRTC_IRQHandler GRTC0_IRQHandler
     #else
@@ -184,8 +184,7 @@ typedef enum
     #endif
 #else
     #define GRTC_IRQn       GRTC_1_IRQn
-    #if defined(NRF_SYSTEMC_APPLICATION) || \
-        defined(NRF_SYSTEMC_SECURE)
+    #if defined(NRF_SYSTEMC_APPLICATION)
         #define GRTC_IRQHandler GRTC1_IRQHandler
     #else
         #define GRTC_IRQHandler GRTC0_1_IRQHandler
@@ -202,7 +201,8 @@ typedef enum
 #define SAADC_CH_NUM 8
 
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
-      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
+      (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
+       || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
        || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
 #define SPIM120_MAX_DATARATE 32
 #define SPIM121_MAX_DATARATE 32
