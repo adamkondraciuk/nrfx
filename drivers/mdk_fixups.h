@@ -70,7 +70,7 @@ typedef enum
 
 #if defined(DPPIC_PRESENT)
 #define DPPI_PRESENT
-#define DPPI_CH_NUM DPPIC_COUNT
+#define DPPI_CH_NUM 8
 #define DPPI_GROUP_NUM 2
 #endif
 
