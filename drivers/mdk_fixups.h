@@ -175,7 +175,7 @@ typedef enum
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
     /** @todo Remove when fix in MDK will appear. */
-    #if defined(NRF_SYSTEMC_APPLICATION) 
+    #if defined(NRF_SYSTEMC_APPLICATION)
         /** @brief Fixup for the GRTC IRQHandler. */
         #define GRTC_IRQHandler GRTC0_IRQHandler
     #else
