@@ -144,12 +144,41 @@ NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th);
 NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void);
 
 /**
+ * @brief Function for enabling or disabling the Cycle Counter.
+ *
+ * @param[in] enable True if Cycle Counter is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_cycle_counter_enable_set(bool enable);
+
+/**
+ * @brief Function for checking whether the Cycle Counter is enabled.
+ *
+ * @retval true  Cycle counter is enabled.
+ * @retval false Cycle counter is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_vpr_csr_machine_cycle_counter_enable_check(void);
+
+/**
  * @brief Function for getting the machine cycle counter.
  *
  * @return Number of clock cycles executed by the processor core.
  */
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_cycle_counter_get(void);
 
+/**
+ * @brief Function for enabling or disabling the Instruction Counter.
+ *
+ * @param[in] enable True if Instruction Counter is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_instruction_counter_enable_set(bool enable);
+
+/**
+ * @brief Function for checking whether the Instruction Counter is enabled.
+ *
+ * @retval true  Instruction counter is enabled.
+ * @retval false Instruction counter is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_vpr_csr_machine_instruction_counter_enable_check(void);
 /**
  * @brief Function for getting the machine instruction counter.
  *
@@ -393,9 +422,45 @@ NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 #endif
 }
 
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_cycle_counter_enable_set(bool enable)
+{
+    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+
+    reg = (reg & ~VPRCSR_MCOUNTINHIBIT_CY_Msk) | (enable ?
+            (VPRCSR_MCOUNTINHIBIT_CY_INCREMENT << VPRCSR_MCOUNTINHIBIT_CY_Pos) :
+            (VPRCSR_MCOUNTINHIBIT_CY_INHIBIT   << VPRCSR_MCOUNTINHIBIT_CY_Pos));
+
+    csr_write(VPRCSR_MCOUNTINHIBIT, reg);
+}
+
+NRF_STATIC_INLINE bool nrf_vpr_csr_machine_cycle_counter_enable_check(void)
+{
+    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+
+    return (reg & (VPRCSR_MCOUNTINHIBIT_CY_INHIBIT << VPRCSR_MCOUNTINHIBIT_CY_Pos)) ? false : true;
+}
+
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_cycle_counter_get(void)
 {
     return csr_read(VPRCSR_MCYCLE) | ((uint64_t)csr_read(VPRCSR_MCYCLEH) << 32);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_machine_instruction_counter_enable_set(bool enable)
+{
+    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+
+    reg = (reg & ~VPRCSR_MCOUNTINHIBIT_IR_Msk) | (enable ?
+            (VPRCSR_MCOUNTINHIBIT_IR_INCREMENT << VPRCSR_MCOUNTINHIBIT_IR_Pos) :
+            (VPRCSR_MCOUNTINHIBIT_IR_INHIBIT   << VPRCSR_MCOUNTINHIBIT_IR_Pos));
+
+    csr_write(VPRCSR_MCOUNTINHIBIT, reg);
+}
+
+NRF_STATIC_INLINE bool nrf_vpr_csr_machine_instruction_counter_enable_check(void)
+{
+    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+
+    return (reg & (VPRCSR_MCOUNTINHIBIT_IR_INHIBIT << VPRCSR_MCOUNTINHIBIT_IR_Pos)) ? false : true;
 }
 
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_instruction_counter_get(void)
