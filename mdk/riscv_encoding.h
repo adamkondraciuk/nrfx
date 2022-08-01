@@ -229,6 +229,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #ifndef __ASSEMBLY__
 
+#ifndef csr_swap
 #define csr_swap(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
@@ -237,7 +238,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_read
 #define csr_read(csr)							\
 ({									\
 	register unsigned long __v;					\
@@ -246,7 +249,9 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
+#endif
 
+#ifndef csr_write
 #define csr_write(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
@@ -254,6 +259,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
 })
+#endif
 
 #define csr_read_and_set_bits(csr, mask)				\
 ({									\
