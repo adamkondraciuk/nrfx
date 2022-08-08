@@ -391,7 +391,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   WDT131_IRQHandler
     .long   WDT132_IRQHandler
-    .long   EGU130_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -780,7 +780,6 @@ Default_Handler:
     IRQ  RTC131_IRQHandler
     IRQ  WDT131_IRQHandler
     IRQ  WDT132_IRQHandler
-    IRQ  EGU130_IRQHandler
     IRQ  RESETHUB_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler

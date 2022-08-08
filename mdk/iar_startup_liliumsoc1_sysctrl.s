@@ -388,7 +388,7 @@ __vector_table
         DCD     WDT130_IRQHandler
         DCD     WDT131_IRQHandler
         DCD     WDT132_IRQHandler
-        DCD     EGU130_IRQHandler
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -965,11 +965,6 @@ WDT131_IRQHandler
         PUBWEAK  WDT132_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 WDT132_IRQHandler
-        j .
-
-        PUBWEAK  EGU130_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-EGU130_IRQHandler
         j .
 
         PUBWEAK  GRCCONF_0_IRQHandler

@@ -133,7 +133,6 @@ typedef enum {
   WDT130_IRQn                            = 298,      /*!< 298 WDT130                                                           */
   WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
   WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
-  EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
   GRCCONF_0_IRQn                         = 320,      /*!< 320 GRCCONF_0                                                        */
   GRCCONF_1_IRQn                         = 321,      /*!< 321 GRCCONF_1                                                        */
   GRCCONF_2_IRQn                         = 322,      /*!< 322 GRCCONF_2                                                        */
@@ -183,6 +182,7 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< liliumsoc1_sysctrl System Library                                    */
@@ -233,8 +233,6 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC110_S_BASE        0x5F083000UL
 #define NRF_SYSCTRL_RAMC111_S_BASE        0x5F084000UL
 #define NRF_SYSCTRL_SHA3_S_BASE           0x5F088000UL
-#define NRF_SYSCTRL_RAMC112_S_BASE        0x5F08A000UL
-#define NRF_SYSCTRL_RAMC113_S_BASE        0x5F08B000UL
 #define NRF_SYSCTRL_PCGCS110_S_BASE       0x5F08E000UL
 #define NRF_SYSCTRL_PCGCM110_S_BASE       0x5F08F000UL
 #define NRF_SYSCTRL_EXMEE_S_BASE          0x5F094000UL
@@ -332,8 +330,6 @@ typedef enum {
 #define NRF_SYSCTRL_RAMC110_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC110_S_BASE)
 #define NRF_SYSCTRL_RAMC111_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC111_S_BASE)
 #define NRF_SYSCTRL_SHA3_S                ((NRF_CRACEN_Type*)                   NRF_SYSCTRL_SHA3_S_BASE)
-#define NRF_SYSCTRL_RAMC112_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC112_S_BASE)
-#define NRF_SYSCTRL_RAMC113_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC113_S_BASE)
 #define NRF_SYSCTRL_PCGCS110_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS110_S_BASE)
 #define NRF_SYSCTRL_PCGCM110_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM110_S_BASE)
 #define NRF_SYSCTRL_EXMEE_S               ((NRF_EXMEE_Type*)                    NRF_SYSCTRL_EXMEE_S_BASE)
@@ -434,8 +430,6 @@ typedef enum {
   #define NRF_SYSCTRL_RAMC110                     NRF_SYSCTRL_RAMC110_S
   #define NRF_SYSCTRL_RAMC111                     NRF_SYSCTRL_RAMC111_S
   #define NRF_SYSCTRL_SHA3                        NRF_SYSCTRL_SHA3_S
-  #define NRF_SYSCTRL_RAMC112                     NRF_SYSCTRL_RAMC112_S
-  #define NRF_SYSCTRL_RAMC113                     NRF_SYSCTRL_RAMC113_S
   #define NRF_SYSCTRL_PCGCS110                    NRF_SYSCTRL_PCGCS110_S
   #define NRF_SYSCTRL_PCGCM110                    NRF_SYSCTRL_PCGCM110_S
   #define NRF_SYSCTRL_EXMEE                       NRF_SYSCTRL_EXMEE_S
@@ -535,8 +529,6 @@ typedef enum {
   #define NRF_RAMC110                             NRF_SYSCTRL_RAMC110
   #define NRF_RAMC111                             NRF_SYSCTRL_RAMC111
   #define NRF_SHA3                                NRF_SYSCTRL_SHA3
-  #define NRF_RAMC112                             NRF_SYSCTRL_RAMC112
-  #define NRF_RAMC113                             NRF_SYSCTRL_RAMC113
   #define NRF_PCGCS110                            NRF_SYSCTRL_PCGCS110
   #define NRF_PCGCM110                            NRF_SYSCTRL_PCGCM110
   #define NRF_EXMEE                               NRF_SYSCTRL_EXMEE

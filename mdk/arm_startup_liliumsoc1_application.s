@@ -385,7 +385,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     WDT131_IRQHandler
                 DCD     WDT132_IRQHandler
-                DCD     EGU130_IRQHandler
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -677,7 +677,6 @@ Default_Handler PROC
                 EXPORT   RTC131_IRQHandler [WEAK]
                 EXPORT   WDT131_IRQHandler [WEAK]
                 EXPORT   WDT132_IRQHandler [WEAK]
-                EXPORT   EGU130_IRQHandler [WEAK]
                 EXPORT   RESETHUB_IRQHandler [WEAK]
                 EXPORT   SAADC_IRQHandler [WEAK]
                 EXPORT   COMP_LPCOMP_IRQHandler [WEAK]
@@ -749,7 +748,6 @@ RTC130_IRQHandler
 RTC131_IRQHandler
 WDT131_IRQHandler
 WDT132_IRQHandler
-EGU130_IRQHandler
 RESETHUB_IRQHandler
 SAADC_IRQHandler
 COMP_LPCOMP_IRQHandler

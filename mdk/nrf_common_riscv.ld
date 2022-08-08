@@ -288,6 +288,7 @@ SECTIONS
         *(.noinit .noinit.*)
         *(.dynbss)
         *(COMMON)
+        . = ALIGN(4);
     } > RAM
     __bss_size         = SIZEOF(.bss);
     __bss_end          = __bss_start + __bss_size;
@@ -301,6 +302,7 @@ SECTIONS
         *(.sbss .sbss.* .gnu.linkonce.sb.*)
         *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
         *(.dynsbss)
+        . = ALIGN(4);
     } > RAM
     __sbss_size         = SIZEOF(.sbss);
     __sbss_end          = __sbss_start + __sbss_size;
@@ -315,6 +317,7 @@ SECTIONS
         *(.tbss .tbss.* .gnu.linkonce.tb.*)
         *(.tcommon)
         *(.stbss .stbss.*)
+        . = ALIGN(4);
     } > RAM
     __tbss_size         = SIZEOF(.tbss);
     __tbss_end          = __tbss_start + __tbss_size;

@@ -529,7 +529,7 @@ __isr_vector:
     .long   WDT130_IRQHandler
     .long   WDT131_IRQHandler
     .long   WDT132_IRQHandler
-    .long   EGU130_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -864,7 +864,6 @@ Default_Handler:
     IRQ  WDT130_IRQHandler
     IRQ  WDT131_IRQHandler
     IRQ  WDT132_IRQHandler
-    IRQ  EGU130_IRQHandler
     IRQ  GRCCONF_0_IRQHandler
     IRQ  GRCCONF_1_IRQHandler
     IRQ  GRCCONF_2_IRQHandler
