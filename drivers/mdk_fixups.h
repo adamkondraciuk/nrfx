@@ -839,6 +839,10 @@ typedef struct {
 #define VPRCSR_MINTTHRESH_TH_THRESHLEVEL3 VPRCSR_MINTTRESH_TH_THRESHLEVEL3
 #endif
 
+#if defined(LILIUMSOC1_XXAA) && (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION))
+#undef EGU_PRESENT
+#endif
+
 #endif // defined(HALTIUM_XXAA)
 
 #endif // MDK_FIXUPS_H__
