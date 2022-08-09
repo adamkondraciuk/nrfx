@@ -817,9 +817,7 @@ NRF_STATIC_INLINE void nrf_grtc_publish_clear(NRF_GRTC_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grtc_event_t event)
 {
 #if !(defined(NRF_SYSCTRL) || defined(NRF_SECURE))
-    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE)     &&
-                (event != NRF_GRTC_EVENT_RTCOMPARESYNC) &&
-                (event != NRF_GRTC_EVENT_SYSCOUNTERVALID));
+    NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE) && (event != NRF_GRTC_EVENT_RTCOMPARESYNC));
 #endif
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
