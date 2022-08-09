@@ -154,7 +154,9 @@ __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
 #else /* ISA_RISCV */
     (void)p_instance;
     (void)p_config;
-    return nrfx_vevif_init(interrupt_priority, (nrfx_vevif_event_handler_t)event_handler, p_context);
+    return nrfx_vevif_init((nrf_vpr_clic_priority_t)interrupt_priority,
+                           (nrfx_vevif_event_handler_t)event_handler,
+                           p_context);
 #endif
 #endif /* HALTIUM_XXAA */
 }

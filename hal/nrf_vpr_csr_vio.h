@@ -17,6 +17,7 @@ extern "C" {
  *          and Status Registers for VPR IO (VPR CSR VIO).
  */
 
+#if !defined(LILIUMSOC1_XXAA)
 /** @brief Shift sizes for output. */
 typedef enum
 {
@@ -40,6 +41,7 @@ typedef enum
     NRF_VPR_CSR_VIO_MODE_IN_CONTINUOUS = VPRCSR_NORDIC_INMODE_MODE_CONTINUOUS, ///< Continuous sampling (if CPU is not sleeping).
     NRF_VPR_CSR_VIO_MODE_IN_EVENT      = VPRCSR_NORDIC_INMODE_MODE_EVENT,      ///< Sampling on Counter 1 event.
 } nrf_vpr_csr_vio_mode_in_t;
+#endif
 
 /**
  * @brief Function for getting the pin directions mask.
@@ -98,6 +100,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_toggle_set(uint16_t mask);
  */
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void);
 
+#if !defined(LILIUMSOC1_XXAA)
 /**
  * @brief Function for getting the input mode.
  *
@@ -111,6 +114,21 @@ NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void);
  * @param[in] mode Input mode to be set.
  */
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(nrf_vpr_csr_vio_mode_in_t mode);
+#else
+/**
+ * @brief Function for getting the input mode.
+ *
+ * @return Mask of input modes. 0 is continous sampling, 1 is sampling on event.
+ */
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_mode_in_get(void);
+
+/**
+ * @brief Function for setting the input mode.
+ *
+ * @param[in] value Mask of input modes to be set. 0 is continous sampling, 1 is sampling on event.
+ */
+NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(uint16_t mode);
+#endif
 
 /**
  * @brief Function for getting the output values.
@@ -188,6 +206,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_combined_toggle_set(uint32_t mask);
  */
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void);
 
+#if !defined(LILIUMSOC1_XXAA)
 /**
  * @brief Function for getting the configuration of output mode.
  *
@@ -201,6 +220,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t *
  * @param[in] p_mode Pointer to the structure with output mode to be set.
  */
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t const * p_mode);
+#endif
 
 /**
  * @brief Function for getting the combined pin directions mask and output values.
@@ -307,6 +327,7 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
     return csr_read(VPRCSR_NORDIC_IN);
 }
 
+#if !defined(LILIUMSOC1_XXAA)
 NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void)
 {
     return csr_read(VPRCSR_NORDIC_INMODE);
@@ -316,6 +337,17 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(nrf_vpr_csr_vio_mode_in_t mod
 {
     csr_write(VPRCSR_NORDIC_INMODE, mode);
 }
+#else
+NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_mode_in_get(void)
+{
+    return csr_read(VPRCSR_NORDIC_INMODE);
+}
+
+NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(uint16_t value)
+{
+    csr_write(VPRCSR_NORDIC_INMODE, value);
+}
+#endif
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_out_get(void)
 {
@@ -369,6 +401,7 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void)
             >> VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Pos) == VPRCSR_NORDIC_OUTBDS_DIRTYBIT_DIRTY;
 }
 
+#if !defined(LILIUMSOC1_XXAA)
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t * p_mode)
 {
     uint32_t reg = csr_read(VPRCSR_NORDIC_OUTMODE);
@@ -377,7 +410,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t *
                             >> VPRCSR_NORDIC_OUTMODE_SHIFTMODE_Pos)
                            == VPRCSR_NORDIC_OUTMODE_SHIFTMODE_Enabled ? true : false;
     p_mode->shift_size   = (reg & VPRCSR_NORDIC_OUTMODE_SHIFSIZE_Msk)
-                           >> VPRCSR_NORDIC_OUTMODE_SHIFSIZE_Pos; 
+                           >> VPRCSR_NORDIC_OUTMODE_SHIFSIZE_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t const * p_mode)
@@ -390,6 +423,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t c
 
     csr_write(VPRCSR_NORDIC_OUTMODE, reg);
 }
+#endif
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_dirout_get(void)
 {

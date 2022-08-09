@@ -5,6 +5,8 @@
 
 #include <nrfx.h>
 
+#include <hal/nrf_vpr_clic.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -34,7 +36,7 @@ typedef void (*nrfx_vevif_event_handler_t)(uint8_t event_idx, void * p_context);
  * @retval NRFX_SUCCESS                   Driver successfully initialized.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED Driver already initialized.
  */
-nrfx_err_t nrfx_vevif_init(uint8_t                    interrupt_priority,
+nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
                            nrfx_vevif_event_handler_t event_handler,
                            void *                     p_context);
 

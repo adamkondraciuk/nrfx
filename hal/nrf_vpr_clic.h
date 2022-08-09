@@ -27,6 +27,19 @@ typedef enum
     NRF_VPR_CLIC_MODE_MSU = CLIC_CLIC_CLICCFG_NMBITS_ModeMSU, /**< Interrupts can be M/S/U-mode. */
 } nrf_vpr_clic_mode_t;
 
+#if defined(LILIUMSOC1_XXAA) || defined(__NRFX_DOXYGEN__)
+/** @brief Interrupt priority level. */
+typedef enum
+{
+    NRF_VPR_CLIC_PRIORITY_LEVEL0 = CLIC_CLIC_CLICINT_PRIORITY_PRIOLEVEL0, /**< Priority level 0. */
+    NRF_VPR_CLIC_PRIORITY_LEVEL1 = CLIC_CLIC_CLICINT_PRIORITY_PRIOLEVEL1, /**< Priority level 1. */
+    NRF_VPR_CLIC_PRIORITY_LEVEL2 = CLIC_CLIC_CLICINT_PRIORITY_PRIOLEVEL2, /**< Priority level 2. */
+    NRF_VPR_CLIC_PRIORITY_LEVEL3 = CLIC_CLIC_CLICINT_PRIORITY_PRIOLEVEL3, /**< Priority level 3. */
+} nrf_vpr_clic_priority_t;
+#else
+typedef uint8_t nrf_vpr_clic_priority_t;
+#endif
+
 /** @brief VPR CLIC configuration structure. */
 typedef struct
 {
@@ -47,17 +60,21 @@ typedef struct
 /** @brief Interrupt trigger and polarity types. */
 typedef enum
 {
-    NRF_VPR_CLIC_TRIGGER_LEVEL_POS = CLIC_CLIC_CLICINT_TRIG_LevelTriggered, /**< Interrupts are positive level-triggered. */
     NRF_VPR_CLIC_TRIGGER_EDGE_POS  = CLIC_CLIC_CLICINT_TRIG_EdgeTriggered,  /**< Interrupts are positive edge-triggered. */
+#if !defined(LILIUMSOC1_XXAA)
+    NRF_VPR_CLIC_TRIGGER_LEVEL_POS = CLIC_CLIC_CLICINT_TRIG_LevelTriggered, /**< Interrupts are positive level-triggered. */
     NRF_VPR_CLIC_TRIGGER_LEVEL_NEG = CLIC_CLIC_CLICINT_TRIG_NegativeLevel,  /**< Interrupts are negative level-triggered. */
     NRF_VPR_CLIC_TRIGGER_EDGE_NEG  = CLIC_CLIC_CLICINT_TRIG_NegativeEdge,   /**< Interrupts are negative edge-triggered. */
+#endif
 } nrf_vpr_clic_trigger_t;
 
 /** @brief Interrupt privilege. */
 typedef enum
 {
+#if !defined(LILIUMSOC1_XXAA)
     NRF_VPR_CLIC_PRIV_USER       = CLIC_CLIC_CLICINT_MODE_UserMode,       /**< User mode. */
     NRF_VPR_CLIC_PRIV_SUPERVISOR = CLIC_CLIC_CLICINT_MODE_SupervisorMode, /**< Supervisor mode. */
+#endif
     NRF_VPR_CLIC_PRIV_MACHINE    = CLIC_CLIC_CLICINT_MODE_MachineMode,    /**< Machine mode. */
 } nrf_vpr_clic_priv_t;
 
@@ -143,9 +160,9 @@ NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_CLIC_Type const * p_reg
  * @param[in] irq_num  Number of interrupt.
  * @param[in] priority Priority to be set.
  */
-NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type * p_reg,
-                                                     uint32_t        irq_num,
-                                                     uint8_t         priority);
+NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type *         p_reg,
+                                                     uint32_t                irq_num,
+                                                     nrf_vpr_clic_priority_t priority);
 
 /**
  * @brief Function for getting the priority of the specified interrupt.
@@ -155,8 +172,9 @@ NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type * p_reg,
  *
  * @return Priority of the specified interrupt.
  */
-NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
-                                                        uint32_t              irq_num);
+NRF_STATIC_INLINE
+nrf_vpr_clic_priority_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
+                                                      uint32_t              irq_num);
 
 /**
  * @brief Function for getting the CLIC attributes.
@@ -193,8 +211,10 @@ NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_CLIC_Type const * p_reg,
                               >> CLIC_CLIC_CLICINFO_NUMINTERRUPTS_Pos;
     p_info->version         = (inf & CLIC_CLIC_CLICINFO_VERSION_Msk)
                               >> CLIC_CLIC_CLICINFO_VERSION_Pos;
+#if !defined(LILIUMSOC1_XXAA)
     p_info->ctl_bits        = (inf & CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Msk)
                               >> CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Pos;
+#endif
     p_info->trigger_count   = (inf & CLIC_CLIC_CLICINFO_NUMTRIGGER_Msk)
                               >> CLIC_CLIC_CLICINFO_NUMTRIGGER_Pos;
 }
@@ -242,26 +262,28 @@ NRF_STATIC_INLINE bool nrf_vpr_clic_int_enable_check(NRF_CLIC_Type const * p_reg
            CLIC_CLIC_CLICINT_IE_Enabled ? true : false;
 }
 
-NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type * p_reg,
-                                                     uint32_t        irq_num,
-                                                     uint8_t         priority)
+NRF_STATIC_INLINE void nrf_vpr_clic_int_priority_set(NRF_CLIC_Type *         p_reg,
+                                                     uint32_t                irq_num,
+                                                     nrf_vpr_clic_priority_t priority)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
+#if !defined(LILIUMSOC1_XXAA)
     NRFX_ASSERT(priority < NRF_VPR_CLIC_PRIO_COUNT);
+#endif
 
     p_reg->CLIC.CLICINT[irq_num] = (p_reg->CLIC.CLICINT[irq_num] & ~CLIC_CLIC_CLICINT_PRIORITY_Msk)
                                    |
                                    (priority << CLIC_CLIC_CLICINT_PRIORITY_Pos);
 }
 
-
-NRF_STATIC_INLINE uint8_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
-                                                        uint32_t              irq_num)
+NRF_STATIC_INLINE
+nrf_vpr_clic_priority_t nrf_vpr_clic_int_priority_get(NRF_CLIC_Type const * p_reg,
+                                                      uint32_t              irq_num)
 {
     NRFX_ASSERT(irq_num < NRF_VPR_CLIC_IRQ_COUNT);
 
-    return (p_reg->CLIC.CLICINT[irq_num] & CLIC_CLIC_CLICINT_PRIORITY_Msk)
-           >> CLIC_CLIC_CLICINT_PRIORITY_Pos;
+    return (nrf_vpr_clic_priority_t)((p_reg->CLIC.CLICINT[irq_num] & CLIC_CLIC_CLICINT_PRIORITY_Msk)
+           >> CLIC_CLIC_CLICINT_PRIORITY_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_clic_int_attr_get(NRF_CLIC_Type const *  p_reg,
