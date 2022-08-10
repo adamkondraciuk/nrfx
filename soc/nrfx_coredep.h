@@ -58,7 +58,7 @@
 
 #if ISA_RISCV
 /** @brief Slowdown for RISCV cores. */
-#define NRFX_DELAY_RISCV_SLOWDOWN 63
+#define NRFX_DELAY_RISCV_SLOWDOWN 110
 #endif
 
 /**
