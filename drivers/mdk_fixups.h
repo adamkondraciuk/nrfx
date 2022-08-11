@@ -763,6 +763,67 @@ typedef struct {
 
 #define NRF_SPU_Type NRF_SPU_Type_fixed
 
+typedef struct {
+	__IM  uint32_t RESERVED0[1];
+	__IOM uint32_t RSZ;
+	__IM  uint32_t RESERVED1[1];
+	__IOM uint32_t STS;
+	__IOM uint32_t RRD; /* RAM read data */
+	__IOM uint32_t RRP; /* RAM read pointer */
+	__IOM uint32_t RWP; /* RAM write pointer */
+	__IOM uint32_t TRG; /* Trigger counter register */
+	__IOM uint32_t CTL; /* Control register */
+	__IOM uint32_t RWD; /* RAM write data */
+	__IOM uint32_t MODE; /* Mode */
+	__IOM uint32_t LBUFLEVEL;
+	__IOM uint32_t CBUFLEVEL;
+	__IOM uint32_t BUFWM;
+	__IM  uint32_t RESERVED2[54];
+	__IOM uint32_t BUSCTL;
+	__IM  uint32_t RESERVED3[1];
+	__IOM uint32_t DBA;
+	__IM  uint32_t RESERVED4[1];
+	__IOM uint32_t RURP;
+	__IM  uint32_t RESERVED5[119];
+	__IOM uint32_t FFSR;
+	__IOM uint32_t FFCR;
+	__IOM uint32_t PSCR;
+	__IOM uint32_t RESERVED6[733];
+	__IOM uint32_t IRQCR0;
+	__IOM uint32_t RES6b;
+	__IOM uint32_t IRQCR1;
+	__IOM uint32_t IRQCR2;
+	__IOM uint32_t RESERVED7[28];
+	__IOM uint32_t ITCTRL;
+	__IM  uint32_t RESERVED8[39];
+	__IOM uint32_t CLAIMSET;
+	__OM  uint32_t CLAIMCLR;
+	__IM  uint64_t RESERVED9[1];
+	__IOM uint32_t LAR;
+	__IOM uint32_t LSR;
+	__IOM uint32_t AUTHSTATUS;
+	__IM  uint32_t DEVARCH;
+	__IM  uint32_t RESERVED10[1];
+	__IM  uint32_t DEVID1;
+	__IM  uint32_t DEVID;
+	__IM  uint32_t DEVTYPE;
+	__IM  uint32_t PIDR4;
+	__IM  uint32_t PIDR5;
+	__IM  uint32_t PIDR6;
+	__IM  uint32_t PIDR7;
+	__IM  uint32_t PIDR0;
+	__IM  uint32_t PIDR1;
+	__IM  uint32_t PIDR2;
+	__IM  uint32_t PIDR3;
+	__IM  uint32_t CIDR0;
+	__IM  uint32_t CIDR1;
+	__IM  uint32_t CIDR2;
+	__IM  uint32_t CIDR3;
+} NRF_ETR_Type;
+
+#undef NRF_ETR_NS
+#define NRF_ETR_NS ((NRF_ETR_Type*) NRF_ETR_NS_BASE)
+
 #endif // defined(HALTIUM_XXAA)
 
 #endif // MDK_FIXUPS_H__
