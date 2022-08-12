@@ -80,7 +80,7 @@ typedef enum
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
       (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
        || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
-       || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
+       || defined(NRF_PPR) || defined(NRF_FLPR) || defined(NRF_SYSCTRL)))
 #define P0_PIN_NUM (12)
 #define P1_PIN_NUM (12)
 #define P2_PIN_NUM (12)
@@ -109,7 +109,7 @@ typedef enum
     #endif
 #elif defined(NRF_SYSCTRL)
     #define NRF_GPIOTE_IRQ_GROUP 6
-#elif defined(NRF_PPR)
+#elif defined(NRF_PPR) || defined(NRF_FLPR)
 /* TODO: PPR can use group shared with either APP or NET core. Investigate this further */
     #define NRF_GPIOTE_IRQ_GROUP 2
 #else
@@ -155,7 +155,7 @@ typedef enum
     #endif
 #elif defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     #define NRF_GRTC_IRQ_GROUP 6
-#elif defined(NRF_PPR)
+#elif defined(NRF_PPR) || defined(NRF_FLPR)
     #define NRF_GRTC_IRQ_GROUP 2
 #else
     #if defined(NRF_SECURE)
@@ -171,7 +171,7 @@ typedef enum
     #endif
 #endif
 
-#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(NRF_FLPR) || defined(__NRFX_DOXYGEN__)
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
     /** @todo Remove when fix in MDK will appear. */
@@ -203,7 +203,7 @@ typedef enum
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
       (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
        || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
-       || defined(NRF_PPR) || defined(NRF_SYSCTRL)))
+       || defined(NRF_PPR) || defined(NRF_FLPR) || defined(NRF_SYSCTRL)))
 #define SPIM120_MAX_DATARATE 32
 #define SPIM121_MAX_DATARATE 32
 #endif
@@ -301,7 +301,7 @@ typedef enum
 #define TIMER020_MAX_SIZE 32
 #define TIMER021_MAX_SIZE 32
 #define TIMER022_MAX_SIZE 32
-#endif //defined(NRF_RADIOCORE)
+#endif // defined(NRF_RADIOCORE)
 
 #define NRF_VPR_CLIC_PRIO_COUNT 4
 #define CLIC_CLIC_CLICCFG_NMBITS_ModeMU  1
