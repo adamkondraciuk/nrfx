@@ -361,6 +361,24 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_task_address_get(nrf_grtc_task_t task);
  */
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_address_get(nrf_grtc_event_t event);
 
+/**
+ * @brief Function for retrieving the address of the capture task for the specified channel.
+ *
+ * @param[in] channel Capture channel number.
+ *
+ * @return Task address.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_grtc_capture_task_address_get(uint8_t channel);
+
+/**
+ * @brief Function for retrieving the address of the capture task for the specified channel.
+ *
+ * @param[in] channel Compare channel number.
+ *
+ * @return Event address.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel);
+
 #if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for reading the GRTC RTCOUNTER value.
@@ -384,6 +402,16 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_task_address_get(nrf_grtc_task_t task)
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_address_get(nrf_grtc_event_t event)
 {
     return nrfy_grtc_event_address_get(NRF_GRTC, event);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_grtc_capture_task_address_get(uint8_t channel)
+{
+    return nrfy_grtc_task_address_get(NRF_GRTC, nrfy_grtc_sys_counter_capture_task_get(channel));
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel)
+{
+    return nrfy_grtc_event_address_get(NRF_GRTC, nrfy_grtc_sys_counter_compare_event_get(channel));
 }
 
 #if defined(NRF_SYSCTRL) || defined(NRF_SECURE)

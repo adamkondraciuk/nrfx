@@ -60,6 +60,10 @@ extern "C" {
 #define NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK \
     ((uint32_t)(((1 << NRF_GRTC_SYSCOUNTER_CC_COUNT) - 1) << GRTC_INTEN0_COMPARE0_Pos))
 
+/* TODO: Remove and replace definition/declaration when NRFX-2209 is merged. */
+/** @brief Alias for capture task getter. */
+#define nrf_grtc_sys_counter_capture_task_get nrf_grtc_capture_task_get
+
 /** @brief GRTC tasks. */
 typedef enum
 {

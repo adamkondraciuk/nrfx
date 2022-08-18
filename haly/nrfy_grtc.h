@@ -10,6 +10,9 @@
 extern "C" {
 #endif
 
+/* TODO: Remove and replace definition when NRFX-2209 is merged. */
+#define nrfy_grtc_sys_counter_capture_task_get nrfy_grtc_capture_task_get
+
 NRFY_STATIC_INLINE void __nrfy_internal_grtc_event_enabled_clear(NRF_GRTC_Type *  p_reg,
                                                                  uint32_t         mask,
                                                                  nrf_grtc_event_t event);
@@ -120,7 +123,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_start(NRF_GRTC_Type * p_reg, bool b
     for (uint8_t cc_channel = 0; cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT; cc_channel ++)
     {
         nrf_grtc_publish_clear(p_reg, nrf_grtc_sys_counter_compare_event_get(cc_channel));
-        nrf_grtc_subscribe_clear(p_reg, nrf_grtc_capture_task_get(cc_channel));
+        nrf_grtc_subscribe_clear(p_reg, nrf_grtc_sys_counter_capture_task_get(cc_channel));
     }
     nrf_grtc_publish_clear(p_reg, NRF_GRTC_EVENT_RTCOMPARE);
     nrf_grtc_task_trigger(p_reg, NRF_GRTC_TASK_CLEAR);
@@ -267,7 +270,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_capture_subscribe_set(NRF_GRTC_Typ
                                                                     uint8_t         cc_channel,
                                                                     uint8_t         channel)
 {
-    nrf_grtc_subscribe_set(p_reg, nrf_grtc_capture_task_get(cc_channel), channel);
+    nrf_grtc_subscribe_set(p_reg, nrf_grtc_sys_counter_capture_task_get(cc_channel), channel);
     nrf_barrier_w();
 }
 
@@ -281,7 +284,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_capture_subscribe_set(NRF_GRTC_Typ
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_capture_subscribe_clear(NRF_GRTC_Type * p_reg,
                                                                       uint8_t         cc_channel)
 {
-    nrf_grtc_subscribe_clear(p_reg, nrf_grtc_capture_task_get(cc_channel));
+    nrf_grtc_subscribe_clear(p_reg, nrf_grtc_sys_counter_capture_task_get(cc_channel));
     nrf_barrier_w();
 }
 
@@ -500,7 +503,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_task_trigger(NRF_GRTC_Type * p_reg, nrf_grtc_t
 /** @refhal{nrf_grtc_capture_task_get} */
 NRFY_STATIC_INLINE nrf_grtc_task_t nrfy_grtc_capture_task_get(uint8_t cc_channel)
 {
-    return nrf_grtc_capture_task_get(cc_channel);
+    return nrf_grtc_sys_counter_capture_task_get(cc_channel);
 }
 
 /** @refhal{nrf_grtc_sys_counter_compare_event_enable} */
