@@ -83,20 +83,27 @@ enum {
 /** @brief Macro for creating channel bitmask associated with specified channel index. */
 #define NRFX_IDS_CHANNEL(channel) (0x1UL << (channel))
 
+#if defined(HALTIUM_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief IDS domains. */
 typedef enum
 {
-    NRFX_IDS_DOMAIN_APP,     /**< Application domain. */
-    NRFX_IDS_DOMAIN_NET,     /**< Network domain. */
-    NRFX_IDS_DOMAIN_SEC,     /**< Secure domain. */
+    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_ID_SECURE,      /**< Secure domain. */
+    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_ID_APPLICATION, /**< Application domain. */
+    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_ID_RADIOCORE,   /**< Network domain. */
 #if defined(NRF_CELLCORE_BELLBOARD)
-    NRFX_IDS_DOMAIN_CELL,    /**< Cellular domain. */
+    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_ID_CELLCORE,    /**< Cellular domain. */
 #endif
-    NRFX_IDS_DOMAIN_SYSCTRL, /**< System Controller domain. */
-    NRFX_IDS_DOMAIN_FLPR,    /**< Fast Lightweight Processor */
-    NRFX_IDS_DOMAIN_PPR,     /**< Peripheral Processor */
-    NRFX_IDS_DOMAIN_COUNT    /**< Total number of possible IDS domains. */
+    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_ID_SYSCTRL,     /**< System Controller domain. */
+    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_ID_PPR,         /**< Peripheral Processor */
+    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_ID_FLPR,        /**< Fast Lightweight Processor */
 } nrfx_ids_domain_t;
+#else
+typedef enum
+{
+    NRFX_IDS_DOMAIN_APP,
+    NRFX_IDS_DOMAIN_NET,
+} nrfx_ids_domain_t;
+#endif
 
 /** @brief Symbol specifying maximum number of available events triggered. */
 #if defined(NRF5340_XXAA)
