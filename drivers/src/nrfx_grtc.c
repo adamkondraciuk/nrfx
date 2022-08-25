@@ -672,7 +672,6 @@ nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val)
 
 static void grtc_irq_handler(void)
 {
-    uint64_t current_time = is_syscounter_running() ? nrfy_grtc_sys_counter_get(NRF_GRTC) : 0;
     uint32_t evt_to_process = GRTC_CHANNEL_MASK_TO_INT_MASK(allocated_channels_mask_get() &
                                                             used_channels_mask_get()) |
                               (GRTC_NON_SYSCOMPARE_INT_MASK & ~NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
@@ -702,17 +701,18 @@ static void grtc_irq_handler(void)
             }
         }
     }
-
+#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     if (active_int_mask & (NRF_GRTC_INT_RTCOMPARE_MASK| NRF_GRTC_INT_RTCOMPARESYNC_MASK))
     {
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARE/NRF_GRTC_EVENT_RTCOMPARESYNC.");
         if (m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].handler)
         {
             m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].handler((int32_t)GRTC_RTCOUNTER_COMPARE_CHANNEL,
-                                current_time,
+                                nrfy_grtc_rt_counter_cc_get(NRF_GRTC),
                                 m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX].p_context);
         }
     }
+#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
     /* The SYSCOUNTERVALID bit is automatically cleared when GRTC goes into sleep state and set
        when returning from this state. It can't be cleared inside the ISR procedure because we rely
