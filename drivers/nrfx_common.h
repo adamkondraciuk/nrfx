@@ -146,7 +146,8 @@ extern "C" {
  *
  * @return Rounded (integer) result of dividing @c a by @c b.
  */
-#define NRFX_ROUNDED_DIV(a, b)  (((a) + ((b) / 2)) / (b))
+#define NRFX_ROUNDED_DIV(a, b) \
+    ((((a) < 0) ^ ((b) < 0)) ? (((a) - (b) / 2) / (b)) : (((a) + (b) / 2) / (b)))
 
 /**
  * @brief Macro for performing integer division, making sure the result is rounded up.
