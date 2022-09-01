@@ -683,15 +683,14 @@ static void grtc_irq_handler(void)
     {
         uint8_t channel = m_cb.channel_data[i].channel;
 
-        //TODO: Remove when HM-15402 is fixed.
-        if (channel == NRF_GRTC_MAIN_CC_CHANNEL)
-        {
-            nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
-        }
-
         event = nrfy_grtc_sys_counter_compare_event_get(channel);
         if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
+            //TODO: Remove when HM-15402 is fixed.
+            if (channel == NRF_GRTC_MAIN_CC_CHANNEL)
+            {
+                nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
+            }
             NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_COMPARE_%d.", channel);
             if (m_cb.channel_data[i].handler)
             {
