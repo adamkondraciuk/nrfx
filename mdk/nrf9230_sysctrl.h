@@ -115,14 +115,16 @@ typedef enum {
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMEE_IRQn                             = 148,      /*!< 148 EXMEE                                                            */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  MVDMA_IRQn                             = 151,      /*!< 151 MVDMA                                                            */
+  MVDMA110_IRQn                          = 151,      /*!< 151 MVDMA110                                                         */
   OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
   VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
+  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
+  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
@@ -183,13 +185,14 @@ typedef enum {
 /* =========================================================================================================================== */
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
-#define __VPR_REV                    0.7             /*!< VPR Core Revision                                                    */
+#define __VPR_REV                    1.1             /*!< VPR Core Revision                                                    */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf9230_sysctrl System Library                                       */
@@ -234,14 +237,14 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEDATA_S_BASE    0x3F640000UL
 #define NRF_SYSCTRL_L2CACHEINFO_S_BASE    0x3F680000UL
 #define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
-#define NRF_SYSCTRL_VPRCLIC_S_BASE        0x5F8C8000UL
-#define NRF_SYSCTRL_VPRTIM_NS_BASE        0x00000000UL
 #define NRF_SYSCTRL_HSFLL200_S_BASE       0xBF004000UL
 #define NRF_SYSCTRL_LRCCONF200_S_BASE     0xBF005000UL
 #define NRF_SYSCTRL_PCGCM200_S_BASE       0xBF006000UL
 #define NRF_SYSCTRL_PCGCS200_S_BASE       0xBF011000UL
 #define NRF_SYSCTRL_LRCCONF210_S_BASE     0xBF012000UL
 #define NRF_SYSCTRL_PCGCM210_S_BASE       0xBF013000UL
+#define NRF_SYSCTRL_VPRCLIC_S_BASE        0x5F8C8000UL
+#define NRF_SYSCTRL_VPRTIM_NS_BASE        0x00000000UL
 #define NRF_SYSCTRL_L2CACHE_S_BASE        0x5F082000UL
 #define NRF_SYSCTRL_RAMC110_S_BASE        0x5F083000UL
 #define NRF_SYSCTRL_RAMC111_S_BASE        0x5F084000UL
@@ -251,7 +254,7 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCS110_S_BASE       0x5F08E000UL
 #define NRF_SYSCTRL_PCGCM110_S_BASE       0x5F08F000UL
 #define NRF_SYSCTRL_EXMEE_S_BASE          0x5F094000UL
-#define NRF_SYSCTRL_MVDMA_S_BASE          0x5F097000UL
+#define NRF_SYSCTRL_MVDMA110_S_BASE       0x5F097000UL
 #define NRF_SYSCTRL_PPIB110_S_BASE        0x5F098000UL
 #define NRF_SYSCTRL_RAMC120_S_BASE        0x5F8C3000UL
 #define NRF_SYSCTRL_RAMC121_S_BASE        0x5F8C4000UL
@@ -261,7 +264,6 @@ typedef enum {
 #define NRF_SYSCTRL_HSFLL120_S_BASE       0x5F8CD000UL
 #define NRF_SYSCTRL_LRCCONF120_S_BASE     0x5F8CE000UL
 #define NRF_SYSCTRL_PCGCM120_S_BASE       0x5F8CF000UL
-#define NRF_SYSCTRL_VSPOWERC_S_BASE       0x5F8DF000UL
 #define NRF_SYSCTRL_PCGCS120_S_BASE       0x5F8EA000UL
 #define NRF_SYSCTRL_PCGCS121_S_BASE       0x5F8EB000UL
 #define NRF_SYSCTRL_PCGCS122_S_BASE       0x5F8EC000UL
@@ -303,6 +305,8 @@ typedef enum {
 #define NRF_SYSCTRL_VDETVS0V8_S_BASE      0x5F972000UL
 #define NRF_SYSCTRL_VDETIO_S_BASE         0x5F974000UL
 #define NRF_SYSCTRL_VDET1V0_S_BASE        0x5F976000UL
+#define NRF_SYSCTRL_VSPOWERC_S_BASE       0x5F977000UL
+#define NRF_SYSCTRL_PMICC_S_BASE          0x5F978000UL
 #define NRF_SYSCTRL_PPIB132_S_BASE        0x5F98D000UL
 #define NRF_SYSCTRL_PCGCS133_S_BASE       0x5F98E000UL
 #define NRF_SYSCTRL_PCGCM133_S_BASE       0x5F98F000UL
@@ -327,17 +331,17 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #define NRF_SYSCTRL_OICR_S                ((NRF_OICR_Type*)                     NRF_SYSCTRL_OICR_S_BASE)
-#define NRF_SYSCTRL_L2CACHEDATA_S         ((NRF_CACHEDATA_Type*)                NRF_SYSCTRL_L2CACHEDATA_S_BASE)
-#define NRF_SYSCTRL_L2CACHEINFO_S         ((NRF_CACHEINFO_Type*)                NRF_SYSCTRL_L2CACHEINFO_S_BASE)
+#define NRF_SYSCTRL_L2CACHEDATA_S         ((NRF_L2CACHEDATA_Type*)              NRF_SYSCTRL_L2CACHEDATA_S_BASE)
+#define NRF_SYSCTRL_L2CACHEINFO_S         ((NRF_L2CACHEINFO_Type*)              NRF_SYSCTRL_L2CACHEINFO_S_BASE)
 #define NRF_SYSCTRL_SHA3CORE_S            ((NRF_CRACENCORE_Type*)               NRF_SYSCTRL_SHA3CORE_S_BASE)
-#define NRF_SYSCTRL_VPRCLIC_S             ((NRF_CLIC_Type*)                     NRF_SYSCTRL_VPRCLIC_S_BASE)
-#define NRF_SYSCTRL_VPRTIM_NS             ((NRF_VTIM_Type*)                     NRF_SYSCTRL_VPRTIM_NS_BASE)
 #define NRF_SYSCTRL_HSFLL200_S            ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL200_S_BASE)
 #define NRF_SYSCTRL_LRCCONF200_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF200_S_BASE)
 #define NRF_SYSCTRL_PCGCM200_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM200_S_BASE)
 #define NRF_SYSCTRL_PCGCS200_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS200_S_BASE)
 #define NRF_SYSCTRL_LRCCONF210_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF210_S_BASE)
 #define NRF_SYSCTRL_PCGCM210_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM210_S_BASE)
+#define NRF_SYSCTRL_VPRCLIC_S             ((NRF_CLIC_Type*)                     NRF_SYSCTRL_VPRCLIC_S_BASE)
+#define NRF_SYSCTRL_VPRTIM_NS             ((NRF_VTIM_Type*)                     NRF_SYSCTRL_VPRTIM_NS_BASE)
 #define NRF_SYSCTRL_L2CACHE_S             ((NRF_CACHE_Type*)                    NRF_SYSCTRL_L2CACHE_S_BASE)
 #define NRF_SYSCTRL_RAMC110_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC110_S_BASE)
 #define NRF_SYSCTRL_RAMC111_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC111_S_BASE)
@@ -347,7 +351,7 @@ typedef enum {
 #define NRF_SYSCTRL_PCGCS110_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS110_S_BASE)
 #define NRF_SYSCTRL_PCGCM110_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM110_S_BASE)
 #define NRF_SYSCTRL_EXMEE_S               ((NRF_EXMEE_Type*)                    NRF_SYSCTRL_EXMEE_S_BASE)
-#define NRF_SYSCTRL_MVDMA_S               ((NRF_MVDMA_Type*)                    NRF_SYSCTRL_MVDMA_S_BASE)
+#define NRF_SYSCTRL_MVDMA110_S            ((NRF_MVDMA_Type*)                    NRF_SYSCTRL_MVDMA110_S_BASE)
 #define NRF_SYSCTRL_PPIB110_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB110_S_BASE)
 #define NRF_SYSCTRL_RAMC120_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC120_S_BASE)
 #define NRF_SYSCTRL_RAMC121_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC121_S_BASE)
@@ -357,7 +361,6 @@ typedef enum {
 #define NRF_SYSCTRL_HSFLL120_S            ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL120_S_BASE)
 #define NRF_SYSCTRL_LRCCONF120_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF120_S_BASE)
 #define NRF_SYSCTRL_PCGCM120_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM120_S_BASE)
-#define NRF_SYSCTRL_VSPOWERC_S            ((NRF_VSPOWERC_Type*)                 NRF_SYSCTRL_VSPOWERC_S_BASE)
 #define NRF_SYSCTRL_PCGCS120_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS120_S_BASE)
 #define NRF_SYSCTRL_PCGCS121_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS121_S_BASE)
 #define NRF_SYSCTRL_PCGCS122_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS122_S_BASE)
@@ -399,6 +402,8 @@ typedef enum {
 #define NRF_SYSCTRL_VDETVS0V8_S           ((NRF_VDETVS0V8_Type*)                NRF_SYSCTRL_VDETVS0V8_S_BASE)
 #define NRF_SYSCTRL_VDETIO_S              ((NRF_VDETIO_Type*)                   NRF_SYSCTRL_VDETIO_S_BASE)
 #define NRF_SYSCTRL_VDET1V0_S             ((NRF_VDET1V0_Type*)                  NRF_SYSCTRL_VDET1V0_S_BASE)
+#define NRF_SYSCTRL_VSPOWERC_S            ((NRF_VSPOWERC_Type*)                 NRF_SYSCTRL_VSPOWERC_S_BASE)
+#define NRF_SYSCTRL_PMICC_S               ((NRF_PMICC_Type*)                    NRF_SYSCTRL_PMICC_S_BASE)
 #define NRF_SYSCTRL_PPIB132_S             ((NRF_PPIB_Type*)                     NRF_SYSCTRL_PPIB132_S_BASE)
 #define NRF_SYSCTRL_PCGCS133_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS133_S_BASE)
 #define NRF_SYSCTRL_PCGCM133_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM133_S_BASE)
@@ -429,14 +434,14 @@ typedef enum {
   #define NRF_SYSCTRL_L2CACHEDATA                 NRF_SYSCTRL_L2CACHEDATA_S
   #define NRF_SYSCTRL_L2CACHEINFO                 NRF_SYSCTRL_L2CACHEINFO_S
   #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_S
-  #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_S
-  #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
   #define NRF_SYSCTRL_HSFLL200                    NRF_SYSCTRL_HSFLL200_S
   #define NRF_SYSCTRL_LRCCONF200                  NRF_SYSCTRL_LRCCONF200_S
   #define NRF_SYSCTRL_PCGCM200                    NRF_SYSCTRL_PCGCM200_S
   #define NRF_SYSCTRL_PCGCS200                    NRF_SYSCTRL_PCGCS200_S
   #define NRF_SYSCTRL_LRCCONF210                  NRF_SYSCTRL_LRCCONF210_S
   #define NRF_SYSCTRL_PCGCM210                    NRF_SYSCTRL_PCGCM210_S
+  #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_S
+  #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
   #define NRF_SYSCTRL_L2CACHE                     NRF_SYSCTRL_L2CACHE_S
   #define NRF_SYSCTRL_RAMC110                     NRF_SYSCTRL_RAMC110_S
   #define NRF_SYSCTRL_RAMC111                     NRF_SYSCTRL_RAMC111_S
@@ -446,7 +451,7 @@ typedef enum {
   #define NRF_SYSCTRL_PCGCS110                    NRF_SYSCTRL_PCGCS110_S
   #define NRF_SYSCTRL_PCGCM110                    NRF_SYSCTRL_PCGCM110_S
   #define NRF_SYSCTRL_EXMEE                       NRF_SYSCTRL_EXMEE_S
-  #define NRF_SYSCTRL_MVDMA                       NRF_SYSCTRL_MVDMA_S
+  #define NRF_SYSCTRL_MVDMA110                    NRF_SYSCTRL_MVDMA110_S
   #define NRF_SYSCTRL_PPIB110                     NRF_SYSCTRL_PPIB110_S
   #define NRF_SYSCTRL_RAMC120                     NRF_SYSCTRL_RAMC120_S
   #define NRF_SYSCTRL_RAMC121                     NRF_SYSCTRL_RAMC121_S
@@ -456,7 +461,6 @@ typedef enum {
   #define NRF_SYSCTRL_HSFLL120                    NRF_SYSCTRL_HSFLL120_S
   #define NRF_SYSCTRL_LRCCONF120                  NRF_SYSCTRL_LRCCONF120_S
   #define NRF_SYSCTRL_PCGCM120                    NRF_SYSCTRL_PCGCM120_S
-  #define NRF_SYSCTRL_VSPOWERC                    NRF_SYSCTRL_VSPOWERC_S
   #define NRF_SYSCTRL_PCGCS120                    NRF_SYSCTRL_PCGCS120_S
   #define NRF_SYSCTRL_PCGCS121                    NRF_SYSCTRL_PCGCS121_S
   #define NRF_SYSCTRL_PCGCS122                    NRF_SYSCTRL_PCGCS122_S
@@ -498,6 +502,8 @@ typedef enum {
   #define NRF_SYSCTRL_VDETVS0V8                   NRF_SYSCTRL_VDETVS0V8_S
   #define NRF_SYSCTRL_VDETIO                      NRF_SYSCTRL_VDETIO_S
   #define NRF_SYSCTRL_VDET1V0                     NRF_SYSCTRL_VDET1V0_S
+  #define NRF_SYSCTRL_VSPOWERC                    NRF_SYSCTRL_VSPOWERC_S
+  #define NRF_SYSCTRL_PMICC                       NRF_SYSCTRL_PMICC_S
   #define NRF_SYSCTRL_PPIB132                     NRF_SYSCTRL_PPIB132_S
   #define NRF_SYSCTRL_PCGCS133                    NRF_SYSCTRL_PCGCS133_S
   #define NRF_SYSCTRL_PCGCM133                    NRF_SYSCTRL_PCGCM133_S
@@ -527,14 +533,14 @@ typedef enum {
   #define NRF_L2CACHEDATA                         NRF_SYSCTRL_L2CACHEDATA
   #define NRF_L2CACHEINFO                         NRF_SYSCTRL_L2CACHEINFO
   #define NRF_SHA3CORE                            NRF_SYSCTRL_SHA3CORE
-  #define NRF_VPRCLIC                             NRF_SYSCTRL_VPRCLIC
-  #define NRF_VPRTIM                              NRF_SYSCTRL_VPRTIM
   #define NRF_HSFLL200                            NRF_SYSCTRL_HSFLL200
   #define NRF_LRCCONF200                          NRF_SYSCTRL_LRCCONF200
   #define NRF_PCGCM200                            NRF_SYSCTRL_PCGCM200
   #define NRF_PCGCS200                            NRF_SYSCTRL_PCGCS200
   #define NRF_LRCCONF210                          NRF_SYSCTRL_LRCCONF210
   #define NRF_PCGCM210                            NRF_SYSCTRL_PCGCM210
+  #define NRF_VPRCLIC                             NRF_SYSCTRL_VPRCLIC
+  #define NRF_VPRTIM                              NRF_SYSCTRL_VPRTIM
   #define NRF_L2CACHE                             NRF_SYSCTRL_L2CACHE
   #define NRF_RAMC110                             NRF_SYSCTRL_RAMC110
   #define NRF_RAMC111                             NRF_SYSCTRL_RAMC111
@@ -544,7 +550,7 @@ typedef enum {
   #define NRF_PCGCS110                            NRF_SYSCTRL_PCGCS110
   #define NRF_PCGCM110                            NRF_SYSCTRL_PCGCM110
   #define NRF_EXMEE                               NRF_SYSCTRL_EXMEE
-  #define NRF_MVDMA                               NRF_SYSCTRL_MVDMA
+  #define NRF_MVDMA110                            NRF_SYSCTRL_MVDMA110
   #define NRF_PPIB110                             NRF_SYSCTRL_PPIB110
   #define NRF_RAMC120                             NRF_SYSCTRL_RAMC120
   #define NRF_RAMC121                             NRF_SYSCTRL_RAMC121
@@ -554,7 +560,6 @@ typedef enum {
   #define NRF_HSFLL120                            NRF_SYSCTRL_HSFLL120
   #define NRF_LRCCONF120                          NRF_SYSCTRL_LRCCONF120
   #define NRF_PCGCM120                            NRF_SYSCTRL_PCGCM120
-  #define NRF_VSPOWERC                            NRF_SYSCTRL_VSPOWERC
   #define NRF_PCGCS120                            NRF_SYSCTRL_PCGCS120
   #define NRF_PCGCS121                            NRF_SYSCTRL_PCGCS121
   #define NRF_PCGCS122                            NRF_SYSCTRL_PCGCS122
@@ -596,6 +601,8 @@ typedef enum {
   #define NRF_VDETVS0V8                           NRF_SYSCTRL_VDETVS0V8
   #define NRF_VDETIO                              NRF_SYSCTRL_VDETIO
   #define NRF_VDET1V0                             NRF_SYSCTRL_VDET1V0
+  #define NRF_VSPOWERC                            NRF_SYSCTRL_VSPOWERC
+  #define NRF_PMICC                               NRF_SYSCTRL_PMICC
   #define NRF_PPIB132                             NRF_SYSCTRL_PPIB132
   #define NRF_PCGCS133                            NRF_SYSCTRL_PCGCS133
   #define NRF_PCGCM133                            NRF_SYSCTRL_PCGCM133

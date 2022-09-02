@@ -87,6 +87,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_I3CCORE121_NS_BASE            0x2FBE1000UL
 #define NRF_STMDATA_NS_BASE               0xA0000000UL
 #define NRF_STMDATA_S_BASE                0xA0000000UL
+#define NRF_TDDCONF_NS_BASE               0xBF001000UL
+#define NRF_TDDCONF_S_BASE                0xBF001000UL
 #define NRF_TSGEN_NS_BASE                 0xBF041000UL
 #define NRF_STM_NS_BASE                   0xBF042000UL
 #define NRF_TPIU_NS_BASE                  0xBF043000UL
@@ -108,21 +110,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GPIOTE131_S_BASE              0x5F935000UL
 #define NRF_GRTC_NS_BASE                  0x4F99C000UL
 #define NRF_GRTC_S_BASE                   0x5F99C000UL
-#define NRF_TDDCONF_NS_BASE               0xBF001000UL
-#define NRF_TDDCONF_S_BASE                0xBF001000UL
 #define NRF_TBM_NS_BASE                   0xBF003000UL
 #define NRF_TBM_S_BASE                    0xBF003000UL
-#define NRF_USBHS_NS_BASE                 0x5F086000UL
+#define NRF_USBHS_NS_BASE                 0x4F086000UL
 #define NRF_USBHS_S_BASE                  0x5F086000UL
 #define NRF_MRAMC110_S_BASE               0x5F092000UL
 #define NRF_MRAMC111_S_BASE               0x5F093000UL
 #define NRF_EXMIF_NS_BASE                 0x4F095000UL
 #define NRF_EXMIF_S_BASE                  0x5F095000UL
-#define NRF_CANPLLPM_NS_BASE              0x5F8C2000UL
+#define NRF_CANPLL_NS_BASE                0x4F8C2000UL
 #define NRF_CANPLLPM_S_BASE               0x5F8C2000UL
-#define NRF_CANPLL_NS_BASE                0x5F8C2000UL
 #define NRF_CANPLL_S_BASE                 0x5F8C2000UL
 #define NRF_OTPC_S_BASE                   0x5F8C5000UL
+#define NRF_VPR120_NS_BASE                0x4F8C8000UL
 #define NRF_VPR120_S_BASE                 0x5F8C8000UL
 #define NRF_IPCT120_NS_BASE               0x4F8D1000UL
 #define NRF_IPCT120_S_BASE                0x5F8D1000UL
@@ -131,12 +131,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_I3C120_S_BASE                 0x5F8D3000UL
 #define NRF_VPR121_NS_BASE                0x4F8D4000UL
 #define NRF_VPR121_S_BASE                 0x5F8D4000UL
-#define NRF_CAN_NS_BASE                   0x4F8D8000UL
-#define NRF_CAN_S_BASE                    0x5F8D8000UL
+#define NRF_CAN120_NS_BASE                0x4F8D8000UL
+#define NRF_CAN120_S_BASE                 0x5F8D8000UL
 #define NRF_MVDMA120_NS_BASE              0x4F8D9000UL
 #define NRF_MVDMA120_S_BASE               0x5F8D9000UL
 #define NRF_RAMC122_NS_BASE               0x4F8DA000UL
 #define NRF_RAMC122_S_BASE                0x5F8DA000UL
+#define NRF_CAN121_NS_BASE                0x4F8DB000UL
+#define NRF_CAN121_S_BASE                 0x5F8DB000UL
+#define NRF_MVDMA121_NS_BASE              0x4F8DC000UL
+#define NRF_MVDMA121_S_BASE               0x5F8DC000UL
+#define NRF_RAMC123_NS_BASE               0x4F8DD000UL
+#define NRF_RAMC123_S_BASE                0x5F8DD000UL
 #define NRF_I3C121_NS_BASE                0x4F8DE000UL
 #define NRF_I3C121_S_BASE                 0x5F8DE000UL
 #define NRF_DPPIC120_NS_BASE              0x4F8E1000UL
@@ -363,6 +369,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_I3CCORE121_NS                 ((NRF_I3CCORE_Type*)                  NRF_I3CCORE121_NS_BASE)
 #define NRF_STMDATA_NS                    ((NRF_STMDATA_Type*)                  NRF_STMDATA_NS_BASE)
 #define NRF_STMDATA_S                     ((NRF_STMDATA_Type*)                  NRF_STMDATA_S_BASE)
+#define NRF_TDDCONF_NS                    ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_NS_BASE)
+#define NRF_TDDCONF_S                     ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_S_BASE)
 #define NRF_TSGEN_NS                      ((NRF_GENERIC_Type*)                  NRF_TSGEN_NS_BASE)
 #define NRF_STM_NS                        ((NRF_STM_Type*)                      NRF_STM_NS_BASE)
 #define NRF_TPIU_NS                       ((NRF_TPIU_Type*)                     NRF_TPIU_NS_BASE)
@@ -384,8 +392,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_GPIOTE131_S                   ((NRF_GPIOTE_Type*)                   NRF_GPIOTE131_S_BASE)
 #define NRF_GRTC_NS                       ((NRF_GRTC_Type*)                     NRF_GRTC_NS_BASE)
 #define NRF_GRTC_S                        ((NRF_GRTC_Type*)                     NRF_GRTC_S_BASE)
-#define NRF_TDDCONF_NS                    ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_NS_BASE)
-#define NRF_TDDCONF_S                     ((NRF_TDDCONF_Type*)                  NRF_TDDCONF_S_BASE)
 #define NRF_TBM_NS                        ((NRF_TBM_Type*)                      NRF_TBM_NS_BASE)
 #define NRF_TBM_S                         ((NRF_TBM_Type*)                      NRF_TBM_S_BASE)
 #define NRF_USBHS_NS                      ((NRF_USBHS_Type*)                    NRF_USBHS_NS_BASE)
@@ -394,11 +400,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_MRAMC111_S                    ((NRF_MRAMC_Type*)                    NRF_MRAMC111_S_BASE)
 #define NRF_EXMIF_NS                      ((NRF_EXMIF_Type*)                    NRF_EXMIF_NS_BASE)
 #define NRF_EXMIF_S                       ((NRF_EXMIF_Type*)                    NRF_EXMIF_S_BASE)
-#define NRF_CANPLLPM_NS                   ((NRF_AUXPM_Type*)                    NRF_CANPLLPM_NS_BASE)
-#define NRF_CANPLLPM_S                    ((NRF_AUXPM_Type*)                    NRF_CANPLLPM_S_BASE)
 #define NRF_CANPLL_NS                     ((NRF_AUXPLL_Type*)                   NRF_CANPLL_NS_BASE)
+#define NRF_CANPLLPM_S                    ((NRF_AUXPM_Type*)                    NRF_CANPLLPM_S_BASE)
 #define NRF_CANPLL_S                      ((NRF_AUXPLL_Type*)                   NRF_CANPLL_S_BASE)
 #define NRF_OTPC_S                        ((NRF_OTPC_Type*)                     NRF_OTPC_S_BASE)
+#define NRF_VPR120_NS                     ((NRF_VPR_Type*)                      NRF_VPR120_NS_BASE)
 #define NRF_VPR120_S                      ((NRF_VPR_Type*)                      NRF_VPR120_S_BASE)
 #define NRF_IPCT120_NS                    ((NRF_IPCT_Type*)                     NRF_IPCT120_NS_BASE)
 #define NRF_IPCT120_S                     ((NRF_IPCT_Type*)                     NRF_IPCT120_S_BASE)
@@ -407,12 +413,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_I3C120_S                      ((NRF_I3C_Type*)                      NRF_I3C120_S_BASE)
 #define NRF_VPR121_NS                     ((NRF_VPR_Type*)                      NRF_VPR121_NS_BASE)
 #define NRF_VPR121_S                      ((NRF_VPR_Type*)                      NRF_VPR121_S_BASE)
-#define NRF_CAN_NS                        ((NRF_CAN_Type*)                      NRF_CAN_NS_BASE)
-#define NRF_CAN_S                         ((NRF_CAN_Type*)                      NRF_CAN_S_BASE)
+#define NRF_CAN120_NS                     ((NRF_CAN_Type*)                      NRF_CAN120_NS_BASE)
+#define NRF_CAN120_S                      ((NRF_CAN_Type*)                      NRF_CAN120_S_BASE)
 #define NRF_MVDMA120_NS                   ((NRF_MVDMA_Type*)                    NRF_MVDMA120_NS_BASE)
 #define NRF_MVDMA120_S                    ((NRF_MVDMA_Type*)                    NRF_MVDMA120_S_BASE)
 #define NRF_RAMC122_NS                    ((NRF_RAMC_Type*)                     NRF_RAMC122_NS_BASE)
 #define NRF_RAMC122_S                     ((NRF_RAMC_Type*)                     NRF_RAMC122_S_BASE)
+#define NRF_CAN121_NS                     ((NRF_CAN_Type*)                      NRF_CAN121_NS_BASE)
+#define NRF_CAN121_S                      ((NRF_CAN_Type*)                      NRF_CAN121_S_BASE)
+#define NRF_MVDMA121_NS                   ((NRF_MVDMA_Type*)                    NRF_MVDMA121_NS_BASE)
+#define NRF_MVDMA121_S                    ((NRF_MVDMA_Type*)                    NRF_MVDMA121_S_BASE)
+#define NRF_RAMC123_NS                    ((NRF_RAMC_Type*)                     NRF_RAMC123_NS_BASE)
+#define NRF_RAMC123_S                     ((NRF_RAMC_Type*)                     NRF_RAMC123_S_BASE)
 #define NRF_I3C121_NS                     ((NRF_I3C_Type*)                      NRF_I3C121_NS_BASE)
 #define NRF_I3C121_S                      ((NRF_I3C_Type*)                      NRF_I3C121_S_BASE)
 #define NRF_DPPIC120_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC120_NS_BASE)
@@ -638,6 +650,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_I3CCORE120                          NRF_I3CCORE120_NS
   #define NRF_I3CCORE121                          NRF_I3CCORE121_NS
   #define NRF_STMDATA                             NRF_STMDATA_NS
+  #define NRF_TDDCONF                             NRF_TDDCONF_NS
   #define NRF_TSGEN                               NRF_TSGEN_NS
   #define NRF_STM                                 NRF_STM_NS
   #define NRF_TPIU                                NRF_TPIU_NS
@@ -656,19 +669,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GPIOTE130                           NRF_GPIOTE130_NS
   #define NRF_GPIOTE131                           NRF_GPIOTE131_NS
   #define NRF_GRTC                                NRF_GRTC_NS
-  #define NRF_TDDCONF                             NRF_TDDCONF_NS
   #define NRF_TBM                                 NRF_TBM_NS
   #define NRF_USBHS                               NRF_USBHS_NS
   #define NRF_EXMIF                               NRF_EXMIF_NS
   #define NRF_CANPLL                              NRF_CANPLL_NS
-  #define NRF_CANPLLPM                            NRF_CANPLLPM_NS
+  #define NRF_VPR120                              NRF_VPR120_NS
   #define NRF_IPCT120                             NRF_IPCT120_NS
   #define NRF_MUTEX120                            NRF_MUTEX120_NS
   #define NRF_I3C120                              NRF_I3C120_NS
   #define NRF_VPR121                              NRF_VPR121_NS
-  #define NRF_CAN                                 NRF_CAN_NS
+  #define NRF_CAN120                              NRF_CAN120_NS
   #define NRF_MVDMA120                            NRF_MVDMA120_NS
   #define NRF_RAMC122                             NRF_RAMC122_NS
+  #define NRF_CAN121                              NRF_CAN121_NS
+  #define NRF_MVDMA121                            NRF_MVDMA121_NS
+  #define NRF_RAMC123                             NRF_RAMC123_NS
   #define NRF_I3C121                              NRF_I3C121_NS
   #define NRF_DPPIC120                            NRF_DPPIC120_NS
   #define NRF_TIMER120                            NRF_TIMER120_NS
@@ -782,6 +797,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_I3CCORE120                          NRF_I3CCORE120_NS
   #define NRF_I3CCORE121                          NRF_I3CCORE121_NS
   #define NRF_STMDATA                             NRF_STMDATA_S
+  #define NRF_TDDCONF                             NRF_TDDCONF_S
   #define NRF_TSGEN                               NRF_TSGEN_NS
   #define NRF_STM                                 NRF_STM_NS
   #define NRF_TPIU                                NRF_TPIU_NS
@@ -800,7 +816,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_GPIOTE130                           NRF_GPIOTE130_S
   #define NRF_GPIOTE131                           NRF_GPIOTE131_S
   #define NRF_GRTC                                NRF_GRTC_S
-  #define NRF_TDDCONF                             NRF_TDDCONF_S
   #define NRF_TBM                                 NRF_TBM_S
   #define NRF_USBHS                               NRF_USBHS_S
   #define NRF_MRAMC110                            NRF_MRAMC110_S
@@ -814,9 +829,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_MUTEX120                            NRF_MUTEX120_NS
   #define NRF_I3C120                              NRF_I3C120_S
   #define NRF_VPR121                              NRF_VPR121_S
-  #define NRF_CAN                                 NRF_CAN_S
+  #define NRF_CAN120                              NRF_CAN120_S
   #define NRF_MVDMA120                            NRF_MVDMA120_S
   #define NRF_RAMC122                             NRF_RAMC122_S
+  #define NRF_CAN121                              NRF_CAN121_S
+  #define NRF_MVDMA121                            NRF_MVDMA121_S
+  #define NRF_RAMC123                             NRF_RAMC123_S
   #define NRF_I3C121                              NRF_I3C121_S
   #define NRF_DPPIC120                            NRF_DPPIC120_S
   #define NRF_TIMER120                            NRF_TIMER120_S
