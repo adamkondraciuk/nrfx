@@ -5,7 +5,7 @@
 
 #include <nrfx.h>
 
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     #include <nrfx_ipc.h>
 #elif defined(HALTIUM_XXAA)
     #include <nrfx_vevif.h>
@@ -45,7 +45,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
 #if NRFX_CHECK(NRFX_IPC_ENABLED)
     NRFX_IDS0_INST_IDX,
 #endif
@@ -87,26 +87,33 @@ enum {
 /** @brief IDS domains. */
 typedef enum
 {
-    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_ID_SECURE,      /**< Secure domain. */
-    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_ID_APPLICATION, /**< Application domain. */
-    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_ID_RADIOCORE,   /**< Network domain. */
+    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_ID_SECURE,      ///< Secure domain. */
+    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_ID_APPLICATION, ///< Application domain. */
+    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_ID_RADIOCORE,   ///< Network domain. */
 #if defined(NRF_CELLCORE_BELLBOARD)
-    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_ID_CELLCORE,    /**< Cellular domain. */
+    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_ID_CELLCORE,    ///< Cellular domain. */
 #endif
-    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_ID_SYSCTRL,     /**< System Controller domain. */
-    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_ID_PPR,         /**< Peripheral Processor */
-    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_ID_FLPR,        /**< Fast Lightweight Processor */
+    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_ID_SYSCTRL,     ///< System Controller domain. */
+    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_ID_PPR,         ///< Peripheral Processor */
+    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_ID_FLPR,        ///< Fast Lightweight Processor */
 } nrfx_ids_domain_t;
-#else
+#elif defined(NRF5340_XXAA)
 typedef enum
 {
-    NRFX_IDS_DOMAIN_APP,
-    NRFX_IDS_DOMAIN_NET,
+    NRFX_IDS_DOMAIN_APP, ///< Application domain. */
+    NRFX_IDS_DOMAIN_NET, ///< Network domain. */
 } nrfx_ids_domain_t;
+#elif defined(NRF9160_XXAA)
+typedef enum
+{
+    NRFX_IDS_DOMAIN_APP,   ///< Application domain. */
+    NRFX_IDS_DOMAIN_MODEM, ///< LTE modem domain. */
+} nrfx_ids_domain_t;
+
 #endif
 
 /** @brief Symbol specifying maximum number of available events triggered. */
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
 #define NRFX_IDS_EVENTS_TRIGGERED_COUNT IPC_CONF_NUM
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
@@ -134,7 +141,7 @@ __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
                                          void *                   p_context,
                                          void const *             p_config)
 {
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     (void)p_instance;
     nrfx_err_t err_code = nrfx_ipc_init(interrupt_priority,
                                         (nrfx_ipc_handler_t)event_handler,
@@ -168,7 +175,7 @@ __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
  */
 __STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
 {
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     (void)p_instance;
     nrfx_ipc_uninit();
 #elif defined(HALTIUM_XXAA)
@@ -189,7 +196,7 @@ __STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
  */
 __STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t mask)
 {
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     (void)p_instance;
     nrfx_ipc_receive_event_group_enable(mask);
 #elif defined(HALTIUM_XXAA)
@@ -210,7 +217,7 @@ __STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t
  */
 __STATIC_INLINE void nrfx_ids_int_disable(nrfx_ids_t const * p_instance, uint32_t mask)
 {
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     (void)p_instance;
     nrfx_ipc_receive_event_group_disable(mask);
 #elif defined(HALTIUM_XXAA)
@@ -235,7 +242,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
                                      uint8_t           channel)
 {
     NRFX_ASSERT(channel < NRFX_IDS_EVENTS_TRIGGERED_COUNT);
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
     (void)domain;
     (void)p_instance;
     nrfx_ipc_signal(channel);
@@ -293,7 +300,7 @@ __STATIC_INLINE void nrfx_ids_signal(nrfx_ids_t *      p_instance,
 
 /** @} */
 
-#if defined(NRF5340_XXAA)
+#if defined(NRF5340_XXAA) || defined(NRF9160_XXAA)
 #if NRFX_CHECK(NRFX_IPC_ENABLED)
 #define nrfx_ids_0_irq_handler nrfx_ipc_irq_handler
 #endif
