@@ -75,6 +75,13 @@ NRFY_STATIC_INLINE void __nrfy_internal_spim_event_enabled_clear(NRF_SPIM_Type *
 #define NRFY_SPIM_HAS_INTEN 0
 #endif
 
+#if NRF_SPIM_HAS_ARRAY_LIST || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_SPIM_HAS_ARRAY_LIST} */
+#define NRFY_SPIM_HAS_ARRAY_LIST 1
+#else
+#define NRFY_SPIM_HAS_ARRAY_LIST 0
+#endif
+
 /** @brief Structure describing single SPIM transfer. */
 struct nrfy_spim_xfer_desc_t
 {
@@ -351,6 +358,7 @@ NRFY_STATIC_INLINE void nrfy_spim_ext_pins_get(NRF_SPIM_Type const *  p_reg,
 }
 #endif
 
+#if NRFY_SPIM_HAS_ARRAY_LIST
 /**
  * @brief Function for enabling or disabling the TX list feature.
  *
@@ -388,6 +396,7 @@ NRFY_STATIC_INLINE void nrfy_spim_rx_list_set(NRF_SPIM_Type * p_reg, bool enable
     }
     nrf_barrier_w();
 }
+#endif
 
 /** @refhal{nrf_spim_task_trigger} */
 NRFY_STATIC_INLINE void nrfy_spim_task_trigger(NRF_SPIM_Type * p_reg,

@@ -33,6 +33,21 @@ extern "C" {
 #define NRF_PDM_HAS_RATIO_CONFIG 0
 #endif
 
+#if defined(PDM_DMA_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether dedicated DMA register is present. */
+#define NRF_PDM_HAS_DMA_REG 1
+#else
+#define NRF_PDM_HAS_DMA_REG 0
+#endif
+
+#if (defined(PDM_TASKS_DMA_START_START_Msk) && defined(PDM_EVENTS_DMA_END_END_Msk)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether PDM DMA tasks and events are present. */
+#define NRF_PDM_HAS_DMA_TASKS_EVENTS 1
+#else
+#define NRF_PDM_HAS_DMA_TASKS_EVENTS 0
+#endif
+
 /** @brief Minimum value of PDM gain. */
 #define NRF_PDM_GAIN_MINIMUM  0x00
 /** @brief Default value of PDM gain. */
@@ -47,8 +62,13 @@ typedef uint8_t nrf_pdm_gain_t;
 /** @brief PDM tasks. */
 typedef enum
 {
-    NRF_PDM_TASK_START = offsetof(NRF_PDM_Type, TASKS_START), ///< Starts continuous PDM transfer.
-    NRF_PDM_TASK_STOP  = offsetof(NRF_PDM_Type, TASKS_STOP)   ///< Stops PDM transfer.
+#if NRF_PDM_HAS_DMA_TASKS_EVENTS
+    NRF_PDM_TASK_START = offsetof(NRF_PDM_Type, TASKS_DMA.START), ///< Starts continuous PDM transfer.
+    NRF_PDM_TASK_STOP  = offsetof(NRF_PDM_Type, TASKS_DMA.STOP),  ///< Stops PDM transfer.
+#else
+    NRF_PDM_TASK_START = offsetof(NRF_PDM_Type, TASKS_START),     ///< Starts continuous PDM transfer.
+    NRF_PDM_TASK_STOP  = offsetof(NRF_PDM_Type, TASKS_STOP),      ///< Stops PDM transfer.
+#endif
 } nrf_pdm_task_t;
 
 /** @brief PDM events. */
@@ -56,7 +76,11 @@ typedef enum
 {
     NRF_PDM_EVENT_STARTED = offsetof(NRF_PDM_Type, EVENTS_STARTED), ///< PDM transfer is started.
     NRF_PDM_EVENT_STOPPED = offsetof(NRF_PDM_Type, EVENTS_STOPPED), ///< PDM transfer is finished.
-    NRF_PDM_EVENT_END     = offsetof(NRF_PDM_Type, EVENTS_END)      ///< The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been received) to Data RAM.
+#if NRF_PDM_HAS_DMA_TASKS_EVENTS
+    NRF_PDM_EVENT_END     = offsetof(NRF_PDM_Type, EVENTS_DMA.END), ///< The PDM has written the last sample specified by MAXCNT (or the last sample after a STOP task has been received) to Data RAM.
+#else
+    NRF_PDM_EVENT_END     = offsetof(NRF_PDM_Type, EVENTS_END),     ///< The PDM has written the last sample specified by MAXCNT (or the last sample after a STOP task has been received) to Data RAM.
+#endif
 } nrf_pdm_event_t;
 
 /** @brief PDM interrupt masks. */
@@ -64,7 +88,11 @@ typedef enum
 {
     NRF_PDM_INT_STARTED = PDM_INTENSET_STARTED_Msk, ///< Interrupt on EVENTS_STARTED event.
     NRF_PDM_INT_STOPPED = PDM_INTENSET_STOPPED_Msk, ///< Interrupt on EVENTS_STOPPED event.
+#if NRF_PDM_HAS_DMA_TASKS_EVENTS
+    NRF_PDM_INT_END     = PDM_INTENSET_DMAEND_Msk   ///< Interrupt on EVENTS_END event.
+#else
     NRF_PDM_INT_END     = PDM_INTENSET_END_Msk      ///< Interrupt on EVENTS_END event.
+#endif
 } nrf_pdm_int_mask_t;
 
 /** @brief PDM clock frequency. */
@@ -559,13 +587,22 @@ NRF_STATIC_INLINE void nrf_pdm_gain_get(NRF_PDM_Type const * p_reg,
 
 NRF_STATIC_INLINE void nrf_pdm_buffer_set(NRF_PDM_Type * p_reg, uint32_t * p_buffer, uint32_t num)
 {
+#if NRF_PDM_HAS_DMA_REG
+    p_reg->DMA.PTR = (uint32_t)p_buffer;
+    p_reg->DMA.MAXCNT = num;
+#else
     p_reg->SAMPLE.PTR = (uint32_t)p_buffer;
     p_reg->SAMPLE.MAXCNT = num;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t * nrf_pdm_buffer_get(NRF_PDM_Type const * p_reg)
 {
+#if NRF_PDM_HAS_DMA_REG
+    return (uint32_t *)p_reg->DMA.PTR;
+#else
     return (uint32_t *)p_reg->SAMPLE.PTR;
+#endif
 }
 
 #if NRF_PDM_HAS_RATIO_CONFIG

@@ -2,7 +2,8 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(NRFX_MVDMA_ENABLED) || NRFX_CHECK(NRFX_GMVDMA_ENABLED)
+#if NRFX_CHECK(NRFX_MVDMA_ENABLED) || NRFX_CHECK(NRFX_GMVDMA_ENABLED) || \
+    NRFX_CHECK(NRFX_MVDMA110_ENABLED)
 
 #include <nrfx_mvdma.h>
 
@@ -329,6 +330,13 @@ void nrfx_mvdma_irq_handler(void)
 void nrfx_gmvdma_irq_handler(void)
 {
     mvdma_irq_handler(NRF_GMVDMA, &m_cb[NRFX_GMVDMA_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_MVDMA110_ENABLED)
+void nrfx_mvdma_irq_handler(void)
+{
+    mvdma_irq_handler(NRF_MVDMA110, &m_cb[NRFX_MVDMA110_INST_IDX]);
 }
 #endif
 

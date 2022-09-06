@@ -47,6 +47,33 @@ extern "C" {
 #define NRF_SPIM_HAS_FREQUENCY 0
 #endif
 
+#if defined(SPIM_TXD_LIST_LIST_ArrayList) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Symbol indicating whether EasyDMA array list feature is present.
+ *
+ * @todo Add support for Haltium-specific bitmask once it is available
+ */
+#define NRF_SPIM_HAS_ARRAY_LIST 1
+#else
+#define NRF_SPIM_HAS_ARRAY_LIST 0
+#endif
+
+#if defined(SPIM_DMA_RX_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether dedicated DMA register is present. */
+#define NRF_SPIM_HAS_DMA_REG 1
+#else
+#define NRF_SPIM_HAS_DMA_REG 0
+#endif
+
+#if (defined(SPIM_TASKS_DMA_RX_ENABLEMATCH_ENABLEMATCH_Msk) && \
+     defined(SPIM_EVENTS_DMA_RX_END_END_Msk)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SPIM DMA tasks and events are present. */
+#define NRF_SPIM_HAS_DMA_TASKS_EVENTS 1
+#else
+#define NRF_SPIM_HAS_DMA_TASKS_EVENTS 0
+#endif
+
 /**
  * @brief This value can be used as a parameter for the @ref nrf_spim_pins_set
  *        function to specify that a given SPI signal (SCK, MOSI, or MISO)
@@ -134,11 +161,16 @@ typedef enum
 /** @brief SPIM events. */
 typedef enum
 {
-    NRF_SPIM_EVENT_STOPPED = offsetof(NRF_SPIM_Type, EVENTS_STOPPED), ///< SPI transaction has stopped.
-    NRF_SPIM_EVENT_ENDRX   = offsetof(NRF_SPIM_Type, EVENTS_ENDRX),   ///< End of RXD buffer reached.
-    NRF_SPIM_EVENT_END     = offsetof(NRF_SPIM_Type, EVENTS_END),     ///< End of RXD buffer and TXD buffer reached.
-    NRF_SPIM_EVENT_ENDTX   = offsetof(NRF_SPIM_Type, EVENTS_ENDTX),   ///< End of TXD buffer reached.
-    NRF_SPIM_EVENT_STARTED = offsetof(NRF_SPIM_Type, EVENTS_STARTED)  ///< Transaction started.
+    NRF_SPIM_EVENT_STOPPED = offsetof(NRF_SPIM_Type, EVENTS_STOPPED),    ///< SPI transaction has stopped.
+    NRF_SPIM_EVENT_END     = offsetof(NRF_SPIM_Type, EVENTS_END),        ///< End of RXD buffer and TXD buffer reached.
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+    NRF_SPIM_EVENT_ENDRX   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.END), ///< End of RXD buffer reached.
+    NRF_SPIM_EVENT_ENDTX   = offsetof(NRF_SPIM_Type, EVENTS_DMA.TX.END), ///< End of TXD buffer reached.
+#else
+    NRF_SPIM_EVENT_ENDRX   = offsetof(NRF_SPIM_Type, EVENTS_ENDRX),      ///< End of RXD buffer reached.
+    NRF_SPIM_EVENT_ENDTX   = offsetof(NRF_SPIM_Type, EVENTS_ENDTX),      ///< End of TXD buffer reached.
+#endif
+    NRF_SPIM_EVENT_STARTED = offsetof(NRF_SPIM_Type, EVENTS_STARTED)     ///< Transaction started.
 } nrf_spim_event_t;
 
 /**
@@ -154,15 +186,20 @@ typedef enum
 typedef enum
 {
     NRF_SPIM_INT_STOPPED_MASK = SPIM_INTENSET_STOPPED_Msk,  ///< Interrupt on STOPPED event.
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+    NRF_SPIM_INT_ENDRX_MASK   = SPIM_INTENSET_DMARXEND_Msk, ///< Interrupt on ENDRX event.
+    NRF_SPIM_INT_ENDTX_MASK   = SPIM_INTENSET_DMATXEND_Msk, ///< Interrupt on ENDTX event.
+#else
     NRF_SPIM_INT_ENDRX_MASK   = SPIM_INTENSET_ENDRX_Msk,    ///< Interrupt on ENDRX event.
-    NRF_SPIM_INT_END_MASK     = SPIM_INTENSET_END_Msk,      ///< Interrupt on END event.
     NRF_SPIM_INT_ENDTX_MASK   = SPIM_INTENSET_ENDTX_Msk,    ///< Interrupt on ENDTX event.
+#endif
+    NRF_SPIM_INT_END_MASK     = SPIM_INTENSET_END_Msk,      ///< Interrupt on END event.
     NRF_SPIM_INT_STARTED_MASK = SPIM_INTENSET_STARTED_Msk,  ///< Interrupt on STARTED event.
-    NRF_SPIM_ALL_INTS_MASK    = SPIM_INTENSET_STOPPED_Msk |
-                                SPIM_INTENSET_ENDRX_Msk   |
-                                SPIM_INTENSET_END_Msk     |
-                                SPIM_INTENSET_ENDTX_Msk   |
-                                SPIM_INTENSET_STARTED_Msk   ///< All SPIM interrupts.
+    NRF_SPIM_ALL_INTS_MASK    = NRF_SPIM_INT_STOPPED_MASK |
+                                NRF_SPIM_INT_ENDRX_MASK   |
+                                NRF_SPIM_INT_ENDTX_MASK   |
+                                NRF_SPIM_INT_END_MASK     |
+                                NRF_SPIM_INT_STARTED_MASK   ///< All SPIM interrupts.
 } nrf_spim_int_mask_t;
 
 /** @brief SPI master data rates. */
@@ -636,6 +673,7 @@ NRF_STATIC_INLINE void nrf_spim_configure(NRF_SPIM_Type *      p_reg,
 NRF_STATIC_INLINE void nrf_spim_orc_set(NRF_SPIM_Type * p_reg,
                                         uint8_t         orc);
 
+#if NRF_SPIM_HAS_ARRAY_LIST
 /**
  * @brief Function for enabling the TX list feature.
  *
@@ -663,6 +701,7 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_enable(NRF_SPIM_Type * p_reg);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg);
+#endif
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -885,36 +924,62 @@ NRF_STATIC_INLINE void nrf_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
                                               uint8_t const * p_buffer,
                                               size_t          length)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.TX.PTR    = (uint32_t)p_buffer;
+    p_reg->DMA.TX.MAXCNT = length;
+#else
     p_reg->TXD.PTR    = (uint32_t)p_buffer;
     p_reg->TXD.MAXCNT = length;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_tx_amount_get(NRF_SPIM_Type const * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    return p_reg->DMA.TX.AMOUNT;
+#else
     return p_reg->TXD.AMOUNT;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_tx_maxcnt_get(NRF_SPIM_Type const * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    return p_reg->DMA.TX.MAXCNT;
+#else
     return p_reg->TXD.MAXCNT;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_rx_buffer_set(NRF_SPIM_Type * p_reg,
                                               uint8_t * p_buffer,
                                               size_t    length)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    p_reg->DMA.RX.PTR    = (uint32_t)p_buffer;
+    p_reg->DMA.RX.MAXCNT = length;
+#else
     p_reg->RXD.PTR    = (uint32_t)p_buffer;
     p_reg->RXD.MAXCNT = length;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_rx_amount_get(NRF_SPIM_Type const * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    return p_reg->DMA.RX.AMOUNT;
+#else
     return p_reg->RXD.AMOUNT;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_rx_maxcnt_get(NRF_SPIM_Type const * p_reg)
 {
+#if NRF_SPIM_HAS_DMA_REG
+    return p_reg->DMA.RX.MAXCNT;
+#else
     return p_reg->RXD.MAXCNT;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_configure(NRF_SPIM_Type *      p_reg,
@@ -955,6 +1020,7 @@ NRF_STATIC_INLINE void nrf_spim_orc_set(NRF_SPIM_Type * p_reg,
     p_reg->ORC = orc;
 }
 
+#if NRF_SPIM_HAS_ARRAY_LIST
 NRF_STATIC_INLINE void nrf_spim_tx_list_enable(NRF_SPIM_Type * p_reg)
 {
     p_reg->TXD.LIST = SPIM_TXD_LIST_LIST_ArrayList << SPIM_TXD_LIST_LIST_Pos;
@@ -974,6 +1040,7 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
 {
     p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_Disabled << SPIM_RXD_LIST_LIST_Pos;
 }
+#endif
 
 #endif // NRF_DECLARE_ONLY
 

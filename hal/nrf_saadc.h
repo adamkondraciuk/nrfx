@@ -38,6 +38,21 @@ extern "C" {
 #define NRF_SAADC_HAS_PIN_ENUM 0
 #endif
 
+#if defined(SAADC_DMA_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether dedicated DMA register is present. */
+#define NRF_SAADC_HAS_DMA_REG 1
+#else
+#define NRF_SAADC_HAS_DMA_REG 0
+#endif
+
+#if (defined(SAADC_TASKS_DMA_START_START_Msk) && defined(SAADC_EVENTS_DMA_END_END_Msk)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC DMA tasks and events are present. */
+#define NRF_SAADC_HAS_DMA_TASKS_EVENTS 1
+#else
+#define NRF_SAADC_HAS_DMA_TASKS_EVENTS 0
+#endif
+
 #if !NRF_SAADC_HAS_ACQTIME_ENUM
 /** @brief Maximum value of acquire time. */
 #define NRF_SAADC_ACQTIME_MAX SAADC_CH_CONFIG_TACQ_Max
@@ -194,9 +209,14 @@ typedef enum
 /** @brief Analog-to-digital converter tasks. */
 typedef enum
 {
+#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
+    NRF_SAADC_TASK_START           = offsetof(NRF_SAADC_Type, TASKS_DMA.START),       ///< Start the ADC and prepare the result buffer in RAM.
+    NRF_SAADC_TASK_STOP            = offsetof(NRF_SAADC_Type, TASKS_DMA.STOP),        ///< Stop the ADC and terminate any ongoing conversion.
+#else
     NRF_SAADC_TASK_START           = offsetof(NRF_SAADC_Type, TASKS_START),           ///< Start the ADC and prepare the result buffer in RAM.
-    NRF_SAADC_TASK_SAMPLE          = offsetof(NRF_SAADC_Type, TASKS_SAMPLE),          ///< Take one ADC sample. If scan is enabled, all channels are sampled.
     NRF_SAADC_TASK_STOP            = offsetof(NRF_SAADC_Type, TASKS_STOP),            ///< Stop the ADC and terminate any ongoing conversion.
+#endif
+    NRF_SAADC_TASK_SAMPLE          = offsetof(NRF_SAADC_Type, TASKS_SAMPLE),          ///< Take one ADC sample. If scan is enabled, all channels are sampled.
     NRF_SAADC_TASK_CALIBRATEOFFSET = offsetof(NRF_SAADC_Type, TASKS_CALIBRATEOFFSET), ///< Starts offset auto-calibration.
 } nrf_saadc_task_t;
 
@@ -204,7 +224,11 @@ typedef enum
 typedef enum
 {
     NRF_SAADC_EVENT_STARTED       = offsetof(NRF_SAADC_Type, EVENTS_STARTED),       ///< The ADC has started.
+#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
+    NRF_SAADC_EVENT_END           = offsetof(NRF_SAADC_Type, EVENTS_DMA.END),       ///< The ADC has filled up the result buffer.
+#else
     NRF_SAADC_EVENT_END           = offsetof(NRF_SAADC_Type, EVENTS_END),           ///< The ADC has filled up the result buffer.
+#endif
     NRF_SAADC_EVENT_DONE          = offsetof(NRF_SAADC_Type, EVENTS_DONE),          ///< A conversion task has been completed.
     NRF_SAADC_EVENT_RESULTDONE    = offsetof(NRF_SAADC_Type, EVENTS_RESULTDONE),    ///< A result is ready to get transferred to RAM.
     NRF_SAADC_EVENT_CALIBRATEDONE = offsetof(NRF_SAADC_Type, EVENTS_CALIBRATEDONE), ///< Calibration is complete.
@@ -231,7 +255,11 @@ typedef enum
 typedef enum
 {
     NRF_SAADC_INT_STARTED       = SAADC_INTENSET_STARTED_Msk,       ///< Interrupt on EVENTS_STARTED event.
+#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
+    NRF_SAADC_INT_END           = SAADC_INTENSET_DMAEND_Msk,        ///< Interrupt on EVENTS_END event.
+#else
     NRF_SAADC_INT_END           = SAADC_INTENSET_END_Msk,           ///< Interrupt on EVENTS_END event.
+#endif
     NRF_SAADC_INT_DONE          = SAADC_INTENSET_DONE_Msk,          ///< Interrupt on EVENTS_DONE event.
     NRF_SAADC_INT_RESULTDONE    = SAADC_INTENSET_RESULTDONE_Msk,    ///< Interrupt on EVENTS_RESULTDONE event.
     NRF_SAADC_INT_CALIBRATEDONE = SAADC_INTENSET_CALIBRATEDONE_Msk, ///< Interrupt on EVENTS_CALIBRATEDONE event.
@@ -834,24 +862,41 @@ NRF_STATIC_INLINE void nrf_saadc_buffer_init(NRF_SAADC_Type *    p_reg,
                                              nrf_saadc_value_t * p_buffer,
                                              uint32_t            size)
 {
+#if NRF_SAADC_HAS_DMA_REG
+    p_reg->DMA.PTR = (uint32_t)p_buffer;
+    p_reg->DMA.MAXCNT = size;
+#else
     p_reg->RESULT.PTR = (uint32_t)p_buffer;
     p_reg->RESULT.MAXCNT = size;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_saadc_buffer_pointer_set(NRF_SAADC_Type *    p_reg,
                                                     nrf_saadc_value_t * p_buffer)
 {
+#if NRF_SAADC_HAS_DMA_REG
+    p_reg->DMA.PTR = (uint32_t)p_buffer;
+#else
     p_reg->RESULT.PTR = (uint32_t)p_buffer;
+#endif
 }
 
 NRF_STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(NRF_SAADC_Type const * p_reg)
 {
+#if NRF_SAADC_HAS_DMA_REG
+    return (nrf_saadc_value_t *)p_reg->DMA.PTR;
+#else
     return (nrf_saadc_value_t *)p_reg->RESULT.PTR;
+#endif
 }
 
 NRF_STATIC_INLINE uint16_t nrf_saadc_amount_get(NRF_SAADC_Type const * p_reg)
 {
+#if NRF_SAADC_HAS_DMA_REG
+    return p_reg->DMA.AMOUNT;
+#else
     return p_reg->RESULT.AMOUNT;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_saadc_resolution_set(NRF_SAADC_Type *       p_reg,

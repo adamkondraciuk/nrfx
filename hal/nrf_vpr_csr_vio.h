@@ -17,7 +17,7 @@ extern "C" {
  *          and Status Registers for VPR IO (VPR CSR VIO).
  */
 
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
 /** @brief Shift sizes for output. */
 typedef enum
 {
@@ -100,7 +100,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_toggle_set(uint16_t mask);
  */
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void);
 
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
 /**
  * @brief Function for getting the input mode.
  *
@@ -206,7 +206,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_combined_toggle_set(uint32_t mask);
  */
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void);
 
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
 /**
  * @brief Function for getting the configuration of output mode.
  *
@@ -327,7 +327,7 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
     return csr_read(VPRCSR_NORDIC_IN);
 }
 
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
 NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void)
 {
     return csr_read(VPRCSR_NORDIC_INMODE);
@@ -401,7 +401,7 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void)
             >> VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Pos) == VPRCSR_NORDIC_OUTBDS_DIRTYBIT_DIRTY;
 }
 
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t * p_mode)
 {
     uint32_t reg = csr_read(VPRCSR_NORDIC_OUTMODE);

@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the SPIS peripheral.
  */
 
+#if defined(SPIS_DMA_TX_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether dedicated DMA register is present. */
+#define NRF_SPIS_HAS_DMA_REG 1
+#else
+#define NRF_SPIS_HAS_DMA_REG 0
+#endif
+
 /**
  * @brief Macro getting pointer to the structure of registers of the SPIS peripheral.
  *
@@ -603,6 +610,9 @@ NRF_STATIC_INLINE void nrf_spis_tx_buffer_set(NRF_SPIS_Type * p_reg,
 #if defined (NRF51)
     p_reg->TXDPTR = (uint32_t)p_buffer;
     p_reg->MAXTX  = length;
+#elif NRF_SPIS_HAS_DMA_REG
+    p_reg->DMA.TX.PTR    = (uint32_t)p_buffer;
+    p_reg->DMA.TX.MAXCNT = length;
 #else
     p_reg->TXD.PTR    = (uint32_t)p_buffer;
     p_reg->TXD.MAXCNT = length;
@@ -616,6 +626,9 @@ NRF_STATIC_INLINE void nrf_spis_rx_buffer_set(NRF_SPIS_Type * p_reg,
 #if defined (NRF51)
     p_reg->RXDPTR = (uint32_t)p_buffer;
     p_reg->MAXRX  = length;
+#elif NRF_SPIS_HAS_DMA_REG
+    p_reg->DMA.RX.PTR    = (uint32_t)p_buffer;
+    p_reg->DMA.RX.MAXCNT = length;
 #else
     p_reg->RXD.PTR    = (uint32_t)p_buffer;
     p_reg->RXD.MAXCNT = length;
@@ -626,6 +639,8 @@ NRF_STATIC_INLINE size_t nrf_spis_tx_amount_get(NRF_SPIS_Type const * p_reg)
 {
 #if defined (NRF51)
     return p_reg->AMOUNTTX;
+#elif NRF_SPIS_HAS_DMA_REG
+    return p_reg->DMA.TX.AMOUNT;
 #else
     return p_reg->TXD.AMOUNT;
 #endif
@@ -635,6 +650,8 @@ NRF_STATIC_INLINE size_t nrf_spis_rx_amount_get(NRF_SPIS_Type const * p_reg)
 {
 #if defined (NRF51)
     return p_reg->AMOUNTRX;
+#elif NRF_SPIS_HAS_DMA_REG
+    return p_reg->DMA.RX.AMOUNT;
 #else
     return p_reg->RXD.AMOUNT;
 #endif

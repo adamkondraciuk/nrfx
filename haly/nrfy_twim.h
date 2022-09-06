@@ -33,6 +33,13 @@ uint32_t __nrfy_internal_twim_events_process(NRF_TWIM_Type *               p_reg
  * @brief   Hardware access layer with cache and barrier support for managing the TWIM peripheral.
  */
 
+#if NRF_TWIM_HAS_ARRAY_LIST || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_TWIM_HAS_ARRAY_LIST} */
+#define NRFY_TWIM_HAS_ARRAY_LIST 1
+#else
+#define NRFY_TWIM_HAS_ARRAY_LIST 0
+#endif
+
 /** @brief TWIM pins configuration structure. */
 typedef struct
 {
@@ -330,6 +337,7 @@ NRFY_STATIC_INLINE void nrfy_twim_stop(NRF_TWIM_Type * p_reg)
     nrf_barrier_w();
 }
 
+#if NRFY_TWIM_HAS_ARRAY_LIST
 /**
  * @brief Function for enabling or disabling the TX list feature.
  *
@@ -367,6 +375,7 @@ NRFY_STATIC_INLINE void nrfy_twim_rx_list_set(NRF_TWIM_Type * p_reg, bool enable
     }
     nrf_barrier_w();
 }
+#endif
 
 /**
  * @brief Function for setting the TWIM pins configuration.
@@ -591,6 +600,7 @@ NRFY_STATIC_INLINE size_t nrfy_twim_rxd_amount_get(NRF_TWIM_Type const * p_reg)
     return amount;
 }
 
+#if NRFY_TWIM_HAS_ARRAY_LIST
 /** @refhal{nrf_twim_tx_list_enable} */
 NRFY_STATIC_INLINE void nrfy_twim_tx_list_enable(NRF_TWIM_Type * p_reg)
 {
@@ -618,6 +628,7 @@ NRFY_STATIC_INLINE void nrfy_twim_rx_list_disable(NRF_TWIM_Type * p_reg)
     nrf_twim_rx_list_disable(p_reg);
     nrf_barrier_w();
 }
+#endif
 
 /** @} */
 

@@ -290,19 +290,19 @@ uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const *         p_instance,
     nrfy_pwm_loop_set(p_instance->p_reg,
         (playback_count / 2) + (odd ? 1 : 0));
 
-    uint32_t shorts_mask;
+    uint32_t shorts_mask = 0;
     if (flags & NRFX_PWM_FLAG_STOP)
     {
         shorts_mask = NRF_PWM_SHORT_LOOPSDONE_STOP_MASK;
     }
     else if (flags & NRFX_PWM_FLAG_LOOP)
     {
+#if NRF_PWM_HAS_SHORT_LOOPSDONE_SEQSTART
         shorts_mask = odd ? NRF_PWM_SHORT_LOOPSDONE_SEQSTART1_MASK
                           : NRF_PWM_SHORT_LOOPSDONE_SEQSTART0_MASK;
-    }
-    else
-    {
-        shorts_mask = 0;
+#else
+        NRFX_ASSERT(0);
+#endif
     }
     nrfy_pwm_shorts_set(p_instance->p_reg, shorts_mask);
 
@@ -331,18 +331,18 @@ uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const *         p_instance,
     nrfy_pwm_sequence_set(p_instance->p_reg, 1, p_sequence_1);
     nrfy_pwm_loop_set(p_instance->p_reg, playback_count);
 
-    uint32_t shorts_mask;
+    uint32_t shorts_mask = 0;
     if (flags & NRFX_PWM_FLAG_STOP)
     {
         shorts_mask = NRF_PWM_SHORT_LOOPSDONE_STOP_MASK;
     }
     else if (flags & NRFX_PWM_FLAG_LOOP)
     {
+#if NRF_PWM_HAS_SHORT_LOOPSDONE_SEQSTART
         shorts_mask = NRF_PWM_SHORT_LOOPSDONE_SEQSTART0_MASK;
-    }
-    else
-    {
-        shorts_mask = 0;
+#else
+        NRFX_ASSERT(0);
+#endif
     }
     nrfy_pwm_shorts_set(p_instance->p_reg, shorts_mask);
 

@@ -445,6 +445,17 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
             return err_code;
     }
 
+#if !NRFY_TWIM_HAS_ARRAY_LIST
+    if ((NRFX_TWIM_FLAG_TX_POSTINC | NRFX_TWIM_FLAG_RX_POSTINC) & flags)
+    {
+        err_code = NRFX_ERROR_NOT_SUPPORTED;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
+#endif
+
     /* Block TWI interrupts to ensure that function is not interrupted by TWI interrupt. */
     nrfy_twim_int_disable(p_twim, NRF_TWIM_ALL_INTS_MASK);
     if (p_cb->busy)
@@ -472,8 +483,10 @@ static nrfx_err_t twim_xfer(twim_control_block_t        * p_cb,
     nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_ERROR);
     nrfy_twim_event_clear(p_twim, NRF_TWIM_EVENT_STOPPED);
 
+#if NRFY_TWIM_HAS_ARRAY_LIST
     nrfy_twim_tx_list_set(p_twim, NRFX_TWIM_FLAG_TX_POSTINC & flags);
     nrfy_twim_rx_list_set(p_twim, NRFX_TWIM_FLAG_RX_POSTINC & flags);
+#endif
     switch (p_xfer_desc->type)
     {
         case NRFX_TWIM_XFER_TXTX:

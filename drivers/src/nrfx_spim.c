@@ -853,8 +853,10 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
     }
 #endif
 
+#if NRFY_SPIM_HAS_ARRAY_LIST
     nrfy_spim_tx_list_set(p_spim, NRFX_SPIM_FLAG_TX_POSTINC & flags);
     nrfy_spim_rx_list_set(p_spim, NRFX_SPIM_FLAG_RX_POSTINC & flags);
+#endif
 
     nrfy_spim_xfer_desc_t xfer_desc = *p_xfer_desc;
 #if NRFX_CHECK(NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
@@ -915,6 +917,17 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const *           p_instance,
                 (p_cb->ss_pin == NRF_SPIM_PIN_NOT_CONNECTED));
 
     nrfx_err_t err_code = NRFX_SUCCESS;
+
+#if !NRFY_SPIM_HAS_ARRAY_LIST
+    if ((NRFX_SPIM_FLAG_TX_POSTINC | NRFX_SPIM_FLAG_RX_POSTINC) & flags)
+    {
+        err_code = NRFX_ERROR_NOT_SUPPORTED;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
+#endif
 
     if (p_cb->transfer_in_progress)
     {

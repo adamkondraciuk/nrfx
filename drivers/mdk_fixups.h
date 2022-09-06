@@ -6,6 +6,113 @@
 #endif
 
 #if defined(HALTIUM_XXAA)
+
+#if defined(NRF9230_XXAA)
+/* HM-17600 */
+typedef struct {
+  __IM uint32_t RESERVED00[1];
+  __OM uint32_t TASKS_STOP;
+  __IM uint32_t RESERVED01[1];
+  __OM uint32_t TASKS_SUSPEND;
+  __OM uint32_t TASKS_RESUME;
+  __IM uint32_t RESERVED1[5];
+  __OM NRF_TWIM_TASKS_DMA_Type TASKS_DMA;
+  __IM uint32_t RESERVED2[13];
+  __IOM uint32_t SUBSCRIBE_SUSPEND;
+  __IOM uint32_t SUBSCRIBE_RESUME;
+  __IM uint32_t RESERVED3[5];
+  __IOM NRF_TWIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;
+  __IM uint32_t RESERVED4[11];
+  __IOM uint32_t EVENTS_STOPPED;
+  __IM uint32_t RESERVED5[3];
+  __IOM uint32_t EVENTS_ERROR;
+  __IM uint32_t RESERVED6[2];
+  __IOM uint32_t EVENTS_BB;
+  __IM uint32_t RESERVED7;
+  __IOM uint32_t EVENTS_SUSPENDED;
+  __IM uint32_t RESERVED8[2];
+  __IOM uint32_t EVENTS_LASTRX;
+  __IOM uint32_t EVENTS_LASTTX;
+  __IM uint32_t RESERVED9[4];
+  __IOM NRF_TWIM_EVENTS_DMA_Type EVENTS_DMA;
+  __IM uint32_t RESERVED10[4];
+  __IOM uint32_t PUBLISH_STOPPED;
+  __IM uint32_t RESERVED11[3];
+  __IOM uint32_t PUBLISH_ERROR;
+  __IM uint32_t RESERVED12[2];
+  __IOM uint32_t PUBLISH_BB;
+  __IM uint32_t RESERVED13;
+  __IOM uint32_t PUBLISH_SUSPENDED;
+  __IM uint32_t RESERVED14[2];
+  __IOM uint32_t PUBLISH_LASTRX;
+  __IOM uint32_t PUBLISH_LASTTX;
+  __IM uint32_t RESERVED15[4];
+  __IOM NRF_TWIM_PUBLISH_DMA_Type PUBLISH_DMA;
+  __IM uint32_t RESERVED16[3];
+  __IOM uint32_t SHORTS;
+  __IM uint32_t RESERVED17[63];
+  __IOM uint32_t INTEN;
+  __IOM uint32_t INTENSET;
+  __IOM uint32_t INTENCLR;
+  __IM uint32_t RESERVED18[110];
+  __IOM uint32_t ERRORSRC;
+  __IM uint32_t RESERVED19[14];
+  __IOM uint32_t ENABLE;
+  __IOM uint32_t CONFIG;
+  __IM uint32_t RESERVED20[6];
+  __IOM uint32_t FMPLUS;
+  __IOM uint32_t FREQUENCY;
+  __IM uint32_t RESERVED21[24];
+  __IOM uint32_t ADDRESS;
+  __IM uint32_t RESERVED22[29];
+  __IOM NRF_TWIM_PSEL_Type PSEL;
+  __IM uint32_t RESERVED23[62];
+  __IOM NRF_TWIM_DMA_Type DMA;
+} NRF_TWIM_Type_fixed;
+
+#if defined(NRF_TWIM130_S)
+#undef NRF_TWIM130_S
+#define NRF_TWIM130_S ((NRF_TWIM_Type_fixed*) NRF_TWIM130_S_BASE)
+#endif
+
+#if defined(NRF_TWIM131_S)
+#undef NRF_TWIM131_S
+#define NRF_TWIM131_S ((NRF_TWIM_Type_fixed*) NRF_TWIM131_S_BASE)
+#endif
+
+#if defined(NRF_TWIM132_S)
+#undef NRF_TWIM132_S
+#define NRF_TWIM132_S ((NRF_TWIM_Type_fixed*) NRF_TWIM132_S_BASE)
+#endif
+
+#if defined(NRF_TWIM133_S)
+#undef NRF_TWIM133_S
+#define NRF_TWIM133_S ((NRF_TWIM_Type_fixed*) NRF_TWIM133_S_BASE)
+#endif
+
+#if defined(NRF_TWIM134_S)
+#undef NRF_TWIM134_S
+#define NRF_TWIM134_S ((NRF_TWIM_Type_fixed*) NRF_TWIM134_S_BASE)
+#endif
+
+#if defined(NRF_TWIM135_S)
+#undef NRF_TWIM135_S
+#define NRF_TWIM135_S ((NRF_TWIM_Type_fixed*) NRF_TWIM135_S_BASE)
+#endif
+
+#if defined(NRF_TWIM136_S)
+#undef NRF_TWIM136_S
+#define NRF_TWIM136_S ((NRF_TWIM_Type_fixed*) NRF_TWIM136_S_BASE)
+#endif
+
+#if defined(NRF_TWIM137_S)
+#undef NRF_TWIM137_S
+#define NRF_TWIM137_S ((NRF_TWIM_Type_fixed*) NRF_TWIM137_S_BASE)
+#endif
+
+#define NRF_TWIM_Type NRF_TWIM_Type_fixed
+#endif
+
 typedef NRF_DOMAINS_t nrf_domain_t;
 
 #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
@@ -254,6 +361,7 @@ typedef enum
 #define SPIM136_EASYDMA_MAXCNT_SIZE 16
 #define SPIM137_EASYDMA_MAXCNT_SIZE 16
 
+#if !defined(NRF9230_XXAA)
 #define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM130_FEATURE_HARDWARE_CSN_PRESENT 0
@@ -264,6 +372,7 @@ typedef enum
 #define SPIM135_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM136_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM137_FEATURE_HARDWARE_CSN_PRESENT 0
+#endif
 
 #define SPIM120_FEATURE_DCX_PRESENT  0
 #define SPIM121_FEATURE_DCX_PRESENT  0
@@ -276,6 +385,7 @@ typedef enum
 #define SPIM136_FEATURE_DCX_PRESENT  0
 #define SPIM137_FEATURE_DCX_PRESENT  0
 
+#if !defined(NRF9230_XXAA)
 #define SPIM120_FEATURE_RXDELAY_PRESENT  0
 #define SPIM121_FEATURE_RXDELAY_PRESENT  0
 #define SPIM130_FEATURE_RXDELAY_PRESENT  0
@@ -286,6 +396,7 @@ typedef enum
 #define SPIM135_FEATURE_RXDELAY_PRESENT  0
 #define SPIM136_FEATURE_RXDELAY_PRESENT  0
 #define SPIM137_FEATURE_RXDELAY_PRESENT  0
+#endif
 
 #define SPIS120_EASYDMA_MAXCNT_SIZE 16
 #define SPIS130_EASYDMA_MAXCNT_SIZE 16
@@ -319,7 +430,7 @@ typedef enum
 #define TIMER136_MAX_SIZE 32
 #define TIMER137_MAX_SIZE 32
 
-#if defined(NRF_RADIOCORE)
+#if defined(NRF_RADIOCORE) && !defined(NRF9230_XXAA)
 #define TIMER020_CC_NUM 6
 #define TIMER021_CC_NUM 6
 #define TIMER022_CC_NUM 6
@@ -327,7 +438,7 @@ typedef enum
 #define TIMER020_MAX_SIZE 32
 #define TIMER021_MAX_SIZE 32
 #define TIMER022_MAX_SIZE 32
-#endif // defined(NRF_RADIOCORE)
+#endif
 
 #define NRF_VPR_CLIC_PRIO_COUNT 4
 #define CLIC_CLIC_CLICCFG_NMBITS_ModeMU  1
