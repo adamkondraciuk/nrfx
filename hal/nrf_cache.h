@@ -23,6 +23,13 @@ extern "C" {
 #define NRF_CACHE_HAS_CACHEDATA 0
 #endif
 
+#if defined(CACHEINFO_SET_WAY_TAG_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Presence of the CACHEINFO feature. */
+#define NRF_CACHE_HAS_CACHEINFO 1
+#else
+#define NRF_CACHE_HAS_CACHEINFO 0
+#endif
+
 #if defined(CACHE_TASKS_INVALIDATECACHE_TASKS_INVALIDATECACHE_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether cache/line tasks are supported */
 #define NRF_CACHE_HAS_TASKS 1
@@ -237,6 +244,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
                                               uint8_t                    word);
 #endif
 
+#if NRF_CACHE_HAS_CACHEINFO
 /**
  * @brief Function for getting the tag associated with the specified set and way.
  *
@@ -277,6 +285,7 @@ NRF_STATIC_INLINE bool nrf_cache_line_validity_check(NRF_CACHEINFO_Type const * 
  * @return The most recently used way in the specified set.
  */
 NRF_STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, uint32_t set);
+#endif
 
 #if NRF_CACHE_HAS_TASKS
 /**
@@ -467,6 +476,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
 }
 #endif
 
+#if NRF_CACHE_HAS_CACHEINFO
 NRF_STATIC_INLINE uint32_t nrf_cache_tag_get(NRF_CACHEINFO_Type const * p_reg,
                                              uint32_t                   set,
                                              uint8_t                    way)
@@ -485,6 +495,7 @@ NRF_STATIC_INLINE uint8_t nrf_cache_mru_get(NRF_CACHEINFO_Type const * p_reg, ui
 {
     return ((p_reg->SET[set].WAY[0] & CACHEINFO_SET_WAY_MRU_Msk) >> CACHEINFO_SET_WAY_MRU_Pos);
 }
+#endif
 
 #if NRF_CACHE_HAS_TASKS
 NRF_STATIC_INLINE void nrf_cache_lineaddr_set(NRF_CACHE_Type * p_reg, uint32_t addr)
