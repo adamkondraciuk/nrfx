@@ -355,6 +355,15 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instan
 }
 #endif // NRFX_DECLARE_ONLY
 
+/**
+ * @brief Macro returning TIMER interrupt handler.
+ *
+ * param[in] idx TIMER index.
+ *
+ * @return Interrupt handler.
+ */
+#define NRFX_TIMER_INST_HANDLER_GET(idx) NRFX_CONCAT_3(nrfx_timer_, idx, _irq_handler)
+
 /** @} */
 
 

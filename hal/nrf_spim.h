@@ -10,6 +10,15 @@ extern "C" {
 #endif
 
 /**
+ * @brief Macro getting pointer to the structure of registers of the SPIM peripheral
+ *
+ * @param[in] idx SPIM instance index.
+ *
+ * @return Pointer to the structure of registers of the SPIM peripheral.
+ */
+ #define NRF_SPIM_INST_GET(idx) NRFX_CONCAT_2(NRF_SPIM, idx)
+
+/**
  * @defgroup nrf_spim_hal SPIM HAL
  * @{
  * @ingroup nrf_spim

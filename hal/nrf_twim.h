@@ -10,6 +10,15 @@ extern "C" {
 #endif
 
 /**
+ * @brief Macro getting pointer to the structure of registers of the TWIM peripheral
+ *
+ * @param[in] idx TWIM instance index.
+ *
+ * @return Pointer to the structure of registers of the TWIM peripheral.
+ */
+ #define NRF_TWIM_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIM, idx)
+
+/**
  * @defgroup nrf_twim_hal TWIM HAL
  * @{
  * @ingroup nrf_twim

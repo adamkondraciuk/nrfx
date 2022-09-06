@@ -10,6 +10,15 @@ extern "C" {
 #endif
 
 /**
+ * @brief Macro getting pointer to the structure of registers of the SPI peripheral
+ *
+ * @param[in] idx SPI instance index.
+ *
+ * @return Pointer to the structure of registers of the SPI peripheral.
+ */
+ #define NRF_SPI_INST_GET(idx) NRFX_CONCAT_2(NRF_SPI, idx)
+
+/**
  * @defgroup nrf_spi_hal SPI HAL
  * @{
  * @ingroup nrf_spi

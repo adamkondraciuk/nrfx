@@ -10,6 +10,15 @@ extern "C" {
 #endif
 
 /**
+ * @brief Macro getting pointer to the structure of registers of the RTC peripheral
+ *
+ * @param[in] idx RTC instance index.
+ *
+ * @return Pointer to the structure of registers of the RTC peripheral.
+ */
+ #define NRF_RTC_INST_GET(idx) NRFX_CONCAT_2(NRF_RTC, idx)
+
+/**
  * @defgroup nrf_rtc_hal RTC HAL
  * @{
  * @ingroup nrf_rtc
