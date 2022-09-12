@@ -81,7 +81,8 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
 
     nrf_timer_mode_set(p_instance->p_reg, p_config->mode);
     nrf_timer_bit_width_set(p_instance->p_reg, p_config->bit_width);
-    nrf_timer_frequency_set(p_instance->p_reg, p_config->frequency);
+    // nrf_timer_frequency_t is mapped to prescaler for 16MHz base clock frequency timers
+    nrf_timer_prescaler_set(p_instance->p_reg, (uint32_t)p_config->frequency);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 
