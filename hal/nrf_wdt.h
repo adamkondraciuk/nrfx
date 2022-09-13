@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the WDT peripheral
+ * @brief Macro getting pointer to the structure of registers of the WDT peripheral.
  *
  * @param[in] idx WDT instance index.
  *

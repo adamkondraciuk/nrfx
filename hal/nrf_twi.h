@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the TWI peripheral
+ * @brief Macro getting pointer to the structure of registers of the TWI peripheral.
  *
  * @param[in] idx TWI instance index.
  *

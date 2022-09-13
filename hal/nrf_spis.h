@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the SPIS peripheral
+ * @brief Macro getting pointer to the structure of registers of the SPIS peripheral.
  *
  * @param[in] idx SPIS instance index.
  *

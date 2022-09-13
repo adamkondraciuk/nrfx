@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the SPIM peripheral
+ * @brief Macro getting pointer to the structure of registers of the SPIM peripheral.
  *
  * @param[in] idx SPIM instance index.
  *

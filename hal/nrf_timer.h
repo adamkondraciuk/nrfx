@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the TIMER peripheral
+ * @brief Macro getting pointer to the structure of registers of the TIMER peripheral.
  *
  * @param[in] idx TIMER instance index.
  *

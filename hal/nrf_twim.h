@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the TWIM peripheral
+ * @brief Macro getting pointer to the structure of registers of the TWIM peripheral.
  *
  * @param[in] idx TWIM instance index.
  *

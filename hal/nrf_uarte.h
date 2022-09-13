@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the UARTE peripheral
+ * @brief Macro getting pointer to the structure of registers of the UARTE peripheral.
  *
  * @param[in] idx UARTE instance index.
  *

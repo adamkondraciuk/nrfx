@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the EGU peripheral
+ * @brief Macro getting pointer to the structure of registers of the EGU peripheral.
  *
  * @param[in] idx EGU instance index.
  *

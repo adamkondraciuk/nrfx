@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the RTC peripheral
+ * @brief Macro getting pointer to the structure of registers of the RTC peripheral.
  *
  * @param[in] idx RTC instance index.
  *

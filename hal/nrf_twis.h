@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the TWIS peripheral
+ * @brief Macro getting pointer to the structure of registers of the TWIS peripheral.
  *
  * @param[in] idx TWIS instance index.
  *

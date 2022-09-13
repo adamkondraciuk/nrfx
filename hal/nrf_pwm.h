@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the PWM peripheral
+ * @brief Macro getting pointer to the structure of registers of the PWM peripheral.
  *
  * @param[in] idx PWM instance index.
  *
