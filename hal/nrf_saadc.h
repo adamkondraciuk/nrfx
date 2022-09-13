@@ -10,15 +10,6 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the SAADC peripheral
- *
- * @param[in] idx SAADC instance index.
- *
- * @return Pointer to the structure of registers of the SAADC peripheral.
- */
- #define NRF_SAADC_INST_GET(idx) NRFX_CONCAT_2(NRF_SAADC, idx)
-
-/**
  * @defgroup nrf_saadc_hal SAADC HAL
  * @{
  * @ingroup nrf_saadc
