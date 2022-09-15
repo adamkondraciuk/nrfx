@@ -70,26 +70,25 @@ typedef enum {
   PendSV_IRQn                            = -2,       /*!<  -2 Pendable request for system service                              */
   SysTick_IRQn                           = -1,       /*!<  -1 System Tick Timer                                                */
 /* ============================================== Processor Specific Interrupts ============================================== */
+  SWI00_IRQn                             = 28,       /*!< 28 SWI00                                                             */
+  SWI01_IRQn                             = 29,       /*!< 29 SWI01                                                             */
+  SWI02_IRQn                             = 30,       /*!< 30 SWI02                                                             */
+  SWI03_IRQn                             = 31,       /*!< 31 SWI03                                                             */
   SPU00_IRQn                             = 32,       /*!< 32 SPU00                                                             */
   MPC00_IRQn                             = 33,       /*!< 33 MPC00                                                             */
   AAR00_CCM00_IRQn                       = 38,       /*!< 38 AAR00_CCM00                                                       */
   ECB00_IRQn                             = 39,       /*!< 39 ECB00                                                             */
   CRACEN_IRQn                            = 40,       /*!< 40 CRACEN                                                            */
   SERIAL00_IRQn                          = 42,       /*!< 42 SERIAL00                                                          */
-  VPR_IRQn                               = 44,       /*!< 44 VPR                                                               */
+  VPR00_IRQn                             = 44,       /*!< 44 VPR00                                                             */
   SPU10_IRQn                             = 64,       /*!< 64 SPU10                                                             */
   TIMER10_IRQn                           = 69,       /*!< 69 TIMER10                                                           */
   RTC10_IRQn                             = 70,       /*!< 70 RTC10                                                             */
   EGU10_IRQn                             = 71,       /*!< 71 EGU10                                                             */
-  AAR30_CCM30_IRQn                       = 72,       /*!< 72 AAR30_CCM30                                                       */
-  ECB30_IRQn                             = 73,       /*!< 73 ECB30                                                             */
+  AAR10_CCM10_IRQn                       = 72,       /*!< 72 AAR10_CCM10                                                       */
+  ECB10_IRQn                             = 73,       /*!< 73 ECB10                                                             */
   RADIO_0_IRQn                           = 74,       /*!< 74 RADIO_0                                                           */
   RADIO_1_IRQn                           = 75,       /*!< 75 RADIO_1                                                           */
-  GPIOTE20_0_IRQn                        = 104,      /*!< 104 GPIOTE20_0                                                       */
-  GPIOTE20_1_IRQn                        = 105,      /*!< 105 GPIOTE20_1                                                       */
-  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
-  GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   SPU20_IRQn                             = 128,      /*!< 128 SPU20                                                            */
   SERIAL20_IRQn                          = 134,      /*!< 134 SERIAL20                                                         */
   SERIAL21_IRQn                          = 135,      /*!< 135 SERIAL21                                                         */
@@ -108,10 +107,15 @@ typedef enum {
   SAADC_IRQn                             = 149,      /*!< 149 SAADC                                                            */
   NFCT_IRQn                              = 150,      /*!< 150 NFCT                                                             */
   TEMP_IRQn                              = 151,      /*!< 151 TEMP                                                             */
+  GPIOTE20_0_IRQn                        = 153,      /*!< 153 GPIOTE20_0                                                       */
+  GPIOTE20_1_IRQn                        = 154,      /*!< 154 GPIOTE20_1                                                       */
   TAMPC_IRQn                             = 155,      /*!< 155 TAMPC                                                            */
-  I2S_IRQn                               = 156,      /*!< 156 I2S                                                              */
+  I2S20_IRQn                             = 156,      /*!< 156 I2S20                                                            */
   QDEC20_IRQn                            = 160,      /*!< 160 QDEC20                                                           */
   QDEC21_IRQn                            = 161,      /*!< 161 QDEC21                                                           */
+  GRTC_0_IRQn                            = 162,      /*!< 162 GRTC_0                                                           */
+  GRTC_1_IRQn                            = 163,      /*!< 163 GRTC_1                                                           */
+  GRTC_2_IRQn                            = 164,      /*!< 164 GRTC_2                                                           */
   SPU30_IRQn                             = 192,      /*!< 192 SPU30                                                            */
   SERIAL30_IRQn                          = 196,      /*!< 196 SERIAL30                                                         */
   RTC30_IRQn                             = 197,      /*!< 197 RTC30                                                            */
@@ -121,6 +125,7 @@ typedef enum {
   WDT31_IRQn                             = 201,      /*!< 201 WDT31                                                            */
   GPIOTE30_0_IRQn                        = 203,      /*!< 203 GPIOTE30_0                                                       */
   GPIOTE30_1_IRQn                        = 204,      /*!< 204 GPIOTE30_1                                                       */
+  CLOCK_POWER_IRQn                       = 205,      /*!< 205 CLOCK_POWER                                                      */
 } IRQn_Type;
 
 
@@ -177,11 +182,25 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_APPLICATION_ICACHEDATA_S_BASE 0x12F00000UL
+#define NRF_APPLICATION_ICACHEINFO_S_BASE 0x12F10000UL
+#define NRF_APPLICATION_ICACHE_S_BASE     0xE0082000UL
+#define NRF_APPLICATION_SWI00_S_BASE      0x5001C000UL
+#define NRF_APPLICATION_SWI01_S_BASE      0x5001D000UL
+#define NRF_APPLICATION_SWI02_S_BASE      0x5001E000UL
+#define NRF_APPLICATION_SWI03_S_BASE      0x5001F000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_APPLICATION_ICACHEDATA_S      ((NRF_CACHEDATA_Type*)                NRF_APPLICATION_ICACHEDATA_S_BASE)
+#define NRF_APPLICATION_ICACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_ICACHEINFO_S_BASE)
+#define NRF_APPLICATION_ICACHE_S          ((NRF_CACHE_Type*)                    NRF_APPLICATION_ICACHE_S_BASE)
+#define NRF_APPLICATION_SWI00_S           ((NRF_SWI_Type*)                      NRF_APPLICATION_SWI00_S_BASE)
+#define NRF_APPLICATION_SWI01_S           ((NRF_SWI_Type*)                      NRF_APPLICATION_SWI01_S_BASE)
+#define NRF_APPLICATION_SWI02_S           ((NRF_SWI_Type*)                      NRF_APPLICATION_SWI02_S_BASE)
+#define NRF_APPLICATION_SWI03_S           ((NRF_SWI_Type*)                      NRF_APPLICATION_SWI03_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
@@ -189,6 +208,13 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
+  #define NRF_APPLICATION_ICACHEDATA              NRF_APPLICATION_ICACHEDATA_S
+  #define NRF_APPLICATION_ICACHEINFO              NRF_APPLICATION_ICACHEINFO_S
+  #define NRF_APPLICATION_ICACHE                  NRF_APPLICATION_ICACHE_S
+  #define NRF_APPLICATION_SWI00                   NRF_APPLICATION_SWI00_S
+  #define NRF_APPLICATION_SWI01                   NRF_APPLICATION_SWI01_S
+  #define NRF_APPLICATION_SWI02                   NRF_APPLICATION_SWI02_S
+  #define NRF_APPLICATION_SWI03                   NRF_APPLICATION_SWI03_S
 #endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */
@@ -196,6 +222,13 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_APPLICATION                               /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_ICACHEDATA                          NRF_APPLICATION_ICACHEDATA
+  #define NRF_ICACHEINFO                          NRF_APPLICATION_ICACHEINFO
+  #define NRF_ICACHE                              NRF_APPLICATION_ICACHE
+  #define NRF_SWI00                               NRF_APPLICATION_SWI00
+  #define NRF_SWI01                               NRF_APPLICATION_SWI01
+  #define NRF_SWI02                               NRF_APPLICATION_SWI02
+  #define NRF_SWI03                               NRF_APPLICATION_SWI03
 #endif                                               /*!< NRF_APPLICATION                                                      */
 
 /* ========================================== End of section using anonymous unions ========================================== */
