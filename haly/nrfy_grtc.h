@@ -664,12 +664,15 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
                                                                 uint32_t        mask)
 {
     uint32_t event_mask = 0;
+    uint32_t channel_mask = NRF_GRTC_SYSCOUNTER_ALL_CHANNELS_INT_MASK & mask;
 
     nrf_barrier_r();
-    for (uint8_t cc_channel = 0; cc_channel < NRF_GRTC_SYSCOUNTER_CC_COUNT; cc_channel++)
+    while (channel_mask)
     {
+        uint8_t cc_channel = NRF_CTZ(channel_mask);
         nrf_grtc_event_t event = nrf_grtc_sys_counter_compare_event_get(cc_channel);
         (void)__nrfy_internal_grtc_event_handle(p_reg, mask, event, &event_mask);
+        channel_mask &= ~NRF_GRTC_CHANNEL_INT_MASK(cc_channel);
     }
 #if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
     (void)__nrfy_internal_grtc_event_handle(p_reg,
