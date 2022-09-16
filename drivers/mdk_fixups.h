@@ -259,7 +259,7 @@ typedef enum
     #endif
 #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
-#if defined(NRF_TRUSTZONE_NONSECURE)
+#if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
 #define NRF_GPIOTE130_IRQn      GPIOTE130_0_IRQn
 #define nrfx_gpiote_irq_handler GPIOTE130_0_IRQHandler
 #else
