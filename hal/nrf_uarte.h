@@ -74,8 +74,8 @@ typedef enum
     NRF_UARTE_EVENT_TXSTOPPED = offsetof(NRF_UARTE_Type, EVENTS_TXSTOPPED),    ///< Transmitted stopped.
 #if NRF_UARTE_HAS_DMA_TASKS_EVENTS
     NRF_UARTE_EVENT_ENDRX     = offsetof(NRF_UARTE_Type, EVENTS_DMA.RX.END),   ///< Receive buffer is filled up.
-    NRF_UARTE_EVENT_ENDTX     = offsetof(NRF_UARTE_Type, EVENTS_DMA.RX.READY), ///< Last TX byte transmitted.
-    NRF_UARTE_EVENT_RXSTARTED = offsetof(NRF_UARTE_Type, EVENTS_DMA.TX.END),   ///< Receiver has started.
+    NRF_UARTE_EVENT_ENDTX     = offsetof(NRF_UARTE_Type, EVENTS_DMA.TX.END),   ///< Last TX byte transmitted.
+    NRF_UARTE_EVENT_RXSTARTED = offsetof(NRF_UARTE_Type, EVENTS_DMA.RX.READY), ///< Receiver has started.
     NRF_UARTE_EVENT_TXSTARTED = offsetof(NRF_UARTE_Type, EVENTS_DMA.TX.READY), ///< Transmitter has started.
 #else
     NRF_UARTE_EVENT_ENDRX     = offsetof(NRF_UARTE_Type, EVENTS_ENDRX),        ///< Receive buffer is filled up.
