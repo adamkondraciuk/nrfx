@@ -4,7 +4,9 @@
 #define NRF_CCM_H__
 
 #include <nrfx.h>
+#ifdef EASYVDMA_PRESENT
 #include <helpers/nrf_vdma.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
