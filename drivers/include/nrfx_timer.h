@@ -100,8 +100,7 @@ typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
  *
  * @param[in] p_instance          Pointer to the driver instance structure.
  * @param[in] p_config            Pointer to the structure with the initial configuration.
- * @param[in] timer_event_handler Event handler provided by the user.
- *                                Must not be NULL.
+ * @param[in] timer_event_handler Event handler provided by the user. Can be NULL.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_INVALID_STATE The instance is already initialized.

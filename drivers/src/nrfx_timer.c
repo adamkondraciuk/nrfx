@@ -50,7 +50,6 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
     NRFX_ASSERT(p_instance->p_reg != NRF_TIMER0);
 #endif
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(timer_event_handler);
 
     nrfx_err_t err_code;
 
@@ -252,7 +251,10 @@ static void irq_handler(NRF_TIMER_Type        * p_reg,
         {
             nrf_timer_event_clear(p_reg, event);
             NRFX_LOG_DEBUG("Compare event, channel: %d.", i);
-            p_cb->handler(event, p_cb->context);
+            if (p_cb->handler)
+            {
+                p_cb->handler(event, p_cb->context);
+            }
         }
     }
 }
