@@ -54,10 +54,10 @@ enum {
 /** @brief Structure describing copy request for the MVDMA driver. */
 typedef struct
 {
-    uint8_t const * p_source;  ///< Pointer to the source buffer.
-    uint8_t *       p_sink;    ///< Pointer to the sink buffer.
-    size_t          size;      ///< Number of bytes to copy.
-    void *          p_context; ///< Request context.
+    void const * p_source;  ///< Pointer to the source buffer.
+    void *       p_sink;    ///< Pointer to the sink buffer.
+    size_t       size;      ///< Number of bytes to copy.
+    void *       p_context; ///< Request context.
 } nrfx_mvdma_copy_request_t;
 
 /** @brief Structure describing list execution request for the MVDMA driver. */

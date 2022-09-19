@@ -16,6 +16,9 @@ extern "C" {
  * @brief   Helper layer that provides the common functionality for Vector DMA (VDMA).
  */
 
+/** @brief Maximum size of VDMA buffer. */
+#define NRF_VDMA_BUFFER_SIZE_MASK VDMADESCRIPTOR_CONFIG_CNT_Msk
+
 /** @brief Structure describing VDMA job. */
 typedef struct __PACKED
 {
@@ -63,9 +66,10 @@ typedef enum
 #define NRF_VDMA_REDUCED_JOB_SIZE(count) (count + 2)
 
 /** @brief Macro for defining initial element of reduced job list. */
-#define NRF_VDMA_REDUCED_JOB_INIT_ELEMENT(p_buffer, size, attribute)                         \
-        (uint32_t)p_buffer,                                                                  \
-        (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attribute) << 24) | (size & 0x00FFFFFF))
+#define NRF_VDMA_REDUCED_JOB_INIT_ELEMENT(p_buffer, size, attribute) \
+        (uint32_t)p_buffer,                                          \
+        (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attribute) <<   \
+                    VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos) | (size & NRF_VDMA_BUFFER_SIZE_MASK))
 
 /**
  * @brief Function for filling the specified structure of the job with given job parameters.
@@ -81,7 +85,7 @@ __STATIC_INLINE void nrf_vdma_job_fill(nrf_vdma_job_t * p_job,
                                        uint8_t          attributes)
 {
     p_job->p_buffer   = (uint8_t *)p_buffer;
-    p_job->size       = (uint32_t)size;
+    p_job->size       = (uint32_t)size & NRF_VDMA_BUFFER_SIZE_MASK;
     p_job->attributes = attributes;
 }
 
@@ -103,8 +107,9 @@ __STATIC_INLINE void nrf_vdma_job_reduced_init(nrf_vdma_job_reduced_t * p_job,
                                                uint8_t                  attributes)
 {
     *p_job       = (uint32_t)p_buffer;
-    *(p_job + 1) = (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attributes) << 24) |
-                              (size & 0x00FFFFFF));
+    *(p_job + 1) = (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attributes) <<
+                                VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos) |
+                                (size & NRF_VDMA_BUFFER_SIZE_MASK));
 }
 
 /**
