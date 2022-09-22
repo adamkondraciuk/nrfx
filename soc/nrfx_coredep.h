@@ -42,7 +42,7 @@
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
-#elif defined(HALTIUM_XXAA)
+#elif defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA)
 /* Development platform (e.g. FPGA) may have actual clock slower than the one
  * declared for the platform. In certain cases it may be convinient to apply
  * this divider to have time accurate delay, otherwise delay is slowed down.
