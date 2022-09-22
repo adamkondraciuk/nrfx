@@ -5,6 +5,30 @@
 #define HALTIUM_XXAA 1
 #endif
 
+#if defined(MOONLIGHT_XXAA)
+    #if defined(NRF_TRUSTZONE_NONSECURE)
+        /** @brief Fixup for the GRTC IRQn lines. */
+        #define GRTC_IRQn       GRTC_0_IRQn
+        #define nrfx_grtc_irq_handler     GRTC_0_IRQHandler
+        #define nrfx_gpiote20_irq_handler GPIOTE20_0_IRQHandler
+        #define nrfx_gpiote30_irq_handler GPIOTE30_0_IRQHandler
+    #else
+        #define GRTC_IRQn       GRTC_1_IRQn
+        #define nrfx_grtc_irq_handler     GRTC_1_IRQHandler
+        #define nrfx_gpiote20_irq_handler GPIOTE20_1_IRQHandler
+        #define nrfx_gpiote30_irq_handler GPIOTE30_1_IRQHandler
+    #endif // defined(NRF_TRUSTZONE_NONSECURE)
+
+    #if defined(DPPIC_PRESENT)
+        #define DPPI_PRESENT
+        // TODO: Establish numbers of DPPI_GROUP_NUM and DPPI_CH_NUM
+        #define DPPI_CH_NUM 8
+        #define DPPI_GROUP_NUM 1
+        // TODO: Add support for NRF_DPPIC00, NRF_DPPIC10, NRF_DPPIC20, NRF_DPPIC30
+         #define NRF_DPPIC NRF_DPPIC00
+    #endif
+#endif
+
 #if defined(HALTIUM_XXAA)
 
 typedef NRF_DOMAINS_t nrf_domain_t;
