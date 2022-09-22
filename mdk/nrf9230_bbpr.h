@@ -83,7 +83,22 @@ typedef enum {
   VPRCLIC_13_IRQn                        = 13,       /*!< 13 VPRCLIC_13                                                        */
   VPRCLIC_14_IRQn                        = 14,       /*!< 14 VPRCLIC_14                                                        */
   VPRCLIC_15_IRQn                        = 15,       /*!< 15 VPRCLIC_15                                                        */
-  VPRTIM_IRQn                            = 16,       /*!< 16 VPRTIM                                                            */
+  VPRCLIC_16_VPRTIM_IRQn                 = 16,       /*!< 16 VPRCLIC_16_VPRTIM                                                 */
+  VPRCLIC_17_IRQn                        = 17,       /*!< 17 VPRCLIC_17                                                        */
+  VPRCLIC_18_IRQn                        = 18,       /*!< 18 VPRCLIC_18                                                        */
+  VPRCLIC_19_IRQn                        = 19,       /*!< 19 VPRCLIC_19                                                        */
+  VPRCLIC_20_IRQn                        = 20,       /*!< 20 VPRCLIC_20                                                        */
+  VPRCLIC_21_IRQn                        = 21,       /*!< 21 VPRCLIC_21                                                        */
+  VPRCLIC_22_IRQn                        = 22,       /*!< 22 VPRCLIC_22                                                        */
+  VPRCLIC_23_IRQn                        = 23,       /*!< 23 VPRCLIC_23                                                        */
+  VPRCLIC_24_IRQn                        = 24,       /*!< 24 VPRCLIC_24                                                        */
+  VPRCLIC_25_IRQn                        = 25,       /*!< 25 VPRCLIC_25                                                        */
+  VPRCLIC_26_IRQn                        = 26,       /*!< 26 VPRCLIC_26                                                        */
+  VPRCLIC_27_IRQn                        = 27,       /*!< 27 VPRCLIC_27                                                        */
+  VPRCLIC_28_IRQn                        = 28,       /*!< 28 VPRCLIC_28                                                        */
+  VPRCLIC_29_IRQn                        = 29,       /*!< 29 VPRCLIC_29                                                        */
+  VPRCLIC_30_IRQn                        = 30,       /*!< 30 VPRCLIC_30                                                        */
+  VPRCLIC_31_IRQn                        = 31,       /*!< 31 VPRCLIC_31                                                        */
   GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GPIOTE131_0_IRQn                       = 106,      /*!< 106 GPIOTE131_0                                                      */
@@ -101,10 +116,8 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
-  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
-  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
@@ -161,14 +174,13 @@ typedef enum {
 /* =========================================================================================================================== */
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
-#define __VPR_REV                    1.1             /*!< VPR Core Revision                                                    */
+#define __VPR_REV                    0.7             /*!< VPR Core Revision                                                    */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< nrf9230_bbpr System Library                                          */

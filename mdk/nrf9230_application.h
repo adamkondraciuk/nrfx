@@ -101,10 +101,8 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
-  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
-  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
@@ -168,7 +166,6 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 #define __NUM_SAUREGIONS               0             /*!< Number of regions                                                    */
@@ -259,10 +256,10 @@ typedef enum {
 
 #define NRF_APPLICATION_UICR_NS           ((NRF_UICR_Type*)                     NRF_APPLICATION_UICR_NS_BASE)
 #define NRF_APPLICATION_BICR_NS           ((NRF_BICR_Type*)                     NRF_APPLICATION_BICR_NS_BASE)
-#define NRF_APPLICATION_ICACHEDATA_S      ((NRF_ICACHEDATA_Type*)               NRF_APPLICATION_ICACHEDATA_S_BASE)
-#define NRF_APPLICATION_ICACHEINFO_S      ((NRF_ICACHEINFO_Type*)               NRF_APPLICATION_ICACHEINFO_S_BASE)
-#define NRF_APPLICATION_DCACHEDATA_S      ((NRF_DCACHEDATA_Type*)               NRF_APPLICATION_DCACHEDATA_S_BASE)
-#define NRF_APPLICATION_DCACHEINFO_S      ((NRF_DCACHEINFO_Type*)               NRF_APPLICATION_DCACHEINFO_S_BASE)
+#define NRF_APPLICATION_ICACHEDATA_S      ((NRF_CACHEDATA_Type*)                NRF_APPLICATION_ICACHEDATA_S_BASE)
+#define NRF_APPLICATION_ICACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_ICACHEINFO_S_BASE)
+#define NRF_APPLICATION_DCACHEDATA_S      ((NRF_CACHEDATA_Type*)                NRF_APPLICATION_DCACHEDATA_S_BASE)
+#define NRF_APPLICATION_DCACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_DCACHEINFO_S_BASE)
 #define NRF_APPLICATION_ETM_NS            ((NRF_ETM_Type*)                      NRF_APPLICATION_ETM_NS_BASE)
 #define NRF_APPLICATION_CTI_S             ((NRF_CTI_Type*)                      NRF_APPLICATION_CTI_S_BASE)
 #define NRF_APPLICATION_CPUC_S            ((NRF_CM33SS_Type*)                   NRF_APPLICATION_CPUC_S_BASE)

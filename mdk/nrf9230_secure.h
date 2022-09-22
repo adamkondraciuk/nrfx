@@ -91,8 +91,9 @@ typedef enum {
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
+  SPU200_IRQn                            = 115,      /*!< 115 SPU200                                                           */
   MPC200_IRQn                            = 124,      /*!< 124 MPC200                                                           */
-  SPU200_SPU210_IRQn                     = 125,      /*!< 125 SPU200_SPU210                                                    */
+  SPU210_IRQn                            = 125,      /*!< 125 SPU210                                                           */
   CTRLAP_IRQn                            = 126,      /*!< 126 CTRLAP                                                           */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   SPU110_IRQn                            = 128,      /*!< 128 SPU110                                                           */
@@ -111,10 +112,8 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
+  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
-  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
-  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   SPU122_IRQn                            = 224,      /*!< 224 SPU122                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
@@ -188,7 +187,6 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 #define __NUM_SAUREGIONS               0             /*!< Number of regions                                                    */
@@ -240,7 +238,6 @@ typedef enum {
 #define NRF_SECURE_DCACHEINFO_S_BASE      0x31F10000UL
 #define NRF_SECURE_CRACENCORE_NS_BASE     0x41800000UL
 #define NRF_SECURE_CRACENCORE_S_BASE      0x51800000UL
-#define NRF_SECURE_MEMCONF200_S_BASE      0xBF014000UL
 #define NRF_SECURE_ETM_NS_BASE            0xE0041000UL
 #define NRF_SECURE_CTI_S_BASE             0xE0042000UL
 #define NRF_SECURE_CPUC_S_BASE            0xE0080000UL
@@ -286,8 +283,9 @@ typedef enum {
 #define NRF_SECURE_IPCT_S_BASE            0x51013000UL
 #define NRF_SECURE_BELLBOARD_NS_BASE      0x4F099000UL
 #define NRF_SECURE_BELLBOARD_S_BASE       0x5F099000UL
-#define NRF_SECURE_MPC200_S_BASE          0xBF007000UL
 #define NRF_SECURE_SPU200_S_BASE          0xBF000000UL
+#define NRF_SECURE_MEMCONF200_S_BASE      0xBF014000UL
+#define NRF_SECURE_MPC200_S_BASE          0xBF007000UL
 #define NRF_SECURE_SPU210_S_BASE          0xBF010000UL
 #define NRF_SECURE_CTRLAP_S_BASE          0xBF015000UL
 #define NRF_SECURE_SPU110_S_BASE          0x5F080000UL
@@ -316,13 +314,12 @@ typedef enum {
 
 #define NRF_SECURE_SICR_S                 ((NRF_SICR_Type*)                     NRF_SECURE_SICR_S_BASE)
 #define NRF_SECURE_RICR_S                 ((NRF_RICR_Type*)                     NRF_SECURE_RICR_S_BASE)
-#define NRF_SECURE_ICACHEDATA_S           ((NRF_ICACHEDATA_Type*)               NRF_SECURE_ICACHEDATA_S_BASE)
-#define NRF_SECURE_ICACHEINFO_S           ((NRF_ICACHEINFO_Type*)               NRF_SECURE_ICACHEINFO_S_BASE)
-#define NRF_SECURE_DCACHEDATA_S           ((NRF_DCACHEDATA_Type*)               NRF_SECURE_DCACHEDATA_S_BASE)
-#define NRF_SECURE_DCACHEINFO_S           ((NRF_DCACHEINFO_Type*)               NRF_SECURE_DCACHEINFO_S_BASE)
+#define NRF_SECURE_ICACHEDATA_S           ((NRF_CACHEDATA_Type*)                NRF_SECURE_ICACHEDATA_S_BASE)
+#define NRF_SECURE_ICACHEINFO_S           ((NRF_CACHEINFO_Type*)                NRF_SECURE_ICACHEINFO_S_BASE)
+#define NRF_SECURE_DCACHEDATA_S           ((NRF_CACHEDATA_Type*)                NRF_SECURE_DCACHEDATA_S_BASE)
+#define NRF_SECURE_DCACHEINFO_S           ((NRF_CACHEINFO_Type*)                NRF_SECURE_DCACHEINFO_S_BASE)
 #define NRF_SECURE_CRACENCORE_NS          ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_NS_BASE)
 #define NRF_SECURE_CRACENCORE_S           ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_S_BASE)
-#define NRF_SECURE_MEMCONF200_S           ((NRF_MEMCONF_Type*)                  NRF_SECURE_MEMCONF200_S_BASE)
 #define NRF_SECURE_ETM_NS                 ((NRF_ETM_Type*)                      NRF_SECURE_ETM_NS_BASE)
 #define NRF_SECURE_CTI_S                  ((NRF_CTI_Type*)                      NRF_SECURE_CTI_S_BASE)
 #define NRF_SECURE_CPUC_S                 ((NRF_CM33SS_Type*)                   NRF_SECURE_CPUC_S_BASE)
@@ -368,8 +365,9 @@ typedef enum {
 #define NRF_SECURE_IPCT_S                 ((NRF_IPCT_Type*)                     NRF_SECURE_IPCT_S_BASE)
 #define NRF_SECURE_BELLBOARD_NS           ((NRF_BELLBOARD_Type*)                NRF_SECURE_BELLBOARD_NS_BASE)
 #define NRF_SECURE_BELLBOARD_S            ((NRF_BELLBOARD_Type*)                NRF_SECURE_BELLBOARD_S_BASE)
-#define NRF_SECURE_MPC200_S               ((NRF_MPC_Type*)                      NRF_SECURE_MPC200_S_BASE)
 #define NRF_SECURE_SPU200_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU200_S_BASE)
+#define NRF_SECURE_MEMCONF200_S           ((NRF_MEMCONF_Type*)                  NRF_SECURE_MEMCONF200_S_BASE)
+#define NRF_SECURE_MPC200_S               ((NRF_MPC_Type*)                      NRF_SECURE_MPC200_S_BASE)
 #define NRF_SECURE_SPU210_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU210_S_BASE)
 #define NRF_SECURE_CTRLAP_S               ((NRF_CTRLAPPERI_Type*)               NRF_SECURE_CTRLAP_S_BASE)
 #define NRF_SECURE_SPU110_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU110_S_BASE)
@@ -419,7 +417,6 @@ typedef enum {
   #define NRF_SECURE_DCACHEDATA                   NRF_SECURE_DCACHEDATA_S
   #define NRF_SECURE_DCACHEINFO                   NRF_SECURE_DCACHEINFO_S
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_S
-  #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_S
   #define NRF_SECURE_ETM                          NRF_SECURE_ETM_NS
   #define NRF_SECURE_CTI                          NRF_SECURE_CTI_S
   #define NRF_SECURE_CPUC                         NRF_SECURE_CPUC_S
@@ -453,8 +450,9 @@ typedef enum {
   #define NRF_SECURE_PCGCM011                     NRF_SECURE_PCGCM011_S
   #define NRF_SECURE_IPCT                         NRF_SECURE_IPCT_S
   #define NRF_SECURE_BELLBOARD                    NRF_SECURE_BELLBOARD_S
-  #define NRF_SECURE_MPC200                       NRF_SECURE_MPC200_S
   #define NRF_SECURE_SPU200                       NRF_SECURE_SPU200_S
+  #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_S
+  #define NRF_SECURE_MPC200                       NRF_SECURE_MPC200_S
   #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_S
   #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_S
   #define NRF_SECURE_SPU110                       NRF_SECURE_SPU110_S
@@ -490,7 +488,6 @@ typedef enum {
   #define NRF_DCACHEDATA                          NRF_SECURE_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_SECURE_DCACHEINFO
   #define NRF_CRACENCORE                          NRF_SECURE_CRACENCORE
-  #define NRF_MEMCONF200                          NRF_SECURE_MEMCONF200
   #define NRF_ETM                                 NRF_SECURE_ETM
   #define NRF_CTI                                 NRF_SECURE_CTI
   #define NRF_CPUC                                NRF_SECURE_CPUC
@@ -524,8 +521,9 @@ typedef enum {
   #define NRF_PCGCM011                            NRF_SECURE_PCGCM011
   #define NRF_IPCT                                NRF_SECURE_IPCT
   #define NRF_BELLBOARD                           NRF_SECURE_BELLBOARD
-  #define NRF_MPC200                              NRF_SECURE_MPC200
   #define NRF_SPU200                              NRF_SECURE_SPU200
+  #define NRF_MEMCONF200                          NRF_SECURE_MEMCONF200
+  #define NRF_MPC200                              NRF_SECURE_MPC200
   #define NRF_SPU210                              NRF_SECURE_SPU210
   #define NRF_CTRLAP                              NRF_SECURE_CTRLAP
   #define NRF_SPU110                              NRF_SECURE_SPU110
