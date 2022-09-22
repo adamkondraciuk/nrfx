@@ -27,6 +27,8 @@
     #include <soc/nrfx_irqs_nrf91.h>
 #elif defined(HALTIUM_XXAA)
     #include <soc/nrfx_irqs_haltium.h>
+#elif defined(MOONLIGHT_XXAA)
+    #include <soc/nrfx_irqs_moonlight.h>
 #else
     #error "Unknown device."
 #endif
