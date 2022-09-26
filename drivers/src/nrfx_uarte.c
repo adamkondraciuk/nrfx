@@ -312,13 +312,13 @@ nrfx_err_t nrfx_uarte_reconfigure(nrfx_uarte_t const *        p_instance,
     {
         return NRFX_ERROR_BUSY;
     }
-    nrf_uarte_disable(p_instance->p_reg);
+    nrfy_uarte_disable(p_instance->p_reg);
     if (p_cb->handler)
     {
         p_cb->p_context = p_config->p_context;
     }
     uarte_configure(p_instance, p_config);
-    nrf_uarte_enable(p_instance->p_reg);
+    nrfy_uarte_enable(p_instance->p_reg);
     return NRFX_SUCCESS;
 }
 
@@ -372,7 +372,7 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
 
     // EasyDMA requires that transfer buffers are placed in DataRAM,
     // signal error if the are not.
-    if (!nrfx_is_in_ram(p_data))
+    if (!nrf_dma_accesible_check(p_instance->p_reg, p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -440,7 +440,7 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
 
     // EasyDMA requires that transfer buffers are placed in DataRAM,
     // signal error if the are not.
-    if (!nrfx_is_in_ram(p_data))
+    if (!nrf_dma_accesible_check(p_instance->p_reg, p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
