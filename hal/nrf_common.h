@@ -136,7 +136,7 @@ NRF_STATIC_INLINE bool nrf_dma_accesible_check(void const * p_reg, void const * 
     else
     {
         /* When peripheral instance is low-speed check whether p_object is placed in GRAM3x */
-        return ((((uint32_t)p_object) & 0xEFFFE000u) == 0x2FC00000u);
+        return ((((uint32_t)p_object) & 0xEFFF8000u) == 0x2FC00000u);
     }
 #else
     (void)p_reg;
