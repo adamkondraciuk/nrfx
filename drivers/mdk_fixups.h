@@ -57,7 +57,7 @@ typedef enum
 #elif defined(NRF_CELLCORE)
 #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
 #elif defined(NRF_SYSCTRL)
-#define NRF_DOMAIN NRF_DOMAIN_GLOBAL
+#define NRF_DOMAIN NRF_DOMAIN_SYSCTRL
 #elif defined(NRF_PPR)
 #define NRF_DOMAIN NRF_DOMAIN_PPR
 #endif
