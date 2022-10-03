@@ -25,6 +25,9 @@ extern "C" {
 /** @brief Symbol specifying maximum interrupt threshold. */
 #define NRF_VPR_CSR_INT_THRESHOLD_MAX VPRCSR_MINTTHRESH_TH_Max
 
+/** @brief Symbol specifying minimum interrupt threshold. */
+#define NRF_VPR_CSR_INT_THRESHOLD_MIN VPRCSR_MINTTHRESH_TH_Min
+
 /** @brief Trap causes. */
 typedef enum
 {
