@@ -24,7 +24,7 @@
                                         "UNKNOWN EVENT"))))))
 
 
-/**@brief RTC driver instance control block structure. */
+/** @brief RTC driver instance control block structure. */
 typedef struct
 {
     nrfx_drv_state_t state;        /**< Instance state. */

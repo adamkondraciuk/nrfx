@@ -31,7 +31,7 @@
 #define NRFX_LOG_MODULE TIMER
 #include <nrfx_log.h>
 
-/**@brief Timer control block. */
+/** @brief Timer control block. */
 typedef struct
 {
     nrfx_timer_event_handler_t handler;

@@ -182,7 +182,8 @@ extern "C" {
  */
 #define NRFX_OFFSETOF(type, member)  ((size_t)&(((type *)0)->member))
 
-/**@brief Macro for checking if given lengths of EasyDMA transfers do not exceed
+/**
+ * @brief Macro for checking if given lengths of EasyDMA transfers do not exceed
  *        the limit of the specified peripheral.
  *
  * @param[in] peripheral Peripheral to check the lengths against.

@@ -56,7 +56,7 @@ enum {
     .drv_inst_idx = NRFX_CONCAT_3(NRFX_WDT, id, _INST_IDX), \
 }
 
-/**@brief Struct for WDT initialization. */
+/** @brief Struct for WDT initialization. */
 typedef struct
 {
     nrf_wdt_behaviour_t    behaviour;          /**< WDT behaviour when CPU in sleep/halt mode. */
