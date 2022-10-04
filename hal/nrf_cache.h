@@ -37,6 +37,20 @@ extern "C" {
 #define NRF_CACHE_HAS_TASKS 0
 #endif
 
+#if defined(CACHE_TASKS_CLEANCACHE_TASKS_CLEANCACHE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the CLEAN cache/line tasks are supported. */
+#define NRF_CACHE_HAS_TASK_CLEAN 1
+#else
+#define NRF_CACHE_HAS_TASK_CLEAN 0
+#endif
+
+#if defined(CACHE_TASKS_FLUSHCACHE_TASKS_FLUSHCACHE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the FLUSH cache/line tasks are supported. */
+#define NRF_CACHE_HAS_TASK_FLUSH 1
+#else
+#define NRF_CACHE_HAS_TASK_FLUSH 0
+#endif
+
 #if defined(CACHE_STATUS_READY_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether status/busy check is supported */
 #define NRF_CACHE_HAS_STATUS 1
@@ -48,12 +62,18 @@ extern "C" {
 /** @brief CACHE tasks. */
 typedef enum
 {
-    NRF_CACHE_TASK_INVALIDATECACHE = offsetof(NRF_CACHE_Type, TASKS_INVALIDATECACHE), /**< Invalidate the whole cache. */
+#if NRF_CACHE_HAS_TASK_CLEAN
     NRF_CACHE_TASK_CLEANCACHE      = offsetof(NRF_CACHE_Type, TASKS_CLEANCACHE),      /**< Clean the whole cache. */
-    NRF_CACHE_TASK_FLUSHCACHE      = offsetof(NRF_CACHE_Type, TASKS_FLUSHCACHE),      /**< Flush the whole cache. */
-    NRF_CACHE_TASK_INVALIDATELINE  = offsetof(NRF_CACHE_Type, TASKS_INVALIDATELINE),  /**< Invalidate the cache line. */
     NRF_CACHE_TASK_CLEANLINE       = offsetof(NRF_CACHE_Type, TASKS_CLEANLINE),       /**< Clean the cache line. */
+#endif
+#if NRF_CACHE_HAS_TASK_FLUSH
+    NRF_CACHE_TASK_FLUSHCACHE      = offsetof(NRF_CACHE_Type, TASKS_FLUSHCACHE),      /**< Flush the whole cache. */
     NRF_CACHE_TASK_FLUSHLINE       = offsetof(NRF_CACHE_Type, TASKS_FLUSHLINE),       /**< Flush the cache line. */
+#endif
+    NRF_CACHE_TAST_SAVE            = offsetof(NRF_CACHE_Type, TASKS_SAVE),            /**< Save the state to a retained memory space. */
+    NRF_CACHE_TAST_RESTORE         = offsetof(NRF_CACHE_Type, TASKS_RESTORE),         /**< Restore the state from a retained memory space. */
+    NRF_CACHE_TASK_INVALIDATECACHE = offsetof(NRF_CACHE_Type, TASKS_INVALIDATECACHE), /**< Invalidate the whole cache. */
+    NRF_CACHE_TASK_INVALIDATELINE  = offsetof(NRF_CACHE_Type, TASKS_INVALIDATELINE),  /**< Invalidate the cache line. */
     NRF_CACHE_TASK_ERASE           = offsetof(NRF_CACHE_Type, TASKS_ERASE),           /**< Erase the whole cache. */
 } nrf_cache_task_t;
 #endif
