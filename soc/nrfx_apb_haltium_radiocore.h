@@ -16,16 +16,16 @@ static nrfx_atomic_t m_dppi030_channels = 0xFF;
     { /* APB2 */                                \
         .p_dppi = NRF_DPPIC020,                 \
         .p_dppi_channels = &m_dppi020_channels, \
-        .p_ppib = NRF_PPIB020,                  \
         .dppi_pub_channels_mask = 0xFF,         \
         .dppi_sub_channels_mask = 0xFF,         \
+        .p_ppib = NRF_PPIB020,                  \
     },                                          \
     { /* APB3 */                                \
         .p_dppi = NRF_DPPIC030,                 \
         .p_dppi_channels = &m_dppi030_channels, \
-        .p_ppib = NRF_PPIB030,                  \
         .dppi_pub_channels_mask = 0xFF,         \
         .dppi_sub_channels_mask = 0xFF,         \
+        .p_ppib = NRF_PPIB030,                  \
     },                                          \
 }
 

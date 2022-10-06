@@ -85,6 +85,15 @@ extern "C" {
         (((uint64_t) -1) >> ((sizeof(uint64_t) * CHAR_BIT) - (x)))))
 
 /**
+ * @brief Macro for returning size in bits for given size in bytes.
+ *
+ * @param[in] x Size in bytes.
+ *
+ * @return Size in bits.
+ */
+#define NRFX_BIT_SIZE(x) ((x) << 3)
+
+/**
  * @brief Macro for concatenating two tokens in macro expansion.
  *
  * @note This macro is expanded in two steps so that tokens given as macros

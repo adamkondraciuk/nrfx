@@ -10,8 +10,8 @@
 
 #define CHANNEL_INVALID UINT8_MAX
 
-#define NUMBER_OF_VIRTUAL_CHANNELS 32
-#define VIRTUAL_CHANNELS_MASK      NRFX_BIT_MASK(NUMBER_OF_VIRTUAL_CHANNELS)
+#define NUMBER_OF_VIRTUAL_CHANNELS NRFX_GPPI_PROG_APP_CHANNELS_NUM
+#define VIRTUAL_CHANNELS_MASK      NRFX_GPPI_PROG_APP_CHANNELS_MASK
 
 typedef struct
 {
@@ -60,7 +60,7 @@ static nrfx_err_t channel_allocate(nrfx_atomic_t * p_channels_available,
         chan_to_alloc = 31 - NRF_CLZ(chan_avail_masked);
 
         prev_mask = nrfx_atomic_u32_fetch_and(p_channels_available, ~NRFX_BIT(chan_to_alloc));
-    } while (prev_mask == chan_avail);
+    } while (prev_mask == *p_channels_available);
     *p_channel = chan_to_alloc;
     return NRFX_SUCCESS;
 }
@@ -299,7 +299,6 @@ void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
     // `fork_eep` is also needed to decide whether `main_apb` is to be used.
     NRFX_ASSERT(false);
 }
-
 
 void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t tep)
 {

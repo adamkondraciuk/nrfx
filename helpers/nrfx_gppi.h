@@ -41,9 +41,13 @@ extern "C" {
  */
 
 #if defined(PPI_PRESENT)
-#include <hal/nrf_ppi.h>
+#include <nrfx_ppi.h>
 
-#define GPPI_GROUP_NUM PPI_GROUP_NUM
+#define NRFX_GPPI_GROUP_NUM              PPI_GROUP_NUM
+#define NRFX_GPPI_GROUPS_USED            NRFX_PPI_GROUPS_USED
+#define NRFX_GPPI_ALL_APP_GROUPS_MASK    (((1uL << PPI_GROUP_NUM) - 1) & ~(NRFX_PPI_GROUPS_USED))
+#define NRFX_GPPI_ALL_APP_CHANNELS_MASK  NRFX_PPI_ALL_APP_CHANNELS_MASK
+#define NRFX_GPPI_PROG_APP_CHANNELS_MASK NRFX_PPI_PROG_APP_CHANNELS_MASK
 
 typedef enum
 {
@@ -78,7 +82,16 @@ typedef enum
 #elif defined(DPPI_PRESENT)
 #include <haly/nrfy_dppi.h>
 
-#define GPPI_GROUP_NUM DPPI_GROUP_NUM
+#define NRFX_GPPI_GROUP_NUM              DPPI_GROUP_NUM
+#define NRFX_GPPI_GROUPS_USED            NRFX_DPPI_GROUPS_USED
+#define NRFX_GPPI_ALL_APP_GROUPS_MASK    (NRFX_BIT_MASK(DPPI_GROUP_NUM) & ~NRFX_DPPI_GROUPS_USED)
+#define NRFX_GPPI_ALL_APP_CHANNELS_MASK  (NRFX_BIT_MASK(DPPI_CH_NUM) & ~NRFX_DPPI_CHANNELS_USED)
+#if defined(HALTIUM_XXAA)
+#define NRFX_GPPI_PROG_APP_CHANNELS_NUM  NRFX_BIT_SIZE(sizeof(uint32_t))
+#define NRFX_GPPI_PROG_APP_CHANNELS_MASK NRFX_BIT_MASK(NRFX_GPPI_PROG_APP_CHANNELS_NUM)
+#else
+#define NRFX_GPPI_PROG_APP_CHANNELS_MASK NRFX_GPPI_ALL_APP_CHANNELS_MASK
+#endif
 
 typedef enum
 {
@@ -117,7 +130,7 @@ typedef enum
 {
     NRFX_GPPI_CHANNEL_GROUP0, /**< Channel group 0.*/
     NRFX_GPPI_CHANNEL_GROUP1, /**< Channel group 1.*/
-#if GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
+#if NRFX_GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRFX_GPPI_CHANNEL_GROUP2, /**< Channel group 2.*/
     NRFX_GPPI_CHANNEL_GROUP3, /**< Channel group 3.*/
     NRFX_GPPI_CHANNEL_GROUP4, /**< Channel group 4.*/
@@ -132,7 +145,7 @@ typedef enum
     NRFX_GPPI_TASK_CHG0_DIS, /**< Task for disabling channel group 0 */
     NRFX_GPPI_TASK_CHG1_EN,  /**< Task for enabling channel group 1 */
     NRFX_GPPI_TASK_CHG1_DIS, /**< Task for disabling channel group 1 */
-#if GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
+#if NRFX_GPPI_GROUP_NUM > 2 || defined(__NRFX_DOXYGEN__)
     NRFX_GPPI_TASK_CHG2_EN,  /**< Task for enabling channel group 2 */
     NRFX_GPPI_TASK_CHG2_DIS, /**< Task for disabling channel group 2 */
     NRFX_GPPI_TASK_CHG3_EN,  /**< Task for enabling channel group 3 */

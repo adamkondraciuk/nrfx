@@ -1,5 +1,6 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
-//#if defined(LILIUMFP1_XXAA) || defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA)
+#include <nrfx.h>
+
 #if defined(HALTIUM_XXAA)
 
 #include <nrfx_apb.h>
@@ -13,6 +14,12 @@
 #include <nrfx_apb_haltium_application.h>
 #elif defined(NRF_CELLCORE)
 #include <nrfx_apb_haltium_cellcore.h>
+#elif defined(NRF_SYSCTRL)
+#include <nrfx_apb_haltium_sysctrl.h>
+#elif defined(NRF_PPR)
+#include <nrfx_apb_haltium_ppr.h>
+#elif defined(NRF_FLPR)
+#include <nrfx_apb_haltium_flpr.h>
 #endif
 
 NRFX_DPPI_GLOBAL_DEFINE;
