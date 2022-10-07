@@ -50,7 +50,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "liliumsoc1_global.h"
 #include "liliumsoc1_application.h"
-#include "liliumsoc1_systemc_application.h"
 #include "liliumsoc1_bbpr.h"
 #include "liliumsoc1_flpr.h"
 #include "liliumsoc1_ppr.h"

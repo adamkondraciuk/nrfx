@@ -29,8 +29,6 @@
 #elif defined(LILIUMSOC1_XXAA) || defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_haltium_application.h>
-    #elif defined(NRF_SYSTEMC_APPLICATION)
-        #include <nrfx_config_haltium_systemc_application.h>
     #elif defined(NRF_RADIOCORE)
         #include <nrfx_config_haltium_network.h>
     #elif defined(NRF_CELLCORE)

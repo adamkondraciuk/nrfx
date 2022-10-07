@@ -48,8 +48,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if defined(NRF_APPLICATION)
   #include "liliumfp1_application_peripherals.h"
-#elif defined(NRF_SYSTEMC_APPLICATION)
-  #include "liliumfp1_application_peripherals.h"
 #elif defined(NRF_BBPR)
   #include "liliumfp1_bbpr_peripherals.h"
 #elif defined(NRF_FLPR)

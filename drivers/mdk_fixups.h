@@ -129,7 +129,7 @@ typedef enum
 #define EGU020_CH_NUM 16
 
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
-      (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
+      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) \
        || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
        || defined(NRF_PPR) || defined(NRF_FLPR) || defined(NRF_SYSCTRL)))
 #define P0_PIN_NUM (12)
@@ -166,7 +166,7 @@ typedef enum
 #else
     #if defined(NRF_SECURE)
         #define NRF_GPIOTE_IRQ_GROUP 1
-    #elif defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION)
+    #elif defined(NRF_APPLICATION)
         #define NRF_GPIOTE_IRQ_GROUP 3
     #elif defined(NRF_RADIOCORE)
         #define NRF_GPIOTE_IRQ_GROUP 5
@@ -211,7 +211,7 @@ typedef enum
 #else
     #if defined(NRF_SECURE)
         #define NRF_GRTC_IRQ_GROUP 1
-    #elif defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION)
+    #elif defined(NRF_APPLICATION)
         #define NRF_GRTC_IRQ_GROUP 3
     #elif defined(NRF_RADIOCORE)
         #define NRF_GRTC_IRQ_GROUP 5
@@ -225,21 +225,11 @@ typedef enum
 #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(NRF_FLPR) || defined(__NRFX_DOXYGEN__)
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
-    /** @todo Remove when fix in MDK will appear. */
-    #if defined(NRF_SYSTEMC_APPLICATION)
-        /** @brief Fixup for the GRTC IRQHandler. */
-        #define GRTC_IRQHandler GRTC0_IRQHandler
-    #else
-        /** @brief Fixup for the GRTC IRQHandler. */
-        #define GRTC_IRQHandler GRTC0_0_IRQHandler
-    #endif
+/** @brief Fixup for the GRTC IRQHandler. */
+    #define GRTC_IRQHandler GRTC0_0_IRQHandler
 #else
     #define GRTC_IRQn       GRTC_1_IRQn
-    #if defined(NRF_SYSTEMC_APPLICATION)
-        #define GRTC_IRQHandler GRTC1_IRQHandler
-    #else
-        #define GRTC_IRQHandler GRTC0_1_IRQHandler
-    #endif
+    #define GRTC_IRQHandler GRTC0_1_IRQHandler
 #endif
 
 #define NRF_GRTC_INTEN_MASK 0x7FFFFFF
@@ -252,7 +242,7 @@ typedef enum
 #define SAADC_CH_NUM 8
 
 #if !((defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)) && \
-      (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION) || defined(NRF_RADIOCORE) \
+      (defined(NRF_APPLICATION) || defined(NRF_RADIOCORE) \
        || defined(NRF_SECURE) || defined(NRF_CELLCORE) \
        || defined(NRF_PPR) || defined(NRF_FLPR) || defined(NRF_SYSCTRL)))
 #define SPIM120_MAX_DATARATE 32
@@ -894,7 +884,7 @@ typedef struct {
 #define EASYVDMA_PRESENT
 #endif
 
-#if defined(LILIUMSOC1_XXAA) && (defined(NRF_APPLICATION) || defined(NRF_SYSTEMC_APPLICATION))
+#if defined(LILIUMSOC1_XXAA) && (defined(NRF_APPLICATION))
 #undef EGU_PRESENT
 #endif
 

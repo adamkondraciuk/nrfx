@@ -50,7 +50,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "liliumfp1_global.h"
 #include "liliumfp1_application.h"
-#include "liliumfp1_systemc_application.h"
 #include "liliumfp1_bbpr.h"
 #include "liliumfp1_flpr.h"
 #include "liliumfp1_ppr.h"
