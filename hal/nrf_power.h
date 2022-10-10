@@ -80,6 +80,13 @@ extern "C" {
 #define NRF_POWER_HAS_MAINREGSTATUS 0
 #endif
 
+#if (!defined(POWER_GPREGRET2_GPREGRET_Msk) && !defined(NRF51)) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GPREGRET register is treated as an array. */
+#define NRF_POWER_HAS_GPREGRET_ARRAY 1
+#else
+#define NRF_POWER_HAS_GPREGRET_ARRAY 0
+#endif
+
 /** @brief POWER tasks. */
 typedef enum
 {
@@ -1049,7 +1056,7 @@ NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(NRF_POWER_Type * p_reg,
                                                   uint8_t          reg_num,
                                                   uint8_t          val)
 {
-#if defined(NRF91_SERIES) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
+#if NRF_POWER_HAS_GPREGRET_ARRAY
     p_reg->GPREGRET[reg_num] = val;
 #else
     NRFX_ASSERT(reg_num < 1);
@@ -1059,7 +1066,7 @@ NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(NRF_POWER_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_power_gpregret_ext_get(NRF_POWER_Type const * p_reg, uint8_t reg_num)
 {
-#if defined(NRF91_SERIES) || defined(NRF5340_XXAA_APPLICATION) || defined(NRF5340_XXAA_NETWORK)
+#if NRF_POWER_HAS_GPREGRET_ARRAY
     return p_reg->GPREGRET[reg_num];
 #else
     NRFX_ASSERT(reg_num < 1);

@@ -890,4 +890,24 @@ typedef struct {
 
 #endif // defined(HALTIUM_XXAA)
 
+#if defined(MOONLIGHT_XXAA)
+
+/* TAMPC @Bit 13 : Reset due to TAMPC detecting illegal tampering of the device */
+  #define RESET_RESETREAS_TAMPC_Pos (13UL)             /*!< Position of TAMPC field.                                           */
+  #define RESET_RESETREAS_TAMPC_Msk (0x1UL << RESET_RESETREAS_TAMPC_Pos) /*!< Bit mask of TAMPC field.                         */
+  #define RESET_RESETREAS_TAMPC_Min (0x0UL)            /*!< Min enumerator value of TAMPC field.                               */
+  #define RESET_RESETREAS_TAMPC_Max (0x1UL)            /*!< Max enumerator value of TAMPC field.                               */
+  #define RESET_RESETREAS_TAMPC_NotDetected (0x0UL)    /*!< Not detected                                                       */
+  #define RESET_RESETREAS_TAMPC_Detected (0x1UL)       /*!< Detected                                                           */
+
+/* VMON @Bit 14 : Reset due to VMON detecting illegal tampering of the device */
+  #define RESET_RESETREAS_VMON_Pos (14UL)             /*!< Position of VMON field.                                             */
+  #define RESET_RESETREAS_VMON_Msk (0x1UL << RESET_RESETREAS_VMON_Pos) /*!< Bit mask of VMON field.                            */
+  #define RESET_RESETREAS_VMON_Min (0x0UL)            /*!< Min enumerator value of VMON field.                                 */
+  #define RESET_RESETREAS_VMON_Max (0x1UL)            /*!< Max enumerator value of VMON field.                                 */
+  #define RESET_RESETREAS_VMON_NotDetected (0x0UL)    /*!< Not detected                                                        */
+  #define RESET_RESETREAS_VMON_Detected (0x1UL)       /*!< Detected                                                            */
+
+#endif
+
 #endif // MDK_FIXUPS_H__

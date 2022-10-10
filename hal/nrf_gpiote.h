@@ -34,6 +34,16 @@ extern "C" {
 /** @brief Interrupt enable clear register definition. */
 #define GPIOTE_INTENCLR NRFX_CONCAT_2(INTENCLR, NRF_GPIOTE_IRQ_GROUP)
 
+#elif defined(MOONLIGHT_XXAA)
+/** @brief Enable or disable interrupt register definition. */
+#define GPIOTE_INTEN    INTEN0
+
+/** @brief Interrupt enable set register definition. */
+#define GPIOTE_INTENSET INTENSET0
+
+/** @brief Interrupt enable clear register definition. */
+#define GPIOTE_INTENCLR INTENCLR0
+
 #else
 
 /** @brief Enable or disable interrupt register definition. */
