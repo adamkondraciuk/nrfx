@@ -10,6 +10,13 @@ extern "C" {
 #endif
 
 /**
+ * @defgroup nrf_pwm_hal PWM HAL
+ * @{
+ * @ingroup nrf_pwm
+ * @brief   Hardware access layer for managing the Pulse Width Modulation (PWM) peripheral.
+ */
+
+/**
  * @brief Macro getting pointer to the structure of registers of the PWM peripheral.
  *
  * @param[in] idx PWM instance index.
@@ -17,13 +24,6 @@ extern "C" {
  * @return Pointer to the structure of registers of the PWM peripheral.
  */
  #define NRF_PWM_INST_GET(idx) NRFX_CONCAT_2(NRF_PWM, idx)
-
-/**
- * @defgroup nrf_pwm_hal PWM HAL
- * @{
- * @ingroup nrf_pwm
- * @brief   Hardware access layer for managing the Pulse Width Modulation (PWM) peripheral.
- */
 
 /**
  * @brief This value can be provided as a parameter for the @ref nrf_pwm_pins_set

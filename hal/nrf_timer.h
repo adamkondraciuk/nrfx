@@ -10,20 +10,20 @@ extern "C" {
 #endif
 
 /**
+ * @defgroup nrf_timer_hal TIMER HAL
+ * @{
+ * @ingroup nrf_timer
+ * @brief   Hardware access layer for managing the TIMER peripheral.
+ */
+
+/**
  * @brief Macro getting pointer to the structure of registers of the TIMER peripheral.
  *
  * @param[in] idx TIMER instance index.
  *
  * @return Pointer to the structure of registers of the TIMER peripheral.
  */
- #define NRF_TIMER_INST_GET(idx) NRFX_CONCAT_2(NRF_TIMER, idx)
-
-/**
- * @defgroup nrf_timer_hal TIMER HAL
- * @{
- * @ingroup nrf_timer
- * @brief   Hardware access layer for managing the TIMER peripheral.
- */
+#define NRF_TIMER_INST_GET(idx) NRFX_CONCAT_2(NRF_TIMER, idx)
 
 #if defined(TIMER_INTENSET_COMPARE4_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether timer has capture/compare channel 4. */

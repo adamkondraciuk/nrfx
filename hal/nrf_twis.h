@@ -10,21 +10,21 @@ extern "C" {
 #endif
 
 /**
- * @brief Macro getting pointer to the structure of registers of the TWIS peripheral.
- *
- * @param[in] idx TWIS instance index.
- *
- * @return Pointer to the structure of registers of the TWIS peripheral.
- */
- #define NRF_TWIS_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIS, idx)
-
-/**
  * @defgroup nrf_twis_hal TWIS HAL
  * @{
  * @ingroup nrf_twis
  * @brief   Hardware access layer for managing the Two Wire Interface Slave with EasyDMA
  *          (TWIS) peripheral.
  */
+
+/**
+ * @brief Macro getting pointer to the structure of registers of the TWIS peripheral.
+ *
+ * @param[in] idx TWIS instance index.
+ *
+ * @return Pointer to the structure of registers of the TWIS peripheral.
+ */
+#define NRF_TWIS_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIS, idx)
 
 /** @brief TWIS tasks. */
 typedef enum

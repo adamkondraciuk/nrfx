@@ -10,20 +10,20 @@ extern "C" {
 #endif
 
 /**
+ * @defgroup nrf_twim_hal TWIM HAL
+ * @{
+ * @ingroup nrf_twim
+ * @brief   Hardware access layer for managing the TWIM peripheral.
+ */
+
+/**
  * @brief Macro getting pointer to the structure of registers of the TWIM peripheral.
  *
  * @param[in] idx TWIM instance index.
  *
  * @return Pointer to the structure of registers of the TWIM peripheral.
  */
- #define NRF_TWIM_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIM, idx)
-
-/**
- * @defgroup nrf_twim_hal TWIM HAL
- * @{
- * @ingroup nrf_twim
- * @brief   Hardware access layer for managing the TWIM peripheral.
- */
+#define NRF_TWIM_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIM, idx)
 
 #if defined(TWIM_FREQUENCY_FREQUENCY_K1000) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether 1000 kHz clock frequency is available. */

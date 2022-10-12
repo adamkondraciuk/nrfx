@@ -10,20 +10,20 @@ extern "C" {
 #endif
 
 /**
+* @defgroup nrf_egu_hal EGU HAL
+* @{
+* @ingroup nrf_egu
+* @brief   Hardware access layer for managing the Event Generator Unit (EGU) peripheral.
+*/
+
+/**
  * @brief Macro getting pointer to the structure of registers of the EGU peripheral.
  *
  * @param[in] idx EGU instance index.
  *
  * @return Pointer to the structure of registers of the EGU peripheral.
  */
- #define NRF_EGU_INST_GET(idx) NRFX_CONCAT_2(NRF_EGU, idx)
-
-/**
-* @defgroup nrf_egu_hal EGU HAL
-* @{
-* @ingroup nrf_egu
-* @brief   Hardware access layer for managing the Event Generator Unit (EGU) peripheral.
-*/
+#define NRF_EGU_INST_GET(idx) NRFX_CONCAT_2(NRF_EGU, idx)
 
 /** @brief EGU tasks. */
 typedef enum
