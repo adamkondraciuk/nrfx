@@ -28,11 +28,11 @@ typedef struct {
 /**
  * @brief Function for getting the domain to which the specified APB bus belongs.
  *
- * @param[in] p_abp_interconnect Pointer to APB properties structure.
+ * @param[in] p_apb_interconnect Pointer to APB properties structure.
  * 
  * @return Domain that includes the specified APB.
  */
-nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_abp_interconnect);
+nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_apb_interconnect);
 
 /**
  * @brief Function for getting the main APB interconnection.

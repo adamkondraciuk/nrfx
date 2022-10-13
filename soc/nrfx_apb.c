@@ -31,9 +31,9 @@ NRFX_DPPI_LOCAL_DEFINE;
 static const nrfx_apb_interconnect_t m_local_apb_interconnect[] = NRFX_APB_LOCAL_INTERCONNECT;
 static const nrfx_apb_interconnect_t m_global_apb_interconnect[] = NRFX_APB_GLOBAL_INTERCONNECT;
 
-nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_abp_interconnect)
+nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_apb_interconnect)
 {
-    return (nrf_domain_t)nrf_address_domain_get((uint32_t)p_abp_interconnect->p_dppi);
+    return (nrf_domain_t)nrf_address_domain_get((uint32_t)p_apb_interconnect->p_dppi);
 }
 
 nrfx_apb_interconnect_t const * nrf_apb_main_interconnect_get(void)
