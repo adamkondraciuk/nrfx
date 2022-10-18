@@ -24,7 +24,7 @@ extern "C" {
  * @param[in] p_context Context passed to the interrupt handler, set on initialization.
  */
 typedef void (*nrfx_ipc_handler_t)(uint8_t event_idx, void * p_context);
-#else
+#elif NRFX_CHECK(NRFX_CONFIG_API_VER_2_9) || defined (__NRFX_DOXYGEN__)
 /**
  * @brief IPC driver handler type.
  *
@@ -90,7 +90,7 @@ NRFX_STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data);
  * @return Saved data.
  */
 NRFX_STATIC_INLINE uint32_t nrfx_ipc_gpmem_get(uint8_t mem_index);
-#else
+#elif NRFX_CHECK(NRFX_CONFIG_API_VER_2_9) || defined (__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting data from the GPMEM register in the IPC peripheral.
  *
@@ -179,7 +179,7 @@ NRFX_STATIC_INLINE void nrfx_ipc_gpmem_set(uint8_t mem_index, uint32_t data)
 
 #if NRFX_CHECK(NRFX_CONFIG_API_VER_2_10)
 NRFX_STATIC_INLINE uint32_t nrfx_ipc_gpmem_get(uint8_t mem_index)
-#else
+#elif NRFX_CHECK(NRFX_CONFIG_API_VER_2_9)
 NRFX_STATIC_INLINE uint32_t nrfx_ipc_mem_get(uint8_t mem_index)
 #endif
 {

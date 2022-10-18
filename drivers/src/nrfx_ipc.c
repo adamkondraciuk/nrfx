@@ -128,7 +128,7 @@ void nrfx_ipc_irq_handler(void)
         {
             m_ipc_cb.handler(event_idx, m_ipc_cb.p_context);
         }
-#else
+#elif NRFX_CHECK(NRFX_CONFIG_API_VER_2_9)
     }
     if (m_ipc_cb.handler)
     {

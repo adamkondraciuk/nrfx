@@ -7,6 +7,10 @@
 #error "This file should not be included directly. Include nrfx_config.h instead."
 #endif
 
+
+// <i> NRFX API version 2.9 flag. When the flag is set NRFX API is compatible with the previous NRFX release.
+#define NRFX_CONFIG_API_VER_2_9 1
+
 // <i> NRFX API version 2.10 flag.
 /* When this flag is set the following changes to the nrfx API will be introduced:
  *
