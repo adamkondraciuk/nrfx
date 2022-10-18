@@ -888,6 +888,18 @@ typedef struct {
 #undef EGU_PRESENT
 #endif
 
+#if defined(MRAMC_CONFIGNVR_PAGE_LOCK_Pos)
+/* This symbols mapping will be provided with MDK when LiliumFP1 and Halti targets will
+ * be updated to newer MDK. Currently it's more proficient to add this fix in mdk_fixups.h
+ */
+#define MRAMC_CONFIGNVR_PAGE_Lock_Pos          MRAMC_CONFIGNVR_PAGE_LOCK_Pos
+#define MRAMC_CONFIGNVR_PAGE_Lock_Msk          MRAMC_CONFIGNVR_PAGE_LOCK_Msk
+#define MRAMC_CONFIGNVR_PAGE_Lock_Min          MRAMC_CONFIGNVR_PAGE_LOCK_Min
+#define MRAMC_CONFIGNVR_PAGE_Lock_Max          MRAMC_CONFIGNVR_PAGE_LOCK_Max
+#define MRAMC_CONFIGNVR_PAGE_Lock_LockDisabled MRAMC_CONFIGNVR_PAGE_LOCK_LockDisabled
+#define MRAMC_CONFIGNVR_PAGE_Lock_LockEnabled  MRAMC_CONFIGNVR_PAGE_LOCK_LockEnabled
+#endif
+
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(MOONLIGHT_XXAA)

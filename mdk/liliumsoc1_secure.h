@@ -180,8 +180,8 @@ typedef enum {
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
-#define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
-#define __NUM_SAUREGIONS               0             /*!< Number of regions                                                    */
+#define __SAUREGION_PRESENT            1             /*!< SAU present                                                          */
+#define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< liliumsoc1_secure System Library                                     */

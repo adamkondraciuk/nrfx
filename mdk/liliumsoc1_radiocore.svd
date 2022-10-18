@@ -60,9 +60,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <nvicPrioBits>3</nvicPrioBits>
     <vendorSystickConfig>0</vendorSystickConfig>
     <deviceNumInterrupts>480</deviceNumInterrupts>
-    <sauNumRegions>0</sauNumRegions>
+    <sauNumRegions>4</sauNumRegions>
   </cpu>
-  <headerSystemFilename>system_liliumsoc1_radiocore</headerSystemFilename>
+  <headerSystemFilename>system_lilium</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
@@ -13335,7 +13335,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>PROGVERSION1</name>
+                  <name>VAL</name>
                   <description>CP1 test program version</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
@@ -13350,8 +13350,68 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>PROGVERSION2</name>
+                  <name>VAL</name>
                   <description>CP2 test program version</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID1</name>
+              <description>CP1 pass ID.</description>
+              <addressOffset>0x014</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP1 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID2</name>
+              <description>CP2 pass ID.</description>
+              <addressOffset>0x018</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP2 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP1</name>
+              <description>Timestamp for when CP1 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x01C</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP1 timestamp</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP2</name>
+              <description>Timestamp for when CP2 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x020</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP2 timestamp</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -13363,7 +13423,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_PRODTEST_FT</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x014</addressOffset>
+            <addressOffset>0x024</addressOffset>
             <register>
               <name>PROGVERSION1</name>
               <description>FT1 test program version.</description>
@@ -13381,14 +13441,74 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </register>
             <register>
               <name>PROGVERSION2</name>
-              <description>FT2 test program version.</description>
+              <description>FT2/EQA test program version.</description>
               <addressOffset>0x004</addressOffset>
               <access>read-only</access>
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
                   <name>PROGVERSION2</name>
-                  <description>FT2 test program version</description>
+                  <description>FT2/EQA test program version</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID1</name>
+              <description>FT1 pass ID.</description>
+              <addressOffset>0x008</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT1 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID2</name>
+              <description>FT2/EQA pass ID.</description>
+              <addressOffset>0x00C</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT2/EQA pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP1</name>
+              <description>Timestamp for when FT1 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x010</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT1 timestamp</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP2</name>
+              <description>Timestamp for when FT2/EQA starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x014</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT2/EQA timestamp</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -13733,13 +13853,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                 </fields>
               </register>
+              <register>
+                <name>AMPLITUDECTRL</name>
+                <description>Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT)</description>
+                <addressOffset>0x1C</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
             </cluster>
             <cluster>
               <name>AUDIOPLL</name>
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_AUDIOPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x54</addressOffset>
+              <addressOffset>0x58</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -13768,7 +13903,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_USBHSPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x58</addressOffset>
+              <addressOffset>0x5C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -13797,7 +13932,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x5C</addressOffset>
+              <addressOffset>0x60</addressOffset>
               <cluster>
                 <name>CONFIG</name>
                 <description>Unspecified</description>
@@ -13863,7 +13998,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_OSCRFR</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x68</addressOffset>
+              <addressOffset>0x6C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -13907,7 +14042,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREG1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x70</addressOffset>
+              <addressOffset>0x74</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -13996,7 +14131,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x84</addressOffset>
+              <addressOffset>0x88</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14085,7 +14220,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x98</addressOffset>
+              <addressOffset>0x9C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14159,7 +14294,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMAIN</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xA8</addressOffset>
+              <addressOffset>0xAC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14353,7 +14488,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xD8</addressOffset>
+              <addressOffset>0xDC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14427,7 +14562,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xE8</addressOffset>
+              <addressOffset>0xEC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14501,7 +14636,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xF8</addressOffset>
+              <addressOffset>0xFC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14575,7 +14710,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGUSB</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x108</addressOffset>
+              <addressOffset>0x10C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14649,7 +14784,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x118</addressOffset>
+              <addressOffset>0x11C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14715,7 +14850,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x124</addressOffset>
+              <addressOffset>0x128</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14759,7 +14894,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x12C</addressOffset>
+              <addressOffset>0x130</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14803,7 +14938,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO5V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x134</addressOffset>
+              <addressOffset>0x138</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14832,7 +14967,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x138</addressOffset>
+              <addressOffset>0x13C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14861,7 +14996,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x13C</addressOffset>
+              <addressOffset>0x140</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14924,7 +15059,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL121</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x170</addressOffset>
+              <addressOffset>0x174</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14987,7 +15122,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x1A4</addressOffset>
+              <addressOffset>0x1A8</addressOffset>
               <cluster>
                 <dim>36</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -15042,7 +15177,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x274</addressOffset>
+              <addressOffset>0x278</addressOffset>
               <cluster>
                 <dim>2</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -15074,7 +15209,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_GLOBAL</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x27C</addressOffset>
+            <addressOffset>0x280</addressOffset>
             <cluster>
               <name>SAADC</name>
               <description>Unspecified</description>
@@ -15168,11 +15303,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x30</addressOffset>
               <register>
+                <name>CALIB</name>
+                <description>Trim value for GLOBAL.TEMP.CALIB</description>
+                <addressOffset>0x0</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
                 <dim>0x6</dim>
                 <dimIncrement>0x4</dimIncrement>
                 <name>A[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.A</description>
-                <addressOffset>0x0</addressOffset>
+                <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -15189,7 +15339,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>B[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.B</description>
-                <addressOffset>0x18</addressOffset>
+                <addressOffset>0x1C</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -15206,7 +15356,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>T[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.T</description>
-                <addressOffset>0x30</addressOffset>
+                <addressOffset>0x34</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -15224,7 +15374,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_NFCT</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x74</addressOffset>
+              <addressOffset>0x78</addressOffset>
               <register>
                 <name>BIASCFG</name>
                 <description>Trim value for NFCT.BIASCFG</description>
@@ -15246,7 +15396,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_CANPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x78</addressOffset>
+              <addressOffset>0x7C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -15275,7 +15425,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x7C</addressOffset>
+              <addressOffset>0x80</addressOffset>
               <cluster>
                 <name>PORTCNF</name>
                 <description>Unspecified</description>
@@ -15308,13 +15458,95 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </cluster>
               </cluster>
             </cluster>
+            <cluster>
+              <name>COMP</name>
+              <description>Unspecified</description>
+              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_COMP</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x88</addressOffset>
+              <register>
+                <name>REFTRIM</name>
+                <description>Trim value for GLOBAL.COMP.REFTRIM</description>
+                <addressOffset>0x0</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL80KCOARSE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL80KCOARSE</description>
+                <addressOffset>0x4</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL80KFINE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL80KFINE</description>
+                <addressOffset>0x8</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL6M4COARSE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL6M4COARSE</description>
+                <addressOffset>0xC</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL6M4FINE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL6M4FINE</description>
+                <addressOffset>0x10</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+            </cluster>
           </cluster>
           <cluster>
             <name>APPLICATION</name>
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_APPLICATION</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x300</addressOffset>
+            <addressOffset>0x31C</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -15415,7 +15647,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x340</addressOffset>
+            <addressOffset>0x35C</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -16306,6 +16538,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
+        <register>
+          <name>CRC32</name>
+          <description>CRC32 value for FICR (except this word)</description>
+          <addressOffset>0x7FC</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VALUE</name>
+              <description>CRC32 value</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -56710,21 +56957,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>MAJOR</name>
-              <description>Major classification of the type of the debug component as specified in the ARM Architecture Specification for this
+              <description>Major classification of the type of the debug component as specified in the Arm Architecture Specification for this
                     debug and trace component.</description>
               <lsb>0</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Controller</name>
-                  <description>Indicates that this component allows a debugger to control other components in a CoreSight SoC-400 system.</description>
+                  <description>Indicates that this component allows a debugger to control other components in an Arm CoreSight SoC-400 system.</description>
                   <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>SUB</name>
-              <description>Sub-classification of the type of the debug component as specified in the ARM Architecture Specification within
+              <description>Sub-classification of the type of the debug component as specified in the Arm Architecture Specification within
                     the major classification as specified in the MAJOR field.</description>
               <lsb>4</lsb>
               <msb>7</msb>
@@ -56753,7 +57000,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Code</name>
-                  <description>JEDEC continuation code</description>
+                  <description>JEDEC continuation code.</description>
                   <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -56837,7 +57084,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Arm</name>
-                  <description>ARM. Bits[3:0] of the JEDEC JEP106 Identity Code</description>
+                  <description>Arm. Bits[3:0] of the JEDEC JEP106 Identity Code</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -56859,7 +57106,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Arm</name>
-                  <description>ARM. Bits[6:4] of the JEDEC JEP106 Identity Code</description>
+                  <description>Arm. Bits[6:4] of the JEDEC JEP106 Identity Code</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -56909,7 +57156,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>REVAND</name>
               <description>Indicates minor errata fixes specific to the revision of the component being used, for example metal fixes after
-                    implementation. In most cases, this field is 0b0000. ARM recommends that the component designers ensure that a
+                    implementation. In most cases, this field is 0b0000. Arm recommends that the component designers ensure that a
                     metal fix can change this field if required, for example, by driving it from registers that reset to 0b0000.</description>
               <lsb>4</lsb>
               <msb>7</msb>
@@ -66184,13 +66431,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>OWNERID</name>
-                <description>Owner identifier of the errorneous access</description>
+                <description>Owner identifier of the erroneous access</description>
                 <lsb>0</lsb>
                 <msb>3</msb>
               </field>
               <field>
                 <name>MASTERPORT</name>
-                <description>Master port where errorneous access is detected</description>
+                <description>Master port where erroneous access is detected</description>
                 <lsb>4</lsb>
                 <msb>8</msb>
               </field>
@@ -68247,7 +68494,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>STARTADDR</name>
-                <description>Start address for memory region n Regions must be on a 4k memory boundary, lower 12 bits are ignored and read as zero</description>
+                <description>Start address for memory region n</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -68262,7 +68509,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>ADDRMASK</name>
-                <description>Address mask for memory region n Regions must be on a 4k memory boundary, lower 12 bits are ignored and read as zero</description>
+                <description>Address mask for memory region n</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -68960,7 +69207,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>STARTADDR</name>
-                <description>Start address for override region n Address must be on a 4k memory boundary, lower 12 bits are ignored and read as zero</description>
+                <description>Start address for override region n</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -68975,7 +69222,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>ENDADDR</name>
-                <description>End address for override region n Address must be on a 4k memory boundary, lower 12 bits are ignored and read as zero</description>
+                <description>End address for override region n</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -68983,7 +69230,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>OFFSET</name>
-            <description>Description cluster: Address offset value divided by 2 for override region n address re-map Offset will be left shifted before applying offset, to create a 33-bit signed integer.</description>
+            <description>Description cluster: Address offset value divided by 2 for override region n address re-map</description>
             <addressOffset>0x0C</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -68991,7 +69238,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>OFFSET</name>
-                <description>Offset value Lower 11 bits are ignored</description>
+                <description>Offset value</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -72103,7 +72350,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>ERROR</name>
-                <description>Error status.</description>
+                <description>Trim error status.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -72115,6 +72362,42 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                   <enumeratedValue>
                     <name>WithinLimit</name>
                     <description>Frequency stayed within accuracy 2 percent in closed loop mode.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>TRIMUNDERFLOW</name>
+                <description>Underflow error status.</description>
+                <lsb>1</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>OutsideLimit</name>
+                    <description>Underflow</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>WithinLimit</name>
+                    <description>No underflow</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>TRIMOVERFLOW</name>
+                <description>Overflow error status.</description>
+                <lsb>2</lsb>
+                <msb>2</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>OutsideLimit</name>
+                    <description>Overflow</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>WithinLimit</name>
+                    <description>No overflow</description>
                     <value>0x0</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -72132,7 +72415,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>VALUE</name>
                 <description>Last frequency measurement value.</description>
                 <lsb>0</lsb>
-                <msb>10</msb>
+                <msb>7</msb>
               </field>
             </fields>
           </register>
@@ -72255,7 +72538,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <description>Clock dithering configuration</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00096733</resetValue>
             <fields>
               <field>
                 <name>CYCLECOUNT</name>
@@ -72300,13 +72583,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <description>Multiplication factor</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
-            <resetValue>0x0000000A</resetValue>
+            <resetValue>0x00000006</resetValue>
             <fields>
               <field>
                 <name>VAL</name>
                 <description>Multiplication factor value.</description>
                 <lsb>0</lsb>
-                <msb>3</msb>
+                <msb>4</msb>
               </field>
             </fields>
           </register>
@@ -72315,7 +72598,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <description>Sleep configuration</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00000001</resetValue>
             <fields>
               <field>
                 <name>MODE</name>
@@ -72657,19 +72940,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>SELMUX</name>
-                <description>Select multiplexer for ATB0</description>
+                <description>Select multiplexer for ATB1</description>
                 <lsb>0</lsb>
-                <msb>0</msb>
+                <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>HiZ</name>
                     <description>HiZ</description>
                     <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VREGOUT</name>
-                    <description>VREG_OUT</description>
-                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -72702,14 +72980,19 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>SELMUX</name>
-                <description>Select multiplexer for ATB1</description>
+                <description>Select multiplexer for ATB0</description>
                 <lsb>0</lsb>
-                <msb>0</msb>
+                <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>HiZ</name>
                     <description>HiZ</description>
                     <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREGOUT</name>
+                    <description>VREG_OUT</description>
+                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -104480,7 +104763,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>SPHYNXFSDIV2CM</name>
-                <description>Set common mode for DIV2</description>
+                <description>Spare, not used</description>
                 <lsb>15</lsb>
                 <msb>18</msb>
               </field>
@@ -104492,13 +104775,13 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>SPHYNXFSDIV2OSC</name>
-                <description>Change back bias of NMOS in ROSC inside DIV2</description>
+                <description>Spare, not used</description>
                 <lsb>22</lsb>
                 <msb>26</msb>
               </field>
               <field>
                 <name>SPHYNXFSDTCCTRL</name>
-                <description>0: controls bleed current from supply, 1: bypasses DTC to send XO out directly</description>
+                <description>DTC control</description>
                 <lsb>27</lsb>
                 <msb>30</msb>
               </field>
@@ -104531,7 +104814,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               </field>
               <field>
                 <name>SPHYNXFSDIV2ISW</name>
-                <description>Adjust voltage for back bias of injection switch</description>
+                <description>[2:0] Adjust voltage for back bias of injection switch; [3] Spare</description>
                 <lsb>14</lsb>
                 <msb>17</msb>
               </field>
@@ -119437,13 +119720,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <fields>
             <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that task TASKS_TRIGGER[n] will subscribe to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-              <access>read-only</access>
-            </field>
-            <field>
               <name>ENABLE</name>
               <description>Subscription enable bit (write only)</description>
               <lsb>0</lsb>
@@ -119507,13 +119783,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <addressOffset>0x180</addressOffset>
           <access>read-write</access>
           <fields>
-            <field>
-              <name>CHIDX</name>
-              <description>DPPI channel that event EVENTS_TRIGGERED[n] will publish to</description>
-              <lsb>0</lsb>
-              <msb>7</msb>
-              <access>read-only</access>
-            </field>
             <field>
               <name>ENABLE</name>
               <description>Publication enable bit (write only)</description>
@@ -143789,14 +144058,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written to the register RTCOMPARESYNC is latched to RTCOMPARE</description>
+          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written to the register RTCOMPARESYNC is latched to RTCOMPARE</description>
+              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -147509,7 +147778,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
-                  <description>Keep the SYSCOUNTER active when KEEPRUNNING is set, or access to any task registers, INT registers or SYSCOUNTER registers.</description>
+                  <description>Default configuration to keep the SYSCOUNTER active.</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -147556,14 +147825,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>SYSCOUNTERH</name>
-          <description>The higher 32-bits of the SYSCOUNTER</description>
+          <description>The higher 20-bits of the SYSCOUNTER</description>
           <addressOffset>0x518</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>VALUE</name>
-              <description>The higher 32-bits of the SYSCOUNTER value.</description>
+              <description>The higher 20-bits of the SYSCOUNTER value.</description>
               <lsb>0</lsb>
               <msb>19</msb>
             </field>
@@ -147604,7 +147873,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>CCL</name>
-                <description>Capture/Compare low value</description>
+                <description>Capture/Compare low value in 1 us</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -147619,7 +147888,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>CCH</name>
-                <description>Capture/Compare high value</description>
+                <description>Capture/Compare high value in 1 us</description>
                 <lsb>0</lsb>
                 <msb>19</msb>
               </field>
@@ -147688,7 +147957,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </cluster>
         <register>
           <name>KEEPRUNNING</name>
-          <description>Request to keep the timer in the active state and prevent going to sleep</description>
+          <description>Request to keep the SYSCOUNTER in the active state and prevent going to sleep</description>
           <addressOffset>0x6A0</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -147701,12 +147970,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147719,12 +147988,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147737,12 +148006,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147755,12 +148024,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147773,12 +148042,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147791,12 +148060,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147809,12 +148078,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147827,12 +148096,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147845,12 +148114,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147863,12 +148132,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147881,12 +148150,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147899,12 +148168,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147917,12 +148186,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147935,12 +148204,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147953,12 +148222,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -147971,12 +148240,12 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Timer not active</description>
+                  <description>Allow SYSCOUNTER to go to sleep</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Timer active</description>
+                  <description>Keep SYSCOUNTER active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -148022,7 +148291,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <fields>
             <field>
               <name>VALUE</name>
-              <description>Number of 32Ki clock cycles to wake up before the next scheduled EVENTS_COMPARE event</description>
+              <description>Number of LFCLK clock cycles to wake up before the next scheduled EVENTS_COMPARE event</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -151990,7 +152259,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <description>Description collection: Configuration register for NVR page n</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00300000</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>WEN</name>
@@ -152043,62 +152312,16 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <description>Enables the lock for this register.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
+                <modifiedWriteValues>oneToSet</modifiedWriteValues>
                 <enumeratedValues>
-                  <usage>read</usage>
                   <enumeratedValue>
                     <name>LockDisabled</name>
-                    <description>Read: Lock is disabled</description>
+                    <description>Lock is disabled</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>LockEnabled</name>
-                    <description>Read: Lock is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-                <enumeratedValues>
-                  <usage>write</usage>
-                  <enumeratedValue>
-                    <name>EnableLock</name>
-                    <description>Write: Enables the lock (Ignores any other value written)</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>UREN</name>
-                <description>Enable read access to the upper part of NVR page, where the upper part size is NVR page size - 2KB</description>
-                <lsb>20</lsb>
-                <msb>20</msb>
-                <access>read-writeonce</access>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Read is disabled. Ignores any other value written.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Read is enabled</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>UWEN</name>
-                <description>Enable write access to the upper part of NVR page, where the upper part size is NVR page size - 2KB</description>
-                <lsb>21</lsb>
-                <msb>21</msb>
-                <access>read-writeonce</access>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Disabled</name>
-                    <description>Write is disabled. Ignores any other value written.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Enabled</name>
-                    <description>Write is enabled</description>
+                    <description>Lock is enabled</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>

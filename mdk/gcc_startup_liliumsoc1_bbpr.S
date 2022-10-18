@@ -244,56 +244,56 @@ __isr_vector:
     .long   VPRCLIC_13_IRQHandler
     .long   VPRCLIC_14_IRQHandler
     .long   VPRCLIC_15_IRQHandler
-    .long   VPRCLIC_16_IRQHandler
-    .long   VPRCLIC_17_IRQHandler
-    .long   VPRCLIC_18_IRQHandler
-    .long   VPRCLIC_19_IRQHandler
-    .long   VPRCLIC_20_IRQHandler
-    .long   VPRCLIC_21_IRQHandler
-    .long   VPRCLIC_22_IRQHandler
-    .long   VPRCLIC_23_IRQHandler
-    .long   VPRCLIC_24_IRQHandler
-    .long   VPRCLIC_25_IRQHandler
-    .long   VPRCLIC_26_IRQHandler
-    .long   VPRCLIC_27_IRQHandler
-    .long   VPRCLIC_28_IRQHandler
-    .long   VPRCLIC_29_IRQHandler
-    .long   VPRCLIC_30_IRQHandler
-    .long   VPRCLIC_31_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   VPRTIM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   EGU020_IRQHandler
+    .long   AAR020_CCM020_IRQHandler
+    .long   ECB020_IRQHandler
+    .long   TIMER020_IRQHandler
+    .long   TIMER021_IRQHandler
+    .long   TIMER022_IRQHandler
+    .long   RTC_IRQHandler
+    .long   RADIO_0_IRQHandler
+    .long   RADIO_1_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   SPU030_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   RADIOACC_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   AAR030_CCM030_IRQHandler
+    .long   ECB030_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   IPCT_0_IRQHandler
+    .long   IPCT_1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -529,7 +529,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   WDT131_IRQHandler
     .long   WDT132_IRQHandler
-    .long   EGU130_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -814,23 +814,22 @@ Default_Handler:
     IRQ  VPRCLIC_13_IRQHandler
     IRQ  VPRCLIC_14_IRQHandler
     IRQ  VPRCLIC_15_IRQHandler
-    IRQ  VPRCLIC_16_IRQHandler
-    IRQ  VPRCLIC_17_IRQHandler
-    IRQ  VPRCLIC_18_IRQHandler
-    IRQ  VPRCLIC_19_IRQHandler
-    IRQ  VPRCLIC_20_IRQHandler
-    IRQ  VPRCLIC_21_IRQHandler
-    IRQ  VPRCLIC_22_IRQHandler
-    IRQ  VPRCLIC_23_IRQHandler
-    IRQ  VPRCLIC_24_IRQHandler
-    IRQ  VPRCLIC_25_IRQHandler
-    IRQ  VPRCLIC_26_IRQHandler
-    IRQ  VPRCLIC_27_IRQHandler
-    IRQ  VPRCLIC_28_IRQHandler
-    IRQ  VPRCLIC_29_IRQHandler
-    IRQ  VPRCLIC_30_IRQHandler
-    IRQ  VPRCLIC_31_IRQHandler
     IRQ  VPRTIM_IRQHandler
+    IRQ  EGU020_IRQHandler
+    IRQ  AAR020_CCM020_IRQHandler
+    IRQ  ECB020_IRQHandler
+    IRQ  TIMER020_IRQHandler
+    IRQ  TIMER021_IRQHandler
+    IRQ  TIMER022_IRQHandler
+    IRQ  RTC_IRQHandler
+    IRQ  RADIO_0_IRQHandler
+    IRQ  RADIO_1_IRQHandler
+    IRQ  SPU030_IRQHandler
+    IRQ  RADIOACC_IRQHandler
+    IRQ  AAR030_CCM030_IRQHandler
+    IRQ  ECB030_IRQHandler
+    IRQ  IPCT_0_IRQHandler
+    IRQ  IPCT_1_IRQHandler
     IRQ  GPIOTE130_0_IRQHandler
     IRQ  GPIOTE130_1_IRQHandler
     IRQ  GRTC_0_IRQHandler
@@ -859,7 +858,6 @@ Default_Handler:
     IRQ  RTC131_IRQHandler
     IRQ  WDT131_IRQHandler
     IRQ  WDT132_IRQHandler
-    IRQ  EGU130_IRQHandler
     IRQ  RESETHUB_IRQHandler
     IRQ  SAADC_IRQHandler
     IRQ  COMP_LPCOMP_IRQHandler
