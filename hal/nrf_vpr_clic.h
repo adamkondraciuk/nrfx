@@ -61,7 +61,7 @@ typedef struct
 typedef enum
 {
     NRF_VPR_CLIC_TRIGGER_EDGE_POS  = CLIC_CLIC_CLICINT_TRIG_EdgeTriggered,  /**< Interrupts are positive edge-triggered. */
-#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
     NRF_VPR_CLIC_TRIGGER_LEVEL_POS = CLIC_CLIC_CLICINT_TRIG_LevelTriggered, /**< Interrupts are positive level-triggered. */
     NRF_VPR_CLIC_TRIGGER_LEVEL_NEG = CLIC_CLIC_CLICINT_TRIG_NegativeLevel,  /**< Interrupts are negative level-triggered. */
     NRF_VPR_CLIC_TRIGGER_EDGE_NEG  = CLIC_CLIC_CLICINT_TRIG_NegativeEdge,   /**< Interrupts are negative edge-triggered. */
@@ -71,7 +71,7 @@ typedef enum
 /** @brief Interrupt privilege. */
 typedef enum
 {
-#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
     NRF_VPR_CLIC_PRIV_USER       = CLIC_CLIC_CLICINT_MODE_UserMode,       /**< User mode. */
     NRF_VPR_CLIC_PRIV_SUPERVISOR = CLIC_CLIC_CLICINT_MODE_SupervisorMode, /**< Supervisor mode. */
 #endif
@@ -211,7 +211,7 @@ NRF_STATIC_INLINE void nrf_vpr_clic_info_get(NRF_CLIC_Type const * p_reg,
                               >> CLIC_CLIC_CLICINFO_NUMINTERRUPTS_Pos;
     p_info->version         = (inf & CLIC_CLIC_CLICINFO_VERSION_Msk)
                               >> CLIC_CLIC_CLICINFO_VERSION_Pos;
-#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
     p_info->ctl_bits        = (inf & CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Msk)
                               >> CLIC_CLIC_CLICINFO_CLICINTCTLBITS_Pos;
 #endif

@@ -20,6 +20,10 @@
 #include <nrfx_apb_haltium_ppr.h>
 #elif defined(NRF_FLPR)
 #include <nrfx_apb_haltium_flpr.h>
+#elif defined(NRF_LMAC)
+#include <nrfx_apb_haltium_lmac.h>
+#elif defined(NRF_UMAC)
+#include <nrfx_apb_haltium_umac.h>
 #endif
 
 NRFX_DPPI_GLOBAL_DEFINE;

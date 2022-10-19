@@ -56,4 +56,9 @@
     #include <nrfx_config_nrf9230_global.h>
 #endif
 
+#if defined(NRF7140_XXAA)
+    #include <nrfx_config_haltium_global.h>
+    #include <nrfx_config_nrf7140_global.h>
+#endif
+
 #endif // NRFX_CONFIG_H__
