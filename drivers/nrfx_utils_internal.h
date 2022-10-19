@@ -8,8 +8,8 @@
 /* This is called from NRFX_IS_ENABLED(), and sticks on a "_XXXX" prefix,
  * it will now be "_XXXX1" if config_macro is "1", or just "_XXXX" if it's
  * undefined.
- *   ENABLED:   Z_IS_ENABLED2(_XXXX1)
- *   DISABLED   Z_IS_ENABLED2(_XXXX)
+ *   ENABLED:   NRFX_IS_ENABLED2(_XXXX1)
+ *   DISABLED   NRFX_IS_ENABLED2(_XXXX)
  */
 #define _NRFX_IS_ENABLED1(config_macro) _NRFX_IS_ENABLED2(_XXXX##config_macro)
 
@@ -25,8 +25,8 @@
 /* Then we append an extra argument to fool the gcc preprocessor into
  * accepting it as a varargs macro.
  *                         arg1   arg2  arg3
- *   ENABLED:   Z_IS_ENABLED3(_YYYY,    1,    0)
- *   DISABLED   Z_IS_ENABLED3(_XXXX 1,  0)
+ *   ENABLED:   NRFX_IS_ENABLED3(_YYYY,    1,    0)
+ *   DISABLED   NRFX_IS_ENABLED3(_XXXX 1,  0)
  */
 #define _NRFX_IS_ENABLED2(one_or_two_args) _NRFX_IS_ENABLED3(one_or_two_args 1, 0)
 
@@ -35,7 +35,7 @@
  */
 #define _NRFX_IS_ENABLED3(ignore_this, val, ...) val
 
-/* Used internally by COND_CODE_1 and COND_CODE_0. */
+/* Used internally by NRFX_COND_CODE_1 and NRFX_COND_CODE_0. */
 #define _NRFX_COND_CODE_1(_flag, _if_1_code, _else_code) \
 	_NRFX_COND_CODE1(_XXXX##_flag, _if_1_code, _else_code)
 
@@ -50,6 +50,34 @@
 #define NRFX_GET_ARG2_DEBRACKET(ignore_this, val, ...) NRFX_DEBRACKET val
 
 #define NRFX_DEBRACKET(...) __VA_ARGS__
+
+/* Implementation details for NRFX_NUM_VA_ARGS_LESS_1 */
+#define _NRFX_NUM_VA_ARGS_LESS_1_IMPL(\
+            _ignored,\
+            _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10,\
+            _11, _12, _13, _14, _15, _16, _17, _18, _19, _20,\
+            _21, _22, _23, _24, _25, _26, _27, _28, _29, _30,\
+            _31, _32, _33, _34, _35, _36, _37, _38, _39, _40,\
+            _41, _42, _43, _44, _45, _46, _47, _48, _49, _50,\
+            _51, _52, _53, _54, _55, _56, _57, _58, _59, _60,\
+            _61, _62, N, ...) N
+
+/* Partial macros for @ref NRFX_CONCAT */
+#define _NRFX_CONCAT_0(arg, ...) arg
+
+#define _NRFX_CONCAT_1(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_0(__VA_ARGS__))
+
+#define _NRFX_CONCAT_2(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_1(__VA_ARGS__))
+
+#define _NRFX_CONCAT_3(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_2(__VA_ARGS__))
+
+#define _NRFX_CONCAT_4(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_3(__VA_ARGS__))
+
+#define _NRFX_CONCAT_5(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_4(__VA_ARGS__))
+
+#define _NRFX_CONCAT_6(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_5(__VA_ARGS__))
+
+#define _NRFX_CONCAT_7(arg, ...) NRFX_CONCAT_2(arg, _NRFX_CONCAT_6(__VA_ARGS__))
 
 /* Set of UTIL_LISTIFY particles */
 #define _NRFX_LISTIFY_0(F, sep, ...)
