@@ -152,11 +152,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PWM120_NS_BASE                0x4F8E4000UL
 #define NRF_PWM120_S_BASE                 0x5F8E4000UL
 #define NRF_SPIS120_NS_BASE               0x4F8E5000UL
-#define NRF_UARTE120_NS_BASE              0x4F8E5000UL
 #define NRF_SPIS120_S_BASE                0x5F8E5000UL
-#define NRF_UARTE120_S_BASE               0x5F8E5000UL
 #define NRF_SPIM120_NS_BASE               0x4F8E6000UL
+#define NRF_UARTE120_NS_BASE              0x4F8E6000UL
 #define NRF_SPIM120_S_BASE                0x5F8E6000UL
+#define NRF_UARTE120_S_BASE               0x5F8E6000UL
 #define NRF_SPIM121_NS_BASE               0x4F8E7000UL
 #define NRF_SPIM121_S_BASE                0x5F8E7000UL
 #define NRF_COEXC_NS_BASE                 0x4F8E8000UL
@@ -444,11 +444,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PWM120_NS                     ((NRF_PWM_Type*)                      NRF_PWM120_NS_BASE)
 #define NRF_PWM120_S                      ((NRF_PWM_Type*)                      NRF_PWM120_S_BASE)
 #define NRF_SPIS120_NS                    ((NRF_SPIS_Type*)                     NRF_SPIS120_NS_BASE)
-#define NRF_UARTE120_NS                   ((NRF_UARTE_Type*)                    NRF_UARTE120_NS_BASE)
 #define NRF_SPIS120_S                     ((NRF_SPIS_Type*)                     NRF_SPIS120_S_BASE)
-#define NRF_UARTE120_S                    ((NRF_UARTE_Type*)                    NRF_UARTE120_S_BASE)
 #define NRF_SPIM120_NS                    ((NRF_SPIM_Type*)                     NRF_SPIM120_NS_BASE)
+#define NRF_UARTE120_NS                   ((NRF_UARTE_Type*)                    NRF_UARTE120_NS_BASE)
 #define NRF_SPIM120_S                     ((NRF_SPIM_Type*)                     NRF_SPIM120_S_BASE)
+#define NRF_UARTE120_S                    ((NRF_UARTE_Type*)                    NRF_UARTE120_S_BASE)
 #define NRF_SPIM121_NS                    ((NRF_SPIM_Type*)                     NRF_SPIM121_NS_BASE)
 #define NRF_SPIM121_S                     ((NRF_SPIM_Type*)                     NRF_SPIM121_S_BASE)
 #define NRF_COEXC_NS                      ((NRF_COEXC_Type*)                    NRF_COEXC_NS_BASE)
@@ -708,8 +708,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TIMER121                            NRF_TIMER121_NS
   #define NRF_PWM120                              NRF_PWM120_NS
   #define NRF_SPIS120                             NRF_SPIS120_NS
-  #define NRF_UARTE120                            NRF_UARTE120_NS
   #define NRF_SPIM120                             NRF_SPIM120_NS
+  #define NRF_UARTE120                            NRF_UARTE120_NS
   #define NRF_SPIM121                             NRF_SPIM121_NS
   #define NRF_COEXC                               NRF_COEXC_NS
   #define NRF_ANTSWC                              NRF_ANTSWC_NS
@@ -864,8 +864,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_TIMER121                            NRF_TIMER121_S
   #define NRF_PWM120                              NRF_PWM120_S
   #define NRF_SPIS120                             NRF_SPIS120_S
-  #define NRF_UARTE120                            NRF_UARTE120_S
   #define NRF_SPIM120                             NRF_SPIM120_S
+  #define NRF_UARTE120                            NRF_UARTE120_S
   #define NRF_SPIM121                             NRF_SPIM121_S
   #define NRF_COEXC                               NRF_COEXC_S
   #define NRF_ANTSWC                              NRF_ANTSWC_S

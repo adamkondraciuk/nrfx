@@ -457,8 +457,8 @@ __isr_vector:
     .long   TIMER120_IRQHandler
     .long   TIMER121_IRQHandler
     .long   PWM120_IRQHandler
-    .long   SPIS120_UARTE120_IRQHandler
-    .long   SPIM120_IRQHandler
+    .long   SPIS120_IRQHandler
+    .long   SPIM120_UARTE120_IRQHandler
     .long   SPIM121_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -700,6 +700,14 @@ __isr_vector:
     .long   SERIAL6_IRQHandler
     .long   SERIAL7_IRQHandler
     .long   PDM133_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
 
     .size __isr_vector, . - __isr_vector
 
@@ -823,8 +831,8 @@ Default_Handler:
     IRQ  TIMER120_IRQHandler
     IRQ  TIMER121_IRQHandler
     IRQ  PWM120_IRQHandler
-    IRQ  SPIS120_UARTE120_IRQHandler
-    IRQ  SPIM120_IRQHandler
+    IRQ  SPIS120_IRQHandler
+    IRQ  SPIM120_UARTE120_IRQHandler
     IRQ  SPIM121_IRQHandler
     IRQ  SPIM122_IRQHandler
     IRQ  SPIM123_IRQHandler

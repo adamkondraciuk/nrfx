@@ -98614,213 +98614,6 @@ typedef struct {
 
 #if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
 
-/* ================================================== Struct PDM_TASKS_DMA =================================================== */
-/**
-  * @brief TASKS_DMA [PDM_TASKS_DMA] Peripheral tasks.
-  */
-typedef struct {
-  __OM  uint32_t  START;                             /*!< (@ 0x00000000) Starts operation using easyDMA to load the values. See
-                                                                         peripheral description for operation using easyDMA.*/    
-  __OM  uint32_t  STOP;                              /*!< (@ 0x00000004) Stops operation using easyDMA. This does not trigger an
-                                                                         END event. After a STOP task, the easyDMA (channel)
-                                                                         will also enter its lowest required power level.*/       
-} NRF_PDM_TASKS_DMA_Type;                            /*!< Size = 8 (0x008)                                                     */
-
-/* PDM_TASKS_DMA_START: Starts operation using easyDMA to load the values. See peripheral description for operation using
-                         easyDMA. */                                                                                              
-                                                                                                                                  
-  #define PDM_TASKS_DMA_START_ResetValue (0x00000000UL) /*!< Reset value of START register.                                    */
-
-/* START @Bit 0 : Starts operation using easyDMA to load the values. See peripheral description for operation using easyDMA. */
-  #define PDM_TASKS_DMA_START_START_Pos (0UL)        /*!< Position of START field.                                             */
-  #define PDM_TASKS_DMA_START_START_Msk (0x1UL << PDM_TASKS_DMA_START_START_Pos) /*!< Bit mask of START field.                 */
-  #define PDM_TASKS_DMA_START_START_Min (0x1UL)      /*!< Min enumerator value of START field.                                 */
-  #define PDM_TASKS_DMA_START_START_Max (0x1UL)      /*!< Max enumerator value of START field.                                 */
-  #define PDM_TASKS_DMA_START_START_Trigger (0x1UL)  /*!< Trigger task                                                         */
-
-
-/* PDM_TASKS_DMA_STOP: Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA
-                        (channel) will also enter its lowest required power level. */                                             
-                                                                                                                                  
-  #define PDM_TASKS_DMA_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                                      */
-
-/* STOP @Bit 0 : Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA (channel)
-                 will also enter its lowest required power level. */                                                              
-                                                                                                                                  
-  #define PDM_TASKS_DMA_STOP_STOP_Pos (0UL)          /*!< Position of STOP field.                                              */
-  #define PDM_TASKS_DMA_STOP_STOP_Msk (0x1UL << PDM_TASKS_DMA_STOP_STOP_Pos) /*!< Bit mask of STOP field.                      */
-  #define PDM_TASKS_DMA_STOP_STOP_Min (0x1UL)        /*!< Min enumerator value of STOP field.                                  */
-  #define PDM_TASKS_DMA_STOP_STOP_Max (0x1UL)        /*!< Max enumerator value of STOP field.                                  */
-  #define PDM_TASKS_DMA_STOP_STOP_Trigger (0x1UL)    /*!< Trigger task                                                         */
-
-
-
-/* ================================================ Struct PDM_SUBSCRIBE_DMA ================================================= */
-/**
-  * @brief SUBSCRIBE_DMA [PDM_SUBSCRIBE_DMA] Subscribe configuration for tasks
-  */
-typedef struct {
-  __IOM uint32_t  START;                             /*!< (@ 0x00000000) Subscribe configuration for task START                */
-  __IOM uint32_t  STOP;                              /*!< (@ 0x00000004) Subscribe configuration for task STOP                 */
-} NRF_PDM_SUBSCRIBE_DMA_Type;                        /*!< Size = 8 (0x008)                                                     */
-
-/* PDM_SUBSCRIBE_DMA_START: Subscribe configuration for task START */
-  #define PDM_SUBSCRIBE_DMA_START_ResetValue (0x00000000UL) /*!< Reset value of START register.                                */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
-  #define PDM_SUBSCRIBE_DMA_START_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
-  #define PDM_SUBSCRIBE_DMA_START_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_DMA_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define PDM_SUBSCRIBE_DMA_START_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
-  #define PDM_SUBSCRIBE_DMA_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Pos (31UL)      /*!< Position of EN field.                                                */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Msk (0x1UL << PDM_SUBSCRIBE_DMA_START_EN_Pos) /*!< Bit mask of EN field.                  */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Disabled (0x0UL) /*!< Disable subscription                                                */
-  #define PDM_SUBSCRIBE_DMA_START_EN_Enabled (0x1UL) /*!< Enable subscription                                                  */
-
-
-/* PDM_SUBSCRIBE_DMA_STOP: Subscribe configuration for task STOP */
-  #define PDM_SUBSCRIBE_DMA_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                                  */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
-  #define PDM_SUBSCRIBE_DMA_STOP_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
-  #define PDM_SUBSCRIBE_DMA_STOP_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_DMA_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
-  #define PDM_SUBSCRIBE_DMA_STOP_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
-  #define PDM_SUBSCRIBE_DMA_STOP_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Pos (31UL)       /*!< Position of EN field.                                                */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Msk (0x1UL << PDM_SUBSCRIBE_DMA_STOP_EN_Pos) /*!< Bit mask of EN field.                    */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Min (0x0UL)      /*!< Min enumerator value of EN field.                                    */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Disabled (0x0UL) /*!< Disable subscription                                                 */
-  #define PDM_SUBSCRIBE_DMA_STOP_EN_Enabled (0x1UL)  /*!< Enable subscription                                                  */
-
-
-
-/* ================================================== Struct PDM_EVENTS_DMA ================================================== */
-/**
-  * @brief EVENTS_DMA [PDM_EVENTS_DMA] Peripheral events.
-  */
-typedef struct {
-  __IOM uint32_t  END;                               /*!< (@ 0x00000000) Generated after all MAXCNT bytes have been transferred
-                                                                         Equivalent to eventDmaEnd[Channel]*/                     
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000004) Generated when EasyDMA has buffered the .PTR and
-                                                                         .MAXCNT registers for the channel, allowing them to be
-                                                                         written to prepare for the next sequence.*/              
-  __IOM uint32_t  BUSERROR;                          /*!< (@ 0x00000008) An error occured during the bus transfer. This event is
-                                                                         generated on an AHB / AXI error response.*/              
-} NRF_PDM_EVENTS_DMA_Type;                           /*!< Size = 12 (0x00C)                                                    */
-
-/* PDM_EVENTS_DMA_END: Generated after all MAXCNT bytes have been transferred Equivalent to eventDmaEnd[Channel] */
-  #define PDM_EVENTS_DMA_END_ResetValue (0x00000000UL) /*!< Reset value of END register.                                       */
-
-/* END @Bit 0 : Generated after all MAXCNT bytes have been transferred Equivalent to eventDmaEnd[Channel] */
-  #define PDM_EVENTS_DMA_END_END_Pos (0UL)           /*!< Position of END field.                                               */
-  #define PDM_EVENTS_DMA_END_END_Msk (0x1UL << PDM_EVENTS_DMA_END_END_Pos) /*!< Bit mask of END field.                         */
-  #define PDM_EVENTS_DMA_END_END_Min (0x0UL)         /*!< Min enumerator value of END field.                                   */
-  #define PDM_EVENTS_DMA_END_END_Max (0x1UL)         /*!< Max enumerator value of END field.                                   */
-  #define PDM_EVENTS_DMA_END_END_NotGenerated (0x0UL) /*!< Event not generated                                                 */
-  #define PDM_EVENTS_DMA_END_END_Generated (0x1UL)   /*!< Event generated                                                      */
-
-
-/* PDM_EVENTS_DMA_READY: Generated when EasyDMA has buffered the .PTR and .MAXCNT registers for the channel, allowing them to be
-                          written to prepare for the next sequence. */                                                            
-                                                                                                                                  
-  #define PDM_EVENTS_DMA_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                   */
-
-/* READY @Bit 0 : Generated when EasyDMA has buffered the .PTR and .MAXCNT registers for the channel, allowing them to be
-                  written to prepare for the next sequence. */                                                                    
-                                                                                                                                  
-  #define PDM_EVENTS_DMA_READY_READY_Pos (0UL)       /*!< Position of READY field.                                             */
-  #define PDM_EVENTS_DMA_READY_READY_Msk (0x1UL << PDM_EVENTS_DMA_READY_READY_Pos) /*!< Bit mask of READY field.               */
-  #define PDM_EVENTS_DMA_READY_READY_Min (0x0UL)     /*!< Min enumerator value of READY field.                                 */
-  #define PDM_EVENTS_DMA_READY_READY_Max (0x1UL)     /*!< Max enumerator value of READY field.                                 */
-  #define PDM_EVENTS_DMA_READY_READY_NotGenerated (0x0UL) /*!< Event not generated                                             */
-  #define PDM_EVENTS_DMA_READY_READY_Generated (0x1UL) /*!< Event generated                                                    */
-
-
-/* PDM_EVENTS_DMA_BUSERROR: An error occured during the bus transfer. This event is generated on an AHB / AXI error response. */
-  #define PDM_EVENTS_DMA_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of BUSERROR register.                             */
-
-/* BUSERROR @Bit 0 : An error occured during the bus transfer. This event is generated on an AHB / AXI error response. */
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_Pos (0UL) /*!< Position of BUSERROR field.                                          */
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_Msk (0x1UL << PDM_EVENTS_DMA_BUSERROR_BUSERROR_Pos) /*!< Bit mask of BUSERROR field.*/
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_Min (0x0UL) /*!< Min enumerator value of BUSERROR field.                            */
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_Max (0x1UL) /*!< Max enumerator value of BUSERROR field.                            */
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_NotGenerated (0x0UL) /*!< Event not generated                                       */
-  #define PDM_EVENTS_DMA_BUSERROR_BUSERROR_Generated (0x1UL) /*!< Event generated                                              */
-
-
-
-/* ================================================= Struct PDM_PUBLISH_DMA ================================================== */
-/**
-  * @brief PUBLISH_DMA [PDM_PUBLISH_DMA] Publish configuration for events
-  */
-typedef struct {
-  __IOM uint32_t  END;                               /*!< (@ 0x00000000) Publish configuration for event END                   */
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000004) Publish configuration for event READY                 */
-  __IOM uint32_t  BUSERROR;                          /*!< (@ 0x00000008) Publish configuration for event BUSERROR              */
-} NRF_PDM_PUBLISH_DMA_Type;                          /*!< Size = 12 (0x00C)                                                    */
-
-/* PDM_PUBLISH_DMA_END: Publish configuration for event END */
-  #define PDM_PUBLISH_DMA_END_ResetValue (0x00000000UL) /*!< Reset value of END register.                                      */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
-  #define PDM_PUBLISH_DMA_END_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
-  #define PDM_PUBLISH_DMA_END_CHIDX_Msk (0xFFUL << PDM_PUBLISH_DMA_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
-  #define PDM_PUBLISH_DMA_END_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
-  #define PDM_PUBLISH_DMA_END_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PDM_PUBLISH_DMA_END_EN_Pos (31UL)          /*!< Position of EN field.                                                */
-  #define PDM_PUBLISH_DMA_END_EN_Msk (0x1UL << PDM_PUBLISH_DMA_END_EN_Pos) /*!< Bit mask of EN field.                          */
-  #define PDM_PUBLISH_DMA_END_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_END_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_END_EN_Disabled (0x0UL)    /*!< Disable publishing                                                   */
-  #define PDM_PUBLISH_DMA_END_EN_Enabled (0x1UL)     /*!< Enable publishing                                                    */
-
-
-/* PDM_PUBLISH_DMA_READY: Publish configuration for event READY */
-  #define PDM_PUBLISH_DMA_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                  */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
-  #define PDM_PUBLISH_DMA_READY_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
-  #define PDM_PUBLISH_DMA_READY_CHIDX_Msk (0xFFUL << PDM_PUBLISH_DMA_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define PDM_PUBLISH_DMA_READY_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
-  #define PDM_PUBLISH_DMA_READY_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PDM_PUBLISH_DMA_READY_EN_Pos (31UL)        /*!< Position of EN field.                                                */
-  #define PDM_PUBLISH_DMA_READY_EN_Msk (0x1UL << PDM_PUBLISH_DMA_READY_EN_Pos) /*!< Bit mask of EN field.                      */
-  #define PDM_PUBLISH_DMA_READY_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_READY_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_READY_EN_Disabled (0x0UL)  /*!< Disable publishing                                                   */
-  #define PDM_PUBLISH_DMA_READY_EN_Enabled (0x1UL)   /*!< Enable publishing                                                    */
-
-
-/* PDM_PUBLISH_DMA_BUSERROR: Publish configuration for event BUSERROR */
-  #define PDM_PUBLISH_DMA_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of BUSERROR register.                            */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event BUSERROR will publish to */
-  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
-  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Msk (0xFFUL << PDM_PUBLISH_DMA_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
-  #define PDM_PUBLISH_DMA_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
-
-/* EN @Bit 31 : (unspecified) */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Pos (31UL)     /*!< Position of EN field.                                                */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Msk (0x1UL << PDM_PUBLISH_DMA_BUSERROR_EN_Pos) /*!< Bit mask of EN field.                */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Disabled (0x0UL) /*!< Disable publishing                                                 */
-  #define PDM_PUBLISH_DMA_BUSERROR_EN_Enabled (0x1UL) /*!< Enable publishing                                                   */
-
-
-
 /* ==================================================== Struct PDM_FILTER ==================================================== */
 /**
   * @brief FILTER [PDM_FILTER] (unspecified)
@@ -98972,63 +98765,55 @@ typedef struct {
 
 
 
+/* ==================================================== Struct PDM_SAMPLE ==================================================== */
+/**
+  * @brief SAMPLE [PDM_SAMPLE] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) RAM address pointer to write samples to with EasyDMA  */
+  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000004) Number of samples to allocate memory for in EasyDMA
+                                                                         mode*/                                                   
+  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000008) Number of samples transferred into Data RAM since last
+                                                                         START task*/                                             
+} NRF_PDM_SAMPLE_Type;                               /*!< Size = 12 (0x00C)                                                    */
+
+/* PDM_SAMPLE_PTR: RAM address pointer to write samples to with EasyDMA */
+  #define PDM_SAMPLE_PTR_ResetValue (0x00000000UL)   /*!< Reset value of PTR register.                                         */
+
+/* SAMPLEPTR @Bits 0..31 : Address to write PDM samples to over DMA */
+  #define PDM_SAMPLE_PTR_SAMPLEPTR_Pos (0UL)         /*!< Position of SAMPLEPTR field.                                         */
+  #define PDM_SAMPLE_PTR_SAMPLEPTR_Msk (0xFFFFFFFFUL << PDM_SAMPLE_PTR_SAMPLEPTR_Pos) /*!< Bit mask of SAMPLEPTR field.        */
+
+
+/* PDM_SAMPLE_MAXCNT: Number of samples to allocate memory for in EasyDMA mode */
+  #define PDM_SAMPLE_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                     */
+
+/* BUFFSIZE @Bits 0..14 : Length of DMA RAM allocation in number of samples */
+  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos (0UL)       /*!< Position of BUFFSIZE field.                                          */
+  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Msk (0x7FFFUL << PDM_SAMPLE_MAXCNT_BUFFSIZE_Pos) /*!< Bit mask of BUFFSIZE field.         */
+  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Min (0x0UL)     /*!< Min value of BUFFSIZE field.                                         */
+  #define PDM_SAMPLE_MAXCNT_BUFFSIZE_Max (0x7FFFUL)  /*!< Max size of BUFFSIZE field.                                          */
+
+
+/* PDM_SAMPLE_AMOUNT: Number of samples transferred into Data RAM since last START task */
+  #define PDM_SAMPLE_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                     */
+
+/* AMOUNT @Bits 0..14 : Number of samples transferred into Data RAM since last START task */
+  #define PDM_SAMPLE_AMOUNT_AMOUNT_Pos (0UL)         /*!< Position of AMOUNT field.                                            */
+  #define PDM_SAMPLE_AMOUNT_AMOUNT_Msk (0x7FFFUL << PDM_SAMPLE_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.               */
+
+
+
 /* ===================================================== Struct PDM_DMA ====================================================== */
 /**
   * @brief DMA [PDM_DMA] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000000) Register doesn't do anything. Can be written and read,
-                                                                         but has no functionality attached.*/                     
-  __IOM uint32_t  PTR;                               /*!< (@ 0x00000004) RAM buffer start address                              */
-  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000008) Maximum number of bytes in receive buffer             */
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
-                                                                         updated after the END event.*/                           
-  __IM  uint32_t  RESERVED[3];
-  __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
+  __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x00000000) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
-  __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
+  __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000004) Address of transaction that generated the last BUSERROR
                                                                          event.*/                                                 
-} NRF_PDM_DMA_Type;                                  /*!< Size = 36 (0x024)                                                    */
-
-/* PDM_DMA_ENABLE: Register doesn't do anything. Can be written and read, but has no functionality attached. */
-  #define PDM_DMA_ENABLE_ResetValue (0x00000000UL)   /*!< Reset value of ENABLE register.                                      */
-
-/* ENABLE @Bit 0 : Register doesn't do anything. Can be written and read, but has no functionality attached. */
-  #define PDM_DMA_ENABLE_ENABLE_Pos (0UL)            /*!< Position of ENABLE field.                                            */
-  #define PDM_DMA_ENABLE_ENABLE_Msk (0x1UL << PDM_DMA_ENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.                        */
-  #define PDM_DMA_ENABLE_ENABLE_Min (0x0UL)          /*!< Min enumerator value of ENABLE field.                                */
-  #define PDM_DMA_ENABLE_ENABLE_Max (0x1UL)          /*!< Max enumerator value of ENABLE field.                                */
-  #define PDM_DMA_ENABLE_ENABLE_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define PDM_DMA_ENABLE_ENABLE_Enabled (0x1UL)      /*!< Enable                                                               */
-
-
-/* PDM_DMA_PTR: RAM buffer start address */
-  #define PDM_DMA_PTR_ResetValue (0x00000000UL)      /*!< Reset value of PTR register.                                         */
-
-/* PTR @Bits 0..31 : RAM buffer start address for this EasyDMA channel. This address is a word aligned Data RAM address. */
-  #define PDM_DMA_PTR_PTR_Pos (0UL)                  /*!< Position of PTR field.                                               */
-  #define PDM_DMA_PTR_PTR_Msk (0xFFFFFFFFUL << PDM_DMA_PTR_PTR_Pos) /*!< Bit mask of PTR field.                                */
-
-
-/* PDM_DMA_MAXCNT: Maximum number of bytes in receive buffer */
-  #define PDM_DMA_MAXCNT_ResetValue (0x00000000UL)   /*!< Reset value of MAXCNT register.                                      */
-
-/* MAXCNT @Bits 0..15 : Maximum number of bytes in receive buffer */
-  #define PDM_DMA_MAXCNT_MAXCNT_Pos (0UL)            /*!< Position of MAXCNT field.                                            */
-  #define PDM_DMA_MAXCNT_MAXCNT_Msk (0xFFFFUL << PDM_DMA_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                     */
-  #define PDM_DMA_MAXCNT_MAXCNT_Min (0x1UL)          /*!< Min value of MAXCNT field.                                           */
-  #define PDM_DMA_MAXCNT_MAXCNT_Max (0xFFFFUL)       /*!< Max size of MAXCNT field.                                            */
-
-
-/* PDM_DMA_AMOUNT: Number of bytes transferred in the last transaction, updated after the END event. */
-  #define PDM_DMA_AMOUNT_ResetValue (0x00000000UL)   /*!< Reset value of AMOUNT register.                                      */
-
-/* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
-  #define PDM_DMA_AMOUNT_AMOUNT_Pos (0UL)            /*!< Position of AMOUNT field.                                            */
-  #define PDM_DMA_AMOUNT_AMOUNT_Msk (0xFFFFUL << PDM_DMA_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                     */
-  #define PDM_DMA_AMOUNT_AMOUNT_Min (0x1UL)          /*!< Min value of AMOUNT field.                                           */
-  #define PDM_DMA_AMOUNT_AMOUNT_Max (0xFFFFUL)       /*!< Max size of AMOUNT field.                                            */
-
+} NRF_PDM_DMA_Type;                                  /*!< Size = 8 (0x008)                                                     */
 
 /* PDM_DMA_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define PDM_DMA_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.              */
@@ -99057,27 +98842,29 @@ typedef struct {
   * @brief Pulse Density Modulation (Digital Microphone) Interface
   */
   typedef struct {                                   /*!< PDM Structure                                                        */
-    __OM NRF_PDM_TASKS_DMA_Type TASKS_DMA;           /*!< (@ 0x00000000) Peripheral tasks.                                     */
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Starts continuous PDM transfer                        */
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stops PDM transfer                                    */
     __IM uint32_t RESERVED[30];
-    __IOM NRF_PDM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;  /*!< (@ 0x00000080) Subscribe configuration for tasks                     */
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
     __IM uint32_t RESERVED1[30];
     __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) PDM transfer has started                              */
     __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) PDM transfer has finished                             */
-    __IM uint32_t RESERVED2[2];
-    __IOM NRF_PDM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000110) Peripheral events.                                    */
-    __IM uint32_t RESERVED3[25];
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000108) The PDM has written the last sample specified by
+                                                                         SAMPLE.MAXCNT (or the last sample after a STOP task has
+                                                                         been received) to Data RAM*/                             
+    __IOM uint32_t EVENTS_OVERRUN;                   /*!< (@ 0x0000010C) PDM samples lost due to DMA destination not available */
+    __IM uint32_t RESERVED2[28];
     __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
     __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
-    __IM uint32_t RESERVED4[2];
-    __IOM NRF_PDM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x00000190) Publish configuration for events                      */
-    __IM uint32_t RESERVED5[25];
-    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
-    __IM uint32_t RESERVED6[63];
+    __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000188) Publish configuration for event END                   */
+    __IOM uint32_t PUBLISH_OVERRUN;                  /*!< (@ 0x0000018C) Publish configuration for event OVERRUN               */
+    __IM uint32_t RESERVED3[92];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
     __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED7[124];
+    __IM uint32_t RESERVED4[124];
     __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PDM module enable register                            */
     __IOM uint32_t PDMCLKCTRL;                       /*!< (@ 0x00000504) PDM clock generator control                           */
     __IOM uint32_t MODE;                             /*!< (@ 0x00000508) Defines the routing of the connected PDM microphones'
@@ -99090,16 +98877,76 @@ typedef struct {
     __IOM uint32_t GAINR;                            /*!< (@ 0x0000051C) Right output gain adjustment                          */
     __IOM uint32_t RATIO;                            /*!< (@ 0x00000520) Selects the ratio between PDM_CLK and output sample
                                                                          rate. Change PDMCLKCTRL accordingly.*/                   
-    __IM uint32_t RESERVED8;
+    __IM uint32_t RESERVED5;
     __IOM NRF_PDM_FILTER_Type FILTER;                /*!< (@ 0x00000528) (unspecified)                                         */
     __IOM uint32_t PHASE;                            /*!< (@ 0x0000053C) Selection of delay on the clock line (to avoid
                                                                          potential setup&hold timing violation on input data)*/   
     __IOM NRF_PDM_PSEL_Type PSEL;                    /*!< (@ 0x00000540) (unspecified)                                         */
     __IOM uint32_t RAMCONFIG;                        /*!< (@ 0x00000548) Trim value for internal PDM RAM                       */
     __IOM uint32_t MCLKCONFIG;                       /*!< (@ 0x0000054C) Master clock generator configuration                  */
-    __IM uint32_t RESERVED9[108];
+    __IM uint32_t RESERVED6[4];
+    __IOM NRF_PDM_SAMPLE_Type SAMPLE;                /*!< (@ 0x00000560) (unspecified)                                         */
+    __IM uint32_t RESERVED7[101];
     __IOM NRF_PDM_DMA_Type DMA;                      /*!< (@ 0x00000700) (unspecified)                                         */
-  } NRF_PDM_Type;                                    /*!< Size = 1828 (0x724)                                                  */
+  } NRF_PDM_Type;                                    /*!< Size = 1800 (0x708)                                                  */
+
+/* PDM_TASKS_START: Starts continuous PDM transfer */
+  #define PDM_TASKS_START_ResetValue (0x00000000UL)  /*!< Reset value of TASKS_START register.                                 */
+
+/* TASKS_START @Bit 0 : Starts continuous PDM transfer */
+  #define PDM_TASKS_START_TASKS_START_Pos (0UL)      /*!< Position of TASKS_START field.                                       */
+  #define PDM_TASKS_START_TASKS_START_Msk (0x1UL << PDM_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field.       */
+  #define PDM_TASKS_START_TASKS_START_Min (0x1UL)    /*!< Min enumerator value of TASKS_START field.                           */
+  #define PDM_TASKS_START_TASKS_START_Max (0x1UL)    /*!< Max enumerator value of TASKS_START field.                           */
+  #define PDM_TASKS_START_TASKS_START_Trigger (0x1UL) /*!< Trigger task                                                        */
+
+
+/* PDM_TASKS_STOP: Stops PDM transfer */
+  #define PDM_TASKS_STOP_ResetValue (0x00000000UL)   /*!< Reset value of TASKS_STOP register.                                  */
+
+/* TASKS_STOP @Bit 0 : Stops PDM transfer */
+  #define PDM_TASKS_STOP_TASKS_STOP_Pos (0UL)        /*!< Position of TASKS_STOP field.                                        */
+  #define PDM_TASKS_STOP_TASKS_STOP_Msk (0x1UL << PDM_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field.            */
+  #define PDM_TASKS_STOP_TASKS_STOP_Min (0x1UL)      /*!< Min enumerator value of TASKS_STOP field.                            */
+  #define PDM_TASKS_STOP_TASKS_STOP_Max (0x1UL)      /*!< Max enumerator value of TASKS_STOP field.                            */
+  #define PDM_TASKS_STOP_TASKS_STOP_Trigger (0x1UL)  /*!< Trigger task                                                         */
+
+
+/* PDM_SUBSCRIBE_START: Subscribe configuration for task START */
+  #define PDM_SUBSCRIBE_START_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_START register.                          */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
+  #define PDM_SUBSCRIBE_START_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
+  #define PDM_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
+  #define PDM_SUBSCRIBE_START_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_SUBSCRIBE_START_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define PDM_SUBSCRIBE_START_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define PDM_SUBSCRIBE_START_EN_Msk (0x1UL << PDM_SUBSCRIBE_START_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define PDM_SUBSCRIBE_START_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define PDM_SUBSCRIBE_START_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define PDM_SUBSCRIBE_START_EN_Disabled (0x0UL)    /*!< Disable subscription                                                 */
+  #define PDM_SUBSCRIBE_START_EN_Enabled (0x1UL)     /*!< Enable subscription                                                  */
+
+
+/* PDM_SUBSCRIBE_STOP: Subscribe configuration for task STOP */
+  #define PDM_SUBSCRIBE_STOP_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_STOP register.                            */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
+  #define PDM_SUBSCRIBE_STOP_CHIDX_Pos (0UL)         /*!< Position of CHIDX field.                                             */
+  #define PDM_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << PDM_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.                  */
+  #define PDM_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)       /*!< Min value of CHIDX field.                                            */
+  #define PDM_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)      /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define PDM_SUBSCRIBE_STOP_EN_Pos (31UL)           /*!< Position of EN field.                                                */
+  #define PDM_SUBSCRIBE_STOP_EN_Msk (0x1UL << PDM_SUBSCRIBE_STOP_EN_Pos) /*!< Bit mask of EN field.                            */
+  #define PDM_SUBSCRIBE_STOP_EN_Min (0x0UL)          /*!< Min enumerator value of EN field.                                    */
+  #define PDM_SUBSCRIBE_STOP_EN_Max (0x1UL)          /*!< Max enumerator value of EN field.                                    */
+  #define PDM_SUBSCRIBE_STOP_EN_Disabled (0x0UL)     /*!< Disable subscription                                                 */
+  #define PDM_SUBSCRIBE_STOP_EN_Enabled (0x1UL)      /*!< Enable subscription                                                  */
+
 
 /* PDM_EVENTS_STARTED: PDM transfer has started */
   #define PDM_EVENTS_STARTED_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_STARTED register.                            */
@@ -99125,6 +98972,35 @@ typedef struct {
   #define PDM_EVENTS_STOPPED_EVENTS_STOPPED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STOPPED field.                     */
   #define PDM_EVENTS_STOPPED_EVENTS_STOPPED_NotGenerated (0x0UL) /*!< Event not generated                                      */
   #define PDM_EVENTS_STOPPED_EVENTS_STOPPED_Generated (0x1UL) /*!< Event generated                                             */
+
+
+/* PDM_EVENTS_END: The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has been
+                    received) to Data RAM */                                                                                      
+                                                                                                                                  
+  #define PDM_EVENTS_END_ResetValue (0x00000000UL)   /*!< Reset value of EVENTS_END register.                                  */
+
+/* EVENTS_END @Bit 0 : The PDM has written the last sample specified by SAMPLE.MAXCNT (or the last sample after a STOP task has
+                       been received) to Data RAM */                                                                              
+                                                                                                                                  
+  #define PDM_EVENTS_END_EVENTS_END_Pos (0UL)        /*!< Position of EVENTS_END field.                                        */
+  #define PDM_EVENTS_END_EVENTS_END_Msk (0x1UL << PDM_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.            */
+  #define PDM_EVENTS_END_EVENTS_END_Min (0x0UL)      /*!< Min enumerator value of EVENTS_END field.                            */
+  #define PDM_EVENTS_END_EVENTS_END_Max (0x1UL)      /*!< Max enumerator value of EVENTS_END field.                            */
+  #define PDM_EVENTS_END_EVENTS_END_NotGenerated (0x0UL) /*!< Event not generated                                              */
+  #define PDM_EVENTS_END_EVENTS_END_Generated (0x1UL) /*!< Event generated                                                     */
+
+
+/* PDM_EVENTS_OVERRUN: PDM samples lost due to DMA destination not available */
+  #define PDM_EVENTS_OVERRUN_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_OVERRUN register.                            */
+
+/* EVENTS_OVERRUN @Bit 0 : PDM samples lost due to DMA destination not available */
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Pos (0UL) /*!< Position of EVENTS_OVERRUN field.                                   */
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Msk (0x1UL << PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Pos) /*!< Bit mask of EVENTS_OVERRUN
+                                                                            field.*/                                              
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Min (0x0UL) /*!< Min enumerator value of EVENTS_OVERRUN field.                     */
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Max (0x1UL) /*!< Max enumerator value of EVENTS_OVERRUN field.                     */
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_NotGenerated (0x0UL) /*!< Event not generated                                      */
+  #define PDM_EVENTS_OVERRUN_EVENTS_OVERRUN_Generated (0x1UL) /*!< Event generated                                             */
 
 
 /* PDM_PUBLISH_STARTED: Publish configuration for event STARTED */
@@ -99163,17 +99039,40 @@ typedef struct {
   #define PDM_PUBLISH_STOPPED_EN_Enabled (0x1UL)     /*!< Enable publishing                                                    */
 
 
-/* PDM_SHORTS: Shortcuts between local events and tasks */
-  #define PDM_SHORTS_ResetValue (0x00000000UL)       /*!< Reset value of SHORTS register.                                      */
+/* PDM_PUBLISH_END: Publish configuration for event END */
+  #define PDM_PUBLISH_END_ResetValue (0x00000000UL)  /*!< Reset value of PUBLISH_END register.                                 */
 
-/* DMA_BUSERROR_STOP @Bit 0 : Shortcut between event DMA.BUSERROR and task STOP */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Pos (0UL)     /*!< Position of DMA_BUSERROR_STOP field.                                 */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Msk (0x1UL << PDM_SHORTS_DMA_BUSERROR_STOP_Pos) /*!< Bit mask of DMA_BUSERROR_STOP
-                                                                            field.*/                                              
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Min (0x0UL)   /*!< Min enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Max (0x1UL)   /*!< Max enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                  */
-  #define PDM_SHORTS_DMA_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                    */
+/* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
+  #define PDM_PUBLISH_END_CHIDX_Pos (0UL)            /*!< Position of CHIDX field.                                             */
+  #define PDM_PUBLISH_END_CHIDX_Msk (0xFFUL << PDM_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                        */
+  #define PDM_PUBLISH_END_CHIDX_Min (0x0UL)          /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_END_CHIDX_Max (0xFFUL)         /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define PDM_PUBLISH_END_EN_Pos (31UL)              /*!< Position of EN field.                                                */
+  #define PDM_PUBLISH_END_EN_Msk (0x1UL << PDM_PUBLISH_END_EN_Pos) /*!< Bit mask of EN field.                                  */
+  #define PDM_PUBLISH_END_EN_Min (0x0UL)             /*!< Min enumerator value of EN field.                                    */
+  #define PDM_PUBLISH_END_EN_Max (0x1UL)             /*!< Max enumerator value of EN field.                                    */
+  #define PDM_PUBLISH_END_EN_Disabled (0x0UL)        /*!< Disable publishing                                                   */
+  #define PDM_PUBLISH_END_EN_Enabled (0x1UL)         /*!< Enable publishing                                                    */
+
+
+/* PDM_PUBLISH_OVERRUN: Publish configuration for event OVERRUN */
+  #define PDM_PUBLISH_OVERRUN_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_OVERRUN register.                          */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event OVERRUN will publish to */
+  #define PDM_PUBLISH_OVERRUN_CHIDX_Pos (0UL)        /*!< Position of CHIDX field.                                             */
+  #define PDM_PUBLISH_OVERRUN_CHIDX_Msk (0xFFUL << PDM_PUBLISH_OVERRUN_CHIDX_Pos) /*!< Bit mask of CHIDX field.                */
+  #define PDM_PUBLISH_OVERRUN_CHIDX_Min (0x0UL)      /*!< Min value of CHIDX field.                                            */
+  #define PDM_PUBLISH_OVERRUN_CHIDX_Max (0xFFUL)     /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define PDM_PUBLISH_OVERRUN_EN_Pos (31UL)          /*!< Position of EN field.                                                */
+  #define PDM_PUBLISH_OVERRUN_EN_Msk (0x1UL << PDM_PUBLISH_OVERRUN_EN_Pos) /*!< Bit mask of EN field.                          */
+  #define PDM_PUBLISH_OVERRUN_EN_Min (0x0UL)         /*!< Min enumerator value of EN field.                                    */
+  #define PDM_PUBLISH_OVERRUN_EN_Max (0x1UL)         /*!< Max enumerator value of EN field.                                    */
+  #define PDM_PUBLISH_OVERRUN_EN_Disabled (0x0UL)    /*!< Disable publishing                                                   */
+  #define PDM_PUBLISH_OVERRUN_EN_Enabled (0x1UL)     /*!< Enable publishing                                                    */
 
 
 /* PDM_INTEN: Enable or disable interrupt */
@@ -99195,29 +99094,21 @@ typedef struct {
   #define PDM_INTEN_STOPPED_Disabled (0x0UL)         /*!< Disable                                                              */
   #define PDM_INTEN_STOPPED_Enabled (0x1UL)          /*!< Enable                                                               */
 
-/* DMAEND @Bit 4 : Enable or disable interrupt for event DMAEND */
-  #define PDM_INTEN_DMAEND_Pos (4UL)                 /*!< Position of DMAEND field.                                            */
-  #define PDM_INTEN_DMAEND_Msk (0x1UL << PDM_INTEN_DMAEND_Pos) /*!< Bit mask of DMAEND field.                                  */
-  #define PDM_INTEN_DMAEND_Min (0x0UL)               /*!< Min enumerator value of DMAEND field.                                */
-  #define PDM_INTEN_DMAEND_Max (0x1UL)               /*!< Max enumerator value of DMAEND field.                                */
-  #define PDM_INTEN_DMAEND_Disabled (0x0UL)          /*!< Disable                                                              */
-  #define PDM_INTEN_DMAEND_Enabled (0x1UL)           /*!< Enable                                                               */
+/* END @Bit 2 : Enable or disable interrupt for event END */
+  #define PDM_INTEN_END_Pos (2UL)                    /*!< Position of END field.                                               */
+  #define PDM_INTEN_END_Msk (0x1UL << PDM_INTEN_END_Pos) /*!< Bit mask of END field.                                           */
+  #define PDM_INTEN_END_Min (0x0UL)                  /*!< Min enumerator value of END field.                                   */
+  #define PDM_INTEN_END_Max (0x1UL)                  /*!< Max enumerator value of END field.                                   */
+  #define PDM_INTEN_END_Disabled (0x0UL)             /*!< Disable                                                              */
+  #define PDM_INTEN_END_Enabled (0x1UL)              /*!< Enable                                                               */
 
-/* DMAREADY @Bit 5 : Enable or disable interrupt for event DMAREADY */
-  #define PDM_INTEN_DMAREADY_Pos (5UL)               /*!< Position of DMAREADY field.                                          */
-  #define PDM_INTEN_DMAREADY_Msk (0x1UL << PDM_INTEN_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                            */
-  #define PDM_INTEN_DMAREADY_Min (0x0UL)             /*!< Min enumerator value of DMAREADY field.                              */
-  #define PDM_INTEN_DMAREADY_Max (0x1UL)             /*!< Max enumerator value of DMAREADY field.                              */
-  #define PDM_INTEN_DMAREADY_Disabled (0x0UL)        /*!< Disable                                                              */
-  #define PDM_INTEN_DMAREADY_Enabled (0x1UL)         /*!< Enable                                                               */
-
-/* DMABUSERROR @Bit 6 : Enable or disable interrupt for event DMABUSERROR */
-  #define PDM_INTEN_DMABUSERROR_Pos (6UL)            /*!< Position of DMABUSERROR field.                                       */
-  #define PDM_INTEN_DMABUSERROR_Msk (0x1UL << PDM_INTEN_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.                   */
-  #define PDM_INTEN_DMABUSERROR_Min (0x0UL)          /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTEN_DMABUSERROR_Max (0x1UL)          /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTEN_DMABUSERROR_Disabled (0x0UL)     /*!< Disable                                                              */
-  #define PDM_INTEN_DMABUSERROR_Enabled (0x1UL)      /*!< Enable                                                               */
+/* OVERRUN @Bit 3 : Enable or disable interrupt for event OVERRUN */
+  #define PDM_INTEN_OVERRUN_Pos (3UL)                /*!< Position of OVERRUN field.                                           */
+  #define PDM_INTEN_OVERRUN_Msk (0x1UL << PDM_INTEN_OVERRUN_Pos) /*!< Bit mask of OVERRUN field.                               */
+  #define PDM_INTEN_OVERRUN_Min (0x0UL)              /*!< Min enumerator value of OVERRUN field.                               */
+  #define PDM_INTEN_OVERRUN_Max (0x1UL)              /*!< Max enumerator value of OVERRUN field.                               */
+  #define PDM_INTEN_OVERRUN_Disabled (0x0UL)         /*!< Disable                                                              */
+  #define PDM_INTEN_OVERRUN_Enabled (0x1UL)          /*!< Enable                                                               */
 
 
 /* PDM_INTENSET: Enable interrupt */
@@ -99241,32 +99132,23 @@ typedef struct {
   #define PDM_INTENSET_STOPPED_Disabled (0x0UL)      /*!< Read: Disabled                                                       */
   #define PDM_INTENSET_STOPPED_Enabled (0x1UL)       /*!< Read: Enabled                                                        */
 
-/* DMAEND @Bit 4 : Write '1' to enable interrupt for event DMAEND */
-  #define PDM_INTENSET_DMAEND_Pos (4UL)              /*!< Position of DMAEND field.                                            */
-  #define PDM_INTENSET_DMAEND_Msk (0x1UL << PDM_INTENSET_DMAEND_Pos) /*!< Bit mask of DMAEND field.                            */
-  #define PDM_INTENSET_DMAEND_Min (0x0UL)            /*!< Min enumerator value of DMAEND field.                                */
-  #define PDM_INTENSET_DMAEND_Max (0x1UL)            /*!< Max enumerator value of DMAEND field.                                */
-  #define PDM_INTENSET_DMAEND_Set (0x1UL)            /*!< Enable                                                               */
-  #define PDM_INTENSET_DMAEND_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
-  #define PDM_INTENSET_DMAEND_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
+/* END @Bit 2 : Write '1' to enable interrupt for event END */
+  #define PDM_INTENSET_END_Pos (2UL)                 /*!< Position of END field.                                               */
+  #define PDM_INTENSET_END_Msk (0x1UL << PDM_INTENSET_END_Pos) /*!< Bit mask of END field.                                     */
+  #define PDM_INTENSET_END_Min (0x0UL)               /*!< Min enumerator value of END field.                                   */
+  #define PDM_INTENSET_END_Max (0x1UL)               /*!< Max enumerator value of END field.                                   */
+  #define PDM_INTENSET_END_Set (0x1UL)               /*!< Enable                                                               */
+  #define PDM_INTENSET_END_Disabled (0x0UL)          /*!< Read: Disabled                                                       */
+  #define PDM_INTENSET_END_Enabled (0x1UL)           /*!< Read: Enabled                                                        */
 
-/* DMAREADY @Bit 5 : Write '1' to enable interrupt for event DMAREADY */
-  #define PDM_INTENSET_DMAREADY_Pos (5UL)            /*!< Position of DMAREADY field.                                          */
-  #define PDM_INTENSET_DMAREADY_Msk (0x1UL << PDM_INTENSET_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                      */
-  #define PDM_INTENSET_DMAREADY_Min (0x0UL)          /*!< Min enumerator value of DMAREADY field.                              */
-  #define PDM_INTENSET_DMAREADY_Max (0x1UL)          /*!< Max enumerator value of DMAREADY field.                              */
-  #define PDM_INTENSET_DMAREADY_Set (0x1UL)          /*!< Enable                                                               */
-  #define PDM_INTENSET_DMAREADY_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
-  #define PDM_INTENSET_DMAREADY_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
-
-/* DMABUSERROR @Bit 6 : Write '1' to enable interrupt for event DMABUSERROR */
-  #define PDM_INTENSET_DMABUSERROR_Pos (6UL)         /*!< Position of DMABUSERROR field.                                       */
-  #define PDM_INTENSET_DMABUSERROR_Msk (0x1UL << PDM_INTENSET_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.             */
-  #define PDM_INTENSET_DMABUSERROR_Min (0x0UL)       /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTENSET_DMABUSERROR_Max (0x1UL)       /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTENSET_DMABUSERROR_Set (0x1UL)       /*!< Enable                                                               */
-  #define PDM_INTENSET_DMABUSERROR_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define PDM_INTENSET_DMABUSERROR_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+/* OVERRUN @Bit 3 : Write '1' to enable interrupt for event OVERRUN */
+  #define PDM_INTENSET_OVERRUN_Pos (3UL)             /*!< Position of OVERRUN field.                                           */
+  #define PDM_INTENSET_OVERRUN_Msk (0x1UL << PDM_INTENSET_OVERRUN_Pos) /*!< Bit mask of OVERRUN field.                         */
+  #define PDM_INTENSET_OVERRUN_Min (0x0UL)           /*!< Min enumerator value of OVERRUN field.                               */
+  #define PDM_INTENSET_OVERRUN_Max (0x1UL)           /*!< Max enumerator value of OVERRUN field.                               */
+  #define PDM_INTENSET_OVERRUN_Set (0x1UL)           /*!< Enable                                                               */
+  #define PDM_INTENSET_OVERRUN_Disabled (0x0UL)      /*!< Read: Disabled                                                       */
+  #define PDM_INTENSET_OVERRUN_Enabled (0x1UL)       /*!< Read: Enabled                                                        */
 
 
 /* PDM_INTENCLR: Disable interrupt */
@@ -99290,32 +99172,23 @@ typedef struct {
   #define PDM_INTENCLR_STOPPED_Disabled (0x0UL)      /*!< Read: Disabled                                                       */
   #define PDM_INTENCLR_STOPPED_Enabled (0x1UL)       /*!< Read: Enabled                                                        */
 
-/* DMAEND @Bit 4 : Write '1' to disable interrupt for event DMAEND */
-  #define PDM_INTENCLR_DMAEND_Pos (4UL)              /*!< Position of DMAEND field.                                            */
-  #define PDM_INTENCLR_DMAEND_Msk (0x1UL << PDM_INTENCLR_DMAEND_Pos) /*!< Bit mask of DMAEND field.                            */
-  #define PDM_INTENCLR_DMAEND_Min (0x0UL)            /*!< Min enumerator value of DMAEND field.                                */
-  #define PDM_INTENCLR_DMAEND_Max (0x1UL)            /*!< Max enumerator value of DMAEND field.                                */
-  #define PDM_INTENCLR_DMAEND_Clear (0x1UL)          /*!< Disable                                                              */
-  #define PDM_INTENCLR_DMAEND_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
-  #define PDM_INTENCLR_DMAEND_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
+/* END @Bit 2 : Write '1' to disable interrupt for event END */
+  #define PDM_INTENCLR_END_Pos (2UL)                 /*!< Position of END field.                                               */
+  #define PDM_INTENCLR_END_Msk (0x1UL << PDM_INTENCLR_END_Pos) /*!< Bit mask of END field.                                     */
+  #define PDM_INTENCLR_END_Min (0x0UL)               /*!< Min enumerator value of END field.                                   */
+  #define PDM_INTENCLR_END_Max (0x1UL)               /*!< Max enumerator value of END field.                                   */
+  #define PDM_INTENCLR_END_Clear (0x1UL)             /*!< Disable                                                              */
+  #define PDM_INTENCLR_END_Disabled (0x0UL)          /*!< Read: Disabled                                                       */
+  #define PDM_INTENCLR_END_Enabled (0x1UL)           /*!< Read: Enabled                                                        */
 
-/* DMAREADY @Bit 5 : Write '1' to disable interrupt for event DMAREADY */
-  #define PDM_INTENCLR_DMAREADY_Pos (5UL)            /*!< Position of DMAREADY field.                                          */
-  #define PDM_INTENCLR_DMAREADY_Msk (0x1UL << PDM_INTENCLR_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                      */
-  #define PDM_INTENCLR_DMAREADY_Min (0x0UL)          /*!< Min enumerator value of DMAREADY field.                              */
-  #define PDM_INTENCLR_DMAREADY_Max (0x1UL)          /*!< Max enumerator value of DMAREADY field.                              */
-  #define PDM_INTENCLR_DMAREADY_Clear (0x1UL)        /*!< Disable                                                              */
-  #define PDM_INTENCLR_DMAREADY_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
-  #define PDM_INTENCLR_DMAREADY_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
-
-/* DMABUSERROR @Bit 6 : Write '1' to disable interrupt for event DMABUSERROR */
-  #define PDM_INTENCLR_DMABUSERROR_Pos (6UL)         /*!< Position of DMABUSERROR field.                                       */
-  #define PDM_INTENCLR_DMABUSERROR_Msk (0x1UL << PDM_INTENCLR_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.             */
-  #define PDM_INTENCLR_DMABUSERROR_Min (0x0UL)       /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTENCLR_DMABUSERROR_Max (0x1UL)       /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTENCLR_DMABUSERROR_Clear (0x1UL)     /*!< Disable                                                              */
-  #define PDM_INTENCLR_DMABUSERROR_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
-  #define PDM_INTENCLR_DMABUSERROR_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
+/* OVERRUN @Bit 3 : Write '1' to disable interrupt for event OVERRUN */
+  #define PDM_INTENCLR_OVERRUN_Pos (3UL)             /*!< Position of OVERRUN field.                                           */
+  #define PDM_INTENCLR_OVERRUN_Msk (0x1UL << PDM_INTENCLR_OVERRUN_Pos) /*!< Bit mask of OVERRUN field.                         */
+  #define PDM_INTENCLR_OVERRUN_Min (0x0UL)           /*!< Min enumerator value of OVERRUN field.                               */
+  #define PDM_INTENCLR_OVERRUN_Max (0x1UL)           /*!< Max enumerator value of OVERRUN field.                               */
+  #define PDM_INTENCLR_OVERRUN_Clear (0x1UL)         /*!< Disable                                                              */
+  #define PDM_INTENCLR_OVERRUN_Disabled (0x0UL)      /*!< Read: Disabled                                                       */
+  #define PDM_INTENCLR_OVERRUN_Enabled (0x1UL)       /*!< Read: Enabled                                                        */
 
 
 /* PDM_INTPEND: Pending interrupts */
@@ -99337,29 +99210,21 @@ typedef struct {
   #define PDM_INTPEND_STOPPED_NotPending (0x0UL)     /*!< Read: Not pending                                                    */
   #define PDM_INTPEND_STOPPED_Pending (0x1UL)        /*!< Read: Pending                                                        */
 
-/* DMAEND @Bit 4 : Read pending status of interrupt for event DMAEND */
-  #define PDM_INTPEND_DMAEND_Pos (4UL)               /*!< Position of DMAEND field.                                            */
-  #define PDM_INTPEND_DMAEND_Msk (0x1UL << PDM_INTPEND_DMAEND_Pos) /*!< Bit mask of DMAEND field.                              */
-  #define PDM_INTPEND_DMAEND_Min (0x0UL)             /*!< Min enumerator value of DMAEND field.                                */
-  #define PDM_INTPEND_DMAEND_Max (0x1UL)             /*!< Max enumerator value of DMAEND field.                                */
-  #define PDM_INTPEND_DMAEND_NotPending (0x0UL)      /*!< Read: Not pending                                                    */
-  #define PDM_INTPEND_DMAEND_Pending (0x1UL)         /*!< Read: Pending                                                        */
+/* END @Bit 2 : Read pending status of interrupt for event END */
+  #define PDM_INTPEND_END_Pos (2UL)                  /*!< Position of END field.                                               */
+  #define PDM_INTPEND_END_Msk (0x1UL << PDM_INTPEND_END_Pos) /*!< Bit mask of END field.                                       */
+  #define PDM_INTPEND_END_Min (0x0UL)                /*!< Min enumerator value of END field.                                   */
+  #define PDM_INTPEND_END_Max (0x1UL)                /*!< Max enumerator value of END field.                                   */
+  #define PDM_INTPEND_END_NotPending (0x0UL)         /*!< Read: Not pending                                                    */
+  #define PDM_INTPEND_END_Pending (0x1UL)            /*!< Read: Pending                                                        */
 
-/* DMAREADY @Bit 5 : Read pending status of interrupt for event DMAREADY */
-  #define PDM_INTPEND_DMAREADY_Pos (5UL)             /*!< Position of DMAREADY field.                                          */
-  #define PDM_INTPEND_DMAREADY_Msk (0x1UL << PDM_INTPEND_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                        */
-  #define PDM_INTPEND_DMAREADY_Min (0x0UL)           /*!< Min enumerator value of DMAREADY field.                              */
-  #define PDM_INTPEND_DMAREADY_Max (0x1UL)           /*!< Max enumerator value of DMAREADY field.                              */
-  #define PDM_INTPEND_DMAREADY_NotPending (0x0UL)    /*!< Read: Not pending                                                    */
-  #define PDM_INTPEND_DMAREADY_Pending (0x1UL)       /*!< Read: Pending                                                        */
-
-/* DMABUSERROR @Bit 6 : Read pending status of interrupt for event DMABUSERROR */
-  #define PDM_INTPEND_DMABUSERROR_Pos (6UL)          /*!< Position of DMABUSERROR field.                                       */
-  #define PDM_INTPEND_DMABUSERROR_Msk (0x1UL << PDM_INTPEND_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.               */
-  #define PDM_INTPEND_DMABUSERROR_Min (0x0UL)        /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTPEND_DMABUSERROR_Max (0x1UL)        /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define PDM_INTPEND_DMABUSERROR_NotPending (0x0UL) /*!< Read: Not pending                                                    */
-  #define PDM_INTPEND_DMABUSERROR_Pending (0x1UL)    /*!< Read: Pending                                                        */
+/* OVERRUN @Bit 3 : Read pending status of interrupt for event OVERRUN */
+  #define PDM_INTPEND_OVERRUN_Pos (3UL)              /*!< Position of OVERRUN field.                                           */
+  #define PDM_INTPEND_OVERRUN_Msk (0x1UL << PDM_INTPEND_OVERRUN_Pos) /*!< Bit mask of OVERRUN field.                           */
+  #define PDM_INTPEND_OVERRUN_Min (0x0UL)            /*!< Min enumerator value of OVERRUN field.                               */
+  #define PDM_INTPEND_OVERRUN_Max (0x1UL)            /*!< Max enumerator value of OVERRUN field.                               */
+  #define PDM_INTPEND_OVERRUN_NotPending (0x0UL)     /*!< Read: Not pending                                                    */
+  #define PDM_INTPEND_OVERRUN_Pending (0x1UL)        /*!< Read: Pending                                                        */
 
 
 /* PDM_ENABLE: PDM module enable register */
@@ -101074,25 +100939,13 @@ typedef struct {
   * @brief SEQ [PWM_SEQ] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  RESERVED;
-  __IOM uint32_t  CNT;                               /*!< (@ 0x00000004) Number of values (duty cycles) in this sequence       */
+  __IM  uint32_t  RESERVED[2];
   __IOM uint32_t  REFRESH;                           /*!< (@ 0x00000008) Number of additional PWM periods between samples loaded
                                                                          into compare register*/                                  
   __IOM uint32_t  ENDDELAY;                          /*!< (@ 0x0000000C) Time added after the sequence                         */
   __IM  uint32_t  RESERVED1[4];
 } NRF_PWM_SEQ_Type;                                  /*!< Size = 32 (0x020)                                                    */
   #define PWM_SEQ_MaxCount (2UL)                     /*!< Max size of SEQ[2] array.                                            */
-
-/* PWM_SEQ_CNT: Number of values (duty cycles) in this sequence */
-  #define PWM_SEQ_CNT_ResetValue (0x00000000UL)      /*!< Reset value of CNT register.                                         */
-
-/* CNT @Bits 0..14 : Number of values (duty cycles) in this sequence */
-  #define PWM_SEQ_CNT_CNT_Pos (0UL)                  /*!< Position of CNT field.                                               */
-  #define PWM_SEQ_CNT_CNT_Msk (0x7FFFUL << PWM_SEQ_CNT_CNT_Pos) /*!< Bit mask of CNT field.                                    */
-  #define PWM_SEQ_CNT_CNT_Min (0x0UL)                /*!< Min enumerator value of CNT field.                                   */
-  #define PWM_SEQ_CNT_CNT_Max (0x0UL)                /*!< Max enumerator value of CNT field.                                   */
-  #define PWM_SEQ_CNT_CNT_Disabled (0x0000UL)        /*!< Sequence is disabled, and shall not be started as it is empty        */
-
 
 /* PWM_SEQ_REFRESH: Number of additional PWM periods between samples loaded into compare register */
   #define PWM_SEQ_REFRESH_ResetValue (0x00000001UL)  /*!< Reset value of REFRESH register.                                     */
@@ -124631,93 +124484,6 @@ typedef struct {
 
 #if !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__) /*!< Ignore C structs for assembly code.                                 */
 
-/* ================================================= Struct SAADC_TASKS_DMA ================================================== */
-/**
-  * @brief TASKS_DMA [SAADC_TASKS_DMA] Peripheral tasks.
-  */
-typedef struct {
-  __OM  uint32_t  START;                             /*!< (@ 0x00000000) Starts operation using easyDMA to load the values. See
-                                                                         peripheral description for operation using easyDMA.*/    
-  __OM  uint32_t  STOP;                              /*!< (@ 0x00000004) Stops operation using easyDMA. This does not trigger an
-                                                                         END event. After a STOP task, the easyDMA (channel)
-                                                                         will also enter its lowest required power level.*/       
-} NRF_SAADC_TASKS_DMA_Type;                          /*!< Size = 8 (0x008)                                                     */
-
-/* SAADC_TASKS_DMA_START: Starts operation using easyDMA to load the values. See peripheral description for operation using
-                           easyDMA. */                                                                                            
-                                                                                                                                  
-  #define SAADC_TASKS_DMA_START_ResetValue (0x00000000UL) /*!< Reset value of START register.                                  */
-
-/* START @Bit 0 : Starts operation using easyDMA to load the values. See peripheral description for operation using easyDMA. */
-  #define SAADC_TASKS_DMA_START_START_Pos (0UL)      /*!< Position of START field.                                             */
-  #define SAADC_TASKS_DMA_START_START_Msk (0x1UL << SAADC_TASKS_DMA_START_START_Pos) /*!< Bit mask of START field.             */
-  #define SAADC_TASKS_DMA_START_START_Min (0x1UL)    /*!< Min enumerator value of START field.                                 */
-  #define SAADC_TASKS_DMA_START_START_Max (0x1UL)    /*!< Max enumerator value of START field.                                 */
-  #define SAADC_TASKS_DMA_START_START_Trigger (0x1UL) /*!< Trigger task                                                        */
-
-
-/* SAADC_TASKS_DMA_STOP: Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA
-                          (channel) will also enter its lowest required power level. */                                           
-                                                                                                                                  
-  #define SAADC_TASKS_DMA_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                                    */
-
-/* STOP @Bit 0 : Stops operation using easyDMA. This does not trigger an END event. After a STOP task, the easyDMA (channel)
-                 will also enter its lowest required power level. */                                                              
-                                                                                                                                  
-  #define SAADC_TASKS_DMA_STOP_STOP_Pos (0UL)        /*!< Position of STOP field.                                              */
-  #define SAADC_TASKS_DMA_STOP_STOP_Msk (0x1UL << SAADC_TASKS_DMA_STOP_STOP_Pos) /*!< Bit mask of STOP field.                  */
-  #define SAADC_TASKS_DMA_STOP_STOP_Min (0x1UL)      /*!< Min enumerator value of STOP field.                                  */
-  #define SAADC_TASKS_DMA_STOP_STOP_Max (0x1UL)      /*!< Max enumerator value of STOP field.                                  */
-  #define SAADC_TASKS_DMA_STOP_STOP_Trigger (0x1UL)  /*!< Trigger task                                                         */
-
-
-
-/* =============================================== Struct SAADC_SUBSCRIBE_DMA ================================================ */
-/**
-  * @brief SUBSCRIBE_DMA [SAADC_SUBSCRIBE_DMA] Subscribe configuration for tasks
-  */
-typedef struct {
-  __IOM uint32_t  START;                             /*!< (@ 0x00000000) Subscribe configuration for task START                */
-  __IOM uint32_t  STOP;                              /*!< (@ 0x00000004) Subscribe configuration for task STOP                 */
-} NRF_SAADC_SUBSCRIBE_DMA_Type;                      /*!< Size = 8 (0x008)                                                     */
-
-/* SAADC_SUBSCRIBE_DMA_START: Subscribe configuration for task START */
-  #define SAADC_SUBSCRIBE_DMA_START_ResetValue (0x00000000UL) /*!< Reset value of START register.                              */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
-  #define SAADC_SUBSCRIBE_DMA_START_CHIDX_Pos (0UL)  /*!< Position of CHIDX field.                                             */
-  #define SAADC_SUBSCRIBE_DMA_START_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_DMA_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.    */
-  #define SAADC_SUBSCRIBE_DMA_START_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                           */
-  #define SAADC_SUBSCRIBE_DMA_START_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                           */
-
-/* EN @Bit 31 : (unspecified) */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Pos (31UL)    /*!< Position of EN field.                                                */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Msk (0x1UL << SAADC_SUBSCRIBE_DMA_START_EN_Pos) /*!< Bit mask of EN field.              */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Min (0x0UL)   /*!< Min enumerator value of EN field.                                    */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Max (0x1UL)   /*!< Max enumerator value of EN field.                                    */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Disabled (0x0UL) /*!< Disable subscription                                              */
-  #define SAADC_SUBSCRIBE_DMA_START_EN_Enabled (0x1UL) /*!< Enable subscription                                                */
-
-
-/* SAADC_SUBSCRIBE_DMA_STOP: Subscribe configuration for task STOP */
-  #define SAADC_SUBSCRIBE_DMA_STOP_ResetValue (0x00000000UL) /*!< Reset value of STOP register.                                */
-
-/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
-  #define SAADC_SUBSCRIBE_DMA_STOP_CHIDX_Pos (0UL)   /*!< Position of CHIDX field.                                             */
-  #define SAADC_SUBSCRIBE_DMA_STOP_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_DMA_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.      */
-  #define SAADC_SUBSCRIBE_DMA_STOP_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                            */
-  #define SAADC_SUBSCRIBE_DMA_STOP_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                            */
-
-/* EN @Bit 31 : (unspecified) */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Pos (31UL)     /*!< Position of EN field.                                                */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Msk (0x1UL << SAADC_SUBSCRIBE_DMA_STOP_EN_Pos) /*!< Bit mask of EN field.                */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Min (0x0UL)    /*!< Min enumerator value of EN field.                                    */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Max (0x1UL)    /*!< Max enumerator value of EN field.                                    */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Disabled (0x0UL) /*!< Disable subscription                                               */
-  #define SAADC_SUBSCRIBE_DMA_STOP_EN_Enabled (0x1UL) /*!< Enable subscription                                                 */
-
-
-
 /* ================================================= Struct SAADC_EVENTS_CH ================================================== */
 /**
   * @brief EVENTS_CH [SAADC_EVENTS_CH] Peripheral events.
@@ -124750,64 +124516,6 @@ typedef struct {
   #define SAADC_EVENTS_CH_LIMITL_LIMITL_Max (0x1UL)  /*!< Max enumerator value of LIMITL field.                                */
   #define SAADC_EVENTS_CH_LIMITL_LIMITL_NotGenerated (0x0UL) /*!< Event not generated                                          */
   #define SAADC_EVENTS_CH_LIMITL_LIMITL_Generated (0x1UL) /*!< Event generated                                                 */
-
-
-
-/* ================================================= Struct SAADC_EVENTS_DMA ================================================= */
-/**
-  * @brief EVENTS_DMA [SAADC_EVENTS_DMA] Peripheral events.
-  */
-typedef struct {
-  __IOM uint32_t  END;                               /*!< (@ 0x00000000) Generated after all MAXCNT bytes have been transferred
-                                                                         Equivalent to eventDmaEnd[Channel]*/                     
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000004) Generated when EasyDMA has buffered the .PTR and
-                                                                         .MAXCNT registers for the channel, allowing them to be
-                                                                         written to prepare for the next sequence.*/              
-  __IOM uint32_t  BUSERROR;                          /*!< (@ 0x00000008) An error occured during the bus transfer. This event is
-                                                                         generated on an AHB / AXI error response.*/              
-} NRF_SAADC_EVENTS_DMA_Type;                         /*!< Size = 12 (0x00C)                                                    */
-
-/* SAADC_EVENTS_DMA_END: Generated after all MAXCNT bytes have been transferred Equivalent to eventDmaEnd[Channel] */
-  #define SAADC_EVENTS_DMA_END_ResetValue (0x00000000UL) /*!< Reset value of END register.                                     */
-
-/* END @Bit 0 : Generated after all MAXCNT bytes have been transferred Equivalent to eventDmaEnd[Channel] */
-  #define SAADC_EVENTS_DMA_END_END_Pos (0UL)         /*!< Position of END field.                                               */
-  #define SAADC_EVENTS_DMA_END_END_Msk (0x1UL << SAADC_EVENTS_DMA_END_END_Pos) /*!< Bit mask of END field.                     */
-  #define SAADC_EVENTS_DMA_END_END_Min (0x0UL)       /*!< Min enumerator value of END field.                                   */
-  #define SAADC_EVENTS_DMA_END_END_Max (0x1UL)       /*!< Max enumerator value of END field.                                   */
-  #define SAADC_EVENTS_DMA_END_END_NotGenerated (0x0UL) /*!< Event not generated                                               */
-  #define SAADC_EVENTS_DMA_END_END_Generated (0x1UL) /*!< Event generated                                                      */
-
-
-/* SAADC_EVENTS_DMA_READY: Generated when EasyDMA has buffered the .PTR and .MAXCNT registers for the channel, allowing them to
-                            be written to prepare for the next sequence. */                                                       
-                                                                                                                                  
-  #define SAADC_EVENTS_DMA_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                 */
-
-/* READY @Bit 0 : Generated when EasyDMA has buffered the .PTR and .MAXCNT registers for the channel, allowing them to be
-                  written to prepare for the next sequence. */                                                                    
-                                                                                                                                  
-  #define SAADC_EVENTS_DMA_READY_READY_Pos (0UL)     /*!< Position of READY field.                                             */
-  #define SAADC_EVENTS_DMA_READY_READY_Msk (0x1UL << SAADC_EVENTS_DMA_READY_READY_Pos) /*!< Bit mask of READY field.           */
-  #define SAADC_EVENTS_DMA_READY_READY_Min (0x0UL)   /*!< Min enumerator value of READY field.                                 */
-  #define SAADC_EVENTS_DMA_READY_READY_Max (0x1UL)   /*!< Max enumerator value of READY field.                                 */
-  #define SAADC_EVENTS_DMA_READY_READY_NotGenerated (0x0UL) /*!< Event not generated                                           */
-  #define SAADC_EVENTS_DMA_READY_READY_Generated (0x1UL) /*!< Event generated                                                  */
-
-
-/* SAADC_EVENTS_DMA_BUSERROR: An error occured during the bus transfer. This event is generated on an AHB / AXI error response.
-                               */                                                                                                 
-                                                                                                                                  
-  #define SAADC_EVENTS_DMA_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of BUSERROR register.                           */
-
-/* BUSERROR @Bit 0 : An error occured during the bus transfer. This event is generated on an AHB / AXI error response. */
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Pos (0UL) /*!< Position of BUSERROR field.                                        */
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Msk (0x1UL << SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Pos) /*!< Bit mask of BUSERROR
-                                                                            field.*/                                              
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Min (0x0UL) /*!< Min enumerator value of BUSERROR field.                          */
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Max (0x1UL) /*!< Max enumerator value of BUSERROR field.                          */
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_NotGenerated (0x0UL) /*!< Event not generated                                     */
-  #define SAADC_EVENTS_DMA_BUSERROR_BUSERROR_Generated (0x1UL) /*!< Event generated                                            */
 
 
 
@@ -124858,71 +124566,6 @@ typedef struct {
 
 
 
-/* ================================================ Struct SAADC_PUBLISH_DMA ================================================= */
-/**
-  * @brief PUBLISH_DMA [SAADC_PUBLISH_DMA] Publish configuration for events
-  */
-typedef struct {
-  __IOM uint32_t  END;                               /*!< (@ 0x00000000) Publish configuration for event END                   */
-  __IOM uint32_t  READY;                             /*!< (@ 0x00000004) Publish configuration for event READY                 */
-  __IOM uint32_t  BUSERROR;                          /*!< (@ 0x00000008) Publish configuration for event BUSERROR              */
-} NRF_SAADC_PUBLISH_DMA_Type;                        /*!< Size = 12 (0x00C)                                                    */
-
-/* SAADC_PUBLISH_DMA_END: Publish configuration for event END */
-  #define SAADC_PUBLISH_DMA_END_ResetValue (0x00000000UL) /*!< Reset value of END register.                                    */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
-  #define SAADC_PUBLISH_DMA_END_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
-  #define SAADC_PUBLISH_DMA_END_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_DMA_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
-  #define SAADC_PUBLISH_DMA_END_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
-  #define SAADC_PUBLISH_DMA_END_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define SAADC_PUBLISH_DMA_END_EN_Pos (31UL)        /*!< Position of EN field.                                                */
-  #define SAADC_PUBLISH_DMA_END_EN_Msk (0x1UL << SAADC_PUBLISH_DMA_END_EN_Pos) /*!< Bit mask of EN field.                      */
-  #define SAADC_PUBLISH_DMA_END_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_END_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_END_EN_Disabled (0x0UL)  /*!< Disable publishing                                                   */
-  #define SAADC_PUBLISH_DMA_END_EN_Enabled (0x1UL)   /*!< Enable publishing                                                    */
-
-
-/* SAADC_PUBLISH_DMA_READY: Publish configuration for event READY */
-  #define SAADC_PUBLISH_DMA_READY_ResetValue (0x00000000UL) /*!< Reset value of READY register.                                */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event READY will publish to */
-  #define SAADC_PUBLISH_DMA_READY_CHIDX_Pos (0UL)    /*!< Position of CHIDX field.                                             */
-  #define SAADC_PUBLISH_DMA_READY_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_DMA_READY_CHIDX_Pos) /*!< Bit mask of CHIDX field.        */
-  #define SAADC_PUBLISH_DMA_READY_CHIDX_Min (0x0UL)  /*!< Min value of CHIDX field.                                            */
-  #define SAADC_PUBLISH_DMA_READY_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                             */
-
-/* EN @Bit 31 : (unspecified) */
-  #define SAADC_PUBLISH_DMA_READY_EN_Pos (31UL)      /*!< Position of EN field.                                                */
-  #define SAADC_PUBLISH_DMA_READY_EN_Msk (0x1UL << SAADC_PUBLISH_DMA_READY_EN_Pos) /*!< Bit mask of EN field.                  */
-  #define SAADC_PUBLISH_DMA_READY_EN_Min (0x0UL)     /*!< Min enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_READY_EN_Max (0x1UL)     /*!< Max enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_READY_EN_Disabled (0x0UL) /*!< Disable publishing                                                  */
-  #define SAADC_PUBLISH_DMA_READY_EN_Enabled (0x1UL) /*!< Enable publishing                                                    */
-
-
-/* SAADC_PUBLISH_DMA_BUSERROR: Publish configuration for event BUSERROR */
-  #define SAADC_PUBLISH_DMA_BUSERROR_ResetValue (0x00000000UL) /*!< Reset value of BUSERROR register.                          */
-
-/* CHIDX @Bits 0..7 : DPPI channel that event BUSERROR will publish to */
-  #define SAADC_PUBLISH_DMA_BUSERROR_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
-  #define SAADC_PUBLISH_DMA_BUSERROR_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_DMA_BUSERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-  #define SAADC_PUBLISH_DMA_BUSERROR_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
-  #define SAADC_PUBLISH_DMA_BUSERROR_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
-
-/* EN @Bit 31 : (unspecified) */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Pos (31UL)   /*!< Position of EN field.                                                */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Msk (0x1UL << SAADC_PUBLISH_DMA_BUSERROR_EN_Pos) /*!< Bit mask of EN field.            */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Min (0x0UL)  /*!< Min enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Max (0x1UL)  /*!< Max enumerator value of EN field.                                    */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Disabled (0x0UL) /*!< Disable publishing                                               */
-  #define SAADC_PUBLISH_DMA_BUSERROR_EN_Enabled (0x1UL) /*!< Enable publishing                                                 */
-
-
-
 /* ==================================================== Struct SAADC_TRIM ==================================================== */
 /**
   * @brief TRIM [SAADC_TRIM] (unspecified)
@@ -124969,67 +124612,85 @@ typedef struct {
 /* SAADC_CH_PSELP: Input positive pin selection for CH[n] */
   #define SAADC_CH_PSELP_ResetValue (0x00000000UL)   /*!< Reset value of PSELP register.                                       */
 
-/* PSELP @Bits 0..4 : Analog positive input channel */
-  #define SAADC_CH_PSELP_PSELP_Pos (0UL)             /*!< Position of PSELP field.                                             */
-  #define SAADC_CH_PSELP_PSELP_Msk (0x1FUL << SAADC_CH_PSELP_PSELP_Pos) /*!< Bit mask of PSELP field.                          */
-  #define SAADC_CH_PSELP_PSELP_Min (0x0UL)           /*!< Min enumerator value of PSELP field.                                 */
-  #define SAADC_CH_PSELP_PSELP_Max (0x16UL)          /*!< Max enumerator value of PSELP field.                                 */
-  #define SAADC_CH_PSELP_PSELP_NC (0x00UL)           /*!< Not connected                                                        */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput0 (0x01UL) /*!< AIN0                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput1 (0x02UL) /*!< AIN1                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput2 (0x03UL) /*!< AIN2                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput3 (0x04UL) /*!< AIN3                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput4 (0x05UL) /*!< AIN4                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput5 (0x06UL) /*!< AIN5                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput6 (0x07UL) /*!< AIN6                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput7 (0x08UL) /*!< AIN7                                                                 */
-  #define SAADC_CH_PSELP_PSELP_ATB2 (0x09UL)         /*!< ATB2                                                                 */
-  #define SAADC_CH_PSELP_PSELP_ATB1 (0x0AUL)         /*!< ATB1                                                                 */
-  #define SAADC_CH_PSELP_PSELP_VDDTest0 (0x0BUL)     /*!< Connected to VDD_AO_1V8                                              */
-  #define SAADC_CH_PSELP_PSELP_VDDTest1 (0x0CUL)     /*!< Connected to VDD_AO_0V8                                              */
-  #define SAADC_CH_PSELP_PSELP_VDDTest2 (0x0DUL)     /*!< Connected to VDD_IO_1V2                                              */
-  #define SAADC_CH_PSELP_PSELP_Spare (0x0EUL)        /*!< Reserved for future use                                              */
-  #define SAADC_CH_PSELP_PSELP_AVSS (0x0FUL)         /*!< AVSS                                                                 */
-  #define SAADC_CH_PSELP_PSELP_SELREF (0x10UL)       /*!< Selected reference, voltage determined by PADC_REFSEL                */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput8 (0x11UL) /*!< AIN8                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput9 (0x12UL) /*!< AIN9                                                                 */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput10 (0x13UL) /*!< AIN10                                                               */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput11 (0x14UL) /*!< AIN11                                                               */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput12 (0x15UL) /*!< AIN12                                                               */
-  #define SAADC_CH_PSELP_PSELP_AnalogInput13 (0x16UL) /*!< AIN13                                                               */
+/* PIN @Bits 0..4 : Analog positive input pin select */
+  #define SAADC_CH_PSELP_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
+  #define SAADC_CH_PSELP_PIN_Msk (0x1FUL << SAADC_CH_PSELP_PIN_Pos) /*!< Bit mask of PIN field.                                */
+
+/* PORT @Bits 8..11 : GPIO Port selection */
+  #define SAADC_CH_PSELP_PORT_Pos (8UL)              /*!< Position of PORT field.                                              */
+  #define SAADC_CH_PSELP_PORT_Msk (0xFUL << SAADC_CH_PSELP_PORT_Pos) /*!< Bit mask of PORT field.                              */
+
+/* INTERNAL @Bits 12..13 : Internal input selection for Analog positive input when CH[n].PSELP.CONNECT = Internal */
+  #define SAADC_CH_PSELP_INTERNAL_Pos (12UL)         /*!< Position of INTERNAL field.                                          */
+  #define SAADC_CH_PSELP_INTERNAL_Msk (0x3UL << SAADC_CH_PSELP_INTERNAL_Pos) /*!< Bit mask of INTERNAL field.                  */
+  #define SAADC_CH_PSELP_INTERNAL_Min (0x0UL)        /*!< Min enumerator value of INTERNAL field.                              */
+  #define SAADC_CH_PSELP_INTERNAL_Max (0x3UL)        /*!< Max enumerator value of INTERNAL field.                              */
+  #define SAADC_CH_PSELP_INTERNAL_Internal0 (0x0UL)  /*!< Connected to VDD_AO_1V8                                              */
+  #define SAADC_CH_PSELP_INTERNAL_Interna1 (0x1UL)   /*!< Connected to VDD_AO_0V8                                              */
+  #define SAADC_CH_PSELP_INTERNAL_Internal2 (0x2UL)  /*!< Connected to VDD_IO_1V2                                              */
+  #define SAADC_CH_PSELP_INTERNAL_Internal3 (0x3UL)  /*!< Reserved for future use                                              */
+
+/* TEST @Bits 16..17 : Test input selection for Analog positive input when CH[n].PSELP.CONNECT = Test */
+  #define SAADC_CH_PSELP_TEST_Pos (16UL)             /*!< Position of TEST field.                                              */
+  #define SAADC_CH_PSELP_TEST_Msk (0x3UL << SAADC_CH_PSELP_TEST_Pos) /*!< Bit mask of TEST field.                              */
+  #define SAADC_CH_PSELP_TEST_Min (0x0UL)            /*!< Min enumerator value of TEST field.                                  */
+  #define SAADC_CH_PSELP_TEST_Max (0x3UL)            /*!< Max enumerator value of TEST field.                                  */
+  #define SAADC_CH_PSELP_TEST_ATB2 (0x0UL)           /*!< ATB2                                                                 */
+  #define SAADC_CH_PSELP_TEST_ATB1 (0x1UL)           /*!< ATB1                                                                 */
+  #define SAADC_CH_PSELP_TEST_AVSS (0x2UL)           /*!< AVSS                                                                 */
+  #define SAADC_CH_PSELP_TEST_SELREF (0x3UL)         /*!< Selected reference, voltage determined by PADC_REFSEL                */
+
+/* CONNECT @Bits 30..31 : Connection */
+  #define SAADC_CH_PSELP_CONNECT_Pos (30UL)          /*!< Position of CONNECT field.                                           */
+  #define SAADC_CH_PSELP_CONNECT_Msk (0x3UL << SAADC_CH_PSELP_CONNECT_Pos) /*!< Bit mask of CONNECT field.                     */
+  #define SAADC_CH_PSELP_CONNECT_Min (0x0UL)         /*!< Min enumerator value of CONNECT field.                               */
+  #define SAADC_CH_PSELP_CONNECT_Max (0x3UL)         /*!< Max enumerator value of CONNECT field.                               */
+  #define SAADC_CH_PSELP_CONNECT_NC (0x0UL)          /*!< Not connected                                                        */
+  #define SAADC_CH_PSELP_CONNECT_AnalogInput (0x1UL) /*!< Select analog input                                                  */
+  #define SAADC_CH_PSELP_CONNECT_Internal (0x2UL)    /*!< Selects internal inputs.                                             */
+  #define SAADC_CH_PSELP_CONNECT_Test (0x3UL)        /*!< Selects test inputs.                                                 */
 
 
 /* SAADC_CH_PSELN: Input negative pin selection for CH[n] */
   #define SAADC_CH_PSELN_ResetValue (0x00000000UL)   /*!< Reset value of PSELN register.                                       */
 
-/* PSELN @Bits 0..4 : Analog negative input, enables differential channel */
-  #define SAADC_CH_PSELN_PSELN_Pos (0UL)             /*!< Position of PSELN field.                                             */
-  #define SAADC_CH_PSELN_PSELN_Msk (0x1FUL << SAADC_CH_PSELN_PSELN_Pos) /*!< Bit mask of PSELN field.                          */
-  #define SAADC_CH_PSELN_PSELN_Min (0x0UL)           /*!< Min enumerator value of PSELN field.                                 */
-  #define SAADC_CH_PSELN_PSELN_Max (0x16UL)          /*!< Max enumerator value of PSELN field.                                 */
-  #define SAADC_CH_PSELN_PSELN_NC (0x00UL)           /*!< Not connected                                                        */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput0 (0x01UL) /*!< AIN0                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput1 (0x02UL) /*!< AIN1                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput2 (0x03UL) /*!< AIN2                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput3 (0x04UL) /*!< AIN3                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput4 (0x05UL) /*!< AIN4                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput5 (0x06UL) /*!< AIN5                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput6 (0x07UL) /*!< AIN6                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput7 (0x08UL) /*!< AIN7                                                                 */
-  #define SAADC_CH_PSELN_PSELN_ATB0 (0x09UL)         /*!< ATB0                                                                 */
-  #define SAADC_CH_PSELN_PSELN_ATB1 (0x0AUL)         /*!< ATB1                                                                 */
-  #define SAADC_CH_PSELN_PSELN_VDDTest3 (0x0BUL)     /*!< Connected to VDD_1V0                                                 */
-  #define SAADC_CH_PSELN_PSELN_VDDTest4 (0x0CUL)     /*!< Reserved for VDD_PPA_1V6 (Halti only)                                */
-  #define SAADC_CH_PSELN_PSELN_VDDTest5 (0x0DUL)     /*!< Reserved for VDD_AO_5V0                                              */
-  #define SAADC_CH_PSELN_PSELN_Spare (0x0EUL)        /*!< Reserved for future use                                              */
-  #define SAADC_CH_PSELN_PSELN_AVSS (0x0FUL)         /*!< AVSS                                                                 */
-  #define SAADC_CH_PSELN_PSELN_SELREF (0x10UL)       /*!< Selected reference, voltage determined by PADC_REFSEL                */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput8 (0x11UL) /*!< AIN8                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput9 (0x12UL) /*!< AIN9                                                                 */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput10 (0x13UL) /*!< AIN10                                                               */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput11 (0x14UL) /*!< AIN11                                                               */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput12 (0x15UL) /*!< AIN12                                                               */
-  #define SAADC_CH_PSELN_PSELN_AnalogInput13 (0x16UL) /*!< AIN13                                                               */
+/* PIN @Bits 0..4 : Analog negative input pin select */
+  #define SAADC_CH_PSELN_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
+  #define SAADC_CH_PSELN_PIN_Msk (0x1FUL << SAADC_CH_PSELN_PIN_Pos) /*!< Bit mask of PIN field.                                */
+
+/* PORT @Bits 8..11 : GPIO Port selection */
+  #define SAADC_CH_PSELN_PORT_Pos (8UL)              /*!< Position of PORT field.                                              */
+  #define SAADC_CH_PSELN_PORT_Msk (0xFUL << SAADC_CH_PSELN_PORT_Pos) /*!< Bit mask of PORT field.                              */
+
+/* INTERNAL @Bits 12..13 : Internal input selection for Analog negative input when CH[n].PSELN.CONNECT = Internal */
+  #define SAADC_CH_PSELN_INTERNAL_Pos (12UL)         /*!< Position of INTERNAL field.                                          */
+  #define SAADC_CH_PSELN_INTERNAL_Msk (0x3UL << SAADC_CH_PSELN_INTERNAL_Pos) /*!< Bit mask of INTERNAL field.                  */
+  #define SAADC_CH_PSELN_INTERNAL_Min (0x0UL)        /*!< Min enumerator value of INTERNAL field.                              */
+  #define SAADC_CH_PSELN_INTERNAL_Max (0x3UL)        /*!< Max enumerator value of INTERNAL field.                              */
+  #define SAADC_CH_PSELN_INTERNAL_Internal4 (0x0UL)  /*!< Connected to VDD_1V0                                                 */
+  #define SAADC_CH_PSELN_INTERNAL_Internal5 (0x1UL)  /*!< Connected to VDD_PPA_1V6 (Halti only)                                */
+  #define SAADC_CH_PSELN_INTERNAL_Internal6 (0x2UL)  /*!< Connected to VDD_AO_5V0                                              */
+  #define SAADC_CH_PSELN_INTERNAL_Internal7 (0x3UL)  /*!< Reserved for future use                                              */
+
+/* TEST @Bits 16..17 : Test input selection for Analog negative input when CH[n].PSELN.CONNECT = Test */
+  #define SAADC_CH_PSELN_TEST_Pos (16UL)             /*!< Position of TEST field.                                              */
+  #define SAADC_CH_PSELN_TEST_Msk (0x3UL << SAADC_CH_PSELN_TEST_Pos) /*!< Bit mask of TEST field.                              */
+  #define SAADC_CH_PSELN_TEST_Min (0x0UL)            /*!< Min enumerator value of TEST field.                                  */
+  #define SAADC_CH_PSELN_TEST_Max (0x3UL)            /*!< Max enumerator value of TEST field.                                  */
+  #define SAADC_CH_PSELN_TEST_ATB0 (0x0UL)           /*!< ATB0                                                                 */
+  #define SAADC_CH_PSELN_TEST_ATB1 (0x1UL)           /*!< ATB1                                                                 */
+  #define SAADC_CH_PSELN_TEST_AVSS (0x2UL)           /*!< AVSS                                                                 */
+  #define SAADC_CH_PSELN_TEST_SELREF (0x3UL)         /*!< Selected reference, voltage determined by PADC_REFSEL                */
+
+/* CONNECT @Bits 30..31 : Connection */
+  #define SAADC_CH_PSELN_CONNECT_Pos (30UL)          /*!< Position of CONNECT field.                                           */
+  #define SAADC_CH_PSELN_CONNECT_Msk (0x3UL << SAADC_CH_PSELN_CONNECT_Pos) /*!< Bit mask of CONNECT field.                     */
+  #define SAADC_CH_PSELN_CONNECT_Min (0x0UL)         /*!< Min enumerator value of CONNECT field.                               */
+  #define SAADC_CH_PSELN_CONNECT_Max (0x3UL)         /*!< Max enumerator value of CONNECT field.                               */
+  #define SAADC_CH_PSELN_CONNECT_NC (0x0UL)          /*!< Not connected                                                        */
+  #define SAADC_CH_PSELN_CONNECT_AnalogInput (0x1UL) /*!< Select analog input                                                  */
+  #define SAADC_CH_PSELN_CONNECT_Internal (0x2UL)    /*!< Selects internal inputs.                                             */
+  #define SAADC_CH_PSELN_CONNECT_Test (0x3UL)        /*!< Selects test inputs.                                                 */
 
 
 /* SAADC_CH_CONFIG: Input configuration for CH[n] */
@@ -125124,6 +124785,44 @@ typedef struct {
 
 
 
+/* =================================================== Struct SAADC_RESULT =================================================== */
+/**
+  * @brief RESULT [SAADC_RESULT] RESULT EasyDMA channel
+  */
+typedef struct {
+  __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) Data pointer                                          */
+  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000004) Maximum number of buffer bytes to transfer            */
+  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000008) Number of buffer bytes transferred since last START   */
+  __IM  uint32_t  RESERVED;
+} NRF_SAADC_RESULT_Type;                             /*!< Size = 16 (0x010)                                                    */
+
+/* SAADC_RESULT_PTR: Data pointer */
+  #define SAADC_RESULT_PTR_ResetValue (0x00000000UL) /*!< Reset value of PTR register.                                         */
+
+/* PTR @Bits 0..31 : Data pointer */
+  #define SAADC_RESULT_PTR_PTR_Pos (0UL)             /*!< Position of PTR field.                                               */
+  #define SAADC_RESULT_PTR_PTR_Msk (0xFFFFFFFFUL << SAADC_RESULT_PTR_PTR_Pos) /*!< Bit mask of PTR field.                      */
+
+
+/* SAADC_RESULT_MAXCNT: Maximum number of buffer bytes to transfer */
+  #define SAADC_RESULT_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                   */
+
+/* MAXCNT @Bits 0..14 : Maximum number of buffer bytes to transfer */
+  #define SAADC_RESULT_MAXCNT_MAXCNT_Pos (0UL)       /*!< Position of MAXCNT field.                                            */
+  #define SAADC_RESULT_MAXCNT_MAXCNT_Msk (0x7FFFUL << SAADC_RESULT_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.           */
+
+
+/* SAADC_RESULT_AMOUNT: Number of buffer bytes transferred since last START */
+  #define SAADC_RESULT_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                   */
+
+/* AMOUNT @Bits 0..14 : Number of buffer bytes transferred since last START. This register can be read after an END or STOPPED
+                        event. */                                                                                                 
+                                                                                                                                  
+  #define SAADC_RESULT_AMOUNT_AMOUNT_Pos (0UL)       /*!< Position of AMOUNT field.                                            */
+  #define SAADC_RESULT_AMOUNT_AMOUNT_Msk (0x7FFFUL << SAADC_RESULT_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.           */
+
+
+
 /* ================================================== Struct SAADC_OVERRIDE ================================================== */
 /**
   * @brief OVERRIDE [SAADC_OVERRIDE] (unspecified)
@@ -125163,87 +124862,6 @@ typedef struct {
   #define SAADC_OVERRIDE_CALCDAC_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
   #define SAADC_OVERRIDE_CALCDAC_EN_Disabled (0x0UL) /*!< Override is disabled                                                 */
   #define SAADC_OVERRIDE_CALCDAC_EN_Enabled (0x1UL)  /*!< Override is enabled                                                  */
-
-
-
-/* ==================================================== Struct SAADC_DMA ===================================================== */
-/**
-  * @brief DMA [SAADC_DMA] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  ENABLE;                            /*!< (@ 0x00000000) Register doesn't do anything. Can be written and read,
-                                                                         but has no functionality attached.*/                     
-  __IOM uint32_t  PTR;                               /*!< (@ 0x00000004) RAM buffer start address                              */
-  __IOM uint32_t  MAXCNT;                            /*!< (@ 0x00000008) Maximum number of bytes in receive buffer             */
-  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
-                                                                         updated after the END event.*/                           
-  __IM  uint32_t  RESERVED[3];
-  __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
-                                                                         detected.*/                                              
-  __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
-                                                                         event.*/                                                 
-} NRF_SAADC_DMA_Type;                                /*!< Size = 36 (0x024)                                                    */
-
-/* SAADC_DMA_ENABLE: Register doesn't do anything. Can be written and read, but has no functionality attached. */
-  #define SAADC_DMA_ENABLE_ResetValue (0x00000000UL) /*!< Reset value of ENABLE register.                                      */
-
-/* ENABLE @Bit 0 : Register doesn't do anything. Can be written and read, but has no functionality attached. */
-  #define SAADC_DMA_ENABLE_ENABLE_Pos (0UL)          /*!< Position of ENABLE field.                                            */
-  #define SAADC_DMA_ENABLE_ENABLE_Msk (0x1UL << SAADC_DMA_ENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.                    */
-  #define SAADC_DMA_ENABLE_ENABLE_Min (0x0UL)        /*!< Min enumerator value of ENABLE field.                                */
-  #define SAADC_DMA_ENABLE_ENABLE_Max (0x1UL)        /*!< Max enumerator value of ENABLE field.                                */
-  #define SAADC_DMA_ENABLE_ENABLE_Disabled (0x0UL)   /*!< Disable                                                              */
-  #define SAADC_DMA_ENABLE_ENABLE_Enabled (0x1UL)    /*!< Enable                                                               */
-
-
-/* SAADC_DMA_PTR: RAM buffer start address */
-  #define SAADC_DMA_PTR_ResetValue (0x00000000UL)    /*!< Reset value of PTR register.                                         */
-
-/* PTR @Bits 0..31 : RAM buffer start address for this EasyDMA channel. This address is a word aligned Data RAM address. */
-  #define SAADC_DMA_PTR_PTR_Pos (0UL)                /*!< Position of PTR field.                                               */
-  #define SAADC_DMA_PTR_PTR_Msk (0xFFFFFFFFUL << SAADC_DMA_PTR_PTR_Pos) /*!< Bit mask of PTR field.                            */
-
-
-/* SAADC_DMA_MAXCNT: Maximum number of bytes in receive buffer */
-  #define SAADC_DMA_MAXCNT_ResetValue (0x00000000UL) /*!< Reset value of MAXCNT register.                                      */
-
-/* MAXCNT @Bits 0..15 : Maximum number of bytes in receive buffer */
-  #define SAADC_DMA_MAXCNT_MAXCNT_Pos (0UL)          /*!< Position of MAXCNT field.                                            */
-  #define SAADC_DMA_MAXCNT_MAXCNT_Msk (0xFFFFUL << SAADC_DMA_MAXCNT_MAXCNT_Pos) /*!< Bit mask of MAXCNT field.                 */
-  #define SAADC_DMA_MAXCNT_MAXCNT_Min (0x1UL)        /*!< Min value of MAXCNT field.                                           */
-  #define SAADC_DMA_MAXCNT_MAXCNT_Max (0xFFFFUL)     /*!< Max size of MAXCNT field.                                            */
-
-
-/* SAADC_DMA_AMOUNT: Number of bytes transferred in the last transaction, updated after the END event. */
-  #define SAADC_DMA_AMOUNT_ResetValue (0x00000000UL) /*!< Reset value of AMOUNT register.                                      */
-
-/* AMOUNT @Bits 0..15 : Number of bytes transferred in the last transaction. In case of NACK error, includes the NACK'ed byte. */
-  #define SAADC_DMA_AMOUNT_AMOUNT_Pos (0UL)          /*!< Position of AMOUNT field.                                            */
-  #define SAADC_DMA_AMOUNT_AMOUNT_Msk (0xFFFFUL << SAADC_DMA_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                 */
-  #define SAADC_DMA_AMOUNT_AMOUNT_Min (0x1UL)        /*!< Min value of AMOUNT field.                                           */
-  #define SAADC_DMA_AMOUNT_AMOUNT_Max (0xFFFFUL)     /*!< Max size of AMOUNT field.                                            */
-
-
-/* SAADC_DMA_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.            */
-
-/* ENABLE @Bit 0 : (unspecified) */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Pos (0UL) /*!< Position of ENABLE field.                                        */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Msk (0x1UL << SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Pos) /*!< Bit mask of ENABLE
-                                                                            field.*/                                              
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                          */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                          */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Disabled (0x0UL) /*!< Disable                                                   */
-  #define SAADC_DMA_TERMINATEONBUSERROR_ENABLE_Enabled (0x1UL) /*!< Enable                                                     */
-
-
-/* SAADC_DMA_BUSERRORADDRESS: Address of transaction that generated the last BUSERROR event. */
-  #define SAADC_DMA_BUSERRORADDRESS_ResetValue (0x00000000UL) /*!< Reset value of BUSERRORADDRESS register.                    */
-
-/* ADDRESS @Bits 0..31 : (unspecified) */
-  #define SAADC_DMA_BUSERRORADDRESS_ADDRESS_Pos (0UL) /*!< Position of ADDRESS field.                                          */
-  #define SAADC_DMA_BUSERRORADDRESS_ADDRESS_Msk (0xFFFFFFFFUL << SAADC_DMA_BUSERRORADDRESS_ADDRESS_Pos) /*!< Bit mask of ADDRESS
-                                                                            field.*/                                              
 
 
 
@@ -125384,36 +125002,40 @@ typedef struct {
   * @brief Analog to Digital Converter
   */
   typedef struct {                                   /*!< SAADC Structure                                                      */
-    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000000) Take one ADC sample, if scan is enabled all channels
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start the ADC and prepare the result buffer in RAM    */
+    __OM uint32_t TASKS_SAMPLE;                      /*!< (@ 0x00000004) Take one ADC sample, if scan is enabled all channels
                                                                          are sampled*/                                            
-    __OM uint32_t TASKS_CALIBRATEOFFSET;             /*!< (@ 0x00000004) Starts offset auto-calibration                        */
-    __OM uint32_t TASKS_CALIBRATEGAIN;               /*!< (@ 0x00000008) Starts gain auto-calibration                          */
-    __OM NRF_SAADC_TASKS_DMA_Type TASKS_DMA;         /*!< (@ 0x0000000C) Peripheral tasks.                                     */
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000008) Stop the ADC and terminate any on-going conversion    */
+    __OM uint32_t TASKS_CALIBRATEOFFSET;             /*!< (@ 0x0000000C) Starts offset auto-calibration                        */
+    __OM uint32_t TASKS_CALIBRATEGAIN;               /*!< (@ 0x00000010) Starts gain auto-calibration                          */
     __IM uint32_t RESERVED[27];
-    __IOM uint32_t SUBSCRIBE_SAMPLE;                 /*!< (@ 0x00000080) Subscribe configuration for task SAMPLE               */
-    __IOM uint32_t SUBSCRIBE_CALIBRATEOFFSET;        /*!< (@ 0x00000084) Subscribe configuration for task CALIBRATEOFFSET      */
-    __IOM uint32_t SUBSCRIBE_CALIBRATEGAIN;          /*!< (@ 0x00000088) Subscribe configuration for task CALIBRATEGAIN        */
-    __IOM NRF_SAADC_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA; /*!< (@ 0x0000008C) Subscribe configuration for tasks                    */
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_SAMPLE;                 /*!< (@ 0x00000084) Subscribe configuration for task SAMPLE               */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000088) Subscribe configuration for task STOP                 */
+    __IOM uint32_t SUBSCRIBE_CALIBRATEOFFSET;        /*!< (@ 0x0000008C) Subscribe configuration for task CALIBRATEOFFSET      */
+    __IOM uint32_t SUBSCRIBE_CALIBRATEGAIN;          /*!< (@ 0x00000090) Subscribe configuration for task CALIBRATEGAIN        */
     __IM uint32_t RESERVED1[27];
     __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) The ADC has started                                   */
-    __IOM uint32_t EVENTS_DONE;                      /*!< (@ 0x00000104) A conversion task has been completed. Depending on the
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000104) The ADC has filled up the Result buffer               */
+    __IOM uint32_t EVENTS_DONE;                      /*!< (@ 0x00000108) A conversion task has been completed. Depending on the
                                                                          mode, multiple conversions might be needed for a result
                                                                          to be transferred to RAM.*/                              
-    __IOM uint32_t EVENTS_RESULTDONE;                /*!< (@ 0x00000108) A result is ready to get transferred to RAM. Result is
+    __IOM uint32_t EVENTS_RESULTDONE;                /*!< (@ 0x0000010C) A result is ready to get transferred to RAM. Result is
                                                                          available in REGRESULT register*/                        
-    __IOM uint32_t EVENTS_CALIBRATEDONE;             /*!< (@ 0x0000010C) Calibration is complete                               */
-    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000110) The ADC has stopped                                   */
-    __IOM NRF_SAADC_EVENTS_CH_Type EVENTS_CH[8];     /*!< (@ 0x00000114) Peripheral events.                                    */
-    __IOM NRF_SAADC_EVENTS_DMA_Type EVENTS_DMA;      /*!< (@ 0x00000154) Peripheral events.                                    */
-    __IM uint32_t RESERVED2[8];
+    __IOM uint32_t EVENTS_CALIBRATEDONE;             /*!< (@ 0x00000110) Calibration is complete                               */
+    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000114) The ADC has stopped                                   */
+    __IOM NRF_SAADC_EVENTS_CH_Type EVENTS_CH[8];     /*!< (@ 0x00000118) Peripheral events.                                    */
+    __IOM uint32_t EVENTS_AHBERROR;                  /*!< (@ 0x00000158) EasyDMA encountered AHB error.                        */
+    __IM uint32_t RESERVED2[9];
     __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
-    __IOM uint32_t PUBLISH_DONE;                     /*!< (@ 0x00000184) Publish configuration for event DONE                  */
-    __IOM uint32_t PUBLISH_RESULTDONE;               /*!< (@ 0x00000188) Publish configuration for event RESULTDONE            */
-    __IOM uint32_t PUBLISH_CALIBRATEDONE;            /*!< (@ 0x0000018C) Publish configuration for event CALIBRATEDONE         */
-    __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000190) Publish configuration for event STOPPED               */
-    __IOM NRF_SAADC_PUBLISH_CH_Type PUBLISH_CH[8];   /*!< (@ 0x00000194) Publish configuration for events                      */
-    __IOM NRF_SAADC_PUBLISH_DMA_Type PUBLISH_DMA;    /*!< (@ 0x000001D4) Publish configuration for events                      */
-    __IM uint32_t RESERVED3[8];
+    __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000184) Publish configuration for event END                   */
+    __IOM uint32_t PUBLISH_DONE;                     /*!< (@ 0x00000188) Publish configuration for event DONE                  */
+    __IOM uint32_t PUBLISH_RESULTDONE;               /*!< (@ 0x0000018C) Publish configuration for event RESULTDONE            */
+    __IOM uint32_t PUBLISH_CALIBRATEDONE;            /*!< (@ 0x00000190) Publish configuration for event CALIBRATEDONE         */
+    __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000194) Publish configuration for event STOPPED               */
+    __IOM NRF_SAADC_PUBLISH_CH_Type PUBLISH_CH[8];   /*!< (@ 0x00000198) Publish configuration for events                      */
+    __IOM uint32_t PUBLISH_AHBERROR;                 /*!< (@ 0x000001D8) Publish configuration for event AHBERROR              */
+    __IM uint32_t RESERVED3[9];
     __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
     __IM uint32_t RESERVED4[63];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
@@ -125437,7 +125059,8 @@ typedef struct {
                                                                          should be used.*/                                        
     __IOM uint32_t SAMPLERATE;                       /*!< (@ 0x000005F8) Controls normal or continuous sample rate             */
     __IOM uint32_t PCRMREQ;                          /*!< (@ 0x000005FC) PCRM request for clean power                          */
-    __IM uint32_t RESERVED10[15];
+    __IM uint32_t RESERVED10[11];
+    __IOM NRF_SAADC_RESULT_Type RESULT;              /*!< (@ 0x0000062C) RESULT EasyDMA channel                                */
     __IOM uint32_t TESTCTRL;                         /*!< (@ 0x0000063C) Control signals used during test of ADC               */
     __IOM uint32_t CALOFFSET;                        /*!< (@ 0x00000640) Calibration control for offset error                  */
     __IOM uint32_t CALGAIN;                          /*!< (@ 0x00000644) Calibration control for gain error                    */
@@ -125445,13 +125068,26 @@ typedef struct {
     __IOM uint32_t CALIREF;                          /*!< (@ 0x0000064C) Calibration control for reference current             */
     __IOM uint32_t CALVREFTC;                        /*!< (@ 0x00000650) Calibration code for reference temperature coefficient*/
     __IOM uint32_t NOISESHAPE;                       /*!< (@ 0x00000654) Enable noise shaping                                  */
-    __IM uint32_t RESERVED11[10];
+    __IOM uint32_t EASYDMAMODE;                      /*!< (@ 0x00000658) Configure EasyDMA mode.                               */
+    __IM uint32_t RESERVED11;
+    __IOM uint32_t TERMINATEONAHBERROR;              /*!< (@ 0x00000660) Enable EasyDMA termination on AHB error               */
+    __IOM uint32_t AHBERRORADDRESS;                  /*!< (@ 0x00000664) Address of the last AHB error transaction             */
+    __IM uint32_t RESERVED12[6];
     __IOM NRF_SAADC_OVERRIDE_Type OVERRIDE;          /*!< (@ 0x00000680) (unspecified)                                         */
-    __IM uint32_t RESERVED12[30];
-    __IOM NRF_SAADC_DMA_Type DMA;                    /*!< (@ 0x00000700) (unspecified)                                         */
-    __IM uint32_t RESERVED13[55];
+    __IM uint32_t RESERVED13[94];
     __IOM NRF_SAADC_DFT_Type DFT;                    /*!< (@ 0x00000800) (unspecified)                                         */
   } NRF_SAADC_Type;                                  /*!< Size = 2072 (0x818)                                                  */
+
+/* SAADC_TASKS_START: Start the ADC and prepare the result buffer in RAM */
+  #define SAADC_TASKS_START_ResetValue (0x00000000UL) /*!< Reset value of TASKS_START register.                                */
+
+/* TASKS_START @Bit 0 : Start the ADC and prepare the result buffer in RAM */
+  #define SAADC_TASKS_START_TASKS_START_Pos (0UL)    /*!< Position of TASKS_START field.                                       */
+  #define SAADC_TASKS_START_TASKS_START_Msk (0x1UL << SAADC_TASKS_START_TASKS_START_Pos) /*!< Bit mask of TASKS_START field.   */
+  #define SAADC_TASKS_START_TASKS_START_Min (0x1UL)  /*!< Min enumerator value of TASKS_START field.                           */
+  #define SAADC_TASKS_START_TASKS_START_Max (0x1UL)  /*!< Max enumerator value of TASKS_START field.                           */
+  #define SAADC_TASKS_START_TASKS_START_Trigger (0x1UL) /*!< Trigger task                                                      */
+
 
 /* SAADC_TASKS_SAMPLE: Take one ADC sample, if scan is enabled all channels are sampled */
   #define SAADC_TASKS_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of TASKS_SAMPLE register.                              */
@@ -125463,6 +125099,17 @@ typedef struct {
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Min (0x1UL) /*!< Min enumerator value of TASKS_SAMPLE field.                         */
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Max (0x1UL) /*!< Max enumerator value of TASKS_SAMPLE field.                         */
   #define SAADC_TASKS_SAMPLE_TASKS_SAMPLE_Trigger (0x1UL) /*!< Trigger task                                                    */
+
+
+/* SAADC_TASKS_STOP: Stop the ADC and terminate any on-going conversion */
+  #define SAADC_TASKS_STOP_ResetValue (0x00000000UL) /*!< Reset value of TASKS_STOP register.                                  */
+
+/* TASKS_STOP @Bit 0 : Stop the ADC and terminate any on-going conversion */
+  #define SAADC_TASKS_STOP_TASKS_STOP_Pos (0UL)      /*!< Position of TASKS_STOP field.                                        */
+  #define SAADC_TASKS_STOP_TASKS_STOP_Msk (0x1UL << SAADC_TASKS_STOP_TASKS_STOP_Pos) /*!< Bit mask of TASKS_STOP field.        */
+  #define SAADC_TASKS_STOP_TASKS_STOP_Min (0x1UL)    /*!< Min enumerator value of TASKS_STOP field.                            */
+  #define SAADC_TASKS_STOP_TASKS_STOP_Max (0x1UL)    /*!< Max enumerator value of TASKS_STOP field.                            */
+  #define SAADC_TASKS_STOP_TASKS_STOP_Trigger (0x1UL) /*!< Trigger task                                                        */
 
 
 /* SAADC_TASKS_CALIBRATEOFFSET: Starts offset auto-calibration */
@@ -125491,6 +125138,24 @@ typedef struct {
   #define SAADC_TASKS_CALIBRATEGAIN_TASKS_CALIBRATEGAIN_Trigger (0x1UL) /*!< Trigger task                                      */
 
 
+/* SAADC_SUBSCRIBE_START: Subscribe configuration for task START */
+  #define SAADC_SUBSCRIBE_START_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_START register.                        */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task START will subscribe to */
+  #define SAADC_SUBSCRIBE_START_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
+  #define SAADC_SUBSCRIBE_START_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_START_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
+  #define SAADC_SUBSCRIBE_START_CHIDX_Min (0x0UL)    /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_START_CHIDX_Max (0xFFUL)   /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define SAADC_SUBSCRIBE_START_EN_Pos (31UL)        /*!< Position of EN field.                                                */
+  #define SAADC_SUBSCRIBE_START_EN_Msk (0x1UL << SAADC_SUBSCRIBE_START_EN_Pos) /*!< Bit mask of EN field.                      */
+  #define SAADC_SUBSCRIBE_START_EN_Min (0x0UL)       /*!< Min enumerator value of EN field.                                    */
+  #define SAADC_SUBSCRIBE_START_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
+  #define SAADC_SUBSCRIBE_START_EN_Disabled (0x0UL)  /*!< Disable subscription                                                 */
+  #define SAADC_SUBSCRIBE_START_EN_Enabled (0x1UL)   /*!< Enable subscription                                                  */
+
+
 /* SAADC_SUBSCRIBE_SAMPLE: Subscribe configuration for task SAMPLE */
   #define SAADC_SUBSCRIBE_SAMPLE_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_SAMPLE register.                      */
 
@@ -125507,6 +125172,24 @@ typedef struct {
   #define SAADC_SUBSCRIBE_SAMPLE_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
   #define SAADC_SUBSCRIBE_SAMPLE_EN_Disabled (0x0UL) /*!< Disable subscription                                                 */
   #define SAADC_SUBSCRIBE_SAMPLE_EN_Enabled (0x1UL)  /*!< Enable subscription                                                  */
+
+
+/* SAADC_SUBSCRIBE_STOP: Subscribe configuration for task STOP */
+  #define SAADC_SUBSCRIBE_STOP_ResetValue (0x00000000UL) /*!< Reset value of SUBSCRIBE_STOP register.                          */
+
+/* CHIDX @Bits 0..7 : DPPI channel that task STOP will subscribe to */
+  #define SAADC_SUBSCRIBE_STOP_CHIDX_Pos (0UL)       /*!< Position of CHIDX field.                                             */
+  #define SAADC_SUBSCRIBE_STOP_CHIDX_Msk (0xFFUL << SAADC_SUBSCRIBE_STOP_CHIDX_Pos) /*!< Bit mask of CHIDX field.              */
+  #define SAADC_SUBSCRIBE_STOP_CHIDX_Min (0x0UL)     /*!< Min value of CHIDX field.                                            */
+  #define SAADC_SUBSCRIBE_STOP_CHIDX_Max (0xFFUL)    /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define SAADC_SUBSCRIBE_STOP_EN_Pos (31UL)         /*!< Position of EN field.                                                */
+  #define SAADC_SUBSCRIBE_STOP_EN_Msk (0x1UL << SAADC_SUBSCRIBE_STOP_EN_Pos) /*!< Bit mask of EN field.                        */
+  #define SAADC_SUBSCRIBE_STOP_EN_Min (0x0UL)        /*!< Min enumerator value of EN field.                                    */
+  #define SAADC_SUBSCRIBE_STOP_EN_Max (0x1UL)        /*!< Max enumerator value of EN field.                                    */
+  #define SAADC_SUBSCRIBE_STOP_EN_Disabled (0x0UL)   /*!< Disable subscription                                                 */
+  #define SAADC_SUBSCRIBE_STOP_EN_Enabled (0x1UL)    /*!< Enable subscription                                                  */
 
 
 /* SAADC_SUBSCRIBE_CALIBRATEOFFSET: Subscribe configuration for task CALIBRATEOFFSET */
@@ -125558,6 +125241,18 @@ typedef struct {
   #define SAADC_EVENTS_STARTED_EVENTS_STARTED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STARTED field.                   */
   #define SAADC_EVENTS_STARTED_EVENTS_STARTED_NotGenerated (0x0UL) /*!< Event not generated                                    */
   #define SAADC_EVENTS_STARTED_EVENTS_STARTED_Generated (0x1UL) /*!< Event generated                                           */
+
+
+/* SAADC_EVENTS_END: The ADC has filled up the Result buffer */
+  #define SAADC_EVENTS_END_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_END register.                                  */
+
+/* EVENTS_END @Bit 0 : The ADC has filled up the Result buffer */
+  #define SAADC_EVENTS_END_EVENTS_END_Pos (0UL)      /*!< Position of EVENTS_END field.                                        */
+  #define SAADC_EVENTS_END_EVENTS_END_Msk (0x1UL << SAADC_EVENTS_END_EVENTS_END_Pos) /*!< Bit mask of EVENTS_END field.        */
+  #define SAADC_EVENTS_END_EVENTS_END_Min (0x0UL)    /*!< Min enumerator value of EVENTS_END field.                            */
+  #define SAADC_EVENTS_END_EVENTS_END_Max (0x1UL)    /*!< Max enumerator value of EVENTS_END field.                            */
+  #define SAADC_EVENTS_END_EVENTS_END_NotGenerated (0x0UL) /*!< Event not generated                                            */
+  #define SAADC_EVENTS_END_EVENTS_END_Generated (0x1UL) /*!< Event generated                                                   */
 
 
 /* SAADC_EVENTS_DONE: A conversion task has been completed. Depending on the mode, multiple conversions might be needed for a
@@ -125615,6 +125310,19 @@ typedef struct {
   #define SAADC_EVENTS_STOPPED_EVENTS_STOPPED_Generated (0x1UL) /*!< Event generated                                           */
 
 
+/* SAADC_EVENTS_AHBERROR: EasyDMA encountered AHB error. */
+  #define SAADC_EVENTS_AHBERROR_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_AHBERROR register.                        */
+
+/* EVENTS_AHBERROR @Bit 0 : EasyDMA encountered AHB error. */
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Pos (0UL) /*!< Position of EVENTS_AHBERROR field.                              */
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Msk (0x1UL << SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Pos) /*!< Bit mask of
+                                                                            EVENTS_AHBERROR field.*/                              
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Min (0x0UL) /*!< Min enumerator value of EVENTS_AHBERROR field.                */
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Max (0x1UL) /*!< Max enumerator value of EVENTS_AHBERROR field.                */
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_NotGenerated (0x0UL) /*!< Event not generated                                  */
+  #define SAADC_EVENTS_AHBERROR_EVENTS_AHBERROR_Generated (0x1UL) /*!< Event generated                                         */
+
+
 /* SAADC_PUBLISH_STARTED: Publish configuration for event STARTED */
   #define SAADC_PUBLISH_STARTED_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_STARTED register.                        */
 
@@ -125631,6 +125339,24 @@ typedef struct {
   #define SAADC_PUBLISH_STARTED_EN_Max (0x1UL)       /*!< Max enumerator value of EN field.                                    */
   #define SAADC_PUBLISH_STARTED_EN_Disabled (0x0UL)  /*!< Disable publishing                                                   */
   #define SAADC_PUBLISH_STARTED_EN_Enabled (0x1UL)   /*!< Enable publishing                                                    */
+
+
+/* SAADC_PUBLISH_END: Publish configuration for event END */
+  #define SAADC_PUBLISH_END_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_END register.                                */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event END will publish to */
+  #define SAADC_PUBLISH_END_CHIDX_Pos (0UL)          /*!< Position of CHIDX field.                                             */
+  #define SAADC_PUBLISH_END_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_END_CHIDX_Pos) /*!< Bit mask of CHIDX field.                    */
+  #define SAADC_PUBLISH_END_CHIDX_Min (0x0UL)        /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_END_CHIDX_Max (0xFFUL)       /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define SAADC_PUBLISH_END_EN_Pos (31UL)            /*!< Position of EN field.                                                */
+  #define SAADC_PUBLISH_END_EN_Msk (0x1UL << SAADC_PUBLISH_END_EN_Pos) /*!< Bit mask of EN field.                              */
+  #define SAADC_PUBLISH_END_EN_Min (0x0UL)           /*!< Min enumerator value of EN field.                                    */
+  #define SAADC_PUBLISH_END_EN_Max (0x1UL)           /*!< Max enumerator value of EN field.                                    */
+  #define SAADC_PUBLISH_END_EN_Disabled (0x0UL)      /*!< Disable publishing                                                   */
+  #define SAADC_PUBLISH_END_EN_Enabled (0x1UL)       /*!< Enable publishing                                                    */
 
 
 /* SAADC_PUBLISH_DONE: Publish configuration for event DONE */
@@ -125705,6 +125431,24 @@ typedef struct {
   #define SAADC_PUBLISH_STOPPED_EN_Enabled (0x1UL)   /*!< Enable publishing                                                    */
 
 
+/* SAADC_PUBLISH_AHBERROR: Publish configuration for event AHBERROR */
+  #define SAADC_PUBLISH_AHBERROR_ResetValue (0x00000000UL) /*!< Reset value of PUBLISH_AHBERROR register.                      */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event AHBERROR will publish to */
+  #define SAADC_PUBLISH_AHBERROR_CHIDX_Pos (0UL)     /*!< Position of CHIDX field.                                             */
+  #define SAADC_PUBLISH_AHBERROR_CHIDX_Msk (0xFFUL << SAADC_PUBLISH_AHBERROR_CHIDX_Pos) /*!< Bit mask of CHIDX field.          */
+  #define SAADC_PUBLISH_AHBERROR_CHIDX_Min (0x0UL)   /*!< Min value of CHIDX field.                                            */
+  #define SAADC_PUBLISH_AHBERROR_CHIDX_Max (0xFFUL)  /*!< Max size of CHIDX field.                                             */
+
+/* EN @Bit 31 : (unspecified) */
+  #define SAADC_PUBLISH_AHBERROR_EN_Pos (31UL)       /*!< Position of EN field.                                                */
+  #define SAADC_PUBLISH_AHBERROR_EN_Msk (0x1UL << SAADC_PUBLISH_AHBERROR_EN_Pos) /*!< Bit mask of EN field.                    */
+  #define SAADC_PUBLISH_AHBERROR_EN_Min (0x0UL)      /*!< Min enumerator value of EN field.                                    */
+  #define SAADC_PUBLISH_AHBERROR_EN_Max (0x1UL)      /*!< Max enumerator value of EN field.                                    */
+  #define SAADC_PUBLISH_AHBERROR_EN_Disabled (0x0UL) /*!< Disable publishing                                                   */
+  #define SAADC_PUBLISH_AHBERROR_EN_Enabled (0x1UL)  /*!< Enable publishing                                                    */
+
+
 /* SAADC_SHORTS: Shortcuts between local events and tasks */
   #define SAADC_SHORTS_ResetValue (0x00000000UL)     /*!< Reset value of SHORTS register.                                      */
 
@@ -125724,15 +125468,6 @@ typedef struct {
   #define SAADC_SHORTS_END_START_Disabled (0x0UL)    /*!< Disable shortcut                                                     */
   #define SAADC_SHORTS_END_START_Enabled (0x1UL)     /*!< Enable shortcut                                                      */
 
-/* DMA_BUSERROR_STOP @Bit 2 : Shortcut between event DMA.BUSERROR and task STOP */
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Pos (2UL)   /*!< Position of DMA_BUSERROR_STOP field.                                 */
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Msk (0x1UL << SAADC_SHORTS_DMA_BUSERROR_STOP_Pos) /*!< Bit mask of DMA_BUSERROR_STOP
-                                                                            field.*/                                              
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Min (0x0UL) /*!< Min enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Max (0x1UL) /*!< Max enumerator value of DMA_BUSERROR_STOP field.                     */
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                */
-  #define SAADC_SHORTS_DMA_BUSERROR_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                  */
-
 
 /* SAADC_INTEN: Enable or disable interrupt */
   #define SAADC_INTEN_ResetValue (0x00000000UL)      /*!< Reset value of INTEN register.                                       */
@@ -125745,189 +125480,181 @@ typedef struct {
   #define SAADC_INTEN_STARTED_Disabled (0x0UL)       /*!< Disable                                                              */
   #define SAADC_INTEN_STARTED_Enabled (0x1UL)        /*!< Enable                                                               */
 
-/* DONE @Bit 1 : Enable or disable interrupt for event DONE */
-  #define SAADC_INTEN_DONE_Pos (1UL)                 /*!< Position of DONE field.                                              */
+/* END @Bit 1 : Enable or disable interrupt for event END */
+  #define SAADC_INTEN_END_Pos (1UL)                  /*!< Position of END field.                                               */
+  #define SAADC_INTEN_END_Msk (0x1UL << SAADC_INTEN_END_Pos) /*!< Bit mask of END field.                                       */
+  #define SAADC_INTEN_END_Min (0x0UL)                /*!< Min enumerator value of END field.                                   */
+  #define SAADC_INTEN_END_Max (0x1UL)                /*!< Max enumerator value of END field.                                   */
+  #define SAADC_INTEN_END_Disabled (0x0UL)           /*!< Disable                                                              */
+  #define SAADC_INTEN_END_Enabled (0x1UL)            /*!< Enable                                                               */
+
+/* DONE @Bit 2 : Enable or disable interrupt for event DONE */
+  #define SAADC_INTEN_DONE_Pos (2UL)                 /*!< Position of DONE field.                                              */
   #define SAADC_INTEN_DONE_Msk (0x1UL << SAADC_INTEN_DONE_Pos) /*!< Bit mask of DONE field.                                    */
   #define SAADC_INTEN_DONE_Min (0x0UL)               /*!< Min enumerator value of DONE field.                                  */
   #define SAADC_INTEN_DONE_Max (0x1UL)               /*!< Max enumerator value of DONE field.                                  */
   #define SAADC_INTEN_DONE_Disabled (0x0UL)          /*!< Disable                                                              */
   #define SAADC_INTEN_DONE_Enabled (0x1UL)           /*!< Enable                                                               */
 
-/* RESULTDONE @Bit 2 : Enable or disable interrupt for event RESULTDONE */
-  #define SAADC_INTEN_RESULTDONE_Pos (2UL)           /*!< Position of RESULTDONE field.                                        */
+/* RESULTDONE @Bit 3 : Enable or disable interrupt for event RESULTDONE */
+  #define SAADC_INTEN_RESULTDONE_Pos (3UL)           /*!< Position of RESULTDONE field.                                        */
   #define SAADC_INTEN_RESULTDONE_Msk (0x1UL << SAADC_INTEN_RESULTDONE_Pos) /*!< Bit mask of RESULTDONE field.                  */
   #define SAADC_INTEN_RESULTDONE_Min (0x0UL)         /*!< Min enumerator value of RESULTDONE field.                            */
   #define SAADC_INTEN_RESULTDONE_Max (0x1UL)         /*!< Max enumerator value of RESULTDONE field.                            */
   #define SAADC_INTEN_RESULTDONE_Disabled (0x0UL)    /*!< Disable                                                              */
   #define SAADC_INTEN_RESULTDONE_Enabled (0x1UL)     /*!< Enable                                                               */
 
-/* CALIBRATEDONE @Bit 3 : Enable or disable interrupt for event CALIBRATEDONE */
-  #define SAADC_INTEN_CALIBRATEDONE_Pos (3UL)        /*!< Position of CALIBRATEDONE field.                                     */
+/* CALIBRATEDONE @Bit 4 : Enable or disable interrupt for event CALIBRATEDONE */
+  #define SAADC_INTEN_CALIBRATEDONE_Pos (4UL)        /*!< Position of CALIBRATEDONE field.                                     */
   #define SAADC_INTEN_CALIBRATEDONE_Msk (0x1UL << SAADC_INTEN_CALIBRATEDONE_Pos) /*!< Bit mask of CALIBRATEDONE field.         */
   #define SAADC_INTEN_CALIBRATEDONE_Min (0x0UL)      /*!< Min enumerator value of CALIBRATEDONE field.                         */
   #define SAADC_INTEN_CALIBRATEDONE_Max (0x1UL)      /*!< Max enumerator value of CALIBRATEDONE field.                         */
   #define SAADC_INTEN_CALIBRATEDONE_Disabled (0x0UL) /*!< Disable                                                              */
   #define SAADC_INTEN_CALIBRATEDONE_Enabled (0x1UL)  /*!< Enable                                                               */
 
-/* STOPPED @Bit 4 : Enable or disable interrupt for event STOPPED */
-  #define SAADC_INTEN_STOPPED_Pos (4UL)              /*!< Position of STOPPED field.                                           */
+/* STOPPED @Bit 5 : Enable or disable interrupt for event STOPPED */
+  #define SAADC_INTEN_STOPPED_Pos (5UL)              /*!< Position of STOPPED field.                                           */
   #define SAADC_INTEN_STOPPED_Msk (0x1UL << SAADC_INTEN_STOPPED_Pos) /*!< Bit mask of STOPPED field.                           */
   #define SAADC_INTEN_STOPPED_Min (0x0UL)            /*!< Min enumerator value of STOPPED field.                               */
   #define SAADC_INTEN_STOPPED_Max (0x1UL)            /*!< Max enumerator value of STOPPED field.                               */
   #define SAADC_INTEN_STOPPED_Disabled (0x0UL)       /*!< Disable                                                              */
   #define SAADC_INTEN_STOPPED_Enabled (0x1UL)        /*!< Enable                                                               */
 
-/* CH0LIMITH @Bit 5 : Enable or disable interrupt for event CH0LIMITH */
-  #define SAADC_INTEN_CH0LIMITH_Pos (5UL)            /*!< Position of CH0LIMITH field.                                         */
+/* CH0LIMITH @Bit 6 : Enable or disable interrupt for event CH0LIMITH */
+  #define SAADC_INTEN_CH0LIMITH_Pos (6UL)            /*!< Position of CH0LIMITH field.                                         */
   #define SAADC_INTEN_CH0LIMITH_Msk (0x1UL << SAADC_INTEN_CH0LIMITH_Pos) /*!< Bit mask of CH0LIMITH field.                     */
   #define SAADC_INTEN_CH0LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH0LIMITH field.                             */
   #define SAADC_INTEN_CH0LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH0LIMITH field.                             */
   #define SAADC_INTEN_CH0LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH0LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH0LIMITL @Bit 6 : Enable or disable interrupt for event CH0LIMITL */
-  #define SAADC_INTEN_CH0LIMITL_Pos (6UL)            /*!< Position of CH0LIMITL field.                                         */
+/* CH0LIMITL @Bit 7 : Enable or disable interrupt for event CH0LIMITL */
+  #define SAADC_INTEN_CH0LIMITL_Pos (7UL)            /*!< Position of CH0LIMITL field.                                         */
   #define SAADC_INTEN_CH0LIMITL_Msk (0x1UL << SAADC_INTEN_CH0LIMITL_Pos) /*!< Bit mask of CH0LIMITL field.                     */
   #define SAADC_INTEN_CH0LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH0LIMITL field.                             */
   #define SAADC_INTEN_CH0LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH0LIMITL field.                             */
   #define SAADC_INTEN_CH0LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH0LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH1LIMITH @Bit 7 : Enable or disable interrupt for event CH1LIMITH */
-  #define SAADC_INTEN_CH1LIMITH_Pos (7UL)            /*!< Position of CH1LIMITH field.                                         */
+/* CH1LIMITH @Bit 8 : Enable or disable interrupt for event CH1LIMITH */
+  #define SAADC_INTEN_CH1LIMITH_Pos (8UL)            /*!< Position of CH1LIMITH field.                                         */
   #define SAADC_INTEN_CH1LIMITH_Msk (0x1UL << SAADC_INTEN_CH1LIMITH_Pos) /*!< Bit mask of CH1LIMITH field.                     */
   #define SAADC_INTEN_CH1LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH1LIMITH field.                             */
   #define SAADC_INTEN_CH1LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH1LIMITH field.                             */
   #define SAADC_INTEN_CH1LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH1LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH1LIMITL @Bit 8 : Enable or disable interrupt for event CH1LIMITL */
-  #define SAADC_INTEN_CH1LIMITL_Pos (8UL)            /*!< Position of CH1LIMITL field.                                         */
+/* CH1LIMITL @Bit 9 : Enable or disable interrupt for event CH1LIMITL */
+  #define SAADC_INTEN_CH1LIMITL_Pos (9UL)            /*!< Position of CH1LIMITL field.                                         */
   #define SAADC_INTEN_CH1LIMITL_Msk (0x1UL << SAADC_INTEN_CH1LIMITL_Pos) /*!< Bit mask of CH1LIMITL field.                     */
   #define SAADC_INTEN_CH1LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH1LIMITL field.                             */
   #define SAADC_INTEN_CH1LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH1LIMITL field.                             */
   #define SAADC_INTEN_CH1LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH1LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH2LIMITH @Bit 9 : Enable or disable interrupt for event CH2LIMITH */
-  #define SAADC_INTEN_CH2LIMITH_Pos (9UL)            /*!< Position of CH2LIMITH field.                                         */
+/* CH2LIMITH @Bit 10 : Enable or disable interrupt for event CH2LIMITH */
+  #define SAADC_INTEN_CH2LIMITH_Pos (10UL)           /*!< Position of CH2LIMITH field.                                         */
   #define SAADC_INTEN_CH2LIMITH_Msk (0x1UL << SAADC_INTEN_CH2LIMITH_Pos) /*!< Bit mask of CH2LIMITH field.                     */
   #define SAADC_INTEN_CH2LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH2LIMITH field.                             */
   #define SAADC_INTEN_CH2LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH2LIMITH field.                             */
   #define SAADC_INTEN_CH2LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH2LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH2LIMITL @Bit 10 : Enable or disable interrupt for event CH2LIMITL */
-  #define SAADC_INTEN_CH2LIMITL_Pos (10UL)           /*!< Position of CH2LIMITL field.                                         */
+/* CH2LIMITL @Bit 11 : Enable or disable interrupt for event CH2LIMITL */
+  #define SAADC_INTEN_CH2LIMITL_Pos (11UL)           /*!< Position of CH2LIMITL field.                                         */
   #define SAADC_INTEN_CH2LIMITL_Msk (0x1UL << SAADC_INTEN_CH2LIMITL_Pos) /*!< Bit mask of CH2LIMITL field.                     */
   #define SAADC_INTEN_CH2LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH2LIMITL field.                             */
   #define SAADC_INTEN_CH2LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH2LIMITL field.                             */
   #define SAADC_INTEN_CH2LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH2LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH3LIMITH @Bit 11 : Enable or disable interrupt for event CH3LIMITH */
-  #define SAADC_INTEN_CH3LIMITH_Pos (11UL)           /*!< Position of CH3LIMITH field.                                         */
+/* CH3LIMITH @Bit 12 : Enable or disable interrupt for event CH3LIMITH */
+  #define SAADC_INTEN_CH3LIMITH_Pos (12UL)           /*!< Position of CH3LIMITH field.                                         */
   #define SAADC_INTEN_CH3LIMITH_Msk (0x1UL << SAADC_INTEN_CH3LIMITH_Pos) /*!< Bit mask of CH3LIMITH field.                     */
   #define SAADC_INTEN_CH3LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH3LIMITH field.                             */
   #define SAADC_INTEN_CH3LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH3LIMITH field.                             */
   #define SAADC_INTEN_CH3LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH3LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH3LIMITL @Bit 12 : Enable or disable interrupt for event CH3LIMITL */
-  #define SAADC_INTEN_CH3LIMITL_Pos (12UL)           /*!< Position of CH3LIMITL field.                                         */
+/* CH3LIMITL @Bit 13 : Enable or disable interrupt for event CH3LIMITL */
+  #define SAADC_INTEN_CH3LIMITL_Pos (13UL)           /*!< Position of CH3LIMITL field.                                         */
   #define SAADC_INTEN_CH3LIMITL_Msk (0x1UL << SAADC_INTEN_CH3LIMITL_Pos) /*!< Bit mask of CH3LIMITL field.                     */
   #define SAADC_INTEN_CH3LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH3LIMITL field.                             */
   #define SAADC_INTEN_CH3LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH3LIMITL field.                             */
   #define SAADC_INTEN_CH3LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH3LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH4LIMITH @Bit 13 : Enable or disable interrupt for event CH4LIMITH */
-  #define SAADC_INTEN_CH4LIMITH_Pos (13UL)           /*!< Position of CH4LIMITH field.                                         */
+/* CH4LIMITH @Bit 14 : Enable or disable interrupt for event CH4LIMITH */
+  #define SAADC_INTEN_CH4LIMITH_Pos (14UL)           /*!< Position of CH4LIMITH field.                                         */
   #define SAADC_INTEN_CH4LIMITH_Msk (0x1UL << SAADC_INTEN_CH4LIMITH_Pos) /*!< Bit mask of CH4LIMITH field.                     */
   #define SAADC_INTEN_CH4LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH4LIMITH field.                             */
   #define SAADC_INTEN_CH4LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH4LIMITH field.                             */
   #define SAADC_INTEN_CH4LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH4LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH4LIMITL @Bit 14 : Enable or disable interrupt for event CH4LIMITL */
-  #define SAADC_INTEN_CH4LIMITL_Pos (14UL)           /*!< Position of CH4LIMITL field.                                         */
+/* CH4LIMITL @Bit 15 : Enable or disable interrupt for event CH4LIMITL */
+  #define SAADC_INTEN_CH4LIMITL_Pos (15UL)           /*!< Position of CH4LIMITL field.                                         */
   #define SAADC_INTEN_CH4LIMITL_Msk (0x1UL << SAADC_INTEN_CH4LIMITL_Pos) /*!< Bit mask of CH4LIMITL field.                     */
   #define SAADC_INTEN_CH4LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH4LIMITL field.                             */
   #define SAADC_INTEN_CH4LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH4LIMITL field.                             */
   #define SAADC_INTEN_CH4LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH4LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH5LIMITH @Bit 15 : Enable or disable interrupt for event CH5LIMITH */
-  #define SAADC_INTEN_CH5LIMITH_Pos (15UL)           /*!< Position of CH5LIMITH field.                                         */
+/* CH5LIMITH @Bit 16 : Enable or disable interrupt for event CH5LIMITH */
+  #define SAADC_INTEN_CH5LIMITH_Pos (16UL)           /*!< Position of CH5LIMITH field.                                         */
   #define SAADC_INTEN_CH5LIMITH_Msk (0x1UL << SAADC_INTEN_CH5LIMITH_Pos) /*!< Bit mask of CH5LIMITH field.                     */
   #define SAADC_INTEN_CH5LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH5LIMITH field.                             */
   #define SAADC_INTEN_CH5LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH5LIMITH field.                             */
   #define SAADC_INTEN_CH5LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH5LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH5LIMITL @Bit 16 : Enable or disable interrupt for event CH5LIMITL */
-  #define SAADC_INTEN_CH5LIMITL_Pos (16UL)           /*!< Position of CH5LIMITL field.                                         */
+/* CH5LIMITL @Bit 17 : Enable or disable interrupt for event CH5LIMITL */
+  #define SAADC_INTEN_CH5LIMITL_Pos (17UL)           /*!< Position of CH5LIMITL field.                                         */
   #define SAADC_INTEN_CH5LIMITL_Msk (0x1UL << SAADC_INTEN_CH5LIMITL_Pos) /*!< Bit mask of CH5LIMITL field.                     */
   #define SAADC_INTEN_CH5LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH5LIMITL field.                             */
   #define SAADC_INTEN_CH5LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH5LIMITL field.                             */
   #define SAADC_INTEN_CH5LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH5LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH6LIMITH @Bit 17 : Enable or disable interrupt for event CH6LIMITH */
-  #define SAADC_INTEN_CH6LIMITH_Pos (17UL)           /*!< Position of CH6LIMITH field.                                         */
+/* CH6LIMITH @Bit 18 : Enable or disable interrupt for event CH6LIMITH */
+  #define SAADC_INTEN_CH6LIMITH_Pos (18UL)           /*!< Position of CH6LIMITH field.                                         */
   #define SAADC_INTEN_CH6LIMITH_Msk (0x1UL << SAADC_INTEN_CH6LIMITH_Pos) /*!< Bit mask of CH6LIMITH field.                     */
   #define SAADC_INTEN_CH6LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH6LIMITH field.                             */
   #define SAADC_INTEN_CH6LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH6LIMITH field.                             */
   #define SAADC_INTEN_CH6LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH6LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH6LIMITL @Bit 18 : Enable or disable interrupt for event CH6LIMITL */
-  #define SAADC_INTEN_CH6LIMITL_Pos (18UL)           /*!< Position of CH6LIMITL field.                                         */
+/* CH6LIMITL @Bit 19 : Enable or disable interrupt for event CH6LIMITL */
+  #define SAADC_INTEN_CH6LIMITL_Pos (19UL)           /*!< Position of CH6LIMITL field.                                         */
   #define SAADC_INTEN_CH6LIMITL_Msk (0x1UL << SAADC_INTEN_CH6LIMITL_Pos) /*!< Bit mask of CH6LIMITL field.                     */
   #define SAADC_INTEN_CH6LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH6LIMITL field.                             */
   #define SAADC_INTEN_CH6LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH6LIMITL field.                             */
   #define SAADC_INTEN_CH6LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH6LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH7LIMITH @Bit 19 : Enable or disable interrupt for event CH7LIMITH */
-  #define SAADC_INTEN_CH7LIMITH_Pos (19UL)           /*!< Position of CH7LIMITH field.                                         */
+/* CH7LIMITH @Bit 20 : Enable or disable interrupt for event CH7LIMITH */
+  #define SAADC_INTEN_CH7LIMITH_Pos (20UL)           /*!< Position of CH7LIMITH field.                                         */
   #define SAADC_INTEN_CH7LIMITH_Msk (0x1UL << SAADC_INTEN_CH7LIMITH_Pos) /*!< Bit mask of CH7LIMITH field.                     */
   #define SAADC_INTEN_CH7LIMITH_Min (0x0UL)          /*!< Min enumerator value of CH7LIMITH field.                             */
   #define SAADC_INTEN_CH7LIMITH_Max (0x1UL)          /*!< Max enumerator value of CH7LIMITH field.                             */
   #define SAADC_INTEN_CH7LIMITH_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH7LIMITH_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* CH7LIMITL @Bit 20 : Enable or disable interrupt for event CH7LIMITL */
-  #define SAADC_INTEN_CH7LIMITL_Pos (20UL)           /*!< Position of CH7LIMITL field.                                         */
+/* CH7LIMITL @Bit 21 : Enable or disable interrupt for event CH7LIMITL */
+  #define SAADC_INTEN_CH7LIMITL_Pos (21UL)           /*!< Position of CH7LIMITL field.                                         */
   #define SAADC_INTEN_CH7LIMITL_Msk (0x1UL << SAADC_INTEN_CH7LIMITL_Pos) /*!< Bit mask of CH7LIMITL field.                     */
   #define SAADC_INTEN_CH7LIMITL_Min (0x0UL)          /*!< Min enumerator value of CH7LIMITL field.                             */
   #define SAADC_INTEN_CH7LIMITL_Max (0x1UL)          /*!< Max enumerator value of CH7LIMITL field.                             */
   #define SAADC_INTEN_CH7LIMITL_Disabled (0x0UL)     /*!< Disable                                                              */
   #define SAADC_INTEN_CH7LIMITL_Enabled (0x1UL)      /*!< Enable                                                               */
 
-/* DMAEND @Bit 21 : Enable or disable interrupt for event DMAEND */
-  #define SAADC_INTEN_DMAEND_Pos (21UL)              /*!< Position of DMAEND field.                                            */
-  #define SAADC_INTEN_DMAEND_Msk (0x1UL << SAADC_INTEN_DMAEND_Pos) /*!< Bit mask of DMAEND field.                              */
-  #define SAADC_INTEN_DMAEND_Min (0x0UL)             /*!< Min enumerator value of DMAEND field.                                */
-  #define SAADC_INTEN_DMAEND_Max (0x1UL)             /*!< Max enumerator value of DMAEND field.                                */
-  #define SAADC_INTEN_DMAEND_Disabled (0x0UL)        /*!< Disable                                                              */
-  #define SAADC_INTEN_DMAEND_Enabled (0x1UL)         /*!< Enable                                                               */
-
-/* DMAREADY @Bit 22 : Enable or disable interrupt for event DMAREADY */
-  #define SAADC_INTEN_DMAREADY_Pos (22UL)            /*!< Position of DMAREADY field.                                          */
-  #define SAADC_INTEN_DMAREADY_Msk (0x1UL << SAADC_INTEN_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                        */
-  #define SAADC_INTEN_DMAREADY_Min (0x0UL)           /*!< Min enumerator value of DMAREADY field.                              */
-  #define SAADC_INTEN_DMAREADY_Max (0x1UL)           /*!< Max enumerator value of DMAREADY field.                              */
-  #define SAADC_INTEN_DMAREADY_Disabled (0x0UL)      /*!< Disable                                                              */
-  #define SAADC_INTEN_DMAREADY_Enabled (0x1UL)       /*!< Enable                                                               */
-
-/* DMABUSERROR @Bit 23 : Enable or disable interrupt for event DMABUSERROR */
-  #define SAADC_INTEN_DMABUSERROR_Pos (23UL)         /*!< Position of DMABUSERROR field.                                       */
-  #define SAADC_INTEN_DMABUSERROR_Msk (0x1UL << SAADC_INTEN_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.               */
-  #define SAADC_INTEN_DMABUSERROR_Min (0x0UL)        /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTEN_DMABUSERROR_Max (0x1UL)        /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTEN_DMABUSERROR_Disabled (0x0UL)   /*!< Disable                                                              */
-  #define SAADC_INTEN_DMABUSERROR_Enabled (0x1UL)    /*!< Enable                                                               */
+/* AHBERROR @Bit 22 : Enable or disable interrupt for event AHBERROR */
+  #define SAADC_INTEN_AHBERROR_Pos (22UL)            /*!< Position of AHBERROR field.                                          */
+  #define SAADC_INTEN_AHBERROR_Msk (0x1UL << SAADC_INTEN_AHBERROR_Pos) /*!< Bit mask of AHBERROR field.                        */
+  #define SAADC_INTEN_AHBERROR_Min (0x0UL)           /*!< Min enumerator value of AHBERROR field.                              */
+  #define SAADC_INTEN_AHBERROR_Max (0x1UL)           /*!< Max enumerator value of AHBERROR field.                              */
+  #define SAADC_INTEN_AHBERROR_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define SAADC_INTEN_AHBERROR_Enabled (0x1UL)       /*!< Enable                                                               */
 
 
 /* SAADC_INTENSET: Enable interrupt */
@@ -125942,8 +125669,17 @@ typedef struct {
   #define SAADC_INTENSET_STARTED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_STARTED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
 
-/* DONE @Bit 1 : Write '1' to enable interrupt for event DONE */
-  #define SAADC_INTENSET_DONE_Pos (1UL)              /*!< Position of DONE field.                                              */
+/* END @Bit 1 : Write '1' to enable interrupt for event END */
+  #define SAADC_INTENSET_END_Pos (1UL)               /*!< Position of END field.                                               */
+  #define SAADC_INTENSET_END_Msk (0x1UL << SAADC_INTENSET_END_Pos) /*!< Bit mask of END field.                                 */
+  #define SAADC_INTENSET_END_Min (0x0UL)             /*!< Min enumerator value of END field.                                   */
+  #define SAADC_INTENSET_END_Max (0x1UL)             /*!< Max enumerator value of END field.                                   */
+  #define SAADC_INTENSET_END_Set (0x1UL)             /*!< Enable                                                               */
+  #define SAADC_INTENSET_END_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define SAADC_INTENSET_END_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
+/* DONE @Bit 2 : Write '1' to enable interrupt for event DONE */
+  #define SAADC_INTENSET_DONE_Pos (2UL)              /*!< Position of DONE field.                                              */
   #define SAADC_INTENSET_DONE_Msk (0x1UL << SAADC_INTENSET_DONE_Pos) /*!< Bit mask of DONE field.                              */
   #define SAADC_INTENSET_DONE_Min (0x0UL)            /*!< Min enumerator value of DONE field.                                  */
   #define SAADC_INTENSET_DONE_Max (0x1UL)            /*!< Max enumerator value of DONE field.                                  */
@@ -125951,8 +125687,8 @@ typedef struct {
   #define SAADC_INTENSET_DONE_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_DONE_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
 
-/* RESULTDONE @Bit 2 : Write '1' to enable interrupt for event RESULTDONE */
-  #define SAADC_INTENSET_RESULTDONE_Pos (2UL)        /*!< Position of RESULTDONE field.                                        */
+/* RESULTDONE @Bit 3 : Write '1' to enable interrupt for event RESULTDONE */
+  #define SAADC_INTENSET_RESULTDONE_Pos (3UL)        /*!< Position of RESULTDONE field.                                        */
   #define SAADC_INTENSET_RESULTDONE_Msk (0x1UL << SAADC_INTENSET_RESULTDONE_Pos) /*!< Bit mask of RESULTDONE field.            */
   #define SAADC_INTENSET_RESULTDONE_Min (0x0UL)      /*!< Min enumerator value of RESULTDONE field.                            */
   #define SAADC_INTENSET_RESULTDONE_Max (0x1UL)      /*!< Max enumerator value of RESULTDONE field.                            */
@@ -125960,8 +125696,8 @@ typedef struct {
   #define SAADC_INTENSET_RESULTDONE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_RESULTDONE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
 
-/* CALIBRATEDONE @Bit 3 : Write '1' to enable interrupt for event CALIBRATEDONE */
-  #define SAADC_INTENSET_CALIBRATEDONE_Pos (3UL)     /*!< Position of CALIBRATEDONE field.                                     */
+/* CALIBRATEDONE @Bit 4 : Write '1' to enable interrupt for event CALIBRATEDONE */
+  #define SAADC_INTENSET_CALIBRATEDONE_Pos (4UL)     /*!< Position of CALIBRATEDONE field.                                     */
   #define SAADC_INTENSET_CALIBRATEDONE_Msk (0x1UL << SAADC_INTENSET_CALIBRATEDONE_Pos) /*!< Bit mask of CALIBRATEDONE field.   */
   #define SAADC_INTENSET_CALIBRATEDONE_Min (0x0UL)   /*!< Min enumerator value of CALIBRATEDONE field.                         */
   #define SAADC_INTENSET_CALIBRATEDONE_Max (0x1UL)   /*!< Max enumerator value of CALIBRATEDONE field.                         */
@@ -125969,8 +125705,8 @@ typedef struct {
   #define SAADC_INTENSET_CALIBRATEDONE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
   #define SAADC_INTENSET_CALIBRATEDONE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
 
-/* STOPPED @Bit 4 : Write '1' to enable interrupt for event STOPPED */
-  #define SAADC_INTENSET_STOPPED_Pos (4UL)           /*!< Position of STOPPED field.                                           */
+/* STOPPED @Bit 5 : Write '1' to enable interrupt for event STOPPED */
+  #define SAADC_INTENSET_STOPPED_Pos (5UL)           /*!< Position of STOPPED field.                                           */
   #define SAADC_INTENSET_STOPPED_Msk (0x1UL << SAADC_INTENSET_STOPPED_Pos) /*!< Bit mask of STOPPED field.                     */
   #define SAADC_INTENSET_STOPPED_Min (0x0UL)         /*!< Min enumerator value of STOPPED field.                               */
   #define SAADC_INTENSET_STOPPED_Max (0x1UL)         /*!< Max enumerator value of STOPPED field.                               */
@@ -125978,8 +125714,8 @@ typedef struct {
   #define SAADC_INTENSET_STOPPED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_STOPPED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
 
-/* CH0LIMITH @Bit 5 : Write '1' to enable interrupt for event CH0LIMITH */
-  #define SAADC_INTENSET_CH0LIMITH_Pos (5UL)         /*!< Position of CH0LIMITH field.                                         */
+/* CH0LIMITH @Bit 6 : Write '1' to enable interrupt for event CH0LIMITH */
+  #define SAADC_INTENSET_CH0LIMITH_Pos (6UL)         /*!< Position of CH0LIMITH field.                                         */
   #define SAADC_INTENSET_CH0LIMITH_Msk (0x1UL << SAADC_INTENSET_CH0LIMITH_Pos) /*!< Bit mask of CH0LIMITH field.               */
   #define SAADC_INTENSET_CH0LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH0LIMITH field.                             */
   #define SAADC_INTENSET_CH0LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH0LIMITH field.                             */
@@ -125987,8 +125723,8 @@ typedef struct {
   #define SAADC_INTENSET_CH0LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH0LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH0LIMITL @Bit 6 : Write '1' to enable interrupt for event CH0LIMITL */
-  #define SAADC_INTENSET_CH0LIMITL_Pos (6UL)         /*!< Position of CH0LIMITL field.                                         */
+/* CH0LIMITL @Bit 7 : Write '1' to enable interrupt for event CH0LIMITL */
+  #define SAADC_INTENSET_CH0LIMITL_Pos (7UL)         /*!< Position of CH0LIMITL field.                                         */
   #define SAADC_INTENSET_CH0LIMITL_Msk (0x1UL << SAADC_INTENSET_CH0LIMITL_Pos) /*!< Bit mask of CH0LIMITL field.               */
   #define SAADC_INTENSET_CH0LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH0LIMITL field.                             */
   #define SAADC_INTENSET_CH0LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH0LIMITL field.                             */
@@ -125996,8 +125732,8 @@ typedef struct {
   #define SAADC_INTENSET_CH0LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH0LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH1LIMITH @Bit 7 : Write '1' to enable interrupt for event CH1LIMITH */
-  #define SAADC_INTENSET_CH1LIMITH_Pos (7UL)         /*!< Position of CH1LIMITH field.                                         */
+/* CH1LIMITH @Bit 8 : Write '1' to enable interrupt for event CH1LIMITH */
+  #define SAADC_INTENSET_CH1LIMITH_Pos (8UL)         /*!< Position of CH1LIMITH field.                                         */
   #define SAADC_INTENSET_CH1LIMITH_Msk (0x1UL << SAADC_INTENSET_CH1LIMITH_Pos) /*!< Bit mask of CH1LIMITH field.               */
   #define SAADC_INTENSET_CH1LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH1LIMITH field.                             */
   #define SAADC_INTENSET_CH1LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH1LIMITH field.                             */
@@ -126005,8 +125741,8 @@ typedef struct {
   #define SAADC_INTENSET_CH1LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH1LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH1LIMITL @Bit 8 : Write '1' to enable interrupt for event CH1LIMITL */
-  #define SAADC_INTENSET_CH1LIMITL_Pos (8UL)         /*!< Position of CH1LIMITL field.                                         */
+/* CH1LIMITL @Bit 9 : Write '1' to enable interrupt for event CH1LIMITL */
+  #define SAADC_INTENSET_CH1LIMITL_Pos (9UL)         /*!< Position of CH1LIMITL field.                                         */
   #define SAADC_INTENSET_CH1LIMITL_Msk (0x1UL << SAADC_INTENSET_CH1LIMITL_Pos) /*!< Bit mask of CH1LIMITL field.               */
   #define SAADC_INTENSET_CH1LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH1LIMITL field.                             */
   #define SAADC_INTENSET_CH1LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH1LIMITL field.                             */
@@ -126014,8 +125750,8 @@ typedef struct {
   #define SAADC_INTENSET_CH1LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH1LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH2LIMITH @Bit 9 : Write '1' to enable interrupt for event CH2LIMITH */
-  #define SAADC_INTENSET_CH2LIMITH_Pos (9UL)         /*!< Position of CH2LIMITH field.                                         */
+/* CH2LIMITH @Bit 10 : Write '1' to enable interrupt for event CH2LIMITH */
+  #define SAADC_INTENSET_CH2LIMITH_Pos (10UL)        /*!< Position of CH2LIMITH field.                                         */
   #define SAADC_INTENSET_CH2LIMITH_Msk (0x1UL << SAADC_INTENSET_CH2LIMITH_Pos) /*!< Bit mask of CH2LIMITH field.               */
   #define SAADC_INTENSET_CH2LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH2LIMITH field.                             */
   #define SAADC_INTENSET_CH2LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH2LIMITH field.                             */
@@ -126023,8 +125759,8 @@ typedef struct {
   #define SAADC_INTENSET_CH2LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH2LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH2LIMITL @Bit 10 : Write '1' to enable interrupt for event CH2LIMITL */
-  #define SAADC_INTENSET_CH2LIMITL_Pos (10UL)        /*!< Position of CH2LIMITL field.                                         */
+/* CH2LIMITL @Bit 11 : Write '1' to enable interrupt for event CH2LIMITL */
+  #define SAADC_INTENSET_CH2LIMITL_Pos (11UL)        /*!< Position of CH2LIMITL field.                                         */
   #define SAADC_INTENSET_CH2LIMITL_Msk (0x1UL << SAADC_INTENSET_CH2LIMITL_Pos) /*!< Bit mask of CH2LIMITL field.               */
   #define SAADC_INTENSET_CH2LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH2LIMITL field.                             */
   #define SAADC_INTENSET_CH2LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH2LIMITL field.                             */
@@ -126032,8 +125768,8 @@ typedef struct {
   #define SAADC_INTENSET_CH2LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH2LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH3LIMITH @Bit 11 : Write '1' to enable interrupt for event CH3LIMITH */
-  #define SAADC_INTENSET_CH3LIMITH_Pos (11UL)        /*!< Position of CH3LIMITH field.                                         */
+/* CH3LIMITH @Bit 12 : Write '1' to enable interrupt for event CH3LIMITH */
+  #define SAADC_INTENSET_CH3LIMITH_Pos (12UL)        /*!< Position of CH3LIMITH field.                                         */
   #define SAADC_INTENSET_CH3LIMITH_Msk (0x1UL << SAADC_INTENSET_CH3LIMITH_Pos) /*!< Bit mask of CH3LIMITH field.               */
   #define SAADC_INTENSET_CH3LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH3LIMITH field.                             */
   #define SAADC_INTENSET_CH3LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH3LIMITH field.                             */
@@ -126041,8 +125777,8 @@ typedef struct {
   #define SAADC_INTENSET_CH3LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH3LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH3LIMITL @Bit 12 : Write '1' to enable interrupt for event CH3LIMITL */
-  #define SAADC_INTENSET_CH3LIMITL_Pos (12UL)        /*!< Position of CH3LIMITL field.                                         */
+/* CH3LIMITL @Bit 13 : Write '1' to enable interrupt for event CH3LIMITL */
+  #define SAADC_INTENSET_CH3LIMITL_Pos (13UL)        /*!< Position of CH3LIMITL field.                                         */
   #define SAADC_INTENSET_CH3LIMITL_Msk (0x1UL << SAADC_INTENSET_CH3LIMITL_Pos) /*!< Bit mask of CH3LIMITL field.               */
   #define SAADC_INTENSET_CH3LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH3LIMITL field.                             */
   #define SAADC_INTENSET_CH3LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH3LIMITL field.                             */
@@ -126050,8 +125786,8 @@ typedef struct {
   #define SAADC_INTENSET_CH3LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH3LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH4LIMITH @Bit 13 : Write '1' to enable interrupt for event CH4LIMITH */
-  #define SAADC_INTENSET_CH4LIMITH_Pos (13UL)        /*!< Position of CH4LIMITH field.                                         */
+/* CH4LIMITH @Bit 14 : Write '1' to enable interrupt for event CH4LIMITH */
+  #define SAADC_INTENSET_CH4LIMITH_Pos (14UL)        /*!< Position of CH4LIMITH field.                                         */
   #define SAADC_INTENSET_CH4LIMITH_Msk (0x1UL << SAADC_INTENSET_CH4LIMITH_Pos) /*!< Bit mask of CH4LIMITH field.               */
   #define SAADC_INTENSET_CH4LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH4LIMITH field.                             */
   #define SAADC_INTENSET_CH4LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH4LIMITH field.                             */
@@ -126059,8 +125795,8 @@ typedef struct {
   #define SAADC_INTENSET_CH4LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH4LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH4LIMITL @Bit 14 : Write '1' to enable interrupt for event CH4LIMITL */
-  #define SAADC_INTENSET_CH4LIMITL_Pos (14UL)        /*!< Position of CH4LIMITL field.                                         */
+/* CH4LIMITL @Bit 15 : Write '1' to enable interrupt for event CH4LIMITL */
+  #define SAADC_INTENSET_CH4LIMITL_Pos (15UL)        /*!< Position of CH4LIMITL field.                                         */
   #define SAADC_INTENSET_CH4LIMITL_Msk (0x1UL << SAADC_INTENSET_CH4LIMITL_Pos) /*!< Bit mask of CH4LIMITL field.               */
   #define SAADC_INTENSET_CH4LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH4LIMITL field.                             */
   #define SAADC_INTENSET_CH4LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH4LIMITL field.                             */
@@ -126068,8 +125804,8 @@ typedef struct {
   #define SAADC_INTENSET_CH4LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH4LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH5LIMITH @Bit 15 : Write '1' to enable interrupt for event CH5LIMITH */
-  #define SAADC_INTENSET_CH5LIMITH_Pos (15UL)        /*!< Position of CH5LIMITH field.                                         */
+/* CH5LIMITH @Bit 16 : Write '1' to enable interrupt for event CH5LIMITH */
+  #define SAADC_INTENSET_CH5LIMITH_Pos (16UL)        /*!< Position of CH5LIMITH field.                                         */
   #define SAADC_INTENSET_CH5LIMITH_Msk (0x1UL << SAADC_INTENSET_CH5LIMITH_Pos) /*!< Bit mask of CH5LIMITH field.               */
   #define SAADC_INTENSET_CH5LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH5LIMITH field.                             */
   #define SAADC_INTENSET_CH5LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH5LIMITH field.                             */
@@ -126077,8 +125813,8 @@ typedef struct {
   #define SAADC_INTENSET_CH5LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH5LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH5LIMITL @Bit 16 : Write '1' to enable interrupt for event CH5LIMITL */
-  #define SAADC_INTENSET_CH5LIMITL_Pos (16UL)        /*!< Position of CH5LIMITL field.                                         */
+/* CH5LIMITL @Bit 17 : Write '1' to enable interrupt for event CH5LIMITL */
+  #define SAADC_INTENSET_CH5LIMITL_Pos (17UL)        /*!< Position of CH5LIMITL field.                                         */
   #define SAADC_INTENSET_CH5LIMITL_Msk (0x1UL << SAADC_INTENSET_CH5LIMITL_Pos) /*!< Bit mask of CH5LIMITL field.               */
   #define SAADC_INTENSET_CH5LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH5LIMITL field.                             */
   #define SAADC_INTENSET_CH5LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH5LIMITL field.                             */
@@ -126086,8 +125822,8 @@ typedef struct {
   #define SAADC_INTENSET_CH5LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH5LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH6LIMITH @Bit 17 : Write '1' to enable interrupt for event CH6LIMITH */
-  #define SAADC_INTENSET_CH6LIMITH_Pos (17UL)        /*!< Position of CH6LIMITH field.                                         */
+/* CH6LIMITH @Bit 18 : Write '1' to enable interrupt for event CH6LIMITH */
+  #define SAADC_INTENSET_CH6LIMITH_Pos (18UL)        /*!< Position of CH6LIMITH field.                                         */
   #define SAADC_INTENSET_CH6LIMITH_Msk (0x1UL << SAADC_INTENSET_CH6LIMITH_Pos) /*!< Bit mask of CH6LIMITH field.               */
   #define SAADC_INTENSET_CH6LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH6LIMITH field.                             */
   #define SAADC_INTENSET_CH6LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH6LIMITH field.                             */
@@ -126095,8 +125831,8 @@ typedef struct {
   #define SAADC_INTENSET_CH6LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH6LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH6LIMITL @Bit 18 : Write '1' to enable interrupt for event CH6LIMITL */
-  #define SAADC_INTENSET_CH6LIMITL_Pos (18UL)        /*!< Position of CH6LIMITL field.                                         */
+/* CH6LIMITL @Bit 19 : Write '1' to enable interrupt for event CH6LIMITL */
+  #define SAADC_INTENSET_CH6LIMITL_Pos (19UL)        /*!< Position of CH6LIMITL field.                                         */
   #define SAADC_INTENSET_CH6LIMITL_Msk (0x1UL << SAADC_INTENSET_CH6LIMITL_Pos) /*!< Bit mask of CH6LIMITL field.               */
   #define SAADC_INTENSET_CH6LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH6LIMITL field.                             */
   #define SAADC_INTENSET_CH6LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH6LIMITL field.                             */
@@ -126104,8 +125840,8 @@ typedef struct {
   #define SAADC_INTENSET_CH6LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH6LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH7LIMITH @Bit 19 : Write '1' to enable interrupt for event CH7LIMITH */
-  #define SAADC_INTENSET_CH7LIMITH_Pos (19UL)        /*!< Position of CH7LIMITH field.                                         */
+/* CH7LIMITH @Bit 20 : Write '1' to enable interrupt for event CH7LIMITH */
+  #define SAADC_INTENSET_CH7LIMITH_Pos (20UL)        /*!< Position of CH7LIMITH field.                                         */
   #define SAADC_INTENSET_CH7LIMITH_Msk (0x1UL << SAADC_INTENSET_CH7LIMITH_Pos) /*!< Bit mask of CH7LIMITH field.               */
   #define SAADC_INTENSET_CH7LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH7LIMITH field.                             */
   #define SAADC_INTENSET_CH7LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH7LIMITH field.                             */
@@ -126113,8 +125849,8 @@ typedef struct {
   #define SAADC_INTENSET_CH7LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH7LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH7LIMITL @Bit 20 : Write '1' to enable interrupt for event CH7LIMITL */
-  #define SAADC_INTENSET_CH7LIMITL_Pos (20UL)        /*!< Position of CH7LIMITL field.                                         */
+/* CH7LIMITL @Bit 21 : Write '1' to enable interrupt for event CH7LIMITL */
+  #define SAADC_INTENSET_CH7LIMITL_Pos (21UL)        /*!< Position of CH7LIMITL field.                                         */
   #define SAADC_INTENSET_CH7LIMITL_Msk (0x1UL << SAADC_INTENSET_CH7LIMITL_Pos) /*!< Bit mask of CH7LIMITL field.               */
   #define SAADC_INTENSET_CH7LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH7LIMITL field.                             */
   #define SAADC_INTENSET_CH7LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH7LIMITL field.                             */
@@ -126122,32 +125858,14 @@ typedef struct {
   #define SAADC_INTENSET_CH7LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENSET_CH7LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* DMAEND @Bit 21 : Write '1' to enable interrupt for event DMAEND */
-  #define SAADC_INTENSET_DMAEND_Pos (21UL)           /*!< Position of DMAEND field.                                            */
-  #define SAADC_INTENSET_DMAEND_Msk (0x1UL << SAADC_INTENSET_DMAEND_Pos) /*!< Bit mask of DMAEND field.                        */
-  #define SAADC_INTENSET_DMAEND_Min (0x0UL)          /*!< Min enumerator value of DMAEND field.                                */
-  #define SAADC_INTENSET_DMAEND_Max (0x1UL)          /*!< Max enumerator value of DMAEND field.                                */
-  #define SAADC_INTENSET_DMAEND_Set (0x1UL)          /*!< Enable                                                               */
-  #define SAADC_INTENSET_DMAEND_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
-  #define SAADC_INTENSET_DMAEND_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
-
-/* DMAREADY @Bit 22 : Write '1' to enable interrupt for event DMAREADY */
-  #define SAADC_INTENSET_DMAREADY_Pos (22UL)         /*!< Position of DMAREADY field.                                          */
-  #define SAADC_INTENSET_DMAREADY_Msk (0x1UL << SAADC_INTENSET_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                  */
-  #define SAADC_INTENSET_DMAREADY_Min (0x0UL)        /*!< Min enumerator value of DMAREADY field.                              */
-  #define SAADC_INTENSET_DMAREADY_Max (0x1UL)        /*!< Max enumerator value of DMAREADY field.                              */
-  #define SAADC_INTENSET_DMAREADY_Set (0x1UL)        /*!< Enable                                                               */
-  #define SAADC_INTENSET_DMAREADY_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
-  #define SAADC_INTENSET_DMAREADY_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
-
-/* DMABUSERROR @Bit 23 : Write '1' to enable interrupt for event DMABUSERROR */
-  #define SAADC_INTENSET_DMABUSERROR_Pos (23UL)      /*!< Position of DMABUSERROR field.                                       */
-  #define SAADC_INTENSET_DMABUSERROR_Msk (0x1UL << SAADC_INTENSET_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.         */
-  #define SAADC_INTENSET_DMABUSERROR_Min (0x0UL)     /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTENSET_DMABUSERROR_Max (0x1UL)     /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTENSET_DMABUSERROR_Set (0x1UL)     /*!< Enable                                                               */
-  #define SAADC_INTENSET_DMABUSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
-  #define SAADC_INTENSET_DMABUSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+/* AHBERROR @Bit 22 : Write '1' to enable interrupt for event AHBERROR */
+  #define SAADC_INTENSET_AHBERROR_Pos (22UL)         /*!< Position of AHBERROR field.                                          */
+  #define SAADC_INTENSET_AHBERROR_Msk (0x1UL << SAADC_INTENSET_AHBERROR_Pos) /*!< Bit mask of AHBERROR field.                  */
+  #define SAADC_INTENSET_AHBERROR_Min (0x0UL)        /*!< Min enumerator value of AHBERROR field.                              */
+  #define SAADC_INTENSET_AHBERROR_Max (0x1UL)        /*!< Max enumerator value of AHBERROR field.                              */
+  #define SAADC_INTENSET_AHBERROR_Set (0x1UL)        /*!< Enable                                                               */
+  #define SAADC_INTENSET_AHBERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define SAADC_INTENSET_AHBERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
 
 /* SAADC_INTENCLR: Disable interrupt */
@@ -126162,8 +125880,17 @@ typedef struct {
   #define SAADC_INTENCLR_STARTED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_STARTED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
 
-/* DONE @Bit 1 : Write '1' to disable interrupt for event DONE */
-  #define SAADC_INTENCLR_DONE_Pos (1UL)              /*!< Position of DONE field.                                              */
+/* END @Bit 1 : Write '1' to disable interrupt for event END */
+  #define SAADC_INTENCLR_END_Pos (1UL)               /*!< Position of END field.                                               */
+  #define SAADC_INTENCLR_END_Msk (0x1UL << SAADC_INTENCLR_END_Pos) /*!< Bit mask of END field.                                 */
+  #define SAADC_INTENCLR_END_Min (0x0UL)             /*!< Min enumerator value of END field.                                   */
+  #define SAADC_INTENCLR_END_Max (0x1UL)             /*!< Max enumerator value of END field.                                   */
+  #define SAADC_INTENCLR_END_Clear (0x1UL)           /*!< Disable                                                              */
+  #define SAADC_INTENCLR_END_Disabled (0x0UL)        /*!< Read: Disabled                                                       */
+  #define SAADC_INTENCLR_END_Enabled (0x1UL)         /*!< Read: Enabled                                                        */
+
+/* DONE @Bit 2 : Write '1' to disable interrupt for event DONE */
+  #define SAADC_INTENCLR_DONE_Pos (2UL)              /*!< Position of DONE field.                                              */
   #define SAADC_INTENCLR_DONE_Msk (0x1UL << SAADC_INTENCLR_DONE_Pos) /*!< Bit mask of DONE field.                              */
   #define SAADC_INTENCLR_DONE_Min (0x0UL)            /*!< Min enumerator value of DONE field.                                  */
   #define SAADC_INTENCLR_DONE_Max (0x1UL)            /*!< Max enumerator value of DONE field.                                  */
@@ -126171,8 +125898,8 @@ typedef struct {
   #define SAADC_INTENCLR_DONE_Disabled (0x0UL)       /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_DONE_Enabled (0x1UL)        /*!< Read: Enabled                                                        */
 
-/* RESULTDONE @Bit 2 : Write '1' to disable interrupt for event RESULTDONE */
-  #define SAADC_INTENCLR_RESULTDONE_Pos (2UL)        /*!< Position of RESULTDONE field.                                        */
+/* RESULTDONE @Bit 3 : Write '1' to disable interrupt for event RESULTDONE */
+  #define SAADC_INTENCLR_RESULTDONE_Pos (3UL)        /*!< Position of RESULTDONE field.                                        */
   #define SAADC_INTENCLR_RESULTDONE_Msk (0x1UL << SAADC_INTENCLR_RESULTDONE_Pos) /*!< Bit mask of RESULTDONE field.            */
   #define SAADC_INTENCLR_RESULTDONE_Min (0x0UL)      /*!< Min enumerator value of RESULTDONE field.                            */
   #define SAADC_INTENCLR_RESULTDONE_Max (0x1UL)      /*!< Max enumerator value of RESULTDONE field.                            */
@@ -126180,8 +125907,8 @@ typedef struct {
   #define SAADC_INTENCLR_RESULTDONE_Disabled (0x0UL) /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_RESULTDONE_Enabled (0x1UL)  /*!< Read: Enabled                                                        */
 
-/* CALIBRATEDONE @Bit 3 : Write '1' to disable interrupt for event CALIBRATEDONE */
-  #define SAADC_INTENCLR_CALIBRATEDONE_Pos (3UL)     /*!< Position of CALIBRATEDONE field.                                     */
+/* CALIBRATEDONE @Bit 4 : Write '1' to disable interrupt for event CALIBRATEDONE */
+  #define SAADC_INTENCLR_CALIBRATEDONE_Pos (4UL)     /*!< Position of CALIBRATEDONE field.                                     */
   #define SAADC_INTENCLR_CALIBRATEDONE_Msk (0x1UL << SAADC_INTENCLR_CALIBRATEDONE_Pos) /*!< Bit mask of CALIBRATEDONE field.   */
   #define SAADC_INTENCLR_CALIBRATEDONE_Min (0x0UL)   /*!< Min enumerator value of CALIBRATEDONE field.                         */
   #define SAADC_INTENCLR_CALIBRATEDONE_Max (0x1UL)   /*!< Max enumerator value of CALIBRATEDONE field.                         */
@@ -126189,8 +125916,8 @@ typedef struct {
   #define SAADC_INTENCLR_CALIBRATEDONE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
   #define SAADC_INTENCLR_CALIBRATEDONE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
 
-/* STOPPED @Bit 4 : Write '1' to disable interrupt for event STOPPED */
-  #define SAADC_INTENCLR_STOPPED_Pos (4UL)           /*!< Position of STOPPED field.                                           */
+/* STOPPED @Bit 5 : Write '1' to disable interrupt for event STOPPED */
+  #define SAADC_INTENCLR_STOPPED_Pos (5UL)           /*!< Position of STOPPED field.                                           */
   #define SAADC_INTENCLR_STOPPED_Msk (0x1UL << SAADC_INTENCLR_STOPPED_Pos) /*!< Bit mask of STOPPED field.                     */
   #define SAADC_INTENCLR_STOPPED_Min (0x0UL)         /*!< Min enumerator value of STOPPED field.                               */
   #define SAADC_INTENCLR_STOPPED_Max (0x1UL)         /*!< Max enumerator value of STOPPED field.                               */
@@ -126198,8 +125925,8 @@ typedef struct {
   #define SAADC_INTENCLR_STOPPED_Disabled (0x0UL)    /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_STOPPED_Enabled (0x1UL)     /*!< Read: Enabled                                                        */
 
-/* CH0LIMITH @Bit 5 : Write '1' to disable interrupt for event CH0LIMITH */
-  #define SAADC_INTENCLR_CH0LIMITH_Pos (5UL)         /*!< Position of CH0LIMITH field.                                         */
+/* CH0LIMITH @Bit 6 : Write '1' to disable interrupt for event CH0LIMITH */
+  #define SAADC_INTENCLR_CH0LIMITH_Pos (6UL)         /*!< Position of CH0LIMITH field.                                         */
   #define SAADC_INTENCLR_CH0LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH0LIMITH_Pos) /*!< Bit mask of CH0LIMITH field.               */
   #define SAADC_INTENCLR_CH0LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH0LIMITH field.                             */
   #define SAADC_INTENCLR_CH0LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH0LIMITH field.                             */
@@ -126207,8 +125934,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH0LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH0LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH0LIMITL @Bit 6 : Write '1' to disable interrupt for event CH0LIMITL */
-  #define SAADC_INTENCLR_CH0LIMITL_Pos (6UL)         /*!< Position of CH0LIMITL field.                                         */
+/* CH0LIMITL @Bit 7 : Write '1' to disable interrupt for event CH0LIMITL */
+  #define SAADC_INTENCLR_CH0LIMITL_Pos (7UL)         /*!< Position of CH0LIMITL field.                                         */
   #define SAADC_INTENCLR_CH0LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH0LIMITL_Pos) /*!< Bit mask of CH0LIMITL field.               */
   #define SAADC_INTENCLR_CH0LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH0LIMITL field.                             */
   #define SAADC_INTENCLR_CH0LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH0LIMITL field.                             */
@@ -126216,8 +125943,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH0LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH0LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH1LIMITH @Bit 7 : Write '1' to disable interrupt for event CH1LIMITH */
-  #define SAADC_INTENCLR_CH1LIMITH_Pos (7UL)         /*!< Position of CH1LIMITH field.                                         */
+/* CH1LIMITH @Bit 8 : Write '1' to disable interrupt for event CH1LIMITH */
+  #define SAADC_INTENCLR_CH1LIMITH_Pos (8UL)         /*!< Position of CH1LIMITH field.                                         */
   #define SAADC_INTENCLR_CH1LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH1LIMITH_Pos) /*!< Bit mask of CH1LIMITH field.               */
   #define SAADC_INTENCLR_CH1LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH1LIMITH field.                             */
   #define SAADC_INTENCLR_CH1LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH1LIMITH field.                             */
@@ -126225,8 +125952,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH1LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH1LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH1LIMITL @Bit 8 : Write '1' to disable interrupt for event CH1LIMITL */
-  #define SAADC_INTENCLR_CH1LIMITL_Pos (8UL)         /*!< Position of CH1LIMITL field.                                         */
+/* CH1LIMITL @Bit 9 : Write '1' to disable interrupt for event CH1LIMITL */
+  #define SAADC_INTENCLR_CH1LIMITL_Pos (9UL)         /*!< Position of CH1LIMITL field.                                         */
   #define SAADC_INTENCLR_CH1LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH1LIMITL_Pos) /*!< Bit mask of CH1LIMITL field.               */
   #define SAADC_INTENCLR_CH1LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH1LIMITL field.                             */
   #define SAADC_INTENCLR_CH1LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH1LIMITL field.                             */
@@ -126234,8 +125961,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH1LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH1LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH2LIMITH @Bit 9 : Write '1' to disable interrupt for event CH2LIMITH */
-  #define SAADC_INTENCLR_CH2LIMITH_Pos (9UL)         /*!< Position of CH2LIMITH field.                                         */
+/* CH2LIMITH @Bit 10 : Write '1' to disable interrupt for event CH2LIMITH */
+  #define SAADC_INTENCLR_CH2LIMITH_Pos (10UL)        /*!< Position of CH2LIMITH field.                                         */
   #define SAADC_INTENCLR_CH2LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH2LIMITH_Pos) /*!< Bit mask of CH2LIMITH field.               */
   #define SAADC_INTENCLR_CH2LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH2LIMITH field.                             */
   #define SAADC_INTENCLR_CH2LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH2LIMITH field.                             */
@@ -126243,8 +125970,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH2LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH2LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH2LIMITL @Bit 10 : Write '1' to disable interrupt for event CH2LIMITL */
-  #define SAADC_INTENCLR_CH2LIMITL_Pos (10UL)        /*!< Position of CH2LIMITL field.                                         */
+/* CH2LIMITL @Bit 11 : Write '1' to disable interrupt for event CH2LIMITL */
+  #define SAADC_INTENCLR_CH2LIMITL_Pos (11UL)        /*!< Position of CH2LIMITL field.                                         */
   #define SAADC_INTENCLR_CH2LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH2LIMITL_Pos) /*!< Bit mask of CH2LIMITL field.               */
   #define SAADC_INTENCLR_CH2LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH2LIMITL field.                             */
   #define SAADC_INTENCLR_CH2LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH2LIMITL field.                             */
@@ -126252,8 +125979,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH2LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH2LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH3LIMITH @Bit 11 : Write '1' to disable interrupt for event CH3LIMITH */
-  #define SAADC_INTENCLR_CH3LIMITH_Pos (11UL)        /*!< Position of CH3LIMITH field.                                         */
+/* CH3LIMITH @Bit 12 : Write '1' to disable interrupt for event CH3LIMITH */
+  #define SAADC_INTENCLR_CH3LIMITH_Pos (12UL)        /*!< Position of CH3LIMITH field.                                         */
   #define SAADC_INTENCLR_CH3LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH3LIMITH_Pos) /*!< Bit mask of CH3LIMITH field.               */
   #define SAADC_INTENCLR_CH3LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH3LIMITH field.                             */
   #define SAADC_INTENCLR_CH3LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH3LIMITH field.                             */
@@ -126261,8 +125988,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH3LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH3LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH3LIMITL @Bit 12 : Write '1' to disable interrupt for event CH3LIMITL */
-  #define SAADC_INTENCLR_CH3LIMITL_Pos (12UL)        /*!< Position of CH3LIMITL field.                                         */
+/* CH3LIMITL @Bit 13 : Write '1' to disable interrupt for event CH3LIMITL */
+  #define SAADC_INTENCLR_CH3LIMITL_Pos (13UL)        /*!< Position of CH3LIMITL field.                                         */
   #define SAADC_INTENCLR_CH3LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH3LIMITL_Pos) /*!< Bit mask of CH3LIMITL field.               */
   #define SAADC_INTENCLR_CH3LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH3LIMITL field.                             */
   #define SAADC_INTENCLR_CH3LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH3LIMITL field.                             */
@@ -126270,8 +125997,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH3LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH3LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH4LIMITH @Bit 13 : Write '1' to disable interrupt for event CH4LIMITH */
-  #define SAADC_INTENCLR_CH4LIMITH_Pos (13UL)        /*!< Position of CH4LIMITH field.                                         */
+/* CH4LIMITH @Bit 14 : Write '1' to disable interrupt for event CH4LIMITH */
+  #define SAADC_INTENCLR_CH4LIMITH_Pos (14UL)        /*!< Position of CH4LIMITH field.                                         */
   #define SAADC_INTENCLR_CH4LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH4LIMITH_Pos) /*!< Bit mask of CH4LIMITH field.               */
   #define SAADC_INTENCLR_CH4LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH4LIMITH field.                             */
   #define SAADC_INTENCLR_CH4LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH4LIMITH field.                             */
@@ -126279,8 +126006,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH4LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH4LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH4LIMITL @Bit 14 : Write '1' to disable interrupt for event CH4LIMITL */
-  #define SAADC_INTENCLR_CH4LIMITL_Pos (14UL)        /*!< Position of CH4LIMITL field.                                         */
+/* CH4LIMITL @Bit 15 : Write '1' to disable interrupt for event CH4LIMITL */
+  #define SAADC_INTENCLR_CH4LIMITL_Pos (15UL)        /*!< Position of CH4LIMITL field.                                         */
   #define SAADC_INTENCLR_CH4LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH4LIMITL_Pos) /*!< Bit mask of CH4LIMITL field.               */
   #define SAADC_INTENCLR_CH4LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH4LIMITL field.                             */
   #define SAADC_INTENCLR_CH4LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH4LIMITL field.                             */
@@ -126288,8 +126015,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH4LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH4LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH5LIMITH @Bit 15 : Write '1' to disable interrupt for event CH5LIMITH */
-  #define SAADC_INTENCLR_CH5LIMITH_Pos (15UL)        /*!< Position of CH5LIMITH field.                                         */
+/* CH5LIMITH @Bit 16 : Write '1' to disable interrupt for event CH5LIMITH */
+  #define SAADC_INTENCLR_CH5LIMITH_Pos (16UL)        /*!< Position of CH5LIMITH field.                                         */
   #define SAADC_INTENCLR_CH5LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH5LIMITH_Pos) /*!< Bit mask of CH5LIMITH field.               */
   #define SAADC_INTENCLR_CH5LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH5LIMITH field.                             */
   #define SAADC_INTENCLR_CH5LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH5LIMITH field.                             */
@@ -126297,8 +126024,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH5LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH5LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH5LIMITL @Bit 16 : Write '1' to disable interrupt for event CH5LIMITL */
-  #define SAADC_INTENCLR_CH5LIMITL_Pos (16UL)        /*!< Position of CH5LIMITL field.                                         */
+/* CH5LIMITL @Bit 17 : Write '1' to disable interrupt for event CH5LIMITL */
+  #define SAADC_INTENCLR_CH5LIMITL_Pos (17UL)        /*!< Position of CH5LIMITL field.                                         */
   #define SAADC_INTENCLR_CH5LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH5LIMITL_Pos) /*!< Bit mask of CH5LIMITL field.               */
   #define SAADC_INTENCLR_CH5LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH5LIMITL field.                             */
   #define SAADC_INTENCLR_CH5LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH5LIMITL field.                             */
@@ -126306,8 +126033,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH5LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH5LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH6LIMITH @Bit 17 : Write '1' to disable interrupt for event CH6LIMITH */
-  #define SAADC_INTENCLR_CH6LIMITH_Pos (17UL)        /*!< Position of CH6LIMITH field.                                         */
+/* CH6LIMITH @Bit 18 : Write '1' to disable interrupt for event CH6LIMITH */
+  #define SAADC_INTENCLR_CH6LIMITH_Pos (18UL)        /*!< Position of CH6LIMITH field.                                         */
   #define SAADC_INTENCLR_CH6LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH6LIMITH_Pos) /*!< Bit mask of CH6LIMITH field.               */
   #define SAADC_INTENCLR_CH6LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH6LIMITH field.                             */
   #define SAADC_INTENCLR_CH6LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH6LIMITH field.                             */
@@ -126315,8 +126042,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH6LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH6LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH6LIMITL @Bit 18 : Write '1' to disable interrupt for event CH6LIMITL */
-  #define SAADC_INTENCLR_CH6LIMITL_Pos (18UL)        /*!< Position of CH6LIMITL field.                                         */
+/* CH6LIMITL @Bit 19 : Write '1' to disable interrupt for event CH6LIMITL */
+  #define SAADC_INTENCLR_CH6LIMITL_Pos (19UL)        /*!< Position of CH6LIMITL field.                                         */
   #define SAADC_INTENCLR_CH6LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH6LIMITL_Pos) /*!< Bit mask of CH6LIMITL field.               */
   #define SAADC_INTENCLR_CH6LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH6LIMITL field.                             */
   #define SAADC_INTENCLR_CH6LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH6LIMITL field.                             */
@@ -126324,8 +126051,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH6LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH6LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH7LIMITH @Bit 19 : Write '1' to disable interrupt for event CH7LIMITH */
-  #define SAADC_INTENCLR_CH7LIMITH_Pos (19UL)        /*!< Position of CH7LIMITH field.                                         */
+/* CH7LIMITH @Bit 20 : Write '1' to disable interrupt for event CH7LIMITH */
+  #define SAADC_INTENCLR_CH7LIMITH_Pos (20UL)        /*!< Position of CH7LIMITH field.                                         */
   #define SAADC_INTENCLR_CH7LIMITH_Msk (0x1UL << SAADC_INTENCLR_CH7LIMITH_Pos) /*!< Bit mask of CH7LIMITH field.               */
   #define SAADC_INTENCLR_CH7LIMITH_Min (0x0UL)       /*!< Min enumerator value of CH7LIMITH field.                             */
   #define SAADC_INTENCLR_CH7LIMITH_Max (0x1UL)       /*!< Max enumerator value of CH7LIMITH field.                             */
@@ -126333,8 +126060,8 @@ typedef struct {
   #define SAADC_INTENCLR_CH7LIMITH_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH7LIMITH_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* CH7LIMITL @Bit 20 : Write '1' to disable interrupt for event CH7LIMITL */
-  #define SAADC_INTENCLR_CH7LIMITL_Pos (20UL)        /*!< Position of CH7LIMITL field.                                         */
+/* CH7LIMITL @Bit 21 : Write '1' to disable interrupt for event CH7LIMITL */
+  #define SAADC_INTENCLR_CH7LIMITL_Pos (21UL)        /*!< Position of CH7LIMITL field.                                         */
   #define SAADC_INTENCLR_CH7LIMITL_Msk (0x1UL << SAADC_INTENCLR_CH7LIMITL_Pos) /*!< Bit mask of CH7LIMITL field.               */
   #define SAADC_INTENCLR_CH7LIMITL_Min (0x0UL)       /*!< Min enumerator value of CH7LIMITL field.                             */
   #define SAADC_INTENCLR_CH7LIMITL_Max (0x1UL)       /*!< Max enumerator value of CH7LIMITL field.                             */
@@ -126342,32 +126069,14 @@ typedef struct {
   #define SAADC_INTENCLR_CH7LIMITL_Disabled (0x0UL)  /*!< Read: Disabled                                                       */
   #define SAADC_INTENCLR_CH7LIMITL_Enabled (0x1UL)   /*!< Read: Enabled                                                        */
 
-/* DMAEND @Bit 21 : Write '1' to disable interrupt for event DMAEND */
-  #define SAADC_INTENCLR_DMAEND_Pos (21UL)           /*!< Position of DMAEND field.                                            */
-  #define SAADC_INTENCLR_DMAEND_Msk (0x1UL << SAADC_INTENCLR_DMAEND_Pos) /*!< Bit mask of DMAEND field.                        */
-  #define SAADC_INTENCLR_DMAEND_Min (0x0UL)          /*!< Min enumerator value of DMAEND field.                                */
-  #define SAADC_INTENCLR_DMAEND_Max (0x1UL)          /*!< Max enumerator value of DMAEND field.                                */
-  #define SAADC_INTENCLR_DMAEND_Clear (0x1UL)        /*!< Disable                                                              */
-  #define SAADC_INTENCLR_DMAEND_Disabled (0x0UL)     /*!< Read: Disabled                                                       */
-  #define SAADC_INTENCLR_DMAEND_Enabled (0x1UL)      /*!< Read: Enabled                                                        */
-
-/* DMAREADY @Bit 22 : Write '1' to disable interrupt for event DMAREADY */
-  #define SAADC_INTENCLR_DMAREADY_Pos (22UL)         /*!< Position of DMAREADY field.                                          */
-  #define SAADC_INTENCLR_DMAREADY_Msk (0x1UL << SAADC_INTENCLR_DMAREADY_Pos) /*!< Bit mask of DMAREADY field.                  */
-  #define SAADC_INTENCLR_DMAREADY_Min (0x0UL)        /*!< Min enumerator value of DMAREADY field.                              */
-  #define SAADC_INTENCLR_DMAREADY_Max (0x1UL)        /*!< Max enumerator value of DMAREADY field.                              */
-  #define SAADC_INTENCLR_DMAREADY_Clear (0x1UL)      /*!< Disable                                                              */
-  #define SAADC_INTENCLR_DMAREADY_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
-  #define SAADC_INTENCLR_DMAREADY_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
-
-/* DMABUSERROR @Bit 23 : Write '1' to disable interrupt for event DMABUSERROR */
-  #define SAADC_INTENCLR_DMABUSERROR_Pos (23UL)      /*!< Position of DMABUSERROR field.                                       */
-  #define SAADC_INTENCLR_DMABUSERROR_Msk (0x1UL << SAADC_INTENCLR_DMABUSERROR_Pos) /*!< Bit mask of DMABUSERROR field.         */
-  #define SAADC_INTENCLR_DMABUSERROR_Min (0x0UL)     /*!< Min enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTENCLR_DMABUSERROR_Max (0x1UL)     /*!< Max enumerator value of DMABUSERROR field.                           */
-  #define SAADC_INTENCLR_DMABUSERROR_Clear (0x1UL)   /*!< Disable                                                              */
-  #define SAADC_INTENCLR_DMABUSERROR_Disabled (0x0UL) /*!< Read: Disabled                                                      */
-  #define SAADC_INTENCLR_DMABUSERROR_Enabled (0x1UL) /*!< Read: Enabled                                                        */
+/* AHBERROR @Bit 22 : Write '1' to disable interrupt for event AHBERROR */
+  #define SAADC_INTENCLR_AHBERROR_Pos (22UL)         /*!< Position of AHBERROR field.                                          */
+  #define SAADC_INTENCLR_AHBERROR_Msk (0x1UL << SAADC_INTENCLR_AHBERROR_Pos) /*!< Bit mask of AHBERROR field.                  */
+  #define SAADC_INTENCLR_AHBERROR_Min (0x0UL)        /*!< Min enumerator value of AHBERROR field.                              */
+  #define SAADC_INTENCLR_AHBERROR_Max (0x1UL)        /*!< Max enumerator value of AHBERROR field.                              */
+  #define SAADC_INTENCLR_AHBERROR_Clear (0x1UL)      /*!< Disable                                                              */
+  #define SAADC_INTENCLR_AHBERROR_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define SAADC_INTENCLR_AHBERROR_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
 
 /* SAADC_STATUS: Status */
@@ -126590,6 +126299,38 @@ typedef struct {
                                                            (10-bit)*/                                                             
   #define SAADC_NOISESHAPE_NOISESHAPE_Enable (0x1UL) /*!< Oversampling based on noise shaping. Used in high-accuracy modes
                                                           (12-bit and 14-bit)*/                                                   
+
+
+/* SAADC_EASYDMAMODE: Configure EasyDMA mode. */
+  #define SAADC_EASYDMAMODE_ResetValue (0x00000001UL) /*!< Reset value of EASYDMAMODE register.                                */
+
+/* LPOP @Bit 0 : Enable low-power operation, or use low-latency */
+  #define SAADC_EASYDMAMODE_LPOP_Pos (0UL)           /*!< Position of LPOP field.                                              */
+  #define SAADC_EASYDMAMODE_LPOP_Msk (0x1UL << SAADC_EASYDMAMODE_LPOP_Pos) /*!< Bit mask of LPOP field.                        */
+  #define SAADC_EASYDMAMODE_LPOP_Min (0x0UL)         /*!< Min enumerator value of LPOP field.                                  */
+  #define SAADC_EASYDMAMODE_LPOP_Max (0x1UL)         /*!< Max enumerator value of LPOP field.                                  */
+  #define SAADC_EASYDMAMODE_LPOP_LowLat (0x0UL)      /*!< Low-latency operation                                                */
+  #define SAADC_EASYDMAMODE_LPOP_LowPower (0x1UL)    /*!< Low-power operation                                                  */
+
+
+/* SAADC_TERMINATEONAHBERROR: Enable EasyDMA termination on AHB error */
+  #define SAADC_TERMINATEONAHBERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONAHBERROR register.                */
+
+/* ENABLE @Bit 0 : Enable termination on AHB error */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Pos (0UL) /*!< Position of ENABLE field.                                            */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Msk (0x1UL << SAADC_TERMINATEONAHBERROR_ENABLE_Pos) /*!< Bit mask of ENABLE field.  */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                              */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                              */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Disabled (0x0UL) /*!< Termination on AHB error disabled                             */
+  #define SAADC_TERMINATEONAHBERROR_ENABLE_Enabled (0x1UL) /*!< Termination on AHB error enabled                               */
+
+
+/* SAADC_AHBERRORADDRESS: Address of the last AHB error transaction */
+  #define SAADC_AHBERRORADDRESS_ResetValue (0x00000000UL) /*!< Reset value of AHBERRORADDRESS register.                        */
+
+/* ADDRESS @Bits 0..31 : Address */
+  #define SAADC_AHBERRORADDRESS_ADDRESS_Pos (0UL)    /*!< Position of ADDRESS field.                                           */
+  #define SAADC_AHBERRORADDRESS_ADDRESS_Msk (0xFFFFFFFFUL << SAADC_AHBERRORADDRESS_ADDRESS_Pos) /*!< Bit mask of ADDRESS field.*/
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -130611,6 +130352,99 @@ typedef struct {
 
 
 
+/* ================================================ Struct SPIM_DMA_RX_MATCH ================================================= */
+/**
+  * @brief MATCH [SPIM_DMA_RX_MATCH] Registers to control the behavior of the pattern matcher engine
+  */
+typedef struct {
+  __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Configure individual match events                     */
+  __IOM uint32_t  CANDIDATE[4];                      /*!< (@ 0x00000004) The data to look for - any match will trigger the
+                                                                         MATCH[n] event, if enabled.*/                            
+} NRF_SPIM_DMA_RX_MATCH_Type;                        /*!< Size = 20 (0x014)                                                    */
+
+/* SPIM_DMA_RX_MATCH_CONFIG: Configure individual match events */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ResetValue (0x00000000UL) /*!< Reset value of CONFIG register.                              */
+
+/* ENABLE0 @Bit 0 : Enable match filter 0 */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Pos (0UL) /*!< Position of ENABLE0 field.                                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Pos) /*!< Bit mask of ENABLE0 field. */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Min (0x0UL) /*!< Min enumerator value of ENABLE0 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Max (0x1UL) /*!< Max enumerator value of ENABLE0 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Disabled (0x0UL) /*!< Match filter disabled                                         */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Enabled (0x1UL) /*!< Match filter enabled                                           */
+
+/* ENABLE1 @Bit 1 : Enable match filter 1 */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Pos (1UL) /*!< Position of ENABLE1 field.                                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Pos) /*!< Bit mask of ENABLE1 field. */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Min (0x0UL) /*!< Min enumerator value of ENABLE1 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Max (0x1UL) /*!< Max enumerator value of ENABLE1 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Disabled (0x0UL) /*!< Match filter disabled                                         */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Enabled (0x1UL) /*!< Match filter enabled                                           */
+
+/* ENABLE2 @Bit 2 : Enable match filter 2 */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Pos (2UL) /*!< Position of ENABLE2 field.                                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Pos) /*!< Bit mask of ENABLE2 field. */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Min (0x0UL) /*!< Min enumerator value of ENABLE2 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Max (0x1UL) /*!< Max enumerator value of ENABLE2 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Disabled (0x0UL) /*!< Match filter disabled                                         */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Enabled (0x1UL) /*!< Match filter enabled                                           */
+
+/* ENABLE3 @Bit 3 : Enable match filter 3 */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Pos (3UL) /*!< Position of ENABLE3 field.                                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Pos) /*!< Bit mask of ENABLE3 field. */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Min (0x0UL) /*!< Min enumerator value of ENABLE3 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Max (0x1UL) /*!< Max enumerator value of ENABLE3 field.                             */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Disabled (0x0UL) /*!< Match filter disabled                                         */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Enabled (0x1UL) /*!< Match filter enabled                                           */
+
+/* ONESHOT0 @Bit 16 : Configure match filter 0 as one-shot or sticky */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Pos (16UL) /*!< Position of ONESHOT0 field.                                        */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Pos) /*!< Bit mask of ONESHOT0
+                                                                            field.*/                                              
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Min (0x0UL) /*!< Min enumerator value of ONESHOT0 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Max (0x1UL) /*!< Max enumerator value of ONESHOT0 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task          */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received   */
+
+/* ONESHOT1 @Bit 17 : Configure match filter 1 as one-shot or sticky */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Pos (17UL) /*!< Position of ONESHOT1 field.                                        */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Pos) /*!< Bit mask of ONESHOT1
+                                                                            field.*/                                              
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Min (0x0UL) /*!< Min enumerator value of ONESHOT1 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Max (0x1UL) /*!< Max enumerator value of ONESHOT1 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task          */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received   */
+
+/* ONESHOT2 @Bit 18 : Configure match filter 2 as one-shot or sticky */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Pos (18UL) /*!< Position of ONESHOT2 field.                                        */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Pos) /*!< Bit mask of ONESHOT2
+                                                                            field.*/                                              
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Min (0x0UL) /*!< Min enumerator value of ONESHOT2 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Max (0x1UL) /*!< Max enumerator value of ONESHOT2 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task          */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received   */
+
+/* ONESHOT3 @Bit 19 : Configure match filter 3 as one-shot or sticky */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Pos (19UL) /*!< Position of ONESHOT3 field.                                        */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Msk (0x1UL << SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Pos) /*!< Bit mask of ONESHOT3
+                                                                            field.*/                                              
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Min (0x0UL) /*!< Min enumerator value of ONESHOT3 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Max (0x1UL) /*!< Max enumerator value of ONESHOT3 field.                           */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Continuous (0x0UL) /*!< Match filter stays enabled until disabled by task          */
+  #define SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Oneshot (0x1UL) /*!< Match filter stays enabled until next data word is received   */
+
+
+/* SPIM_DMA_RX_MATCH_CANDIDATE: The data to look for - any match will trigger the MATCH[n] event, if enabled. */
+  #define SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount (4UL) /*!< Max size of CANDIDATE[4] array.                                      */
+  #define SPIM_DMA_RX_MATCH_CANDIDATE_ResetValue (0x00000000UL) /*!< Reset value of CANDIDATE[4] register.                     */
+
+/* DATA @Bits 0..31 : Data to look for */
+  #define SPIM_DMA_RX_MATCH_CANDIDATE_DATA_Pos (0UL) /*!< Position of DATA field.                                              */
+  #define SPIM_DMA_RX_MATCH_CANDIDATE_DATA_Msk (0xFFFFFFFFUL << SPIM_DMA_RX_MATCH_CANDIDATE_DATA_Pos) /*!< Bit mask of DATA
+                                                                            field.*/                                              
+
+
+
 /* =================================================== Struct SPIM_DMA_RX ==================================================== */
 /**
   * @brief RX [SPIM_DMA_RX] (unspecified)
@@ -130623,12 +130457,16 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
                                                                          event.*/                                                 
-} NRF_SPIM_DMA_RX_Type;                              /*!< Size = 36 (0x024)                                                    */
+  __IOM NRF_SPIM_DMA_RX_MATCH_Type MATCH;            /*!< (@ 0x00000024) Registers to control the behavior of the pattern
+                                                                         matcher engine*/                                         
+} NRF_SPIM_DMA_RX_Type;                              /*!< Size = 56 (0x038)                                                    */
 
 /* SPIM_DMA_RX_ENABLE: Register doesn't do anything. Can be written and read, but has no functionality attached. */
   #define SPIM_DMA_RX_ENABLE_ResetValue (0x00000000UL) /*!< Reset value of ENABLE register.                                    */
@@ -130672,6 +130510,18 @@ typedef struct {
   #define SPIM_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* SPIM_DMA_RX_LIST: EasyDMA list type */
+  #define SPIM_DMA_RX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define SPIM_DMA_RX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define SPIM_DMA_RX_LIST_TYPE_Msk (0x7UL << SPIM_DMA_RX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define SPIM_DMA_RX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define SPIM_DMA_RX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define SPIM_DMA_RX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define SPIM_DMA_RX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
+
+
 /* SPIM_DMA_RX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define SPIM_DMA_RX_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -130707,7 +130557,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -130756,6 +130608,18 @@ typedef struct {
   #define SPIM_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* SPIM_DMA_TX_LIST: EasyDMA list type */
+  #define SPIM_DMA_TX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define SPIM_DMA_TX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define SPIM_DMA_TX_LIST_TYPE_Msk (0x7UL << SPIM_DMA_TX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define SPIM_DMA_TX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define SPIM_DMA_TX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define SPIM_DMA_TX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define SPIM_DMA_TX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
+
+
 /* SPIM_DMA_TX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define SPIM_DMA_TX_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -130785,8 +130649,8 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_SPIM_DMA_RX_Type RX;                     /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_SPIM_DMA_TX_Type TX;                     /*!< (@ 0x00000024) (unspecified)                                         */
-} NRF_SPIM_DMA_Type;                                 /*!< Size = 72 (0x048)                                                    */
+  __IOM NRF_SPIM_DMA_TX_Type TX;                     /*!< (@ 0x00000038) (unspecified)                                         */
+} NRF_SPIM_DMA_Type;                                 /*!< Size = 92 (0x05C)                                                    */
 
 /* ======================================================= Struct SPIM ======================================================= */
 /**
@@ -130849,7 +130713,7 @@ typedef struct {
     __IOM NRF_SPIM_PSEL_Type PSEL;                   /*!< (@ 0x00000600) (unspecified)                                         */
     __IM uint32_t RESERVED18[59];
     __IOM NRF_SPIM_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified)                                         */
-    __IM uint32_t RESERVED19[264];
+    __IM uint32_t RESERVED19[259];
     __IOM uint32_t DCXCNT;                           /*!< (@ 0x00000B68) DCX configuration                                     */
   } NRF_SPIM_Type;                                   /*!< Size = 2924 (0xB6C)                                                  */
 
@@ -132083,8 +131947,9 @@ typedef struct {
   __IOM uint32_t  SCK;                               /*!< (@ 0x00000000) Pin select for SCK                                    */
   __IOM uint32_t  MISO;                              /*!< (@ 0x00000004) Pin select for MISO signal                            */
   __IOM uint32_t  MOSI;                              /*!< (@ 0x00000008) Pin select for MOSI signal                            */
-  __IOM uint32_t  CSN;                               /*!< (@ 0x0000000C) Pin select for CSN signal                             */
-} NRF_SPIS_PSEL_Type;                                /*!< Size = 16 (0x010)                                                    */
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  CSN;                               /*!< (@ 0x00000010) Pin select for CSN signal                             */
+} NRF_SPIS_PSEL_Type;                                /*!< Size = 20 (0x014)                                                    */
 
 /* SPIS_PSEL_SCK: Pin select for SCK */
   #define SPIS_PSEL_SCK_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of SCK register.                                         */
@@ -132288,7 +132153,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -132339,6 +132206,18 @@ typedef struct {
   #define SPIS_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* SPIS_DMA_RX_LIST: EasyDMA list type */
+  #define SPIS_DMA_RX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define SPIS_DMA_RX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define SPIS_DMA_RX_LIST_TYPE_Msk (0x7UL << SPIS_DMA_RX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define SPIS_DMA_RX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define SPIS_DMA_RX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define SPIS_DMA_RX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define SPIS_DMA_RX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
+
+
 /* SPIS_DMA_RX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define SPIS_DMA_RX_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -132374,7 +132253,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -132421,6 +132302,18 @@ typedef struct {
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << SPIS_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
   #define SPIS_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
+
+
+/* SPIS_DMA_TX_LIST: EasyDMA list type */
+  #define SPIS_DMA_TX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define SPIS_DMA_TX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define SPIS_DMA_TX_LIST_TYPE_Msk (0x7UL << SPIS_DMA_TX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define SPIS_DMA_TX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define SPIS_DMA_TX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define SPIS_DMA_TX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define SPIS_DMA_TX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
 
 
 /* SPIS_DMA_TX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
@@ -132504,7 +132397,7 @@ typedef struct {
     __IOM uint32_t ORC;                              /*!< (@ 0x000005C0) Over-read character                                   */
     __IM uint32_t RESERVED18[15];
     __IOM NRF_SPIS_PSEL_Type PSEL;                   /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED19[60];
+    __IM uint32_t RESERVED19[59];
     __IOM NRF_SPIS_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified)                                         */
   } NRF_SPIS_Type;                                   /*!< Size = 1884 (0x75C)                                                  */
 
@@ -143098,7 +142991,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -143149,6 +143044,18 @@ typedef struct {
   #define TWIM_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* TWIM_DMA_RX_LIST: EasyDMA list type */
+  #define TWIM_DMA_RX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define TWIM_DMA_RX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define TWIM_DMA_RX_LIST_TYPE_Msk (0x7UL << TWIM_DMA_RX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define TWIM_DMA_RX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define TWIM_DMA_RX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define TWIM_DMA_RX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define TWIM_DMA_RX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
+
+
 /* TWIM_DMA_RX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define TWIM_DMA_RX_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -143184,7 +143091,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -143231,6 +143140,18 @@ typedef struct {
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIM_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
   #define TWIM_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
+
+
+/* TWIM_DMA_TX_LIST: EasyDMA list type */
+  #define TWIM_DMA_TX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define TWIM_DMA_TX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define TWIM_DMA_TX_LIST_TYPE_Msk (0x7UL << TWIM_DMA_TX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define TWIM_DMA_TX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define TWIM_DMA_TX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define TWIM_DMA_TX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define TWIM_DMA_TX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
 
 
 /* TWIM_DMA_TX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
@@ -144832,7 +144753,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -144883,6 +144806,18 @@ typedef struct {
   #define TWIS_DMA_RX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
 
 
+/* TWIS_DMA_RX_LIST: EasyDMA list type */
+  #define TWIS_DMA_RX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define TWIS_DMA_RX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define TWIS_DMA_RX_LIST_TYPE_Msk (0x7UL << TWIS_DMA_RX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define TWIS_DMA_RX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define TWIS_DMA_RX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define TWIS_DMA_RX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define TWIS_DMA_RX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
+
+
 /* TWIS_DMA_RX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
   #define TWIS_DMA_RX_TERMINATEONBUSERROR_ResetValue (0x00000000UL) /*!< Reset value of TERMINATEONBUSERROR register.          */
 
@@ -144918,7 +144853,9 @@ typedef struct {
   __IM  uint32_t  AMOUNT;                            /*!< (@ 0x0000000C) Number of bytes transferred in the last transaction,
                                                                          updated after the END event. Also updated after each
                                                                          MATCH event.*/                                           
-  __IM  uint32_t  RESERVED[3];
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  LIST;                              /*!< (@ 0x00000014) EasyDMA list type                                     */
+  __IM  uint32_t  RESERVED1;
   __IOM uint32_t  TERMINATEONBUSERROR;               /*!< (@ 0x0000001C) Terminate the transaction if a BUSERROR event is
                                                                          detected.*/                                              
   __IOM uint32_t  BUSERRORADDRESS;                   /*!< (@ 0x00000020) Address of transaction that generated the last BUSERROR
@@ -144965,6 +144902,18 @@ typedef struct {
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Msk (0xFFFFUL << TWIS_DMA_TX_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.             */
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Min (0x1UL)      /*!< Min value of AMOUNT field.                                           */
   #define TWIS_DMA_TX_AMOUNT_AMOUNT_Max (0xFFFFUL)   /*!< Max size of AMOUNT field.                                            */
+
+
+/* TWIS_DMA_TX_LIST: EasyDMA list type */
+  #define TWIS_DMA_TX_LIST_ResetValue (0x00000000UL) /*!< Reset value of LIST register.                                        */
+
+/* TYPE @Bits 0..2 : List type */
+  #define TWIS_DMA_TX_LIST_TYPE_Pos (0UL)            /*!< Position of TYPE field.                                              */
+  #define TWIS_DMA_TX_LIST_TYPE_Msk (0x7UL << TWIS_DMA_TX_LIST_TYPE_Pos) /*!< Bit mask of TYPE field.                          */
+  #define TWIS_DMA_TX_LIST_TYPE_Min (0x0UL)          /*!< Min enumerator value of TYPE field.                                  */
+  #define TWIS_DMA_TX_LIST_TYPE_Max (0x1UL)          /*!< Max enumerator value of TYPE field.                                  */
+  #define TWIS_DMA_TX_LIST_TYPE_Disabled (0x0UL)     /*!< Disable EasyDMA list                                                 */
+  #define TWIS_DMA_TX_LIST_TYPE_ArrayList (0x1UL)    /*!< Use array list                                                       */
 
 
 /* TWIS_DMA_TX_TERMINATEONBUSERROR: Terminate the transaction if a BUSERROR event is detected. */
@@ -146882,9 +146831,8 @@ typedef struct {
   __IOM uint32_t  TXD;                               /*!< (@ 0x00000000) Pin select for TXD signal                             */
   __IOM uint32_t  CTS;                               /*!< (@ 0x00000004) Pin select for CTS signal                             */
   __IOM uint32_t  RXD;                               /*!< (@ 0x00000008) Pin select for RXD signal                             */
-  __IM  uint32_t  RESERVED[4];
-  __IOM uint32_t  RTS;                               /*!< (@ 0x0000001C) Pin select for RTS signal                             */
-} NRF_UARTE_PSEL_Type;                               /*!< Size = 32 (0x020)                                                    */
+  __IOM uint32_t  RTS;                               /*!< (@ 0x0000000C) Pin select for RTS signal                             */
+} NRF_UARTE_PSEL_Type;                               /*!< Size = 16 (0x010)                                                    */
 
 /* UARTE_PSEL_TXD: Pin select for TXD signal */
   #define UARTE_PSEL_TXD_ResetValue (0xFFFFFFFFUL)   /*!< Reset value of TXD register.                                         */
@@ -147333,7 +147281,7 @@ typedef struct {
                                                                          packet timeout.*/                                        
     __IM uint32_t RESERVED23[34];
     __IOM NRF_UARTE_PSEL_Type PSEL;                  /*!< (@ 0x00000604) (unspecified)                                         */
-    __IM uint32_t RESERVED24[55];
+    __IM uint32_t RESERVED24[59];
     __IOM NRF_UARTE_DMA_Type DMA;                    /*!< (@ 0x00000700) (unspecified)                                         */
   } NRF_UARTE_Type;                                  /*!< Size = 1884 (0x75C)                                                  */
 

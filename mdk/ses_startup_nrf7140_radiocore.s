@@ -384,8 +384,8 @@ _vectors:
   ISR_HANDLER   TIMER120_IRQHandler
   ISR_HANDLER   TIMER121_IRQHandler
   ISR_HANDLER   PWM120_IRQHandler
-  ISR_HANDLER   SPIS120_UARTE120_IRQHandler
-  ISR_HANDLER   SPIM120_IRQHandler
+  ISR_HANDLER   SPIS120_IRQHandler
+  ISR_HANDLER   SPIM120_UARTE120_IRQHandler
   ISR_HANDLER   SPIM121_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -627,6 +627,14 @@ _vectors:
   ISR_HANDLER   SERIAL6_IRQHandler
   ISR_HANDLER   SERIAL7_IRQHandler
   ISR_HANDLER   PDM133_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
 _vectors_end:
 
 #ifdef VECTORS_IN_RAM
