@@ -62,6 +62,54 @@
             _51, _52, _53, _54, _55, _56, _57, _58, _59, _60,\
             _61, _62, N, ...) N
 
+/* Intermediate macros needed for @ref NRFX_FEATURE_PRESENT. */
+#define NRFX_INSTANCE_FEATURE_PRESENT(i, _instance_name, _feature_name) \
+        NRFX_COND_CODE_1(NRFX_CONCAT_3(_instance_name, i, _feature_name), (1), ())
+
+#define _NRFX_FEATURE_PRESENT(_instance_name, _feature_name, _rpt) \
+        NRFX_LISTIFY(_rpt, NRFX_INSTANCE_FEATURE_PRESENT, (), _instance_name, _feature_name)
+
+
+/** Used for @ref NRFX_FOREACH_ENABLED. Execute provided macro if driver instance is enabled.
+ *
+ * @param[in] i           Instance index.
+ * @param[in] off_code    Code which is pasted when given driver instance is disabled.
+ *                        Must be given in parentheses.
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] prefix      Prefix added before instance index, e.g. some device has
+ *                        instances named like SPIM00. First 0 is passed here as prefix.
+ * @param[in] macro       Macro which is executed.
+ * @param[in] ...         Variable length arguments passed to the @p macro. Macro has following
+ *                        arguments: macro(periph_name, prefix, i, ...).
+ */
+#define _NRFX_EVAL_IF_ENABLED(i, off_code, periph_name, prefix, macro, ...) \
+        NRFX_COND_CODE_1(NRFX_CONCAT(NRFX_, periph_name, prefix, i, _ENABLED), \
+                    (macro(periph_name, prefix, i, __VA_ARGS__)), \
+                    off_code)
+
+/* Macro used for enabled driver instances enum generation. */
+#define _NRFX_INST_ENUM(periph_name, prefix, i, _) \
+    NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX),
+
+/* Macro used for generation of irq handlers.
+ *
+ * Macro is using enum created by _NRFX_INSG_ENUM macro.
+ *
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] prefix            Prefix appended to the index.
+ * @param[in] i                 Index.
+ * @param[in] periph_name_small Peripheral name in small letters, e.g. spim.
+ */
+#define _NRFX_IRQ_HANDLER(periph_name, prefix, i, periph_name_small) \
+void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
+{ \
+    irq_handler(NRFX_CONCAT(NRF_, periph_name, prefix, i), \
+                &m_cb[NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)]); \
+}
+
+#define _NRFX_IRQ_HANDLER_LIST(periph_name, prefix, i, periph_name_small) \
+    NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler),
+
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
 
