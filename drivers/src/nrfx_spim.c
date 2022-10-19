@@ -3,15 +3,7 @@
 #include <nrfx.h>
 
 #if NRFX_CHECK(NRFX_SPIM_ENABLED)
-
-#if !(NRFX_CHECK(NRFX_SPIM0_ENABLED)   || NRFX_CHECK(NRFX_SPIM1_ENABLED)   || \
-      NRFX_CHECK(NRFX_SPIM2_ENABLED)   || NRFX_CHECK(NRFX_SPIM3_ENABLED)   || \
-      NRFX_CHECK(NRFX_SPIM4_ENABLED)   || NRFX_CHECK(NRFX_SPIM120_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM121_ENABLED) || NRFX_CHECK(NRFX_SPIM130_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM131_ENABLED) || NRFX_CHECK(NRFX_SPIM132_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM133_ENABLED) || NRFX_CHECK(NRFX_SPIM134_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM135_ENABLED) || NRFX_CHECK(NRFX_SPIM136_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIM137_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_SPIM, _ENABLED)
 #error "No enabled SPIM instances. Check <nrfx_config.h>."
 #endif
 
@@ -25,273 +17,39 @@
 #error "Extended options are not available in the SoC currently in use."
 #endif
 
-#define SPIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len) \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, rx_len, tx_len))
+#define SPIMX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, rx_len, tx_len) \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), rx_len, tx_len))
 
-#define SPIMX_HW_CSN_PRESENT_VALIDATE(peripheral, drv_inst_idx)         \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-     NRFX_CONCAT_2(peripheral, _FEATURE_HARDWARE_CSN_PRESENT))
+#define SPIM_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)    \
+        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, rx_len, tx_len))
 
-#define SPIMX_DCX_PRESENT_VALIDATE(peripheral, drv_inst_idx)            \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-    NRFX_CONCAT_2(peripheral, _FEATURE_DCX_PRESENT))
+#define SPIMX_HW_CSN_PRESENT_VALIDATE(periph_name, prefix, i, drv_inst_idx)         \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_CONCAT(periph_name, prefix, i, _FEATURE_HARDWARE_CSN_PRESENT))
 
-#define SPIMX_SUPPORTED_FREQ_VALIDATE(peripheral, drv_inst_idx, freq)                            \
+#define SPIM_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)    \
+        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_HW_CSN_PRESENT_VALIDATE, (||), (0), drv_inst_idx))
+
+#define SPIMX_DCX_PRESENT_VALIDATE(periph_name, prefix, i, drv_inst_idx)            \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_CONCAT(periph_name, prefix, i, _FEATURE_DCX_PRESENT))
+
+#define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx)    \
+        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_DCX_PRESENT_VALIDATE, (||), (0), drv_inst_idx))
+
+#define SPIMX_SUPPORTED_FREQ_VALIDATE(periph_name, prefix, i, drv_inst_idx, freq)                \
     (                                                                                            \
-    ((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) &&                           \
+    ((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) &&                 \
     (                                                                                            \
         (((freq) != NRF_SPIM_FREQ_16M) && ((freq) != NRF_SPIM_FREQ_32M)) ||                      \
-        (((freq) == NRF_SPIM_FREQ_16M) && ((NRFX_CONCAT_2(peripheral, _MAX_DATARATE) >= 16))) || \
-        (((freq) == NRF_SPIM_FREQ_32M) && ((NRFX_CONCAT_2(peripheral, _MAX_DATARATE) >= 32)))    \
+        (((freq) == NRF_SPIM_FREQ_16M) && ((NRFX_CONCAT(periph_name, prefix, i, _MAX_DATARATE) >= 16))) || \
+        (((freq) == NRF_SPIM_FREQ_32M) && ((NRFX_CONCAT(periph_name, prefix, i, _MAX_DATARATE) >= 32)))    \
     )                                                                                            \
     )
 
-#if NRFX_CHECK(NRFX_SPIM0_ENABLED)
-#define SPIM0_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM0, __VA_ARGS__)
-#define SPIM0_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM0, __VA_ARGS__)
-#define SPIM0_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM0, __VA_ARGS__)
-#define SPIM0_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM0, __VA_ARGS__)
-#else
-#define SPIM0_LENGTH_VALIDATE(...)          0
-#define SPIM0_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM0_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM0_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM1_ENABLED)
-#define SPIM1_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM1, __VA_ARGS__)
-#define SPIM1_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM1, __VA_ARGS__)
-#define SPIM1_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM1, __VA_ARGS__)
-#define SPIM1_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM1, __VA_ARGS__)
-#else
-#define SPIM1_LENGTH_VALIDATE(...)          0
-#define SPIM1_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM1_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM1_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM2_ENABLED)
-#define SPIM2_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM2, __VA_ARGS__)
-#define SPIM2_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM2, __VA_ARGS__)
-#define SPIM2_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM2, __VA_ARGS__)
-#define SPIM2_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM2, __VA_ARGS__)
-#else
-#define SPIM2_LENGTH_VALIDATE(...)          0
-#define SPIM2_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM2_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM2_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM3_ENABLED)
-#define SPIM3_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM3, __VA_ARGS__)
-#define SPIM3_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM3, __VA_ARGS__)
-#define SPIM3_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM3, __VA_ARGS__)
-#define SPIM3_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM3, __VA_ARGS__)
-#else
-#define SPIM3_LENGTH_VALIDATE(...)          0
-#define SPIM3_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM3_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM3_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM4_ENABLED)
-#define SPIM4_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM4, __VA_ARGS__)
-#define SPIM4_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM4, __VA_ARGS__)
-#define SPIM4_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM4, __VA_ARGS__)
-#define SPIM4_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM4, __VA_ARGS__)
-#else
-#define SPIM4_LENGTH_VALIDATE(...)          0
-#define SPIM4_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM4_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM4_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM120_ENABLED)
-#define SPIM120_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM120, __VA_ARGS__)
-#define SPIM120_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM120, __VA_ARGS__)
-#define SPIM120_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM120, __VA_ARGS__)
-#define SPIM120_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM120, __VA_ARGS__)
-#else
-#define SPIM120_LENGTH_VALIDATE(...)          0
-#define SPIM120_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM120_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM120_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM121_ENABLED)
-#define SPIM121_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM121, __VA_ARGS__)
-#define SPIM121_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM121, __VA_ARGS__)
-#define SPIM121_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM121, __VA_ARGS__)
-#define SPIM121_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM121, __VA_ARGS__)
-#else
-#define SPIM121_LENGTH_VALIDATE(...)          0
-#define SPIM121_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM121_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM121_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM130_ENABLED)
-#define SPIM130_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM130, __VA_ARGS__)
-#define SPIM130_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM130, __VA_ARGS__)
-#define SPIM130_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM130, __VA_ARGS__)
-#define SPIM130_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM130, __VA_ARGS__)
-#else
-#define SPIM130_LENGTH_VALIDATE(...)          0
-#define SPIM130_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM130_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM130_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM131_ENABLED)
-#define SPIM131_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM131, __VA_ARGS__)
-#define SPIM131_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM131, __VA_ARGS__)
-#define SPIM131_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM131, __VA_ARGS__)
-#define SPIM131_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM131, __VA_ARGS__)
-#else
-#define SPIM131_LENGTH_VALIDATE(...)          0
-#define SPIM131_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM131_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM131_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM132_ENABLED)
-#define SPIM132_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM132, __VA_ARGS__)
-#define SPIM132_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM132, __VA_ARGS__)
-#define SPIM132_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM132, __VA_ARGS__)
-#define SPIM132_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM132, __VA_ARGS__)
-#else
-#define SPIM132_LENGTH_VALIDATE(...)          0
-#define SPIM132_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM132_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM132_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM133_ENABLED)
-#define SPIM133_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM133, __VA_ARGS__)
-#define SPIM133_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM133, __VA_ARGS__)
-#define SPIM133_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM133, __VA_ARGS__)
-#define SPIM133_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM133, __VA_ARGS__)
-#else
-#define SPIM133_LENGTH_VALIDATE(...)          0
-#define SPIM133_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM133_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM133_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM134_ENABLED)
-#define SPIM134_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM134, __VA_ARGS__)
-#define SPIM134_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM134, __VA_ARGS__)
-#define SPIM134_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM134, __VA_ARGS__)
-#define SPIM134_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM134, __VA_ARGS__)
-#else
-#define SPIM134_LENGTH_VALIDATE(...)          0
-#define SPIM134_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM134_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM134_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM135_ENABLED)
-#define SPIM135_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM135, __VA_ARGS__)
-#define SPIM135_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM135, __VA_ARGS__)
-#define SPIM135_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM135, __VA_ARGS__)
-#define SPIM135_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM135, __VA_ARGS__)
-#else
-#define SPIM135_LENGTH_VALIDATE(...)          0
-#define SPIM135_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM135_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM135_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM136_ENABLED)
-#define SPIM136_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM136, __VA_ARGS__)
-#define SPIM136_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM136, __VA_ARGS__)
-#define SPIM136_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM136, __VA_ARGS__)
-#define SPIM136_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM136, __VA_ARGS__)
-#else
-#define SPIM136_LENGTH_VALIDATE(...)          0
-#define SPIM136_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM136_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM136_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM137_ENABLED)
-#define SPIM137_LENGTH_VALIDATE(...)          SPIMX_LENGTH_VALIDATE(SPIM137, __VA_ARGS__)
-#define SPIM137_HW_CSN_PRESENT_VALIDATE(...)  SPIMX_HW_CSN_PRESENT_VALIDATE(SPIM137, __VA_ARGS__)
-#define SPIM137_DCX_PRESENT_VALIDATE(...)     SPIMX_DCX_PRESENT_VALIDATE(SPIM137, __VA_ARGS__)
-#define SPIM137_SUPPORTED_FREQ_VALIDATE(...)  SPIMX_SUPPORTED_FREQ_VALIDATE(SPIM137, __VA_ARGS__)
-#else
-#define SPIM137_LENGTH_VALIDATE(...)          0
-#define SPIM137_HW_CSN_PRESENT_VALIDATE(...)  0
-#define SPIM137_DCX_PRESENT_VALIDATE(...)     0
-#define SPIM137_SUPPORTED_FREQ_VALIDATE(...)  0
-#endif
-
-#define SPIM_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)    \
-    (SPIM0_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIM1_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIM2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIM3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIM4_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIM130_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM131_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM132_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM133_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM134_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM135_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM136_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIM137_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
-
-#define SPIM_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)    \
-    (SPIM0_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM1_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM2_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM3_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM4_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM120_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM121_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM130_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM131_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM132_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM133_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM134_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM135_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM136_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM137_HW_CSN_PRESENT_VALIDATE(drv_inst_idx))
-
-#define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx)    \
-    (SPIM0_DCX_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM1_DCX_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM2_DCX_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM3_DCX_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM4_DCX_PRESENT_VALIDATE(drv_inst_idx)   || \
-     SPIM120_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM121_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM130_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM131_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM132_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM133_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM134_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM135_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM136_DCX_PRESENT_VALIDATE(drv_inst_idx) || \
-     SPIM137_DCX_PRESENT_VALIDATE(drv_inst_idx))
-
 #define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)    \
-    (SPIM0_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)   || \
-     SPIM1_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)   || \
-     SPIM2_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)   || \
-     SPIM3_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)   || \
-     SPIM4_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)   || \
-     SPIM120_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM121_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM130_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM131_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM132_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM133_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM134_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM135_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM136_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq) || \
-     SPIM137_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq))
+        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_SUPPORTED_FREQ_VALIDATE, (||), (0), drv_inst_idx, freq))
 
 // Requested pin can either match dedicated pin or be not connected at all.
 #define SPIM_DEDICATED_PIN_VALIDATE(requested_pin, supported_pin) \
@@ -600,51 +358,7 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPIM_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_SPIM0_ENABLED)
-        nrfx_spim_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM1_ENABLED)
-        nrfx_spim_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM2_ENABLED)
-        nrfx_spim_2_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM3_ENABLED)
-        nrfx_spim_3_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM4_ENABLED)
-        nrfx_spim_4_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM120_ENABLED)
-        nrfx_spim_120_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM121_ENABLED)
-        nrfx_spim_121_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM130_ENABLED)
-        nrfx_spim_130_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM131_ENABLED)
-        nrfx_spim_131_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM132_ENABLED)
-        nrfx_spim_132_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM133_ENABLED)
-        nrfx_spim_133_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM134_ENABLED)
-        nrfx_spim_134_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM135_ENABLED)
-        nrfx_spim_135_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM136_ENABLED)
-        nrfx_spim_136_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIM137_ENABLED)
-        nrfx_spim_137_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(SPIM, spim)
     };
     if (nrfx_prs_acquire(p_instance->p_reg, irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
     {
@@ -1001,110 +715,6 @@ static void irq_handler(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
     }
 }
 
-#if NRFX_CHECK(NRFX_SPIM0_ENABLED)
-void nrfx_spim_0_irq_handler(void)
-{
-    irq_handler(NRF_SPIM0, &m_cb[NRFX_SPIM0_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM1_ENABLED)
-void nrfx_spim_1_irq_handler(void)
-{
-    irq_handler(NRF_SPIM1, &m_cb[NRFX_SPIM1_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM2_ENABLED)
-void nrfx_spim_2_irq_handler(void)
-{
-    irq_handler(NRF_SPIM2, &m_cb[NRFX_SPIM2_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM3_ENABLED)
-void nrfx_spim_3_irq_handler(void)
-{
-    irq_handler(NRF_SPIM3, &m_cb[NRFX_SPIM3_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM4_ENABLED)
-void nrfx_spim_4_irq_handler(void)
-{
-    irq_handler(NRF_SPIM4, &m_cb[NRFX_SPIM4_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM120_ENABLED)
-void nrfx_spim_120_irq_handler(void)
-{
-    irq_handler(NRF_SPIM120, &m_cb[NRFX_SPIM120_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM121_ENABLED)
-void nrfx_spim_121_irq_handler(void)
-{
-    irq_handler(NRF_SPIM121, &m_cb[NRFX_SPIM121_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM130_ENABLED)
-void nrfx_spim_130_irq_handler(void)
-{
-    irq_handler(NRF_SPIM130, &m_cb[NRFX_SPIM130_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM131_ENABLED)
-void nrfx_spim_131_irq_handler(void)
-{
-    irq_handler(NRF_SPIM131, &m_cb[NRFX_SPIM131_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM132_ENABLED)
-void nrfx_spim_132_irq_handler(void)
-{
-    irq_handler(NRF_SPIM132, &m_cb[NRFX_SPIM132_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM133_ENABLED)
-void nrfx_spim_133_irq_handler(void)
-{
-    irq_handler(NRF_SPIM133, &m_cb[NRFX_SPIM133_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM134_ENABLED)
-void nrfx_spim_134_irq_handler(void)
-{
-    irq_handler(NRF_SPIM134, &m_cb[NRFX_SPIM134_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM135_ENABLED)
-void nrfx_spim_135_irq_handler(void)
-{
-    irq_handler(NRF_SPIM135, &m_cb[NRFX_SPIM135_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM136_ENABLED)
-void nrfx_spim_136_irq_handler(void)
-{
-    irq_handler(NRF_SPIM136, &m_cb[NRFX_SPIM136_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPIM137_ENABLED)
-void nrfx_spim_137_irq_handler(void)
-{
-    irq_handler(NRF_SPIM137, &m_cb[NRFX_SPIM137_INST_IDX]);
-}
-#endif
-
+NRFX_INSTANCE_IRQ_HANDLERS(SPIM, spim)
 
 #endif // NRFX_CHECK(NRFX_SPIM_ENABLED)
