@@ -93,6 +93,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_XXAA)
     #include "nrf9230_peripherals.h"
 
+#elif defined (NRF7140_XXAA)
+    #include "nrf7140_peripherals.h"
+
 #elif defined (LILIUMFP1_XXAA)
     #include "liliumfp1_peripherals.h"
 

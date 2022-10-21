@@ -191,6 +191,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
+#if defined (NRF7140_XXAA)
+    #ifndef NRF71_SERIES
+        #define NRF71_SERIES
+    #endif
+#endif
+
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
 #if defined (NRF9160_XXAA) ||  defined (NRF9120_XXAA)
     #ifndef NRF91_SERIES    
@@ -421,6 +427,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230.h"
+    #endif
+
+#elif defined (NRF7140_XXAA)
+    #if !defined(EXCLUDE_HEADER)
+        #include "nrf7140.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."
