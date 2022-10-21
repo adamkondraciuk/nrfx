@@ -1209,4 +1209,31 @@ typedef struct {
 
 #endif
 
+#if defined(NRF9230_XXAA)
+    // Old HFXO modes are not supported
+    #ifdef BICR_HFXO_CONFIG_MODE_Pierce
+        #undef BICR_HFXO_CONFIG_MODE_Pierce
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_PIXO
+        #undef BICR_HFXO_CONFIG_MODE_PIXO
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_ExtSquare
+        #undef BICR_HFXO_CONFIG_MODE_ExtSquare
+    #endif
+    #ifdef BICR_HFXO_CONFIG_MODE_Auto
+        #undef BICR_HFXO_CONFIG_MODE_Auto
+    #endif
+    #define BICR_HFXO_CONFIG_MODE_Normal   (0x0UL)     /*!< HFXO Normal mode.                                                    */
+    #define BICR_HFXO_CONFIG_MODE_TCXO     (0x1UL)     /*!< HFXO TCXO/bypass mode.                                               */
+    #define BICR_HFXO_CONFIG_MODE_Crystal2 (0x2UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal3 (0x3UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal4 (0x4UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
+    #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
+    // The HFXO64M.CFG.CHIRPEN field was missing
+    /* CHIRPEN @Bit 16 : Enable chirp during the HFXO64 startup. */
+    #define HFXO64M_CFG_CHIRPEN_Pos (14UL)             /*!< Position of CHIRPEN field.                                           */
+    #define HFXO64M_CFG_CHIRPEN_Msk (0x3UL << HFXO64M_CFG_CHIRPEN_Pos) /*!< Bit mask of CHIRPEN field.                           */
+#endif // defined(NRF9230_XXAA)
+
 #endif // MDK_FIXUPS_H__
