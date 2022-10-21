@@ -99,58 +99,58 @@ typedef enum {
   VPR_29_IRQn                            = 29,       /*!< 29 VPR_29                                                            */
   VPR_30_IRQn                            = 30,       /*!< 30 VPR_30                                                            */
   VPR_31_IRQn                            = 31,       /*!< 31 VPR_31                                                            */
-  SPU00_IRQn                             = 32,       /*!< 32 SPU00                                                             */
-  MPC00_IRQn                             = 33,       /*!< 33 MPC00                                                             */
-  AAR00_CCM00_IRQn                       = 38,       /*!< 38 AAR00_CCM00                                                       */
-  ECB00_IRQn                             = 39,       /*!< 39 ECB00                                                             */
-  CRACEN_IRQn                            = 40,       /*!< 40 CRACEN                                                            */
-  SERIAL00_IRQn                          = 42,       /*!< 42 SERIAL00                                                          */
-  VPR00_IRQn                             = 44,       /*!< 44 VPR00                                                             */
-  SPU10_IRQn                             = 64,       /*!< 64 SPU10                                                             */
-  TIMER10_IRQn                           = 69,       /*!< 69 TIMER10                                                           */
-  RTC10_IRQn                             = 70,       /*!< 70 RTC10                                                             */
-  EGU10_IRQn                             = 71,       /*!< 71 EGU10                                                             */
-  AAR10_CCM10_IRQn                       = 72,       /*!< 72 AAR10_CCM10                                                       */
-  ECB10_IRQn                             = 73,       /*!< 73 ECB10                                                             */
-  RADIO_0_IRQn                           = 74,       /*!< 74 RADIO_0                                                           */
-  RADIO_1_IRQn                           = 75,       /*!< 75 RADIO_1                                                           */
-  SPU20_IRQn                             = 128,      /*!< 128 SPU20                                                            */
-  SERIAL20_IRQn                          = 134,      /*!< 134 SERIAL20                                                         */
-  SERIAL21_IRQn                          = 135,      /*!< 135 SERIAL21                                                         */
-  SERIAL22_IRQn                          = 136,      /*!< 136 SERIAL22                                                         */
-  EGU20_IRQn                             = 137,      /*!< 137 EGU20                                                            */
-  TIMER20_IRQn                           = 138,      /*!< 138 TIMER20                                                          */
-  TIMER21_IRQn                           = 139,      /*!< 139 TIMER21                                                          */
-  TIMER22_IRQn                           = 140,      /*!< 140 TIMER22                                                          */
-  TIMER23_IRQn                           = 141,      /*!< 141 TIMER23                                                          */
-  TIMER24_IRQn                           = 142,      /*!< 142 TIMER24                                                          */
-  PDM20_IRQn                             = 144,      /*!< 144 PDM20                                                            */
-  PDM21_IRQn                             = 145,      /*!< 145 PDM21                                                            */
-  PWM20_IRQn                             = 146,      /*!< 146 PWM20                                                            */
-  PWM21_IRQn                             = 147,      /*!< 147 PWM21                                                            */
-  PWM22_IRQn                             = 148,      /*!< 148 PWM22                                                            */
-  SAADC_IRQn                             = 149,      /*!< 149 SAADC                                                            */
-  NFCT_IRQn                              = 150,      /*!< 150 NFCT                                                             */
-  TEMP_IRQn                              = 151,      /*!< 151 TEMP                                                             */
-  GPIOTE20_0_IRQn                        = 153,      /*!< 153 GPIOTE20_0                                                       */
-  GPIOTE20_1_IRQn                        = 154,      /*!< 154 GPIOTE20_1                                                       */
-  TAMPC_IRQn                             = 155,      /*!< 155 TAMPC                                                            */
-  I2S20_IRQn                             = 156,      /*!< 156 I2S20                                                            */
-  QDEC20_IRQn                            = 160,      /*!< 160 QDEC20                                                           */
-  QDEC21_IRQn                            = 161,      /*!< 161 QDEC21                                                           */
-  GRTC_0_IRQn                            = 162,      /*!< 162 GRTC_0                                                           */
-  GRTC_1_IRQn                            = 163,      /*!< 163 GRTC_1                                                           */
-  GRTC_2_IRQn                            = 164,      /*!< 164 GRTC_2                                                           */
-  SPU30_IRQn                             = 192,      /*!< 192 SPU30                                                            */
-  SERIAL30_IRQn                          = 196,      /*!< 196 SERIAL30                                                         */
-  RTC30_IRQn                             = 197,      /*!< 197 RTC30                                                            */
-  COMP_IRQn                              = 198,      /*!< 198 COMP                                                             */
-  LPCOMP_IRQn                            = 199,      /*!< 199 LPCOMP                                                           */
-  WDT30_IRQn                             = 200,      /*!< 200 WDT30                                                            */
-  WDT31_IRQn                             = 201,      /*!< 201 WDT31                                                            */
-  GPIOTE30_0_IRQn                        = 203,      /*!< 203 GPIOTE30_0                                                       */
-  GPIOTE30_1_IRQn                        = 204,      /*!< 204 GPIOTE30_1                                                       */
-  CLOCK_POWER_IRQn                       = 205,      /*!< 205 CLOCK_POWER                                                      */
+  SPU00_IRQn                             = 64,       /*!< 64 SPU00                                                             */
+  MPC00_IRQn                             = 65,       /*!< 65 MPC00                                                             */
+  AAR00_CCM00_IRQn                       = 70,       /*!< 70 AAR00_CCM00                                                       */
+  ECB00_IRQn                             = 71,       /*!< 71 ECB00                                                             */
+  CRACEN_IRQn                            = 72,       /*!< 72 CRACEN                                                            */
+  SERIAL00_IRQn                          = 74,       /*!< 74 SERIAL00                                                          */
+  RRAMC_IRQn                             = 75,       /*!< 75 RRAMC                                                             */
+  VPR00_IRQn                             = 76,       /*!< 76 VPR00                                                             */
+  SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
+  TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
+  RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
+  EGU10_IRQn                             = 135,      /*!< 135 EGU10                                                            */
+  AAR10_CCM10_IRQn                       = 136,      /*!< 136 AAR10_CCM10                                                      */
+  ECB10_IRQn                             = 137,      /*!< 137 ECB10                                                            */
+  RADIO_0_IRQn                           = 138,      /*!< 138 RADIO_0                                                          */
+  RADIO_1_IRQn                           = 139,      /*!< 139 RADIO_1                                                          */
+  SPU20_IRQn                             = 192,      /*!< 192 SPU20                                                            */
+  SERIAL20_IRQn                          = 198,      /*!< 198 SERIAL20                                                         */
+  SERIAL21_IRQn                          = 199,      /*!< 199 SERIAL21                                                         */
+  SERIAL22_IRQn                          = 200,      /*!< 200 SERIAL22                                                         */
+  EGU20_IRQn                             = 201,      /*!< 201 EGU20                                                            */
+  TIMER20_IRQn                           = 202,      /*!< 202 TIMER20                                                          */
+  TIMER21_IRQn                           = 203,      /*!< 203 TIMER21                                                          */
+  TIMER22_IRQn                           = 204,      /*!< 204 TIMER22                                                          */
+  TIMER23_IRQn                           = 205,      /*!< 205 TIMER23                                                          */
+  TIMER24_IRQn                           = 206,      /*!< 206 TIMER24                                                          */
+  PDM20_IRQn                             = 208,      /*!< 208 PDM20                                                            */
+  PDM21_IRQn                             = 209,      /*!< 209 PDM21                                                            */
+  PWM20_IRQn                             = 210,      /*!< 210 PWM20                                                            */
+  PWM21_IRQn                             = 211,      /*!< 211 PWM21                                                            */
+  PWM22_IRQn                             = 212,      /*!< 212 PWM22                                                            */
+  SAADC_IRQn                             = 213,      /*!< 213 SAADC                                                            */
+  NFCT_IRQn                              = 214,      /*!< 214 NFCT                                                             */
+  TEMP_IRQn                              = 215,      /*!< 215 TEMP                                                             */
+  GPIOTE20_0_IRQn                        = 217,      /*!< 217 GPIOTE20_0                                                       */
+  GPIOTE20_1_IRQn                        = 218,      /*!< 218 GPIOTE20_1                                                       */
+  TAMPC_IRQn                             = 219,      /*!< 219 TAMPC                                                            */
+  I2S20_IRQn                             = 220,      /*!< 220 I2S20                                                            */
+  QDEC20_IRQn                            = 224,      /*!< 224 QDEC20                                                           */
+  QDEC21_IRQn                            = 225,      /*!< 225 QDEC21                                                           */
+  GRTC_0_IRQn                            = 226,      /*!< 226 GRTC_0                                                           */
+  GRTC_1_IRQn                            = 227,      /*!< 227 GRTC_1                                                           */
+  GRTC_2_IRQn                            = 228,      /*!< 228 GRTC_2                                                           */
+  SPU30_IRQn                             = 256,      /*!< 256 SPU30                                                            */
+  SERIAL30_IRQn                          = 260,      /*!< 260 SERIAL30                                                         */
+  RTC30_IRQn                             = 261,      /*!< 261 RTC30                                                            */
+  COMP_LPCOMP_IRQn                       = 262,      /*!< 262 COMP_LPCOMP                                                      */
+  WDT30_IRQn                             = 264,      /*!< 264 WDT30                                                            */
+  WDT31_IRQn                             = 265,      /*!< 265 WDT31                                                            */
+  GPIOTE30_0_IRQn                        = 267,      /*!< 267 GPIOTE30_0                                                       */
+  GPIOTE30_1_IRQn                        = 268,      /*!< 268 GPIOTE30_1                                                       */
+  CLOCK_POWER_IRQn                       = 269,      /*!< 269 CLOCK_POWER                                                      */
 } IRQn_Type;
 
 
@@ -166,6 +166,7 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+#define __INTERRUPTS_MAX             176             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< moonlight_flpr System Library                                        */
@@ -204,15 +205,13 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPR_NS_BASE              0x4002C000UL
-#define NRF_FLPR_VPR_S_BASE               0x5002C000UL
+#define NRF_FLPR_VPR_NS_BASE              0xF0000000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
 #define NRF_FLPR_VPR_NS                   ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_NS_BASE)
-#define NRF_FLPR_VPR_S                    ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
@@ -221,7 +220,7 @@ typedef enum {
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_FLPR_VPR                            NRF_FLPR_VPR_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_S
+  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_NS
 #endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */

@@ -81,201 +81,211 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_SICR_S_BASE                   0x00FFC000UL
 #define NRF_UICR_S_BASE                   0x00FFE000UL
 #define NRF_FICR_NS_BASE                  0x00FFF000UL
-#define NRF_CTRLAP_NS_BASE                0x40031000UL
-#define NRF_CTRLAP_S_BASE                 0x50031000UL
+#define NRF_CTRLAP_NS_BASE                0x40051000UL
+#define NRF_CTRLAP_S_BASE                 0x50051000UL
 #define NRF_CRACENCORE_S_BASE             0x51800000UL
-#define NRF_SPU00_NS_BASE                 0x40020000UL
-#define NRF_SPU00_S_BASE                  0x50020000UL
-#define NRF_MPC00_S_BASE                  0x50021000UL
-#define NRF_DPPIC00_NS_BASE               0x40022000UL
-#define NRF_DPPIC00_S_BASE                0x50022000UL
-#define NRF_PPIB00_NS_BASE                0x40023000UL
-#define NRF_PPIB00_S_BASE                 0x50023000UL
-#define NRF_PPIB01_NS_BASE                0x40024000UL
-#define NRF_PPIB01_S_BASE                 0x50024000UL
-#define NRF_KMU_NS_BASE                   0x40025000UL
-#define NRF_KMU_S_BASE                    0x50025000UL
-#define NRF_AAR00_NS_BASE                 0x40026000UL
-#define NRF_CCM00_NS_BASE                 0x40026000UL
-#define NRF_AAR00_S_BASE                  0x50026000UL
-#define NRF_CCM00_S_BASE                  0x50026000UL
-#define NRF_ECB00_NS_BASE                 0x40027000UL
-#define NRF_ECB00_S_BASE                  0x50027000UL
-#define NRF_CRACEN_S_BASE                 0x50028000UL
-#define NRF_SPIM00_NS_BASE                0x4002A000UL
-#define NRF_SPIS00_NS_BASE                0x4002A000UL
-#define NRF_TWIM00_NS_BASE                0x4002A000UL
-#define NRF_TWIS00_NS_BASE                0x4002A000UL
-#define NRF_UARTE00_NS_BASE               0x4002A000UL
-#define NRF_SPIM00_S_BASE                 0x5002A000UL
-#define NRF_SPIS00_S_BASE                 0x5002A000UL
-#define NRF_TWIM00_S_BASE                 0x5002A000UL
-#define NRF_TWIS00_S_BASE                 0x5002A000UL
-#define NRF_UARTE00_S_BASE                0x5002A000UL
-#define NRF_VPR00_NS_BASE                 0x4002C000UL
-#define NRF_VPR00_S_BASE                  0x5002C000UL
-#define NRF_P2_NS_BASE                    0x40030400UL
-#define NRF_P2_S_BASE                     0x50030400UL
-#define NRF_TAD_NS_BASE                   0x40032000UL
-#define NRF_TAD_S_BASE                    0x50032000UL
-#define NRF_PCGCS00_S_BASE                0x5003E000UL
-#define NRF_PCGCM00_S_BASE                0x5003F000UL
-#define NRF_SPU10_NS_BASE                 0x40040000UL
-#define NRF_SPU10_S_BASE                  0x50040000UL
-#define NRF_DPPIC10_NS_BASE               0x40042000UL
-#define NRF_DPPIC10_S_BASE                0x50042000UL
-#define NRF_PPIB10_NS_BASE                0x40043000UL
-#define NRF_PPIB10_S_BASE                 0x50043000UL
-#define NRF_PPIB11_NS_BASE                0x40044000UL
-#define NRF_PPIB11_S_BASE                 0x50044000UL
-#define NRF_TIMER10_NS_BASE               0x40045000UL
-#define NRF_TIMER10_S_BASE                0x50045000UL
-#define NRF_RTC10_NS_BASE                 0x40046000UL
-#define NRF_RTC10_S_BASE                  0x50046000UL
-#define NRF_EGU10_NS_BASE                 0x40047000UL
-#define NRF_EGU10_S_BASE                  0x50047000UL
-#define NRF_AAR10_NS_BASE                 0x40048000UL
-#define NRF_CCM10_NS_BASE                 0x40048000UL
-#define NRF_AAR10_S_BASE                  0x50048000UL
-#define NRF_CCM10_S_BASE                  0x50048000UL
-#define NRF_ECB10_NS_BASE                 0x40049000UL
-#define NRF_ECB10_S_BASE                  0x50049000UL
-#define NRF_RADIO_NS_BASE                 0x4004A000UL
-#define NRF_RADIO_S_BASE                  0x5004A000UL
-#define NRF_PCGCS10_S_BASE                0x5005E000UL
-#define NRF_PCGCM10_S_BASE                0x5005F000UL
-#define NRF_SPU20_NS_BASE                 0x40080000UL
-#define NRF_SPU20_S_BASE                  0x50080000UL
-#define NRF_DPPIC20_NS_BASE               0x40082000UL
-#define NRF_DPPIC20_S_BASE                0x50082000UL
-#define NRF_PPIB20_NS_BASE                0x40083000UL
-#define NRF_PPIB20_S_BASE                 0x50083000UL
-#define NRF_PPIB21_NS_BASE                0x40084000UL
-#define NRF_PPIB21_S_BASE                 0x50084000UL
-#define NRF_PPIB22_NS_BASE                0x40085000UL
-#define NRF_PPIB22_S_BASE                 0x50085000UL
-#define NRF_SPIM20_NS_BASE                0x40086000UL
-#define NRF_SPIS20_NS_BASE                0x40086000UL
-#define NRF_TWIM20_NS_BASE                0x40086000UL
-#define NRF_TWIS20_NS_BASE                0x40086000UL
-#define NRF_UARTE20_NS_BASE               0x40086000UL
-#define NRF_SPIM20_S_BASE                 0x50086000UL
-#define NRF_SPIS20_S_BASE                 0x50086000UL
-#define NRF_TWIM20_S_BASE                 0x50086000UL
-#define NRF_TWIS20_S_BASE                 0x50086000UL
-#define NRF_UARTE20_S_BASE                0x50086000UL
-#define NRF_SPIM21_NS_BASE                0x40087000UL
-#define NRF_SPIS21_NS_BASE                0x40087000UL
-#define NRF_TWIM21_NS_BASE                0x40087000UL
-#define NRF_TWIS21_NS_BASE                0x40087000UL
-#define NRF_UARTE21_NS_BASE               0x40087000UL
-#define NRF_SPIM21_S_BASE                 0x50087000UL
-#define NRF_SPIS21_S_BASE                 0x50087000UL
-#define NRF_TWIM21_S_BASE                 0x50087000UL
-#define NRF_TWIS21_S_BASE                 0x50087000UL
-#define NRF_UARTE21_S_BASE                0x50087000UL
-#define NRF_SPIM22_NS_BASE                0x40088000UL
-#define NRF_SPIS22_NS_BASE                0x40088000UL
-#define NRF_TWIM22_NS_BASE                0x40088000UL
-#define NRF_TWIS22_NS_BASE                0x40088000UL
-#define NRF_UARTE22_NS_BASE               0x40088000UL
-#define NRF_SPIM22_S_BASE                 0x50088000UL
-#define NRF_SPIS22_S_BASE                 0x50088000UL
-#define NRF_TWIM22_S_BASE                 0x50088000UL
-#define NRF_TWIS22_S_BASE                 0x50088000UL
-#define NRF_UARTE22_S_BASE                0x50088000UL
-#define NRF_EGU20_NS_BASE                 0x40089000UL
-#define NRF_EGU20_S_BASE                  0x50089000UL
-#define NRF_TIMER20_NS_BASE               0x4008A000UL
-#define NRF_TIMER20_S_BASE                0x5008A000UL
-#define NRF_TIMER21_NS_BASE               0x4008B000UL
-#define NRF_TIMER21_S_BASE                0x5008B000UL
-#define NRF_TIMER22_NS_BASE               0x4008C000UL
-#define NRF_TIMER22_S_BASE                0x5008C000UL
-#define NRF_TIMER23_NS_BASE               0x4008D000UL
-#define NRF_TIMER23_S_BASE                0x5008D000UL
-#define NRF_TIMER24_NS_BASE               0x4008E000UL
-#define NRF_TIMER24_S_BASE                0x5008E000UL
-#define NRF_MEMCONF_NS_BASE               0x4008F000UL
-#define NRF_MEMCONF_S_BASE                0x5008F000UL
-#define NRF_PDM20_NS_BASE                 0x40090000UL
-#define NRF_PDM20_S_BASE                  0x50090000UL
-#define NRF_PDM21_NS_BASE                 0x40091000UL
-#define NRF_PDM21_S_BASE                  0x50091000UL
-#define NRF_PWM20_NS_BASE                 0x40092000UL
-#define NRF_PWM20_S_BASE                  0x50092000UL
-#define NRF_PWM21_NS_BASE                 0x40093000UL
-#define NRF_PWM21_S_BASE                  0x50093000UL
-#define NRF_PWM22_NS_BASE                 0x40094000UL
-#define NRF_PWM22_S_BASE                  0x50094000UL
-#define NRF_SAADC_NS_BASE                 0x40095000UL
-#define NRF_SAADC_S_BASE                  0x50095000UL
-#define NRF_NFCT_NS_BASE                  0x40096000UL
-#define NRF_NFCT_S_BASE                   0x50096000UL
-#define NRF_TEMP_NS_BASE                  0x40097000UL
-#define NRF_TEMP_S_BASE                   0x50097000UL
-#define NRF_P1_NS_BASE                    0x40098200UL
-#define NRF_P1_S_BASE                     0x50098200UL
-#define NRF_GPIOTE20_NS_BASE              0x40099000UL
-#define NRF_GPIOTE20_S_BASE               0x50099000UL
-#define NRF_TAMPC_NS_BASE                 0x4009B000UL
-#define NRF_TAMPC_S_BASE                  0x5009B000UL
-#define NRF_I2S20_NS_BASE                 0x4009C000UL
-#define NRF_I2S20_S_BASE                  0x5009C000UL
-#define NRF_PCGCS20_S_BASE                0x5009E000UL
-#define NRF_PCGCM20_S_BASE                0x5009F000UL
-#define NRF_QDEC20_NS_BASE                0x400A0000UL
-#define NRF_QDEC20_S_BASE                 0x500A0000UL
-#define NRF_QDEC21_NS_BASE                0x400A1000UL
-#define NRF_QDEC21_S_BASE                 0x500A1000UL
-#define NRF_GRTC_NS_BASE                  0x400A2000UL
-#define NRF_GRTC_S_BASE                   0x500A2000UL
-#define NRF_SPU30_NS_BASE                 0x400C0000UL
-#define NRF_SPU30_S_BASE                  0x500C0000UL
-#define NRF_DPPIC30_NS_BASE               0x400C2000UL
-#define NRF_DPPIC30_S_BASE                0x500C2000UL
-#define NRF_PPIB30_NS_BASE                0x400C3000UL
-#define NRF_PPIB30_S_BASE                 0x500C3000UL
-#define NRF_SPIM30_NS_BASE                0x400C4000UL
-#define NRF_SPIS30_NS_BASE                0x400C4000UL
-#define NRF_TWIM30_NS_BASE                0x400C4000UL
-#define NRF_TWIS30_NS_BASE                0x400C4000UL
-#define NRF_UARTE30_NS_BASE               0x400C4000UL
-#define NRF_SPIM30_S_BASE                 0x500C4000UL
-#define NRF_SPIS30_S_BASE                 0x500C4000UL
-#define NRF_TWIM30_S_BASE                 0x500C4000UL
-#define NRF_TWIS30_S_BASE                 0x500C4000UL
-#define NRF_UARTE30_S_BASE                0x500C4000UL
-#define NRF_RTC30_NS_BASE                 0x400C5000UL
-#define NRF_RTC30_S_BASE                  0x500C5000UL
-#define NRF_COMP_NS_BASE                  0x400C6000UL
-#define NRF_COMP_S_BASE                   0x500C6000UL
-#define NRF_LPCOMP_NS_BASE                0x400C7000UL
-#define NRF_LPCOMP_S_BASE                 0x500C7000UL
-#define NRF_WDT30_NS_BASE                 0x400C8000UL
-#define NRF_WDT30_S_BASE                  0x500C8000UL
-#define NRF_WDT31_NS_BASE                 0x400C9000UL
-#define NRF_WDT31_S_BASE                  0x500C9000UL
-#define NRF_P0_NS_BASE                    0x400CA000UL
-#define NRF_P0_S_BASE                     0x500CA000UL
-#define NRF_GPIOTE30_NS_BASE              0x400CB000UL
-#define NRF_GPIOTE30_S_BASE               0x500CB000UL
-#define NRF_CLOCK_NS_BASE                 0x400CD000UL
-#define NRF_POWER_NS_BASE                 0x400CD000UL
-#define NRF_RESET_NS_BASE                 0x400CD000UL
-#define NRF_CLOCK_S_BASE                  0x500CD000UL
-#define NRF_POWER_S_BASE                  0x500CD000UL
-#define NRF_RESET_S_BASE                  0x500CD000UL
-#define NRF_PCGCS30_S_BASE                0x500DE000UL
-#define NRF_PCGCM30_S_BASE                0x500DF000UL
-#define NRF_OSCILLATORS_NS_BASE           0x400E0000UL
-#define NRF_REGULATORS_NS_BASE            0x400E0000UL
-#define NRF_OSCILLATORS_S_BASE            0x500E0000UL
-#define NRF_REGULATORS_S_BASE             0x500E0000UL
-#define NRF_VREGMAIN_NS_BASE              0x400E1000UL
-#define NRF_VREGMAIN_S_BASE               0x500E1000UL
-#define NRF_RCOSC32K_NS_BASE              0x400E2000UL
-#define NRF_RCOSC32K_S_BASE               0x500E2000UL
+#define NRF_SPU00_NS_BASE                 0x40040000UL
+#define NRF_SPU00_S_BASE                  0x50040000UL
+#define NRF_MPC00_S_BASE                  0x50041000UL
+#define NRF_DPPIC00_NS_BASE               0x40042000UL
+#define NRF_DPPIC00_S_BASE                0x50042000UL
+#define NRF_PPIB00_NS_BASE                0x40043000UL
+#define NRF_PPIB00_S_BASE                 0x50043000UL
+#define NRF_PPIB01_NS_BASE                0x40044000UL
+#define NRF_PPIB01_S_BASE                 0x50044000UL
+#define NRF_KMU_S_BASE                    0x50045000UL
+#define NRF_AAR00_NS_BASE                 0x40046000UL
+#define NRF_CCM00_NS_BASE                 0x40046000UL
+#define NRF_AAR00_S_BASE                  0x50046000UL
+#define NRF_CCM00_S_BASE                  0x50046000UL
+#define NRF_ECB00_NS_BASE                 0x40047000UL
+#define NRF_ECB00_S_BASE                  0x50047000UL
+#define NRF_CRACEN_S_BASE                 0x50048000UL
+#define NRF_SPI00_NS_BASE                 0x4004A000UL
+#define NRF_SPIM00_NS_BASE                0x4004A000UL
+#define NRF_SPIS00_NS_BASE                0x4004A000UL
+#define NRF_TWIM00_NS_BASE                0x4004A000UL
+#define NRF_TWIS00_NS_BASE                0x4004A000UL
+#define NRF_UARTE00_NS_BASE               0x4004A000UL
+#define NRF_SPI00_S_BASE                  0x5004A000UL
+#define NRF_SPIM00_S_BASE                 0x5004A000UL
+#define NRF_SPIS00_S_BASE                 0x5004A000UL
+#define NRF_TWIM00_S_BASE                 0x5004A000UL
+#define NRF_TWIS00_S_BASE                 0x5004A000UL
+#define NRF_UARTE00_S_BASE                0x5004A000UL
+#define NRF_RRAMC_NS_BASE                 0x4004B000UL
+#define NRF_RRAMC_S_BASE                  0x5004B000UL
+#define NRF_VPR00_NS_BASE                 0x4004C000UL
+#define NRF_VPR00_S_BASE                  0x5004C000UL
+#define NRF_P2_NS_BASE                    0x40050400UL
+#define NRF_P2_S_BASE                     0x50050400UL
+#define NRF_TAD_NS_BASE                   0x40052000UL
+#define NRF_TAD_S_BASE                    0x50052000UL
+#define NRF_PCGCS00_S_BASE                0x5005E000UL
+#define NRF_PCGCM00_S_BASE                0x5005F000UL
+#define NRF_SPU10_NS_BASE                 0x40080000UL
+#define NRF_SPU10_S_BASE                  0x50080000UL
+#define NRF_DPPIC10_NS_BASE               0x40082000UL
+#define NRF_DPPIC10_S_BASE                0x50082000UL
+#define NRF_PPIB10_NS_BASE                0x40083000UL
+#define NRF_PPIB10_S_BASE                 0x50083000UL
+#define NRF_PPIB11_NS_BASE                0x40084000UL
+#define NRF_PPIB11_S_BASE                 0x50084000UL
+#define NRF_TIMER10_NS_BASE               0x40085000UL
+#define NRF_TIMER10_S_BASE                0x50085000UL
+#define NRF_RTC10_NS_BASE                 0x40086000UL
+#define NRF_RTC10_S_BASE                  0x50086000UL
+#define NRF_EGU10_NS_BASE                 0x40087000UL
+#define NRF_EGU10_S_BASE                  0x50087000UL
+#define NRF_AAR10_NS_BASE                 0x40088000UL
+#define NRF_CCM10_NS_BASE                 0x40088000UL
+#define NRF_AAR10_S_BASE                  0x50088000UL
+#define NRF_CCM10_S_BASE                  0x50088000UL
+#define NRF_ECB10_NS_BASE                 0x40089000UL
+#define NRF_ECB10_S_BASE                  0x50089000UL
+#define NRF_RADIO_NS_BASE                 0x4008A000UL
+#define NRF_RADIO_S_BASE                  0x5008A000UL
+#define NRF_PCGCS10_S_BASE                0x5009E000UL
+#define NRF_PCGCM10_S_BASE                0x5009F000UL
+#define NRF_SPU20_NS_BASE                 0x400C0000UL
+#define NRF_SPU20_S_BASE                  0x500C0000UL
+#define NRF_DPPIC20_NS_BASE               0x400C2000UL
+#define NRF_DPPIC20_S_BASE                0x500C2000UL
+#define NRF_PPIB20_NS_BASE                0x400C3000UL
+#define NRF_PPIB20_S_BASE                 0x500C3000UL
+#define NRF_PPIB21_NS_BASE                0x400C4000UL
+#define NRF_PPIB21_S_BASE                 0x500C4000UL
+#define NRF_PPIB22_NS_BASE                0x400C5000UL
+#define NRF_PPIB22_S_BASE                 0x500C5000UL
+#define NRF_SPI20_NS_BASE                 0x400C6000UL
+#define NRF_SPIM20_NS_BASE                0x400C6000UL
+#define NRF_SPIS20_NS_BASE                0x400C6000UL
+#define NRF_TWIM20_NS_BASE                0x400C6000UL
+#define NRF_TWIS20_NS_BASE                0x400C6000UL
+#define NRF_UARTE20_NS_BASE               0x400C6000UL
+#define NRF_SPI20_S_BASE                  0x500C6000UL
+#define NRF_SPIM20_S_BASE                 0x500C6000UL
+#define NRF_SPIS20_S_BASE                 0x500C6000UL
+#define NRF_TWIM20_S_BASE                 0x500C6000UL
+#define NRF_TWIS20_S_BASE                 0x500C6000UL
+#define NRF_UARTE20_S_BASE                0x500C6000UL
+#define NRF_SPI21_NS_BASE                 0x400C7000UL
+#define NRF_SPIM21_NS_BASE                0x400C7000UL
+#define NRF_SPIS21_NS_BASE                0x400C7000UL
+#define NRF_TWIM21_NS_BASE                0x400C7000UL
+#define NRF_TWIS21_NS_BASE                0x400C7000UL
+#define NRF_UARTE21_NS_BASE               0x400C7000UL
+#define NRF_SPI21_S_BASE                  0x500C7000UL
+#define NRF_SPIM21_S_BASE                 0x500C7000UL
+#define NRF_SPIS21_S_BASE                 0x500C7000UL
+#define NRF_TWIM21_S_BASE                 0x500C7000UL
+#define NRF_TWIS21_S_BASE                 0x500C7000UL
+#define NRF_UARTE21_S_BASE                0x500C7000UL
+#define NRF_SPI22_NS_BASE                 0x400C8000UL
+#define NRF_SPIM22_NS_BASE                0x400C8000UL
+#define NRF_SPIS22_NS_BASE                0x400C8000UL
+#define NRF_TWIM22_NS_BASE                0x400C8000UL
+#define NRF_TWIS22_NS_BASE                0x400C8000UL
+#define NRF_UARTE22_NS_BASE               0x400C8000UL
+#define NRF_SPI22_S_BASE                  0x500C8000UL
+#define NRF_SPIM22_S_BASE                 0x500C8000UL
+#define NRF_SPIS22_S_BASE                 0x500C8000UL
+#define NRF_TWIM22_S_BASE                 0x500C8000UL
+#define NRF_TWIS22_S_BASE                 0x500C8000UL
+#define NRF_UARTE22_S_BASE                0x500C8000UL
+#define NRF_EGU20_NS_BASE                 0x400C9000UL
+#define NRF_EGU20_S_BASE                  0x500C9000UL
+#define NRF_TIMER20_NS_BASE               0x400CA000UL
+#define NRF_TIMER20_S_BASE                0x500CA000UL
+#define NRF_TIMER21_NS_BASE               0x400CB000UL
+#define NRF_TIMER21_S_BASE                0x500CB000UL
+#define NRF_TIMER22_NS_BASE               0x400CC000UL
+#define NRF_TIMER22_S_BASE                0x500CC000UL
+#define NRF_TIMER23_NS_BASE               0x400CD000UL
+#define NRF_TIMER23_S_BASE                0x500CD000UL
+#define NRF_TIMER24_NS_BASE               0x400CE000UL
+#define NRF_TIMER24_S_BASE                0x500CE000UL
+#define NRF_MEMCONF_NS_BASE               0x400CF000UL
+#define NRF_MEMCONF_S_BASE                0x500CF000UL
+#define NRF_PDM20_NS_BASE                 0x400D0000UL
+#define NRF_PDM20_S_BASE                  0x500D0000UL
+#define NRF_PDM21_NS_BASE                 0x400D1000UL
+#define NRF_PDM21_S_BASE                  0x500D1000UL
+#define NRF_PWM20_NS_BASE                 0x400D2000UL
+#define NRF_PWM20_S_BASE                  0x500D2000UL
+#define NRF_PWM21_NS_BASE                 0x400D3000UL
+#define NRF_PWM21_S_BASE                  0x500D3000UL
+#define NRF_PWM22_NS_BASE                 0x400D4000UL
+#define NRF_PWM22_S_BASE                  0x500D4000UL
+#define NRF_SAADC_NS_BASE                 0x400D5000UL
+#define NRF_SAADC_S_BASE                  0x500D5000UL
+#define NRF_NFCT_NS_BASE                  0x400D6000UL
+#define NRF_NFCT_S_BASE                   0x500D6000UL
+#define NRF_TEMP_NS_BASE                  0x400D7000UL
+#define NRF_TEMP_S_BASE                   0x500D7000UL
+#define NRF_P1_NS_BASE                    0x400D8200UL
+#define NRF_P1_S_BASE                     0x500D8200UL
+#define NRF_GPIOTE20_NS_BASE              0x400D9000UL
+#define NRF_GPIOTE20_S_BASE               0x500D9000UL
+#define NRF_TAMPC_NS_BASE                 0x400DB000UL
+#define NRF_TAMPC_S_BASE                  0x500DB000UL
+#define NRF_I2S20_NS_BASE                 0x400DC000UL
+#define NRF_I2S20_S_BASE                  0x500DC000UL
+#define NRF_PCGCS20_S_BASE                0x500DE000UL
+#define NRF_PCGCM20_S_BASE                0x500DF000UL
+#define NRF_QDEC20_NS_BASE                0x400E0000UL
+#define NRF_QDEC20_S_BASE                 0x500E0000UL
+#define NRF_QDEC21_NS_BASE                0x400E1000UL
+#define NRF_QDEC21_S_BASE                 0x500E1000UL
+#define NRF_GRTC_NS_BASE                  0x400E2000UL
+#define NRF_GRTC_S_BASE                   0x500E2000UL
+#define NRF_SPU30_NS_BASE                 0x40100000UL
+#define NRF_SPU30_S_BASE                  0x50100000UL
+#define NRF_DPPIC30_NS_BASE               0x40102000UL
+#define NRF_DPPIC30_S_BASE                0x50102000UL
+#define NRF_PPIB30_NS_BASE                0x40103000UL
+#define NRF_PPIB30_S_BASE                 0x50103000UL
+#define NRF_SPI30_NS_BASE                 0x40104000UL
+#define NRF_SPIM30_NS_BASE                0x40104000UL
+#define NRF_SPIS30_NS_BASE                0x40104000UL
+#define NRF_TWIM30_NS_BASE                0x40104000UL
+#define NRF_TWIS30_NS_BASE                0x40104000UL
+#define NRF_UARTE30_NS_BASE               0x40104000UL
+#define NRF_SPI30_S_BASE                  0x50104000UL
+#define NRF_SPIM30_S_BASE                 0x50104000UL
+#define NRF_SPIS30_S_BASE                 0x50104000UL
+#define NRF_TWIM30_S_BASE                 0x50104000UL
+#define NRF_TWIS30_S_BASE                 0x50104000UL
+#define NRF_UARTE30_S_BASE                0x50104000UL
+#define NRF_RTC30_NS_BASE                 0x40105000UL
+#define NRF_RTC30_S_BASE                  0x50105000UL
+#define NRF_COMP_NS_BASE                  0x40106000UL
+#define NRF_LPCOMP_NS_BASE                0x40106000UL
+#define NRF_COMP_S_BASE                   0x50106000UL
+#define NRF_LPCOMP_S_BASE                 0x50106000UL
+#define NRF_WDT30_S_BASE                  0x50108000UL
+#define NRF_WDT31_NS_BASE                 0x40109000UL
+#define NRF_WDT31_S_BASE                  0x50109000UL
+#define NRF_P0_NS_BASE                    0x4010A000UL
+#define NRF_P0_S_BASE                     0x5010A000UL
+#define NRF_GPIOTE30_NS_BASE              0x4010B000UL
+#define NRF_GPIOTE30_S_BASE               0x5010B000UL
+#define NRF_CLOCK_NS_BASE                 0x4010D000UL
+#define NRF_POWER_NS_BASE                 0x4010D000UL
+#define NRF_RESET_NS_BASE                 0x4010D000UL
+#define NRF_CLOCK_S_BASE                  0x5010D000UL
+#define NRF_POWER_S_BASE                  0x5010D000UL
+#define NRF_RESET_S_BASE                  0x5010D000UL
+#define NRF_PCGCS30_S_BASE                0x5011E000UL
+#define NRF_PCGCM30_S_BASE                0x5011F000UL
+#define NRF_OSCILLATORS_NS_BASE           0x40120000UL
+#define NRF_REGULATORS_NS_BASE            0x40120000UL
+#define NRF_OSCILLATORS_S_BASE            0x50120000UL
+#define NRF_REGULATORS_S_BASE             0x50120000UL
+#define NRF_VREGMAIN_NS_BASE              0x40121000UL
+#define NRF_VREGMAIN_S_BASE               0x50121000UL
+#define NRF_RCOSC32K_NS_BASE              0x40122000UL
+#define NRF_RCOSC32K_S_BASE               0x50122000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
@@ -296,7 +306,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB00_S                      ((NRF_PPIB_Type*)                     NRF_PPIB00_S_BASE)
 #define NRF_PPIB01_NS                     ((NRF_PPIB_Type*)                     NRF_PPIB01_NS_BASE)
 #define NRF_PPIB01_S                      ((NRF_PPIB_Type*)                     NRF_PPIB01_S_BASE)
-#define NRF_KMU_NS                        ((NRF_KMU_Type*)                      NRF_KMU_NS_BASE)
 #define NRF_KMU_S                         ((NRF_KMU_Type*)                      NRF_KMU_S_BASE)
 #define NRF_AAR00_NS                      ((NRF_AAR_Type*)                      NRF_AAR00_NS_BASE)
 #define NRF_CCM00_NS                      ((NRF_CCM_Type*)                      NRF_CCM00_NS_BASE)
@@ -305,16 +314,20 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_ECB00_NS                      ((NRF_ECB_Type*)                      NRF_ECB00_NS_BASE)
 #define NRF_ECB00_S                       ((NRF_ECB_Type*)                      NRF_ECB00_S_BASE)
 #define NRF_CRACEN_S                      ((NRF_CRACEN_Type*)                   NRF_CRACEN_S_BASE)
+#define NRF_SPI00_NS                      ((NRF_SPI_Type*)                      NRF_SPI00_NS_BASE)
 #define NRF_SPIM00_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM00_NS_BASE)
 #define NRF_SPIS00_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS00_NS_BASE)
 #define NRF_TWIM00_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM00_NS_BASE)
 #define NRF_TWIS00_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS00_NS_BASE)
 #define NRF_UARTE00_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE00_NS_BASE)
+#define NRF_SPI00_S                       ((NRF_SPI_Type*)                      NRF_SPI00_S_BASE)
 #define NRF_SPIM00_S                      ((NRF_SPIM_Type*)                     NRF_SPIM00_S_BASE)
 #define NRF_SPIS00_S                      ((NRF_SPIS_Type*)                     NRF_SPIS00_S_BASE)
 #define NRF_TWIM00_S                      ((NRF_TWIM_Type*)                     NRF_TWIM00_S_BASE)
 #define NRF_TWIS00_S                      ((NRF_TWIS_Type*)                     NRF_TWIS00_S_BASE)
 #define NRF_UARTE00_S                     ((NRF_UARTE_Type*)                    NRF_UARTE00_S_BASE)
+#define NRF_RRAMC_NS                      ((NRF_RRAMC_Type*)                    NRF_RRAMC_NS_BASE)
+#define NRF_RRAMC_S                       ((NRF_RRAMC_Type*)                    NRF_RRAMC_S_BASE)
 #define NRF_VPR00_NS                      ((NRF_VPR_Type*)                      NRF_VPR00_NS_BASE)
 #define NRF_VPR00_S                       ((NRF_VPR_Type*)                      NRF_VPR00_S_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
@@ -357,31 +370,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_PPIB21_S                      ((NRF_PPIB_Type*)                     NRF_PPIB21_S_BASE)
 #define NRF_PPIB22_NS                     ((NRF_PPIB_Type*)                     NRF_PPIB22_NS_BASE)
 #define NRF_PPIB22_S                      ((NRF_PPIB_Type*)                     NRF_PPIB22_S_BASE)
+#define NRF_SPI20_NS                      ((NRF_SPI_Type*)                      NRF_SPI20_NS_BASE)
 #define NRF_SPIM20_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM20_NS_BASE)
 #define NRF_SPIS20_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS20_NS_BASE)
 #define NRF_TWIM20_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM20_NS_BASE)
 #define NRF_TWIS20_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS20_NS_BASE)
 #define NRF_UARTE20_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE20_NS_BASE)
+#define NRF_SPI20_S                       ((NRF_SPI_Type*)                      NRF_SPI20_S_BASE)
 #define NRF_SPIM20_S                      ((NRF_SPIM_Type*)                     NRF_SPIM20_S_BASE)
 #define NRF_SPIS20_S                      ((NRF_SPIS_Type*)                     NRF_SPIS20_S_BASE)
 #define NRF_TWIM20_S                      ((NRF_TWIM_Type*)                     NRF_TWIM20_S_BASE)
 #define NRF_TWIS20_S                      ((NRF_TWIS_Type*)                     NRF_TWIS20_S_BASE)
 #define NRF_UARTE20_S                     ((NRF_UARTE_Type*)                    NRF_UARTE20_S_BASE)
+#define NRF_SPI21_NS                      ((NRF_SPI_Type*)                      NRF_SPI21_NS_BASE)
 #define NRF_SPIM21_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM21_NS_BASE)
 #define NRF_SPIS21_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS21_NS_BASE)
 #define NRF_TWIM21_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM21_NS_BASE)
 #define NRF_TWIS21_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS21_NS_BASE)
 #define NRF_UARTE21_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE21_NS_BASE)
+#define NRF_SPI21_S                       ((NRF_SPI_Type*)                      NRF_SPI21_S_BASE)
 #define NRF_SPIM21_S                      ((NRF_SPIM_Type*)                     NRF_SPIM21_S_BASE)
 #define NRF_SPIS21_S                      ((NRF_SPIS_Type*)                     NRF_SPIS21_S_BASE)
 #define NRF_TWIM21_S                      ((NRF_TWIM_Type*)                     NRF_TWIM21_S_BASE)
 #define NRF_TWIS21_S                      ((NRF_TWIS_Type*)                     NRF_TWIS21_S_BASE)
 #define NRF_UARTE21_S                     ((NRF_UARTE_Type*)                    NRF_UARTE21_S_BASE)
+#define NRF_SPI22_NS                      ((NRF_SPI_Type*)                      NRF_SPI22_NS_BASE)
 #define NRF_SPIM22_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM22_NS_BASE)
 #define NRF_SPIS22_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS22_NS_BASE)
 #define NRF_TWIM22_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM22_NS_BASE)
 #define NRF_TWIS22_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS22_NS_BASE)
 #define NRF_UARTE22_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE22_NS_BASE)
+#define NRF_SPI22_S                       ((NRF_SPI_Type*)                      NRF_SPI22_S_BASE)
 #define NRF_SPIM22_S                      ((NRF_SPIM_Type*)                     NRF_SPIM22_S_BASE)
 #define NRF_SPIS22_S                      ((NRF_SPIS_Type*)                     NRF_SPIS22_S_BASE)
 #define NRF_TWIM22_S                      ((NRF_TWIM_Type*)                     NRF_TWIM22_S_BASE)
@@ -439,11 +458,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_DPPIC30_S                     ((NRF_DPPIC_Type*)                    NRF_DPPIC30_S_BASE)
 #define NRF_PPIB30_NS                     ((NRF_PPIB_Type*)                     NRF_PPIB30_NS_BASE)
 #define NRF_PPIB30_S                      ((NRF_PPIB_Type*)                     NRF_PPIB30_S_BASE)
+#define NRF_SPI30_NS                      ((NRF_SPI_Type*)                      NRF_SPI30_NS_BASE)
 #define NRF_SPIM30_NS                     ((NRF_SPIM_Type*)                     NRF_SPIM30_NS_BASE)
 #define NRF_SPIS30_NS                     ((NRF_SPIS_Type*)                     NRF_SPIS30_NS_BASE)
 #define NRF_TWIM30_NS                     ((NRF_TWIM_Type*)                     NRF_TWIM30_NS_BASE)
 #define NRF_TWIS30_NS                     ((NRF_TWIS_Type*)                     NRF_TWIS30_NS_BASE)
 #define NRF_UARTE30_NS                    ((NRF_UARTE_Type*)                    NRF_UARTE30_NS_BASE)
+#define NRF_SPI30_S                       ((NRF_SPI_Type*)                      NRF_SPI30_S_BASE)
 #define NRF_SPIM30_S                      ((NRF_SPIM_Type*)                     NRF_SPIM30_S_BASE)
 #define NRF_SPIS30_S                      ((NRF_SPIS_Type*)                     NRF_SPIS30_S_BASE)
 #define NRF_TWIM30_S                      ((NRF_TWIM_Type*)                     NRF_TWIM30_S_BASE)
@@ -452,10 +473,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_RTC30_NS                      ((NRF_RTC_Type*)                      NRF_RTC30_NS_BASE)
 #define NRF_RTC30_S                       ((NRF_RTC_Type*)                      NRF_RTC30_S_BASE)
 #define NRF_COMP_NS                       ((NRF_COMP_Type*)                     NRF_COMP_NS_BASE)
-#define NRF_COMP_S                        ((NRF_COMP_Type*)                     NRF_COMP_S_BASE)
 #define NRF_LPCOMP_NS                     ((NRF_LPCOMP_Type*)                   NRF_LPCOMP_NS_BASE)
+#define NRF_COMP_S                        ((NRF_COMP_Type*)                     NRF_COMP_S_BASE)
 #define NRF_LPCOMP_S                      ((NRF_LPCOMP_Type*)                   NRF_LPCOMP_S_BASE)
-#define NRF_WDT30_NS                      ((NRF_WDT_Type*)                      NRF_WDT30_NS_BASE)
 #define NRF_WDT30_S                       ((NRF_WDT_Type*)                      NRF_WDT30_S_BASE)
 #define NRF_WDT31_NS                      ((NRF_WDT_Type*)                      NRF_WDT31_NS_BASE)
 #define NRF_WDT31_S                       ((NRF_WDT_Type*)                      NRF_WDT31_S_BASE)
@@ -491,15 +511,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_DPPIC00                             NRF_DPPIC00_NS
   #define NRF_PPIB00                              NRF_PPIB00_NS
   #define NRF_PPIB01                              NRF_PPIB01_NS
-  #define NRF_KMU                                 NRF_KMU_NS
   #define NRF_AAR00                               NRF_AAR00_NS
   #define NRF_CCM00                               NRF_CCM00_NS
   #define NRF_ECB00                               NRF_ECB00_NS
+  #define NRF_SPI00                               NRF_SPI00_NS
   #define NRF_SPIM00                              NRF_SPIM00_NS
   #define NRF_SPIS00                              NRF_SPIS00_NS
   #define NRF_TWIM00                              NRF_TWIM00_NS
   #define NRF_TWIS00                              NRF_TWIS00_NS
   #define NRF_UARTE00                             NRF_UARTE00_NS
+  #define NRF_RRAMC                               NRF_RRAMC_NS
   #define NRF_VPR00                               NRF_VPR00_NS
   #define NRF_P2                                  NRF_P2_NS
   #define NRF_TAD                                 NRF_TAD_NS
@@ -519,16 +540,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB20                              NRF_PPIB20_NS
   #define NRF_PPIB21                              NRF_PPIB21_NS
   #define NRF_PPIB22                              NRF_PPIB22_NS
+  #define NRF_SPI20                               NRF_SPI20_NS
   #define NRF_SPIM20                              NRF_SPIM20_NS
   #define NRF_SPIS20                              NRF_SPIS20_NS
   #define NRF_TWIM20                              NRF_TWIM20_NS
   #define NRF_TWIS20                              NRF_TWIS20_NS
   #define NRF_UARTE20                             NRF_UARTE20_NS
+  #define NRF_SPI21                               NRF_SPI21_NS
   #define NRF_SPIM21                              NRF_SPIM21_NS
   #define NRF_SPIS21                              NRF_SPIS21_NS
   #define NRF_TWIM21                              NRF_TWIM21_NS
   #define NRF_TWIS21                              NRF_TWIS21_NS
   #define NRF_UARTE21                             NRF_UARTE21_NS
+  #define NRF_SPI22                               NRF_SPI22_NS
   #define NRF_SPIM22                              NRF_SPIM22_NS
   #define NRF_SPIS22                              NRF_SPIS22_NS
   #define NRF_TWIM22                              NRF_TWIM22_NS
@@ -559,6 +583,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPU30                               NRF_SPU30_NS
   #define NRF_DPPIC30                             NRF_DPPIC30_NS
   #define NRF_PPIB30                              NRF_PPIB30_NS
+  #define NRF_SPI30                               NRF_SPI30_NS
   #define NRF_SPIM30                              NRF_SPIM30_NS
   #define NRF_SPIS30                              NRF_SPIS30_NS
   #define NRF_TWIM30                              NRF_TWIM30_NS
@@ -567,7 +592,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_RTC30                               NRF_RTC30_NS
   #define NRF_COMP                                NRF_COMP_NS
   #define NRF_LPCOMP                              NRF_LPCOMP_NS
-  #define NRF_WDT30                               NRF_WDT30_NS
   #define NRF_WDT31                               NRF_WDT31_NS
   #define NRF_P0                                  NRF_P0_NS
   #define NRF_GPIOTE30                            NRF_GPIOTE30_NS
@@ -594,11 +618,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_CCM00                               NRF_CCM00_S
   #define NRF_ECB00                               NRF_ECB00_S
   #define NRF_CRACEN                              NRF_CRACEN_S
+  #define NRF_SPI00                               NRF_SPI00_S
   #define NRF_SPIM00                              NRF_SPIM00_S
   #define NRF_SPIS00                              NRF_SPIS00_S
   #define NRF_TWIM00                              NRF_TWIM00_S
   #define NRF_TWIS00                              NRF_TWIS00_S
   #define NRF_UARTE00                             NRF_UARTE00_S
+  #define NRF_RRAMC                               NRF_RRAMC_S
   #define NRF_VPR00                               NRF_VPR00_S
   #define NRF_P2                                  NRF_P2_S
   #define NRF_TAD                                 NRF_TAD_S
@@ -622,16 +648,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_PPIB20                              NRF_PPIB20_S
   #define NRF_PPIB21                              NRF_PPIB21_S
   #define NRF_PPIB22                              NRF_PPIB22_S
+  #define NRF_SPI20                               NRF_SPI20_S
   #define NRF_SPIM20                              NRF_SPIM20_S
   #define NRF_SPIS20                              NRF_SPIS20_S
   #define NRF_TWIM20                              NRF_TWIM20_S
   #define NRF_TWIS20                              NRF_TWIS20_S
   #define NRF_UARTE20                             NRF_UARTE20_S
+  #define NRF_SPI21                               NRF_SPI21_S
   #define NRF_SPIM21                              NRF_SPIM21_S
   #define NRF_SPIS21                              NRF_SPIS21_S
   #define NRF_TWIM21                              NRF_TWIM21_S
   #define NRF_TWIS21                              NRF_TWIS21_S
   #define NRF_UARTE21                             NRF_UARTE21_S
+  #define NRF_SPI22                               NRF_SPI22_S
   #define NRF_SPIM22                              NRF_SPIM22_S
   #define NRF_SPIS22                              NRF_SPIS22_S
   #define NRF_TWIM22                              NRF_TWIM22_S
@@ -664,6 +693,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_SPU30                               NRF_SPU30_S
   #define NRF_DPPIC30                             NRF_DPPIC30_S
   #define NRF_PPIB30                              NRF_PPIB30_S
+  #define NRF_SPI30                               NRF_SPI30_S
   #define NRF_SPIM30                              NRF_SPIM30_S
   #define NRF_SPIS30                              NRF_SPIS30_S
   #define NRF_TWIM30                              NRF_TWIM30_S
