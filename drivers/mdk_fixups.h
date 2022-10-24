@@ -14,6 +14,12 @@
         #define nrfx_gpiote20_irq_handler GPIOTE20_0_IRQHandler
         #define nrfx_gpiote30_irq_handler GPIOTE30_0_IRQHandler
     #else
+        #if defined(NRF_APPLICATION) || defined(__NRFX_DOXYGEN__)
+            #define NRF_GRTC_IRQ_GROUP 2
+        #else
+            #error Unknown core.
+        #endif
+
         #define GRTC_IRQn       GRTC_1_IRQn
         #define nrfx_grtc_irq_handler     GRTC_1_IRQHandler
         #define nrfx_gpiote20_irq_handler GPIOTE20_1_IRQHandler
@@ -30,11 +36,15 @@
     #endif
 #endif
 
-#if defined(HALTIUM_XXAA)
+#if defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA)
 
 typedef NRF_DOMAINS_t nrf_domain_t;
 
 #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
+
+#endif /* defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA) */
+
+#if defined(HALTIUM_XXAA)
 
 /* MDK-2070 */
 typedef enum

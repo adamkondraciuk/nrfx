@@ -82,6 +82,7 @@ typedef enum
     NRF_GRTC_TASK_CAPTURE_9  = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[9]),  /**< Capture the counter value on channel 9. */
     NRF_GRTC_TASK_CAPTURE_10 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[10]), /**< Capture the counter value on channel 10. */
     NRF_GRTC_TASK_CAPTURE_11 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[11]), /**< Capture the counter value on channel 11. */
+#if !defined(MOONLIGHT_XXAA)
     NRF_GRTC_TASK_CAPTURE_12 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[12]), /**< Capture the counter value on channel 12. */
     NRF_GRTC_TASK_CAPTURE_13 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[13]), /**< Capture the counter value on channel 13. */
     NRF_GRTC_TASK_CAPTURE_14 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[14]), /**< Capture the counter value on channel 14. */
@@ -95,7 +96,8 @@ typedef enum
     NRF_GRTC_TASK_CAPTURE_21 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[21]), /**< Capture the counter value on channel 21. */
     NRF_GRTC_TASK_CAPTURE_22 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[22]), /**< Capture the counter value on channel 22. */
     NRF_GRTC_TASK_CAPTURE_23 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[23]), /**< Capture the counter value on channel 23. */
-#endif
+#endif /* LILIUMSOC1_XXAA */
+#endif /* MOONLIGHT_XXAA */
 } nrf_grtc_task_t;
 
 /** @brief GRTC events. */
@@ -114,6 +116,7 @@ typedef enum
     NRF_GRTC_EVENT_COMPARE_10      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[10]),     /**< Compare 10 event. */
     NRF_GRTC_EVENT_COMPARE_11      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[11]),     /**< Compare 11 event. */
     NRF_GRTC_EVENT_COMPARE_12      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[12]),     /**< Compare 12 event. */
+#if !defined(MOONLIGHT_XXAA)
     NRF_GRTC_EVENT_COMPARE_13      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[13]),     /**< Compare 13 event. */
     NRF_GRTC_EVENT_COMPARE_14      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[14]),     /**< Compare 14 event. */
     NRF_GRTC_EVENT_COMPARE_15      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[15]),     /**< Compare 15 event. */
@@ -126,7 +129,8 @@ typedef enum
     NRF_GRTC_EVENT_COMPARE_21      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[21]),     /**< Compare 21 event. */
     NRF_GRTC_EVENT_COMPARE_22      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[22]),     /**< Compare 22 event. */
     NRF_GRTC_EVENT_COMPARE_23      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[23]),     /**< Compare 23 event. */
-#endif
+#endif /* LILIUMSOC1_XXAA */
+#endif /* MOONLIGHT_XXAA */
     NRF_GRTC_EVENT_RTCOMPARE       = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARE),       /**< RTCOUNTER compare event. */
     NRF_GRTC_EVENT_RTCOMPARESYNC   = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARESYNC),   /**< RTCOUNTER synchronized compare event. */
     NRF_GRTC_EVENT_SYSCOUNTERVALID = offsetof(NRF_GRTC_Type, EVENTS_SYSCOUNTERVALID), /**< SYSCOUNTER value valid event. */
@@ -160,6 +164,7 @@ typedef enum
     NRF_GRTC_INT_COMPARE9_MASK        = GRTC_INTENSET0_COMPARE9_Msk,        /**< GRTC interrupt from compare event on channel 9. */
     NRF_GRTC_INT_COMPARE10_MASK       = GRTC_INTENSET0_COMPARE10_Msk,       /**< GRTC interrupt from compare event on channel 10. */
     NRF_GRTC_INT_COMPARE11_MASK       = GRTC_INTENSET0_COMPARE11_Msk,       /**< GRTC interrupt from compare event on channel 11. */
+#if !defined(MOONLIGHT_XXAA)
     NRF_GRTC_INT_COMPARE12_MASK       = GRTC_INTENSET0_COMPARE12_Msk,       /**< GRTC interrupt from compare event on channel 12. */
     NRF_GRTC_INT_COMPARE13_MASK       = GRTC_INTENSET0_COMPARE13_Msk,       /**< GRTC interrupt from compare event on channel 13. */
     NRF_GRTC_INT_COMPARE14_MASK       = GRTC_INTENSET0_COMPARE14_Msk,       /**< GRTC interrupt from compare event on channel 14. */
@@ -173,7 +178,8 @@ typedef enum
     NRF_GRTC_INT_COMPARE21_MASK       = GRTC_INTENSET0_COMPARE21_Msk,       /**< GRTC interrupt from compare event on channel 21. */
     NRF_GRTC_INT_COMPARE22_MASK       = GRTC_INTENSET0_COMPARE22_Msk,       /**< GRTC interrupt from compare event on channel 22. */
     NRF_GRTC_INT_COMPARE23_MASK       = GRTC_INTENSET0_COMPARE23_Msk,       /**< GRTC interrupt from compare event on channel 23. */
-#endif
+#endif /* LILIUMSOC1_XXAA */
+#endif /* MOONLIGHT_XXAA */
     NRF_GRTC_INT_RTCOMPARE_MASK       = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
     NRF_GRTC_INT_RTCOMPARESYNC_MASK   = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
     NRF_GRTC_INT_SYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
