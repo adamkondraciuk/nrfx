@@ -15,6 +15,7 @@ All notable changes to this project are documented in this file.
 - Added missing NRFX_RESET_REASON_SREQ_MASK in nrfx_reset_reason_mask_t.
 
 ### Changed
+- Updated MDK to version 8.51.0.
 - Refactored the TIMER driver to allow user handler to be NULL.
 - Removed magic numbers from nrf_twim_event_t type in TWIM HAL.
 
