@@ -7,8 +7,8 @@ All notable changes to this project are documented in this file.
 - Added new signature for the event handler in the IPC driver that accepts event index instead of event bitmask. The previous signature is deprecated.
 - Added nrfx_ipc_gpmem_get() function that is used to get data from the GPMEM register in IPC. It should be now used instead of nrfx_ipc_mem_get(), which is deprecated.
 - Added samples for the following drivers: EGU, PWM, RNG, SAADC, SPIM, SPIS, TEMP, TIMER, TWIM, TWIS, UARTE. They are a part of `zephyrproject-rtos/hal_nordic/nrfx` repository.
-- Introduced the NRFX_<PERIPH>_INST_HANDLER_GET() macro for getting interrupt handler associated with the specified driver instance.
-- Introduced the NRFX_<PERIPH>_INST_GET() macro for getting pointer to the structure of the registers of the specified peripheral.
+- Introduced the NRFX_{PERIPH}_INST_HANDLER_GET() macro for getting interrupt handler associated with the specified driver instance.
+- Introduced the NRFX_{PERIPH}_INST_GET() macro for getting pointer to the structure of the registers of the specified peripheral.
 - Introduced the NRF_TIMER_PRESCALER_CALCULATE() macro for computing prescaler value for given TIMER base frequency and desired frequency.
 - Introduced the NRF_TIMER_BASE_FREQUENCY_GET() macro for getting base frequency in Hz for the specified TIMER instance.
 - Added missing NRFX_RESET_REASON_CTRLAP_MASK in nrfx_reset_reason_mask_t for nRF9160.
