@@ -4,9 +4,7 @@
 
 #if NRFX_CHECK(NRFX_WDT_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_WDT0_ENABLED)   || NRFX_CHECK(NRFX_WDT1_ENABLED)   || \
-      NRFX_CHECK(NRFX_WDT130_ENABLED) || NRFX_CHECK(NRFX_WDT131_ENABLED) || \
-      NRFX_CHECK(NRFX_WDT132_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_WDT, _ENABLED)
 #error "No enabled WDT instances. Check <nrfx_config.h>."
 #endif
 
@@ -158,7 +156,7 @@ void nrfx_wdt_channel_feed(nrfx_wdt_t const * p_instance, nrfx_wdt_channel_id ch
 }
 
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
-static void irq_handler(NRF_WDT_Type * p_reg, uint32_t instance_id)
+static void irq_handler(NRF_WDT_Type * p_reg, wdt_control_block_t * p_cb)
 {
     /* Clearing timeout event also causes request status register to be cleared, so read it
      * before clearing. */
@@ -169,40 +167,11 @@ static void irq_handler(NRF_WDT_Type * p_reg, uint32_t instance_id)
 
     if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_TIMEOUT))
     {
-        m_cb[instance_id].wdt_event_handler(requests);
+        p_cb->wdt_event_handler(requests);
     }
 }
 
-#if NRFX_CHECK(NRFX_WDT0_ENABLED)
-void nrfx_wdt_0_irq_handler(void)
-{
-    irq_handler(NRF_WDT0, NRFX_WDT0_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_WDT1_ENABLED)
-void nrfx_wdt_1_irq_handler(void)
-{
-    irq_handler(NRF_WDT1, NRFX_WDT1_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_WDT130_ENABLED)
-void nrfx_wdt_130_irq_handler(void)
-{
-    irq_handler(NRF_WDT130, NRFX_WDT130_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_WDT131_ENABLED)
-void nrfx_wdt_131_irq_handler(void)
-{
-    irq_handler(NRF_WDT131, NRFX_WDT131_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_WDT132_ENABLED)
-void nrfx_wdt_132_irq_handler(void)
-{
-    irq_handler(NRF_WDT132, NRFX_WDT132_INST_IDX);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(WDT, wdt)
 
 #endif // !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
 

@@ -4,19 +4,7 @@
 
 #if NRFX_CHECK(NRFX_SPIS_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_SPIS0_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS1_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS2_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS3_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS120_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS130_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS131_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS132_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS133_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS134_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS135_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS136_ENABLED) || \
-      NRFX_CHECK(NRFX_SPIS137_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_SPIS, _ENABLED)
 #error "No enabled SPIS instances. Check <nrfx_config.h>."
 #endif
 
@@ -31,103 +19,12 @@
     (event == NRF_SPIS_EVENT_END      ? "NRF_SPIS_EVENT_END"      : \
                                         "UNKNOWN ERROR"))
 
-#define SPISX_LENGTH_VALIDATE(peripheral, drv_inst_idx, rx_len, tx_len) \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, rx_len, tx_len))
-
-#if NRFX_CHECK(NRFX_SPIS0_ENABLED)
-#define SPIS0_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS0, __VA_ARGS__)
-#else
-#define SPIS0_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS1_ENABLED)
-#define SPIS1_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS1, __VA_ARGS__)
-#else
-#define SPIS1_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS2_ENABLED)
-#define SPIS2_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS2, __VA_ARGS__)
-#else
-#define SPIS2_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS3_ENABLED)
-#define SPIS3_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS3, __VA_ARGS__)
-#else
-#define SPIS3_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS120_ENABLED)
-#define SPIS120_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS120, __VA_ARGS__)
-#else
-#define SPIS120_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS130_ENABLED)
-#define SPIS130_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS130, __VA_ARGS__)
-#else
-#define SPIS130_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS131_ENABLED)
-#define SPIS131_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS131, __VA_ARGS__)
-#else
-#define SPIS131_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS132_ENABLED)
-#define SPIS132_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS132, __VA_ARGS__)
-#else
-#define SPIS132_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS133_ENABLED)
-#define SPIS133_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS133, __VA_ARGS__)
-#else
-#define SPIS133_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS134_ENABLED)
-#define SPIS134_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS134, __VA_ARGS__)
-#else
-#define SPIS134_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS135_ENABLED)
-#define SPIS135_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS135, __VA_ARGS__)
-#else
-#define SPIS135_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS136_ENABLED)
-#define SPIS136_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS136, __VA_ARGS__)
-#else
-#define SPIS136_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_SPIS137_ENABLED)
-#define SPIS137_LENGTH_VALIDATE(...)  SPISX_LENGTH_VALIDATE(SPIS137, __VA_ARGS__)
-#else
-#define SPIS137_LENGTH_VALIDATE(...)  0
-#endif
+#define SPISX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, rx_len, tx_len) \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), rx_len, tx_len))
 
 #define SPIS_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)    \
-    (SPIS0_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIS1_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIS2_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIS3_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)   || \
-     SPIS120_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS130_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS131_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS132_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS133_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS134_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS135_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS136_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len) || \
-     SPIS137_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len))
-
+        (NRFX_FOREACH_ENABLED(SPIS, SPISX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, rx_len, tx_len))
 
 #if NRFX_CHECK(NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED)
 #include <nrfx_gpiote.h>
@@ -299,45 +196,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPIS_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_SPIS0_ENABLED)
-        nrfx_spis_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS1_ENABLED)
-        nrfx_spis_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS2_ENABLED)
-        nrfx_spis_2_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS3_ENABLED)
-        nrfx_spis_3_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS120_ENABLED)
-        nrfx_spis_120_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS130_ENABLED)
-        nrfx_spis_130_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS131_ENABLED)
-        nrfx_spis_131_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS132_ENABLED)
-        nrfx_spis_132_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS133_ENABLED)
-        nrfx_spis_133_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS134_ENABLED)
-        nrfx_spis_134_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS135_ENABLED)
-        nrfx_spis_135_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS136_ENABLED)
-        nrfx_spis_136_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPIS137_ENABLED)
-        nrfx_spis_137_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(SPIS, spis)
     };
     if (nrfx_prs_acquire(p_spis,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -560,7 +419,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * p_instance,
     return err_code;
 }
 
-static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
+static void irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
 {
     // @note: as multiple events can be pending for processing, the correct event processing order
     // is as follows:
@@ -609,83 +468,6 @@ static void spis_irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
     }
 }
 
-#if NRFX_CHECK(NRFX_SPIS0_ENABLED)
-void nrfx_spis_0_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS0, &m_cb[NRFX_SPIS0_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS1_ENABLED)
-void nrfx_spis_1_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS1, &m_cb[NRFX_SPIS1_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS2_ENABLED)
-void nrfx_spis_2_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS2, &m_cb[NRFX_SPIS2_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS3_ENABLED)
-void nrfx_spis_3_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS3, &m_cb[NRFX_SPIS3_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS120_ENABLED)
-void nrfx_spis_120_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS120, &m_cb[NRFX_SPIS120_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS130_ENABLED)
-void nrfx_spis_130_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS130, &m_cb[NRFX_SPIS130_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS131_ENABLED)
-void nrfx_spis_131_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS131, &m_cb[NRFX_SPIS131_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS132_ENABLED)
-void nrfx_spis_132_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS132, &m_cb[NRFX_SPIS132_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS133_ENABLED)
-void nrfx_spis_133_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS133, &m_cb[NRFX_SPIS133_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS134_ENABLED)
-void nrfx_spis_134_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS134, &m_cb[NRFX_SPIS134_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS135_ENABLED)
-void nrfx_spis_135_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS135, &m_cb[NRFX_SPIS135_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS136_ENABLED)
-void nrfx_spis_136_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS136, &m_cb[NRFX_SPIS136_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_SPIS137_ENABLED)
-void nrfx_spis_137_irq_handler(void)
-{
-    spis_irq_handler(NRF_SPIS137, &m_cb[NRFX_SPIS137_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(SPIS, spis)
 
 #endif // NRFX_CHECK(NRFX_SPIS_ENABLED)

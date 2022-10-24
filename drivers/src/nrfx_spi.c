@@ -4,8 +4,7 @@
 
 #if NRFX_CHECK(NRFX_SPI_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_SPI0_ENABLED) || NRFX_CHECK(NRFX_SPI1_ENABLED) || \
-      NRFX_CHECK(NRFX_SPI2_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_SPI, _ENABLED)
 #error "No enabled SPI instances. Check <nrfx_config.h>."
 #endif
 
@@ -124,15 +123,7 @@ nrfx_err_t nrfx_spi_init(nrfx_spi_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_SPI_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_SPI0_ENABLED)
-        nrfx_spi_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPI1_ENABLED)
-        nrfx_spi_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_SPI2_ENABLED)
-        nrfx_spi_2_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(SPI, spi)
     };
     if (nrfx_prs_acquire(p_instance->p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -418,25 +409,6 @@ static void irq_handler(NRF_SPI_Type * p_spi, spi_control_block_t * p_cb)
     }
 }
 
-#if NRFX_CHECK(NRFX_SPI0_ENABLED)
-void nrfx_spi_0_irq_handler(void)
-{
-    irq_handler(NRF_SPI0, &m_cb[NRFX_SPI0_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPI1_ENABLED)
-void nrfx_spi_1_irq_handler(void)
-{
-    irq_handler(NRF_SPI1, &m_cb[NRFX_SPI1_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_SPI2_ENABLED)
-void nrfx_spi_2_irq_handler(void)
-{
-    irq_handler(NRF_SPI2, &m_cb[NRFX_SPI2_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(SPI, spi)
 
 #endif // NRFX_CHECK(NRFX_SPI_ENABLED)

@@ -4,7 +4,7 @@
 
 #if NRFX_CHECK(NRFX_TWI_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_TWI0_ENABLED) || NRFX_CHECK(NRFX_TWI1_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_TWI, _ENABLED)
 #error "No enabled TWI instances. Check <nrfx_config.h>."
 #endif
 
@@ -162,12 +162,7 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_TWI_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_TWI0_ENABLED)
-        nrfx_twi_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWI1_ENABLED)
-        nrfx_twi_1_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(TWI, twi)
     };
     if (nrfx_prs_acquire(p_instance->p_twi,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -673,7 +668,7 @@ uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance)
     return nrf_twi_event_address_get(p_instance->p_twi, NRF_TWI_EVENT_STOPPED);
 }
 
-static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
+static void irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
 {
     NRFX_ASSERT(p_cb->handler);
 
@@ -746,18 +741,6 @@ static void twi_irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
 
 }
 
-#if NRFX_CHECK(NRFX_TWI0_ENABLED)
-void nrfx_twi_0_irq_handler(void)
-{
-    twi_irq_handler(NRF_TWI0, &m_cb[NRFX_TWI0_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_TWI1_ENABLED)
-void nrfx_twi_1_irq_handler(void)
-{
-    twi_irq_handler(NRF_TWI1, &m_cb[NRFX_TWI1_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(TWI, twi)
 
 #endif // NRFX_CHECK(NRFX_TWI_ENABLED)

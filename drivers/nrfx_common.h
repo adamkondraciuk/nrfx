@@ -136,6 +136,25 @@ extern "C" {
 /** @brief Internal macro used by @ref NRFX_CONCAT_3 to perform the expansion in two steps. */
 #define NRFX_CONCAT_3_(p1, p2, p3)  p1 ## p2 ## p3
 
+/** @brief Create an interrupt handler for all enabled driver instances.
+ *
+ * Macro creates set of function which calls irq_handler function with three parameters:
+ * - peripheral instance register pointer
+ * - pointer to a control block structure associated with the given instance
+ * - provided @p ext_macro called with peripheral name suffix (e.g. 01 for SPIM01)
+ *
+ * Generic interrupt handler function with above mentioned parameters named irq_handler
+ * must be implemented in the driver.
+ *
+ * @note Handlers are using enum which should be generated using @ref NRFX_INSTANCE_ENUM_LIST.
+ *
+ * @param periph_name       Peripheral name, e.g. SPIM.
+ * @param periph_name_small Peripheral name written with small letters, e.g. spim.
+ * @param ext_macro         External macro to be executed for each instance.
+ */
+#define NRFX_INSTANCE_IRQ_HANDLERS_EXT(periph_name, periph_name_small, ext_macro) \
+    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_EXT, (), (), periph_name_small, ext_macro)
+
 /**
  * @brief Macro for computing the absolute value of an integer number.
  *

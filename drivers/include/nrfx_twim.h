@@ -34,42 +34,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_TWIM0_ENABLED)
-    NRFX_TWIM0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM1_ENABLED)
-    NRFX_TWIM1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM2_ENABLED)
-    NRFX_TWIM2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM3_ENABLED)
-    NRFX_TWIM3_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM130_ENABLED)
-    NRFX_TWIM130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM131_ENABLED)
-    NRFX_TWIM131_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM132_ENABLED)
-    NRFX_TWIM132_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM133_ENABLED)
-    NRFX_TWIM133_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM134_ENABLED)
-    NRFX_TWIM134_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM135_ENABLED)
-    NRFX_TWIM135_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM136_ENABLED)
-    NRFX_TWIM136_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIM137_ENABLED)
-    NRFX_TWIM137_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(TWIM)
     NRFX_TWIM_ENABLED_COUNT
 };
 #endif
@@ -387,18 +352,8 @@ NRFX_STATIC_INLINE nrfx_err_t nrfx_twim_bus_recover(uint32_t scl_pin, uint32_t s
 
 /** @} */
 
-void nrfx_twim_0_irq_handler(void);
-void nrfx_twim_1_irq_handler(void);
-void nrfx_twim_2_irq_handler(void);
-void nrfx_twim_3_irq_handler(void);
-void nrfx_twim_130_irq_handler(void);
-void nrfx_twim_131_irq_handler(void);
-void nrfx_twim_132_irq_handler(void);
-void nrfx_twim_133_irq_handler(void);
-void nrfx_twim_134_irq_handler(void);
-void nrfx_twim_135_irq_handler(void);
-void nrfx_twim_136_irq_handler(void);
-void nrfx_twim_137_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TWIM, twim)
 
 
 #ifdef __cplusplus

@@ -4,9 +4,7 @@
 
 #if NRFX_CHECK(NRFX_RTC_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_RTC0_ENABLED) || NRFX_CHECK(NRFX_RTC1_ENABLED)   || \
-      NRFX_CHECK(NRFX_RTC2_ENABLED) || NRFX_CHECK(NRFX_RTC130_ENABLED) || \
-      NRFX_CHECK(NRFX_RTC131_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_RTC, _ENABLED)
 #error "No enabled RTC instances. Check <nrfx_config.h>."
 #endif
 
@@ -28,13 +26,13 @@
 /** @brief RTC driver instance control block structure. */
 typedef struct
 {
-    nrfx_drv_state_t state;        /**< Instance state. */
-    bool             reliable;     /**< Reliable mode flag. */
-    uint8_t          tick_latency; /**< Maximum length of interrupt handler in ticks (max 7.7 ms). */
+    nrfx_rtc_handler_t handler;      /**< Instance event handler. */
+    nrfx_drv_state_t   state;        /**< Instance state. */
+    bool               reliable;     /**< Reliable mode flag. */
+    uint8_t            tick_latency; /**< Maximum length of interrupt handler in ticks (max 7.7 ms). */
 } nrfx_rtc_cb_t;
 
 // User callbacks local storage.
-static nrfx_rtc_handler_t m_handlers[NRFX_RTC_ENABLED_COUNT];
 static nrfx_rtc_cb_t      m_cb[NRFX_RTC_ENABLED_COUNT];
 
 nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
@@ -45,7 +43,7 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
     NRFX_ASSERT(handler);
     nrfx_err_t err_code;
 
-    m_handlers[p_instance->instance_id] = handler;
+    m_cb[p_instance->instance_id].handler = handler;
 
     if (m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -227,9 +225,9 @@ uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * p_instance)
     return ticks;
 }
 
-static void irq_handler(NRF_RTC_Type * p_reg,
-                        uint32_t       instance_id,
-                        uint32_t       channel_count)
+static void irq_handler(NRF_RTC_Type  * p_reg,
+                        nrfx_rtc_cb_t * p_cb,
+                        uint32_t        channel_count)
 {
     uint32_t evt_to_process = NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_TICK)     |
                               NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_OVERFLOW) |
@@ -247,63 +245,24 @@ static void irq_handler(NRF_RTC_Type * p_reg,
             (event_mask & NRFY_EVENT_TO_INT_BITMASK(event)))
         {
             nrfy_rtc_event_disable(p_reg, NRFY_EVENT_TO_INT_BITMASK(event));
-            NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
-                           EVT_TO_STR(event),
-                           (unsigned long)instance_id);
-            m_handlers[instance_id]((nrfx_rtc_int_type_t)i);
+            NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(event), p_reg);
+            p_cb->handler((nrfx_rtc_int_type_t)i);
         }
     }
 
     if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_TICK))
     {
-        NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
-                       EVT_TO_STR(event),
-                       (unsigned long)instance_id);
-        m_handlers[instance_id](NRFX_RTC_INT_TICK);
+        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(event), p_reg);
+        p_cb->handler(NRFX_RTC_INT_TICK);
     }
 
     if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_OVERFLOW))
     {
-        NRFX_LOG_DEBUG("Event: %s, instance id: %lu.",
-                       EVT_TO_STR(event),
-                       (unsigned long)instance_id);
-        m_handlers[instance_id](NRFX_RTC_INT_OVERFLOW);
+        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(event), p_reg);
+        p_cb->handler(NRFX_RTC_INT_OVERFLOW);
     }
 }
 
-#if NRFX_CHECK(NRFX_RTC0_ENABLED)
-void nrfx_rtc_0_irq_handler(void)
-{
-    irq_handler(NRF_RTC0, NRFX_RTC0_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(0));
-}
-#endif
-
-#if NRFX_CHECK(NRFX_RTC1_ENABLED)
-void nrfx_rtc_1_irq_handler(void)
-{
-    irq_handler(NRF_RTC1, NRFX_RTC1_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(1));
-}
-#endif
-
-#if NRFX_CHECK(NRFX_RTC2_ENABLED)
-void nrfx_rtc_2_irq_handler(void)
-{
-    irq_handler(NRF_RTC2, NRFX_RTC2_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(2));
-}
-#endif
-
-#if NRFX_CHECK(NRFX_RTC130_ENABLED)
-void nrfx_rtc_130_irq_handler(void)
-{
-    irq_handler(NRF_RTC130, NRFX_RTC130_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(130));
-}
-#endif
-
-#if NRFX_CHECK(NRFX_RTC131_ENABLED)
-void nrfx_rtc_131_irq_handler(void)
-{
-    irq_handler(NRF_RTC131, NRFX_RTC131_INST_IDX, NRF_RTC_CC_CHANNEL_COUNT(131));
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS_EXT(RTC, rtc, NRF_RTC_CC_CHANNEL_COUNT)
 
 #endif // NRFX_CHECK(NRFX_RTC_ENABLED)

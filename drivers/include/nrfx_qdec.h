@@ -40,18 +40,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_QDEC0_ENABLED)
-    NRFX_QDEC0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_QDEC1_ENABLED)
-    NRFX_QDEC1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_QDEC130_ENABLED)
-    NRFX_QDEC130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_QDEC131_ENABLED)
-    NRFX_QDEC131_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(QDEC)
     NRFX_QDEC_ENABLED_COUNT
 };
 #endif
@@ -239,10 +228,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_qdec_event_address_get(nrfx_qdec_t const * p_in
 
 /** @} */
 
-void nrfx_qdec_0_irq_handler(void);
-void nrfx_qdec_1_irq_handler(void);
-void nrfx_qdec_130_irq_handler(void);
-void nrfx_qdec_131_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(QDEC, qdec)
 
 #ifdef __cplusplus
 }

@@ -27,45 +27,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_SPIS0_ENABLED)
-    NRFX_SPIS0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS1_ENABLED)
-    NRFX_SPIS1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS2_ENABLED)
-    NRFX_SPIS2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS3_ENABLED)
-    NRFX_SPIS3_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS120_ENABLED)
-    NRFX_SPIS120_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS130_ENABLED)
-    NRFX_SPIS130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS131_ENABLED)
-    NRFX_SPIS131_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS132_ENABLED)
-    NRFX_SPIS132_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS133_ENABLED)
-    NRFX_SPIS133_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS134_ENABLED)
-    NRFX_SPIS134_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS135_ENABLED)
-    NRFX_SPIS135_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS136_ENABLED)
-    NRFX_SPIS136_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_SPIS137_ENABLED)
-    NRFX_SPIS137_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(SPIS)
     NRFX_SPIS_ENABLED_COUNT
 };
 #endif
@@ -278,21 +240,8 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * p_instance,
 
 /** @} */
 
-
-void nrfx_spis_0_irq_handler(void);
-void nrfx_spis_1_irq_handler(void);
-void nrfx_spis_2_irq_handler(void);
-void nrfx_spis_3_irq_handler(void);
-void nrfx_spis_120_irq_handler(void);
-void nrfx_spis_130_irq_handler(void);
-void nrfx_spis_131_irq_handler(void);
-void nrfx_spis_132_irq_handler(void);
-void nrfx_spis_133_irq_handler(void);
-void nrfx_spis_134_irq_handler(void);
-void nrfx_spis_135_irq_handler(void);
-void nrfx_spis_136_irq_handler(void);
-void nrfx_spis_137_irq_handler(void);
-
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(SPIS, spis)
 
 #ifdef __cplusplus
 }

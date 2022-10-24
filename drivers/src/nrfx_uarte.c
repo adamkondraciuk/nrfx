@@ -4,19 +4,7 @@
 
 #if NRFX_CHECK(NRFX_UARTE_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_UARTE0_ENABLED)   || \
-      NRFX_CHECK(NRFX_UARTE1_ENABLED)   || \
-      NRFX_CHECK(NRFX_UARTE2_ENABLED)   || \
-      NRFX_CHECK(NRFX_UARTE3_ENABLED)   || \
-      NRFX_CHECK(NRFX_UARTE120_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE130_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE131_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE132_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE133_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE134_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE135_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE136_ENABLED) || \
-      NRFX_CHECK(NRFX_UARTE137_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_UARTE, _ENABLED)
 #error "No enabled UARTE instances. Check <nrfx_config.h>."
 #endif
 
@@ -31,39 +19,12 @@
     (event == NRF_UARTE_EVENT_ERROR ? "NRF_UARTE_EVENT_ERROR" : \
                                       "UNKNOWN EVENT")
 
-#define UARTEX_LENGTH_VALIDATE(peripheral, drv_inst_idx, len1, len2)     \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, len1, len2))
+#define UARTEX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, len1, len2) \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), len1, len2))
 
-#if NRFX_CHECK(NRFX_UARTE0_ENABLED)
-#define UARTE0_LENGTH_VALIDATE(...)  UARTEX_LENGTH_VALIDATE(UARTE0, __VA_ARGS__)
-#else
-#define UARTE0_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_UARTE1_ENABLED)
-#define UARTE1_LENGTH_VALIDATE(...)  UARTEX_LENGTH_VALIDATE(UARTE1, __VA_ARGS__)
-#else
-#define UARTE1_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_UARTE2_ENABLED)
-#define UARTE2_LENGTH_VALIDATE(...)  UARTEX_LENGTH_VALIDATE(UARTE2, __VA_ARGS__)
-#else
-#define UARTE2_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_UARTE3_ENABLED)
-#define UARTE3_LENGTH_VALIDATE(...)  UARTEX_LENGTH_VALIDATE(UARTE3, __VA_ARGS__)
-#else
-#define UARTE3_LENGTH_VALIDATE(...)  0
-#endif
-
-#define UARTE_LENGTH_VALIDATE(drv_inst_idx, length)     \
-    (UARTE0_LENGTH_VALIDATE(drv_inst_idx, length, 0) || \
-     UARTE1_LENGTH_VALIDATE(drv_inst_idx, length, 0) || \
-     UARTE2_LENGTH_VALIDATE(drv_inst_idx, length, 0) || \
-     UARTE3_LENGTH_VALIDATE(drv_inst_idx, length, 0))
+#define UARTE_LENGTH_VALIDATE(drv_inst_idx, len)    \
+        (NRFX_FOREACH_ENABLED(UARTE, UARTEX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, len, 0))
 
 typedef struct
 {
@@ -226,45 +187,7 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_UARTE_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_UARTE0_ENABLED)
-        nrfx_uarte_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE1_ENABLED)
-        nrfx_uarte_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE2_ENABLED)
-        nrfx_uarte_2_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE3_ENABLED)
-        nrfx_uarte_3_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE120_ENABLED)
-        nrfx_uarte_120_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE130_ENABLED)
-        nrfx_uarte_130_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE131_ENABLED)
-        nrfx_uarte_131_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE132_ENABLED)
-        nrfx_uarte_132_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE133_ENABLED)
-        nrfx_uarte_133_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE134_ENABLED)
-        nrfx_uarte_134_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE135_ENABLED)
-        nrfx_uarte_135_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE136_ENABLED)
-        nrfx_uarte_136_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_UARTE137_ENABLED)
-        nrfx_uarte_137_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(UARTE, uarte)
     };
     if (nrfx_prs_acquire(p_instance->p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -587,8 +510,7 @@ void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance)
     NRFX_LOG_INFO("RX transaction aborted.");
 }
 
-static void uarte_irq_handler(NRF_UARTE_Type *        p_reg,
-                              uarte_control_block_t * p_cb)
+static void irq_handler(NRF_UARTE_Type * p_reg, uarte_control_block_t * p_cb)
 {
     nrfy_uarte_xfer_desc_t xfer_desc = {
         .p_buffer = p_cb->p_rx_buffer,
@@ -672,83 +594,6 @@ static void uarte_irq_handler(NRF_UARTE_Type *        p_reg,
     }
 }
 
-#if NRFX_CHECK(NRFX_UARTE0_ENABLED)
-void nrfx_uarte_0_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE0, &m_cb[NRFX_UARTE0_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE1_ENABLED)
-void nrfx_uarte_1_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE1, &m_cb[NRFX_UARTE1_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE2_ENABLED)
-void nrfx_uarte_2_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE2, &m_cb[NRFX_UARTE2_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE3_ENABLED)
-void nrfx_uarte_3_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE3, &m_cb[NRFX_UARTE3_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE120_ENABLED)
-void nrfx_uarte_120_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE120, &m_cb[NRFX_UARTE120_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE130_ENABLED)
-void nrfx_uarte_130_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE130, &m_cb[NRFX_UARTE130_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE131_ENABLED)
-void nrfx_uarte_131_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE131, &m_cb[NRFX_UARTE131_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE132_ENABLED)
-void nrfx_uarte_132_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE132, &m_cb[NRFX_UARTE132_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE133_ENABLED)
-void nrfx_uarte_133_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE133, &m_cb[NRFX_UARTE133_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE134_ENABLED)
-void nrfx_uarte_134_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE134, &m_cb[NRFX_UARTE134_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE135_ENABLED)
-void nrfx_uarte_135_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE135, &m_cb[NRFX_UARTE135_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE136_ENABLED)
-void nrfx_uarte_136_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE136, &m_cb[NRFX_UARTE136_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_UARTE137_ENABLED)
-void nrfx_uarte_137_irq_handler(void)
-{
-    uarte_irq_handler(NRF_UARTE137, &m_cb[NRFX_UARTE137_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(UARTE, uarte)
 
 #endif // NRFX_CHECK(NRFX_UARTE_ENABLED)

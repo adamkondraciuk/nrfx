@@ -4,7 +4,7 @@
 
 #if NRFX_CHECK(NRFX_UART_ENABLED)
 
-#if !NRFX_CHECK(NRFX_UART0_ENABLED)
+#if !NRFX_FEATURE_PRESENT(NRFX_UART, _ENABLED)
 #error "No enabled UART instances. Check <nrfx_config.h>."
 #endif
 
@@ -175,9 +175,7 @@ nrfx_err_t nrfx_uart_init(nrfx_uart_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_UART_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_UART0_ENABLED)
-        nrfx_uart_0_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(UART, uart)
     };
     if (nrfx_prs_acquire(p_instance->p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -565,8 +563,7 @@ void nrfx_uart_rx_abort(nrfx_uart_t const * p_instance)
     NRFX_LOG_INFO("RX transaction aborted.");
 }
 
-static void uart_irq_handler(NRF_UART_Type *        p_uart,
-                             uart_control_block_t * p_cb)
+static void irq_handler(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 {
     if (nrf_uart_int_enable_check(p_uart, NRF_UART_INT_MASK_ERROR) &&
         nrf_uart_event_check(p_uart, NRF_UART_EVENT_ERROR))
@@ -659,11 +656,6 @@ static void uart_irq_handler(NRF_UART_Type *        p_uart,
     }
 }
 
-#if NRFX_CHECK(NRFX_UART0_ENABLED)
-void nrfx_uart_0_irq_handler(void)
-{
-    uart_irq_handler(NRF_UART0, &m_cb[NRFX_UART0_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(UART, uart)
 
 #endif // NRFX_CHECK(NRFX_UART_ENABLED)

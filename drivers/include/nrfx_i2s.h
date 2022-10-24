@@ -48,15 +48,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_I2S0_ENABLED)
-    NRFX_I2S0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_I2S130_ENABLED)
-    NRFX_I2S130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_I2S131_ENABLED)
-    NRFX_I2S131_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(I2S)
     NRFX_I2S_ENABLED_COUNT
 };
 #endif
@@ -266,10 +258,8 @@ void nrfx_i2s_stop(nrfx_i2s_t const * p_instance);
 
 /** @} */
 
-
-void nrfx_i2s_0_irq_handler(void);
-void nrfx_i2s_130_irq_handler(void);
-void nrfx_i2s_131_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(I2S, i2s)
 
 #ifdef __cplusplus
 }

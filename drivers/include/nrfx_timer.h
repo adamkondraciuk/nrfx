@@ -37,60 +37,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_TIMER0_ENABLED)
-    NRFX_TIMER0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER1_ENABLED)
-    NRFX_TIMER1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER2_ENABLED)
-    NRFX_TIMER2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER3_ENABLED)
-    NRFX_TIMER3_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER4_ENABLED)
-    NRFX_TIMER4_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER020_ENABLED)
-    NRFX_TIMER020_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER021_ENABLED)
-    NRFX_TIMER021_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER022_ENABLED)
-    NRFX_TIMER022_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER120_ENABLED)
-    NRFX_TIMER120_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER121_ENABLED)
-    NRFX_TIMER121_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER130_ENABLED)
-    NRFX_TIMER130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER131_ENABLED)
-    NRFX_TIMER131_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER132_ENABLED)
-    NRFX_TIMER132_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER133_ENABLED)
-    NRFX_TIMER133_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER134_ENABLED)
-    NRFX_TIMER134_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER135_ENABLED)
-    NRFX_TIMER135_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER136_ENABLED)
-    NRFX_TIMER136_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TIMER137_ENABLED)
-    NRFX_TIMER137_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(TIMER)
     NRFX_TIMER_ENABLED_COUNT
 };
 #endif
@@ -435,24 +382,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const *   p_inst
 
 /** @} */
 
-void nrfx_timer_0_irq_handler(void);
-void nrfx_timer_1_irq_handler(void);
-void nrfx_timer_2_irq_handler(void);
-void nrfx_timer_3_irq_handler(void);
-void nrfx_timer_4_irq_handler(void);
-void nrfx_timer_020_irq_handler(void);
-void nrfx_timer_021_irq_handler(void);
-void nrfx_timer_022_irq_handler(void);
-void nrfx_timer_120_irq_handler(void);
-void nrfx_timer_121_irq_handler(void);
-void nrfx_timer_130_irq_handler(void);
-void nrfx_timer_131_irq_handler(void);
-void nrfx_timer_132_irq_handler(void);
-void nrfx_timer_133_irq_handler(void);
-void nrfx_timer_134_irq_handler(void);
-void nrfx_timer_135_irq_handler(void);
-void nrfx_timer_136_irq_handler(void);
-void nrfx_timer_137_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TIMER, timer)
 
 #ifdef __cplusplus
 }

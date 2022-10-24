@@ -107,6 +107,28 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
                 &m_cb[NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)]); \
 }
 
+/* Macro used for generation of irq handlers with addtional parameter.
+ *
+ * Additional parameter passed to the interrupt handler is a value returned by
+ * @p ext_macro. One of the use cases is a peripheral with variable number of
+ * channels (e.g. RTC or TIMER).
+ *
+ * Macro is using enum created by _NRFX_INSG_ENUM macro.
+ *
+ * @param periph_name       Peripheral name, e.g. SPIM.
+ * @param prefix            Prefix appended to the index.
+ * @param i                 Index.
+ * @param periph_name_small Peripheral name in small letters, e.g. spim.
+ * @param ext_macro         Macro called as third parameter of the handler.
+ */
+#define _NRFX_IRQ_HANDLER_EXT(periph_name, prefix, i, periph_name_small, ext_macro) \
+void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
+{ \
+    irq_handler(NRFX_CONCAT(NRF_, periph_name, prefix, i), \
+                &m_cb[NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)], \
+                ext_macro(NRFX_CONCAT(prefix, i))); \
+}
+
 #define _NRFX_IRQ_HANDLER_LIST(periph_name, prefix, i, periph_name_small) \
     NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler),
 

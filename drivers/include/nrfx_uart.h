@@ -26,9 +26,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_UART0_ENABLED)
-    NRFX_UART0_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(UART)
     NRFX_UART_ENABLED_COUNT
 };
 #endif
@@ -377,9 +375,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_in
 
 /** @} */
 
-
-void nrfx_uart_0_irq_handler(void);
-
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(UART, uart)
 
 #ifdef __cplusplus
 }

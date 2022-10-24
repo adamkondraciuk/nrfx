@@ -27,42 +27,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_TWIS0_ENABLED)
-    NRFX_TWIS0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS1_ENABLED)
-    NRFX_TWIS1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS2_ENABLED)
-    NRFX_TWIS2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS3_ENABLED)
-    NRFX_TWIS3_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS130_ENABLED)
-    NRFX_TWIS130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS131_ENABLED)
-    NRFX_TWIS131_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS132_ENABLED)
-    NRFX_TWIS132_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS133_ENABLED)
-    NRFX_TWIS133_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS134_ENABLED)
-    NRFX_TWIS134_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS135_ENABLED)
-    NRFX_TWIS135_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS136_ENABLED)
-    NRFX_TWIS136_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_TWIS137_ENABLED)
-    NRFX_TWIS137_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(TWIS)
     NRFX_TWIS_ENABLED_COUNT
 };
 #endif
@@ -421,19 +386,8 @@ NRFX_STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance)
 
 /** @} */
 
-
-void nrfx_twis_0_irq_handler(void);
-void nrfx_twis_1_irq_handler(void);
-void nrfx_twis_2_irq_handler(void);
-void nrfx_twis_3_irq_handler(void);
-void nrfx_twis_130_irq_handler(void);
-void nrfx_twis_131_irq_handler(void);
-void nrfx_twis_132_irq_handler(void);
-void nrfx_twis_133_irq_handler(void);
-void nrfx_twis_134_irq_handler(void);
-void nrfx_twis_135_irq_handler(void);
-void nrfx_twis_136_irq_handler(void);
-void nrfx_twis_137_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TWIS, twis)
 
 
 #ifdef __cplusplus

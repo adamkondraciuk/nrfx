@@ -26,45 +26,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_UARTE0_ENABLED)
-    NRFX_UARTE0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE1_ENABLED)
-    NRFX_UARTE1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE2_ENABLED)
-    NRFX_UARTE2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE3_ENABLED)
-    NRFX_UARTE3_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE120_ENABLED)
-    NRFX_UARTE120_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE130_ENABLED)
-    NRFX_UARTE130_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE131_ENABLED)
-    NRFX_UARTE131_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE132_ENABLED)
-    NRFX_UARTE132_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE133_ENABLED)
-    NRFX_UARTE133_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE134_ENABLED)
-    NRFX_UARTE134_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE135_ENABLED)
-    NRFX_UARTE135_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE136_ENABLED)
-    NRFX_UARTE136_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_UARTE137_ENABLED)
-    NRFX_UARTE137_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(UARTE)
     NRFX_UARTE_ENABLED_COUNT
 };
 #endif
@@ -412,20 +374,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_
 
 /** @} */
 
-
-void nrfx_uarte_0_irq_handler(void);
-void nrfx_uarte_1_irq_handler(void);
-void nrfx_uarte_2_irq_handler(void);
-void nrfx_uarte_3_irq_handler(void);
-void nrfx_uarte_120_irq_handler(void);
-void nrfx_uarte_130_irq_handler(void);
-void nrfx_uarte_131_irq_handler(void);
-void nrfx_uarte_132_irq_handler(void);
-void nrfx_uarte_133_irq_handler(void);
-void nrfx_uarte_134_irq_handler(void);
-void nrfx_uarte_135_irq_handler(void);
-void nrfx_uarte_136_irq_handler(void);
-void nrfx_uarte_137_irq_handler(void);
+/* Declare interrupt handlers for enabled instances. */
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(UARTE, uarte)
 
 #ifdef __cplusplus
 }

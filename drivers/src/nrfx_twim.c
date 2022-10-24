@@ -4,18 +4,7 @@
 
 #if NRFX_CHECK(NRFX_TWIM_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_TWIM0_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIM1_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIM2_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIM3_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIM130_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM131_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM132_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM133_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM134_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM135_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM136_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIM137_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_TWIM, _ENABLED)
 #error "No enabled TWIM instances. Check <nrfx_config.h>."
 #endif
 
@@ -58,39 +47,12 @@
                                                   (_drive),                   \
                                                   NRF_GPIO_PIN_NOSENSE)
 
-#define TWIMX_LENGTH_VALIDATE(peripheral, drv_inst_idx, len1, len2)     \
-    (((drv_inst_idx) == NRFX_CONCAT_3(NRFX_, peripheral, _INST_IDX)) && \
-     NRFX_EASYDMA_LENGTH_VALIDATE(peripheral, len1, len2))
+#define TWIMX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, len1, len2) \
+    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
+     NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), len1, len2))
 
-#if NRFX_CHECK(NRFX_TWIM0_ENABLED)
-#define TWIM0_LENGTH_VALIDATE(...)  TWIMX_LENGTH_VALIDATE(TWIM0, __VA_ARGS__)
-#else
-#define TWIM0_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_TWIM1_ENABLED)
-#define TWIM1_LENGTH_VALIDATE(...)  TWIMX_LENGTH_VALIDATE(TWIM1, __VA_ARGS__)
-#else
-#define TWIM1_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_TWIM2_ENABLED)
-#define TWIM2_LENGTH_VALIDATE(...)  TWIMX_LENGTH_VALIDATE(TWIM2, __VA_ARGS__)
-#else
-#define TWIM2_LENGTH_VALIDATE(...)  0
-#endif
-
-#if NRFX_CHECK(NRFX_TWIM3_ENABLED)
-#define TWIM3_LENGTH_VALIDATE(...)  TWIMX_LENGTH_VALIDATE(TWIM3, __VA_ARGS__)
-#else
-#define TWIM3_LENGTH_VALIDATE(...)  0
-#endif
-
-#define TWIM_LENGTH_VALIDATE(drv_inst_idx, len1, len2)  \
-    (TWIM0_LENGTH_VALIDATE(drv_inst_idx, len1, len2) || \
-     TWIM1_LENGTH_VALIDATE(drv_inst_idx, len1, len2) || \
-     TWIM2_LENGTH_VALIDATE(drv_inst_idx, len1, len2) || \
-     TWIM3_LENGTH_VALIDATE(drv_inst_idx, len1, len2))
+#define TWIM_LENGTH_VALIDATE(drv_inst_idx, len1, len2)    \
+        (NRFX_FOREACH_ENABLED(TWIM, TWIMX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, len1, len2))
 
 // Control block - driver instance local data.
 typedef struct
@@ -265,42 +227,7 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_TWIM_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_TWIM0_ENABLED)
-        nrfx_twim_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM1_ENABLED)
-        nrfx_twim_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM2_ENABLED)
-        nrfx_twim_2_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM3_ENABLED)
-        nrfx_twim_3_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM130_ENABLED)
-        nrfx_twim_130_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM131_ENABLED)
-        nrfx_twim_131_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM132_ENABLED)
-        nrfx_twim_132_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM133_ENABLED)
-        nrfx_twim_133_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM134_ENABLED)
-        nrfx_twim_134_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM135_ENABLED)
-        nrfx_twim_135_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM136_ENABLED)
-        nrfx_twim_136_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIM137_ENABLED)
-        nrfx_twim_137_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(TWIM, twim)
     };
     if (nrfx_prs_acquire(p_instance->p_twim,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -658,7 +585,7 @@ uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance)
     return nrfy_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
 }
 
-static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb)
+static void irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb)
 {
     nrfy_twim_xfer_desc_t * p_xfer = p_cb->xfer_desc.type == NRFX_TWIM_XFER_RX ?
                             &p_cb->xfer_desc.primary_buffer : &p_cb->xfer_desc.secondary_buffer;
@@ -832,78 +759,6 @@ static void twim_irq_handler(NRF_TWIM_Type * p_twim, twim_control_block_t * p_cb
     }
 }
 
-#if NRFX_CHECK(NRFX_TWIM0_ENABLED)
-void nrfx_twim_0_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM0, &m_cb[NRFX_TWIM0_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM1_ENABLED)
-void nrfx_twim_1_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM1, &m_cb[NRFX_TWIM1_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM2_ENABLED)
-void nrfx_twim_2_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM2, &m_cb[NRFX_TWIM2_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM3_ENABLED)
-void nrfx_twim_3_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM3, &m_cb[NRFX_TWIM3_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM130_ENABLED)
-void nrfx_twim_130_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM130, &m_cb[NRFX_TWIM130_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM131_ENABLED)
-void nrfx_twim_131_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM131, &m_cb[NRFX_TWIM131_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM132_ENABLED)
-void nrfx_twim_132_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM132, &m_cb[NRFX_TWIM132_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM133_ENABLED)
-void nrfx_twim_133_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM133, &m_cb[NRFX_TWIM133_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM134_ENABLED)
-void nrfx_twim_134_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM134, &m_cb[NRFX_TWIM134_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM135_ENABLED)
-void nrfx_twim_135_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM135, &m_cb[NRFX_TWIM135_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM136_ENABLED)
-void nrfx_twim_136_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM136, &m_cb[NRFX_TWIM136_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIM137_ENABLED)
-void nrfx_twim_137_irq_handler(void)
-{
-    twim_irq_handler(NRF_TWIM137, &m_cb[NRFX_TWIM137_INST_IDX]);
-}
-#endif
-
+NRFX_INSTANCE_IRQ_HANDLERS(TWIM, twim)
 
 #endif // NRFX_CHECK(NRFX_TWIM_ENABLED)

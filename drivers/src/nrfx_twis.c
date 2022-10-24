@@ -4,18 +4,7 @@
 
 #if NRFX_CHECK(NRFX_TWIS_ENABLED)
 
-#if !(NRFX_CHECK(NRFX_TWIS0_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIS1_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIS2_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIS3_ENABLED)   || \
-      NRFX_CHECK(NRFX_TWIS130_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS131_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS132_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS133_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS134_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS135_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS136_ENABLED) || \
-      NRFX_CHECK(NRFX_TWIS137_ENABLED))
+#if !NRFX_FEATURE_PRESENT(NRFX_TWIS, _ENABLED)
 #error "No enabled TWIS instances. Check <nrfx_config.h>."
 #endif
 
@@ -223,8 +212,7 @@ static inline void nrfx_twis_process_error(twis_control_block_t * p_cb,
     call_event_handler(p_cb, &evdata);
 }
 
-static void nrfx_twis_state_machine(NRF_TWIS_Type *        p_reg,
-                                    twis_control_block_t * p_cb)
+static void irq_handler(NRF_TWIS_Type * p_reg, twis_control_block_t * p_cb)
 {
     if (!NRFX_TWIS_NO_SYNC_MODE)
     {
@@ -417,7 +405,7 @@ static inline void nrfx_twis_preprocess_status(nrfx_twis_t const * p_instance)
         twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
         if (NULL == p_cb->ev_handler)
         {
-            nrfx_twis_state_machine(p_reg, p_cb);
+            irq_handler(p_reg, p_cb);
         }
     }
 }
@@ -488,42 +476,7 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     static nrfx_irq_handler_t const irq_handlers[NRFX_TWIS_ENABLED_COUNT] = {
-        #if NRFX_CHECK(NRFX_TWIS0_ENABLED)
-        nrfx_twis_0_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS1_ENABLED)
-        nrfx_twis_1_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS2_ENABLED)
-        nrfx_twis_2_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS3_ENABLED)
-        nrfx_twis_3_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS130_ENABLED)
-        nrfx_twis_130_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS131_ENABLED)
-        nrfx_twis_131_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS132_ENABLED)
-        nrfx_twis_132_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS133_ENABLED)
-        nrfx_twis_133_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS134_ENABLED)
-        nrfx_twis_134_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS135_ENABLED)
-        nrfx_twis_135_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS136_ENABLED)
-        nrfx_twis_136_irq_handler,
-        #endif
-        #if NRFX_CHECK(NRFX_TWIS137_ENABLED)
-        nrfx_twis_137_irq_handler,
-        #endif
+        NRFX_INSTANCE_IRQ_HANDLERS_LIST(TWIS, twis)
     };
     if (nrfx_prs_acquire(p_reg,
             irq_handlers[p_instance->drv_inst_idx]) != NRFX_SUCCESS)
@@ -859,78 +812,6 @@ bool nrfx_twis_is_pending_rx(nrfx_twis_t const * p_instance)
     return NRFX_TWIS_SUBSTATE_WRITE_PENDING == p_cb->substate;
 }
 
-
-#if NRFX_CHECK(NRFX_TWIS0_ENABLED)
-void nrfx_twis_0_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS0, &m_cb[NRFX_TWIS0_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS1_ENABLED)
-void nrfx_twis_1_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS1, &m_cb[NRFX_TWIS1_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS2_ENABLED)
-void nrfx_twis_2_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS2, &m_cb[NRFX_TWIS2_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS3_ENABLED)
-void nrfx_twis_3_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS3, &m_cb[NRFX_TWIS3_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS130_ENABLED)
-void nrfx_twis_130_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS130, &m_cb[NRFX_TWIS130_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS131_ENABLED)
-void nrfx_twis_131_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS131, &m_cb[NRFX_TWIS131_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS132_ENABLED)
-void nrfx_twis_132_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS132, &m_cb[NRFX_TWIS132_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS133_ENABLED)
-void nrfx_twis_133_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS133, &m_cb[NRFX_TWIS133_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS134_ENABLED)
-void nrfx_twis_134_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS134, &m_cb[NRFX_TWIS134_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS135_ENABLED)
-void nrfx_twis_135_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS135, &m_cb[NRFX_TWIS135_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS136_ENABLED)
-void nrfx_twis_136_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS136, &m_cb[NRFX_TWIS136_INST_IDX]);
-}
-#endif
-#if NRFX_CHECK(NRFX_TWIS137_ENABLED)
-void nrfx_twis_137_irq_handler(void)
-{
-    nrfx_twis_state_machine(NRF_TWIS137, &m_cb[NRFX_TWIS137_INST_IDX]);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(TWIS, twis)
 
 #endif // NRFX_CHECK(NRFX_TWIS_ENABLED)

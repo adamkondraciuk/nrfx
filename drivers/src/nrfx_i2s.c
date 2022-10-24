@@ -421,10 +421,9 @@ void nrfx_i2s_stop(nrfx_i2s_t const * p_instance)
 #endif
 }
 
-static void irq_handler(NRF_I2S_Type * p_reg, uint32_t drv_inst_idx)
+static void irq_handler(NRF_I2S_Type * p_reg, nrfx_i2s_cb_t * p_cb)
 {
     uint32_t event_mask;
-    nrfx_i2s_cb_t * p_cb = &m_cb[drv_inst_idx];
     nrfy_i2s_xfer_desc_t xfer = {
         .p_buffers   = &p_cb->current_buffers,
         .buffer_size = p_cb->buffer_size,
@@ -520,23 +519,6 @@ static void irq_handler(NRF_I2S_Type * p_reg, uint32_t drv_inst_idx)
     }
 }
 
-#if NRFX_CHECK(NRFX_I2S0_ENABLED)
-void nrfx_i2s_0_irq_handler(void)
-{
-    irq_handler(NRF_I2S0, NRFX_I2S0_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_I2S130_ENABLED)
-void nrfx_i2s_130_irq_handler(void)
-{
-    irq_handler(NRF_I2S130, NRFX_I2S130_INST_IDX);
-}
-#endif
-#if NRFX_CHECK(NRFX_I2S131_ENABLED)
-void nrfx_i2s_131_irq_handler(void)
-{
-    irq_handler(NRF_I2S131, NRFX_I2S131_INST_IDX);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(I2S, i2s)
 
 #endif // NRFX_CHECK(NRFX_I2S_ENABLED)
