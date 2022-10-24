@@ -64,7 +64,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #ifndef __WEAK
         #define __WEAK              __weak
     #endif
-
+    
     #ifndef __ALIGN
         #define __ALIGN(n)          __align(n)
     #endif
@@ -78,6 +78,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 
     #define GET_SP()                __current_sp()
+
+    #ifndef __DEPRECATED            
+        #define __DEPRECATED(msg)   __attribute__((deprecated(msg)))
+    #endif
 
     #ifndef NRF_STATIC_ASSERT
         #define NRF_STATIC_ASSERT(cond, msg) \
@@ -111,6 +115,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 
     #define GET_SP()                __current_sp()
+
+    #ifndef __DEPRECATED            
+        #define __DEPRECATED(msg)   __attribute__((deprecated(msg)))
+    #endif
 
     #ifndef NRF_STATIC_ASSERT
         #ifdef __cplusplus
@@ -160,6 +168,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     
     #define GET_SP()                __get_SP()
 
+    #ifndef __DEPRECATED            
+        #define __DEPRECATED(msg)   __attribute__((deprecated(msg)))
+    #endif
+
     #ifndef NRF_STATIC_ASSERT
         #define NRF_STATIC_ASSERT(cond, msg) static_assert(cond, msg)
     #endif
@@ -191,6 +203,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 
     #define GET_SP()                gcc_current_sp()
+
+    #ifndef __DEPRECATED            
+        #define __DEPRECATED(msg)   __attribute__((deprecated(msg)))
+    #endif
 
     static inline unsigned int gcc_current_sp(void)
     {
@@ -236,6 +252,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 
     #define GET_SP()                __get_MSP()
+
+    #ifndef __DEPRECATED            
+        #define __DEPRECATED(msg)
+    #endif
 
     #ifndef NRF_STATIC_ASSERT
         #define NRF_STATIC_ASSERT(cond, msg) static_assert(cond, msg)

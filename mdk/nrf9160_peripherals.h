@@ -68,11 +68,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
 
 /* Distributed  Peripheral to Peripheral Interconnect */
-#define DPPI_PRESENT
-#define DPPI_COUNT 1
+#define DPPIC_PRESENT
+#define DPPIC_COUNT 1
 
-#define DPPI_CH_NUM 16
-#define DPPI_GROUP_NUM 6
+#define DPPIC_CH_NUM 16
+#define DPPIC_GROUP_NUM 6
 
 /* Event Generator Unit */
 #define EGU_PRESENT
