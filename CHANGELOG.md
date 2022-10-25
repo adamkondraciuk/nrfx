@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [2.10.0] - 2022-10-24
+## [2.10.0] - 2022-10-25
 ### Added
 - Added NRFX_CONFIG_API_VER_2_9 and NRFX_CONFIG_API_VER_2_10 symbols that guard API-breaking changes. Deprecated API is used by default.
 - Added new signature for the event handler in the IPC driver that accepts event index instead of event bitmask. The previous signature is deprecated.
