@@ -294,12 +294,12 @@ void nrfx_clock_disable(void)
     {
         NRFX_IRQ_DISABLE(nrfx_get_irq_number(NRF_CLOCK));
     }
-    nrf_clock_int_disable(NRF_CLOCK, CLOCK_INTENSET_HFCLKSTARTED_Msk |
-                                     CLOCK_INTENSET_LFCLKSTARTED_Msk |
+    nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_HF_STARTED_MASK |
+                                     NRF_CLOCK_INT_LF_STARTED_MASK |
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
-                                     CLOCK_INTENSET_DONE_Msk |
+                                     NRF_CLOCK_INT_DONE_MASK |
 #if NRF_HAS_CALIBRATION_TIMER
-                                     CLOCK_INTENSET_CTTO_Msk |
+                                     NRF_CLOCK_INT_CTTO_MASK |
 #endif
 #endif // NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
                           0);
@@ -342,7 +342,11 @@ void nrfx_clock_start(nrf_clock_domain_t domain)
                 else if (nrf_clock_start_task_check(NRF_CLOCK, NRF_CLOCK_DOMAIN_LFCLK))
                 {
                     // LF clock is not active yet but was started already. Inspect its source.
+#if NRF_CLOCK_HAS_XO
+                    lfclksrc = nrf_clock_lf_actv_src_get(NRF_CLOCK);
+#else
                     lfclksrc = nrf_clock_lf_srccopy_get(NRF_CLOCK);
+#endif
                     if (clock_lfclksrc_tweak(&lfclksrc))
                     {
                         // LF clock was started already and the configured source
