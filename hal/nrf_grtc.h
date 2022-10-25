@@ -20,6 +20,27 @@ extern "C" {
  *         1 MHz system counter (marked as 'SYSCOUNTER').
  */
 
+#if NRFX_CHECK(GRTC_PWMREGS) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC has PWM registers. */
+#define NRF_GRTC_HAS_PWM 1
+#else
+#define NRF_GRTC_HAS_PWM 0
+#endif
+
+#if NRFX_CHECK(GRTC_CLKOUTREG) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC has clock output registers. */
+#define NRF_GRTC_HAS_CLKOUT 1
+#else
+#define NRF_GRTC_HAS_CLKOUT 0
+#endif
+
+#if NRFX_CHECK(GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC has has multiple SYSCOUNTER registers. */
+#define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 1
+#else
+#define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
+#endif
+
 /** @brief Interrupts INTEN register definition. */
 #define GRTC_INTEN        NRFX_CONCAT_2(INTEN, NRF_GRTC_IRQ_GROUP)
 /** @brief Interrupts INTENSET register definition. */
@@ -70,6 +91,10 @@ typedef enum
     NRF_GRTC_TASK_START      = offsetof(NRF_GRTC_Type, TASKS_START),       /**< Start. */
     NRF_GRTC_TASK_STOP       = offsetof(NRF_GRTC_Type, TASKS_STOP),        /**< Stop. */
     NRF_GRTC_TASK_CLEAR      = offsetof(NRF_GRTC_Type, TASKS_CLEAR),       /**< Clear. */
+#if NRF_GRTC_HAS_PWM
+    NRF_GRTC_TASK_PWM_START  = offsetof(NRF_GRTC_Type, TASKS_PWMSTART),    /**< Start the PWM. */
+    NRF_GRTC_TASK_PWM_STOP   = offsetof(NRF_GRTC_Type, TASKS_PWMSTOP),     /**< Stop the PWM. */
+#endif // NRF_GRTC_HAS_PWM
     NRF_GRTC_TASK_CAPTURE_0  = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[0]),  /**< Capture the counter value on channel 0. */
     NRF_GRTC_TASK_CAPTURE_1  = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[1]),  /**< Capture the counter value on channel 1. */
     NRF_GRTC_TASK_CAPTURE_2  = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[2]),  /**< Capture the counter value on channel 2. */
@@ -96,8 +121,8 @@ typedef enum
     NRF_GRTC_TASK_CAPTURE_21 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[21]), /**< Capture the counter value on channel 21. */
     NRF_GRTC_TASK_CAPTURE_22 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[22]), /**< Capture the counter value on channel 22. */
     NRF_GRTC_TASK_CAPTURE_23 = offsetof(NRF_GRTC_Type, TASKS_CAPTURE[23]), /**< Capture the counter value on channel 23. */
-#endif /* LILIUMSOC1_XXAA */
-#endif /* MOONLIGHT_XXAA */
+#endif // LILIUMSOC1_XXAA
+#endif // MOONLIGHT_XXAA
 } nrf_grtc_task_t;
 
 /** @brief GRTC events. */
@@ -129,11 +154,14 @@ typedef enum
     NRF_GRTC_EVENT_COMPARE_21      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[21]),     /**< Compare 21 event. */
     NRF_GRTC_EVENT_COMPARE_22      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[22]),     /**< Compare 22 event. */
     NRF_GRTC_EVENT_COMPARE_23      = offsetof(NRF_GRTC_Type, EVENTS_COMPARE[23]),     /**< Compare 23 event. */
-#endif /* LILIUMSOC1_XXAA */
-#endif /* MOONLIGHT_XXAA */
+#endif // LILIUMSOC1_XXAA
+#endif // MOONLIGHT_XXAA
     NRF_GRTC_EVENT_RTCOMPARE       = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARE),       /**< RTCOUNTER compare event. */
     NRF_GRTC_EVENT_RTCOMPARESYNC   = offsetof(NRF_GRTC_Type, EVENTS_RTCOMPARESYNC),   /**< RTCOUNTER synchronized compare event. */
     NRF_GRTC_EVENT_SYSCOUNTERVALID = offsetof(NRF_GRTC_Type, EVENTS_SYSCOUNTERVALID), /**< SYSCOUNTER value valid event. */
+#if NRF_GRTC_HAS_PWM
+    NRF_GRTC_EVENT_PWM_PERIOD_END  = offsetof(NRF_GRTC_Type, EVENTS_PWMPERIODEND),    /**< End of PWM period event. */
+#endif // NRF_GRTC_HAS_PWM
 } nrf_grtc_event_t;
 
 /** @brief Types of GRTC shortcuts. */
@@ -178,12 +206,21 @@ typedef enum
     NRF_GRTC_INT_COMPARE21_MASK       = GRTC_INTENSET0_COMPARE21_Msk,       /**< GRTC interrupt from compare event on channel 21. */
     NRF_GRTC_INT_COMPARE22_MASK       = GRTC_INTENSET0_COMPARE22_Msk,       /**< GRTC interrupt from compare event on channel 22. */
     NRF_GRTC_INT_COMPARE23_MASK       = GRTC_INTENSET0_COMPARE23_Msk,       /**< GRTC interrupt from compare event on channel 23. */
-#endif /* LILIUMSOC1_XXAA */
-#endif /* MOONLIGHT_XXAA */
+#endif // LILIUMSOC1_XXAA
+#endif // MOONLIGHT_XXAA
     NRF_GRTC_INT_RTCOMPARE_MASK       = GRTC_INTENSET0_RTCOMPARE_Msk,       /**< GRTC interrupt from RTCOUNTER compare event. */
     NRF_GRTC_INT_RTCOMPARESYNC_MASK   = GRTC_INTENSET0_RTCOMPARESYNC_Msk,   /**< GRTC interrupt from RTCOUNTER synchronized compare event. */
     NRF_GRTC_INT_SYSCOUNTERVALID_MASK = GRTC_INTENSET0_SYSCOUNTERVALID_Msk, /**< GRTC interrupt from SYSCOUNTER valid event. */
 } nrf_grtc_int_mask_t;
+
+#if NRF_GRTC_HAS_CLKOUT
+/** @brief Configuration of clock output. */
+typedef enum
+{
+    NRF_GRTC_CLKOUT_32K  = GRTC_CLKOUT_CLKOUT32K_Msk,  /**< Enable 32K clock output on pin. */
+    NRF_GRTC_CLKOUT_FAST = GRTC_CLKOUT_CLKOUTFAST_Msk, /**< Enable fast clock output on pin. */
+} nrf_grtc_clkout_t;
+#endif
 
 /**
  * @brief Function for setting the compare value of channel for the SYSCOUNTER.
@@ -288,6 +325,28 @@ NRF_STATIC_INLINE void nrf_grtc_int_disable(NRF_GRTC_Type * p_reg, uint32_t mask
  * @return Mask of enabled interrupts.
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_int_enable_check(NRF_GRTC_Type const * p_reg, uint32_t mask);
+
+#if NRF_GRTC_HAS_PWM
+/**
+ * @brief Function for enabling events.
+ *
+ * @note Only specific events can be individually enabled or disabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of event flags to be enabled.
+ */
+NRF_STATIC_INLINE void nrf_grtc_event_enable(NRF_GRTC_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling events.
+ *
+ * @note Only specific events can be individually enabled or disabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of event flags to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_grtc_event_disable(NRF_GRTC_Type * p_reg, uint32_t mask);
+#endif // NRF_GRTC_HAS_PWM
 
 /**
  * @brief Function for retrieving the state of pending interrupts.
@@ -439,10 +498,13 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
  *       whole procedure should be repeated.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index SYSCOUNTER channel index.
+ *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @return Lower part of SYSCOUNTER value.
  */
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg,
+                                                        uint8_t               index);
 
 /**
  * @brief Function for returning the higher 32-bits of SYSCOUNTER value.
@@ -453,20 +515,51 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_
  *       whole procedure should be repeated.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index SYSCOUNTER channel index.
+ *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @return Higher part SYSCOUNTER value.
  */
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg,
+                                                         uint8_t               index);
 
 /**
  * @brief Function for checking whether the lower 32-bits of SYSCOUNTER overflowed after
  *        last execution of @ref nrf_grtc_sys_counter_low_get.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index SYSCOUNTER channel index.
+ *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @retval True if the lower 32-bits of SYSCOUNTER overflowed, false otherwise.
  */
-NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg);
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               index);
+
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+/**
+ * @brief Function for setting the request to keep the specified SYSCOUNTER channel active.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] index  SYSCOUNTER channel index.
+ * @param[in] enable True if the SYSCOUNTER channel is to be kept active, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg,
+                                                       uint8_t         index,
+                                                       bool            enable);
+
+/**
+ * @brief Function for checking whether the specified SYSCOUNTER channel is requested to remain active.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index SYSCOUNTER channel index.
+ *
+ * @retval True if SYSCOUNTER channel is requested to remain active, false otherwise.
+ */
+NRF_STATIC_INLINE
+bool nrf_grtc_sys_counter_index_active_state_request_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               index);
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 
 /**
  * @brief Function for returning the address of an event.
@@ -600,8 +693,8 @@ bool nrf_grtc_sys_counter_active_state_request_check(NRF_GRTC_Type const * p_reg
 /**
  * @brief Function for getting the domains that requested the SYSCTOUNER to remain active.
  *
- * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] mask   Domains mask.
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Domains mask.
  *
  * @retval Bitmask of domains that keep the SYSCOUNTER active.
  */
@@ -666,6 +759,66 @@ NRF_STATIC_INLINE void nrf_grtc_waketime_set(NRF_GRTC_Type * p_reg, uint32_t val
  */
 NRF_STATIC_INLINE uint32_t nrf_grtc_waketime_get(NRF_GRTC_Type const * p_reg);
 #endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+
+#if NRF_GRTC_HAS_PWM
+/**
+ * @brief Function for setting the PWM compare value.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] value PWM compare value.
+ */
+NRF_STATIC_INLINE void nrf_grtc_pwm_compare_set(NRF_GRTC_Type * p_reg, uint32_t value);
+
+/**
+ * @brief Function for getting the PWM compare value.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Value of PWM compare.
+ */
+NRF_STATIC_INLINE uint32_t nrf_grtc_pwm_compare_get(NRF_GRTC_Type const * p_reg);
+#endif // NRF_GRTC_HAS_PWM
+
+#if NRF_GRTC_HAS_CLKOUT
+/**
+ * @brief Function for setting the specified clock source to be connected to output pin.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] clkout Selected clkout source.
+ * @param[in] enable True if the clkout source is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_grtc_clkout_set(NRF_GRTC_Type *   p_reg,
+                                           nrf_grtc_clkout_t clkout,
+                                           bool              enable);
+
+/**
+ * @brief Function for checking whether clock source is connected to clkout pin.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] clkout Selected clkout source.
+ *
+ * @retval True if the clkout source is enabled, false otherwise.
+ */
+NRF_STATIC_INLINE bool nrf_grtc_clkout_enable_check(NRF_GRTC_Type const * p_reg,
+                                                    nrf_grtc_clkout_t     clkout);
+
+/**
+ * @brief Function for setting the fast clock divisor value of clock output.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] value Fast clock divisor value.
+ */
+NRF_STATIC_INLINE void nrf_grtc_clkout_divider_set(NRF_GRTC_Type * p_reg, uint8_t value);
+
+/**
+ * @brief Function for getting the fast clock divisor value of clock output.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval Fast clock divisor value.
+ */
+NRF_STATIC_INLINE uint32_t nrf_grtc_clkout_divider_get(NRF_GRTC_Type const * p_reg);
+#endif // NRF_GRTC_HAS_CLKOUT
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -765,6 +918,18 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_int_pending_get(NRF_GRTC_Type const * p_reg)
     return p_reg->GRTC_INTPEND;
 }
 
+#if NRF_GRTC_HAS_PWM
+NRF_STATIC_INLINE void nrf_grtc_event_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
+{
+    p_reg->EVTENSET = mask;
+}
+
+NRF_STATIC_INLINE void nrf_grtc_event_disable(NRF_GRTC_Type * p_reg, uint32_t mask)
+{
+    p_reg->EVTENCLR = mask;
+}
+#endif // NRF_GRTC_HAS_PWM
+
 #if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 NRF_STATIC_INLINE void nrf_grtc_shorts_enable(NRF_GRTC_Type * p_reg, uint32_t mask)
 {
@@ -861,20 +1026,69 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
 }
 #endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg,
+                                                        uint8_t               index)
 {
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
+
+    return p_reg->SYSCOUNTER[index].SYSCOUNTERL;
+#else
+    (void)index;
     return p_reg->SYSCOUNTERL;
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg,
+                                                         uint8_t               index)
 {
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
+
+    return p_reg->SYSCOUNTER[index].SYSCOUNTERH;
+#else
+    (void)index;
     return p_reg->SYSCOUNTERH;
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
-NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg)
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               index)
 {
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
+
+    return (p_reg->SYSCOUNTER[index].SYSCOUNTERH &
+            GRTC_SYSCOUNTER_SYSCOUNTERH_OVERFLOW_Msk) ? true : false;
+#else
+    (void)index;
     return (p_reg->SYSCOUNTERH & GRTC_SYSCOUNTERH_OVERFLOW_Msk) ? true : false;
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
+
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg,
+                                                       uint8_t         index,
+                                                       bool            enable)
+{
+    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
+
+    p_reg->SYSCOUNTER[index].ACTIVE = ((p_reg->SYSCOUNTER[index].ACTIVE &
+                                       ~(GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk)) |
+                                       (enable ? GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Active :
+                                                 GRTC_SYSCOUNTER_ACTIVE_ACTIVE_NotActive));
+}
+
+NRF_STATIC_INLINE
+bool nrf_grtc_sys_counter_index_active_state_request_check(NRF_GRTC_Type const * p_reg,
+                                                           uint8_t               index)
+{
+    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
+
+    return (p_reg->SYSCOUNTER[index].ACTIVE & GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk) ==
+           GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Active;
+}
+#endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 
 NRF_STATIC_INLINE uint32_t nrf_grtc_event_address_get(NRF_GRTC_Type const * p_reg,
                                                       nrf_grtc_event_t      event)
@@ -1017,6 +1231,50 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_waketime_get(NRF_GRTC_Type const * p_reg)
     return (p_reg->WAKETIME >> GRTC_WAKETIME_VALUE_Pos);
 }
 #endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
+
+#if NRF_GRTC_HAS_PWM
+NRF_STATIC_INLINE void nrf_grtc_pwm_compare_set(NRF_GRTC_Type * p_reg, uint32_t value)
+{
+    p_reg->PWMCONFIG = (value << GRTC_PWMCONFIG_COMPAREVALUE_Pos) & GRTC_PWMCONFIG_COMPAREVALUE_Msk;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_grtc_pwm_compare_get(NRF_GRTC_Type const * p_reg)
+{
+    return (p_reg->PWMCONFIG >> GRTC_PWMCONFIG_COMPAREVALUE_Pos);
+}
+#endif // NRF_GRTC_HAS_PWM
+
+#if NRF_GRTC_HAS_CLKOUT
+NRF_STATIC_INLINE void nrf_grtc_clkout_set(NRF_GRTC_Type *   p_reg,
+                                           nrf_grtc_clkout_t clkout,
+                                           bool              enable)
+{
+    if (enable)
+    {
+        p_reg->CLKOUT |= (uint32_t)clkout;
+    }
+    else
+    {
+        p_reg->CLKOUT &= ~((uint32_t)clkout);
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_grtc_clkout_enable_check(NRF_GRTC_Type const * p_reg,
+                                                    nrf_grtc_clkout_t     clkout)
+{
+    return p_reg->CLKOUT == (uint32_t)clkout;
+}
+
+NRF_STATIC_INLINE void nrf_grtc_clkout_divider_set(NRF_GRTC_Type * p_reg, uint8_t value)
+{
+    p_reg->CLKCFG = (value & GRTC_CLKCFG_CLKFASTDIV_Msk) << GRTC_CLKCFG_CLKFASTDIV_Pos;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_grtc_clkout_divider_get(NRF_GRTC_Type const * p_reg)
+{
+    return (p_reg->CLKCFG & GRTC_CLKCFG_CLKFASTDIV_Msk) >> GRTC_CLKCFG_CLKFASTDIV_Pos;
+}
+#endif // NRF_GRTC_HAS_CLKOUT
 
 #endif // NRF_DECLARE_ONLY
 

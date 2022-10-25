@@ -173,16 +173,17 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
  * @brief Function for returning the SYSCOUNTER 1 MHz value.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @return SYSCOUNTER value.
  */
-NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg)
+NRFY_STATIC_INLINE uint64_t nrfy_grtc_sys_counter_get(NRF_GRTC_Type const * p_reg, uint8_t index)
 {
     uint32_t counter_l, counter_h;
     do
     {
-        counter_l = nrf_grtc_sys_counter_low_get(p_reg);
-        counter_h = nrf_grtc_sys_counter_high_get(p_reg);
+        counter_l = nrf_grtc_sys_counter_low_get(p_reg, index);
+        counter_h = nrf_grtc_sys_counter_high_get(p_reg, index);
         nrf_barrier_r();
     } while(counter_h & GRTC_SYSCOUNTERH_OVERFLOW_Msk);
     return (uint64_t)counter_l | ((uint64_t)counter_h << 32);
@@ -471,10 +472,11 @@ NRFY_STATIC_INLINE void nrfy_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_ev
 }
 
 /** @refhal{nrf_grtc_sys_counter_overflow_check} */
-NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg)
+NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg,
+                                                             uint8_t               index)
 {
     nrf_barrier_r();
-    bool check = nrf_grtc_sys_counter_overflow_check(p_reg);
+    bool check = nrf_grtc_sys_counter_overflow_check(p_reg, index);
     nrf_barrier_r();
     return check;
 }

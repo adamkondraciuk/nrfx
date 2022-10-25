@@ -339,9 +339,11 @@ nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val)
 /**
  * @brief Function for reading the GRTC SYSCOUNTER value.
  *
+ * @param[in] index Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
+ *
  * @return SYSCOUNTER (1 MHz) value.
  */
-NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(void);
+NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(uint8_t index);
 
 /**
  * @brief Function for retrieving the address of the specified GRTC task.
@@ -389,9 +391,9 @@ NRFX_STATIC_INLINE uint64_t nrfx_grtc_rtcounter_get(void);
 #endif
 
 #ifndef NRFX_DECLARE_ONLY
-NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(void)
+NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(uint8_t index)
 {
-    return nrfy_grtc_sys_counter_get(NRF_GRTC);
+    return nrfy_grtc_sys_counter_get(NRF_GRTC, index);
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_task_address_get(nrf_grtc_task_t task)

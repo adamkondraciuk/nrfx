@@ -7,6 +7,7 @@
 #endif
 
 #if defined(MOONLIGHT_XXAA)
+    #define GRTC_SYSCOUNTER_COUNT 3
     #if defined(NRF_TRUSTZONE_NONSECURE)
         /** @brief Fixup for the GRTC IRQn lines. */
         #define GRTC_IRQn       GRTC_0_IRQn
