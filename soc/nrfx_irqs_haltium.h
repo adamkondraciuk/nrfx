@@ -80,11 +80,20 @@ extern "C" {
 // BELLBOARD3_IRQn
 #define nrfx_bellboard_3_irq_handler  BELLBOARD_3_IRQHandler
 
+// TIMER020_IRQn
+#define nrfx_timer_020_irq_handler    TIMER020_IRQHandler
+
+// TIMER021_IRQn
+#define nrfx_timer_021_irq_handler    TIMER021_IRQHandler
+
+// TIMER022_IRQn
+#define nrfx_timer_022_irq_handler    TIMER022_IRQHandler
+
 // TIMER120_IRQn
 #define nrfx_timer_120_irq_handler    TIMER120_IRQHandler
 
 // TIMER121_IRQn
-#define nrfx_timer_120_irq_handler    TIMER120_IRQHandler
+#define nrfx_timer_121_irq_handler    TIMER121_IRQHandler
 
 // SPU2_IRQn
 
