@@ -377,6 +377,30 @@ NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_receive_event_get(uint8_t index);
  */
 NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_acked_event_get(uint8_t index);
 
+/**
+ * @brief Function for enabling the specified shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be enabled.
+ */
+NRF_STATIC_INLINE void nrf_ipct_shorts_enable(NRF_IPCT_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling the specified shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_ipct_shorts_disable(NRF_IPCT_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for setting the configuration of IPCT shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Shortcuts to be set.
+ */
+NRF_STATIC_INLINE void nrf_ipct_shorts_set(NRF_IPCT_Type * p_reg, uint32_t mask);
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_ipct_task_trigger(NRF_IPCT_Type * p_reg, nrf_ipct_task_t task)
@@ -595,6 +619,21 @@ NRF_STATIC_INLINE nrf_ipct_event_t nrf_ipct_acked_event_get(uint8_t index)
     /* TODO: Align to FP1 */
     return (nrf_ipct_event_t)0;
 #endif
+}
+
+NRF_STATIC_INLINE void nrf_ipct_shorts_enable(NRF_IPCT_Type * p_reg, uint32_t mask)
+{
+    p_reg->SHORTS |= mask;
+}
+
+NRF_STATIC_INLINE void nrf_ipct_shorts_disable(NRF_IPCT_Type * p_reg, uint32_t mask)
+{
+    p_reg->SHORTS &= ~(mask);
+}
+
+NRF_STATIC_INLINE void nrf_ipct_shorts_set(NRF_IPCT_Type * p_reg, uint32_t mask)
+{
+    p_reg->SHORTS = mask;
 }
 
 #endif // NRF_DECLARE_ONLY
