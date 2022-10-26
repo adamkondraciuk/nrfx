@@ -517,7 +517,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>VAL</name>
+                  <name>PROGVERSION1</name>
                   <description>CP1 test program version</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
@@ -532,68 +532,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>VAL</name>
+                  <name>PROGVERSION2</name>
                   <description>CP2 test program version</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>PASSID1</name>
-              <description>CP1 pass ID.</description>
-              <addressOffset>0x014</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>CP1 pass ID.</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>PASSID2</name>
-              <description>CP2 pass ID.</description>
-              <addressOffset>0x018</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>CP2 pass ID.</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>TIMESTAMP1</name>
-              <description>Timestamp for when CP1 starts or ends (YYYYMMDDTHHMMSS)</description>
-              <addressOffset>0x01C</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>CP1 timestamp</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>TIMESTAMP2</name>
-              <description>Timestamp for when CP2 starts or ends (YYYYMMDDTHHMMSS)</description>
-              <addressOffset>0x020</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>CP2 timestamp</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -605,7 +545,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_PRODTEST_FT</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x024</addressOffset>
+            <addressOffset>0x014</addressOffset>
             <register>
               <name>PROGVERSION1</name>
               <description>FT1 test program version.</description>
@@ -623,74 +563,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </register>
             <register>
               <name>PROGVERSION2</name>
-              <description>FT2/EQA test program version.</description>
+              <description>FT2 test program version.</description>
               <addressOffset>0x004</addressOffset>
               <access>read-only</access>
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
                   <name>PROGVERSION2</name>
-                  <description>FT2/EQA test program version</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>PASSID1</name>
-              <description>FT1 pass ID.</description>
-              <addressOffset>0x008</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>FT1 pass ID.</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>PASSID2</name>
-              <description>FT2/EQA pass ID.</description>
-              <addressOffset>0x00C</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>FT2/EQA pass ID.</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>TIMESTAMP1</name>
-              <description>Timestamp for when FT1 starts or ends (YYYYMMDDTHHMMSS)</description>
-              <addressOffset>0x010</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>FT1 timestamp</description>
-                  <lsb>0</lsb>
-                  <msb>31</msb>
-                </field>
-              </fields>
-            </register>
-            <register>
-              <name>TIMESTAMP2</name>
-              <description>Timestamp for when FT2/EQA starts or ends (YYYYMMDDTHHMMSS)</description>
-              <addressOffset>0x014</addressOffset>
-              <access>read-only</access>
-              <resetValue>0xFFFFFFFF</resetValue>
-              <fields>
-                <field>
-                  <name>VAL</name>
-                  <description>FT2/EQA timestamp</description>
+                  <description>FT2 test program version</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -1035,28 +915,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                 </fields>
               </register>
-              <register>
-                <name>AMPLITUDECTRL</name>
-                <description>Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT)</description>
-                <addressOffset>0x1C</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
             </cluster>
             <cluster>
               <name>AUDIOPLL</name>
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_AUDIOPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x58</addressOffset>
+              <addressOffset>0x54</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1085,7 +950,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_USBHSPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x5C</addressOffset>
+              <addressOffset>0x58</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1114,7 +979,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x60</addressOffset>
+              <addressOffset>0x5C</addressOffset>
               <cluster>
                 <name>CONFIG</name>
                 <description>Unspecified</description>
@@ -1180,7 +1045,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_OSCRFR</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x6C</addressOffset>
+              <addressOffset>0x68</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1224,7 +1089,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREG1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x74</addressOffset>
+              <addressOffset>0x70</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1313,7 +1178,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x88</addressOffset>
+              <addressOffset>0x84</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1402,7 +1267,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x9C</addressOffset>
+              <addressOffset>0x98</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1476,7 +1341,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMAIN</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xAC</addressOffset>
+              <addressOffset>0xA8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1670,7 +1535,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xDC</addressOffset>
+              <addressOffset>0xD8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1744,7 +1609,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xEC</addressOffset>
+              <addressOffset>0xE8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1818,7 +1683,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xFC</addressOffset>
+              <addressOffset>0xF8</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1892,7 +1757,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGUSB</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x10C</addressOffset>
+              <addressOffset>0x108</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -1966,7 +1831,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x11C</addressOffset>
+              <addressOffset>0x118</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2032,7 +1897,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x128</addressOffset>
+              <addressOffset>0x124</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2076,7 +1941,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x130</addressOffset>
+              <addressOffset>0x12C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2120,7 +1985,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO5V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x138</addressOffset>
+              <addressOffset>0x134</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2149,7 +2014,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x13C</addressOffset>
+              <addressOffset>0x138</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2178,7 +2043,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x140</addressOffset>
+              <addressOffset>0x13C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2241,7 +2106,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL121</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x174</addressOffset>
+              <addressOffset>0x170</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2304,7 +2169,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x1A8</addressOffset>
+              <addressOffset>0x1A4</addressOffset>
               <cluster>
                 <dim>36</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -2359,7 +2224,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x278</addressOffset>
+              <addressOffset>0x274</addressOffset>
               <cluster>
                 <dim>2</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -2391,7 +2256,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_GLOBAL</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x280</addressOffset>
+            <addressOffset>0x27C</addressOffset>
             <cluster>
               <name>SAADC</name>
               <description>Unspecified</description>
@@ -2485,26 +2350,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x30</addressOffset>
               <register>
-                <name>CALIB</name>
-                <description>Trim value for GLOBAL.TEMP.CALIB</description>
-                <addressOffset>0x0</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
                 <dim>0x6</dim>
                 <dimIncrement>0x4</dimIncrement>
                 <name>A[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.A</description>
-                <addressOffset>0x4</addressOffset>
+                <addressOffset>0x0</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -2521,7 +2371,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>B[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.B</description>
-                <addressOffset>0x1C</addressOffset>
+                <addressOffset>0x18</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -2538,7 +2388,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>T[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.T</description>
-                <addressOffset>0x34</addressOffset>
+                <addressOffset>0x30</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -2556,7 +2406,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_NFCT</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x78</addressOffset>
+              <addressOffset>0x74</addressOffset>
               <register>
                 <name>BIASCFG</name>
                 <description>Trim value for NFCT.BIASCFG</description>
@@ -2578,7 +2428,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_CANPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x7C</addressOffset>
+              <addressOffset>0x78</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -2607,7 +2457,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x80</addressOffset>
+              <addressOffset>0x7C</addressOffset>
               <cluster>
                 <name>PORTCNF</name>
                 <description>Unspecified</description>
@@ -2640,95 +2490,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </cluster>
               </cluster>
             </cluster>
-            <cluster>
-              <name>COMP</name>
-              <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_COMP</headerStructName>
-              <access>read-write</access>
-              <addressOffset>0x88</addressOffset>
-              <register>
-                <name>REFTRIM</name>
-                <description>Trim value for GLOBAL.COMP.REFTRIM</description>
-                <addressOffset>0x0</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL80KCOARSE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL80KCOARSE</description>
-                <addressOffset>0x4</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL80KFINE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL80KFINE</description>
-                <addressOffset>0x8</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL6M4COARSE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL6M4COARSE</description>
-                <addressOffset>0xC</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL6M4FINE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL6M4FINE</description>
-                <addressOffset>0x10</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-            </cluster>
           </cluster>
           <cluster>
             <name>APPLICATION</name>
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_APPLICATION</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x31C</addressOffset>
+            <addressOffset>0x300</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -2829,7 +2597,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x35C</addressOffset>
+            <addressOffset>0x340</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -3720,21 +3488,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
-        <register>
-          <name>CRC32</name>
-          <description>CRC32 value for FICR (except this word)</description>
-          <addressOffset>0x7FC</addressOffset>
-          <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
-          <fields>
-            <field>
-              <name>VALUE</name>
-              <description>CRC32 value</description>
-              <lsb>0</lsb>
-              <msb>31</msb>
-            </field>
-          </fields>
-        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -38583,7 +38336,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>ERROR</name>
-                <description>Trim error status.</description>
+                <description>Error status.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -38595,42 +38348,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   <enumeratedValue>
                     <name>WithinLimit</name>
                     <description>Frequency stayed within accuracy 2 percent in closed loop mode.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>TRIMUNDERFLOW</name>
-                <description>Underflow error status.</description>
-                <lsb>1</lsb>
-                <msb>1</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>OutsideLimit</name>
-                    <description>Underflow</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>WithinLimit</name>
-                    <description>No underflow</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>TRIMOVERFLOW</name>
-                <description>Overflow error status.</description>
-                <lsb>2</lsb>
-                <msb>2</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>OutsideLimit</name>
-                    <description>Overflow</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>WithinLimit</name>
-                    <description>No overflow</description>
                     <value>0x0</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -38648,7 +38365,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <name>VALUE</name>
                 <description>Last frequency measurement value.</description>
                 <lsb>0</lsb>
-                <msb>7</msb>
+                <msb>10</msb>
               </field>
             </fields>
           </register>
@@ -38771,7 +38488,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Clock dithering configuration</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00096733</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>CYCLECOUNT</name>
@@ -38816,13 +38533,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Multiplication factor</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000006</resetValue>
+            <resetValue>0x0000000A</resetValue>
             <fields>
               <field>
                 <name>VAL</name>
                 <description>Multiplication factor value.</description>
                 <lsb>0</lsb>
-                <msb>4</msb>
+                <msb>3</msb>
               </field>
             </fields>
           </register>
@@ -38831,7 +38548,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Sleep configuration</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000001</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>MODE</name>
@@ -39173,14 +38890,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>SELMUX</name>
-                <description>Select multiplexer for ATB1</description>
+                <description>Select multiplexer for ATB0</description>
                 <lsb>0</lsb>
-                <msb>1</msb>
+                <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>HiZ</name>
                     <description>HiZ</description>
                     <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>VREGOUT</name>
+                    <description>VREG_OUT</description>
+                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -39213,19 +38935,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>SELMUX</name>
-                <description>Select multiplexer for ATB0</description>
+                <description>Select multiplexer for ATB1</description>
                 <lsb>0</lsb>
-                <msb>1</msb>
+                <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>HiZ</name>
                     <description>HiZ</description>
                     <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>VREGOUT</name>
-                    <description>VREG_OUT</description>
-                    <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -47856,21 +47573,21 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <fields>
             <field>
               <name>MAJOR</name>
-              <description>Major classification of the type of the debug component as specified in the Arm Architecture Specification for this
+              <description>Major classification of the type of the debug component as specified in the ARM Architecture Specification for this
                     debug and trace component.</description>
               <lsb>0</lsb>
               <msb>3</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Controller</name>
-                  <description>Indicates that this component allows a debugger to control other components in an Arm CoreSight SoC-400 system.</description>
+                  <description>Indicates that this component allows a debugger to control other components in a CoreSight SoC-400 system.</description>
                   <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
             <field>
               <name>SUB</name>
-              <description>Sub-classification of the type of the debug component as specified in the Arm Architecture Specification within
+              <description>Sub-classification of the type of the debug component as specified in the ARM Architecture Specification within
                     the major classification as specified in the MAJOR field.</description>
               <lsb>4</lsb>
               <msb>7</msb>
@@ -47899,7 +47616,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Code</name>
-                  <description>JEDEC continuation code.</description>
+                  <description>JEDEC continuation code</description>
                   <value>0x4</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -47983,7 +47700,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Arm</name>
-                  <description>Arm. Bits[3:0] of the JEDEC JEP106 Identity Code</description>
+                  <description>ARM. Bits[3:0] of the JEDEC JEP106 Identity Code</description>
                   <value>0xB</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -48005,7 +47722,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Arm</name>
-                  <description>Arm. Bits[6:4] of the JEDEC JEP106 Identity Code</description>
+                  <description>ARM. Bits[6:4] of the JEDEC JEP106 Identity Code</description>
                   <value>0x3</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -48055,7 +47772,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <field>
               <name>REVAND</name>
               <description>Indicates minor errata fixes specific to the revision of the component being used, for example metal fixes after
-                    implementation. In most cases, this field is 0b0000. Arm recommends that the component designers ensure that a
+                    implementation. In most cases, this field is 0b0000. ARM recommends that the component designers ensure that a
                     metal fix can change this field if required, for example, by driving it from registers that reset to 0b0000.</description>
               <lsb>4</lsb>
               <msb>7</msb>
@@ -55051,14 +54768,14 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>EVENTS_RTCOMPARESYNC</name>
-          <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+          <description>The value written to the register RTCOMPARESYNC is latched to RTCOMPARE</description>
           <addressOffset>0x164</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_RTCOMPARESYNC</name>
-              <description>The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE</description>
+              <description>The value written to the register RTCOMPARESYNC is latched to RTCOMPARE</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -58771,7 +58488,7 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Default</name>
-                  <description>Default configuration to keep the SYSCOUNTER active.</description>
+                  <description>Keep the SYSCOUNTER active when KEEPRUNNING is set, or access to any task registers, INT registers or SYSCOUNTER registers.</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
@@ -58818,14 +58535,14 @@ A write outputs the value to atbytesm.</description>
         </register>
         <register>
           <name>SYSCOUNTERH</name>
-          <description>The higher 20-bits of the SYSCOUNTER</description>
+          <description>The higher 32-bits of the SYSCOUNTER</description>
           <addressOffset>0x518</addressOffset>
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>VALUE</name>
-              <description>The higher 20-bits of the SYSCOUNTER value.</description>
+              <description>The higher 32-bits of the SYSCOUNTER value.</description>
               <lsb>0</lsb>
               <msb>19</msb>
             </field>
@@ -58866,7 +58583,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>CCL</name>
-                <description>Capture/Compare low value in 1 us</description>
+                <description>Capture/Compare low value</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -58881,7 +58598,7 @@ A write outputs the value to atbytesm.</description>
             <fields>
               <field>
                 <name>CCH</name>
-                <description>Capture/Compare high value in 1 us</description>
+                <description>Capture/Compare high value</description>
                 <lsb>0</lsb>
                 <msb>19</msb>
               </field>
@@ -58950,7 +58667,7 @@ A write outputs the value to atbytesm.</description>
         </cluster>
         <register>
           <name>KEEPRUNNING</name>
-          <description>Request to keep the SYSCOUNTER in the active state and prevent going to sleep</description>
+          <description>Request to keep the timer in the active state and prevent going to sleep</description>
           <addressOffset>0x6A0</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
@@ -58963,12 +58680,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -58981,12 +58698,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -58999,12 +58716,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59017,12 +58734,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59035,12 +58752,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59053,12 +58770,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59071,12 +58788,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59089,12 +58806,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59107,12 +58824,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59125,12 +58842,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59143,12 +58860,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59161,12 +58878,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59179,12 +58896,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59197,12 +58914,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59215,12 +58932,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59233,12 +58950,12 @@ A write outputs the value to atbytesm.</description>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotActive</name>
-                  <description>Allow SYSCOUNTER to go to sleep</description>
+                  <description>Timer not active</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>Active</name>
-                  <description>Keep SYSCOUNTER active</description>
+                  <description>Timer active</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -59284,7 +59001,7 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>VALUE</name>
-              <description>Number of LFCLK clock cycles to wake up before the next scheduled EVENTS_COMPARE event</description>
+              <description>Number of 32Ki clock cycles to wake up before the next scheduled EVENTS_COMPARE event</description>
               <lsb>0</lsb>
               <msb>7</msb>
             </field>
@@ -64563,7 +64280,7 @@ A write outputs the value to atbytesm.</description>
             <description>Description collection: Configuration register for NVR page n</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00300000</resetValue>
             <fields>
               <field>
                 <name>WEN</name>
@@ -64616,16 +64333,62 @@ A write outputs the value to atbytesm.</description>
                 <description>Enables the lock for this register.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
-                <modifiedWriteValues>oneToSet</modifiedWriteValues>
                 <enumeratedValues>
+                  <usage>read</usage>
                   <enumeratedValue>
                     <name>LockDisabled</name>
-                    <description>Lock is disabled</description>
+                    <description>Read: Lock is disabled</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>LockEnabled</name>
-                    <description>Lock is enabled</description>
+                    <description>Read: Lock is enabled</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+                <enumeratedValues>
+                  <usage>write</usage>
+                  <enumeratedValue>
+                    <name>EnableLock</name>
+                    <description>Write: Enables the lock (Ignores any other value written)</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>UREN</name>
+                <description>Enable read access to the upper part of NVR page, where the upper part size is NVR page size - 2KB</description>
+                <lsb>20</lsb>
+                <msb>20</msb>
+                <access>read-writeonce</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Read is disabled. Ignores any other value written.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>Read is enabled</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>UWEN</name>
+                <description>Enable write access to the upper part of NVR page, where the upper part size is NVR page size - 2KB</description>
+                <lsb>21</lsb>
+                <msb>21</msb>
+                <access>read-writeonce</access>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Disabled</name>
+                    <description>Write is disabled. Ignores any other value written.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Enabled</name>
+                    <description>Write is enabled</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -78969,6 +78732,13 @@ A write outputs the value to atbytesm.</description>
           <access>read-write</access>
           <fields>
             <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that task TASKS_TRIGGER[n] will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <access>read-only</access>
+            </field>
+            <field>
               <name>ENABLE</name>
               <description>Subscription enable bit (write only)</description>
               <lsb>0</lsb>
@@ -79032,6 +78802,13 @@ A write outputs the value to atbytesm.</description>
           <addressOffset>0x180</addressOffset>
           <access>read-write</access>
           <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event EVENTS_TRIGGERED[n] will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+              <access>read-only</access>
+            </field>
             <field>
               <name>ENABLE</name>
               <description>Publication enable bit (write only)</description>
@@ -128559,7 +128336,6 @@ A write outputs the value to atbytesm.</description>
               <description>Chip configuration ready</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <modifiedWriteValues>oneToSet</modifiedWriteValues>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotReady</name>
@@ -128578,7 +128354,6 @@ A write outputs the value to atbytesm.</description>
               <description>Trim configuration ready</description>
               <lsb>1</lsb>
               <msb>1</msb>
-              <modifiedWriteValues>oneToSet</modifiedWriteValues>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotReady</name>
@@ -128597,7 +128372,6 @@ A write outputs the value to atbytesm.</description>
               <description>Ramp up done status</description>
               <lsb>2</lsb>
               <msb>2</msb>
-              <modifiedWriteValues>oneToSet</modifiedWriteValues>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>NotDone</name>
@@ -128837,583 +128611,583 @@ A write outputs the value to atbytesm.</description>
           <addressOffset>0x50C</addressOffset>
           <register>
             <name>MASK0</name>
-            <description>Mask the active power domain request due to interrupt from GRC peripheral identifier [31:0]</description>
+            <description>Mask the interrupt from GRC peripheral identifier [31:0]</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>PERIPHID_0</name>
-                <description>GRC peripheral identifier [0]</description>
+                <description>Interrupt status of the GRC peripheral identifier [0]</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [0] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [0] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [0] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [0] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_1</name>
-                <description>GRC peripheral identifier [1]</description>
+                <description>Interrupt status of the GRC peripheral identifier [1]</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [1] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [1] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [1] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [1] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_2</name>
-                <description>GRC peripheral identifier [2]</description>
+                <description>Interrupt status of the GRC peripheral identifier [2]</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [2] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [2] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [2] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [2] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_3</name>
-                <description>GRC peripheral identifier [3]</description>
+                <description>Interrupt status of the GRC peripheral identifier [3]</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [3] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [3] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [3] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [3] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_4</name>
-                <description>GRC peripheral identifier [4]</description>
+                <description>Interrupt status of the GRC peripheral identifier [4]</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [4] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [4] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [4] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [4] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_5</name>
-                <description>GRC peripheral identifier [5]</description>
+                <description>Interrupt status of the GRC peripheral identifier [5]</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [5] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [5] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [5] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [5] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_6</name>
-                <description>GRC peripheral identifier [6]</description>
+                <description>Interrupt status of the GRC peripheral identifier [6]</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [6] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [6] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [6] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [6] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_7</name>
-                <description>GRC peripheral identifier [7]</description>
+                <description>Interrupt status of the GRC peripheral identifier [7]</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [7] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [7] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [7] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [7] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_8</name>
-                <description>GRC peripheral identifier [8]</description>
+                <description>Interrupt status of the GRC peripheral identifier [8]</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [8] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [8] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [8] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [8] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_9</name>
-                <description>GRC peripheral identifier [9]</description>
+                <description>Interrupt status of the GRC peripheral identifier [9]</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [9] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [9] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [9] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [9] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_10</name>
-                <description>GRC peripheral identifier [10]</description>
+                <description>Interrupt status of the GRC peripheral identifier [10]</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [10] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [10] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [10] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [10] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_11</name>
-                <description>GRC peripheral identifier [11]</description>
+                <description>Interrupt status of the GRC peripheral identifier [11]</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [11] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [11] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [11] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [11] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_12</name>
-                <description>GRC peripheral identifier [12]</description>
+                <description>Interrupt status of the GRC peripheral identifier [12]</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [12] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [12] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [12] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [12] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_13</name>
-                <description>GRC peripheral identifier [13]</description>
+                <description>Interrupt status of the GRC peripheral identifier [13]</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [13] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [13] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [13] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [13] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_14</name>
-                <description>GRC peripheral identifier [14]</description>
+                <description>Interrupt status of the GRC peripheral identifier [14]</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [14] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [14] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [14] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [14] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_15</name>
-                <description>GRC peripheral identifier [15]</description>
+                <description>Interrupt status of the GRC peripheral identifier [15]</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [15] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [15] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [15] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [15] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_16</name>
-                <description>GRC peripheral identifier [16]</description>
+                <description>Interrupt status of the GRC peripheral identifier [16]</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [16] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [16] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [16] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [16] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_17</name>
-                <description>GRC peripheral identifier [17]</description>
+                <description>Interrupt status of the GRC peripheral identifier [17]</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [17] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [17] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [17] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [17] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_18</name>
-                <description>GRC peripheral identifier [18]</description>
+                <description>Interrupt status of the GRC peripheral identifier [18]</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [18] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [18] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [18] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [18] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_19</name>
-                <description>GRC peripheral identifier [19]</description>
+                <description>Interrupt status of the GRC peripheral identifier [19]</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [19] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [19] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [19] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [19] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_20</name>
-                <description>GRC peripheral identifier [20]</description>
+                <description>Interrupt status of the GRC peripheral identifier [20]</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [20] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [20] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [20] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [20] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_21</name>
-                <description>GRC peripheral identifier [21]</description>
+                <description>Interrupt status of the GRC peripheral identifier [21]</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [21] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [21] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [21] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [21] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_22</name>
-                <description>GRC peripheral identifier [22]</description>
+                <description>Interrupt status of the GRC peripheral identifier [22]</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [22] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [22] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [22] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [22] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_23</name>
-                <description>GRC peripheral identifier [23]</description>
+                <description>Interrupt status of the GRC peripheral identifier [23]</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [23] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [23] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [23] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [23] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_24</name>
-                <description>GRC peripheral identifier [24]</description>
+                <description>Interrupt status of the GRC peripheral identifier [24]</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [24] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [24] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [24] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [24] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_25</name>
-                <description>GRC peripheral identifier [25]</description>
+                <description>Interrupt status of the GRC peripheral identifier [25]</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [25] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [25] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [25] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [25] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_26</name>
-                <description>GRC peripheral identifier [26]</description>
+                <description>Interrupt status of the GRC peripheral identifier [26]</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [26] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [26] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [26] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [26] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_27</name>
-                <description>GRC peripheral identifier [27]</description>
+                <description>Interrupt status of the GRC peripheral identifier [27]</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [27] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [27] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [27] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [27] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_28</name>
-                <description>GRC peripheral identifier [28]</description>
+                <description>Interrupt status of the GRC peripheral identifier [28]</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [28] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [28] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [28] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [28] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_29</name>
-                <description>GRC peripheral identifier [29]</description>
+                <description>Interrupt status of the GRC peripheral identifier [29]</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [29] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [29] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [29] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [29] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_30</name>
-                <description>GRC peripheral identifier [30]</description>
+                <description>Interrupt status of the GRC peripheral identifier [30]</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [30] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [30] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [30] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [30] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_31</name>
-                <description>GRC peripheral identifier [31]</description>
+                <description>Interrupt status of the GRC peripheral identifier [31]</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [31] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [31] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [31] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [31] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -129422,583 +129196,583 @@ A write outputs the value to atbytesm.</description>
           </register>
           <register>
             <name>MASK1</name>
-            <description>Mask the active power domain request due to interrupt from GRC peripheral identifier [63 : 32]</description>
+            <description>Mask the interrupt from GRC peripheral identifier [63 : 32]</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>PERIPHID_0</name>
-                <description>GRC peripheral identifier [0]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 0]</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 0] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 0] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 0] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 0] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_1</name>
-                <description>GRC peripheral identifier [1]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 1]</description>
                 <lsb>1</lsb>
                 <msb>1</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 1] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 1] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 1] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 1] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_2</name>
-                <description>GRC peripheral identifier [2]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 2]</description>
                 <lsb>2</lsb>
                 <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 2] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 2] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 2] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 2] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_3</name>
-                <description>GRC peripheral identifier [3]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 3]</description>
                 <lsb>3</lsb>
                 <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 3] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 3] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 3] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 3] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_4</name>
-                <description>GRC peripheral identifier [4]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 4]</description>
                 <lsb>4</lsb>
                 <msb>4</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 4] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 4] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 4] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 4] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_5</name>
-                <description>GRC peripheral identifier [5]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 5]</description>
                 <lsb>5</lsb>
                 <msb>5</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 5] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 5] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 5] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 5] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_6</name>
-                <description>GRC peripheral identifier [6]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 6]</description>
                 <lsb>6</lsb>
                 <msb>6</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 6] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 6] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 6] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 6] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_7</name>
-                <description>GRC peripheral identifier [7]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 7]</description>
                 <lsb>7</lsb>
                 <msb>7</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 7] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 7] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 7] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 7] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_8</name>
-                <description>GRC peripheral identifier [8]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 8]</description>
                 <lsb>8</lsb>
                 <msb>8</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 8] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 8] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 8] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 8] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_9</name>
-                <description>GRC peripheral identifier [9]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 9]</description>
                 <lsb>9</lsb>
                 <msb>9</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 9] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 9] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 9] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 9] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_10</name>
-                <description>GRC peripheral identifier [10]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 10]</description>
                 <lsb>10</lsb>
                 <msb>10</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 10] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 10] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 10] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 10] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_11</name>
-                <description>GRC peripheral identifier [11]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 11]</description>
                 <lsb>11</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 11] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 11] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 11] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 11] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_12</name>
-                <description>GRC peripheral identifier [12]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 12]</description>
                 <lsb>12</lsb>
                 <msb>12</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 12] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 12] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 12] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 12] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_13</name>
-                <description>GRC peripheral identifier [13]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 13]</description>
                 <lsb>13</lsb>
                 <msb>13</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 13] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 13] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 13] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 13] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_14</name>
-                <description>GRC peripheral identifier [14]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 14]</description>
                 <lsb>14</lsb>
                 <msb>14</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 14] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 14] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 14] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 14] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_15</name>
-                <description>GRC peripheral identifier [15]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 15]</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 15] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 15] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 15] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 15] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_16</name>
-                <description>GRC peripheral identifier [16]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 16]</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 16] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 16] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 16] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 16] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_17</name>
-                <description>GRC peripheral identifier [17]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 17]</description>
                 <lsb>17</lsb>
                 <msb>17</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 17] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 17] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 17] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 17] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_18</name>
-                <description>GRC peripheral identifier [18]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 18]</description>
                 <lsb>18</lsb>
                 <msb>18</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 18] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 18] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 18] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 18] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_19</name>
-                <description>GRC peripheral identifier [19]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 19]</description>
                 <lsb>19</lsb>
                 <msb>19</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 19] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 19] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 19] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 19] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_20</name>
-                <description>GRC peripheral identifier [20]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 20]</description>
                 <lsb>20</lsb>
                 <msb>20</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 20] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 20] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 20] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 20] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_21</name>
-                <description>GRC peripheral identifier [21]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 21]</description>
                 <lsb>21</lsb>
                 <msb>21</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 21] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 21] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 21] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 21] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_22</name>
-                <description>GRC peripheral identifier [22]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 22]</description>
                 <lsb>22</lsb>
                 <msb>22</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 22] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 22] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 22] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 22] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_23</name>
-                <description>GRC peripheral identifier [23]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 23]</description>
                 <lsb>23</lsb>
                 <msb>23</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 23] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 23] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 23] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 23] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_24</name>
-                <description>GRC peripheral identifier [24]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 24]</description>
                 <lsb>24</lsb>
                 <msb>24</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 24] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 24] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 24] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 24] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_25</name>
-                <description>GRC peripheral identifier [25]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 25]</description>
                 <lsb>25</lsb>
                 <msb>25</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 25] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 25] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 25] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 25] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_26</name>
-                <description>GRC peripheral identifier [26]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 26]</description>
                 <lsb>26</lsb>
                 <msb>26</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 26] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 26] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 26] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 26] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_27</name>
-                <description>GRC peripheral identifier [27]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 27]</description>
                 <lsb>27</lsb>
                 <msb>27</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 27] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 27] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 27] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 27] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_28</name>
-                <description>GRC peripheral identifier [28]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 28]</description>
                 <lsb>28</lsb>
                 <msb>28</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 28] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 28] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 28] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 28] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_29</name>
-                <description>GRC peripheral identifier [29]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 29]</description>
                 <lsb>29</lsb>
                 <msb>29</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 29] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 29] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 29] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 29] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_30</name>
-                <description>GRC peripheral identifier [30]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 30]</description>
                 <lsb>30</lsb>
                 <msb>30</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 30] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 30] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 30] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 30] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
               <field>
                 <name>PERIPHID_31</name>
-                <description>GRC peripheral identifier [31]</description>
+                <description>Interrupt status of the GRC peripheral identifier [32 + 31]</description>
                 <lsb>31</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Off</name>
-                    <description>The GRC active power domain remain Off even when GRC peripheral [32 + 31] interrupt is active</description>
+                    <name>Unmask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 31] is unmasked</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>On</name>
-                    <description>The GRC active power domain is kept On when GRC peripheral [32 + 31] interrupt is active</description>
+                    <name>Mask</name>
+                    <description>Interrupt from the GRC peripheral [32 + 31] is masked</description>
                     <value>0x1</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -130327,7 +130101,7 @@ A write outputs the value to atbytesm.</description>
           <addressOffset>0x518</addressOffset>
           <register>
             <name>PDMAIN</name>
-            <description>Register for possible metal-fix in GRC Main power domain</description>
+            <description>Register for possible metal-fix in GRC MAIN power domain</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -130342,7 +130116,7 @@ A write outputs the value to atbytesm.</description>
           </register>
           <register>
             <name>PDACT</name>
-            <description>Register for possible metal-fix in GRC Active power domain</description>
+            <description>Register for possible metal-fix in GRC ACT power domain</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
@@ -146480,7 +146254,7 @@ A write outputs the value to atbytesm.</description>
               <name>SLOPE</name>
               <description>The calculated slope value.</description>
               <lsb>16</lsb>
-              <msb>24</msb>
+              <msb>23</msb>
             </field>
           </fields>
         </register>
@@ -146779,31 +146553,13 @@ A write outputs the value to atbytesm.</description>
           <description>Enable LOCK for mirrored registers</description>
           <addressOffset>0x480</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000003</resetValue>
+          <resetValue>0x00000001</resetValue>
           <fields>
             <field>
-              <name>LOCKDCO</name>
-              <description>Lock for mirrored registers of DCO</description>
+              <name>LOCK</name>
+              <description>Lock for mirrored registers</description>
               <lsb>0</lsb>
               <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Lock disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Lock enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>LOCKCKSW</name>
-              <description>Lock for mirrored registers of CKSW</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -146908,7 +146664,7 @@ A write outputs the value to atbytesm.</description>
             <description>Clock dithering configuration</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00096733</resetValue>
+            <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>CYCLECOUNT</name>
@@ -151861,7 +151617,7 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <register>
-          <dim>0x2</dim>
+          <dim>0x3</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>EVENTS_ABBLOCK[%s]</name>
           <description>Description collection: ABB lock for the ABB domain [n]</description>
@@ -151973,6 +151729,24 @@ A write outputs the value to atbytesm.</description>
               <description>Enable or disable interrupt for event ABBLOCK[1]</description>
               <lsb>4</lsb>
               <msb>4</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ABBLOCK2</name>
+              <description>Enable or disable interrupt for event ABBLOCK[2]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -152108,6 +151882,33 @@ A write outputs the value to atbytesm.</description>
               <description>Write '1' to enable interrupt for event ABBLOCK[1]</description>
               <lsb>4</lsb>
               <msb>4</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>ABBLOCK2</name>
+              <description>Write '1' to enable interrupt for event ABBLOCK[2]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -152274,6 +152075,33 @@ A write outputs the value to atbytesm.</description>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>ABBLOCK2</name>
+              <description>Write '1' to disable interrupt for event ABBLOCK[2]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -152378,6 +152206,25 @@ A write outputs the value to atbytesm.</description>
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>ABBLOCK2</name>
+              <description>Read pending status of interrupt for event ABBLOCK[2]</description>
+              <lsb>5</lsb>
+              <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -152421,7 +152268,6 @@ A write outputs the value to atbytesm.</description>
           <fields>
             <field>
               <name>GNDCLAMPCTRL_0</name>
-              <description>Enable ground clamp [0]</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -152439,7 +152285,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_1</name>
-              <description>Enable ground clamp [1]</description>
               <lsb>1</lsb>
               <msb>1</msb>
               <enumeratedValues>
@@ -152457,7 +152302,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_2</name>
-              <description>Enable ground clamp [2]</description>
               <lsb>2</lsb>
               <msb>2</msb>
               <enumeratedValues>
@@ -152475,7 +152319,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_3</name>
-              <description>Enable ground clamp [3]</description>
               <lsb>3</lsb>
               <msb>3</msb>
               <enumeratedValues>
@@ -152493,7 +152336,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_4</name>
-              <description>Enable ground clamp [4]</description>
               <lsb>4</lsb>
               <msb>4</msb>
               <enumeratedValues>
@@ -152511,7 +152353,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_5</name>
-              <description>Enable ground clamp [5]</description>
               <lsb>5</lsb>
               <msb>5</msb>
               <enumeratedValues>
@@ -152529,7 +152370,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_6</name>
-              <description>Enable ground clamp [6]</description>
               <lsb>6</lsb>
               <msb>6</msb>
               <enumeratedValues>
@@ -152547,7 +152387,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_7</name>
-              <description>Enable ground clamp [7]</description>
               <lsb>7</lsb>
               <msb>7</msb>
               <enumeratedValues>
@@ -152565,7 +152404,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_8</name>
-              <description>Enable ground clamp [8]</description>
               <lsb>8</lsb>
               <msb>8</msb>
               <enumeratedValues>
@@ -152583,7 +152421,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_9</name>
-              <description>Enable ground clamp [9]</description>
               <lsb>9</lsb>
               <msb>9</msb>
               <enumeratedValues>
@@ -152601,7 +152438,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_10</name>
-              <description>Enable ground clamp [10]</description>
               <lsb>10</lsb>
               <msb>10</msb>
               <enumeratedValues>
@@ -152619,7 +152455,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_11</name>
-              <description>Enable ground clamp [11]</description>
               <lsb>11</lsb>
               <msb>11</msb>
               <enumeratedValues>
@@ -152637,7 +152472,6 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_12</name>
-              <description>Enable ground clamp [12]</description>
               <lsb>12</lsb>
               <msb>12</msb>
               <enumeratedValues>
@@ -152655,9 +152489,314 @@ A write outputs the value to atbytesm.</description>
             </field>
             <field>
               <name>GNDCLAMPCTRL_13</name>
-              <description>Enable ground clamp [13]</description>
               <lsb>13</lsb>
               <msb>13</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_14</name>
+              <lsb>14</lsb>
+              <msb>14</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_15</name>
+              <lsb>15</lsb>
+              <msb>15</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_16</name>
+              <lsb>16</lsb>
+              <msb>16</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_17</name>
+              <lsb>17</lsb>
+              <msb>17</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_18</name>
+              <lsb>18</lsb>
+              <msb>18</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_19</name>
+              <lsb>19</lsb>
+              <msb>19</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_20</name>
+              <lsb>20</lsb>
+              <msb>20</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_21</name>
+              <lsb>21</lsb>
+              <msb>21</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_22</name>
+              <lsb>22</lsb>
+              <msb>22</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_23</name>
+              <lsb>23</lsb>
+              <msb>23</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_24</name>
+              <lsb>24</lsb>
+              <msb>24</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_25</name>
+              <lsb>25</lsb>
+              <msb>25</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_26</name>
+              <lsb>26</lsb>
+              <msb>26</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_27</name>
+              <lsb>27</lsb>
+              <msb>27</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_28</name>
+              <lsb>28</lsb>
+              <msb>28</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_29</name>
+              <lsb>29</lsb>
+              <msb>29</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_30</name>
+              <lsb>30</lsb>
+              <msb>30</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Ground clamp is disabled, net is floating</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Ground clamp is enabled, net is grounded</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>GNDCLAMPCTRL_31</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -152701,7 +152840,7 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <cluster>
-          <dim>2</dim>
+          <dim>3</dim>
           <dimIncrement>0x00C</dimIncrement>
           <name>ABB[%s]</name>
           <description>Unspecified</description>
@@ -152841,7 +152980,7 @@ A write outputs the value to atbytesm.</description>
           <description>Regulator configuration</description>
           <addressOffset>0x500</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000007</resetValue>
+          <resetValue>0x80000007</resetValue>
           <fields>
             <field>
               <name>VREG1V8</name>
@@ -152990,26 +153129,26 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <register>
-          <name>BLOCKULPMODE</name>
-          <description>Block entering into ULP mode</description>
-          <addressOffset>0x508</addressOffset>
+          <name>PMICENABLE</name>
+          <description>Enable PMIC interface</description>
+          <addressOffset>0x504</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>BLOCK</name>
-              <description>Block ULP mode</description>
+              <name>ENABLE</name>
+              <description>Enable PMIC interface</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Allowed</name>
-                  <description>Allowed going into ULP mode</description>
+                  <name>Disabled</name>
+                  <description>Disabled</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Blocked</name>
-                  <description>Blocked going into ULP mode</description>
+                  <name>Enabled</name>
+                  <description>Enabled</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -153017,26 +153156,53 @@ A write outputs the value to atbytesm.</description>
           </fields>
         </register>
         <register>
-          <name>BLOCKULVMODE</name>
-          <description>Block entering into ULV mode</description>
-          <addressOffset>0x50C</addressOffset>
+          <name>ULPENABLE</name>
+          <description>Enable ULP mode</description>
+          <addressOffset>0x508</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000001</resetValue>
           <fields>
             <field>
-              <name>BLOCK</name>
-              <description>Block ULV mode</description>
+              <name>ENABLE</name>
+              <description>Enable ULP mode</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
                 <enumeratedValue>
-                  <name>Allowed</name>
-                  <description>Allowed going into ULV mode</description>
+                  <name>Disabled</name>
+                  <description>Disabled</description>
                   <value>0x0</value>
                 </enumeratedValue>
                 <enumeratedValue>
-                  <name>Blocked</name>
-                  <description>Blocked going into ULV mode</description>
+                  <name>Enabled</name>
+                  <description>Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
+          <name>ULVENABLE</name>
+          <description>Enable ULV mode</description>
+          <addressOffset>0x50C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000001</resetValue>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable ULV mode</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enabled</description>
                   <value>0x1</value>
                 </enumeratedValue>
               </enumeratedValues>
@@ -155257,7 +155423,7 @@ A write outputs the value to atbytesm.</description>
           <description>VDD_1V0 LP output voltage</description>
           <addressOffset>0x49C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000017</resetValue>
+          <resetValue>0x00000018</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -155474,7 +155640,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for HP/LP mode transistion</description>
           <addressOffset>0x4B8</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000010</resetValue>
+          <resetValue>0x00000006</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -155489,7 +155655,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for half clock speed in PWM mode</description>
           <addressOffset>0x4BC</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000010</resetValue>
+          <resetValue>0x00000006</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -155504,7 +155670,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold LDO toggle at low 0V8 current consumption</description>
           <addressOffset>0x4C0</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000010</resetValue>
+          <resetValue>0x00000002</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -156974,7 +157140,7 @@ A write outputs the value to atbytesm.</description>
               </field>
               <field>
                 <name>GPI</name>
-                <description>Enable GPI (PSEUDO PWM)</description>
+                <description>Enable GPI (PUEDO PWM)</description>
                 <lsb>15</lsb>
                 <msb>15</msb>
                 <enumeratedValues>
@@ -158129,7 +158295,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for mode transistion</description>
           <addressOffset>0x494</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
+          <resetValue>0x00000005</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -159810,7 +159976,7 @@ A write outputs the value to atbytesm.</description>
             <description>Local current reference trimming</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00000008</resetValue>
             <fields>
               <field>
                 <name>VAL</name>
@@ -159943,7 +160109,7 @@ A write outputs the value to atbytesm.</description>
           <description>Nominal low power mode output voltage programming</description>
           <addressOffset>0x490</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000017</resetValue>
+          <resetValue>0x00000018</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -159958,7 +160124,7 @@ A write outputs the value to atbytesm.</description>
           <description>Radio low power mode output voltage programming</description>
           <addressOffset>0x494</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000002B</resetValue>
+          <resetValue>0x00000027</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -160025,7 +160191,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for mode transistion</description>
           <addressOffset>0x4A0</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
+          <resetValue>0x00000005</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -162122,7 +162288,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for mode transistion</description>
           <addressOffset>0x48C</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
+          <resetValue>0x00000005</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -163859,7 +164025,7 @@ A write outputs the value to atbytesm.</description>
             <description>Local current reference trimming</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
+            <resetValue>0x00000008</resetValue>
             <fields>
               <field>
                 <name>VAL</name>
@@ -164014,7 +164180,7 @@ A write outputs the value to atbytesm.</description>
           <description>Current threshold for mode transistion</description>
           <addressOffset>0x490</addressOffset>
           <access>read-write</access>
-          <resetValue>0x0000000A</resetValue>
+          <resetValue>0x00000005</resetValue>
           <fields>
             <field>
               <name>VAL</name>
@@ -164803,7 +164969,7 @@ A write outputs the value to atbytesm.</description>
           <description>Power up control</description>
           <addressOffset>0x480</addressOffset>
           <access>read-write</access>
-          <resetValue>0x00000000</resetValue>
+          <resetValue>0x00000001</resetValue>
           <fields>
             <field>
               <name>CTRL</name>

@@ -18657,7 +18657,7 @@ typedef struct {
 /* CTI_DEVTYPE: Device Type Identifier register */
   #define CTI_DEVTYPE_ResetValue (0x00000014UL)      /*!< Reset value of DEVTYPE register.                                     */
 
-/* MAJOR @Bits 0..3 : Major classification of the type of the debug component as specified in the Arm Architecture Specification
+/* MAJOR @Bits 0..3 : Major classification of the type of the debug component as specified in the ARM Architecture Specification
                       for this debug and trace component. */                                                                      
                                                                                                                                   
   #define CTI_DEVTYPE_MAJOR_Pos (0UL)                /*!< Position of MAJOR field.                                             */
@@ -18665,9 +18665,9 @@ typedef struct {
   #define CTI_DEVTYPE_MAJOR_Min (0x4UL)              /*!< Min enumerator value of MAJOR field.                                 */
   #define CTI_DEVTYPE_MAJOR_Max (0x4UL)              /*!< Max enumerator value of MAJOR field.                                 */
   #define CTI_DEVTYPE_MAJOR_Controller (0x4UL)       /*!< Indicates that this component allows a debugger to control other
-                                                          components in an Arm CoreSight SoC-400 system.*/                        
+                                                          components in a CoreSight SoC-400 system.*/                             
 
-/* SUB @Bits 4..7 : Sub-classification of the type of the debug component as specified in the Arm Architecture Specification
+/* SUB @Bits 4..7 : Sub-classification of the type of the debug component as specified in the ARM Architecture Specification
                     within the major classification as specified in the MAJOR field. */                                           
                                                                                                                                   
   #define CTI_DEVTYPE_SUB_Pos (4UL)                  /*!< Position of SUB field.                                               */
@@ -18685,7 +18685,7 @@ typedef struct {
   #define CTI_PIDR4_DES_2_Msk (0xFUL << CTI_PIDR4_DES_2_Pos) /*!< Bit mask of DES_2 field.                                     */
   #define CTI_PIDR4_DES_2_Min (0x4UL)                /*!< Min enumerator value of DES_2 field.                                 */
   #define CTI_PIDR4_DES_2_Max (0x4UL)                /*!< Max enumerator value of DES_2 field.                                 */
-  #define CTI_PIDR4_DES_2_Code (0x4UL)               /*!< JEDEC continuation code.                                             */
+  #define CTI_PIDR4_DES_2_Code (0x4UL)               /*!< JEDEC continuation code                                              */
 
 /* SIZE @Bits 4..7 : Always 0b0000. Indicates that the device only occupies 4KB of memory. */
   #define CTI_PIDR4_SIZE_Pos (4UL)                   /*!< Position of SIZE field.                                              */
@@ -18722,7 +18722,7 @@ typedef struct {
   #define CTI_PIDR1_DES_0_Msk (0xFUL << CTI_PIDR1_DES_0_Pos) /*!< Bit mask of DES_0 field.                                     */
   #define CTI_PIDR1_DES_0_Min (0xBUL)                /*!< Min enumerator value of DES_0 field.                                 */
   #define CTI_PIDR1_DES_0_Max (0xBUL)                /*!< Max enumerator value of DES_0 field.                                 */
-  #define CTI_PIDR1_DES_0_Arm (0xBUL)                /*!< Arm. Bits[3:0] of the JEDEC JEP106 Identity Code                     */
+  #define CTI_PIDR1_DES_0_Arm (0xBUL)                /*!< ARM. Bits[3:0] of the JEDEC JEP106 Identity Code                     */
 
 
 /* CTI_PIDR2: Peripheral ID2 Register */
@@ -18733,7 +18733,7 @@ typedef struct {
   #define CTI_PIDR2_DES_1_Msk (0x7UL << CTI_PIDR2_DES_1_Pos) /*!< Bit mask of DES_1 field.                                     */
   #define CTI_PIDR2_DES_1_Min (0x3UL)                /*!< Min enumerator value of DES_1 field.                                 */
   #define CTI_PIDR2_DES_1_Max (0x3UL)                /*!< Max enumerator value of DES_1 field.                                 */
-  #define CTI_PIDR2_DES_1_Arm (0x3UL)                /*!< Arm. Bits[6:4] of the JEDEC JEP106 Identity Code                     */
+  #define CTI_PIDR2_DES_1_Arm (0x3UL)                /*!< ARM. Bits[6:4] of the JEDEC JEP106 Identity Code                     */
 
 /* JEDEC @Bit 3 : Always 1. Indicates that the JEDEC-assigned designer ID is used. */
   #define CTI_PIDR2_JEDEC_Pos (3UL)                  /*!< Position of JEDEC field.                                             */
@@ -18761,7 +18761,7 @@ typedef struct {
   #define CTI_PIDR3_CMOD_Unmodified (0x0UL)          /*!< Indicates that the customer has not modified this component.         */
 
 /* REVAND @Bits 4..7 : Indicates minor errata fixes specific to the revision of the component being used, for example metal
-                       fixes after implementation. In most cases, this field is 0b0000. Arm recommends that the component
+                       fixes after implementation. In most cases, this field is 0b0000. ARM recommends that the component
                        designers ensure that a metal fix can change this field if required, for example, by driving it from
                        registers that reset to 0b0000. */                                                                         
                                                                                                                                   
@@ -26918,13 +26918,7 @@ typedef struct {
   __IM  uint32_t  WAFERXY;                           /*!< (@ 0x00000008) Wafer number and die X,Y coordinate.                  */
   __IM  uint32_t  PROGVERSION1;                      /*!< (@ 0x0000000C) CP1 test program version.                             */
   __IM  uint32_t  PROGVERSION2;                      /*!< (@ 0x00000010) CP2 test program version.                             */
-  __IM  uint32_t  PASSID1;                           /*!< (@ 0x00000014) CP1 pass ID.                                          */
-  __IM  uint32_t  PASSID2;                           /*!< (@ 0x00000018) CP2 pass ID.                                          */
-  __IM  uint32_t  TIMESTAMP1;                        /*!< (@ 0x0000001C) Timestamp for when CP1 starts or ends
-                                                                         (YYYYMMDDTHHMMSS)*/                                      
-  __IM  uint32_t  TIMESTAMP2;                        /*!< (@ 0x00000020) Timestamp for when CP2 starts or ends
-                                                                         (YYYYMMDDTHHMMSS)*/                                      
-} NRF_FICR_PRODTEST_CP_Type;                         /*!< Size = 36 (0x024)                                                    */
+} NRF_FICR_PRODTEST_CP_Type;                         /*!< Size = 20 (0x014)                                                    */
 
 /* FICR_PRODTEST_CP_LOTNR: Lot number. */
   #define FICR_PRODTEST_CP_LOTNR_MaxCount (2UL)      /*!< Max size of LOTNR[2] array.                                          */
@@ -26954,51 +26948,19 @@ typedef struct {
 /* FICR_PRODTEST_CP_PROGVERSION1: CP1 test program version. */
   #define FICR_PRODTEST_CP_PROGVERSION1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION1 register.                   */
 
-/* VAL @Bits 0..31 : CP1 test program version */
-  #define FICR_PRODTEST_CP_PROGVERSION1_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define FICR_PRODTEST_CP_PROGVERSION1_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PROGVERSION1_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/                                              
+/* PROGVERSION1 @Bits 0..31 : CP1 test program version */
+  #define FICR_PRODTEST_CP_PROGVERSION1_PROGVERSION1_Pos (0UL) /*!< Position of PROGVERSION1 field.                            */
+  #define FICR_PRODTEST_CP_PROGVERSION1_PROGVERSION1_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PROGVERSION1_PROGVERSION1_Pos) /*!<
+                                                                            Bit mask of PROGVERSION1 field.*/                     
 
 
 /* FICR_PRODTEST_CP_PROGVERSION2: CP2 test program version. */
   #define FICR_PRODTEST_CP_PROGVERSION2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION2 register.                   */
 
-/* VAL @Bits 0..31 : CP2 test program version */
-  #define FICR_PRODTEST_CP_PROGVERSION2_VAL_Pos (0UL) /*!< Position of VAL field.                                              */
-  #define FICR_PRODTEST_CP_PROGVERSION2_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PROGVERSION2_VAL_Pos) /*!< Bit mask of VAL
-                                                                            field.*/                                              
-
-
-/* FICR_PRODTEST_CP_PASSID1: CP1 pass ID. */
-  #define FICR_PRODTEST_CP_PASSID1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID1 register.                             */
-
-/* VAL @Bits 0..31 : CP1 pass ID. */
-  #define FICR_PRODTEST_CP_PASSID1_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_CP_PASSID1_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PASSID1_VAL_Pos) /*!< Bit mask of VAL field.      */
-
-
-/* FICR_PRODTEST_CP_PASSID2: CP2 pass ID. */
-  #define FICR_PRODTEST_CP_PASSID2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID2 register.                             */
-
-/* VAL @Bits 0..31 : CP2 pass ID. */
-  #define FICR_PRODTEST_CP_PASSID2_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_CP_PASSID2_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PASSID2_VAL_Pos) /*!< Bit mask of VAL field.      */
-
-
-/* FICR_PRODTEST_CP_TIMESTAMP1: Timestamp for when CP1 starts or ends (YYYYMMDDTHHMMSS) */
-  #define FICR_PRODTEST_CP_TIMESTAMP1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP1 register.                       */
-
-/* VAL @Bits 0..31 : CP1 timestamp */
-  #define FICR_PRODTEST_CP_TIMESTAMP1_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_CP_TIMESTAMP1_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_TIMESTAMP1_VAL_Pos) /*!< Bit mask of VAL field.*/
-
-
-/* FICR_PRODTEST_CP_TIMESTAMP2: Timestamp for when CP2 starts or ends (YYYYMMDDTHHMMSS) */
-  #define FICR_PRODTEST_CP_TIMESTAMP2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP2 register.                       */
-
-/* VAL @Bits 0..31 : CP2 timestamp */
-  #define FICR_PRODTEST_CP_TIMESTAMP2_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_CP_TIMESTAMP2_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_TIMESTAMP2_VAL_Pos) /*!< Bit mask of VAL field.*/
+/* PROGVERSION2 @Bits 0..31 : CP2 test program version */
+  #define FICR_PRODTEST_CP_PROGVERSION2_PROGVERSION2_Pos (0UL) /*!< Position of PROGVERSION2 field.                            */
+  #define FICR_PRODTEST_CP_PROGVERSION2_PROGVERSION2_Msk (0xFFFFFFFFUL << FICR_PRODTEST_CP_PROGVERSION2_PROGVERSION2_Pos) /*!<
+                                                                            Bit mask of PROGVERSION2 field.*/                     
 
 
 
@@ -27008,14 +26970,8 @@ typedef struct {
   */
 typedef struct {
   __IM  uint32_t  PROGVERSION1;                      /*!< (@ 0x00000000) FT1 test program version.                             */
-  __IM  uint32_t  PROGVERSION2;                      /*!< (@ 0x00000004) FT2/EQA test program version.                         */
-  __IM  uint32_t  PASSID1;                           /*!< (@ 0x00000008) FT1 pass ID.                                          */
-  __IM  uint32_t  PASSID2;                           /*!< (@ 0x0000000C) FT2/EQA pass ID.                                      */
-  __IM  uint32_t  TIMESTAMP1;                        /*!< (@ 0x00000010) Timestamp for when FT1 starts or ends
-                                                                         (YYYYMMDDTHHMMSS)*/                                      
-  __IM  uint32_t  TIMESTAMP2;                        /*!< (@ 0x00000014) Timestamp for when FT2/EQA starts or ends
-                                                                         (YYYYMMDDTHHMMSS)*/                                      
-} NRF_FICR_PRODTEST_FT_Type;                         /*!< Size = 24 (0x018)                                                    */
+  __IM  uint32_t  PROGVERSION2;                      /*!< (@ 0x00000004) FT2 test program version.                             */
+} NRF_FICR_PRODTEST_FT_Type;                         /*!< Size = 8 (0x008)                                                     */
 
 /* FICR_PRODTEST_FT_PROGVERSION1: FT1 test program version. */
   #define FICR_PRODTEST_FT_PROGVERSION1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION1 register.                   */
@@ -27026,45 +26982,13 @@ typedef struct {
                                                                             Bit mask of PROGVERSION1 field.*/                     
 
 
-/* FICR_PRODTEST_FT_PROGVERSION2: FT2/EQA test program version. */
+/* FICR_PRODTEST_FT_PROGVERSION2: FT2 test program version. */
   #define FICR_PRODTEST_FT_PROGVERSION2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PROGVERSION2 register.                   */
 
-/* PROGVERSION2 @Bits 0..31 : FT2/EQA test program version */
+/* PROGVERSION2 @Bits 0..31 : FT2 test program version */
   #define FICR_PRODTEST_FT_PROGVERSION2_PROGVERSION2_Pos (0UL) /*!< Position of PROGVERSION2 field.                            */
   #define FICR_PRODTEST_FT_PROGVERSION2_PROGVERSION2_Msk (0xFFFFFFFFUL << FICR_PRODTEST_FT_PROGVERSION2_PROGVERSION2_Pos) /*!<
                                                                             Bit mask of PROGVERSION2 field.*/                     
-
-
-/* FICR_PRODTEST_FT_PASSID1: FT1 pass ID. */
-  #define FICR_PRODTEST_FT_PASSID1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID1 register.                             */
-
-/* VAL @Bits 0..31 : FT1 pass ID. */
-  #define FICR_PRODTEST_FT_PASSID1_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_FT_PASSID1_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_FT_PASSID1_VAL_Pos) /*!< Bit mask of VAL field.      */
-
-
-/* FICR_PRODTEST_FT_PASSID2: FT2/EQA pass ID. */
-  #define FICR_PRODTEST_FT_PASSID2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PASSID2 register.                             */
-
-/* VAL @Bits 0..31 : FT2/EQA pass ID. */
-  #define FICR_PRODTEST_FT_PASSID2_VAL_Pos (0UL)     /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_FT_PASSID2_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_FT_PASSID2_VAL_Pos) /*!< Bit mask of VAL field.      */
-
-
-/* FICR_PRODTEST_FT_TIMESTAMP1: Timestamp for when FT1 starts or ends (YYYYMMDDTHHMMSS) */
-  #define FICR_PRODTEST_FT_TIMESTAMP1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP1 register.                       */
-
-/* VAL @Bits 0..31 : FT1 timestamp */
-  #define FICR_PRODTEST_FT_TIMESTAMP1_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_FT_TIMESTAMP1_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_FT_TIMESTAMP1_VAL_Pos) /*!< Bit mask of VAL field.*/
-
-
-/* FICR_PRODTEST_FT_TIMESTAMP2: Timestamp for when FT2/EQA starts or ends (YYYYMMDDTHHMMSS) */
-  #define FICR_PRODTEST_FT_TIMESTAMP2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TIMESTAMP2 register.                       */
-
-/* VAL @Bits 0..31 : FT2/EQA timestamp */
-  #define FICR_PRODTEST_FT_TIMESTAMP2_VAL_Pos (0UL)  /*!< Position of VAL field.                                               */
-  #define FICR_PRODTEST_FT_TIMESTAMP2_VAL_Msk (0xFFFFFFFFUL << FICR_PRODTEST_FT_TIMESTAMP2_VAL_Pos) /*!< Bit mask of VAL field.*/
 
 
 
@@ -27074,8 +26998,8 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_PRODTEST_CP_Type CP;                /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_PRODTEST_FT_Type FT;                /*!< (@ 0x00000024) (unspecified)                                         */
-} NRF_FICR_PRODTEST_Type;                            /*!< Size = 60 (0x03C)                                                    */
+  __IOM NRF_FICR_PRODTEST_FT_Type FT;                /*!< (@ 0x00000014) (unspecified)                                         */
+} NRF_FICR_PRODTEST_Type;                            /*!< Size = 28 (0x01C)                                                    */
 
 
 /* ========================================== Struct FICR_TRIM_SYSCTRL_FLL16M_TRIM =========================================== */
@@ -27314,8 +27238,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_HFXO_TRIM_Type TRIM;   /*!< (@ 0x00000000) (unspecified)                                         */
   __IM  uint32_t  CLOAD;                             /*!< (@ 0x00000018) Trim value for SYSCTRL.HFXO.CLOAD                     */
-  __IM  uint32_t  AMPLITUDECTRL;                     /*!< (@ 0x0000001C) Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT) */
-} NRF_FICR_TRIM_SYSCTRL_HFXO_Type;                   /*!< Size = 32 (0x020)                                                    */
+} NRF_FICR_TRIM_SYSCTRL_HFXO_Type;                   /*!< Size = 28 (0x01C)                                                    */
 
 /* FICR_TRIM_SYSCTRL_HFXO_CLOAD: Trim value for SYSCTRL.HFXO.CLOAD */
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CLOAD register.                           */
@@ -27324,15 +27247,6 @@ typedef struct {
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Pos (0UL) /*!< Position of VALUE field.                                           */
   #define FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_HFXO_CLOAD_VALUE_Pos) /*!< Bit mask of VALUE
                                                                             field.*/                                              
-
-
-/* FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL: Trim value for SYSCTRL.HFXO.AMPLITUDECTRL (AREG_VOLT) */
-  #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of AMPLITUDECTRL register.           */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
-  #define FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_HFXO_AMPLITUDECTRL_VALUE_Pos) /*!<
-                                                                            Bit mask of VALUE field.*/                            
 
 
 
@@ -28434,28 +28348,28 @@ typedef struct {
   #if defined(_GNUC_)
     #pragma GCC diagnostic pop
   #endif
-  __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_Type AUDIOPLL; /*!< (@ 0x00000058) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_USBHSPLL_Type USBHSPLL; /*!< (@ 0x0000005C) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MBIAS_Type MBIAS;      /*!< (@ 0x00000060) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_OSCRFR_Type OSCRFR;    /*!< (@ 0x0000006C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREG1V0_Type VREG1V0;  /*!< (@ 0x00000074) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_Type VREGAO0V8; /*!< (@ 0x00000088) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_Type VREGAO1V8; /*!< (@ 0x0000009C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type VREGMAIN; /*!< (@ 0x000000AC) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x000000DC) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x000000EC) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x000000FC) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x0000010C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x0000011C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x00000128) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x00000130) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x00000138) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x0000013C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x00000140) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x00000174) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x000001A8) (unspecified)                                    */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x00000278) (unspecified)                                    */
-} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 640 (0x280)                                                   */
+  __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_Type AUDIOPLL; /*!< (@ 0x00000054) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_USBHSPLL_Type USBHSPLL; /*!< (@ 0x00000058) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MBIAS_Type MBIAS;      /*!< (@ 0x0000005C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_OSCRFR_Type OSCRFR;    /*!< (@ 0x00000068) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREG1V0_Type VREG1V0;  /*!< (@ 0x00000070) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_Type VREGAO0V8; /*!< (@ 0x00000084) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_Type VREGAO1V8; /*!< (@ 0x00000098) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type VREGMAIN; /*!< (@ 0x000000A8) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x000000D8) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x000000E8) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x000000F8) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x00000108) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x00000118) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x00000124) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x0000012C) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x00000134) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x00000138) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x0000013C) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x00000170) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x000001A4) (unspecified)                                    */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x00000274) (unspecified)                                    */
+} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 636 (0x27C)                                                   */
 
 
 /* ============================================== Struct FICR_TRIM_GLOBAL_SAADC ============================================== */
@@ -28523,20 +28437,10 @@ typedef struct {
   * @brief TEMP [FICR_TRIM_GLOBAL_TEMP] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  CALIB;                             /*!< (@ 0x00000000) Trim value for GLOBAL.TEMP.CALIB                      */
-  __IM  uint32_t  A[6];                              /*!< (@ 0x00000004) Trim value for GLOBAL.TEMP.A                          */
-  __IM  uint32_t  B[6];                              /*!< (@ 0x0000001C) Trim value for GLOBAL.TEMP.B                          */
-  __IM  uint32_t  T[5];                              /*!< (@ 0x00000034) Trim value for GLOBAL.TEMP.T                          */
-} NRF_FICR_TRIM_GLOBAL_TEMP_Type;                    /*!< Size = 72 (0x048)                                                    */
-
-/* FICR_TRIM_GLOBAL_TEMP_CALIB: Trim value for GLOBAL.TEMP.CALIB */
-  #define FICR_TRIM_GLOBAL_TEMP_CALIB_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIB register.                            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
-  #define FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Pos) /*!< Bit mask of VALUE
-                                                                            field.*/                                              
-
+  __IM  uint32_t  A[6];                              /*!< (@ 0x00000000) Trim value for GLOBAL.TEMP.A                          */
+  __IM  uint32_t  B[6];                              /*!< (@ 0x00000018) Trim value for GLOBAL.TEMP.B                          */
+  __IM  uint32_t  T[5];                              /*!< (@ 0x00000030) Trim value for GLOBAL.TEMP.T                          */
+} NRF_FICR_TRIM_GLOBAL_TEMP_Type;                    /*!< Size = 68 (0x044)                                                    */
 
 /* FICR_TRIM_GLOBAL_TEMP_A: Trim value for GLOBAL.TEMP.A */
   #define FICR_TRIM_GLOBAL_TEMP_A_MaxCount (6UL)     /*!< Max size of A[6] array.                                              */
@@ -28648,64 +28552,6 @@ typedef struct {
 } NRF_FICR_TRIM_GLOBAL_GPIO_Type;                    /*!< Size = 8 (0x008)                                                     */
 
 
-/* ============================================== Struct FICR_TRIM_GLOBAL_COMP =============================================== */
-/**
-  * @brief COMP [FICR_TRIM_GLOBAL_COMP] (unspecified)
-  */
-typedef struct {
-  __IM  uint32_t  REFTRIM;                           /*!< (@ 0x00000000) Trim value for GLOBAL.COMP.REFTRIM                    */
-  __IM  uint32_t  RCAL80KCOARSE;                     /*!< (@ 0x00000004) Trim value for GLOBAL.COMP.RCAL80KCOARSE              */
-  __IM  uint32_t  RCAL80KFINE;                       /*!< (@ 0x00000008) Trim value for GLOBAL.COMP.RCAL80KFINE                */
-  __IM  uint32_t  RCAL6M4COARSE;                     /*!< (@ 0x0000000C) Trim value for GLOBAL.COMP.RCAL6M4COARSE              */
-  __IM  uint32_t  RCAL6M4FINE;                       /*!< (@ 0x00000010) Trim value for GLOBAL.COMP.RCAL6M4FINE                */
-} NRF_FICR_TRIM_GLOBAL_COMP_Type;                    /*!< Size = 20 (0x014)                                                    */
-
-/* FICR_TRIM_GLOBAL_COMP_REFTRIM: Trim value for GLOBAL.COMP.REFTRIM */
-  #define FICR_TRIM_GLOBAL_COMP_REFTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REFTRIM register.                        */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_REFTRIM_VALUE_Pos (0UL) /*!< Position of VALUE field.                                          */
-  #define FICR_TRIM_GLOBAL_COMP_REFTRIM_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_REFTRIM_VALUE_Pos) /*!< Bit mask of
-                                                                            VALUE field.*/                                        
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE: Trim value for GLOBAL.COMP.RCAL80KCOARSE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL80KCOARSE register.            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL80KFINE: Trim value for GLOBAL.COMP.RCAL80KFINE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL80KFINE register.                */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE: Trim value for GLOBAL.COMP.RCAL6M4COARSE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL6M4COARSE register.            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE: Trim value for GLOBAL.COMP.RCAL6M4FINE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL6M4FINE register.                */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-
 /* ================================================= Struct FICR_TRIM_GLOBAL ================================================= */
 /**
   * @brief GLOBAL [FICR_TRIM_GLOBAL] (unspecified)
@@ -28713,11 +28559,10 @@ typedef struct {
 typedef struct {
   __IOM NRF_FICR_TRIM_GLOBAL_SAADC_Type SAADC;       /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_GLOBAL_TEMP_Type TEMP;         /*!< (@ 0x00000030) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x00000078) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x0000007C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_Type GPIO;         /*!< (@ 0x00000080) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_COMP_Type COMP;         /*!< (@ 0x00000088) (unspecified)                                         */
-} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 156 (0x09C)                                                   */
+  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x00000074) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x00000078) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_Type GPIO;         /*!< (@ 0x0000007C) (unspecified)                                         */
+} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 132 (0x084)                                                   */
 
 
 /* ========================================= Struct FICR_TRIM_APPLICATION_HSFLL_TRIM ========================================= */
@@ -29260,10 +29105,10 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_Type SYSCTRL;          /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000280) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x0000031C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x0000035C) (unspecified)                                         */
-  __IM  uint32_t  RESERVED[10];
+  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x0000027C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x00000300) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x00000340) (unspecified)                                         */
+  __IM  uint32_t  RESERVED[17];
   __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003E0) (unspecified)                                         */
   __IM  uint32_t  RESERVED1;
   __IOM NRF_FICR_TRIM_COMMON_Type COMMON;            /*!< (@ 0x000003F8) (unspecified)                                         */
@@ -29546,23 +29391,13 @@ typedef struct {
     __IOM NRF_FICR_INFO_Type INFO;                   /*!< (@ 0x00000050) Device info                                           */
     __IM uint32_t RESERVED1[3];
     __IOM NRF_FICR_PRODTEST_Type PRODTEST;           /*!< (@ 0x00000080) (unspecified)                                         */
-    __IM uint32_t RESERVED2[17];
+    __IM uint32_t RESERVED2[25];
     __IOM NRF_FICR_TRIM_Type TRIM;                   /*!< (@ 0x00000100) (unspecified)                                         */
     __IM uint32_t RESERVED3[10];
     __IOM NRF_FICR_BOOT_Type BOOT;                   /*!< (@ 0x000005A0) (unspecified)                                         */
     __IM uint32_t RESERVED4[3];
     __IOM NRF_FICR_SRAM_Type SRAM;                   /*!< (@ 0x000007B0) (unspecified)                                         */
-    __IM uint32_t RESERVED5[10];
-    __IOM uint32_t CRC32;                            /*!< (@ 0x000007FC) CRC32 value for FICR (except this word)               */
-  } NRF_FICR_Type;                                   /*!< Size = 2048 (0x800)                                                  */
-
-/* FICR_CRC32: CRC32 value for FICR (except this word) */
-  #define FICR_CRC32_ResetValue (0x00000000UL)       /*!< Reset value of CRC32 register.                                       */
-
-/* VALUE @Bits 0..31 : CRC32 value */
-  #define FICR_CRC32_VALUE_Pos (0UL)                 /*!< Position of VALUE field.                                             */
-  #define FICR_CRC32_VALUE_Msk (0xFFFFFFFFUL << FICR_CRC32_VALUE_Pos) /*!< Bit mask of VALUE field.                            */
-
+  } NRF_FICR_Type;                                   /*!< Size = 2004 (0x7D4)                                                  */
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
@@ -29761,7 +29596,7 @@ typedef struct {
 
 
 /* FLL16M_CLOCKCTRL_DITHERING: Clock dithering configuration */
-  #define FLL16M_CLOCKCTRL_DITHERING_ResetValue (0x00096733UL) /*!< Reset value of DITHERING register.                         */
+  #define FLL16M_CLOCKCTRL_DITHERING_ResetValue (0x00000000UL) /*!< Reset value of DITHERING register.                         */
 
 /* CYCLECOUNT @Bits 0..2 : Cycle count configuration for clock dithering */
   #define FLL16M_CLOCKCTRL_DITHERING_CYCLECOUNT_Pos (0UL) /*!< Position of CYCLECOUNT field.                                   */
@@ -29992,8 +29827,7 @@ typedef struct {
                                                                          module*/                                                 
   __IOM uint32_t  CKSELOUT;                          /*!< (@ 0x00000014) Override the CKSW16M CKSEL signal from the analog
                                                                          module*/                                                 
-  __IM  uint32_t  RESERVED;
-} NRF_FLL16M_OVERRIDE_CKSW16M_Type;                  /*!< Size = 28 (0x01C)                                                    */
+} NRF_FLL16M_OVERRIDE_CKSW16M_Type;                  /*!< Size = 24 (0x018)                                                    */
 
 /* FLL16M_OVERRIDE_CKSW16M_PWRUP: Override the PWRUP signal to the CKSW16M analog module */
   #define FLL16M_OVERRIDE_CKSW16M_PWRUP_ResetValue (0x00000000UL) /*!< Reset value of PWRUP register.                          */
@@ -30101,7 +29935,7 @@ typedef struct {
 typedef struct {
   __IOM NRF_FLL16M_OVERRIDE_DCO16M_Type DCO16M;      /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_FLL16M_OVERRIDE_CKSW16M_Type CKSW16M;    /*!< (@ 0x00000014) (unspecified)                                         */
-} NRF_FLL16M_OVERRIDE_Type;                          /*!< Size = 48 (0x030)                                                    */
+} NRF_FLL16M_OVERRIDE_Type;                          /*!< Size = 44 (0x02C)                                                    */
 
 
 /* ================================================ Struct FLL16M_DFT_DCO16M ================================================= */
@@ -30408,7 +30242,7 @@ typedef struct {
     __IOM NRF_FLL16M_CLOCKCTRL_Type CLOCKCTRL;       /*!< (@ 0x00000490) (unspecified)                                         */
     __IM uint32_t RESERVED8[20];
     __IOM NRF_FLL16M_OVERRIDE_Type OVERRIDE;         /*!< (@ 0x00000500) (unspecified)                                         */
-    __IM uint32_t RESERVED9[52];
+    __IM uint32_t RESERVED9[53];
     __IOM NRF_FLL16M_DFT_Type DFT;                   /*!< (@ 0x00000600) (unspecified)                                         */
   } NRF_FLL16M_Type;                                 /*!< Size = 1652 (0x674)                                                  */
 
@@ -30674,9 +30508,9 @@ typedef struct {
   #define FLL16M_CLOCKSTATUS_LOCKED_NotLocked (0x0UL) /*!< Not locked to reference clock                                       */
   #define FLL16M_CLOCKSTATUS_LOCKED_Locked (0x1UL)   /*!< Locked to reference clock.                                           */
 
-/* SLOPE @Bits 16..24 : The calculated slope value. */
+/* SLOPE @Bits 16..23 : The calculated slope value. */
   #define FLL16M_CLOCKSTATUS_SLOPE_Pos (16UL)        /*!< Position of SLOPE field.                                             */
-  #define FLL16M_CLOCKSTATUS_SLOPE_Msk (0x1FFUL << FLL16M_CLOCKSTATUS_SLOPE_Pos) /*!< Bit mask of SLOPE field.                 */
+  #define FLL16M_CLOCKSTATUS_SLOPE_Msk (0xFFUL << FLL16M_CLOCKSTATUS_SLOPE_Pos) /*!< Bit mask of SLOPE field.                  */
 
 
 /* FLL16M_STATUSANA: Status of analog module output signals */
@@ -30706,23 +30540,15 @@ typedef struct {
 
 
 /* FLL16M_MIRROR: Enable LOCK for mirrored registers */
-  #define FLL16M_MIRROR_ResetValue (0x00000003UL)    /*!< Reset value of MIRROR register.                                      */
+  #define FLL16M_MIRROR_ResetValue (0x00000001UL)    /*!< Reset value of MIRROR register.                                      */
 
-/* LOCKDCO @Bit 0 : Lock for mirrored registers of DCO */
-  #define FLL16M_MIRROR_LOCKDCO_Pos (0UL)            /*!< Position of LOCKDCO field.                                           */
-  #define FLL16M_MIRROR_LOCKDCO_Msk (0x1UL << FLL16M_MIRROR_LOCKDCO_Pos) /*!< Bit mask of LOCKDCO field.                       */
-  #define FLL16M_MIRROR_LOCKDCO_Min (0x0UL)          /*!< Min enumerator value of LOCKDCO field.                               */
-  #define FLL16M_MIRROR_LOCKDCO_Max (0x1UL)          /*!< Max enumerator value of LOCKDCO field.                               */
-  #define FLL16M_MIRROR_LOCKDCO_Disabled (0x0UL)     /*!< Lock disabled                                                        */
-  #define FLL16M_MIRROR_LOCKDCO_Enabled (0x1UL)      /*!< Lock enabled                                                         */
-
-/* LOCKCKSW @Bit 1 : Lock for mirrored registers of CKSW */
-  #define FLL16M_MIRROR_LOCKCKSW_Pos (1UL)           /*!< Position of LOCKCKSW field.                                          */
-  #define FLL16M_MIRROR_LOCKCKSW_Msk (0x1UL << FLL16M_MIRROR_LOCKCKSW_Pos) /*!< Bit mask of LOCKCKSW field.                    */
-  #define FLL16M_MIRROR_LOCKCKSW_Min (0x0UL)         /*!< Min enumerator value of LOCKCKSW field.                              */
-  #define FLL16M_MIRROR_LOCKCKSW_Max (0x1UL)         /*!< Max enumerator value of LOCKCKSW field.                              */
-  #define FLL16M_MIRROR_LOCKCKSW_Disabled (0x0UL)    /*!< Lock disabled                                                        */
-  #define FLL16M_MIRROR_LOCKCKSW_Enabled (0x1UL)     /*!< Lock enabled                                                         */
+/* LOCK @Bit 0 : Lock for mirrored registers */
+  #define FLL16M_MIRROR_LOCK_Pos (0UL)               /*!< Position of LOCK field.                                              */
+  #define FLL16M_MIRROR_LOCK_Msk (0x1UL << FLL16M_MIRROR_LOCK_Pos) /*!< Bit mask of LOCK field.                                */
+  #define FLL16M_MIRROR_LOCK_Min (0x0UL)             /*!< Min enumerator value of LOCK field.                                  */
+  #define FLL16M_MIRROR_LOCK_Max (0x1UL)             /*!< Max enumerator value of LOCK field.                                  */
+  #define FLL16M_MIRROR_LOCK_Disabled (0x0UL)        /*!< Lock disabled                                                        */
+  #define FLL16M_MIRROR_LOCK_Enabled (0x1UL)         /*!< Lock enabled                                                         */
 
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
@@ -38372,722 +38198,594 @@ typedef struct {
   * @brief GRCFORCEON [GRCCONF_GRCFORCEON] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  MASK0;                             /*!< (@ 0x00000000) Mask the active power domain request due to interrupt
-                                                                         from GRC peripheral identifier [31:0]*/                  
-  __IOM uint32_t  MASK1;                             /*!< (@ 0x00000004) Mask the active power domain request due to interrupt
-                                                                         from GRC peripheral identifier [63 : 32]*/               
+  __IOM uint32_t  MASK0;                             /*!< (@ 0x00000000) Mask the interrupt from GRC peripheral identifier
+                                                                         [31:0]*/                                                 
+  __IOM uint32_t  MASK1;                             /*!< (@ 0x00000004) Mask the interrupt from GRC peripheral identifier [63 :
+                                                                         32]*/                                                    
 } NRF_GRCCONF_GRCFORCEON_Type;                       /*!< Size = 8 (0x008)                                                     */
 
-/* GRCCONF_GRCFORCEON_MASK0: Mask the active power domain request due to interrupt from GRC peripheral identifier [31:0] */
+/* GRCCONF_GRCFORCEON_MASK0: Mask the interrupt from GRC peripheral identifier [31:0] */
   #define GRCCONF_GRCFORCEON_MASK0_ResetValue (0x00000000UL) /*!< Reset value of MASK0 register.                               */
 
-/* PERIPHID0 @Bit 0 : GRC peripheral identifier [0] */
+/* PERIPHID0 @Bit 0 : Interrupt status of the GRC peripheral identifier [0] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Pos (0UL) /*!< Position of PERIPHID0 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Pos) /*!< Bit mask of PERIPHID0
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Min (0x0UL) /*!< Min enumerator value of PERIPHID0 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Max (0x1UL) /*!< Max enumerator value of PERIPHID0 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [0] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [0]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [0] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID0_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [0] is masked                 */
 
-/* PERIPHID1 @Bit 1 : GRC peripheral identifier [1] */
+/* PERIPHID1 @Bit 1 : Interrupt status of the GRC peripheral identifier [1] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Pos (1UL) /*!< Position of PERIPHID1 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Pos) /*!< Bit mask of PERIPHID1
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Min (0x0UL) /*!< Min enumerator value of PERIPHID1 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Max (0x1UL) /*!< Max enumerator value of PERIPHID1 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [1] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [1]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [1] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID1_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [1] is masked                 */
 
-/* PERIPHID2 @Bit 2 : GRC peripheral identifier [2] */
+/* PERIPHID2 @Bit 2 : Interrupt status of the GRC peripheral identifier [2] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Pos (2UL) /*!< Position of PERIPHID2 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Pos) /*!< Bit mask of PERIPHID2
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Min (0x0UL) /*!< Min enumerator value of PERIPHID2 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Max (0x1UL) /*!< Max enumerator value of PERIPHID2 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [2] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [2]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [2] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID2_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [2] is masked                 */
 
-/* PERIPHID3 @Bit 3 : GRC peripheral identifier [3] */
+/* PERIPHID3 @Bit 3 : Interrupt status of the GRC peripheral identifier [3] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Pos (3UL) /*!< Position of PERIPHID3 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Pos) /*!< Bit mask of PERIPHID3
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Min (0x0UL) /*!< Min enumerator value of PERIPHID3 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Max (0x1UL) /*!< Max enumerator value of PERIPHID3 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [3] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [3]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [3] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID3_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [3] is masked                 */
 
-/* PERIPHID4 @Bit 4 : GRC peripheral identifier [4] */
+/* PERIPHID4 @Bit 4 : Interrupt status of the GRC peripheral identifier [4] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Pos (4UL) /*!< Position of PERIPHID4 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Pos) /*!< Bit mask of PERIPHID4
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Min (0x0UL) /*!< Min enumerator value of PERIPHID4 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Max (0x1UL) /*!< Max enumerator value of PERIPHID4 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [4] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [4]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [4] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID4_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [4] is masked                 */
 
-/* PERIPHID5 @Bit 5 : GRC peripheral identifier [5] */
+/* PERIPHID5 @Bit 5 : Interrupt status of the GRC peripheral identifier [5] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Pos (5UL) /*!< Position of PERIPHID5 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Pos) /*!< Bit mask of PERIPHID5
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Min (0x0UL) /*!< Min enumerator value of PERIPHID5 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Max (0x1UL) /*!< Max enumerator value of PERIPHID5 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [5] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [5]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [5] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID5_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [5] is masked                 */
 
-/* PERIPHID6 @Bit 6 : GRC peripheral identifier [6] */
+/* PERIPHID6 @Bit 6 : Interrupt status of the GRC peripheral identifier [6] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Pos (6UL) /*!< Position of PERIPHID6 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Pos) /*!< Bit mask of PERIPHID6
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Min (0x0UL) /*!< Min enumerator value of PERIPHID6 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Max (0x1UL) /*!< Max enumerator value of PERIPHID6 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [6] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [6]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [6] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID6_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [6] is masked                 */
 
-/* PERIPHID7 @Bit 7 : GRC peripheral identifier [7] */
+/* PERIPHID7 @Bit 7 : Interrupt status of the GRC peripheral identifier [7] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Pos (7UL) /*!< Position of PERIPHID7 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Pos) /*!< Bit mask of PERIPHID7
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Min (0x0UL) /*!< Min enumerator value of PERIPHID7 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Max (0x1UL) /*!< Max enumerator value of PERIPHID7 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [7] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [7]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [7] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID7_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [7] is masked                 */
 
-/* PERIPHID8 @Bit 8 : GRC peripheral identifier [8] */
+/* PERIPHID8 @Bit 8 : Interrupt status of the GRC peripheral identifier [8] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Pos (8UL) /*!< Position of PERIPHID8 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Pos) /*!< Bit mask of PERIPHID8
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Min (0x0UL) /*!< Min enumerator value of PERIPHID8 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Max (0x1UL) /*!< Max enumerator value of PERIPHID8 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [8] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [8]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [8] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID8_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [8] is masked                 */
 
-/* PERIPHID9 @Bit 9 : GRC peripheral identifier [9] */
+/* PERIPHID9 @Bit 9 : Interrupt status of the GRC peripheral identifier [9] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Pos (9UL) /*!< Position of PERIPHID9 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Pos) /*!< Bit mask of PERIPHID9
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Min (0x0UL) /*!< Min enumerator value of PERIPHID9 field.                         */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Max (0x1UL) /*!< Max enumerator value of PERIPHID9 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [9] interrupt is active*/                                           
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [9]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [9] is unmasked             */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID9_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [9] is masked                 */
 
-/* PERIPHID10 @Bit 10 : GRC peripheral identifier [10] */
+/* PERIPHID10 @Bit 10 : Interrupt status of the GRC peripheral identifier [10] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Pos (10UL) /*!< Position of PERIPHID10 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Pos) /*!< Bit mask of PERIPHID10
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Min (0x0UL) /*!< Min enumerator value of PERIPHID10 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Max (0x1UL) /*!< Max enumerator value of PERIPHID10 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [10] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [10]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [10] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID10_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [10] is masked               */
 
-/* PERIPHID11 @Bit 11 : GRC peripheral identifier [11] */
+/* PERIPHID11 @Bit 11 : Interrupt status of the GRC peripheral identifier [11] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Pos (11UL) /*!< Position of PERIPHID11 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Pos) /*!< Bit mask of PERIPHID11
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Min (0x0UL) /*!< Min enumerator value of PERIPHID11 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Max (0x1UL) /*!< Max enumerator value of PERIPHID11 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [11] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [11]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [11] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID11_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [11] is masked               */
 
-/* PERIPHID12 @Bit 12 : GRC peripheral identifier [12] */
+/* PERIPHID12 @Bit 12 : Interrupt status of the GRC peripheral identifier [12] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Pos (12UL) /*!< Position of PERIPHID12 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Pos) /*!< Bit mask of PERIPHID12
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Min (0x0UL) /*!< Min enumerator value of PERIPHID12 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Max (0x1UL) /*!< Max enumerator value of PERIPHID12 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [12] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [12]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [12] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID12_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [12] is masked               */
 
-/* PERIPHID13 @Bit 13 : GRC peripheral identifier [13] */
+/* PERIPHID13 @Bit 13 : Interrupt status of the GRC peripheral identifier [13] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Pos (13UL) /*!< Position of PERIPHID13 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Pos) /*!< Bit mask of PERIPHID13
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Min (0x0UL) /*!< Min enumerator value of PERIPHID13 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Max (0x1UL) /*!< Max enumerator value of PERIPHID13 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [13] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [13]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [13] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID13_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [13] is masked               */
 
-/* PERIPHID14 @Bit 14 : GRC peripheral identifier [14] */
+/* PERIPHID14 @Bit 14 : Interrupt status of the GRC peripheral identifier [14] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Pos (14UL) /*!< Position of PERIPHID14 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Pos) /*!< Bit mask of PERIPHID14
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Min (0x0UL) /*!< Min enumerator value of PERIPHID14 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Max (0x1UL) /*!< Max enumerator value of PERIPHID14 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [14] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [14]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [14] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID14_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [14] is masked               */
 
-/* PERIPHID15 @Bit 15 : GRC peripheral identifier [15] */
+/* PERIPHID15 @Bit 15 : Interrupt status of the GRC peripheral identifier [15] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Pos (15UL) /*!< Position of PERIPHID15 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Pos) /*!< Bit mask of PERIPHID15
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Min (0x0UL) /*!< Min enumerator value of PERIPHID15 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Max (0x1UL) /*!< Max enumerator value of PERIPHID15 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [15] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [15]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [15] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID15_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [15] is masked               */
 
-/* PERIPHID16 @Bit 16 : GRC peripheral identifier [16] */
+/* PERIPHID16 @Bit 16 : Interrupt status of the GRC peripheral identifier [16] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Pos (16UL) /*!< Position of PERIPHID16 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Pos) /*!< Bit mask of PERIPHID16
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Min (0x0UL) /*!< Min enumerator value of PERIPHID16 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Max (0x1UL) /*!< Max enumerator value of PERIPHID16 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [16] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [16]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [16] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID16_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [16] is masked               */
 
-/* PERIPHID17 @Bit 17 : GRC peripheral identifier [17] */
+/* PERIPHID17 @Bit 17 : Interrupt status of the GRC peripheral identifier [17] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Pos (17UL) /*!< Position of PERIPHID17 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Pos) /*!< Bit mask of PERIPHID17
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Min (0x0UL) /*!< Min enumerator value of PERIPHID17 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Max (0x1UL) /*!< Max enumerator value of PERIPHID17 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [17] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [17]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [17] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID17_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [17] is masked               */
 
-/* PERIPHID18 @Bit 18 : GRC peripheral identifier [18] */
+/* PERIPHID18 @Bit 18 : Interrupt status of the GRC peripheral identifier [18] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Pos (18UL) /*!< Position of PERIPHID18 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Pos) /*!< Bit mask of PERIPHID18
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Min (0x0UL) /*!< Min enumerator value of PERIPHID18 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Max (0x1UL) /*!< Max enumerator value of PERIPHID18 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [18] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [18]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [18] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID18_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [18] is masked               */
 
-/* PERIPHID19 @Bit 19 : GRC peripheral identifier [19] */
+/* PERIPHID19 @Bit 19 : Interrupt status of the GRC peripheral identifier [19] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Pos (19UL) /*!< Position of PERIPHID19 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Pos) /*!< Bit mask of PERIPHID19
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Min (0x0UL) /*!< Min enumerator value of PERIPHID19 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Max (0x1UL) /*!< Max enumerator value of PERIPHID19 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [19] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [19]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [19] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID19_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [19] is masked               */
 
-/* PERIPHID20 @Bit 20 : GRC peripheral identifier [20] */
+/* PERIPHID20 @Bit 20 : Interrupt status of the GRC peripheral identifier [20] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Pos (20UL) /*!< Position of PERIPHID20 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Pos) /*!< Bit mask of PERIPHID20
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Min (0x0UL) /*!< Min enumerator value of PERIPHID20 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Max (0x1UL) /*!< Max enumerator value of PERIPHID20 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [20] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [20]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [20] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID20_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [20] is masked               */
 
-/* PERIPHID21 @Bit 21 : GRC peripheral identifier [21] */
+/* PERIPHID21 @Bit 21 : Interrupt status of the GRC peripheral identifier [21] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Pos (21UL) /*!< Position of PERIPHID21 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Pos) /*!< Bit mask of PERIPHID21
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Min (0x0UL) /*!< Min enumerator value of PERIPHID21 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Max (0x1UL) /*!< Max enumerator value of PERIPHID21 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [21] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [21]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [21] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID21_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [21] is masked               */
 
-/* PERIPHID22 @Bit 22 : GRC peripheral identifier [22] */
+/* PERIPHID22 @Bit 22 : Interrupt status of the GRC peripheral identifier [22] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Pos (22UL) /*!< Position of PERIPHID22 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Pos) /*!< Bit mask of PERIPHID22
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Min (0x0UL) /*!< Min enumerator value of PERIPHID22 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Max (0x1UL) /*!< Max enumerator value of PERIPHID22 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [22] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [22]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [22] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID22_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [22] is masked               */
 
-/* PERIPHID23 @Bit 23 : GRC peripheral identifier [23] */
+/* PERIPHID23 @Bit 23 : Interrupt status of the GRC peripheral identifier [23] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Pos (23UL) /*!< Position of PERIPHID23 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Pos) /*!< Bit mask of PERIPHID23
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Min (0x0UL) /*!< Min enumerator value of PERIPHID23 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Max (0x1UL) /*!< Max enumerator value of PERIPHID23 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [23] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [23]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [23] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID23_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [23] is masked               */
 
-/* PERIPHID24 @Bit 24 : GRC peripheral identifier [24] */
+/* PERIPHID24 @Bit 24 : Interrupt status of the GRC peripheral identifier [24] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Pos (24UL) /*!< Position of PERIPHID24 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Pos) /*!< Bit mask of PERIPHID24
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Min (0x0UL) /*!< Min enumerator value of PERIPHID24 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Max (0x1UL) /*!< Max enumerator value of PERIPHID24 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [24] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [24]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [24] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID24_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [24] is masked               */
 
-/* PERIPHID25 @Bit 25 : GRC peripheral identifier [25] */
+/* PERIPHID25 @Bit 25 : Interrupt status of the GRC peripheral identifier [25] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Pos (25UL) /*!< Position of PERIPHID25 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Pos) /*!< Bit mask of PERIPHID25
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Min (0x0UL) /*!< Min enumerator value of PERIPHID25 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Max (0x1UL) /*!< Max enumerator value of PERIPHID25 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [25] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [25]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [25] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID25_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [25] is masked               */
 
-/* PERIPHID26 @Bit 26 : GRC peripheral identifier [26] */
+/* PERIPHID26 @Bit 26 : Interrupt status of the GRC peripheral identifier [26] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Pos (26UL) /*!< Position of PERIPHID26 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Pos) /*!< Bit mask of PERIPHID26
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Min (0x0UL) /*!< Min enumerator value of PERIPHID26 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Max (0x1UL) /*!< Max enumerator value of PERIPHID26 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [26] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [26]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [26] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID26_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [26] is masked               */
 
-/* PERIPHID27 @Bit 27 : GRC peripheral identifier [27] */
+/* PERIPHID27 @Bit 27 : Interrupt status of the GRC peripheral identifier [27] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Pos (27UL) /*!< Position of PERIPHID27 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Pos) /*!< Bit mask of PERIPHID27
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Min (0x0UL) /*!< Min enumerator value of PERIPHID27 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Max (0x1UL) /*!< Max enumerator value of PERIPHID27 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [27] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [27]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [27] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID27_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [27] is masked               */
 
-/* PERIPHID28 @Bit 28 : GRC peripheral identifier [28] */
+/* PERIPHID28 @Bit 28 : Interrupt status of the GRC peripheral identifier [28] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Pos (28UL) /*!< Position of PERIPHID28 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Pos) /*!< Bit mask of PERIPHID28
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Min (0x0UL) /*!< Min enumerator value of PERIPHID28 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Max (0x1UL) /*!< Max enumerator value of PERIPHID28 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [28] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [28]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [28] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID28_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [28] is masked               */
 
-/* PERIPHID29 @Bit 29 : GRC peripheral identifier [29] */
+/* PERIPHID29 @Bit 29 : Interrupt status of the GRC peripheral identifier [29] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Pos (29UL) /*!< Position of PERIPHID29 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Pos) /*!< Bit mask of PERIPHID29
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Min (0x0UL) /*!< Min enumerator value of PERIPHID29 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Max (0x1UL) /*!< Max enumerator value of PERIPHID29 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [29] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [29]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [29] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID29_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [29] is masked               */
 
-/* PERIPHID30 @Bit 30 : GRC peripheral identifier [30] */
+/* PERIPHID30 @Bit 30 : Interrupt status of the GRC peripheral identifier [30] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Pos (30UL) /*!< Position of PERIPHID30 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Pos) /*!< Bit mask of PERIPHID30
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Min (0x0UL) /*!< Min enumerator value of PERIPHID30 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Max (0x1UL) /*!< Max enumerator value of PERIPHID30 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [30] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [30]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [30] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID30_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [30] is masked               */
 
-/* PERIPHID31 @Bit 31 : GRC peripheral identifier [31] */
+/* PERIPHID31 @Bit 31 : Interrupt status of the GRC peripheral identifier [31] */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Pos (31UL) /*!< Position of PERIPHID31 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Pos) /*!< Bit mask of PERIPHID31
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Min (0x0UL) /*!< Min enumerator value of PERIPHID31 field.                       */
   #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Max (0x1UL) /*!< Max enumerator value of PERIPHID31 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [31] interrupt is active*/                                         
-  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [31]
-                                                              interrupt is active*/                                               
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [31] is unmasked           */
+  #define GRCCONF_GRCFORCEON_MASK0_PERIPHID31_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [31] is masked               */
 
 
-/* GRCCONF_GRCFORCEON_MASK1: Mask the active power domain request due to interrupt from GRC peripheral identifier [63 : 32] */
+/* GRCCONF_GRCFORCEON_MASK1: Mask the interrupt from GRC peripheral identifier [63 : 32] */
   #define GRCCONF_GRCFORCEON_MASK1_ResetValue (0x00000000UL) /*!< Reset value of MASK1 register.                               */
 
-/* PERIPHID0 @Bit 0 : GRC peripheral identifier [0] */
+/* PERIPHID0 @Bit 0 : Interrupt status of the GRC peripheral identifier [32 + 0] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Pos (0UL) /*!< Position of PERIPHID0 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Pos) /*!< Bit mask of PERIPHID0
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Min (0x0UL) /*!< Min enumerator value of PERIPHID0 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Max (0x1UL) /*!< Max enumerator value of PERIPHID0 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 0] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 0]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 0] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID0_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 0] is masked            */
 
-/* PERIPHID1 @Bit 1 : GRC peripheral identifier [1] */
+/* PERIPHID1 @Bit 1 : Interrupt status of the GRC peripheral identifier [32 + 1] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Pos (1UL) /*!< Position of PERIPHID1 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Pos) /*!< Bit mask of PERIPHID1
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Min (0x0UL) /*!< Min enumerator value of PERIPHID1 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Max (0x1UL) /*!< Max enumerator value of PERIPHID1 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 1] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 1]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 1] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID1_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 1] is masked            */
 
-/* PERIPHID2 @Bit 2 : GRC peripheral identifier [2] */
+/* PERIPHID2 @Bit 2 : Interrupt status of the GRC peripheral identifier [32 + 2] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Pos (2UL) /*!< Position of PERIPHID2 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Pos) /*!< Bit mask of PERIPHID2
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Min (0x0UL) /*!< Min enumerator value of PERIPHID2 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Max (0x1UL) /*!< Max enumerator value of PERIPHID2 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 2] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 2]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 2] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID2_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 2] is masked            */
 
-/* PERIPHID3 @Bit 3 : GRC peripheral identifier [3] */
+/* PERIPHID3 @Bit 3 : Interrupt status of the GRC peripheral identifier [32 + 3] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Pos (3UL) /*!< Position of PERIPHID3 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Pos) /*!< Bit mask of PERIPHID3
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Min (0x0UL) /*!< Min enumerator value of PERIPHID3 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Max (0x1UL) /*!< Max enumerator value of PERIPHID3 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 3] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 3]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 3] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID3_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 3] is masked            */
 
-/* PERIPHID4 @Bit 4 : GRC peripheral identifier [4] */
+/* PERIPHID4 @Bit 4 : Interrupt status of the GRC peripheral identifier [32 + 4] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Pos (4UL) /*!< Position of PERIPHID4 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Pos) /*!< Bit mask of PERIPHID4
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Min (0x0UL) /*!< Min enumerator value of PERIPHID4 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Max (0x1UL) /*!< Max enumerator value of PERIPHID4 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 4] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 4]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 4] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID4_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 4] is masked            */
 
-/* PERIPHID5 @Bit 5 : GRC peripheral identifier [5] */
+/* PERIPHID5 @Bit 5 : Interrupt status of the GRC peripheral identifier [32 + 5] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Pos (5UL) /*!< Position of PERIPHID5 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Pos) /*!< Bit mask of PERIPHID5
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Min (0x0UL) /*!< Min enumerator value of PERIPHID5 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Max (0x1UL) /*!< Max enumerator value of PERIPHID5 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 5] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 5]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 5] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID5_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 5] is masked            */
 
-/* PERIPHID6 @Bit 6 : GRC peripheral identifier [6] */
+/* PERIPHID6 @Bit 6 : Interrupt status of the GRC peripheral identifier [32 + 6] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Pos (6UL) /*!< Position of PERIPHID6 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Pos) /*!< Bit mask of PERIPHID6
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Min (0x0UL) /*!< Min enumerator value of PERIPHID6 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Max (0x1UL) /*!< Max enumerator value of PERIPHID6 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 6] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 6]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 6] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID6_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 6] is masked            */
 
-/* PERIPHID7 @Bit 7 : GRC peripheral identifier [7] */
+/* PERIPHID7 @Bit 7 : Interrupt status of the GRC peripheral identifier [32 + 7] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Pos (7UL) /*!< Position of PERIPHID7 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Pos) /*!< Bit mask of PERIPHID7
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Min (0x0UL) /*!< Min enumerator value of PERIPHID7 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Max (0x1UL) /*!< Max enumerator value of PERIPHID7 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 7] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 7]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 7] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID7_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 7] is masked            */
 
-/* PERIPHID8 @Bit 8 : GRC peripheral identifier [8] */
+/* PERIPHID8 @Bit 8 : Interrupt status of the GRC peripheral identifier [32 + 8] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Pos (8UL) /*!< Position of PERIPHID8 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Pos) /*!< Bit mask of PERIPHID8
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Min (0x0UL) /*!< Min enumerator value of PERIPHID8 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Max (0x1UL) /*!< Max enumerator value of PERIPHID8 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 8] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 8]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 8] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID8_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 8] is masked            */
 
-/* PERIPHID9 @Bit 9 : GRC peripheral identifier [9] */
+/* PERIPHID9 @Bit 9 : Interrupt status of the GRC peripheral identifier [32 + 9] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Pos (9UL) /*!< Position of PERIPHID9 field.                                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Pos) /*!< Bit mask of PERIPHID9
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Min (0x0UL) /*!< Min enumerator value of PERIPHID9 field.                         */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Max (0x1UL) /*!< Max enumerator value of PERIPHID9 field.                         */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                              [32 + 9] interrupt is active*/                                      
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 + 9]
-                                                             interrupt is active*/                                                
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 9] is unmasked        */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID9_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 9] is masked            */
 
-/* PERIPHID10 @Bit 10 : GRC peripheral identifier [10] */
+/* PERIPHID10 @Bit 10 : Interrupt status of the GRC peripheral identifier [32 + 10] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Pos (10UL) /*!< Position of PERIPHID10 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Pos) /*!< Bit mask of PERIPHID10
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Min (0x0UL) /*!< Min enumerator value of PERIPHID10 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Max (0x1UL) /*!< Max enumerator value of PERIPHID10 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 10] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              10] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 10] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID10_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 10] is masked          */
 
-/* PERIPHID11 @Bit 11 : GRC peripheral identifier [11] */
+/* PERIPHID11 @Bit 11 : Interrupt status of the GRC peripheral identifier [32 + 11] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Pos (11UL) /*!< Position of PERIPHID11 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Pos) /*!< Bit mask of PERIPHID11
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Min (0x0UL) /*!< Min enumerator value of PERIPHID11 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Max (0x1UL) /*!< Max enumerator value of PERIPHID11 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 11] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              11] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 11] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID11_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 11] is masked          */
 
-/* PERIPHID12 @Bit 12 : GRC peripheral identifier [12] */
+/* PERIPHID12 @Bit 12 : Interrupt status of the GRC peripheral identifier [32 + 12] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Pos (12UL) /*!< Position of PERIPHID12 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Pos) /*!< Bit mask of PERIPHID12
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Min (0x0UL) /*!< Min enumerator value of PERIPHID12 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Max (0x1UL) /*!< Max enumerator value of PERIPHID12 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 12] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              12] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 12] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID12_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 12] is masked          */
 
-/* PERIPHID13 @Bit 13 : GRC peripheral identifier [13] */
+/* PERIPHID13 @Bit 13 : Interrupt status of the GRC peripheral identifier [32 + 13] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Pos (13UL) /*!< Position of PERIPHID13 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Pos) /*!< Bit mask of PERIPHID13
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Min (0x0UL) /*!< Min enumerator value of PERIPHID13 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Max (0x1UL) /*!< Max enumerator value of PERIPHID13 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 13] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              13] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 13] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID13_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 13] is masked          */
 
-/* PERIPHID14 @Bit 14 : GRC peripheral identifier [14] */
+/* PERIPHID14 @Bit 14 : Interrupt status of the GRC peripheral identifier [32 + 14] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Pos (14UL) /*!< Position of PERIPHID14 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Pos) /*!< Bit mask of PERIPHID14
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Min (0x0UL) /*!< Min enumerator value of PERIPHID14 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Max (0x1UL) /*!< Max enumerator value of PERIPHID14 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 14] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              14] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 14] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID14_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 14] is masked          */
 
-/* PERIPHID15 @Bit 15 : GRC peripheral identifier [15] */
+/* PERIPHID15 @Bit 15 : Interrupt status of the GRC peripheral identifier [32 + 15] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Pos (15UL) /*!< Position of PERIPHID15 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Pos) /*!< Bit mask of PERIPHID15
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Min (0x0UL) /*!< Min enumerator value of PERIPHID15 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Max (0x1UL) /*!< Max enumerator value of PERIPHID15 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 15] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              15] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 15] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID15_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 15] is masked          */
 
-/* PERIPHID16 @Bit 16 : GRC peripheral identifier [16] */
+/* PERIPHID16 @Bit 16 : Interrupt status of the GRC peripheral identifier [32 + 16] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Pos (16UL) /*!< Position of PERIPHID16 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Pos) /*!< Bit mask of PERIPHID16
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Min (0x0UL) /*!< Min enumerator value of PERIPHID16 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Max (0x1UL) /*!< Max enumerator value of PERIPHID16 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 16] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              16] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 16] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID16_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 16] is masked          */
 
-/* PERIPHID17 @Bit 17 : GRC peripheral identifier [17] */
+/* PERIPHID17 @Bit 17 : Interrupt status of the GRC peripheral identifier [32 + 17] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Pos (17UL) /*!< Position of PERIPHID17 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Pos) /*!< Bit mask of PERIPHID17
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Min (0x0UL) /*!< Min enumerator value of PERIPHID17 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Max (0x1UL) /*!< Max enumerator value of PERIPHID17 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 17] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              17] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 17] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID17_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 17] is masked          */
 
-/* PERIPHID18 @Bit 18 : GRC peripheral identifier [18] */
+/* PERIPHID18 @Bit 18 : Interrupt status of the GRC peripheral identifier [32 + 18] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Pos (18UL) /*!< Position of PERIPHID18 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Pos) /*!< Bit mask of PERIPHID18
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Min (0x0UL) /*!< Min enumerator value of PERIPHID18 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Max (0x1UL) /*!< Max enumerator value of PERIPHID18 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 18] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              18] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 18] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID18_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 18] is masked          */
 
-/* PERIPHID19 @Bit 19 : GRC peripheral identifier [19] */
+/* PERIPHID19 @Bit 19 : Interrupt status of the GRC peripheral identifier [32 + 19] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Pos (19UL) /*!< Position of PERIPHID19 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Pos) /*!< Bit mask of PERIPHID19
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Min (0x0UL) /*!< Min enumerator value of PERIPHID19 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Max (0x1UL) /*!< Max enumerator value of PERIPHID19 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 19] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              19] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 19] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID19_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 19] is masked          */
 
-/* PERIPHID20 @Bit 20 : GRC peripheral identifier [20] */
+/* PERIPHID20 @Bit 20 : Interrupt status of the GRC peripheral identifier [32 + 20] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Pos (20UL) /*!< Position of PERIPHID20 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Pos) /*!< Bit mask of PERIPHID20
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Min (0x0UL) /*!< Min enumerator value of PERIPHID20 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Max (0x1UL) /*!< Max enumerator value of PERIPHID20 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 20] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              20] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 20] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID20_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 20] is masked          */
 
-/* PERIPHID21 @Bit 21 : GRC peripheral identifier [21] */
+/* PERIPHID21 @Bit 21 : Interrupt status of the GRC peripheral identifier [32 + 21] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Pos (21UL) /*!< Position of PERIPHID21 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Pos) /*!< Bit mask of PERIPHID21
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Min (0x0UL) /*!< Min enumerator value of PERIPHID21 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Max (0x1UL) /*!< Max enumerator value of PERIPHID21 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 21] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              21] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 21] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID21_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 21] is masked          */
 
-/* PERIPHID22 @Bit 22 : GRC peripheral identifier [22] */
+/* PERIPHID22 @Bit 22 : Interrupt status of the GRC peripheral identifier [32 + 22] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Pos (22UL) /*!< Position of PERIPHID22 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Pos) /*!< Bit mask of PERIPHID22
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Min (0x0UL) /*!< Min enumerator value of PERIPHID22 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Max (0x1UL) /*!< Max enumerator value of PERIPHID22 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 22] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              22] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 22] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID22_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 22] is masked          */
 
-/* PERIPHID23 @Bit 23 : GRC peripheral identifier [23] */
+/* PERIPHID23 @Bit 23 : Interrupt status of the GRC peripheral identifier [32 + 23] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Pos (23UL) /*!< Position of PERIPHID23 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Pos) /*!< Bit mask of PERIPHID23
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Min (0x0UL) /*!< Min enumerator value of PERIPHID23 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Max (0x1UL) /*!< Max enumerator value of PERIPHID23 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 23] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              23] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 23] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID23_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 23] is masked          */
 
-/* PERIPHID24 @Bit 24 : GRC peripheral identifier [24] */
+/* PERIPHID24 @Bit 24 : Interrupt status of the GRC peripheral identifier [32 + 24] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Pos (24UL) /*!< Position of PERIPHID24 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Pos) /*!< Bit mask of PERIPHID24
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Min (0x0UL) /*!< Min enumerator value of PERIPHID24 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Max (0x1UL) /*!< Max enumerator value of PERIPHID24 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 24] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              24] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 24] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID24_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 24] is masked          */
 
-/* PERIPHID25 @Bit 25 : GRC peripheral identifier [25] */
+/* PERIPHID25 @Bit 25 : Interrupt status of the GRC peripheral identifier [32 + 25] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Pos (25UL) /*!< Position of PERIPHID25 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Pos) /*!< Bit mask of PERIPHID25
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Min (0x0UL) /*!< Min enumerator value of PERIPHID25 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Max (0x1UL) /*!< Max enumerator value of PERIPHID25 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 25] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              25] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 25] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID25_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 25] is masked          */
 
-/* PERIPHID26 @Bit 26 : GRC peripheral identifier [26] */
+/* PERIPHID26 @Bit 26 : Interrupt status of the GRC peripheral identifier [32 + 26] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Pos (26UL) /*!< Position of PERIPHID26 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Pos) /*!< Bit mask of PERIPHID26
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Min (0x0UL) /*!< Min enumerator value of PERIPHID26 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Max (0x1UL) /*!< Max enumerator value of PERIPHID26 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 26] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              26] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 26] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID26_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 26] is masked          */
 
-/* PERIPHID27 @Bit 27 : GRC peripheral identifier [27] */
+/* PERIPHID27 @Bit 27 : Interrupt status of the GRC peripheral identifier [32 + 27] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Pos (27UL) /*!< Position of PERIPHID27 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Pos) /*!< Bit mask of PERIPHID27
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Min (0x0UL) /*!< Min enumerator value of PERIPHID27 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Max (0x1UL) /*!< Max enumerator value of PERIPHID27 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 27] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              27] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 27] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID27_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 27] is masked          */
 
-/* PERIPHID28 @Bit 28 : GRC peripheral identifier [28] */
+/* PERIPHID28 @Bit 28 : Interrupt status of the GRC peripheral identifier [32 + 28] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Pos (28UL) /*!< Position of PERIPHID28 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Pos) /*!< Bit mask of PERIPHID28
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Min (0x0UL) /*!< Min enumerator value of PERIPHID28 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Max (0x1UL) /*!< Max enumerator value of PERIPHID28 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 28] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              28] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 28] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID28_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 28] is masked          */
 
-/* PERIPHID29 @Bit 29 : GRC peripheral identifier [29] */
+/* PERIPHID29 @Bit 29 : Interrupt status of the GRC peripheral identifier [32 + 29] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Pos (29UL) /*!< Position of PERIPHID29 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Pos) /*!< Bit mask of PERIPHID29
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Min (0x0UL) /*!< Min enumerator value of PERIPHID29 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Max (0x1UL) /*!< Max enumerator value of PERIPHID29 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 29] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              29] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 29] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID29_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 29] is masked          */
 
-/* PERIPHID30 @Bit 30 : GRC peripheral identifier [30] */
+/* PERIPHID30 @Bit 30 : Interrupt status of the GRC peripheral identifier [32 + 30] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Pos (30UL) /*!< Position of PERIPHID30 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Pos) /*!< Bit mask of PERIPHID30
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Min (0x0UL) /*!< Min enumerator value of PERIPHID30 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Max (0x1UL) /*!< Max enumerator value of PERIPHID30 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 30] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              30] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 30] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID30_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 30] is masked          */
 
-/* PERIPHID31 @Bit 31 : GRC peripheral identifier [31] */
+/* PERIPHID31 @Bit 31 : Interrupt status of the GRC peripheral identifier [32 + 31] */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Pos (31UL) /*!< Position of PERIPHID31 field.                                    */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Msk (0x1UL << GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Pos) /*!< Bit mask of PERIPHID31
                                                                             field.*/                                              
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Min (0x0UL) /*!< Min enumerator value of PERIPHID31 field.                       */
   #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Max (0x1UL) /*!< Max enumerator value of PERIPHID31 field.                       */
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Off (0x0UL) /*!< The GRC active power domain remain Off even when GRC peripheral
-                                                               [32 + 31] interrupt is active*/                                    
-  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_On (0x1UL) /*!< The GRC active power domain is kept On when GRC peripheral [32 +
-                                                              31] interrupt is active*/                                           
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Unmask (0x0UL) /*!< Interrupt from the GRC peripheral [32 + 31] is unmasked      */
+  #define GRCCONF_GRCFORCEON_MASK1_PERIPHID31_Mask (0x1UL) /*!< Interrupt from the GRC peripheral [32 + 31] is masked          */
 
 
 
@@ -39096,13 +38794,13 @@ typedef struct {
   * @brief METALFIX [GRCCONF_METALFIX] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  PDMAIN;                            /*!< (@ 0x00000000) Register for possible metal-fix in GRC Main power
+  __IOM uint32_t  PDMAIN;                            /*!< (@ 0x00000000) Register for possible metal-fix in GRC MAIN power
                                                                          domain*/                                                 
-  __IOM uint32_t  PDACT;                             /*!< (@ 0x00000004) Register for possible metal-fix in GRC Active power
+  __IOM uint32_t  PDACT;                             /*!< (@ 0x00000004) Register for possible metal-fix in GRC ACT power
                                                                          domain*/                                                 
 } NRF_GRCCONF_METALFIX_Type;                         /*!< Size = 8 (0x008)                                                     */
 
-/* GRCCONF_METALFIX_PDMAIN: Register for possible metal-fix in GRC Main power domain */
+/* GRCCONF_METALFIX_PDMAIN: Register for possible metal-fix in GRC MAIN power domain */
   #define GRCCONF_METALFIX_PDMAIN_ResetValue (0x00000000UL) /*!< Reset value of PDMAIN register.                               */
 
 /* VAL @Bits 0..3 : Value */
@@ -39112,7 +38810,7 @@ typedef struct {
   #define GRCCONF_METALFIX_PDMAIN_VAL_Max (0xFUL)    /*!< Max size of VAL field.                                               */
 
 
-/* GRCCONF_METALFIX_PDACT: Register for possible metal-fix in GRC Active power domain */
+/* GRCCONF_METALFIX_PDACT: Register for possible metal-fix in GRC ACT power domain */
   #define GRCCONF_METALFIX_PDACT_ResetValue (0x00000000UL) /*!< Reset value of PDACT register.                                 */
 
 /* VAL @Bits 0..31 : Value */
@@ -46697,7 +46395,7 @@ typedef struct {
 /* GRTC_CC_CCL: The lower 32-bits of Capture/Compare register CC[n] */
   #define GRTC_CC_CCL_ResetValue (0x00000000UL)      /*!< Reset value of CCL register.                                         */
 
-/* CCL @Bits 0..31 : Capture/Compare low value in 1 us */
+/* CCL @Bits 0..31 : Capture/Compare low value */
   #define GRTC_CC_CCL_CCL_Pos (0UL)                  /*!< Position of CCL field.                                               */
   #define GRTC_CC_CCL_CCL_Msk (0xFFFFFFFFUL << GRTC_CC_CCL_CCL_Pos) /*!< Bit mask of CCL field.                                */
 
@@ -46705,7 +46403,7 @@ typedef struct {
 /* GRTC_CC_CCH: The higher 32-bits of Capture/Compare register CC[n] */
   #define GRTC_CC_CCH_ResetValue (0x00000000UL)      /*!< Reset value of CCH register.                                         */
 
-/* CCH @Bits 0..19 : Capture/Compare high value in 1 us */
+/* CCH @Bits 0..19 : Capture/Compare high value */
   #define GRTC_CC_CCH_CCH_Pos (0UL)                  /*!< Position of CCH field.                                               */
   #define GRTC_CC_CCH_CCH_Msk (0xFFFFFUL << GRTC_CC_CCH_CCH_Pos) /*!< Bit mask of CCH field.                                   */
 
@@ -46754,8 +46452,8 @@ typedef struct {
     __IOM uint32_t EVENTS_COMPARE[16];               /*!< (@ 0x00000100) Compare event on CC[n] match                          */
     __IM uint32_t RESERVED3[8];
     __IOM uint32_t EVENTS_RTCOMPARE;                 /*!< (@ 0x00000160) Compare event on RTCOMPARE register match             */
-    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The value written from the register RTCOMPAREL/H or
-                                                                         RTCOMPARESYNCL/H is latched to RTCOMPARE*/               
+    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The value written to the register RTCOMPARESYNC is
+                                                                         latched to RTCOMPARE*/                                   
     __IOM uint32_t EVENTS_SYSCOUNTERVALID;           /*!< (@ 0x00000168) The SYSCOUNTER is in active state and value is valid  */
     __IM uint32_t RESERVED4[5];
     __IOM uint32_t PUBLISH_COMPARE[16];              /*!< (@ 0x00000180) Publish configuration for event COMPARE[n]            */
@@ -46834,11 +46532,11 @@ typedef struct {
     __IM uint32_t RESERVED9[2];
     __IOM uint32_t MODE;                             /*!< (@ 0x00000510) Counter mode selection                                */
     __IM uint32_t SYSCOUNTERL;                       /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
-    __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
+    __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 32-bits of the SYSCOUNTER                  */
     __IM uint32_t RESERVED10;
     __IOM NRF_GRTC_CC_Type CC[16];                   /*!< (@ 0x00000520) (unspecified)                                         */
     __IM uint32_t RESERVED11[32];
-    __IOM uint32_t KEEPRUNNING;                      /*!< (@ 0x000006A0) Request to keep the SYSCOUNTER in the active state and
+    __IOM uint32_t KEEPRUNNING;                      /*!< (@ 0x000006A0) Request to keep the timer in the active state and
                                                                          prevent going to sleep*/                                 
     __IOM uint32_t TIMEOUT;                          /*!< (@ 0x000006A4) Timeout after all CPUs gone into sleep state to stop
                                                                          the SYSCOUNTER*/                                         
@@ -46945,10 +46643,10 @@ typedef struct {
   #define GRTC_EVENTS_RTCOMPARE_EVENTS_RTCOMPARE_Generated (0x1UL) /*!< Event generated                                        */
 
 
-/* GRTC_EVENTS_RTCOMPARESYNC: The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE */
+/* GRTC_EVENTS_RTCOMPARESYNC: The value written to the register RTCOMPARESYNC is latched to RTCOMPARE */
   #define GRTC_EVENTS_RTCOMPARESYNC_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_RTCOMPARESYNC register.               */
 
-/* EVENTS_RTCOMPARESYNC @Bit 0 : The value written from the register RTCOMPAREL/H or RTCOMPARESYNCL/H is latched to RTCOMPARE */
+/* EVENTS_RTCOMPARESYNC @Bit 0 : The value written to the register RTCOMPARESYNC is latched to RTCOMPARE */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos (0UL) /*!< Position of EVENTS_RTCOMPARESYNC field.                */
   #define GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Msk (0x1UL << GRTC_EVENTS_RTCOMPARESYNC_EVENTS_RTCOMPARESYNC_Pos) /*!<
                                                                             Bit mask of EVENTS_RTCOMPARESYNC field.*/             
@@ -57686,7 +57384,8 @@ typedef struct {
   #define GRTC_MODE_AUTOEN_Msk (0x1UL << GRTC_MODE_AUTOEN_Pos) /*!< Bit mask of AUTOEN field.                                  */
   #define GRTC_MODE_AUTOEN_Min (0x0UL)               /*!< Min enumerator value of AUTOEN field.                                */
   #define GRTC_MODE_AUTOEN_Max (0x1UL)               /*!< Max enumerator value of AUTOEN field.                                */
-  #define GRTC_MODE_AUTOEN_Default (0x0UL)           /*!< Default configuration to keep the SYSCOUNTER active.                 */
+  #define GRTC_MODE_AUTOEN_Default (0x0UL)           /*!< Keep the SYSCOUNTER active when KEEPRUNNING is set, or access to any
+                                                          task registers, INT registers or SYSCOUNTER registers.*/                
   #define GRTC_MODE_AUTOEN_CpuActive (0x1UL)         /*!< In addition to the above mode, any local CPU that is not sleeping keep
                                                           the SYSCOUNTER active.*/                                                
 
@@ -57707,10 +57406,10 @@ typedef struct {
   #define GRTC_SYSCOUNTERL_VALUE_Msk (0xFFFFFFFFUL << GRTC_SYSCOUNTERL_VALUE_Pos) /*!< Bit mask of VALUE field.                */
 
 
-/* GRTC_SYSCOUNTERH: The higher 20-bits of the SYSCOUNTER */
+/* GRTC_SYSCOUNTERH: The higher 32-bits of the SYSCOUNTER */
   #define GRTC_SYSCOUNTERH_ResetValue (0x00000000UL) /*!< Reset value of SYSCOUNTERH register.                                 */
 
-/* VALUE @Bits 0..19 : The higher 20-bits of the SYSCOUNTER value. */
+/* VALUE @Bits 0..19 : The higher 32-bits of the SYSCOUNTER value. */
   #define GRTC_SYSCOUNTERH_VALUE_Pos (0UL)           /*!< Position of VALUE field.                                             */
   #define GRTC_SYSCOUNTERH_VALUE_Msk (0xFFFFFUL << GRTC_SYSCOUNTERH_VALUE_Pos) /*!< Bit mask of VALUE field.                   */
 
@@ -57723,7 +57422,7 @@ typedef struct {
   #define GRTC_SYSCOUNTERH_OVERFLOW_Overflow (0x1UL) /*!< SYSCOUNTERL overflown                                                */
 
 
-/* GRTC_KEEPRUNNING: Request to keep the SYSCOUNTER in the active state and prevent going to sleep */
+/* GRTC_KEEPRUNNING: Request to keep the timer in the active state and prevent going to sleep */
   #define GRTC_KEEPRUNNING_ResetValue (0x00000000UL) /*!< Reset value of KEEPRUNNING register.                                 */
 
 /* DOMAIN0 @Bit 0 : Request from the Domain [0] */
@@ -57731,128 +57430,128 @@ typedef struct {
   #define GRTC_KEEPRUNNING_DOMAIN0_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN0_Pos) /*!< Bit mask of DOMAIN0 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN0_Min (0x0UL)       /*!< Min enumerator value of DOMAIN0 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN0_Max (0x1UL)       /*!< Max enumerator value of DOMAIN0 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN0_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN0_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN0_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN0_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN1 @Bit 1 : Request from the Domain [1] */
   #define GRTC_KEEPRUNNING_DOMAIN1_Pos (1UL)         /*!< Position of DOMAIN1 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN1_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN1_Pos) /*!< Bit mask of DOMAIN1 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN1_Min (0x0UL)       /*!< Min enumerator value of DOMAIN1 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN1_Max (0x1UL)       /*!< Max enumerator value of DOMAIN1 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN1_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN1_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN1_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN1_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN2 @Bit 2 : Request from the Domain [2] */
   #define GRTC_KEEPRUNNING_DOMAIN2_Pos (2UL)         /*!< Position of DOMAIN2 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN2_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN2_Pos) /*!< Bit mask of DOMAIN2 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN2_Min (0x0UL)       /*!< Min enumerator value of DOMAIN2 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN2_Max (0x1UL)       /*!< Max enumerator value of DOMAIN2 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN2_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN2_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN2_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN2_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN3 @Bit 3 : Request from the Domain [3] */
   #define GRTC_KEEPRUNNING_DOMAIN3_Pos (3UL)         /*!< Position of DOMAIN3 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN3_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN3_Pos) /*!< Bit mask of DOMAIN3 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN3_Min (0x0UL)       /*!< Min enumerator value of DOMAIN3 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN3_Max (0x1UL)       /*!< Max enumerator value of DOMAIN3 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN3_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN3_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN3_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN3_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN4 @Bit 4 : Request from the Domain [4] */
   #define GRTC_KEEPRUNNING_DOMAIN4_Pos (4UL)         /*!< Position of DOMAIN4 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN4_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN4_Pos) /*!< Bit mask of DOMAIN4 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN4_Min (0x0UL)       /*!< Min enumerator value of DOMAIN4 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN4_Max (0x1UL)       /*!< Max enumerator value of DOMAIN4 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN4_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN4_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN4_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN4_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN5 @Bit 5 : Request from the Domain [5] */
   #define GRTC_KEEPRUNNING_DOMAIN5_Pos (5UL)         /*!< Position of DOMAIN5 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN5_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN5_Pos) /*!< Bit mask of DOMAIN5 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN5_Min (0x0UL)       /*!< Min enumerator value of DOMAIN5 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN5_Max (0x1UL)       /*!< Max enumerator value of DOMAIN5 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN5_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN5_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN5_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN5_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN6 @Bit 6 : Request from the Domain [6] */
   #define GRTC_KEEPRUNNING_DOMAIN6_Pos (6UL)         /*!< Position of DOMAIN6 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN6_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN6_Pos) /*!< Bit mask of DOMAIN6 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN6_Min (0x0UL)       /*!< Min enumerator value of DOMAIN6 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN6_Max (0x1UL)       /*!< Max enumerator value of DOMAIN6 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN6_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN6_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN6_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN6_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN7 @Bit 7 : Request from the Domain [7] */
   #define GRTC_KEEPRUNNING_DOMAIN7_Pos (7UL)         /*!< Position of DOMAIN7 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN7_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN7_Pos) /*!< Bit mask of DOMAIN7 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN7_Min (0x0UL)       /*!< Min enumerator value of DOMAIN7 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN7_Max (0x1UL)       /*!< Max enumerator value of DOMAIN7 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN7_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN7_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN7_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN7_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN8 @Bit 8 : Request from the Domain [8] */
   #define GRTC_KEEPRUNNING_DOMAIN8_Pos (8UL)         /*!< Position of DOMAIN8 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN8_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN8_Pos) /*!< Bit mask of DOMAIN8 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN8_Min (0x0UL)       /*!< Min enumerator value of DOMAIN8 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN8_Max (0x1UL)       /*!< Max enumerator value of DOMAIN8 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN8_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN8_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN8_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN8_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN9 @Bit 9 : Request from the Domain [9] */
   #define GRTC_KEEPRUNNING_DOMAIN9_Pos (9UL)         /*!< Position of DOMAIN9 field.                                           */
   #define GRTC_KEEPRUNNING_DOMAIN9_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN9_Pos) /*!< Bit mask of DOMAIN9 field.                 */
   #define GRTC_KEEPRUNNING_DOMAIN9_Min (0x0UL)       /*!< Min enumerator value of DOMAIN9 field.                               */
   #define GRTC_KEEPRUNNING_DOMAIN9_Max (0x1UL)       /*!< Max enumerator value of DOMAIN9 field.                               */
-  #define GRTC_KEEPRUNNING_DOMAIN9_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                      */
-  #define GRTC_KEEPRUNNING_DOMAIN9_Active (0x1UL)    /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN9_NotActive (0x0UL) /*!< Timer not active                                                     */
+  #define GRTC_KEEPRUNNING_DOMAIN9_Active (0x1UL)    /*!< Timer active                                                         */
 
 /* DOMAIN10 @Bit 10 : Request from the Domain [10] */
   #define GRTC_KEEPRUNNING_DOMAIN10_Pos (10UL)       /*!< Position of DOMAIN10 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN10_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN10_Pos) /*!< Bit mask of DOMAIN10 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN10_Min (0x0UL)      /*!< Min enumerator value of DOMAIN10 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN10_Max (0x1UL)      /*!< Max enumerator value of DOMAIN10 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN10_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN10_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN10_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN10_Active (0x1UL)   /*!< Timer active                                                         */
 
 /* DOMAIN11 @Bit 11 : Request from the Domain [11] */
   #define GRTC_KEEPRUNNING_DOMAIN11_Pos (11UL)       /*!< Position of DOMAIN11 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN11_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN11_Pos) /*!< Bit mask of DOMAIN11 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN11_Min (0x0UL)      /*!< Min enumerator value of DOMAIN11 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN11_Max (0x1UL)      /*!< Max enumerator value of DOMAIN11 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN11_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN11_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN11_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN11_Active (0x1UL)   /*!< Timer active                                                         */
 
 /* DOMAIN12 @Bit 12 : Request from the Domain [12] */
   #define GRTC_KEEPRUNNING_DOMAIN12_Pos (12UL)       /*!< Position of DOMAIN12 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN12_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN12_Pos) /*!< Bit mask of DOMAIN12 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN12_Min (0x0UL)      /*!< Min enumerator value of DOMAIN12 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN12_Max (0x1UL)      /*!< Max enumerator value of DOMAIN12 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN12_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN12_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN12_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN12_Active (0x1UL)   /*!< Timer active                                                         */
 
 /* DOMAIN13 @Bit 13 : Request from the Domain [13] */
   #define GRTC_KEEPRUNNING_DOMAIN13_Pos (13UL)       /*!< Position of DOMAIN13 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN13_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN13_Pos) /*!< Bit mask of DOMAIN13 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN13_Min (0x0UL)      /*!< Min enumerator value of DOMAIN13 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN13_Max (0x1UL)      /*!< Max enumerator value of DOMAIN13 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN13_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN13_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN13_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN13_Active (0x1UL)   /*!< Timer active                                                         */
 
 /* DOMAIN14 @Bit 14 : Request from the Domain [14] */
   #define GRTC_KEEPRUNNING_DOMAIN14_Pos (14UL)       /*!< Position of DOMAIN14 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN14_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN14_Pos) /*!< Bit mask of DOMAIN14 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN14_Min (0x0UL)      /*!< Min enumerator value of DOMAIN14 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN14_Max (0x1UL)      /*!< Max enumerator value of DOMAIN14 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN14_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN14_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN14_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN14_Active (0x1UL)   /*!< Timer active                                                         */
 
 /* DOMAIN15 @Bit 15 : Request from the Domain [15] */
   #define GRTC_KEEPRUNNING_DOMAIN15_Pos (15UL)       /*!< Position of DOMAIN15 field.                                          */
   #define GRTC_KEEPRUNNING_DOMAIN15_Msk (0x1UL << GRTC_KEEPRUNNING_DOMAIN15_Pos) /*!< Bit mask of DOMAIN15 field.              */
   #define GRTC_KEEPRUNNING_DOMAIN15_Min (0x0UL)      /*!< Min enumerator value of DOMAIN15 field.                              */
   #define GRTC_KEEPRUNNING_DOMAIN15_Max (0x1UL)      /*!< Max enumerator value of DOMAIN15 field.                              */
-  #define GRTC_KEEPRUNNING_DOMAIN15_NotActive (0x0UL) /*!< Allow SYSCOUNTER to go to sleep                                     */
-  #define GRTC_KEEPRUNNING_DOMAIN15_Active (0x1UL)   /*!< Keep SYSCOUNTER active                                               */
+  #define GRTC_KEEPRUNNING_DOMAIN15_NotActive (0x0UL) /*!< Timer not active                                                    */
+  #define GRTC_KEEPRUNNING_DOMAIN15_Active (0x1UL)   /*!< Timer active                                                         */
 
 
 /* GRTC_TIMEOUT: Timeout after all CPUs gone into sleep state to stop the SYSCOUNTER */
@@ -57874,7 +57573,7 @@ typedef struct {
 /* GRTC_WAKETIME: GRTC wake up time. */
   #define GRTC_WAKETIME_ResetValue (0x00000001UL)    /*!< Reset value of WAKETIME register.                                    */
 
-/* VALUE @Bits 0..7 : Number of LFCLK clock cycles to wake up before the next scheduled EVENTS_COMPARE event */
+/* VALUE @Bits 0..7 : Number of 32Ki clock cycles to wake up before the next scheduled EVENTS_COMPARE event */
   #define GRTC_WAKETIME_VALUE_Pos (0UL)              /*!< Position of VALUE field.                                             */
   #define GRTC_WAKETIME_VALUE_Msk (0xFFUL << GRTC_WAKETIME_VALUE_Pos) /*!< Bit mask of VALUE field.                            */
 
@@ -59051,7 +58750,7 @@ typedef struct {
 /* HSFLL_FREQM_ERROR: Frequency measurement error status */
   #define HSFLL_FREQM_ERROR_ResetValue (0x00000000UL) /*!< Reset value of ERROR register.                                      */
 
-/* ERROR @Bit 0 : Trim error status. */
+/* ERROR @Bit 0 : Error status. */
   #define HSFLL_FREQM_ERROR_ERROR_Pos (0UL)          /*!< Position of ERROR field.                                             */
   #define HSFLL_FREQM_ERROR_ERROR_Msk (0x1UL << HSFLL_FREQM_ERROR_ERROR_Pos) /*!< Bit mask of ERROR field.                     */
   #define HSFLL_FREQM_ERROR_ERROR_Min (0x0UL)        /*!< Min enumerator value of ERROR field.                                 */
@@ -59059,30 +58758,13 @@ typedef struct {
   #define HSFLL_FREQM_ERROR_ERROR_OutsideLimit (0x1UL) /*!< Frequency exceeded the accuracy 2 percent in closed loop mode.     */
   #define HSFLL_FREQM_ERROR_ERROR_WithinLimit (0x0UL) /*!< Frequency stayed within accuracy 2 percent in closed loop mode.     */
 
-/* TRIMUNDERFLOW @Bit 1 : Underflow error status. */
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos (1UL)  /*!< Position of TRIMUNDERFLOW field.                                     */
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos) /*!< Bit mask of TRIMUNDERFLOW
-                                                                            field.*/                                              
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Min (0x0UL) /*!< Min enumerator value of TRIMUNDERFLOW field.                        */
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Max (0x1UL) /*!< Max enumerator value of TRIMUNDERFLOW field.                        */
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_OutsideLimit (0x1UL) /*!< Underflow                                                  */
-  #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_WithinLimit (0x0UL) /*!< No underflow                                                */
-
-/* TRIMOVERFLOW @Bit 2 : Overflow error status. */
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos (2UL)   /*!< Position of TRIMOVERFLOW field.                                      */
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos) /*!< Bit mask of TRIMOVERFLOW field.*/
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Min (0x0UL) /*!< Min enumerator value of TRIMOVERFLOW field.                          */
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Max (0x1UL) /*!< Max enumerator value of TRIMOVERFLOW field.                          */
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_OutsideLimit (0x1UL) /*!< Overflow                                                    */
-  #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_WithinLimit (0x0UL) /*!< No overflow                                                  */
-
 
 /* HSFLL_FREQM_MEAS: Frequency measurement */
   #define HSFLL_FREQM_MEAS_ResetValue (0x00000000UL) /*!< Reset value of MEAS register.                                        */
 
-/* VALUE @Bits 0..7 : Last frequency measurement value. */
+/* VALUE @Bits 0..10 : Last frequency measurement value. */
   #define HSFLL_FREQM_MEAS_VALUE_Pos (0UL)           /*!< Position of VALUE field.                                             */
-  #define HSFLL_FREQM_MEAS_VALUE_Msk (0xFFUL << HSFLL_FREQM_MEAS_VALUE_Pos) /*!< Bit mask of VALUE field.                      */
+  #define HSFLL_FREQM_MEAS_VALUE_Msk (0x7FFUL << HSFLL_FREQM_MEAS_VALUE_Pos) /*!< Bit mask of VALUE field.                     */
 
 
 
@@ -59094,8 +58776,8 @@ typedef struct {
   __IOM uint32_t  VSUP;                              /*!< (@ 0x00000000) Internal regulator voltage supply level trimming      */
   __IOM uint32_t  COARSE;                            /*!< (@ 0x00000004) Coarse frequency trimming                             */
   __IOM uint32_t  FINE;                              /*!< (@ 0x00000008) Fine frequency trimming                               */
-  __IM  uint32_t  RESERVED[2];
-} NRF_HSFLL_TRIM_Type;                               /*!< Size = 20 (0x014)                                                    */
+  __IM  uint32_t  RESERVED;
+} NRF_HSFLL_TRIM_Type;                               /*!< Size = 16 (0x010)                                                    */
 
 /* HSFLL_TRIM_VSUP: Internal regulator voltage supply level trimming */
   #define HSFLL_TRIM_VSUP_ResetValue (0x00000010UL)  /*!< Reset value of VSUP register.                                        */
@@ -59158,7 +58840,7 @@ typedef struct {
 
 
 /* HSFLL_CLOCKCTRL_DITHERING: Clock dithering configuration */
-  #define HSFLL_CLOCKCTRL_DITHERING_ResetValue (0x00096733UL) /*!< Reset value of DITHERING register.                          */
+  #define HSFLL_CLOCKCTRL_DITHERING_ResetValue (0x00000000UL) /*!< Reset value of DITHERING register.                          */
 
 /* CYCLECOUNT @Bits 0..2 : Cycle count configuration for clock dithering */
   #define HSFLL_CLOCKCTRL_DITHERING_CYCLECOUNT_Pos (0UL) /*!< Position of CYCLECOUNT field.                                    */
@@ -59185,15 +58867,15 @@ typedef struct {
 
 
 /* HSFLL_CLOCKCTRL_MULT: Multiplication factor */
-  #define HSFLL_CLOCKCTRL_MULT_ResetValue (0x00000006UL) /*!< Reset value of MULT register.                                    */
+  #define HSFLL_CLOCKCTRL_MULT_ResetValue (0x0000000AUL) /*!< Reset value of MULT register.                                    */
 
-/* VAL @Bits 0..4 : Multiplication factor value. */
+/* VAL @Bits 0..3 : Multiplication factor value. */
   #define HSFLL_CLOCKCTRL_MULT_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
-  #define HSFLL_CLOCKCTRL_MULT_VAL_Msk (0x1FUL << HSFLL_CLOCKCTRL_MULT_VAL_Pos) /*!< Bit mask of VAL field.                    */
+  #define HSFLL_CLOCKCTRL_MULT_VAL_Msk (0xFUL << HSFLL_CLOCKCTRL_MULT_VAL_Pos) /*!< Bit mask of VAL field.                     */
 
 
 /* HSFLL_CLOCKCTRL_SLEEP: Sleep configuration */
-  #define HSFLL_CLOCKCTRL_SLEEP_ResetValue (0x00000001UL) /*!< Reset value of SLEEP register.                                  */
+  #define HSFLL_CLOCKCTRL_SLEEP_ResetValue (0x00000000UL) /*!< Reset value of SLEEP register.                                  */
 
 /* MODE @Bit 0 : HSFLL sleep mode. */
   #define HSFLL_CLOCKCTRL_SLEEP_MODE_Pos (0UL)       /*!< Position of MODE field.                                              */
@@ -59368,12 +59050,13 @@ typedef struct {
 /* HSFLL_DFT_ATB0CONFIG: Analog Test Bus 0 (ATB0) configuration */
   #define HSFLL_DFT_ATB0CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB0CONFIG register.                              */
 
-/* SELMUX @Bits 0..1 : Select multiplexer for ATB1 */
+/* SELMUX @Bit 0 : Select multiplexer for ATB0 */
   #define HSFLL_DFT_ATB0CONFIG_SELMUX_Pos (0UL)      /*!< Position of SELMUX field.                                            */
-  #define HSFLL_DFT_ATB0CONFIG_SELMUX_Msk (0x3UL << HSFLL_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
+  #define HSFLL_DFT_ATB0CONFIG_SELMUX_Msk (0x1UL << HSFLL_DFT_ATB0CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
   #define HSFLL_DFT_ATB0CONFIG_SELMUX_Min (0x0UL)    /*!< Min enumerator value of SELMUX field.                                */
-  #define HSFLL_DFT_ATB0CONFIG_SELMUX_Max (0x0UL)    /*!< Max enumerator value of SELMUX field.                                */
+  #define HSFLL_DFT_ATB0CONFIG_SELMUX_Max (0x1UL)    /*!< Max enumerator value of SELMUX field.                                */
   #define HSFLL_DFT_ATB0CONFIG_SELMUX_HiZ (0x0UL)    /*!< HiZ                                                                  */
+  #define HSFLL_DFT_ATB0CONFIG_SELMUX_VREGOUT (0x1UL) /*!< VREG_OUT                                                            */
 
 /* EN @Bit 31 : Enable the analog test bus */
   #define HSFLL_DFT_ATB0CONFIG_EN_Pos (31UL)         /*!< Position of EN field.                                                */
@@ -59387,13 +59070,12 @@ typedef struct {
 /* HSFLL_DFT_ATB1CONFIG: Analog Test Bus 1 (ATB1) configuration */
   #define HSFLL_DFT_ATB1CONFIG_ResetValue (0x00000000UL) /*!< Reset value of ATB1CONFIG register.                              */
 
-/* SELMUX @Bits 0..1 : Select multiplexer for ATB0 */
+/* SELMUX @Bit 0 : Select multiplexer for ATB1 */
   #define HSFLL_DFT_ATB1CONFIG_SELMUX_Pos (0UL)      /*!< Position of SELMUX field.                                            */
-  #define HSFLL_DFT_ATB1CONFIG_SELMUX_Msk (0x3UL << HSFLL_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
+  #define HSFLL_DFT_ATB1CONFIG_SELMUX_Msk (0x1UL << HSFLL_DFT_ATB1CONFIG_SELMUX_Pos) /*!< Bit mask of SELMUX field.            */
   #define HSFLL_DFT_ATB1CONFIG_SELMUX_Min (0x0UL)    /*!< Min enumerator value of SELMUX field.                                */
-  #define HSFLL_DFT_ATB1CONFIG_SELMUX_Max (0x1UL)    /*!< Max enumerator value of SELMUX field.                                */
+  #define HSFLL_DFT_ATB1CONFIG_SELMUX_Max (0x0UL)    /*!< Max enumerator value of SELMUX field.                                */
   #define HSFLL_DFT_ATB1CONFIG_SELMUX_HiZ (0x0UL)    /*!< HiZ                                                                  */
-  #define HSFLL_DFT_ATB1CONFIG_SELMUX_VREGOUT (0x1UL) /*!< VREG_OUT                                                            */
 
 /* EN @Bit 31 : Enable the analog test bus */
   #define HSFLL_DFT_ATB1CONFIG_EN_Pos (31UL)         /*!< Position of EN field.                                                */
@@ -59546,7 +59228,7 @@ typedef struct {
     __IOM NRF_HSFLL_FREQM_Type FREQM;                /*!< (@ 0x00000420) (unspecified)                                         */
     __IM uint32_t RESERVED4[5];
     __IOM NRF_HSFLL_TRIM_Type TRIM;                  /*!< (@ 0x00000440) (unspecified)                                         */
-    __IM uint32_t RESERVED5[3];
+    __IM uint32_t RESERVED5[4];
     __IOM NRF_HSFLL_CLOCKCTRL_Type CLOCKCTRL;        /*!< (@ 0x00000460) (unspecified)                                         */
     __IM uint32_t RESERVED6[2];
     __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
@@ -81125,13 +80807,13 @@ typedef struct {
                                                                                                                                   
   #define MPC_MEMACCERR_INFO_ResetValue (0x00000000UL) /*!< Reset value of INFO register.                                      */
 
-/* OWNERID @Bits 0..3 : Owner identifier of the erroneous access */
+/* OWNERID @Bits 0..3 : Owner identifier of the errorneous access */
   #define MPC_MEMACCERR_INFO_OWNERID_Pos (0UL)       /*!< Position of OWNERID field.                                           */
   #define MPC_MEMACCERR_INFO_OWNERID_Msk (0xFUL << MPC_MEMACCERR_INFO_OWNERID_Pos) /*!< Bit mask of OWNERID field.             */
   #define MPC_MEMACCERR_INFO_OWNERID_Min (0x0UL)     /*!< Min value of OWNERID field.                                          */
   #define MPC_MEMACCERR_INFO_OWNERID_Max (0xFUL)     /*!< Max size of OWNERID field.                                           */
 
-/* MASTERPORT @Bits 4..8 : Master port where erroneous access is detected */
+/* MASTERPORT @Bits 4..8 : Master port where errorneous access is detected */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Pos (4UL)    /*!< Position of MASTERPORT field.                                        */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Msk (0x1FUL << MPC_MEMACCERR_INFO_MASTERPORT_Pos) /*!< Bit mask of MASTERPORT field.   */
   #define MPC_MEMACCERR_INFO_MASTERPORT_Min (0x0UL)  /*!< Min value of MASTERPORT field.                                       */
@@ -82234,7 +81916,9 @@ typedef struct {
 /* MPC_REGION_STARTADDR: Region n start address */
   #define MPC_REGION_STARTADDR_ResetValue (0x00000000UL) /*!< Reset value of STARTADDR register.                               */
 
-/* STARTADDR @Bits 0..31 : Start address for memory region n */
+/* STARTADDR @Bits 0..31 : Start address for memory region n Regions must be on a 4k memory boundary, lower 12 bits are ignored
+                           and read as zero */                                                                                    
+                                                                                                                                  
   #define MPC_REGION_STARTADDR_STARTADDR_Pos (0UL)   /*!< Position of STARTADDR field.                                         */
   #define MPC_REGION_STARTADDR_STARTADDR_Msk (0xFFFFFFFFUL << MPC_REGION_STARTADDR_STARTADDR_Pos) /*!< Bit mask of STARTADDR
                                                                             field.*/                                              
@@ -82243,7 +81927,9 @@ typedef struct {
 /* MPC_REGION_ADDRMASK: Select which bits of the incoming address are compared against the STARTADDR */
   #define MPC_REGION_ADDRMASK_ResetValue (0x00000000UL) /*!< Reset value of ADDRMASK register.                                 */
 
-/* ADDRMASK @Bits 0..31 : Address mask for memory region n */
+/* ADDRMASK @Bits 0..31 : Address mask for memory region n Regions must be on a 4k memory boundary, lower 12 bits are ignored
+                          and read as zero */                                                                                     
+                                                                                                                                  
   #define MPC_REGION_ADDRMASK_ADDRMASK_Pos (0UL)     /*!< Position of ADDRMASK field.                                          */
   #define MPC_REGION_ADDRMASK_ADDRMASK_Msk (0xFFFFFFFFUL << MPC_REGION_ADDRMASK_ADDRMASK_Pos) /*!< Bit mask of ADDRMASK field. */
 
@@ -82518,7 +82204,8 @@ typedef struct {
   __IOM uint32_t  STARTADDR;                         /*!< (@ 0x00000004) Override region n Start Address                       */
   __IOM uint32_t  ENDADDR;                           /*!< (@ 0x00000008) Override region n End Address                         */
   __IOM int32_t   OFFSET;                            /*!< (@ 0x0000000C) Address offset value divided by 2 for override region n
-                                                                         address re-map*/                                         
+                                                                         address re-map Offset will be left shifted before
+                                                                         applying offset, to create a 33-bit signed integer.*/    
   __IOM uint32_t  PERM;                              /*!< (@ 0x00000010) Permission settings for override region n             */
   __IOM uint32_t  PERMMASK;                          /*!< (@ 0x00000014) Masks permission setting fields from register
                                                                          OVERRIDE.PERM*/                                          
@@ -82576,24 +82263,32 @@ typedef struct {
 /* MPC_OVERRIDE_STARTADDR: Override region n Start Address */
   #define MPC_OVERRIDE_STARTADDR_ResetValue (0x00000000UL) /*!< Reset value of STARTADDR register.                             */
 
-/* STARTADDR @Bits 0..31 : Start address for override region n */
+/* STARTADDR @Bits 0..31 : Start address for override region n Address must be on a 4k memory boundary, lower 12 bits are
+                           ignored and read as zero */                                                                            
+                                                                                                                                  
   #define MPC_OVERRIDE_STARTADDR_STARTADDR_Pos (0UL) /*!< Position of STARTADDR field.                                         */
   #define MPC_OVERRIDE_STARTADDR_STARTADDR_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_STARTADDR_STARTADDR_Pos) /*!< Bit mask of STARTADDR
                                                                             field.*/                                              
+  #define MPC_OVERRIDE_STARTADDR_STARTADDR_Min (0x0UL) /*!< Min value of STARTADDR field.                                      */
+  #define MPC_OVERRIDE_STARTADDR_STARTADDR_Max (0xFFFFFUL) /*!< Max size of STARTADDR field.                                   */
 
 
 /* MPC_OVERRIDE_ENDADDR: Override region n End Address */
   #define MPC_OVERRIDE_ENDADDR_ResetValue (0x00000000UL) /*!< Reset value of ENDADDR register.                                 */
 
-/* ENDADDR @Bits 0..31 : End address for override region n */
+/* ENDADDR @Bits 0..31 : End address for override region n Address must be on a 4k memory boundary, lower 12 bits are ignored
+                         and read as zero */                                                                                      
+                                                                                                                                  
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Pos (0UL)     /*!< Position of ENDADDR field.                                           */
   #define MPC_OVERRIDE_ENDADDR_ENDADDR_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_ENDADDR_ENDADDR_Pos) /*!< Bit mask of ENDADDR field.  */
 
 
-/* MPC_OVERRIDE_OFFSET: Address offset value divided by 2 for override region n address re-map */
+/* MPC_OVERRIDE_OFFSET: Address offset value divided by 2 for override region n address re-map Offset will be left shifted
+                         before applying offset, to create a 33-bit signed integer. */                                            
+                                                                                                                                  
   #define MPC_OVERRIDE_OFFSET_ResetValue (0x00000000UL) /*!< Reset value of OFFSET register.                                   */
 
-/* OFFSET @Bits 0..31 : Offset value */
+/* OFFSET @Bits 0..31 : Offset value Lower 11 bits are ignored */
   #define MPC_OVERRIDE_OFFSET_OFFSET_Pos (0UL)       /*!< Position of OFFSET field.                                            */
   #define MPC_OVERRIDE_OFFSET_OFFSET_Msk (0xFFFFFFFFUL << MPC_OVERRIDE_OFFSET_OFFSET_Pos) /*!< Bit mask of OFFSET field.       */
 
@@ -83679,7 +83374,7 @@ typedef struct {
 
 /* MRAMC_CONFIGNVR_PAGE: Configuration register for NVR page n */
   #define MRAMC_CONFIGNVR_PAGE_MaxCount (4UL)        /*!< Max size of PAGE[4] array.                                           */
-  #define MRAMC_CONFIGNVR_PAGE_ResetValue (0x00000000UL) /*!< Reset value of PAGE[4] register.                                 */
+  #define MRAMC_CONFIGNVR_PAGE_ResetValue (0x00300000UL) /*!< Reset value of PAGE[4] register.                                 */
 
 /* WEN @Bits 0..1 : Write enable. */
   #define MRAMC_CONFIGNVR_PAGE_WEN_Pos (0UL)         /*!< Position of WEN field.                                               */
@@ -83700,12 +83395,29 @@ typedef struct {
   #define MRAMC_CONFIGNVR_PAGE_EEN_EnableWordErase (0x2UL) /*!< Erase word and read are allowed                                */
 
 /* Lock @Bit 16 : Enables the lock for this register. */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_Pos (16UL)       /*!< Position of Lock field.                                              */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_Msk (0x1UL << MRAMC_CONFIGNVR_PAGE_LOCK_Pos) /*!< Bit mask of Lock field.                  */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_Min (0x0UL)      /*!< Min enumerator value of Lock field.                                  */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_Max (0x1UL)      /*!< Max enumerator value of Lock field.                                  */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_LockDisabled (0x0UL) /*!< Lock is disabled                                                 */
-  #define MRAMC_CONFIGNVR_PAGE_LOCK_LockEnabled (0x1UL) /*!< Lock is enabled                                                   */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_Pos (16UL)       /*!< Position of Lock field.                                              */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_Msk (0x1UL << MRAMC_CONFIGNVR_PAGE_Lock_Pos) /*!< Bit mask of Lock field.                  */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_Min (0x0UL)      /*!< Min enumerator value of Lock field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_Max (0x1UL)      /*!< Max enumerator value of Lock field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_LockDisabled (0x0UL) /*!< Read: Lock is disabled                                           */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_LockEnabled (0x1UL) /*!< Read: Lock is enabled                                             */
+  #define MRAMC_CONFIGNVR_PAGE_Lock_EnableLock (0x1UL) /*!< Write: Enables the lock (Ignores any other value written)          */
+
+/* UREN @Bit 20 : Enable read access to the upper part of NVR page, where the upper part size is NVR page size - 2KB */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Pos (20UL)       /*!< Position of UREN field.                                              */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Msk (0x1UL << MRAMC_CONFIGNVR_PAGE_UREN_Pos) /*!< Bit mask of UREN field.                  */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Min (0x0UL)      /*!< Min enumerator value of UREN field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Max (0x1UL)      /*!< Max enumerator value of UREN field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Disabled (0x0UL) /*!< Read is disabled. Ignores any other value written.                   */
+  #define MRAMC_CONFIGNVR_PAGE_UREN_Enabled (0x1UL)  /*!< Read is enabled                                                      */
+
+/* UWEN @Bit 21 : Enable write access to the upper part of NVR page, where the upper part size is NVR page size - 2KB */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Pos (21UL)       /*!< Position of UWEN field.                                              */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Msk (0x1UL << MRAMC_CONFIGNVR_PAGE_UWEN_Pos) /*!< Bit mask of UWEN field.                  */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Min (0x0UL)      /*!< Min enumerator value of UWEN field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Max (0x1UL)      /*!< Max enumerator value of UWEN field.                                  */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Disabled (0x0UL) /*!< Write is disabled. Ignores any other value written.                  */
+  #define MRAMC_CONFIGNVR_PAGE_UWEN_Enabled (0x1UL)  /*!< Write is enabled                                                     */
 
 
 
@@ -95102,7 +94814,7 @@ typedef struct {
   __IOM uint32_t  OPPOINT;                           /*!< (@ 0x00000004) Select ABB operating point for ABB domain [n]         */
   __IOM uint32_t  FORCELOCK;                         /*!< (@ 0x00000008) Force lock for the ABB at ABB domain [n]              */
 } NRF_POWER_ABB_Type;                                /*!< Size = 12 (0x00C)                                                    */
-  #define POWER_ABB_MaxCount (2UL)                   /*!< Max size of ABB[2] array.                                            */
+  #define POWER_ABB_MaxCount (3UL)                   /*!< Max size of ABB[3] array.                                            */
 
 /* POWER_ABB_STATUS: ABB Status for ABB domain [n] */
   #define POWER_ABB_STATUS_ResetValue (0x00000000UL) /*!< Reset value of STATUS register.                                      */
@@ -95172,8 +94884,8 @@ typedef struct {
     __IM uint32_t RESERVED[60];
     __IOM NRF_POWER_EVENTS_SEMAPHORE_Type EVENTS_SEMAPHORE; /*!< (@ 0x00000100) Peripheral events.                             */
     __IOM uint32_t EVENTS_REGUPDATED;                /*!< (@ 0x00000108) Updated the regulator configuration.                  */
-    __IOM uint32_t EVENTS_ABBLOCK[2];                /*!< (@ 0x0000010C) ABB lock for the ABB domain [n]                       */
-    __IM uint32_t RESERVED1[123];
+    __IOM uint32_t EVENTS_ABBLOCK[3];                /*!< (@ 0x0000010C) ABB lock for the ABB domain [n]                       */
+    __IM uint32_t RESERVED1[122];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
     __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
     __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
@@ -95183,12 +94895,12 @@ typedef struct {
                                                                          domain.*/                                                
     __IOM uint32_t ATBGNDCLAMP;                      /*!< (@ 0x00000408) Control of ground clamps for Analog Test Bus lines.   */
     __IOM uint32_t FORCEALLPOWERON;                  /*!< (@ 0x0000040C) Forces all the power domains to remain ON.            */
-    __IOM NRF_POWER_ABB_Type ABB[2];                 /*!< (@ 0x00000410) (unspecified)                                         */
-    __IM uint32_t RESERVED3[54];
+    __IOM NRF_POWER_ABB_Type ABB[3];                 /*!< (@ 0x00000410) (unspecified)                                         */
+    __IM uint32_t RESERVED3[51];
     __IOM uint32_t REGCONFIG;                        /*!< (@ 0x00000500) Regulator configuration                               */
-    __IM uint32_t RESERVED4;
-    __IOM uint32_t BLOCKULPMODE;                     /*!< (@ 0x00000508) Block entering into ULP mode                          */
-    __IOM uint32_t BLOCKULVMODE;                     /*!< (@ 0x0000050C) Block entering into ULV mode                          */
+    __IOM uint32_t PMICENABLE;                       /*!< (@ 0x00000504) Enable PMIC interface                                 */
+    __IOM uint32_t ULPENABLE;                        /*!< (@ 0x00000508) Enable ULP mode                                       */
+    __IOM uint32_t ULVENABLE;                        /*!< (@ 0x0000050C) Enable ULV mode                                       */
     __IOM uint32_t SEMAPHORESTATUS;                  /*!< (@ 0x00000510) Semaphore status                                      */
     __IOM uint32_t BILSENABLE;                       /*!< (@ 0x00000514) Enable BILS instances                                 */
   } NRF_POWER_Type;                                  /*!< Size = 1304 (0x518)                                                  */
@@ -95231,8 +94943,8 @@ typedef struct {
 
 
 /* POWER_EVENTS_ABBLOCK: ABB lock for the ABB domain [n] */
-  #define POWER_EVENTS_ABBLOCK_MaxCount (2UL)        /*!< Max size of EVENTS_ABBLOCK[2] array.                                 */
-  #define POWER_EVENTS_ABBLOCK_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ABBLOCK[2] register.                       */
+  #define POWER_EVENTS_ABBLOCK_MaxCount (3UL)        /*!< Max size of EVENTS_ABBLOCK[3] array.                                 */
+  #define POWER_EVENTS_ABBLOCK_ResetValue (0x00000000UL) /*!< Reset value of EVENTS_ABBLOCK[3] register.                       */
 
 /* EVENTS_ABBLOCK @Bit 0 : ABB lock for the ABB domain [n] */
   #define POWER_EVENTS_ABBLOCK_EVENTS_ABBLOCK_Pos (0UL) /*!< Position of EVENTS_ABBLOCK field.                                 */
@@ -95289,6 +95001,14 @@ typedef struct {
   #define POWER_INTEN_ABBLOCK1_Disabled (0x0UL)      /*!< Disable                                                              */
   #define POWER_INTEN_ABBLOCK1_Enabled (0x1UL)       /*!< Enable                                                               */
 
+/* ABBLOCK2 @Bit 5 : Enable or disable interrupt for event ABBLOCK[2] */
+  #define POWER_INTEN_ABBLOCK2_Pos (5UL)             /*!< Position of ABBLOCK2 field.                                          */
+  #define POWER_INTEN_ABBLOCK2_Msk (0x1UL << POWER_INTEN_ABBLOCK2_Pos) /*!< Bit mask of ABBLOCK2 field.                        */
+  #define POWER_INTEN_ABBLOCK2_Min (0x0UL)           /*!< Min enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTEN_ABBLOCK2_Max (0x1UL)           /*!< Max enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTEN_ABBLOCK2_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define POWER_INTEN_ABBLOCK2_Enabled (0x1UL)       /*!< Enable                                                               */
+
 
 /* POWER_INTENSET: Enable interrupt */
   #define POWER_INTENSET_ResetValue (0x00000000UL)   /*!< Reset value of INTENSET register.                                    */
@@ -95339,6 +95059,15 @@ typedef struct {
   #define POWER_INTENSET_ABBLOCK1_Set (0x1UL)        /*!< Enable                                                               */
   #define POWER_INTENSET_ABBLOCK1_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
   #define POWER_INTENSET_ABBLOCK1_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* ABBLOCK2 @Bit 5 : Write '1' to enable interrupt for event ABBLOCK[2] */
+  #define POWER_INTENSET_ABBLOCK2_Pos (5UL)          /*!< Position of ABBLOCK2 field.                                          */
+  #define POWER_INTENSET_ABBLOCK2_Msk (0x1UL << POWER_INTENSET_ABBLOCK2_Pos) /*!< Bit mask of ABBLOCK2 field.                  */
+  #define POWER_INTENSET_ABBLOCK2_Min (0x0UL)        /*!< Min enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTENSET_ABBLOCK2_Max (0x1UL)        /*!< Max enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTENSET_ABBLOCK2_Set (0x1UL)        /*!< Enable                                                               */
+  #define POWER_INTENSET_ABBLOCK2_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define POWER_INTENSET_ABBLOCK2_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
 
 /* POWER_INTENCLR: Disable interrupt */
@@ -95391,6 +95120,15 @@ typedef struct {
   #define POWER_INTENCLR_ABBLOCK1_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
   #define POWER_INTENCLR_ABBLOCK1_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
+/* ABBLOCK2 @Bit 5 : Write '1' to disable interrupt for event ABBLOCK[2] */
+  #define POWER_INTENCLR_ABBLOCK2_Pos (5UL)          /*!< Position of ABBLOCK2 field.                                          */
+  #define POWER_INTENCLR_ABBLOCK2_Msk (0x1UL << POWER_INTENCLR_ABBLOCK2_Pos) /*!< Bit mask of ABBLOCK2 field.                  */
+  #define POWER_INTENCLR_ABBLOCK2_Min (0x0UL)        /*!< Min enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTENCLR_ABBLOCK2_Max (0x1UL)        /*!< Max enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTENCLR_ABBLOCK2_Clear (0x1UL)      /*!< Disable                                                              */
+  #define POWER_INTENCLR_ABBLOCK2_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define POWER_INTENCLR_ABBLOCK2_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
 
 /* POWER_INTPEND: Pending interrupts */
   #define POWER_INTPEND_ResetValue (0x00000000UL)    /*!< Reset value of INTPEND register.                                     */
@@ -95437,6 +95175,14 @@ typedef struct {
   #define POWER_INTPEND_ABBLOCK1_NotPending (0x0UL)  /*!< Read: Not pending                                                    */
   #define POWER_INTPEND_ABBLOCK1_Pending (0x1UL)     /*!< Read: Pending                                                        */
 
+/* ABBLOCK2 @Bit 5 : Read pending status of interrupt for event ABBLOCK[2] */
+  #define POWER_INTPEND_ABBLOCK2_Pos (5UL)           /*!< Position of ABBLOCK2 field.                                          */
+  #define POWER_INTPEND_ABBLOCK2_Msk (0x1UL << POWER_INTPEND_ABBLOCK2_Pos) /*!< Bit mask of ABBLOCK2 field.                    */
+  #define POWER_INTPEND_ABBLOCK2_Min (0x0UL)         /*!< Min enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTPEND_ABBLOCK2_Max (0x1UL)         /*!< Max enumerator value of ABBLOCK2 field.                              */
+  #define POWER_INTPEND_ABBLOCK2_NotPending (0x0UL)  /*!< Read: Not pending                                                    */
+  #define POWER_INTPEND_ABBLOCK2_Pending (0x1UL)     /*!< Read: Pending                                                        */
+
 
 /* POWER_DFTTAPPINENABLE: Routed to DFT tap controllers and enables target power domain. */
   #define POWER_DFTTAPPINENABLE_ResetValue (0x00000000UL) /*!< Reset value of DFTTAPPINENABLE register.                        */
@@ -95454,7 +95200,7 @@ typedef struct {
 /* POWER_ATBGNDCLAMP: Control of ground clamps for Analog Test Bus lines. */
   #define POWER_ATBGNDCLAMP_ResetValue (0xFFFFFFFFUL) /*!< Reset value of ATBGNDCLAMP register.                                */
 
-/* GNDCLAMPCTRL0 @Bit 0 : Enable ground clamp [0] */
+/* GNDCLAMPCTRL0 @Bit 0 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL0_Pos (0UL)  /*!< Position of GNDCLAMPCTRL0 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL0_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL0_Pos) /*!< Bit mask of GNDCLAMPCTRL0
                                                                             field.*/                                              
@@ -95463,7 +95209,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL0_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL0_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL1 @Bit 1 : Enable ground clamp [1] */
+/* GNDCLAMPCTRL1 @Bit 1 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL1_Pos (1UL)  /*!< Position of GNDCLAMPCTRL1 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL1_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL1_Pos) /*!< Bit mask of GNDCLAMPCTRL1
                                                                             field.*/                                              
@@ -95472,7 +95218,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL1_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL1_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL2 @Bit 2 : Enable ground clamp [2] */
+/* GNDCLAMPCTRL2 @Bit 2 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL2_Pos (2UL)  /*!< Position of GNDCLAMPCTRL2 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL2_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL2_Pos) /*!< Bit mask of GNDCLAMPCTRL2
                                                                             field.*/                                              
@@ -95481,7 +95227,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL2_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL2_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL3 @Bit 3 : Enable ground clamp [3] */
+/* GNDCLAMPCTRL3 @Bit 3 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL3_Pos (3UL)  /*!< Position of GNDCLAMPCTRL3 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL3_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL3_Pos) /*!< Bit mask of GNDCLAMPCTRL3
                                                                             field.*/                                              
@@ -95490,7 +95236,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL3_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL3_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL4 @Bit 4 : Enable ground clamp [4] */
+/* GNDCLAMPCTRL4 @Bit 4 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL4_Pos (4UL)  /*!< Position of GNDCLAMPCTRL4 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL4_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL4_Pos) /*!< Bit mask of GNDCLAMPCTRL4
                                                                             field.*/                                              
@@ -95499,7 +95245,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL4_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL4_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL5 @Bit 5 : Enable ground clamp [5] */
+/* GNDCLAMPCTRL5 @Bit 5 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL5_Pos (5UL)  /*!< Position of GNDCLAMPCTRL5 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL5_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL5_Pos) /*!< Bit mask of GNDCLAMPCTRL5
                                                                             field.*/                                              
@@ -95508,7 +95254,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL5_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL5_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL6 @Bit 6 : Enable ground clamp [6] */
+/* GNDCLAMPCTRL6 @Bit 6 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL6_Pos (6UL)  /*!< Position of GNDCLAMPCTRL6 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL6_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL6_Pos) /*!< Bit mask of GNDCLAMPCTRL6
                                                                             field.*/                                              
@@ -95517,7 +95263,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL6_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL6_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL7 @Bit 7 : Enable ground clamp [7] */
+/* GNDCLAMPCTRL7 @Bit 7 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL7_Pos (7UL)  /*!< Position of GNDCLAMPCTRL7 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL7_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL7_Pos) /*!< Bit mask of GNDCLAMPCTRL7
                                                                             field.*/                                              
@@ -95526,7 +95272,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL7_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL7_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL8 @Bit 8 : Enable ground clamp [8] */
+/* GNDCLAMPCTRL8 @Bit 8 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL8_Pos (8UL)  /*!< Position of GNDCLAMPCTRL8 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL8_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL8_Pos) /*!< Bit mask of GNDCLAMPCTRL8
                                                                             field.*/                                              
@@ -95535,7 +95281,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL8_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL8_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL9 @Bit 9 : Enable ground clamp [9] */
+/* GNDCLAMPCTRL9 @Bit 9 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL9_Pos (9UL)  /*!< Position of GNDCLAMPCTRL9 field.                                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL9_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL9_Pos) /*!< Bit mask of GNDCLAMPCTRL9
                                                                             field.*/                                              
@@ -95544,7 +95290,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL9_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL9_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                        */
 
-/* GNDCLAMPCTRL10 @Bit 10 : Enable ground clamp [10] */
+/* GNDCLAMPCTRL10 @Bit 10 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL10_Pos (10UL) /*!< Position of GNDCLAMPCTRL10 field.                                   */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL10_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL10_Pos) /*!< Bit mask of GNDCLAMPCTRL10
                                                                             field.*/                                              
@@ -95553,7 +95299,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL10_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL10_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
 
-/* GNDCLAMPCTRL11 @Bit 11 : Enable ground clamp [11] */
+/* GNDCLAMPCTRL11 @Bit 11 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL11_Pos (11UL) /*!< Position of GNDCLAMPCTRL11 field.                                   */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL11_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL11_Pos) /*!< Bit mask of GNDCLAMPCTRL11
                                                                             field.*/                                              
@@ -95562,7 +95308,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL11_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL11_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
 
-/* GNDCLAMPCTRL12 @Bit 12 : Enable ground clamp [12] */
+/* GNDCLAMPCTRL12 @Bit 12 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL12_Pos (12UL) /*!< Position of GNDCLAMPCTRL12 field.                                   */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL12_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL12_Pos) /*!< Bit mask of GNDCLAMPCTRL12
                                                                             field.*/                                              
@@ -95571,7 +95317,7 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL12_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL12_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
 
-/* GNDCLAMPCTRL13 @Bit 13 : Enable ground clamp [13] */
+/* GNDCLAMPCTRL13 @Bit 13 : (unspecified) */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Pos (13UL) /*!< Position of GNDCLAMPCTRL13 field.                                   */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Pos) /*!< Bit mask of GNDCLAMPCTRL13
                                                                             field.*/                                              
@@ -95579,6 +95325,168 @@ typedef struct {
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL13 field.                      */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
   #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL13_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL14 @Bit 14 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Pos (14UL) /*!< Position of GNDCLAMPCTRL14 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Pos) /*!< Bit mask of GNDCLAMPCTRL14
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL14 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL14 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL14_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL15 @Bit 15 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Pos (15UL) /*!< Position of GNDCLAMPCTRL15 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Pos) /*!< Bit mask of GNDCLAMPCTRL15
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL15 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL15 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL15_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL16 @Bit 16 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Pos (16UL) /*!< Position of GNDCLAMPCTRL16 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Pos) /*!< Bit mask of GNDCLAMPCTRL16
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL16 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL16 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL16_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL17 @Bit 17 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Pos (17UL) /*!< Position of GNDCLAMPCTRL17 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Pos) /*!< Bit mask of GNDCLAMPCTRL17
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL17 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL17 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL17_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL18 @Bit 18 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Pos (18UL) /*!< Position of GNDCLAMPCTRL18 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Pos) /*!< Bit mask of GNDCLAMPCTRL18
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL18 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL18 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL18_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL19 @Bit 19 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Pos (19UL) /*!< Position of GNDCLAMPCTRL19 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Pos) /*!< Bit mask of GNDCLAMPCTRL19
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL19 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL19 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL19_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL20 @Bit 20 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Pos (20UL) /*!< Position of GNDCLAMPCTRL20 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Pos) /*!< Bit mask of GNDCLAMPCTRL20
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL20 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL20 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL20_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL21 @Bit 21 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Pos (21UL) /*!< Position of GNDCLAMPCTRL21 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Pos) /*!< Bit mask of GNDCLAMPCTRL21
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL21 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL21 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL21_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL22 @Bit 22 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Pos (22UL) /*!< Position of GNDCLAMPCTRL22 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Pos) /*!< Bit mask of GNDCLAMPCTRL22
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL22 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL22 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL22_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL23 @Bit 23 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Pos (23UL) /*!< Position of GNDCLAMPCTRL23 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Pos) /*!< Bit mask of GNDCLAMPCTRL23
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL23 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL23 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL23_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL24 @Bit 24 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Pos (24UL) /*!< Position of GNDCLAMPCTRL24 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Pos) /*!< Bit mask of GNDCLAMPCTRL24
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL24 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL24 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL24_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL25 @Bit 25 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Pos (25UL) /*!< Position of GNDCLAMPCTRL25 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Pos) /*!< Bit mask of GNDCLAMPCTRL25
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL25 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL25 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL25_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL26 @Bit 26 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Pos (26UL) /*!< Position of GNDCLAMPCTRL26 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Pos) /*!< Bit mask of GNDCLAMPCTRL26
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL26 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL26 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL26_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL27 @Bit 27 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Pos (27UL) /*!< Position of GNDCLAMPCTRL27 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Pos) /*!< Bit mask of GNDCLAMPCTRL27
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL27 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL27 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL27_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL28 @Bit 28 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Pos (28UL) /*!< Position of GNDCLAMPCTRL28 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Pos) /*!< Bit mask of GNDCLAMPCTRL28
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL28 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL28 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL28_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL29 @Bit 29 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Pos (29UL) /*!< Position of GNDCLAMPCTRL29 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Pos) /*!< Bit mask of GNDCLAMPCTRL29
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL29 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL29 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL29_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL30 @Bit 30 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Pos (30UL) /*!< Position of GNDCLAMPCTRL30 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Pos) /*!< Bit mask of GNDCLAMPCTRL30
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL30 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL30 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL30_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
+
+/* GNDCLAMPCTRL31 @Bit 31 : (unspecified) */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Pos (31UL) /*!< Position of GNDCLAMPCTRL31 field.                                   */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Msk (0x1UL << POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Pos) /*!< Bit mask of GNDCLAMPCTRL31
+                                                                            field.*/                                              
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Min (0x0UL) /*!< Min enumerator value of GNDCLAMPCTRL31 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Max (0x1UL) /*!< Max enumerator value of GNDCLAMPCTRL31 field.                      */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Disabled (0x0UL) /*!< Ground clamp is disabled, net is floating                     */
+  #define POWER_ATBGNDCLAMP_GNDCLAMPCTRL31_Enabled (0x1UL) /*!< Ground clamp is enabled, net is grounded                       */
 
 
 /* POWER_FORCEALLPOWERON: Forces all the power domains to remain ON. */
@@ -95594,7 +95502,7 @@ typedef struct {
 
 
 /* POWER_REGCONFIG: Regulator configuration */
-  #define POWER_REGCONFIG_ResetValue (0x00000007UL)  /*!< Reset value of REGCONFIG register.                                   */
+  #define POWER_REGCONFIG_ResetValue (0x80000007UL)  /*!< Reset value of REGCONFIG register.                                   */
 
 /* VREG1V8 @Bit 0 : Enable 1.8V regulator */
   #define POWER_REGCONFIG_VREG1V8_Pos (0UL)          /*!< Position of VREG1V8 field.                                           */
@@ -95661,28 +95569,40 @@ typedef struct {
   #define POWER_REGCONFIG_FORCE_Enabled (0x1UL)      /*!< Force enabled                                                        */
 
 
-/* POWER_BLOCKULPMODE: Block entering into ULP mode */
-  #define POWER_BLOCKULPMODE_ResetValue (0x00000000UL) /*!< Reset value of BLOCKULPMODE register.                              */
+/* POWER_PMICENABLE: Enable PMIC interface */
+  #define POWER_PMICENABLE_ResetValue (0x00000000UL) /*!< Reset value of PMICENABLE register.                                  */
 
-/* BLOCK @Bit 0 : Block ULP mode */
-  #define POWER_BLOCKULPMODE_BLOCK_Pos (0UL)         /*!< Position of BLOCK field.                                             */
-  #define POWER_BLOCKULPMODE_BLOCK_Msk (0x1UL << POWER_BLOCKULPMODE_BLOCK_Pos) /*!< Bit mask of BLOCK field.                   */
-  #define POWER_BLOCKULPMODE_BLOCK_Min (0x0UL)       /*!< Min enumerator value of BLOCK field.                                 */
-  #define POWER_BLOCKULPMODE_BLOCK_Max (0x1UL)       /*!< Max enumerator value of BLOCK field.                                 */
-  #define POWER_BLOCKULPMODE_BLOCK_Allowed (0x0UL)   /*!< Allowed going into ULP mode                                          */
-  #define POWER_BLOCKULPMODE_BLOCK_Blocked (0x1UL)   /*!< Blocked going into ULP mode                                          */
+/* ENABLE @Bit 0 : Enable PMIC interface */
+  #define POWER_PMICENABLE_ENABLE_Pos (0UL)          /*!< Position of ENABLE field.                                            */
+  #define POWER_PMICENABLE_ENABLE_Msk (0x1UL << POWER_PMICENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.                    */
+  #define POWER_PMICENABLE_ENABLE_Min (0x0UL)        /*!< Min enumerator value of ENABLE field.                                */
+  #define POWER_PMICENABLE_ENABLE_Max (0x1UL)        /*!< Max enumerator value of ENABLE field.                                */
+  #define POWER_PMICENABLE_ENABLE_Disabled (0x0UL)   /*!< Disabled                                                             */
+  #define POWER_PMICENABLE_ENABLE_Enabled (0x1UL)    /*!< Enabled                                                              */
 
 
-/* POWER_BLOCKULVMODE: Block entering into ULV mode */
-  #define POWER_BLOCKULVMODE_ResetValue (0x00000000UL) /*!< Reset value of BLOCKULVMODE register.                              */
+/* POWER_ULPENABLE: Enable ULP mode */
+  #define POWER_ULPENABLE_ResetValue (0x00000001UL)  /*!< Reset value of ULPENABLE register.                                   */
 
-/* BLOCK @Bit 0 : Block ULV mode */
-  #define POWER_BLOCKULVMODE_BLOCK_Pos (0UL)         /*!< Position of BLOCK field.                                             */
-  #define POWER_BLOCKULVMODE_BLOCK_Msk (0x1UL << POWER_BLOCKULVMODE_BLOCK_Pos) /*!< Bit mask of BLOCK field.                   */
-  #define POWER_BLOCKULVMODE_BLOCK_Min (0x0UL)       /*!< Min enumerator value of BLOCK field.                                 */
-  #define POWER_BLOCKULVMODE_BLOCK_Max (0x1UL)       /*!< Max enumerator value of BLOCK field.                                 */
-  #define POWER_BLOCKULVMODE_BLOCK_Allowed (0x0UL)   /*!< Allowed going into ULV mode                                          */
-  #define POWER_BLOCKULVMODE_BLOCK_Blocked (0x1UL)   /*!< Blocked going into ULV mode                                          */
+/* ENABLE @Bit 0 : Enable ULP mode */
+  #define POWER_ULPENABLE_ENABLE_Pos (0UL)           /*!< Position of ENABLE field.                                            */
+  #define POWER_ULPENABLE_ENABLE_Msk (0x1UL << POWER_ULPENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.                      */
+  #define POWER_ULPENABLE_ENABLE_Min (0x0UL)         /*!< Min enumerator value of ENABLE field.                                */
+  #define POWER_ULPENABLE_ENABLE_Max (0x1UL)         /*!< Max enumerator value of ENABLE field.                                */
+  #define POWER_ULPENABLE_ENABLE_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define POWER_ULPENABLE_ENABLE_Enabled (0x1UL)     /*!< Enabled                                                              */
+
+
+/* POWER_ULVENABLE: Enable ULV mode */
+  #define POWER_ULVENABLE_ResetValue (0x00000001UL)  /*!< Reset value of ULVENABLE register.                                   */
+
+/* ENABLE @Bit 0 : Enable ULV mode */
+  #define POWER_ULVENABLE_ENABLE_Pos (0UL)           /*!< Position of ENABLE field.                                            */
+  #define POWER_ULVENABLE_ENABLE_Msk (0x1UL << POWER_ULVENABLE_ENABLE_Pos) /*!< Bit mask of ENABLE field.                      */
+  #define POWER_ULVENABLE_ENABLE_Min (0x0UL)         /*!< Min enumerator value of ENABLE field.                                */
+  #define POWER_ULVENABLE_ENABLE_Max (0x1UL)         /*!< Max enumerator value of ENABLE field.                                */
+  #define POWER_ULVENABLE_ENABLE_Disabled (0x0UL)    /*!< Disabled                                                             */
+  #define POWER_ULVENABLE_ENABLE_Enabled (0x1UL)     /*!< Enabled                                                              */
 
 
 /* POWER_SEMAPHORESTATUS: Semaphore status */
@@ -98754,7 +98674,7 @@ typedef struct {
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSVCOSWREF_Msk (0x7UL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSVCOSWREF_Pos) /*!< Bit mask of
                                                                             SPHYNXFSVCOSWREF field.*/                             
 
-/* SPHYNXFSDIV2CM @Bits 15..18 : Spare, not used */
+/* SPHYNXFSDIV2CM @Bits 15..18 : Set common mode for DIV2 */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CM_Pos (15UL) /*!< Position of SPHYNXFSDIV2CM field.                             */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CM_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CM_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2CM field.*/                               
@@ -98764,12 +98684,12 @@ typedef struct {
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CTRL_Msk (0x7UL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2CTRL_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2CTRL field.*/                             
 
-/* SPHYNXFSDIV2OSC @Bits 22..26 : Spare, not used */
+/* SPHYNXFSDIV2OSC @Bits 22..26 : Change back bias of NMOS in ROSC inside DIV2 */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2OSC_Pos (22UL) /*!< Position of SPHYNXFSDIV2OSC field.                           */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2OSC_Msk (0x1FUL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDIV2OSC_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2OSC field.*/                              
 
-/* SPHYNXFSDTCCTRL @Bits 27..30 : DTC control */
+/* SPHYNXFSDTCCTRL @Bits 27..30 : 0: controls bleed current from supply, 1: bypasses DTC to send XO out directly */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDTCCTRL_Pos (27UL) /*!< Position of SPHYNXFSDTCCTRL field.                           */
   #define RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDTCCTRL_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL0_SPHYNXFSDTCCTRL_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDTCCTRL field.*/                              
@@ -98793,7 +98713,7 @@ typedef struct {
   #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Msk (0x3UL << RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSREFVTTRIM_Pos) /*!< Bit mask
                                                                             of SPHYNXFSREFVTTRIM field.*/                         
 
-/* SPHYNXFSDIV2ISW @Bits 14..17 : [2:0] Adjust voltage for back bias of injection switch; [3] Spare */
+/* SPHYNXFSDIV2ISW @Bits 14..17 : Adjust voltage for back bias of injection switch */
   #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSDIV2ISW_Pos (14UL) /*!< Position of SPHYNXFSDIV2ISW field.                           */
   #define RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSDIV2ISW_Msk (0xFUL << RADIO_SPHYNXANA_FSCTRL1_SPHYNXFSDIV2ISW_Pos) /*!< Bit mask of
                                                                             SPHYNXFSDIV2ISW field.*/                              
@@ -156161,6 +156081,10 @@ typedef struct {
 /* VPR_SUBSCRIBE_TRIGGER: Subscribe configuration for task TASKS_TRIGGER[n] */
   #define VPR_SUBSCRIBE_TRIGGER_MaxCount (32UL)      /*!< Max size of SUBSCRIBE_TRIGGER[32] array.                             */
 
+/* CHIDX @Bits 0..7 : DPPI channel that task TASKS_TRIGGER[n] will subscribe to */
+  #define VPR_SUBSCRIBE_TRIGGER_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
+  #define VPR_SUBSCRIBE_TRIGGER_CHIDX_Msk (0xFFUL << VPR_SUBSCRIBE_TRIGGER_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
+
 /* ENABLE @Bit 0 : Subscription enable bit (write only) */
   #define VPR_SUBSCRIBE_TRIGGER_ENABLE_Pos (0UL)     /*!< Position of ENABLE field.                                            */
   #define VPR_SUBSCRIBE_TRIGGER_ENABLE_Msk (0x1UL << VPR_SUBSCRIBE_TRIGGER_ENABLE_Pos) /*!< Bit mask of ENABLE field.          */
@@ -156190,6 +156114,10 @@ typedef struct {
 
 /* VPR_PUBLISH_TRIGGERED: Publish configuration for event EVENTS_TRIGGERED[n] */
   #define VPR_PUBLISH_TRIGGERED_MaxCount (32UL)      /*!< Max size of PUBLISH_TRIGGERED[32] array.                             */
+
+/* CHIDX @Bits 0..7 : DPPI channel that event EVENTS_TRIGGERED[n] will publish to */
+  #define VPR_PUBLISH_TRIGGERED_CHIDX_Pos (0UL)      /*!< Position of CHIDX field.                                             */
+  #define VPR_PUBLISH_TRIGGERED_CHIDX_Msk (0xFFUL << VPR_PUBLISH_TRIGGERED_CHIDX_Pos) /*!< Bit mask of CHIDX field.            */
 
 /* ENABLE @Bit 0 : Publication enable bit (write only) */
   #define VPR_PUBLISH_TRIGGERED_ENABLE_Pos (0UL)     /*!< Position of ENABLE field.                                            */
@@ -157803,27 +157731,15 @@ typedef struct {
 /* PRV @Bits 0..1 : Privilege level */
   #define VPRCSR_DCSR_PRV_Pos (0UL)                  /*!< Position of PRV field.                                               */
   #define VPRCSR_DCSR_PRV_Msk (0x3UL << VPRCSR_DCSR_PRV_Pos) /*!< Bit mask of PRV field.                                       */
-  #define VPRCSR_DCSR_PRV_Min (0x3UL)                /*!< Min enumerator value of PRV field.                                   */
+  #define VPRCSR_DCSR_PRV_Min (0x0UL)                /*!< Min enumerator value of PRV field.                                   */
   #define VPRCSR_DCSR_PRV_Max (0x3UL)                /*!< Max enumerator value of PRV field.                                   */
+  #define VPRCSR_DCSR_PRV_USER (0x0UL)               /*!< (unspecified)                                                        */
+  #define VPRCSR_DCSR_PRV_SUPERVISOR (0x1UL)         /*!< (unspecified)                                                        */
   #define VPRCSR_DCSR_PRV_MACHINE (0x3UL)            /*!< (unspecified)                                                        */
 
 /* STEP @Bit 2 : Step */
   #define VPRCSR_DCSR_STEP_Pos (2UL)                 /*!< Position of STEP field.                                              */
   #define VPRCSR_DCSR_STEP_Msk (0x1UL << VPRCSR_DCSR_STEP_Pos) /*!< Bit mask of STEP field.                                    */
-
-/* CAUSE @Bits 6..8 : Debug Mode enter cause */
-  #define VPRCSR_DCSR_CAUSE_Pos (6UL)                /*!< Position of CAUSE field.                                             */
-  #define VPRCSR_DCSR_CAUSE_Msk (0x7UL << VPRCSR_DCSR_CAUSE_Pos) /*!< Bit mask of CAUSE field.                                 */
-  #define VPRCSR_DCSR_CAUSE_Min (0x1UL)              /*!< Min enumerator value of CAUSE field.                                 */
-  #define VPRCSR_DCSR_CAUSE_Max (0x5UL)              /*!< Max enumerator value of CAUSE field.                                 */
-  #define VPRCSR_DCSR_CAUSE_EBREAK (0x1UL)           /*!< An ebreak instruction was executed. (priority 3)                     */
-  #define VPRCSR_DCSR_CAUSE_TRIGGER (0x2UL)          /*!< The Trigger Module caused a breakpoint exception. (priority 4,
-                                                          highest)*/                                                              
-  #define VPRCSR_DCSR_CAUSE_HALTREQ (0x3UL)          /*!< The debugger requested entry to Debug Mode using haltreq. (priority
-                                                          1)*/                                                                    
-  #define VPRCSR_DCSR_CAUSE_STEP (0x4UL)             /*!< The hart single stepped because step was set. (priority 0, lowest)   */
-  #define VPRCSR_DCSR_CAUSE_RESETHALTREQ (0x5UL)     /*!< The hart halted directly out of reset due to resethaltreq. It is also
-                                                          acceptable to report 3 when this happens. (priority 2)*/                
 
 /* STEPIE @Bit 11 : Step Interrupt Enable */
   #define VPRCSR_DCSR_STEPIE_Pos (11UL)              /*!< Position of STEPIE field.                                            */
@@ -157847,9 +157763,12 @@ typedef struct {
 /* XDEBUGVER @Bits 28..31 : External Debug version */
   #define VPRCSR_DCSR_XDEBUGVER_Pos (28UL)           /*!< Position of XDEBUGVER field.                                         */
   #define VPRCSR_DCSR_XDEBUGVER_Msk (0xFUL << VPRCSR_DCSR_XDEBUGVER_Pos) /*!< Bit mask of XDEBUGVER field.                     */
-  #define VPRCSR_DCSR_XDEBUGVER_Min (0x4UL)          /*!< Min enumerator value of XDEBUGVER field.                             */
-  #define VPRCSR_DCSR_XDEBUGVER_Max (0x4UL)          /*!< Max enumerator value of XDEBUGVER field.                             */
+  #define VPRCSR_DCSR_XDEBUGVER_Min (0x0UL)          /*!< Min enumerator value of XDEBUGVER field.                             */
+  #define VPRCSR_DCSR_XDEBUGVER_Max (0xFUL)          /*!< Max enumerator value of XDEBUGVER field.                             */
+  #define VPRCSR_DCSR_XDEBUGVER_NODBG (0x0UL)        /*!< There is no external debug support                                   */
   #define VPRCSR_DCSR_XDEBUGVER_STDDBG (0x4UL)       /*!< External debug support exists as it is described in this document    */
+  #define VPRCSR_DCSR_XDEBUGVER_NSTDDBG (0xFUL)      /*!< There is external debug support, but it does not conform to any
+                                                          available version of this spec*/                                        
 
 
 /**
@@ -157905,50 +157824,6 @@ typedef struct {
 /* VAL @Bits 0..31 : Machine Instruction Counter (Upper part) value */
   #define VPRCSR_MINSTRETH_VAL_Pos (0UL)             /*!< Position of VAL field.                                               */
   #define VPRCSR_MINSTRETH_VAL_Msk (0xFFFFFFFFUL << VPRCSR_MINSTRETH_VAL_Pos) /*!< Bit mask of VAL field.                      */
-
-
-/**
-  * @brief UCYCLE [VPRCSR_UCYCLE] User Cycle Counter
-  */
-  #define VPRCSR_UCYCLE (0x00000C00ul)
-  #define VPRCSR_UCYCLE_ResetValue (0x00000000UL)    /*!< Reset value of UCYCLE register.                                      */
-
-/* VAL @Bits 0..31 : User Cycle Counter value */
-  #define VPRCSR_UCYCLE_VAL_Pos (0UL)                /*!< Position of VAL field.                                               */
-  #define VPRCSR_UCYCLE_VAL_Msk (0xFFFFFFFFUL << VPRCSR_UCYCLE_VAL_Pos) /*!< Bit mask of VAL field.                            */
-
-
-/**
-  * @brief UINSTRET [VPRCSR_UINSTRET] User Instruction Counter
-  */
-  #define VPRCSR_UINSTRET (0x00000C02ul)
-  #define VPRCSR_UINSTRET_ResetValue (0x00000000UL)  /*!< Reset value of UINSTRET register.                                    */
-
-/* VAL @Bits 0..31 : User Instruction Counter value */
-  #define VPRCSR_UINSTRET_VAL_Pos (0UL)              /*!< Position of VAL field.                                               */
-  #define VPRCSR_UINSTRET_VAL_Msk (0xFFFFFFFFUL << VPRCSR_UINSTRET_VAL_Pos) /*!< Bit mask of VAL field.                        */
-
-
-/**
-  * @brief UCYCLEH [VPRCSR_UCYCLEH] User Cycle Counter (Upper part)
-  */
-  #define VPRCSR_UCYCLEH (0x00000C80ul)
-  #define VPRCSR_UCYCLEH_ResetValue (0x00000000UL)   /*!< Reset value of UCYCLEH register.                                     */
-
-/* VAL @Bits 0..31 : User Cycle Counter value */
-  #define VPRCSR_UCYCLEH_VAL_Pos (0UL)               /*!< Position of VAL field.                                               */
-  #define VPRCSR_UCYCLEH_VAL_Msk (0xFFFFFFFFUL << VPRCSR_UCYCLEH_VAL_Pos) /*!< Bit mask of VAL field.                          */
-
-
-/**
-  * @brief UINSTRETH [VPRCSR_UINSTRETH] User Instruction Counter (Upper part)
-  */
-  #define VPRCSR_UINSTRETH (0x00000C82ul)
-  #define VPRCSR_UINSTRETH_ResetValue (0x00000000UL) /*!< Reset value of UINSTRETH register.                                   */
-
-/* VAL @Bits 0..31 : User Instruction Counter (Upper part) value */
-  #define VPRCSR_UINSTRETH_VAL_Pos (0UL)             /*!< Position of VAL field.                                               */
-  #define VPRCSR_UINSTRETH_VAL_Msk (0xFFFFFFFFUL << VPRCSR_UINSTRETH_VAL_Pos) /*!< Bit mask of VAL field.                      */
 
 
 /**
@@ -162549,7 +162424,7 @@ typedef struct {
 } NRF_VREG1V0_TRIM_Type;                             /*!< Size = 16 (0x010)                                                    */
 
 /* VREG1V0_TRIM_IREF: Local current reference trimming */
-  #define VREG1V0_TRIM_IREF_ResetValue (0x00000000UL) /*!< Reset value of IREF register.                                       */
+  #define VREG1V0_TRIM_IREF_ResetValue (0x00000008UL) /*!< Reset value of IREF register.                                       */
 
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREG1V0_TRIM_IREF_VAL_Pos (0UL)            /*!< Position of VAL field.                                               */
@@ -163351,7 +163226,7 @@ typedef struct {
 
 
 /* VREG1V0_VOUTLPNOMINAL: Nominal low power mode output voltage programming */
-  #define VREG1V0_VOUTLPNOMINAL_ResetValue (0x00000017UL) /*!< Reset value of VOUTLPNOMINAL register.                          */
+  #define VREG1V0_VOUTLPNOMINAL_ResetValue (0x00000018UL) /*!< Reset value of VOUTLPNOMINAL register.                          */
 
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTLPNOMINAL_VAL_Pos (0UL)        /*!< Position of VAL field.                                               */
@@ -163361,7 +163236,7 @@ typedef struct {
 
 
 /* VREG1V0_VOUTLPRADIO: Radio low power mode output voltage programming */
-  #define VREG1V0_VOUTLPRADIO_ResetValue (0x0000002BUL) /*!< Reset value of VOUTLPRADIO register.                              */
+  #define VREG1V0_VOUTLPRADIO_ResetValue (0x00000027UL) /*!< Reset value of VOUTLPRADIO register.                              */
 
 /* VAL @Bits 0..5 : Output voltage value */
   #define VREG1V0_VOUTLPRADIO_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
@@ -163395,7 +163270,7 @@ typedef struct {
 
 
 /* VREG1V0_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREG1V0_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                                */
+  #define VREG1V0_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                                */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREG1V0_ITHRESHOLD_VAL_Pos (0UL)           /*!< Position of VAL field.                                               */
@@ -164415,7 +164290,7 @@ typedef struct {
 
 
 /* VREGAO0V8_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREGAO0V8_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                              */
+  #define VREGAO0V8_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                              */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGAO0V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
@@ -165351,7 +165226,7 @@ typedef struct {
 
 
 /* VREGAO1V8_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREGAO1V8_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                              */
+  #define VREGAO1V8_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                              */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGAO1V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */
@@ -166402,7 +166277,7 @@ typedef struct {
   #define VREGMAIN_DFT_TCFG_SIGDIG_Disabled (0x0UL)  /*!< SIGDIG disabled                                                      */
   #define VREGMAIN_DFT_TCFG_SIGDIG_Enabled (0x1UL)   /*!< SIGDIG enabled                                                       */
 
-/* GPI @Bit 15 : Enable GPI (PSEUDO PWM) */
+/* GPI @Bit 15 : Enable GPI (PUEDO PWM) */
   #define VREGMAIN_DFT_TCFG_GPI_Pos (15UL)           /*!< Position of GPI field.                                               */
   #define VREGMAIN_DFT_TCFG_GPI_Msk (0x1UL << VREGMAIN_DFT_TCFG_GPI_Pos) /*!< Bit mask of GPI field.                           */
   #define VREGMAIN_DFT_TCFG_GPI_Min (0x0UL)          /*!< Min enumerator value of GPI field.                                   */
@@ -167101,7 +166976,7 @@ typedef struct {
 
 
 /* VREGMAIN_VDD1V0LPOUTPUT: VDD_1V0 LP output voltage */
-  #define VREGMAIN_VDD1V0LPOUTPUT_ResetValue (0x00000017UL) /*!< Reset value of VDD1V0LPOUTPUT register.                       */
+  #define VREGMAIN_VDD1V0LPOUTPUT_ResetValue (0x00000018UL) /*!< Reset value of VDD1V0LPOUTPUT register.                       */
 
 /* VAL @Bits 0..5 : Voltage value */
   #define VREGMAIN_VDD1V0LPOUTPUT_VAL_Pos (0UL)      /*!< Position of VAL field.                                               */
@@ -167201,7 +167076,7 @@ typedef struct {
 
 
 /* VREGMAIN_ITHRESHOLD: Current threshold for HP/LP mode transistion */
-  #define VREGMAIN_ITHRESHOLD_ResetValue (0x00000010UL) /*!< Reset value of ITHRESHOLD register.                               */
+  #define VREGMAIN_ITHRESHOLD_ResetValue (0x00000006UL) /*!< Reset value of ITHRESHOLD register.                               */
 
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLD_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
@@ -167211,7 +167086,7 @@ typedef struct {
 
 
 /* VREGMAIN_ITHRESHOLDPWM: Current threshold for half clock speed in PWM mode */
-  #define VREGMAIN_ITHRESHOLDPWM_ResetValue (0x00000010UL) /*!< Reset value of ITHRESHOLDPWM register.                         */
+  #define VREGMAIN_ITHRESHOLDPWM_ResetValue (0x00000006UL) /*!< Reset value of ITHRESHOLDPWM register.                         */
 
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLDPWM_VAL_Pos (0UL)       /*!< Position of VAL field.                                               */
@@ -167221,7 +167096,7 @@ typedef struct {
 
 
 /* VREGMAIN_ITHRESHOLD0V8LOW: Current threshold LDO toggle at low 0V8 current consumption */
-  #define VREGMAIN_ITHRESHOLD0V8LOW_ResetValue (0x00000010UL) /*!< Reset value of ITHRESHOLD0V8LOW register.                   */
+  #define VREGMAIN_ITHRESHOLD0V8LOW_ResetValue (0x00000002UL) /*!< Reset value of ITHRESHOLD0V8LOW register.                   */
 
 /* VAL @Bits 0..4 : Current consumption */
   #define VREGMAIN_ITHRESHOLD0V8LOW_VAL_Pos (0UL)    /*!< Position of VAL field.                                               */
@@ -167754,7 +167629,7 @@ typedef struct {
   } NRF_VREGSU_Type;                                 /*!< Size = 1544 (0x608)                                                  */
 
 /* VREGSU_PWRUPCTRL: Power up control */
-  #define VREGSU_PWRUPCTRL_ResetValue (0x00000000UL) /*!< Reset value of PWRUPCTRL register.                                   */
+  #define VREGSU_PWRUPCTRL_ResetValue (0x00000001UL) /*!< Reset value of PWRUPCTRL register.                                   */
 
 /* CTRL @Bit 0 : Power up control */
   #define VREGSU_PWRUPCTRL_CTRL_Pos (0UL)            /*!< Position of CTRL field.                                              */
@@ -168605,7 +168480,7 @@ typedef struct {
 } NRF_VREGVS0V8_TRIM_Type;                           /*!< Size = 16 (0x010)                                                    */
 
 /* VREGVS0V8_TRIM_IREF: Local current reference trimming */
-  #define VREGVS0V8_TRIM_IREF_ResetValue (0x00000000UL) /*!< Reset value of IREF register.                                     */
+  #define VREGVS0V8_TRIM_IREF_ResetValue (0x00000008UL) /*!< Reset value of IREF register.                                     */
 
 /* VAL @Bits 0..6 : Current reference trimming value */
   #define VREGVS0V8_TRIM_IREF_VAL_Pos (0UL)          /*!< Position of VAL field.                                               */
@@ -169375,7 +169250,7 @@ typedef struct {
 
 
 /* VREGVS0V8_ITHRESHOLD: Current threshold for mode transistion */
-  #define VREGVS0V8_ITHRESHOLD_ResetValue (0x0000000AUL) /*!< Reset value of ITHRESHOLD register.                              */
+  #define VREGVS0V8_ITHRESHOLD_ResetValue (0x00000005UL) /*!< Reset value of ITHRESHOLD register.                              */
 
 /* VAL @Bits 0..3 : Current consumption */
   #define VREGVS0V8_ITHRESHOLD_VAL_Pos (0UL)         /*!< Position of VAL field.                                               */

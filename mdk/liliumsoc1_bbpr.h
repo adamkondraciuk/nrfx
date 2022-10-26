@@ -83,22 +83,23 @@ typedef enum {
   VPRCLIC_13_IRQn                        = 13,       /*!< 13 VPRCLIC_13                                                        */
   VPRCLIC_14_IRQn                        = 14,       /*!< 14 VPRCLIC_14                                                        */
   VPRCLIC_15_IRQn                        = 15,       /*!< 15 VPRCLIC_15                                                        */
+  VPRCLIC_16_IRQn                        = 16,       /*!< 16 VPRCLIC_16                                                        */
+  VPRCLIC_17_IRQn                        = 17,       /*!< 17 VPRCLIC_17                                                        */
+  VPRCLIC_18_IRQn                        = 18,       /*!< 18 VPRCLIC_18                                                        */
+  VPRCLIC_19_IRQn                        = 19,       /*!< 19 VPRCLIC_19                                                        */
+  VPRCLIC_20_IRQn                        = 20,       /*!< 20 VPRCLIC_20                                                        */
+  VPRCLIC_21_IRQn                        = 21,       /*!< 21 VPRCLIC_21                                                        */
+  VPRCLIC_22_IRQn                        = 22,       /*!< 22 VPRCLIC_22                                                        */
+  VPRCLIC_23_IRQn                        = 23,       /*!< 23 VPRCLIC_23                                                        */
+  VPRCLIC_24_IRQn                        = 24,       /*!< 24 VPRCLIC_24                                                        */
+  VPRCLIC_25_IRQn                        = 25,       /*!< 25 VPRCLIC_25                                                        */
+  VPRCLIC_26_IRQn                        = 26,       /*!< 26 VPRCLIC_26                                                        */
+  VPRCLIC_27_IRQn                        = 27,       /*!< 27 VPRCLIC_27                                                        */
+  VPRCLIC_28_IRQn                        = 28,       /*!< 28 VPRCLIC_28                                                        */
+  VPRCLIC_29_IRQn                        = 29,       /*!< 29 VPRCLIC_29                                                        */
+  VPRCLIC_30_IRQn                        = 30,       /*!< 30 VPRCLIC_30                                                        */
+  VPRCLIC_31_IRQn                        = 31,       /*!< 31 VPRCLIC_31                                                        */
   VPRTIM_IRQn                            = 32,       /*!< 32 VPRTIM                                                            */
-  EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
-  AAR020_CCM020_IRQn                     = 38,       /*!< 38 AAR020_CCM020                                                     */
-  ECB020_IRQn                            = 39,       /*!< 39 ECB020                                                            */
-  TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
-  TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
-  TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
-  RTC_IRQn                               = 43,       /*!< 43 RTC                                                               */
-  RADIO_0_IRQn                           = 44,       /*!< 44 RADIO_0                                                           */
-  RADIO_1_IRQn                           = 45,       /*!< 45 RADIO_1                                                           */
-  SPU030_IRQn                            = 48,       /*!< 48 SPU030                                                            */
-  RADIOACC_IRQn                          = 51,       /*!< 51 RADIOACC                                                          */
-  AAR030_CCM030_IRQn                     = 58,       /*!< 58 AAR030_CCM030                                                     */
-  ECB030_IRQn                            = 59,       /*!< 59 ECB030                                                            */
-  IPCT_0_IRQn                            = 64,       /*!< 64 IPCT_0                                                            */
-  IPCT_1_IRQn                            = 65,       /*!< 65 IPCT_1                                                            */
   GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
@@ -127,6 +128,7 @@ typedef enum {
   RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
   WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
   WDT132_IRQn                            = 300,      /*!< 300 WDT132                                                           */
+  EGU130_IRQn                            = 301,      /*!< 301 EGU130                                                           */
   RESETHUB_IRQn                          = 329,      /*!< 329 RESETHUB                                                         */
   SAADC_IRQn                             = 386,      /*!< 386 SAADC                                                            */
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
@@ -173,7 +175,7 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX             480             /*!< Top interrupt number                                                 */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< liliumsoc1_bbpr System Library                                       */
