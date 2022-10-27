@@ -109,6 +109,16 @@ NRF_STATIC_INLINE uint8_t nrf_address_bus_get(uint32_t addr)
     return (uint8_t)((addr & ADDRESS_BUS_Msk) >> ADDRESS_BUS_Pos);
 }
 
+NRF_STATIC_INLINE uint8_t nrf_address_bridge_group_get(uint32_t addr)
+{
+    return (uint8_t)((addr & ADDRESS_BRIDGE_GROUP_Msk) >> ADDRESS_BRIDGE_GROUP_Pos);
+}
+
+NRF_STATIC_INLINE nrf_domain_speed_t nrf_address_domain_speed_get(uint32_t addr)
+{
+    return (nrf_domain_speed_t)((addr & ADDRESS_DOMAIN_SPEED_Msk) >> ADDRESS_DOMAIN_SPEED_Pos);
+}
+
 NRF_STATIC_INLINE uint8_t nrf_address_slave_get(uint32_t addr)
 {
     return (uint8_t)((addr & ADDRESS_SLAVE_Msk) >> ADDRESS_SLAVE_Pos);
