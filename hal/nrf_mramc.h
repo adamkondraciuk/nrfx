@@ -20,6 +20,25 @@ extern "C" {
 #define NRF_MRAMC_ERASE_SIZE_MIN            MRAMC_ERASE_SIZE_SIZE_Min
 #define NRF_MRAMC_ERASE_SIZE_MAX            MRAMC_ERASE_SIZE_SIZE_Max
 #define NRF_MRAMC_CONFIGNVR_PAGE_MAX        MRAMC_CONFIGNVR_PAGE_MaxCount
+#define NRF_MRAMC_CONFIGNVR_PAGE_LRSIZE_MAX MRAMC_CONFIGNVR_PAGE_LRSIZE_Max
+#define NRF_MRAMC_CONFIGNVR_PAGE_LWSIZE_MAX MRAMC_CONFIGNVR_PAGE_LWSIZE_Max
+
+#if (defined(MRAMC_CONFIGNVR_PAGE_UREN_Msk) && defined(MRAMC_CONFIGNVR_PAGE_UWEN_Msk)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether CONFIGNVR.PAGE[n] registers have upper part of NVR page read and write protection fields. */
+#define NRF_MRAMC_HAS_CONFIGNVR_PAGE_UPPER_PROTECT 1
+#else
+#define NRF_MRAMC_HAS_CONFIGNVR_PAGE_UPPER_PROTECT 0
+#endif
+
+#if (defined(MRAMC_CONFIGNVR_PAGE_LREN_Msk) && defined(MRAMC_CONFIGNVR_PAGE_LWEN_Msk) && \
+     defined(MRAMC_CONFIGNVR_PAGE_LRSIZE_Msk) && defined(MRAMC_CONFIGNVR_PAGE_LWSIZE_Msk)) || \
+    defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether CONFIGNVR.PAGE[n] registers have lower part of NVR page read and write protection fields. */
+#define NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT 1
+#else
+#define NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT 0
+#endif
 
 /**
  * @defgroup nrf_mramc_hal MRAMC HAL
@@ -156,9 +175,15 @@ typedef struct
 /** @brief Configuration structure for NVR page n. */
 typedef struct
 {
-    nrf_mramc_mode_write_t wen;  ///< Write enable.
-    nrf_mramc_mode_erase_t een;  ///< Erase enable.
-    bool                   lock; ///< Enables the lock for this register.
+    nrf_mramc_mode_write_t wen;    ///< Write enable.
+    nrf_mramc_mode_erase_t een;    ///< Erase enable.
+    bool                   lock;   ///< Enables the lock for this register.
+    bool                   uren;   ///< Enable read access to the upper part of NVR page, where the upper part size is NVR page size - 2KB.
+    bool                   uwen;   ///< Enable write access to the upper part of NVR page, where the upper part size is NVR page size - 2KB.
+    bool                   lren;   ///< Enable read access to the lower range of the NVR page, as defined by LRSIZE.
+    bool                   lwen;   ///< Enable write access to the lower range of the NVR page, as defined by LWSIZE.
+    uint8_t                lrsize; ///< Size of part of the lower 2KB memory in the NVR page to disable read access, expressed in 128-byte units.
+    uint8_t                lwsize; ///< Size of part of the lower 2KB memory in the NVR page to disable write access, expressed in 128-byte units.
 } nrf_mramc_config_nvr_t;
 
 /**
@@ -1206,9 +1231,23 @@ NRF_STATIC_INLINE void nrf_mramc_config_nvr_set(NRF_MRAMC_Type *               p
                                                 uint8_t                        page)
 {
     NRFX_ASSERT(page < NRF_MRAMC_CONFIGNVR_PAGE_MAX);
+#if NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT
+    NRFX_ASSERT(p_data->lrsize < NRF_MRAMC_CONFIGNVR_PAGE_LRSIZE_MAX);
+    NRFX_ASSERT(p_data->lwsize < NRF_MRAMC_CONFIGNVR_PAGE_LWSIZE_MAX);
+#endif
 
     p_reg->CONFIGNVR.PAGE[page] = ((uint32_t)p_data->wen  << MRAMC_CONFIGNVR_PAGE_WEN_Pos) |
                                   ((uint32_t)p_data->een  << MRAMC_CONFIGNVR_PAGE_EEN_Pos) |
+#if NRF_MRAMC_HAS_CONFIGNVR_PAGE_UPPER_PROTECT
+                                  ((uint32_t)p_data->uren  << MRAMC_CONFIGNVR_PAGE_UREN_Pos) |
+                                  ((uint32_t)p_data->uwen  << MRAMC_CONFIGNVR_PAGE_UWEN_Pos) |
+#endif
+#if NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT
+                                  ((uint32_t)p_data->lren  << MRAMC_CONFIGNVR_PAGE_LREN_Pos) |
+                                  ((uint32_t)p_data->lwen  << MRAMC_CONFIGNVR_PAGE_LWEN_Pos) |
+                                  ((uint32_t)p_data->lrsize  << MRAMC_CONFIGNVR_PAGE_LRSIZE_Pos) |
+                                  ((uint32_t)p_data->lwsize  << MRAMC_CONFIGNVR_PAGE_LWSIZE_Pos) |
+#endif
                                   ((uint32_t)p_data->lock << MRAMC_CONFIGNVR_PAGE_Lock_Pos);
 }
 
@@ -1223,6 +1262,21 @@ NRF_STATIC_INLINE void nrf_mramc_config_nvr_get(NRF_MRAMC_Type const *   p_reg,
     p_data->een  = (nrf_mramc_mode_erase_t)
                     (p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_EEN_Msk);
     p_data->lock = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_Lock_Msk);
+
+#if NRF_MRAMC_HAS_CONFIGNVR_PAGE_UPPER_PROTECT
+    p_data->uren = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_UREN_Msk);
+    p_data->uwen = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_UWEN_Msk);
+#endif
+#if NRF_MRAMC_HAS_CONFIGNVR_PAGE_LOWER_PROTECT
+    p_data->lren = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_LREN_Msk);
+    p_data->lwen = (bool)(p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_LWEN_Msk);
+    p_data->lrsize = (uint8_t)
+                      ((p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_LRSIZE_Msk) >>
+                       MRAMC_CONFIGNVR_PAGE_LRSIZE_Pos);
+    p_data->lwsize = (uint8_t)
+                      ((p_reg->CONFIGNVR.PAGE[page] & MRAMC_CONFIGNVR_PAGE_LWSIZE_Msk) >>
+                       MRAMC_CONFIGNVR_PAGE_LWSIZE_Pos);
+#endif
 }
 
 #endif // NRF_DECLARE_ONLY
