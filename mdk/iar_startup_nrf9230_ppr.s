@@ -103,22 +103,22 @@ __vector_table
         DCD     VPRCLIC_13_IRQHandler
         DCD     VPRCLIC_14_IRQHandler
         DCD     VPRCLIC_15_IRQHandler
-        DCD     VPRCLIC_16_VPRTIM_IRQHandler
-        DCD     VPRCLIC_17_IRQHandler
-        DCD     VPRCLIC_18_IRQHandler
-        DCD     VPRCLIC_19_IRQHandler
-        DCD     VPRCLIC_20_IRQHandler
-        DCD     VPRCLIC_21_IRQHandler
-        DCD     VPRCLIC_22_IRQHandler
-        DCD     VPRCLIC_23_IRQHandler
-        DCD     VPRCLIC_24_IRQHandler
-        DCD     VPRCLIC_25_IRQHandler
-        DCD     VPRCLIC_26_IRQHandler
-        DCD     VPRCLIC_27_IRQHandler
-        DCD     VPRCLIC_28_IRQHandler
-        DCD     VPRCLIC_29_IRQHandler
-        DCD     VPRCLIC_30_IRQHandler
-        DCD     VPRCLIC_31_IRQHandler
+        DCD     VPRTIM_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -303,11 +303,11 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     CAN_IRQHandler
+        DCD     CAN120_IRQHandler
         DCD     MVDMA120_IRQHandler
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     CAN121_IRQHandler
+        DCD     MVDMA121_IRQHandler
         DCD     0                         ; Reserved
         DCD     I3C121_IRQHandler
         DCD     0                         ; Reserved
@@ -316,8 +316,8 @@ __vector_table
         DCD     TIMER120_IRQHandler
         DCD     TIMER121_IRQHandler
         DCD     PWM120_IRQHandler
-        DCD     SPIS120_UARTE120_IRQHandler
-        DCD     SPIM120_IRQHandler
+        DCD     SPIS120_IRQHandler
+        DCD     SPIM120_UARTE120_IRQHandler
         DCD     SPIM121_IRQHandler
         DCD     TWIM120_IRQHandler
         DCD     SACR_IRQHandler
@@ -717,84 +717,9 @@ VPRCLIC_14_IRQHandler
 VPRCLIC_15_IRQHandler
         j .
 
-        PUBWEAK  VPRCLIC_16_VPRTIM_IRQHandler
+        PUBWEAK  VPRTIM_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_16_VPRTIM_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_17_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_17_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_18_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_18_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_19_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_19_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_20_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_20_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_21_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_21_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_22_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_22_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_23_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_23_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_24_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_24_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_25_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_25_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_26_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_26_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_27_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_27_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_28_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_28_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_29_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_29_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_30_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_30_IRQHandler
-        j .
-
-        PUBWEAK  VPRCLIC_31_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_31_IRQHandler
+VPRTIM_IRQHandler
         j .
 
         PUBWEAK  GPIOTE130_0_IRQHandler
@@ -882,14 +807,24 @@ I3C120_IRQHandler
 VPR121_IRQHandler
         j .
 
-        PUBWEAK  CAN_IRQHandler
+        PUBWEAK  CAN120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-CAN_IRQHandler
+CAN120_IRQHandler
         j .
 
         PUBWEAK  MVDMA120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 MVDMA120_IRQHandler
+        j .
+
+        PUBWEAK  CAN121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+CAN121_IRQHandler
+        j .
+
+        PUBWEAK  MVDMA121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+MVDMA121_IRQHandler
         j .
 
         PUBWEAK  I3C121_IRQHandler
@@ -912,14 +847,14 @@ TIMER121_IRQHandler
 PWM120_IRQHandler
         j .
 
-        PUBWEAK  SPIS120_UARTE120_IRQHandler
+        PUBWEAK  SPIS120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SPIS120_UARTE120_IRQHandler
+SPIS120_IRQHandler
         j .
 
-        PUBWEAK  SPIM120_IRQHandler
+        PUBWEAK  SPIM120_UARTE120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SPIM120_IRQHandler
+SPIM120_UARTE120_IRQHandler
         j .
 
         PUBWEAK  SPIM121_IRQHandler

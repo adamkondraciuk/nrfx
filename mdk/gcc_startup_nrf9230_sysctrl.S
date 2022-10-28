@@ -379,7 +379,7 @@ __isr_vector:
     .long   EXMEE_IRQHandler
     .long   EXMIF_IRQHandler
     .long   0                           /*Reserved */
-    .long   MVDMA_IRQHandler
+    .long   MVDMA110_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -444,11 +444,11 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   CAN_IRQHandler
+    .long   CAN120_IRQHandler
     .long   MVDMA120_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   CAN121_IRQHandler
+    .long   MVDMA121_IRQHandler
     .long   0                           /*Reserved */
     .long   I3C121_IRQHandler
     .long   0                           /*Reserved */
@@ -457,8 +457,8 @@ __isr_vector:
     .long   TIMER120_IRQHandler
     .long   TIMER121_IRQHandler
     .long   PWM120_IRQHandler
-    .long   SPIS120_UARTE120_IRQHandler
-    .long   SPIM120_IRQHandler
+    .long   SPIS120_IRQHandler
+    .long   SPIM120_UARTE120_IRQHandler
     .long   SPIM121_IRQHandler
     .long   TWIM120_IRQHandler
     .long   SACR_IRQHandler
@@ -846,20 +846,22 @@ Default_Handler:
     IRQ  MRAMC111_IRQHandler
     IRQ  EXMEE_IRQHandler
     IRQ  EXMIF_IRQHandler
-    IRQ  MVDMA_IRQHandler
+    IRQ  MVDMA110_IRQHandler
     IRQ  OTPC_IRQHandler
     IRQ  VPR120_IRQHandler
     IRQ  IPCT120_0_IRQHandler
     IRQ  I3C120_IRQHandler
     IRQ  VPR121_IRQHandler
-    IRQ  CAN_IRQHandler
+    IRQ  CAN120_IRQHandler
     IRQ  MVDMA120_IRQHandler
+    IRQ  CAN121_IRQHandler
+    IRQ  MVDMA121_IRQHandler
     IRQ  I3C121_IRQHandler
     IRQ  TIMER120_IRQHandler
     IRQ  TIMER121_IRQHandler
     IRQ  PWM120_IRQHandler
-    IRQ  SPIS120_UARTE120_IRQHandler
-    IRQ  SPIM120_IRQHandler
+    IRQ  SPIS120_IRQHandler
+    IRQ  SPIM120_UARTE120_IRQHandler
     IRQ  SPIM121_IRQHandler
     IRQ  TWIM120_IRQHandler
     IRQ  SACR_IRQHandler

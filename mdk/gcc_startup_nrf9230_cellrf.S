@@ -111,8 +111,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   RFCORESERVICES_IRQHandler
     .long   MVDMA_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   GPIOTE130_IRQHandler
+    .long   MIPIRFFE_IRQHandler
     .long   BELLBOARD_0_IRQHandler
     .long   BELLBOARD_1_IRQHandler
     .long   BELLBOARD_2_IRQHandler
@@ -277,6 +277,8 @@ Default_Handler:
     IRQ  RFSERVICES_IRQHandler
     IRQ  RFCORESERVICES_IRQHandler
     IRQ  MVDMA_IRQHandler
+    IRQ  GPIOTE130_IRQHandler
+    IRQ  MIPIRFFE_IRQHandler
     IRQ  BELLBOARD_0_IRQHandler
     IRQ  BELLBOARD_1_IRQHandler
     IRQ  BELLBOARD_2_IRQHandler

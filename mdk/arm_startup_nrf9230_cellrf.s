@@ -105,8 +105,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     RFCORESERVICES_IRQHandler
                 DCD     MVDMA_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     GPIOTE130_IRQHandler
+                DCD     MIPIRFFE_IRQHandler
                 DCD     BELLBOARD_0_IRQHandler
                 DCD     BELLBOARD_1_IRQHandler
                 DCD     BELLBOARD_2_IRQHandler
@@ -184,6 +184,8 @@ Default_Handler PROC
                 EXPORT   RFSERVICES_IRQHandler [WEAK]
                 EXPORT   RFCORESERVICES_IRQHandler [WEAK]
                 EXPORT   MVDMA_IRQHandler [WEAK]
+                EXPORT   GPIOTE130_IRQHandler [WEAK]
+                EXPORT   MIPIRFFE_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_0_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_1_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_2_IRQHandler [WEAK]
@@ -213,6 +215,8 @@ MIPIRFFE1_IRQHandler
 RFSERVICES_IRQHandler
 RFCORESERVICES_IRQHandler
 MVDMA_IRQHandler
+GPIOTE130_IRQHandler
+MIPIRFFE_IRQHandler
 BELLBOARD_0_IRQHandler
 BELLBOARD_1_IRQHandler
 BELLBOARD_2_IRQHandler

@@ -141,16 +141,16 @@ _vectors:
   VECTOR        Reset_Handler
   EXC_HANDLER   NMI_Handler
   EXC_HANDLER   HardFault_Handler
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
   EXC_HANDLER   SVC_Handler
-  ISR_RESERVED                           /*Reserved */
-  ISR_RESERVED                           /*Reserved */
+  ISR_RESERVED                           /* Reserved */
+  ISR_RESERVED                           /* Reserved */
   EXC_HANDLER   PendSV_Handler
   EXC_HANDLER   SysTick_Handler
 
@@ -172,12 +172,12 @@ _vectors:
   ISR_HANDLER   MIPIRFFE0_IRQHandler
   ISR_HANDLER   MIPIRFFE1_IRQHandler
   ISR_HANDLER   RFSERVICES_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   RFCORESERVICES_IRQHandler
   ISR_HANDLER   MVDMA_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   GPIOTE130_IRQHandler
+  ISR_HANDLER   MIPIRFFE_IRQHandler
   ISR_HANDLER   BELLBOARD_0_IRQHandler
   ISR_HANDLER   BELLBOARD_1_IRQHandler
   ISR_HANDLER   BELLBOARD_2_IRQHandler

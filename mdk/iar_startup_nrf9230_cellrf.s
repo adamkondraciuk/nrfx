@@ -106,8 +106,8 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     RFCORESERVICES_IRQHandler
         DCD     MVDMA_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     GPIOTE130_IRQHandler
+        DCD     MIPIRFFE_IRQHandler
         DCD     BELLBOARD_0_IRQHandler
         DCD     BELLBOARD_1_IRQHandler
         DCD     BELLBOARD_2_IRQHandler
@@ -260,6 +260,16 @@ RFCORESERVICES_IRQHandler
         PUBWEAK  MVDMA_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 MVDMA_IRQHandler
+        B .
+
+        PUBWEAK  GPIOTE130_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GPIOTE130_IRQHandler
+        B .
+
+        PUBWEAK  MIPIRFFE_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+MIPIRFFE_IRQHandler
         B .
 
         PUBWEAK  BELLBOARD_0_IRQHandler

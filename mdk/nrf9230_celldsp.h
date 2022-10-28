@@ -105,14 +105,16 @@ typedef enum {
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
-  CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
+  CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
+  CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
+  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
-  SPIS120_UARTE120_IRQn                  = 229,      /*!< 229 SPIS120_UARTE120                                                 */
-  SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
+  SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
+  SPIM120_UARTE120_IRQn                  = 230,      /*!< 230 SPIM120_UARTE120                                                 */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
   SACR_IRQn                              = 233,      /*!< 233 SACR                                                             */
@@ -168,6 +170,7 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
 #include "system_nrf.h"                              /*!< nrf9230_celldsp System Library                                       */
 

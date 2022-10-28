@@ -301,11 +301,11 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     CAN_IRQHandler
+        DCD     CAN120_IRQHandler
         DCD     MVDMA120_IRQHandler
         DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     CAN121_IRQHandler
+        DCD     MVDMA121_IRQHandler
         DCD     0                         ; Reserved
         DCD     I3C121_IRQHandler
         DCD     0                         ; Reserved
@@ -314,8 +314,8 @@ __vector_table
         DCD     TIMER120_IRQHandler
         DCD     TIMER121_IRQHandler
         DCD     PWM120_IRQHandler
-        DCD     SPIS120_UARTE120_IRQHandler
-        DCD     SPIM120_IRQHandler
+        DCD     SPIS120_IRQHandler
+        DCD     SPIM120_UARTE120_IRQHandler
         DCD     SPIM121_IRQHandler
         DCD     TWIM120_IRQHandler
         DCD     SACR_IRQHandler
@@ -759,14 +759,24 @@ I3C120_IRQHandler
 VPR121_IRQHandler
         B .
 
-        PUBWEAK  CAN_IRQHandler
+        PUBWEAK  CAN120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-CAN_IRQHandler
+CAN120_IRQHandler
         B .
 
         PUBWEAK  MVDMA120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 MVDMA120_IRQHandler
+        B .
+
+        PUBWEAK  CAN121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+CAN121_IRQHandler
+        B .
+
+        PUBWEAK  MVDMA121_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+MVDMA121_IRQHandler
         B .
 
         PUBWEAK  I3C121_IRQHandler
@@ -789,14 +799,14 @@ TIMER121_IRQHandler
 PWM120_IRQHandler
         B .
 
-        PUBWEAK  SPIS120_UARTE120_IRQHandler
+        PUBWEAK  SPIS120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SPIS120_UARTE120_IRQHandler
+SPIS120_IRQHandler
         B .
 
-        PUBWEAK  SPIM120_IRQHandler
+        PUBWEAK  SPIM120_UARTE120_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-SPIM120_IRQHandler
+SPIM120_UARTE120_IRQHandler
         B .
 
         PUBWEAK  SPIM121_IRQHandler

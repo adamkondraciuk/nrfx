@@ -148,17 +148,23 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     IPCT_0_IRQHandler
-                DCD     IPCT_1_IRQHandler
-                DCD     IPCT_2_IRQHandler
-                DCD     IPCT_3_IRQHandler
-                DCD     IPCT_4_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     SYSTEMTIMER_0_IRQHandler
                 DCD     SYSTEMTIMER_1_IRQHandler
                 DCD     LTETIMER_0_IRQHandler
                 DCD     LTETIMER_1_IRQHandler
                 DCD     GNSSTIMER_0_IRQHandler
                 DCD     GNSSTIMER_1_IRQHandler
+                DCD     IPCT_0_IRQHandler
+                DCD     IPCT_1_IRQHandler
+                DCD     IPCT_2_IRQHandler
+                DCD     IPCT_3_IRQHandler
+                DCD     IPCT_4_IRQHandler
+                DCD     IPCT_5_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -166,20 +172,14 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     SWI0_IRQHandler
+                DCD     SWI1_IRQHandler
+                DCD     SWI2_IRQHandler
+                DCD     SWI3_IRQHandler
+                DCD     SWI4_IRQHandler
+                DCD     SWI5_IRQHandler
+                DCD     SWI6_IRQHandler
+                DCD     SWI7_IRQHandler
                 DCD     BELLBOARD_0_IRQHandler
                 DCD     BELLBOARD_1_IRQHandler
                 DCD     BELLBOARD_2_IRQHandler
@@ -195,11 +195,11 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     GRTC_0_IRQHandler
                 DCD     GRTC_1_IRQHandler
                 DCD     GRTC_2_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     ISIM_MHU_0_IRQHandler
+                DCD     ISIM_MHU_1_IRQHandler
+                DCD     ISIM_SPU_IRQHandler
+                DCD     ISIM_MPC_IRQHandler
+                DCD     ISIM_CICTRL_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -300,11 +300,11 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     CAN_IRQHandler
+                DCD     CAN120_IRQHandler
                 DCD     MVDMA120_IRQHandler
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     CAN121_IRQHandler
+                DCD     MVDMA121_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     I3C121_IRQHandler
                 DCD     0                         ; Reserved
@@ -313,8 +313,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TIMER120_IRQHandler
                 DCD     TIMER121_IRQHandler
                 DCD     PWM120_IRQHandler
-                DCD     SPIS120_UARTE120_IRQHandler
-                DCD     SPIM120_IRQHandler
+                DCD     SPIS120_IRQHandler
+                DCD     SPIM120_UARTE120_IRQHandler
                 DCD     SPIM121_IRQHandler
                 DCD     TWIM120_IRQHandler
                 DCD     SACR_IRQHandler
@@ -646,17 +646,26 @@ Default_Handler PROC
                 EXPORT   LFCLKCALIBMEAS_IRQHandler [WEAK]
                 EXPORT   SPU3_IRQHandler [WEAK]
                 EXPORT   MCPLL_IRQHandler [WEAK]
-                EXPORT   IPCT_0_IRQHandler [WEAK]
-                EXPORT   IPCT_1_IRQHandler [WEAK]
-                EXPORT   IPCT_2_IRQHandler [WEAK]
-                EXPORT   IPCT_3_IRQHandler [WEAK]
-                EXPORT   IPCT_4_IRQHandler [WEAK]
                 EXPORT   SYSTEMTIMER_0_IRQHandler [WEAK]
                 EXPORT   SYSTEMTIMER_1_IRQHandler [WEAK]
                 EXPORT   LTETIMER_0_IRQHandler [WEAK]
                 EXPORT   LTETIMER_1_IRQHandler [WEAK]
                 EXPORT   GNSSTIMER_0_IRQHandler [WEAK]
                 EXPORT   GNSSTIMER_1_IRQHandler [WEAK]
+                EXPORT   IPCT_0_IRQHandler [WEAK]
+                EXPORT   IPCT_1_IRQHandler [WEAK]
+                EXPORT   IPCT_2_IRQHandler [WEAK]
+                EXPORT   IPCT_3_IRQHandler [WEAK]
+                EXPORT   IPCT_4_IRQHandler [WEAK]
+                EXPORT   IPCT_5_IRQHandler [WEAK]
+                EXPORT   SWI0_IRQHandler [WEAK]
+                EXPORT   SWI1_IRQHandler [WEAK]
+                EXPORT   SWI2_IRQHandler [WEAK]
+                EXPORT   SWI3_IRQHandler [WEAK]
+                EXPORT   SWI4_IRQHandler [WEAK]
+                EXPORT   SWI5_IRQHandler [WEAK]
+                EXPORT   SWI6_IRQHandler [WEAK]
+                EXPORT   SWI7_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_0_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_1_IRQHandler [WEAK]
                 EXPORT   BELLBOARD_2_IRQHandler [WEAK]
@@ -668,6 +677,11 @@ Default_Handler PROC
                 EXPORT   GRTC_0_IRQHandler [WEAK]
                 EXPORT   GRTC_1_IRQHandler [WEAK]
                 EXPORT   GRTC_2_IRQHandler [WEAK]
+                EXPORT   ISIM_MHU_0_IRQHandler [WEAK]
+                EXPORT   ISIM_MHU_1_IRQHandler [WEAK]
+                EXPORT   ISIM_SPU_IRQHandler [WEAK]
+                EXPORT   ISIM_MPC_IRQHandler [WEAK]
+                EXPORT   ISIM_CICTRL_IRQHandler [WEAK]
                 EXPORT   TBM_IRQHandler [WEAK]
                 EXPORT   USBHS_IRQHandler [WEAK]
                 EXPORT   MRAMC110_IRQHandler [WEAK]
@@ -678,14 +692,16 @@ Default_Handler PROC
                 EXPORT   IPCT120_0_IRQHandler [WEAK]
                 EXPORT   I3C120_IRQHandler [WEAK]
                 EXPORT   VPR121_IRQHandler [WEAK]
-                EXPORT   CAN_IRQHandler [WEAK]
+                EXPORT   CAN120_IRQHandler [WEAK]
                 EXPORT   MVDMA120_IRQHandler [WEAK]
+                EXPORT   CAN121_IRQHandler [WEAK]
+                EXPORT   MVDMA121_IRQHandler [WEAK]
                 EXPORT   I3C121_IRQHandler [WEAK]
                 EXPORT   TIMER120_IRQHandler [WEAK]
                 EXPORT   TIMER121_IRQHandler [WEAK]
                 EXPORT   PWM120_IRQHandler [WEAK]
-                EXPORT   SPIS120_UARTE120_IRQHandler [WEAK]
-                EXPORT   SPIM120_IRQHandler [WEAK]
+                EXPORT   SPIS120_IRQHandler [WEAK]
+                EXPORT   SPIM120_UARTE120_IRQHandler [WEAK]
                 EXPORT   SPIM121_IRQHandler [WEAK]
                 EXPORT   TWIM120_IRQHandler [WEAK]
                 EXPORT   SACR_IRQHandler [WEAK]
@@ -742,17 +758,26 @@ SPU2_IRQHandler
 LFCLKCALIBMEAS_IRQHandler
 SPU3_IRQHandler
 MCPLL_IRQHandler
-IPCT_0_IRQHandler
-IPCT_1_IRQHandler
-IPCT_2_IRQHandler
-IPCT_3_IRQHandler
-IPCT_4_IRQHandler
 SYSTEMTIMER_0_IRQHandler
 SYSTEMTIMER_1_IRQHandler
 LTETIMER_0_IRQHandler
 LTETIMER_1_IRQHandler
 GNSSTIMER_0_IRQHandler
 GNSSTIMER_1_IRQHandler
+IPCT_0_IRQHandler
+IPCT_1_IRQHandler
+IPCT_2_IRQHandler
+IPCT_3_IRQHandler
+IPCT_4_IRQHandler
+IPCT_5_IRQHandler
+SWI0_IRQHandler
+SWI1_IRQHandler
+SWI2_IRQHandler
+SWI3_IRQHandler
+SWI4_IRQHandler
+SWI5_IRQHandler
+SWI6_IRQHandler
+SWI7_IRQHandler
 BELLBOARD_0_IRQHandler
 BELLBOARD_1_IRQHandler
 BELLBOARD_2_IRQHandler
@@ -764,6 +789,11 @@ GPIOTE131_1_IRQHandler
 GRTC_0_IRQHandler
 GRTC_1_IRQHandler
 GRTC_2_IRQHandler
+ISIM_MHU_0_IRQHandler
+ISIM_MHU_1_IRQHandler
+ISIM_SPU_IRQHandler
+ISIM_MPC_IRQHandler
+ISIM_CICTRL_IRQHandler
 TBM_IRQHandler
 USBHS_IRQHandler
 MRAMC110_IRQHandler
@@ -774,14 +804,16 @@ VPR120_IRQHandler
 IPCT120_0_IRQHandler
 I3C120_IRQHandler
 VPR121_IRQHandler
-CAN_IRQHandler
+CAN120_IRQHandler
 MVDMA120_IRQHandler
+CAN121_IRQHandler
+MVDMA121_IRQHandler
 I3C121_IRQHandler
 TIMER120_IRQHandler
 TIMER121_IRQHandler
 PWM120_IRQHandler
-SPIS120_UARTE120_IRQHandler
-SPIM120_IRQHandler
+SPIS120_IRQHandler
+SPIM120_UARTE120_IRQHandler
 SPIM121_IRQHandler
 TWIM120_IRQHandler
 SACR_IRQHandler

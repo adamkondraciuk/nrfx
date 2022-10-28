@@ -244,22 +244,7 @@ __isr_vector:
     .long   VPRCLIC_13_IRQHandler
     .long   VPRCLIC_14_IRQHandler
     .long   VPRCLIC_15_IRQHandler
-    .long   VPRCLIC_16_VPRTIM_IRQHandler
-    .long   VPRCLIC_17_IRQHandler
-    .long   VPRCLIC_18_IRQHandler
-    .long   VPRCLIC_19_IRQHandler
-    .long   VPRCLIC_20_IRQHandler
-    .long   VPRCLIC_21_IRQHandler
-    .long   VPRCLIC_22_IRQHandler
-    .long   VPRCLIC_23_IRQHandler
-    .long   VPRCLIC_24_IRQHandler
-    .long   VPRCLIC_25_IRQHandler
-    .long   VPRCLIC_26_IRQHandler
-    .long   VPRCLIC_27_IRQHandler
-    .long   VPRCLIC_28_IRQHandler
-    .long   VPRCLIC_29_IRQHandler
-    .long   VPRCLIC_30_IRQHandler
-    .long   VPRCLIC_31_IRQHandler
+    .long   VPRTIM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -275,25 +260,40 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   SPU020_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   EGU020_IRQHandler
+    .long   AAR020_CCM020_IRQHandler
+    .long   ECB020_IRQHandler
+    .long   TIMER020_IRQHandler
+    .long   TIMER021_IRQHandler
+    .long   TIMER022_IRQHandler
+    .long   RTC_IRQHandler
+    .long   RADIO_0_IRQHandler
+    .long   RADIO_1_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   SPU030_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   HWACC_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   AAR030_CCM030_IRQHandler
+    .long   ECB030_IRQHandler
+    .long   AAR031_CCM031_IRQHandler
+    .long   ECB031_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   IPCT_0_IRQHandler
+    .long   IPCT_1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -444,11 +444,11 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   CAN_IRQHandler
+    .long   CAN120_IRQHandler
     .long   MVDMA120_IRQHandler
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   CAN121_IRQHandler
+    .long   MVDMA121_IRQHandler
     .long   0                           /*Reserved */
     .long   I3C121_IRQHandler
     .long   0                           /*Reserved */
@@ -457,8 +457,8 @@ __isr_vector:
     .long   TIMER120_IRQHandler
     .long   TIMER121_IRQHandler
     .long   PWM120_IRQHandler
-    .long   SPIS120_UARTE120_IRQHandler
-    .long   SPIM120_IRQHandler
+    .long   SPIS120_IRQHandler
+    .long   SPIM120_UARTE120_IRQHandler
     .long   SPIM121_IRQHandler
     .long   TWIM120_IRQHandler
     .long   SACR_IRQHandler
@@ -814,22 +814,25 @@ Default_Handler:
     IRQ  VPRCLIC_13_IRQHandler
     IRQ  VPRCLIC_14_IRQHandler
     IRQ  VPRCLIC_15_IRQHandler
-    IRQ  VPRCLIC_16_VPRTIM_IRQHandler
-    IRQ  VPRCLIC_17_IRQHandler
-    IRQ  VPRCLIC_18_IRQHandler
-    IRQ  VPRCLIC_19_IRQHandler
-    IRQ  VPRCLIC_20_IRQHandler
-    IRQ  VPRCLIC_21_IRQHandler
-    IRQ  VPRCLIC_22_IRQHandler
-    IRQ  VPRCLIC_23_IRQHandler
-    IRQ  VPRCLIC_24_IRQHandler
-    IRQ  VPRCLIC_25_IRQHandler
-    IRQ  VPRCLIC_26_IRQHandler
-    IRQ  VPRCLIC_27_IRQHandler
-    IRQ  VPRCLIC_28_IRQHandler
-    IRQ  VPRCLIC_29_IRQHandler
-    IRQ  VPRCLIC_30_IRQHandler
-    IRQ  VPRCLIC_31_IRQHandler
+    IRQ  VPRTIM_IRQHandler
+    IRQ  SPU020_IRQHandler
+    IRQ  EGU020_IRQHandler
+    IRQ  AAR020_CCM020_IRQHandler
+    IRQ  ECB020_IRQHandler
+    IRQ  TIMER020_IRQHandler
+    IRQ  TIMER021_IRQHandler
+    IRQ  TIMER022_IRQHandler
+    IRQ  RTC_IRQHandler
+    IRQ  RADIO_0_IRQHandler
+    IRQ  RADIO_1_IRQHandler
+    IRQ  SPU030_IRQHandler
+    IRQ  HWACC_IRQHandler
+    IRQ  AAR030_CCM030_IRQHandler
+    IRQ  ECB030_IRQHandler
+    IRQ  AAR031_CCM031_IRQHandler
+    IRQ  ECB031_IRQHandler
+    IRQ  IPCT_0_IRQHandler
+    IRQ  IPCT_1_IRQHandler
     IRQ  GPIOTE130_0_IRQHandler
     IRQ  GPIOTE130_1_IRQHandler
     IRQ  GPIOTE131_0_IRQHandler
@@ -847,14 +850,16 @@ Default_Handler:
     IRQ  IPCT120_0_IRQHandler
     IRQ  I3C120_IRQHandler
     IRQ  VPR121_IRQHandler
-    IRQ  CAN_IRQHandler
+    IRQ  CAN120_IRQHandler
     IRQ  MVDMA120_IRQHandler
+    IRQ  CAN121_IRQHandler
+    IRQ  MVDMA121_IRQHandler
     IRQ  I3C121_IRQHandler
     IRQ  TIMER120_IRQHandler
     IRQ  TIMER121_IRQHandler
     IRQ  PWM120_IRQHandler
-    IRQ  SPIS120_UARTE120_IRQHandler
-    IRQ  SPIM120_IRQHandler
+    IRQ  SPIS120_IRQHandler
+    IRQ  SPIM120_UARTE120_IRQHandler
     IRQ  SPIM121_IRQHandler
     IRQ  TWIM120_IRQHandler
     IRQ  SACR_IRQHandler

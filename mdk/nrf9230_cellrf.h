@@ -82,8 +82,8 @@ typedef enum {
   RFSERVICES_IRQn                        = 16,       /*!< 16 RFSERVICES                                                        */
   RFCORESERVICES_IRQn                    = 19,       /*!< 19 RFCORESERVICES                                                    */
   MVDMA_IRQn                             = 20,       /*!< 20 MVDMA                                                             */
-  GPIOTE1310_IRQn                        = 21,       /*!< 21 GPIOTE1310                                                        */
-  MIPIRFFE130_IRQn                       = 22,       /*!< 22 MIPIRFFE130                                                       */
+  GPIOTE130_IRQn                         = 21,       /*!< 21 GPIOTE130                                                         */
+  MIPIRFFE_IRQn                          = 22,       /*!< 22 MIPIRFFE                                                          */
   BELLBOARD_0_IRQn                       = 23,       /*!< 23 BELLBOARD_0                                                       */
   BELLBOARD_1_IRQn                       = 24,       /*!< 24 BELLBOARD_1                                                       */
   BELLBOARD_2_IRQn                       = 25,       /*!< 25 BELLBOARD_2                                                       */
@@ -109,6 +109,7 @@ typedef enum {
 #define __MPU_PRESENT                  0             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
+#define __INTERRUPTS_MAX              33             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 #define __NUM_SAUREGIONS               0             /*!< Number of regions                                                    */
