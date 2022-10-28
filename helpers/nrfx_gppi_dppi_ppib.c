@@ -5,6 +5,7 @@
 #if defined(HALTIUM_XXAA) && defined(NRFX_PPIB_ENABLED)
 #include <string.h>
 #include <soc/nrfx_apb.h>
+#include <soc/nrfx_ipct.h>
 #include <hal/nrf_ppib.h>
 #include <helpers/nrfx_flag32_allocator.h>
 
@@ -18,6 +19,9 @@ typedef struct
     nrfx_apb_interconnect_t const * p_src_apb;
     nrfx_apb_interconnect_t const * p_dst_apb;
     uint8_t                         dppi_channel;
+    uint8_t                         local_dppi_channel;
+    uint8_t                         ipct_channel;
+    uint8_t                         local_ipct_channel;
 } nrfx_gppi_channels_path_t;
 
 static nrfx_gppi_channels_path_t channels_path[NUMBER_OF_VIRTUAL_CHANNELS];
@@ -28,6 +32,8 @@ static void path_cleanup(nrfx_gppi_channels_path_t * p_path)
     NRFX_ASSERT(p_path);
     memset(p_path, 0, sizeof(nrfx_gppi_channels_path_t));
     p_path->dppi_channel = CHANNEL_INVALID;
+    p_path->local_dppi_channel = CHANNEL_INVALID;
+    p_path->ipct_channel = CHANNEL_INVALID;
 }
 
 static nrfx_err_t channel_free(nrfx_atomic_t * p_allocated_channels, uint8_t channel)
@@ -65,15 +71,15 @@ static nrfx_err_t channel_allocate(nrfx_atomic_t * p_channels_available,
     return NRFX_SUCCESS;
 }
 
-static bool is_main_connection_needed(nrfx_gppi_channels_path_t * p_path)
+static bool is_main_connection_needed(nrfx_apb_interconnect_t const * p_src_apb,
+                                      nrfx_apb_interconnect_t const * p_dst_apb)
 {
-    nrfx_apb_interconnect_t const * p_src_apb = p_path->p_src_apb;
-    nrfx_apb_interconnect_t const * p_dst_apb = p_path->p_dst_apb;
     if (nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN_GLOBAL ||
         nrf_apb_domain_get(p_dst_apb) == NRF_DOMAIN_GLOBAL)
     {
         return (p_src_apb != nrf_apb_main_interconnect_get() &&
-                p_dst_apb != nrf_apb_main_interconnect_get());
+                p_dst_apb != nrf_apb_main_interconnect_get() &&
+                p_src_apb != p_dst_apb);
     }
     return false;
 }
@@ -112,23 +118,119 @@ static void apb_connection_create(nrfx_apb_interconnect_t const * p_src_apb,
                          dppi_channel);
 }
 
+
+static nrfx_err_t ipct_connection_remove(nrfx_ipct_interconnect_t const * p_src_ipct,
+                                         nrfx_ipct_interconnect_t const * p_dst_ipct,
+                                         nrfx_gppi_channels_path_t      * p_path)
+{
+    nrfx_err_t err_code;
+    uint8_t src_ipct_chan = nrf_ipct_domain_get(p_src_ipct) == NRF_DOMAIN_GLOBAL ?
+                            p_path->ipct_channel :
+                            p_path->local_ipct_channel;
+    uint8_t dst_ipct_chan = nrf_ipct_domain_get(p_dst_ipct) == NRF_DOMAIN_GLOBAL ?
+                            p_path->ipct_channel :
+                            p_path->local_ipct_channel;
+
+    NRFX_ASSERT(p_src_ipct);
+    NRFX_ASSERT(p_dst_ipct);
+    NRFX_ASSERT(p_dst_ipct != p_src_ipct);
+    NRFX_ASSERT(p_path);
+    NRFX_ASSERT(nrf_ipct_domain_get(p_src_ipct) == NRF_DOMAIN_GLOBAL ||
+                nrf_ipct_domain_get(p_dst_ipct) == NRF_DOMAIN_GLOBAL);
+
+    err_code = channel_free(p_src_ipct->p_ipct_channels, src_ipct_chan);
+    if (err_code == NRFX_SUCCESS)
+    {
+        err_code = channel_free(p_dst_ipct->p_ipct_channels, dst_ipct_chan);
+        if (err_code == NRFX_SUCCESS)
+        {
+            nrf_ipct_shorts_disable(p_src_ipct->p_ipct, NRFX_BIT(src_ipct_chan));
+            nrf_ipct_shorts_disable(p_dst_ipct->p_ipct, NRFX_BIT(dst_ipct_chan));
+            nrf_ipct_subscribe_clear(p_src_ipct->p_ipct, nrf_ipct_send_task_get(src_ipct_chan));
+            nrf_ipct_publish_clear(p_dst_ipct->p_ipct, nrf_ipct_receive_event_get(dst_ipct_chan));
+        }
+    }
+    return err_code;
+}
+
+static nrfx_err_t ipct_connection_create(nrfx_ipct_interconnect_t const * p_src_ipct,
+                                         nrfx_ipct_interconnect_t const * p_dst_ipct,
+                                         nrfx_gppi_channels_path_t      * p_path)
+{
+    nrfx_err_t err_code;
+    uint8_t src_dppi_channel;
+    uint8_t dst_dppi_channel;
+    uint8_t * src_ipct_channel;
+    uint8_t * dst_ipct_channel;
+    uint32_t src_chan_mask;
+    uint32_t dst_chan_mask;
+    nrfx_apb_interconnect_t const * p_src_apb =
+                                    nrf_apb_interconnect_get((uint32_t)p_src_ipct->p_ipct);
+    nrfx_apb_interconnect_t const * p_dst_apb =
+                                    nrf_apb_interconnect_get((uint32_t)p_dst_ipct->p_ipct);
+    if (nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN_GLOBAL)
+    {
+        src_dppi_channel = p_path->dppi_channel;
+        src_ipct_channel = &p_path->ipct_channel;
+        dst_dppi_channel = p_path->local_dppi_channel;
+        dst_ipct_channel = &p_path->local_ipct_channel;
+    }
+    else if (nrf_apb_domain_get(p_dst_apb) == NRF_DOMAIN_GLOBAL)
+    {
+        src_dppi_channel = p_path->local_dppi_channel;
+        src_ipct_channel = &p_path->local_ipct_channel;
+        dst_dppi_channel = p_path->dppi_channel;
+        dst_ipct_channel = &p_path->ipct_channel;
+    }
+    else
+    {
+        return NRFX_ERROR_INVALID_PARAM;
+    }
+
+    NRFX_ASSERT(p_src_ipct);
+    NRFX_ASSERT(p_dst_ipct);
+    NRFX_ASSERT(p_dst_ipct != p_src_ipct);
+    NRFX_ASSERT(p_path);
+    NRFX_ASSERT(nrf_ipct_domain_get(p_src_ipct) == NRF_DOMAIN_GLOBAL ||
+                nrf_ipct_domain_get(p_dst_ipct) == NRF_DOMAIN_GLOBAL);
+
+    src_chan_mask = *p_src_ipct->p_ipct_channels & p_src_ipct->ipct_pub_channels_mask;
+    dst_chan_mask = *p_dst_ipct->p_ipct_channels & p_dst_ipct->ipct_sub_channels_mask;
+    err_code = channel_allocate(p_src_ipct->p_ipct_channels, src_ipct_channel, src_chan_mask);
+    if (err_code == NRFX_SUCCESS)
+    {
+        err_code = channel_allocate(p_dst_ipct->p_ipct_channels, dst_ipct_channel, dst_chan_mask);
+        if (err_code == NRFX_SUCCESS)
+        {
+            nrf_ipct_shorts_enable(p_src_ipct->p_ipct, NRFX_BIT(*src_ipct_channel));
+            nrf_ipct_shorts_enable(p_dst_ipct->p_ipct, NRFX_BIT(*dst_ipct_channel));
+            nrf_ipct_subscribe_set(p_src_ipct->p_ipct,
+                                   nrf_ipct_send_task_get(*src_ipct_channel),
+                                   src_dppi_channel);
+            nrf_ipct_publish_set(p_dst_ipct->p_ipct,
+                                 nrf_ipct_receive_event_get(*dst_ipct_channel),
+                                 dst_dppi_channel);
+        }
+        else
+        {
+            (void)channel_free(p_src_ipct->p_ipct_channels, *src_ipct_channel);
+        }
+    }
+    return err_code;
+}
+
 static nrfx_err_t local_connection_create(nrfx_apb_interconnect_t const * p_src_apb,
                                           nrfx_apb_interconnect_t const * p_dst_apb,
-                                          nrfx_gppi_channels_path_t     * p_path)
+                                          uint8_t *                       dppi_channel)
 {
     nrfx_err_t err_code;
     uint8_t reserved_src_channel = CHANNEL_INVALID;
     uint8_t reserved_dst_channel = CHANNEL_INVALID;
-    uint8_t * dppi_channel = &p_path->dppi_channel;
     bool use_main_apb_interconnect = false;
     uint32_t chan_mask;
 
     NRFX_ASSERT(p_src_apb);
     NRFX_ASSERT(p_dst_apb);
-    NRFX_ASSERT(p_path);
-    NRFX_ASSERT(nrf_apb_domain_get(p_src_apb) == nrf_apb_domain_get(p_dst_apb));
-    p_path->p_src_apb = p_src_apb;
-    p_path->p_dst_apb = p_dst_apb;
     if (p_src_apb == p_dst_apb)
     {
         chan_mask = (*p_src_apb->p_dppi_channels &
@@ -141,7 +243,7 @@ static nrfx_err_t local_connection_create(nrfx_apb_interconnect_t const * p_src_
         NRFX_CRITICAL_SECTION_ENTER();
         chan_mask = (*p_src_apb->p_dppi_channels & p_src_apb->dppi_pub_channels_mask) &
                     (*p_dst_apb->p_dppi_channels & p_dst_apb->dppi_sub_channels_mask);
-        if (is_main_connection_needed(p_path))
+        if (is_main_connection_needed(p_src_apb, p_dst_apb))
         {
             use_main_apb_interconnect = true;
             chan_mask &= (nrf_apb_main_interconnect_get()->dppi_pub_channels_mask &
@@ -180,21 +282,15 @@ static nrfx_err_t local_connection_create(nrfx_apb_interconnect_t const * p_src_
         }
         NRFX_CRITICAL_SECTION_EXIT();
     }
-    if (err_code != NRFX_SUCCESS)
-    {
-        path_cleanup(p_path);
-    }
     return err_code;
 }
 
-static nrfx_err_t local_connection_remove(nrfx_gppi_channels_path_t * p_path)
+static nrfx_err_t local_connection_remove(nrfx_apb_interconnect_t const * p_src_apb,
+                                          nrfx_apb_interconnect_t const * p_dst_apb,
+                                          uint8_t                         dppi_channel)
 {
     nrfx_err_t err_code;
-    uint8_t dppi_channel = p_path->dppi_channel;
-    nrfx_apb_interconnect_t const * p_src_apb = p_path->p_src_apb;
-    nrfx_apb_interconnect_t const * p_dst_apb = p_path->p_dst_apb;
 
-    NRFX_ASSERT(p_path);
     NRFX_ASSERT(dppi_channel != CHANNEL_INVALID);
     NRFX_ASSERT(p_src_apb);
     NRFX_ASSERT(p_dst_apb);
@@ -216,9 +312,10 @@ static nrfx_err_t local_connection_remove(nrfx_gppi_channels_path_t * p_path)
             err_code = channel_free(p_dst_apb->p_dppi_channels, dppi_channel);
             if (err_code == NRFX_SUCCESS)
             {
-                if (is_main_connection_needed(p_path))
+                if (is_main_connection_needed(p_src_apb, p_dst_apb))
                 {
-                    err_code = channel_free(nrf_apb_main_interconnect_get()->p_dppi_channels, dppi_channel);
+                    err_code = channel_free(nrf_apb_main_interconnect_get()->p_dppi_channels,
+                                            dppi_channel);
                 }
             }
         }
@@ -229,12 +326,11 @@ static nrfx_err_t local_connection_remove(nrfx_gppi_channels_path_t * p_path)
     {
         return err_code;
     }
-    if (nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN)
+    if (nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN && p_src_apb != p_dst_apb)
     {
         /* Inside our domain we are allowed to configure APB connection by ourself. */
         apb_connection_remove(p_src_apb, p_dst_apb, dppi_channel);
     }
-    path_cleanup(p_path);
     return err_code;
 }
 
@@ -305,26 +401,71 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
     NRFX_ASSERT(tep);
     NRFX_ASSERT(eep);
 
+    nrfx_err_t err_code;
     nrfx_apb_interconnect_t const * p_src_apb = (nrf_apb_interconnect_get(eep));
     nrfx_apb_interconnect_t const * p_dst_apb = (nrf_apb_interconnect_get(tep));
     nrfx_gppi_channels_path_t * p_path = &channels_path[channel];
+    uint8_t * src_dppi_chan = nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN_GLOBAL ?
+                              &p_path->dppi_channel :
+                              &p_path->local_dppi_channel;
+    uint8_t * dst_dppi_chan = nrf_apb_domain_get(p_dst_apb) == NRF_DOMAIN_GLOBAL ?
+                              &p_path->dppi_channel :
+                              &p_path->local_dppi_channel;
 
     NRFX_ASSERT(p_src_apb);
     NRFX_ASSERT(p_dst_apb);
 
     if (nrf_apb_domain_get(p_src_apb) == nrf_apb_domain_get(p_dst_apb))
     {
-        (void)local_connection_create(p_src_apb, p_dst_apb, p_path);
+        NRFX_ASSERT(src_dppi_chan == dst_dppi_chan);
+        err_code = local_connection_create(p_src_apb, p_dst_apb, src_dppi_chan);
+        if (err_code != NRFX_SUCCESS)
+        {
+            NRFX_ASSERT(false);
+            (void)local_connection_remove(p_src_apb, p_dst_apb, *src_dppi_chan);
+        }
     }
     else
     {
-        // Currently not supported
-        NRFX_ASSERT(false);
+        nrfx_ipct_interconnect_t const * p_src_ipct = nrf_ipct_get(p_src_apb);
+        nrfx_ipct_interconnect_t const * p_dst_ipct = nrf_ipct_get(p_dst_apb);
+        nrfx_apb_interconnect_t const * p_src_ipct_apb =
+                                        (nrf_apb_interconnect_get((uint32_t)p_src_ipct->p_ipct));
+        nrfx_apb_interconnect_t const * p_dst_ipct_apb =
+                                        (nrf_apb_interconnect_get((uint32_t)p_dst_ipct->p_ipct));
+        NRFX_ASSERT(src_dppi_chan != dst_dppi_chan);
+
+        err_code = local_connection_create(p_src_apb, p_src_ipct_apb, src_dppi_chan);
+        NRFX_ASSERT(err_code == NRFX_SUCCESS);
+        if (err_code == NRFX_SUCCESS)
+        {
+            err_code = local_connection_create(p_dst_ipct_apb, p_dst_apb, dst_dppi_chan);
+            NRFX_ASSERT(err_code == NRFX_SUCCESS);
+            if (err_code == NRFX_SUCCESS)
+            {
+                err_code = ipct_connection_create(p_src_ipct, p_dst_ipct, p_path);
+                NRFX_ASSERT(err_code == NRFX_SUCCESS);
+            }
+        }
+        if (err_code != NRFX_SUCCESS)
+        {
+            (void)local_connection_remove(p_src_apb, p_src_ipct_apb, *src_dppi_chan);
+            (void)local_connection_remove(p_dst_ipct_apb, p_dst_apb, *dst_dppi_chan);
+            (void)ipct_connection_create(p_src_ipct, p_dst_ipct, p_path);
+        }
     }
 
-    uint8_t dppi_chan = p_path->dppi_channel;
-    NRFX_DPPIC_ENDPOINT_SETUP(eep, dppi_chan);
-    NRFX_DPPIC_ENDPOINT_SETUP(tep, dppi_chan);
+    if (err_code == NRFX_SUCCESS)
+    {
+        p_path->p_src_apb = p_src_apb;
+        p_path->p_dst_apb = p_dst_apb;
+        NRFX_DPPIC_ENDPOINT_SETUP(eep, *src_dppi_chan);
+        NRFX_DPPIC_ENDPOINT_SETUP(tep, *dst_dppi_chan);
+    }
+    else
+    {
+        path_cleanup(p_path);
+    }
 }
 
 void nrfx_gppi_channel_endpoints_clear(uint8_t channel, uint32_t eep, uint32_t tep)
@@ -332,9 +473,16 @@ void nrfx_gppi_channel_endpoints_clear(uint8_t channel, uint32_t eep, uint32_t t
     NRFX_ASSERT(tep);
     NRFX_ASSERT(eep);
 
+    nrfx_err_t err_code;
     nrfx_apb_interconnect_t const * p_src_apb = (nrf_apb_interconnect_get(eep));
     nrfx_apb_interconnect_t const * p_dst_apb = (nrf_apb_interconnect_get(tep));
     nrfx_gppi_channels_path_t * p_path = &channels_path[channel];
+    uint8_t * src_dppi_chan = nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN_GLOBAL ?
+                              &p_path->dppi_channel :
+                              &p_path->local_dppi_channel;
+    uint8_t * dst_dppi_chan = nrf_apb_domain_get(p_dst_apb) == NRF_DOMAIN_GLOBAL ?
+                              &p_path->dppi_channel :
+                              &p_path->local_dppi_channel;
 
     NRFX_ASSERT(p_src_apb);
     NRFX_ASSERT(p_dst_apb);
@@ -343,15 +491,39 @@ void nrfx_gppi_channel_endpoints_clear(uint8_t channel, uint32_t eep, uint32_t t
 
     if (nrf_apb_domain_get(p_src_apb) == nrf_apb_domain_get(p_dst_apb))
     {
-        (void)local_connection_remove(p_path);
+        NRFX_ASSERT(src_dppi_chan == dst_dppi_chan);
+        err_code = local_connection_remove(p_src_apb, p_dst_apb, *src_dppi_chan);
+        NRFX_ASSERT(err_code == NRFX_SUCCESS);
     }
     else
     {
-        // Currently not supported
-        NRFX_ASSERT(false);
+        NRFX_ASSERT(src_dppi_chan != dst_dppi_chan);
+        nrfx_ipct_interconnect_t const * p_src_ipct = nrf_ipct_get(p_src_apb);
+        nrfx_ipct_interconnect_t const * p_dst_ipct = nrf_ipct_get(p_dst_apb);
+        nrfx_apb_interconnect_t const * p_src_ipct_apb =
+                                        nrf_apb_interconnect_get((uint32_t)p_src_ipct->p_ipct);
+        nrfx_apb_interconnect_t const * p_dst_ipct_apb =
+                                        nrf_apb_interconnect_get((uint32_t)p_dst_ipct->p_ipct);
+        err_code = ipct_connection_remove(p_src_ipct, p_dst_ipct, p_path);
+        NRFX_ASSERT(err_code == NRFX_SUCCESS);
+        if (err_code == NRFX_SUCCESS)
+        {
+            err_code = local_connection_remove(p_src_apb, p_src_ipct_apb, *src_dppi_chan);
+            NRFX_ASSERT(err_code == NRFX_SUCCESS);
+            if (err_code == NRFX_SUCCESS)
+            {
+                err_code = local_connection_remove(p_dst_ipct_apb, p_dst_apb, *dst_dppi_chan);
+                NRFX_ASSERT(err_code == NRFX_SUCCESS);
+            }
+        }
     }
-    NRFX_DPPIC_ENDPOINT_CLEAR(eep);
-    NRFX_DPPIC_ENDPOINT_CLEAR(tep);
+    if (err_code == NRFX_SUCCESS)
+    {
+        path_cleanup(p_path);
+        NRFX_DPPIC_ENDPOINT_CLEAR(eep);
+        NRFX_DPPIC_ENDPOINT_CLEAR(tep);
+    }
+    NRFX_ASSERT(err_code == NRFX_SUCCESS);
 }
 
 nrfx_err_t nrfx_gppi_channel_free(uint8_t channel)
@@ -385,7 +557,7 @@ bool nrfx_gppi_channel_check(uint8_t channel)
         {
             return false;
         }
-        if (is_main_connection_needed(&channels_path[channel]) &&
+        if (is_main_connection_needed(p_src_apb, p_dst_apb) &&
             !nrf_dppi_channel_check(nrf_apb_main_interconnect_get()->p_dppi, dppi_channel))
         {
             return false;
@@ -411,7 +583,7 @@ void nrfx_gppi_channels_disable_all(void)
             NRFX_ASSERT(p_dst_apb);
             nrf_dppi_channels_disable(p_src_apb->p_dppi, NRFX_BIT(dppi_channel));
             nrf_dppi_channels_disable(p_dst_apb->p_dppi, NRFX_BIT(dppi_channel));
-            if (is_main_connection_needed(&channels_path[chan]))
+            if (is_main_connection_needed(p_src_apb, p_dst_apb))
             {
                 nrf_dppi_channels_disable(nrf_apb_main_interconnect_get()->p_dppi,
                                           NRFX_BIT(dppi_channel));
@@ -428,21 +600,25 @@ void nrfx_gppi_channels_enable(uint32_t mask)
     while (mask)
     {
         uint8_t chan = NRF_CTZ(mask);
+        nrfx_gppi_channels_path_t * p_path = &channels_path[chan];
         nrfx_apb_interconnect_t const * p_src_apb = channels_path[chan].p_src_apb;
         nrfx_apb_interconnect_t const * p_dst_apb = channels_path[chan].p_dst_apb;
-        uint8_t dppi_channel = channels_path[chan].dppi_channel;
+        uint8_t src_dppi_chan = nrf_apb_domain_get(p_src_apb) == NRF_DOMAIN_GLOBAL ?
+                                p_path->dppi_channel :
+                                p_path->local_dppi_channel;
+        uint8_t dst_dppi_chan = nrf_apb_domain_get(p_dst_apb) == NRF_DOMAIN_GLOBAL ?
+                                p_path->dppi_channel :
+                                p_path->local_dppi_channel;
 
         NRFX_ASSERT(nrfx_flag32_is_allocated(m_virtual_channels, chan));
         NRFX_ASSERT(p_src_apb);
         NRFX_ASSERT(p_dst_apb);
-        nrf_dppi_channels_enable(p_src_apb->p_dppi, NRFX_BIT(dppi_channel));
-        nrf_dppi_channels_enable(p_dst_apb->p_dppi, NRFX_BIT(dppi_channel));
-        if (is_main_connection_needed(&channels_path[chan]))
+        nrf_dppi_channels_enable(p_src_apb->p_dppi, NRFX_BIT(src_dppi_chan));
+        nrf_dppi_channels_enable(p_dst_apb->p_dppi, NRFX_BIT(dst_dppi_chan));
+        if (is_main_connection_needed(p_src_apb, p_dst_apb))
         {
             nrf_dppi_channels_enable(nrf_apb_main_interconnect_get()->p_dppi,
-                                     NRFX_BIT(dppi_channel));
-            nrf_dppi_channels_enable(nrf_apb_main_interconnect_get()->p_dppi,
-                                     NRFX_BIT(dppi_channel));
+                                     NRFX_BIT(p_path->dppi_channel));
         }
         mask &= ~NRFX_BIT(chan);
     }
@@ -462,10 +638,8 @@ void nrfx_gppi_channels_disable(uint32_t mask)
         NRFX_ASSERT(p_dst_apb);
         nrf_dppi_channels_disable(p_src_apb->p_dppi, NRFX_BIT(dppi_channel));
         nrf_dppi_channels_disable(p_dst_apb->p_dppi, NRFX_BIT(dppi_channel));
-        if (is_main_connection_needed(&channels_path[chan]))
+        if (is_main_connection_needed(p_src_apb, p_dst_apb))
         {
-            nrf_dppi_channels_disable(nrf_apb_main_interconnect_get()->p_dppi,
-                                      NRFX_BIT(dppi_channel));
             nrf_dppi_channels_disable(nrf_apb_main_interconnect_get()->p_dppi,
                                       NRFX_BIT(dppi_channel));
         }

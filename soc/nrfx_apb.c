@@ -67,4 +67,15 @@ nrfx_apb_interconnect_t const * nrf_apb_interconnect_get(uint32_t addr)
     }
     return NULL;
 }
+
+size_t nrf_apb_interconnect_num_of_global_get(void)
+{
+    return NRFX_ARRAY_SIZE(m_global_apb_interconnect);
+}
+
+nrfx_apb_interconnect_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t idx)
+{
+    return &m_global_apb_interconnect[idx];
+}
+
 #endif // defined(HALTIUM_XXAA)

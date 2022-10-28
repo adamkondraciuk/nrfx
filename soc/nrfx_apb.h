@@ -22,7 +22,7 @@ typedef struct {
     nrfx_atomic_t  * p_dppi_channels;        ///< Pointer to the mask of available DPPI channels.
     uint32_t         dppi_pub_channels_mask; ///< Mask of configurable DPPI publish channels.
     uint32_t         dppi_sub_channels_mask; ///< Mask of configurable DPPI subscribe channels.
-    NRF_PPIB_Type  * p_ppib;                 ///< PPIB peripheral that belongs to given APB
+    NRF_PPIB_Type  * p_ppib;                 ///< PPIB peripheral that belongs to given APB.
 } nrfx_apb_interconnect_t;
 
 /**
@@ -54,6 +54,25 @@ nrfx_apb_interconnect_t const * nrf_apb_main_interconnect_get(void);
  *         or NULL if provided address is invalid.
  */
 nrfx_apb_interconnect_t const * nrf_apb_interconnect_get(uint32_t addr);
+
+/**
+ * @brief Function for getting number entries for global domain in APB bus properties array.
+ *
+ * @note The number of entries is equal to number of APB buses in global domain which contain
+ *       DPPIC peripheral.
+ *
+ * @return Number of entries in APB properties array.
+ */
+size_t nrf_apb_interconnect_num_of_global_get(void);
+
+/**
+ * @brief Function for getting APB bus properties structure by index of APB bus properties array.
+ *
+ * @param[in] idx Index of entry in APB bus properties array.
+ *
+ * @return Pointer to the properties structure that represents APB assigned to given index.
+ */
+nrfx_apb_interconnect_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t idx);
 
 /** @} */
 
