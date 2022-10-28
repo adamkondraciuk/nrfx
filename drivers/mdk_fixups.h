@@ -295,7 +295,7 @@ typedef enum
 #define SPIM136_EASYDMA_MAXCNT_SIZE 16
 #define SPIM137_EASYDMA_MAXCNT_SIZE 16
 
-#ifndef NRF7140_XXAA
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
 #define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 0
 #define SPIM130_FEATURE_HARDWARE_CSN_PRESENT 0
@@ -319,7 +319,7 @@ typedef enum
 #define SPIM136_FEATURE_DCX_PRESENT  0
 #define SPIM137_FEATURE_DCX_PRESENT  0
 
-#ifndef NRF7140_XXAA
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
 #define SPIM120_FEATURE_RXDELAY_PRESENT  0
 #define SPIM121_FEATURE_RXDELAY_PRESENT  0
 #define SPIM130_FEATURE_RXDELAY_PRESENT  0
@@ -376,252 +376,9 @@ typedef enum
 #endif
 
 #undef QSPI_PRESENT
-
-/* HM-17600 */
-typedef struct {
-  __IM uint32_t RESERVED00[1];
-  __OM uint32_t TASKS_STOP;
-  __IM uint32_t RESERVED01[1];
-  __OM uint32_t TASKS_SUSPEND;
-  __OM uint32_t TASKS_RESUME;
-  __IM uint32_t RESERVED1[5];
-  __OM NRF_TWIM_TASKS_DMA_Type TASKS_DMA;
-  __IM uint32_t RESERVED2[13];
-  __IOM uint32_t SUBSCRIBE_SUSPEND;
-  __IOM uint32_t SUBSCRIBE_RESUME;
-  __IM uint32_t RESERVED3[5];
-  __IOM NRF_TWIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;
-  __IM uint32_t RESERVED4[11];
-  __IOM uint32_t EVENTS_STOPPED;
-  __IM uint32_t RESERVED5[3];
-  __IOM uint32_t EVENTS_ERROR;
-  __IM uint32_t RESERVED6[2];
-  __IOM uint32_t EVENTS_BB;
-  __IM uint32_t RESERVED7;
-  __IOM uint32_t EVENTS_SUSPENDED;
-  __IM uint32_t RESERVED8[2];
-  __IOM uint32_t EVENTS_LASTRX;
-  __IOM uint32_t EVENTS_LASTTX;
-  __IM uint32_t RESERVED9[4];
-  __IOM NRF_TWIM_EVENTS_DMA_Type EVENTS_DMA;
-  __IM uint32_t RESERVED10[4];
-  __IOM uint32_t PUBLISH_STOPPED;
-  __IM uint32_t RESERVED11[3];
-  __IOM uint32_t PUBLISH_ERROR;
-  __IM uint32_t RESERVED12[2];
-  __IOM uint32_t PUBLISH_BB;
-  __IM uint32_t RESERVED13;
-  __IOM uint32_t PUBLISH_SUSPENDED;
-  __IM uint32_t RESERVED14[2];
-  __IOM uint32_t PUBLISH_LASTRX;
-  __IOM uint32_t PUBLISH_LASTTX;
-  __IM uint32_t RESERVED15[4];
-  __IOM NRF_TWIM_PUBLISH_DMA_Type PUBLISH_DMA;
-  __IM uint32_t RESERVED16[3];
-  __IOM uint32_t SHORTS;
-  __IM uint32_t RESERVED17[63];
-  __IOM uint32_t INTEN;
-  __IOM uint32_t INTENSET;
-  __IOM uint32_t INTENCLR;
-  __IM uint32_t RESERVED18[110];
-  __IOM uint32_t ERRORSRC;
-  __IM uint32_t RESERVED19[14];
-  __IOM uint32_t ENABLE;
-  __IOM uint32_t CONFIG;
-  __IM uint32_t RESERVED20[6];
-  __IOM uint32_t FMPLUS;
-  __IOM uint32_t FREQUENCY;
-  __IM uint32_t RESERVED21[24];
-  __IOM uint32_t ADDRESS;
-  __IM uint32_t RESERVED22[29];
-  __IOM NRF_TWIM_PSEL_Type PSEL;
-  __IM uint32_t RESERVED23[62];
-  __IOM NRF_TWIM_DMA_Type DMA;
-} NRF_TWIM_Type_fixed;
-
-#if defined(NRF_TWIM130_S)
-#undef NRF_TWIM130_S
-#define NRF_TWIM130_S ((NRF_TWIM_Type_fixed*) NRF_TWIM130_S_BASE)
-#endif
-
-#if defined(NRF_TWIM131_S)
-#undef NRF_TWIM131_S
-#define NRF_TWIM131_S ((NRF_TWIM_Type_fixed*) NRF_TWIM131_S_BASE)
-#endif
-
-#if defined(NRF_TWIM132_S)
-#undef NRF_TWIM132_S
-#define NRF_TWIM132_S ((NRF_TWIM_Type_fixed*) NRF_TWIM132_S_BASE)
-#endif
-
-#if defined(NRF_TWIM133_S)
-#undef NRF_TWIM133_S
-#define NRF_TWIM133_S ((NRF_TWIM_Type_fixed*) NRF_TWIM133_S_BASE)
-#endif
-
-#if defined(NRF_TWIM134_S)
-#undef NRF_TWIM134_S
-#define NRF_TWIM134_S ((NRF_TWIM_Type_fixed*) NRF_TWIM134_S_BASE)
-#endif
-
-#if defined(NRF_TWIM135_S)
-#undef NRF_TWIM135_S
-#define NRF_TWIM135_S ((NRF_TWIM_Type_fixed*) NRF_TWIM135_S_BASE)
-#endif
-
-#if defined(NRF_TWIM136_S)
-#undef NRF_TWIM136_S
-#define NRF_TWIM136_S ((NRF_TWIM_Type_fixed*) NRF_TWIM136_S_BASE)
-#endif
-
-#if defined(NRF_TWIM137_S)
-#undef NRF_TWIM137_S
-#define NRF_TWIM137_S ((NRF_TWIM_Type_fixed*) NRF_TWIM137_S_BASE)
-#endif
-
-#define NRF_TWIM_Type NRF_TWIM_Type_fixed
-
-
-typedef struct {
-  __IM  uint32_t  RESERVED;
-  __IOM uint32_t  CNT;                               /*!< (@ 0x00000004) Number of values (duty cycles) in this sequence       */
-  __IOM uint32_t  REFRESH;                           /*!< (@ 0x00000008) Number of additional PWM periods between samples loaded
-                                                                         into compare register*/                                  
-  __IOM uint32_t  ENDDELAY;                          /*!< (@ 0x0000000C) Time added after the sequence                         */
-  __IM  uint32_t  RESERVED1[4];
-} NRF_PWM_SEQ_Type_fixed;                                  /*!< Size = 32 (0x020)                                                    */
-
-/* PWM_SEQ_CNT: Number of values (duty cycles) in this sequence */
-  #define PWM_SEQ_CNT_ResetValue (0x00000000UL)      /*!< Reset value of CNT register.                                         */
-
-/* CNT @Bits 0..14 : Number of values (duty cycles) in this sequence */
-  #define PWM_SEQ_CNT_CNT_Pos (0UL)                  /*!< Position of CNT field.                                               */
-  #define PWM_SEQ_CNT_CNT_Msk (0x7FFFUL << PWM_SEQ_CNT_CNT_Pos) /*!< Bit mask of CNT field.                                    */
-  #define PWM_SEQ_CNT_CNT_Min (0x0UL)                /*!< Min enumerator value of CNT field.                                   */
-  #define PWM_SEQ_CNT_CNT_Max (0x0UL)                /*!< Max enumerator value of CNT field.                                   */
-  #define PWM_SEQ_CNT_CNT_Disabled (0x0000UL)        /*!< Sequence is disabled, and shall not be started as it is empty        */
-
-  typedef struct {                                   /*!< PWM Structure                                                        */
-    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Starts PWM pulse generation with the last loaded
-                                                                         values*/                                                 
-    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stops PWM pulse generation on all channels at the end
-                                                                         of current PWM period, and stops sequence playback*/     
-    __OM uint32_t TASKS_NEXTSTEP;                    /*!< (@ 0x00000008) Steps by one value in the current sequence on all
-                                                                         enabled channels if DECODER.MODE=NextStep. Does not
-                                                                         cause PWM generation to start if not running.*/          
-    __OM uint32_t TASKS_SEQABORT;                    /*!< (@ 0x0000000C) (Gracefully) aborts the playback of the current
-                                                                         sequence or the current end delay*/                      
-    __OM NRF_PWM_TASKS_DMA_Type TASKS_DMA;           /*!< (@ 0x00000010) Peripheral tasks.                                     */
-    __IM uint32_t RESERVED[24];
-    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
-    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
-    __IOM uint32_t SUBSCRIBE_NEXTSTEP;               /*!< (@ 0x00000088) Subscribe configuration for task NEXTSTEP             */
-    __IOM uint32_t SUBSCRIBE_SEQABORT;               /*!< (@ 0x0000008C) Subscribe configuration for task SEQABORT             */
-    __IOM NRF_PWM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;  /*!< (@ 0x00000090) Subscribe configuration for tasks                     */
-    __IM uint32_t RESERVED1[24];
-    __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) Response to START task, emitted when the PWM pulse
-                                                                         generation starts*/                                      
-    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) Response to STOP task, emitted when PWM pulses are no
-                                                                         longer generated*/                                       
-    __IOM uint32_t EVENTS_SEQSTARTED[2];             /*!< (@ 0x00000108) First PWM period started on sequence n                */
-    __IOM uint32_t EVENTS_SEQEND[2];                 /*!< (@ 0x00000110) Emitted at end of every sequence n, when last value
-                                                                         from RAM has been applied to wave counter*/              
-    __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x00000118) Emitted at the end of each PWM period                 */
-    __IOM uint32_t EVENTS_LOOPSDONE;                 /*!< (@ 0x0000011C) Concatenated sequences have been played the amount of
-                                                                         times defined in LOOP.CNT*/                              
-    __IOM uint32_t EVENTS_RAMUNDERFLOW;              /*!< (@ 0x00000120) Emitted when retrieving from RAM does not complete in
-                                                                         time for the PWM module*/                                
-    __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000124) Peripheral events.                                    */
-    __IOM uint32_t EVENTS_COMPAREMATCH[4];           /*!< (@ 0x0000013C) This event is generated when the compare matches for
-                                                                         the compare channel [n].*/                               
-    __IM uint32_t RESERVED2[13];
-    __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
-    __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
-    __IOM uint32_t PUBLISH_SEQSTARTED[2];            /*!< (@ 0x00000188) Publish configuration for event SEQSTARTED[n]         */
-    __IOM uint32_t PUBLISH_SEQEND[2];                /*!< (@ 0x00000190) Publish configuration for event SEQEND[n]             */
-    __IOM uint32_t PUBLISH_PWMPERIODEND;             /*!< (@ 0x00000198) Publish configuration for event PWMPERIODEND          */
-    __IOM uint32_t PUBLISH_LOOPSDONE;                /*!< (@ 0x0000019C) Publish configuration for event LOOPSDONE             */
-    __IOM uint32_t PUBLISH_RAMUNDERFLOW;             /*!< (@ 0x000001A0) Publish configuration for event RAMUNDERFLOW          */
-    __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x000001A4) Publish configuration for events                      */
-    __IOM uint32_t PUBLISH_COMPAREMATCH[4];          /*!< (@ 0x000001BC) Publish configuration for event COMPAREMATCH[n]       */
-    __IM uint32_t RESERVED3[13];
-    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
-    __IM uint32_t RESERVED4[63];
-    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED5[124];
-    __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PWM module enable register                            */
-    __IOM uint32_t MODE;                             /*!< (@ 0x00000504) Selects operating mode of the wave counter            */
-    __IOM uint32_t COUNTERTOP;                       /*!< (@ 0x00000508) Value up to which the pulse generator counter counts  */
-    __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000050C) Configuration for PWM_CLK                             */
-    __IOM uint32_t DECODER;                          /*!< (@ 0x00000510) Configuration of the decoder                          */
-    __IOM uint32_t LOOP;                             /*!< (@ 0x00000514) Number of playbacks of a loop                         */
-    __IOM uint32_t IDLEOUT;                          /*!< (@ 0x00000518) Configure the output value on the PWM channel during
-                                                                         idle*/                                                   
-    __IM uint32_t RESERVED6;
-    __IOM NRF_PWM_SEQ_Type_fixed SEQ[2];                   /*!< (@ 0x00000520) (unspecified)                                         */
-    __IOM NRF_PWM_PSEL_Type PSEL;                    /*!< (@ 0x00000560) (unspecified)                                         */
-    __IM uint32_t RESERVED7[100];
-    __IOM NRF_PWM_DMA_Type DMA;                      /*!< (@ 0x00000700) (unspecified)                                         */
-  } NRF_PWM_Type_fixed;                                    /*!< Size = 1864 (0x748)                                                  */
-
-#if defined(NRF_PWM120_NS)
-#undef NRF_PWM120_NS
-#define NRF_PWM120_NS ((NRF_PWM_Type_fixed*) NRF_PWM120_NS_BASE)
-#endif
-
-#if defined(NRF_PWM120_S)
-#undef NRF_PWM120_S
-#define NRF_PWM120_S ((NRF_PWM_Type_fixed*) NRF_PWM120_S_BASE)
-#endif
-
-#if defined(NRF_PWM130_NS)
-#undef NRF_PWM130_NS
-#define NRF_PWM130_NS ((NRF_PWM_Type_fixed*) NRF_PWM130_NS_BASE)
-#endif
-
-#if defined(NRF_PWM130_S)
-#undef NRF_PWM130_S
-#define NRF_PWM130_S ((NRF_PWM_Type_fixed*) NRF_PWM130_S_BASE)
-#endif
-
-#if defined(NRF_PWM131_NS)
-#undef NRF_PWM131_NS
-#define NRF_PWM131_NS ((NRF_PWM_Type_fixed*) NRF_PWM131_NS_BASE)
-#endif
-
-#if defined(NRF_PWM131_S)
-#undef NRF_PWM131_S
-#define NRF_PWM131_S ((NRF_PWM_Type_fixed*) NRF_PWM131_S_BASE)
-#endif
-
-#if defined(NRF_PWM132_NS)
-#undef NRF_PWM132_NS
-#define NRF_PWM132_NS ((NRF_PWM_Type_fixed*) NRF_PWM132_NS_BASE)
-#endif
-
-#if defined(NRF_PWM132_S)
-#undef NRF_PWM132_S
-#define NRF_PWM132_S ((NRF_PWM_Type_fixed*) NRF_PWM132_S_BASE)
-#endif
-
-#if defined(NRF_PWM133_NS)
-#undef NRF_PWM133_NS
-#define NRF_PWM133_NS ((NRF_PWM_Type_fixed*) NRF_PWM133_NS_BASE)
-#endif
-
-#if defined(NRF_PWM133_S)
-#undef NRF_PWM133_S
-#define NRF_PWM133_S ((NRF_PWM_Type_fixed*) NRF_PWM133_S_BASE)
-#endif
-
-#define NRF_PWM_Type NRF_PWM_Type_fixed
-
 #endif /* NRF7140_XXAA */
 
-#if defined(NRF_RADIOCORE) && !defined(NRF7140_XXAA)
+#if defined(NRF_RADIOCORE) && !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
 #define TIMER020_CC_NUM 6
 #define TIMER021_CC_NUM 6
 #define TIMER022_CC_NUM 6
@@ -1149,6 +906,250 @@ typedef struct {
 	__IM  uint32_t CIDR3;
 } NRF_ETR_Type;
 
+#if defined(NRF7140_XXAA) || defined(NRF9230_XXAA)
+/* HM-17600 */
+typedef struct {
+  __IM uint32_t RESERVED00[1];
+  __OM uint32_t TASKS_STOP;
+  __IM uint32_t RESERVED01[1];
+  __OM uint32_t TASKS_SUSPEND;
+  __OM uint32_t TASKS_RESUME;
+  __IM uint32_t RESERVED1[5];
+  __OM NRF_TWIM_TASKS_DMA_Type TASKS_DMA;
+  __IM uint32_t RESERVED2[13];
+  __IOM uint32_t SUBSCRIBE_SUSPEND;
+  __IOM uint32_t SUBSCRIBE_RESUME;
+  __IM uint32_t RESERVED3[5];
+  __IOM NRF_TWIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;
+  __IM uint32_t RESERVED4[11];
+  __IOM uint32_t EVENTS_STOPPED;
+  __IM uint32_t RESERVED5[3];
+  __IOM uint32_t EVENTS_ERROR;
+  __IM uint32_t RESERVED6[2];
+  __IOM uint32_t EVENTS_BB;
+  __IM uint32_t RESERVED7;
+  __IOM uint32_t EVENTS_SUSPENDED;
+  __IM uint32_t RESERVED8[2];
+  __IOM uint32_t EVENTS_LASTRX;
+  __IOM uint32_t EVENTS_LASTTX;
+  __IM uint32_t RESERVED9[4];
+  __IOM NRF_TWIM_EVENTS_DMA_Type EVENTS_DMA;
+  __IM uint32_t RESERVED10[4];
+  __IOM uint32_t PUBLISH_STOPPED;
+  __IM uint32_t RESERVED11[3];
+  __IOM uint32_t PUBLISH_ERROR;
+  __IM uint32_t RESERVED12[2];
+  __IOM uint32_t PUBLISH_BB;
+  __IM uint32_t RESERVED13;
+  __IOM uint32_t PUBLISH_SUSPENDED;
+  __IM uint32_t RESERVED14[2];
+  __IOM uint32_t PUBLISH_LASTRX;
+  __IOM uint32_t PUBLISH_LASTTX;
+  __IM uint32_t RESERVED15[4];
+  __IOM NRF_TWIM_PUBLISH_DMA_Type PUBLISH_DMA;
+  __IM uint32_t RESERVED16[3];
+  __IOM uint32_t SHORTS;
+  __IM uint32_t RESERVED17[63];
+  __IOM uint32_t INTEN;
+  __IOM uint32_t INTENSET;
+  __IOM uint32_t INTENCLR;
+  __IM uint32_t RESERVED18[110];
+  __IOM uint32_t ERRORSRC;
+  __IM uint32_t RESERVED19[14];
+  __IOM uint32_t ENABLE;
+  __IOM uint32_t CONFIG;
+  __IM uint32_t RESERVED20[6];
+  __IOM uint32_t FMPLUS;
+  __IOM uint32_t FREQUENCY;
+  __IM uint32_t RESERVED21[24];
+  __IOM uint32_t ADDRESS;
+  __IM uint32_t RESERVED22[29];
+  __IOM NRF_TWIM_PSEL_Type PSEL;
+  __IM uint32_t RESERVED23[62];
+  __IOM NRF_TWIM_DMA_Type DMA;
+} NRF_TWIM_Type_fixed;
+
+#if defined(NRF_TWIM130_S)
+#undef NRF_TWIM130_S
+#define NRF_TWIM130_S ((NRF_TWIM_Type_fixed*) NRF_TWIM130_S_BASE)
+#endif
+
+#if defined(NRF_TWIM131_S)
+#undef NRF_TWIM131_S
+#define NRF_TWIM131_S ((NRF_TWIM_Type_fixed*) NRF_TWIM131_S_BASE)
+#endif
+
+#if defined(NRF_TWIM132_S)
+#undef NRF_TWIM132_S
+#define NRF_TWIM132_S ((NRF_TWIM_Type_fixed*) NRF_TWIM132_S_BASE)
+#endif
+
+#if defined(NRF_TWIM133_S)
+#undef NRF_TWIM133_S
+#define NRF_TWIM133_S ((NRF_TWIM_Type_fixed*) NRF_TWIM133_S_BASE)
+#endif
+
+#if defined(NRF_TWIM134_S)
+#undef NRF_TWIM134_S
+#define NRF_TWIM134_S ((NRF_TWIM_Type_fixed*) NRF_TWIM134_S_BASE)
+#endif
+
+#if defined(NRF_TWIM135_S)
+#undef NRF_TWIM135_S
+#define NRF_TWIM135_S ((NRF_TWIM_Type_fixed*) NRF_TWIM135_S_BASE)
+#endif
+
+#if defined(NRF_TWIM136_S)
+#undef NRF_TWIM136_S
+#define NRF_TWIM136_S ((NRF_TWIM_Type_fixed*) NRF_TWIM136_S_BASE)
+#endif
+
+#if defined(NRF_TWIM137_S)
+#undef NRF_TWIM137_S
+#define NRF_TWIM137_S ((NRF_TWIM_Type_fixed*) NRF_TWIM137_S_BASE)
+#endif
+
+#define NRF_TWIM_Type NRF_TWIM_Type_fixed
+
+
+typedef struct {
+  __IM  uint32_t  RESERVED;
+  __IOM uint32_t  CNT;                               /*!< (@ 0x00000004) Number of values (duty cycles) in this sequence       */
+  __IOM uint32_t  REFRESH;                           /*!< (@ 0x00000008) Number of additional PWM periods between samples loaded
+                                                                         into compare register*/
+  __IOM uint32_t  ENDDELAY;                          /*!< (@ 0x0000000C) Time added after the sequence                         */
+  __IM  uint32_t  RESERVED1[4];
+} NRF_PWM_SEQ_Type_fixed;                                  /*!< Size = 32 (0x020)                                                    */
+
+/* PWM_SEQ_CNT: Number of values (duty cycles) in this sequence */
+  #define PWM_SEQ_CNT_ResetValue (0x00000000UL)      /*!< Reset value of CNT register.                                         */
+
+/* CNT @Bits 0..14 : Number of values (duty cycles) in this sequence */
+  #define PWM_SEQ_CNT_CNT_Pos (0UL)                  /*!< Position of CNT field.                                               */
+  #define PWM_SEQ_CNT_CNT_Msk (0x7FFFUL << PWM_SEQ_CNT_CNT_Pos) /*!< Bit mask of CNT field.                                    */
+  #define PWM_SEQ_CNT_CNT_Min (0x0UL)                /*!< Min enumerator value of CNT field.                                   */
+  #define PWM_SEQ_CNT_CNT_Max (0x0UL)                /*!< Max enumerator value of CNT field.                                   */
+  #define PWM_SEQ_CNT_CNT_Disabled (0x0000UL)        /*!< Sequence is disabled, and shall not be started as it is empty        */
+
+  typedef struct {                                   /*!< PWM Structure                                                        */
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Starts PWM pulse generation with the last loaded
+                                                                         values*/
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stops PWM pulse generation on all channels at the end
+                                                                         of current PWM period, and stops sequence playback*/
+    __OM uint32_t TASKS_NEXTSTEP;                    /*!< (@ 0x00000008) Steps by one value in the current sequence on all
+                                                                         enabled channels if DECODER.MODE=NextStep. Does not
+                                                                         cause PWM generation to start if not running.*/
+    __OM uint32_t TASKS_SEQABORT;                    /*!< (@ 0x0000000C) (Gracefully) aborts the playback of the current
+                                                                         sequence or the current end delay*/
+    __OM NRF_PWM_TASKS_DMA_Type TASKS_DMA;           /*!< (@ 0x00000010) Peripheral tasks.                                     */
+    __IM uint32_t RESERVED[24];
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
+    __IOM uint32_t SUBSCRIBE_NEXTSTEP;               /*!< (@ 0x00000088) Subscribe configuration for task NEXTSTEP             */
+    __IOM uint32_t SUBSCRIBE_SEQABORT;               /*!< (@ 0x0000008C) Subscribe configuration for task SEQABORT             */
+    __IOM NRF_PWM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;  /*!< (@ 0x00000090) Subscribe configuration for tasks                     */
+    __IM uint32_t RESERVED1[24];
+    __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) Response to START task, emitted when the PWM pulse
+                                                                         generation starts*/
+    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) Response to STOP task, emitted when PWM pulses are no
+                                                                         longer generated*/
+    __IOM uint32_t EVENTS_SEQSTARTED[2];             /*!< (@ 0x00000108) First PWM period started on sequence n                */
+    __IOM uint32_t EVENTS_SEQEND[2];                 /*!< (@ 0x00000110) Emitted at end of every sequence n, when last value
+                                                                         from RAM has been applied to wave counter*/
+    __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x00000118) Emitted at the end of each PWM period                 */
+    __IOM uint32_t EVENTS_LOOPSDONE;                 /*!< (@ 0x0000011C) Concatenated sequences have been played the amount of
+                                                                         times defined in LOOP.CNT*/
+    __IOM uint32_t EVENTS_RAMUNDERFLOW;              /*!< (@ 0x00000120) Emitted when retrieving from RAM does not complete in
+                                                                         time for the PWM module*/
+    __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000124) Peripheral events.                                    */
+    __IOM uint32_t EVENTS_COMPAREMATCH[4];           /*!< (@ 0x0000013C) This event is generated when the compare matches for
+                                                                         the compare channel [n].*/
+    __IM uint32_t RESERVED2[13];
+    __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
+    __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
+    __IOM uint32_t PUBLISH_SEQSTARTED[2];            /*!< (@ 0x00000188) Publish configuration for event SEQSTARTED[n]         */
+    __IOM uint32_t PUBLISH_SEQEND[2];                /*!< (@ 0x00000190) Publish configuration for event SEQEND[n]             */
+    __IOM uint32_t PUBLISH_PWMPERIODEND;             /*!< (@ 0x00000198) Publish configuration for event PWMPERIODEND          */
+    __IOM uint32_t PUBLISH_LOOPSDONE;                /*!< (@ 0x0000019C) Publish configuration for event LOOPSDONE             */
+    __IOM uint32_t PUBLISH_RAMUNDERFLOW;             /*!< (@ 0x000001A0) Publish configuration for event RAMUNDERFLOW          */
+    __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x000001A4) Publish configuration for events                      */
+    __IOM uint32_t PUBLISH_COMPAREMATCH[4];          /*!< (@ 0x000001BC) Publish configuration for event COMPAREMATCH[n]       */
+    __IM uint32_t RESERVED3[13];
+    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
+    __IM uint32_t RESERVED4[63];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED5[124];
+    __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PWM module enable register                            */
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000504) Selects operating mode of the wave counter            */
+    __IOM uint32_t COUNTERTOP;                       /*!< (@ 0x00000508) Value up to which the pulse generator counter counts  */
+    __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000050C) Configuration for PWM_CLK                             */
+    __IOM uint32_t DECODER;                          /*!< (@ 0x00000510) Configuration of the decoder                          */
+    __IOM uint32_t LOOP;                             /*!< (@ 0x00000514) Number of playbacks of a loop                         */
+    __IOM uint32_t IDLEOUT;                          /*!< (@ 0x00000518) Configure the output value on the PWM channel during
+                                                                         idle*/
+    __IM uint32_t RESERVED6;
+    __IOM NRF_PWM_SEQ_Type_fixed SEQ[2];                   /*!< (@ 0x00000520) (unspecified)                                         */
+    __IOM NRF_PWM_PSEL_Type PSEL;                    /*!< (@ 0x00000560) (unspecified)                                         */
+    __IM uint32_t RESERVED7[100];
+    __IOM NRF_PWM_DMA_Type DMA;                      /*!< (@ 0x00000700) (unspecified)                                         */
+  } NRF_PWM_Type_fixed;                                    /*!< Size = 1864 (0x748)                                                  */
+
+#if defined(NRF_PWM120_NS)
+#undef NRF_PWM120_NS
+#define NRF_PWM120_NS ((NRF_PWM_Type_fixed*) NRF_PWM120_NS_BASE)
+#endif
+
+#if defined(NRF_PWM120_S)
+#undef NRF_PWM120_S
+#define NRF_PWM120_S ((NRF_PWM_Type_fixed*) NRF_PWM120_S_BASE)
+#endif
+
+#if defined(NRF_PWM130_NS)
+#undef NRF_PWM130_NS
+#define NRF_PWM130_NS ((NRF_PWM_Type_fixed*) NRF_PWM130_NS_BASE)
+#endif
+
+#if defined(NRF_PWM130_S)
+#undef NRF_PWM130_S
+#define NRF_PWM130_S ((NRF_PWM_Type_fixed*) NRF_PWM130_S_BASE)
+#endif
+
+#if defined(NRF_PWM131_NS)
+#undef NRF_PWM131_NS
+#define NRF_PWM131_NS ((NRF_PWM_Type_fixed*) NRF_PWM131_NS_BASE)
+#endif
+
+#if defined(NRF_PWM131_S)
+#undef NRF_PWM131_S
+#define NRF_PWM131_S ((NRF_PWM_Type_fixed*) NRF_PWM131_S_BASE)
+#endif
+
+#if defined(NRF_PWM132_NS)
+#undef NRF_PWM132_NS
+#define NRF_PWM132_NS ((NRF_PWM_Type_fixed*) NRF_PWM132_NS_BASE)
+#endif
+
+#if defined(NRF_PWM132_S)
+#undef NRF_PWM132_S
+#define NRF_PWM132_S ((NRF_PWM_Type_fixed*) NRF_PWM132_S_BASE)
+#endif
+
+#if defined(NRF_PWM133_NS)
+#undef NRF_PWM133_NS
+#define NRF_PWM133_NS ((NRF_PWM_Type_fixed*) NRF_PWM133_NS_BASE)
+#endif
+
+#if defined(NRF_PWM133_S)
+#undef NRF_PWM133_S
+#define NRF_PWM133_S ((NRF_PWM_Type_fixed*) NRF_PWM133_S_BASE)
+#endif
+
+#define NRF_PWM_Type NRF_PWM_Type_fixed
+#endif
+
 #undef NRF_ETR_NS
 #define NRF_ETR_NS ((NRF_ETR_Type*) NRF_ETR_NS_BASE)
 
@@ -1230,10 +1231,6 @@ typedef struct {
     #define BICR_HFXO_CONFIG_MODE_Crystal4 (0x4UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
-    // The HFXO64M.CFG.CHIRPEN field was missing
-    /* CHIRPEN @Bit 16 : Enable chirp during the HFXO64 startup. */
-    #define HFXO64M_CFG_CHIRPEN_Pos (14UL)             /*!< Position of CHIRPEN field.                                           */
-    #define HFXO64M_CFG_CHIRPEN_Msk (0x3UL << HFXO64M_CFG_CHIRPEN_Pos) /*!< Bit mask of CHIRPEN field.                           */
 #endif // defined(NRF9230_XXAA)
 
 #endif // MDK_FIXUPS_H__
