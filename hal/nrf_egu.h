@@ -297,6 +297,16 @@ NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg)
         return EGU130_CH_NUM;
     }
 #endif
+#if defined(NRF_EGU10)
+    if (p_reg == NRF_EGU10){
+        return EGU10_CH_NUM;
+    }
+#endif
+#if defined(NRF_EGU20)
+    if (p_reg == NRF_EGU20){
+        return EGU20_CH_NUM;
+    }
+#endif
     return 0;
 }
 
@@ -371,6 +381,7 @@ NRF_STATIC_INLINE void nrf_egu_subscribe_set(NRF_EGU_Type * p_reg,
                                              nrf_egu_task_t task,
                                              uint8_t        channel)
 {
+    NRFX_ASSERT(p_reg);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
@@ -378,6 +389,7 @@ NRF_STATIC_INLINE void nrf_egu_subscribe_set(NRF_EGU_Type * p_reg,
 NRF_STATIC_INLINE void nrf_egu_subscribe_clear(NRF_EGU_Type * p_reg,
                                                nrf_egu_task_t task)
 {
+    NRFX_ASSERT(p_reg);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
 
@@ -385,6 +397,7 @@ NRF_STATIC_INLINE void nrf_egu_publish_set(NRF_EGU_Type *  p_reg,
                                            nrf_egu_event_t event,
                                            uint8_t         channel)
 {
+    NRFX_ASSERT(p_reg);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
@@ -392,6 +405,7 @@ NRF_STATIC_INLINE void nrf_egu_publish_set(NRF_EGU_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_egu_publish_clear(NRF_EGU_Type *  p_reg,
                                              nrf_egu_event_t event)
 {
+    NRFX_ASSERT(p_reg);
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
 #endif // defined(DPPI_PRESENT)
