@@ -1413,12 +1413,19 @@ __IOM uint32_t CC[8];
     #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
 #endif // defined(NRF9230_XXAA)
 
+
+#ifdef NRF7140_XXAA
+
+#define NRF_GRAPHICS_AUXPLL_NS_BASE       0x4900B000UL
+#define NRF_GRAPHICS_AUXPLL_NS            ((NRF_AUXPLL_Type*) NRF_GRAPHICS_AUXPLL_NS_BASE)
+#define NRF_GRAPHICS_AUXPLL               NRF_GRAPHICS_AUXPLL_NS
+#define NRF_AUXPLL                        NRF_GRAPHICS_AUXPLL
+
 /*Lack of GPU and DISPC in MDK files*/
-#if defined(NRF_APPLICATION) &&  defined(NRF7140_XXAA)
+#ifdef NRF_APPLICATION
 #define NRF_GRAPHICS
 #define GPU_PRESENT
 #define DISPC_PRESENT
-
 
 /* =========================================================================================================================== */
 /* ================                                            GPU                                            ================ */
@@ -6319,9 +6326,9 @@ typedef struct {
 /* ================                                    TrustZone Remapping                                    ================ */
 /* =========================================================================================================================== */
 
-  #define NRF_GRAPHICS_GPU                        NRF_GRAPHICS_GPU_NS
-  #define NRF_GRAPHICS_DISPC                      NRF_GRAPHICS_DISPC_NS
-  #define NRF_GRAPHICS_GSI                        NRF_GRAPHICS_GSI_NS
+#define NRF_GRAPHICS_GPU                        NRF_GRAPHICS_GPU_NS
+#define NRF_GRAPHICS_DISPC                      NRF_GRAPHICS_DISPC_NS
+#define NRF_GRAPHICS_GSI                        NRF_GRAPHICS_GSI_NS
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
@@ -6333,7 +6340,8 @@ typedef struct {
   #define NRF_GSI                                 NRF_GRAPHICS_GSI
 #endif
 
+#endif // && NRF_APPLICATION
 
-#endif // NRF7140_XXAA && NRF_APPLICATION
+#endif // NRF7140_XXAA
 
 #endif // MDK_FIXUPS_H__
