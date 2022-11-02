@@ -31,8 +31,10 @@
         // TODO: Establish numbers of DPPI_GROUP_NUM and DPPI_CH_NUM
         #define DPPI_CH_NUM 8
         #define DPPI_GROUP_NUM 1
+        #ifndef NRF_DPPIC
         // TODO: Add support for NRF_DPPIC00, NRF_DPPIC10, NRF_DPPIC20, NRF_DPPIC30
-         #define NRF_DPPIC NRF_DPPIC00
+            #define NRF_DPPIC NRF_DPPIC00
+        #endif
     #endif
 #endif
 
