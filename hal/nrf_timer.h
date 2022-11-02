@@ -146,7 +146,7 @@ extern "C" {
     #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width)      \
                 (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) || \
                 NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(LUMOS_XXAA)
     #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
            ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
         || ((p_reg == NRF_TIMER20) && TIMER_BIT_WIDTH_MAX(20, bit_width)) \

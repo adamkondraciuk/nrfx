@@ -7,6 +7,10 @@
 #endif
 
 #if defined(MOONLIGHT_XXAA)
+#define LUMOS_XXAA 1
+#endif
+
+#if defined(LUMOS_XXAA)
     #if defined(NRF_TRUSTZONE_NONSECURE)
         /** @brief Fixup for the GRTC IRQn lines. */
         #define GRTC_IRQn       GRTC_0_IRQn
@@ -57,13 +61,13 @@
     #endif
 #endif
 
-#if defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA)
+#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
 
 typedef NRF_DOMAINS_t nrf_domain_t;
 
 #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
-#endif /* defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA) */
+#endif /* defined(HALTIUM_XXAA) || defined(LUMOS_XXAA) */
 
 #if defined(HALTIUM_XXAA)
 
@@ -1211,7 +1215,7 @@ typedef struct {
 
 #endif // defined(HALTIUM_XXAA)
 
-#if defined(MOONLIGHT_XXAA)
+#if defined(LUMOS_XXAA)
 
 /* TAMPC @Bit 13 : Reset due to TAMPC detecting illegal tampering of the device */
   #define RESET_RESETREAS_TAMPC_Pos (13UL)             /*!< Position of TAMPC field.                                           */
