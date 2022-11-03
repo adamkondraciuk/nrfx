@@ -1223,6 +1223,164 @@ typedef struct {
   #define RESET_RESETREAS_VMON_NotDetected (0x0UL)    /*!< Not detected                                                        */
   #define RESET_RESETREAS_VMON_Detected (0x1UL)       /*!< Detected                                                            */
 
+/*
+ * TIMER10 has 8 CC channels
+ */
+typedef struct {
+__OM uint32_t TASKS_START;
+__OM uint32_t TASKS_STOP;
+__OM uint32_t TASKS_COUNT;
+__OM uint32_t TASKS_CLEAR;
+__OM uint32_t TASKS_SHUTDOWN;
+__IM uint32_t RESERVED[11];
+__OM uint32_t TASKS_CAPTURE[8];
+__IM uint32_t RESERVED1[10];
+__IOM uint32_t SUBSCRIBE_START;
+__IOM uint32_t SUBSCRIBE_STOP;
+__IOM uint32_t SUBSCRIBE_COUNT;
+__IOM uint32_t SUBSCRIBE_CLEAR;
+__IOM uint32_t SUBSCRIBE_SHUTDOWN;
+__IM uint32_t RESERVED2[11];
+__IOM uint32_t SUBSCRIBE_CAPTURE[8];
+__IM uint32_t RESERVED3[26];
+__IOM uint32_t EVENTS_COMPARE[8];
+__IM uint32_t RESERVED4[26];
+__IOM uint32_t PUBLISH_COMPARE[8];
+__IM uint32_t RESERVED5[10];
+__IOM uint32_t SHORTS;
+__IM uint32_t RESERVED6[63];
+__IOM uint32_t INTEN;
+__IOM uint32_t INTENSET;
+__IOM uint32_t INTENCLR;
+__IM uint32_t RESERVED7[61];
+__IM uint32_t STATUS;
+__IM uint32_t RESERVED8[63];
+__IOM uint32_t MULTITIMERENABLE;
+__IOM uint32_t MODE;
+__IOM uint32_t BITMODE;
+__IM uint32_t RESERVED9;
+__IOM uint32_t PRESCALER;
+__IOM uint32_t ONESHOTEN[8];
+__IM uint32_t RESERVED10[5];
+__IOM uint32_t CC[8];
+} NRF_TIMER_Type_fixed;
+
+#if defined(NRF_TIMER10_S)
+#undef NRF_TIMER10_S
+#define NRF_TIMER10_S ((NRF_TIMER_Type_fixed*) NRF_TIMER10_S_BASE)
+#endif
+
+#if defined(NRF_TIMER20_S)
+#undef NRF_TIMER20_S
+#define NRF_TIMER20_S ((NRF_TIMER_Type_fixed*) NRF_TIMER20_S_BASE)
+#endif
+
+#if defined(NRF_TIMER21_S)
+#undef NRF_TIMER21_S
+#define NRF_TIMER21_S ((NRF_TIMER_Type_fixed*) NRF_TIMER21_S_BASE)
+#endif
+
+#if defined(NRF_TIMER22_S)
+#undef NRF_TIMER22_S
+#define NRF_TIMER22_S ((NRF_TIMER_Type_fixed*) NRF_TIMER22_S_BASE)
+#endif
+
+#if defined(NRF_TIMER23_S)
+#undef NRF_TIMER23_S
+#define NRF_TIMER23_S ((NRF_TIMER_Type_fixed*) NRF_TIMER23_S_BASE)
+#endif
+
+#if defined(NRF_TIMER24_S)
+#undef NRF_TIMER24_S
+#define NRF_TIMER24_S ((NRF_TIMER_Type_fixed*) NRF_TIMER24_S_BASE)
+#endif
+
+#define NRF_TIMER_Type NRF_TIMER_Type_fixed
+
+/* COMPARE6_CLEAR @Bit 6 : Shortcut between event COMPARE[6] and task CLEAR */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Pos (6UL)      /*!< Position of COMPARE6_CLEAR field.                                    */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Msk (0x1UL << TIMER_SHORTS_COMPARE6_CLEAR_Pos) /*!< Bit mask of COMPARE6_CLEAR field.    */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Min (0x0UL)    /*!< Min enumerator value of COMPARE6_CLEAR field.                        */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Max (0x1UL)    /*!< Max enumerator value of COMPARE6_CLEAR field.                        */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Disabled (0x0UL) /*!< Disable shortcut                                                   */
+  #define TIMER_SHORTS_COMPARE6_CLEAR_Enabled (0x1UL) /*!< Enable shortcut                                                     */
+
+/* COMPARE7_CLEAR @Bit 7 : Shortcut between event COMPARE[7] and task CLEAR */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Pos (7UL)      /*!< Position of COMPARE7_CLEAR field.                                    */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Msk (0x1UL << TIMER_SHORTS_COMPARE7_CLEAR_Pos) /*!< Bit mask of COMPARE7_CLEAR field.    */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Min (0x0UL)    /*!< Min enumerator value of COMPARE7_CLEAR field.                        */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Max (0x1UL)    /*!< Max enumerator value of COMPARE7_CLEAR field.                        */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Disabled (0x0UL) /*!< Disable shortcut                                                   */
+  #define TIMER_SHORTS_COMPARE7_CLEAR_Enabled (0x1UL) /*!< Enable shortcut                                                     */
+
+/* COMPARE6_STOP @Bit 22 : Shortcut between event COMPARE[6] and task STOP */
+  #define TIMER_SHORTS_COMPARE6_STOP_Pos (22UL)      /*!< Position of COMPARE6_STOP field.                                     */
+  #define TIMER_SHORTS_COMPARE6_STOP_Msk (0x1UL << TIMER_SHORTS_COMPARE6_STOP_Pos) /*!< Bit mask of COMPARE6_STOP field.       */
+  #define TIMER_SHORTS_COMPARE6_STOP_Min (0x0UL)     /*!< Min enumerator value of COMPARE6_STOP field.                         */
+  #define TIMER_SHORTS_COMPARE6_STOP_Max (0x1UL)     /*!< Max enumerator value of COMPARE6_STOP field.                         */
+  #define TIMER_SHORTS_COMPARE6_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                    */
+  #define TIMER_SHORTS_COMPARE6_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+
+/* COMPARE7_STOP @Bit 23 : Shortcut between event COMPARE[7] and task STOP */
+  #define TIMER_SHORTS_COMPARE7_STOP_Pos (23UL)      /*!< Position of COMPARE7_STOP field.                                     */
+  #define TIMER_SHORTS_COMPARE7_STOP_Msk (0x1UL << TIMER_SHORTS_COMPARE7_STOP_Pos) /*!< Bit mask of COMPARE7_STOP field.       */
+  #define TIMER_SHORTS_COMPARE7_STOP_Min (0x0UL)     /*!< Min enumerator value of COMPARE7_STOP field.                         */
+  #define TIMER_SHORTS_COMPARE7_STOP_Max (0x1UL)     /*!< Max enumerator value of COMPARE7_STOP field.                         */
+  #define TIMER_SHORTS_COMPARE7_STOP_Disabled (0x0UL) /*!< Disable shortcut                                                    */
+  #define TIMER_SHORTS_COMPARE7_STOP_Enabled (0x1UL) /*!< Enable shortcut                                                      */
+
+/* COMPARE6 @Bit 22 : Enable or disable interrupt for event COMPARE[6] */
+  #define TIMER_INTEN_COMPARE6_Pos (22UL)            /*!< Position of COMPARE6 field.                                          */
+  #define TIMER_INTEN_COMPARE6_Msk (0x1UL << TIMER_INTEN_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                        */
+  #define TIMER_INTEN_COMPARE6_Min (0x0UL)           /*!< Min enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTEN_COMPARE6_Max (0x1UL)           /*!< Max enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTEN_COMPARE6_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define TIMER_INTEN_COMPARE6_Enabled (0x1UL)       /*!< Enable                                                               */
+
+/* COMPARE7 @Bit 23 : Enable or disable interrupt for event COMPARE[7] */
+  #define TIMER_INTEN_COMPARE7_Pos (23UL)            /*!< Position of COMPARE7 field.                                          */
+  #define TIMER_INTEN_COMPARE7_Msk (0x1UL << TIMER_INTEN_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                        */
+  #define TIMER_INTEN_COMPARE7_Min (0x0UL)           /*!< Min enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTEN_COMPARE7_Max (0x1UL)           /*!< Max enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTEN_COMPARE7_Disabled (0x0UL)      /*!< Disable                                                              */
+  #define TIMER_INTEN_COMPARE7_Enabled (0x1UL)       /*!< Enable                                                               */
+
+/* COMPARE6 @Bit 22 : Write '1' to enable interrupt for event COMPARE[6] */
+  #define TIMER_INTENSET_COMPARE6_Pos (22UL)         /*!< Position of COMPARE6 field.                                          */
+  #define TIMER_INTENSET_COMPARE6_Msk (0x1UL << TIMER_INTENSET_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
+  #define TIMER_INTENSET_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTENSET_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTENSET_COMPARE6_Set (0x1UL)        /*!< Enable                                                               */
+  #define TIMER_INTENSET_COMPARE6_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define TIMER_INTENSET_COMPARE6_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* COMPARE7 @Bit 23 : Write '1' to enable interrupt for event COMPARE[7] */
+  #define TIMER_INTENSET_COMPARE7_Pos (23UL)         /*!< Position of COMPARE7 field.                                          */
+  #define TIMER_INTENSET_COMPARE7_Msk (0x1UL << TIMER_INTENSET_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
+  #define TIMER_INTENSET_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTENSET_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTENSET_COMPARE7_Set (0x1UL)        /*!< Enable                                                               */
+  #define TIMER_INTENSET_COMPARE7_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define TIMER_INTENSET_COMPARE7_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* COMPARE6 @Bit 22 : Write '1' to disable interrupt for event COMPARE[6] */
+  #define TIMER_INTENCLR_COMPARE6_Pos (22UL)         /*!< Position of COMPARE6 field.                                          */
+  #define TIMER_INTENCLR_COMPARE6_Msk (0x1UL << TIMER_INTENCLR_COMPARE6_Pos) /*!< Bit mask of COMPARE6 field.                  */
+  #define TIMER_INTENCLR_COMPARE6_Min (0x0UL)        /*!< Min enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTENCLR_COMPARE6_Max (0x1UL)        /*!< Max enumerator value of COMPARE6 field.                              */
+  #define TIMER_INTENCLR_COMPARE6_Clear (0x1UL)      /*!< Disable                                                              */
+  #define TIMER_INTENCLR_COMPARE6_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define TIMER_INTENCLR_COMPARE6_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
+/* COMPARE7 @Bit 23 : Write '1' to disable interrupt for event COMPARE[7] */
+  #define TIMER_INTENCLR_COMPARE7_Pos (23UL)         /*!< Position of COMPARE7 field.                                          */
+  #define TIMER_INTENCLR_COMPARE7_Msk (0x1UL << TIMER_INTENCLR_COMPARE7_Pos) /*!< Bit mask of COMPARE7 field.                  */
+  #define TIMER_INTENCLR_COMPARE7_Min (0x0UL)        /*!< Min enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTENCLR_COMPARE7_Max (0x1UL)        /*!< Max enumerator value of COMPARE7 field.                              */
+  #define TIMER_INTENCLR_COMPARE7_Clear (0x1UL)      /*!< Disable                                                              */
+  #define TIMER_INTENCLR_COMPARE7_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
+  #define TIMER_INTENCLR_COMPARE7_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
+
 #endif
 
 #if defined(NRF9230_XXAA)

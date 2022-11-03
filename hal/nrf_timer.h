@@ -146,7 +146,15 @@ extern "C" {
     #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width)      \
                 (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) || \
                 NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
-#else // defined(HALTIUM_XXAA)
+#elif defined(MOONLIGHT_XXAA)
+    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
+           ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
+        || ((p_reg == NRF_TIMER20) && TIMER_BIT_WIDTH_MAX(20, bit_width)) \
+        || ((p_reg == NRF_TIMER21) && TIMER_BIT_WIDTH_MAX(21, bit_width)) \
+        || ((p_reg == NRF_TIMER22) && TIMER_BIT_WIDTH_MAX(22, bit_width)) \
+        || ((p_reg == NRF_TIMER23) && TIMER_BIT_WIDTH_MAX(23, bit_width)) \
+        || ((p_reg == NRF_TIMER24) && TIMER_BIT_WIDTH_MAX(24, bit_width)))
+#else
     #if (TIMER_COUNT == 3) || defined(__NRFX_DOXYGEN__)
         #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
                ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width))   \
@@ -168,7 +176,7 @@ extern "C" {
     #else
         #error "Not supported timer count"
     #endif
-#endif // defined(HALTIUM_XXAA)
+#endif
 
 /**
  * @brief Macros for checking whether the specified instance represents high-speed (320 MHz),
