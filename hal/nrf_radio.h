@@ -351,6 +351,12 @@ typedef enum
 /** @brief Types of RADIO TX power. */
 typedef enum
 {
+#if defined(RADIO_TXPOWER_TXPOWER_Pos10dBm) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_TXPOWER_POS10DBM = RADIO_TXPOWER_TXPOWER_Pos10dBm, /**< 10 dBm. */
+#endif
+#if defined(RADIO_TXPOWER_TXPOWER_Pos9dBm) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_TXPOWER_POS9DBM  = RADIO_TXPOWER_TXPOWER_Pos9dBm,  /**< 9 dBm. */
+#endif
 #if defined(RADIO_TXPOWER_TXPOWER_Pos8dBm) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_TXPOWER_POS8DBM  = RADIO_TXPOWER_TXPOWER_Pos8dBm,  /**< 8 dBm. */
 #endif
@@ -371,6 +377,9 @@ typedef enum
 #endif
 #if defined(RADIO_TXPOWER_TXPOWER_Pos2dBm) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_TXPOWER_POS2DBM  = RADIO_TXPOWER_TXPOWER_Pos2dBm,  /**< 2 dBm. */
+#endif
+#if defined(RADIO_TXPOWER_TXPOWER_Pos1dBm) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_TXPOWER_POS1DBM  = RADIO_TXPOWER_TXPOWER_Pos1dBm,  /**< 1 dBm. */
 #endif
     NRF_RADIO_TXPOWER_0DBM     = RADIO_TXPOWER_TXPOWER_0dBm,     /**< 0 dBm. */
 #if defined(RADIO_TXPOWER_TXPOWER_Neg1dBm) || defined(__NRFX_DOXYGEN__)
@@ -400,6 +409,9 @@ typedef enum
 #if defined(RADIO_TXPOWER_TXPOWER_Neg40dBm) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_TXPOWER_NEG40DBM = RADIO_TXPOWER_TXPOWER_Neg40dBm, /**< -40 dBm. */
 #endif
+#if defined(RADIO_TXPOWER_TXPOWER_Neg70dBm) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_TXPOWER_NEG70DBM = RADIO_TXPOWER_TXPOWER_Neg70dBm, /**< -70 dBm. */
+#endif
 } nrf_radio_txpower_t;
 
 /** @brief Types of RADIO modes (data rate and modulation). */
@@ -409,6 +421,12 @@ typedef enum
     NRF_RADIO_MODE_NRF_2MBIT          = RADIO_MODE_MODE_Nrf_2Mbit,          /**< 2Mbit/s Nordic proprietary radio mode. */
 #if defined(RADIO_MODE_MODE_Nrf_250Kbit) || defined(__NRFX_DOXYGEN__)
     NRF_RADIO_MODE_NRF_250KBIT        = RADIO_MODE_MODE_Nrf_250Kbit,        /**< 250Kbit/s Nordic proprietary radio mode. */
+#endif
+#if defined(RADIO_MODE_MODE_Nrf_4Mbit0_5) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_MODE_NRF_4MBIT_H_0_5    = RADIO_MODE_MODE_Nrf_4Mbit0_5,       /*!< 4Mbit/s Nordic proprietary radio mode (BT=0.5/h=0.5). */
+#endif
+#if defined(RADIO_MODE_MODE_Nrf_4Mbit0_25) || defined(__NRFX_DOXYGEN__)
+    NRF_RADIO_MODE_NRF_4MBIT_H_0_25   = RADIO_MODE_MODE_Nrf_4Mbit0_25,      /*!< 4Mbit/s Nordic proprietary radio mode (BT=0.5/h=0.25). */
 #endif
     NRF_RADIO_MODE_BLE_1MBIT          = RADIO_MODE_MODE_Ble_1Mbit,          /**< 1 Mbit/s Bluetooth Low Energy. */
 #if defined(RADIO_MODE_MODE_Ble_2Mbit) || defined(__NRFX_DOXYGEN__)
@@ -584,6 +602,9 @@ typedef struct
     nrf_radio_dfectrl_sample_spacing_t spacing_ref;    /**< Interval between samples in the reference period. */
     nrf_radio_dfectrl_sample_type_t    sample_type;    /**< Indicates whether to sample I/Q or magnitude/phase. */
     nrf_radio_dfectrl_sample_spacing_t sample_spacing; /**< Interval between samples in the switching period. */
+#if defined(RADIO_DFECTRL1_REPEATPATTERN_Msk)
+    uint8_t                            repeat_pattern; /**< Number of times antenna pattern should be repeated. */
+#endif
     uint8_t                            gain_steps;     /**< Number of gain steps lowering the total gain at the start of CTE . */
     int16_t                            switch_offset;  /**< Signed value offset after the end of the CRC before starting switching expressed in 16 Mhz cycles. */
     int16_t                            sample_offset;  /**< Signed value offset before starting sampling expressed in 16 Mhz cycles
@@ -1474,6 +1495,19 @@ NRF_STATIC_INLINE void nrf_radio_dfe_buffer_set(NRF_RADIO_Type * p_reg,
  * @retval Amount of samples.
  */
 NRF_STATIC_INLINE uint32_t nrf_radio_dfe_amount_get(NRF_RADIO_Type const * p_reg);
+
+#if defined(RADIO_DFEPACKET_CURRENTAMOUNT_AMOUNT_Msk)
+/**
+ * @brief Function for getting the number of bytes transferred in the current transaction.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Number of bytes.
+ */
+NRF_STATIC_INLINE uint32_t nrf_radio_dfe_current_amount_get(NRF_RADIO_Type const * p_reg);
+
+#endif
+
 #endif
 
 #ifndef NRF_DECLARE_ONLY
@@ -2087,6 +2121,10 @@ NRF_STATIC_INLINE void nrf_radio_dfectrl_configure(NRF_RADIO_Type *             
                        ((uint32_t)p_config->spacing_ref << RADIO_DFECTRL1_TSAMPLESPACINGREF_Pos) |
                        ((uint32_t)p_config->sample_type << RADIO_DFECTRL1_SAMPLETYPE_Pos) |
                        ((uint32_t)p_config->sample_spacing << RADIO_DFECTRL1_TSAMPLESPACING_Pos) |
+#if defined(RADIO_DFECTRL1_REPEATPATTERN_Msk)
+                       (((uint32_t)p_config->repeat_pattern << RADIO_DFECTRL1_REPEATPATTERN_Pos) &
+                            RADIO_DFECTRL1_REPEATPATTERN_Msk) |
+#endif
                        (((uint32_t)p_config->gain_steps << RADIO_DFECTRL1_AGCBACKOFFGAIN_Pos) &
                             RADIO_DFECTRL1_AGCBACKOFFGAIN_Msk));
 
@@ -2148,6 +2186,14 @@ NRF_STATIC_INLINE uint32_t nrf_radio_dfe_amount_get(NRF_RADIO_Type const * p_reg
 {
     return p_reg->DFEPACKET.AMOUNT;
 }
+
+#if defined(RADIO_DFEPACKET_CURRENTAMOUNT_AMOUNT_Msk)
+NRF_STATIC_INLINE uint32_t nrf_radio_dfe_current_amount_get(NRF_RADIO_Type const * p_reg)
+{
+    return p_reg->DFEPACKET.CURRENTAMOUNT;
+}
+#endif
+
 #endif
 
 #endif // NRF_DECLARE_ONLY
