@@ -49,6 +49,12 @@
             #define NRF_DPPIC NRF_DPPIC00
         #endif
     #endif
+    #if defined(CCM_PRESENT)
+        #define EASYVDMA_PRESENT
+        #define VDMADESCRIPTOR_CONFIG_CNT_Pos (0UL)        /*!< Position of CNT field.                                               */
+        #define VDMADESCRIPTOR_CONFIG_CNT_Msk (0xFFFFFFUL << VDMADESCRIPTOR_CONFIG_CNT_Pos) /*!< Bit mask of CNT field.              */
+        #define VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos (24UL) /*!< Position of ATTRIBUTE field.                                         */
+    #endif
 #endif
 
 #if defined(HALTIUM_XXAA) || defined(MOONLIGHT_XXAA)
