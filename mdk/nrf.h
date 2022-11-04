@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   46 
+#define MDK_MINOR_VERSION   51 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -381,25 +381,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "lilium.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+    #endif
 
 #elif defined (LILIUMFP1_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "liliumfp1.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
     #endif
 
 #elif defined (LILIUMSOC1_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "liliumsoc1.h"
     #endif
-
-#elif defined (HALTIUM_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "haltium.h"
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
     #endif
     
 #elif defined (MOONLIGHT_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "moonlight.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
     #endif
 
 #elif defined (NRF9160_XXAA)
@@ -428,10 +435,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #if !defined(EXCLUDE_HEADER)
         #include "nrf9230.h"
     #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
+    #endif
 
 #elif defined (NRF7140_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf7140.h"
+    #endif
+    #if !defined(EXCLUDE_PORTABILITY)
+        #include "haltium_name_change.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."
