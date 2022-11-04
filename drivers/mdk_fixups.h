@@ -1214,6 +1214,7 @@ typedef struct {
 #endif
 
 #if defined(NRF9230_XXAA)
+    #define GRTC_SYSCOUNTER_COUNT 16
     // Old HFXO modes are not supported
     #ifdef BICR_HFXO_CONFIG_MODE_Pierce
         #undef BICR_HFXO_CONFIG_MODE_Pierce
