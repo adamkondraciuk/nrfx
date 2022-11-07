@@ -19,7 +19,7 @@
         #define nrfx_gpiote30_irq_handler GPIOTE30_0_IRQHandler
     #else
         /* todo: NRF_GRTC_IRQ_GROUP in IPS for MOONLIGHT is not defined yet. Should be checked and verified in future. */
-        #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)    
+        #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
             #if defined(NRF_APPLICATION)
                 #define NRF_GRTC_IRQ_GROUP 2
             #else
@@ -1216,6 +1216,32 @@ typedef struct {
 #define MRAMC_CONFIGNVR_PAGE_Lock_LockEnabled  MRAMC_CONFIGNVR_PAGE_LOCK_LockEnabled
 #endif
 
+#define VREG1V0_DFT_DTB0CONFIG_SELMUX_Spare0 3
+
+#define VREG1V0_DFT_TCFG_VREFTIMERREQ_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_RFRENDCRITERIA_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_LPCANCELREQ_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_MODELPREQ_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_MODEULPRREQ_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_PWRUPIBPP_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_PWRUPLP_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_PWRUPHP_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_PWRUPIBPSR_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_TCFGENABLE_Enabled (0x1UL)
+#define VREG1V0_DFT_TCFG_REFRESHCMPCLK_Enabled (0x1UL)
+
+#define VREG1V0_DFT_TCFG_VREFTIMERREQ_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_RFRENDCRITERIA_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_LPCANCELREQ_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_MODELPREQ_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_MODEULPRREQ_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_PWRUPIBPP_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_PWRUPLP_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_PWRUPHP_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_PWRUPIBPSR_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_TCFGENABLE_Disabled (0x0UL)
+#define VREG1V0_DFT_TCFG_REFRESHCMPCLK_Disabled (0x0UL)
+
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(LUMOS_XXAA)
@@ -1466,22 +1492,22 @@ typedef struct {
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                        */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Msk (0xFUL << GPU_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos) /*!< Bit
-                                                                            mask of CLOCKFORCINGPRE field.*/                      
+                                                                            mask of CLOCKFORCINGPRE field.*/
 
 /* DOFORCECLOCKPRE @Bit 7 : DOFORCECLOCKPRE */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos (7UL) /*!< Position of DOFORCECLOCKPRE field.                        */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Msk (0x1UL << GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos) /*!< Bit
-                                                                            mask of DOFORCECLOCKPRE field.*/                      
+                                                                            mask of DOFORCECLOCKPRE field.*/
 
 /* POWERFORCINGPRE @Bits 8..9 : POWERFORCINGPRE */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Pos (8UL) /*!< Position of POWERFORCINGPRE field.                        */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Msk (0x3UL << GPU_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Pos) /*!< Bit
-                                                                            mask of POWERFORCINGPRE field.*/                      
+                                                                            mask of POWERFORCINGPRE field.*/
 
 /* DOFORCEPOWERPRE @Bit 15 : DOFORCEPOWERPRE */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos (15UL) /*!< Position of DOFORCEPOWERPRE field.                       */
   #define GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Msk (0x1UL << GPU_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos) /*!< Bit
-                                                                            mask of DOFORCEPOWERPRE field.*/                      
+                                                                            mask of DOFORCEPOWERPRE field.*/
 
 
 
@@ -1498,7 +1524,7 @@ typedef struct {
   __IOM uint32_t  TEX1FSTRIDE;                       /*!< (@ 0x00000014) Image 1 Mode and Stride                               */
   __IOM uint32_t  TEX1RESXY;                         /*!< (@ 0x00000018) Image 1 Resolution                                    */
   __IOM uint32_t  TEXCOLOR;                          /*!< (@ 0x0000001C) Texture Maps default color (for use with Luminance and
-                                                                         Alpha-only color formats)*/                              
+                                                                         Alpha-only color formats)*/
   __IOM uint32_t  TEX2BASE;                          /*!< (@ 0x00000020) Base address of drawing surface 2.                    */
   __IOM uint32_t  TEX2FSTRIDE;                       /*!< (@ 0x00000024) Image 2 Mode and Stride                               */
   __IOM uint32_t  TEX2RESXY;                         /*!< (@ 0x00000028) Image 2 Resolution                                    */
@@ -1513,28 +1539,28 @@ typedef struct {
   __IOM uint32_t  CGCMD;                             /*!< (@ 0x00000090) Enable Clock gating                                   */
   __IOM uint32_t  CGCTRL;                            /*!< (@ 0x00000094) Clock gating controller                               */
   __IOM uint32_t  DIRTYMIN;                          /*!< (@ 0x00000098) Read the Dirty_Min value. Resets dirty region to
-                                                                         resolution size on write function.*/                     
+                                                                         resolution size on write function.*/
   __IOM uint32_t  DIRTYMAX;                          /*!< (@ 0x0000009C) Read the Dirty_Max value                              */
   __IOM uint32_t  CONVCOEFRAB;                       /*!< (@ 0x000000A0) Specifies the YUV coefficients for Red color. Part one*/
   __IOM uint32_t  CONVCOEFRCD;                       /*!< (@ 0x000000A4) Specifies the YUV coefficients for Red color. Part two*/
   __IOM uint32_t  CONVCOEFGAB;                       /*!< (@ 0x000000A8) Specifies the YUV coefficients for Green color. Part
-                                                                         one*/                                                    
+                                                                         one*/
   __IOM uint32_t  CONVCOEFGCD;                       /*!< (@ 0x000000AC) Specifies the YUV coefficients for Gren color. Part
-                                                                         two*/                                                    
+                                                                         two*/
   __IOM uint32_t  CONVCOEFBAB;                       /*!< (@ 0x000000B0) Specifies the YUV coefficients for Blue color. Part
-                                                                         one*/                                                    
+                                                                         one*/
   __IOM uint32_t  CONVCOEFBCD;                       /*!< (@ 0x000000B4) Specifies the YUV coefficients for Blue color. Part
-                                                                         two*/                                                    
+                                                                         two*/
   __IOM uint32_t  CRCM0;                             /*!< (@ 0x000000B8) On read returns the CRC form Write Channel 0          */
   __IOM uint32_t  CRCM1;                             /*!< (@ 0x000000BC) On read returns the CRC form Write Channel 1          */
   __IOM uint32_t  BUSCTRL;                           /*!< (@ 0x000000C0) Indicates the value of the AWCACHE and the ARCACHE
-                                                                         signals of the AXI Bus Interface.*/                      
+                                                                         signals of the AXI Bus Interface.*/
   __IOM uint32_t  IMEMADDR;                          /*!< (@ 0x000000C4) Load shader instruction memory address. This register
-                                                                         can be auto incremented. Its contains*/                  
+                                                                         can be auto incremented. Its contains*/
   __IOM uint32_t  IMEMDATALOW;                       /*!< (@ 0x000000C8) The lower bits (31-0) of the 64-bit load shader
-                                                                         instruction memory data*/                                
+                                                                         instruction memory data*/
   __IOM uint32_t  IMEMDATAHIGH;                      /*!< (@ 0x000000CC) The higher bits (63-32) of the 64-bit load shader
-                                                                         instruction memory data*/                                
+                                                                         instruction memory data*/
   __IM  uint32_t  RESERVED4[5];
   __IOM uint32_t  FLUSHCTRL;                         /*!< (@ 0x000000E4) Controls the system flush                             */
   __IOM uint32_t  CMDSTATUS;                         /*!< (@ 0x000000E8) On read, returns internal CL processor status.        */
@@ -1545,60 +1571,60 @@ typedef struct {
   __IOM uint32_t  STATUS;                            /*!< (@ 0x000000FC) On read, returns GPUs status.                         */
   __IOM uint32_t  DRAWCMDNOHOLD;                     /*!< (@ 0x00000100) Rasterizer Command (e.g. draw triangle, rectangle etc)*/
   __IOM uint32_t  DRAWSTARTXY;                       /*!< (@ 0x00000104) Vertex 0 drawing primitive. This register is used only
-                                                                         for integer values. For greater accuracy*/               
+                                                                         for integer values. For greater accuracy*/
   __IOM uint32_t  DRAWENDXY;                         /*!< (@ 0x00000108) Vertex 1 drawing primitive. This register is used only
-                                                                         for integer values. For greater accuracy*/               
+                                                                         for integer values. For greater accuracy*/
   __IM  uint32_t  RESERVED5;
   __IOM uint32_t  CLIPMIN;                           /*!< (@ 0x00000110) Clipping Rectangle upper left vertex                  */
   __IOM uint32_t  CLIPMAX;                           /*!< (@ 0x00000114) Clipping Rectangle bottom right vertex                */
   __IOM uint32_t  MATMULT;                           /*!< (@ 0x00000118) Rasterizer matrix multiplication control. This register
-                                                                         is partially updated*/                                   
+                                                                         is partially updated*/
   __IOM uint32_t  CODEPTR;                           /*!< (@ 0x0000011C) Shader code pointer                                   */
   __IOM uint32_t  DRAWPT0X;                          /*!< (@ 0x00000120) X coordinate of vertex 0 drawing primitive. The value
-                                                                         is 16.16 fixed point.*/                                  
+                                                                         is 16.16 fixed point.*/
   __IOM uint32_t  DRAWPT0Y;                          /*!< (@ 0x00000124) Y coordinate of vertex 0 drawing primitive. The value
-                                                                         is 16.16 fixed point.*/                                  
+                                                                         is 16.16 fixed point.*/
   __IM  uint32_t  RESERVED6;
   __IOM uint32_t  DRAWCOLOR;                         /*!< (@ 0x0000012C) Rasterizer drawing color for filling primitives       */
   __IOM uint32_t  DRAWPT1X;                          /*!< (@ 0x00000130) X coordinate of vertex 1 drawing primitive. The value
-                                                                         is 16.16 fixed point.*/                                  
+                                                                         is 16.16 fixed point.*/
   __IOM uint32_t  DRAWPT1Y;                          /*!< (@ 0x00000134) Y coordinate of vertex 1 drawing primitive. The value
-                                                                         is 16.16 fixed point.*/                                  
+                                                                         is 16.16 fixed point.*/
   __IOM uint32_t  BYPASSADDR;                        /*!< (@ 0x00000138) Address of bypass mode of rasterizer setup access     */
   __IOM uint32_t  BYPASSDATA;                        /*!< (@ 0x0000013C) Data and enable of bypass mode of rasterizer          */
   __IOM uint32_t  DRAWPT2X;                          /*!< (@ 0x00000140) X coordinate of vertex 2 drawing primitive. The value
-                                                                         is 16.16 fixed point*/                                   
+                                                                         is 16.16 fixed point*/
   __IOM uint32_t  DRAWPT2Y;                          /*!< (@ 0x00000144) Y coordinate of vertex 2 drawing primitive. The value
-                                                                         is 16.16 fixed point*/                                   
+                                                                         is 16.16 fixed point*/
   __IOM uint32_t  CLID;                              /*!< (@ 0x00000148) Command List ID Key                                   */
   __IM  uint32_t  RESERVED7;
   __IOM uint32_t  DRAWPT3X;                          /*!< (@ 0x00000150) X coordinate of vertex 3 drawing primitive. The value
-                                                                         is 16.16 fixed point*/                                   
+                                                                         is 16.16 fixed point*/
   __IOM uint32_t  DRAWPT3Y;                          /*!< (@ 0x00000154) Y coordinate of vertex 3 drawing primitive. The value
-                                                                         is 16.16 fixed point*/                                   
+                                                                         is 16.16 fixed point*/
   __IM  uint32_t  RESERVED8[2];
   __IOM uint32_t  MM00;                              /*!< (@ 0x00000160) (0,0) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM01;                              /*!< (@ 0x00000164) (0,1) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM02;                              /*!< (@ 0x00000168) (0,2) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM10;                              /*!< (@ 0x0000016C) (1,0) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM11;                              /*!< (@ 0x00000170) (1,1) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM12;                              /*!< (@ 0x00000174) (1,2) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM20;                              /*!< (@ 0x00000178) (2,0) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM21;                              /*!< (@ 0x0000017C) (2,1) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  MM22;                              /*!< (@ 0x00000180) (2,2) matrix floating point element. On read return the
-                                                                         floating point value with the selected characteristics*/ 
+                                                                         floating point value with the selected characteristics*/
   __IOM uint32_t  DEPTHSTARTL;                       /*!< (@ 0x00000184) Depth value of the STARTXY pixel. This register defines
-                                                                         the*/                                                    
+                                                                         the*/
   __IOM uint32_t  DEPTHSTARTH;                       /*!< (@ 0x00000188) Depth value of the STARTXY pixel. This register defines
-                                                                         the*/                                                    
+                                                                         the*/
   __IOM uint32_t  DEPTHDXL;                          /*!< (@ 0x0000018C) For each step at x-axis, depth value is added.        */
   __IOM uint32_t  DEPTHDXH;                          /*!< (@ 0x00000190) For each step at x-axis, depth value is added.        */
   __IOM uint32_t  DEPTHDYL;                          /*!< (@ 0x00000194) For each step at y-axis, depth value is added.        */
@@ -1613,19 +1639,19 @@ typedef struct {
   __IOM uint32_t  ALFDX;                             /*!< (@ 0x000001B8) For each step at x-axis, Alpha (A) value is added.    */
   __IOM uint32_t  ALFDY;                             /*!< (@ 0x000001BC) For each step at y-axis, Alpha (A) value is added.    */
   __IOM uint32_t  REDINIT;                           /*!< (@ 0x000001C0) Red (R) value of the STARTXY pixel. The value is 16,16
-                                                                         fixed point*/                                            
+                                                                         fixed point*/
   __IOM uint32_t  GREINIT;                           /*!< (@ 0x000001C4) Green (G) value of the STARTXY pixel. The value is
-                                                                         16,16 fixed point*/                                      
+                                                                         16,16 fixed point*/
   __IOM uint32_t  BLUINIT;                           /*!< (@ 0x000001C8) Blue (B) value of the STARTXY pixel. The value is 16,16
-                                                                         fixed point*/                                            
+                                                                         fixed point*/
   __IOM uint32_t  ALFINIT;                           /*!< (@ 0x000001CC) Alpha (A) value of the STARTXY pixel. The value is
-                                                                         16,16 fixed point*/                                      
+                                                                         16,16 fixed point*/
   __IOM uint32_t  ROPBLENDERBLENDMODE;               /*!< (@ 0x000001D0) Blending Modes for different calculations between the
-                                                                         source*/                                                 
+                                                                         source*/
   __IOM uint32_t  ROPBLENDERDSTCKEY;                 /*!< (@ 0x000001D4) When Color Keying is enabled. The new pixel is written
-                                                                         in the Frame Buffer,*/                                   
+                                                                         in the Frame Buffer,*/
   __IOM uint32_t  ROPBLENDERCONSTCOLOR;              /*!< (@ 0x000001D8) Constant Color value which is used for blending when
-                                                                         the blending modes.*/                                    
+                                                                         the blending modes.*/
   __IOM uint32_t  IPVERSION;                         /*!< (@ 0x000001DC) Returns the configuration status                      */
   __IM  uint32_t  RESERVED10[3];
   __IOM uint32_t  IDREG;                             /*!< (@ 0x000001EC) GPU ID Register (fixed value)                         */
@@ -1634,13 +1660,13 @@ typedef struct {
   __IM  uint32_t  RESERVED11;
   __IOM uint32_t  CORESELECT;                        /*!< (@ 0x000001FC) Select which of the available cores will be active    */
   __IOM uint32_t  C0REG;                             /*!< (@ 0x00000200) A 32-bit integer RGBA value is stored in constant
-                                                                         register 0 for fragment calculations.*/                  
+                                                                         register 0 for fragment calculations.*/
   __IOM uint32_t  C1REG;                             /*!< (@ 0x00000204) A 32-bit integer RGBA value is stored in constant
-                                                                         register 1 for fragment calculations.*/                  
+                                                                         register 1 for fragment calculations.*/
   __IOM uint32_t  C2REG;                             /*!< (@ 0x00000208) A 32-bit integer RGBA value is stored in constant
-                                                                         register 2 for fragment calculations.*/                  
+                                                                         register 2 for fragment calculations.*/
   __IOM uint32_t  C3REG;                             /*!< (@ 0x0000020C) A 32-bit integer RGBA value is stored in constant
-                                                                         register 3 for fragment calculations.*/                  
+                                                                         register 3 for fragment calculations.*/
   __IM  uint32_t  RESERVED12[176];
   __IOM uint32_t  COORDMASK;                         /*!< (@ 0x000004D0) Inverted mask for rasterizer coordinates              */
   __IM  uint32_t  RESERVED13[13];
@@ -1649,24 +1675,24 @@ typedef struct {
   __IOM uint32_t  GAMMADATA;                         /*!< (@ 0x00000510) Specify the Gamma LUT data                            */
   __IM  uint32_t  RESERVED15[187];
   __IOM uint32_t  TEX0BASEL;                         /*!< (@ 0x00000800) Texture mapping registers of drawing surface 0.(low
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IOM uint32_t  TEX0BASEH;                         /*!< (@ 0x00000804) Texture mapping registers of drawing surface 0.(high
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IM  uint32_t  RESERVED16[2];
   __IOM uint32_t  TEX1BASEL;                         /*!< (@ 0x00000810) Texture mapping registers of drawing surface 1.(low
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IOM uint32_t  TEX1BASEH;                         /*!< (@ 0x00000814) Texture mapping registers of drawing surface 1.(high
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IM  uint32_t  RESERVED17[2];
   __IOM uint32_t  TEX2BASEL;                         /*!< (@ 0x00000820) Texture mapping registers of drawing surface 2.(low
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IOM uint32_t  TEX2BASEH;                         /*!< (@ 0x00000824) Texture mapping registers of drawing surface 2.(high
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IM  uint32_t  RESERVED18[2];
   __IOM uint32_t  TEX3BASEL;                         /*!< (@ 0x00000830) Texture mapping registers of drawing surface 3.(low
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IOM uint32_t  TEX3BASEH;                         /*!< (@ 0x00000834) Texture mapping registers of drawing surface 3.(high
-                                                                         bits)*/                                                  
+                                                                         bits)*/
   __IM  uint32_t  RESERVED19[2];
   __IOM uint32_t  CMDRINGSTOPL;                      /*!< (@ 0x00000840) Ring Buffers pointer Low bits.                        */
   __IOM uint32_t  CMDRINGSTOPH;                      /*!< (@ 0x00000844) Ring Buffers pointer High bits.                       */
@@ -1676,7 +1702,7 @@ typedef struct {
   __IOM uint32_t  IRQID;                             /*!< (@ 0x00000FF0) Signals an interrupt when written                     */
   __IOM uint32_t  GPFLAGS;                           /*!< (@ 0x00000FF4) Stop/Break the command list when debugging            */
   __IOM uint32_t  SYSINTERRUPT;                      /*!< (@ 0x00000FF8) On Read: Returns the SYSERROR_IRQ ID. On write: Clears
-                                                                         the SYSERROR_IRQ.*/                                      
+                                                                         the SYSERROR_IRQ.*/
   __IOM uint32_t  BUSERRORMASK;                      /*!< (@ 0x00000FFC) Sets the mask for the Buserror Interrupt.             */
 } NRF_GPU_CORE_Type;                                 /*!< Size = 4096 (0x1000)                                                 */
 
@@ -1694,7 +1720,7 @@ typedef struct {
 /* TEX0STRIDE @Bits 0..15 : Specifies the image stride distance in bytes from one scanline to another (signed) */
   #define GPU_CORE_TEX0FSTRIDE_TEX0STRIDE_Pos (0UL)  /*!< Position of TEX0STRIDE field.                                        */
   #define GPU_CORE_TEX0FSTRIDE_TEX0STRIDE_Msk (0xFFFFUL << GPU_CORE_TEX0FSTRIDE_TEX0STRIDE_Pos) /*!< Bit mask of TEX0STRIDE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEX0MODE @Bits 16..23 : Specifies the image mode */
   #define GPU_CORE_TEX0FSTRIDE_TEX0MODE_Pos (16UL)   /*!< Position of TEX0MODE field.                                          */
@@ -1703,7 +1729,7 @@ typedef struct {
 /* TEX0FORMAT @Bits 24..31 : Specifies the image format */
   #define GPU_CORE_TEX0FSTRIDE_TEX0FORMAT_Pos (24UL) /*!< Position of TEX0FORMAT field.                                        */
   #define GPU_CORE_TEX0FSTRIDE_TEX0FORMAT_Msk (0xFFUL << GPU_CORE_TEX0FSTRIDE_TEX0FORMAT_Pos) /*!< Bit mask of TEX0FORMAT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_TEX0RESXY: Image 0 Resolution */
@@ -1732,7 +1758,7 @@ typedef struct {
 /* TEX1STRIDE @Bits 0..15 : Specifies the image stride distance in bytes from one scanline to another (signed) */
   #define GPU_CORE_TEX1FSTRIDE_TEX1STRIDE_Pos (0UL)  /*!< Position of TEX1STRIDE field.                                        */
   #define GPU_CORE_TEX1FSTRIDE_TEX1STRIDE_Msk (0xFFFFUL << GPU_CORE_TEX1FSTRIDE_TEX1STRIDE_Pos) /*!< Bit mask of TEX1STRIDE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEX1MODE @Bits 16..23 : Specifies the image mode */
   #define GPU_CORE_TEX1FSTRIDE_TEX1MODE_Pos (16UL)   /*!< Position of TEX1MODE field.                                          */
@@ -1741,7 +1767,7 @@ typedef struct {
 /* TEX1FORMAT @Bits 24..31 : Specifies the image format */
   #define GPU_CORE_TEX1FSTRIDE_TEX1FORMAT_Pos (24UL) /*!< Position of TEX1FORMAT field.                                        */
   #define GPU_CORE_TEX1FSTRIDE_TEX1FORMAT_Msk (0xFFUL << GPU_CORE_TEX1FSTRIDE_TEX1FORMAT_Pos) /*!< Bit mask of TEX1FORMAT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_TEX1RESXY: Image 1 Resolution */
@@ -1766,17 +1792,17 @@ typedef struct {
 /* TEXCOLORGREEN @Bits 8..15 : Specifies the Green (G) value */
   #define GPU_CORE_TEXCOLOR_TEXCOLORGREEN_Pos (8UL)  /*!< Position of TEXCOLORGREEN field.                                     */
   #define GPU_CORE_TEXCOLOR_TEXCOLORGREEN_Msk (0xFFUL << GPU_CORE_TEXCOLOR_TEXCOLORGREEN_Pos) /*!< Bit mask of TEXCOLORGREEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEXCOLORBLUE @Bits 16..23 : Specifies the Blue (B) value */
   #define GPU_CORE_TEXCOLOR_TEXCOLORBLUE_Pos (16UL)  /*!< Position of TEXCOLORBLUE field.                                      */
   #define GPU_CORE_TEXCOLOR_TEXCOLORBLUE_Msk (0xFFUL << GPU_CORE_TEXCOLOR_TEXCOLORBLUE_Pos) /*!< Bit mask of TEXCOLORBLUE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEXCOLORALPHA @Bits 24..31 : Specifies the Alpha (A) value */
   #define GPU_CORE_TEXCOLOR_TEXCOLORALPHA_Pos (24UL) /*!< Position of TEXCOLORALPHA field.                                     */
   #define GPU_CORE_TEXCOLOR_TEXCOLORALPHA_Msk (0xFFUL << GPU_CORE_TEXCOLOR_TEXCOLORALPHA_Pos) /*!< Bit mask of TEXCOLORALPHA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_TEX2BASE: Base address of drawing surface 2. */
@@ -1793,7 +1819,7 @@ typedef struct {
 /* TEX2STRIDE @Bits 0..15 : Specifies the image stride distance in bytes from one scanline to another (signed) */
   #define GPU_CORE_TEX2FSTRIDE_TEX2STRIDE_Pos (0UL)  /*!< Position of TEX2STRIDE field.                                        */
   #define GPU_CORE_TEX2FSTRIDE_TEX2STRIDE_Msk (0xFFFFUL << GPU_CORE_TEX2FSTRIDE_TEX2STRIDE_Pos) /*!< Bit mask of TEX2STRIDE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEX2MODE @Bits 16..23 : Specifies the image mode */
   #define GPU_CORE_TEX2FSTRIDE_TEX2MODE_Pos (16UL)   /*!< Position of TEX2MODE field.                                          */
@@ -1802,7 +1828,7 @@ typedef struct {
 /* TEX2FORMAT @Bits 24..31 : Specifies the image format */
   #define GPU_CORE_TEX2FSTRIDE_TEX2FORMAT_Pos (24UL) /*!< Position of TEX2FORMAT field.                                        */
   #define GPU_CORE_TEX2FSTRIDE_TEX2FORMAT_Msk (0xFFUL << GPU_CORE_TEX2FSTRIDE_TEX2FORMAT_Pos) /*!< Bit mask of TEX2FORMAT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_TEX2RESXY: Image 2 Resolution */
@@ -1831,7 +1857,7 @@ typedef struct {
 /* TEX3STRIDE @Bits 0..15 : Specifies the image stride distance in bytes from one scanline to another (signed) */
   #define GPU_CORE_TEX3FSTRIDE_TEX3STRIDE_Pos (0UL)  /*!< Position of TEX3STRIDE field.                                        */
   #define GPU_CORE_TEX3FSTRIDE_TEX3STRIDE_Msk (0xFFFFUL << GPU_CORE_TEX3FSTRIDE_TEX3STRIDE_Pos) /*!< Bit mask of TEX3STRIDE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* TEX3MODE @Bits 16..23 : Specifies the image mode */
   #define GPU_CORE_TEX3FSTRIDE_TEX3MODE_Pos (16UL)   /*!< Position of TEX3MODE field.                                          */
@@ -1840,7 +1866,7 @@ typedef struct {
 /* TEX3FORMAT @Bits 24..31 : Specifies the image format */
   #define GPU_CORE_TEX3FSTRIDE_TEX3FORMAT_Pos (24UL) /*!< Position of TEX3FORMAT field.                                        */
   #define GPU_CORE_TEX3FSTRIDE_TEX3FORMAT_Msk (0xFFUL << GPU_CORE_TEX3FSTRIDE_TEX3FORMAT_Pos) /*!< Bit mask of TEX3FORMAT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_TEX3RESXY: Image 3 Resolution */
@@ -1861,7 +1887,7 @@ typedef struct {
 /* BREAKPOINT @Bits 0..31 : (unspecified) */
   #define GPU_CORE_BREAKPOINT_BREAKPOINT_Pos (0UL)   /*!< Position of BREAKPOINT field.                                        */
   #define GPU_CORE_BREAKPOINT_BREAKPOINT_Msk (0xFFFFFFFFUL << GPU_CORE_BREAKPOINT_BREAKPOINT_Pos) /*!< Bit mask of BREAKPOINT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_BREAKPOINTMASK: (unspecified) */
@@ -1870,7 +1896,7 @@ typedef struct {
 /* BREAKPOINTMASK @Bits 0..31 : (unspecified) */
   #define GPU_CORE_BREAKPOINTMASK_BREAKPOINTMASK_Pos (0UL) /*!< Position of BREAKPOINTMASK field.                              */
   #define GPU_CORE_BREAKPOINTMASK_BREAKPOINTMASK_Msk (0xFFFFFFFFUL << GPU_CORE_BREAKPOINTMASK_BREAKPOINTMASK_Pos) /*!< Bit mask
-                                                                            of BREAKPOINTMASK field.*/                            
+                                                                            of BREAKPOINTMASK field.*/
 
 
 /* GPU_CORE_CGCMD: Enable Clock gating */
@@ -1883,7 +1909,7 @@ typedef struct {
 /* CGCMDPOS01LEN30 @Bits 1..31 : Revered */
   #define GPU_CORE_CGCMD_CGCMDPOS01LEN30_Pos (1UL)   /*!< Position of CGCMDPOS01LEN30 field.                                   */
   #define GPU_CORE_CGCMD_CGCMDPOS01LEN30_Msk (0x7FFFFFFFUL << GPU_CORE_CGCMD_CGCMDPOS01LEN30_Pos) /*!< Bit mask of
-                                                                            CGCMDPOS01LEN30 field.*/                              
+                                                                            CGCMDPOS01LEN30 field.*/
 
 
 /* GPU_CORE_CGCTRL: Clock gating controller */
@@ -1900,7 +1926,7 @@ typedef struct {
 /* CGCTRLPOS02LEN01 @Bit 2 : Revered */
   #define GPU_CORE_CGCTRL_CGCTRLPOS02LEN01_Pos (2UL) /*!< Position of CGCTRLPOS02LEN01 field.                                  */
   #define GPU_CORE_CGCTRL_CGCTRLPOS02LEN01_Msk (0x1UL << GPU_CORE_CGCTRL_CGCTRLPOS02LEN01_Pos) /*!< Bit mask of CGCTRLPOS02LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CGCTRLROPC0 @Bit 3 : Disable clock gating for the Render Output Unit of core 0 */
   #define GPU_CORE_CGCTRL_CGCTRLROPC0_Pos (3UL)      /*!< Position of CGCTRLROPC0 field.                                       */
@@ -1925,7 +1951,7 @@ typedef struct {
 /* CGCTRLPOS08LEN03 @Bits 8..10 : Revered */
   #define GPU_CORE_CGCTRL_CGCTRLPOS08LEN03_Pos (8UL) /*!< Position of CGCTRLPOS08LEN03 field.                                  */
   #define GPU_CORE_CGCTRL_CGCTRLPOS08LEN03_Msk (0x7UL << GPU_CORE_CGCTRL_CGCTRLPOS08LEN03_Pos) /*!< Bit mask of CGCTRLPOS08LEN03
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CGCTRLPIPEC0 @Bit 11 : Disable clock gating for Core 0 Pipeline */
   #define GPU_CORE_CGCTRL_CGCTRLPIPEC0_Pos (11UL)    /*!< Position of CGCTRLPIPEC0 field.                                      */
@@ -2034,12 +2060,12 @@ typedef struct {
 /* CONVCOEFRA @Bits 0..15 : Specifies the YUV coefficients for Red color. Part A */
   #define GPU_CORE_CONVCOEFRAB_CONVCOEFRA_Pos (0UL)  /*!< Position of CONVCOEFRA field.                                        */
   #define GPU_CORE_CONVCOEFRAB_CONVCOEFRA_Msk (0xFFFFUL << GPU_CORE_CONVCOEFRAB_CONVCOEFRA_Pos) /*!< Bit mask of CONVCOEFRA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFRB @Bits 16..31 : Specifies the YUV coefficients for Red color. Part B */
   #define GPU_CORE_CONVCOEFRAB_CONVCOEFRB_Pos (16UL) /*!< Position of CONVCOEFRB field.                                        */
   #define GPU_CORE_CONVCOEFRAB_CONVCOEFRB_Msk (0xFFFFUL << GPU_CORE_CONVCOEFRAB_CONVCOEFRB_Pos) /*!< Bit mask of CONVCOEFRB
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CONVCOEFRCD: Specifies the YUV coefficients for Red color. Part two */
@@ -2048,12 +2074,12 @@ typedef struct {
 /* CONVCOEFRC @Bits 0..15 : Specifies the YUV coefficients for Red color. Part C */
   #define GPU_CORE_CONVCOEFRCD_CONVCOEFRC_Pos (0UL)  /*!< Position of CONVCOEFRC field.                                        */
   #define GPU_CORE_CONVCOEFRCD_CONVCOEFRC_Msk (0xFFFFUL << GPU_CORE_CONVCOEFRCD_CONVCOEFRC_Pos) /*!< Bit mask of CONVCOEFRC
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFRD @Bits 16..31 : Specifies the YUV coefficients for Red color. Part D */
   #define GPU_CORE_CONVCOEFRCD_CONVCOEFRD_Pos (16UL) /*!< Position of CONVCOEFRD field.                                        */
   #define GPU_CORE_CONVCOEFRCD_CONVCOEFRD_Msk (0xFFFFUL << GPU_CORE_CONVCOEFRCD_CONVCOEFRD_Pos) /*!< Bit mask of CONVCOEFRD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CONVCOEFGAB: Specifies the YUV coefficients for Green color. Part one */
@@ -2062,12 +2088,12 @@ typedef struct {
 /* CONVCOEFGA @Bits 0..15 : Specifies the YUV coefficients for Green color. Part A */
   #define GPU_CORE_CONVCOEFGAB_CONVCOEFGA_Pos (0UL)  /*!< Position of CONVCOEFGA field.                                        */
   #define GPU_CORE_CONVCOEFGAB_CONVCOEFGA_Msk (0xFFFFUL << GPU_CORE_CONVCOEFGAB_CONVCOEFGA_Pos) /*!< Bit mask of CONVCOEFGA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFGB @Bits 16..31 : Specifies the YUV coefficients for Green color. Part B */
   #define GPU_CORE_CONVCOEFGAB_CONVCOEFGB_Pos (16UL) /*!< Position of CONVCOEFGB field.                                        */
   #define GPU_CORE_CONVCOEFGAB_CONVCOEFGB_Msk (0xFFFFUL << GPU_CORE_CONVCOEFGAB_CONVCOEFGB_Pos) /*!< Bit mask of CONVCOEFGB
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CONVCOEFGCD: Specifies the YUV coefficients for Gren color. Part two */
@@ -2076,12 +2102,12 @@ typedef struct {
 /* CONVCOEFGC @Bits 0..15 : Specifies the YUV coefficients for Green color. Part C */
   #define GPU_CORE_CONVCOEFGCD_CONVCOEFGC_Pos (0UL)  /*!< Position of CONVCOEFGC field.                                        */
   #define GPU_CORE_CONVCOEFGCD_CONVCOEFGC_Msk (0xFFFFUL << GPU_CORE_CONVCOEFGCD_CONVCOEFGC_Pos) /*!< Bit mask of CONVCOEFGC
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFGD @Bits 16..31 : Specifies the YUV coefficients for Green color. Part D */
   #define GPU_CORE_CONVCOEFGCD_CONVCOEFGD_Pos (16UL) /*!< Position of CONVCOEFGD field.                                        */
   #define GPU_CORE_CONVCOEFGCD_CONVCOEFGD_Msk (0xFFFFUL << GPU_CORE_CONVCOEFGCD_CONVCOEFGD_Pos) /*!< Bit mask of CONVCOEFGD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CONVCOEFBAB: Specifies the YUV coefficients for Blue color. Part one */
@@ -2090,12 +2116,12 @@ typedef struct {
 /* CONVCOEFBA @Bits 0..15 : Specifies the YUV coefficients for Blue color. Part A */
   #define GPU_CORE_CONVCOEFBAB_CONVCOEFBA_Pos (0UL)  /*!< Position of CONVCOEFBA field.                                        */
   #define GPU_CORE_CONVCOEFBAB_CONVCOEFBA_Msk (0xFFFFUL << GPU_CORE_CONVCOEFBAB_CONVCOEFBA_Pos) /*!< Bit mask of CONVCOEFBA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFBB @Bits 16..31 : Specifies the YUV coefficients for Blue color. Part B */
   #define GPU_CORE_CONVCOEFBAB_CONVCOEFBB_Pos (16UL) /*!< Position of CONVCOEFBB field.                                        */
   #define GPU_CORE_CONVCOEFBAB_CONVCOEFBB_Msk (0xFFFFUL << GPU_CORE_CONVCOEFBAB_CONVCOEFBB_Pos) /*!< Bit mask of CONVCOEFBB
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CONVCOEFBCD: Specifies the YUV coefficients for Blue color. Part two */
@@ -2104,12 +2130,12 @@ typedef struct {
 /* CONVCOEFBC @Bits 0..15 : Specifies the YUV coefficients for Blue color. Part C */
   #define GPU_CORE_CONVCOEFBCD_CONVCOEFBC_Pos (0UL)  /*!< Position of CONVCOEFBC field.                                        */
   #define GPU_CORE_CONVCOEFBCD_CONVCOEFBC_Msk (0xFFFFUL << GPU_CORE_CONVCOEFBCD_CONVCOEFBC_Pos) /*!< Bit mask of CONVCOEFBC
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONVCOEFBD @Bits 16..31 : Specifies the YUV coefficients for Blue color. Part D */
   #define GPU_CORE_CONVCOEFBCD_CONVCOEFBD_Pos (16UL) /*!< Position of CONVCOEFBD field.                                        */
   #define GPU_CORE_CONVCOEFBCD_CONVCOEFBD_Msk (0xFFFFUL << GPU_CORE_CONVCOEFBCD_CONVCOEFBD_Pos) /*!< Bit mask of CONVCOEFBD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_CRCM0: On read returns the CRC form Write Channel 0 */
@@ -2134,17 +2160,17 @@ typedef struct {
 /* BUSCTRLARCACHE @Bits 0..3 : Specifies the value of the output ARCACHE signal of the AXI Master Read Bus Interface */
   #define GPU_CORE_BUSCTRL_BUSCTRLARCACHE_Pos (0UL)  /*!< Position of BUSCTRLARCACHE field.                                    */
   #define GPU_CORE_BUSCTRL_BUSCTRLARCACHE_Msk (0xFUL << GPU_CORE_BUSCTRL_BUSCTRLARCACHE_Pos) /*!< Bit mask of BUSCTRLARCACHE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BUSCTRLAWCACHE @Bits 4..7 : Specifies the value of the output AWCACHE signal of the AXI Master Write Bus Interface */
   #define GPU_CORE_BUSCTRL_BUSCTRLAWCACHE_Pos (4UL)  /*!< Position of BUSCTRLAWCACHE field.                                    */
   #define GPU_CORE_BUSCTRL_BUSCTRLAWCACHE_Msk (0xFUL << GPU_CORE_BUSCTRL_BUSCTRLAWCACHE_Pos) /*!< Bit mask of BUSCTRLAWCACHE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BUSCTRLPOS08LEN24 @Bits 8..31 : Revered */
   #define GPU_CORE_BUSCTRL_BUSCTRLPOS08LEN24_Pos (8UL) /*!< Position of BUSCTRLPOS08LEN24 field.                               */
   #define GPU_CORE_BUSCTRL_BUSCTRLPOS08LEN24_Msk (0xFFFFFFUL << GPU_CORE_BUSCTRL_BUSCTRLPOS08LEN24_Pos) /*!< Bit mask of
-                                                                            BUSCTRLPOS08LEN24 field.*/                            
+                                                                            BUSCTRLPOS08LEN24 field.*/
 
 
 /* GPU_CORE_IMEMADDR: Load shader instruction memory address. This register can be auto incremented. Its contains */
@@ -2157,7 +2183,7 @@ typedef struct {
 /* IMEMADDRPOS04LEN28 @Bits 4..31 : Revered */
   #define GPU_CORE_IMEMADDR_IMEMADDRPOS04LEN28_Pos (4UL) /*!< Position of IMEMADDRPOS04LEN28 field.                            */
   #define GPU_CORE_IMEMADDR_IMEMADDRPOS04LEN28_Msk (0xFFFFFFFUL << GPU_CORE_IMEMADDR_IMEMADDRPOS04LEN28_Pos) /*!< Bit mask of
-                                                                            IMEMADDRPOS04LEN28 field.*/                           
+                                                                            IMEMADDRPOS04LEN28 field.*/
 
 
 /* GPU_CORE_IMEMDATALOW: The lower bits (31-0) of the 64-bit load shader instruction memory data */
@@ -2166,7 +2192,7 @@ typedef struct {
 /* IMEMDATALOW @Bits 0..31 : Specifies the lower bits (31-0) of the load shader instruction memory data */
   #define GPU_CORE_IMEMDATALOW_IMEMDATALOW_Pos (0UL) /*!< Position of IMEMDATALOW field.                                       */
   #define GPU_CORE_IMEMDATALOW_IMEMDATALOW_Msk (0xFFFFFFFFUL << GPU_CORE_IMEMDATALOW_IMEMDATALOW_Pos) /*!< Bit mask of
-                                                                            IMEMDATALOW field.*/                                  
+                                                                            IMEMDATALOW field.*/
 
 
 /* GPU_CORE_IMEMDATAHIGH: The higher bits (63-32) of the 64-bit load shader instruction memory data */
@@ -2175,74 +2201,74 @@ typedef struct {
 /* IMEMDATAHIGH @Bits 0..31 : Specifies the higher bits (63-32) of the load shader instruction memory data */
   #define GPU_CORE_IMEMDATAHIGH_IMEMDATAHIGH_Pos (0UL) /*!< Position of IMEMDATAHIGH field.                                    */
   #define GPU_CORE_IMEMDATAHIGH_IMEMDATAHIGH_Msk (0xFFFFFFFFUL << GPU_CORE_IMEMDATAHIGH_IMEMDATAHIGH_Pos) /*!< Bit mask of
-                                                                            IMEMDATAHIGH field.*/                                 
+                                                                            IMEMDATAHIGH field.*/
 
 
 /* GPU_CORE_FLUSHCTRL: Controls the system flush */
   #define GPU_CORE_FLUSHCTRL_ResetValue (0x00000007UL) /*!< Reset value of FLUSHCTRL register.                                 */
 
 /* FLUSHCTRLPOS00LEN01 @Bit 0 : If set to 1, the read caches are flushed when the Command List Processor triggers the Rasterizer
-                                (Register NEMA_DRAW_CMD_NOHOLD) */                                                                
-                                                                                                                                  
+                                (Register NEMA_DRAW_CMD_NOHOLD) */
+
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS00LEN01_Pos (0UL) /*!< Position of FLUSHCTRLPOS00LEN01 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS00LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS00LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS00LEN01 field.*/
 
 /* FLUSHCTRLPOS01LEN03 @Bits 1..3 : Revered */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS01LEN03_Pos (1UL) /*!< Position of FLUSHCTRLPOS01LEN03 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS01LEN03_Msk (0x7UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS01LEN03_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS01LEN03 field.*/                          
+                                                                            FLUSHCTRLPOS01LEN03 field.*/
 
 /* FLUSHCTRLPOS04LEN01 @Bit 4 : If set to 1, the read caches are fluhsed when the Host triggers the Rasterizer (Register
-                                NEMA_DRAW_CMD_NOHOLD) */                                                                          
-                                                                                                                                  
+                                NEMA_DRAW_CMD_NOHOLD) */
+
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS04LEN01_Pos (4UL) /*!< Position of FLUSHCTRLPOS04LEN01 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS04LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS04LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS04LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS04LEN01 field.*/
 
 /* FLUSHCTRLPOS05LEN01 @Bit 5 : Revered */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS05LEN01_Pos (5UL) /*!< Position of FLUSHCTRLPOS05LEN01 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS05LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS05LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS05LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS05LEN01 field.*/
 
 /* FLUSHCTRLPOS06LEN01 @Bit 6 : When set to 1, flush read caches */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS06LEN01_Pos (6UL) /*!< Position of FLUSHCTRLPOS06LEN01 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS06LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS06LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS06LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS06LEN01 field.*/
 
 /* FLUSHCTRLPOS07LEN01 @Bit 7 : If set to 1, the write caches are flushed when the Command List Processor triggers the
-                                Rasterizer (Register NEMA_DRAW_CMD_NOHOLD) */                                                     
-                                                                                                                                  
+                                Rasterizer (Register NEMA_DRAW_CMD_NOHOLD) */
+
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS07LEN01_Pos (7UL) /*!< Position of FLUSHCTRLPOS07LEN01 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS07LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS07LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS07LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS07LEN01 field.*/
 
 /* FLUSHCTRLPOS08LEN03 @Bits 8..10 : Revered */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS08LEN03_Pos (8UL) /*!< Position of FLUSHCTRLPOS08LEN03 field.                         */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS08LEN03_Msk (0x7UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS08LEN03_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS08LEN03 field.*/                          
+                                                                            FLUSHCTRLPOS08LEN03 field.*/
 
 /* FLUSHCTRLPOS11LEN01 @Bit 11 : If set to 1, the write caches are flushed when the Host triggers the Rasterizer (Register
-                                 NEMA_DRAW_CMD_NOHOLD) */                                                                         
-                                                                                                                                  
+                                 NEMA_DRAW_CMD_NOHOLD) */
+
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS11LEN01_Pos (11UL) /*!< Position of FLUSHCTRLPOS11LEN01 field.                        */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS11LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS11LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS11LEN01 field.*/
 
 /* FLUSHCTRLPOS12LEN01 @Bit 12 : Revered */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS12LEN01_Pos (12UL) /*!< Position of FLUSHCTRLPOS12LEN01 field.                        */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS12LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS12LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS12LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS12LEN01 field.*/
 
 /* FLUSHCTRLPOS13LEN01 @Bit 13 : When set to 1, flush write caches */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS13LEN01_Pos (13UL) /*!< Position of FLUSHCTRLPOS13LEN01 field.                        */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS13LEN01_Msk (0x1UL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS13LEN01_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS13LEN01 field.*/                          
+                                                                            FLUSHCTRLPOS13LEN01 field.*/
 
 /* FLUSHCTRLPOS14LEN18 @Bits 14..31 : Revered */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS14LEN18_Pos (14UL) /*!< Position of FLUSHCTRLPOS14LEN18 field.                        */
   #define GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS14LEN18_Msk (0x3FFFFUL << GPU_CORE_FLUSHCTRL_FLUSHCTRLPOS14LEN18_Pos) /*!< Bit mask of
-                                                                            FLUSHCTRLPOS14LEN18 field.*/                          
+                                                                            FLUSHCTRLPOS14LEN18 field.*/
 
 
 /* GPU_CORE_CMDSTATUS: On read, returns internal CL processor status. */
@@ -2251,62 +2277,62 @@ typedef struct {
 /* CMDSTATUSPOS00LEN01 @Bit 0 : Indicates the state of the FSM responsible for fetching */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS00LEN01_Pos (0UL) /*!< Position of CMDSTATUSPOS00LEN01 field.                         */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS00LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS00LEN01 field.*/                          
+                                                                            CMDSTATUSPOS00LEN01 field.*/
 
 /* CMDSTATUSPOS01LEN01 @Bits 1..3 : Revered */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS01LEN01_Pos (1UL) /*!< Position of CMDSTATUSPOS01LEN01 field.                         */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS01LEN01_Msk (0x7UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS01LEN01 field.*/                          
+                                                                            CMDSTATUSPOS01LEN01 field.*/
 
 /* CMDSTATUSPOS04LEN03 @Bits 4..6 : Indicates the state of CMDList internal FSM. */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS04LEN03_Pos (4UL) /*!< Position of CMDSTATUSPOS04LEN03 field.                         */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS04LEN03_Msk (0x7UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS04LEN03_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS04LEN03 field.*/                          
+                                                                            CMDSTATUSPOS04LEN03 field.*/
 
 /* CMDSTATUSPOS07LEN02 @Bits 7..8 : Revered */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS07LEN02_Pos (7UL) /*!< Position of CMDSTATUSPOS07LEN02 field.                         */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS07LEN02_Msk (0x3UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS07LEN02_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS07LEN02 field.*/                          
+                                                                            CMDSTATUSPOS07LEN02 field.*/
 
 /* CMDSTATUSPOS08LEN03 @Bits 9..11 : Show the address of the stack pointer */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS08LEN03_Pos (9UL) /*!< Position of CMDSTATUSPOS08LEN03 field.                         */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS08LEN03_Msk (0x7UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS08LEN03_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS08LEN03 field.*/                          
+                                                                            CMDSTATUSPOS08LEN03 field.*/
 
 /* CMDSTATUSPOS11LEN01 @Bit 12 : Revered */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS11LEN01_Pos (12UL) /*!< Position of CMDSTATUSPOS11LEN01 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS11LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS11LEN01 field.*/                          
+                                                                            CMDSTATUSPOS11LEN01 field.*/
 
 /* CMDSTATUSPOS12LEN05 @Bits 13..17 : Show many cells are still available in FIFO */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS12LEN05_Pos (13UL) /*!< Position of CMDSTATUSPOS12LEN05 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS12LEN05_Msk (0x1FUL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS12LEN05_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS12LEN05 field.*/                          
+                                                                            CMDSTATUSPOS12LEN05 field.*/
 
 /* CMDSTATUSPOS17LEN11 @Bits 18..27 : Revered */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS17LEN11_Pos (18UL) /*!< Position of CMDSTATUSPOS17LEN11 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS17LEN11_Msk (0x3FFUL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS17LEN11_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS17LEN11 field.*/                          
+                                                                            CMDSTATUSPOS17LEN11 field.*/
 
 /* CMDSTATUSPOS28LEN01 @Bit 28 : Show many cells are still available in FIFO */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS28LEN01_Pos (28UL) /*!< Position of CMDSTATUSPOS28LEN01 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS28LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS28LEN01 field.*/                          
+                                                                            CMDSTATUSPOS28LEN01 field.*/
 
 /* CMDSTATUSPOS29LEN01 @Bit 29 : Indicates if there are available data to read from FIFO */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS29LEN01_Pos (29UL) /*!< Position of CMDSTATUSPOS29LEN01 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS29LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS29LEN01 field.*/                          
+                                                                            CMDSTATUSPOS29LEN01 field.*/
 
 /* CMDSTATUSPOS30LEN01 @Bit 30 : Indicates if there are data available in System Memory */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS30LEN01_Pos (30UL) /*!< Position of CMDSTATUSPOS30LEN01 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS30LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS30LEN01 field.*/                          
+                                                                            CMDSTATUSPOS30LEN01 field.*/
 
 /* CMDSTATUSPOS31LEN01 @Bit 31 : Indicates if the Command List Processor is busy */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS31LEN01_Pos (31UL) /*!< Position of CMDSTATUSPOS31LEN01 field.                        */
   #define GPU_CORE_CMDSTATUS_CMDSTATUSPOS31LEN01_Msk (0x1UL << GPU_CORE_CMDSTATUS_CMDSTATUSPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            CMDSTATUSPOS31LEN01 field.*/                          
+                                                                            CMDSTATUSPOS31LEN01 field.*/
 
 
 /* GPU_CORE_CMDRINGSTOP: Ring Buffers pointer. */
@@ -2315,7 +2341,7 @@ typedef struct {
 /* CMDRINGSTOP @Bits 0..31 : Stores the Ring Buffers last written address */
   #define GPU_CORE_CMDRINGSTOP_CMDRINGSTOP_Pos (0UL) /*!< Position of CMDRINGSTOP field.                                       */
   #define GPU_CORE_CMDRINGSTOP_CMDRINGSTOP_Msk (0xFFFFFFFFUL << GPU_CORE_CMDRINGSTOP_CMDRINGSTOP_Pos) /*!< Bit mask of
-                                                                            CMDRINGSTOP field.*/                                  
+                                                                            CMDRINGSTOP field.*/
 
 
 /* GPU_CORE_CMDADDR: Command list base address. */
@@ -2340,7 +2366,7 @@ typedef struct {
 /* INTERRUPTPOLARITY @Bit 0 : 1: IRQ signal is active low */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOLARITY_Pos (0UL) /*!< Position of INTERRUPTPOLARITY field.                             */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOLARITY_Msk (0x1UL << GPU_CORE_INTERRUPT_INTERRUPTPOLARITY_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOLARITY field.*/                            
+                                                                            INTERRUPTPOLARITY field.*/
 
 /* INTERRUPTCL @Bit 1 : When set to 1, signals an interrupt at the end of a command list */
   #define GPU_CORE_INTERRUPT_INTERRUPTCL_Pos (1UL)   /*!< Position of INTERRUPTCL field.                                       */
@@ -2349,32 +2375,32 @@ typedef struct {
 /* INTERRUPTDRAW @Bit 2 : When set to 1, signals an interrupt at the end of a drawing command */
   #define GPU_CORE_INTERRUPT_INTERRUPTDRAW_Pos (2UL) /*!< Position of INTERRUPTDRAW field.                                     */
   #define GPU_CORE_INTERRUPT_INTERRUPTDRAW_Msk (0x1UL << GPU_CORE_INTERRUPT_INTERRUPTDRAW_Pos) /*!< Bit mask of INTERRUPTDRAW
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* INTERRUPTCLEAR @Bit 3 : When set to 1, the interrupt in the NEMA_IRQ_ID register is cleared */
   #define GPU_CORE_INTERRUPT_INTERRUPTCLEAR_Pos (3UL) /*!< Position of INTERRUPTCLEAR field.                                   */
   #define GPU_CORE_INTERRUPT_INTERRUPTCLEAR_Msk (0x1UL << GPU_CORE_INTERRUPT_INTERRUPTCLEAR_Pos) /*!< Bit mask of INTERRUPTCLEAR
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* INTERRUPTPOS04LEN26 @Bits 4..26 : Revered */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOS04LEN26_Pos (4UL) /*!< Position of INTERRUPTPOS04LEN26 field.                         */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOS04LEN26_Msk (0x7FFFFFUL << GPU_CORE_INTERRUPT_INTERRUPTPOS04LEN26_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS04LEN26 field.*/                          
+                                                                            INTERRUPTPOS04LEN26 field.*/
 
 /* INTERRUPTTHROTTLE @Bit 27 : When set to 1, the throttle signal will be ignored. */
   #define GPU_CORE_INTERRUPT_INTERRUPTTHROTTLE_Pos (27UL) /*!< Position of INTERRUPTTHROTTLE field.                            */
   #define GPU_CORE_INTERRUPT_INTERRUPTTHROTTLE_Msk (0x1UL << GPU_CORE_INTERRUPT_INTERRUPTTHROTTLE_Pos) /*!< Bit mask of
-                                                                            INTERRUPTTHROTTLE field.*/                            
+                                                                            INTERRUPTTHROTTLE field.*/
 
 /* INTERRUPTPOS28LEN02 @Bits 28..29 : Revered */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOS28LEN02_Pos (28UL) /*!< Position of INTERRUPTPOS28LEN02 field.                        */
   #define GPU_CORE_INTERRUPT_INTERRUPTPOS28LEN02_Msk (0x3UL << GPU_CORE_INTERRUPT_INTERRUPTPOS28LEN02_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS28LEN02 field.*/                          
+                                                                            INTERRUPTPOS28LEN02 field.*/
 
 /* INTERRUPTCLKDVFS @Bits 30..31 : Specify the core_clk_dvfs output */
   #define GPU_CORE_INTERRUPT_INTERRUPTCLKDVFS_Pos (30UL) /*!< Position of INTERRUPTCLKDVFS field.                              */
   #define GPU_CORE_INTERRUPT_INTERRUPTCLKDVFS_Msk (0x3UL << GPU_CORE_INTERRUPT_INTERRUPTCLKDVFS_Pos) /*!< Bit mask of
-                                                                            INTERRUPTCLKDVFS field.*/                             
+                                                                            INTERRUPTCLKDVFS field.*/
 
 
 /* GPU_CORE_STATUS: On read, returns GPUs status. */
@@ -2447,12 +2473,12 @@ typedef struct {
 /* STATUSPOS16LEN08 @Bits 16..23 : Revered */
   #define GPU_CORE_STATUS_STATUSPOS16LEN08_Pos (16UL) /*!< Position of STATUSPOS16LEN08 field.                                 */
   #define GPU_CORE_STATUS_STATUSPOS16LEN08_Msk (0xFFUL << GPU_CORE_STATUS_STATUSPOS16LEN08_Pos) /*!< Bit mask of
-                                                                            STATUSPOS16LEN08 field.*/                             
+                                                                            STATUSPOS16LEN08 field.*/
 
 /* STATUSRASTERIZER @Bits 24..27 : Indicate if the Rasterizer Unit is busy */
   #define GPU_CORE_STATUS_STATUSRASTERIZER_Pos (24UL) /*!< Position of STATUSRASTERIZER field.                                 */
   #define GPU_CORE_STATUS_STATUSRASTERIZER_Msk (0xFUL << GPU_CORE_STATUS_STATUSRASTERIZER_Pos) /*!< Bit mask of STATUSRASTERIZER
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* STATUSCL @Bit 28 : Indicates if the Command List Processor is busy */
   #define GPU_CORE_STATUS_STATUSCL_Pos (28UL)        /*!< Position of STATUSCL field.                                          */
@@ -2481,7 +2507,7 @@ typedef struct {
 /* DRAWCMDNOHOLDPOS03LEN20 @Bits 3..22 : Revered */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS03LEN20_Pos (3UL) /*!< Position of DRAWCMDNOHOLDPOS03LEN20 field.             */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS03LEN20_Msk (0xFFFFFUL << GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS03LEN20_Pos)
-                                                                            /*!< Bit mask of DRAWCMDNOHOLDPOS03LEN20 field.*/     
+                                                                            /*!< Bit mask of DRAWCMDNOHOLDPOS03LEN20 field.*/
 
 /* AAEDGE3 @Bit 23 : When set to 1, Antialiasing feature is enabled for edge 3 */
   #define GPU_CORE_DRAWCMDNOHOLD_AAEDGE3_Pos (23UL)  /*!< Position of AAEDGE3 field.                                           */
@@ -2502,17 +2528,17 @@ typedef struct {
 /* DRAWGRADIENT @Bit 27 : When set to 1, color gradient is enabled */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWGRADIENT_Pos (27UL) /*!< Position of DRAWGRADIENT field.                                  */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWGRADIENT_Msk (0x1UL << GPU_CORE_DRAWCMDNOHOLD_DRAWGRADIENT_Pos) /*!< Bit mask of
-                                                                            DRAWGRADIENT field.*/                                 
+                                                                            DRAWGRADIENT field.*/
 
 /* DRAWNEGCULLING @Bit 28 : When set to 1, negative culling (clockwise) is enabled */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWNEGCULLING_Pos (28UL) /*!< Position of DRAWNEGCULLING field.                              */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWNEGCULLING_Msk (0x1UL << GPU_CORE_DRAWCMDNOHOLD_DRAWNEGCULLING_Pos) /*!< Bit mask of
-                                                                            DRAWNEGCULLING field.*/                               
+                                                                            DRAWNEGCULLING field.*/
 
 /* DRAWPOSCULLING @Bit 29 : When set to 1, positive culling (counter-clockwise) is enabled */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWPOSCULLING_Pos (29UL) /*!< Position of DRAWPOSCULLING field.                              */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWPOSCULLING_Msk (0x1UL << GPU_CORE_DRAWCMDNOHOLD_DRAWPOSCULLING_Pos) /*!< Bit mask of
-                                                                            DRAWPOSCULLING field.*/                               
+                                                                            DRAWPOSCULLING field.*/
 
 /* DRAWTILE @Bit 30 : When set to 1, tile mode is enabled */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWTILE_Pos (30UL) /*!< Position of DRAWTILE field.                                          */
@@ -2521,7 +2547,7 @@ typedef struct {
 /* DRAWCMDNOHOLDPOS31LEN01 @Bit 31 : Revered */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS31LEN01_Pos (31UL) /*!< Position of DRAWCMDNOHOLDPOS31LEN01 field.            */
   #define GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS31LEN01_Msk (0x1UL << GPU_CORE_DRAWCMDNOHOLD_DRAWCMDNOHOLDPOS31LEN01_Pos) /*!<
-                                                                            Bit mask of DRAWCMDNOHOLDPOS31LEN01 field.*/          
+                                                                            Bit mask of DRAWCMDNOHOLDPOS31LEN01 field.*/
 
 
 /* GPU_CORE_DRAWSTARTXY: Vertex 0 drawing primitive. This register is used only for integer values. For greater accuracy */
@@ -2530,12 +2556,12 @@ typedef struct {
 /* DRAWSTARTX @Bits 0..15 : pecifies the X coordinate (integer value) of vertex 0 */
   #define GPU_CORE_DRAWSTARTXY_DRAWSTARTX_Pos (0UL)  /*!< Position of DRAWSTARTX field.                                        */
   #define GPU_CORE_DRAWSTARTXY_DRAWSTARTX_Msk (0xFFFFUL << GPU_CORE_DRAWSTARTXY_DRAWSTARTX_Pos) /*!< Bit mask of DRAWSTARTX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* DRAWSTARTY @Bits 16..31 : Specifies the Y coordinate (integer value) of vertex 0 */
   #define GPU_CORE_DRAWSTARTXY_DRAWSTARTY_Pos (16UL) /*!< Position of DRAWSTARTY field.                                        */
   #define GPU_CORE_DRAWSTARTXY_DRAWSTARTY_Msk (0xFFFFUL << GPU_CORE_DRAWSTARTXY_DRAWSTARTY_Pos) /*!< Bit mask of DRAWSTARTY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_DRAWENDXY: Vertex 1 drawing primitive. This register is used only for integer values. For greater accuracy */
@@ -2580,37 +2606,37 @@ typedef struct {
 /* MATMULTPOS00LEN26 @Bits 0..25 : Revered */
   #define GPU_CORE_MATMULT_MATMULTPOS00LEN26_Pos (0UL) /*!< Position of MATMULTPOS00LEN26 field.                               */
   #define GPU_CORE_MATMULT_MATMULTPOS00LEN26_Msk (0x3FFFFFFUL << GPU_CORE_MATMULT_MATMULTPOS00LEN26_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS00LEN26 field.*/                            
+                                                                            MATMULTPOS00LEN26 field.*/
 
 /* MATMULTPOS26LEN01 @Bit 26 : When set to 1, the result is in floating point value */
   #define GPU_CORE_MATMULT_MATMULTPOS26LEN01_Pos (26UL) /*!< Position of MATMULTPOS26LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS26LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS26LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS26LEN01 field.*/                            
+                                                                            MATMULTPOS26LEN01 field.*/
 
 /* MATMULTPOS27LEN01 @Bit 27 : When set to 0, the result is in fixed point value (default) */
   #define GPU_CORE_MATMULT_MATMULTPOS27LEN01_Pos (27UL) /*!< Position of MATMULTPOS27LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS27LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS27LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS27LEN01 field.*/                            
+                                                                            MATMULTPOS27LEN01 field.*/
 
 /* MATMULTPOS28LEN01 @Bit 28 : When set to 1, the matrix multiplications are bypassed */
   #define GPU_CORE_MATMULT_MATMULTPOS28LEN01_Pos (28UL) /*!< Position of MATMULTPOS28LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS28LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS28LEN01 field.*/                            
+                                                                            MATMULTPOS28LEN01 field.*/
 
 /* MATMULTPOS29LEN01 @Bit 29 : When set to 1, the 0.5 value is added to the X and Y coordinates */
   #define GPU_CORE_MATMULT_MATMULTPOS29LEN01_Pos (29UL) /*!< Position of MATMULTPOS29LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS29LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS29LEN01 field.*/                            
+                                                                            MATMULTPOS29LEN01 field.*/
 
 /* MATMULTPOS30LEN01 @Bit 30 : Revered */
   #define GPU_CORE_MATMULT_MATMULTPOS30LEN01_Pos (30UL) /*!< Position of MATMULTPOS30LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS30LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS30LEN01 field.*/                            
+                                                                            MATMULTPOS30LEN01 field.*/
 
 /* MATMULTPOS31LEN01 @Bit 31 : When set to 0, perspective mode is on (default) */
   #define GPU_CORE_MATMULT_MATMULTPOS31LEN01_Pos (31UL) /*!< Position of MATMULTPOS31LEN01 field.                              */
   #define GPU_CORE_MATMULT_MATMULTPOS31LEN01_Msk (0x1UL << GPU_CORE_MATMULT_MATMULTPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            MATMULTPOS31LEN01 field.*/                            
+                                                                            MATMULTPOS31LEN01 field.*/
 
 
 /* GPU_CORE_CODEPTR: Shader code pointer */
@@ -2671,7 +2697,7 @@ typedef struct {
 /* BYPASSADDR @Bits 0..31 : Address of bypass mode of rasterizer setup access */
   #define GPU_CORE_BYPASSADDR_BYPASSADDR_Pos (0UL)   /*!< Position of BYPASSADDR field.                                        */
   #define GPU_CORE_BYPASSADDR_BYPASSADDR_Msk (0xFFFFFFFFUL << GPU_CORE_BYPASSADDR_BYPASSADDR_Pos) /*!< Bit mask of BYPASSADDR
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_BYPASSDATA: Data and enable of bypass mode of rasterizer */
@@ -2680,7 +2706,7 @@ typedef struct {
 /* BYPASSDATA @Bits 0..31 : Data and enable of bypass mode of rasterizer */
   #define GPU_CORE_BYPASSDATA_BYPASSDATA_Pos (0UL)   /*!< Position of BYPASSDATA field.                                        */
   #define GPU_CORE_BYPASSDATA_BYPASSDATA_Msk (0xFFFFFFFFUL << GPU_CORE_BYPASSDATA_BYPASSDATA_Pos) /*!< Bit mask of BYPASSDATA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* GPU_CORE_DRAWPT2X: X coordinate of vertex 2 drawing primitive. The value is 16.16 fixed point */
@@ -2724,8 +2750,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM00: (0,0) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM00_ResetValue (0x00000000UL)    /*!< Reset value of MM00 register.                                        */
 
 /* MM00 @Bits 0..20 : Specifies the (0,0) element */
@@ -2738,8 +2764,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM01: (0,1) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM01_ResetValue (0x00000000UL)    /*!< Reset value of MM01 register.                                        */
 
 /* MM01 @Bits 0..20 : Specifies the (0,1) element */
@@ -2752,8 +2778,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM02: (0,2) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM02_ResetValue (0x00000000UL)    /*!< Reset value of MM02 register.                                        */
 
 /* MM02 @Bits 0..20 : Specifies the (0,2) element */
@@ -2766,8 +2792,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM10: (1,0) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM10_ResetValue (0x00000000UL)    /*!< Reset value of MM10 register.                                        */
 
 /* MM10 @Bits 0..20 : Specifies the (1,0) element */
@@ -2780,8 +2806,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM11: (1,1) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM11_ResetValue (0x00000000UL)    /*!< Reset value of MM11 register.                                        */
 
 /* MM11 @Bits 0..20 : Specifies the (1,1) element */
@@ -2794,8 +2820,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM12: (1,2) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM12_ResetValue (0x00000000UL)    /*!< Reset value of MM12 register.                                        */
 
 /* MM12 @Bits 0..20 : Specifies the (1,2) element */
@@ -2808,8 +2834,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM20: (2,0) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM20_ResetValue (0x00000000UL)    /*!< Reset value of MM20 register.                                        */
 
 /* MM20 @Bits 0..20 : Specifies the (2,0) element */
@@ -2822,8 +2848,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM21: (2,1) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM21_ResetValue (0x00000000UL)    /*!< Reset value of MM21 register.                                        */
 
 /* MM21 @Bits 0..20 : Specifies the (2,1) element */
@@ -2836,8 +2862,8 @@ typedef struct {
 
 
 /* GPU_CORE_MM22: (2,2) matrix floating point element. On read return the floating point value with the selected characteristics
-                   */                                                                                                             
-                                                                                                                                  
+                   */
+
   #define GPU_CORE_MM22_ResetValue (0x00000000UL)    /*!< Reset value of MM22 register.                                        */
 
 /* MM22 @Bits 0..20 : Specifies the (2,2) element */
@@ -2855,7 +2881,7 @@ typedef struct {
 /* DEPTHSTARTL @Bits 0..31 : Specifies the fractional part of the depth value of the STARTXY pixel */
   #define GPU_CORE_DEPTHSTARTL_DEPTHSTARTL_Pos (0UL) /*!< Position of DEPTHSTARTL field.                                       */
   #define GPU_CORE_DEPTHSTARTL_DEPTHSTARTL_Msk (0xFFFFFFFFUL << GPU_CORE_DEPTHSTARTL_DEPTHSTARTL_Pos) /*!< Bit mask of
-                                                                            DEPTHSTARTL field.*/                                  
+                                                                            DEPTHSTARTL field.*/
 
 
 /* GPU_CORE_DEPTHSTARTH: Depth value of the STARTXY pixel. This register defines the */
@@ -2864,7 +2890,7 @@ typedef struct {
 /* DEPTHSTARTH @Bits 0..31 : Specifies the integral value of the depth value of the STARTXY pixel */
   #define GPU_CORE_DEPTHSTARTH_DEPTHSTARTH_Pos (0UL) /*!< Position of DEPTHSTARTH field.                                       */
   #define GPU_CORE_DEPTHSTARTH_DEPTHSTARTH_Msk (0xFFFFFFFFUL << GPU_CORE_DEPTHSTARTH_DEPTHSTARTH_Pos) /*!< Bit mask of
-                                                                            DEPTHSTARTH field.*/                                  
+                                                                            DEPTHSTARTH field.*/
 
 
 /* GPU_CORE_DEPTHDXL: For each step at x-axis, depth value is added. */
@@ -3001,50 +3027,50 @@ typedef struct {
 /* ROPBLENDERBLENDMODESOURCE @Bits 0..3 : Blending mode of the current pixel (source pixel) */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODESOURCE_Pos (0UL) /*!< Position of ROPBLENDERBLENDMODESOURCE field.   */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODESOURCE_Msk (0xFUL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODESOURCE_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERBLENDMODESOURCE field.*/   
+                                                                            /*!< Bit mask of ROPBLENDERBLENDMODESOURCE field.*/
 
 /* ROPBLENDERBLENDMODEPOS04LEN04 @Bits 4..7 : Revered */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS04LEN04_Pos (4UL) /*!< Position of ROPBLENDERBLENDMODEPOS04LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS04LEN04_Msk (0xFUL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS04LEN04_Pos)
                                                                             /*!< Bit mask of ROPBLENDERBLENDMODEPOS04LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* ROPBLENDERBLENDMODEDEST @Bits 8..11 : Blending mode of the stored pixel in the FrameBuffer (destination pixel) */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEDEST_Pos (8UL) /*!< Position of ROPBLENDERBLENDMODEDEST field.       */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEDEST_Msk (0xFUL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEDEST_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERBLENDMODEDEST field.*/     
+                                                                            /*!< Bit mask of ROPBLENDERBLENDMODEDEST field.*/
 
 /* ROPBLENDERBLENDMODEPOS12LEN13 @Bits 12..24 : Revered */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS12LEN13_Pos (12UL) /*!< Position of ROPBLENDERBLENDMODEPOS12LEN13
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS12LEN13_Msk (0x1FFFUL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS12LEN13_Pos)
                                                                             /*!< Bit mask of ROPBLENDERBLENDMODEPOS12LEN13
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* ROPBLENDERBLENDMODEBLDOFF @Bit 25 : Force GPU to not use the Blender accelerator. */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEBLDOFF_Pos (25UL) /*!< Position of ROPBLENDERBLENDMODEBLDOFF field.  */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEBLDOFF_Msk (0x1UL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEBLDOFF_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERBLENDMODEBLDOFF field.*/   
+                                                                            /*!< Bit mask of ROPBLENDERBLENDMODEBLDOFF field.*/
 
 /* ROPBLENDERBLENDMODEPOS26LEN04 @Bits 26..29 : Revered */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS26LEN04_Pos (26UL) /*!< Position of ROPBLENDERBLENDMODEPOS26LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS26LEN04_Msk (0xFUL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODEPOS26LEN04_Pos)
                                                                             /*!< Bit mask of ROPBLENDERBLENDMODEPOS26LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* ROPBLENDERBLENDMODECLKEYSRC @Bit 30 : If set, enables Source Color Keying */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYSRC_Pos (30UL) /*!< Position of ROPBLENDERBLENDMODECLKEYSRC
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYSRC_Msk (0x1UL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYSRC_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERBLENDMODECLKEYSRC field.*/ 
+                                                                            /*!< Bit mask of ROPBLENDERBLENDMODECLKEYSRC field.*/
 
 /* ROPBLENDERBLENDMODECLKEYDST @Bit 31 : If set, enables Destination Color Keying */
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYDST_Pos (31UL) /*!< Position of ROPBLENDERBLENDMODECLKEYDST
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYDST_Msk (0x1UL << GPU_CORE_ROPBLENDERBLENDMODE_ROPBLENDERBLENDMODECLKEYDST_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERBLENDMODECLKEYDST field.*/ 
+                                                                            /*!< Bit mask of ROPBLENDERBLENDMODECLKEYDST field.*/
 
 
 /* GPU_CORE_ROPBLENDERDSTCKEY: When Color Keying is enabled. The new pixel is written in the Frame Buffer, */
@@ -3053,22 +3079,22 @@ typedef struct {
 /* ROPBLENDERDSTCKEYRED @Bits 0..7 : Specifies the Red (R) value */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYRED_Pos (0UL) /*!< Position of ROPBLENDERDSTCKEYRED field.               */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYRED_Msk (0xFFUL << GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYRED_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYRED field.*/        
+                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYRED field.*/
 
 /* ROPBLENDERDSTCKEYGREEN @Bits 8..15 : Specifies the Green (G) value */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYGREEN_Pos (8UL) /*!< Position of ROPBLENDERDSTCKEYGREEN field.           */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYGREEN_Msk (0xFFUL << GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYGREEN_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYGREEN field.*/      
+                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYGREEN field.*/
 
 /* ROPBLENDERDSTCKEYBLUE @Bits 16..23 : Specifies the Blue (B) value */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYBLUE_Pos (16UL) /*!< Position of ROPBLENDERDSTCKEYBLUE field.            */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYBLUE_Msk (0xFFUL << GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYBLUE_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYBLUE field.*/       
+                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYBLUE field.*/
 
 /* ROPBLENDERDSTCKEYALPHA @Bits 24..31 : Specifies the Alpha (A) value */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYALPHA_Pos (24UL) /*!< Position of ROPBLENDERDSTCKEYALPHA field.          */
   #define GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYALPHA_Msk (0xFFUL << GPU_CORE_ROPBLENDERDSTCKEY_ROPBLENDERDSTCKEYALPHA_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYALPHA field.*/      
+                                                                            /*!< Bit mask of ROPBLENDERDSTCKEYALPHA field.*/
 
 
 /* GPU_CORE_ROPBLENDERCONSTCOLOR: Constant Color value which is used for blending when the blending modes. */
@@ -3077,22 +3103,22 @@ typedef struct {
 /* ROPBLENDERCONSTCOLORRED @Bits 0..7 : Specifies the Red (R) value */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORRED_Pos (0UL) /*!< Position of ROPBLENDERCONSTCOLORRED field.      */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORRED_Msk (0xFFUL << GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORRED_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORRED field.*/     
+                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORRED field.*/
 
 /* ROPBLENDERCONSTCOLORGREEN @Bits 8..15 : Specifies the Green (G) value */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORGREEN_Pos (8UL) /*!< Position of ROPBLENDERCONSTCOLORGREEN field.  */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORGREEN_Msk (0xFFUL << GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORGREEN_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORGREEN field.*/   
+                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORGREEN field.*/
 
 /* ROPBLENDERCONSTCOLORBLUE @Bits 16..23 : Specifies the Blue (B) value */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORBLUE_Pos (16UL) /*!< Position of ROPBLENDERCONSTCOLORBLUE field.   */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORBLUE_Msk (0xFFUL << GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORBLUE_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORBLUE field.*/    
+                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORBLUE field.*/
 
 /* ROPBLENDERCONSTCOLORALPHA @Bits 24..31 : Specifies the Alpha (A) value */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORALPHA_Pos (24UL) /*!< Position of ROPBLENDERCONSTCOLORALPHA field. */
   #define GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORALPHA_Msk (0xFFUL << GPU_CORE_ROPBLENDERCONSTCOLOR_ROPBLENDERCONSTCOLORALPHA_Pos)
-                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORALPHA field.*/   
+                                                                            /*!< Bit mask of ROPBLENDERCONSTCOLORALPHA field.*/
 
 
 /* GPU_CORE_IPVERSION: Returns the configuration status */
@@ -3125,7 +3151,7 @@ typedef struct {
 /* CONFIGPOS12LEN04 @Bits 12..15 : Revered */
   #define GPU_CORE_CONFIG_CONFIGPOS12LEN04_Pos (12UL) /*!< Position of CONFIGPOS12LEN04 field.                                 */
   #define GPU_CORE_CONFIG_CONFIGPOS12LEN04_Msk (0xFUL << GPU_CORE_CONFIG_CONFIGPOS12LEN04_Pos) /*!< Bit mask of CONFIGPOS12LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONFIGCG @Bit 16 : When set to 1, indicates that clock gating is enabled */
   #define GPU_CORE_CONFIG_CONFIGCG_Pos (16UL)        /*!< Position of CONFIGCG field.                                          */
@@ -3138,7 +3164,7 @@ typedef struct {
 /* CONFIGPOS18LEN08 @Bits 18..25 : Revered */
   #define GPU_CORE_CONFIG_CONFIGPOS18LEN08_Pos (18UL) /*!< Position of CONFIGPOS18LEN08 field.                                 */
   #define GPU_CORE_CONFIG_CONFIGPOS18LEN08_Msk (0xFFUL << GPU_CORE_CONFIG_CONFIGPOS18LEN08_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS18LEN08 field.*/                             
+                                                                            CONFIGPOS18LEN08 field.*/
 
 /* CONFIGDIRTY @Bit 26 : When set to 1, indicates that Dirty Region is enabled */
   #define GPU_CORE_CONFIG_CONFIGDIRTY_Pos (26UL)     /*!< Position of CONFIGDIRTY field.                                       */
@@ -3187,17 +3213,17 @@ typedef struct {
 /* CONFIGHYUVCOEF @Bit 4 : Indicates that YUV coefficients are present */
   #define GPU_CORE_CONFIGH_CONFIGHYUVCOEF_Pos (4UL)  /*!< Position of CONFIGHYUVCOEF field.                                    */
   #define GPU_CORE_CONFIGH_CONFIGHYUVCOEF_Msk (0x1UL << GPU_CORE_CONFIGH_CONFIGHYUVCOEF_Pos) /*!< Bit mask of CONFIGHYUVCOEF
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONFIGHTEXCHAN @Bit 5 : Indicates that Texture map unit has two channels */
   #define GPU_CORE_CONFIGH_CONFIGHTEXCHAN_Pos (5UL)  /*!< Position of CONFIGHTEXCHAN field.                                    */
   #define GPU_CORE_CONFIGH_CONFIGHTEXCHAN_Msk (0x1UL << GPU_CORE_CONFIGH_CONFIGHTEXCHAN_Pos) /*!< Bit mask of CONFIGHTEXCHAN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CONFIGHPOS04LEN28 @Bits 6..31 : Revered */
   #define GPU_CORE_CONFIGH_CONFIGHPOS04LEN28_Pos (6UL) /*!< Position of CONFIGHPOS04LEN28 field.                               */
   #define GPU_CORE_CONFIGH_CONFIGHPOS04LEN28_Msk (0x3FFFFFFUL << GPU_CORE_CONFIGH_CONFIGHPOS04LEN28_Pos) /*!< Bit mask of
-                                                                            CONFIGHPOS04LEN28 field.*/                            
+                                                                            CONFIGHPOS04LEN28 field.*/
 
 
 /* GPU_CORE_CORESELECT: Select which of the available cores will be active */
@@ -3206,27 +3232,27 @@ typedef struct {
 /* DISABLECORE0 @Bit 0 : set to deactivate core 0 */
   #define GPU_CORE_CORESELECT_DISABLECORE0_Pos (0UL) /*!< Position of DISABLECORE0 field.                                      */
   #define GPU_CORE_CORESELECT_DISABLECORE0_Msk (0x1UL << GPU_CORE_CORESELECT_DISABLECORE0_Pos) /*!< Bit mask of DISABLECORE0
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* DISABLECORE1 @Bit 1 : set to deactivate core 1 */
   #define GPU_CORE_CORESELECT_DISABLECORE1_Pos (1UL) /*!< Position of DISABLECORE1 field.                                      */
   #define GPU_CORE_CORESELECT_DISABLECORE1_Msk (0x1UL << GPU_CORE_CORESELECT_DISABLECORE1_Pos) /*!< Bit mask of DISABLECORE1
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* DISABLECORE2 @Bit 2 : set to deactivate core 2 */
   #define GPU_CORE_CORESELECT_DISABLECORE2_Pos (2UL) /*!< Position of DISABLECORE2 field.                                      */
   #define GPU_CORE_CORESELECT_DISABLECORE2_Msk (0x1UL << GPU_CORE_CORESELECT_DISABLECORE2_Pos) /*!< Bit mask of DISABLECORE2
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* DISABLECORE3 @Bit 3 : set to deactivate core 3 */
   #define GPU_CORE_CORESELECT_DISABLECORE3_Pos (3UL) /*!< Position of DISABLECORE3 field.                                      */
   #define GPU_CORE_CORESELECT_DISABLECORE3_Msk (0x1UL << GPU_CORE_CORESELECT_DISABLECORE3_Pos) /*!< Bit mask of DISABLECORE3
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CORESELECTPOS04LEN28 @Bits 4..31 : Revered */
   #define GPU_CORE_CORESELECT_CORESELECTPOS04LEN28_Pos (4UL) /*!< Position of CORESELECTPOS04LEN28 field.                      */
   #define GPU_CORE_CORESELECT_CORESELECTPOS04LEN28_Msk (0xFFFFFFFUL << GPU_CORE_CORESELECT_CORESELECTPOS04LEN28_Pos) /*!< Bit
-                                                                            mask of CORESELECTPOS04LEN28 field.*/                 
+                                                                            mask of CORESELECTPOS04LEN28 field.*/
 
 
 /* GPU_CORE_C0REG: A 32-bit integer RGBA value is stored in constant register 0 for fragment calculations. */
@@ -3327,7 +3353,7 @@ typedef struct {
 /* GAMMAADDRPOS16LEN15 @Bits 16..30 : Revered */
   #define GPU_CORE_GAMMAADDR_GAMMAADDRPOS16LEN15_Pos (16UL) /*!< Position of GAMMAADDRPOS16LEN15 field.                        */
   #define GPU_CORE_GAMMAADDR_GAMMAADDRPOS16LEN15_Msk (0x7FFFUL << GPU_CORE_GAMMAADDR_GAMMAADDRPOS16LEN15_Pos) /*!< Bit mask of
-                                                                            GAMMAADDRPOS16LEN15 field.*/                          
+                                                                            GAMMAADDRPOS16LEN15 field.*/
 
 /* GAMMAENABLE @Bit 31 : Enables the Gamma Luts */
   #define GPU_CORE_GAMMAADDR_GAMMAENABLE_Pos (31UL)  /*!< Position of GAMMAENABLE field.                                       */
@@ -3412,7 +3438,7 @@ typedef struct {
 /* CMDRINGSTOPL @Bits 0..31 : Updates Ring Buffers last written address Low bits. */
   #define GPU_CORE_CMDRINGSTOPL_CMDRINGSTOPL_Pos (0UL) /*!< Position of CMDRINGSTOPL field.                                    */
   #define GPU_CORE_CMDRINGSTOPL_CMDRINGSTOPL_Msk (0xFFFFFFFFUL << GPU_CORE_CMDRINGSTOPL_CMDRINGSTOPL_Pos) /*!< Bit mask of
-                                                                            CMDRINGSTOPL field.*/                                 
+                                                                            CMDRINGSTOPL field.*/
 
 
 /* GPU_CORE_CMDRINGSTOPH: Ring Buffers pointer High bits. */
@@ -3421,7 +3447,7 @@ typedef struct {
 /* CMDRINGSTOPH @Bits 0..31 : Updates Ring Buffers last written address High bits. */
   #define GPU_CORE_CMDRINGSTOPH_CMDRINGSTOPH_Pos (0UL) /*!< Position of CMDRINGSTOPH field.                                    */
   #define GPU_CORE_CMDRINGSTOPH_CMDRINGSTOPH_Msk (0xFFFFFFFFUL << GPU_CORE_CMDRINGSTOPH_CMDRINGSTOPH_Pos) /*!< Bit mask of
-                                                                            CMDRINGSTOPH field.*/                                 
+                                                                            CMDRINGSTOPH field.*/
 
 
 /* GPU_CORE_CMDADDRL: Command List base address Low bits */
@@ -3470,47 +3496,47 @@ typedef struct {
 /* GPFLAGSLINEMASK0 @Bit 4 : GP_FLAG_mask when set to 1 masks/enables the generation of the output FREEZE signal from line 0 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK0_Pos (4UL) /*!< Position of GPFLAGSLINEMASK0 field.                                 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK0_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSLINEMASK0_Pos) /*!< Bit mask of
-                                                                            GPFLAGSLINEMASK0 field.*/                             
+                                                                            GPFLAGSLINEMASK0 field.*/
 
 /* GPFLAGSLINEMASK1 @Bit 5 : GP_FLAG_mask when set to 1 masks/enables the generation of the output FREEZE signal from line 1 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK1_Pos (5UL) /*!< Position of GPFLAGSLINEMASK1 field.                                 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK1_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSLINEMASK1_Pos) /*!< Bit mask of
-                                                                            GPFLAGSLINEMASK1 field.*/                             
+                                                                            GPFLAGSLINEMASK1 field.*/
 
 /* GPFLAGSLINEMASK2 @Bit 6 : GP_FLAG_mask when set to 1 masks/enables the generation of the output FREEZE signal from line 2 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK2_Pos (6UL) /*!< Position of GPFLAGSLINEMASK2 field.                                 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK2_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSLINEMASK2_Pos) /*!< Bit mask of
-                                                                            GPFLAGSLINEMASK2 field.*/                             
+                                                                            GPFLAGSLINEMASK2 field.*/
 
 /* GPFLAGSLINEMASK3 @Bit 7 : GP_FLAG_mask when set to 1 masks/enables the generation of the output FREEZE signal from line 3 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK3_Pos (7UL) /*!< Position of GPFLAGSLINEMASK3 field.                                 */
   #define GPU_CORE_GPFLAGS_GPFLAGSLINEMASK3_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSLINEMASK3_Pos) /*!< Bit mask of
-                                                                            GPFLAGSLINEMASK3 field.*/                             
+                                                                            GPFLAGSLINEMASK3 field.*/
 
 /* GPFLAGSIRQSYSERRMASK0 @Bit 8 : GP_FLAG_irqmask when set to 1 masks/enables the generation of the IRQ_SYSERROR from line 0 */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK0_Pos (8UL) /*!< Position of GPFLAGSIRQSYSERRMASK0 field.                       */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK0_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK0_Pos) /*!< Bit mask of
-                                                                            GPFLAGSIRQSYSERRMASK0 field.*/                        
+                                                                            GPFLAGSIRQSYSERRMASK0 field.*/
 
 /* GPFLAGSIRQSYSERRMASK1 @Bit 9 : GP_FLAG_irqmask when set to 1 masks/enables the generation of the IRQ_SYSERROR from line 1 */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK1_Pos (9UL) /*!< Position of GPFLAGSIRQSYSERRMASK1 field.                       */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK1_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK1_Pos) /*!< Bit mask of
-                                                                            GPFLAGSIRQSYSERRMASK1 field.*/                        
+                                                                            GPFLAGSIRQSYSERRMASK1 field.*/
 
 /* GPFLAGSIRQSYSERRMASK2 @Bit 10 : GP_FLAG_irqmask when set to 1 masks/enables the generation of the IRQ_SYSERROR from line 2 */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK2_Pos (10UL) /*!< Position of GPFLAGSIRQSYSERRMASK2 field.                      */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK2_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK2_Pos) /*!< Bit mask of
-                                                                            GPFLAGSIRQSYSERRMASK2 field.*/                        
+                                                                            GPFLAGSIRQSYSERRMASK2 field.*/
 
 /* GPFLAGSIRQSYSERRMASK3 @Bit 11 : GP_FLAG_irqmask when set to 1 masks/enables the generation of the IRQ_SYSERROR from line 3 */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK3_Pos (11UL) /*!< Position of GPFLAGSIRQSYSERRMASK3 field.                      */
   #define GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK3_Msk (0x1UL << GPU_CORE_GPFLAGS_GPFLAGSIRQSYSERRMASK3_Pos) /*!< Bit mask of
-                                                                            GPFLAGSIRQSYSERRMASK3 field.*/                        
+                                                                            GPFLAGSIRQSYSERRMASK3 field.*/
 
 /* GPFLAGSPOS12LEN04 @Bits 12..15 : Revered */
   #define GPU_CORE_GPFLAGS_GPFLAGSPOS12LEN04_Pos (12UL) /*!< Position of GPFLAGSPOS12LEN04 field.                              */
   #define GPU_CORE_GPFLAGS_GPFLAGSPOS12LEN04_Msk (0xFUL << GPU_CORE_GPFLAGS_GPFLAGSPOS12LEN04_Pos) /*!< Bit mask of
-                                                                            GPFLAGSPOS12LEN04 field.*/                            
+                                                                            GPFLAGSPOS12LEN04 field.*/
 
 /* GPFLAGSBRK0 @Bit 16 : When set to 1, set breakpoint for GP_FLAG line 0 if NEMA_GP_FLAGS[0] bit value is high. */
   #define GPU_CORE_GPFLAGS_GPFLAGSBRK0_Pos (16UL)    /*!< Position of GPFLAGSBRK0 field.                                       */
@@ -3531,7 +3557,7 @@ typedef struct {
 /* GPFLAGSPOS20LEN12 @Bits 20..31 : Revered */
   #define GPU_CORE_GPFLAGS_GPFLAGSPOS20LEN12_Pos (20UL) /*!< Position of GPFLAGSPOS20LEN12 field.                              */
   #define GPU_CORE_GPFLAGS_GPFLAGSPOS20LEN12_Msk (0xFFFUL << GPU_CORE_GPFLAGS_GPFLAGSPOS20LEN12_Pos) /*!< Bit mask of
-                                                                            GPFLAGSPOS20LEN12 field.*/                            
+                                                                            GPFLAGSPOS20LEN12 field.*/
 
 
 /* GPU_CORE_SYSINTERRUPT: On Read: Returns the SYSERROR_IRQ ID. On write: Clears the SYSERROR_IRQ. */
@@ -3540,47 +3566,47 @@ typedef struct {
 /* SYSERRORLINE0 @Bit 0 : Indicates that IRQ_SYSERROR due to GP_FLAG line 0. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE0_Pos (0UL) /*!< Position of SYSERRORLINE0 field.                                  */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE0_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORLINE0_Pos) /*!< Bit mask of
-                                                                            SYSERRORLINE0 field.*/                                
+                                                                            SYSERRORLINE0 field.*/
 
 /* SYSERRORLINE1 @Bit 1 : Indicates that IRQ_SYSERROR due to GP_FLAG line 1. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE1_Pos (1UL) /*!< Position of SYSERRORLINE1 field.                                  */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE1_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORLINE1_Pos) /*!< Bit mask of
-                                                                            SYSERRORLINE1 field.*/                                
+                                                                            SYSERRORLINE1 field.*/
 
 /* SYSERRORLINE2 @Bit 2 : Indicates that IRQ_SYSERROR due to GP_FLAG line 2. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE2_Pos (2UL) /*!< Position of SYSERRORLINE2 field.                                  */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE2_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORLINE2_Pos) /*!< Bit mask of
-                                                                            SYSERRORLINE2 field.*/                                
+                                                                            SYSERRORLINE2 field.*/
 
 /* SYSERRORLINE3 @Bit 3 : Indicates that IRQ_SYSERROR due to GP_FLAG line 3. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE3_Pos (3UL) /*!< Position of SYSERRORLINE3 field.                                  */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORLINE3_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORLINE3_Pos) /*!< Bit mask of
-                                                                            SYSERRORLINE3 field.*/                                
+                                                                            SYSERRORLINE3 field.*/
 
 /* SYSERRORBUSCODE0 @Bit 4 : Indicates the Interface Error Code(AXI only). */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE0_Pos (4UL) /*!< Position of SYSERRORBUSCODE0 field.                            */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE0_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE0_Pos) /*!< Bit mask of
-                                                                            SYSERRORBUSCODE0 field.*/                             
+                                                                            SYSERRORBUSCODE0 field.*/
 
 /* SYSERRORBUSCODE1 @Bits 5..6 : Indicates the Bus Error Code occurence direction (AXI only). */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE1_Pos (5UL) /*!< Position of SYSERRORBUSCODE1 field.                            */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE1_Msk (0x3UL << GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE1_Pos) /*!< Bit mask of
-                                                                            SYSERRORBUSCODE1 field.*/                             
+                                                                            SYSERRORBUSCODE1 field.*/
 
 /* SYSERRORBUSCODE2 @Bits 7..10 : Indicates the Bus Error Code Interface. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE2_Pos (7UL) /*!< Position of SYSERRORBUSCODE2 field.                            */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE2_Msk (0xFUL << GPU_CORE_SYSINTERRUPT_SYSERRORBUSCODE2_Pos) /*!< Bit mask of
-                                                                            SYSERRORBUSCODE2 field.*/                             
+                                                                            SYSERRORBUSCODE2 field.*/
 
 /* SYSERRORBUSERR @Bit 11 : Indicates that a bus error has occurred. */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSERR_Pos (11UL) /*!< Position of SYSERRORBUSERR field.                               */
   #define GPU_CORE_SYSINTERRUPT_SYSERRORBUSERR_Msk (0x1UL << GPU_CORE_SYSINTERRUPT_SYSERRORBUSERR_Pos) /*!< Bit mask of
-                                                                            SYSERRORBUSERR field.*/                               
+                                                                            SYSERRORBUSERR field.*/
 
 /* SYSINTERRUPTPOS12LEN20 @Bits 12..31 : Revered */
   #define GPU_CORE_SYSINTERRUPT_SYSINTERRUPTPOS12LEN20_Pos (12UL) /*!< Position of SYSINTERRUPTPOS12LEN20 field.               */
   #define GPU_CORE_SYSINTERRUPT_SYSINTERRUPTPOS12LEN20_Msk (0xFFFFFUL << GPU_CORE_SYSINTERRUPT_SYSINTERRUPTPOS12LEN20_Pos) /*!<
-                                                                            Bit mask of SYSINTERRUPTPOS12LEN20 field.*/           
+                                                                            Bit mask of SYSINTERRUPTPOS12LEN20 field.*/
 
 
 /* GPU_CORE_BUSERRORMASK: Sets the mask for the Buserror Interrupt. */
@@ -3589,22 +3615,22 @@ typedef struct {
 /* BUSERRORMASK0 @Bit 0 : Revered */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK0_Pos (0UL) /*!< Position of BUSERRORMASK0 field.                                  */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK0_Msk (0x1UL << GPU_CORE_BUSERRORMASK_BUSERRORMASK0_Pos) /*!< Bit mask of
-                                                                            BUSERRORMASK0 field.*/                                
+                                                                            BUSERRORMASK0 field.*/
 
 /* BUSERRORMASK1 @Bits 1..2 : Sets the mask for the Bus Error Code occurence direction (AXI only). */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK1_Pos (1UL) /*!< Position of BUSERRORMASK1 field.                                  */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK1_Msk (0x3UL << GPU_CORE_BUSERRORMASK_BUSERRORMASK1_Pos) /*!< Bit mask of
-                                                                            BUSERRORMASK1 field.*/                                
+                                                                            BUSERRORMASK1 field.*/
 
 /* BUSERRORMASK2 @Bits 3..6 : Sets the mask for the Bus Error Code Interface. */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK2_Pos (3UL) /*!< Position of BUSERRORMASK2 field.                                  */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASK2_Msk (0xFUL << GPU_CORE_BUSERRORMASK_BUSERRORMASK2_Pos) /*!< Bit mask of
-                                                                            BUSERRORMASK2 field.*/                                
+                                                                            BUSERRORMASK2 field.*/
 
 /* BUSERRORMASKPOS07LEN24 @Bits 7..31 : Revered */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASKPOS07LEN24_Pos (7UL) /*!< Position of BUSERRORMASKPOS07LEN24 field.                */
   #define GPU_CORE_BUSERRORMASK_BUSERRORMASKPOS07LEN24_Msk (0x1FFFFFFUL << GPU_CORE_BUSERRORMASK_BUSERRORMASKPOS07LEN24_Pos)
-                                                                            /*!< Bit mask of BUSERRORMASKPOS07LEN24 field.*/      
+                                                                            /*!< Bit mask of BUSERRORMASKPOS07LEN24 field.*/
 
 
 /* ======================================================= Struct GPU ======================================================== */
@@ -3650,7 +3676,7 @@ typedef struct {
 /* EVENTS_SYSERROR @Bit 0 : Event indicating */
   #define GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_Pos (0UL) /*!< Position of EVENTS_SYSERROR field.                                */
   #define GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_Msk (0x1UL << GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_Pos) /*!< Bit mask of
-                                                                            EVENTS_SYSERROR field.*/                              
+                                                                            EVENTS_SYSERROR field.*/
   #define GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_Min (0x0UL) /*!< Min enumerator value of EVENTS_SYSERROR field.                  */
   #define GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_Max (0x1UL) /*!< Max enumerator value of EVENTS_SYSERROR field.                  */
   #define GPU_EVENTS_SYSERROR_EVENTS_SYSERROR_NotGenerated (0x0UL) /*!< Event not generated                                    */
@@ -3663,7 +3689,7 @@ typedef struct {
 /* EVENTS_STARTED @Bit 0 : The display controller has been enabled. */
   #define GPU_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field.                                   */
   #define GPU_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << GPU_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of EVENTS_STARTED
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_EVENTS_STARTED_EVENTS_STARTED_Min (0x0UL) /*!< Min enumerator value of EVENTS_STARTED field.                     */
   #define GPU_EVENTS_STARTED_EVENTS_STARTED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STARTED field.                     */
   #define GPU_EVENTS_STARTED_EVENTS_STARTED_NotGenerated (0x0UL) /*!< Event not generated                                      */
@@ -3676,7 +3702,7 @@ typedef struct {
 /* EVENTS_FREEZE @Bit 0 : Freeze GPU */
   #define GPU_EVENTS_FREEZE_EVENTS_FREEZE_Pos (0UL)  /*!< Position of EVENTS_FREEZE field.                                     */
   #define GPU_EVENTS_FREEZE_EVENTS_FREEZE_Msk (0x1UL << GPU_EVENTS_FREEZE_EVENTS_FREEZE_Pos) /*!< Bit mask of EVENTS_FREEZE
-                                                                            field.*/                                              
+                                                                            field.*/
   #define GPU_EVENTS_FREEZE_EVENTS_FREEZE_Min (0x0UL) /*!< Min enumerator value of EVENTS_FREEZE field.                        */
   #define GPU_EVENTS_FREEZE_EVENTS_FREEZE_Max (0x1UL) /*!< Max enumerator value of EVENTS_FREEZE field.                        */
   #define GPU_EVENTS_FREEZE_EVENTS_FREEZE_NotGenerated (0x0UL) /*!< Event not generated                                        */
@@ -3851,8 +3877,8 @@ typedef struct {
   #define GPU_FLAG_ResetValue (0x00000000UL)         /*!< Reset value of FLAG register.                                        */
 
 /* FLAG @Bits 0..3 : Writing '1' sets the flag breakpoint, writing '0' resumes the breakpoint. Reading reads the value of the
-                     flag. */                                                                                                     
-                                                                                                                                  
+                     flag. */
+
   #define GPU_FLAG_FLAG_Pos (0UL)                    /*!< Position of FLAG field.                                              */
   #define GPU_FLAG_FLAG_Msk (0xFUL << GPU_FLAG_FLAG_Pos) /*!< Bit mask of FLAG field.                                          */
 
@@ -3908,22 +3934,22 @@ typedef struct {
 /* CLOCKFORCINGPRE @Bits 0..3 : CLOCKFORCINGPRE */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos (0UL) /*!< Position of CLOCKFORCINGPRE field.                      */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Msk (0xFUL << DISPC_PCGCSLAVE_FORCEOVERRIDE_CLOCKFORCINGPRE_Pos) /*!<
-                                                                            Bit mask of CLOCKFORCINGPRE field.*/                  
+                                                                            Bit mask of CLOCKFORCINGPRE field.*/
 
 /* DOFORCECLOCKPRE @Bit 7 : DOFORCECLOCKPRE */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos (7UL) /*!< Position of DOFORCECLOCKPRE field.                      */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Msk (0x1UL << DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCECLOCKPRE_Pos) /*!<
-                                                                            Bit mask of DOFORCECLOCKPRE field.*/                  
+                                                                            Bit mask of DOFORCECLOCKPRE field.*/
 
 /* POWERFORCINGPRE @Bits 8..9 : POWERFORCINGPRE */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Pos (8UL) /*!< Position of POWERFORCINGPRE field.                      */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Msk (0x3UL << DISPC_PCGCSLAVE_FORCEOVERRIDE_POWERFORCINGPRE_Pos) /*!<
-                                                                            Bit mask of POWERFORCINGPRE field.*/                  
+                                                                            Bit mask of POWERFORCINGPRE field.*/
 
 /* DOFORCEPOWERPRE @Bit 15 : DOFORCEPOWERPRE */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos (15UL) /*!< Position of DOFORCEPOWERPRE field.                     */
   #define DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Msk (0x1UL << DISPC_PCGCSLAVE_FORCEOVERRIDE_DOFORCEPOWERPRE_Pos) /*!<
-                                                                            Bit mask of DOFORCEPOWERPRE field.*/                  
+                                                                            Bit mask of DOFORCEPOWERPRE field.*/
 
 
 
@@ -3937,10 +3963,10 @@ typedef struct {
   __IOM uint32_t  BGCOLOR;                           /*!< (@ 0x00000008) Specifies the main background color.                  */
   __IOM uint32_t  RESXY;                             /*!< (@ 0x0000000C) Specifies the main X and Y resolutions.               */
   __IOM uint32_t  PLAY;                              /*!< (@ 0x00000010) Write any value to this register at the end of the
-                                                                         programming sequence to trigger the display.*/           
+                                                                         programming sequence to trigger the display.*/
   __IOM uint32_t  FRONTPORCHXY;                      /*!< (@ 0x00000014) Specifies the X and Y dimensions for the Front Porch. */
   __IOM uint32_t  BLANKINGXY;                        /*!< (@ 0x00000018) Specifies the X and Y dimensions for the Blanking
-                                                                         Period.*/                                                
+                                                                         Period.*/
   __IOM uint32_t  BACKPORCHXY;                       /*!< (@ 0x0000001C) Specifies the X and Y dimensions for the Back Porch.  */
   __IOM uint32_t  CURSORXY;                          /*!< (@ 0x00000020) Specifies the cursors start X and Y coordinates.      */
   __IOM uint32_t  STARTXY;                           /*!< (@ 0x00000024) Specifies the start position of the very first frame. */
@@ -3950,81 +3976,81 @@ typedef struct {
   __IOM uint32_t  LAYER0STARTXY;                     /*!< (@ 0x00000034) X and Y start dimensions of layer 0                   */
   __IOM uint32_t  LAYER0SIZEXY;                      /*!< (@ 0x00000038) X and Y size of layer 0                               */
   __IOM uint32_t  LAYER0BASEADDR;                    /*!< (@ 0x0000003C) The start address of the framebuffer to be accessed by
-                                                                         layer 0*/                                                
+                                                                         layer 0*/
   __IOM uint32_t  LAYER0STRIDE;                      /*!< (@ 0x00000040) Specify the stride and the AXI bus burst of layer 0   */
   __IOM uint32_t  LAYER0RESXY;                       /*!< (@ 0x00000044) X and Y start dimensions of layerX and Y dimensions for
-                                                                         the resolution of layer 0.*/                             
+                                                                         the resolution of layer 0.*/
   __IM  uint32_t  RESERVED[2];
   __IOM uint32_t  LAYER1MODE;                        /*!< (@ 0x00000050) Activate and set-up layer 1                           */
   __IOM uint32_t  LAYER1STARTXY;                     /*!< (@ 0x00000054) X and Y start dimensions of layer 1                   */
   __IOM uint32_t  LAYER1SIZEXY;                      /*!< (@ 0x00000058) X and Y size of layer 1                               */
   __IOM uint32_t  LAYER1BASEADDR;                    /*!< (@ 0x0000005C) The start address of the framebuffer to be accessed by
-                                                                         layer 1*/                                                
+                                                                         layer 1*/
   __IOM uint32_t  LAYER1STRIDE;                      /*!< (@ 0x00000060) Specify the stride and the AXI bus burst of layer 1   */
   __IOM uint32_t  LAYER1RESXY;                       /*!< (@ 0x00000064) X and Y start dimensions of layerX and Y dimensions for
-                                                                         the resolution of layer 1.*/                             
+                                                                         the resolution of layer 1.*/
   __IM  uint32_t  RESERVED1[2];
   __IOM uint32_t  LAYER2MODE;                        /*!< (@ 0x00000070) Activate and set-up layer 2                           */
   __IOM uint32_t  LAYER2STARTXY;                     /*!< (@ 0x00000074) X and Y start dimensions of layer 2                   */
   __IOM uint32_t  LAYER2SIZEXY;                      /*!< (@ 0x00000078) X and Y size of layer 2                               */
   __IOM uint32_t  LAYER2BASEADDR;                    /*!< (@ 0x0000007C) The start address of the framebuffer to be accessed by
-                                                                         layer 2*/                                                
+                                                                         layer 2*/
   __IOM uint32_t  LAYER2STRIDE;                      /*!< (@ 0x00000080) Specify the stride and the AXI bus burst of layer 2   */
   __IOM uint32_t  LAYER2RESXY;                       /*!< (@ 0x00000084) X and Y start dimensions of layerX and Y dimensions for
-                                                                         the resolution of layer 2.*/                             
+                                                                         the resolution of layer 2.*/
   __IM  uint32_t  RESERVED2[2];
   __IOM uint32_t  LAYER3MODE;                        /*!< (@ 0x00000090) Activate and set-up layer 3                           */
   __IOM uint32_t  LAYER3STARTXY;                     /*!< (@ 0x00000094) X and Y start dimensions of layer 3                   */
   __IOM uint32_t  LAYER3SIZEXY;                      /*!< (@ 0x00000098) X and Y size of layer 3                               */
   __IOM uint32_t  LAYER3BASEADDR;                    /*!< (@ 0x0000009C) The start address of the framebuffer to be accessed by
-                                                                         layer 3*/                                                
+                                                                         layer 3*/
   __IOM uint32_t  LAYER3STRIDE;                      /*!< (@ 0x000000A0) Specify the stride and the AXI bus burst of layer 3   */
   __IOM uint32_t  LAYER3RESXY;                       /*!< (@ 0x000000A4) X and Y start dimensions of layerX and Y dimensions for
-                                                                         the resolution of layer 3.*/                             
+                                                                         the resolution of layer 3.*/
   __IM  uint32_t  RESERVED3[10];
   __IOM uint32_t  LAYER0UBASE;                       /*!< (@ 0x000000D0) The start address of the U chroma for layer 0 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER0VBASE;                       /*!< (@ 0x000000D4) The start address of the V chroma for layer 0 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER0UVSTRIDE;                    /*!< (@ 0x000000D8) Specify the stride for layer 0 YUV planar format.     */
   __IOM uint32_t  LAYER1UBASE;                       /*!< (@ 0x000000DC) The start address of the U chroma for layer 1 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER1VBASE;                       /*!< (@ 0x000000E0) The start address of the V chroma for layer 1 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER1UVSTRIDE;                    /*!< (@ 0x000000E4) Specify the stride for layer 1 YUV planar format.     */
   __IOM uint32_t  DBIBCMD;                           /*!< (@ 0x000000E8) Command Register to read/write commands from/to DBI
-                                                                         Type-B interface.*/                                      
+                                                                         Type-B interface.*/
   __IOM uint32_t  DBIBRDAT;                          /*!< (@ 0x000000EC) Data read by DBI Type-B/SPI interface are stored in the
-                                                                         CORE_DBIB_RDAT register.*/                               
+                                                                         CORE_DBIB_RDAT register.*/
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x000000F0) Information register of the layers activation and
-                                                                         setup.*/                                                 
+                                                                         setup.*/
   __IOM uint32_t  IDREG;                             /*!< (@ 0x000000F4) Identification Register.                              */
   __IOM uint32_t  INTERRUPT;                         /*!< (@ 0x000000F8) Interrupt register                                    */
   __IOM uint32_t  STATUS;                            /*!< (@ 0x000000FC) Status register                                       */
   __IOM uint32_t  COLMOD;                            /*!< (@ 0x00000100) Color mode status register.                           */
   __IM  uint32_t  RESERVED4[32];
   __IOM uint32_t  CRC;                               /*!< (@ 0x00000184) If CRC errors occur, they are written in the CORE_CRC
-                                                                         register*/                                               
+                                                                         register*/
   __IOM uint32_t  LAYER2UBASE;                       /*!< (@ 0x00000188) The start address of the U chroma for layer 2 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER2VBASE;                       /*!< (@ 0x0000018C) The start address of the V chroma for layer 2 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER2UVSTRIDE;                    /*!< (@ 0x00000190) Specify the stride for layer 2 YUV planar format.     */
   __IOM uint32_t  LAYER3UBASE;                       /*!< (@ 0x00000194) The start address of the U chroma for layer 3 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER3VBASE;                       /*!< (@ 0x00000198) The start address of the V chroma for layer 3 YUV
-                                                                         planar format.*/                                         
+                                                                         planar format.*/
   __IOM uint32_t  LAYER3UVSTRIDE;                    /*!< (@ 0x0000019C) Specify the stride for layer 3 YUV planar format.     */
   __IOM uint32_t  FORMATCTRL;                        /*!< (@ 0x000001A0) Controls DBI and JDI format.                          */
   __IOM uint32_t  FORMATCTRL2;                       /*!< (@ 0x000001A4) Controls DBI and JDI format.                          */
   __IOM uint32_t  CLKCTRLCG;                         /*!< (@ 0x000001A8) Controls the Clock Gaters and the routing of format and
-                                                                         pixel clock*/                                            
+                                                                         pixel clock*/
   __IOM uint32_t  FORMATCTRL3;                       /*!< (@ 0x000001AC) Control JDI format.                                   */
   __IM  uint32_t  RESERVED5[148];
   __IOM uint32_t  PALETTE;                           /*!< (@ 0x00000400) Global palette/gamma correction memory region.        */
   __IM  uint32_t  RESERVED6[255];
   __IOM uint32_t  CURSORIMAGE;                       /*!< (@ 0x00000800) Color values for the pixel Cursor that are used with
-                                                                         the Cursor LUT.*/                                        
+                                                                         the Cursor LUT.*/
   __IM  uint32_t  RESERVED7[127];
   __IOM uint32_t  CURSORLUT;                         /*!< (@ 0x00000A00) Cursor Look-up Table.                                 */
   __IM  uint32_t  RESERVED8[383];
@@ -4055,7 +4081,7 @@ typedef struct {
 /* MODEPOS03LEN01 @Bit 3 : When set to 0, the following output color formats are enabled */
   #define DISPC_CORE_MODE_MODEPOS03LEN01_Pos (3UL)   /*!< Position of MODEPOS03LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS03LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS03LEN01_Pos) /*!< Bit mask of MODEPOS03LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* DBIBEN @Bit 4 : When set to 0, DBI Type-B interface is enabled */
   #define DISPC_CORE_MODE_DBIBEN_Pos (4UL)           /*!< Position of DBIBEN field.                                            */
@@ -4064,32 +4090,32 @@ typedef struct {
 /* MODEPOS05LEN04 @Bits 5..8 : Display data format */
   #define DISPC_CORE_MODE_MODEPOS05LEN04_Pos (5UL)   /*!< Position of MODEPOS05LEN04 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS05LEN04_Msk (0xFUL << DISPC_CORE_MODE_MODEPOS05LEN04_Pos) /*!< Bit mask of MODEPOS05LEN04
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS09LEN01 @Bit 9 : * 1: YUV/YCbCr format is enabled */
   #define DISPC_CORE_MODE_MODEPOS09LEN01_Pos (9UL)   /*!< Position of MODEPOS09LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS09LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS09LEN01_Pos) /*!< Bit mask of MODEPOS09LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS10LEN01 @Bit 10 : When set to 1, LVDS Enable output is enabled */
   #define DISPC_CORE_MODE_MODEPOS10LEN01_Pos (10UL)  /*!< Position of MODEPOS10LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS10LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS10LEN01_Pos) /*!< Bit mask of MODEPOS10LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS11LEN01 @Bit 11 : When set to 1, DPI_PCLK is equal to format_clk */
   #define DISPC_CORE_MODE_MODEPOS11LEN01_Pos (11UL)  /*!< Position of MODEPOS11LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS11LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS11LEN01_Pos) /*!< Bit mask of MODEPOS11LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS12LEN03 @Bits 12..14 : * 0x00: RGB888 24-bits */
   #define DISPC_CORE_MODE_MODEPOS12LEN03_Pos (12UL)  /*!< Position of MODEPOS12LEN03 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS12LEN03_Msk (0x7UL << DISPC_CORE_MODE_MODEPOS12LEN03_Pos) /*!< Bit mask of MODEPOS12LEN03
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS15LEN02 @Bits 15..16 : Revered */
   #define DISPC_CORE_MODE_MODEPOS15LEN02_Pos (15UL)  /*!< Position of MODEPOS15LEN02 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS15LEN02_Msk (0x3UL << DISPC_CORE_MODE_MODEPOS15LEN02_Pos) /*!< Bit mask of MODEPOS15LEN02
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODESNGFRAME @Bit 17 : When set to 1, single frame update is enabled */
   #define DISPC_CORE_MODE_MODESNGFRAME_Pos (17UL)    /*!< Position of MODESNGFRAME field.                                      */
@@ -4098,22 +4124,22 @@ typedef struct {
 /* MODEPOS18LEN01 @Bit 18 : When set to 1, underrun prevention is enabled for interfaces that support this */
   #define DISPC_CORE_MODE_MODEPOS18LEN01_Pos (18UL)  /*!< Position of MODEPOS18LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS18LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS18LEN01_Pos) /*!< Bit mask of MODEPOS18LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEFORCEBLANK @Bit 19 : When set to 1, forces output to blank */
   #define DISPC_CORE_MODE_MODEFORCEBLANK_Pos (19UL)  /*!< Position of MODEFORCEBLANK field.                                    */
   #define DISPC_CORE_MODE_MODEFORCEBLANK_Msk (0x1UL << DISPC_CORE_MODE_MODEFORCEBLANK_Pos) /*!< Bit mask of MODEFORCEBLANK
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEGLBGAMMAEN @Bit 20 : When set to 1, global gamma correction is enabled */
   #define DISPC_CORE_MODE_MODEGLBGAMMAEN_Pos (20UL)  /*!< Position of MODEGLBGAMMAEN field.                                    */
   #define DISPC_CORE_MODE_MODEGLBGAMMAEN_Msk (0x1UL << DISPC_CORE_MODE_MODEGLBGAMMAEN_Pos) /*!< Bit mask of MODEGLBGAMMAEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPOS21LEN02 @Bits 21..22 : Revered */
   #define DISPC_CORE_MODE_MODEPOS21LEN02_Pos (21UL)  /*!< Position of MODEPOS21LEN02 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS21LEN02_Msk (0x3UL << DISPC_CORE_MODE_MODEPOS21LEN02_Pos) /*!< Bit mask of MODEPOS21LEN02
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODESNGVSYNC @Bit 23 : When set to 1, VSYNC for a single cycle per line is enabled */
   #define DISPC_CORE_MODE_MODESNGVSYNC_Pos (23UL)    /*!< Position of MODESNGVSYNC field.                                      */
@@ -4138,7 +4164,7 @@ typedef struct {
 /* MODEPOS29LEN01 @Bit 29 : Revered */
   #define DISPC_CORE_MODE_MODEPOS29LEN01_Pos (29UL)  /*!< Position of MODEPOS29LEN01 field.                                    */
   #define DISPC_CORE_MODE_MODEPOS29LEN01_Msk (0x1UL << DISPC_CORE_MODE_MODEPOS29LEN01_Pos) /*!< Bit mask of MODEPOS29LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* MODEPRGCUREN @Bit 30 : When set to 1, programmable cursor is enabled */
   #define DISPC_CORE_MODE_MODEPRGCUREN_Pos (30UL)    /*!< Position of MODEPRGCUREN field.                                      */
@@ -4155,37 +4181,37 @@ typedef struct {
 /* CLKCTRLPRIDIV @Bits 0..5 : Value of primary clock divider */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPRIDIV_Pos (0UL) /*!< Position of CLKCTRLPRIDIV field.                                     */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPRIDIV_Msk (0x3FUL << DISPC_CORE_CLKCTRL_CLKCTRLPRIDIV_Pos) /*!< Bit mask of CLKCTRLPRIDIV
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CLKCTRLPOS06LEN02 @Bits 6..7 : Revered */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPOS06LEN02_Pos (6UL) /*!< Position of CLKCTRLPOS06LEN02 field.                             */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPOS06LEN02_Msk (0x3UL << DISPC_CORE_CLKCTRL_CLKCTRLPOS06LEN02_Pos) /*!< Bit mask of
-                                                                            CLKCTRLPOS06LEN02 field.*/                            
+                                                                            CLKCTRLPOS06LEN02 field.*/
 
 /* CLKCTRLPREFETCH @Bits 8..13 : Number of lines to be prefetched before starting the */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPREFETCH_Pos (8UL) /*!< Position of CLKCTRLPREFETCH field.                                 */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPREFETCH_Msk (0x3FUL << DISPC_CORE_CLKCTRL_CLKCTRLPREFETCH_Pos) /*!< Bit mask of
-                                                                            CLKCTRLPREFETCH field.*/                              
+                                                                            CLKCTRLPREFETCH field.*/
 
 /* CLKCTRLPOS14LEN02 @Bits 14..15 : Revered */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPOS14LEN02_Pos (14UL) /*!< Position of CLKCTRLPOS14LEN02 field.                            */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPOS14LEN02_Msk (0x3UL << DISPC_CORE_CLKCTRL_CLKCTRLPOS14LEN02_Pos) /*!< Bit mask of
-                                                                            CLKCTRLPOS14LEN02 field.*/                            
+                                                                            CLKCTRLPOS14LEN02 field.*/
 
 /* CLKCTRLPLLSLCT @Bits 16..23 : Select PLL Clock. Drives the pll_sw pins */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPLLSLCT_Pos (16UL) /*!< Position of CLKCTRLPLLSLCT field.                                  */
   #define DISPC_CORE_CLKCTRL_CLKCTRLPLLSLCT_Msk (0xFFUL << DISPC_CORE_CLKCTRL_CLKCTRLPLLSLCT_Pos) /*!< Bit mask of
-                                                                            CLKCTRLPLLSLCT field.*/                               
+                                                                            CLKCTRLPLLSLCT field.*/
 
 /* CLKCTRLSHFPHASE @Bits 24..26 : Clock phase shift value for LVDS operation */
   #define DISPC_CORE_CLKCTRL_CLKCTRLSHFPHASE_Pos (24UL) /*!< Position of CLKCTRLSHFPHASE field.                                */
   #define DISPC_CORE_CLKCTRL_CLKCTRLSHFPHASE_Msk (0x7UL << DISPC_CORE_CLKCTRL_CLKCTRLSHFPHASE_Pos) /*!< Bit mask of
-                                                                            CLKCTRLSHFPHASE field.*/                              
+                                                                            CLKCTRLSHFPHASE field.*/
 
 /* CLKCTRLOPTDIV @Bits 27..31 : Value of optional clock divider */
   #define DISPC_CORE_CLKCTRL_CLKCTRLOPTDIV_Pos (27UL) /*!< Position of CLKCTRLOPTDIV field.                                    */
   #define DISPC_CORE_CLKCTRL_CLKCTRLOPTDIV_Msk (0x1FUL << DISPC_CORE_CLKCTRL_CLKCTRLOPTDIV_Pos) /*!< Bit mask of CLKCTRLOPTDIV
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_BGCOLOR: Specifies the main background color. */
@@ -4194,7 +4220,7 @@ typedef struct {
 /* BGCOLORALPHA @Bits 0..7 : Color alpha is used as background color */
   #define DISPC_CORE_BGCOLOR_BGCOLORALPHA_Pos (0UL)  /*!< Position of BGCOLORALPHA field.                                      */
   #define DISPC_CORE_BGCOLOR_BGCOLORALPHA_Msk (0xFFUL << DISPC_CORE_BGCOLOR_BGCOLORALPHA_Pos) /*!< Bit mask of BGCOLORALPHA
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BGCOLORBLUE @Bits 8..15 : Color blue is used as background color */
   #define DISPC_CORE_BGCOLOR_BGCOLORBLUE_Pos (8UL)   /*!< Position of BGCOLORBLUE field.                                       */
@@ -4203,7 +4229,7 @@ typedef struct {
 /* BGCOLORGREEN @Bits 16..23 : Color green is used as background color */
   #define DISPC_CORE_BGCOLOR_BGCOLORGREEN_Pos (16UL) /*!< Position of BGCOLORGREEN field.                                      */
   #define DISPC_CORE_BGCOLOR_BGCOLORGREEN_Msk (0xFFUL << DISPC_CORE_BGCOLOR_BGCOLORGREEN_Pos) /*!< Bit mask of BGCOLORGREEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BGCOLORRED @Bits 24..31 : Color red is used as background color */
   #define DISPC_CORE_BGCOLOR_BGCOLORRED_Pos (24UL)   /*!< Position of BGCOLORRED field.                                        */
@@ -4236,12 +4262,12 @@ typedef struct {
 /* FRONTPORCHY @Bits 0..15 : Specify the number of lines for the front porch Y dimension */
   #define DISPC_CORE_FRONTPORCHXY_FRONTPORCHY_Pos (0UL) /*!< Position of FRONTPORCHY field.                                    */
   #define DISPC_CORE_FRONTPORCHXY_FRONTPORCHY_Msk (0xFFFFUL << DISPC_CORE_FRONTPORCHXY_FRONTPORCHY_Pos) /*!< Bit mask of
-                                                                            FRONTPORCHY field.*/                                  
+                                                                            FRONTPORCHY field.*/
 
 /* FRONTPORCHX @Bits 16..31 : Specify the pixel clock cycles for the front porch X dimension */
   #define DISPC_CORE_FRONTPORCHXY_FRONTPORCHX_Pos (16UL) /*!< Position of FRONTPORCHX field.                                   */
   #define DISPC_CORE_FRONTPORCHXY_FRONTPORCHX_Msk (0xFFFFUL << DISPC_CORE_FRONTPORCHXY_FRONTPORCHX_Pos) /*!< Bit mask of
-                                                                            FRONTPORCHX field.*/                                  
+                                                                            FRONTPORCHX field.*/
 
 
 /* DISPC_CORE_BLANKINGXY: Specifies the X and Y dimensions for the Blanking Period. */
@@ -4250,12 +4276,12 @@ typedef struct {
 /* BLANKINGY @Bits 0..15 : Specify the VSYNC lines for the Y dimension blanking period */
   #define DISPC_CORE_BLANKINGXY_BLANKINGY_Pos (0UL)  /*!< Position of BLANKINGY field.                                         */
   #define DISPC_CORE_BLANKINGXY_BLANKINGY_Msk (0xFFFFUL << DISPC_CORE_BLANKINGXY_BLANKINGY_Pos) /*!< Bit mask of BLANKINGY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BLANKINGX @Bits 16..31 : Specify the HSYNC pulse length for the X dimension blanking period */
   #define DISPC_CORE_BLANKINGXY_BLANKINGX_Pos (16UL) /*!< Position of BLANKINGX field.                                         */
   #define DISPC_CORE_BLANKINGXY_BLANKINGX_Msk (0xFFFFUL << DISPC_CORE_BLANKINGXY_BLANKINGX_Pos) /*!< Bit mask of BLANKINGX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_BACKPORCHXY: Specifies the X and Y dimensions for the Back Porch. */
@@ -4264,12 +4290,12 @@ typedef struct {
 /* BACKPORCHY @Bits 0..15 : Specify the number of lines for the front porch Y dimension */
   #define DISPC_CORE_BACKPORCHXY_BACKPORCHY_Pos (0UL) /*!< Position of BACKPORCHY field.                                       */
   #define DISPC_CORE_BACKPORCHXY_BACKPORCHY_Msk (0xFFFFUL << DISPC_CORE_BACKPORCHXY_BACKPORCHY_Pos) /*!< Bit mask of BACKPORCHY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* BACKPORCHX @Bits 16..31 : Specify the pixel clock cycles for the back porch X dimension */
   #define DISPC_CORE_BACKPORCHXY_BACKPORCHX_Pos (16UL) /*!< Position of BACKPORCHX field.                                      */
   #define DISPC_CORE_BACKPORCHXY_BACKPORCHX_Msk (0xFFFFUL << DISPC_CORE_BACKPORCHXY_BACKPORCHX_Pos) /*!< Bit mask of BACKPORCHX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_CURSORXY: Specifies the cursors start X and Y coordinates. */
@@ -4302,127 +4328,127 @@ typedef struct {
 /* DBIBCFGPOS00LEN03 @Bits 0..2 : Set the color format for DBI Type-B interface */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS00LEN03_Pos (0UL) /*!< Position of DBIBCFGPOS00LEN03 field.                             */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS00LEN03_Msk (0x7UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS00LEN03_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS00LEN03 field.*/                            
+                                                                            DBIBCFGPOS00LEN03 field.*/
 
 /* DBIBCFGPOS03LEN03 @Bits 3..5 : Set the data order of the 8-bit data word: */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS03LEN03_Pos (3UL) /*!< Position of DBIBCFGPOS03LEN03 field.                             */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS03LEN03_Msk (0x7UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS03LEN03_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS03LEN03 field.*/                            
+                                                                            DBIBCFGPOS03LEN03 field.*/
 
 /* DBIBCFGPOS06LEN03 @Bits 6..8 : Set DBI Type-B interface width (8, 9 or 16 bits) and the serial interface: */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS06LEN03_Pos (6UL) /*!< Position of DBIBCFGPOS06LEN03 field.                             */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS06LEN03_Msk (0x7UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS06LEN03_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS06LEN03 field.*/                            
+                                                                            DBIBCFGPOS06LEN03 field.*/
 
 /* DBIBCFGPOS09LEN02 @Bits 9..10 : Set mode of operation SPI/DualSPI/QuadSPI/QuadSPI DDR */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS09LEN02_Pos (9UL) /*!< Position of DBIBCFGPOS09LEN02 field.                             */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS09LEN02_Msk (0x3UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS09LEN02_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS09LEN02 field.*/                            
+                                                                            DBIBCFGPOS09LEN02 field.*/
 
 /* DBIBCFGPOS11LEN01 @Bit 11 : When set to 1, Enables DualSPI sub-pixel transaction */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS11LEN01_Pos (11UL) /*!< Position of DBIBCFGPOS11LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS11LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS11LEN01 field.*/                            
+                                                                            DBIBCFGPOS11LEN01 field.*/
 
 /* DBIBCFGPOS12LEN01 @Bit 12 : When set to 1, enables the horizontal blanking */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS12LEN01_Pos (12UL) /*!< Position of DBIBCFGPOS12LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS12LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS12LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS12LEN01 field.*/                            
+                                                                            DBIBCFGPOS12LEN01 field.*/
 
 /* DBIBCFGPOS13LEN01 @Bit 13 : When set to 1, enables the external control */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS13LEN01_Pos (13UL) /*!< Position of DBIBCFGPOS13LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS13LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS13LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS13LEN01 field.*/                            
+                                                                            DBIBCFGPOS13LEN01 field.*/
 
 /* DBIBCFGPOS14LEN01 @Bit 14 : When set to 1, expose pixel generation clock on the DBIB_CLK */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS14LEN01_Pos (14UL) /*!< Position of DBIBCFGPOS14LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS14LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS14LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS14LEN01 field.*/                            
+                                                                            DBIBCFGPOS14LEN01 field.*/
 
 /* DBIBCFGPOS15LEN01 @Bit 15 : When set to 1, two-byte address is sent with each horizontal line (SPI) */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS15LEN01_Pos (15UL) /*!< Position of DBIBCFGPOS15LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS15LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS15LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS15LEN01 field.*/                            
+                                                                            DBIBCFGPOS15LEN01 field.*/
 
 /* DBIBCFGPOS16LEN01 @Bit 16 : When set to 1, inverts the bit-order of the horizontal line address */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS16LEN01_Pos (16UL) /*!< Position of DBIBCFGPOS16LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS16LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS16LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS16LEN01 field.*/                            
+                                                                            DBIBCFGPOS16LEN01 field.*/
 
 /* DBIBCFGPOS17LEN01 @Bit 17 : When set to 1, command data are used as header of each line */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS17LEN01_Pos (17UL) /*!< Position of DBIBCFGPOS17LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS17LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS17LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS17LEN01 field.*/                            
+                                                                            DBIBCFGPOS17LEN01 field.*/
 
 /* DBIBCFGPOS18LEN01 @Bit 18 : Revered */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS18LEN01_Pos (18UL) /*!< Position of DBIBCFGPOS18LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS18LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS18LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS18LEN01 field.*/                            
+                                                                            DBIBCFGPOS18LEN01 field.*/
 
 /* DBIBCFGPOS19LEN01 @Bit 19 : Sets SPI Clock Polarity */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS19LEN01_Pos (19UL) /*!< Position of DBIBCFGPOS19LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS19LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS19LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS19LEN01 field.*/                            
+                                                                            DBIBCFGPOS19LEN01 field.*/
 
 /* DBIBCFGPOS20LEN01 @Bit 20 : Sets SPI Clock Phase */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS20LEN01_Pos (20UL) /*!< Position of DBIBCFGPOS20LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS20LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS20LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS20LEN01 field.*/                            
+                                                                            DBIBCFGPOS20LEN01 field.*/
 
 /* DBIBCFGPOS21LEN01 @Bit 21 : When set to 1, Enables back-pressure for DBI Type-B interface */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS21LEN01_Pos (21UL) /*!< Position of DBIBCFGPOS21LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS21LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS21LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS21LEN01 field.*/                            
+                                                                            DBIBCFGPOS21LEN01 field.*/
 
 /* DBIBCFGPOS22LEN01 @Bit 22 : When set to 1, SPI 4-wire interface is enabled */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS22LEN01_Pos (22UL) /*!< Position of DBIBCFGPOS22LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS22LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS22LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS22LEN01 field.*/                            
+                                                                            DBIBCFGPOS22LEN01 field.*/
 
 /* DBIBCFGPOS23LEN01 @Bit 23 : When set to 1, SPI 3-wire interface is enabled */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS23LEN01_Pos (23UL) /*!< Position of DBIBCFGPOS23LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS23LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS23LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS23LEN01 field.*/                            
+                                                                            DBIBCFGPOS23LEN01 field.*/
 
 /* DBIBCFGPOS24LEN01 @Bit 24 : Invert Pixel Order */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS24LEN01_Pos (24UL) /*!< Position of DBIBCFGPOS24LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS24LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS24LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS24LEN01 field.*/                            
+                                                                            DBIBCFGPOS24LEN01 field.*/
 
 /* DBIBCFGPOS25LEN01 @Bit 25 : Drives DBIB_RESX output signal of DBI Type-B interface */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS25LEN01_Pos (25UL) /*!< Position of DBIBCFGPOS25LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS25LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS25LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS25LEN01 field.*/                            
+                                                                            DBIBCFGPOS25LEN01 field.*/
 
 /* DBIBCFGPOS26LEN01 @Bit 26 : When set to 1, force DBI Type-B interface to idle state. */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS26LEN01_Pos (26UL) /*!< Position of DBIBCFGPOS26LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS26LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS26LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS26LEN01 field.*/                            
+                                                                            DBIBCFGPOS26LEN01 field.*/
 
 /* DBIBCFGPOS27LEN01 @Bit 27 : When set to 1, enables the usage of SPI_DC wire as SPI_SD1 */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS27LEN01_Pos (27UL) /*!< Position of DBIBCFGPOS27LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS27LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS27LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS27LEN01 field.*/                            
+                                                                            DBIBCFGPOS27LEN01 field.*/
 
 /* DBIBCFGPOS28LEN01 @Bit 28 : When set to 1, the DBIB_TE signal is disabled */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS28LEN01_Pos (28UL) /*!< Position of DBIBCFGPOS28LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS28LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS28LEN01 field.*/                            
+                                                                            DBIBCFGPOS28LEN01 field.*/
 
 /* DBIBCFGPOS29LEN01 @Bit 29 : Sets the value of DBIB_CSX signal: */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS29LEN01_Pos (29UL) /*!< Position of DBIBCFGPOS29LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS29LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS29LEN01 field.*/                            
+                                                                            DBIBCFGPOS29LEN01 field.*/
 
 /* DBIBCFGPOS30LEN01 @Bit 30 : When set to 1, the value of the CSX signal of the DBI Type-B interface */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS30LEN01_Pos (30UL) /*!< Position of DBIBCFGPOS30LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS30LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS30LEN01 field.*/                            
+                                                                            DBIBCFGPOS30LEN01 field.*/
 
 /* DBIBCFGPOS31LEN01 @Bit 31 : When set to 1, the DBI Type-B interface is activated */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS31LEN01_Pos (31UL) /*!< Position of DBIBCFGPOS31LEN01 field.                            */
   #define DISPC_CORE_DBIBCFG_DBIBCFGPOS31LEN01_Msk (0x1UL << DISPC_CORE_DBIBCFG_DBIBCFGPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCFGPOS31LEN01 field.*/                            
+                                                                            DBIBCFGPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_GPIO: General Purpose register. */
@@ -4431,27 +4457,27 @@ typedef struct {
 /* GPIOPOS0LEN13 @Bits 0..12 : Read/Write from/to GPIO pins */
   #define DISPC_CORE_GPIO_GPIOPOS0LEN13_Pos (0UL)    /*!< Position of GPIOPOS0LEN13 field.                                     */
   #define DISPC_CORE_GPIO_GPIOPOS0LEN13_Msk (0x1FFFUL << DISPC_CORE_GPIO_GPIOPOS0LEN13_Pos) /*!< Bit mask of GPIOPOS0LEN13
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GPIOPOS13LEN02 @Bits 13..14 : Scaler advance */
   #define DISPC_CORE_GPIO_GPIOPOS13LEN02_Pos (13UL)  /*!< Position of GPIOPOS13LEN02 field.                                    */
   #define DISPC_CORE_GPIO_GPIOPOS13LEN02_Msk (0x3UL << DISPC_CORE_GPIO_GPIOPOS13LEN02_Pos) /*!< Bit mask of GPIOPOS13LEN02
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GPIOPOS15LEN01 @Bit 15 : Assert DPI-2 Shutdown Signal */
   #define DISPC_CORE_GPIO_GPIOPOS15LEN01_Pos (15UL)  /*!< Position of GPIOPOS15LEN01 field.                                    */
   #define DISPC_CORE_GPIO_GPIOPOS15LEN01_Msk (0x1UL << DISPC_CORE_GPIO_GPIOPOS15LEN01_Pos) /*!< Bit mask of GPIOPOS15LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GPIOPOS16LEN01 @Bit 16 : Assert DPI-2 Color Mode Signal */
   #define DISPC_CORE_GPIO_GPIOPOS16LEN01_Pos (16UL)  /*!< Position of GPIOPOS16LEN01 field.                                    */
   #define DISPC_CORE_GPIO_GPIOPOS16LEN01_Msk (0x1UL << DISPC_CORE_GPIO_GPIOPOS16LEN01_Pos) /*!< Bit mask of GPIOPOS16LEN01
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GPIOPOS17LEN15 @Bits 17..31 : Revered */
   #define DISPC_CORE_GPIO_GPIOPOS17LEN15_Pos (17UL)  /*!< Position of GPIOPOS17LEN15 field.                                    */
   #define DISPC_CORE_GPIO_GPIOPOS17LEN15_Msk (0x7FFFUL << DISPC_CORE_GPIO_GPIOPOS17LEN15_Pos) /*!< Bit mask of GPIOPOS17LEN15
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER0MODE: Activate and set-up layer 0 */
@@ -4460,68 +4486,68 @@ typedef struct {
 /* LAYER0COLORMODE @Bits 0..4 : Color mode for layer 0. */
   #define DISPC_CORE_LAYER0MODE_LAYER0COLORMODE_Pos (0UL) /*!< Position of LAYER0COLORMODE field.                              */
   #define DISPC_CORE_LAYER0MODE_LAYER0COLORMODE_Msk (0x1FUL << DISPC_CORE_LAYER0MODE_LAYER0COLORMODE_Pos) /*!< Bit mask of
-                                                                            LAYER0COLORMODE field.*/                              
+                                                                            LAYER0COLORMODE field.*/
 
 /* LAYER0MODELAYERREGISTERPROTECT @Bit 5 : Enable Register Protection for display layer registers. */
   #define DISPC_CORE_LAYER0MODE_LAYER0MODELAYERREGISTERPROTECT_Pos (5UL) /*!< Position of LAYER0MODELAYERREGISTERPROTECT field.*/
   #define DISPC_CORE_LAYER0MODE_LAYER0MODELAYERREGISTERPROTECT_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0MODELAYERREGISTERPROTECT_Pos)
                                                                             /*!< Bit mask of LAYER0MODELAYERREGISTERPROTECT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0MODEPOS05LEN02 @Bits 6..7 : Revered */
   #define DISPC_CORE_LAYER0MODE_LAYER0MODEPOS05LEN02_Pos (6UL) /*!< Position of LAYER0MODEPOS05LEN02 field.                    */
   #define DISPC_CORE_LAYER0MODE_LAYER0MODEPOS05LEN02_Msk (0x3UL << DISPC_CORE_LAYER0MODE_LAYER0MODEPOS05LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER0MODEPOS05LEN02 field.*/                      
+                                                                            of LAYER0MODEPOS05LEN02 field.*/
 
 /* LAYER0SRCBLD @Bits 8..11 : Source blending function for layer 0. */
   #define DISPC_CORE_LAYER0MODE_LAYER0SRCBLD_Pos (8UL) /*!< Position of LAYER0SRCBLD field.                                    */
   #define DISPC_CORE_LAYER0MODE_LAYER0SRCBLD_Msk (0xFUL << DISPC_CORE_LAYER0MODE_LAYER0SRCBLD_Pos) /*!< Bit mask of LAYER0SRCBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0DSTBLD @Bits 12..15 : Destination blending function for layer 0. */
   #define DISPC_CORE_LAYER0MODE_LAYER0DSTBLD_Pos (12UL) /*!< Position of LAYER0DSTBLD field.                                   */
   #define DISPC_CORE_LAYER0MODE_LAYER0DSTBLD_Msk (0xFUL << DISPC_CORE_LAYER0MODE_LAYER0DSTBLD_Pos) /*!< Bit mask of LAYER0DSTBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0GLBALPHA @Bits 16..23 : Alpha layer global value (0x00-0xFF range) */
   #define DISPC_CORE_LAYER0MODE_LAYER0GLBALPHA_Pos (16UL) /*!< Position of LAYER0GLBALPHA field.                               */
   #define DISPC_CORE_LAYER0MODE_LAYER0GLBALPHA_Msk (0xFFUL << DISPC_CORE_LAYER0MODE_LAYER0GLBALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER0GLBALPHA field.*/                               
+                                                                            LAYER0GLBALPHA field.*/
 
 /* LAYER0MODEPOS24LEN02 @Bits 24..25 : Revered */
   #define DISPC_CORE_LAYER0MODE_LAYER0MODEPOS24LEN02_Pos (24UL) /*!< Position of LAYER0MODEPOS24LEN02 field.                   */
   #define DISPC_CORE_LAYER0MODE_LAYER0MODEPOS24LEN02_Msk (0x3UL << DISPC_CORE_LAYER0MODE_LAYER0MODEPOS24LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER0MODEPOS24LEN02 field.*/                      
+                                                                            of LAYER0MODEPOS24LEN02 field.*/
 
 /* LAYER0GAMMAEN @Bit 26 : When set to 1, Gamma Look Up Table is enabled */
   #define DISPC_CORE_LAYER0MODE_LAYER0GAMMAEN_Pos (26UL) /*!< Position of LAYER0GAMMAEN field.                                 */
   #define DISPC_CORE_LAYER0MODE_LAYER0GAMMAEN_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0GAMMAEN_Pos) /*!< Bit mask of
-                                                                            LAYER0GAMMAEN field.*/                                
+                                                                            LAYER0GAMMAEN field.*/
 
 /* LAYER0HLOCK @Bit 27 : When set to 1, HLOCK signal on AHB DMAs is asserted */
   #define DISPC_CORE_LAYER0MODE_LAYER0HLOCK_Pos (27UL) /*!< Position of LAYER0HLOCK field.                                     */
   #define DISPC_CORE_LAYER0MODE_LAYER0HLOCK_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0HLOCK_Pos) /*!< Bit mask of LAYER0HLOCK
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0PREMULT @Bit 28 : When set to 1, premultiply image alpha is enabled */
   #define DISPC_CORE_LAYER0MODE_LAYER0PREMULT_Pos (28UL) /*!< Position of LAYER0PREMULT field.                                 */
   #define DISPC_CORE_LAYER0MODE_LAYER0PREMULT_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0PREMULT_Pos) /*!< Bit mask of
-                                                                            LAYER0PREMULT field.*/                                
+                                                                            LAYER0PREMULT field.*/
 
 /* LAYER0BLEN @Bit 29 : When set to 0, bilinear filtering is enabled. */
   #define DISPC_CORE_LAYER0MODE_LAYER0BLEN_Pos (29UL) /*!< Position of LAYER0BLEN field.                                       */
   #define DISPC_CORE_LAYER0MODE_LAYER0BLEN_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0BLEN_Pos) /*!< Bit mask of LAYER0BLEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0FORCEALPHA @Bit 30 : When set to 1, force alpha with global alpha */
   #define DISPC_CORE_LAYER0MODE_LAYER0FORCEALPHA_Pos (30UL) /*!< Position of LAYER0FORCEALPHA field.                           */
   #define DISPC_CORE_LAYER0MODE_LAYER0FORCEALPHA_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0FORCEALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER0FORCEALPHA field.*/                             
+                                                                            LAYER0FORCEALPHA field.*/
 
 /* LAYER0ENABLE @Bit 31 : When set to 1, layer n is enabled */
   #define DISPC_CORE_LAYER0MODE_LAYER0ENABLE_Pos (31UL) /*!< Position of LAYER0ENABLE field.                                   */
   #define DISPC_CORE_LAYER0MODE_LAYER0ENABLE_Msk (0x1UL << DISPC_CORE_LAYER0MODE_LAYER0ENABLE_Pos) /*!< Bit mask of LAYER0ENABLE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER0STARTXY: X and Y start dimensions of layer 0 */
@@ -4530,12 +4556,12 @@ typedef struct {
 /* LAYER0STARTY @Bits 0..15 : Specify the pixel offset of the starting Y dimension of layer 0 */
   #define DISPC_CORE_LAYER0STARTXY_LAYER0STARTY_Pos (0UL) /*!< Position of LAYER0STARTY field.                                 */
   #define DISPC_CORE_LAYER0STARTXY_LAYER0STARTY_Msk (0xFFFFUL << DISPC_CORE_LAYER0STARTXY_LAYER0STARTY_Pos) /*!< Bit mask of
-                                                                            LAYER0STARTY field.*/                                 
+                                                                            LAYER0STARTY field.*/
 
 /* LAYER0STARTX @Bits 16..31 : Specify the pixel offset of the starting X dimension of layer 0 */
   #define DISPC_CORE_LAYER0STARTXY_LAYER0STARTX_Pos (16UL) /*!< Position of LAYER0STARTX field.                                */
   #define DISPC_CORE_LAYER0STARTXY_LAYER0STARTX_Msk (0xFFFFUL << DISPC_CORE_LAYER0STARTXY_LAYER0STARTX_Pos) /*!< Bit mask of
-                                                                            LAYER0STARTX field.*/                                 
+                                                                            LAYER0STARTX field.*/
 
 
 /* DISPC_CORE_LAYER0SIZEXY: X and Y size of layer 0 */
@@ -4544,12 +4570,12 @@ typedef struct {
 /* LAYER0SIZEY @Bits 0..15 : Specify the pixel size of the layer 0 in the Y dimension */
   #define DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEY_Pos (0UL) /*!< Position of LAYER0SIZEY field.                                    */
   #define DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEY_Msk (0xFFFFUL << DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEY_Pos) /*!< Bit mask of
-                                                                            LAYER0SIZEY field.*/                                  
+                                                                            LAYER0SIZEY field.*/
 
 /* LAYER0SIZEX @Bits 16..31 : Specify the pixel size of the layer 0 in the X dimension */
   #define DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEX_Pos (16UL) /*!< Position of LAYER0SIZEX field.                                   */
   #define DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEX_Msk (0xFFFFUL << DISPC_CORE_LAYER0SIZEXY_LAYER0SIZEX_Pos) /*!< Bit mask of
-                                                                            LAYER0SIZEX field.*/                                  
+                                                                            LAYER0SIZEX field.*/
 
 
 /* DISPC_CORE_LAYER0BASEADDR: The start address of the framebuffer to be accessed by layer 0 */
@@ -4558,7 +4584,7 @@ typedef struct {
 /* LAYER0BASEADDR @Bits 0..31 : Specify the start address of framebuffer for layer 0. */
   #define DISPC_CORE_LAYER0BASEADDR_LAYER0BASEADDR_Pos (0UL) /*!< Position of LAYER0BASEADDR field.                            */
   #define DISPC_CORE_LAYER0BASEADDR_LAYER0BASEADDR_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER0BASEADDR_LAYER0BASEADDR_Pos) /*!< Bit
-                                                                            mask of LAYER0BASEADDR field.*/                       
+                                                                            mask of LAYER0BASEADDR field.*/
 
 
 /* DISPC_CORE_LAYER0STRIDE: Specify the stride and the AXI bus burst of layer 0 */
@@ -4567,32 +4593,32 @@ typedef struct {
 /* LAYER0STRIDE @Bits 0..15 : Specify the stride, which is the distance from line to line in bytes for layer 0 memory */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDE_Pos (0UL) /*!< Position of LAYER0STRIDE field.                                  */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDE_Msk (0xFFFFUL << DISPC_CORE_LAYER0STRIDE_LAYER0STRIDE_Pos) /*!< Bit mask of
-                                                                            LAYER0STRIDE field.*/                                 
+                                                                            LAYER0STRIDE field.*/
 
 /* LAYER0AXIBEAT @Bits 16..18 : Specify the AXI-beats per burst in layer 0 */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0AXIBEAT_Pos (16UL) /*!< Position of LAYER0AXIBEAT field.                               */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0AXIBEAT_Msk (0x7UL << DISPC_CORE_LAYER0STRIDE_LAYER0AXIBEAT_Pos) /*!< Bit mask of
-                                                                            LAYER0AXIBEAT field.*/                                
+                                                                            LAYER0AXIBEAT field.*/
 
 /* LAYER0AXITHRESHOLD @Bits 19..20 : Specify the AXI fifo threshold burst start in layer 0 */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0AXITHRESHOLD_Pos (19UL) /*!< Position of LAYER0AXITHRESHOLD field.                     */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0AXITHRESHOLD_Msk (0x3UL << DISPC_CORE_LAYER0STRIDE_LAYER0AXITHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER0AXITHRESHOLD field.*/                        
+                                                                            of LAYER0AXITHRESHOLD field.*/
 
 /* LAYER0STRIDEPOS21LEN4 @Bits 21..24 : Revered */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS21LEN4_Pos (21UL) /*!< Position of LAYER0STRIDEPOS21LEN4 field.               */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS21LEN4_Msk (0xFUL << DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS21LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER0STRIDEPOS21LEN4 field.*/            
+                                                                            Bit mask of LAYER0STRIDEPOS21LEN4 field.*/
 
 /* LAYER0DMATHRESHOLD @Bits 25..27 : Specify the DMA prefetch Level in layer 0 */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0DMATHRESHOLD_Pos (25UL) /*!< Position of LAYER0DMATHRESHOLD field.                     */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0DMATHRESHOLD_Msk (0x7UL << DISPC_CORE_LAYER0STRIDE_LAYER0DMATHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER0DMATHRESHOLD field.*/                        
+                                                                            of LAYER0DMATHRESHOLD field.*/
 
 /* LAYER0STRIDEPOS28LEN4 @Bits 28..31 : Revered */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS28LEN4_Pos (28UL) /*!< Position of LAYER0STRIDEPOS28LEN4 field.               */
   #define DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS28LEN4_Msk (0xFUL << DISPC_CORE_LAYER0STRIDE_LAYER0STRIDEPOS28LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER0STRIDEPOS28LEN4 field.*/            
+                                                                            Bit mask of LAYER0STRIDEPOS28LEN4 field.*/
 
 
 /* DISPC_CORE_LAYER0RESXY: X and Y start dimensions of layerX and Y dimensions for the resolution of layer 0. */
@@ -4601,12 +4627,12 @@ typedef struct {
 /* LAYER0RESY @Bits 0..15 : Specify the layer 0 pixel resolution in the Y dimension */
   #define DISPC_CORE_LAYER0RESXY_LAYER0RESY_Pos (0UL) /*!< Position of LAYER0RESY field.                                       */
   #define DISPC_CORE_LAYER0RESXY_LAYER0RESY_Msk (0xFFFFUL << DISPC_CORE_LAYER0RESXY_LAYER0RESY_Pos) /*!< Bit mask of LAYER0RESY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER0RESX @Bits 16..31 : Specify the layer 0 pixel resolution in the X dimension */
   #define DISPC_CORE_LAYER0RESXY_LAYER0RESX_Pos (16UL) /*!< Position of LAYER0RESX field.                                      */
   #define DISPC_CORE_LAYER0RESXY_LAYER0RESX_Msk (0xFFFFUL << DISPC_CORE_LAYER0RESXY_LAYER0RESX_Pos) /*!< Bit mask of LAYER0RESX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER1MODE: Activate and set-up layer 1 */
@@ -4615,68 +4641,68 @@ typedef struct {
 /* LAYER1COLORMODE @Bits 0..4 : Color mode for layer 1. */
   #define DISPC_CORE_LAYER1MODE_LAYER1COLORMODE_Pos (0UL) /*!< Position of LAYER1COLORMODE field.                              */
   #define DISPC_CORE_LAYER1MODE_LAYER1COLORMODE_Msk (0x1FUL << DISPC_CORE_LAYER1MODE_LAYER1COLORMODE_Pos) /*!< Bit mask of
-                                                                            LAYER1COLORMODE field.*/                              
+                                                                            LAYER1COLORMODE field.*/
 
 /* LAYER1MODELAYERREGISTERPROTECT @Bit 5 : Enable Register Protection for display layer registers. */
   #define DISPC_CORE_LAYER1MODE_LAYER1MODELAYERREGISTERPROTECT_Pos (5UL) /*!< Position of LAYER1MODELAYERREGISTERPROTECT field.*/
   #define DISPC_CORE_LAYER1MODE_LAYER1MODELAYERREGISTERPROTECT_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1MODELAYERREGISTERPROTECT_Pos)
                                                                             /*!< Bit mask of LAYER1MODELAYERREGISTERPROTECT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1MODEPOS05LEN02 @Bits 6..7 : Revered */
   #define DISPC_CORE_LAYER1MODE_LAYER1MODEPOS05LEN02_Pos (6UL) /*!< Position of LAYER1MODEPOS05LEN02 field.                    */
   #define DISPC_CORE_LAYER1MODE_LAYER1MODEPOS05LEN02_Msk (0x3UL << DISPC_CORE_LAYER1MODE_LAYER1MODEPOS05LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER1MODEPOS05LEN02 field.*/                      
+                                                                            of LAYER1MODEPOS05LEN02 field.*/
 
 /* LAYER1SRCBLD @Bits 8..11 : Source blending function for layer 1. */
   #define DISPC_CORE_LAYER1MODE_LAYER1SRCBLD_Pos (8UL) /*!< Position of LAYER1SRCBLD field.                                    */
   #define DISPC_CORE_LAYER1MODE_LAYER1SRCBLD_Msk (0xFUL << DISPC_CORE_LAYER1MODE_LAYER1SRCBLD_Pos) /*!< Bit mask of LAYER1SRCBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1DSTBLD @Bits 12..15 : Destination blending function for layer 1. */
   #define DISPC_CORE_LAYER1MODE_LAYER1DSTBLD_Pos (12UL) /*!< Position of LAYER1DSTBLD field.                                   */
   #define DISPC_CORE_LAYER1MODE_LAYER1DSTBLD_Msk (0xFUL << DISPC_CORE_LAYER1MODE_LAYER1DSTBLD_Pos) /*!< Bit mask of LAYER1DSTBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1GLBALPHA @Bits 16..23 : Alpha layer global value (0x00-0xFF range) */
   #define DISPC_CORE_LAYER1MODE_LAYER1GLBALPHA_Pos (16UL) /*!< Position of LAYER1GLBALPHA field.                               */
   #define DISPC_CORE_LAYER1MODE_LAYER1GLBALPHA_Msk (0xFFUL << DISPC_CORE_LAYER1MODE_LAYER1GLBALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER1GLBALPHA field.*/                               
+                                                                            LAYER1GLBALPHA field.*/
 
 /* LAYER1MODEPOS24LEN02 @Bits 24..25 : Revered */
   #define DISPC_CORE_LAYER1MODE_LAYER1MODEPOS24LEN02_Pos (24UL) /*!< Position of LAYER1MODEPOS24LEN02 field.                   */
   #define DISPC_CORE_LAYER1MODE_LAYER1MODEPOS24LEN02_Msk (0x3UL << DISPC_CORE_LAYER1MODE_LAYER1MODEPOS24LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER1MODEPOS24LEN02 field.*/                      
+                                                                            of LAYER1MODEPOS24LEN02 field.*/
 
 /* LAYER1GAMMAEN @Bit 26 : When set to 1, Gamma Look Up Table is enabled */
   #define DISPC_CORE_LAYER1MODE_LAYER1GAMMAEN_Pos (26UL) /*!< Position of LAYER1GAMMAEN field.                                 */
   #define DISPC_CORE_LAYER1MODE_LAYER1GAMMAEN_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1GAMMAEN_Pos) /*!< Bit mask of
-                                                                            LAYER1GAMMAEN field.*/                                
+                                                                            LAYER1GAMMAEN field.*/
 
 /* LAYER1HLOCK @Bit 27 : When set to 1, HLOCK signal on AHB DMAs is asserted */
   #define DISPC_CORE_LAYER1MODE_LAYER1HLOCK_Pos (27UL) /*!< Position of LAYER1HLOCK field.                                     */
   #define DISPC_CORE_LAYER1MODE_LAYER1HLOCK_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1HLOCK_Pos) /*!< Bit mask of LAYER1HLOCK
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1PREMULT @Bit 28 : When set to 1, premultiply image alpha is enabled */
   #define DISPC_CORE_LAYER1MODE_LAYER1PREMULT_Pos (28UL) /*!< Position of LAYER1PREMULT field.                                 */
   #define DISPC_CORE_LAYER1MODE_LAYER1PREMULT_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1PREMULT_Pos) /*!< Bit mask of
-                                                                            LAYER1PREMULT field.*/                                
+                                                                            LAYER1PREMULT field.*/
 
 /* LAYER1BLEN @Bit 29 : When set to 0, bilinear filtering is enabled. */
   #define DISPC_CORE_LAYER1MODE_LAYER1BLEN_Pos (29UL) /*!< Position of LAYER1BLEN field.                                       */
   #define DISPC_CORE_LAYER1MODE_LAYER1BLEN_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1BLEN_Pos) /*!< Bit mask of LAYER1BLEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1FORCEALPHA @Bit 30 : When set to 1, force alpha with global alpha */
   #define DISPC_CORE_LAYER1MODE_LAYER1FORCEALPHA_Pos (30UL) /*!< Position of LAYER1FORCEALPHA field.                           */
   #define DISPC_CORE_LAYER1MODE_LAYER1FORCEALPHA_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1FORCEALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER1FORCEALPHA field.*/                             
+                                                                            LAYER1FORCEALPHA field.*/
 
 /* LAYER1ENABLE @Bit 31 : When set to 1, layer n is enabled */
   #define DISPC_CORE_LAYER1MODE_LAYER1ENABLE_Pos (31UL) /*!< Position of LAYER1ENABLE field.                                   */
   #define DISPC_CORE_LAYER1MODE_LAYER1ENABLE_Msk (0x1UL << DISPC_CORE_LAYER1MODE_LAYER1ENABLE_Pos) /*!< Bit mask of LAYER1ENABLE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER1STARTXY: X and Y start dimensions of layer 1 */
@@ -4685,12 +4711,12 @@ typedef struct {
 /* LAYER1STARTY @Bits 0..15 : Specify the pixel offset of the starting Y dimension of layer 1 */
   #define DISPC_CORE_LAYER1STARTXY_LAYER1STARTY_Pos (0UL) /*!< Position of LAYER1STARTY field.                                 */
   #define DISPC_CORE_LAYER1STARTXY_LAYER1STARTY_Msk (0xFFFFUL << DISPC_CORE_LAYER1STARTXY_LAYER1STARTY_Pos) /*!< Bit mask of
-                                                                            LAYER1STARTY field.*/                                 
+                                                                            LAYER1STARTY field.*/
 
 /* LAYER1STARTX @Bits 16..31 : Specify the pixel offset of the starting X dimension of layer 1 */
   #define DISPC_CORE_LAYER1STARTXY_LAYER1STARTX_Pos (16UL) /*!< Position of LAYER1STARTX field.                                */
   #define DISPC_CORE_LAYER1STARTXY_LAYER1STARTX_Msk (0xFFFFUL << DISPC_CORE_LAYER1STARTXY_LAYER1STARTX_Pos) /*!< Bit mask of
-                                                                            LAYER1STARTX field.*/                                 
+                                                                            LAYER1STARTX field.*/
 
 
 /* DISPC_CORE_LAYER1SIZEXY: X and Y size of layer 1 */
@@ -4699,12 +4725,12 @@ typedef struct {
 /* LAYER1SIZEY @Bits 0..15 : Specify the pixel size of the layer 1 in the Y dimension */
   #define DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEY_Pos (0UL) /*!< Position of LAYER1SIZEY field.                                    */
   #define DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEY_Msk (0xFFFFUL << DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEY_Pos) /*!< Bit mask of
-                                                                            LAYER1SIZEY field.*/                                  
+                                                                            LAYER1SIZEY field.*/
 
 /* LAYER1SIZEX @Bits 16..31 : Specify the pixel size of the layer 1 in the X dimension */
   #define DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEX_Pos (16UL) /*!< Position of LAYER1SIZEX field.                                   */
   #define DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEX_Msk (0xFFFFUL << DISPC_CORE_LAYER1SIZEXY_LAYER1SIZEX_Pos) /*!< Bit mask of
-                                                                            LAYER1SIZEX field.*/                                  
+                                                                            LAYER1SIZEX field.*/
 
 
 /* DISPC_CORE_LAYER1BASEADDR: The start address of the framebuffer to be accessed by layer 1 */
@@ -4713,7 +4739,7 @@ typedef struct {
 /* LAYER1BASEADDR @Bits 0..31 : Specify the start address of framebuffer for layer 1. */
   #define DISPC_CORE_LAYER1BASEADDR_LAYER1BASEADDR_Pos (0UL) /*!< Position of LAYER1BASEADDR field.                            */
   #define DISPC_CORE_LAYER1BASEADDR_LAYER1BASEADDR_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER1BASEADDR_LAYER1BASEADDR_Pos) /*!< Bit
-                                                                            mask of LAYER1BASEADDR field.*/                       
+                                                                            mask of LAYER1BASEADDR field.*/
 
 
 /* DISPC_CORE_LAYER1STRIDE: Specify the stride and the AXI bus burst of layer 1 */
@@ -4722,32 +4748,32 @@ typedef struct {
 /* LAYER1STRIDE @Bits 0..15 : Specify the stride, which is the distance from line to line in bytes for layer 1 memory */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDE_Pos (0UL) /*!< Position of LAYER1STRIDE field.                                  */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDE_Msk (0xFFFFUL << DISPC_CORE_LAYER1STRIDE_LAYER1STRIDE_Pos) /*!< Bit mask of
-                                                                            LAYER1STRIDE field.*/                                 
+                                                                            LAYER1STRIDE field.*/
 
 /* LAYER1AXIBEAT @Bits 16..18 : Specify the AXI-beats per burst in layer 1 */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1AXIBEAT_Pos (16UL) /*!< Position of LAYER1AXIBEAT field.                               */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1AXIBEAT_Msk (0x7UL << DISPC_CORE_LAYER1STRIDE_LAYER1AXIBEAT_Pos) /*!< Bit mask of
-                                                                            LAYER1AXIBEAT field.*/                                
+                                                                            LAYER1AXIBEAT field.*/
 
 /* LAYER1AXITHRESHOLD @Bits 19..20 : Specify the AXI fifo threshold burst start in layer 1 */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1AXITHRESHOLD_Pos (19UL) /*!< Position of LAYER1AXITHRESHOLD field.                     */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1AXITHRESHOLD_Msk (0x3UL << DISPC_CORE_LAYER1STRIDE_LAYER1AXITHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER1AXITHRESHOLD field.*/                        
+                                                                            of LAYER1AXITHRESHOLD field.*/
 
 /* LAYER1STRIDEPOS21LEN4 @Bits 21..24 : Revered */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS21LEN4_Pos (21UL) /*!< Position of LAYER1STRIDEPOS21LEN4 field.               */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS21LEN4_Msk (0xFUL << DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS21LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER1STRIDEPOS21LEN4 field.*/            
+                                                                            Bit mask of LAYER1STRIDEPOS21LEN4 field.*/
 
 /* LAYER1DMATHRESHOLD @Bits 25..27 : Specify the DMA prefetch Level in layer 1 */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1DMATHRESHOLD_Pos (25UL) /*!< Position of LAYER1DMATHRESHOLD field.                     */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1DMATHRESHOLD_Msk (0x7UL << DISPC_CORE_LAYER1STRIDE_LAYER1DMATHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER1DMATHRESHOLD field.*/                        
+                                                                            of LAYER1DMATHRESHOLD field.*/
 
 /* LAYER1STRIDEPOS28LEN4 @Bits 28..31 : Revered */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS28LEN4_Pos (28UL) /*!< Position of LAYER1STRIDEPOS28LEN4 field.               */
   #define DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS28LEN4_Msk (0xFUL << DISPC_CORE_LAYER1STRIDE_LAYER1STRIDEPOS28LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER1STRIDEPOS28LEN4 field.*/            
+                                                                            Bit mask of LAYER1STRIDEPOS28LEN4 field.*/
 
 
 /* DISPC_CORE_LAYER1RESXY: X and Y start dimensions of layerX and Y dimensions for the resolution of layer 1. */
@@ -4756,12 +4782,12 @@ typedef struct {
 /* LAYER1RESY @Bits 0..15 : Specify the layer 1 pixel resolution in the Y dimension */
   #define DISPC_CORE_LAYER1RESXY_LAYER1RESY_Pos (0UL) /*!< Position of LAYER1RESY field.                                       */
   #define DISPC_CORE_LAYER1RESXY_LAYER1RESY_Msk (0xFFFFUL << DISPC_CORE_LAYER1RESXY_LAYER1RESY_Pos) /*!< Bit mask of LAYER1RESY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER1RESX @Bits 16..31 : Specify the layer 1 pixel resolution in the X dimension */
   #define DISPC_CORE_LAYER1RESXY_LAYER1RESX_Pos (16UL) /*!< Position of LAYER1RESX field.                                      */
   #define DISPC_CORE_LAYER1RESXY_LAYER1RESX_Msk (0xFFFFUL << DISPC_CORE_LAYER1RESXY_LAYER1RESX_Pos) /*!< Bit mask of LAYER1RESX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER2MODE: Activate and set-up layer 2 */
@@ -4770,68 +4796,68 @@ typedef struct {
 /* LAYER2COLORMODE @Bits 0..4 : Color mode for layer 2. */
   #define DISPC_CORE_LAYER2MODE_LAYER2COLORMODE_Pos (0UL) /*!< Position of LAYER2COLORMODE field.                              */
   #define DISPC_CORE_LAYER2MODE_LAYER2COLORMODE_Msk (0x1FUL << DISPC_CORE_LAYER2MODE_LAYER2COLORMODE_Pos) /*!< Bit mask of
-                                                                            LAYER2COLORMODE field.*/                              
+                                                                            LAYER2COLORMODE field.*/
 
 /* LAYER2MODELAYERREGISTERPROTECT @Bit 5 : Enable Register Protection for display layer registers. */
   #define DISPC_CORE_LAYER2MODE_LAYER2MODELAYERREGISTERPROTECT_Pos (5UL) /*!< Position of LAYER2MODELAYERREGISTERPROTECT field.*/
   #define DISPC_CORE_LAYER2MODE_LAYER2MODELAYERREGISTERPROTECT_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2MODELAYERREGISTERPROTECT_Pos)
                                                                             /*!< Bit mask of LAYER2MODELAYERREGISTERPROTECT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2MODEPOS05LEN02 @Bits 6..7 : Revered */
   #define DISPC_CORE_LAYER2MODE_LAYER2MODEPOS05LEN02_Pos (6UL) /*!< Position of LAYER2MODEPOS05LEN02 field.                    */
   #define DISPC_CORE_LAYER2MODE_LAYER2MODEPOS05LEN02_Msk (0x3UL << DISPC_CORE_LAYER2MODE_LAYER2MODEPOS05LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER2MODEPOS05LEN02 field.*/                      
+                                                                            of LAYER2MODEPOS05LEN02 field.*/
 
 /* LAYER2SRCBLD @Bits 8..11 : Source blending function for layer 2. */
   #define DISPC_CORE_LAYER2MODE_LAYER2SRCBLD_Pos (8UL) /*!< Position of LAYER2SRCBLD field.                                    */
   #define DISPC_CORE_LAYER2MODE_LAYER2SRCBLD_Msk (0xFUL << DISPC_CORE_LAYER2MODE_LAYER2SRCBLD_Pos) /*!< Bit mask of LAYER2SRCBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2DSTBLD @Bits 12..15 : Destination blending function for layer 2. */
   #define DISPC_CORE_LAYER2MODE_LAYER2DSTBLD_Pos (12UL) /*!< Position of LAYER2DSTBLD field.                                   */
   #define DISPC_CORE_LAYER2MODE_LAYER2DSTBLD_Msk (0xFUL << DISPC_CORE_LAYER2MODE_LAYER2DSTBLD_Pos) /*!< Bit mask of LAYER2DSTBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2GLBALPHA @Bits 16..23 : Alpha layer global value (0x00-0xFF range) */
   #define DISPC_CORE_LAYER2MODE_LAYER2GLBALPHA_Pos (16UL) /*!< Position of LAYER2GLBALPHA field.                               */
   #define DISPC_CORE_LAYER2MODE_LAYER2GLBALPHA_Msk (0xFFUL << DISPC_CORE_LAYER2MODE_LAYER2GLBALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER2GLBALPHA field.*/                               
+                                                                            LAYER2GLBALPHA field.*/
 
 /* LAYER2MODEPOS24LEN02 @Bits 24..25 : Revered */
   #define DISPC_CORE_LAYER2MODE_LAYER2MODEPOS24LEN02_Pos (24UL) /*!< Position of LAYER2MODEPOS24LEN02 field.                   */
   #define DISPC_CORE_LAYER2MODE_LAYER2MODEPOS24LEN02_Msk (0x3UL << DISPC_CORE_LAYER2MODE_LAYER2MODEPOS24LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER2MODEPOS24LEN02 field.*/                      
+                                                                            of LAYER2MODEPOS24LEN02 field.*/
 
 /* LAYER2GAMMAEN @Bit 26 : When set to 1, Gamma Look Up Table is enabled */
   #define DISPC_CORE_LAYER2MODE_LAYER2GAMMAEN_Pos (26UL) /*!< Position of LAYER2GAMMAEN field.                                 */
   #define DISPC_CORE_LAYER2MODE_LAYER2GAMMAEN_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2GAMMAEN_Pos) /*!< Bit mask of
-                                                                            LAYER2GAMMAEN field.*/                                
+                                                                            LAYER2GAMMAEN field.*/
 
 /* LAYER2HLOCK @Bit 27 : When set to 1, HLOCK signal on AHB DMAs is asserted */
   #define DISPC_CORE_LAYER2MODE_LAYER2HLOCK_Pos (27UL) /*!< Position of LAYER2HLOCK field.                                     */
   #define DISPC_CORE_LAYER2MODE_LAYER2HLOCK_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2HLOCK_Pos) /*!< Bit mask of LAYER2HLOCK
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2PREMULT @Bit 28 : When set to 1, premultiply image alpha is enabled */
   #define DISPC_CORE_LAYER2MODE_LAYER2PREMULT_Pos (28UL) /*!< Position of LAYER2PREMULT field.                                 */
   #define DISPC_CORE_LAYER2MODE_LAYER2PREMULT_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2PREMULT_Pos) /*!< Bit mask of
-                                                                            LAYER2PREMULT field.*/                                
+                                                                            LAYER2PREMULT field.*/
 
 /* LAYER2BLEN @Bit 29 : When set to 0, bilinear filtering is enabled. */
   #define DISPC_CORE_LAYER2MODE_LAYER2BLEN_Pos (29UL) /*!< Position of LAYER2BLEN field.                                       */
   #define DISPC_CORE_LAYER2MODE_LAYER2BLEN_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2BLEN_Pos) /*!< Bit mask of LAYER2BLEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2FORCEALPHA @Bit 30 : When set to 1, force alpha with global alpha */
   #define DISPC_CORE_LAYER2MODE_LAYER2FORCEALPHA_Pos (30UL) /*!< Position of LAYER2FORCEALPHA field.                           */
   #define DISPC_CORE_LAYER2MODE_LAYER2FORCEALPHA_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2FORCEALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER2FORCEALPHA field.*/                             
+                                                                            LAYER2FORCEALPHA field.*/
 
 /* LAYER2ENABLE @Bit 31 : When set to 1, layer n is enabled */
   #define DISPC_CORE_LAYER2MODE_LAYER2ENABLE_Pos (31UL) /*!< Position of LAYER2ENABLE field.                                   */
   #define DISPC_CORE_LAYER2MODE_LAYER2ENABLE_Msk (0x1UL << DISPC_CORE_LAYER2MODE_LAYER2ENABLE_Pos) /*!< Bit mask of LAYER2ENABLE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER2STARTXY: X and Y start dimensions of layer 2 */
@@ -4840,12 +4866,12 @@ typedef struct {
 /* LAYER2STARTY @Bits 0..15 : Specify the pixel offset of the starting Y dimension of layer 2 */
   #define DISPC_CORE_LAYER2STARTXY_LAYER2STARTY_Pos (0UL) /*!< Position of LAYER2STARTY field.                                 */
   #define DISPC_CORE_LAYER2STARTXY_LAYER2STARTY_Msk (0xFFFFUL << DISPC_CORE_LAYER2STARTXY_LAYER2STARTY_Pos) /*!< Bit mask of
-                                                                            LAYER2STARTY field.*/                                 
+                                                                            LAYER2STARTY field.*/
 
 /* LAYER2STARTX @Bits 16..31 : Specify the pixel offset of the starting X dimension of layer 2 */
   #define DISPC_CORE_LAYER2STARTXY_LAYER2STARTX_Pos (16UL) /*!< Position of LAYER2STARTX field.                                */
   #define DISPC_CORE_LAYER2STARTXY_LAYER2STARTX_Msk (0xFFFFUL << DISPC_CORE_LAYER2STARTXY_LAYER2STARTX_Pos) /*!< Bit mask of
-                                                                            LAYER2STARTX field.*/                                 
+                                                                            LAYER2STARTX field.*/
 
 
 /* DISPC_CORE_LAYER2SIZEXY: X and Y size of layer 2 */
@@ -4854,12 +4880,12 @@ typedef struct {
 /* LAYER2SIZEY @Bits 0..15 : Specify the pixel size of the layer 2 in the Y dimension */
   #define DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEY_Pos (0UL) /*!< Position of LAYER2SIZEY field.                                    */
   #define DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEY_Msk (0xFFFFUL << DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEY_Pos) /*!< Bit mask of
-                                                                            LAYER2SIZEY field.*/                                  
+                                                                            LAYER2SIZEY field.*/
 
 /* LAYER2SIZEX @Bits 16..31 : Specify the pixel size of the layer 2 in the X dimension */
   #define DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEX_Pos (16UL) /*!< Position of LAYER2SIZEX field.                                   */
   #define DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEX_Msk (0xFFFFUL << DISPC_CORE_LAYER2SIZEXY_LAYER2SIZEX_Pos) /*!< Bit mask of
-                                                                            LAYER2SIZEX field.*/                                  
+                                                                            LAYER2SIZEX field.*/
 
 
 /* DISPC_CORE_LAYER2BASEADDR: The start address of the framebuffer to be accessed by layer 2 */
@@ -4868,7 +4894,7 @@ typedef struct {
 /* LAYER2BASEADDR @Bits 0..31 : Specify the start address of framebuffer for layer 2. */
   #define DISPC_CORE_LAYER2BASEADDR_LAYER2BASEADDR_Pos (0UL) /*!< Position of LAYER2BASEADDR field.                            */
   #define DISPC_CORE_LAYER2BASEADDR_LAYER2BASEADDR_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER2BASEADDR_LAYER2BASEADDR_Pos) /*!< Bit
-                                                                            mask of LAYER2BASEADDR field.*/                       
+                                                                            mask of LAYER2BASEADDR field.*/
 
 
 /* DISPC_CORE_LAYER2STRIDE: Specify the stride and the AXI bus burst of layer 2 */
@@ -4877,32 +4903,32 @@ typedef struct {
 /* LAYER2STRIDE @Bits 0..15 : Specify the stride, which is the distance from line to line in bytes for layer 2 memory */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDE_Pos (0UL) /*!< Position of LAYER2STRIDE field.                                  */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDE_Msk (0xFFFFUL << DISPC_CORE_LAYER2STRIDE_LAYER2STRIDE_Pos) /*!< Bit mask of
-                                                                            LAYER2STRIDE field.*/                                 
+                                                                            LAYER2STRIDE field.*/
 
 /* LAYER2AXIBEAT @Bits 16..18 : Specify the AXI-beats per burst in layer 2 */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2AXIBEAT_Pos (16UL) /*!< Position of LAYER2AXIBEAT field.                               */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2AXIBEAT_Msk (0x7UL << DISPC_CORE_LAYER2STRIDE_LAYER2AXIBEAT_Pos) /*!< Bit mask of
-                                                                            LAYER2AXIBEAT field.*/                                
+                                                                            LAYER2AXIBEAT field.*/
 
 /* LAYER2AXITHRESHOLD @Bits 19..20 : Specify the AXI fifo threshold burst start in layer 2 */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2AXITHRESHOLD_Pos (19UL) /*!< Position of LAYER2AXITHRESHOLD field.                     */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2AXITHRESHOLD_Msk (0x3UL << DISPC_CORE_LAYER2STRIDE_LAYER2AXITHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER2AXITHRESHOLD field.*/                        
+                                                                            of LAYER2AXITHRESHOLD field.*/
 
 /* LAYER2STRIDEPOS21LEN4 @Bits 21..24 : Revered */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS21LEN4_Pos (21UL) /*!< Position of LAYER2STRIDEPOS21LEN4 field.               */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS21LEN4_Msk (0xFUL << DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS21LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER2STRIDEPOS21LEN4 field.*/            
+                                                                            Bit mask of LAYER2STRIDEPOS21LEN4 field.*/
 
 /* LAYER2DMATHRESHOLD @Bits 25..27 : Specify the DMA prefetch Level in layer 2 */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2DMATHRESHOLD_Pos (25UL) /*!< Position of LAYER2DMATHRESHOLD field.                     */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2DMATHRESHOLD_Msk (0x7UL << DISPC_CORE_LAYER2STRIDE_LAYER2DMATHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER2DMATHRESHOLD field.*/                        
+                                                                            of LAYER2DMATHRESHOLD field.*/
 
 /* LAYER2STRIDEPOS28LEN4 @Bits 28..31 : Revered */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS28LEN4_Pos (28UL) /*!< Position of LAYER2STRIDEPOS28LEN4 field.               */
   #define DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS28LEN4_Msk (0xFUL << DISPC_CORE_LAYER2STRIDE_LAYER2STRIDEPOS28LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER2STRIDEPOS28LEN4 field.*/            
+                                                                            Bit mask of LAYER2STRIDEPOS28LEN4 field.*/
 
 
 /* DISPC_CORE_LAYER2RESXY: X and Y start dimensions of layerX and Y dimensions for the resolution of layer 2. */
@@ -4911,12 +4937,12 @@ typedef struct {
 /* LAYER2RESY @Bits 0..15 : Specify the layer 2 pixel resolution in the Y dimension */
   #define DISPC_CORE_LAYER2RESXY_LAYER2RESY_Pos (0UL) /*!< Position of LAYER2RESY field.                                       */
   #define DISPC_CORE_LAYER2RESXY_LAYER2RESY_Msk (0xFFFFUL << DISPC_CORE_LAYER2RESXY_LAYER2RESY_Pos) /*!< Bit mask of LAYER2RESY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER2RESX @Bits 16..31 : Specify the layer 2 pixel resolution in the X dimension */
   #define DISPC_CORE_LAYER2RESXY_LAYER2RESX_Pos (16UL) /*!< Position of LAYER2RESX field.                                      */
   #define DISPC_CORE_LAYER2RESXY_LAYER2RESX_Msk (0xFFFFUL << DISPC_CORE_LAYER2RESXY_LAYER2RESX_Pos) /*!< Bit mask of LAYER2RESX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER3MODE: Activate and set-up layer 3 */
@@ -4925,68 +4951,68 @@ typedef struct {
 /* LAYER3COLORMODE @Bits 0..4 : Color mode for layer 3. */
   #define DISPC_CORE_LAYER3MODE_LAYER3COLORMODE_Pos (0UL) /*!< Position of LAYER3COLORMODE field.                              */
   #define DISPC_CORE_LAYER3MODE_LAYER3COLORMODE_Msk (0x1FUL << DISPC_CORE_LAYER3MODE_LAYER3COLORMODE_Pos) /*!< Bit mask of
-                                                                            LAYER3COLORMODE field.*/                              
+                                                                            LAYER3COLORMODE field.*/
 
 /* LAYER3MODELAYERREGISTERPROTECT @Bit 5 : Enable Register Protection for display layer registers. */
   #define DISPC_CORE_LAYER3MODE_LAYER3MODELAYERREGISTERPROTECT_Pos (5UL) /*!< Position of LAYER3MODELAYERREGISTERPROTECT field.*/
   #define DISPC_CORE_LAYER3MODE_LAYER3MODELAYERREGISTERPROTECT_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3MODELAYERREGISTERPROTECT_Pos)
                                                                             /*!< Bit mask of LAYER3MODELAYERREGISTERPROTECT
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3MODEPOS05LEN02 @Bits 6..7 : Revered */
   #define DISPC_CORE_LAYER3MODE_LAYER3MODEPOS05LEN02_Pos (6UL) /*!< Position of LAYER3MODEPOS05LEN02 field.                    */
   #define DISPC_CORE_LAYER3MODE_LAYER3MODEPOS05LEN02_Msk (0x3UL << DISPC_CORE_LAYER3MODE_LAYER3MODEPOS05LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER3MODEPOS05LEN02 field.*/                      
+                                                                            of LAYER3MODEPOS05LEN02 field.*/
 
 /* LAYER3SRCBLD @Bits 8..11 : Source blending function for layer 3. */
   #define DISPC_CORE_LAYER3MODE_LAYER3SRCBLD_Pos (8UL) /*!< Position of LAYER3SRCBLD field.                                    */
   #define DISPC_CORE_LAYER3MODE_LAYER3SRCBLD_Msk (0xFUL << DISPC_CORE_LAYER3MODE_LAYER3SRCBLD_Pos) /*!< Bit mask of LAYER3SRCBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3DSTBLD @Bits 12..15 : Destination blending function for layer 3. */
   #define DISPC_CORE_LAYER3MODE_LAYER3DSTBLD_Pos (12UL) /*!< Position of LAYER3DSTBLD field.                                   */
   #define DISPC_CORE_LAYER3MODE_LAYER3DSTBLD_Msk (0xFUL << DISPC_CORE_LAYER3MODE_LAYER3DSTBLD_Pos) /*!< Bit mask of LAYER3DSTBLD
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3GLBALPHA @Bits 16..23 : Alpha layer global value (0x00-0xFF range) */
   #define DISPC_CORE_LAYER3MODE_LAYER3GLBALPHA_Pos (16UL) /*!< Position of LAYER3GLBALPHA field.                               */
   #define DISPC_CORE_LAYER3MODE_LAYER3GLBALPHA_Msk (0xFFUL << DISPC_CORE_LAYER3MODE_LAYER3GLBALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER3GLBALPHA field.*/                               
+                                                                            LAYER3GLBALPHA field.*/
 
 /* LAYER3MODEPOS24LEN02 @Bits 24..25 : Revered */
   #define DISPC_CORE_LAYER3MODE_LAYER3MODEPOS24LEN02_Pos (24UL) /*!< Position of LAYER3MODEPOS24LEN02 field.                   */
   #define DISPC_CORE_LAYER3MODE_LAYER3MODEPOS24LEN02_Msk (0x3UL << DISPC_CORE_LAYER3MODE_LAYER3MODEPOS24LEN02_Pos) /*!< Bit mask
-                                                                            of LAYER3MODEPOS24LEN02 field.*/                      
+                                                                            of LAYER3MODEPOS24LEN02 field.*/
 
 /* LAYER3GAMMAEN @Bit 26 : When set to 1, Gamma Look Up Table is enabled */
   #define DISPC_CORE_LAYER3MODE_LAYER3GAMMAEN_Pos (26UL) /*!< Position of LAYER3GAMMAEN field.                                 */
   #define DISPC_CORE_LAYER3MODE_LAYER3GAMMAEN_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3GAMMAEN_Pos) /*!< Bit mask of
-                                                                            LAYER3GAMMAEN field.*/                                
+                                                                            LAYER3GAMMAEN field.*/
 
 /* LAYER3HLOCK @Bit 27 : When set to 1, HLOCK signal on AHB DMAs is asserted */
   #define DISPC_CORE_LAYER3MODE_LAYER3HLOCK_Pos (27UL) /*!< Position of LAYER3HLOCK field.                                     */
   #define DISPC_CORE_LAYER3MODE_LAYER3HLOCK_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3HLOCK_Pos) /*!< Bit mask of LAYER3HLOCK
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3PREMULT @Bit 28 : When set to 1, premultiply image alpha is enabled */
   #define DISPC_CORE_LAYER3MODE_LAYER3PREMULT_Pos (28UL) /*!< Position of LAYER3PREMULT field.                                 */
   #define DISPC_CORE_LAYER3MODE_LAYER3PREMULT_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3PREMULT_Pos) /*!< Bit mask of
-                                                                            LAYER3PREMULT field.*/                                
+                                                                            LAYER3PREMULT field.*/
 
 /* LAYER3BLEN @Bit 29 : When set to 0, bilinear filtering is enabled. */
   #define DISPC_CORE_LAYER3MODE_LAYER3BLEN_Pos (29UL) /*!< Position of LAYER3BLEN field.                                       */
   #define DISPC_CORE_LAYER3MODE_LAYER3BLEN_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3BLEN_Pos) /*!< Bit mask of LAYER3BLEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3FORCEALPHA @Bit 30 : When set to 1, force alpha with global alpha */
   #define DISPC_CORE_LAYER3MODE_LAYER3FORCEALPHA_Pos (30UL) /*!< Position of LAYER3FORCEALPHA field.                           */
   #define DISPC_CORE_LAYER3MODE_LAYER3FORCEALPHA_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3FORCEALPHA_Pos) /*!< Bit mask of
-                                                                            LAYER3FORCEALPHA field.*/                             
+                                                                            LAYER3FORCEALPHA field.*/
 
 /* LAYER3ENABLE @Bit 31 : When set to 1, layer n is enabled */
   #define DISPC_CORE_LAYER3MODE_LAYER3ENABLE_Pos (31UL) /*!< Position of LAYER3ENABLE field.                                   */
   #define DISPC_CORE_LAYER3MODE_LAYER3ENABLE_Msk (0x1UL << DISPC_CORE_LAYER3MODE_LAYER3ENABLE_Pos) /*!< Bit mask of LAYER3ENABLE
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER3STARTXY: X and Y start dimensions of layer 3 */
@@ -4995,12 +5021,12 @@ typedef struct {
 /* LAYER3STARTY @Bits 0..15 : Specify the pixel offset of the starting Y dimension of layer 3 */
   #define DISPC_CORE_LAYER3STARTXY_LAYER3STARTY_Pos (0UL) /*!< Position of LAYER3STARTY field.                                 */
   #define DISPC_CORE_LAYER3STARTXY_LAYER3STARTY_Msk (0xFFFFUL << DISPC_CORE_LAYER3STARTXY_LAYER3STARTY_Pos) /*!< Bit mask of
-                                                                            LAYER3STARTY field.*/                                 
+                                                                            LAYER3STARTY field.*/
 
 /* LAYER3STARTX @Bits 16..31 : Specify the pixel offset of the starting X dimension of layer 3 */
   #define DISPC_CORE_LAYER3STARTXY_LAYER3STARTX_Pos (16UL) /*!< Position of LAYER3STARTX field.                                */
   #define DISPC_CORE_LAYER3STARTXY_LAYER3STARTX_Msk (0xFFFFUL << DISPC_CORE_LAYER3STARTXY_LAYER3STARTX_Pos) /*!< Bit mask of
-                                                                            LAYER3STARTX field.*/                                 
+                                                                            LAYER3STARTX field.*/
 
 
 /* DISPC_CORE_LAYER3SIZEXY: X and Y size of layer 3 */
@@ -5009,12 +5035,12 @@ typedef struct {
 /* LAYER3SIZEY @Bits 0..15 : Specify the pixel size of the layer 3 in the Y dimension */
   #define DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEY_Pos (0UL) /*!< Position of LAYER3SIZEY field.                                    */
   #define DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEY_Msk (0xFFFFUL << DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEY_Pos) /*!< Bit mask of
-                                                                            LAYER3SIZEY field.*/                                  
+                                                                            LAYER3SIZEY field.*/
 
 /* LAYER3SIZEX @Bits 16..31 : Specify the pixel size of the layer 3 in the X dimension */
   #define DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEX_Pos (16UL) /*!< Position of LAYER3SIZEX field.                                   */
   #define DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEX_Msk (0xFFFFUL << DISPC_CORE_LAYER3SIZEXY_LAYER3SIZEX_Pos) /*!< Bit mask of
-                                                                            LAYER3SIZEX field.*/                                  
+                                                                            LAYER3SIZEX field.*/
 
 
 /* DISPC_CORE_LAYER3BASEADDR: The start address of the framebuffer to be accessed by layer 3 */
@@ -5023,7 +5049,7 @@ typedef struct {
 /* LAYER3BASEADDR @Bits 0..31 : Specify the start address of framebuffer for layer 3. */
   #define DISPC_CORE_LAYER3BASEADDR_LAYER3BASEADDR_Pos (0UL) /*!< Position of LAYER3BASEADDR field.                            */
   #define DISPC_CORE_LAYER3BASEADDR_LAYER3BASEADDR_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER3BASEADDR_LAYER3BASEADDR_Pos) /*!< Bit
-                                                                            mask of LAYER3BASEADDR field.*/                       
+                                                                            mask of LAYER3BASEADDR field.*/
 
 
 /* DISPC_CORE_LAYER3STRIDE: Specify the stride and the AXI bus burst of layer 3 */
@@ -5032,32 +5058,32 @@ typedef struct {
 /* LAYER3STRIDE @Bits 0..15 : Specify the stride, which is the distance from line to line in bytes for layer 3 memory */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDE_Pos (0UL) /*!< Position of LAYER3STRIDE field.                                  */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDE_Msk (0xFFFFUL << DISPC_CORE_LAYER3STRIDE_LAYER3STRIDE_Pos) /*!< Bit mask of
-                                                                            LAYER3STRIDE field.*/                                 
+                                                                            LAYER3STRIDE field.*/
 
 /* LAYER3AXIBEAT @Bits 16..18 : Specify the AXI-beats per burst in layer 3 */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3AXIBEAT_Pos (16UL) /*!< Position of LAYER3AXIBEAT field.                               */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3AXIBEAT_Msk (0x7UL << DISPC_CORE_LAYER3STRIDE_LAYER3AXIBEAT_Pos) /*!< Bit mask of
-                                                                            LAYER3AXIBEAT field.*/                                
+                                                                            LAYER3AXIBEAT field.*/
 
 /* LAYER3AXITHRESHOLD @Bits 19..20 : Specify the AXI fifo threshold burst start in layer 3 */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3AXITHRESHOLD_Pos (19UL) /*!< Position of LAYER3AXITHRESHOLD field.                     */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3AXITHRESHOLD_Msk (0x3UL << DISPC_CORE_LAYER3STRIDE_LAYER3AXITHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER3AXITHRESHOLD field.*/                        
+                                                                            of LAYER3AXITHRESHOLD field.*/
 
 /* LAYER3STRIDEPOS21LEN4 @Bits 21..24 : Revered */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS21LEN4_Pos (21UL) /*!< Position of LAYER3STRIDEPOS21LEN4 field.               */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS21LEN4_Msk (0xFUL << DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS21LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER3STRIDEPOS21LEN4 field.*/            
+                                                                            Bit mask of LAYER3STRIDEPOS21LEN4 field.*/
 
 /* LAYER3DMATHRESHOLD @Bits 25..27 : Specify the DMA prefetch Level in layer 3 */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3DMATHRESHOLD_Pos (25UL) /*!< Position of LAYER3DMATHRESHOLD field.                     */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3DMATHRESHOLD_Msk (0x7UL << DISPC_CORE_LAYER3STRIDE_LAYER3DMATHRESHOLD_Pos) /*!< Bit mask
-                                                                            of LAYER3DMATHRESHOLD field.*/                        
+                                                                            of LAYER3DMATHRESHOLD field.*/
 
 /* LAYER3STRIDEPOS28LEN4 @Bits 28..31 : Revered */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS28LEN4_Pos (28UL) /*!< Position of LAYER3STRIDEPOS28LEN4 field.               */
   #define DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS28LEN4_Msk (0xFUL << DISPC_CORE_LAYER3STRIDE_LAYER3STRIDEPOS28LEN4_Pos) /*!<
-                                                                            Bit mask of LAYER3STRIDEPOS28LEN4 field.*/            
+                                                                            Bit mask of LAYER3STRIDEPOS28LEN4 field.*/
 
 
 /* DISPC_CORE_LAYER3RESXY: X and Y start dimensions of layerX and Y dimensions for the resolution of layer 3. */
@@ -5066,12 +5092,12 @@ typedef struct {
 /* LAYER3RESY @Bits 0..15 : Specify the layer 3 pixel resolution in the Y dimension */
   #define DISPC_CORE_LAYER3RESXY_LAYER3RESY_Pos (0UL) /*!< Position of LAYER3RESY field.                                       */
   #define DISPC_CORE_LAYER3RESXY_LAYER3RESY_Msk (0xFFFFUL << DISPC_CORE_LAYER3RESXY_LAYER3RESY_Pos) /*!< Bit mask of LAYER3RESY
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* LAYER3RESX @Bits 16..31 : Specify the layer 3 pixel resolution in the X dimension */
   #define DISPC_CORE_LAYER3RESXY_LAYER3RESX_Pos (16UL) /*!< Position of LAYER3RESX field.                                      */
   #define DISPC_CORE_LAYER3RESXY_LAYER3RESX_Msk (0xFFFFUL << DISPC_CORE_LAYER3RESXY_LAYER3RESX_Pos) /*!< Bit mask of LAYER3RESX
-                                                                            field.*/                                              
+                                                                            field.*/
 
 
 /* DISPC_CORE_LAYER0UBASE: The start address of the U chroma for layer 0 YUV planar format. */
@@ -5080,7 +5106,7 @@ typedef struct {
 /* LAYER0UBASE @Bits 0..31 : Specify the start address of U chroma for layer 0 */
   #define DISPC_CORE_LAYER0UBASE_LAYER0UBASE_Pos (0UL) /*!< Position of LAYER0UBASE field.                                     */
   #define DISPC_CORE_LAYER0UBASE_LAYER0UBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER0UBASE_LAYER0UBASE_Pos) /*!< Bit mask of
-                                                                            LAYER0UBASE field.*/                                  
+                                                                            LAYER0UBASE field.*/
 
 
 /* DISPC_CORE_LAYER0VBASE: The start address of the V chroma for layer 0 YUV planar format. */
@@ -5089,7 +5115,7 @@ typedef struct {
 /* LAYER0VBASE @Bits 0..31 : Specify the start address of V chroma for layer 0 */
   #define DISPC_CORE_LAYER0VBASE_LAYER0VBASE_Pos (0UL) /*!< Position of LAYER0VBASE field.                                     */
   #define DISPC_CORE_LAYER0VBASE_LAYER0VBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER0VBASE_LAYER0VBASE_Pos) /*!< Bit mask of
-                                                                            LAYER0VBASE field.*/                                  
+                                                                            LAYER0VBASE field.*/
 
 
 /* DISPC_CORE_LAYER0UVSTRIDE: Specify the stride for layer 0 YUV planar format. */
@@ -5098,7 +5124,7 @@ typedef struct {
 /* LAYER0UVSTRIDE @Bits 0..31 : Specify the stride for layer 0 YUV planar format. */
   #define DISPC_CORE_LAYER0UVSTRIDE_LAYER0UVSTRIDE_Pos (0UL) /*!< Position of LAYER0UVSTRIDE field.                            */
   #define DISPC_CORE_LAYER0UVSTRIDE_LAYER0UVSTRIDE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER0UVSTRIDE_LAYER0UVSTRIDE_Pos) /*!< Bit
-                                                                            mask of LAYER0UVSTRIDE field.*/                       
+                                                                            mask of LAYER0UVSTRIDE field.*/
 
 
 /* DISPC_CORE_LAYER1UBASE: The start address of the U chroma for layer 1 YUV planar format. */
@@ -5107,7 +5133,7 @@ typedef struct {
 /* LAYER1UBASE @Bits 0..31 : Specify the start address of U chroma for layer 1 */
   #define DISPC_CORE_LAYER1UBASE_LAYER1UBASE_Pos (0UL) /*!< Position of LAYER1UBASE field.                                     */
   #define DISPC_CORE_LAYER1UBASE_LAYER1UBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER1UBASE_LAYER1UBASE_Pos) /*!< Bit mask of
-                                                                            LAYER1UBASE field.*/                                  
+                                                                            LAYER1UBASE field.*/
 
 
 /* DISPC_CORE_LAYER1VBASE: The start address of the V chroma for layer 1 YUV planar format. */
@@ -5116,7 +5142,7 @@ typedef struct {
 /* LAYER1VBASE @Bits 0..31 : Specify the start address of V chroma for layer 1 */
   #define DISPC_CORE_LAYER1VBASE_LAYER1VBASE_Pos (0UL) /*!< Position of LAYER1VBASE field.                                     */
   #define DISPC_CORE_LAYER1VBASE_LAYER1VBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER1VBASE_LAYER1VBASE_Pos) /*!< Bit mask of
-                                                                            LAYER1VBASE field.*/                                  
+                                                                            LAYER1VBASE field.*/
 
 
 /* DISPC_CORE_LAYER1UVSTRIDE: Specify the stride for layer 1 YUV planar format. */
@@ -5125,7 +5151,7 @@ typedef struct {
 /* LAYER1UVSTRIDE @Bits 0..31 : Specify the stride for layer 1 YUV planar format. */
   #define DISPC_CORE_LAYER1UVSTRIDE_LAYER1UVSTRIDE_Pos (0UL) /*!< Position of LAYER1UVSTRIDE field.                            */
   #define DISPC_CORE_LAYER1UVSTRIDE_LAYER1UVSTRIDE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER1UVSTRIDE_LAYER1UVSTRIDE_Pos) /*!< Bit
-                                                                            mask of LAYER1UVSTRIDE field.*/                       
+                                                                            mask of LAYER1UVSTRIDE field.*/
 
 
 /* DISPC_CORE_DBIBCMD: Command Register to read/write commands from/to DBI Type-B interface. */
@@ -5134,47 +5160,47 @@ typedef struct {
 /* DBIBCMDPOS00LEN16 @Bits 0..15 : Data to send to the DBI Type-B interface */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS00LEN16_Pos (0UL) /*!< Position of DBIBCMDPOS00LEN16 field.                             */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS00LEN16_Msk (0xFFFFUL << DISPC_CORE_DBIBCMD_DBIBCMDPOS00LEN16_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS00LEN16 field.*/                            
+                                                                            DBIBCMDPOS00LEN16 field.*/
 
 /* DBIBCMDPOS16LEN08 @Bits 16..23 : Revered */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS16LEN08_Pos (16UL) /*!< Position of DBIBCMDPOS16LEN08 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS16LEN08_Msk (0xFFUL << DISPC_CORE_DBIBCMD_DBIBCMDPOS16LEN08_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS16LEN08 field.*/                            
+                                                                            DBIBCMDPOS16LEN08 field.*/
 
 /* DBIBCMDPOS24LEN01 @Bit 24 : When sets to 1, store internally a command type which is */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS24LEN01_Pos (24UL) /*!< Position of DBIBCMDPOS24LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS24LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS24LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS24LEN01 field.*/                            
+                                                                            DBIBCMDPOS24LEN01 field.*/
 
 /* DBIBCMDPOS25LEN01 @Bit 25 : When sets to 1, FMTCTRL[15:8] is exposed on DBIB_CT pins and */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS25LEN01_Pos (25UL) /*!< Position of DBIBCMDPOS25LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS25LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS25LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS25LEN01 field.*/                            
+                                                                            DBIBCMDPOS25LEN01 field.*/
 
 /* DBIBCMDPOS26LEN01 @Bit 26 : When sets to 1, read mode is enabled */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS26LEN01_Pos (26UL) /*!< Position of DBIBCMDPOS26LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS26LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS26LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS26LEN01 field.*/                            
+                                                                            DBIBCMDPOS26LEN01 field.*/
 
 /* DBIBCMDPOS27LEN01 @Bit 27 : When sets to 1, switch to serial transmission of the */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS27LEN01_Pos (27UL) /*!< Position of DBIBCMDPOS27LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS27LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS27LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS27LEN01 field.*/                            
+                                                                            DBIBCMDPOS27LEN01 field.*/
 
 /* DBIBCMDPOS28LEN01 @Bits 28..29 : Determine the command width. */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS28LEN01_Pos (28UL) /*!< Position of DBIBCMDPOS28LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS28LEN01_Msk (0x3UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS28LEN01 field.*/                            
+                                                                            DBIBCMDPOS28LEN01 field.*/
 
 /* DBIBCMDPOS30LEN01 @Bit 30 : Send direct data of type command to the DBI Type-B interface */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS30LEN01_Pos (30UL) /*!< Position of DBIBCMDPOS30LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS30LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS30LEN01 field.*/                            
+                                                                            DBIBCMDPOS30LEN01 field.*/
 
 /* DBIBCMDPOS31LEN01 @Bit 31 : When set to 0, indicates that the command data are */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS31LEN01_Pos (31UL) /*!< Position of DBIBCMDPOS31LEN01 field.                            */
   #define DISPC_CORE_DBIBCMD_DBIBCMDPOS31LEN01_Msk (0x1UL << DISPC_CORE_DBIBCMD_DBIBCMDPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            DBIBCMDPOS31LEN01 field.*/                            
+                                                                            DBIBCMDPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_DBIBRDAT: Data read by DBI Type-B/SPI interface are stored in the CORE_DBIB_RDAT register. */
@@ -5183,12 +5209,12 @@ typedef struct {
 /* DBIBRDATPOS00LEN30 @Bits 0..29 : Read data from DBI Type-B/SPI interfaces (low bits) */
   #define DISPC_CORE_DBIBRDAT_DBIBRDATPOS00LEN30_Pos (0UL) /*!< Position of DBIBRDATPOS00LEN30 field.                          */
   #define DISPC_CORE_DBIBRDAT_DBIBRDATPOS00LEN30_Msk (0x3FFFFFFFUL << DISPC_CORE_DBIBRDAT_DBIBRDATPOS00LEN30_Pos) /*!< Bit mask
-                                                                            of DBIBRDATPOS00LEN30 field.*/                        
+                                                                            of DBIBRDATPOS00LEN30 field.*/
 
 /* DBIBRDATPOS30LEN02 @Bits 30..31 : On Write: Specify the number of read cycles */
   #define DISPC_CORE_DBIBRDAT_DBIBRDATPOS30LEN02_Pos (30UL) /*!< Position of DBIBRDATPOS30LEN02 field.                         */
   #define DISPC_CORE_DBIBRDAT_DBIBRDATPOS30LEN02_Msk (0x3UL << DISPC_CORE_DBIBRDAT_DBIBRDATPOS30LEN02_Pos) /*!< Bit mask of
-                                                                            DBIBRDATPOS30LEN02 field.*/                           
+                                                                            DBIBRDATPOS30LEN02 field.*/
 
 
 /* DISPC_CORE_CONFIG: Information register of the layers activation and setup. */
@@ -5197,147 +5223,147 @@ typedef struct {
 /* CONFIGPOS00LEN01 @Bit 0 : Indicates that Global Gamma/Palette is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS00LEN01_Pos (0UL) /*!< Position of CONFIGPOS00LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS00LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS00LEN01 field.*/                             
+                                                                            CONFIGPOS00LEN01 field.*/
 
 /* CONFIGPOS01LEN01 @Bit 1 : Indicates that fixed cursor is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS01LEN01_Pos (1UL) /*!< Position of CONFIGPOS01LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS01LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS01LEN01 field.*/                             
+                                                                            CONFIGPOS01LEN01 field.*/
 
 /* CONFIGPOS02LEN01 @Bit 2 : Indicates that programmable cursor is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS02LEN01_Pos (2UL) /*!< Position of CONFIGPOS02LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS02LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS02LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS02LEN01 field.*/                             
+                                                                            CONFIGPOS02LEN01 field.*/
 
 /* CONFIGPOS03LEN01 @Bit 3 : Indicates that dithering is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS03LEN01_Pos (3UL) /*!< Position of CONFIGPOS03LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS03LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS03LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS03LEN01 field.*/                             
+                                                                            CONFIGPOS03LEN01 field.*/
 
 /* CONFIGPOS04LEN01 @Bit 4 : Indicates that formatting is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS04LEN01_Pos (4UL) /*!< Position of CONFIGPOS04LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS04LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS04LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS04LEN01 field.*/                             
+                                                                            CONFIGPOS04LEN01 field.*/
 
 /* CONFIGPOS05LEN01 @Bit 5 : Indicates that high quality YUV/YCbCr converter is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS05LEN01_Pos (5UL) /*!< Position of CONFIGPOS05LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS05LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS05LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS05LEN01 field.*/                             
+                                                                            CONFIGPOS05LEN01 field.*/
 
 /* CONFIGPOS06LEN01 @Bit 6 : Indicates that DBI Type-B interface is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS06LEN01_Pos (6UL) /*!< Position of CONFIGPOS06LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS06LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS06LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS06LEN01 field.*/                             
+                                                                            CONFIGPOS06LEN01 field.*/
 
 /* CONFIGPOS07LEN01 @Bit 7 : Indicates that RGB to YUV/YCbCr converter is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS07LEN01_Pos (7UL) /*!< Position of CONFIGPOS07LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS07LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS07LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS07LEN01 field.*/                             
+                                                                            CONFIGPOS07LEN01 field.*/
 
 /* CONFIGPOS08LEN01 @Bit 8 : Indicates that layer 0 is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS08LEN01_Pos (8UL) /*!< Position of CONFIGPOS08LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS08LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS08LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS08LEN01 field.*/                             
+                                                                            CONFIGPOS08LEN01 field.*/
 
 /* CONFIGPOS09LEN01 @Bit 9 : Indicates that layer 0 has blender */
   #define DISPC_CORE_CONFIG_CONFIGPOS09LEN01_Pos (9UL) /*!< Position of CONFIGPOS09LEN01 field.                                */
   #define DISPC_CORE_CONFIG_CONFIGPOS09LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS09LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS09LEN01 field.*/                             
+                                                                            CONFIGPOS09LEN01 field.*/
 
 /* CONFIGPOS10LEN01 @Bit 10 : Revered */
   #define DISPC_CORE_CONFIG_CONFIGPOS10LEN01_Pos (10UL) /*!< Position of CONFIGPOS10LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS10LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS10LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS10LEN01 field.*/                             
+                                                                            CONFIGPOS10LEN01 field.*/
 
 /* CONFIGPOS11LEN01 @Bit 11 : Indicates that layer 0 has gamma LUT */
   #define DISPC_CORE_CONFIG_CONFIGPOS11LEN01_Pos (11UL) /*!< Position of CONFIGPOS11LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS11LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS11LEN01 field.*/                             
+                                                                            CONFIGPOS11LEN01 field.*/
 
 /* CONFIGPOS12LEN01 @Bit 12 : Indicates that layer 1 is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS12LEN01_Pos (12UL) /*!< Position of CONFIGPOS12LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS12LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS12LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS12LEN01 field.*/                             
+                                                                            CONFIGPOS12LEN01 field.*/
 
 /* CONFIGPOS13LEN01 @Bit 13 : Indicates that layer 1 has blender */
   #define DISPC_CORE_CONFIG_CONFIGPOS13LEN01_Pos (13UL) /*!< Position of CONFIGPOS13LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS13LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS13LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS13LEN01 field.*/                             
+                                                                            CONFIGPOS13LEN01 field.*/
 
 /* CONFIGPOS14LEN01 @Bit 14 : Revered */
   #define DISPC_CORE_CONFIG_CONFIGPOS14LEN01_Pos (14UL) /*!< Position of CONFIGPOS14LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS14LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS14LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS14LEN01 field.*/                             
+                                                                            CONFIGPOS14LEN01 field.*/
 
 /* CONFIGPOS15LEN01 @Bit 15 : Indicates that layer 1 has gamma LUT */
   #define DISPC_CORE_CONFIG_CONFIGPOS15LEN01_Pos (15UL) /*!< Position of CONFIGPOS15LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS15LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS15LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS15LEN01 field.*/                             
+                                                                            CONFIGPOS15LEN01 field.*/
 
 /* CONFIGPOS16LEN01 @Bit 16 : Indicates that layer 2 is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS16LEN01_Pos (16UL) /*!< Position of CONFIGPOS16LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS16LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS16LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS16LEN01 field.*/                             
+                                                                            CONFIGPOS16LEN01 field.*/
 
 /* CONFIGPOS17LEN01 @Bit 17 : Indicates that layer 2 has blender */
   #define DISPC_CORE_CONFIG_CONFIGPOS17LEN01_Pos (17UL) /*!< Position of CONFIGPOS17LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS17LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS17LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS17LEN01 field.*/                             
+                                                                            CONFIGPOS17LEN01 field.*/
 
 /* CONFIGPOS18LEN01 @Bit 18 : Revered */
   #define DISPC_CORE_CONFIG_CONFIGPOS18LEN01_Pos (18UL) /*!< Position of CONFIGPOS18LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS18LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS18LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS18LEN01 field.*/                             
+                                                                            CONFIGPOS18LEN01 field.*/
 
 /* CONFIGPOS19LEN01 @Bit 19 : Indicates that layer 2 has gamma LUT */
   #define DISPC_CORE_CONFIG_CONFIGPOS19LEN01_Pos (19UL) /*!< Position of CONFIGPOS19LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS19LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS19LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS19LEN01 field.*/                             
+                                                                            CONFIGPOS19LEN01 field.*/
 
 /* CONFIGPOS20LEN01 @Bit 20 : Indicates that layer 3 is enabled */
   #define DISPC_CORE_CONFIG_CONFIGPOS20LEN01_Pos (20UL) /*!< Position of CONFIGPOS20LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS20LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS20LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS20LEN01 field.*/                             
+                                                                            CONFIGPOS20LEN01 field.*/
 
 /* CONFIGPOS21LEN01 @Bit 21 : Indicates that layer 3 has blender */
   #define DISPC_CORE_CONFIG_CONFIGPOS21LEN01_Pos (21UL) /*!< Position of CONFIGPOS21LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS21LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS21LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS21LEN01 field.*/                             
+                                                                            CONFIGPOS21LEN01 field.*/
 
 /* CONFIGPOS22LEN01 @Bit 22 : Revered */
   #define DISPC_CORE_CONFIG_CONFIGPOS22LEN01_Pos (22UL) /*!< Position of CONFIGPOS22LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS22LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS22LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS22LEN01 field.*/                             
+                                                                            CONFIGPOS22LEN01 field.*/
 
 /* CONFIGPOS23LEN01 @Bit 23 : Indicates that layer 3 has gamma LUT */
   #define DISPC_CORE_CONFIG_CONFIGPOS23LEN01_Pos (23UL) /*!< Position of CONFIGPOS23LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS23LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS23LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS23LEN01 field.*/                             
+                                                                            CONFIGPOS23LEN01 field.*/
 
 /* CONFIGPOS24LEN04 @Bits 24..27 : Revered */
   #define DISPC_CORE_CONFIG_CONFIGPOS24LEN04_Pos (24UL) /*!< Position of CONFIGPOS24LEN04 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS24LEN04_Msk (0xFUL << DISPC_CORE_CONFIG_CONFIGPOS24LEN04_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS24LEN04 field.*/                             
+                                                                            CONFIGPOS24LEN04 field.*/
 
 /* CONFIGPOS28LEN01 @Bit 28 : Indicates that layer 0 has YUV Memory */
   #define DISPC_CORE_CONFIG_CONFIGPOS28LEN01_Pos (28UL) /*!< Position of CONFIGPOS28LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS28LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS28LEN01 field.*/                             
+                                                                            CONFIGPOS28LEN01 field.*/
 
 /* CONFIGPOS29LEN01 @Bit 29 : Indicates that layer 1 has YUV Memory */
   #define DISPC_CORE_CONFIG_CONFIGPOS29LEN01_Pos (29UL) /*!< Position of CONFIGPOS29LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS29LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS29LEN01 field.*/                             
+                                                                            CONFIGPOS29LEN01 field.*/
 
 /* CONFIGPOS30LEN01 @Bit 30 : Indicates that layer 2 has YUV Memory */
   #define DISPC_CORE_CONFIG_CONFIGPOS30LEN01_Pos (30UL) /*!< Position of CONFIGPOS30LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS30LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS30LEN01 field.*/                             
+                                                                            CONFIGPOS30LEN01 field.*/
 
 /* CONFIGPOS31LEN01 @Bit 31 : Indicates that layer 3 has YUV Memory */
   #define DISPC_CORE_CONFIG_CONFIGPOS31LEN01_Pos (31UL) /*!< Position of CONFIGPOS31LEN01 field.                               */
   #define DISPC_CORE_CONFIG_CONFIGPOS31LEN01_Msk (0x1UL << DISPC_CORE_CONFIG_CONFIGPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            CONFIGPOS31LEN01 field.*/                             
+                                                                            CONFIGPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_IDREG: Identification Register. */
@@ -5354,42 +5380,42 @@ typedef struct {
 /* INTERRUPTPOS00LEN01 @Bit 0 : When set to 1, VSYNC interrupt enabled */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS00LEN01_Pos (0UL) /*!< Position of INTERRUPTPOS00LEN01 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS00LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS00LEN01 field.*/                          
+                                                                            INTERRUPTPOS00LEN01 field.*/
 
 /* INTERRUPTPOS01LEN01 @Bit 1 : When set to 1, HSYNC interrupt enabled */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS01LEN01_Pos (1UL) /*!< Position of INTERRUPTPOS01LEN01 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS01LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS01LEN01 field.*/                          
+                                                                            INTERRUPTPOS01LEN01 field.*/
 
 /* INTERRUPTPOS02LEN01 @Bit 2 : When set to 1, signals an interrupt on MMU error */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS02LEN01_Pos (2UL) /*!< Position of INTERRUPTPOS02LEN01 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS02LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS02LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS02LEN01 field.*/                          
+                                                                            INTERRUPTPOS02LEN01 field.*/
 
 /* INTERRUPTPOS03LEN01 @Bit 3 : When set to 1, TE interrupt enabled */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS03LEN01_Pos (3UL) /*!< Position of INTERRUPTPOS03LEN01 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS03LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS03LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS03LEN01 field.*/                          
+                                                                            INTERRUPTPOS03LEN01 field.*/
 
 /* INTERRUPTPOS04LEN01 @Bit 4 : When set to 1, signals an interrupt on Frame End */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS04LEN01_Pos (4UL) /*!< Position of INTERRUPTPOS04LEN01 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS04LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS04LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS04LEN01 field.*/                          
+                                                                            INTERRUPTPOS04LEN01 field.*/
 
 /* INTERRUPTPOS05LEN25 @Bits 5..29 : Revered */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS05LEN25_Pos (5UL) /*!< Position of INTERRUPTPOS05LEN25 field.                       */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS05LEN25_Msk (0x1FFFFFFUL << DISPC_CORE_INTERRUPT_INTERRUPTPOS05LEN25_Pos) /*!< Bit
-                                                                            mask of INTERRUPTPOS05LEN25 field.*/                  
+                                                                            mask of INTERRUPTPOS05LEN25 field.*/
 
 /* INTERRUPTPOS30LEN01 @Bit 30 : Indicates IRQ is underway */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS30LEN01_Pos (30UL) /*!< Position of INTERRUPTPOS30LEN01 field.                      */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS30LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS30LEN01 field.*/                          
+                                                                            INTERRUPTPOS30LEN01 field.*/
 
 /* INTERRUPTPOS31LEN01 @Bit 31 : Interrupt request trigger control */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS31LEN01_Pos (31UL) /*!< Position of INTERRUPTPOS31LEN01 field.                      */
   #define DISPC_CORE_INTERRUPT_INTERRUPTPOS31LEN01_Msk (0x1UL << DISPC_CORE_INTERRUPT_INTERRUPTPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            INTERRUPTPOS31LEN01 field.*/                          
+                                                                            INTERRUPTPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_STATUS: Status register */
@@ -5398,97 +5424,97 @@ typedef struct {
 /* STATUSPOS00LEN01 @Bit 0 : Indicates that the controller is not in active vertical blanking */
   #define DISPC_CORE_STATUS_STATUSPOS00LEN01_Pos (0UL) /*!< Position of STATUSPOS00LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS00LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS00LEN01 field.*/                             
+                                                                            STATUSPOS00LEN01 field.*/
 
 /* STATUSPOS01LEN01 @Bit 1 : Indicates the DE signal status (0 or 1) at the current time of reading */
   #define DISPC_CORE_STATUS_STATUSPOS01LEN01_Pos (1UL) /*!< Position of STATUSPOS01LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS01LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS01LEN01 field.*/                             
+                                                                            STATUSPOS01LEN01 field.*/
 
 /* STATUSPOS02LEN01 @Bit 2 : Indicates the HSYNC signal status (0 or 1) at the current time of reading */
   #define DISPC_CORE_STATUS_STATUSPOS02LEN01_Pos (2UL) /*!< Position of STATUSPOS02LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS02LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS02LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS02LEN01 field.*/                             
+                                                                            STATUSPOS02LEN01 field.*/
 
 /* STATUSPOS03LEN01 @Bit 3 : Indicates the VSYNC signal status and the tearing effect signal */
   #define DISPC_CORE_STATUS_STATUSPOS03LEN01_Pos (3UL) /*!< Position of STATUSPOS03LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS03LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS03LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS03LEN01 field.*/                             
+                                                                            STATUSPOS03LEN01 field.*/
 
 /* STATUSPOS04LEN01 @Bit 4 : Indicates the CSYNC signal status (0 or 1) at the current time of reading */
   #define DISPC_CORE_STATUS_STATUSPOS04LEN01_Pos (4UL) /*!< Position of STATUSPOS04LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS04LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS04LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS04LEN01 field.*/                             
+                                                                            STATUSPOS04LEN01 field.*/
 
 /* STATUSPOS05LEN01 @Bit 5 : Indicates that the last row is currently displayed */
   #define DISPC_CORE_STATUS_STATUSPOS05LEN01_Pos (5UL) /*!< Position of STATUSPOS05LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS05LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS05LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS05LEN01 field.*/                             
+                                                                            STATUSPOS05LEN01 field.*/
 
 /* STATUSPOS06LEN01 @Bit 6 : Indicates current underflow */
   #define DISPC_CORE_STATUS_STATUSPOS06LEN01_Pos (6UL) /*!< Position of STATUSPOS06LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS06LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS06LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS06LEN01 field.*/                             
+                                                                            STATUSPOS06LEN01 field.*/
 
 /* STATUSPOS07LEN01 @Bit 7 : Indicates sticky underflow. This bit clears when interrupt register is written */
   #define DISPC_CORE_STATUS_STATUSPOS07LEN01_Pos (7UL) /*!< Position of STATUSPOS07LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS07LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS07LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS07LEN01 field.*/                             
+                                                                            STATUSPOS07LEN01 field.*/
 
 /* STATUSPOS08LEN01 @Bit 8 : Indicates DBI Type-B tearing effect */
   #define DISPC_CORE_STATUS_STATUSPOS08LEN01_Pos (8UL) /*!< Position of STATUSPOS08LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS08LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS08LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS08LEN01 field.*/                             
+                                                                            STATUSPOS08LEN01 field.*/
 
 /* STATUSPOS09LEN01 @Bit 9 : Revered */
   #define DISPC_CORE_STATUS_STATUSPOS09LEN01_Pos (9UL) /*!< Position of STATUSPOS09LEN01 field.                                */
   #define DISPC_CORE_STATUS_STATUSPOS09LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS09LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS09LEN01 field.*/                             
+                                                                            STATUSPOS09LEN01 field.*/
 
 /* STATUSPOS10LEN01 @Bit 10 : Indicates pending RGB data in DBI Type-B interface */
   #define DISPC_CORE_STATUS_STATUSPOS10LEN01_Pos (10UL) /*!< Position of STATUSPOS10LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS10LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS10LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS10LEN01 field.*/                             
+                                                                            STATUSPOS10LEN01 field.*/
 
 /* STATUSPOS11LEN01 @Bit 11 : Indicates pending commands in DBI Type-B interface */
   #define DISPC_CORE_STATUS_STATUSPOS11LEN01_Pos (11UL) /*!< Position of STATUSPOS11LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS11LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS11LEN01 field.*/                             
+                                                                            STATUSPOS11LEN01 field.*/
 
 /* STATUSPOS12LEN01 @Bit 12 : Indicates pending output transaction in DBI Type-B interface */
   #define DISPC_CORE_STATUS_STATUSPOS12LEN01_Pos (12UL) /*!< Position of STATUSPOS12LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS12LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS12LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS12LEN01 field.*/                             
+                                                                            STATUSPOS12LEN01 field.*/
 
 /* STATUSPOS13LEN01 @Bit 13 : Indicates Frame end */
   #define DISPC_CORE_STATUS_STATUSPOS13LEN01_Pos (13UL) /*!< Position of STATUSPOS13LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS13LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS13LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS13LEN01 field.*/                             
+                                                                            STATUSPOS13LEN01 field.*/
 
 /* STATUSPOS14LEN01 @Bit 14 : Indicates DBI/SPI CS status */
   #define DISPC_CORE_STATUS_STATUSPOS14LEN01_Pos (14UL) /*!< Position of STATUSPOS14LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS14LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS14LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS14LEN01 field.*/                             
+                                                                            STATUSPOS14LEN01 field.*/
 
 /* STATUSPOS15LEN01 @Bit 15 : Indicates the DBI Command fifo ack */
   #define DISPC_CORE_STATUS_STATUSPOS15LEN01_Pos (15UL) /*!< Position of STATUSPOS15LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS15LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS15LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS15LEN01 field.*/                             
+                                                                            STATUSPOS15LEN01 field.*/
 
 /* STATUSPOS16LEN01 @Bit 16 : Indicates read/write operation on SPI */
   #define DISPC_CORE_STATUS_STATUSPOS16LEN01_Pos (16UL) /*!< Position of STATUSPOS16LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS16LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS16LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS16LEN01 field.*/                             
+                                                                            STATUSPOS16LEN01 field.*/
 
 /* STATUSPOS17LEN01 @Bit 17 : Indicates CRC Register read ready */
   #define DISPC_CORE_STATUS_STATUSPOS17LEN01_Pos (17UL) /*!< Position of STATUSPOS17LEN01 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS17LEN01_Msk (0x1UL << DISPC_CORE_STATUS_STATUSPOS17LEN01_Pos) /*!< Bit mask of
-                                                                            STATUSPOS17LEN01 field.*/                             
+                                                                            STATUSPOS17LEN01 field.*/
 
 /* STATUSPOS17LEN14 @Bits 18..31 : Revered */
   #define DISPC_CORE_STATUS_STATUSPOS17LEN14_Pos (18UL) /*!< Position of STATUSPOS17LEN14 field.                               */
   #define DISPC_CORE_STATUS_STATUSPOS17LEN14_Msk (0x3FFFUL << DISPC_CORE_STATUS_STATUSPOS17LEN14_Pos) /*!< Bit mask of
-                                                                            STATUSPOS17LEN14 field.*/                             
+                                                                            STATUSPOS17LEN14 field.*/
 
 
 /* DISPC_CORE_COLMOD: Color mode status register. */
@@ -5497,137 +5523,137 @@ typedef struct {
 /* COLMODPOS00LEN01 @Bit 0 : Zero value indicates that the TSc4/TSc6 propietary color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS00LEN01_Pos (0UL) /*!< Position of COLMODPOS00LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS00LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS00LEN01 field.*/                             
+                                                                            COLMODPOS00LEN01 field.*/
 
 /* COLMODPOS01LEN01 @Bit 1 : Zero value indicates that the TLYUV420 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS01LEN01_Pos (1UL) /*!< Position of COLMODPOS01LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS01LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS01LEN01 field.*/                             
+                                                                            COLMODPOS01LEN01 field.*/
 
 /* COLMODPOS02LEN01 @Bit 2 : Zero value indicates that the V_YUV420 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS02LEN01_Pos (2UL) /*!< Position of COLMODPOS02LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS02LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS02LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS02LEN01 field.*/                             
+                                                                            COLMODPOS02LEN01 field.*/
 
 /* COLMODPOS03LEN01 @Bit 3 : Zero value indicates that the BGRA8888 32-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS03LEN01_Pos (3UL) /*!< Position of COLMODPOS03LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS03LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS03LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS03LEN01 field.*/                             
+                                                                            COLMODPOS03LEN01 field.*/
 
 /* COLMODPOS04LEN01 @Bit 4 : Zero value indicates that the ABGR8888 32-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS04LEN01_Pos (4UL) /*!< Position of COLMODPOS04LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS04LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS04LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS04LEN01 field.*/                             
+                                                                            COLMODPOS04LEN01 field.*/
 
 /* COLMODPOS05LEN01 @Bit 5 : Zero value indicates that the YUY2 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS05LEN01_Pos (5UL) /*!< Position of COLMODPOS05LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS05LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS05LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS05LEN01 field.*/                             
+                                                                            COLMODPOS05LEN01 field.*/
 
 /* COLMODPOS06LEN01 @Bit 6 : Zero value indicates that the RGB888 24-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS06LEN01_Pos (6UL) /*!< Position of COLMODPOS06LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS06LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS06LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS06LEN01 field.*/                             
+                                                                            COLMODPOS06LEN01 field.*/
 
 /* COLMODPOS07LEN01 @Bit 7 : Zero value indicates that the YUYV color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS07LEN01_Pos (7UL) /*!< Position of COLMODPOS07LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS07LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS07LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS07LEN01 field.*/                             
+                                                                            COLMODPOS07LEN01 field.*/
 
 /* COLMODPOS08LEN01 @Bit 8 : Zero value indicates that the L4 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS08LEN01_Pos (8UL) /*!< Position of COLMODPOS08LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS08LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS08LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS08LEN01 field.*/                             
+                                                                            COLMODPOS08LEN01 field.*/
 
 /* COLMODPOS09LEN01 @Bit 9 : Zero value indicates that the L1 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS09LEN01_Pos (9UL) /*!< Position of COLMODPOS09LEN01 field.                                */
   #define DISPC_CORE_COLMOD_COLMODPOS09LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS09LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS09LEN01 field.*/                             
+                                                                            COLMODPOS09LEN01 field.*/
 
 /* COLMODPOS10LEN01 @Bit 10 : Zero value indicates that the L8 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS10LEN01_Pos (10UL) /*!< Position of COLMODPOS10LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS10LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS10LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS10LEN01 field.*/                             
+                                                                            COLMODPOS10LEN01 field.*/
 
 /* COLMODPOS11LEN01 @Bit 11 : Zero value indicates that the ARGB8888 32-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS11LEN01_Pos (11UL) /*!< Position of COLMODPOS11LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS11LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS11LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS11LEN01 field.*/                             
+                                                                            COLMODPOS11LEN01 field.*/
 
 /* COLMODPOS12LEN01 @Bit 12 : Zero value indicates that the RGB565 16-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS12LEN01_Pos (12UL) /*!< Position of COLMODPOS12LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS12LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS12LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS12LEN01 field.*/                             
+                                                                            COLMODPOS12LEN01 field.*/
 
 /* COLMODPOS13LEN01 @Bit 13 : Zero value indicates that the RGB332 8-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS13LEN01_Pos (13UL) /*!< Position of COLMODPOS13LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS13LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS13LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS13LEN01 field.*/                             
+                                                                            COLMODPOS13LEN01 field.*/
 
 /* COLMODPOS14LEN01 @Bit 14 : Zero value indicates that the RGBA8888 32-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS14LEN01_Pos (14UL) /*!< Position of COLMODPOS14LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS14LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS14LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS14LEN01 field.*/                             
+                                                                            COLMODPOS14LEN01 field.*/
 
 /* COLMODPOS15LEN01 @Bit 15 : Zero value indicates that the RGBA5551 16-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS15LEN01_Pos (15UL) /*!< Position of COLMODPOS15LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS15LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS15LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS15LEN01 field.*/                             
+                                                                            COLMODPOS15LEN01 field.*/
 
 /* COLMODPOS16LEN01 @Bit 16 : Zero value indicates that the LUT8 color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS16LEN01_Pos (16UL) /*!< Position of COLMODPOS16LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS16LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS16LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS16LEN01 field.*/                             
+                                                                            COLMODPOS16LEN01 field.*/
 
 /* COLMODPOS17LEN01 @Bit 17 : High value indicates that TSC4 is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS17LEN01_Pos (17UL) /*!< Position of COLMODPOS17LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS17LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS17LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS17LEN01 field.*/                             
+                                                                            COLMODPOS17LEN01 field.*/
 
 /* COLMODPOS18LEN01 @Bit 18 : High value indicate that TSC6 is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS18LEN01_Pos (18UL) /*!< Position of COLMODPOS18LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS18LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS18LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS18LEN01 field.*/                             
+                                                                            COLMODPOS18LEN01 field.*/
 
 /* COLMODPOS19LEN01 @Bit 19 : Revered */
   #define DISPC_CORE_COLMOD_COLMODPOS19LEN01_Pos (19UL) /*!< Position of COLMODPOS19LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS19LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS19LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS19LEN01 field.*/                             
+                                                                            COLMODPOS19LEN01 field.*/
 
 /* COLMODPOS20LEN01 @Bit 20 : Revered */
   #define DISPC_CORE_COLMOD_COLMODPOS20LEN01_Pos (20UL) /*!< Position of COLMODPOS20LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS20LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS20LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS20LEN01 field.*/                             
+                                                                            COLMODPOS20LEN01 field.*/
 
 /* COLMODPOS21LEN01 @Bit 21 : Zero value indicates that the RGBA4444 16-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS21LEN01_Pos (21UL) /*!< Position of COLMODPOS21LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS21LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS21LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS21LEN01 field.*/                             
+                                                                            COLMODPOS21LEN01 field.*/
 
 /* COLMODPOS22LEN01 @Bit 22 : Zero value indicates that the ARGB4444 16-bit color format is enabled */
   #define DISPC_CORE_COLMOD_COLMODPOS22LEN01_Pos (22UL) /*!< Position of COLMODPOS22LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS22LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS22LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS22LEN01 field.*/                             
+                                                                            COLMODPOS22LEN01 field.*/
 
 /* COLMODPOS23LEN06 @Bits 23..28 : Revered */
   #define DISPC_CORE_COLMOD_COLMODPOS23LEN06_Pos (23UL) /*!< Position of COLMODPOS23LEN06 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS23LEN06_Msk (0x3FUL << DISPC_CORE_COLMOD_COLMODPOS23LEN06_Pos) /*!< Bit mask of
-                                                                            COLMODPOS23LEN06 field.*/                             
+                                                                            COLMODPOS23LEN06 field.*/
 
 /* COLMODPOS29LEN01 @Bit 29 : High value indicate that display is equiped with JDI */
   #define DISPC_CORE_COLMOD_COLMODPOS29LEN01_Pos (29UL) /*!< Position of COLMODPOS29LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS29LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS29LEN01 field.*/                             
+                                                                            COLMODPOS29LEN01 field.*/
 
 /* COLMODPOS30LEN01 @Bit 30 : Revered */
   #define DISPC_CORE_COLMOD_COLMODPOS30LEN01_Pos (30UL) /*!< Position of COLMODPOS30LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS30LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS30LEN01 field.*/                             
+                                                                            COLMODPOS30LEN01 field.*/
 
 /* COLMODPOS31LEN01 @Bit 31 : Revered */
   #define DISPC_CORE_COLMOD_COLMODPOS31LEN01_Pos (31UL) /*!< Position of COLMODPOS31LEN01 field.                               */
   #define DISPC_CORE_COLMOD_COLMODPOS31LEN01_Msk (0x1UL << DISPC_CORE_COLMOD_COLMODPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            COLMODPOS31LEN01 field.*/                             
+                                                                            COLMODPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_CRC: If CRC errors occur, they are written in the CORE_CRC register */
@@ -5644,7 +5670,7 @@ typedef struct {
 /* LAYER2UBASE @Bits 0..31 : Specify the start address of U chroma for layer 2 */
   #define DISPC_CORE_LAYER2UBASE_LAYER2UBASE_Pos (0UL) /*!< Position of LAYER2UBASE field.                                     */
   #define DISPC_CORE_LAYER2UBASE_LAYER2UBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER2UBASE_LAYER2UBASE_Pos) /*!< Bit mask of
-                                                                            LAYER2UBASE field.*/                                  
+                                                                            LAYER2UBASE field.*/
 
 
 /* DISPC_CORE_LAYER2VBASE: The start address of the V chroma for layer 2 YUV planar format. */
@@ -5653,7 +5679,7 @@ typedef struct {
 /* LAYER2VBASE @Bits 0..31 : Specify the start address of V chroma for layer 2 */
   #define DISPC_CORE_LAYER2VBASE_LAYER2VBASE_Pos (0UL) /*!< Position of LAYER2VBASE field.                                     */
   #define DISPC_CORE_LAYER2VBASE_LAYER2VBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER2VBASE_LAYER2VBASE_Pos) /*!< Bit mask of
-                                                                            LAYER2VBASE field.*/                                  
+                                                                            LAYER2VBASE field.*/
 
 
 /* DISPC_CORE_LAYER2UVSTRIDE: Specify the stride for layer 2 YUV planar format. */
@@ -5662,7 +5688,7 @@ typedef struct {
 /* LAYER2UVSTRIDE @Bits 0..31 : Specify the stride for layer 2 YUV planar format. */
   #define DISPC_CORE_LAYER2UVSTRIDE_LAYER2UVSTRIDE_Pos (0UL) /*!< Position of LAYER2UVSTRIDE field.                            */
   #define DISPC_CORE_LAYER2UVSTRIDE_LAYER2UVSTRIDE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER2UVSTRIDE_LAYER2UVSTRIDE_Pos) /*!< Bit
-                                                                            mask of LAYER2UVSTRIDE field.*/                       
+                                                                            mask of LAYER2UVSTRIDE field.*/
 
 
 /* DISPC_CORE_LAYER3UBASE: The start address of the U chroma for layer 3 YUV planar format. */
@@ -5671,7 +5697,7 @@ typedef struct {
 /* LAYER3UBASE @Bits 0..31 : Specify the start address of U chroma for layer 3 */
   #define DISPC_CORE_LAYER3UBASE_LAYER3UBASE_Pos (0UL) /*!< Position of LAYER3UBASE field.                                     */
   #define DISPC_CORE_LAYER3UBASE_LAYER3UBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER3UBASE_LAYER3UBASE_Pos) /*!< Bit mask of
-                                                                            LAYER3UBASE field.*/                                  
+                                                                            LAYER3UBASE field.*/
 
 
 /* DISPC_CORE_LAYER3VBASE: The start address of the V chroma for layer 3 YUV planar format. */
@@ -5680,7 +5706,7 @@ typedef struct {
 /* LAYER3VBASE @Bits 0..31 : Specify the start address of V chroma for layer 3 */
   #define DISPC_CORE_LAYER3VBASE_LAYER3VBASE_Pos (0UL) /*!< Position of LAYER3VBASE field.                                     */
   #define DISPC_CORE_LAYER3VBASE_LAYER3VBASE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER3VBASE_LAYER3VBASE_Pos) /*!< Bit mask of
-                                                                            LAYER3VBASE field.*/                                  
+                                                                            LAYER3VBASE field.*/
 
 
 /* DISPC_CORE_LAYER3UVSTRIDE: Specify the stride for layer 3 YUV planar format. */
@@ -5689,7 +5715,7 @@ typedef struct {
 /* LAYER3UVSTRIDE @Bits 0..31 : Specify the stride for layer 3 YUV planar format. */
   #define DISPC_CORE_LAYER3UVSTRIDE_LAYER3UVSTRIDE_Pos (0UL) /*!< Position of LAYER3UVSTRIDE field.                            */
   #define DISPC_CORE_LAYER3UVSTRIDE_LAYER3UVSTRIDE_Msk (0xFFFFFFFFUL << DISPC_CORE_LAYER3UVSTRIDE_LAYER3UVSTRIDE_Pos) /*!< Bit
-                                                                            mask of LAYER3UVSTRIDE field.*/                       
+                                                                            mask of LAYER3UVSTRIDE field.*/
 
 
 /* DISPC_CORE_FORMATCTRL: Controls DBI and JDI format. */
@@ -5698,57 +5724,57 @@ typedef struct {
 /* FORMATCTRLPOS00LEN03 @Bits 0..2 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS00LEN03_Pos (0UL) /*!< Position of FORMATCTRLPOS00LEN03 field.                    */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS00LEN03_Msk (0x7UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS00LEN03_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS00LEN03 field.*/                      
+                                                                            of FORMATCTRLPOS00LEN03 field.*/
 
 /* FORMATCTRLPOS03LEN05 @Bits 3..7 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS03LEN05_Pos (3UL) /*!< Position of FORMATCTRLPOS03LEN05 field.                    */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS03LEN05_Msk (0x1FUL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS03LEN05_Pos) /*!< Bit
-                                                                            mask of FORMATCTRLPOS03LEN05 field.*/                 
+                                                                            mask of FORMATCTRLPOS03LEN05 field.*/
 
 /* FORMATCTRLPOS08LEN05 @Bits 8..12 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS08LEN05_Pos (8UL) /*!< Position of FORMATCTRLPOS08LEN05 field.                    */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS08LEN05_Msk (0x1FUL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS08LEN05_Pos) /*!< Bit
-                                                                            mask of FORMATCTRLPOS08LEN05 field.*/                 
+                                                                            mask of FORMATCTRLPOS08LEN05 field.*/
 
 /* FORMATCTRLPOS13LEN03 @Bits 13..15 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS13LEN03_Pos (13UL) /*!< Position of FORMATCTRLPOS13LEN03 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS13LEN03_Msk (0x7UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS13LEN03_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS13LEN03 field.*/                      
+                                                                            of FORMATCTRLPOS13LEN03 field.*/
 
 /* FORMATCTRLPOS16LEN06 @Bits 16..21 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS16LEN06_Pos (16UL) /*!< Position of FORMATCTRLPOS16LEN06 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS16LEN06_Msk (0x3FUL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS16LEN06_Pos) /*!< Bit
-                                                                            mask of FORMATCTRLPOS16LEN06 field.*/                 
+                                                                            mask of FORMATCTRLPOS16LEN06 field.*/
 
 /* FORMATCTRLPOS22LEN01 @Bit 22 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS22LEN01_Pos (22UL) /*!< Position of FORMATCTRLPOS22LEN01 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS22LEN01_Msk (0x1UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS22LEN01_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS22LEN01 field.*/                      
+                                                                            of FORMATCTRLPOS22LEN01 field.*/
 
 /* FORMATCTRLPOS23LEN03 @Bits 23..25 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS23LEN03_Pos (23UL) /*!< Position of FORMATCTRLPOS23LEN03 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS23LEN03_Msk (0x7UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS23LEN03_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS23LEN03 field.*/                      
+                                                                            of FORMATCTRLPOS23LEN03 field.*/
 
 /* FORMATCTRLPOS26LEN03 @Bits 26..28 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS26LEN03_Pos (26UL) /*!< Position of FORMATCTRLPOS26LEN03 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS26LEN03_Msk (0x7UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS26LEN03_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS26LEN03 field.*/                      
+                                                                            of FORMATCTRLPOS26LEN03 field.*/
 
 /* FORMATCTRLPOS29LEN01 @Bit 29 : Revered */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS29LEN01_Pos (29UL) /*!< Position of FORMATCTRLPOS29LEN01 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS29LEN01_Msk (0x1UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS29LEN01_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS29LEN01 field.*/                      
+                                                                            of FORMATCTRLPOS29LEN01 field.*/
 
 /* FORMATCTRLPOS30LEN01 @Bit 30 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS30LEN01_Pos (30UL) /*!< Position of FORMATCTRLPOS30LEN01 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS30LEN01_Msk (0x1UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS30LEN01_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS30LEN01 field.*/                      
+                                                                            of FORMATCTRLPOS30LEN01 field.*/
 
 /* FORMATCTRLPOS31LEN01 @Bit 31 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS31LEN01_Pos (31UL) /*!< Position of FORMATCTRLPOS31LEN01 field.                   */
   #define DISPC_CORE_FORMATCTRL_FORMATCTRLPOS31LEN01_Msk (0x1UL << DISPC_CORE_FORMATCTRL_FORMATCTRLPOS31LEN01_Pos) /*!< Bit mask
-                                                                            of FORMATCTRLPOS31LEN01 field.*/                      
+                                                                            of FORMATCTRLPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_FORMATCTRL2: Controls DBI and JDI format. */
@@ -5757,27 +5783,27 @@ typedef struct {
 /* FORMATCTRL2POS00LEN10 @Bits 0..9 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS00LEN10_Pos (0UL) /*!< Position of FORMATCTRL2POS00LEN10 field.                 */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS00LEN10_Msk (0x3FFUL << DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS00LEN10_Pos) /*!<
-                                                                            Bit mask of FORMATCTRL2POS00LEN10 field.*/            
+                                                                            Bit mask of FORMATCTRL2POS00LEN10 field.*/
 
 /* FORMATCTRL2POS10LEN06 @Bits 10..15 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS10LEN06_Pos (10UL) /*!< Position of FORMATCTRL2POS10LEN06 field.                */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS10LEN06_Msk (0x3FUL << DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS10LEN06_Pos) /*!< Bit
-                                                                            mask of FORMATCTRL2POS10LEN06 field.*/                
+                                                                            mask of FORMATCTRL2POS10LEN06 field.*/
 
 /* FORMATCTRL2POS16LEN04 @Bits 16..19 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS16LEN04_Pos (16UL) /*!< Position of FORMATCTRL2POS16LEN04 field.                */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS16LEN04_Msk (0xFUL << DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS16LEN04_Pos) /*!< Bit
-                                                                            mask of FORMATCTRL2POS16LEN04 field.*/                
+                                                                            mask of FORMATCTRL2POS16LEN04 field.*/
 
 /* FORMATCTRL2POS20LEN10 @Bits 20..29 : When DBI-Type B Interface is selected */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS20LEN10_Pos (20UL) /*!< Position of FORMATCTRL2POS20LEN10 field.                */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS20LEN10_Msk (0x3FFUL << DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS20LEN10_Pos) /*!<
-                                                                            Bit mask of FORMATCTRL2POS20LEN10 field.*/            
+                                                                            Bit mask of FORMATCTRL2POS20LEN10 field.*/
 
 /* FORMATCTRL2POS30LEN02 @Bits 30..31 : Revered */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS30LEN02_Pos (30UL) /*!< Position of FORMATCTRL2POS30LEN02 field.                */
   #define DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS30LEN02_Msk (0x3UL << DISPC_CORE_FORMATCTRL2_FORMATCTRL2POS30LEN02_Pos) /*!< Bit
-                                                                            mask of FORMATCTRL2POS30LEN02 field.*/                
+                                                                            mask of FORMATCTRL2POS30LEN02 field.*/
 
 
 /* DISPC_CORE_CLKCTRLCG: Controls the Clock Gaters and the routing of format and pixel clock */
@@ -5786,72 +5812,72 @@ typedef struct {
 /* CLKCTRLCGPOS00LEN01 @Bit 0 : Enable clock divider */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS00LEN01_Pos (0UL) /*!< Position of CLKCTRLCGPOS00LEN01 field.                       */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS00LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS00LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS00LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS00LEN01 field.*/
 
 /* CLKCTRLCGPOS01LEN01 @Bit 1 : Invert (ouput) clock polarity */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS01LEN01_Pos (1UL) /*!< Position of CLKCTRLCGPOS01LEN01 field.                       */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS01LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS01LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS01LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS01LEN01 field.*/
 
 /* CLKCTRLCGPOS02LEN01 @Bit 2 : Pixel generation and format clock swap */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS02LEN01_Pos (2UL) /*!< Position of CLKCTRLCGPOS02LEN01 field.                       */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS02LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS02LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS02LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS02LEN01 field.*/
 
 /* CLKCTRLCGPOS03LEN19 @Bits 3..21 : Revered */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS03LEN19_Pos (3UL) /*!< Position of CLKCTRLCGPOS03LEN19 field.                       */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS03LEN19_Msk (0x7FFFFUL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS03LEN19_Pos) /*!< Bit mask
-                                                                            of CLKCTRLCGPOS03LEN19 field.*/                       
+                                                                            of CLKCTRLCGPOS03LEN19 field.*/
 
 /* CLKCTRLCGPOS22LEN01 @Bit 22 : Clock-gaters bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS22LEN01_Pos (22UL) /*!< Position of CLKCTRLCGPOS22LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS22LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS22LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS22LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS22LEN01 field.*/
 
 /* CLKCTRLCGPOS23LEN01 @Bit 23 : RegFile clock-gaters bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS23LEN01_Pos (23UL) /*!< Position of CLKCTRLCGPOS23LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS23LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS23LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS23LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS23LEN01 field.*/
 
 /* CLKCTRLCGPOS24LEN01 @Bit 24 : layer 0 pixel clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS24LEN01_Pos (24UL) /*!< Position of CLKCTRLCGPOS24LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS24LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS24LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS24LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS24LEN01 field.*/
 
 /* CLKCTRLCGPOS25LEN01 @Bit 25 : layer 0 bus clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS25LEN01_Pos (25UL) /*!< Position of CLKCTRLCGPOS25LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS25LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS25LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS25LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS25LEN01 field.*/
 
 /* CLKCTRLCGPOS26LEN01 @Bit 26 : layer 1 pixel clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS26LEN01_Pos (26UL) /*!< Position of CLKCTRLCGPOS26LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS26LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS26LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS26LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS26LEN01 field.*/
 
 /* CLKCTRLCGPOS27LEN01 @Bit 27 : layer 1 bus clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS27LEN01_Pos (27UL) /*!< Position of CLKCTRLCGPOS27LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS27LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS27LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS27LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS27LEN01 field.*/
 
 /* CLKCTRLCGPOS28LEN01 @Bit 28 : layer 2 pixel clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS28LEN01_Pos (28UL) /*!< Position of CLKCTRLCGPOS28LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS28LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS28LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS28LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS28LEN01 field.*/
 
 /* CLKCTRLCGPOS29LEN01 @Bit 29 : layer 2 bus clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS29LEN01_Pos (29UL) /*!< Position of CLKCTRLCGPOS29LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS29LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS29LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS29LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS29LEN01 field.*/
 
 /* CLKCTRLCGPOS30LEN01 @Bit 30 : layer 3 pixel clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS30LEN01_Pos (30UL) /*!< Position of CLKCTRLCGPOS30LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS30LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS30LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS30LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS30LEN01 field.*/
 
 /* CLKCTRLCGPOS31LEN01 @Bit 31 : layer 3 bus clock clock-gater bypass */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS31LEN01_Pos (31UL) /*!< Position of CLKCTRLCGPOS31LEN01 field.                      */
   #define DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS31LEN01_Msk (0x1UL << DISPC_CORE_CLKCTRLCG_CLKCTRLCGPOS31LEN01_Pos) /*!< Bit mask of
-                                                                            CLKCTRLCGPOS31LEN01 field.*/                          
+                                                                            CLKCTRLCGPOS31LEN01 field.*/
 
 
 /* DISPC_CORE_FORMATCTRL3: Control JDI format. */
@@ -5860,22 +5886,22 @@ typedef struct {
 /* FORMATCTRL3POS00LEN10 @Bits 0..9 : Set the high state of XRST signal in multiple of VCK */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS00LEN10_Pos (0UL) /*!< Position of FORMATCTRL3POS00LEN10 field.                 */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS00LEN10_Msk (0x3FFUL << DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS00LEN10_Pos) /*!<
-                                                                            Bit mask of FORMATCTRL3POS00LEN10 field.*/            
+                                                                            Bit mask of FORMATCTRL3POS00LEN10 field.*/
 
 /* FORMATCTRL3POS10LEN3 @Bits 10..12 : Set the delay that begins at the CS activation and */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS10LEN3_Pos (10UL) /*!< Position of FORMATCTRL3POS10LEN3 field.                  */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS10LEN3_Msk (0x7UL << DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS10LEN3_Pos) /*!< Bit
-                                                                            mask of FORMATCTRL3POS10LEN3 field.*/                 
+                                                                            mask of FORMATCTRL3POS10LEN3 field.*/
 
 /* FORMATCTRL3POS13LEN3 @Bits 13..15 : Set the delay that begins at the last negative edge of SPI_CLK and */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS13LEN3_Pos (13UL) /*!< Position of FORMATCTRL3POS13LEN3 field.                  */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS13LEN3_Msk (0x7UL << DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS13LEN3_Pos) /*!< Bit
-                                                                            mask of FORMATCTRL3POS13LEN3 field.*/                 
+                                                                            mask of FORMATCTRL3POS13LEN3 field.*/
 
 /* FORMATCTRL3POS16LEN16 @Bits 16..31 : Revered */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS16LEN16_Pos (16UL) /*!< Position of FORMATCTRL3POS16LEN16 field.                */
   #define DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS16LEN16_Msk (0xFFFFUL << DISPC_CORE_FORMATCTRL3_FORMATCTRL3POS16LEN16_Pos) /*!<
-                                                                            Bit mask of FORMATCTRL3POS16LEN16 field.*/            
+                                                                            Bit mask of FORMATCTRL3POS16LEN16 field.*/
 
 
 /* DISPC_CORE_PALETTE: Global palette/gamma correction memory region. */
@@ -5888,7 +5914,7 @@ typedef struct {
 /* PALETTEGREEN @Bits 8..15 : Gamma ramp green bits. */
   #define DISPC_CORE_PALETTE_PALETTEGREEN_Pos (8UL)  /*!< Position of PALETTEGREEN field.                                      */
   #define DISPC_CORE_PALETTE_PALETTEGREEN_Msk (0xFFUL << DISPC_CORE_PALETTE_PALETTEGREEN_Pos) /*!< Bit mask of PALETTEGREEN
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* PALETTERED @Bits 16..23 : Gamma ramp red bits. */
   #define DISPC_CORE_PALETTE_PALETTERED_Pos (16UL)   /*!< Position of PALETTERED field.                                        */
@@ -5897,7 +5923,7 @@ typedef struct {
 /* PALETTEPOS24LEN08 @Bits 24..31 : Revered */
   #define DISPC_CORE_PALETTE_PALETTEPOS24LEN08_Pos (24UL) /*!< Position of PALETTEPOS24LEN08 field.                            */
   #define DISPC_CORE_PALETTE_PALETTEPOS24LEN08_Msk (0xFFUL << DISPC_CORE_PALETTE_PALETTEPOS24LEN08_Pos) /*!< Bit mask of
-                                                                            PALETTEPOS24LEN08 field.*/                            
+                                                                            PALETTEPOS24LEN08 field.*/
 
 
 /* DISPC_CORE_CURSORIMAGE: Color values for the pixel Cursor that are used with the Cursor LUT. */
@@ -5906,42 +5932,42 @@ typedef struct {
 /* CURSORIMAGEPOS03LEN04 @Bits 0..3 : Pixel (x,6) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS03LEN04_Pos (0UL) /*!< Position of CURSORIMAGEPOS03LEN04 field.                 */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS03LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS03LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS03LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS03LEN04 field.*/
 
 /* CURSORIMAGEPOS04LEN04 @Bits 4..7 : Pixel (x,5) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS04LEN04_Pos (4UL) /*!< Position of CURSORIMAGEPOS04LEN04 field.                 */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS04LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS04LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS04LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS04LEN04 field.*/
 
 /* CURSORIMAGEPOS08LEN04 @Bits 8..11 : Revered */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS08LEN04_Pos (8UL) /*!< Position of CURSORIMAGEPOS08LEN04 field.                 */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS08LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS08LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS08LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS08LEN04 field.*/
 
 /* CURSORIMAGEPOS12LEN04 @Bits 12..15 : Pixel (x,4) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS12LEN04_Pos (12UL) /*!< Position of CURSORIMAGEPOS12LEN04 field.                */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS12LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS12LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS12LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS12LEN04 field.*/
 
 /* CURSORIMAGEPOS16LEN04 @Bits 16..19 : Pixel (x,3) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS16LEN04_Pos (16UL) /*!< Position of CURSORIMAGEPOS16LEN04 field.                */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS16LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS16LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS16LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS16LEN04 field.*/
 
 /* CURSORIMAGEPOS20LEN04 @Bits 20..23 : Pixel (x,2) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS20LEN04_Pos (20UL) /*!< Position of CURSORIMAGEPOS20LEN04 field.                */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS20LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS20LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS20LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS20LEN04 field.*/
 
 /* CURSORIMAGEPOS24LEN04 @Bits 24..27 : Pixel (x,1) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS24LEN04_Pos (24UL) /*!< Position of CURSORIMAGEPOS24LEN04 field.                */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS24LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS24LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS24LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS24LEN04 field.*/
 
 /* CURSORIMAGEPOS28LEN04 @Bits 28..31 : Pixel (x,0) color Look up bits */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS28LEN04_Pos (28UL) /*!< Position of CURSORIMAGEPOS28LEN04 field.                */
   #define DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS28LEN04_Msk (0xFUL << DISPC_CORE_CURSORIMAGE_CURSORIMAGEPOS28LEN04_Pos) /*!< Bit
-                                                                            mask of CURSORIMAGEPOS28LEN04 field.*/                
+                                                                            mask of CURSORIMAGEPOS28LEN04 field.*/
 
 
 /* DISPC_CORE_CURSORLUT: Cursor Look-up Table. */
@@ -5950,22 +5976,22 @@ typedef struct {
 /* CURSORLUTBLUE @Bits 0..7 : Color blue is used as Lut color. */
   #define DISPC_CORE_CURSORLUT_CURSORLUTBLUE_Pos (0UL) /*!< Position of CURSORLUTBLUE field.                                   */
   #define DISPC_CORE_CURSORLUT_CURSORLUTBLUE_Msk (0xFFUL << DISPC_CORE_CURSORLUT_CURSORLUTBLUE_Pos) /*!< Bit mask of
-                                                                            CURSORLUTBLUE field.*/                                
+                                                                            CURSORLUTBLUE field.*/
 
 /* CURSORLUTGREEN @Bits 8..15 : Color green is used as Lut color. */
   #define DISPC_CORE_CURSORLUT_CURSORLUTGREEN_Pos (8UL) /*!< Position of CURSORLUTGREEN field.                                 */
   #define DISPC_CORE_CURSORLUT_CURSORLUTGREEN_Msk (0xFFUL << DISPC_CORE_CURSORLUT_CURSORLUTGREEN_Pos) /*!< Bit mask of
-                                                                            CURSORLUTGREEN field.*/                               
+                                                                            CURSORLUTGREEN field.*/
 
 /* CURSORLUTRED @Bits 16..23 : Color red is used as Lut color. */
   #define DISPC_CORE_CURSORLUT_CURSORLUTRED_Pos (16UL) /*!< Position of CURSORLUTRED field.                                    */
   #define DISPC_CORE_CURSORLUT_CURSORLUTRED_Msk (0xFFUL << DISPC_CORE_CURSORLUT_CURSORLUTRED_Pos) /*!< Bit mask of CURSORLUTRED
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* CURSORLUTPOS24LEN08 @Bits 24..31 : Revered */
   #define DISPC_CORE_CURSORLUT_CURSORLUTPOS24LEN08_Pos (24UL) /*!< Position of CURSORLUTPOS24LEN08 field.                      */
   #define DISPC_CORE_CURSORLUT_CURSORLUTPOS24LEN08_Msk (0xFFUL << DISPC_CORE_CURSORLUT_CURSORLUTPOS24LEN08_Pos) /*!< Bit mask of
-                                                                            CURSORLUTPOS24LEN08 field.*/                          
+                                                                            CURSORLUTPOS24LEN08 field.*/
 
 
 /* DISPC_CORE_GAMMALUT0: Layer 0 palette/gamma correction memory region. */
@@ -5974,22 +6000,22 @@ typedef struct {
 /* GAMMALUT0BLUE @Bits 0..7 : Color blue is used as Lut color. */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0BLUE_Pos (0UL) /*!< Position of GAMMALUT0BLUE field.                                   */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0BLUE_Msk (0xFFUL << DISPC_CORE_GAMMALUT0_GAMMALUT0BLUE_Pos) /*!< Bit mask of
-                                                                            GAMMALUT0BLUE field.*/                                
+                                                                            GAMMALUT0BLUE field.*/
 
 /* GAMMALUT0GREEN @Bits 8..15 : Color green is used as Lut color. */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0GREEN_Pos (8UL) /*!< Position of GAMMALUT0GREEN field.                                 */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0GREEN_Msk (0xFFUL << DISPC_CORE_GAMMALUT0_GAMMALUT0GREEN_Pos) /*!< Bit mask of
-                                                                            GAMMALUT0GREEN field.*/                               
+                                                                            GAMMALUT0GREEN field.*/
 
 /* GAMMALUT0RED @Bits 16..23 : Color red is used as Lut color. */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0RED_Pos (16UL) /*!< Position of GAMMALUT0RED field.                                    */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0RED_Msk (0xFFUL << DISPC_CORE_GAMMALUT0_GAMMALUT0RED_Pos) /*!< Bit mask of GAMMALUT0RED
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GAMMALUT0ALPHA @Bits 24..31 : Color alpha is used as Lut color. */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0ALPHA_Pos (24UL) /*!< Position of GAMMALUT0ALPHA field.                                */
   #define DISPC_CORE_GAMMALUT0_GAMMALUT0ALPHA_Msk (0xFFUL << DISPC_CORE_GAMMALUT0_GAMMALUT0ALPHA_Pos) /*!< Bit mask of
-                                                                            GAMMALUT0ALPHA field.*/                               
+                                                                            GAMMALUT0ALPHA field.*/
 
 
 /* DISPC_CORE_GAMMALUT1: Layer 1 palette/gamma correction memory region. */
@@ -5998,22 +6024,22 @@ typedef struct {
 /* GAMMALUT1BLUE @Bits 0..7 : Color blue is used as Lut color. */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1BLUE_Pos (0UL) /*!< Position of GAMMALUT1BLUE field.                                   */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1BLUE_Msk (0xFFUL << DISPC_CORE_GAMMALUT1_GAMMALUT1BLUE_Pos) /*!< Bit mask of
-                                                                            GAMMALUT1BLUE field.*/                                
+                                                                            GAMMALUT1BLUE field.*/
 
 /* GAMMALUT1GREEN @Bits 8..15 : Color green is used as Lut color. */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1GREEN_Pos (8UL) /*!< Position of GAMMALUT1GREEN field.                                 */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1GREEN_Msk (0xFFUL << DISPC_CORE_GAMMALUT1_GAMMALUT1GREEN_Pos) /*!< Bit mask of
-                                                                            GAMMALUT1GREEN field.*/                               
+                                                                            GAMMALUT1GREEN field.*/
 
 /* GAMMALUT1RED @Bits 16..23 : Color red is used as Lut color. */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1RED_Pos (16UL) /*!< Position of GAMMALUT1RED field.                                    */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1RED_Msk (0xFFUL << DISPC_CORE_GAMMALUT1_GAMMALUT1RED_Pos) /*!< Bit mask of GAMMALUT1RED
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GAMMALUT1ALPHA @Bits 24..31 : Color alpha is used as Lut color. */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1ALPHA_Pos (24UL) /*!< Position of GAMMALUT1ALPHA field.                                */
   #define DISPC_CORE_GAMMALUT1_GAMMALUT1ALPHA_Msk (0xFFUL << DISPC_CORE_GAMMALUT1_GAMMALUT1ALPHA_Pos) /*!< Bit mask of
-                                                                            GAMMALUT1ALPHA field.*/                               
+                                                                            GAMMALUT1ALPHA field.*/
 
 
 /* DISPC_CORE_GAMMALUT2: Layer 2 palette/gamma correction memory region. */
@@ -6022,22 +6048,22 @@ typedef struct {
 /* GAMMALUT2BLUE @Bits 0..7 : Color blue is used as Lut color. */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2BLUE_Pos (0UL) /*!< Position of GAMMALUT2BLUE field.                                   */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2BLUE_Msk (0xFFUL << DISPC_CORE_GAMMALUT2_GAMMALUT2BLUE_Pos) /*!< Bit mask of
-                                                                            GAMMALUT2BLUE field.*/                                
+                                                                            GAMMALUT2BLUE field.*/
 
 /* GAMMALUT2GREEN @Bits 8..15 : Color green is used as Lut color. */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2GREEN_Pos (8UL) /*!< Position of GAMMALUT2GREEN field.                                 */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2GREEN_Msk (0xFFUL << DISPC_CORE_GAMMALUT2_GAMMALUT2GREEN_Pos) /*!< Bit mask of
-                                                                            GAMMALUT2GREEN field.*/                               
+                                                                            GAMMALUT2GREEN field.*/
 
 /* GAMMALUT2RED @Bits 16..23 : Color red is used as Lut color. */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2RED_Pos (16UL) /*!< Position of GAMMALUT2RED field.                                    */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2RED_Msk (0xFFUL << DISPC_CORE_GAMMALUT2_GAMMALUT2RED_Pos) /*!< Bit mask of GAMMALUT2RED
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GAMMALUT2ALPHA @Bits 24..31 : Color alpha is used as Lut color. */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2ALPHA_Pos (24UL) /*!< Position of GAMMALUT2ALPHA field.                                */
   #define DISPC_CORE_GAMMALUT2_GAMMALUT2ALPHA_Msk (0xFFUL << DISPC_CORE_GAMMALUT2_GAMMALUT2ALPHA_Pos) /*!< Bit mask of
-                                                                            GAMMALUT2ALPHA field.*/                               
+                                                                            GAMMALUT2ALPHA field.*/
 
 
 /* DISPC_CORE_GAMMALUT3: Layer 3 palette/gamma correction memory region. */
@@ -6046,22 +6072,22 @@ typedef struct {
 /* GAMMALUT3BLUE @Bits 0..7 : Color blue is used as Lut color. */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3BLUE_Pos (0UL) /*!< Position of GAMMALUT3BLUE field.                                   */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3BLUE_Msk (0xFFUL << DISPC_CORE_GAMMALUT3_GAMMALUT3BLUE_Pos) /*!< Bit mask of
-                                                                            GAMMALUT3BLUE field.*/                                
+                                                                            GAMMALUT3BLUE field.*/
 
 /* GAMMALUT3GREEN @Bits 8..15 : Color green is used as Lut color. */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3GREEN_Pos (8UL) /*!< Position of GAMMALUT3GREEN field.                                 */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3GREEN_Msk (0xFFUL << DISPC_CORE_GAMMALUT3_GAMMALUT3GREEN_Pos) /*!< Bit mask of
-                                                                            GAMMALUT3GREEN field.*/                               
+                                                                            GAMMALUT3GREEN field.*/
 
 /* GAMMALUT3RED @Bits 16..23 : Color red is used as Lut color. */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3RED_Pos (16UL) /*!< Position of GAMMALUT3RED field.                                    */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3RED_Msk (0xFFUL << DISPC_CORE_GAMMALUT3_GAMMALUT3RED_Pos) /*!< Bit mask of GAMMALUT3RED
-                                                                            field.*/                                              
+                                                                            field.*/
 
 /* GAMMALUT3ALPHA @Bits 24..31 : Color alpha is used as Lut color. */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3ALPHA_Pos (24UL) /*!< Position of GAMMALUT3ALPHA field.                                */
   #define DISPC_CORE_GAMMALUT3_GAMMALUT3ALPHA_Msk (0xFFUL << DISPC_CORE_GAMMALUT3_GAMMALUT3ALPHA_Pos) /*!< Bit mask of
-                                                                            GAMMALUT3ALPHA field.*/                               
+                                                                            GAMMALUT3ALPHA field.*/
 
 
 /* ====================================================== Struct DISPC ======================================================= */
@@ -6071,11 +6097,11 @@ typedef struct {
   typedef struct {                                   /*!< DISPC Structure                                                      */
     __IM uint32_t RESERVED[64];
     __IOM uint32_t EVENTS_CORE;                      /*!< (@ 0x00000100) Event indicating that interrupt triggered at DISPC
-                                                                         core*/                                                   
+                                                                         core*/
     __IOM uint32_t EVENTS_UNDERRUN;                  /*!< (@ 0x00000104) Event indicating that underrun triggered in the DISPC
-                                                                         core FIFO*/                                              
+                                                                         core FIFO*/
     __IOM uint32_t EVENTS_LOWBUFFER;                 /*!< (@ 0x00000108) Event indicating a low level condition in the DISPC
-                                                                         core FIFO*/                                              
+                                                                         core FIFO*/
     __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x0000010C) The display controller has been enabled.              */
     __IM uint32_t RESERVED1[124];
     __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
@@ -6108,7 +6134,7 @@ typedef struct {
 /* EVENTS_UNDERRUN @Bit 0 : Event indicating that underrun triggered in the DISPC core FIFO */
   #define DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_Pos (0UL) /*!< Position of EVENTS_UNDERRUN field.                              */
   #define DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_Msk (0x1UL << DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_Pos) /*!< Bit mask of
-                                                                            EVENTS_UNDERRUN field.*/                              
+                                                                            EVENTS_UNDERRUN field.*/
   #define DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_Min (0x0UL) /*!< Min enumerator value of EVENTS_UNDERRUN field.                */
   #define DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_Max (0x1UL) /*!< Max enumerator value of EVENTS_UNDERRUN field.                */
   #define DISPC_EVENTS_UNDERRUN_EVENTS_UNDERRUN_NotGenerated (0x0UL) /*!< Event not generated                                  */
@@ -6121,7 +6147,7 @@ typedef struct {
 /* EVENTS_LOWBUFFER @Bit 0 : Event indicating a low level condition in the DISPC core FIFO */
   #define DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_Pos (0UL) /*!< Position of EVENTS_LOWBUFFER field.                           */
   #define DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_Msk (0x1UL << DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_Pos) /*!< Bit mask of
-                                                                            EVENTS_LOWBUFFER field.*/                             
+                                                                            EVENTS_LOWBUFFER field.*/
   #define DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_Min (0x0UL) /*!< Min enumerator value of EVENTS_LOWBUFFER field.             */
   #define DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_Max (0x1UL) /*!< Max enumerator value of EVENTS_LOWBUFFER field.             */
   #define DISPC_EVENTS_LOWBUFFER_EVENTS_LOWBUFFER_NotGenerated (0x0UL) /*!< Event not generated                                */
@@ -6134,7 +6160,7 @@ typedef struct {
 /* EVENTS_STARTED @Bit 0 : The display controller has been enabled. */
   #define DISPC_EVENTS_STARTED_EVENTS_STARTED_Pos (0UL) /*!< Position of EVENTS_STARTED field.                                 */
   #define DISPC_EVENTS_STARTED_EVENTS_STARTED_Msk (0x1UL << DISPC_EVENTS_STARTED_EVENTS_STARTED_Pos) /*!< Bit mask of
-                                                                            EVENTS_STARTED field.*/                               
+                                                                            EVENTS_STARTED field.*/
   #define DISPC_EVENTS_STARTED_EVENTS_STARTED_Min (0x0UL) /*!< Min enumerator value of EVENTS_STARTED field.                   */
   #define DISPC_EVENTS_STARTED_EVENTS_STARTED_Max (0x1UL) /*!< Max enumerator value of EVENTS_STARTED field.                   */
   #define DISPC_EVENTS_STARTED_EVENTS_STARTED_NotGenerated (0x0UL) /*!< Event not generated                                    */
@@ -6312,7 +6338,7 @@ typedef struct {
 //   GPU_IRQn                               = 0,        /*!< 0 GPU                                                                */
 //   DISPC_IRQn                             = 4,        /*!< 4 DISPC                                                              */
 //   GSI_IRQn                               = 8,        /*!< 8 GSI                                                                */
- 
+
  /* =========================================================================================================================== */
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
