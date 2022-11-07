@@ -110,6 +110,9 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
 #define _NRFX_IRQ_HANDLER_LIST(periph_name, prefix, i, periph_name_small) \
     NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler),
 
+#define _NRFX_IRQ_HANDLER_DECLARE(periph_name, prefix, i, periph_name_small) \
+    void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void);
+
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
 
