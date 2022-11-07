@@ -89,7 +89,9 @@ extern "C" {
 #endif
 
 /** @brief Macro for checking if the DCX pin control is available. */
-#if NRFX_FEATURE_PRESENT(SPIM, _FEATURE_DCX_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRFX_FEATURE_PRESENT(SPIM, _FEATURE_HARDWARE_DCX_PRESENT) || \
+    NRFX_FEATURE_PRESENT(SPIM, _FEATURE_DCX_PRESENT) || \
+    defined(__NRFX_DOXYGEN__)
 #define NRF_SPIM_HAS_DCX 1
 #else
 #define NRF_SPIM_HAS_DCX 0
@@ -232,8 +234,13 @@ typedef enum
 /** @brief SPI CSN pin polarity. */
 typedef enum
 {
+#if defined(SPIM_CSNPOL_CSNPOL0_LOW)
+    NRF_SPIM_CSN_POL_LOW  = SPIM_CSNPOL_CSNPOL0_LOW, ///< Active low (idle state high).
+    NRF_SPIM_CSN_POL_HIGH = SPIM_CSNPOL_CSNPOL0_HIGH ///< Active high (idle state low).
+#else
     NRF_SPIM_CSN_POL_LOW  = SPIM_CSNPOL_CSNPOL_LOW, ///< Active low (idle state high).
     NRF_SPIM_CSN_POL_HIGH = SPIM_CSNPOL_CSNPOL_HIGH ///< Active high (idle state low).
+#endif
 } nrf_spim_csn_pol_t;
 #endif // NRF_SPIM_HAS_HW_CSN
 
@@ -833,14 +840,22 @@ NRF_STATIC_INLINE void nrf_spim_csn_configure(NRF_SPIM_Type *    p_reg,
                                               nrf_spim_csn_pol_t polarity,
                                               uint32_t           duration)
 {
+#if defined(SPIM_CSNPOL_CSNPOL0_LOW)
+    p_reg->PSEL.CSN[0] = pin;
+#else
     p_reg->PSEL.CSN = pin;
+#endif
     p_reg->CSNPOL = polarity;
     p_reg->IFTIMING.CSNDUR = duration;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
 {
+#if defined(SPIM_CSNPOL_CSNPOL0_LOW)
+    return p_reg->PSEL.CSN[0];
+#else
     return p_reg->PSEL.CSN;
+#endif
 }
 #endif // NRF_SPIM_HAS_HW_CSN
 
@@ -848,12 +863,20 @@ NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg,
                                             uint32_t        dcx_pin)
 {
+#if defined(SPIM_PSEL_DCX_ResetValue)
+    p_reg->PSEL.DCX = dcx_pin;
+#else
     p_reg->PSELDCX = dcx_pin;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_spim_dcx_pin_get(NRF_SPIM_Type const * p_reg)
 {
+#if defined(SPIM_PSEL_DCX_ResetValue)
+    return p_reg->PSEL.DCX;
+#else
     return p_reg->PSELDCX;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg,
