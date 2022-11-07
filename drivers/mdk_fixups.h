@@ -7,7 +7,6 @@
 #endif
 
 #if defined(MOONLIGHT_XXAA)
-    #define GRTC_SYSCOUNTER_COUNT 3
     #if defined(NRF_TRUSTZONE_NONSECURE)
         /** @brief Fixup for the GRTC IRQn lines. */
         #define GRTC_IRQn       GRTC_0_IRQn
@@ -15,11 +14,24 @@
         #define nrfx_gpiote20_irq_handler GPIOTE20_0_IRQHandler
         #define nrfx_gpiote30_irq_handler GPIOTE30_0_IRQHandler
     #else
-        #if defined(NRF_APPLICATION) || defined(__NRFX_DOXYGEN__)
-            #define NRF_GRTC_IRQ_GROUP 2
+        /* todo: NRF_GRTC_IRQ_GROUP in IPS for MOONLIGHT is not defined yet. Should be checked and verified in future. */
+        #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)    
+            #if defined(NRF_APPLICATION)
+                #define NRF_GRTC_IRQ_GROUP 2
+            #else
+                #error Unknown core.
+            #endif
+        #elif defined(NRF_FLPR)
+            #define NRF_GRTC_IRQ_GROUP 0
         #else
-            #error Unknown core.
+            #if defined(NRF_APPLICATION)
+                #define NRF_GRTC_IRQ_GROUP 1
+            #else
+                #error Unknown core.
+            #endif
         #endif
+
+        #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
 
         #define GRTC_IRQn       GRTC_1_IRQn
         #define nrfx_grtc_irq_handler     GRTC_1_IRQHandler
@@ -1214,7 +1226,7 @@ typedef struct {
 #endif
 
 #if defined(NRF9230_XXAA)
-    #define GRTC_SYSCOUNTER_COUNT 16
+    #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
     // Old HFXO modes are not supported
     #ifdef BICR_HFXO_CONFIG_MODE_Pierce
         #undef BICR_HFXO_CONFIG_MODE_Pierce

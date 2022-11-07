@@ -41,6 +41,14 @@ extern "C" {
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
 #endif
 
+#if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
+    #if defined(GRTC_SYSCOUNTER_INDEX)
+        #define GRTC_SYSCOUNTER SYSCOUNTER[GRTC_SYSCOUNTER_INDEX]
+    #else
+        #error "GRTC_SYSCOUNTER_INDEX must be defined"
+    #endif
+#endif
+
 /** @brief Interrupts INTEN register definition. */
 #define GRTC_INTEN        NRFX_CONCAT_2(INTEN, NRF_GRTC_IRQ_GROUP)
 /** @brief Interrupts INTENSET register definition. */
@@ -498,13 +506,10 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
  *       whole procedure should be repeated.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index SYSCOUNTER channel index.
- *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @return Lower part of SYSCOUNTER value.
  */
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg,
-                                                        uint8_t               index);
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg);
 
 /**
  * @brief Function for returning the higher 32-bits of SYSCOUNTER value.
@@ -515,50 +520,39 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_
  *       whole procedure should be repeated.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index SYSCOUNTER channel index.
- *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @return Higher part SYSCOUNTER value.
  */
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg,
-                                                         uint8_t               index);
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg);
 
 /**
  * @brief Function for checking whether the lower 32-bits of SYSCOUNTER overflowed after
  *        last execution of @ref nrf_grtc_sys_counter_low_get.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index SYSCOUNTER channel index.
- *                  Is used only if @ref NRF_GRTC_HAS_SYSCOUNTER_ARRAY is true, otherwise ignored.
  *
  * @retval True if the lower 32-bits of SYSCOUNTER overflowed, false otherwise.
  */
-NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg,
-                                                           uint8_t               index);
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg);
 
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 /**
  * @brief Function for setting the request to keep the specified SYSCOUNTER channel active.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] index  SYSCOUNTER channel index.
  * @param[in] enable True if the SYSCOUNTER channel is to be kept active, false otherwise.
  */
-NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg,
-                                                       uint8_t         index,
-                                                       bool            enable);
+NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg, bool enable);
 
 /**
  * @brief Function for checking whether the specified SYSCOUNTER channel is requested to remain active.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] index SYSCOUNTER channel index.
  *
  * @retval True if SYSCOUNTER channel is requested to remain active, false otherwise.
  */
 NRF_STATIC_INLINE
-bool nrf_grtc_sys_counter_index_active_state_request_check(NRF_GRTC_Type const * p_reg,
-                                                           uint8_t               index);
+bool nrf_grtc_sys_counter_active_check(NRF_GRTC_Type const * p_reg);
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 
 /**
@@ -1026,66 +1020,47 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_rt_counter_high_get(NRF_GRTC_Type const * p_
 }
 #endif //defined(NRF_SYSCTRL) || defined(NRF_SECURE)
 
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg,
-                                                        uint8_t               index)
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_low_get(NRF_GRTC_Type const * p_reg)
 {
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
-    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
-
-    return p_reg->SYSCOUNTER[index].SYSCOUNTERL;
+    return p_reg->GRTC_SYSCOUNTER.SYSCOUNTERL;
 #else
-    (void)index;
     return p_reg->SYSCOUNTERL;
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
-NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg,
-                                                         uint8_t               index)
+NRF_STATIC_INLINE uint32_t nrf_grtc_sys_counter_high_get(NRF_GRTC_Type const * p_reg)
 {
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
-    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
-
-    return p_reg->SYSCOUNTER[index].SYSCOUNTERH;
+    return p_reg->GRTC_SYSCOUNTER.SYSCOUNTERH;
 #else
-    (void)index;
     return p_reg->SYSCOUNTERH;
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
-NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg,
-                                                           uint8_t               index)
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_overflow_check(NRF_GRTC_Type const * p_reg)
 {
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
-    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
-
-    return (p_reg->SYSCOUNTER[index].SYSCOUNTERH &
+    return (p_reg->GRTC_SYSCOUNTER.SYSCOUNTERH &
             GRTC_SYSCOUNTER_SYSCOUNTERH_OVERFLOW_Msk) ? true : false;
 #else
-    (void)index;
     return (p_reg->SYSCOUNTERH & GRTC_SYSCOUNTERH_OVERFLOW_Msk) ? true : false;
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
 }
 
 #if NRF_GRTC_HAS_SYSCOUNTER_ARRAY
-NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg,
-                                                       uint8_t         index,
-                                                       bool            enable)
+NRF_STATIC_INLINE void nrf_grtc_sys_counter_active_set(NRF_GRTC_Type * p_reg, bool enable)
 {
-    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
-
-    p_reg->SYSCOUNTER[index].ACTIVE = ((p_reg->SYSCOUNTER[index].ACTIVE &
-                                       ~(GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk)) |
-                                       (enable ? GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Active :
-                                                 GRTC_SYSCOUNTER_ACTIVE_ACTIVE_NotActive));
+    p_reg->GRTC_SYSCOUNTER.ACTIVE = ((p_reg->GRTC_SYSCOUNTER.ACTIVE &
+                                     ~(GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk)) |
+                                     (enable ? GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Active :
+                                               GRTC_SYSCOUNTER_ACTIVE_ACTIVE_NotActive));
 }
 
 NRF_STATIC_INLINE
-bool nrf_grtc_sys_counter_index_active_state_request_check(NRF_GRTC_Type const * p_reg,
-                                                           uint8_t               index)
+bool nrf_grtc_sys_counter_active_check(NRF_GRTC_Type const * p_reg)
 {
-    NRFX_ASSERT(index < GRTC_SYSCOUNTER_COUNT);
-
-    return (p_reg->SYSCOUNTER[index].ACTIVE & GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk) ==
+    return (p_reg->GRTC_SYSCOUNTER.ACTIVE & GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Msk) ==
            GRTC_SYSCOUNTER_ACTIVE_ACTIVE_Active;
 }
 #endif // NRF_GRTC_HAS_SYSCOUNTER_ARRAY
