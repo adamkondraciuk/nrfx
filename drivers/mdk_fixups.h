@@ -44,12 +44,14 @@
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
     #if defined(DPPIC_PRESENT)
-        #define DPPI_PRESENT
-        // TODO: Establish numbers of DPPI_GROUP_NUM and DPPI_CH_NUM
-        #define DPPI_CH_NUM 8
-        #define DPPI_GROUP_NUM 1
-        #ifndef NRF_DPPIC
-        // TODO: Add support for NRF_DPPIC00, NRF_DPPIC10, NRF_DPPIC20, NRF_DPPIC30
+        #if !defined(DPPI_PRESENT)
+            #define DPPI_PRESENT
+        #endif
+        #if !defined(NRF_DPPIC)
+            // TODO: Establish numbers of DPPI_GROUP_NUM and DPPI_CH_NUM
+            #define DPPI_CH_NUM 8
+            #define DPPI_GROUP_NUM 1
+            // TODO: Add support for NRF_DPPIC00, NRF_DPPIC10, NRF_DPPIC20, NRF_DPPIC30
             #define NRF_DPPIC NRF_DPPIC00
         #endif
     #endif
@@ -156,14 +158,15 @@ typedef enum
 #define GLOBAL_IRQN_MAX   (480)
 
 #if defined(DPPIC_PRESENT)
-#define DPPI_PRESENT
-#define DPPI_CH_NUM 8
-#define DPPI_GROUP_NUM 2
+    #if !defined(DPPI_PRESENT)
+        #define DPPI_PRESENT
+    #endif
+    #define DPPI_CH_NUM 8
+    #define DPPI_GROUP_NUM 2
 
-#ifdef NRF7140_XXAA
-#define NRF_DPPIC NRF_DPPIC110
-#endif
-
+    #if defined(NRF7140_XXAA) && !defined(NRF_DPPIC)
+        #define NRF_DPPIC NRF_DPPIC110
+    #endif
 #endif
 
 #define EGU130_CH_NUM 8
