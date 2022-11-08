@@ -6351,4 +6351,109 @@ typedef struct {
 
 #endif // NRF7140_XXAA
 
+/* MLT-3907 */
+#if defined(LUMOS_XXAA) || defined(LILIUMFP1_XXAA)
+/* ===================================================== Struct AAR_OUT ====================================================== */
+/**
+  * @brief OUT [AAR_OUT] OUT EasyDMA channel
+  */
+typedef struct {
+  __IOM uint32_t  PTR;                               /*!< (@ 0x00000000) Output pointer                                        */
+  __IM  uint32_t  AMOUNT;                            /*!< (@ 0x00000004) Number of bytes transferred in the last transaction   */
+} NRF_AAR_OUT_Type;                                  /*!< Size = 8 (0x008)                                                     */
+
+/* AAR_OUT_PTR: Output pointer */
+  #define AAR_OUT_PTR_ResetValue (0x00000000UL)      /*!< Reset value of PTR register.                                         */
+
+/* PTR @Bits 0..31 : Output pointer */
+  #define AAR_OUT_PTR_PTR_Pos (0UL)                  /*!< Position of PTR field.                                               */
+  #define AAR_OUT_PTR_PTR_Msk (0xFFFFFFFFUL << AAR_OUT_PTR_PTR_Pos) /*!< Bit mask of PTR field.                                */
+
+
+/* AAR_OUT_AMOUNT: Number of bytes transferred in the last transaction */
+  #define AAR_OUT_AMOUNT_ResetValue (0x00000000UL)   /*!< Reset value of AMOUNT register.                                      */
+
+/* AMOUNT @Bits 0..7 : Number of bytes written to memory after triggering the START task. */
+  #define AAR_OUT_AMOUNT_AMOUNT_Pos (0UL)            /*!< Position of AMOUNT field.                                            */
+  #define AAR_OUT_AMOUNT_AMOUNT_Msk (0xFFUL << AAR_OUT_AMOUNT_AMOUNT_Pos) /*!< Bit mask of AMOUNT field.                       */
+  #define AAR_OUT_AMOUNT_AMOUNT_Min (0x1UL)          /*!< Min value of AMOUNT field.                                           */
+  #define AAR_OUT_AMOUNT_AMOUNT_Max (0xFFUL)         /*!< Max size of AMOUNT field.                                            */
+
+/* AAR_MAXRESOLVED: Maximum number of IRKs to resolve */
+  #define AAR_MAXRESOLVED_ResetValue (0x00000001UL)  /*!< Reset value of MAXRESOLVED register.                                 */
+
+/* MAXRESOLVED @Bits 0..11 : The maximum number of IRKs to resolve */
+  #define AAR_MAXRESOLVED_MAXRESOLVED_Pos (0UL)      /*!< Position of MAXRESOLVED field.                                       */
+  #define AAR_MAXRESOLVED_MAXRESOLVED_Msk (0xFFFUL << AAR_MAXRESOLVED_MAXRESOLVED_Pos) /*!< Bit mask of MAXRESOLVED field.     */
+
+/* ======================================================= Struct AAR ======================================================== */
+/**
+  * @brief Accelerated Address Resolver
+  */
+  typedef struct {                                   /*!< AAR Structure                                                        */
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start resolving addresses based on IRKs specified in
+                                                                         the IRK data structure*/
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop resolving addresses                              */
+    __IM uint32_t RESERVED[30];
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
+    __IM uint32_t RESERVED1[30];
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000100) Address resolution procedure complete                 */
+    __IOM uint32_t EVENTS_RESOLVED;                  /*!< (@ 0x00000104) Address resolved                                      */
+    __IOM uint32_t EVENTS_NOTRESOLVED;               /*!< (@ 0x00000108) Address not resolved                                  */
+    __IM uint32_t RESERVED2[29];
+    __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000180) Publish configuration for event END                   */
+    __IOM uint32_t PUBLISH_RESOLVED;                 /*!< (@ 0x00000184) Publish configuration for event RESOLVED              */
+    __IOM uint32_t PUBLISH_NOTRESOLVED;              /*!< (@ 0x00000188) Publish configuration for event NOTRESOLVED           */
+    __IM uint32_t RESERVED3[93];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t RESERVED4[125];
+    __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) Enable AAR                                            */
+    __IM uint32_t RESERVED5;
+    __IOM uint32_t MAXRESOLVED;                      /*!< (@ 0x00000508) Maximum number of IRKs to resolve                     */
+    __IM uint32_t RESERVED6[9];
+    __IOM NRF_AAR_IN_Type IN;                        /*!< (@ 0x00000530) IN EasyDMA channel                                    */
+    __IM uint32_t RESERVED7;
+    __IOM NRF_AAR_OUT_Type OUT;                      /*!< (@ 0x00000538) OUT EasyDMA channel                                   */
+  } NRF_AAR_Type_fixed;                                    /*!< Size = 1344 (0x540)                                                  */
+
+/* Lilium FP1 */
+#if defined(NRF_RADIOCORE_AAR030_NS)
+#undef NRF_RADIOCORE_AAR030_NS
+#define NRF_RADIOCORE_AAR030_NS ((NRF_AAR_Type_fixed*) NRF_RADIOCORE_AAR030_NS_BASE)
+#endif
+#if defined(NRF_RADIOCORE_AAR030_S)
+#undef NRF_RADIOCORE_AAR030_S
+#define NRF_RADIOCORE_AAR030_S ((NRF_AAR_Type_fixed*) NRF_RADIOCORE_AAR030_S_BASE)
+#endif
+#if defined(NRF_RADIOCORE_AAR031_NS)
+#undef NRF_RADIOCORE_AAR031_NS
+#define NRF_RADIOCORE_AAR031_NS ((NRF_AAR_Type_fixed*) NRF_RADIOCORE_AAR031_NS_BASE)
+#endif
+#if defined(NRF_RADIOCORE_AAR031_S)
+#undef NRF_RADIOCORE_AAR031_S
+#define NRF_RADIOCORE_AAR031_S ((NRF_AAR_Type_fixed*) NRF_RADIOCORE_AAR031_S_BASE)
+#endif
+/* Moonlight */
+#if defined(NRF_AAR00_NS)
+#undef NRF_AAR00_NS
+#define NRF_AAR00_NS ((NRF_AAR_Type_fixed*) NRF_AAR00_NS_BASE)
+#endif
+#if defined(NRF_AAR00_S)
+#undef NRF_AAR00_S
+#define NRF_AAR00_S ((NRF_AAR_Type_fixed*) NRF_AAR00_S_BASE)
+#endif
+#if defined(NRF_AAR10_NS)
+#undef NRF_AAR10_NS
+#define NRF_AAR10_NS ((NRF_AAR_Type_fixed*) NRF_AAR10_NS_BASE)
+#endif
+#if defined(NRF_AAR10_S)
+#undef NRF_AAR10_S
+#define NRF_AAR10_S ((NRF_AAR_Type_fixed*) NRF_AAR10_S_BASE)
+#endif
+
+#endif
+
 #endif // MDK_FIXUPS_H__
