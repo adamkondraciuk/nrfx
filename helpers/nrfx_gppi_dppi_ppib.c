@@ -4,8 +4,8 @@
 
 #if defined(HALTIUM_XXAA) && defined(NRFX_PPIB_ENABLED)
 #include <string.h>
-#include <soc/nrfx_apb.h>
-#include <soc/nrfx_ipct.h>
+#include <soc/interconnect/apb/nrfx_interconnect_apb.h>
+#include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
 #include <hal/nrf_ppib.h>
 #include <helpers/nrfx_flag32_allocator.h>
 

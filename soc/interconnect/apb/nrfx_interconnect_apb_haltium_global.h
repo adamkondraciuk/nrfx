@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_APB_HALTIUM_GLOBAL_H__
-#define NRFX_APB_HALTIUM_GLOBAL_H__
+#ifndef NRFX_INTERCONNECT_APB_HALTIUM_GLOBAL_H__
+#define NRFX_INTERCONNECT_APB_HALTIUM_GLOBAL_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -91,4 +91,4 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
 }
 #endif
 
-#endif // NRFX_APB_HALTIUM_GLOBAL_H__
+#endif // NRFX_INTERCONNECT_APB_HALTIUM_GLOBAL_H__

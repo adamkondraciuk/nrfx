@@ -1,11 +1,11 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_IPCT_H__
-#define NRFX_IPCT_H__
+#ifndef NRFX_INTERCONNECT_IPCT_H__
+#define NRFX_INTERCONNECT_IPCT_H__
 
 #include <nrfx.h>
 #include <hal/nrf_ipct.h>
-#include <nrfx_apb.h>
+#include <interconnect/apb/nrfx_interconnect_apb.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -69,4 +69,4 @@ nrfx_ipct_interconnect_t const * nrf_ipct_by_idx_global_get(uint8_t idx);
 }
 #endif
 
-#endif // NRFX_IPCT_H__
+#endif // NRFX_INTERCONNECT_IPCT_H__

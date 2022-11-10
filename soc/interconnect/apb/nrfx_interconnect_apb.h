@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_APB_H__
-#define NRFX_APB_H__
+#ifndef NRFX_INTERCONNECT_APB_H__
+#define NRFX_INTERCONNECT_APB_H__
 
 #include <nrfx.h>
 
@@ -80,4 +80,4 @@ nrfx_apb_interconnect_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t i
 }
 #endif
 
-#endif // NRFX_APB_H__
+#endif // NRFX_INTERCONNECT_APB_H__

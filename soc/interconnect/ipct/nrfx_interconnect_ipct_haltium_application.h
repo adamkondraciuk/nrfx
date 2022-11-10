@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_APB_HALTIUM_APPLICATION_H__
-#define NRFX_APB_HALTIUM_APPLICATION_H__
+#ifndef NRFX_INTERCONNECT_IPCT_HALTIUM_APPLICATION_H__
+#define NRFX_INTERCONNECT_IPCT_HALTIUM_APPLICATION_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,4 +24,4 @@ static nrfx_atomic_t m_ipct_channels = 0xFF;
 }
 #endif
 
-#endif // NRFX_APB_HALTIUM_APPLICATION_H__
+#endif // NRFX_INTERCONNECT_IPCT_HALTIUM_APPLICATION_H__

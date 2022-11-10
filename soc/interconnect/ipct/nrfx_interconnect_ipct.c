@@ -3,28 +3,28 @@
 
 #if defined(HALTIUM_XXAA)
 
-#include <nrfx_ipct.h>
-#include <nrfx_ipct_haltium_global.h>
-#include <nrfx_apb.h>
+#include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
+#include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_global.h>
+#include <soc/interconnect/apb/nrfx_interconnect_apb.h>
 
 #if defined(NRF_RADIOCORE)
-#include <nrfx_ipct_haltium_radiocore.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_radiocore.h>
 #elif defined(NRF_SECURE)
-#include <nrfx_ipct_haltium_secure.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_secure.h>
 #elif defined(NRF_APPLICATION)
-#include <nrfx_ipct_haltium_application.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_application.h>
 #elif defined(NRF_CELLCORE)
-#include <nrfx_ipct_haltium_cellcore.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_cellcore.h>
 #elif defined(NRF_SYSCTRL)
-#include <nrfx_ipct_haltium_sysctrl.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_sysctrl.h>
 #elif defined(NRF_PPR)
-#include <nrfx_ipct_haltium_ppr.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_ppr.h>
 #elif defined(NRF_FLPR)
-#include <nrfx_ipct_haltium_flpr.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_flpr.h>
 #elif defined(NRF_LMAC)
-    #include <nrfx_ipct_haltium_lmac.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_lmac.h>
 #elif defined(NRF_UMAC)
-    #include <nrfx_ipct_haltium_umac.h>
+    #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_umac.h>
 #endif
 
 NRFX_IPC_GLOBAL_DEFINE;

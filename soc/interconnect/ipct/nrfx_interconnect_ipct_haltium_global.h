@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_IPC_HALTIUM_GLOBAL_H__
-#define NRFX_IPC_HALTIUM_GLOBAL_H__
+#ifndef NRFX_INTERCONNECT_IPCT_HALTIUM_GLOBAL_H__
+#define NRFX_INTERCONNECT_IPCT_HALTIUM_GLOBAL_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,4 +35,4 @@ static nrfx_atomic_t m_ipct130_channels = NRFX_IPCT130_PUB_CONFIG_ALLOWED_CHANNE
 }
 #endif
 
-#endif // NRFX_IPC_HALTIUM_GLOBAL_H__
+#endif // NRFX_INTERCONNECT_IPCT_HALTIUM_GLOBAL_H__

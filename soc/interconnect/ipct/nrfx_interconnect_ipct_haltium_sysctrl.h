@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_APB_HALTIUM_FLPR_H__
-#define NRFX_APB_HALTIUM_FLPR_H__
+#ifndef NRFX_INTERCONNECT_IPCT_HALTIUM_SYSCTRL_H__
+#define NRFX_INTERCONNECT_IPCT_HALTIUM_SYSCTRL_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -15,4 +15,4 @@ extern "C" {
 }
 #endif
 
-#endif // NRFX_APB_HALTIUM_FLPR_H__
+#endif // NRFX_INTERCONNECT_IPCT_HALTIUM_SYSCTRL_H__

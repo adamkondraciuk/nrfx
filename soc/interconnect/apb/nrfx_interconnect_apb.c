@@ -3,27 +3,27 @@
 
 #if defined(HALTIUM_XXAA)
 
-#include <nrfx_apb.h>
-#include <nrfx_apb_haltium_global.h>
+#include <soc/interconnect/apb/nrfx_interconnect_apb.h>
+#include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_global.h>
 
 #if defined(NRF_RADIOCORE)
-#include <nrfx_apb_haltium_radiocore.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_radiocore.h>
 #elif defined(NRF_SECURE)
-#include <nrfx_apb_haltium_secure.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_secure.h>
 #elif defined(NRF_APPLICATION)
-#include <nrfx_apb_haltium_application.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_application.h>
 #elif defined(NRF_CELLCORE)
-#include <nrfx_apb_haltium_cellcore.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_cellcore.h>
 #elif defined(NRF_SYSCTRL)
-#include <nrfx_apb_haltium_sysctrl.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_sysctrl.h>
 #elif defined(NRF_PPR)
-#include <nrfx_apb_haltium_ppr.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_ppr.h>
 #elif defined(NRF_FLPR)
-#include <nrfx_apb_haltium_flpr.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_flpr.h>
 #elif defined(NRF_LMAC)
-#include <nrfx_apb_haltium_lmac.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_lmac.h>
 #elif defined(NRF_UMAC)
-#include <nrfx_apb_haltium_umac.h>
+    #include <soc/interconnect/apb/nrfx_interconnect_apb_haltium_umac.h>
 #endif
 
 NRFX_DPPI_GLOBAL_DEFINE;
