@@ -1242,6 +1242,10 @@ typedef struct {
 #define VREG1V0_DFT_TCFG_TCFGENABLE_Disabled (0x0UL)
 #define VREG1V0_DFT_TCFG_REFRESHCMPCLK_Disabled (0x0UL)
 
+#if !defined(NRF_VREGMRAM)
+#define NRF_VREGMRAM NRF_VREGMRAM130
+#endif
+
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(LUMOS_XXAA)

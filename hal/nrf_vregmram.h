@@ -59,7 +59,7 @@ typedef enum
 /** @brief Analog signal to be overridden. */
 typedef enum
 {
-    NRF_VREGMRAM_ANALOG_SIGNAL_PWR_UP,  /**< Override PWRUP signal. */
+    NRF_VREGMRAM_ANALOG_SIGNAL_PWR_UP, /**< Override PWRUP signal. */
     NRF_VREGMRAM_ANALOG_SIGNAL_RETAIN, /**< Override RETAIN signal. */
     NRF_VREGMRAM_ANALOG_SIGNAL_MODE,   /**< Override MODE signal. */
 } nrf_vregmram_analog_signal_t;
@@ -312,9 +312,9 @@ NRF_STATIC_INLINE bool nrf_vregmram_vprbleed_get(NRF_VREGMRAM_Type const * p_reg
 /**
  * @brief Function for setting adaptive bias.
  *
- * @param[in] p_reg           Pointer to the structure of registers of the peripheral.
- * @param[in] adaptive_bias   Adaptive bias voltage target.
- * @param[in] enable          True to enable adaptive bias and false to disable.
+ * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
+ * @param[in] adaptive_bias Adaptive bias voltage target.
+ * @param[in] enable        True to enable adaptive bias and false to disable.
  */
 NRF_STATIC_INLINE void nrf_vregmram_adaptive_bias_set(NRF_VREGMRAM_Type *          p_reg,
                                                       nrf_vregmram_adaptive_bias_t adaptive_bias,
@@ -323,8 +323,8 @@ NRF_STATIC_INLINE void nrf_vregmram_adaptive_bias_set(NRF_VREGMRAM_Type *       
 /**
  * @brief Function for checking adaptive bias.
  *
- * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
- * @param[in] adaptive_bias  Adaptive bias voltage target.
+ * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
+ * @param[in] adaptive_bias Adaptive bias voltage target.
  * 
  * @retval true  Adaptive bias is enabled.
  * @retval false Adaptive bias is disabled.
@@ -486,7 +486,7 @@ NRF_STATIC_INLINE void nrf_vregmram_trim_vref_set(NRF_VREGMRAM_Type * p_reg, uin
     p_reg->TRIM.VREF = val;
 }
 
-NRF_STATIC_INLINE void nrf_vregmram_trim_vref_get(NRF_VREGMRAM_Type const * p_reg)
+NRF_STATIC_INLINE uint8_t nrf_vregmram_trim_vref_get(NRF_VREGMRAM_Type const * p_reg)
 {
     return p_reg->TRIM.VREF;
 }
@@ -539,13 +539,11 @@ NRF_STATIC_INLINE bool nrf_vregmram_adaptive_bias_check(NRF_VREGMRAM_Type const 
     {
         case NRF_VREGMRAM_ADAPTIVE_BIAS_VREF:
             return p_reg->VREFADAPTIVEBIAS == VREGMRAM_VREFADAPTIVEBIAS_EN_Enabled;
-            break;
         case NRF_VREGMRAM_ADAPTIVE_BIAS_VPR:
             return p_reg->VPRADAPTIVEBIAS == VREGMRAM_VPRADAPTIVEBIAS_EN_Enabled;
-            break;
         default:
             NRFX_ASSERT(0);
-            break;
+            return false;
     }
 }
 
