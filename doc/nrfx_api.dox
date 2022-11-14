@@ -77,6 +77,8 @@
 
 @defgroup nrf_radio RADIO
 
+@defgroup nrf_ramc RAMC
+
 @defgroup nrf_rng RNG
 
 @defgroup nrf_rtc RTC
