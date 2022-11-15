@@ -1255,6 +1255,26 @@ typedef struct {
 #define NRF_VREGMRAM NRF_VREGMRAM130
 #endif
 
+#define VREGVS0V8_DFT_TCFG_VREFTIMERREQ_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_RFRENDCRITERIA_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_LPCANCELREQ_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_MODELPREQ_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_MODEULPRREQ_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPIBPP_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPLP_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPHP_Enabled (0x1UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPIBPSR_Enabled (0x1UL)
+
+#define VREGVS0V8_DFT_TCFG_VREFTIMERREQ_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_RFRENDCRITERIA_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_LPCANCELREQ_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_MODELPREQ_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_MODEULPRREQ_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPIBPP_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPLP_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPHP_Disabled (0x0UL)
+#define VREGVS0V8_DFT_TCFG_PWRUPIBPSR_Disabled (0x0UL)
+
 /* At some point (ver. 8.52.0 or 8.51.0, depending on flavor) MDK introduced a fix to typo
  * in VPRCSR_MCAUSE_EXECPTIONCODE_* symbols that reworded incorrect _EXECPTIONCODE_
  * to _EXCEPTIONCODE_. This causes a lot of chaos in enums as devices using older MDK
