@@ -22,7 +22,9 @@ extern "C" {
 #else
 #define NRF_GPIOTE        NRF_GPIOTE131
 #endif
-#endif // defined(HALTIUM_XXAA)
+#elif defined(LUMOS_XXAA)
+#define NRF_GPIOTE        NRF_GPIOTE20
+#endif //defined(HALTIUM_XXAA)
 
 #if defined(HALTIUM_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Enable or disable interrupt register definition. */

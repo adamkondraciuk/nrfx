@@ -1433,7 +1433,12 @@ __IOM uint32_t CC[8];
   #define TIMER_INTENCLR_COMPARE7_Disabled (0x0UL)   /*!< Read: Disabled                                                       */
   #define TIMER_INTENCLR_COMPARE7_Enabled (0x1UL)    /*!< Read: Enabled                                                        */
 
-#endif
+  #define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
+  #define GPIOTE_FEATURE_SET_PRESENT
+  #define GPIOTE_FEATURE_CLR_PRESENT
+  #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+
+#endif // defined(LUMOS_XXAA)
 
 #if defined(NRF9230_XXAA)
     #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
