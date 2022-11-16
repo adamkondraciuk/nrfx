@@ -7,11 +7,11 @@
 extern "C" {
 #endif
 
-#define NRFX_DPPI_LOCAL_DEFINE                                           \
+#define NRFX_INTERCONNECT_APB_LOCAL_DPPI_DEFINE                          \
 static nrfx_atomic_t m_dppi020_channels = NRFX_BIT_MASK(DPPI020_CH_NUM); \
 static nrfx_atomic_t m_dppi030_channels = NRFX_BIT_MASK(DPPI030_CH_NUM);
 
-#define NRFX_APB_LOCAL_INTERCONNECT                                               \
+#define NRFX_INTERCONNECT_APB_LOCAL_BUSES_PROP                                    \
 {                                                                                 \
     { /* APB2 */                                                                  \
         .p_dppi = NRF_DPPIC020,                                                   \

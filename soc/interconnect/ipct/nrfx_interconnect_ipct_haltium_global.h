@@ -9,13 +9,13 @@ extern "C" {
 
 #define MAIN_IPCT_INTERCONNECT_IDX 1
 
-#define NRFX_IPC_GLOBAL_DEFINE                                                            \
+#define NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE                                              \
 static nrfx_atomic_t m_ipct120_channels = NRFX_IPCT120_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
                                           NRFX_IPCT120_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
 static nrfx_atomic_t m_ipct130_channels = NRFX_IPCT130_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
                                           NRFX_IPCT130_SUB_CONFIG_ALLOWED_CHANNELS_MASK;
 
-#define NRFX_IPC_GLOBAL_INTERCONNECT                                              \
+#define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                              \
 {                                                                                 \
     { /* IPCT120 */                                                               \
         .p_ipct = NRF_IPCT120,                                                    \

@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-#define NRFX_IPC_LOCAL_DEFINE               \
+#define NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE \
 static nrfx_atomic_t m_ipct_channels = 0xFF;
 
-#define NRFX_IPC_LOCAL_INTERCONNECT                                           \
+#define NRFX_INTERCONNECT_IPCT_LOCAL_IPCT_PROP                                \
 {                                                                             \
     { /* IPCT */                                                              \
         .p_ipct = NRF_IPCT,                                                   \

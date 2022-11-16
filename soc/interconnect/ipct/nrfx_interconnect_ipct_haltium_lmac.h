@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-#define NRFX_IPC_LOCAL_DEFINE
+#define NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE
 
-#define NRFX_IPC_LOCAL_INTERCONNECT {}
+#define NRFX_INTERCONNECT_IPCT_LOCAL_IPCT_PROP {}
 
 #ifdef __cplusplus
 }

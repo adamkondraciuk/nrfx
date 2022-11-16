@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-#define NRFX_DPPI_LOCAL_DEFINE
+#define NRFX_INTERCONNECT_APB_LOCAL_DPPI_DEFINE
 
-#define NRFX_APB_LOCAL_INTERCONNECT {}
+#define NRFX_INTERCONNECT_APB_LOCAL_BUSES_PROP {}
 
 #ifdef __cplusplus
 }

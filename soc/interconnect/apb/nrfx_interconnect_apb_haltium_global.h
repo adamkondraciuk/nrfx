@@ -7,9 +7,9 @@
 extern "C" {
 #endif
 
-#define MAIN_APB_INTERCONNECT_IDX 0
+#define NRFX_INTERCONNECT_APB_MAIN_IDX 0
 
-#define NRFX_DPPI_GLOBAL_DEFINE                                                            \
+#define NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE                                           \
 static nrfx_atomic_t m_dppi120_channels = NRFX_DPPIC120_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
                                           NRFX_DPPIC120_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
 static nrfx_atomic_t m_dppi130_channels = NRFX_DPPIC130_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
@@ -27,7 +27,7 @@ static nrfx_atomic_t m_dppi135_channels = NRFX_DPPIC135_PUB_CONFIG_ALLOWED_CHANN
 static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
                                           NRFX_DPPIC136_SUB_CONFIG_ALLOWED_CHANNELS_MASK;
 
-#define NRFX_APB_GLOBAL_INTERCONNECT                                              \
+#define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                                   \
 {                                                                                 \
     { /* APB32 */                                                                 \
         .p_dppi = NRF_DPPIC130,                                                   \

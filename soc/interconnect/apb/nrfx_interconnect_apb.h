@@ -10,7 +10,7 @@ extern "C" {
 #endif  
 
 /**
- * @defgroup nrfx_apb APB bus support
+ * @defgroup nrfx_interconnect_apb APB bus support
  * @{
  * @ingroup nrf_apb
  * @brief   Support for APB bus services.
@@ -23,16 +23,16 @@ typedef struct {
     uint32_t         dppi_pub_channels_mask; ///< Mask of configurable DPPI publish channels.
     uint32_t         dppi_sub_channels_mask; ///< Mask of configurable DPPI subscribe channels.
     NRF_PPIB_Type  * p_ppib;                 ///< PPIB peripheral that belongs to given APB.
-} nrfx_apb_interconnect_t;
+} nrfx_interconnect_apb_t;
 
 /**
  * @brief Function for getting the domain to which the specified APB bus belongs.
  *
- * @param[in] p_apb_interconnect Pointer to APB properties structure.
+ * @param[in] p_apb_prop Pointer to APB properties structure.
  * 
  * @return Domain that includes the specified APB.
  */
-nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_apb_interconnect);
+nrf_domain_t nrfx_interconnect_apb_domain_get(nrfx_interconnect_apb_t const * p_apb_prop);
 
 /**
  * @brief Function for getting the main APB interconnection.
@@ -42,7 +42,7 @@ nrf_domain_t nrf_apb_domain_get(nrfx_apb_interconnect_t const * p_apb_interconne
  * 
  * @return Pointer to the properties structure that represents the main APB interconnection.
  */
-nrfx_apb_interconnect_t const * nrf_apb_main_interconnect_get(void);
+nrfx_interconnect_apb_t const * nrfx_interconnect_apb_main_get(void);
 
 /**
  * @brief Function for getting APB bus properties structure by address of any peripheral 
@@ -53,7 +53,7 @@ nrfx_apb_interconnect_t const * nrf_apb_main_interconnect_get(void);
  * @return Pointer to the properties structure that represents the main APB interconnection
  *         or NULL if provided address is invalid.
  */
-nrfx_apb_interconnect_t const * nrf_apb_interconnect_get(uint32_t addr);
+nrfx_interconnect_apb_t const * nrfx_interconnect_apb_get(uint32_t addr);
 
 /**
  * @brief Function for getting number entries for global domain in APB bus properties array.
@@ -63,7 +63,7 @@ nrfx_apb_interconnect_t const * nrf_apb_interconnect_get(uint32_t addr);
  *
  * @return Number of entries in APB properties array.
  */
-size_t nrf_apb_interconnect_num_of_global_get(void);
+size_t nrfx_interconnect_apb_global_num_of_get(void);
 
 /**
  * @brief Function for getting APB bus properties structure by index of APB bus properties array.
@@ -72,7 +72,7 @@ size_t nrf_apb_interconnect_num_of_global_get(void);
  *
  * @return Pointer to the properties structure that represents APB assigned to given index.
  */
-nrfx_apb_interconnect_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t idx);
+nrfx_interconnect_apb_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t idx);
 
 /** @} */
 
