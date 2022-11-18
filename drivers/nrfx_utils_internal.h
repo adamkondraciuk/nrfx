@@ -87,6 +87,26 @@
                     (macro(periph_name, prefix, i, __VA_ARGS__)), \
                     off_code)
 
+/** Used for @ref NRFX_FOREACH_PRESENT. Execute provided macro if instance is present.
+ *
+ * Presence is determined by existing of define \<instance\>_PRESENT set to 1.
+ *
+ * @param[in] i           Instance index.
+ * @param[in] off_code    Code which is pasted when given driver instance is disabled.
+ *                        Must be given in parentheses.
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] prefix      Prefix added before instance index, e.g. some device has
+ *                        instances named like SPIM00. First 0 is passed here as prefix.
+ * @param[in] macro       Macro which is executed.
+ * @param[in] ...         Variable length arguments passed to the @p macro. Macro has following
+ *                        arguments: macro(instance, ...), where instance is a concatenation of
+ *                        a peripheral name,  prefix and index.
+ */
+#define _NRFX_EVAL_IF_PRESENT(i, off_code, periph_name, prefix, macro, ...) \
+        NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(NRFX_CONCAT(periph_name, prefix, i)), \
+                    (macro(NRFX_CONCAT(periph_name, prefix, i), __VA_ARGS__)), \
+                    off_code)
+
 /* Macro used for enabled driver instances enum generation. */
 #define _NRFX_INST_ENUM(periph_name, prefix, i, _) \
     NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX),

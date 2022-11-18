@@ -161,12 +161,12 @@ extern "C" {
  * @retval 1 At least one instance on current device supports a given feature.
  * @retval 0 None of peripheral instances supports a given feature.
  */
-#define NRFX_FEATURE_PRESENT(periph_name, feature_name) \
-        NRFX_COND_CODE_0(NRFX_CONCAT(0, \
-                            _NRFX_FEATURE_PRESENT(periph_name, feature_name, 256), \
+#define NRFX_FEATURE_PRESENT(periph_name, feature_name)                                            \
+        NRFX_COND_CODE_0(NRFX_CONCAT(0,                                                            \
+                            _NRFX_FEATURE_PRESENT(periph_name, feature_name, 256),                 \
                             _NRFX_FEATURE_PRESENT(NRFX_CONCAT(periph_name, 0), feature_name, 100), \
-                            _NRFX_FEATURE_PRESENT(NRFX_CONCAT(periph_name, 00), feature_name, 10) \
-                         ), \
+                            _NRFX_FEATURE_PRESENT(NRFX_CONCAT(periph_name, 00), feature_name, 10)  \
+                         ),                                                                        \
                         (0), (1))
 
 /**
@@ -194,6 +194,33 @@ extern "C" {
                      off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
         NRFX_LISTIFY(10, _NRFX_EVAL_IF_ENABLED, sep, \
                      off_code, periph_name, 00, macro, __VA_ARGS__)
+
+/**
+ * @brief Macro for resolving provided user macro for present instances of a peripheral.
+ *
+ * Macro checks if peripheral instances are present by checking if there is
+ * \<peripheral\>\<id\>_PRESENT define set to 1.
+ *
+ * Macro supports check on instances with following names:
+ * - \<periph_name\>0 - \<periph_name\>255 - e.g. SPIM0, SPIM255
+ * - \<periph_name\>00 - \<periph_name\>099 - e.g. SPIM00, SPIM099
+ * - \<periph_name\>000 - \<periph_name\>009 - e.g. SPIM000, SPIM009
+ * - \<periph_name\> - e.g. SPIM
+ *
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] macro       Macro which is resolved if peripheral instance is present.
+ *                        Macro has following arguments: macro(periph_name, prefix, i, ...).
+ * @param[in] sep         Separator added between all evaluations, in parentheses.
+ * @param[in] off_code    Code injected for disabled instances, in parentheses.
+ */
+#define NRFX_FOREACH_PRESENT(periph_name, macro, sep, off_code, ...) \
+        NRFX_LISTIFY(256, _NRFX_EVAL_IF_PRESENT, sep, \
+                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep \
+        NRFX_LISTIFY(100, _NRFX_EVAL_IF_PRESENT, sep, \
+                     off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
+        NRFX_LISTIFY(10, _NRFX_EVAL_IF_PRESENT, sep, \
+                     off_code, periph_name, 00, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
+        _NRFX_EVAL_IF_PRESENT(, off_code, periph_name, , macro, __VA_ARGS__)
 
 /**
  * @brief Macro for creating a content for enum which is listing enabled driver instances.
