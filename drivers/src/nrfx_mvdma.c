@@ -316,7 +316,10 @@ static void mvdma_irq_handler(NRF_MVDMA_Type * p_reg, mvdma_control_block_t * p_
     }
 
     p_cb->busy = false;
-    p_cb->handler(&event, p_cb->p_context);
+    if (p_cb->handler)
+    {
+        p_cb->handler(&event, p_cb->p_context);
+    }
 }
 
 #if NRFX_CHECK(NRFX_MVDMA_ENABLED)

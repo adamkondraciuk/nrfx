@@ -114,7 +114,7 @@ typedef void (*nrfx_mvdma_event_handler_t)(nrfx_mvdma_event_t const * p_event, v
  *
  * @param[in] p_instance         Pointer to the driver instance structure.
  * @param[in] interrupt_priority Interrupt priority.
- * @param[in] event_handler      Event handler provided by the user. Must not be NULL.
+ * @param[in] event_handler      Event handler provided by the user.
  *
  * @retval NRFX_SUCCESS                   Initialization was successful.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED The driver is already initialized.
