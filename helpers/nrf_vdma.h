@@ -65,11 +65,22 @@ typedef enum
  */
 #define NRF_VDMA_REDUCED_JOB_SIZE(count) (count + 2)
 
+/** @brief Macro for defining an element of a job list.
+ *
+ * @param[in] p_buffer  Pointer to the buffer.
+ * @param[in] size      Size of the transfer.
+ * @param[in] attribute Attribute mask.
+ *
+ * @return Two words of the job descriptor.
+ */
+#define NRF_VDMA_JOB_ELEMENT(p_buffer, size, attribute)                   \
+        (uint32_t)p_buffer,                                               \
+        (uint32_t)(((attribute) << VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos) | \
+                   ((size) & NRF_VDMA_BUFFER_SIZE_MASK))
+
 /** @brief Macro for defining initial element of reduced job list. */
 #define NRF_VDMA_REDUCED_JOB_INIT_ELEMENT(p_buffer, size, attribute) \
-        (uint32_t)p_buffer,                                          \
-        (uint32_t)(((NRF_VDMA_ATTRIBUTE_FIXED_ATTR | attribute) <<   \
-                    VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos) | (size & NRF_VDMA_BUFFER_SIZE_MASK))
+    NRF_VDMA_JOB_ELEMENT(p_buffer, size, NRF_VDMA_ATTRIBUTE_FIXED_ATTR | (attribute))
 
 /**
  * @brief Function for filling the specified structure of the job with given job parameters.
