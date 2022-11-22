@@ -23,6 +23,7 @@ typedef enum
 {
     NRFX_CLOCK_EVT_HFCLK_STARTED,      ///< HFCLK has been started.
     NRFX_CLOCK_EVT_LFCLK_STARTED,      ///< LFCLK has been started.
+    NRFX_CLOCK_EVT_PLL_STARTED,        ///< PLL has been started.
     NRFX_CLOCK_EVT_CTTO,               ///< Calibration timeout.
     NRFX_CLOCK_EVT_CAL_DONE,           ///< Calibration has been done.
     NRFX_CLOCK_EVT_HFCLKAUDIO_STARTED, ///< HFCLKAUDIO has been started.

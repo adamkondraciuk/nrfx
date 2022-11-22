@@ -343,6 +343,8 @@ void nrfx_clock_start(nrf_clock_domain_t domain)
                 {
                     // LF clock is not active yet but was started already. Inspect its source.
 #if NRF_CLOCK_HAS_XO
+                    // todo: for moonlight there is no srccopy register yet
+                    // LFCLKSTAT not works as expected, JIRA: MLT-4105
                     lfclksrc = nrf_clock_lf_actv_src_get(NRF_CLOCK);
 #else
                     lfclksrc = nrf_clock_lf_srccopy_get(NRF_CLOCK);
@@ -596,6 +598,16 @@ void nrfx_clock_irq_handler(void)
             m_clock_cb.event_handler(NRFX_CLOCK_EVT_LFCLK_STARTED);
         }
     }
+
+#if NRFX_CHECK(NRF_CLOCK_HAS_PLL)
+    if (nrf_clock_event_check(NRF_CLOCK, NRF_CLOCK_EVENT_PLLSTARTED))
+    {
+        nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_PLLSTARTED);
+        NRFX_LOG_DEBUG("Event: NRF_CLOCK_EVENT_PLLSTARTED");
+        nrf_clock_int_disable(NRF_CLOCK, NRFX_CLOCK_INT_PLL_STARTED_MASK);
+        m_clock_cb.event_handler(NRFX_CLOCK_EVT_PLL_STARTED);
+    }
+#endif
 
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 #if NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)

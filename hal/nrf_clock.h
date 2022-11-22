@@ -280,6 +280,9 @@ typedef enum
     NRF_CLOCK_INT_HF_STARTED_MASK      = NRF_CLOCK_INTENSET_HFCLKSTARTED_Msk,  /**< Interrupt on HFCLKSTARTED event. */
     NRF_CLOCK_INT_LF_STARTED_MASK      = NRF_CLOCK_INTENSET_LFCLKSTARTED_Msk,  /**< Interrupt on LFCLKSTARTED event. */
 
+#if NRF_CLOCK_HAS_PLL
+    NRFX_CLOCK_INT_PLL_STARTED_MASK    = CLOCK_INTENSET_PLLSTARTED_Msk,        /**< Interrupt on PLLSTARTED event. */
+#endif
 #if NRF_CLOCK_HAS_CALIBRATION
     NRF_CLOCK_INT_DONE_MASK            = CLOCK_INTENSET_DONE_Msk,              /**< Interrupt on DONE event. */
 #endif
