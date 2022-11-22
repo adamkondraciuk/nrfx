@@ -9,9 +9,8 @@
 #include <limits.h>
 
 #include <nrf.h>
-#include <nrfx_utils.h>
+#include "nrfx_utils.h"
 #include <nrf_peripherals.h>
-#include <nrfx_driver_internal.h>
 #include "mdk_fixups.h"
 
 #ifdef __cplusplus
@@ -136,25 +135,6 @@ extern "C" {
 /** @brief Internal macro used by @ref NRFX_CONCAT_3 to perform the expansion in two steps. */
 #define NRFX_CONCAT_3_(p1, p2, p3)  p1 ## p2 ## p3
 
-/** @brief Create an interrupt handler for all enabled driver instances.
- *
- * Macro creates set of function which calls irq_handler function with three parameters:
- * - peripheral instance register pointer
- * - pointer to a control block structure associated with the given instance
- * - provided @p ext_macro called with peripheral name suffix (e.g. 01 for SPIM01)
- *
- * Generic interrupt handler function with above mentioned parameters named irq_handler
- * must be implemented in the driver.
- *
- * @note Handlers are using enum which should be generated using @ref NRFX_INSTANCE_ENUM_LIST.
- *
- * @param periph_name       Peripheral name, e.g. SPIM.
- * @param periph_name_small Peripheral name written with small letters, e.g. spim.
- * @param ext_macro         External macro to be executed for each instance.
- */
-#define NRFX_INSTANCE_IRQ_HANDLERS_EXT(periph_name, periph_name_small, ext_macro) \
-    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_EXT, (), (), periph_name_small, ext_macro)
-
 /**
  * @brief Macro for computing the absolute value of an integer number.
  *
@@ -188,6 +168,109 @@ extern "C" {
                             _NRFX_FEATURE_PRESENT(NRFX_CONCAT(periph_name, 00), feature_name, 10) \
                          ), \
                         (0), (1))
+
+/**
+ * @brief Macro for resolving provided user macro for enabled instances of a driver.
+ *
+ * Macro checks if driver instances are enabled for all potential instaces of a
+ * peripheral. It takes peripheral name and checks whether NRFX_\<peripheral\>\<id\>_ENABLED
+ * is set to 1 and if yes then provided macro is evaluated for given instance.
+ *
+ * Macro supports check on instances with following names:
+ * - \<periph_name\>0 - \<periph_name\>255 - e.g. SPIM0, SPIM255
+ * - \<periph_name\>00 - \<periph_name\>099 - e.g. SPIM00, SPIM099
+ * - \<periph_name\>000 - \<periph_name\>009 - e.g. SPIM000, SPIM009
+ *
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] macro       Macro which is resolved if driver instance is enabled. Macro has following
+ *                        arguments: macro(periph_name, prefix, i, ...).
+ * @param[in] sep         Separator added between all evaluations, in parentheses.
+ * @param[in] off_code    Code injected for disabled instances, in parentheses.
+ */
+#define NRFX_FOREACH_ENABLED(periph_name, macro, sep, off_code, ...) \
+        NRFX_LISTIFY(256, _NRFX_EVAL_IF_ENABLED, sep, \
+                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep \
+        NRFX_LISTIFY(100, _NRFX_EVAL_IF_ENABLED, sep, \
+                     off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
+        NRFX_LISTIFY(10, _NRFX_EVAL_IF_ENABLED, sep, \
+                     off_code, periph_name, 00, macro, __VA_ARGS__)
+
+/**
+ * @brief Macro for creating a content for enum which is listing enabled driver instances.
+ *
+ * It creates comma separated list of entries like NRFX_\<instance_name\>_INST_IDX,
+ * e.g. (NRFX_SPIM0_INST_IDX) for all enabled instances (NRFX_\<instance_name\>_ENABLED
+ * is set to 1). It should be called within enum declaration. Created enum is used
+ * by the driver to index all enabled instances of the driver.
+ *
+ * @param[in] periph_name Peripheral name (e.g. SPIM).
+ */
+#define NRFX_INSTANCE_ENUM_LIST(periph_name) \
+        NRFX_FOREACH_ENABLED(periph_name, _NRFX_INST_ENUM, (), ())
+
+/**
+ * @brief Macro for creating an interrupt handler for all enabled driver instances.
+ *
+ * Macro creates a set of functions which calls generic @p irq_handler function with two parameters:
+ * - peripheral instance register pointer
+ * - pointer to a control block structure associated with the given instance
+ *
+ * Generic interrupt handler function with above mentioned parameters named @p irq_handler
+ * must be implemented in the driver.
+ *
+ * @note Handlers are using enum which should be generated using @ref NRFX_INSTANCE_ENUM_LIST.
+ *
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] periph_name_small Peripheral name written with small letters, e.g. spim.
+ */
+#define NRFX_INSTANCE_IRQ_HANDLERS(periph_name, periph_name_small) \
+    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER, (), (), periph_name_small)
+
+/**
+ * @brief Macro for creating an interrupt handler for all enabled driver instances
+ *        with the specified extra parameter.
+ *
+ * Macro creates set of function which calls generic @p irq_handler function with three parameters:
+ * - peripheral instance register pointer
+ * - pointer to a control block structure associated with the given instance
+ * - provided @p ext_macro called with peripheral name suffix (e.g. 01 for TIMER01)
+ *
+ * Generic interrupt handler function with above mentioned parameters named @p irq_handler
+ * must be implemented in the driver.
+ *
+ * @note Handlers are using enum which should be generated using @ref NRFX_INSTANCE_ENUM_LIST.
+ *
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] periph_name_small Peripheral name written with small letters, e.g. rtc.
+ * @param[in] ext_macro         External macro to be executed for each instance.
+ */
+#define NRFX_INSTANCE_IRQ_HANDLERS_EXT(periph_name, periph_name_small, ext_macro) \
+    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_EXT, (), (), periph_name_small, ext_macro)
+
+/**
+ * @brief Macro for declaring an interrupt handler for all enabled driver instances.
+ *
+ * Macro creates set of function declarations. It is intended to be used in the driver header.
+ *
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] periph_name_small Peripheral name written with small letters, e.g. spim.
+ */
+#define NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(periph_name, periph_name_small) \
+    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_DECLARE, (), (), periph_name_small)
+
+/**
+ * @brief Macro for generating comma-separated list of interrupt handlers for all
+ *        enabled driver instances.
+ *
+ * Interrupt handlers are generated using @ref NRFX_INSTANCE_IRQ_HANDLERS.
+ * It is intended to be used to create a list which is used for passing an interrupt
+ * handler function to the PRS driver.
+ *
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] periph_name_small Peripheral name written with small letters, e.g. spim.
+ */
+#define NRFX_INSTANCE_IRQ_HANDLERS_LIST(periph_name, periph_name_small) \
+    NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_LIST, (), (), periph_name_small)
 
 /**
  * @brief Macro for getting the smaller value between two arguments.
