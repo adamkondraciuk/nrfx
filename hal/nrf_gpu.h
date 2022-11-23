@@ -28,10 +28,10 @@ typedef enum
 /** @brief GPU interrupts. */
 typedef enum
 {
-    NRF_GPU_INT_MASK_CORE      = GPU_INTEN_CORE_Msk,     /**< GPU interrupt for CORE event. */
-    NRF_GPU_INT_MASK_SYS_ERROR = GPU_INTEN_SYSERROR_Msk, /**< GPU interrupt for SYSERROR event. */
-    NRF_GPU_INT_MASK_STARTED   = GPU_INTEN_STARTED_Msk,  /**< GPU interrupt for STARTED event. */
-    NRF_GPU_INT_MASK_FREEZE    = GPU_INTEN_FREEZE_Msk,   /**< GPU interrupt for FREEZE event. */
+    NRF_GPU_INT_CORE_MASK      = GPU_INTEN_CORE_Msk,     /**< GPU interrupt for CORE event. */
+    NRF_GPU_INT_SYS_ERROR_MASK = GPU_INTEN_SYSERROR_Msk, /**< GPU interrupt for SYSERROR event. */
+    NRF_GPU_INT_STARTED_MASK   = GPU_INTEN_STARTED_Msk,  /**< GPU interrupt for STARTED event. */
+    NRF_GPU_INT_FREEZE_MASK    = GPU_INTEN_FREEZE_Msk,   /**< GPU interrupt for FREEZE event. */
 } nrf_gpu_int_mask_t;
 
 /** @brief STATUS register bit masks. */

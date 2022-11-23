@@ -38,9 +38,9 @@ typedef enum
 /** @brief AUXPLL interrupts. */
 typedef enum
 {
-    NRF_AUXPLL_INT_MASK_STARTED = AUXPLL_INTEN_STARTED_Msk, /**< AUXPLL interrupt for STARTED event. */
-    NRF_AUXPLL_INT_MASK_STOPPED = AUXPLL_INTEN_STOPPED_Msk, /**< AUXPLL interrupt for STOPPED event. */
-    NRF_AUXPLL_INT_MASK_LOCKED  = AUXPLL_INTEN_LOCKED_Msk   /**< AUXPLL interrupt for LOCKED event. */
+    NRF_AUXPLL_INT_STARTED_MASK = AUXPLL_INTEN_STARTED_Msk, /**< AUXPLL interrupt for STARTED event. */
+    NRF_AUXPLL_INT_STOPPED_MASK = AUXPLL_INTEN_STOPPED_Msk, /**< AUXPLL interrupt for STOPPED event. */
+    NRF_AUXPLL_INT_LOCKED_MASK  = AUXPLL_INTEN_LOCKED_Msk   /**< AUXPLL interrupt for LOCKED event. */
 } nrf_auxpll_int_mask_t;
 
 /** @brief AUXPLL STATUS register bit masks. */

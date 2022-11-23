@@ -28,10 +28,10 @@ typedef enum
 /** @brief DISPC interrupts. */
 typedef enum
 {
-    NRF_DISPC_INT_MASK_CORE       = DISPC_INTEN_CORE_Msk,      /**< DISPC interrupt for CORE event. */
-    NRF_DISPC_INT_MASK_UNDERRUN   = DISPC_INTEN_UNDERRUN_Msk,  /**< DISPC interrupt for UNDERRUN event. */
-    NRF_DISPC_INT_MASK_LOW_BUFFER = DISPC_INTEN_LOWBUFFER_Msk, /**< DISPC interrupt for LOWBUFFER event. */
-    NRF_DISPC_INT_MASK_STARTED    = DISPC_INTEN_STARTED_Msk,   /**< DISPC interrupt for STARTED event. */
+    NRF_DISPC_INT_CORE_MASK       = DISPC_INTEN_CORE_Msk,      /**< DISPC interrupt for CORE event. */
+    NRF_DISPC_INT_UNDERRUN_MASK   = DISPC_INTEN_UNDERRUN_Msk,  /**< DISPC interrupt for UNDERRUN event. */
+    NRF_DISPC_INT_LOW_BUFFER_MASK = DISPC_INTEN_LOWBUFFER_Msk, /**< DISPC interrupt for LOWBUFFER event. */
+    NRF_DISPC_INT_STARTED_MASK    = DISPC_INTEN_STARTED_Msk,   /**< DISPC interrupt for STARTED event. */
 } nrf_dispc_int_mask_t;
 
 /**
