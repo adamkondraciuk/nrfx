@@ -45,26 +45,28 @@ nrfx_interconnect_apb_t const * nrfx_interconnect_apb_main_get(void)
 
 nrfx_interconnect_apb_t const * nrfx_interconnect_apb_get(uint32_t addr)
 {
-    uint32_t bus_address = nrf_address_bus_get(addr);
     nrf_domain_t domain = (nrf_domain_t)nrf_address_domain_get(addr);
-    uint32_t size;
+    uint32_t num_of_entries;
     nrfx_interconnect_apb_t const * apb_interconnect;
     if (domain == NRF_DOMAIN_GLOBAL)
     {
-        size = NRFX_ARRAY_SIZE(m_global_apb_interconnect);
+        num_of_entries = NRFX_ARRAY_SIZE(m_global_apb_interconnect);
         apb_interconnect = m_global_apb_interconnect;
     }
     else
     {
-        size = NRFX_ARRAY_SIZE(m_local_apb_interconnect);
+        num_of_entries = NRFX_ARRAY_SIZE(m_local_apb_interconnect);
         apb_interconnect = m_local_apb_interconnect;
     }
 
-    for (uint8_t i = 0; i < size; i++)
+    for (uint8_t i = 0; i < num_of_entries; i++)
     {
-        if (bus_address == nrf_address_bus_get((uint32_t)apb_interconnect[i].p_dppi))
+        nrfx_interconnect_apb_t const * p_apb = &apb_interconnect[i];
+        uint8_t bus_address_area = nrf_address_bus_get(addr, p_apb->size);
+        
+        if (bus_address_area == nrf_address_bus_get((uint32_t)p_apb->p_dppi, p_apb->size))
         {
-            return &apb_interconnect[i];
+            return p_apb;
         }
     }
     return NULL;

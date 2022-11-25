@@ -46,14 +46,14 @@ nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_main_get(void)
 
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_get(nrfx_interconnect_apb_t const * p_apb_prop)
 {
-    uint8_t bus = nrf_address_bus_get((uint32_t)p_apb_prop->p_dppi);
+    uint8_t bus = nrf_address_bus_get((uint32_t)p_apb_prop->p_dppi, p_apb_prop->size);
 
     if (nrfx_interconnect_apb_domain_get(p_apb_prop) == NRF_DOMAIN_GLOBAL)
     {
         for (uint8_t i = 0; i < NRFX_ARRAY_SIZE(m_global_ipct_interconnect); i++)
         {
             // Check if some IPCT is on the same bus
-            if (nrf_address_bus_get((uint32_t)m_global_ipct_interconnect[i].p_ipct) == bus)
+            if (nrf_address_bus_get((uint32_t)m_global_ipct_interconnect[i].p_ipct, p_apb_prop->size) == bus)
             {
                 return &m_global_ipct_interconnect[i];
             }

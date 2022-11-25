@@ -98,6 +98,12 @@ typedef enum
 #define NRF_DOMAIN NRF_DOMAIN_SYSCTRL
 #elif defined(NRF_PPR)
 #define NRF_DOMAIN NRF_DOMAIN_PPR
+#elif defined(NRF_FLPR)
+#define NRF_DOMAIN NRF_DOMAIN_FLPR
+#elif defined(NRF_LMAC)
+#define NRF_DOMAIN NRF_DOMAIN_LMAC
+#elif defined(NRF_UMAC)
+#define NRF_DOMAIN NRF_DOMAIN_UMAC
 #endif
 
 /* TODO: Create tag for internal cores and remove them from public release. */
@@ -116,7 +122,7 @@ typedef enum
     NRF_PROCESSOR_ID_FLPR        = 14,
 } nrf_processor_id_t;
 
-#define NRF_PROCESSOR_ID_COUNT NRF_PROCESSOR_ID_FLPR + 1
+#define NRF_PROCESSOR_ID_COUNT (NRF_PROCESSOR_ID_FLPR + 1)
 
 /* MDK-2059 */
 #define ADDRESS_REGION_Pos        (29UL)
@@ -218,6 +224,13 @@ typedef enum
 #define P6_FEATURE_PINS_PRESENT 0x3FFFUL
 #define P7_FEATURE_PINS_PRESENT 0xFFUL
 #define P9_FEATURE_PINS_PRESENT 0x3FUL
+#elif defined(HALTIUM_XXAA) && !defined(NRF9230_XXAA)
+#define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
+#define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
+#define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
+#define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
+#define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
+#define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
 #endif
 
 #if defined(NRF_TRUSTZONE_NONSECURE)

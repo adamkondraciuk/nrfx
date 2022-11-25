@@ -23,7 +23,9 @@ typedef struct {
     uint32_t         dppi_pub_channels_mask; ///< Mask of configurable DPPI publish channels.
     uint32_t         dppi_sub_channels_mask; ///< Mask of configurable DPPI subscribe channels.
     NRF_PPIB_Type  * p_ppib;                 ///< PPIB peripheral that belongs to given APB.
+    size_t           size;                   ///< Size of APB.
 } nrfx_interconnect_apb_t;
+
 
 /**
  * @brief Function for getting the domain to which the specified APB bus belongs.

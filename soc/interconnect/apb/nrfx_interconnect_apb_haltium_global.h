@@ -35,6 +35,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC130_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC130_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NULL,                                                           \
+        .size = 0x20000,                                                          \
     },                                                                            \
     { /* APB22 */                                                                 \
         .p_dppi = NRF_DPPIC120,                                                   \
@@ -42,6 +43,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC120_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC120_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB121,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB38 */                                                                 \
         .p_dppi = NRF_DPPIC131,                                                   \
@@ -49,6 +51,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC131_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC131_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB132,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB39 */                                                                 \
         .p_dppi = NRF_DPPIC132,                                                   \
@@ -56,6 +59,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC132_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC132_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB133,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB3A */                                                                 \
         .p_dppi = NRF_DPPIC133,                                                   \
@@ -63,6 +67,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC133_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC133_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB134,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB3B */                                                                 \
         .p_dppi = NRF_DPPIC134,                                                   \
@@ -70,6 +75,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC134_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC134_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB135,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB3C */                                                                 \
         .p_dppi = NRF_DPPIC135,                                                   \
@@ -77,6 +83,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC135_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC135_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB136,                                            \
+        .size = 0x10000,                                                          \
     },                                                                            \
     { /* APB3D */                                                                 \
         .p_dppi = NRF_DPPIC136,                                                   \
@@ -84,6 +91,7 @@ static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANN
         .dppi_pub_channels_mask = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .dppi_sub_channels_mask = NRFX_DPPIC136_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
         .p_ppib = NRF_SYSCTRL_PPIB137,                                            \
+        .size = 0x10000,                                                          \
     }                                                                             \
 }
 

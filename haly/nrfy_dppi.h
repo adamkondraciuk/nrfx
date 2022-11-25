@@ -17,6 +17,30 @@ extern "C" {
  * @brief   Hardware access layer with cache and barrier support for managing the DPPI peripheral.
  */
 
+/**
+ * @brief Function for enabling or disabling multiple DPPI channels.
+ *
+ * The bits in @c mask value correspond to particular channels. It means that
+ * writing 1 to bit 0 enables or disables channel 0,
+ * writing 1 to bit 1 enables or disables channel 1 etc.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] mask   Channel mask.
+ * @param[in] enable True if specified channels are to be enabled, false otherwise.
+ */
+NRFY_STATIC_INLINE void nrfy_dppi_channels_set(NRF_DPPIC_Type * p_reg, uint32_t mask, bool enable)
+{
+    if (enable == true)
+    {
+        nrf_dppi_channels_enable(p_reg, mask);
+    }
+    else
+    {
+        nrf_dppi_channels_disable(p_reg, mask);
+    }
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_dppi_task_trigger} */
 NRFY_STATIC_INLINE void nrfy_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t dppi_task)
 {

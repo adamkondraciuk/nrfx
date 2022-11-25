@@ -104,9 +104,9 @@ NRF_STATIC_INLINE uint8_t nrf_address_domain_get(uint32_t addr)
     return (uint8_t)((addr & ADDRESS_DOMAIN_Msk) >> ADDRESS_DOMAIN_Pos);
 }
 
-NRF_STATIC_INLINE uint8_t nrf_address_bus_get(uint32_t addr)
+NRF_STATIC_INLINE uint8_t nrf_address_bus_get(uint32_t addr, size_t size)
 {
-    return (uint8_t)((addr & ADDRESS_BUS_Msk) >> ADDRESS_BUS_Pos);
+    return (uint8_t)((addr & ADDRESS_BUS_Msk & ~(size - 1)) >> ADDRESS_BUS_Pos);
 }
 
 NRF_STATIC_INLINE uint8_t nrf_address_bridge_group_get(uint32_t addr)
@@ -133,7 +133,7 @@ NRF_STATIC_INLINE uint16_t nrf_address_periphid_get(uint32_t addr)
 NRF_STATIC_INLINE bool nrf_dma_accesible_check(void const * p_reg, void const * p_object)
 {
 #if defined(HALTIUM_XXAA)
-    if (nrf_address_bus_get((uint32_t)p_reg) == 0x8E)
+    if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)
     {
         /* Bitwise operation to unify secure/non-secure memory address */
         uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;
