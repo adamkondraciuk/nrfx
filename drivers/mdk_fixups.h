@@ -35,8 +35,6 @@
             #endif
         #endif
 
-        #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
-
         #define GRTC_IRQn       GRTC_1_IRQn
         #define nrfx_grtc_irq_handler     GRTC_1_IRQHandler
         #define nrfx_gpiote20_irq_handler GPIOTE20_1_IRQHandler
@@ -68,6 +66,8 @@
 typedef NRF_DOMAINS_t nrf_domain_t;
 
 #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
+
+#define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
 #endif /* defined(HALTIUM_XXAA) || defined(LUMOS_XXAA) */
 
@@ -326,8 +326,6 @@ typedef enum
     #define GRTC_IRQn       GRTC_1_IRQn
     #define GRTC_IRQHandler GRTC0_1_IRQHandler
 #endif
-
-#define NRF_GRTC_INTEN_MASK 0x7FFFFFF
 
 #define LPCOMP_REFSEL_RESOLUTION 16
 

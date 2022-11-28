@@ -118,7 +118,7 @@ bool nrfx_grtc_is_channel_used(uint8_t channel);
  */
 nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority);
 
-#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for starting the 32 kHz RTCOUNTER.
  *
@@ -144,7 +144,6 @@ nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
  * @param[out] p_main_cc_channel Pointer to the main capture/compare channel.
  *
  * @retval NRFX_SUCCESS                   Starting was successful.
- * @retval NRFX_ERROR_INVALID_STATE       The GRTC driver is uninitialized.
  * @retval NRFX_ERROR_NO_MEM              No resource available to allocate main channel.
  * @retval NRFX_ERROR_ALREADY_INITIALIZED The GRTC is already running.
  */
@@ -156,7 +155,6 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
  * @param[in] action Action to be performed.
  *
  * @retval NRFX_SUCCESS             Starting was successful.
- * @retval NRFX_ERROR_INVALID_STATE The GRTC driver is uninitialized.
  * @retval NRFX_ERROR_INTERNAL      The SYSCOUNTER (1 MHz) is running and the operation is
  *                                  not allowed.
  */
@@ -190,7 +188,7 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
                                                uint64_t                             val,
                                                bool                                 enable_irq,
                                                bool                                 sync);
-#endif // defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+#endif // NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for uninitializing the GRTC.
@@ -337,11 +335,23 @@ nrfx_err_t nrfx_grtc_syscounter_capture(uint8_t channel);
 nrfx_err_t nrfx_grtc_syscounter_cc_value_read(uint8_t channel, uint64_t * p_val);
 
 /**
+ * @brief Function for requesting the SYSCOUNTER state.
+ *
+ * @note By using this function any domain can prevent SYSCOUNTER from going to sleep state.
+ *
+ * @param[in] active True if SYSCOUNTER is to be always kept active, false otherwise.
+ */
+void nrfx_grtc_active_request_set(bool active);
+
+/**
  * @brief Function for reading the GRTC SYSCOUNTER value.
  *
- * @return SYSCOUNTER (1 MHz) value.
+ * @param[out] p_counter p_counter Pointer to the variable to be filled with the SYSCOUNTER value.
+ * 
+ * @retval NRFX_SUCCESS        The procedure was successful.
+ * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is not running.
  */
-NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(void);
+nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter);
 
 /**
  * @brief Function for retrieving the address of the specified GRTC task.
@@ -379,7 +389,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_capture_task_address_get(uint8_t channel);
  */
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel);
 
-#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+#if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for reading the GRTC RTCOUNTER value.
  *
@@ -389,10 +399,6 @@ NRFX_STATIC_INLINE uint64_t nrfx_grtc_rtcounter_get(void);
 #endif
 
 #ifndef NRFX_DECLARE_ONLY
-NRFX_STATIC_INLINE uint64_t nrfx_grtc_syscounter_get(void)
-{
-    return nrfy_grtc_sys_counter_get(NRF_GRTC);
-}
 
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_task_address_get(nrf_grtc_task_t task)
 {
@@ -414,12 +420,12 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel)
     return nrfy_grtc_event_address_get(NRF_GRTC, nrfy_grtc_sys_counter_compare_event_get(channel));
 }
 
-#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
+#if NRFY_GRTC_HAS_EXTENDED
 NRFX_STATIC_INLINE uint64_t nrfx_grtc_rtcounter_get(void)
 {
     return nrfy_grtc_rt_counter_get(NRF_GRTC);
 }
-#endif
+#endif // NRFY_GRTC_HAS_EXTENDED
 
 #endif // NRFX_DECLARE_ONLY
 
