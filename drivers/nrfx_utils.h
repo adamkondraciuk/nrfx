@@ -3,7 +3,7 @@
 #ifndef NRFX_UTILS_H__
 #define NRFX_UTILS_H__
 
-#include <nrfx_utils_internal.h>
+#include "nrfx_utils_internal.h"
 
 /**
  * @defgroup nrfx_utils Preprocessor utility macros

@@ -115,11 +115,11 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
  *
  * Macro is using enum created by _NRFX_INSG_ENUM macro.
  *
- * @param periph_name       Peripheral name, e.g. SPIM.
- * @param prefix            Prefix appended to the index.
- * @param i                 Index.
- * @param periph_name_small Peripheral name in small letters, e.g. spim.
- * @param ext_macro         Macro called as third parameter of the handler.
+ * @param[in] periph_name       Peripheral name, e.g. SPIM.
+ * @param[in] prefix            Prefix appended to the index.
+ * @param[in] i                 Index.
+ * @param[in] periph_name_small Peripheral name in small letters, e.g. spim.
+ * @param[in] ext_macro         Macro called as third parameter of the handler.
  */
 #define _NRFX_IRQ_HANDLER_EXT(periph_name, prefix, i, periph_name_small, ext_macro) \
 void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
