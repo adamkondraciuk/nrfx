@@ -6574,4 +6574,39 @@ typedef struct {
 
 #endif // HALTIUM_XXAA
 
+#if defined(NRF9230_XXAA)
+/* ===================================================== Struct RESETHUB ===================================================== */
+/**
+  * @brief Reset hub
+  */
+  typedef struct {                                   /*!< RESETHUB Structure                                                   */
+    __OM uint32_t TASKS_RESETDOMAIN[8];              /*!< (@ 0x00000000) Reset the domain [n], where n is domain id.           */
+    __IM uint32_t RESERVED[56];
+    __IOM uint32_t EVENTS_DOMAINRESET[8];            /*!< (@ 0x00000100) Domain [n] was reset, where n is domain id.           */
+    __IM uint32_t RESERVED1[120];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IM uint32_t RESERVED2[60];
+    __IOM NRF_RESETHUB_RESETREAS_Type RESETREAS;     /*!< (@ 0x00000400) (unspecified)                                         */
+    __IM uint32_t RESERVED3[55];
+    __IOM uint32_t RESETMASK;                        /*!< (@ 0x00000500) Mask the reset request for a domain by itself.        */
+    __IOM uint32_t CROSSDOMAINRESET;                 /*!< (@ 0x00000504) Enable cross domain resets.                           */
+    __IOM uint32_t GPREGRET;                         /*!< (@ 0x00000508) General purpose retention register.                   */
+  } NRF_RESETHUB_Type_fixed;                         /*!< Size = 1292 (0x50C)                                                  */
+
+#if defined(NRF_RESETHUB_S)
+#undef NRF_RESETHUB_S
+#define NRF_RESETHUB_S ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_S_BASE)
+#endif
+#if defined(NRF_RESETHUB_NS)
+#undef NRF_RESETHUB_NS
+#define NRF_RESETHUB_NS ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_NS_BASE)
+#endif
+
+#define NRF_RESETHUB_Type NRF_RESETHUB_Type_fixed
+
+#endif /* defined(NRF9230_XXAA) */
+
 #endif // MDK_FIXUPS_H__

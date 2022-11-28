@@ -15,6 +15,8 @@
 #define MAX_PIN_NUMBER 32
 #elif (GPIO_COUNT == 2)
 #define MAX_PIN_NUMBER (32 + P1_PIN_NUM)
+#elif (GPIO_COUNT == 10)
+#define MAX_PIN_NUMBER 320
 #elif (GPIO_COUNT == 16)
 #define MAX_PIN_NUMBER 512
 #else
