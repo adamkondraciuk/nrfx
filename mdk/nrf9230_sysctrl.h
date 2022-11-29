@@ -237,20 +237,18 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEDATA_S_BASE    0x3F640000UL
 #define NRF_SYSCTRL_L2CACHEINFO_S_BASE    0x3F680000UL
 #define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
-#define NRF_SYSCTRL_HSFLL200_S_BASE       0xBF004000UL
-#define NRF_SYSCTRL_LRCCONF200_S_BASE     0xBF005000UL
-#define NRF_SYSCTRL_PCGCM200_S_BASE       0xBF006000UL
-#define NRF_SYSCTRL_PCGCS200_S_BASE       0xBF011000UL
-#define NRF_SYSCTRL_LRCCONF210_S_BASE     0xBF012000UL
-#define NRF_SYSCTRL_PCGCM210_S_BASE       0xBF013000UL
-#define NRF_SYSCTRL_VPRCLIC_S_BASE        0x5F8C8000UL
+#define NRF_SYSCTRL_HSFLL200_NS_BASE      0xBF004000UL
+#define NRF_SYSCTRL_LRCCONF200_NS_BASE    0xBF005000UL
+#define NRF_SYSCTRL_PCGCM200_NS_BASE      0xBF006000UL
+#define NRF_SYSCTRL_PCGCS200_NS_BASE      0xBF011000UL
+#define NRF_SYSCTRL_LRCCONF210_NS_BASE    0xBF012000UL
+#define NRF_SYSCTRL_PCGCM210_NS_BASE      0xBF013000UL
+#define NRF_SYSCTRL_VPRCLIC_NS_BASE       0x5F8C8000UL
 #define NRF_SYSCTRL_VPRTIM_NS_BASE        0x00000000UL
 #define NRF_SYSCTRL_L2CACHE_S_BASE        0x5F082000UL
 #define NRF_SYSCTRL_RAMC110_S_BASE        0x5F083000UL
 #define NRF_SYSCTRL_RAMC111_S_BASE        0x5F084000UL
 #define NRF_SYSCTRL_SHA3_S_BASE           0x5F088000UL
-#define NRF_SYSCTRL_RAMC112_S_BASE        0x5F08A000UL
-#define NRF_SYSCTRL_RAMC113_S_BASE        0x5F08B000UL
 #define NRF_SYSCTRL_PCGCS110_S_BASE       0x5F08E000UL
 #define NRF_SYSCTRL_PCGCM110_S_BASE       0x5F08F000UL
 #define NRF_SYSCTRL_EXMEE_S_BASE          0x5F094000UL
@@ -334,20 +332,18 @@ typedef enum {
 #define NRF_SYSCTRL_L2CACHEDATA_S         ((NRF_L2CACHEDATA_Type*)              NRF_SYSCTRL_L2CACHEDATA_S_BASE)
 #define NRF_SYSCTRL_L2CACHEINFO_S         ((NRF_L2CACHEINFO_Type*)              NRF_SYSCTRL_L2CACHEINFO_S_BASE)
 #define NRF_SYSCTRL_SHA3CORE_S            ((NRF_CRACENCORE_Type*)               NRF_SYSCTRL_SHA3CORE_S_BASE)
-#define NRF_SYSCTRL_HSFLL200_S            ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL200_S_BASE)
-#define NRF_SYSCTRL_LRCCONF200_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF200_S_BASE)
-#define NRF_SYSCTRL_PCGCM200_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM200_S_BASE)
-#define NRF_SYSCTRL_PCGCS200_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS200_S_BASE)
-#define NRF_SYSCTRL_LRCCONF210_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF210_S_BASE)
-#define NRF_SYSCTRL_PCGCM210_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM210_S_BASE)
-#define NRF_SYSCTRL_VPRCLIC_S             ((NRF_CLIC_Type*)                     NRF_SYSCTRL_VPRCLIC_S_BASE)
+#define NRF_SYSCTRL_HSFLL200_NS           ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL200_NS_BASE)
+#define NRF_SYSCTRL_LRCCONF200_NS         ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF200_NS_BASE)
+#define NRF_SYSCTRL_PCGCM200_NS           ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM200_NS_BASE)
+#define NRF_SYSCTRL_PCGCS200_NS           ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS200_NS_BASE)
+#define NRF_SYSCTRL_LRCCONF210_NS         ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF210_NS_BASE)
+#define NRF_SYSCTRL_PCGCM210_NS           ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM210_NS_BASE)
+#define NRF_SYSCTRL_VPRCLIC_NS            ((NRF_CLIC_Type*)                     NRF_SYSCTRL_VPRCLIC_NS_BASE)
 #define NRF_SYSCTRL_VPRTIM_NS             ((NRF_VTIM_Type*)                     NRF_SYSCTRL_VPRTIM_NS_BASE)
 #define NRF_SYSCTRL_L2CACHE_S             ((NRF_CACHE_Type*)                    NRF_SYSCTRL_L2CACHE_S_BASE)
 #define NRF_SYSCTRL_RAMC110_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC110_S_BASE)
 #define NRF_SYSCTRL_RAMC111_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC111_S_BASE)
 #define NRF_SYSCTRL_SHA3_S                ((NRF_CRACEN_Type*)                   NRF_SYSCTRL_SHA3_S_BASE)
-#define NRF_SYSCTRL_RAMC112_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC112_S_BASE)
-#define NRF_SYSCTRL_RAMC113_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC113_S_BASE)
 #define NRF_SYSCTRL_PCGCS110_S            ((NRF_PCGCSLAVE_Type*)                NRF_SYSCTRL_PCGCS110_S_BASE)
 #define NRF_SYSCTRL_PCGCM110_S            ((NRF_PCGCMASTER_Type*)               NRF_SYSCTRL_PCGCM110_S_BASE)
 #define NRF_SYSCTRL_EXMEE_S               ((NRF_EXMEE_Type*)                    NRF_SYSCTRL_EXMEE_S_BASE)
@@ -428,26 +424,31 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+  #define NRF_SYSCTRL_HSFLL200                    NRF_SYSCTRL_HSFLL200_NS
+  #define NRF_SYSCTRL_LRCCONF200                  NRF_SYSCTRL_LRCCONF200_NS
+  #define NRF_SYSCTRL_PCGCM200                    NRF_SYSCTRL_PCGCM200_NS
+  #define NRF_SYSCTRL_PCGCS200                    NRF_SYSCTRL_PCGCS200_NS
+  #define NRF_SYSCTRL_LRCCONF210                  NRF_SYSCTRL_LRCCONF210_NS
+  #define NRF_SYSCTRL_PCGCM210                    NRF_SYSCTRL_PCGCM210_NS
+  #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_NS
   #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SYSCTRL_OICR                        NRF_SYSCTRL_OICR_S
   #define NRF_SYSCTRL_L2CACHEDATA                 NRF_SYSCTRL_L2CACHEDATA_S
   #define NRF_SYSCTRL_L2CACHEINFO                 NRF_SYSCTRL_L2CACHEINFO_S
   #define NRF_SYSCTRL_SHA3CORE                    NRF_SYSCTRL_SHA3CORE_S
-  #define NRF_SYSCTRL_HSFLL200                    NRF_SYSCTRL_HSFLL200_S
-  #define NRF_SYSCTRL_LRCCONF200                  NRF_SYSCTRL_LRCCONF200_S
-  #define NRF_SYSCTRL_PCGCM200                    NRF_SYSCTRL_PCGCM200_S
-  #define NRF_SYSCTRL_PCGCS200                    NRF_SYSCTRL_PCGCS200_S
-  #define NRF_SYSCTRL_LRCCONF210                  NRF_SYSCTRL_LRCCONF210_S
-  #define NRF_SYSCTRL_PCGCM210                    NRF_SYSCTRL_PCGCM210_S
-  #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_S
+  #define NRF_SYSCTRL_HSFLL200                    NRF_SYSCTRL_HSFLL200_NS
+  #define NRF_SYSCTRL_LRCCONF200                  NRF_SYSCTRL_LRCCONF200_NS
+  #define NRF_SYSCTRL_PCGCM200                    NRF_SYSCTRL_PCGCM200_NS
+  #define NRF_SYSCTRL_PCGCS200                    NRF_SYSCTRL_PCGCS200_NS
+  #define NRF_SYSCTRL_LRCCONF210                  NRF_SYSCTRL_LRCCONF210_NS
+  #define NRF_SYSCTRL_PCGCM210                    NRF_SYSCTRL_PCGCM210_NS
+  #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_NS
   #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
   #define NRF_SYSCTRL_L2CACHE                     NRF_SYSCTRL_L2CACHE_S
   #define NRF_SYSCTRL_RAMC110                     NRF_SYSCTRL_RAMC110_S
   #define NRF_SYSCTRL_RAMC111                     NRF_SYSCTRL_RAMC111_S
   #define NRF_SYSCTRL_SHA3                        NRF_SYSCTRL_SHA3_S
-  #define NRF_SYSCTRL_RAMC112                     NRF_SYSCTRL_RAMC112_S
-  #define NRF_SYSCTRL_RAMC113                     NRF_SYSCTRL_RAMC113_S
   #define NRF_SYSCTRL_PCGCS110                    NRF_SYSCTRL_PCGCS110_S
   #define NRF_SYSCTRL_PCGCM110                    NRF_SYSCTRL_PCGCM110_S
   #define NRF_SYSCTRL_EXMEE                       NRF_SYSCTRL_EXMEE_S
@@ -545,8 +546,6 @@ typedef enum {
   #define NRF_RAMC110                             NRF_SYSCTRL_RAMC110
   #define NRF_RAMC111                             NRF_SYSCTRL_RAMC111
   #define NRF_SHA3                                NRF_SYSCTRL_SHA3
-  #define NRF_RAMC112                             NRF_SYSCTRL_RAMC112
-  #define NRF_RAMC113                             NRF_SYSCTRL_RAMC113
   #define NRF_PCGCS110                            NRF_SYSCTRL_PCGCS110
   #define NRF_PCGCM110                            NRF_SYSCTRL_PCGCM110
   #define NRF_EXMEE                               NRF_SYSCTRL_EXMEE

@@ -17,6 +17,6 @@ Following table presents current MDK version for specified targets:
 |nrf9160   |8.53.1 External|
 |liliumsoc1|8.51.0 Gunillas|
 |liliumfp1 |8.46.0 Internal|
-|nrf9230   |8.50.0 Kitts   |
+|nrf9230   |8.51.0 Leavings|
 |nrf7140   |8.51.0 Jannex  |
 |moonlight |8.51.0 Dionysus|

@@ -190,37 +190,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_P0_NS_BASE                    0x4F938000UL
 #define NRF_P1_NS_BASE                    0x4F938200UL
 #define NRF_P2_NS_BASE                    0x4F938400UL
-#define NRF_P3_NS_BASE                    0x4F938600UL
-#define NRF_P4_NS_BASE                    0x4F938800UL
-#define NRF_P5_NS_BASE                    0x4F938A00UL
 #define NRF_P6_NS_BASE                    0x4F938C00UL
-#define NRF_P7_NS_BASE                    0x4F938E00UL
 #define NRF_P0_S_BASE                     0x5F938000UL
 #define NRF_P1_S_BASE                     0x5F938200UL
 #define NRF_P2_S_BASE                     0x5F938400UL
-#define NRF_P3_S_BASE                     0x5F938600UL
-#define NRF_P4_S_BASE                     0x5F938800UL
-#define NRF_P5_S_BASE                     0x5F938A00UL
 #define NRF_P6_S_BASE                     0x5F938C00UL
-#define NRF_P7_S_BASE                     0x5F938E00UL
 #define NRF_P8_NS_BASE                    0x4F939000UL
 #define NRF_P9_NS_BASE                    0x4F939200UL
 #define NRF_P10_NS_BASE                   0x4F939400UL
 #define NRF_P11_NS_BASE                   0x4F939600UL
 #define NRF_P12_NS_BASE                   0x4F939800UL
 #define NRF_P13_NS_BASE                   0x4F939A00UL
-#define NRF_P14_NS_BASE                   0x4F939C00UL
 #define NRF_GPIOINTERNAL_NS_BASE          0x4F939E00UL
-#define NRF_P15_NS_BASE                   0x4F939E00UL
 #define NRF_P8_S_BASE                     0x5F939000UL
 #define NRF_P9_S_BASE                     0x5F939200UL
 #define NRF_P10_S_BASE                    0x5F939400UL
 #define NRF_P11_S_BASE                    0x5F939600UL
 #define NRF_P12_S_BASE                    0x5F939800UL
 #define NRF_P13_S_BASE                    0x5F939A00UL
-#define NRF_P14_S_BASE                    0x5F939C00UL
 #define NRF_GPIOINTERNAL_S_BASE           0x5F939E00UL
-#define NRF_P15_S_BASE                    0x5F939E00UL
 #define NRF_RESETHUB_S_BASE               0x5F949000UL
 #define NRF_DPPIC131_NS_BASE              0x4F981000UL
 #define NRF_DPPIC131_S_BASE               0x5F981000UL
@@ -477,37 +465,25 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NRF_P0_NS                         ((NRF_GPIO_Type*)                     NRF_P0_NS_BASE)
 #define NRF_P1_NS                         ((NRF_GPIO_Type*)                     NRF_P1_NS_BASE)
 #define NRF_P2_NS                         ((NRF_GPIO_Type*)                     NRF_P2_NS_BASE)
-#define NRF_P3_NS                         ((NRF_GPIO_Type*)                     NRF_P3_NS_BASE)
-#define NRF_P4_NS                         ((NRF_GPIO_Type*)                     NRF_P4_NS_BASE)
-#define NRF_P5_NS                         ((NRF_GPIO_Type*)                     NRF_P5_NS_BASE)
 #define NRF_P6_NS                         ((NRF_GPIO_Type*)                     NRF_P6_NS_BASE)
-#define NRF_P7_NS                         ((NRF_GPIO_Type*)                     NRF_P7_NS_BASE)
 #define NRF_P0_S                          ((NRF_GPIO_Type*)                     NRF_P0_S_BASE)
 #define NRF_P1_S                          ((NRF_GPIO_Type*)                     NRF_P1_S_BASE)
 #define NRF_P2_S                          ((NRF_GPIO_Type*)                     NRF_P2_S_BASE)
-#define NRF_P3_S                          ((NRF_GPIO_Type*)                     NRF_P3_S_BASE)
-#define NRF_P4_S                          ((NRF_GPIO_Type*)                     NRF_P4_S_BASE)
-#define NRF_P5_S                          ((NRF_GPIO_Type*)                     NRF_P5_S_BASE)
 #define NRF_P6_S                          ((NRF_GPIO_Type*)                     NRF_P6_S_BASE)
-#define NRF_P7_S                          ((NRF_GPIO_Type*)                     NRF_P7_S_BASE)
 #define NRF_P8_NS                         ((NRF_GPIO_Type*)                     NRF_P8_NS_BASE)
 #define NRF_P9_NS                         ((NRF_GPIO_Type*)                     NRF_P9_NS_BASE)
 #define NRF_P10_NS                        ((NRF_GPIO_Type*)                     NRF_P10_NS_BASE)
 #define NRF_P11_NS                        ((NRF_GPIO_Type*)                     NRF_P11_NS_BASE)
 #define NRF_P12_NS                        ((NRF_GPIO_Type*)                     NRF_P12_NS_BASE)
 #define NRF_P13_NS                        ((NRF_GPIO_Type*)                     NRF_P13_NS_BASE)
-#define NRF_P14_NS                        ((NRF_GPIO_Type*)                     NRF_P14_NS_BASE)
 #define NRF_GPIOINTERNAL_NS               ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNAL_NS_BASE)
-#define NRF_P15_NS                        ((NRF_GPIO_Type*)                     NRF_P15_NS_BASE)
 #define NRF_P8_S                          ((NRF_GPIO_Type*)                     NRF_P8_S_BASE)
 #define NRF_P9_S                          ((NRF_GPIO_Type*)                     NRF_P9_S_BASE)
 #define NRF_P10_S                         ((NRF_GPIO_Type*)                     NRF_P10_S_BASE)
 #define NRF_P11_S                         ((NRF_GPIO_Type*)                     NRF_P11_S_BASE)
 #define NRF_P12_S                         ((NRF_GPIO_Type*)                     NRF_P12_S_BASE)
 #define NRF_P13_S                         ((NRF_GPIO_Type*)                     NRF_P13_S_BASE)
-#define NRF_P14_S                         ((NRF_GPIO_Type*)                     NRF_P14_S_BASE)
 #define NRF_GPIOINTERNAL_S                ((NRF_GPIOINTERNAL_Type*)             NRF_GPIOINTERNAL_S_BASE)
-#define NRF_P15_S                         ((NRF_GPIO_Type*)                     NRF_P15_S_BASE)
 #define NRF_RESETHUB_S                    ((NRF_RESETHUB_Type*)                 NRF_RESETHUB_S_BASE)
 #define NRF_DPPIC131_NS                   ((NRF_DPPIC_Type*)                    NRF_DPPIC131_NS_BASE)
 #define NRF_DPPIC131_S                    ((NRF_DPPIC_Type*)                    NRF_DPPIC131_S_BASE)
@@ -722,20 +698,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_P0                                  NRF_P0_NS
   #define NRF_P1                                  NRF_P1_NS
   #define NRF_P2                                  NRF_P2_NS
-  #define NRF_P3                                  NRF_P3_NS
-  #define NRF_P4                                  NRF_P4_NS
-  #define NRF_P5                                  NRF_P5_NS
   #define NRF_P6                                  NRF_P6_NS
-  #define NRF_P7                                  NRF_P7_NS
   #define NRF_P8                                  NRF_P8_NS
   #define NRF_P9                                  NRF_P9_NS
   #define NRF_P10                                 NRF_P10_NS
   #define NRF_P11                                 NRF_P11_NS
   #define NRF_P12                                 NRF_P12_NS
   #define NRF_P13                                 NRF_P13_NS
-  #define NRF_P14                                 NRF_P14_NS
   #define NRF_GPIOINTERNAL                        NRF_GPIOINTERNAL_NS
-  #define NRF_P15                                 NRF_P15_NS
   #define NRF_DPPIC131                            NRF_DPPIC131_NS
   #define NRF_SAADC                               NRF_SAADC_NS
   #define NRF_COMP                                NRF_COMP_NS
@@ -878,20 +848,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define NRF_P0                                  NRF_P0_S
   #define NRF_P1                                  NRF_P1_S
   #define NRF_P2                                  NRF_P2_S
-  #define NRF_P3                                  NRF_P3_S
-  #define NRF_P4                                  NRF_P4_S
-  #define NRF_P5                                  NRF_P5_S
   #define NRF_P6                                  NRF_P6_S
-  #define NRF_P7                                  NRF_P7_S
   #define NRF_P8                                  NRF_P8_S
   #define NRF_P9                                  NRF_P9_S
   #define NRF_P10                                 NRF_P10_S
   #define NRF_P11                                 NRF_P11_S
   #define NRF_P12                                 NRF_P12_S
   #define NRF_P13                                 NRF_P13_S
-  #define NRF_P14                                 NRF_P14_S
   #define NRF_GPIOINTERNAL                        NRF_GPIOINTERNAL_S
-  #define NRF_P15                                 NRF_P15_S
   #define NRF_RESETHUB                            NRF_RESETHUB_S
   #define NRF_DPPIC131                            NRF_DPPIC131_S
   #define NRF_SAADC                               NRF_SAADC_S

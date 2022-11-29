@@ -59,14 +59,8 @@ typedef enum {
   Reset_IRQn                             = -15,      /*!< -15 Reset Vector, invoked on Power up and warm reset                 */
   NonMaskableInt_IRQn                    = -14,      /*!< -14 Non maskable Interrupt, cannot be stopped or preempted           */
   HardFault_IRQn                         = -13,      /*!< -13 Hard Fault, all classes of Fault                                 */
-  MemoryManagement_IRQn                  = -12,      /*!< -12 Memory Management, MPU mismatch, including Access Violation and No
-                                                          Match*/                                                                 
-  BusFault_IRQn                          = -11,      /*!< -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory
-                                                          related Fault*/                                                         
-  UsageFault_IRQn                        = -10,      /*!< -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition    */
   SecureFault_IRQn                       = -9,       /*!<  -9 Secure Fault Handler                                             */
   SVCall_IRQn                            = -5,       /*!<  -5 System Service Call via SVC instruction                          */
-  DebugMonitor_IRQn                      = -4,       /*!<  -4 Debug Monitor                                                    */
   PendSV_IRQn                            = -2,       /*!<  -2 Pendable request for system service                              */
   SysTick_IRQn                           = -1,       /*!<  -1 System Tick Timer                                                */
 /* ============================================== Processor Specific Interrupts ============================================== */
@@ -153,20 +147,20 @@ typedef enum {
 /* ================                           Processor and Core Peripheral Section                           ================ */
 /* =========================================================================================================================== */
 
-/* =========================== Configuration of the ARM Cortex-M33 Processor and Core Peripherals ============================ */
-#define __CM33_REV                  r0p4             /*!< CM33 Core Revision                                                   */
-#define __DSP_PRESENT                  1             /*!< DSP present or not                                                   */
-#define __NVIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
+/* ============================ Configuration of the ARM Cortex-M0 Processor and Core Peripherals ============================ */
+#define __CM0_REV                   r0p1             /*!< CM0 Core Revision                                                    */
+#define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
+#define __NVIC_PRIO_BITS               2             /*!< Number of Bits used for Priority Levels                              */
 #define __VTOR_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
-#define __FPU_PRESENT                  1             /*!< FPU present                                                          */
+#define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX              32             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            0             /*!< SAU present                                                          */
 #define __NUM_SAUREGIONS               0             /*!< Number of regions                                                    */
 
-#include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
+#include "core_cm0.h"                                /*!< ARM Cortex-M0 processor and core peripherals                         */
 #include "system_nrf.h"                              /*!< nrf9230_isimcore System Library                                      */
 
 #endif                                               /*!< NRF_ISIMCORE                                                         */

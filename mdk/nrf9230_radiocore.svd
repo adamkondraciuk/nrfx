@@ -62,7 +62,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <deviceNumInterrupts>480</deviceNumInterrupts>
     <sauNumRegions>4</sauNumRegions>
   </cpu>
-  <headerSystemFilename>system_nrf92</headerSystemFilename>
+  <headerSystemFilename>system_nrf9230_radiocore</headerSystemFilename>
   <vendorExtensions>
     <MaxInterrupts>480</MaxInterrupts>
   </vendorExtensions>
@@ -12887,6 +12887,421 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
+        <cluster>
+          <name>TRACE</name>
+          <description>Unspecified</description>
+          <headerStructName>UICR_TRACE</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x740</addressOffset>
+          <cluster>
+            <name>ETBSINK</name>
+            <description>Unspecified</description>
+            <headerStructName>UICR_TRACE_ETBSINK</headerStructName>
+            <access>read-write</access>
+            <addressOffset>0x000</addressOffset>
+            <register>
+              <name>SOURCES</name>
+              <description>Unspecified</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>STMMAINCORE</name>
+                  <description>STM trace from the domain main CPU</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMMAINCORE</name>
+                  <description>ETM trace from the domain main CPU</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMHWEVENTS</name>
+                  <description>STM HW events trace</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMPPR</name>
+                  <description>STM trace from PPR CPU</description>
+                  <lsb>3</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMFLPR</name>
+                  <description>STM trace from FLPR CPU</description>
+                  <lsb>4</lsb>
+                  <msb>4</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMBBPR</name>
+                  <description>STM trace from BBPR CPU</description>
+                  <lsb>5</lsb>
+                  <msb>5</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+          <cluster>
+            <name>TPIUSINK</name>
+            <description>Unspecified</description>
+            <headerStructName>UICR_TRACE_TPIUSINK</headerStructName>
+            <access>read-write</access>
+            <addressOffset>0x004</addressOffset>
+            <register>
+              <name>SOURCES</name>
+              <description>Unspecified</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>STMMAINCORE</name>
+                  <description>STM trace from the domain main CPU</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMMAINCORE</name>
+                  <description>ETM trace from the domain main CPU</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMHWEVENTS</name>
+                  <description>STM HW events trace</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMPPR</name>
+                  <description>STM trace from PPR CPU</description>
+                  <lsb>3</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMFLPR</name>
+                  <description>STM trace from FLPR CPU</description>
+                  <lsb>4</lsb>
+                  <msb>4</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMBBPR</name>
+                  <description>STM trace from BBPR CPU</description>
+                  <lsb>5</lsb>
+                  <msb>5</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+          <cluster>
+            <name>ETRSINK</name>
+            <description>Unspecified</description>
+            <headerStructName>UICR_TRACE_ETRSINK</headerStructName>
+            <access>read-write</access>
+            <addressOffset>0x008</addressOffset>
+            <register>
+              <name>SOURCES</name>
+              <description>Unspecified</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-write</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>STMMAINCORE</name>
+                  <description>STM trace from the domain main CPU</description>
+                  <lsb>0</lsb>
+                  <msb>0</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>ETMMAINCORE</name>
+                  <description>ETM trace from the domain main CPU</description>
+                  <lsb>1</lsb>
+                  <msb>1</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMHWEVENTS</name>
+                  <description>STM HW events trace</description>
+                  <lsb>2</lsb>
+                  <msb>2</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMPPR</name>
+                  <description>STM trace from PPR CPU</description>
+                  <lsb>3</lsb>
+                  <msb>3</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMFLPR</name>
+                  <description>STM trace from FLPR CPU</description>
+                  <lsb>4</lsb>
+                  <msb>4</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+                <field>
+                  <name>STMBBPR</name>
+                  <description>STM trace from BBPR CPU</description>
+                  <lsb>5</lsb>
+                  <msb>5</msb>
+                  <enumeratedValues>
+                    <enumeratedValue>
+                      <name>NotRequested</name>
+                      <description>Not Requested</description>
+                      <value>0x1</value>
+                    </enumeratedValue>
+                    <enumeratedValue>
+                      <name>Requested</name>
+                      <description>Requested</description>
+                      <value>0x0</value>
+                    </enumeratedValue>
+                  </enumeratedValues>
+                </field>
+              </fields>
+            </register>
+          </cluster>
+          <register>
+            <name>PORTCONFIG</name>
+            <description>Trace port speed configuration</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>PORTCONFIG</name>
+                <lsb>0</lsb>
+                <msb>1</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>FullSpeed</name>
+                    <description>Full speed</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>HalfSpeed</name>
+                    <description>Half speed</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>QuarterSpeed</name>
+                    <description>One quarter speed</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>EightSpeed</name>
+                    <description>One eigth speed</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
         <register>
           <name>INITSVTOR</name>
           <description>Initial value of the secure VTOR (Vector Table Offset Register) after CPU reset.</description>
@@ -13746,7 +14161,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>PROGVERSION1</name>
+                  <name>VAL</name>
                   <description>CP1 test program version</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
@@ -13761,8 +14176,68 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
-                  <name>PROGVERSION2</name>
+                  <name>VAL</name>
                   <description>CP2 test program version</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID1</name>
+              <description>CP1 pass ID.</description>
+              <addressOffset>0x014</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP1 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID2</name>
+              <description>CP2 pass ID.</description>
+              <addressOffset>0x018</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP2 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP1</name>
+              <description>Timestamp for when CP1 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x01C</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP1 timestamp</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP2</name>
+              <description>Timestamp for when CP2 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x020</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>CP2 timestamp</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -13774,7 +14249,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_PRODTEST_FT</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x014</addressOffset>
+            <addressOffset>0x024</addressOffset>
             <register>
               <name>PROGVERSION1</name>
               <description>FT1 test program version.</description>
@@ -13792,14 +14267,74 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </register>
             <register>
               <name>PROGVERSION2</name>
-              <description>FT2 test program version.</description>
+              <description>FT2/EQA test program version.</description>
               <addressOffset>0x004</addressOffset>
               <access>read-only</access>
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
                   <name>PROGVERSION2</name>
-                  <description>FT2 test program version</description>
+                  <description>FT2/EQA test program version</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID1</name>
+              <description>FT1 pass ID.</description>
+              <addressOffset>0x008</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT1 pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>PASSID2</name>
+              <description>FT2/EQA pass ID.</description>
+              <addressOffset>0x00C</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT2/EQA pass ID.</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP1</name>
+              <description>Timestamp for when FT1 starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x010</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT1 timestamp</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
+            <register>
+              <name>TIMESTAMP2</name>
+              <description>Timestamp for when FT2/EQA starts or ends (YYYYMMDDTHHMMSS)</description>
+              <addressOffset>0x014</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>VAL</name>
+                  <description>FT2/EQA timestamp</description>
                   <lsb>0</lsb>
                   <msb>31</msb>
                 </field>
@@ -14090,7 +14625,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_AUDIOPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x54</addressOffset>
+              <addressOffset>0x58</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14119,7 +14654,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_USBHSPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x58</addressOffset>
+              <addressOffset>0x5C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14148,7 +14683,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x5C</addressOffset>
+              <addressOffset>0x60</addressOffset>
               <cluster>
                 <name>CONFIG</name>
                 <description>Unspecified</description>
@@ -14214,7 +14749,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_OSCRFR</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x68</addressOffset>
+              <addressOffset>0x6C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14258,7 +14793,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xD8</addressOffset>
+              <addressOffset>0xDC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14332,7 +14867,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xE8</addressOffset>
+              <addressOffset>0xEC</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14406,7 +14941,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGUSB</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x108</addressOffset>
+              <addressOffset>0x10C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14480,7 +15015,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x118</addressOffset>
+              <addressOffset>0x11C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14546,7 +15081,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x124</addressOffset>
+              <addressOffset>0x128</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14590,7 +15125,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x12C</addressOffset>
+              <addressOffset>0x130</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14634,7 +15169,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x138</addressOffset>
+              <addressOffset>0x13C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14663,7 +15198,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x13C</addressOffset>
+              <addressOffset>0x140</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14726,7 +15261,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL121</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x170</addressOffset>
+              <addressOffset>0x174</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -14789,13 +15324,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x1A4</addressOffset>
+              <addressOffset>0x1A8</addressOffset>
               <cluster>
-                <dim>44</dim>
+                <dim>19</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>REPAIR[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>REPAIR</headerStructName>
+                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -14821,10 +15356,10 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <description>Unspecified</description>
                 <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
-                <addressOffset>0xB0</addressOffset>
+                <addressOffset>0x4C</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Description cluster: Trim value for SYSCTRL.MEMCONF120.TRIM</description>
+                  <description>Description cluster: Trim value for SYSCTRL.MEMCONF120.BLOCKTYPE[n].TRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -14844,7 +15379,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x274</addressOffset>
+              <addressOffset>0x214</addressOffset>
               <cluster>
                 <dim>2</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -14855,7 +15390,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Description cluster: Trim value for SYSCTRL.MEMCONF130.TRIM</description>
+                  <description>Description cluster: Trim value for SYSCTRL.MEMCONF130.BLOCKTYPE[n].TRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -14876,7 +15411,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_GLOBAL</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x27C</addressOffset>
+            <addressOffset>0x21C</addressOffset>
             <cluster>
               <name>SAADC</name>
               <description>Unspecified</description>
@@ -14970,11 +15505,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <access>read-write</access>
               <addressOffset>0x30</addressOffset>
               <register>
+                <name>CALIB</name>
+                <description>Trim value for GLOBAL.TEMP.CALIB</description>
+                <addressOffset>0x0</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
                 <dim>0x6</dim>
                 <dimIncrement>0x4</dimIncrement>
                 <name>A[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.A</description>
-                <addressOffset>0x0</addressOffset>
+                <addressOffset>0x4</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -14991,7 +15541,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>B[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.B</description>
-                <addressOffset>0x18</addressOffset>
+                <addressOffset>0x1C</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -15008,7 +15558,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x4</dimIncrement>
                 <name>T[%s]</name>
                 <description>Description collection: Trim value for GLOBAL.TEMP.T</description>
-                <addressOffset>0x30</addressOffset>
+                <addressOffset>0x34</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -15026,7 +15576,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_CANPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x78</addressOffset>
+              <addressOffset>0x7C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
@@ -15055,7 +15605,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x7C</addressOffset>
+              <addressOffset>0x80</addressOffset>
               <cluster>
                 <name>PORTCNF</name>
                 <description>Unspecified</description>
@@ -15088,13 +15638,95 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </cluster>
               </cluster>
             </cluster>
+            <cluster>
+              <name>COMP</name>
+              <description>Unspecified</description>
+              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_COMP</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x88</addressOffset>
+              <register>
+                <name>REFTRIM</name>
+                <description>Trim value for GLOBAL.COMP.REFTRIM</description>
+                <addressOffset>0x0</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL80KCOARSE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL80KCOARSE</description>
+                <addressOffset>0x4</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL80KFINE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL80KFINE</description>
+                <addressOffset>0x8</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL6M4COARSE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL6M4COARSE</description>
+                <addressOffset>0xC</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>RCAL6M4FINE</name>
+                <description>Trim value for GLOBAL.COMP.RCAL6M4FINE</description>
+                <addressOffset>0x10</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+            </cluster>
           </cluster>
           <cluster>
             <name>APPLICATION</name>
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_APPLICATION</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x300</addressOffset>
+            <addressOffset>0x2B8</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -15174,7 +15806,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Description cluster: Trim value for APPLICATION.MEMCONF.TRIM</description>
+                  <description>Description cluster: Trim value for APPLICATION.MEMCONF.BLOCKTYPE[n].TRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15195,7 +15827,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x340</addressOffset>
+            <addressOffset>0x2F8</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -15275,7 +15907,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <addressOffset>0x0</addressOffset>
                 <register>
                   <name>TRIM</name>
-                  <description>Description cluster: Trim value for RADIOCORE.MEMCONF.TRIM</description>
+                  <description>Description cluster: Trim value for RADIOCORE.MEMCONF.BLOCKTYPE[n].TRIM</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -15511,11 +16143,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_COMMON</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x3F8</addressOffset>
+            <addressOffset>0x3F4</addressOffset>
+            <register>
+              <name>FFFF</name>
+              <description>Value to be written to multibit MIRROR register in MMIs (MIRROR=1)</description>
+              <addressOffset>0x000</addressOffset>
+              <access>read-only</access>
+              <resetValue>0xFFFFFFFF</resetValue>
+              <fields>
+                <field>
+                  <name>FFFF</name>
+                  <description>Mirror register value</description>
+                  <lsb>0</lsb>
+                  <msb>31</msb>
+                </field>
+              </fields>
+            </register>
             <register>
               <name>ZERO</name>
               <description>Value to be written to MIRROR register in MMIs (MIRROR=0)</description>
-              <addressOffset>0x000</addressOffset>
+              <addressOffset>0x004</addressOffset>
               <access>read-only</access>
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
@@ -15530,7 +16177,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <register>
               <name>ONE</name>
               <description>Value to be written to MIRROR register in MMIs (MIRROR=1)</description>
-              <addressOffset>0x004</addressOffset>
+              <addressOffset>0x008</addressOffset>
               <access>read-only</access>
               <resetValue>0xFFFFFFFF</resetValue>
               <fields>
@@ -16561,11 +17208,26 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </fields>
               </register>
               <register>
+                <name>INTD25C</name>
+                <description>Trim value for CELLRF.SENSORADC.INTD25C</description>
+                <addressOffset>0x01C</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
                 <dim>0x4</dim>
                 <dimIncrement>0x4</dimIncrement>
                 <name>TRIMSPARE[%s]</name>
                 <description>Description collection: Trim value for CELLRF.RFPLL.TRIMSPARE[n]</description>
-                <addressOffset>0x01C</addressOffset>
+                <addressOffset>0x020</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -16583,7 +17245,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <description>Unspecified</description>
               <headerStructName>GLOBAL_FICR_TRIM_CELLRF_COMMONTRIM</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x120</addressOffset>
+              <addressOffset>0x124</addressOffset>
               <cluster>
                 <name>TX</name>
                 <description>Unspecified</description>
@@ -16724,7 +17386,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <description>Unspecified</description>
             <headerStructName>GLOBAL_FICR_TRIM_ISIMCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x6D8</addressOffset>
+            <addressOffset>0x6DC</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
@@ -16864,7 +17526,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>AHMAM005</name>
-                <description>AhmaRf M0RAM Ram 5</description>
+                <description>AhmaRf M0RAM Ram 5 bits 4:7</description>
                 <lsb>28</lsb>
                 <msb>31</msb>
               </field>
@@ -16879,7 +17541,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>AHMAM005</name>
-                <description>AhmaRf M0RAM Ram 5</description>
+                <description>AhmaRf M0RAM Ram 5 bits 0:3</description>
                 <lsb>0</lsb>
                 <msb>3</msb>
               </field>
@@ -16903,7 +17565,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>AHMAM001</name>
-                <description>AhmaRf M0RAM Ram 1</description>
+                <description>AhmaRf M0RAM Ram 1 bits 4:7</description>
                 <lsb>28</lsb>
                 <msb>31</msb>
               </field>
@@ -16918,7 +17580,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <fields>
               <field>
                 <name>AHMAM001</name>
-                <description>AhmaRf M0RAM Ram 1</description>
+                <description>AhmaRf M0RAM Ram 1 bits 0:3</description>
                 <lsb>0</lsb>
                 <msb>3</msb>
               </field>
@@ -16935,45 +17597,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>12</msb>
               </field>
               <field>
-                <name>LTEDSPLSRAM107</name>
-                <description>LteDsp LS_RAM1 Ram 7</description>
-                <lsb>13</lsb>
-                <msb>20</msb>
-              </field>
-              <field>
-                <name>LTEDSPLSRAM106</name>
-                <description>LteDsp LS_RAM1 Ram 6</description>
-                <lsb>21</lsb>
-                <msb>28</msb>
-              </field>
-              <field>
-                <name>LTEDSPLSRAM105</name>
-                <description>LteDsp LS_RAM1 Ram 5</description>
-                <lsb>29</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR3</name>
-            <description>SRAM repair register 3</description>
-            <addressOffset>0x00C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>LTEDSPLSRAM105</name>
-                <description>LteDsp LS_RAM1 Ram 5</description>
-                <lsb>0</lsb>
-                <msb>4</msb>
-              </field>
-              <field>
-                <name>LTEDSPLSRAM104</name>
-                <description>LteDsp LS_RAM1 Ram 4</description>
-                <lsb>5</lsb>
-                <msb>12</msb>
-              </field>
-              <field>
                 <name>LTEDSPLSRAM103</name>
                 <description>LteDsp LS_RAM1 Ram 3</description>
                 <lsb>13</lsb>
@@ -16987,22 +17610,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>LTEDSPLSRAM101</name>
-                <description>LteDsp LS_RAM1 Ram 1</description>
+                <description>LteDsp LS_RAM1 Ram 1 bits 5:7</description>
                 <lsb>29</lsb>
                 <msb>31</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>REPAIR4</name>
-            <description>SRAM repair register 4</description>
-            <addressOffset>0x010</addressOffset>
+            <name>REPAIR3</name>
+            <description>SRAM repair register 3</description>
+            <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>LTEDSPLSRAM101</name>
-                <description>LteDsp LS_RAM1 Ram 1</description>
+                <description>LteDsp LS_RAM1 Ram 1 bits 0:4</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
@@ -17026,22 +17649,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>LTEDSPLSRAM005</name>
-                <description>LteDsp LS_RAM0 Ram 5</description>
+                <description>LteDsp LS_RAM0 Ram 5 bits 5:7</description>
                 <lsb>29</lsb>
                 <msb>31</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>REPAIR5</name>
-            <description>SRAM repair register 5</description>
-            <addressOffset>0x014</addressOffset>
+            <name>REPAIR4</name>
+            <description>SRAM repair register 4</description>
+            <addressOffset>0x010</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>LTEDSPLSRAM005</name>
-                <description>LteDsp LS_RAM0 Ram 5</description>
+                <description>LteDsp LS_RAM0 Ram 5 bits 0:4</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
@@ -17065,22 +17688,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>LTEDSPLSRAM001</name>
-                <description>LteDsp LS_RAM0 Ram 1</description>
+                <description>LteDsp LS_RAM0 Ram 1 bits 5:7</description>
                 <lsb>29</lsb>
                 <msb>31</msb>
               </field>
             </fields>
           </register>
           <register>
-            <name>REPAIR6</name>
-            <description>SRAM repair register 6</description>
-            <addressOffset>0x018</addressOffset>
+            <name>REPAIR5</name>
+            <description>SRAM repair register 5</description>
+            <addressOffset>0x014</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>LTEDSPLSRAM001</name>
-                <description>LteDsp LS_RAM0 Ram 1</description>
+                <description>LteDsp LS_RAM0 Ram 1 bits 0:4</description>
                 <lsb>0</lsb>
                 <msb>4</msb>
               </field>
@@ -17097,20 +17720,59 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <msb>13</msb>
               </field>
               <field>
-                <name>GDRAMCTRL0109</name>
-                <description>GD RAMC_01 Ram 9</description>
+                <name>GDRAMCTRL0102</name>
+                <description>GD RAMC_01 Ram 2</description>
                 <lsb>14</lsb>
                 <msb>21</msb>
               </field>
               <field>
-                <name>GDRAMCTRL0108</name>
-                <description>GD RAMC_01 Ram 8</description>
+                <name>GDRAMCTRL0101</name>
+                <description>GD RAMC_01 Ram 1</description>
                 <lsb>22</lsb>
                 <msb>29</msb>
               </field>
               <field>
-                <name>GDRAMCTRL0107</name>
-                <description>GD RAMC_01 Ram 7</description>
+                <name>GDRAMCTRL0100</name>
+                <description>GD RAMC_01 Ram 0 bits 6:7</description>
+                <lsb>30</lsb>
+                <msb>31</msb>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>REPAIR6</name>
+            <description>SRAM repair register 6</description>
+            <addressOffset>0x018</addressOffset>
+            <access>read-write</access>
+            <resetValue>0x00000000</resetValue>
+            <fields>
+              <field>
+                <name>GDRAMCTRL0100</name>
+                <description>GD RAMC_01 Ram 0 bits 0:5</description>
+                <lsb>0</lsb>
+                <msb>5</msb>
+              </field>
+              <field>
+                <name>GDRAMCTRL0003</name>
+                <description>GD RAMC_00 Ram 3</description>
+                <lsb>6</lsb>
+                <msb>13</msb>
+              </field>
+              <field>
+                <name>GDRAMCTRL0002</name>
+                <description>GD RAMC_00 Ram 2</description>
+                <lsb>14</lsb>
+                <msb>21</msb>
+              </field>
+              <field>
+                <name>GDRAMCTRL0001</name>
+                <description>GD RAMC_00 Ram 1</description>
+                <lsb>22</lsb>
+                <msb>29</msb>
+              </field>
+              <field>
+                <name>GDRAMCTRL0000</name>
+                <description>GD RAMC_00 Ram 0 bits 6:7</description>
                 <lsb>30</lsb>
                 <msb>31</msb>
               </field>
@@ -17124,410 +17786,35 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
-                <name>GDRAMCTRL0107</name>
-                <description>GD RAMC_01 Ram 7</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0106</name>
-                <description>GD RAMC_01 Ram 6</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0105</name>
-                <description>GD RAMC_01 Ram 5</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0104</name>
-                <description>GD RAMC_01 Ram 4</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0103</name>
-                <description>GD RAMC_01 Ram 3</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR8</name>
-            <description>SRAM repair register 8</description>
-            <addressOffset>0x020</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0103</name>
-                <description>GD RAMC_01 Ram 3</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0102</name>
-                <description>GD RAMC_01 Ram 2</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0101</name>
-                <description>GD RAMC_01 Ram 1</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0111</name>
-                <description>GD RAMC_01 Ram 11</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0110</name>
-                <description>GD RAMC_01 Ram 10</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR9</name>
-            <description>SRAM repair register 9</description>
-            <addressOffset>0x024</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0110</name>
-                <description>GD RAMC_01 Ram 10</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0100</name>
-                <description>GD RAMC_01 Ram 0</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0009</name>
-                <description>GD RAMC_00 Ram 9</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0008</name>
-                <description>GD RAMC_00 Ram 8</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0007</name>
-                <description>GD RAMC_00 Ram 7</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR10</name>
-            <description>SRAM repair register 10</description>
-            <addressOffset>0x028</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0007</name>
-                <description>GD RAMC_00 Ram 7</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0006</name>
-                <description>GD RAMC_00 Ram 6</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0005</name>
-                <description>GD RAMC_00 Ram 5</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0004</name>
-                <description>GD RAMC_00 Ram 4</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0003</name>
-                <description>GD RAMC_00 Ram 3</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR11</name>
-            <description>SRAM repair register 11</description>
-            <addressOffset>0x02C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0003</name>
-                <description>GD RAMC_00 Ram 3</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0002</name>
-                <description>GD RAMC_00 Ram 2</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0001</name>
-                <description>GD RAMC_00 Ram 1</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0015</name>
-                <description>GD RAMC_00 Ram 15</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0014</name>
-                <description>GD RAMC_00 Ram 14</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR12</name>
-            <description>SRAM repair register 12</description>
-            <addressOffset>0x030</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0014</name>
-                <description>GD RAMC_00 Ram 14</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0013</name>
-                <description>GD RAMC_00 Ram 13</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0012</name>
-                <description>GD RAMC_00 Ram 12</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0011</name>
-                <description>GD RAMC_00 Ram 11</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDRAMCTRL0010</name>
-                <description>GD RAMC_00 Ram 10</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR13</name>
-            <description>SRAM repair register 13</description>
-            <addressOffset>0x034</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDRAMCTRL0010</name>
-                <description>GD RAMC_00 Ram 10</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
                 <name>GDRAMCTRL0000</name>
-                <description>GD RAMC_00 Ram 0</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM09</name>
-                <description>GD L2 Cache Data Ram 9</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM08</name>
-                <description>GD L2 Cache Data Ram 8</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM07</name>
-                <description>GD L2 Cache Data Ram 7</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR14</name>
-            <description>SRAM repair register 14</description>
-            <addressOffset>0x038</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDCACHERAM07</name>
-                <description>GD L2 Cache Data Ram 7</description>
+                <description>GD RAMC_00 Ram 0 bits 0:5</description>
                 <lsb>0</lsb>
                 <msb>5</msb>
               </field>
               <field>
-                <name>GDCACHERAM06</name>
-                <description>GD L2 Cache Data Ram 6</description>
+                <name>UNUSED</name>
+                <description>Unused repair boundary bits</description>
                 <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM05</name>
-                <description>GD L2 Cache Data Ram 5</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM04</name>
-                <description>GD L2 Cache Data Ram 4</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM03</name>
-                <description>GD L2 Cache Data Ram 3</description>
-                <lsb>30</lsb>
                 <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR15</name>
-            <description>SRAM repair register 15</description>
-            <addressOffset>0x03C</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDCACHERAM03</name>
-                <description>GD L2 Cache Data Ram 3</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM02</name>
-                <description>GD L2 Cache Data Ram 2</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM01</name>
-                <description>GD L2 Cache Data Ram 1</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM15</name>
-                <description>GD L2 Cache Data Ram 15</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM14</name>
-                <description>GD L2 Cache Data Ram 14</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR16</name>
-            <description>SRAM repair register 16</description>
-            <addressOffset>0x040</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDCACHERAM14</name>
-                <description>GD L2 Cache Data Ram 14</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM13</name>
-                <description>GD L2 Cache Data Ram 13</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM12</name>
-                <description>GD L2 Cache Data Ram 12</description>
-                <lsb>14</lsb>
-                <msb>21</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM11</name>
-                <description>GD L2 Cache Data Ram 11</description>
-                <lsb>22</lsb>
-                <msb>29</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM10</name>
-                <description>GD L2 Cache Data Ram 10</description>
-                <lsb>30</lsb>
-                <msb>31</msb>
-              </field>
-            </fields>
-          </register>
-          <register>
-            <name>REPAIR17</name>
-            <description>SRAM repair register 17</description>
-            <addressOffset>0x044</addressOffset>
-            <access>read-write</access>
-            <resetValue>0x00000000</resetValue>
-            <fields>
-              <field>
-                <name>GDCACHERAM10</name>
-                <description>GD L2 Cache Data Ram 10</description>
-                <lsb>0</lsb>
-                <msb>5</msb>
-              </field>
-              <field>
-                <name>GDCACHERAM00</name>
-                <description>GD L2 Cache Data Ram 0</description>
-                <lsb>6</lsb>
-                <msb>13</msb>
               </field>
             </fields>
           </register>
         </cluster>
+        <register>
+          <name>CRC32</name>
+          <description>CRC32 value for FICR (except this word)</description>
+          <addressOffset>0xBFC</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>VALUE</name>
+              <description>CRC32 value</description>
+              <lsb>0</lsb>
+              <msb>31</msb>
+            </field>
+          </fields>
+        </register>
       </registers>
     </peripheral>
     <peripheral>
@@ -73343,8 +73630,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <register>
                 <dim>0x10</dim>
                 <dimIncrement>0x4</dimIncrement>
-                <name>INTEN[%s]</name>
-                <description>Description collection: Configuration of features for INTEN register pair [(o * 2) + 1:o * 2] of Processor ID n</description>
+                <name>INTERRUPT[%s]</name>
+                <description>Description collection: Configuration of features for interrupt register pair [(o * 2) + 1:o * 2] of Processor ID n</description>
                 <addressOffset>0x080</addressOffset>
                 <access>read-write</access>
                 <resetValue>0x00000000</resetValue>
@@ -74315,6 +74602,39 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
         </cluster>
+        <register>
+          <name>EXTENDCLKREQ</name>
+          <description>Extend clock request configuration</description>
+          <addressOffset>0x418</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>INIT</name>
+              <description>Initial value of the down counter used for extending the clock request.</description>
+              <lsb>0</lsb>
+              <msb>15</msb>
+            </field>
+            <field>
+              <name>ENABLE</name>
+              <description>Enable the extend clock request feature</description>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disable</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enable</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
         <cluster>
           <name>RTCHOKE</name>
           <description>Real time choke configuration for AXI master port</description>
@@ -77238,14 +77558,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>TASKS_START[%s]</name>
-          <description>Description collection: Start operation.</description>
+          <description>Description collection: Start operation of job list n. Base address for successive TASKS_STARTs.</description>
           <addressOffset>0x008</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>TASKS_START</name>
-              <description>Start operation.</description>
+              <description>Start operation of job list n. Base address for successive TASKS_STARTs.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -77321,14 +77641,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_STARTED</name>
-          <description>Event indicating that the data transfer has started.</description>
+          <description>Event indicating that the source list processing has started.</description>
           <addressOffset>0x104</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_STARTED</name>
-              <description>Event indicating that the data transfer has started.</description>
+              <description>Event indicating that the source list processing has started.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -77435,14 +77755,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>SELECTJOBDONE</name>
-            <description>Event indicating that a job on the Source channel with event enable attribute bit active has been processed.</description>
+            <description>Event indicating that a job on the Source channel with EVENT_ENABLE active has been processed.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>SELECTJOBDONE</name>
-                <description>Event indicating that a job on the Source channel with event enable attribute bit active has been processed.</description>
+                <description>Event indicating that a job on the Source channel with EVENT_ENABLE active has been processed.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -77496,14 +77816,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>SELECTJOBDONE</name>
-            <description>Event indicating that a job on the Sink channel with event enable attribute bit active has been processed.</description>
+            <description>Event indicating that a job on the Sink channel with EVENT_ENABLE active has been processed.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>SELECTJOBDONE</name>
-                <description>Event indicating that a job on the Sink channel with event enable attribute bit active has been processed.</description>
+                <description>Event indicating that a job on the Sink channel with EVENT_ENABLE active has been processed.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -77526,14 +77846,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>EVENTS_COMPLETED[%s]</name>
-          <description>Description collection: Event indicating that the operation started by the task START[n] has been completed.</description>
+          <description>Description collection: Event indicating that the operation started by the task START[n] has been completed. Base address for successive EVENTS_COMPLETED.</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_COMPLETED</name>
-              <description>Event indicating that the operation started by the task START[n] has been completed.</description>
+              <description>Event indicating that the operation started by the task START[n] has been completed. Base address for successive EVENTS_COMPLETED.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -79382,7 +79702,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>ADDRESS</name>
-            <description>Latest address being accessed on the Source channel.</description>
+            <description>Latest address being accessed on the Source channel.If a bus error occurs, these registers will contain the address that cause the error.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -79397,7 +79717,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>JOBCOUNT</name>
-            <description>Number of completed jobs in the current Source descriptor list.</description>
+            <description>Number of completed jobs in the current Source descriptor list. This resets to 0 when a new joblist is started.</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -79476,7 +79796,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>ADDRESS</name>
-            <description>Latest address being accessed on the Sink channel.</description>
+            <description>Latest address being accessed on the Sink channel. If a bus error occurs, these registers will contain the address that cause the error.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -79491,7 +79811,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>JOBCOUNT</name>
-            <description>Number of completed jobs in the current Sink descriptor list.</description>
+            <description>Number of completed jobs in the current Sink descriptor list. This resets to 0 when a new joblist is started.</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -197615,7 +197935,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </field>
             <field>
               <name>RDY</name>
-              <description>Use RDY (ready) signal from the MRAM macro in addiiton to waitstates 
+              <description>Use RDY (ready) signal from the MRAM macro in addition to waitstates 
                   specified above. The data is read which ever of waitstate or RDY signal
                   comes first.</description>
               <lsb>8</lsb>
@@ -197810,7 +198130,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>TIMEOUTVALUE</name>
-                <description>Tiemout value for the power down.</description>
+                <description>Timeout value for the power down.</description>
                 <lsb>0</lsb>
                 <msb>15</msb>
               </field>
@@ -198687,7 +199007,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
-                <name>TrimCompleted</name>
+                <name>TRIMCOMPLETED</name>
                 <description>Trim configuration is completed.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
@@ -198736,7 +199056,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>ERASEWORD</name>
-                <description>Address of the word that needs to be erased in the MRAM.</description>
+                <description>Address of the word that needs to be erased.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -198766,7 +199086,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <fields>
               <field>
                 <name>ERASEAREA</name>
-                <description>Start of the address of the area to be erased.</description>
+                <description>Start address of the area to be erased.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
               </field>
@@ -198925,7 +199245,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValues>
               </field>
               <field>
-                <name>Lock</name>
+                <name>LOCK</name>
                 <description>Enables the lock for this register.</description>
                 <lsb>16</lsb>
                 <msb>16</msb>
@@ -198952,7 +199272,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Read is disabled. Ignores any other value written.</description>
+                    <description>Read is disabled.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -198971,7 +199291,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Write is disabled</description>
+                    <description>Write is disabled.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -198990,7 +199310,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Read is disabled</description>
+                    <description>Read is disabled.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -199009,7 +199329,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Disabled</name>
-                    <description>Write is disabled</description>
+                    <description>Write is disabled.</description>
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
@@ -199324,7 +199644,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </register>
             <register>
               <name>OUT</name>
-              <description>The ouput control signals from the MRAM</description>
+              <description>The output control signals from the MRAM</description>
               <addressOffset>0x004</addressOffset>
               <access>read-only</access>
               <resetValue>0x00000000</resetValue>
@@ -199425,7 +199745,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <field>
                 <name>YADDR</name>
                 <description>Control the YADDR lines. The YADDR is incremented on auto-increment
-        and the XADDR is incrmented by one when the YADDR overflow during increment.</description>
+        and the XADDR is incremented by one when the YADDR overflow during increment.</description>
                 <lsb>0</lsb>
                 <msb>6</msb>
               </field>
@@ -199790,7 +200110,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             <name>BURSTMODESTAT</name>
             <description>The burst mode operation status.</description>
             <addressOffset>0x054</addressOffset>
-            <access>read-write</access>
+            <access>read-only</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
@@ -203535,7 +203855,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Status of AUXPLL</description>
           <addressOffset>0x400</addressOffset>
           <access>read-only</access>
-          <resetValue>0x3BCD0000</resetValue>
+          <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>MODE</name>
@@ -206491,7 +206811,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>OTP read/write data</description>
               <addressOffset>0x010</addressOffset>
               <access>read-write</access>
-              <resetValue>0x00000000</resetValue>
+              <resetValue>0xFFFFFFFF</resetValue>
               <fields>
                 <field>
                   <name>DATA</name>
@@ -210290,14 +210610,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>TASKS_START[%s]</name>
-          <description>Description collection: Start operation.</description>
+          <description>Description collection: Start operation of job list n. Base address for successive TASKS_STARTs.</description>
           <addressOffset>0x008</addressOffset>
           <access>write-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>TASKS_START</name>
-              <description>Start operation.</description>
+              <description>Start operation of job list n. Base address for successive TASKS_STARTs.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -210373,14 +210693,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         </register>
         <register>
           <name>EVENTS_STARTED</name>
-          <description>Event indicating that the data transfer has started.</description>
+          <description>Event indicating that the source list processing has started.</description>
           <addressOffset>0x104</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_STARTED</name>
-              <description>Event indicating that the data transfer has started.</description>
+              <description>Event indicating that the source list processing has started.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -210487,14 +210807,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>SELECTJOBDONE</name>
-            <description>Event indicating that a job on the Source channel with event enable attribute bit active has been processed.</description>
+            <description>Event indicating that a job on the Source channel with EVENT_ENABLE active has been processed.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>SELECTJOBDONE</name>
-                <description>Event indicating that a job on the Source channel with event enable attribute bit active has been processed.</description>
+                <description>Event indicating that a job on the Source channel with EVENT_ENABLE active has been processed.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -210548,14 +210868,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>SELECTJOBDONE</name>
-            <description>Event indicating that a job on the Sink channel with event enable attribute bit active has been processed.</description>
+            <description>Event indicating that a job on the Sink channel with EVENT_ENABLE active has been processed.</description>
             <addressOffset>0x004</addressOffset>
             <access>read-write</access>
             <resetValue>0x00000000</resetValue>
             <fields>
               <field>
                 <name>SELECTJOBDONE</name>
-                <description>Event indicating that a job on the Sink channel with event enable attribute bit active has been processed.</description>
+                <description>Event indicating that a job on the Sink channel with EVENT_ENABLE active has been processed.</description>
                 <lsb>0</lsb>
                 <msb>0</msb>
                 <enumeratedValues>
@@ -210578,14 +210898,14 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dim>0x8</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>EVENTS_COMPLETED[%s]</name>
-          <description>Description collection: Event indicating that the operation started by the task START[n] has been completed.</description>
+          <description>Description collection: Event indicating that the operation started by the task START[n] has been completed. Base address for successive EVENTS_COMPLETED.</description>
           <addressOffset>0x120</addressOffset>
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
               <name>EVENTS_COMPLETED</name>
-              <description>Event indicating that the operation started by the task START[n] has been completed.</description>
+              <description>Event indicating that the operation started by the task START[n] has been completed. Base address for successive EVENTS_COMPLETED.</description>
               <lsb>0</lsb>
               <msb>0</msb>
               <enumeratedValues>
@@ -212434,7 +212754,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>ADDRESS</name>
-            <description>Latest address being accessed on the Source channel.</description>
+            <description>Latest address being accessed on the Source channel.If a bus error occurs, these registers will contain the address that cause the error.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -212449,7 +212769,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>JOBCOUNT</name>
-            <description>Number of completed jobs in the current Source descriptor list.</description>
+            <description>Number of completed jobs in the current Source descriptor list. This resets to 0 when a new joblist is started.</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -212528,7 +212848,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>ADDRESS</name>
-            <description>Latest address being accessed on the Sink channel.</description>
+            <description>Latest address being accessed on the Sink channel. If a bus error occurs, these registers will contain the address that cause the error.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -212543,7 +212863,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </register>
           <register>
             <name>JOBCOUNT</name>
-            <description>Number of completed jobs in the current Sink descriptor list.</description>
+            <description>Number of completed jobs in the current Sink descriptor list. This resets to 0 when a new joblist is started.</description>
             <addressOffset>0x00C</addressOffset>
             <access>read-only</access>
             <resetValue>0x00000000</resetValue>
@@ -226373,6 +226693,28 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <size>0x20</size>
       <registers>
         <register>
+          <name>TASKS_STOP</name>
+          <description>Stop TWI transaction. Must be issued while the TWI master is not suspended.</description>
+          <addressOffset>0x004</addressOffset>
+          <access>write-only</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>TASKS_STOP</name>
+              <description>Stop TWI transaction. Must be issued while the TWI master is not suspended.</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Trigger</name>
+                  <description>Trigger task</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>TASKS_SUSPEND</name>
           <description>Suspend TWI transaction</description>
           <addressOffset>0x00C</addressOffset>
@@ -226573,6 +226915,38 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </register>
           </cluster>
         </cluster>
+        <register>
+          <name>SUBSCRIBE_STOP</name>
+          <description>Subscribe configuration for task STOP</description>
+          <addressOffset>0x084</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that task STOP will subscribe to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable subscription</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable subscription</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
         <register>
           <name>SUBSCRIBE_SUSPEND</name>
           <description>Subscribe configuration for task SUSPEND</description>
@@ -237671,48 +238045,16 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <!--Split access-->
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P3_NS</name>
-      <description>GPIO Port 3</description>
-      <baseAddress>0x4F938600</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P4_NS</name>
-      <description>GPIO Port 4</description>
-      <baseAddress>0x4F938800</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P5_NS</name>
-      <description>GPIO Port 5</description>
-      <baseAddress>0x4F938A00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P6_NS</name>
-      <description>GPIO Port 6</description>
+      <description>GPIO Port 3</description>
       <baseAddress>0x4F938C00</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P7_NS</name>
-      <description>GPIO Port 7</description>
-      <baseAddress>0x4F938E00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P0_S</name>
-      <description>GPIO Port 8</description>
+      <description>GPIO Port 4</description>
       <baseAddress>0x5F938000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237720,7 +238062,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P1_S</name>
-      <description>GPIO Port 9</description>
+      <description>GPIO Port 5</description>
       <baseAddress>0x5F938200</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237728,55 +238070,23 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P2_S</name>
-      <description>GPIO Port 10</description>
+      <description>GPIO Port 6</description>
       <baseAddress>0x5F938400</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P3_S</name>
-      <description>GPIO Port 11</description>
-      <baseAddress>0x5F938600</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P4_S</name>
-      <description>GPIO Port 12</description>
-      <baseAddress>0x5F938800</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P5_S</name>
-      <description>GPIO Port 13</description>
-      <baseAddress>0x5F938A00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P6_S</name>
-      <description>GPIO Port 14</description>
+      <description>GPIO Port 7</description>
       <baseAddress>0x5F938C00</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P7_S</name>
-      <description>GPIO Port 15</description>
-      <baseAddress>0x5F938E00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P8_NS</name>
-      <description>GPIO Port 16</description>
+      <description>GPIO Port 8</description>
       <baseAddress>0x4F939000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237784,7 +238094,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P9_NS</name>
-      <description>GPIO Port 17</description>
+      <description>GPIO Port 9</description>
       <baseAddress>0x4F939200</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237792,7 +238102,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P10_NS</name>
-      <description>GPIO Port 18</description>
+      <description>GPIO Port 10</description>
       <baseAddress>0x4F939400</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237800,7 +238110,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P11_NS</name>
-      <description>GPIO Port 19</description>
+      <description>GPIO Port 11</description>
       <baseAddress>0x4F939600</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237808,7 +238118,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P12_NS</name>
-      <description>GPIO Port 20</description>
+      <description>GPIO Port 12</description>
       <baseAddress>0x4F939800</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -237816,16 +238126,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P13_NS</name>
-      <description>GPIO Port 21</description>
+      <description>GPIO Port 13</description>
       <baseAddress>0x4F939A00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P14_NS</name>
-      <description>GPIO Port 22</description>
-      <baseAddress>0x4F939C00</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
@@ -238033,17 +238335,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       </registers>
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P15_NS</name>
-      <description>GPIO Port 23</description>
-      <baseAddress>0x4F939E00</baseAddress>
-      <alternatePeripheral>GLOBAL_GPIOINTERNAL_NS</alternatePeripheral>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P8_S</name>
-      <description>GPIO Port 24</description>
+      <description>GPIO Port 14</description>
       <baseAddress>0x5F939000</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -238051,7 +238344,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P9_S</name>
-      <description>GPIO Port 25</description>
+      <description>GPIO Port 15</description>
       <baseAddress>0x5F939200</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -238059,7 +238352,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P10_S</name>
-      <description>GPIO Port 26</description>
+      <description>GPIO Port 16</description>
       <baseAddress>0x5F939400</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -238067,7 +238360,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P11_S</name>
-      <description>GPIO Port 27</description>
+      <description>GPIO Port 17</description>
       <baseAddress>0x5F939600</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -238075,7 +238368,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P12_S</name>
-      <description>GPIO Port 28</description>
+      <description>GPIO Port 18</description>
       <baseAddress>0x5F939800</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
@@ -238083,16 +238376,8 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
     </peripheral>
     <peripheral derivedFrom="GLOBAL_P0_NS">
       <name>GLOBAL_P13_S</name>
-      <description>GPIO Port 29</description>
+      <description>GPIO Port 19</description>
       <baseAddress>0x5F939A00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P14_S</name>
-      <description>GPIO Port 30</description>
-      <baseAddress>0x5F939C00</baseAddress>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
@@ -238101,15 +238386,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <name>GLOBAL_GPIOINTERNAL_S</name>
       <description>GPIO Internal 1</description>
       <baseAddress>0x5F939E00</baseAddress>
-      <!--Security dma=NA-->
-      <!--Security securemapping=S-->
-      <!--Split access-->
-    </peripheral>
-    <peripheral derivedFrom="GLOBAL_P0_NS">
-      <name>GLOBAL_P15_S</name>
-      <description>GPIO Port 31</description>
-      <baseAddress>0x5F939E00</baseAddress>
-      <alternatePeripheral>GLOBAL_GPIOINTERNAL_S</alternatePeripheral>
       <!--Security dma=NA-->
       <!--Security securemapping=S-->
       <!--Split access-->
@@ -238134,7 +238410,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
       <size>0x20</size>
       <registers>
         <register>
-          <dim>0x10</dim>
+          <dim>0x6</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>TASKS_RESETDOMAIN[%s]</name>
           <description>Description collection: Reset the domain [n], where n is domain id.</description>
@@ -238158,7 +238434,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
-          <dim>0x10</dim>
+          <dim>0x6</dim>
           <dimIncrement>0x4</dimIncrement>
           <name>EVENTS_DOMAINRESET[%s]</name>
           <description>Description collection: Domain [n] was reset, where n is domain id.</description>
@@ -238193,42 +238469,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
-            <field>
-              <name>DOMAINRESET0</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[0]</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET1</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[1]</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
             <field>
               <name>DOMAINRESET2</name>
               <description>Enable or disable interrupt for event DOMAINRESET[2]</description>
@@ -238337,150 +238577,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>DOMAINRESET8</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[8]</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET9</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[9]</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET10</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[10]</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET11</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[11]</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET12</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[12]</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET13</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[13]</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET14</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[14]</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET15</name>
-              <description>Enable or disable interrupt for event DOMAINRESET[15]</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Disable</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -238490,60 +238586,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
-            <field>
-              <name>DOMAINRESET0</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[0]</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET1</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[1]</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
             <field>
               <name>DOMAINRESET2</name>
               <description>Write '1' to enable interrupt for event DOMAINRESET[2]</description>
@@ -238706,222 +238748,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>DOMAINRESET8</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[8]</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET9</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[9]</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET10</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[10]</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET11</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[11]</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET12</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[12]</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET13</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[13]</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET14</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[14]</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET15</name>
-              <description>Write '1' to enable interrupt for event DOMAINRESET[15]</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Set</name>
-                  <description>Enable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -238931,60 +238757,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
-            <field>
-              <name>DOMAINRESET0</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[0]</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET1</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[1]</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
             <field>
               <name>DOMAINRESET2</name>
               <description>Write '1' to disable interrupt for event DOMAINRESET[2]</description>
@@ -239147,222 +238919,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>DOMAINRESET8</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[8]</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET9</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[9]</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET10</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[10]</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET11</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[11]</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET12</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[12]</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET13</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[13]</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET14</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[14]</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET15</name>
-              <description>Write '1' to disable interrupt for event DOMAINRESET[15]</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Read: Disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Read: Enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-              <enumeratedValues>
-                <usage>write</usage>
-                <enumeratedValue>
-                  <name>Clear</name>
-                  <description>Disable</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -239372,44 +238928,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-only</access>
           <resetValue>0x00000000</resetValue>
           <fields>
-            <field>
-              <name>DOMAINRESET0</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[0]</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET1</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[1]</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
             <field>
               <name>DOMAINRESET2</name>
               <description>Read pending status of interrupt for event DOMAINRESET[2]</description>
@@ -239510,158 +239028,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Read pending status of interrupt for event DOMAINRESET[7]</description>
               <lsb>7</lsb>
               <msb>7</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET8</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[8]</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET9</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[9]</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET10</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[10]</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET11</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[11]</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET12</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[12]</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET13</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[13]</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET14</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[14]</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <usage>read</usage>
-                <enumeratedValue>
-                  <name>NotPending</name>
-                  <description>Read: Not pending</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Pending</name>
-                  <description>Read: Pending</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAINRESET15</name>
-              <description>Read pending status of interrupt for event DOMAINRESET[15]</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -239965,7 +239331,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
             </fields>
           </register>
           <register>
-            <dim>0x10</dim>
+            <dim>0x6</dim>
             <dimIncrement>0x4</dimIncrement>
             <name>DOMAIN[%s]</name>
             <description>Description collection: Reset reason for the domain[n], where n is domain id.</description>
@@ -240075,42 +239441,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <resetValue>0x0000FFFF</resetValue>
           <fields>
             <field>
-              <name>DOMAIN_0</name>
-              <description>Mask the reset request for the domain[0], where [0] is domain id.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_1</name>
-              <description>Mask the reset request for the domain[1], where [1] is domain id.</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
               <name>DOMAIN_2</name>
               <description>Mask the reset request for the domain[2], where [2] is domain id.</description>
               <lsb>2</lsb>
@@ -240218,150 +239548,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
-            <field>
-              <name>DOMAIN_8</name>
-              <description>Mask the reset request for the domain[8], where [8] is domain id.</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_9</name>
-              <description>Mask the reset request for the domain[9], where [9] is domain id.</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_10</name>
-              <description>Mask the reset request for the domain[10], where [10] is domain id.</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_11</name>
-              <description>Mask the reset request for the domain[11], where [11] is domain id.</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_12</name>
-              <description>Mask the reset request for the domain[12], where [12] is domain id.</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_13</name>
-              <description>Mask the reset request for the domain[13], where [13] is domain id.</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_14</name>
-              <description>Mask the reset request for the domain[14], where [14] is domain id.</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN_15</name>
-              <description>Mask the reset request for the domain[15], where [15] is domain id.</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Mask</name>
-                  <description>Mask the reset request.</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Unmask</name>
-                  <description>Unmask the reset request.</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
           </fields>
         </register>
         <register>
@@ -240371,42 +239557,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <access>read-write</access>
           <resetValue>0x0000FFFF</resetValue>
           <fields>
-            <field>
-              <name>DOMAIN0</name>
-              <description>Cross domain reset enaable for DOMAIN[0], where [0] is domain id.</description>
-              <lsb>0</lsb>
-              <msb>0</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN1</name>
-              <description>Cross domain reset enaable for DOMAIN[1], where [1] is domain id.</description>
-              <lsb>1</lsb>
-              <msb>1</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
             <field>
               <name>DOMAIN2</name>
               <description>Cross domain reset enaable for DOMAIN[2], where [2] is domain id.</description>
@@ -240502,150 +239652,6 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Cross domain reset enaable for DOMAIN[7], where [7] is domain id.</description>
               <lsb>7</lsb>
               <msb>7</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN8</name>
-              <description>Cross domain reset enaable for DOMAIN[8], where [8] is domain id.</description>
-              <lsb>8</lsb>
-              <msb>8</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN9</name>
-              <description>Cross domain reset enaable for DOMAIN[9], where [9] is domain id.</description>
-              <lsb>9</lsb>
-              <msb>9</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN10</name>
-              <description>Cross domain reset enaable for DOMAIN[10], where [10] is domain id.</description>
-              <lsb>10</lsb>
-              <msb>10</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN11</name>
-              <description>Cross domain reset enaable for DOMAIN[11], where [11] is domain id.</description>
-              <lsb>11</lsb>
-              <msb>11</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN12</name>
-              <description>Cross domain reset enaable for DOMAIN[12], where [12] is domain id.</description>
-              <lsb>12</lsb>
-              <msb>12</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN13</name>
-              <description>Cross domain reset enaable for DOMAIN[13], where [13] is domain id.</description>
-              <lsb>13</lsb>
-              <msb>13</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN14</name>
-              <description>Cross domain reset enaable for DOMAIN[14], where [14] is domain id.</description>
-              <lsb>14</lsb>
-              <msb>14</msb>
-              <enumeratedValues>
-                <enumeratedValue>
-                  <name>Disabled</name>
-                  <description>Cross domain reset disabled</description>
-                  <value>0x0</value>
-                </enumeratedValue>
-                <enumeratedValue>
-                  <name>Enabled</name>
-                  <description>Cross domain reset enabled</description>
-                  <value>0x1</value>
-                </enumeratedValue>
-              </enumeratedValues>
-            </field>
-            <field>
-              <name>DOMAIN15</name>
-              <description>Cross domain reset enaable for DOMAIN[15], where [15] is domain id.</description>
-              <lsb>15</lsb>
-              <msb>15</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -244474,7 +243480,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 <name>SELMUX</name>
                 <description>Select multiplexer for ATB1</description>
                 <lsb>0</lsb>
-                <msb>3</msb>
+                <msb>2</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>INMUX</name>
@@ -250142,7 +249148,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>CONFIG</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_CONFIG</headerStructName>
+          <headerStructName>GLOBAL_I2S_CONFIG</headerStructName>
           <access>read-write</access>
           <addressOffset>0x504</addressOffset>
           <register>
@@ -250632,7 +249638,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>RXD</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_RXD</headerStructName>
+          <headerStructName>GLOBAL_I2S_RXD</headerStructName>
           <access>read-write</access>
           <addressOffset>0x538</addressOffset>
           <register>
@@ -250654,7 +249660,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>TXD</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_TXD</headerStructName>
+          <headerStructName>GLOBAL_I2S_TXD</headerStructName>
           <access>read-write</access>
           <addressOffset>0x540</addressOffset>
           <register>
@@ -250676,7 +249682,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>RXTXD</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_RXTXD</headerStructName>
+          <headerStructName>GLOBAL_I2S_RXTXD</headerStructName>
           <access>read-write</access>
           <addressOffset>0x550</addressOffset>
           <register>
@@ -250713,7 +249719,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
         <cluster>
           <name>PSEL</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_PSEL</headerStructName>
+          <headerStructName>GLOBAL_I2S_PSEL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x560</addressOffset>
           <register>
@@ -250917,7 +249923,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <dimIncrement>0x008</dimIncrement>
           <name>CHANNEL[%s]</name>
           <description>Unspecified</description>
-          <headerStructName>I2S_CHANNEL</headerStructName>
+          <headerStructName>GLOBAL_I2S_CHANNEL</headerStructName>
           <access>read-write</access>
           <addressOffset>0x580</addressOffset>
           <register>
@@ -258625,6 +257631,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>EVENTS_FIFO_OVERFLOW</name>
+          <description>FIFO overflow occured</description>
+          <addressOffset>0x118</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>EVENTS_FIFO_OVERFLOW</name>
+              <description>FIFO overflow occured</description>
+              <lsb>0</lsb>
+              <msb>0</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>NotGenerated</name>
+                  <description>Event not generated</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Generated</name>
+                  <description>Event generated</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>PUBLISH_FIFO_EMPTY</name>
           <description>Publish configuration for event FIFO_EMPTY</description>
           <addressOffset>0x180</addressOffset>
@@ -258817,6 +257850,38 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           </fields>
         </register>
         <register>
+          <name>PUBLISH_FIFO_OVERFLOW</name>
+          <description>Publish configuration for event FIFO_OVERFLOW</description>
+          <addressOffset>0x198</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <fields>
+            <field>
+              <name>CHIDX</name>
+              <description>DPPI channel that event FIFO_OVERFLOW will publish to</description>
+              <lsb>0</lsb>
+              <msb>7</msb>
+            </field>
+            <field>
+              <name>EN</name>
+              <lsb>31</lsb>
+              <msb>31</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable publishing</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable publishing</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+          </fields>
+        </register>
+        <register>
           <name>INTEN</name>
           <description>Enable or disable interrupt</description>
           <addressOffset>0x300</addressOffset>
@@ -258918,6 +257983,24 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Enable or disable interrupt for event READ_OVERWRITE</description>
               <lsb>5</lsb>
               <msb>5</msb>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Disable</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FIFO_OVERFLOW</name>
+              <description>Enable or disable interrupt for event FIFO_OVERFLOW</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
               <enumeratedValues>
                 <enumeratedValue>
                   <name>Disabled</name>
@@ -259080,6 +258163,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Write '1' to enable interrupt for event READ_OVERWRITE</description>
               <lsb>5</lsb>
               <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Set</name>
+                  <description>Enable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FIFO_OVERFLOW</name>
+              <description>Write '1' to enable interrupt for event FIFO_OVERFLOW</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -259273,6 +258383,33 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
                 </enumeratedValue>
               </enumeratedValues>
             </field>
+            <field>
+              <name>FIFO_OVERFLOW</name>
+              <description>Write '1' to disable interrupt for event FIFO_OVERFLOW</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>Disabled</name>
+                  <description>Read: Disabled</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Enabled</name>
+                  <description>Read: Enabled</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+              <enumeratedValues>
+                <usage>write</usage>
+                <enumeratedValue>
+                  <name>Clear</name>
+                  <description>Disable</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
           </fields>
         </register>
         <register>
@@ -259382,6 +258519,25 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
               <description>Read pending status of interrupt for event READ_OVERWRITE</description>
               <lsb>5</lsb>
               <msb>5</msb>
+              <enumeratedValues>
+                <usage>read</usage>
+                <enumeratedValue>
+                  <name>NotPending</name>
+                  <description>Read: Not pending</description>
+                  <value>0x0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>Pending</name>
+                  <description>Read: Pending</description>
+                  <value>0x1</value>
+                </enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FIFO_OVERFLOW</name>
+              <description>Read pending status of interrupt for event FIFO_OVERFLOW</description>
+              <lsb>6</lsb>
+              <msb>6</msb>
               <enumeratedValues>
                 <usage>read</usage>
                 <enumeratedValue>
@@ -260185,7 +259341,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Peripheral tasks.</description>
           <headerStructName>TWIS_TASKS_DMA</headerStructName>
           <access>write-only</access>
-          <addressOffset>0x028</addressOffset>
+          <addressOffset>0x030</addressOffset>
           <cluster>
             <name>RX</name>
             <description>Peripheral tasks.</description>
@@ -260407,7 +259563,7 @@ unexpectedly or might not fire. Reads of the TRCRSCTLRn might return UNKNOWN.</d
           <description>Subscribe configuration for tasks</description>
           <headerStructName>TWIS_SUBSCRIBE_DMA</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x0A8</addressOffset>
+          <addressOffset>0x0B0</addressOffset>
           <cluster>
             <name>RX</name>
             <description>Subscribe configuration for tasks</description>

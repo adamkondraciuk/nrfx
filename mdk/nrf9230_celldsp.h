@@ -73,10 +73,10 @@ typedef enum {
   IPCT_1_LTEFE_10_IRQn                   = 20,       /*!< 20 IPCT_1_LTEFE_10                                                   */
   IPCT_2_LTEFE_11_IRQn                   = 21,       /*!< 21 IPCT_2_LTEFE_11                                                   */
   LTEFE_12_IRQn                          = 22,       /*!< 22 LTEFE_12                                                          */
-  LTEFE_13_IRQn                          = 23,       /*!< 23 LTEFE_13                                                          */
+  ABB_LTEFE_13_IRQn                      = 23,       /*!< 23 ABB_LTEFE_13                                                      */
   LTEFE_14_IRQn                          = 24,       /*!< 24 LTEFE_14                                                          */
   LTEFE_15_IRQn                          = 25,       /*!< 25 LTEFE_15                                                          */
-  ABB_GNSSFE_0_IRQn                      = 40,       /*!< 40 ABB_GNSSFE_0                                                      */
+  GNSSFE_0_IRQn                          = 40,       /*!< 40 GNSSFE_0                                                          */
   GNSSFE_1_WIFIBFE_0_IRQn                = 41,       /*!< 41 GNSSFE_1_WIFIBFE_0                                                */
   GNSSFE_2_WIFIBFE_1_WIFIGNFE_0_IRQn     = 42,       /*!< 42 GNSSFE_2_WIFIBFE_1_WIFIGNFE_0                                     */
   GNSSFE_3_WIFIBFE_2_WIFIGNFE_1_IRQn     = 43,       /*!< 43 GNSSFE_3_WIFIBFE_2_WIFIGNFE_1                                     */
@@ -165,12 +165,12 @@ typedef enum {
 /* =========================================================================================================================== */
 
 /* ============================== Configuration of the CEVA XC5 Processor and Core Peripherals =============================== */
-#define __XC5_REV                   r0p1             /*!< XC5 Core Revision                                                    */
+#define __XC5_REV               v1.1.0.F             /*!< XC5 Core Revision                                                    */
 #define __DSP_PRESENT                  1             /*!< DSP present or not                                                   */
-#define __MPU_PRESENT                  1             /*!< MPU present                                                          */
-#define __FPU_PRESENT                  1             /*!< FPU present                                                          */
+#define __MPU_PRESENT                  0             /*!< MPU present                                                          */
+#define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX              55             /*!< Size of interrupt vector table                                       */
 
 #include "system_nrf.h"                              /*!< nrf9230_celldsp System Library                                       */
 
@@ -210,7 +210,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLDSP_LSTMDATA_BASE         0x26000000UL
+#define NRF_CELLDSP_LSTMDATA_BASE         0x2A000000UL
 #define NRF_CELLDSP_HSFLL_BASE            0x45000000UL
 #define NRF_CELLDSP_LRCCONF0_BASE         0x45001000UL
 #define NRF_CELLDSP_MPC_BASE              0x45002000UL
@@ -232,6 +232,8 @@ typedef enum {
 #define NRF_CELLDSP_DSPCTRL_BASE          0x45014000UL
 #define NRF_CELLDSP_PCGCM0_BASE           0x45015000UL
 #define NRF_CELLDSP_PPIB1_BASE            0x45016000UL
+#define NRF_CELLDSP_ABB_BASE              0x45017000UL
+#define NRF_CELLDSP_BILS_BASE             0x45018000UL
 #define NRF_CELLDSP_CTI0_BASE             0x45020000UL
 #define NRF_CELLDSP_DPPIC_BASE            0x45021000UL
 #define NRF_CELLDSP_PCGCS0_BASE           0x45022000UL
@@ -240,9 +242,7 @@ typedef enum {
 #define NRF_CELLDSP_ETM_BASE              0x45025000UL
 #define NRF_CELLDSP_CTI1_BASE             0x45026000UL
 #define NRF_CELLDSP_TRACEDELAYREG_BASE    0x45027000UL
-#define NRF_CELLDSP_ABB_BASE              0x45028000UL
 #define NRF_CELLDSP_GNSSFE_BASE           0x45028000UL
-#define NRF_CELLDSP_BILS_BASE             0x45029000UL
 #define NRF_CELLDSP_WIFIBFE_BASE          0x45029000UL
 #define NRF_CELLDSP_WIFIGNFE_BASE         0x4502A000UL
 #define NRF_CELLDSP_BELLBOARD_BASE        0x4F09D000UL
@@ -273,6 +273,8 @@ typedef enum {
 #define NRF_CELLDSP_DSPCTRL               ((NRF_DSPCTRL_Type*)                  NRF_CELLDSP_DSPCTRL_BASE)
 #define NRF_CELLDSP_PCGCM0                ((NRF_PCGCMASTER_Type*)               NRF_CELLDSP_PCGCM0_BASE)
 #define NRF_CELLDSP_PPIB1                 ((NRF_PPIB_Type*)                     NRF_CELLDSP_PPIB1_BASE)
+#define NRF_CELLDSP_ABB                   ((NRF_ABB_Type*)                      NRF_CELLDSP_ABB_BASE)
+#define NRF_CELLDSP_BILS                  ((NRF_BILS_Type*)                     NRF_CELLDSP_BILS_BASE)
 #define NRF_CELLDSP_CTI0                  ((NRF_CTI_Type*)                      NRF_CELLDSP_CTI0_BASE)
 #define NRF_CELLDSP_DPPIC                 ((NRF_DPPIC_Type*)                    NRF_CELLDSP_DPPIC_BASE)
 #define NRF_CELLDSP_PCGCS0                ((NRF_PCGCSLAVE_Type*)                NRF_CELLDSP_PCGCS0_BASE)
@@ -281,9 +283,7 @@ typedef enum {
 #define NRF_CELLDSP_ETM                   ((NRF_ETM_Type*)                      NRF_CELLDSP_ETM_BASE)
 #define NRF_CELLDSP_CTI1                  ((NRF_CTI_Type*)                      NRF_CELLDSP_CTI1_BASE)
 #define NRF_CELLDSP_TRACEDELAYREG         ((NRF_TRACEDELAYREG_Type*)            NRF_CELLDSP_TRACEDELAYREG_BASE)
-#define NRF_CELLDSP_ABB                   ((NRF_ABB_Type*)                      NRF_CELLDSP_ABB_BASE)
 #define NRF_CELLDSP_GNSSFE                ((NRF_POSFE_Type*)                    NRF_CELLDSP_GNSSFE_BASE)
-#define NRF_CELLDSP_BILS                  ((NRF_BILS_Type*)                     NRF_CELLDSP_BILS_BASE)
 #define NRF_CELLDSP_WIFIBFE               ((NRF_POSFE_Type*)                    NRF_CELLDSP_WIFIBFE_BASE)
 #define NRF_CELLDSP_WIFIGNFE              ((NRF_POSFE_Type*)                    NRF_CELLDSP_WIFIGNFE_BASE)
 #define NRF_CELLDSP_BELLBOARD             ((NRF_BELLBOARD_Type*)                NRF_CELLDSP_BELLBOARD_BASE)
@@ -315,6 +315,8 @@ typedef enum {
   #define NRF_DSPCTRL                             NRF_CELLDSP_DSPCTRL
   #define NRF_PCGCM0                              NRF_CELLDSP_PCGCM0
   #define NRF_PPIB1                               NRF_CELLDSP_PPIB1
+  #define NRF_ABB                                 NRF_CELLDSP_ABB
+  #define NRF_BILS                                NRF_CELLDSP_BILS
   #define NRF_CTI0                                NRF_CELLDSP_CTI0
   #define NRF_DPPIC                               NRF_CELLDSP_DPPIC
   #define NRF_PCGCS0                              NRF_CELLDSP_PCGCS0
@@ -323,9 +325,7 @@ typedef enum {
   #define NRF_ETM                                 NRF_CELLDSP_ETM
   #define NRF_CTI1                                NRF_CELLDSP_CTI1
   #define NRF_TRACEDELAYREG                       NRF_CELLDSP_TRACEDELAYREG
-  #define NRF_ABB                                 NRF_CELLDSP_ABB
   #define NRF_GNSSFE                              NRF_CELLDSP_GNSSFE
-  #define NRF_BILS                                NRF_CELLDSP_BILS
   #define NRF_WIFIBFE                             NRF_CELLDSP_WIFIBFE
   #define NRF_WIFIGNFE                            NRF_CELLDSP_WIFIGNFE
   #define NRF_BELLBOARD                           NRF_CELLDSP_BELLBOARD

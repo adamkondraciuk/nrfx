@@ -194,7 +194,7 @@ typedef enum {
 #define __NVIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __VTOR_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
-#define __FPU_PRESENT                  1             /*!< FPU present                                                          */
+#define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
 #define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
@@ -248,7 +248,7 @@ typedef enum {
 #define NRF_SECURE_DCACHEINFO_S_BASE      0x31F10000UL
 #define NRF_SECURE_CRACENCORE_NS_BASE     0x41800000UL
 #define NRF_SECURE_CRACENCORE_S_BASE      0x51800000UL
-#define NRF_SECURE_MEMCONF200_S_BASE      0xBF014000UL
+#define NRF_SECURE_MEMCONF200_NS_BASE     0xBF014000UL
 #define NRF_SECURE_ETM_NS_BASE            0xE0041000UL
 #define NRF_SECURE_CTI_S_BASE             0xE0042000UL
 #define NRF_SECURE_CPUC_S_BASE            0xE0080000UL
@@ -302,10 +302,10 @@ typedef enum {
 #define NRF_SECURE_SWI7_NS_BASE           0x4205F000UL
 #define NRF_SECURE_BELLBOARD_NS_BASE      0x4F099000UL
 #define NRF_SECURE_BELLBOARD_S_BASE       0x5F099000UL
-#define NRF_SECURE_MPC200_S_BASE          0xBF007000UL
-#define NRF_SECURE_SPU200_S_BASE          0xBF000000UL
-#define NRF_SECURE_SPU210_S_BASE          0xBF010000UL
-#define NRF_SECURE_CTRLAP_S_BASE          0xBF015000UL
+#define NRF_SECURE_MPC200_NS_BASE         0xBF007000UL
+#define NRF_SECURE_SPU200_NS_BASE         0xBF000000UL
+#define NRF_SECURE_SPU210_NS_BASE         0xBF010000UL
+#define NRF_SECURE_CTRLAP_NS_BASE         0xBF015000UL
 #define NRF_SECURE_SPU110_S_BASE          0x5F080000UL
 #define NRF_SECURE_MPC110_S_BASE          0x5F081000UL
 #define NRF_SECURE_SPU111_S_BASE          0x5F090000UL
@@ -338,7 +338,7 @@ typedef enum {
 #define NRF_SECURE_DCACHEINFO_S           ((NRF_DCACHEINFO_Type*)               NRF_SECURE_DCACHEINFO_S_BASE)
 #define NRF_SECURE_CRACENCORE_NS          ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_NS_BASE)
 #define NRF_SECURE_CRACENCORE_S           ((NRF_CRACENCORE_Type*)               NRF_SECURE_CRACENCORE_S_BASE)
-#define NRF_SECURE_MEMCONF200_S           ((NRF_MEMCONF_Type*)                  NRF_SECURE_MEMCONF200_S_BASE)
+#define NRF_SECURE_MEMCONF200_NS          ((NRF_MEMCONF_Type*)                  NRF_SECURE_MEMCONF200_NS_BASE)
 #define NRF_SECURE_ETM_NS                 ((NRF_ETM_Type*)                      NRF_SECURE_ETM_NS_BASE)
 #define NRF_SECURE_CTI_S                  ((NRF_CTI_Type*)                      NRF_SECURE_CTI_S_BASE)
 #define NRF_SECURE_CPUC_S                 ((NRF_CM33SS_Type*)                   NRF_SECURE_CPUC_S_BASE)
@@ -392,10 +392,10 @@ typedef enum {
 #define NRF_SECURE_SWI7_NS                ((NRF_SWI_Type*)                      NRF_SECURE_SWI7_NS_BASE)
 #define NRF_SECURE_BELLBOARD_NS           ((NRF_BELLBOARD_Type*)                NRF_SECURE_BELLBOARD_NS_BASE)
 #define NRF_SECURE_BELLBOARD_S            ((NRF_BELLBOARD_Type*)                NRF_SECURE_BELLBOARD_S_BASE)
-#define NRF_SECURE_MPC200_S               ((NRF_MPC_Type*)                      NRF_SECURE_MPC200_S_BASE)
-#define NRF_SECURE_SPU200_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU200_S_BASE)
-#define NRF_SECURE_SPU210_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU210_S_BASE)
-#define NRF_SECURE_CTRLAP_S               ((NRF_CTRLAPPERI_Type*)               NRF_SECURE_CTRLAP_S_BASE)
+#define NRF_SECURE_MPC200_NS              ((NRF_MPC_Type*)                      NRF_SECURE_MPC200_NS_BASE)
+#define NRF_SECURE_SPU200_NS              ((NRF_SPU_Type*)                      NRF_SECURE_SPU200_NS_BASE)
+#define NRF_SECURE_SPU210_NS              ((NRF_SPU_Type*)                      NRF_SECURE_SPU210_NS_BASE)
+#define NRF_SECURE_CTRLAP_NS              ((NRF_CTRLAPPERI_Type*)               NRF_SECURE_CTRLAP_NS_BASE)
 #define NRF_SECURE_SPU110_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU110_S_BASE)
 #define NRF_SECURE_MPC110_S               ((NRF_MPC_Type*)                      NRF_SECURE_MPC110_S_BASE)
 #define NRF_SECURE_SPU111_S               ((NRF_SPU_Type*)                      NRF_SECURE_SPU111_S_BASE)
@@ -422,6 +422,7 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_NS
+  #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_NS
   #define NRF_SECURE_ETM                          NRF_SECURE_ETM_NS
   #define NRF_SECURE_MVDMA                        NRF_SECURE_MVDMA_NS
   #define NRF_SECURE_RAMC000                      NRF_SECURE_RAMC000_NS
@@ -443,6 +444,10 @@ typedef enum {
   #define NRF_SECURE_SWI6                         NRF_SECURE_SWI6_NS
   #define NRF_SECURE_SWI7                         NRF_SECURE_SWI7_NS
   #define NRF_SECURE_BELLBOARD                    NRF_SECURE_BELLBOARD_NS
+  #define NRF_SECURE_MPC200                       NRF_SECURE_MPC200_NS
+  #define NRF_SECURE_SPU200                       NRF_SECURE_SPU200_NS
+  #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_NS
+  #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SECURE_SICR                         NRF_SECURE_SICR_S
   #define NRF_SECURE_RICR                         NRF_SECURE_RICR_S
@@ -451,7 +456,7 @@ typedef enum {
   #define NRF_SECURE_DCACHEDATA                   NRF_SECURE_DCACHEDATA_S
   #define NRF_SECURE_DCACHEINFO                   NRF_SECURE_DCACHEINFO_S
   #define NRF_SECURE_CRACENCORE                   NRF_SECURE_CRACENCORE_S
-  #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_S
+  #define NRF_SECURE_MEMCONF200                   NRF_SECURE_MEMCONF200_NS
   #define NRF_SECURE_ETM                          NRF_SECURE_ETM_NS
   #define NRF_SECURE_CTI                          NRF_SECURE_CTI_S
   #define NRF_SECURE_CPUC                         NRF_SECURE_CPUC_S
@@ -493,10 +498,10 @@ typedef enum {
   #define NRF_SECURE_SWI6                         NRF_SECURE_SWI6_NS
   #define NRF_SECURE_SWI7                         NRF_SECURE_SWI7_NS
   #define NRF_SECURE_BELLBOARD                    NRF_SECURE_BELLBOARD_S
-  #define NRF_SECURE_MPC200                       NRF_SECURE_MPC200_S
-  #define NRF_SECURE_SPU200                       NRF_SECURE_SPU200_S
-  #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_S
-  #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_S
+  #define NRF_SECURE_MPC200                       NRF_SECURE_MPC200_NS
+  #define NRF_SECURE_SPU200                       NRF_SECURE_SPU200_NS
+  #define NRF_SECURE_SPU210                       NRF_SECURE_SPU210_NS
+  #define NRF_SECURE_CTRLAP                       NRF_SECURE_CTRLAP_NS
   #define NRF_SECURE_SPU110                       NRF_SECURE_SPU110_S
   #define NRF_SECURE_MPC110                       NRF_SECURE_MPC110_S
   #define NRF_SECURE_SPU111                       NRF_SECURE_SPU111_S

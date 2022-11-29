@@ -225,8 +225,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPRCLIC_NS_BASE          0x4F8D4000UL
-#define NRF_FLPR_VPRCLIC_S_BASE           0x5F8D4000UL
+#define NRF_FLPR_VPRCLIC_NS_BASE          0x5F8D4000UL
 #define NRF_FLPR_VPRTIM_NS_BASE           0x00000000UL
 
 /* =========================================================================================================================== */
@@ -234,7 +233,6 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #define NRF_FLPR_VPRCLIC_NS               ((NRF_CLIC_Type*)                     NRF_FLPR_VPRCLIC_NS_BASE)
-#define NRF_FLPR_VPRCLIC_S                ((NRF_CLIC_Type*)                     NRF_FLPR_VPRCLIC_S_BASE)
 #define NRF_FLPR_VPRTIM_NS                ((NRF_VTIM_Type*)                     NRF_FLPR_VPRTIM_NS_BASE)
 
 /* =========================================================================================================================== */
@@ -245,7 +243,7 @@ typedef enum {
   #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
   #define NRF_FLPR_VPRTIM                         NRF_FLPR_VPRTIM_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_S
+  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
   #define NRF_FLPR_VPRTIM                         NRF_FLPR_VPRTIM_NS
 #endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
