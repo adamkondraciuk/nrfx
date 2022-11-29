@@ -246,7 +246,7 @@ typedef enum
         #define NRF_GPIOTE_IRQ_GROUP 1
     #elif defined(NRF_APPLICATION)
         #define NRF_GPIOTE_IRQ_GROUP 3
-    #elif defined(NRF_RADIOCORE)
+    #elif defined(NRF_RADIOCORE) || defined(NRF_BBPR)
         #define NRF_GPIOTE_IRQ_GROUP 5
     #elif defined(NRF_CELLCORE)
         #define NRF_GPIOTE_IRQ_GROUP 5
@@ -291,7 +291,7 @@ typedef enum
         #define NRF_GRTC_IRQ_GROUP 1
     #elif defined(NRF_APPLICATION)
         #define NRF_GRTC_IRQ_GROUP 3
-    #elif defined(NRF_RADIOCORE)
+    #elif defined(NRF_RADIOCORE) || defined(NRF_BBPR)
         #define NRF_GRTC_IRQ_GROUP 5
     #elif defined(NRF_CELLCORE)
         #define NRF_GRTC_IRQ_GROUP 7
