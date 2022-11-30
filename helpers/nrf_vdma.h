@@ -65,7 +65,8 @@ typedef enum
  */
 #define NRF_VDMA_REDUCED_JOB_SIZE(count) (count + 2)
 
-/** @brief Macro for defining an element of a job list.
+/**
+ * @brief Macro for defining an element of a job list.
  *
  * @param[in] p_buffer  Pointer to the buffer.
  * @param[in] size      Size of the transfer.
@@ -78,9 +79,28 @@ typedef enum
         (uint32_t)(((attribute) << VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos) | \
                    ((size) & NRF_VDMA_BUFFER_SIZE_MASK))
 
-/** @brief Macro for defining initial element of reduced job list. */
+/**
+ * @brief Macro for defining initial element of reduced job list.
+ *
+ * @param[in] p_buffer  Job buffer.
+ * @param[in] size      Size of the job buffer.
+ * @param[in] attribute Attributes of the job.
+ *
+ * @return Two words of the job descriptor.
+ */
 #define NRF_VDMA_REDUCED_JOB_INIT_ELEMENT(p_buffer, size, attribute) \
     NRF_VDMA_JOB_ELEMENT(p_buffer, size, NRF_VDMA_ATTRIBUTE_FIXED_ATTR | (attribute))
+
+/**
+ * @brief Macro for defining a job for transfer engaging peripheral.
+ *
+ * @param[in] addr Starting address.
+ * @param[in] size Size of a DMA job.
+ *
+ * @return Two words which contains address, size and the descriptor byte.
+ */
+#define NRFX_VDMA_PERIPH_JOB(addr, size) \
+        NRF_VDMA_JOB_ELEMENT(addr, size, NRF_VDMA_EXT_ATTRIBUTE_PERIPHERAL_MODE)
 
 /**
  * @brief Function for filling the specified structure of the job with given job parameters.
