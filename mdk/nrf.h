@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   51 
+#define MDK_MINOR_VERSION   52 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -393,14 +393,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "haltium_name_change.h"
     #endif
 
-#elif defined (LILIUMSOC1_XXAA)
+#elif defined (NRF54H20_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
-        #include "liliumsoc1.h"
+        #include "nrf54h20_enga.h"
     #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
-    #endif
-    
+
 #elif defined (MOONLIGHT_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "moonlight.h"
