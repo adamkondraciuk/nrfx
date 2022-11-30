@@ -27,7 +27,10 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdbool.h>
 #include "nrf.h"
 #include "system_nrf54h.h"
+#if defined(__CORTEX_M) && !defined(NRF_TRUSTZONE_NONSECURE) && \
+    (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 0x3))
 #include "system_config_sau.h"
+#endif
 
 /*lint ++flb "Enter library region" */
 
@@ -92,7 +95,8 @@ void SystemCoreClockUpdate(void)
 void SystemInit(void)
 {
     #ifdef __CORTEX_M
-        #if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
+        #if !defined(NRF_TRUSTZONE_NONSECURE) && \
+            (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 0x3))
             /* Allow Non-Secure code to run FPU instructions.
             * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
             SCB->NSACR |= (3UL << 10);
