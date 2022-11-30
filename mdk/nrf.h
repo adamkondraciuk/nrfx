@@ -393,7 +393,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "haltium_name_change.h"
     #endif
 
-#elif defined (NRF54H20_ENGA_XXAA)
+#elif defined (LILIUMSOC1_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf54h20_enga.h"
     #endif

@@ -99,7 +99,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (LILIUMFP1_XXAA)
     #include "liliumfp1_peripherals.h"
 
-#elif defined (NRF54H20_ENGA_XXAA)
+#elif defined (LILIUMSOC1_XXAA)
     #include "nrf54h20_enga_peripherals.h"
 
 #elif defined (HALTIUM_XXAA)
