@@ -26,8 +26,8 @@ typedef enum
     NRF_RESETHUB_TASK_RESET_DOMAIN_4  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[4]),  /**< Reset domain 4. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_5  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[5]),  /**< Reset domain 5. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_6  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[6]),  /**< Reset domain 6. */
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_7  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[7]),  /**< Reset domain 7. */
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_8  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[8]),  /**< Reset domain 8. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_9  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[9]),  /**< Reset domain 9. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_10 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[10]), /**< Reset domain 10. */
@@ -64,8 +64,8 @@ typedef enum
     NRF_RESETHUB_EVENT_DOMAIN_RESET_4  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[4]),  /**< Domain 4 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_5  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[5]),  /**< Domain 5 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_6  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[6]),  /**< Domain 6 was reset. */
-#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_7  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[7]),  /**< Domain 7 was reset. */
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_8  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[8]),  /**< Domain 8 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_9  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[9]),  /**< Domain 9 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_10 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[10]), /**< Domain 10 was reset. */
@@ -95,7 +95,7 @@ typedef enum
 /** @brief RESETHUB interrupt mask. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_0_MASK  = RESETHUB_INTENSET_DOMAINRESET0_Msk,  /**< Interrupt on event DOMAINRESET[0]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_1_MASK  = RESETHUB_INTENSET_DOMAINRESET1_Msk,  /**< Interrupt on event DOMAINRESET[1]. */
 #endif
@@ -105,7 +105,7 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_5_MASK  = RESETHUB_INTENSET_DOMAINRESET5_Msk,  /**< Interrupt on event DOMAINRESET[5]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_6_MASK  = RESETHUB_INTENSET_DOMAINRESET6_Msk,  /**< Interrupt on event DOMAINRESET[6]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_7_MASK  = RESETHUB_INTENSET_DOMAINRESET7_Msk,  /**< Interrupt on event DOMAINRESET[7]. */
-#if !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_8_MASK  = RESETHUB_INTENSET_DOMAINRESET8_Msk,  /**< Interrupt on event DOMAINRESET[8]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_9_MASK  = RESETHUB_INTENSET_DOMAINRESET9_Msk,  /**< Interrupt on event DOMAINRESET[9]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_10_MASK = RESETHUB_INTENSET_DOMAINRESET10_Msk, /**< Interrupt on event DOMAINRESET[10]. */
@@ -115,6 +115,7 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_14_MASK = RESETHUB_INTENSET_DOMAINRESET14_Msk, /**< Interrupt on event DOMAINRESET[14]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_15_MASK = RESETHUB_INTENSET_DOMAINRESET15_Msk, /**< Interrupt on event DOMAINRESET[15]. */
 #endif
+
     NRF_RESETHUB_INT_DOMAIN_RESET_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Interrupt on Application domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_NETWORK_MASK     = (1UL << NRF_DOMAIN_RADIOCORE),   /**< Interrupt on Network domain reset. */
 #if defined(NRF9230_XXAA)
@@ -128,7 +129,7 @@ typedef enum
 /** @brief Domain mask. */
 typedef enum
 {
-#if !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_0_MASK = RESETHUB_RESETMASK_DOMAIN0_Msk,   /**< Domain 0. */
     NRF_RESETHUB_DOMAIN_1_MASK = RESETHUB_RESETMASK_DOMAIN1_Msk,   /**< Domain 1. */
 #endif
@@ -138,7 +139,7 @@ typedef enum
     NRF_RESETHUB_DOMAIN_5_MASK = RESETHUB_RESETMASK_DOMAIN5_Msk,   /**< Domain 5. */
     NRF_RESETHUB_DOMAIN_6_MASK = RESETHUB_RESETMASK_DOMAIN6_Msk,   /**< Domain 6. */
     NRF_RESETHUB_DOMAIN_7_MASK = RESETHUB_RESETMASK_DOMAIN7_Msk,   /**< Domain 7. */
-#if !defined(NRF9230_XXAA)
+#if !defined(LILIUMSOC1_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_8_MASK = RESETHUB_RESETMASK_DOMAIN8_Msk,   /**< Domain 8. */
     NRF_RESETHUB_DOMAIN_9_MASK = RESETHUB_RESETMASK_DOMAIN9_Msk,   /**< Domain 9. */
     NRF_RESETHUB_DOMAIN_10_MASK = RESETHUB_RESETMASK_DOMAIN10_Msk, /**< Domain 10. */
