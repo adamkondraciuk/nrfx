@@ -10,6 +10,13 @@
 #define NRFX_LOG_MODULE MVDMA
 #include <nrfx_log.h>
 
+typedef enum
+{
+    NRFX_MVDMA_AXIMODE_AXI     = NRF_MVDMA_AXIMODE_AXI,
+    NRFX_MVDMA_AXIMODE_AXILITE = NRF_MVDMA_AXIMODE_AXILITE,
+    NRFX_MVDMA_AXIMODE_DETECT
+} nrfx_mvdma_aximode_t;
+
 typedef struct
 {
     nrfx_mvdma_event_handler_t handler;
@@ -20,26 +27,35 @@ typedef struct
     void *                     p_context;
     nrfx_drv_state_t           state;
     nrf_mvdma_mode_t           mode;
+    nrf_mvdma_aximode_t        aximode;
     bool                       busy;
+    bool                       reset_req;
 } mvdma_control_block_t;
 static mvdma_control_block_t m_cb[NRFX_MVDMA_ENABLED_COUNT];
 
-static void mvdma_config_reset(nrfx_mvdma_t const * p_instance)
+/* Function checks if a job desciptor uses peripheral mode. */
+static bool mvdma_peripheral_job_check(nrf_vdma_job_t const * p_job)
 {
-    mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-
-    // Event RESET arrives immediately after triggering the corresponding task.
-    nrfy_mvdma_reset(p_instance->p_reg, true);
-    nrfy_mvdma_mode_set(p_instance->p_reg, p_cb->mode);
+    return p_job->attributes & NRF_VDMA_EXT_ATTRIBUTE_PERIPHERAL_MODE;
 }
 
-static void mvdma_state_change(nrfx_mvdma_t const * p_instance)
+static void mvdma_mode_set(NRF_MVDMA_Type *        p_reg,
+                           mvdma_control_block_t * p_cb,
+                           nrf_mvdma_mode_t        mode)
 {
-    mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    if (!NRF_MVDMA_HAS_MULTIMODE)
+    {
+        return;
+    }
 
-    p_cb->mode = (p_cb->mode == NRF_MVDMA_MODE_SINGLE) ?
-                 NRF_MVDMA_MODE_MULTI : NRF_MVDMA_MODE_SINGLE;
-    nrfy_mvdma_mode_set(p_instance->p_reg, p_cb->mode);
+    if (p_cb->mode == mode)
+    {
+        return;
+    }
+
+    p_cb->mode = mode;
+    (void)p_reg;
+    nrfy_mvdma_mode_set(p_reg, mode);
 }
 
 nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
@@ -60,9 +76,10 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
         return err_code;
     }
 
-    p_cb->mode = NRF_MVDMA_MODE_SINGLE;
+    p_cb->mode    = NRF_MVDMA_MODE_SINGLE;
+    p_cb->aximode = NRF_MVDMA_AXIMODE_AXI;
 
-    mvdma_config_reset(p_instance);
+    nrfy_mvdma_reset(p_instance->p_reg, true);
     nrfy_mvdma_int_init(p_instance->p_reg,
                         NRF_MVDMA_INT_END_MASK |
 #if NRF_MVDMA_HAS_NEW_VER
@@ -89,6 +106,45 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
     return err_code;
 }
 
+static void mvdma_job_start(NRF_MVDMA_Type *                  p_reg,
+                            mvdma_control_block_t *           p_cb,
+                            nrfx_mvdma_list_request_t const * p_list_request,
+                            nrfx_mvdma_aximode_t              aximode,
+                            void *                            p_context)
+{
+    nrf_mvdma_aximode_t prev_aximode = p_cb->aximode;
+
+    if (p_cb->reset_req)
+    {
+        p_cb->reset_req = false;
+        // Reset task also resets MODE and AXIMODE settings.
+        nrfy_mvdma_reset(p_reg, true);
+    }
+
+    if (aximode == NRFX_MVDMA_AXIMODE_DETECT)
+    {
+        p_cb->aximode = (mvdma_peripheral_job_check(p_list_request->p_source_job_list) ||
+                         mvdma_peripheral_job_check(p_list_request->p_sink_job_list)) ?
+                        NRF_MVDMA_AXIMODE_AXILITE : NRF_MVDMA_AXIMODE_AXI;
+    }
+    else
+    {
+        p_cb->aximode = (nrf_mvdma_aximode_t)aximode;
+    }
+
+    // Change aximode if it changed compared to the previous transfer .
+    if (p_cb->aximode != prev_aximode)
+    {
+        nrfy_mvdma_aximode_set(p_reg, p_cb->aximode);
+    }
+
+    p_cb->p_context = p_context;
+
+    mvdma_mode_set(p_reg, p_cb, NRF_MVDMA_MODE_SINGLE);
+    nrfy_mvdma_job_list_set(p_reg, p_list_request);
+    nrfy_mvdma_start(p_reg, NULL);
+}
+
 nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
                            nrfx_mvdma_copy_request_t const * p_request)
 {
@@ -101,8 +157,6 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
     }
     p_cb->busy = true;
 
-    // MVDMA reset is needed in case of starting new transfer after abort or error.
-    mvdma_config_reset(p_instance);
 
     nrf_vdma_job_fill(&p_cb->source_job,
                       p_request->p_source,
@@ -112,28 +166,26 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
                       p_request->p_sink,
                       p_request->size,
                       NRF_VDMA_ATTRIBUTE_PLAIN_DATA);
-    p_cb->p_context = p_request->p_context;
 
-    nrfx_mvdma_list_request_t p_list_request =
+    nrfx_mvdma_list_request_t list_request =
     {
         .p_source_job_list = &p_cb->source_job,
         .p_sink_job_list   = &p_cb->sink_job
     };
 
-    if (p_cb->mode == NRF_MVDMA_MODE_MULTI)
-    {
-        mvdma_state_change(p_instance);
-    }
-
-    nrfy_mvdma_job_list_set(p_instance->p_reg, &p_list_request);
-    nrfy_mvdma_start(p_instance->p_reg, NULL);
+    mvdma_job_start(p_instance->p_reg,
+                    p_cb,
+                    &list_request,
+                    NRFX_MVDMA_AXIMODE_AXI,
+                    p_request->p_context);
 
     return NRFX_SUCCESS;
 }
 
 nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
                                    void const *         p_buffer,
-                                   size_t               size)
+                                   size_t               size,
+                                   void *               p_context)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
@@ -146,19 +198,13 @@ nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
 
     nrf_vdma_job_fill(&p_cb->sink_job, p_buffer, size, NRF_VDMA_ATTRIBUTE_BUFFER_FILL);
 
-    nrfx_mvdma_list_request_t p_list_request =
+    nrfx_mvdma_list_request_t list_request =
     {
         .p_source_job_list = &p_cb->source_terminating_job,
         .p_sink_job_list   = &p_cb->sink_job
     };
 
-    if (p_cb->mode == NRF_MVDMA_MODE_MULTI)
-    {
-        mvdma_state_change(p_instance);
-    }
-
-    nrfy_mvdma_job_list_set(p_instance->p_reg, &p_list_request);
-    nrfy_mvdma_start(p_instance->p_reg, NULL);
+    mvdma_job_start(p_instance->p_reg, p_cb, &list_request, NRFX_MVDMA_AXIMODE_AXI, p_context);
 
     return NRFX_SUCCESS;
 }
@@ -176,19 +222,7 @@ nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
     }
     p_cb->busy = true;
 
-    // MVDMA reset is needed in case of starting new transfer after abort or error.
-    mvdma_config_reset(p_instance);
-
-
-    p_cb->p_context = p_context;
-
-    if (p_cb->mode == NRF_MVDMA_MODE_MULTI)
-    {
-        mvdma_state_change(p_instance);
-    }
-
-    nrfy_mvdma_job_list_set(p_instance->p_reg, p_request);
-    nrfy_mvdma_start(p_instance->p_reg, NULL);
+    mvdma_job_start(p_instance->p_reg, p_cb, p_request, NRFX_MVDMA_AXIMODE_DETECT, p_context);
 
     return NRFX_SUCCESS;
 }
@@ -207,14 +241,22 @@ nrfx_err_t nrfx_mvdma_multi_list_set(nrfx_mvdma_t const *                    p_i
         return NRFX_ERROR_BUSY;
     }
 
-    if (p_cb->mode == NRF_MVDMA_MODE_SINGLE)
-    {
-        mvdma_state_change(p_instance);
-    }
-
+    mvdma_mode_set(p_instance->p_reg, p_cb, NRF_MVDMA_MODE_MULTI);
     nrfy_mvdma_multi_job_list_set(p_instance->p_reg, p_request);
 
     return NRFX_SUCCESS;
+}
+
+/* Function checks if sink or source of a job descriptor in the list (in multimode) is using
+ * peripheral mode.
+ */
+static bool mvdma_multi_peripheral_check(NRF_MVDMA_Type * p_reg, bool sink, uint8_t idx)
+{
+    nrf_vdma_job_t *p_job = sink ?
+            (nrf_vdma_job_t *)((uint32_t **)nrfy_mvdma_sink_list_ptr_get(p_reg))[idx] :
+            (nrf_vdma_job_t *)((uint32_t **)nrfy_mvdma_source_list_ptr_get(p_reg))[idx];
+
+    return mvdma_peripheral_job_check(p_job);
 }
 
 nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
@@ -222,6 +264,8 @@ nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
                                        void *               p_context)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    nrf_mvdma_aximode_t prev_aximode;
+    nrfx_mvdma_aximode_t aximode = NRFX_MVDMA_AXIMODE_DETECT;
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     if (p_cb->mode != NRF_MVDMA_MODE_MULTI)
@@ -235,11 +279,24 @@ nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
     }
     p_cb->busy = true;
 
-    // MVDMA reset is needed in case of starting new transfer after abort or error.
-    mvdma_config_reset(p_instance);
+    prev_aximode = p_cb->aximode;
+    if (aximode == NRFX_MVDMA_AXIMODE_DETECT)
+    {
+        bool periph = mvdma_multi_peripheral_check(p_instance->p_reg, true, idx) ||
+                      mvdma_multi_peripheral_check(p_instance->p_reg, false, idx);
+        p_cb->aximode = periph ? NRF_MVDMA_AXIMODE_AXILITE : NRF_MVDMA_AXIMODE_AXI;
+    }
+    else
+    {
+        p_cb->aximode = (nrf_mvdma_aximode_t)aximode;
+    }
+
+    if (p_cb->aximode != prev_aximode)
+    {
+        nrfy_mvdma_aximode_set(p_instance->p_reg, p_cb->aximode);
+    }
 
     p_cb->p_context = p_context;
-
     nrfy_mvdma_multi_start(p_instance->p_reg, idx, NULL);
 
     return NRFX_SUCCESS;
@@ -299,26 +356,46 @@ static void mvdma_irq_handler(NRF_MVDMA_Type * p_reg, mvdma_control_block_t * p_
                     NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR) |
                     NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR);
 
+    uint32_t reset_req_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR)   |
+                              NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR) |
+#if NRF_MVDMA_HAS_NEW_VER
+                              NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_PAUSED);
+#else
+                              NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_STOPPED);
+#endif
+
     uint32_t event_mask = nrfy_mvdma_events_process(p_reg, mask, &list_request);
 
     event.type = NRFX_MVDMA_EVT_REQUEST_DONE;
 
-    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR))
+    if (event_mask & reset_req_mask)
     {
-        event.type = NRFX_MVDMA_EVT_ERROR;
-        event.source.error = nrfy_mvdma_source_error_get(p_reg);
+        // Request DMA reset before next transfer. It's deferred from here to because
+        // process involves pending on hardware event and it should be avoided in the
+        // interrupt handler.
+        p_cb->reset_req = true;
+
+        if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SOURCEBUSERROR))
+        {
+            event.type = NRFX_MVDMA_EVT_ERROR;
+            event.source.error = nrfy_mvdma_source_error_get(p_reg);
+        }
+
+        if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR))
+        {
+            event.type = NRFX_MVDMA_EVT_ERROR;
+            event.sink.error = nrfy_mvdma_sink_error_get(p_reg);
+        }
     }
 
-    if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_MVDMA_EVENT_SINKBUSERROR))
-    {
-        event.type = NRFX_MVDMA_EVT_ERROR;
-        event.sink.error = nrfy_mvdma_sink_error_get(p_reg);
-    }
+    // Store user context and handler as once busy flag is cleared both can be overwritten.
+    void * p_context = p_cb->p_context;
+    nrfx_mvdma_event_handler_t handler = p_cb->handler;
 
     p_cb->busy = false;
-    if (p_cb->handler)
+    if (handler)
     {
-        p_cb->handler(&event, p_cb->p_context);
+        handler(&event, p_context);
     }
 }
 

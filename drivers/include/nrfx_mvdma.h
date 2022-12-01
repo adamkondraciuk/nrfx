@@ -148,13 +148,15 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
  * @param p_instance Pointer to the driver instance structure.
  * @param p_buffer   Pointer to the buffer to fill with zeros.
  * @param size       Size of the buffer
+ * @param p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS    Clear operation requested successfully.
  * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
  */
 nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
                                    void const *         p_buffer,
-                                   size_t               size);
+                                   size_t               size,
+                                   void *               p_context);
 
 /**
  * @brief Function for executing the specified source and sink job lists.

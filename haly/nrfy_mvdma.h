@@ -437,6 +437,14 @@ NRFY_STATIC_INLINE void nrfy_mvdma_mode_set(NRF_MVDMA_Type * p_reg,
     nrf_barrier_w();
 }
 
+/** @refhal{nrf_mvdma_aximode_set} */
+NRFY_STATIC_INLINE void nrfy_mvdma_aximode_set(NRF_MVDMA_Type *    p_reg,
+                                               nrf_mvdma_aximode_t aximode)
+{
+    nrf_mvdma_aximode_set(p_reg, aximode);
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_mvdma_source_list_ptr_set} */
 NRFY_STATIC_INLINE void nrfy_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,
                                                        nrf_vdma_job_t const * p_job)

@@ -101,6 +101,13 @@ typedef enum
     NRF_MVDMA_MODE_MULTI  = MVDMA_CONFIG_MODE_MODE_MultiMode,  ///< Descriptor list pointers are stored in a list in the memory.
 } nrf_mvdma_mode_t;
 
+/** @brief MVDMA AXI modes. */
+typedef enum
+{
+    NRF_MVDMA_AXIMODE_AXI     = MVDMA_CONFIG_AXIMODE_AXIMODE_AXI,     ///< AXI burst transactions may be longer than one beat.
+    NRF_MVDMA_AXIMODE_AXILITE = MVDMA_CONFIG_AXIMODE_AXIMODE_AXILITE, ///< All AXI transactions are one-beat accesses.
+} nrf_mvdma_aximode_t;
+
 /** @brief MVDMA FIFO status. */
 typedef enum
 {
@@ -299,6 +306,14 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
  * @param[in] mode  Desired operating mode for MVDMA.
  */
 NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode_t mode);
+
+/**
+ * @brief Function for setting the AXI mode.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] aximode Desired AXI mode for MVDMA.
+ */
+NRF_STATIC_INLINE void nrf_mvdma_aximode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_aximode_t aximode);
 
 /**
  * @brief Function for setting the pointer to the source descriptor list
@@ -518,6 +533,11 @@ NRF_STATIC_INLINE void nrf_mvdma_publish_clear(NRF_MVDMA_Type *  p_reg,
 NRF_STATIC_INLINE void nrf_mvdma_mode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_mode_t mode)
 {
     p_reg->CONFIG.MODE = ((uint32_t)mode << MVDMA_CONFIG_MODE_MODE_Pos);
+}
+
+NRF_STATIC_INLINE void nrf_mvdma_aximode_set(NRF_MVDMA_Type * p_reg, nrf_mvdma_aximode_t aximode)
+{
+    p_reg->CONFIG.AXIMODE = ((uint32_t)aximode << MVDMA_CONFIG_AXIMODE_AXIMODE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_mvdma_source_list_ptr_set(NRF_MVDMA_Type *       p_reg,
