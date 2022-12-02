@@ -35,14 +35,24 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 /*lint ++flb "Enter library region" */
 
 #define __SYSTEM_CLOCK_MHZ      (1000000UL)
+
+#if defined(NRF_APPLICATION) || defined(NRF_SECURE) || defined(NRF_FLPR) || \
+    defined(NRF_SYSCTRL) || defined(NRF_BBPR)
 #define __SYSTEM_CLOCK_DEFAULT  (320ul * __SYSTEM_CLOCK_MHZ)
+#elif defined(NRF_RADIOCORE)
+#define __SYSTEM_CLOCK_DEFAULT  (256ul * __SYSTEM_CLOCK_MHZ)
+#elif defined(NRF_PPR)
+#define __SYSTEM_CLOCK_DEFAULT  (16ul * __SYSTEM_CLOCK_MHZ)
+#else
+#error "Undefined domain"
+#endif
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used));  
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_DEFAULT;
 #elif defined ( __ICCARM__ )
-    __root uint32_t SystemCoreClock;
+    __root uint32_t SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
 #elif defined   ( __GNUC__ )
-    uint32_t SystemCoreClock __attribute__((used));
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_DEFAULT;
 #endif
 
 void SystemCoreClockUpdate(void)
