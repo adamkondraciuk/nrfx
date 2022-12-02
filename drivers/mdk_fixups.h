@@ -6791,6 +6791,15 @@ typedef struct {
 
 #define NRF_RESETHUB_Type NRF_RESETHUB_Type_fixed
 
+#if defined(BOARD_FPGA)
+/* MDK 8.52.0 contains fix for HM-17533 bug, however the currently available FPGA netlist (017)
+ * is not yet aligned to that change. Revert it back for now so MINTTHRESH feature remains available. */
+#undef VPRCSR_MINTTHRESH_TH_Pos
+#undef VPRCSR_MINTTHRESH_TH_Msk
+#define VPRCSR_MINTTHRESH_TH_Pos (24UL)
+#define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos)
+#endif
+
 #endif // defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA)
 
 #endif // HALTIUM_XXAA
