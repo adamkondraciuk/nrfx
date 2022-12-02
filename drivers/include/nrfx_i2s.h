@@ -47,7 +47,7 @@ typedef struct
     nrf_i2s_channels_t channels;      ///< Enabled channels.
     nrf_i2s_mck_t      mck_setup;     ///< Master clock setup.
     nrf_i2s_ratio_t    ratio;         ///< MCK/LRCK ratio.
-#if NRF_I2S_HAS_CLKCONFIG
+#if NRF_I2S_HAS_CLKCONFIG || defined(__NRFX_DOXYGEN__)
     nrf_i2s_clksrc_t   clksrc;        ///< Clock source selection.
     bool               enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
 #endif

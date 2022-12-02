@@ -393,7 +393,7 @@ nrfx_err_t nrfx_qspi_lfm_xfer(void const * p_tx_buffer,
                               size_t       transfer_length,
                               bool         finalize);
 
-#if NRF_QSPI_HAS_XIP_ENC
+#if NRF_QSPI_HAS_XIP_ENC || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the XIP encryption.
  *
@@ -406,7 +406,7 @@ nrfx_err_t nrfx_qspi_lfm_xfer(void const * p_tx_buffer,
 nrfx_err_t nrfx_qspi_xip_encrypt(nrf_qspi_encryption_t const * p_config);
 #endif
 
-#if NRF_QSPI_HAS_DMA_ENC
+#if NRF_QSPI_HAS_DMA_ENC || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the EasyDMA encryption.
  *

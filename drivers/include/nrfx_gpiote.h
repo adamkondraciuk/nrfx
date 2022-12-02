@@ -740,7 +740,7 @@ void nrfx_gpiote_set_task_trigger(nrfx_gpiote_pin_t pin);
 void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_pin_t pin);
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
-#if NRF_GPIOTE_HAS_LATENCY
+#if NRF_GPIOTE_HAS_LATENCY || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the latency setting.
  *

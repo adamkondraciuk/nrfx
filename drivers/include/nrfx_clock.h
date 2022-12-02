@@ -88,7 +88,8 @@ void nrfx_clock_stop(nrf_clock_domain_t domain);
  */
 NRFX_STATIC_INLINE bool nrfx_clock_is_running(nrf_clock_domain_t domain, void * p_clk_src);
 
-#if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M
+#if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M || \
+    defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the specified clock domain divider.
  *
@@ -162,7 +163,7 @@ NRFX_STATIC_INLINE void nrfx_clock_hfclk_stop(void);
 NRFX_STATIC_INLINE bool nrfx_clock_hfclk_is_running(void);
 
 
-#if NRF_CLOCK_HAS_HFCLKAUDIO
+#if NRF_CLOCK_HAS_HFCLKAUDIO || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting the HFCLKAUDIO configuration.
  *

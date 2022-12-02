@@ -46,10 +46,10 @@ typedef struct
     nrf_pdm_gain_t    gain_l;             ///< Left channel gain.
     nrf_pdm_gain_t    gain_r;             ///< Right channel gain.
     uint8_t           interrupt_priority; ///< Interrupt priority.
-#if NRF_PDM_HAS_RATIO_CONFIG
+#if NRF_PDM_HAS_RATIO_CONFIG || defined(__NRFX_DOXYGEN__)
     nrf_pdm_ratio_t   ratio;              ///< Ratio between PDM_CLK and output sample rate.
 #endif
-#if NRF_PDM_HAS_MCLKCONFIG
+#if NRF_PDM_HAS_MCLKCONFIG || defined(__NRFX_DOXYGEN__)
     nrf_pdm_mclksrc_t mclksrc;            ///< Master clock source selection.
 #endif
     bool              skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
