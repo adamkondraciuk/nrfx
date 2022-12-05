@@ -199,6 +199,16 @@ extern "C" {
            (p_reg == NRF_TIMER020)             \
         || (p_reg == NRF_TIMER021)             \
         || (p_reg == NRF_TIMER022))
+#elif defined(LUMOS_XXAA)
+    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
+    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
+           (p_reg == NRF_TIMER20)              \
+        || (p_reg == NRF_TIMER21)              \
+        || (p_reg == NRF_TIMER22)              \
+        || (p_reg == NRF_TIMER23)              \
+        || (p_reg == NRF_TIMER24))
+    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
+           (p_reg == NRF_TIMER10))
 #else
     /** @brief Macro for checking whether the base frequency for the specified timer is 320 MHz. */
     #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
