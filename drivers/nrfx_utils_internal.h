@@ -135,6 +135,20 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
 #define _NRFX_IRQ_HANDLER_DECLARE(periph_name, prefix, i, periph_name_small) \
     void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void);
 
+/* Macro for getting third argument from the set of input arguments. */
+#define __NRFX_GET_ARG3(arg1, arg2, arg3, ...) arg3
+#define _NRFX_GET_ARG3(...) __NRFX_GET_ARG3(__VA_ARGS__)
+
+/* Macro for triggering argument evaluation. */
+#define _NRFX_EVAL(...) __VA_ARGS__
+
+/* Macro used for a trick which detects if input argument is wrapped in parenthesis.
+ *
+ * Macro that has parenthesis will expand to additional comma (additional argument)
+ * and that is used to return 0 or 1.
+ */
+#define _NRFX_ARG_HAS_PARENTHESIS(...) ,
+
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
 

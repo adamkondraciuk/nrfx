@@ -273,6 +273,23 @@ extern "C" {
     NRFX_FOREACH_ENABLED(periph_name, _NRFX_IRQ_HANDLER_LIST, (), (), periph_name_small)
 
 /**
+ * @brief Macro for checking if given peripheral instance is present on the target.
+ *
+ * Macro utilizes the fact that for each existing instance a define is created which points to
+ * the memory mapped register set casted to a register set structure. It is wrapped in parenthesis
+ * and existance of parethesis wrapping is used to determine if instance exists. It if does not
+ * exist then token (e.g. NRF_SPIM10) is undefined so it does not have parenthesis wrapping.
+ *
+ * Since macro returns literal 1 it can be used by other macros.
+ *
+ * @param[in] _inst Instance, .e.g SPIM10.
+ *
+ * @retval 1 If instance is present.
+ * @retval 0 If instance is not present.
+ */
+#define NRFX_INSTANCE_PRESENT(_inst) NRFX_ARG_HAS_PARENTHESIS(NRFX_CONCAT(NRF_, _inst))
+
+/**
  * @brief Macro for getting the smaller value between two arguments.
  *
  * @param[in] a First argument.

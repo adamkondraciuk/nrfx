@@ -152,6 +152,18 @@
 #define NRFX_CONCAT(...) \
     NRFX_CONCAT_2(_NRFX_CONCAT_, NRFX_NUM_VA_ARGS_LESS_1(__VA_ARGS__))(__VA_ARGS__)
 
+/**
+ * @brief Macro for checking if argument starts with opening round bracket and contains matching
+ *        closing bracket (parenthesis).
+ *
+ * @param[in] x Input argument.
+ *
+ * @retval 1 If input argument starts with opening bracket and contains closing bracket.
+ * @retval 0 If input argument does not match above mentioned condition.
+ */
+#define NRFX_ARG_HAS_PARENTHESIS(x) _NRFX_GET_ARG3(_NRFX_EVAL(_NRFX_ARG_HAS_PARENTHESIS x, 1, 0))
+
+
 /** @} */
 
 #endif /* NRFX_UTILS_H__ */
