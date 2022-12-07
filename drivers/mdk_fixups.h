@@ -1601,6 +1601,19 @@ __IOM uint32_t CC[8];
   #define GPIOTE_FEATURE_CLR_PRESENT
   #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
 
+/* WRITEBUFSIZE @Bits 8..13 : Write buffer size. */
+  #define RRAMC_CONFIG_WRITEBUFSIZE_Pos (8UL)                 /*!< Position of WRITEBUFSIZE field.                             */
+  #define RRAMC_CONFIG_WRITEBUFSIZE_Msk (0x3FUL << RRAMC_CONFIG_WRITEBUFSIZE_Pos) /*!< Bit mask of WRITEBUFSIZE field.         */
+  #define RRAMC_CONFIG_WRITEBUFSIZE_Min (0x0UL)               /*!< Min size of WRITEBUFSIZE field.                             */
+  #define RRAMC_CONFIG_WRITEBUFSIZE_Max (0x20UL)              /*!< Max size of WRITEBUFSIZE field.                             */
+
+/* POWERONFAILURE @Bit 16 : Power on failure warning handling configuration */
+  #define RRAMC_POWER_CONFIG_POWERONFAILURE_Pos (16UL) /*!< Position of POWERONFAILURE field.                                     */
+  #define RRAMC_POWER_CONFIG_POWERONFAILURE_Msk (0xFFFFUL << RRAMC_POWER_CONFIG_POWERONFAILURE_Pos) /*!< Bit mask of POWERONFAILURE field.*/   
+
+/* RRAMC_WAITSTATES: Waitstates for RRAM read access */
+  #define RRAMC_WAITSTATES_FREQ_MaxCount 3 /*!< Max size of the index array related to the AXI clock frequencies. */
+
 #endif // defined(LUMOS_XXAA)
 
 #if defined(NRF9230_XXAA)

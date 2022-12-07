@@ -81,6 +81,8 @@
 
 @defgroup nrf_rng RNG
 
+@defgroup nrf_rramc RRAMC
+
 @defgroup nrf_rtc RTC
 
 @defgroup nrf_saadc SAADC
