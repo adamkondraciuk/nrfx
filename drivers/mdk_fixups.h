@@ -126,7 +126,7 @@ typedef enum
 
 /* MDK-2059 */
 #define ADDRESS_REGION_Pos        (29UL)
-#define ADDRESS_REGION_Msk        (0xEUL << ADDRESS_REGION_Pos)
+#define ADDRESS_REGION_Msk        (0x7UL << ADDRESS_REGION_Pos)
 #define ADDRESS_SECURITY_Pos      (28UL)
 #define ADDRESS_SECURITY_Msk      (0x1UL << ADDRESS_SECURITY_Pos)
 #define ADDRESS_DOMAIN_Pos        (24UL)
@@ -134,7 +134,7 @@ typedef enum
 #define ADDRESS_BUS_Pos           (16UL)
 #define ADDRESS_BUS_Msk           (0xFFUL << ADDRESS_BUS_Pos)
 #define ADDRESS_BRIDGE_GROUP_Pos  (20UL)
-#define ADDRESS_BRIDGE_GROUP_Msk  (0xFFUL << ADDRESS_BRIDGE_GROUP_Pos)
+#define ADDRESS_BRIDGE_GROUP_Msk  (0xFUL << ADDRESS_BRIDGE_GROUP_Pos)
 #define ADDRESS_DOMAIN_SPEED_Pos  (20UL)
 #define ADDRESS_DOMAIN_SPEED_Msk  (0x1UL << ADDRESS_DOMAIN_SPEED_Pos)
 #define ADDRESS_DOMAIN_SPEED_Fast (0x0UL)
