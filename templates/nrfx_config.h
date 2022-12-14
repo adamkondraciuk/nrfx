@@ -26,7 +26,7 @@
     #include <nrfx_config_nrf5340_network.h>
 #elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
     #include <nrfx_config_nrf91.h>
-#elif defined(LILIUMSOC1_XXAA) || defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)
+#elif defined(NRF54H20_ENGA_XXAA) || defined(LILIUMFP1_XXAA) || defined(NRF9230_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_haltium_application.h>
     #elif defined(NRF_RADIOCORE)
@@ -46,7 +46,7 @@
     #error "Unknown device."
 #endif
 
-#if defined(LILIUMSOC1_XXAA) || defined(LILIUMFP1_XXAA)
+#if defined(NRF54H20_ENGA_XXAA) || defined(LILIUMFP1_XXAA)
     #include <nrfx_config_haltium_global.h>
     #include <nrfx_config_nrf5420_global.h>
 #endif

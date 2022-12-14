@@ -17,7 +17,7 @@ extern "C" {
  *          peripheral.
  */
 
-#if defined(LILIUMSOC1_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF54H20_ENGA_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Write key. */
 /* @todo Assert all KEY values and offsets are equal. */
 #define NRF_TAMPC_KEY_MASK 0
@@ -234,7 +234,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -247,7 +247,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
                                                    | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -260,7 +260,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
                                                    | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -273,7 +273,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_value_set(NRF_TAMPC_Type *       p_
                                                     | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -328,7 +328,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_r
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].DBGEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -341,7 +341,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_r
                                                    | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].NIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_NIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -354,7 +354,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_r
                                                    | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].SPIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -367,7 +367,7 @@ NRF_STATIC_INLINE void nrf_tampc_domain_ctrl_lock_set(NRF_TAMPC_Type *       p_r
                                                     | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.DOMAIN[domain].SPNIDEN.CTRL =
                 (TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_DOMAIN_SPNIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -422,7 +422,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.AP[domain].DBGEN.CTRL =
                 (TAMPC_PROTECT_AP_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_AP_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -435,7 +435,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_value_set(NRF_TAMPC_Type *       p_reg,
                                                | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.AP[domain].SPIDEN.CTRL =
                 (TAMPC_PROTECT_AP_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_AP_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -484,7 +484,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
     switch (type)
     {
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.AP[domain].DBGEN.CTRL =
                 (TAMPC_PROTECT_AP_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_AP_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -497,7 +497,7 @@ NRF_STATIC_INLINE void nrf_tampc_ap_ctrl_lock_set(NRF_TAMPC_Type *       p_reg,
                                                | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.AP[domain].SPIDEN.CTRL =
                 (TAMPC_PROTECT_AP_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_AP_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -542,7 +542,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
     switch (type)
     {
         case NRF_TAMPC_CTRL_DEVICEEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -556,7 +556,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DBGEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -570,7 +570,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.NIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -584,7 +584,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -598,7 +598,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_value_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -654,7 +654,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       
     switch (type)
     {
         case NRF_TAMPC_CTRL_DEVICEEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -668,7 +668,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DBGEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -682,7 +682,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.NIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -696,7 +696,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -710,7 +710,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_lock_set(NRF_TAMPC_Type *       
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -766,7 +766,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
     switch (type)
     {
         case NRF_TAMPC_CTRL_DEVICEEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DEVICEEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DEVICEEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -780,7 +780,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_DBGEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.DBGEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_DBGEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -794,7 +794,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_NIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.NIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_NIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -808,7 +808,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;
@@ -822,7 +822,7 @@ NRF_STATIC_INLINE void nrf_tampc_coresight_ctrl_fault_set(NRF_TAMPC_Type *      
                 | NRF_TAMPC_KEY_MASK;
             break;
         case NRF_TAMPC_CTRL_SPNIDEN:
-#if !defined(LILIUMSOC1_XXAA)
+#if !defined(NRF54H20_ENGA_XXAA)
             p_reg->PROTECT.CORESIGHT.SPNIDEN.CTRL =
                 (TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Clear
                  << TAMPC_PROTECT_CORESIGHT_SPNIDEN_CTRL_WRITEPROTECTION_Pos) | NRF_TAMPC_KEY_MASK;

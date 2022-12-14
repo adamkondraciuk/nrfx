@@ -1,7 +1,7 @@
 #ifndef MDK_FIXUPS_H__
 #define MDK_FIXUPS_H__
 
-#if defined(LILIUMFP1_XXAA) || defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA) \
+#if defined(LILIUMFP1_XXAA) || defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_XXAA) \
     || defined(NRF7140_XXAA)
 #define HALTIUM_XXAA 1
 #endif
@@ -1220,7 +1220,7 @@ typedef struct {
 #define EASYVDMA_PRESENT
 #endif
 
-#if defined(LILIUMSOC1_XXAA) && (defined(NRF_APPLICATION))
+#if defined(NRF54H20_ENGA_XXAA) && (defined(NRF_APPLICATION))
 #undef EGU_PRESENT
 #endif
 
@@ -6782,7 +6782,7 @@ typedef struct {
 #define UARTE137_EASYDMA_MAXCNT_SIZE UARTE137_EASYDMA_MAXCNT_SIZE_MAX
 #endif
 
-#if defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA)
+#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_XXAA)
 /* ===================================================== Struct RESETHUB ===================================================== */
 /**
   * @brief Reset hub
@@ -6824,7 +6824,7 @@ typedef struct {
 #define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos)
 #endif
 
-#endif // defined(LILIUMSOC1_XXAA) || defined(NRF9230_XXAA)
+#endif // defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_XXAA)
 
 #endif // HALTIUM_XXAA
 
