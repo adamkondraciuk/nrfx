@@ -201,6 +201,13 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
             nrf_grtc_sys_counter_active_set(p_reg, true);
             nrf_barrier_w();
         }
+#else
+        // Perform action which returns SysCounter to ative state.
+        // TODO: Check whether solution https://projecttools.nordicsemi.no/jira/browse/MLT-3897
+        //       works. Also according to HW team  calling `nrf_grtc_sys_counter_active_set()`
+        //       should give expected result.
+        (void)nrf_grtc_sys_counter_low_get(p_reg);
+        (void)nrf_grtc_sys_counter_high_get(p_reg);
 #endif
         uint32_t evt_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_GRTC_EVENT_SYSCOUNTERVALID);
         while (!__nrfy_internal_grtc_events_process(p_reg, evt_mask))

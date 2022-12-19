@@ -1784,7 +1784,7 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
             break;
 
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_CC_COUNT);
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
             p_reg->FEATURE.GRTC.INTERRUPT[index] =
                 ((p_reg->FEATURE.GRTC.INTERRUPT[index] &
                   ~SPU_FEATURE_GRTC_INTERRUPT_OWNERID_Msk) |

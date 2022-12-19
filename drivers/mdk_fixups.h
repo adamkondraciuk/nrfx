@@ -321,10 +321,10 @@ typedef enum
 /** @brief Fixup for the GRTC IRQn lines. */
     #define GRTC_IRQn       GRTC_0_IRQn
 /** @brief Fixup for the GRTC IRQHandler. */
-    #define GRTC_IRQHandler GRTC0_0_IRQHandler
+    #define GRTC_IRQHandler GRTC_0_IRQHandler
 #else
     #define GRTC_IRQn       GRTC_1_IRQn
-    #define GRTC_IRQHandler GRTC0_1_IRQHandler
+    #define GRTC_IRQHandler GRTC_1_IRQHandler
 #endif
 
 #define LPCOMP_REFSEL_RESOLUTION 16

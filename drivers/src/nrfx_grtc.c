@@ -185,7 +185,9 @@ nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter)
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_counter);
     *p_counter = 0;
+
     nrfx_err_t err_code = NRFX_SUCCESS;
+#if NRFY_GRTC_HAS_EXTENDED
     if (!is_syscounter_running())
     {
         err_code = NRFX_ERROR_INTERNAL;
@@ -194,6 +196,7 @@ nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter)
                          NRFX_LOG_ERROR_STRING_GET(err_code));
         return err_code;
     }
+#endif // NRFY_GRTC_HAS_EXTENDED
 
 #if NRFY_GRTC_HAS_SYSCOUNTER_ARRAY
     if (nrfy_grtc_sys_counter_active_check(NRF_GRTC))
@@ -462,6 +465,11 @@ void nrfx_grtc_uninit(void)
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_grtc_int_disable(NRF_GRTC, GRTC_ALL_INT_MASK);
+#if NRFY_GRTC_HAS_EXTENDED
+    nrfy_grtc_sys_counter_set(NRF_GRTC, false);
+    nrf_grtc_task_trigger(NRF_GRTC, NRF_GRTC_TASK_STOP);
+    nrf_grtc_task_trigger(NRF_GRTC, NRF_GRTC_TASK_CLEAR);
+#endif // NRFY_GRTC_HAS_EXTENDED
 
     for (uint8_t chan = 0; ch_mask; chan++, ch_mask >>= 1)
     {
