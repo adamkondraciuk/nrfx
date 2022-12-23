@@ -186,6 +186,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_start(NRF_GRTC_Type * p_reg, bool b
  */
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool busy_wait)
 {
+    nrf_grtc_sys_counter_auto_mode_set(p_reg, true);
     nrf_grtc_sys_counter_set(p_reg, true);
     nrf_barrier_w();
     if (busy_wait)
