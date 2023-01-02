@@ -718,6 +718,68 @@ typedef struct {
 #define SPU_FEATURE_GPIO_MaxCount 16
 #endif
 
+#if defined(LILIUMFP1_XXAA) || defined(NRF7140_XXAA)
+/**
+  * @brief PROCESSOR [SPU_FEATURE_BELLS_PROCESSOR] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  TASKS[16];                         /*!< (@ 0x00000000) Configuration of features for tasks pair [(o * 2) + 1:o
+                                                                         * 2] of Processor ID n*/
+  __IOM uint32_t  EVENTS[16];                        /*!< (@ 0x00000040) Configuration of features for events pair [(o * 2) +
+                                                                         1:o * 2] of Processor ID n*/
+  __IOM uint32_t  INTERRUPT[16];                     /*!< (@ 0x00000080) Configuration of features for interrupt register pair
+                                                                         [(o * 2) + 1:o * 2] of Processor ID n*/
+} NRF_SPU_FEATURE_BELLS_PROCESSOR_Type_fixed;              /*!< Size = 192 (0x0C0)                                                   */
+
+/**
+  * @brief BELLS [SPU_FEATURE_BELLS] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_SPU_FEATURE_BELLS_PROCESSOR_Type_fixed PROCESSOR[8]; /*!< (@ 0x00000000) (unspecified)                                   */
+} NRF_SPU_FEATURE_BELLS_Type_fixed;                        /*!< Size = 1536 (0x600)                                                  */
+
+/* SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT: Configuration of features for interrupt register pair [(o * 2) + 1:o * 2] of Processor
+                                           ID n */
+
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_MaxCount (16UL) /*!< Max size of INTERRUPT[16] array.                          */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[16] register.          */
+
+/* SECATTR @Bit 4 : SECATTR feature */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos (4UL) /*!< Position of SECATTR field.                              */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos) /*!<
+                                                                        Bit mask of SECATTR field.*/
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Min (0x0UL) /*!< Min enumerator value of SECATTR field.                */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Max (0x1UL) /*!< Max enumerator value of SECATTR field.                */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_NonSecure (0x0UL) /*!< Feature is available for non-secure usage       */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Secure (0x1UL) /*!< Feature is reserved for secure usage               */
+
+/* LOCK @Bit 8 : LOCK feature */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos (8UL) /*!< Position of LOCK field.                                    */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos) /*!< Bit mask
+                                                                        of LOCK field.*/
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                      */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                      */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Unlocked (0x0UL) /*!< Feature permissions can be updated                  */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Locked (0x1UL) /*!< Feature permissions can not be changed until the next
+                                                                     reset*/
+
+/* BLOCK @Bit 12 : BLOCK feature */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos (12UL) /*!< Position of BLOCK field.                                 */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos) /*!< Bit
+                                                                        mask of BLOCK field.*/
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Min (0x0UL) /*!< Min enumerator value of BLOCK field.                    */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Max (0x1UL) /*!< Max enumerator value of BLOCK field.                    */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Available (0x0UL) /*!< Feature is accessible                             */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Blocked (0x1UL) /*!< Feature cannot be accessed until next reset         */
+
+/* OWNERID @Bits 16..19 : Feature owner ID */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos (16UL) /*!< Position of OWNERID field.                             */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Msk (0xFUL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos) /*!<
+                                                                        Bit mask of OWNERID field.*/
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Min (0x0UL) /*!< Min value of OWNERID field.                           */
+#define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Max (0xFUL) /*!< Max size of OWNERID field.                            */
+#endif /* LILIUMFP1_XXAA || NRF7140_XXAA */
+
 typedef union {
   struct {
     __IOM NRF_SPU_FEATURE_IPCT_Type IPCT;
@@ -736,7 +798,11 @@ typedef union {
       #pragma GCC diagnostic pop
     #endif
   };
+#if defined(LILIUMFP1_XXAA) || defined(NRF7140_XXAA)
+  __IOM NRF_SPU_FEATURE_BELLS_Type_fixed BELLS;
+#else
   __IOM NRF_SPU_FEATURE_BELLS_Type BELLS;
+#endif
 } NRF_SPU_FEATURE_Type_fixed;
 
 typedef struct {

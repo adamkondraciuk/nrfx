@@ -77,16 +77,18 @@ extern "C" {
 
 /** @brief Number of BELL domains. */
 #if NRF_SPU_HAS_DOMAIN
-#define NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT     SPU_FEATURE_BELLS_DOMAIN_MaxCount
+#define NRF_SPU_FEATURE_BELL_DOMAIN_COUNT        SPU_FEATURE_BELLS_DOMAIN_MaxCount
 #else
-#define NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT     SPU_FEATURE_BELLS_PROCESSOR_MaxCount
+#define NRF_SPU_FEATURE_BELLS_PROCESSOR_COUNT    SPU_FEATURE_BELLS_PROCESSOR_MaxCount
 #endif
 
-/** @brief Number of BELL bells. */
+/** @brief Number of BELL Domain/Processor features. */
 #if NRF_SPU_HAS_DOMAIN
 #define NRF_SPU_FEATURE_BELL_BELL_COUNT          SPU_FEATURE_BELLS_DOMAIN_BELL_MaxCount
 #else
-#define NRF_SPU_FEATURE_BELL_BELL_COUNT          SPU_FEATURE_BELLS_PROCESSOR_INTEN_MaxCount
+#define NRF_SPU_FEATURE_BELLS_TASKS_COUNT        SPU_FEATURE_BELLS_PROCESSOR_TASKS_MaxCount
+#define NRF_SPU_FEATURE_BELLS_EVENTS_COUNT       SPU_FEATURE_BELLS_PROCESSOR_EVENTS_MaxCount
+#define NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT    SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_MaxCount
 #endif
 
 #endif
@@ -165,7 +167,13 @@ typedef enum
     NRF_SPU_FEATURE_GPIO_PIN,           /**< GPIO pin. */
     NRF_SPU_FEATURE_GRTC_CC,            /**< GRTC compare channel. */
     NRF_SPU_FEATURE_GRTC_INTERRUPT,     /**< GRTC interrupt. */
+#if NRF_SPU_HAS_DOMAIN
     NRF_SPU_FEATURE_BELLS_BELL,         /**< BELLS bell pair. */
+#else
+    NRF_SPU_FEATURE_BELLS_TASKS,        /**< BELLS tasks pair. */
+    NRF_SPU_FEATURE_BELLS_EVENTS,       /**< BELLS events pair. */
+    NRF_SPU_FEATURE_BELLS_INTERRUPT,    /**< BELLS interrupt pair. */
+#endif
 } nrf_spu_feature_t;
 
 #endif
@@ -1076,16 +1084,30 @@ NRF_STATIC_INLINE bool nrf_spu_feature_secattr_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_INTERRUPT_SECATTR_Msk)
                    >> SPU_FEATURE_GRTC_INTERRUPT_SECATTR_Pos;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Pos;
 #else
-            /* TODO: Align to FP1 */
-            return 0;
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_Pos;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_Pos;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos;
 #endif
 
         default:
@@ -1158,16 +1180,30 @@ NRF_STATIC_INLINE bool nrf_spu_feature_lock_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_INTERRUPT_LOCK_Msk)
                    >> SPU_FEATURE_GRTC_INTERRUPT_LOCK_Pos;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Pos;
 #else
-           /* TODO: Align to FP1 */
-           return 0;
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_TASKS_LOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_TASKS_LOCK_Pos;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_EVENTS_LOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_EVENTS_LOCK_Pos;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos;
 #endif
         default:
             NRFX_ASSERT(0);
@@ -1239,18 +1275,31 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_INTERRUPT_BLOCK_Msk)
                    >> SPU_FEATURE_GRTC_INTERRUPT_BLOCK_Pos;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
                     & SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Msk)
                    >> SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Pos;
 #else
-           /* TODO: Align to FP1 */
-           return 0;
-#endif
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_TASKS_BLOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_TASKS_BLOCK_Pos;
 
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_EVENTS_BLOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_EVENTS_BLOCK_Pos;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            return (p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos;
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1321,16 +1370,30 @@ NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p
                                   & SPU_FEATURE_GRTC_INTERRUPT_OWNERID_Msk)
                                  >> SPU_FEATURE_GRTC_INTERRUPT_OWNERID_Pos);
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             return (nrf_owner_t)((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex]
-                                  & SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Msk)
-                                 >> SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Pos);
+                    & SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Msk)
+                   >> SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Pos);
 #else
-            /* Align to FP1. */
-            return (nrf_owner_t)0;
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            return (nrf_owner_t)((p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_TASKS_OWNERID_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_TASKS_OWNERID_Pos);
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            return (nrf_owner_t)((p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_EVENTS_OWNERID_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_EVENTS_OWNERID_Pos);
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            return (nrf_owner_t)((p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex]
+                    & SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Msk)
+                   >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos);
 #endif
         default:
             NRFX_ASSERT(0);
@@ -1448,9 +1511,8 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
                   <<  SPU_FEATURE_GRTC_INTERRUPT_SECATTR_Pos));
             break;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
@@ -1459,10 +1521,41 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
                    SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Secure :
                    SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_NonSecure)
                   <<  SPU_FEATURE_BELLS_DOMAIN_BELL_SECATTR_Pos));
-#else
-/* TODO: Align to FP1 */
-#endif
             break;
+#else
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_Msk) |
+                 ((enable ?
+                   SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_Secure :
+                   SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_NonSecure)
+                  <<  SPU_FEATURE_BELLS_PROCESSOR_TASKS_SECATTR_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_Msk) |
+                 ((enable ?
+                   SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_Secure :
+                   SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_NonSecure)
+                  <<  SPU_FEATURE_BELLS_PROCESSOR_EVENTS_SECATTR_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Msk) |
+                 ((enable ?
+                   SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Secure :
+                   SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_NonSecure)
+                  <<  SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos));
+            break;
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -1561,19 +1654,43 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
                   << SPU_FEATURE_GRTC_INTERRUPT_LOCK_Pos));
             break;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
                   ~SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Msk) |
                  (SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Locked
                   << SPU_FEATURE_BELLS_DOMAIN_BELL_LOCK_Pos));
-#else
-/* TODO: Align to FP1 */
-#endif
             break;
+#else
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_TASKS_LOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_TASKS_LOCK_Locked
+                  << SPU_FEATURE_BELLS_PROCESSOR_TASKS_LOCK_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_EVENTS_LOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_EVENTS_LOCK_Locked
+                  << SPU_FEATURE_BELLS_PROCESSOR_EVENTS_LOCK_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Locked
+                  << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos));
+            break;
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -1672,19 +1789,43 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
                   << SPU_FEATURE_GRTC_INTERRUPT_BLOCK_Pos));
             break;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
                   ~SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Msk) |
                  (SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Blocked
                   << SPU_FEATURE_BELLS_DOMAIN_BELL_BLOCK_Pos));
-#else
-/* TODO: Align to FP1 */
-#endif
             break;
+#else
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_TASKS_BLOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_TASKS_BLOCK_Blocked
+                  << SPU_FEATURE_BELLS_PROCESSOR_TASKS_BLOCK_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_EVENTS_BLOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_EVENTS_BLOCK_Blocked
+                  << SPU_FEATURE_BELLS_PROCESSOR_EVENTS_BLOCK_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Msk) |
+                 (SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Blocked
+                  << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos));
+            break;
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -1793,9 +1934,8 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                   SPU_FEATURE_GRTC_INTERRUPT_OWNERID_Msk));
             break;
 
-        case NRF_SPU_FEATURE_BELLS_BELL:
 #if NRF_SPU_HAS_DOMAIN
-            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_PROCESSOR_COUNT);
+        case NRF_SPU_FEATURE_BELLS_BELL:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_BELL_BELL_COUNT);
             p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] =
                 ((p_reg->FEATURE.BELLS.DOMAIN[index].BELL[subindex] &
@@ -1803,10 +1943,38 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                  ((owner_id
                    << SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Pos) &
                   SPU_FEATURE_BELLS_DOMAIN_BELL_OWNERID_Msk));
-#else
-/* TODO: Align FP1 */
-#endif
             break;
+#else
+        case NRF_SPU_FEATURE_BELLS_TASKS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_TASKS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].TASKS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_TASKS_OWNERID_Msk) |
+                 ((owner_id
+                   << SPU_FEATURE_BELLS_PROCESSOR_TASKS_OWNERID_Pos) &
+                  SPU_FEATURE_BELLS_PROCESSOR_TASKS_OWNERID_Msk));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_EVENTS:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_EVENTS_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].EVENTS[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_EVENTS_OWNERID_Msk) |
+                 ((owner_id
+                   << SPU_FEATURE_BELLS_PROCESSOR_EVENTS_OWNERID_Pos) &
+                  SPU_FEATURE_BELLS_PROCESSOR_EVENTS_OWNERID_Msk));
+            break;
+
+        case NRF_SPU_FEATURE_BELLS_INTERRUPT:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT);
+            p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] =
+                ((p_reg->FEATURE.BELLS.PROCESSOR[index].INTERRUPT[subindex] &
+                  ~SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Msk) |
+                 ((owner_id
+                   << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos) &
+                  SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Msk));
+            break;
+#endif
 
         default:
             NRFX_ASSERT(0);
