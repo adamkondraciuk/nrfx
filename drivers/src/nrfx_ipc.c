@@ -124,17 +124,10 @@ void nrfx_ipc_irq_handler(void)
         uint8_t event_idx = NRF_CTZ(bitmask);
         bitmask &= ~(1UL << event_idx);
         nrf_ipc_event_clear(NRF_IPC, nrf_ipc_receive_event_get(event_idx));
-#if NRFX_CHECK(NRFX_CONFIG_API_VER_2_10)
         if (m_cb.handler)
         {
             m_cb.handler(event_idx, m_cb.p_context);
         }
-#elif NRFX_CHECK(NRFX_CONFIG_API_VER_2_9)
-    }
-    if (m_cb.handler)
-    {
-        m_cb.handler(events_map, m_cb.p_context);
-#endif
     }
 }
 

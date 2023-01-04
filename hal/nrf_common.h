@@ -11,10 +11,8 @@ extern "C" {
 #define NRFX_EVENT_READBACK_ENABLED 1
 #endif
 
-#if !defined(NRFX_CONFIG_API_VER_2_9)  && \
-    !defined(NRFX_CONFIG_API_VER_2_10) && \
-    !defined(NRFX_CONFIG_API_VER_2_11)
-#define NRFX_CONFIG_API_VER_2_9 1
+#if !defined(NRFX_CONFIG_API_VER_3_0)
+#define NRFX_CONFIG_API_VER_3_0 1
 #endif
 
 #if defined(ISA_RISCV)
