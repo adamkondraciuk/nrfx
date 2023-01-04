@@ -184,10 +184,7 @@ nrfx_err_t nrfx_grtc_syscounter_get(uint64_t * p_counter)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_counter);
-#if !defined(LUMOS_XXAA)
-    // TODO: Investigate why such initialization crashes CI for Moonlight.
     *p_counter = 0;
-#endif
     nrfx_err_t err_code = NRFX_SUCCESS;
     if (!is_syscounter_running())
     {
