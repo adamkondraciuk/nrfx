@@ -1607,7 +1607,7 @@ __IOM uint32_t CC[8];
 
 /* POWERONFAILURE @Bit 16 : Power on failure warning handling configuration */
   #define RRAMC_POWER_CONFIG_POWERONFAILURE_Pos (16UL) /*!< Position of POWERONFAILURE field.                                     */
-  #define RRAMC_POWER_CONFIG_POWERONFAILURE_Msk (0xFFFFUL << RRAMC_POWER_CONFIG_POWERONFAILURE_Pos) /*!< Bit mask of POWERONFAILURE field.*/   
+  #define RRAMC_POWER_CONFIG_POWERONFAILURE_Msk (0xFFFFUL << RRAMC_POWER_CONFIG_POWERONFAILURE_Pos) /*!< Bit mask of POWERONFAILURE field.*/
 
 /* RRAMC_WAITSTATES: Waitstates for RRAM read access */
   #define RRAMC_WAITSTATES_FREQ_MaxCount 3 /*!< Max size of the index array related to the AXI clock frequencies. */
@@ -6856,5 +6856,9 @@ typedef struct {
 #define SPU137_PERIPH_COUNT 16
 
 #endif // defined(HALTIUM_XXAA)
+
+#if defined(LILIUMFP1_XXAA)
+#define __INTERRUPTS_MAX 480
+#endif
 
 #endif // MDK_FIXUPS_H__
