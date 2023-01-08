@@ -503,6 +503,9 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
             NRFX_ASSERT(p_config->scl != p_config->sda);
             nrfx_twis_config_pin(p_config->scl, p_config->scl_pull);
             nrfx_twis_config_pin(p_config->sda, p_config->sda_pull);
+#if NRF_GPIO_HAS_CLOCKPIN
+            nrf_gpio_pin_clock_set(p_config->scl, true);
+#endif
         }
         twis_configure(p_instance, p_config);
     }
