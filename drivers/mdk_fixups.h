@@ -1510,6 +1510,121 @@ typedef struct {
 
 #if defined(LUMOS_XXAA)
 
+/**
+  * @brief IFTIMING [SPIM_IFTIMING] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  RXDELAY;                           /*!< (@ 0x00000000) Sample delay for input serial data on MISO            */
+  __IOM uint32_t  CSNDUR;                            /*!< (@ 0x00000004) Minimum duration between edge of CSN and edge of SCK.
+                                                                         When SHORTS.END_START is used, this is also the minimum
+                                                                         duration CSN must stay high between transactions.*/      
+} NRF_SPIM_IFTIMING_Type;                            /*!< Size = 8 (0x008)                                                     */
+
+/**
+  * @brief PSEL [SPIM_PSEL] (unspecified)
+  */
+typedef struct {
+    __IOM uint32_t  SCK;                               /*!< (@ 0x00000000) Pin select for SCK                                    */
+    __IOM uint32_t  MOSI;                              /*!< (@ 0x00000004) Pin select for MOSI signal                            */
+    __IOM uint32_t  MISO;                              /*!< (@ 0x00000008) Pin select for MISO signal                            */
+    union {
+        struct {
+        __IOM uint32_t DCX;                            /*!< (@ 0x0000000C) Pin select for DCX signal                             */
+        __IOM uint32_t CSN[1];                         /*!< (@ 0x00000010) Pin select for CSN                                    */
+        };
+    };
+} NRF_SPIM_PSEL_Type_fixed;                            /*!< Size = 16 (0x010)                                                    */
+
+/**
+  * @brief Serial Peripheral Interface Master with EasyDMA
+  */
+typedef struct {                                   /*!< SPIM Structure                                                       */
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Start SPI transaction                                 */
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop SPI transaction                                  */
+    __IM uint32_t RESERVED;
+    __OM uint32_t TASKS_SUSPEND;                     /*!< (@ 0x0000000C) Suspend SPI transaction                               */
+    __OM uint32_t TASKS_RESUME;                      /*!< (@ 0x00000010) Resume SPI transaction                                */
+    __IM uint32_t RESERVED1[5];
+    __OM NRF_SPIM_TASKS_DMA_Type TASKS_DMA;          /*!< (@ 0x00000028) Peripheral tasks.                                     */
+    __IM uint32_t RESERVED2[12];
+    __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
+    __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
+    __IM uint32_t RESERVED3;
+    __IOM uint32_t SUBSCRIBE_SUSPEND;                /*!< (@ 0x0000008C) Subscribe configuration for task SUSPEND              */
+    __IOM uint32_t SUBSCRIBE_RESUME;                 /*!< (@ 0x00000090) Subscribe configuration for task RESUME               */
+    __IM uint32_t RESERVED4[5];
+    __IOM NRF_SPIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA; /*!< (@ 0x000000A8) Subscribe configuration for tasks                     */
+    __IM uint32_t RESERVED5[12];
+    __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) SPI transaction has started                           */
+    __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) SPI transaction has stopped                           */
+    __IOM uint32_t EVENTS_END;                       /*!< (@ 0x00000108) End of RXD buffer and TXD buffer reached              */
+    __IM uint32_t RESERVED6[16];
+    __IOM NRF_SPIM_EVENTS_DMA_Type EVENTS_DMA;       /*!< (@ 0x0000014C) Peripheral events.                                    */
+    __IM uint32_t RESERVED7[3];
+    __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
+    __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
+    __IOM uint32_t PUBLISH_END;                      /*!< (@ 0x00000188) Publish configuration for event END                   */
+    __IM uint32_t RESERVED8[16];
+    __IOM NRF_SPIM_PUBLISH_DMA_Type PUBLISH_DMA;     /*!< (@ 0x000001CC) Publish configuration for events                      */
+    __IM uint32_t RESERVED9[3];
+    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
+    __IM uint32_t RESERVED10[63];
+    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t RESERVED11[125];
+    __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) Enable SPIM                                           */
+    __IM uint32_t RESERVED12[5];
+    __IM uint32_t RXDDATA;                           /*!< (@ 0x00000518) RXD register                                          */
+    __IOM uint32_t TXDDATA;                          /*!< (@ 0x0000051C) TXD register                                          */
+    __IM uint32_t RESERVED13[3];
+    __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000052C) The prescaler is used to set the SPI frequency.       */
+    __IM uint32_t RESERVED14[9];
+    __IOM uint32_t CONFIG;                           /*!< (@ 0x00000554) Configuration register                                */
+    __IM uint32_t RESERVED15[21];
+    __IOM NRF_SPIM_IFTIMING_Type IFTIMING;           /*!< (@ 0x000005AC) (unspecified)                                         */
+    __IOM uint32_t DCXCNT;                           /*!< (@ 0x000005B4) DCX configuration                                     */
+    __IOM uint32_t CSNPOL;                           /*!< (@ 0x000005B8) Polarity of CSN output                                */
+    __IM uint32_t RESERVED16[1];
+    __IOM uint32_t ORC;                              /*!< (@ 0x000005C0) Byte transmitted after TXD.MAXCNT bytes have been
+                                                                         transmitted in the case when RXD.MAXCNT is greater than
+                                                                         TXD.MAXCNT*/                                             
+    __IM uint32_t RESERVED17[15];
+    __IOM NRF_SPIM_PSEL_Type_fixed PSEL;             /*!< (@ 0x00000600) (unspecified)                                         */
+    __IM uint32_t RESERVED18[60];
+    __IOM NRF_SPIM_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified)                                         */
+} NRF_SPIM_Type_fixed;                               /*!< Size = 1884 (0x75C)                                                  */
+
+#define SPIM_CSNPOL_CSNPOL0_LOW (0x0UL)
+#define SPIM_CSNPOL_CSNPOL0_HIGH (0x1UL)
+
+#if defined(NRF_SPIM00_S)
+#undef NRF_SPIM00_S
+#define NRF_SPIM00_S ((NRF_SPIM_Type_fixed*) NRF_SPIM00_S_BASE)
+#endif
+
+#if defined(NRF_SPIM20_S)
+#undef NRF_SPIM20_S
+#define NRF_SPIM20_S ((NRF_SPIM_Type_fixed*) NRF_SPIM20_S_BASE)
+#endif
+
+#if defined(NRF_SPIM21_S)
+#undef NRF_SPIM21_S
+#define NRF_SPIM21_S ((NRF_SPIM_Type_fixed*) NRF_SPIM21_S_BASE)
+#endif
+
+#if defined(NRF_SPIM22_S)
+#undef NRF_SPIM22_S
+#define NRF_SPIM22_S ((NRF_SPIM_Type_fixed*) NRF_SPIM22_S_BASE)
+#endif
+
+#if defined(NRF_SPIM30_S)
+#undef NRF_SPIM30_S
+#define NRF_SPIM30_S ((NRF_SPIM_Type_fixed*) NRF_SPIM30_S_BASE)
+#endif
+
+#define NRF_SPIM_Type NRF_SPIM_Type_fixed
+
 /*
  * TIMER10 has 8 CC channels
  */
