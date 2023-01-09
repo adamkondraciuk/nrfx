@@ -6839,6 +6839,16 @@ typedef struct {
 #define SPU136_PERIPH_COUNT 16
 #define SPU137_PERIPH_COUNT 16
 
+/* TODO: Remove when HM-19626 done. */
+#if defined(NRF_RADIOCORE)
+#ifndef NRF_RTC0
+    #define NRF_RTC0              NRF_RTC
+    #define RTC0_IRQn             RTC_IRQn
+    #define nrfx_rtc0_irq_handler RTC_IRQHandler
+    #define RTC0_CC_NUM           8
+#endif
+#endif
+
 #endif // defined(HALTIUM_XXAA)
 
 #if defined(LILIUMFP1_XXAA)

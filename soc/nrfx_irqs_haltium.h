@@ -213,6 +213,9 @@ extern "C" {
 // RTC131_IRQn
 #define nrfx_rtc_131_irq_handler      RTC131_IRQHandler
 
+// RTC_IRQn
+#define nrfx_rtc_irq_handler          RTC_IRQHandler
+
 // HSSPIM0_IRQn
 
 // HSSPIM1_IRQn
