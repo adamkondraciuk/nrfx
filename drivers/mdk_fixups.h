@@ -6683,6 +6683,9 @@ typedef struct {
  */
 #if defined(LUMOS_XXAA)
 
+/* TODO: Verify correct value. */
+#define SAADC_EASYDMA_MAXCNT_SIZE 15
+
 #define SPIM00_EASYDMA_MAXCNT_SIZE 16
 #define SPIM20_EASYDMA_MAXCNT_SIZE 16
 #define SPIM21_EASYDMA_MAXCNT_SIZE 16
@@ -6710,6 +6713,8 @@ typedef struct {
 #endif // LUMOS_XXAA
 
 #if defined(HALTIUM_XXAA)
+
+#define SAADC_EASYDMA_MAXCNT_SIZE 15
 
 #define SPIM120_EASYDMA_MAXCNT_SIZE 16
 #define SPIM121_EASYDMA_MAXCNT_SIZE 16
