@@ -11,8 +11,6 @@
 
 @defgroup nrf_bprot BPROT
 
-@defgroup nrf_bellboard BELLBOARD
-
 @defgroup nrf_cache CACHE
 
 @defgroup nrf_ccm CCM
@@ -21,15 +19,9 @@
 
 @defgroup nrf_comp COMP
 
-@defgroup nrf_cpuconf CPUCONF
-
-@defgroup nrf_ctrlap CTRL-AP
-
 @defgroup nrf_systick Cortex-M Systick
 
 @defgroup nrf_dcnf DCNF
-
-@defgroup nrf_dispc DISPC
 
 @defgroup nrf_dppi DPPI
 
@@ -37,45 +29,25 @@
 
 @defgroup nrf_egu EGU
 
-@defgroup nrf_exmif EXMIF
-
 @defgroup nrf_fpu FPU
 
 @defgroup nrf_gpio GPIO
 
 @defgroup nrf_gpiote GPIOTE
 
-@defgroup nrf_gpu GPU
-
-@defgroup nrf_grtc GRTC
-
 @defgroup nrf_i2s I2S
 
 @defgroup nrf_icr ICR
 
-@defgroup nrf_irqmap IRQMAP
-
 @defgroup nrf_ipc IPC
-
-@defgroup nrf_ipcmap IPCMAP
-
-@defgroup nrf_ipct IPCT
 
 @defgroup nrf_kmu KMU
 
 @defgroup nrf_lpcomp LPCOMP
 
-@defgroup nrf_lrc LRC
-
-@defgroup nrf_mpc MPC
-
 @defgroup nrf_mpu MPU
 
-@defgroup nrf_mramc MRAMC
-
 @defgroup nrf_mutex MUTEX
-
-@defgroup nrf_mvdma MVDMA
 
 @defgroup nrf_mwu MWU
 
@@ -89,8 +61,6 @@
 
 @defgroup nrf_ppi PPI
 
-@defgroup nrf_ppib PPIB
-
 @defgroup nrf_pwm PWM
 
 @defgroup nrf_qdec QDEC
@@ -99,15 +69,7 @@
 
 @defgroup nrf_radio RADIO
 
-@defgroup nrf_ramc RAMC
-
-@defgroup nrf_resethub RESET
-
-@defgroup nrf_resetinfo RESETINFO
-
 @defgroup nrf_rng RNG
-
-@defgroup nrf_rramc RRAMC
 
 @defgroup nrf_rtc RTC
 
@@ -120,12 +82,6 @@
 @defgroup nrf_spis SPIS
 
 @defgroup nrf_spu SPU
-
-@defgroup nrf_stm STM
-
-@defgroup nrf_tampc TAMPC
-
-@defgroup nrf_tbm Trace buffer monitor
 
 @defgroup nrf_temp TEMP
 
@@ -145,9 +101,8 @@
 
 @defgroup nrf_vmc VMC
 
-@defgroup nrf_vpr VPR
-
 @defgroup nrf_wdt WDT
+
 @}
 
 @defgroup nrfx nrfx API
