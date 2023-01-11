@@ -53,14 +53,14 @@ static void pins_configure(nrfx_pwm_config_t const * p_config)
 {
     // Nothing to do here if both GPIO configuration and pin selection are
     // to be skipped (the pin numbers may be then even not specified).
-    if (p_config->skip_gpio_cfg && p_config->nrfy_config.skip_psel_cfg)
+    if (p_config->skip_gpio_cfg && p_config->skip_psel_cfg)
     {
         return;
     }
 
     for (uint8_t i = 0; i < NRF_PWM_CHANNEL_COUNT; ++i)
     {
-        uint32_t output_pin = p_config->nrfy_config.output_pins[i];
+        uint32_t output_pin = p_config->output_pins[i];
         if (output_pin != NRF_PWM_PIN_NOT_CONNECTED)
         {
             if (p_config->pin_inverted[i])
@@ -103,6 +103,8 @@ static void apply_errata_109(nrfx_pwm_config_t const * p_config)
 }
 #endif
 
+#define PWM_PIN_INIT(i, field) field[i]
+
 static void pwm_configure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
 {
     if (!p_config->skip_gpio_cfg)
@@ -110,7 +112,21 @@ static void pwm_configure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const
         pins_configure(p_config);
     }
 
-    nrfy_pwm_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+    nrfy_pwm_config_t nrfy_config =
+    {
+        .output_pins   =
+        {
+            NRFX_LISTIFY(NRF_PWM_CHANNEL_COUNT, PWM_PIN_INIT, (,), p_config->output_pins)
+        },
+        .top_value     = p_config->top_value,
+        .base_clock    = p_config->base_clock,
+        .count_mode    = p_config->count_mode,
+        .load_mode     = p_config->load_mode,
+        .step_mode     = p_config->step_mode,
+        .skip_psel_cfg = p_config->skip_psel_cfg
+    };
+
+    nrfy_pwm_periph_configure(p_instance->p_reg, &nrfy_config);
     uint32_t to_clear = NRF_PWM_EVENT_LOOPSDONE | NRF_PWM_EVENT_SEQEND0 |
                         NRF_PWM_EVENT_SEQEND1 | NRF_PWM_EVENT_STOPPED;
     nrfy_pwm_int_init(p_instance->p_reg, to_clear, p_config->irq_priority, false);
