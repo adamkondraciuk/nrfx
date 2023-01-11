@@ -35,14 +35,14 @@ typedef struct
     uint32_t a_pin;   /**< Pin number for A input. */
     uint32_t b_pin;   /**< Pin number for B input. */
     uint32_t led_pin; /**< Pin number for LED output. */
-} qdec_pins_t;
+} nrfy_qdec_pins_t;
 
 /** @brief QDEC configuration structure. */
 typedef struct
 {
     nrf_qdec_reportper_t reportper;     /**< Report period in samples. */
     nrf_qdec_sampleper_t sampleper;     /**< Sampling period in microseconds. */
-    qdec_pins_t          pins;          /**< Pin configuration structure. */
+    nrfy_qdec_pins_t     pins;          /**< Pin configuration structure. */
     uint32_t             ledpre;        /**< Time (in microseconds) how long LED is switched on before sampling. */
     nrf_qdec_ledpol_t    ledpol;        /**< Active LED polarity. */
     bool                 dbfen;         /**< State of debouncing filter. */
@@ -183,7 +183,7 @@ NRFY_STATIC_INLINE void nrfy_qdec_accumulators_read(NRF_QDEC_Type const * p_reg,
  * @param[in] p_pins Pointer to the QDEC pin configurartion structure.
  */
 NRFY_STATIC_INLINE void nrfy_qdec_pins_get(NRF_QDEC_Type const * p_reg,
-                                           qdec_pins_t *         p_pins)
+                                           nrfy_qdec_pins_t *    p_pins)
 {
     nrf_barrier_rw();
     p_pins->a_pin   = nrf_qdec_phase_a_pin_get(p_reg);
@@ -198,8 +198,8 @@ NRFY_STATIC_INLINE void nrfy_qdec_pins_get(NRF_QDEC_Type const * p_reg,
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] p_pins Pointer to the QDEC pin configurartion structure.
  */
-NRFY_STATIC_INLINE void nrfy_qdec_pins_set(NRF_QDEC_Type * p_reg,
-                                           qdec_pins_t *   p_pins)
+NRFY_STATIC_INLINE void nrfy_qdec_pins_set(NRF_QDEC_Type *          p_reg,
+                                           nrfy_qdec_pins_t const * p_pins)
 {
     nrf_qdec_pins_set(p_reg, p_pins->a_pin, p_pins->b_pin, p_pins->led_pin);
     nrf_barrier_w();

@@ -36,14 +36,30 @@ static void qdec_configure(nrfx_qdec_t const *        p_instance,
 {
     if (!p_config->skip_gpio_cfg)
     {
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.a_pin, NRF_GPIO_PIN_NOPULL);
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.b_pin, NRF_GPIO_PIN_NOPULL);
-        if (p_config->nrfy_config.pins.led_pin != NRF_QDEC_LED_NOT_CONNECTED)
+        nrfy_gpio_cfg_input(p_config->psela, NRF_GPIO_PIN_NOPULL);
+        nrfy_gpio_cfg_input(p_config->pselb, NRF_GPIO_PIN_NOPULL);
+        if (p_config->pselled != NRF_QDEC_LED_NOT_CONNECTED)
         {
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.led_pin, NRF_GPIO_PIN_NOPULL);
+            nrfy_gpio_cfg_input(p_config->pselled, NRF_GPIO_PIN_NOPULL);
         }
     }
-    nrfy_qdec_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+
+    nrfy_qdec_config_t nrfy_config =
+    {
+        .reportper = p_config->reportper,
+        .sampleper = p_config->sampleper,
+        .pins = {
+            .a_pin   = p_config->psela,
+            .b_pin   = p_config->pselb,
+            .led_pin = p_config->pselled
+        },
+        .ledpre    = p_config->ledpre,
+        .ledpol    = p_config->ledpol,
+        .dbfen     = p_config->dbfen,
+        .skip_psel_cfg = p_config->skip_psel_cfg
+    };
+
+    nrfy_qdec_periph_configure(p_instance->p_reg, &nrfy_config);
     nrfy_qdec_shorts_enable(p_instance->p_reg, NRF_QDEC_SHORT_REPORTRDY_READCLRACC_MASK);
 
     uint32_t int_mask = NRF_QDEC_INT_ACCOF_MASK;
@@ -120,7 +136,7 @@ void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
 {
     NRFX_ASSERT(p_instance);
     qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
-    qdec_pins_t pins;
+    nrfy_qdec_pins_t pins;
 
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
