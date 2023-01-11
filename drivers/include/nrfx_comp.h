@@ -55,8 +55,17 @@ typedef enum
 /** @brief COMP configuration. */
 typedef struct
 {
-    nrfy_comp_config_t nrfy_config;        /**< Basic hardware configuration. */
-    uint8_t            interrupt_priority; /**< Interrupt priority. */
+    nrf_comp_ref_t       reference;          ///< Reference selection.
+    nrf_comp_ext_ref_t   ext_ref;            ///< External analog reference selection.
+    nrf_comp_main_mode_t main_mode;          ///< Main operation mode.
+    nrf_comp_th_t        threshold;          ///< Structure holding THDOWN and THUP values needed by the COMP_TH register.
+    nrf_comp_sp_mode_t   speed_mode;         ///< Speed and power mode.
+    nrf_comp_hyst_t      hyst;               ///< Comparator hysteresis.
+#if NRF_COMP_HAS_ISOURCE
+    nrf_isource_t        isource;            ///< Current source selected on analog input.
+#endif
+    nrf_comp_input_t     input;              ///< Input to be monitored.
+    uint8_t              interrupt_priority; ///< Interrupt priority.
 } nrfx_comp_config_t;
 
 /** @brief COMP threshold default configuration. */
@@ -65,14 +74,6 @@ typedef struct
     .th_down = NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT(0.5, 1.8), \
     .th_up   = NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT(1.5, 1.8)  \
 }
-
-#if NRF_COMP_HAS_ISOURCE || defined (__NRFX_DOXYGEN__)
-    /** @brief COMP additional ISOURCE configuration. */
-    #define NRFX_COMP_ISOURCE_CONFIG    \
-        .isource = NRF_COMP_ISOURCE_OFF,
-#else
-    #define NRFX_COMP_ISOURCE_CONFIG
-#endif
 
 /**
  * @brief COMP driver default configuration.
@@ -88,19 +89,16 @@ typedef struct
  *
  * @param[in] _input Analog input.
  */
-#define NRFX_COMP_DEFAULT_CONFIG(_input)                        \
-{                                                               \
-    .nrfy_config =                                              \
-    {                                                           \
-        .reference  = NRF_COMP_REF_INT_1V8,                     \
-        .main_mode  = NRF_COMP_MAIN_MODE_SE,                    \
-        .threshold  = NRFX_COMP_CONFIG_TH,                      \
-        .speed_mode = NRF_COMP_SP_MODE_HIGH,                    \
-        .hyst       = NRF_COMP_HYST_NO_HYST,                    \
-        NRFX_COMP_ISOURCE_CONFIG                                \
-        .input      = (nrf_comp_input_t)_input                  \
-    },                                                          \
-    .interrupt_priority = NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY \
+#define NRFX_COMP_DEFAULT_CONFIG(_input)                                           \
+{                                                                                  \
+    .reference  = NRF_COMP_REF_INT_1V8,                                            \
+    .main_mode  = NRF_COMP_MAIN_MODE_SE,                                           \
+    .threshold  = NRFX_COMP_CONFIG_TH,                                             \
+    .speed_mode = NRF_COMP_SP_MODE_HIGH,                                           \
+    .hyst       = NRF_COMP_HYST_NO_HYST,                                           \
+    NRFX_COND_CODE_1(NRF_COMP_HAS_ISOURCE, (.isource = NRF_COMP_ISOURCE_OFF,), ()) \
+    .input      = (nrf_comp_input_t)_input,                                        \
+    .interrupt_priority = NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY                    \
 }
 
 /**

@@ -23,7 +23,18 @@ static nrfx_drv_state_t             m_state = NRFX_DRV_STATE_UNINITIALIZED;
 
 static void comp_configure(nrfx_comp_config_t const * p_config)
 {
-    nrfy_comp_periph_configure(NRF_COMP, &p_config->nrfy_config);
+    nrfy_comp_config_t nrfy_config =
+    {
+        .reference  = p_config->reference,
+        .main_mode  = p_config->main_mode,
+        .threshold  = p_config->threshold,
+        .speed_mode = p_config->speed_mode,
+        .hyst       = p_config->hyst,
+        NRFX_COND_CODE_1(NRF_COMP_HAS_ISOURCE, (.isource = p_config->isource,), ())
+        .input      = p_config->input
+    };
+
+    nrfy_comp_periph_configure(NRF_COMP, &nrfy_config);
     nrfy_comp_int_init(NRF_COMP,
                        NRF_COMP_INT_READY_MASK |
                        NRF_COMP_INT_DOWN_MASK |
