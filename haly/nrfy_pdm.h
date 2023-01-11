@@ -42,8 +42,8 @@ struct nrfy_pdm_buffer_t
 /** @brief PDM pins configuration structure. */
 typedef struct
 {
-    uint8_t clk_pin; ///< CLK pin number.
-    uint8_t din_pin; ///< DIN pin number.
+    uint32_t clk_pin; ///< CLK pin number.
+    uint32_t din_pin; ///< DIN pin number.
 } nrfy_pdm_pins_t;
 
 /** @brief PDM configuration structure. */

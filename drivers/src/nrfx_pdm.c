@@ -47,17 +47,35 @@ static void pdm_configure(nrfx_pdm_config_t const * p_config)
 {
     if (!p_config->skip_gpio_cfg)
     {
-        nrfy_gpio_pin_clear(p_config->nrfy_config.pins.clk_pin);
-        nrfy_gpio_cfg_output(p_config->nrfy_config.pins.clk_pin);
-        nrfy_gpio_cfg_input(p_config->nrfy_config.pins.din_pin, NRF_GPIO_PIN_NOPULL);
+        nrfy_gpio_pin_clear(p_config->clk_pin);
+        nrfy_gpio_cfg_output(p_config->clk_pin);
+        nrfy_gpio_cfg_input(p_config->din_pin, NRF_GPIO_PIN_NOPULL);
     }
-    if (!p_config->nrfy_config.skip_psel_cfg)
+    if (!p_config->skip_psel_cfg)
     {
         nrf_pdm_psel_connect(NRF_PDM0,
-                             p_config->nrfy_config.pins.clk_pin,
-                             p_config->nrfy_config.pins.din_pin);
+                             p_config->clk_pin,
+                             p_config->din_pin);
     }
-    nrfy_pdm_periph_configure(NRF_PDM0, &p_config->nrfy_config);
+
+    nrfy_pdm_config_t nrfy_config =
+    {
+        .mode        = p_config->mode,
+        .edge        = p_config->edge,
+        .pins =
+        {
+            .clk_pin = p_config->clk_pin,
+            .din_pin = p_config->din_pin,
+        },
+        .clock_freq  = p_config->clock_freq,
+        .gain_l      = p_config->gain_l,
+        .gain_r      = p_config->gain_r,
+        NRFX_COND_CODE_1(NRF_PDM_HAS_RATIO_CONFIG, (.ratio = p_config->ratio,), ())
+        NRFX_COND_CODE_1(NRF_PDM_HAS_MCLKCONFIG, (.mclksrc = p_config->mclksrc,), ())
+        .skip_psel_cfg = p_config->skip_psel_cfg
+    };
+
+    nrfy_pdm_periph_configure(NRF_PDM0, &nrfy_config);
 
     nrfy_pdm_int_init(NRF_PDM0,
                       NRF_PDM_INT_STARTED | NRF_PDM_INT_STOPPED,
@@ -92,8 +110,8 @@ nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
     {
         m_cb.skip_gpio_cfg = p_config->skip_gpio_cfg;
 
-        if (p_config->nrfy_config.gain_l > NRF_PDM_GAIN_MAXIMUM ||
-            p_config->nrfy_config.gain_r > NRF_PDM_GAIN_MAXIMUM)
+        if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM ||
+            p_config->gain_r > NRF_PDM_GAIN_MAXIMUM)
         {
             err_code = NRFX_ERROR_INVALID_PARAM;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -121,8 +139,8 @@ nrfx_err_t nrfx_pdm_reconfigure(nrfx_pdm_config_t const * p_config)
         return NRFX_ERROR_INVALID_STATE;
     }
 
-    if (p_config->nrfy_config.gain_l > NRF_PDM_GAIN_MAXIMUM ||
-        p_config->nrfy_config.gain_r > NRF_PDM_GAIN_MAXIMUM)
+    if (p_config->gain_l > NRF_PDM_GAIN_MAXIMUM ||
+        p_config->gain_r > NRF_PDM_GAIN_MAXIMUM)
     {
         return NRFX_ERROR_INVALID_PARAM;
     }
