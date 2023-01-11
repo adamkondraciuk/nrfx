@@ -344,7 +344,7 @@ static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
     nrfx_timer_config_t timer_cfg = NRFX_TIMER_DEFAULT_CONFIG;
     err_code = nrfx_timer_prescaler_calculate(&m_timer_workaround.timer,
                                               FIELD_TIMER_FREQUENCY_HZ,
-                                              &timer_cfg.nrfy_config.prescaler);
+                                              &timer_cfg.prescaler);
     NRFX_ASSERT(err_code == NRFX_SUCCESS);
     timer_cfg.interrupt_priority = NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY;
 

@@ -45,9 +45,11 @@ enum {
 /** @brief The configuration structure of the timer driver instance. */
 typedef struct
 {
-    nrfy_timer_config_t nrfy_config;        ///< TIMER Configuration.
-    uint8_t             interrupt_priority; ///< Interrupt priority.
-    void *              p_context;          ///< Context passed to interrupt handler.
+    uint32_t              prescaler;          ///< Prescaler value.
+    nrf_timer_mode_t      mode;               ///< Mode of operation.
+    nrf_timer_bit_width_t bit_width;          ///< Bit width.
+    uint8_t               interrupt_priority; ///< Interrupt priority.
+    void *                p_context;          ///< Context passed to interrupt handler.
 } nrfx_timer_config_t;
 
 /**
@@ -60,12 +62,9 @@ typedef struct
  */
 #define NRFX_TIMER_DEFAULT_CONFIG                                 \
 {                                                                 \
-    .nrfy_config =                                                \
-    {                                                             \
-        .prescaler = 0,                                           \
-        .mode      = NRF_TIMER_MODE_TIMER,                        \
-        .bit_width = NRF_TIMER_BIT_WIDTH_16,                      \
-    },                                                            \
+    .prescaler          = 0,                                      \
+    .mode               = NRF_TIMER_MODE_TIMER,                   \
+    .bit_width          = NRF_TIMER_BIT_WIDTH_16,                 \
     .interrupt_priority = NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY, \
     .p_context          = NULL                                    \
 }

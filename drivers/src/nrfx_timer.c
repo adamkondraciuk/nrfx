@@ -81,13 +81,20 @@ static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 static void timer_configure(nrfx_timer_t const *        p_instance,
                             nrfx_timer_config_t const * p_config)
 {
-    nrfy_timer_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+    nrfy_timer_config_t nrfy_config =
+    {
+        .prescaler = p_config->prescaler,
+        .mode      = p_config->mode,
+        .bit_width = p_config->bit_width
+    };
 
+    nrfy_timer_periph_configure(p_instance->p_reg, &nrfy_config);
     nrfy_timer_int_init(p_instance->p_reg,
                         NRF_TIMER_ALL_CHANNELS_INT_MASK,
                         p_config->interrupt_priority,
                         false);
 }
+
 static uint32_t prescaler_calculate(uint32_t base_frequency, uint32_t frequency)
 {
     NRFX_ASSERT(base_frequency / frequency > 0);
@@ -117,8 +124,8 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
     if (p_config)
     {
         p_cb->context = p_config->p_context;
-        NRFX_ASSERT(p_config->nrfy_config.prescaler <= NRF_TIMER_PRESCALER_MAX);
-        NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->nrfy_config.bit_width));
+        NRFX_ASSERT(p_config->prescaler <= NRF_TIMER_PRESCALER_MAX);
+        NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
         timer_configure(p_instance, p_config);
     }
 
@@ -135,8 +142,8 @@ nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
                                   nrfx_timer_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(p_config->nrfy_config.prescaler <= NRF_TIMER_PRESCALER_MAX);
-    NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->nrfy_config.bit_width));
+    NRFX_ASSERT(p_config->prescaler <= NRF_TIMER_PRESCALER_MAX);
+    NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
     timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
