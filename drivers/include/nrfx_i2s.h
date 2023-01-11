@@ -20,7 +20,21 @@ extern "C" {
 /** @brief I2S driver configuration structure. */
 typedef struct
 {
-    nrfy_i2s_config_t nrfy_config;   ///< PWM configuration structure.
+    nrf_i2s_config_t  config;        ///< Peripheral configuration.
+    nrf_i2s_pins_t    pins;          ///< Pins to be used.
+#if NRF_I2S_HAS_CLKCONFIG
+    nrf_i2s_clksrc_t  clksrc;        ///< Clock source selection.
+    bool              enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
+#endif
+    bool              skip_psel_cfg; ///< Skip pin selection configuration.
+                                     /**< When set to true, the driver does not modify
+                                      *   pin select registers in the peripheral.
+                                      *   Those registers are supposed to be set up
+                                      *   externally before the driver is initialized.
+                                      *   @note When both GPIO configuration and pin
+                                      *   selection are to be skipped, the structure
+                                      *   fields that specify pins can be omitted,
+                                      *   as they are ignored anyway. */
     uint8_t           irq_priority;  ///< Interrupt priority.
     bool              skip_gpio_cfg; ///< Skip GPIO configuration of pins.
                                      /**< When set to true, the driver does not modify
@@ -53,14 +67,6 @@ enum {
 };
 #endif
 
-#if NRF_I2S_HAS_CLKCONFIG || defined(__NRFX_DOXYGEN__)
-    /** @brief I2S additional clock source configuration. */
-    #define NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG \
-        .clksrc        = NRF_I2S_CLKSRC_PCLK32M,   \
-        .enable_bypass = false,
-#else
-    #define NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG
-#endif
 /**
  * @brief I2S driver default configuration.
  *
@@ -81,25 +87,26 @@ enum {
  */
 #define NRFX_I2S_DEFAULT_CONFIG(_pin_sck, _pin_lrck, _pin_mck, _pin_sdout, _pin_sdin)   \
 {                                                                                       \
-    .nrfy_config = {                                                                    \
-        .config = {                                                                     \
-            .mode         = NRF_I2S_MODE_MASTER,                                        \
-            .format       = NRF_I2S_FORMAT_I2S,                                         \
-            .alignment    = NRF_I2S_ALIGN_LEFT,                                         \
-            .sample_width = NRF_I2S_SWIDTH_16BIT,                                       \
-            .channels     = NRF_I2S_CHANNELS_LEFT,                                      \
-            .mck_setup    = NRF_I2S_MCK_32MDIV8,                                        \
-            .ratio        = NRF_I2S_RATIO_32X,                                          \
-        },                                                                              \
-        .pins = {                                                                       \
-            .sck_pin      = _pin_sck,                                                   \
-            .lrck_pin     = _pin_lrck,                                                  \
-            .mck_pin      = _pin_mck,                                                   \
-            .sdout_pin    = _pin_sdout,                                                 \
-            .sdin_pin     = _pin_sdin,                                                  \
-        },                                                                              \
-        NRF_I2S_DEFAULT_EXTENDED_CLKSRC_CONFIG                                          \
+    .config = {                                                                         \
+        .mode         = NRF_I2S_MODE_MASTER,                                            \
+        .format       = NRF_I2S_FORMAT_I2S,                                             \
+        .alignment    = NRF_I2S_ALIGN_LEFT,                                             \
+        .sample_width = NRF_I2S_SWIDTH_16BIT,                                           \
+        .channels     = NRF_I2S_CHANNELS_LEFT,                                          \
+        .mck_setup    = NRF_I2S_MCK_32MDIV8,                                            \
+        .ratio        = NRF_I2S_RATIO_32X,                                              \
     },                                                                                  \
+    .pins = {                                                                           \
+        .sck_pin      = _pin_sck,                                                       \
+        .lrck_pin     = _pin_lrck,                                                      \
+        .mck_pin      = _pin_mck,                                                       \
+        .sdout_pin    = _pin_sdout,                                                     \
+        .sdin_pin     = _pin_sdin,                                                      \
+    },                                                                                  \
+    NRFX_COND_CODE_1(NRF_I2S_HAS_CLKCONFIG,                                             \
+                     (.clksrc = NRF_I2S_CLKSRC_PCLK32M,                                 \
+                      .enable_bypass = false,),                                         \
+                     ())                                                                \
     .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
 }
 

@@ -67,30 +67,30 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
         // - SCK and LRCK (required) - depending on the mode of operation these
         //   pins are configured as outputs (in Master mode) or inputs (in Slave
         //   mode).
-        if (p_config->nrfy_config.config.mode == NRF_I2S_MODE_MASTER)
+        if (p_config->config.mode == NRF_I2S_MODE_MASTER)
         {
-            nrfy_gpio_cfg_output(p_config->nrfy_config.pins.sck_pin);
-            nrfy_gpio_cfg_output(p_config->nrfy_config.pins.lrck_pin);
+            nrfy_gpio_cfg_output(p_config->pins.sck_pin);
+            nrfy_gpio_cfg_output(p_config->pins.lrck_pin);
         }
         else
         {
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.sck_pin,  NRF_GPIO_PIN_NOPULL);
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.lrck_pin, NRF_GPIO_PIN_NOPULL);
+            nrfy_gpio_cfg_input(p_config->pins.sck_pin,  NRF_GPIO_PIN_NOPULL);
+            nrfy_gpio_cfg_input(p_config->pins.lrck_pin, NRF_GPIO_PIN_NOPULL);
         }
         // - MCK (optional) - always output,
-        if (p_config->nrfy_config.pins.mck_pin != NRF_I2S_PIN_NOT_CONNECTED)
+        if (p_config->pins.mck_pin != NRF_I2S_PIN_NOT_CONNECTED)
         {
-            nrfy_gpio_cfg_output(p_config->nrfy_config.pins.mck_pin);
+            nrfy_gpio_cfg_output(p_config->pins.mck_pin);
         }
         // - SDOUT (optional) - always output,
-        if (p_config->nrfy_config.pins.sdout_pin != NRF_I2S_PIN_NOT_CONNECTED)
+        if (p_config->pins.sdout_pin != NRF_I2S_PIN_NOT_CONNECTED)
         {
-            nrfy_gpio_cfg_output(p_config->nrfy_config.pins.sdout_pin);
+            nrfy_gpio_cfg_output(p_config->pins.sdout_pin);
         }
         // - SDIN (optional) - always input.
-        if (p_config->nrfy_config.pins.sdin_pin != NRF_I2S_PIN_NOT_CONNECTED)
+        if (p_config->pins.sdin_pin != NRF_I2S_PIN_NOT_CONNECTED)
         {
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.sdin_pin, NRF_GPIO_PIN_NOPULL);
+            nrfy_gpio_cfg_input(p_config->pins.sdin_pin, NRF_GPIO_PIN_NOPULL);
         }
     }
 }
@@ -195,9 +195,9 @@ nrfx_err_t nrfx_i2s_init(nrfx_i2s_t const *        p_instance,
     }
 
 
-    if (!validate_config(p_config->nrfy_config.config.mode,
-                         p_config->nrfy_config.config.ratio,
-                         p_config->nrfy_config.config.sample_width))
+    if (!validate_config(p_config->config.mode,
+                         p_config->config.ratio,
+                         p_config->config.sample_width))
     {
         err_code = NRFX_ERROR_INVALID_PARAM;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -208,11 +208,36 @@ nrfx_err_t nrfx_i2s_init(nrfx_i2s_t const *        p_instance,
 
     configure_pins(p_config);
 
-    nrfy_i2s_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+    nrfy_i2s_config_t nrfy_config =
+    {
+        .config = {
+            .mode         = p_config->config.mode,
+            .format       = p_config->config.format,
+            .alignment    = p_config->config.alignment,
+            .sample_width = p_config->config.sample_width,
+            .channels     = p_config->config.channels,
+            .mck_setup    = p_config->config.mck_setup,
+            .ratio        = p_config->config.ratio,
+        },
+        .pins = {
+            .sck_pin      = p_config->pins.sck_pin,
+            .lrck_pin     = p_config->pins.lrck_pin,
+            .mck_pin      = p_config->pins.mck_pin,
+            .sdout_pin    = p_config->pins.sdout_pin,
+            .sdin_pin     = p_config->pins.sdin_pin,
+        },
+#if NRF_I2S_HAS_CLKCONFIG
+        .clksrc        = p_config->clksrc,
+        .enable_bypass = p_config->enable_bypass,
+#endif
+        .skip_psel_cfg = p_config->skip_psel_cfg
+    };
+
+    nrfy_i2s_periph_configure(p_instance->p_reg, &nrfy_config);
 
     p_cb->handler = handler;
     p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
-    p_cb->skip_psel_cfg = p_config->nrfy_config.skip_psel_cfg;
+    p_cb->skip_psel_cfg = p_config->skip_psel_cfg;
 
     nrfy_i2s_int_init(p_instance->p_reg,
                       NRF_I2S_INT_RXPTRUPD_MASK |
