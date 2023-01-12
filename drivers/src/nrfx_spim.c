@@ -18,39 +18,86 @@
 #error "Extended options are not available in the SoC currently in use."
 #endif
 
-#define SPIMX_LENGTH_VALIDATE(periph_name, prefix, i, drv_inst_idx, rx_len, tx_len) \
-    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
-     NRFX_EASYDMA_LENGTH_VALIDATE(NRFX_CONCAT(periph_name, prefix, i), rx_len, tx_len))
+#define _NRFX_NUM_FEATURE_TOKEN(periph, inst, feature) \
+    NRFX_CONCAT(NRFX_CONCAT(periph, _, feature, _TOKEN), NRFX_CONCAT(inst, _, feature))
 
-#define SPIM_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)    \
-        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, rx_len, tx_len))
+#define _NRFX_NUM_FEATURE_SUPPORTED_MASK(periph, prefix, i, feature)                           \
+    NRFX_COND_CODE_1(_NRFX_NUM_FEATURE_TOKEN(periph, NRFX_CONCAT(periph, prefix, i), feature), \
+                    ((1UL << NRFX_CONCAT(NRFX_, periph, prefix, i, _INST_IDX))), (0))
 
-#define SPIMX_HW_CSN_PRESENT_VALIDATE(periph_name, prefix, i, drv_inst_idx)         \
-    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
-     NRFX_CONCAT(periph_name, prefix, i, _FEATURE_HARDWARE_CSN_PRESENT))
+/**
+ * @brief Macro initializes a mask with n bit set if nth driver instance supports the given numeric feature.
+ *
+ * Bits associated with non existing instances are set so that if all enabled instances supports
+ * the given feature mask has all 1 (and potentially can be optimized by the compiler).
+ *
+ * In order to determine if a given flag is set to a specific numeric value a token must be defined.
+ * Token must be defined to 1 and follow the name convention \<periph_name\>_\<feature\>_TOKEN\<value\>.
+ *
+ * @param periph  Peripheral name.
+ * @param feature Feature name as used in the _peripherals.h.
+ */
+#define NRFX_NUM_FEATURE_SUPPORTED_MASK(periph, feature)                                     \
+        (~(NRFX_BIT(NRFX_CONCAT(NRFX_, periph, _ENABLED_COUNT)) - 1) |                       \
+         (NRFX_FOREACH_ENABLED(periph, _NRFX_NUM_FEATURE_SUPPORTED_MASK, (|), (0), feature)))
 
-#define SPIM_HW_CSN_PRESENT_VALIDATE(drv_inst_idx)    \
-        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_HW_CSN_PRESENT_VALIDATE, (||), (0), drv_inst_idx))
+/* Internal helper macro which returns a bit mask set if nth driver instance supports the given feature. */
+#define _NRFX_SUPPORTED_FEATURE_MASK(periph, prefix, i, feature) \
+    NRFX_COND_CODE_1(NRFX_CONCAT(periph, prefix, i, _, feature), \
+                    ((1UL << NRFX_CONCAT(NRFX_, periph, prefix, i, _INST_IDX))), (0))
 
-#define SPIMX_DCX_PRESENT_VALIDATE(periph_name, prefix, i, drv_inst_idx)            \
-    (((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) && \
-     NRFX_CONCAT(periph_name, prefix, i, _FEATURE_DCX_PRESENT))
+/**
+ * @brief Macro initializes a mask with n bit set if nth driver instance supports the given feature.
+ *
+ * Bits associated with non existing instances are set so that if all enabled instances supports
+ * the given feature mask has all 1 (and potentially can be optimized by the compiler).
+ *
+ * @param periph  Peripheral name.
+ * @param feature Feature name as used in the _peripherals.h.
+ */
+#define NRFX_FEATURE_SUPPORTED_MASK(periph, feature)                                    \
+        (~(NRFX_BIT(NRFX_CONCAT(NRFX_, periph, _ENABLED_COUNT)) - 1) |                  \
+        (NRFX_FOREACH_ENABLED(periph, _NRFX_SUPPORTED_FEATURE_MASK, (|), (0), feature)))
 
-#define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx)    \
-        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_DCX_PRESENT_VALIDATE, (||), (0), drv_inst_idx))
+#define _NRFX_INST_FEATURE_FLAG(periph, prefix, i, feature) NRFX_CONCAT(periph, prefix, i, _, feature),
 
-#define SPIMX_SUPPORTED_FREQ_VALIDATE(periph_name, prefix, i, drv_inst_idx, freq)                \
-    (                                                                                            \
-    ((drv_inst_idx) == NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)) &&                 \
-    (                                                                                            \
-        (((freq) != NRF_SPIM_FREQ_16M) && ((freq) != NRF_SPIM_FREQ_32M)) ||                      \
-        (((freq) == NRF_SPIM_FREQ_16M) && ((NRFX_CONCAT(periph_name, prefix, i, _MAX_DATARATE) >= 16))) || \
-        (((freq) == NRF_SPIM_FREQ_32M) && ((NRFX_CONCAT(periph_name, prefix, i, _MAX_DATARATE) >= 32)))    \
-    )                                                                                            \
-    )
+/**
+ * @brief Macro initializes an array with numeric, feature value for each enabled driver instance.
+ *
+ * Array can be used as a lookup table to determine how the given feature is supported by the
+ * instance.
+ *
+ * @param periph  Peripheral name.
+ * @param feature Feature name as used in the _peripherals.h.
+ */
+#define NRFX_FEATURE_ARRAY_INITIALIZE(periph, feature) \
+    { NRFX_FOREACH_ENABLED(periph, _NRFX_INST_FEATURE_FLAG, (), (), feature) }
 
-#define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)    \
-        (NRFX_FOREACH_ENABLED(SPIM, SPIMX_SUPPORTED_FREQ_VALIDATE, (||), (0), drv_inst_idx, freq))
+/* Token used to determine if SPIM instance supports 32M data rate. */
+#define SPIM_MAX_DATARATE_TOKEN32 1
+
+#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
+static const uint32_t dcx_support_mask =
+    NRFX_FEATURE_SUPPORTED_MASK(SPIM, FEATURE_DCX_PRESENT);
+static const uint32_t hw_csn_support_mask =
+    NRFX_FEATURE_SUPPORTED_MASK(SPIM, FEATURE_HARDWARE_CSN_PRESENT);
+static const uint32_t datarate32_support_mask =
+    NRFX_NUM_FEATURE_SUPPORTED_MASK(SPIM, MAX_DATARATE);
+#endif
+
+static const uint8_t easydma_support_bits[] = NRFX_FEATURE_ARRAY_INITIALIZE(SPIM, EASYDMA_MAXCNT_SIZE);
+
+#define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)          \
+            (((freq != NRF_SPIM_FREQ_32M) && (freq != NRF_SPIM_FREQ_16M)) || \
+             ((NRFX_BIT(drv_inst_idx)) & datarate32_support_mask))
+
+#define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx) (NRFX_BIT(drv_inst_idx) & dcx_support_mask)
+
+#define SPIM_HW_CSN_PRESENT_VALIDATE(drv_inst_idx) (NRFX_BIT(drv_inst_idx) & hw_csn_support_mask)
+
+#define SPIM_LENGTH_VALIDATE(drv_inst_idx, rx_len, tx_len)          \
+            ((rx_len < NRFX_BIT(easydma_support_bits[drv_inst_idx])) && \
+             (tx_len < NRFX_BIT(easydma_support_bits[drv_inst_idx])))
 
 // Requested pin can either match dedicated pin or be not connected at all.
 #define SPIM_DEDICATED_PIN_VALIDATE(requested_pin, supported_pin) \
