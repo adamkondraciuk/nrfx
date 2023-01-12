@@ -8,3 +8,10 @@ CLOCK
 
    *
    ../oscillators/hal.rst
+   ../auxpll/hal.rst
+   ../fll16m/hal.rst
+   ../hfxo/hal.rst
+   ../hfxo64m/hal.rst
+   ../lfclockmux/hal.rst
+   ../lfrc/hal.rst
+   ../lfxo/hal.rst

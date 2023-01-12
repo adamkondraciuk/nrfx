@@ -1,7 +1,7 @@
-FICR
+PPIB
 ====
 
-.. doxygengroup:: nrf_ficr
+.. doxygengroup:: nrf_ppib
 
 .. toctree::
    :glob:
