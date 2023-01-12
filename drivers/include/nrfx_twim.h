@@ -42,14 +42,25 @@ enum {
 /** @brief Structure for the TWI master driver instance configuration. */
 typedef struct
 {
-    nrfy_twim_config_t nrfy_config;        ///< TWIM configuration.
-    uint8_t            interrupt_priority; ///< Interrupt priority.
-    bool               hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
-    bool               skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                           /**< When set to true, the driver does not modify
-                                            *   any GPIO parameters of the used pins. Those
-                                            *   parameters are supposed to be configured
-                                            *   externally before the driver is initialized. */
+    uint32_t             scl_pin;            ///< SCL pin number.
+    uint32_t             sda_pin;            ///< SDA pin number.
+    nrf_twim_frequency_t frequency;          ///< TWIM frequency.
+    bool                 skip_psel_cfg;      ///< Skip pin selection configuration.
+                                             /**< When set to true, the driver does not modify
+                                              *   pin select registers in the peripheral.
+                                              *   Those registers are supposed to be set up
+                                              *   externally before the driver is initialized.
+                                              *   @note When both GPIO configuration and pin
+                                              *   selection are to be skipped, the structure
+                                              *   fields that specify pins can be omitted,
+                                              *   as they are ignored anyway. */
+    uint8_t              interrupt_priority; ///< Interrupt priority.
+    bool                 hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
+    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
+                                             /**< When set to true, the driver does not modify
+                                              *   any GPIO parameters of the used pins. Those
+                                              *   parameters are supposed to be configured
+                                              *   externally before the driver is initialized. */
 } nrfx_twim_config_t;
 
 /**
@@ -64,15 +75,9 @@ typedef struct
  */
 #define NRFX_TWIM_DEFAULT_CONFIG(_pin_scl, _pin_sda)             \
 {                                                                \
-    .nrfy_config =                                               \
-    {                                                            \
-        .pins =                                                  \
-        {                                                        \
-            .scl_pin    = _pin_scl,                              \
-            .sda_pin    = _pin_sda                               \
-        },                                                       \
-        .frequency      = NRF_TWIM_FREQ_100K                     \
-    },                                                           \
+    .scl_pin            = _pin_scl,                              \
+    .sda_pin            = _pin_sda,                              \
+    .frequency          = NRF_TWIM_FREQ_100K,                    \
     .interrupt_priority = NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY, \
     .hold_bus_uninit    = false,                                 \
 }

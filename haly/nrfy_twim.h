@@ -43,8 +43,8 @@ uint32_t __nrfy_internal_twim_events_process(NRF_TWIM_Type *               p_reg
 /** @brief TWIM pins configuration structure. */
 typedef struct
 {
-    uint8_t scl_pin; ///< SCL pin number.
-    uint8_t sda_pin; ///< SDA pin number.
+    uint32_t scl_pin; ///< SCL pin number.
+    uint32_t sda_pin; ///< SDA pin number.
 } nrfy_twim_pins_t;
 
 /** @brief TWIM configuration structure. */
