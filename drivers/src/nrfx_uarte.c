@@ -50,36 +50,51 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
 {
     if (!p_config->skip_gpio_cfg)
     {
-        if (p_config->nrfy_config.pins.txd_pin != NRF_UARTE_PSEL_DISCONNECTED)
+        if (p_config->txd_pin != NRF_UARTE_PSEL_DISCONNECTED)
         {
-            nrfy_gpio_pin_set(p_config->nrfy_config.pins.txd_pin);
-            nrfy_gpio_cfg_output(p_config->nrfy_config.pins.txd_pin);
+            nrfy_gpio_pin_set(p_config->txd_pin);
+            nrfy_gpio_cfg_output(p_config->txd_pin);
         }
-        if (p_config->nrfy_config.pins.rxd_pin != NRF_UARTE_PSEL_DISCONNECTED)
+        if (p_config->rxd_pin != NRF_UARTE_PSEL_DISCONNECTED)
         {
-            nrfy_gpio_cfg_input(p_config->nrfy_config.pins.rxd_pin, NRF_GPIO_PIN_NOPULL);
+            nrfy_gpio_cfg_input(p_config->rxd_pin, NRF_GPIO_PIN_NOPULL);
         }
     }
 
-    if (p_config->nrfy_config.config.hwfc == NRF_UARTE_HWFC_ENABLED)
+    if (p_config->config.hwfc == NRF_UARTE_HWFC_ENABLED)
     {
         if (!p_config->skip_gpio_cfg)
         {
-            if (p_config->nrfy_config.pins.cts_pin != NRF_UARTE_PSEL_DISCONNECTED)
+            if (p_config->cts_pin != NRF_UARTE_PSEL_DISCONNECTED)
             {
-                nrfy_gpio_cfg_input(p_config->nrfy_config.pins.cts_pin, NRF_GPIO_PIN_NOPULL);
+                nrfy_gpio_cfg_input(p_config->cts_pin, NRF_GPIO_PIN_NOPULL);
             }
-            if (p_config->nrfy_config.pins.rts_pin != NRF_UARTE_PSEL_DISCONNECTED)
+            if (p_config->rts_pin != NRF_UARTE_PSEL_DISCONNECTED)
             {
-                nrfy_gpio_pin_set(p_config->nrfy_config.pins.rts_pin);
-                nrfy_gpio_cfg_output(p_config->nrfy_config.pins.rts_pin);
+                nrfy_gpio_pin_set(p_config->rts_pin);
+                nrfy_gpio_cfg_output(p_config->rts_pin);
 #if NRF_GPIO_HAS_CLOCKPIN
-                nrfy_gpio_pin_clock_set(p_config->nrfy_config.pins.rts_pin, true);
+                nrfy_gpio_pin_clock_set(p_config->rts_pin, true);
 #endif
             }
         }
     }
-    nrfy_uarte_periph_configure(p_instance->p_reg, &p_config->nrfy_config);
+
+    nrfy_uarte_config_t nrfy_config =
+    {
+        .pins =
+        {
+            .txd_pin = p_config->txd_pin,
+            .rxd_pin = p_config->rxd_pin,
+            .rts_pin = p_config->rts_pin,
+            .cts_pin = p_config->cts_pin
+        },
+        .baudrate = p_config->baudrate,
+        .skip_psel_cfg = p_config->skip_psel_cfg
+    };
+    nrfy_config.config = p_config->config;
+
+    nrfy_uarte_periph_configure(p_instance->p_reg, &nrfy_config);
 
     apply_workaround_for_enable_anomaly(p_instance);
 
@@ -206,7 +221,7 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     {
         p_cb->p_context = p_config->p_context;
         p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
-        p_cb->skip_psel_cfg = p_config->nrfy_config.skip_psel_cfg;
+        p_cb->skip_psel_cfg = p_config->skip_psel_cfg;
         uarte_configure(p_instance, p_config);
     }
 

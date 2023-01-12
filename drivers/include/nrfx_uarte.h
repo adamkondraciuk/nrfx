@@ -49,7 +49,21 @@ typedef enum
 /** @brief Structure for the UARTE configuration. */
 typedef struct
 {
-    nrfy_uarte_config_t nrfy_config;        ///< UARTE configuration.
+    uint32_t             txd_pin;           ///< TXD pin number.
+    uint32_t             rxd_pin;           ///< RXD pin number.
+    uint32_t             rts_pin;           ///< RTS pin number.
+    uint32_t             cts_pin;           ///< CTS pin number.
+    nrf_uarte_baudrate_t baudrate;          ///< Baud rate.
+    nrf_uarte_config_t   config;            ///< Peripheral configuration.
+    bool                 skip_psel_cfg;     ///< Skip pin selection configuration.
+                                            /**< When set to true, the driver does not modify
+                                             *   pin select registers in the peripheral.
+                                             *   Those registers are supposed to be set up
+                                             *   externally before the driver is initialized.
+                                             *   @note When both GPIO configuration and pin
+                                             *   selection are to be skipped, the structure
+                                             *   fields that specify pins can be omitted,
+                                             *   as they are ignored anyway. */
     void *              p_context;          ///< Context passed to interrupt handler.
     uint8_t             interrupt_priority; ///< Interrupt priority.
     bool                skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
@@ -58,22 +72,6 @@ typedef struct
                                              *   parameters are supposed to be configured
                                              *   externally before the driver is initialized. */
 } nrfx_uarte_config_t;
-
-#if defined(UARTE_CONFIG_STOP_Msk) || defined(__NRFX_DOXYGEN__)
-    /** @brief UARTE additional stop bits configuration. */
-    #define NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG   \
-        .stop = (nrf_uarte_stop_t)NRF_UARTE_STOP_ONE,
-#else
-    #define NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG
-#endif
-
-#if defined(UARTE_CONFIG_PARITYTYPE_Msk) || defined(__NRFX_DOXYGEN__)
-    /** @brief UARTE additional parity type configuration. */
-    #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG   \
-        .paritytype = NRF_UARTE_PARITYTYPE_EVEN,
-#else
-    #define NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG
-#endif
 
 /**
  * @brief UARTE driver default configuration.
@@ -87,28 +85,25 @@ typedef struct
  * @param[in] _pin_tx TX pin.
  * @param[in] _pin_rx RX pin.
  */
-#define NRFX_UARTE_DEFAULT_CONFIG(_pin_tx, _pin_rx)              \
-{                                                                \
-    .nrfy_config        =                                        \
-    {                                                            \
-        .pins           =                                        \
-        {                                                        \
-            .txd_pin    = _pin_tx,                               \
-            .rxd_pin    = _pin_rx,                               \
-            .rts_pin    = NRF_UARTE_PSEL_DISCONNECTED,           \
-            .cts_pin    = NRF_UARTE_PSEL_DISCONNECTED            \
-        },                                                       \
-        .baudrate       = NRF_UARTE_BAUDRATE_115200,             \
-        .config         =                                        \
-        {                                                        \
-            .hwfc       = NRF_UARTE_HWFC_DISABLED,               \
-            .parity     = NRF_UARTE_PARITY_EXCLUDED,             \
-            NRFX_UARTE_DEFAULT_EXTENDED_STOP_CONFIG              \
-            NRFX_UARTE_DEFAULT_EXTENDED_PARITYTYPE_CONFIG        \
-        }                                                        \
-    },                                                           \
-    .p_context          = NULL,                                  \
-    .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY \
+#define NRFX_UARTE_DEFAULT_CONFIG(_pin_tx, _pin_rx)                             \
+{                                                                               \
+    .txd_pin            = _pin_tx,                                              \
+    .rxd_pin            = _pin_rx,                                              \
+    .rts_pin            = NRF_UARTE_PSEL_DISCONNECTED,                          \
+    .cts_pin            = NRF_UARTE_PSEL_DISCONNECTED,                          \
+    .baudrate           = NRF_UARTE_BAUDRATE_115200,                            \
+    .config             =                                                       \
+    {                                                                           \
+        .hwfc           = NRF_UARTE_HWFC_DISABLED,                              \
+        .parity         = NRF_UARTE_PARITY_EXCLUDED,                            \
+        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(UARTE_CONFIG_STOP_Msk),       \
+                (.stop = (nrf_uarte_stop_t)NRF_UARTE_STOP_ONE,), ())            \
+        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(UARTE_CONFIG_PARITYTYPE_Msk), \
+                (.paritytype = NRF_UARTE_PARITYTYPE_EVEN,), ())                 \
+    },                                                                          \
+                                                                                \
+    .p_context          = NULL,                                                 \
+    .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY                \
 }
 
 /** @brief Structure for the UARTE transfer completion event. */
