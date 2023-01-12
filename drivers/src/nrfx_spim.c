@@ -177,6 +177,39 @@ static void spim_abort(NRF_SPIM_Type * p_spim, spim_control_block_t * p_cb)
     p_cb->transfer_in_progress = false;
 }
 
+static void pin_init(uint32_t             pin,
+                     nrf_gpio_pin_dir_t   dir,
+                     nrf_gpio_pin_pull_t  pull,
+                     nrf_gpio_pin_drive_t drive,
+                     uint32_t             initial_state)
+{
+    nrf_gpio_pin_input_t input;
+
+    if (pin == NRF_SPIM_PIN_NOT_CONNECTED)
+    {
+        return;
+    }
+
+    if (dir == NRF_GPIO_PIN_DIR_OUTPUT)
+    {
+        if (initial_state)
+        {
+            nrfy_gpio_pin_set(pin);
+        }
+        else
+        {
+            nrfy_gpio_pin_clear(pin);
+        }
+        input = NRF_GPIO_PIN_INPUT_DISCONNECT;
+    }
+    else
+    {
+        input = NRF_GPIO_PIN_INPUT_CONNECT;
+    }
+
+    nrfy_gpio_cfg(pin, dir, input, pull, drive, NRF_GPIO_PIN_NOSENSE);
+}
+
 static void configure_pins(nrfx_spim_t const *        p_instance,
                            nrfx_spim_config_t const * p_config)
 {
@@ -202,20 +235,6 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
 
     if (!p_config->skip_gpio_cfg)
     {
-        // Configure pins used by the peripheral:
-        // - SCK - output with initial value corresponding with the SPI mode used:
-        //   0 - for modes 0 and 1 (CPOL = 0), 1 - for modes 2 and 3 (CPOL = 1);
-        //   according to the reference manual guidelines this pin and its input
-        //   buffer must always be connected for the SPI to work.
-        if (p_nrfy_config->mode <= NRF_SPIM_MODE_1)
-        {
-            nrfy_gpio_pin_clear(p_nrfy_config->pins.sck_pin);
-        }
-        else
-        {
-            nrfy_gpio_pin_set(p_nrfy_config->pins.sck_pin);
-        }
-
         nrf_gpio_pin_drive_t pin_drive;
         // Configure pin drive - high drive for 32 MHz clock frequency.
 #if NRF_SPIM_HAS_32_MHZ_FREQ
@@ -223,70 +242,47 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
 #else
         pin_drive = NRF_GPIO_PIN_S0S1;
 #endif
-
-        nrfy_gpio_cfg(p_nrfy_config->pins.sck_pin,
-                      NRF_GPIO_PIN_DIR_OUTPUT,
-                      NRF_GPIO_PIN_INPUT_CONNECT,
-                      NRF_GPIO_PIN_NOPULL,
-                      pin_drive,
-                      NRF_GPIO_PIN_NOSENSE);
+        // Configure pins used by the peripheral:
+        // - SCK - output with initial value corresponding with the SPI mode used:
+        //   0 - for modes 0 and 1 (CPOL = 0), 1 - for modes 2 and 3 (CPOL = 1);
+        //   according to the reference manual guidelines this pin and its input
+        //   buffer must always be connected for the SPI to work.
+        pin_init(p_nrfy_config->pins.sck_pin,
+                 NRF_GPIO_PIN_DIR_OUTPUT,
+                 NRF_GPIO_PIN_NOPULL,
+                 pin_drive,
+                 (p_nrfy_config->mode <= NRF_SPIM_MODE_1) ? 0 : 1);
 #if NRF_GPIO_HAS_CLOCKPIN
         nrfy_gpio_pin_clock_set(p_nrfy_config->pins.sck_pin, true);
 #endif
+
         // - MOSI (optional) - output with initial value 0
-        if (p_nrfy_config->pins.mosi_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-        {
-            nrfy_gpio_pin_clear(p_nrfy_config->pins.mosi_pin);
-            nrfy_gpio_cfg(p_nrfy_config->pins.mosi_pin,
-                          NRF_GPIO_PIN_DIR_OUTPUT,
-                          NRF_GPIO_PIN_INPUT_DISCONNECT,
-                          NRF_GPIO_PIN_NOPULL,
-                          pin_drive,
-                          NRF_GPIO_PIN_NOSENSE);
-        }
+        pin_init(p_nrfy_config->pins.mosi_pin,
+                 NRF_GPIO_PIN_DIR_OUTPUT,
+                 NRF_GPIO_PIN_NOPULL,
+                 pin_drive,
+                 0);
+
         // - MISO (optional) - input
-        if (p_nrfy_config->pins.miso_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-        {
-            nrfy_gpio_cfg(p_nrfy_config->pins.miso_pin,
-                          NRF_GPIO_PIN_DIR_INPUT,
-                          NRF_GPIO_PIN_INPUT_CONNECT,
-                          p_config->miso_pull,
-                          pin_drive,
-                          NRF_GPIO_PIN_NOSENSE);
-        }
-
+        pin_init(p_nrfy_config->pins.miso_pin,
+                 NRF_GPIO_PIN_DIR_INPUT,
+                 p_config->miso_pull,
+                 pin_drive,
+                 0);
         // - Slave Select (optional) - output with initial value 1 (inactive).
-
-        if (ss_pin_to_configure != NRF_SPIM_PIN_NOT_CONNECTED)
-        {
-            if (ss_active_high)
-            {
-                nrfy_gpio_pin_clear(ss_pin_to_configure);
-            }
-            else
-            {
-                nrfy_gpio_pin_set(ss_pin_to_configure);
-            }
-            nrfy_gpio_cfg(ss_pin_to_configure,
-                          NRF_GPIO_PIN_DIR_OUTPUT,
-                          NRF_GPIO_PIN_INPUT_DISCONNECT,
-                          NRF_GPIO_PIN_NOPULL,
-                          pin_drive,
-                          NRF_GPIO_PIN_NOSENSE);
-        }
+        pin_init(ss_pin_to_configure,
+                 NRF_GPIO_PIN_DIR_OUTPUT,
+                 NRF_GPIO_PIN_NOPULL,
+                 pin_drive,
+                 ss_active_high ? 0 : 1);
 
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
         // - DCX (optional) - output.
-        if (p_nrfy_config->ext_config.pins.dcx_pin != NRF_SPIM_PIN_NOT_CONNECTED)
-        {
-            nrfy_gpio_pin_set(p_nrfy_config->ext_config.pins.dcx_pin);
-            nrfy_gpio_cfg(p_nrfy_config->ext_config.pins.dcx_pin,
-                          NRF_GPIO_PIN_DIR_OUTPUT,
-                          NRF_GPIO_PIN_INPUT_DISCONNECT,
-                          NRF_GPIO_PIN_NOPULL,
-                          pin_drive,
-                          NRF_GPIO_PIN_NOSENSE);
-        }
+        pin_init(p_nrfy_config->ext_config.pins.dcx_pin,
+                 NRF_GPIO_PIN_DIR_OUTPUT,
+                 NRF_GPIO_PIN_NOPULL,
+                 pin_drive,
+                 1);
 #endif
     }
 }
