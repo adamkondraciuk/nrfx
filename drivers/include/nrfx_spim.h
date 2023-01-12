@@ -43,110 +43,68 @@ enum {
 /** @brief Configuration structure of the SPIM driver instance. */
 typedef struct
 {
-    nrfy_spim_config_t  nrfy_config;       ///< SPIM configuration structure.
-    uint32_t            sw_ss_pin;         ///< Software-controlled Slave Select pin number (optional).
-                                           /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED if this signal is not needed
-                                            *   or hardware-controlled Slave Select is used. */
-    bool                sw_ss_active_high; ///< Polarity of the software-controlled Slave Select pin during transmission.
-    uint8_t             irq_priority;      ///< Interrupt priority.
-    nrf_gpio_pin_pull_t miso_pull;         ///< MISO pull up configuration.
-    bool                skip_gpio_cfg;     ///< Skip GPIO configuration of pins.
-                                           /**< When set to true, the driver does not modify
-                                            *   any GPIO parameters of the used pins. Those
-                                            *   parameters are supposed to be configured
-                                            *   externally before the driver is initialized. */
-} nrfx_spim_config_t;
-
+    uint32_t             sck_pin;        ///< SCK pin number.
+    uint32_t             mosi_pin;       ///< MOSI pin number (optional).
+                                         /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED
+                                          *   if this signal is not needed. */
+    uint32_t             miso_pin;       ///< MISO pin number (optional).
+                                         /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED
+                                          *   if this signal is not needed. */
+    uint32_t             ss_pin;         ///< Slave Select pin number (optional).
+                                         /**< Set to @ref NRF_SPIM_PIN_NOT_CONNECTED
+                                          *   if this signal is not needed.
+                                          *   @note Unlike the other fields that specify
+                                          *   pin numbers, this one cannot be omitted
+                                          *   when both GPIO configuration and pin
+                                          *   selection are to be skipped but the signal
+                                          *   is not controlled by hardware (the driver
+                                          *   must then control it as a regular GPIO). */
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief SPIM driver extended default configuration.
- *
- * This configuration sets up SPIM options for extended instance with the following options:
- * - software-controlled Slave Select disabled
- * - software-controlled Slave Select active low
- * - over-run character set to 0xFF
- * - clock frequency: 32 MHz
- * - mode: 0 (SCK active high, sample on leading edge of the clock signal)
- * - MSB shifted out first
- * - MISO pull-up disabled
- * - DCX pin disabled
- * - CSN (hardware-controlled Slave Select) pin enabled
- * - CSN pin active low
- * - CSN activity duration before and after transmission: 2 clock cycles
- * - RX sampling delay: 2 clock cycles
- *
- * @param[in] _pin_sck  SCK pin.
- * @param[in] _pin_mosi MOSI pin.
- * @param[in] _pin_miso MISO pin.
- * @param[in] _pin_ss   Hardware-Controlled Slave Select pin.
- */
-#define NRFX_SPIM_DEFAULT_EXTENDED_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_ss) \
-{                                                                                  \
-    .nrfy_config          =                                                        \
-    {                                                                              \
-        .pins             =                                                        \
-        {                                                                          \
-            .sck_pin      = _pin_sck,                                              \
-            .mosi_pin     = _pin_mosi,                                             \
-            .miso_pin     = _pin_miso,                                             \
-        },                                                                         \
-        .orc              = 0xFF,                                                  \
-        .frequency        = NRF_SPIM_FREQ_32M,                                     \
-        .mode             = NRF_SPIM_MODE_0,                                       \
-        .bit_order        = NRF_SPIM_BIT_ORDER_MSB_FIRST,                          \
-        .ext_config       =                                                        \
-        {                                                                          \
-            .pins         =                                                        \
-            {                                                                      \
-                .dcx_pin  = NRF_SPIM_PIN_NOT_CONNECTED,                            \
-                .csn_pin  = _pin_ss,                                               \
-            },                                                                     \
-            .csn_pol      = NRF_SPIM_CSN_POL_LOW,                                  \
-            .csn_duration = 0x02,                                                  \
-            .rx_delay     = 0x02,                                                  \
-        },                                                                         \
-        .ext_enable       = true,                                                  \
-    },                                                                             \
-    .sw_ss_pin            = NRF_SPIM_PIN_NOT_CONNECTED,                            \
-    .sw_ss_active_high    = false,                                                 \
-    .irq_priority         = NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY,                 \
-    .miso_pull            = NRF_GPIO_PIN_NOPULL,                                   \
-}
-
-/**
- * @brief Extended part of the SPIM driver default configuration.
- *
- * This configuration sets up SPIM extended options with the following values:
- * - DCX pin disabled
- * - CSN (hardware-controlled Slave Select) pin disabled
- * - CSN pin active low
- * - CSN activity duration before and after transmission: 2 clock cycles
- * - RX sampling delay: 2 clock cycles
- * - extended features disabled
- */
-#define NRFX_SPIM_DEFAULT_CONFIG_EXTENDED_PART      \
-    .ext_config       =                             \
-    {                                               \
-        .pins         =                             \
-        {                                           \
-            .dcx_pin  = NRF_SPIM_PIN_NOT_CONNECTED, \
-            .csn_pin  = NRF_SPIM_PIN_NOT_CONNECTED, \
-        },                                          \
-        .csn_pol      = NRF_SPIM_CSN_POL_LOW,       \
-        .csn_duration = 0x02,                       \
-        .rx_delay     = 0x02,                       \
-    },                                              \
-    .ext_enable   = false,
-#else
-    #define NRFX_SPIM_DEFAULT_CONFIG_EXTENDED_PART
-#endif // NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
+    uint32_t             dcx_pin;        ///< D/CX pin number (optional).
+    uint8_t              rx_delay;       ///< Sample delay for input serial data on MISO.
+                                         /**< The value specifies the delay, in number of 64 MHz clock cycles
+                                          *   (15.625 ns), from the the sampling edge of SCK (leading edge for
+                                          *   CONFIG.CPHA = 0, trailing edge for CONFIG.CPHA = 1) until
+                                          *   the input serial data is sampled. */
+    bool                 use_hw_ss;      ///< Indication to use software or hardware controlled Slave Select pin.
+    uint8_t              ss_duration;    ///< Slave Select duration before and after transmission.
+                                         /**< Minimum duration between the edge of CSN and the edge of SCK.
+                                          *   Also, minimum duration of CSN inactivity between transactions.
+                                          *   The value is specified in number of 64 MHz clock cycles (15.625 ns).
+                                          *   Supported only for hardware-controlled Slave Select. */
+#endif
+    bool                 ss_active_high; ///< Polarity of the Slave Select pin during transmission.
+    uint8_t              irq_priority;   ///< Interrupt priority.
+    uint8_t              orc;            ///< Overrun character.
+                                         /**< This character is used when all bytes from the TX buffer are sent,
+                                          *   but the transfer continues due to RX. */
+    nrf_spim_frequency_t frequency;      ///< SPIM frequency.
+    nrf_spim_mode_t      mode;           ///< SPIM mode.
+    nrf_spim_bit_order_t bit_order;      ///< SPIM bit order.
+    nrf_gpio_pin_pull_t  miso_pull;      ///< MISO pull up configuration.
+    bool                 skip_gpio_cfg;  ///< Skip GPIO configuration of pins.
+                                         /**< When set to true, the driver does not modify
+                                          *   any GPIO parameters of the used pins. Those
+                                          *   parameters are supposed to be configured
+                                          *   externally before the driver is initialized. */
+    bool                 skip_psel_cfg;  ///< Skip pin selection configuration.
+                                         /**< When set to true, the driver does not modify
+                                          *   pin select registers in the peripheral.
+                                          *   Those registers are supposed to be set up
+                                          *   externally before the driver is initialized.
+                                          *   @note When both GPIO configuration and pin
+                                          *   selection are to be skipped, the structure
+                                          *   fields that specify pins can be omitted,
+                                          *   as they are ignored anyway. This does not
+                                          *   apply to the @p ss_pin field, unless it is
+                                          *   to be controlled by hardware.*/
+} nrfx_spim_config_t;
 
 /**
  * @brief SPIM driver default configuration.
  *
  * This configuration sets up SPIM with the following options:
- * - software-controlled Slave Select utilized
- * - software-controlled Slave Select active low
+ * - SS pin active low
  * - over-run character set to 0xFF
  * - clock frequency: 4 MHz
  * - mode: 0 (SCK active high, sample on leading edge of the clock signal)
@@ -156,30 +114,24 @@ typedef struct
  * @param[in] _pin_sck  SCK pin.
  * @param[in] _pin_mosi MOSI pin.
  * @param[in] _pin_miso MISO pin.
- * @param[in] _pin_ss   Software-Controlled Slave Select pin.
+ * @param[in] _pin_ss   Slave select pin.
  */
-#define NRFX_SPIM_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_ss) \
-{                                                                         \
-    .nrfy_config       =                                                  \
-    {                                                                     \
-        .pins          =                                                  \
-        {                                                                 \
-            .sck_pin   = _pin_sck,                                        \
-            .mosi_pin  = _pin_mosi,                                       \
-            .miso_pin  = _pin_miso,                                       \
-        },                                                                \
-        .orc           = 0xFF,                                            \
-        .frequency     = NRF_SPIM_FREQ_4M,                                \
-        .mode          = NRF_SPIM_MODE_0,                                 \
-        .bit_order     = NRF_SPIM_BIT_ORDER_MSB_FIRST,                    \
-        .skip_psel_cfg = false,                                           \
-        NRFX_SPIM_DEFAULT_CONFIG_EXTENDED_PART                            \
-    },                                                                    \
-    .sw_ss_pin         = _pin_ss,                                         \
-    .sw_ss_active_high = false,                                           \
-    .irq_priority      = NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY,           \
-    .miso_pull         = NRF_GPIO_PIN_NOPULL,                             \
-    .skip_gpio_cfg     = false                                            \
+#define NRFX_SPIM_DEFAULT_CONFIG(_pin_sck, _pin_mosi, _pin_miso, _pin_ss)                        \
+{                                                                                                \
+    .sck_pin        = _pin_sck,                                                                  \
+    .mosi_pin       = _pin_mosi,                                                                 \
+    .miso_pin       = _pin_miso,                                                                 \
+    .ss_pin         = _pin_ss,                                                                   \
+    .ss_active_high = false,                                                                     \
+    .irq_priority   = NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY,                                     \
+    .orc            = 0xFF,                                                                      \
+    .frequency      = NRF_SPIM_FREQ_4M,                                                          \
+    .mode           = NRF_SPIM_MODE_0,                                                           \
+    .bit_order      = NRF_SPIM_BIT_ORDER_MSB_FIRST,                                              \
+    .miso_pull      = NRF_GPIO_PIN_NOPULL,                                                       \
+    NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.use_hw_ss = false, .ss_duration = 0x02,), ()) \
+    NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.rx_delay = 0x02,), ())                        \
+    NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.dcx_pin = NRF_SPIM_PIN_NOT_CONNECTED,), ())   \
 }
 
 /** @brief Flag indicating that TX buffer address will be incremented after transfer. */
