@@ -20,10 +20,8 @@ typedef enum
 typedef struct
 {
     nrfx_mvdma_event_handler_t handler;
-    nrf_vdma_job_t             source_job;
-    nrf_vdma_job_t             source_terminating_job;
-    nrf_vdma_job_t             sink_job;
-    nrf_vdma_job_t             sink_terminating_job;
+    nrf_vdma_job_t             source_job[2];
+    nrf_vdma_job_t             sink_job[2];
     void *                     p_context;
     nrfx_drv_state_t           state;
     nrf_mvdma_mode_t           mode;
@@ -96,8 +94,8 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
 
     p_cb->busy = false;
     p_cb->handler = event_handler;
-    nrf_vdma_job_terminate(&p_cb->source_terminating_job);
-    nrf_vdma_job_terminate(&p_cb->sink_terminating_job);
+    nrf_vdma_job_terminate(&p_cb->source_job[1]);
+    nrf_vdma_job_terminate(&p_cb->sink_job[1]);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -158,19 +156,19 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
     p_cb->busy = true;
 
 
-    nrf_vdma_job_fill(&p_cb->source_job,
+    nrf_vdma_job_fill(p_cb->source_job,
                       p_request->p_source,
                       p_request->size,
                       NRF_VDMA_ATTRIBUTE_PLAIN_DATA);
-    nrf_vdma_job_fill(&p_cb->sink_job,
+    nrf_vdma_job_fill(p_cb->sink_job,
                       p_request->p_sink,
                       p_request->size,
                       NRF_VDMA_ATTRIBUTE_PLAIN_DATA);
 
     nrfx_mvdma_list_request_t list_request =
     {
-        .p_source_job_list = &p_cb->source_job,
-        .p_sink_job_list   = &p_cb->sink_job
+        .p_source_job_list = p_cb->source_job,
+        .p_sink_job_list   = p_cb->sink_job
     };
 
     mvdma_job_start(p_instance->p_reg,
@@ -196,12 +194,13 @@ nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
     }
     p_cb->busy = true;
 
-    nrf_vdma_job_fill(&p_cb->sink_job, p_buffer, size, NRF_VDMA_ATTRIBUTE_BUFFER_FILL);
+    nrf_vdma_job_fill(p_cb->sink_job, p_buffer, size, NRF_VDMA_ATTRIBUTE_BUFFER_FILL);
+    nrf_vdma_job_terminate(p_cb->source_job);
 
     nrfx_mvdma_list_request_t list_request =
     {
-        .p_source_job_list = &p_cb->source_terminating_job,
-        .p_sink_job_list   = &p_cb->sink_job
+        .p_source_job_list = p_cb->source_job,
+        .p_sink_job_list   = p_cb->sink_job
     };
 
     mvdma_job_start(p_instance->p_reg, p_cb, &list_request, NRFX_MVDMA_AXIMODE_AXI, p_context);
