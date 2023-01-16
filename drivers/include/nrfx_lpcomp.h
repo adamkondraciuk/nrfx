@@ -26,8 +26,9 @@ typedef void (* nrfx_lpcomp_event_handler_t)(nrf_lpcomp_event_t event);
 /** @brief LPCOMP configuration. */
 typedef struct
 {
-    nrfy_lpcomp_config_t nrfy_config;        /**< LPCOMP configuration. */
-    uint8_t              interrupt_priority; /**< LPCOMP interrupt priority. */
+    nrf_lpcomp_config_t config;             ///< Peripheral configuration.
+    nrf_lpcomp_input_t  input;              ///< Input to be monitored.
+    uint8_t             interrupt_priority; ///< LPCOMP interrupt priority.
 } nrfx_lpcomp_config_t;
 
 /**
@@ -40,36 +41,19 @@ typedef struct
  *
  * @param[in] _input Comparator input pin.
  */
-#if defined(LPCOMP_FEATURE_HYST_PRESENT)
-#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                         \
-{                                                                  \
-    .nrfy_config =                                                 \
-    {                                                              \
-        .config =                                                  \
-        {                                                          \
-            NRF_LPCOMP_REF_SUPPLY_4_8,                             \
-            NRF_LPCOMP_DETECT_CROSS,                               \
-            NRF_LPCOMP_HYST_NOHYST                                 \
-        },                                                         \
-        .input = (nrf_lpcomp_input_t)_input,                       \
-    },                                                             \
-    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY  \
+#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                               \
+{                                                                        \
+    .config =                                                            \
+    {                                                                    \
+        .reference = NRF_LPCOMP_REF_SUPPLY_4_8,                          \
+        .detection = NRF_LPCOMP_DETECT_CROSS,                            \
+        /* TODO: NRFX-3161 */                                            \
+        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(LPCOMP_HYST_HYST_Msk), \
+                         (.hyst = NRF_LPCOMP_HYST_NOHYST,), ())          \
+    },                                                                   \
+    .input = (nrf_lpcomp_input_t)_input,                                 \
+    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY        \
 }
-#else
-#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                         \
-{                                                                  \
-    .nrfy_config =                                                 \
-    {                                                              \
-        .config =                                                  \
-        {                                                          \
-            NRF_LPCOMP_REF_SUPPLY_4_8,                             \
-            NRF_LPCOMP_DETECT_CROSS,                               \
-        },                                                         \
-        .input = (nrf_lpcomp_input_t)_input,                       \
-    },                                                             \
-    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY  \
-}
-#endif
 
 /**
  * @brief Function for initializing the LPCOMP driver.

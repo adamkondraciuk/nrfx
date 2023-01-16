@@ -75,7 +75,20 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
 #endif
     nrfy_lpcomp_task_trigger(NRF_LPCOMP, NRF_LPCOMP_TASK_STOP);
     nrfy_lpcomp_disable(NRF_LPCOMP);
-    nrfy_lpcomp_periph_configure(NRF_LPCOMP, &p_config->nrfy_config);
+
+    nrfy_lpcomp_config_t nrfy_config =
+    {
+        .config = {
+            .reference = p_config->config.reference,
+            .detection = p_config->config.detection,
+            /* TODO: NRFX-3161 Replace with LPCOMP_FEATURE_HYST_PRESENT when it is set to 1.*/
+            NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(LPCOMP_HYST_HYST_Msk),
+                             (.hyst = p_config->config.hyst), ())
+        },
+        .input = p_config->input
+    };
+
+    nrfy_lpcomp_periph_configure(NRF_LPCOMP, &nrfy_config);
     nrfy_lpcomp_shorts_disable(NRF_LPCOMP,
                                NRF_LPCOMP_SHORT_CROSS_STOP_MASK |
                                NRF_LPCOMP_SHORT_UP_STOP_MASK |
@@ -90,7 +103,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
     nrfy_lpcomp_enable(NRF_LPCOMP);
 
     uint32_t int_mask = 0;
-    switch (p_config->nrfy_config.config.detection)
+    switch (p_config->config.detection)
     {
         case NRF_LPCOMP_DETECT_UP:
             int_mask = NRF_LPCOMP_INT_UP_MASK;
