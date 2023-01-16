@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_stmesp_hal STMESP HAL
  * @{
- * @ingroup nrf_stmesp
+ * @ingroup nrf_stm
  * @brief   Hardware access layer for managing the System Trace Macrocell Extended Stimulus Port (STMESP) peripheral.
  */
 

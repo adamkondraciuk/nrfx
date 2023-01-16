@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_ficr_hal FICR HAL
  * @{
- * @ingroup nrf_ficr
+ * @ingroup nrf_icr
  * @brief   Hardware access layer (HAL) for getting data from
  *          the Factory Information Configuration Registers (FICR).
  */

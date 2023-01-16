@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_lfxo_hal LFXO HAL
  * @{
- * @ingroup nrf_lfxo
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the Low Frequency Crystal Oscillator (LFXO).
  */
 
@@ -306,7 +306,7 @@ NRF_STATIC_INLINE void nrf_lfxo_amplitude_control_get(NRF_LFXO_Type const *     
 {
     NRFX_ASSERT(p_ctrl);
     uint32_t reg = p_reg->AMPLITUDECTRL;
-    
+
     p_ctrl->interval  = (reg & LFXO_AMPLITUDECTRL_INTERVAL_Msk) >> LFXO_AMPLITUDECTRL_INTERVAL_Pos;
     p_ctrl->step      = (reg & LFXO_AMPLITUDECTRL_STEP_Msk)     >> LFXO_AMPLITUDECTRL_STEP_Pos;
     p_ctrl->idac_init = (reg & LFXO_AMPLITUDECTRL_IDACINIT_Msk) >> LFXO_AMPLITUDECTRL_IDACINIT_Pos;

@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_lfrc_hal LFRC HAL
  * @{
- * @ingroup nrf_lfrc
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the Low Frequency 32 KHz RC Oscillator (LFRC).
  */
 
@@ -326,7 +326,7 @@ NRF_STATIC_INLINE bool nrf_lfrc_statusana_settled_check(NRF_LFRC_Type const * p_
 NRF_STATIC_INLINE void nrf_lfrc_config_set(NRF_LFRC_Type *           p_reg,
                                            nrf_lfrc_config_t const * p_config)
 {
-    p_reg->CONFIG.CFG = 
+    p_reg->CONFIG.CFG =
         ((p_config->doubletailcurrent_en  << LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Pos)  &
               LFRC_CONFIG_CFG_DOUBLETAILCURRENT_Msk)
       | ((p_config->continuoustailbias_en << LFRC_CONFIG_CFG_CONTINUOUSTAILBIAS_Pos) &

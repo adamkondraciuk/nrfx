@@ -10,10 +10,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrf_ctrlap_hal CTRLAP HAL
+ * @defgroup nrf_ctrlap_hal CTRL-AP HAL
  * @{
  * @ingroup nrf_ctrlap
- * @brief   Hardware access layer for managing the Control Access Port (CTRLAP) peripheral.
+ * @brief   Hardware access layer for managing the Control Access Port (CTRL-AP) peripheral.
  */
 
 /** @brief CTRLAP events. */

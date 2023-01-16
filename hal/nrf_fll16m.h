@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_fll16m_hal FLL16M HAL
  * @{
- * @ingroup nrf_fll16m
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the 16 MHz Frequency Locked Loop (FLL16M) peripheral.
  */
 
@@ -278,7 +278,7 @@ NRF_STATIC_INLINE void nrf_fll16m_freqmeas_clocksel_set(NRF_FLL16M_Type *       
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] p_config Configuration parameters.
  */
-NRF_STATIC_INLINE void nrf_fll16m_clkctrl_mode_set(NRF_FLL16M_Type *              p_reg, 
+NRF_STATIC_INLINE void nrf_fll16m_clkctrl_mode_set(NRF_FLL16M_Type *              p_reg,
                                                    nrf_fll16m_clockctrl_t const * p_config);
 
 /**
@@ -447,7 +447,7 @@ NRF_STATIC_INLINE void nrf_fll16m_freqmeas_clocksel_set(NRF_FLL16M_Type *       
     p_reg->FREQM.CLOCKSEL = (uint32_t)clocksel;
 }
 
-NRF_STATIC_INLINE void nrf_fll16m_clkctrl_mode_set(NRF_FLL16M_Type *              p_reg, 
+NRF_STATIC_INLINE void nrf_fll16m_clkctrl_mode_set(NRF_FLL16M_Type *              p_reg,
                                                    nrf_fll16m_clockctrl_t const * p_config)
 {
     p_reg->CLOCKCTRL.MODE =

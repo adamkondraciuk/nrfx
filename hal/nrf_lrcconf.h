@@ -11,7 +11,7 @@ extern "C" {
 /**
  * @defgroup nrf_lrcconf_hal LRCCONF HAL
  * @{
- * @ingroup nrf_lrcconf
+ * @ingroup nrf_lrc
  * @brief   Hardware access layer for managing the Local Resource Controller Configuration (LRCCONF) peripheral.
  */
 

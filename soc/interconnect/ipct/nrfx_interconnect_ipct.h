@@ -9,12 +9,12 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif  
+#endif
 
 /**
  * @defgroup nrfx_interconnect_ipct IPCT support
  * @{
- * @ingroup nrf_ipct
+ * @ingroup nrfx
  * @brief   Support for IPCT interconnection services.
  */
 
@@ -30,7 +30,7 @@ typedef struct {
  * @brief Function for getting the domain to which the specified IPCT belongs.
  *
  * @param[in] p_ipct_prop Pointer to IPCT properties structure.
- * 
+ *
  * @return Domain that includes the specified IPCT.
  */
 nrf_domain_t nrfx_interconnect_ipct_domain_get(nrfx_interconnect_ipct_t const * p_ipct_prop);
@@ -38,9 +38,9 @@ nrf_domain_t nrfx_interconnect_ipct_domain_get(nrfx_interconnect_ipct_t const * 
 /**
  * @brief Function for getting IPCT properties structure by pointer to APB bus properties
  *        structure to which this particular IPCT belongs.
- * 
+ *
  * @param[in] p_apb_prop Pointer to APB properties structure.
- * 
+ *
  * @return Pointer to the IPCT properties structure that belongs to the specified APB bus.
  */
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_get(nrfx_interconnect_apb_t const * p_apb_prop);
@@ -48,7 +48,7 @@ nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_get(nrfx_interconnect_ap
 /**
  * @brief Function for getting number entries for global domain in IPCT peripheral properties
  *        array.
- * 
+ *
  * @return Number of entries in global IPCT peripheral properties array.
  */
 size_t nrfx_interconnect_ipct_global_num_of_get(void);

@@ -18,7 +18,7 @@ NRFY_STATIC_INLINE void __nrfy_internal_tbm_event_enabled_clear(NRF_TBM_Type *  
                                                                 uint32_t        mask,
                                                                 nrf_tbm_event_t event);
 /**
-* @defgroup nrfy_tbm_hal TBM HAL
+* @defgroup nrfy_tbm TBM HALY
 * @{
 * @ingroup nrf_tbm
 * @brief   Hardware access layer with cache and barrier support

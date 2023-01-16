@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_auxpll_hal Auxiliary PLL HAL
  * @{
- * @ingroup nrf_auxpll
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the Auxiliary Phase Locked Loop (AUXPLL) peripheral.
  */
 
@@ -342,7 +342,7 @@ NRF_STATIC_INLINE void nrf_auxpll_unlock(NRF_AUXPLL_Type * p_reg);
  * @brief Check if mirrored AUXPLL registers are locked.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @retval true  The AUXPLL mirrored register lock enabled.
  * @retval false The AUXPLL mirrored register lock disabled.
  */

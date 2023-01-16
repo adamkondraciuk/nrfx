@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_lfclockmux_hal Low Frequency Clock Multiplexer HAL
  * @{
- * @ingroup nrf_lfclockmux
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the Low Frequency Clock Multiplexer.
  */
 

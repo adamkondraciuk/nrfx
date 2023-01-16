@@ -288,13 +288,13 @@ extern "C" {
 /** @brief Initialization vector size. */
 #define NRF_CCM_IV_SIZE     8
 /** @brief Packet counter configuration size. */
-#define NRC_CCM_PKTCTR_SIZE 9
+#define NRF_CCM_PKTCTR_SIZE 9
 
 /** @brief CCM data structure. */
 typedef struct __PACKED
 {
     uint8_t key[NRF_CCM_KEY_SIZE];       ///< 16-byte AES key.
-    uint8_t pktctr[NRC_CCM_PKTCTR_SIZE]; ///< Packet counter configuration.
+    uint8_t pktctr[NRF_CCM_PKTCTR_SIZE]; ///< Packet counter configuration.
     uint8_t iv[NRF_CCM_IV_SIZE];         ///< 8-byte initialization vector (IV).
 } nrf_ccm_cnf_t;
 #endif

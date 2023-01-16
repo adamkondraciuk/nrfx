@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_uicr_hal UICR HAL
  * @{
- * @ingroup nrf_uicr
+ * @ingroup nrf_icr
  * @brief   Hardware access layer for managing the User Information Configuration Registers (UICR) peripheral.
  */
 
@@ -299,7 +299,7 @@ NRF_STATIC_INLINE nrf_uicr_mem_config_t nrf_uicr_mem_config_get(NRF_UICR_Type co
 
     config.permissions = (p_reg->MEM[index].CONFIG &
                           (UICR_MEM_CONFIG_READ_Msk | UICR_MEM_CONFIG_WRITE_Msk |
-                           UICR_MEM_CONFIG_EXECUTE_Msk | UICR_MEM_CONFIG_SECURE_Msk) 
+                           UICR_MEM_CONFIG_EXECUTE_Msk | UICR_MEM_CONFIG_SECURE_Msk)
                           >> UICR_MEM_CONFIG_READ_Pos);
 
     config.owner = (nrf_owner_t)((p_reg->MEM[index].CONFIG & UICR_MEM_CONFIG_OWNERID_Msk) >>

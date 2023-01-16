@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 /**
-* @defgroup nrfy_temp_hal TEMP HAL
+* @defgroup nrfy_temp TEMP HALY
 * @{
 * @ingroup nrf_temp
 * @brief   Hardware access layer with cache and barrier support

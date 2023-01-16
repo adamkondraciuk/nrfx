@@ -12,7 +12,7 @@ extern "C" {
 /**
  * @defgroup nrf_hfxo_hal HFXO HAL
  * @{
- * @ingroup nrf_hfxo
+ * @ingroup nrf_clock
  * @brief   Hardware access layer for managing the High Frequency Crystal Oscillator (HFXO).
  */
 

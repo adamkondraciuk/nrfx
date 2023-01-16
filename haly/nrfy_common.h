@@ -10,7 +10,7 @@ extern "C" {
 /**
  * @defgroup nrfy_common Common module
  * @{
- * @ingroup nrfy
+ * @ingroup nrfx
  * @brief Common module.
  */
 

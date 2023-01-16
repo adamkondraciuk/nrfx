@@ -7,12 +7,12 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif  
+#endif
 
 /**
  * @defgroup nrfx_interconnect_apb APB bus support
  * @{
- * @ingroup nrf_apb
+ * @ingroup nrfx
  * @brief   Support for APB bus services.
  */
 
@@ -31,27 +31,27 @@ typedef struct {
  * @brief Function for getting the domain to which the specified APB bus belongs.
  *
  * @param[in] p_apb_prop Pointer to APB properties structure.
- * 
+ *
  * @return Domain that includes the specified APB.
  */
 nrf_domain_t nrfx_interconnect_apb_domain_get(nrfx_interconnect_apb_t const * p_apb_prop);
 
 /**
  * @brief Function for getting the main APB interconnection.
- * 
+ *
  * @note In some domains the connection between different APBs is realized via additional
  *       bus which is called here `main_apb_connection`
- * 
+ *
  * @return Pointer to the properties structure that represents the main APB interconnection.
  */
 nrfx_interconnect_apb_t const * nrfx_interconnect_apb_main_get(void);
 
 /**
- * @brief Function for getting APB bus properties structure by address of any peripheral 
+ * @brief Function for getting APB bus properties structure by address of any peripheral
  *        that is included in.
- * 
+ *
  * @param[in] addr Address of the peripheral.
- * 
+ *
  * @return Pointer to the properties structure that represents the main APB interconnection
  *         or NULL if provided address is invalid.
  */
