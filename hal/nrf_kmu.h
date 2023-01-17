@@ -16,7 +16,7 @@ extern "C" {
  * @brief   Hardware access layer for managing the Key Management Unit (KMU) peripheral.
  */
 
-#if defined(KMU_INTEN_STARTED_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(KMU_INTEN_KEYSLOT_ERROR_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether INTEN register is available. */
 #define NRF_KMU_HAS_INTEN 1
 #else
