@@ -78,7 +78,7 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
         nrfy_gpio_pin_clock_set(p_config->sck_pin, true);
 #endif
 
-        if (p_config->mosi_pin != NRFX_SPIS_PIN_NOT_USED)
+        if (p_config->mosi_pin != NRF_SPIS_PIN_NOT_CONNECTED)
         {
             nrf_gpio_cfg(p_config->mosi_pin,
                          NRF_GPIO_PIN_DIR_INPUT,
@@ -88,7 +88,7 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
                          NRF_GPIO_PIN_NOSENSE);
         }
 
-        if (p_config->miso_pin != NRFX_SPIS_PIN_NOT_USED)
+        if (p_config->miso_pin != NRF_SPIS_PIN_NOT_CONNECTED)
         {
             nrf_gpio_cfg(p_config->miso_pin,
                          NRF_GPIO_PIN_DIR_INPUT,
@@ -144,13 +144,11 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
 
     if (!p_config->skip_psel_cfg)
     {
-        uint32_t mosi_pin = p_config->mosi_pin != NRFX_SPIS_PIN_NOT_USED ?
-                            p_config->mosi_pin : NRF_SPIS_PIN_NOT_CONNECTED;
-
-        uint32_t miso_pin = p_config->miso_pin != NRFX_SPIS_PIN_NOT_USED ?
-                            p_config->miso_pin : NRF_SPIS_PIN_NOT_CONNECTED;
-
-        nrf_spis_pins_set(p_spis, p_config->sck_pin, mosi_pin, miso_pin, p_config->csn_pin);
+        nrf_spis_pins_set(p_spis,
+                          p_config->sck_pin,
+                          p_config->mosi_pin,
+                          p_config->miso_pin,
+                          p_config->csn_pin);
     }
 
     // Configure SPI mode.

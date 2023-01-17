@@ -39,13 +39,6 @@ enum {
     .drv_inst_idx = NRFX_CONCAT_3(NRFX_SPIS, id, _INST_IDX), \
 }
 
-/**
- * @brief This value can be provided instead of a pin number for the signals MOSI
- *        and MISO to specify that the given signal is not used and therefore
- *        does not need to be connected to a pin.
- */
-#define NRFX_SPIS_PIN_NOT_USED  0xFF
-
 /** @brief SPI slave driver event types. */
 typedef enum
 {
@@ -99,10 +92,10 @@ typedef struct
 typedef struct
 {
     uint32_t             miso_pin;      ///< SPI MISO pin (optional).
-                                        /**< Set @ref NRFX_SPIS_PIN_NOT_USED
+                                        /**< Set @ref NRF_SPIS_PIN_NOT_CONNECTED
                                          *   if this signal is not needed. */
     uint32_t             mosi_pin;      ///< SPI MOSI pin (optional).
-                                        /**< Set @ref NRFX_SPIS_PIN_NOT_USED
+                                        /**< Set @ref NRF_SPIS_PIN_NOT_CONNECTED
                                          *   if this signal is not needed. */
     uint32_t             sck_pin;       ///< SPI SCK pin.
     uint32_t             csn_pin;       ///< SPI CSN pin.
