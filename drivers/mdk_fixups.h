@@ -1825,6 +1825,159 @@ __IOM uint32_t CC[8];
     #define BICR_HFXO_CONFIG_MODE_Crystal4 (0x4UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
+
+  typedef struct {                                   /*!< GRTC Structure                                                       */
+    __OM uint32_t TASKS_CAPTURE[16];                 /*!< (@ 0x00000000) Capture the counter value to CC[n] register           */
+    __IM uint32_t RESERVED1[8];
+    __OM uint32_t TASKS_START;                       /*!< (@ 0x00000060) Start the counter                                     */
+    __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000064) Stop the counter                                      */
+    __OM uint32_t TASKS_CLEAR;                       /*!< (@ 0x00000068) Clear the counter                                     */
+    __OM uint32_t TASKS_PWMSTART;                    /*!< (@ 0x0000006C) Start the PWM                                         */
+    __OM uint32_t TASKS_PWMSTOP;                     /*!< (@ 0x00000070) Stop the PWM                                          */
+    __IM uint32_t RESERVED2[3];
+    __IOM uint32_t SUBSCRIBE_CAPTURE[16];            /*!< (@ 0x00000080) Subscribe configuration for task CAPTURE[n]           */
+    __IM uint32_t RESERVED3[16];
+    __IOM uint32_t EVENTS_COMPARE[16];               /*!< (@ 0x00000100) Compare event on CC[n] match                          */
+    __IM uint32_t RESERVED4[8];
+    __IOM uint32_t EVENTS_RTCOMPARE;                 /*!< (@ 0x00000160) Compare event on RTCOMPARE register match             */
+    __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The value written from the register RTCOMPAREL/H or
+                                                                        RTCOMPARESYNCL/H is latched to RTCOMPARE*/
+    __IOM uint32_t EVENTS_SYSCOUNTERVALID;           /*!< (@ 0x00000168) The SYSCOUNTER is in active state and value is valid  */
+    __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x0000016C) Event on end of each PWM period                       */
+    __IM uint32_t RESERVED5[4];
+    __IOM uint32_t PUBLISH_COMPARE[16];              /*!< (@ 0x00000180) Publish configuration for event COMPARE[n]            */
+    __IM uint32_t RESERVED6[8];
+    __IOM uint32_t PUBLISH_RTCOMPARE;                /*!< (@ 0x000001E0) Publish configuration for event RTCOMPARE             */
+    __IM uint32_t RESERVED7[7];
+    __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
+    __IM uint32_t RESERVED8[63];
+    __IOM uint32_t INTEN0;                           /*!< (@ 0x00000300) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET0;                        /*!< (@ 0x00000304) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR0;                        /*!< (@ 0x00000308) Disable interrupt                                     */
+    __IM uint32_t INTPEND0;                          /*!< (@ 0x0000030C) Pending interrupts                                    */
+    __IOM uint32_t INTEN1;                           /*!< (@ 0x00000310) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET1;                        /*!< (@ 0x00000314) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR1;                        /*!< (@ 0x00000318) Disable interrupt                                     */
+    __IM uint32_t INTPEND1;                          /*!< (@ 0x0000031C) Pending interrupts                                    */
+    __IOM uint32_t INTEN2;                           /*!< (@ 0x00000320) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET2;                        /*!< (@ 0x00000324) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR2;                        /*!< (@ 0x00000328) Disable interrupt                                     */
+    __IM uint32_t INTPEND2;                          /*!< (@ 0x0000032C) Pending interrupts                                    */
+    __IOM uint32_t INTEN3;                           /*!< (@ 0x00000330) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET3;                        /*!< (@ 0x00000334) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR3;                        /*!< (@ 0x00000338) Disable interrupt                                     */
+    __IM uint32_t INTPEND3;                          /*!< (@ 0x0000033C) Pending interrupts                                    */
+    __IOM uint32_t INTEN4;                           /*!< (@ 0x00000340) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET4;                        /*!< (@ 0x00000344) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR4;                        /*!< (@ 0x00000348) Disable interrupt                                     */
+    __IM uint32_t INTPEND4;                          /*!< (@ 0x0000034C) Pending interrupts                                    */
+    __IOM uint32_t INTEN5;                           /*!< (@ 0x00000350) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET5;                        /*!< (@ 0x00000354) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR5;                        /*!< (@ 0x00000358) Disable interrupt                                     */
+    __IM uint32_t INTPEND5;                          /*!< (@ 0x0000035C) Pending interrupts                                    */
+    __IOM uint32_t INTEN6;                           /*!< (@ 0x00000360) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET6;                        /*!< (@ 0x00000364) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR6;                        /*!< (@ 0x00000368) Disable interrupt                                     */
+    __IM uint32_t INTPEND6;                          /*!< (@ 0x0000036C) Pending interrupts                                    */
+    __IOM uint32_t INTEN7;                           /*!< (@ 0x00000370) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET7;                        /*!< (@ 0x00000374) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR7;                        /*!< (@ 0x00000378) Disable interrupt                                     */
+    __IM uint32_t INTPEND7;                          /*!< (@ 0x0000037C) Pending interrupts                                    */
+    __IOM uint32_t INTEN8;                           /*!< (@ 0x00000380) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET8;                        /*!< (@ 0x00000384) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR8;                        /*!< (@ 0x00000388) Disable interrupt                                     */
+    __IM uint32_t INTPEND8;                          /*!< (@ 0x0000038C) Pending interrupts                                    */
+    __IOM uint32_t INTEN9;                           /*!< (@ 0x00000390) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET9;                        /*!< (@ 0x00000394) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR9;                        /*!< (@ 0x00000398) Disable interrupt                                     */
+    __IM uint32_t INTPEND9;                          /*!< (@ 0x0000039C) Pending interrupts                                    */
+    __IOM uint32_t INTEN10;                          /*!< (@ 0x000003A0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET10;                       /*!< (@ 0x000003A4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR10;                       /*!< (@ 0x000003A8) Disable interrupt                                     */
+    __IM uint32_t INTPEND10;                         /*!< (@ 0x000003AC) Pending interrupts                                    */
+    __IOM uint32_t INTEN11;                          /*!< (@ 0x000003B0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET11;                       /*!< (@ 0x000003B4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR11;                       /*!< (@ 0x000003B8) Disable interrupt                                     */
+    __IM uint32_t INTPEND11;                         /*!< (@ 0x000003BC) Pending interrupts                                    */
+    __IOM uint32_t INTEN12;                          /*!< (@ 0x000003C0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET12;                       /*!< (@ 0x000003C4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR12;                       /*!< (@ 0x000003C8) Disable interrupt                                     */
+    __IM uint32_t INTPEND12;                         /*!< (@ 0x000003CC) Pending interrupts                                    */
+    __IOM uint32_t INTEN13;                          /*!< (@ 0x000003D0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET13;                       /*!< (@ 0x000003D4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR13;                       /*!< (@ 0x000003D8) Disable interrupt                                     */
+    __IM uint32_t INTPEND13;                         /*!< (@ 0x000003DC) Pending interrupts                                    */
+    __IOM uint32_t INTEN14;                          /*!< (@ 0x000003E0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET14;                       /*!< (@ 0x000003E4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR14;                       /*!< (@ 0x000003E8) Disable interrupt                                     */
+    __IM uint32_t INTPEND14;                         /*!< (@ 0x000003EC) Pending interrupts                                    */
+    __IOM uint32_t INTEN15;                          /*!< (@ 0x000003F0) Enable or disable interrupt                           */
+    __IOM uint32_t INTENSET15;                       /*!< (@ 0x000003F4) Enable interrupt                                      */
+    __IOM uint32_t INTENCLR15;                       /*!< (@ 0x000003F8) Disable interrupt                                     */
+    __IM uint32_t INTPEND15;                         /*!< (@ 0x000003FC) Pending interrupts                                    */
+    __IOM uint32_t EVTEN;                            /*!< (@ 0x00000400) Enable or disable event routing                       */
+    __IOM uint32_t EVTENSET;                         /*!< (@ 0x00000404) Enable event routing                                  */
+    __IOM uint32_t EVTENCLR;                         /*!< (@ 0x00000408) Disable event routing                                 */
+    __IM uint32_t RESERVED9[61];
+    __IM uint32_t RTCOUNTERL;                        /*!< (@ 0x00000500) The lower 32-bits of the RTCOUNTER counter.           */
+    __IM uint32_t RTCOUNTERH;                        /*!< (@ 0x00000504) The most significant bits of the RTCOUNTER counter.   */
+    __IM uint32_t RESERVED10[2];
+    __IOM uint32_t MODE;                             /*!< (@ 0x00000510) Counter mode selection                                */
+    __IM uint32_t SYSCOUNTERL;                       /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
+    __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
+    __IM uint32_t RESERVED11;
+    __IOM NRF_GRTC_CC_Type CC[16];                   /*!< (@ 0x00000520) (unspecified)                                         */
+    __IM uint32_t RESERVED12[32];
+    __IOM uint32_t KEEPRUNNING;                      /*!< (@ 0x000006A0) Request to keep the SYSCOUNTER in the active state and
+                                                                        prevent going to sleep*/
+    __IOM uint32_t TIMEOUT;                          /*!< (@ 0x000006A4) Timeout after all CPUs gone into sleep state to stop
+                                                                        the SYSCOUNTER*/
+    __IOM uint32_t INTERVAL;                         /*!< (@ 0x000006A8) Count to add to CC[0] when the event EVENTS_COMPARE[0]
+                                                                        triggers.*/
+    __IOM uint32_t WAKETIME;                         /*!< (@ 0x000006AC) GRTC wake up time.                                    */
+    __IM uint32_t RESERVED13[20];
+    __IOM uint32_t RTCOMPAREL;                       /*!< (@ 0x00000700) The lower 32-bits of the RTCOMPARE register.          */
+    __IOM uint32_t RTCOMPAREH;                       /*!< (@ 0x00000704) The most significant bits of the RTCOMPARE register.  */
+    __IOM uint32_t RTCOMPARESYNCL;                   /*!< (@ 0x00000708) The lower 32-bits of the RTCOMPARESYNC register.      */
+    __IOM uint32_t RTCOMPARESYNCH;                   /*!< (@ 0x0000070C) The most significant bits of the RTCOMPARESYNC register.*/
+    __IOM uint32_t PWMCONFIG;                        /*!< (@ 0x00000710) PWM configuration.                                    */
+    __IOM uint32_t CLKOUT;                           /*!< (@ 0x00000714) Configuration of clock output                         */
+    __IOM uint32_t CLKCFG;                           /*!< (@ 0x00000718) Clock Configuration                                   */
+    __IM uint32_t RESERVED14;
+    __IOM NRF_GRTC_SYSCOUNTER_Type SYSCOUNTER[16];   /*!< (@ 0x00000720) (unspecified)                                         */
+  } NRF_GRTC_Type_fixed;                             /*!< Size = 2080 (0x820)                                                  */
+
+  #ifdef GRTC_CC_MaxCount
+    #undef GRTC_CC_MaxCount
+    #define GRTC_CC_MaxCount (16UL)                  /*!< Max size of CC[16] array.                                            */
+  #endif
+  #ifdef GRTC_TASKS_CAPTURE_MaxCount
+    #undef GRTC_TASKS_CAPTURE_MaxCount
+    #define GRTC_TASKS_CAPTURE_MaxCount (16UL)       /*!< Max size of TASKS_CAPTURE[16] array.                                 */
+  #endif
+  #ifdef GRTC_SUBSCRIBE_CAPTURE_MaxCount
+    #undef GRTC_SUBSCRIBE_CAPTURE_MaxCount
+    #define GRTC_SUBSCRIBE_CAPTURE_MaxCount (16UL)   /*!< Max size of SUBSCRIBE_CAPTURE[16] array.                             */
+  #endif
+  #ifdef GRTC_EVENTS_COMPARE_MaxCount
+    #undef GRTC_EVENTS_COMPARE_MaxCount
+    #define GRTC_EVENTS_COMPARE_MaxCount (16UL)      /*!< Max size of EVENTS_COMPARE[16] array.                                */
+  #endif
+  #ifdef GRTC_PUBLISH_COMPARE_MaxCount
+    #undef GRTC_PUBLISH_COMPARE_MaxCount
+    #define GRTC_PUBLISH_COMPARE_MaxCount (16UL)     /*!< Max size of PUBLISH_COMPARE[16] array.                               */
+  #endif
+
+  #ifdef NRF_GRTC_NS
+    #undef NRF_GRTC_NS
+    #define NRF_GRTC_NS ((NRF_GRTC_Type_fixed*) NRF_GRTC_NS_BASE)
+  #endif
+  #ifdef NRF_GRTC_S
+    #undef NRF_GRTC_S
+    #define NRF_GRTC_S ((NRF_GRTC_Type_fixed*) NRF_GRTC_S_BASE)
+  #endif
+
+  #define NRF_GRTC_Type NRF_GRTC_Type_fixed
 #endif // defined(NRF9230_XXAA)
 
 
