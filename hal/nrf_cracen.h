@@ -1,0 +1,241 @@
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
+
+#ifndef NRF_CRACEN_H__
+#define NRF_CRACEN_H__
+
+#include <nrfx.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * @defgroup nrf_cracen_hal CRACEN HAL
+ * @{
+ * @ingroup nrf_cracen
+ * @brief   Hardware access layer for managing the Crypto Accelerator Engine (CRACEN) peripheral.
+ */
+
+/** @brief Number of seed words for private key generation. */
+#define NRF_CRACEN_SEED_COUNT CRACEN_SEED_MaxCount
+
+/** @brief CRACEN events. */
+typedef enum
+{
+    NRF_CRACEN_EVENT_CRYPTOMASTER = offsetof(NRF_CRACEN_Type, EVENTS_CRYPTOMASTER), ///< Interrupt triggered at Cryptomaster.
+    NRF_CRACEN_EVENT_RNG          = offsetof(NRF_CRACEN_Type, EVENTS_RNG),          ///< Interrupt triggered at RNG.
+    NRF_CRACEN_EVENT_PKE_IKG      = offsetof(NRF_CRACEN_Type, EVENTS_PKEIKG),       ///< Interrupt triggered at PKE or IKG.
+} nrf_cracen_event_t;
+
+/** @brief CRACEN interrupts. */
+typedef enum
+{
+    NRF_CRACEN_INT_CRYPTOMASTER_MASK = CRACEN_INTENSET_CRYPTOMASTER_Msk, ///< Interrupt on CRYPTOMASTER event.
+    NRF_CRACEN_INT_RNG_MASK          = CRACEN_INTENSET_RNG_Msk,          ///< Interrupt on RNG event.
+    NRF_CRACEN_INT_PKE_IKG_MASK      = CRACEN_INTENSET_PKEIKG_Msk,       ///< Interrupt on PKEIKG event.
+} nrf_cracen_int_mask_t;
+
+/** @brief CRACEN modules mask. */
+typedef enum
+{
+    NRF_CRACEN_MODULE_CRYPTOMASTER_MASK = CRACEN_ENABLE_CRYPTOMASTER_Msk, ///< Cryptomaster module.
+    NRF_CRACEN_MODULE_RNG_MASK          = CRACEN_ENABLE_RNG_Msk,          ///< RNG module.
+    NRF_CRACEN_MODULE_PKE_IKG_MASK      = CRACEN_ENABLE_PKEIKG_Msk,       ///< PKE and IKG module.
+} nrf_cracen_module_mask_t;
+
+
+/**
+ * @brief Function for getting the address of the specified CRACEN event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event CRACEN event.
+ *
+ * @return Address of the specified event register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cracen_event_address_get(NRF_CRACEN_Type const * p_reg,
+                                                        nrf_cracen_event_t      event);
+
+/**
+ * @brief Function for clearing the specified CRACEN event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event CRACEN event to be cleared.
+ */
+NRF_STATIC_INLINE void nrf_cracen_event_clear(NRF_CRACEN_Type *  p_reg,
+                                              nrf_cracen_event_t event);
+
+/**
+ * @brief Function for checking the state of the specified CRACEN event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event CRACEN event to be checked.
+ *
+ * @retval true  The event has been generated.
+ * @retval false The event has not been generated.
+ */
+NRF_STATIC_INLINE bool nrf_cracen_event_check(NRF_CRACEN_Type const * p_reg,
+                                              nrf_cracen_event_t      event);
+
+/**
+ * @brief Function for enabling the specified interrupts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be enabled.
+ */
+NRF_STATIC_INLINE void nrf_cracen_int_enable(NRF_CRACEN_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for checking if the specified interrupts are enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be checked.
+ *
+ * @return Mask of enabled interrupts.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cracen_int_enable_check(NRF_CRACEN_Type const * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for disabling the specified interrupts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of interrupts to be disabled.
+ */
+NRF_STATIC_INLINE void nrf_cracen_int_disable(NRF_CRACEN_Type * p_reg, uint32_t mask);
+
+/**
+ * @brief Function for enabling CRACEN modules.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] modules Mask of modules to be enabled. See @ref nrf_cracen_module_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_cracen_module_enable(NRF_CRACEN_Type * p_reg, uint32_t modules);
+
+/**
+ * @brief Function for disabling CRACEN modules.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] modules Mask of modules to be disabled. See @ref nrf_cracen_module_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_cracen_module_disable(NRF_CRACEN_Type * p_reg, uint32_t modules);
+
+/**
+ * @brief Function for getting enabled CRACEN modules.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of enabled modules. See @ref nrf_cracen_module_mask_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_cracen_module_get(NRF_CRACEN_Type const * p_reg);
+
+/**
+ * @brief Function for enabling or disabling lock on access to the RAM used for the seed.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if lock is to be enabled, false otherwise. 
+ */
+NRF_STATIC_INLINE void nrf_cracen_seedram_lock_enable_set(NRF_CRACEN_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for checking if access to the RAM used for the seed is locked.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  Access to the RAM used for the seed is locked.
+ * @retval false Access to the RAM used for the seed is unlocked.
+ */
+NRF_STATIC_INLINE bool nrf_cracen_seedram_lock_check(NRF_CRACEN_Type const * p_reg);
+
+/**
+ * @brief Function for setting specified seed word for private key generation.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] idx   Index of the seed word.
+ * @param[in] value Seed value to be set.
+ */
+NRF_STATIC_INLINE void nrf_cracen_seed_set(NRF_CRACEN_Type * p_reg, uint8_t idx, uint32_t value);
+
+#ifndef NRF_DECLARE_ONLY
+NRF_STATIC_INLINE uint32_t nrf_cracen_event_address_get(NRF_CRACEN_Type const * p_reg,
+                                                        nrf_cracen_event_t      event)
+{
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+}
+
+NRF_STATIC_INLINE void nrf_cracen_event_clear(NRF_CRACEN_Type *  p_reg,
+                                              nrf_cracen_event_t event)
+{
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event)) = 0;
+    nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
+}
+
+NRF_STATIC_INLINE bool nrf_cracen_event_check(NRF_CRACEN_Type const * p_reg,
+                                              nrf_cracen_event_t      event)
+{
+    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+}
+
+NRF_STATIC_INLINE void nrf_cracen_int_enable(NRF_CRACEN_Type * p_reg, uint32_t mask)
+{
+    p_reg->INTENSET = mask;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_cracen_int_enable_check(NRF_CRACEN_Type const * p_reg, uint32_t mask)
+{
+    return p_reg->INTENSET & mask;
+}
+
+NRF_STATIC_INLINE void nrf_cracen_int_disable(NRF_CRACEN_Type * p_reg, uint32_t mask)
+{
+    p_reg->INTENCLR = mask;
+}
+
+NRF_STATIC_INLINE void nrf_cracen_module_enable(NRF_CRACEN_Type * p_reg, uint32_t modules)
+{
+    p_reg->ENABLE |= modules;
+}
+
+NRF_STATIC_INLINE void nrf_cracen_module_disable(NRF_CRACEN_Type * p_reg, uint32_t modules)
+{
+    p_reg->ENABLE &= ~modules;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_cracen_module_get(NRF_CRACEN_Type const * p_reg)
+{
+    return p_reg->ENABLE;
+}
+
+NRF_STATIC_INLINE void nrf_cracen_seedram_lock_enable_set(NRF_CRACEN_Type * p_reg, bool enable)
+{
+#if defined(CRACEN_SEEDRAMLOCK_ENABLE_Enabled)
+    p_reg->SEEDRAMLOCK = (enable ? CRACEN_SEEDRAMLOCK_ENABLE_Enabled
+                          : CRACEN_SEEDRAMLOCK_ENABLE_Disabled) << CRACEN_SEEDRAMLOCK_ENABLE_Pos;
+#else
+    p_reg->KEYLOCK = (enable ? CRACEN_KEYLOCK_ENABLE_Enabled : CRACEN_KEYLOCK_ENABLE_Disabled)
+                     << CRACEN_KEYLOCK_ENABLE_Pos;
+#endif
+}
+
+NRF_STATIC_INLINE bool nrf_cracen_seedram_lock_check(NRF_CRACEN_Type const * p_reg)
+{
+#if defined(CRACEN_SEEDRAMLOCK_ENABLE_Enabled)
+    return p_reg->SEEDRAMLOCK == (CRACEN_SEEDRAMLOCK_ENABLE_Enabled
+                                  << CRACEN_SEEDRAMLOCK_ENABLE_Pos);
+#else
+    return p_reg->KEYLOCK == (CRACEN_KEYLOCK_ENABLE_Enabled << CRACEN_KEYLOCK_ENABLE_Pos);
+#endif
+}
+
+NRF_STATIC_INLINE void nrf_cracen_seed_set(NRF_CRACEN_Type * p_reg, uint8_t idx, uint32_t value)
+{
+    NRFX_ASSERT(idx < NRF_CRACEN_SEED_COUNT);
+    p_reg->SEED[idx] = value;
+}
+#endif // NRF_DECLARE_ONLY
+
+/** @} */
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // NRF_CRACEN_H__
