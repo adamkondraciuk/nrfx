@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#ifndef NRF_WDT0
+#if !defined(NRF_WDT0) && defined(NRF_WDT)
 #define NRF_WDT0 NRF_WDT
 #endif
 
