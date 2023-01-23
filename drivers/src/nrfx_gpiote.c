@@ -23,6 +23,10 @@
 #error "Not supported."
 #endif
 
+#if !defined(TE_MANAGED_PORTS_MASK)
+#define TE_MANAGED_PORTS_MASK NRF_GPIOTE_INT_PORT_MASK
+#endif
+
 /* Use legacy configuration if new is not present. That will lead to slight
  * increase of RAM usage since number of slots will exceed application need.
  */
@@ -574,16 +578,7 @@ nrfx_err_t nrfx_gpiote_init(uint8_t interrupt_priority)
 
     memset(m_cb.pin_flags, 0, sizeof(m_cb.pin_flags));
 
-    uint32_t mask;
-#if defined(HALTIUM_XXAA)
-    /* Only P0, P1, P2 and P9 can be managed by the GPIOTE. */
-    mask = NRF_GPIOTE_INT_PORT0_MASK |
-           NRF_GPIOTE_INT_PORT1_MASK |
-           NRF_GPIOTE_INT_PORT2_MASK |
-           NRF_GPIOTE_INT_PORT9_MASK;
-#else
-    mask = (uint32_t)NRF_GPIOTE_INT_PORT_MASK;
-#endif
+    uint32_t mask = (uint32_t)TE_MANAGED_PORTS_MASK;
     nrfy_gpiote_int_init(NRF_GPIOTE, mask, interrupt_priority, true);
 
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
@@ -1168,16 +1163,7 @@ static void port_event_handle(void)
 
         /* All pins have been handled, clear PORT, check latch again in case
          * something came between deciding to exit and clearing PORT event. */
-        uint32_t evt_mask;
-#if defined(HALTIUM_XXAA)
-        /* Only P0, P1, P2 and P9 can be managed by the GPIOTE. */
-        evt_mask = NRF_GPIOTE_INT_PORT0_MASK |
-                   NRF_GPIOTE_INT_PORT1_MASK |
-                   NRF_GPIOTE_INT_PORT2_MASK |
-                   NRF_GPIOTE_INT_PORT9_MASK;
-#else
-        evt_mask = (uint32_t)NRF_GPIOTE_INT_PORT_MASK;
-#endif
+        uint32_t evt_mask = (uint32_t)TE_MANAGED_PORTS_MASK;
         (void)nrfy_gpiote_events_process(NRF_GPIOTE, evt_mask);
     } while (latch_pending_read_and_check(latch));
 }
@@ -1287,16 +1273,7 @@ static void port_event_handle(void)
             }
         }
 
-        uint32_t evt_mask;
-#if defined(HALTIUM_XXAA)
-        /* Only P0, P1, P2 and P9 can be managed by the GPIOTE. */
-        evt_mask = NRF_GPIOTE_INT_PORT0_MASK |
-                   NRF_GPIOTE_INT_PORT1_MASK |
-                   NRF_GPIOTE_INT_PORT2_MASK |
-                   NRF_GPIOTE_INT_PORT9_MASK;
-#else
-        evt_mask = NRF_GPIOTE_INT_PORT_MASK;
-#endif
+        uint32_t evt_mask = (uint32_t)TE_MANAGED_PORTS_MASK;
         (void)nrfy_gpiote_events_process(NRF_GPIOTE, evt_mask);
     } while (input_read_and_check(input, pins_to_check));
 }
@@ -1321,16 +1298,7 @@ void nrfx_gpiote_irq_handler(void)
     uint32_t in_evt_mask = nrfy_gpiote_events_process(NRF_GPIOTE, NRF_GPIOTE_INT_IN_MASK);
 
     /* Collect status of all PORT events */
-    uint32_t mask;
-#if defined(HALTIUM_XXAA)
-    /* Only P0, P1, P2 and P9 can be managed by the GPIOTE. */
-    mask = NRF_GPIOTE_INT_PORT0_MASK |
-           NRF_GPIOTE_INT_PORT1_MASK |
-           NRF_GPIOTE_INT_PORT2_MASK |
-           NRF_GPIOTE_INT_PORT9_MASK;
-#else
-    mask = (uint32_t)NRF_GPIOTE_INT_PORT_MASK;
-#endif
+    uint32_t mask = (uint32_t)TE_MANAGED_PORTS_MASK;
     (void)nrfy_gpiote_events_process(NRF_GPIOTE, mask);
 
     port_event_handle();
