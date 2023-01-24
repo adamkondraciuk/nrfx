@@ -1256,6 +1256,26 @@ NRF_STATIC_INLINE bool nrf_radio_modecnf0_ru_get(NRF_RADIO_Type const * p_reg);
 NRF_STATIC_INLINE uint8_t nrf_radio_modecnf0_dtx_get(NRF_RADIO_Type const * p_reg);
 #endif // defined(RADIO_MODECNF0_RU_Msk) || defined(__NRFX_DOXYGEN__)
 
+#if defined(RADIO_MODECNF0_RU_Msk) || defined(RADIO_TIMING_RU_Msk) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for enabling or disabling fast ramp-up setting.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if fast ramp-up is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_radio_fast_ramp_up_enable_set(NRF_RADIO_Type * p_reg, bool enable);
+
+/**
+ * @brief Function for checking fast ramp-up time configuration.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return true  If the ramp-up time is set to fast.
+ * @return false If the ramp-up time is set to default compatible with 180nm radio.
+ */
+NRF_STATIC_INLINE bool nrf_radio_fast_ramp_up_check(NRF_RADIO_Type const * p_reg);
+#endif
+
 #if defined(RADIO_SFD_SFD_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for setting IEEE 802.15.4 start of frame delimiter.
@@ -1988,6 +2008,30 @@ NRF_STATIC_INLINE uint8_t nrf_radio_modecnf0_dtx_get(NRF_RADIO_Type const * p_re
     return (uint8_t)((p_reg->MODECNF0 & RADIO_MODECNF0_DTX_Msk) >> RADIO_MODECNF0_DTX_Pos);
 }
 #endif // defined(RADIO_MODECNF0_RU_Msk)
+
+#if defined(RADIO_MODECNF0_RU_Msk) || defined(RADIO_TIMING_RU_Msk)
+NRF_STATIC_INLINE void nrf_radio_fast_ramp_up_enable_set(NRF_RADIO_Type * p_reg, bool enable)
+{
+#if defined(RADIO_TIMING_RU_Msk)
+    p_reg->TIMING = (enable ? RADIO_TIMING_RU_Fast : RADIO_TIMING_RU_Default) <<
+                    RADIO_TIMING_RU_Pos;
+#elif defined(RADIO_MODECNF0_RU_Msk)
+    p_reg->MODECNF0 = ((p_reg->MODECNF0 & (~RADIO_MODECNF0_RU_Msk)) |
+                       (enable ? RADIO_MODECNF0_RU_Fast : RADIO_MODECNF0_RU_Default) <<
+                       RADIO_MODECNF0_RU_Pos);
+#endif
+}
+
+NRF_STATIC_INLINE bool nrf_radio_fast_ramp_up_check(NRF_RADIO_Type const * p_reg)
+{
+#if defined(RADIO_TIMING_RU_Msk)
+    return ((p_reg->TIMING & RADIO_TIMING_RU_Msk) >> RADIO_TIMING_RU_Pos) == RADIO_TIMING_RU_Fast;
+#elif defined(RADIO_MODECNF0_RU_Msk)
+    return ((p_reg->MODECNF0 & RADIO_MODECNF0_RU_Msk) >> RADIO_MODECNF0_RU_Pos) ==
+           RADIO_MODECNF0_RU_Fast;
+#endif
+}
+#endif
 
 #if defined(RADIO_SFD_SFD_Msk)
 NRF_STATIC_INLINE void nrf_radio_sfd_set(NRF_RADIO_Type * p_reg, uint8_t sfd)
