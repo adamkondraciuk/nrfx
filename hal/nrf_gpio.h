@@ -1371,9 +1371,34 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
             mask = P7_FEATURE_PINS_PRESENT;
             break;
 #endif
+#ifdef P8_FEATURE_PINS_PRESENT
+        case 8:
+            mask = P8_FEATURE_PINS_PRESENT;
+            break;
+#endif
 #ifdef P9_FEATURE_PINS_PRESENT
         case 9:
             mask = P9_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P10_FEATURE_PINS_PRESENT
+        case 10:
+            mask = P10_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P11_FEATURE_PINS_PRESENT
+        case 11:
+            mask = P11_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P12_FEATURE_PINS_PRESENT
+        case 12:
+            mask = P12_FEATURE_PINS_PRESENT;
+            break;
+#endif
+#ifdef P13_FEATURE_PINS_PRESENT
+        case 13:
+            mask = P13_FEATURE_PINS_PRESENT;
             break;
 #endif
     }
