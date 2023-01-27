@@ -364,7 +364,6 @@ NRF_STATIC_INLINE void nrf_vpr_csr_transaction_timeout_exception_set(bool enable
 NRF_STATIC_INLINE bool nrf_vpr_csr_transaction_timeout_exception_check(void);
 
 #ifndef NRF_DECLARE_ONLY
-/* @todo Report to fix in IPS: MSTATUS_MIE is read only */
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupts_enable(void)
 {
     csr_set_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
