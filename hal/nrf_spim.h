@@ -9,7 +9,6 @@
 extern "C" {
 #endif
 
-/** @todo Remove when added in MDK */
 /**
  * @defgroup nrf_spim_hal SPIM HAL
  * @{
