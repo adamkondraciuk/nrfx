@@ -134,8 +134,7 @@ nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
  * @brief Function for starting the 1 MHz SYSCOUNTER.
  *
  * @note This function automatically allocates and marks as used the special-purpose main
- *       capture/compare channel. It should be owned only by the System Controller or
- *       Secure Domain.
+ *       capture/compare channel. It is available only for GRTC manager.
  *
  * @note Use auxiliary structure of type @ref nrfx_grtc_channel_t when working with SYSCOUNTER.
  *

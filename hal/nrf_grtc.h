@@ -41,7 +41,9 @@ extern "C" {
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
 #endif
 
-#if defined(NRF_SYSCTRL) || defined(NRF_SECURE) || defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_SYSCTRL) || defined(LUMOS_XXAA) || (defined(NRF_SECURE) && \
+    (NRFX_IS_ENABLED(NRFX_CONFIG_TESTS) || NRFX_IS_ENABLED(NRFX_ON_TARGET_TEST))) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has has extended functionality. */
 #define NRF_GRTC_HAS_EXTENDED 1
 #else

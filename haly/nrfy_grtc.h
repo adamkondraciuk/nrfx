@@ -81,7 +81,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
         nrf_grtc_event_t event = nrf_grtc_sys_counter_compare_event_get(cc_channel);
         __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, event);
     }
-#if defined(NRF_SYSCTRL) || defined(NRF_SECURE)
+#if defined(NRF_SYSCTRL)
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_RTCOMPARE);
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_RTCOMPARESYNC);
     __nrfy_internal_grtc_event_enabled_clear(p_reg, mask, NRF_GRTC_EVENT_SYSCOUNTERVALID);
