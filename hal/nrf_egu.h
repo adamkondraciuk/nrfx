@@ -25,12 +25,6 @@ extern "C" {
  */
 #define NRF_EGU_INST_GET(idx) NRFX_CONCAT_2(NRF_EGU, idx)
 
-#if defined(HALTIUM_XXAA)
-/* TODO: Delete when added to MDK. */
-#define EGU130_CH_NUM 8
-#define EGU020_CH_NUM 16
-#endif
-
 /** @brief EGU tasks. */
 typedef enum
 {

@@ -51,7 +51,7 @@
         #define NRF_DOMAIN NRF_DOMAIN_UMAC
     #endif
 
-    /* TODO: Create a ticket for SAG to add those symbols. */
+    /* TODO: NRFX-3171 */
     typedef enum
     {
         NRF_PROCESSOR_ID_SECURE      = 1,
