@@ -1517,7 +1517,7 @@ typedef struct {
   __IOM uint32_t  RXDELAY;                           /*!< (@ 0x00000000) Sample delay for input serial data on MISO            */
   __IOM uint32_t  CSNDUR;                            /*!< (@ 0x00000004) Minimum duration between edge of CSN and edge of SCK.
                                                                          When SHORTS.END_START is used, this is also the minimum
-                                                                         duration CSN must stay high between transactions.*/      
+                                                                         duration CSN must stay high between transactions.*/
 } NRF_SPIM_IFTIMING_Type;                            /*!< Size = 8 (0x008)                                                     */
 
 /**
@@ -1588,7 +1588,7 @@ typedef struct {                                   /*!< SPIM Structure          
     __IM uint32_t RESERVED16[1];
     __IOM uint32_t ORC;                              /*!< (@ 0x000005C0) Byte transmitted after TXD.MAXCNT bytes have been
                                                                          transmitted in the case when RXD.MAXCNT is greater than
-                                                                         TXD.MAXCNT*/                                             
+                                                                         TXD.MAXCNT*/
     __IM uint32_t RESERVED17[15];
     __IOM NRF_SPIM_PSEL_Type_fixed PSEL;             /*!< (@ 0x00000600) (unspecified)                                         */
     __IM uint32_t RESERVED18[60];
@@ -7216,6 +7216,11 @@ typedef struct {
 
 #if defined(LILIUMFP1_XXAA)
 #define __INTERRUPTS_MAX 480
+#endif
+
+// Haltium plaftorms do not have LPCOMP_FEATURE_HYST_PRESENT defined
+#if defined(LPCOMP_HYST_HYST_Msk) && defined(HALTIUM_XXAA)
+#define LPCOMP_FEATURE_HYST_PRESENT
 #endif
 
 #endif // MDK_FIXUPS_H__
