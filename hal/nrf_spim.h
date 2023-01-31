@@ -34,6 +34,7 @@ extern "C" {
 #endif
 
 #if defined(SPIM_INTEN_STARTED_Msk) || defined(__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Symbol indicating whether INTEN register is available. */
 #define NRF_SPIM_HAS_INTEN 1
 #else
@@ -872,7 +873,7 @@ NRF_STATIC_INLINE void nrf_spim_publish_clear(NRF_SPIM_Type *  p_reg,
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
-#endif 
+#endif
 
 NRF_STATIC_INLINE void nrf_spim_enable(NRF_SPIM_Type * p_reg)
 {

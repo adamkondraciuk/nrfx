@@ -607,6 +607,7 @@ NRF_STATIC_INLINE uint32_t nrf_gpio_port_impedance_get(NRF_GPIO_Type const * p_r
 #endif
 
 #if NRF_GPIO_HAS_PORT_POWER
+/* TODO: NRFX-3188 */
 /**
  * @brief Function for setting the power control of the pins on the given port.
  *

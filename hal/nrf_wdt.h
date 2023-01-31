@@ -65,6 +65,7 @@ extern "C" {
 #endif
 
 #if defined(WDT_RCNT_RCNT_Msk) || defined (__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Presence of reload count. */
 #define NRF_WDT_HAS_RCNT 1
 #else
@@ -72,6 +73,7 @@ extern "C" {
 #endif
 
 #if defined(WDT_CONFIG_OFF_Msk) || defined (__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Presence of system OFF mode override. */
 #define NRF_WDT_HAS_CONFIG_OFF 1
 #else
@@ -86,6 +88,7 @@ extern "C" {
 #endif
 
 #if defined(WDT_CONFIG_RELOAD_Msk) || defined (__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Presence of reload configuration. */
 #define NRF_WDT_HAS_CONFIG_RELOAD 1
 #else
@@ -93,6 +96,7 @@ extern "C" {
 #endif
 
 #if defined(WDT_RRKEY_RRKEY_Msk) || defined (__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Presence of reload request key. */
 #define NRF_WDT_HAS_RRKEY 1
 #else
@@ -100,6 +104,7 @@ extern "C" {
 #endif
 
 #if defined(WDT_TSKEY_TSKEY_Msk) || defined (__NRFX_DOXYGEN__)
+/* TODO: NRFX-3188 */
 /** @brief Presence of task stop key. */
 #define NRF_WDT_HAS_TSKEY 1
 #else

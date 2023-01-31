@@ -350,6 +350,7 @@ typedef enum
     NRF_CCM_INT_ENDCRYPT_MASK  = CCM_INTENSET_ENDCRYPT_Msk,  ///< Interrupt on ENDCRYPT event.
 #endif
     NRF_CCM_INT_ERROR_MASK     = CCM_INTENSET_ERROR_Msk,     ///< Interrupt on ERROR event.
+    /* TODO: NRFX-3188 Internal register. */
 #if NRF_CCM_HAS_EVENT_ENDCONFIG
     NRF_CCM_INT_ENDCONFIG_MASK = CCM_INTENSET_ENDCONFIG_Msk, ///< Interrupt on ENDCONFIG event.
 #endif
