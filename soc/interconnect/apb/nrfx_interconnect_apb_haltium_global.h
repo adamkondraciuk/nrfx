@@ -9,90 +9,70 @@ extern "C" {
 
 #define NRFX_INTERCONNECT_APB_MAIN_IDX 0
 
-#define NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE                                           \
-static nrfx_atomic_t m_dppi120_channels = NRFX_DPPIC120_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC120_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi130_channels = NRFX_DPPIC130_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC130_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi131_channels = NRFX_DPPIC131_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC131_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi132_channels = NRFX_DPPIC132_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC132_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi133_channels = NRFX_DPPIC133_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC133_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi134_channels = NRFX_DPPIC134_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC134_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi135_channels = NRFX_DPPIC135_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC135_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_dppi136_channels = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_DPPIC136_SUB_CONFIG_ALLOWED_CHANNELS_MASK;
+#ifndef NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE
+/* Default DPPI static variables generation in case of bare-metal application. */
+#ifndef NRFX_DPPI_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM
+#define NRFX_DPPI_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(m_dppi, inst_num, _channels)
+#else
+#error Invalid set of configuration for DPPIC.
+#endif
 
-#define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                                   \
-{                                                                                 \
-    { /* APB32 */                                                                 \
-        .p_dppi = NRF_DPPIC130,                                                   \
-        .p_dppi_channels = &m_dppi130_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC130_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC130_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NULL,                                                           \
-        .size = 0x20000,                                                          \
-    },                                                                            \
-    { /* APB22 */                                                                 \
-        .p_dppi = NRF_DPPIC120,                                                   \
-        .p_dppi_channels = &m_dppi120_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC120_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC120_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB121,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB38 */                                                                 \
-        .p_dppi = NRF_DPPIC131,                                                   \
-        .p_dppi_channels = &m_dppi131_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC131_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC131_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB132,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB39 */                                                                 \
-        .p_dppi = NRF_DPPIC132,                                                   \
-        .p_dppi_channels = &m_dppi132_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC132_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC132_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB133,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB3A */                                                                 \
-        .p_dppi = NRF_DPPIC133,                                                   \
-        .p_dppi_channels = &m_dppi133_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC133_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC133_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB134,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB3B */                                                                 \
-        .p_dppi = NRF_DPPIC134,                                                   \
-        .p_dppi_channels = &m_dppi134_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC134_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC134_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB135,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB3C */                                                                 \
-        .p_dppi = NRF_DPPIC135,                                                   \
-        .p_dppi_channels = &m_dppi135_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC135_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC135_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB136,                                            \
-        .size = 0x10000,                                                          \
-    },                                                                            \
-    { /* APB3D */                                                                 \
-        .p_dppi = NRF_DPPIC136,                                                   \
-        .p_dppi_channels = &m_dppi136_channels,                                   \
-        .dppi_pub_channels_mask = NRFX_DPPIC136_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .dppi_sub_channels_mask = NRFX_DPPIC136_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .p_ppib = NRF_SYSCTRL_PPIB137,                                            \
-        .size = 0x10000,                                                          \
-    }                                                                             \
+#ifndef NRFX_DPPI_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM
+#define NRFX_DPPI_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(NRFX_DPPI, inst_num, _PUB_CONFIG_ALLOWED_CHANNELS_MASK)
+#else
+#error Invalid set of configuration for DPPIC.
+#endif
+
+#ifndef NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM
+#define NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(NRFX_DPPI, inst_num, _SUB_CONFIG_ALLOWED_CHANNELS_MASK)
+#else
+#error "Invalid set of configuration for DPPIC."
+#endif
+
+#define NRFX_DPPI_CHANNELS_VAR(inst_num) \
+    NRFX_CONCAT(m_dppi, inst_num, _channels)
+
+#define NRFX_DPPI_CHANNELS_ENTRY(inst_num)                                            \
+        static nrfx_atomic_t NRFX_DPPI_CHANNELS_VAR(inst_num) __attribute__((used)) = \
+        NRFX_DPPI_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) |           \
+        NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num);
+
+
+#define _NRFX_DPPI_CHANNELS_ENTRY(periph_name, prefix, inst_num, _) \
+        NRFX_DPPI_CHANNELS_ENTRY(inst_num)
+
+#define NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE \
+        NRFX_FOREACH_ENABLED(DPPI, _NRFX_DPPI_CHANNELS_ENTRY, (), ())
+
+#endif // NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE
+
+#define NRFX_INTERCONNECT_APB_PROP_ENTRY(inst_num, ppib, apb_size)                                  \
+{                                                                                                   \
+        .p_dppi = NRFX_CONCAT(NRF_DPPIC, inst_num),                                                 \
+        .p_dppi_channels = &NRFX_DPPI_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num),               \
+        .dppi_pub_channels_mask = NRFX_DPPI_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+        .dppi_sub_channels_mask = NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+        .p_ppib = ppib,                                                                             \
+        .size = apb_size,                                                                           \
+},
+
+/* TODO: Use `NRFX_FOREACH_ENABLED` macro here as well when it will be possible to
+         retrieve `size` parameter by instance number. There is also need to use `p_ppib` field
+         only by local domains and SecDom thus we can eventualy move it out from here.
+         However we would still need such parameter then. Ticket: NRFX-3226. */
+#define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                                     \
+{                                                                                   \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(130, NULL, 0x20000)                /* APB32 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(120, NRF_SYSCTRL_PPIB121, 0x10000) /* APB22 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(131, NRF_SYSCTRL_PPIB132, 0x10000) /* APB38 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(132, NRF_SYSCTRL_PPIB133, 0x10000) /* APB39 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(133, NRF_SYSCTRL_PPIB134, 0x10000) /* APB3A */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(134, NRF_SYSCTRL_PPIB135, 0x10000) /* APB3B */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(135, NRF_SYSCTRL_PPIB136, 0x10000) /* APB3C */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(136, NRF_SYSCTRL_PPIB137, 0x10000) /* APB3D */ \
 }
 
 #ifdef __cplusplus

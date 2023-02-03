@@ -8,6 +8,7 @@
 #include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
 #include <hal/nrf_ppib.h>
 #include <helpers/nrfx_flag32_allocator.h>
+#include <soc/nrfx_atomic.h>
 
 #define CHANNEL_INVALID UINT8_MAX
 
@@ -65,7 +66,8 @@ static nrfx_err_t channel_allocate(nrfx_atomic_t * p_channels_available,
         }
         chan_to_alloc = 31 - NRF_CLZ(chan_avail_masked);
 
-        prev_mask = nrfx_atomic_u32_fetch_and(p_channels_available, ~NRFX_BIT(chan_to_alloc));
+        prev_mask = nrfx_atomic_u32_fetch_and((nrfx_atomic_u32_t *)p_channels_available,
+                                              ~NRFX_BIT(chan_to_alloc));
     } while (prev_mask == *p_channels_available);
     *p_channel = chan_to_alloc;
     return NRFX_SUCCESS;

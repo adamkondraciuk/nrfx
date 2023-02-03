@@ -2,7 +2,7 @@
 
 #include <helpers/nrfx_gppi.h>
 
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
 #include <nrfx_dppi.h>
 #endif // NRFX_CHECK(NRFX_DPPI_ENABLED)
 
@@ -128,7 +128,7 @@ nrfx_gppi_task_t nrfx_gppi_group_enable_task_get(nrfx_gppi_channel_group_t group
 
 nrfx_err_t nrfx_gppi_channel_alloc(uint8_t * p_channel)
 {
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
     return nrfx_dppi_channel_alloc(p_channel);
 #else
     (void)p_channel;
@@ -138,7 +138,7 @@ nrfx_err_t nrfx_gppi_channel_alloc(uint8_t * p_channel)
 
 nrfx_err_t nrfx_gppi_channel_free(uint8_t channel)
 {
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
     return nrfx_dppi_channel_free(channel);
 #else
     (void)channel;
@@ -148,7 +148,7 @@ nrfx_err_t nrfx_gppi_channel_free(uint8_t channel)
 
 nrfx_err_t nrfx_gppi_group_alloc(nrfx_gppi_channel_group_t * p_group)
 {
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
     return nrfx_dppi_group_alloc((nrf_dppi_channel_group_t *)p_group);
 #else
     (void)p_group;
@@ -158,7 +158,7 @@ nrfx_err_t nrfx_gppi_group_alloc(nrfx_gppi_channel_group_t * p_group)
 
 nrfx_err_t nrfx_gppi_group_free(nrfx_gppi_channel_group_t group)
 {
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
     return nrfx_dppi_group_free((nrf_dppi_channel_group_t)group);
 #else
     (void)group;

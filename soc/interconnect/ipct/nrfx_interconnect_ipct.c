@@ -3,8 +3,8 @@
 
 #if defined(HALTIUM_XXAA)
 
-#include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
 #include <soc/interconnect/ipct/nrfx_interconnect_ipct_haltium_global.h>
+#include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
 #include <soc/interconnect/apb/nrfx_interconnect_apb.h>
 
 #if defined(NRF_RADIOCORE)

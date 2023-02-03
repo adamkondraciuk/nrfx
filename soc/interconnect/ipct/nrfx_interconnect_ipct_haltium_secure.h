@@ -7,17 +7,19 @@
 extern "C" {
 #endif
 
-#define NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE \
-static nrfx_atomic_t m_ipct_channels = 0xFF;
+#if ((NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM() | \
+     NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM()) > \
+     NRFX_BIT_MASK(LOCAL_IPCT_NUM))
+#error "Invalid mask for IPCT subscibe/publish defined."
+#endif
 
-#define NRFX_INTERCONNECT_IPCT_LOCAL_IPCT_PROP                                \
-{                                                                             \
-    { /* IPCT */                                                              \
-        .p_ipct = NRF_IPCT,                                                   \
-        .p_ipct_channels = &m_ipct_channels,                                  \
-        .ipct_pub_channels_mask = NRFX_IPCT_PUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-        .ipct_sub_channels_mask = NRFX_IPCT_SUB_CONFIG_ALLOWED_CHANNELS_MASK, \
-    },                                                                        \
+#ifndef NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE
+#define NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE NRFX_IPCT_CHANNELS_ENTRY();
+#endif // NRFX_INTERCONNECT_IPCT_LOCAL_DEFINE
+
+#define NRFX_INTERCONNECT_IPCT_LOCAL_IPCT_PROP \
+{                                              \
+    NRFX_INTERCONNECT_IPCT_PROP_ENTRY()        \
 }
 
 #ifdef __cplusplus

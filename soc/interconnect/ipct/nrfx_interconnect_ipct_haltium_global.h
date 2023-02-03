@@ -9,26 +9,59 @@ extern "C" {
 
 #define MAIN_IPCT_INTERCONNECT_IDX 1
 
-#define NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE                                              \
-static nrfx_atomic_t m_ipct120_channels = NRFX_IPCT120_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_IPCT120_SUB_CONFIG_ALLOWED_CHANNELS_MASK;  \
-static nrfx_atomic_t m_ipct130_channels = NRFX_IPCT130_PUB_CONFIG_ALLOWED_CHANNELS_MASK | \
-                                          NRFX_IPCT130_SUB_CONFIG_ALLOWED_CHANNELS_MASK;
+#ifndef NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE
+/* Default IPCT static variables generation in case of bare-metal application. */
+#ifndef NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM
+#define NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(m_ipct, inst_num, _channels)
+#else
+#error "Invalid set of configuration for IPCT."
+#endif
 
-#define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                              \
-{                                                                                 \
-    { /* IPCT120 */                                                               \
-        .p_ipct = NRF_IPCT120,                                                    \
-        .p_ipct_channels = &m_ipct120_channels,                                   \
-        .ipct_pub_channels_mask = NRFX_IPCT120_PUB_CONFIG_ALLOWED_CHANNELS_MASK,  \
-        .ipct_sub_channels_mask = NRFX_IPCT120_SUB_CONFIG_ALLOWED_CHANNELS_MASK,  \
-    },                                                                            \
-    { /* IPCT130 */                                                               \
-        .p_ipct = NRF_IPCT130,                                                    \
-        .p_ipct_channels = &m_ipct130_channels,                                   \
-        .ipct_pub_channels_mask = NRFX_IPCT130_PUB_CONFIG_ALLOWED_CHANNELS_MASK,  \
-        .ipct_sub_channels_mask = NRFX_IPCT130_SUB_CONFIG_ALLOWED_CHANNELS_MASK,  \
-    }                                                                             \
+#ifndef NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM
+#define NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(NRFX_IPCT, inst_num, _PUB_CONFIG_ALLOWED_CHANNELS_MASK)
+#else
+#error "Invalid set of configuration for IPCT."
+#endif
+
+#ifndef NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM
+#define NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) \
+        NRFX_CONCAT(NRFX_IPCT, inst_num, _SUB_CONFIG_ALLOWED_CHANNELS_MASK)
+#else
+#error "Invalid set of configuration for IPCT."
+#endif
+
+#define NRFX_IPCT_CHANNELS_ENTRY(inst_num)                                               \
+    NRFX_CONCAT(static nrfx_atomic_t m_ipct, inst_num, _channels __attribute__((used)) = \
+                NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num) |      \
+                NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num));
+
+#define _NRFX_IPCT_CHANNELS_ENTRY(periph_name, prefix, inst_num, _) \
+        NRFX_IPCT_CHANNELS_ENTRY(inst_num)
+
+#define NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE \
+        NRFX_FOREACH_ENABLED(IPC, _NRFX_IPCT_CHANNELS_ENTRY, (), ())
+
+#endif // NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE
+
+#define _NRFX_IPCT_INSTANCE(inst_num) NRFX_CONCAT(NRF, _NRFX_IPCT_PREFIX(inst_num))
+#define _NRFX_IPCT_PREFIX(inst_num) NRFX_CONCAT(_IPCT, inst_num)
+
+#define NRFX_INTERCONNECT_IPCT_PROP_ENTRY(inst_num)                                                  \
+{                                                                                                    \
+        .p_ipct                 = _NRFX_IPCT_INSTANCE(inst_num),                                     \
+        .p_ipct_channels        = &NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num),        \
+        .ipct_pub_channels_mask = NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+        .ipct_sub_channels_mask = NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+},
+
+#define _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY(periph_name, prefix, inst_num, _) \
+        NRFX_INTERCONNECT_IPCT_PROP_ENTRY(inst_num)
+
+#define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                           \
+{                                                                                         \
+        NRFX_FOREACH_ENABLED(IPC, _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY, (), ()) \
 }
 
 #ifdef __cplusplus
