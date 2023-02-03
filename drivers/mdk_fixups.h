@@ -999,6 +999,9 @@
     #define MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_Msk (0xFFFF0000UL)
     #define MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Pos 16
 
+    #define RADIO_TIMING_RU_Default 0
+    #define RADIO_TIMING_RU_Fast    1
+
 #endif
 
 /**************************************************************************************************/
@@ -1961,6 +1964,9 @@
 
     /* RRAMC_WAITSTATES: Waitstates for RRAM read access */
     #define RRAMC_WAITSTATES_FREQ_MaxCount 3 /*!< Max size of the index array related to the AXI clock frequencies. */
+
+    #define RADIO_TIMING_RU_Default 0
+    #define RADIO_TIMING_RU_Fast    1
 
 #endif
 
