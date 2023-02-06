@@ -413,7 +413,7 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_value_get(void)
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th)
 {
-    // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
+    // TODO: [NRFX-3172] Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
     csr_write(VPRCSR_MINTTHRESH, th);
 #else
@@ -423,7 +423,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th)
 
 NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 {
-    // TODO: Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
+    // TODO: [NRFX-3172] Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
     return csr_read(VPRCSR_MINTTHRESH);
 #else

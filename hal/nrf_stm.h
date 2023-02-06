@@ -458,16 +458,16 @@ NRF_STATIC_INLINE bool nrf_stm_feature_check(NRF_STM_Type const * p_reg,
             return (p_reg->LSR & STM_LSR_LOCKED_Msk);
         case NRF_STM_FEATURE_NSID:
             return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSID_Msk)
-                    >> STM_AUTHSTATUS_NSID_Pos) == 0x3UL; //TODO: remove 0x3 after MDK fix
+                    >> STM_AUTHSTATUS_NSID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
         case NRF_STM_FEATURE_NSNID:
             return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_NSNID_Msk)
-                    >> STM_AUTHSTATUS_NSNID_Pos) == 0x3UL; //TODO: remove 0x3 after MDK fix
+                    >> STM_AUTHSTATUS_NSNID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
         case NRF_STM_FEATURE_SID:
             return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_SID_Msk)
-                    >> STM_AUTHSTATUS_SID_Pos) == 0x3UL; //TODO: remove 0x3 after MDK fix
+                    >> STM_AUTHSTATUS_SID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
         case NRF_STM_FEATURE_SNID:
             return ((p_reg->AUTHSTATUS & STM_AUTHSTATUS_SNID_Msk)
-                    >> STM_AUTHSTATUS_SNID_Pos) == 0x3UL; //TODO: remove 0x3 after MDK fix
+                    >> STM_AUTHSTATUS_SNID_Pos) == 0x3UL; //TODO: [NRFX-3167] remove 0x3 after MDK fix
         default:
             NRFX_ASSERT(0);
             return false;

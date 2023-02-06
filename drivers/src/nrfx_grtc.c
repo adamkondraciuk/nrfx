@@ -749,7 +749,7 @@ static void grtc_irq_handler(void)
         event = nrfy_grtc_sys_counter_compare_event_get(channel);
         if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
-            //TODO: Remove when HM-15402 is fixed.
+            //TODO: [NRFX-3175] Remove when HM-15402 is fixed.
             if (channel == MAIN_GRTC_CC_CHANNEL)
             {
                 nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
@@ -783,7 +783,7 @@ static void grtc_irq_handler(void)
     if (nrfy_grtc_event_check(NRF_GRTC, NRF_GRTC_EVENT_SYSCOUNTERVALID) &&
         nrfy_grtc_int_enable_check(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK))
     {
-        //TODO: Check whether such procedure is valid when HM-15400 is fixed.
+        //TODO: [NRFX-3175] Check whether such procedure is valid when HM-15400 is fixed.
         nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_SYSCOUNTERVALID_MASK);
         NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_SYSCOUNTERVALID.");
         if (m_cb.syscountervalid_handler)

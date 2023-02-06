@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-/* TODO: Remove and replace definition when NRFX-2209 is merged. */
+/* TODO: [NRFX-2210] Remove and replace definition. */
 #define nrfy_grtc_sys_counter_capture_task_get nrfy_grtc_capture_task_get
 
 NRFY_STATIC_INLINE void __nrfy_internal_grtc_event_enabled_clear(NRF_GRTC_Type *  p_reg,
@@ -89,7 +89,7 @@ NRFY_STATIC_INLINE void nrfy_grtc_int_init(NRF_GRTC_Type * p_reg,
     nrf_barrier_w();
 
 #if defined(BOARD_PALLADIUM)
-    // TODO: Remove later
+    // TODO: [NRFX-3160] Remove later
     NRFY_IRQ_PENDING_CLEAR(GRTC_IRQn);
 #endif
 
@@ -203,9 +203,9 @@ NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_start(NRF_GRTC_Type * p_reg, bool 
         }
 #else
         // Perform action which returns SysCounter to ative state.
-        // TODO: Check whether solution https://projecttools.nordicsemi.no/jira/browse/MLT-3897
-        //       works. Also according to HW team  calling `nrf_grtc_sys_counter_active_set()`
-        //       should give expected result.
+        // TODO: [NRFX-3159] Check whether solution MLT-3897 works. 
+        // Also according to HW team  calling `nrf_grtc_sys_counter_active_set()`
+        // should give expected result.
         (void)nrf_grtc_sys_counter_low_get(p_reg);
         (void)nrf_grtc_sys_counter_high_get(p_reg);
 #endif

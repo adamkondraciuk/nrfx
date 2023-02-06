@@ -143,7 +143,7 @@ typedef enum
 {
     NRF_VPR_DMCONTROL_DMACTIVE, /** Debug module active. */
     NRF_VPR_DMCONTROL_NDMRESET, /** Negative system reset signal. */
-    /* TODO: other values */
+    /* TODO: [NRFX-3169] Add support for other values. */
 } nrf_vpr_dmcontrol_t;
 
 /**
