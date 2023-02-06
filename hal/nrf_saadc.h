@@ -106,7 +106,6 @@ typedef enum
 #endif
 } nrf_saadc_input_t;
 #else
-/* TODO: Support for non-enum pin select. */
 #define NRF_SAADC_INPUT_DISABLED 0
 typedef uint32_t nrf_saadc_input_t;
 #endif

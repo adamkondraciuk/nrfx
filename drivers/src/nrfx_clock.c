@@ -343,7 +343,6 @@ void nrfx_clock_start(nrf_clock_domain_t domain)
                 {
                     // LF clock is not active yet but was started already. Inspect its source.
 #if NRF_CLOCK_HAS_XO
-                    /* TODO: MLT-4105 */
                     lfclksrc = nrf_clock_lf_actv_src_get(NRF_CLOCK);
 #else
                     lfclksrc = nrf_clock_lf_srccopy_get(NRF_CLOCK);
