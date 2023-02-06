@@ -73,6 +73,28 @@ nrfx_err_t nrfx_egu_init(nrfx_egu_t const *       p_instance,
 void nrfx_egu_int_enable(nrfx_egu_t const * p_instance, uint32_t mask);
 
 /**
+ * @brief Function for getting the address of the specified EGU task.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] task       EGU task.
+ *
+ * @return Task address.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_egu_task_address_get(nrfx_egu_t const * p_instance,
+                                                      nrf_egu_task_t     task);
+
+/**
+ * @brief Function for getting the address of the specified EGU event.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] event      EGU event.
+ *
+ * @return Event address.
+ */
+NRFX_STATIC_INLINE uint32_t nrfx_egu_event_address_get(nrfx_egu_t const * p_instance,
+                                                       nrf_egu_event_t    event);
+
+/**
  * @brief Function for disabling interrupts on specified events of a given EGU driver instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
@@ -103,6 +125,20 @@ void nrfx_egu_uninit(nrfx_egu_t const * p_instance);
  * @return Interrupt handler.
  */
 #define NRFX_EGU_INST_HANDLER_GET(idx) NRFX_CONCAT_3(nrfx_egu_, idx, _irq_handler)
+
+#ifndef NRFX_DECLARE_ONLY
+NRFX_STATIC_INLINE uint32_t nrfx_egu_task_address_get(nrfx_egu_t const * p_instance,
+                                                      nrf_egu_task_t     task)
+{
+    return nrf_egu_task_address_get(p_instance->p_reg, task);
+}
+
+NRFX_STATIC_INLINE uint32_t nrfx_egu_event_address_get(nrfx_egu_t const * p_instance,
+                                                       nrf_egu_event_t    event)
+{
+    return nrf_egu_event_address_get(p_instance->p_reg, event);
+}
+#endif // NRFX_DECLARE_ONLY
 
 /** @} */
 

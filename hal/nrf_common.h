@@ -96,47 +96,61 @@ NRF_STATIC_INLINE void nrf_barrier_rw(void)
 #endif
 }
 
-#if defined(HALTIUM_XXAA)
-NRF_STATIC_INLINE nrf_region_t nrf_address_region_get(uint32_t addr)
-{
-    return (nrf_region_t)((addr & ADDRESS_REGION_Msk) >> ADDRESS_REGION_Pos);
-}
-
-NRF_STATIC_INLINE bool nrf_address_security_get(uint32_t addr)
-{
-    return ((addr & ADDRESS_SECURITY_Msk) >> ADDRESS_SECURITY_Pos);
-}
-
+#if defined(ADDRESS_DOMAIN_Msk)
 NRF_STATIC_INLINE uint8_t nrf_address_domain_get(uint32_t addr)
 {
     return (uint8_t)((addr & ADDRESS_DOMAIN_Msk) >> ADDRESS_DOMAIN_Pos);
 }
+#endif
 
+#if defined(ADDRESS_REGION_Msk)
+NRF_STATIC_INLINE nrf_region_t nrf_address_region_get(uint32_t addr)
+{
+    return (nrf_region_t)((addr & ADDRESS_REGION_Msk) >> ADDRESS_REGION_Pos);
+}
+#endif
+
+#if defined(ADDRESS_SECURITY_Msk)
+NRF_STATIC_INLINE bool nrf_address_security_get(uint32_t addr)
+{
+    return ((addr & ADDRESS_SECURITY_Msk) >> ADDRESS_SECURITY_Pos);
+}
+#endif
+
+#if defined(ADDRESS_BUS_Msk)
 NRF_STATIC_INLINE uint8_t nrf_address_bus_get(uint32_t addr, size_t size)
 {
     return (uint8_t)((addr & ADDRESS_BUS_Msk & ~(size - 1)) >> ADDRESS_BUS_Pos);
 }
+#endif
 
+#if defined(ADDRESS_BRIDGE_GROUP_Msk)
 NRF_STATIC_INLINE uint8_t nrf_address_bridge_group_get(uint32_t addr)
 {
     return (uint8_t)((addr & ADDRESS_BRIDGE_GROUP_Msk) >> ADDRESS_BRIDGE_GROUP_Pos);
 }
+#endif
 
+#if defined(ADDRESS_DOMAIN_SPEED_Msk)
 NRF_STATIC_INLINE nrf_domain_speed_t nrf_address_domain_speed_get(uint32_t addr)
 {
     return (nrf_domain_speed_t)((addr & ADDRESS_DOMAIN_SPEED_Msk) >> ADDRESS_DOMAIN_SPEED_Pos);
 }
+#endif
 
+#if defined(ADDRESS_SLAVE_Msk)
 NRF_STATIC_INLINE uint8_t nrf_address_slave_get(uint32_t addr)
 {
     return (uint8_t)((addr & ADDRESS_SLAVE_Msk) >> ADDRESS_SLAVE_Pos);
 }
+#endif
 
+#if defined(ADDRESS_PERIPHID_Msk)
 NRF_STATIC_INLINE uint16_t nrf_address_periphid_get(uint32_t addr)
 {
     return (uint16_t)((addr & ADDRESS_PERIPHID_Msk) >> ADDRESS_PERIPHID_Pos);
 }
-#endif // defined(HALTIUM_XXAA)
+#endif
 
 NRF_STATIC_INLINE bool nrf_dma_accesible_check(void const * p_reg, void const * p_object)
 {

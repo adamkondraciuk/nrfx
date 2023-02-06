@@ -168,8 +168,7 @@ NRF_STATIC_INLINE void nrf_ppib_subscribe_set(NRF_PPIB_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_ppib_subscribe_clear(NRF_PPIB_Type * p_reg,
-                                                nrf_ppib_task_t task);
+NRF_STATIC_INLINE void nrf_ppib_subscribe_clear(NRF_PPIB_Type * p_reg, nrf_ppib_task_t task);
 
 /**
  * @brief Function for setting the publish configuration for a given event.
@@ -188,8 +187,7 @@ NRF_STATIC_INLINE void nrf_ppib_publish_set(NRF_PPIB_Type *  p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_ppib_publish_clear(NRF_PPIB_Type *  p_reg,
-                                              nrf_ppib_event_t event);
+NRF_STATIC_INLINE void nrf_ppib_publish_clear(NRF_PPIB_Type * p_reg, nrf_ppib_event_t event);
 
 /**
  * @brief Function for getting the task oveflow register for SEND tasks.

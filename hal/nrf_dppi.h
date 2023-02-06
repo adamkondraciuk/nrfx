@@ -70,6 +70,24 @@ typedef enum
 } nrf_dppi_task_t;
 
 /**
+ * @brief Function for getting the total number of available channels for the given DPPIC instance.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Number of available channels.
+ */
+NRF_STATIC_INLINE uint8_t nrf_dppi_channel_number_get(NRF_DPPIC_Type const * p_reg);
+
+/**
+ * @brief Function for getting the total number of available groups for the given DPPIC instance.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Number of available groups.
+ */
+NRF_STATIC_INLINE uint8_t nrf_dppi_group_number_get(NRF_DPPIC_Type const * p_reg);
+
+/**
  * @brief Function for activating a DPPI task.
  *
  * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
@@ -238,6 +256,74 @@ NRF_STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index)
 
 #ifndef NRF_DECLARE_ONLY
 
+NRF_STATIC_INLINE uint8_t nrf_dppi_channel_number_get(NRF_DPPIC_Type const * p_reg)
+{
+#if defined(DPPI_CH_NUM)
+    (void)p_reg;
+    return DPPI_CH_NUM;
+#else
+#if defined(NRF_DPPIC00)
+    if (p_reg == NRF_DPPIC00)
+    {
+        return DPPIC00_CH_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC10)
+    if (p_reg == NRF_DPPIC10)
+    {
+        return DPPIC10_CH_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC20)
+    if (p_reg == NRF_DPPIC20)
+    {
+        return DPPIC20_CH_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC30)
+    if (p_reg == NRF_DPPIC30)
+    {
+        return DPPIC30_CH_NUM;
+    }
+#endif
+#endif // defined(DPPI_CH_NUM)
+    return 0;
+}
+
+NRF_STATIC_INLINE uint8_t nrf_dppi_group_number_get(NRF_DPPIC_Type const * p_reg)
+{
+#if defined(DPPI_GROUP_NUM)
+    (void)p_reg;
+    return DPPI_GROUP_NUM;
+#else
+#if defined(NRF_DPPIC00)
+    if (p_reg == NRF_DPPIC00)
+    {
+        return DPPIC00_GROUP_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC10)
+    if (p_reg == NRF_DPPIC10)
+    {
+        return DPPIC10_GROUP_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC20)
+    if (p_reg == NRF_DPPIC20)
+    {
+        return DPPIC20_GROUP_NUM;
+    }
+#endif
+#if defined(NRF_DPPIC30)
+    if (p_reg == NRF_DPPIC30)
+    {
+        return DPPIC30_GROUP_NUM;
+    }
+#endif
+#endif // defined(DPPI_GROUP_NUM)
+    return 0;
+}
+
 NRF_STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_task_t dppi_task)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) dppi_task)) = 1;
@@ -251,7 +337,7 @@ NRF_STATIC_INLINE uint32_t nrf_dppi_task_address_get(NRF_DPPIC_Type const * p_re
 
 NRF_STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel)
 {
-    NRFX_ASSERT(channel < DPPI_CH_NUM);
+    NRFX_ASSERT(channel < nrf_dppi_channel_number_get(p_reg));
     return ((p_reg->CHEN & (DPPIC_CHEN_CH0_Enabled << (DPPIC_CHEN_CH0_Pos + channel))) != 0);
 }
 
@@ -274,7 +360,7 @@ NRF_STATIC_INLINE void nrf_dppi_subscribe_set(NRF_DPPIC_Type * p_reg,
                                               nrf_dppi_task_t  task,
                                               uint8_t          channel)
 {
-    NRFX_ASSERT(channel < DPPI_CH_NUM);
+    NRFX_ASSERT(channel < nrf_dppi_channel_number_get(p_reg));
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
@@ -319,13 +405,11 @@ NRF_STATIC_INLINE void nrf_dppi_group_disable(NRF_DPPIC_Type *         p_reg,
 
 NRF_STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_enable_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < DPPI_GROUP_NUM);
     return (nrf_dppi_task_t)NRFX_OFFSETOF(NRF_DPPIC_Type, TASKS_CHG[index].EN);
 }
 
 NRF_STATIC_INLINE nrf_dppi_task_t nrf_dppi_group_disable_task_get(uint8_t index)
 {
-    NRFX_ASSERT(index < DPPI_GROUP_NUM);
     return (nrf_dppi_task_t)NRFX_OFFSETOF(NRF_DPPIC_Type, TASKS_CHG[index].DIS);
 }
 

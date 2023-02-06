@@ -6,7 +6,8 @@
 #include <nrfx_dppi.h>
 #endif // NRFX_CHECK(NRFX_DPPI_ENABLED)
 
-#if defined(DPPI_PRESENT) && !(defined(HALTIUM_XXAA) && defined(NRFX_PPIB_ENABLED))
+#if defined(DPPI_PRESENT) && !(defined(HALTIUM_XXAA) && defined(NRFX_PPIB_ENABLED)) && \
+    !defined(LUMOS_XXAA)
 bool nrfx_gppi_channel_check(uint8_t channel)
 {
     return nrfy_dppi_channel_check(NRF_DPPIC, channel);

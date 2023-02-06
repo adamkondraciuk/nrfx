@@ -1545,6 +1545,8 @@
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
 
     typedef NRF_DOMAINS_t nrf_domain_t;
+    #define ADDRESS_BUS_Pos (18UL)
+    #define ADDRESS_BUS_Msk (0x3FUL << ADDRESS_BUS_Pos)
 
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
@@ -1555,6 +1557,29 @@
 
     #define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
     #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+    
+    #define PPIB00_CH_NUM 8
+    #define PPIB10_CH_NUM 8
+    #define PPIB11_CH_NUM 16
+    #define PPIB21_CH_NUM 16
+    #define PPIB22_CH_NUM 4
+    #define PPIB30_CH_NUM 4
+    #define PPIB20_CH_NUM 8
+    #define PPIB01_CH_NUM 8
+
+    #define NRF_PPIB00_TO_PPIB10_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB00_CH_NUM, PPIB10_CH_NUM))
+    #define NRF_PPIB11_TO_PPIB21_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB11_CH_NUM, PPIB21_CH_NUM))
+    #define NRF_PPIB22_TO_PPIB30_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB22_CH_NUM, PPIB30_CH_NUM))
+    #define NRF_PPIB20_TO_PPIB01_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB20_CH_NUM, PPIB01_CH_NUM))
+    
+    // TODO: remove when MLT-4763 is done
+    typedef enum
+    {
+        NRF_APB_INDEX_MCU   = 1,
+        NRF_APB_INDEX_RADIO = 2,
+        NRF_APB_INDEX_PERI  = 3,
+        NRF_APB_INDEX_LP    = 4
+    } nrf_apb_index_t;
 
     #if defined(NRF_TRUSTZONE_NONSECURE)
         #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
@@ -1588,19 +1613,21 @@
         #define GRTC_IRQn             GRTC_1_IRQn
         #define nrfx_grtc_irq_handler GRTC_1_IRQHandler
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
+    
+    #define DPPI_PRESENT DPPIC_PRESENT
 
-    #if defined(DPPIC_PRESENT)
-        #if !defined(DPPI_PRESENT)
-            #define DPPI_PRESENT
-        #endif
-        #if !defined(NRF_DPPIC)
-            /* TODO: Establish numbers of DPPI_GROUP_NUM and DPPI_CH_NUM */
-            #define DPPI_CH_NUM 8
-            #define DPPI_GROUP_NUM 1
-            /* TODO: Add support for NRF_DPPIC00, NRF_DPPIC10, NRF_DPPIC20, NRF_DPPIC30 */
-            #define NRF_DPPIC NRF_DPPIC00
-        #endif
-    #endif
+    #define DPPI_GROUP_MAX_COUNT NRFX_MAX(DPPIC00_GROUP_NUM, \
+                                 NRFX_MAX(DPPIC10_GROUP_NUM, \
+                                 NRFX_MAX(DPPIC20_GROUP_NUM, \
+                                 DPPIC30_GROUP_NUM)))
+    #define DPPI_GROUP_NUM DPPI_GROUP_MAX_COUNT
+    #define DPPI_CHANNEL_MAX_COUNT NRFX_MAX(DPPIC00_CH_NUM, \
+                                   NRFX_MAX(DPPIC10_CH_NUM, \
+                                   NRFX_MAX(DPPIC20_CH_NUM, \
+                                   DPPIC30_CH_NUM)))
+    #define DPPI_CH_NUM DPPI_CHANNEL_MAX_COUNT
+    #define PPIB_CHANNEL_MAX_COUNT 24UL
+
     #if defined(CCM_PRESENT)
         #define EASYVDMA_PRESENT
         #define VDMADESCRIPTOR_CONFIG_CNT_Pos (0UL)        /*!< Position of CNT field.                                               */
