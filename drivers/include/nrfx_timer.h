@@ -45,7 +45,7 @@ enum {
 /** @brief The configuration structure of the timer driver instance. */
 typedef struct
 {
-    uint32_t              prescaler;          ///< Prescaler value.
+    uint32_t              frequency;          ///< Frequency value.
     nrf_timer_mode_t      mode;               ///< Mode of operation.
     nrf_timer_bit_width_t bit_width;          ///< Bit width.
     uint8_t               interrupt_priority; ///< Interrupt priority.
@@ -56,13 +56,14 @@ typedef struct
  * @brief TIMER driver default configuration.
  *
  * This configuration sets up TIMER with the following options:
- * - prescaler: set to achieve maximum available frequency
  * - works as timer
  * - width: 16 bit
+ *
+ * @param[in] _frequency Timer frequency in Hz.
  */
-#define NRFX_TIMER_DEFAULT_CONFIG                                 \
+#define NRFX_TIMER_DEFAULT_CONFIG(_frequency)                     \
 {                                                                 \
-    .prescaler          = 0,                                      \
+    .frequency          = _frequency,                             \
     .mode               = NRF_TIMER_MODE_TIMER,                   \
     .bit_width          = NRF_TIMER_BIT_WIDTH_16,                 \
     .interrupt_priority = NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY, \

@@ -78,12 +78,22 @@ typedef struct
 
 static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 
-static void timer_configure(nrfx_timer_t const *        p_instance,
-                            nrfx_timer_config_t const * p_config)
+static nrfx_err_t timer_configure(nrfx_timer_t const *        p_instance,
+                                  nrfx_timer_config_t const * p_config)
 {
+    nrfx_err_t err_code;
+    uint32_t prescaler;
+
+    err_code = nrfx_timer_prescaler_calculate(p_instance, p_config->frequency, &prescaler);
+    if (err_code == NRFX_ERROR_INVALID_PARAM)
+    {
+        NRFX_LOG_WARNING("Specified frequency is not supported by the TIMER instance.");
+        return err_code;
+    }
+
     nrfy_timer_config_t nrfy_config =
     {
-        .prescaler = p_config->prescaler,
+        .prescaler = prescaler,
         .mode      = p_config->mode,
         .bit_width = p_config->bit_width
     };
@@ -93,6 +103,7 @@ static void timer_configure(nrfx_timer_t const *        p_instance,
                         NRF_TIMER_ALL_CHANNELS_INT_MASK,
                         p_config->interrupt_priority,
                         false);
+    return NRFX_SUCCESS;
 }
 
 static uint32_t prescaler_calculate(uint32_t base_frequency, uint32_t frequency)
@@ -124,17 +135,19 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
     if (p_config)
     {
         p_cb->context = p_config->p_context;
-        NRFX_ASSERT(p_config->prescaler <= NRF_TIMER_PRESCALER_MAX);
         NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
-        timer_configure(p_instance, p_config);
+
+        err_code = timer_configure(p_instance, p_config);
+    }
+    else
+    {
+        err_code = NRFX_SUCCESS;
     }
 
-    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
+    p_cb->state = err_code == NRFX_SUCCESS ?
+                NRFX_DRV_STATE_INITIALIZED : NRFX_DRV_STATE_UNINITIALIZED;
 
-    err_code = NRFX_SUCCESS;
-    NRFX_LOG_INFO("Function: %s, error code: %s.",
-                  __func__,
-                  NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
 
@@ -142,7 +155,6 @@ nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
                                   nrfx_timer_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(p_config->prescaler <= NRF_TIMER_PRESCALER_MAX);
     NRFX_ASSERT(NRF_TIMER_IS_BIT_WIDTH_VALID(p_instance->p_reg, p_config->bit_width));
     timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
@@ -154,9 +166,10 @@ nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
     {
         return NRFX_ERROR_BUSY;
     }
+
     p_cb->context = p_config->p_context;
-    timer_configure(p_instance, p_config);
-    return NRFX_SUCCESS;
+    nrfx_err_t err_code = timer_configure(p_instance, p_config);
+    return err_code;
 }
 
 void nrfx_timer_uninit(nrfx_timer_t const * p_instance)
@@ -180,7 +193,12 @@ nrfx_err_t nrfx_timer_prescaler_calculate(nrfx_timer_t const * p_instance,
     (void)p_instance;
     uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
 
-    if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
+    if (base_frequency == frequency)
+    {
+        *prescaler = 0;
+        return NRFX_SUCCESS;
+    }
+    else if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
     {
         return NRFX_ERROR_INVALID_PARAM;
     }
@@ -194,8 +212,9 @@ bool nrfx_timer_frequency_vaild_check(nrfx_timer_t const * p_instance,
     (void)p_instance;
     uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
 
-    return NRFX_IS_POWER_OF_TWO(base_frequency / (uint32_t)frequency) &&
-               ((base_frequency / frequency) <= (1 << NRF_TIMER_PRESCALER_MAX));
+    return (base_frequency % frequency == 0) &&
+            NRFX_IS_POWER_OF_TWO(base_frequency / (uint32_t)frequency) &&
+            ((base_frequency / frequency) <= (1 << NRF_TIMER_PRESCALER_MAX));
 }
 
 void nrfx_timer_enable(nrfx_timer_t const * p_instance)
