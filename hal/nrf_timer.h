@@ -240,6 +240,22 @@ extern "C" {
         NRF_CTZ((uint32_t)(base_freq) / (uint32_t)(frequency))
 
 /**
+ * @brief Macro for checking whether specified frequency can be achived for given timer instance.
+ *
+ * @note Macro is using compile time assertion.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] frequency Desired frequency value in Hz.
+ */
+#define NRF_TIMER_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                       \
+    NRF_STATIC_ASSERT(                                                                           \
+        (NRF_TIMER_BASE_FREQUENCY_GET(p_reg) == frequency) ||                                    \
+        ((NRF_TIMER_BASE_FREQUENCY_GET(p_reg) % frequency == 0) &&                               \
+         NRFX_IS_POWER_OF_TWO(NRF_TIMER_BASE_FREQUENCY_GET(p_reg) / (uint32_t)frequency) &&      \
+         ((NRF_TIMER_BASE_FREQUENCY_GET(p_reg) / frequency) <= (1 << NRF_TIMER_PRESCALER_MAX))), \
+        "Specified frequency can not be achived with given TIMER instance.")
+
+/**
  * @brief Macro for getting the number of capture/compare channels available
  *        in a given timer instance.
  *

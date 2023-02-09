@@ -70,6 +70,17 @@ typedef struct
 }
 
 /**
+ * @brief Macro for checking whether specified frequency can be achived for given timer instance.
+ *
+ * @note Macro is using compile time assertion.
+ *
+ * @param[in] id        Index of the specified timer instance.
+ * @param[in] frequency Desired frequency value in Hz.
+ */
+#define NRFX_TIMER_FREQUENCY_STATIC_CHECK(id, frequency) \
+        NRF_TIMER_FREQUENCY_STATIC_CHECK(NRF_TIMER_INST_GET(id), frequency)
+
+/**
  * @brief Timer driver event handler type.
  *
  * @param[in] event_type Timer event.
