@@ -55,6 +55,8 @@
 
 @defgroup nrf_nvmc NVMC
 
+@defgroup nrf_pcrm PCRM
+
 @defgroup nrf_pdm PDM
 
 @defgroup nrf_power POWER
