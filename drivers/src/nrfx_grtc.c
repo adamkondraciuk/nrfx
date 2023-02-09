@@ -247,7 +247,6 @@ nrfx_err_t nrfx_grtc_channel_alloc(uint8_t * p_channel)
 nrfx_err_t nrfx_grtc_channel_free(uint8_t channel)
 {
     NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
-    NRFX_ASSERT(channel != MAIN_GRTC_CC_CHANNEL);
     nrfx_err_t err_code;
 
     channel_used_unmark(channel);
@@ -612,7 +611,8 @@ nrfx_err_t nrfx_grtc_syscounter_cc_absolute_set(nrfx_grtc_channel_t * p_chan_dat
                                                          enable_irq);
 
     NRFX_LOG_INFO("GRTC SYSCOUNTER absolute compare for channel %u set to %u.",
-                  (uint32_t)p_chan_data->channel, (uint32_t)val);
+                  (uint32_t)p_chan_data->channel,
+                  (uint32_t)nrfy_grtc_sys_counter_cc_get(NRF_GRTC, p_chan_data->channel));
     return err_code;
 }
 
@@ -750,7 +750,7 @@ static void grtc_irq_handler(void)
         if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
             //TODO: [NRFX-3175] Remove when HM-15402 is fixed.
-            if (channel == MAIN_GRTC_CC_CHANNEL)
+            if (channel == 0)
             {
                 nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
             }

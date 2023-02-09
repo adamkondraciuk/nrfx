@@ -166,6 +166,7 @@ typedef enum
     NRF_SPU_FEATURE_GPIOTE_INTERRUPT,   /**< GPIOTE interrupt. */
     NRF_SPU_FEATURE_GPIO_PIN,           /**< GPIO pin. */
     NRF_SPU_FEATURE_GRTC_CC,            /**< GRTC compare channel. */
+    NRF_SPU_FEATURE_GRTC_SYSCOUNTER,    /**< GRTC SYSCOUNTER. */
     NRF_SPU_FEATURE_GRTC_INTERRUPT,     /**< GRTC interrupt. */
 #if NRF_SPU_HAS_DOMAIN
     NRF_SPU_FEATURE_BELLS_BELL,         /**< BELLS bell pair. */
@@ -1078,6 +1079,11 @@ NRF_STATIC_INLINE bool nrf_spu_feature_secattr_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_CC_SECATTR_Msk)
                    >> SPU_FEATURE_GRTC_CC_SECATTR_Pos;
 
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            return (p_reg->FEATURE.GRTC.SYSCOUNTER
+                    & SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_Msk)
+                   >> SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_Pos;
+
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
             return (p_reg->FEATURE.GRTC.INTERRUPT[index]
@@ -1174,6 +1180,11 @@ NRF_STATIC_INLINE bool nrf_spu_feature_lock_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_CC_LOCK_Msk)
                    >> SPU_FEATURE_GRTC_CC_LOCK_Pos;
 
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            return (p_reg->FEATURE.GRTC.SYSCOUNTER
+                    & SPU_FEATURE_GRTC_SYSCOUNTER_LOCK_Msk)
+                   >> SPU_FEATURE_GRTC_SYSCOUNTER_LOCK_Pos;
+
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
             return (p_reg->FEATURE.GRTC.INTERRUPT[index]
@@ -1269,6 +1280,11 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
                     & SPU_FEATURE_GRTC_CC_BLOCK_Msk)
                    >> SPU_FEATURE_GRTC_CC_BLOCK_Pos;
 
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            return (p_reg->FEATURE.GRTC.SYSCOUNTER
+                    & SPU_FEATURE_GRTC_SYSCOUNTER_BLOCK_Msk)
+                   >> SPU_FEATURE_GRTC_SYSCOUNTER_BLOCK_Pos;
+
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
             return (p_reg->FEATURE.GRTC.INTERRUPT[index]
@@ -1363,6 +1379,11 @@ NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p
             return (nrf_owner_t)((p_reg->FEATURE.GRTC.CC[index]
                                   & SPU_FEATURE_GRTC_CC_OWNERID_Msk)
                                  >> SPU_FEATURE_GRTC_CC_OWNERID_Pos);
+
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            return (nrf_owner_t)((p_reg->FEATURE.GRTC.SYSCOUNTER
+                                  & SPU_FEATURE_GRTC_SYSCOUNTER_OWNERID_Msk)
+                                 >> SPU_FEATURE_GRTC_SYSCOUNTER_OWNERID_Pos);
 
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
@@ -1498,6 +1519,16 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
                    SPU_FEATURE_GRTC_CC_SECATTR_Secure :
                    SPU_FEATURE_GRTC_CC_SECATTR_NonSecure)
                   <<  SPU_FEATURE_GRTC_CC_SECATTR_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            p_reg->FEATURE.GRTC.SYSCOUNTER =
+                ((p_reg->FEATURE.GRTC.SYSCOUNTER &
+                  ~SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_Msk) |
+                 ((enable ?
+                   SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_Secure :
+                   SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_NonSecure)
+                  <<  SPU_FEATURE_GRTC_SYSCOUNTER_SECATTR_Pos));
             break;
 
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
@@ -1645,6 +1676,14 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
                   << SPU_FEATURE_GRTC_CC_LOCK_Pos));
             break;
 
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            p_reg->FEATURE.GRTC.SYSCOUNTER =
+                ((p_reg->FEATURE.GRTC.SYSCOUNTER &
+                  ~SPU_FEATURE_GRTC_SYSCOUNTER_LOCK_Msk) |
+                 (SPU_FEATURE_GRTC_SYSCOUNTER_LOCK_Locked
+                  << SPU_FEATURE_GRTC_SYSCOUNTER_LOCK_Pos));
+            break;
+
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
             NRFX_ASSERT(index < NRF_SPU_FEATURE_GRTC_INTERRUPT_COUNT);
             p_reg->FEATURE.GRTC.INTERRUPT[index] =
@@ -1778,6 +1817,14 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
                   ~SPU_FEATURE_GRTC_CC_BLOCK_Msk) |
                  (SPU_FEATURE_GRTC_CC_BLOCK_Blocked
                   << SPU_FEATURE_GRTC_CC_BLOCK_Pos));
+            break;
+
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            p_reg->FEATURE.GRTC.SYSCOUNTER =
+                ((p_reg->FEATURE.GRTC.SYSCOUNTER &
+                  ~SPU_FEATURE_GRTC_SYSCOUNTER_BLOCK_Msk) |
+                 (SPU_FEATURE_GRTC_SYSCOUNTER_BLOCK_Blocked
+                  << SPU_FEATURE_GRTC_SYSCOUNTER_BLOCK_Pos));
             break;
 
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:
@@ -1922,6 +1969,15 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
                  ((owner_id
                    << SPU_FEATURE_GRTC_CC_OWNERID_Pos) &
                   SPU_FEATURE_GRTC_CC_OWNERID_Msk));
+            break;
+
+        case NRF_SPU_FEATURE_GRTC_SYSCOUNTER:
+            p_reg->FEATURE.GRTC.SYSCOUNTER =
+                ((p_reg->FEATURE.GRTC.SYSCOUNTER &
+                  ~SPU_FEATURE_GRTC_SYSCOUNTER_OWNERID_Msk) |
+                 ((owner_id
+                   << SPU_FEATURE_GRTC_SYSCOUNTER_OWNERID_Pos) &
+                  SPU_FEATURE_GRTC_SYSCOUNTER_OWNERID_Msk));
             break;
 
         case NRF_SPU_FEATURE_GRTC_INTERRUPT:

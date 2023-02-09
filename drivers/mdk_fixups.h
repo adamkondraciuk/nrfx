@@ -180,7 +180,7 @@
         #else
             #error Unknown core.
         #endif
-    #elif defined(NRF_SYSCTRL) || defined(NRF_SECURE)
+    #elif defined(NRF_SYSCTRL)
         #define NRF_GRTC_IRQ_GROUP 6
     #elif defined(NRF_PPR) || defined(NRF_FLPR)
         #define NRF_GRTC_IRQ_GROUP 2

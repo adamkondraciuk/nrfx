@@ -41,14 +41,14 @@ extern "C" {
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 0
 #endif
 
-#if defined(NRF_SYSCTRL) || defined(LUMOS_XXAA) || (defined(NRF_SECURE) && \
-    (NRFX_IS_ENABLED(NRFX_CONFIG_TESTS) || NRFX_IS_ENABLED(NRFX_ON_TARGET_TEST))) || \
-    defined(__NRFX_DOXYGEN__)
+#if !defined(NRF_GRTC_HAS_EXTENDED)
+#if defined(NRF_SYSCTRL) || defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has has extended functionality. */
 #define NRF_GRTC_HAS_EXTENDED 1
 #else
 #define NRF_GRTC_HAS_EXTENDED 0
 #endif
+#endif // !defined(NRF_GRTC_HAS_EXTENDED)
 
 /** @brief Symbol indicating actual domain index. */
 #define NRF_GRTC_DOMAIN_INDEX NRF_GRTC_IRQ_GROUP
