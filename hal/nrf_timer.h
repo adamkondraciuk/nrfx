@@ -68,11 +68,11 @@ extern "C" {
 #endif
 
 /** @brief Base frequency value 320 MHz for TIMER. */
-#define NRF_TIMER_BASE_FREQUENCY_320MHZ (320000000UL)
+#define NRF_TIMER_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
 /** @brief Base frequency value 32 MHz for TIMER. */
-#define NRF_TIMER_BASE_FREQUENCY_32MHZ  (32000000UL)
+#define NRF_TIMER_BASE_FREQUENCY_32MHZ  (NRFX_MHZ_TO_HZ(32UL))
 /** @brief Base frequency value 16 MHz for TIMER. */
-#define NRF_TIMER_BASE_FREQUENCY_16MHZ  (16000000UL)
+#define NRF_TIMER_BASE_FREQUENCY_16MHZ  (NRFX_MHZ_TO_HZ(16UL))
 
 /** @brief Maximum value of PRESCALER register. */
 #if defined(HALTIUM_XXAA)

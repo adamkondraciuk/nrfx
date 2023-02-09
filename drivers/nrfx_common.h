@@ -456,6 +456,24 @@ do {                                                         \
  */
 #define NRFX_IRQ_NUMBER_GET(base_addr)  NRFX_PERIPHERAL_ID_GET(base_addr)
 
+/**
+ * @brief Macro for converting frequency in kHz to Hz.
+ *
+ * @param[in] freq Frequency value in kHz.
+ *
+ * @return Number of Hz in @p freq kHz.
+ */
+#define NRFX_KHZ_TO_HZ(freq) ((freq) * 1000)
+
+/**
+ * @brief Macro for converting frequency in MHz to Hz.
+ *
+ * @param[in] freq Frequency value in MHz.
+ *
+ * @return Number of Hz in @p freq MHz.
+ */
+#define NRFX_MHZ_TO_HZ(freq) ((freq) * 1000 * 1000)
+
 /** @brief IRQ handler type. */
 typedef void (* nrfx_irq_handler_t)(void);
 
