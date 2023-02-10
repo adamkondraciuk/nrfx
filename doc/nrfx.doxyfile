@@ -2299,7 +2299,8 @@ INCLUDE_FILE_PATTERNS  =
 # This tag requires that the tag ENABLE_PREPROCESSING is set to YES.
 
 PREDEFINED             = SUPPRESS_INLINE_IMPLEMENTATION \
-                         __NRFX_DOXYGEN__
+                         __NRFX_DOXYGEN__ \
+                         __PACKED= \
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then this
 # tag can be used to specify a list of macro names that should be expanded. The
