@@ -9,7 +9,7 @@
 #define NRFX_LOG_MODULE NFCT
 #include <nrfx_log.h>
 
-#define FIELD_TIMER_FREQUENCY_HZ 1000000
+#define FIELD_TIMER_FREQUENCY_HZ NRFX_MHZ_TO_HZ(1)
 
 #if !defined(USE_WORKAROUND_FOR_ANOMALY_79) &&          \
     (defined(NRF52832_XXAA) || defined(NRF52832_XXAB))
@@ -341,11 +341,7 @@ static void nrfx_nfct_field_timer_handler(nrf_timer_event_t event_type, void * p
 static inline nrfx_err_t nrfx_nfct_field_timer_config(void)
 {
     nrfx_err_t err_code;
-    nrfx_timer_config_t timer_cfg = NRFX_TIMER_DEFAULT_CONFIG;
-    err_code = nrfx_timer_prescaler_calculate(&m_timer_workaround.timer,
-                                              FIELD_TIMER_FREQUENCY_HZ,
-                                              &timer_cfg.prescaler);
-    NRFX_ASSERT(err_code == NRFX_SUCCESS);
+    nrfx_timer_config_t timer_cfg = NRFX_TIMER_DEFAULT_CONFIG(FIELD_TIMER_FREQUENCY_HZ);
     timer_cfg.interrupt_priority = NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY;
 
     err_code = nrfx_timer_init(&m_timer_workaround.timer,
