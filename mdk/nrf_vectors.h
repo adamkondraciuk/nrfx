@@ -40,6 +40,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef NRF_VECTORS_H_
 #define NRF_VECTORS_H_
 
+<<<<<<< HEAD
 #if defined(NRF51422_XXAA)
     #include "nrf51422_vectors.h"
 #elif defined(NRF51422_XXAB)
@@ -85,6 +86,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9120_vectors.h"
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_vectors.h"
+#elif defined(MOONLIGHT_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "moonlight_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "moonlight_flpr_vectors.h"
+    #endif
 #else
     #error "Device must be defined. See nrf_vectors.h."
 #endif

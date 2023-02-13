@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -112,6 +112,38 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
+                DCD     SWI00_IRQHandler
+                DCD     SWI01_IRQHandler
+                DCD     SWI02_IRQHandler
+                DCD     SWI03_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -127,8 +159,40 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     CRACEN_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     SERIAL00_IRQHandler
+                DCD     RRAMC_IRQHandler
+                DCD     VPR00_IRQHandler
                 DCD     0                         ; Reserved
-                DCD     VPR_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     CTRLAP_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     CM33SS_IRQHandler
+                DCD     TIMER00_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -156,8 +220,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TIMER10_IRQHandler
                 DCD     RTC10_IRQHandler
                 DCD     EGU10_IRQHandler
-                DCD     AAR30_CCM30_IRQHandler
-                DCD     ECB30_IRQHandler
+                DCD     AAR10_CCM10_IRQHandler
+                DCD     ECB10_IRQHandler
                 DCD     RADIO_0_IRQHandler
                 DCD     RADIO_1_IRQHandler
                 DCD     0                         ; Reserved
@@ -188,13 +252,13 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     GPIOTE20_0_IRQHandler
-                DCD     GPIOTE20_1_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
-                DCD     GRTC_0_IRQHandler
-                DCD     GRTC_1_IRQHandler
-                DCD     GRTC_2_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -228,8 +292,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     TIMER23_IRQHandler
                 DCD     TIMER24_IRQHandler
                 DCD     0                         ; Reserved
-                DCD     PDM20_IRQHandler
-                DCD     PDM21_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     PWM20_IRQHandler
                 DCD     PWM21_IRQHandler
                 DCD     PWM22_IRQHandler
@@ -237,18 +301,18 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     NFCT_IRQHandler
                 DCD     TEMP_IRQHandler
                 DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     GPIOTE20_0_IRQHandler
+                DCD     GPIOTE20_1_IRQHandler
                 DCD     TAMPC_IRQHandler
-                DCD     I2S_IRQHandler
+                DCD     I2S20_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     QDEC20_IRQHandler
                 DCD     QDEC21_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     GRTC_0_IRQHandler
+                DCD     GRTC_1_IRQHandler
+                DCD     GRTC_2_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -282,78 +346,14 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     SERIAL30_IRQHandler
                 DCD     RTC30_IRQHandler
-                DCD     COMP_IRQHandler
-                DCD     LPCOMP_IRQHandler
+                DCD     COMP_LPCOMP_IRQHandler
+                DCD     0                         ; Reserved
                 DCD     WDT30_IRQHandler
                 DCD     WDT31_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     GPIOTE30_0_IRQHandler
                 DCD     GPIOTE30_1_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     CLOCK_POWER_IRQHandler
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -637,26 +637,29 @@ SysTick_Handler PROC
 
 Default_Handler PROC
 
+                EXPORT   SWI00_IRQHandler [WEAK]
+                EXPORT   SWI01_IRQHandler [WEAK]
+                EXPORT   SWI02_IRQHandler [WEAK]
+                EXPORT   SWI03_IRQHandler [WEAK]
                 EXPORT   SPU00_IRQHandler [WEAK]
                 EXPORT   MPC00_IRQHandler [WEAK]
                 EXPORT   AAR00_CCM00_IRQHandler [WEAK]
                 EXPORT   ECB00_IRQHandler [WEAK]
                 EXPORT   CRACEN_IRQHandler [WEAK]
                 EXPORT   SERIAL00_IRQHandler [WEAK]
-                EXPORT   VPR_IRQHandler [WEAK]
+                EXPORT   RRAMC_IRQHandler [WEAK]
+                EXPORT   VPR00_IRQHandler [WEAK]
+                EXPORT   CTRLAP_IRQHandler [WEAK]
+                EXPORT   CM33SS_IRQHandler [WEAK]
+                EXPORT   TIMER00_IRQHandler [WEAK]
                 EXPORT   SPU10_IRQHandler [WEAK]
                 EXPORT   TIMER10_IRQHandler [WEAK]
                 EXPORT   RTC10_IRQHandler [WEAK]
                 EXPORT   EGU10_IRQHandler [WEAK]
-                EXPORT   AAR30_CCM30_IRQHandler [WEAK]
-                EXPORT   ECB30_IRQHandler [WEAK]
+                EXPORT   AAR10_CCM10_IRQHandler [WEAK]
+                EXPORT   ECB10_IRQHandler [WEAK]
                 EXPORT   RADIO_0_IRQHandler [WEAK]
                 EXPORT   RADIO_1_IRQHandler [WEAK]
-                EXPORT   GPIOTE20_0_IRQHandler [WEAK]
-                EXPORT   GPIOTE20_1_IRQHandler [WEAK]
-                EXPORT   GRTC_0_IRQHandler [WEAK]
-                EXPORT   GRTC_1_IRQHandler [WEAK]
-                EXPORT   GRTC_2_IRQHandler [WEAK]
                 EXPORT   SPU20_IRQHandler [WEAK]
                 EXPORT   SERIAL20_IRQHandler [WEAK]
                 EXPORT   SERIAL21_IRQHandler [WEAK]
@@ -667,47 +670,53 @@ Default_Handler PROC
                 EXPORT   TIMER22_IRQHandler [WEAK]
                 EXPORT   TIMER23_IRQHandler [WEAK]
                 EXPORT   TIMER24_IRQHandler [WEAK]
-                EXPORT   PDM20_IRQHandler [WEAK]
-                EXPORT   PDM21_IRQHandler [WEAK]
                 EXPORT   PWM20_IRQHandler [WEAK]
                 EXPORT   PWM21_IRQHandler [WEAK]
                 EXPORT   PWM22_IRQHandler [WEAK]
                 EXPORT   SAADC_IRQHandler [WEAK]
                 EXPORT   NFCT_IRQHandler [WEAK]
                 EXPORT   TEMP_IRQHandler [WEAK]
+                EXPORT   GPIOTE20_0_IRQHandler [WEAK]
+                EXPORT   GPIOTE20_1_IRQHandler [WEAK]
                 EXPORT   TAMPC_IRQHandler [WEAK]
-                EXPORT   I2S_IRQHandler [WEAK]
+                EXPORT   I2S20_IRQHandler [WEAK]
                 EXPORT   QDEC20_IRQHandler [WEAK]
                 EXPORT   QDEC21_IRQHandler [WEAK]
+                EXPORT   GRTC_0_IRQHandler [WEAK]
+                EXPORT   GRTC_1_IRQHandler [WEAK]
+                EXPORT   GRTC_2_IRQHandler [WEAK]
                 EXPORT   SPU30_IRQHandler [WEAK]
                 EXPORT   SERIAL30_IRQHandler [WEAK]
                 EXPORT   RTC30_IRQHandler [WEAK]
-                EXPORT   COMP_IRQHandler [WEAK]
-                EXPORT   LPCOMP_IRQHandler [WEAK]
+                EXPORT   COMP_LPCOMP_IRQHandler [WEAK]
                 EXPORT   WDT30_IRQHandler [WEAK]
                 EXPORT   WDT31_IRQHandler [WEAK]
                 EXPORT   GPIOTE30_0_IRQHandler [WEAK]
                 EXPORT   GPIOTE30_1_IRQHandler [WEAK]
+                EXPORT   CLOCK_POWER_IRQHandler [WEAK]
+SWI00_IRQHandler
+SWI01_IRQHandler
+SWI02_IRQHandler
+SWI03_IRQHandler
 SPU00_IRQHandler
 MPC00_IRQHandler
 AAR00_CCM00_IRQHandler
 ECB00_IRQHandler
 CRACEN_IRQHandler
 SERIAL00_IRQHandler
-VPR_IRQHandler
+RRAMC_IRQHandler
+VPR00_IRQHandler
+CTRLAP_IRQHandler
+CM33SS_IRQHandler
+TIMER00_IRQHandler
 SPU10_IRQHandler
 TIMER10_IRQHandler
 RTC10_IRQHandler
 EGU10_IRQHandler
-AAR30_CCM30_IRQHandler
-ECB30_IRQHandler
+AAR10_CCM10_IRQHandler
+ECB10_IRQHandler
 RADIO_0_IRQHandler
 RADIO_1_IRQHandler
-GPIOTE20_0_IRQHandler
-GPIOTE20_1_IRQHandler
-GRTC_0_IRQHandler
-GRTC_1_IRQHandler
-GRTC_2_IRQHandler
 SPU20_IRQHandler
 SERIAL20_IRQHandler
 SERIAL21_IRQHandler
@@ -718,27 +727,30 @@ TIMER21_IRQHandler
 TIMER22_IRQHandler
 TIMER23_IRQHandler
 TIMER24_IRQHandler
-PDM20_IRQHandler
-PDM21_IRQHandler
 PWM20_IRQHandler
 PWM21_IRQHandler
 PWM22_IRQHandler
 SAADC_IRQHandler
 NFCT_IRQHandler
 TEMP_IRQHandler
+GPIOTE20_0_IRQHandler
+GPIOTE20_1_IRQHandler
 TAMPC_IRQHandler
-I2S_IRQHandler
+I2S20_IRQHandler
 QDEC20_IRQHandler
 QDEC21_IRQHandler
+GRTC_0_IRQHandler
+GRTC_1_IRQHandler
+GRTC_2_IRQHandler
 SPU30_IRQHandler
 SERIAL30_IRQHandler
 RTC30_IRQHandler
-COMP_IRQHandler
-LPCOMP_IRQHandler
+COMP_LPCOMP_IRQHandler
 WDT30_IRQHandler
 WDT31_IRQHandler
 GPIOTE30_0_IRQHandler
 GPIOTE30_1_IRQHandler
+CLOCK_POWER_IRQHandler
                 B .
                 ENDP
                 ALIGN

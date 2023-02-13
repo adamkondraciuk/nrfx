@@ -1,5 +1,4 @@
 /*
-
 Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
@@ -36,24 +35,54 @@ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-*/
+#ifndef NRF_DEVICE_MEM_H_
+#define NRF_DEVICE_MEM_H_
 
-#ifndef MOONLIGHT_H
-#define MOONLIGHT_H
-
-#ifdef __cplusplus
-    extern "C" {
+#ifndef __DEFAULT_STACK_SIZE
+    #define __DEFAULT_STACK_SIZE 16384
+#endif
+#ifndef __DEFAULT_HEAP_SIZE
+    #define __DEFAULT_HEAP_SIZE 16384
 #endif
 
-#include "moonlight_types.h"
+/* Device memory FlashS: */
+#define NRF_MEMORY_FLASHS_BASE 0x10000000
+#define NRF_MEMORY_FLASHS_SIZE 0x00100000
 
-#include "moonlight_global.h"
-#include "moonlight_application.h"
-#include "moonlight_flpr.h"
+/* Device memory FlashNS: */
+#define NRF_MEMORY_FLASHNS_BASE 0x00000000
+#define NRF_MEMORY_FLASHNS_SIZE 0x00100000
 
-#ifdef __cplusplus
-}
+/* Device memory UICR: */
+#define NRF_MEMORY_UICR_BASE 0x0FFFE000
+#define NRF_MEMORY_UICR_SIZE 0x00001000
+
+/* Device memory RAMS: */
+#define NRF_MEMORY_RAMS_BASE 0x30000000
+#define NRF_MEMORY_RAMS_SIZE 0x00040000
+
+/* Device memory RAMNS: */
+#define NRF_MEMORY_RAMNS_BASE 0x20000000
+#define NRF_MEMORY_RAMNS_SIZE 0x00040000
+
+/* Device memory PeripheralsAPBS: */
+#define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x54000000
+#define NRF_MEMORY_PERIPHERALSAPBS_SIZE 0x00200000
+
+/* Device memory PeripheralsAPBNS: */
+#define NRF_MEMORY_PERIPHERALSAPBNS_BASE 0x44000000
+#define NRF_MEMORY_PERIPHERALSAPBNS_SIZE 0x00200000
+
+/* Device memory PeripheralsAHB: */
+#define NRF_MEMORY_PERIPHERALSAHB_BASE 0x54840000
+#define NRF_MEMORY_PERIPHERALSAHB_SIZE 0x00003000
+
+/* Device memory SystemSFR: */
+#define NRF_MEMORY_SYSTEMSFR_BASE 0xE0000000
+#define NRF_MEMORY_SYSTEMSFR_SIZE 0x00100000
+
+
+
 #endif
-#endif /* MOONLIGHT_H */
-

@@ -85,6 +85,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9120_xxaa_memory.h"
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_xxaa_memory.h"
+#elif defined(MOONLIGHT_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "moonlight_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "moonlight_xxaa_flpr_memory.h"
+    #endif
 #else
     #error "Device must be defined. See nrf_mem.h."
 #endif

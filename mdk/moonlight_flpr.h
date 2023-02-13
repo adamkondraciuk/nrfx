@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -67,38 +67,38 @@ typedef enum {
   MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
   CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  VPR_0_IRQn                             = 0,        /*!< 0 VPR_0                                                              */
-  VPR_1_IRQn                             = 1,        /*!< 1 VPR_1                                                              */
-  VPR_2_IRQn                             = 2,        /*!< 2 VPR_2                                                              */
-  VPR_3_IRQn                             = 3,        /*!< 3 VPR_3                                                              */
-  VPR_4_IRQn                             = 4,        /*!< 4 VPR_4                                                              */
-  VPR_5_IRQn                             = 5,        /*!< 5 VPR_5                                                              */
-  VPR_6_IRQn                             = 6,        /*!< 6 VPR_6                                                              */
-  VPR_7_IRQn                             = 7,        /*!< 7 VPR_7                                                              */
-  VPR_8_IRQn                             = 8,        /*!< 8 VPR_8                                                              */
-  VPR_9_IRQn                             = 9,        /*!< 9 VPR_9                                                              */
-  VPR_10_IRQn                            = 10,       /*!< 10 VPR_10                                                            */
-  VPR_11_IRQn                            = 11,       /*!< 11 VPR_11                                                            */
-  VPR_12_IRQn                            = 12,       /*!< 12 VPR_12                                                            */
-  VPR_13_IRQn                            = 13,       /*!< 13 VPR_13                                                            */
-  VPR_14_IRQn                            = 14,       /*!< 14 VPR_14                                                            */
-  VPR_15_IRQn                            = 15,       /*!< 15 VPR_15                                                            */
-  VPR_16_IRQn                            = 16,       /*!< 16 VPR_16                                                            */
-  VPR_17_IRQn                            = 17,       /*!< 17 VPR_17                                                            */
-  VPR_18_IRQn                            = 18,       /*!< 18 VPR_18                                                            */
-  VPR_19_IRQn                            = 19,       /*!< 19 VPR_19                                                            */
-  VPR_20_IRQn                            = 20,       /*!< 20 VPR_20                                                            */
-  VPR_21_IRQn                            = 21,       /*!< 21 VPR_21                                                            */
-  VPR_22_IRQn                            = 22,       /*!< 22 VPR_22                                                            */
-  VPR_23_IRQn                            = 23,       /*!< 23 VPR_23                                                            */
-  VPR_24_IRQn                            = 24,       /*!< 24 VPR_24                                                            */
-  VPR_25_IRQn                            = 25,       /*!< 25 VPR_25                                                            */
-  VPR_26_IRQn                            = 26,       /*!< 26 VPR_26                                                            */
-  VPR_27_IRQn                            = 27,       /*!< 27 VPR_27                                                            */
-  VPR_28_IRQn                            = 28,       /*!< 28 VPR_28                                                            */
-  VPR_29_IRQn                            = 29,       /*!< 29 VPR_29                                                            */
-  VPR_30_IRQn                            = 30,       /*!< 30 VPR_30                                                            */
-  VPR_31_IRQn                            = 31,       /*!< 31 VPR_31                                                            */
+  VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
+  VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
+  VPRCLIC_2_IRQn                         = 2,        /*!< 2 VPRCLIC_2                                                          */
+  VPRCLIC_3_IRQn                         = 3,        /*!< 3 VPRCLIC_3                                                          */
+  VPRCLIC_4_IRQn                         = 4,        /*!< 4 VPRCLIC_4                                                          */
+  VPRCLIC_5_IRQn                         = 5,        /*!< 5 VPRCLIC_5                                                          */
+  VPRCLIC_6_IRQn                         = 6,        /*!< 6 VPRCLIC_6                                                          */
+  VPRCLIC_7_IRQn                         = 7,        /*!< 7 VPRCLIC_7                                                          */
+  VPRCLIC_8_IRQn                         = 8,        /*!< 8 VPRCLIC_8                                                          */
+  VPRCLIC_9_IRQn                         = 9,        /*!< 9 VPRCLIC_9                                                          */
+  VPRCLIC_10_IRQn                        = 10,       /*!< 10 VPRCLIC_10                                                        */
+  VPRCLIC_11_IRQn                        = 11,       /*!< 11 VPRCLIC_11                                                        */
+  VPRCLIC_12_IRQn                        = 12,       /*!< 12 VPRCLIC_12                                                        */
+  VPRCLIC_13_IRQn                        = 13,       /*!< 13 VPRCLIC_13                                                        */
+  VPRCLIC_14_IRQn                        = 14,       /*!< 14 VPRCLIC_14                                                        */
+  VPRCLIC_15_IRQn                        = 15,       /*!< 15 VPRCLIC_15                                                        */
+  VPRCLIC_16_IRQn                        = 16,       /*!< 16 VPRCLIC_16                                                        */
+  VPRCLIC_17_IRQn                        = 17,       /*!< 17 VPRCLIC_17                                                        */
+  VPRCLIC_18_IRQn                        = 18,       /*!< 18 VPRCLIC_18                                                        */
+  VPRCLIC_19_IRQn                        = 19,       /*!< 19 VPRCLIC_19                                                        */
+  VPRCLIC_20_IRQn                        = 20,       /*!< 20 VPRCLIC_20                                                        */
+  VPRCLIC_21_IRQn                        = 21,       /*!< 21 VPRCLIC_21                                                        */
+  VPRCLIC_22_IRQn                        = 22,       /*!< 22 VPRCLIC_22                                                        */
+  VPRCLIC_23_IRQn                        = 23,       /*!< 23 VPRCLIC_23                                                        */
+  VPRCLIC_24_IRQn                        = 24,       /*!< 24 VPRCLIC_24                                                        */
+  VPRCLIC_25_IRQn                        = 25,       /*!< 25 VPRCLIC_25                                                        */
+  VPRCLIC_26_IRQn                        = 26,       /*!< 26 VPRCLIC_26                                                        */
+  VPRCLIC_27_IRQn                        = 27,       /*!< 27 VPRCLIC_27                                                        */
+  VPRCLIC_28_IRQn                        = 28,       /*!< 28 VPRCLIC_28                                                        */
+  VPRCLIC_29_IRQn                        = 29,       /*!< 29 VPRCLIC_29                                                        */
+  VPRCLIC_30_IRQn                        = 30,       /*!< 30 VPRCLIC_30                                                        */
+  VPRCLIC_31_IRQn                        = 31,       /*!< 31 VPRCLIC_31                                                        */
   SPU00_IRQn                             = 64,       /*!< 64 SPU00                                                             */
   MPC00_IRQn                             = 65,       /*!< 65 MPC00                                                             */
   AAR00_CCM00_IRQn                       = 70,       /*!< 70 AAR00_CCM00                                                       */
@@ -107,6 +107,8 @@ typedef enum {
   SERIAL00_IRQn                          = 74,       /*!< 74 SERIAL00                                                          */
   RRAMC_IRQn                             = 75,       /*!< 75 RRAMC                                                             */
   VPR00_IRQn                             = 76,       /*!< 76 VPR00                                                             */
+  CTRLAP_IRQn                            = 81,       /*!< 81 CTRLAP                                                            */
+  TIMER00_IRQn                           = 84,       /*!< 84 TIMER00                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
@@ -125,8 +127,6 @@ typedef enum {
   TIMER22_IRQn                           = 204,      /*!< 204 TIMER22                                                          */
   TIMER23_IRQn                           = 205,      /*!< 205 TIMER23                                                          */
   TIMER24_IRQn                           = 206,      /*!< 206 TIMER24                                                          */
-  PDM20_IRQn                             = 208,      /*!< 208 PDM20                                                            */
-  PDM21_IRQn                             = 209,      /*!< 209 PDM21                                                            */
   PWM20_IRQn                             = 210,      /*!< 210 PWM20                                                            */
   PWM21_IRQn                             = 211,      /*!< 211 PWM21                                                            */
   PWM22_IRQn                             = 212,      /*!< 212 PWM22                                                            */
@@ -166,7 +166,7 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             176             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< moonlight_flpr System Library                                        */
@@ -205,22 +205,22 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPR_NS_BASE              0xF0000000UL
+#define NRF_FLPR_VPRCLIC_NS_BASE          0xF0000000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPR_NS                   ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_NS_BASE)
+#define NRF_FLPR_VPRCLIC_NS               ((NRF_CLIC_Type*)                     NRF_FLPR_VPRCLIC_NS_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
 /* =========================================================================================================================== */
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_NS
+  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_FLPR_VPR                            NRF_FLPR_VPR_NS
+  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
 #endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */
@@ -228,7 +228,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_FLPR                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_VPR                                 NRF_FLPR_VPR
+  #define NRF_VPRCLIC                             NRF_FLPR_VPRCLIC
 #endif                                               /*!< NRF_FLPR                                                             */
 
 /* ========================================== End of section using anonymous unions ========================================== */

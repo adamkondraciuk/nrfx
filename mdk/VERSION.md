@@ -19,4 +19,4 @@ Following table presents current MDK version for specified targets:
 |liliumfp1 |8.46.0 Internal|
 |nrf9230   |8.51.0 Leavings|
 |nrf7140   |8.51.0 Jannex  |
-|moonlight |8.51.0 Dionysus|
+|moonlight |8.52.0 Eos     |
