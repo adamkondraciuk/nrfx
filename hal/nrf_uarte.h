@@ -709,7 +709,11 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t const * nrf_uarte_tx_buffer_get(NRF_UARTE_Type * p_reg)
 {
+#if NRF_UARTE_HAS_DMA_REG
+    return (uint8_t const *)p_reg->DMA.TX.PTR;
+#else
     return (uint8_t const *)p_reg->TXD.PTR;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_uarte_tx_amount_get(NRF_UARTE_Type const * p_reg)
@@ -736,7 +740,11 @@ NRF_STATIC_INLINE void nrf_uarte_rx_buffer_set(NRF_UARTE_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t * nrf_uarte_rx_buffer_get(NRF_UARTE_Type * p_reg)
 {
+#if NRF_UARTE_HAS_DMA_REG
+    return (uint8_t *)p_reg->DMA.RX.PTR;
+#else
     return (uint8_t *)p_reg->RXD.PTR;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_uarte_rx_amount_get(NRF_UARTE_Type const * p_reg)
