@@ -63,7 +63,7 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
-/* Start of GPIOTE Extended section                                                                 */
+/* Start of GPIOTE Extended section                                                               */
 /*------------------------------------------------------------------------------------------------*/
 
 #define TE_MANAGED_PORTS_MASK        \
@@ -75,7 +75,35 @@ extern "C" {
         (NRF_GPIOTE_INT_PORT_MASK))
 
 /*------------------------------------------------------------------------------------------------*/
-/* End of GPIOTE Extended section                                                                   */
+/* End of GPIOTE Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
+/* Start of PRS Extended section                                                                  */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA)
+    #define NRF_PRS_BOX_EXT
+    #define NRFX_PRS_BOX_0_ADDR NRF_UARTE130
+    #define NRFX_PRS_BOX_1_ADDR NRF_UARTE131
+    #define NRFX_PRS_BOX_2_ADDR NRF_UARTE132
+    #define NRFX_PRS_BOX_3_ADDR NRF_UARTE133
+    #define NRFX_PRS_BOX_4_ADDR NRF_UARTE134
+    #define NRFX_PRS_BOX_5_ADDR NRF_UARTE135
+    #define NRFX_PRS_BOX_6_ADDR NRF_UARTE136
+    #define NRFX_PRS_BOX_7_ADDR NRF_UARTE137
+    #define NRFX_PRS_BOX_8_ADDR NRF_UARTE120
+#elif defined(LUMOS_XXAA)
+    #define NRF_PRS_BOX_EXT
+    #define NRFX_PRS_BOX_0_ADDR NRF_UARTE00
+    #define NRFX_PRS_BOX_1_ADDR NRF_UARTE20
+    #define NRFX_PRS_BOX_2_ADDR NRF_UARTE21
+    #define NRFX_PRS_BOX_3_ADDR NRF_UARTE22
+    #define NRFX_PRS_BOX_4_ADDR NRF_UARTE30
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of PRS Extended section                                                                    */
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
