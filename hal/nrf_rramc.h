@@ -42,7 +42,7 @@ extern "C" {
 #define NRF_RRAMC_FORCEOVERRIDE_MAX RRAMC_PCGCSLAVE_FORCEOVERRIDE_MaxCount
 
 /** @brief Max size of the index array related to the AXI clock frequencies. */
-#define NRF_RRAMC_FREQUENCY_INDEX_MAX RRAMC_WAITSTATES_FREQ_MaxCount
+#define NRF_RRAMC_FREQUENCY_INDEX_MAX RRAMC_WAITSTATES_VALUE_MaxCount
 
 /** @brief RRAMC tasks. */
 typedef enum
@@ -121,10 +121,6 @@ typedef enum
     NRF_RRAMC_POWER_LP_IGNORE_1_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK1_Msk, ///< Mask to ignore consumer [1] request to go into low power mode.
     NRF_RRAMC_POWER_LP_IGNORE_2_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK2_Msk, ///< Mask to ignore consumer [2] request to go into low power mode.
     NRF_RRAMC_POWER_LP_IGNORE_3_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK3_Msk, ///< Mask to ignore consumer [3] request to go into low power mode.
-    NRF_RRAMC_POWER_LP_IGNORE_4_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK4_Msk, ///< Mask to ignore consumer [4] request to go into low power mode.
-    NRF_RRAMC_POWER_LP_IGNORE_5_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK5_Msk, ///< Mask to ignore consumer [5] request to go into low power mode.
-    NRF_RRAMC_POWER_LP_IGNORE_6_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK6_Msk, ///< Mask to ignore consumer [6] request to go into low power mode.
-    NRF_RRAMC_POWER_LP_IGNORE_7_MASK = RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK7_Msk, ///< Mask to ignore consumer [7] request to go into low power mode.
 } nrf_rramc_power_lp_ignore_mask_t;
 
 /** @brief VDD force state. */
@@ -160,9 +156,9 @@ typedef struct
 /** @brief Preload timeout value for waiting for a next write. */
 typedef struct
 {
-    uint16_t value;        ///< Preload value expressed in clock cycles.
-    bool     direct_write; ///< True if write to the RRAM is to be triggered on the next timeout, false otherwise.
-} nrf_rramc_readynext_timeout_t;
+    uint16_t value;  ///< Preload value expressed in clock cycles.
+    bool     enable; ///< True if write to the RRAM is to be triggered on the next timeout, false otherwise.
+} nrf_rramc_ready_next_timeout_t;
 
 /** @brief Power configuration. */
 typedef struct
@@ -200,11 +196,18 @@ typedef struct
     uint8_t size;     ///< Size in KBytes.
 } nrf_rramc_region_t;
 
+/** @brief Configuration for glitch detector mode. */
+typedef enum
+{
+    NRF_RRAMC_GLDETECT_MODE_HIGH_PASS_FILTER = RRAMC_GLITCHDETECTOR_CONFIG_MODE_HighPassFilter, ///< High pass filter mode.
+    NRF_RRAMC_GLDETECT_MODE_CAP_DIV          = RRAMC_GLITCHDETECTOR_CONFIG_MODE_CapDiv,         ///< Cap divider mode.
+} nrf_rramc_gldetect_mode_t;
+
 /** @brief Configuration for glitch detectors. */
 typedef struct
 {
-    bool enable; ///< True if glitch detector is to be enabled, false otherwise.
-    bool dtb;    ///< True if DTB for glitch detector is to be enabled, false otherwise.
+    bool enable;                    ///< True if glitch detector is to be enabled, false otherwise.
+    nrf_rramc_gldetect_mode_t mode; ///< Glitch detector mode.
 } nrf_rramc_gldetect_config_t;
 
 /** @brief Trim configuration for glitch detectors. */
@@ -492,8 +495,8 @@ NRF_STATIC_INLINE void nrf_rramc_waitstates_set(NRF_RRAMC_Type *               p
  * @param[out] p_config Pointer to the structure to be filled with information about
  *                      preload timeout value.
  */
-NRF_STATIC_INLINE void nrf_rramc_ready_next_timeout_get(NRF_RRAMC_Type const *          p_reg,
-                                                        nrf_rramc_readynext_timeout_t * p_config);
+NRF_STATIC_INLINE void nrf_rramc_ready_next_timeout_get(NRF_RRAMC_Type const *           p_reg,
+                                                        nrf_rramc_ready_next_timeout_t * p_config);
 
 /**
  * @brief Function for setting preload timeout value for waiting for a next write.
@@ -503,8 +506,8 @@ NRF_STATIC_INLINE void nrf_rramc_ready_next_timeout_get(NRF_RRAMC_Type const *  
  *                     timeout value.
  */
 NRF_STATIC_INLINE
-void nrf_rramc_ready_next_timeout_set(NRF_RRAMC_Type *                      p_reg,
-                                      nrf_rramc_readynext_timeout_t const * p_config);
+void nrf_rramc_ready_next_timeout_set(NRF_RRAMC_Type *                       p_reg,
+                                      nrf_rramc_ready_next_timeout_t const * p_config);
 
 /**
  * @brief Function for getting the RRAMC power configuration.
@@ -605,17 +608,17 @@ NRF_STATIC_INLINE void nrf_rramc_erase_all_set(NRF_RRAMC_Type * p_reg);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @retval true  Erase of FICR started.
+ * @retval true  Erase of SICR, UICR and FICR started.
  * @retval false No operation.
  */
-NRF_STATIC_INLINE bool nrf_rramc_erase_ficr_check(NRF_RRAMC_Type const * p_reg);
+NRF_STATIC_INLINE bool nrf_rramc_erase_mass_check(NRF_RRAMC_Type const * p_reg);
 
 /**
- * @brief Function for erasing whole RRAM.
+ * @brief Function for erasing whole RRAM, including SICR, UICR and FICR.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-NRF_STATIC_INLINE void nrf_rramc_erase_ficr_set(NRF_RRAMC_Type * p_reg);
+NRF_STATIC_INLINE void nrf_rramc_erase_mass_set(NRF_RRAMC_Type * p_reg);
 
 /**
  * @brief Function for getting the start address of the specified RRAMC region.
@@ -664,25 +667,21 @@ NRF_STATIC_INLINE void nrf_rramc_region_config_set(NRF_RRAMC_Type *           p_
 /**
  * @brief Function for getting the configuration of the specified glitch detector.
  *
- * @param[in]  p_reg        Pointer to the structure of registers of the peripheral.
- * @param[in]  gldetect_num Index of the specified glitch detector.
- * @param[out] p_config     Pointer to the configuration for glitch detector.
+ * @param[in]  p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[out] p_config Pointer to the configuration for glitch detector.
  */
 NRF_STATIC_INLINE
 void nrf_rramc_giltchdetector_config_get(NRF_RRAMC_Type const *        p_reg,
-                                         uint8_t                       gldetect_num,
                                          nrf_rramc_gldetect_config_t * p_config);
 
 /**
  * @brief Function for setting the configuration of a specified glitch detector.
  *
- * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
- * @param[in] gldetect_num Index of the specified glitch detector.
- * @param[in] p_config     Pointer to the configuration for glitch detector.
+ * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
+ * @param[in] p_config Pointer to the configuration for glitch detector.
  */
 NRF_STATIC_INLINE
 void nrf_rramc_giltchdetector_config_set(NRF_RRAMC_Type *                    p_reg,
-                                         uint8_t                             gldetect_num,
                                          nrf_rramc_gldetect_config_t const * p_config);
 
 /**
@@ -917,23 +916,25 @@ NRF_STATIC_INLINE void nrf_rramc_waitstates_set(NRF_RRAMC_Type *               p
                         ((uint32_t)p_config->read_done         << RRAMC_WAITSTATES_RDONE_Pos);
 }
 
-NRF_STATIC_INLINE void nrf_rramc_ready_next_timeout_get(NRF_RRAMC_Type const *          p_reg,
-                                                        nrf_rramc_readynext_timeout_t * p_config)
+NRF_STATIC_INLINE void nrf_rramc_ready_next_timeout_get(NRF_RRAMC_Type const *           p_reg,
+                                                        nrf_rramc_ready_next_timeout_t * p_config)
 {
     p_config->value = (uint16_t)((p_reg->READYNEXTTIMEOUT & RRAMC_READYNEXTTIMEOUT_VALUE_Msk) >>
                                  RRAMC_READYNEXTTIMEOUT_VALUE_Pos);
-    p_config->direct_write = (bool)((p_reg->READYNEXTTIMEOUT & RRAMC_READYNEXTTIMEOUT_DW_Msk) >>
-                                    RRAMC_READYNEXTTIMEOUT_DW_Pos);
+    p_config->enable = ((p_reg->READYNEXTTIMEOUT & RRAMC_READYNEXTTIMEOUT_EN_Msk)
+                        >> RRAMC_READYNEXTTIMEOUT_EN_Pos) == RRAMC_READYNEXTTIMEOUT_EN_Enable;
 }
 
 NRF_STATIC_INLINE void
-nrf_rramc_ready_next_timeout_set(NRF_RRAMC_Type *                      p_reg,
-                                 nrf_rramc_readynext_timeout_t const * p_config)
+nrf_rramc_ready_next_timeout_set(NRF_RRAMC_Type *                       p_reg,
+                                 nrf_rramc_ready_next_timeout_t const * p_config)
 {
     NRFX_ASSERT(p_config->value <= NRF_RRAMC_READYNEXTTIMEOUT_MAX);
 
     p_reg->READYNEXTTIMEOUT = ((uint32_t)p_config->value << RRAMC_READYNEXTTIMEOUT_VALUE_Pos) |
-                              ((uint32_t)p_config->direct_write << RRAMC_READYNEXTTIMEOUT_DW_Pos);
+                              ((p_config->enable ? RRAMC_READYNEXTTIMEOUT_EN_Enable :
+                                                   RRAMC_READYNEXTTIMEOUT_EN_Disable)
+                               << RRAMC_READYNEXTTIMEOUT_EN_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_rramc_power_config_get(NRF_RRAMC_Type const * p_reg,
@@ -943,8 +944,8 @@ NRF_STATIC_INLINE void nrf_rramc_power_config_get(NRF_RRAMC_Type const * p_reg,
                                           RRAMC_POWER_CONFIG_ACCESSTIMEOUT_Msk) >>
                                           RRAMC_POWER_CONFIG_ACCESSTIMEOUT_Pos);
     p_config->abort_on_pof = (bool)((p_reg->POWER.CONFIG &
-                                    RRAMC_POWER_CONFIG_POWERONFAILURE_Msk) >>
-                                    RRAMC_POWER_CONFIG_POWERONFAILURE_Pos);
+                                    RRAMC_POWER_CONFIG_POF_Msk) >>
+                                    RRAMC_POWER_CONFIG_POF_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_rramc_power_config_set(NRF_RRAMC_Type *          p_reg,
@@ -952,7 +953,7 @@ NRF_STATIC_INLINE void nrf_rramc_power_config_set(NRF_RRAMC_Type *          p_re
 {
     p_reg->POWER.CONFIG =
             ((uint32_t)p_config->access_timeout << RRAMC_POWER_CONFIG_ACCESSTIMEOUT_Pos) |
-            ((uint32_t)p_config->abort_on_pof   << RRAMC_POWER_CONFIG_POWERONFAILURE_Pos);
+            ((uint32_t)p_config->abort_on_pof   << RRAMC_POWER_CONFIG_POF_Pos);
 }
 
 NRF_STATIC_INLINE
@@ -986,11 +987,7 @@ NRF_STATIC_INLINE void nrf_rramc_power_lp_config_get(NRF_RRAMC_Type const * p_re
                                        (NRF_RRAMC_POWER_LP_IGNORE_0_MASK |
                                         NRF_RRAMC_POWER_LP_IGNORE_1_MASK |
                                         NRF_RRAMC_POWER_LP_IGNORE_2_MASK |
-                                        NRF_RRAMC_POWER_LP_IGNORE_3_MASK |
-                                        NRF_RRAMC_POWER_LP_IGNORE_4_MASK |
-                                        NRF_RRAMC_POWER_LP_IGNORE_5_MASK |
-                                        NRF_RRAMC_POWER_LP_IGNORE_6_MASK |
-                                        NRF_RRAMC_POWER_LP_IGNORE_7_MASK)) >>
+                                        NRF_RRAMC_POWER_LP_IGNORE_3_MASK)) >>
                                         RRAMC_POWER_LOWPOWERCONFIG_LOWPOWERMASK0_Pos);
 }
 
@@ -1033,14 +1030,14 @@ NRF_STATIC_INLINE void nrf_rramc_erase_all_set(NRF_RRAMC_Type * p_reg)
     p_reg->ERASE.ERASEALL = RRAMC_ERASE_ERASEALL_ERASE_Erase;
 }
 
-NRF_STATIC_INLINE bool nrf_rramc_erase_ficr_check(NRF_RRAMC_Type const * p_reg)
+NRF_STATIC_INLINE bool nrf_rramc_erase_mass_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)(p_reg->ERASE.ERASEFICR);
+    return (bool)(p_reg->ERASE.MASSERASE);
 }
 
-NRF_STATIC_INLINE void nrf_rramc_erase_ficr_set(NRF_RRAMC_Type * p_reg)
+NRF_STATIC_INLINE void nrf_rramc_erase_mass_set(NRF_RRAMC_Type * p_reg)
 {
-    p_reg->ERASE.ERASEFICR = RRAMC_ERASE_ERASEFICR_ERASE_Erase;
+    p_reg->ERASE.MASSERASE = RRAMC_ERASE_MASSERASE_ERASE_Erase;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_rramc_region_address_get(NRF_RRAMC_Type const * p_reg,
@@ -1107,57 +1104,51 @@ NRF_STATIC_INLINE void nrf_rramc_region_config_set(NRF_RRAMC_Type *           p_
 
 NRF_STATIC_INLINE
 void nrf_rramc_giltchdetector_config_get(NRF_RRAMC_Type const *        p_reg,
-                                         uint8_t                       gldetect_num,
                                          nrf_rramc_gldetect_config_t * p_config)
 {
-    NRFX_ASSERT(gldetect_num < NRF_RRAMC_GLITCHDETECTED_MAX);
-
-    p_config->enable = (bool)((p_reg->POWER.GLITCHDETECTOR.CONFIG[gldetect_num] &
-                              RRAMC_POWER_GLITCHDETECTOR_CONFIG_ENABLE_Msk) >>
-                              RRAMC_POWER_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
-    p_config->dtb = (bool)((p_reg->POWER.GLITCHDETECTOR.CONFIG[gldetect_num] & 
-                           RRAMC_POWER_GLITCHDETECTOR_CONFIG_DTBENABLE_Msk) >>
-                           RRAMC_POWER_GLITCHDETECTOR_CONFIG_DTBENABLE_Pos);
+    p_config->enable = (bool)((p_reg->GLITCHDETECTOR.CONFIG &
+                              RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Msk) >>
+                              RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
+    p_config->mode = (nrf_rramc_gldetect_mode_t)((p_reg->GLITCHDETECTOR.CONFIG & 
+                           RRAMC_GLITCHDETECTOR_CONFIG_MODE_Msk) >>
+                           RRAMC_GLITCHDETECTOR_CONFIG_MODE_Pos);
 }
 
 NRF_STATIC_INLINE
 void nrf_rramc_giltchdetector_config_set(NRF_RRAMC_Type *                    p_reg,
-                                         uint8_t                             gldetect_num,
                                          nrf_rramc_gldetect_config_t const * p_config)
 {
-    NRFX_ASSERT(gldetect_num < NRF_RRAMC_GLITCHDETECTED_MAX);
-
-    p_reg->POWER.GLITCHDETECTOR.CONFIG[gldetect_num] =
-        ((uint32_t)p_config->enable << RRAMC_POWER_GLITCHDETECTOR_CONFIG_ENABLE_Pos) |
-        ((uint32_t)p_config->dtb    << RRAMC_POWER_GLITCHDETECTOR_CONFIG_DTBENABLE_Pos);
+    p_reg->GLITCHDETECTOR.CONFIG =
+        ((uint32_t)p_config->enable << RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos) |
+        ((uint32_t)p_config->mode   << RRAMC_GLITCHDETECTOR_CONFIG_MODE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_rramc_giltchdetectors_trim_get(NRF_RRAMC_Type const *      p_reg,
                                                           nrf_rramc_gldetect_trim_t * p_config) 
 {
-    p_config->vrefl_dvdd = (uint8_t)((p_reg->POWER.GLITCHDETECTOR.TRIM &
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL0V9_Msk) >>
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL0V9_Pos);
-    p_config->vrefl_vdd  = (uint8_t)((p_reg->POWER.GLITCHDETECTOR.TRIM &
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL3V0_Msk) >>
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL3V0_Pos);
-    p_config->vrefh_dvdd = (uint8_t)((p_reg->POWER.GLITCHDETECTOR.TRIM &
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH0V9_Msk) >>
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH0V9_Pos);
-    p_config->vrefh_vdd  = (uint8_t)((p_reg->POWER.GLITCHDETECTOR.TRIM &
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH3V0_Msk) >>
-                                     RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH3V0_Pos);
+    p_config->vrefl_dvdd = (uint8_t)((p_reg->GLITCHDETECTOR.TRIM &
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFLDVDD_Msk) >>
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFLDVDD_Pos);
+    p_config->vrefl_vdd  = (uint8_t)((p_reg->GLITCHDETECTOR.TRIM &
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFLVDD_Msk) >>
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFLVDD_Pos);
+    p_config->vrefh_dvdd = (uint8_t)((p_reg->GLITCHDETECTOR.TRIM &
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFHDVDD_Msk) >>
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFHDVDD_Pos);
+    p_config->vrefh_vdd  = (uint8_t)((p_reg->GLITCHDETECTOR.TRIM &
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFHVDD_Msk) >>
+                                     RRAMC_GLITCHDETECTOR_TRIM_VREFHVDD_Pos);
 }
 
 NRF_STATIC_INLINE
 void nrf_rramc_giltchdetectors_trim_set(NRF_RRAMC_Type *                  p_reg,
                                         nrf_rramc_gldetect_trim_t const * p_config)
 {
-    p_reg->POWER.GLITCHDETECTOR.TRIM =
-        ((uint32_t)p_config->vrefl_dvdd << RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL0V9_Pos) |
-        ((uint32_t)p_config->vrefl_vdd  << RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGL3V0_Pos) |
-        ((uint32_t)p_config->vrefh_dvdd << RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH0V9_Pos) |
-        ((uint32_t)p_config->vrefh_vdd  << RRAMC_POWER_GLITCHDETECTOR_TRIM_PROGH3V0_Pos);
+    p_reg->GLITCHDETECTOR.TRIM =
+        ((uint32_t)p_config->vrefl_dvdd << RRAMC_GLITCHDETECTOR_TRIM_VREFLDVDD_Pos) |
+        ((uint32_t)p_config->vrefl_vdd  << RRAMC_GLITCHDETECTOR_TRIM_VREFLVDD_Pos)  |
+        ((uint32_t)p_config->vrefh_dvdd << RRAMC_GLITCHDETECTOR_TRIM_VREFHDVDD_Pos) |
+        ((uint32_t)p_config->vrefh_vdd  << RRAMC_GLITCHDETECTOR_TRIM_VREFHVDD_Pos);
 }
 
 NRF_STATIC_INLINE uint8_t nrf_rramc_pcgslave_penalty_get(NRF_RRAMC_Type const * p_reg,
