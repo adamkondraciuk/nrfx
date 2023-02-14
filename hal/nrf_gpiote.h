@@ -79,6 +79,13 @@ extern "C" {
 #define NRF_GPIOTE_HAS_MULTIPLE_INT 0
 #endif
 
+#if defined(GPIOTE_INTEN0_PORT0SECURE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether secure and non-secure port interrupts are present. */
+#define NRF_GPIOTE_HAS_SECURE_PORT_INT 1
+#else
+#define NRF_GPIOTE_HAS_SECURE_PORT_INT 0
+#endif
+
 /** @brief Polarity for the GPIOTE channel. */
 typedef enum
 {
@@ -165,6 +172,7 @@ typedef enum
     NRF_GPIOTE_EVENT_PORT_6   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6]),  /**<  Port event 6. */
     NRF_GPIOTE_EVENT_PORT_7   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7]),  /**<  Port event 7. */
     NRF_GPIOTE_EVENT_PORT_8   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[8]),  /**<  Port event 8. */
+#if (GPIOTE_PORT_NUM > 8) || defined(__NRFX_DOXYGEN__)
     NRF_GPIOTE_EVENT_PORT_9   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[9]),  /**<  Port event 9. */
     NRF_GPIOTE_EVENT_PORT_10  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[10]), /**<  Port event 10. */
     NRF_GPIOTE_EVENT_PORT_11  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[11]), /**<  Port event 11. */
@@ -172,6 +180,7 @@ typedef enum
     NRF_GPIOTE_EVENT_PORT_13  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[13]), /**<  Port event 13. */
     NRF_GPIOTE_EVENT_PORT_14  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[14]), /**<  Port event 14. */
     NRF_GPIOTE_EVENT_PORT_15  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[15]), /**<  Port event 15. */
+#endif
 #endif
 } nrf_gpiote_event_t;
 
@@ -187,6 +196,16 @@ typedef enum
     NRF_GPIOTE_INT_IN5_MASK    = GPIOTE_INTENSET0_IN5_Msk,    /**< GPIOTE interrupt from IN5. */
     NRF_GPIOTE_INT_IN6_MASK    = GPIOTE_INTENSET0_IN6_Msk,    /**< GPIOTE interrupt from IN6. */
     NRF_GPIOTE_INT_IN7_MASK    = GPIOTE_INTENSET0_IN7_Msk,    /**< GPIOTE interrupt from IN7. */
+#if NRF_GPIOTE_HAS_SECURE_PORT_INT
+    NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT0NONSECURE_Msk, /**< GPIOTE interrupt from PORT0 nonsecure event. */
+    NRF_GPIOTE_INT_PORT0_SECURE_MASK     = GPIOTE_INTENSET0_PORT0SECURE_Msk,    /**< GPIOTE interrupt from PORT0 secure event. */
+    NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT1NONSECURE_Msk, /**< GPIOTE interrupt from PORT1 nonsecure event. */
+    NRF_GPIOTE_INT_PORT1_SECURE_MASK     = GPIOTE_INTENSET0_PORT1SECURE_Msk,    /**< GPIOTE interrupt from PORT1 secure event. */
+    NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT2NONSECURE_Msk, /**< GPIOTE interrupt from PORT2 nonsecure event. */
+    NRF_GPIOTE_INT_PORT2_SECURE_MASK     = GPIOTE_INTENSET0_PORT2SECURE_Msk,    /**< GPIOTE interrupt from PORT2 secure event. */
+    NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT3NONSECURE_Msk, /**< GPIOTE interrupt from PORT3 nonsecure event. */
+    NRF_GPIOTE_INT_PORT3_SECURE_MASK     = GPIOTE_INTENSET0_PORT3SECURE_Msk,    /**< GPIOTE interrupt from PORT3 secure event. */
+#else
     NRF_GPIOTE_INT_PORT0_MASK  = GPIOTE_INTENSET0_PORT0_Msk,  /**< GPIOTE interrupt from PORT0 event. */
     NRF_GPIOTE_INT_PORT1_MASK  = GPIOTE_INTENSET0_PORT1_Msk,  /**< GPIOTE interrupt from PORT1 event. */
     NRF_GPIOTE_INT_PORT2_MASK  = GPIOTE_INTENSET0_PORT2_Msk,  /**< GPIOTE interrupt from PORT2 event. */
@@ -203,6 +222,7 @@ typedef enum
     NRF_GPIOTE_INT_PORT13_MASK = GPIOTE_INTENSET0_PORT13_Msk, /**< GPIOTE interrupt from PORT13 event. */
     NRF_GPIOTE_INT_PORT14_MASK = GPIOTE_INTENSET0_PORT14_Msk, /**< GPIOTE interrupt from PORT14 event. */
     NRF_GPIOTE_INT_PORT15_MASK = GPIOTE_INTENSET0_PORT15_Msk, /**< GPIOTE interrupt from PORT15 event. */
+#endif // NRF_GPIOTE_HAS_SECURE_PORT_INT
 #else
     NRF_GPIOTE_INT_IN0_MASK  = GPIOTE_INTENSET_IN0_Msk,  /**< GPIOTE interrupt from IN0. */
     NRF_GPIOTE_INT_IN1_MASK  = GPIOTE_INTENSET_IN1_Msk,  /**< GPIOTE interrupt from IN1. */
@@ -228,7 +248,19 @@ typedef enum
                                 NRF_GPIOTE_INT_IN4_MASK | NRF_GPIOTE_INT_IN5_MASK |\
                                 NRF_GPIOTE_INT_IN6_MASK | NRF_GPIOTE_INT_IN7_MASK)
 #endif
-#if NRF_GPIOTE_HAS_MULTIPLE_INT || defined(__NRFX_DOXYGEN__)
+
+#if NRF_GPIOTE_HAS_MULTIPLE_INT
+#if NRF_GPIOTE_HAS_SECURE_PORT_INT
+/** @brief Mask holding positions of available GPIOTE port interrupts. */
+#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK |\
+                                  NRF_GPIOTE_INT_PORT0_SECURE_MASK     |\
+                                  NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK |\
+                                  NRF_GPIOTE_INT_PORT1_SECURE_MASK     |\
+                                  NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK |\
+                                  NRF_GPIOTE_INT_PORT2_SECURE_MASK     |\
+                                  NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK |\
+                                  NRF_GPIOTE_INT_PORT3_SECURE_MASK)
+#else
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
 #define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_MASK  | NRF_GPIOTE_INT_PORT1_MASK  |\
                                   NRF_GPIOTE_INT_PORT2_MASK  | NRF_GPIOTE_INT_PORT3_MASK  |\
@@ -238,7 +270,8 @@ typedef enum
                                   NRF_GPIOTE_INT_PORT10_MASK | NRF_GPIOTE_INT_PORT11_MASK |\
                                   NRF_GPIOTE_INT_PORT12_MASK | NRF_GPIOTE_INT_PORT13_MASK |\
                                   NRF_GPIOTE_INT_PORT14_MASK | NRF_GPIOTE_INT_PORT15_MASK)
-#endif
+#endif // NRF_GPIOTE_HAS_SECURE_PORT_INT
+#endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 
 /**
  * @brief Function for activating the specified GPIOTE task.
