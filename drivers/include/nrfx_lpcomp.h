@@ -41,18 +41,16 @@ typedef struct
  *
  * @param[in] _input Comparator input pin.
  */
-#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                               \
-{                                                                        \
-    .config =                                                            \
-    {                                                                    \
-        .reference = NRF_LPCOMP_REF_SUPPLY_4_8,                          \
-        .detection = NRF_LPCOMP_DETECT_CROSS,                            \
-        /* TODO: NRFX-3161 */                                            \
-        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(LPCOMP_HYST_HYST_Msk), \
-                         (.hyst = NRF_LPCOMP_HYST_NOHYST,), ())          \
-    },                                                                   \
-    .input = (nrf_lpcomp_input_t)_input,                                 \
-    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY        \
+#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                                                   \
+{                                                                                            \
+    .config =                                                                                \
+    {                                                                                        \
+        .reference = NRF_LPCOMP_REF_SUPPLY_4_8,                                              \
+        .detection = NRF_LPCOMP_DETECT_CROSS,                                                \
+        NRFX_COND_CODE_1(LPCOMP_FEATURE_HYST_PRESENT, (.hyst = NRF_LPCOMP_HYST_NOHYST,), ()) \
+    },                                                                                       \
+    .input = (nrf_lpcomp_input_t)_input,                                                     \
+    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY                            \
 }
 
 /**

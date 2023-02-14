@@ -81,9 +81,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
         .config = {
             .reference = p_config->config.reference,
             .detection = p_config->config.detection,
-            /* TODO: NRFX-3161 Replace with LPCOMP_FEATURE_HYST_PRESENT when it is set to 1.*/
-            NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(LPCOMP_HYST_HYST_Msk),
-                             (.hyst = p_config->config.hyst), ())
+            NRFX_COND_CODE_1(LPCOMP_FEATURE_HYST_PRESENT, (.hyst = p_config->config.hyst), ())
         },
         .input = p_config->input
     };
