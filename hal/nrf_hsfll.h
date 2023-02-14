@@ -151,7 +151,7 @@ NRF_STATIC_INLINE uint32_t nrf_hsfll_event_address_get(NRF_HSFLL_Type const * p_
  * @brief Function for clearing the specified event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Event to clear.
+ * @param[in] event Event to be cleared.
  */
 NRF_STATIC_INLINE void nrf_hsfll_event_clear(NRF_HSFLL_Type * p_reg, nrf_hsfll_event_t event);
 
