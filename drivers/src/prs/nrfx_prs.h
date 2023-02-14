@@ -78,10 +78,7 @@ extern "C" {
     #define NRFX_PRS_BOX_2_ADDR     NRF_UARTE2
     // UARTE3, SPIM3, SPIS3, TWIM3, TWIS3
     #define NRFX_PRS_BOX_3_ADDR     NRF_UARTE3
-#elif defined(NRF_PRS_BOX_EXT)
-    #undef NRF_PRS_BOX_EXT
-    #define NRF_PRS_BOX_EXT
-#else
+#elif !defined(NRF_PRS_BOX_EXT)
     #error "Unknown device."
 #endif
 
