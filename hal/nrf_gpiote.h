@@ -16,17 +16,18 @@ extern "C" {
 * @brief   Hardware access layer (HAL) for managing the GPIOTE peripheral.
 */
 
-#if defined(HALTIUM_XXAA)
+#if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
 #if !defined(NRF_CELLCORE)
-#define NRF_GPIOTE        NRF_GPIOTE130
+#define NRF_GPIOTE NRF_GPIOTE130
 #else
-#define NRF_GPIOTE        NRF_GPIOTE131
+#define NRF_GPIOTE NRF_GPIOTE131
 #endif
-#elif defined(LUMOS_XXAA)
-#define NRF_GPIOTE        NRF_GPIOTE20
-#endif //defined(HALTIUM_XXAA)
+#elif defined(NRF_GPIOTE20)
+#define NRF_GPIOTE              NRF_GPIOTE20
+#define GPIOTE_GPIOTE_NCHANNELS GPIOTE20_GPIOTE_NCHANNELS
+#endif
 
-#if defined(HALTIUM_XXAA) || defined(__NRFX_DOXYGEN__)
+#if defined(NRF_GPIOTE_IRQ_GROUP) || defined(__NRFX_DOXYGEN__)
 /** @brief Enable or disable interrupt register definition. */
 #define GPIOTE_INTEN    NRFX_CONCAT_2(INTEN,    NRF_GPIOTE_IRQ_GROUP)
 
@@ -35,16 +36,6 @@ extern "C" {
 
 /** @brief Interrupt enable clear register definition. */
 #define GPIOTE_INTENCLR NRFX_CONCAT_2(INTENCLR, NRF_GPIOTE_IRQ_GROUP)
-
-#elif defined(LUMOS_XXAA)
-/** @brief Enable or disable interrupt register definition. */
-#define GPIOTE_INTEN    INTEN0
-
-/** @brief Interrupt enable set register definition. */
-#define GPIOTE_INTENSET INTENSET0
-
-/** @brief Interrupt enable clear register definition. */
-#define GPIOTE_INTENCLR INTENCLR0
 
 #else
 
@@ -56,7 +47,7 @@ extern "C" {
 
 /** @brief Interrupt enable clear register definition. */
 #define GPIOTE_INTENCLR INTENCLR
-#endif // defined(HALTIUM_XXAA)
+#endif // defined(NRF_GPIOTE_IRQ_GROUP)
 
 #if defined(GPIOTE_CONFIG_PORT_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Mask for covering port and pin bits in registers. */
@@ -89,186 +80,225 @@ extern "C" {
 /** @brief Polarity for the GPIOTE channel. */
 typedef enum
 {
-    NRF_GPIOTE_POLARITY_NONE   = GPIOTE_CONFIG_POLARITY_None,   /**< None. */
-    NRF_GPIOTE_POLARITY_LOTOHI = GPIOTE_CONFIG_POLARITY_LoToHi, /**< Low to high. */
-    NRF_GPIOTE_POLARITY_HITOLO = GPIOTE_CONFIG_POLARITY_HiToLo, /**< High to low. */
-    NRF_GPIOTE_POLARITY_TOGGLE = GPIOTE_CONFIG_POLARITY_Toggle, /**< Toggle. */
+    NRF_GPIOTE_POLARITY_NONE   = GPIOTE_CONFIG_POLARITY_None,   ///< None.
+    NRF_GPIOTE_POLARITY_LOTOHI = GPIOTE_CONFIG_POLARITY_LoToHi, ///< Low to high.
+    NRF_GPIOTE_POLARITY_HITOLO = GPIOTE_CONFIG_POLARITY_HiToLo, ///< High to low.
+    NRF_GPIOTE_POLARITY_TOGGLE = GPIOTE_CONFIG_POLARITY_Toggle, ///< Toggle.
 } nrf_gpiote_polarity_t;
 
 /** @brief Initial output value for the GPIOTE channel. */
 typedef enum
 {
-    NRF_GPIOTE_INITIAL_VALUE_LOW  = GPIOTE_CONFIG_OUTINIT_Low,  /**< Low to high. */
-    NRF_GPIOTE_INITIAL_VALUE_HIGH = GPIOTE_CONFIG_OUTINIT_High, /**< High to low. */
+    NRF_GPIOTE_INITIAL_VALUE_LOW  = GPIOTE_CONFIG_OUTINIT_Low,  ///< Low to high.
+    NRF_GPIOTE_INITIAL_VALUE_HIGH = GPIOTE_CONFIG_OUTINIT_High, ///< High to low.
 } nrf_gpiote_outinit_t;
 
 #if NRF_GPIOTE_HAS_LATENCY
 /** @brief Latency setting. */
 typedef enum
 {
-    NRF_GPIOTE_LATENCY_LOWPOWER   = GPIOTE_LATENCY_LATENCY_LowPower,   /**< Low Power. */
-    NRF_GPIOTE_LATENCY_LOWLATENCY = GPIOTE_LATENCY_LATENCY_LowLatency, /**< Low Latency. */
+    NRF_GPIOTE_LATENCY_LOWPOWER   = GPIOTE_LATENCY_LATENCY_LowPower,   ///< Low Power.
+    NRF_GPIOTE_LATENCY_LOWLATENCY = GPIOTE_LATENCY_LATENCY_LowLatency, ///< Low Latency.
 } nrf_gpiote_latency_t;
 #endif
 
 /** @brief GPIOTE tasks. */
 typedef enum
 {
-    NRF_GPIOTE_TASK_OUT_0     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), /**< Out task 0. */
-    NRF_GPIOTE_TASK_OUT_1     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), /**< Out task 1. */
-    NRF_GPIOTE_TASK_OUT_2     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), /**< Out task 2. */
-    NRF_GPIOTE_TASK_OUT_3     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), /**< Out task 3. */
+    NRF_GPIOTE_TASK_OUT_0     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), ///< Out task 0.
+    NRF_GPIOTE_TASK_OUT_1     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), ///< Out task 1.
+    NRF_GPIOTE_TASK_OUT_2     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), ///< Out task 2.
+    NRF_GPIOTE_TASK_OUT_3     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), ///< Out task 3.
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_OUT_4     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), /**< Out task 4. */
-    NRF_GPIOTE_TASK_OUT_5     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), /**< Out task 5. */
-    NRF_GPIOTE_TASK_OUT_6     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), /**< Out task 6. */
-    NRF_GPIOTE_TASK_OUT_7     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), /**< Out task 7. */
+    NRF_GPIOTE_TASK_OUT_4     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), ///< Out task 4.
+    NRF_GPIOTE_TASK_OUT_5     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), ///< Out task 5.
+    NRF_GPIOTE_TASK_OUT_6     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), ///< Out task 6.
+    NRF_GPIOTE_TASK_OUT_7     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), ///< Out task 7.
 #endif
 #if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_SET_0     = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), /**< Set task 0. */
-    NRF_GPIOTE_TASK_SET_1     = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), /**< Set task 1. */
-    NRF_GPIOTE_TASK_SET_2     = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), /**< Set task 2. */
-    NRF_GPIOTE_TASK_SET_3     = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), /**< Set task 3. */
-    NRF_GPIOTE_TASK_SET_4     = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), /**< Set task 4. */
-    NRF_GPIOTE_TASK_SET_5     = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), /**< Set task 5. */
-    NRF_GPIOTE_TASK_SET_6     = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), /**< Set task 6. */
-    NRF_GPIOTE_TASK_SET_7     = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), /**< Set task 7. */
+    NRF_GPIOTE_TASK_SET_0     = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), ///< Set task 0.
+    NRF_GPIOTE_TASK_SET_1     = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), ///< Set task 1.
+    NRF_GPIOTE_TASK_SET_2     = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), ///< Set task 2.
+    NRF_GPIOTE_TASK_SET_3     = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), ///< Set task 3.
+    NRF_GPIOTE_TASK_SET_4     = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), ///< Set task 4.
+    NRF_GPIOTE_TASK_SET_5     = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), ///< Set task 5.
+    NRF_GPIOTE_TASK_SET_6     = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), ///< Set task 6.
+    NRF_GPIOTE_TASK_SET_7     = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), ///< Set task 7.
 #endif
 #if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_CLR_0     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), /**< Clear task 0. */
-    NRF_GPIOTE_TASK_CLR_1     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), /**< Clear task 1. */
-    NRF_GPIOTE_TASK_CLR_2     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), /**< Clear task 2. */
-    NRF_GPIOTE_TASK_CLR_3     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), /**< Clear task 3. */
-    NRF_GPIOTE_TASK_CLR_4     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), /**< Clear task 4. */
-    NRF_GPIOTE_TASK_CLR_5     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), /**< Clear task 5. */
-    NRF_GPIOTE_TASK_CLR_6     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), /**< Clear task 6. */
-    NRF_GPIOTE_TASK_CLR_7     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), /**< Clear task 7. */
+    NRF_GPIOTE_TASK_CLR_0     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), ///< Clear task 0.
+    NRF_GPIOTE_TASK_CLR_1     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), ///< Clear task 1.
+    NRF_GPIOTE_TASK_CLR_2     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), ///< Clear task 2.
+    NRF_GPIOTE_TASK_CLR_3     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), ///< Clear task 3.
+    NRF_GPIOTE_TASK_CLR_4     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), ///< Clear task 4.
+    NRF_GPIOTE_TASK_CLR_5     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), ///< Clear task 5.
+    NRF_GPIOTE_TASK_CLR_6     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), ///< Clear task 6.
+    NRF_GPIOTE_TASK_CLR_7     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), ///< Clear task 7.
 #endif
 } nrf_gpiote_task_t;
 
 /** @brief GPIOTE events. */
 typedef enum
 {
-    NRF_GPIOTE_EVENT_IN_0     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[0]), /**< In event 0. */
-    NRF_GPIOTE_EVENT_IN_1     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[1]), /**< In event 1. */
-    NRF_GPIOTE_EVENT_IN_2     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[2]), /**< In event 2. */
-    NRF_GPIOTE_EVENT_IN_3     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[3]), /**< In event 3. */
+    NRF_GPIOTE_EVENT_IN_0     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[0]),                      ///< In event 0.
+    NRF_GPIOTE_EVENT_IN_1     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[1]),                      ///< In event 1.
+    NRF_GPIOTE_EVENT_IN_2     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[2]),                      ///< In event 2.
+    NRF_GPIOTE_EVENT_IN_3     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[3]),                      ///< In event 3.
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_EVENT_IN_4     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[4]), /**< In event 4. */
-    NRF_GPIOTE_EVENT_IN_5     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[5]), /**< In event 5. */
-    NRF_GPIOTE_EVENT_IN_6     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[6]), /**< In event 6. */
-    NRF_GPIOTE_EVENT_IN_7     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[7]), /**< In event 7. */
+    NRF_GPIOTE_EVENT_IN_4     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[4]),                      ///< In event 4.
+    NRF_GPIOTE_EVENT_IN_5     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[5]),                      ///< In event 5.
+    NRF_GPIOTE_EVENT_IN_6     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[6]),                      ///< In event 6.
+    NRF_GPIOTE_EVENT_IN_7     = offsetof(NRF_GPIOTE_Type, EVENTS_IN[7]),                      ///< In event 7.
 #endif
 #if !defined(GPIOTE_PORT_NUM)
-    NRF_GPIOTE_EVENT_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT),  /**<  Port event. */
+    NRF_GPIOTE_EVENT_PORT     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT),                       ///< Port event.
 #endif
 #if defined(GPIOTE_PORT_NUM) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_EVENT_PORT_0   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0]),  /**<  Port event 0. */
-    NRF_GPIOTE_EVENT_PORT_1   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1]),  /**<  Port event 1. */
-    NRF_GPIOTE_EVENT_PORT_2   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2]),  /**<  Port event 2. */
-    NRF_GPIOTE_EVENT_PORT_3   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3]),  /**<  Port event 3. */
-    NRF_GPIOTE_EVENT_PORT_4   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4]),  /**<  Port event 4. */
-    NRF_GPIOTE_EVENT_PORT_5   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5]),  /**<  Port event 5. */
-    NRF_GPIOTE_EVENT_PORT_6   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6]),  /**<  Port event 6. */
-    NRF_GPIOTE_EVENT_PORT_7   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7]),  /**<  Port event 7. */
-    NRF_GPIOTE_EVENT_PORT_8   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[8]),  /**<  Port event 8. */
+#if NRF_GPIOTE_HAS_SECURE_PORT_INT
+    NRF_GPIOTE_EVENT_PORT_0_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0].NONSECURE), ///< Non-secure port event 0.
+    NRF_GPIOTE_EVENT_PORT_0_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0].SECURE),    ///< Secure port event 0.
+    NRF_GPIOTE_EVENT_PORT_1_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1].NONSECURE), ///< Non-secure port event 1.
+    NRF_GPIOTE_EVENT_PORT_1_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1].SECURE),    ///< Secure port event 1.
+    NRF_GPIOTE_EVENT_PORT_2_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2].NONSECURE), ///< Non-secure port event 2.
+    NRF_GPIOTE_EVENT_PORT_2_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2].SECURE),    ///< Secure port event 2.
+    NRF_GPIOTE_EVENT_PORT_3_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3].NONSECURE), ///< Non-secure port event 3.
+    NRF_GPIOTE_EVENT_PORT_3_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3].SECURE),    ///< Secure port event 3.
+    NRF_GPIOTE_EVENT_PORT_4_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4].NONSECURE), ///< Non-secure port event 4.
+    NRF_GPIOTE_EVENT_PORT_4_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4].SECURE),    ///< Secure port event 4.
+    NRF_GPIOTE_EVENT_PORT_5_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5].NONSECURE), ///< Non-secure port event 5.
+    NRF_GPIOTE_EVENT_PORT_5_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5].SECURE),    ///< Secure port event 5.
+    NRF_GPIOTE_EVENT_PORT_6_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6].NONSECURE), ///< Non-secure port event 6.
+    NRF_GPIOTE_EVENT_PORT_6_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6].SECURE),    ///< Secure port event 6.
+    NRF_GPIOTE_EVENT_PORT_7_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7].NONSECURE), ///< Non-secure port event 7.
+    NRF_GPIOTE_EVENT_PORT_7_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7].SECURE),    ///< Secure port event 7.
+#else
+    NRF_GPIOTE_EVENT_PORT_0            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0]),           ///< Port event 0.
+    NRF_GPIOTE_EVENT_PORT_1            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1]),           ///< Port event 1.
+    NRF_GPIOTE_EVENT_PORT_2            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2]),           ///< Port event 2.
+    NRF_GPIOTE_EVENT_PORT_3            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3]),           ///< Port event 3.
+    NRF_GPIOTE_EVENT_PORT_4            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4]),           ///< Port event 4.
+    NRF_GPIOTE_EVENT_PORT_5            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5]),           ///< Port event 5.
+    NRF_GPIOTE_EVENT_PORT_6            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6]),           ///< Port event 6.
+    NRF_GPIOTE_EVENT_PORT_7            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7]),           ///< Port event 7.
+    NRF_GPIOTE_EVENT_PORT_8            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[8]),           ///< Port event 8.
 #if (GPIOTE_PORT_NUM > 8) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_EVENT_PORT_9   = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[9]),  /**<  Port event 9. */
-    NRF_GPIOTE_EVENT_PORT_10  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[10]), /**<  Port event 10. */
-    NRF_GPIOTE_EVENT_PORT_11  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[11]), /**<  Port event 11. */
-    NRF_GPIOTE_EVENT_PORT_12  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[12]), /**<  Port event 12. */
-    NRF_GPIOTE_EVENT_PORT_13  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[13]), /**<  Port event 13. */
-    NRF_GPIOTE_EVENT_PORT_14  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[14]), /**<  Port event 14. */
-    NRF_GPIOTE_EVENT_PORT_15  = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[15]), /**<  Port event 15. */
-#endif
-#endif
+    NRF_GPIOTE_EVENT_PORT_9            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[9]),           ///< Port event 9.
+    NRF_GPIOTE_EVENT_PORT_10           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[10]),          ///< Port event 10.
+    NRF_GPIOTE_EVENT_PORT_11           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[11]),          ///< Port event 11.
+    NRF_GPIOTE_EVENT_PORT_12           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[12]),          ///< Port event 12.
+    NRF_GPIOTE_EVENT_PORT_13           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[13]),          ///< Port event 13.
+    NRF_GPIOTE_EVENT_PORT_14           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[14]),          ///< Port event 14.
+    NRF_GPIOTE_EVENT_PORT_15           = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[15]),          ///< Port event 15.
+#endif // (GPIOTE_PORT_NUM > 8)
+#endif // NRF_GPIOTE_HAS_SECURE_PORT_INT
+#endif // defined(GPIOTE_PORT_NUM)
 } nrf_gpiote_event_t;
 
 /** @brief GPIOTE interrupts. */
 typedef enum
 {
 #if NRF_GPIOTE_HAS_MULTIPLE_INT
-    NRF_GPIOTE_INT_IN0_MASK    = GPIOTE_INTENSET0_IN0_Msk,    /**< GPIOTE interrupt from IN0. */
-    NRF_GPIOTE_INT_IN1_MASK    = GPIOTE_INTENSET0_IN1_Msk,    /**< GPIOTE interrupt from IN1. */
-    NRF_GPIOTE_INT_IN2_MASK    = GPIOTE_INTENSET0_IN2_Msk,    /**< GPIOTE interrupt from IN2. */
-    NRF_GPIOTE_INT_IN3_MASK    = GPIOTE_INTENSET0_IN3_Msk,    /**< GPIOTE interrupt from IN3. */
-    NRF_GPIOTE_INT_IN4_MASK    = GPIOTE_INTENSET0_IN4_Msk,    /**< GPIOTE interrupt from IN4. */
-    NRF_GPIOTE_INT_IN5_MASK    = GPIOTE_INTENSET0_IN5_Msk,    /**< GPIOTE interrupt from IN5. */
-    NRF_GPIOTE_INT_IN6_MASK    = GPIOTE_INTENSET0_IN6_Msk,    /**< GPIOTE interrupt from IN6. */
-    NRF_GPIOTE_INT_IN7_MASK    = GPIOTE_INTENSET0_IN7_Msk,    /**< GPIOTE interrupt from IN7. */
+    NRF_GPIOTE_INT_IN0_MASK              = GPIOTE_INTENSET0_IN0_Msk,            ///< GPIOTE interrupt from IN0.
+    NRF_GPIOTE_INT_IN1_MASK              = GPIOTE_INTENSET0_IN1_Msk,            ///< GPIOTE interrupt from IN1.
+    NRF_GPIOTE_INT_IN2_MASK              = GPIOTE_INTENSET0_IN2_Msk,            ///< GPIOTE interrupt from IN2.
+    NRF_GPIOTE_INT_IN3_MASK              = GPIOTE_INTENSET0_IN3_Msk,            ///< GPIOTE interrupt from IN3.
+    NRF_GPIOTE_INT_IN4_MASK              = GPIOTE_INTENSET0_IN4_Msk,            ///< GPIOTE interrupt from IN4.
+    NRF_GPIOTE_INT_IN5_MASK              = GPIOTE_INTENSET0_IN5_Msk,            ///< GPIOTE interrupt from IN5.
+    NRF_GPIOTE_INT_IN6_MASK              = GPIOTE_INTENSET0_IN6_Msk,            ///< GPIOTE interrupt from IN6.
+    NRF_GPIOTE_INT_IN7_MASK              = GPIOTE_INTENSET0_IN7_Msk,            ///< GPIOTE interrupt from IN7.
 #if NRF_GPIOTE_HAS_SECURE_PORT_INT
-    NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT0NONSECURE_Msk, /**< GPIOTE interrupt from PORT0 nonsecure event. */
-    NRF_GPIOTE_INT_PORT0_SECURE_MASK     = GPIOTE_INTENSET0_PORT0SECURE_Msk,    /**< GPIOTE interrupt from PORT0 secure event. */
-    NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT1NONSECURE_Msk, /**< GPIOTE interrupt from PORT1 nonsecure event. */
-    NRF_GPIOTE_INT_PORT1_SECURE_MASK     = GPIOTE_INTENSET0_PORT1SECURE_Msk,    /**< GPIOTE interrupt from PORT1 secure event. */
-    NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT2NONSECURE_Msk, /**< GPIOTE interrupt from PORT2 nonsecure event. */
-    NRF_GPIOTE_INT_PORT2_SECURE_MASK     = GPIOTE_INTENSET0_PORT2SECURE_Msk,    /**< GPIOTE interrupt from PORT2 secure event. */
-    NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT3NONSECURE_Msk, /**< GPIOTE interrupt from PORT3 nonsecure event. */
-    NRF_GPIOTE_INT_PORT3_SECURE_MASK     = GPIOTE_INTENSET0_PORT3SECURE_Msk,    /**< GPIOTE interrupt from PORT3 secure event. */
+    NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT0NONSECURE_Msk, ///< GPIOTE interrupt from PORT0 non-secure event.
+    NRF_GPIOTE_INT_PORT0_SECURE_MASK     = GPIOTE_INTENSET0_PORT0SECURE_Msk,    ///< GPIOTE interrupt from PORT0 secure event.
+    NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT1NONSECURE_Msk, ///< GPIOTE interrupt from PORT1 non-secure event.
+    NRF_GPIOTE_INT_PORT1_SECURE_MASK     = GPIOTE_INTENSET0_PORT1SECURE_Msk,    ///< GPIOTE interrupt from PORT1 secure event.
+    NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT2NONSECURE_Msk, ///< GPIOTE interrupt from PORT2 non-secure event.
+    NRF_GPIOTE_INT_PORT2_SECURE_MASK     = GPIOTE_INTENSET0_PORT2SECURE_Msk,    ///< GPIOTE interrupt from PORT2 secure event.
+    NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT3NONSECURE_Msk, ///< GPIOTE interrupt from PORT3 non-secure event.
+    NRF_GPIOTE_INT_PORT3_SECURE_MASK     = GPIOTE_INTENSET0_PORT3SECURE_Msk,    ///< GPIOTE interrupt from PORT3 secure event.
+    NRF_GPIOTE_INT_PORT4_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT4NONSECURE_Msk, ///< GPIOTE interrupt from PORT4 non-secure event.
+    NRF_GPIOTE_INT_PORT4_SECURE_MASK     = GPIOTE_INTENSET0_PORT4SECURE_Msk,    ///< GPIOTE interrupt from PORT4 secure event.
+    NRF_GPIOTE_INT_PORT5_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT5NONSECURE_Msk, ///< GPIOTE interrupt from PORT5 non-secure event.
+    NRF_GPIOTE_INT_PORT5_SECURE_MASK     = GPIOTE_INTENSET0_PORT5SECURE_Msk,    ///< GPIOTE interrupt from PORT5 secure event.
+    NRF_GPIOTE_INT_PORT6_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT6NONSECURE_Msk, ///< GPIOTE interrupt from PORT6 non-secure event.
+    NRF_GPIOTE_INT_PORT6_SECURE_MASK     = GPIOTE_INTENSET0_PORT6SECURE_Msk,    ///< GPIOTE interrupt from PORT6 secure event.
+    NRF_GPIOTE_INT_PORT7_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT7NONSECURE_Msk, ///< GPIOTE interrupt from PORT7 non-secure event.
+    NRF_GPIOTE_INT_PORT7_SECURE_MASK     = GPIOTE_INTENSET0_PORT7SECURE_Msk,    ///< GPIOTE interrupt from PORT7 secure event.
 #else
-    NRF_GPIOTE_INT_PORT0_MASK  = GPIOTE_INTENSET0_PORT0_Msk,  /**< GPIOTE interrupt from PORT0 event. */
-    NRF_GPIOTE_INT_PORT1_MASK  = GPIOTE_INTENSET0_PORT1_Msk,  /**< GPIOTE interrupt from PORT1 event. */
-    NRF_GPIOTE_INT_PORT2_MASK  = GPIOTE_INTENSET0_PORT2_Msk,  /**< GPIOTE interrupt from PORT2 event. */
-    NRF_GPIOTE_INT_PORT3_MASK  = GPIOTE_INTENSET0_PORT3_Msk,  /**< GPIOTE interrupt from PORT3 event. */
-    NRF_GPIOTE_INT_PORT4_MASK  = GPIOTE_INTENSET0_PORT4_Msk,  /**< GPIOTE interrupt from PORT4 event. */
-    NRF_GPIOTE_INT_PORT5_MASK  = GPIOTE_INTENSET0_PORT5_Msk,  /**< GPIOTE interrupt from PORT5 event. */
-    NRF_GPIOTE_INT_PORT6_MASK  = GPIOTE_INTENSET0_PORT6_Msk,  /**< GPIOTE interrupt from PORT6 event. */
-    NRF_GPIOTE_INT_PORT7_MASK  = GPIOTE_INTENSET0_PORT7_Msk,  /**< GPIOTE interrupt from PORT7 event. */
-    NRF_GPIOTE_INT_PORT8_MASK  = GPIOTE_INTENSET0_PORT8_Msk,  /**< GPIOTE interrupt from PORT8 event. */
-    NRF_GPIOTE_INT_PORT9_MASK  = GPIOTE_INTENSET0_PORT9_Msk,  /**< GPIOTE interrupt from PORT9 event. */
-    NRF_GPIOTE_INT_PORT10_MASK = GPIOTE_INTENSET0_PORT10_Msk, /**< GPIOTE interrupt from PORT10 event. */
-    NRF_GPIOTE_INT_PORT11_MASK = GPIOTE_INTENSET0_PORT11_Msk, /**< GPIOTE interrupt from PORT11 event. */
-    NRF_GPIOTE_INT_PORT12_MASK = GPIOTE_INTENSET0_PORT12_Msk, /**< GPIOTE interrupt from PORT12 event. */
-    NRF_GPIOTE_INT_PORT13_MASK = GPIOTE_INTENSET0_PORT13_Msk, /**< GPIOTE interrupt from PORT13 event. */
-    NRF_GPIOTE_INT_PORT14_MASK = GPIOTE_INTENSET0_PORT14_Msk, /**< GPIOTE interrupt from PORT14 event. */
-    NRF_GPIOTE_INT_PORT15_MASK = GPIOTE_INTENSET0_PORT15_Msk, /**< GPIOTE interrupt from PORT15 event. */
+    NRF_GPIOTE_INT_PORT0_MASK            = GPIOTE_INTENSET0_PORT0_Msk,          ///< GPIOTE interrupt from PORT0 event.
+    NRF_GPIOTE_INT_PORT1_MASK            = GPIOTE_INTENSET0_PORT1_Msk,          ///< GPIOTE interrupt from PORT1 event.
+    NRF_GPIOTE_INT_PORT2_MASK            = GPIOTE_INTENSET0_PORT2_Msk,          ///< GPIOTE interrupt from PORT2 event.
+    NRF_GPIOTE_INT_PORT3_MASK            = GPIOTE_INTENSET0_PORT3_Msk,          ///< GPIOTE interrupt from PORT3 event.
+    NRF_GPIOTE_INT_PORT4_MASK            = GPIOTE_INTENSET0_PORT4_Msk,          ///< GPIOTE interrupt from PORT4 event.
+    NRF_GPIOTE_INT_PORT5_MASK            = GPIOTE_INTENSET0_PORT5_Msk,          ///< GPIOTE interrupt from PORT5 event.
+    NRF_GPIOTE_INT_PORT6_MASK            = GPIOTE_INTENSET0_PORT6_Msk,          ///< GPIOTE interrupt from PORT6 event.
+    NRF_GPIOTE_INT_PORT7_MASK            = GPIOTE_INTENSET0_PORT7_Msk,          ///< GPIOTE interrupt from PORT7 event.
+    NRF_GPIOTE_INT_PORT8_MASK            = GPIOTE_INTENSET0_PORT8_Msk,          ///< GPIOTE interrupt from PORT8 event.
+    NRF_GPIOTE_INT_PORT9_MASK            = GPIOTE_INTENSET0_PORT9_Msk,          ///< GPIOTE interrupt from PORT9 event.
+    NRF_GPIOTE_INT_PORT10_MASK           = GPIOTE_INTENSET0_PORT10_Msk,         ///< GPIOTE interrupt from PORT10 event.
+    NRF_GPIOTE_INT_PORT11_MASK           = GPIOTE_INTENSET0_PORT11_Msk,         ///< GPIOTE interrupt from PORT11 event.
+    NRF_GPIOTE_INT_PORT12_MASK           = GPIOTE_INTENSET0_PORT12_Msk,         ///< GPIOTE interrupt from PORT12 event.
+    NRF_GPIOTE_INT_PORT13_MASK           = GPIOTE_INTENSET0_PORT13_Msk,         ///< GPIOTE interrupt from PORT13 event.
+    NRF_GPIOTE_INT_PORT14_MASK           = GPIOTE_INTENSET0_PORT14_Msk,         ///< GPIOTE interrupt from PORT14 event.
+    NRF_GPIOTE_INT_PORT15_MASK           = GPIOTE_INTENSET0_PORT15_Msk,         ///< GPIOTE interrupt from PORT15 event.
 #endif // NRF_GPIOTE_HAS_SECURE_PORT_INT
 #else
-    NRF_GPIOTE_INT_IN0_MASK  = GPIOTE_INTENSET_IN0_Msk,  /**< GPIOTE interrupt from IN0. */
-    NRF_GPIOTE_INT_IN1_MASK  = GPIOTE_INTENSET_IN1_Msk,  /**< GPIOTE interrupt from IN1. */
-    NRF_GPIOTE_INT_IN2_MASK  = GPIOTE_INTENSET_IN2_Msk,  /**< GPIOTE interrupt from IN2. */
-    NRF_GPIOTE_INT_IN3_MASK  = GPIOTE_INTENSET_IN3_Msk,  /**< GPIOTE interrupt from IN3. */
+    NRF_GPIOTE_INT_IN0_MASK              = GPIOTE_INTENSET_IN0_Msk,             ///< GPIOTE interrupt from IN0.
+    NRF_GPIOTE_INT_IN1_MASK              = GPIOTE_INTENSET_IN1_Msk,             ///< GPIOTE interrupt from IN1.
+    NRF_GPIOTE_INT_IN2_MASK              = GPIOTE_INTENSET_IN2_Msk,             ///< GPIOTE interrupt from IN2.
+    NRF_GPIOTE_INT_IN3_MASK              = GPIOTE_INTENSET_IN3_Msk,             ///< GPIOTE interrupt from IN3.
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_INT_IN4_MASK  = GPIOTE_INTENSET_IN4_Msk,  /**< GPIOTE interrupt from IN4. */
-    NRF_GPIOTE_INT_IN5_MASK  = GPIOTE_INTENSET_IN5_Msk,  /**< GPIOTE interrupt from IN5. */
-    NRF_GPIOTE_INT_IN6_MASK  = GPIOTE_INTENSET_IN6_Msk,  /**< GPIOTE interrupt from IN6. */
-    NRF_GPIOTE_INT_IN7_MASK  = GPIOTE_INTENSET_IN7_Msk,  /**< GPIOTE interrupt from IN7. */
+    NRF_GPIOTE_INT_IN4_MASK              = GPIOTE_INTENSET_IN4_Msk,             ///< GPIOTE interrupt from IN4.
+    NRF_GPIOTE_INT_IN5_MASK              = GPIOTE_INTENSET_IN5_Msk,             ///< GPIOTE interrupt from IN5.
+    NRF_GPIOTE_INT_IN6_MASK              = GPIOTE_INTENSET_IN6_Msk,             ///< GPIOTE interrupt from IN6.
+    NRF_GPIOTE_INT_IN7_MASK              = GPIOTE_INTENSET_IN7_Msk,             ///< GPIOTE interrupt from IN7.
 #endif
-    NRF_GPIOTE_INT_PORT_MASK = (int)GPIOTE_INTENSET_PORT_Msk, /**< GPIOTE interrupt from PORT event. */
+    NRF_GPIOTE_INT_PORT_MASK             = (int)GPIOTE_INTENSET_PORT_Msk,       ///< GPIOTE interrupt from PORT event.
 #endif // NRF_GPIOTE_HAS_MULTIPLE_INT
 } nrf_gpiote_int_t;
 
 #if (GPIOTE_CH_NUM == 4) || defined(__NRFX_DOXYGEN__)
 /** @brief Mask holding positions of available GPIOTE input interrupts. */
-#define NRF_GPIOTE_INT_IN_MASK (NRF_GPIOTE_INT_IN0_MASK | NRF_GPIOTE_INT_IN1_MASK |\
+#define NRF_GPIOTE_INT_IN_MASK (NRF_GPIOTE_INT_IN0_MASK | NRF_GPIOTE_INT_IN1_MASK | \
                                 NRF_GPIOTE_INT_IN2_MASK | NRF_GPIOTE_INT_IN3_MASK)
 #else
-#define NRF_GPIOTE_INT_IN_MASK (NRF_GPIOTE_INT_IN0_MASK | NRF_GPIOTE_INT_IN1_MASK |\
-                                NRF_GPIOTE_INT_IN2_MASK | NRF_GPIOTE_INT_IN3_MASK |\
-                                NRF_GPIOTE_INT_IN4_MASK | NRF_GPIOTE_INT_IN5_MASK |\
+#define NRF_GPIOTE_INT_IN_MASK (NRF_GPIOTE_INT_IN0_MASK | NRF_GPIOTE_INT_IN1_MASK | \
+                                NRF_GPIOTE_INT_IN2_MASK | NRF_GPIOTE_INT_IN3_MASK | \
+                                NRF_GPIOTE_INT_IN4_MASK | NRF_GPIOTE_INT_IN5_MASK | \
                                 NRF_GPIOTE_INT_IN6_MASK | NRF_GPIOTE_INT_IN7_MASK)
 #endif
 
 #if NRF_GPIOTE_HAS_MULTIPLE_INT
 #if NRF_GPIOTE_HAS_SECURE_PORT_INT
+#if defined(NRF_TRUSTZONE_NONSECURE)
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
-#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK |\
-                                  NRF_GPIOTE_INT_PORT0_SECURE_MASK     |\
-                                  NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK |\
-                                  NRF_GPIOTE_INT_PORT1_SECURE_MASK     |\
-                                  NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK |\
-                                  NRF_GPIOTE_INT_PORT2_SECURE_MASK     |\
-                                  NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK |\
-                                  NRF_GPIOTE_INT_PORT3_SECURE_MASK)
+#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT4_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT5_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT6_NON_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT7_NON_SECURE_MASK)
 #else
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
-#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_MASK  | NRF_GPIOTE_INT_PORT1_MASK  |\
-                                  NRF_GPIOTE_INT_PORT2_MASK  | NRF_GPIOTE_INT_PORT3_MASK  |\
-                                  NRF_GPIOTE_INT_PORT4_MASK  | NRF_GPIOTE_INT_PORT5_MASK  |\
-                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT7_MASK  |\
-                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT9_MASK  |\
-                                  NRF_GPIOTE_INT_PORT10_MASK | NRF_GPIOTE_INT_PORT11_MASK |\
-                                  NRF_GPIOTE_INT_PORT12_MASK | NRF_GPIOTE_INT_PORT13_MASK |\
+#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT1_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT2_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT3_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT4_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT5_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT6_SECURE_MASK | \
+                                  NRF_GPIOTE_INT_PORT7_SECURE_MASK)
+#endif // defined(NRF_TRUSTZONE_NONSECURE)
+#else
+/** @brief Mask holding positions of available GPIOTE port interrupts. */
+#define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_MASK  | NRF_GPIOTE_INT_PORT1_MASK  | \
+                                  NRF_GPIOTE_INT_PORT2_MASK  | NRF_GPIOTE_INT_PORT3_MASK  | \
+                                  NRF_GPIOTE_INT_PORT4_MASK  | NRF_GPIOTE_INT_PORT5_MASK  | \
+                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT7_MASK  | \
+                                  NRF_GPIOTE_INT_PORT6_MASK  | NRF_GPIOTE_INT_PORT9_MASK  | \
+                                  NRF_GPIOTE_INT_PORT10_MASK | NRF_GPIOTE_INT_PORT11_MASK | \
+                                  NRF_GPIOTE_INT_PORT12_MASK | NRF_GPIOTE_INT_PORT13_MASK | \
                                   NRF_GPIOTE_INT_PORT14_MASK | NRF_GPIOTE_INT_PORT15_MASK)
 #endif // NRF_GPIOTE_HAS_SECURE_PORT_INT
 #endif // NRF_GPIOTE_HAS_MULTIPLE_INT
@@ -496,7 +526,8 @@ NRF_STATIC_INLINE void nrf_gpiote_task_force(NRF_GPIOTE_Type *    p_reg,
  */
 NRF_STATIC_INLINE void nrf_gpiote_te_default(NRF_GPIOTE_Type * p_reg, uint32_t idx);
 
-/**@brief Function for checking if particular Task-Event is enabled.
+/**
+ * @brief Function for checking if particular Task-Event is enabled.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] idx   Task-Event index.
@@ -546,7 +577,6 @@ NRF_STATIC_INLINE nrf_gpiote_task_t nrf_gpiote_clr_task_get(uint8_t index);
  */
 NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index);
 
-#if defined(GPIOTE_PORT_NUM) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for getting the PORT event associated with the specified GPIOTE port.
  *
@@ -555,7 +585,6 @@ NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index);
  * @return Requested PORT event.
  */
 NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_port_event_get(uint8_t index);
-#endif
 
 #if NRF_GPIOTE_HAS_LATENCY
 /**
@@ -735,7 +764,7 @@ NRF_STATIC_INLINE void nrf_gpiote_task_force(NRF_GPIOTE_Type *    p_reg,
 NRF_STATIC_INLINE void nrf_gpiote_te_default(NRF_GPIOTE_Type * p_reg, uint32_t idx)
 {
     p_reg->CONFIG[idx] = 0;
-#if defined(NRF53_SERIES) || defined(NRF91_SERIES) || defined(HALTIUM_XXAA)
+#if !defined(NRF51_SERIES) && !defined(NRF52_SERIES)
     p_reg->CONFIG[idx] = 0;
 #endif
 }
@@ -773,13 +802,23 @@ NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_in_event_get(uint8_t index)
     return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_IN[index]);
 }
 
-#if defined(GPIOTE_PORT_NUM)
 NRF_STATIC_INLINE nrf_gpiote_event_t nrf_gpiote_port_event_get(uint8_t index)
 {
+#if NRF_GPIOTE_HAS_SECURE_PORT_INT
+    NRFX_ASSERT(index < GPIOTE_GPIOTE_NCHANNELS);
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_PORT[index].NONSECURE);
+#else
+    return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_PORT[index].SECURE);
+#endif
+#elif defined(GPIOTE_PORT_NUM)
     NRFX_ASSERT(index < GPIOTE_PORT_NUM);
     return (nrf_gpiote_event_t)NRFX_OFFSETOF(NRF_GPIOTE_Type, EVENTS_PORT[index]);
-}
+#else
+    (void)index;
+    return NRF_GPIOTE_EVENT_PORT;
 #endif
+}
 
 #if NRF_GPIOTE_HAS_LATENCY
 NRF_STATIC_INLINE void nrf_gpiote_latency_set(NRF_GPIOTE_Type *    p_reg,

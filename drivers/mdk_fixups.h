@@ -1540,6 +1540,10 @@
 #if defined(MOONLIGHT_XXAA)
     #define LUMOS_XXAA 1
 
+    #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
+    #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
+    #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
+
     typedef NRF_DOMAINS_t nrf_domain_t;
 
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
@@ -1549,33 +1553,40 @@
 
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
+    #define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
+    #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+
     #if defined(NRF_TRUSTZONE_NONSECURE)
+        #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
+        #define nrfx_gpiote_irq_handler GPIOTE20_0_IRQHandler
+
         #define GRTC_IRQn       GRTC_0_IRQn
         #define nrfx_grtc_irq_handler     GRTC_0_IRQHandler
-        #define nrfx_gpiote20_irq_handler GPIOTE20_0_IRQHandler
-        #define nrfx_gpiote30_irq_handler GPIOTE30_0_IRQHandler
     #else
+        #define NRF_GPIOTE20_IRQn       GPIOTE20_1_IRQn
+        #define nrfx_gpiote_irq_handler GPIOTE20_1_IRQHandler
+
         /* TODO: NRF_GRTC_IRQ_GROUP in IPS for MOONLIGHT is not defined yet. Should be checked and verified in future. */
         #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
             #if defined(NRF_APPLICATION)
-                #define NRF_GRTC_IRQ_GROUP 2
+                #define NRF_GRTC_IRQ_GROUP 0
+                #define NRF_GPIOTE_IRQ_GROUP 0
             #else
                 #error Unknown core.
             #endif
         #elif defined(NRF_FLPR)
-            #define NRF_GRTC_IRQ_GROUP 0
+            #define NRF_GRTC_IRQ_GROUP 2
         #else
             #if defined(NRF_APPLICATION)
                 #define NRF_GRTC_IRQ_GROUP 1
+                #define NRF_GPIOTE_IRQ_GROUP 1
             #else
                 #error Unknown core.
             #endif
         #endif
 
-        #define GRTC_IRQn       GRTC_1_IRQn
-        #define nrfx_grtc_irq_handler     GRTC_1_IRQHandler
-        #define nrfx_gpiote20_irq_handler GPIOTE20_1_IRQHandler
-        #define nrfx_gpiote30_irq_handler GPIOTE30_1_IRQHandler
+        #define GRTC_IRQn             GRTC_1_IRQn
+        #define nrfx_grtc_irq_handler GRTC_1_IRQHandler
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
     #if defined(DPPIC_PRESENT)
