@@ -33,8 +33,12 @@
 // on the CSN line. There is no need to do anything here. The handling of the
 // interrupt itself provides a protection for DMA transfers.
 static void csn_event_handler(nrfx_gpiote_pin_t     pin,
-                              nrf_gpiote_polarity_t action)
+                              nrfx_gpiote_trigger_t trigger,
+                              void *                p_context)
 {
+    (void)pin;
+    (void)trigger;
+    (void)p_context;
 }
 #endif
 
@@ -64,7 +68,7 @@ typedef struct
 
 static spis_cb_t m_cb[NRFX_SPIS_ENABLED_COUNT];
 
-static void pins_configure(nrfx_spis_config_t const * p_config)
+static nrfx_err_t pins_configure(nrfx_spis_config_t const * p_config)
 {
     if (!p_config->skip_gpio_cfg)
     {
@@ -114,21 +118,44 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
         //  driver when another SPIS instance is used, or by an application code),
         //  so just ignore the returned value]
         (void)nrfx_gpiote_init(NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
-        static nrfx_gpiote_in_config_t const csn_gpiote_config =
-            NRFX_GPIOTE_CONFIG_IN_SENSE_HITOLO(true);
-        nrfx_err_t gpiote_err_code = nrfx_gpiote_in_init(p_config->csn_pin,
-            &csn_gpiote_config, csn_event_handler);
-        if (gpiote_err_code != NRFX_SUCCESS)
+
+        uint8_t ch;
+        nrfx_err_t err_code;
+
+        err_code = nrfx_gpiote_channel_alloc(&ch);
+        if (err_code != NRFX_SUCCESS)
         {
-            err_code = NRFX_ERROR_INTERNAL;
-            NRFX_LOG_INFO("Function: %s, error code: %s.",
-                        __func__,
-                        NRFX_LOG_ERROR_STRING_GET(err_code));
+            NRFX_LOG_ERROR("Function: %s, error code: %s.",
+                           __func__,
+                           NRFX_LOG_ERROR_STRING_GET(err_code));
             return err_code;
         }
-        nrfx_gpiote_in_event_enable(p_config->csn_pin, true);
+
+        nrfx_gpiote_trigger_config_t trigger_config = {
+            .trigger = NRFX_GPIOTE_TRIGGER_HITOLO,
+            .p_in_channel = &ch
+        };
+        nrfx_gpiote_handler_config_t handler_config = {
+            .handler = csn_event_handler
+        };
+
+        err_code = nrfx_gpiote_input_configure(p_config->csn_pin,
+                                               NULL,
+                                               &trigger_config,
+                                               &handler_config);
+        if (err_code != NRFX_SUCCESS)
+        {
+            NRFX_LOG_ERROR("Function: %s, error code: %s.",
+                           __func__,
+                           NRFX_LOG_ERROR_STRING_GET(err_code));
+            return err_code;
+        }
+
+        nrfx_gpiote_trigger_enable(p_config->csn_pin, true);
 #endif
     }
+
+    return NRFX_SUCCESS;
 }
 
 static bool spis_configure(nrfx_spis_t const *        p_instance,
@@ -140,7 +167,10 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
         return false;
     }
 
-    pins_configure(p_config);
+    if (pins_configure(p_config) != NRFX_SUCCESS)
+    {
+        return false;
+    }
 
     if (!p_config->skip_psel_cfg)
     {
