@@ -1968,6 +1968,98 @@
     #define RADIO_TIMING_RU_Default 0
     #define RADIO_TIMING_RU_Fast    1
 
+    typedef struct {                                     /*!< TWIM Structure.                                                      */
+        __IM uint32_t RESERVED00[1];
+        __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stop TWI transaction.                                 */
+        __IM uint32_t RESERVED01[1];
+        __OM uint32_t TASKS_SUSPEND;                     /*!< (@ 0x0000000C) Suspend TWI transaction.                              */
+        __OM uint32_t TASKS_RESUME;                      /*!< (@ 0x00000010) Resume TWI transaction.                               */
+        __IM uint32_t RESERVED1[5];
+        __OM NRF_TWIM_TASKS_DMA_Type TASKS_DMA;          /*!< (@ 0x00000028) Peripheral tasks.                                     */
+        __IM uint32_t RESERVED2[13];
+        __IOM uint32_t SUBSCRIBE_SUSPEND;                /*!< (@ 0x0000008C) Subscribe configuration for task SUSPEND.             */
+        __IOM uint32_t SUBSCRIBE_RESUME;                 /*!< (@ 0x00000090) Subscribe configuration for task RESUME.              */
+        __IM uint32_t RESERVED3[5];
+        __IOM NRF_TWIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA; /*!< (@ 0x000000A8) Subscribe configuration for tasks.                    */
+        __IM uint32_t RESERVED4[11];
+        __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) TWI stopped.                                          */
+        __IM uint32_t RESERVED5[3];
+        __IOM uint32_t EVENTS_ERROR;                     /*!< (@ 0x00000114) TWI error.                                            */
+        __IM uint32_t RESERVED6[2];
+        __IOM uint32_t EVENTS_BB;                        /*!< (@ 0x00000120) TWI byte boundary, generated before each byte that is
+                                                                            sent or received. */
+        __IM uint32_t RESERVED7;
+        __IOM uint32_t EVENTS_SUSPENDED;                 /*!< (@ 0x00000128) SUSPEND task has been issued, TWI traffic is now
+                                                                            suspended. */
+        __IM uint32_t RESERVED8[2];
+        __IOM uint32_t EVENTS_LASTRX;                    /*!< (@ 0x00000134) Byte boundary, starting to receive the last byte.     */
+        __IOM uint32_t EVENTS_LASTTX;                    /*!< (@ 0x00000138) Byte boundary, starting to transmit the last byte.    */
+        __IM uint32_t RESERVED9[4];
+        __IOM NRF_TWIM_EVENTS_DMA_Type EVENTS_DMA;       /*!< (@ 0x0000014C) Peripheral events.                                    */
+        __IM uint32_t RESERVED10[4];
+        __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED.              */
+        __IM uint32_t RESERVED11[3];
+        __IOM uint32_t PUBLISH_ERROR;                    /*!< (@ 0x00000194) Publish configuration for event ERROR.                */
+        __IM uint32_t RESERVED12[2];
+        __IOM uint32_t PUBLISH_BB;                       /*!< (@ 0x000001A0) Publish configuration for event BB.                   */
+        __IM uint32_t RESERVED13;
+        __IOM uint32_t PUBLISH_SUSPENDED;                /*!< (@ 0x000001A8) Publish configuration for event SUSPENDED.            */
+        __IM uint32_t RESERVED14[2];
+        __IOM uint32_t PUBLISH_LASTRX;                   /*!< (@ 0x000001B4) Publish configuration for event LASTRX.               */
+        __IOM uint32_t PUBLISH_LASTTX;                   /*!< (@ 0x000001B8) Publish configuration for event LASTTX.               */
+        __IM uint32_t RESERVED15[4];
+        __IOM NRF_TWIM_PUBLISH_DMA_Type PUBLISH_DMA;     /*!< (@ 0x000001CC) Publish configuration for events.                     */
+        __IM uint32_t RESERVED16[3];
+        __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks.             */
+        __IM uint32_t RESERVED17[63];
+        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt.                          */
+        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt.                                     */
+        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt.                                    */
+        __IM uint32_t RESERVED18[110];
+        __IOM uint32_t ERRORSRC;                         /*!< (@ 0x000004C4) Error source.                                         */
+        __IM uint32_t RESERVED19[14];
+        __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) Enable TWIM.                                          */
+        __IOM uint32_t CONFIG;                           /*!< (@ 0x00000504) Configuration register.                               */
+        __IM uint32_t RESERVED20[6];
+        __IOM uint32_t FMPLUS;                           /*!< (@ 0x00000520) FREQUENCY threshold for switch from regular mode to
+                                                                            FastMode+. */
+        __IOM uint32_t FREQUENCY;                        /*!< (@ 0x00000524) TWI frequency. Accuracy depends on the HFCLK source
+                                                                            selected. */
+        __IM uint32_t RESERVED21[24];
+        __IOM uint32_t ADDRESS;                          /*!< (@ 0x00000588) Address used in the TWI transfer.                     */
+        __IM uint32_t RESERVED22[29];
+        __IOM NRF_TWIM_PSEL_Type PSEL;                   /*!< (@ 0x00000600) (unspecified).                                        */
+        __IM uint32_t RESERVED23[62];
+        __IOM NRF_TWIM_DMA_Type DMA;                     /*!< (@ 0x00000700) (unspecified).                                        */
+    } NRF_TWIM_Type_fixed;                               /*!< Size = 1884 (0x75C).                                                 */
+
+    #if defined(NRF_TWIM00_S)
+        #undef NRF_TWIM00_S
+        #define NRF_TWIM00_S ((NRF_TWIM_Type_fixed*) NRF_TWIM00_S_BASE)
+    #endif
+
+    #if defined(NRF_TWIM20_S)
+        #undef NRF_TWIM20_S
+        #define NRF_TWIM20_S ((NRF_TWIM_Type_fixed*) NRF_TWIM20_S_BASE)
+    #endif
+
+    #if defined(NRF_TWIM21_S)
+        #undef NRF_TWIM21_S
+        #define NRF_TWIM21_S ((NRF_TWIM_Type_fixed*) NRF_TWIM21_S_BASE)
+    #endif
+
+    #if defined(NRF_TWIM22_S)
+        #undef NRF_TWIM22_S
+        #define NRF_TWIM22_S ((NRF_TWIM_Type_fixed*) NRF_TWIM22_S_BASE)
+    #endif
+
+    #if defined(NRF_TWIM30_S)
+        #undef NRF_TWIM30_S
+        #define NRF_TWIM30_S ((NRF_TWIM_Type_fixed*) NRF_TWIM30_S_BASE)
+    #endif
+
+    #define NRF_TWIM_Type NRF_TWIM_Type_fixed
+
 #endif
 
 /**************************************************************************************************/
