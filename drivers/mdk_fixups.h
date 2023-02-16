@@ -1508,6 +1508,25 @@
     #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Min (0x0UL) /*!< Min value of OWNERID field.                           */
     #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Max (0xFUL) /*!< Max size of OWNERID field.                            */
 
+
+    /* Missing HSFLL FREQM.ERROR register bit definitions */
+    /* TRIMUNDERFLOW @Bit 1 : Underflow error status. */
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos (1UL)  /*!< Position of TRIMUNDERFLOW field.                                     */
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos) /*!< Bit mask of TRIMUNDERFLOW
+                                                                              field.*/                                              
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Min (0x0UL) /*!< Min enumerator value of TRIMUNDERFLOW field.                        */
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Max (0x1UL) /*!< Max enumerator value of TRIMUNDERFLOW field.                        */
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_OutsideLimit (0x1UL) /*!< Underflow                                                  */
+    #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_WithinLimit (0x0UL) /*!< No underflow                                                */
+    
+    /* TRIMOVERFLOW @Bit 2 : Overflow error status. */
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos (2UL)   /*!< Position of TRIMOVERFLOW field.                                      */
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos) /*!< Bit mask of TRIMOVERFLOW field.*/
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Min (0x0UL) /*!< Min enumerator value of TRIMOVERFLOW field.                          */
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Max (0x1UL) /*!< Max enumerator value of TRIMOVERFLOW field.                          */
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_OutsideLimit (0x1UL) /*!< Overflow                                                    */
+    #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_WithinLimit (0x0UL) /*!< No overflow                                                  */
+
 #endif
 
 /**************************************************************************************************/
