@@ -44,8 +44,8 @@ NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_TOGGLE == GPIOTE_CONFIG_POLARITY_Toggle);
  * +--------+-------+-----------------------+-----+--------+--------+---------+-------+
  * | 0      | 1     | 2-4                   | 5   | 6      | 7      | 8-12    | 13-15 |
  * +--------+-------+-----------------------+-----+--------+--------+---------+-------+
- * | in use | dir   | nrfx_gpiote_trigger_t | te  | skip   | legacy |8:       | TE    |
- * | 0: no  | 0:in  |                       | used| config | api    | present | index |
+ * | in use | dir   | nrfx_gpiote_trigger_t | te  | skip   | N/A    |8:       | TE    |
+ * | 0: no  | 0:in  |                       | used| config |        | present | index |
  * | 1: yes | 1:out |                       |     |        |        |9-12:    | (when |
  * |        |       |                       |     |        |        | handler |  used)|
  * |        |       |                       |     |        |        | index   |       |
@@ -83,7 +83,6 @@ NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_MAX <= NRFX_BIT(PIN_FLAG_TRIG_MODE_BITS))
 
 #define PIN_FLAG_TE_USED        NRFX_BIT(5)
 #define PIN_FLAG_SKIP_CONFIG    NRFX_BIT(6)
-#define PIN_FLAG_LEGACY_API_PIN NRFX_BIT(7)
 
 #define PIN_FLAG_HANDLER_PRESENT NRFX_BIT(8)
 
@@ -604,22 +603,7 @@ void nrfx_gpiote_uninit(void)
     {
         if (nrfy_gpio_pin_present_check(i) && pin_in_use(i))
         {
-            if (m_cb.pin_flags[i] & PIN_FLAG_LEGACY_API_PIN)
-            {
-                m_cb.pin_flags[i] &= ~PIN_FLAG_LEGACY_API_PIN;
-                if (pin_has_trigger(i))
-                {
-                    nrfx_gpiote_in_uninit(i);
-                }
-                else
-                {
-                    nrfx_gpiote_out_uninit(i);
-                }
-            }
-            else
-            {
-                nrfx_gpiote_pin_uninit(i);
-            }
+            nrfx_gpiote_pin_uninit(i);
         }
     }
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
@@ -635,90 +619,6 @@ nrfx_err_t nrfx_gpiote_channel_alloc(uint8_t * p_channel)
 {
     return nrfx_flag32_alloc(&m_cb.available_channels_mask, p_channel);
 }
-
-nrfx_err_t nrfx_gpiote_out_init(nrfx_gpiote_pin_t                pin,
-                                nrfx_gpiote_out_config_t const * p_config)
-{
-    uint8_t ch;
-    nrfx_err_t err;
-
-    if (p_config->task_pin)
-    {
-        err = nrfx_gpiote_channel_alloc(&ch);
-        if (err != NRFX_SUCCESS)
-        {
-            return err;
-        }
-    }
-    else
-    {
-        /* Value will not be used. */
-        ch = 0xFF;
-    }
-
-    err = nrfx_gpiote_out_prealloc_init(pin, p_config, ch);
-    if (err == NRFX_ERROR_BUSY && p_config->task_pin)
-    {
-        nrfx_gpiote_channel_free(ch);
-    }
-
-    return err;
-}
-
-nrfx_err_t nrfx_gpiote_out_prealloc_init(nrfx_gpiote_pin_t                pin,
-                                         nrfx_gpiote_out_config_t const * p_config,
-                                         uint8_t                          channel)
-{
-    nrfx_gpiote_output_config_t config = NRFX_GPIOTE_DEFAULT_OUTPUT_CONFIG;
-    nrfx_gpiote_task_config_t task_config;
-    bool use_task = p_config->task_pin;
-    nrfx_err_t err;
-
-    if (pin_in_use(pin))
-    {
-        return NRFX_ERROR_BUSY;
-    }
-
-    if (p_config->init_state == NRF_GPIOTE_INITIAL_VALUE_HIGH)
-    {
-        nrfy_gpio_pin_set(pin);
-    }
-
-    if (use_task)
-    {
-
-        task_config.task_ch = channel;
-        task_config.init_val = p_config->init_state;
-        task_config.polarity = p_config->action;
-    }
-
-    err = nrfx_gpiote_output_configure(pin, &config, use_task ? &task_config : NULL);
-    if (err == NRFX_SUCCESS)
-    {
-        m_cb.pin_flags[pin] |= PIN_FLAG_LEGACY_API_PIN;
-    }
-
-    return err;
-}
-
-void nrfx_gpiote_out_uninit(nrfx_gpiote_pin_t pin)
-{
-    NRFX_ASSERT(nrf_gpio_pin_present_check(pin));
-    NRFX_ASSERT(pin_in_use(pin));
-
-    uint8_t ch = pin_in_use_by_te(pin) ? pin_te_get(pin) : 0xFF;
-
-    nrfx_err_t err = nrfx_gpiote_pin_uninit(pin);
-    NRFX_ASSERT(err == NRFX_SUCCESS);
-
-    if (ch != 0xFF)
-    {
-        nrfx_gpiote_channel_free(ch);
-    }
-
-    (void)err;
-}
-
 
 void nrfx_gpiote_out_set(nrfx_gpiote_pin_t pin)
 {
@@ -866,97 +766,6 @@ void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_pin_t pin)
 
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT)
 
-
-nrfx_err_t nrfx_gpiote_in_init(nrfx_gpiote_pin_t               pin,
-                               nrfx_gpiote_in_config_t const * p_config,
-                               nrfx_gpiote_evt_handler_t       evt_handler)
-{
-    uint8_t ch;
-    nrfx_err_t err;
-
-    if (p_config->hi_accuracy)
-    {
-        err = nrfx_gpiote_channel_alloc(&ch);
-        if (err != NRFX_SUCCESS)
-        {
-            return err;
-        }
-    }
-    else
-    {
-        /* Value will not be used. */
-        ch = 0xFF;
-    }
-
-    err = nrfx_gpiote_in_prealloc_init(pin, p_config, ch, evt_handler);
-    if ((err == NRFX_ERROR_NO_MEM) && p_config->hi_accuracy)
-    {
-        nrfx_gpiote_channel_free(ch);
-    }
-
-    return err;
-}
-
-static void legacy_handler(nrfx_gpiote_pin_t pin, nrfx_gpiote_trigger_t trigger, void * p_context)
-{
-    NRFX_ASSERT(trigger <= NRFX_GPIOTE_TRIGGER_TOGGLE);
-
-    ((nrfx_gpiote_evt_handler_t)p_context)(pin, gpiote_trigger_to_polarity(trigger));
-}
-
-nrfx_err_t nrfx_gpiote_in_prealloc_init(nrfx_gpiote_pin_t               pin,
-                                        nrfx_gpiote_in_config_t const * p_config,
-                                        uint8_t                         channel,
-                                        nrfx_gpiote_evt_handler_t       evt_handler)
-{
-    nrfx_err_t err;
-    bool skip_in_config = false;
-    nrfx_gpiote_input_config_t input_config;
-    nrfx_gpiote_trigger_config_t trigger_config = {
-        .trigger = gpiote_polarity_to_trigger(p_config->sense),
-        .p_in_channel = p_config->hi_accuracy ? &channel : NULL
-    };
-    nrfx_gpiote_handler_config_t handler_config = {
-        .handler = legacy_handler,
-        .p_context = (void *)evt_handler
-    };
-
-    if (p_config->is_watcher)
-    {
-        nrfx_gpiote_output_config_t output_config = {
-            .input_connect = NRF_GPIO_PIN_INPUT_CONNECT
-        };
-
-        skip_in_config = true;
-        err = nrfx_gpiote_output_configure(pin, &output_config, NULL);
-        if (err != NRFX_SUCCESS)
-        {
-            return err;
-        }
-    }
-    else
-    {
-        input_config.pull = p_config->pull;
-    }
-
-    if (p_config->skip_gpio_setup)
-    {
-        m_cb.pin_flags[pin] |= PIN_FLAG_SKIP_CONFIG;
-        skip_in_config = true;
-    }
-
-    err = nrfx_gpiote_input_configure(pin,
-                                      skip_in_config ? NULL : &input_config,
-                                      &trigger_config,
-                                      &handler_config);
-    if (err == NRFX_SUCCESS)
-    {
-        m_cb.pin_flags[pin] |= PIN_FLAG_LEGACY_API_PIN;
-    }
-
-    return err;
-}
-
 void nrfx_gpiote_trigger_enable(nrfx_gpiote_pin_t pin, bool int_enable)
 {
     NRFX_ASSERT(pin_has_trigger(pin));
@@ -993,40 +802,6 @@ void nrfx_gpiote_trigger_disable(nrfx_gpiote_pin_t pin)
         nrfy_gpio_cfg_sense_set(pin, NRF_GPIO_PIN_NOSENSE);
     }
 }
-
-void nrfx_gpiote_in_uninit(nrfx_gpiote_pin_t pin)
-{
-    NRFX_ASSERT(pin_in_use(pin));
-    NRFX_ASSERT(pin_is_input(pin) || pin_has_trigger(pin));
-    nrfx_err_t err;
-    uint8_t ch;
-
-    if (!pin_in_use(pin))
-    {
-        return;
-    }
-
-    ch = pin_in_use_by_te(pin) ? pin_te_get(pin) : 0xFF;
-
-    if (m_cb.pin_flags[pin] & PIN_FLAG_SKIP_CONFIG)
-    {
-        pin_handler_trigger_uninit(pin);
-        m_cb.pin_flags[pin] &= ~PIN_FLAG_SKIP_CONFIG;
-    }
-    else
-    {
-        err = nrfx_gpiote_pin_uninit(pin);
-        NRFX_ASSERT(err == NRFX_SUCCESS);
-    }
-
-    if (ch != 0xFF)
-    {
-        nrfx_gpiote_channel_free(ch);
-    }
-
-    (void)err;
-}
-
 
 bool nrfx_gpiote_in_is_set(nrfx_gpiote_pin_t pin)
 {
