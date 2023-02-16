@@ -71,16 +71,16 @@ typedef struct
 /** @brief HSFLL status of analog module output signals. */
 typedef struct
 {
-    bool ready;   ///< Current value of READY signal from the analog module.
-    bool settled; ///< Current value of SETTLED signal from the analog module.
+    bool ready;   ///< Current value of READY signal from the analog module. True if '1', false if '0'.
+    bool settled; ///< Current value of SETTLED signal from the analog module. True if '1', false if '0'.
 } nrf_hsfll_statusana_t;
 
 /** @brief HSFLL frequency measurements errors. */
 typedef struct
 {
-    bool error;          ///< Trim error status.
-    bool trim_underflow; ///< Underflow error status.
-    bool trim_overflow;  ///< Overflow error status.
+    bool error;          ///< Trim error status. True if outside limit, false if within.
+    bool trim_underflow; ///< Underflow error status. True if outside limit, false if within.
+    bool trim_overflow;  ///< Overflow error status. True if outside limit, false if within.
 } nrf_hsfll_freqm_error_t;
 
 /** @brief HSFLL clock control operating mode settings. */
@@ -95,8 +95,8 @@ typedef enum
 /** @brief HSFLL clock control. */
 typedef struct
 {
-    nrf_hsfll_mode_ctrl_t mode;     ///< The HSFLL operating mode.
-    bool                  override; ///< HSFLL override mode.
+    nrf_hsfll_mode_ctrl_t mode;     ///< HSFLL operating mode.
+    bool                  override; ///< HSFLL override mode. True if enabled, false otherwise.
 } nrf_hsfll_clkctrl_t;
 
 /** @brief HSFLL clock dithering configuration. */
@@ -113,12 +113,12 @@ typedef struct
 /** @brief HSFLL clock sleep configuration. */
 typedef struct
 {
-    bool mode;   ///< Power down the HSFLL core.
-    bool retain; ///< Retain all inputs while powered down.
+    bool mode;   ///< Power down the HSFLL core. True if powered down, false if in normal mode.
+    bool retain; ///< Retain all inputs while powered down. True if retention is enabled, false otherwise.
 } nrf_hsfll_sleep_t;
 
 /**
- * @brief Function for retrieving the address of the specified task.
+ * @brief Function for getting the address of the specified task.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  HSFLL task.
@@ -213,7 +213,7 @@ NRF_STATIC_INLINE void nrf_hsfll_freqm_error_get(NRF_HSFLL_Type const *    p_reg
  *
  * @return The last frequency measurement value. Measures the number of reference clock cycles.
  */
-NRF_STATIC_INLINE uint8_t nrf_hsfll_freqm_meas_get(NRF_HSFLL_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_hsfll_freqm_meas_get(NRF_HSFLL_Type const * p_reg);
 
 /**
  * @brief Function for setting HSFLL clock control mode settings.
@@ -258,7 +258,7 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_dithering_get(NRF_HSFLL_Type const *  p
  * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
  * @param[in] multiplier Value of new multiplier. Valid @c multiplier range is from 4 to 25.
  */
-NRF_STATIC_INLINE void nrf_hsfll_clkctrl_mult_set(NRF_HSFLL_Type * p_reg, uint8_t multiplier);
+NRF_STATIC_INLINE void nrf_hsfll_clkctrl_mult_set(NRF_HSFLL_Type * p_reg, uint32_t multiplier);
 
 /**
  * @brief Function for getting HSFLL frequency multiplier.
@@ -267,7 +267,7 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_mult_set(NRF_HSFLL_Type * p_reg, uint8_
  *
  * @return Current value of frequency multiplier used by HSFLL.
  */
-NRF_STATIC_INLINE uint8_t nrf_hsfll_clkctrl_mult_get(NRF_HSFLL_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_hsfll_clkctrl_mult_get(NRF_HSFLL_Type const * p_reg);
 
 /**
  * @brief Function for setting HSFLL clock sleep configuration.
@@ -288,7 +288,7 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_sleep_get(NRF_HSFLL_Type const * p_reg,
                                                    nrf_hsfll_sleep_t *    p_config);
 
 /**
- * @brief Function for enabling the retention of HSFLL fine trim control.
+ * @brief Function for enabling or disabling the retention of HSFLL fine trim control.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] retain True if the fine trim control is to be retained when HSFLL goes to open-loop
@@ -298,7 +298,7 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_retainfinetrim_enable_set(NRF_HSFLL_Typ
                                                                    bool             retain);
 
 /**
- * @brief Function for enabling the override of the HSFLL LOCKED signal.
+ * @brief Function for enabling or disabling the override of the HSFLL LOCKED signal.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] override True if the override is to be enabled, false otherwise.
@@ -313,8 +313,8 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_overridelocked_enable_set(NRF_HSFLL_Typ
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] seed  32-bit initial value for the PRBS.
  */
-NRF_STATIC_INLINE void nrf_hsfll_clkctrl_ditherinit_set(NRF_HSFLL_Type * p_reg, uint32_t seed);
-#endif //NRF_HSFLL_HAS_DITHERINIT
+NRF_STATIC_INLINE void nrf_hsfll_clkctrl_dither_init_set(NRF_HSFLL_Type * p_reg, uint32_t seed);
+#endif // NRF_HSFLL_HAS_DITHERINIT
 
 /**
  * @brief Function for enabling or disabling lock for mirrored registers.
@@ -359,16 +359,18 @@ NRF_STATIC_INLINE void nrf_hsfll_status_clk_get(NRF_HSFLL_Type const *   p_reg,
                                                 nrf_hsfll_status_clk_t * p_status)
 {
     NRFX_ASSERT(p_status);
-    p_status->mode = (p_reg->CLOCKSTATUS & HSFLL_CLOCKSTATUS_MODE_Msk)
-                     >> HSFLL_CLOCKSTATUS_MODE_Pos;
-    p_status->override = (p_reg->CLOCKSTATUS & HSFLL_CLOCKSTATUS_OVERRIDE_Msk)
-                         >> HSFLL_CLOCKSTATUS_OVERRIDE_Pos ==
+    uint32_t reg = p_reg->CLOCKSTATUS;
+
+    p_status->mode =
+        (nrf_hsfll_mode_status_t)((reg & HSFLL_CLOCKSTATUS_MODE_Msk) >> HSFLL_CLOCKSTATUS_MODE_Pos);
+    p_status->override = ((reg & HSFLL_CLOCKSTATUS_OVERRIDE_Msk)
+                          >> HSFLL_CLOCKSTATUS_OVERRIDE_Pos) ==
                          HSFLL_CLOCKSTATUS_OVERRIDE_Enabled;
-    p_status->accuracy = (p_reg->CLOCKSTATUS & HSFLL_CLOCKSTATUS_ACCURACY_Msk)
-                         >> HSFLL_CLOCKSTATUS_ACCURACY_Pos ==
+    p_status->accuracy = ((reg & HSFLL_CLOCKSTATUS_ACCURACY_Msk)
+                          >> HSFLL_CLOCKSTATUS_ACCURACY_Pos) ==
                          HSFLL_CLOCKSTATUS_ACCURACY_WithinLimit;
-    p_status->locked = (p_reg->CLOCKSTATUS & HSFLL_CLOCKSTATUS_LOCKED_Msk)
-                       >> HSFLL_CLOCKSTATUS_LOCKED_Pos ==
+    p_status->locked = ((reg & HSFLL_CLOCKSTATUS_LOCKED_Msk)
+                        >> HSFLL_CLOCKSTATUS_LOCKED_Pos) ==
                        HSFLL_CLOCKSTATUS_LOCKED_Locked;
 }
 
@@ -384,7 +386,7 @@ NRF_STATIC_INLINE void nrf_hsfll_statusana_get(NRF_HSFLL_Type const *  p_reg,
 
 NRF_STATIC_INLINE bool nrf_hsfll_freqm_done_check(NRF_HSFLL_Type const * p_reg)
 {
-    return (p_reg->FREQM.DONE & HSFLL_FREQM_DONE_DONE_Msk) >> HSFLL_FREQM_DONE_DONE_Pos ==
+    return ((p_reg->FREQM.DONE & HSFLL_FREQM_DONE_DONE_Msk) >> HSFLL_FREQM_DONE_DONE_Pos) ==
            HSFLL_FREQM_DONE_DONE_Completed;
 }
 
@@ -393,17 +395,17 @@ NRF_STATIC_INLINE void nrf_hsfll_freqm_error_get(NRF_HSFLL_Type const *    p_reg
 {
     NRFX_ASSERT(p_error);
     p_error->error =
-        (p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_ERROR_Msk) >> HSFLL_FREQM_ERROR_ERROR_Pos ==
+        ((p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_ERROR_Msk) >> HSFLL_FREQM_ERROR_ERROR_Pos) ==
         HSFLL_FREQM_ERROR_ERROR_OutsideLimit;
-    p_error->trim_underflow = (p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Msk)
-                              >> HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos ==
+    p_error->trim_underflow = ((p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Msk)
+                               >> HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos) ==
                               HSFLL_FREQM_ERROR_TRIMUNDERFLOW_OutsideLimit;
-    p_error->trim_overflow = (p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_TRIMOVERFLOW_Msk)
-                             >> HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos ==
+    p_error->trim_overflow = ((p_reg->FREQM.ERROR & HSFLL_FREQM_ERROR_TRIMOVERFLOW_Msk)
+                              >> HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos) ==
                              HSFLL_FREQM_ERROR_TRIMOVERFLOW_OutsideLimit;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_hsfll_freqm_meas_get(NRF_HSFLL_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_hsfll_freqm_meas_get(NRF_HSFLL_Type const * p_reg)
 {
     return (p_reg->FREQM.MEAS & HSFLL_FREQM_MEAS_VALUE_Msk) >> HSFLL_FREQM_MEAS_VALUE_Pos;
 }
@@ -425,9 +427,12 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_mode_get(NRF_HSFLL_Type const * p_reg,
                                                   nrf_hsfll_clkctrl_t *  p_clkctrl)
 {
     NRFX_ASSERT(p_clkctrl);
-    p_clkctrl->mode = (p_reg->CLOCKCTRL.MODE & HSFLL_CLOCKCTRL_MODE_MODE_Msk)
-                      >> HSFLL_CLOCKCTRL_MODE_MODE_Pos;
-    p_clkctrl->override = ((p_reg->CLOCKCTRL.MODE & HSFLL_CLOCKCTRL_MODE_OVERRIDE_Msk)
+    uint32_t reg = p_reg->CLOCKCTRL.MODE;
+
+    p_clkctrl->mode =
+        (nrf_hsfll_mode_ctrl_t)((reg & HSFLL_CLOCKCTRL_MODE_MODE_Msk)
+                                >> HSFLL_CLOCKCTRL_MODE_MODE_Pos);
+    p_clkctrl->override = ((reg & HSFLL_CLOCKCTRL_MODE_OVERRIDE_Msk)
                            >> HSFLL_CLOCKCTRL_MODE_OVERRIDE_Pos) ==
                           HSFLL_CLOCKCTRL_MODE_OVERRIDE_Enabled;
 }
@@ -469,13 +474,13 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_dithering_get(NRF_HSFLL_Type const *  p
 }
 
 NRF_STATIC_INLINE void nrf_hsfll_clkctrl_mult_set(NRF_HSFLL_Type * p_reg,
-                                                  uint8_t          multiplier)
+                                                  uint32_t         multiplier)
 {
     p_reg->CLOCKCTRL.MULT = (multiplier << HSFLL_CLOCKCTRL_MULT_VAL_Pos) &
                             HSFLL_CLOCKCTRL_MULT_VAL_Msk;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_hsfll_clkctrl_mult_get(NRF_HSFLL_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_hsfll_clkctrl_mult_get(NRF_HSFLL_Type const * p_reg)
 {
     return (p_reg->CLOCKCTRL.MULT & HSFLL_CLOCKCTRL_MULT_VAL_Msk) >> HSFLL_CLOCKCTRL_MULT_VAL_Pos;
 }
@@ -528,7 +533,7 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_overridelocked_enable_set(NRF_HSFLL_Typ
 }
 
 #if NRF_HSFLL_HAS_DITHERINIT
-NRF_STATIC_INLINE void nrf_hsfll_clkctrl_ditherinit_set(NRF_HSFLL_Type * p_reg, uint32_t seed)
+NRF_STATIC_INLINE void nrf_hsfll_clkctrl_dither_init_set(NRF_HSFLL_Type * p_reg, uint32_t seed)
 {
     p_reg->CLOCKCTRL.DITHERINIT = (seed << HSFLL_CLOCKCTRL_DITHERINIT_SEED_Pos) &
                                   HSFLL_CLOCKCTRL_DITHERINIT_SEED_Msk;
