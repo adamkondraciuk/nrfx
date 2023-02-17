@@ -65,15 +65,14 @@ typedef uint16_t nrf_comp_input_t;
 typedef enum
 {
     NRF_COMP_REF_INT_1V2   = COMP_REFSEL_REFSEL_Int1V2,    /*!< VREF = internal 1.2 V reference (VDD >= 1.7 V). */
-    /* TODO: NRFX-3188 Hacker fields. */
+#if defined(COMP_REFSEL_REFSEL_Int1V8) || defined(__NRFX_DOXYGEN__)
     NRF_COMP_REF_INT_1V8   = COMP_REFSEL_REFSEL_Int1V8,    /*!< VREF = internal 1.8 V reference (VDD >= VREF + 0.2 V). */
+#endif
+#if defined(COMP_REFSEL_REFSEL_Int2V4) || defined(__NRFX_DOXYGEN__)
     NRF_COMP_REF_INT_2V4   = COMP_REFSEL_REFSEL_Int2V4,    /*!< VREF = internal 2.4 V reference (VDD >= VREF + 0.2 V). */
+#endif
 #if defined(COMP_REFSEL_REFSEL_AVDDAO1V8) || defined(__NRFX_DOXYGEN__)
     NRF_COMP_REF_AVDDAO1V8 = COMP_REFSEL_REFSEL_AVDDAO1V8, /*!< VREF = AVDD_AO_1V8. */
-#endif
-    /* TODO: NRFX-3188 Internal field. */
-#if defined(COMP_REFSEL_REFSEL_Diff) || defined(__NRFX_DOXYGEN__)
-    NRF_COMP_REF_DIFF      = COMP_REFSEL_REFSEL_Diff,      /*!< VREF = power down built-in reference with disconnected resistor ladder. */
 #endif
 #if defined(COMP_REFSEL_REFSEL_VDD) || defined(__NRFX_DOXYGEN__)
     NRF_COMP_REF_VDD       = COMP_REFSEL_REFSEL_VDD,       /*!< VREF = VDD. */

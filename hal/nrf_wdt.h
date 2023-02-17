@@ -64,51 +64,11 @@ extern "C" {
 #define NRF_WDT_HAS_TIMER 0
 #endif
 
-#if defined(WDT_RCNT_RCNT_Msk) || defined (__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Presence of reload count. */
-#define NRF_WDT_HAS_RCNT 1
-#else
-#define NRF_WDT_HAS_RCNT 0
-#endif
-
-#if defined(WDT_CONFIG_OFF_Msk) || defined (__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Presence of system OFF mode override. */
-#define NRF_WDT_HAS_CONFIG_OFF 1
-#else
-#define NRF_WDT_HAS_CONFIG_OFF 0
-#endif
-
 #if defined(WDT_CONFIG_STOPEN_Msk) || defined (__NRFX_DOXYGEN__)
 /** @brief Presence of WDT stop enable. */
 #define NRF_WDT_HAS_CONFIG_STOPEN 1
 #else
 #define NRF_WDT_HAS_CONFIG_STOPEN 0
-#endif
-
-#if defined(WDT_CONFIG_RELOAD_Msk) || defined (__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Presence of reload configuration. */
-#define NRF_WDT_HAS_CONFIG_RELOAD 1
-#else
-#define NRF_WDT_HAS_CONFIG_RELOAD 0
-#endif
-
-#if defined(WDT_RRKEY_RRKEY_Msk) || defined (__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Presence of reload request key. */
-#define NRF_WDT_HAS_RRKEY 1
-#else
-#define NRF_WDT_HAS_RRKEY 0
-#endif
-
-#if defined(WDT_TSKEY_TSKEY_Msk) || defined (__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Presence of task stop key. */
-#define NRF_WDT_HAS_TSKEY 1
-#else
-#define NRF_WDT_HAS_TSKEY 0
 #endif
 
 #if defined(WDT_INTENSET_STOPPED_Msk) || defined (__NRFX_DOXYGEN__)
@@ -148,15 +108,6 @@ typedef enum
 {
     NRF_WDT_BEHAVIOUR_RUN_SLEEP_MASK     = WDT_CONFIG_SLEEP_Msk,  /**< WDT will run when CPU is in SLEEP mode. */
     NRF_WDT_BEHAVIOUR_RUN_HALT_MASK      = WDT_CONFIG_HALT_Msk,   /**< WDT will run when CPU is in HALT mode. */
-#if NRF_WDT_HAS_CONFIG_OFF
-    NRF_WDT_BEHAVIOUR_PREVENT_OFF_MASK   = WDT_CONFIG_OFF_Msk,    /**< WDT running will prevent system OFF mode. */
-#endif
-#if NRF_WDT_HAS_TIMER
-    NRF_WDT_BEHAVIOUR_TIMER_MODE_MASK    = WDT_CONFIG_MODE_Msk,   /**< WDT operating as a timer. */
-#endif
-#if NRF_WDT_HAS_CONFIG_RELOAD
-    NRF_WDT_BEHAVIOUR_RELOAD_ENABLE_MASK = WDT_CONFIG_RELOAD_Msk, /**< WDT allows reloading CRV between TIMEOUT and watchdog reset. */
-#endif
 #if NRF_WDT_HAS_CONFIG_STOPEN
     NRF_WDT_BEHAVIOUR_STOP_ENABLE_MASK   = WDT_CONFIG_STOPEN_Msk, /**< WDT allows stopping. */
 #endif
@@ -395,17 +346,6 @@ NRF_STATIC_INLINE bool nrf_wdt_request_status_check(NRF_WDT_Type const *  p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_wdt_request_status_get(NRF_WDT_Type const * p_reg);
 
-#if NRF_WDT_HAS_RCNT
-/**
- * @brief Function for retrieving the watchdog reload count.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Number of times the watchdog has been reloaded.
- */
-NRF_STATIC_INLINE uint8_t nrf_wdt_reload_count_get(NRF_WDT_Type const * p_reg);
-#endif
-
 /**
  * @brief Function for setting the watchdog reload value.
  *
@@ -461,44 +401,6 @@ NRF_STATIC_INLINE bool nrf_wdt_reload_request_enable_check(NRF_WDT_Type const * 
  */
 NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
                                                   nrf_wdt_rr_register_t rr_register);
-
-#if NRF_WDT_HAS_RRKEY
-/**
- * @brief Function for setting the watchdog reload request key.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] key   Key to be used when requesting a reload.
- */
-NRF_STATIC_INLINE void nrf_wdt_reload_request_key_set(NRF_WDT_Type * p_reg, uint32_t key);
-
-/**
- * @brief Function for retrieving the watchdog reload request key.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Reload request key.
- */
-NRF_STATIC_INLINE uint32_t nrf_wdt_reload_request_key_get(NRF_WDT_Type const * p_reg);
-#endif
-
-#if NRF_WDT_HAS_TSKEY
-/**
- * @brief Function for setting the watchdog task stop key.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] key   Key to be used when stopping the watchdog.
- */
-NRF_STATIC_INLINE void nrf_wdt_task_stop_key_set(NRF_WDT_Type * p_reg, uint32_t key);
-
-/**
- * @brief Function for retrieving the watchdog task stop key.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Task stop key.
- */
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_stop_key_get(NRF_WDT_Type const * p_reg);
-#endif
 
 #if NRF_WDT_HAS_STOP_ENABLE
 /**
@@ -633,13 +535,6 @@ NRF_STATIC_INLINE uint32_t nrf_wdt_request_status_get(NRF_WDT_Type const * p_reg
     return p_reg->REQSTATUS;
 }
 
-#if NRF_WDT_HAS_RCNT
-NRF_STATIC_INLINE uint8_t nrf_wdt_reload_count_get(NRF_WDT_Type const * p_reg)
-{
-    return (uint8_t)p_reg->RCNT;
-}
-#endif
-
 NRF_STATIC_INLINE void nrf_wdt_reload_value_set(NRF_WDT_Type * p_reg, uint32_t reload_value)
 {
     p_reg->CRV = reload_value;
@@ -673,30 +568,6 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
 {
     p_reg->RR[rr_register] = NRF_WDT_RR_VALUE;
 }
-
-#if NRF_WDT_HAS_RRKEY
-NRF_STATIC_INLINE void nrf_wdt_reload_request_key_set(NRF_WDT_Type * p_reg, uint32_t key)
-{
-    p_reg->RRKEY = key;
-}
-
-NRF_STATIC_INLINE uint32_t nrf_wdt_reload_request_key_get(NRF_WDT_Type const * p_reg)
-{
-    return p_reg->RRKEY;
-}
-#endif
-
-#if NRF_WDT_HAS_TSKEY
-NRF_STATIC_INLINE void nrf_wdt_task_stop_key_set(NRF_WDT_Type * p_reg, uint32_t key)
-{
-    p_reg->TSKEY = key;
-}
-
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_stop_key_get(NRF_WDT_Type const * p_reg)
-{
-    return p_reg->TSKEY;
-}
-#endif
 
 #if NRF_WDT_HAS_STOP_ENABLE
 NRF_STATIC_INLINE void nrf_wdt_task_stop_enable(NRF_WDT_Type * p_reg)

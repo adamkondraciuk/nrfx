@@ -74,13 +74,6 @@ extern "C" {
 #define NRF_GPIO_HAS_PORT_IMPEDANCE 0
 #endif
 
-#if defined(GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Presence of power control. */
-#define NRF_GPIO_HAS_PORT_POWER 1
-#else
-#define NRF_GPIO_HAS_PORT_POWER 0
-#endif
-
 #if defined(GPIO_RETAIN_APPLICAION_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of register retention. */
 #define NRF_GPIO_HAS_RETENTION 1
@@ -235,17 +228,6 @@ typedef enum
     NRF_GPIO_PORT_IMPEDANCE_800_MASK  = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE800_Msk,  //< Enable 800 Ohm impedance.
     NRF_GPIO_PORT_IMPEDANCE_1600_MASK = GPIO_PORTCNF_DRIVECTRL_IMPEDANCE1600_Msk, //< Enable 1600 Ohm impedance.
 } nrf_gpio_port_impedance_mask_t;
-#endif
-
-#if NRF_GPIO_HAS_PORT_POWER
-/** @brief Port power control. */
-typedef enum
-{
-    NRF_GPIO_PORT_POWER_OFF     = GPIO_PORTCNF_PWRCTRL_PWRCTRL_Off,            //< Power off.
-    NRF_GPIO_PORT_POWER_GND_0V  = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGND0V,  //< Static floating GND of the pin, connected to 0V.
-    NRF_GPIO_PORT_POWER_GND_1V8 = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGND1V8, //< Static floating GND of the pin, connected to 1.8V.
-    NRF_GPIO_PORT_POWER_GND_BUF = GPIO_PORTCNF_PWRCTRL_PWRCTRL_FloatingGNDBuf, //< Buffered floating GND of the pin, generating VDDIO - 1.8V.
-} nrf_gpio_port_power_t;
 #endif
 
 #if NRF_GPIO_HAS_RETENTION
@@ -604,30 +586,6 @@ NRF_STATIC_INLINE void nrf_gpio_port_impedance_set(NRF_GPIO_Type * p_reg, uint32
  * @return Mask of impedances set, created using @ref nrf_gpio_port_impedance_mask_t.
  */
 NRF_STATIC_INLINE uint32_t nrf_gpio_port_impedance_get(NRF_GPIO_Type const * p_reg);
-#endif
-
-#if NRF_GPIO_HAS_PORT_POWER
-/* TODO: NRFX-3188 */
-/**
- * @brief Function for setting the power control of the pins on the given port.
- *
- * @warning This register is retained when retention is enabled.
- *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- * @param power Power control to be set.
- */
-NRF_STATIC_INLINE void nrf_gpio_port_power_set(NRF_GPIO_Type * p_reg, nrf_gpio_port_power_t power);
-
-/**
- * @brief Function for geting the power control of the pins on the given port.
- *
- * @warning This register is retained when retention is enabled.
- *
- * @param p_reg Pointer to the structure of registers of the peripheral.
- *
- * @return Power control that is active.
- */
-NRF_STATIC_INLINE nrf_gpio_port_power_t nrf_gpio_port_power_get(NRF_GPIO_Type const * p_reg);
 #endif
 
 #if NRF_GPIO_HAS_RETENTION
@@ -1205,20 +1163,6 @@ NRF_STATIC_INLINE void nrf_gpio_port_impedance_set(NRF_GPIO_Type * p_reg, uint32
 NRF_STATIC_INLINE uint32_t nrf_gpio_port_impedance_get(NRF_GPIO_Type const * p_reg)
 {
     return p_reg->PORTCNF.DRIVECTRL & NRF_GPIO_PORT_IMPEDANCE_ALL_MASK;
-}
-#endif
-
-#if NRF_GPIO_HAS_PORT_POWER
-NRF_STATIC_INLINE void nrf_gpio_port_power_set(NRF_GPIO_Type * p_reg, nrf_gpio_port_power_t power)
-{
-    p_reg->PORTCNF.PWRCTRL = ((p_reg->PORTCNF.PWRCTRL & ~GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk) |
-                              power << GPIO_PORTCNF_PWRCTRL_PWRCTRL_Pos);
-}
-
-NRF_STATIC_INLINE nrf_gpio_port_power_t nrf_gpio_port_power_get(NRF_GPIO_Type const * p_reg)
-{
-    return (nrf_gpio_port_power_t)((p_reg->PORTCNF.PWRCTRL & GPIO_PORTCNF_PWRCTRL_PWRCTRL_Msk)
-                                   >> GPIO_PORTCNF_PWRCTRL_PWRCTRL_Pos);
 }
 #endif
 

@@ -32,14 +32,6 @@ extern "C" {
 #define NRF_SPIM_HAS_32_MHZ_FREQ 0
 #endif
 
-#if defined(SPIM_INTEN_STARTED_Msk) || defined(__NRFX_DOXYGEN__)
-/* TODO: NRFX-3188 */
-/** @brief Symbol indicating whether INTEN register is available. */
-#define NRF_SPIM_HAS_INTEN 1
-#else
-#define NRF_SPIM_HAS_INTEN 0
-#endif
-
 #if defined(SPIM_FREQUENCY_FREQUENCY_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether frequency is used. */
 #define NRF_SPIM_HAS_FREQUENCY 1
@@ -378,16 +370,6 @@ NRF_STATIC_INLINE uint32_t nrf_spim_shorts_get(NRF_SPIM_Type const * p_reg);
  * @param[in] mask  Mask of interrupts to be enabled.
  */
 NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg, uint32_t mask);
-
-#if NRF_SPIM_HAS_INTEN
-/**
- * @brief Function for setting the configuration of interrupts.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Mask of interrupts to be set.
- */
-NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask);
-#endif
 
 #if NRF_SPIM_HAS_PRESCALER
 /**
@@ -813,13 +795,6 @@ NRF_STATIC_INLINE void nrf_spim_int_enable(NRF_SPIM_Type * p_reg, uint32_t mask)
 {
     p_reg->INTENSET = mask;
 }
-
-#if NRF_SPIM_HAS_INTEN
-NRF_STATIC_INLINE void nrf_spim_int_set(NRF_SPIM_Type * p_reg, uint32_t mask)
-{
-    p_reg->INTEN = mask;
-}
-#endif
 
 NRF_STATIC_INLINE void nrf_spim_int_disable(NRF_SPIM_Type * p_reg, uint32_t mask)
 {
