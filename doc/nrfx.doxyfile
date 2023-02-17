@@ -795,7 +795,8 @@ INPUT                  = ../helpers \
                          ../drivers \
                          ../hal \
                          ../soc \
-                         ../templates \
+                         ../templates/nrfx_glue.h \
+                         ../templates/nrfx_log.h \
                          ../CHANGELOG.md \
                          config_dox \
                          .
