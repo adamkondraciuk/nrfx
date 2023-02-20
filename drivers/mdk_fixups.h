@@ -522,6 +522,7 @@
 
     #define LPCOMP_REFSEL_RESOLUTION 16
 
+    /* TODO: HM-20336 */
     #define SAADC_CH_NUM 8
 
     #if defined(DPPIC_PRESENT)
@@ -1523,6 +1524,9 @@
     typedef NRF_DOMAINS_t nrf_domain_t;
 
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
+
+    /* TODO: HM-20336 */
+    #define SAADC_CH_NUM 8
 
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 

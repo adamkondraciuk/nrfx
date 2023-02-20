@@ -35,6 +35,12 @@ extern "C" {
 #define NRF_CTZ(value) __CLZ(__RBIT(value))
 #endif
 
+/** @brief Macro for extracting relative pin number from the absolute pin number. */
+#define NRF_PIN_NUMBER_TO_PIN(pin) ((pin) & 0x1F)
+
+/** @brief Macro for extracting port number from the absolute pin number. */
+#define NRF_PIN_NUMBER_TO_PORT(pin) ((pin) >> 5)
+
 /**
  * @brief Function for checking if an object is accesible by EasyDMA of given peripheral instance.
  *

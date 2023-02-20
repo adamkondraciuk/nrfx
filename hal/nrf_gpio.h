@@ -1412,9 +1412,9 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 NRF_STATIC_INLINE uint32_t nrf_gpio_pin_port_number_extract(uint32_t * p_pin)
 {
     uint32_t pin_number = *p_pin;
-    *p_pin = pin_number & 0x1F;
+    *p_pin = NRF_PIN_NUMBER_TO_PIN(pin_number);
 
-    return pin_number >> 5;
+    return NRF_PIN_NUMBER_TO_PORT(pin_number);
 }
 
 #endif // NRF_DECLARE_ONLY
