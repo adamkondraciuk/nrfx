@@ -8,10 +8,10 @@ extern "C" {
 #endif
 
 /**
- * @defgroup nrfy_common Common module
+ * @defgroup nrfy_common Common nrfy module
  * @{
  * @ingroup nrfx
- * @brief Common module.
+ * @brief Common nrfy module.
  */
 
 /**
