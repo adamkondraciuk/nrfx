@@ -33,11 +33,7 @@ extern "C" {
 #endif
 
 #if defined(TWIM_TXD_LIST_LIST_ArrayList) || defined(__NRFX_DOXYGEN__)
-/**
- * @brief Symbol indicating whether EasyDMA array list feature is present.
- *
- * @todo Add support for Haltium-specific bitmask once it is available
- */
+/** @brief Symbol indicating whether EasyDMA array list feature is present. */
 #define NRF_TWIM_HAS_ARRAY_LIST 1
 #else
 #define NRF_TWIM_HAS_ARRAY_LIST 0
