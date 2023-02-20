@@ -190,16 +190,28 @@ extern "C" {
 // PWM120_IRQn
 #define nrfx_pwm_120_irq_handler      PWM120_IRQHandler
 
-// SPIS120_UARTE120_IRQn
-#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_8_ENABLED)
-#define nrfx_prs_box_8_irq_handler    SPIS120_UARTE120_IRQHandler
-#else
-#define nrfx_spis_120_irq_handler     SPIS120_UARTE120_IRQHandler
-#define nrfx_uarte_120_irq_handler    SPIS120_UARTE120_IRQHandler
-#endif
+// SPIS120_UARTE120_IRQn SPIM120 and UARTE120
+#if defined(NRF7140_XXAA)
+    #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_8_ENABLED)
+    #define nrfx_prs_box_8_irq_handler    SPIM120_UARTE120_IRQHandler
+    #else
+    #define nrfx_spim_120_irq_handler     SPIM120_UARTE120_IRQHandler
+    #define nrfx_uarte_120_irq_handler    SPIM120_UARTE120_IRQHandler
+    #endif
 
-// SPIM120_IRQn
-#define nrfx_spim_120_irq_handler     SPIM120_IRQHandler
+    // SPIS120_IRQn
+    #define nrfx_spis_120_irq_handler     SPIS120_IRQHandler
+#else
+    #if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_8_ENABLED)
+    #define nrfx_prs_box_8_irq_handler    SPIS120_UARTE120_IRQHandler
+    #else
+    #define nrfx_spis_120_irq_handler     SPIS120_UARTE120_IRQHandler
+    #define nrfx_uarte_120_irq_handler    SPIS120_UARTE120_IRQHandler
+    #endif
+
+    // SPIM120_IRQn
+    #define nrfx_spim_120_irq_handler     SPIM120_IRQHandler
+#endif
 
 // SPIM121_IRQn
 #define nrfx_spim_121_irq_handler     SPIM121_IRQHandler
