@@ -35,6 +35,12 @@ enum {
 #if NRFX_CHECK(NRFX_MVDMA110_ENABLED)
     NRFX_MVDMA110_INST_IDX,
 #endif
+#if NRFX_CHECK(NRFX_MVDMA120_ENABLED)
+    NRFX_MVDMA120_INST_IDX,
+#endif
+#if NRFX_CHECK(NRFX_MVDMA121_ENABLED)
+    NRFX_MVDMA121_INST_IDX,
+#endif
     NRFX_MVDMA_ENABLED_COUNT
 };
 #endif
@@ -226,8 +232,6 @@ void nrfx_mvdma_abort(nrfx_mvdma_t const * p_instance);
 /** @} */
 
 void nrfx_mvdma_irq_handler(void);
-
-void nrfx_gmvdma_irq_handler(void);
 
 #ifdef __cplusplus
 }

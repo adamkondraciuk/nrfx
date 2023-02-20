@@ -398,17 +398,10 @@ static void mvdma_irq_handler(NRF_MVDMA_Type * p_reg, mvdma_control_block_t * p_
     }
 }
 
-#if NRFX_CHECK(NRFX_MVDMA_ENABLED)
+#if NRFX_CHECK(NRFX_MVDMA_ENABLED) && defined(NRF_MVDMA)
 void nrfx_mvdma_irq_handler(void)
 {
     mvdma_irq_handler(NRF_MVDMA, &m_cb[NRFX_MVDMA_INST_IDX]);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_GMVDMA_ENABLED)
-void nrfx_gmvdma_irq_handler(void)
-{
-    mvdma_irq_handler(NRF_GMVDMA, &m_cb[NRFX_GMVDMA_INST_IDX]);
 }
 #endif
 
@@ -416,6 +409,20 @@ void nrfx_gmvdma_irq_handler(void)
 void nrfx_mvdma_irq_handler(void)
 {
     mvdma_irq_handler(NRF_MVDMA110, &m_cb[NRFX_MVDMA110_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_MVDMA120_ENABLED)
+void nrfx_mvdma120_irq_handler(void)
+{
+    mvdma_irq_handler(NRF_MVDMA120, &m_cb[NRFX_MVDMA120_INST_IDX]);
+}
+#endif
+
+#if NRFX_CHECK(NRFX_MVDMA121_ENABLED)
+void nrfx_mvdma121_irq_handler(void)
+{
+    mvdma_irq_handler(NRF_MVDMA121, &m_cb[NRFX_MVDMA121_INST_IDX]);
 }
 #endif
 
