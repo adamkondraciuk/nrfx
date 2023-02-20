@@ -488,9 +488,11 @@
         #define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos)
     #endif
 
+    #define SAADC_CH_NUM 8
     /* MDK-2195 MDK removed information about easydma maxcnt from peripherals since if width is 16. */
     #define SAADC_EASYDMA_MAXCNT_SIZE 15
 
+    #define TWIM120_EASYDMA_MAXCNT_SIZE 16
     #define TWIM130_EASYDMA_MAXCNT_SIZE 16
     #define TWIM131_EASYDMA_MAXCNT_SIZE 16
     #define TWIM132_EASYDMA_MAXCNT_SIZE 16
@@ -1076,6 +1078,7 @@
     #define SPIM136_EASYDMA_MAXCNT_SIZE 16
     #define SPIM137_EASYDMA_MAXCNT_SIZE 16
 
+    #define TWIM120_EASYDMA_MAXCNT_SIZE 16
     #define TWIM130_EASYDMA_MAXCNT_SIZE 16
     #define TWIM131_EASYDMA_MAXCNT_SIZE 16
     #define TWIM132_EASYDMA_MAXCNT_SIZE 16
@@ -1635,6 +1638,7 @@
         #define VDMADESCRIPTOR_CONFIG_ATTRIBUTE_Pos (24UL) /*!< Position of ATTRIBUTE field.                                         */
     #endif
 
+    #define SAADC_CH_NUM 8
     /* MDK-2195 MDK removed information about easydma maxcnt from peripherals since if width is 16.*/
     /* TODO: Verify correct value. */
     #define SAADC_EASYDMA_MAXCNT_SIZE 15
