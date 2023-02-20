@@ -2,7 +2,8 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(NRFX_DPPI_ENABLED)
+// Driver for single instance DPPI
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !NRFX_FEATURE_PRESENT(NRFX_DPPI, _ENABLED)
 
 #include <nrfx_dppi.h>
 #include <helpers/nrfx_flag32_allocator.h>
