@@ -41,7 +41,7 @@ extern "C" {
         NRFX_IPCT_CHANNELS_ENTRY(inst_num)
 
 #define NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE \
-        NRFX_FOREACH_ENABLED(IPC, _NRFX_IPCT_CHANNELS_ENTRY, (), ())
+        NRFX_FOREACH_ENABLED(IPCT, _NRFX_IPCT_CHANNELS_ENTRY, (), ())
 
 #endif // NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE
 
@@ -61,7 +61,7 @@ extern "C" {
 
 #define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                           \
 {                                                                                         \
-        NRFX_FOREACH_ENABLED(IPC, _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY, (), ()) \
+        NRFX_FOREACH_ENABLED(IPCT, _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY, (), ()) \
 }
 
 #ifdef __cplusplus

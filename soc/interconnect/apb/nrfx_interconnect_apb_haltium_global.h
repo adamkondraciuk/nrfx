@@ -41,8 +41,9 @@ extern "C" {
         NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num);
 
 
-#define _NRFX_DPPI_CHANNELS_ENTRY(periph_name, prefix, inst_num, _) \
-        NRFX_DPPI_CHANNELS_ENTRY(inst_num)
+#define _NRFX_DPPI_CHANNELS_ENTRY(periph_name, prefix, inst_num, _)                               \
+        /* Since this is used only for global instances macro shall skip instances starting with 0 */ \
+        NRFX_COND_CODE_0(prefix, (), (NRFX_DPPI_CHANNELS_ENTRY(inst_num)))
 
 #define NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE \
         NRFX_FOREACH_ENABLED(DPPI, _NRFX_DPPI_CHANNELS_ENTRY, (), ())
