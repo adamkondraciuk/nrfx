@@ -3,6 +3,8 @@
 #ifndef NRFX_COREDEP_H__
 #define NRFX_COREDEP_H__
 
+#include <nrfx.h>
+
 /**
  * @defgroup nrfx_coredep Core-dependent functionality
  * @{
@@ -42,26 +44,8 @@
 #elif defined(NRF5340_XXAA_NETWORK)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
-#elif defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
-/* Development platform (e.g. FPGA) may have actual clock slower than the one
- * declared for the platform. In certain cases it may be convinient to apply
- * this divider to have time accurate delay, otherwise delay is slowed down.
- *
- * Currently FPGA divider is 8.
- */
-#if !defined(CONFIG_NRFX_SYS_CLOCK_DIV)
-#define CONFIG_NRFX_SYS_CLOCK_DIV 1
-#endif
-    #if defined(BOARD_PALLADIUM)
-        #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
-        #define NRFX_DELAY_DWT_PRESENT  0
-    #elif defined(BOARD_FPGA)
-        #define NRFX_DELAY_CPU_FREQ_MHZ ((SystemCoreClock / 1000000) / CONFIG_NRFX_SYS_CLOCK_DIV)
-        #define NRFX_DELAY_DWT_PRESENT  1
-    #else
-        #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
-        #define NRFX_DELAY_DWT_PRESENT  0
-    #endif
+#elif !defined(NRFX_DELAY_CPU_FREQ_MHZ) || !defined(NRFX_DELAY_DWT_PRESENT)
+    #error "Unknown device"
 #endif
 
 #if ISA_RISCV
