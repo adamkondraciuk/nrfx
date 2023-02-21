@@ -83,7 +83,7 @@ extern "C" {
  *
  * @return Job descriptors.
  */
-#define NRFX_SR_VDMA_PCGCM_JOB() NRFX_FOREACH_PRESENT(PCGCM, _NRFX_SR_PCGCM_VDMA_JOB, (), (), _)
+#define NRFX_SR_VDMA_PCGCM_JOB() NRFX_FOREACH_PRESENT(PCGCM, NRFX_INSTANCE_CONCAT, (), (), _NRFX_SR_PCGCM_VDMA_JOB, _)
 
 /**
  * @brief Macro for calculating length of a save & restore transfer for all PCGCM instances.
@@ -92,21 +92,21 @@ extern "C" {
  *
  * @return Number of bytes to transfer for performing save and restore.
  */
-#define NRFX_SR_VDMA_PCGCM_LEN() (NRFX_FOREACH_PRESENT(PCGCM, _NRFX_SR_PCGCM_VDMA_LEN, (+), (0), _))
+#define NRFX_SR_VDMA_PCGCM_LEN() (NRFX_FOREACH_PRESENT(PCGCM, NRFX_INSTANCE_CONCAT, (+), (0), _NRFX_SR_PCGCM_VDMA_LEN, _))
 
 /**
  * @brief Macro for generating a set of VDMA jobs for transfer engaging all PCGCS instances.
  *
  * @return Job descriptors.
  */
-#define NRFX_SR_VDMA_PCGCS_JOB() NRFX_FOREACH_PRESENT(PCGCS, _NRFX_SR_PCGCS_VDMA_JOB, (), (), _)
+#define NRFX_SR_VDMA_PCGCS_JOB() NRFX_FOREACH_PRESENT(PCGCS, NRFX_INSTANCE_CONCAT, (), (), _NRFX_SR_PCGCS_VDMA_JOB, _)
 
 /**
  * @brief Macro for calculating length of a save & restore transfer for all PCGCS instances.
  *
  * @return Number of bytes to transfer for performing save and restore.
  */
-#define NRFX_SR_VDMA_PCGCS_LEN() (NRFX_FOREACH_PRESENT(PCGCS, _NRFX_SR_PCGCS_VDMA_LEN, (+), (0), _))
+#define NRFX_SR_VDMA_PCGCS_LEN() (NRFX_FOREACH_PRESENT(PCGCS, NRFX_INSTANCE_CONCAT, (+), (0), _NRFX_SR_PCGCS_VDMA_LEN, _))
 
 /** @} */
 

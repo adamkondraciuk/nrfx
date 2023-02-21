@@ -60,25 +60,25 @@ extern "C" {
  *
  * @return Job descriptors.
  */
-#define _NRFX_SPU_VDMA_JOB(_inst, _with_periph)                                           \
-    NRFX_COND_CODE_1(NRFX_CONCAT(_inst, _SR_VDMA_SKIP),                                   \
-        (),                                                                               \
-        (                                                                                 \
-          NRFX_SR_VDMA_INST_SET_JOB(_inst, INTEN, 0)                                      \
-          NRFX_COND_CODE_1(_with_periph,                                                  \
-                           (NRFX_SR_VDMA_INST_REG_JOB(_inst, PERIPH,                      \
-                                                     NRFX_CONCAT(_inst, _PERIPH_COUNT) *  \
-                                                     sizeof(NRF_SPU_PERIPH_Type),         \
-                                                     1)                                   \
-                           ),                                                             \
-                           ())                                                            \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, IPCT, FEATURE.IPCT, 0)                    \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, DPPIC, FEATURE.DPPI, 0)                   \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GPIOTE, FEATURE.GPIOTE, 1)                \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GPIO, FEATURE.GPIO, 1)                    \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GRTC, FEATURE.GRTC, 0)                    \
-          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, BELLS, FEATURE.BELLS, 0)                  \
-        )                                                                                 \
+#define _NRFX_SPU_VDMA_JOB(_inst, _with_periph)                                          \
+    NRFX_COND_CODE_1(NRFX_CONCAT(_inst, _SR_VDMA_SKIP),                                  \
+        (),                                                                              \
+        (                                                                                \
+          NRFX_SR_VDMA_INST_SET_JOB(_inst, INTEN, 0)                                     \
+          NRFX_COND_CODE_1(_with_periph,                                                 \
+                           (NRFX_SR_VDMA_INST_REG_JOB(_inst, PERIPH,                     \
+                                                     NRFX_CONCAT(_inst, _PERIPH_COUNT) * \
+                                                     sizeof(NRF_SPU_PERIPH_Type),        \
+                                                     1)                                  \
+                           ),                                                            \
+                           ())                                                           \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, IPCT, FEATURE.IPCT, 0)                   \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, DPPIC, FEATURE.DPPI, 0)                  \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GPIOTE, FEATURE.GPIOTE, 1)               \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GPIO, FEATURE.GPIO, 1)                   \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, GRTC, FEATURE.GRTC, 0)                   \
+          NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, BELLS, FEATURE.BELLS, 0)                 \
+        )                                                                                \
     )
 
 /**
@@ -88,7 +88,8 @@ extern "C" {
  *
  * @return Job descriptors.
  */
-#define NRFX_SR_VDMA_SPU_JOB() NRFX_FOREACH_PRESENT(SPU, _NRFX_SPU_VDMA_JOB, (), (), 1)
+#define NRFX_SR_VDMA_SPU_JOB() \
+    NRFX_FOREACH_PRESENT(SPU, NRFX_INSTANCE_CONCAT, (), (), _NRFX_SPU_VDMA_JOB, 1)
 
 /**
  * @brief Macro for calculating length of a save & restore transfer for all SPU instances.
@@ -97,7 +98,8 @@ extern "C" {
  *
  * @return Number of bytes to transfer for perform save and restore.
  */
-#define NRFX_SR_VDMA_SPU_LEN() (NRFX_FOREACH_PRESENT(SPU, _NRFX_SPU_VDMA_LEN, (+), (0), 1))
+#define NRFX_SR_VDMA_SPU_LEN() \
+    (NRFX_FOREACH_PRESENT(SPU, NRFX_INSTANCE_CONCAT, (+), (0), _NRFX_SPU_VDMA_LEN, 1))
 
 /** @} */
 

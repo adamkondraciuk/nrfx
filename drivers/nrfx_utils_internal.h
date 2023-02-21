@@ -70,7 +70,7 @@
         NRFX_LISTIFY(_rpt, NRFX_INSTANCE_FEATURE_PRESENT, (), _instance_name, _feature_name)
 
 
-/** Used for @ref NRFX_FOREACH_ENABLED. Execute provided macro if driver instance is enabled.
+/** Used by @ref NRFX_FOREACH_ENABLED. Execute provided macro if driver instance is enabled.
  *
  * @param[in] i           Instance index.
  * @param[in] off_code    Code which is pasted when given driver instance is disabled.
@@ -87,9 +87,11 @@
                     (macro(periph_name, prefix, i, __VA_ARGS__)), \
                     off_code)
 
-/** Used for @ref NRFX_FOREACH_PRESENT. Execute provided macro if instance is present.
+/** Used by @ref NRFX_FOREACH_PRESENT. Execute provided macro if instance is present.
  *
- * Presence is determined by existing of define \<instance\>_PRESENT set to 1.
+ * Presence is determined by existing of token NRF_\<instance\> defined with wrapped
+ * in parenthesis value (see @ref NRFX_INSTANCE_PRESENT), where <instance\> is the concatenation
+ * of @p periph_name, @p prefix and @p i.
  *
  * @param[in] i           Instance index.
  * @param[in] off_code    Code which is pasted when given driver instance is disabled.
@@ -99,12 +101,11 @@
  *                        instances named like SPIM00. First 0 is passed here as prefix.
  * @param[in] macro       Macro which is executed.
  * @param[in] ...         Variable length arguments passed to the @p macro. Macro has following
- *                        arguments: macro(instance, ...), where instance is a concatenation of
- *                        a peripheral name,  prefix and index.
+ *                        arguments: macro(periph_name, prefix, i, ...).
  */
 #define _NRFX_EVAL_IF_PRESENT(i, off_code, periph_name, prefix, macro, ...) \
         NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(NRFX_CONCAT(periph_name, prefix, i)), \
-                    (macro(NRFX_CONCAT(periph_name, prefix, i), __VA_ARGS__)), \
+                    (macro(periph_name, prefix, i, __VA_ARGS__)), \
                     off_code)
 
 /* Macro used for enabled driver instances enum generation. */

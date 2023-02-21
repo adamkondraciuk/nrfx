@@ -19,9 +19,9 @@ extern "C" {
 #endif
 
 #if defined(__CORTEX_M) || defined(__NRFX_DOXYGEN__)
-#define ISA_ARM 1
+#define ISA_ARM     1
 #elif defined(__VPR_REV)
-#define ISA_RISCV 1
+#define ISA_RISCV   1
 #else
 #define ISA_UNKNOWN 1
 #endif
@@ -65,7 +65,7 @@ extern "C" {
  * such warnings only in places where this macro is used for evaluation, not in
  * the whole analyzed code.
  */
-#define NRFX_CHECK(module_enabled)  (module_enabled)
+#define NRFX_CHECK(module_enabled) (module_enabled)
 
 /**
  * @brief Macro for creating unsigned integer with bit position @p x set.
@@ -109,10 +109,10 @@ extern "C" {
  *
  * @sa NRFX_CONCAT_3
  */
-#define NRFX_CONCAT_2(p1, p2)       NRFX_CONCAT_2_(p1, p2)
+#define NRFX_CONCAT_2(p1, p2) NRFX_CONCAT_2_(p1, p2)
 
 /** @brief Internal macro used by @ref NRFX_CONCAT_2 to perform the expansion in two steps. */
-#define NRFX_CONCAT_2_(p1, p2)      p1 ## p2
+#define NRFX_CONCAT_2_(p1, p2) p1 ## p2
 
 /**
  * @brief Macro for concatenating three tokens in macro expansion.
@@ -130,10 +130,10 @@ extern "C" {
  *
  * @sa NRFX_CONCAT_2
  */
-#define NRFX_CONCAT_3(p1, p2, p3)   NRFX_CONCAT_3_(p1, p2, p3)
+#define NRFX_CONCAT_3(p1, p2, p3) NRFX_CONCAT_3_(p1, p2, p3)
 
 /** @brief Internal macro used by @ref NRFX_CONCAT_3 to perform the expansion in two steps. */
-#define NRFX_CONCAT_3_(p1, p2, p3)  p1 ## p2 ## p3
+#define NRFX_CONCAT_3_(p1, p2, p3) p1 ## p2 ## p3
 
 /**
  * @brief Macro for computing the absolute value of an integer number.
@@ -187,12 +187,12 @@ extern "C" {
  * @param[in] sep         Separator added between all evaluations, in parentheses.
  * @param[in] off_code    Code injected for disabled instances, in parentheses.
  */
-#define NRFX_FOREACH_ENABLED(periph_name, macro, sep, off_code, ...) \
-        NRFX_LISTIFY(256, _NRFX_EVAL_IF_ENABLED, sep, \
-                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep \
-        NRFX_LISTIFY(100, _NRFX_EVAL_IF_ENABLED, sep, \
+#define NRFX_FOREACH_ENABLED(periph_name, macro, sep, off_code, ...)                  \
+        NRFX_LISTIFY(256, _NRFX_EVAL_IF_ENABLED, sep,                                 \
+                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep  \
+        NRFX_LISTIFY(100, _NRFX_EVAL_IF_ENABLED, sep,                                 \
                      off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
-        NRFX_LISTIFY(10, _NRFX_EVAL_IF_ENABLED, sep, \
+        NRFX_LISTIFY(10, _NRFX_EVAL_IF_ENABLED, sep,                                  \
                      off_code, periph_name, 00, macro, __VA_ARGS__)
 
 /**
@@ -213,14 +213,32 @@ extern "C" {
  * @param[in] sep         Separator added between all evaluations, in parentheses.
  * @param[in] off_code    Code injected for disabled instances, in parentheses.
  */
-#define NRFX_FOREACH_PRESENT(periph_name, macro, sep, off_code, ...) \
-        NRFX_LISTIFY(256, _NRFX_EVAL_IF_PRESENT, sep, \
-                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep \
-        NRFX_LISTIFY(100, _NRFX_EVAL_IF_PRESENT, sep, \
-                     off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
-        NRFX_LISTIFY(10, _NRFX_EVAL_IF_PRESENT, sep, \
+#define NRFX_FOREACH_PRESENT(periph_name, macro, sep, off_code, ...)                   \
+        NRFX_LISTIFY(256, _NRFX_EVAL_IF_PRESENT, sep,                                  \
+                     off_code, periph_name, , macro, __VA_ARGS__) NRFX_DEBRACKET sep   \
+        NRFX_LISTIFY(100, _NRFX_EVAL_IF_PRESENT, sep,                                  \
+                     off_code, periph_name, 0, macro, __VA_ARGS__) NRFX_DEBRACKET sep  \
+        NRFX_LISTIFY(10, _NRFX_EVAL_IF_PRESENT, sep,                                   \
                      off_code, periph_name, 00, macro, __VA_ARGS__) NRFX_DEBRACKET sep \
         _NRFX_EVAL_IF_PRESENT(, off_code, periph_name, , macro, __VA_ARGS__)
+
+/**
+ * @brief Macro for resolving provided user macro on concatenated peripheral name
+ *        and instance index.
+ *
+ * Execute provided macro with single argument <instance\>
+ * that is the concatenation of @p periph_name, @p prefix and @p i.
+ *
+ * @param[in] i           Instance index.
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] prefix      Prefix added before instance index, e.g. some device has
+ *                        instances named like SPIM00. First 0 is passed here as prefix.
+ * @param[in] macro       Macro which is executed.
+ * @param[in] ...         Variable length arguments passed to the @p macro. Macro has following
+ *                        arguments: macro(instance, ...).
+ */
+#define NRFX_INSTANCE_CONCAT(periph_name, prefix, i, macro, ...) \
+      macro(NRFX_CONCAT(periph_name, prefix, i), __VA_ARGS__)
 
 /**
  * @brief Macro for creating a content for enum which is listing enabled driver instances.
@@ -359,7 +377,7 @@ extern "C" {
  *
  * @return Integer result of dividing @c a by @c b, rounded up.
  */
-#define NRFX_CEIL_DIV(a, b)  ((((a) - 1) / (b)) + 1)
+#define NRFX_CEIL_DIV(a, b) ((((a) - 1) / (b)) + 1)
 
 /**
  * @brief Macro for getting the number of elements in an array.
@@ -379,7 +397,7 @@ extern "C" {
  *
  * @return Member offset in bytes.
  */
-#define NRFX_OFFSETOF(type, member)  ((size_t)&(((type *)0)->member))
+#define NRFX_OFFSETOF(type, member) ((size_t) & (((type *)0)->member))
 
 /**
  * @brief Macro for checking whether given number is power of 2.
@@ -440,7 +458,7 @@ do {                                                         \
  *
  * @return ID number associated with the specified peripheral.
  */
-#define NRFX_PERIPHERAL_ID_GET(base_addr)  (uint16_t)(((uint32_t)(base_addr) >> 12) & 0x000001FF)
+#define NRFX_PERIPHERAL_ID_GET(base_addr) (uint16_t)(((uint32_t)(base_addr) >> 12) & 0x000001FF)
 
 /**
  * @brief Macro for getting the interrupt number assigned to a specific
@@ -454,7 +472,7 @@ do {                                                         \
  *
  * @return Interrupt number associated with the specified peripheral.
  */
-#define NRFX_IRQ_NUMBER_GET(base_addr)  NRFX_PERIPHERAL_ID_GET(base_addr)
+#define NRFX_IRQ_NUMBER_GET(base_addr) NRFX_PERIPHERAL_ID_GET(base_addr)
 
 /**
  * @brief Macro for converting frequency in kHz to Hz.
@@ -553,7 +571,6 @@ NRF_STATIC_INLINE uint32_t nrfx_bitpos_to_event(uint32_t bit);
  * @sa nrfx_bitpos_to_event
  */
 NRF_STATIC_INLINE uint32_t nrfx_event_to_bitpos(uint32_t event);
-
 
 #ifndef NRF_DECLARE_ONLY
 
