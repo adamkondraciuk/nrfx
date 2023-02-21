@@ -33,6 +33,42 @@ extern "C" {
 #include <nrf_erratas.h>
 #endif
 
+/*
+ * Macro for generating case code blocks that return token NRF_<periph_name><prefix><i>
+ * for case value equal to <i>.
+ *
+ * Used by NRF_INTERNAL_GPIO_PORT_EXTRACT.
+ */
+#define NRF_INTERNAL_GPIO_PORT_EXTRACT_1(periph_name, prefix, i, port) \
+    case i:                                                            \
+        port = NRFX_CONCAT(NRF_, periph_name, prefix, i);              \
+        break;
+
+/*
+ * Macro for generating case code blocks for switch statement used in function nrf_gpio_pin_port_decode.
+ * It allows extracting the port number relative to the decoded pin.
+ */
+#define NRF_INTERNAL_GPIO_PORT_EXTRACT(port) \
+    NRFX_FOREACH_PRESENT(P, NRF_INTERNAL_GPIO_PORT_EXTRACT_1, (), (), port)
+
+/*
+ * Macro for generating case code blocks that set mask to <periph_name><prefix><i>_FEATURE_PINS_PRESENT
+ * for case value equal to <i>.
+ *
+ * Used by NRF_INTERNAL_GPIO_PORT_MASK_SET.
+ */
+#define NRF_INTERNAL_GPIO_PORT_MASK_SET_1(periph_name, prefix, i, mask)    \
+    case i:                                                                \
+        mask = NRFX_CONCAT(periph_name, prefix, i, _FEATURE_PINS_PRESENT); \
+        break;
+
+/*
+ * Macro for generating case code blocks for switch statement used in function nrf_gpio_pin_present_check.
+ * It allows setting the mask to a value associated with the specific port.
+ */
+#define NRF_INTERNAL_GPIO_PORT_MASK_SET(mask) \
+    NRFX_FOREACH_PRESENT(P, NRF_INTERNAL_GPIO_PORT_MASK_SET_1, (), (), mask)
+
 /**
  * @defgroup nrf_gpio_hal GPIO HAL
  * @{
@@ -747,75 +783,16 @@ NRF_STATIC_INLINE NRF_GPIO_Type * nrf_gpio_pin_port_decode(uint32_t * p_pin)
 {
     NRFX_ASSERT(nrf_gpio_pin_present_check(*p_pin));
 
+    NRF_GPIO_Type * p_port = NULL;
+
     switch (nrf_gpio_pin_port_number_extract(p_pin))
     {
+        NRF_INTERNAL_GPIO_PORT_EXTRACT(p_port);
+
         default:
             NRFX_ASSERT(0);
-#if defined(NRF_P0)
-        /* FALLTHROUGH */
-        case 0: return NRF_P0;
-#endif
-#if defined(NRF_P1)
-        /* FALLTHROUGH */
-        case 1: return NRF_P1;
-#endif
-#if defined(NRF_P2)
-        /* FALLTHROUGH */
-        case 2: return NRF_P2;
-#endif
-#if defined(NRF_P3)
-        /* FALLTHROUGH */
-        case 3: return NRF_P3;
-#endif
-#if defined(NRF_P4)
-        /* FALLTHROUGH */
-        case 4: return NRF_P4;
-#endif
-#if defined(NRF_P5)
-        /* FALLTHROUGH */
-        case 5: return NRF_P5;
-#endif
-#if defined(NRF_P6)
-        /* FALLTHROUGH */
-        case 6: return NRF_P6;
-#endif
-#if defined(NRF_P7)
-        /* FALLTHROUGH */
-        case 7: return NRF_P7;
-#endif
-#if defined(NRF_P8)
-        /* FALLTHROUGH */
-        case 8: return NRF_P8;
-#endif
-#if defined(NRF_P9)
-        /* FALLTHROUGH */
-        case 9: return NRF_P9;
-#endif
-#if defined(NRF_P10)
-        /* FALLTHROUGH */
-        case 10: return NRF_P10;
-#endif
-#if defined(NRF_P11)
-        /* FALLTHROUGH */
-        case 11: return NRF_P11;
-#endif
-#if defined(NRF_P12)
-        /* FALLTHROUGH */
-        case 12: return NRF_P12;
-#endif
-#if defined(NRF_P13)
-        /* FALLTHROUGH */
-        case 13: return NRF_P13;
-#endif
-#if defined(NRF_P14)
-        /* FALLTHROUGH */
-        case 14: return NRF_P14;
-#endif
-#if defined(NRF_P15)
-        /* FALLTHROUGH */
-        case 15: return NRF_P15;
-#endif
     }
+    return p_port;
 }
 
 
@@ -1288,73 +1265,25 @@ NRF_STATIC_INLINE bool nrf_gpio_pin_present_check(uint32_t pin_number)
 
     switch (port)
     {
-#ifdef P0_FEATURE_PINS_PRESENT
-        case 0:
-            mask = P0_FEATURE_PINS_PRESENT;
-#if defined(NRF52820_XXAA) && defined(DEVELOP_IN_NRF52833)
-            /* Allow use of the following additional GPIOs that are connected to LEDs and buttons
-             * on the nRF52833 DK:
-             * - P0.11 - Button 1
-             * - P0.12 - Button 2
-             * - P0.13 - LED 1
-             * - P0.24 - Button 3
-             * - P0.25 - Button 4
-             */
-            mask |= 0x03003800;
-#endif // defined(NRF52820_XXAA) && defined(DEVELOP_IN_NRF52833)
-            break;
-#endif
-#ifdef P1_FEATURE_PINS_PRESENT
-        case 1:
-            mask = P1_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P2_FEATURE_PINS_PRESENT
-        case 2:
-            mask = P2_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P6_FEATURE_PINS_PRESENT
-        case 6:
-            mask = P6_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P7_FEATURE_PINS_PRESENT
-        case 7:
-            mask = P7_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P8_FEATURE_PINS_PRESENT
-        case 8:
-            mask = P8_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P9_FEATURE_PINS_PRESENT
-        case 9:
-            mask = P9_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P10_FEATURE_PINS_PRESENT
-        case 10:
-            mask = P10_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P11_FEATURE_PINS_PRESENT
-        case 11:
-            mask = P11_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P12_FEATURE_PINS_PRESENT
-        case 12:
-            mask = P12_FEATURE_PINS_PRESENT;
-            break;
-#endif
-#ifdef P13_FEATURE_PINS_PRESENT
-        case 13:
-            mask = P13_FEATURE_PINS_PRESENT;
-            break;
-#endif
+        NRF_INTERNAL_GPIO_PORT_MASK_SET(mask);
+
+        default:
+            NRFX_ASSERT(0);
     }
+
+#ifdef P0_FEATURE_PINS_PRESENT
+#if defined(NRF52820_XXAA) && defined(DEVELOP_IN_NRF52833)
+    /* Allow use of the following additional GPIOs that are connected to LEDs and buttons
+        * on the nRF52833 DK:
+        * - P0.11 - Button 1
+        * - P0.12 - Button 2
+        * - P0.13 - LED 1
+        * - P0.24 - Button 3
+        * - P0.25 - Button 4
+        */
+    mask |= 0x03003800;
+#endif // defined(NRF52820_XXAA) && defined(DEVELOP_IN_NRF52833)
+#endif
 
     pin_number &= 0x1F;
 
