@@ -53,12 +53,13 @@ typedef enum
  */
 typedef enum
 {
-    NRF_LFCLOCKMUX_SOURCE_LPRC      = (CLOCK_LFCLKSTAT_SRC_LFLPRC_Active << CLOCK_LFCLKSTAT_SRC_LFLPRC_Pos), /**< Internal 32 kHz low power RC oscillator. */
-    NRF_LFCLOCKMUX_SOURCE_RC        = (CLOCK_LFCLKSTAT_SRC_LFRC_Active   << CLOCK_LFCLKSTAT_SRC_LFRC_Pos),   /**< Internal 32 kHz RC oscillator. */
-    NRF_LFCLOCKMUX_SOURCE_XTAL      = (CLOCK_LFCLKSTAT_SRC_LFXO_Active   << CLOCK_LFCLKSTAT_SRC_LFXO_Pos),   /**< External 32 kHz crystal. */
-    NRF_LFCLOCKMUX_SOURCE_SYNTH     = (CLOCK_LFCLKSTAT_SRC_SYNTH_Active  << CLOCK_LFCLKSTAT_SRC_SYNTH_Pos),  /**< Internal 32 kHz synthesized. */
-    NRF_LFCLOCKMUX_SOURCE_LPRC_XTAL = NRF_LFCLOCKMUX_SOURCE_LPRC | NRF_LFCLOCKMUX_SOURCE_XTAL,               /**< Internal 32 kHz low power RC oscillator and external 32 kHz crystal. */
-    NRF_LFCLOCKMUX_SOURCE_RC_XTAL   = NRF_LFCLOCKMUX_SOURCE_RC   | NRF_LFCLOCKMUX_SOURCE_XTAL,               /**< Internal 32 kHz RC oscillator and external 32 kHz crystal. */
+    NRF_LFCLOCKMUX_SOURCE_LPRC       = (CLOCK_LFCLKSTAT_SRC_LFLPRC_Active << CLOCK_LFCLKSTAT_SRC_LFLPRC_Pos), /**< Internal 32 kHz low power RC oscillator. */
+    NRF_LFCLOCKMUX_SOURCE_RC         = (CLOCK_LFCLKSTAT_SRC_LFRC_Active   << CLOCK_LFCLKSTAT_SRC_LFRC_Pos),   /**< Internal 32 kHz RC oscillator. */
+    NRF_LFCLOCKMUX_SOURCE_XTAL       = (CLOCK_LFCLKSTAT_SRC_LFXO_Active   << CLOCK_LFCLKSTAT_SRC_LFXO_Pos),   /**< External 32 kHz crystal. */
+    NRF_LFCLOCKMUX_SOURCE_SYNTH      = (CLOCK_LFCLKSTAT_SRC_SYNTH_Active  << CLOCK_LFCLKSTAT_SRC_SYNTH_Pos),  /**< Internal 32 kHz synthesized. */
+    NRF_LFCLOCKMUX_SOURCE_LPRC_XTAL  = NRF_LFCLOCKMUX_SOURCE_LPRC  | NRF_LFCLOCKMUX_SOURCE_XTAL,              /**< Internal 32 kHz low power RC oscillator and external 32 kHz crystal. */
+    NRF_LFCLOCKMUX_SOURCE_RC_XTAL    = NRF_LFCLOCKMUX_SOURCE_RC    | NRF_LFCLOCKMUX_SOURCE_XTAL,              /**< Internal 32 kHz RC oscillator and external 32 kHz crystal. */
+    NRF_LFCLOCKMUX_SOURCE_SYNTH_XTAL = NRF_LFCLOCKMUX_SOURCE_SYNTH | NRF_LFCLOCKMUX_SOURCE_XTAL,              /**< Internal 32 kHz synthesized and external 32 kHz crystal. */
 } nrf_lfclockmux_source_t;
 
 /**
