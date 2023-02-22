@@ -848,13 +848,21 @@ NRF_STATIC_INLINE void nrf_gpio_cfg(
     nrf_gpio_pin_sense_t sense)
 {
     NRF_GPIO_Type * reg = nrf_gpio_pin_port_decode(&pin_number);
+    uint32_t cnf = reg->PIN_CNF[pin_number];
 
-#if defined(GPIO_PIN_CNF_MCUSEL_Msk)
-    /* Preserve MCUSEL setting. */
-    uint32_t cnf = reg->PIN_CNF[pin_number] & GPIO_PIN_CNF_MCUSEL_Msk;
+    uint32_t to_update = GPIO_PIN_CNF_DIR_Msk    |
+                         GPIO_PIN_CNF_INPUT_Msk  |
+                         GPIO_PIN_CNF_PULL_Msk   |
+#if defined(GPIO_PIN_CNF_DRIVE_Msk)
+                         GPIO_PIN_CNF_DRIVE_Msk  |
 #else
-    uint32_t cnf = 0;
+                         GPIO_PIN_CNF_DRIVE0_Msk |
+                         GPIO_PIN_CNF_DRIVE1_Msk |
 #endif
+                         GPIO_PIN_CNF_SENSE_Msk;
+
+    /* Clear fields that will be updated. */
+    cnf &= ~to_update;
     cnf |= ((uint32_t)dir << GPIO_PIN_CNF_DIR_Pos)      |
            ((uint32_t)input << GPIO_PIN_CNF_INPUT_Pos)  |
            ((uint32_t)pull << GPIO_PIN_CNF_PULL_Pos)    |
