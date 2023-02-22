@@ -102,7 +102,7 @@ static void bellboard_irq_handler(uint8_t interrupt_idx)
     {
         while (int_pend)
         {
-            uint32_t event_no = nrf_bitmask_trailing_zeros_get(int_pend);
+            uint32_t event_no = NRF_CTZ(int_pend);
             m_cb[inst_idx].handler(event_no, m_cb[inst_idx].context);
             nrf_bitmask_bit_clear(event_no, (void *)&int_pend);
         }

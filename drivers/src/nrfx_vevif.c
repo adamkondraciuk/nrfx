@@ -70,7 +70,7 @@ void nrfx_vevif_int_enable(uint32_t mask)
 
     while (mask != 0)
     {
-        uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
+        uint32_t event_no = NRF_CTZ(mask);
         NRFY_IRQ_ENABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
@@ -82,7 +82,7 @@ void nrfx_vevif_int_disable(uint32_t mask)
 
     while (mask != 0)
     {
-        uint32_t event_no = nrf_bitmask_trailing_zeros_get(mask);
+        uint32_t event_no = NRF_CTZ(mask);
         NRFY_IRQ_DISABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }

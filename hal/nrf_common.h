@@ -25,14 +25,18 @@ extern "C" {
 
 #if defined(NRFX_CLZ)
 #define NRF_CLZ(value) NRFX_CLZ(value)
-#else
+#elif defined(ISA_ARM)
 #define NRF_CLZ(value) __CLZ(value)
+#else
+#define NRF_CLZ(value) __builtin_clz(value)
 #endif
 
 #if defined(NRFX_CTZ)
 #define NRF_CTZ(value) NRFX_CTZ(value)
-#else
+#elif defined(ISA_ARM)
 #define NRF_CTZ(value) __CLZ(__RBIT(value))
+#else
+#define NRF_CTZ(value) __builtin_ctz(value)
 #endif
 
 /** @brief Macro for extracting relative pin number from the absolute pin number. */
