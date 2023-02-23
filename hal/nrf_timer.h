@@ -69,6 +69,8 @@ extern "C" {
 
 /** @brief Base frequency value 320 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_320MHZ (NRFX_MHZ_TO_HZ(320UL))
+/** @brief Base frequency value 64 MHz for TIMER. */
+#define NRF_TIMER_BASE_FREQUENCY_64MHZ  (NRFX_MHZ_TO_HZ(64UL))
 /** @brief Base frequency value 32 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_32MHZ  (NRFX_MHZ_TO_HZ(32UL))
 /** @brief Base frequency value 16 MHz for TIMER. */
@@ -148,7 +150,8 @@ extern "C" {
                 NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
 #elif defined(LUMOS_XXAA)
     #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
-           ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
+           ((p_reg == NRF_TIMER00) && TIMER_BIT_WIDTH_MAX(00, bit_width)) \
+        || ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
         || ((p_reg == NRF_TIMER20) && TIMER_BIT_WIDTH_MAX(20, bit_width)) \
         || ((p_reg == NRF_TIMER21) && TIMER_BIT_WIDTH_MAX(21, bit_width)) \
         || ((p_reg == NRF_TIMER22) && TIMER_BIT_WIDTH_MAX(22, bit_width)) \
@@ -199,6 +202,7 @@ extern "C" {
            (p_reg == NRF_TIMER020)             \
         || (p_reg == NRF_TIMER021)             \
         || (p_reg == NRF_TIMER022))
+    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) false
 #elif defined(LUMOS_XXAA)
     #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
     #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
@@ -209,6 +213,8 @@ extern "C" {
         || (p_reg == NRF_TIMER24))
     #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
            (p_reg == NRF_TIMER10))
+    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) ( \
+            (p_reg == NRF_TIMER00))
 #else
     /** @brief Macro for checking whether the base frequency for the specified timer is 320 MHz. */
     #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
@@ -216,6 +222,8 @@ extern "C" {
     #define NRF_TIMER_IS_16MHZ_TIMER(p_reg)  true
     /** @brief Macro for checking whether the base frequency for the specified timer is 32 MHz. */
     #define NRF_TIMER_IS_32MHZ_TIMER(p_reg)  false
+    /** @brief Macro for checking whether the base frequency for the specified timer is 64 MHz. */
+    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg)  false
 #endif // defined(HALTIUM_XXAA)
 
 /**
@@ -225,8 +233,9 @@ extern "C" {
  */
 #define NRF_TIMER_BASE_FREQUENCY_GET(p_reg)                                  \
     ((NRF_TIMER_IS_320MHZ_TIMER(p_reg)) ? (NRF_TIMER_BASE_FREQUENCY_320MHZ): \
+    ((NRF_TIMER_IS_64MHZ_TIMER(p_reg))  ? (NRF_TIMER_BASE_FREQUENCY_64MHZ): \
     ((NRF_TIMER_IS_16MHZ_TIMER(p_reg))  ? (NRF_TIMER_BASE_FREQUENCY_16MHZ) : \
-    (NRF_TIMER_BASE_FREQUENCY_32MHZ)))
+    (NRF_TIMER_BASE_FREQUENCY_32MHZ))))
 
 /**
  * @brief Macro for computing prescaler value for given base frequency and desired frequency.
