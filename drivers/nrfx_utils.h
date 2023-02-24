@@ -126,6 +126,23 @@
  */
 #define NRFX_LISTIFY(LEN, F, sep, ...) \
     NRFX_CONCAT_2(_NRFX_LISTIFY_, LEN)(F, sep, __VA_ARGS__)
+
+/**
+ * @brief Macro for checking if input argument is empty.
+ *
+ * Empty means that nothing is provided or provided value is resolved to nothing
+ * (e.g. empty define).
+ *
+ * Macro idea is taken from P99 which is under Apache 2.0 license and described by
+ * Jens Gustedt https://gustedt.wordpress.com/2010/06/08/detect-empty-macro-arguments/
+ *
+ * @param arg Argument.
+ *
+ * @retval 1 if argument is empty.
+ * @retval 0 if argument is not empty.
+ */
+#define NRFX_IS_EMPTY(arg) _NRFX_IS_EMPTY(arg)
+
 /**
  * @brief Macro for calculating number of arguments in the variable arguments list minus one.
  *

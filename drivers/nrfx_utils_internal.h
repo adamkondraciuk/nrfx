@@ -170,6 +170,31 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
  */
 #define _NRFX_ARG_HAS_PARENTHESIS(...) ,
 
+#define _NRFX_ARG16(_0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, ...) _15
+
+/* Returns 1 if there is a comma in the arguments (if there is more than one argument) */
+#define _NRFX_HAS_COMMA(...) \
+    _NRFX_ARG16(__VA_ARGS__, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+/* Internal macro used for @ref NRFX_IS_EMPTY */
+#define _NRFX_IS_EMPTY2(_0, _1, _2, _3) \
+    _NRFX_HAS_COMMA(NRFX_CONCAT(_NRFX_IS_EMPTY_CASE_, _0, _1, _2, _3))
+
+#define _NRFX_IS_EMPTY_CASE_0001 ,
+
+/* Internal macro used for @ref NRFX_IS_EMPTY */
+#define _NRFX_IS_EMPTY(...)                                                                 \
+    _NRFX_IS_EMPTY2(                                                                        \
+    /* test if there is just one argument, eventually an empty one */                       \
+    _NRFX_HAS_COMMA(__VA_ARGS__),                                                           \
+    /* test if _TRIGGER_PARENTHESIS_ together with the argument adds a comma */             \
+    _NRFX_HAS_COMMA(_NRFX_ARG_HAS_PARENTHESIS __VA_ARGS__),                                 \
+    /* test if the argument together with a parenthesis adds a comma */                     \
+    _NRFX_HAS_COMMA(__VA_ARGS__ (/*empty*/)),                                               \
+    /* test if placing it between _TRIGGER_PARENTHESIS_ and the parenthesis adds a comma */ \
+    _NRFX_HAS_COMMA(_NRFX_ARG_HAS_PARENTHESIS __VA_ARGS__ (/*empty*/))                      \
+    )
+
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
 
