@@ -7,8 +7,6 @@
 extern "C" {
 #endif
 
-#define MAIN_IPCT_INTERCONNECT_IDX 1
-
 #ifndef NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE
 /* Default IPCT static variables generation in case of bare-metal application. */
 #ifndef NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM
@@ -33,10 +31,14 @@ extern "C" {
 #endif
 
 /* Macro checks if any inst_num mask (PUB or SUB) is not zero and then returns 1, else 0 */
+#ifdef NRF_SECURE
+#define NRFX_IPCT_PUB_OR_SUB_MASK(inst_num) 1
+#else
 #define NRFX_IPCT_PUB_OR_SUB_MASK(inst_num) \
     NRFX_COND_CODE_0(NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
         (NRFX_COND_CODE_0(NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
                           (0), (1))), (1))
+#endif
 
 #define NRFX_IPCT_CHANNELS_ENTRY(inst_num)                                               \
     NRFX_COND_CODE_1(NRFX_IPCT_PUB_OR_SUB_MASK(inst_num), \
@@ -59,13 +61,15 @@ extern "C" {
 
 #define _NRFX_IPCT_INSTANCE(inst_num) NRFX_CONCAT(NRF_, IPCT, inst_num)
 
-#define NRFX_INTERCONNECT_IPCT_PROP_ENTRY(inst_num)                                                  \
+#define NRFX_INTERCONNECT_IPCT_PROP_ENTRY(inst_num)                                               \
     NRFX_COND_CODE_1(NRFX_IPCT_PUB_OR_SUB_MASK(inst_num), \
-    ({                                                                                                    \
-            .p_ipct                 = _NRFX_IPCT_INSTANCE(inst_num),                                     \
-            .p_ipct_channels        = &NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num),        \
-            .ipct_pub_channels_mask = NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
-            .ipct_sub_channels_mask = NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+    ({                                                                                             \
+            .p_ipct                 = _NRFX_IPCT_INSTANCE(inst_num),                               \
+            .p_ipct_channels        = &NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM(inst_num),  \
+            .ipct_pub_channels_mask = \
+                NRFX_IPCTx_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
+            .ipct_sub_channels_mask = \
+                NRFX_IPCTx_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
     },), ())
 
 /* Global entry discard case when instance has no inst_num (NRF_IPCT) which is a local
@@ -74,8 +78,8 @@ extern "C" {
 #define _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY(periph_name, prefix, inst_num, _) \
     NRFX_COND_CODE_1(NRFX_IS_EMPTY(inst_num), (), (NRFX_INTERCONNECT_IPCT_PROP_ENTRY(inst_num)))
 
-#define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                           \
-{                                                                                         \
+#define NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP                                            \
+{                                                                                          \
         NRFX_FOREACH_PRESENT(IPCT, _NRFX_INTERCONNECT_IPCT_GLOBAL_IPCT_PROP_ENTRY, (), ()) \
 }
 

@@ -38,9 +38,32 @@ nrf_domain_t nrfx_interconnect_apb_domain_get(nrfx_interconnect_apb_t const * p_
     return (nrf_domain_t)nrf_address_domain_get((uint32_t)p_apb_prop->p_dppi);
 }
 
+/* Set of macros to allow calculation of array index where given index is located.
+ * We create a structure with fields for each instance which has non-zero
+ * CHANNEL_MASK. Then offsetof is used to get the index of the given instance.
+ */
+#define _APB_STRUCT_ELEM(periph_name, prefix, inst_num, _) \
+    NRFX_COND_CODE_0(prefix, (), \
+            (NRFX_COND_CODE_1(NRFX_DPPI_PUB_OR_SUB_MASK(inst_num), \
+                              (uint8_t NRFX_CONCAT(dummy, inst_num);), ())))
+
+#define APB_IDX_STRUCT() \
+    struct apb_idx_dummy_struct { \
+        NRFX_FOREACH_PRESENT(DPPIC, _APB_STRUCT_ELEM, (), (), _) \
+    }
+
+#define APB_IDX(inst_num) \
+    NRFX_COND_CODE_1(NRFX_DPPI_PUB_OR_SUB_MASK(inst_num), \
+            (offsetof(struct apb_idx_dummy_struct, NRFX_CONCAT(dummy, inst_num))), \
+            (-1))
+
+APB_IDX_STRUCT();
+
+static const int apb_main_idx = APB_IDX(120);
+
 nrfx_interconnect_apb_t const * nrfx_interconnect_apb_main_get(void)
 {
-    return &m_global_apb_interconnect[NRFX_INTERCONNECT_APB_MAIN_IDX];
+    return apb_main_idx >= 0 ? &m_global_apb_interconnect[apb_main_idx] : NULL;
 }
 
 nrfx_interconnect_apb_t const * nrfx_interconnect_apb_get(uint32_t addr)
@@ -63,7 +86,7 @@ nrfx_interconnect_apb_t const * nrfx_interconnect_apb_get(uint32_t addr)
     {
         nrfx_interconnect_apb_t const * p_apb = &apb_interconnect[i];
         uint8_t bus_address_area = nrf_address_bus_get(addr, p_apb->size);
-        
+
         if (bus_address_area == nrf_address_bus_get((uint32_t)p_apb->p_dppi, p_apb->size))
         {
             return p_apb;
@@ -79,7 +102,7 @@ size_t nrfx_interconnect_apb_global_num_of_get(void)
 
 nrfx_interconnect_apb_t const * nrf_apb_interconnect_by_idx_global_get(uint8_t idx)
 {
-    return &m_global_apb_interconnect[idx];
+    return NRFX_ARRAY_SIZE(m_global_apb_interconnect) ? &m_global_apb_interconnect[idx] : NULL;
 }
 
 #endif // defined(HALTIUM_XXAA)

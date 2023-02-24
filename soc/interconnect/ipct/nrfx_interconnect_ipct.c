@@ -39,9 +39,32 @@ nrf_domain_t nrfx_interconnect_ipct_domain_get(nrfx_interconnect_ipct_t const * 
     return (nrf_domain_t)nrf_address_domain_get((uint32_t)p_ipct_prop->p_ipct);
 }
 
+/* Set of macros to allow calculation of array index where given index is located.
+ * We create a structure with fields for each instance which has non-zero
+ * CHANNEL_MASK. Then offsetof is used to get the index of the given instance.
+ */
+#define _IPCT_STRUCT_ELEM(periph_name, prefix, inst_num, _) \
+    NRFX_COND_CODE_1(NRFX_IS_EMPTY(inst_num), (), \
+            (NRFX_COND_CODE_1(NRFX_IPCT_PUB_OR_SUB_MASK(inst_num), \
+                              (uint8_t NRFX_CONCAT(dummy, inst_num);), ())))
+
+#define IPCT_IDX_STRUCT() \
+    struct ipct_idx_dummy_struct { \
+        NRFX_FOREACH_PRESENT(IPCT, _IPCT_STRUCT_ELEM, (), (), _) \
+    }
+
+#define IPCT_IDX(inst_num) \
+    NRFX_COND_CODE_1(NRFX_IPCT_PUB_OR_SUB_MASK(inst_num), \
+            (offsetof(struct ipct_idx_dummy_struct, NRFX_CONCAT(dummy, inst_num))), \
+            (-1))
+
+IPCT_IDX_STRUCT();
+
+static const int ipct_main_idx = IPCT_IDX(130);
+
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_main_get(void)
 {
-    return &m_global_ipct_interconnect[MAIN_IPCT_INTERCONNECT_IDX];
+    return ipct_main_idx >= 0 ? &m_global_ipct_interconnect[ipct_main_idx] : NULL;
 }
 
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_get(nrfx_interconnect_apb_t const * p_apb_prop)

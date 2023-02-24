@@ -7,8 +7,6 @@
 extern "C" {
 #endif
 
-#define NRFX_INTERCONNECT_APB_MAIN_IDX 0
-
 #ifndef NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE
 /* Default DPPI static variables generation in case of bare-metal application. */
 #ifndef NRFX_DPPI_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM
@@ -33,10 +31,14 @@ extern "C" {
 #endif
 
 /* Macro checks if any inst_num mask (PUB or SUB) is not zero and then returns 1, else 0 */
+#ifdef NRF_SECURE
+#define NRFX_DPPI_PUB_OR_SUB_MASK(inst_num) 1
+#else
 #define NRFX_DPPI_PUB_OR_SUB_MASK(inst_num) \
     NRFX_COND_CODE_0(NRFX_DPPI_PUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
         (NRFX_COND_CODE_0(NRFX_DPPI_SUB_CONFIG_ALLOWED_CHANNELS_MASK_BY_INST_NUM(inst_num), \
                           (0), (1))), (1))
+#endif
 
 #define NRFX_DPPI_CHANNELS_VAR(inst_num) \
     NRFX_CONCAT(m_dppi, inst_num, _channels)
