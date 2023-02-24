@@ -57,13 +57,6 @@ extern "C" {
 #define NRF_WDT_HAS_NMI 0
 #endif
 
-#if defined(WDT_RUNSTATUS_RUNSTATUSTIMER_Msk) || defined (__NRFX_DOXYGEN__)
-/** @brief Presence of timer mode. */
-#define NRF_WDT_HAS_TIMER 1
-#else
-#define NRF_WDT_HAS_TIMER 0
-#endif
-
 #if defined(WDT_CONFIG_STOPEN_Msk) || defined (__NRFX_DOXYGEN__)
 /** @brief Presence of WDT stop enable. */
 #define NRF_WDT_HAS_CONFIG_STOPEN 1
@@ -313,18 +306,6 @@ NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, uint32_t mask
  */
 NRF_STATIC_INLINE bool nrf_wdt_started_check(NRF_WDT_Type const * p_reg);
 
-#if NRF_WDT_HAS_TIMER
-/**
- * @brief Function for retrieving the watchdog timer status.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- *
- * @retval true  The watchdog is started.
- * @retval false The watchdog is not started.
- */
-NRF_STATIC_INLINE bool nrf_wdt_timer_started_check(NRF_WDT_Type const * p_reg);
-#endif
-
 /**
  * @brief Function for retrieving the watchdog reload request status for specified register.
  *
@@ -514,15 +495,6 @@ NRF_STATIC_INLINE bool nrf_wdt_started_check(NRF_WDT_Type const * p_reg)
     return (bool)(p_reg->RUNSTATUS & WDT_RUNSTATUS_RUNSTATUSWDT_Msk);
 #endif
 }
-
-#if NRF_WDT_HAS_TIMER
-NRF_STATIC_INLINE bool nrf_wdt_timer_started_check(NRF_WDT_Type const * p_reg)
-{
-    return (bool)((p_reg->RUNSTATUS & WDT_RUNSTATUS_RUNSTATUSTIMER_Msk)
-                  >> WDT_RUNSTATUS_RUNSTATUSTIMER_Pos);
-}
-#endif
-
 
 NRF_STATIC_INLINE bool nrf_wdt_request_status_check(NRF_WDT_Type const *  p_reg,
                                                     nrf_wdt_rr_register_t rr_register)
