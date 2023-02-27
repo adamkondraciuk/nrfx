@@ -11,7 +11,7 @@
 
 /** @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
- * Integer value.
+ * Integer value. Minimum: 0 Maximum: 3 for RISCV and 7 for ARM Cortex-M
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
 #define NRFX_DEFAULT_IRQ_PRIORITY 7
