@@ -3,7 +3,7 @@
 #include <nrfx.h>
 
 // Driver for single instance DPPI
-#if NRFX_CHECK(NRFX_DPPI_ENABLED) && !defined(NRFX_PPIB_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && (!defined(DPPIC_COUNT) || (DPPIC_COUNT == 1))
 
 #include <nrfx_dppi.h>
 #include <helpers/nrfx_flag32_allocator.h>
@@ -205,4 +205,4 @@ nrfx_err_t nrfx_dppi_group_disable(nrf_dppi_channel_group_t group)
     return err_code;
 }
 
-#endif // NRFX_CHECK(NRFX_DPPI_ENABLED)
+#endif // defined(DPPI_PRESENT) && defined(DPPIC_COUNT == 1)

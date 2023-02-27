@@ -595,14 +595,6 @@
 #define NRFX_PDM_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_PPIB_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_PPIB_ENABLED
-#define NRFX_PPIB_ENABLED 0
-#endif
-
 /** @brief NRFX_PRS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.

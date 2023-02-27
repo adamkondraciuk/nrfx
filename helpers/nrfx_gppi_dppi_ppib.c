@@ -2,7 +2,8 @@
 
 #include <helpers/nrfx_gppi.h>
 
-#if defined(HALTIUM_XXAA) && defined(NRFX_PPIB_ENABLED)
+#if NRFX_CHECK(NRFX_DPPI_ENABLED) && defined(DPPIC_COUNT) && (DPPIC_COUNT > 1)
+
 #include <string.h>
 #include <soc/interconnect/apb/nrfx_interconnect_apb.h>
 #include <soc/interconnect/ipct/nrfx_interconnect_ipct.h>
@@ -480,7 +481,7 @@ void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
     // The endpoint must belong to one of used APB in existing connection.
     if ((p_path->p_dst_apb != p_apb) && (p_path->p_src_apb != p_apb))
     {
-        if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) || 
+        if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) ||
             p_apb != nrfx_interconnect_apb_main_get())
             {
                 // TODO: error code should be returned instead (NRFX-2761).
@@ -503,7 +504,7 @@ void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
     // The endpoint must belong to one of used APB in existing connection.
     if ((p_path->p_dst_apb != p_apb) && (p_path->p_src_apb != p_apb))
     {
-        if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) || 
+        if (!is_main_connection_needed(p_path->p_src_apb, p_path->p_dst_apb) ||
             p_apb != nrfx_interconnect_apb_main_get())
             {
                 // TODO: error code should be returned instead (NRFX-2761).
@@ -731,4 +732,4 @@ void nrfx_gppi_channels_disable(uint32_t mask)
     }
 }
 
-#endif // defined(HALTIUM_XXAA)
+#endif // NRFX_DPPI_ENABLED && (DPPIC_COUNT > 1)
