@@ -80,6 +80,9 @@ extern "C" {
 // SAADC_IRQHandler
 #define nrfx_saadc_irq_handler          SAADC_IRQHandler
 
+// TIMER00_IRQHandler
+#define nrfx_timer_00_irq_handler       TIMER00_IRQHandler
+
 // TIMER10_IRQHandler
 #define nrfx_timer_10_irq_handler       TIMER10_IRQHandler
 
