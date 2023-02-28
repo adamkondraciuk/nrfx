@@ -195,6 +195,23 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
     _NRFX_HAS_COMMA(_NRFX_ARG_HAS_PARENTHESIS __VA_ARGS__ (/*empty*/))                      \
     )
 
+/**
+ * @brief Macro for generating else if statement code blocks that assignes token \<periph_name\>\<prefix\>\<i\>\<suffix\> 
+ *        to the variable \<var\> if \<p_reg\> points to the instance NRF_\<periph_name\>\<prefix\>\<i\>.
+ * 
+ * @param[in] periph_name Peripheral name, e.g. SPIM.
+ * @param[in] prefix      Prefix appended to the index.
+ * @param[in] i           Index.
+ * @param[in] var         Variable.
+ * @param[in] suffix      Suffix following an instance name, e.g. _CH_NUM.
+ * @param[in] p_reg       Specific peripheral instance register pointer.
+ */
+#define NRF_INTERNAL_ELSE_IF_EXTRACT_1(periph_name, prefix, i, var, suffix, p_reg) \
+    else if (p_reg == NRFX_CONCAT(NRF_, periph_name, prefix, i))                   \
+    {                                                                              \
+        var = NRFX_CONCAT(periph_name, prefix, i, suffix);                         \
+    }
+
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
 

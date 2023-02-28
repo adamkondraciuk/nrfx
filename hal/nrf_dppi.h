@@ -9,6 +9,18 @@
 extern "C" {
 #endif
 
+/*
+ * Macro for generating if statement code blocks that allow extracting
+ * the number of channels associated with the specific DPPIC instance.
+ */
+#define NRF_INTERNAL_DPPI_CHAN_NUM_EXTRACT(chan_num, p_reg)                                       \
+    if (0) {}                                                                                     \
+    NRFX_FOREACH_PRESENT(DPPIC, NRF_INTERNAL_ELSE_IF_EXTRACT_1, (), (), chan_num, _CH_NUM, p_reg) \
+    else                                                                                          \
+    {                                                                                             \
+        chan_num = 0;                                                                             \
+    }
+
 /**
  * @defgroup nrf_dppi_hal DPPI Controller HAL
  * @{
@@ -262,32 +274,11 @@ NRF_STATIC_INLINE uint8_t nrf_dppi_channel_number_get(NRF_DPPIC_Type const * p_r
     (void)p_reg;
     return DPPI_CH_NUM;
 #else
-#if defined(NRF_DPPIC00)
-    if (p_reg == NRF_DPPIC00)
-    {
-        return DPPIC00_CH_NUM;
-    }
-#endif
-#if defined(NRF_DPPIC10)
-    if (p_reg == NRF_DPPIC10)
-    {
-        return DPPIC10_CH_NUM;
-    }
-#endif
-#if defined(NRF_DPPIC20)
-    if (p_reg == NRF_DPPIC20)
-    {
-        return DPPIC20_CH_NUM;
-    }
-#endif
-#if defined(NRF_DPPIC30)
-    if (p_reg == NRF_DPPIC30)
-    {
-        return DPPIC30_CH_NUM;
-    }
-#endif
+    uint8_t chan_num = 0;
+    NRF_INTERNAL_DPPI_CHAN_NUM_EXTRACT(chan_num, p_reg);
+
+    return chan_num;
 #endif // defined(DPPI_CH_NUM)
-    return 0;
 }
 
 NRF_STATIC_INLINE uint8_t nrf_dppi_group_number_get(NRF_DPPIC_Type const * p_reg)
