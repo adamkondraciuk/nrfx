@@ -1580,41 +1580,33 @@
         NRF_APB_INDEX_LP    = 4
     } nrf_apb_index_t;
 
-    #if defined(NRF_TRUSTZONE_NONSECURE)
-        #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
-        #define nrfx_gpiote_irq_handler GPIOTE20_0_IRQHandler
+    #if defined(NRF_FLPR)
+        #define NRF_GRTC_IRQ_GROUP    0 // Not sure, no way to check for now.
+        #define GRTC_IRQn             GRTC_0_IRQn
+        #define nrfx_grtc_irq_handler GRTC_0_IRQHandler
+    #elif defined(NRF_APPLICATION)
+        #if defined(NRF_TRUSTZONE_NONSECURE)
+            #define NRF_GPIOTE_IRQ_GROUP    0
+            #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
+            #define nrfx_gpiote_irq_handler GPIOTE20_0_IRQHandler
 
-        #define GRTC_IRQn       GRTC_0_IRQn
-        #define nrfx_grtc_irq_handler     GRTC_0_IRQHandler
-    #else
-        #define NRF_GPIOTE20_IRQn       GPIOTE20_1_IRQn
-        #define nrfx_gpiote_irq_handler GPIOTE20_1_IRQHandler
-
-        /* TODO: NRF_GRTC_IRQ_GROUP in IPS for MOONLIGHT is not defined yet. Should be checked and verified in future. */
-        #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
-            #if defined(NRF_APPLICATION)
-                #define NRF_GRTC_IRQ_GROUP 0
-                #define NRF_GPIOTE_IRQ_GROUP 0
-            #else
-                #error Unknown core.
-            #endif
-        #elif defined(NRF_FLPR)
-            #define NRF_GRTC_IRQ_GROUP 2
+            #define NRF_GRTC_IRQ_GROUP      1 // Not sure, no way to check for now.
+            #define GRTC_IRQn               GRTC_1_IRQn
+            #define nrfx_grtc_irq_handler   GRTC_1_IRQHandler
         #else
-            #if defined(NRF_APPLICATION)
-                #define NRF_GRTC_IRQ_GROUP 1
-                #define NRF_GPIOTE_IRQ_GROUP 1
-            #else
-                #error Unknown core.
-            #endif
-        #endif
+            #define NRF_GPIOTE_IRQ_GROUP    1
+            #define NRF_GPIOTE20_IRQn       GPIOTE20_1_IRQn
+            #define nrfx_gpiote_irq_handler GPIOTE20_1_IRQHandler
 
-        #define GRTC_IRQn             GRTC_1_IRQn
-        #define nrfx_grtc_irq_handler GRTC_1_IRQHandler
-    #endif // defined(NRF_TRUSTZONE_NONSECURE)
+            #define NRF_GRTC_IRQ_GROUP    2
+            #define GRTC_IRQn             GRTC_2_IRQn
+            #define nrfx_grtc_irq_handler GRTC_2_IRQHandler
+        #endif // defined(NRF_TRUSTZONE_NONSECURE)
+    #else
+        #error "Unknown core"
+    #endif
 
     #define DPPI_PRESENT DPPIC_PRESENT
-
     #define DPPI_GROUP_MAX_COUNT NRFX_MAX(DPPIC00_GROUP_NUM, \
                                  NRFX_MAX(DPPIC10_GROUP_NUM, \
                                  NRFX_MAX(DPPIC20_GROUP_NUM, \

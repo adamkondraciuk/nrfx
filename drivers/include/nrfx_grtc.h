@@ -33,6 +33,13 @@ typedef void (*nrfx_grtc_cc_handler_t)(int32_t id, uint64_t cc_value, void * p_c
  */
 typedef void (*nrfx_grtc_syscountervalid_handler_t)(void * p_context);
 
+/**
+ * @brief GRTC driver instance RTCOMPARESYNC handler type.
+ *
+ * @param[in] p_context User context.
+ */
+typedef void (*nrfx_grtc_rtcomparesync_handler_t)(void * p_context);
+
 /** @brief GRTC capture/compare channel description structure. */
 typedef struct
 {
@@ -167,6 +174,18 @@ nrfx_err_t nrfx_grtc_rtcounter_action_perform(nrfx_grtc_rtcounter_action_t actio
  * @retval NRFX_ERROR_TIMEOUT  RTCOUNTER compare interrupt is pending.
  */
 nrfx_err_t nrfx_grtc_rtcounter_cc_disable(void);
+
+/**
+ * @brief Function for enabling the RTCOMPARESYNC interrupt.
+ *
+ * @param[in] handler   Handler provided by the user. May be NULL.
+ * @param[in] p_context User context.
+ */
+void nrfx_grtc_rtcomparesync_int_enable(nrfx_grtc_rtcomparesync_handler_t handler,
+                                        void *                            p_context);
+
+/** @brief Function for disabling the RTCOMPARESYNC interrupt. */
+void nrfx_grtc_rtcomparesync_int_disable(void);
 
 /**
  * @brief Function for setting the absolute compare value for the RTCOUNTER.

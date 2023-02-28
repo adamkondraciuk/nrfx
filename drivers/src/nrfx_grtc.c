@@ -58,6 +58,8 @@ typedef struct
     nrfx_atomic_t                       available_channels;                                    /**< Bitmask of available channels. */
     uint32_t                            used_channels;                                         /**< Bitmask of channels used by the driver. */
     nrfx_grtc_channel_t                 channel_data[NRFX_GRTC_CONFIG_NUM_OF_CC_CHANNELS + 1]; /**< Channel specific data. */
+    nrfx_grtc_rtcomparesync_handler_t   rtcomparesync_handler;                                 /**< User handler corresponding to rtcomparesync event.*/
+    void *                              rtcomparesync_context;                                 /**< User context for rtcomparesync event handler. */
     nrfx_grtc_syscountervalid_handler_t syscountervalid_handler;                               /**< User handler corresponding to syscountervalid event. */
     void *                              syscountervalid_context;                               /**< User context for syscountervalid event handler. */
 } nrfx_grtc_cb_t;
@@ -426,6 +428,25 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_disable(void)
     return err_code;
 }
 
+void nrfx_grtc_rtcomparesync_int_enable(nrfx_grtc_rtcomparesync_handler_t handler, void * p_context)
+{
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+
+    m_cb.rtcomparesync_handler = handler;
+    m_cb.rtcomparesync_context = p_context;
+    nrfy_grtc_event_clear(NRF_GRTC, NRF_GRTC_EVENT_RTCOMPARESYNC);
+    nrfy_grtc_int_enable(NRF_GRTC, NRFY_EVENT_TO_INT_BITMASK(NRF_GRTC_EVENT_RTCOMPARESYNC));
+    NRFX_LOG_INFO("GRTC RTCOMPARESYNC interrupt enabled.");
+}
+
+void nrfx_grtc_rtcomparesync_int_disable(void)
+{
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+
+    nrfy_grtc_int_disable(NRF_GRTC, NRF_GRTC_INT_RTCOMPARESYNC_MASK);
+    NRFX_LOG_INFO("GRTC RTCOMPARESYNC interrupt disabled.");
+}
+
 nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_t * p_handler_data,
                                                uint64_t                             val,
                                                bool                                 enable_irq,
@@ -445,14 +466,13 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
     }
     nrfx_grtc_channel_t * p_chan_data = &m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX];
 
-    nrf_grtc_event_t event = sync ? NRF_GRTC_EVENT_RTCOMPARESYNC :
-                                    NRF_GRTC_EVENT_RTCOMPARE;
-
     p_chan_data->handler   = p_handler_data->handler;
     p_chan_data->p_context = p_handler_data->p_context;
     p_chan_data->channel   = GRTC_RTCOUNTER_COMPARE_CHANNEL;
 
     nrfy_grtc_rt_counter_cc_set(NRF_GRTC, val, sync);
+
+    nrf_grtc_event_t event = NRF_GRTC_EVENT_RTCOMPARE;
 
     nrfy_grtc_event_clear(NRF_GRTC, event);
     if (enable_irq)
@@ -764,15 +784,24 @@ static void grtc_irq_handler(void)
         }
     }
 #if NRFY_GRTC_HAS_EXTENDED
-    if (active_int_mask & (NRF_GRTC_INT_RTCOMPARE_MASK | NRF_GRTC_INT_RTCOMPARESYNC_MASK))
+    if (active_int_mask & NRF_GRTC_INT_RTCOMPARE_MASK)
     {
-        NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARE/NRF_GRTC_EVENT_RTCOMPARESYNC.");
+        NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARE.");
         nrfx_grtc_channel_t const * p_channel = &m_cb.channel_data[GRTC_RTCOUNTER_CC_HANDLER_IDX];
         if (p_channel->handler)
         {
             p_channel->handler((int32_t)GRTC_RTCOUNTER_COMPARE_CHANNEL,
                                nrfy_grtc_rt_counter_cc_get(NRF_GRTC),
                                p_channel->p_context);
+        }
+    }
+
+    if (active_int_mask & NRF_GRTC_INT_RTCOMPARESYNC_MASK)
+    {
+        NRFX_LOG_INFO("Event: NRF_GRTC_EVENT_RTCOMPARESYNC.");
+        if (m_cb.rtcomparesync_handler)
+        {
+            m_cb.rtcomparesync_handler(m_cb.rtcomparesync_context);
         }
     }
 #endif // NRFY_GRTC_HAS_EXTENDED
