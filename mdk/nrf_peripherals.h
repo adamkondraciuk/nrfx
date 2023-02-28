@@ -44,23 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*lint ++flb "Enter library region */
 
-#if defined (NRF5001_XXAA)
-    #include "nrf5001_peripherals.h"
-#elif defined(NRF5002_XXAA)
-    #include "nrf5002_peripherals.h"
-
-#elif defined (NRF51422_XXAA) || defined (NRF51422_XXAB) || defined (NRF51422_XXAC)
-    #include "nrf51422_peripherals.h"
-#elif defined (NRF51801_XXAB)
-    #include "nrf51801_peripherals.h"
-#elif defined (NRF51802_XXAA)
-    #include "nrf51802_peripherals.h"
-#elif defined (NRF51822_XXAA) || defined (NRF51822_XXAB) || defined (NRF51822_XXAC)
-    #include "nrf51822_peripherals.h"
-#elif defined (NRF51824_XXAA)
-    #include "nrf51824_peripherals.h"
-
-#elif defined(NRF51)
+#if defined(NRF51)
     #include "nrf51_peripherals.h"
 
 #elif defined(NRF52805_XXAA)
@@ -75,8 +59,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf52832_peripherals.h"
 #elif defined(NRF52833_XXAA)
     #include "nrf52833_peripherals.h"
-#elif defined(NRF52834_XXAA)
-    #include "nrf52834_peripherals.h"
 #elif defined(NRF52840_XXAA)
     #include "nrf52840_peripherals.h"
 

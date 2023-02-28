@@ -79,78 +79,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #endif
 
-#if defined (NRF9160_XXAA)
-    #if defined (NRF_APPLICATION)
-        #ifndef NRF9160_XXAA_APPLICATION
-            #define NRF9160_XXAA_APPLICATION
-        #endif
-    #elif defined (NRF_MODEM)
-        #ifndef NRF9160_XXAA_MODEM
-            #define NRF9160_XXAA_MODEM
-        #endif
-    #else
-        #ifndef NRF9160_XXAA_APPLICATION
-            #define NRF9160_XXAA_APPLICATION
-        #endif
-    #endif
-#endif
-
-#if defined (NRF9160_XXAA_APPLICATION) || defined (NRF9160_XXAA_MODEM)
-    #ifndef NRF9160_XXAA
-        #define NRF9160_XXAA
-    #endif
-#endif
-#if defined (NRF9160_XXAA_APPLICATION)
-    #ifndef NRF_APPLICATION
-        #define NRF_APPLICATION
-    #endif
-#endif
-#if defined (NRF9160_XXAA_MODEM)
-    #ifndef NRF_MODEM
-        #define NRF_MODEM
-    #endif
-#endif
-
-#if defined (NRF9120_XXAA)
-    #if defined (NRF_APPLICATION)
-        #ifndef NRF9120_XXAA_APPLICATION
-            #define NRF9120_XXAA_APPLICATION
-        #endif
-    #elif defined (NRF_MODEM)
-        #ifndef NRF9120_XXAA_MODEM
-            #define NRF9120_XXAA_MODEM
-        #endif
-    #else
-        #ifndef NRF9120_XXAA_APPLICATION
-            #define NRF9120_XXAA_APPLICATION
-        #endif
-    #endif
-#endif
-
-#if defined (NRF9120_XXAA_APPLICATION) || defined (NRF9120_XXAA_MODEM)
-    #ifndef NRF9120_XXAA
-        #define NRF9120_XXAA
-    #endif
-#endif
-#if defined (NRF9120_XXAA_APPLICATION)
-    #ifndef NRF_APPLICATION
-        #define NRF_APPLICATION
-    #endif
-#endif
-#if defined (NRF9120_XXAA_MODEM)
-    #ifndef NRF_MODEM
-        #define NRF_MODEM
-    #endif
-#endif
-
-/* Define NRF50_SERIES for common use in nRF50 series devices. Only if not previously defined. */
-#if defined (NRF5001_XXAA) ||\
-    defined (NRF5002_XXAA)
-    #ifndef NRF50_SERIES
-        #define NRF50_SERIES
-    #endif
-#endif
-
 /* Define NRF51_SERIES for common use in nRF51 series devices. Only if not previously defined. */
 #if defined (NRF51) ||\
     defined (NRF51422_XXAA) ||\
@@ -178,7 +106,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF52_SERIES for common use in nRF52 series devices. Only if not previously defined. */
-#if defined (NRF52805_XXAA) || defined (NRF52810_XXAA) || defined (NRF52811_XXAA) || defined (NRF52820_XXAA) || defined (NRF52832_XXAA) || defined (NRF52832_XXAB) || defined (NRF52833_XXAA) || defined (NRF52834_XXAA) || defined (NRF52840_XXAA)
+#if defined (NRF52805_XXAA) || defined (NRF52810_XXAA) || defined (NRF52811_XXAA) || defined (NRF52820_XXAA) || defined (NRF52832_XXAA) || defined (NRF52832_XXAB) || defined (NRF52833_XXAA) || defined (NRF52840_XXAA)
     #ifndef NRF52_SERIES
         #define NRF52_SERIES
     #endif
@@ -212,30 +140,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Device selection for device includes. */
-#if defined (NRF5001_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf5001.h"
-    #endif
-    #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5001_types.h"
-    #endif
-#elif defined (NRF5002_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf5002.h"
-    #endif
-    #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5002_types.h"
-    #endif
-
-#elif defined (NRF5002_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf5002.h"
-    #endif
-    #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5002_bitfields.h"
-    #endif
-
-#elif defined (NRF51)
+#if defined (NRF51)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf51.h"
     #endif
@@ -318,18 +223,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if !defined(EXCLUDE_BITFIELDS)
         #include "nrf52833_bitfields.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf51_to_nrf52.h"
-        #include "nrf52_to_nrf52833.h"
-    #endif
-
-#elif defined (NRF52834_XXAA)
-    #if !defined(EXCLUDE_HEADER)
-        #include "nrf52834.h"
-    #endif
-    #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf52834_bitfields.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
         #include "nrf51_to_nrf52.h"
@@ -445,8 +338,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
 #else
     #error "Device must be defined. See nrf.h."
-#endif /* NRF5001_XXAA, NRF5002_XXAA, NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA, NRF9160_XXAA_MODEM, NRF9280_XXAA */
+#endif /* NRF51, NRF52805_XXAA, NRF52810_XXAA, NRF52811_XXAA, NRF52820_XXAA, NRF52832_XXAA, NRF52832_XXAB, NRF52833_XXAA, NRF52840_XXAA, NRF5340_XXAA_APPLICATION, NRF5340_XXAA_NETWORK, NRF9160_XXAA */
+
 #include "compiler_abstraction.h"
 
 #endif /* NRF_H */
-
