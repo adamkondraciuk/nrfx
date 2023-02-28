@@ -12884,7 +12884,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       <!--Security securemapping=NS-->
       <addressBlock>
         <offset>0</offset>
-        <size>0x30</size>
+        <size>0x80</size>
         <usage>registers</usage>
       </addressBlock>
       <groupName>BICR</groupName>
@@ -13038,10 +13038,17 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
             </fields>
           </register>
+        </cluster>
+        <cluster>
+          <name>IOPORT</name>
+          <description>Unspecified</description>
+          <headerStructName>BICR_IOPORT</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x004</addressOffset>
           <register>
-            <name>IOPORT</name>
-            <description>Power configuration of IO ports.</description>
-            <addressOffset>0x004</addressOffset>
+            <name>POWER0</name>
+            <description>Power configuration for P0 to P7 IO ports.</description>
+            <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <fields>
@@ -13049,12 +13056,12 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <name>P0</name>
                 <description>P0 power configuration.</description>
                 <lsb>0</lsb>
-                <msb>1</msb>
+                <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
                     <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
+                    <value>0xF</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Disconnected</name>
@@ -13062,13 +13069,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -13076,13 +13083,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>P1</name>
                 <description>P1 power configuration.</description>
-                <lsb>2</lsb>
-                <msb>3</msb>
+                <lsb>4</lsb>
+                <msb>7</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
                     <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
+                    <value>0xF</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Disconnected</name>
@@ -13090,13 +13097,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -13104,97 +13111,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>P2</name>
                 <description>P2 power configuration.</description>
-                <lsb>4</lsb>
-                <msb>5</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P3</name>
-                <description>P3 power configuration.</description>
-                <lsb>6</lsb>
-                <msb>7</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P4</name>
-                <description>P4 power configuration.</description>
                 <lsb>8</lsb>
-                <msb>9</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P5</name>
-                <description>P5 power configuration.</description>
-                <lsb>10</lsb>
                 <msb>11</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
                     <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
+                    <value>0xF</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Disconnected</name>
@@ -13202,13 +13125,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -13216,13 +13139,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>P6</name>
                 <description>P6 power configuration.</description>
-                <lsb>12</lsb>
-                <msb>13</msb>
+                <lsb>24</lsb>
+                <msb>27</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
                     <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
+                    <value>0xF</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Disconnected</name>
@@ -13230,13 +13153,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -13244,237 +13167,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>P7</name>
                 <description>P7 power configuration.</description>
-                <lsb>14</lsb>
-                <msb>15</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P8</name>
-                <description>P8 power configuration.</description>
-                <lsb>16</lsb>
-                <msb>17</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P9</name>
-                <description>P9 power configuration.</description>
-                <lsb>18</lsb>
-                <msb>19</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P10</name>
-                <description>P10 power configuration.</description>
-                <lsb>20</lsb>
-                <msb>21</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P11</name>
-                <description>P11 power configuration.</description>
-                <lsb>22</lsb>
-                <msb>23</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P12</name>
-                <description>P12 power configuration.</description>
-                <lsb>24</lsb>
-                <msb>25</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P13</name>
-                <description>P13 power configuration.</description>
-                <lsb>26</lsb>
-                <msb>27</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P14</name>
-                <description>P14 power configuration.</description>
                 <lsb>28</lsb>
-                <msb>29</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Disconnected</name>
-                    <description>Port supply rail is not connected. Port cannot be used.</description>
-                    <value>0x0</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
-                    <value>0x1</value>
-                  </enumeratedValue>
-                  <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
-                    <value>0x2</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-              <field>
-                <name>P15</name>
-                <description>P15 power configuration.</description>
-                <lsb>30</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
                     <description>Port supply is unconfigured.</description>
-                    <value>0x3</value>
+                    <value>0xF</value>
                   </enumeratedValue>
                   <enumeratedValue>
                     <name>Disconnected</name>
@@ -13482,13 +13181,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <value>0x0</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>External</name>
-                    <description>Port supply is provided externally.</description>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Shorted</name>
-                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
                     <value>0x2</value>
                   </enumeratedValue>
                 </enumeratedValues>
@@ -13496,23 +13195,193 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <dim>0x2</dim>
-            <dimIncrement>0x4</dimIncrement>
-            <name>MISPROT[%s]</name>
-            <description>Description collection: Misconfiguration protection for power configuration. Whenever chaning any register in the POWER group, these registers MUST be written to 0xFFFFFFFF to indicate the system to perform the misconfiguration protection sequence.</description>
+            <name>POWER1</name>
+            <description>Power configuration for P8 to P15 IO ports.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>P9</name>
+                <description>P9 power configuration.</description>
+                <lsb>4</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Disconnected</name>
+                    <description>Port supply rail is not connected. Port cannot be used.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Shorted</name>
+                    <description>Port supply is shorted to VDD_AO_1V8.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>External1V8</name>
+                    <description>Port supply is provided externally at 1.8 V.</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>External3V</name>
+                    <description>Port supply is provided externally at 3 V.</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>ExternalFull</name>
+                    <description>Port supply is provided externally with a full range of values, from 3 V to 1.8 V.</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>DRIVECTRL0</name>
+            <description>Drive control configuration for P0 to P7 IO ports.</description>
             <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
-                <name>MISPROT</name>
+                <name>P0</name>
+                <description>P0 drive control configuration.</description>
                 <lsb>0</lsb>
+                <msb>3</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>P1</name>
+                <description>P1 drive control configuration.</description>
+                <lsb>4</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>P2</name>
+                <description>P2 drive control configuration.</description>
+                <lsb>8</lsb>
+                <msb>11</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>P6</name>
+                <description>P6 drive control configuration.</description>
+                <lsb>24</lsb>
+                <msb>27</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms33</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 33 Ohms.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms40</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 40 Ohms.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms50</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 50 Ohms.</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms66</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 66 Ohms.</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms100</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 100 Ohms.</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+              <field>
+                <name>P7</name>
+                <description>P7 drive control configuration.</description>
+                <lsb>28</lsb>
                 <msb>31</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>Modified</name>
-                    <description>Power configuration has been modified.</description>
-                    <value>0xFFFFFFFF</value>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms33</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 33 Ohms.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms40</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 40 Ohms.</description>
+                    <value>0x1</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms50</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 50 Ohms.</description>
+                    <value>0x2</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms66</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 66 Ohms.</description>
+                    <value>0x3</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Ohms100</name>
+                    <description>PORTCNF.DRIVECTRL will be adjusted for 100 Ohms.</description>
+                    <value>0x4</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>DRIVECTRL1</name>
+            <description>Drive control configuration for P8 to P15 IO ports.</description>
+            <addressOffset>0x00C</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>P9</name>
+                <description>P9 drive control configuration.</description>
+                <lsb>4</lsb>
+                <msb>7</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Port supply is unconfigured. PORTCNF.DRIVECTRL will not be adjusted.</description>
+                    <value>0xF</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
@@ -13520,41 +13389,60 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           </register>
         </cluster>
         <cluster>
-          <name>LFXO</name>
+          <name>LFOSC</name>
           <description>Unspecified</description>
-          <headerStructName>BICR_LFXO</headerStructName>
+          <headerStructName>BICR_LFOSC</headerStructName>
           <access>read-write</access>
           <addressOffset>0x014</addressOffset>
           <register>
             <name>CONFIG</name>
-            <description>LFXO configuration.</description>
+            <description>LF oscillator configuration.</description>
             <addressOffset>0x000</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
-                <name>PRESENCE</name>
-                <description>LFXO crystal or external signal presence.</description>
+                <name>SRC</name>
+                <description>LF oscillator source.</description>
                 <lsb>0</lsb>
-                <msb>0</msb>
+                <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
-                    <name>NotPresent</name>
-                    <description>LFXO crystal or external signal is not present.</description>
+                    <name>Unconfigured</name>
+                    <description>LF oscillator source is unconfigured. Default will be used.</description>
+                    <value>0xF</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>LFXO</name>
+                    <description>Use LFXO as source for the LF oscillator.</description>
+                    <value>0x0</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>LFRC</name>
+                    <description>Use LFRC as source for the LF oscillator.</description>
                     <value>0x1</value>
                   </enumeratedValue>
                   <enumeratedValue>
-                    <name>Present</name>
-                    <description>LFXO crystal or external signal is present.</description>
-                    <value>0x0</value>
+                    <name>Synth</name>
+                    <description>Use LF Synth as source for the LF oscillator.</description>
+                    <value>0x3</value>
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
+            </fields>
+          </register>
+          <register>
+            <name>LFXOCONFIG</name>
+            <description>LFXO configuration.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
               <field>
                 <name>ACCURACY</name>
                 <description>LFXO crystal or external signal accuracy.</description>
-                <lsb>4</lsb>
-                <msb>7</msb>
+                <lsb>0</lsb>
+                <msb>3</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
@@ -13605,9 +13493,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </field>
               <field>
                 <name>MODE</name>
-                <description>LFXO mode.</description>
-                <lsb>8</lsb>
-                <msb>10</msb>
+                <description>LFXO mode. LFXO will not start unless MODE is configured.</description>
+                <lsb>4</lsb>
+                <msb>6</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
@@ -13639,8 +13527,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <field>
                 <name>LOADCAP</name>
                 <description>Built-in load capacitors selection in 1 pF steps. Max. value 25 pF.</description>
-                <lsb>12</lsb>
-                <msb>19</msb>
+                <lsb>8</lsb>
+                <msb>15</msb>
                 <enumeratedValues>
                   <enumeratedValue>
                     <name>Unconfigured</name>
@@ -13654,17 +13542,30 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </enumeratedValue>
                 </enumeratedValues>
               </field>
+              <field>
+                <name>TIME</name>
+                <description>LFXO startup time in ms.</description>
+                <lsb>16</lsb>
+                <msb>27</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Unconfigured</name>
+                    <description>Startup time has not been configured.</description>
+                    <value>0xFFF</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
             </fields>
           </register>
           <register>
-            <name>CALIBRATION</name>
+            <name>LFXOCAL</name>
             <description>LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board circuit, load capacitance, or crystal swap.</description>
-            <addressOffset>0x004</addressOffset>
+            <addressOffset>0x008</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <fields>
               <field>
-                <name>CALIBRATION</name>
+                <name>LFXOCAL</name>
                 <description>LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board circuit, load capacitance, or crystal swap.</description>
                 <lsb>0</lsb>
                 <msb>31</msb>
@@ -13679,38 +13580,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
           <register>
-            <name>STARTUPTIME</name>
-            <description>LFXO startup time in us.</description>
-            <addressOffset>0x008</addressOffset>
-            <access>read-write</access>
-            <resetValue>0xFFFFFFFF</resetValue>
-            <fields>
-              <field>
-                <name>TIME</name>
-                <description>LFXO startup time in us.</description>
-                <lsb>0</lsb>
-                <msb>31</msb>
-                <enumeratedValues>
-                  <enumeratedValue>
-                    <name>Unconfigured</name>
-                    <description>Startup time has not been configured.</description>
-                    <value>0xFFFFFFFF</value>
-                  </enumeratedValue>
-                </enumeratedValues>
-              </field>
-            </fields>
-          </register>
-        </cluster>
-        <cluster>
-          <name>LFRC</name>
-          <description>Unspecified</description>
-          <headerStructName>BICR_LFRC</headerStructName>
-          <access>read-write</access>
-          <addressOffset>0x020</addressOffset>
-          <register>
-            <name>AUTOCALCONFIG</name>
+            <name>LFRCAUTOCALCONFIG</name>
             <description>LFRC autocalibration configuration.</description>
-            <addressOffset>0x000</addressOffset>
+            <addressOffset>0x00C</addressOffset>
             <access>read-write</access>
             <resetValue>0xFFFFFFFF</resetValue>
             <fields>
@@ -13847,7 +13719,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <description>Unspecified</description>
           <headerStructName>BICR_TAMPC</headerStructName>
           <access>read-write</access>
-          <addressOffset>0x030</addressOffset>
+          <addressOffset>0x034</addressOffset>
           <register>
             <name>TAMPERSWITCH</name>
             <description>Configuration for external tamper switch detector.</description>
@@ -13957,6 +13829,94 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             </fields>
           </register>
         </cluster>
+        <cluster>
+          <name>MISPROT</name>
+          <description>Unspecified</description>
+          <headerStructName>BICR_MISPROT</headerStructName>
+          <access>read-write</access>
+          <addressOffset>0x03C</addressOffset>
+          <register>
+            <name>POWERCONFIG</name>
+            <description>Misconfiguration report for POWER.CONFIG register.</description>
+            <addressOffset>0x000</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>POWERCONFIG</name>
+                <description>Misconfiguration report configuration for POWER.CONFIG register.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Correct</name>
+                    <description>POWER.CONFIG register does not have an invalid field.</description>
+                    <value>0x471B4B2A</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Incorrect</name>
+                    <description>POWER.CONFIG register has at least an invalid field. POWER.CONFIG register is not used and should be corrected.</description>
+                    <value>0xAA95E6D8</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>IOPORTPOWER</name>
+            <description>Misconfiguration report for IOPORT.POWER0 and IOPORT.POWER1 registers.</description>
+            <addressOffset>0x004</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>IOPORTPOWER</name>
+                <description>Misconfiguration report configuration for IOPORT.POWER0 and IOPORT.POWER1 registers.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Correct</name>
+                    <description>IOPORT.POWER0 and IOPORT.POWER1 registers do not have an invalid field.</description>
+                    <value>0x471B4B2A</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Incorrect</name>
+                    <description>IOPORT.POWER0 and/or IOPORT.POWER1 registers have at least an invalid field. Invalid field is not used and should be corrected.</description>
+                    <value>0xAA95E6D8</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+          <register>
+            <name>IOPORTDRIVECTRL</name>
+            <description>Misconfiguration report for IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 registers.</description>
+            <addressOffset>0x008</addressOffset>
+            <access>read-write</access>
+            <resetValue>0xFFFFFFFF</resetValue>
+            <fields>
+              <field>
+                <name>IOPORTDRIVECTRL0</name>
+                <description>Misconfiguration report for IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 registers.</description>
+                <lsb>0</lsb>
+                <msb>31</msb>
+                <enumeratedValues>
+                  <enumeratedValue>
+                    <name>Correct</name>
+                    <description>IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 register does not have an invalid field.</description>
+                    <value>0x471B4B2A</value>
+                  </enumeratedValue>
+                  <enumeratedValue>
+                    <name>Incorrect</name>
+                    <description>IOPORT.DRIVECTRL0 and/or and IOPORT.DRIVECTRL1 registers have at least an invalid field. Invalid field is not used and should be corrected.</description>
+                    <value>0xAA95E6D8</value>
+                  </enumeratedValue>
+                </enumeratedValues>
+              </field>
+            </fields>
+          </register>
+        </cluster>
       </registers>
     </peripheral>
     <peripheral>
@@ -13977,7 +13937,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>SOCINFO</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_SOCINFO</headerStructName>
+          <headerStructName>FICR_SOCINFO</headerStructName>
           <access>read-write</access>
           <addressOffset>0x000</addressOffset>
           <register>
@@ -14029,7 +13989,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>BLE</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_BLE</headerStructName>
+          <headerStructName>FICR_BLE</headerStructName>
           <access>read-write</access>
           <addressOffset>0x00C</addressOffset>
           <register>
@@ -14114,7 +14074,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>NFC</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_NFC</headerStructName>
+          <headerStructName>FICR_NFC</headerStructName>
           <access>read-write</access>
           <addressOffset>0x040</addressOffset>
           <register>
@@ -14156,7 +14116,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>INFO</name>
           <description>Device info</description>
-          <headerStructName>GLOBAL_FICR_INFO</headerStructName>
+          <headerStructName>FICR_INFO</headerStructName>
           <access>read-write</access>
           <addressOffset>0x050</addressOffset>
           <register>
@@ -14359,13 +14319,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>PRODTEST</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_PRODTEST</headerStructName>
+          <headerStructName>FICR_PRODTEST</headerStructName>
           <access>read-write</access>
           <addressOffset>0x080</addressOffset>
           <cluster>
             <name>CP</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_PRODTEST_CP</headerStructName>
+            <headerStructName>FICR_PRODTEST_CP</headerStructName>
             <access>read-write</access>
             <addressOffset>0x000</addressOffset>
             <register>
@@ -14506,7 +14466,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>FT</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_PRODTEST_FT</headerStructName>
+            <headerStructName>FICR_PRODTEST_FT</headerStructName>
             <access>read-write</access>
             <addressOffset>0x024</addressOffset>
             <register>
@@ -14604,27 +14564,49 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>TRIM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_TRIM</headerStructName>
+          <headerStructName>FICR_TRIM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x100</addressOffset>
           <cluster>
             <name>SYSCTRL</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL</headerStructName>
+            <headerStructName>FICR_TRIM_SYSCTRL</headerStructName>
             <access>read-write</access>
             <addressOffset>0x0</addressOffset>
             <cluster>
               <name>FLL16M</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_FLL16M</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_FLL16M</headerStructName>
               <access>read-write</access>
               <addressOffset>0x0</addressOffset>
               <cluster>
-                <name>TRIM</name>
+                <name>CONFIG</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_FLL16M_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_FLL16M_CONFIG</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
+                <register>
+                  <name>CFGCKSW16M</name>
+                  <description>Trim value for SYSCTRL.FLL16M.CFGCKSW16M</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_SYSCTRL_FLL16M_TRIM</headerStructName>
+                <access>read-write</access>
+                <addressOffset>0x4</addressOffset>
                 <register>
                   <name>RCOARSE</name>
                   <description>Trim value for SYSCTRL.FLL16M.RCOARSE</description>
@@ -14656,24 +14638,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </fields>
                 </register>
                 <register>
-                  <name>TCOEF</name>
-                  <description>Trim value for SYSCTRL.FLL16M.TCOEF</description>
-                  <addressOffset>0x8</addressOffset>
-                  <access>read-only</access>
-                  <resetValue>0xFFFFFFFF</resetValue>
-                  <fields>
-                    <field>
-                      <name>VALUE</name>
-                      <description>Trim value</description>
-                      <lsb>0</lsb>
-                      <msb>31</msb>
-                    </field>
-                  </fields>
-                </register>
-                <register>
                   <name>VSUP</name>
                   <description>Trim value for SYSCTRL.FLL16M.VSUP</description>
-                  <addressOffset>0xC</addressOffset>
+                  <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
                   <fields>
@@ -14688,7 +14655,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <register>
                   <name>CKSW16MTRIM</name>
                   <description>Trim value for SYSCTRL.FLL16M.CKSW16MTRIM</description>
-                  <addressOffset>0x10</addressOffset>
+                  <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
                   <fields>
@@ -14705,13 +14672,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>LFRC</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_LFRC</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_LFRC</headerStructName>
               <access>read-write</access>
               <addressOffset>0x14</addressOffset>
               <cluster>
                 <name>CAL</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_LFRC_CAL</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_LFRC_CAL</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -14734,13 +14701,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>LFXO</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_LFXO</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_LFXO</headerStructName>
               <access>read-write</access>
               <addressOffset>0x18</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_LFXO_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_LFXO_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -14957,13 +14924,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>AUDIOPLL</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_AUDIOPLL</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_AUDIOPLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x58</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -14984,15 +14951,44 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </cluster>
             </cluster>
             <cluster>
-              <name>USBHSPLL</name>
+              <name>AUDIOPLLPM</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_USBHSPLL</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_AUDIOPLLPM</headerStructName>
               <access>read-write</access>
               <addressOffset>0x5C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_USBHSPLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM</headerStructName>
+                <access>read-write</access>
+                <addressOffset>0x0</addressOffset>
+                <register>
+                  <name>VREFPM</name>
+                  <description>Trim value for SYSCTRL.AUDIOPLLPM.TRIM.VREFPM</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
+            </cluster>
+            <cluster>
+              <name>USBHSPLL</name>
+              <description>Unspecified</description>
+              <headerStructName>FICR_TRIM_SYSCTRL_USBHSPLL</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x60</addressOffset>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_SYSCTRL_USBHSPLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15015,13 +15011,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MBIAS</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_MBIAS</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x60</addressOffset>
+              <addressOffset>0x64</addressOffset>
               <cluster>
                 <name>CONFIG</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS_CONFIG</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_MBIAS_CONFIG</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15043,7 +15039,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MBIAS_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_MBIAS_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x4</addressOffset>
                 <register>
@@ -15081,13 +15077,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>OSCRFR</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_OSCRFR</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_OSCRFR</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x6C</addressOffset>
+              <addressOffset>0x70</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_OSCRFR_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_OSCRFR_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15125,13 +15121,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREG1V0</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREG1V0</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREG1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x74</addressOffset>
+              <addressOffset>0x78</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREG1V0_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREG1V0_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15214,13 +15210,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGAO0V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO0V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x88</addressOffset>
+              <addressOffset>0x8C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGAO0V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15303,13 +15299,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGAO1V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO1V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x9C</addressOffset>
+              <addressOffset>0xA0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGAO1V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15377,13 +15373,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGMAIN</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMAIN</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGMAIN</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xAC</addressOffset>
+              <addressOffset>0xB0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMAIN_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGMAIN_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15571,13 +15567,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGMRAM130</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xDC</addressOffset>
+              <addressOffset>0xE0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM130_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15645,13 +15641,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGMRAM131</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM131</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xEC</addressOffset>
+              <addressOffset>0xF0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGMRAM131_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15719,13 +15715,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGVS0V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGVS0V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0xFC</addressOffset>
+              <addressOffset>0x100</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGVS0V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15793,13 +15789,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VREGUSB</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGUSB</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VREGUSB</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x10C</addressOffset>
+              <addressOffset>0x110</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VREGUSB_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VREGUSB_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15867,13 +15863,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VDETAO0V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VDETAO0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x11C</addressOffset>
+              <addressOffset>0x120</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDETAO0V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15910,7 +15906,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               <cluster>
                 <name>CONFIG</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDETAO0V8_CONFIG</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x8</addressOffset>
                 <register>
@@ -15933,13 +15929,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VDETAO1V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VDETAO1V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x128</addressOffset>
+              <addressOffset>0x12C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDETAO1V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -15977,13 +15973,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VDETVS0V8</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETVS0V8</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VDETVS0V8</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x130</addressOffset>
+              <addressOffset>0x134</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDETVS0V8_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16021,13 +16017,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VDETAO5V0</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO5V0</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VDETAO5V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x138</addressOffset>
+              <addressOffset>0x13C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDETAO5V0_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16050,13 +16046,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>VDET1V0</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_VDET1V0</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x13C</addressOffset>
+              <addressOffset>0x140</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_VDET1V0_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_VDET1V0_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16079,13 +16075,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>HSFLL120</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x140</addressOffset>
+              <addressOffset>0x144</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL120_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_HSFLL120_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16142,13 +16138,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>HSFLL121</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL121</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_HSFLL121</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x174</addressOffset>
+              <addressOffset>0x178</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_HSFLL121_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_HSFLL121_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16205,9 +16201,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF120</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x1A8</addressOffset>
+              <addressOffset>0x1AC</addressOffset>
               <cluster>
                 <dim>36</dim>
                 <dimIncrement>0x004</dimIncrement>
@@ -16237,7 +16233,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0xB0</addressOffset>
                 <register>
@@ -16260,15 +16256,15 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF130</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
+              <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF130</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x278</addressOffset>
+              <addressOffset>0x27C</addressOffset>
               <cluster>
                 <dim>2</dim>
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16292,13 +16288,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>GLOBAL</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_GLOBAL</headerStructName>
+            <headerStructName>FICR_TRIM_GLOBAL</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x280</addressOffset>
+            <addressOffset>0x284</addressOffset>
             <cluster>
               <name>SAADC</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_SAADC</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_SAADC</headerStructName>
               <access>read-write</access>
               <addressOffset>0x0</addressOffset>
               <register>
@@ -16380,13 +16376,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                 </fields>
               </register>
+              <register>
+                <name>CALVREFTC</name>
+                <description>Trim value for GLOBAL.SAADC.CALVREFTC</description>
+                <addressOffset>0x30</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
             </cluster>
             <cluster>
               <name>TEMP</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_TEMP</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_TEMP</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x30</addressOffset>
+              <addressOffset>0x34</addressOffset>
               <register>
                 <name>CALIB</name>
                 <description>Trim value for GLOBAL.TEMP.CALIB</description>
@@ -16402,64 +16413,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </field>
                 </fields>
               </register>
-              <register>
-                <dim>0x6</dim>
-                <dimIncrement>0x4</dimIncrement>
-                <name>A[%s]</name>
-                <description>Description collection: Trim value for GLOBAL.TEMP.A</description>
-                <addressOffset>0x4</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <dim>0x6</dim>
-                <dimIncrement>0x4</dimIncrement>
-                <name>B[%s]</name>
-                <description>Description collection: Trim value for GLOBAL.TEMP.B</description>
-                <addressOffset>0x1C</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <dim>0x5</dim>
-                <dimIncrement>0x4</dimIncrement>
-                <name>T[%s]</name>
-                <description>Description collection: Trim value for GLOBAL.TEMP.T</description>
-                <addressOffset>0x34</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
             </cluster>
             <cluster>
               <name>NFCT</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_NFCT</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_NFCT</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x78</addressOffset>
+              <addressOffset>0x38</addressOffset>
               <register>
                 <name>BIASCFG</name>
                 <description>Trim value for NFCT.BIASCFG</description>
@@ -16479,13 +16439,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>CANPLL</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_CANPLL</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_CANPLL</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x7C</addressOffset>
+              <addressOffset>0x3C</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_CANPLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_GLOBAL_CANPLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16506,21 +16466,50 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
               </cluster>
             </cluster>
             <cluster>
+              <name>CANPLLPM</name>
+              <description>Unspecified</description>
+              <headerStructName>FICR_TRIM_GLOBAL_CANPLLPM</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x40</addressOffset>
+              <cluster>
+                <name>TRIM</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_GLOBAL_CANPLLPM_TRIM</headerStructName>
+                <access>read-write</access>
+                <addressOffset>0x0</addressOffset>
+                <register>
+                  <name>VREFPM</name>
+                  <description>Trim value for GLOBAL.CANPLLPM.TRIM.VREFPM</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
+            </cluster>
+            <cluster>
               <name>GPIO</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_GPIO</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x80</addressOffset>
+              <addressOffset>0x44</addressOffset>
               <cluster>
                 <name>PORTCNF</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO_PORTCNF</headerStructName>
+                <headerStructName>FICR_TRIM_GLOBAL_GPIO_PORTCNF</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <cluster>
                   <name>DRIVECTRL</name>
                   <description>Unspecified</description>
-                  <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL</headerStructName>
+                  <headerStructName>FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL</headerStructName>
                   <access>read-write</access>
                   <addressOffset>0x0</addressOffset>
                   <register>
@@ -16546,9 +16535,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>COMP</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_GLOBAL_COMP</headerStructName>
+              <headerStructName>FICR_TRIM_GLOBAL_COMP</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x88</addressOffset>
+              <addressOffset>0x4C</addressOffset>
               <register>
                 <name>REFTRIM</name>
                 <description>Trim value for GLOBAL.COMP.REFTRIM</description>
@@ -16565,54 +16554,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </fields>
               </register>
               <register>
-                <name>RCAL80KCOARSE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL80KCOARSE</description>
+                <name>RCALTRIM</name>
+                <description>Trim value used during production test</description>
                 <addressOffset>0x4</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL80KFINE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL80KFINE</description>
-                <addressOffset>0x8</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL6M4COARSE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL6M4COARSE</description>
-                <addressOffset>0xC</addressOffset>
-                <access>read-only</access>
-                <resetValue>0xFFFFFFFF</resetValue>
-                <fields>
-                  <field>
-                    <name>VALUE</name>
-                    <description>Trim value</description>
-                    <lsb>0</lsb>
-                    <msb>31</msb>
-                  </field>
-                </fields>
-              </register>
-              <register>
-                <name>RCAL6M4FINE</name>
-                <description>Trim value for GLOBAL.COMP.RCAL6M4FINE</description>
-                <addressOffset>0x10</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -16629,19 +16573,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>APPLICATION</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_APPLICATION</headerStructName>
+            <headerStructName>FICR_TRIM_APPLICATION</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x31C</addressOffset>
+            <addressOffset>0x2D8</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_APPLICATION_HSFLL</headerStructName>
+              <headerStructName>FICR_TRIM_APPLICATION_HSFLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_APPLICATION_HSFLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_APPLICATION_HSFLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16698,7 +16642,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_APPLICATION_MEMCONF</headerStructName>
+              <headerStructName>FICR_TRIM_APPLICATION_MEMCONF</headerStructName>
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
@@ -16706,7 +16650,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16730,19 +16674,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>RADIOCORE</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE</headerStructName>
+            <headerStructName>FICR_TRIM_RADIOCORE</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x35C</addressOffset>
+            <addressOffset>0x318</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_HSFLL</headerStructName>
+              <headerStructName>FICR_TRIM_RADIOCORE_HSFLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x0</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_HSFLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_RADIOCORE_HSFLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16799,7 +16743,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_MEMCONF</headerStructName>
+              <headerStructName>FICR_TRIM_RADIOCORE_MEMCONF</headerStructName>
               <access>read-write</access>
               <addressOffset>0x34</addressOffset>
               <cluster>
@@ -16807,7 +16751,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
@@ -16830,18 +16774,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>RADIO</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_RADIO</headerStructName>
+              <headerStructName>FICR_TRIM_RADIOCORE_RADIO</headerStructName>
               <access>read-write</access>
               <addressOffset>0x40</addressOffset>
               <cluster>
                 <name>SPHYNXANA</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA</headerStructName>
+                <headerStructName>FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x0</addressOffset>
                 <register>
-                  <name>FSCTRL1</name>
-                  <description>Trim value for RADIOCORE.RADIO.FSCTRL1</description>
+                  <name>FSCTRL0</name>
+                  <description>Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL0</description>
                   <addressOffset>0x0</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16855,8 +16799,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </fields>
                 </register>
                 <register>
-                  <name>FSCTRL2</name>
-                  <description>Trim value for RADIOCORE.RADIO.FSCTRL2</description>
+                  <name>FSCTRL1</name>
+                  <description>Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL1</description>
                   <addressOffset>0x4</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16870,8 +16814,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </fields>
                 </register>
                 <register>
-                  <name>RXCTRL</name>
-                  <description>Trim value for RADIOCORE.RADIO.RXCTRL</description>
+                  <name>FSCTRL2</name>
+                  <description>Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL2</description>
                   <addressOffset>0x8</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16885,8 +16829,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </fields>
                 </register>
                 <register>
-                  <name>TXCTRL</name>
-                  <description>Trim value for RADIOCORE.RADIO.TXCTRL</description>
+                  <name>RXCTRL</name>
+                  <description>Trim value for RADIOCORE.RADIO.SPHYNXANA.RXCTRL</description>
                   <addressOffset>0xC</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16901,7 +16845,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </register>
                 <register>
                   <name>OVRRXTRIMCODE</name>
-                  <description>Trim value for RADIOCORE.RADIO.OVRRXTRIMCODE</description>
+                  <description>Trim value for RADIOCORE.RADIO.SPHYNXANA.OVRRXTRIMCODE</description>
                   <addressOffset>0x10</addressOffset>
                   <access>read-only</access>
                   <resetValue>0xFFFFFFFF</resetValue>
@@ -16915,10 +16859,32 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                   </fields>
                 </register>
               </cluster>
-              <register>
-                <name>RSSIOFFSET</name>
-                <description>Trim value for RSSI offset compensation</description>
+              <cluster>
+                <name>RXAGC</name>
+                <description>Unspecified</description>
+                <headerStructName>FICR_TRIM_RADIOCORE_RADIO_RXAGC</headerStructName>
+                <access>read-write</access>
                 <addressOffset>0x14</addressOffset>
+                <register>
+                  <name>CALIBRATION</name>
+                  <description>Trim value for RSSICAL and ED154CAL in RADIOCORE.RADIO.RXAGC.CALIBRATION</description>
+                  <addressOffset>0x0</addressOffset>
+                  <access>read-only</access>
+                  <resetValue>0xFFFFFFFF</resetValue>
+                  <fields>
+                    <field>
+                      <name>VALUE</name>
+                      <description>Trim value</description>
+                      <lsb>0</lsb>
+                      <msb>31</msb>
+                    </field>
+                  </fields>
+                </register>
+              </cluster>
+              <register>
+                <name>PVTTOT</name>
+                <description>Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO</description>
+                <addressOffset>0x18</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -16931,9 +16897,39 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 </fields>
               </register>
               <register>
-                <name>EDCAL</name>
-                <description>Trim value for EDCAL</description>
-                <addressOffset>0x18</addressOffset>
+                <name>KDTC</name>
+                <description>Trim value for RADIOCORE.RADIO.ESTKDTCVAL</description>
+                <addressOffset>0x1C</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>TXHFGAIN</name>
+                <description>Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN</description>
+                <addressOffset>0x20</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+              <register>
+                <name>PVTTOFIX</name>
+                <description>Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND6</description>
+                <addressOffset>0x24</addressOffset>
                 <access>read-only</access>
                 <resetValue>0xFFFFFFFF</resetValue>
                 <fields>
@@ -16950,15 +16946,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>BOOT</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_BOOT</headerStructName>
+            <headerStructName>FICR_TRIM_BOOT</headerStructName>
             <access>read-write</access>
-            <addressOffset>0x3E0</addressOffset>
+            <addressOffset>0x3DC</addressOffset>
+            <cluster>
+              <name>VREG1V0</name>
+              <description>Unspecified</description>
+              <headerStructName>FICR_TRIM_BOOT_VREG1V0</headerStructName>
+              <access>read-write</access>
+              <addressOffset>0x000</addressOffset>
+              <register>
+                <name>VOUTHPNOMINAL</name>
+                <description>Trim value for SYSCTRL.VREG1V0.VOUTHPNOMINAL</description>
+                <addressOffset>0x000</addressOffset>
+                <access>read-only</access>
+                <resetValue>0xFFFFFFFF</resetValue>
+                <fields>
+                  <field>
+                    <name>VALUE</name>
+                    <description>Trim value</description>
+                    <lsb>0</lsb>
+                    <msb>31</msb>
+                  </field>
+                </fields>
+              </register>
+            </cluster>
             <cluster>
               <name>HSFLL120</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_BOOT_HSFLL120</headerStructName>
+              <headerStructName>FICR_TRIM_BOOT_HSFLL120</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x000</addressOffset>
+              <addressOffset>0x004</addressOffset>
               <register>
                 <name>VSUP</name>
                 <description>Trim value for SYSCTRL.HSFLL120.VSUP</description>
@@ -17008,9 +17026,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>OTPC</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_BOOT_OTPC</headerStructName>
+              <headerStructName>FICR_TRIM_BOOT_OTPC</headerStructName>
               <access>read-write</access>
-              <addressOffset>0x00C</addressOffset>
+              <addressOffset>0x010</addressOffset>
               <register>
                 <name>WAITSTATES</name>
                 <description>OTPC waitstates trim when running with TRIM.BOOT.HSFLL120 trims</description>
@@ -17046,7 +17064,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>COMMON</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_COMMON</headerStructName>
+            <headerStructName>FICR_TRIM_COMMON</headerStructName>
             <access>read-write</access>
             <addressOffset>0x3F4</addressOffset>
             <register>
@@ -17098,19 +17116,19 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
           <cluster>
             <name>SECURE</name>
             <description>Unspecified</description>
-            <headerStructName>GLOBAL_FICR_TRIM_SECURE</headerStructName>
+            <headerStructName>FICR_TRIM_SECURE</headerStructName>
             <access>read-write</access>
             <addressOffset>0x400</addressOffset>
             <cluster>
               <name>HSFLL</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SECURE_HSFLL</headerStructName>
+              <headerStructName>FICR_TRIM_SECURE_HSFLL</headerStructName>
               <access>read-write</access>
               <addressOffset>0x000</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SECURE_HSFLL_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SECURE_HSFLL_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
                 <register>
@@ -17167,13 +17185,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>HSFLL200</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SECURE_HSFLL200</headerStructName>
+              <headerStructName>FICR_TRIM_SECURE_HSFLL200</headerStructName>
               <access>read-write</access>
               <addressOffset>0x034</addressOffset>
               <cluster>
                 <name>TRIM</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SECURE_HSFLL200_TRIM</headerStructName>
+                <headerStructName>FICR_TRIM_SECURE_HSFLL200_TRIM</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
                 <register>
@@ -17230,7 +17248,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SECURE_MEMCONF</headerStructName>
+              <headerStructName>FICR_TRIM_SECURE_MEMCONF</headerStructName>
               <access>read-write</access>
               <addressOffset>0x058</addressOffset>
               <cluster>
@@ -17238,7 +17256,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                 <dimIncrement>0x004</dimIncrement>
                 <name>BLOCKTYPE[%s]</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
                 <register>
@@ -17261,13 +17279,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <cluster>
               <name>MEMCONF200</name>
               <description>Unspecified</description>
-              <headerStructName>GLOBAL_FICR_TRIM_SECURE_MEMCONF200</headerStructName>
+              <headerStructName>FICR_TRIM_SECURE_MEMCONF200</headerStructName>
               <access>read-write</access>
               <addressOffset>0x074</addressOffset>
               <cluster>
                 <name>BLOCKTYPE</name>
                 <description>Unspecified</description>
-                <headerStructName>GLOBAL_FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE</headerStructName>
+                <headerStructName>FICR_TRIM_SECURE_MEMCONF200_BLOCKTYPE</headerStructName>
                 <access>read-write</access>
                 <addressOffset>0x000</addressOffset>
                 <register>
@@ -17292,7 +17310,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>BOOT</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_BOOT</headerStructName>
+          <headerStructName>FICR_BOOT</headerStructName>
           <access>read-write</access>
           <addressOffset>0x5A0</addressOffset>
           <register>
@@ -17337,7 +17355,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <cluster>
           <name>SRAM</name>
           <description>Unspecified</description>
-          <headerStructName>GLOBAL_FICR_SRAM</headerStructName>
+          <headerStructName>FICR_SRAM</headerStructName>
           <access>read-write</access>
           <addressOffset>0x7B0</addressOffset>
           <register>
