@@ -12447,14 +12447,7 @@ typedef struct {
   */
 typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Power configuration of power rails.                   */
-  __IOM uint32_t  IOPORT;                            /*!< (@ 0x00000004) Power configuration of IO ports.                      */
-  __IOM uint32_t  MISPROT[2];                        /*!< (@ 0x00000008) Misconfiguration protection for power configuration.
-                                                                         Whenever chaning any register in the POWER group, these
-                                                                         registers MUST be written to 0xFFFFFFFF to indicate the
-                                                                         system to perform the misconfiguration protection
-                                                                         sequence.*/                                              
-  __IM  uint32_t  RESERVED;
-} NRF_BICR_POWER_Type;                               /*!< Size = 20 (0x014)                                                    */
+} NRF_BICR_POWER_Type;                               /*!< Size = 4 (0x004)                                                     */
 
 /* BICR_POWER_CONFIG: Power configuration of power rails. */
   #define BICR_POWER_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG register.                                     */
@@ -12513,310 +12506,275 @@ typedef struct {
   #define BICR_POWER_CONFIG_INDUCTOR_Present (0x0UL) /*!< DC/DC inductor is present.                                           */
 
 
-/* BICR_POWER_IOPORT: Power configuration of IO ports. */
-  #define BICR_POWER_IOPORT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IOPORT register.                                     */
 
-/* P0 @Bits 0..1 : P0 power configuration. */
-  #define BICR_POWER_IOPORT_P0_Pos (0UL)             /*!< Position of P0 field.                                                */
-  #define BICR_POWER_IOPORT_P0_Msk (0x3UL << BICR_POWER_IOPORT_P0_Pos) /*!< Bit mask of P0 field.                              */
-  #define BICR_POWER_IOPORT_P0_Min (0x0UL)           /*!< Min enumerator value of P0 field.                                    */
-  #define BICR_POWER_IOPORT_P0_Max (0x3UL)           /*!< Max enumerator value of P0 field.                                    */
-  #define BICR_POWER_IOPORT_P0_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P0_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P0_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P0_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P1 @Bits 2..3 : P1 power configuration. */
-  #define BICR_POWER_IOPORT_P1_Pos (2UL)             /*!< Position of P1 field.                                                */
-  #define BICR_POWER_IOPORT_P1_Msk (0x3UL << BICR_POWER_IOPORT_P1_Pos) /*!< Bit mask of P1 field.                              */
-  #define BICR_POWER_IOPORT_P1_Min (0x0UL)           /*!< Min enumerator value of P1 field.                                    */
-  #define BICR_POWER_IOPORT_P1_Max (0x3UL)           /*!< Max enumerator value of P1 field.                                    */
-  #define BICR_POWER_IOPORT_P1_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P1_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P1_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P1_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P2 @Bits 4..5 : P2 power configuration. */
-  #define BICR_POWER_IOPORT_P2_Pos (4UL)             /*!< Position of P2 field.                                                */
-  #define BICR_POWER_IOPORT_P2_Msk (0x3UL << BICR_POWER_IOPORT_P2_Pos) /*!< Bit mask of P2 field.                              */
-  #define BICR_POWER_IOPORT_P2_Min (0x0UL)           /*!< Min enumerator value of P2 field.                                    */
-  #define BICR_POWER_IOPORT_P2_Max (0x3UL)           /*!< Max enumerator value of P2 field.                                    */
-  #define BICR_POWER_IOPORT_P2_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P2_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P2_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P2_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P3 @Bits 6..7 : P3 power configuration. */
-  #define BICR_POWER_IOPORT_P3_Pos (6UL)             /*!< Position of P3 field.                                                */
-  #define BICR_POWER_IOPORT_P3_Msk (0x3UL << BICR_POWER_IOPORT_P3_Pos) /*!< Bit mask of P3 field.                              */
-  #define BICR_POWER_IOPORT_P3_Min (0x0UL)           /*!< Min enumerator value of P3 field.                                    */
-  #define BICR_POWER_IOPORT_P3_Max (0x3UL)           /*!< Max enumerator value of P3 field.                                    */
-  #define BICR_POWER_IOPORT_P3_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P3_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P3_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P3_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P4 @Bits 8..9 : P4 power configuration. */
-  #define BICR_POWER_IOPORT_P4_Pos (8UL)             /*!< Position of P4 field.                                                */
-  #define BICR_POWER_IOPORT_P4_Msk (0x3UL << BICR_POWER_IOPORT_P4_Pos) /*!< Bit mask of P4 field.                              */
-  #define BICR_POWER_IOPORT_P4_Min (0x0UL)           /*!< Min enumerator value of P4 field.                                    */
-  #define BICR_POWER_IOPORT_P4_Max (0x3UL)           /*!< Max enumerator value of P4 field.                                    */
-  #define BICR_POWER_IOPORT_P4_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P4_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P4_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P4_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P5 @Bits 10..11 : P5 power configuration. */
-  #define BICR_POWER_IOPORT_P5_Pos (10UL)            /*!< Position of P5 field.                                                */
-  #define BICR_POWER_IOPORT_P5_Msk (0x3UL << BICR_POWER_IOPORT_P5_Pos) /*!< Bit mask of P5 field.                              */
-  #define BICR_POWER_IOPORT_P5_Min (0x0UL)           /*!< Min enumerator value of P5 field.                                    */
-  #define BICR_POWER_IOPORT_P5_Max (0x3UL)           /*!< Max enumerator value of P5 field.                                    */
-  #define BICR_POWER_IOPORT_P5_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P5_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P5_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P5_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P6 @Bits 12..13 : P6 power configuration. */
-  #define BICR_POWER_IOPORT_P6_Pos (12UL)            /*!< Position of P6 field.                                                */
-  #define BICR_POWER_IOPORT_P6_Msk (0x3UL << BICR_POWER_IOPORT_P6_Pos) /*!< Bit mask of P6 field.                              */
-  #define BICR_POWER_IOPORT_P6_Min (0x0UL)           /*!< Min enumerator value of P6 field.                                    */
-  #define BICR_POWER_IOPORT_P6_Max (0x3UL)           /*!< Max enumerator value of P6 field.                                    */
-  #define BICR_POWER_IOPORT_P6_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P6_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P6_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P6_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P7 @Bits 14..15 : P7 power configuration. */
-  #define BICR_POWER_IOPORT_P7_Pos (14UL)            /*!< Position of P7 field.                                                */
-  #define BICR_POWER_IOPORT_P7_Msk (0x3UL << BICR_POWER_IOPORT_P7_Pos) /*!< Bit mask of P7 field.                              */
-  #define BICR_POWER_IOPORT_P7_Min (0x0UL)           /*!< Min enumerator value of P7 field.                                    */
-  #define BICR_POWER_IOPORT_P7_Max (0x3UL)           /*!< Max enumerator value of P7 field.                                    */
-  #define BICR_POWER_IOPORT_P7_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P7_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P7_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P7_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P8 @Bits 16..17 : P8 power configuration. */
-  #define BICR_POWER_IOPORT_P8_Pos (16UL)            /*!< Position of P8 field.                                                */
-  #define BICR_POWER_IOPORT_P8_Msk (0x3UL << BICR_POWER_IOPORT_P8_Pos) /*!< Bit mask of P8 field.                              */
-  #define BICR_POWER_IOPORT_P8_Min (0x0UL)           /*!< Min enumerator value of P8 field.                                    */
-  #define BICR_POWER_IOPORT_P8_Max (0x3UL)           /*!< Max enumerator value of P8 field.                                    */
-  #define BICR_POWER_IOPORT_P8_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P8_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P8_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P8_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P9 @Bits 18..19 : P9 power configuration. */
-  #define BICR_POWER_IOPORT_P9_Pos (18UL)            /*!< Position of P9 field.                                                */
-  #define BICR_POWER_IOPORT_P9_Msk (0x3UL << BICR_POWER_IOPORT_P9_Pos) /*!< Bit mask of P9 field.                              */
-  #define BICR_POWER_IOPORT_P9_Min (0x0UL)           /*!< Min enumerator value of P9 field.                                    */
-  #define BICR_POWER_IOPORT_P9_Max (0x3UL)           /*!< Max enumerator value of P9 field.                                    */
-  #define BICR_POWER_IOPORT_P9_Unconfigured (0x3UL)  /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P9_Disconnected (0x0UL)  /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P9_External (0x1UL)      /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P9_Shorted (0x2UL)       /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P10 @Bits 20..21 : P10 power configuration. */
-  #define BICR_POWER_IOPORT_P10_Pos (20UL)           /*!< Position of P10 field.                                               */
-  #define BICR_POWER_IOPORT_P10_Msk (0x3UL << BICR_POWER_IOPORT_P10_Pos) /*!< Bit mask of P10 field.                           */
-  #define BICR_POWER_IOPORT_P10_Min (0x0UL)          /*!< Min enumerator value of P10 field.                                   */
-  #define BICR_POWER_IOPORT_P10_Max (0x3UL)          /*!< Max enumerator value of P10 field.                                   */
-  #define BICR_POWER_IOPORT_P10_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P10_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P10_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P10_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P11 @Bits 22..23 : P11 power configuration. */
-  #define BICR_POWER_IOPORT_P11_Pos (22UL)           /*!< Position of P11 field.                                               */
-  #define BICR_POWER_IOPORT_P11_Msk (0x3UL << BICR_POWER_IOPORT_P11_Pos) /*!< Bit mask of P11 field.                           */
-  #define BICR_POWER_IOPORT_P11_Min (0x0UL)          /*!< Min enumerator value of P11 field.                                   */
-  #define BICR_POWER_IOPORT_P11_Max (0x3UL)          /*!< Max enumerator value of P11 field.                                   */
-  #define BICR_POWER_IOPORT_P11_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P11_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P11_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P11_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P12 @Bits 24..25 : P12 power configuration. */
-  #define BICR_POWER_IOPORT_P12_Pos (24UL)           /*!< Position of P12 field.                                               */
-  #define BICR_POWER_IOPORT_P12_Msk (0x3UL << BICR_POWER_IOPORT_P12_Pos) /*!< Bit mask of P12 field.                           */
-  #define BICR_POWER_IOPORT_P12_Min (0x0UL)          /*!< Min enumerator value of P12 field.                                   */
-  #define BICR_POWER_IOPORT_P12_Max (0x3UL)          /*!< Max enumerator value of P12 field.                                   */
-  #define BICR_POWER_IOPORT_P12_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P12_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P12_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P12_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P13 @Bits 26..27 : P13 power configuration. */
-  #define BICR_POWER_IOPORT_P13_Pos (26UL)           /*!< Position of P13 field.                                               */
-  #define BICR_POWER_IOPORT_P13_Msk (0x3UL << BICR_POWER_IOPORT_P13_Pos) /*!< Bit mask of P13 field.                           */
-  #define BICR_POWER_IOPORT_P13_Min (0x0UL)          /*!< Min enumerator value of P13 field.                                   */
-  #define BICR_POWER_IOPORT_P13_Max (0x3UL)          /*!< Max enumerator value of P13 field.                                   */
-  #define BICR_POWER_IOPORT_P13_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P13_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P13_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P13_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P14 @Bits 28..29 : P14 power configuration. */
-  #define BICR_POWER_IOPORT_P14_Pos (28UL)           /*!< Position of P14 field.                                               */
-  #define BICR_POWER_IOPORT_P14_Msk (0x3UL << BICR_POWER_IOPORT_P14_Pos) /*!< Bit mask of P14 field.                           */
-  #define BICR_POWER_IOPORT_P14_Min (0x0UL)          /*!< Min enumerator value of P14 field.                                   */
-  #define BICR_POWER_IOPORT_P14_Max (0x3UL)          /*!< Max enumerator value of P14 field.                                   */
-  #define BICR_POWER_IOPORT_P14_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P14_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P14_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P14_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-/* P15 @Bits 30..31 : P15 power configuration. */
-  #define BICR_POWER_IOPORT_P15_Pos (30UL)           /*!< Position of P15 field.                                               */
-  #define BICR_POWER_IOPORT_P15_Msk (0x3UL << BICR_POWER_IOPORT_P15_Pos) /*!< Bit mask of P15 field.                           */
-  #define BICR_POWER_IOPORT_P15_Min (0x0UL)          /*!< Min enumerator value of P15 field.                                   */
-  #define BICR_POWER_IOPORT_P15_Max (0x3UL)          /*!< Max enumerator value of P15 field.                                   */
-  #define BICR_POWER_IOPORT_P15_Unconfigured (0x3UL) /*!< Port supply is unconfigured.                                         */
-  #define BICR_POWER_IOPORT_P15_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
-  #define BICR_POWER_IOPORT_P15_External (0x1UL)     /*!< Port supply is provided externally.                                  */
-  #define BICR_POWER_IOPORT_P15_Shorted (0x2UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
-
-
-/* BICR_POWER_MISPROT: Misconfiguration protection for power configuration. Whenever chaning any register in the POWER group,
-                        these registers MUST be written to 0xFFFFFFFF to indicate the system to perform the misconfiguration
-                        protection sequence. */                                                                                   
-                                                                                                                                  
-  #define BICR_POWER_MISPROT_MaxCount (2UL)          /*!< Max size of MISPROT[2] array.                                        */
-  #define BICR_POWER_MISPROT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of MISPROT[2] register.                                */
-
-/* MISPROT @Bits 0..31 : (unspecified) */
-  #define BICR_POWER_MISPROT_MISPROT_Pos (0UL)       /*!< Position of MISPROT field.                                           */
-  #define BICR_POWER_MISPROT_MISPROT_Msk (0xFFFFFFFFUL << BICR_POWER_MISPROT_MISPROT_Pos) /*!< Bit mask of MISPROT field.      */
-  #define BICR_POWER_MISPROT_MISPROT_Min (0xFFFFFFFFUL) /*!< Min enumerator value of MISPROT field.                            */
-  #define BICR_POWER_MISPROT_MISPROT_Max (0xFFFFFFFFUL) /*!< Max enumerator value of MISPROT field.                            */
-  #define BICR_POWER_MISPROT_MISPROT_Modified (0xFFFFFFFFUL) /*!< Power configuration has been modified.                       */
-
-
-
-/* ==================================================== Struct BICR_LFXO ===================================================== */
+/* =================================================== Struct BICR_IOPORT ==================================================== */
 /**
-  * @brief LFXO [BICR_LFXO] (unspecified)
+  * @brief IOPORT [BICR_IOPORT] (unspecified)
   */
 typedef struct {
-  __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) LFXO configuration.                                   */
-  __IOM uint32_t  CALIBRATION;                       /*!< (@ 0x00000004) LFXO calibration needed. Must be written to 0xFFFFFFFF
+  __IOM uint32_t  POWER0;                            /*!< (@ 0x00000000) Power configuration for P0 to P7 IO ports.            */
+  __IOM uint32_t  POWER1;                            /*!< (@ 0x00000004) Power configuration for P8 to P15 IO ports.           */
+  __IOM uint32_t  DRIVECTRL0;                        /*!< (@ 0x00000008) Drive control configuration for P0 to P7 IO ports.    */
+  __IOM uint32_t  DRIVECTRL1;                        /*!< (@ 0x0000000C) Drive control configuration for P8 to P15 IO ports.   */
+} NRF_BICR_IOPORT_Type;                              /*!< Size = 16 (0x010)                                                    */
+
+/* BICR_IOPORT_POWER0: Power configuration for P0 to P7 IO ports. */
+  #define BICR_IOPORT_POWER0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POWER0 register.                                    */
+
+/* P0 @Bits 0..3 : P0 power configuration. */
+  #define BICR_IOPORT_POWER0_P0_Pos (0UL)            /*!< Position of P0 field.                                                */
+  #define BICR_IOPORT_POWER0_P0_Msk (0xFUL << BICR_IOPORT_POWER0_P0_Pos) /*!< Bit mask of P0 field.                            */
+  #define BICR_IOPORT_POWER0_P0_Min (0x0UL)          /*!< Min enumerator value of P0 field.                                    */
+  #define BICR_IOPORT_POWER0_P0_Max (0xFUL)          /*!< Max enumerator value of P0 field.                                    */
+  #define BICR_IOPORT_POWER0_P0_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER0_P0_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER0_P0_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P0_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+
+/* P1 @Bits 4..7 : P1 power configuration. */
+  #define BICR_IOPORT_POWER0_P1_Pos (4UL)            /*!< Position of P1 field.                                                */
+  #define BICR_IOPORT_POWER0_P1_Msk (0xFUL << BICR_IOPORT_POWER0_P1_Pos) /*!< Bit mask of P1 field.                            */
+  #define BICR_IOPORT_POWER0_P1_Min (0x0UL)          /*!< Min enumerator value of P1 field.                                    */
+  #define BICR_IOPORT_POWER0_P1_Max (0xFUL)          /*!< Max enumerator value of P1 field.                                    */
+  #define BICR_IOPORT_POWER0_P1_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER0_P1_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER0_P1_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P1_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+
+/* P2 @Bits 8..11 : P2 power configuration. */
+  #define BICR_IOPORT_POWER0_P2_Pos (8UL)            /*!< Position of P2 field.                                                */
+  #define BICR_IOPORT_POWER0_P2_Msk (0xFUL << BICR_IOPORT_POWER0_P2_Pos) /*!< Bit mask of P2 field.                            */
+  #define BICR_IOPORT_POWER0_P2_Min (0x0UL)          /*!< Min enumerator value of P2 field.                                    */
+  #define BICR_IOPORT_POWER0_P2_Max (0xFUL)          /*!< Max enumerator value of P2 field.                                    */
+  #define BICR_IOPORT_POWER0_P2_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER0_P2_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER0_P2_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P2_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+
+/* P6 @Bits 24..27 : P6 power configuration. */
+  #define BICR_IOPORT_POWER0_P6_Pos (24UL)           /*!< Position of P6 field.                                                */
+  #define BICR_IOPORT_POWER0_P6_Msk (0xFUL << BICR_IOPORT_POWER0_P6_Pos) /*!< Bit mask of P6 field.                            */
+  #define BICR_IOPORT_POWER0_P6_Min (0x0UL)          /*!< Min enumerator value of P6 field.                                    */
+  #define BICR_IOPORT_POWER0_P6_Max (0xFUL)          /*!< Max enumerator value of P6 field.                                    */
+  #define BICR_IOPORT_POWER0_P6_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER0_P6_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER0_P6_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P6_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+
+/* P7 @Bits 28..31 : P7 power configuration. */
+  #define BICR_IOPORT_POWER0_P7_Pos (28UL)           /*!< Position of P7 field.                                                */
+  #define BICR_IOPORT_POWER0_P7_Msk (0xFUL << BICR_IOPORT_POWER0_P7_Pos) /*!< Bit mask of P7 field.                            */
+  #define BICR_IOPORT_POWER0_P7_Min (0x0UL)          /*!< Min enumerator value of P7 field.                                    */
+  #define BICR_IOPORT_POWER0_P7_Max (0xFUL)          /*!< Max enumerator value of P7 field.                                    */
+  #define BICR_IOPORT_POWER0_P7_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER0_P7_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER0_P7_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER0_P7_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+
+
+/* BICR_IOPORT_POWER1: Power configuration for P8 to P15 IO ports. */
+  #define BICR_IOPORT_POWER1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POWER1 register.                                    */
+
+/* P9 @Bits 4..7 : P9 power configuration. */
+  #define BICR_IOPORT_POWER1_P9_Pos (4UL)            /*!< Position of P9 field.                                                */
+  #define BICR_IOPORT_POWER1_P9_Msk (0xFUL << BICR_IOPORT_POWER1_P9_Pos) /*!< Bit mask of P9 field.                            */
+  #define BICR_IOPORT_POWER1_P9_Min (0x0UL)          /*!< Min enumerator value of P9 field.                                    */
+  #define BICR_IOPORT_POWER1_P9_Max (0xFUL)          /*!< Max enumerator value of P9 field.                                    */
+  #define BICR_IOPORT_POWER1_P9_Unconfigured (0xFUL) /*!< Port supply is unconfigured.                                         */
+  #define BICR_IOPORT_POWER1_P9_Disconnected (0x0UL) /*!< Port supply rail is not connected. Port cannot be used.              */
+  #define BICR_IOPORT_POWER1_P9_Shorted (0x1UL)      /*!< Port supply is shorted to VDD_AO_1V8.                                */
+  #define BICR_IOPORT_POWER1_P9_External1V8 (0x2UL)  /*!< Port supply is provided externally at 1.8 V.                         */
+  #define BICR_IOPORT_POWER1_P9_External3V (0x3UL)   /*!< Port supply is provided externally at 3 V.                           */
+  #define BICR_IOPORT_POWER1_P9_ExternalFull (0x4UL) /*!< Port supply is provided externally with a full range of values, from 3
+                                                          V to 1.8 V.*/                                                           
+
+
+/* BICR_IOPORT_DRIVECTRL0: Drive control configuration for P0 to P7 IO ports. */
+  #define BICR_IOPORT_DRIVECTRL0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DRIVECTRL0 register.                            */
+
+/* P0 @Bits 0..3 : P0 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL0_P0_Pos (0UL)        /*!< Position of P0 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL0_P0_Msk (0xFUL << BICR_IOPORT_DRIVECTRL0_P0_Pos) /*!< Bit mask of P0 field.                    */
+  #define BICR_IOPORT_DRIVECTRL0_P0_Min (0xFUL)      /*!< Min enumerator value of P0 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P0_Max (0xFUL)      /*!< Max enumerator value of P0 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P0_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+
+/* P1 @Bits 4..7 : P1 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL0_P1_Pos (4UL)        /*!< Position of P1 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL0_P1_Msk (0xFUL << BICR_IOPORT_DRIVECTRL0_P1_Pos) /*!< Bit mask of P1 field.                    */
+  #define BICR_IOPORT_DRIVECTRL0_P1_Min (0xFUL)      /*!< Min enumerator value of P1 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P1_Max (0xFUL)      /*!< Max enumerator value of P1 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P1_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+
+/* P2 @Bits 8..11 : P2 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL0_P2_Pos (8UL)        /*!< Position of P2 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL0_P2_Msk (0xFUL << BICR_IOPORT_DRIVECTRL0_P2_Pos) /*!< Bit mask of P2 field.                    */
+  #define BICR_IOPORT_DRIVECTRL0_P2_Min (0xFUL)      /*!< Min enumerator value of P2 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P2_Max (0xFUL)      /*!< Max enumerator value of P2 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P2_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+
+/* P6 @Bits 24..27 : P6 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Pos (24UL)       /*!< Position of P6 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Msk (0xFUL << BICR_IOPORT_DRIVECTRL0_P6_Pos) /*!< Bit mask of P6 field.                    */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Min (0x0UL)      /*!< Min enumerator value of P6 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Max (0xFUL)      /*!< Max enumerator value of P6 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+  #define BICR_IOPORT_DRIVECTRL0_P6_Ohms33 (0x0UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 33 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Ohms40 (0x1UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 40 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Ohms50 (0x2UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 50 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Ohms66 (0x3UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 66 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P6_Ohms100 (0x4UL)  /*!< PORTCNF.DRIVECTRL will be adjusted for 100 Ohms.                     */
+
+/* P7 @Bits 28..31 : P7 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Pos (28UL)       /*!< Position of P7 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Msk (0xFUL << BICR_IOPORT_DRIVECTRL0_P7_Pos) /*!< Bit mask of P7 field.                    */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Min (0x0UL)      /*!< Min enumerator value of P7 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Max (0xFUL)      /*!< Max enumerator value of P7 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+  #define BICR_IOPORT_DRIVECTRL0_P7_Ohms33 (0x0UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 33 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Ohms40 (0x1UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 40 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Ohms50 (0x2UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 50 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Ohms66 (0x3UL)   /*!< PORTCNF.DRIVECTRL will be adjusted for 66 Ohms.                      */
+  #define BICR_IOPORT_DRIVECTRL0_P7_Ohms100 (0x4UL)  /*!< PORTCNF.DRIVECTRL will be adjusted for 100 Ohms.                     */
+
+
+/* BICR_IOPORT_DRIVECTRL1: Drive control configuration for P8 to P15 IO ports. */
+  #define BICR_IOPORT_DRIVECTRL1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of DRIVECTRL1 register.                            */
+
+/* P9 @Bits 4..7 : P9 drive control configuration. */
+  #define BICR_IOPORT_DRIVECTRL1_P9_Pos (4UL)        /*!< Position of P9 field.                                                */
+  #define BICR_IOPORT_DRIVECTRL1_P9_Msk (0xFUL << BICR_IOPORT_DRIVECTRL1_P9_Pos) /*!< Bit mask of P9 field.                    */
+  #define BICR_IOPORT_DRIVECTRL1_P9_Min (0xFUL)      /*!< Min enumerator value of P9 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL1_P9_Max (0xFUL)      /*!< Max enumerator value of P9 field.                                    */
+  #define BICR_IOPORT_DRIVECTRL1_P9_Unconfigured (0xFUL) /*!< Port supply is unconfigured. PORTCNF.DRIVECTRL will not be
+                                                              adjusted.*/                                                         
+
+
+
+/* ==================================================== Struct BICR_LFOSC ==================================================== */
+/**
+  * @brief LFOSC [BICR_LFOSC] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) LF oscillator configuration.                          */
+  __IOM uint32_t  LFXOCONFIG;                        /*!< (@ 0x00000004) LFXO configuration.                                   */
+  __IOM uint32_t  LFXOCAL;                           /*!< (@ 0x00000008) LFXO calibration needed. Must be written to 0xFFFFFFFF
                                                                          after any modification of the LFXO board circuit, load
                                                                          capacitance, or crystal swap.*/                          
-  __IOM uint32_t  STARTUPTIME;                       /*!< (@ 0x00000008) LFXO startup time in us.                              */
-} NRF_BICR_LFXO_Type;                                /*!< Size = 12 (0x00C)                                                    */
+  __IOM uint32_t  LFRCAUTOCALCONFIG;                 /*!< (@ 0x0000000C) LFRC autocalibration configuration.                   */
+} NRF_BICR_LFOSC_Type;                               /*!< Size = 16 (0x010)                                                    */
 
-/* BICR_LFXO_CONFIG: LFXO configuration. */
-  #define BICR_LFXO_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG register.                                      */
+/* BICR_LFOSC_CONFIG: LF oscillator configuration. */
+  #define BICR_LFOSC_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG register.                                     */
 
-/* PRESENCE @Bit 0 : LFXO crystal or external signal presence. */
-  #define BICR_LFXO_CONFIG_PRESENCE_Pos (0UL)        /*!< Position of PRESENCE field.                                          */
-  #define BICR_LFXO_CONFIG_PRESENCE_Msk (0x1UL << BICR_LFXO_CONFIG_PRESENCE_Pos) /*!< Bit mask of PRESENCE field.              */
-  #define BICR_LFXO_CONFIG_PRESENCE_Min (0x0UL)      /*!< Min enumerator value of PRESENCE field.                              */
-  #define BICR_LFXO_CONFIG_PRESENCE_Max (0x1UL)      /*!< Max enumerator value of PRESENCE field.                              */
-  #define BICR_LFXO_CONFIG_PRESENCE_NotPresent (0x1UL) /*!< LFXO crystal or external signal is not present.                    */
-  #define BICR_LFXO_CONFIG_PRESENCE_Present (0x0UL)  /*!< LFXO crystal or external signal is present.                          */
-
-/* ACCURACY @Bits 4..7 : LFXO crystal or external signal accuracy. */
-  #define BICR_LFXO_CONFIG_ACCURACY_Pos (4UL)        /*!< Position of ACCURACY field.                                          */
-  #define BICR_LFXO_CONFIG_ACCURACY_Msk (0xFUL << BICR_LFXO_CONFIG_ACCURACY_Pos) /*!< Bit mask of ACCURACY field.              */
-  #define BICR_LFXO_CONFIG_ACCURACY_Min (0x0UL)      /*!< Min enumerator value of ACCURACY field.                              */
-  #define BICR_LFXO_CONFIG_ACCURACY_Max (0xFUL)      /*!< Max enumerator value of ACCURACY field.                              */
-  #define BICR_LFXO_CONFIG_ACCURACY_Unconfigured (0xFUL) /*!< The accuracy is unconfigured.                                    */
-  #define BICR_LFXO_CONFIG_ACCURACY_500ppm (0x0UL)   /*!< LFXO crystal or external signal has an accuracy of 500 ppm.          */
-  #define BICR_LFXO_CONFIG_ACCURACY_250ppm (0x1UL)   /*!< LFXO crystal or external signal has an accuracy of 250 ppm.          */
-  #define BICR_LFXO_CONFIG_ACCURACY_150ppm (0x2UL)   /*!< LFXO crystal or external signal has an accuracy of 150 ppm.          */
-  #define BICR_LFXO_CONFIG_ACCURACY_100ppm (0x3UL)   /*!< LFXO crystal or external signal has an accuracy of 100 ppm.          */
-  #define BICR_LFXO_CONFIG_ACCURACY_75ppm (0x4UL)    /*!< LFXO crystal or external signal has an accuracy of 75 ppm.           */
-  #define BICR_LFXO_CONFIG_ACCURACY_50ppm (0x5UL)    /*!< LFXO crystal or external signal has an accuracy of 50 ppm.           */
-  #define BICR_LFXO_CONFIG_ACCURACY_30ppm (0x6UL)    /*!< LFXO crystal or external signal has an accuracy of 30 ppm.           */
-  #define BICR_LFXO_CONFIG_ACCURACY_20ppm (0x7UL)    /*!< LFXO crystal or external signal has an accuracy of 20 ppm.           */
-
-/* MODE @Bits 8..10 : LFXO mode. */
-  #define BICR_LFXO_CONFIG_MODE_Pos (8UL)            /*!< Position of MODE field.                                              */
-  #define BICR_LFXO_CONFIG_MODE_Msk (0x7UL << BICR_LFXO_CONFIG_MODE_Pos) /*!< Bit mask of MODE field.                          */
-  #define BICR_LFXO_CONFIG_MODE_Min (0x0UL)          /*!< Min enumerator value of MODE field.                                  */
-  #define BICR_LFXO_CONFIG_MODE_Max (0x7UL)          /*!< Max enumerator value of MODE field.                                  */
-  #define BICR_LFXO_CONFIG_MODE_Unconfigured (0x7UL) /*!< The mode is unconfigured.                                            */
-  #define BICR_LFXO_CONFIG_MODE_Pierce (0x0UL)       /*!< LFXO Pierce mode.                                                    */
-  #define BICR_LFXO_CONFIG_MODE_PIXO (0x1UL)         /*!< LFXO PIXO mode.                                                      */
-  #define BICR_LFXO_CONFIG_MODE_ExtSine (0x2UL)      /*!< LFXO in external sine wave mode.                                     */
-  #define BICR_LFXO_CONFIG_MODE_ExtSquare (0x3UL)    /*!< LFXO in external square wave mode.                                   */
-
-/* LOADCAP @Bits 12..19 : Built-in load capacitors selection in 1 pF steps. Max. value 25 pF. */
-  #define BICR_LFXO_CONFIG_LOADCAP_Pos (12UL)        /*!< Position of LOADCAP field.                                           */
-  #define BICR_LFXO_CONFIG_LOADCAP_Msk (0xFFUL << BICR_LFXO_CONFIG_LOADCAP_Pos) /*!< Bit mask of LOADCAP field.                */
-  #define BICR_LFXO_CONFIG_LOADCAP_Min (0x0UL)       /*!< Min enumerator value of LOADCAP field.                               */
-  #define BICR_LFXO_CONFIG_LOADCAP_Max (0xFFUL)      /*!< Max enumerator value of LOADCAP field.                               */
-  #define BICR_LFXO_CONFIG_LOADCAP_Unconfigured (0xFFUL) /*!< The built-in load capacitors is unconfigured. LFXO will not start
-                                                              unless LOADCAP is configured.*/                                     
-  #define BICR_LFXO_CONFIG_LOADCAP_External (0x00UL) /*!< Do not use the built-in load capacitors, only external capacitors will
-                                                          be used.*/                                                              
+/* SRC @Bits 0..3 : LF oscillator source. */
+  #define BICR_LFOSC_CONFIG_SRC_Pos (0UL)            /*!< Position of SRC field.                                               */
+  #define BICR_LFOSC_CONFIG_SRC_Msk (0xFUL << BICR_LFOSC_CONFIG_SRC_Pos) /*!< Bit mask of SRC field.                           */
+  #define BICR_LFOSC_CONFIG_SRC_Min (0x0UL)          /*!< Min enumerator value of SRC field.                                   */
+  #define BICR_LFOSC_CONFIG_SRC_Max (0xFUL)          /*!< Max enumerator value of SRC field.                                   */
+  #define BICR_LFOSC_CONFIG_SRC_Unconfigured (0xFUL) /*!< LF oscillator source is unconfigured. Default will be used.          */
+  #define BICR_LFOSC_CONFIG_SRC_LFXO (0x0UL)         /*!< Use LFXO as source for the LF oscillator.                            */
+  #define BICR_LFOSC_CONFIG_SRC_LFRC (0x1UL)         /*!< Use LFRC as source for the LF oscillator.                            */
+  #define BICR_LFOSC_CONFIG_SRC_Synth (0x3UL)        /*!< Use LF Synth as source for the LF oscillator.                        */
 
 
-/* BICR_LFXO_CALIBRATION: LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board
-                           circuit, load capacitance, or crystal swap. */                                                         
+/* BICR_LFOSC_LFXOCONFIG: LFXO configuration. */
+  #define BICR_LFOSC_LFXOCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LFXOCONFIG register.                             */
+
+/* ACCURACY @Bits 0..3 : LFXO crystal or external signal accuracy. */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_Pos (0UL)   /*!< Position of ACCURACY field.                                          */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_Msk (0xFUL << BICR_LFOSC_LFXOCONFIG_ACCURACY_Pos) /*!< Bit mask of ACCURACY field.    */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_Min (0x0UL) /*!< Min enumerator value of ACCURACY field.                              */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_Max (0xFUL) /*!< Max enumerator value of ACCURACY field.                              */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_Unconfigured (0xFUL) /*!< The accuracy is unconfigured.                               */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_500ppm (0x0UL) /*!< LFXO crystal or external signal has an accuracy of 500 ppm.       */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_250ppm (0x1UL) /*!< LFXO crystal or external signal has an accuracy of 250 ppm.       */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_150ppm (0x2UL) /*!< LFXO crystal or external signal has an accuracy of 150 ppm.       */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_100ppm (0x3UL) /*!< LFXO crystal or external signal has an accuracy of 100 ppm.       */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_75ppm (0x4UL) /*!< LFXO crystal or external signal has an accuracy of 75 ppm.         */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_50ppm (0x5UL) /*!< LFXO crystal or external signal has an accuracy of 50 ppm.         */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_30ppm (0x6UL) /*!< LFXO crystal or external signal has an accuracy of 30 ppm.         */
+  #define BICR_LFOSC_LFXOCONFIG_ACCURACY_20ppm (0x7UL) /*!< LFXO crystal or external signal has an accuracy of 20 ppm.         */
+
+/* MODE @Bits 4..6 : LFXO mode. LFXO will not start unless MODE is configured. */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Pos (4UL)       /*!< Position of MODE field.                                              */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Msk (0x7UL << BICR_LFOSC_LFXOCONFIG_MODE_Pos) /*!< Bit mask of MODE field.                */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Min (0x0UL)     /*!< Min enumerator value of MODE field.                                  */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Max (0x7UL)     /*!< Max enumerator value of MODE field.                                  */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Unconfigured (0x7UL) /*!< The mode is unconfigured.                                       */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_Pierce (0x0UL)  /*!< LFXO Pierce mode.                                                    */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_PIXO (0x1UL)    /*!< LFXO PIXO mode.                                                      */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_ExtSine (0x2UL) /*!< LFXO in external sine wave mode.                                     */
+  #define BICR_LFOSC_LFXOCONFIG_MODE_ExtSquare (0x3UL) /*!< LFXO in external square wave mode.                                 */
+
+/* LOADCAP @Bits 8..15 : Built-in load capacitors selection in 1 pF steps. Max. value 25 pF. */
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Pos (8UL)    /*!< Position of LOADCAP field.                                           */
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Msk (0xFFUL << BICR_LFOSC_LFXOCONFIG_LOADCAP_Pos) /*!< Bit mask of LOADCAP field.      */
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Min (0x0UL)  /*!< Min enumerator value of LOADCAP field.                               */
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Max (0xFFUL) /*!< Max enumerator value of LOADCAP field.                               */
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_Unconfigured (0xFFUL) /*!< The built-in load capacitors is unconfigured. LFXO will not
+                                                                   start unless LOADCAP is configured.*/                          
+  #define BICR_LFOSC_LFXOCONFIG_LOADCAP_External (0x00UL) /*!< Do not use the built-in load capacitors, only external capacitors
+                                                               will be used.*/                                                    
+
+/* TIME @Bits 16..27 : LFXO startup time in ms. */
+  #define BICR_LFOSC_LFXOCONFIG_TIME_Pos (16UL)      /*!< Position of TIME field.                                              */
+  #define BICR_LFOSC_LFXOCONFIG_TIME_Msk (0xFFFUL << BICR_LFOSC_LFXOCONFIG_TIME_Pos) /*!< Bit mask of TIME field.              */
+  #define BICR_LFOSC_LFXOCONFIG_TIME_Min (0xFFFUL)   /*!< Min enumerator value of TIME field.                                  */
+  #define BICR_LFOSC_LFXOCONFIG_TIME_Max (0xFFFUL)   /*!< Max enumerator value of TIME field.                                  */
+  #define BICR_LFOSC_LFXOCONFIG_TIME_Unconfigured (0xFFFUL) /*!< Startup time has not been configured.                         */
+
+
+/* BICR_LFOSC_LFXOCAL: LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board circuit,
+                        load capacitance, or crystal swap. */                                                                     
                                                                                                                                   
-  #define BICR_LFXO_CALIBRATION_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIBRATION register.                            */
+  #define BICR_LFOSC_LFXOCAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LFXOCAL register.                                   */
 
-/* CALIBRATION @Bits 0..31 : LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board
-                             circuit, load capacitance, or crystal swap. */                                                       
+/* LFXOCAL @Bits 0..31 : LFXO calibration needed. Must be written to 0xFFFFFFFF after any modification of the LFXO board
+                         circuit, load capacitance, or crystal swap. */                                                           
                                                                                                                                   
-  #define BICR_LFXO_CALIBRATION_CALIBRATION_Pos (0UL) /*!< Position of CALIBRATION field.                                      */
-  #define BICR_LFXO_CALIBRATION_CALIBRATION_Msk (0xFFFFFFFFUL << BICR_LFXO_CALIBRATION_CALIBRATION_Pos) /*!< Bit mask of
-                                                                            CALIBRATION field.*/                                  
-  #define BICR_LFXO_CALIBRATION_CALIBRATION_Min (0xFFFFFFFFUL) /*!< Min enumerator value of CALIBRATION field.                 */
-  #define BICR_LFXO_CALIBRATION_CALIBRATION_Max (0xFFFFFFFFUL) /*!< Max enumerator value of CALIBRATION field.                 */
-  #define BICR_LFXO_CALIBRATION_CALIBRATION_Calibrate (0xFFFFFFFFUL) /*!< Calibrate the LFXO at startup.                       */
+  #define BICR_LFOSC_LFXOCAL_LFXOCAL_Pos (0UL)       /*!< Position of LFXOCAL field.                                           */
+  #define BICR_LFOSC_LFXOCAL_LFXOCAL_Msk (0xFFFFFFFFUL << BICR_LFOSC_LFXOCAL_LFXOCAL_Pos) /*!< Bit mask of LFXOCAL field.      */
+  #define BICR_LFOSC_LFXOCAL_LFXOCAL_Min (0xFFFFFFFFUL) /*!< Min enumerator value of LFXOCAL field.                            */
+  #define BICR_LFOSC_LFXOCAL_LFXOCAL_Max (0xFFFFFFFFUL) /*!< Max enumerator value of LFXOCAL field.                            */
+  #define BICR_LFOSC_LFXOCAL_LFXOCAL_Calibrate (0xFFFFFFFFUL) /*!< Calibrate the LFXO at startup.                              */
 
 
-/* BICR_LFXO_STARTUPTIME: LFXO startup time in us. */
-  #define BICR_LFXO_STARTUPTIME_ResetValue (0xFFFFFFFFUL) /*!< Reset value of STARTUPTIME register.                            */
-
-/* TIME @Bits 0..31 : LFXO startup time in us. */
-  #define BICR_LFXO_STARTUPTIME_TIME_Pos (0UL)       /*!< Position of TIME field.                                              */
-  #define BICR_LFXO_STARTUPTIME_TIME_Msk (0xFFFFFFFFUL << BICR_LFXO_STARTUPTIME_TIME_Pos) /*!< Bit mask of TIME field.         */
-  #define BICR_LFXO_STARTUPTIME_TIME_Min (0xFFFFFFFFUL) /*!< Min enumerator value of TIME field.                               */
-  #define BICR_LFXO_STARTUPTIME_TIME_Max (0xFFFFFFFFUL) /*!< Max enumerator value of TIME field.                               */
-  #define BICR_LFXO_STARTUPTIME_TIME_Unconfigured (0xFFFFFFFFUL) /*!< Startup time has not been configured.                    */
-
-
-
-/* ==================================================== Struct BICR_LFRC ===================================================== */
-/**
-  * @brief LFRC [BICR_LFRC] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  AUTOCALCONFIG;                     /*!< (@ 0x00000000) LFRC autocalibration configuration.                   */
-} NRF_BICR_LFRC_Type;                                /*!< Size = 4 (0x004)                                                     */
-
-/* BICR_LFRC_AUTOCALCONFIG: LFRC autocalibration configuration. */
-  #define BICR_LFRC_AUTOCALCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of AUTOCALCONFIG register.                        */
+/* BICR_LFOSC_LFRCAUTOCALCONFIG: LFRC autocalibration configuration. */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of LFRCAUTOCALCONFIG register.               */
 
 /* TEMPINTERVAL @Bits 0..6 : Temperature measurement interval in 0.25 s steps. */
-  #define BICR_LFRC_AUTOCALCONFIG_TEMPINTERVAL_Pos (0UL) /*!< Position of TEMPINTERVAL field.                                  */
-  #define BICR_LFRC_AUTOCALCONFIG_TEMPINTERVAL_Msk (0x7FUL << BICR_LFRC_AUTOCALCONFIG_TEMPINTERVAL_Pos) /*!< Bit mask of
-                                                                            TEMPINTERVAL field.*/                                 
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPINTERVAL_Pos (0UL) /*!< Position of TEMPINTERVAL field.                             */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPINTERVAL_Msk (0x7FUL << BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPINTERVAL_Pos) /*!< Bit mask
+                                                                            of TEMPINTERVAL field.*/                              
 
 /* TEMPDELTA @Bits 8..13 : Temperature delta that should trigger a calibration in 0.25 degrees steps. */
-  #define BICR_LFRC_AUTOCALCONFIG_TEMPDELTA_Pos (8UL) /*!< Position of TEMPDELTA field.                                        */
-  #define BICR_LFRC_AUTOCALCONFIG_TEMPDELTA_Msk (0x3FUL << BICR_LFRC_AUTOCALCONFIG_TEMPDELTA_Pos) /*!< Bit mask of TEMPDELTA
-                                                                            field.*/                                              
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPDELTA_Pos (8UL) /*!< Position of TEMPDELTA field.                                   */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPDELTA_Msk (0x3FUL << BICR_LFOSC_LFRCAUTOCALCONFIG_TEMPDELTA_Pos) /*!< Bit mask of
+                                                                            TEMPDELTA field.*/                                    
 
 /* INTERVALMAXNO @Bits 16..20 : Maximum number of TEMPINTERVAL periods in between calibrations, independent of temperature
                                 changes. */                                                                                       
                                                                                                                                   
-  #define BICR_LFRC_AUTOCALCONFIG_INTERVALMAXNO_Pos (16UL) /*!< Position of INTERVALMAXNO field.                               */
-  #define BICR_LFRC_AUTOCALCONFIG_INTERVALMAXNO_Msk (0x1FUL << BICR_LFRC_AUTOCALCONFIG_INTERVALMAXNO_Pos) /*!< Bit mask of
-                                                                            INTERVALMAXNO field.*/                                
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_INTERVALMAXNO_Pos (16UL) /*!< Position of INTERVALMAXNO field.                          */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_INTERVALMAXNO_Msk (0x1FUL << BICR_LFOSC_LFRCAUTOCALCONFIG_INTERVALMAXNO_Pos) /*!< Bit
+                                                                            mask of INTERVALMAXNO field.*/                        
 
 /* ENABLE @Bit 31 : LFRC.AUTOCALCONFIG register enable. */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Pos (31UL)  /*!< Position of ENABLE field.                                            */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Msk (0x1UL << BICR_LFRC_AUTOCALCONFIG_ENABLE_Pos) /*!< Bit mask of ENABLE field.      */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                                */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                                */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Enabled (0x0UL) /*!< LFRC.AUTOCALCONFIG register has been configured and can be used. */
-  #define BICR_LFRC_AUTOCALCONFIG_ENABLE_Disabled (0x1UL) /*!< LFRC.AUTOCALCONFIG register has not been configured and cannot be
-                                                               used.*/                                                            
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Pos (31UL) /*!< Position of ENABLE field.                                        */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Msk (0x1UL << BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Pos) /*!< Bit mask of ENABLE
+                                                                            field.*/                                              
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Min (0x0UL) /*!< Min enumerator value of ENABLE field.                           */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Max (0x1UL) /*!< Max enumerator value of ENABLE field.                           */
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Enabled (0x0UL) /*!< LFRC.AUTOCALCONFIG register has been configured and can be
+                                                                   used.*/                                                        
+  #define BICR_LFOSC_LFRCAUTOCALCONFIG_ENABLE_Disabled (0x1UL) /*!< LFRC.AUTOCALCONFIG register has not been configured and
+                                                                    cannot be used.*/                                             
 
 
 
@@ -12827,8 +12785,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) HFXO configuration.                                   */
   __IOM uint32_t  STARTUPTIME;                       /*!< (@ 0x00000004) HFXO startup time in us.                              */
-  __IM  uint32_t  RESERVED;
-} NRF_BICR_HFXO_Type;                                /*!< Size = 12 (0x00C)                                                    */
+} NRF_BICR_HFXO_Type;                                /*!< Size = 8 (0x008)                                                     */
 
 /* BICR_HFXO_CONFIG: HFXO configuration. */
   #define BICR_HFXO_CONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CONFIG register.                                      */
@@ -12875,8 +12832,7 @@ typedef struct {
 typedef struct {
   __IOM uint32_t  TAMPERSWITCH;                      /*!< (@ 0x00000000) Configuration for external tamper switch detector.    */
   __IOM uint32_t  ACTIVESHIELD;                      /*!< (@ 0x00000004) Configuration for active shield channels.             */
-  __IM  uint32_t  RESERVED;
-} NRF_BICR_TAMPC_Type;                               /*!< Size = 12 (0x00C)                                                    */
+} NRF_BICR_TAMPC_Type;                               /*!< Size = 8 (0x008)                                                     */
 
 /* BICR_TAMPC_TAMPERSWITCH: Configuration for external tamper switch detector. */
   #define BICR_TAMPC_TAMPERSWITCH_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TAMPERSWITCH register.                         */
@@ -12936,17 +12892,81 @@ typedef struct {
                                                              be Enabled.*/                                                        
 
 
+
+/* =================================================== Struct BICR_MISPROT =================================================== */
+/**
+  * @brief MISPROT [BICR_MISPROT] (unspecified)
+  */
+typedef struct {
+  __IOM uint32_t  POWERCONFIG;                       /*!< (@ 0x00000000) Misconfiguration report for POWER.CONFIG register.    */
+  __IOM uint32_t  IOPORTPOWER;                       /*!< (@ 0x00000004) Misconfiguration report for IOPORT.POWER0 and
+                                                                         IOPORT.POWER1 registers.*/                               
+  __IOM uint32_t  IOPORTDRIVECTRL;                   /*!< (@ 0x00000008) Misconfiguration report for IOPORT.DRIVECTRL0 and
+                                                                         IOPORT.DRIVECTRL1 registers.*/                           
+} NRF_BICR_MISPROT_Type;                             /*!< Size = 12 (0x00C)                                                    */
+
+/* BICR_MISPROT_POWERCONFIG: Misconfiguration report for POWER.CONFIG register. */
+  #define BICR_MISPROT_POWERCONFIG_ResetValue (0xFFFFFFFFUL) /*!< Reset value of POWERCONFIG register.                         */
+
+/* POWERCONFIG @Bits 0..31 : Misconfiguration report configuration for POWER.CONFIG register. */
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Pos (0UL) /*!< Position of POWERCONFIG field.                                   */
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Msk (0xFFFFFFFFUL << BICR_MISPROT_POWERCONFIG_POWERCONFIG_Pos) /*!< Bit mask of
+                                                                            POWERCONFIG field.*/                                  
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Min (0x471B4B2AUL) /*!< Min enumerator value of POWERCONFIG field.              */
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Max (0xAA95E6D8UL) /*!< Max enumerator value of POWERCONFIG field.              */
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Correct (0x471B4B2AUL) /*!< POWER.CONFIG register does not have an invalid
+                                                                           field.*/                                               
+  #define BICR_MISPROT_POWERCONFIG_POWERCONFIG_Incorrect (0xAA95E6D8UL) /*!< POWER.CONFIG register has at least an invalid
+                                                                            field. POWER.CONFIG register is not used and should
+                                                                            be corrected.*/                                       
+
+
+/* BICR_MISPROT_IOPORTPOWER: Misconfiguration report for IOPORT.POWER0 and IOPORT.POWER1 registers. */
+  #define BICR_MISPROT_IOPORTPOWER_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IOPORTPOWER register.                         */
+
+/* IOPORTPOWER @Bits 0..31 : Misconfiguration report configuration for IOPORT.POWER0 and IOPORT.POWER1 registers. */
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Pos (0UL) /*!< Position of IOPORTPOWER field.                                   */
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Msk (0xFFFFFFFFUL << BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Pos) /*!< Bit mask of
+                                                                            IOPORTPOWER field.*/                                  
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Min (0x471B4B2AUL) /*!< Min enumerator value of IOPORTPOWER field.              */
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Max (0xAA95E6D8UL) /*!< Max enumerator value of IOPORTPOWER field.              */
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Correct (0x471B4B2AUL) /*!< IOPORT.POWER0 and IOPORT.POWER1 registers do not have
+                                                                           an invalid field.*/                                    
+  #define BICR_MISPROT_IOPORTPOWER_IOPORTPOWER_Incorrect (0xAA95E6D8UL) /*!< IOPORT.POWER0 and/or IOPORT.POWER1 registers have
+                                                                            at least an invalid field. Invalid field is not used
+                                                                            and should be corrected.*/                            
+
+
+/* BICR_MISPROT_IOPORTDRIVECTRL: Misconfiguration report for IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 registers. */
+  #define BICR_MISPROT_IOPORTDRIVECTRL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of IOPORTDRIVECTRL register.                 */
+
+/* IOPORTDRIVECTRL0 @Bits 0..31 : Misconfiguration report for IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1 registers. */
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Pos (0UL) /*!< Position of IOPORTDRIVECTRL0 field.                     */
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Msk (0xFFFFFFFFUL << BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Pos)
+                                                                            /*!< Bit mask of IOPORTDRIVECTRL0 field.*/            
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Min (0x471B4B2AUL) /*!< Min enumerator value of IOPORTDRIVECTRL0 field.*/
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Max (0xAA95E6D8UL) /*!< Max enumerator value of IOPORTDRIVECTRL0 field.*/
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Correct (0x471B4B2AUL) /*!< IOPORT.DRIVECTRL0 and IOPORT.DRIVECTRL1
+                                                                            register does not have an invalid field.*/            
+  #define BICR_MISPROT_IOPORTDRIVECTRL_IOPORTDRIVECTRL0_Incorrect (0xAA95E6D8UL) /*!< IOPORT.DRIVECTRL0 and/or and
+                                                                            IOPORT.DRIVECTRL1 registers have at least an invalid
+                                                                            field. Invalid field is not used and should be
+                                                                            corrected.*/                                          
+
+
 /* ======================================================= Struct BICR ======================================================= */
 /**
   * @brief Board information configuration registers
   */
   typedef struct {                                   /*!< BICR Structure                                                       */
     __IOM NRF_BICR_POWER_Type POWER;                 /*!< (@ 0x00000000) (unspecified)                                         */
-    __IOM NRF_BICR_LFXO_Type LFXO;                   /*!< (@ 0x00000014) (unspecified)                                         */
-    __IOM NRF_BICR_LFRC_Type LFRC;                   /*!< (@ 0x00000020) (unspecified)                                         */
+    __IOM NRF_BICR_IOPORT_Type IOPORT;               /*!< (@ 0x00000004) (unspecified)                                         */
+    __IOM NRF_BICR_LFOSC_Type LFOSC;                 /*!< (@ 0x00000014) (unspecified)                                         */
     __IOM NRF_BICR_HFXO_Type HFXO;                   /*!< (@ 0x00000024) (unspecified)                                         */
-    __IOM NRF_BICR_TAMPC_Type TAMPC;                 /*!< (@ 0x00000030) (unspecified)                                         */
-  } NRF_BICR_Type;                                   /*!< Size = 60 (0x03C)                                                    */
+    __IM uint32_t RESERVED[2];
+    __IOM NRF_BICR_TAMPC_Type TAMPC;                 /*!< (@ 0x00000034) (unspecified)                                         */
+    __IOM NRF_BICR_MISPROT_Type MISPROT;             /*!< (@ 0x0000003C) (unspecified)                                         */
+  } NRF_BICR_Type;                                   /*!< Size = 72 (0x048)                                                    */
 
 #endif                                               /*!< !defined(__ASSEMBLER__) && !defined(__ASSEMBLY__)                    */
 
@@ -27078,6 +27098,24 @@ typedef struct {
 } NRF_FICR_PRODTEST_Type;                            /*!< Size = 60 (0x03C)                                                    */
 
 
+/* ========================================= Struct FICR_TRIM_SYSCTRL_FLL16M_CONFIG ========================================== */
+/**
+  * @brief CONFIG [FICR_TRIM_SYSCTRL_FLL16M_CONFIG] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  CFGCKSW16M;                        /*!< (@ 0x00000000) Trim value for SYSCTRL.FLL16M.CFGCKSW16M              */
+} NRF_FICR_TRIM_SYSCTRL_FLL16M_CONFIG_Type;          /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M: Trim value for SYSCTRL.FLL16M.CFGCKSW16M */
+  #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CFGCKSW16M register.        */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
+  #define FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_FLL16M_CONFIG_CFGCKSW16M_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/                       
+
+
+
 /* ========================================== Struct FICR_TRIM_SYSCTRL_FLL16M_TRIM =========================================== */
 /**
   * @brief TRIM [FICR_TRIM_SYSCTRL_FLL16M_TRIM] (unspecified)
@@ -27085,10 +27123,9 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  RCOARSE;                           /*!< (@ 0x00000000) Trim value for SYSCTRL.FLL16M.RCOARSE                 */
   __IM  uint32_t  RFINE;                             /*!< (@ 0x00000004) Trim value for SYSCTRL.FLL16M.RFINE                   */
-  __IM  uint32_t  TCOEF;                             /*!< (@ 0x00000008) Trim value for SYSCTRL.FLL16M.TCOEF                   */
-  __IM  uint32_t  VSUP;                              /*!< (@ 0x0000000C) Trim value for SYSCTRL.FLL16M.VSUP                    */
-  __IM  uint32_t  CKSW16MTRIM;                       /*!< (@ 0x00000010) Trim value for SYSCTRL.FLL16M.CKSW16MTRIM             */
-} NRF_FICR_TRIM_SYSCTRL_FLL16M_TRIM_Type;            /*!< Size = 20 (0x014)                                                    */
+  __IM  uint32_t  VSUP;                              /*!< (@ 0x00000008) Trim value for SYSCTRL.FLL16M.VSUP                    */
+  __IM  uint32_t  CKSW16MTRIM;                       /*!< (@ 0x0000000C) Trim value for SYSCTRL.FLL16M.CKSW16MTRIM             */
+} NRF_FICR_TRIM_SYSCTRL_FLL16M_TRIM_Type;            /*!< Size = 16 (0x010)                                                    */
 
 /* FICR_TRIM_SYSCTRL_FLL16M_TRIM_RCOARSE: Trim value for SYSCTRL.FLL16M.RCOARSE */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_RCOARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCOARSE register.                */
@@ -27105,15 +27142,6 @@ typedef struct {
 /* VALUE @Bits 0..31 : Trim value */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
   #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_FLL16M_TRIM_RFINE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF: Trim value for SYSCTRL.FLL16M.TCOEF */
-  #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TCOEF register.                    */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_FLL16M_TRIM_TCOEF_VALUE_Pos) /*!< Bit
                                                                             mask of VALUE field.*/                                
 
 
@@ -27141,7 +27169,8 @@ typedef struct {
   * @brief FLL16M [FICR_TRIM_SYSCTRL_FLL16M] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_SYSCTRL_FLL16M_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_FLL16M_CONFIG_Type CONFIG; /*!< (@ 0x00000000) (unspecified)                                     */
+  __IOM NRF_FICR_TRIM_SYSCTRL_FLL16M_TRIM_Type TRIM; /*!< (@ 0x00000004) (unspecified)                                         */
 } NRF_FICR_TRIM_SYSCTRL_FLL16M_Type;                 /*!< Size = 20 (0x014)                                                    */
 
 
@@ -27361,6 +27390,33 @@ typedef struct {
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                       */
 } NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_Type;               /*!< Size = 4 (0x004)                                                     */
+
+
+/* ======================================== Struct FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM ========================================= */
+/**
+  * @brief TRIM [FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  VREFPM;                            /*!< (@ 0x00000000) Trim value for SYSCTRL.AUDIOPLLPM.TRIM.VREFPM         */
+} NRF_FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_Type;        /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_VREFPM: Trim value for SYSCTRL.AUDIOPLLPM.TRIM.VREFPM */
+  #define FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_VREFPM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREFPM register.              */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_VREFPM_VALUE_Pos (0UL) /*!< Position of VALUE field.                               */
+  #define FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_VREFPM_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_VREFPM_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/                       
+
+
+
+/* =========================================== Struct FICR_TRIM_SYSCTRL_AUDIOPLLPM =========================================== */
+/**
+  * @brief AUDIOPLLPM [FICR_TRIM_SYSCTRL_AUDIOPLLPM] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLLPM_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                     */
+} NRF_FICR_TRIM_SYSCTRL_AUDIOPLLPM_Type;             /*!< Size = 4 (0x004)                                                     */
 
 
 /* ========================================= Struct FICR_TRIM_SYSCTRL_USBHSPLL_TRIM ========================================== */
@@ -28435,27 +28491,28 @@ typedef struct {
     #pragma GCC diagnostic pop
   #endif
   __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLL_Type AUDIOPLL; /*!< (@ 0x00000058) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_USBHSPLL_Type USBHSPLL; /*!< (@ 0x0000005C) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MBIAS_Type MBIAS;      /*!< (@ 0x00000060) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_OSCRFR_Type OSCRFR;    /*!< (@ 0x0000006C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREG1V0_Type VREG1V0;  /*!< (@ 0x00000074) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_Type VREGAO0V8; /*!< (@ 0x00000088) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_Type VREGAO1V8; /*!< (@ 0x0000009C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type VREGMAIN; /*!< (@ 0x000000AC) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x000000DC) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x000000EC) (unspecified)                                  */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x000000FC) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x0000010C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x0000011C) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x00000128) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x00000130) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x00000138) (unspecified)                                      */
-  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x0000013C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x00000140) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x00000174) (unspecified)                                        */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x000001A8) (unspecified)                                    */
-  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x00000278) (unspecified)                                    */
-} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 640 (0x280)                                                   */
+  __IOM NRF_FICR_TRIM_SYSCTRL_AUDIOPLLPM_Type AUDIOPLLPM; /*!< (@ 0x0000005C) (unspecified)                                    */
+  __IOM NRF_FICR_TRIM_SYSCTRL_USBHSPLL_Type USBHSPLL; /*!< (@ 0x00000060) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MBIAS_Type MBIAS;      /*!< (@ 0x00000064) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_OSCRFR_Type OSCRFR;    /*!< (@ 0x00000070) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREG1V0_Type VREG1V0;  /*!< (@ 0x00000078) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO0V8_Type VREGAO0V8; /*!< (@ 0x0000008C) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGAO1V8_Type VREGAO1V8; /*!< (@ 0x000000A0) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMAIN_Type VREGMAIN; /*!< (@ 0x000000B0) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM130_Type VREGMRAM130; /*!< (@ 0x000000E0) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGMRAM131_Type VREGMRAM131; /*!< (@ 0x000000F0) (unspecified)                                  */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGVS0V8_Type VREGVS0V8; /*!< (@ 0x00000100) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VREGUSB_Type VREGUSB;  /*!< (@ 0x00000110) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO0V8_Type VDETAO0V8; /*!< (@ 0x00000120) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO1V8_Type VDETAO1V8; /*!< (@ 0x0000012C) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETVS0V8_Type VDETVS0V8; /*!< (@ 0x00000134) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDETAO5V0_Type VDETAO5V0; /*!< (@ 0x0000013C) (unspecified)                                      */
+  __IOM NRF_FICR_TRIM_SYSCTRL_VDET1V0_Type VDET1V0;  /*!< (@ 0x00000140) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL120_Type HSFLL120; /*!< (@ 0x00000144) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_HSFLL121_Type HSFLL121; /*!< (@ 0x00000178) (unspecified)                                        */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF120_Type MEMCONF120; /*!< (@ 0x000001AC) (unspecified)                                    */
+  __IOM NRF_FICR_TRIM_SYSCTRL_MEMCONF130_Type MEMCONF130; /*!< (@ 0x0000027C) (unspecified)                                    */
+} NRF_FICR_TRIM_SYSCTRL_Type;                        /*!< Size = 644 (0x284)                                                   */
 
 
 /* ============================================== Struct FICR_TRIM_GLOBAL_SAADC ============================================== */
@@ -28468,7 +28525,8 @@ typedef struct {
   __IM  uint32_t  CALOFFSET;                         /*!< (@ 0x00000010) Trim value for GLOBAL.SAADC.CALOFFSET                 */
   __IM  uint32_t  LINCALCOEFF[6];                    /*!< (@ 0x00000014) Trim value for GLOBAL.SAADC.LINCALCOEFF               */
   __IM  uint32_t  CALIREF;                           /*!< (@ 0x0000002C) Trim value for GLOBAL.SAADC.CALIREF                   */
-} NRF_FICR_TRIM_GLOBAL_SAADC_Type;                   /*!< Size = 48 (0x030)                                                    */
+  __IM  uint32_t  CALVREFTC;                         /*!< (@ 0x00000030) Trim value for GLOBAL.SAADC.CALVREFTC                 */
+} NRF_FICR_TRIM_GLOBAL_SAADC_Type;                   /*!< Size = 52 (0x034)                                                    */
 
 /* FICR_TRIM_GLOBAL_SAADC_CALVREF: Trim value for GLOBAL.SAADC.CALVREF */
   #define FICR_TRIM_GLOBAL_SAADC_CALVREF_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALVREF register.                       */
@@ -28517,6 +28575,15 @@ typedef struct {
                                                                             VALUE field.*/                                        
 
 
+/* FICR_TRIM_GLOBAL_SAADC_CALVREFTC: Trim value for GLOBAL.SAADC.CALVREFTC */
+  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALVREFTC register.                   */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_SAADC_CALVREFTC_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/                                     
+
+
 
 /* ============================================== Struct FICR_TRIM_GLOBAL_TEMP =============================================== */
 /**
@@ -28524,10 +28591,7 @@ typedef struct {
   */
 typedef struct {
   __IM  uint32_t  CALIB;                             /*!< (@ 0x00000000) Trim value for GLOBAL.TEMP.CALIB                      */
-  __IM  uint32_t  A[6];                              /*!< (@ 0x00000004) Trim value for GLOBAL.TEMP.A                          */
-  __IM  uint32_t  B[6];                              /*!< (@ 0x0000001C) Trim value for GLOBAL.TEMP.B                          */
-  __IM  uint32_t  T[5];                              /*!< (@ 0x00000034) Trim value for GLOBAL.TEMP.T                          */
-} NRF_FICR_TRIM_GLOBAL_TEMP_Type;                    /*!< Size = 72 (0x048)                                                    */
+} NRF_FICR_TRIM_GLOBAL_TEMP_Type;                    /*!< Size = 4 (0x004)                                                     */
 
 /* FICR_TRIM_GLOBAL_TEMP_CALIB: Trim value for GLOBAL.TEMP.CALIB */
   #define FICR_TRIM_GLOBAL_TEMP_CALIB_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIB register.                            */
@@ -28536,33 +28600,6 @@ typedef struct {
   #define FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Pos (0UL) /*!< Position of VALUE field.                                            */
   #define FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_TEMP_CALIB_VALUE_Pos) /*!< Bit mask of VALUE
                                                                             field.*/                                              
-
-
-/* FICR_TRIM_GLOBAL_TEMP_A: Trim value for GLOBAL.TEMP.A */
-  #define FICR_TRIM_GLOBAL_TEMP_A_MaxCount (6UL)     /*!< Max size of A[6] array.                                              */
-  #define FICR_TRIM_GLOBAL_TEMP_A_ResetValue (0xFFFFFFFFUL) /*!< Reset value of A[6] register.                                 */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_TEMP_A_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
-  #define FICR_TRIM_GLOBAL_TEMP_A_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_TEMP_A_VALUE_Pos) /*!< Bit mask of VALUE field.  */
-
-
-/* FICR_TRIM_GLOBAL_TEMP_B: Trim value for GLOBAL.TEMP.B */
-  #define FICR_TRIM_GLOBAL_TEMP_B_MaxCount (6UL)     /*!< Max size of B[6] array.                                              */
-  #define FICR_TRIM_GLOBAL_TEMP_B_ResetValue (0xFFFFFFFFUL) /*!< Reset value of B[6] register.                                 */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_TEMP_B_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
-  #define FICR_TRIM_GLOBAL_TEMP_B_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_TEMP_B_VALUE_Pos) /*!< Bit mask of VALUE field.  */
-
-
-/* FICR_TRIM_GLOBAL_TEMP_T: Trim value for GLOBAL.TEMP.T */
-  #define FICR_TRIM_GLOBAL_TEMP_T_MaxCount (5UL)     /*!< Max size of T[5] array.                                              */
-  #define FICR_TRIM_GLOBAL_TEMP_T_ResetValue (0xFFFFFFFFUL) /*!< Reset value of T[5] register.                                 */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_TEMP_T_VALUE_Pos (0UL)    /*!< Position of VALUE field.                                             */
-  #define FICR_TRIM_GLOBAL_TEMP_T_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_TEMP_T_VALUE_Pos) /*!< Bit mask of VALUE field.  */
 
 
 
@@ -28611,6 +28648,33 @@ typedef struct {
 } NRF_FICR_TRIM_GLOBAL_CANPLL_Type;                  /*!< Size = 4 (0x004)                                                     */
 
 
+/* ========================================== Struct FICR_TRIM_GLOBAL_CANPLLPM_TRIM ========================================== */
+/**
+  * @brief TRIM [FICR_TRIM_GLOBAL_CANPLLPM_TRIM] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  VREFPM;                            /*!< (@ 0x00000000) Trim value for GLOBAL.CANPLLPM.TRIM.VREFPM            */
+} NRF_FICR_TRIM_GLOBAL_CANPLLPM_TRIM_Type;           /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_GLOBAL_CANPLLPM_TRIM_VREFPM: Trim value for GLOBAL.CANPLLPM.TRIM.VREFPM */
+  #define FICR_TRIM_GLOBAL_CANPLLPM_TRIM_VREFPM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VREFPM register.                 */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_GLOBAL_CANPLLPM_TRIM_VREFPM_VALUE_Pos (0UL) /*!< Position of VALUE field.                                  */
+  #define FICR_TRIM_GLOBAL_CANPLLPM_TRIM_VREFPM_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_CANPLLPM_TRIM_VREFPM_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/                            
+
+
+
+/* ============================================ Struct FICR_TRIM_GLOBAL_CANPLLPM ============================================= */
+/**
+  * @brief CANPLLPM [FICR_TRIM_GLOBAL_CANPLLPM] (unspecified)
+  */
+typedef struct {
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLLPM_TRIM_Type TRIM; /*!< (@ 0x00000000) (unspecified)                                        */
+} NRF_FICR_TRIM_GLOBAL_CANPLLPM_Type;                /*!< Size = 4 (0x004)                                                     */
+
+
 /* ===================================== Struct FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL ====================================== */
 /**
   * @brief DRIVECTRL [FICR_TRIM_GLOBAL_GPIO_PORTCNF_DRIVECTRL] (unspecified)
@@ -28654,11 +28718,8 @@ typedef struct {
   */
 typedef struct {
   __IM  uint32_t  REFTRIM;                           /*!< (@ 0x00000000) Trim value for GLOBAL.COMP.REFTRIM                    */
-  __IM  uint32_t  RCAL80KCOARSE;                     /*!< (@ 0x00000004) Trim value for GLOBAL.COMP.RCAL80KCOARSE              */
-  __IM  uint32_t  RCAL80KFINE;                       /*!< (@ 0x00000008) Trim value for GLOBAL.COMP.RCAL80KFINE                */
-  __IM  uint32_t  RCAL6M4COARSE;                     /*!< (@ 0x0000000C) Trim value for GLOBAL.COMP.RCAL6M4COARSE              */
-  __IM  uint32_t  RCAL6M4FINE;                       /*!< (@ 0x00000010) Trim value for GLOBAL.COMP.RCAL6M4FINE                */
-} NRF_FICR_TRIM_GLOBAL_COMP_Type;                    /*!< Size = 20 (0x014)                                                    */
+  __IM  uint32_t  RCALTRIM;                          /*!< (@ 0x00000004) Trim value used during production test                */
+} NRF_FICR_TRIM_GLOBAL_COMP_Type;                    /*!< Size = 8 (0x008)                                                     */
 
 /* FICR_TRIM_GLOBAL_COMP_REFTRIM: Trim value for GLOBAL.COMP.REFTRIM */
   #define FICR_TRIM_GLOBAL_COMP_REFTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of REFTRIM register.                        */
@@ -28669,40 +28730,13 @@ typedef struct {
                                                                             VALUE field.*/                                        
 
 
-/* FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE: Trim value for GLOBAL.COMP.RCAL80KCOARSE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL80KCOARSE register.            */
+/* FICR_TRIM_GLOBAL_COMP_RCALTRIM: Trim value used during production test */
+  #define FICR_TRIM_GLOBAL_COMP_RCALTRIM_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCALTRIM register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL80KCOARSE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL80KFINE: Trim value for GLOBAL.COMP.RCAL80KFINE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL80KFINE register.                */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL80KFINE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE: Trim value for GLOBAL.COMP.RCAL6M4COARSE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL6M4COARSE register.            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                    */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL6M4COARSE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
-
-
-/* FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE: Trim value for GLOBAL.COMP.RCAL6M4FINE */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RCAL6M4FINE register.                */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Pos (0UL) /*!< Position of VALUE field.                                      */
-  #define FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCAL6M4FINE_VALUE_Pos) /*!< Bit
-                                                                            mask of VALUE field.*/                                
+  #define FICR_TRIM_GLOBAL_COMP_RCALTRIM_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define FICR_TRIM_GLOBAL_COMP_RCALTRIM_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_GLOBAL_COMP_RCALTRIM_VALUE_Pos) /*!< Bit mask of
+                                                                            VALUE field.*/                                        
 
 
 
@@ -28712,12 +28746,13 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_GLOBAL_SAADC_Type SAADC;       /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_TEMP_Type TEMP;         /*!< (@ 0x00000030) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x00000078) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x0000007C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_Type GPIO;         /*!< (@ 0x00000080) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_COMP_Type COMP;         /*!< (@ 0x00000088) (unspecified)                                         */
-} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 156 (0x09C)                                                   */
+  __IOM NRF_FICR_TRIM_GLOBAL_TEMP_Type TEMP;         /*!< (@ 0x00000034) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_NFCT_Type NFCT;         /*!< (@ 0x00000038) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLL_Type CANPLL;     /*!< (@ 0x0000003C) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_CANPLLPM_Type CANPLLPM; /*!< (@ 0x00000040) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_GPIO_Type GPIO;         /*!< (@ 0x00000044) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_COMP_Type COMP;         /*!< (@ 0x0000004C) (unspecified)                                         */
+} NRF_FICR_TRIM_GLOBAL_Type;                         /*!< Size = 84 (0x054)                                                    */
 
 
 /* ========================================= Struct FICR_TRIM_APPLICATION_HSFLL_TRIM ========================================= */
@@ -28889,14 +28924,23 @@ typedef struct {
   * @brief SPHYNXANA [FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA] (unspecified)
   */
 typedef struct {
-  __IM  uint32_t  FSCTRL1;                           /*!< (@ 0x00000000) Trim value for RADIOCORE.RADIO.FSCTRL1                */
-  __IM  uint32_t  FSCTRL2;                           /*!< (@ 0x00000004) Trim value for RADIOCORE.RADIO.FSCTRL2                */
-  __IM  uint32_t  RXCTRL;                            /*!< (@ 0x00000008) Trim value for RADIOCORE.RADIO.RXCTRL                 */
-  __IM  uint32_t  TXCTRL;                            /*!< (@ 0x0000000C) Trim value for RADIOCORE.RADIO.TXCTRL                 */
-  __IM  uint32_t  OVRRXTRIMCODE;                     /*!< (@ 0x00000010) Trim value for RADIOCORE.RADIO.OVRRXTRIMCODE          */
+  __IM  uint32_t  FSCTRL0;                           /*!< (@ 0x00000000) Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL0      */
+  __IM  uint32_t  FSCTRL1;                           /*!< (@ 0x00000004) Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL1      */
+  __IM  uint32_t  FSCTRL2;                           /*!< (@ 0x00000008) Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL2      */
+  __IM  uint32_t  RXCTRL;                            /*!< (@ 0x0000000C) Trim value for RADIOCORE.RADIO.SPHYNXANA.RXCTRL       */
+  __IM  uint32_t  OVRRXTRIMCODE;                     /*!< (@ 0x00000010) Trim value for RADIOCORE.RADIO.SPHYNXANA.OVRRXTRIMCODE*/
 } NRF_FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_Type;      /*!< Size = 20 (0x014)                                                    */
 
-/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL1: Trim value for RADIOCORE.RADIO.FSCTRL1 */
+/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL0: Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL0 */
+  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL0_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FSCTRL0 register.          */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL0_VALUE_Pos (0UL) /*!< Position of VALUE field.                            */
+  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL0_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL0_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/                       
+
+
+/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL1: Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL1 */
   #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL1_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FSCTRL1 register.          */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28905,7 +28949,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/                       
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL2: Trim value for RADIOCORE.RADIO.FSCTRL2 */
+/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL2: Trim value for RADIOCORE.RADIO.SPHYNXANA.FSCTRL2 */
   #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_FSCTRL2_ResetValue (0xFFFFFFFFUL) /*!< Reset value of FSCTRL2 register.          */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28914,7 +28958,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/                       
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_RXCTRL: Trim value for RADIOCORE.RADIO.RXCTRL */
+/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_RXCTRL: Trim value for RADIOCORE.RADIO.SPHYNXANA.RXCTRL */
   #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_RXCTRL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RXCTRL register.            */
 
 /* VALUE @Bits 0..31 : Trim value */
@@ -28923,16 +28967,7 @@ typedef struct {
                                                                             /*!< Bit mask of VALUE field.*/                       
 
 
-/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_TXCTRL: Trim value for RADIOCORE.RADIO.TXCTRL */
-  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_TXCTRL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TXCTRL register.            */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_TXCTRL_VALUE_Pos (0UL) /*!< Position of VALUE field.                             */
-  #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_TXCTRL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_TXCTRL_VALUE_Pos)
-                                                                            /*!< Bit mask of VALUE field.*/                       
-
-
-/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_OVRRXTRIMCODE: Trim value for RADIOCORE.RADIO.OVRRXTRIMCODE */
+/* FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_OVRRXTRIMCODE: Trim value for RADIOCORE.RADIO.SPHYNXANA.OVRRXTRIMCODE */
   #define FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_OVRRXTRIMCODE_ResetValue (0xFFFFFFFFUL) /*!< Reset value of OVRRXTRIMCODE
                                                                             register.*/                                           
 
@@ -28943,32 +28978,72 @@ typedef struct {
 
 
 
+/* ========================================= Struct FICR_TRIM_RADIOCORE_RADIO_RXAGC ========================================== */
+/**
+  * @brief RXAGC [FICR_TRIM_RADIOCORE_RADIO_RXAGC] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  CALIBRATION;                       /*!< (@ 0x00000000) Trim value for RSSICAL and ED154CAL in
+                                                                         RADIOCORE.RADIO.RXAGC.CALIBRATION*/                      
+} NRF_FICR_TRIM_RADIOCORE_RADIO_RXAGC_Type;          /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION: Trim value for RSSICAL and ED154CAL in RADIOCORE.RADIO.RXAGC.CALIBRATION */
+  #define FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION_ResetValue (0xFFFFFFFFUL) /*!< Reset value of CALIBRATION register.      */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION_VALUE_Pos (0UL) /*!< Position of VALUE field.                            */
+  #define FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_RXAGC_CALIBRATION_VALUE_Pos)
+                                                                            /*!< Bit mask of VALUE field.*/                       
+
+
+
 /* ============================================ Struct FICR_TRIM_RADIOCORE_RADIO ============================================= */
 /**
   * @brief RADIO [FICR_TRIM_RADIOCORE_RADIO] (unspecified)
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_SPHYNXANA_Type SPHYNXANA; /*!< (@ 0x00000000) (unspecified)                              */
-  __IM  uint32_t  RSSIOFFSET;                        /*!< (@ 0x00000014) Trim value for RSSI offset compensation               */
-  __IM  uint32_t  EDCAL;                             /*!< (@ 0x00000018) Trim value for EDCAL                                  */
-} NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 28 (0x01C)                                                    */
+  __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_RXAGC_Type RXAGC; /*!< (@ 0x00000014) (unspecified)                                      */
+  __IM  uint32_t  PVTTOT;                            /*!< (@ 0x00000018) Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO    */
+  __IM  uint32_t  KDTC;                              /*!< (@ 0x0000001C) Trim value for RADIOCORE.RADIO.ESTKDTCVAL             */
+  __IM  uint32_t  TXHFGAIN;                          /*!< (@ 0x00000020) Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN      */
+  __IM  uint32_t  PVTTOFIX;                          /*!< (@ 0x00000024) Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND6   */
+} NRF_FICR_TRIM_RADIOCORE_RADIO_Type;                /*!< Size = 40 (0x028)                                                    */
 
-/* FICR_TRIM_RADIOCORE_RADIO_RSSIOFFSET: Trim value for RSSI offset compensation */
-  #define FICR_TRIM_RADIOCORE_RADIO_RSSIOFFSET_ResetValue (0xFFFFFFFFUL) /*!< Reset value of RSSIOFFSET register.              */
-
-/* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_RADIOCORE_RADIO_RSSIOFFSET_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
-  #define FICR_TRIM_RADIOCORE_RADIO_RSSIOFFSET_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_RSSIOFFSET_VALUE_Pos) /*!<
-                                                                            Bit mask of VALUE field.*/                            
-
-
-/* FICR_TRIM_RADIOCORE_RADIO_EDCAL: Trim value for EDCAL */
-  #define FICR_TRIM_RADIOCORE_RADIO_EDCAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of EDCAL register.                        */
+/* FICR_TRIM_RADIOCORE_RADIO_PVTTOT: Trim value for RADIOCORE.RADIO.EXPECTEDPVTTOTRATIO */
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOT_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PVTTOT register.                      */
 
 /* VALUE @Bits 0..31 : Trim value */
-  #define FICR_TRIM_RADIOCORE_RADIO_EDCAL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                        */
-  #define FICR_TRIM_RADIOCORE_RADIO_EDCAL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_EDCAL_VALUE_Pos) /*!< Bit mask of
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOT_VALUE_Pos (0UL) /*!< Position of VALUE field.                                       */
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOT_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_PVTTOT_VALUE_Pos) /*!< Bit mask
+                                                                            of VALUE field.*/                                     
+
+
+/* FICR_TRIM_RADIOCORE_RADIO_KDTC: Trim value for RADIOCORE.RADIO.ESTKDTCVAL */
+  #define FICR_TRIM_RADIOCORE_RADIO_KDTC_ResetValue (0xFFFFFFFFUL) /*!< Reset value of KDTC register.                          */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_KDTC_VALUE_Pos (0UL) /*!< Position of VALUE field.                                         */
+  #define FICR_TRIM_RADIOCORE_RADIO_KDTC_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_KDTC_VALUE_Pos) /*!< Bit mask of
                                                                             VALUE field.*/                                        
+
+
+/* FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN: Trim value for RADIOCORE.RADIO.TXINTERFACEHFGAIN */
+  #define FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN_ResetValue (0xFFFFFFFFUL) /*!< Reset value of TXHFGAIN register.                  */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_TXHFGAIN_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/                                
+
+
+/* FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX: Trim value for RADIOCORE.RADIO.ADPLLSTARTUPCOMMAND6 */
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX_ResetValue (0xFFFFFFFFUL) /*!< Reset value of PVTTOFIX register.                  */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX_VALUE_Pos (0UL) /*!< Position of VALUE field.                                     */
+  #define FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_RADIOCORE_RADIO_PVTTOFIX_VALUE_Pos) /*!< Bit
+                                                                            mask of VALUE field.*/                                
 
 
 
@@ -28980,7 +29055,25 @@ typedef struct {
   __IOM NRF_FICR_TRIM_RADIOCORE_HSFLL_Type HSFLL;    /*!< (@ 0x00000000) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_RADIOCORE_MEMCONF_Type MEMCONF; /*!< (@ 0x00000034) (unspecified)                                        */
   __IOM NRF_FICR_TRIM_RADIOCORE_RADIO_Type RADIO;    /*!< (@ 0x00000040) (unspecified)                                         */
-} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 92 (0x05C)                                                    */
+} NRF_FICR_TRIM_RADIOCORE_Type;                      /*!< Size = 104 (0x068)                                                   */
+
+
+/* ============================================== Struct FICR_TRIM_BOOT_VREG1V0 ============================================== */
+/**
+  * @brief VREG1V0 [FICR_TRIM_BOOT_VREG1V0] (unspecified)
+  */
+typedef struct {
+  __IM  uint32_t  VOUTHPNOMINAL;                     /*!< (@ 0x00000000) Trim value for SYSCTRL.VREG1V0.VOUTHPNOMINAL          */
+} NRF_FICR_TRIM_BOOT_VREG1V0_Type;                   /*!< Size = 4 (0x004)                                                     */
+
+/* FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL: Trim value for SYSCTRL.VREG1V0.VOUTHPNOMINAL */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_ResetValue (0xFFFFFFFFUL) /*!< Reset value of VOUTHPNOMINAL register.           */
+
+/* VALUE @Bits 0..31 : Trim value */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Pos (0UL) /*!< Position of VALUE field.                                   */
+  #define FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Msk (0xFFFFFFFFUL << FICR_TRIM_BOOT_VREG1V0_VOUTHPNOMINAL_VALUE_Pos) /*!<
+                                                                            Bit mask of VALUE field.*/                            
+
 
 
 /* ============================================= Struct FICR_TRIM_BOOT_HSFLL120 ============================================== */
@@ -29056,9 +29149,10 @@ typedef struct {
   * @brief BOOT [FICR_TRIM_BOOT] (unspecified)
   */
 typedef struct {
-  __IOM NRF_FICR_TRIM_BOOT_HSFLL120_Type HSFLL120;   /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_BOOT_OTPC_Type OTPC;           /*!< (@ 0x0000000C) (unspecified)                                         */
-} NRF_FICR_TRIM_BOOT_Type;                           /*!< Size = 20 (0x014)                                                    */
+  __IOM NRF_FICR_TRIM_BOOT_VREG1V0_Type VREG1V0;     /*!< (@ 0x00000000) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_BOOT_HSFLL120_Type HSFLL120;   /*!< (@ 0x00000004) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_BOOT_OTPC_Type OTPC;           /*!< (@ 0x00000010) (unspecified)                                         */
+} NRF_FICR_TRIM_BOOT_Type;                           /*!< Size = 24 (0x018)                                                    */
 
 
 /* ================================================= Struct FICR_TRIM_COMMON ================================================= */
@@ -29270,11 +29364,11 @@ typedef struct {
   */
 typedef struct {
   __IOM NRF_FICR_TRIM_SYSCTRL_Type SYSCTRL;          /*!< (@ 0x00000000) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000280) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x0000031C) (unspecified)                                         */
-  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x0000035C) (unspecified)                                         */
-  __IM  uint32_t  RESERVED[10];
-  __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003E0) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_GLOBAL_Type GLOBAL;            /*!< (@ 0x00000284) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_APPLICATION_Type APPLICATION;  /*!< (@ 0x000002D8) (unspecified)                                         */
+  __IOM NRF_FICR_TRIM_RADIOCORE_Type RADIOCORE;      /*!< (@ 0x00000318) (unspecified)                                         */
+  __IM  uint32_t  RESERVED[23];
+  __IOM NRF_FICR_TRIM_BOOT_Type BOOT;                /*!< (@ 0x000003DC) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_COMMON_Type COMMON;            /*!< (@ 0x000003F4) (unspecified)                                         */
   __IOM NRF_FICR_TRIM_SECURE_Type SECURE;            /*!< (@ 0x00000400) (unspecified)                                         */
 } NRF_FICR_TRIM_Type;                                /*!< Size = 1144 (0x478)                                                  */
@@ -127988,7 +128082,7 @@ typedef union {
 
 
 /* TEMP_CALIB: Calibration value. */
-  #define TEMP_CALIB_ResetValue (0x00000182UL)       /*!< Reset value of CALIB register.                                       */
+  #define TEMP_CALIB_ResetValue (0x000000C6UL)       /*!< Reset value of CALIB register.                                       */
 
 /* CALIB @Bits 0..9 : TBD */
   #define TEMP_CALIB_CALIB_Pos (0UL)                 /*!< Position of CALIB field.                                             */
