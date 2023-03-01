@@ -85,7 +85,8 @@ static const uint32_t datarate32_support_mask =
     NRFX_NUM_FEATURE_SUPPORTED_MASK(SPIM, MAX_DATARATE);
 #endif
 
-static const uint8_t easydma_support_bits[] = NRFX_FEATURE_ARRAY_INITIALIZE(SPIM, EASYDMA_MAXCNT_SIZE);
+static const uint8_t easydma_support_bits[] __UNUSED =
+    NRFX_FEATURE_ARRAY_INITIALIZE(SPIM, EASYDMA_MAXCNT_SIZE);
 
 #define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)          \
             (((freq != NRF_SPIM_FREQ_32M) && (freq != NRF_SPIM_FREQ_16M)) || \
