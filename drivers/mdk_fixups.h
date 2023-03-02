@@ -539,10 +539,6 @@
             #define DPPI030_CH_NUM 9
             #define DPPI030_GROUP_NUM 1
         #endif
-
-        #if defined(NRF7140_XXAA) && !defined(NRF_DPPIC)
-            #define NRF_DPPIC NRF_DPPIC110
-        #endif
     #endif // defined(DPPIC_PRESENT)
 
     #if defined(IPCT_PRESENT)
@@ -1516,12 +1512,12 @@
     /* TRIMUNDERFLOW @Bit 1 : Underflow error status. */
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos (1UL)  /*!< Position of TRIMUNDERFLOW field.                                     */
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Pos) /*!< Bit mask of TRIMUNDERFLOW
-                                                                              field.*/                                              
+                                                                              field.*/
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Min (0x0UL) /*!< Min enumerator value of TRIMUNDERFLOW field.                        */
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_Max (0x1UL) /*!< Max enumerator value of TRIMUNDERFLOW field.                        */
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_OutsideLimit (0x1UL) /*!< Underflow                                                  */
     #define HSFLL_FREQM_ERROR_TRIMUNDERFLOW_WithinLimit (0x0UL) /*!< No underflow                                                */
-    
+
     /* TRIMOVERFLOW @Bit 2 : Overflow error status. */
     #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos (2UL)   /*!< Position of TRIMOVERFLOW field.                                      */
     #define HSFLL_FREQM_ERROR_TRIMOVERFLOW_Msk (0x1UL << HSFLL_FREQM_ERROR_TRIMOVERFLOW_Pos) /*!< Bit mask of TRIMOVERFLOW field.*/
@@ -1560,7 +1556,7 @@
 
     #define GPIOTE_CH_NUM   GPIOTE_EVENTS_IN_MaxCount
     #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
-    
+
     #define PPIB00_CH_NUM 8
     #define PPIB10_CH_NUM 8
     #define PPIB11_CH_NUM 16
@@ -1574,7 +1570,7 @@
     #define NRF_PPIB11_TO_PPIB21_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB11_CH_NUM, PPIB21_CH_NUM))
     #define NRF_PPIB22_TO_PPIB30_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB22_CH_NUM, PPIB30_CH_NUM))
     #define NRF_PPIB20_TO_PPIB01_CHANNEL_MASK NRFX_BIT_MASK(NRFX_MIN(PPIB20_CH_NUM, PPIB01_CH_NUM))
-    
+
     // TODO: remove when MLT-4763 is done
     typedef enum
     {
@@ -1616,7 +1612,7 @@
         #define GRTC_IRQn             GRTC_1_IRQn
         #define nrfx_grtc_irq_handler GRTC_1_IRQHandler
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
-    
+
     #define DPPI_PRESENT DPPIC_PRESENT
 
     #define DPPI_GROUP_MAX_COUNT NRFX_MAX(DPPIC00_GROUP_NUM, \
