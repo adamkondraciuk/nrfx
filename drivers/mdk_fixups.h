@@ -1175,6 +1175,44 @@
     #define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
     #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
 
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(GPIO_COUNT)
+        #undef GPIO_COUNT
+        #define GPIO_COUNT 6
+    #endif
+
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(NRF_P3)
+        #undef NRF_P3
+    #endif
+    #if defined(NRF_P4)
+        #undef NRF_P4
+    #endif
+    #if defined(NRF_P5)
+        #undef NRF_P5
+    #endif
+    #if defined(NRF_P8)
+        #undef NRF_P8
+    #endif
+    #if defined(NRF_P10)
+        #undef NRF_P10
+    #endif
+    #if defined(NRF_P11)
+        #undef NRF_P11
+    #endif
+    #if defined(NRF_P12)
+        #undef NRF_P12
+    #endif
+    #if defined(NRF_P13)
+        #undef NRF_P13
+    #endif
+    #if defined(NRF_P14)
+        #undef NRF_P14
+    #endif
+    #if defined(NRF_P15)
+        #undef NRF_P15
+    #endif
+
     #if defined(UARTE120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE120_EASYDMA_MAXCNT_SIZE)
         #define UARTE120_EASYDMA_MAXCNT_SIZE UARTE120_EASYDMA_MAXCNT_SIZE_MAX
     #endif
@@ -1390,6 +1428,44 @@
     #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
     #define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
     #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
+
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(GPIO_COUNT)
+        #undef GPIO_COUNT
+        #define GPIO_COUNT 6
+    #endif
+
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(NRF_P3)
+        #undef NRF_P3
+    #endif
+    #if defined(NRF_P4)
+        #undef NRF_P4
+    #endif
+    #if defined(NRF_P5)
+        #undef NRF_P5
+    #endif
+    #if defined(NRF_P8)
+        #undef NRF_P8
+    #endif
+    #if defined(NRF_P10)
+        #undef NRF_P10
+    #endif
+    #if defined(NRF_P11)
+        #undef NRF_P11
+    #endif
+    #if defined(NRF_P12)
+        #undef NRF_P12
+    #endif
+    #if defined(NRF_P13)
+        #undef NRF_P13
+    #endif
+    #if defined(NRF_P14)
+        #undef NRF_P14
+    #endif
+    #if defined(NRF_P15)
+        #undef NRF_P15
+    #endif
 
     /* TODO: MLT-3907 */
     /* ===================================================== Struct AAR_OUT ====================================================== */
@@ -2085,6 +2161,44 @@
     #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
     #define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
     #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
+
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(GPIO_COUNT)
+        #undef GPIO_COUNT
+        #define GPIO_COUNT 6
+    #endif
+
+    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
+    #if defined(NRF_P3)
+        #undef NRF_P3
+    #endif
+    #if defined(NRF_P4)
+        #undef NRF_P4
+    #endif
+    #if defined(NRF_P5)
+        #undef NRF_P5
+    #endif
+    #if defined(NRF_P8)
+        #undef NRF_P8
+    #endif
+    #if defined(NRF_P10)
+        #undef NRF_P10
+    #endif
+    #if defined(NRF_P11)
+        #undef NRF_P11
+    #endif
+    #if defined(NRF_P12)
+        #undef NRF_P12
+    #endif
+    #if defined(NRF_P13)
+        #undef NRF_P13
+    #endif
+    #if defined(NRF_P14)
+        #undef NRF_P14
+    #endif
+    #if defined(NRF_P15)
+        #undef NRF_P15
+    #endif    
 
     #define NRF_PDM   NRF_PDM130
 
