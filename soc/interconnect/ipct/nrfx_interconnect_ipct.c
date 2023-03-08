@@ -105,7 +105,7 @@ size_t nrfx_interconnect_ipct_global_num_of_get(void)
 
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_global_by_idx_get(uint8_t idx)
 {
-    return &m_global_ipct_interconnect[idx];
+    return idx < NRFX_ARRAY_SIZE(m_global_ipct_interconnect) ? &m_global_ipct_interconnect[idx] : NULL;
 }
 
 #endif // defined(HALTIUM_XXAA)
