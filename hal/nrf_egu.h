@@ -9,6 +9,18 @@
 extern "C" {
 #endif
 
+/*
+ * Macro for generating if statement code blocks that allow extracting
+ * the number of channels associated with the specific EGU instance.
+ */
+#define NRF_INTERNAL_EGU_CHAN_NUM_EXTRACT(chan_num, p_reg)                                      \
+    if (0) {}                                                                                   \
+    NRFX_FOREACH_PRESENT(EGU, NRF_INTERNAL_ELSE_IF_EXTRACT_1, (), (), chan_num, _CH_NUM, p_reg) \
+    else                                                                                        \
+    {                                                                                           \
+        chan_num = 0;                                                                           \
+    }
+
 /**
 * @defgroup nrf_egu_hal EGU HAL
 * @{
@@ -251,57 +263,10 @@ NRF_STATIC_INLINE void nrf_egu_publish_clear(NRF_EGU_Type *  p_reg,
 
 NRF_STATIC_INLINE uint32_t nrf_egu_channel_count(NRF_EGU_Type const * p_reg)
 {
-#if defined(NRF_EGU0)
-    if (p_reg == NRF_EGU0){
-        return EGU0_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU1)
-    if (p_reg == NRF_EGU1){
-        return EGU1_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU2)
-    if (p_reg == NRF_EGU2){
-        return EGU2_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU3)
-    if (p_reg == NRF_EGU3){
-        return EGU3_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU4)
-    if (p_reg == NRF_EGU4){
-        return EGU4_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU5)
-    if (p_reg == NRF_EGU5){
-        return EGU5_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU020)
-    if (p_reg == NRF_EGU020){
-        return EGU020_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU130)
-    if (p_reg == NRF_EGU130){
-        return EGU130_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU10)
-    if (p_reg == NRF_EGU10){
-        return EGU10_CH_NUM;
-    }
-#endif
-#if defined(NRF_EGU20)
-    if (p_reg == NRF_EGU20){
-        return EGU20_CH_NUM;
-    }
-#endif
-    return 0;
+    uint8_t chan_num = 0;
+    NRF_INTERNAL_EGU_CHAN_NUM_EXTRACT(chan_num, p_reg);
+
+    return chan_num;
 }
 
 NRF_STATIC_INLINE void nrf_egu_task_trigger(NRF_EGU_Type * p_reg, nrf_egu_task_t egu_task)
