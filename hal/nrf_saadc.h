@@ -962,9 +962,9 @@ NRF_STATIC_INLINE nrf_saadc_value_t * nrf_saadc_buffer_pointer_get(NRF_SAADC_Typ
 NRF_STATIC_INLINE uint16_t nrf_saadc_amount_get(NRF_SAADC_Type const * p_reg)
 {
 #if NRF_SAADC_HAS_DMA_REG
-    return p_reg->DMA.AMOUNT;
+    return (uint16_t)p_reg->DMA.AMOUNT;
 #else
-    return p_reg->RESULT.AMOUNT;
+    return (uint16_t)p_reg->RESULT.AMOUNT;
 #endif
 }
 

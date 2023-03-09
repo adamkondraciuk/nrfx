@@ -1102,7 +1102,7 @@ NRF_STATIC_INLINE uint16_t nrf_nfct_rx_bits_get(NRF_NFCT_Type const * p_reg, boo
 {
     uint16_t rx_bits = p_reg->RXD.AMOUNT & (NFCT_RXD_AMOUNT_RXDATABITS_Msk |
                                             NFCT_RXD_AMOUNT_RXDATABYTES_Msk);
-    return rx_bits - (crc_excluded ? (8u * NRF_NFCT_CRC_SIZE) : 0);
+    return (uint16_t)(rx_bits - (crc_excluded ? (8u * NRF_NFCT_CRC_SIZE) : 0));
 }
 
 NRF_STATIC_INLINE

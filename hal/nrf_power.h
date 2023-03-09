@@ -1049,7 +1049,7 @@ NRF_STATIC_INLINE uint8_t nrf_power_gpregret_get(NRF_POWER_Type const * p_reg)
     {
         p_gpregret = &((volatile uint32_t *)&p_reg->GPREGRET)[0];
     }
-    return *p_gpregret;
+    return (uint8_t)*p_gpregret;
 }
 
 NRF_STATIC_INLINE void nrf_power_gpregret_ext_set(NRF_POWER_Type * p_reg,
@@ -1070,7 +1070,7 @@ NRF_STATIC_INLINE uint8_t nrf_power_gpregret_ext_get(NRF_POWER_Type const * p_re
     return p_reg->GPREGRET[reg_num];
 #else
     NRFX_ASSERT(reg_num < 1);
-    return p_reg->GPREGRET;
+    return (uint8_t)p_reg->GPREGRET;
 #endif
 }
 
@@ -1082,7 +1082,7 @@ NRF_STATIC_INLINE void nrf_power_gpregret2_set(NRF_POWER_Type * p_reg, uint8_t v
 
 NRF_STATIC_INLINE uint8_t nrf_power_gpregret2_get(NRF_POWER_Type const * p_reg)
 {
-    return p_reg->GPREGRET2;
+    return (uint8_t)p_reg->GPREGRET2;
 }
 #endif
 

@@ -1722,7 +1722,7 @@ NRF_STATIC_INLINE uint16_t nrf_radio_frequency_get(NRF_RADIO_Type const * p_reg)
     }
     freq += p_reg->FREQUENCY & RADIO_FREQUENCY_FREQUENCY_Msk;
 
-    return freq;
+    return (uint16_t)freq;
 }
 
 NRF_STATIC_INLINE void nrf_radio_txpower_set(NRF_RADIO_Type * p_reg, nrf_radio_txpower_t tx_power)
@@ -1941,26 +1941,26 @@ NRF_STATIC_INLINE void nrf_radio_dacnf_set(NRF_RADIO_Type * p_reg, uint8_t ena, 
 
 NRF_STATIC_INLINE uint8_t nrf_radio_dacnf_ena_get(NRF_RADIO_Type const * p_reg)
 {
-    return (p_reg->DACNF & (RADIO_DACNF_ENA0_Msk |
-                            RADIO_DACNF_ENA1_Msk |
-                            RADIO_DACNF_ENA2_Msk |
-                            RADIO_DACNF_ENA3_Msk |
-                            RADIO_DACNF_ENA4_Msk |
-                            RADIO_DACNF_ENA5_Msk |
-                            RADIO_DACNF_ENA6_Msk |
-                            RADIO_DACNF_ENA7_Msk)) >> RADIO_DACNF_ENA0_Pos;
+    return (uint8_t)((p_reg->DACNF & (RADIO_DACNF_ENA0_Msk |
+                                      RADIO_DACNF_ENA1_Msk |
+                                      RADIO_DACNF_ENA2_Msk |
+                                      RADIO_DACNF_ENA3_Msk |
+                                      RADIO_DACNF_ENA4_Msk |
+                                      RADIO_DACNF_ENA5_Msk |
+                                      RADIO_DACNF_ENA6_Msk |
+                                      RADIO_DACNF_ENA7_Msk)) >> RADIO_DACNF_ENA0_Pos);
 }
 
 NRF_STATIC_INLINE uint8_t nrf_radio_dacnf_txadd_get(NRF_RADIO_Type const * p_reg)
 {
-    return (p_reg->DACNF & (RADIO_DACNF_TXADD0_Msk |
-                            RADIO_DACNF_TXADD1_Msk |
-                            RADIO_DACNF_TXADD2_Msk |
-                            RADIO_DACNF_TXADD3_Msk |
-                            RADIO_DACNF_TXADD4_Msk |
-                            RADIO_DACNF_TXADD5_Msk |
-                            RADIO_DACNF_TXADD6_Msk |
-                            RADIO_DACNF_TXADD7_Msk)) >> RADIO_DACNF_TXADD0_Pos;
+    return (uint8_t)((p_reg->DACNF & (RADIO_DACNF_TXADD0_Msk |
+                                      RADIO_DACNF_TXADD1_Msk |
+                                      RADIO_DACNF_TXADD2_Msk |
+                                      RADIO_DACNF_TXADD3_Msk |
+                                      RADIO_DACNF_TXADD4_Msk |
+                                      RADIO_DACNF_TXADD5_Msk |
+                                      RADIO_DACNF_TXADD6_Msk |
+                                      RADIO_DACNF_TXADD7_Msk)) >> RADIO_DACNF_TXADD0_Pos);
 }
 
 #if defined(RADIO_INTENSET_MHRMATCH_Msk)
