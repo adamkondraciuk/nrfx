@@ -44,6 +44,16 @@ typedef struct
 
 static egu_control_block_t m_cb[NRFX_EGU_ENABLED_COUNT];
 
+/*
+ * `-Warray-bounds` warning is disabled for the `egu_event_mask_get_and_clear`
+ * function because GCC 12 and above may report a false positive due to accessing
+ * event registers.
+ */
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
+
 static uint32_t egu_event_mask_get_and_clear(NRF_EGU_Type * p_reg, uint32_t int_mask)
 {
     uint32_t event_mask = 0;
@@ -61,6 +71,10 @@ static uint32_t egu_event_mask_get_and_clear(NRF_EGU_Type * p_reg, uint32_t int_
     }
     return event_mask;
 }
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
 nrfx_err_t nrfx_egu_init(nrfx_egu_t const *       p_instance,
                          uint8_t                  interrupt_priority,
