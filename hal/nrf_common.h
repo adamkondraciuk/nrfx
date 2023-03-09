@@ -56,7 +56,7 @@ extern "C" {
  * @retval true  The pointed object is located in the memory region accessible by EasyDMA.
  * @retval false The pointed object is not located in the memory region accessible by EasyDMA.
  */
-NRF_STATIC_INLINE bool nrf_dma_accesible_check(void const * p_reg, void const * p_object);
+NRF_STATIC_INLINE bool nrf_dma_accessible_check(void const * p_reg, void const * p_object);
 
 NRF_STATIC_INLINE void nrf_barrier_w(void);
 
@@ -152,7 +152,7 @@ NRF_STATIC_INLINE uint16_t nrf_address_periphid_get(uint32_t addr)
 }
 #endif
 
-NRF_STATIC_INLINE bool nrf_dma_accesible_check(void const * p_reg, void const * p_object)
+NRF_STATIC_INLINE bool nrf_dma_accessible_check(void const * p_reg, void const * p_object)
 {
 #if defined(HALTIUM_XXAA)
     if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)

@@ -310,7 +310,7 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
 
     // EasyDMA requires that transfer buffers are placed in DataRAM,
     // signal error if the are not.
-    if (!nrf_dma_accesible_check(p_instance->p_reg, p_data))
+    if (!nrf_dma_accessible_check(p_instance->p_reg, p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -378,7 +378,7 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
 
     // EasyDMA requires that transfer buffers are placed in DataRAM,
     // signal error if the are not.
-    if (!nrf_dma_accesible_check(p_instance->p_reg, p_data))
+    if (!nrf_dma_accessible_check(p_instance->p_reg, p_data))
     {
         err_code = NRFX_ERROR_INVALID_ADDR;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
