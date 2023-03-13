@@ -410,6 +410,16 @@ extern "C" {
 #define NRFX_IS_POWER_OF_TWO(val) ((val != 0) && (val & (val - 1)) == 0)
 
 /**
+ * @brief Macro for checking whether a given number is even.
+ *
+ * @param[in] val Tested value.
+ *
+ * @retval true  The value is even.
+ * @retval false The value is odd.
+ */
+#define NRFX_IS_EVEN(val) ((val % 2)  == 0)
+
+/**
  * @brief Macro for checking if given lengths of EasyDMA transfers do not exceed
  *        the limit of the specified peripheral.
  *

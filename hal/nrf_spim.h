@@ -25,6 +25,13 @@ extern "C" {
  */
 #define NRF_SPIM_INST_GET(idx) NRFX_CONCAT_2(NRF_SPIM, idx)
 
+#if defined(SPIM_FREQUENCY_FREQUENCY_M16) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether 16 MHz clock frequency is available. */
+#define NRF_SPIM_HAS_16_MHZ_FREQ 1
+#else
+#define NRF_SPIM_HAS_16_MHZ_FREQ 0
+#endif
+
 #if defined(SPIM_FREQUENCY_FREQUENCY_M32) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether 32 MHz clock frequency is available. */
 #define NRF_SPIM_HAS_32_MHZ_FREQ 1
@@ -145,6 +152,14 @@ extern "C" {
 #if NRF_SPIM_HAS_PRESCALER
 /** @brief Maximum value of PRESCALER register. */
 #define NRF_SPIM_PRESCALER_MAX SPIM_PRESCALER_DIVISOR_Max
+
+/** @brief Minimum value of PRESCALER register. */
+#define NRF_SPIM_PRESCALER_MIN SPIM_PRESCALER_DIVISOR_Min
+#endif
+
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+/** @brief Max number of RX patterns. */
+#define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
 #endif
 
 /* Macros for checking the clock source frequency for specified SPIM instance. */
@@ -180,57 +195,152 @@ extern "C" {
     ((NRF_SPIM_IS_128MHZ_SPIM(p_reg)) ? (NRF_SPIM_BASE_FREQUENCY_128MHZ) : \
     (NRF_SPIM_BASE_FREQUENCY_192MHZ)))))
 
+#if NRF_SPIM_HAS_PRESCALER
+/**
+ * @brief Macro for computing prescaler value for a given SPIM instance and desired frequency.
+ *
+ * @warning Not every combination of base and desired frequency is supported.
+ *          The @ref NRF_SPIM_FREQUENCY_STATIC_CHECK macro can be used to check if the desired frequency is supported.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] frequency Desired frequency value in Hz.
+ */
+#define NRF_SPIM_PRESCALER_CALCULATE(p_reg, frequency) \
+        ((uint32_t)(NRF_SPIM_BASE_FREQUENCY_GET(p_reg)) / (uint32_t)(frequency))
+#endif
+
+/**
+ * @brief Macro for checking whether specified frequency can be achieved for a given SPIM instance.
+ *
+ * @note This macro uses a compile-time assertion.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] frequency Desired frequency value in Hz.
+ */
+#define NRF_SPIM_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                          \
+    NRF_STATIC_ASSERT(                                                                             \
+    NRFX_COND_CODE_1(NRF_SPIM_HAS_PRESCALER,                                                       \
+        ((NRF_SPIM_BASE_FREQUENCY_GET(p_reg) % (uint32_t)frequency == 0) &&                        \
+        (NRFX_IS_EVEN(NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency))) &&                \
+        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) >= (NRF_SPIM_PRESCALER_MIN)) &&  \
+        (NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency) <= (NRF_SPIM_PRESCALER_MAX)))    \
+        ,                                                                                          \
+        (((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(125)) ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(250)) ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_KHZ_TO_HZ(500)) ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(1))   ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(2))   ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(4))   ||                                 \
+         ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(8))   ||                                 \
+         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(16)) && (NRF_SPIM_HAS_16_MHZ_FREQ)) ||  \
+         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(32)) && (NRF_SPIM_HAS_32_MHZ_FREQ)) )), \
+        "The specified frequency cannot be achieved with the given SPIM instance.")
+
 /** @brief SPIM tasks. */
 typedef enum
 {
-    NRF_SPIM_TASK_START   = offsetof(NRF_SPIM_Type, TASKS_START),   ///< Start SPI transaction.
-    NRF_SPIM_TASK_STOP    = offsetof(NRF_SPIM_Type, TASKS_STOP),    ///< Stop SPI transaction.
-    NRF_SPIM_TASK_SUSPEND = offsetof(NRF_SPIM_Type, TASKS_SUSPEND), ///< Suspend SPI transaction.
-    NRF_SPIM_TASK_RESUME  = offsetof(NRF_SPIM_Type, TASKS_RESUME)   ///< Resume SPI transaction.
+    NRF_SPIM_TASK_START           = offsetof(NRF_SPIM_Type, TASKS_START),                  ///< Start SPI transaction.
+    NRF_SPIM_TASK_STOP            = offsetof(NRF_SPIM_Type, TASKS_STOP),                   ///< Stop SPI transaction.
+    NRF_SPIM_TASK_SUSPEND         = offsetof(NRF_SPIM_Type, TASKS_SUSPEND),                ///< Suspend SPI transaction.
+    NRF_SPIM_TASK_RESUME          = offsetof(NRF_SPIM_Type, TASKS_RESUME),                 ///< Resume SPI transaction.
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+    NRF_SPIM_TASK_ENABLERXMATCH0  = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.ENABLEMATCH[0]),  ///< Enable SPI pattern matching functionality for pattern 0.
+    NRF_SPIM_TASK_ENABLERXMATCH1  = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.ENABLEMATCH[1]),  ///< Enable SPI pattern matching functionality for pattern 1.
+    NRF_SPIM_TASK_ENABLERXMATCH2  = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.ENABLEMATCH[2]),  ///< Enable SPI pattern matching functionality for pattern 2.
+    NRF_SPIM_TASK_ENABLERXMATCH3  = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.ENABLEMATCH[3]),  ///< Enable SPI pattern matching functionality for pattern 3.
+    NRF_SPIM_TASK_DISABLERXMATCH0 = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.DISABLEMATCH[0]), ///< Disable SPI pattern matching functionality for pattern 0.
+    NRF_SPIM_TASK_DISABLERXMATCH1 = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.DISABLEMATCH[1]), ///< Disable SPI pattern matching functionality for pattern 1.
+    NRF_SPIM_TASK_DISABLERXMATCH2 = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.DISABLEMATCH[2]), ///< Disable SPI pattern matching functionality for pattern 2.
+    NRF_SPIM_TASK_DISABLERXMATCH3 = offsetof(NRF_SPIM_Type, TASKS_DMA.RX.DISABLEMATCH[3])  ///< Disable SPI pattern matching functionality for pattern 3.
+#endif
 } nrf_spim_task_t;
 
 /** @brief SPIM events. */
 typedef enum
 {
-    NRF_SPIM_EVENT_STOPPED = offsetof(NRF_SPIM_Type, EVENTS_STOPPED),    ///< SPI transaction has stopped.
-    NRF_SPIM_EVENT_END     = offsetof(NRF_SPIM_Type, EVENTS_END),        ///< End of RXD buffer and TXD buffer reached.
+    NRF_SPIM_EVENT_STARTED    = offsetof(NRF_SPIM_Type, EVENTS_STARTED),         ///< SPI transaction has started.
+    NRF_SPIM_EVENT_STOPPED    = offsetof(NRF_SPIM_Type, EVENTS_STOPPED),         ///< SPI transaction has stopped.
 #if NRF_SPIM_HAS_DMA_TASKS_EVENTS
-    NRF_SPIM_EVENT_ENDRX   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.END), ///< End of RXD buffer reached.
-    NRF_SPIM_EVENT_ENDTX   = offsetof(NRF_SPIM_Type, EVENTS_DMA.TX.END), ///< End of TXD buffer reached.
+    NRF_SPIM_EVENT_RXSTARTED  = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.READY),    ///< Receive sequence started.
+    NRF_SPIM_EVENT_RXBUSERROR = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.BUSERROR), ///< Memory bus error occurred during the RX transfer.
+    NRF_SPIM_EVENT_RXMATCH0   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.MATCH[0]), ///< Pattern match for pattern 0 detected.
+    NRF_SPIM_EVENT_RXMATCH1   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.MATCH[1]), ///< Pattern match for pattern 1 detected.
+    NRF_SPIM_EVENT_RXMATCH2   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.MATCH[2]), ///< Pattern match for pattern 2 detected.
+    NRF_SPIM_EVENT_RXMATCH3   = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.MATCH[3]), ///< Pattern match for pattern 3 detected.
+    NRF_SPIM_EVENT_TXSTARTED  = offsetof(NRF_SPIM_Type, EVENTS_DMA.TX.READY),    ///< Transmit sequence started.
+    NRF_SPIM_EVENT_TXBUSERROR = offsetof(NRF_SPIM_Type, EVENTS_DMA.TX.BUSERROR), ///< Memory bus error occurred during the TX transfer.
+    NRF_SPIM_EVENT_ENDRX      = offsetof(NRF_SPIM_Type, EVENTS_DMA.RX.END),      ///< End of RXD buffer reached.
+    NRF_SPIM_EVENT_ENDTX      = offsetof(NRF_SPIM_Type, EVENTS_DMA.TX.END),      ///< End of TXD buffer reached.
 #else
-    NRF_SPIM_EVENT_ENDRX   = offsetof(NRF_SPIM_Type, EVENTS_ENDRX),      ///< End of RXD buffer reached.
-    NRF_SPIM_EVENT_ENDTX   = offsetof(NRF_SPIM_Type, EVENTS_ENDTX),      ///< End of TXD buffer reached.
+    NRF_SPIM_EVENT_ENDRX      = offsetof(NRF_SPIM_Type, EVENTS_ENDRX),           ///< End of RXD buffer reached.
+    NRF_SPIM_EVENT_ENDTX      = offsetof(NRF_SPIM_Type, EVENTS_ENDTX),           ///< End of TXD buffer reached.
 #endif
-    NRF_SPIM_EVENT_STARTED = offsetof(NRF_SPIM_Type, EVENTS_STARTED)     ///< Transaction started.
+    NRF_SPIM_EVENT_END        = offsetof(NRF_SPIM_Type, EVENTS_END)              ///< End of RXD buffer and TXD buffer reached.
 } nrf_spim_event_t;
 
-/**
- * @brief SPIM shortcuts.
- */
+/** @brief SPIM shortcuts. */
 typedef enum
 {
-    NRF_SPIM_SHORT_END_START_MASK = SPIM_SHORTS_END_START_Msk, ///< Shortcut between END event and START task.
-    NRF_SPIM_ALL_SHORTS_MASK      = SPIM_SHORTS_END_START_Msk  ///< All SPIM shortcuts.
+    NRF_SPIM_SHORT_END_START_MASK                = SPIM_SHORTS_END_START_Msk,                          ///< Shortcut between END event and START task.
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+    NRF_SPIM_SHORT_RXMATCH0_ENABLERXMATCH1_MASK  = SPIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Msk,  ///< Shortcut between DMA.RX.MATCH0 event and DMA.RX.ENABLEMATCH1 task.
+    NRF_SPIM_SHORT_RXMATCH1_ENABLERXMATCH2_MASK  = SPIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Msk,  ///< Shortcut between DMA.RX.MATCH1 event and DMA.RX.ENABLEMATCH2 task.
+    NRF_SPIM_SHORT_RXMATCH2_ENABLERXMATCH3_MASK  = SPIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk,  ///< Shortcut between DMA.RX.MATCH2 event and DMA.RX.ENABLEMATCH3 task.
+    NRF_SPIM_SHORT_RXMATCH3_ENABLERXMATCH4_MASK  = SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH4_Msk,  ///< Shortcut between DMA.RX.MATCH3 event and DMA.RX.ENABLEMATCH4 task.
+    NRF_SPIM_SHORT_RXMATCH0_DISABLERXMATCH0_MASK = SPIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Msk, ///< Shortcut between DMA.RX.MATCH0 event and DMA.RX.DISABLEMATCH0 task.
+    NRF_SPIM_SHORT_RXMATCH1_DISABLERXMATCH1_MASK = SPIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Msk, ///< Shortcut between DMA.RX.MATCH1 event and DMA.RX.DISABLEMATCH1 task.
+    NRF_SPIM_SHORT_RXMATCH2_DISABLERXMATCH2_MASK = SPIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Msk, ///< Shortcut between DMA.RX.MATCH2 event and DMA.RX.DISABLEMATCH2 task.
+    NRF_SPIM_SHORT_RXMATCH3_DISABLERXMATCH3_MASK = SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Msk, ///< Shortcut between DMA.RX.MATCH3 event and DMA.RX.DISABLEMATCH3 task.
+#endif
+    NRF_SPIM_ALL_SHORTS_MASK      = SPIM_SHORTS_END_START_Msk
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+                                  | SPIM_SHORTS_DMA_RX_MATCH0_DMA_RX_ENABLEMATCH1_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH1_DMA_RX_ENABLEMATCH2_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH4_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH0_DMA_RX_DISABLEMATCH0_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH1_DMA_RX_DISABLEMATCH1_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH2_DMA_RX_DISABLEMATCH2_Msk
+                                  | SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_DISABLEMATCH3_Msk                 ///< All SPIM shortcuts.
+#endif
 } nrf_spim_short_mask_t;
 
 /** @brief SPIM interrupts. */
 typedef enum
 {
-    NRF_SPIM_INT_STOPPED_MASK = SPIM_INTENSET_STOPPED_Msk,  ///< Interrupt on STOPPED event.
+    NRF_SPIM_INT_STARTED_MASK    = SPIM_INTENSET_STARTED_Msk,       ///< Interrupt on STARTED event.
+    NRF_SPIM_INT_STOPPED_MASK    = SPIM_INTENSET_STOPPED_Msk,       ///< Interrupt on STOPPED event.
 #if NRF_SPIM_HAS_DMA_TASKS_EVENTS
-    NRF_SPIM_INT_ENDRX_MASK   = SPIM_INTENSET_DMARXEND_Msk, ///< Interrupt on ENDRX event.
-    NRF_SPIM_INT_ENDTX_MASK   = SPIM_INTENSET_DMATXEND_Msk, ///< Interrupt on ENDTX event.
+    NRF_SPIM_INT_RXREADY_MASK    = SPIM_INTENSET_DMARXREADY_Msk,    ///< Interrupt on DMA.RX.READY event.
+    NRF_SPIM_INT_RXBUSERROR_MASK = SPIM_INTENSET_DMARXBUSERROR_Msk, ///< Interrupt on DMA.RX.BUSERROR event.
+    NRF_SPIM_INT_RXMATCH0_MASK   = SPIM_INTENSET_DMARXMATCH0_Msk,   ///< Interrupt on DMA.RX.MATCH0 event.
+    NRF_SPIM_INT_RXMATCH1_MASK   = SPIM_INTENSET_DMARXMATCH1_Msk,   ///< Interrupt on DMA.RX.MATCH1 event.
+    NRF_SPIM_INT_RXMATCH2_MASK   = SPIM_INTENSET_DMARXMATCH2_Msk,   ///< Interrupt on DMA.RX.MATCH2 event.
+    NRF_SPIM_INT_RXMATCH3_MASK   = SPIM_INTENSET_DMARXMATCH3_Msk,   ///< Interrupt on DMA.RX.MATCH3 event.
+    NRF_SPIM_INT_TXREADY_MASK    = SPIM_INTENSET_DMATXREADY_Msk,    ///< Interrupt on DMA.TX.READY event.
+    NRF_SPIM_INT_TXBUSERROR_MASK = SPIM_INTENSET_DMATXBUSERROR_Msk, ///< Interrupt on DMA.TX.BUSERROR event.
+    NRF_SPIM_INT_ENDRX_MASK      = SPIM_INTENSET_DMARXEND_Msk,      ///< Interrupt on ENDRX event.
+    NRF_SPIM_INT_ENDTX_MASK      = SPIM_INTENSET_DMATXEND_Msk,      ///< Interrupt on ENDTX event.
 #else
-    NRF_SPIM_INT_ENDRX_MASK   = SPIM_INTENSET_ENDRX_Msk,    ///< Interrupt on ENDRX event.
-    NRF_SPIM_INT_ENDTX_MASK   = SPIM_INTENSET_ENDTX_Msk,    ///< Interrupt on ENDTX event.
+    NRF_SPIM_INT_ENDRX_MASK      = SPIM_INTENSET_ENDRX_Msk,         ///< Interrupt on ENDRX event.
+    NRF_SPIM_INT_ENDTX_MASK      = SPIM_INTENSET_ENDTX_Msk,         ///< Interrupt on ENDTX event.
 #endif
-    NRF_SPIM_INT_END_MASK     = SPIM_INTENSET_END_Msk,      ///< Interrupt on END event.
-    NRF_SPIM_INT_STARTED_MASK = SPIM_INTENSET_STARTED_Msk,  ///< Interrupt on STARTED event.
-    NRF_SPIM_ALL_INTS_MASK    = NRF_SPIM_INT_STOPPED_MASK |
-                                NRF_SPIM_INT_ENDRX_MASK   |
-                                NRF_SPIM_INT_ENDTX_MASK   |
-                                NRF_SPIM_INT_END_MASK     |
-                                NRF_SPIM_INT_STARTED_MASK   ///< All SPIM interrupts.
+    NRF_SPIM_INT_END_MASK        = SPIM_INTENSET_END_Msk,           ///< Interrupt on END event.
+    NRF_SPIM_ALL_INTS_MASK       = NRF_SPIM_INT_STARTED_MASK
+                                 | NRF_SPIM_INT_STOPPED_MASK
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+                                 | NRF_SPIM_INT_RXREADY_MASK
+                                 | NRF_SPIM_INT_RXBUSERROR_MASK
+                                 | NRF_SPIM_INT_RXMATCH0_MASK
+                                 | NRF_SPIM_INT_RXMATCH1_MASK
+                                 | NRF_SPIM_INT_RXMATCH2_MASK
+                                 | NRF_SPIM_INT_RXMATCH3_MASK
+                                 | NRF_SPIM_INT_TXREADY_MASK
+                                 | NRF_SPIM_INT_TXBUSERROR_MASK
+#endif
+                                 | NRF_SPIM_INT_ENDRX_MASK
+                                 | NRF_SPIM_INT_ENDTX_MASK
+                                 | NRF_SPIM_INT_END_MASK            ///< All SPIM interrupts.
 } nrf_spim_int_mask_t;
 
 #if NRF_SPIM_HAS_FREQUENCY
@@ -243,13 +353,13 @@ typedef enum
     NRF_SPIM_FREQ_1M   = SPIM_FREQUENCY_FREQUENCY_M1,      ///< 1 Mbps.
     NRF_SPIM_FREQ_2M   = SPIM_FREQUENCY_FREQUENCY_M2,      ///< 2 Mbps.
     NRF_SPIM_FREQ_4M   = SPIM_FREQUENCY_FREQUENCY_M4,      ///< 4 Mbps.
-    // [conversion to 'int' needed to prevent compilers from complaining
-    //  that the provided value (0x80000000UL) is out of range of "int"]
+    // Conversion to int is needed to prevent compilers from getting an error message
+    // that the provided value (0x80000000UL) is out of range for int.
     NRF_SPIM_FREQ_8M   = (int)SPIM_FREQUENCY_FREQUENCY_M8, ///< 8 Mbps.
-#if defined(SPIM_FREQUENCY_FREQUENCY_M16) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_16_MHZ_FREQ
     NRF_SPIM_FREQ_16M  = SPIM_FREQUENCY_FREQUENCY_M16,     ///< 16 Mbps.
 #endif
-#if defined(SPIM_FREQUENCY_FREQUENCY_M32) || defined(__NRFX_DOXYGEN__)
+#if NRF_SPIM_HAS_32_MHZ_FREQ
     NRF_SPIM_FREQ_32M  = SPIM_FREQUENCY_FREQUENCY_M32      ///< 32 Mbps.
 #endif
 } nrf_spim_frequency_t;
@@ -742,6 +852,134 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_enable(NRF_SPIM_Type * p_reg);
 NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg);
 #endif
 
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+/**
+ * @brief Function for enabling individual pattern match filters.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] index  Index of pattern match filter.
+ * @param[in] enable True if pattern match filter is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_enable_set(NRF_SPIM_Type * p_reg,
+                                                            uint8_t         index,
+                                                            bool            enable);
+
+/**
+ * @brief Function for checking if the specified pattern match filter is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of pattern match filter.
+ *
+ * @retval true  Pattern match filter is enabled.
+ * @retval false Pattern match filter is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_spim_rx_pattern_match_enable_check(NRF_SPIM_Type const * p_reg,
+                                                              uint8_t               index);
+
+/**
+ * @brief Function for enabling one-shot operation for the specified match filter.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of pattern match filter.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_one_shot_enable(NRF_SPIM_Type * p_reg,
+                                                                 uint8_t         index);
+
+/**
+ * @brief Function for disabling one-shot operation for the specified match filter.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of pattern match filter.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_one_shot_disable(NRF_SPIM_Type * p_reg,
+                                                                  uint8_t         index);
+
+/**
+ * @brief Function for checking if specified pattern match filter is configured as one-shot.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of pattern match filter.
+ *
+ * @retval true  Pattern match filter is configured as one-shot.
+ * @retval false Pattern match filter is configured as continuous.
+ */
+NRF_STATIC_INLINE bool nrf_spim_rx_pattern_match_one_shot_check(NRF_SPIM_Type const * p_reg,
+                                                                uint8_t               index);
+
+/**
+ * @brief Function for setting the pattern to be looked for by the specified match filter.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] index   Index of pattern match filter.
+ * @param[in] pattern Pattern to be looked for.
+ *                    Match will trigger the corresponding event, if enabled.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_candidate_set(NRF_SPIM_Type * p_reg,
+                                                               uint8_t         index,
+                                                               uint32_t        pattern);
+
+/**
+ * @brief Function for getting the pattern that the specified match filter is looking for.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] index Index of pattern match filter.
+ *
+ * @return Pattern that the specified match filter is looking for.
+ */
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_pattern_match_candidate_get(NRF_SPIM_Type const * p_reg,
+                                                                   uint8_t               index);
+#endif // NRF_SPIM_HAS_DMA_TASKS_EVENTS
+
+#if NRF_SPIM_HAS_DMA_REG
+/**
+ * @brief Function for enabling the termination of the RX transaction after detecting the BUSERROR event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_terminate_on_bus_error_enable(NRF_SPIM_Type * p_reg);
+
+/**
+ * @brief Function for disabling the termination of the RX transaction after detecting the BUSERROR event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spim_rx_terminate_on_bus_error_disable(NRF_SPIM_Type * p_reg);
+
+/**
+ * @brief Function for checking if RX transaction termination after detecting the BUSERROR event is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  RX transaction termination after detecting a BUSERROR event is enabled.
+ * @retval false RX transaction termination after detecting a BUSERROR event is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_spim_rx_terminate_on_bus_error_check(NRF_SPIM_Type const * p_reg);
+
+/**
+ * @brief Function for enabling the termination of the TX transaction after detecting the BUSERROR event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spim_tx_terminate_on_bus_error_enable(NRF_SPIM_Type * p_reg);
+
+/**
+ * @brief Function for disabling the termination of the TX transaction after detecting the BUSERROR event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_spim_tx_terminate_on_bus_error_disable(NRF_SPIM_Type * p_reg);
+
+/**
+ * @brief Function for checking if TX transaction termination after detecting the BUSERROR event is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  TX transaction termination after detecting a BUSERROR event is enabled.
+ * @retval false TX transaction termination after detecting a BUSERROR event is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_spim_tx_terminate_on_bus_error_check(NRF_SPIM_Type const * p_reg);
+#endif // NRF_SPIM_HAS_DMA_REG
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_spim_task_trigger(NRF_SPIM_Type * p_reg, nrf_spim_task_t task)
@@ -805,7 +1043,9 @@ NRF_STATIC_INLINE uint32_t nrf_spim_int_enable_check(NRF_SPIM_Type const * p_reg
 #if NRF_SPIM_HAS_PRESCALER
 NRF_STATIC_INLINE void nrf_spim_prescaler_set(NRF_SPIM_Type * p_reg, uint32_t prescaler)
 {
+    NRFX_ASSERT(prescaler >= NRF_SPIM_PRESCALER_MIN);
     NRFX_ASSERT(prescaler <= NRF_SPIM_PRESCALER_MAX);
+    NRFX_ASSERT(NRFX_IS_EVEN(prescaler));
     p_reg->PRESCALER = prescaler;
 }
 
@@ -903,7 +1143,7 @@ NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
     return p_reg->PSEL.CSN;
 #endif
 }
-#endif
+#endif // NRF_SPIM_HAS_HW_CSN
 
 #if NRF_SPIM_HAS_DCX
 NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg, uint32_t dcx_pin)
@@ -928,7 +1168,7 @@ NRF_STATIC_INLINE void nrf_spim_dcx_cnt_set(NRF_SPIM_Type * p_reg, uint32_t dcx_
 {
     p_reg->DCXCNT = dcx_cnt;
 }
-#endif
+#endif // NRF_SPIM_HAS_DCX
 
 #if NRF_SPIM_HAS_RXDELAY
 NRF_STATIC_INLINE void nrf_spim_iftiming_set(NRF_SPIM_Type * p_reg, uint32_t rxdelay)
@@ -1091,6 +1331,208 @@ NRF_STATIC_INLINE void nrf_spim_rx_list_disable(NRF_SPIM_Type * p_reg)
     p_reg->RXD.LIST = SPIM_RXD_LIST_LIST_Disabled << SPIM_RXD_LIST_LIST_Pos;
 }
 #endif
+
+#if NRF_SPIM_HAS_DMA_TASKS_EVENTS
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_enable_set(NRF_SPIM_Type * p_reg,
+                                                            uint8_t         index,
+                                                            bool            enable)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    switch (index)
+    {
+        case 0:
+            p_reg->DMA.RX.MATCH.CONFIG = ((p_reg->DMA.RX.MATCH.CONFIG &
+                                         ~SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Msk) |
+                                         ((enable ?
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Enabled :
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Disabled)
+                                           << SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Pos));
+            break;
+        case 1:
+            p_reg->DMA.RX.MATCH.CONFIG = ((p_reg->DMA.RX.MATCH.CONFIG &
+                                         ~SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Msk) |
+                                         ((enable ?
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Enabled :
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Disabled)
+                                           << SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Pos));
+            break;
+        case 2:
+            p_reg->DMA.RX.MATCH.CONFIG = ((p_reg->DMA.RX.MATCH.CONFIG &
+                                         ~SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Msk) |
+                                         ((enable ?
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Enabled :
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Disabled)
+                                           << SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Pos));
+            break;
+        case 3:
+            p_reg->DMA.RX.MATCH.CONFIG = ((p_reg->DMA.RX.MATCH.CONFIG &
+                                         ~SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Msk) |
+                                         ((enable ?
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Enabled :
+                                           SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Disabled)
+                                           << SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Pos));
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_spim_rx_pattern_match_enable_check(NRF_SPIM_Type const * p_reg,
+                                                              uint8_t               index)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    switch (index)
+    {
+        case 0:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ENABLE0_Enabled;
+        case 1:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ENABLE1_Enabled;
+        case 2:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ENABLE2_Enabled;
+        case 3:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ENABLE3_Enabled;
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_one_shot_enable(NRF_SPIM_Type * p_reg,
+                                                                 uint8_t         index)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    switch (index)
+    {
+        case 0:
+            p_reg->DMA.RX.MATCH.CONFIG |= SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Msk;
+            break;
+        case 1:
+            p_reg->DMA.RX.MATCH.CONFIG |= SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Msk;
+            break;
+        case 2:
+            p_reg->DMA.RX.MATCH.CONFIG |= SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Msk;
+            break;
+        case 3:
+            p_reg->DMA.RX.MATCH.CONFIG |= SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Msk;
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_one_shot_disable(NRF_SPIM_Type * p_reg,
+                                                                  uint8_t         index)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    switch (index)
+    {
+        case 0:
+            p_reg->DMA.RX.MATCH.CONFIG &= ~(SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Msk);
+            break;
+        case 1:
+            p_reg->DMA.RX.MATCH.CONFIG &= ~(SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Msk);
+            break;
+        case 2:
+            p_reg->DMA.RX.MATCH.CONFIG &= ~(SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Msk);
+            break;
+        case 3:
+            p_reg->DMA.RX.MATCH.CONFIG &= ~(SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Msk);
+            break;
+        default:
+            NRFX_ASSERT(false);
+            break;
+    }
+}
+
+NRF_STATIC_INLINE bool nrf_spim_rx_pattern_match_one_shot_check(NRF_SPIM_Type const * p_reg,
+                                                                uint8_t               index)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    switch (index)
+    {
+        case 0:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ONESHOT0_Oneshot;
+        case 1:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ONESHOT1_Oneshot;
+        case 2:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ONESHOT2_Oneshot;
+        case 3:
+            return ((p_reg->DMA.RX.MATCH.CONFIG & SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Msk)
+                    >> SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Pos) ==
+                    SPIM_DMA_RX_MATCH_CONFIG_ONESHOT3_Oneshot;
+        default:
+            NRFX_ASSERT(false);
+            return 0;
+    }
+}
+
+NRF_STATIC_INLINE void nrf_spim_rx_pattern_match_candidate_set(NRF_SPIM_Type * p_reg,
+                                                               uint8_t         index,
+                                                               uint32_t        pattern)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    p_reg->DMA.RX.MATCH.CANDIDATE[index] = pattern;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_spim_rx_pattern_match_candidate_get(NRF_SPIM_Type const * p_reg,
+                                                                   uint8_t               index)
+{
+    NRFX_ASSERT(index < NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT);
+    return p_reg->DMA.RX.MATCH.CANDIDATE[index];
+}
+#endif // NRF_SPIM_HAS_DMA_TASKS_EVENTS
+
+#if NRF_SPIM_HAS_DMA_REG
+NRF_STATIC_INLINE void nrf_spim_rx_terminate_on_bus_error_enable(NRF_SPIM_Type * p_reg)
+{
+    p_reg->DMA.RX.TERMINATEONBUSERROR |= SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_spim_rx_terminate_on_bus_error_disable(NRF_SPIM_Type * p_reg)
+{
+    p_reg->DMA.RX.TERMINATEONBUSERROR &= ~(SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Msk);
+}
+
+NRF_STATIC_INLINE bool nrf_spim_rx_terminate_on_bus_error_check(NRF_SPIM_Type const * p_reg)
+{
+    return ((p_reg->DMA.RX.TERMINATEONBUSERROR & SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Msk)
+            >> SPIM_DMA_RX_TERMINATEONBUSERROR_ENABLE_Pos) ==
+            SPIM_DMA_RX_ENABLE_ENABLE_Enabled;
+}
+
+NRF_STATIC_INLINE void nrf_spim_tx_terminate_on_bus_error_enable(NRF_SPIM_Type * p_reg)
+{
+    p_reg->DMA.TX.TERMINATEONBUSERROR |= SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_spim_tx_terminate_on_bus_error_disable(NRF_SPIM_Type * p_reg)
+{
+    p_reg->DMA.TX.TERMINATEONBUSERROR &= ~(SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Msk);
+}
+
+NRF_STATIC_INLINE bool nrf_spim_tx_terminate_on_bus_error_check(NRF_SPIM_Type const * p_reg)
+{
+    return ((p_reg->DMA.TX.TERMINATEONBUSERROR & SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Msk)
+            >> SPIM_DMA_TX_TERMINATEONBUSERROR_ENABLE_Pos) ==
+            SPIM_DMA_TX_ENABLE_ENABLE_Enabled;
+}
+#endif // NRF_SPIM_HAS_DMA_REG
 
 #endif // NRF_DECLARE_ONLY
 
