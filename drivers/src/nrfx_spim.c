@@ -89,7 +89,7 @@ static const uint8_t easydma_support_bits[] __UNUSED =
     NRFX_FEATURE_ARRAY_INITIALIZE(SPIM, EASYDMA_MAXCNT_SIZE);
 
 #define SPIM_SUPPORTED_FREQ_VALIDATE(drv_inst_idx, freq)          \
-            (((freq != NRF_SPIM_FREQ_32M) && (freq != NRF_SPIM_FREQ_16M)) || \
+            (((freq != NRFX_MHZ_TO_HZ(32)) && (freq != NRFX_MHZ_TO_HZ(16))) || \
              ((NRFX_BIT(drv_inst_idx)) & datarate32_support_mask))
 
 #define SPIM_DCX_PRESENT_VALIDATE(drv_inst_idx) (NRFX_BIT(drv_inst_idx) & dcx_support_mask)
@@ -225,9 +225,8 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
 
     nrf_gpio_pin_drive_t pin_drive;
     // Configure pin drive - high drive for 32 MHz clock frequency.
-#if NRF_SPIM_HAS_32_MHZ_FREQ
-    pin_drive = (p_config->frequency == NRF_SPIM_FREQ_32M) ?
-                    NRF_GPIO_PIN_H0H1 : NRF_GPIO_PIN_S0S1;
+#if (NRF_SPIM_HAS_FREQUENCY && NRF_SPIM_HAS_32_MHZ_FREQ) || NRF_SPIM_HAS_PRESCALER
+    pin_drive = (p_config->frequency == NRFX_MHZ_TO_HZ(32)) ? NRF_GPIO_PIN_H0H1 : NRF_GPIO_PIN_S0S1;
 #else
     pin_drive = NRF_GPIO_PIN_S0S1;
 #endif
@@ -254,13 +253,104 @@ static void configure_pins(nrfx_spim_t const *        p_instance,
 #endif
 }
 
+#if NRF_SPIM_HAS_FREQUENCY
+static bool spim_frequency_valid_check(nrfx_spim_t const * p_instance, uint32_t frequency)
+{
+    (void)p_instance;
+    switch (frequency)
+    {
+        case NRFX_KHZ_TO_HZ(125):
+            /* FALLTHROUGH */
+        case NRFX_KHZ_TO_HZ(250):
+            /* FALLTHROUGH */
+        case NRFX_KHZ_TO_HZ(500):
+            /* FALLTHROUGH */
+        case NRFX_MHZ_TO_HZ(1):
+            /* FALLTHROUGH */
+        case NRFX_MHZ_TO_HZ(2):
+            /* FALLTHROUGH */
+        case NRFX_MHZ_TO_HZ(4):
+            /* FALLTHROUGH */
+        case NRFX_MHZ_TO_HZ(8):
+            return true;
+#if NRF_SPIM_HAS_16_MHZ_FREQ
+        case NRFX_MHZ_TO_HZ(16):
+            return true;
+#endif
+#if NRF_SPIM_HAS_32_MHZ_FREQ
+        case NRFX_MHZ_TO_HZ(32):
+            return true;
+#endif
+        default:
+            return false;
+    }
+}
+
+static nrf_spim_frequency_t spim_frequency_bit_decode(uint32_t frequency)
+{
+    switch (frequency)
+    {
+        case NRFX_KHZ_TO_HZ(125):
+            return NRF_SPIM_FREQ_125K;
+        case NRFX_KHZ_TO_HZ(250):
+            return NRF_SPIM_FREQ_250K;
+        case NRFX_KHZ_TO_HZ(500):
+            return NRF_SPIM_FREQ_500K;
+        case NRFX_MHZ_TO_HZ(1):
+            return NRF_SPIM_FREQ_1M;
+        case NRFX_MHZ_TO_HZ(2):
+            return NRF_SPIM_FREQ_2M;
+        case NRFX_MHZ_TO_HZ(4):
+            return NRF_SPIM_FREQ_4M;
+        case NRFX_MHZ_TO_HZ(8):
+            return NRF_SPIM_FREQ_8M;
+#if NRF_SPIM_HAS_16_MHZ_FREQ
+        case NRFX_MHZ_TO_HZ(16):
+            return NRF_SPIM_FREQ_16M;
+#endif
+#if NRF_SPIM_HAS_32_MHZ_FREQ
+        case NRFX_MHZ_TO_HZ(32):
+            return NRF_SPIM_FREQ_32M;
+#endif
+        default:
+            NRFX_ASSERT(false);
+            return NRF_SPIM_FREQ_4M;
+    }
+}
+#elif NRF_SPIM_HAS_PRESCALER
+static bool spim_frequency_valid_check(nrfx_spim_t const * p_instance, uint32_t frequency)
+{
+    uint32_t base_frequency = NRF_SPIM_BASE_FREQUENCY_GET(p_instance->p_reg);
+    uint32_t prescaler = NRF_SPIM_PRESCALER_CALCULATE(p_instance->p_reg, frequency);
+
+    return (base_frequency % frequency == 0) &&
+            NRFX_IS_EVEN(prescaler) &&
+            (prescaler <= NRF_SPIM_PRESCALER_MAX) &&
+            (prescaler >= NRF_SPIM_PRESCALER_MIN);
+}
+
+static uint32_t spim_prescaler_calculate(nrfx_spim_t const * p_instance, uint32_t frequency)
+{
+    return NRF_SPIM_PRESCALER_CALCULATE(p_instance->p_reg, frequency);
+}
+#else
+    #error "Unable to determine frequency division support type."
+#endif
 
 static nrfx_err_t spim_configuration_verify(nrfx_spim_t const *        p_instance,
                                             nrfx_spim_config_t const * p_config)
 {
-#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
     nrfx_err_t err_code;
+    if (!spim_frequency_valid_check(p_instance, p_config->frequency))
+    {
+        err_code = NRFX_ERROR_INVALID_PARAM;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
+    }
 
+#if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
     // Check if SPIM instance supports the extended features.
     if (!SPIM_SUPPORTED_FREQ_VALIDATE(p_instance->drv_inst_idx, p_config->frequency) ||
          (p_config->use_hw_ss && (p_config->ss_pin != NRF_SPIM_PIN_NOT_CONNECTED) &&
@@ -280,7 +370,7 @@ static nrfx_err_t spim_configuration_verify(nrfx_spim_t const *        p_instanc
     // and pin selection are to be skipped (pin numbers may be not specified
     // in such case).
     if (!(p_config->skip_gpio_cfg && p_config->skip_psel_cfg) &&
-        (p_instance->p_reg == NRF_SPIM4) && (p_config->frequency == NRF_SPIM_FREQ_32M))
+        (p_instance->p_reg == NRF_SPIM4) && (p_config->frequency == NRFX_MHZ_TO_HZ(32)))
     {
         enum {
             SPIM_SCK_DEDICATED  = NRF_GPIO_PIN_MAP(0, 8),
@@ -318,6 +408,12 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
+#if NRF_SPIM_HAS_FREQUENCY
+    nrf_spim_frequency_t frequency = spim_frequency_bit_decode(p_config->frequency);
+#elif NRF_SPIM_HAS_PRESCALER
+    uint32_t prescaler = spim_prescaler_calculate(p_instance, p_config->frequency);
+#endif
+
     p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
     configure_pins(p_instance, p_config);
 
@@ -344,7 +440,11 @@ static void spim_configure(nrfx_spim_t const *        p_instance,
             .miso_pin = p_config->miso_pin
         },
         .orc       = p_config->orc,
-        .frequency = p_config->frequency,
+#if NRF_SPIM_HAS_FREQUENCY
+        .frequency = frequency,
+#elif NRF_SPIM_HAS_PRESCALER
+        .prescaler = prescaler,
+#endif
         .mode      = p_config->mode,
         .bit_order = p_config->bit_order,
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)

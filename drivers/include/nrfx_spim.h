@@ -78,7 +78,7 @@ typedef struct
     uint8_t              orc;            ///< Overrun character.
                                          /**< This character is used when all bytes from the TX buffer are sent,
                                           *   but the transfer continues due to RX. */
-    nrf_spim_frequency_t frequency;      ///< SPIM frequency.
+    uint32_t             frequency;      ///< SPIM frequency in Hz.
     nrf_spim_mode_t      mode;           ///< SPIM mode.
     nrf_spim_bit_order_t bit_order;      ///< SPIM bit order.
     nrf_gpio_pin_pull_t  miso_pull;      ///< MISO pull up configuration.
@@ -125,7 +125,7 @@ typedef struct
     .ss_active_high = false,                                                                     \
     .irq_priority   = NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY,                                     \
     .orc            = 0xFF,                                                                      \
-    .frequency      = NRF_SPIM_FREQ_4M,                                                          \
+    .frequency      = NRFX_MHZ_TO_HZ(4),                                                         \
     .mode           = NRF_SPIM_MODE_0,                                                           \
     .bit_order      = NRF_SPIM_BIT_ORDER_MSB_FIRST,                                              \
     .miso_pull      = NRF_GPIO_PIN_NOPULL,                                                       \
@@ -134,14 +134,29 @@ typedef struct
     NRFX_COND_CODE_1(NRFX_SPIM_EXTENDED_ENABLED, (.dcx_pin = NRF_SPIM_PIN_NOT_CONNECTED,), ())   \
 }
 
+/**
+ * @brief Macro for checking whether specified frequency can be achieved for a given SPIM instance.
+ *
+ * @note This macro uses a compile-time assertion.
+ *
+ * @param[in] id        Index of the specified SPIM instance.
+ * @param[in] frequency Desired frequency value in Hz.
+ */
+#define NRFX_SPIM_FREQUENCY_STATIC_CHECK(id, frequency) \
+         NRF_SPIM_FREQUENCY_STATIC_CHECK(NRF_SPIM_INST_GET(id), frequency)
+
 /** @brief Flag indicating that TX buffer address will be incremented after transfer. */
 #define NRFX_SPIM_FLAG_TX_POSTINC          (1UL << 0)
+
 /** @brief Flag indicating that RX buffer address will be incremented after transfer. */
 #define NRFX_SPIM_FLAG_RX_POSTINC          (1UL << 1)
+
 /** @brief Flag indicating that the interrupt after each transfer will be suppressed, and the event handler will not be called. */
 #define NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER (1UL << 2)
+
 /** @brief Flag indicating that the transfer will be set up, but not started. */
 #define NRFX_SPIM_FLAG_HOLD_XFER           (1UL << 3)
+
 /** @brief Flag indicating that the transfer will be executed multiple times. */
 #define NRFX_SPIM_FLAG_REPEATED_XFER       (1UL << 4)
 
@@ -218,7 +233,7 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *                                  is enabled.
  * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
- * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.
+ * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified driver instance or pins.
  * @retval NRFX_ERROR_FORBIDDEN     Software-controlled Slave Select and hardware-controlled Slave Select
                                     cannot be active at the same time.
  */
@@ -240,7 +255,7 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
  * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
  * @retval NRFX_ERROR_NOT_SUPPORTED Requested configuration is not supported
  *                                  by the SPIM instance.
- * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified pins.
+ * @retval NRFX_ERROR_INVALID_PARAM Requested frequency is not available on the specified driver instance or pins.
  * @retval NRFX_ERROR_FORBIDDEN     Software-controlled Slave Select and hardware-controlled Slave Select
                                     cannot be active at the same time.
  */
