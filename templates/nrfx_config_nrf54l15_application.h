@@ -808,6 +808,76 @@
 #define NRFX_TIMER24_ENABLED 0
 #endif
 
+/** @brief NRFX_TWIM_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM_ENABLED
+#define NRFX_TWIM_ENABLED 0
+#endif
+
+/** @brief NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
+ *
+ * Integer value. Minimum: 0 Maximum: 7
+ */
+#ifndef NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
+#endif
+
+/** @brief NRFX_TWIM_CONFIG_LOG_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM_CONFIG_LOG_ENABLED
+#define NRFX_TWIM_CONFIG_LOG_ENABLED 0
+#endif
+
+/** @brief NRFX_TWIM_CONFIG_LOG_LEVEL
+ *
+ * Integer value.
+ * Supported values:
+ * - Off     = 0
+ * - Error   = 1
+ * - Warning = 2
+ * - Info    = 3
+ * - Debug   = 4
+ */
+#ifndef NRFX_TWIM_CONFIG_LOG_LEVEL
+#define NRFX_TWIM_CONFIG_LOG_LEVEL 3
+#endif
+
+/** @brief NRFX_TWIM20_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM20_ENABLED
+#define NRFX_TWIM20_ENABLED 0
+#endif
+
+/** @brief NRFX_TWIM21_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM21_ENABLED
+#define NRFX_TWIM21_ENABLED 0
+#endif
+
+/** @brief NRFX_TWIM22_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM22_ENABLED
+#define NRFX_TWIM22_ENABLED 0
+#endif
+
+/** @brief NRFX_TWIM30_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM30_ENABLED
+#define NRFX_TWIM30_ENABLED 0
+#endif
+
 /** @brief NRFX_TWIS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
