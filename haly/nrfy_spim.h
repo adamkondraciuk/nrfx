@@ -75,6 +75,20 @@ NRFY_STATIC_INLINE void __nrfy_internal_spim_event_enabled_clear(NRF_SPIM_Type *
 #define NRFY_SPIM_HAS_ARRAY_LIST 0
 #endif
 
+#if NRF_SPIM_HAS_FREQUENCY || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_SPIM_HAS_FREQUENCY} */
+#define NRFY_SPIM_HAS_FREQUENCY 1
+#else
+#define NRFY_SPIM_HAS_FREQUENCY 0
+#endif
+
+#if NRF_SPIM_HAS_PRESCALER || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_SPIM_HAS_PRESCALER} */
+#define NRFY_SPIM_HAS_PRESCALER 1
+#else
+#define NRFY_SPIM_HAS_PRESCALER 0
+#endif
+
 /** @brief Structure describing single SPIM transfer. */
 struct nrfy_spim_xfer_desc_t
 {
@@ -134,7 +148,11 @@ typedef struct
     uint8_t                orc;           ///< Overrun character.
                                           /**< This character is transmitted when the TX buffer gets exhausted,
                                                but the transaction continues due to RX. */
+#if NRFY_SPIM_HAS_FREQUENCY
     nrf_spim_frequency_t   frequency;     ///< SPIM frequency.
+#elif NRFY_SPIM_HAS_PRESCALER
+    uint32_t               prescaler;     ///< SPIM prescaler value.
+#endif
     nrf_spim_mode_t        mode;          ///< SPIM mode.
     nrf_spim_bit_order_t   bit_order;     ///< SPIM bit order.
 #if NRFY_SPIM_HAS_EXTENDED
@@ -168,7 +186,11 @@ NRFY_STATIC_INLINE void nrfy_spim_periph_configure(NRF_SPIM_Type *            p_
             p_config->pins.sck_pin, p_config->pins.mosi_pin, p_config->pins.miso_pin);
     }
     nrf_spim_orc_set(p_reg, p_config->orc);
+#if NRFY_SPIM_HAS_FREQUENCY
     nrf_spim_frequency_set(p_reg, p_config->frequency);
+#elif NRFY_SPIM_HAS_PRESCALER
+    nrf_spim_prescaler_set(p_reg, p_config->prescaler);
+#endif
     nrf_spim_configure(p_reg, p_config->mode, p_config->bit_order);
 #if NRFY_SPIM_HAS_EXTENDED
     if (p_config->ext_enable)
@@ -654,6 +676,7 @@ NRFY_STATIC_INLINE bool nrfy_spim_stallstat_tx_get(NRF_SPIM_Type const * p_reg)
 }
 #endif // NRFY_SPIM_HAS_STALLSTAT
 
+#if NRFY_SPIM_HAS_FREQUENCY
 /** @refhal{nrf_spim_frequency_set} */
 NRFY_STATIC_INLINE void nrfy_spim_frequency_set(NRF_SPIM_Type *      p_reg,
                                                 nrf_spim_frequency_t frequency)
@@ -661,6 +684,25 @@ NRFY_STATIC_INLINE void nrfy_spim_frequency_set(NRF_SPIM_Type *      p_reg,
     nrf_spim_frequency_set(p_reg, frequency);
     nrf_barrier_w();
 }
+#endif
+
+#if NRFY_SPIM_HAS_PRESCALER
+/** @refhal{nrf_spim_prescaler_set} */
+NRF_STATIC_INLINE void nrfy_spim_prescaler_set(NRF_SPIM_Type * p_reg, uint32_t prescaler)
+{
+    nrf_spim_prescaler_set(p_reg, prescaler);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_spim_prescaler_get} */
+NRF_STATIC_INLINE uint32_t nrfy_spim_prescaler_get(NRF_SPIM_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    uint32_t prescaler = nrf_spim_prescaler_get(p_reg);
+    nrf_barrier_r();
+    return prescaler;
+}
+#endif
 
 /** @refhal{nrf_spim_tx_buffer_set} */
 NRFY_STATIC_INLINE void nrfy_spim_tx_buffer_set(NRF_SPIM_Type * p_reg,
