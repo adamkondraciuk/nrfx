@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the High Frequency Crystal Oscillator 64MHz (HFXO64M).
  */
 
+#if defined(HFXO64M_INTENSET_ERRORTCXO_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the TCXO is present. */
+#define NRF_HFXO64M_HAS_TCXO 1
+#else
+#define NRF_HFXO64M_HAS_TCXO 0
+#endif
+
 /** @brief HFXO64M events. */
 typedef enum
 {
@@ -23,6 +30,11 @@ typedef enum
     NRF_HFXO64M_EVENT_STOPPED        = offsetof(NRF_HFXO64M_Type, EVENTS_STOPPED),       /**< HFXO64M stopped. */
     NRF_HFXO64M_EVENT_ERROR_BIAS     = offsetof(NRF_HFXO64M_Type, EVENTS_ERRORBIAS),     /**< Error in BIAS setup. */
     NRF_HFXO64M_EVENT_ERROR_DETECTOR = offsetof(NRF_HFXO64M_Type, EVENTS_ERRORDETECTOR), /**< Error with DETECTOR. */
+#if NRF_HFXO64M_HAS_TCXO
+    NRF_HFXO64M_EVENT_ERROR_TCXO     = offsetof(NRF_HFXO64M_Type, EVENTS_ERRORTCXO),     /**< Error with TCXO startup. */
+    NRF_HFXO64M_EVENT_STARTREQ       = offsetof(NRF_HFXO64M_Type, EVENTS_STARTREQ),      /**< Clock start has been requested. */
+    NRF_HFXO64M_EVENT_STOPREQ        = offsetof(NRF_HFXO64M_Type, EVENTS_STOPREQ),       /**< Clock start has been requested. */
+#endif
 } nrf_hfxo64m_event_t;
 
 /** @brief HFXO64M interrupts. */
@@ -32,6 +44,11 @@ typedef enum
     NRF_HFXO64M_INT_STOPPED_MASK        = HFXO64M_INTENSET_STOPPED_Msk,       /**< Interrupt on STOPPED event. */
     NRF_HFXO64M_INT_ERROR_BIAS_MASK     = HFXO64M_INTENSET_ERRORBIAS_Msk,     /**< Interrupt on ERRORBIAS event. */
     NRF_HFXO64M_INT_ERROR_DETECTOR_MASK = HFXO64M_INTENSET_ERRORDETECTOR_Msk, /**< Interrupt on ERRORDETECTOR event. */
+#if NRF_HFXO64M_HAS_TCXO
+    NRF_HFXO64M_INT_ERROR_TCXO_MASK     = HFXO64M_INTENSET_ERRORTCXO_Msk,     /**< Interrupt on ERRORTCXO event. */
+    NRF_HFXO64M_INT_STARTREQ_MASK       = HFXO64M_INTENSET_STARTREQ_Msk,      /**< Interrupt on STARTREQ event. */
+    NRF_HFXO64M_INT_STOPREQ_MASK        = HFXO64M_INTENSET_STOPREQ_Msk,       /**< Interrupt on STOPREQ event. */
+#endif
 } nrf_hfxo64m_int_mask_t;
 
 /** @brief HFXO64M status modes. */

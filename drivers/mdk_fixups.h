@@ -7471,6 +7471,190 @@
     #endif
 
     #define NRF_GRTC_Type NRF_GRTC_Type_fixed
+
+    typedef struct {                                     /*!< HFXO64M Structure                                                    */
+        __IM uint32_t RESERVED[64];
+        __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) HFXO64M started                                       */
+        __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) HFXO64M stopped                                       */
+        __IOM uint32_t EVENTS_ERRORBIAS;                 /*!< (@ 0x00000108) Error in BIAS setup                                   */
+        __IOM uint32_t EVENTS_ERRORDETECTOR;             /*!< (@ 0x0000010C) Error with DETECTOR                                   */
+        __IOM uint32_t EVENTS_ERRORTCXO;                 /*!< (@ 0x00000110) Error with TCXO startup                               */
+        __IOM uint32_t EVENTS_STARTREQ;                  /*!< (@ 0x00000114) Clock start has been requested                        */
+        __IOM uint32_t EVENTS_STOPREQ;                   /*!< (@ 0x00000118) Clock stop has been requested                         */
+        __IM uint32_t RESERVED1[121];
+        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
+        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
+        __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
+        __IM uint32_t RESERVED2[60];
+        __IM uint32_t STATUS;                            /*!< (@ 0x00000400) HFXO64M status                                        */
+        __IM uint32_t STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
+        __IM uint32_t STATUSMMI;                         /*!< (@ 0x00000408) MMI internal values for debug use.                    */
+        __IM uint32_t RESERVED3[13];
+        __IOM NRF_HFXO64M_TRIM_Type TRIM;                /*!< (@ 0x00000440) (unspecified)                                         */
+        __IM uint32_t RESERVED4[5];
+        __IOM NRF_HFXO64M_TS_Type TS;                    /*!< (@ 0x00000460) (unspecified)                                         */
+        __IM uint32_t RESERVED5[4];
+        __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
+        __IOM uint32_t PWRUPCTRL;                        /*!< (@ 0x00000484) Power up control                                      */
+        __IOM uint32_t MODE;                             /*!< (@ 0x00000488) HFXO64M mode                                          */
+        __IOM uint32_t XTALSETTLETIME;                   /*!< (@ 0x0000048C) Settle time of the crystal. List of pre-coded times.  */
+        __IOM uint32_t CHIRPTIME;                        /*!< (@ 0x00000490) Chirp period length. List of pre-coded times.         */
+        __IOM uint32_t ENABLEDAMPING;                    /*!< (@ 0x00000494) Enables the MMI to do crystal damping when stopping the
+                                                                            oscillator.*/
+        __IOM uint32_t FORCEBUFF;                        /*!< (@ 0x00000498) Enables all clock buffers when sinOut4_ana buffer is
+                                                                            enabled.*/
+        __IOM uint32_t CFG;                              /*!< (@ 0x0000049C) Direct HFXO64M static configurations.                 */
+        __IM uint32_t RESERVED6[24];
+        __IOM NRF_HFXO64M_OVERRIDE_Type OVERRIDE;        /*!< (@ 0x00000500) (unspecified)                                         */
+        __IM uint32_t RESERVED7[41];
+        __IOM NRF_HFXO64M_DFT_Type DFT;                  /*!< (@ 0x00000600) (unspecified)                                         */
+    } NRF_HFXO64M_Type_fixed;                            /*!< Size = 1540 (0x604)                                                  */
+
+    /* HFXO64M_EVENTS_ERRORTCXO: Error with TCXO startup */
+    #define HFXO64M_EVENTS_ERRORTCXO_ResetValue (0x00000000UL)              /*!< Reset value of EVENTS_ERRORTCXO register.       */
+
+    /* EVENTS_ERRORTCXO @Bit 0 : Error with TCXO startup */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos (0UL)             /*!< Position of EVENTS_ERRORTCXO field.             */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Msk (0x1UL << HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos)
+                                                                            /*!< Bit mask of EVENTS_ERRORTCXO field.             */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Min (0x0UL)           /*!< Min enumerator value of EVENTS_ERRORTCXO field. */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Max (0x1UL)           /*!< Max enumerator value of EVENTS_ERRORTCXO field. */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_NotGenerated (0x0UL)  /*!< Event not generated                             */
+    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Generated (0x1UL)     /*!< Event generated                                 */
+
+    /* HFXO64M_EVENTS_STARTREQ: Clock start has been requested */
+    #define HFXO64M_EVENTS_STARTREQ_ResetValue (0x00000000UL)               /*!< Reset value of EVENTS_STARTREQ register.         */
+
+    /* EVENTS_STARTREQ @Bit 0 : Clock start has been requested */
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos (0UL)               /*!< Position of EVENTS_STARTREQ field.               */
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Msk (0x1UL << HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos)
+                                                                            /*!< Bit mask of EVENTS_STARTREQ field.*/
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Min (0x0UL)             /*!< Min enumerator value of EVENTS_STARTREQ field.    */
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Max (0x1UL)             /*!< Max enumerator value of EVENTS_STARTREQ field.    */
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_NotGenerated (0x0UL)    /*!< Event not generated                               */
+    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Generated (0x1UL)       /*!< Event generated                                   */
+
+    /* HFXO64M_EVENTS_STOPREQ: Clock stop has been requested */
+    #define HFXO64M_EVENTS_STOPREQ_ResetValue (0x00000000UL)                /*!< Reset value of EVENTS_STOPREQ register.         */
+
+    /* EVENTS_STOPREQ @Bit 0 : Clock stop has been requested */
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos (0UL)                 /*!< Position of EVENTS_STOPREQ field.               */
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Msk (0x1UL << HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos)
+                                                                            /*!< Bit mask of EVENTS_STOPREQ field.*/
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Min (0x0UL)               /*!< Min enumerator value of EVENTS_STOPREQ field.    */
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Max (0x1UL)               /*!< Max enumerator value of EVENTS_STOPREQ field.    */
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_NotGenerated (0x0UL)      /*!< Event not generated                               */
+    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Generated (0x1UL)         /*!< Event generated                                   */
+
+    /* ERRORTCXO @Bit 4 : Enable or disable interrupt for event ERRORTCXO */
+    #define HFXO64M_INTEN_ERRORTCXO_Pos (4UL)                                  /*!< Position of ERRORTCXO field.             */
+    #define HFXO64M_INTEN_ERRORTCXO_Msk (0x1UL << HFXO64M_INTEN_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
+    #define HFXO64M_INTEN_ERRORTCXO_Min (0x0UL)                                /*!< Min enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTEN_ERRORTCXO_Max (0x1UL)                                /*!< Max enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTEN_ERRORTCXO_Disabled (0x0UL)                           /*!< Disable                                  */
+    #define HFXO64M_INTEN_ERRORTCXO_Enabled (0x1UL)                            /*!< Enable                                   */
+
+    /* STARTREQ @Bit 5 : Enable or disable interrupt for event STARTREQ */
+    #define HFXO64M_INTEN_STARTREQ_Pos (5UL)                                 /*!< Position of STARTREQ field.             */
+    #define HFXO64M_INTEN_STARTREQ_Msk (0x1UL << HFXO64M_INTEN_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
+    #define HFXO64M_INTEN_STARTREQ_Min (0x0UL)                               /*!< Min enumerator value of STARTREQ field. */
+    #define HFXO64M_INTEN_STARTREQ_Max (0x1UL)                               /*!< Max enumerator value of STARTREQ field. */
+    #define HFXO64M_INTEN_STARTREQ_Disabled (0x0UL)                          /*!< Disable                                 */
+    #define HFXO64M_INTEN_STARTREQ_Enabled (0x1UL)                           /*!< Enable                                  */
+
+    /* STOPREQ @Bit 6 : Enable or disable interrupt for event STOPREQ */
+    #define HFXO64M_INTEN_STOPREQ_Pos (6UL)                                /*!< Position of STOPREQ field.             */
+    #define HFXO64M_INTEN_STOPREQ_Msk (0x1UL << HFXO64M_INTEN_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
+    #define HFXO64M_INTEN_STOPREQ_Min (0x0UL)                              /*!< Min enumerator value of STOPREQ field. */
+    #define HFXO64M_INTEN_STOPREQ_Max (0x1UL)                              /*!< Max enumerator value of STOPREQ field. */
+    #define HFXO64M_INTEN_STOPREQ_Disabled (0x0UL)                         /*!< Disable                                */
+    #define HFXO64M_INTEN_STOPREQ_Enabled (0x1UL)                          /*!< Enable                                 */
+
+    /* ERRORTCXO @Bit 4 : Write '1' to enable interrupt for event ERRORTCXO */
+    #define HFXO64M_INTENSET_ERRORTCXO_Pos (4UL)                                     /*!< Position of ERRORTCXO field.             */
+    #define HFXO64M_INTENSET_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENSET_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
+    #define HFXO64M_INTENSET_ERRORTCXO_Min (0x0UL)                                   /*!< Min enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTENSET_ERRORTCXO_Max (0x1UL)                                   /*!< Max enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTENSET_ERRORTCXO_Set (0x1UL)                                   /*!< Enable                                   */
+    #define HFXO64M_INTENSET_ERRORTCXO_Disabled (0x0UL)                              /*!< Read: Disabled                           */
+    #define HFXO64M_INTENSET_ERRORTCXO_Enabled (0x1UL)                               /*!< Read: Enabled                            */
+
+    /* STARTREQ @Bit 5 : Write '1' to enable interrupt for event STARTREQ */
+    #define HFXO64M_INTENSET_STARTREQ_Pos (5UL)                                     /*!< Position of STARTREQ field.             */
+    #define HFXO64M_INTENSET_STARTREQ_Msk (0x1UL << HFXO64M_INTENSET_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.              */
+    #define HFXO64M_INTENSET_STARTREQ_Min (0x0UL)                                   /*!< Min enumerator value of STARTREQ field. */
+    #define HFXO64M_INTENSET_STARTREQ_Max (0x1UL)                                   /*!< Max enumerator value of STARTREQ field. */
+    #define HFXO64M_INTENSET_STARTREQ_Set (0x1UL)                                   /*!< Enable                                  */
+    #define HFXO64M_INTENSET_STARTREQ_Disabled (0x0UL)                              /*!< Read: Disabled                          */
+    #define HFXO64M_INTENSET_STARTREQ_Enabled (0x1UL)                               /*!< Read: Enabled                           */
+
+    /* STOPREQ @Bit 6 : Write '1' to enable interrupt for event STOPREQ */
+    #define HFXO64M_INTENSET_STOPREQ_Pos (6UL)                                     /*!< Position of STOPREQ field.             */
+    #define HFXO64M_INTENSET_STOPREQ_Msk (0x1UL << HFXO64M_INTENSET_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.               */
+    #define HFXO64M_INTENSET_STOPREQ_Min (0x0UL)                                   /*!< Min enumerator value of STOPREQ field. */
+    #define HFXO64M_INTENSET_STOPREQ_Max (0x1UL)                                   /*!< Max enumerator value of STOPREQ field. */
+    #define HFXO64M_INTENSET_STOPREQ_Set (0x1UL)                                   /*!< Enable                                 */
+    #define HFXO64M_INTENSET_STOPREQ_Disabled (0x0UL)                              /*!< Read: Disabled                         */
+    #define HFXO64M_INTENSET_STOPREQ_Enabled (0x1UL)                               /*!< Read: Enabled                          */
+
+    /* ERRORTCXO @Bit 4 : Write '1' to disable interrupt for event ERRORTCXO */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Pos (4UL)                                     /*!< Position of ERRORTCXO field.             */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENCLR_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Min (0x0UL)                                   /*!< Min enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Max (0x1UL)                                   /*!< Max enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Clear (0x1UL)                                 /*!< Disable                                  */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Disabled (0x0UL)                              /*!< Read: Disabled                           */
+    #define HFXO64M_INTENCLR_ERRORTCXO_Enabled (0x1UL)                               /*!< Read: Enabled                            */
+
+    /* STARTREQ @Bit 5 : Write '1' to disable interrupt for event STARTREQ */
+    #define HFXO64M_INTENCLR_STARTREQ_Pos (5UL)                                    /*!< Position of STARTREQ field.             */
+    #define HFXO64M_INTENCLR_STARTREQ_Msk (0x1UL << HFXO64M_INTENCLR_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
+    #define HFXO64M_INTENCLR_STARTREQ_Min (0x0UL)                                  /*!< Min enumerator value of STARTREQ field. */
+    #define HFXO64M_INTENCLR_STARTREQ_Max (0x1UL)                                  /*!< Max enumerator value of STARTREQ field. */
+    #define HFXO64M_INTENCLR_STARTREQ_Clear (0x1UL)                                /*!< Disable                                 */
+    #define HFXO64M_INTENCLR_STARTREQ_Disabled (0x0UL)                             /*!< Read: Disabled                          */
+    #define HFXO64M_INTENCLR_STARTREQ_Enabled (0x1UL)                              /*!< Read: Enabled                           */
+
+    /* STOPREQ @Bit 6 : Write '1' to disable interrupt for event STOPREQ */
+    #define HFXO64M_INTENCLR_STOPREQ_Pos (6UL)                                   /*!< Position of STOPREQ field.             */
+    #define HFXO64M_INTENCLR_STOPREQ_Msk (0x1UL << HFXO64M_INTENCLR_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
+    #define HFXO64M_INTENCLR_STOPREQ_Min (0x0UL)                                 /*!< Min enumerator value of STOPREQ field. */
+    #define HFXO64M_INTENCLR_STOPREQ_Max (0x1UL)                                 /*!< Max enumerator value of STOPREQ field. */
+    #define HFXO64M_INTENCLR_STOPREQ_Clear (0x1UL)                               /*!< Disable                                */
+    #define HFXO64M_INTENCLR_STOPREQ_Disabled (0x0UL)                            /*!< Read: Disabled                         */
+    #define HFXO64M_INTENCLR_STOPREQ_Enabled (0x1UL)                             /*!< Read: Enabled                          */
+
+    /* ERRORTCXO @Bit 4 : Read pending status of interrupt for event ERRORTCXO */
+    #define HFXO64M_INTPEND_ERRORTCXO_Pos (4UL)                                    /*!< Position of ERRORTCXO field.             */
+    #define HFXO64M_INTPEND_ERRORTCXO_Msk (0x1UL << HFXO64M_INTPEND_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
+    #define HFXO64M_INTPEND_ERRORTCXO_Min (0x0UL)                                  /*!< Min enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTPEND_ERRORTCXO_Max (0x1UL)                                  /*!< Max enumerator value of ERRORTCXO field. */
+    #define HFXO64M_INTPEND_ERRORTCXO_NotPending (0x0UL)                           /*!< Read: Not pending                        */
+    #define HFXO64M_INTPEND_ERRORTCXO_Pending (0x1UL)                              /*!< Read: Pending                            */
+
+    /* STARTREQ @Bit 5 : Read pending status of interrupt for event STARTREQ */
+    #define HFXO64M_INTPEND_STARTREQ_Pos (5UL)                                   /*!< Position of STARTREQ field.             */
+    #define HFXO64M_INTPEND_STARTREQ_Msk (0x1UL << HFXO64M_INTPEND_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
+    #define HFXO64M_INTPEND_STARTREQ_Min (0x0UL)                                 /*!< Min enumerator value of STARTREQ field. */
+    #define HFXO64M_INTPEND_STARTREQ_Max (0x1UL)                                 /*!< Max enumerator value of STARTREQ field. */
+    #define HFXO64M_INTPEND_STARTREQ_NotPending (0x0UL)                          /*!< Read: Not pending                       */
+    #define HFXO64M_INTPEND_STARTREQ_Pending (0x1UL)                             /*!< Read: Pending                           */
+
+    /* STOPREQ @Bit 6 : Read pending status of interrupt for event STOPREQ */
+    #define HFXO64M_INTPEND_STOPREQ_Pos (6UL)                                  /*!< Position of STOPREQ field.             */
+    #define HFXO64M_INTPEND_STOPREQ_Msk (0x1UL << HFXO64M_INTPEND_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
+    #define HFXO64M_INTPEND_STOPREQ_Min (0x0UL)                                /*!< Min enumerator value of STOPREQ field. */
+    #define HFXO64M_INTPEND_STOPREQ_Max (0x1UL)                                /*!< Max enumerator value of STOPREQ field. */
+    #define HFXO64M_INTPEND_STOPREQ_NotPending (0x0UL)                         /*!< Read: Not pending                      */
+    #define HFXO64M_INTPEND_STOPREQ_Pending (0x1UL)                            /*!< Read: Pending                          */
+
+    #ifdef NRF_SYSCTRL_HFXO64M_S
+        #undef NRF_SYSCTRL_HFXO64M_S
+        #define NRF_SYSCTRL_HFXO64M_S ((NRF_HFXO64M_Type_fixed*) NRF_SYSCTRL_HFXO64M_S_BASE)
+    #endif
+
+    #define NRF_HFXO64M_Type NRF_HFXO64M_Type_fixed
 #endif
 
 /**************************************************************************************************/
