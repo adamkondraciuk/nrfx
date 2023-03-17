@@ -21,11 +21,16 @@
 #define NRFX_DPPI_GROUPS_USED 0x00000000uL
 #endif
 
+#if defined(DPPI_CH_NUM)
 #define DPPI_AVAILABLE_CHANNELS_MASK \
-    ((uint32_t)(((1ULL << DPPI_CH_NUM) - 1) & (~NRFX_DPPI_CHANNELS_USED)))
+    ((uint32_t)(NRFX_BIT_MASK(DPPI_CH_NUM) & (~NRFX_DPPI_CHANNELS_USED)))
+#else
+#define DPPI_AVAILABLE_CHANNELS_MASK \
+    ((uint32_t)(NRFX_BIT_MASK(NRF_DPPI_CH_NUM_MAX) & (~NRFX_DPPI_CHANNELS_USED)))
+#endif
 
-#define DPPI_AVAILABLE_GROUPS_MASK   \
-    (((1UL << DPPI_GROUP_NUM) - 1)   & (~NRFX_DPPI_GROUPS_USED))
+#define DPPI_AVAILABLE_GROUPS_MASK \
+    (NRFX_BIT_MASK(DPPI_GROUP_NUM) & (~NRFX_DPPI_GROUPS_USED))
 
 /** @brief Set bit at given position. */
 #define DPPI_BIT_SET(pos) (1uL << (pos))

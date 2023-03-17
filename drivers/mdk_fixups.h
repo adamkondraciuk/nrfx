@@ -509,7 +509,6 @@
         #if !defined(DPPI_PRESENT)
             #define DPPI_PRESENT
         #endif
-        #define DPPI_CH_NUM 8
         #define DPPI_GROUP_NUM 2
         #if defined(NRF_RADIOCORE)
             #define DPPI020_CH_NUM 16
@@ -1202,6 +1201,46 @@
         #define UARTE137_EASYDMA_MAXCNT_SIZE UARTE137_EASYDMA_MAXCNT_SIZE_MAX
     #endif
 
+    #if defined(DPPIC020_CH_NUM_MAX) && !defined(DPPIC020_CH_NUM)
+        #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC030_CH_NUM_MAX) && !defined(DPPIC030_CH_NUM)
+        #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC120_CH_NUM_MAX) && !defined(DPPIC120_CH_NUM)
+        #define DPPIC120_CH_NUM (DPPIC120_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC130_CH_NUM_MAX) && !defined(DPPIC130_CH_NUM)
+        #define DPPIC130_CH_NUM (DPPIC130_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC131_CH_NUM_MAX) && !defined(DPPIC131_CH_NUM)
+        #define DPPIC131_CH_NUM (DPPIC131_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC132_CH_NUM_MAX) && !defined(DPPIC132_CH_NUM)
+        #define DPPIC132_CH_NUM (DPPIC132_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC133_CH_NUM_MAX) && !defined(DPPIC133_CH_NUM)
+        #define DPPIC133_CH_NUM (DPPIC133_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC134_CH_NUM_MAX) && !defined(DPPIC134_CH_NUM)
+        #define DPPIC134_CH_NUM (DPPIC134_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC135_CH_NUM_MAX) && !defined(DPPIC135_CH_NUM)
+        #define DPPIC135_CH_NUM (DPPIC135_CH_NUM_MAX + 1UL)
+    #endif
+
+    #if defined(DPPIC136_CH_NUM_MAX) && !defined(DPPIC136_CH_NUM)
+        #define DPPIC136_CH_NUM (DPPIC136_CH_NUM_MAX + 1UL)
+    #endif
+
     /* <periph>_<feature>_MaxCount symbols meaning is inconsistent - sometimes they express
      * size of an array they describe, sometimes they express last applicable index. */
 
@@ -1577,6 +1616,8 @@
     #if defined(NRF_P15)
         #undef NRF_P15
     #endif
+
+    #define DPPI_CH_NUM 8
 
     /* TODO: MLT-3907 */
     /* ===================================================== Struct AAR_OUT ====================================================== */
