@@ -16,6 +16,14 @@
 
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
+    #if !defined(NRF_IPCMAP_CHANNEL_COUNT)
+        #if defined(NRF9230_XXAA)
+            #define NRF_IPCMAP_CHANNEL_COUNT (31)
+        #else
+            #define NRF_IPCMAP_CHANNEL_COUNT (16)
+        #endif
+    #endif
+
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
     /* TODO: MDK-2070 */

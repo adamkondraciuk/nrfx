@@ -62,7 +62,7 @@ NRF_STATIC_INLINE void nrf_ipcmap_source_config_set(NRF_IPCMAP_Type * p_reg,
 {
     NRFX_ASSERT(domain > 0);
     NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
-    NRFX_ASSERT(index < 16);
+    NRFX_ASSERT(index < NRF_IPCMAP_CHANNEL_COUNT);
 
     p_reg->CHANNEL[index].SOURCE =
         ((source << IPCMAP_CHANNEL_SOURCE_SOURCE_Pos) & IPCMAP_CHANNEL_SOURCE_SOURCE_Msk)
@@ -76,7 +76,7 @@ NRF_STATIC_INLINE void nrf_ipcmap_sink_config_set(NRF_IPCMAP_Type * p_reg,
 {
     NRFX_ASSERT(domain > 0);
     NRFX_ASSERT(domain < NRF_DOMAIN_COUNT);
-    NRFX_ASSERT(index < 16);
+    NRFX_ASSERT(index < NRF_IPCMAP_CHANNEL_COUNT);
 
     p_reg->CHANNEL[index].SINK =
         ((sink   << IPCMAP_CHANNEL_SINK_SINK_Pos)   & IPCMAP_CHANNEL_SINK_SINK_Msk)
@@ -87,7 +87,7 @@ NRF_STATIC_INLINE void nrf_ipcmap_source_enable_set(NRF_IPCMAP_Type * p_reg,
                                                     uint16_t          index,
                                                     bool              enable)
 {
-    NRFX_ASSERT(index < 16);
+    NRFX_ASSERT(index < NRF_IPCMAP_CHANNEL_COUNT);
     p_reg->CHANNEL[index].SOURCE = (p_reg->CHANNEL[index].SOURCE & 
             (~IPCMAP_CHANNEL_SOURCE_ENABLE_Msk)) | (enable << IPCMAP_CHANNEL_SOURCE_ENABLE_Pos);
 }
