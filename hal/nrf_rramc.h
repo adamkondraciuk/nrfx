@@ -206,8 +206,8 @@ typedef enum
 /** @brief Configuration for glitch detectors. */
 typedef struct
 {
-    bool enable;                    ///< True if glitch detector is to be enabled, false otherwise.
-    nrf_rramc_gldetect_mode_t mode; ///< Glitch detector mode.
+    bool                      enable; ///< True if glitch detector is to be enabled, false otherwise.
+    nrf_rramc_gldetect_mode_t mode;   ///< Glitch detector mode.
 } nrf_rramc_gldetect_config_t;
 
 /** @brief Trim configuration for glitch detectors. */
@@ -234,8 +234,7 @@ typedef struct
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task to be activated.
  */
-NRF_STATIC_INLINE void nrf_rramc_task_trigger(NRF_RRAMC_Type * p_reg,
-                                              nrf_rramc_task_t task);
+NRF_STATIC_INLINE void nrf_rramc_task_trigger(NRF_RRAMC_Type * p_reg, nrf_rramc_task_t task);
 
 /**
  * @brief Function for getting the address of the specified RRAMC task register.
@@ -265,8 +264,7 @@ NRF_STATIC_INLINE void nrf_rramc_event_clear(NRF_RRAMC_Type * p_reg, nrf_rramc_e
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_rramc_event_check(NRF_RRAMC_Type const * p_reg,
-                                             nrf_rramc_event_t      event);
+NRF_STATIC_INLINE bool nrf_rramc_event_check(NRF_RRAMC_Type const * p_reg, nrf_rramc_event_t event);
 
 /**
  * @brief Function for getting the address of the specified RRAMC event register.
@@ -306,7 +304,7 @@ NRF_STATIC_INLINE void nrf_rramc_int_disable(NRF_RRAMC_Type * p_reg, uint32_t ma
 NRF_STATIC_INLINE uint32_t nrf_rramc_int_enable_check(NRF_RRAMC_Type const * p_reg, uint32_t mask);
 
 /**
- * @brief Function for retrieving the state of pending interrupts.
+ * @brief Function for getting the state of pending interrupts.
  *
  * States of pending interrupt are saved as a bitmask.
  * One set at particular position means that interrupt for event is pending.
@@ -611,14 +609,14 @@ NRF_STATIC_INLINE void nrf_rramc_erase_all_set(NRF_RRAMC_Type * p_reg);
  * @retval true  Erase of SICR, UICR and FICR started.
  * @retval false No operation.
  */
-NRF_STATIC_INLINE bool nrf_rramc_erase_mass_check(NRF_RRAMC_Type const * p_reg);
+NRF_STATIC_INLINE bool nrf_rramc_mass_erase_check(NRF_RRAMC_Type const * p_reg);
 
 /**
  * @brief Function for erasing whole RRAM, including SICR, UICR and FICR.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
-NRF_STATIC_INLINE void nrf_rramc_erase_mass_set(NRF_RRAMC_Type * p_reg);
+NRF_STATIC_INLINE void nrf_rramc_mass_erase_start(NRF_RRAMC_Type * p_reg);
 
 /**
  * @brief Function for getting the start address of the specified RRAMC region.
@@ -752,8 +750,7 @@ void nrf_rramc_pcgslave_force_override_set(NRF_RRAMC_Type *                  p_r
 
 #ifndef NRF_DECLARE_ONLY
 
-NRF_STATIC_INLINE void nrf_rramc_task_trigger(NRF_RRAMC_Type * p_reg,
-                                              nrf_rramc_task_t task)
+NRF_STATIC_INLINE void nrf_rramc_task_trigger(NRF_RRAMC_Type * p_reg, nrf_rramc_task_t task)
 {
     *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
 }
@@ -770,8 +767,7 @@ NRF_STATIC_INLINE void nrf_rramc_event_clear(NRF_RRAMC_Type * p_reg, nrf_rramc_e
     nrf_event_readback((uint8_t *)p_reg + (uint32_t)event);
 }
 
-NRF_STATIC_INLINE bool nrf_rramc_event_check(NRF_RRAMC_Type const * p_reg,
-                                             nrf_rramc_event_t      event)
+NRF_STATIC_INLINE bool nrf_rramc_event_check(NRF_RRAMC_Type const * p_reg, nrf_rramc_event_t event)
 {
     return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
 }
@@ -833,12 +829,16 @@ NRF_STATIC_INLINE void nrf_rramc_publish_clear(NRF_RRAMC_Type * p_reg, nrf_rramc
 
 NRF_STATIC_INLINE bool nrf_rramc_ready_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)p_reg->READY;
+    return ((p_reg->READY & RRAMC_READY_READY_Msk) >>
+            RRAMC_READY_READY_Pos) ==
+            RRAMC_READY_READY_Ready;
 }
 
 NRF_STATIC_INLINE bool nrf_rramc_write_ready_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)p_reg->READYNEXT;
+    return ((p_reg->READYNEXT & RRAMC_READYNEXT_READYNEXT_Msk) >>
+            RRAMC_READYNEXT_READYNEXT_Pos) ==
+            RRAMC_READYNEXT_READYNEXT_Ready;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_rramc_error_access_addr_get(NRF_RRAMC_Type const * p_reg)
@@ -853,12 +853,16 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_error_ecc_addr_get(NRF_RRAMC_Type const * p
 
 NRF_STATIC_INLINE bool nrf_rramc_trc_busy_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)(p_reg->TRCSTATUS & RRAMC_TRCSTATUS_TRCBUSY_Msk);
+    return ((p_reg->TRCSTATUS & RRAMC_TRCSTATUS_TRCBUSY_Msk) >>
+            RRAMC_TRCSTATUS_TRCBUSY_Pos) ==
+            RRAMC_TRCSTATUS_TRCBUSY_Busy;
 }
 
 NRF_STATIC_INLINE bool nrf_rramc_trc_init_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)(p_reg->TRCSTATUS & RRAMC_TRCSTATUS_TRCINIT_Msk);
+    return ((p_reg->TRCSTATUS & RRAMC_TRCSTATUS_TRCINIT_Msk) >>
+            RRAMC_TRCSTATUS_TRCINIT_Pos) ==
+            RRAMC_TRCSTATUS_TRCINIT_Done;
 }
 
 NRF_STATIC_INLINE void nrf_rramc_config_get(NRF_RRAMC_Type const * p_reg,
@@ -899,7 +903,9 @@ NRF_STATIC_INLINE void nrf_rramc_waitstates_get(NRF_RRAMC_Type const *   p_reg,
                                     RRAMC_WAITSTATES_VALUE1_Pos);
     p_config->value[2]  = (uint8_t)((p_reg->WAITSTATES & RRAMC_WAITSTATES_VALUE2_Msk) >> 
                                     RRAMC_WAITSTATES_VALUE2_Pos);
-    p_config->read_done = (bool)(p_reg->WAITSTATES & RRAMC_WAITSTATES_RDONE_Msk);
+    p_config->read_done = ((p_reg->WAITSTATES & RRAMC_WAITSTATES_RDONE_Msk) >>
+                           RRAMC_WAITSTATES_RDONE_Pos) ==
+                           RRAMC_WAITSTATES_RDONE_Enable;
 }
 
 NRF_STATIC_INLINE void nrf_rramc_waitstates_set(NRF_RRAMC_Type *               p_reg,
@@ -943,9 +949,10 @@ NRF_STATIC_INLINE void nrf_rramc_power_config_get(NRF_RRAMC_Type const * p_reg,
     p_config->access_timeout = (uint16_t)((p_reg->POWER.CONFIG &
                                           RRAMC_POWER_CONFIG_ACCESSTIMEOUT_Msk) >>
                                           RRAMC_POWER_CONFIG_ACCESSTIMEOUT_Pos);
-    p_config->abort_on_pof = (bool)((p_reg->POWER.CONFIG &
-                                    RRAMC_POWER_CONFIG_POF_Msk) >>
-                                    RRAMC_POWER_CONFIG_POF_Pos);
+    p_config->abort_on_pof = ((p_reg->POWER.CONFIG &
+                                RRAMC_POWER_CONFIG_POF_Msk) >>
+                                RRAMC_POWER_CONFIG_POF_Pos) ==
+                                RRAMC_POWER_CONFIG_POF_Abort;
 }
 
 NRF_STATIC_INLINE void nrf_rramc_power_config_set(NRF_RRAMC_Type *          p_reg,
@@ -974,12 +981,14 @@ NRF_STATIC_INLINE void nrf_rramc_power_lp_config_get(NRF_RRAMC_Type const * p_re
     p_config->mode = (nrf_rramc_power_lp_mode_t)((p_reg->POWER.LOWPOWERCONFIG & 
                                                  RRAMC_POWER_STANDBYCONFIG_MODE_Msk) >>
                                                  RRAMC_POWER_STANDBYCONFIG_MODE_Pos);
-    p_config->force_on_rramc = (bool)((p_reg->POWER.LOWPOWERCONFIG & 
-                                      RRAMC_POWER_LOWPOWERCONFIG_FORCEONRRAMC_Msk) >>
-                                      RRAMC_POWER_LOWPOWERCONFIG_FORCEONRRAMC_Pos);
-    p_config->trc_reinit = (bool)((p_reg->POWER.LOWPOWERCONFIG &
-                                  RRAMC_POWER_LOWPOWERCONFIG_TRCREINIT_Msk) >>
-                                  RRAMC_POWER_LOWPOWERCONFIG_TRCREINIT_Pos);
+    p_config->force_on_rramc = ((p_reg->POWER.LOWPOWERCONFIG &
+                                RRAMC_POWER_LOWPOWERCONFIG_FORCEONRRAMC_Msk) >>
+                                RRAMC_POWER_LOWPOWERCONFIG_FORCEONRRAMC_Pos) ==
+                                RRAMC_POWER_LOWPOWERCONFIG_FORCEONRRAMC_On;
+    p_config->trc_reinit = ((p_reg->POWER.LOWPOWERCONFIG &
+                            RRAMC_POWER_LOWPOWERCONFIG_TRCREINIT_Msk) >>
+                            RRAMC_POWER_LOWPOWERCONFIG_TRCREINIT_Pos) ==
+                            RRAMC_POWER_LOWPOWERCONFIG_TRCREINIT_Enabled;
     p_config->wakeup = (nrf_rramc_power_wakeup_t)((p_reg->POWER.LOWPOWERCONFIG &
                                                   RRAMC_POWER_LOWPOWERCONFIG_WAKEUP_Msk) >>
                                                   RRAMC_POWER_LOWPOWERCONFIG_WAKEUP_Pos);
@@ -1022,7 +1031,9 @@ NRF_STATIC_INLINE void nrf_rramc_power_force_set(NRF_RRAMC_Type *               
 
 NRF_STATIC_INLINE bool nrf_rramc_erase_all_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)(p_reg->ERASE.ERASEALL);
+    return ((p_reg->ERASE.ERASEALL & RRAMC_ERASE_ERASEALL_ERASE_Msk) >>
+            RRAMC_ERASE_ERASEALL_ERASE_Pos) ==
+            RRAMC_ERASE_ERASEALL_ERASE_Erase;
 }
 
 NRF_STATIC_INLINE void nrf_rramc_erase_all_set(NRF_RRAMC_Type * p_reg)
@@ -1030,12 +1041,14 @@ NRF_STATIC_INLINE void nrf_rramc_erase_all_set(NRF_RRAMC_Type * p_reg)
     p_reg->ERASE.ERASEALL = RRAMC_ERASE_ERASEALL_ERASE_Erase;
 }
 
-NRF_STATIC_INLINE bool nrf_rramc_erase_mass_check(NRF_RRAMC_Type const * p_reg)
+NRF_STATIC_INLINE bool nrf_rramc_mass_erase_check(NRF_RRAMC_Type const * p_reg)
 {
-    return (bool)(p_reg->ERASE.MASSERASE);
+    return ((p_reg->ERASE.MASSERASE & RRAMC_ERASE_MASSERASE_ERASE_Msk) >>
+                RRAMC_ERASE_MASSERASE_ERASE_Pos) ==
+                RRAMC_ERASE_MASSERASE_ERASE_Erase;
 }
 
-NRF_STATIC_INLINE void nrf_rramc_erase_mass_set(NRF_RRAMC_Type * p_reg)
+NRF_STATIC_INLINE void nrf_rramc_mass_erase_start(NRF_RRAMC_Type * p_reg)
 {
     p_reg->ERASE.MASSERASE = RRAMC_ERASE_MASSERASE_ERASE_Erase;
 }
@@ -1063,24 +1076,29 @@ NRF_STATIC_INLINE void nrf_rramc_region_config_get(NRF_RRAMC_Type const * p_reg,
 {
     NRFX_ASSERT(region_num < NRF_RRAMC_REGION_MAX);
 
-    p_config->read     = (bool)((p_reg->REGION[region_num].CONFIG &
-                                RRAMC_REGION_CONFIG_READ_Msk) >>
-                                RRAMC_REGION_CONFIG_READ_Pos);
-    p_config->write    = (bool)((p_reg->REGION[region_num].CONFIG &
-                                RRAMC_REGION_CONFIG_WRITE_Msk) >>
-                                RRAMC_REGION_CONFIG_WRITE_Pos);
-    p_config->execute  = (bool)((p_reg->REGION[region_num].CONFIG &
-                                RRAMC_REGION_CONFIG_EXECUTE_Msk) >>
-                                RRAMC_REGION_CONFIG_EXECUTE_Pos);
-    p_config->secure   = (bool)((p_reg->REGION[region_num].CONFIG &
-                                RRAMC_REGION_CONFIG_SECURE_Msk) >>
-                                RRAMC_REGION_CONFIG_SECURE_Pos);
+    p_config->read     = ((p_reg->REGION[region_num].CONFIG &
+                            RRAMC_REGION_CONFIG_READ_Msk) >>
+                            RRAMC_REGION_CONFIG_READ_Pos) ==
+                            RRAMC_REGION_CONFIG_READ_Allowed;
+    p_config->write    = ((p_reg->REGION[region_num].CONFIG &
+                            RRAMC_REGION_CONFIG_WRITE_Msk) >>
+                            RRAMC_REGION_CONFIG_WRITE_Pos) ==
+                            RRAMC_REGION_CONFIG_WRITE_Allowed;
+    p_config->execute  = ((p_reg->REGION[region_num].CONFIG &
+                            RRAMC_REGION_CONFIG_EXECUTE_Msk) >>
+                            RRAMC_REGION_CONFIG_EXECUTE_Pos) ==
+                            RRAMC_REGION_CONFIG_EXECUTE_Allowed;
+    p_config->secure   = ((p_reg->REGION[region_num].CONFIG &
+                            RRAMC_REGION_CONFIG_SECURE_Msk) >>
+                            RRAMC_REGION_CONFIG_SECURE_Pos) ==
+                            RRAMC_REGION_CONFIG_SECURE_Secure;
     p_config->owner_id = (uint8_t)((p_reg->REGION[region_num].CONFIG &
                                    RRAMC_REGION_CONFIG_OWNER_Msk) >>
                                    RRAMC_REGION_CONFIG_OWNER_Pos);
-    p_config->lock     = (bool)((p_reg->REGION[region_num].CONFIG &
-                                RRAMC_REGION_CONFIG_LOCK_Msk) >>
-                                RRAMC_REGION_CONFIG_LOCK_Pos);
+    p_config->lock     = ((p_reg->REGION[region_num].CONFIG &
+                            RRAMC_REGION_CONFIG_LOCK_Msk) >>
+                            RRAMC_REGION_CONFIG_LOCK_Pos) ==
+                            RRAMC_REGION_CONFIG_LOCK_Enabled;
     p_config->size     = (uint8_t)((p_reg->REGION[region_num].CONFIG &
                                    RRAMC_REGION_CONFIG_SIZE_Msk) >>
                                    RRAMC_REGION_CONFIG_SIZE_Pos);
@@ -1106,9 +1124,10 @@ NRF_STATIC_INLINE
 void nrf_rramc_giltchdetector_config_get(NRF_RRAMC_Type const *        p_reg,
                                          nrf_rramc_gldetect_config_t * p_config)
 {
-    p_config->enable = (bool)((p_reg->GLITCHDETECTOR.CONFIG &
-                              RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Msk) >>
-                              RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
+    p_config->enable = ((p_reg->GLITCHDETECTOR.CONFIG &
+                        RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Msk) >>
+                        RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos) ==
+                        RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Enable;
     p_config->mode = (nrf_rramc_gldetect_mode_t)((p_reg->GLITCHDETECTOR.CONFIG & 
                            RRAMC_GLITCHDETECTOR_CONFIG_MODE_Msk) >>
                            RRAMC_GLITCHDETECTOR_CONFIG_MODE_Pos);
