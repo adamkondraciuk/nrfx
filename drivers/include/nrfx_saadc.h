@@ -24,6 +24,11 @@ extern "C" {
 #define NRFX_SAADC_DEFAULT_ACQTIME 79
 #endif
 
+#if NRF_SAADC_HAS_CONV_TIME || defined(__NRFX_DOXYGEN__)
+/** @brief Auxiliary symbol specifying default value for the SAADC conversion time. */
+#define NRFX_SAADC_DEFAULT_CONV_TIME 7
+#endif
+
 /**
  * @brief SAADC channel default configuration for the single-ended mode.
  *
@@ -39,21 +44,24 @@ extern "C" {
  *
  * @sa nrfx_saadc_channel_t
  */
-#define NRFX_SAADC_DEFAULT_CHANNEL_SE(_pin_p, _index)       \
-{                                                           \
-    .channel_config =                                       \
-    {                                                       \
-        .resistor_p = NRF_SAADC_RESISTOR_DISABLED,          \
-        .resistor_n = NRF_SAADC_RESISTOR_DISABLED,          \
-        .gain       = NRF_SAADC_GAIN1,                      \
-        .reference  = NRF_SAADC_REFERENCE_INTERNAL,         \
-        .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,           \
-        .mode       = NRF_SAADC_MODE_SINGLE_ENDED,          \
-        .burst      = NRF_SAADC_BURST_DISABLED,             \
-    },                                                      \
-    .pin_p          = (nrf_saadc_input_t)_pin_p,            \
-    .pin_n          = NRF_SAADC_INPUT_DISABLED,             \
-    .channel_index  = _index,                               \
+#define NRFX_SAADC_DEFAULT_CHANNEL_SE(_pin_p, _index)                  \
+{                                                                      \
+    .channel_config =                                                  \
+    {                                                                  \
+        .resistor_p = NRF_SAADC_RESISTOR_DISABLED,                     \
+        .resistor_n = NRF_SAADC_RESISTOR_DISABLED,                     \
+        .gain       = NRF_SAADC_GAIN1,                                 \
+        .reference  = NRF_SAADC_REFERENCE_INTERNAL,                    \
+        .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,                      \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CONV_TIME,                      \
+                         (.conv_time = NRFX_SAADC_DEFAULT_CONV_TIME,), \
+                         ())                                           \
+        .mode       = NRF_SAADC_MODE_SINGLE_ENDED,                     \
+        .burst      = NRF_SAADC_BURST_DISABLED,                        \
+    },                                                                 \
+    .pin_p          = (nrf_saadc_input_t)_pin_p,                       \
+    .pin_n          = NRF_SAADC_INPUT_DISABLED,                        \
+    .channel_index  = _index,                                          \
 }
 
 /**
@@ -81,6 +89,9 @@ extern "C" {
         .gain       = NRF_SAADC_GAIN1,                                  \
         .reference  = NRF_SAADC_REFERENCE_INTERNAL,                     \
         .acq_time   = NRFX_SAADC_DEFAULT_ACQTIME,                       \
+        NRFX_COND_CODE_1(NRF_SAADC_HAS_CONV_TIME,                       \
+                         (.conv_time = NRFX_SAADC_DEFAULT_CONV_TIME,),  \
+                         ())                                            \
         .mode       = NRF_SAADC_MODE_DIFFERENTIAL,                      \
         .burst      = NRF_SAADC_BURST_DISABLED,                         \
     },                                                                  \
