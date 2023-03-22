@@ -56,7 +56,7 @@
  * @param[in] _else_code Result otherwise; must be in parentheses
  */
 #define NRFX_COND_CODE_1(_flag, _if_1_code, _else_code) \
-	_NRFX_COND_CODE_1(_flag, _if_1_code, _else_code)
+    _NRFX_COND_CODE_1(_flag, _if_1_code, _else_code)
 
 /**
  * @brief Macro for inserting code depending on whether @p _flag exists and expands to 0 or not.
@@ -71,7 +71,7 @@
  * @param[in] _else_code Result otherwise; must be in parentheses
  */
 #define NRFX_COND_CODE_0(_flag, _if_0_code, _else_code) \
-	_NRFX_COND_CODE_0(_flag, _if_0_code, _else_code)
+    _NRFX_COND_CODE_0(_flag, _if_0_code, _else_code)
 
 /**
  * @brief Macro for checking for macro definition in compiler-visible expressions
@@ -201,7 +201,7 @@
  *            <tt>F(element)</tt> for each element in the list.
  */
 #define NRFX_FOR_EACH(F, sep, ...) \
-	_NRFX_FOR_EACH(F, sep, NRFX_REVERSE_ARGS(__VA_ARGS__))
+    _NRFX_FOR_EACH(F, sep, NRFX_REVERSE_ARGS(__VA_ARGS__))
 
 /**
  * @brief Call macro @p F on each provided argument, with the argument's index
@@ -294,7 +294,7 @@
  * @return Input arguments in reversed order.
  */
 #define NRFX_REVERSE_ARGS(...) \
-	_NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_EXEC, (,), NRFX_EVAL, _, __VA_ARGS__)
+    _NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_EXEC, (,), NRFX_EVAL, _, __VA_ARGS__)
 
 
 /**
@@ -309,7 +309,7 @@
  * @return Highest value from the input list.
  */
 #define NRFX_MAX_N(...) \
-	NRFX_EVAL(NRFX_FOR_EACH(_NRFX_MAX_P1, (), __VA_ARGS__) 0 \
+    NRFX_EVAL(NRFX_FOR_EACH(_NRFX_MAX_P1, (), __VA_ARGS__) 0 \
               NRFX_FOR_EACH(_NRFX_MAX_P2, (), __VA_ARGS__))
 
 /** @} */
