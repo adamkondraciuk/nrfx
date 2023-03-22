@@ -220,6 +220,13 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
         var = NRFX_CONCAT(periph_name, prefix, i, suffix);                         \
     }
 
+/**
+ * Macro used with @p NRFX_FOREACH_PRESENT for generating comma separated
+ * \<periph_name\>\<prefix\>\<i\>_CH_NUM tokens.
+ */
+#define NRFX_INTERNAL_CHAN_NUM(periph_name, prefix, i, _) \
+    NRFX_CONCAT(periph_name, prefix, i, _CH_NUM),
+
 /* Internal macros for @ref NRFX_FOR_EACH_IDX_FIXED_ARG */
 #define _NRFX_FOR_EACH_IDX_FIXED_ARG_EXEC(idx, x, fixed_arg0, fixed_arg1) \
     fixed_arg0(idx, x, fixed_arg1)

@@ -21,6 +21,10 @@ extern "C" {
         chan_num = 0;                                                                             \
     }
 
+/* Symbol specifying the maximal number of channels associated with the DPPIC instances. */
+#define NRF_DPPI_CH_NUM_MAX \
+    NRFX_MAX_N(NRFX_FOREACH_PRESENT(DPPIC, NRFX_INTERNAL_CHAN_NUM, (), (), _) 0)
+
 /**
  * @defgroup nrf_dppi_hal DPPI Controller HAL
  * @{
