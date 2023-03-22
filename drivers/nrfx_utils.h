@@ -47,9 +47,9 @@
  * sometimes more useful when used within another macro's expansion.
  *
  * @note @p _flag can be the result of preprocessor expansion,
- *	 however, @p _if_1_code is only expanded if @p _flag expands
- *	 to the integer literal 1. Integer expressions that evaluate
- *	 to 1, e.g. after doing some arithmetic, will not work.
+ *       however @p _if_1_code is only expanded if @p _flag expands
+ *       to the integer literal 1. Integer expressions that evaluate
+ *       to 1, e.g. after doing some arithmetic, will not work.
  *
  * @param[in] _flag      Evaluated flag
  * @param[in] _if_1_code Result if @p _flag expands to 1; must be in parentheses
@@ -121,8 +121,7 @@
  * @param[in] sep Separator (e.g. comma or semicolon). Must be in parentheses;
  *            this is required to enable providing a comma as separator.
  *
- * @note Calling NRFX_LISTIFY with undefined arguments has undefined
- * behavior.
+ * @note Calling NRFX_LISTIFY with undefined arguments has undefined behavior.
  */
 #define NRFX_LISTIFY(LEN, F, sep, ...) \
     NRFX_CONCAT_2(_NRFX_LISTIFY_, LEN)(F, sep, __VA_ARGS__)
@@ -180,6 +179,138 @@
  */
 #define NRFX_ARG_HAS_PARENTHESIS(x) _NRFX_GET_ARG3(_NRFX_EVAL(_NRFX_ARG_HAS_PARENTHESIS x, 1, 0))
 
+/**
+ * @brief Macro for calling a macro @p F on each provided argument with a given
+ *        separator between each call.
+ *
+ * Example:
+ *
+ *     #define F(x) int a##x
+ *     NRFX_FOR_EACH(F, (;), 4, 5, 6);
+ *
+ * This expands to:
+ *
+ *     int a4;
+ *     int a5;
+ *     int a6;
+ *
+ * @param F Macro to invoke
+ * @param sep Separator (e.g. comma or semicolon). Must be in parentheses;
+ *            this is required to enable providing a comma as a separator.
+ * @param ... Variable argument list. The macro @p F is invoked as
+ *            <tt>F(element)</tt> for each element in the list.
+ */
+#define NRFX_FOR_EACH(F, sep, ...) \
+	_NRFX_FOR_EACH(F, sep, NRFX_REVERSE_ARGS(__VA_ARGS__))
+
+/**
+ * @brief Call macro @p F on each provided argument, with the argument's index
+ *        as an additional parameter.
+ *
+ * This is like @ref NRFX_FOR_EACH(), except @p F should be a macro which takes two
+ * arguments: <tt>F(index, variable_arg)</tt>.
+ *
+ * Example:
+ *
+ *     #define F(idx, x) int a##idx = x
+ *     NRFX_FOR_EACH_IDX(F, (;), 4, 5, 6);
+ *
+ * This expands to:
+ *
+ *     int a0 = 4;
+ *     int a1 = 5;
+ *     int a2 = 6;
+ *
+ * @param F Macro to invoke
+ * @param sep Separator (e.g. comma or semicolon). Must be in parentheses;
+ *            this is required to enable providing a comma as a separator.
+ * @param ... Variable argument list. The macro @p F is invoked as
+ *            <tt>F(index, element)</tt> for each element in the list.
+ */
+#define NRFX_FOR_EACH_IDX(F, sep, ...) \
+    _NRFX_FOR_EACH_IDX(F, sep, NRFX_REVERSE_ARGS(__VA_ARGS__))
+
+/**
+ * @brief Macro for calling macro @p F on each provided argument, with an additional fixed
+ *        argument as a parameter.
+ *
+ * This is like @ref NRFX_FOR_EACH(), except @p F should be a macro which takes two
+ * arguments: <tt>F(variable_arg, fixed_arg)</tt>.
+ *
+ * Example:
+ *
+ *     static void func(int val, void *dev);
+ *     NRFX_FOR_EACH_FIXED_ARG(func, (;), dev, 4, 5, 6);
+ *
+ * This expands to:
+ *
+ *     func(4, dev);
+ *     func(5, dev);
+ *     func(6, dev);
+ *
+ * @param F Macro to invoke
+ * @param sep Separator (e.g. comma or semicolon). Must be in parentheses;
+ *            this is required to enable providing a comma as a separator.
+ * @param fixed_arg Fixed argument passed to @p F as the second macro parameter.
+ * @param ... Variable argument list. The macro @p F is invoked as
+ *            <tt>F(element, fixed_arg)</tt> for each element in the list.
+ */
+#define NRFX_FOR_EACH_FIXED_ARG(F, sep, fixed_arg, ...) \
+    _NRFX_FOR_EACH_FIXED_ARG(F, sep, fixed_arg, NRFX_REVERSE_ARGS(__VA_ARGS__))
+
+/**
+ * @brief Macro from calling macro @p F for each variable argument with an index and fixed
+ *        argument
+ *
+ * This is like the combination of @ref NRFX_FOR_EACH_IDX() with @ref NRFX_FOR_EACH_FIXED_ARG().
+ *
+ * Example:
+ *
+ *     #define F(idx, x, fixed_arg) int fixed_arg##idx = x
+ *     NRFX_FOR_EACH_IDX_FIXED_ARG(F, (;), a, 4, 5, 6);
+ *
+ * This expands to:
+ *
+ *     int a0 = 4;
+ *     int a1 = 5;
+ *     int a2 = 6;
+ *
+ * @param F Macro to invoke
+ * @param sep Separator (e.g. comma or semicolon). Must be in parentheses;
+ *            This is required to enable providing a comma as a separator.
+ * @param fixed_arg Fixed argument passed to @p F as the third macro parameter.
+ * @param ... Variable list of arguments. The macro @p F is invoked as
+ *            <tt>F(index, element, fixed_arg)</tt> for each element in
+ *            the list.
+ */
+#define NRFX_FOR_EACH_IDX_FIXED_ARG(F, sep, fixed_arg, ...) \
+    _NRFX_FOR_EACH_IDX_FIXED_ARG(F, sep, fixed_arg, NRFX_REVERSE_ARGS(__VA_ARGS__))
+
+/**
+ * @brief Macro for reversing arguments order.
+ *
+ * @param ... Variable argument list.
+ *
+ * @return Input arguments in reversed order.
+ */
+#define NRFX_REVERSE_ARGS(...) \
+	_NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_EXEC, (,), NRFX_EVAL, _, __VA_ARGS__)
+
+
+/**
+ * @brief Macro for getting the highest value from input arguments.
+ *
+ * It is similar to @ref NRFX_MAX but accepts a variable number of arguments.
+ *
+ * @note Input arguments must be numeric variables.
+ *
+ * @param ... Variable argument list.
+ *
+ * @return Highest value from the input list.
+ */
+#define NRFX_MAX_N(...) \
+	NRFX_EVAL(NRFX_FOR_EACH(_NRFX_MAX_P1, (), __VA_ARGS__) 0 \
+              NRFX_FOR_EACH(_NRFX_MAX_P2, (), __VA_ARGS__))
 
 /** @} */
 

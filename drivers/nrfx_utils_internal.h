@@ -51,6 +51,14 @@
 
 #define NRFX_DEBRACKET(...) __VA_ARGS__
 
+#define NRFX_EVAL(...) __VA_ARGS__
+
+#define NRFX_EMPTY()
+
+/* Helper macros used for @ref NRFX_MAX_N. */
+#define _NRFX_MAX_P1(x) NRFX_MAX NRFX_EMPTY() ((x),
+#define _NRFX_MAX_P2(x) )
+
 /* Implementation details for NRFX_NUM_VA_ARGS_LESS_1 */
 #define _NRFX_NUM_VA_ARGS_LESS_1_IMPL(\
             _ignored,\
@@ -211,6 +219,105 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
     {                                                                              \
         var = NRFX_CONCAT(periph_name, prefix, i, suffix);                         \
     }
+
+/* Internal macros for @ref NRFX_FOR_EACH_IDX_FIXED_ARG */
+#define _NRFX_FOR_EACH_IDX_FIXED_ARG_EXEC(idx, x, fixed_arg0, fixed_arg1) \
+    fixed_arg0(idx, x, fixed_arg1)
+
+#define _NRFX_FOR_EACH_IDX_FIXED_ARG(F, sep, fixed_arg, ...) \
+    _NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_IDX_FIXED_ARG_EXEC, sep, \
+                      F, fixed_arg, __VA_ARGS__)
+
+/* Internal macros for @ref NRFX_FOR_EACH_FIXED_ARG */
+#define _NRFX_FOR_EACH_FIXED_ARG_EXEC(idx, x, fixed_arg0, fixed_arg1) \
+    fixed_arg0(x, fixed_arg1)
+
+#define _NRFX_FOR_EACH_FIXED_ARG(F, sep, fixed_arg, ...) \
+    _NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_FIXED_ARG_EXEC, sep, \
+                      F, fixed_arg, __VA_ARGS__)
+
+/* Internal macros for @ref NRFX_FOR_EACH_IDX */
+#define _NRFX_FOR_EACH_IDX_EXEC(idx, x, fixed_arg0, fixed_arg1) \
+    fixed_arg0(idx, x)
+
+#define _NRFX_FOR_EACH_IDX(F, sep, ...) \
+    _NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_IDX_EXEC, sep, F, _, __VA_ARGS__)
+
+/* Internal macros for @ref NRFX_FOR_EACH */
+#define _NRFX_FOR_EACH(F, sep, ...) \
+	_NRFX_FOR_EACH_ENGINE(_NRFX_FOR_EACH_EXEC, sep, F, _, __VA_ARGS__)
+
+#define _NRFX_FOR_EACH_EXEC(idx, x, fixed_arg0, fixed_arg1) \
+	fixed_arg0(x)
+
+#define _NRFX_FOR_EACH_ENGINE(x, sep, fixed_arg0, fixed_arg1, ...) \
+	_NRFX_FOR_LOOP_GET_ARG(__VA_ARGS__, \
+		_NRFX_FOR_LOOP_64, \
+		_NRFX_FOR_LOOP_63, \
+		_NRFX_FOR_LOOP_62, \
+		_NRFX_FOR_LOOP_61, \
+		_NRFX_FOR_LOOP_60, \
+		_NRFX_FOR_LOOP_59, \
+		_NRFX_FOR_LOOP_58, \
+		_NRFX_FOR_LOOP_57, \
+		_NRFX_FOR_LOOP_56, \
+		_NRFX_FOR_LOOP_55, \
+		_NRFX_FOR_LOOP_54, \
+		_NRFX_FOR_LOOP_53, \
+		_NRFX_FOR_LOOP_52, \
+		_NRFX_FOR_LOOP_51, \
+		_NRFX_FOR_LOOP_50, \
+		_NRFX_FOR_LOOP_49, \
+		_NRFX_FOR_LOOP_48, \
+		_NRFX_FOR_LOOP_47, \
+		_NRFX_FOR_LOOP_46, \
+		_NRFX_FOR_LOOP_45, \
+		_NRFX_FOR_LOOP_44, \
+		_NRFX_FOR_LOOP_43, \
+		_NRFX_FOR_LOOP_42, \
+		_NRFX_FOR_LOOP_41, \
+		_NRFX_FOR_LOOP_40, \
+		_NRFX_FOR_LOOP_39, \
+		_NRFX_FOR_LOOP_38, \
+		_NRFX_FOR_LOOP_37, \
+		_NRFX_FOR_LOOP_36, \
+		_NRFX_FOR_LOOP_35, \
+		_NRFX_FOR_LOOP_34, \
+		_NRFX_FOR_LOOP_33, \
+		_NRFX_FOR_LOOP_32, \
+		_NRFX_FOR_LOOP_31, \
+		_NRFX_FOR_LOOP_30, \
+		_NRFX_FOR_LOOP_29, \
+		_NRFX_FOR_LOOP_28, \
+		_NRFX_FOR_LOOP_27, \
+		_NRFX_FOR_LOOP_26, \
+		_NRFX_FOR_LOOP_25, \
+		_NRFX_FOR_LOOP_24, \
+		_NRFX_FOR_LOOP_23, \
+		_NRFX_FOR_LOOP_22, \
+		_NRFX_FOR_LOOP_21, \
+		_NRFX_FOR_LOOP_20, \
+		_NRFX_FOR_LOOP_19, \
+		_NRFX_FOR_LOOP_18, \
+		_NRFX_FOR_LOOP_17, \
+		_NRFX_FOR_LOOP_16, \
+		_NRFX_FOR_LOOP_15, \
+		_NRFX_FOR_LOOP_14, \
+		_NRFX_FOR_LOOP_13, \
+		_NRFX_FOR_LOOP_12, \
+		_NRFX_FOR_LOOP_11, \
+		_NRFX_FOR_LOOP_10, \
+		_NRFX_FOR_LOOP_9, \
+		_NRFX_FOR_LOOP_8, \
+		_NRFX_FOR_LOOP_7, \
+		_NRFX_FOR_LOOP_6, \
+		_NRFX_FOR_LOOP_5, \
+		_NRFX_FOR_LOOP_4, \
+		_NRFX_FOR_LOOP_3, \
+		_NRFX_FOR_LOOP_2, \
+		_NRFX_FOR_LOOP_1, \
+		_NRFX_FOR_LOOP_0)(x, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__)
+>>>>>>> 7084f456 (NRFX-NONE: nrfx_utils: Add NRFX_MAX_N macro)
 
 /* Partial macros for @ref NRFX_CONCAT */
 #define _NRFX_CONCAT_0(arg, ...) arg
@@ -1254,5 +1361,333 @@ void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
 #define _NRFX_LISTIFY_256(F, sep, ...) \
 	_NRFX_LISTIFY_255(F, sep, __VA_ARGS__) NRFX_DEBRACKET sep \
 	F(255, __VA_ARGS__)
+
+#define _NRFX_FOR_LOOP_GET_ARG(_1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, \
+				_12, _13, _14, _15, _16, _17, _18, _19, _20, \
+				_21, _22, _23, _24, _25, _26, _27, _28, _29, \
+				_30, _31, _32, _33, _34, _35, _36, _37, _38, \
+				_39, _40, _41, _42, _43, _44, _45, _46, _47, \
+				_48, _49, _50, _51, _52, _53, _54, _55, _56, \
+				_57, _58, _59, _60, _61, _62, _63, _64, N, ...) N
+
+#define _NRFX_FOR_LOOP_0(call, sep, fixed_arg0, fixed_arg1, ...)
+
+#define _NRFX_FOR_LOOP_1(call, sep, fixed_arg0, fixed_arg1, x) \
+	call(0, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_2(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_1(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(1, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_3(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_2(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(2, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_4(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_3(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(3, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_5(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_4(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(4, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_6(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_5(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(5, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_7(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_6(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(6, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_8(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_7(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(7, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_9(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_8(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(8, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_10(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_9(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(9, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_11(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_10(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(10, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_12(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_11(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(11, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_13(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_12(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(12, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_14(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_13(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(13, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_15(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_14(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(14, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_16(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_15(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(15, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_17(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_16(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(16, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_18(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_17(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(17, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_19(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_18(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(18, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_20(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_19(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(19, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_21(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_20(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(20, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_22(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_21(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(21, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_23(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_22(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(22, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_24(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_23(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(23, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_25(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_24(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(24, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_26(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_25(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(25, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_27(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_26(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(26, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_28(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_27(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(27, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_29(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_28(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(28, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_30(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_29(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(29, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_31(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_30(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(30, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_32(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_31(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(31, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_33(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_32(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(32, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_34(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_33(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(33, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_35(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_34(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(34, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_36(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_35(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(35, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_37(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_36(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(36, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_38(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_37(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(37, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_39(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_38(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(38, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_40(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_39(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(39, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_41(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_40(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(40, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_42(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_41(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(41, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_43(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_42(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(42, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_44(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_43(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(43, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_45(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_44(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(44, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_46(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_45(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(45, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_47(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_46(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(46, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_48(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_47(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(47, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_49(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_48(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(48, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_50(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_49(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(49, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_51(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_50(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(50, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_52(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_51(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(51, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_53(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_52(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(52, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_54(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_53(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(53, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_55(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_54(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(54, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_56(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_55(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(55, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_57(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_56(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(56, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_58(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_57(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(57, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_59(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_58(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(58, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_60(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_59(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(59, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_61(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_60(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(60, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_62(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_61(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(61, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_63(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_62(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(62, x, fixed_arg0, fixed_arg1)
+
+#define _NRFX_FOR_LOOP_64(call, sep, fixed_arg0, fixed_arg1, x, ...) \
+	_NRFX_FOR_LOOP_63(call, sep, fixed_arg0, fixed_arg1, ##__VA_ARGS__) \
+	NRFX_DEBRACKET sep \
+	call(63, x, fixed_arg0, fixed_arg1)
 
 #endif /* NRFX_UTILS_INTERNAL_H__ */
