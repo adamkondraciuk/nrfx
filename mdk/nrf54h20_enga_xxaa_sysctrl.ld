@@ -10,12 +10,8 @@ MEMORY
   FLASH2 (rx) : ORIGIN = 0x11040000, LENGTH = 0x8000 /* Inside Secure domain ROM (secure) */
   FLASH3 (rx) : ORIGIN = 0x3F800000, LENGTH = 0x4000 /* GROM0 (secure) */
   FLASH4 (rx) : ORIGIN = 0x2F800000, LENGTH = 0x4000 /* GROM0 (non-secure) */
-  FLASH5 (rx) : ORIGIN = 0x1E000000, LENGTH = 0x600000 /* MRAM00 (secure) */
-  FLASH6 (rx) : ORIGIN = 0xE000000, LENGTH = 0x600000 /* MRAM00 (non-secure) */
-  FLASH7 (rx) : ORIGIN = 0x1E600000, LENGTH = 0x200000 /* MRAM01 (secure) */
-  FLASH8 (rx) : ORIGIN = 0xE600000, LENGTH = 0x200000 /* MRAM01 (non-secure) */
-  FLASH9 (rx) : ORIGIN = 0x3F840000, LENGTH = 0x4000 /* OTP0 (secure) */
-  FLASH10 (rx) : ORIGIN = 0x2F840000, LENGTH = 0x4000 /* OTP0 (non-secure) */
+  FLASH5 (rx) : ORIGIN = 0x3F840000, LENGTH = 0x4000 /* OTP0 (secure) */
+  FLASH6 (rx) : ORIGIN = 0x2F840000, LENGTH = 0x4000 /* OTP0 (non-secure) */
   EXTFLASH (rx) : ORIGIN = 0x70000000, LENGTH = 0x20000000
   RAM (rwx) : ORIGIN = 0x3FBF0000, LENGTH = 0x8000 /* GRAM20 (secure) */
   RAM1 (rwx) : ORIGIN = 0x2FBF0000, LENGTH = 0x8000 /* GRAM20 (non-secure) */

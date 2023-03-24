@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -27,53 +27,42 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdbool.h>
 #include "nrf.h"
 #include "system_nrf54h.h"
-#if defined(__CORTEX_M) && !defined(NRF_TRUSTZONE_NONSECURE) && \
-    (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 0x3))
 #include "system_config_sau.h"
-#endif
 
 /*lint ++flb "Enter library region" */
 
-#define __SYSTEM_CLOCK_MHZ      (1000000UL)
-
-#if defined(NRF_APPLICATION) || defined(NRF_SECURE) || defined(NRF_FLPR) || \
-    defined(NRF_SYSCTRL) || defined(NRF_BBPR)
-#define __SYSTEM_CLOCK_DEFAULT  (320ul * __SYSTEM_CLOCK_MHZ)
-#elif defined(NRF_RADIOCORE)
-#define __SYSTEM_CLOCK_DEFAULT  (256ul * __SYSTEM_CLOCK_MHZ)
-#elif defined(NRF_PPR)
-#define __SYSTEM_CLOCK_DEFAULT  (16ul * __SYSTEM_CLOCK_MHZ)
+#define __SYSTEM_CLOCK_MHZ (1000000UL)
+#if defined(NRF_PPR)
+    #define __SYSTEM_CLOCK_DEFAULT (16ul * __SYSTEM_CLOCK_MHZ)
 #else
-#error "Undefined domain"
+    #define __SYSTEM_CLOCK_DEFAULT (320ul * __SYSTEM_CLOCK_MHZ)
 #endif
 
-#if defined ( __CC_ARM )
+#if defined ( __CC_ARM ) || defined ( __GNUC__ )
     uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_DEFAULT;
 #elif defined ( __ICCARM__ )
     __root uint32_t SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
-#elif defined   ( __GNUC__ )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_DEFAULT;
 #endif
 
 void SystemCoreClockUpdate(void)
 {
-    #ifndef NRF_TRUSTZONE_NONSECURE
-        #if defined(NRF_PPR)
-            /* PPR clock is always 16MHz */
-            SystemCoreClock = 16 * __SYSTEM_CLOCK_MHZ;
-        #elif defined(NRF_FLPR)
-            /* FLPR does not have access to its HSFLL, assume default speed. */
-            SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
-        #else
-            #ifndef NRF_HSFLL
-                #if defined(NRF_SYSCTRL)
-                    #define NRF_HSFLL NRF_HSFLL120
-                #elif defined(NRF_BBPR)
-                    #define NRF_HSFLL NRF_RADIOCORE_HSFLL
-                #else
-                    #error "Could not find CPU HSFLL"
-                #endif
+    #if defined(NRF_PPR)
+        /* PPR clock is always 16MHz */
+        SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
+    #elif defined(NRF_FLPR)
+        /* FLPR does not have access to its HSFLL, assume default speed. */
+        SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
+    #else
+        #ifndef NRF_HSFLL
+            #if defined(NRF_SYSCTRL)
+                #define NRF_HSFLL NRF_HSFLL120
+            #elif defined(NRF_BBPR)
+                #define NRF_HSFLL NRF_RADIOCORE_HSFLL
+            #else
+                #error "Could not find CPU HSFLL"
             #endif
+        #endif
+        #if !defined(NRF_SKIP_CORECLOCKDETECT) && !defined(NRF_TRUSTZONE_NONSECURE)
 
             /* CPU should have access to its local HSFLL, measure CPU frequency. */
             /* If HSFLL is in closed loop mode it's always measuring, and we can just pick the result.*/
@@ -95,38 +84,38 @@ void SystemCoreClockUpdate(void)
                     return;
                 }
             }
-            
+
             /* Frequency measurement result is a multiple of 16MHz */
             SystemCoreClock = NRF_HSFLL->FREQM.MEAS * 16 * __SYSTEM_CLOCK_MHZ;
+        #else
+            SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
         #endif
     #endif
 }
 
 void SystemInit(void)
 {
-    #ifdef __CORTEX_M
-        #if !defined(NRF_TRUSTZONE_NONSECURE) && \
-            (defined(__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 0x3))
-            /* Allow Non-Secure code to run FPU instructions.
-            * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
-            SCB->NSACR |= (3UL << 10);
+#ifdef __CORTEX_M
+#if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
+            #if defined(__FPU_PRESENT) && __FPU_PRESENT
+                /* Allow Non-Secure code to run FPU instructions.
+                * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
+                SCB->NSACR |= (3UL << 10);
+            #endif
+#ifndef NRF_SKIP_SAU_CONFIGURATION
+    configure_default_sau();
+#endif
+#endif
 
-            #ifndef NRF_SKIP_SAU_CONFIGURATION   
-                configure_default_sau();
-            #endif        
-        #endif
-
-        /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
-        * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
-        * operations are not used in your code. */
-        #if (__FPU_USED == 1)
-            SCB->CPACR |= (3UL << 20) | (3UL << 22);
-            __DSB();
-            __ISB();
-        #endif
-    #endif
-    
-    SystemCoreClockUpdate();
+/* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
+ * compiler. Since the FPU consumes energy, remember to disable FPU use in the compiler if floating point unit
+ * operations are not used in your code. */
+#if (__FPU_USED == 1)
+    SCB->CPACR |= (3UL << 20) | (3UL << 22);
+    __DSB();
+    __ISB();
+#endif
+#endif
 }
 
 /*lint --flb "Leave library region" */

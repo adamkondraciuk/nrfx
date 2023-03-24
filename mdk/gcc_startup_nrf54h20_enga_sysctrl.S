@@ -1,6 +1,6 @@
 /*
  
-Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -90,7 +90,7 @@ __HeapLimit:
 /* Reset Handler */
 
 
-    .section .init, "ax"
+    .section .startup, "ax"
     .align 1
     .globl Reset_Handler
     .type Reset_Handler, %function
@@ -123,27 +123,55 @@ Reset_Handler:
  * The ranges of copy from/to are specified by following symbols:
  *      __data_load_start: LMA of start of the section to copy from. Usually end of text
  *      __data_start: VMA of start of the section to copy to.
- *      __bss_start: VMA of end of the section to copy to. Normally __data_end is used, but by using __bss_start
- *                    the user can add their own initialized data section before BSS section with the INSERT AFTER command.
+ *      __data_end: VMA of end of the section to copy to. 
  *
  * All addresses must be aligned to 4 bytes boundary.
  */
 #ifndef __STARTUP_SKIP_ETEXT
+
+/* Load .data */
     la t0, __data_start
-    la t1, __bss_start
-
-    beq t0, t1, L_loop1_done
-
+    la t1, __data_end
     la t2, __data_load_start
+    jal copy_region
 
-L_loop1:
+/* Load .sdata */
+    la t0, __sdata_start
+    la t1, __sdata_end
+    la t2, __sdata_load_start
+    jal copy_region
+
+/* Load .tdata */
+    la t0, __tdata_start
+    la t1, __tdata_end
+    la t2, __tdata_load_start
+    jal copy_region
+
+/* Load .fast */
+    la t0, __fast_start
+    la t1, __fast_end
+    la t2, __fast_load_start
+    jal copy_region
+
+    j copy_etext_done
+
+/* Method that loads data from nvm to ram */
+copy_region:
+    beq t0, t1, L_copy_region_done
+
+L_copy_region:
     lw a0,0(t2)
     sw a0,0(t0)
     addi t0, t0, 4
     addi t2, t2, 4
-    bne  t0, t1, L_loop1
+    bne  t0, t1, L_copy_region
 
-L_loop1_done:
+L_copy_region_done:
+
+    ret
+
+copy_etext_done:
+
 #endif
 
 /* This part of work usually is done in C library startup code. Otherwise,
@@ -162,15 +190,34 @@ L_loop1_done:
  */
 #ifdef __STARTUP_CLEAR_BSS
     la t0, __bss_start
-    la t1, __tbss_end
-    beq t0, t1, L_loop3_done
+    la t1, __bss_end
+    jal zero_region
 
-L_loop3:
+    la t0, __sbss_start
+    la t1, __sbss_end
+    jal zero_region
+
+    la t0, __tbss_start
+    la t1, __tbss_end
+    jal zero_region
+    
+    j clear_bss_done
+
+/* Method that clears ram region */
+zero_region:
+    beq t0, t1, L_zero_region_done
+
+L_zero_region:
     sw   zero, 0(t0)
     addi t0, t0, 4
-    bne  t0, t1, L_loop3
+    bne  t0, t1, L_zero_region
 
-L_loop3_done:
+L_zero_region_done:
+
+    ret
+
+clear_bss_done:
+
 #endif /* __STARTUP_CLEAR_BSS */
 
 /* Execute SystemInit function. */

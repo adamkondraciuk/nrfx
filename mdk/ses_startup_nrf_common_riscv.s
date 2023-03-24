@@ -151,7 +151,7 @@ Reset_Handler:
         la t0, _vectors
 #endif
         lw t0, 0(t0)
-        csrw mtvt, t0
+        csrw 0x307, t0
 #endif
 
         //

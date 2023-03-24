@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -51,6 +51,7 @@ extern "C" {
 /* Function that configures default SAU settings in cores with 4 or more SAU regions. */
 static inline void configure_default_sau(void)
 {
+    #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
     /* Configure SAU with default region settings. */
 
     /* Region 0: Mark [0x00000000:0x10000000> NS */
@@ -72,6 +73,7 @@ static inline void configure_default_sau(void)
 
     /* Enable SAU. */
     SAU->CTRL |= (1 << SAU_CTRL_ENABLE_Pos);
+    #endif
 }
 
 #ifdef __cplusplus

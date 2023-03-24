@@ -7,12 +7,8 @@ MEMORY
 {
   FLASH (rx) : ORIGIN = 0x1E0E0000, LENGTH = 0x20000 /* Inside global MRAM0 (secure) */
   FLASH1 (rx) : ORIGIN = 0xE0E0000, LENGTH = 0x20000 /* Inside global MRAM0 (non-secure) */
-  FLASH2 (rx) : ORIGIN = 0x1E000000, LENGTH = 0x600000 /* MRAM00 (secure) */
-  FLASH3 (rx) : ORIGIN = 0xE000000, LENGTH = 0x600000 /* MRAM00 (non-secure) */
-  FLASH4 (rx) : ORIGIN = 0x1E600000, LENGTH = 0x200000 /* MRAM01 (secure) */
-  FLASH5 (rx) : ORIGIN = 0xE600000, LENGTH = 0x200000 /* MRAM01 (non-secure) */
-  FLASH6 (rx) : ORIGIN = 0x3F840000, LENGTH = 0x4000 /* OTP0 (secure) */
-  FLASH7 (rx) : ORIGIN = 0x2F840000, LENGTH = 0x4000 /* OTP0 (non-secure) */
+  FLASH2 (rx) : ORIGIN = 0x3F840000, LENGTH = 0x4000 /* OTP0 (secure) */
+  FLASH3 (rx) : ORIGIN = 0x2F840000, LENGTH = 0x4000 /* OTP0 (non-secure) */
   EXTFLASH (rx) : ORIGIN = 0x70000000, LENGTH = 0x20000000
   RAM (rwx) : ORIGIN = 0x3FC00000, LENGTH = 0x4000 /* All of GRAM30 (secure) */
   RAM1 (rwx) : ORIGIN = 0x2FC00000, LENGTH = 0x4000 /* All of GRAM30 (non-secure) */

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -56,16 +56,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
-  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
-  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
-  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
-  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
-  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
-  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
-  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
-  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
-  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
-  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
   VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
   VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
@@ -227,8 +217,7 @@ typedef enum {
 #define NRF_SYSCTRL_SHA3CORE_S_BASE       0x5F089000UL
 #define NRF_SYSCTRL_HSFLL200_S_BASE       0xBF004000UL
 #define NRF_SYSCTRL_LRCCONF200_S_BASE     0xBF005000UL
-#define NRF_SYSCTRL_VPRCLIC_S_BASE        0x5F8C8000UL
-#define NRF_SYSCTRL_VPRTIM_NS_BASE        0x00000000UL
+#define NRF_SYSCTRL_VPRCLIC_S_BASE        0x5F8C9000UL
 #define NRF_SYSCTRL_L2CACHE_S_BASE        0x5F082000UL
 #define NRF_SYSCTRL_RAMC110_S_BASE        0x5F083000UL
 #define NRF_SYSCTRL_RAMC111_S_BASE        0x5F084000UL
@@ -325,7 +314,6 @@ typedef enum {
 #define NRF_SYSCTRL_HSFLL200_S            ((NRF_HSFLL_Type*)                    NRF_SYSCTRL_HSFLL200_S_BASE)
 #define NRF_SYSCTRL_LRCCONF200_S          ((NRF_LRCCONF_Type*)                  NRF_SYSCTRL_LRCCONF200_S_BASE)
 #define NRF_SYSCTRL_VPRCLIC_S             ((NRF_CLIC_Type*)                     NRF_SYSCTRL_VPRCLIC_S_BASE)
-#define NRF_SYSCTRL_VPRTIM_NS             ((NRF_VTIM_Type*)                     NRF_SYSCTRL_VPRTIM_NS_BASE)
 #define NRF_SYSCTRL_L2CACHE_S             ((NRF_CACHE_Type*)                    NRF_SYSCTRL_L2CACHE_S_BASE)
 #define NRF_SYSCTRL_RAMC110_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC110_S_BASE)
 #define NRF_SYSCTRL_RAMC111_S             ((NRF_RAMC_Type*)                     NRF_SYSCTRL_RAMC111_S_BASE)
@@ -416,7 +404,6 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_SYSCTRL_OICR                        NRF_SYSCTRL_OICR_S
   #define NRF_SYSCTRL_L2CACHEDATA                 NRF_SYSCTRL_L2CACHEDATA_S
@@ -425,7 +412,6 @@ typedef enum {
   #define NRF_SYSCTRL_HSFLL200                    NRF_SYSCTRL_HSFLL200_S
   #define NRF_SYSCTRL_LRCCONF200                  NRF_SYSCTRL_LRCCONF200_S
   #define NRF_SYSCTRL_VPRCLIC                     NRF_SYSCTRL_VPRCLIC_S
-  #define NRF_SYSCTRL_VPRTIM                      NRF_SYSCTRL_VPRTIM_NS
   #define NRF_SYSCTRL_L2CACHE                     NRF_SYSCTRL_L2CACHE_S
   #define NRF_SYSCTRL_RAMC110                     NRF_SYSCTRL_RAMC110_S
   #define NRF_SYSCTRL_RAMC111                     NRF_SYSCTRL_RAMC111_S
@@ -524,7 +510,6 @@ typedef enum {
   #define NRF_HSFLL200                            NRF_SYSCTRL_HSFLL200
   #define NRF_LRCCONF200                          NRF_SYSCTRL_LRCCONF200
   #define NRF_VPRCLIC                             NRF_SYSCTRL_VPRCLIC
-  #define NRF_VPRTIM                              NRF_SYSCTRL_VPRTIM
   #define NRF_L2CACHE                             NRF_SYSCTRL_L2CACHE
   #define NRF_RAMC110                             NRF_SYSCTRL_RAMC110
   #define NRF_RAMC111                             NRF_SYSCTRL_RAMC111

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -48,1164 +48,1228 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdbool.h>
 /*Secure Information Configuration Registers*/
-#define SICR_PRESENT
+#define SICR_PRESENT 1
 #define SICR_COUNT 1
 
 /*ROM Information Configuration Registers*/
-#define RICR_PRESENT
+#define RICR_PRESENT 1
 #define RICR_COUNT 1
 
 /*CACHEDATA*/
-#define CACHEDATA_PRESENT
+#define CACHEDATA_PRESENT 1
 #define CACHEDATA_COUNT 2
 
 /*CACHEINFO*/
-#define CACHEINFO_PRESENT
+#define CACHEINFO_PRESENT 1
 #define CACHEINFO_COUNT 2
 
 /*CRACENCORE*/
-#define CRACENCORE_PRESENT
+#define CRACENCORE_PRESENT 1
 #define CRACENCORE_COUNT 1
 
-#define CRACENCORE_CRYPTMSTRDMAREGS true
-#define CRACENCORE_CRYPTMSTRHWREGS true
-#define CRACENCORE_RNGCONTROLREGS true
-#define CRACENCORE_PKREGS true
-#define CRACENCORE_IKGREGS true
-#define CRACENCORE_RNGDATAREGS true
-#define CRACENCORE_PKDATAMEMORYREGS true
-#define CRACENCORE_PKUCODEREGS true
-#define CRACENCORE_CRACENRESETVALUES true
-#define CRACENCORE_SHA3RESETVALUES false
+#define CRACENCORE_CRYPTMSTRDMAREGS 1                /*!< (unspecified)                                                        */
+#define CRACENCORE_CRYPTMSTRHWREGS 1                 /*!< (unspecified)                                                        */
+#define CRACENCORE_RNGCONTROLREGS 1                  /*!< (unspecified)                                                        */
+#define CRACENCORE_PKREGS 1                          /*!< (unspecified)                                                        */
+#define CRACENCORE_IKGREGS 1                         /*!< (unspecified)                                                        */
+#define CRACENCORE_RNGDATAREGS 1                     /*!< (unspecified)                                                        */
+#define CRACENCORE_PKDATAMEMORYREGS 1                /*!< (unspecified)                                                        */
+#define CRACENCORE_PKUCODEREGS 1                     /*!< (unspecified)                                                        */
+#define CRACENCORE_CRACENRESETVALUES 1               /*!< (unspecified)                                                        */
+#define CRACENCORE_SHA3RESETVALUES 0                 /*!< (unspecified)                                                        */
 
 /*PCGC Master*/
-#define PCGCMASTER_PRESENT
+#define PCGCMASTER_PRESENT 1
 #define PCGCMASTER_COUNT 5
 
-#define PCGCM200_POWERCONSUMPTIONCALC true
-#define PCGCM200_SETPWRCONTHRESHOLDBASE true
-#define PCGCM200_CLOCKFORCEREG true
-#define PCGCM200_MASTERFORCEREG true
+#define PCGCM200_POWERCONSUMPTIONCALC 1              /*!< (unspecified)                                                        */
+#define PCGCM200_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM200_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM200_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM000_POWERCONSUMPTIONCALC true
-#define PCGCM000_SETPWRCONTHRESHOLDBASE true
-#define PCGCM000_CLOCKFORCEREG true
-#define PCGCM000_MASTERFORCEREG true
+#define PCGCM000_POWERCONSUMPTIONCALC 1              /*!< (unspecified)                                                        */
+#define PCGCM000_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM000_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM000_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM001_POWERCONSUMPTIONCALC true
-#define PCGCM001_SETPWRCONTHRESHOLDBASE true
-#define PCGCM001_CLOCKFORCEREG true
-#define PCGCM001_MASTERFORCEREG true
+#define PCGCM001_POWERCONSUMPTIONCALC 1              /*!< (unspecified)                                                        */
+#define PCGCM001_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM001_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM001_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM010_POWERCONSUMPTIONCALC true
-#define PCGCM010_SETPWRCONTHRESHOLDBASE true
-#define PCGCM010_CLOCKFORCEREG true
-#define PCGCM010_MASTERFORCEREG true
+#define PCGCM010_POWERCONSUMPTIONCALC 1              /*!< (unspecified)                                                        */
+#define PCGCM010_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM010_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM010_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM011_POWERCONSUMPTIONCALC true
-#define PCGCM011_SETPWRCONTHRESHOLDBASE true
-#define PCGCM011_CLOCKFORCEREG true
-#define PCGCM011_MASTERFORCEREG true
+#define PCGCM011_POWERCONSUMPTIONCALC 1              /*!< (unspecified)                                                        */
+#define PCGCM011_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM011_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM011_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
 /*Memory configuration*/
-#define MEMCONF_PRESENT
+#define MEMCONF_PRESENT 1
 #define MEMCONF_COUNT 2
 
-#define MEMCONF200_RETTRIM true
-#define MEMCONF200_REPAIR false
-#define MEMCONF200_POWER false
-#define MEMCONF200_RET2 true
+#define MEMCONF200_RETTRIM 1                         /*!< (unspecified)                                                        */
+#define MEMCONF200_REPAIR 0                          /*!< (unspecified)                                                        */
+#define MEMCONF200_POWER 0                           /*!< (unspecified)                                                        */
+#define MEMCONF200_RET2 1                            /*!< (unspecified)                                                        */
 
-#define MEMCONF_RETTRIM true
-#define MEMCONF_REPAIR false
-#define MEMCONF_POWER true
-#define MEMCONF_RET2 true
+#define MEMCONF_RETTRIM 1                            /*!< (unspecified)                                                        */
+#define MEMCONF_REPAIR 0                             /*!< (unspecified)                                                        */
+#define MEMCONF_POWER 1                              /*!< (unspecified)                                                        */
+#define MEMCONF_RET2 1                               /*!< (unspecified)                                                        */
 
 /*Embedded Trace Macrocell*/
-#define ETM_PRESENT
+#define ETM_PRESENT 1
 #define ETM_COUNT 1
 
 /*Cross-Trigger Interface control*/
-#define CTI_PRESENT
+#define CTI_PRESENT 1
 #define CTI_COUNT 3
 
 /*CM33 SubSystem*/
-#define CM33SS_PRESENT
+#define CM33SS_PRESENT 1
 #define CM33SS_COUNT 1
 
-#define CPUC_FPUAVAILABLE false
+#define CPUC_FPUAVAILABLE 0                          /*!< (unspecified)                                                        */
 
 /*Cache*/
-#define CACHE_PRESENT
+#define CACHE_PRESENT 1
 #define CACHE_COUNT 2
 
-#define ICACHE_VIRTUALCACHE false
-#define ICACHE_FLUSH true
-#define ICACHE_CLEAN false
+#define ICACHE_VIRTUALCACHE 0                        /*!< (unspecified)                                                        */
+#define ICACHE_FLUSH 1                               /*!< (unspecified)                                                        */
+#define ICACHE_CLEAN 0                               /*!< (unspecified)                                                        */
 
-#define DCACHE_VIRTUALCACHE false
-#define DCACHE_FLUSH true
-#define DCACHE_CLEAN true
+#define DCACHE_VIRTUALCACHE 0                        /*!< (unspecified)                                                        */
+#define DCACHE_FLUSH 1                               /*!< (unspecified)                                                        */
+#define DCACHE_CLEAN 1                               /*!< (unspecified)                                                        */
 
 /*System protection unit*/
-#define SPU_PRESENT
+#define SPU_PRESENT 1
 #define SPU_COUNT 16
 
-#define SPU000_BELLS false
-#define SPU000_IPCT false
-#define SPU000_DPPI false
-#define SPU000_GPIOTE false
-#define SPU000_GRTC false
-#define SPU000_GPIO false
+#define SPU000_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU000_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU000_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU000_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU000_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU000_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU010_BELLS false
-#define SPU010_IPCT true
-#define SPU010_DPPI false
-#define SPU010_GPIOTE false
-#define SPU010_GRTC false
-#define SPU010_GPIO false
+#define SPU010_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU010_IPCT 1                                /*!< (unspecified)                                                        */
+#define SPU010_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU010_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU010_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU010_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU200_BELLS false
-#define SPU200_IPCT false
-#define SPU200_DPPI false
-#define SPU200_GPIOTE false
-#define SPU200_GRTC false
-#define SPU200_GPIO false
+#define SPU200_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU200_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU200_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU200_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU200_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU200_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU110_BELLS false
-#define SPU110_IPCT false
-#define SPU110_DPPI false
-#define SPU110_GPIOTE false
-#define SPU110_GRTC false
-#define SPU110_GPIO false
+#define SPU110_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU110_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU110_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU110_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU110_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU110_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU111_BELLS true
-#define SPU111_IPCT false
-#define SPU111_DPPI false
-#define SPU111_GPIOTE false
-#define SPU111_GRTC false
-#define SPU111_GPIO false
+#define SPU111_BELLS 1                               /*!< (unspecified)                                                        */
+#define SPU111_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU111_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU111_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU111_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU111_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU120_BELLS true
-#define SPU120_IPCT false
-#define SPU120_DPPI false
-#define SPU120_GPIOTE false
-#define SPU120_GRTC false
-#define SPU120_GPIO false
+#define SPU120_BELLS 1                               /*!< (unspecified)                                                        */
+#define SPU120_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU120_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU120_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU120_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU120_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU121_BELLS false
-#define SPU121_IPCT true
-#define SPU121_DPPI false
-#define SPU121_GPIOTE false
-#define SPU121_GRTC false
-#define SPU121_GPIO false
+#define SPU121_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU121_IPCT 1                                /*!< (unspecified)                                                        */
+#define SPU121_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU121_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU121_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU121_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU122_BELLS false
-#define SPU122_IPCT false
-#define SPU122_DPPI true
-#define SPU122_GPIOTE false
-#define SPU122_GRTC false
-#define SPU122_GPIO false
+#define SPU122_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU122_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU122_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU122_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU122_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU122_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU130_BELLS false
-#define SPU130_IPCT false
-#define SPU130_DPPI false
-#define SPU130_GPIOTE false
-#define SPU130_GRTC false
-#define SPU130_GPIO false
+#define SPU130_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU130_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU130_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU130_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU130_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU130_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU131_BELLS false
-#define SPU131_IPCT true
-#define SPU131_DPPI true
-#define SPU131_GPIOTE true
-#define SPU131_GRTC false
-#define SPU131_GPIO true
+#define SPU131_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU131_IPCT 1                                /*!< (unspecified)                                                        */
+#define SPU131_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU131_GPIOTE 1                              /*!< (unspecified)                                                        */
+#define SPU131_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU131_GPIO 1                                /*!< (unspecified)                                                        */
 
-#define SPU132_BELLS false
-#define SPU132_IPCT false
-#define SPU132_DPPI true
-#define SPU132_GPIOTE false
-#define SPU132_GRTC false
-#define SPU132_GPIO false
+#define SPU132_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU132_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU132_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU132_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU132_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU132_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU133_BELLS false
-#define SPU133_IPCT false
-#define SPU133_DPPI true
-#define SPU133_GPIOTE false
-#define SPU133_GRTC true
-#define SPU133_GPIO false
+#define SPU133_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU133_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU133_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU133_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU133_GRTC 1                                /*!< (unspecified)                                                        */
+#define SPU133_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU134_BELLS false
-#define SPU134_IPCT false
-#define SPU134_DPPI true
-#define SPU134_GPIOTE false
-#define SPU134_GRTC false
-#define SPU134_GPIO false
+#define SPU134_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU134_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU134_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU134_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU134_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU134_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU135_BELLS false
-#define SPU135_IPCT false
-#define SPU135_DPPI true
-#define SPU135_GPIOTE false
-#define SPU135_GRTC false
-#define SPU135_GPIO false
+#define SPU135_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU135_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU135_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU135_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU135_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU135_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU136_BELLS false
-#define SPU136_IPCT false
-#define SPU136_DPPI true
-#define SPU136_GPIOTE false
-#define SPU136_GRTC false
-#define SPU136_GPIO false
+#define SPU136_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU136_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU136_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU136_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU136_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU136_GPIO 0                                /*!< (unspecified)                                                        */
 
-#define SPU137_BELLS false
-#define SPU137_IPCT false
-#define SPU137_DPPI true
-#define SPU137_GPIOTE false
-#define SPU137_GRTC false
-#define SPU137_GPIO false
+#define SPU137_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU137_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU137_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU137_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU137_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU137_GPIO 0                                /*!< (unspecified)                                                        */
 
 /*Memory Privilege Controller*/
-#define MPC_PRESENT
+#define MPC_PRESENT 1
 #define MPC_COUNT 6
 
-#define MPC000_EXTEND_CLOCK_REQ false
-#define MPC000_OVERRIDE_GRAN 4
+#define MPC000_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC000_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
-#define MPC200_EXTEND_CLOCK_REQ false
-#define MPC200_OVERRIDE_GRAN 4
+#define MPC200_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC200_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
-#define MPC110_EXTEND_CLOCK_REQ false
-#define MPC110_OVERRIDE_GRAN 4
+#define MPC110_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC110_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
-#define MPC111_EXTEND_CLOCK_REQ false
-#define MPC111_OVERRIDE_GRAN 4
+#define MPC111_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC111_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
-#define MPC120_EXTEND_CLOCK_REQ false
-#define MPC120_OVERRIDE_GRAN 4
+#define MPC120_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC120_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
-#define MPC130_EXTEND_CLOCK_REQ false
-#define MPC130_OVERRIDE_GRAN 4
+#define MPC130_EXTEND_CLOCK_REQ 0                    /*!< (unspecified)                                                        */
+#define MPC130_OVERRIDE_GRAN 4                       /*!< The override region granularity is 4 bytes                           */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
-                                                                                                                                  
-#define MVDMA_PRESENT
+
+#define MVDMA_PRESENT 1
 #define MVDMA_COUNT 1
 
 /*RAM Controller*/
-#define RAMC_PRESENT
+#define RAMC_PRESENT 1
 #define RAMC_COUNT 2
 
-#define RAMC000_ECC false
-#define RAMC000_SEC true
+#define RAMC000_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC000_SEC 1                                /*!< (unspecified)                                                        */
 
-#define RAMC001_ECC false
-#define RAMC001_SEC true
+#define RAMC001_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC001_SEC 1                                /*!< (unspecified)                                                        */
 
 /*ROM Controller*/
-#define ROMC_PRESENT
+#define ROMC_PRESENT 1
 #define ROMC_COUNT 1
 
 /*CRACEN*/
-#define CRACEN_PRESENT
+#define CRACEN_PRESENT 1
 #define CRACEN_COUNT 1
 
-#define CRACEN_CRYPTOACCELERATOR true
+#define CRACEN_CRYPTOACCELERATOR 1                   /*!< (unspecified)                                                        */
 
 /*PCGCSlave*/
-#define PCGCSLAVE_PRESENT
+#define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 2
 
-#define PCGCS000_PENALTYTASKS false
+#define PCGCS000_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS010_PENALTYTASKS false
+#define PCGCS010_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
 /*HSFLL*/
-#define HSFLL_PRESENT
+#define HSFLL_PRESENT 1
 #define HSFLL_COUNT 1
 
-#define HSFLL_DITHER_32B false
+#define HSFLL_DITHER_32B 0                           /*!< (unspecified)                                                        */
 
 /*LRCCONF*/
-#define LRCCONF_PRESENT
+#define LRCCONF_PRESENT 1
 #define LRCCONF_COUNT 2
 
-#define LRCCONF000_POWERON false
-#define LRCCONF000_RETAIN false
-#define LRCCONF000_SYSTEMOFF false
-#define LRCCONF000_LRCREQHFXO false
-#define LRCCONF000_NCLK_MIN 0
-#define LRCCONF000_NCLK_MAX 0
-#define LRCCONF000_CLKCTRL true
-#define LRCCONF000_NACTPD_MIN 0
-#define LRCCONF000_NACTPD_MAX 7
-#define LRCCONF000_PDACT false
-#define LRCCONF000_NPD_MIN 0
-#define LRCCONF000_NPD_MAX 7
-#define LRCCONF000_OTHERON false
-#define LRCCONF000_NDOMAINS_MIN 0
-#define LRCCONF000_NDOMAINS_MAX 15
-#define LRCCONF000_AX2XWAITSTATES false
-#define LRCCONF000_POWERON_MAIN_RESET 0
-#define LRCCONF000_POWERON_ACT_RESET 0
-#define LRCCONF000_RETAIN_MAIN_RESET 1
-#define LRCCONF000_RETAIN_ACT_RESET 1
+#define LRCCONF000_POWERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_RETAIN 0                          /*!< (unspecified)                                                        */
+#define LRCCONF000_SYSTEMOFF 0                       /*!< (unspecified)                                                        */
+#define LRCCONF000_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
+#define LRCCONF000_NCLK_MIN 0                        /*!< (unspecified)                                                        */
+#define LRCCONF000_NCLK_MAX 0                        /*!< (unspecified)                                                        */
+#define LRCCONF000_CLKCTRL 1                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
+#define LRCCONF000_NACTPD_MAX 7                      /*!< (unspecified)                                                        */
+#define LRCCONF000_PDACT 0                           /*!< (unspecified)                                                        */
+#define LRCCONF000_NPD_MIN 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF000_OTHERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
+#define LRCCONF000_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF000_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
+#define LRCCONF000_POWERON_MAIN_RESET 0              /*!< Reset value of register POWERON.MAIN: 0                              */
+#define LRCCONF000_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
+#define LRCCONF000_RETAIN_MAIN_RESET 1               /*!< Reset value of register RETAIN.MAIN: 1                               */
+#define LRCCONF000_RETAIN_ACT_RESET 1                /*!< Reset value of register RETAIN.ACT: 1                                */
 
-#define LRCCONF010_POWERON true
-#define LRCCONF010_RETAIN true
-#define LRCCONF010_SYSTEMOFF true
-#define LRCCONF010_LRCREQHFXO false
-#define LRCCONF010_NCLK_MIN 0
-#define LRCCONF010_NCLK_MAX 7
-#define LRCCONF010_CLKCTRL false
-#define LRCCONF010_NACTPD_MIN 0
-#define LRCCONF010_NACTPD_MAX 0
-#define LRCCONF010_PDACT true
-#define LRCCONF010_NPD_MIN 0
-#define LRCCONF010_NPD_MAX 7
-#define LRCCONF010_OTHERON false
-#define LRCCONF010_NDOMAINS_MIN 0
-#define LRCCONF010_NDOMAINS_MAX 15
-#define LRCCONF010_AX2XWAITSTATES false
-#define LRCCONF010_POWERON_MAIN_RESET 0
-#define LRCCONF010_POWERON_ACT_RESET 0
-#define LRCCONF010_RETAIN_MAIN_RESET 1
-#define LRCCONF010_RETAIN_ACT_RESET 1
+#define LRCCONF010_POWERON 1                         /*!< (unspecified)                                                        */
+#define LRCCONF010_RETAIN 1                          /*!< (unspecified)                                                        */
+#define LRCCONF010_SYSTEMOFF 1                       /*!< (unspecified)                                                        */
+#define LRCCONF010_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
+#define LRCCONF010_NCLK_MIN 0                        /*!< (unspecified)                                                        */
+#define LRCCONF010_NCLK_MAX 7                        /*!< (unspecified)                                                        */
+#define LRCCONF010_CLKCTRL 0                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
+#define LRCCONF010_NACTPD_MAX 0                      /*!< (unspecified)                                                        */
+#define LRCCONF010_PDACT 1                           /*!< (unspecified)                                                        */
+#define LRCCONF010_NPD_MIN 0                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF010_OTHERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
+#define LRCCONF010_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF010_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
+#define LRCCONF010_POWERON_MAIN_RESET 0              /*!< Reset value of register POWERON.MAIN: 0                              */
+#define LRCCONF010_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
+#define LRCCONF010_RETAIN_MAIN_RESET 1               /*!< Reset value of register RETAIN.MAIN: 1                               */
+#define LRCCONF010_RETAIN_ACT_RESET 1                /*!< Reset value of register RETAIN.ACT: 1                                */
 
 /*CPU Configuration*/
-#define CPUCONF_PRESENT
+#define CPUCONF_PRESENT 1
 #define CPUCONF_COUNT 1
 
-#define CPUCONF_HASTASKERASECACHE true
-#define CPUCONF_HASINITSVTOR true
-#define CPUCONF_HASINITNSVTOR true
-#define CPUCONF_HASCPUSTART true
-#define CPUCONF_HASCPUWAIT true
+#define CPUCONF_HASTASKERASECACHE 1                  /*!< (unspecified)                                                        */
+#define CPUCONF_HASINITSVTOR 1                       /*!< (unspecified)                                                        */
+#define CPUCONF_HASINITNSVTOR 1                      /*!< (unspecified)                                                        */
+#define CPUCONF_HASCPUSTART 1                        /*!< (unspecified)                                                        */
+#define CPUCONF_HASCPUWAIT 1                         /*!< (unspecified)                                                        */
 
 /*Watchdog Timer*/
-#define WDT_PRESENT
+#define WDT_PRESENT 1
 #define WDT_COUNT 4
 
 /*Tamper controller*/
-#define TAMPC_PRESENT
+#define TAMPC_PRESENT 1
 #define TAMPC_COUNT 1
 
 /*MUTEX*/
-#define MUTEX_PRESENT
+#define MUTEX_PRESENT 1
 #define MUTEX_COUNT 3
 
 /*The Built-in Leakage Sensor (BILS) module.*/
-#define BILS_PRESENT
+#define BILS_PRESENT 1
 #define BILS_COUNT 1
 
 /*ABB peripheral*/
-#define ABB_PRESENT
+#define ABB_PRESENT 1
 #define ABB_COUNT 1
 
 /*RESETINFO*/
-#define RESETINFO_PRESENT
+#define RESETINFO_PRESENT 1
 #define RESETINFO_COUNT 1
 
-#define RESETINFO_HASRESETREAS false
+#define RESETINFO_HASRESETREAS 1                     /*!< (unspecified)                                                        */
 
 /*IPCT APB registers*/
-#define IPCT_PRESENT
+#define IPCT_PRESENT 1
 #define IPCT_COUNT 3
 
 /*BELLBOARD APB registers*/
-#define BELLBOARD_PRESENT
+#define BELLBOARD_PRESENT 1
 #define BELLBOARD_COUNT 1
 
 /*Control access port*/
-#define CTRLAPPERI_PRESENT
+#define CTRLAPPERI_PRESENT 1
 #define CTRLAPPERI_COUNT 1
 
-#define CTRLAP_BOOTSTATUS_REG false
+#define CTRLAP_BOOTSTATUS_REG 0                      /*!< (unspecified)                                                        */
 
 /*IPCMAP APB registers*/
-#define IPCMAP_PRESENT
+#define IPCMAP_PRESENT 1
 #define IPCMAP_COUNT 1
 
 /*IRQMAP APB registers*/
-#define IRQMAP_PRESENT
+#define IRQMAP_PRESENT 1
 #define IRQMAP_COUNT 1
 
 /*Factory Information Configuration Registers*/
-#define FICR_PRESENT
+#define FICR_PRESENT 1
 #define FICR_COUNT 1
 
-#define FICR_LTE_ON false
-#define FICR_WIFI_ON false
-#define FICR_NFC_ON true
+#define FICR_LTE_ON 0                                /*!< (unspecified)                                                        */
+#define FICR_WIFI_ON 0                               /*!< (unspecified)                                                        */
+#define FICR_NFC_ON 1                                /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
-#define USBHSCORE_PRESENT
+#define USBHSCORE_PRESENT 1
 #define USBHSCORE_COUNT 1
 
 /*I3CCORE*/
-#define I3CCORE_PRESENT
+#define I3CCORE_PRESENT 1
 #define I3CCORE_COUNT 2
 
+/*DMU*/
+#define DMU_PRESENT 1
+#define DMU_COUNT 1
+
+/*MCAN*/
+#define MCAN_PRESENT 1
+#define MCAN_COUNT 1
+
 /*System Trace Macrocell data buffer*/
-#define STMDATA_PRESENT
+#define STMDATA_PRESENT 1
 #define STMDATA_COUNT 1
 
 /*TDDCONF*/
-#define TDDCONF_PRESENT
+#define TDDCONF_PRESENT 1
 #define TDDCONF_COUNT 1
 
 /*GENERIC*/
-#define GENERIC_PRESENT
+#define GENERIC_PRESENT 1
 #define GENERIC_COUNT 3
 
 /*System Trace Macrocell*/
-#define STM_PRESENT
+#define STM_PRESENT 1
 #define STM_COUNT 1
 
 /*Trace Port Interface Unit*/
-#define TPIU_PRESENT
+#define TPIU_PRESENT 1
 #define TPIU_COUNT 1
 
 /*ATB Replicator module*/
-#define ATBREPLICATOR_PRESENT
+#define ATBREPLICATOR_PRESENT 1
 #define ATBREPLICATOR_COUNT 4
 
 /*ATB funnel module*/
-#define ATBFUNNEL_PRESENT
+#define ATBFUNNEL_PRESENT 1
 #define ATBFUNNEL_COUNT 4
 
 /*GPIO Tasks and Events*/
-#define GPIOTE_PRESENT
+#define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 1
 
+#define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE130_GPIOTE_NPORTEVENTS_MIN 0           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE130_GPIOTE_NPORTEVENTS_MAX 3           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE130_GPIOTE_NINTERRUPTS_MIN 0           /*!< Number of GPIOTE interrupts: 0..1                                    */
+#define GPIOTE130_GPIOTE_NINTERRUPTS_MAX 1           /*!< Number of GPIOTE interrupts: 0..1                                    */
+
 /*Global Real-time counter*/
-#define GRTC_PRESENT
+#define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
-#define GRTC_MSBWIDTH_MIN 0
-#define GRTC_MSBWIDTH_MAX 14
-#define GRTC_NCC_MIN 0
-#define GRTC_NCC_MAX 15
-#define GRTC_NTIMEOUT_MIN 0
-#define GRTC_NTIMEOUT_MAX 15
-#define GRTC_NDOMAIN_MIN 0
-#define GRTC_NDOMAIN_MAX 15
-#define GRTC_GRTC_NINTERRUPTS_MIN 0
-#define GRTC_GRTC_NINTERRUPTS_MAX 1
-#define GRTC_PWMREGS false
-#define GRTC_CLKOUTREG false
+#define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
+                                                          0..14*/
+#define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
+                                                          0..14*/
+#define GRTC_NCC_MIN 0                               /*!< Number of compare/capture registers : 0..15                          */
+#define GRTC_NCC_MAX 15                              /*!< Number of compare/capture registers : 0..15                          */
+#define GRTC_NTIMEOUT_MIN 0                          /*!< Width of the TIMEOUT register : 0..15                                */
+#define GRTC_NTIMEOUT_MAX 15                         /*!< Width of the TIMEOUT register : 0..15                                */
+#define GRTC_NDOMAIN_MIN 0                           /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
+#define GRTC_NDOMAIN_MAX 15                          /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
+#define GRTC_GRTC_NINTERRUPTS_MIN 0                  /*!< Number of GRTC interrupts : 0..1                                     */
+#define GRTC_GRTC_NINTERRUPTS_MAX 1                  /*!< Number of GRTC interrupts : 0..1                                     */
+#define GRTC_PWMREGS 0                               /*!< (unspecified)                                                        */
+#define GRTC_CLKOUTREG 0                             /*!< (unspecified)                                                        */
 
 /*Trace buffer monitor*/
-#define TBM_PRESENT
+#define TBM_PRESENT 1
 #define TBM_COUNT 1
 
 /*USBHS*/
-#define USBHS_PRESENT
+#define USBHS_PRESENT 1
 #define USBHS_COUNT 1
 
 /*MRAM controller*/
-#define MRAMC_PRESENT
+#define MRAMC_PRESENT 1
 #define MRAMC_COUNT 2
 
-#define MRAMC110_NMRAMWORDSIZE 128
-#define MRAMC110_NMRAMPAGESIZE 4
-#define MRAMC110_NNVRPAGESIZE 2
-#define MRAMC110_NMAINMEMORYSIZE 1
-#define MRAMC110_NNVRPAGES_MIN 0
-#define MRAMC110_NNVRPAGES_MAX 3
-#define MRAMC110_NSIZEMRAMWORDS_MIN 1
-#define MRAMC110_NSIZEMRAMWORDS_MAX 65536
-#define MRAMC110_MARMDATAWIDTHWORDS_MIN 0
-#define MRAMC110_MARMDATAWIDTHWORDS_MAX 3
-#define MRAMC110_NVRPAGEUPPER false
-#define MRAMC110_NVRPAGELOWER false
+#define MRAMC110_NMRAMWORDSIZE 128                   /*!< (unspecified)                                                        */
+#define MRAMC110_NMRAMPAGESIZE 4                     /*!< (unspecified)                                                        */
+#define MRAMC110_NNVRPAGESIZE 2                      /*!< (unspecified)                                                        */
+#define MRAMC110_NMAINMEMORYSIZE 1                   /*!< MRAM main memory size: 1 MB                                          */
+#define MRAMC110_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC110_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC110_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC110_NSIZEMRAMWORDS_MAX 65536            /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC110_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC110_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC110_NVRPAGEUPPER 0                      /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELOWER 0                      /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGEENABLENORMALWRITE 1          /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
 
-#define MRAMC111_NMRAMWORDSIZE 128
-#define MRAMC111_NMRAMPAGESIZE 4
-#define MRAMC111_NNVRPAGESIZE 2
-#define MRAMC111_NMAINMEMORYSIZE 1
-#define MRAMC111_NNVRPAGES_MIN 0
-#define MRAMC111_NNVRPAGES_MAX 3
-#define MRAMC111_NSIZEMRAMWORDS_MIN 1
-#define MRAMC111_NSIZEMRAMWORDS_MAX 65536
-#define MRAMC111_MARMDATAWIDTHWORDS_MIN 0
-#define MRAMC111_MARMDATAWIDTHWORDS_MAX 3
-#define MRAMC111_NVRPAGEUPPER false
-#define MRAMC111_NVRPAGELOWER false
+#define MRAMC111_NMRAMWORDSIZE 128                   /*!< (unspecified)                                                        */
+#define MRAMC111_NMRAMPAGESIZE 4                     /*!< (unspecified)                                                        */
+#define MRAMC111_NNVRPAGESIZE 2                      /*!< (unspecified)                                                        */
+#define MRAMC111_NMAINMEMORYSIZE 1                   /*!< MRAM main memory size: 1 MB                                          */
+#define MRAMC111_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC111_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC111_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC111_NSIZEMRAMWORDS_MAX 65536            /*!< Register ERASE.SIZE.SIZE range: 1..65536                             */
+#define MRAMC111_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC111_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC111_NVRPAGEUPPER 0                      /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELOWER 0                      /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGEENABLENORMALWRITE 1          /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
 
 /*External Memory Interface*/
-#define EXMIF_PRESENT
+#define EXMIF_PRESENT 1
 #define EXMIF_COUNT 1
 
 /*AUXPLL*/
-#define AUXPLL_PRESENT
+#define AUXPLL_PRESENT 1
 #define AUXPLL_COUNT 1
 
 /*AUXPM*/
-#define AUXPM_PRESENT
+#define AUXPM_PRESENT 1
 #define AUXPM_COUNT 1
 
 /*OTP controller*/
-#define OTPC_PRESENT
+#define OTPC_PRESENT 1
 #define OTPC_COUNT 1
 
-#define OTPC_REGION_NO_EXTENSION true
-#define OTPC_REGION_EXTENSION false
-#define OTPC_NREGIONS_MIN 0
-#define OTPC_NREGIONS_MAX 5
-#define OTPC_REGION0ADDR 797179904
-#define OTPC_REGION0SIZE 1024
-#define OTPC_REGION1ADDR 797180928
-#define OTPC_REGION1SIZE 15360
-#define OTPC_REGION2ADDR 0
-#define OTPC_REGION2SIZE 0
-#define OTPC_REGION3ADDR 0
-#define OTPC_REGION3SIZE 0
-#define OTPC_REGION4ADDR 0
-#define OTPC_REGION4SIZE 0
-#define OTPC_REGION5ADDR 0
-#define OTPC_REGION5SIZE 0
+#define OTPC_REGION_NO_EXTENSION 1                   /*!< (unspecified)                                                        */
+#define OTPC_REGION_EXTENSION 0                      /*!< (unspecified)                                                        */
+#define OTPC_NREGIONS_MIN 0                          /*!< (unspecified)                                                        */
+#define OTPC_NREGIONS_MAX 5                          /*!< (unspecified)                                                        */
+#define OTPC_REGION0ADDR 797179904                   /*!< Region 0 address : 797179904, size: 1024 Bytes                       */
+#define OTPC_REGION0SIZE 1024                        /*!< (unspecified)                                                        */
+#define OTPC_REGION1ADDR 797180928                   /*!< Region 1 address : 797180928, size: 15360 Bytes                      */
+#define OTPC_REGION1SIZE 15360                       /*!< (unspecified)                                                        */
+#define OTPC_REGION2ADDR 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION2SIZE 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION3ADDR 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION3SIZE 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION4ADDR 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION4SIZE 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION5ADDR 0                           /*!< (unspecified)                                                        */
+#define OTPC_REGION5SIZE 0                           /*!< (unspecified)                                                        */
 
 /*VPR peripheral registers*/
-#define VPR_PRESENT
+#define VPR_PRESENT 1
 #define VPR_COUNT 3
 
-#define VPR120_INIT_PC_RESET_VALUE 796917760
-#define VPR120_VPR_START_RESET_VALUE 1
-#define VPR120_RAM_BASE_ADDR 796917760
-#define VPR120_RAM_SZ 16
-#define VPR120_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET
-#define VPR120_VPRSAVEDCTX_REGBIT 22
-#define VPR120_RETAINED 0
-#define VPR120_VPRSAVEDCTX true
-#define VPR120_VPRSAVEADDR 796917760
-#define VPR120_VPRREMAPADDRVTOB 797179904
-#define VPR120_VEVIF_NTASKS_MIN 0
-#define VPR120_VEVIF_NTASKS_MAX 31
-#define VPR120_VEVIF_TASKS_MASK 4294963455
-#define VPR120_VEVIF_NDPPI_MIN 24
-#define VPR120_VEVIF_NDPPI_MAX 27
-#define VPR120_VEVIF_NEVENTS_MIN 28
-#define VPR120_VEVIF_NEVENTS_MAX 31
-#define VPR120_DEBUGGER_OFFSET 1024
+#define VPR120_INIT_PC_RESET_VALUE 0x2f800000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x2F800000                        */
+#define VPR120_VPR_START_RESET_VALUE 1               /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
+#define VPR120_RAM_BASE_ADDR 0x2f800000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F800000                     */
+#define VPR120_RAM_SZ 16                             /*!< VPR RAM size (RAM_SZ): 16 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR120_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR120_VPRSAVEDCTX_REGBIT 22                 /*!< (unspecified)                                                        */
+#define VPR120_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
+#define VPR120_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR120_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR120_VPRREMAPADDRVTOB 0x2f840000           /*!< VPR remap address: 0x2F840000                                        */
+#define VPR120_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPR120_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR120_VEVIF_TASKS_MASK 0xfffff0ff           /*!< Mask of supported VEVIF tasks: 0xFFFFF0FF                            */
+#define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
+#define VPR120_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR120_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8C8400                       */
 
-#define VPR121_INIT_PC_RESET_VALUE 0
-#define VPR121_VPR_START_RESET_VALUE 0
-#define VPR121_RAM_BASE_ADDR 797507584
-#define VPR121_RAM_SZ 15
-#define VPR121_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET
-#define VPR121_VPRSAVEDCTX_REGBIT 23
-#define VPR121_RETAINED 0
-#define VPR121_VPRSAVEDCTX true
-#define VPR121_VPRSAVEADDR 796917760
-#define VPR121_VPRREMAPADDRVTOB 0
-#define VPR121_VEVIF_NTASKS_MIN 0
-#define VPR121_VEVIF_NTASKS_MAX 31
-#define VPR121_VEVIF_TASKS_MASK 4294901760
-#define VPR121_VEVIF_NDPPI_MIN 24
-#define VPR121_VEVIF_NDPPI_MAX 27
-#define VPR121_VEVIF_NEVENTS_MIN 28
-#define VPR121_VEVIF_NEVENTS_MAX 31
-#define VPR121_DEBUGGER_OFFSET 1024
+#define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
+#define VPR121_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
+#define VPR121_RAM_BASE_ADDR 0x2f890000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F890000                     */
+#define VPR121_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR121_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR121_VPRSAVEDCTX_REGBIT 23                 /*!< (unspecified)                                                        */
+#define VPR121_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
+#define VPR121_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR121_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR121_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
+#define VPR121_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPR121_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR121_VEVIF_TASKS_MASK 0xffff0000           /*!< Mask of supported VEVIF tasks: 0xFFFF0000                            */
+#define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
+#define VPR121_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR121_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8D4400                       */
 
-#define VPR130_INIT_PC_RESET_VALUE 0
-#define VPR130_VPR_START_RESET_VALUE 0
-#define VPR130_RAM_BASE_ADDR 801112064
-#define VPR130_RAM_SZ 15
-#define VPR130_VPRSAVEDCTX_REGNAME NRF_MEMCONF130->POWER[0].RET
-#define VPR130_VPRSAVEDCTX_REGBIT 5
-#define VPR130_RETAINED 0
-#define VPR130_VPRSAVEDCTX true
-#define VPR130_VPRSAVEADDR 796917760
-#define VPR130_VPRREMAPADDRVTOB 0
-#define VPR130_VEVIF_NTASKS_MIN 0
-#define VPR130_VEVIF_NTASKS_MAX 15
-#define VPR130_VEVIF_TASKS_MASK 4294967280
-#define VPR130_VEVIF_NDPPI_MIN 8
-#define VPR130_VEVIF_NDPPI_MAX 11
-#define VPR130_VEVIF_NEVENTS_MIN 12
-#define VPR130_VEVIF_NEVENTS_MAX 15
-#define VPR130_DEBUGGER_OFFSET 1024
+#define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
+#define VPR130_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
+#define VPR130_RAM_BASE_ADDR 0x2fc00000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2FC00000                     */
+#define VPR130_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR130_VPRSAVEDCTX_REGNAME nrf_memconf130->power[0].ret /*!< (unspecified)                                             */
+#define VPR130_VPRSAVEDCTX_REGBIT 5                  /*!< (unspecified)                                                        */
+#define VPR130_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
+#define VPR130_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR130_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR130_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
+#define VPR130_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..15                                                   */
+#define VPR130_VEVIF_NTASKS_MAX 15                   /*!< VEVIF tasks: 0..15                                                   */
+#define VPR130_VEVIF_TASKS_MASK 0xfffffff0           /*!< Mask of supported VEVIF tasks: 0xFFFFFFF0                            */
+#define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
+#define VPR130_VEVIF_NEVENTS_MAX 15                  /*!< VEVIF events: 12..15                                                 */
+#define VPR130_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F908400                       */
 
 /*I3C*/
-#define I3C_PRESENT
+#define I3C_PRESENT 1
 #define I3C_COUNT 2
 
 /*Controller Area Network*/
-#define CAN_PRESENT
+#define CAN_PRESENT 1
 #define CAN_COUNT 1
 
 /*Distributed programmable peripheral interconnect controller*/
-#define DPPIC_PRESENT
+#define DPPIC_PRESENT 1
 #define DPPIC_COUNT 8
 
-#define DPPIC120_HASCHANNELGROUPS true
-#define DPPIC120_CH_NUM_MIN 0
-#define DPPIC120_CH_NUM_MAX 7
-#define DPPIC120_GROUP_NUM_MIN 0
-#define DPPIC120_GROUP_NUM_MAX 1
+#define DPPIC120_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC120_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC120_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC120_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC120_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC130_HASCHANNELGROUPS true
-#define DPPIC130_CH_NUM_MIN 0
-#define DPPIC130_CH_NUM_MAX 7
-#define DPPIC130_GROUP_NUM_MIN 0
-#define DPPIC130_GROUP_NUM_MAX 1
+#define DPPIC130_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC130_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC130_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC130_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC130_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC131_HASCHANNELGROUPS true
-#define DPPIC131_CH_NUM_MIN 0
-#define DPPIC131_CH_NUM_MAX 7
-#define DPPIC131_GROUP_NUM_MIN 0
-#define DPPIC131_GROUP_NUM_MAX 1
+#define DPPIC131_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC131_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC131_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC131_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC131_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC132_HASCHANNELGROUPS true
-#define DPPIC132_CH_NUM_MIN 0
-#define DPPIC132_CH_NUM_MAX 7
-#define DPPIC132_GROUP_NUM_MIN 0
-#define DPPIC132_GROUP_NUM_MAX 1
+#define DPPIC132_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC132_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC132_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC132_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC132_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC133_HASCHANNELGROUPS true
-#define DPPIC133_CH_NUM_MIN 0
-#define DPPIC133_CH_NUM_MAX 7
-#define DPPIC133_GROUP_NUM_MIN 0
-#define DPPIC133_GROUP_NUM_MAX 1
+#define DPPIC133_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC133_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC133_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC133_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC133_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC134_HASCHANNELGROUPS true
-#define DPPIC134_CH_NUM_MIN 0
-#define DPPIC134_CH_NUM_MAX 7
-#define DPPIC134_GROUP_NUM_MIN 0
-#define DPPIC134_GROUP_NUM_MAX 1
+#define DPPIC134_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC134_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC134_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC134_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC134_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC135_HASCHANNELGROUPS true
-#define DPPIC135_CH_NUM_MIN 0
-#define DPPIC135_CH_NUM_MAX 7
-#define DPPIC135_GROUP_NUM_MIN 0
-#define DPPIC135_GROUP_NUM_MAX 1
+#define DPPIC135_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC135_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC135_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC135_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC135_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC136_HASCHANNELGROUPS true
-#define DPPIC136_CH_NUM_MIN 0
-#define DPPIC136_CH_NUM_MAX 7
-#define DPPIC136_GROUP_NUM_MIN 0
-#define DPPIC136_GROUP_NUM_MAX 1
+#define DPPIC136_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC136_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC136_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC136_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC136_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
 /*Timer/Counter*/
-#define TIMER_PRESENT
+#define TIMER_PRESENT 1
 #define TIMER_COUNT 10
 
-#define TIMER120_CC_NUM_MIN 0
-#define TIMER120_CC_NUM_MAX 5
-#define TIMER120_MAX_SIZE_MIN 0
-#define TIMER120_MAX_SIZE_MAX 31
+#define TIMER120_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER120_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER120_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER120_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER121_CC_NUM_MIN 0
-#define TIMER121_CC_NUM_MAX 5
-#define TIMER121_MAX_SIZE_MIN 0
-#define TIMER121_MAX_SIZE_MAX 31
+#define TIMER121_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER121_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER121_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER121_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER130_CC_NUM_MIN 0
-#define TIMER130_CC_NUM_MAX 5
-#define TIMER130_MAX_SIZE_MIN 0
-#define TIMER130_MAX_SIZE_MAX 31
+#define TIMER130_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER130_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER130_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER130_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER131_CC_NUM_MIN 0
-#define TIMER131_CC_NUM_MAX 5
-#define TIMER131_MAX_SIZE_MIN 0
-#define TIMER131_MAX_SIZE_MAX 31
+#define TIMER131_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER131_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER131_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER131_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER132_CC_NUM_MIN 0
-#define TIMER132_CC_NUM_MAX 5
-#define TIMER132_MAX_SIZE_MIN 0
-#define TIMER132_MAX_SIZE_MAX 31
+#define TIMER132_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER132_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER132_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER132_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER133_CC_NUM_MIN 0
-#define TIMER133_CC_NUM_MAX 5
-#define TIMER133_MAX_SIZE_MIN 0
-#define TIMER133_MAX_SIZE_MAX 31
+#define TIMER133_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER133_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER133_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER133_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER134_CC_NUM_MIN 0
-#define TIMER134_CC_NUM_MAX 5
-#define TIMER134_MAX_SIZE_MIN 0
-#define TIMER134_MAX_SIZE_MAX 31
+#define TIMER134_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER134_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER134_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER134_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER135_CC_NUM_MIN 0
-#define TIMER135_CC_NUM_MAX 5
-#define TIMER135_MAX_SIZE_MIN 0
-#define TIMER135_MAX_SIZE_MAX 31
+#define TIMER135_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER135_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER135_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER135_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER136_CC_NUM_MIN 0
-#define TIMER136_CC_NUM_MAX 5
-#define TIMER136_MAX_SIZE_MIN 0
-#define TIMER136_MAX_SIZE_MAX 31
+#define TIMER136_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER136_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER136_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER136_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER137_CC_NUM_MIN 0
-#define TIMER137_CC_NUM_MAX 5
-#define TIMER137_MAX_SIZE_MIN 0
-#define TIMER137_MAX_SIZE_MAX 31
+#define TIMER137_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER137_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER137_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER137_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
 /*Pulse width modulation unit*/
-#define PWM_PRESENT
+#define PWM_PRESENT 1
 #define PWM_COUNT 5
 
-#define PWM120_EASYDMA5 false
-#define PWM120_EASYDMATEMP true
+#define PWM120_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define PWM120_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 
-#define PWM130_EASYDMA5 false
-#define PWM130_EASYDMATEMP true
+#define PWM130_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define PWM130_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 
-#define PWM131_EASYDMA5 false
-#define PWM131_EASYDMATEMP true
+#define PWM131_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define PWM131_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 
-#define PWM132_EASYDMA5 false
-#define PWM132_EASYDMATEMP true
+#define PWM132_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define PWM132_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 
-#define PWM133_EASYDMA5 false
-#define PWM133_EASYDMATEMP true
+#define PWM133_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define PWM133_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
 
 /*SPI Slave*/
-#define SPIS_PRESENT
+#define SPIS_PRESENT 1
 #define SPIS_COUNT 9
 
-#define SPIS120_LEGACYPSEL false
-#define SPIS120_LEGACYEDMA false
-#define SPIS120_EASYDMA5 false
-#define SPIS120_EASYDMATEMP true
-#define SPIS120_EASYDMALISTINCLUDED false
-#define SPIS120_EASYDMAMODEINCLUDED false
-#define SPIS120_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS120_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS120_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS130_LEGACYPSEL false
-#define SPIS130_LEGACYEDMA false
-#define SPIS130_EASYDMA5 false
-#define SPIS130_EASYDMATEMP true
-#define SPIS130_EASYDMALISTINCLUDED false
-#define SPIS130_EASYDMAMODEINCLUDED false
-#define SPIS130_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS130_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS131_LEGACYPSEL false
-#define SPIS131_LEGACYEDMA false
-#define SPIS131_EASYDMA5 false
-#define SPIS131_EASYDMATEMP true
-#define SPIS131_EASYDMALISTINCLUDED false
-#define SPIS131_EASYDMAMODEINCLUDED false
-#define SPIS131_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS131_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS132_LEGACYPSEL false
-#define SPIS132_LEGACYEDMA false
-#define SPIS132_EASYDMA5 false
-#define SPIS132_EASYDMATEMP true
-#define SPIS132_EASYDMALISTINCLUDED false
-#define SPIS132_EASYDMAMODEINCLUDED false
-#define SPIS132_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS132_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS132_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS133_LEGACYPSEL false
-#define SPIS133_LEGACYEDMA false
-#define SPIS133_EASYDMA5 false
-#define SPIS133_EASYDMATEMP true
-#define SPIS133_EASYDMALISTINCLUDED false
-#define SPIS133_EASYDMAMODEINCLUDED false
-#define SPIS133_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS133_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS133_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS134_LEGACYPSEL false
-#define SPIS134_LEGACYEDMA false
-#define SPIS134_EASYDMA5 false
-#define SPIS134_EASYDMATEMP true
-#define SPIS134_EASYDMALISTINCLUDED false
-#define SPIS134_EASYDMAMODEINCLUDED false
-#define SPIS134_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS134_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS134_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS135_LEGACYPSEL false
-#define SPIS135_LEGACYEDMA false
-#define SPIS135_EASYDMA5 false
-#define SPIS135_EASYDMATEMP true
-#define SPIS135_EASYDMALISTINCLUDED false
-#define SPIS135_EASYDMAMODEINCLUDED false
-#define SPIS135_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS135_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS135_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS136_LEGACYPSEL false
-#define SPIS136_LEGACYEDMA false
-#define SPIS136_EASYDMA5 false
-#define SPIS136_EASYDMATEMP true
-#define SPIS136_EASYDMALISTINCLUDED false
-#define SPIS136_EASYDMAMODEINCLUDED false
-#define SPIS136_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS136_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS136_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define SPIS137_LEGACYPSEL false
-#define SPIS137_LEGACYEDMA false
-#define SPIS137_EASYDMA5 false
-#define SPIS137_EASYDMATEMP true
-#define SPIS137_EASYDMALISTINCLUDED false
-#define SPIS137_EASYDMAMODEINCLUDED false
-#define SPIS137_EASYDMAFULLLPMODEINCLUDED false
+#define SPIS137_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS137_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
 /*UART with EasyDMA*/
-#define UARTE_PRESENT
+#define UARTE_PRESENT 1
 #define UARTE_COUNT 9
 
-#define UARTE120_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE120_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE120_EASYDMA5 false
-#define UARTE120_EASYDMATEMP true
-#define UARTE120_EASYDMALISTINCLUDED false
-#define UARTE120_EASYDMAMODEINCLUDED false
-#define UARTE120_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE120_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE130_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE130_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE130_EASYDMA5 false
-#define UARTE130_EASYDMATEMP true
-#define UARTE130_EASYDMALISTINCLUDED false
-#define UARTE130_EASYDMAMODEINCLUDED false
-#define UARTE130_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE130_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE131_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE131_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE131_EASYDMA5 false
-#define UARTE131_EASYDMATEMP true
-#define UARTE131_EASYDMALISTINCLUDED false
-#define UARTE131_EASYDMAMODEINCLUDED false
-#define UARTE131_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE131_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE132_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE132_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE132_EASYDMA5 false
-#define UARTE132_EASYDMATEMP true
-#define UARTE132_EASYDMALISTINCLUDED false
-#define UARTE132_EASYDMAMODEINCLUDED false
-#define UARTE132_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE132_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE133_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE133_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE133_EASYDMA5 false
-#define UARTE133_EASYDMATEMP true
-#define UARTE133_EASYDMALISTINCLUDED false
-#define UARTE133_EASYDMAMODEINCLUDED false
-#define UARTE133_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE133_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE134_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE134_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE134_EASYDMA5 false
-#define UARTE134_EASYDMATEMP true
-#define UARTE134_EASYDMALISTINCLUDED false
-#define UARTE134_EASYDMAMODEINCLUDED false
-#define UARTE134_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE134_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE135_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE135_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE135_EASYDMA5 false
-#define UARTE135_EASYDMATEMP true
-#define UARTE135_EASYDMALISTINCLUDED false
-#define UARTE135_EASYDMAMODEINCLUDED false
-#define UARTE135_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE135_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE136_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE136_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE136_EASYDMA5 false
-#define UARTE136_EASYDMATEMP true
-#define UARTE136_EASYDMALISTINCLUDED false
-#define UARTE136_EASYDMAMODEINCLUDED false
-#define UARTE136_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE136_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
-#define UARTE137_EASYDMA_MAXCNT_SIZE_MIN 0
-#define UARTE137_EASYDMA_MAXCNT_SIZE_MAX 7
-#define UARTE137_EASYDMA5 false
-#define UARTE137_EASYDMATEMP true
-#define UARTE137_EASYDMALISTINCLUDED false
-#define UARTE137_EASYDMAMODEINCLUDED false
-#define UARTE137_EASYDMAFULLLPMODEINCLUDED false
+#define UARTE137_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA_MAXCNT_SIZE_MAX 7           /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA5 0                          /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMATEMP 1                       /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 
 /*Serial Peripheral Interface Master with EasyDMA*/
-#define SPIM_PRESENT
+#define SPIM_PRESENT 1
 #define SPIM_COUNT 10
 
-#define SPIM120_EASYDMA5 false
-#define SPIM120_EASYDMATEMP true
-#define SPIM120_EASYDMALISTINCLUDED false
-#define SPIM120_EASYDMAMODEINCLUDED false
-#define SPIM120_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM120_HSSPI true
+#define SPIM120_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM120_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM121_EASYDMA5 false
-#define SPIM121_EASYDMATEMP true
-#define SPIM121_EASYDMALISTINCLUDED false
-#define SPIM121_EASYDMAMODEINCLUDED false
-#define SPIM121_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM121_HSSPI true
+#define SPIM121_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM121_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM130_EASYDMA5 false
-#define SPIM130_EASYDMATEMP true
-#define SPIM130_EASYDMALISTINCLUDED false
-#define SPIM130_EASYDMAMODEINCLUDED false
-#define SPIM130_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM130_HSSPI true
+#define SPIM130_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM130_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM131_EASYDMA5 false
-#define SPIM131_EASYDMATEMP true
-#define SPIM131_EASYDMALISTINCLUDED false
-#define SPIM131_EASYDMAMODEINCLUDED false
-#define SPIM131_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM131_HSSPI true
+#define SPIM131_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM131_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM132_EASYDMA5 false
-#define SPIM132_EASYDMATEMP true
-#define SPIM132_EASYDMALISTINCLUDED false
-#define SPIM132_EASYDMAMODEINCLUDED false
-#define SPIM132_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM132_HSSPI true
+#define SPIM132_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM132_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM133_EASYDMA5 false
-#define SPIM133_EASYDMATEMP true
-#define SPIM133_EASYDMALISTINCLUDED false
-#define SPIM133_EASYDMAMODEINCLUDED false
-#define SPIM133_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM133_HSSPI true
+#define SPIM133_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM133_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM134_EASYDMA5 false
-#define SPIM134_EASYDMATEMP true
-#define SPIM134_EASYDMALISTINCLUDED false
-#define SPIM134_EASYDMAMODEINCLUDED false
-#define SPIM134_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM134_HSSPI true
+#define SPIM134_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM134_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM135_EASYDMA5 false
-#define SPIM135_EASYDMATEMP true
-#define SPIM135_EASYDMALISTINCLUDED false
-#define SPIM135_EASYDMAMODEINCLUDED false
-#define SPIM135_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM135_HSSPI true
+#define SPIM135_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM135_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM136_EASYDMA5 false
-#define SPIM136_EASYDMATEMP true
-#define SPIM136_EASYDMALISTINCLUDED false
-#define SPIM136_EASYDMAMODEINCLUDED false
-#define SPIM136_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM136_HSSPI true
+#define SPIM136_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM136_HSSPI 1                              /*!< (unspecified)                                                        */
 
-#define SPIM137_EASYDMA5 false
-#define SPIM137_EASYDMATEMP true
-#define SPIM137_EASYDMALISTINCLUDED false
-#define SPIM137_EASYDMAMODEINCLUDED false
-#define SPIM137_EASYDMAFULLLPMODEINCLUDED false
-#define SPIM137_HSSPI true
+#define SPIM137_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM137_HSSPI 1                              /*!< (unspecified)                                                        */
 
 /*Real-time counter*/
-#define RTC_PRESENT
+#define RTC_PRESENT 1
 #define RTC_COUNT 2
 
 /*GPIO Port*/
-#define GPIO_PRESENT
-#define GPIO_COUNT 16
+#define GPIO_PRESENT 1
+#define GPIO_COUNT 6
 
-#define P0_DRIVECTRL false
-#define P0_PWRCTRL false
+#define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P0_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
+#define P0_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P0_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P0_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P0_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P0_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
-#define P1_DRIVECTRL false
-#define P1_PWRCTRL false
+#define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
+#define P1_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P1_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P1_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P1_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P1_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
-#define P2_DRIVECTRL false
-#define P2_PWRCTRL false
+#define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
+#define P2_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P2_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P2_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P2_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P2_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
-#define P3_DRIVECTRL false
-#define P3_PWRCTRL false
+#define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
+#define P6_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P6_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P6_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P6_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P6_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P6_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P6_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
-#define P4_DRIVECTRL false
-#define P4_PWRCTRL false
+#define P7_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P7_PIN_NUM_MAX 7                             /*!< (unspecified)                                                        */
+#define P7_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P7_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P7_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P7_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P7_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P7_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P7_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
-#define P5_DRIVECTRL false
-#define P5_PWRCTRL false
-
-#define P6_DRIVECTRL true
-#define P6_PWRCTRL false
-
-#define P7_DRIVECTRL true
-#define P7_PWRCTRL false
-
-#define P8_DRIVECTRL true
-#define P8_PWRCTRL false
-
-#define P9_DRIVECTRL false
-#define P9_PWRCTRL true
-
-#define P10_DRIVECTRL false
-#define P10_PWRCTRL false
-
-#define P11_DRIVECTRL false
-#define P11_PWRCTRL false
-
-#define P12_DRIVECTRL false
-#define P12_PWRCTRL false
-
-#define P13_DRIVECTRL false
-#define P13_PWRCTRL false
-
-#define P14_DRIVECTRL false
-#define P14_PWRCTRL false
-
-#define P15_DRIVECTRL false
-#define P15_PWRCTRL false
+#define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
+#define P9_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P9_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P9_PWRCTRL 1                                 /*!< (unspecified)                                                        */
+#define P9_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P9_VSS_FLOAT_DFT 0                           /*!< (unspecified)                                                        */
+#define P9_PIN_OWNER_SEC 0                           /*!< (unspecified)                                                        */
+#define P9_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 
 /*GPIO Internal*/
-#define GPIOINTERNAL_PRESENT
+#define GPIOINTERNAL_PRESENT 1
 #define GPIOINTERNAL_COUNT 1
 
 /*Reset hub*/
-#define RESETHUB_PRESENT
+#define RESETHUB_PRESENT 1
 #define RESETHUB_COUNT 1
 
 /*Analog to Digital Converter*/
-#define SAADC_PRESENT
+#define SAADC_PRESENT 1
 #define SAADC_COUNT 1
 
-#define SAADC_EASYDMA5 false
-#define SAADC_EASYDMATEMP true
-#define SAADC_EASYDMALISTINCLUDED false
-#define SAADC_EASYDMAMODEINCLUDED false
-#define SAADC_EASYDMAFULLLPMODEINCLUDED false
+#define SAADC_EASYDMA5 0                             /*!< (unspecified)                                                        */
+#define SAADC_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
+#define SAADC_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
+#define SAADC_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
+#define SAADC_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
 
 /*Comparator*/
-#define COMP_PRESENT
+#define COMP_PRESENT 1
 #define COMP_COUNT 1
 
 /*Low-power comparator*/
-#define LPCOMP_PRESENT
+#define LPCOMP_PRESENT 1
 #define LPCOMP_COUNT 1
 
 /*Temperature Sensor*/
-#define TEMP_PRESENT
+#define TEMP_PRESENT 1
 #define TEMP_COUNT 1
 
 /*NFC-A compatible radio NFC-A compatible radio*/
-#define NFCT_PRESENT
+#define NFCT_PRESENT 1
 #define NFCT_COUNT 1
 
-#define NFCT_EASYDMA5 false
-#define NFCT_EASYDMATEMP false
+#define NFCT_EASYDMA5 0                              /*!< (unspecified)                                                        */
+#define NFCT_EASYDMATEMP 0                           /*!< (unspecified)                                                        */
 
 /*Inter-IC Sound*/
-#define I2S_PRESENT
+#define I2S_PRESENT 1
 #define I2S_COUNT 2
 
+#define I2S130_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define I2S130_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
+#define I2S130_EASYDMA_MAXCNT_SIZE_MIN 0             /*!< (unspecified)                                                        */
+#define I2S130_EASYDMA_MAXCNT_SIZE_MAX 13            /*!< (unspecified)                                                        */
+
+#define I2S131_EASYDMA5 0                            /*!< (unspecified)                                                        */
+#define I2S131_EASYDMATEMP 1                         /*!< (unspecified)                                                        */
+#define I2S131_EASYDMA_MAXCNT_SIZE_MIN 0             /*!< (unspecified)                                                        */
+#define I2S131_EASYDMA_MAXCNT_SIZE_MAX 13            /*!< (unspecified)                                                        */
+
 /*Pulse Density Modulation (Digital Microphone) Interface*/
-#define PDM_PRESENT
+#define PDM_PRESENT 1
 #define PDM_COUNT 1
 
-#define PDM_EASYDMA5 false
-#define PDM_EASYDMATEMP true
-#define PDM_EASYDMALISTINCLUDED false
-#define PDM_EASYDMAMODEINCLUDED false
-#define PDM_EASYDMAFULLLPMODEINCLUDED false
+#define PDM_EASYDMA5 0                               /*!< (unspecified)                                                        */
+#define PDM_EASYDMATEMP 1                            /*!< (unspecified)                                                        */
+#define PDM_EASYDMALISTINCLUDED 0                    /*!< (unspecified)                                                        */
+#define PDM_EASYDMAMODEINCLUDED 0                    /*!< (unspecified)                                                        */
+#define PDM_EASYDMAFULLLPMODEINCLUDED 0              /*!< (unspecified)                                                        */
 
 /*Quadrature Decoder*/
-#define QDEC_PRESENT
+#define QDEC_PRESENT 1
 #define QDEC_COUNT 2
 
-#define QDEC130_LEGACYPSEL false
+#define QDEC130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
 
-#define QDEC131_LEGACYPSEL false
+#define QDEC131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
 
 /*SIM card interface*/
-#define SIMIF_PRESENT
+#define SIMIF_PRESENT 1
 #define SIMIF_COUNT 1
 
 /*I2C compatible Two-Wire Master Interface with EasyDMA*/
-#define TWIM_PRESENT
+#define TWIM_PRESENT 1
 #define TWIM_COUNT 8
 
-#define TWIM130_EASYDMA5 false
-#define TWIM130_EASYDMATEMP true
-#define TWIM130_EASYDMALISTINCLUDED false
-#define TWIM130_EASYDMAMODEINCLUDED false
-#define TWIM130_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM130_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM131_EASYDMA5 false
-#define TWIM131_EASYDMATEMP true
-#define TWIM131_EASYDMALISTINCLUDED false
-#define TWIM131_EASYDMAMODEINCLUDED false
-#define TWIM131_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM131_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM132_EASYDMA5 false
-#define TWIM132_EASYDMATEMP true
-#define TWIM132_EASYDMALISTINCLUDED false
-#define TWIM132_EASYDMAMODEINCLUDED false
-#define TWIM132_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM132_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM133_EASYDMA5 false
-#define TWIM133_EASYDMATEMP true
-#define TWIM133_EASYDMALISTINCLUDED false
-#define TWIM133_EASYDMAMODEINCLUDED false
-#define TWIM133_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM133_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM134_EASYDMA5 false
-#define TWIM134_EASYDMATEMP true
-#define TWIM134_EASYDMALISTINCLUDED false
-#define TWIM134_EASYDMAMODEINCLUDED false
-#define TWIM134_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM134_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM135_EASYDMA5 false
-#define TWIM135_EASYDMATEMP true
-#define TWIM135_EASYDMALISTINCLUDED false
-#define TWIM135_EASYDMAMODEINCLUDED false
-#define TWIM135_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM135_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM136_EASYDMA5 false
-#define TWIM136_EASYDMATEMP true
-#define TWIM136_EASYDMALISTINCLUDED false
-#define TWIM136_EASYDMAMODEINCLUDED false
-#define TWIM136_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM136_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIM137_EASYDMA5 false
-#define TWIM137_EASYDMATEMP true
-#define TWIM137_EASYDMALISTINCLUDED false
-#define TWIM137_EASYDMAMODEINCLUDED false
-#define TWIM137_EASYDMAFULLLPMODEINCLUDED false
+#define TWIM137_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
 /*I2C compatible Two-Wire Slave Interface with EasyDMA*/
-#define TWIS_PRESENT
+#define TWIS_PRESENT 1
 #define TWIS_COUNT 8
 
-#define TWIS130_EASYDMA5 false
-#define TWIS130_EASYDMATEMP true
-#define TWIS130_EASYDMALISTINCLUDED false
-#define TWIS130_EASYDMAMODEINCLUDED false
-#define TWIS130_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS130_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS131_EASYDMA5 false
-#define TWIS131_EASYDMATEMP true
-#define TWIS131_EASYDMALISTINCLUDED false
-#define TWIS131_EASYDMAMODEINCLUDED false
-#define TWIS131_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS131_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS132_EASYDMA5 false
-#define TWIS132_EASYDMATEMP true
-#define TWIS132_EASYDMALISTINCLUDED false
-#define TWIS132_EASYDMAMODEINCLUDED false
-#define TWIS132_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS132_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS133_EASYDMA5 false
-#define TWIS133_EASYDMATEMP true
-#define TWIS133_EASYDMALISTINCLUDED false
-#define TWIS133_EASYDMAMODEINCLUDED false
-#define TWIS133_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS133_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS134_EASYDMA5 false
-#define TWIS134_EASYDMATEMP true
-#define TWIS134_EASYDMALISTINCLUDED false
-#define TWIS134_EASYDMAMODEINCLUDED false
-#define TWIS134_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS134_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS135_EASYDMA5 false
-#define TWIS135_EASYDMATEMP true
-#define TWIS135_EASYDMALISTINCLUDED false
-#define TWIS135_EASYDMAMODEINCLUDED false
-#define TWIS135_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS135_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS136_EASYDMA5 false
-#define TWIS136_EASYDMATEMP true
-#define TWIS136_EASYDMALISTINCLUDED false
-#define TWIS136_EASYDMAMODEINCLUDED false
-#define TWIS136_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS136_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
-#define TWIS137_EASYDMA5 false
-#define TWIS137_EASYDMATEMP true
-#define TWIS137_EASYDMALISTINCLUDED false
-#define TWIS137_EASYDMAMODEINCLUDED false
-#define TWIS137_EASYDMAFULLLPMODEINCLUDED false
+#define TWIS137_EASYDMA5 0                           /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMATEMP 1                        /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMALISTINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
 
 
 #ifdef __cplusplus

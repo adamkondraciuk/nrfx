@@ -229,8 +229,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 
 #ifndef __ASSEMBLY__
 
-#ifndef csr_swap
-#define csr_swap(csr, val)						\
+#define nrf_csr_swap(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
 	__asm__ __volatile__ ("csrrw %0, %1, %2"			\
@@ -238,10 +237,8 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
-#endif
 
-#ifndef csr_read
-#define csr_read(csr)							\
+#define nrf_csr_read(csr)							\
 ({									\
 	register unsigned long __v;					\
 	__asm__ __volatile__ ("csrr %0, %1"				\
@@ -249,19 +246,16 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 	__v;								\
 })
-#endif
 
-#ifndef csr_write
-#define csr_write(csr, val)						\
+#define nrf_csr_write(csr, val)						\
 ({									\
 	unsigned long __v = (unsigned long)(val);			\
 	__asm__ __volatile__ ("csrw %0, %1"				\
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
 })
-#endif
 
-#define csr_read_and_set_bits(csr, mask)				\
+#define nrf_csr_read_and_set_bits(csr, mask)				\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
 	__asm__ __volatile__ ("csrrs %0, %1, %2"			\
@@ -270,7 +264,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 	__v;								\
 })
 
-#define csr_set_bits(csr, mask)						\
+#define nrf_csr_set_bits(csr, mask)						\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
 	__asm__ __volatile__ ("csrs %0, %1"				\
@@ -278,7 +272,7 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 			      : "memory");				\
 })
 
-#define csr_read_and_clear_bits(csr, mask)				\
+#define nrf_csr_read_and_clear_bits(csr, mask)				\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
 	__asm__ __volatile__ ("csrrc %0, %1, %2"			\
@@ -287,12 +281,34 @@ MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR MODIFICATIONS.
 	__v;								\
 })
 
-#define csr_clear_bits(csr, mask)					\
+#define nrf_csr_clear_bits(csr, mask)					\
 ({									\
 	unsigned long __v = (unsigned long)(mask);			\
 	__asm__ __volatile__ ("csrc %0, %1"				\
 			      : : "i" (csr), "rK" (__v)			\
 			      : "memory");				\
+})
+
+/* Define NRF_ENABLE_COMPAT_CSR_ACCESSORS to remove old csr accessor names. */
+#if !defined(__ZEPHYR__) && !defined(NRF_DISABLE_COMPAT_CSR_ACCESSORS)
+	#define csr_swap nrf_csr_swap
+	#define csr_read nrf_csr_read
+	#define csr_write nrf_csr_write
+	#define csr_read_and_set_bits nrf_csr_read_and_set_bits
+	#define csr_set_bits nrf_csr_set_bits
+	#define csr_read_and_clear_bits nrf_csr_read_and_clear_bits
+	#define csr_clear_bits nrf_csr_clear_bits
+#endif
+
+#ifdef __set_SP
+	#undef __set_SP
+#endif
+#define __set_SP(val)							\
+({												\
+	unsigned long __v = (unsigned long)(val);	\
+	__asm__ __volatile__ ("add sp, %0, zero"	\
+			    :: "rK" (__v)					\
+			      : "memory");					\
 })
 
 #endif /* __ASSEMBLY__ */

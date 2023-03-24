@@ -24,8 +24,6 @@ OUTPUT_ARCH(riscv)
  *   Reset_Handler : Entry of reset handler
  *
  * It defines following symbols, which code can use without definition:
- *   _etext, _edata and _end
- *
  *   __init_start
  *   __init_end
  *   __text_start
@@ -35,26 +33,34 @@ OUTPUT_ARCH(riscv)
  *   __DTOR_END__
  *   __exidx_start
  *   __exidx_end
+ *   __etext
  *   _etext
  *   etext
  *   __data_load_start
  *   __data_start
+ *   __data_start__
  *   __preinit_array_start
  *   __preinit_array_end
  *   __data_end
+ *   __data_end__
  *   __sdata_start
  *   __sdata_end
  *   __fast_start
  *   __fast_end
+ *   __edata
  *   _edata
- *   edata
+ *   edata 
  *   __init_array_start
  *   __init_array_end
  *   __fini_array_start
  *   __fini_array_end
+ *   __bss_start__
  *   __bss_start
+ *   __bss_end__
  *   __bss_end
+ *   __end
  *   _end
+ *   __end__
  *   end
  *   __global_pointer$
  *   __HeapBase
@@ -72,19 +78,19 @@ SECTIONS
     . = ALIGN(ORIGIN(FLASH), 4);
 
     /* executable instructions that contribute to the process initialization code */
-    .init :
+    .startup :
     {
-        __init_start = .;
-        KEEP(*(.init))
-        *(.init*)
+        __startup_start = .;
+        KEEP(*(.startup))
+        *(.startup*)
     } > FLASH
-    __init_size = SIZEOF(.init);
-    __init_end = __init_start + __init_size;
-    ASSERT(__init_start == __init_end || (__init_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .init is too large to fit in FLASH memory segment")
+    __startup_size = SIZEOF(.startup);
+    __startup_end = __startup_start + __startup_size;
+    ASSERT(__startup_start == __startup_end || (__startup_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .startup is too large to fit in FLASH memory segment")
 
     /* Exception return hardcoded at offset 0x01F0 */
-    ASSERT(__init_end <= (__init_start + 0x01F0), "error: .init is too large. It must be less than 0x01F0 bytes")
-    .isr_return __init_start + 0x01F0 :
+    ASSERT(__startup_end <= (ORIGIN(FLASH) + 0x01F0), "error: .startup is too large. It must be less than 0x01F0 bytes")
+    .isr_return ORIGIN(FLASH) + 0x01F0 :
     {
         KEEP(*(.isr_return))
     } > FLASH
@@ -99,6 +105,7 @@ SECTIONS
     __vectors_size = SIZEOF(.vectors);
     __vectors_end = __vectors_start + __vectors_size;
     ASSERT(__vectors_start == __vectors_end || (__vectors_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .vectors is too large to fit in FLASH memory segment")
+
 
     /* .ctors section (global constructor function pointers) */
     . = ALIGN(4);
@@ -134,6 +141,19 @@ SECTIONS
     ASSERT(__dtors_start == __dtors_end || (__dtors_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .dtors is too large to fit in FLASH memory segment")
 
 
+    /* .rodata section */
+    . = ALIGN(4);
+    .rodata : {
+        . = ALIGN(4);
+        __rodata_start = .;
+        *(.rodata*)
+        *(.srodata .srodata.*)
+    } > FLASH
+    __rodata_size       = SIZEOF(.rodata);
+    __rodata_end        = __rodata_start + __rodata_size;
+    ASSERT(__rodata_start == __rodata_end || (__rodata_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .rodata is too large to fit in FLASH memory segment")
+
+
     . = ALIGN(4);
     __text_start = .;
     .text :
@@ -141,8 +161,28 @@ SECTIONS
         /* text: executable instructions of a program. */
         *(.text*)
 
+        /* executable instructions that contribute to the process initialization code */
+        . = ALIGN(4);
+        KEEP(*(.init))
+        . = ALIGN(4);
+        __preinit_array_start = .;
+        KEEP (*(.preinit_array))
+        __preinit_array_end = .;
+
+        . = ALIGN(4);
+        __init_array_start = .;
+        KEEP (*(SORT(.init_array.*)))
+        KEEP (*(.init_array))
+        __init_array_end = .;
+
         /* executable instructions that contribute to the process termination code */
         KEEP(*(.fini))
+
+        . = ALIGN(4);
+        __fini_array_start = .;
+        KEEP (*(.fini_array))
+        KEEP (*(SORT(.fini_array.*)))
+        __fini_array_end = .;
 
         /* DWARF-based unwinding - exception handling. C++ stuff (disable with no-asynchronous-unwind-tables)*/
         . = ALIGN(4);
@@ -170,10 +210,55 @@ SECTIONS
     __text_size = SIZEOF(.text);
     __text_end = __text_start + __text_size;
     ASSERT(__text_start == __text_end || (__text_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .text is too large to fit in FLASH memory segment")
+    
+    .copy.table :
+    {
+        . = ALIGN(4);
+        __copy_table_start__ = .;
+
+        LONG (__data_load_start)
+        LONG (__data_start)
+        LONG ((__data_end - __data_start) / 4)
+
+        LONG (__sdata_load_start)
+        LONG (__sdata_start)
+        LONG ((__sdata_end - __sdata_start) / 4)
+
+        LONG (__tdata_load_start)
+        LONG (__tdata_start)
+        LONG ((__tdata_end - __tdata_start) / 4)
+
+        LONG (__fast_load_start)
+        LONG (__fast_start)
+        LONG ((__fast_end - __fast_start) / 4)
+
+        /* Add aditional regions here as needed. */
+        
+        __copy_table_end__ = .;
+    } > FLASH
+
+    .zero.table :
+    {
+        . = ALIGN(4);
+        __zero_table_start__ = .;
+        
+        LONG (__bss_start)
+        LONG ((__bss_end - __bss_start) / 4)
+        
+        LONG (__sbss_start)
+        LONG ((__sbss_end - __sbss_start) / 4)
+        
+        LONG (__tbss_start)
+        LONG ((__tbss_end - __tbss_start) / 4)
+
+        /* Add aditional regions here as needed. */
+
+        __zero_table_end__ = .;
+    } > FLASH
 
     /* End of text */
     . = ALIGN(4);
-    _etext = .; PROVIDE(etext = .);
+    __etext = .; PROVIDE(etext = .); PROVIDE(_etext = .);
 
 
     /* Define start of all sections that needs to be loaded on boot */
@@ -185,51 +270,24 @@ SECTIONS
     .data : AT(__data_load_start){
         . = ALIGN(4);
         __data_start = .;
+        __data_start__ = .;
         *(vtable)
         *(.data* .gnu.linkonce.d.*)
-
-        /* preinit data */
-        . = ALIGN(4);
-        PROVIDE_HIDDEN (__preinit_array_start = .);
-        KEEP(*(.preinit_array))
-        PROVIDE_HIDDEN (__preinit_array_end = .);
-
-        /* init data */
-        . = ALIGN(4);
-        PROVIDE_HIDDEN (__init_array_start = .);
-        KEEP(*(SORT(.init_array.*)))
-        KEEP(*(.init_array))
-        PROVIDE_HIDDEN (__init_array_end = .);
 
         . = ALIGN(4);
         KEEP(*(.jcr*))
     } > RAM
     __data_size       = SIZEOF(.data);
     __data_end        = __data_start + __data_size;
+    __data_end__      = __data_end;
     __data_load_end   = __data_load_start + __data_size;
     ASSERT(__data_load_start == __data_load_end || (__data_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .data is too large to fit in FLASH memory segment")
     ASSERT(__data_start == __data_end || (__data_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .data is too large to fit in RAM memory segment")
 
 
-    /* .rodata section */
-    . = ALIGN(4);
-    __rodata_load_start = ALIGN(__data_load_end, 4);
-    .rodata : AT(__rodata_load_start){
-        . = ALIGN(4);
-        __rodata_start = .;
-        *(.rodata*)
-        *(.srodata .srodata.*)
-    } > RAM
-    __rodata_size       = SIZEOF(.rodata);
-    __rodata_end        = __rodata_start + __rodata_size;
-    __rodata_load_end   = __rodata_load_start + __rodata_size;
-    ASSERT(__rodata_load_start == __rodata_load_end || (__rodata_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .rodata is too large to fit in FLASH memory segment")
-    ASSERT(__rodata_start == __rodata_end || (__rodata_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .rodata is too large to fit in RAM memory segment")
-
-
     /* .sdata section */
     . = ALIGN(4);
-    __sdata_load_start = ALIGN(__rodata_load_end, 4);
+    __sdata_load_start = ALIGN(__data_load_end, 4);
     .sdata : AT(__sdata_load_start){
         . = ALIGN(4);
         __sdata_start = .;
@@ -274,31 +332,51 @@ SECTIONS
     __fast_end        = __fast_start + __fast_size;
     __fast_load_end   = __fast_load_start + __fast_size;
     ASSERT(__fast_load_start == __fast_load_end || (__fast_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .fast is too large to fit in FLASH memory segment")
-    ASSERT(__fast_start == __fast_end || (__fast_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .tdata is too large to fit in RAM memory segment")
+    ASSERT(__fast_start == __fast_end || (__fast_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .fast is too large to fit in RAM memory segment")
 
     /* end of data in RAM */
     . = ALIGN(4);
-    _edata = .; PROVIDE (edata = .);
+    _edata = .; PROVIDE (edata = .); PROVIDE (__edata = .);
+
+
+    /* No-init section. */
+    . = ALIGN(4);
+    __noinit_start = .; PROVIDE(__noinit_start__ = .);
+    .noinit (NOLOAD):
+    {
+        *(.noinit .noinit.*)
+        *(.no_init .no_init.*)
+        *(.noninit .noninit.*)
+        *(.non_init .non_init.*)
+        . = ALIGN(4);
+    } > RAM
+    __noinit_size         = SIZEOF(.noinit);
+    __noinit_end          = __noinit_start + __noinit_size;
+    __noinit_end__        = __noinit_end;
+    ASSERT(__noinit_start == __noinit_end || (__noinit_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .noinit is too large to fit in RAM memory segment")
+
 
     /* .bss section */
     . = ALIGN(4);
-    __bss_start = .;
-    .bss :{
+    __bss_start = .; PROVIDE(__bss_start__ = .);
+    .bss (NOLOAD):
+    {
         *(.bss* .gnu.linkonce.b.*)
-        *(.noinit .noinit.*)
         *(.dynbss)
         *(COMMON)
         . = ALIGN(4);
     } > RAM
     __bss_size         = SIZEOF(.bss);
     __bss_end          = __bss_start + __bss_size;
+    __bss_end__        = __bss_end;
     ASSERT(__bss_start == __bss_end || (__bss_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .bss is too large to fit in RAM memory segment")
 
 
     /* .sbss section */
     . = ALIGN(4);
     __sbss_start = .;
-    .sbss :{
+    .sbss (NOLOAD):
+    {
         *(.sbss .sbss.* .gnu.linkonce.sb.*)
         *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
         *(.dynsbss)
@@ -312,7 +390,8 @@ SECTIONS
     /* .tbss section */
     . = ALIGN(4);
     __tbss_start = .;
-    .tbss :{
+    .tbss (NOLOAD):
+    {
         . = ALIGN(4);
         *(.tbss .tbss.* .gnu.linkonce.tb.*)
         *(.tcommon)
@@ -322,7 +401,7 @@ SECTIONS
     __tbss_size         = SIZEOF(.tbss);
     __tbss_end          = __tbss_start + __tbss_size;
     ASSERT(__tbss_start == __tbss_end || (__tbss_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .tbss is too large to fit in RAM memory segment")
-
+    
     . = ALIGN(4);
     . = SEGMENT_START("ldata-segment", .);
 
@@ -337,9 +416,14 @@ SECTIONS
     .heap (COPY):
     {
         __HeapBase = .;
-        _end = .; PROVIDE(end = .);
+        __heap_base = .;
+        __end = .; 
+        PROVIDE(end = .);
+        PROVIDE(_end = .);
+        PROVIDE(__end__ = .);
         KEEP(*(.heap*))
         __HeapLimit = .;
+        __heap_limit = .;
     } > RAM
     __heap_end = .;
 
