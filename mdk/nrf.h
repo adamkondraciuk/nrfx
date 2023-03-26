@@ -275,7 +275,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "lilium.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
+        // #include "haltium_name_change.h"
     #endif
 
 #elif defined (LILIUMFP1_XXAA)
@@ -283,7 +283,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "liliumfp1.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
+        // #include "haltium_name_change.h"
     #endif
 
 #elif defined (NRF54H20_ENGA_XXAA)
@@ -297,9 +297,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (MOONLIGHT_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "moonlight.h"
-    #endif
-    #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
     #endif
 
 #elif defined (NRF9160_XXAA)
@@ -329,7 +326,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf9230.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
+        // #include "haltium_name_change.h"
     #endif
 
 #elif defined (NRF7140_XXAA)
@@ -337,7 +334,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf7140.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        #include "haltium_name_change.h"
+        // #include "haltium_name_change.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."
