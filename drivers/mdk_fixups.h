@@ -12,8 +12,6 @@
 
 #if defined(HALTIUM_XXAA)
 
-    typedef NRF_DOMAINS_t nrf_domain_t;
-
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
     #if !defined(NRF_IPCMAP_CHANNEL_COUNT)
@@ -26,18 +24,6 @@
 
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
-    /* TODO: MDK-2070 */
-    typedef enum
-    {
-        NRF_OWNER_NONE        = 0,
-        NRF_OWNER_SECURE      = 1,
-        NRF_OWNER_APPLICATION = 2,
-        NRF_OWNER_RADIOCORE   = 3,
-        NRF_OWNER_CELLCORE    = 4,
-        NRF_OWNER_ISIMCORE    = 5,
-        NRF_OWNER_SYSCTRL     = 8,
-    } nrf_owner_t;
-
     /* TODO: Create ticket for MDK. */
     #if defined(NRF_SECURE)
         #define NRF_DOMAIN NRF_DOMAIN_SECURE
@@ -48,34 +34,16 @@
     #elif defined(NRF_CELLCORE)
         #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
     #elif defined(NRF_SYSCTRL)
-        #define NRF_DOMAIN NRF_DOMAIN_SYSCTRL
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
     #elif defined(NRF_PPR)
-        #define NRF_DOMAIN NRF_DOMAIN_PPR
-    #elif defined(NRF_FLPR)
-        #define NRF_DOMAIN NRF_DOMAIN_FLPR
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
     #elif defined(NRF_LMAC)
         #define NRF_DOMAIN NRF_DOMAIN_LMAC
     #elif defined(NRF_UMAC)
         #define NRF_DOMAIN NRF_DOMAIN_UMAC
     #endif
 
-    /* TODO: NRFX-3171 */
-    typedef enum
-    {
-        NRF_PROCESSOR_ID_SECURE      = 1,
-        NRF_PROCESSOR_ID_APPLICATION = 2,
-        NRF_PROCESSOR_ID_RADIOCORE   = 3,
-        NRF_PROCESSOR_ID_CELLCORE    = 4,
-        NRF_PROCESSOR_ID_CELLDSP     = 5,
-        NRF_PROCESSOR_ID_CELLRF      = 6,
-        NRF_PROCESSOR_ID_ISIMCORE    = 7,
-        NRF_PROCESSOR_ID_BBPR        = 11,
-        NRF_PROCESSOR_ID_SYSCTRL     = 12,
-        NRF_PROCESSOR_ID_PPR         = 13,
-        NRF_PROCESSOR_ID_FLPR        = 14,
-    } nrf_processor_id_t;
-
-    #define NRF_PROCESSOR_ID_COUNT (NRF_PROCESSOR_ID_FLPR + 1)
+    #define NRF_PROCESSOR_COUNT (NRF_PROCESSOR_FLPR + 1)
 
     /* TODO: MDK-2059 */
     #define ADDRESS_REGION_Pos        (29UL)
@@ -1260,6 +1228,41 @@
 /**************************************************************************************************/
 
 #if defined(LILIUMFP1_XXAA)
+    /* MDK for nRF54H20 FP1 is not yet updated to haltium_name_change.h from 8.53.0 */
+    #define NRF_DOMAIN_GLOBALFAST NRF_DOMAIN_SYSCTRL
+    #define NRF_DOMAIN_GLOBALSLOW NRF_DOMAIN_PPR
+
+    typedef NRF_DOMAINS_t NRF_DOMAINID_Type;
+
+    typedef enum {
+        NRF_OWNER_NONE            = 0,
+        NRF_OWNER_SECURE          = 1,
+        NRF_OWNER_APPLICATION     = 2,
+        NRF_OWNER_RADIOCORE       = 3,
+        NRF_OWNER_CELL            = 4,
+        NRF_OWNER_ISIMCORE        = 5,
+        NRF_OWNER_SYSCTRL         = 8,
+        NRF_OWNER_DBG_SECURE      = 9,
+        NRF_OWNER_DBG_APPLICATION = 10,
+        NRF_OWNER_DBG_RADIOCORE   = 11,
+        NRF_OWNER_DBG_CELLCORE    = 12,
+        NRF_OWNER_DBG_CELLRF      = 13,
+        NRF_OWNER_DBG_ISIMCORE    = 15
+    } NRF_OWNERID_Type;
+
+    typedef enum {
+        NRF_PROCESSOR_SECURE      = 1,
+        NRF_PROCESSOR_APPLICATION = 2,
+        NRF_PROCESSOR_RADIOCORE   = 3,
+        NRF_PROCESSOR_CELLCORE    = 4,
+        NRF_PROCESSOR_CELLDSP     = 5,
+        NRF_PROCESSOR_CELLRF      = 6,
+        NRF_PROCESSOR_ISIMCORE    = 7,
+        NRF_PROCESSOR_BBPR        = 11,
+        NRF_PROCESSOR_SYSCTRL     = 12,
+        NRF_PROCESSOR_PPR         = 13,
+        NRF_PROCESSOR_FLPR        = 14,
+    } NRF_PROCESSORID_Type;
 
     #define RTC130_CC_NUM 4
     #define RTC131_CC_NUM 4
@@ -1783,6 +1786,41 @@
 /**************************************************************************************************/
 
 #if defined(NRF7140_XXAA)
+    /* MDK for nRF7140 is not yet updated to haltium_name_change.h from 8.53.0 */
+    #define NRF_DOMAIN_GLOBALFAST NRF_DOMAIN_SYSCTRL
+    #define NRF_DOMAIN_GLOBALSLOW NRF_DOMAIN_PPR
+
+    typedef NRF_DOMAINS_t NRF_DOMAINID_Type;
+
+    typedef enum {
+        NRF_OWNER_NONE            = 0,
+        NRF_OWNER_SECURE          = 1,
+        NRF_OWNER_APPLICATION     = 2,
+        NRF_OWNER_RADIOCORE       = 3,
+        NRF_OWNER_CELL            = 4,
+        NRF_OWNER_ISIMCORE        = 5,
+        NRF_OWNER_SYSCTRL         = 8,
+        NRF_OWNER_DBG_SECURE      = 9,
+        NRF_OWNER_DBG_APPLICATION = 10,
+        NRF_OWNER_DBG_RADIOCORE   = 11,
+        NRF_OWNER_DBG_CELLCORE    = 12,
+        NRF_OWNER_DBG_CELLRF      = 13,
+        NRF_OWNER_DBG_ISIMCORE    = 15
+    } NRF_OWNERID_Type;
+
+    typedef enum {
+        NRF_PROCESSOR_SECURE      = 1,
+        NRF_PROCESSOR_APPLICATION = 2,
+        NRF_PROCESSOR_RADIOCORE   = 3,
+        NRF_PROCESSOR_CELLCORE    = 4,
+        NRF_PROCESSOR_CELLDSP     = 5,
+        NRF_PROCESSOR_CELLRF      = 6,
+        NRF_PROCESSOR_ISIMCORE    = 7,
+        NRF_PROCESSOR_BBPR        = 11,
+        NRF_PROCESSOR_SYSCTRL     = 12,
+        NRF_PROCESSOR_PPR         = 13,
+        NRF_PROCESSOR_FLPR        = 14,
+    } NRF_PROCESSORID_Type;
 
     /* TODO: HM-17600 */
     typedef struct {
@@ -7185,6 +7223,42 @@
 /**************************************************************************************************/
 
 #if defined(NRF9230_XXAA)
+    /* MDK for nRF9230 is not yet updated to haltium_name_change.h from 8.53.0 */
+    #define NRF_DOMAIN_GLOBALFAST NRF_DOMAIN_SYSCTRL
+    #define NRF_DOMAIN_GLOBALSLOW NRF_DOMAIN_PPR
+
+    typedef NRF_DOMAINS_t NRF_DOMAINID_Type;
+
+    typedef enum {
+        NRF_OWNER_NONE            = 0,
+        NRF_OWNER_SECURE          = 1,
+        NRF_OWNER_APPLICATION     = 2,
+        NRF_OWNER_RADIOCORE       = 3,
+        NRF_OWNER_CELL            = 4,
+        NRF_OWNER_ISIMCORE        = 5,
+        NRF_OWNER_SYSCTRL         = 8,
+        NRF_OWNER_DBG_SECURE      = 9,
+        NRF_OWNER_DBG_APPLICATION = 10,
+        NRF_OWNER_DBG_RADIOCORE   = 11,
+        NRF_OWNER_DBG_CELLCORE    = 12,
+        NRF_OWNER_DBG_CELLRF      = 13,
+        NRF_OWNER_DBG_ISIMCORE    = 15
+    } NRF_OWNERID_Type;
+
+    typedef enum {
+        NRF_PROCESSOR_SECURE      = 1,
+        NRF_PROCESSOR_APPLICATION = 2,
+        NRF_PROCESSOR_RADIOCORE   = 3,
+        NRF_PROCESSOR_CELLCORE    = 4,
+        NRF_PROCESSOR_CELLDSP     = 5,
+        NRF_PROCESSOR_CELLRF      = 6,
+        NRF_PROCESSOR_ISIMCORE    = 7,
+        NRF_PROCESSOR_BBPR        = 11,
+        NRF_PROCESSOR_SYSCTRL     = 12,
+        NRF_PROCESSOR_PPR         = 13,
+        NRF_PROCESSOR_FLPR        = 14,
+    } NRF_PROCESSORID_Type;
+
     typedef struct {                                   /*!< RESETHUB Structure                                                   */
         __OM uint32_t TASKS_RESETDOMAIN[8];              /*!< (@ 0x00000000) Reset the domain [n], where n is domain id.           */
         __IM uint32_t RESERVED[56];

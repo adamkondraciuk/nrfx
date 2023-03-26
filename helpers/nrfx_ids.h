@@ -87,15 +87,15 @@ enum {
 /** @brief IDS domains. */
 typedef enum
 {
-    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_ID_SECURE,      ///< Secure domain. */
-    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_ID_APPLICATION, ///< Application domain. */
-    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_ID_RADIOCORE,   ///< Network domain. */
+    NRFX_IDS_DOMAIN_SEC     = NRF_PROCESSOR_SECURE,      ///< Secure domain. */
+    NRFX_IDS_DOMAIN_APP     = NRF_PROCESSOR_APPLICATION, ///< Application domain. */
+    NRFX_IDS_DOMAIN_NET     = NRF_PROCESSOR_RADIOCORE,   ///< Network domain. */
 #if defined(NRF_CELLCORE_BELLBOARD)
-    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_ID_CELLCORE,    ///< Cellular domain. */
+    NRFX_IDS_DOMAIN_CELL    = NRF_PROCESSOR_CELLCORE,    ///< Cellular domain. */
 #endif
-    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_ID_SYSCTRL,     ///< System Controller domain. */
-    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_ID_PPR,         ///< Peripheral Processor */
-    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_ID_FLPR,        ///< Fast Lightweight Processor */
+    NRFX_IDS_DOMAIN_SYSCTRL = NRF_PROCESSOR_SYSCTRL,     ///< System Controller domain. */
+    NRFX_IDS_DOMAIN_PPR     = NRF_PROCESSOR_PPR,         ///< Peripheral Processor */
+    NRFX_IDS_DOMAIN_FLPR    = NRF_PROCESSOR_FLPR,        ///< Fast Lightweight Processor */
 } nrfx_ids_domain_t;
 #elif defined(NRF5340_XXAA)
 typedef enum

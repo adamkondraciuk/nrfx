@@ -33,9 +33,9 @@ extern "C" {
  * @param[in] index     Interrupt index.
  * @param[in] processor Processor indentifier to be set.
  */
-NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type *  p_reg,
-                                           uint32_t           index,
-                                           nrf_processor_id_t processor);
+NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type * p_reg,
+                                           uint32_t          index,
+                                           nrf_processor_t   processor);
 
 /**
  * @brief Function for getting the interrupt sink configuration for given interrupt.
@@ -45,18 +45,18 @@ NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type *  p_reg,
  *
  * @return Processor identifier.
  */
-NRF_STATIC_INLINE nrf_processor_id_t nrf_irqmap_sink_get(NRF_IRQMAP_Type const * p_reg,
-                                                         uint32_t                index);
+NRF_STATIC_INLINE nrf_processor_t nrf_irqmap_sink_get(NRF_IRQMAP_Type const * p_reg,
+                                                      uint32_t                index);
 
 
 #ifndef NRF_DECLARE_ONLY
-NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type *  p_reg,
-                                           uint32_t           index,
-                                           nrf_processor_id_t processor)
+NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type * p_reg,
+                                           uint32_t          index,
+                                           nrf_processor_t   processor)
 {
     NRFX_ASSERT(index < NRF_IRQMAP_IRQ_COUNT);
     NRFX_ASSERT(processor > 0);
-    NRFX_ASSERT(processor < NRF_PROCESSOR_ID_COUNT);
+    NRFX_ASSERT(processor < NRF_PROCESSOR_COUNT);
 
 #if NRF_IRQMAP_HAS_DOMAIN
     p_reg->IRQ[index].SINK = (processor << IRQMAP_IRQ_SINK_DOMAIN_Pos)
@@ -67,16 +67,16 @@ NRF_STATIC_INLINE void nrf_irqmap_sink_set(NRF_IRQMAP_Type *  p_reg,
 #endif
 }
 
-NRF_STATIC_INLINE nrf_processor_id_t nrf_irqmap_sink_get(NRF_IRQMAP_Type const * p_reg,
-                                                         uint32_t                index)
+NRF_STATIC_INLINE nrf_processor_t nrf_irqmap_sink_get(NRF_IRQMAP_Type const * p_reg,
+                                                      uint32_t                index)
 {
     NRFX_ASSERT(index < NRF_IRQMAP_IRQ_COUNT);
 #if NRF_IRQMAP_HAS_DOMAIN
-    return (nrf_processor_id_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_DOMAIN_Msk)
-                                >> IRQMAP_IRQ_SINK_DOMAIN_Pos);
+    return (nrf_processor_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_DOMAIN_Msk)
+                              >> IRQMAP_IRQ_SINK_DOMAIN_Pos);
 #else
-    return (nrf_processor_id_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_PROCESSORID_Msk)
-                                >> IRQMAP_IRQ_SINK_PROCESSORID_Pos);
+    return (nrf_processor_t)((p_reg->IRQ[index].SINK & IRQMAP_IRQ_SINK_PROCESSORID_Msk)
+                              >> IRQMAP_IRQ_SINK_PROCESSORID_Pos);
 #endif
 }
 #endif // NRF_DECLARE_ONLY
