@@ -135,7 +135,7 @@
     #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
         #define NRF_GPIOTE130_IRQn      GPIOTE130_0_IRQn
         #define nrfx_gpiote_irq_handler GPIOTE130_0_IRQHandler
-    #else
+    #elif !defined(NRF_CELLCORE)
         #define NRF_GPIOTE130_IRQn      GPIOTE130_1_IRQn
         #define nrfx_gpiote_irq_handler GPIOTE130_1_IRQHandler
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
@@ -8588,6 +8588,16 @@
         NRF_PROCESSOR_PPR         = 13,
         NRF_PROCESSOR_FLPR        = 14,
     } NRF_PROCESSORID_Type;
+
+    #if defined(NRF_CELLCORE)
+        #if defined(NRF_TRUSTZONE_NONSECURE)
+            #define NRF_GPIOTE131_IRQn      GPIOTE131_0_IRQn
+            #define nrfx_gpiote_irq_handler GPIOTE131_0_IRQHandler
+        #else
+            #define NRF_GPIOTE131_IRQn      GPIOTE131_1_IRQn
+            #define nrfx_gpiote_irq_handler GPIOTE131_1_IRQHandler
+        #endif // defined(NRF_TRUSTZONE_NONSECURE)
+    #endif //defined(NRF_CELLCORE)
 
     typedef struct {
         __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Non-secure port event from owner n                    */

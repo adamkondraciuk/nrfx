@@ -111,23 +111,29 @@ extern "C" {
 /* Start of GPIOTE Extended section                                                               */
 /*------------------------------------------------------------------------------------------------*/
 
-#if defined(NRF54H20_ENGA_XXAA) || defined(MOONLIGHT_XXAA)
-#define TE_MANAGED_PORTS_MASK                   \
-    NRFX_COND_CODE_1(NRF_TRUSTZONE_NONSECURE,   \
-        (NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK | \
-         NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK | \
-         NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK | \
-         NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK), \
-        (NRF_GPIOTE_INT_PORT0_SECURE_MASK |     \
-         NRF_GPIOTE_INT_PORT1_SECURE_MASK |     \
-         NRF_GPIOTE_INT_PORT2_SECURE_MASK |     \
-         NRF_GPIOTE_INT_PORT3_SECURE_MASK))
-#elif defined(HALTIUM_XXAA)
-#define TE_MANAGED_PORTS_MASK    \
-    (NRF_GPIOTE_INT_PORT0_MASK | \
-     NRF_GPIOTE_INT_PORT1_MASK | \
-     NRF_GPIOTE_INT_PORT2_MASK | \
-     NRF_GPIOTE_INT_PORT9_MASK)
+#if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
+    #if !defined(NRF_CELLCORE)
+        #define NRF_GPIOTE NRF_GPIOTE130
+        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
+    #else
+        #define NRF_GPIOTE NRF_GPIOTE131
+        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
+    #endif
+#elif defined(NRF_GPIOTE20)
+    #define NRF_GPIOTE     NRF_GPIOTE20
+    #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE20_IRQn
+#endif
+
+#if defined(GPIOTE_INTEN0_IN0_Msk)
+    #if defined(NRF_SECURE) || defined(MOONLIGHT_XXAA)
+        #define NRF_GPIOTE_PORT_ID 0
+    #elif defined(NRF_APPLICATION) || defined(NRF_PPR)
+        #define NRF_GPIOTE_PORT_ID 1
+    #elif defined(NRF_RADIOCORE) || defined(NRF_CELLCORE)
+        #define NRF_GPIOTE_PORT_ID 2
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GPIOTE_PORT_ID 3
+    #endif
 #endif
 
 /*------------------------------------------------------------------------------------------------*/

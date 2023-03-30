@@ -36,13 +36,6 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_gpiote_events_process(NRF_GPIOTE_Typ
 #define NRFY_GPIOTE_HAS_LATENCY 0
 #endif
 
-#if NRF_GPIOTE_HAS_MULTIPLE_INT || defined(__NRFX_DOXYGEN__)
-/** @refhal{NRF_GPIOTE_HAS_MULTIPLE_INT} */
-#define NRFY_GPIOTE_HAS_MULTIPLE_INT 1
-#else
-#define NRFY_GPIOTE_HAS_MULTIPLE_INT 0
-#endif
-
 /**
  * @brief Function for initializing the specified GPIOTE interrupts.
  *
@@ -61,27 +54,10 @@ NRFY_STATIC_INLINE void nrfy_gpiote_int_init(NRF_GPIOTE_Type * p_reg,
         __nrfy_internal_gpiote_event_enabled_clear(p_reg, mask, nrf_gpiote_in_event_get(i));
     }
 
-#if defined(NRFY_GPIOTE_HAS_MULTIPLE_INT)
-#if defined(GPIOTE_GPIOTE_NCHANNELS)
-    uint8_t max_index = GPIOTE_GPIOTE_NCHANNELS;
-#else
-    uint8_t max_index = GPIO_COUNT;
-#endif
-#else
-    uint8_t max_index = 1;
-#endif // NRFY_GPIOTE_HAS_MULTIPLE_INT
+    __nrfy_internal_gpiote_event_enabled_clear(p_reg, mask, NRF_GPIOTE_EVENT_PORT);
 
-    for (uint8_t i = 0; i < max_index; i++)
-    {
-        __nrfy_internal_gpiote_event_enabled_clear(p_reg,
-                                                   mask,
-                                                   nrf_gpiote_port_event_get(i));
-    }
-
-#if defined(NRF_GPIOTE130)
-    IRQn_Type irqn = NRF_GPIOTE130_IRQn;
-#elif defined(NRF_GPIOTE20)
-    IRQn_Type irqn = NRF_GPIOTE20_IRQn;
+#if defined(NRF_GPIOTE_IRQn_EXT)
+    IRQn_Type irqn = NRF_GPIOTE_IRQn_EXT;
 #else
     IRQn_Type irqn = nrfx_get_irq_number(p_reg);
 #endif
@@ -331,12 +307,6 @@ NRFY_STATIC_INLINE nrf_gpiote_event_t nrfy_gpiote_in_event_get(uint8_t index)
     return nrf_gpiote_in_event_get(index);
 }
 
-/** @refhal{nrf_gpiote_port_event_get} */
-NRFY_STATIC_INLINE nrf_gpiote_event_t nrfy_gpiote_port_event_get(uint8_t index)
-{
-    return nrf_gpiote_port_event_get(index);
-}
-
 #if NRFY_GPIOTE_HAS_LATENCY
 /** @refhal{nrf_gpiote_latency_set} */
 NRFY_STATIC_INLINE void nrfy_gpiote_latency_set(NRF_GPIOTE_Type *    p_reg,
@@ -399,23 +369,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_gpiote_events_process(NRF_GPIOTE_Typ
                                                   &event_mask);
     }
 
-#if NRFY_GPIOTE_HAS_MULTIPLE_INT
-#if defined(GPIOTE_GPIOTE_NCHANNELS)
-    uint8_t max_index = GPIOTE_GPIOTE_NCHANNELS;
-#else
-    uint8_t max_index = GPIO_COUNT;
-#endif 
-#else
-    uint8_t max_index = 1;
-#endif// NRFY_GPIOTE_HAS_MULTIPLE_INT
-
-    for (uint8_t i = 0; i < max_index; i++)
-    {
-        (void)__nrfy_internal_gpiote_event_handle(p_reg,
-                                                  mask,
-                                                  nrf_gpiote_port_event_get(i),
-                                                  &event_mask);
-    }
+    (void)__nrfy_internal_gpiote_event_handle(p_reg, mask, NRF_GPIOTE_EVENT_PORT, &event_mask);
 
     return event_mask;
 }

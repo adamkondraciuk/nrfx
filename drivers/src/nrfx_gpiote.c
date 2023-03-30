@@ -21,10 +21,6 @@
 #error "Not supported."
 #endif
 
-#if !defined(TE_MANAGED_PORTS_MASK)
-#define TE_MANAGED_PORTS_MASK NRF_GPIOTE_INT_PORT_MASK
-#endif
-
 /* Use legacy configuration if new is not present. That will lead to slight
  * increase of RAM usage since number of slots will exceed application need.
  */
@@ -575,8 +571,7 @@ nrfx_err_t nrfx_gpiote_init(uint8_t interrupt_priority)
 
     memset(m_cb.pin_flags, 0, sizeof(m_cb.pin_flags));
 
-    uint32_t mask = (uint32_t)TE_MANAGED_PORTS_MASK;
-    nrfy_gpiote_int_init(NRF_GPIOTE, mask, interrupt_priority, true);
+    nrfy_gpiote_int_init(NRF_GPIOTE, (uint32_t)NRF_GPIOTE_INT_PORT_MASK, interrupt_priority, true);
 
     m_cb.state = NRFX_DRV_STATE_INITIALIZED;
     m_cb.available_evt_handlers = NRFX_BIT_MASK(NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS);
@@ -821,7 +816,7 @@ nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin)
         return nrfy_gpiote_in_event_get((uint8_t)pin_te_get(pin));
     }
 
-    return nrfy_gpiote_port_event_get((uint8_t)nrfy_gpio_pin_port_number_extract(&pin));
+    return NRF_GPIOTE_EVENT_PORT;
 }
 
 
@@ -932,8 +927,7 @@ static void port_event_handle(void)
 
         /* All pins have been handled, clear PORT, check latch again in case
          * something came between deciding to exit and clearing PORT event. */
-        uint32_t evt_mask = (uint32_t)TE_MANAGED_PORTS_MASK;
-        (void)nrfy_gpiote_events_process(NRF_GPIOTE, evt_mask);
+        (void)nrfy_gpiote_events_process(NRF_GPIOTE, (uint32_t)NRF_GPIOTE_INT_PORT_MASK);
     } while (latch_pending_read_and_check(latch));
 }
 
@@ -1042,8 +1036,7 @@ static void port_event_handle(void)
             }
         }
 
-        uint32_t evt_mask = (uint32_t)TE_MANAGED_PORTS_MASK;
-        (void)nrfy_gpiote_events_process(NRF_GPIOTE, evt_mask);
+        (void)nrfy_gpiote_events_process(NRF_GPIOTE, (uint32_t)NRF_GPIOTE_INT_PORT_MASK);
     } while (input_read_and_check(input, pins_to_check));
 }
 #endif // defined(NRF_GPIO_LATCH_PRESENT)
@@ -1064,16 +1057,20 @@ static void gpiote_evt_handle(uint32_t mask)
 void nrfx_gpiote_irq_handler(void)
 {
     /* Collect status of all GPIOTE pin events. Processing is done once all are collected and cleared.*/
-    uint32_t in_evt_mask = nrfy_gpiote_events_process(NRF_GPIOTE, NRF_GPIOTE_INT_IN_MASK);
+    uint32_t enabled_in_events = nrf_gpiote_int_enable_check(NRF_GPIOTE, NRF_GPIOTE_INT_IN_MASK);
+    uint32_t evt_mask = nrfy_gpiote_events_process(NRF_GPIOTE,
+                                                   enabled_in_events |
+                                                   (uint32_t)NRF_GPIOTE_INT_PORT_MASK);
 
-    /* Collect status of all PORT events */
-    uint32_t mask = (uint32_t)TE_MANAGED_PORTS_MASK;
-    (void)nrfy_gpiote_events_process(NRF_GPIOTE, mask);
-
-    port_event_handle();
+    /* Handle PORT event. */
+    if (evt_mask & (uint32_t)NRF_GPIOTE_INT_PORT_MASK)
+    {
+        port_event_handle();
+        evt_mask &= ~(uint32_t)NRF_GPIOTE_INT_PORT_MASK;
+    }
 
     /* Process pin events. */
-    gpiote_evt_handle(in_evt_mask);
+    gpiote_evt_handle(evt_mask);
 }
 
 #endif // NRFX_CHECK(NRFX_GPIOTE_ENABLED)
