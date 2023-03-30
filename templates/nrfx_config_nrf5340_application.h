@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
 
 #ifndef NRFX_CONFIG_NRF5340_APPLICATION_H__
 #define NRFX_CONFIG_NRF5340_APPLICATION_H__
@@ -50,10 +50,6 @@
 #define NRF_RTC0         NRF_RTC0_S
 #define NRF_RTC1         NRF_RTC1_S
 #define NRF_SAADC        NRF_SAADC_S
-#define NRF_SPI0         NRF_SPI0_S
-#define NRF_SPI1         NRF_SPI1_S
-#define NRF_SPI2         NRF_SPI2_S
-#define NRF_SPI3         NRF_SPI3_S
 #define NRF_SPIM0        NRF_SPIM0_S
 #define NRF_SPIM1        NRF_SPIM1_S
 #define NRF_SPIM2        NRF_SPIM2_S
@@ -66,10 +62,6 @@
 #define NRF_TIMER0       NRF_TIMER0_S
 #define NRF_TIMER1       NRF_TIMER1_S
 #define NRF_TIMER2       NRF_TIMER2_S
-#define NRF_TWI0         NRF_TWI0_S
-#define NRF_TWI1         NRF_TWI1_S
-#define NRF_TWI2         NRF_TWI2_S
-#define NRF_TWI3         NRF_TWI3_S
 #define NRF_TWIM0        NRF_TWIM0_S
 #define NRF_TWIM1        NRF_TWIM1_S
 #define NRF_TWIM2        NRF_TWIM2_S
@@ -78,10 +70,6 @@
 #define NRF_TWIS1        NRF_TWIS1_S
 #define NRF_TWIS2        NRF_TWIS2_S
 #define NRF_TWIS3        NRF_TWIS3_S
-#define NRF_UART0        NRF_UART0_S
-#define NRF_UART1        NRF_UART1_S
-#define NRF_UART2        NRF_UART2_S
-#define NRF_UART3        NRF_UART3_S
 #define NRF_UARTE0       NRF_UARTE0_S
 #define NRF_UARTE1       NRF_UARTE1_S
 #define NRF_UARTE2       NRF_UARTE2_S
@@ -107,14 +95,19 @@
 #define NRF_SPU        NRF_SPU_S
 #define NRF_UICR       NRF_UICR_S
 
-/* Fixups for GPIOTE driver. */
+/* Fixups for the GPIOTE driver. */
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#define NRF_GPIOTE        NRF_GPIOTE1
+#define GPIOTE_IRQHandler GPIOTE1_IRQHandler
+#else
 #define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
+#endif
 
 
 /** @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3 for RISCV and 7 for ARM Cortex-M
+ * Integer value. Minimum: 0 Maximum: 7
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
 #define NRFX_DEFAULT_IRQ_PRIORITY 7
@@ -126,16 +119,6 @@
  */
 #ifndef NRFX_CLOCK_ENABLED
 #define NRFX_CLOCK_ENABLED 0
-#endif
-
-/** @brief NRFX_CLOCK_CONFIG_FLLCLK_SRC
- *
- * Integer value.
- * Supported values:
- * - FLL16M = 0
- */
-#ifndef NRFX_CLOCK_CONFIG_FLLCLK_SRC
-#define NRFX_CLOCK_CONFIG_FLLCLK_SRC 0
 #endif
 
 /** @brief NRFX_CLOCK_CONFIG_HFCLK192M_SRC
@@ -383,7 +366,7 @@
  * - Debug   = 4
  */
 #ifndef NRFX_GPIOTE_CONFIG_LOG_LEVEL
-#define NRFX_GPIOTE_CONFIG_LOG_LEVEL NRFX_DEFAULT_IRQ_PRIORITY
+#define NRFX_GPIOTE_CONFIG_LOG_LEVEL 3
 #endif
 
 /** @brief NRFX_I2S_ENABLED

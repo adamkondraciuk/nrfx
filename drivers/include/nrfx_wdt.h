@@ -10,6 +10,11 @@
 extern "C" {
 #endif
 
+/* On devices with single instance (with no id) use instance 0. */
+#if defined(NRF_WDT) && defined(NRFX_WDT_ENABLED) && !defined(NRFX_WDT0_ENABLED)
+#define NRFX_WDT0_ENABLED 1
+#endif
+
 /**
  * @defgroup nrfx_wdt WDT driver
  * @{

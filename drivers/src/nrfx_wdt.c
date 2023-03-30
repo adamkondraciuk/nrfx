@@ -4,11 +4,11 @@
 
 #if NRFX_CHECK(NRFX_WDT_ENABLED)
 
+#include <nrfx_wdt.h>
+
 #if !NRFX_FEATURE_PRESENT(NRFX_WDT, _ENABLED)
 #error "No enabled WDT instances. Check <nrfx_config.h>."
 #endif
-
-#include <nrfx_wdt.h>
 
 #define NRFX_LOG_MODULE WDT
 #include <nrfx_log.h>

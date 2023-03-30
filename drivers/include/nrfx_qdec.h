@@ -10,6 +10,11 @@
 extern "C" {
 #endif
 
+/* On devices with single instance (with no id) use instance 0. */
+#if defined(NRF_QDEC) && defined(NRFX_QDEC_ENABLED) && !defined(NRFX_QDEC0_ENABLED)
+#define NRFX_QDEC0_ENABLED 1
+#endif
+
 /**
  * @defgroup nrfx_qdec QDEC driver
  * @{

@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2019>$$$*/
 
 #ifndef NRFX_CONFIG_NRF5340_NETWORK_H__
 #define NRFX_CONFIG_NRF5340_NETWORK_H__
@@ -34,7 +34,6 @@
 #define NRF_RNG        NRF_RNG_NS
 #define NRF_RTC0       NRF_RTC0_NS
 #define NRF_RTC1       NRF_RTC1_NS
-#define NRF_SPI0       NRF_SPI0_NS
 #define NRF_SPIM0      NRF_SPIM0_NS
 #define NRF_SPIS0      NRF_SPIS0_NS
 #define NRF_SWI0       NRF_SWI0_NS
@@ -45,10 +44,8 @@
 #define NRF_TIMER0     NRF_TIMER0_NS
 #define NRF_TIMER1     NRF_TIMER1_NS
 #define NRF_TIMER2     NRF_TIMER2_NS
-#define NRF_TWI0       NRF_TWI0_NS
 #define NRF_TWIM0      NRF_TWIM0_NS
 #define NRF_TWIS0      NRF_TWIS0_NS
-#define NRF_UART0      NRF_UART0_NS
 #define NRF_UARTE0     NRF_UARTE0_NS
 #define NRF_UICR       NRF_UICR_NS
 #define NRF_VMC        NRF_VMC_NS
@@ -57,7 +54,7 @@
 
 /** @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3 for RISCV and 7 for ARM Cortex-M
+ * Integer value. Minimum: 0 Maximum: 7
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
 #define NRFX_DEFAULT_IRQ_PRIORITY 7
@@ -69,16 +66,6 @@
  */
 #ifndef NRFX_CLOCK_ENABLED
 #define NRFX_CLOCK_ENABLED 0
-#endif
-
-/** @brief NRFX_CLOCK_CONFIG_FLLCLK_SRC
- *
- * Integer value.
- * Supported values:
- * - FLL16M = 0
- */
-#ifndef NRFX_CLOCK_CONFIG_FLLCLK_SRC
-#define NRFX_CLOCK_CONFIG_FLLCLK_SRC 0
 #endif
 
 /** @brief NRFX_CLOCK_CONFIG_LF_SRC
@@ -238,7 +225,7 @@
  * - Debug   = 4
  */
 #ifndef NRFX_GPIOTE_CONFIG_LOG_LEVEL
-#define NRFX_GPIOTE_CONFIG_LOG_LEVEL NRFX_DEFAULT_IRQ_PRIORITY
+#define NRFX_GPIOTE_CONFIG_LOG_LEVEL 3
 #endif
 
 /** @brief NRFX_IPC_ENABLED
@@ -763,14 +750,6 @@
  */
 #ifndef NRFX_WDT_ENABLED
 #define NRFX_WDT_ENABLED 0
-#endif
-
-/** @brief NRFX_WDT0_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_WDT0_ENABLED
-#define NRFX_WDT0_ENABLED 0
 #endif
 
 /** @brief NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY

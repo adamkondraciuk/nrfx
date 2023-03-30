@@ -4,11 +4,12 @@
 
 #if NRFX_CHECK(NRFX_QDEC_ENABLED)
 
+#include <nrfx_qdec.h>
+
 #if !NRFX_FEATURE_PRESENT(NRFX_QDEC, _ENABLED)
 #error "No enabled QDEC instances. Check <nrfx_config.h>."
 #endif
 
-#include <nrfx_qdec.h>
 #include <haly/nrfy_gpio.h>
 
 #define NRFX_LOG_MODULE QDEC

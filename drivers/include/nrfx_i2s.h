@@ -10,6 +10,11 @@
 extern "C" {
 #endif
 
+/* On devices with single instance (with no id) use instance 0. */
+#if defined(NRF_I2S) && defined(NRFX_I2S_ENABLED) && !defined(NRFX_I2S0_ENABLED)
+#define NRFX_I2S0_ENABLED 1
+#endif
+
 /**
  * @defgroup nrfx_i2s I2S driver
  * @{

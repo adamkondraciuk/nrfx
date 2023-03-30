@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2020>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
 
 #ifndef NRFX_CONFIG_NRF54L15_APPLICATION_H__
 #define NRFX_CONFIG_NRF54L15_APPLICATION_H__
@@ -10,7 +10,7 @@
 
 /** @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3 for RISCV and 7 for ARM Cortex-M
+ * Integer value. Minimum: 0 Maximum: 7
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
 #define NRFX_DEFAULT_IRQ_PRIORITY 7
@@ -22,16 +22,6 @@
  */
 #ifndef NRFX_CLOCK_ENABLED
 #define NRFX_CLOCK_ENABLED 0
-#endif
-
-/** @brief NRFX_CLOCK_CONFIG_FLLCLK_SRC
- *
- * Integer value.
- * Supported values:
- * - FLL16M = 0
- */
-#ifndef NRFX_CLOCK_CONFIG_FLLCLK_SRC
-#define NRFX_CLOCK_CONFIG_FLLCLK_SRC 0
 #endif
 
 /** @brief NRFX_CLOCK_CONFIG_LF_SRC
@@ -229,7 +219,7 @@
  * - Debug   = 4
  */
 #ifndef NRFX_GPIOTE_CONFIG_LOG_LEVEL
-#define NRFX_GPIOTE_CONFIG_LOG_LEVEL NRFX_DEFAULT_IRQ_PRIORITY
+#define NRFX_GPIOTE_CONFIG_LOG_LEVEL 3
 #endif
 
 /** @brief NRFX_GRTC_ENABLED
