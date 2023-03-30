@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -67,11 +67,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF5340_XXAA_NETWORK)
     #include "nrf5340_network_peripherals.h"
 
+#elif defined(NRF9120_XXAA)
+    #include "nrf9120_peripherals.h"
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_peripherals.h"
 
 #else
-    #error "Device must be defined. See nrf.h."
+    #error "Device must be defined. See nrf_peripherals.h."
 #endif
 
 /*lint --flb "Leave library region" */

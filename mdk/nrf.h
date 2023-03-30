@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   51 
+#define MDK_MINOR_VERSION   53 
 #define MDK_MICRO_VERSION   0 
 
    
@@ -120,7 +120,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* Define NRF91_SERIES for common use in nRF91 series devices. */
-#if defined (NRF9160_XXAA)
+#if defined (NRF9160_XXAA) ||  defined (NRF9120_XXAA)
     #ifndef NRF91_SERIES    
         #define NRF91_SERIES
     #endif
@@ -193,6 +193,16 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9160.h"
     #include "nrf9160_bitfields.h"
     #include "nrf9160_name_change.h"
+
+    /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
+    #if !defined(NRF_FICR_NS)
+        #define NRF_FICR_NS_BASE 0x2003E000
+        #define NRF_FICR_NS ((NRF_FICR_Type*)          NRF_FICR_NS_BASE)
+    #endif
+
+#elif defined (NRF9120_XXAA)
+    #include "nrf9120.h"
+    #include "nrf9120_bitfields.h"
 
     /* Address of locations in RAM that will be used to store a NS-accessible version of FICR */
     #if !defined(NRF_FICR_NS)

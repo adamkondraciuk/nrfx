@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -58,6 +58,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define NVMC_COUNT 1
 
 #define NVMC_FEATURE_CACHE_PRESENT
+
+/* Memory Protection Unit */
+#define MPU_REGION_NUM 16
 
 /* GPIO */
 #define GPIO_PRESENT
