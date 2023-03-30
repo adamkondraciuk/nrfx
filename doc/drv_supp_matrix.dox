@@ -8,7 +8,7 @@ This page lists nrfx driver components supported by each SoC:
 @anchor nrfx_drv_supp_matrix_table
 @par Driver support matrix
 
-The following matrix provides a comparative overview of which drivers are supported by specific Nordic SoCs.
+The following matrix provides a comparative overview of which drivers are supported by specific Nordic SoCs and SiPs.
 
 | Driver           | nRF51 Series | nRF52805     | nRF52810/nRF52811 | nRF52820     | nRF52832     | nRF52833     | nRF52840     | nRF5340      | nRF9160      |
 |------------------|--------------|--------------|-------------------|--------------|--------------|--------------|--------------|--------------|--------------|
@@ -66,7 +66,7 @@ The following matrix provides a comparative overview of which drivers are suppor
 @anchor nrfx_drv_supp_matrix_list
 @par Driver support lists
 
-The following pages list supported drivers by SoC:
+The following pages list the drivers supported by respective SoCs and SiPs:
 
 - @subpage nrf51_series_drivers
 - @subpage nrf52805_drivers
