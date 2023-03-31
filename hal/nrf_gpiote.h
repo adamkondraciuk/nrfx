@@ -22,6 +22,7 @@ extern "C" {
 #else
 #define NRF_GPIOTE NRF_GPIOTE131
 #endif
+#define GPIOTE_GPIOTE_NCHANNELS 8
 #elif defined(NRF_GPIOTE20)
 #define NRF_GPIOTE              NRF_GPIOTE20
 #define GPIOTE_GPIOTE_NCHANNELS GPIOTE20_GPIOTE_NCHANNELS
@@ -163,14 +164,6 @@ typedef enum
     NRF_GPIOTE_EVENT_PORT_2_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[2].SECURE),    ///< Secure port event 2.
     NRF_GPIOTE_EVENT_PORT_3_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3].NONSECURE), ///< Non-secure port event 3.
     NRF_GPIOTE_EVENT_PORT_3_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[3].SECURE),    ///< Secure port event 3.
-    NRF_GPIOTE_EVENT_PORT_4_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4].NONSECURE), ///< Non-secure port event 4.
-    NRF_GPIOTE_EVENT_PORT_4_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[4].SECURE),    ///< Secure port event 4.
-    NRF_GPIOTE_EVENT_PORT_5_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5].NONSECURE), ///< Non-secure port event 5.
-    NRF_GPIOTE_EVENT_PORT_5_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[5].SECURE),    ///< Secure port event 5.
-    NRF_GPIOTE_EVENT_PORT_6_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6].NONSECURE), ///< Non-secure port event 6.
-    NRF_GPIOTE_EVENT_PORT_6_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[6].SECURE),    ///< Secure port event 6.
-    NRF_GPIOTE_EVENT_PORT_7_NON_SECURE = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7].NONSECURE), ///< Non-secure port event 7.
-    NRF_GPIOTE_EVENT_PORT_7_SECURE     = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[7].SECURE),    ///< Secure port event 7.
 #else
     NRF_GPIOTE_EVENT_PORT_0            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[0]),           ///< Port event 0.
     NRF_GPIOTE_EVENT_PORT_1            = offsetof(NRF_GPIOTE_Type, EVENTS_PORT[1]),           ///< Port event 1.
@@ -215,14 +208,6 @@ typedef enum
     NRF_GPIOTE_INT_PORT2_SECURE_MASK     = GPIOTE_INTENSET0_PORT2SECURE_Msk,    ///< GPIOTE interrupt from PORT2 secure event.
     NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT3NONSECURE_Msk, ///< GPIOTE interrupt from PORT3 non-secure event.
     NRF_GPIOTE_INT_PORT3_SECURE_MASK     = GPIOTE_INTENSET0_PORT3SECURE_Msk,    ///< GPIOTE interrupt from PORT3 secure event.
-    NRF_GPIOTE_INT_PORT4_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT4NONSECURE_Msk, ///< GPIOTE interrupt from PORT4 non-secure event.
-    NRF_GPIOTE_INT_PORT4_SECURE_MASK     = GPIOTE_INTENSET0_PORT4SECURE_Msk,    ///< GPIOTE interrupt from PORT4 secure event.
-    NRF_GPIOTE_INT_PORT5_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT5NONSECURE_Msk, ///< GPIOTE interrupt from PORT5 non-secure event.
-    NRF_GPIOTE_INT_PORT5_SECURE_MASK     = GPIOTE_INTENSET0_PORT5SECURE_Msk,    ///< GPIOTE interrupt from PORT5 secure event.
-    NRF_GPIOTE_INT_PORT6_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT6NONSECURE_Msk, ///< GPIOTE interrupt from PORT6 non-secure event.
-    NRF_GPIOTE_INT_PORT6_SECURE_MASK     = GPIOTE_INTENSET0_PORT6SECURE_Msk,    ///< GPIOTE interrupt from PORT6 secure event.
-    NRF_GPIOTE_INT_PORT7_NON_SECURE_MASK = GPIOTE_INTENSET0_PORT7NONSECURE_Msk, ///< GPIOTE interrupt from PORT7 non-secure event.
-    NRF_GPIOTE_INT_PORT7_SECURE_MASK     = GPIOTE_INTENSET0_PORT7SECURE_Msk,    ///< GPIOTE interrupt from PORT7 secure event.
 #else
     NRF_GPIOTE_INT_PORT0_MASK            = GPIOTE_INTENSET0_PORT0_Msk,          ///< GPIOTE interrupt from PORT0 event.
     NRF_GPIOTE_INT_PORT1_MASK            = GPIOTE_INTENSET0_PORT1_Msk,          ///< GPIOTE interrupt from PORT1 event.
@@ -274,21 +259,13 @@ typedef enum
 #define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_NON_SECURE_MASK | \
                                   NRF_GPIOTE_INT_PORT1_NON_SECURE_MASK | \
                                   NRF_GPIOTE_INT_PORT2_NON_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT4_NON_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT5_NON_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT6_NON_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT7_NON_SECURE_MASK)
+                                  NRF_GPIOTE_INT_PORT3_NON_SECURE_MASK)
 #else
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
 #define NRF_GPIOTE_INT_PORT_MASK (NRF_GPIOTE_INT_PORT0_SECURE_MASK | \
                                   NRF_GPIOTE_INT_PORT1_SECURE_MASK | \
                                   NRF_GPIOTE_INT_PORT2_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT3_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT4_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT5_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT6_SECURE_MASK | \
-                                  NRF_GPIOTE_INT_PORT7_SECURE_MASK)
+                                  NRF_GPIOTE_INT_PORT3_SECURE_MASK)
 #endif // defined(NRF_TRUSTZONE_NONSECURE)
 #else
 /** @brief Mask holding positions of available GPIOTE port interrupts. */
