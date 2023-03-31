@@ -171,7 +171,6 @@ typedef struct
 {
     bool vpr;     ///< Mask VPR.
     bool vref;    ///< Mask VREF.
-    bool vddacfg; ///< Mask VDD_CFG.
     bool vddcfg;  ///< Mask VDDCFG.
     bool vdda;    ///< Mask VDDA.
     bool vdd;     ///< Mask VDD.
@@ -988,7 +987,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_mask_set(NRF_MRAMC_Type *               p
         ((uint32_t)MRAMC_POWER_MASK_KEY_Enable << MRAMC_POWER_MASK_KEY_Pos)     |
         ((uint32_t)p_data->vpr                 << MRAMC_POWER_MASK_VPR_Pos)     |
         ((uint32_t)p_data->vref                << MRAMC_POWER_MASK_VREF_Pos)    |
-        ((uint32_t)p_data->vddacfg             << MRAMC_POWER_MASK_VDDACFG_Pos) |
         ((uint32_t)p_data->vddcfg              << MRAMC_POWER_MASK_VDDCFG_Pos)  |
         ((uint32_t)p_data->vdda                << MRAMC_POWER_MASK_VDDA_Pos)    |
         ((uint32_t)p_data->vdd                 << MRAMC_POWER_MASK_VDD_Pos);
@@ -999,7 +997,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_mask_get(NRF_MRAMC_Type const *   p_reg,
 {
     p_data->vpr     = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VPR_Msk);
     p_data->vref    = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VREF_Msk);
-    p_data->vddacfg = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VDDACFG_Msk);
     p_data->vddcfg  = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VDDCFG_Msk);
     p_data->vdda    = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VDDA_Msk);
     p_data->vdd     = (bool)(p_reg->POWER.MASK & MRAMC_POWER_MASK_VDD_Msk);
@@ -1013,7 +1010,6 @@ NRF_STATIC_INLINE nrf_mramc_power_status_t nrf_mramc_power_status_get(NRF_MRAMC_
 NRF_STATIC_INLINE void nrf_mramc_powerup_ack_get(NRF_MRAMC_Type const *   p_reg,
                                                  nrf_mramc_power_conf_t * p_data)
 {
-    p_data->vddacfg = (bool)(p_reg->POWER.POWERUPACK & MRAMC_POWER_POWERUPACK_VDDACFG_Msk);
     p_data->vdda    = (bool)(p_reg->POWER.POWERUPACK & MRAMC_POWER_POWERUPACK_VDDA_Msk);
     p_data->vddcfg  = (bool)(p_reg->POWER.POWERUPACK & MRAMC_POWER_POWERUPACK_VDDCFG_Msk);
     p_data->vdd     = (bool)(p_reg->POWER.POWERUPACK & MRAMC_POWER_POWERUPACK_VDD_Msk);
@@ -1024,7 +1020,6 @@ NRF_STATIC_INLINE void nrf_mramc_powerup_ack_get(NRF_MRAMC_Type const *   p_reg,
 NRF_STATIC_INLINE void nrf_mramc_powerdown_ack_get(NRF_MRAMC_Type const *   p_reg,
                                                    nrf_mramc_power_conf_t * p_data)
 {
-    p_data->vddacfg = (bool)(p_reg->POWER.POWERDOWNACK & MRAMC_POWER_POWERDOWNACK_VDDACFG_Msk);
     p_data->vdda    = (bool)(p_reg->POWER.POWERDOWNACK & MRAMC_POWER_POWERDOWNACK_VDDA_Msk);
     p_data->vddcfg  = (bool)(p_reg->POWER.POWERDOWNACK & MRAMC_POWER_POWERDOWNACK_VDDCFG_Msk);
     p_data->vdd     = (bool)(p_reg->POWER.POWERDOWNACK & MRAMC_POWER_POWERDOWNACK_VDD_Msk);
@@ -1039,7 +1034,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_on_set(NRF_MRAMC_Type *            
         ((uint32_t)MRAMC_POWER_FORCEON_KEY_Enable << MRAMC_POWER_FORCEON_KEY_Pos)     |
         ((uint32_t)p_data->vpr                    << MRAMC_POWER_FORCEON_VPR_Pos)     |
         ((uint32_t)p_data->vref                   << MRAMC_POWER_FORCEON_VREF_Pos)    |
-        ((uint32_t)p_data->vddacfg                << MRAMC_POWER_FORCEON_VDDACFG_Pos) |
         ((uint32_t)p_data->vddcfg                 << MRAMC_POWER_FORCEON_VDDCFG_Pos)  |
         ((uint32_t)p_data->vdda                   << MRAMC_POWER_FORCEON_VDDA_Pos)    |
         ((uint32_t)p_data->vdd                    << MRAMC_POWER_FORCEON_VDD_Pos);
@@ -1050,7 +1044,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_on_get(NRF_MRAMC_Type const *   p_r
 {
     p_data->vpr     = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VPR_Msk);
     p_data->vref    = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VREF_Msk);
-    p_data->vddacfg = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VDDACFG_Msk);
     p_data->vddcfg  = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VDDCFG_Msk);
     p_data->vdda    = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VDDA_Msk);
     p_data->vdd     = (bool)(p_reg->POWER.FORCEON & MRAMC_POWER_FORCEON_VDD_Msk);
@@ -1063,7 +1056,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_off_set(NRF_MRAMC_Type *           
        ((uint32_t)MRAMC_POWER_FORCEOFF_KEY_Enable << MRAMC_POWER_FORCEOFF_KEY_Pos)     |
        ((uint32_t)p_data->vpr                     << MRAMC_POWER_FORCEOFF_VPR_Pos)     |
        ((uint32_t)p_data->vref                    << MRAMC_POWER_FORCEOFF_VREF_Pos)    |
-       ((uint32_t)p_data->vddacfg                 << MRAMC_POWER_FORCEOFF_VDDACFG_Pos) |
        ((uint32_t)p_data->vddcfg                  << MRAMC_POWER_FORCEOFF_VDDCFG_Pos)  |
        ((uint32_t)p_data->vdda                    << MRAMC_POWER_FORCEOFF_VDDA_Pos)    |
        ((uint32_t)p_data->vdd                     << MRAMC_POWER_FORCEOFF_VDD_Pos);
@@ -1074,7 +1066,6 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_off_get(NRF_MRAMC_Type const *   p_
 {
     p_data->vpr     = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VPR_Msk);
     p_data->vref    = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VREF_Msk);
-    p_data->vddacfg = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VDDACFG_Msk);
     p_data->vddcfg  = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VDDCFG_Msk);
     p_data->vdda    = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VDDA_Msk);
     p_data->vdd     = (bool)(p_reg->POWER.FORCEOFF & MRAMC_POWER_FORCEOFF_VDD_Msk);
