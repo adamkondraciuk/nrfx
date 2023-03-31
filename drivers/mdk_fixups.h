@@ -12,6 +12,7 @@
 
 #if defined(HALTIUM_XXAA)
 
+    /* TODO: MDK-2221 */
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
     #if !defined(NRF_IPCMAP_CHANNEL_COUNT)
@@ -43,6 +44,7 @@
         #define NRF_DOMAIN NRF_DOMAIN_UMAC
     #endif
 
+    /* TODO: MDK-2221 */
     #define NRF_PROCESSOR_COUNT (NRF_PROCESSOR_FLPR + 1)
 
     /* TODO: MDK-2059 */
@@ -989,34 +991,6 @@
 
 #if defined(NRF54H20_ENGA_XXAA)
 
-    typedef struct {                                   /*!< RESETHUB Structure                                                   */
-        __OM uint32_t TASKS_RESETDOMAIN[8];              /*!< (@ 0x00000000) Reset the domain [n], where n is domain id.           */
-        __IM uint32_t RESERVED[56];
-        __IOM uint32_t EVENTS_DOMAINRESET[8];            /*!< (@ 0x00000100) Domain [n] was reset, where n is domain id.           */
-        __IM uint32_t RESERVED1[120];
-        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-        __IM uint32_t RESERVED2[60];
-        __IOM NRF_RESETHUB_RESETREAS_Type RESETREAS;     /*!< (@ 0x00000400) (unspecified)                                         */
-        __IM uint32_t RESERVED3[55];
-        __IOM uint32_t RESETMASK;                        /*!< (@ 0x00000500) Mask the reset request for a domain by itself.        */
-        __IOM uint32_t CROSSDOMAINRESET;                 /*!< (@ 0x00000504) Enable cross domain resets.                           */
-        __IOM uint32_t GPREGRET;                         /*!< (@ 0x00000508) General purpose retention register.                   */
-    } NRF_RESETHUB_Type_fixed;                         /*!< Size = 1292 (0x50C)                                                  */
-
-    #if defined(NRF_RESETHUB_S)
-        #undef NRF_RESETHUB_S
-        #define NRF_RESETHUB_S ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_S_BASE)
-    #endif
-    #if defined(NRF_RESETHUB_NS)
-        #undef NRF_RESETHUB_NS
-        #define NRF_RESETHUB_NS ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_NS_BASE)
-    #endif
-
-    #define NRF_RESETHUB_Type NRF_RESETHUB_Type_fixed
-
     #define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 0
     #define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 0
     #define SPIM130_FEATURE_HARDWARE_CSN_PRESENT 0
@@ -1123,17 +1097,66 @@
 
     #define EGU020_CH_NUM 16
 
-    #define P0_PIN_NUM (12)
-    #define P1_PIN_NUM (12)
-    #define P2_PIN_NUM (12)
-    #define P6_PIN_NUM (14)
-    #define P7_PIN_NUM (8)
-    #define P9_PIN_NUM (6)
+    #if defined(P0_PIN_NUM)
+        #undef P0_PIN_NUM
+    #endif
+    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
+
+    #if defined(P1_PIN_NUM)
+        #undef P1_PIN_NUM
+    #endif
+    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
+
+    #if defined(P2_PIN_NUM)
+        #undef P2_PIN_NUM
+    #endif
+    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
+
+    #if defined(P6_PIN_NUM)
+        #undef P6_PIN_NUM
+    #endif
+    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
+
+    #if defined(P7_PIN_NUM)
+        #undef P7_PIN_NUM
+    #endif
+    #define P7_PIN_NUM (P7_PIN_NUM_MAX - P7_PIN_NUM_MIN + 1)
+
+    #if defined(P9_PIN_NUM)
+        #undef P9_PIN_NUM
+    #endif
+    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
+
+    /* TODO: MDK-2220 */
+
+    #if defined(P0_PINS_PRESENT)
+        #undef P0_PINS_PRESENT
+    #endif
     #define P0_PINS_PRESENT 0xFFFUL
+
+    #if defined(P1_PINS_PRESENT)
+        #undef P1_PINS_PRESENT
+    #endif
     #define P1_PINS_PRESENT 0xFFFUL
+
+    #if defined(P2_PINS_PRESENT)
+        #undef P2_PINS_PRESENT
+    #endif
     #define P2_PINS_PRESENT 0xFFFUL
+
+    #if defined(P6_PINS_PRESENT)
+        #undef P6_PINS_PRESENT
+    #endif
     #define P6_PINS_PRESENT 0x3FFFUL
+
+    #if defined(P7_PINS_PRESENT)
+        #undef P7_PINS_PRESENT
+    #endif
     #define P7_PINS_PRESENT 0xFFUL
+
+    #if defined(P9_PINS_PRESENT)
+        #undef P9_PINS_PRESENT
+    #endif
     #define P9_PINS_PRESENT 0x3FUL
 
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
@@ -1142,44 +1165,6 @@
     #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
     #define P7_FEATURE_PINS_PRESENT P7_PINS_PRESENT
     #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
-
-    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
-    #if defined(GPIO_COUNT)
-        #undef GPIO_COUNT
-        #define GPIO_COUNT 6
-    #endif
-
-    /* TODO: [NRFX-3252] Remove when MDK 8.53.0 is integrated. */
-    #if defined(NRF_P3)
-        #undef NRF_P3
-    #endif
-    #if defined(NRF_P4)
-        #undef NRF_P4
-    #endif
-    #if defined(NRF_P5)
-        #undef NRF_P5
-    #endif
-    #if defined(NRF_P8)
-        #undef NRF_P8
-    #endif
-    #if defined(NRF_P10)
-        #undef NRF_P10
-    #endif
-    #if defined(NRF_P11)
-        #undef NRF_P11
-    #endif
-    #if defined(NRF_P12)
-        #undef NRF_P12
-    #endif
-    #if defined(NRF_P13)
-        #undef NRF_P13
-    #endif
-    #if defined(NRF_P14)
-        #undef NRF_P14
-    #endif
-    #if defined(NRF_P15)
-        #undef NRF_P15
-    #endif
 
     #if defined(UARTE120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE120_EASYDMA_MAXCNT_SIZE)
         #define UARTE120_EASYDMA_MAXCNT_SIZE UARTE120_EASYDMA_MAXCNT_SIZE_MAX
@@ -1216,6 +1201,129 @@
     #if defined(UARTE137_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE137_EASYDMA_MAXCNT_SIZE)
         #define UARTE137_EASYDMA_MAXCNT_SIZE UARTE137_EASYDMA_MAXCNT_SIZE_MAX
     #endif
+
+    /* <periph>_<feature>_MaxCount symbols meaning is inconsistent - sometimes they express
+     * size of an array they describe, sometimes they express last applicable index. */
+
+    #undef CACHEDATA_SET_WAY_DU_MaxCount
+    #undef CACHEDATA_SET_WAY_MaxCount
+    #undef CACHEDATA_SET_MaxCount
+    #undef CACHEINFO_SET_MaxCount
+    #undef DPPIC_TASKS_CHG_MaxCount
+    #undef DPPIC_SUBSCRIBE_CHG_MaxCount
+    #undef ETM_TRCRSCTLR_MaxCount
+    #undef EXMEE_REGION_MaxCount
+    #undef FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount
+    #undef FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount
+    #undef FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount
+    #undef FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount
+    #undef FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount
+    #undef FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount
+    #undef GPIOTE_EVENTS_PORT_MaxCount
+    #undef GPIOTE_PUBLISH_PORT_MaxCount
+    #undef GRTC_CC_MaxCount
+    #undef I2S_CHANNEL_MaxCount
+    #undef I3CCORE_CORE_DEVCHARTABLE_MaxCount
+    #undef IPCMAP_CHANNEL_MaxCount
+    #undef IRQMAP_IRQ_MaxCount
+    #undef LRCCONF_CLKSTAT_MaxCount
+    #undef LRCCONF_CLKCTRL_MaxCount
+    #undef MEMCONF_POWER_MaxCount
+    #undef MEMCONF_REPAIR_MaxCount
+    #undef MEMCONF_BLOCKTYPE_MaxCount
+    #undef MPC_REGION_MaxCount
+    #undef MPC_OVERRIDE_MaxCount
+    #undef OICR_USER_PUBKEY_MaxCount
+    #undef OICR_USER_AUTHOPKEY_MaxCount
+    #undef OICR_NORDIC_PUBKEY_MaxCount
+    #undef OICR_NORDIC_AUTHOPKEY_MaxCount
+    #undef OICR_CRACEN_KEY_MaxCount
+    #undef OICR_MRAM_MaxCount
+    #undef POWER_ABB_MaxCount
+    #undef PWM_SEQ_MaxCount
+    #undef RADIO_ACQINJDMA_MaxCount
+    #undef SAADC_EVENTS_CH_MaxCount
+    #undef SAADC_PUBLISH_CH_MaxCount
+    #undef SAADC_CH_MaxCount
+    #undef SPU_PERIPH_MaxCount
+    #undef SPU_FEATURE_GPIOTE_MaxCount
+    #undef SPU_FEATURE_GPIO_MaxCount
+    #undef SPU_FEATURE_BELLS_DOMAIN_MaxCount
+    #undef STMDATA_DOMAIN_MaxCount
+    #undef STMDATA_BUFFER_MaxCount
+    #undef TAMPC_PROTECT_FEATURE_MaxCount
+    #undef TAMPC_PROTECT_DOMAIN_MaxCount
+    #undef TAMPC_PROTECT_AP_MaxCount
+    #undef UICR_MEM_MaxCount
+    #undef UICR_PERIPH_MaxCount
+    #undef UICR_GPIO_MaxCount
+    #undef UICR_GPIOTE_MaxCount
+    #undef UICR_IPCT_GLOBAL_MaxCount
+    #undef UICR_DPPI_LOCAL_MaxCount
+    #undef UICR_DPPI_GLOBAL_MaxCount
+    #undef UICR_MAILBOX_MaxCount
+    #undef USBHSCORE_HC_MaxCount
+    #undef USBHSCORE_DWCOTGDFIFO_MaxCount
+
+    #define CACHEDATA_SET_WAY_DU_MaxCount (4UL)        /*!< Max size of DU[4] array.                    */
+    #define CACHEDATA_SET_WAY_MaxCount (2UL)           /*!< Max size of WAY[2] array.                   */
+    #define CACHEDATA_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                 */
+    #define CACHEINFO_SET_MaxCount (256UL)             /*!< Max size of SET[256] array.                 */
+    #define DPPIC_TASKS_CHG_MaxCount (2UL)             /*!< Max size of TASKS_CHG[2] array.             */
+    #define DPPIC_SUBSCRIBE_CHG_MaxCount (2UL)         /*!< Max size of SUBSCRIBE_CHG[2] array.         */
+    #define ETM_TRCRSCTLR_MaxCount (32UL)              /*!< Max size of TRCRSCTLR[32] array.            */
+    #define EXMEE_REGION_MaxCount (16UL)               /*!< Max size of REGION[16] array.               */
+    #define FICR_TRIM_SYSCTRL_MEMCONF120_REPAIR_MaxCount (36UL) /*!< Max size of REPAIR[36] array.      */
+    #define FICR_TRIM_SYSCTRL_MEMCONF120_BLOCKTYPE_MaxCount (8UL) /*!< Max size of BLOCKTYPE[8] array.  */
+    #define FICR_TRIM_SYSCTRL_MEMCONF130_BLOCKTYPE_MaxCount (2UL) /*!< Max size of BLOCKTYPE[2] array.  */
+    #define FICR_TRIM_APPLICATION_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array. */
+    #define FICR_TRIM_RADIOCORE_MEMCONF_BLOCKTYPE_MaxCount (3UL) /*!< Max size of BLOCKTYPE[3] array.   */
+    #define FICR_TRIM_SECURE_MEMCONF_BLOCKTYPE_MaxCount (7UL) /*!< Max size of BLOCKTYPE[7] array.      */
+    #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Max size of EVENTS_PORT[4] array.           */
+    #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Max size of PUBLISH_PORT[4] array.          */
+    #define GRTC_CC_MaxCount (16UL)                    /*!< Max size of CC[16] array.                   */
+    #define I2S_CHANNEL_MaxCount (2UL)                 /*!< Max size of CHANNEL[2] array.               */
+    #define I3CCORE_CORE_DEVCHARTABLE_MaxCount (10UL)  /*!< Max size of DEVCHARTABLE[10] array.         */
+    #define IPCMAP_CHANNEL_MaxCount (16UL)             /*!< Max size of CHANNEL[16] array.              */
+    #define IRQMAP_IRQ_MaxCount (480UL)                /*!< Max size of IRQ[480] array.                 */
+    #define LRCCONF_CLKSTAT_MaxCount (8UL)             /*!< Max size of CLKSTAT[8] array.               */
+    #define LRCCONF_CLKCTRL_MaxCount (8UL)             /*!< Max size of CLKCTRL[8] array.               */
+    #define MEMCONF_POWER_MaxCount (2UL)               /*!< Max size of POWER[2] array.                 */
+    #define MEMCONF_REPAIR_MaxCount (192UL)            /*!< Max size of REPAIR[192] array.              */
+    #define MEMCONF_BLOCKTYPE_MaxCount (64UL)          /*!< Max size of BLOCKTYPE[64] array.            */
+    #define MPC_REGION_MaxCount (32UL)                 /*!< Max size of REGION[32] array.               */
+    #define MPC_OVERRIDE_MaxCount (40UL)               /*!< Max size of OVERRIDE[40] array.             */
+    #define OICR_USER_PUBKEY_MaxCount (4UL)            /*!< Max size of PUBKEY[4] array.                */
+    #define OICR_USER_AUTHOPKEY_MaxCount (4UL)         /*!< Max size of AUTHOPKEY[4] array.             */
+    #define OICR_NORDIC_PUBKEY_MaxCount (4UL)          /*!< Max size of PUBKEY[4] array.                */
+    #define OICR_NORDIC_AUTHOPKEY_MaxCount (4UL)       /*!< Max size of AUTHOPKEY[4] array.             */
+    #define OICR_CRACEN_KEY_MaxCount (4UL)             /*!< Max size of KEY[4] array.                   */
+    #define OICR_MRAM_MaxCount (2UL)                   /*!< Max size of MRAM[2] array.                  */
+    #define POWER_ABB_MaxCount (2UL)                   /*!< Max size of ABB[2] array.                   */
+    #define PWM_SEQ_MaxCount (2UL)                     /*!< Max size of SEQ[2] array.                   */
+    #define RADIO_ACQINJDMA_MaxCount (2UL)             /*!< Max size of ACQINJDMA[2] array.             */
+    #define SAADC_EVENTS_CH_MaxCount (8UL)             /*!< Max size of EVENTS_CH[8] array.             */
+    #define SAADC_PUBLISH_CH_MaxCount (8UL)            /*!< Max size of PUBLISH_CH[8] array.            */
+    #define SAADC_CH_MaxCount (8UL)                    /*!< Max size of CH[8] array.                    */
+    #define SPU_PERIPH_MaxCount (32UL)                 /*!< Max size of PERIPH[32] array.               */
+    #define SPU_FEATURE_GPIOTE_MaxCount (1UL)          /*!< Max size of GPIOTE[1] array.                */
+    #define SPU_FEATURE_GPIO_MaxCount (10UL)           /*!< Max size of GPIO[10] array.                 */
+    #define SPU_FEATURE_BELLS_DOMAIN_MaxCount (16UL)   /*!< Max size of DOMAIN[16] array.               */
+    #define STMDATA_DOMAIN_MaxCount (16UL)             /*!< Max size of DOMAIN[16] array.               */
+    #define STMDATA_BUFFER_MaxCount (16UL)             /*!< Max size of BUFFER[16] array.               */
+    #define TAMPC_PROTECT_FEATURE_MaxCount (128UL)     /*!< Max size of FEATURE[128] array.             */
+    #define TAMPC_PROTECT_DOMAIN_MaxCount (16UL)       /*!< Max size of DOMAIN[16] array.               */
+    #define TAMPC_PROTECT_AP_MaxCount (16UL)           /*!< Max size of AP[16] array.                   */
+    #define UICR_MEM_MaxCount (16UL)                   /*!< Max size of MEM[16] array.                  */
+    #define UICR_PERIPH_MaxCount (192UL)               /*!< Max size of PERIPH[192] array.              */
+    #define UICR_GPIO_MaxCount (16UL)                  /*!< Max size of GPIO[16] array.                 */
+    #define UICR_GPIOTE_MaxCount (4UL)                 /*!< Max size of GPIOTE[4] array.                */
+    #define UICR_IPCT_GLOBAL_MaxCount (2UL)            /*!< Max size of GLOBAL[2] array.                */
+    #define UICR_DPPI_LOCAL_MaxCount (2UL)             /*!< Max size of LOCAL[2] array.                 */
+    #define UICR_DPPI_GLOBAL_MaxCount (12UL)           /*!< Max size of GLOBAL[12] array.               */
+    #define UICR_MAILBOX_MaxCount (8UL)                /*!< Max size of MAILBOX[8] array.               */
+    #define USBHSCORE_HC_MaxCount (16UL)               /*!< Max size of HC[16] array.                   */
+    #define USBHSCORE_DWCOTGDFIFO_MaxCount (16UL)      /*!< Max size of DWCOTGDFIFO[16] array.          */
 
 #endif
 
@@ -1634,6 +1742,7 @@
     #define ADDRESS_BUS_Pos (18UL)
     #define ADDRESS_BUS_Msk (0x3FUL << ADDRESS_BUS_Pos)
 
+    /* TODO: MDK-2221 */
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
     /* TODO: HM-20336 */
