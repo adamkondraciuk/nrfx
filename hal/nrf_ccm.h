@@ -1091,6 +1091,7 @@ NRF_STATIC_INLINE nrf_ccm_cnf_t * nrf_ccm_cnfptr_get(NRF_CCM_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_ccm_key_set(NRF_CCM_Type   * p_reg,
                                        uint32_t const * p_key)
 {
+    NRFX_ASSERT(p_key);
     for (uint8_t i = 0; i < CCM_KEY_VALUE_MaxCount; i++)
     {
         p_reg->KEY.VALUE[i] = p_key[i];
@@ -1107,6 +1108,7 @@ NRF_STATIC_INLINE uint32_t const * nrf_ccm_key_get(NRF_CCM_Type const * p_reg)
 NRF_STATIC_INLINE void nrf_ccm_nonce_set(NRF_CCM_Type *   p_reg,
                                          uint32_t const * p_nonce)
 {
+    NRFX_ASSERT(p_nonce);
     for (uint8_t i = 0; i < CCM_NONCE_VALUE_MaxCount; i++)
     {
         p_reg->NONCE.VALUE[i] = p_nonce[i];
