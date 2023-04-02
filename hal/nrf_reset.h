@@ -4,6 +4,7 @@
 #define NRF_RESET_H__
 
 #include <nrfx.h>
+#include <nrf_erratas.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -105,8 +106,29 @@ NRF_STATIC_INLINE void nrf_reset_resetreas_clear(NRF_RESET_Type * p_reg, uint32_
 #if NRF_RESET_HAS_APPLICATION
 NRF_STATIC_INLINE void nrf_reset_network_force_off(NRF_RESET_Type * p_reg, bool hold)
 {
-    p_reg->NETWORK.FORCEOFF = (hold ? RESET_NETWORK_FORCEOFF_FORCEOFF_Hold :
-                                      RESET_NETWORK_FORCEOFF_FORCEOFF_Release);
+    if (hold)
+    {
+        p_reg->NETWORK.FORCEOFF = RESET_NETWORK_FORCEOFF_FORCEOFF_Hold <<
+                                  RESET_NETWORK_FORCEOFF_FORCEOFF_Pos;
+    }
+    else if (nrf53_errata_161())
+    {
+        *(volatile uint32_t *)0x50005618UL = 1UL;
+        p_reg->NETWORK.FORCEOFF = RESET_NETWORK_FORCEOFF_FORCEOFF_Release <<
+                                  RESET_NETWORK_FORCEOFF_FORCEOFF_Pos;
+        NRFX_DELAY_US(5);
+        p_reg->NETWORK.FORCEOFF = RESET_NETWORK_FORCEOFF_FORCEOFF_Hold <<
+                                  RESET_NETWORK_FORCEOFF_FORCEOFF_Pos;
+        NRFX_DELAY_US(1);
+        p_reg->NETWORK.FORCEOFF = RESET_NETWORK_FORCEOFF_FORCEOFF_Release <<
+                                  RESET_NETWORK_FORCEOFF_FORCEOFF_Pos;
+        *(volatile uint32_t *)0x50005618UL = 0UL;
+    }
+    else
+    {
+        p_reg->NETWORK.FORCEOFF = RESET_NETWORK_FORCEOFF_FORCEOFF_Release <<
+                                  RESET_NETWORK_FORCEOFF_FORCEOFF_Pos;
+    }
 }
 #endif // NRF_RESET_HAS_APPLICATION
 
