@@ -34,6 +34,8 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define __SYSTEM_CLOCK_MHZ (1000000UL)
 #if defined(NRF_PPR)
     #define __SYSTEM_CLOCK_DEFAULT (16ul * __SYSTEM_CLOCK_MHZ)
+#elif defined(NRF_RADIOCORE)
+    #define __SYSTEM_CLOCK_DEFAULT (256ul * __SYSTEM_CLOCK_MHZ)
 #else
     #define __SYSTEM_CLOCK_DEFAULT (320ul * __SYSTEM_CLOCK_MHZ)
 #endif
