@@ -1413,6 +1413,595 @@
         NRF_PROCESSOR_FLPR        = 14,
     } NRF_PROCESSORID_Type;
 
+    typedef struct {
+        __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Non-secure port event from owner n                    */
+        __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Secure port event from owner n                        */
+    } NRF_GPIOTE_EVENTS_PORT_Type;                       /*!< Size = 8 (0x008)                                                     */
+
+    typedef struct {
+        __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Publish configuration for event PORT[n].NONSECURE     */
+        __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Publish configuration for event PORT[n].SECURE        */
+    } NRF_GPIOTE_PUBLISH_PORT_Type;                      /*!< Size = 8 (0x008)                                                     */
+
+    typedef struct {                                   /*!< GPIOTE Structure                                                     */
+        __OM uint32_t TASKS_OUT[8];                      /*!< (@ 0x00000000) Task for writing to pin specified in CONFIG[n].PSEL.
+                                                                             Action on pin is configured in CONFIG[n].POLARITY.*/
+        __IM uint32_t RESERVED[4];
+        __OM uint32_t TASKS_SET[8];                      /*!< (@ 0x00000030) Task for writing to pin specified in CONFIG[n].PSEL.
+                                                                             Action on pin is to set it high.*/
+        __IM uint32_t RESERVED1[4];
+        __OM uint32_t TASKS_CLR[8];                      /*!< (@ 0x00000060) Task for writing to pin specified in CONFIG[n].PSEL.
+                                                                             Action on pin is to set it low.*/
+        __IOM uint32_t SUBSCRIBE_OUT[8];                 /*!< (@ 0x00000080) Subscribe configuration for task OUT[n]               */
+        __IM uint32_t RESERVED2[4];
+        __IOM uint32_t SUBSCRIBE_SET[8];                 /*!< (@ 0x000000B0) Subscribe configuration for task SET[n]               */
+        __IM uint32_t RESERVED3[4];
+        __IOM uint32_t SUBSCRIBE_CLR[8];                 /*!< (@ 0x000000E0) Subscribe configuration for task CLR[n]               */
+        __IOM uint32_t EVENTS_IN[8];                     /*!< (@ 0x00000100) Event from pin specified in CONFIG[n].PSEL            */
+        __IM uint32_t RESERVED4[8];
+        __IOM NRF_GPIOTE_EVENTS_PORT_Type EVENTS_PORT[4]; /*!< (@ 0x00000140) Peripheral events.                                   */
+        __IM uint32_t RESERVED5[8];
+        __IOM uint32_t PUBLISH_IN[8];                    /*!< (@ 0x00000180) Publish configuration for event IN[n]                 */
+        __IM uint32_t RESERVED6[8];
+        __IOM NRF_GPIOTE_PUBLISH_PORT_Type PUBLISH_PORT[4]; /*!< (@ 0x000001C0) Publish configuration for events                   */
+        __IM uint32_t RESERVED7[73];
+        __IOM uint32_t INTENSET0;                        /*!< (@ 0x00000304) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR0;                        /*!< (@ 0x00000308) Disable interrupt                                     */
+        __IM uint32_t RESERVED8[2];
+        __IOM uint32_t INTENSET1;                        /*!< (@ 0x00000314) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR1;                        /*!< (@ 0x00000318) Disable interrupt                                     */
+        __IM uint32_t RESERVED9[2];
+        __IOM uint32_t INTENSET2;                        /*!< (@ 0x00000324) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR2;                        /*!< (@ 0x00000328) Disable interrupt                                     */
+        __IM uint32_t RESERVED10[2];
+        __IOM uint32_t INTENSET3;                        /*!< (@ 0x00000334) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR3;                        /*!< (@ 0x00000338) Disable interrupt                                     */
+        __IM uint32_t RESERVED11[2];
+        __IOM uint32_t INTENSET4;                        /*!< (@ 0x00000344) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR4;                        /*!< (@ 0x00000348) Disable interrupt                                     */
+        __IM uint32_t RESERVED12[2];
+        __IOM uint32_t INTENSET5;                        /*!< (@ 0x00000354) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR5;                        /*!< (@ 0x00000358) Disable interrupt                                     */
+        __IM uint32_t RESERVED13[2];
+        __IOM uint32_t INTENSET6;                        /*!< (@ 0x00000364) Enable interrupt                                      */
+        __IOM uint32_t INTENCLR6;                        /*!< (@ 0x00000368) Disable interrupt                                     */
+        __IM uint32_t RESERVED14[102];
+        __IOM uint32_t LATENCY;                          /*!< (@ 0x00000504) Latency selection for Event mode (MODE=Event) with
+                                                                             rising or falling edge detection on the pin.*/
+        __IM uint32_t RESERVED15[2];
+        __IOM uint32_t CONFIG[8];                        /*!< (@ 0x00000510) Configuration for OUT[n], SET[n], and CLR[n] tasks and
+                                                                             IN[n] event*/
+    } NRF_GPIOTE_Type_fixed;                             /*!< Size = 1328 (0x530)                                                  */
+
+    #if defined(NRF_GPIOTE130_S)
+        #undef NRF_GPIOTE130_S
+        #define NRF_GPIOTE130_S ((NRF_GPIOTE_Type_fixed*) NRF_GPIOTE130_S_BASE)
+    #endif
+    #if defined(NRF_GPIOTE130_NS)
+        #undef NRF_GPIOTE130_NS
+        #define NRF_GPIOTE130_NS ((NRF_GPIOTE_Type_fixed*) NRF_GPIOTE130_NS_BASE)
+    #endif
+
+    #define NRF_GPIOTE_Type NRF_GPIOTE_Type_fixed
+
+    #undef GPIOTE_PUBLISH_PORT_MaxCount
+    #undef GPIOTE_EVENTS_PORT_MaxCount
+    #undef GPIOTE_EVENTS_PORT_ResetValue
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Pos
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Msk
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Min
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Max
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_NotGenerated
+    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Generated
+
+    #undef GPIOTE_INTENSET0_PORT0_Msk
+    #undef GPIOTE_INTENSET0_PORT1_Msk
+    #undef GPIOTE_INTENSET0_PORT2_Msk
+    #undef GPIOTE_INTENSET0_PORT3_Msk
+    #undef GPIOTE_INTENSET0_PORT4_Msk
+    #undef GPIOTE_INTENSET0_PORT5_Msk
+    #undef GPIOTE_INTENSET0_PORT6_Msk
+    #undef GPIOTE_INTENSET0_PORT7_Msk
+    #undef GPIOTE_INTENSET0_PORT8_Msk
+    #undef GPIOTE_INTENSET0_PORT9_Msk
+    #undef GPIOTE_INTENSET0_PORT10_Msk
+    #undef GPIOTE_INTENSET0_PORT11_Msk
+    #undef GPIOTE_INTENSET0_PORT12_Msk
+    #undef GPIOTE_INTENSET0_PORT13_Msk
+    #undef GPIOTE_INTENSET0_PORT14_Msk
+    #undef GPIOTE_INTENSET0_PORT15_Msk
+
+    #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Max size of EVENTS_PORT[4] array.                                    */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                       */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Pos (0UL) /*!< Position of NONSECURE field.                                   */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Msk (0x1UL << GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Pos)
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Min (0x0UL) /*!< Min enumerator value of NONSECURE field.                     */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Max (0x1UL) /*!< Max enumerator value of NONSECURE field.                     */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_NotGenerated (0x0UL) /*!< Event not generated                                 */
+    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Generated (0x1UL) /*!< Event generated                                        */
+
+    #define GPIOTE_EVENTS_PORT_SECURE_ResetValue (0x00000000UL) /*!< Reset value of SECURE register.                             */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Pos (0UL) /*!< Position of SECURE field.                                            */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Msk (0x1UL << GPIOTE_EVENTS_PORT_SECURE_SECURE_Pos) /*!< Bit mask of SECURE field.  */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Min (0x0UL) /*!< Min enumerator value of SECURE field.                              */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Max (0x1UL) /*!< Max enumerator value of SECURE field.                              */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_NotGenerated (0x0UL) /*!< Event not generated                                       */
+    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Generated (0x1UL) /*!< Event generated                                              */
+
+    #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Max size of PUBLISH_PORT[4] array.                                   */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                      */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                          */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos)
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                       */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                       */
+
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Pos (31UL) /*!< Position of EN field.                                               */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Msk (0x1UL << GPIOTE_PUBLISH_PORT_NONSECURE_EN_Pos) /*!< Bit mask of EN field.      */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                  */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                  */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Disabled (0x0UL) /*!< Disable publishing                                            */
+    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Enabled (0x1UL) /*!< Enable publishing                                              */
+
+    #define GPIOTE_PUBLISH_PORT_SECURE_ResetValue (0x00000000UL) /*!< Reset value of SECURE register.                            */
+    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
+    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
+    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
+    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Pos (31UL)   /*!< Position of EN field.                                                */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Msk (0x1UL << GPIOTE_PUBLISH_PORT_SECURE_EN_Pos) /*!< Bit mask of EN field.            */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Min (0x0UL)  /*!< Min enumerator value of EN field.                                    */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Max (0x1UL)  /*!< Max enumerator value of EN field.                                    */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Disabled (0x0UL) /*!< Disable publishing                                               */
+    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Enabled (0x1UL) /*!< Enable publishing                                                 */
+
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET0_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET0_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET0_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET0_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET0_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET0_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET0_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET0_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET0_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET0_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET0_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET0_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET1_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET1_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET1_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET1_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET1_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET1_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET1_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET1_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET1_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET1_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET1_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET1_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET2_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET2_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET2_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET2_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET2_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET2_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET2_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET2_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET2_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET2_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET2_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET2_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET3_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET3_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET3_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET3_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET3_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET3_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET3_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET3_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET3_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET3_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET3_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET3_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET4_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET4_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET4_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET4_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET4_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET4_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET4_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET4_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET4_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET4_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET4_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET4_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET5_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET5_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET5_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET5_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET5_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET5_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET5_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET5_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET5_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET5_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET5_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET5_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET6_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET6_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET6_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET6_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET6_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET6_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET6_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET6_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET6_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
+    #define GPIOTE_INTENSET6_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
+
+    #define GPIOTE_INTENSET6_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
+    #define GPIOTE_INTENSET6_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
+
     #define RTC130_CC_NUM 4
     #define RTC131_CC_NUM 4
 
