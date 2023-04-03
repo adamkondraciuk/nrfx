@@ -33,7 +33,7 @@
     #define NRFX_DELAY_DWT_PRESENT  0
 #elif defined(NRF52832_XXAA) || defined(NRF52832_XXAB) || \
       defined(NRF52833_XXAA) || defined(NRF52840_XXAA) || \
-      defined(NRF9160_XXAA)
+      defined(NRF9120_XXAA)  || defined(NRF9160_XXAA)
     #define NRFX_DELAY_CPU_FREQ_MHZ 64
     #define NRFX_DELAY_DWT_PRESENT  1
 #elif defined(NRF5340_XXAA_APPLICATION)

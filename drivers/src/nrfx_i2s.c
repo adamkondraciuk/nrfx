@@ -17,7 +17,7 @@
                                        "UNKNOWN EVENT")))
 
 #if !defined(USE_WORKAROUND_FOR_I2S_STOP_ANOMALY) && \
-    (defined(NRF52_SERIES) || defined(NRF9160_XXAA))
+    (defined(NRF52_SERIES) || defined(NRF91_SERIES))
 // Enable workaround for nRF52 Series anomaly 194 / nRF9160 anomaly 1
 // (STOP task does not switch off all resources).
 #define USE_WORKAROUND_FOR_I2S_STOP_ANOMALY 1

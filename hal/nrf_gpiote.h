@@ -584,7 +584,7 @@ NRF_STATIC_INLINE void nrf_gpiote_task_force(NRF_GPIOTE_Type *    p_reg,
 NRF_STATIC_INLINE void nrf_gpiote_te_default(NRF_GPIOTE_Type * p_reg, uint32_t idx)
 {
     p_reg->CONFIG[idx] = 0;
-#if defined(NRF9160_XXAA) || defined(NRF5340_XXAA)
+#if defined(NRF53_SERIES) || defined(NRF91_SERIES)
     p_reg->CONFIG[idx] = 0;
 #endif
 }

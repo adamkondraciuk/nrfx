@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2018>$$$*/
 
-#ifndef NRFX_IRQS_NRF9160_H__
-#define NRFX_IRQS_NRF9160_H__
+#ifndef NRFX_IRQS_NRF91_H__
+#define NRFX_IRQS_NRF91_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -129,4 +129,4 @@ extern "C" {
 }
 #endif
 
-#endif // NRFX_IRQS_NRF9160_H__
+#endif // NRFX_IRQS_NRF91_H__

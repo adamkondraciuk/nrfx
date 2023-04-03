@@ -69,7 +69,7 @@ extern "C" {
 #elif defined(NRF5340_XXAA_NETWORK)
     // SPIM0, SPIS0, TWIM0, TWIS0, UARTE0
     #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE0
-#elif defined(NRF9160_XXAA)
+#elif defined(NRF91_SERIES)
     // UARTE0, SPIM0, SPIS0, TWIM0, TWIS0
     #define NRFX_PRS_BOX_0_ADDR     NRF_UARTE0
     // UARTE1, SPIM1, SPIS1, TWIM1, TWIS1
