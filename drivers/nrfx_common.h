@@ -9,6 +9,9 @@
 
 #include <nrf.h>
 #include <nrf_peripherals.h>
+#if defined(NRF9120_XXAA)
+#include <nrf9160_name_change.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
