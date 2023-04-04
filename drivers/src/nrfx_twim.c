@@ -586,14 +586,14 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
     return err_code;
 }
 
-uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance,
-                                  nrfx_twim_xfer_type_t xfer_type)
+uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const * p_instance,
+                                          nrfx_twim_xfer_type_t xfer_type)
 {
     return nrfy_twim_task_address_get(p_instance->p_twim,
         (xfer_type != NRFX_TWIM_XFER_RX) ? NRF_TWIM_TASK_STARTTX : NRF_TWIM_TASK_STARTRX);
 }
 
-uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance)
+uint32_t nrfx_twim_stopped_event_address_get(nrfx_twim_t const * p_instance)
 {
     return nrfy_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
 }

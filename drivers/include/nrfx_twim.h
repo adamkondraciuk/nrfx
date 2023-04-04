@@ -242,11 +242,11 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance);
  * - @ref NRFX_TWIM_FLAG_TX_POSTINC and @ref NRFX_TWIM_FLAG_RX_POSTINC - Post-incrementation of buffer addresses.
  * - @ref NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER - No user event handler after the transfer completion. In most cases, this also means no interrupt at the end of the transfer.
  * - @ref NRFX_TWIM_FLAG_HOLD_XFER - Driver is not starting the transfer. Use this flag if the transfer is triggered externally by PPI.
- *   Use @ref nrfx_twim_start_task_get to get the address of the start task.
+ *   Use @ref nrfx_twim_start_task_address_get to get the address of the start task.
  * - @ref NRFX_TWIM_FLAG_REPEATED_XFER - Prepare for repeated transfers. You can set up a number of transfers that will be triggered externally (for example by PPI).
  *   An example is a TXRX transfer with the options @ref NRFX_TWIM_FLAG_RX_POSTINC, @ref NRFX_TWIM_FLAG_NO_XFER_EVT_HANDLER, and @ref NRFX_TWIM_FLAG_REPEATED_XFER.
  *   After the transfer is set up, a set of transfers can be triggered by PPI that will read, for example, the same register of an
- *   external component and put it into a RAM buffer without any interrupts. @ref nrfx_twim_stopped_event_get can be used to get the
+ *   external component and put it into a RAM buffer without any interrupts. @ref nrfx_twim_stopped_event_address_get can be used to get the
  *   address of the STOPPED event, which can be used to count the number of transfers. If @ref NRFX_TWIM_FLAG_REPEATED_XFER is used,
  *   the driver does not set the driver instance into busy state, so you must ensure that the next transfers are set up
  *   when TWIM is not active.
@@ -308,7 +308,7 @@ bool nrfx_twim_is_busy(nrfx_twim_t const * p_instance);
  *
  * @return Start task address (TX or RX) depending on the value of xfer_type.
  */
-uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer_type_t xfer_type);
+uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer_type_t xfer_type);
 
 /**
  * @brief Function for returning the address of a STOPPED TWIM event.
@@ -320,7 +320,7 @@ uint32_t nrfx_twim_start_task_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer
  *
  * @return STOPPED event address.
  */
-uint32_t nrfx_twim_stopped_event_get(nrfx_twim_t const * p_instance);
+uint32_t nrfx_twim_stopped_event_address_get(nrfx_twim_t const * p_instance);
 
 /**
  * @brief Function for recovering the bus.
