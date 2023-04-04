@@ -669,7 +669,7 @@ nrf_gpiote_task_t nrfx_gpiote_out_task_get(nrfx_gpiote_pin_t pin)
 }
 
 
-uint32_t nrfx_gpiote_out_task_addr_get(nrfx_gpiote_pin_t pin)
+uint32_t nrfx_gpiote_out_task_address_get(nrfx_gpiote_pin_t pin)
 {
     nrf_gpiote_task_t task = nrfx_gpiote_out_task_get(pin);
     return nrfy_gpiote_task_address_get(NRF_GPIOTE, task);
@@ -686,7 +686,7 @@ nrf_gpiote_task_t nrfx_gpiote_set_task_get(nrfx_gpiote_pin_t pin)
 }
 
 
-uint32_t nrfx_gpiote_set_task_addr_get(nrfx_gpiote_pin_t pin)
+uint32_t nrfx_gpiote_set_task_address_get(nrfx_gpiote_pin_t pin)
 {
     nrf_gpiote_task_t task = nrfx_gpiote_set_task_get(pin);
     return nrfy_gpiote_task_address_get(NRF_GPIOTE, task);
@@ -704,7 +704,7 @@ nrf_gpiote_task_t nrfx_gpiote_clr_task_get(nrfx_gpiote_pin_t pin)
 }
 
 
-uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin)
+uint32_t nrfx_gpiote_clr_task_address_get(nrfx_gpiote_pin_t pin)
 {
     nrf_gpiote_task_t task = nrfx_gpiote_clr_task_get(pin);
     return nrfy_gpiote_task_address_get(NRF_GPIOTE, task);
@@ -820,7 +820,7 @@ nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin)
 }
 
 
-uint32_t nrfx_gpiote_in_event_addr_get(nrfx_gpiote_pin_t pin)
+uint32_t nrfx_gpiote_in_event_address_get(nrfx_gpiote_pin_t pin)
 {
     nrf_gpiote_event_t event = nrfx_gpiote_in_event_get(pin);
     return nrfy_gpiote_event_address_get(NRF_GPIOTE, event);

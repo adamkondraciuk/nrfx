@@ -336,7 +336,7 @@ nrf_gpiote_task_t nrfx_gpiote_out_task_get(nrfx_gpiote_pin_t pin);
  *
  * @return Address of OUT task.
  */
-uint32_t nrfx_gpiote_out_task_addr_get(nrfx_gpiote_pin_t pin);
+uint32_t nrfx_gpiote_out_task_address_get(nrfx_gpiote_pin_t pin);
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
@@ -358,7 +358,7 @@ nrf_gpiote_task_t nrfx_gpiote_set_task_get(nrfx_gpiote_pin_t pin);
  *
  * @return Address of SET task.
  */
-uint32_t nrfx_gpiote_set_task_addr_get(nrfx_gpiote_pin_t pin);
+uint32_t nrfx_gpiote_set_task_address_get(nrfx_gpiote_pin_t pin);
 #endif // defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 #if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
@@ -381,7 +381,7 @@ nrf_gpiote_task_t nrfx_gpiote_clr_task_get(nrfx_gpiote_pin_t pin);
  *
  * @return Address of CLR task.
  */
-uint32_t nrfx_gpiote_clr_task_addr_get(nrfx_gpiote_pin_t pin);
+uint32_t nrfx_gpiote_clr_task_address_get(nrfx_gpiote_pin_t pin);
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -416,7 +416,7 @@ nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_pin_t pin);
  *
  * @return Address of the specified input pin event.
  */
-uint32_t nrfx_gpiote_in_event_addr_get(nrfx_gpiote_pin_t pin);
+uint32_t nrfx_gpiote_in_event_address_get(nrfx_gpiote_pin_t pin);
 
 /**
  * @brief Function for forcing a specific state on the pin configured as task.
