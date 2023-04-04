@@ -291,7 +291,7 @@ NRFX_STATIC_INLINE void nrfx_pwm_step(nrfx_pwm_t const * p_instance);
  * @note This function can be instructed to wait until the playback is stopped
  *       (by setting @p wait_until_stopped to true). Depending on
  *       the length of the PMW period, this might take a significant amount of
- *       time. Alternatively, the @ref nrfx_pwm_is_stopped function can be
+ *       time. Alternatively, the @ref nrfx_pwm_stopped_check function can be
  *       used to poll the status, or the @ref NRFX_PWM_EVT_STOPPED event can
  *       be used to get the notification when the playback is stopped, provided
  *       the event handler is defined.
@@ -313,7 +313,7 @@ bool nrfx_pwm_stop(nrfx_pwm_t const * p_instance, bool wait_until_stopped);
  * @retval true  The PWM peripheral is stopped.
  * @retval false The PWM peripheral is not stopped.
  */
-bool nrfx_pwm_is_stopped(nrfx_pwm_t const * p_instance);
+bool nrfx_pwm_stopped_check(nrfx_pwm_t const * p_instance);
 
 /**
  * @brief Function for updating the sequence data during playback.

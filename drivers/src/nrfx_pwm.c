@@ -393,20 +393,20 @@ bool nrfx_pwm_stop(nrfx_pwm_t const * p_instance, bool wait_until_stopped)
     if (wait_until_stopped)
     {
         // Either status was already correct or new STOPPED event will appear.
-        while (!(nrfx_pwm_is_stopped(p_instance) ||
+        while (!(nrfx_pwm_stopped_check(p_instance) ||
                  nrfy_pwm_events_process(p_instance->p_reg,
                                          NRFY_EVENT_TO_INT_BITMASK(NRF_PWM_EVENT_STOPPED))))
         {}
         p_cb->state = NRFX_DRV_STATE_INITIALIZED;
     }
 
-    ret_val = nrfx_pwm_is_stopped(p_instance);
+    ret_val = nrfx_pwm_stopped_check(p_instance);
 
     NRFX_LOG_INFO("%s returned %d.", __func__, ret_val);
     return ret_val;
 }
 
-bool nrfx_pwm_is_stopped(nrfx_pwm_t const * p_instance)
+bool nrfx_pwm_stopped_check(nrfx_pwm_t const * p_instance)
 {
     pwm_control_block_t * p_cb  = &m_cb[p_instance->instance_id];
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
