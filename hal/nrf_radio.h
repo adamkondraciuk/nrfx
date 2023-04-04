@@ -18,8 +18,7 @@ extern "C" {
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol specifying offset between address of TASK/EVENT register and address of associated SUBSCRIBE/PUBLISH register. */
-#define NRF_RADIO_DPPI_OFFSET \
-    (NRFX_OFFSETOF(NRF_RADIO_Type, SUBSCRIBE_TXEN) - NRFX_OFFSETOF(NRF_RADIO_Type, TASKS_TXEN))
+#define NRF_RADIO_DPPI_OFFSET NRF_SUBSCRIBE_PUBLISH_OFFSET_RADIO
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /** @brief RADIO tasks. */
