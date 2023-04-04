@@ -278,14 +278,14 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
  *   Post-incrementation of buffer addresses.
  * - @ref NRFX_SPIM_FLAG_HOLD_XFER - Driver is not starting the transfer. Use this
  *   flag if the transfer is triggered externally by PPI. Use
- *   @ref nrfx_spim_start_task_get to get the address of the start task.
+ *   @ref nrfx_spim_start_task_address_get to get the address of the start task.
  *   Chip select must be configured to @ref NRF_SPIM_PIN_NOT_CONNECTED and managed outside the driver.
  * - @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER - No user event handler after transfer
  *   completion. This also means no interrupt at the end of the transfer.
  *   If @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER is used, the driver does not set the instance into
  *   busy state, so you must ensure that the next transfers are set up when SPIM is not active.
- *   @ref nrfx_spim_end_event_get function can be used to detect end of transfer. Option can be used
- *   together with @ref NRFX_SPIM_FLAG_REPEATED_XFER to prepare a sequence of SPI transfers
+ *   @ref nrfx_spim_end_event_address_get function can be used to detect end of transfer. Option can 
+ *   be used together with @ref NRFX_SPIM_FLAG_REPEATED_XFER to prepare a sequence of SPI transfers
  *   without interruptions.
  * - @ref NRFX_SPIM_FLAG_REPEATED_XFER - Prepare for repeated transfers. You can set
  *   up a number of transfers that will be triggered externally (for example by PPI). An example is
@@ -293,8 +293,8 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
  *   @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER, and @ref NRFX_SPIM_FLAG_REPEATED_XFER. After the
  *   transfer is set up, a set of transfers can be triggered by PPI that will read, for example,
  *   the same register of an external component and put it into a RAM buffer without any interrupts.
- *   @ref nrfx_spim_end_event_get can be used to get the address of the END event, which can be
- *   used to count the number of transfers. If @ref NRFX_SPIM_FLAG_REPEATED_XFER is used,
+ *   @ref nrfx_spim_end_event_address_get can be used to get the address of the END event, which can 
+ *   be used to count the number of transfers. If @ref NRFX_SPIM_FLAG_REPEATED_XFER is used,
  *   the driver does not set the instance into busy state, so you must ensure that the next
  *   transfers are set up when SPIM is not active.
  *
@@ -361,7 +361,7 @@ nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const *           p_instance,
  *
  * @return Start task address.
  */
-NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance);
+NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_address_get(nrfx_spim_t const * p_instance);
 
 /**
  * @brief Function for returning the address of a END SPIM event.
@@ -373,7 +373,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_insta
  *
  * @return END event address.
  */
-NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance);
+NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_address_get(nrfx_spim_t const * p_instance);
 
 /**
  * @brief Function for aborting ongoing transfer.
@@ -392,12 +392,12 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance);
 #define NRFX_SPIM_INST_HANDLER_GET(idx) NRFX_CONCAT_3(nrfx_spim_, idx, _irq_handler)
 
 #ifndef NRFX_DECLARE_ONLY
-NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_get(nrfx_spim_t const * p_instance)
+NRFX_STATIC_INLINE uint32_t nrfx_spim_start_task_address_get(nrfx_spim_t const * p_instance)
 {
     return nrfy_spim_task_address_get(p_instance->p_reg, NRF_SPIM_TASK_START);
 }
 
-NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_get(nrfx_spim_t const * p_instance)
+NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_address_get(nrfx_spim_t const * p_instance)
 {
     return nrfy_spim_event_address_get(p_instance->p_reg, NRF_SPIM_EVENT_END);
 }
