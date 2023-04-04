@@ -116,7 +116,7 @@ typedef struct
 /** @brief Structure for UARTE error event. */
 typedef struct
 {
-    nrfx_uarte_xfer_evt_t rxtx;       ///< Transfer details, including number of bytes transferred.
+    nrfx_uarte_xfer_evt_t rx;         ///< Transfer details, including number of bytes received.
     uint32_t              error_mask; ///< Mask of error flags that generated the event.
 } nrfx_uarte_error_evt_t;
 
@@ -126,7 +126,8 @@ typedef struct
     nrfx_uarte_evt_type_t type; ///< Event type.
     union
     {
-        nrfx_uarte_xfer_evt_t  rxtx;  ///< Data provided for transfer completion events.
+        nrfx_uarte_xfer_evt_t  rx;    ///< Data provided for RX completion events.
+        nrfx_uarte_xfer_evt_t  tx;    ///< Data provided for TX completion events.
         nrfx_uarte_error_evt_t error; ///< Data provided for error event.
     } data;                           ///< Union to store event data.
 } nrfx_uarte_event_t;
@@ -223,6 +224,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_
  *                       dependent on the used SoC (see the MAXCNT register
  *                       description in the Product Specification). The driver
  *                       checks it with assertion.
+ * @param[in] flags      Transfer options (0 for default settings).
  *
  * @retval NRFX_SUCCESS            Initialization was successful.
  * @retval NRFX_ERROR_BUSY         Driver is already transferring.
@@ -232,7 +234,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_
  */
 nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
                          uint8_t const *      p_data,
-                         size_t               length);
+                         size_t               length,
+                         uint32_t             flags);
 
 /**
  * @brief Function for checking if UARTE is currently transmitting.
@@ -251,8 +254,11 @@ bool nrfx_uarte_tx_in_progress(nrfx_uarte_t const * p_instance);
  *       handler will be called from the UARTE interrupt context.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] sync       For future use.
+ *
+ * @retval NRFX_SUCCESS Successfully initiated abort.
  */
-void nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance);
+nrfx_err_t nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance, bool sync);
 
 /**
  * @brief Function for receiving data over UARTE.
@@ -305,12 +311,13 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
 /**
  * @brief Function for testing the receiver state in blocking mode.
  *
- * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in]  p_instance  Pointer to the driver instance structure.
+ * @param[out] p_rx_amount For future use.
  *
- * @retval true  The receiver has at least one byte of data to get.
- * @retval false The receiver is empty.
+ * @retval NRFX_SUCCESS    The receiving operation is completed.
+ * @retval NRFX_ERROR_BUSY The receiver did not complete the operation.
  */
-bool nrfx_uarte_rx_ready(nrfx_uarte_t const * p_instance);
+nrfx_err_t nrfx_uarte_rx_ready(nrfx_uarte_t const * p_instance, size_t * p_rx_amount);
 
 /**
  * @brief Function for aborting any ongoing reception.
@@ -328,9 +335,13 @@ bool nrfx_uarte_rx_ready(nrfx_uarte_t const * p_instance);
  *          To prevent this from happening, keep the UARTE interrupt latency low
  *          or use large enough reception buffers.
  *
- * @param[in] p_instance Pointer to the driver instance structure.
+ * @param[in] p_instance  Pointer to the driver instance structure.
+ * @param[in] disable_all For future use.
+ * @param[in] sync        For future use.
+ *
+ * @retval NRFX_SUCCESS Successfully initiated abort.
  */
-void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance);
+nrfx_err_t nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance, bool disable_all, bool sync);
 
 /**
  * @brief Function for reading error source mask. Mask contains values from @ref nrf_uarte_error_mask_t.

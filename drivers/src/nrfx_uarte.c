@@ -298,8 +298,10 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
 
 nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
                          uint8_t const *      p_data,
-                         size_t               length)
+                         size_t               length,
+                         uint32_t             flags)
 {
+    (void)flags;
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_data);
@@ -468,9 +470,12 @@ nrfx_err_t nrfx_uarte_rx(nrfx_uarte_t const * p_instance,
     return err_code;
 }
 
-bool nrfx_uarte_rx_ready(nrfx_uarte_t const * p_instance)
+nrfx_err_t nrfx_uarte_rx_ready(nrfx_uarte_t const * p_instance, size_t * p_rx_amount)
 {
-    return nrfy_uarte_event_check(p_instance->p_reg, NRF_UARTE_EVENT_ENDRX);
+    (void)p_rx_amount;
+
+    return nrfy_uarte_event_check(p_instance->p_reg, NRF_UARTE_EVENT_ENDRX) ?
+            NRFX_SUCCESS : NRFX_ERROR_BUSY;
 }
 
 uint32_t nrfx_uarte_errorsrc_get(nrfx_uarte_t const * p_instance)
@@ -485,8 +490,8 @@ static void rx_done_event(uarte_control_block_t * p_cb,
 {
     nrfx_uarte_event_t event;
     event.type             = NRFX_UARTE_EVT_RX_DONE;
-    event.data.rxtx.bytes  = bytes;
-    event.data.rxtx.p_data = p_data;
+    event.data.rx.bytes  = bytes;
+    event.data.rx.p_data = p_data;
 
     p_cb->handler(&event, p_cb->p_context);
 }
@@ -496,22 +501,27 @@ static void tx_done_event(uarte_control_block_t * p_cb,
 {
     nrfx_uarte_event_t event;
     event.type             = NRFX_UARTE_EVT_TX_DONE;
-    event.data.rxtx.bytes  = bytes;
-    event.data.rxtx.p_data = (uint8_t *)p_cb->p_tx_buffer;
+    event.data.tx.bytes  = bytes;
+    event.data.tx.p_data = (uint8_t *)p_cb->p_tx_buffer;
 
     p_cb->tx_buffer_length = 0;
     p_cb->handler(&event, p_cb->p_context);
 }
 
-void nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance)
+nrfx_err_t nrfx_uarte_tx_abort(nrfx_uarte_t const * p_instance, bool sync)
 {
+    (void)sync;
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfy_uarte_tx_abort(p_instance->p_reg, !p_cb->handler ? true : false);
     NRFX_LOG_INFO("TX transaction aborted.");
+
+    return NRFX_SUCCESS;
 }
 
-void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance)
+nrfx_err_t nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance, bool disable_all, bool sync)
 {
+    (void)disable_all;
+    (void)sync;
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     // Short between ENDRX event and STARTRX task must be disabled before
@@ -523,6 +533,8 @@ void nrfx_uarte_rx_abort(nrfx_uarte_t const * p_instance)
     p_cb->rx_aborted = true;
     nrfy_uarte_task_trigger(p_instance->p_reg, NRF_UARTE_TASK_STOPRX);
     NRFX_LOG_INFO("RX transaction aborted.");
+
+    return NRFX_SUCCESS;
 }
 
 static void irq_handler(NRF_UARTE_Type * p_reg, uarte_control_block_t * p_cb)
@@ -544,8 +556,8 @@ static void irq_handler(NRF_UARTE_Type * p_reg, uarte_control_block_t * p_cb)
         nrfx_uarte_event_t event;
         event.type                   = NRFX_UARTE_EVT_ERROR;
         event.data.error.error_mask  = nrfy_uarte_errorsrc_get_and_clear(p_reg);
-        event.data.error.rxtx.bytes  = nrfy_uarte_rx_amount_get(p_reg);
-        event.data.error.rxtx.p_data = p_cb->p_rx_buffer;
+        event.data.error.rx.bytes  = nrfy_uarte_rx_amount_get(p_reg);
+        event.data.error.rx.p_data = p_cb->p_rx_buffer;
 
         // Abort transfer.
         p_cb->rx_buffer_length = 0;
