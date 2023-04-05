@@ -66,9 +66,10 @@ typedef NRF_PROCESSORID_Type nrf_processor_t;
     #define NUMBER_OF_PINS 512
     #define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P6, NRF_P7, NRF_P9}
 #elif (GPIO_COUNT == 10)
-    #define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM + P2_PIN_NUM + \
-                            P6_PIN_NUM + P8_PIN_NUM + P9_PIN_NUM)
-    #define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P6, NRF_P8, NRF_P9}
+    #define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM + P2_PIN_NUM + P6_PIN_NUM + P8_PIN_NUM + \
+                            P9_PIN_NUM + P10_PIN_NUM + P11_PIN_NUM + P12_PIN_NUM + P13_PIN_NUM)
+    #define GPIO_REG_LIST  {NRF_P0, NRF_P1, NRF_P2, NRF_P6, NRF_P8, NRF_P9, NRF_P10, NRF_P11, \
+                            NRF_P12, NRF_P13}
 #endif
 
 /*------------------------------------------------------------------------------------------------*/
