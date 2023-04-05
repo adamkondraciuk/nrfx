@@ -142,23 +142,20 @@ typedef enum
 } nrf_wdt_int_mask_t;
 
 /**
+ * @brief Function for configuring the watchdog behaviour when the CPU is sleeping or halted.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Watchdog behaviour mask, created using @ref nrf_wdt_behaviour_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, uint32_t mask);
+
+/**
  * @brief Function for starting the WDT task.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task.
  */
 NRF_STATIC_INLINE void nrf_wdt_task_trigger(NRF_WDT_Type * p_reg, nrf_wdt_task_t task);
-
-/**
- * @brief Function for returning the address of a specific WDT task register.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] task  Task.
- *
- * @return Address of requested task register.
- */
-NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
-                                                    nrf_wdt_task_t       task);
 
 /**
  * @brief Function for clearing the WDT event register.
@@ -178,17 +175,6 @@ NRF_STATIC_INLINE void nrf_wdt_event_clear(NRF_WDT_Type * p_reg, nrf_wdt_event_t
  * @retval false The event has not been generated.
  */
 NRF_STATIC_INLINE bool nrf_wdt_event_check(NRF_WDT_Type const * p_reg, nrf_wdt_event_t event);
-
-/**
- * @brief Function for returning the address of a specific WDT event register.
- *
- * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] event Event.
- *
- * @return Address of requested event register.
- */
-NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
-                                                     nrf_wdt_event_t      event);
 
 /**
  * @brief Function for enabling the specified interrupts.
@@ -289,12 +275,26 @@ NRF_STATIC_INLINE void nrf_wdt_publish_clear(NRF_WDT_Type * p_reg, nrf_wdt_event
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
- * @brief Function for configuring the watchdog behavior when the CPU is sleeping or halted.
+ * @brief Function for returning the address of a specific WDT task register.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] mask  Watchdog behaviour mask, created using @ref nrf_wdt_behaviour_mask_t.
+ * @param[in] task  Task.
+ *
+ * @return Address of requested task register.
  */
-NRF_STATIC_INLINE void nrf_wdt_behaviour_set(NRF_WDT_Type * p_reg, uint32_t mask);
+NRF_STATIC_INLINE uint32_t nrf_wdt_task_address_get(NRF_WDT_Type const * p_reg,
+                                                    nrf_wdt_task_t       task);
+
+/**
+ * @brief Function for returning the address of a specific WDT event register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event.
+ *
+ * @return Address of requested event register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_wdt_event_address_get(NRF_WDT_Type const * p_reg,
+                                                     nrf_wdt_event_t      event);
 
 /**
  * @brief Function for retrieving the watchdog status.
