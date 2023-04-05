@@ -20,6 +20,21 @@ extern "C" {
 /** @brief Maximum supported PDM buffer size. */
 #define NRFX_PDM_MAX_BUFFER_SIZE 32767
 
+/** @brief PDM error type. */
+typedef enum
+{
+    NRFX_PDM_NO_ERROR = 0,      ///< No error.
+    NRFX_PDM_ERROR_OVERFLOW = 1 ///< Overflow error.
+} nrfx_pdm_error_t;
+
+/** @brief PDM event structure. */
+typedef struct
+{
+    bool             buffer_requested; ///< Buffer request flag.
+    int16_t *        buffer_released;  ///< Pointer to the released buffer. Can be NULL.
+    nrfx_pdm_error_t error;            ///< Error type.
+} nrfx_pdm_evt_t;
+
 /** @brief PDM interface driver configuration structure. */
 typedef struct
 {
@@ -52,21 +67,6 @@ typedef struct
                                            *   fields that specify pins can be omitted,
                                            *   as they are ignored anyway. */
 } nrfx_pdm_config_t;
-
-/** @brief PDM error type. */
-typedef enum
-{
-    NRFX_PDM_NO_ERROR = 0,      ///< No error.
-    NRFX_PDM_ERROR_OVERFLOW = 1 ///< Overflow error.
-} nrfx_pdm_error_t;
-
-/** @brief PDM event structure. */
-typedef struct
-{
-    bool             buffer_requested; ///< Buffer request flag.
-    int16_t *        buffer_released;  ///< Pointer to the released buffer. Can be NULL.
-    nrfx_pdm_error_t error;            ///< Error type.
-} nrfx_pdm_evt_t;
 
 /**
  * @brief PDM driver default configuration.
@@ -119,7 +119,6 @@ typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * p_evt);
  */
 nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,
                          nrfx_pdm_event_handler_t  event_handler);
-
 
 /**
  * @brief Function for reconfiguring the PDM interface.
