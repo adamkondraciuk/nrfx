@@ -27,10 +27,16 @@ typedef struct
 {
     nrf_i2s_config_t  config;        ///< Peripheral configuration.
     nrf_i2s_pins_t    pins;          ///< Pins to be used.
+    uint8_t           irq_priority;  ///< Interrupt priority.
 #if NRF_I2S_HAS_CLKCONFIG
     nrf_i2s_clksrc_t  clksrc;        ///< Clock source selection.
     bool              enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
 #endif
+    bool              skip_gpio_cfg; ///< Skip GPIO configuration of pins.
+                                     /**< When set to true, the driver does not modify
+                                      *   any GPIO parameters of the used pins. Those
+                                      *   parameters are supposed to be configured
+                                      *   externally before the driver is initialized. */
     bool              skip_psel_cfg; ///< Skip pin selection configuration.
                                      /**< When set to true, the driver does not modify
                                       *   pin select registers in the peripheral.
@@ -40,12 +46,6 @@ typedef struct
                                       *   selection are to be skipped, the structure
                                       *   fields that specify pins can be omitted,
                                       *   as they are ignored anyway. */
-    uint8_t           irq_priority;  ///< Interrupt priority.
-    bool              skip_gpio_cfg; ///< Skip GPIO configuration of pins.
-                                     /**< When set to true, the driver does not modify
-                                      *   any GPIO parameters of the used pins. Those
-                                      *   parameters are supposed to be configured
-                                      *   externally before the driver is initialized. */
 } nrfx_i2s_config_t;
 
 /** @brief I2S driver buffers structure. */
@@ -108,11 +108,11 @@ enum {
         .sdout_pin    = _pin_sdout,                                                     \
         .sdin_pin     = _pin_sdin,                                                      \
     },                                                                                  \
+    .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
     NRFX_COND_CODE_1(NRF_I2S_HAS_CLKCONFIG,                                             \
                      (.clksrc = NRF_I2S_CLKSRC_PCLK32M,                                 \
                       .enable_bypass = false,),                                         \
                      ())                                                                \
-    .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
 }
 
 #define NRFX_I2S_STATUS_NEXT_BUFFERS_NEEDED (1UL << 0)
