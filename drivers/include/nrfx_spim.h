@@ -59,6 +59,15 @@ typedef struct
                                           *   selection are to be skipped but the signal
                                           *   is not controlled by hardware (the driver
                                           *   must then control it as a regular GPIO). */
+    bool                 ss_active_high; ///< Polarity of the Slave Select pin during transmission.
+    uint8_t              irq_priority;   ///< Interrupt priority.
+    uint8_t              orc;            ///< Overrun character.
+                                         /**< This character is used when all bytes from the TX buffer are sent,
+                                          *   but the transfer continues due to RX. */
+    uint32_t             frequency;      ///< SPIM frequency in Hz.
+    nrf_spim_mode_t      mode;           ///< SPIM mode.
+    nrf_spim_bit_order_t bit_order;      ///< SPIM bit order.
+    nrf_gpio_pin_pull_t  miso_pull;      ///< MISO pull up configuration.
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED) || defined(__NRFX_DOXYGEN__)
     uint32_t             dcx_pin;        ///< D/CX pin number (optional).
     uint8_t              rx_delay;       ///< Sample delay for input serial data on MISO.
@@ -73,15 +82,6 @@ typedef struct
                                           *   The value is specified in number of 64 MHz clock cycles (15.625 ns).
                                           *   Supported only for hardware-controlled Slave Select. */
 #endif
-    bool                 ss_active_high; ///< Polarity of the Slave Select pin during transmission.
-    uint8_t              irq_priority;   ///< Interrupt priority.
-    uint8_t              orc;            ///< Overrun character.
-                                         /**< This character is used when all bytes from the TX buffer are sent,
-                                          *   but the transfer continues due to RX. */
-    uint32_t             frequency;      ///< SPIM frequency in Hz.
-    nrf_spim_mode_t      mode;           ///< SPIM mode.
-    nrf_spim_bit_order_t bit_order;      ///< SPIM bit order.
-    nrf_gpio_pin_pull_t  miso_pull;      ///< MISO pull up configuration.
     bool                 skip_gpio_cfg;  ///< Skip GPIO configuration of pins.
                                          /**< When set to true, the driver does not modify
                                           *   any GPIO parameters of the used pins. Those
