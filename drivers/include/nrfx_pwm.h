@@ -45,12 +45,16 @@ typedef struct
                                                             /**< Use @ref NRF_PWM_PIN_NOT_CONNECTED
                                                              *   if a given output channel is not needed. */
     bool               pin_inverted[NRF_PWM_CHANNEL_COUNT]; ///< Inverted pin polarity (idle state = 1).
-    uint16_t           top_value;                           ///< Value up to which the pulse generator counter counts.
+    uint8_t            irq_priority;                        ///< Interrupt priority.
     nrf_pwm_clk_t      base_clock;                          ///< Base clock frequency.
     nrf_pwm_mode_t     count_mode;                          ///< Operating mode of the pulse generator counter.
+    uint16_t           top_value;                           ///< Value up to which the pulse generator counter counts.
     nrf_pwm_dec_load_t load_mode;                           ///< Mode of loading sequence data from RAM.
     nrf_pwm_dec_step_t step_mode;                           ///< Mode of advancing the active sequence.
-    uint8_t            irq_priority;                        ///< Interrupt priority.
+    bool               skip_gpio_cfg;                       ///< Skip the GPIO configuration
+                                                            /**< When this flag is set, the user is responsible for
+                                                             *   providing the proper configuration of the output pins,
+                                                             *   as the driver does not touch it at all. */
     bool               skip_psel_cfg;                       ///< Skip pin selection configuration.
                                                             /**< When set to true, the driver does not modify
                                                              *   pin select registers in the peripheral.
@@ -60,10 +64,6 @@ typedef struct
                                                              *   selection are to be skipped, the structure
                                                              *   fields that specify pins can be omitted,
                                                              *   as they are ignored anyway. */
-    bool              skip_gpio_cfg;                        ///< Skip the GPIO configuration
-                                                            /**< When this flag is set, the user is responsible for
-                                                             *   providing the proper configuration of the output pins,
-                                                             *   as the driver does not touch it at all. */
 } nrfx_pwm_config_t;
 
 /**
@@ -95,13 +95,13 @@ typedef struct
         false,                                                  \
         false,                                                  \
     },                                                          \
-    .top_value     = 1000,                                      \
+    .irq_priority  = NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY,      \
     .base_clock    = NRF_PWM_CLK_1MHz,                          \
     .count_mode    = NRF_PWM_MODE_UP,                           \
+    .top_value     = 1000,                                      \
     .load_mode     = NRF_PWM_LOAD_COMMON,                       \
     .step_mode     = NRF_PWM_STEP_AUTO,                         \
-    .irq_priority  = NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY,      \
-    .skip_gpio_cfg = false,                                     \
+    .skip_gpio_cfg = false                                      \
 }
 
 /** @brief PWM flags providing additional playback options. */
