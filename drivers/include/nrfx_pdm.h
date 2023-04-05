@@ -30,12 +30,18 @@ typedef struct
     nrf_pdm_freq_t    clock_freq;         ///< Clock frequency.
     nrf_pdm_gain_t    gain_l;             ///< Left channel gain.
     nrf_pdm_gain_t    gain_r;             ///< Right channel gain.
+    uint8_t           interrupt_priority; ///< Interrupt priority.
 #if NRF_PDM_HAS_RATIO_CONFIG
     nrf_pdm_ratio_t   ratio;              ///< Ratio between PDM_CLK and output sample rate.
 #endif
 #if NRF_PDM_HAS_MCLKCONFIG
     nrf_pdm_mclksrc_t mclksrc;            ///< Master clock source selection.
 #endif
+    bool              skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
+                                          /**< When set to true, the driver does not modify
+                                           *   any GPIO parameters of the used pins. Those
+                                           *   parameters are supposed to be configured
+                                           *   externally before the driver is initialized. */
     bool              skip_psel_cfg;      ///< Skip pin selection configuration.
                                           /**< When set to true, the driver does not modify
                                            *   pin select registers in the peripheral.
@@ -45,12 +51,6 @@ typedef struct
                                            *   selection are to be skipped, the structure
                                            *   fields that specify pins can be omitted,
                                            *   as they are ignored anyway. */
-    uint8_t           interrupt_priority; ///< Interrupt priority.
-    bool              skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                          /**< When set to true, the driver does not modify
-                                           *   any GPIO parameters of the used pins. Those
-                                           *   parameters are supposed to be configured
-                                           *   externally before the driver is initialized. */
 } nrfx_pdm_config_t;
 
 /** @brief PDM error type. */
@@ -89,11 +89,11 @@ typedef struct
     .clock_freq         = NRF_PDM_FREQ_1032K,                   \
     .gain_l             = NRF_PDM_GAIN_DEFAULT,                 \
     .gain_r             = NRF_PDM_GAIN_DEFAULT,                 \
+    .interrupt_priority = NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY, \
     NRFX_COND_CODE_1(NRF_PDM_HAS_RATIO_CONFIG,                  \
                      (.ratio = NRF_PDM_RATIO_64X,), ())         \
     NRFX_COND_CODE_1(NRF_PDM_HAS_MCLKCONFIG,                    \
                      (.mclksrc = NRF_PDM_MCLKSRC_PCLK32M,), ()) \
-    .interrupt_priority = NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY, \
 }
 
 /**
