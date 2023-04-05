@@ -586,7 +586,7 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
     return err_code;
 }
 
-uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const * p_instance,
+uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const *   p_instance,
                                           nrfx_twim_xfer_type_t xfer_type)
 {
     return nrfy_twim_task_address_get(p_instance->p_twim,

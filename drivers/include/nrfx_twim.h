@@ -45,6 +45,13 @@ typedef struct
     uint32_t             scl_pin;            ///< SCL pin number.
     uint32_t             sda_pin;            ///< SDA pin number.
     nrf_twim_frequency_t frequency;          ///< TWIM frequency.
+    uint8_t              interrupt_priority; ///< Interrupt priority.
+    bool                 hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
+    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
+                                             /**< When set to true, the driver does not modify
+                                              *   any GPIO parameters of the used pins. Those
+                                              *   parameters are supposed to be configured
+                                              *   externally before the driver is initialized. */
     bool                 skip_psel_cfg;      ///< Skip pin selection configuration.
                                              /**< When set to true, the driver does not modify
                                               *   pin select registers in the peripheral.
@@ -54,13 +61,6 @@ typedef struct
                                               *   selection are to be skipped, the structure
                                               *   fields that specify pins can be omitted,
                                               *   as they are ignored anyway. */
-    uint8_t              interrupt_priority; ///< Interrupt priority.
-    bool                 hold_bus_uninit;    ///< Hold pull up state on GPIO pins after uninit.
-    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                             /**< When set to true, the driver does not modify
-                                              *   any GPIO parameters of the used pins. Those
-                                              *   parameters are supposed to be configured
-                                              *   externally before the driver is initialized. */
 } nrfx_twim_config_t;
 
 /**
@@ -308,7 +308,8 @@ bool nrfx_twim_is_busy(nrfx_twim_t const * p_instance);
  *
  * @return Start task address (TX or RX) depending on the value of xfer_type.
  */
-uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const * p_instance, nrfx_twim_xfer_type_t xfer_type);
+uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const *   p_instance,
+                                          nrfx_twim_xfer_type_t xfer_type);
 
 /**
  * @brief Function for returning the address of a STOPPED TWIM event.
