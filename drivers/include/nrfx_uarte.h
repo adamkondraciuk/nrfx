@@ -49,28 +49,28 @@ typedef enum
 /** @brief Structure for the UARTE configuration. */
 typedef struct
 {
-    uint32_t             txd_pin;           ///< TXD pin number.
-    uint32_t             rxd_pin;           ///< RXD pin number.
-    uint32_t             rts_pin;           ///< RTS pin number.
-    uint32_t             cts_pin;           ///< CTS pin number.
-    nrf_uarte_baudrate_t baudrate;          ///< Baud rate.
-    nrf_uarte_config_t   config;            ///< Peripheral configuration.
-    bool                 skip_psel_cfg;     ///< Skip pin selection configuration.
-                                            /**< When set to true, the driver does not modify
-                                             *   pin select registers in the peripheral.
-                                             *   Those registers are supposed to be set up
-                                             *   externally before the driver is initialized.
-                                             *   @note When both GPIO configuration and pin
-                                             *   selection are to be skipped, the structure
-                                             *   fields that specify pins can be omitted,
-                                             *   as they are ignored anyway. */
-    void *              p_context;          ///< Context passed to interrupt handler.
-    uint8_t             interrupt_priority; ///< Interrupt priority.
-    bool                skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
-                                            /**< When set to true, the driver does not modify
-                                             *   any GPIO parameters of the used pins. Those
-                                             *   parameters are supposed to be configured
-                                             *   externally before the driver is initialized. */
+    uint32_t             txd_pin;            ///< TXD pin number.
+    uint32_t             rxd_pin;            ///< RXD pin number.
+    uint32_t             rts_pin;            ///< RTS pin number.
+    uint32_t             cts_pin;            ///< CTS pin number.
+    void *               p_context;          ///< Context passed to interrupt handler.
+    nrf_uarte_baudrate_t baudrate;           ///< Baud rate.
+    uint8_t              interrupt_priority; ///< Interrupt priority.
+    nrf_uarte_config_t   config;             ///< Peripheral configuration.
+    bool                 skip_gpio_cfg;      ///< Skip GPIO configuration of pins.
+                                             /**< When set to true, the driver does not modify
+                                              *   any GPIO parameters of the used pins. Those
+                                              *   parameters are supposed to be configured
+                                              *   externally before the driver is initialized. */
+    bool                 skip_psel_cfg;      ///< Skip pin selection configuration.
+                                             /**< When set to true, the driver does not modify
+                                              *   pin select registers in the peripheral.
+                                              *   Those registers are supposed to be set up
+                                              *   externally before the driver is initialized.
+                                              *   @note When both GPIO configuration and pin
+                                              *   selection are to be skipped, the structure
+                                              *   fields that specify pins can be omitted,
+                                              *   as they are ignored anyway. */
 } nrfx_uarte_config_t;
 
 /**
@@ -91,7 +91,9 @@ typedef struct
     .rxd_pin            = _pin_rx,                                              \
     .rts_pin            = NRF_UARTE_PSEL_DISCONNECTED,                          \
     .cts_pin            = NRF_UARTE_PSEL_DISCONNECTED,                          \
+    .p_context          = NULL,                                                 \
     .baudrate           = NRF_UARTE_BAUDRATE_115200,                            \
+    .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY,               \
     .config             =                                                       \
     {                                                                           \
         .hwfc           = NRF_UARTE_HWFC_DISABLED,                              \
@@ -101,9 +103,6 @@ typedef struct
         NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(UARTE_CONFIG_PARITYTYPE_Msk), \
                 (.paritytype = NRF_UARTE_PARITYTYPE_EVEN,), ())                 \
     },                                                                          \
-                                                                                \
-    .p_context          = NULL,                                                 \
-    .interrupt_priority = NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY                \
 }
 
 /** @brief Structure for the UARTE transfer completion event. */
