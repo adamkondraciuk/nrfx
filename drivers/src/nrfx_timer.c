@@ -116,7 +116,6 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
                            nrfx_timer_config_t const * p_config,
                            nrfx_timer_event_handler_t  timer_event_handler)
 {
-    NRFX_ASSERT(p_config);
     timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
 
     nrfx_err_t err_code;
