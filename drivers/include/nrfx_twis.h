@@ -98,8 +98,8 @@ typedef void (*nrfx_twis_event_handler_t)(nrfx_twis_evt_t const * p_event);
 typedef struct
 {
     uint32_t            addr[2];            ///< Set addresses that this slave should respond. Set 0 to disable.
-    uint32_t            scl;                ///< SCL pin number.
-    uint32_t            sda;                ///< SDA pin number.
+    uint32_t            scl_pin;            ///< SCL pin number.
+    uint32_t            sda_pin;            ///< SDA pin number.
     nrf_gpio_pin_pull_t scl_pull;           ///< SCL pin pull.
     nrf_gpio_pin_pull_t sda_pull;           ///< SDA pin pull.
     uint8_t             interrupt_priority; ///< The priority of interrupt for the module to be set.
@@ -134,8 +134,8 @@ typedef struct
 #define NRFX_TWIS_DEFAULT_CONFIG(_pin_scl, _pin_sda, _addr)      \
 {                                                                \
     .addr               = { _addr, 0x00 },                       \
-    .scl                = _pin_scl,                              \
-    .sda                = _pin_sda,                              \
+    .scl_pin            = _pin_scl,                              \
+    .sda_pin            = _pin_sda,                              \
     .scl_pull           = NRF_GPIO_PIN_NOPULL,                   \
     .sda_pull           = NRF_GPIO_PIN_NOPULL,                   \
     .interrupt_priority = NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY  \

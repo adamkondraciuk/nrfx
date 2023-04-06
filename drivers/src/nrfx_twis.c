@@ -432,7 +432,7 @@ static void twis_configure(nrfx_twis_t const *        p_instance,
 
     if (!p_config->skip_psel_cfg)
     {
-        nrf_twis_pins_set(p_instance->p_reg, p_config->scl, p_config->sda);
+        nrf_twis_pins_set(p_instance->p_reg, p_config->scl_pin, p_config->sda_pin);
     }
     nrf_twis_address_set(p_instance->p_reg, 0, p_config->addr[0]);
     nrf_twis_address_set(p_instance->p_reg, 1, p_config->addr[1]);
@@ -500,11 +500,11 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
         p_cb->skip_gpio_cfg = p_config->skip_gpio_cfg;
         if (!p_config->skip_gpio_cfg)
         {
-            NRFX_ASSERT(p_config->scl != p_config->sda);
-            nrfx_twis_config_pin(p_config->scl, p_config->scl_pull);
-            nrfx_twis_config_pin(p_config->sda, p_config->sda_pull);
+            NRFX_ASSERT(p_config->scl_pin != p_config->sda_pin);
+            nrfx_twis_config_pin(p_config->scl_pin, p_config->scl_pull);
+            nrfx_twis_config_pin(p_config->sda_pin, p_config->sda_pull);
 #if NRF_GPIO_HAS_CLOCKPIN
-            nrf_gpio_pin_clock_set(p_config->scl, true);
+            nrf_gpio_pin_clock_set(p_config->scl_pin, true);
 #endif
         }
         twis_configure(p_instance, p_config);
