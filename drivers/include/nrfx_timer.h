@@ -183,21 +183,6 @@ void nrfx_timer_clear(nrfx_timer_t const * p_instance);
 void nrfx_timer_increment(nrfx_timer_t const * p_instance);
 
 /**
- * @brief Function for getting the prescaler setting for given frequency value.
- *
- * @param[in]  p_instance Pointer to the driver instance structure.
- * @param[in]  frequency  Desired frequency value.
- * @param[out] prescaler  Pointer to the variable to be filled with prescaler value
- *                        corresponding to desired frequency.
- *
- * @retval NRFX_SUCCESS             Operation was successful.
- * @retval NRFX_ERROR_INVALID_PARAM No prescaler values available for given frequency and instance pair.
- */
-nrfx_err_t nrfx_timer_prescaler_calculate(nrfx_timer_t const * p_instance,
-                                          uint32_t             frequency,
-                                          uint32_t *           prescaler);
-
-/**
  * @brief Function for returning the address of the specified timer task.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

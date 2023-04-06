@@ -65,6 +65,8 @@
 
 #include <nrfx_timer.h>
 
+#define PRESCALER_INVALID UINT32_MAX
+
 #define NRFX_LOG_MODULE TIMER
 #include <nrfx_log.h>
 
@@ -78,17 +80,28 @@ typedef struct
 
 static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 
+static uint32_t prescaler_calculate(nrfx_timer_t const * p_instance, uint32_t frequency)
+{
+    (void)p_instance;
+    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
+
+    if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
+    {
+        return PRESCALER_INVALID;
+    }
+    return 31 - NRF_CLZ(base_frequency / frequency);
+}
+
 static nrfx_err_t timer_configure(nrfx_timer_t const *        p_instance,
                                   nrfx_timer_config_t const * p_config)
 {
-    nrfx_err_t err_code;
     uint32_t prescaler;
 
-    err_code = nrfx_timer_prescaler_calculate(p_instance, p_config->frequency, &prescaler);
-    if (err_code == NRFX_ERROR_INVALID_PARAM)
+    prescaler = prescaler_calculate(p_instance, p_config->frequency);
+    if (prescaler == PRESCALER_INVALID)
     {
         NRFX_LOG_WARNING("Specified frequency is not supported by the TIMER instance.");
-        return err_code;
+        return NRFX_ERROR_INVALID_PARAM;
     }
 
     nrfy_timer_config_t nrfy_config =
@@ -104,12 +117,6 @@ static nrfx_err_t timer_configure(nrfx_timer_t const *        p_instance,
                         p_config->interrupt_priority,
                         false);
     return NRFX_SUCCESS;
-}
-
-static uint32_t prescaler_calculate(uint32_t base_frequency, uint32_t frequency)
-{
-    NRFX_ASSERT(base_frequency / frequency > 0);
-    return 31 - NRF_CLZ(base_frequency / frequency);
 }
 
 nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
@@ -182,27 +189,6 @@ void nrfx_timer_uninit(nrfx_timer_t const * p_instance)
 
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized instance: %d.", p_instance->instance_id);
-}
-
-nrfx_err_t nrfx_timer_prescaler_calculate(nrfx_timer_t const * p_instance,
-                                          uint32_t             frequency,
-                                          uint32_t *           prescaler)
-{
-    NRFX_ASSERT(prescaler);
-    (void)p_instance;
-    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
-
-    if (base_frequency == frequency)
-    {
-        *prescaler = 0;
-        return NRFX_SUCCESS;
-    }
-    else if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
-    {
-        return NRFX_ERROR_INVALID_PARAM;
-    }
-    *prescaler = prescaler_calculate(base_frequency, frequency);
-    return NRFX_SUCCESS;
 }
 
 bool nrfx_timer_frequency_vaild_check(nrfx_timer_t const * p_instance,
