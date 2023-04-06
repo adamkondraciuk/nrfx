@@ -36,39 +36,11 @@ extern "C" {
 #define NRF_WDT_HAS_STOP 0
 #endif
 
-#if defined(WDT_TSEN_TSEN_Msk) || defined (__NRFX_DOXYGEN__)
-/** @brief Presence of Task STOP enable functionality. */
-#define NRF_WDT_HAS_STOP_ENABLE 1
-#else
-#define NRF_WDT_HAS_STOP_ENABLE 0
-#endif
-
-#if defined(WDT_EVENTS_STOPPED_EVENTS_STOPPED_Msk) || defined (__NRFX_DOXYGEN__)
-/** @brief Presence of Event STOP functionality. */
-#define NRF_WDT_HAS_EVENT_STOP 1
-#else
-#define NRF_WDT_HAS_EVENT_STOP 0
-#endif
-
 #if defined(WDT_NMIENSET_TIMEOUT_Msk) || defined (__NRFX_DOXYGEN__)
 /** @brief Presence of non-maskable interrupt configuration. */
 #define NRF_WDT_HAS_NMI 1
 #else
 #define NRF_WDT_HAS_NMI 0
-#endif
-
-#if defined(WDT_CONFIG_STOPEN_Msk) || defined (__NRFX_DOXYGEN__)
-/** @brief Presence of WDT stop enable. */
-#define NRF_WDT_HAS_CONFIG_STOPEN 1
-#else
-#define NRF_WDT_HAS_CONFIG_STOPEN 0
-#endif
-
-#if defined(WDT_INTENSET_STOPPED_Msk) || defined (__NRFX_DOXYGEN__)
-/** @brief Presence of interrupt for event STOPPED */
-#define NRF_WDT_HAS_INTENSET_STOPPED 1
-#else
-#define NRF_WDT_HAS_INTENSET_STOPPED 0
 #endif
 
 /** @brief Number of WDT channels. */
@@ -91,7 +63,7 @@ typedef enum
 typedef enum
 {
     NRF_WDT_EVENT_TIMEOUT = offsetof(NRF_WDT_Type, EVENTS_TIMEOUT), /**< Event from WDT time-out. */
-#if NRF_WDT_HAS_EVENT_STOP
+#if NRF_WDT_HAS_STOP
     NRF_WDT_EVENT_STOPPED = offsetof(NRF_WDT_Type, EVENTS_STOPPED), /**< Event from WDT stop. */
 #endif
 } nrf_wdt_event_t;
@@ -101,7 +73,7 @@ typedef enum
 {
     NRF_WDT_BEHAVIOUR_RUN_SLEEP_MASK     = WDT_CONFIG_SLEEP_Msk,  /**< WDT will run when CPU is in SLEEP mode. */
     NRF_WDT_BEHAVIOUR_RUN_HALT_MASK      = WDT_CONFIG_HALT_Msk,   /**< WDT will run when CPU is in HALT mode. */
-#if NRF_WDT_HAS_CONFIG_STOPEN
+#if defined(WDT_CONFIG_STOPEN_Msk)
     NRF_WDT_BEHAVIOUR_STOP_ENABLE_MASK   = WDT_CONFIG_STOPEN_Msk, /**< WDT allows stopping. */
 #endif
 } nrf_wdt_behaviour_mask_t;
@@ -136,7 +108,7 @@ typedef enum
 typedef enum
 {
     NRF_WDT_INT_TIMEOUT_MASK = WDT_INTENSET_TIMEOUT_Msk, /**< WDT interrupt from time-out event. */
-#if NRF_WDT_HAS_INTENSET_STOPPED
+#if NRF_WDT_HAS_STOP
     NRF_WDT_INT_STOPPED_MASK = WDT_INTENSET_STOPPED_Msk, /**< WDT interrupt from stop event. */
 #endif
 } nrf_wdt_int_mask_t;
@@ -383,7 +355,7 @@ NRF_STATIC_INLINE bool nrf_wdt_reload_request_enable_check(NRF_WDT_Type const * 
 NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
                                                   nrf_wdt_rr_register_t rr_register);
 
-#if NRF_WDT_HAS_STOP_ENABLE
+#if defined(WDT_TSEN_TSEN_Msk)
 /**
  * @brief Function for enabling task stop.
  *
@@ -541,7 +513,7 @@ NRF_STATIC_INLINE void nrf_wdt_reload_request_set(NRF_WDT_Type *        p_reg,
     p_reg->RR[rr_register] = NRF_WDT_RR_VALUE;
 }
 
-#if NRF_WDT_HAS_STOP_ENABLE
+#if defined(WDT_TSEN_TSEN_Msk)
 NRF_STATIC_INLINE void nrf_wdt_task_stop_enable(NRF_WDT_Type * p_reg)
 {
     p_reg->TSEN = NRF_WDT_RR_VALUE;
