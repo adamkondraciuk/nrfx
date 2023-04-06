@@ -407,7 +407,7 @@ extern "C" {
  * @retval true  The value is power of 2.
  * @retval false The value is not power of 2.
  */
-#define NRFX_IS_POWER_OF_TWO(val) ((val != 0) && (val & (val - 1)) == 0)
+#define NRFX_IS_POWER_OF_TWO(val) (((val) != 0) && ((val) & ((val) - 1)) == 0)
 
 /**
  * @brief Macro for checking whether a given number is even.
@@ -417,7 +417,7 @@ extern "C" {
  * @retval true  The value is even.
  * @retval false The value is odd.
  */
-#define NRFX_IS_EVEN(val) ((val % 2)  == 0)
+#define NRFX_IS_EVEN(val) (((val) % 2)  == 0)
 
 /**
  * @brief Macro for checking if given lengths of EasyDMA transfers do not exceed
