@@ -1165,7 +1165,7 @@ NRF_STATIC_INLINE uint32_t nrf_spim_csn_pin_get(NRF_SPIM_Type const * p_reg)
 #if NRF_SPIM_HAS_DCX
 NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg, uint32_t dcx_pin)
 {
-#if defined(SPIM_PSEL_DCX_ResetValue)
+#if defined(SPIM_PSEL_DCX_PIN_Msk)
     p_reg->PSEL.DCX = dcx_pin;
 #else
     p_reg->PSELDCX = dcx_pin;
@@ -1174,7 +1174,7 @@ NRF_STATIC_INLINE void nrf_spim_dcx_pin_set(NRF_SPIM_Type * p_reg, uint32_t dcx_
 
 NRF_STATIC_INLINE uint32_t nrf_spim_dcx_pin_get(NRF_SPIM_Type const * p_reg)
 {
-#if defined(SPIM_PSEL_DCX_ResetValue)
+#if defined(SPIM_PSEL_DCX_PIN_Msk)
     return p_reg->PSEL.DCX;
 #else
     return p_reg->PSELDCX;
