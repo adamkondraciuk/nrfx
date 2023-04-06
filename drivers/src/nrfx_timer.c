@@ -67,6 +67,12 @@
 
 #define PRESCALER_INVALID UINT32_MAX
 
+#define TIMER_FREQUENCY_VALID_CHECK(p_instance, frequency)                                      \
+        ((NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) % (frequency) == 0) &&                \
+         NRFX_IS_POWER_OF_TWO(NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / (frequency)) && \
+         ((NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / (frequency)) <=                    \
+          (1 << NRF_TIMER_PRESCALER_MAX)))
+
 #define NRFX_LOG_MODULE TIMER
 #include <nrfx_log.h>
 
@@ -85,11 +91,11 @@ static uint32_t prescaler_calculate(nrfx_timer_t const * p_instance, uint32_t fr
     (void)p_instance;
     uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
 
-    if (!nrfx_timer_frequency_vaild_check(p_instance, frequency))
+    if (!TIMER_FREQUENCY_VALID_CHECK(p_instance, frequency))
     {
         return PRESCALER_INVALID;
     }
-    return 31 - NRF_CLZ(base_frequency / frequency);
+    return NRF_CTZ(base_frequency / frequency);
 }
 
 static nrfx_err_t timer_configure(nrfx_timer_t const *        p_instance,
@@ -189,17 +195,6 @@ void nrfx_timer_uninit(nrfx_timer_t const * p_instance)
 
     m_cb[p_instance->instance_id].state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized instance: %d.", p_instance->instance_id);
-}
-
-bool nrfx_timer_frequency_vaild_check(nrfx_timer_t const * p_instance,
-                                      uint32_t             frequency)
-{
-    (void)p_instance;
-    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
-
-    return (base_frequency % frequency == 0) &&
-            NRFX_IS_POWER_OF_TWO(base_frequency / (uint32_t)frequency) &&
-            ((base_frequency / frequency) <= (1 << NRF_TIMER_PRESCALER_MAX));
 }
 
 void nrfx_timer_enable(nrfx_timer_t const * p_instance)

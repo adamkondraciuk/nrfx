@@ -280,19 +280,6 @@ void nrfx_timer_extended_compare(nrfx_timer_t const *   p_instance,
                                  bool                   enable_int);
 
 /**
- * @brief Function for checking whether specified @p frequency can be obtained for given timer
- *        instance.
- *
- * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] frequency  Frequency value in Hz to be checked.
- *
- * @retval true  Given frequency can be obtained.
- * @retval false Given frequency cannot be obtained.
- */
-bool nrfx_timer_frequency_vaild_check(nrfx_timer_t const * p_instance,
-                                      uint32_t             frequency);
-
-/**
  * @brief Function for converting time in microseconds to timer ticks.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
