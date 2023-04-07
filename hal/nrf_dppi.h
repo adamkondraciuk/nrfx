@@ -40,7 +40,7 @@ extern "C" {
  *                          register is to be set.
  * @param[in] dppi_chan     DPPIC channel number.
  */
-#define NRFX_DPPIC_ENDPOINT_SETUP(task_or_event, dppi_chan) \
+#define NRF_DPPI_ENDPOINT_SETUP(task_or_event, dppi_chan)   \
         (*((volatile uint32_t *)(task_or_event + 0x80uL)) = \
         ((uint32_t)dppi_chan | NRF_SUBSCRIBE_PUBLISH_ENABLE))
 
@@ -50,7 +50,7 @@ extern "C" {
  * @param[in] task_or_event Address of the event or task for which publish/subscribe
  *                          register is to be cleared.
  */
-#define NRFX_DPPIC_ENDPOINT_CLEAR(task_or_event) \
+#define NRF_DPPI_ENDPOINT_CLEAR(task_or_event) \
         (*((volatile uint32_t *)(task_or_event + 0x80uL)) = 0)
 
 /** @brief DPPI channel groups. */

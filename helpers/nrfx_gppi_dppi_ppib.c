@@ -488,7 +488,7 @@ void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
                 NRFX_ASSERT(false);
             }
     }
-    NRFX_DPPIC_ENDPOINT_SETUP(fork_tep, dppi_chan);
+    NRF_DPPI_ENDPOINT_SETUP(fork_tep, dppi_chan);
 }
 
 void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
@@ -511,7 +511,7 @@ void nrfx_gppi_fork_endpoint_clear(uint8_t channel, uint32_t fork_tep)
                 NRFX_ASSERT(false);
             }
     }
-    NRFX_DPPIC_ENDPOINT_CLEAR(fork_tep);
+    NRF_DPPI_ENDPOINT_CLEAR(fork_tep);
 }
 
 void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t tep)
@@ -583,8 +583,8 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
     {
         p_path->p_src_apb = p_src_apb;
         p_path->p_dst_apb = p_dst_apb;
-        NRFX_DPPIC_ENDPOINT_SETUP(eep, *src_dppi_chan);
-        NRFX_DPPIC_ENDPOINT_SETUP(tep, *dst_dppi_chan);
+        NRF_DPPI_ENDPOINT_SETUP(eep, *src_dppi_chan);
+        NRF_DPPI_ENDPOINT_SETUP(tep, *dst_dppi_chan);
     }
     else
     {
@@ -650,8 +650,8 @@ void nrfx_gppi_channel_endpoints_clear(uint8_t channel, uint32_t eep, uint32_t t
     if (err_code == NRFX_SUCCESS)
     {
         path_cleanup(p_path);
-        NRFX_DPPIC_ENDPOINT_CLEAR(eep);
-        NRFX_DPPIC_ENDPOINT_CLEAR(tep);
+        NRF_DPPI_ENDPOINT_CLEAR(eep);
+        NRF_DPPI_ENDPOINT_CLEAR(tep);
     }
     NRFX_ASSERT(err_code == NRFX_SUCCESS);
 }

@@ -35,13 +35,13 @@ void nrfx_gppi_task_trigger(nrfx_gppi_task_t task)
 void nrfx_gppi_event_endpoint_setup(uint8_t channel, uint32_t eep)
 {
     NRFX_ASSERT(eep);
-    NRFX_DPPIC_ENDPOINT_SETUP(eep, channel);
+    NRF_DPPI_ENDPOINT_SETUP(eep, channel);
 }
 
 void nrfx_gppi_task_endpoint_setup(uint8_t channel, uint32_t tep)
 {
     NRFX_ASSERT(tep);
-    NRFX_DPPIC_ENDPOINT_SETUP(tep, channel);
+    NRF_DPPI_ENDPOINT_SETUP(tep, channel);
 }
 
 void nrfx_gppi_channel_endpoints_setup(uint8_t  channel, uint32_t eep, uint32_t tep)
@@ -60,14 +60,14 @@ void nrfx_gppi_event_endpoint_clear(uint8_t channel, uint32_t eep)
 {
     NRFX_ASSERT(eep);
     (void)channel;
-    NRFX_DPPIC_ENDPOINT_CLEAR(eep);
+    NRF_DPPI_ENDPOINT_CLEAR(eep);
 }
 
 void nrfx_gppi_task_endpoint_clear(uint8_t channel, uint32_t tep)
 {
     NRFX_ASSERT(tep);
     (void)channel;
-    NRFX_DPPIC_ENDPOINT_CLEAR(tep);
+    NRF_DPPI_ENDPOINT_CLEAR(tep);
 }
 
 void nrfx_gppi_fork_endpoint_setup(uint8_t channel, uint32_t fork_tep)
