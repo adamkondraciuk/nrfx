@@ -167,8 +167,8 @@ NRFY_STATIC_INLINE uint32_t nrfy_qdec_events_process(NRF_QDEC_Type * p_reg,
  * @param[in] p_accdbl Pointer to store the accumulated double transitions.
  */
 NRFY_STATIC_INLINE void nrfy_qdec_accumulators_read(NRF_QDEC_Type const * p_reg,
-                                                    int16_t *             p_acc,
-                                                    uint8_t *             p_accdbl)
+                                                    int32_t *             p_acc,
+                                                    uint32_t *            p_accdbl)
 {
     nrf_barrier_r();
     *p_acc    = nrf_qdec_accread_get(p_reg);
@@ -385,37 +385,37 @@ NRFY_STATIC_INLINE int32_t nrfy_qdec_sample_get(NRF_QDEC_Type const * p_reg)
 }
 
 /** @refhal{nrf_qdec_acc_get} */
-NRFY_STATIC_INLINE int16_t nrfy_qdec_acc_get(NRF_QDEC_Type const * p_reg)
+NRFY_STATIC_INLINE int32_t nrfy_qdec_acc_get(NRF_QDEC_Type const * p_reg)
 {
     nrf_barrier_r();
-    int16_t ret = nrf_qdec_acc_get(p_reg);
+    int32_t ret = nrf_qdec_acc_get(p_reg);
     nrf_barrier_r();
     return ret;
 }
 
 /** @refhal{nrf_qdec_accread_get} */
-NRFY_STATIC_INLINE int16_t nrfy_qdec_accread_get(NRF_QDEC_Type const * p_reg)
+NRFY_STATIC_INLINE int32_t nrfy_qdec_accread_get(NRF_QDEC_Type const * p_reg)
 {
     nrf_barrier_r();
-    int16_t ret = nrf_qdec_accread_get(p_reg);
+    int32_t ret = nrf_qdec_accread_get(p_reg);
     nrf_barrier_r();
     return ret;
 }
 
 /** @refhal{nrf_qdec_accdbl_get} */
-NRFY_STATIC_INLINE uint8_t nrfy_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
+NRFY_STATIC_INLINE uint32_t nrfy_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
 {
     nrf_barrier_r();
-    uint8_t ret = nrf_qdec_accdbl_get(p_reg);
+    uint32_t ret = nrf_qdec_accdbl_get(p_reg);
     nrf_barrier_r();
     return ret;
 }
 
 /** @refhal{nrf_qdec_accdblread_get} */
-NRFY_STATIC_INLINE uint8_t nrfy_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
+NRFY_STATIC_INLINE uint32_t nrfy_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
 {
     nrf_barrier_r();
-    uint8_t ret = nrf_qdec_accdblread_get(p_reg);
+    uint32_t ret = nrf_qdec_accdblread_get(p_reg);
     nrf_barrier_r();
     return ret;
 }
