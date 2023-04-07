@@ -112,8 +112,8 @@ typedef struct
 /** @brief QDEC report event data. */
 typedef struct
 {
-    int16_t acc;     /**< Accumulated transitions. */
-    uint8_t accdbl;  /**< Accumulated double transitions. */
+    int32_t  acc;    /**< Accumulated transitions. */
+    uint32_t accdbl; /**< Accumulated double transitions. */
 } nrfx_qdec_report_data_evt_t;
 
 /** @brief QDEC event handler structure. */
@@ -202,8 +202,8 @@ void nrfx_qdec_disable(nrfx_qdec_t const * p_instance);
  * @param[out] p_accdbl   Pointer to store the accumulated double transitions.
  */
 void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
-                                 int16_t *           p_acc,
-                                 uint8_t *           p_accdbl);
+                                 int32_t *           p_acc,
+                                 uint32_t *          p_accdbl);
 
 /**
  * @brief Function for returning the address of the specified QDEC task.

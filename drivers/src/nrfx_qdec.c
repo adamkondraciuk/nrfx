@@ -190,8 +190,8 @@ void nrfx_qdec_disable(nrfx_qdec_t const * p_instance)
 }
 
 void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
-                                 int16_t *           p_acc,
-                                 uint8_t *           p_accdbl)
+                                 int32_t *           p_acc,
+                                 uint32_t *          p_accdbl)
 {
     NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_accdbl);
