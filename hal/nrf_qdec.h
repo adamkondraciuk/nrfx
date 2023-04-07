@@ -368,7 +368,7 @@ NRF_STATIC_INLINE int32_t nrf_qdec_sample_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACC register.
  */
-NRF_STATIC_INLINE int16_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE int32_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCREAD register.
@@ -377,7 +377,7 @@ NRF_STATIC_INLINE int16_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCREAD register.
  */
-NRF_STATIC_INLINE int16_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE int32_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCDBL register.
@@ -386,7 +386,7 @@ NRF_STATIC_INLINE int16_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCDBL register.
  */
-NRF_STATIC_INLINE uint8_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for retrieving value of the QDEC ACCDBLREAD register.
@@ -395,7 +395,7 @@ NRF_STATIC_INLINE uint8_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg);
  *
  * @return Value of the ACCDBLREAD register.
  */
-NRF_STATIC_INLINE uint8_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg);
 
 /**
  * @brief Function for setting delay time between setting LED active state and start sampling.
@@ -617,22 +617,22 @@ NRF_STATIC_INLINE int32_t nrf_qdec_sample_get(NRF_QDEC_Type const * p_reg)
     return p_reg->SAMPLE;
 }
 
-NRF_STATIC_INLINE int16_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE int32_t nrf_qdec_acc_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACC;
 }
 
-NRF_STATIC_INLINE int16_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE int32_t nrf_qdec_accread_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCREAD;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_qdec_accdbl_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCDBL;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t nrf_qdec_accdblread_get(NRF_QDEC_Type const * p_reg)
 {
     return p_reg->ACCDBLREAD;
 }
