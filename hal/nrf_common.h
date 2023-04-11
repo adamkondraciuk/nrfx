@@ -53,6 +53,9 @@ extern "C" {
 /** @brief Macro for extracting port number from the absolute pin number. */
 #define NRF_PIN_NUMBER_TO_PORT(pin) ((pin) >> 5)
 
+/** @brief Macro for extracting absolute pin number from the relative pin and port numbers. */
+#define NRF_PIN_PORT_TO_PIN_NUMBER(pin, port) (((pin) & 0x1F) | ((port) << 5))
+
 /**
  * @brief Function for checking if an object is accesible by EasyDMA of given peripheral instance.
  *

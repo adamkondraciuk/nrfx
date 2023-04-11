@@ -125,7 +125,7 @@ extern "C" {
 #endif
 
 /** @brief Macro for mapping port and pin numbers to values understandable for nrf_gpio functions. */
-#define NRF_GPIO_PIN_MAP(port, pin) (((port) << 5) | ((pin) & 0x1F))
+#define NRF_GPIO_PIN_MAP(port, pin) NRF_PIN_PORT_TO_PIN_NUMBER(pin, port)
 
 #if NRF_GPIO_HAS_PORT_IMPEDANCE
 /** @brief Mask of all impedances. */
