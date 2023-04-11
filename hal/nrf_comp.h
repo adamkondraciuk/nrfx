@@ -23,15 +23,17 @@ extern "C" {
 #define NRF_COMP_HAS_ISOURCE 0
 #endif
 
-#if defined(COMP_PSEL_PSEL_AnalogInput0) || defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether COMP uses enum for pins. */
-#define NRF_COMP_HAS_PIN_ENUM 1
+#if defined(COMP_PSEL_PIN_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the configuration of analog input using pin number is present. */
+#define NRF_COMP_HAS_AIN_AS_PIN 1
 #else
-#define NRF_COMP_HAS_PIN_ENUM 0
+#define NRF_COMP_HAS_AIN_AS_PIN 0
 #endif
 
 /** @brief COMP analog pin selection. */
-#if NRF_COMP_HAS_PIN_ENUM
+#if NRF_COMP_HAS_AIN_AS_PIN
+typedef uint32_t nrf_comp_input_t;
+#else
 typedef enum
 {
     NRF_COMP_INPUT_0   = COMP_PSEL_PSEL_AnalogInput0, /*!< AIN0 selected as analog input. */
@@ -57,9 +59,7 @@ typedef enum
     NRF_COMP_VDDH_DIV5 = COMP_PSEL_PSEL_VddhDiv5,     /*!< VDDH/5 selected as analog input. */
 #endif
 } nrf_comp_input_t;
-#else
-typedef uint16_t nrf_comp_input_t;
-#endif // NRF_COMP_HAS_PIN_ENUM
+#endif // NRF_COMP_HAS_AIN_AS_PIN
 
 /** @brief COMP reference selection. */
 typedef enum
@@ -81,7 +81,9 @@ typedef enum
 } nrf_comp_ref_t;
 
 /** @brief COMP external analog reference selection. */
-#if NRF_COMP_HAS_PIN_ENUM
+#if NRF_COMP_HAS_AIN_AS_PIN
+typedef uint32_t nrf_comp_ext_ref_t;
+#else
 typedef enum
 {
     NRF_COMP_EXT_REF_0 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference0, /*!< Use AIN0 as external analog reference. */
@@ -101,9 +103,7 @@ typedef enum
     NRF_COMP_EXT_REF_7 = COMP_EXTREFSEL_EXTREFSEL_AnalogReference7  /*!< Use AIN7 as external analog reference. */
 #endif
 } nrf_comp_ext_ref_t;
-#else
-typedef uint16_t nrf_comp_ext_ref_t;
-#endif // NRF_COMP_HAS_PIN_ENUM
+#endif // NRF_COMP_HAS_AIN_AS_PIN
 
 /** @brief COMP THDOWN and THUP values that are used to calculate the threshold voltages VDOWN and VUP. */
 typedef struct
@@ -395,18 +395,6 @@ NRF_STATIC_INLINE void nrf_comp_event_clear(NRF_COMP_Type * p_reg, nrf_comp_even
  */
 NRF_STATIC_INLINE bool nrf_comp_event_check(NRF_COMP_Type const * p_reg, nrf_comp_event_t event);
 
-#if !NRF_COMP_HAS_PIN_ENUM
-/**
- * @brief Function for mapping GPIO pins to COMP pins.
- *
- * @param[in] port Port of the GPIO pin.
- * @param[in] pin  GPIO pin number.
- *
- * @return COMP reference pin to be used in @ref nrf_comp_ext_ref_set and @ref nrf_comp_input_select.
- */
-NRF_STATIC_INLINE uint16_t nrf_comp_pin_convert(uint8_t port, uint8_t pin);
-#endif
-
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_comp_enable(NRF_COMP_Type * p_reg)
@@ -431,10 +419,13 @@ NRF_STATIC_INLINE void nrf_comp_ref_set(NRF_COMP_Type * p_reg, nrf_comp_ref_t re
 
 NRF_STATIC_INLINE void nrf_comp_ext_ref_set(NRF_COMP_Type * p_reg, nrf_comp_ext_ref_t ext_ref)
 {
-#if NRF_COMP_HAS_PIN_ENUM
-    p_reg->EXTREFSEL = (ext_ref << COMP_EXTREFSEL_EXTREFSEL_Pos);
+#if NRF_COMP_HAS_AIN_AS_PIN
+    p_reg->EXTREFSEL = (NRF_PIN_NUMBER_TO_PORT(ext_ref) << COMP_EXTREFSEL_PORT_Pos) |
+                       (NRF_PIN_NUMBER_TO_PIN(ext_ref) << COMP_EXTREFSEL_PIN_Pos) |
+                       (p_reg->EXTREFSEL & ~(COMP_EXTREFSEL_PORT_Msk | COMP_EXTREFSEL_PIN_Msk));
 #else
-    p_reg->EXTREFSEL = ext_ref;
+    p_reg->EXTREFSEL = ((uint32_t)ext_ref << COMP_EXTREFSEL_EXTREFSEL_Pos) |
+                        (p_reg->EXTREFSEL & ~COMP_EXTREFSEL_EXTREFSEL_Msk);
 #endif
 }
 
@@ -471,10 +462,12 @@ NRF_STATIC_INLINE void nrf_comp_isource_set(NRF_COMP_Type * p_reg, nrf_isource_t
 
 NRF_STATIC_INLINE void nrf_comp_input_select(NRF_COMP_Type * p_reg, nrf_comp_input_t input)
 {
-#if NRF_COMP_HAS_PIN_ENUM
-    p_reg->PSEL = ((uint32_t)input << COMP_PSEL_PSEL_Pos);
+#if NRF_COMP_HAS_AIN_AS_PIN
+    p_reg->PSEL = (NRF_PIN_NUMBER_TO_PORT(input) << COMP_PSEL_PORT_Pos) |
+                  (NRF_PIN_NUMBER_TO_PIN(input) << COMP_PSEL_PIN_Pos) |
+                  (p_reg->PSEL & ~(COMP_PSEL_PORT_Msk | COMP_PSEL_PIN_Msk));
 #else
-    p_reg->PSEL = input;
+    p_reg->PSEL = ((uint32_t)input << COMP_PSEL_PSEL_Pos) | (p_reg->PSEL & ~COMP_PSEL_PSEL_Msk);
 #endif
 }
 
@@ -535,13 +528,6 @@ NRF_STATIC_INLINE bool nrf_comp_event_check(NRF_COMP_Type const * p_reg, nrf_com
 {
     return (bool) (*(volatile uint32_t *)( (uint8_t *)p_reg + (uint32_t)event));
 }
-
-#if !NRF_COMP_HAS_PIN_ENUM
-NRF_STATIC_INLINE uint16_t nrf_comp_pin_convert(uint8_t port, uint8_t pin)
-{
-    return (((uint16_t)port << COMP_PSEL_PORT_Pos) | ((uint16_t)pin << COMP_PSEL_PIN_Pos));
-}
-#endif
 
 #endif // NRF_DECLARE_ONLY
 
