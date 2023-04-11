@@ -28,6 +28,7 @@ typedef struct
 #ifndef __NRFX_DOXYGEN__
 /* Internally generated enum used to index all enabled instances. */
 enum {
+    /* List all enabled driver instances (in the format NRFX_\<instance_name\>_INST_IDX). */
     NRFX_INSTANCE_ENUM_LIST(SPIM)
     NRFX_SPIM_ENABLED_COUNT
 };
@@ -284,7 +285,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
  *   completion. This also means no interrupt at the end of the transfer.
  *   If @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER is used, the driver does not set the instance into
  *   busy state, so you must ensure that the next transfers are set up when SPIM is not active.
- *   @ref nrfx_spim_end_event_address_get function can be used to detect end of transfer. Option can 
+ *   @ref nrfx_spim_end_event_address_get function can be used to detect end of transfer. Option can
  *   be used together with @ref NRFX_SPIM_FLAG_REPEATED_XFER to prepare a sequence of SPI transfers
  *   without interruptions.
  * - @ref NRFX_SPIM_FLAG_REPEATED_XFER - Prepare for repeated transfers. You can set
@@ -293,7 +294,7 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
  *   @ref NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER, and @ref NRFX_SPIM_FLAG_REPEATED_XFER. After the
  *   transfer is set up, a set of transfers can be triggered by PPI that will read, for example,
  *   the same register of an external component and put it into a RAM buffer without any interrupts.
- *   @ref nrfx_spim_end_event_address_get can be used to get the address of the END event, which can 
+ *   @ref nrfx_spim_end_event_address_get can be used to get the address of the END event, which can
  *   be used to count the number of transfers. If @ref NRFX_SPIM_FLAG_REPEATED_XFER is used,
  *   the driver does not set the instance into busy state, so you must ensure that the next
  *   transfers are set up when SPIM is not active.
@@ -404,7 +405,19 @@ NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_address_get(nrfx_spim_t const * 
 #endif // NRFX_DECLARE_ONLY
 /** @} */
 
-/* Declare interrupt handlers for enabled instances. */
+/*
+ * Declare interrupt handlers for all enabled driver instances in the following format:
+ * nrfx_\<periph_name\>_\<idx\>_irq_handler (for example, nrfx_spim_0_irq_handler).
+ *
+ * A specific interrupt handler for the driver instance can be retrieved by using
+ * the NRFX_SPIM_INST_HANDLER_GET macro.
+ *
+ * Here is a sample of using the NRFX_SPIM_INST_HANDLER_GET macro to directly map
+ * an interrupt handler in a Zephyr application:
+ *
+ * IRQ_DIRECT_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_SPIM_INST_GET(\<instance_index\>)), \<priority\>,
+ *                    NRFX_SPIM_INST_HANDLER_GET(\<instance_index\>), 0);
+ */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(SPIM, spim)
 
 

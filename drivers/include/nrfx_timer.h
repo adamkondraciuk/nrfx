@@ -37,6 +37,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
+    /* List all enabled driver instances (in the format NRFX_\<instance_name\>_INST_IDX). */
     NRFX_INSTANCE_ENUM_LIST(TIMER)
     NRFX_TIMER_ENABLED_COUNT
 };
@@ -365,7 +366,19 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const *   p_inst
 
 /** @} */
 
-/* Declare interrupt handlers for enabled instances. */
+/*
+ * Declare interrupt handlers for all enabled driver instances in the following format:
+ * nrfx_\<periph_name\>_\<idx\>_irq_handler (for example, nrfx_timer_0_irq_handler).
+ *
+ * A specific interrupt handler for the driver instance can be retrieved by using
+ * the NRFX_TIMER_INST_HANDLER_GET macro.
+ *
+ * Here is a sample of using the NRFX_TIMER_INST_HANDLER_GET macro to directly map
+ * an interrupt handler in a Zephyr application:
+ *
+ * IRQ_DIRECT_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TIMER_INST_GET(\<instance_index\>)), \<priority\>,
+ *                    NRFX_TIMER_INST_HANDLER_GET(\<instance_index\>), 0);
+ */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TIMER, timer)
 
 #ifdef __cplusplus
