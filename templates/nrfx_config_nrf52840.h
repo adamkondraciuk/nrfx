@@ -8,7 +8,8 @@
 #endif
 
 
-/** @brief NRFX_DEFAULT_IRQ_PRIORITY
+/**
+ * @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -16,7 +17,8 @@
 #define NRFX_DEFAULT_IRQ_PRIORITY 7
 #endif
 
-/** @brief NRFX_CLOCK_ENABLED
+/**
+ * @brief NRFX_CLOCK_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -24,7 +26,8 @@
 #define NRFX_CLOCK_ENABLED 0
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_LF_SRC
+/**
+ * @brief NRFX_CLOCK_CONFIG_LF_SRC
  *
  * Integer value.
  * Supported values:
@@ -38,7 +41,8 @@
 #define NRFX_CLOCK_CONFIG_LF_SRC 1
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_LF_CAL_ENABLED
+/**
+ * @brief NRFX_CLOCK_CONFIG_LF_CAL_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -46,7 +50,8 @@
 #define NRFX_CLOCK_CONFIG_LF_CAL_ENABLED 0
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_CT_ENABLED
+/**
+ * @brief NRFX_CLOCK_CONFIG_CT_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -54,7 +59,8 @@
 #define NRFX_CLOCK_CONFIG_CT_ENABLED 1
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_LFXO_TWO_STAGE_ENABLED
+/**
+ * @brief NRFX_CLOCK_CONFIG_LFXO_TWO_STAGE_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -62,7 +68,8 @@
 #define NRFX_CLOCK_CONFIG_LFXO_TWO_STAGE_ENABLED 0
 #endif
 
-/** @brief NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -70,7 +77,8 @@
 #define NRFX_CLOCK_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_CLOCK_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -78,7 +86,8 @@
 #define NRFX_CLOCK_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_CLOCK_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_CLOCK_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -92,7 +101,8 @@
 #define NRFX_CLOCK_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_COMP_ENABLED
+/**
+ * @brief NRFX_COMP_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -100,7 +110,8 @@
 #define NRFX_COMP_ENABLED 0
 #endif
 
-/** @brief NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -108,7 +119,8 @@
 #define NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_COMP_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_COMP_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -116,7 +128,8 @@
 #define NRFX_COMP_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_COMP_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_COMP_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -130,7 +143,8 @@
 #define NRFX_COMP_CONFIG_LOG_LEVEL NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_EGU_ENABLED
+/**
+ * @brief NRFX_EGU_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -138,7 +152,8 @@
 #define NRFX_EGU_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -146,7 +161,8 @@
 #define NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_EGU0_ENABLED
+/**
+ * @brief NRFX_EGU0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -154,7 +170,8 @@
 #define NRFX_EGU0_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU1_ENABLED
+/**
+ * @brief NRFX_EGU1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -162,7 +179,8 @@
 #define NRFX_EGU1_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU2_ENABLED
+/**
+ * @brief NRFX_EGU2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -170,7 +188,8 @@
 #define NRFX_EGU2_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU3_ENABLED
+/**
+ * @brief NRFX_EGU3_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -178,7 +197,8 @@
 #define NRFX_EGU3_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU4_ENABLED
+/**
+ * @brief NRFX_EGU4_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -186,7 +206,8 @@
 #define NRFX_EGU4_ENABLED 0
 #endif
 
-/** @brief NRFX_EGU5_ENABLED
+/**
+ * @brief NRFX_EGU5_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -194,7 +215,8 @@
 #define NRFX_EGU5_ENABLED 0
 #endif
 
-/** @brief NRFX_GPIOTE_ENABLED
+/**
+ * @brief NRFX_GPIOTE_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -202,7 +224,8 @@
 #define NRFX_GPIOTE_ENABLED 0
 #endif
 
-/** @brief NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -210,7 +233,8 @@
 #define NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY 3
 #endif
 
-/** @brief NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS
+/**
+ * @brief NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS
  *
  * Integer value. Minimum: 0 Maximum: 15
  */
@@ -218,7 +242,8 @@
 #define NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS 2
 #endif
 
-/** @brief NRFX_GPIOTE_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_GPIOTE_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -226,7 +251,8 @@
 #define NRFX_GPIOTE_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_GPIOTE_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_GPIOTE_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -240,7 +266,8 @@
 #define NRFX_GPIOTE_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_I2S_ENABLED
+/**
+ * @brief NRFX_I2S_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -248,7 +275,8 @@
 #define NRFX_I2S_ENABLED 0
 #endif
 
-/** @brief NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -256,7 +284,8 @@
 #define NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_I2S_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_I2S_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -264,7 +293,8 @@
 #define NRFX_I2S_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_I2S_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_I2S_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -278,7 +308,8 @@
 #define NRFX_I2S_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_LPCOMP_ENABLED
+/**
+ * @brief NRFX_LPCOMP_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -286,7 +317,8 @@
 #define NRFX_LPCOMP_ENABLED 0
 #endif
 
-/** @brief NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -294,7 +326,8 @@
 #define NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_LPCOMP_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_LPCOMP_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -302,7 +335,8 @@
 #define NRFX_LPCOMP_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_LPCOMP_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_LPCOMP_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -316,7 +350,8 @@
 #define NRFX_LPCOMP_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_NFCT_ENABLED
+/**
+ * @brief NRFX_NFCT_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -324,7 +359,8 @@
 #define NRFX_NFCT_ENABLED 0
 #endif
 
-/** @brief NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -332,7 +368,8 @@
 #define NRFX_NFCT_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID - Timer instance used for workarounds in the driver.
+/**
+ * @brief NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID - Timer instance used for workarounds in the driver.
  *
  * Integer value. Minimum: 0 Maximum: 5
  */
@@ -340,7 +377,8 @@
 #define NRFX_NFCT_CONFIG_TIMER_INSTANCE_ID 4
 #endif
 
-/** @brief NRFX_NFCT_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_NFCT_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -348,7 +386,8 @@
 #define NRFX_NFCT_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_NFCT_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_NFCT_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -362,7 +401,8 @@
 #define NRFX_NFCT_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_NVMC_ENABLED
+/**
+ * @brief NRFX_NVMC_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -370,7 +410,8 @@
 #define NRFX_NVMC_ENABLED 0
 #endif
 
-/** @brief NRFX_PDM_ENABLED
+/**
+ * @brief NRFX_PDM_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -378,7 +419,8 @@
 #define NRFX_PDM_ENABLED 0
 #endif
 
-/** @brief NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -386,7 +428,8 @@
 #define NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_PDM_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_PDM_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -394,7 +437,8 @@
 #define NRFX_PDM_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_PDM_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_PDM_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -408,7 +452,8 @@
 #define NRFX_PDM_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_POWER_ENABLED
+/**
+ * @brief NRFX_POWER_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -416,7 +461,8 @@
 #define NRFX_POWER_ENABLED 0
 #endif
 
-/** @brief NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -424,7 +470,8 @@
 #define NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_PPI_ENABLED
+/**
+ * @brief NRFX_PPI_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -432,7 +479,8 @@
 #define NRFX_PPI_ENABLED 0
 #endif
 
-/** @brief NRFX_PPI_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_PPI_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -440,7 +488,8 @@
 #define NRFX_PPI_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_PPI_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_PPI_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -454,7 +503,8 @@
 #define NRFX_PPI_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_PRS_ENABLED
+/**
+ * @brief NRFX_PRS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -462,7 +512,8 @@
 #define NRFX_PRS_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_PRS_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -470,7 +521,8 @@
 #define NRFX_PRS_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_PRS_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -484,7 +536,8 @@
 #define NRFX_PRS_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_PRS_BOX_0_ENABLED
+/**
+ * @brief NRFX_PRS_BOX_0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -492,7 +545,8 @@
 #define NRFX_PRS_BOX_0_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_BOX_1_ENABLED
+/**
+ * @brief NRFX_PRS_BOX_1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -500,7 +554,8 @@
 #define NRFX_PRS_BOX_1_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_BOX_2_ENABLED
+/**
+ * @brief NRFX_PRS_BOX_2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -508,7 +563,8 @@
 #define NRFX_PRS_BOX_2_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_BOX_3_ENABLED
+/**
+ * @brief NRFX_PRS_BOX_3_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -516,7 +572,8 @@
 #define NRFX_PRS_BOX_3_ENABLED 0
 #endif
 
-/** @brief NRFX_PRS_BOX_4_ENABLED
+/**
+ * @brief NRFX_PRS_BOX_4_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -524,7 +581,8 @@
 #define NRFX_PRS_BOX_4_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM_ENABLED
+/**
+ * @brief NRFX_PWM_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -532,7 +590,8 @@
 #define NRFX_PWM_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -540,7 +599,8 @@
 #define NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_PWM_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_PWM_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -548,7 +608,8 @@
 #define NRFX_PWM_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_PWM_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -562,7 +623,8 @@
 #define NRFX_PWM_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_PWM0_ENABLED
+/**
+ * @brief NRFX_PWM0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -570,7 +632,8 @@
 #define NRFX_PWM0_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM1_ENABLED
+/**
+ * @brief NRFX_PWM1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -578,7 +641,8 @@
 #define NRFX_PWM1_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM2_ENABLED
+/**
+ * @brief NRFX_PWM2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -586,7 +650,8 @@
 #define NRFX_PWM2_ENABLED 0
 #endif
 
-/** @brief NRFX_PWM3_ENABLED
+/**
+ * @brief NRFX_PWM3_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -594,7 +659,8 @@
 #define NRFX_PWM3_ENABLED 0
 #endif
 
-/** @brief NRFX_QDEC_ENABLED
+/**
+ * @brief NRFX_QDEC_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -602,7 +668,8 @@
 #define NRFX_QDEC_ENABLED 0
 #endif
 
-/** @brief NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -610,7 +677,8 @@
 #define NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_QDEC_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_QDEC_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -618,7 +686,8 @@
 #define NRFX_QDEC_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_QDEC_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_QDEC_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -632,7 +701,8 @@
 #define NRFX_QDEC_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_QSPI_ENABLED
+/**
+ * @brief NRFX_QSPI_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -640,7 +710,8 @@
 #define NRFX_QSPI_ENABLED 0
 #endif
 
-/** @brief NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -648,7 +719,8 @@
 #define NRFX_QSPI_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_RNG_ENABLED
+/**
+ * @brief NRFX_RNG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -656,7 +728,8 @@
 #define NRFX_RNG_ENABLED 0
 #endif
 
-/** @brief NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -664,7 +737,8 @@
 #define NRFX_RNG_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_RNG_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_RNG_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -672,7 +746,8 @@
 #define NRFX_RNG_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_RNG_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_RNG_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -686,7 +761,8 @@
 #define NRFX_RNG_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_RTC_ENABLED
+/**
+ * @brief NRFX_RTC_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -694,7 +770,8 @@
 #define NRFX_RTC_ENABLED 0
 #endif
 
-/** @brief NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -702,7 +779,8 @@
 #define NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_RTC_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_RTC_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -710,7 +788,8 @@
 #define NRFX_RTC_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_RTC_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_RTC_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -724,7 +803,8 @@
 #define NRFX_RTC_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_RTC0_ENABLED
+/**
+ * @brief NRFX_RTC0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -732,7 +812,8 @@
 #define NRFX_RTC0_ENABLED 0
 #endif
 
-/** @brief NRFX_RTC1_ENABLED
+/**
+ * @brief NRFX_RTC1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -740,7 +821,8 @@
 #define NRFX_RTC1_ENABLED 0
 #endif
 
-/** @brief NRFX_RTC2_ENABLED
+/**
+ * @brief NRFX_RTC2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -748,7 +830,8 @@
 #define NRFX_RTC2_ENABLED 0
 #endif
 
-/** @brief NRFX_SAADC_ENABLED
+/**
+ * @brief NRFX_SAADC_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -756,7 +839,8 @@
 #define NRFX_SAADC_ENABLED 0
 #endif
 
-/** @brief NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -764,7 +848,8 @@
 #define NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_SAADC_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_SAADC_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -772,7 +857,8 @@
 #define NRFX_SAADC_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_SAADC_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_SAADC_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -786,7 +872,8 @@
 #define NRFX_SAADC_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_SPI_ENABLED
+/**
+ * @brief NRFX_SPI_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -794,7 +881,8 @@
 #define NRFX_SPI_ENABLED 0
 #endif
 
-/** @brief NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -802,7 +890,8 @@
 #define NRFX_SPI_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_SPI_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_SPI_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -810,7 +899,8 @@
 #define NRFX_SPI_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_SPI_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_SPI_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -824,7 +914,8 @@
 #define NRFX_SPI_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_SPI0_ENABLED
+/**
+ * @brief NRFX_SPI0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -832,7 +923,8 @@
 #define NRFX_SPI0_ENABLED 0
 #endif
 
-/** @brief NRFX_SPI1_ENABLED
+/**
+ * @brief NRFX_SPI1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -840,7 +932,8 @@
 #define NRFX_SPI1_ENABLED 0
 #endif
 
-/** @brief NRFX_SPI2_ENABLED
+/**
+ * @brief NRFX_SPI2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -848,7 +941,8 @@
 #define NRFX_SPI2_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM_ENABLED
+/**
+ * @brief NRFX_SPIM_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -856,7 +950,8 @@
 #define NRFX_SPIM_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -864,7 +959,8 @@
 #define NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_SPIM_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_SPIM_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -872,7 +968,8 @@
 #define NRFX_SPIM_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_SPIM_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -886,7 +983,8 @@
 #define NRFX_SPIM_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED
+/**
+ * @brief NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -894,7 +992,8 @@
 #define NRFX_SPIM3_NRF52840_ANOMALY_198_WORKAROUND_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM0_ENABLED
+/**
+ * @brief NRFX_SPIM0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -902,7 +1001,8 @@
 #define NRFX_SPIM0_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM1_ENABLED
+/**
+ * @brief NRFX_SPIM1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -910,7 +1010,8 @@
 #define NRFX_SPIM1_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM2_ENABLED
+/**
+ * @brief NRFX_SPIM2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -918,7 +1019,8 @@
 #define NRFX_SPIM2_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIM3_ENABLED
+/**
+ * @brief NRFX_SPIM3_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -926,7 +1028,8 @@
 #define NRFX_SPIM3_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIS_ENABLED
+/**
+ * @brief NRFX_SPIS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -934,7 +1037,8 @@
 #define NRFX_SPIS_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -942,7 +1046,8 @@
 #define NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_SPIS_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_SPIS_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -950,7 +1055,8 @@
 #define NRFX_SPIS_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIS_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_SPIS_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -964,7 +1070,8 @@
 #define NRFX_SPIS_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_SPIS0_ENABLED
+/**
+ * @brief NRFX_SPIS0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -972,7 +1079,8 @@
 #define NRFX_SPIS0_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIS1_ENABLED
+/**
+ * @brief NRFX_SPIS1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -980,7 +1088,8 @@
 #define NRFX_SPIS1_ENABLED 0
 #endif
 
-/** @brief NRFX_SPIS2_ENABLED
+/**
+ * @brief NRFX_SPIS2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -988,7 +1097,8 @@
 #define NRFX_SPIS2_ENABLED 0
 #endif
 
-/** @brief NRFX_SYSTICK_ENABLED
+/**
+ * @brief NRFX_SYSTICK_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -996,7 +1106,8 @@
 #define NRFX_SYSTICK_ENABLED 0
 #endif
 
-/** @brief NRFX_TEMP_ENABLED
+/**
+ * @brief NRFX_TEMP_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1004,7 +1115,8 @@
 #define NRFX_TEMP_ENABLED 0
 #endif
 
-/** @brief NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1012,7 +1124,8 @@
 #define NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_TEMP_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_TEMP_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1020,7 +1133,8 @@
 #define NRFX_TEMP_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_TEMP_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_TEMP_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1034,7 +1148,8 @@
 #define NRFX_TEMP_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_TIMER_ENABLED
+/**
+ * @brief NRFX_TIMER_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1042,7 +1157,8 @@
 #define NRFX_TIMER_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1050,7 +1166,8 @@
 #define NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_TIMER_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_TIMER_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1058,7 +1175,8 @@
 #define NRFX_TIMER_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_TIMER_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1072,7 +1190,8 @@
 #define NRFX_TIMER_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_TIMER0_ENABLED
+/**
+ * @brief NRFX_TIMER0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1080,7 +1199,8 @@
 #define NRFX_TIMER0_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER1_ENABLED
+/**
+ * @brief NRFX_TIMER1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1088,7 +1208,8 @@
 #define NRFX_TIMER1_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER2_ENABLED
+/**
+ * @brief NRFX_TIMER2_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1096,7 +1217,8 @@
 #define NRFX_TIMER2_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER3_ENABLED
+/**
+ * @brief NRFX_TIMER3_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1104,7 +1226,8 @@
 #define NRFX_TIMER3_ENABLED 0
 #endif
 
-/** @brief NRFX_TIMER4_ENABLED
+/**
+ * @brief NRFX_TIMER4_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1112,7 +1235,8 @@
 #define NRFX_TIMER4_ENABLED 0
 #endif
 
-/** @brief NRFX_TWI_ENABLED
+/**
+ * @brief NRFX_TWI_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1120,7 +1244,8 @@
 #define NRFX_TWI_ENABLED 0
 #endif
 
-/** @brief NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1128,7 +1253,8 @@
 #define NRFX_TWI_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_TWI_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_TWI_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1136,7 +1262,8 @@
 #define NRFX_TWI_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_TWI_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_TWI_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1150,7 +1277,8 @@
 #define NRFX_TWI_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_TWI0_ENABLED
+/**
+ * @brief NRFX_TWI0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1158,7 +1286,8 @@
 #define NRFX_TWI0_ENABLED 0
 #endif
 
-/** @brief NRFX_TWI1_ENABLED
+/**
+ * @brief NRFX_TWI1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1166,7 +1295,8 @@
 #define NRFX_TWI1_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIM_ENABLED
+/**
+ * @brief NRFX_TWIM_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1174,7 +1304,8 @@
 #define NRFX_TWIM_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1182,7 +1313,8 @@
 #define NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_TWIM_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_TWIM_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1190,7 +1322,8 @@
 #define NRFX_TWIM_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIM_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_TWIM_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1204,7 +1337,8 @@
 #define NRFX_TWIM_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_TWIM0_ENABLED
+/**
+ * @brief NRFX_TWIM0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1212,7 +1346,8 @@
 #define NRFX_TWIM0_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIM1_ENABLED
+/**
+ * @brief NRFX_TWIM1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1220,7 +1355,8 @@
 #define NRFX_TWIM1_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIS_ENABLED
+/**
+ * @brief NRFX_TWIS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1228,7 +1364,8 @@
 #define NRFX_TWIS_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1236,7 +1373,8 @@
 #define NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_TWIS_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_TWIS_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1244,7 +1382,8 @@
 #define NRFX_TWIS_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY - Assume that any instance would be initialized only once.
+/**
+ * @brief NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY - Assume that any instance would be initialized only once.
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1252,7 +1391,8 @@
 #define NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY 0
 #endif
 
-/** @brief NRFX_TWIS_NO_SYNC_MODE - Remove support for synchronous mode.
+/**
+ * @brief NRFX_TWIS_NO_SYNC_MODE - Remove support for synchronous mode.
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1260,7 +1400,8 @@
 #define NRFX_TWIS_NO_SYNC_MODE 0
 #endif
 
-/** @brief NRFX_TWIS_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_TWIS_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1274,7 +1415,8 @@
 #define NRFX_TWIS_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_TWIS0_ENABLED
+/**
+ * @brief NRFX_TWIS0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1282,7 +1424,8 @@
 #define NRFX_TWIS0_ENABLED 0
 #endif
 
-/** @brief NRFX_TWIS1_ENABLED
+/**
+ * @brief NRFX_TWIS1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1290,7 +1433,8 @@
 #define NRFX_TWIS1_ENABLED 0
 #endif
 
-/** @brief NRFX_UART_ENABLED
+/**
+ * @brief NRFX_UART_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1298,7 +1442,8 @@
 #define NRFX_UART_ENABLED 0
 #endif
 
-/** @brief NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1306,7 +1451,8 @@
 #define NRFX_UART_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_UART_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_UART_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1314,7 +1460,8 @@
 #define NRFX_UART_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_UART_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_UART_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1328,7 +1475,8 @@
 #define NRFX_UART_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_UART0_ENABLED
+/**
+ * @brief NRFX_UART0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1336,7 +1484,8 @@
 #define NRFX_UART0_ENABLED 0
 #endif
 
-/** @brief NRFX_UARTE_ENABLED
+/**
+ * @brief NRFX_UARTE_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1344,7 +1493,8 @@
 #define NRFX_UARTE_ENABLED 0
 #endif
 
-/** @brief NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1352,7 +1502,8 @@
 #define NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_UARTE_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_UARTE_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1360,7 +1511,8 @@
 #define NRFX_UARTE_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_UARTE_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_UARTE_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1374,7 +1526,8 @@
 #define NRFX_UARTE_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_UARTE0_ENABLED
+/**
+ * @brief NRFX_UARTE0_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1382,7 +1535,8 @@
 #define NRFX_UARTE0_ENABLED 0
 #endif
 
-/** @brief NRFX_UARTE1_ENABLED
+/**
+ * @brief NRFX_UARTE1_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1390,7 +1544,8 @@
 #define NRFX_UARTE1_ENABLED 0
 #endif
 
-/** @brief NRFX_USBD_ENABLED
+/**
+ * @brief NRFX_USBD_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1398,7 +1553,8 @@
 #define NRFX_USBD_ENABLED 0
 #endif
 
-/** @brief NRFX_USBD_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_USBD_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1406,7 +1562,8 @@
 #define NRFX_USBD_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_USBD_CONFIG_DMASCHEDULER_ISO_BOOST - Give priority to isochronous transfers
+/**
+ * @brief NRFX_USBD_CONFIG_DMASCHEDULER_ISO_BOOST - Give priority to isochronous transfers
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1414,7 +1571,8 @@
 #define NRFX_USBD_CONFIG_DMASCHEDULER_ISO_BOOST 1
 #endif
 
-/** @brief NRFX_USBD_CONFIG_ISO_IN_ZLP - Respond to an IN token on ISO IN endpoint with ZLP when no data is ready.
+/**
+ * @brief NRFX_USBD_CONFIG_ISO_IN_ZLP - Respond to an IN token on ISO IN endpoint with ZLP when no data is ready.
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1422,7 +1580,8 @@
 #define NRFX_USBD_CONFIG_ISO_IN_ZLP 0
 #endif
 
-/** @brief NRFX_USBD_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_USBD_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1430,7 +1589,8 @@
 #define NRFX_USBD_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_USBD_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_USBD_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
@@ -1444,7 +1604,8 @@
 #define NRFX_USBD_CONFIG_LOG_LEVEL 3
 #endif
 
-/** @brief NRFX_WDT_ENABLED
+/**
+ * @brief NRFX_WDT_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1452,7 +1613,8 @@
 #define NRFX_WDT_ENABLED 0
 #endif
 
-/** @brief NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
+/**
+ * @brief NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0 Maximum: 7
  */
@@ -1460,7 +1622,8 @@
 #define NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
-/** @brief NRFX_WDT_CONFIG_NO_IRQ - Remove WDT IRQ handling from WDT driver
+/**
+ * @brief NRFX_WDT_CONFIG_NO_IRQ - Remove WDT IRQ handling from WDT driver
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1468,7 +1631,8 @@
 #define NRFX_WDT_CONFIG_NO_IRQ 0
 #endif
 
-/** @brief NRFX_WDT_CONFIG_LOG_ENABLED
+/**
+ * @brief NRFX_WDT_CONFIG_LOG_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
  */
@@ -1476,7 +1640,8 @@
 #define NRFX_WDT_CONFIG_LOG_ENABLED 0
 #endif
 
-/** @brief NRFX_WDT_CONFIG_LOG_LEVEL
+/**
+ * @brief NRFX_WDT_CONFIG_LOG_LEVEL
  *
  * Integer value.
  * Supported values:
