@@ -25,27 +25,43 @@ extern "C" {
 /** @brief I2S driver configuration structure. */
 typedef struct
 {
-    nrf_i2s_config_t  config;        ///< Peripheral configuration.
-    nrf_i2s_pins_t    pins;          ///< Pins to be used.
-    uint8_t           irq_priority;  ///< Interrupt priority.
+    uint32_t           sck_pin;       ///< SCK pin number.
+    uint32_t           lrck_pin;      ///< LRCK pin number.
+    uint32_t           mck_pin;       ///< MCK pin number.
+                                      /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                                       *   if this signal is not needed. */
+    uint32_t           sdout_pin;     ///< SDOUT pin number.
+                                      /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                                       *   if this signal is not needed. */
+    uint32_t           sdin_pin;      ///< SDIN pin number.
+                                      /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                                       *   if this signal is not needed. */
+    uint8_t            irq_priority;  ///< Interrupt priority.
+    nrf_i2s_mode_t     mode;          ///< Mode of operation (master or slave).
+    nrf_i2s_format_t   format;        ///< I2S frame format.
+    nrf_i2s_align_t    alignment;     ///< Alignment of sample within a frame.
+    nrf_i2s_swidth_t   sample_width;  ///< Sample width.
+    nrf_i2s_channels_t channels;      ///< Enabled channels.
+    nrf_i2s_mck_t      mck_setup;     ///< Master clock generator setup.
+    nrf_i2s_ratio_t    ratio;         ///< MCK/LRCK ratio.
 #if NRF_I2S_HAS_CLKCONFIG
-    nrf_i2s_clksrc_t  clksrc;        ///< Clock source selection.
-    bool              enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
+    nrf_i2s_clksrc_t   clksrc;        ///< Clock source selection.
+    bool               enable_bypass; ///< Bypass clock generator. MCK will be equal to source input.
 #endif
-    bool              skip_gpio_cfg; ///< Skip GPIO configuration of pins.
-                                     /**< When set to true, the driver does not modify
-                                      *   any GPIO parameters of the used pins. Those
-                                      *   parameters are supposed to be configured
-                                      *   externally before the driver is initialized. */
-    bool              skip_psel_cfg; ///< Skip pin selection configuration.
-                                     /**< When set to true, the driver does not modify
-                                      *   pin select registers in the peripheral.
-                                      *   Those registers are supposed to be set up
-                                      *   externally before the driver is initialized.
-                                      *   @note When both GPIO configuration and pin
-                                      *   selection are to be skipped, the structure
-                                      *   fields that specify pins can be omitted,
-                                      *   as they are ignored anyway. */
+    bool               skip_gpio_cfg; ///< Skip GPIO configuration of pins.
+                                      /**< When set to true, the driver does not modify
+                                       *   any GPIO parameters of the used pins. Those
+                                       *   parameters are supposed to be configured
+                                       *   externally before the driver is initialized. */
+    bool               skip_psel_cfg; ///< Skip pin selection configuration.
+                                      /**< When set to true, the driver does not modify
+                                       *   pin select registers in the peripheral.
+                                       *   Those registers are supposed to be set up
+                                       *   externally before the driver is initialized.
+                                       *   @note When both GPIO configuration and pin
+                                       *   selection are to be skipped, the structure
+                                       *   fields that specify pins can be omitted,
+                                       *   as they are ignored anyway. */
 } nrfx_i2s_config_t;
 
 /** @brief I2S driver buffers structure. */
@@ -90,29 +106,25 @@ enum {
  * @param[in] _pin_sdout SDOUT pin number.
  * @param[in] _pin_sdin  SDIN pin number.
  */
-#define NRFX_I2S_DEFAULT_CONFIG(_pin_sck, _pin_lrck, _pin_mck, _pin_sdout, _pin_sdin)   \
-{                                                                                       \
-    .config = {                                                                         \
-        .mode         = NRF_I2S_MODE_MASTER,                                            \
-        .format       = NRF_I2S_FORMAT_I2S,                                             \
-        .alignment    = NRF_I2S_ALIGN_LEFT,                                             \
-        .sample_width = NRF_I2S_SWIDTH_16BIT,                                           \
-        .channels     = NRF_I2S_CHANNELS_LEFT,                                          \
-        .mck_setup    = NRF_I2S_MCK_32MDIV8,                                            \
-        .ratio        = NRF_I2S_RATIO_32X,                                              \
-    },                                                                                  \
-    .pins = {                                                                           \
-        .sck_pin      = _pin_sck,                                                       \
-        .lrck_pin     = _pin_lrck,                                                      \
-        .mck_pin      = _pin_mck,                                                       \
-        .sdout_pin    = _pin_sdout,                                                     \
-        .sdin_pin     = _pin_sdin,                                                      \
-    },                                                                                  \
-    .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                               \
-    NRFX_COND_CODE_1(NRF_I2S_HAS_CLKCONFIG,                                             \
-                     (.clksrc = NRF_I2S_CLKSRC_PCLK32M,                                 \
-                      .enable_bypass = false,),                                         \
-                     ())                                                                \
+#define NRFX_I2S_DEFAULT_CONFIG(_pin_sck, _pin_lrck, _pin_mck, _pin_sdout, _pin_sdin) \
+{                                                                                     \
+    .sck_pin      = _pin_sck,                                                         \
+    .lrck_pin     = _pin_lrck,                                                        \
+    .mck_pin      = _pin_mck,                                                         \
+    .sdout_pin    = _pin_sdout,                                                       \
+    .sdin_pin     = _pin_sdin,                                                        \
+    .irq_priority = NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY,                             \
+    .mode         = NRF_I2S_MODE_MASTER,                                              \
+    .format       = NRF_I2S_FORMAT_I2S,                                               \
+    .alignment    = NRF_I2S_ALIGN_LEFT,                                               \
+    .sample_width = NRF_I2S_SWIDTH_16BIT,                                             \
+    .channels     = NRF_I2S_CHANNELS_LEFT,                                            \
+    .mck_setup    = NRF_I2S_MCK_32MDIV8,                                              \
+    .ratio        = NRF_I2S_RATIO_32X,                                                \
+    NRFX_COND_CODE_1(NRF_I2S_HAS_CLKCONFIG,                                           \
+                     (.clksrc = NRF_I2S_CLKSRC_PCLK32M,                               \
+                      .enable_bypass = false,),                                       \
+                     ())                                                              \
 }
 
 #define NRFX_I2S_STATUS_NEXT_BUFFERS_NEEDED (1UL << 0)
