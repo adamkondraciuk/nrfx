@@ -14,10 +14,12 @@
  * use the macros without any suffixes, you must translate the names.
  * The following section provides configuration for the name translation.
  */
-#define NRF_ACL        NRF_ACL_NS
 #define NRF_AAR        NRF_AAR_NS
+#define NRF_ACL        NRF_ACL_NS
 #define NRF_CCM        NRF_CCM_NS
 #define NRF_CLOCK      NRF_CLOCK_NS
+#define NRF_CTI        NRF_CTI_NS
+#define NRF_CTRLAP     NRF_CTRLAP_NS
 #define NRF_DCNF       NRF_DCNF_NS
 #define NRF_DPPIC      NRF_DPPIC_NS
 #define NRF_ECB        NRF_ECB_NS

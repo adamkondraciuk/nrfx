@@ -15,8 +15,8 @@
  * The following section provides configuration for the name translation.
  * It must be modified to reflect the actual configuration set in NRF_SPU.
  */
-#define NRF_COMP         NRF_COMP_S
 #define NRF_CLOCK        NRF_CLOCK_S
+#define NRF_COMP         NRF_COMP_S
 #define NRF_DCNF         NRF_DCNF_S
 #define NRF_DPPIC        NRF_DPPIC_S
 #define NRF_EGU0         NRF_EGU0_S
@@ -85,15 +85,20 @@
  * only one type of access available. For these peripherals, you cannot choose
  * between secure and non-secure mapping.
  */
-#define NRF_CACHE      NRF_CACHE_S
-#define NRF_CACHEINFO  NRF_CACHEINFO_S
-#define NRF_CACHEDATA  NRF_CACHEDATA_S
-#define NRF_CRYPTOCELL NRF_CRYPTOCELL_S
-#define NRF_FICR       NRF_FICR_S
-#define NRF_GPIOTE0    NRF_GPIOTE0_S
-#define NRF_GPIOTE1    NRF_GPIOTE1_NS
-#define NRF_SPU        NRF_SPU_S
-#define NRF_UICR       NRF_UICR_S
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#define NRF_GPIOTE1      NRF_GPIOTE1_NS
+#else
+#define NRF_CACHE        NRF_CACHE_S
+#define NRF_CACHEINFO    NRF_CACHEINFO_S
+#define NRF_CACHEDATA    NRF_CACHEDATA_S
+#define NRF_CRYPTOCELL   NRF_CRYPTOCELL_S
+#define NRF_CTI          NRF_CTI_S
+#define NRF_FICR         NRF_FICR_S
+#define NRF_GPIOTE0      NRF_GPIOTE0_S
+#define NRF_SPU          NRF_SPU_S
+#define NRF_TAD          NRF_TAD_S
+#define NRF_UICR         NRF_UICR_S
+#endif
 
 /* Fixups for the GPIOTE driver. */
 #if defined(NRF_TRUSTZONE_NONSECURE)
