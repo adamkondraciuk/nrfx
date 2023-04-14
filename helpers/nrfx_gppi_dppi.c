@@ -6,7 +6,7 @@
 #include <nrfx_dppi.h>
 #endif
 
-#if defined(DPPI_PRESENT) && !defined(HALTIUM_XXAA) && !defined(LUMOS_XXAA)
+#if defined(DPPI_PRESENT) && !defined(NRF_DPPI_EXT)
 bool nrfx_gppi_channel_check(uint8_t channel)
 {
     return nrfy_dppi_channel_check(NRF_DPPIC, channel);
@@ -165,4 +165,4 @@ nrfx_err_t nrfx_gppi_group_free(nrfx_gppi_channel_group_t group)
     return NRFX_ERROR_NOT_SUPPORTED;
 #endif
 }
-#endif // DPPI_PRESENT && !HALTIUM_XXAA
+#endif // defined(DPPI_PRESENT) && !defined(NRF_DPPI_EXT)

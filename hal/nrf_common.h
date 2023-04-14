@@ -154,22 +154,8 @@ NRF_STATIC_INLINE uint16_t nrf_address_periphid_get(uint32_t addr)
 
 NRF_STATIC_INLINE bool nrf_dma_accessible_check(void const * p_reg, void const * p_object)
 {
-#if defined(HALTIUM_XXAA)
-    if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)
-    {
-        /* Bitwise operation to unify secure/non-secure memory address */
-        uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;
-
-        /* When peripheral instance is high-speed check whether p_object is placed in GRAM2x or GRAM0x */
-        bool gram0x = (addr >= 0x2F000000u) && (addr < 0x2F038000);
-        bool gram2x = (addr >= 0x2F880000u) && (addr < 0x2F886200);
-        return gram0x || gram2x;
-    }
-    else
-    {
-        /* When peripheral instance is low-speed check whether p_object is placed in GRAM3x */
-        return ((((uint32_t)p_object) & 0xEFFF8000u) == 0x2FC00000u);
-    }
+#if defined(NRF_DMA_ACCESS_EXT)
+    NRF_DMA_ACCESS_EXT
 #else
     (void)p_reg;
     return ((((uint32_t)p_object) & 0xE0000000u) == 0x20000000u);

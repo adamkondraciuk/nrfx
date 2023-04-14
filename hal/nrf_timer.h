@@ -76,10 +76,8 @@ extern "C" {
 /** @brief Base frequency value 16 MHz for TIMER. */
 #define NRF_TIMER_BASE_FREQUENCY_16MHZ  (NRFX_MHZ_TO_HZ(16UL))
 
+#if !defined(NRF_TIMER_PRESCALER_MAX)
 /** @brief Maximum value of PRESCALER register. */
-#if defined(HALTIUM_XXAA)
-#define NRF_TIMER_PRESCALER_MAX TIMER_PRESCALER_PRESCALER_Max
-#else
 #define NRF_TIMER_PRESCALER_MAX 9
 #endif
 
@@ -123,108 +121,49 @@ extern "C" {
  * @retval true  Timer instance supports the specified bit width resolution value.
  * @retval false Timer instance does not support the specified bit width resolution value.
  */
-#if defined(HALTIUM_XXAA)
-    #if defined(NRF_RADIOCORE)
-        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) (                 \
-               (p_reg == NRF_TIMER020 && TIMER_BIT_WIDTH_MAX(020, bit_width)) \
-            || (p_reg == NRF_TIMER021 && TIMER_BIT_WIDTH_MAX(021, bit_width)) \
-            || (p_reg == NRF_TIMER022 && TIMER_BIT_WIDTH_MAX(022, bit_width)))
-    #else
-        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) 0
-    #endif
-
-    #define NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width) (                \
-           (p_reg == NRF_TIMER120 && TIMER_BIT_WIDTH_MAX(120, bit_width)) \
-        || (p_reg == NRF_TIMER121 && TIMER_BIT_WIDTH_MAX(121, bit_width)) \
-        || (p_reg == NRF_TIMER130 && TIMER_BIT_WIDTH_MAX(130, bit_width)) \
-        || (p_reg == NRF_TIMER131 && TIMER_BIT_WIDTH_MAX(131, bit_width)) \
-        || (p_reg == NRF_TIMER132 && TIMER_BIT_WIDTH_MAX(132, bit_width)) \
-        || (p_reg == NRF_TIMER133 && TIMER_BIT_WIDTH_MAX(133, bit_width)) \
-        || (p_reg == NRF_TIMER134 && TIMER_BIT_WIDTH_MAX(134, bit_width)) \
-        || (p_reg == NRF_TIMER135 && TIMER_BIT_WIDTH_MAX(135, bit_width)) \
-        || (p_reg == NRF_TIMER136 && TIMER_BIT_WIDTH_MAX(136, bit_width)) \
-        || (p_reg == NRF_TIMER137 && TIMER_BIT_WIDTH_MAX(137, bit_width)))
-
-    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width)      \
-                (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) || \
-                NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
-#elif defined(LUMOS_XXAA)
-    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
-           ((p_reg == NRF_TIMER00) && TIMER_BIT_WIDTH_MAX(00, bit_width)) \
-        || ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
-        || ((p_reg == NRF_TIMER20) && TIMER_BIT_WIDTH_MAX(20, bit_width)) \
-        || ((p_reg == NRF_TIMER21) && TIMER_BIT_WIDTH_MAX(21, bit_width)) \
-        || ((p_reg == NRF_TIMER22) && TIMER_BIT_WIDTH_MAX(22, bit_width)) \
-        || ((p_reg == NRF_TIMER23) && TIMER_BIT_WIDTH_MAX(23, bit_width)) \
-        || ((p_reg == NRF_TIMER24) && TIMER_BIT_WIDTH_MAX(24, bit_width)))
-#else
+#if !defined(NRF_TIMER_IS_BIT_WIDTH_VALID)
     #if (TIMER_COUNT == 3) || defined(__NRFX_DOXYGEN__)
-        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
-               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width))   \
-            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width))   \
+        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (            \
+               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width)) \
+            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width)) \
             || ((p_reg == NRF_TIMER2) && TIMER_BIT_WIDTH_MAX(2, bit_width)))
     #elif (TIMER_COUNT == 4)
-        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
-               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width))   \
-            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width))   \
-            || ((p_reg == NRF_TIMER2) && TIMER_BIT_WIDTH_MAX(2, bit_width))   \
+        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (            \
+               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width)) \
+            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width)) \
+            || ((p_reg == NRF_TIMER2) && TIMER_BIT_WIDTH_MAX(2, bit_width)) \
             || ((p_reg == NRF_TIMER3) && TIMER_BIT_WIDTH_MAX(3, bit_width)))
     #elif (TIMER_COUNT == 5)
-        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
-               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width))   \
-            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width))   \
-            || ((p_reg == NRF_TIMER2) && TIMER_BIT_WIDTH_MAX(2, bit_width))   \
-            || ((p_reg == NRF_TIMER3) && TIMER_BIT_WIDTH_MAX(3, bit_width))   \
+        #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (            \
+               ((p_reg == NRF_TIMER0) && TIMER_BIT_WIDTH_MAX(0, bit_width)) \
+            || ((p_reg == NRF_TIMER1) && TIMER_BIT_WIDTH_MAX(1, bit_width)) \
+            || ((p_reg == NRF_TIMER2) && TIMER_BIT_WIDTH_MAX(2, bit_width)) \
+            || ((p_reg == NRF_TIMER3) && TIMER_BIT_WIDTH_MAX(3, bit_width)) \
             || ((p_reg == NRF_TIMER4) && TIMER_BIT_WIDTH_MAX(4, bit_width)))
     #else
         #error "Not supported timer count"
     #endif
 #endif
 
-/**
- * @brief Macros for checking whether the specified instance represents high-speed (320 MHz),
- *        higher-speed (32 MHz), or normal-speed timer (16 MHz).
- */
-#if defined(HALTIUM_XXAA)
-    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) ( \
-           (p_reg == NRF_TIMER120)             \
-        || (p_reg == NRF_TIMER121))
-    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
-           (p_reg == NRF_TIMER130)             \
-        || (p_reg == NRF_TIMER131)             \
-        || (p_reg == NRF_TIMER132)             \
-        || (p_reg == NRF_TIMER133)             \
-        || (p_reg == NRF_TIMER134)             \
-        || (p_reg == NRF_TIMER135)             \
-        || (p_reg == NRF_TIMER136)             \
-        || (p_reg == NRF_TIMER137))
-    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
-           (p_reg == NRF_TIMER020)             \
-        || (p_reg == NRF_TIMER021)             \
-        || (p_reg == NRF_TIMER022))
-    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) false
-#elif defined(LUMOS_XXAA)
-    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
-    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
-           (p_reg == NRF_TIMER20)              \
-        || (p_reg == NRF_TIMER21)              \
-        || (p_reg == NRF_TIMER22)              \
-        || (p_reg == NRF_TIMER23)              \
-        || (p_reg == NRF_TIMER24))
-    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) (  \
-           (p_reg == NRF_TIMER10))
-    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) ( \
-            (p_reg == NRF_TIMER00))
-#else
-    /** @brief Macro for checking whether the base frequency for the specified timer is 320 MHz. */
-    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
-    /** @brief Macro for checking whether the base frequency for the specified timer is 16 MHz. */
-    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg)  true
-    /** @brief Macro for checking whether the base frequency for the specified timer is 32 MHz. */
-    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg)  false
-    /** @brief Macro for checking whether the base frequency for the specified timer is 64 MHz. */
-    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg)  false
-#endif // defined(HALTIUM_XXAA)
+#if !defined(NRF_TIMER_IS_320MHZ_TIMER)
+/** @brief Macro for checking whether the base frequency for the specified timer is 320 MHz. */
+#define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
+#endif
+
+#if !defined(NRF_TIMER_IS_64MHZ_TIMER)
+/** @brief Macro for checking whether the base frequency for the specified timer is 64 MHz. */
+#define NRF_TIMER_IS_64MHZ_TIMER(p_reg) false
+#endif
+
+#if !defined(NRF_TIMER_IS_32MHZ_TIMER)
+/** @brief Macro for checking whether the base frequency for the specified timer is 32 MHz. */
+#define NRF_TIMER_IS_32MHZ_TIMER(p_reg) false
+#endif
+
+#if !defined(NRF_TIMER_IS_16MHZ_TIMER)
+/** @brief Macro for checking whether the base frequency for the specified timer is 16 MHz. */
+#define NRF_TIMER_IS_16MHZ_TIMER(p_reg) true
+#endif
 
 /**
  * @brief Macro for getting base frequency value in Hz for the specified timer.

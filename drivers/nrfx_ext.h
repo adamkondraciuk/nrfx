@@ -12,13 +12,44 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 #if defined(HALTIUM_XXAA)
-typedef NRF_DOMAINID_Type    nrf_domain_t;
-typedef NRF_OWNERID_Type     nrf_owner_t;
-typedef NRF_PROCESSORID_Type nrf_processor_t;
+    typedef NRF_DOMAINID_Type    nrf_domain_t;
+    typedef NRF_OWNERID_Type     nrf_owner_t;
+    typedef NRF_PROCESSORID_Type nrf_processor_t;
+
+    #define NRF_DMA_ACCESS_EXT                                                \
+        if (nrf_address_bus_get((uint32_t)p_reg, 0x10000) == 0x8E)            \
+        {                                                                     \
+            /* Bitwise operation to unify secure/non-secure memory address */ \
+            uint32_t addr = (uint32_t)p_object & 0xEFFFFFFFu;                 \
+                                                                              \
+            /* When peripheral instance is high-speed check whether */        \
+            /* p_object is placed in GRAM2x or GRAM0x */                      \
+            bool gram0x = (addr >= 0x2F000000u) && (addr < 0x2F038000);       \
+            bool gram2x = (addr >= 0x2F880000u) && (addr < 0x2F886200);       \
+            return gram0x || gram2x;                                          \
+        }                                                                     \
+        else                                                                  \
+        {                                                                     \
+            /* When peripheral instance is low-speed check whether */         \
+            /* p_object is placed in GRAM3x */                                \
+            return ((((uint32_t)p_object) & 0xEFFF8000u) == 0x2FC00000u);     \
+        }
 #endif
 
 /*------------------------------------------------------------------------------------------------*/
-/* End of Common Extended section                                                                 */
+/* End of Auxiliary Extended section                                                              */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
+/* Start of DPPI Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
+    #define NRF_DPPI_EXT
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of DPPI Extended section                                                                   */
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
@@ -104,6 +135,19 @@ typedef NRF_PROCESSORID_Type nrf_processor_t;
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
+/* Start of GPPI Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
+    #define NRFX_GPPI_PROG_APP_CHANNELS_NUM  NRFX_BIT_SIZE(sizeof(uint32_t))
+    #define NRFX_GPPI_PROG_APP_CHANNELS_MASK NRFX_BIT_MASK(NRFX_GPPI_PROG_APP_CHANNELS_NUM)
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of GPPI Extended section                                                                   */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
 /* Start of PRS Extended section                                                                  */
 /*------------------------------------------------------------------------------------------------*/
 
@@ -175,6 +219,102 @@ typedef NRF_PROCESSORID_Type nrf_processor_t;
 
 /*------------------------------------------------------------------------------------------------*/
 /* End of RESET Extended section                                                                  */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
+/* Start of SPIM Extended section                                                                 */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(LUMOS_XXAA)
+    #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
+    #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  ( \
+           (p_reg == NRF_SPIM00))
+    #define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
+    #define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  ( \
+           (p_reg == NRF_SPIM20)             \
+        || (p_reg == NRF_SPIM21)             \
+        || (p_reg == NRF_SPIM22)             \
+        || (p_reg == NRF_SPIM30))
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of SPIM Extended section                                                                   */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
+/* Start of TIMER Extended section                                                                */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA)
+    #define NRF_TIMER_PRESCALER_MAX TIMER_PRESCALER_PRESCALER_Max
+
+    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) ( \
+           (p_reg == NRF_TIMER120)                 \
+        || (p_reg == NRF_TIMER121))
+    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) (  \
+           (p_reg == NRF_TIMER130)                 \
+        || (p_reg == NRF_TIMER131)                 \
+        || (p_reg == NRF_TIMER132)                 \
+        || (p_reg == NRF_TIMER133)                 \
+        || (p_reg == NRF_TIMER134)                 \
+        || (p_reg == NRF_TIMER135)                 \
+        || (p_reg == NRF_TIMER136)                 \
+        || (p_reg == NRF_TIMER137))
+    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) ( \
+           (p_reg == NRF_TIMER020)                \
+        || (p_reg == NRF_TIMER021)                \
+        || (p_reg == NRF_TIMER022))
+    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) false
+
+    #if defined(NRF_RADIOCORE)
+        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) (                 \
+               (p_reg == NRF_TIMER020 && TIMER_BIT_WIDTH_MAX(020, bit_width)) \
+            || (p_reg == NRF_TIMER021 && TIMER_BIT_WIDTH_MAX(021, bit_width)) \
+            || (p_reg == NRF_TIMER022 && TIMER_BIT_WIDTH_MAX(022, bit_width)))
+    #else
+        #define NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) 0
+    #endif
+
+    #define NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width) (                \
+           (p_reg == NRF_TIMER120 && TIMER_BIT_WIDTH_MAX(120, bit_width)) \
+        || (p_reg == NRF_TIMER121 && TIMER_BIT_WIDTH_MAX(121, bit_width)) \
+        || (p_reg == NRF_TIMER130 && TIMER_BIT_WIDTH_MAX(130, bit_width)) \
+        || (p_reg == NRF_TIMER131 && TIMER_BIT_WIDTH_MAX(131, bit_width)) \
+        || (p_reg == NRF_TIMER132 && TIMER_BIT_WIDTH_MAX(132, bit_width)) \
+        || (p_reg == NRF_TIMER133 && TIMER_BIT_WIDTH_MAX(133, bit_width)) \
+        || (p_reg == NRF_TIMER134 && TIMER_BIT_WIDTH_MAX(134, bit_width)) \
+        || (p_reg == NRF_TIMER135 && TIMER_BIT_WIDTH_MAX(135, bit_width)) \
+        || (p_reg == NRF_TIMER136 && TIMER_BIT_WIDTH_MAX(136, bit_width)) \
+        || (p_reg == NRF_TIMER137 && TIMER_BIT_WIDTH_MAX(137, bit_width)))
+
+    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) \
+        (NRF_TIMER_BIT_WIDTH_LOCAL(p_reg, bit_width) ||    \
+        NRF_TIMER_BIT_WIDTH_GLOBAL(p_reg, bit_width))
+#elif defined(LUMOS_XXAA)
+    #define NRF_TIMER_IS_320MHZ_TIMER(p_reg) false
+    #define NRF_TIMER_IS_16MHZ_TIMER(p_reg) ( \
+           (p_reg == NRF_TIMER20)                 \
+        || (p_reg == NRF_TIMER21)                 \
+        || (p_reg == NRF_TIMER22)                 \
+        || (p_reg == NRF_TIMER23)                 \
+        || (p_reg == NRF_TIMER24))
+    #define NRF_TIMER_IS_32MHZ_TIMER(p_reg) ( \
+           (p_reg == NRF_TIMER10))
+    #define NRF_TIMER_IS_64MHZ_TIMER(p_reg) ( \
+            (p_reg == NRF_TIMER00))
+
+    #define NRF_TIMER_IS_BIT_WIDTH_VALID(p_reg, bit_width) (              \
+           ((p_reg == NRF_TIMER00) && TIMER_BIT_WIDTH_MAX(00, bit_width)) \
+        || ((p_reg == NRF_TIMER10) && TIMER_BIT_WIDTH_MAX(10, bit_width)) \
+        || ((p_reg == NRF_TIMER20) && TIMER_BIT_WIDTH_MAX(20, bit_width)) \
+        || ((p_reg == NRF_TIMER21) && TIMER_BIT_WIDTH_MAX(21, bit_width)) \
+        || ((p_reg == NRF_TIMER22) && TIMER_BIT_WIDTH_MAX(22, bit_width)) \
+        || ((p_reg == NRF_TIMER23) && TIMER_BIT_WIDTH_MAX(23, bit_width)) \
+        || ((p_reg == NRF_TIMER24) && TIMER_BIT_WIDTH_MAX(24, bit_width)))
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of TIMER Extended section                                                                  */
 /*------------------------------------------------------------------------------------------------*/
 
 #ifdef __cplusplus

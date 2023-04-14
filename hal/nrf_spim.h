@@ -162,30 +162,25 @@ extern "C" {
 #define NRF_SPIM_DMA_RX_PATTERN_MAX_COUNT SPIM_DMA_RX_MATCH_CANDIDATE_MaxCount
 #endif
 
-/* Macros for checking the clock source frequency for specified SPIM instance. */
-#if defined(LUMOS_XXAA) || defined(__NRFX_DOXYGEN__)
-    /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 128 MHz. */
-    #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
+#if !defined(NRF_SPIM_IS_128MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 128 MHz. */
+#define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
+#endif
 
-    /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 64 MHz. */
-    #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  ( \
-           (p_reg == NRF_SPIM00))
+#if !defined(NRF_SPIM_IS_64MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 64 MHz. */
+#define NRF_SPIM_IS_64MHZ_SPIM(p_reg) false
+#endif
 
-    /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 32 MHz. */
-    #define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
+#if !defined(NRF_SPIM_IS_32MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 32 MHz. */
+#define NRF_SPIM_IS_32MHZ_SPIM(p_reg) false
+#endif
 
-    /** @brief Macro for checking whether the base frequency for the specified SPIM instance is 16 MHz. */
-    #define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  ( \
-           (p_reg == NRF_SPIM20)             \
-        || (p_reg == NRF_SPIM21)             \
-        || (p_reg == NRF_SPIM22)             \
-        || (p_reg == NRF_SPIM30))
-#else
-    #define NRF_SPIM_IS_128MHZ_SPIM(p_reg) false
-    #define NRF_SPIM_IS_64MHZ_SPIM(p_reg)  false
-    #define NRF_SPIM_IS_32MHZ_SPIM(p_reg)  false
-    #define NRF_SPIM_IS_16MHZ_SPIM(p_reg)  true
-#endif // defined(LUMOS_XXAA)
+#if !defined(NRF_SPIM_IS_16MHZ_SPIM)
+/** @brief Macro for checking whether the base frequency for the specified SPIM instance is 16 MHz. */
+#define NRF_SPIM_IS_16MHZ_SPIM(p_reg) true
+#endif
 
 /** @brief Macro for getting base frequency value in Hz for the specified SPIM instance. */
 #define NRF_SPIM_BASE_FREQUENCY_GET(p_reg)                                 \
