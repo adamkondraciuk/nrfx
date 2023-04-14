@@ -85,12 +85,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9120_xxaa_memory.h"
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_xxaa_memory.h"
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF7140_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf7140_xxaa_secure_memory.h"
+    #endif
     #if defined(NRF_APPLICATION)
-        #include "moonlight_xxaa_application_memory.h"
+        #include "nrf7140_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf7140_xxaa_radiocore_memory.h"
+    #endif
+    #if defined(NRF_UMAC)
+        #include "nrf7140_xxaa_umac_memory.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf7140_xxaa_sysctrl_memory.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf7140_xxaa_bbpr_memory.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "moonlight_xxaa_flpr_memory.h"
+        #include "nrf7140_xxaa_flpr_memory.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf7140_xxaa_ppr_memory.h"
+    #endif
+    #if defined(NRF_LMAC)
+        #include "nrf7140_xxaa_lmac_memory.h"
     #endif
 #elif defined(NRF54H20_ENGA_XXAA)
     #if defined(NRF_SECURE)
@@ -113,6 +134,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_BBPR)
         #include "nrf54h20_enga_xxaa_bbpr_memory.h"
+    #endif
+#elif defined(MOONLIGHT_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "moonlight_xxaa_application_memory.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "moonlight_xxaa_flpr_memory.h"
     #endif
 #else
     #error "Device must be defined. See nrf_mem.h."

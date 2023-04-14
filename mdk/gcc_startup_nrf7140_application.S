@@ -1,6 +1,6 @@
 /*
  
-Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -178,14 +178,14 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   SWI0_IRQHandler
+    .long   SWI1_IRQHandler
+    .long   SWI2_IRQHandler
+    .long   SWI3_IRQHandler
+    .long   SWI4_IRQHandler
+    .long   SWI5_IRQHandler
+    .long   SWI6_IRQHandler
+    .long   SWI7_IRQHandler
     .long   BELLBOARD_0_IRQHandler
     .long   BELLBOARD_1_IRQHandler
     .long   BELLBOARD_2_IRQHandler
@@ -205,7 +205,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   GPU_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -253,9 +253,9 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   QSPI110_IRQHandler
     .long   0                           /*Reserved */
-    .long   QSPI111_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -303,17 +303,17 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   I3C120_IRQHandler
     .long   VPR121_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   SPIM122_IRQHandler
+    .long   SPIM123_IRQHandler
+    .long   QSPI120_IRQHandler
     .long   CAN120_IRQHandler
     .long   MVDMA120_IRQHandler
     .long   0                           /*Reserved */
     .long   CAN121_IRQHandler
-    .long   0                           /*Reserved */
+    .long   MVDMA121_IRQHandler
     .long   0                           /*Reserved */
     .long   I3C121_IRQHandler
-    .long   0                           /*Reserved */
+    .long   QSPI121_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   TIMER120_IRQHandler
@@ -331,8 +331,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   SPIM122_IRQHandler
-    .long   SPIM123_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -492,14 +492,14 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   I2S130_IRQHandler
+    .long   TDM130_IRQHandler
     .long   0                           /*Reserved */
     .long   QDEC130_IRQHandler
     .long   QDEC131_IRQHandler
     .long   SIMIF130_IRQHandler
-    .long   I2S131_IRQHandler
+    .long   TDM131_IRQHandler
     .long   0                           /*Reserved */
-    .long   TDM_IRQHandler
+    .long   TDM132_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -588,27 +588,57 @@ Reset_Handler:
 /* Loop to copy data from read only memory to RAM.
  * The ranges of copy from/to are specified by following symbols:
  *      __etext: LMA of start of the section to copy from. Usually end of text
- *      __data_start__: VMA of start of the section to copy to.
- *      __bss_start__: VMA of end of the section to copy to. Normally __data_end__ is used, but by using __bss_start__
- *                    the user can add their own initialized data section before BSS section with the INSERT AFTER command.
+ *      __data_start: VMA of start of the section to copy to.
+ *      __data_end: VMA of end of the section to copy to. 
  *
  * All addresses must be aligned to 4 bytes boundary.
  */
 #ifndef __STARTUP_SKIP_ETEXT
-    ldr r1, =__etext
-    ldr r2, =__data_start__
-    ldr r3, =__bss_start__
 
-    subs r3, r3, r2
-    ble .L_loop1_done
+/* Load .data */
+    ldr r1, =__data_start
+    ldr r2, =__data_end
+    ldr r3, =__data_load_start
+    bl copy_region
 
-.L_loop1:
-    subs r3, r3, #4
-    ldr r0, [r1,r3]
-    str r0, [r2,r3]
-    bgt .L_loop1
+/* Load .sdata */
+    ldr r1, =__sdata_start
+    ldr r2, =__sdata_end
+    ldr r3, =__sdata_load_start
+    bl copy_region
 
-.L_loop1_done:
+/* Load .tdata */
+    ldr r1, =__tdata_start
+    ldr r2, =__tdata_end
+    ldr r3, =__tdata_load_start
+    bl copy_region
+
+/* Load .fast */
+    ldr r1, =__fast_start
+    ldr r2, =__fast_end
+    ldr r3, =__fast_load_start
+    bl copy_region
+
+    b copy_etext_done
+
+/* Method that loads data from nvm to ram */
+copy_region:
+    subs r2, r2, r1
+    ble L_copy_region_done
+
+L_copy_region:
+    subs r2, r2, #4
+    ldr r0, [r3,r2]
+    str r0, [r1,r2]
+    bgt L_copy_region
+
+L_copy_region_done:
+
+    bx lr
+
+copy_etext_done:
+
+
 #endif
 
 /* This part of work usually is done in C library startup code. Otherwise,
@@ -624,18 +654,36 @@ Reset_Handler:
 #ifdef __STARTUP_CLEAR_BSS
     ldr r1, =__bss_start__
     ldr r2, =__bss_end__
+    bl clear_region
 
+    ldr r1, =__tbss_start__
+    ldr r2, =__tbss_end__
+    bl clear_region
+
+    ldr r1, =__sbss_start__
+    ldr r2, =__sbss_end__
+    bl clear_region
+
+    b clear_bss_done
+
+/* Method that clears default-0 registers */
+clear_region:
     movs r0, 0
 
     subs r2, r2, r1
-    ble .L_loop3_done
+    ble .L_clear_region_done
 
-.L_loop3:
+.L_clear_region:
     subs r2, r2, #4
     str r0, [r1, r2]
-    bgt .L_loop3
+    bgt .L_clear_region
 
-.L_loop3_done:
+.L_clear_region_done:
+
+    bx lr
+
+clear_bss_done:
+
 #endif /* __STARTUP_CLEAR_BSS */
 
 /* Execute SystemInit function. */
@@ -748,6 +796,14 @@ Default_Handler:
     IRQ  WDT011_IRQHandler
     IRQ  IPCT_0_IRQHandler
     IRQ  IPCT_1_IRQHandler
+    IRQ  SWI0_IRQHandler
+    IRQ  SWI1_IRQHandler
+    IRQ  SWI2_IRQHandler
+    IRQ  SWI3_IRQHandler
+    IRQ  SWI4_IRQHandler
+    IRQ  SWI5_IRQHandler
+    IRQ  SWI6_IRQHandler
+    IRQ  SWI7_IRQHandler
     IRQ  BELLBOARD_0_IRQHandler
     IRQ  BELLBOARD_1_IRQHandler
     IRQ  BELLBOARD_2_IRQHandler
@@ -757,30 +813,32 @@ Default_Handler:
     IRQ  GRTC_0_IRQHandler
     IRQ  GRTC_1_IRQHandler
     IRQ  GRTC_2_IRQHandler
+    IRQ  GPU_IRQHandler
     IRQ  TBM_IRQHandler
     IRQ  USBHS_IRQHandler
     IRQ  MRAMC110_IRQHandler
     IRQ  MRAMC111_IRQHandler
     IRQ  EXMIF_IRQHandler
-    IRQ  QSPI110_IRQHandler
-    IRQ  QSPI111_IRQHandler
     IRQ  OTPC_IRQHandler
     IRQ  VPR120_IRQHandler
     IRQ  IPCT120_0_IRQHandler
     IRQ  I3C120_IRQHandler
     IRQ  VPR121_IRQHandler
+    IRQ  SPIM122_IRQHandler
+    IRQ  SPIM123_IRQHandler
+    IRQ  QSPI120_IRQHandler
     IRQ  CAN120_IRQHandler
     IRQ  MVDMA120_IRQHandler
     IRQ  CAN121_IRQHandler
+    IRQ  MVDMA121_IRQHandler
     IRQ  I3C121_IRQHandler
+    IRQ  QSPI121_IRQHandler
     IRQ  TIMER120_IRQHandler
     IRQ  TIMER121_IRQHandler
     IRQ  PWM120_IRQHandler
     IRQ  SPIS120_IRQHandler
     IRQ  SPIM120_UARTE120_IRQHandler
     IRQ  SPIM121_IRQHandler
-    IRQ  SPIM122_IRQHandler
-    IRQ  SPIM123_IRQHandler
     IRQ  VPR130_IRQHandler
     IRQ  IPCT130_0_IRQHandler
     IRQ  RTC130_IRQHandler
@@ -793,12 +851,12 @@ Default_Handler:
     IRQ  COMP_LPCOMP_IRQHandler
     IRQ  TEMP_IRQHandler
     IRQ  NFCT_IRQHandler
-    IRQ  I2S130_IRQHandler
+    IRQ  TDM130_IRQHandler
     IRQ  QDEC130_IRQHandler
     IRQ  QDEC131_IRQHandler
     IRQ  SIMIF130_IRQHandler
-    IRQ  I2S131_IRQHandler
-    IRQ  TDM_IRQHandler
+    IRQ  TDM131_IRQHandler
+    IRQ  TDM132_IRQHandler
     IRQ  TIMER130_IRQHandler
     IRQ  TIMER131_IRQHandler
     IRQ  PWM130_IRQHandler

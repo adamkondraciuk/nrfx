@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -52,8 +52,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #include "nrf7140_bbpr_peripherals.h"
 #elif defined(NRF_FLPR)
   #include "nrf7140_flpr_peripherals.h"
-#elif defined(NRF_GRAPHICS)
-  #include "nrf7140_graphics_peripherals.h"
 #elif defined(NRF_LMAC)
   #include "nrf7140_lmac_peripherals.h"
 #elif defined(NRF_PPR)

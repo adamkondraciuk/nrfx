@@ -40,7 +40,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef NRF_VECTORS_H_
 #define NRF_VECTORS_H_
 
-<<<<<<< HEAD
 #if defined(NRF51422_XXAA)
     #include "nrf51422_vectors.h"
 #elif defined(NRF51422_XXAB)
@@ -86,12 +85,33 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #include "nrf9120_vectors.h"
 #elif defined(NRF9160_XXAA)
     #include "nrf9160_vectors.h"
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF7140_XXAA)
+    #if defined(NRF_SECURE)
+        #include "nrf7140_secure_vectors.h"
+    #endif
     #if defined(NRF_APPLICATION)
-        #include "moonlight_application_vectors.h"
+        #include "nrf7140_application_vectors.h"
+    #endif
+    #if defined(NRF_RADIOCORE)
+        #include "nrf7140_radiocore_vectors.h"
+    #endif
+    #if defined(NRF_UMAC)
+        #include "nrf7140_umac_vectors.h"
+    #endif
+    #if defined(NRF_SYSCTRL)
+        #include "nrf7140_sysctrl_vectors.h"
+    #endif
+    #if defined(NRF_BBPR)
+        #include "nrf7140_bbpr_vectors.h"
     #endif
     #if defined(NRF_FLPR)
-        #include "moonlight_flpr_vectors.h"
+        #include "nrf7140_flpr_vectors.h"
+    #endif
+    #if defined(NRF_PPR)
+        #include "nrf7140_ppr_vectors.h"
+    #endif
+    #if defined(NRF_LMAC)
+        #include "nrf7140_lmac_vectors.h"
     #endif
 #elif defined(NRF54H20_ENGA_XXAA)
     #if defined(NRF_SECURE)
@@ -114,6 +134,13 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     #endif
     #if defined(NRF_BBPR)
         #include "nrf54h20_enga_bbpr_vectors.h"
+    #endif
+#elif defined(MOONLIGHT_XXAA)
+    #if defined(NRF_APPLICATION)
+        #include "moonlight_application_vectors.h"
+    #endif
+    #if defined(NRF_FLPR)
+        #include "moonlight_flpr_vectors.h"
     #endif
 #else
     #error "Device must be defined. See nrf_vectors.h."

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -334,7 +334,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf7140.h"
     #endif
     #if !defined(EXCLUDE_PORTABILITY)
-        // #include "haltium_name_change.h"
+        #include "haltium_name_change.h"
     #endif
 #else
     #error "Device must be defined. See nrf.h."

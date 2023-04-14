@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -52,7 +52,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "nrf7140_application.h"
 #include "nrf7140_bbpr.h"
 #include "nrf7140_flpr.h"
-#include "nrf7140_graphics.h"
 #include "nrf7140_lmac.h"
 #include "nrf7140_ppr.h"
 #include "nrf7140_radiocore.h"

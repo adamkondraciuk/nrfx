@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -67,10 +67,10 @@ typedef enum {
   MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
   CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
-  VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
+  SPU000_IRQn                            = 0,        /*!< 0 SPU000                                                             */
+  MPC_IRQn                               = 1,        /*!< 1 MPC                                                                */
   VPRCLIC_2_IRQn                         = 2,        /*!< 2 VPRCLIC_2                                                          */
-  VPRCLIC_3_IRQn                         = 3,        /*!< 3 VPRCLIC_3                                                          */
+  MVDMA_IRQn                             = 3,        /*!< 3 MVDMA                                                              */
   VPRCLIC_4_IRQn                         = 4,        /*!< 4 VPRCLIC_4                                                          */
   VPRCLIC_5_IRQn                         = 5,        /*!< 5 VPRCLIC_5                                                          */
   VPRCLIC_6_IRQn                         = 6,        /*!< 6 VPRCLIC_6                                                          */
@@ -84,35 +84,65 @@ typedef enum {
   VPRCLIC_14_IRQn                        = 14,       /*!< 14 VPRCLIC_14                                                        */
   VPRCLIC_15_IRQn                        = 15,       /*!< 15 VPRCLIC_15                                                        */
   VPRTIM_IRQn                            = 16,       /*!< 16 VPRTIM                                                            */
+  WDT010_IRQn                            = 19,       /*!< 19 WDT010                                                            */
+  WDT011_IRQn                            = 20,       /*!< 20 WDT011                                                            */
+  SPU020_IRQn                            = 32,       /*!< 32 SPU020                                                            */
+  EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
+  TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
+  TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
+  TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
+  RTC_IRQn                               = 43,       /*!< 43 RTC                                                               */
+  RADIO_0_IRQn                           = 44,       /*!< 44 RADIO_0                                                           */
+  RADIO_1_IRQn                           = 45,       /*!< 45 RADIO_1                                                           */
+  SPU030_IRQn                            = 48,       /*!< 48 SPU030                                                            */
+  RADIOACC_IRQn                          = 51,       /*!< 51 RADIOACC                                                          */
+  AAR030_CCM030_IRQn                     = 58,       /*!< 58 AAR030_CCM030                                                     */
+  ECB030_IRQn                            = 59,       /*!< 59 ECB030                                                            */
+  AAR031_CCM031_IRQn                     = 60,       /*!< 60 AAR031_CCM031                                                     */
+  ECB031_IRQn                            = 61,       /*!< 61 ECB031                                                            */
+  IPCT_0_IRQn                            = 64,       /*!< 64 IPCT_0                                                            */
+  IPCT_1_IRQn                            = 65,       /*!< 65 IPCT_1                                                            */
+  SWI0_IRQn                              = 88,       /*!< 88 SWI0                                                              */
+  SWI1_IRQn                              = 89,       /*!< 89 SWI1                                                              */
+  SWI2_IRQn                              = 90,       /*!< 90 SWI2                                                              */
+  SWI3_IRQn                              = 91,       /*!< 91 SWI3                                                              */
+  SWI4_IRQn                              = 92,       /*!< 92 SWI4                                                              */
+  SWI5_IRQn                              = 93,       /*!< 93 SWI5                                                              */
+  SWI6_IRQn                              = 94,       /*!< 94 SWI6                                                              */
+  SWI7_IRQn                              = 95,       /*!< 95 SWI7                                                              */
   GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
+  GSI_IRQn                               = 111,      /*!< 111 GSI                                                              */
+  DISPC_IRQn                             = 112,      /*!< 112 DISPC                                                            */
+  GPU_IRQn                               = 115,      /*!< 115 GPU                                                              */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  QSPI110_IRQn                           = 163,      /*!< 163 QSPI110                                                          */
-  QSPI111_IRQn                           = 165,      /*!< 165 QSPI111                                                          */
   OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
   VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
+  SPIM122_IRQn                           = 213,      /*!< 213 SPIM122                                                          */
+  SPIM123_IRQn                           = 214,      /*!< 214 SPIM123                                                          */
+  QSPI120_IRQn                           = 215,      /*!< 215 QSPI120                                                          */
   CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
   CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
+  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
+  QSPI121_IRQn                           = 223,      /*!< 223 QSPI121                                                          */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
   SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
   SPIM120_UARTE120_IRQn                  = 230,      /*!< 230 SPIM120_UARTE120                                                 */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
-  SPIM122_IRQn                           = 241,      /*!< 241 SPIM122                                                          */
-  SPIM123_IRQn                           = 242,      /*!< 242 SPIM123                                                          */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
@@ -125,12 +155,12 @@ typedef enum {
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
   TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
   NFCT_IRQn                              = 389,      /*!< 389 NFCT                                                             */
-  I2S130_IRQn                            = 402,      /*!< 402 I2S130                                                           */
+  TDM130_IRQn                            = 402,      /*!< 402 TDM130                                                           */
   QDEC130_IRQn                           = 404,      /*!< 404 QDEC130                                                          */
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF130_IRQn                          = 406,      /*!< 406 SIMIF130                                                         */
-  I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
-  TDM_IRQn                               = 409,      /*!< 409 TDM                                                              */
+  TDM131_IRQn                            = 407,      /*!< 407 TDM131                                                           */
+  TDM132_IRQn                            = 409,      /*!< 409 TDM132                                                           */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
   PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
@@ -209,29 +239,13 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_BBPR_VPRCLIC_NS_BASE          0x43034000UL
-#define NRF_BBPR_VPRCLIC_S_BASE           0x53034000UL
-#define NRF_BBPR_VPRTIM_NS_BASE           0x00000000UL
+#define NRF_BBPR_VPRCLIC_BASE             0xF0000000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_BBPR_VPRCLIC_NS               ((NRF_CLIC_Type*)                     NRF_BBPR_VPRCLIC_NS_BASE)
-#define NRF_BBPR_VPRCLIC_S                ((NRF_CLIC_Type*)                     NRF_BBPR_VPRCLIC_S_BASE)
-#define NRF_BBPR_VPRTIM_NS                ((NRF_VTIM_Type*)                     NRF_BBPR_VPRTIM_NS_BASE)
-
-/* =========================================================================================================================== */
-/* ================                                    TrustZone Remapping                                    ================ */
-/* =========================================================================================================================== */
-
-#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_BBPR_VPRCLIC                        NRF_BBPR_VPRCLIC_NS
-  #define NRF_BBPR_VPRTIM                         NRF_BBPR_VPRTIM_NS
-#else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_BBPR_VPRCLIC                        NRF_BBPR_VPRCLIC_S
-  #define NRF_BBPR_VPRTIM                         NRF_BBPR_VPRTIM_NS
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#define NRF_BBPR_VPRCLIC                  ((NRF_CLIC_Type*)                     NRF_BBPR_VPRCLIC_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
@@ -239,7 +253,6 @@ typedef enum {
 
 #ifdef NRF_BBPR                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
   #define NRF_VPRCLIC                             NRF_BBPR_VPRCLIC
-  #define NRF_VPRTIM                              NRF_BBPR_VPRTIM
 #endif                                               /*!< NRF_BBPR                                                             */
 
 /* ========================================== End of section using anonymous unions ========================================== */

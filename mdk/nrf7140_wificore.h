@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -70,40 +70,50 @@ typedef enum {
   PendSV_IRQn                            = -2,       /*!<  -2 Pendable request for system service                              */
   SysTick_IRQn                           = -1,       /*!<  -1 System Tick Timer                                                */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  LMAC_IRQn                              = 0,        /*!< 0 LMAC                                                               */
-  UMAC_IRQn                              = 4,        /*!< 4 UMAC                                                               */
+  VPRLMAC_IRQn                           = 0,        /*!< 0 VPRLMAC                                                            */
+  VPRUMAC_IRQn                           = 4,        /*!< 4 VPRUMAC                                                            */
   MVDMA_IRQn                             = 8,        /*!< 8 MVDMA                                                              */
-  IPCT_0_IRQn                            = 10,       /*!< 10 IPCT_0                                                            */
-  IPCT_1_IRQn                            = 11,       /*!< 11 IPCT_1                                                            */
+  IPCT_0_0_IRQn                          = 10,       /*!< 10 IPCT_0_0                                                          */
+  IPCT_1_1_IRQn                          = 11,       /*!< 11 IPCT_1_1                                                          */
+  WDT000_IRQn                            = 13,       /*!< 13 WDT000                                                            */
+  WDT001_IRQn                            = 14,       /*!< 14 WDT001                                                            */
+  BELLBOARD_0_0_IRQn                     = 96,       /*!< 96 BELLBOARD_0_0                                                     */
+  BELLBOARD_1_1_IRQn                     = 97,       /*!< 97 BELLBOARD_1_1                                                     */
+  BELLBOARD_2_2_IRQn                     = 98,       /*!< 98 BELLBOARD_2_2                                                     */
+  BELLBOARD_3_3_IRQn                     = 99,       /*!< 99 BELLBOARD_3_3                                                     */
   GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
+  GSI_IRQn                               = 111,      /*!< 111 GSI                                                              */
+  DISPC_IRQn                             = 112,      /*!< 112 DISPC                                                            */
+  GPU_IRQn                               = 115,      /*!< 115 GPU                                                              */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
   MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
   MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
-  QSPI110_IRQn                           = 163,      /*!< 163 QSPI110                                                          */
-  QSPI111_IRQn                           = 165,      /*!< 165 QSPI111                                                          */
   OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
   VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
   IPCT120_0_IRQn                         = 209,      /*!< 209 IPCT120_0                                                        */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
   VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
+  SPIM122_IRQn                           = 213,      /*!< 213 SPIM122                                                          */
+  SPIM123_IRQn                           = 214,      /*!< 214 SPIM123                                                          */
+  QSPI120_IRQn                           = 215,      /*!< 215 QSPI120                                                          */
   CAN120_IRQn                            = 216,      /*!< 216 CAN120                                                           */
   MVDMA120_IRQn                          = 217,      /*!< 217 MVDMA120                                                         */
   CAN121_IRQn                            = 219,      /*!< 219 CAN121                                                           */
+  MVDMA121_IRQn                          = 220,      /*!< 220 MVDMA121                                                         */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
+  QSPI121_IRQn                           = 223,      /*!< 223 QSPI121                                                          */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
   TIMER121_IRQn                          = 227,      /*!< 227 TIMER121                                                         */
   PWM120_IRQn                            = 228,      /*!< 228 PWM120                                                           */
   SPIS120_IRQn                           = 229,      /*!< 229 SPIS120                                                          */
   SPIM120_UARTE120_IRQn                  = 230,      /*!< 230 SPIM120_UARTE120                                                 */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
-  SPIM122_IRQn                           = 241,      /*!< 241 SPIM122                                                          */
-  SPIM123_IRQn                           = 242,      /*!< 242 SPIM123                                                          */
   VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT130_0_IRQn                         = 289,      /*!< 289 IPCT130_0                                                        */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
@@ -116,12 +126,12 @@ typedef enum {
   COMP_LPCOMP_IRQn                       = 387,      /*!< 387 COMP_LPCOMP                                                      */
   TEMP_IRQn                              = 388,      /*!< 388 TEMP                                                             */
   NFCT_IRQn                              = 389,      /*!< 389 NFCT                                                             */
-  I2S130_IRQn                            = 402,      /*!< 402 I2S130                                                           */
+  TDM130_IRQn                            = 402,      /*!< 402 TDM130                                                           */
   QDEC130_IRQn                           = 404,      /*!< 404 QDEC130                                                          */
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF130_IRQn                          = 406,      /*!< 406 SIMIF130                                                         */
-  I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
-  TDM_IRQn                               = 409,      /*!< 409 TDM                                                              */
+  TDM131_IRQn                            = 407,      /*!< 407 TDM131                                                           */
+  TDM132_IRQn                            = 409,      /*!< 409 TDM132                                                           */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
   PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
@@ -204,30 +214,58 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #define NRF_WIFICORE_UICR_NS_BASE         0x0FFF0000UL
-#define NRF_WIFICORE_LMAC_NS_BASE         0x48000000UL
-#define NRF_WIFICORE_UMAC_NS_BASE         0x48004000UL
+#define NRF_WIFICORE_VPRLMAC_NS_BASE      0x48000000UL
+#define NRF_WIFICORE_VPRUMAC_NS_BASE      0x48004000UL
 #define NRF_WIFICORE_MVDMA_NS_BASE        0x48008000UL
-#define NRF_WIFICORE_MEMCONF_NS_BASE      0x48009000UL
-#define NRF_WIFICORE_IPCT_NS_BASE         0x4800A000UL
-#define NRF_WIFICORE_PCGCS000_NS_BASE     0x4800B000UL
-#define NRF_WIFICORE_HSFLL_NS_BASE        0x4800C000UL
-#define NRF_WIFICORE_LRCCONF_NS_BASE      0x4800D000UL
-#define NRF_WIFICORE_PCGCM000_NS_BASE     0x4800E000UL
+#define NRF_WIFICORE_PCGCS000_NS_BASE     0x48009000UL
+#define NRF_WIFICORE_HSFLL_NS_BASE        0x4800A000UL
+#define NRF_WIFICORE_IPCT_NS_BASE         0x48014000UL
+#define NRF_WIFICORE_LRCCONF000_NS_BASE   0x4800B000UL
+#define NRF_WIFICORE_PCGCM000_NS_BASE     0x4800C000UL
+#define NRF_WIFICORE_WDT000_NS_BASE       0x4800D000UL
+#define NRF_WIFICORE_WDT001_NS_BASE       0x4800E000UL
+#define NRF_WIFICORE_LRCCONF010_NS_BASE   0x48010000UL
+#define NRF_WIFICORE_PCGCM010_NS_BASE     0x48011000UL
+#define NRF_WIFICORE_PCGCS010_NS_BASE     0x48012000UL
+#define NRF_WIFICORE_MEMCONF_NS_BASE      0x48013000UL
+#define NRF_WIFICORE_RESETINFO_NS_BASE    0x52015000UL
+#define NRF_WIFICORE_RPURFBUS_NS_BASE     0x48030000UL
+#define NRF_WIFICORE_BELLBOARD_NS_BASE    0x4F09C000UL
+#define NRF_WIFICORE_BELLBOARD_S_BASE     0x5F09C000UL
+#define NRF_WIFICORE_RPUMAC_NS_BASE       0x48080000UL
+#define NRF_WIFICORE_RPUPHY_NS_BASE       0x48080000UL
+#define NRF_WIFICORE_RPUSYS_NS_BASE       0x48080000UL
+#define NRF_WIFICORE_RPUQM_NS_BASE        0x480BE000UL
+#define NRF_WIFICORE_RPUHPQM_NS_BASE      0x480BF000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
 #define NRF_WIFICORE_UICR_NS              ((NRF_UICR_Type*)                     NRF_WIFICORE_UICR_NS_BASE)
-#define NRF_WIFICORE_LMAC_NS              ((NRF_VPR_Type*)                      NRF_WIFICORE_LMAC_NS_BASE)
-#define NRF_WIFICORE_UMAC_NS              ((NRF_VPR_Type*)                      NRF_WIFICORE_UMAC_NS_BASE)
+#define NRF_WIFICORE_VPRLMAC_NS           ((NRF_VPR_Type*)                      NRF_WIFICORE_VPRLMAC_NS_BASE)
+#define NRF_WIFICORE_VPRUMAC_NS           ((NRF_VPR_Type*)                      NRF_WIFICORE_VPRUMAC_NS_BASE)
 #define NRF_WIFICORE_MVDMA_NS             ((NRF_MVDMA_Type*)                    NRF_WIFICORE_MVDMA_NS_BASE)
-#define NRF_WIFICORE_MEMCONF_NS           ((NRF_MEMCONF_Type*)                  NRF_WIFICORE_MEMCONF_NS_BASE)
-#define NRF_WIFICORE_IPCT_NS              ((NRF_IPCT_Type*)                     NRF_WIFICORE_IPCT_NS_BASE)
 #define NRF_WIFICORE_PCGCS000_NS          ((NRF_PCGCSLAVE_Type*)                NRF_WIFICORE_PCGCS000_NS_BASE)
 #define NRF_WIFICORE_HSFLL_NS             ((NRF_HSFLL_Type*)                    NRF_WIFICORE_HSFLL_NS_BASE)
-#define NRF_WIFICORE_LRCCONF_NS           ((NRF_LRCCONF_Type*)                  NRF_WIFICORE_LRCCONF_NS_BASE)
+#define NRF_WIFICORE_IPCT_NS              ((NRF_IPCT_Type*)                     NRF_WIFICORE_IPCT_NS_BASE)
+#define NRF_WIFICORE_LRCCONF000_NS        ((NRF_LRCCONF_Type*)                  NRF_WIFICORE_LRCCONF000_NS_BASE)
 #define NRF_WIFICORE_PCGCM000_NS          ((NRF_PCGCMASTER_Type*)               NRF_WIFICORE_PCGCM000_NS_BASE)
+#define NRF_WIFICORE_WDT000_NS            ((NRF_WDT_Type*)                      NRF_WIFICORE_WDT000_NS_BASE)
+#define NRF_WIFICORE_WDT001_NS            ((NRF_WDT_Type*)                      NRF_WIFICORE_WDT001_NS_BASE)
+#define NRF_WIFICORE_LRCCONF010_NS        ((NRF_LRCCONF_Type*)                  NRF_WIFICORE_LRCCONF010_NS_BASE)
+#define NRF_WIFICORE_PCGCM010_NS          ((NRF_PCGCMASTER_Type*)               NRF_WIFICORE_PCGCM010_NS_BASE)
+#define NRF_WIFICORE_PCGCS010_NS          ((NRF_PCGCSLAVE_Type*)                NRF_WIFICORE_PCGCS010_NS_BASE)
+#define NRF_WIFICORE_MEMCONF_NS           ((NRF_MEMCONF_Type*)                  NRF_WIFICORE_MEMCONF_NS_BASE)
+#define NRF_WIFICORE_RESETINFO_NS         ((NRF_RESETINFO_Type*)                NRF_WIFICORE_RESETINFO_NS_BASE)
+#define NRF_WIFICORE_RPURFBUS_NS          ((NRF_RPURFBUS_Type*)                 NRF_WIFICORE_RPURFBUS_NS_BASE)
+#define NRF_WIFICORE_BELLBOARD_NS         ((NRF_BELLBOARD_Type*)                NRF_WIFICORE_BELLBOARD_NS_BASE)
+#define NRF_WIFICORE_BELLBOARD_S          ((NRF_BELLBOARD_Type*)                NRF_WIFICORE_BELLBOARD_S_BASE)
+#define NRF_WIFICORE_RPUMAC_NS            ((NRF_WIFIMAC_Type*)                  NRF_WIFICORE_RPUMAC_NS_BASE)
+#define NRF_WIFICORE_RPUPHY_NS            ((NRF_WIFIPHY_Type*)                  NRF_WIFICORE_RPUPHY_NS_BASE)
+#define NRF_WIFICORE_RPUSYS_NS            ((NRF_RPUPBUS_Type*)                  NRF_WIFICORE_RPUSYS_NS_BASE)
+#define NRF_WIFICORE_RPUQM_NS             ((NRF_RPUQM_Type*)                    NRF_WIFICORE_RPUQM_NS_BASE)
+#define NRF_WIFICORE_RPUHPQM_NS           ((NRF_RPUHPQM_Type*)                  NRF_WIFICORE_RPUHPQM_NS_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
@@ -235,26 +273,52 @@ typedef enum {
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_WIFICORE_UICR                       NRF_WIFICORE_UICR_NS
-  #define NRF_WIFICORE_LMAC                       NRF_WIFICORE_LMAC_NS
-  #define NRF_WIFICORE_UMAC                       NRF_WIFICORE_UMAC_NS
+  #define NRF_WIFICORE_VPRLMAC                    NRF_WIFICORE_VPRLMAC_NS
+  #define NRF_WIFICORE_VPRUMAC                    NRF_WIFICORE_VPRUMAC_NS
   #define NRF_WIFICORE_MVDMA                      NRF_WIFICORE_MVDMA_NS
-  #define NRF_WIFICORE_MEMCONF                    NRF_WIFICORE_MEMCONF_NS
-  #define NRF_WIFICORE_IPCT                       NRF_WIFICORE_IPCT_NS
   #define NRF_WIFICORE_PCGCS000                   NRF_WIFICORE_PCGCS000_NS
   #define NRF_WIFICORE_HSFLL                      NRF_WIFICORE_HSFLL_NS
-  #define NRF_WIFICORE_LRCCONF                    NRF_WIFICORE_LRCCONF_NS
+  #define NRF_WIFICORE_IPCT                       NRF_WIFICORE_IPCT_NS
+  #define NRF_WIFICORE_LRCCONF000                 NRF_WIFICORE_LRCCONF000_NS
   #define NRF_WIFICORE_PCGCM000                   NRF_WIFICORE_PCGCM000_NS
+  #define NRF_WIFICORE_WDT000                     NRF_WIFICORE_WDT000_NS
+  #define NRF_WIFICORE_WDT001                     NRF_WIFICORE_WDT001_NS
+  #define NRF_WIFICORE_LRCCONF010                 NRF_WIFICORE_LRCCONF010_NS
+  #define NRF_WIFICORE_PCGCM010                   NRF_WIFICORE_PCGCM010_NS
+  #define NRF_WIFICORE_PCGCS010                   NRF_WIFICORE_PCGCS010_NS
+  #define NRF_WIFICORE_MEMCONF                    NRF_WIFICORE_MEMCONF_NS
+  #define NRF_WIFICORE_RESETINFO                  NRF_WIFICORE_RESETINFO_NS
+  #define NRF_WIFICORE_RPURFBUS                   NRF_WIFICORE_RPURFBUS_NS
+  #define NRF_WIFICORE_BELLBOARD                  NRF_WIFICORE_BELLBOARD_NS
+  #define NRF_WIFICORE_RPUMAC                     NRF_WIFICORE_RPUMAC_NS
+  #define NRF_WIFICORE_RPUPHY                     NRF_WIFICORE_RPUPHY_NS
+  #define NRF_WIFICORE_RPUSYS                     NRF_WIFICORE_RPUSYS_NS
+  #define NRF_WIFICORE_RPUQM                      NRF_WIFICORE_RPUQM_NS
+  #define NRF_WIFICORE_RPUHPQM                    NRF_WIFICORE_RPUHPQM_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
   #define NRF_WIFICORE_UICR                       NRF_WIFICORE_UICR_NS
-  #define NRF_WIFICORE_LMAC                       NRF_WIFICORE_LMAC_NS
-  #define NRF_WIFICORE_UMAC                       NRF_WIFICORE_UMAC_NS
+  #define NRF_WIFICORE_VPRLMAC                    NRF_WIFICORE_VPRLMAC_NS
+  #define NRF_WIFICORE_VPRUMAC                    NRF_WIFICORE_VPRUMAC_NS
   #define NRF_WIFICORE_MVDMA                      NRF_WIFICORE_MVDMA_NS
-  #define NRF_WIFICORE_MEMCONF                    NRF_WIFICORE_MEMCONF_NS
-  #define NRF_WIFICORE_IPCT                       NRF_WIFICORE_IPCT_NS
   #define NRF_WIFICORE_PCGCS000                   NRF_WIFICORE_PCGCS000_NS
   #define NRF_WIFICORE_HSFLL                      NRF_WIFICORE_HSFLL_NS
-  #define NRF_WIFICORE_LRCCONF                    NRF_WIFICORE_LRCCONF_NS
+  #define NRF_WIFICORE_IPCT                       NRF_WIFICORE_IPCT_NS
+  #define NRF_WIFICORE_LRCCONF000                 NRF_WIFICORE_LRCCONF000_NS
   #define NRF_WIFICORE_PCGCM000                   NRF_WIFICORE_PCGCM000_NS
+  #define NRF_WIFICORE_WDT000                     NRF_WIFICORE_WDT000_NS
+  #define NRF_WIFICORE_WDT001                     NRF_WIFICORE_WDT001_NS
+  #define NRF_WIFICORE_LRCCONF010                 NRF_WIFICORE_LRCCONF010_NS
+  #define NRF_WIFICORE_PCGCM010                   NRF_WIFICORE_PCGCM010_NS
+  #define NRF_WIFICORE_PCGCS010                   NRF_WIFICORE_PCGCS010_NS
+  #define NRF_WIFICORE_MEMCONF                    NRF_WIFICORE_MEMCONF_NS
+  #define NRF_WIFICORE_RESETINFO                  NRF_WIFICORE_RESETINFO_NS
+  #define NRF_WIFICORE_RPURFBUS                   NRF_WIFICORE_RPURFBUS_NS
+  #define NRF_WIFICORE_BELLBOARD                  NRF_WIFICORE_BELLBOARD_S
+  #define NRF_WIFICORE_RPUMAC                     NRF_WIFICORE_RPUMAC_NS
+  #define NRF_WIFICORE_RPUPHY                     NRF_WIFICORE_RPUPHY_NS
+  #define NRF_WIFICORE_RPUSYS                     NRF_WIFICORE_RPUSYS_NS
+  #define NRF_WIFICORE_RPUQM                      NRF_WIFICORE_RPUQM_NS
+  #define NRF_WIFICORE_RPUHPQM                    NRF_WIFICORE_RPUHPQM_NS
 #endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
 
 /* =========================================================================================================================== */
@@ -263,15 +327,28 @@ typedef enum {
 
 #ifdef NRF_WIFICORE                                  /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
   #define NRF_UICR                                NRF_WIFICORE_UICR
-  #define NRF_LMAC                                NRF_WIFICORE_LMAC
-  #define NRF_UMAC                                NRF_WIFICORE_UMAC
+  #define NRF_VPRLMAC                             NRF_WIFICORE_VPRLMAC
+  #define NRF_VPRUMAC                             NRF_WIFICORE_VPRUMAC
   #define NRF_MVDMA                               NRF_WIFICORE_MVDMA
-  #define NRF_MEMCONF                             NRF_WIFICORE_MEMCONF
-  #define NRF_IPCT                                NRF_WIFICORE_IPCT
   #define NRF_PCGCS000                            NRF_WIFICORE_PCGCS000
   #define NRF_HSFLL                               NRF_WIFICORE_HSFLL
-  #define NRF_LRCCONF                             NRF_WIFICORE_LRCCONF
+  #define NRF_IPCT                                NRF_WIFICORE_IPCT
+  #define NRF_LRCCONF000                          NRF_WIFICORE_LRCCONF000
   #define NRF_PCGCM000                            NRF_WIFICORE_PCGCM000
+  #define NRF_WDT000                              NRF_WIFICORE_WDT000
+  #define NRF_WDT001                              NRF_WIFICORE_WDT001
+  #define NRF_LRCCONF010                          NRF_WIFICORE_LRCCONF010
+  #define NRF_PCGCM010                            NRF_WIFICORE_PCGCM010
+  #define NRF_PCGCS010                            NRF_WIFICORE_PCGCS010
+  #define NRF_MEMCONF                             NRF_WIFICORE_MEMCONF
+  #define NRF_RESETINFO                           NRF_WIFICORE_RESETINFO
+  #define NRF_RPURFBUS                            NRF_WIFICORE_RPURFBUS
+  #define NRF_BELLBOARD                           NRF_WIFICORE_BELLBOARD
+  #define NRF_RPUMAC                              NRF_WIFICORE_RPUMAC
+  #define NRF_RPUPHY                              NRF_WIFICORE_RPUPHY
+  #define NRF_RPUSYS                              NRF_WIFICORE_RPUSYS
+  #define NRF_RPUQM                               NRF_WIFICORE_RPUQM
+  #define NRF_RPUHPQM                             NRF_WIFICORE_RPUHPQM
 #endif                                               /*!< NRF_WIFICORE                                                         */
 
 /* ========================================== End of section using anonymous unions ========================================== */
