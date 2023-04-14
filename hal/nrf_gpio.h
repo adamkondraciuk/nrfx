@@ -13,13 +13,11 @@ extern "C" {
 #define NRF_P0 NRF_GPIO
 #endif
 
-#if (GPIO_COUNT == 1)
-#define NUMBER_OF_PINS (P0_PIN_NUM)
-#define GPIO_REG_LIST  {NRF_P0}
-#elif (GPIO_COUNT == 2)
-#define NUMBER_OF_PINS (P0_PIN_NUM + P1_PIN_NUM)
-#define GPIO_REG_LIST  {NRF_P0, NRF_P1}
-#endif
+#define GPIO_REG(periph_name, prefix, i, _) NRFX_CONCAT(NRF_, periph_name, prefix, i),
+#define GPIO_NUM_OF_PINS(periph_name, prefix, i, _) NRFX_CONCAT(periph_name, prefix, i, _PIN_NUM)
+
+#define GPIO_REG_LIST  {NRFX_FOREACH_PRESENT(P, GPIO_REG, (), (), _)}
+#define NUMBER_OF_PINS {NRFX_FOREACH_PRESENT(P, GPIO_NUM_OF_PINS, (+), (0), _)}
 
 #if !defined(GPIO_REG_LIST)
 #error "Not supported."
