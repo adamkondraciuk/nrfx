@@ -19,8 +19,10 @@ extern "C" {
 /** @brief RESETHUB tasks. */
 typedef enum
 {
+#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_0  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[0]),  /**< Reset domain 0. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_1  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[1]),  /**< Reset domain 1. */
+#endif
     NRF_RESETHUB_TASK_RESET_DOMAIN_2  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[2]),  /**< Reset domain 2. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_3  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[3]),  /**< Reset domain 3. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_4  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[4]),  /**< Reset domain 4. */
@@ -29,6 +31,7 @@ typedef enum
     NRF_RESETHUB_TASK_RESET_DOMAIN_7  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[7]),  /**< Reset domain 7. */
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_8  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[8]),  /**< Reset domain 8. */
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_TASK_RESET_DOMAIN_9  = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[9]),  /**< Reset domain 9. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_10 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[10]), /**< Reset domain 10. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_11 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[11]), /**< Reset domain 11. */
@@ -36,6 +39,7 @@ typedef enum
     NRF_RESETHUB_TASK_RESET_DOMAIN_13 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[13]), /**< Reset domain 13. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_14 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[14]), /**< Reset domain 14. */
     NRF_RESETHUB_TASK_RESET_DOMAIN_15 = offsetof(NRF_RESETHUB_Type, TASKS_RESETDOMAIN[15]), /**< Reset domain 15. */
+#endif
 #endif
 
     NRF_RESETHUB_TASK_RESET_DOMAIN_APPLICATION =
@@ -57,8 +61,10 @@ typedef enum
 /** @brief RESETHUB events. */
 typedef enum
 {
+#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_0  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[0]),  /**< Domain 0 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_1  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[1]),  /**< Domain 1 was reset. */
+#endif
     NRF_RESETHUB_EVENT_DOMAIN_RESET_2  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[2]),  /**< Domain 2 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_3  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[3]),  /**< Domain 3 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_4  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[4]),  /**< Domain 4 was reset. */
@@ -67,6 +73,7 @@ typedef enum
     NRF_RESETHUB_EVENT_DOMAIN_RESET_7  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[7]),  /**< Domain 7 was reset. */
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_8  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[8]),  /**< Domain 8 was reset. */
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_EVENT_DOMAIN_RESET_9  = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[9]),  /**< Domain 9 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_10 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[10]), /**< Domain 10 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_11 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[11]), /**< Domain 11 was reset. */
@@ -75,7 +82,7 @@ typedef enum
     NRF_RESETHUB_EVENT_DOMAIN_RESET_14 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[14]), /**< Domain 14 was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_15 = offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[15]), /**< Domain 15 was reset. */
 #endif
-
+#endif
     NRF_RESETHUB_EVENT_DOMAIN_RESET_APPLICATION =
         offsetof(NRF_RESETHUB_Type, EVENTS_DOMAINRESET[NRF_DOMAIN_APPLICATION]),              /**< Application domain was reset. */
     NRF_RESETHUB_EVENT_DOMAIN_RESET_NETWORK =
@@ -95,7 +102,7 @@ typedef enum
 /** @brief RESETHUB interrupt mask. */
 typedef enum
 {
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_0_MASK  = RESETHUB_INTENSET_DOMAINRESET0_Msk,  /**< Interrupt on event DOMAINRESET[0]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_1_MASK  = RESETHUB_INTENSET_DOMAINRESET1_Msk,  /**< Interrupt on event DOMAINRESET[1]. */
 #endif
@@ -107,6 +114,7 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_7_MASK  = RESETHUB_INTENSET_DOMAINRESET7_Msk,  /**< Interrupt on event DOMAINRESET[7]. */
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_8_MASK  = RESETHUB_INTENSET_DOMAINRESET8_Msk,  /**< Interrupt on event DOMAINRESET[8]. */
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_9_MASK  = RESETHUB_INTENSET_DOMAINRESET9_Msk,  /**< Interrupt on event DOMAINRESET[9]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_10_MASK = RESETHUB_INTENSET_DOMAINRESET10_Msk, /**< Interrupt on event DOMAINRESET[10]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_11_MASK = RESETHUB_INTENSET_DOMAINRESET11_Msk, /**< Interrupt on event DOMAINRESET[11]. */
@@ -114,6 +122,7 @@ typedef enum
     NRF_RESETHUB_INT_DOMAIN_RESET_13_MASK = RESETHUB_INTENSET_DOMAINRESET13_Msk, /**< Interrupt on event DOMAINRESET[13]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_14_MASK = RESETHUB_INTENSET_DOMAINRESET14_Msk, /**< Interrupt on event DOMAINRESET[14]. */
     NRF_RESETHUB_INT_DOMAIN_RESET_15_MASK = RESETHUB_INTENSET_DOMAINRESET15_Msk, /**< Interrupt on event DOMAINRESET[15]. */
+#endif
 #endif
 
     NRF_RESETHUB_INT_DOMAIN_RESET_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Interrupt on Application domain reset. */
@@ -129,7 +138,7 @@ typedef enum
 /** @brief Domain mask. */
 typedef enum
 {
-#if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
+#if !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_0_MASK = RESETHUB_RESETMASK_DOMAIN0_Msk,   /**< Domain 0. */
     NRF_RESETHUB_DOMAIN_1_MASK = RESETHUB_RESETMASK_DOMAIN1_Msk,   /**< Domain 1. */
 #endif
@@ -141,6 +150,7 @@ typedef enum
     NRF_RESETHUB_DOMAIN_7_MASK = RESETHUB_RESETMASK_DOMAIN7_Msk,   /**< Domain 7. */
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_8_MASK = RESETHUB_RESETMASK_DOMAIN8_Msk,   /**< Domain 8. */
+#if !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA)
     NRF_RESETHUB_DOMAIN_9_MASK = RESETHUB_RESETMASK_DOMAIN9_Msk,   /**< Domain 9. */
     NRF_RESETHUB_DOMAIN_10_MASK = RESETHUB_RESETMASK_DOMAIN10_Msk, /**< Domain 10. */
     NRF_RESETHUB_DOMAIN_11_MASK = RESETHUB_RESETMASK_DOMAIN11_Msk, /**< Domain 11. */
@@ -148,6 +158,7 @@ typedef enum
     NRF_RESETHUB_DOMAIN_13_MASK = RESETHUB_RESETMASK_DOMAIN13_Msk, /**< Domain 13. */
     NRF_RESETHUB_DOMAIN_14_MASK = RESETHUB_RESETMASK_DOMAIN14_Msk, /**< Domain 14. */
     NRF_RESETHUB_DOMAIN_15_MASK = RESETHUB_RESETMASK_DOMAIN15_Msk, /**< Domain 15. */
+#endif
 #endif
 
     NRF_RESETHUB_DOMAIN_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Application domain. */
