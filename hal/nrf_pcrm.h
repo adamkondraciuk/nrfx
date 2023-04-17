@@ -106,13 +106,16 @@ typedef enum
     NRF_PCRM_EVENT_REQUEST_FALLING_29  = offsetof(NRF_PCRM_Type, EVENTS_REQUESTFALLING[29]), ///< PCRM REQUEST_FALLING[29] event generated. */
 #if !defined(NRF9230_XXAA)
     NRF_PCRM_EVENT_REQUEST_FALLING_30  = offsetof(NRF_PCRM_Type, EVENTS_REQUESTFALLING[30]), ///< PCRM REQUEST_FALLING[30] event generated. */
+#if !defined(NRF7140_XXAA)
     NRF_PCRM_EVENT_REQUEST_FALLING_31  = offsetof(NRF_PCRM_Type, EVENTS_REQUESTFALLING[31]), ///< PCRM REQUEST_FALLING[31] event generated. */
+#endif
 #endif
 
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_0  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[0]),  ///< PCRM LOAD_CHANGE_RAIL[0] event generated. */
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_1  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[1]),  ///< PCRM LOAD_CHANGE_RAIL[1] event generated. */
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_2  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[2]),  ///< PCRM LOAD_CHANGE_RAIL[2] event generated. */
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_3  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[3]),  ///< PCRM LOAD_CHANGE_RAIL[3] event generated. */
+#if !defined(NRF7140_XXAA)
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_4  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[4]),  ///< PCRM LOAD_CHANGE_RAIL[4] event generated. */
 #if !defined(NRF9230_XXAA)
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_5  = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[5]),  ///< PCRM LOAD_CHANGE_RAIL[5] event generated. */
@@ -126,6 +129,7 @@ typedef enum
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_13 = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[13]), ///< PCRM LOAD_CHANGE_RAIL[13] event generated. */
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_14 = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[14]), ///< PCRM LOAD_CHANGE_RAIL[14] event generated. */
     NRF_PCRM_EVENT_LOAD_CHANGE_RAIL_15 = offsetof(NRF_PCRM_Type, EVENTS_LOADCHANGERAIL[15]), ///< PCRM LOAD_CHANGE_RAIL[15] event generated. */
+#endif
 #endif
 } nrf_pcrm_event_t;
 
@@ -164,13 +168,16 @@ typedef enum
     NRF_PCRM_INT_REQUEST_29_MASK          = PCRM_INTEN0_REQUESTRISING29_Msk,  ///< Interrupt on REQUEST_RISING[29] or REQUEST_FALLING[29] event. */
 #if !defined(NRF9230_XXAA)
     NRF_PCRM_INT_REQUEST_30_MASK          = PCRM_INTEN0_REQUESTRISING30_Msk,  ///< Interrupt on REQUEST_RISING[30] or REQUEST_FALLING[30] event. */
+#if !defined(NRF7140_XXAA)
     NRF_PCRM_INT_REQUEST_31_MASK          = PCRM_INTEN0_REQUESTRISING31_Msk,  ///< Interrupt on REQUEST_RISING[31] or REQUEST_FALLING[31] event. */
+#endif
 #endif
 
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_0_MASK  = PCRM_INTEN4_LOADCHANGERAIL0_Msk,  ///< Interrupt on LOAD_CHANGE_RAIL[0] event. */
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_1_MASK  = PCRM_INTEN4_LOADCHANGERAIL1_Msk,  ///< Interrupt on LOAD_CHANGE_RAIL[1] event. */
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_2_MASK  = PCRM_INTEN4_LOADCHANGERAIL2_Msk,  ///< Interrupt on LOAD_CHANGE_RAIL[2] event. */
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_3_MASK  = PCRM_INTEN4_LOADCHANGERAIL3_Msk,  ///< Interrupt on LOAD_CHANGE_RAIL[3] event. */
+#if !defined(NRF7140_XXAA)
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_4_MASK  = PCRM_INTEN4_LOADCHANGERAIL4_Msk,  ///< Interrupt on LOAD_CHANGE_RAIL[4] event. */
 #if !defined(NRF9230_XXAA)
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_5_MASK  = PCRM_INTEN4_LOADCHANGERAIL5_Msk,  ///< Interrupt on event LOAD_CHANGE_RAIL[5] event. */
@@ -184,6 +191,7 @@ typedef enum
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_13_MASK = PCRM_INTEN4_LOADCHANGERAIL13_Msk, ///< Interrupt on event LOAD_CHANGE_RAIL[13] event. */
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_14_MASK = PCRM_INTEN4_LOADCHANGERAIL14_Msk, ///< Interrupt on event LOAD_CHANGE_RAIL[14] event. */
     NRF_PCRM_INT_LOAD_CHANGE_RAIL_15_MASK = PCRM_INTEN4_LOADCHANGERAIL15_Msk, ///< Interrupt on event LOAD_CHANGE_RAIL[15] event. */
+#endif
 #endif
 } nrf_pcrm_int_mask_t;
 
@@ -318,7 +326,7 @@ NRF_STATIC_INLINE bool nrf_pcrm_request_status_check(NRF_PCRM_Type const * p_reg
                                                      uint8_t               consumer_idx);
 
 /**
- * @brief Function for checking the acknowledgment status of the request associated 
+ * @brief Function for checking the acknowledgment status of the request associated
  *        with the specified customer.
  *
  * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
@@ -378,7 +386,7 @@ NRF_STATIC_INLINE void nrf_pcrm_override_request_set(NRF_PCRM_Type * p_reg,
                                                      bool            request);
 
 /**
- * @brief Function for overriding acknowledgment status value of the request associated 
+ * @brief Function for overriding acknowledgment status value of the request associated
  *        with the specified customer.
  *
  * @param[in] p_reg        Pointer to the structure of registers of the peripheral.
@@ -523,7 +531,7 @@ NRF_STATIC_INLINE bool nrf_pcrm_request_status_check(NRF_PCRM_Type const * p_reg
 {
     NRFX_ASSERT(consumer_idx < NRF_PCRM_CONSUMERS_COUNT);
 
-        return ((p_reg->REQUEST.STATUS >> consumer_idx) & PCRM_REQUEST_STATUS_CONSUMER0_Msk) == 
+        return ((p_reg->REQUEST.STATUS >> consumer_idx) & PCRM_REQUEST_STATUS_CONSUMER0_Msk) ==
                PCRM_REQUEST_STATUS_CONSUMER0_Rising;
 }
 
@@ -549,7 +557,7 @@ NRF_STATIC_INLINE uint32_t nrf_pcrm_config_load_get(NRF_PCRM_Type const * p_reg,
 {
     NRFX_ASSERT(consumer_idx < NRF_PCRM_CONSUMERS_COUNT);
 
-    return (p_reg->CONFIG.LOAD[consumer_idx] & PCRM_CONFIG_LOAD_VALUE_Msk) >> 
+    return (p_reg->CONFIG.LOAD[consumer_idx] & PCRM_CONFIG_LOAD_VALUE_Msk) >>
            PCRM_CONFIG_LOAD_VALUE_Pos;
 }
 
@@ -573,7 +581,7 @@ NRF_STATIC_INLINE void nrf_pcrm_override_request_set(NRF_PCRM_Type * p_reg,
     p_reg->OVERRIDE.REQUEST[consumer_idx] =
         (((request ? PCRM_OVERRIDE_REQUEST_VAL_Set : PCRM_OVERRIDE_REQUEST_VAL_Clear) <<
           PCRM_OVERRIDE_REQUEST_VAL_Pos) & PCRM_OVERRIDE_REQUEST_VAL_Msk) |
-        (((enable ? PCRM_OVERRIDE_REQUEST_MASK_UnMask : PCRM_OVERRIDE_REQUEST_MASK_Mask) << 
+        (((enable ? PCRM_OVERRIDE_REQUEST_MASK_UnMask : PCRM_OVERRIDE_REQUEST_MASK_Mask) <<
           PCRM_OVERRIDE_REQUEST_MASK_Pos) & PCRM_OVERRIDE_REQUEST_MASK_Msk);
 }
 
@@ -585,9 +593,9 @@ NRF_STATIC_INLINE void nrf_pcrm_override_ack_set(NRF_PCRM_Type * p_reg,
     NRFX_ASSERT(consumer_idx < NRF_PCRM_CONSUMERS_COUNT);
 
     p_reg->OVERRIDE.ACK[consumer_idx] =
-        (((ack_status ? PCRM_OVERRIDE_ACK_VAL_Set : PCRM_OVERRIDE_ACK_VAL_Clear) << 
+        (((ack_status ? PCRM_OVERRIDE_ACK_VAL_Set : PCRM_OVERRIDE_ACK_VAL_Clear) <<
           PCRM_OVERRIDE_ACK_VAL_Pos) & PCRM_OVERRIDE_ACK_VAL_Msk) |
-        (((enable ? PCRM_OVERRIDE_ACK_MASK_UnMask : PCRM_OVERRIDE_ACK_MASK_Mask) << 
+        (((enable ? PCRM_OVERRIDE_ACK_MASK_UnMask : PCRM_OVERRIDE_ACK_MASK_Mask) <<
           PCRM_OVERRIDE_ACK_MASK_Pos) & PCRM_OVERRIDE_ACK_MASK_Msk);
 }
 
@@ -599,11 +607,11 @@ NRF_STATIC_INLINE void nrf_pcrm_override_cross_current_set(NRF_PCRM_Type * p_reg
     NRFX_ASSERT(rail_idx < NRF_PCRM_RAILS_COUNT);
 
     p_reg->OVERRIDE.CROSSCURRENT[rail_idx] =
-        (((cross_curr ? PCRM_OVERRIDE_CROSSCURRENT_VAL_Enabled : 
+        (((cross_curr ? PCRM_OVERRIDE_CROSSCURRENT_VAL_Enabled :
            PCRM_OVERRIDE_CROSSCURRENT_VAL_Disabled) << PCRM_OVERRIDE_CROSSCURRENT_VAL_Pos) &
          PCRM_OVERRIDE_CROSSCURRENT_VAL_Msk) |
-        (((enable ? PCRM_OVERRIDE_CROSSCURRENT_MASK_UnMask : 
-           PCRM_OVERRIDE_CROSSCURRENT_MASK_Mask) << PCRM_OVERRIDE_CROSSCURRENT_MASK_Pos) & 
+        (((enable ? PCRM_OVERRIDE_CROSSCURRENT_MASK_UnMask :
+           PCRM_OVERRIDE_CROSSCURRENT_MASK_Mask) << PCRM_OVERRIDE_CROSSCURRENT_MASK_Pos) &
          PCRM_OVERRIDE_CROSSCURRENT_MASK_Msk);
 }
 
