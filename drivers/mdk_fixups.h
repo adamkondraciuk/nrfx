@@ -36,6 +36,8 @@
         #define NRF_DOMAIN NRF_DOMAIN_CELLCORE
     #elif defined(NRF_SYSCTRL)
         #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
+    #elif defined(NRF_FLPR)
+        #define NRF_DOMAIN NRF_DOMAIN_GLOBALFAST
     #elif defined(NRF_PPR)
         #define NRF_DOMAIN NRF_DOMAIN_GLOBALSLOW
     #elif defined(NRF_LMAC)
@@ -2386,7 +2388,7 @@
     #endif
     #if defined(NRF_P15)
         #undef NRF_P15
-    #endif    
+    #endif
 
     #define NRF_PDM   NRF_PDM130
 
