@@ -110,13 +110,8 @@ typedef enum
 /** @brief Trim configuration is completed - values for read operation. */
 typedef enum
 {
-#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_XXAA)
     NRF_MRAMC_TRIM_READ_UNKNOWN   = MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimUnknown,   ///< Read: Trim configuration is unknown.
     NRF_MRAMC_TRIM_READ_COMPLETED = MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimCompleted, ///< Read: Trim configuration data write is completed.
-#else
-    NRF_MRAMC_TRIM_READ_UNKNOWN   = MRAMC_TRIM_DONE_TrimCompleted_TrimUnknown,   ///< Read: Trim configuration is unknown.
-    NRF_MRAMC_TRIM_READ_COMPLETED = MRAMC_TRIM_DONE_TrimCompleted_TrimCompleted, ///< Read: Trim configuration data write is completed.
-#endif
 } nrf_mramc_trim_t;
 
 /** @brief Error Correction Code (ECC) information. */
@@ -1114,11 +1109,7 @@ NRF_STATIC_INLINE bool nrf_mramc_trim_ready_get(NRF_MRAMC_Type const * p_reg)
 
 NRF_STATIC_INLINE void nrf_mramc_trim_done_set(NRF_MRAMC_Type * p_reg)
 {
-#if defined(NRF54H20_ENGA_XXAA) || defined(NRF9230_XXAA)
     p_reg->TRIM.DONE = MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimComplete;
-#else
-    p_reg->TRIM.DONE = MRAMC_TRIM_DONE_TrimCompleted_TrimComplete;
-#endif
 }
 
 NRF_STATIC_INLINE nrf_mramc_trim_t nrf_mramc_trim_done_get(NRF_MRAMC_Type const * p_reg)

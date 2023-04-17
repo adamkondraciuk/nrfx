@@ -2033,6 +2033,10 @@
     #define TIMER136_MAX_SIZE 32
     #define TIMER137_MAX_SIZE 32
 
+#define MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimUnknown MRAMC_TRIM_DONE_TrimCompleted_TrimUnknown
+#define MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimCompleted MRAMC_TRIM_DONE_TrimCompleted_TrimCompleted
+#define MRAMC_TRIM_DONE_TRIMCOMPLETED_TrimComplete MRAMC_TRIM_DONE_TrimCompleted_TrimComplete
+
     /* At some point (ver. 8.52.0 or 8.51.0, depending on flavor) MDK introduced a fix to typo
     * in VPRCSR_MCAUSE_EXECPTIONCODE_* symbols that reworded incorrect _EXECPTIONCODE_
     * to _EXCEPTIONCODE_. This causes a lot of chaos in enums as devices using older MDK
