@@ -218,7 +218,7 @@ extern "C" {
  * @param[in] frequency Desired frequency value in Hz.
  */
 #define NRF_SPIM_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                          \
-    NRF_STATIC_ASSERT(                                                                             \
+    NRFX_STATIC_ASSERT(                                                                            \
     NRFX_COND_CODE_1(NRF_SPIM_HAS_PRESCALER,                                                       \
         ((NRF_SPIM_BASE_FREQUENCY_GET(p_reg) % (uint32_t)frequency == 0) &&                        \
         (NRFX_IS_EVEN(NRF_SPIM_PRESCALER_CALCULATE(p_reg, (uint32_t)frequency))) &&                \

@@ -257,7 +257,7 @@ extern "C" {
  * @param[in] frequency Desired frequency value in Hz.
  */
 #define NRF_TIMER_FREQUENCY_STATIC_CHECK(p_reg, frequency)                                       \
-    NRF_STATIC_ASSERT(                                                                           \
+    NRFX_STATIC_ASSERT(                                                                          \
         (NRF_TIMER_BASE_FREQUENCY_GET(p_reg) == frequency) ||                                    \
         ((NRF_TIMER_BASE_FREQUENCY_GET(p_reg) % frequency == 0) &&                               \
          NRFX_IS_POWER_OF_TWO(NRF_TIMER_BASE_FREQUENCY_GET(p_reg) / (uint32_t)frequency) &&      \
