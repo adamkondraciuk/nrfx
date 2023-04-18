@@ -11,7 +11,6 @@
 #include <nrf.h>
 #include "nrfx_utils.h"
 #include <nrf_peripherals.h>
-#include "mdk_fixups.h"
 #include "nrfx_ext.h"
 
 #ifdef __cplusplus

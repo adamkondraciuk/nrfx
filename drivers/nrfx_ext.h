@@ -3,6 +3,8 @@
 #ifndef NRFX_EXT_H__
 #define NRFX_EXT_H__
 
+#include "mdk_fixups.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
