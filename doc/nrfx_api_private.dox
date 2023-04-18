@@ -53,6 +53,8 @@
 
 @defgroup nrf_tbm TBM
 
+@defgroup nrf_usbhs USBHS
+
 @defgroup nrf_vpr VPR
 
 @}
