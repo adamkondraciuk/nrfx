@@ -95,35 +95,35 @@ typedef enum
 /** @brief GPIOTE tasks. */
 typedef enum
 {
-    NRF_GPIOTE_TASK_OUT_0     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), ///< Out task 0.
-    NRF_GPIOTE_TASK_OUT_1     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), ///< Out task 1.
-    NRF_GPIOTE_TASK_OUT_2     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), ///< Out task 2.
-    NRF_GPIOTE_TASK_OUT_3     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), ///< Out task 3.
+    NRF_GPIOTE_TASK_OUT_0 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[0]), ///< Out task 0.
+    NRF_GPIOTE_TASK_OUT_1 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[1]), ///< Out task 1.
+    NRF_GPIOTE_TASK_OUT_2 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[2]), ///< Out task 2.
+    NRF_GPIOTE_TASK_OUT_3 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[3]), ///< Out task 3.
 #if (GPIOTE_CH_NUM > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_OUT_4     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), ///< Out task 4.
-    NRF_GPIOTE_TASK_OUT_5     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), ///< Out task 5.
-    NRF_GPIOTE_TASK_OUT_6     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), ///< Out task 6.
-    NRF_GPIOTE_TASK_OUT_7     = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), ///< Out task 7.
+    NRF_GPIOTE_TASK_OUT_4 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[4]), ///< Out task 4.
+    NRF_GPIOTE_TASK_OUT_5 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[5]), ///< Out task 5.
+    NRF_GPIOTE_TASK_OUT_6 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[6]), ///< Out task 6.
+    NRF_GPIOTE_TASK_OUT_7 = offsetof(NRF_GPIOTE_Type, TASKS_OUT[7]), ///< Out task 7.
 #endif
 #if defined(GPIOTE_FEATURE_SET_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_SET_0     = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), ///< Set task 0.
-    NRF_GPIOTE_TASK_SET_1     = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), ///< Set task 1.
-    NRF_GPIOTE_TASK_SET_2     = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), ///< Set task 2.
-    NRF_GPIOTE_TASK_SET_3     = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), ///< Set task 3.
-    NRF_GPIOTE_TASK_SET_4     = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), ///< Set task 4.
-    NRF_GPIOTE_TASK_SET_5     = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), ///< Set task 5.
-    NRF_GPIOTE_TASK_SET_6     = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), ///< Set task 6.
-    NRF_GPIOTE_TASK_SET_7     = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), ///< Set task 7.
+    NRF_GPIOTE_TASK_SET_0 = offsetof(NRF_GPIOTE_Type, TASKS_SET[0]), ///< Set task 0.
+    NRF_GPIOTE_TASK_SET_1 = offsetof(NRF_GPIOTE_Type, TASKS_SET[1]), ///< Set task 1.
+    NRF_GPIOTE_TASK_SET_2 = offsetof(NRF_GPIOTE_Type, TASKS_SET[2]), ///< Set task 2.
+    NRF_GPIOTE_TASK_SET_3 = offsetof(NRF_GPIOTE_Type, TASKS_SET[3]), ///< Set task 3.
+    NRF_GPIOTE_TASK_SET_4 = offsetof(NRF_GPIOTE_Type, TASKS_SET[4]), ///< Set task 4.
+    NRF_GPIOTE_TASK_SET_5 = offsetof(NRF_GPIOTE_Type, TASKS_SET[5]), ///< Set task 5.
+    NRF_GPIOTE_TASK_SET_6 = offsetof(NRF_GPIOTE_Type, TASKS_SET[6]), ///< Set task 6.
+    NRF_GPIOTE_TASK_SET_7 = offsetof(NRF_GPIOTE_Type, TASKS_SET[7]), ///< Set task 7.
 #endif
 #if defined(GPIOTE_FEATURE_CLR_PRESENT) || defined(__NRFX_DOXYGEN__)
-    NRF_GPIOTE_TASK_CLR_0     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), ///< Clear task 0.
-    NRF_GPIOTE_TASK_CLR_1     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), ///< Clear task 1.
-    NRF_GPIOTE_TASK_CLR_2     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), ///< Clear task 2.
-    NRF_GPIOTE_TASK_CLR_3     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), ///< Clear task 3.
-    NRF_GPIOTE_TASK_CLR_4     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), ///< Clear task 4.
-    NRF_GPIOTE_TASK_CLR_5     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), ///< Clear task 5.
-    NRF_GPIOTE_TASK_CLR_6     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), ///< Clear task 6.
-    NRF_GPIOTE_TASK_CLR_7     = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), ///< Clear task 7.
+    NRF_GPIOTE_TASK_CLR_0 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[0]), ///< Clear task 0.
+    NRF_GPIOTE_TASK_CLR_1 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[1]), ///< Clear task 1.
+    NRF_GPIOTE_TASK_CLR_2 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[2]), ///< Clear task 2.
+    NRF_GPIOTE_TASK_CLR_3 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[3]), ///< Clear task 3.
+    NRF_GPIOTE_TASK_CLR_4 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[4]), ///< Clear task 4.
+    NRF_GPIOTE_TASK_CLR_5 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[5]), ///< Clear task 5.
+    NRF_GPIOTE_TASK_CLR_6 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[6]), ///< Clear task 6.
+    NRF_GPIOTE_TASK_CLR_7 = offsetof(NRF_GPIOTE_Type, TASKS_CLR[7]), ///< Clear task 7.
 #endif
 } nrf_gpiote_task_t;
 
