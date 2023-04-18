@@ -26,7 +26,6 @@ typedef struct
 } nrfx_spim_t;
 
 #ifndef __NRFX_DOXYGEN__
-/* Internally generated enum used to index all enabled instances. */
 enum {
     /* List all enabled driver instances (in the format NRFX_\<instance_name\>_INST_IDX). */
     NRFX_INSTANCE_ENUM_LIST(SPIM)
