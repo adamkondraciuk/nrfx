@@ -918,7 +918,8 @@ WARN_LOGFILE           = warnings_nrfx.txt
 
 ### EDIT THIS ###
 
-INPUT                  = ../helpers \
+INPUT                  = config_dox \
+                         ../helpers \
                          ../drivers \
                          ../hal \
                          ../haly \
@@ -926,7 +927,6 @@ INPUT                  = ../helpers \
                          ../templates/nrfx_glue.h \
                          ../templates/nrfx_log.h \
                          ../CHANGELOG.md \
-                         config_dox \
                          .
 
 # This tag can be used to specify the character encoding of the source files

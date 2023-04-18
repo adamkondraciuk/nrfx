@@ -791,13 +791,13 @@ WARN_LOGFILE           = warnings_nrfx.txt
 
 ### EDIT THIS ###
 
-INPUT                  = ../../nrfx/helpers \
+INPUT                  = ../../nrfx/doc/config_dox \
+                         ../../nrfx/helpers \
                          ../../nrfx/drivers \
                          ../../nrfx/hal \
                          ../../nrfx/soc \
                          ../../nrfx/templates \
                          ../../nrfx/CHANGELOG.md \
-                         ../../nrfx/doc/config_dox \
                          ../../nrfx/doc
 
 # This tag can be used to specify the character encoding of the source files
