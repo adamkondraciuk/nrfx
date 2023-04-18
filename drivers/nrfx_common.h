@@ -68,6 +68,27 @@ extern "C" {
 #define NRFX_CHECK(module_enabled) (module_enabled)
 
 /**
+ * @brief Macro for checking if the configured API version is greater than or equal
+ *        to the specified API version.
+ *
+ * @note API version to be used is configured using following symbols:
+ *       - @ref NRFX_CONFIG_API_VER_MAJOR
+ *       - @ref NRFX_CONFIG_API_VER_MINOR
+ *       - @ref NRFX_CONFIG_API_VER_MICRO
+ *
+ * @param[in] major Major API version.
+ * @param[in] minor Minor API version.
+ * @param[in] micro Micro API version.
+ *
+ * @retval true  Configured API version is greater than or equal to the specified API version.
+ * @retval false Configured API version is smaller than the specified API version.
+ */
+#define NRFX_API_VER_AT_LEAST(major, minor, micro) \
+    ((NRFX_CONFIG_API_VER_MAJOR >= (major)) &&     \
+     (NRFX_CONFIG_API_VER_MINOR >= (minor)) &&     \
+     (NRFX_CONFIG_API_VER_MICRO >= (micro)))
+
+/**
  * @brief Macro for creating unsigned integer with bit position @p x set.
  *
  * @param[in] x Bit position to be set.

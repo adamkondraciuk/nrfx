@@ -7,7 +7,19 @@
 #error "This file should not be included directly. Include nrfx_config.h instead."
 #endif
 
-// <i> NRFX API version 3.0 flag.
-#define NRFX_CONFIG_API_VER_3_0 1
+/** @brief Symbol specifying major version of the nrfx API to be used. */
+#ifndef NRFX_CONFIG_API_VER_MAJOR
+#define NRFX_CONFIG_API_VER_MAJOR 3
+#endif
+
+/** @brief Symbol specifying minor version of the nrfx API to be used. */
+#ifndef NRFX_CONFIG_API_VER_MINOR
+#define NRFX_CONFIG_API_VER_MINOR 0
+#endif
+
+/** @brief Symbol specifying micro version of the nrfx API to be used. */
+#ifndef NRFX_CONFIG_API_VER_MICRO
+#define NRFX_CONFIG_API_VER_MICRO 0
+#endif
 
 #endif /* NRFX_CONFIG_COMMON_H__ */
