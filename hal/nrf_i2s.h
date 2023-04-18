@@ -211,11 +211,17 @@ typedef struct
 /** @brief I2S pins. */
 typedef struct
 {
-    uint32_t sck_pin;   /**< SCK pin number. */
-    uint32_t lrck_pin;  /**< LRCK pin number. */
-    uint32_t mck_pin;   /**< MCK pin number. Optional. */
-    uint32_t sdout_pin; /**< SDOUT pin number. Optional. */
-    uint32_t sdin_pin;  /**< SDIN pin number. Optional. */
+    uint32_t sck_pin;   ///< SCK pin number.
+    uint32_t lrck_pin;  ///< LRCK pin number.
+    uint32_t mck_pin;   ///< MCK pin number.
+                        /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                         *   if this signal is not needed. */
+    uint32_t sdout_pin; ///< SDOUT pin number.
+                        /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                         *   if this signal is not needed. */
+    uint32_t sdin_pin;  ///< SDIN pin number.
+                        /**< Optional. Use @ref NRF_I2S_PIN_NOT_CONNECTED
+                         *   if this signal is not needed. */
 } nrf_i2s_pins_t;
 
 /**
