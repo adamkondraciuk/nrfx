@@ -19,8 +19,8 @@ extern "C" {
 /** @brief VREGUSB tasks. */
 typedef enum
 {
-    NRF_VREGMRAM_TASK_START = offsetof(NRF_VREGUSB_Type, TASKS_START), /**< Request power up of USB PM. */
-    NRF_VREGMRAM_TASK_STOP  = offsetof(NRF_VREGUSB_Type, TASKS_STOP),  /**< Stop requesting power up for USB PM. */
+    NRF_VREGUSB_TASK_START = offsetof(NRF_VREGUSB_Type, TASKS_START), /**< Request power up of USB PM. */
+    NRF_VREGUSB_TASK_STOP  = offsetof(NRF_VREGUSB_Type, TASKS_STOP),  /**< Stop requesting power up for USB PM. */
 } nrf_vregusb_task_t;
 
 /** @brief VREGUSB events. */
@@ -90,6 +90,26 @@ typedef struct
     bool test_vbus_det;  /**< Controls VBUS det test. */
     bool test_ibp;       /**< Controls IBP test. */
 } nrf_vregusb_tcfg_t;
+
+/**
+ * @brief Function for activating the specified VREGUSB task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task to be activated.
+ */
+NRF_STATIC_INLINE void nrf_vregusb_task_trigger(NRF_VREGUSB_Type * p_reg,
+                                                nrf_vregusb_task_t task);
+
+/**
+ * @brief Function for getting the address of the specified VREGUSB task register.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  The specified task.
+ *
+ * @return Address of the specified task register.
+ */
+NRF_STATIC_INLINE uint32_t nrf_vregusb_task_address_get(NRF_VREGUSB_Type const * p_reg,
+                                                        nrf_vregusb_task_t       task);
 
 /**
  * @brief Function for clearing the specified VREGUSB event.
@@ -194,7 +214,7 @@ NRF_STATIC_INLINE uint8_t nrf_vregusb_config_rdy_tim_get(NRF_VREGUSB_Type const 
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] val   From 0 (0us) to 8000 (500us).
  */
-NRF_STATIC_INLINE void nrf_vregusb_config_vbrft_set(NRF_VREGUSB_Type * p_reg, uint8_t val);
+NRF_STATIC_INLINE void nrf_vregusb_config_vbrft_set(NRF_VREGUSB_Type * p_reg, uint16_t val);
 
 /**
  * @brief Function for getting time from VBUSDETRAW until filtered VBUSDET.
@@ -203,7 +223,7 @@ NRF_STATIC_INLINE void nrf_vregusb_config_vbrft_set(NRF_VREGUSB_Type * p_reg, ui
  *
  * @return Time value.
  */
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_vbrft_get(NRF_VREGUSB_Type const * p_reg);
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_vbrft_get(NRF_VREGUSB_Type const * p_reg);
 
 /**
  * @brief Function for setting time from power up LDOs until ready.
@@ -228,7 +248,7 @@ NRF_STATIC_INLINE uint8_t nrf_vregusb_config_rdy_ldo_stim_get(NRF_VREGUSB_Type c
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] val   From 0 (0us) to 16000 (1000us).
  */
-NRF_STATIC_INLINE void nrf_vregusb_config_setl_0v8_tim_set(NRF_VREGUSB_Type * p_reg, uint8_t val);
+NRF_STATIC_INLINE void nrf_vregusb_config_setl_0v8_tim_set(NRF_VREGUSB_Type * p_reg, uint16_t val);
 
 /**
  * @brief Function for getting time from LDOs ready to SETTLED0v8.
@@ -237,7 +257,7 @@ NRF_STATIC_INLINE void nrf_vregusb_config_setl_0v8_tim_set(NRF_VREGUSB_Type * p_
  *
  * @return Time value.
  */
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_setl_0v8_tim_get(NRF_VREGUSB_Type const * p_reg);
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_setl_0v8_tim_get(NRF_VREGUSB_Type const * p_reg);
 
 /**
  * @brief Function for setting time from SETTLE0v8 to SETTLED3v3.
@@ -245,7 +265,7 @@ NRF_STATIC_INLINE uint8_t nrf_vregusb_config_setl_0v8_tim_get(NRF_VREGUSB_Type c
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] val   From 0 (0us) to 16000 (1000us).
  */
-NRF_STATIC_INLINE void nrf_vregusb_config_setl_3v3_tim_set(NRF_VREGUSB_Type * p_reg, uint8_t val);
+NRF_STATIC_INLINE void nrf_vregusb_config_setl_3v3_tim_set(NRF_VREGUSB_Type * p_reg, uint16_t val);
 
 /**
  * @brief Function for getting time from SETTLE0v8 to SETTLED3v3.
@@ -254,7 +274,7 @@ NRF_STATIC_INLINE void nrf_vregusb_config_setl_3v3_tim_set(NRF_VREGUSB_Type * p_
  *
  * @return Time value.
  */
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_setl_3v3_tim_get(NRF_VREGUSB_Type const * p_reg);
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_setl_3v3_tim_get(NRF_VREGUSB_Type const * p_reg);
 
 /**
  * @brief Function for setting USB PM internal 1.8V trim.
@@ -396,6 +416,18 @@ NRF_STATIC_INLINE void nrf_vregusb_dft_tcfg_config_set(NRF_VREGUSB_Type * p_reg,
 
 #ifndef NRF_DECLARE_ONLY
 
+NRF_STATIC_INLINE void nrf_vregusb_task_trigger(NRF_VREGUSB_Type * p_reg,
+                                                nrf_vregusb_task_t task)
+{
+    *((volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)task)) = 0x1UL;
+}
+
+NRF_STATIC_INLINE uint32_t nrf_vregusb_task_address_get(NRF_VREGUSB_Type const * p_reg,
+                                                        nrf_vregusb_task_t       task)
+{
+    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+}
+
 NRF_STATIC_INLINE void nrf_vregusb_event_clear(NRF_VREGUSB_Type *  p_reg,
                                                nrf_vregusb_event_t event)
 {
@@ -451,14 +483,14 @@ NRF_STATIC_INLINE uint8_t nrf_vregusb_config_rdy_tim_get(NRF_VREGUSB_Type const 
     return (uint8_t)p_reg->CONFIG.RDYTIM;
 }
 
-NRF_STATIC_INLINE void nrf_vregusb_config_vbrft_set(NRF_VREGUSB_Type * p_reg, uint8_t val)
+NRF_STATIC_INLINE void nrf_vregusb_config_vbrft_set(NRF_VREGUSB_Type * p_reg, uint16_t val)
 {
     p_reg->CONFIG.VBRFT = (uint32_t)val;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_vbrft_get(NRF_VREGUSB_Type const * p_reg)
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_vbrft_get(NRF_VREGUSB_Type const * p_reg)
 {
-    return (uint8_t)p_reg->CONFIG.VBRFT;
+    return (uint16_t)p_reg->CONFIG.VBRFT;
 }
 
 NRF_STATIC_INLINE void nrf_vregusb_config_rdy_ldo_stim_set(NRF_VREGUSB_Type * p_reg, uint8_t val)
@@ -471,24 +503,24 @@ NRF_STATIC_INLINE uint8_t nrf_vregusb_config_rdy_ldo_stim_get(NRF_VREGUSB_Type c
     return (uint8_t)p_reg->CONFIG.RDYLDOSTIM;
 }
 
-NRF_STATIC_INLINE void nrf_vregusb_config_setl_0v8_tim_set(NRF_VREGUSB_Type * p_reg, uint8_t val)
+NRF_STATIC_INLINE void nrf_vregusb_config_setl_0v8_tim_set(NRF_VREGUSB_Type * p_reg, uint16_t val)
 {
     p_reg->CONFIG.SETL0V8TIM = (uint32_t)val;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_setl_0v8_tim_get(NRF_VREGUSB_Type const * p_reg)
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_setl_0v8_tim_get(NRF_VREGUSB_Type const * p_reg)
 {
-    return (uint8_t)p_reg->CONFIG.SETL0V8TIM;
+    return (uint16_t)p_reg->CONFIG.SETL0V8TIM;
 }
 
-NRF_STATIC_INLINE void nrf_vregusb_config_setl_3v3_tim_set(NRF_VREGUSB_Type * p_reg, uint8_t val)
+NRF_STATIC_INLINE void nrf_vregusb_config_setl_3v3_tim_set(NRF_VREGUSB_Type * p_reg, uint16_t val)
 {
     p_reg->CONFIG.SETL3V3TIM = (uint32_t)val;
 }
 
-NRF_STATIC_INLINE uint8_t nrf_vregusb_config_setl_3v3_tim_get(NRF_VREGUSB_Type const * p_reg)
+NRF_STATIC_INLINE uint16_t nrf_vregusb_config_setl_3v3_tim_get(NRF_VREGUSB_Type const * p_reg)
 {
-    return (uint8_t)p_reg->CONFIG.SETL3V3TIM;
+    return (uint16_t)p_reg->CONFIG.SETL3V3TIM;
 }
 
 NRF_STATIC_INLINE void nrf_vregusb_trim_vdd_set(NRF_VREGUSB_Type * p_reg, uint8_t val)
