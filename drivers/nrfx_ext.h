@@ -13,9 +13,11 @@ extern "C" {
 /* Start of Auxiliary Extended section                                                            */
 /*------------------------------------------------------------------------------------------------*/
 
+#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
+    typedef NRF_OWNERID_Type     nrf_owner_t;
+#endif
 #if defined(HALTIUM_XXAA)
     typedef NRF_DOMAINID_Type    nrf_domain_t;
-    typedef NRF_OWNERID_Type     nrf_owner_t;
     typedef NRF_PROCESSORID_Type nrf_processor_t;
 
     #define NRF_DMA_ACCESS_EXT                                                \

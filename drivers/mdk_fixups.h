@@ -2384,6 +2384,12 @@
     /* TODO: HM-20336 */
     #define SAADC_CH_NUM 8
 
+    typedef enum {
+        NRF_OWNER_NONE            = 0,
+        NRF_OWNER_APPLICATION     = 1,
+        NRF_OWNER_KMU             = 2,
+    } NRF_OWNERID_Type;
+
     /* PIN @Bits 0..4 : Analog positive input pin select */
     #define SAADC_CH_PSELP_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
     #define SAADC_CH_PSELP_PIN_Msk (0x1FUL << SAADC_CH_PSELP_PIN_Pos) /*!< Bit mask of PIN field.                                */
