@@ -44,8 +44,8 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   43 
-#define MDK_MICRO_VERSION   0 
+#define MDK_MINOR_VERSION   44 
+#define MDK_MICRO_VERSION   2 
 
 
 /* Define coprocessor domains */
@@ -172,14 +172,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #include "nrf5001.h"
     #endif
     #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5001_bitfields.h"
+        #include "nrf5001_types.h"
     #endif
 #elif defined (NRF5002_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "nrf5002.h"
     #endif
     #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5002_bitfields.h"
+        #include "nrf5002_types.h"
     #endif
 
 #elif defined (NRF5002_XXAA)
@@ -310,14 +310,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         #endif
     #elif defined (NRF_NETWORK)
         #if !defined(EXCLUDE_HEADER)
-        #include "nrf5340_network.h"
+            #include "nrf5340_network.h"
         #endif
         #if !defined(EXCLUDE_BITFIELDS)
-        #include "nrf5340_network_bitfields.h"
+            #include "nrf5340_network_bitfields.h"
         #endif
         #if !defined(EXCLUDE_PORTABILITY)
-        #include "nrf5340_network_name_change.h"
-    #endif
+            #include "nrf5340_network_name_change.h"
+        #endif
     #endif
 
 #elif defined (LILIUM_XXAA)

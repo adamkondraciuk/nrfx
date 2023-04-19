@@ -81,23 +81,29 @@ typedef enum {
   WDT011_IRQn                            = 21,       /*!< 21 WDT011                                                            */
   ABB_IRQn                               = 28,       /*!< 28 ABB                                                               */
   LRCCONF010_IRQn                        = 30,       /*!< 30 LRCCONF010                                                        */
-  IPCT_0_IRQn                             = 64,       /*!< 64 IPCT0                                                             */
-  IPCT_1_IRQn                             = 65,       /*!< 65 IPCT1                                                             */
-  BELLBOARD_0_IRQn                        = 96,       /*!< 96 BELLBOARD0                                                        */
-  BELLBOARD_1_IRQn                        = 97,       /*!< 97 BELLBOARD1                                                        */
-  BELLBOARD_2_IRQn                        = 98,       /*!< 98 BELLBOARD2                                                        */
-  BELLBOARD_3_IRQn                        = 99,       /*!< 99 BELLBOARD3                                                        */
-  GPIOTE130_0_IRQn                        = 104,      /*!< 104 GPIOTE1300                                                       */
-  GPIOTE130_1_IRQn                        = 105,      /*!< 105 GPIOTE1301                                                       */
-  GPIOTE131_0_IRQn                        = 106,      /*!< 106 GPIOTE1310                                                       */
-  GPIOTE131_1_IRQn                        = 107,      /*!< 107 GPIOTE1311                                                       */
-  GRTC_0_IRQn                             = 108,      /*!< 108 GRTC0                                                            */
-  GRTC_1_IRQn                             = 109,      /*!< 109 GRTC1                                                            */
+  IPCT_0_IRQn                            = 64,       /*!< 64 IPCT0_0                                                           */
+  IPCT_1_IRQn                            = 65,       /*!< 65 IPCT0_1                                                           */
+  BELLBOARD_0_IRQn                       = 96,       /*!< 96 BELLBOARD0_0                                                      */
+  BELLBOARD_1_IRQn                       = 97,       /*!< 97 BELLBOARD0_1                                                      */
+  BELLBOARD_2_IRQn                       = 98,       /*!< 98 BELLBOARD0_2                                                      */
+  BELLBOARD_3_IRQn                       = 99,       /*!< 99 BELLBOARD0_3                                                      */
+  GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE1300_0                                                     */
+  GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE1300_1                                                     */
+  GPIOTE131_0_IRQn                       = 106,      /*!< 106 GPIOTE1310_0                                                     */
+  GPIOTE131_1_IRQn                       = 107,      /*!< 107 GPIOTE1310_1                                                     */
+  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC0_0                                                          */
+  GRTC_1_IRQn                            = 109,      /*!< 109 GRTC0_1                                                          */
+  TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
+  MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
   CANPLL_CANPLLPM_IRQn                   = 194,      /*!< 194 CANPLL_CANPLLPM                                                  */
-  IPCT120_0_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
+  OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
+  VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
+  IPCT120_IRQn                           = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
+  VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
   CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
@@ -107,7 +113,8 @@ typedef enum {
   SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
-  IPCT130_0_IRQn                          = 289,      /*!< 289 IPCT1300                                                         */
+  VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
+  IPCT130_IRQn                           = 289,      /*!< 289 IPCT1300                                                         */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
   RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
   WDT131_IRQn                            = 299,      /*!< 299 WDT131                                                           */
@@ -123,7 +130,7 @@ typedef enum {
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF_IRQn                             = 406,      /*!< 406 SIMIF                                                            */
   I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
-  MIPIRFFE_IRQn                          = 408,      /*!< 408 MIPIRFFE                                                         */
+  MIPIRFFE_IRQn                          = 411,      /*!< 411 MIPIRFFE                                                         */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
   PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
@@ -207,7 +214,6 @@ typedef enum {
 #define NRF_APPLICATION_ICACHEINFO_S_BASE 0x12F10000UL
 #define NRF_APPLICATION_DCACHEDATA_S_BASE 0x32F00000UL
 #define NRF_APPLICATION_DCACHEINFO_S_BASE 0x32F10000UL
-#define NRF_APPLICATION_STMESP_NS_BASE    0xA2000000UL
 #define NRF_APPLICATION_ETM_NS_BASE       0xE0041000UL
 #define NRF_APPLICATION_CTI_S_BASE        0xE0042000UL
 #define NRF_APPLICATION_CPUC_S_BASE       0xE0080000UL
@@ -253,7 +259,6 @@ typedef enum {
 #define NRF_APPLICATION_ICACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_ICACHEINFO_S_BASE)
 #define NRF_APPLICATION_DCACHEDATA_S      ((NRF_CACHEDATA_Type*)                NRF_APPLICATION_DCACHEDATA_S_BASE)
 #define NRF_APPLICATION_DCACHEINFO_S      ((NRF_CACHEINFO_Type*)                NRF_APPLICATION_DCACHEINFO_S_BASE)
-#define NRF_APPLICATION_STMESP_NS         ((NRF_STMESP_Type*)                   NRF_APPLICATION_STMESP_NS_BASE)
 #define NRF_APPLICATION_ETM_NS            ((NRF_ETM_Type*)                      NRF_APPLICATION_ETM_NS_BASE)
 #define NRF_APPLICATION_CTI_S             ((NRF_CTI_Type*)                      NRF_APPLICATION_CTI_S_BASE)
 #define NRF_APPLICATION_CPUC_S            ((NRF_CM33SS_Type*)                   NRF_APPLICATION_CPUC_S_BASE)
@@ -296,7 +301,6 @@ typedef enum {
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
-  #define NRF_APPLICATION_STMESP                  NRF_APPLICATION_STMESP_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_MVDMA                   NRF_APPLICATION_MVDMA_NS
   #define NRF_APPLICATION_RAMC                    NRF_APPLICATION_RAMC_NS
@@ -313,7 +317,6 @@ typedef enum {
   #define NRF_APPLICATION_ICACHEINFO              NRF_APPLICATION_ICACHEINFO_S
   #define NRF_APPLICATION_DCACHEDATA              NRF_APPLICATION_DCACHEDATA_S
   #define NRF_APPLICATION_DCACHEINFO              NRF_APPLICATION_DCACHEINFO_S
-  #define NRF_APPLICATION_STMESP                  NRF_APPLICATION_STMESP_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
   #define NRF_APPLICATION_CTI                     NRF_APPLICATION_CTI_S
   #define NRF_APPLICATION_CPUC                    NRF_APPLICATION_CPUC_S
@@ -353,7 +356,6 @@ typedef enum {
   #define NRF_ICACHEINFO                          NRF_APPLICATION_ICACHEINFO
   #define NRF_DCACHEDATA                          NRF_APPLICATION_DCACHEDATA
   #define NRF_DCACHEINFO                          NRF_APPLICATION_DCACHEINFO
-  #define NRF_STMESP                              NRF_APPLICATION_STMESP
   #define NRF_ETM                                 NRF_APPLICATION_ETM
   #define NRF_CTI                                 NRF_APPLICATION_CTI
   #define NRF_CPUC                                NRF_APPLICATION_CPUC

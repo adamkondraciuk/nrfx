@@ -22,7 +22,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 #ifndef SYSTEM_HALTIUM_FLPR_H
 #define SYSTEM_HALTIUM_FLPR_H
-
+#ifndef __ASSEMBLY__
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -59,4 +59,5 @@ extern void SystemCoreClockUpdate (void);
 }
 #endif
 
+#endif /* __ASSEMBLY__ */
 #endif /* SYSTEM_HALTIUM_FLPR_H */

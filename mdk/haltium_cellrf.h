@@ -85,16 +85,16 @@ typedef enum {
   MVDMA_IRQn                             = 20,       /*!< 20 MVDMA                                                             */
   GPIOTE_1_GD_IRQn                       = 21,       /*!< 21 GPIOTE_1_GD                                                       */
   MIPIRFFE_GD_IRQn                       = 22,       /*!< 22 MIPIRFFE_GD                                                       */
-  BELLBOARD_0_IRQn                      = 23,       /*!< 23 BELLBOARD0_0                                                      */
-  BELLBOARD_1_IRQn                      = 24,       /*!< 24 BELLBOARD0_1                                                      */
-  BELLBOARD_2_IRQn                      = 25,       /*!< 25 BELLBOARD0_2                                                      */
-  BELLBOARD_3_IRQn                      = 26,       /*!< 26 BELLBOARD0_3                                                      */
-  IPCT_0_IRQn                           = 27,       /*!< 27 IPCT0_0                                                           */
-  IPCT_1_IRQn                           = 28,       /*!< 28 IPCT0_1                                                           */
-  IPCT_2_IRQn                           = 29,       /*!< 29 IPCT0_2                                                           */
-  IPCT_3_IRQn                           = 30,       /*!< 30 IPCT0_3                                                           */
-  IPCT_4_IRQn                           = 31,       /*!< 31 IPCT0_4                                                           */
-  IPCT_5_IRQn                           = 32,       /*!< 32 IPCT0_5                                                           */
+  BELLBOARD_0_IRQn                       = 23,       /*!< 23 BELLBOARD0_0                                                      */
+  BELLBOARD_1_IRQn                       = 24,       /*!< 24 BELLBOARD0_1                                                      */
+  BELLBOARD_2_IRQn                       = 25,       /*!< 25 BELLBOARD0_2                                                      */
+  BELLBOARD_3_IRQn                       = 26,       /*!< 26 BELLBOARD0_3                                                      */
+  IPCT_0_IRQn                            = 27,       /*!< 27 IPCT0_0                                                           */
+  IPCT_1_IRQn                            = 28,       /*!< 28 IPCT0_1                                                           */
+  IPCT_2_IRQn                            = 29,       /*!< 29 IPCT0_2                                                           */
+  IPCT_3_IRQn                            = 30,       /*!< 30 IPCT0_3                                                           */
+  IPCT_4_IRQn                            = 31,       /*!< 31 IPCT0_4                                                           */
+  IPCT_5_IRQn                            = 32,       /*!< 32 IPCT0_5                                                           */
   RAMCTX_IRQn                            = 81,       /*!< 81 RAMCTX                                                            */
   RAMCRX_IRQn                            = 82,       /*!< 82 RAMCRX                                                            */
   LRCCONF2_IRQn                          = 84,       /*!< 84 LRCCONF2                                                          */
@@ -156,7 +156,6 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLRF_STMESP_BASE            0xA6000000UL
 #define NRF_CELLRF_HSFLL_BASE             0x46008000UL
 #define NRF_CELLRF_RFTIMERTX_BASE         0x46021000UL
 #define NRF_CELLRF_RFTIMERRX_BASE         0x46032000UL
@@ -203,7 +202,6 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLRF_STMESP                 ((NRF_STMESP_Type*)                   NRF_CELLRF_STMESP_BASE)
 #define NRF_CELLRF_HSFLL                  ((NRF_HSFLL_Type*)                    NRF_CELLRF_HSFLL_BASE)
 #define NRF_CELLRF_RFTIMERTX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERTX_BASE)
 #define NRF_CELLRF_RFTIMERRX              ((NRF_RFTIMER_Type*)                  NRF_CELLRF_RFTIMERRX_BASE)
@@ -251,7 +249,6 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLRF                                    /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_STMESP                              NRF_CELLRF_STMESP
   #define NRF_HSFLL                               NRF_CELLRF_HSFLL
   #define NRF_RFTIMERTX                           NRF_CELLRF_RFTIMERTX
   #define NRF_RFTIMERRX                           NRF_CELLRF_RFTIMERRX

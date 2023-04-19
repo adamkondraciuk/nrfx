@@ -75,28 +75,34 @@ typedef enum {
   HARQ4_LRCCONF1_LTEFE6_VITERBI3_IRQn    = 16,       /*!< 16 HARQ4_LRCCONF1_LTEFE6_VITERBI3                                    */
   HARQ5_LTEFE7_IRQn                      = 17,       /*!< 17 HARQ5_LTEFE7                                                      */
   HARQ6_LTEFE8_IRQn                      = 18,       /*!< 18 HARQ6_LTEFE8                                                      */
-  HARQ7_IPCT_0_LTEFE9_IRQn              = 19,       /*!< 19 HARQ7_IPCT0_0_LTEFE9                                              */
-  IPCT_1_LTEFE10_IRQn                   = 20,       /*!< 20 IPCT0_1_LTEFE10                                                   */
-  IPCT_2_LTEFE11_IRQn                   = 21,       /*!< 21 IPCT0_2_LTEFE11                                                   */
+  HARQ7_IPCT0_0_LTEFE9_IRQn              = 19,       /*!< 19 HARQ7_IPCT0_0_LTEFE9                                              */
+  IPCT_1_LTEFE10_IRQn                    = 20,       /*!< 20 IPCT0_1_LTEFE10                                                   */
+  IPCT_2_LTEFE11_IRQn                    = 21,       /*!< 21 IPCT0_2_LTEFE11                                                   */
   LTEFE12_IRQn                           = 22,       /*!< 22 LTEFE12                                                           */
   LTEFE13_IRQn                           = 23,       /*!< 23 LTEFE13                                                           */
   LTEFE14_IRQn                           = 24,       /*!< 24 LTEFE14                                                           */
   LTEFE15_IRQn                           = 25,       /*!< 25 LTEFE15                                                           */
-  BELLBOARD_0_IRQn                      = 96,       /*!< 96 BELLBOARD0_0                                                      */
-  BELLBOARD_1_IRQn                      = 97,       /*!< 97 BELLBOARD0_1                                                      */
-  BELLBOARD_2_IRQn                      = 98,       /*!< 98 BELLBOARD0_2                                                      */
-  BELLBOARD_3_IRQn                      = 99,       /*!< 99 BELLBOARD0_3                                                      */
-  GPIOTE130_0_IRQn                      = 104,      /*!< 104 GPIOTE1300_0                                                     */
-  GPIOTE130_1_IRQn                      = 105,      /*!< 105 GPIOTE1300_1                                                     */
-  GPIOTE131_0_IRQn                      = 106,      /*!< 106 GPIOTE1310_0                                                     */
-  GPIOTE131_1_IRQn                      = 107,      /*!< 107 GPIOTE1310_1                                                     */
-  GRTC_0_IRQn                           = 108,      /*!< 108 GRTC0_0                                                          */
-  GRTC_1_IRQn                           = 109,      /*!< 109 GRTC0_1                                                          */
+  BELLBOARD_0_IRQn                       = 96,       /*!< 96 BELLBOARD0_0                                                      */
+  BELLBOARD_1_IRQn                       = 97,       /*!< 97 BELLBOARD0_1                                                      */
+  BELLBOARD_2_IRQn                       = 98,       /*!< 98 BELLBOARD0_2                                                      */
+  BELLBOARD_3_IRQn                       = 99,       /*!< 99 BELLBOARD0_3                                                      */
+  GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE1300_0                                                     */
+  GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE1300_1                                                     */
+  GPIOTE131_0_IRQn                       = 106,      /*!< 106 GPIOTE1310_0                                                     */
+  GPIOTE131_1_IRQn                       = 107,      /*!< 107 GPIOTE1310_1                                                     */
+  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC0_0                                                          */
+  GRTC_1_IRQn                            = 109,      /*!< 109 GRTC0_1                                                          */
+  TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
+  MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
   CANPLL_CANPLLPM_IRQn                   = 194,      /*!< 194 CANPLL_CANPLLPM                                                  */
+  OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
+  VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
+  VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
   CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
@@ -106,6 +112,7 @@ typedef enum {
   SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
+  VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT1300_IRQn                          = 289,      /*!< 289 IPCT1300                                                         */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
   RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
@@ -122,7 +129,7 @@ typedef enum {
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF_IRQn                             = 406,      /*!< 406 SIMIF                                                            */
   I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
-  MIPIRFFE_IRQn                          = 408,      /*!< 408 MIPIRFFE                                                         */
+  MIPIRFFE_IRQn                          = 411,      /*!< 411 MIPIRFFE                                                         */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
   PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
@@ -195,7 +202,6 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLDSP_STMESP_BASE           0xA5000000UL
 #define NRF_CELLDSP_LSTMDATA_BASE         0x26000000UL
 #define NRF_CELLDSP_HSFLL_BASE            0x45000000UL
 #define NRF_CELLDSP_LRCCONF0_BASE         0x45001000UL
@@ -233,7 +239,6 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_CELLDSP_STMESP                ((NRF_STMESP_Type*)                   NRF_CELLDSP_STMESP_BASE)
 #define NRF_CELLDSP_LSTMDATA              ((NRF_STMDATA_Type*)                  NRF_CELLDSP_LSTMDATA_BASE)
 #define NRF_CELLDSP_HSFLL                 ((NRF_HSFLL_Type*)                    NRF_CELLDSP_HSFLL_BASE)
 #define NRF_CELLDSP_LRCCONF0              ((NRF_LRCCONF_Type*)                  NRF_CELLDSP_LRCCONF0_BASE)
@@ -272,7 +277,6 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_CELLDSP                                   /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
-  #define NRF_STMESP                              NRF_CELLDSP_STMESP
   #define NRF_LSTMDATA                            NRF_CELLDSP_LSTMDATA
   #define NRF_HSFLL                               NRF_CELLDSP_HSFLL
   #define NRF_LRCCONF0                            NRF_CELLDSP_LRCCONF0

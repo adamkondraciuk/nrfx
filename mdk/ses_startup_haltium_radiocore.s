@@ -144,7 +144,7 @@ _vectors:
   EXC_HANDLER   MemoryManagement_Handler
   EXC_HANDLER   BusFault_Handler
   EXC_HANDLER   UsageFault_Handler
-  ISR_RESERVED                           /*Reserved */
+  EXC_HANDLER   SecureFault_Handler
   ISR_RESERVED                           /*Reserved */
   ISR_RESERVED                           /*Reserved */
   ISR_RESERVED                           /*Reserved */
@@ -168,7 +168,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   HSFLL_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   SPU010_IRQHandler
@@ -207,7 +207,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   RADIOACC_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   VPR_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -259,9 +259,9 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   GPIOTE1300_0_IRQHandler
-  ISR_HANDLER   GPIOTE1300_1_IRQHandler
-  ISR_HANDLER   GPIOTE1310_0_IRQHandler
+  ISR_HANDLER   GPIOTE130_0_IRQHandler
+  ISR_HANDLER   GPIOTE130_1_IRQHandler
+  ISR_HANDLER   GPIOTE131_0_IRQHandler
   ISR_HANDLER   GPIOTE1310_1_IRQHandler
   ISR_HANDLER   GRTC0_0_IRQHandler
   ISR_HANDLER   GRTC0_1_IRQHandler
@@ -282,7 +282,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   TBM_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -301,8 +301,8 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   MRAMC110_IRQHandler
+  ISR_HANDLER   MRAMC111_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   EXMIF_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -352,6 +352,10 @@ _vectors:
   ISR_HANDLER   CANPLL_CANPLLPM_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   OTPC_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   VPR120_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -360,14 +364,10 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   IPCT1200_IRQHandler
+  ISR_HANDLER   IPCT120_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   I3C120_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   VPR121_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -419,6 +419,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_HANDLER   VPR130_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -443,8 +444,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_HANDLER   IPCT1300_IRQHandler
+  ISR_HANDLER   IPCT130_IRQHandler
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
@@ -563,10 +563,10 @@ _vectors:
   ISR_HANDLER   QDEC131_IRQHandler
   ISR_HANDLER   SIMIF_IRQHandler
   ISR_HANDLER   I2S131_IRQHandler
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
+  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_HANDLER   MIPIRFFE_IRQHandler
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
-  ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */
   ISR_RESERVED_DUMMY                           /*Reserved */

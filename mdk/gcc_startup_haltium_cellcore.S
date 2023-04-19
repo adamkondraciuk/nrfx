@@ -91,8 +91,8 @@ __isr_vector:
 
   /* External Interrupts */
     .long   SPU0_IRQHandler
-    .long   HSFLL_IRQHandler
-    .long   LRCCONF0_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   MPC_IRQHandler
     .long   AXI_IRQHandler
     .long   MVDMA_IRQHandler
@@ -107,7 +107,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   SPU1_IRQHandler
-    .long   LRCCONF1_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -139,7 +139,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   SPU3_IRQHandler
-    .long   LRCCONF3_IRQHandler
+    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -154,10 +154,10 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   IPCT0_IRQHandler
-    .long   IPCT1_IRQHandler
-    .long   IPCT2_IRQHandler
-    .long   IPCT3_IRQHandler
+    .long   IPCT0_0_IRQHandler
+    .long   IPCT0_1_IRQHandler
+    .long   IPCT0_2_IRQHandler
+    .long   IPCT0_3_IRQHandler
     .long   SYSTEMTIMER0_IRQHandler
     .long   SYSTEMTIMER1_IRQHandler
     .long   LTETIMER0_IRQHandler
@@ -186,25 +186,20 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   BELLBOARD0_IRQHandler
-    .long   BELLBOARD1_IRQHandler
-    .long   BELLBOARD2_IRQHandler
-    .long   BELLBOARD3_IRQHandler
+    .long   BELLBOARD0_0_IRQHandler
+    .long   BELLBOARD0_1_IRQHandler
+    .long   BELLBOARD0_2_IRQHandler
+    .long   BELLBOARD0_3_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   GPIOTE1300_IRQHandler
-    .long   GPIOTE1301_IRQHandler
-    .long   GPIOTE1310_IRQHandler
-    .long   GPIOTE1311_IRQHandler
-    .long   GRTC0_IRQHandler
-    .long   GRTC1_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   GPIOTE130_0_IRQHandler
+    .long   GPIOTE130_1_IRQHandler
+    .long   GPIOTE131_0_IRQHandler
+    .long   GPIOTE1310_1_IRQHandler
+    .long   GRTC0_0_IRQHandler
+    .long   GRTC0_1_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -218,6 +213,11 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   TBM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -236,8 +236,8 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
+    .long   MRAMC110_IRQHandler
+    .long   MRAMC111_IRQHandler
     .long   0                           /*Reserved */
     .long   EXMIF_IRQHandler
     .long   0                           /*Reserved */
@@ -287,6 +287,10 @@ __isr_vector:
     .long   CANPLL_CANPLLPM_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   OTPC_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   VPR120_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -295,14 +299,10 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   IPCT1200_IRQHandler
+    .long   IPCT120_IRQHandler
     .long   0                           /*Reserved */
     .long   I3C120_IRQHandler
-    .long   0                           /*Reserved */
+    .long   VPR121_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -354,6 +354,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
+    .long   VPR130_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -378,8 +379,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   IPCT1300_IRQHandler
+    .long   IPCT130_IRQHandler
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -498,10 +498,10 @@ __isr_vector:
     .long   QDEC131_IRQHandler
     .long   SIMIF_IRQHandler
     .long   I2S131_IRQHandler
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
+    .long   0                           /*Reserved */
     .long   MIPIRFFE_IRQHandler
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
-    .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
     .long   0                           /*Reserved */
@@ -734,8 +734,6 @@ Default_Handler:
     .endm
 
     IRQ  SPU0_IRQHandler
-    IRQ  HSFLL_IRQHandler
-    IRQ  LRCCONF0_IRQHandler
     IRQ  MPC_IRQHandler
     IRQ  AXI_IRQHandler
     IRQ  MVDMA_IRQHandler
@@ -743,40 +741,44 @@ Default_Handler:
     IRQ  SNOW_IRQHandler
     IRQ  ZUC_IRQHandler
     IRQ  SPU1_IRQHandler
-    IRQ  LRCCONF1_IRQHandler
     IRQ  WDT0_IRQHandler
     IRQ  WDT1_IRQHandler
     IRQ  RTC_IRQHandler
     IRQ  SPU2_IRQHandler
     IRQ  LFCLKCALIBMEAS_IRQHandler
     IRQ  SPU3_IRQHandler
-    IRQ  LRCCONF3_IRQHandler
     IRQ  MCPLL_IRQHandler
-    IRQ  IPCT0_IRQHandler
-    IRQ  IPCT1_IRQHandler
-    IRQ  IPCT2_IRQHandler
-    IRQ  IPCT3_IRQHandler
+    IRQ  IPCT0_0_IRQHandler
+    IRQ  IPCT0_1_IRQHandler
+    IRQ  IPCT0_2_IRQHandler
+    IRQ  IPCT0_3_IRQHandler
     IRQ  SYSTEMTIMER0_IRQHandler
     IRQ  SYSTEMTIMER1_IRQHandler
     IRQ  LTETIMER0_IRQHandler
     IRQ  LTETIMER1_IRQHandler
     IRQ  GNSSTIMER0_IRQHandler
     IRQ  GNSSTIMER1_IRQHandler
-    IRQ  BELLBOARD0_IRQHandler
-    IRQ  BELLBOARD1_IRQHandler
-    IRQ  BELLBOARD2_IRQHandler
-    IRQ  BELLBOARD3_IRQHandler
-    IRQ  GPIOTE1300_IRQHandler
-    IRQ  GPIOTE1301_IRQHandler
-    IRQ  GPIOTE1310_IRQHandler
-    IRQ  GPIOTE1311_IRQHandler
-    IRQ  GRTC0_IRQHandler
-    IRQ  GRTC1_IRQHandler
+    IRQ  BELLBOARD0_0_IRQHandler
+    IRQ  BELLBOARD0_1_IRQHandler
+    IRQ  BELLBOARD0_2_IRQHandler
+    IRQ  BELLBOARD0_3_IRQHandler
+    IRQ  GPIOTE130_0_IRQHandler
+    IRQ  GPIOTE130_1_IRQHandler
+    IRQ  GPIOTE131_0_IRQHandler
+    IRQ  GPIOTE1310_1_IRQHandler
+    IRQ  GRTC0_0_IRQHandler
+    IRQ  GRTC0_1_IRQHandler
+    IRQ  TBM_IRQHandler
     IRQ  USBHS_IRQHandler
+    IRQ  MRAMC110_IRQHandler
+    IRQ  MRAMC111_IRQHandler
     IRQ  EXMIF_IRQHandler
     IRQ  CANPLL_CANPLLPM_IRQHandler
-    IRQ  IPCT1200_IRQHandler
+    IRQ  OTPC_IRQHandler
+    IRQ  VPR120_IRQHandler
+    IRQ  IPCT120_IRQHandler
     IRQ  I3C120_IRQHandler
+    IRQ  VPR121_IRQHandler
     IRQ  CAN_IRQHandler
     IRQ  I3C121_IRQHandler
     IRQ  TIMER120_IRQHandler
@@ -786,7 +788,8 @@ Default_Handler:
     IRQ  SPIM120_IRQHandler
     IRQ  SPIM121_IRQHandler
     IRQ  TWIM120_IRQHandler
-    IRQ  IPCT1300_IRQHandler
+    IRQ  VPR130_IRQHandler
+    IRQ  IPCT130_IRQHandler
     IRQ  RTC130_IRQHandler
     IRQ  RTC131_IRQHandler
     IRQ  WDT131_IRQHandler

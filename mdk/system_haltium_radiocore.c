@@ -34,7 +34,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #define __SYSTEM_CLOCK      (256000000UL)
 
 #if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
 #elif defined ( __ICCARM__ )
     __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
 #elif defined   ( __GNUC__ )

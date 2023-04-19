@@ -67,49 +67,55 @@ typedef enum {
   MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
   CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  VPR_0_IRQn                            = 0,        /*!< 0 VPR0_0                                                             */
-  VPR_1_IRQn                            = 1,        /*!< 1 VPR0_1                                                             */
-  VPR_2_IRQn                            = 2,        /*!< 2 VPR0_2                                                             */
-  VPR_3_IRQn                            = 3,        /*!< 3 VPR0_3                                                             */
-  VPR_4_IRQn                            = 4,        /*!< 4 VPR0_4                                                             */
-  VPR_5_IRQn                            = 5,        /*!< 5 VPR0_5                                                             */
-  VPR_6_IRQn                            = 6,        /*!< 6 VPR0_6                                                             */
-  VPR_7_IRQn                            = 7,        /*!< 7 VPR0_7                                                             */
-  VPR_8_IRQn                            = 8,        /*!< 8 VPR0_8                                                             */
-  VPR_9_IRQn                            = 9,        /*!< 9 VPR0_9                                                             */
-  VPR_10_IRQn                           = 10,       /*!< 10 VPR0_10                                                           */
-  VPR_11_IRQn                           = 11,       /*!< 11 VPR0_11                                                           */
-  VPR_12_IRQn                           = 12,       /*!< 12 VPR0_12                                                           */
-  VPR_13_IRQn                           = 13,       /*!< 13 VPR0_13                                                           */
-  VPR_14_IRQn                           = 14,       /*!< 14 VPR0_14                                                           */
-  VPR_15_IRQn                           = 15,       /*!< 15 VPR0_15                                                           */
-  VPR_16_IRQn                           = 16,       /*!< 16 VPR0_16                                                           */
-  VPR_17_IRQn                           = 17,       /*!< 17 VPR0_17                                                           */
-  VPR_18_IRQn                           = 18,       /*!< 18 VPR0_18                                                           */
-  VPR_19_IRQn                           = 19,       /*!< 19 VPR0_19                                                           */
-  VPR_20_IRQn                           = 20,       /*!< 20 VPR0_20                                                           */
-  VPR_21_IRQn                           = 21,       /*!< 21 VPR0_21                                                           */
-  VPR_22_IRQn                           = 22,       /*!< 22 VPR0_22                                                           */
-  VPR_23_IRQn                           = 23,       /*!< 23 VPR0_23                                                           */
-  VPR_24_IRQn                           = 24,       /*!< 24 VPR0_24                                                           */
-  VPR_25_IRQn                           = 25,       /*!< 25 VPR0_25                                                           */
-  VPR_26_IRQn                           = 26,       /*!< 26 VPR0_26                                                           */
-  VPR_27_IRQn                           = 27,       /*!< 27 VPR0_27                                                           */
-  VPR_28_IRQn                           = 28,       /*!< 28 VPR0_28                                                           */
-  VPR_29_IRQn                           = 29,       /*!< 29 VPR0_29                                                           */
-  VPR_30_IRQn                           = 30,       /*!< 30 VPR0_30                                                           */
-  VPR_31_IRQn                           = 31,       /*!< 31 VPR0_31                                                           */
-  GPIOTE130_0_IRQn                      = 104,      /*!< 104 GPIOTE1300_0                                                     */
-  GPIOTE130_1_IRQn                      = 105,      /*!< 105 GPIOTE1300_1                                                     */
-  GPIOTE131_0_IRQn                      = 106,      /*!< 106 GPIOTE1310_0                                                     */
-  GPIOTE131_1_IRQn                      = 107,      /*!< 107 GPIOTE1310_1                                                     */
-  GRTC_0_IRQn                           = 108,      /*!< 108 GRTC0_0                                                          */
-  GRTC_1_IRQn                           = 109,      /*!< 109 GRTC0_1                                                          */
+  VPR_0_IRQn                             = 0,        /*!< 0 VPR0_0                                                             */
+  VPR_1_IRQn                             = 1,        /*!< 1 VPR0_1                                                             */
+  VPR_2_IRQn                             = 2,        /*!< 2 VPR0_2                                                             */
+  VPR_3_IRQn                             = 3,        /*!< 3 VPR0_3                                                             */
+  VPR_4_IRQn                             = 4,        /*!< 4 VPR0_4                                                             */
+  VPR_5_IRQn                             = 5,        /*!< 5 VPR0_5                                                             */
+  VPR_6_IRQn                             = 6,        /*!< 6 VPR0_6                                                             */
+  VPR_7_IRQn                             = 7,        /*!< 7 VPR0_7                                                             */
+  VPR_8_IRQn                             = 8,        /*!< 8 VPR0_8                                                             */
+  VPR_9_IRQn                             = 9,        /*!< 9 VPR0_9                                                             */
+  VPR_10_IRQn                            = 10,       /*!< 10 VPR0_10                                                           */
+  VPR_11_IRQn                            = 11,       /*!< 11 VPR0_11                                                           */
+  VPR_12_IRQn                            = 12,       /*!< 12 VPR0_12                                                           */
+  VPR_13_IRQn                            = 13,       /*!< 13 VPR0_13                                                           */
+  VPR_14_IRQn                            = 14,       /*!< 14 VPR0_14                                                           */
+  VPR_15_IRQn                            = 15,       /*!< 15 VPR0_15                                                           */
+  VPR_16_IRQn                            = 16,       /*!< 16 VPR0_16                                                           */
+  VPR_17_IRQn                            = 17,       /*!< 17 VPR0_17                                                           */
+  VPR_18_IRQn                            = 18,       /*!< 18 VPR0_18                                                           */
+  VPR_19_IRQn                            = 19,       /*!< 19 VPR0_19                                                           */
+  VPR_20_IRQn                            = 20,       /*!< 20 VPR0_20                                                           */
+  VPR_21_IRQn                            = 21,       /*!< 21 VPR0_21                                                           */
+  VPR_22_IRQn                            = 22,       /*!< 22 VPR0_22                                                           */
+  VPR_23_IRQn                            = 23,       /*!< 23 VPR0_23                                                           */
+  VPR_24_IRQn                            = 24,       /*!< 24 VPR0_24                                                           */
+  VPR_25_IRQn                            = 25,       /*!< 25 VPR0_25                                                           */
+  VPR_26_IRQn                            = 26,       /*!< 26 VPR0_26                                                           */
+  VPR_27_IRQn                            = 27,       /*!< 27 VPR0_27                                                           */
+  VPR_28_IRQn                            = 28,       /*!< 28 VPR0_28                                                           */
+  VPR_29_IRQn                            = 29,       /*!< 29 VPR0_29                                                           */
+  VPR_30_IRQn                            = 30,       /*!< 30 VPR0_30                                                           */
+  VPR_31_IRQn                            = 31,       /*!< 31 VPR0_31                                                           */
+  GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE1300_0                                                     */
+  GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE1300_1                                                     */
+  GPIOTE131_0_IRQn                       = 106,      /*!< 106 GPIOTE1310_0                                                     */
+  GPIOTE131_1_IRQn                       = 107,      /*!< 107 GPIOTE1310_1                                                     */
+  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC0_0                                                          */
+  GRTC_1_IRQn                            = 109,      /*!< 109 GRTC0_1                                                          */
+  TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
   USBHS_IRQn                             = 134,      /*!< 134 USBHS                                                            */
+  MRAMC110_IRQn                          = 146,      /*!< 146 MRAMC110                                                         */
+  MRAMC111_IRQn                          = 147,      /*!< 147 MRAMC111                                                         */
   EXMIF_IRQn                             = 149,      /*!< 149 EXMIF                                                            */
   CANPLL_CANPLLPM_IRQn                   = 194,      /*!< 194 CANPLL_CANPLLPM                                                  */
+  OTPC_IRQn                              = 197,      /*!< 197 OTPC                                                             */
+  VPR120_IRQn                            = 200,      /*!< 200 VPR120                                                           */
   IPCT1200_IRQn                          = 209,      /*!< 209 IPCT1200                                                         */
   I3C120_IRQn                            = 211,      /*!< 211 I3C120                                                           */
+  VPR121_IRQn                            = 212,      /*!< 212 VPR121                                                           */
   CAN_IRQn                               = 216,      /*!< 216 CAN                                                              */
   I3C121_IRQn                            = 222,      /*!< 222 I3C121                                                           */
   TIMER120_IRQn                          = 226,      /*!< 226 TIMER120                                                         */
@@ -119,6 +125,7 @@ typedef enum {
   SPIM120_IRQn                           = 230,      /*!< 230 SPIM120                                                          */
   SPIM121_IRQn                           = 231,      /*!< 231 SPIM121                                                          */
   TWIM120_IRQn                           = 232,      /*!< 232 TWIM120                                                          */
+  VPR130_IRQn                            = 264,      /*!< 264 VPR130                                                           */
   IPCT1300_IRQn                          = 289,      /*!< 289 IPCT1300                                                         */
   RTC130_IRQn                            = 296,      /*!< 296 RTC130                                                           */
   RTC131_IRQn                            = 297,      /*!< 297 RTC131                                                           */
@@ -135,7 +142,7 @@ typedef enum {
   QDEC131_IRQn                           = 405,      /*!< 405 QDEC131                                                          */
   SIMIF_IRQn                             = 406,      /*!< 406 SIMIF                                                            */
   I2S131_IRQn                            = 407,      /*!< 407 I2S131                                                           */
-  MIPIRFFE_IRQn                          = 408,      /*!< 408 MIPIRFFE                                                         */
+  MIPIRFFE_IRQn                          = 411,      /*!< 411 MIPIRFFE                                                         */
   TIMER130_IRQn                          = 418,      /*!< 418 TIMER130                                                         */
   TIMER131_IRQn                          = 419,      /*!< 419 TIMER131                                                         */
   PWM130_IRQn                            = 420,      /*!< 420 PWM130                                                           */
@@ -218,8 +225,8 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPR_NS                   ((NRF_VPR_Type*)                      NRF_FLPR_VPR_NS_BASE)
-#define NRF_FLPR_VPR_S                    ((NRF_VPR_Type*)                      NRF_FLPR_VPR_S_BASE)
+#define NRF_FLPR_VPR_NS                   ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_NS_BASE)
+#define NRF_FLPR_VPR_S                    ((NRF_CLIC_Type*)                     NRF_FLPR_VPR_S_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                    TrustZone Remapping                                    ================ */
