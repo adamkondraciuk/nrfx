@@ -980,6 +980,9 @@
     #define RADIO_TIMING_RU_Default 0
     #define RADIO_TIMING_RU_Fast    1
 
+    /* ==================================================== Struct MPC_REGION ==================================================== */
+    #define MPC_MASTER_PORTS_MaxCount (32UL) /*!< Max number of master ports. */
+
 #endif
 
 /**************************************************************************************************/
@@ -2526,6 +2529,10 @@
 
     #define RADIO_TIMING_RU_Default 0
     #define RADIO_TIMING_RU_Fast    1
+
+    /* ==================================================== Struct MPC_REGION ==================================================== */
+    #define MPC_MASTER_PORTS_MaxCount (15UL) /*!< Max number of master ports. */
+
 #endif
 
 /**************************************************************************************************/
