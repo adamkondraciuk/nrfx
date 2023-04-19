@@ -17,14 +17,26 @@ extern "C" {
  *          peripheral.
  */
 
+#if defined(MPC_RTCHOKE_WRITEACCESS_ENABLE0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RTCHOKE functionality is present. */
+#define NRF_MPC_HAS_RTCHOKE 1
+#else
+#define NRF_MPC_HAS_RTCHOKE 0
+#endif
+
 /** @brief Number of regions. */
 #define NRF_MPC_REGION_COUNT   MPC_REGION_MaxCount
 
 /** @brief Number of override regions. */
 #define NRF_MPC_OVERRIDE_COUNT MPC_OVERRIDE_MaxCount
 
+/** @brief Number of master ports. */
+#define NRF_MPC_MASTER_PORTS_COUNT MPC_MASTER_PORTS_MaxCount
+
+#if NRF_MPC_HAS_RTCHOKE
 /** @brief Number of Real Time Choke slaves. */
 #define NRF_MPC_RTCHOKE_COUNT  MPC_RTCHOKE_DELAY_MaxCount
+#endif
 
 /** @brief MPC events. */
 typedef enum
@@ -76,6 +88,7 @@ typedef enum
     NRF_MPC_MASTERPORT_12_MASK = MPC_REGION_MASTERPORT_ENABLE12_Msk, /**< Enable master port 12. */
     NRF_MPC_MASTERPORT_13_MASK = MPC_REGION_MASTERPORT_ENABLE13_Msk, /**< Enable master port 13. */
     NRF_MPC_MASTERPORT_14_MASK = MPC_REGION_MASTERPORT_ENABLE14_Msk, /**< Enable master port 14. */
+#if (NRF_MPC_MASTER_PORTS_COUNT > 15)
     NRF_MPC_MASTERPORT_15_MASK = MPC_REGION_MASTERPORT_ENABLE15_Msk, /**< Enable master port 15. */
     NRF_MPC_MASTERPORT_16_MASK = MPC_REGION_MASTERPORT_ENABLE16_Msk, /**< Enable master port 16. */
     NRF_MPC_MASTERPORT_17_MASK = MPC_REGION_MASTERPORT_ENABLE17_Msk, /**< Enable master port 17. */
@@ -93,6 +106,7 @@ typedef enum
     NRF_MPC_MASTERPORT_29_MASK = MPC_REGION_MASTERPORT_ENABLE29_Msk, /**< Enable master port 29. */
     NRF_MPC_MASTERPORT_30_MASK = MPC_REGION_MASTERPORT_ENABLE30_Msk, /**< Enable master port 30. */
     NRF_MPC_MASTERPORT_31_MASK = MPC_REGION_MASTERPORT_ENABLE31_Msk, /**< Enable master port 31. */
+#endif
 } nrf_mpc_masterport_mask_t;
 
 /** @brief Region configuration. */
@@ -548,6 +562,7 @@ NRF_STATIC_INLINE void nrf_mpc_globalslave_lock_enable(NRF_MPC_Type * p_reg);
  */
 NRF_STATIC_INLINE bool nrf_mpc_globalslave_lock_check(NRF_MPC_Type const * p_reg);
 
+#if NRF_MPC_HAS_RTCHOKE
 /**
  * @brief Function for enabling the AXI Write Address Channel Real Time Choke for specified master ports.
  *
@@ -607,6 +622,7 @@ NRF_STATIC_INLINE void nrf_mpc_rtchoke_delay_set(NRF_MPC_Type * p_reg,
  */
 NRF_STATIC_INLINE uint8_t nrf_mpc_rtchoke_delay_get(NRF_MPC_Type const * p_reg, uint8_t slave);
 
+#endif // NRF_MPC_HAS_RTCHOKE
 
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE bool nrf_mpc_event_check(NRF_MPC_Type const * p_reg, nrf_mpc_event_t event)
@@ -967,6 +983,7 @@ NRF_STATIC_INLINE bool nrf_mpc_globalslave_lock_check(NRF_MPC_Type const * p_reg
             >> MPC_GLOBALSLAVE_LOCK_LOCK_Pos) == MPC_GLOBALSLAVE_LOCK_LOCK_Enabled;
 }
 
+#if NRF_MPC_HAS_RTCHOKE
 NRF_STATIC_INLINE void nrf_mpc_rtchoke_writeaccess_set(NRF_MPC_Type * p_reg, uint32_t mask)
 {
     p_reg->RTCHOKE.WRITEACCESS = mask;
@@ -1002,6 +1019,7 @@ NRF_STATIC_INLINE uint8_t nrf_mpc_rtchoke_delay_get(NRF_MPC_Type const * p_reg, 
 
     return p_reg->RTCHOKE.DELAY[slave];
 }
+#endif
 
 #endif // NRF_DECLARE_ONLY
 
