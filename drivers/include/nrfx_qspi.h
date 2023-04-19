@@ -191,6 +191,7 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
  * @retval NRFX_SUCCESS             Reconfiguration was successful.
  * @retval NRFX_ERROR_BUSY          The driver is during transaction.
  * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ * @retval NRFX_ERROR_INVALID_PARAM The pin configuration was incorrect.
  */
 nrfx_err_t nrfx_qspi_reconfigure(nrfx_qspi_config_t const * p_config);
 

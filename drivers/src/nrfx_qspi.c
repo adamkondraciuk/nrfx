@@ -226,6 +226,8 @@ static bool qspi_configure(nrfx_qspi_config_t const * p_config)
         return false;
     }
 
+    m_cb.skip_gpio_cfg = p_config->skip_gpio_cfg;
+
     nrf_qspi_xip_offset_set(NRF_QSPI, p_config->xip_offset);
 
     nrf_qspi_ifconfig0_set(NRF_QSPI, &p_config->prot_if);
@@ -288,7 +290,6 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
 
     if (p_config)
     {
-        m_cb.skip_gpio_cfg = p_config->skip_gpio_cfg;
         if (!qspi_configure(p_config))
         {
             return NRFX_ERROR_INVALID_PARAM;
