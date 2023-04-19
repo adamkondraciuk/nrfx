@@ -91,13 +91,13 @@ typedef struct
  */
 #define NRFX_COMP_DEFAULT_CONFIG(_input)                                           \
 {                                                                                  \
-    .reference  = NRF_COMP_REF_INT_1V8,                                            \
-    .main_mode  = NRF_COMP_MAIN_MODE_SE,                                           \
-    .threshold  = NRFX_COMP_CONFIG_TH,                                             \
-    .speed_mode = NRF_COMP_SP_MODE_HIGH,                                           \
-    .hyst       = NRF_COMP_HYST_NO_HYST,                                           \
+    .reference          = NRF_COMP_REF_INT_1V8,                                    \
+    .main_mode          = NRF_COMP_MAIN_MODE_SE,                                   \
+    .threshold          = NRFX_COMP_CONFIG_TH,                                     \
+    .speed_mode         = NRF_COMP_SP_MODE_HIGH,                                   \
+    .hyst               = NRF_COMP_HYST_NO_HYST,                                   \
     NRFX_COND_CODE_1(NRF_COMP_HAS_ISOURCE, (.isource = NRF_COMP_ISOURCE_OFF,), ()) \
-    .input      = (nrf_comp_input_t)_input,                                        \
+    .input              = (nrf_comp_input_t)_input,                                \
     .interrupt_priority = NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY                    \
 }
 
