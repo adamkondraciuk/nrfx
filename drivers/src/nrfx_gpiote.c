@@ -11,15 +11,18 @@
 #define NRFX_LOG_MODULE GPIOTE
 #include <nrfx_log.h>
 
-#if (GPIO_COUNT == 1)
-#define MAX_PIN_NUMBER 32
-#elif (GPIO_COUNT == 2)
-#define MAX_PIN_NUMBER (32 + P1_PIN_NUM)
-#elif (GPIO_COUNT > 2)
-#define MAX_PIN_NUMBER (32 * GPIO_COUNT)
-#else
-#error "Not supported."
-#endif
+/* Macro returning number of pins in the port */
+#define GPIO_PIN_NUM(periph, prefix, i, _) NRFX_CONCAT(periph, prefix, i, _PIN_NUM)
+
+/* Macro for calculating total number of pins. */
+#define MAX_PIN_NUMBER NRFX_FOREACH_PRESENT(P, GPIO_PIN_NUM, (+), (0), _)
+
+/* Macro returns true if port has 32 pins. */
+#define GPIO_IS_FULL_PORT(periph, prefix, i, _) \
+    (NRFX_CONCAT(periph, prefix, i, _PIN_NUM) == 32)
+
+/* Macro return true if all ports has 32 pins. In that case pin numbers are continuous. */
+#define FULL_PORTS_PRESENT (NRFX_FOREACH_PRESENT(P, GPIO_IS_FULL_PORT, (&&), (1), _))
 
 /* Use legacy configuration if new is not present. That will lead to slight
  * increase of RAM usage since number of slots will exceed application need.
@@ -145,6 +148,39 @@ static gpiote_control_block_t m_cb = {
     .available_channels_mask = NRFX_GPIOTE_APP_CHANNELS_MASK
 };
 
+#define GPIO_PORT_OFFSET(i, _) \
+    NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(NRFX_CONCAT(P, i)),(NRFX_CONCAT(P, i, _PIN_NUM)), (0))
+
+static uint8_t get_pin_idx(nrfx_gpiote_pin_t pin)
+{
+#if FULL_PORTS_PRESENT
+    // If all ports have 32 pins then array ordering matches pin ordering.
+    return pin;
+#else
+    // Possible instances must be explicitely listed as NRFX_LISTIFY cannot be nested.
+    static const uint8_t port_offset[] = {
+        0,
+        NRFX_LISTIFY(1, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(2, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(3, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(4, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(5, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(6, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(7, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(8, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(9, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(10, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(11, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(12, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(13, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(14, GPIO_PORT_OFFSET, (+), _),
+        NRFX_LISTIFY(15, GPIO_PORT_OFFSET, (+), _),
+    };
+
+    return port_offset[pin >> 5] + (pin & 0x1F);
+#endif
+}
+
 /** @brief Checks if pin is in use by the driver.
  *
  * @param[in] pin Absolute pin.
@@ -153,7 +189,7 @@ static gpiote_control_block_t m_cb = {
  */
 static bool pin_in_use(uint32_t pin)
 {
-    return m_cb.pin_flags[pin] & PIN_FLAG_IN_USE;
+    return m_cb.pin_flags[get_pin_idx(pin)] & PIN_FLAG_IN_USE;
 }
 
 /** @brief Check if Task/Event is used.
@@ -166,7 +202,7 @@ static bool pin_in_use(uint32_t pin)
  */
 static bool pin_in_use_by_te(uint32_t pin)
 {
-    return m_cb.pin_flags[pin] & PIN_FLAG_TE_USED;
+    return m_cb.pin_flags[get_pin_idx(pin)] & PIN_FLAG_TE_USED;
 }
 
 /** @brief Check if pin has trigger.
@@ -177,7 +213,7 @@ static bool pin_in_use_by_te(uint32_t pin)
  */
 static bool pin_has_trigger(uint32_t pin)
 {
-    return PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[pin]) != NRFX_GPIOTE_TRIGGER_NONE;
+    return PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]) != NRFX_GPIOTE_TRIGGER_NONE;
 }
 
 /** @brief Check if pin is output.
@@ -190,7 +226,7 @@ static bool pin_has_trigger(uint32_t pin)
  */
 static bool pin_is_output(uint32_t pin)
 {
-    return PIN_FLAG_IS_OUTPUT(m_cb.pin_flags[pin]);
+    return PIN_FLAG_IS_OUTPUT(m_cb.pin_flags[get_pin_idx(pin)]);
 }
 
 /** @brief Check if pin is output controlled by GPIOTE task.
@@ -230,7 +266,7 @@ static nrf_gpiote_polarity_t gpiote_trigger_to_polarity(nrfx_gpiote_trigger_t tr
 /* Returns gpiote TE channel associated with the pin */
 static uint8_t pin_te_get(nrfx_gpiote_pin_t pin)
 {
-    return PIN_GET_TE_ID(m_cb.pin_flags[pin]);
+    return PIN_GET_TE_ID(m_cb.pin_flags[get_pin_idx(pin)]);
 }
 
 static bool is_level(nrfx_gpiote_trigger_t trigger)
@@ -254,14 +290,15 @@ static bool handler_in_use(int32_t handler_id)
  * pair is not used by other pin. */
 static void release_handler(nrfx_gpiote_pin_t pin)
 {
-    int32_t handler_id = PIN_GET_HANDLER_ID(m_cb.pin_flags[pin]);
+    uint8_t idx = get_pin_idx(pin);
+    int32_t handler_id = PIN_GET_HANDLER_ID(m_cb.pin_flags[idx]);
 
     if (handler_id == PIN_FLAG_NO_HANDLER)
     {
         return;
     }
 
-    m_cb.pin_flags[pin] &= ~PIN_HANDLER_MASK;
+    m_cb.pin_flags[idx] &= ~PIN_HANDLER_MASK;
 
     /* Check if other pin is using same handler and release handler only if handler
      * is not used by others.
@@ -293,7 +330,7 @@ static void pin_handler_trigger_uninit(nrfx_gpiote_pin_t pin)
     }
 
     release_handler(pin);
-    m_cb.pin_flags[pin] = PIN_FLAG_NOT_USED;
+    m_cb.pin_flags[get_pin_idx(pin)] = PIN_FLAG_NOT_USED;
 }
 
 nrfx_err_t nrfx_gpiote_pin_uninit(nrfx_gpiote_pin_t pin)
@@ -353,14 +390,14 @@ static nrfx_err_t pin_handler_set(nrfx_gpiote_pin_t               pin,
 
     m_cb.handlers[handler_id].handler = handler;
     m_cb.handlers[handler_id].p_context = p_context;
-    m_cb.pin_flags[pin] |= PIN_FLAG_HANDLER(handler_id);
+    m_cb.pin_flags[get_pin_idx(pin)] |= PIN_FLAG_HANDLER(handler_id);
 
     return NRFX_SUCCESS;
 }
 
 static inline nrf_gpio_pin_sense_t get_initial_sense(nrfx_gpiote_pin_t pin)
 {
-    nrfx_gpiote_trigger_t trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[pin]);
+    nrfx_gpiote_trigger_t trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]);
     nrf_gpio_pin_sense_t sense;
 
     if (trigger == NRFX_GPIOTE_TRIGGER_LOW)
@@ -386,6 +423,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
                                        nrfx_gpiote_handler_config_t const * p_handler_config)
 {
     nrfx_err_t err;
+    uint8_t idx = get_pin_idx(pin);
 
     if (p_input_config)
     {
@@ -399,8 +437,8 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
 
         nrfy_gpio_reconfigure(pin, &dir, &input_connect, &p_input_config->pull, NULL, NULL);
 
-        m_cb.pin_flags[pin] &= ~PIN_FLAG_OUTPUT;
-        m_cb.pin_flags[pin] |= PIN_FLAG_IN_USE;
+        m_cb.pin_flags[idx] &= ~PIN_FLAG_OUTPUT;
+        m_cb.pin_flags[idx] |= PIN_FLAG_IN_USE;
     }
 
     if (p_trigger_config)
@@ -417,7 +455,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
         }
         else
         {
-            m_cb.pin_flags[pin] &= ~(PIN_TE_ID_MASK | PIN_FLAG_TE_USED);
+            m_cb.pin_flags[idx] &= ~(PIN_TE_ID_MASK | PIN_FLAG_TE_USED);
             if (use_evt)
             {
                 bool edge = trigger <= NRFX_GPIOTE_TRIGGER_TOGGLE;
@@ -442,7 +480,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
                     nrfy_gpiote_event_disable(NRF_GPIOTE, ch);
                     nrfy_gpiote_event_configure(NRF_GPIOTE, ch, pin, polarity);
 
-                    m_cb.pin_flags[pin] |= PIN_FLAG_TE_ID(ch);
+                    m_cb.pin_flags[idx] |= PIN_FLAG_TE_ID(ch);
                 }
             }
         }
@@ -456,8 +494,8 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
             nrf_bitmask_bit_set(pin, (uint8_t *)m_cb.port_pins);
         }
 #endif
-        m_cb.pin_flags[pin] &= ~PIN_FLAG_TRIG_MODE_MASK;
-        m_cb.pin_flags[pin] |= PIN_FLAG_TRIG_MODE_SET(trigger);
+        m_cb.pin_flags[idx] &= ~PIN_FLAG_TRIG_MODE_MASK;
+        m_cb.pin_flags[idx] |= PIN_FLAG_TRIG_MODE_SET(trigger);
     }
 
     if (p_handler_config)
@@ -476,6 +514,8 @@ nrfx_err_t nrfx_gpiote_output_configure(nrfx_gpiote_pin_t                   pin,
                                         nrfx_gpiote_output_config_t const * p_config,
                                         nrfx_gpiote_task_config_t const *   p_task_config)
 {
+    uint8_t idx = get_pin_idx(pin);
+
     if (p_config)
     {
         /* Cannot configure pin to output if pin was using TE event. */
@@ -496,7 +536,7 @@ nrfx_err_t nrfx_gpiote_output_configure(nrfx_gpiote_pin_t                   pin,
         nrfy_gpio_reconfigure(pin, &dir, &p_config->input_connect, &p_config->pull,
                               &p_config->drive, NULL);
 
-        m_cb.pin_flags[pin] |= PIN_FLAG_IN_USE | PIN_FLAG_OUTPUT;
+        m_cb.pin_flags[idx] |= PIN_FLAG_IN_USE | PIN_FLAG_OUTPUT;
     }
 
     if (p_task_config)
@@ -509,13 +549,13 @@ nrfx_err_t nrfx_gpiote_output_configure(nrfx_gpiote_pin_t                   pin,
         uint32_t ch = p_task_config->task_ch;
 
         nrfy_gpiote_te_default(NRF_GPIOTE, ch);
-        m_cb.pin_flags[pin] &= ~(PIN_FLAG_TE_USED | PIN_TE_ID_MASK);
+        m_cb.pin_flags[idx] &= ~(PIN_FLAG_TE_USED | PIN_TE_ID_MASK);
         if (p_task_config->polarity != NRF_GPIOTE_POLARITY_NONE)
         {
             nrfy_gpiote_task_configure(NRF_GPIOTE, ch, pin,
                                        p_task_config->polarity,
                                        p_task_config->init_val);
-            m_cb.pin_flags[pin] |= PIN_FLAG_TE_ID(ch);
+            m_cb.pin_flags[idx] |= PIN_FLAG_TE_ID(ch);
         }
     }
 
@@ -534,7 +574,7 @@ nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel)
 
     if (pin_in_use_by_te(pin))
     {
-        *p_channel = PIN_GET_TE_ID(m_cb.pin_flags[pin]);
+        *p_channel = PIN_GET_TE_ID(m_cb.pin_flags[get_pin_idx(pin)]);
         return NRFX_SUCCESS;
     }
     else
@@ -546,7 +586,7 @@ nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_pin_t pin, uint8_t *p_channel)
 /* Return handler associated with given pin or null. */
 static nrfx_gpiote_handler_config_t const * channel_handler_get(nrfx_gpiote_pin_t pin)
 {
-    int32_t handler_id = PIN_GET_HANDLER_ID(m_cb.pin_flags[pin]);
+    int32_t handler_id = PIN_GET_HANDLER_ID(m_cb.pin_flags[get_pin_idx(pin)]);
 
     if (handler_id == PIN_FLAG_NO_HANDLER)
     {
@@ -587,20 +627,48 @@ bool nrfx_gpiote_is_init(void)
     return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED) ? true : false;
 }
 
+static void pin_uninit(uint32_t pin)
+{
+    if (nrfy_gpio_pin_present_check(pin) && pin_in_use(pin))
+    {
+        nrfx_gpiote_pin_uninit(pin);
+    }
+}
 
 void nrfx_gpiote_uninit(void)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
 
-    uint32_t i;
-
-    for (i = 0; i < MAX_PIN_NUMBER; i++)
+#if FULL_PORTS_PRESENT
+    // Simple iteration for simple case to save memory
+    for (size_t i = 0; i < MAX_PIN_NUMBER; i++)
     {
-        if (nrfy_gpio_pin_present_check(i) && pin_in_use(i))
+            pin_uninit(i);
+    }
+#else
+#define _PORT_ID(periph, prefix, i, _) i,
+#define _PORT_LEN(periph, prefix, i, _) NRFX_CONCAT(periph, prefix, i, _PIN_NUM),
+    static const uint8_t ports[] =
+    {
+        NRFX_FOREACH_PRESENT(P, _PORT_ID, (), (), _)
+    };
+    static const uint8_t port_lens[] =
+    {
+        NRFX_FOREACH_PRESENT(P, _PORT_LEN, (), (), _)
+    };
+
+    // Iterate over all pins in all ports.
+    for (size_t i = 0; i < NRFX_ARRAY_SIZE(ports); i++)
+    {
+        for (size_t j = 0; j < port_lens[i]; j++)
         {
-            nrfx_gpiote_pin_uninit(i);
+            pin_uninit(32 * ports[i] + j);
         }
     }
+#undef _PORT_ID
+#undef _PORT_LEN
+#endif
+
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
     NRFX_LOG_INFO("Uninitialized.");
 }
@@ -911,7 +979,8 @@ static void port_event_handle(void)
                 /* Convert to absolute value. */
                 pin += 32 * i;
                 nrf_gpio_pin_sense_t sense;
-                nrfx_gpiote_trigger_t trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[pin]);
+                nrfx_gpiote_trigger_t trigger =
+                    PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]);
 
                 nrf_bitmask_bit_clear(pin, latch);
                 sense = nrfy_gpio_pin_sense_get(pin);
@@ -989,7 +1058,7 @@ static void port_event_handle(void)
                 /* Absolute */
                 pin = rel_pin + 32 * i;
 
-                trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[pin]);
+                trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]);
                 sense = nrfy_gpio_pin_sense_get(pin);
                 pin_state = nrf_bitmask_bit_is_set(pin, input);
 
@@ -1023,7 +1092,7 @@ static void port_event_handle(void)
                 pin = rel_pin + 32 * i;
                 if (nrfy_gpio_pin_sense_get(pin) != NRF_GPIO_PIN_NOSENSE)
                 {
-                    trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[pin]);
+                    trigger = PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]);
                     if (trigger == NRFX_GPIOTE_TRIGGER_HIGH)
                     {
                         input[i] &= ~NRFX_BIT(rel_pin);
