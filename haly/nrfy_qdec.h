@@ -69,7 +69,7 @@ NRFY_STATIC_INLINE void nrfy_qdec_periph_configure(NRF_QDEC_Type *            p_
     nrf_qdec_sampleper_set(p_reg, p_config->sampleper);
     nrf_qdec_reportper_set(p_reg, p_config->reportper);
 
-    if (p_config->pins.led_pin != NRF_QDEC_LED_NOT_CONNECTED)
+    if (p_config->pins.led_pin != NRF_QDEC_PIN_NOT_CONNECTED)
     {
         nrf_qdec_ledpre_set(p_reg, p_config->ledpre);
         nrf_qdec_ledpol_set(p_reg, p_config->ledpol);

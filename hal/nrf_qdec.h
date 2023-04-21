@@ -24,7 +24,7 @@ extern "C" {
  *        function call to specify that a LED signal shall not be use by the QDEC and
  *        connected to a physical pin.
  */
-#define NRF_QDEC_LED_NOT_CONNECTED  0xFFFFFFFF
+#define NRF_QDEC_PIN_NOT_CONNECTED 0xFFFFFFFF
 
 #if defined(QDEC_TASKS_RDCLRACC_TASKS_RDCLRACC_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of the RDCLRACC task. */

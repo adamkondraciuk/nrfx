@@ -39,7 +39,7 @@ static void qdec_configure(nrfx_qdec_t const *        p_instance,
     {
         nrfy_gpio_cfg_input(p_config->psela, NRF_GPIO_PIN_NOPULL);
         nrfy_gpio_cfg_input(p_config->pselb, NRF_GPIO_PIN_NOPULL);
-        if (p_config->pselled != NRF_QDEC_LED_NOT_CONNECTED)
+        if (p_config->pselled != NRF_QDEC_PIN_NOT_CONNECTED)
         {
             nrfy_gpio_cfg_input(p_config->pselled, NRF_GPIO_PIN_NOPULL);
         }
@@ -152,7 +152,7 @@ void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
         nrfy_gpio_cfg_default(pins.b_pin);
 
         uint32_t led_pin = nrfy_qdec_led_pin_get(p_instance->p_reg);
-        if (led_pin != NRF_QDEC_LED_NOT_CONNECTED)
+        if (led_pin != NRF_QDEC_PIN_NOT_CONNECTED)
         {
             nrfy_gpio_cfg_default(led_pin);
         }
