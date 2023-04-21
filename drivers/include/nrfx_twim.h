@@ -122,8 +122,10 @@ typedef struct
 {
     nrfx_twim_xfer_type_t type;             ///< Type of transfer.
     uint8_t               address;          ///< Slave address.
-    nrfy_twim_xfer_desc_t primary_buffer;   ///< Primary structure describing a TWIM transfer.
-    nrfy_twim_xfer_desc_t secondary_buffer; ///< Secondary structure describing a TWIM transfer.
+    size_t                primary_length;   ///< Number of bytes transferred.
+    size_t                secondary_length; ///< Number of bytes transferred.
+    uint8_t *             p_primary_buf;    ///< Pointer to transferred data.
+    uint8_t *             p_secondary_buf;  ///< Pointer to transferred data.
 } nrfx_twim_xfer_desc_t;
 
 /** @brief Macro for setting the transfer descriptor. */
@@ -131,16 +133,10 @@ typedef struct
 {                                                                               \
     .type             = (transfer),                                             \
     .address          = (addr),                                                 \
-    .primary_buffer   =                                                         \
-    {                                                                           \
-            .p_buffer = (p_buf1),                                               \
-            .length   = (buf_len1)                                              \
-    },                                                                          \
-    .secondary_buffer =                                                         \
-    {                                                                           \
-            .p_buffer = (p_buf2),                                               \
-            .length   = (buf_len2)                                              \
-    }                                                                           \
+    .primary_length   = (buf_len1),                                             \
+    .secondary_length = (buf_len2),                                             \
+    .p_primary_buf    = (p_buf1),                                               \
+    .p_secondary_buf  = (p_buf2)                                                \
 }
 
 /** @brief Macro for setting the TX transfer descriptor. */
