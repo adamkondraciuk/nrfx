@@ -26,12 +26,6 @@
 #if NRFX_CHECK(NRFX_EGU5_ENABLED) && ((1 << 5) & NRFX_EGUS_USED)
     #error "EGU instance 5 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_EGU020_ENABLED) && ((1 << 6) & NRFX_EGUS_USED)
-    #error "EGU instance 020 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_EGU130_ENABLED) && ((1 << 7) & NRFX_EGUS_USED)
-    #error "EGU instance 130 is reserved for use outside of nrfx."
-#endif
 
 #include <nrfx_egu.h>
 

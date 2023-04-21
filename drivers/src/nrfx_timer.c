@@ -23,45 +23,6 @@
 #if NRFX_CHECK(NRFX_TIMER4_ENABLED) && ((1 << 4) & NRFX_TIMERS_USED)
     #error "TIMER instance 4 is reserved for use outside of nrfx."
 #endif
-#if NRFX_CHECK(NRFX_TIMER120_ENABLED) && ((1 << 5) & NRFX_TIMERS_USED)
-    #error "TIMER instance 120 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER121_ENABLED) && ((1 << 6) & NRFX_TIMERS_USED)
-    #error "TIMER instance 121 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER020_ENABLED) && ((1 << 7) & NRFX_TIMERS_USED)
-    #error "TIMER instance 020 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER021_ENABLED) && ((1 << 8) & NRFX_TIMERS_USED)
-    #error "TIMER instance 021 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER022_ENABLED) && ((1 << 9) & NRFX_TIMERS_USED)
-    #error "TIMER instance 022 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER130_ENABLED) && ((1 << 10) & NRFX_TIMERS_USED)
-    #error "TIMER instance 130 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER131_ENABLED) && ((1 << 11) & NRFX_TIMERS_USED)
-    #error "TIMER instance 131 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER132_ENABLED) && ((1 << 12) & NRFX_TIMERS_USED)
-    #error "TIMER instance 132 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER133_ENABLED) && ((1 << 13) & NRFX_TIMERS_USED)
-    #error "TIMER instance 133 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER134_ENABLED) && ((1 << 14) & NRFX_TIMERS_USED)
-    #error "TIMER instance 134 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER135_ENABLED) && ((1 << 15) & NRFX_TIMERS_USED)
-    #error "TIMER instance 135 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER136_ENABLED) && ((1 << 16) & NRFX_TIMERS_USED)
-    #error "TIMER instance 136 is reserved for use outside of nrfx."
-#endif
-#if NRFX_CHECK(NRFX_TIMER137_ENABLED) && ((1 << 17) & NRFX_TIMERS_USED)
-    #error "TIMER instance 137 is reserved for use outside of nrfx."
-#endif
 
 #include <nrfx_timer.h>
 
