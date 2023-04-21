@@ -1,33 +1,38 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [3.0.0] - 2023-04-21
+## [3.0.0] - 2023-04-25
 ### Added
 - Added the HALY layer for the following peripherals: COMP, DPPI, GPIO, GPIOTE, I2S, LPCOMP, PDM, PWM, QDEC, RTC, SAADC, SPIM, TEMP, TIMER, TWIM, UARTE, WDT. HALY is an extension of the HAL layer that aggregates basic hardware use cases within single functions. Now it is used instead of HAL in the corresponding drivers.
 - Added functions for reconfiguring a peripheral outside of the initialization process in the following drivers: COMP, PDM, PWM, QDEC, QSPI, SPI, SPIM, SPIS, TIMER, TWI, TWIM, TWIS, UART, UARTE, WDT.
 - Added multi-instance support for the I2S and QDEC drivers. Now a pointer to the driver instance needs to be specified in all relevant functions.
+- Added the reportper_inten member to the configuration structure for the QDEC driver. It allows to explicitly enable interrupts associated with the REPORTRDY peripheral event.
 - Added the NRFX_ERROR_FORBIDDEN error being returned from the nrfx_spim_init() function when a user attempts to configure a hardware-controlled and software-controlled chip select simultaneously.
 - Added the NRFX_TIMER_FREQUENCY_STATIC_CHECK() macro to statically check if the given frequency is achievable for the specified TIMER instance.
 - Added the NRFX_TWIM_XFER_DESC() macro to support creation of any type of TWIM transaction for the TWIM driver.
 - Added auxiliary macros NRFX_KHZ_TO_HZ() and NRFX_MHZ_TO_HZ() for converting specified frequency value to Hertz.
 - Added auxiliary macros for sophisticated handling of the preprocessor symbols to `nrfx_utils.h`.
 - Added functions for getting the number of available channels and groups for a given peripheral instance in the DPPIC HAL.
-- Added getters for SEQSTART tasks and SEQEND events associated with a specified sequence index in the PWM HAL.
+- Added functions for getting the SEQSTART tasks and SEQEND events associated with a specified sequence index in the PWM HAL.
 - Added the nrf_rtc_capture_task_get() function for getting the CAPTURE task associated with the specified CC channel in the RTC HAL.
 - Added functions for managing the non-maskable watchdog interrupts in the WDT HAL.
+- Added functions for getting the address of peripheral tasks and events in the EGU HAL.
 - Added a function for enabling the watchdog STOP task in the WDT HAL.
 - Added a function for getting the bitmask of all watchdog requests' statuses in the WDT HAL.
 - Added a function for clearing the event and task endpoints for a given channel in the GPPI helper.
 
 ### Changed
 - Renamed a macro from NRFX_VOLTAGE_THRESHOLD_TO_INT() to NRFX_COMP_VOLTAGE_THRESHOLD_TO_INT() in the COMP HAL.
-- Renamed functions for getting the task of event address in the following drivers: CLOCK, GPIOTE, PPI, SPIM, TWIM.
+- Renamed functions for getting the task of event address in the following drivers: CLOCK, GPIOTE, PPI, SPIM, TWIM. Now they follow a common scheme.
 - Renamed configuration structure members `hal` and `hal_config`, containing low-level peripheral settings, to `config` in the LPCOMP and UARTE drivers.
 - Renamed a function from nrfx_pwm_is_stopped() to nrfx_pwm_stopped_check() in the PWM driver.
+- Renamed a symbol from NRF_QDEC_LED_NOT_CONNECTED to NRF_QDEC_PIN_NOT_CONNECTED in the QDEC HAL. Now it is consistent with other, similar symbols.
+- Changed prototypes of several functions in the UARTE driver. Now all functions have a return value, and some of them accept additional parameters.
 - Changed a type of configuration structure members that hold a pin number from `uint8_t` to `uint32_t` in the following drivers: I2S, PWM, SPIM.
 - Changed the prototypes of the nrf_i2s_pins_set() and nrf_i2s_configure() functions in the I2S HAL. Now they accept a pointer to the configuration structure instead of several individual parameters.
 - Changed a default value of the `gain` structure member from `1/6` to `1` in the SAADC driver configuration structure.
-- Changed a type of configuration structure member specifying the clock frequency from an enumeration to an unsigned integer in the TIMER driver. Now the timer clock frequency must be specified in Hertz. Use the NRFX_TIMER_FREQUENCY_STATIC_CHECK() macro to check if the requested frequency is achievable for a given TIMER instance.
+- Changed a type of the configuration structure member specifying the clock frequency from an enumeration to an unsigned integer in the TIMER driver. Now the timer clock frequency must be specified in Hertz. Use the NRFX_TIMER_FREQUENCY_STATIC_CHECK() macro to check if the requested frequency is achievable for a given TIMER instance.
+- Changed a type of the configuration structure member specifying the clock frequency from an enumeration to an unsigned integer in the SPIM driver. Now the clock signal frequency must be specified in Hertz. Use the NRFX_SPIM_FREQUENCY_STATIC_CHECK() macro to check if the requested frequency is achievable for a given SPIM instance.
 - Changed the prototype of the NRFX_TIMER_DEFAULT_CONFIG() macro in the TIMER driver. Now the desired timer clock frequency in Hertz needs to be specified as a parameter.
 - Changed a prototype of the WDT driver callback. Now a bitmask specifying which reload request caused the timeout is provided.
 - Changed the prototype of the initialization and callback functions of the QDEC driver. Now the user context can be provided and accessed during the interrupt handler execution.
