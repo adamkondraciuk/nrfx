@@ -7,7 +7,8 @@
 #error "This file should not be included directly. Include nrfx_config.h instead."
 #endif
 
-/* The MDK macros for accessing the peripheral register structures
+/*
+ * The MDK macros for accessing the peripheral register structures
  * by using their secure and non-secure address mappings (with the names
  * containing the suffix _S or _NS, respectively). Because the nrfx drivers
  * use the macros without any suffixes, you must translate the names.
@@ -16,7 +17,6 @@
  */
 #define NRF_CLOCK      NRF_CLOCK_S
 #define NRF_DPPIC      NRF_DPPIC_S
-#define NRF_DCNF       NRF_DCNF_S
 #define NRF_EGU0       NRF_EGU0_S
 #define NRF_EGU1       NRF_EGU1_S
 #define NRF_EGU2       NRF_EGU2_S
@@ -70,16 +70,27 @@
  * only one type of access available. For these peripherals, you cannot choose
  * between secure and non-secure mapping.
  */
-#define NRF_CRYPTOCELL NRF_CRYPTOCELL_S
-#define NRF_FICR       NRF_FICR_S
-#define NRF_GPIOTE0    NRF_GPIOTE0_S
-#define NRF_GPIOTE1    NRF_GPIOTE1_NS
-#define NRF_SPU        NRF_SPU_S
-#define NRF_UICR       NRF_UICR_S
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#define NRF_GPIOTE1      NRF_GPIOTE1_NS
+#else
+#define NRF_CC_HOST_RGF  NRF_CC_HOST_RGF_S
+#define NRF_CRYPTOCELL   NRF_CRYPTOCELL_S
+#define NRF_CTRL_AP_PERI NRF_CTRL_AP_PERI_S
+#define NRF_FICR         NRF_FICR_S
+#define NRF_GPIOTE0      NRF_GPIOTE0_S
+#define NRF_SPU          NRF_SPU_S
+#define NRF_TAD          NRF_TAD_S
+#define NRF_UICR         NRF_UICR_S
+#endif
 
-/* Fixups for GPIOTE driver. */
+/* Fixups for the GPIOTE driver. */
+#if defined(NRF_TRUSTZONE_NONSECURE)
+#define NRF_GPIOTE        NRF_GPIOTE1
+#define GPIOTE_IRQHandler GPIOTE1_IRQHandler
+#else
 #define NRF_GPIOTE        NRF_GPIOTE0
 #define GPIOTE_IRQHandler GPIOTE0_IRQHandler
+#endif
 
 /**
  * @brief NRFX_DEFAULT_IRQ_PRIORITY
