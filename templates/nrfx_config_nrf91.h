@@ -8,7 +8,7 @@
 #endif
 
 /*
- * The MDK macros for accessing the peripheral register structures
+ * The MDK provides macros for accessing the peripheral register structures
  * by using their secure and non-secure address mappings (with the names
  * containing the suffix _S or _NS, respectively). Because the nrfx drivers
  * use the macros without any suffixes, you must translate the names.
