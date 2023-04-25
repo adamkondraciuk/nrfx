@@ -27,6 +27,7 @@ All notable changes to this project are documented in this file.
 - Renamed configuration structure members `hal` and `hal_config`, containing low-level peripheral settings, to `config` in the LPCOMP and UARTE drivers.
 - Renamed a function from nrfx_pwm_is_stopped() to nrfx_pwm_stopped_check() in the PWM driver.
 - Renamed a symbol from NRF_QDEC_LED_NOT_CONNECTED to NRF_QDEC_PIN_NOT_CONNECTED in the QDEC HAL. Now it is consistent with other, similar symbols.
+- Changed the way the API version to be used is specified. Now the following dedicated symbols shall be defined to form the API version as a numerical value: NRFX_CONFIG_API_VER_MAJOR, NRFX_CONFIG_API_VER_MINOR, NRFX_CONFIG_API_VER_MICRO.
 - Changed prototypes of several functions in the UARTE driver. Now all functions have a return value, and some of them accept additional parameters.
 - Changed a type of configuration structure members that hold a pin number from `uint8_t` to `uint32_t` in the following drivers: I2S, PWM, SPIM.
 - Changed the prototypes of the nrf_i2s_pins_set() and nrf_i2s_configure() functions in the I2S HAL. Now they accept a pointer to the configuration structure instead of several individual parameters.
