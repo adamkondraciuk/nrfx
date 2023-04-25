@@ -471,6 +471,28 @@ NRF_STATIC_INLINE void nrf_hfxo64m_cfg_get(NRF_HFXO64M_Type const *  p_reg,
 NRF_STATIC_INLINE void nrf_hfxo64m_cfg_set(NRF_HFXO64M_Type *  p_reg,
                                            nrf_hfxo64m_cfg_t * p_cfg);
 
+#if NRF_HFXO64M_HAS_TCXO
+
+/**
+ * @brief Function for checking the status of the TCXO power.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  TCXO is powered on.
+ * @retval false TCXO is powered off.
+ */
+NRF_STATIC_INLINE bool nrf_hfxo64m_tcxopowered_check(NRF_HFXO64M_Type const * p_reg);
+
+/**
+ * @brief Function for setting the status of the TCXO power.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] enable True if the TCXO power status is to be set, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_hfxo64m_tcxopowered_set(NRF_HFXO64M_Type * p_reg, bool enable);
+
+#endif // NRF_HFXO64M_HAS_TCXO
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE uint32_t nrf_hfxo64m_event_address_get(NRF_HFXO64M_Type const * p_reg,
@@ -809,6 +831,22 @@ NRF_STATIC_INLINE void nrf_hfxo64m_cfg_set(NRF_HFXO64M_Type *  p_reg,
         | ((p_cfg->chirp << HFXO64M_CFG_CHIRPEN_Pos)
             & HFXO64M_CFG_CHIRPEN_Msk);
 }
+
+#if NRF_HFXO64M_HAS_TCXO
+
+NRF_STATIC_INLINE bool nrf_hfxo64m_tcxopowered_check(NRF_HFXO64M_Type const * p_reg)
+{
+    return (p_reg->TCXOPOWERED & HFXO64M_TCXOPOWERED_VAL_Msk) >> HFXO64M_TCXOPOWERED_VAL_Pos;
+}
+
+NRF_STATIC_INLINE void nrf_hfxo64m_tcxopowered_set(NRF_HFXO64M_Type * p_reg, bool enable)
+{
+    p_reg->TCXOPOWERED = ((p_reg->TCXOPOWERED & ~HFXO64M_TCXOPOWERED_VAL_Msk) |
+                          ((enable ? HFXO64M_TCXOPOWERED_VAL_On : HFXO64M_TCXOPOWERED_VAL_Off)
+                           << HFXO64M_TCXOPOWERED_VAL_Pos));
+}
+
+#endif // NRF_HFXO64M_HAS_TCXO
 
 #endif // NRF_DECLARE_ONLY
 
