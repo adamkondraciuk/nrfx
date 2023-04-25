@@ -609,6 +609,31 @@
 #endif
 
 /**
+ * @brief NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED - Enables nRF52 Anomaly 109 workaround for PWM.
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_PWM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE - EGU instance used by the nRF52 Anomaly 109 workaround for PWM.
+ *
+ * Integer value.
+ * Supported values:
+ * - EGU0 = 0
+ * - EGU1 = 1
+ * - EGU2 = 2
+ * - EGU3 = 3
+ * - EGU4 = 4
+ * - EGU5 = 5
+ */
+#ifndef NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE
+#define NRFX_PWM_NRF52_ANOMALY_109_EGU_INSTANCE 5
+#endif
+
+/**
  * @brief NRFX_PWM_CONFIG_LOG_LEVEL
  *
  * Integer value.
@@ -942,6 +967,15 @@
 #endif
 
 /**
+ * @brief NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED - Enables nRF52 Anomaly 109 workaround for SPIM.
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_SPIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_SPIM_CONFIG_LOG_LEVEL
  *
  * Integer value.
@@ -1008,6 +1042,15 @@
  */
 #ifndef NRFX_SPIS_CONFIG_LOG_ENABLED
 #define NRFX_SPIS_CONFIG_LOG_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED - Enables nRF52 Anomaly 109 workaround for SPIS.
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_SPIS_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
 #endif
 
 /**
@@ -1275,6 +1318,15 @@
  */
 #ifndef NRFX_TWIM_CONFIG_LOG_ENABLED
 #define NRFX_TWIM_CONFIG_LOG_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED - Enables nRF52 Anomaly 109 workaround for TWIM.
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED
+#define NRFX_TWIM_NRF52_ANOMALY_109_WORKAROUND_ENABLED 0
 #endif
 
 /**
