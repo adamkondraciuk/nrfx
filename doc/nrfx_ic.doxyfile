@@ -795,6 +795,7 @@ INPUT                  = ../../nrfx/doc/config_dox \
                          ../../nrfx/helpers \
                          ../../nrfx/drivers \
                          ../../nrfx/hal \
+                         ../../nrfx/haly \
                          ../../nrfx/soc \
                          ../../nrfx/templates \
                          ../../nrfx/CHANGELOG.md \
