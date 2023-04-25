@@ -115,11 +115,8 @@
  *
  * Integer value.
  * Supported values:
- * - RC = 0
- * - XTAL = 1
- * - Synth = 2
- * - External Low Swing = 131073
- * - External Full Swing = 196609
+ * - RC   = 1
+ * - XTAL = 2
  */
 #ifndef NRFX_CLOCK_CONFIG_LF_SRC
 #define NRFX_CLOCK_CONFIG_LF_SRC 2

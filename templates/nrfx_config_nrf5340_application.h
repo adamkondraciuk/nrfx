@@ -133,10 +133,11 @@
  *
  * Integer value.
  * Supported values:
- * - FLL16M = 0
+ * - HFINT = 0
+ * - HFXO  = 1
  */
 #ifndef NRFX_CLOCK_CONFIG_HFCLK192M_SRC
-#define NRFX_CLOCK_CONFIG_HFCLK192M_SRC 0
+#define NRFX_CLOCK_CONFIG_HFCLK192M_SRC 1
 #endif
 
 /**
@@ -144,11 +145,9 @@
  *
  * Integer value.
  * Supported values:
- * - RC = 0
- * - XTAL = 1
- * - Synth = 2
- * - External Low Swing = 131073
- * - External Full Swing = 196609
+ * - RC    = 1
+ * - XTAL  = 2
+ * - Synth = 3
  */
 #ifndef NRFX_CLOCK_CONFIG_LF_SRC
 #define NRFX_CLOCK_CONFIG_LF_SRC 2
