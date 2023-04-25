@@ -37,6 +37,8 @@
 
 @defgroup nrf_mvdma MVDMA
 
+@defgroup nrf_pcrm PCRM
+
 @defgroup nrf_ppib PPIB
 
 @defgroup nrf_ramc RAMC
