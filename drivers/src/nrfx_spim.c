@@ -2,8 +2,8 @@
 
 #include <nrfx.h>
 
-#if NRFX_CHECK(NRFX_SPIM_ENABLED) \
-    && !defined(NRF7140_XXAA) && !defined(NRF9230_XXAA) && !defined(LILIUMFP1_XXAA) // Remove in NRFX-3069
+#if NRFX_CHECK(NRFX_SPIM_ENABLED)
+
 #if !NRFX_FEATURE_PRESENT(NRFX_SPIM, _ENABLED)
 #error "No enabled SPIM instances. Check <nrfx_config.h>."
 #endif
