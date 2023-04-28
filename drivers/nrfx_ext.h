@@ -208,8 +208,7 @@ extern "C" {
             /* Currently SECURE runs at 288MHz even though same multiplier as for APP is used. */
             #define NRFX_DELAY_CPU_FREQ_MHZ 288
         #elif defined(NRF_RADIOCORE)
-            /* Currently RADIO runs at 64MHz for unknown reason (expected to be 256MHz). */
-            #define NRFX_DELAY_CPU_FREQ_MHZ 64
+            #define NRFX_DELAY_CPU_FREQ_MHZ 256
         #else
             #define NRFX_DELAY_CPU_FREQ_MHZ (SystemCoreClock / 1000000)
         #endif
