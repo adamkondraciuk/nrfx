@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -90,7 +90,7 @@ __vector_table
         DCD     VPRCLIC_0_IRQHandler
         DCD     VPRCLIC_1_IRQHandler
         DCD     VPRCLIC_2_IRQHandler
-        DCD     VPRCLIC_3_IRQHandler
+        DCD     MVDMA_IRQHandler
         DCD     VPRCLIC_4_IRQHandler
         DCD     VPRCLIC_5_IRQHandler
         DCD     VPRCLIC_6_IRQHandler
@@ -130,15 +130,15 @@ __vector_table
         DCD     TIMER020_IRQHandler
         DCD     TIMER021_IRQHandler
         DCD     TIMER022_IRQHandler
-        DCD     RTC_IRQHandler
-        DCD     RADIO_0_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     RADIO_1_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     SPU030_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
-        DCD     HWACC_IRQHandler
+        DCD     RADIOACC_IRQHandler
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -195,7 +195,7 @@ __vector_table
         DCD     GPIOTE130_1_IRQHandler
         DCD     GPIOTE131_0_IRQHandler
         DCD     GPIOTE131_1_IRQHandler
-        DCD     GRTC_0_IRQHandler
+        DCD     GRTC_3_IRQHandler
         DCD     GRTC_1_IRQHandler
         DCD     GRTC_2_IRQHandler
         DCD     0                         ; Reserved
@@ -652,9 +652,9 @@ VPRCLIC_1_IRQHandler
 VPRCLIC_2_IRQHandler
         j .
 
-        PUBWEAK  VPRCLIC_3_IRQHandler
+        PUBWEAK  MVDMA_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-VPRCLIC_3_IRQHandler
+MVDMA_IRQHandler
         j .
 
         PUBWEAK  VPRCLIC_4_IRQHandler
@@ -757,16 +757,6 @@ TIMER021_IRQHandler
 TIMER022_IRQHandler
         j .
 
-        PUBWEAK  RTC_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-RTC_IRQHandler
-        j .
-
-        PUBWEAK  RADIO_0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-RADIO_0_IRQHandler
-        j .
-
         PUBWEAK  RADIO_1_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 RADIO_1_IRQHandler
@@ -777,9 +767,9 @@ RADIO_1_IRQHandler
 SPU030_IRQHandler
         j .
 
-        PUBWEAK  HWACC_IRQHandler
+        PUBWEAK  RADIOACC_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-HWACC_IRQHandler
+RADIOACC_IRQHandler
         j .
 
         PUBWEAK  AAR030_CCM030_IRQHandler
@@ -832,9 +822,9 @@ GPIOTE131_0_IRQHandler
 GPIOTE131_1_IRQHandler
         j .
 
-        PUBWEAK  GRTC_0_IRQHandler
+        PUBWEAK  GRTC_3_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GRTC_0_IRQHandler
+GRTC_3_IRQHandler
         j .
 
         PUBWEAK  GRTC_1_IRQHandler

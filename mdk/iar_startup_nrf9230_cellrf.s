@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -106,7 +106,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     RFCORESERVICES_IRQHandler
         DCD     MVDMA_IRQHandler
-        DCD     GPIOTE130_IRQHandler
+        DCD     GPIOTE131_IRQHandler
         DCD     MIPIRFFE_IRQHandler
         DCD     BELLBOARD_0_IRQHandler
         DCD     BELLBOARD_1_IRQHandler
@@ -262,9 +262,9 @@ RFCORESERVICES_IRQHandler
 MVDMA_IRQHandler
         B .
 
-        PUBWEAK  GPIOTE130_IRQHandler
+        PUBWEAK  GPIOTE131_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
-GPIOTE130_IRQHandler
+GPIOTE131_IRQHandler
         B .
 
         PUBWEAK  MIPIRFFE_IRQHandler

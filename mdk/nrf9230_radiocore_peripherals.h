@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -46,1615 +46,1951 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     extern "C" {
 #endif
 
+#include <stdbool.h>
 /*User information configuration registers*/
-#define UICR_PRESENT
+#define UICR_PRESENT 1
 #define UICR_COUNT 1
 
-#define UICR_FEATEN_RADIO_ON 1
-#define UICR_FEATEN_WIFI_ON 0
-#define UICR_FEATEN_LTE_ON 0
+#define UICR_FEATEN_RADIO_ON 1                       /*!< (unspecified)                                                        */
+#define UICR_FEATEN_WIFI_ON 0                        /*!< (unspecified)                                                        */
+#define UICR_FEATEN_LTE_ON 0                         /*!< (unspecified)                                                        */
 
 /*CACHEDATA*/
-#define ICACHEDATA_PRESENT
+#define ICACHEDATA_PRESENT 1
 #define ICACHEDATA_COUNT 1
 
-#define ICACHEDATA_NUMSETS 256
-#define ICACHEDATA_NUMWAYS 2
-#define ICACHEDATA_NUMDATAUNIT 4
-#define ICACHEDATA_datawidth 2
+#define ICACHEDATA_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
+#define ICACHEDATA_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
+#define ICACHEDATA_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
+#define ICACHEDATA_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
+#define ICACHEDATA_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..3                                          */
+#define ICACHEDATA_NUMDATAUNIT_MAX 3                 /*!< Number of data units : 0..3                                          */
+#define ICACHEDATA_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..1 words                               */
+#define ICACHEDATA_DATAWIDTH_MAX 1                   /*!< Data width of a data unit : 0..1 words                               */
 
 /*CACHEINFO*/
-#define ICACHEINFO_PRESENT
+#define ICACHEINFO_PRESENT 1
 #define ICACHEINFO_COUNT 1
 
-#define ICACHEINFO_NUMSETS 256
-#define ICACHEINFO_NUMWAYS 2
-#define ICACHEINFO_NUMDATAUNIT 4
-#define ICACHEINFO_datawidth 2
-#define ICACHEINFO_TAGWIDTH 19
-#define ICACHEINFO_DU_EXTENSION 0
+#define ICACHEINFO_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
+#define ICACHEINFO_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
+#define ICACHEINFO_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
+#define ICACHEINFO_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
+#define ICACHEINFO_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..3                                          */
+#define ICACHEINFO_NUMDATAUNIT_MAX 3                 /*!< Number of data units : 0..3                                          */
+#define ICACHEINFO_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..1 words                               */
+#define ICACHEINFO_DATAWIDTH_MAX 1                   /*!< Data width of a data unit : 0..1 words                               */
+#define ICACHEINFO_TAGWIDTH_MIN 0                    /*!< TAG width : 0..18                                                    */
+#define ICACHEINFO_TAGWIDTH_MAX 18                   /*!< TAG width : 0..18                                                    */
+#define ICACHEINFO_DU_EXTENSION 0                    /*!< (unspecified)                                                        */
 
 /*CACHEDATA*/
-#define DCACHEDATA_PRESENT
+#define DCACHEDATA_PRESENT 1
 #define DCACHEDATA_COUNT 1
 
-#define DCACHEDATA_NUMSETS 256
-#define DCACHEDATA_NUMWAYS 2
-#define DCACHEDATA_NUMDATAUNIT 8
-#define DCACHEDATA_datawidth 1
+#define DCACHEDATA_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
+#define DCACHEDATA_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
+#define DCACHEDATA_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
+#define DCACHEDATA_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
+#define DCACHEDATA_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..7                                          */
+#define DCACHEDATA_NUMDATAUNIT_MAX 7                 /*!< Number of data units : 0..7                                          */
+#define DCACHEDATA_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..0 words                               */
+#define DCACHEDATA_DATAWIDTH_MAX 0                   /*!< Data width of a data unit : 0..0 words                               */
 
 /*CACHEINFO*/
-#define DCACHEINFO_PRESENT
+#define DCACHEINFO_PRESENT 1
 #define DCACHEINFO_COUNT 1
 
-#define DCACHEINFO_NUMSETS 256
-#define DCACHEINFO_NUMWAYS 2
-#define DCACHEINFO_NUMDATAUNIT 8
-#define DCACHEINFO_datawidth 1
-#define DCACHEINFO_TAGWIDTH 19
-#define DCACHEINFO_DU_EXTENSION 1
+#define DCACHEINFO_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
+#define DCACHEINFO_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
+#define DCACHEINFO_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
+#define DCACHEINFO_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
+#define DCACHEINFO_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..7                                          */
+#define DCACHEINFO_NUMDATAUNIT_MAX 7                 /*!< Number of data units : 0..7                                          */
+#define DCACHEINFO_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..0 words                               */
+#define DCACHEINFO_DATAWIDTH_MAX 0                   /*!< Data width of a data unit : 0..0 words                               */
+#define DCACHEINFO_TAGWIDTH_MIN 0                    /*!< TAG width : 0..18                                                    */
+#define DCACHEINFO_TAGWIDTH_MAX 18                   /*!< TAG width : 0..18                                                    */
+#define DCACHEINFO_DU_EXTENSION 1                    /*!< (unspecified)                                                        */
 
 /*Embedded Trace Macrocell*/
-#define ETM_PRESENT
+#define ETM_PRESENT 1
 #define ETM_COUNT 1
 
 /*Cross-Trigger Interface control*/
-#define CTI_PRESENT
+#define CTI_PRESENT 1
 #define CTI_COUNT 3
 
 /*CM33 SubSystem*/
-#define CM33SS_PRESENT
+#define CM33SS_PRESENT 1
 #define CM33SS_COUNT 1
 
-#define CPUC_FPUAVAILABLE 1
+#define CPUC_FPUAVAILABLE 1                          /*!< (unspecified)                                                        */
 
 /*Cache*/
-#define CACHE_PRESENT
+#define CACHE_PRESENT 1
 #define CACHE_COUNT 2
 
-#define ICACHE_VIRTUALCACHE 0
-#define ICACHE_FLUSH 1
-#define ICACHE_CLEAN 0
-#define ICACHE_NONCACHEABLEMISS 1
-#define ICACHE_BUSWIDTH 64
+#define ICACHE_VIRTUALCACHE 0                        /*!< (unspecified)                                                        */
+#define ICACHE_FLUSH 1                               /*!< (unspecified)                                                        */
+#define ICACHE_CLEAN 0                               /*!< (unspecified)                                                        */
+#define ICACHE_NONCACHEABLEMISS 1                    /*!< (unspecified)                                                        */
+#define ICACHE_BUSWIDTH_MIN 0                        /*!< Data bus width : 0..63                                               */
+#define ICACHE_BUSWIDTH_MAX 63                       /*!< Data bus width : 0..63                                               */
+#define ICACHE_SECUREINVALIDATE 0                    /*!< (unspecified)                                                        */
 
-#define DCACHE_VIRTUALCACHE 0
-#define DCACHE_FLUSH 1
-#define DCACHE_CLEAN 1
-#define DCACHE_NONCACHEABLEMISS 1
-#define DCACHE_BUSWIDTH 64
+#define DCACHE_VIRTUALCACHE 0                        /*!< (unspecified)                                                        */
+#define DCACHE_FLUSH 1                               /*!< (unspecified)                                                        */
+#define DCACHE_CLEAN 1                               /*!< (unspecified)                                                        */
+#define DCACHE_NONCACHEABLEMISS 1                    /*!< (unspecified)                                                        */
+#define DCACHE_BUSWIDTH_MIN 0                        /*!< Data bus width : 0..63                                               */
+#define DCACHE_BUSWIDTH_MAX 63                       /*!< Data bus width : 0..63                                               */
+#define DCACHE_SECUREINVALIDATE 0                    /*!< (unspecified)                                                        */
 
 /*System protection unit*/
-#define SPU_PRESENT
+#define SPU_PRESENT 1
 #define SPU_COUNT 4
 
-#define SPU000_GRTCSECONDARYOFFSET 0
-#define SPU000_BELLS 0
-#define SPU000_IPCT 0
-#define SPU000_DPPI 0
-#define SPU000_GPIOTE 0
-#define SPU000_GRTC 0
-#define SPU000_GPIO 0
-#define SPU000_MRAMC 0
-#define SPU000_COEXC 0
-#define SPU000_ANTSWC 0
-#define SPU000_TDD 0
+#define SPU000_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
+#define SPU000_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU000_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU000_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU000_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU000_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU000_GPIO 0                                /*!< (unspecified)                                                        */
+#define SPU000_CRACEN 0                              /*!< (unspecified)                                                        */
+#define SPU000_MRAMC 0                               /*!< (unspecified)                                                        */
+#define SPU000_COEXC 0                               /*!< (unspecified)                                                        */
+#define SPU000_ANTSWC 0                              /*!< (unspecified)                                                        */
+#define SPU000_TDD 0                                 /*!< (unspecified)                                                        */
+#define SPU000_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
+                                                          peripheral slave index)*/
+#define SPU000_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
-#define SPU010_GRTCSECONDARYOFFSET 0
-#define SPU010_BELLS 0
-#define SPU010_IPCT 0
-#define SPU010_DPPI 0
-#define SPU010_GPIOTE 0
-#define SPU010_GRTC 0
-#define SPU010_GPIO 0
-#define SPU010_MRAMC 0
-#define SPU010_COEXC 0
-#define SPU010_ANTSWC 0
-#define SPU010_TDD 0
+#define SPU010_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
+#define SPU010_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU010_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU010_DPPI 0                                /*!< (unspecified)                                                        */
+#define SPU010_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU010_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU010_GPIO 0                                /*!< (unspecified)                                                        */
+#define SPU010_CRACEN 0                              /*!< (unspecified)                                                        */
+#define SPU010_MRAMC 0                               /*!< (unspecified)                                                        */
+#define SPU010_COEXC 0                               /*!< (unspecified)                                                        */
+#define SPU010_ANTSWC 0                              /*!< (unspecified)                                                        */
+#define SPU010_TDD 0                                 /*!< (unspecified)                                                        */
+#define SPU010_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
+                                                          peripheral slave index)*/
+#define SPU010_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
-#define SPU020_GRTCSECONDARYOFFSET 0
-#define SPU020_BELLS 0
-#define SPU020_IPCT 1
-#define SPU020_DPPI 1
-#define SPU020_GPIOTE 0
-#define SPU020_GRTC 0
-#define SPU020_GPIO 0
-#define SPU020_MRAMC 0
-#define SPU020_COEXC 0
-#define SPU020_ANTSWC 0
-#define SPU020_TDD 0
+#define SPU020_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
+#define SPU020_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU020_IPCT 1                                /*!< (unspecified)                                                        */
+#define SPU020_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU020_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU020_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU020_GPIO 0                                /*!< (unspecified)                                                        */
+#define SPU020_CRACEN 0                              /*!< (unspecified)                                                        */
+#define SPU020_MRAMC 0                               /*!< (unspecified)                                                        */
+#define SPU020_COEXC 0                               /*!< (unspecified)                                                        */
+#define SPU020_ANTSWC 0                              /*!< (unspecified)                                                        */
+#define SPU020_TDD 0                                 /*!< (unspecified)                                                        */
+#define SPU020_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
+                                                          peripheral slave index)*/
+#define SPU020_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
-#define SPU030_GRTCSECONDARYOFFSET 0
-#define SPU030_BELLS 0
-#define SPU030_IPCT 0
-#define SPU030_DPPI 1
-#define SPU030_GPIOTE 0
-#define SPU030_GRTC 0
-#define SPU030_GPIO 0
-#define SPU030_MRAMC 0
-#define SPU030_COEXC 0
-#define SPU030_ANTSWC 0
-#define SPU030_TDD 0
+#define SPU030_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
+#define SPU030_BELLS 0                               /*!< (unspecified)                                                        */
+#define SPU030_IPCT 0                                /*!< (unspecified)                                                        */
+#define SPU030_DPPI 1                                /*!< (unspecified)                                                        */
+#define SPU030_GPIOTE 0                              /*!< (unspecified)                                                        */
+#define SPU030_GRTC 0                                /*!< (unspecified)                                                        */
+#define SPU030_GPIO 0                                /*!< (unspecified)                                                        */
+#define SPU030_CRACEN 0                              /*!< (unspecified)                                                        */
+#define SPU030_MRAMC 0                               /*!< (unspecified)                                                        */
+#define SPU030_COEXC 0                               /*!< (unspecified)                                                        */
+#define SPU030_ANTSWC 0                              /*!< (unspecified)                                                        */
+#define SPU030_TDD 0                                 /*!< (unspecified)                                                        */
+#define SPU030_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
+                                                          peripheral slave index)*/
+#define SPU030_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 /*Memory Privilege Controller*/
-#define MPC_PRESENT
+#define MPC_PRESENT 1
 #define MPC_COUNT 1
 
-#define MPC_EXTEND_CLOCK_REQ 1
-#define MPC_OVERRIDE_GRAN 4K
+#define MPC_EXTEND_CLOCK_REQ 1                       /*!< (unspecified)                                                        */
+#define MPC_OVERRIDE_GRAN 4k                         /*!< The override region granularity is 4K bytes                          */
 
 /*MVDMA performs direct-memory-accesses between memories. Data is transferred according to job descriptor lists. Each transfer has corresponding source and sink descriptor lists with matching data amounts. The lists are in memory and they contain data buffer information, address pointers, buffer sizes and data type attributes.*/
-                                                                                                                                  
-#define MVDMA_PRESENT
+
+#define MVDMA_PRESENT 1
 #define MVDMA_COUNT 3
 
-#define MVDMA_COMPLETED_EVENT 1
-#define MVDMA_DPPI_DISCONNECTED 0
-#define MVDMA_INSTANCE_IN_WRAPPER 0
+#define MVDMA_COMPLETED_EVENT 1                      /*!< (unspecified)                                                        */
+#define MVDMA_DPPI_DISCONNECTED 0                    /*!< (unspecified)                                                        */
+#define MVDMA_INSTANCE_IN_WRAPPER 0                  /*!< (unspecified)                                                        */
 
-#define MVDMA120_COMPLETED_EVENT 1
-#define MVDMA120_DPPI_DISCONNECTED 1
-#define MVDMA120_INSTANCE_IN_WRAPPER 1
+#define MVDMA120_COMPLETED_EVENT 1                   /*!< (unspecified)                                                        */
+#define MVDMA120_DPPI_DISCONNECTED 1                 /*!< (unspecified)                                                        */
+#define MVDMA120_INSTANCE_IN_WRAPPER 1               /*!< (unspecified)                                                        */
 
-#define MVDMA121_COMPLETED_EVENT 1
-#define MVDMA121_DPPI_DISCONNECTED 1
-#define MVDMA121_INSTANCE_IN_WRAPPER 1
+#define MVDMA121_COMPLETED_EVENT 1                   /*!< (unspecified)                                                        */
+#define MVDMA121_DPPI_DISCONNECTED 1                 /*!< (unspecified)                                                        */
+#define MVDMA121_INSTANCE_IN_WRAPPER 1               /*!< (unspecified)                                                        */
 
 /*RAM Controller*/
-#define RAMC_PRESENT
+#define RAMC_PRESENT 1
 #define RAMC_COUNT 4
 
-#define RAMC000_ECC 0
-#define RAMC000_SEC 1
+#define RAMC000_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC000_SEC 1                                /*!< (unspecified)                                                        */
 
-#define RAMC001_ECC 0
-#define RAMC001_SEC 0
+#define RAMC001_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC001_SEC 0                                /*!< (unspecified)                                                        */
 
-#define RAMC122_ECC 0
-#define RAMC122_SEC 0
+#define RAMC122_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC122_SEC 0                                /*!< (unspecified)                                                        */
 
-#define RAMC123_ECC 0
-#define RAMC123_SEC 0
+#define RAMC123_ECC 0                                /*!< (unspecified)                                                        */
+#define RAMC123_SEC 0                                /*!< (unspecified)                                                        */
 
 /*PCGCSlave*/
-#define PCGCSLAVE_PRESENT
+#define PCGCSLAVE_PRESENT 1
 #define PCGCSLAVE_COUNT 4
 
-#define PCGCS000_PENALTYTASKS 0
+#define PCGCS000_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS010_PENALTYTASKS 0
+#define PCGCS010_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS020_PENALTYTASKS 0
+#define PCGCS020_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
-#define PCGCS030_PENALTYTASKS 0
+#define PCGCS030_PENALTYTASKS 0                      /*!< (unspecified)                                                        */
 
 /*HSFLL*/
-#define HSFLL_PRESENT
+#define HSFLL_PRESENT 1
 #define HSFLL_COUNT 1
 
-#define HSFLL_DITHER_32B 1
+#define HSFLL_DITHER_32B 1                           /*!< (unspecified)                                                        */
 
 /*LRCCONF*/
-#define LRCCONF_PRESENT
+#define LRCCONF_PRESENT 1
 #define LRCCONF_COUNT 3
 
-#define LRCCONF000_POWERON 0
-#define LRCCONF000_RETAIN 0
-#define LRCCONF000_SYSTEMOFF 0
-#define LRCCONF000_LRCREQHFXO 1
-#define LRCCONF000_NCLK 1
-#define LRCCONF000_CLKCTRL 1
-#define LRCCONF000_NACTPD 8
-#define LRCCONF000_PDACT 0
-#define LRCCONF000_NPD 8
-#define LRCCONF000_OTHERON 0
-#define LRCCONF000_NDOMAINS 16
-#define LRCCONF000_AX2XWAITSTATES 0
-#define LRCCONF000_POWERON_MAIN_RESET 0
-#define LRCCONF000_POWERON_ACT_RESET 0
-#define LRCCONF000_RETAIN_MAIN_RESET 1
-#define LRCCONF000_RETAIN_ACT_RESET 1
+#define LRCCONF000_POWERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_RETAIN 0                          /*!< (unspecified)                                                        */
+#define LRCCONF000_SYSTEMOFF 0                       /*!< (unspecified)                                                        */
+#define LRCCONF000_LRCREQHFXO 0                      /*!< (unspecified)                                                        */
+#define LRCCONF000_NCLK_MIN 0                        /*!< (unspecified)                                                        */
+#define LRCCONF000_NCLK_MAX 0                        /*!< (unspecified)                                                        */
+#define LRCCONF000_CLKCTRL 1                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
+#define LRCCONF000_NACTPD_MAX 7                      /*!< (unspecified)                                                        */
+#define LRCCONF000_PDACT 0                           /*!< (unspecified)                                                        */
+#define LRCCONF000_NPD_MIN 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF000_OTHERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF000_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
+#define LRCCONF000_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF000_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
+#define LRCCONF000_POWERON_MAIN_RESET 0              /*!< (unspecified)                                                        */
+#define LRCCONF000_POWERON_ACT_RESET 0               /*!< (unspecified)                                                        */
+#define LRCCONF000_RETAIN_MAIN_RESET 1               /*!< (unspecified)                                                        */
+#define LRCCONF000_RETAIN_ACT_RESET 1                /*!< (unspecified)                                                        */
 
-#define LRCCONF010_POWERON 1
-#define LRCCONF010_RETAIN 1
-#define LRCCONF010_SYSTEMOFF 1
-#define LRCCONF010_LRCREQHFXO 1
-#define LRCCONF010_NCLK 8
-#define LRCCONF010_CLKCTRL 0
-#define LRCCONF010_NACTPD 2
-#define LRCCONF010_PDACT 1
-#define LRCCONF010_NPD 8
-#define LRCCONF010_OTHERON 0
-#define LRCCONF010_NDOMAINS 16
-#define LRCCONF010_AX2XWAITSTATES 0
-#define LRCCONF010_POWERON_MAIN_RESET 1
-#define LRCCONF010_POWERON_ACT_RESET 0
-#define LRCCONF010_RETAIN_MAIN_RESET 0
-#define LRCCONF010_RETAIN_ACT_RESET 0
+#define LRCCONF010_POWERON 1                         /*!< (unspecified)                                                        */
+#define LRCCONF010_RETAIN 1                          /*!< (unspecified)                                                        */
+#define LRCCONF010_SYSTEMOFF 1                       /*!< (unspecified)                                                        */
+#define LRCCONF010_LRCREQHFXO 1                      /*!< (unspecified)                                                        */
+#define LRCCONF010_NCLK_MIN 0                        /*!< (unspecified)                                                        */
+#define LRCCONF010_NCLK_MAX 0                        /*!< (unspecified)                                                        */
+#define LRCCONF010_CLKCTRL 1                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
+#define LRCCONF010_NACTPD_MAX 1                      /*!< (unspecified)                                                        */
+#define LRCCONF010_PDACT 1                           /*!< (unspecified)                                                        */
+#define LRCCONF010_NPD_MIN 0                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF010_OTHERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF010_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
+#define LRCCONF010_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF010_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
+#define LRCCONF010_POWERON_MAIN_RESET 1              /*!< Reset value of register POWERON.MAIN: 1                              */
+#define LRCCONF010_POWERON_ACT_RESET 0               /*!< Reset value of register POWERON.ACT: 0                               */
+#define LRCCONF010_RETAIN_MAIN_RESET 0               /*!< Reset value of register RETAIN.MAIN: 0                               */
+#define LRCCONF010_RETAIN_ACT_RESET 0                /*!< Reset value of register RETAIN.ACT: 0                                */
 
-#define LRCCONF020_POWERON 0
-#define LRCCONF020_RETAIN 0
-#define LRCCONF020_SYSTEMOFF 0
-#define LRCCONF020_LRCREQHFXO 1
-#define LRCCONF020_NCLK 8
-#define LRCCONF020_CLKCTRL 0
-#define LRCCONF020_NACTPD 8
-#define LRCCONF020_PDACT 0
-#define LRCCONF020_NPD 8
-#define LRCCONF020_OTHERON 0
-#define LRCCONF020_NDOMAINS 16
-#define LRCCONF020_AX2XWAITSTATES 0
-#define LRCCONF020_POWERON_MAIN_RESET 0
-#define LRCCONF020_POWERON_ACT_RESET 0
-#define LRCCONF020_RETAIN_MAIN_RESET 1
-#define LRCCONF020_RETAIN_ACT_RESET 1
+#define LRCCONF020_POWERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF020_RETAIN 0                          /*!< (unspecified)                                                        */
+#define LRCCONF020_SYSTEMOFF 0                       /*!< (unspecified)                                                        */
+#define LRCCONF020_LRCREQHFXO 1                      /*!< (unspecified)                                                        */
+#define LRCCONF020_NCLK_MIN 0                        /*!< (unspecified)                                                        */
+#define LRCCONF020_NCLK_MAX 7                        /*!< (unspecified)                                                        */
+#define LRCCONF020_CLKCTRL 0                         /*!< (unspecified)                                                        */
+#define LRCCONF020_NACTPD_MIN 0                      /*!< (unspecified)                                                        */
+#define LRCCONF020_NACTPD_MAX 7                      /*!< (unspecified)                                                        */
+#define LRCCONF020_PDACT 0                           /*!< (unspecified)                                                        */
+#define LRCCONF020_NPD_MIN 0                         /*!< (unspecified)                                                        */
+#define LRCCONF020_NPD_MAX 7                         /*!< (unspecified)                                                        */
+#define LRCCONF020_OTHERON 0                         /*!< (unspecified)                                                        */
+#define LRCCONF020_NDOMAINS_MIN 0                    /*!< (unspecified)                                                        */
+#define LRCCONF020_NDOMAINS_MAX 15                   /*!< (unspecified)                                                        */
+#define LRCCONF020_AX2XWAITSTATES 0                  /*!< (unspecified)                                                        */
+#define LRCCONF020_POWERON_MAIN_RESET 0              /*!< (unspecified)                                                        */
+#define LRCCONF020_POWERON_ACT_RESET 0               /*!< (unspecified)                                                        */
+#define LRCCONF020_RETAIN_MAIN_RESET 1               /*!< (unspecified)                                                        */
+#define LRCCONF020_RETAIN_ACT_RESET 1                /*!< (unspecified)                                                        */
 
 /*PCGC Master*/
-#define PCGCMASTER_PRESENT
+#define PCGCMASTER_PRESENT 1
 #define PCGCMASTER_COUNT 4
 
-#define PCGCM000_POWERCONSUMPTIONCALC 1
-#define PCGCM000_SETPWRCONTHRESHOLDBASE 1
-#define PCGCM000_CLOCKFORCEREG 1
-#define PCGCM000_MASTERFORCEREG 1
+#define PCGCM000_POWERCONSUMPTIONCALC 0              /*!< (unspecified)                                                        */
+#define PCGCM000_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM000_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM000_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM010_POWERCONSUMPTIONCALC 1
-#define PCGCM010_SETPWRCONTHRESHOLDBASE 1
-#define PCGCM010_CLOCKFORCEREG 1
-#define PCGCM010_MASTERFORCEREG 1
+#define PCGCM010_POWERCONSUMPTIONCALC 0              /*!< (unspecified)                                                        */
+#define PCGCM010_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM010_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM010_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM020_POWERCONSUMPTIONCALC 1
-#define PCGCM020_SETPWRCONTHRESHOLDBASE 1
-#define PCGCM020_CLOCKFORCEREG 1
-#define PCGCM020_MASTERFORCEREG 1
+#define PCGCM020_POWERCONSUMPTIONCALC 0              /*!< (unspecified)                                                        */
+#define PCGCM020_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM020_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM020_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
-#define PCGCM030_POWERCONSUMPTIONCALC 1
-#define PCGCM030_SETPWRCONTHRESHOLDBASE 1
-#define PCGCM030_CLOCKFORCEREG 1
-#define PCGCM030_MASTERFORCEREG 1
+#define PCGCM030_POWERCONSUMPTIONCALC 0              /*!< (unspecified)                                                        */
+#define PCGCM030_SETPWRCONTHRESHOLDBASE 1            /*!< (unspecified)                                                        */
+#define PCGCM030_CLOCKFORCEREG 1                     /*!< (unspecified)                                                        */
+#define PCGCM030_MASTERFORCEREG 1                    /*!< (unspecified)                                                        */
 
 /*CPU Configuration*/
-#define CPUCONF_PRESENT
+#define CPUCONF_PRESENT 1
 #define CPUCONF_COUNT 1
 
-#define CPUCONF_HASTASKERASECACHE 1
-#define CPUCONF_HASINITSVTOR 1
-#define CPUCONF_HASINITNSVTOR 1
-#define CPUCONF_HASCPUSTART 1
-#define CPUCONF_HASCPUWAIT 1
+#define CPUCONF_HASTASKERASECACHE 1                  /*!< (unspecified)                                                        */
+#define CPUCONF_HASINITSVTOR 1                       /*!< (unspecified)                                                        */
+#define CPUCONF_HASINITNSVTOR 1                      /*!< (unspecified)                                                        */
+#define CPUCONF_HASCPUSTART 1                        /*!< (unspecified)                                                        */
+#define CPUCONF_HASCPUWAIT 1                         /*!< (unspecified)                                                        */
 
 /*Memory configuration*/
-#define MEMCONF_PRESENT
+#define MEMCONF_PRESENT 1
 #define MEMCONF_COUNT 1
 
-#define MEMCONF_RETTRIM 1
-#define MEMCONF_REPAIR 0
-#define MEMCONF_POWER 1
-#define MEMCONF_RET2 1
+#define MEMCONF_RETTRIM 1                            /*!< (unspecified)                                                        */
+#define MEMCONF_REPAIR 0                             /*!< (unspecified)                                                        */
+#define MEMCONF_POWER 1                              /*!< (unspecified)                                                        */
+#define MEMCONF_RET2 1                               /*!< (unspecified)                                                        */
 
 /*Watchdog Timer*/
-#define WDT_PRESENT
+#define WDT_PRESENT 1
 #define WDT_COUNT 4
 
-#define WDT010_START_ON_RESET 0
-#define WDT010_CRV_RESETVALUE 4294967295
-#define WDT010_ALLOW_STOP 0
+#define WDT010_START_ON_RESET 0                      /*!< (unspecified)                                                        */
+#define WDT010_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
+#define WDT010_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
 
-#define WDT011_START_ON_RESET 0
-#define WDT011_CRV_RESETVALUE 4294967295
-#define WDT011_ALLOW_STOP 0
+#define WDT011_START_ON_RESET 0                      /*!< (unspecified)                                                        */
+#define WDT011_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
+#define WDT011_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
 
-#define WDT131_START_ON_RESET 0
-#define WDT131_CRV_RESETVALUE 4294967295
-#define WDT131_ALLOW_STOP 0
+#define WDT131_START_ON_RESET 0                      /*!< (unspecified)                                                        */
+#define WDT131_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
+#define WDT131_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
 
-#define WDT132_START_ON_RESET 0
-#define WDT132_CRV_RESETVALUE 4294967295
-#define WDT132_ALLOW_STOP 0
+#define WDT132_START_ON_RESET 0                      /*!< (unspecified)                                                        */
+#define WDT132_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
+#define WDT132_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
 
 /*The Built-in Leakage Sensor (BILS) module.*/
-#define BILS_PRESENT
+#define BILS_PRESENT 1
 #define BILS_COUNT 1
 
 /*RESETINFO*/
-#define RESETINFO_PRESENT
+#define RESETINFO_PRESENT 1
 #define RESETINFO_COUNT 1
 
-#define RESETINFO_HASRESETREAS 1
+#define RESETINFO_HASRESETREAS 1                     /*!< (unspecified)                                                        */
 
 /*Distributed programmable peripheral interconnect controller*/
-#define DPPIC_PRESENT
+#define DPPIC_PRESENT 1
 #define DPPIC_COUNT 10
 
-#define DPPIC020_HASCHANNELGROUPS 1
-#define DPPIC020_CH_NUM 24
-#define DPPIC020_GROUP_NUM 4
+#define DPPIC020_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC020_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC020_CH_NUM_MAX 23                       /*!< (unspecified)                                                        */
+#define DPPIC020_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC020_GROUP_NUM_MAX 3                     /*!< (unspecified)                                                        */
 
-#define DPPIC030_HASCHANNELGROUPS 1
-#define DPPIC030_CH_NUM 16
-#define DPPIC030_GROUP_NUM 1
+#define DPPIC030_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC030_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC030_CH_NUM_MAX 15                       /*!< (unspecified)                                                        */
+#define DPPIC030_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC030_GROUP_NUM_MAX 0                     /*!< (unspecified)                                                        */
 
-#define DPPIC120_HASCHANNELGROUPS 1
-#define DPPIC120_CH_NUM 8
-#define DPPIC120_GROUP_NUM 2
+#define DPPIC120_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC120_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC120_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC120_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC120_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC130_HASCHANNELGROUPS 1
-#define DPPIC130_CH_NUM 8
-#define DPPIC130_GROUP_NUM 2
+#define DPPIC130_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC130_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC130_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC130_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC130_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC131_HASCHANNELGROUPS 1
-#define DPPIC131_CH_NUM 8
-#define DPPIC131_GROUP_NUM 2
+#define DPPIC131_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC131_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC131_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC131_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC131_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC132_HASCHANNELGROUPS 1
-#define DPPIC132_CH_NUM 8
-#define DPPIC132_GROUP_NUM 2
+#define DPPIC132_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC132_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC132_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC132_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC132_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC133_HASCHANNELGROUPS 1
-#define DPPIC133_CH_NUM 8
-#define DPPIC133_GROUP_NUM 2
+#define DPPIC133_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC133_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC133_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC133_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC133_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC134_HASCHANNELGROUPS 1
-#define DPPIC134_CH_NUM 8
-#define DPPIC134_GROUP_NUM 2
+#define DPPIC134_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC134_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC134_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC134_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC134_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC135_HASCHANNELGROUPS 1
-#define DPPIC135_CH_NUM 8
-#define DPPIC135_GROUP_NUM 2
+#define DPPIC135_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC135_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC135_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC135_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC135_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
-#define DPPIC136_HASCHANNELGROUPS 1
-#define DPPIC136_CH_NUM 8
-#define DPPIC136_GROUP_NUM 2
+#define DPPIC136_HASCHANNELGROUPS 1                  /*!< (unspecified)                                                        */
+#define DPPIC136_CH_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define DPPIC136_CH_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define DPPIC136_GROUP_NUM_MIN 0                     /*!< (unspecified)                                                        */
+#define DPPIC136_GROUP_NUM_MAX 1                     /*!< (unspecified)                                                        */
 
 /*PPIB APB registers*/
-#define PPIB_PRESENT
+#define PPIB_PRESENT 1
 #define PPIB_COUNT 2
 
+#define PPIB020_NTASKSEVENTS_MIN 0                   /*!< (unspecified)                                                        */
+#define PPIB020_NTASKSEVENTS_MAX 15                  /*!< (unspecified)                                                        */
+
+#define PPIB030_NTASKSEVENTS_MIN 0                   /*!< (unspecified)                                                        */
+#define PPIB030_NTASKSEVENTS_MAX 15                  /*!< (unspecified)                                                        */
+
 /*Event generator unit*/
-#define EGU_PRESENT
+#define EGU_PRESENT 1
 #define EGU_COUNT 2
 
-#define EGU020_PEND 0
-#define EGU020_CH_NUM 16
+#define EGU020_PEND 0                                /*!< (unspecified)                                                        */
+#define EGU020_CH_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define EGU020_CH_NUM_MAX 15                         /*!< (unspecified)                                                        */
 
-#define EGU130_PEND 0
-#define EGU130_CH_NUM 8
+#define EGU130_PEND 0                                /*!< (unspecified)                                                        */
+#define EGU130_CH_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define EGU130_CH_NUM_MAX 7                          /*!< (unspecified)                                                        */
+
+/*Accelerated Address Resolver*/
+#define AAR_PRESENT 1
+#define AAR_COUNT 3
+
+/*AES CCM Mode Encryption*/
+#define CCM_PRESENT 1
+#define CCM_COUNT 3
+
+#define CCM020_AMOUNTREG 0                           /*!< (unspecified)                                                        */
+#define CCM020_ONTHEFLYDECRYPTION 1                  /*!< (unspecified)                                                        */
+
+#define CCM030_AMOUNTREG 0                           /*!< (unspecified)                                                        */
+#define CCM030_ONTHEFLYDECRYPTION 0                  /*!< (unspecified)                                                        */
+
+#define CCM031_AMOUNTREG 0                           /*!< (unspecified)                                                        */
+#define CCM031_ONTHEFLYDECRYPTION 0                  /*!< (unspecified)                                                        */
+
+/*AES ECB Mode Encryption*/
+#define ECB_PRESENT 1
+#define ECB_COUNT 3
+
+#define ECB020_AMOUNTREG 1                           /*!< (unspecified)                                                        */
+
+#define ECB030_AMOUNTREG 1                           /*!< (unspecified)                                                        */
+
+#define ECB031_AMOUNTREG 1                           /*!< (unspecified)                                                        */
 
 /*Timer/Counter*/
-#define TIMER_PRESENT
+#define TIMER_PRESENT 1
 #define TIMER_COUNT 13
 
-#define TIMER020_CC_NUM 8
-#define TIMER020_MAX_SIZE 32
+#define TIMER020_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER020_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER020_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER020_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER021_CC_NUM 8
-#define TIMER021_MAX_SIZE 32
+#define TIMER021_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER021_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER021_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER021_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER022_CC_NUM 8
-#define TIMER022_MAX_SIZE 32
+#define TIMER022_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER022_CC_NUM_MAX 7                        /*!< (unspecified)                                                        */
+#define TIMER022_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER022_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER120_CC_NUM 6
-#define TIMER120_MAX_SIZE 32
+#define TIMER120_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER120_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER120_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER120_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER121_CC_NUM 6
-#define TIMER121_MAX_SIZE 32
+#define TIMER121_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER121_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER121_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER121_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER130_CC_NUM 6
-#define TIMER130_MAX_SIZE 32
+#define TIMER130_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER130_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER130_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER130_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER131_CC_NUM 6
-#define TIMER131_MAX_SIZE 32
+#define TIMER131_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER131_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER131_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER131_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER132_CC_NUM 6
-#define TIMER132_MAX_SIZE 32
+#define TIMER132_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER132_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER132_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER132_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER133_CC_NUM 6
-#define TIMER133_MAX_SIZE 32
+#define TIMER133_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER133_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER133_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER133_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER134_CC_NUM 6
-#define TIMER134_MAX_SIZE 32
+#define TIMER134_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER134_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER134_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER134_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER135_CC_NUM 6
-#define TIMER135_MAX_SIZE 32
+#define TIMER135_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER135_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER135_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER135_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER136_CC_NUM 6
-#define TIMER136_MAX_SIZE 32
+#define TIMER136_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER136_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER136_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER136_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
-#define TIMER137_CC_NUM 6
-#define TIMER137_MAX_SIZE 32
+#define TIMER137_CC_NUM_MIN 0                        /*!< (unspecified)                                                        */
+#define TIMER137_CC_NUM_MAX 5                        /*!< (unspecified)                                                        */
+#define TIMER137_MAX_SIZE_MIN 0                      /*!< (unspecified)                                                        */
+#define TIMER137_MAX_SIZE_MAX 31                     /*!< (unspecified)                                                        */
 
 /*Real-time counter*/
-#define RTC_PRESENT
+#define RTC_PRESENT 1
 #define RTC_COUNT 3
 
-#define RTC_CC_NUM 8
+#define RTC_CC_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define RTC_CC_NUM_MAX 7                             /*!< (unspecified)                                                        */
 
-#define RTC130_CC_NUM 4
+#define RTC130_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define RTC130_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
 
-#define RTC131_CC_NUM 4
+#define RTC131_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
+#define RTC131_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
 
 /*2.4 GHz radio*/
-#define RADIO_PRESENT
+#define RADIO_PRESENT 1
 #define RADIO_COUNT 1
 
-#define RADIO_ADPLLCOMPANION_INCLUDE_DMA 0
-#define RADIO_PERPOWER 1
+#define RADIO_ADPLLCOMPANION_INCLUDE_DMA 0           /*!< (unspecified)                                                        */
+#define RADIO_PERPOWER 1                             /*!< (unspecified)                                                        */
 
 /*RADIOACC peripheral*/
-#define RADIOACC_PRESENT
+#define RADIOACC_PRESENT 1
 #define RADIOACC_COUNT 1
 
 /*VPR peripheral registers*/
-#define VPR_PRESENT
+#define VPR_PRESENT 1
 #define VPR_COUNT 4
 
-#define VPR_INIT_PC_RESET_VALUE 0
-#define VPR_VPR_START_RESET_VALUE 0
-#define VPR_RAM_BASE_ADDR 587464704
-#define VPR_RAM_SZ 15
-#define VPR_VPRSAVEDCTX_REGNAME
-#define VPR_VPRSAVEDCTX_REGBIT
-#define VPR_RETAINED 1
-#define VPR_VPRSAVEDCTX 0
-#define VPR_VPRSAVEADDR 0
-#define VPR_VPRREMAPADDRVTOB 0
-#define VPR_VEVIF_NTASKS 16
-#define VPR_VEVIF_TASKS_MASK 65280
-#define VPR_VEVIF_NDPPI 3
-#define VPR_VEVIF_NEVENTS 4
-#define VPR_DEBUGGER_OFFSET 1024
+#define VPR_INIT_PC_RESET_VALUE 0x00000000           /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
+#define VPR_VPR_START_RESET_VALUE 0                  /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
+#define VPR_RAM_BASE_ADDR 0x23040000                 /*!< VPR RAM base address (RAM_BASE_ADDR): 0x23040000                     */
+#define VPR_RAM_SZ 15                                /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR_RETAINED 1                               /*!< Retain registers in Deep Sleep mode: 1                               */
+#define VPR_VPRSAVEDCTX 0                            /*!< (unspecified)                                                        */
+#define VPR_VPRSAVEADDR 0x00000000                   /*!< VPR context save address: 0x00000000                                 */
+#define VPR_VPRREMAPADDRVTOB 0x00000000              /*!< VPR remap address: 0x00000000                                        */
+#define VPR_VEVIF_NTASKS_MIN 0                       /*!< VEVIF tasks: 0..15                                                   */
+#define VPR_VEVIF_NTASKS_MAX 15                      /*!< VEVIF tasks: 0..15                                                   */
+#define VPR_VEVIF_TASKS_MASK 0x0000ff00              /*!< Mask of supported VEVIF tasks: 0x0000FF00                            */
+#define VPR_VEVIF_NDPPI_MIN 8                        /*!< VEVIF DPPI channels: 8..10                                           */
+#define VPR_VEVIF_NDPPI_MAX 10                       /*!< VEVIF DPPI channels: 8..10                                           */
+#define VPR_VEVIF_NEVENTS_MIN 12                     /*!< VEVIF events: 12..15                                                 */
+#define VPR_VEVIF_NEVENTS_MAX 15                     /*!< VEVIF events: 12..15                                                 */
+#define VPR_DEBUGGER_OFFSET 1024                     /*!< Debugger interface register offset: 0x53034400                       */
 
-#define VPR120_INIT_PC_RESET_VALUE 796917760
-#define VPR120_VPR_START_RESET_VALUE 1
-#define VPR120_RAM_BASE_ADDR 797442048
-#define VPR120_RAM_SZ 16
-#define VPR120_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET
-#define VPR120_VPRSAVEDCTX_REGBIT 22
-#define VPR120_RETAINED 0
-#define VPR120_VPRSAVEDCTX 1
-#define VPR120_VPRSAVEADDR 797442048
-#define VPR120_VPRREMAPADDRVTOB 797179904
-#define VPR120_VEVIF_NTASKS 32
-#define VPR120_VEVIF_TASKS_MASK 4294963455
-#define VPR120_VEVIF_NDPPI 4
-#define VPR120_VEVIF_NEVENTS 4
-#define VPR120_DEBUGGER_OFFSET 1024
+#define VPR120_INIT_PC_RESET_VALUE 0x2f800000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x2F800000                        */
+#define VPR120_VPR_START_RESET_VALUE 1               /*!< Self-booting (VPR_START_RESET_VALUE): 1                              */
+#define VPR120_RAM_BASE_ADDR 0x2f880000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F880000                     */
+#define VPR120_RAM_SZ 16                             /*!< VPR RAM size (RAM_SZ): 16 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR120_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR120_VPRSAVEDCTX_REGBIT 22                 /*!< (unspecified)                                                        */
+#define VPR120_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
+#define VPR120_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR120_VPRSAVEADDR 0x2f880000                /*!< VPR context save address: 0x2F880000                                 */
+#define VPR120_VPRREMAPADDRVTOB 0x2f840000           /*!< VPR remap address: 0x2F840000                                        */
+#define VPR120_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPR120_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR120_VEVIF_TASKS_MASK 0xfffff0ff           /*!< Mask of supported VEVIF tasks: 0xFFFFF0FF                            */
+#define VPR120_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR120_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
+#define VPR120_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR120_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8C8400                       */
 
-#define VPR121_INIT_PC_RESET_VALUE 0
-#define VPR121_VPR_START_RESET_VALUE 0
-#define VPR121_RAM_BASE_ADDR 797507584
-#define VPR121_RAM_SZ 15
-#define VPR121_VPRSAVEDCTX_REGNAME NRF_MEMCONF120->POWER[0].RET
-#define VPR121_VPRSAVEDCTX_REGBIT 23
-#define VPR121_RETAINED 0
-#define VPR121_VPRSAVEDCTX 1
-#define VPR121_VPRSAVEADDR 796917760
-#define VPR121_VPRREMAPADDRVTOB 0
-#define VPR121_VEVIF_NTASKS 32
-#define VPR121_VEVIF_TASKS_MASK 4294901760
-#define VPR121_VEVIF_NDPPI 4
-#define VPR121_VEVIF_NEVENTS 4
-#define VPR121_DEBUGGER_OFFSET 1024
+#define VPR121_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
+#define VPR121_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
+#define VPR121_RAM_BASE_ADDR 0x2f890000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2F890000                     */
+#define VPR121_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR121_VPRSAVEDCTX_REGNAME nrf_memconf120->power[0].ret /*!< (unspecified)                                             */
+#define VPR121_VPRSAVEDCTX_REGBIT 23                 /*!< (unspecified)                                                        */
+#define VPR121_RETAINED 0                            /*!< Retain registers in Deep Sleep mode: 0                               */
+#define VPR121_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR121_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR121_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
+#define VPR121_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..31                                                   */
+#define VPR121_VEVIF_NTASKS_MAX 31                   /*!< VEVIF tasks: 0..31                                                   */
+#define VPR121_VEVIF_TASKS_MASK 0xffff0000           /*!< Mask of supported VEVIF tasks: 0xFFFF0000                            */
+#define VPR121_VEVIF_NDPPI_MIN 24                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_NDPPI_MAX 27                    /*!< VEVIF DPPI channels: 24..27                                          */
+#define VPR121_VEVIF_NEVENTS_MIN 28                  /*!< VEVIF events: 28..31                                                 */
+#define VPR121_VEVIF_NEVENTS_MAX 31                  /*!< VEVIF events: 28..31                                                 */
+#define VPR121_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F8D4400                       */
 
-#define VPR130_INIT_PC_RESET_VALUE 0
-#define VPR130_VPR_START_RESET_VALUE 0
-#define VPR130_RAM_BASE_ADDR 801112064
-#define VPR130_RAM_SZ 15
-#define VPR130_VPRSAVEDCTX_REGNAME NRF_MEMCONF130->POWER[0].RET
-#define VPR130_VPRSAVEDCTX_REGBIT 5
-#define VPR130_RETAINED 1
-#define VPR130_VPRSAVEDCTX 1
-#define VPR130_VPRSAVEADDR 796917760
-#define VPR130_VPRREMAPADDRVTOB 0
-#define VPR130_VEVIF_NTASKS 16
-#define VPR130_VEVIF_TASKS_MASK 65520
-#define VPR130_VEVIF_NDPPI 4
-#define VPR130_VEVIF_NEVENTS 4
-#define VPR130_DEBUGGER_OFFSET 1024
-
-/*Accelerated Address Resolver*/
-#define AAR_PRESENT
-#define AAR_COUNT 2
-
-/*AES CCM Mode Encryption*/
-#define CCM_PRESENT
-#define CCM_COUNT 2
-
-/*AES ECB Mode Encryption*/
-#define ECB_PRESENT
-#define ECB_COUNT 2
-
-#define ECB030_AMOUNTREG 1
-
-#define ECB031_AMOUNTREG 1
+#define VPR130_INIT_PC_RESET_VALUE 0x00000000        /*!< Boot vector (INIT_PC_RESET_VALUE): 0x00000000                        */
+#define VPR130_VPR_START_RESET_VALUE 0               /*!< Self-booting (VPR_START_RESET_VALUE): 0                              */
+#define VPR130_RAM_BASE_ADDR 0x2fc00000              /*!< VPR RAM base address (RAM_BASE_ADDR): 0x2FC00000                     */
+#define VPR130_RAM_SZ 15                             /*!< VPR RAM size (RAM_SZ): 15 (Value in bytes is computed as 2^(RAM
+                                                          size))*/
+#define VPR130_VPRSAVEDCTX_REGNAME nrf_memconf130->power[0].ret /*!< (unspecified)                                             */
+#define VPR130_VPRSAVEDCTX_REGBIT 5                  /*!< (unspecified)                                                        */
+#define VPR130_RETAINED 1                            /*!< Retain registers in Deep Sleep mode: 1                               */
+#define VPR130_VPRSAVEDCTX 1                         /*!< (unspecified)                                                        */
+#define VPR130_VPRSAVEADDR 0x2f800000                /*!< VPR context save address: 0x2F800000                                 */
+#define VPR130_VPRREMAPADDRVTOB 0x00000000           /*!< VPR remap address: 0x00000000                                        */
+#define VPR130_VEVIF_NTASKS_MIN 0                    /*!< VEVIF tasks: 0..15                                                   */
+#define VPR130_VEVIF_NTASKS_MAX 15                   /*!< VEVIF tasks: 0..15                                                   */
+#define VPR130_VEVIF_TASKS_MASK 0x0000fff0           /*!< Mask of supported VEVIF tasks: 0x0000FFF0                            */
+#define VPR130_VEVIF_NDPPI_MIN 8                     /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_NDPPI_MAX 11                    /*!< VEVIF DPPI channels: 8..11                                           */
+#define VPR130_VEVIF_NEVENTS_MIN 12                  /*!< VEVIF events: 12..15                                                 */
+#define VPR130_VEVIF_NEVENTS_MAX 15                  /*!< VEVIF events: 12..15                                                 */
+#define VPR130_DEBUGGER_OFFSET 1024                  /*!< Debugger interface register offset: 0x5F908400                       */
 
 /*IPCT APB registers*/
-#define IPCT_PRESENT
+#define IPCT_PRESENT 1
 #define IPCT_COUNT 3
 
 /*Software interrupt*/
-#define SWI_PRESENT
+#define SWI_PRESENT 1
 #define SWI_COUNT 8
 
 /*BELLBOARD APB registers*/
-#define BELLBOARD_PRESENT
+#define BELLBOARD_PRESENT 1
 #define BELLBOARD_COUNT 1
 
 /*Factory Information Configuration Registers*/
-#define FICR_PRESENT
+#define FICR_PRESENT 1
 #define FICR_COUNT 1
 
-#define FICR_LTE_ON 1
-#define FICR_WIFI_ON 0
-#define FICR_NFC_ON 0
+#define FICR_LTE_ON 1                                /*!< (unspecified)                                                        */
+#define FICR_WIFI_ON 0                               /*!< (unspecified)                                                        */
+#define FICR_NFC_ON 0                                /*!< (unspecified)                                                        */
 
 /*USBHSCORE*/
-#define USBHSCORE_PRESENT
+#define USBHSCORE_PRESENT 1
 #define USBHSCORE_COUNT 1
 
 /*I3CCORE*/
-#define I3CCORE_PRESENT
+#define I3CCORE_PRESENT 1
 #define I3CCORE_COUNT 2
 
-/*MCAN*/
-#define MCAN_PRESENT
-#define MCAN_COUNT 2
-
 /*DMU*/
-#define DMU_PRESENT
+#define DMU_PRESENT 1
 #define DMU_COUNT 2
 
+/*MCAN*/
+#define MCAN_PRESENT 1
+#define MCAN_COUNT 2
+
 /*System Trace Macrocell data buffer*/
-#define STMDATA_PRESENT
+#define STMDATA_PRESENT 1
 #define STMDATA_COUNT 1
 
 /*TDDCONF*/
-#define TDDCONF_PRESENT
+#define TDDCONF_PRESENT 1
 #define TDDCONF_COUNT 1
 
-#define TDDCONF_FEATEN_TDDCONF_CLK_320MHZ 0
-#define TDDCONF_FEATEN_TDDCONF_CLK_400MHZ 1
+#define TDDCONF_FEATEN_TDDCONF_CLK_320MHZ 0          /*!< (unspecified)                                                        */
+#define TDDCONF_FEATEN_TDDCONF_CLK_400MHZ 1          /*!< (unspecified)                                                        */
 
 /*GENERIC*/
-#define GENERIC_PRESENT
+#define GENERIC_PRESENT 1
 #define GENERIC_COUNT 3
 
 /*System Trace Macrocell*/
-#define STM_PRESENT
+#define STM_PRESENT 1
 #define STM_COUNT 1
 
 /*Trace Port Interface Unit*/
-#define TPIU_PRESENT
+#define TPIU_PRESENT 1
 #define TPIU_COUNT 1
 
 /*ATB Replicator module*/
-#define ATBREPLICATOR_PRESENT
+#define ATBREPLICATOR_PRESENT 1
 #define ATBREPLICATOR_COUNT 4
 
 /*ATB funnel module*/
-#define ATBFUNNEL_PRESENT
+#define ATBFUNNEL_PRESENT 1
 #define ATBFUNNEL_COUNT 4
 
 /*GPIO Tasks and Events*/
-#define GPIOTE_PRESENT
+#define GPIOTE_PRESENT 1
 #define GPIOTE_COUNT 2
 
+#define GPIOTE130_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE130_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE130_GPIOTE_NPORTEVENTS_MIN 0           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE130_GPIOTE_NPORTEVENTS_MAX 3           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE130_GPIOTE_NINTERRUPTS_MIN 0           /*!< Number of GPIOTE interrupts: 0..1                                    */
+#define GPIOTE130_GPIOTE_NINTERRUPTS_MAX 1           /*!< Number of GPIOTE interrupts: 0..1                                    */
+
+#define GPIOTE131_GPIOTE_NCHANNELS_MIN 0             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE131_GPIOTE_NCHANNELS_MAX 7             /*!< Number of GPIOTE channels: 0..7                                      */
+#define GPIOTE131_GPIOTE_NPORTEVENTS_MIN 0           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE131_GPIOTE_NPORTEVENTS_MAX 3           /*!< Number of GPIOTE port events: 0..3                                   */
+#define GPIOTE131_GPIOTE_NINTERRUPTS_MIN 0           /*!< Number of GPIOTE interrupts: 0..1                                    */
+#define GPIOTE131_GPIOTE_NINTERRUPTS_MAX 1           /*!< Number of GPIOTE interrupts: 0..1                                    */
+
 /*Global Real-time counter*/
-#define GRTC_PRESENT
+#define GRTC_PRESENT 1
 #define GRTC_COUNT 1
 
-#define GRTC_MSBWIDTH 15
-#define GRTC_NCC 24
-#define GRTC_NTIMEOUT 16
-#define GRTC_NDOMAIN 16
-#define GRTC_GRTC_NINTERRUPTS 3
-#define GRTC_PWMREGS 1
-#define GRTC_CLKOUTREG 1
-#define GRTC_CLKSELREG 0
+#define GRTC_MSBWIDTH_MIN 0                          /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
+                                                          0..14*/
+#define GRTC_MSBWIDTH_MAX 14                         /*!< Width of the RTCOUNTERH, RTCOMPAREH and RTCOMPARESYNCH registers :
+                                                          0..14*/
+#define GRTC_NCC_MIN 0                               /*!< Number of compare/capture registers : 0..15                          */
+#define GRTC_NCC_MAX 15                              /*!< Number of compare/capture registers : 0..15                          */
+#define GRTC_NTIMEOUT_MIN 0                          /*!< Width of the TIMEOUT register : 0..15                                */
+#define GRTC_NTIMEOUT_MAX 15                         /*!< Width of the TIMEOUT register : 0..15                                */
+#define GRTC_NDOMAIN_MIN 0                           /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
+#define GRTC_NDOMAIN_MAX 15                          /*!< Number of domains at the KEEPRUNNING register: 0..15                 */
+#define GRTC_GRTC_NINTERRUPTS_MIN 0                  /*!< Number of GRTC interrupts : 0..2                                     */
+#define GRTC_GRTC_NINTERRUPTS_MAX 2                  /*!< Number of GRTC interrupts : 0..2                                     */
+#define GRTC_PWMREGS 1                               /*!< (unspecified)                                                        */
+#define GRTC_CLKOUTREG 1                             /*!< (unspecified)                                                        */
+#define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
+#define GRTC_CLKSELLFLPRC 0                          /*!< (unspecified)                                                        */
 
 /*Trace buffer monitor*/
-#define TBM_PRESENT
+#define TBM_PRESENT 1
 #define TBM_COUNT 1
 
 /*USBHS*/
-#define USBHS_PRESENT
+#define USBHS_PRESENT 1
 #define USBHS_COUNT 1
 
 /*MRAM controller*/
-#define MRAMC_PRESENT
+#define MRAMC_PRESENT 1
 #define MRAMC_COUNT 2
 
-#define MRAMC110_NMRAMWORDSIZE 128
-#define MRAMC110_NMRAMPAGESIZE 4
-#define MRAMC110_NNVRPAGESIZE 3
-#define MRAMC110_NMAINMEMORYSIZE 6
-#define MRAMC110_NNVRPAGES 4
-#define MRAMC110_NSIZEMRAMWORDS 393216
-#define MRAMC110_MARMDATAWIDTHWORDS 4
-#define MRAMC110_NVRPAGEUPPER 1
-#define MRAMC110_NVRPAGELOWER 1
+#define MRAMC110_NMRAMWORDSIZE 128                   /*!< (unspecified)                                                        */
+#define MRAMC110_NMRAMPAGESIZE 4                     /*!< (unspecified)                                                        */
+#define MRAMC110_NNVRPAGESIZE 3                      /*!< (unspecified)                                                        */
+#define MRAMC110_NMAINMEMORYSIZE 6                   /*!< MRAM main memory size: 6 MB                                          */
+#define MRAMC110_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC110_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC110_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..393216                            */
+#define MRAMC110_NSIZEMRAMWORDS_MAX 393216           /*!< Register ERASE.SIZE.SIZE range: 1..393216                            */
+#define MRAMC110_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC110_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC110_NVRPAGEUPPER 1                      /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELOWER 1                      /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGEENABLENORMALWRITE 1          /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC110_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC110_IMPROVEDBURSTMODE 0                 /*!< (unspecified)                                                        */
 
-#define MRAMC111_NMRAMWORDSIZE 128
-#define MRAMC111_NMRAMPAGESIZE 4
-#define MRAMC111_NNVRPAGESIZE 1
-#define MRAMC111_NMAINMEMORYSIZE 2
-#define MRAMC111_NNVRPAGES 4
-#define MRAMC111_NSIZEMRAMWORDS 131072
-#define MRAMC111_MARMDATAWIDTHWORDS 4
-#define MRAMC111_NVRPAGEUPPER 0
-#define MRAMC111_NVRPAGELOWER 0
+#define MRAMC111_NMRAMWORDSIZE 128                   /*!< (unspecified)                                                        */
+#define MRAMC111_NMRAMPAGESIZE 4                     /*!< (unspecified)                                                        */
+#define MRAMC111_NNVRPAGESIZE 1                      /*!< (unspecified)                                                        */
+#define MRAMC111_NMAINMEMORYSIZE 2                   /*!< MRAM main memory size: 2 MB                                          */
+#define MRAMC111_NNVRPAGES_MIN 0                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC111_NNVRPAGES_MAX 3                     /*!< Number of MRAM NVR pages: 0..3                                       */
+#define MRAMC111_NSIZEMRAMWORDS_MIN 1                /*!< Register ERASE.SIZE.SIZE range: 1..131072                            */
+#define MRAMC111_NSIZEMRAMWORDS_MAX 131072           /*!< Register ERASE.SIZE.SIZE range: 1..131072                            */
+#define MRAMC111_MARMDATAWIDTHWORDS_MIN 0            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC111_MARMDATAWIDTHWORDS_MAX 3            /*!< Register TESTMODE2.MRAM.DATA/DATAINC size: 0..3                      */
+#define MRAMC111_NVRPAGEUPPER 0                      /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELOWER 0                      /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGEENABLENORMALWRITE 0          /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEBITS_MIN 24            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEBITS_MAX 27            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELRSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEBITS_MIN 28            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEBITS_MAX 31            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZERESET 15               /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEVALUE_MIN 0            /*!< (unspecified)                                                        */
+#define MRAMC111_NVRPAGELWSIZEVALUE_MAX 15           /*!< (unspecified)                                                        */
+#define MRAMC111_IMPROVEDBURSTMODE 0                 /*!< (unspecified)                                                        */
 
 /*External Memory Interface*/
-#define EXMIF_PRESENT
+#define EXMIF_PRESENT 1
 #define EXMIF_COUNT 1
 
 /*AUXPLL*/
-#define AUXPLL_PRESENT
+#define AUXPLL_PRESENT 1
 #define AUXPLL_COUNT 1
 
 /*AUXPM*/
-#define AUXPM_PRESENT
+#define AUXPM_PRESENT 1
 #define AUXPM_COUNT 1
 
 /*OTP controller*/
-#define OTPC_PRESENT
+#define OTPC_PRESENT 1
 #define OTPC_COUNT 1
 
-#define OTPC_REGION_NO_EXTENSION 0
-#define OTPC_REGION_EXTENSION 1
-#define OTPC_NREGIONS 6
-#define OTPC_REGION0ADDR 797179904
-#define OTPC_REGION0SIZE 768
-#define OTPC_REGION1ADDR 797180672
-#define OTPC_REGION1SIZE 256
-#define OTPC_REGION2ADDR 797180928
-#define OTPC_REGION2SIZE 768
-#define OTPC_REGION3ADDR 797181696
-#define OTPC_REGION3SIZE 768
-#define OTPC_REGION4ADDR 797182464
-#define OTPC_REGION4SIZE 512
-#define OTPC_REGION5ADDR 797182976
-#define OTPC_REGION5SIZE 13312
+#define OTPC_REGION_NO_EXTENSION 0                   /*!< (unspecified)                                                        */
+#define OTPC_REGION_EXTENSION 1                      /*!< (unspecified)                                                        */
+#define OTPC_NREGIONS_MIN 0                          /*!< Number of OTP regions : 0..5                                         */
+#define OTPC_NREGIONS_MAX 5                          /*!< Number of OTP regions : 0..5                                         */
+#define OTPC_REGION0ADDR 797179904                   /*!< Region 0 address : 797179904, size: 768 Bytes                        */
+#define OTPC_REGION0SIZE 768                         /*!< (unspecified)                                                        */
+#define OTPC_REGION1ADDR 797180672                   /*!< Region 1 address : 797180672, size: 256 Bytes                        */
+#define OTPC_REGION1SIZE 256                         /*!< (unspecified)                                                        */
+#define OTPC_REGION2ADDR 797180928                   /*!< Region 2 address : 797180928, size: 768 Bytes                        */
+#define OTPC_REGION2SIZE 768                         /*!< (unspecified)                                                        */
+#define OTPC_REGION3ADDR 797181696                   /*!< Region 3 address : 797181696, size: 768 Bytes                        */
+#define OTPC_REGION3SIZE 768                         /*!< (unspecified)                                                        */
+#define OTPC_REGION4ADDR 797182464                   /*!< Region 4 address : 797182464, size: 512 Bytes                        */
+#define OTPC_REGION4SIZE 512                         /*!< (unspecified)                                                        */
+#define OTPC_REGION5ADDR 797182976                   /*!< Region 5 address : 797182976, size: 13312 Bytes                      */
+#define OTPC_REGION5SIZE 13312                       /*!< (unspecified)                                                        */
 
 /*MUTEX*/
-#define MUTEX_PRESENT
+#define MUTEX_PRESENT 1
 #define MUTEX_COUNT 2
 
 /*Prototype HW information registers.*/
-#define PROTOTYPEINFO_PRESENT
+#define PROTOTYPEINFO_PRESENT 1
 #define PROTOTYPEINFO_COUNT 1
 
 /*I3C*/
-#define I3C_PRESENT
+#define I3C_PRESENT 1
 #define I3C_COUNT 2
 
 /*Controller Area Network*/
-#define CAN_PRESENT
+#define CAN_PRESENT 1
 #define CAN_COUNT 2
 
 /*Pulse width modulation unit*/
-#define PWM_PRESENT
+#define PWM_PRESENT 1
 #define PWM_COUNT 5
 
-#define PWM120_EASYDMA5 1
-#define PWM120_EASYDMATEMP 0
-#define PWM120_IDLE_OUT 1
-#define PWM120_COMPARE_MATCH 1
-#define PWM120_FEATURES_V2 0
-#define PWM120_NO_FEATURES_V2 1
-#define PWM120_EASYDMALISTINCLUDED 0
-#define PWM120_EASYDMAMODEINCLUDED 0
-#define PWM120_EASYDMAFULLLPMODEINCLUDED 0
-#define PWM120_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PWM120_EASYDMAMATCHEVENTRANGE 4
-#define PWM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1
-#define PWM120_EASYDMASTOPTASKINCLUDED 1
+#define PWM120_EASYDMA5 1                            /*!< (unspecified)                                                        */
+#define PWM120_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
+#define PWM120_IDLE_OUT 1                            /*!< (unspecified)                                                        */
+#define PWM120_COMPARE_MATCH 1                       /*!< (unspecified)                                                        */
+#define PWM120_FEATURES_V2 0                         /*!< (unspecified)                                                        */
+#define PWM120_NO_FEATURES_V2 1                      /*!< (unspecified)                                                        */
+#define PWM120_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM120_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM120_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define PWM120_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define PWM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                   */
+#define PWM120_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
 
-#define PWM130_EASYDMA5 1
-#define PWM130_EASYDMATEMP 0
-#define PWM130_IDLE_OUT 1
-#define PWM130_COMPARE_MATCH 1
-#define PWM130_FEATURES_V2 0
-#define PWM130_NO_FEATURES_V2 1
-#define PWM130_EASYDMALISTINCLUDED 0
-#define PWM130_EASYDMAMODEINCLUDED 0
-#define PWM130_EASYDMAFULLLPMODEINCLUDED 0
-#define PWM130_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PWM130_EASYDMAMATCHEVENTRANGE 4
-#define PWM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1
-#define PWM130_EASYDMASTOPTASKINCLUDED 1
+#define PWM130_EASYDMA5 1                            /*!< (unspecified)                                                        */
+#define PWM130_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
+#define PWM130_IDLE_OUT 1                            /*!< (unspecified)                                                        */
+#define PWM130_COMPARE_MATCH 1                       /*!< (unspecified)                                                        */
+#define PWM130_FEATURES_V2 0                         /*!< (unspecified)                                                        */
+#define PWM130_NO_FEATURES_V2 1                      /*!< (unspecified)                                                        */
+#define PWM130_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM130_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM130_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define PWM130_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define PWM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                   */
+#define PWM130_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
 
-#define PWM131_EASYDMA5 1
-#define PWM131_EASYDMATEMP 0
-#define PWM131_IDLE_OUT 1
-#define PWM131_COMPARE_MATCH 1
-#define PWM131_FEATURES_V2 0
-#define PWM131_NO_FEATURES_V2 1
-#define PWM131_EASYDMALISTINCLUDED 0
-#define PWM131_EASYDMAMODEINCLUDED 0
-#define PWM131_EASYDMAFULLLPMODEINCLUDED 0
-#define PWM131_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PWM131_EASYDMAMATCHEVENTRANGE 4
-#define PWM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1
-#define PWM131_EASYDMASTOPTASKINCLUDED 1
+#define PWM131_EASYDMA5 1                            /*!< (unspecified)                                                        */
+#define PWM131_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
+#define PWM131_IDLE_OUT 1                            /*!< (unspecified)                                                        */
+#define PWM131_COMPARE_MATCH 1                       /*!< (unspecified)                                                        */
+#define PWM131_FEATURES_V2 0                         /*!< (unspecified)                                                        */
+#define PWM131_NO_FEATURES_V2 1                      /*!< (unspecified)                                                        */
+#define PWM131_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM131_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM131_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define PWM131_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define PWM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                   */
+#define PWM131_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
 
-#define PWM132_EASYDMA5 1
-#define PWM132_EASYDMATEMP 0
-#define PWM132_IDLE_OUT 1
-#define PWM132_COMPARE_MATCH 1
-#define PWM132_FEATURES_V2 0
-#define PWM132_NO_FEATURES_V2 1
-#define PWM132_EASYDMALISTINCLUDED 0
-#define PWM132_EASYDMAMODEINCLUDED 0
-#define PWM132_EASYDMAFULLLPMODEINCLUDED 0
-#define PWM132_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PWM132_EASYDMAMATCHEVENTRANGE 4
-#define PWM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1
-#define PWM132_EASYDMASTOPTASKINCLUDED 1
+#define PWM132_EASYDMA5 1                            /*!< (unspecified)                                                        */
+#define PWM132_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
+#define PWM132_IDLE_OUT 1                            /*!< (unspecified)                                                        */
+#define PWM132_COMPARE_MATCH 1                       /*!< (unspecified)                                                        */
+#define PWM132_FEATURES_V2 0                         /*!< (unspecified)                                                        */
+#define PWM132_NO_FEATURES_V2 1                      /*!< (unspecified)                                                        */
+#define PWM132_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM132_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM132_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define PWM132_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define PWM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                   */
+#define PWM132_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
 
-#define PWM133_EASYDMA5 1
-#define PWM133_EASYDMATEMP 0
-#define PWM133_IDLE_OUT 1
-#define PWM133_COMPARE_MATCH 1
-#define PWM133_FEATURES_V2 0
-#define PWM133_NO_FEATURES_V2 1
-#define PWM133_EASYDMALISTINCLUDED 0
-#define PWM133_EASYDMAMODEINCLUDED 0
-#define PWM133_EASYDMAFULLLPMODEINCLUDED 0
-#define PWM133_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PWM133_EASYDMAMATCHEVENTRANGE 4
-#define PWM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1
-#define PWM133_EASYDMASTOPTASKINCLUDED 1
+#define PWM133_EASYDMA5 1                            /*!< (unspecified)                                                        */
+#define PWM133_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
+#define PWM133_IDLE_OUT 1                            /*!< (unspecified)                                                        */
+#define PWM133_COMPARE_MATCH 1                       /*!< (unspecified)                                                        */
+#define PWM133_FEATURES_V2 0                         /*!< (unspecified)                                                        */
+#define PWM133_NO_FEATURES_V2 1                      /*!< (unspecified)                                                        */
+#define PWM133_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM133_EASYDMAMODEINCLUDED 0                 /*!< (unspecified)                                                        */
+#define PWM133_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
+#define PWM133_EASYDMAPATTERNMATCHERINCLUDED 0       /*!< (unspecified)                                                        */
+#define PWM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                   */
+#define PWM133_EASYDMASTOPTASKINCLUDED 1             /*!< (unspecified)                                                        */
 
 /*SPI Slave*/
-#define SPIS_PRESENT
+#define SPIS_PRESENT 1
 #define SPIS_COUNT 9
 
-#define SPIS120_LEGACYPSEL 0
-#define SPIS120_LEGACYEDMA 0
-#define SPIS120_EASYDMA_MAXCNT_SIZE 16
-#define SPIS120_EASYDMA5 1
-#define SPIS120_EASYDMATEMP 0
-#define SPIS120_EASYDMALISTINCLUDED 1
-#define SPIS120_EASYDMAMODEINCLUDED 0
-#define SPIS120_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS120_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS120_EASYDMAMATCHEVENTRANGE 4
-#define SPIS120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS120_EASYDMASTOPTASKINCLUDED 1
+#define SPIS120_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS120_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS120_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS120_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS130_LEGACYPSEL 0
-#define SPIS130_LEGACYEDMA 0
-#define SPIS130_EASYDMA_MAXCNT_SIZE 16
-#define SPIS130_EASYDMA5 1
-#define SPIS130_EASYDMATEMP 0
-#define SPIS130_EASYDMALISTINCLUDED 1
-#define SPIS130_EASYDMAMODEINCLUDED 0
-#define SPIS130_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS130_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS130_EASYDMAMATCHEVENTRANGE 4
-#define SPIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS130_EASYDMASTOPTASKINCLUDED 1
+#define SPIS130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS130_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS131_LEGACYPSEL 0
-#define SPIS131_LEGACYEDMA 0
-#define SPIS131_EASYDMA_MAXCNT_SIZE 16
-#define SPIS131_EASYDMA5 1
-#define SPIS131_EASYDMATEMP 0
-#define SPIS131_EASYDMALISTINCLUDED 1
-#define SPIS131_EASYDMAMODEINCLUDED 0
-#define SPIS131_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS131_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS131_EASYDMAMATCHEVENTRANGE 4
-#define SPIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS131_EASYDMASTOPTASKINCLUDED 1
+#define SPIS131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS131_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS132_LEGACYPSEL 0
-#define SPIS132_LEGACYEDMA 0
-#define SPIS132_EASYDMA_MAXCNT_SIZE 16
-#define SPIS132_EASYDMA5 1
-#define SPIS132_EASYDMATEMP 0
-#define SPIS132_EASYDMALISTINCLUDED 1
-#define SPIS132_EASYDMAMODEINCLUDED 0
-#define SPIS132_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS132_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS132_EASYDMAMATCHEVENTRANGE 4
-#define SPIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS132_EASYDMASTOPTASKINCLUDED 1
+#define SPIS132_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS132_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS133_LEGACYPSEL 0
-#define SPIS133_LEGACYEDMA 0
-#define SPIS133_EASYDMA_MAXCNT_SIZE 16
-#define SPIS133_EASYDMA5 1
-#define SPIS133_EASYDMATEMP 0
-#define SPIS133_EASYDMALISTINCLUDED 1
-#define SPIS133_EASYDMAMODEINCLUDED 0
-#define SPIS133_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS133_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS133_EASYDMAMATCHEVENTRANGE 4
-#define SPIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS133_EASYDMASTOPTASKINCLUDED 1
+#define SPIS133_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS133_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS134_LEGACYPSEL 0
-#define SPIS134_LEGACYEDMA 0
-#define SPIS134_EASYDMA_MAXCNT_SIZE 16
-#define SPIS134_EASYDMA5 1
-#define SPIS134_EASYDMATEMP 0
-#define SPIS134_EASYDMALISTINCLUDED 1
-#define SPIS134_EASYDMAMODEINCLUDED 0
-#define SPIS134_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS134_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS134_EASYDMAMATCHEVENTRANGE 4
-#define SPIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS134_EASYDMASTOPTASKINCLUDED 1
+#define SPIS134_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS134_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS135_LEGACYPSEL 0
-#define SPIS135_LEGACYEDMA 0
-#define SPIS135_EASYDMA_MAXCNT_SIZE 16
-#define SPIS135_EASYDMA5 1
-#define SPIS135_EASYDMATEMP 0
-#define SPIS135_EASYDMALISTINCLUDED 1
-#define SPIS135_EASYDMAMODEINCLUDED 0
-#define SPIS135_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS135_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS135_EASYDMAMATCHEVENTRANGE 4
-#define SPIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS135_EASYDMASTOPTASKINCLUDED 1
+#define SPIS135_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS135_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS136_LEGACYPSEL 0
-#define SPIS136_LEGACYEDMA 0
-#define SPIS136_EASYDMA_MAXCNT_SIZE 16
-#define SPIS136_EASYDMA5 1
-#define SPIS136_EASYDMATEMP 0
-#define SPIS136_EASYDMALISTINCLUDED 1
-#define SPIS136_EASYDMAMODEINCLUDED 0
-#define SPIS136_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS136_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS136_EASYDMAMATCHEVENTRANGE 4
-#define SPIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS136_EASYDMASTOPTASKINCLUDED 1
+#define SPIS136_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS136_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define SPIS137_LEGACYPSEL 0
-#define SPIS137_LEGACYEDMA 0
-#define SPIS137_EASYDMA_MAXCNT_SIZE 16
-#define SPIS137_EASYDMA5 1
-#define SPIS137_EASYDMATEMP 0
-#define SPIS137_EASYDMALISTINCLUDED 1
-#define SPIS137_EASYDMAMODEINCLUDED 0
-#define SPIS137_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIS137_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIS137_EASYDMAMATCHEVENTRANGE 4
-#define SPIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIS137_EASYDMASTOPTASKINCLUDED 1
+#define SPIS137_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
+#define SPIS137_LEGACYEDMA 0                         /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIS137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 /*Serial Peripheral Interface Master with EasyDMA*/
-#define SPIM_PRESENT
+#define SPIM_PRESENT 1
 #define SPIM_COUNT 10
 
-#define SPIM120_EASYDMA5 1
-#define SPIM120_EASYDMATEMP 0
-#define SPIM120_EASYDMALISTINCLUDED 1
-#define SPIM120_EASYDMAMODEINCLUDED 0
-#define SPIM120_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM120_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM120_EASYDMAMATCHEVENTRANGE 4
-#define SPIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM120_EASYDMASTOPTASKINCLUDED 1
-#define SPIM120_MAX_DATARATE 32
-#define SPIM120_EASYDMA_MAXCNT_SIZE 16
-#define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM120_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM120_FEATURE_RXDELAY_PRESENT 1
-#define SPIM120_STALL_STATUS_PRESENT 0
-#define SPIM120_STALL_STATUS_TX_PRESENT 0
-#define SPIM120_HSSPI 0
-#define SPIM120_HIGH_SPEED_DOMAIN 1
-#define SPIM120_MULTIPLE_CHIPSELECT 1
-#define SPIM120_NUM_CHIPSELECT 1
-#define SPIM120_CORE_FREQUENCY 320
-#define SPIM120_PRESCALER_PRESENT 1
-#define SPIM120_PRESCALER_DIVISOR_RANGE 123
+#define SPIM120_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM120_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM120_MAX_DATARATE 32                      /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM120_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM120_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM120_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM120_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM120_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM120_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM120_HIGH_SPEED_DOMAIN 1                  /*!< (unspecified)                                                        */
+#define SPIM120_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM120_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM120_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM120_CORE_FREQUENCY 320                   /*!< Peripheral core frequency is 320 MHz.                                */
+#define SPIM120_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM120_PRESCALER_DIVISOR_RANGE_MIN 4        /*!< (unspecified)                                                        */
+#define SPIM120_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM120_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM120_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM120_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM120_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM121_EASYDMA5 1
-#define SPIM121_EASYDMATEMP 0
-#define SPIM121_EASYDMALISTINCLUDED 1
-#define SPIM121_EASYDMAMODEINCLUDED 0
-#define SPIM121_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM121_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM121_EASYDMAMATCHEVENTRANGE 4
-#define SPIM121_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM121_EASYDMASTOPTASKINCLUDED 1
-#define SPIM121_MAX_DATARATE 32
-#define SPIM121_EASYDMA_MAXCNT_SIZE 16
-#define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM121_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM121_FEATURE_RXDELAY_PRESENT 1
-#define SPIM121_STALL_STATUS_PRESENT 0
-#define SPIM121_STALL_STATUS_TX_PRESENT 0
-#define SPIM121_HSSPI 0
-#define SPIM121_HIGH_SPEED_DOMAIN 1
-#define SPIM121_MULTIPLE_CHIPSELECT 1
-#define SPIM121_NUM_CHIPSELECT 1
-#define SPIM121_CORE_FREQUENCY 320
-#define SPIM121_PRESCALER_PRESENT 1
-#define SPIM121_PRESCALER_DIVISOR_RANGE 123
+#define SPIM121_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM121_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM121_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM121_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM121_MAX_DATARATE 32                      /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM121_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM121_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM121_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM121_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM121_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM121_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM121_HIGH_SPEED_DOMAIN 1                  /*!< (unspecified)                                                        */
+#define SPIM121_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM121_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM121_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM121_CORE_FREQUENCY 320                   /*!< Peripheral core frequency is 320 MHz.                                */
+#define SPIM121_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM121_PRESCALER_DIVISOR_RANGE_MIN 4        /*!< (unspecified)                                                        */
+#define SPIM121_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM121_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM121_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM121_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM121_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM130_EASYDMA5 1
-#define SPIM130_EASYDMATEMP 0
-#define SPIM130_EASYDMALISTINCLUDED 1
-#define SPIM130_EASYDMAMODEINCLUDED 0
-#define SPIM130_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM130_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM130_EASYDMAMATCHEVENTRANGE 4
-#define SPIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM130_EASYDMASTOPTASKINCLUDED 1
-#define SPIM130_MAX_DATARATE 8
-#define SPIM130_EASYDMA_MAXCNT_SIZE 16
-#define SPIM130_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM130_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM130_FEATURE_RXDELAY_PRESENT 1
-#define SPIM130_STALL_STATUS_PRESENT 0
-#define SPIM130_STALL_STATUS_TX_PRESENT 0
-#define SPIM130_HSSPI 0
-#define SPIM130_HIGH_SPEED_DOMAIN 0
-#define SPIM130_MULTIPLE_CHIPSELECT 1
-#define SPIM130_NUM_CHIPSELECT 1
-#define SPIM130_CORE_FREQUENCY 64
-#define SPIM130_PRESCALER_PRESENT 1
-#define SPIM130_PRESCALER_DIVISOR_RANGE 125
+#define SPIM130_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM130_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM130_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM130_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM130_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM130_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM130_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM130_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM130_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM130_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM130_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM130_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM130_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM130_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM130_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM130_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM130_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM130_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM130_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM130_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM130_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM131_EASYDMA5 1
-#define SPIM131_EASYDMATEMP 0
-#define SPIM131_EASYDMALISTINCLUDED 1
-#define SPIM131_EASYDMAMODEINCLUDED 0
-#define SPIM131_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM131_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM131_EASYDMAMATCHEVENTRANGE 4
-#define SPIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM131_EASYDMASTOPTASKINCLUDED 1
-#define SPIM131_MAX_DATARATE 8
-#define SPIM131_EASYDMA_MAXCNT_SIZE 16
-#define SPIM131_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM131_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM131_FEATURE_RXDELAY_PRESENT 1
-#define SPIM131_STALL_STATUS_PRESENT 0
-#define SPIM131_STALL_STATUS_TX_PRESENT 0
-#define SPIM131_HSSPI 0
-#define SPIM131_HIGH_SPEED_DOMAIN 0
-#define SPIM131_MULTIPLE_CHIPSELECT 1
-#define SPIM131_NUM_CHIPSELECT 1
-#define SPIM131_CORE_FREQUENCY 64
-#define SPIM131_PRESCALER_PRESENT 1
-#define SPIM131_PRESCALER_DIVISOR_RANGE 125
+#define SPIM131_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM131_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM131_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM131_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM131_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM131_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM131_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM131_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM131_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM131_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM131_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM131_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM131_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM131_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM131_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM131_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM131_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM131_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM131_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM131_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM131_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM132_EASYDMA5 1
-#define SPIM132_EASYDMATEMP 0
-#define SPIM132_EASYDMALISTINCLUDED 1
-#define SPIM132_EASYDMAMODEINCLUDED 0
-#define SPIM132_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM132_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM132_EASYDMAMATCHEVENTRANGE 4
-#define SPIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM132_EASYDMASTOPTASKINCLUDED 1
-#define SPIM132_MAX_DATARATE 8
-#define SPIM132_EASYDMA_MAXCNT_SIZE 16
-#define SPIM132_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM132_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM132_FEATURE_RXDELAY_PRESENT 1
-#define SPIM132_STALL_STATUS_PRESENT 0
-#define SPIM132_STALL_STATUS_TX_PRESENT 0
-#define SPIM132_HSSPI 0
-#define SPIM132_HIGH_SPEED_DOMAIN 0
-#define SPIM132_MULTIPLE_CHIPSELECT 1
-#define SPIM132_NUM_CHIPSELECT 1
-#define SPIM132_CORE_FREQUENCY 64
-#define SPIM132_PRESCALER_PRESENT 1
-#define SPIM132_PRESCALER_DIVISOR_RANGE 125
+#define SPIM132_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM132_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM132_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM132_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM132_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM132_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM132_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM132_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM132_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM132_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM132_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM132_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM132_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM132_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM132_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM132_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM132_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM132_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM132_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM132_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM132_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM133_EASYDMA5 1
-#define SPIM133_EASYDMATEMP 0
-#define SPIM133_EASYDMALISTINCLUDED 1
-#define SPIM133_EASYDMAMODEINCLUDED 0
-#define SPIM133_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM133_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM133_EASYDMAMATCHEVENTRANGE 4
-#define SPIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM133_EASYDMASTOPTASKINCLUDED 1
-#define SPIM133_MAX_DATARATE 8
-#define SPIM133_EASYDMA_MAXCNT_SIZE 16
-#define SPIM133_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM133_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM133_FEATURE_RXDELAY_PRESENT 1
-#define SPIM133_STALL_STATUS_PRESENT 0
-#define SPIM133_STALL_STATUS_TX_PRESENT 0
-#define SPIM133_HSSPI 0
-#define SPIM133_HIGH_SPEED_DOMAIN 0
-#define SPIM133_MULTIPLE_CHIPSELECT 1
-#define SPIM133_NUM_CHIPSELECT 1
-#define SPIM133_CORE_FREQUENCY 64
-#define SPIM133_PRESCALER_PRESENT 1
-#define SPIM133_PRESCALER_DIVISOR_RANGE 125
+#define SPIM133_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM133_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM133_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM133_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM133_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM133_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM133_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM133_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM133_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM133_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM133_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM133_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM133_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM133_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM133_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM133_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM133_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM133_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM133_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM133_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM133_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM134_EASYDMA5 1
-#define SPIM134_EASYDMATEMP 0
-#define SPIM134_EASYDMALISTINCLUDED 1
-#define SPIM134_EASYDMAMODEINCLUDED 0
-#define SPIM134_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM134_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM134_EASYDMAMATCHEVENTRANGE 4
-#define SPIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM134_EASYDMASTOPTASKINCLUDED 1
-#define SPIM134_MAX_DATARATE 8
-#define SPIM134_EASYDMA_MAXCNT_SIZE 16
-#define SPIM134_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM134_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM134_FEATURE_RXDELAY_PRESENT 1
-#define SPIM134_STALL_STATUS_PRESENT 0
-#define SPIM134_STALL_STATUS_TX_PRESENT 0
-#define SPIM134_HSSPI 0
-#define SPIM134_HIGH_SPEED_DOMAIN 0
-#define SPIM134_MULTIPLE_CHIPSELECT 1
-#define SPIM134_NUM_CHIPSELECT 1
-#define SPIM134_CORE_FREQUENCY 64
-#define SPIM134_PRESCALER_PRESENT 1
-#define SPIM134_PRESCALER_DIVISOR_RANGE 125
+#define SPIM134_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM134_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM134_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM134_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM134_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM134_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM134_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM134_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM134_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM134_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM134_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM134_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM134_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM134_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM134_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM134_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM134_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM134_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM134_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM134_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM134_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM135_EASYDMA5 1
-#define SPIM135_EASYDMATEMP 0
-#define SPIM135_EASYDMALISTINCLUDED 1
-#define SPIM135_EASYDMAMODEINCLUDED 0
-#define SPIM135_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM135_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM135_EASYDMAMATCHEVENTRANGE 4
-#define SPIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM135_EASYDMASTOPTASKINCLUDED 1
-#define SPIM135_MAX_DATARATE 8
-#define SPIM135_EASYDMA_MAXCNT_SIZE 16
-#define SPIM135_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM135_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM135_FEATURE_RXDELAY_PRESENT 1
-#define SPIM135_STALL_STATUS_PRESENT 0
-#define SPIM135_STALL_STATUS_TX_PRESENT 0
-#define SPIM135_HSSPI 0
-#define SPIM135_HIGH_SPEED_DOMAIN 0
-#define SPIM135_MULTIPLE_CHIPSELECT 1
-#define SPIM135_NUM_CHIPSELECT 1
-#define SPIM135_CORE_FREQUENCY 64
-#define SPIM135_PRESCALER_PRESENT 1
-#define SPIM135_PRESCALER_DIVISOR_RANGE 125
+#define SPIM135_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM135_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM135_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM135_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM135_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM135_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM135_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM135_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM135_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM135_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM135_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM135_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM135_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM135_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM135_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM135_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM135_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM135_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM135_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM135_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM135_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM136_EASYDMA5 1
-#define SPIM136_EASYDMATEMP 0
-#define SPIM136_EASYDMALISTINCLUDED 1
-#define SPIM136_EASYDMAMODEINCLUDED 0
-#define SPIM136_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM136_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM136_EASYDMAMATCHEVENTRANGE 4
-#define SPIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM136_EASYDMASTOPTASKINCLUDED 1
-#define SPIM136_MAX_DATARATE 8
-#define SPIM136_EASYDMA_MAXCNT_SIZE 16
-#define SPIM136_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM136_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM136_FEATURE_RXDELAY_PRESENT 1
-#define SPIM136_STALL_STATUS_PRESENT 0
-#define SPIM136_STALL_STATUS_TX_PRESENT 0
-#define SPIM136_HSSPI 0
-#define SPIM136_HIGH_SPEED_DOMAIN 0
-#define SPIM136_MULTIPLE_CHIPSELECT 1
-#define SPIM136_NUM_CHIPSELECT 1
-#define SPIM136_CORE_FREQUENCY 64
-#define SPIM136_PRESCALER_PRESENT 1
-#define SPIM136_PRESCALER_DIVISOR_RANGE 125
+#define SPIM136_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM136_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM136_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM136_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM136_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM136_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM136_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM136_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM136_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM136_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM136_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM136_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM136_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM136_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM136_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM136_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM136_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM136_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM136_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM136_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM136_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
-#define SPIM137_EASYDMA5 1
-#define SPIM137_EASYDMATEMP 0
-#define SPIM137_EASYDMALISTINCLUDED 1
-#define SPIM137_EASYDMAMODEINCLUDED 0
-#define SPIM137_EASYDMAFULLLPMODEINCLUDED 0
-#define SPIM137_EASYDMAPATTERNMATCHERINCLUDED 1
-#define SPIM137_EASYDMAMATCHEVENTRANGE 4
-#define SPIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SPIM137_EASYDMASTOPTASKINCLUDED 1
-#define SPIM137_MAX_DATARATE 8
-#define SPIM137_EASYDMA_MAXCNT_SIZE 16
-#define SPIM137_FEATURE_HARDWARE_CSN_PRESENT 1
-#define SPIM137_FEATURE_HARDWARE_DCX_PRESENT 1
-#define SPIM137_FEATURE_RXDELAY_PRESENT 1
-#define SPIM137_STALL_STATUS_PRESENT 0
-#define SPIM137_STALL_STATUS_TX_PRESENT 0
-#define SPIM137_HSSPI 0
-#define SPIM137_HIGH_SPEED_DOMAIN 0
-#define SPIM137_MULTIPLE_CHIPSELECT 1
-#define SPIM137_NUM_CHIPSELECT 1
-#define SPIM137_CORE_FREQUENCY 64
-#define SPIM137_PRESCALER_PRESENT 1
-#define SPIM137_PRESCALER_DIVISOR_RANGE 125
+#define SPIM137_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define SPIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
+#define SPIM137_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM137_EASYDMA_MAXCNT_SIZE_MAX 14           /*!< (unspecified)                                                        */
+#define SPIM137_FEATURE_HARDWARE_CSN_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM137_FEATURE_HARDWARE_DCX_PRESENT 1       /*!< (unspecified)                                                        */
+#define SPIM137_FEATURE_RXDELAY_PRESENT 1            /*!< (unspecified)                                                        */
+#define SPIM137_STALL_STATUS_PRESENT 0               /*!< (unspecified)                                                        */
+#define SPIM137_STALL_STATUS_TX_PRESENT 0            /*!< (unspecified)                                                        */
+#define SPIM137_HSSPI 0                              /*!< (unspecified)                                                        */
+#define SPIM137_HIGH_SPEED_DOMAIN 0                  /*!< (unspecified)                                                        */
+#define SPIM137_MULTIPLE_CHIPSELECT 1                /*!< (unspecified)                                                        */
+#define SPIM137_NUM_CHIPSELECT_MIN 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM137_NUM_CHIPSELECT_MAX 0                 /*!< Peripheral supports 0..0 chip select signals.                        */
+#define SPIM137_CORE_FREQUENCY 64                    /*!< Peripheral core frequency is 64 MHz.                                 */
+#define SPIM137_PRESCALER_PRESENT 1                  /*!< (unspecified)                                                        */
+#define SPIM137_PRESCALER_DIVISOR_RANGE_MIN 2        /*!< (unspecified)                                                        */
+#define SPIM137_PRESCALER_DIVISOR_RANGE_MAX 126      /*!< (unspecified)                                                        */
+#define SPIM137_RXDELAY_VALUE_RANGE_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM137_RXDELAY_VALUE_RANGE_MAX 7            /*!< (unspecified)                                                        */
+#define SPIM137_RXDELAY_FIELD_WIDTH_MIN 0            /*!< (unspecified)                                                        */
+#define SPIM137_RXDELAY_FIELD_WIDTH_MAX 2            /*!< (unspecified)                                                        */
 
 /*UART with EasyDMA*/
-#define UARTE_PRESENT
+#define UARTE_PRESENT 1
 #define UARTE_COUNT 9
 
-#define UARTE120_EASYDMA_MAXCNT_SIZE 8
-#define UARTE120_EASYDMA5 1
-#define UARTE120_EASYDMATEMP 0
-#define UARTE120_TIMEOUT_INTERRUPT 1
-#define UARTE120_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE120_CORE_CLOCK_16 0
-#define UARTE120_CORE_CLOCK_320 1
-#define UARTE120_EASYDMALISTINCLUDED 0
-#define UARTE120_EASYDMAMODEINCLUDED 0
-#define UARTE120_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE120_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE120_EASYDMAMATCHEVENTRANGE 4
-#define UARTE120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE120_EASYDMASTOPTASKINCLUDED 1
+#define UARTE120_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE120_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE120_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE120_CORE_CLOCK_16 0                     /*!< (unspecified)                                                        */
+#define UARTE120_CORE_CLOCK_320 1                    /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE120_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE120_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE130_EASYDMA_MAXCNT_SIZE 8
-#define UARTE130_EASYDMA5 1
-#define UARTE130_EASYDMATEMP 0
-#define UARTE130_TIMEOUT_INTERRUPT 1
-#define UARTE130_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE130_CORE_CLOCK_16 1
-#define UARTE130_CORE_CLOCK_320 0
-#define UARTE130_EASYDMALISTINCLUDED 0
-#define UARTE130_EASYDMAMODEINCLUDED 0
-#define UARTE130_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE130_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE130_EASYDMAMATCHEVENTRANGE 4
-#define UARTE130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE130_EASYDMASTOPTASKINCLUDED 1
+#define UARTE130_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE130_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE130_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE130_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE130_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE130_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE130_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE131_EASYDMA_MAXCNT_SIZE 8
-#define UARTE131_EASYDMA5 1
-#define UARTE131_EASYDMATEMP 0
-#define UARTE131_TIMEOUT_INTERRUPT 1
-#define UARTE131_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE131_CORE_CLOCK_16 1
-#define UARTE131_CORE_CLOCK_320 0
-#define UARTE131_EASYDMALISTINCLUDED 0
-#define UARTE131_EASYDMAMODEINCLUDED 0
-#define UARTE131_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE131_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE131_EASYDMAMATCHEVENTRANGE 4
-#define UARTE131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE131_EASYDMASTOPTASKINCLUDED 1
+#define UARTE131_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE131_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE131_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE131_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE131_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE131_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE131_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE132_EASYDMA_MAXCNT_SIZE 8
-#define UARTE132_EASYDMA5 1
-#define UARTE132_EASYDMATEMP 0
-#define UARTE132_TIMEOUT_INTERRUPT 1
-#define UARTE132_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE132_CORE_CLOCK_16 1
-#define UARTE132_CORE_CLOCK_320 0
-#define UARTE132_EASYDMALISTINCLUDED 0
-#define UARTE132_EASYDMAMODEINCLUDED 0
-#define UARTE132_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE132_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE132_EASYDMAMATCHEVENTRANGE 4
-#define UARTE132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE132_EASYDMASTOPTASKINCLUDED 1
+#define UARTE132_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE132_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE132_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE132_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE132_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE132_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE132_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE133_EASYDMA_MAXCNT_SIZE 8
-#define UARTE133_EASYDMA5 1
-#define UARTE133_EASYDMATEMP 0
-#define UARTE133_TIMEOUT_INTERRUPT 1
-#define UARTE133_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE133_CORE_CLOCK_16 1
-#define UARTE133_CORE_CLOCK_320 0
-#define UARTE133_EASYDMALISTINCLUDED 0
-#define UARTE133_EASYDMAMODEINCLUDED 0
-#define UARTE133_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE133_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE133_EASYDMAMATCHEVENTRANGE 4
-#define UARTE133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE133_EASYDMASTOPTASKINCLUDED 1
+#define UARTE133_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE133_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE133_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE133_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE133_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE133_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE133_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE134_EASYDMA_MAXCNT_SIZE 8
-#define UARTE134_EASYDMA5 1
-#define UARTE134_EASYDMATEMP 0
-#define UARTE134_TIMEOUT_INTERRUPT 1
-#define UARTE134_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE134_CORE_CLOCK_16 1
-#define UARTE134_CORE_CLOCK_320 0
-#define UARTE134_EASYDMALISTINCLUDED 0
-#define UARTE134_EASYDMAMODEINCLUDED 0
-#define UARTE134_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE134_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE134_EASYDMAMATCHEVENTRANGE 4
-#define UARTE134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE134_EASYDMASTOPTASKINCLUDED 1
+#define UARTE134_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE134_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE134_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE134_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE134_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE134_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE134_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE135_EASYDMA_MAXCNT_SIZE 8
-#define UARTE135_EASYDMA5 1
-#define UARTE135_EASYDMATEMP 0
-#define UARTE135_TIMEOUT_INTERRUPT 1
-#define UARTE135_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE135_CORE_CLOCK_16 1
-#define UARTE135_CORE_CLOCK_320 0
-#define UARTE135_EASYDMALISTINCLUDED 0
-#define UARTE135_EASYDMAMODEINCLUDED 0
-#define UARTE135_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE135_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE135_EASYDMAMATCHEVENTRANGE 4
-#define UARTE135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE135_EASYDMASTOPTASKINCLUDED 1
+#define UARTE135_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE135_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE135_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE135_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE135_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE135_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE135_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE136_EASYDMA_MAXCNT_SIZE 8
-#define UARTE136_EASYDMA5 1
-#define UARTE136_EASYDMATEMP 0
-#define UARTE136_TIMEOUT_INTERRUPT 1
-#define UARTE136_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE136_CORE_CLOCK_16 1
-#define UARTE136_CORE_CLOCK_320 0
-#define UARTE136_EASYDMALISTINCLUDED 0
-#define UARTE136_EASYDMAMODEINCLUDED 0
-#define UARTE136_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE136_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE136_EASYDMAMATCHEVENTRANGE 4
-#define UARTE136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE136_EASYDMASTOPTASKINCLUDED 1
+#define UARTE136_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE136_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE136_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE136_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE136_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE136_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE136_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
-#define UARTE137_EASYDMA_MAXCNT_SIZE 8
-#define UARTE137_EASYDMA5 1
-#define UARTE137_EASYDMATEMP 0
-#define UARTE137_TIMEOUT_INTERRUPT 1
-#define UARTE137_CONFIGURABLE_DATA_FRAME_SIZE 1
-#define UARTE137_CORE_CLOCK_16 1
-#define UARTE137_CORE_CLOCK_320 0
-#define UARTE137_EASYDMALISTINCLUDED 0
-#define UARTE137_EASYDMAMODEINCLUDED 0
-#define UARTE137_EASYDMAFULLLPMODEINCLUDED 0
-#define UARTE137_EASYDMAPATTERNMATCHERINCLUDED 1
-#define UARTE137_EASYDMAMATCHEVENTRANGE 4
-#define UARTE137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define UARTE137_EASYDMASTOPTASKINCLUDED 1
+#define UARTE137_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA_MAXCNT_SIZE_MAX 14          /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMA5 1                          /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMATEMP 0                       /*!< (unspecified)                                                        */
+#define UARTE137_TIMEOUT_INTERRUPT 1                 /*!< (unspecified)                                                        */
+#define UARTE137_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
+#define UARTE137_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
+#define UARTE137_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE137_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define UARTE137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE137_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 /*I2C compatible Two-Wire Master Interface with EasyDMA*/
-#define TWIM_PRESENT
+#define TWIM_PRESENT 1
 #define TWIM_COUNT 9
 
-#define TWIM120_EASYDMA5 1
-#define TWIM120_EASYDMATEMP 0
-#define TWIM120_EASYDMALISTINCLUDED 1
-#define TWIM120_EASYDMAMODEINCLUDED 0
-#define TWIM120_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM120_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM120_EASYDMAMATCHEVENTRANGE 4
-#define TWIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM120_EASYDMASTOPTASKINCLUDED 1
+#define TWIM120_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM120_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM120_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM130_EASYDMA5 1
-#define TWIM130_EASYDMATEMP 0
-#define TWIM130_EASYDMALISTINCLUDED 1
-#define TWIM130_EASYDMAMODEINCLUDED 0
-#define TWIM130_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM130_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM130_EASYDMAMATCHEVENTRANGE 4
-#define TWIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM130_EASYDMASTOPTASKINCLUDED 1
+#define TWIM130_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM131_EASYDMA5 1
-#define TWIM131_EASYDMATEMP 0
-#define TWIM131_EASYDMALISTINCLUDED 1
-#define TWIM131_EASYDMAMODEINCLUDED 0
-#define TWIM131_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM131_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM131_EASYDMAMATCHEVENTRANGE 4
-#define TWIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM131_EASYDMASTOPTASKINCLUDED 1
+#define TWIM131_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM132_EASYDMA5 1
-#define TWIM132_EASYDMATEMP 0
-#define TWIM132_EASYDMALISTINCLUDED 1
-#define TWIM132_EASYDMAMODEINCLUDED 0
-#define TWIM132_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM132_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM132_EASYDMAMATCHEVENTRANGE 4
-#define TWIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM132_EASYDMASTOPTASKINCLUDED 1
+#define TWIM132_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM133_EASYDMA5 1
-#define TWIM133_EASYDMATEMP 0
-#define TWIM133_EASYDMALISTINCLUDED 1
-#define TWIM133_EASYDMAMODEINCLUDED 0
-#define TWIM133_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM133_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM133_EASYDMAMATCHEVENTRANGE 4
-#define TWIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM133_EASYDMASTOPTASKINCLUDED 1
+#define TWIM133_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM134_EASYDMA5 1
-#define TWIM134_EASYDMATEMP 0
-#define TWIM134_EASYDMALISTINCLUDED 1
-#define TWIM134_EASYDMAMODEINCLUDED 0
-#define TWIM134_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM134_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM134_EASYDMAMATCHEVENTRANGE 4
-#define TWIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM134_EASYDMASTOPTASKINCLUDED 1
+#define TWIM134_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM135_EASYDMA5 1
-#define TWIM135_EASYDMATEMP 0
-#define TWIM135_EASYDMALISTINCLUDED 1
-#define TWIM135_EASYDMAMODEINCLUDED 0
-#define TWIM135_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM135_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM135_EASYDMAMATCHEVENTRANGE 4
-#define TWIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM135_EASYDMASTOPTASKINCLUDED 1
+#define TWIM135_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM136_EASYDMA5 1
-#define TWIM136_EASYDMATEMP 0
-#define TWIM136_EASYDMALISTINCLUDED 1
-#define TWIM136_EASYDMAMODEINCLUDED 0
-#define TWIM136_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM136_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM136_EASYDMAMATCHEVENTRANGE 4
-#define TWIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM136_EASYDMASTOPTASKINCLUDED 1
+#define TWIM136_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIM137_EASYDMA5 1
-#define TWIM137_EASYDMATEMP 0
-#define TWIM137_EASYDMALISTINCLUDED 1
-#define TWIM137_EASYDMAMODEINCLUDED 0
-#define TWIM137_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIM137_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIM137_EASYDMAMATCHEVENTRANGE 4
-#define TWIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIM137_EASYDMASTOPTASKINCLUDED 1
+#define TWIM137_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIM137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 /*Sample accumulator router*/
-#define SACR_PRESENT
+#define SACR_PRESENT 1
 #define SACR_COUNT 1
 
 /*GPIO Port*/
-#define GPIO_PRESENT
+#define GPIO_PRESENT 1
 #define GPIO_COUNT 10
 
-#define P0_PIN_NUM 13
-#define P0_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P0_DRIVECTRL 0
-#define P0_PWRCTRL 0
-#define P0_PWRCTRL_SEPARATE_REG 0
-#define P0_VSS_FLOAT_DFT 1
-#define P0_PIN_OWNER_SEC 1
-#define P0_WIFI_CORE_PRESENT 0
+#define P0_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P0_PIN_NUM_MAX 12                            /*!< (unspecified)                                                        */
+#define P0_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P0_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P0_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P0_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P0_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P0_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P0_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P0_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P1_PIN_NUM 12
-#define P1_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P1_DRIVECTRL 0
-#define P1_PWRCTRL 0
-#define P1_PWRCTRL_SEPARATE_REG 0
-#define P1_VSS_FLOAT_DFT 1
-#define P1_PIN_OWNER_SEC 1
-#define P1_WIFI_CORE_PRESENT 0
+#define P1_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P1_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
+#define P1_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P1_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P1_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P1_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P1_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P1_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P1_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P1_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P2_PIN_NUM 12
-#define P2_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P2_DRIVECTRL 0
-#define P2_PWRCTRL 0
-#define P2_PWRCTRL_SEPARATE_REG 0
-#define P2_VSS_FLOAT_DFT 1
-#define P2_PIN_OWNER_SEC 1
-#define P2_WIFI_CORE_PRESENT 0
+#define P2_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P2_PIN_NUM_MAX 11                            /*!< (unspecified)                                                        */
+#define P2_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P2_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P2_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P2_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P2_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P2_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P2_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P2_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P6_PIN_NUM 14
-#define P6_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P6_DRIVECTRL 1
-#define P6_PWRCTRL 0
-#define P6_PWRCTRL_SEPARATE_REG 0
-#define P6_VSS_FLOAT_DFT 1
-#define P6_PIN_OWNER_SEC 1
-#define P6_WIFI_CORE_PRESENT 0
+#define P6_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P6_PIN_NUM_MAX 13                            /*!< (unspecified)                                                        */
+#define P6_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P6_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P6_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P6_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P6_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P6_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P6_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P6_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P8_PIN_NUM 5
-#define P8_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P8_DRIVECTRL 1
-#define P8_PWRCTRL 0
-#define P8_PWRCTRL_SEPARATE_REG 0
-#define P8_VSS_FLOAT_DFT 1
-#define P8_PIN_OWNER_SEC 1
-#define P8_WIFI_CORE_PRESENT 0
+#define P8_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P8_PIN_NUM_MAX 4                             /*!< (unspecified)                                                        */
+#define P8_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P8_DRIVECTRL 1                               /*!< (unspecified)                                                        */
+#define P8_PWRCTRL 0                                 /*!< (unspecified)                                                        */
+#define P8_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P8_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P8_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P8_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P8_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P9_PIN_NUM 6
-#define P9_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P9_DRIVECTRL 0
-#define P9_PWRCTRL 1
-#define P9_PWRCTRL_SEPARATE_REG 0
-#define P9_VSS_FLOAT_DFT 1
-#define P9_PIN_OWNER_SEC 1
-#define P9_WIFI_CORE_PRESENT 0
+#define P9_PIN_NUM_MIN 0                             /*!< (unspecified)                                                        */
+#define P9_PIN_NUM_MAX 5                             /*!< (unspecified)                                                        */
+#define P9_PINS_PRESENT 0xfffffffful                 /*!< (unspecified)                                                        */
+#define P9_DRIVECTRL 0                               /*!< (unspecified)                                                        */
+#define P9_PWRCTRL 1                                 /*!< (unspecified)                                                        */
+#define P9_PWRCTRL_SEPARATE_REG 0                    /*!< (unspecified)                                                        */
+#define P9_VSS_FLOAT_DFT 1                           /*!< (unspecified)                                                        */
+#define P9_PIN_OWNER_SEC 1                           /*!< (unspecified)                                                        */
+#define P9_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
+#define P9_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 
-#define P10_PIN_NUM 8
-#define P10_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P10_DRIVECTRL 0
-#define P10_PWRCTRL 0
-#define P10_PWRCTRL_SEPARATE_REG 0
-#define P10_VSS_FLOAT_DFT 1
-#define P10_PIN_OWNER_SEC 1
-#define P10_WIFI_CORE_PRESENT 0
+#define P10_PIN_NUM_MIN 0                            /*!< (unspecified)                                                        */
+#define P10_PIN_NUM_MAX 7                            /*!< (unspecified)                                                        */
+#define P10_PINS_PRESENT 0xfffffffful                /*!< (unspecified)                                                        */
+#define P10_DRIVECTRL 0                              /*!< (unspecified)                                                        */
+#define P10_PWRCTRL 0                                /*!< (unspecified)                                                        */
+#define P10_PWRCTRL_SEPARATE_REG 0                   /*!< (unspecified)                                                        */
+#define P10_VSS_FLOAT_DFT 1                          /*!< (unspecified)                                                        */
+#define P10_PIN_OWNER_SEC 1                          /*!< (unspecified)                                                        */
+#define P10_WIFI_CORE_PRESENT 0                      /*!< (unspecified)                                                        */
+#define P10_RETAIN_PER_PIN 0                         /*!< (unspecified)                                                        */
 
-#define P11_PIN_NUM 8
-#define P11_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P11_DRIVECTRL 0
-#define P11_PWRCTRL 0
-#define P11_PWRCTRL_SEPARATE_REG 0
-#define P11_VSS_FLOAT_DFT 1
-#define P11_PIN_OWNER_SEC 1
-#define P11_WIFI_CORE_PRESENT 0
+#define P11_PIN_NUM_MIN 0                            /*!< (unspecified)                                                        */
+#define P11_PIN_NUM_MAX 7                            /*!< (unspecified)                                                        */
+#define P11_PINS_PRESENT 0xfffffffful                /*!< (unspecified)                                                        */
+#define P11_DRIVECTRL 0                              /*!< (unspecified)                                                        */
+#define P11_PWRCTRL 0                                /*!< (unspecified)                                                        */
+#define P11_PWRCTRL_SEPARATE_REG 0                   /*!< (unspecified)                                                        */
+#define P11_VSS_FLOAT_DFT 1                          /*!< (unspecified)                                                        */
+#define P11_PIN_OWNER_SEC 1                          /*!< (unspecified)                                                        */
+#define P11_WIFI_CORE_PRESENT 0                      /*!< (unspecified)                                                        */
+#define P11_RETAIN_PER_PIN 0                         /*!< (unspecified)                                                        */
 
-#define P12_PIN_NUM 3
-#define P12_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P12_DRIVECTRL 0
-#define P12_PWRCTRL 0
-#define P12_PWRCTRL_SEPARATE_REG 0
-#define P12_VSS_FLOAT_DFT 1
-#define P12_PIN_OWNER_SEC 1
-#define P12_WIFI_CORE_PRESENT 0
+#define P12_PIN_NUM_MIN 0                            /*!< (unspecified)                                                        */
+#define P12_PIN_NUM_MAX 2                            /*!< (unspecified)                                                        */
+#define P12_PINS_PRESENT 0xfffffffful                /*!< (unspecified)                                                        */
+#define P12_DRIVECTRL 0                              /*!< (unspecified)                                                        */
+#define P12_PWRCTRL 0                                /*!< (unspecified)                                                        */
+#define P12_PWRCTRL_SEPARATE_REG 0                   /*!< (unspecified)                                                        */
+#define P12_VSS_FLOAT_DFT 1                          /*!< (unspecified)                                                        */
+#define P12_PIN_OWNER_SEC 1                          /*!< (unspecified)                                                        */
+#define P12_WIFI_CORE_PRESENT 0                      /*!< (unspecified)                                                        */
+#define P12_RETAIN_PER_PIN 0                         /*!< (unspecified)                                                        */
 
-#define P13_PIN_NUM 4
-#define P13_FEATURE_PINS_PRESENT 0xFFFFFFFFUL
-#define P13_DRIVECTRL 0
-#define P13_PWRCTRL 0
-#define P13_PWRCTRL_SEPARATE_REG 0
-#define P13_VSS_FLOAT_DFT 1
-#define P13_PIN_OWNER_SEC 1
-#define P13_WIFI_CORE_PRESENT 0
+#define P13_PIN_NUM_MIN 0                            /*!< (unspecified)                                                        */
+#define P13_PIN_NUM_MAX 3                            /*!< (unspecified)                                                        */
+#define P13_PINS_PRESENT 0xfffffffful                /*!< (unspecified)                                                        */
+#define P13_DRIVECTRL 0                              /*!< (unspecified)                                                        */
+#define P13_PWRCTRL 0                                /*!< (unspecified)                                                        */
+#define P13_PWRCTRL_SEPARATE_REG 0                   /*!< (unspecified)                                                        */
+#define P13_VSS_FLOAT_DFT 1                          /*!< (unspecified)                                                        */
+#define P13_PIN_OWNER_SEC 1                          /*!< (unspecified)                                                        */
+#define P13_WIFI_CORE_PRESENT 0                      /*!< (unspecified)                                                        */
+#define P13_RETAIN_PER_PIN 0                         /*!< (unspecified)                                                        */
 
 /*GPIO Internal*/
-#define GPIOINTERNAL_PRESENT
+#define GPIOINTERNAL_PRESENT 1
 #define GPIOINTERNAL_COUNT 1
 
 /*Reset hub*/
-#define RESETHUB_PRESENT
+#define RESETHUB_PRESENT 1
 #define RESETHUB_COUNT 1
 
+#define RESETHUB_DOMAIN_MASK 252                     /*!< Mask for supported domains.                                          */
+
 /*Analog to Digital Converter*/
-#define SAADC_PRESENT
+#define SAADC_PRESENT 1
 #define SAADC_COUNT 1
 
-#define SAADC_EASYDMA5 0
-#define SAADC_EASYDMATEMP 1
-#define SAADC_PSEL_V2 1
-#define SAADC_EASYDMALISTINCLUDED 0
-#define SAADC_EASYDMAMODEINCLUDED 0
-#define SAADC_EASYDMAFULLLPMODEINCLUDED 0
-#define SAADC_EASYDMAPATTERNMATCHERINCLUDED 0
-#define SAADC_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define SAADC_EASYDMASTOPTASKINCLUDED 1
+#define SAADC_EASYDMA5 0                             /*!< (unspecified)                                                        */
+#define SAADC_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
+#define SAADC_PSEL_V2 1                              /*!< (unspecified)                                                        */
+#define SAADC_TASKS_CALIBRATEGAIN 0                  /*!< (unspecified)                                                        */
+#define SAADC_EASYDMALISTINCLUDED 0                  /*!< (unspecified)                                                        */
+#define SAADC_EASYDMAMODEINCLUDED 0                  /*!< (unspecified)                                                        */
+#define SAADC_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
+#define SAADC_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
+#define SAADC_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
+#define SAADC_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
 
 /*Comparator*/
-#define COMP_PRESENT
+#define COMP_PRESENT 1
 #define COMP_COUNT 1
 
 /*Low-power comparator*/
-#define LPCOMP_PRESENT
+#define LPCOMP_PRESENT 1
 #define LPCOMP_COUNT 1
 
 /*Temperature Sensor*/
-#define TEMP_PRESENT
+#define TEMP_PRESENT 1
 #define TEMP_COUNT 1
 
 /*Inter-IC Sound*/
-#define I2S_PRESENT
+#define I2S_PRESENT 1
 #define I2S_COUNT 2
 
 /*Pulse Density Modulation (Digital Microphone) Interface*/
-#define PDM_PRESENT
+#define PDM_PRESENT 1
 #define PDM_COUNT 1
 
-#define PDM_EASYDMA5 0
-#define PDM_EASYDMATEMP 1
-#define PDM_SAMPLE16 0
-#define PDM_SAMPLE48 1
-#define PDM_EASYDMALISTINCLUDED 0
-#define PDM_EASYDMAMODEINCLUDED 0
-#define PDM_EASYDMAFULLLPMODEINCLUDED 0
-#define PDM_EASYDMAPATTERNMATCHERINCLUDED 0
-#define PDM_EASYDMAMATCHEVENTRANGE 4
-#define PDM_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define PDM_EASYDMASTOPTASKINCLUDED 1
+#define PDM_EASYDMA5 0                               /*!< (unspecified)                                                        */
+#define PDM_EASYDMATEMP 1                            /*!< (unspecified)                                                        */
+#define PDM_SAMPLE16 0                               /*!< (unspecified)                                                        */
+#define PDM_SAMPLE48 1                               /*!< (unspecified)                                                        */
+#define PDM_EASYDMALISTINCLUDED 0                    /*!< (unspecified)                                                        */
+#define PDM_EASYDMAMODEINCLUDED 0                    /*!< (unspecified)                                                        */
+#define PDM_EASYDMAFULLLPMODEINCLUDED 0              /*!< (unspecified)                                                        */
+#define PDM_EASYDMAPATTERNMATCHERINCLUDED 0          /*!< (unspecified)                                                        */
+#define PDM_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                      */
+#define PDM_EASYDMASTOPTASKINCLUDED 1                /*!< (unspecified)                                                        */
 
 /*Quadrature Decoder*/
-#define QDEC_PRESENT
+#define QDEC_PRESENT 1
 #define QDEC_COUNT 2
 
-#define QDEC130_LEGACYPSEL 0
+#define QDEC130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
 
-#define QDEC131_LEGACYPSEL 0
+#define QDEC131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
 
 /*SIM card interface*/
-#define SIMIF_PRESENT
+#define SIMIF_PRESENT 1
 #define SIMIF_COUNT 2
 
 /*MipiRffe Master*/
-#define MIPIRFFE_PRESENT
+#define MIPIRFFE_PRESENT 1
 #define MIPIRFFE_COUNT 1
 
 /*I2C compatible Two-Wire Slave Interface with EasyDMA*/
-#define TWIS_PRESENT
+#define TWIS_PRESENT 1
 #define TWIS_COUNT 8
 
-#define TWIS130_EASYDMA5 1
-#define TWIS130_EASYDMATEMP 0
-#define TWIS130_EASYDMALISTINCLUDED 1
-#define TWIS130_EASYDMAMODEINCLUDED 0
-#define TWIS130_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS130_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS130_EASYDMAMATCHEVENTRANGE 4
-#define TWIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS130_EASYDMASTOPTASKINCLUDED 1
+#define TWIS130_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS131_EASYDMA5 1
-#define TWIS131_EASYDMATEMP 0
-#define TWIS131_EASYDMALISTINCLUDED 1
-#define TWIS131_EASYDMAMODEINCLUDED 0
-#define TWIS131_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS131_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS131_EASYDMAMATCHEVENTRANGE 4
-#define TWIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS131_EASYDMASTOPTASKINCLUDED 1
+#define TWIS131_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS132_EASYDMA5 1
-#define TWIS132_EASYDMATEMP 0
-#define TWIS132_EASYDMALISTINCLUDED 1
-#define TWIS132_EASYDMAMODEINCLUDED 0
-#define TWIS132_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS132_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS132_EASYDMAMATCHEVENTRANGE 4
-#define TWIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS132_EASYDMASTOPTASKINCLUDED 1
+#define TWIS132_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS133_EASYDMA5 1
-#define TWIS133_EASYDMATEMP 0
-#define TWIS133_EASYDMALISTINCLUDED 1
-#define TWIS133_EASYDMAMODEINCLUDED 0
-#define TWIS133_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS133_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS133_EASYDMAMATCHEVENTRANGE 4
-#define TWIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS133_EASYDMASTOPTASKINCLUDED 1
+#define TWIS133_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS134_EASYDMA5 1
-#define TWIS134_EASYDMATEMP 0
-#define TWIS134_EASYDMALISTINCLUDED 1
-#define TWIS134_EASYDMAMODEINCLUDED 0
-#define TWIS134_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS134_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS134_EASYDMAMATCHEVENTRANGE 4
-#define TWIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS134_EASYDMASTOPTASKINCLUDED 1
+#define TWIS134_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS135_EASYDMA5 1
-#define TWIS135_EASYDMATEMP 0
-#define TWIS135_EASYDMALISTINCLUDED 1
-#define TWIS135_EASYDMAMODEINCLUDED 0
-#define TWIS135_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS135_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS135_EASYDMAMATCHEVENTRANGE 4
-#define TWIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS135_EASYDMASTOPTASKINCLUDED 1
+#define TWIS135_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS136_EASYDMA5 1
-#define TWIS136_EASYDMATEMP 0
-#define TWIS136_EASYDMALISTINCLUDED 1
-#define TWIS136_EASYDMAMODEINCLUDED 0
-#define TWIS136_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS136_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS136_EASYDMAMATCHEVENTRANGE 4
-#define TWIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS136_EASYDMASTOPTASKINCLUDED 1
+#define TWIS136_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
-#define TWIS137_EASYDMA5 1
-#define TWIS137_EASYDMATEMP 0
-#define TWIS137_EASYDMALISTINCLUDED 1
-#define TWIS137_EASYDMAMODEINCLUDED 0
-#define TWIS137_EASYDMAFULLLPMODEINCLUDED 0
-#define TWIS137_EASYDMAPATTERNMATCHERINCLUDED 1
-#define TWIS137_EASYDMAMATCHEVENTRANGE 4
-#define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0
-#define TWIS137_EASYDMASTOPTASKINCLUDED 1
+#define TWIS137_EASYDMA5 1                           /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMATEMP 0                        /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMALISTINCLUDED 1                /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMAMODEINCLUDED 0                /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMAFULLLPMODEINCLUDED 0          /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
+#define TWIS137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
+#define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 
 #ifdef __cplusplus

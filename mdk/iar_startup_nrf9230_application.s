@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -196,8 +196,8 @@ __vector_table
         DCD     GRTC_0_IRQHandler
         DCD     GRTC_1_IRQHandler
         DCD     GRTC_2_IRQHandler
-        DCD     ISIM_MHU_0_IRQHandler
-        DCD     ISIM_MHU_1_IRQHandler
+        DCD     0                         ; Reserved
+        DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
@@ -772,16 +772,6 @@ GRTC_1_IRQHandler
         PUBWEAK  GRTC_2_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 GRTC_2_IRQHandler
-        B .
-
-        PUBWEAK  ISIM_MHU_0_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-ISIM_MHU_0_IRQHandler
-        B .
-
-        PUBWEAK  ISIM_MHU_1_IRQHandler
-        SECTION .text:CODE:REORDER:NOROOT(1)
-ISIM_MHU_1_IRQHandler
         B .
 
         PUBWEAK  TBM_IRQHandler

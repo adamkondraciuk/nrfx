@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -56,16 +56,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
-  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
-  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
-  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
-  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
-  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
-  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
-  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
-  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
-  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
-  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
   VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
   VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
@@ -225,27 +215,13 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPRCLIC_NS_BASE          0x5F8D4000UL
-#define NRF_FLPR_VPRTIM_NS_BASE           0x00000000UL
+#define NRF_FLPR_VPRCLIC_BASE             0x5F8D5000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_FLPR_VPRCLIC_NS               ((NRF_CLIC_Type*)                     NRF_FLPR_VPRCLIC_NS_BASE)
-#define NRF_FLPR_VPRTIM_NS                ((NRF_VTIM_Type*)                     NRF_FLPR_VPRTIM_NS_BASE)
-
-/* =========================================================================================================================== */
-/* ================                                    TrustZone Remapping                                    ================ */
-/* =========================================================================================================================== */
-
-#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
-  #define NRF_FLPR_VPRTIM                         NRF_FLPR_VPRTIM_NS
-#else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_FLPR_VPRCLIC                        NRF_FLPR_VPRCLIC_NS
-  #define NRF_FLPR_VPRTIM                         NRF_FLPR_VPRTIM_NS
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#define NRF_FLPR_VPRCLIC                  ((NRF_CLIC_Type*)                     NRF_FLPR_VPRCLIC_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
@@ -253,7 +229,6 @@ typedef enum {
 
 #ifdef NRF_FLPR                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
   #define NRF_VPRCLIC                             NRF_FLPR_VPRCLIC
-  #define NRF_VPRTIM                              NRF_FLPR_VPRTIM
 #endif                                               /*!< NRF_FLPR                                                             */
 
 /* ========================================== End of section using anonymous unions ========================================== */

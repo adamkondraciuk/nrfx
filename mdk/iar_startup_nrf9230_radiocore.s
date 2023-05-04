@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -123,8 +123,8 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     0                         ; Reserved
         DCD     EGU020_IRQHandler
-        DCD     0                         ; Reserved
-        DCD     0                         ; Reserved
+        DCD     AAR020_CCM020_IRQHandler
+        DCD     ECB020_IRQHandler
         DCD     TIMER020_IRQHandler
         DCD     TIMER021_IRQHandler
         DCD     TIMER022_IRQHandler
@@ -677,6 +677,16 @@ SPU020_IRQHandler
         PUBWEAK  EGU020_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 EGU020_IRQHandler
+        B .
+
+        PUBWEAK  AAR020_CCM020_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+AAR020_CCM020_IRQHandler
+        B .
+
+        PUBWEAK  ECB020_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+ECB020_IRQHandler
         B .
 
         PUBWEAK  TIMER020_IRQHandler

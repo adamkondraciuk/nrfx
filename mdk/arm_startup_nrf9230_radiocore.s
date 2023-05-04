@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -122,8 +122,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     EGU020_IRQHandler
-                DCD     0                         ; Reserved
-                DCD     0                         ; Reserved
+                DCD     AAR020_CCM020_IRQHandler
+                DCD     ECB020_IRQHandler
                 DCD     TIMER020_IRQHandler
                 DCD     TIMER021_IRQHandler
                 DCD     TIMER022_IRQHandler
@@ -645,6 +645,8 @@ Default_Handler PROC
                 EXPORT   WDT011_IRQHandler [WEAK]
                 EXPORT   SPU020_IRQHandler [WEAK]
                 EXPORT   EGU020_IRQHandler [WEAK]
+                EXPORT   AAR020_CCM020_IRQHandler [WEAK]
+                EXPORT   ECB020_IRQHandler [WEAK]
                 EXPORT   TIMER020_IRQHandler [WEAK]
                 EXPORT   TIMER021_IRQHandler [WEAK]
                 EXPORT   TIMER022_IRQHandler [WEAK]
@@ -749,6 +751,8 @@ WDT010_IRQHandler
 WDT011_IRQHandler
 SPU020_IRQHandler
 EGU020_IRQHandler
+AAR020_CCM020_IRQHandler
+ECB020_IRQHandler
 TIMER020_IRQHandler
 TIMER021_IRQHandler
 TIMER022_IRQHandler

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -82,7 +82,7 @@ typedef enum {
   RFSERVICES_IRQn                        = 16,       /*!< 16 RFSERVICES                                                        */
   RFCORESERVICES_IRQn                    = 19,       /*!< 19 RFCORESERVICES                                                    */
   MVDMA_IRQn                             = 20,       /*!< 20 MVDMA                                                             */
-  GPIOTE130_IRQn                         = 21,       /*!< 21 GPIOTE130                                                         */
+  GPIOTE131_IRQn                         = 21,       /*!< 21 GPIOTE131                                                         */
   MIPIRFFE_IRQn                          = 22,       /*!< 22 MIPIRFFE                                                          */
   BELLBOARD_0_IRQn                       = 23,       /*!< 23 BELLBOARD_0                                                       */
   BELLBOARD_1_IRQn                       = 24,       /*!< 24 BELLBOARD_1                                                       */

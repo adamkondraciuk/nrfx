@@ -1,4 +1,4 @@
-; Copyright (c) 2009-2022 ARM Limited. All rights reserved.
+; Copyright (c) 2009-2023 ARM Limited. All rights reserved.
 ; 
 ;     SPDX-License-Identifier: Apache-2.0
 ; 
@@ -195,8 +195,8 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     GRTC_0_IRQHandler
                 DCD     GRTC_1_IRQHandler
                 DCD     GRTC_2_IRQHandler
-                DCD     ISIM_MHU_0_IRQHandler
-                DCD     ISIM_MHU_1_IRQHandler
+                DCD     0                         ; Reserved
+                DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
                 DCD     0                         ; Reserved
@@ -664,8 +664,6 @@ Default_Handler PROC
                 EXPORT   GRTC_0_IRQHandler [WEAK]
                 EXPORT   GRTC_1_IRQHandler [WEAK]
                 EXPORT   GRTC_2_IRQHandler [WEAK]
-                EXPORT   ISIM_MHU_0_IRQHandler [WEAK]
-                EXPORT   ISIM_MHU_1_IRQHandler [WEAK]
                 EXPORT   TBM_IRQHandler [WEAK]
                 EXPORT   USBHS_IRQHandler [WEAK]
                 EXPORT   MRAMC110_IRQHandler [WEAK]
@@ -755,8 +753,6 @@ GPIOTE131_1_IRQHandler
 GRTC_0_IRQHandler
 GRTC_1_IRQHandler
 GRTC_2_IRQHandler
-ISIM_MHU_0_IRQHandler
-ISIM_MHU_1_IRQHandler
 TBM_IRQHandler
 USBHS_IRQHandler
 MRAMC110_IRQHandler

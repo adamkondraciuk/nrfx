@@ -144,7 +144,7 @@ _vectors:
   EXC_HANDLER   MemoryManagement_Handler
   EXC_HANDLER   BusFault_Handler
   EXC_HANDLER   UsageFault_Handler
-  EXC_HANDLER   SecureFault_Handler
+  ISR_RESERVED                           /* Reserved */
   ISR_RESERVED                           /* Reserved */
   ISR_RESERVED                           /* Reserved */
   ISR_RESERVED                           /* Reserved */
@@ -626,15 +626,6 @@ _vectors:
   ISR_HANDLER   PWM133_IRQHandler
   ISR_HANDLER   SERIAL6_IRQHandler
   ISR_HANDLER   SERIAL7_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_RESERVED_DUMMY                           /* Reserved */
 _vectors_end:
 
 #ifdef VECTORS_IN_RAM

@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -60,9 +60,9 @@ typedef enum {
   NonMaskableInt_IRQn                    = -14,      /*!< -14 Non maskable Interrupt, cannot be stopped or preempted           */
   HardFault_IRQn                         = -13,      /*!< -13 Hard Fault, all classes of Fault                                 */
   MemoryManagement_IRQn                  = -12,      /*!< -12 Memory Management, MPU mismatch, including Access Violation and No
-                                                          Match*/                                                                 
+                                                          Match*/
   BusFault_IRQn                          = -11,      /*!< -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory
-                                                          related Fault*/                                                         
+                                                          related Fault*/
   UsageFault_IRQn                        = -10,      /*!< -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition    */
   SecureFault_IRQn                       = -9,       /*!<  -9 Secure Fault Handler                                             */
   SVCall_IRQn                            = -5,       /*!<  -5 System Service Call via SVC instruction                          */
@@ -254,9 +254,9 @@ typedef enum {
 #define NRF_CELLCORE_SPU0_S_BASE          0x54000000UL
 #define NRF_CELLCORE_HSFLL_NS_BASE        0x44001000UL
 #define NRF_CELLCORE_HSFLL_S_BASE         0x54001000UL
+#define NRF_CELLCORE_LRCCONF0_NS_BASE     0x44002000UL
 #define NRF_CELLCORE_LRCCONF0_S_BASE      0x54002000UL
 #define NRF_CELLCORE_MPC_S_BASE           0x54003000UL
-#define NRF_CELLCORE_AXI_S_BASE           0x54004000UL
 #define NRF_CELLCORE_MVDMA_NS_BASE        0x44005000UL
 #define NRF_CELLCORE_MVDMA_S_BASE         0x54005000UL
 #define NRF_CELLCORE_RAMC00_NS_BASE       0x44006000UL
@@ -360,9 +360,9 @@ typedef enum {
 #define NRF_CELLCORE_SPU0_S               ((NRF_SPU_Type*)                      NRF_CELLCORE_SPU0_S_BASE)
 #define NRF_CELLCORE_HSFLL_NS             ((NRF_HSFLL_Type*)                    NRF_CELLCORE_HSFLL_NS_BASE)
 #define NRF_CELLCORE_HSFLL_S              ((NRF_HSFLL_Type*)                    NRF_CELLCORE_HSFLL_S_BASE)
+#define NRF_CELLCORE_LRCCONF0_NS          ((NRF_LRCCONF_Type*)                  NRF_CELLCORE_LRCCONF0_NS_BASE)
 #define NRF_CELLCORE_LRCCONF0_S           ((NRF_LRCCONF_Type*)                  NRF_CELLCORE_LRCCONF0_S_BASE)
 #define NRF_CELLCORE_MPC_S                ((NRF_MPC_Type*)                      NRF_CELLCORE_MPC_S_BASE)
-#define NRF_CELLCORE_AXI_S                ((NRF_AXI_Type*)                      NRF_CELLCORE_AXI_S_BASE)
 #define NRF_CELLCORE_MVDMA_NS             ((NRF_MVDMA_Type*)                    NRF_CELLCORE_MVDMA_NS_BASE)
 #define NRF_CELLCORE_MVDMA_S              ((NRF_MVDMA_Type*)                    NRF_CELLCORE_MVDMA_S_BASE)
 #define NRF_CELLCORE_RAMC00_NS            ((NRF_RAMC_Type*)                     NRF_CELLCORE_RAMC00_NS_BASE)
@@ -457,6 +457,7 @@ typedef enum {
   #define NRF_CELLCORE_UICR                       NRF_CELLCORE_UICR_NS
   #define NRF_CELLCORE_ETM                        NRF_CELLCORE_ETM_NS
   #define NRF_CELLCORE_HSFLL                      NRF_CELLCORE_HSFLL_NS
+  #define NRF_CELLCORE_LRCCONF0                   NRF_CELLCORE_LRCCONF0_NS
   #define NRF_CELLCORE_MVDMA                      NRF_CELLCORE_MVDMA_NS
   #define NRF_CELLCORE_RAMC00                     NRF_CELLCORE_RAMC00_NS
   #define NRF_CELLCORE_AESLTE                     NRF_CELLCORE_AESLTE_NS
@@ -516,7 +517,6 @@ typedef enum {
   #define NRF_CELLCORE_HSFLL                      NRF_CELLCORE_HSFLL_S
   #define NRF_CELLCORE_LRCCONF0                   NRF_CELLCORE_LRCCONF0_S
   #define NRF_CELLCORE_MPC                        NRF_CELLCORE_MPC_S
-  #define NRF_CELLCORE_AXI                        NRF_CELLCORE_AXI_S
   #define NRF_CELLCORE_MVDMA                      NRF_CELLCORE_MVDMA_S
   #define NRF_CELLCORE_RAMC00                     NRF_CELLCORE_RAMC00_S
   #define NRF_CELLCORE_AESLTE                     NRF_CELLCORE_AESLTE_S
@@ -587,7 +587,6 @@ typedef enum {
   #define NRF_HSFLL                               NRF_CELLCORE_HSFLL
   #define NRF_LRCCONF0                            NRF_CELLCORE_LRCCONF0
   #define NRF_MPC                                 NRF_CELLCORE_MPC
-  #define NRF_AXI                                 NRF_CELLCORE_AXI
   #define NRF_MVDMA                               NRF_CELLCORE_MVDMA
   #define NRF_RAMC00                              NRF_CELLCORE_RAMC00
   #define NRF_AESLTE                              NRF_CELLCORE_AESLTE

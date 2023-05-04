@@ -266,8 +266,8 @@ _vectors:
   ISR_HANDLER   GRTC_0_IRQHandler
   ISR_HANDLER   GRTC_1_IRQHandler
   ISR_HANDLER   GRTC_2_IRQHandler
-  ISR_HANDLER   ISIM_MHU_0_IRQHandler
-  ISR_HANDLER   ISIM_MHU_1_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */

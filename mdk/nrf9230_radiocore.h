@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -60,9 +60,9 @@ typedef enum {
   NonMaskableInt_IRQn                    = -14,      /*!< -14 Non maskable Interrupt, cannot be stopped or preempted           */
   HardFault_IRQn                         = -13,      /*!< -13 Hard Fault, all classes of Fault                                 */
   MemoryManagement_IRQn                  = -12,      /*!< -12 Memory Management, MPU mismatch, including Access Violation and No
-                                                          Match*/                                                                 
+                                                          Match*/
   BusFault_IRQn                          = -11,      /*!< -11 Bus Fault, Pre-Fetch-, Memory Access Fault, other address/memory
-                                                          related Fault*/                                                         
+                                                          related Fault*/
   UsageFault_IRQn                        = -10,      /*!< -10 Usage Fault, i.e. Undef Instruction, Illegal State Transition    */
   SecureFault_IRQn                       = -9,       /*!<  -9 Secure Fault Handler                                             */
   SVCall_IRQn                            = -5,       /*!<  -5 System Service Call via SVC instruction                          */
@@ -78,6 +78,8 @@ typedef enum {
   WDT011_IRQn                            = 20,       /*!< 20 WDT011                                                            */
   SPU020_IRQn                            = 32,       /*!< 32 SPU020                                                            */
   EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
+  AAR020_CCM020_IRQn                     = 38,       /*!< 38 AAR020_CCM020                                                     */
+  ECB020_IRQn                            = 39,       /*!< 39 ECB020                                                            */
   TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
   TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
   TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
@@ -274,6 +276,12 @@ typedef enum {
 #define NRF_RADIOCORE_PPIB020_S_BASE      0x53023000UL
 #define NRF_RADIOCORE_EGU020_NS_BASE      0x43025000UL
 #define NRF_RADIOCORE_EGU020_S_BASE       0x53025000UL
+#define NRF_RADIOCORE_AAR020_NS_BASE      0x43026000UL
+#define NRF_RADIOCORE_CCM020_NS_BASE      0x43026000UL
+#define NRF_RADIOCORE_AAR020_S_BASE       0x53026000UL
+#define NRF_RADIOCORE_CCM020_S_BASE       0x53026000UL
+#define NRF_RADIOCORE_ECB020_NS_BASE      0x43027000UL
+#define NRF_RADIOCORE_ECB020_S_BASE       0x53027000UL
 #define NRF_RADIOCORE_TIMER020_NS_BASE    0x43028000UL
 #define NRF_RADIOCORE_TIMER020_S_BASE     0x53028000UL
 #define NRF_RADIOCORE_TIMER021_NS_BASE    0x43029000UL
@@ -368,6 +376,12 @@ typedef enum {
 #define NRF_RADIOCORE_PPIB020_S           ((NRF_PPIB_Type*)                     NRF_RADIOCORE_PPIB020_S_BASE)
 #define NRF_RADIOCORE_EGU020_NS           ((NRF_EGU_Type*)                      NRF_RADIOCORE_EGU020_NS_BASE)
 #define NRF_RADIOCORE_EGU020_S            ((NRF_EGU_Type*)                      NRF_RADIOCORE_EGU020_S_BASE)
+#define NRF_RADIOCORE_AAR020_NS           ((NRF_AAR_Type*)                      NRF_RADIOCORE_AAR020_NS_BASE)
+#define NRF_RADIOCORE_CCM020_NS           ((NRF_CCM_Type*)                      NRF_RADIOCORE_CCM020_NS_BASE)
+#define NRF_RADIOCORE_AAR020_S            ((NRF_AAR_Type*)                      NRF_RADIOCORE_AAR020_S_BASE)
+#define NRF_RADIOCORE_CCM020_S            ((NRF_CCM_Type*)                      NRF_RADIOCORE_CCM020_S_BASE)
+#define NRF_RADIOCORE_ECB020_NS           ((NRF_ECB_Type*)                      NRF_RADIOCORE_ECB020_NS_BASE)
+#define NRF_RADIOCORE_ECB020_S            ((NRF_ECB_Type*)                      NRF_RADIOCORE_ECB020_S_BASE)
 #define NRF_RADIOCORE_TIMER020_NS         ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER020_NS_BASE)
 #define NRF_RADIOCORE_TIMER020_S          ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER020_S_BASE)
 #define NRF_RADIOCORE_TIMER021_NS         ((NRF_TIMER_Type*)                    NRF_RADIOCORE_TIMER021_NS_BASE)
@@ -432,6 +446,9 @@ typedef enum {
   #define NRF_RADIOCORE_WDT011                    NRF_RADIOCORE_WDT011_NS
   #define NRF_RADIOCORE_DPPIC020                  NRF_RADIOCORE_DPPIC020_NS
   #define NRF_RADIOCORE_EGU020                    NRF_RADIOCORE_EGU020_NS
+  #define NRF_RADIOCORE_AAR020                    NRF_RADIOCORE_AAR020_NS
+  #define NRF_RADIOCORE_CCM020                    NRF_RADIOCORE_CCM020_NS
+  #define NRF_RADIOCORE_ECB020                    NRF_RADIOCORE_ECB020_NS
   #define NRF_RADIOCORE_TIMER020                  NRF_RADIOCORE_TIMER020_NS
   #define NRF_RADIOCORE_TIMER021                  NRF_RADIOCORE_TIMER021_NS
   #define NRF_RADIOCORE_TIMER022                  NRF_RADIOCORE_TIMER022_NS
@@ -491,6 +508,9 @@ typedef enum {
   #define NRF_RADIOCORE_DPPIC020                  NRF_RADIOCORE_DPPIC020_S
   #define NRF_RADIOCORE_PPIB020                   NRF_RADIOCORE_PPIB020_S
   #define NRF_RADIOCORE_EGU020                    NRF_RADIOCORE_EGU020_S
+  #define NRF_RADIOCORE_AAR020                    NRF_RADIOCORE_AAR020_S
+  #define NRF_RADIOCORE_CCM020                    NRF_RADIOCORE_CCM020_S
+  #define NRF_RADIOCORE_ECB020                    NRF_RADIOCORE_ECB020_S
   #define NRF_RADIOCORE_TIMER020                  NRF_RADIOCORE_TIMER020_S
   #define NRF_RADIOCORE_TIMER021                  NRF_RADIOCORE_TIMER021_S
   #define NRF_RADIOCORE_TIMER022                  NRF_RADIOCORE_TIMER022_S
@@ -562,6 +582,9 @@ typedef enum {
   #define NRF_DPPIC020                            NRF_RADIOCORE_DPPIC020
   #define NRF_PPIB020                             NRF_RADIOCORE_PPIB020
   #define NRF_EGU020                              NRF_RADIOCORE_EGU020
+  #define NRF_AAR020                              NRF_RADIOCORE_AAR020
+  #define NRF_CCM020                              NRF_RADIOCORE_CCM020
+  #define NRF_ECB020                              NRF_RADIOCORE_ECB020
   #define NRF_TIMER020                            NRF_RADIOCORE_TIMER020
   #define NRF_TIMER021                            NRF_RADIOCORE_TIMER021
   #define NRF_TIMER022                            NRF_RADIOCORE_TIMER022

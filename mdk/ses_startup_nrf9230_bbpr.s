@@ -144,7 +144,7 @@ _vectors:
   ISR_HANDLER   VPRCLIC_0_IRQHandler
   ISR_HANDLER   VPRCLIC_1_IRQHandler
   ISR_HANDLER   VPRCLIC_2_IRQHandler
-  ISR_HANDLER   VPRCLIC_3_IRQHandler
+  ISR_HANDLER   MVDMA_IRQHandler
   ISR_HANDLER   VPRCLIC_4_IRQHandler
   ISR_HANDLER   VPRCLIC_5_IRQHandler
   ISR_HANDLER   VPRCLIC_6_IRQHandler
@@ -184,15 +184,15 @@ _vectors:
   ISR_HANDLER   TIMER020_IRQHandler
   ISR_HANDLER   TIMER021_IRQHandler
   ISR_HANDLER   TIMER022_IRQHandler
-  ISR_HANDLER   RTC_IRQHandler
-  ISR_HANDLER   RADIO_0_IRQHandler
+  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   RADIO_1_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   SPU030_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
-  ISR_HANDLER   HWACC_IRQHandler
+  ISR_HANDLER   RADIOACC_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_RESERVED_DUMMY                           /* Reserved */
@@ -249,7 +249,7 @@ _vectors:
   ISR_HANDLER   GPIOTE130_1_IRQHandler
   ISR_HANDLER   GPIOTE131_0_IRQHandler
   ISR_HANDLER   GPIOTE131_1_IRQHandler
-  ISR_HANDLER   GRTC_0_IRQHandler
+  ISR_HANDLER   GRTC_3_IRQHandler
   ISR_HANDLER   GRTC_1_IRQHandler
   ISR_HANDLER   GRTC_2_IRQHandler
   ISR_RESERVED_DUMMY                           /* Reserved */

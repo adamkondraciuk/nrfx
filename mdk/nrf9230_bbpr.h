@@ -1,6 +1,6 @@
 /*
 
-Copyright (c) 2010 - 2022, Nordic Semiconductor ASA
+Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
 
@@ -56,19 +56,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
-  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
-  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
-  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
-  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
-  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
-  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
-  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
-  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
-  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
-  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
-  SPU000_IRQn                            = 0,        /*!< 0 SPU000                                                             */
-  MPC_IRQn                               = 1,        /*!< 1 MPC                                                                */
+  VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
+  VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
   VPRCLIC_2_IRQn                         = 2,        /*!< 2 VPRCLIC_2                                                          */
   MVDMA_IRQn                             = 3,        /*!< 3 MVDMA                                                              */
   VPRCLIC_4_IRQn                         = 4,        /*!< 4 VPRCLIC_4                                                          */
@@ -84,15 +74,13 @@ typedef enum {
   VPRCLIC_14_IRQn                        = 14,       /*!< 14 VPRCLIC_14                                                        */
   VPRCLIC_15_IRQn                        = 15,       /*!< 15 VPRCLIC_15                                                        */
   VPRTIM_IRQn                            = 16,       /*!< 16 VPRTIM                                                            */
-  WDT010_IRQn                            = 19,       /*!< 19 WDT010                                                            */
-  WDT011_IRQn                            = 20,       /*!< 20 WDT011                                                            */
   SPU020_IRQn                            = 32,       /*!< 32 SPU020                                                            */
   EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
+  AAR020_CCM020_IRQn                     = 38,       /*!< 38 AAR020_CCM020                                                     */
+  ECB020_IRQn                            = 39,       /*!< 39 ECB020                                                            */
   TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
   TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
   TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
-  RTC_IRQn                               = 43,       /*!< 43 RTC                                                               */
-  RADIO_0_IRQn                           = 44,       /*!< 44 RADIO_0                                                           */
   RADIO_1_IRQn                           = 45,       /*!< 45 RADIO_1                                                           */
   SPU030_IRQn                            = 48,       /*!< 48 SPU030                                                            */
   RADIOACC_IRQn                          = 51,       /*!< 51 RADIOACC                                                          */
@@ -102,19 +90,11 @@ typedef enum {
   ECB031_IRQn                            = 61,       /*!< 61 ECB031                                                            */
   IPCT_0_IRQn                            = 64,       /*!< 64 IPCT_0                                                            */
   IPCT_1_IRQn                            = 65,       /*!< 65 IPCT_1                                                            */
-  SWI0_IRQn                              = 88,       /*!< 88 SWI0                                                              */
-  SWI1_IRQn                              = 89,       /*!< 89 SWI1                                                              */
-  SWI2_IRQn                              = 90,       /*!< 90 SWI2                                                              */
-  SWI3_IRQn                              = 91,       /*!< 91 SWI3                                                              */
-  SWI4_IRQn                              = 92,       /*!< 92 SWI4                                                              */
-  SWI5_IRQn                              = 93,       /*!< 93 SWI5                                                              */
-  SWI6_IRQn                              = 94,       /*!< 94 SWI6                                                              */
-  SWI7_IRQn                              = 95,       /*!< 95 SWI7                                                              */
   GPIOTE130_0_IRQn                       = 104,      /*!< 104 GPIOTE130_0                                                      */
   GPIOTE130_1_IRQn                       = 105,      /*!< 105 GPIOTE130_1                                                      */
   GPIOTE131_0_IRQn                       = 106,      /*!< 106 GPIOTE131_0                                                      */
   GPIOTE131_1_IRQn                       = 107,      /*!< 107 GPIOTE131_1                                                      */
-  GRTC_0_IRQn                            = 108,      /*!< 108 GRTC_0                                                           */
+  GRTC_3_IRQn                            = 108,      /*!< 108 GRTC_3                                                           */
   GRTC_1_IRQn                            = 109,      /*!< 109 GRTC_1                                                           */
   GRTC_2_IRQn                            = 110,      /*!< 110 GRTC_2                                                           */
   TBM_IRQn                               = 127,      /*!< 127 TBM                                                              */
@@ -235,27 +215,13 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_BBPR_VPRCLIC_NS_BASE          0x53034000UL
-#define NRF_BBPR_VPRTIM_NS_BASE           0x00000000UL
+#define NRF_BBPR_VPRCLIC_BASE             0x53035000UL
 
 /* =========================================================================================================================== */
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
-#define NRF_BBPR_VPRCLIC_NS               ((NRF_CLIC_Type*)                     NRF_BBPR_VPRCLIC_NS_BASE)
-#define NRF_BBPR_VPRTIM_NS                ((NRF_VTIM_Type*)                     NRF_BBPR_VPRTIM_NS_BASE)
-
-/* =========================================================================================================================== */
-/* ================                                    TrustZone Remapping                                    ================ */
-/* =========================================================================================================================== */
-
-#ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
-  #define NRF_BBPR_VPRCLIC                        NRF_BBPR_VPRCLIC_NS
-  #define NRF_BBPR_VPRTIM                         NRF_BBPR_VPRTIM_NS
-#else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
-  #define NRF_BBPR_VPRCLIC                        NRF_BBPR_VPRCLIC_NS
-  #define NRF_BBPR_VPRTIM                         NRF_BBPR_VPRTIM_NS
-#endif                                               /*!<  NRF_TRUSTZONE_NONSECURE                                             */
+#define NRF_BBPR_VPRCLIC                  ((NRF_CLIC_Type*)                     NRF_BBPR_VPRCLIC_BASE)
 
 /* =========================================================================================================================== */
 /* ================                                  Local Domain Remapping                                  ================ */
@@ -263,7 +229,6 @@ typedef enum {
 
 #ifdef NRF_BBPR                                      /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
   #define NRF_VPRCLIC                             NRF_BBPR_VPRCLIC
-  #define NRF_VPRTIM                              NRF_BBPR_VPRTIM
 #endif                                               /*!< NRF_BBPR                                                             */
 
 /* ========================================== End of section using anonymous unions ========================================== */
