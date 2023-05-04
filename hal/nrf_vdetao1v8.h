@@ -277,7 +277,7 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_config_brownout_set(NRF_VDETAO1V8_Type * p_
  *
  * @return True if the detector is enabled and false otherwise.
  */
-NRF_STATIC_INLINE bool nrf_vdetao1v8_config_brownout_get(NRF_VDETAO1V8_Type * p_reg);
+NRF_STATIC_INLINE bool nrf_vdetao1v8_config_brownout_get(NRF_VDETAO1V8_Type const * p_reg);
 
 /**
  * @brief Function for setting Brownout detector high threshold voltage level.
@@ -295,7 +295,8 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_trim_brownout_level_high_set(NRF_VDETAO1V8_
  *
  * @return Threshold value.
  */
-NRF_STATIC_INLINE uint8_t nrf_vdetao1v8_trim_brownout_level_high_get(NRF_VDETAO1V8_Type * p_reg);
+NRF_STATIC_INLINE
+uint8_t nrf_vdetao1v8_trim_brownout_level_high_get(NRF_VDETAO1V8_Type const * p_reg);
 
 /**
  * @brief Function for setting Brownout detector low threshold voltage level.
@@ -313,7 +314,8 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_trim_brownout_level_low_set(NRF_VDETAO1V8_T
  *
  * @return Threshold value.
  */
-NRF_STATIC_INLINE uint8_t nrf_vdetao1v8_trim_brownout_level_low_get(NRF_VDETAO1V8_Type * p_reg);
+NRF_STATIC_INLINE
+uint8_t nrf_vdetao1v8_trim_brownout_level_low_get(NRF_VDETAO1V8_Type const * p_reg);
 
 /**
  * @brief Function for locking mirrored registers.
@@ -504,7 +506,7 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_config_brownout_set(NRF_VDETAO1V8_Type * p_
                                    VDETAO1V8_CONFIG_BROWNOUTCONFIG_ENBROWNOUTLVLLOW_Pos;
 }
 
-NRF_STATIC_INLINE bool nrf_vdetao1v8_config_brownout_get(NRF_VDETAO1V8_Type * p_reg)
+NRF_STATIC_INLINE bool nrf_vdetao1v8_config_brownout_get(NRF_VDETAO1V8_Type const * p_reg)
 {
     return (p_reg->CONFIG.BROWNOUTCONFIG >> VDETAO1V8_CONFIG_BROWNOUTCONFIG_ENBROWNOUTLVLLOW_Pos) ==
            VDETAO1V8_CONFIG_BROWNOUTCONFIG_ENBROWNOUTLVLLOW_Enabled;
@@ -516,7 +518,8 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_trim_brownout_level_high_set(NRF_VDETAO1V8_
     p_reg->TRIM.BROWNOUTLVLHIGH = (uint32_t)(val << VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Pos);
 }
 
-NRF_STATIC_INLINE uint8_t nrf_vdetao1v8_trim_brownout_level_high_get(NRF_VDETAO1V8_Type * p_reg)
+NRF_STATIC_INLINE
+uint8_t nrf_vdetao1v8_trim_brownout_level_high_get(NRF_VDETAO1V8_Type const * p_reg)
 {
     return (uint8_t)((p_reg->TRIM.BROWNOUTLVLHIGH & VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Msk) >>
                      VDETAO1V8_TRIM_BROWNOUTLVLHIGH_VAL_Pos);
@@ -528,7 +531,8 @@ NRF_STATIC_INLINE void nrf_vdetao1v8_trim_brownout_level_low_set(NRF_VDETAO1V8_T
     p_reg->TRIM.BROWNOUTLVLLOW = (uint32_t)(val << VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Pos);
 }
 
-NRF_STATIC_INLINE uint8_t nrf_vdetao1v8_trim_brownout_level_low_get(NRF_VDETAO1V8_Type * p_reg)
+NRF_STATIC_INLINE
+uint8_t nrf_vdetao1v8_trim_brownout_level_low_get(NRF_VDETAO1V8_Type const * p_reg)
 {
     return (uint8_t)((p_reg->TRIM.BROWNOUTLVLLOW & VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Msk) >>
                      VDETAO1V8_TRIM_BROWNOUTLVLLOW_VAL_Pos);
