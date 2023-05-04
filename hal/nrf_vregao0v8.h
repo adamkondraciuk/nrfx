@@ -413,7 +413,7 @@ NRF_STATIC_INLINE uint8_t nrf_vregao0v8_trim_lowpower_get(NRF_VREGAO0V8_Type con
  * @brief Function for setting ultra low power ripple trimming.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * @param[in] val   Voltage offset trimming value. The value is 2's complement value of 0mV +/- 11.8mV steps.
+ * @param[in] val   Voltage offset trimming value.
  */
 NRF_STATIC_INLINE void nrf_vregao0v8_trim_ultralowpower_set(NRF_VREGAO0V8_Type *     p_reg,
                                                             nrf_vregao0v8_trim_ulp_t val);
