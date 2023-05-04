@@ -131,78 +131,78 @@ NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_int_enable_check(uint32_t mask);
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_tasks_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_TASKS);
+    return nrf_csr_read(VPRCSR_NORDIC_TASKS);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_clear(uint32_t mask)
 {
-    csr_clear_bits(VPRCSR_NORDIC_TASKS, mask);
+    nrf_csr_clear_bits(VPRCSR_NORDIC_TASKS, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_tasks_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_TASKS, value);
+    nrf_csr_write(VPRCSR_NORDIC_TASKS, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_events_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_EVENTS);
+    return nrf_csr_read(VPRCSR_NORDIC_EVENTS);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_EVENTS, value);
+    nrf_csr_write(VPRCSR_NORDIC_EVENTS, value);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_trigger(uint32_t mask)
 {
-    csr_set_bits(VPRCSR_NORDIC_EVENTS, mask);
+    nrf_csr_set_bits(VPRCSR_NORDIC_EVENTS, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_events_buffered_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_EVENTSB, value);
+    nrf_csr_write(VPRCSR_NORDIC_EVENTSB, value);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_vevif_events_buffered_dirty_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_EVENTSBS) & VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_Msk)
+    return ((nrf_csr_read(VPRCSR_NORDIC_EVENTSBS) & VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_Msk)
             >> VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_Pos) == VPRCSR_NORDIC_EVENTSBS_DIRTYBIT_DIRTY;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_subscribe_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_SUBSCRIBE);
+    return nrf_csr_read(VPRCSR_NORDIC_SUBSCRIBE);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_subscribe_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_SUBSCRIBE, value);
+    nrf_csr_write(VPRCSR_NORDIC_SUBSCRIBE, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_publish_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_PUBLISH);
+    return nrf_csr_read(VPRCSR_NORDIC_PUBLISH);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_publish_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_PUBLISH, value);
+    nrf_csr_write(VPRCSR_NORDIC_PUBLISH, value);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_enable(uint32_t mask)
 {
-    csr_set_bits(VPRCSR_NORDIC_INTEN, mask);
+    nrf_csr_set_bits(VPRCSR_NORDIC_INTEN, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vevif_int_disable(uint32_t mask)
 {
-    csr_clear_bits(VPRCSR_NORDIC_INTEN, mask);
+    nrf_csr_clear_bits(VPRCSR_NORDIC_INTEN, mask);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vevif_int_enable_check(uint32_t mask)
 {
-    return csr_read(VPRCSR_NORDIC_INTEN) & mask;
+    return nrf_csr_read(VPRCSR_NORDIC_INTEN) & mask;
 }
 
 #endif // NRF_DECLARE_ONLY

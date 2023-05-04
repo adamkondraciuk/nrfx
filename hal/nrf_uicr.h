@@ -63,38 +63,38 @@ typedef enum
  */
 typedef enum
 {
-    NRF_UICR_FEATURE_INDEX_0_MASK  = UICR_GPIO_OWN_PIN0_Msk,  /**< Feature index 0.  */
-    NRF_UICR_FEATURE_INDEX_1_MASK  = UICR_GPIO_OWN_PIN1_Msk,  /**< Feature index 1.  */
-    NRF_UICR_FEATURE_INDEX_2_MASK  = UICR_GPIO_OWN_PIN2_Msk,  /**< Feature index 2.  */
-    NRF_UICR_FEATURE_INDEX_3_MASK  = UICR_GPIO_OWN_PIN3_Msk,  /**< Feature index 3.  */
-    NRF_UICR_FEATURE_INDEX_4_MASK  = UICR_GPIO_OWN_PIN4_Msk,  /**< Feature index 4.  */
-    NRF_UICR_FEATURE_INDEX_5_MASK  = UICR_GPIO_OWN_PIN5_Msk,  /**< Feature index 5.  */
-    NRF_UICR_FEATURE_INDEX_6_MASK  = UICR_GPIO_OWN_PIN6_Msk,  /**< Feature index 6.  */
-    NRF_UICR_FEATURE_INDEX_7_MASK  = UICR_GPIO_OWN_PIN7_Msk,  /**< Feature index 7.  */
-    NRF_UICR_FEATURE_INDEX_8_MASK  = UICR_GPIO_OWN_PIN8_Msk,  /**< Feature index 8.  */
-    NRF_UICR_FEATURE_INDEX_9_MASK  = UICR_GPIO_OWN_PIN9_Msk,  /**< Feature index 9.  */
-    NRF_UICR_FEATURE_INDEX_10_MASK = UICR_GPIO_OWN_PIN10_Msk, /**< Feature index 10. */
-    NRF_UICR_FEATURE_INDEX_11_MASK = UICR_GPIO_OWN_PIN11_Msk, /**< Feature index 11. */
-    NRF_UICR_FEATURE_INDEX_12_MASK = UICR_GPIO_OWN_PIN12_Msk, /**< Feature index 12. */
-    NRF_UICR_FEATURE_INDEX_13_MASK = UICR_GPIO_OWN_PIN13_Msk, /**< Feature index 13. */
-    NRF_UICR_FEATURE_INDEX_14_MASK = UICR_GPIO_OWN_PIN14_Msk, /**< Feature index 14. */
-    NRF_UICR_FEATURE_INDEX_15_MASK = UICR_GPIO_OWN_PIN15_Msk, /**< Feature index 15. */
-    NRF_UICR_FEATURE_INDEX_16_MASK = UICR_GPIO_OWN_PIN16_Msk, /**< Feature index 16. */
-    NRF_UICR_FEATURE_INDEX_17_MASK = UICR_GPIO_OWN_PIN17_Msk, /**< Feature index 17. */
-    NRF_UICR_FEATURE_INDEX_18_MASK = UICR_GPIO_OWN_PIN18_Msk, /**< Feature index 18. */
-    NRF_UICR_FEATURE_INDEX_19_MASK = UICR_GPIO_OWN_PIN19_Msk, /**< Feature index 19. */
-    NRF_UICR_FEATURE_INDEX_20_MASK = UICR_GPIO_OWN_PIN20_Msk, /**< Feature index 20. */
-    NRF_UICR_FEATURE_INDEX_21_MASK = UICR_GPIO_OWN_PIN21_Msk, /**< Feature index 21. */
-    NRF_UICR_FEATURE_INDEX_22_MASK = UICR_GPIO_OWN_PIN22_Msk, /**< Feature index 22. */
-    NRF_UICR_FEATURE_INDEX_23_MASK = UICR_GPIO_OWN_PIN23_Msk, /**< Feature index 23. */
-    NRF_UICR_FEATURE_INDEX_24_MASK = UICR_GPIO_OWN_PIN24_Msk, /**< Feature index 24. */
-    NRF_UICR_FEATURE_INDEX_25_MASK = UICR_GPIO_OWN_PIN25_Msk, /**< Feature index 25. */
-    NRF_UICR_FEATURE_INDEX_26_MASK = UICR_GPIO_OWN_PIN26_Msk, /**< Feature index 26. */
-    NRF_UICR_FEATURE_INDEX_27_MASK = UICR_GPIO_OWN_PIN27_Msk, /**< Feature index 27. */
-    NRF_UICR_FEATURE_INDEX_28_MASK = UICR_GPIO_OWN_PIN28_Msk, /**< Feature index 28. */
-    NRF_UICR_FEATURE_INDEX_29_MASK = UICR_GPIO_OWN_PIN29_Msk, /**< Feature index 29. */
-    NRF_UICR_FEATURE_INDEX_30_MASK = UICR_GPIO_OWN_PIN30_Msk, /**< Feature index 30. */
-    NRF_UICR_FEATURE_INDEX_31_MASK = UICR_GPIO_OWN_PIN31_Msk, /**< Feature index 31. */
+    NRF_UICR_FEATURE_INDEX_0_MASK  = UICR_GPIOTE_CH_OWN_CH0_Msk,  /**< Feature index 0.  */
+    NRF_UICR_FEATURE_INDEX_1_MASK  = UICR_GPIOTE_CH_OWN_CH1_Msk,  /**< Feature index 1.  */
+    NRF_UICR_FEATURE_INDEX_2_MASK  = UICR_GPIOTE_CH_OWN_CH2_Msk,  /**< Feature index 2.  */
+    NRF_UICR_FEATURE_INDEX_3_MASK  = UICR_GPIOTE_CH_OWN_CH3_Msk,  /**< Feature index 3.  */
+    NRF_UICR_FEATURE_INDEX_4_MASK  = UICR_GPIOTE_CH_OWN_CH4_Msk,  /**< Feature index 4.  */
+    NRF_UICR_FEATURE_INDEX_5_MASK  = UICR_GPIOTE_CH_OWN_CH5_Msk,  /**< Feature index 5.  */
+    NRF_UICR_FEATURE_INDEX_6_MASK  = UICR_GPIOTE_CH_OWN_CH6_Msk,  /**< Feature index 6.  */
+    NRF_UICR_FEATURE_INDEX_7_MASK  = UICR_GPIOTE_CH_OWN_CH7_Msk,  /**< Feature index 7.  */
+    NRF_UICR_FEATURE_INDEX_8_MASK  = UICR_GPIOTE_CH_OWN_CH8_Msk,  /**< Feature index 8.  */
+    NRF_UICR_FEATURE_INDEX_9_MASK  = UICR_GPIOTE_CH_OWN_CH9_Msk,  /**< Feature index 9.  */
+    NRF_UICR_FEATURE_INDEX_10_MASK = UICR_GPIOTE_CH_OWN_CH10_Msk, /**< Feature index 10. */
+    NRF_UICR_FEATURE_INDEX_11_MASK = UICR_GPIOTE_CH_OWN_CH11_Msk, /**< Feature index 11. */
+    NRF_UICR_FEATURE_INDEX_12_MASK = UICR_GPIOTE_CH_OWN_CH12_Msk, /**< Feature index 12. */
+    NRF_UICR_FEATURE_INDEX_13_MASK = UICR_GPIOTE_CH_OWN_CH13_Msk, /**< Feature index 13. */
+    NRF_UICR_FEATURE_INDEX_14_MASK = UICR_GPIOTE_CH_OWN_CH14_Msk, /**< Feature index 14. */
+    NRF_UICR_FEATURE_INDEX_15_MASK = UICR_GPIOTE_CH_OWN_CH15_Msk, /**< Feature index 15. */
+    NRF_UICR_FEATURE_INDEX_16_MASK = UICR_GPIOTE_CH_OWN_CH16_Msk, /**< Feature index 16. */
+    NRF_UICR_FEATURE_INDEX_17_MASK = UICR_GPIOTE_CH_OWN_CH17_Msk, /**< Feature index 17. */
+    NRF_UICR_FEATURE_INDEX_18_MASK = UICR_GPIOTE_CH_OWN_CH18_Msk, /**< Feature index 18. */
+    NRF_UICR_FEATURE_INDEX_19_MASK = UICR_GPIOTE_CH_OWN_CH19_Msk, /**< Feature index 19. */
+    NRF_UICR_FEATURE_INDEX_20_MASK = UICR_GPIOTE_CH_OWN_CH20_Msk, /**< Feature index 20. */
+    NRF_UICR_FEATURE_INDEX_21_MASK = UICR_GPIOTE_CH_OWN_CH21_Msk, /**< Feature index 21. */
+    NRF_UICR_FEATURE_INDEX_22_MASK = UICR_GPIOTE_CH_OWN_CH22_Msk, /**< Feature index 22. */
+    NRF_UICR_FEATURE_INDEX_23_MASK = UICR_GPIOTE_CH_OWN_CH23_Msk, /**< Feature index 23. */
+    NRF_UICR_FEATURE_INDEX_24_MASK = UICR_GPIOTE_CH_OWN_CH24_Msk, /**< Feature index 24. */
+    NRF_UICR_FEATURE_INDEX_25_MASK = UICR_GPIOTE_CH_OWN_CH25_Msk, /**< Feature index 25. */
+    NRF_UICR_FEATURE_INDEX_26_MASK = UICR_GPIOTE_CH_OWN_CH26_Msk, /**< Feature index 26. */
+    NRF_UICR_FEATURE_INDEX_27_MASK = UICR_GPIOTE_CH_OWN_CH27_Msk, /**< Feature index 27. */
+    NRF_UICR_FEATURE_INDEX_28_MASK = UICR_GPIOTE_CH_OWN_CH28_Msk, /**< Feature index 28. */
+    NRF_UICR_FEATURE_INDEX_29_MASK = UICR_GPIOTE_CH_OWN_CH29_Msk, /**< Feature index 29. */
+    NRF_UICR_FEATURE_INDEX_30_MASK = UICR_GPIOTE_CH_OWN_CH30_Msk, /**< Feature index 30. */
+    NRF_UICR_FEATURE_INDEX_31_MASK = UICR_GPIOTE_CH_OWN_CH31_Msk, /**< Feature index 31. */
 } nrf_uicr_feature_index_mask_t;
 
 /** @brief Memory configuration. */
@@ -108,10 +108,10 @@ typedef struct
 /** @brief Peripheral configuration. */
 typedef struct
 {
-    bool         secattr; /**< Security mapping. */
-    bool         dmasec;  /**< Security attribution for the DMA transfer. */
-    nrf_domain_t domain;  /**< Domain ID. */
-    uint32_t     address; /**< Peripheral address. */
+    bool            secattr;   /**< Security mapping. */
+    bool            dmasec;    /**< Security attribution for the DMA transfer. */
+    nrf_processor_t processor; /**< Processor ID. */
+    uint32_t        address;   /**< Peripheral address. */
 } nrf_uicr_periph_config_t;
 
 /** @brief UICR features. */
@@ -329,8 +329,8 @@ NRF_STATIC_INLINE nrf_uicr_periph_config_t nrf_uicr_periph_config_get(NRF_UICR_T
     config.dmasec = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_DMASEC_Msk) >>
                     UICR_PERIPH_CONFIG_DMASEC_Pos;
 
-    config.domain = (nrf_domain_t)((p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_PROCESSOR_Msk)
-                                   >> UICR_PERIPH_CONFIG_PROCESSOR_Pos);
+    config.processor = (nrf_processor_t)((p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_PROCESSOR_Msk)
+                                         >> UICR_PERIPH_CONFIG_PROCESSOR_Pos);
 
     /* Address should not be bit-shifted, as it contains bits [31:12]. The rest should be all zeroes. */
     config.address = (p_reg->PERIPH[index].CONFIG & UICR_PERIPH_CONFIG_ADDRESS_Msk);
@@ -344,9 +344,11 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_own_get(NRF_UICR_Type const * p_reg,
 {
     switch (feature)
     {
+#if defined(UICR_GPIO_OWN_PIN0_Msk)
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
             return p_reg->GPIO[index].OWN;
+#endif
 
         case NRF_UICR_FEATURE_GPIOTE_CH:
             NRFX_ASSERT(index < NRF_UICR_GPIOTE_CH_COUNT);
@@ -383,9 +385,11 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_secure_get(NRF_UICR_Type const * p_r
 {
     switch (feature)
     {
+#if defined(UICR_GPIO_OWN_PIN0_Msk)
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
             return p_reg->GPIO[index].SECURE;
+#endif
 
         case NRF_UICR_FEATURE_GPIOTE_CH:
             NRFX_ASSERT(index < NRF_UICR_GPIOTE_CH_COUNT);
@@ -440,13 +444,24 @@ NRF_STATIC_INLINE nrf_uicr_dppi_link_t nrf_uicr_feature_link_get(NRF_UICR_Type c
     {
         case NRF_UICR_FEATURE_DPPI_LOCAL_CH:
             NRFX_ASSERT(index < NRF_UICR_DPPI_LOCAL_COUNT);
+#if defined(UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk) && defined(UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk)
+            link.source = p_reg->DPPI.LOCAL[index].CH.LINK.EN | ~p_reg->DPPI.LOCAL[index].CH.LINK.DIR;
+            link.sink = p_reg->DPPI.LOCAL[index].CH.LINK.EN | p_reg->DPPI.LOCAL[index].CH.LINK.DIR;
+#else
             link.source = p_reg->DPPI.LOCAL[index].CH.LINK.SOURCE;
             link.sink = p_reg->DPPI.LOCAL[index].CH.LINK.SINK;
+#endif
             break;
 
         case NRF_UICR_FEATURE_DPPI_GLOBAL_CH:
+            NRFX_ASSERT(index < NRF_UICR_DPPI_GLOBAL_COUNT);
+#if defined(UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk) && defined(UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk)
+            link.source = p_reg->DPPI.GLOBAL[index].CH.LINK.EN | ~p_reg->DPPI.GLOBAL[index].CH.LINK.DIR;
+            link.sink = p_reg->DPPI.GLOBAL[index].CH.LINK.EN | p_reg->DPPI.GLOBAL[index].CH.LINK.DIR;
+#else
             link.source = p_reg->DPPI.GLOBAL[index].CH.LINK.SOURCE;
             link.sink = p_reg->DPPI.GLOBAL[index].CH.LINK.SINK;
+#endif
             break;
 
         default:

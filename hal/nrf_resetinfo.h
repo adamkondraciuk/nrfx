@@ -16,8 +16,19 @@ extern "C" {
  * @brief   Hardware access layer for managing the Reset information peripheral (RESETINFO).
  */
 
+#if defined(RESETINFO_RESETREAS_ERROR_STATUS_ERRORSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether intermediate RESETREAS structure is present. */
+#define NRF_RESETINFO_HAS_RESETREAS_STRUCT 1
+#else
+#define NRF_RESETINFO_HAS_RESETREAS_STRUCT 0
+#endif
+
+#if defined(RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Maximum value of error status. */
+#define NRF_RESETINFO_ERROR_STATUS_MAX RESETINFO_ERROR_STATUS_ERRORSTATUS_Msk
+#else
 #define NRF_RESETINFO_ERROR_STATUS_MAX RESETINFO_RESETREAS_ERROR_STATUS_ERRORSTATUS_Msk
+#endif
 
 /** @brief Global reset reason mask. */
 typedef enum
@@ -191,23 +202,39 @@ NRF_STATIC_INLINE uint32_t nrf_resetinfo_resetreas_local_get(NRF_RESETINFO_Type 
 NRF_STATIC_INLINE void nrf_resetinfo_error_status_set(NRF_RESETINFO_Type * p_reg, uint8_t status)
 {
     NRFX_ASSERT(status <= NRF_RESETINFO_ERROR_STATUS_MAX);
+#if NRF_RESETINFO_HAS_RESETREAS_STRUCT
     p_reg->RESETREAS.ERROR.STATUS = status;
+#else
+    p_reg->ERROR.STATUS = status;
+#endif
 }
 
 NRF_STATIC_INLINE uint8_t nrf_resetinfo_error_status_get(NRF_RESETINFO_Type const * p_reg)
 {
+#if NRF_RESETINFO_HAS_RESETREAS_STRUCT
     return p_reg->RESETREAS.ERROR.STATUS;
+#else
+    return p_reg->ERROR.STATUS;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_resetinfo_error_address_set(NRF_RESETINFO_Type * p_reg,
                                                        uint32_t             address)
 {
+#if NRF_RESETINFO_HAS_RESETREAS_STRUCT
     p_reg->RESETREAS.ERROR.ADDRESS = address;
+#else
+    p_reg->ERROR.ADDRESS = address;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_resetinfo_error_address_get(NRF_RESETINFO_Type const * p_reg)
 {
+#if NRF_RESETINFO_HAS_RESETREAS_STRUCT
     return p_reg->RESETREAS.ERROR.ADDRESS;
+#else
+    return p_reg->ERROR.ADDRESS;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_resetinfo_restore_valid_set(NRF_RESETINFO_Type * p_reg, bool enable)

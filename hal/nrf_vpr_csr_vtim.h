@@ -165,9 +165,9 @@ NRF_STATIC_INLINE nrf_vpr_csr_vtim_count_t nrf_vpr_cst_vtim_count_mode_get(uint8
     switch (counter)
     {
         case 0:
-            return csr_read(VPRCSR_NORDIC_CNTMODE0);
+            return nrf_csr_read(VPRCSR_NORDIC_CNTMODE0);
         case 1:
-            return csr_read(VPRCSR_NORDIC_CNTMODE1);
+            return nrf_csr_read(VPRCSR_NORDIC_CNTMODE1);
         default:
             NRFX_ASSERT(false);
             return 0;
@@ -180,10 +180,10 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_count_mode_set(uint8_t                  
     switch (counter)
     {
         case 0:
-            csr_write(VPRCSR_NORDIC_CNTMODE0, mode);
+            nrf_csr_write(VPRCSR_NORDIC_CNTMODE0, mode);
             break;
         case 1:
-            csr_write(VPRCSR_NORDIC_CNTMODE1, mode);
+            nrf_csr_write(VPRCSR_NORDIC_CNTMODE1, mode);
             break;
         default:
             NRFX_ASSERT(false);
@@ -196,9 +196,9 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_get(uint8_t counter)
     switch (counter)
     {
         case 0:
-            return csr_read(VPRCSR_NORDIC_CNT0);
+            return nrf_csr_read(VPRCSR_NORDIC_CNT0);
         case 1:
-            return csr_read(VPRCSR_NORDIC_CNT1);
+            return nrf_csr_read(VPRCSR_NORDIC_CNT1);
         default:
             NRFX_ASSERT(false);
             return 0;
@@ -210,10 +210,10 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_set(uint8_t counter, uint
     switch (counter)
     {
         case 0:
-            csr_write(VPRCSR_NORDIC_CNT0, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNT0, value);
             break;
         case 1:
-            csr_write(VPRCSR_NORDIC_CNT1, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNT1, value);
             break;
         default:
             NRFX_ASSERT(false);
@@ -226,10 +226,10 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_top_get(uint8_t count
     switch (counter)
     {
         case 0:
-            return (csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Msk)
+            return (nrf_csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Msk)
                    >> VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Pos;
         case 1:
-            return (csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Msk)
+            return (nrf_csr_read(VPRCSR_NORDIC_CNTTOP) & VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Msk)
                    >> VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Pos;
         default:
             return 0;
@@ -243,16 +243,16 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_top_set(uint8_t counter, 
     switch (counter)
     {
         case 0:
-            reg = csr_read(VPRCSR_NORDIC_CNTTOP);
+            reg = nrf_csr_read(VPRCSR_NORDIC_CNTTOP);
             reg &= ~VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Msk;
             reg |= value << VPRCSR_NORDIC_CNTTOP_CNT0RELOAD_Pos;
-            csr_write(VPRCSR_NORDIC_CNTTOP, reg);
+            nrf_csr_write(VPRCSR_NORDIC_CNTTOP, reg);
             break;
         case 1:
-            reg = csr_read(VPRCSR_NORDIC_CNTTOP);
+            reg = nrf_csr_read(VPRCSR_NORDIC_CNTTOP);
             reg &= ~VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Msk;
             reg |= value << VPRCSR_NORDIC_CNTTOP_CNT1RELOAD_Pos;
-            csr_write(VPRCSR_NORDIC_CNTTOP, reg);
+            nrf_csr_write(VPRCSR_NORDIC_CNTTOP, reg);
             break;
         default:
             NRFX_ASSERT(false);
@@ -265,10 +265,10 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_add_set(uint8_t counter, 
     switch (counter)
     {
         case 0:
-            csr_write(VPRCSR_NORDIC_CNTADD0, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNTADD0, value);
             break;
         case 1:
-            csr_write(VPRCSR_NORDIC_CNTADD1, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNTADD1, value);
             break;
         default:
             NRFX_ASSERT(false);
@@ -281,14 +281,14 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_wait_set(uint8_t counter, bool wr
     switch (counter)
     {
         case 0:
-            csr_write(VPRCSR_NORDIC_WAIT0,
+            nrf_csr_write(VPRCSR_NORDIC_WAIT0,
                       ((write ? VPRCSR_NORDIC_WAIT0_WRITEDATA_WRITE :
                                 VPRCSR_NORDIC_WAIT0_WRITEDATA_WAIT)
                        << VPRCSR_NORDIC_WAIT0_WRITEDATA_Pos) |
                       (value << VPRCSR_NORDIC_WAIT0_DATA_Pos));
             break;
         case 1:
-            csr_write(VPRCSR_NORDIC_WAIT1,
+            nrf_csr_write(VPRCSR_NORDIC_WAIT1,
                       ((write ? VPRCSR_NORDIC_WAIT1_WRITEDATA_WRITE :
                                 VPRCSR_NORDIC_WAIT1_WRITEDATA_WAIT)
                        << VPRCSR_NORDIC_WAIT1_WRITEDATA_Pos) |
@@ -302,33 +302,33 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_wait_set(uint8_t counter, bool wr
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_CNT);
+    return nrf_csr_read(VPRCSR_NORDIC_CNT);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_CNT, value);
+    nrf_csr_write(VPRCSR_NORDIC_CNT, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vtim_combined_counter_top_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_CNTTOP);
+    return nrf_csr_read(VPRCSR_NORDIC_CNTTOP);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_top_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_CNTTOP, value);
+    nrf_csr_write(VPRCSR_NORDIC_CNTTOP, value);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_counter_add_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_CNTADD, value);
+    nrf_csr_write(VPRCSR_NORDIC_CNTADD, value);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vtim_combined_wait_trigger(void)
 {
     /* Writing any value will trigger wait. */
-    csr_write(VPRCSR_NORDIC_WAIT, VPRCSR_NORDIC_WAIT_VAL_Msk);
+    nrf_csr_write(VPRCSR_NORDIC_WAIT, VPRCSR_NORDIC_WAIT_VAL_Msk);
 }
 
 #endif // NRF_DECLARE_ONLY

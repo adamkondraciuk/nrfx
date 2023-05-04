@@ -366,58 +366,58 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_transaction_timeout_exception_check(void);
 #ifndef NRF_DECLARE_ONLY
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupts_enable(void)
 {
-    csr_set_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
+    nrf_csr_set_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupts_disable(void)
 {
-    csr_clear_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
+    nrf_csr_clear_bits(VPRCSR_MSTATUS, VPRCSR_MSTATUS_MIE_Msk);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_machine_interrupts_check(void)
 {
-    return csr_read(VPRCSR_MSTATUS) & VPRCSR_MSTATUS_MIE_Msk;
+    return nrf_csr_read(VPRCSR_MSTATUS) & VPRCSR_MSTATUS_MIE_Msk;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_trap_vector_table_addr_set(uint32_t address)
 {
     NRFX_ASSERT(!(address & 0xF));
 
-    csr_write(VPRCSR_MTVT, address);
+    nrf_csr_write(VPRCSR_MTVT, address);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_vector_table_addr_get(void)
 {
-    return csr_read(VPRCSR_MTVT);
+    return nrf_csr_read(VPRCSR_MTVT);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_exception_pc_get(void)
 {
-    return csr_read(VPRCSR_MEPC);
+    return nrf_csr_read(VPRCSR_MEPC);
 }
 
 NRF_STATIC_INLINE nrf_vpr_csr_trap_cause_t nrf_vpr_csr_machine_trap_cause_code_get(void)
 {
-    return csr_read(VPRCSR_MCAUSE) & VPRCSR_MCAUSE_EXCEPTIONCODE_Msk;
+    return nrf_csr_read(VPRCSR_MCAUSE) & VPRCSR_MCAUSE_EXCEPTIONCODE_Msk;
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_machine_trap_interrupt_check(void)
 {
-    return (csr_read(VPRCSR_MCAUSE) & VPRCSR_MCAUSE_INTERRUPT_Msk) >> VPRCSR_MCAUSE_INTERRUPT_Pos;
+    return (nrf_csr_read(VPRCSR_MCAUSE) & VPRCSR_MCAUSE_INTERRUPT_Msk) >> VPRCSR_MCAUSE_INTERRUPT_Pos;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_machine_trap_value_get(void)
 {
-    return csr_read(VPRCSR_MTVAL);
+    return nrf_csr_read(VPRCSR_MTVAL);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_interrupt_threshold_set(uint8_t th)
 {
     // TODO: [NRFX-3172] Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
-    csr_write(VPRCSR_MINTTHRESH, th);
+    nrf_csr_write(VPRCSR_MINTTHRESH, th);
 #else
-    csr_write(VPRCSR_MINTTHRESH, (th << VPRCSR_MINTTHRESH_TH_Pos));
+    nrf_csr_write(VPRCSR_MINTTHRESH, (th << VPRCSR_MINTTHRESH_TH_Pos));
 #endif
 }
 
@@ -425,197 +425,197 @@ NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 {
     // TODO: [NRFX-3172] Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
-    return csr_read(VPRCSR_MINTTHRESH);
+    return nrf_csr_read(VPRCSR_MINTTHRESH);
 #else
-    return (csr_read(VPRCSR_MINTTHRESH) & VPRCSR_MINTTHRESH_TH_Msk) >> VPRCSR_MINTTHRESH_TH_Pos;
+    return (nrf_csr_read(VPRCSR_MINTTHRESH) & VPRCSR_MINTTHRESH_TH_Msk) >> VPRCSR_MINTTHRESH_TH_Pos;
 #endif
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_cycle_counter_enable_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+    uint32_t reg = nrf_csr_read(VPRCSR_MCOUNTINHIBIT);
 
     reg = (reg & ~VPRCSR_MCOUNTINHIBIT_CY_Msk) | (enable ?
             (VPRCSR_MCOUNTINHIBIT_CY_INCREMENT << VPRCSR_MCOUNTINHIBIT_CY_Pos) :
             (VPRCSR_MCOUNTINHIBIT_CY_INHIBIT   << VPRCSR_MCOUNTINHIBIT_CY_Pos));
 
-    csr_write(VPRCSR_MCOUNTINHIBIT, reg);
+    nrf_csr_write(VPRCSR_MCOUNTINHIBIT, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_machine_cycle_counter_enable_check(void)
 {
-    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+    uint32_t reg = nrf_csr_read(VPRCSR_MCOUNTINHIBIT);
 
     return (reg & (VPRCSR_MCOUNTINHIBIT_CY_INHIBIT << VPRCSR_MCOUNTINHIBIT_CY_Pos)) ? false : true;
 }
 
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_cycle_counter_get(void)
 {
-    return csr_read(VPRCSR_MCYCLE) | ((uint64_t)csr_read(VPRCSR_MCYCLEH) << 32);
+    return nrf_csr_read(VPRCSR_MCYCLE) | ((uint64_t)nrf_csr_read(VPRCSR_MCYCLEH) << 32);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_machine_instruction_counter_enable_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+    uint32_t reg = nrf_csr_read(VPRCSR_MCOUNTINHIBIT);
 
     reg = (reg & ~VPRCSR_MCOUNTINHIBIT_IR_Msk) | (enable ?
             (VPRCSR_MCOUNTINHIBIT_IR_INCREMENT << VPRCSR_MCOUNTINHIBIT_IR_Pos) :
             (VPRCSR_MCOUNTINHIBIT_IR_INHIBIT   << VPRCSR_MCOUNTINHIBIT_IR_Pos));
 
-    csr_write(VPRCSR_MCOUNTINHIBIT, reg);
+    nrf_csr_write(VPRCSR_MCOUNTINHIBIT, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_machine_instruction_counter_enable_check(void)
 {
-    uint32_t reg = csr_read(VPRCSR_MCOUNTINHIBIT);
+    uint32_t reg = nrf_csr_read(VPRCSR_MCOUNTINHIBIT);
 
     return (reg & (VPRCSR_MCOUNTINHIBIT_IR_INHIBIT << VPRCSR_MCOUNTINHIBIT_IR_Pos)) ? false : true;
 }
 
 NRF_STATIC_INLINE uint64_t nrf_vpr_csr_machine_instruction_counter_get(void)
 {
-    return csr_read(VPRCSR_MINSTRET) | ((uint64_t)csr_read(VPRCSR_MINSTRETH) << 32);
+    return nrf_csr_read(VPRCSR_MINSTRET) | ((uint64_t)nrf_csr_read(VPRCSR_MINSTRETH) << 32);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_rtperiph_enable_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Enabled :
                       VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Disabled)
             << VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
-    csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_rtperiph_enable_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Msk)
            >> VPRCSR_NORDIC_VPRNORDICCTRL_ENABLERTPERIPH_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_force_ext_clock_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Enabled :
                       VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Disabled)
             << VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
-    csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_force_ext_clock_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Msk)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Msk)
            >> VPRCSR_NORDIC_VPRNORDICCTRL_FORCEEXTCLK_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_force_ram_clock_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Enabled :
                       VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Disabled)
             << VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
-    csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_force_ram_clock_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Msk)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Msk)
            >> VPRCSR_NORDIC_VPRNORDICCTRL_FORCERAMCLK_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_cnt_irq_enable_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL);
     reg &= ~(VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Msk | NRF_VPR_CSR_NORDIC_KEY_MASK);
 
     reg |= ((enable ? VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Enabled :
                       VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Disabled)
             << VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Pos) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
-    csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_cnt_irq_enable_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Msk)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICCTRL) & VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Msk)
            >> VPRCSR_NORDIC_VPRNORDICCTRL_CNTIRQENABLE_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_sleep_state_set(nrf_vpr_csr_sleep_state_t state)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
     reg &= ~VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Msk;
 
     reg |= (uint32_t)state << VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
 }
 
 NRF_STATIC_INLINE nrf_vpr_csr_sleep_state_t nrf_vpr_csr_sleep_state_get(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
             & VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Msk)
            >> VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_SLEEPSTATE_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_return_to_sleep_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
     reg &= ~VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Msk;
 
     reg |= (enable ? VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Enabled :
                      VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Disabled)
            << VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_return_to_sleep_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
             & VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Msk)
            >> VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_RETURNTOSLEEP_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_stack_on_sleep_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL);
     reg &= ~VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Msk;
 
     reg |= (enable ? VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Enabled :
                      VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Disabled)
            << VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_stack_on_sleep_check(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICSLEEPCTRL)
             & VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Msk)
            >> VPRCSR_NORDIC_VPRNORDICSLEEPCTRL_STACKONSLEEP_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_clic_round_robin_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Msk) |
              NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= (enable ? VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Enabled :
                      VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Disabled)
            << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_clic_round_robin_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
+    return ((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
              & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Msk)
             >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Pos
             == VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_DISABLECLICROUNDROBIN_Enabled);
@@ -623,19 +623,19 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_clic_round_robin_check(void)
 
 NRF_STATIC_INLINE void nrf_vpr_csr_unrecoverable_return_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Msk) |
              NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= (enable ? VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Enabled :
                      VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Disabled)
            << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_unrecoverable_return_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
+    return ((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
              & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Msk)
             >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Pos
             == VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_UNRECOVRETURN_Enabled);
@@ -643,35 +643,35 @@ NRF_STATIC_INLINE bool nrf_vpr_csr_unrecoverable_return_check(void)
 
 NRF_STATIC_INLINE void nrf_vpr_csr_irq_stacking_set(nrf_vpr_csr_stacking_t mode)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Msk) |
              NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= (mode << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos);
-    csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
 }
 
 NRF_STATIC_INLINE nrf_vpr_csr_stacking_t nrf_vpr_csr_irq_stacking_get(void)
 {
-    return (csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
+    return (nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
             & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Msk)
            >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_INTHWSTACKING_Pos;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_transaction_timeout_exception_set(bool enable)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE);
     reg = (reg & ~VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Msk) | NRF_VPR_CSR_NORDIC_KEY_MASK;
 
     reg |= (enable ? VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Enabled :
                      VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Disabled)
            << VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Pos;
-    csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
+    nrf_csr_write(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE, reg);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_transaction_timeout_exception_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
+    return ((nrf_csr_read(VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE)
              & VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Msk)
             >> VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Pos
             == VPRCSR_NORDIC_VPRNORDICFEATURESDISABLE_TIMEOUTCHK_Enabled);

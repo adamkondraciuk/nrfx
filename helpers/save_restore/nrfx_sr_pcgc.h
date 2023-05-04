@@ -18,6 +18,13 @@ extern "C" {
  * @brief Utility macros for saving and restoring PCGCM & PCGCS peripherals.
  */
 
+#if defined(PCGCMASTER_SETPOWERCONSUMPTIONBASE_MaxCount) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SETPOWERCONSUMPTIONBASE registers are available. */
+#define NRF_PCGCMASTER_HAS_SETPOWERCONSUMPTIONBASE 1
+#else
+#define NRF_PCGCMASTER_HAS_SETPOWERCONSUMPTIONBASE 0
+#endif
+
 /**
  * @brief Macro for calculating length of a save & restore transfer for the given PCGCM instance.
  *
@@ -30,7 +37,8 @@ extern "C" {
     NRFX_SR_VDMA_INST_COND_SET_LEN(_inst, SETPWRCONTHRESHOLDBASE, SETPWRCONTHRESHOLDBASE) + \
     NRFX_SR_VDMA_INST_COND_SET_LEN(_inst, CLOCKFORCEREG, CLOCKFORCEREG) +                   \
     NRFX_SR_VDMA_INST_COND_SET_LEN(_inst, MASTERFORCEREG, MASTERFORCEREG) +                 \
-    NRFX_SR_VDMA_INST_SET_LEN(_inst, SETPOWERCONSUMPTIONBASE) +                             \
+    NRFX_COND_CODE_1(NRF_PCGCMASTER_HAS_SETPOWERCONSUMPTIONBASE,                            \
+                     (NRFX_SR_VDMA_INST_SET_LEN(_inst, SETPOWERCONSUMPTIONBASE) +), ())     \
     NRFX_SR_VDMA_INST_SET_LEN(_inst, ENABLEPOWERREGFORCE) +                                 \
     NRFX_SR_VDMA_INST_SET_LEN(_inst, POWERREGFORCE)
 
@@ -58,7 +66,8 @@ extern "C" {
  */
 #define _NRFX_SR_PCGCM_VDMA_JOB(_inst, _)                                                    \
     NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, SETPWRCONTHRESHOLDBASE, SETPWRCONTHRESHOLDBASE, 1) \
-    NRFX_SR_VDMA_INST_SET_JOB(_inst, SETPOWERCONSUMPTIONBASE, 1)                             \
+    NRFX_COND_CODE_1(NRF_PCGCMASTER_HAS_SETPOWERCONSUMPTIONBASE,                             \
+                     (NRFX_SR_VDMA_INST_SET_JOB(_inst, SETPOWERCONSUMPTIONBASE, 1)), ())     \
     /* POWERREGFORCE follows ENABLEPOWERREGFORCE */                                          \
     NRFX_SR_VDMA_INST_REG_JOB(_inst, ENABLEPOWERREGFORCE, 2 * sizeof(uint32_t), 0)           \
     NRFX_SR_VDMA_INST_COND_SET_JOB(_inst, MASTERFORCEREG, MASTERFORCEREG, 1)                 \

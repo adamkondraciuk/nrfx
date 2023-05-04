@@ -288,123 +288,123 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_toggle_buffered_set(uint32_t mask)
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_dir_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_DIR);
+    return nrf_csr_read(VPRCSR_NORDIC_DIR);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_set(uint16_t value)
 {
-    csr_write(VPRCSR_NORDIC_DIR, value);
+    nrf_csr_write(VPRCSR_NORDIC_DIR, value);
 }
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_dir_buffered_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_DIRB);
+    return nrf_csr_read(VPRCSR_NORDIC_DIRB);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_set(uint16_t value)
 {
-    csr_write(VPRCSR_NORDIC_DIRB, value);
+    nrf_csr_write(VPRCSR_NORDIC_DIRB, value);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_dir_buffered_dirty_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_DIRBS) & VPRCSR_NORDIC_DIRBS_DIRTYBIT_Msk)
+    return ((nrf_csr_read(VPRCSR_NORDIC_DIRBS) & VPRCSR_NORDIC_DIRBS_DIRTYBIT_Msk)
             >> VPRCSR_NORDIC_DIRBS_DIRTYBIT_Pos) == VPRCSR_NORDIC_DIRBS_DIRTYBIT_DIRTY;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_toggle_set(uint16_t mask)
 {
-    csr_write(VPRCSR_NORDIC_DIRTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_DIRTGL, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_toggle_set(uint16_t mask)
 {
-    csr_write(VPRCSR_NORDIC_DIRBTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_DIRBTGL, mask);
 }
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_IN);
+    return nrf_csr_read(VPRCSR_NORDIC_IN);
 }
 
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
 NRF_STATIC_INLINE nrf_vpr_csr_vio_mode_in_t nrf_vpr_csr_vio_mode_in_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_INMODE);
+    return nrf_csr_read(VPRCSR_NORDIC_INMODE);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(nrf_vpr_csr_vio_mode_in_t mode)
 {
-    csr_write(VPRCSR_NORDIC_INMODE, mode);
+    nrf_csr_write(VPRCSR_NORDIC_INMODE, mode);
 }
 #else
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_mode_in_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_INMODE);
+    return nrf_csr_read(VPRCSR_NORDIC_INMODE);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(uint16_t value)
 {
-    csr_write(VPRCSR_NORDIC_INMODE, value);
+    nrf_csr_write(VPRCSR_NORDIC_INMODE, value);
 }
 #endif
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_out_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_OUT);
+    return nrf_csr_read(VPRCSR_NORDIC_OUT);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_set(uint16_t value)
 {
-    csr_write(VPRCSR_NORDIC_OUT, value);
+    nrf_csr_write(VPRCSR_NORDIC_OUT, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_out_buffered_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_OUTB);
+    return nrf_csr_read(VPRCSR_NORDIC_OUTB);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_buffered_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_OUTB, value);
+    nrf_csr_write(VPRCSR_NORDIC_OUTB, value);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_buffered_dirty_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_OUTBS) & VPRCSR_NORDIC_OUTBS_DIRTYBIT_Msk)
+    return ((nrf_csr_read(VPRCSR_NORDIC_OUTBS) & VPRCSR_NORDIC_OUTBS_DIRTYBIT_Msk)
             >> VPRCSR_NORDIC_OUTBS_DIRTYBIT_Pos) == VPRCSR_NORDIC_OUTBS_DIRTYBIT_DIRTY;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_toggle_set(uint16_t mask)
 {
-    csr_write(VPRCSR_NORDIC_OUTTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_OUTTGL, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_toggle_buffered_set(uint16_t mask)
 {
-    csr_write(VPRCSR_NORDIC_OUTBTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_OUTBTGL, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_combined_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_OUTBD, value);
+    nrf_csr_write(VPRCSR_NORDIC_OUTBD, value);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_combined_toggle_set(uint32_t mask)
 {
-    csr_write(VPRCSR_NORDIC_OUTBDTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_OUTBDTGL, mask);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_out_combined_dirty_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_OUTBDS) & VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Msk)
+    return ((nrf_csr_read(VPRCSR_NORDIC_OUTBDS) & VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Msk)
             >> VPRCSR_NORDIC_OUTBDS_DIRTYBIT_Pos) == VPRCSR_NORDIC_OUTBDS_DIRTYBIT_DIRTY;
 }
 
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_get(nrf_vpr_csr_vio_mode_out_t * p_mode)
 {
-    uint32_t reg = csr_read(VPRCSR_NORDIC_OUTMODE);
+    uint32_t reg = nrf_csr_read(VPRCSR_NORDIC_OUTMODE);
 
     p_mode->shift_enable = ((reg & VPRCSR_NORDIC_OUTMODE_SHIFTMODE_Msk)
                             >> VPRCSR_NORDIC_OUTMODE_SHIFTMODE_Pos)
@@ -421,44 +421,44 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_out_set(nrf_vpr_csr_vio_mode_out_t c
                    ((p_mode->shift_size << VPRCSR_NORDIC_OUTMODE_SHIFSIZE_Pos)
                     & VPRCSR_NORDIC_OUTMODE_SHIFSIZE_Msk);
 
-    csr_write(VPRCSR_NORDIC_OUTMODE, reg);
+    nrf_csr_write(VPRCSR_NORDIC_OUTMODE, reg);
 }
 #endif
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_dirout_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_DIROUT);
+    return nrf_csr_read(VPRCSR_NORDIC_DIROUT);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_DIROUT, value);
+    nrf_csr_write(VPRCSR_NORDIC_DIROUT, value);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_vpr_csr_vio_dirout_buffered_get(void)
 {
-    return csr_read(VPRCSR_NORDIC_DIROUTB);
+    return nrf_csr_read(VPRCSR_NORDIC_DIROUTB);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_buffered_set(uint32_t value)
 {
-    csr_write(VPRCSR_NORDIC_DIROUTB, value);
+    nrf_csr_write(VPRCSR_NORDIC_DIROUTB, value);
 }
 
 NRF_STATIC_INLINE bool nrf_vpr_csr_vio_dirout_buffered_dirty_check(void)
 {
-    return ((csr_read(VPRCSR_NORDIC_DIROUTBS) & VPRCSR_NORDIC_DIROUTBS_DIRTYBIT_Msk)
+    return ((nrf_csr_read(VPRCSR_NORDIC_DIROUTBS) & VPRCSR_NORDIC_DIROUTBS_DIRTYBIT_Msk)
             >> VPRCSR_NORDIC_DIROUTBS_DIRTYBIT_Pos) == VPRCSR_NORDIC_DIROUTBS_DIRTYBIT_DIRTY;
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_toggle_set(uint32_t mask)
 {
-    csr_write(VPRCSR_NORDIC_DIROUTTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_DIROUTTGL, mask);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_toggle_buffered_set(uint32_t mask)
 {
-    csr_write(VPRCSR_NORDIC_DIROUTBTGL, mask);
+    nrf_csr_write(VPRCSR_NORDIC_DIROUTBTGL, mask);
 }
 
 #endif // NRF_DECLARE_ONLY

@@ -2373,6 +2373,28 @@
 #if defined(MOONLIGHT_XXAA)
     #define LUMOS_XXAA 1
 
+    /* HM-21528 */
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Min (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Max (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Disabled (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Enabled (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
+
+    /* HM-21528 */
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH4_Pos)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
+
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
@@ -2544,6 +2566,28 @@
 /**************************************************************************************************/
 
 #if defined(NRF7140_XXAA)
+
+    /* HM-21528 */
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Min (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Max (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Disabled (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Enabled (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
+    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
+
+    /* HM-21528 */
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH4_Pos)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
+    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
 
     typedef struct {
         __IM  uint32_t  RESERVED;
@@ -2842,41 +2886,6 @@
 /**************************************************************************************************/
 
 #if defined(NRF9230_XXAA)
-    /* MDK for nRF9230 is not yet updated to haltium_name_change.h from 8.53.0 */
-    #define NRF_DOMAIN_GLOBALFAST NRF_DOMAIN_SYSCTRL
-    #define NRF_DOMAIN_GLOBALSLOW NRF_DOMAIN_PPR
-
-    typedef NRF_DOMAINS_t NRF_DOMAINID_Type;
-
-    typedef enum {
-        NRF_OWNER_NONE            = 0,
-        NRF_OWNER_SECURE          = 1,
-        NRF_OWNER_APPLICATION     = 2,
-        NRF_OWNER_RADIOCORE       = 3,
-        NRF_OWNER_CELL            = 4,
-        NRF_OWNER_ISIMCORE        = 5,
-        NRF_OWNER_SYSCTRL         = 8,
-        NRF_OWNER_DBG_SECURE      = 9,
-        NRF_OWNER_DBG_APPLICATION = 10,
-        NRF_OWNER_DBG_RADIOCORE   = 11,
-        NRF_OWNER_DBG_CELLCORE    = 12,
-        NRF_OWNER_DBG_CELLRF      = 13,
-        NRF_OWNER_DBG_ISIMCORE    = 15
-    } NRF_OWNERID_Type;
-
-    typedef enum {
-        NRF_PROCESSOR_SECURE      = 1,
-        NRF_PROCESSOR_APPLICATION = 2,
-        NRF_PROCESSOR_RADIOCORE   = 3,
-        NRF_PROCESSOR_CELLCORE    = 4,
-        NRF_PROCESSOR_CELLDSP     = 5,
-        NRF_PROCESSOR_CELLRF      = 6,
-        NRF_PROCESSOR_ISIMCORE    = 7,
-        NRF_PROCESSOR_BBPR        = 11,
-        NRF_PROCESSOR_SYSCTRL     = 12,
-        NRF_PROCESSOR_PPR         = 13,
-        NRF_PROCESSOR_FLPR        = 14,
-    } NRF_PROCESSORID_Type;
 
     #if defined(NRF_CELLCORE)
         #if defined(NRF_TRUSTZONE_NONSECURE)
@@ -2887,623 +2896,6 @@
             #define nrfx_gpiote_irq_handler GPIOTE131_1_IRQHandler
         #endif // defined(NRF_TRUSTZONE_NONSECURE)
     #endif //defined(NRF_CELLCORE)
-
-    typedef struct {
-        __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Non-secure port event from owner n                    */
-        __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Secure port event from owner n                        */
-    } NRF_GPIOTE_EVENTS_PORT_Type;                       /*!< Size = 8 (0x008)                                                     */
-
-    typedef struct {
-        __IOM uint32_t  NONSECURE;                         /*!< (@ 0x00000000) Publish configuration for event PORT[n].NONSECURE     */
-        __IOM uint32_t  SECURE;                            /*!< (@ 0x00000004) Publish configuration for event PORT[n].SECURE        */
-    } NRF_GPIOTE_PUBLISH_PORT_Type;                      /*!< Size = 8 (0x008)                                                     */
-
-    typedef struct {                                   /*!< GPIOTE Structure                                                     */
-        __OM uint32_t TASKS_OUT[8];                      /*!< (@ 0x00000000) Task for writing to pin specified in CONFIG[n].PSEL.
-                                                                             Action on pin is configured in CONFIG[n].POLARITY.*/
-        __IM uint32_t RESERVED[4];
-        __OM uint32_t TASKS_SET[8];                      /*!< (@ 0x00000030) Task for writing to pin specified in CONFIG[n].PSEL.
-                                                                             Action on pin is to set it high.*/
-        __IM uint32_t RESERVED1[4];
-        __OM uint32_t TASKS_CLR[8];                      /*!< (@ 0x00000060) Task for writing to pin specified in CONFIG[n].PSEL.
-                                                                             Action on pin is to set it low.*/
-        __IOM uint32_t SUBSCRIBE_OUT[8];                 /*!< (@ 0x00000080) Subscribe configuration for task OUT[n]               */
-        __IM uint32_t RESERVED2[4];
-        __IOM uint32_t SUBSCRIBE_SET[8];                 /*!< (@ 0x000000B0) Subscribe configuration for task SET[n]               */
-        __IM uint32_t RESERVED3[4];
-        __IOM uint32_t SUBSCRIBE_CLR[8];                 /*!< (@ 0x000000E0) Subscribe configuration for task CLR[n]               */
-        __IOM uint32_t EVENTS_IN[8];                     /*!< (@ 0x00000100) Event from pin specified in CONFIG[n].PSEL            */
-        __IM uint32_t RESERVED4[8];
-        __IOM NRF_GPIOTE_EVENTS_PORT_Type EVENTS_PORT[4]; /*!< (@ 0x00000140) Peripheral events.                                   */
-        __IM uint32_t RESERVED5[8];
-        __IOM uint32_t PUBLISH_IN[8];                    /*!< (@ 0x00000180) Publish configuration for event IN[n]                 */
-        __IM uint32_t RESERVED6[8];
-        __IOM NRF_GPIOTE_PUBLISH_PORT_Type PUBLISH_PORT[4]; /*!< (@ 0x000001C0) Publish configuration for events                   */
-        __IM uint32_t RESERVED7[73];
-        __IOM uint32_t INTENSET0;                        /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR0;                        /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t RESERVED8[2];
-        __IOM uint32_t INTENSET1;                        /*!< (@ 0x00000314) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR1;                        /*!< (@ 0x00000318) Disable interrupt                                     */
-        __IM uint32_t RESERVED9[2];
-        __IOM uint32_t INTENSET2;                        /*!< (@ 0x00000324) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR2;                        /*!< (@ 0x00000328) Disable interrupt                                     */
-        __IM uint32_t RESERVED10[2];
-        __IOM uint32_t INTENSET3;                        /*!< (@ 0x00000334) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR3;                        /*!< (@ 0x00000338) Disable interrupt                                     */
-        __IM uint32_t RESERVED11[2];
-        __IOM uint32_t INTENSET4;                        /*!< (@ 0x00000344) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR4;                        /*!< (@ 0x00000348) Disable interrupt                                     */
-        __IM uint32_t RESERVED12[2];
-        __IOM uint32_t INTENSET5;                        /*!< (@ 0x00000354) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR5;                        /*!< (@ 0x00000358) Disable interrupt                                     */
-        __IM uint32_t RESERVED13[2];
-        __IOM uint32_t INTENSET6;                        /*!< (@ 0x00000364) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR6;                        /*!< (@ 0x00000368) Disable interrupt                                     */
-        __IM uint32_t RESERVED14[102];
-        __IOM uint32_t LATENCY;                          /*!< (@ 0x00000504) Latency selection for Event mode (MODE=Event) with
-                                                                             rising or falling edge detection on the pin.*/
-        __IM uint32_t RESERVED15[2];
-        __IOM uint32_t CONFIG[8];                        /*!< (@ 0x00000510) Configuration for OUT[n], SET[n], and CLR[n] tasks and
-                                                                             IN[n] event*/
-    } NRF_GPIOTE_Type_fixed;                             /*!< Size = 1328 (0x530)                                                  */
-
-    #if defined(NRF_GPIOTE130_S)
-        #undef NRF_GPIOTE130_S
-        #define NRF_GPIOTE130_S ((NRF_GPIOTE_Type_fixed*) NRF_GPIOTE130_S_BASE)
-    #endif
-    #if defined(NRF_GPIOTE130_NS)
-        #undef NRF_GPIOTE130_NS
-        #define NRF_GPIOTE130_NS ((NRF_GPIOTE_Type_fixed*) NRF_GPIOTE130_NS_BASE)
-    #endif
-
-    #define NRF_GPIOTE_Type NRF_GPIOTE_Type_fixed
-
-    #undef GPIOTE_PUBLISH_PORT_MaxCount
-    #undef GPIOTE_EVENTS_PORT_MaxCount
-    #undef GPIOTE_EVENTS_PORT_ResetValue
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Pos
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Msk
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Min
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Max
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_NotGenerated
-    #undef GPIOTE_EVENTS_PORT_EVENTS_PORT_Generated
-
-    #undef GPIOTE_INTENSET0_PORT0_Msk
-    #undef GPIOTE_INTENSET0_PORT1_Msk
-    #undef GPIOTE_INTENSET0_PORT2_Msk
-    #undef GPIOTE_INTENSET0_PORT3_Msk
-    #undef GPIOTE_INTENSET0_PORT4_Msk
-    #undef GPIOTE_INTENSET0_PORT5_Msk
-    #undef GPIOTE_INTENSET0_PORT6_Msk
-    #undef GPIOTE_INTENSET0_PORT7_Msk
-    #undef GPIOTE_INTENSET0_PORT8_Msk
-    #undef GPIOTE_INTENSET0_PORT9_Msk
-    #undef GPIOTE_INTENSET0_PORT10_Msk
-    #undef GPIOTE_INTENSET0_PORT11_Msk
-    #undef GPIOTE_INTENSET0_PORT12_Msk
-    #undef GPIOTE_INTENSET0_PORT13_Msk
-    #undef GPIOTE_INTENSET0_PORT14_Msk
-    #undef GPIOTE_INTENSET0_PORT15_Msk
-
-    #define GPIOTE_EVENTS_PORT_MaxCount (4UL)          /*!< Max size of EVENTS_PORT[4] array.                                    */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                       */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Pos (0UL) /*!< Position of NONSECURE field.                                   */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Msk (0x1UL << GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Pos)
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Min (0x0UL) /*!< Min enumerator value of NONSECURE field.                     */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Max (0x1UL) /*!< Max enumerator value of NONSECURE field.                     */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_NotGenerated (0x0UL) /*!< Event not generated                                 */
-    #define GPIOTE_EVENTS_PORT_NONSECURE_NONSECURE_Generated (0x1UL) /*!< Event generated                                        */
-
-    #define GPIOTE_EVENTS_PORT_SECURE_ResetValue (0x00000000UL) /*!< Reset value of SECURE register.                             */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Pos (0UL) /*!< Position of SECURE field.                                            */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Msk (0x1UL << GPIOTE_EVENTS_PORT_SECURE_SECURE_Pos) /*!< Bit mask of SECURE field.  */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Min (0x0UL) /*!< Min enumerator value of SECURE field.                              */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Max (0x1UL) /*!< Max enumerator value of SECURE field.                              */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_NotGenerated (0x0UL) /*!< Event not generated                                       */
-    #define GPIOTE_EVENTS_PORT_SECURE_SECURE_Generated (0x1UL) /*!< Event generated                                              */
-
-    #define GPIOTE_PUBLISH_PORT_MaxCount (4UL)         /*!< Max size of PUBLISH_PORT[4] array.                                   */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_ResetValue (0x00000000UL) /*!< Reset value of NONSECURE register.                      */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                          */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Pos)
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                       */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                       */
-
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Pos (31UL) /*!< Position of EN field.                                               */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Msk (0x1UL << GPIOTE_PUBLISH_PORT_NONSECURE_EN_Pos) /*!< Bit mask of EN field.      */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Min (0x0UL) /*!< Min enumerator value of EN field.                                  */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Max (0x1UL) /*!< Max enumerator value of EN field.                                  */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Disabled (0x0UL) /*!< Disable publishing                                            */
-    #define GPIOTE_PUBLISH_PORT_NONSECURE_EN_Enabled (0x1UL) /*!< Enable publishing                                              */
-
-    #define GPIOTE_PUBLISH_PORT_SECURE_ResetValue (0x00000000UL) /*!< Reset value of SECURE register.                            */
-    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos (0UL) /*!< Position of CHIDX field.                                             */
-    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Msk (0xFFUL << GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Pos) /*!< Bit mask of CHIDX field.  */
-    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Min (0x0UL) /*!< Min value of CHIDX field.                                          */
-    #define GPIOTE_PUBLISH_PORT_SECURE_CHIDX_Max (0xFFUL) /*!< Max size of CHIDX field.                                          */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Pos (31UL)   /*!< Position of EN field.                                                */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Msk (0x1UL << GPIOTE_PUBLISH_PORT_SECURE_EN_Pos) /*!< Bit mask of EN field.            */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Min (0x0UL)  /*!< Min enumerator value of EN field.                                    */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Max (0x1UL)  /*!< Max enumerator value of EN field.                                    */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Disabled (0x0UL) /*!< Disable publishing                                               */
-    #define GPIOTE_PUBLISH_PORT_SECURE_EN_Enabled (0x1UL) /*!< Enable publishing                                                 */
-
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET0_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET0_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET0_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET0_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET0_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET0_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET0_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET0_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET0_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET0_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET0_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET0_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET1_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET1_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET1_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET1_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET1_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET1_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET1_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET1_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET1_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET1_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET1_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET1_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET2_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET2_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET2_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET2_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET2_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET2_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET2_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET2_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET2_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET2_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET2_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET2_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET3_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET3_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET3_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET3_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET3_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET3_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET3_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET3_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET3_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET3_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET3_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET3_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET4_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET4_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET4_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET4_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET4_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET4_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET4_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET4_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET4_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET4_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET4_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET4_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET5_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET5_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET5_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET5_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET5_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET5_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET5_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET5_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET5_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET5_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET5_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET5_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Pos (16UL) /*!< Position of PORT0NONSECURE field.                                    */
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0NONSECURE_Pos)
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT0NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET6_PORT0NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET6_PORT0SECURE_Pos (17UL)    /*!< Position of PORT0SECURE field.                                       */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT0SECURE_Pos) /*!< Bit mask of PORT0SECURE field.     */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT0SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET6_PORT0SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Pos (18UL) /*!< Position of PORT1NONSECURE field.                                    */
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1NONSECURE_Pos)
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT1NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET6_PORT1NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET6_PORT1SECURE_Pos (19UL)    /*!< Position of PORT1SECURE field.                                       */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT1SECURE_Pos) /*!< Bit mask of PORT1SECURE field.     */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT1SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET6_PORT1SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Pos (20UL) /*!< Position of PORT2NONSECURE field.                                    */
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2NONSECURE_Pos)
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT2NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET6_PORT2NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET6_PORT2SECURE_Pos (21UL)    /*!< Position of PORT2SECURE field.                                       */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT2SECURE_Pos) /*!< Bit mask of PORT2SECURE field.     */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT2SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET6_PORT2SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Pos (22UL) /*!< Position of PORT3NONSECURE field.                                    */
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3NONSECURE_Pos)
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Min (0x0UL) /*!< Min enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Max (0x1UL) /*!< Max enumerator value of PORT3NONSECURE field.                       */
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Set (0x1UL) /*!< Enable                                                              */
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Disabled (0x0UL) /*!< Read: Disabled                                                 */
-    #define GPIOTE_INTENSET6_PORT3NONSECURE_Enabled (0x1UL) /*!< Read: Enabled                                                   */
-
-    #define GPIOTE_INTENSET6_PORT3SECURE_Pos (23UL)    /*!< Position of PORT3SECURE field.                                       */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Msk (0x1UL << GPIOTE_INTENSET0_PORT3SECURE_Pos) /*!< Bit mask of PORT3SECURE field.     */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Min (0x0UL)   /*!< Min enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Max (0x1UL)   /*!< Max enumerator value of PORT3SECURE field.                           */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Set (0x1UL)   /*!< Enable                                                               */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Disabled (0x0UL) /*!< Read: Disabled                                                    */
-    #define GPIOTE_INTENSET6_PORT3SECURE_Enabled (0x1UL) /*!< Read: Enabled                                                      */
-
-    typedef struct {                                   /*!< RESETHUB Structure                                                   */
-        __OM uint32_t TASKS_RESETDOMAIN[8];              /*!< (@ 0x00000000) Reset the domain [n], where n is domain id.           */
-        __IM uint32_t RESERVED[56];
-        __IOM uint32_t EVENTS_DOMAINRESET[8];            /*!< (@ 0x00000100) Domain [n] was reset, where n is domain id.           */
-        __IM uint32_t RESERVED1[120];
-        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-        __IM uint32_t RESERVED2[60];
-        __IOM NRF_RESETHUB_RESETREAS_Type RESETREAS;     /*!< (@ 0x00000400) (unspecified)                                         */
-        __IM uint32_t RESERVED3[55];
-        __IOM uint32_t RESETMASK;                        /*!< (@ 0x00000500) Mask the reset request for a domain by itself.        */
-        __IOM uint32_t CROSSDOMAINRESET;                 /*!< (@ 0x00000504) Enable cross domain resets.                           */
-        __IOM uint32_t GPREGRET;                         /*!< (@ 0x00000508) General purpose retention register.                   */
-    } NRF_RESETHUB_Type_fixed;                         /*!< Size = 1292 (0x50C)                                                  */
-
-    #if defined(NRF_RESETHUB_S)
-        #undef NRF_RESETHUB_S
-        #define NRF_RESETHUB_S ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_S_BASE)
-    #endif
-    #if defined(NRF_RESETHUB_NS)
-        #undef NRF_RESETHUB_NS
-        #define NRF_RESETHUB_NS ((NRF_RESETHUB_Type_fixed*) NRF_RESETHUB_NS_BASE)
-    #endif
-
-    #define NRF_RESETHUB_Type NRF_RESETHUB_Type_fixed
 
     #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
     // Old HFXO modes are not supported
@@ -3527,583 +2919,179 @@
     #define BICR_HFXO_CONFIG_MODE_Crystal5 (0x5UL)     /*!< Reserved value.                                                      */
     #define BICR_HFXO_CONFIG_MODE_Crystal6 (0x6UL)     /*!< Reserved value.                                                      */
 
-    /* TODO: HM-17600 */
-    typedef struct {
-        __IM uint32_t RESERVED00[1];
-        __OM uint32_t TASKS_STOP;
-        __IM uint32_t RESERVED01[1];
-        __OM uint32_t TASKS_SUSPEND;
-        __OM uint32_t TASKS_RESUME;
-        __IM uint32_t RESERVED1[5];
-        __OM NRF_TWIM_TASKS_DMA_Type TASKS_DMA;
-        __IM uint32_t RESERVED2[13];
-        __IOM uint32_t SUBSCRIBE_SUSPEND;
-        __IOM uint32_t SUBSCRIBE_RESUME;
-        __IM uint32_t RESERVED3[5];
-        __IOM NRF_TWIM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;
-        __IM uint32_t RESERVED4[11];
-        __IOM uint32_t EVENTS_STOPPED;
-        __IM uint32_t RESERVED5[3];
-        __IOM uint32_t EVENTS_ERROR;
-        __IM uint32_t RESERVED6[2];
-        __IOM uint32_t EVENTS_BB;
-        __IM uint32_t RESERVED7;
-        __IOM uint32_t EVENTS_SUSPENDED;
-        __IM uint32_t RESERVED8[2];
-        __IOM uint32_t EVENTS_LASTRX;
-        __IOM uint32_t EVENTS_LASTTX;
-        __IM uint32_t RESERVED9[4];
-        __IOM NRF_TWIM_EVENTS_DMA_Type EVENTS_DMA;
-        __IM uint32_t RESERVED10[4];
-        __IOM uint32_t PUBLISH_STOPPED;
-        __IM uint32_t RESERVED11[3];
-        __IOM uint32_t PUBLISH_ERROR;
-        __IM uint32_t RESERVED12[2];
-        __IOM uint32_t PUBLISH_BB;
-        __IM uint32_t RESERVED13;
-        __IOM uint32_t PUBLISH_SUSPENDED;
-        __IM uint32_t RESERVED14[2];
-        __IOM uint32_t PUBLISH_LASTRX;
-        __IOM uint32_t PUBLISH_LASTTX;
-        __IM uint32_t RESERVED15[4];
-        __IOM NRF_TWIM_PUBLISH_DMA_Type PUBLISH_DMA;
-        __IM uint32_t RESERVED16[3];
-        __IOM uint32_t SHORTS;
-        __IM uint32_t RESERVED17[63];
-        __IOM uint32_t INTEN;
-        __IOM uint32_t INTENSET;
-        __IOM uint32_t INTENCLR;
-        __IM uint32_t RESERVED18[110];
-        __IOM uint32_t ERRORSRC;
-        __IM uint32_t RESERVED19[14];
-        __IOM uint32_t ENABLE;
-        __IOM uint32_t CONFIG;
-        __IM uint32_t RESERVED20[6];
-        __IOM uint32_t FMPLUS;
-        __IOM uint32_t FREQUENCY;
-        __IM uint32_t RESERVED21[24];
-        __IOM uint32_t ADDRESS;
-        __IM uint32_t RESERVED22[29];
-        __IOM NRF_TWIM_PSEL_Type PSEL;
-        __IM uint32_t RESERVED23[62];
-        __IOM NRF_TWIM_DMA_Type DMA;
-    } NRF_TWIM_Type_fixed;
-
-    #if defined(NRF_TWIM130_S)
-        #undef NRF_TWIM130_S
-        #define NRF_TWIM130_S ((NRF_TWIM_Type_fixed*) NRF_TWIM130_S_BASE)
+    /* HM-21366 Peripheral capabilities described as _MIN and _MAX instead of single symbol */
+    #if defined(UARTE120_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE120_EASYDMA_MAXCNT_SIZE)
+        #define UARTE120_EASYDMA_MAXCNT_SIZE UARTE120_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE130_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE130_EASYDMA_MAXCNT_SIZE)
+        #define UARTE130_EASYDMA_MAXCNT_SIZE UARTE130_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE131_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE131_EASYDMA_MAXCNT_SIZE)
+        #define UARTE131_EASYDMA_MAXCNT_SIZE UARTE131_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE132_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE132_EASYDMA_MAXCNT_SIZE)
+        #define UARTE132_EASYDMA_MAXCNT_SIZE UARTE132_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE133_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE133_EASYDMA_MAXCNT_SIZE)
+        #define UARTE133_EASYDMA_MAXCNT_SIZE UARTE133_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE134_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE134_EASYDMA_MAXCNT_SIZE)
+        #define UARTE134_EASYDMA_MAXCNT_SIZE UARTE134_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE135_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE135_EASYDMA_MAXCNT_SIZE)
+        #define UARTE135_EASYDMA_MAXCNT_SIZE UARTE135_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE136_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE136_EASYDMA_MAXCNT_SIZE)
+        #define UARTE136_EASYDMA_MAXCNT_SIZE UARTE136_EASYDMA_MAXCNT_SIZE_MAX
+    #endif
+    #if defined(UARTE137_EASYDMA_MAXCNT_SIZE_MAX) && !defined(UARTE137_EASYDMA_MAXCNT_SIZE)
+        #define UARTE137_EASYDMA_MAXCNT_SIZE UARTE137_EASYDMA_MAXCNT_SIZE_MAX
     #endif
 
-    #if defined(NRF_TWIM131_S)
-        #undef NRF_TWIM131_S
-        #define NRF_TWIM131_S ((NRF_TWIM_Type_fixed*) NRF_TWIM131_S_BASE)
+    #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
+    #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
+    #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
+    #define P6_FEATURE_PINS_PRESENT P6_PINS_PRESENT
+    #define P8_FEATURE_PINS_PRESENT P8_PINS_PRESENT
+    #define P9_FEATURE_PINS_PRESENT P9_PINS_PRESENT
+    #define P10_FEATURE_PINS_PRESENT P10_PINS_PRESENT
+    #define P11_FEATURE_PINS_PRESENT P11_PINS_PRESENT
+    #define P12_FEATURE_PINS_PRESENT P12_PINS_PRESENT
+    #define P13_FEATURE_PINS_PRESENT P13_PINS_PRESENT
+
+    #define P0_PIN_NUM P0_PIN_NUM_MAX
+    #define P1_PIN_NUM P1_PIN_NUM_MAX
+    #define P2_PIN_NUM P2_PIN_NUM_MAX
+    #define P6_PIN_NUM P6_PIN_NUM_MAX
+    #define P8_PIN_NUM P8_PIN_NUM_MAX
+    #define P9_PIN_NUM P9_PIN_NUM_MAX
+    #define P10_PIN_NUM P10_PIN_NUM_MAX
+    #define P11_PIN_NUM P11_PIN_NUM_MAX
+    #define P12_PIN_NUM P12_PIN_NUM_MAX
+    #define P13_PIN_NUM P13_PIN_NUM_MAX
+
+    #define TWIM120_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM130_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM131_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM132_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM133_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM134_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM135_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM136_EASYDMA_MAXCNT_SIZE 16
+    #define TWIM137_EASYDMA_MAXCNT_SIZE 16
+
+    #define TWIS130_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS131_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS132_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS133_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS134_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS135_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS136_EASYDMA_MAXCNT_SIZE 16
+    #define TWIS137_EASYDMA_MAXCNT_SIZE 16
+
+    #define SPIS120_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS130_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS131_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS132_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS133_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS134_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS135_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS136_EASYDMA_MAXCNT_SIZE 16
+    #define SPIS137_EASYDMA_MAXCNT_SIZE 16
+
+    #define SPIM120_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM121_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM130_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM131_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM132_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM133_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM134_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM135_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM136_EASYDMA_MAXCNT_SIZE 16
+    #define SPIM137_EASYDMA_MAXCNT_SIZE 16
+
+    #define TIMER020_CC_NUM 6
+    #define TIMER021_CC_NUM 6
+    #define TIMER022_CC_NUM 6
+    #define TIMER120_CC_NUM 6
+    #define TIMER121_CC_NUM 6
+    #define TIMER130_CC_NUM 6
+    #define TIMER131_CC_NUM 6
+    #define TIMER132_CC_NUM 6
+    #define TIMER133_CC_NUM 6
+    #define TIMER134_CC_NUM 6
+    #define TIMER135_CC_NUM 6
+    #define TIMER136_CC_NUM 6
+    #define TIMER137_CC_NUM 6
+
+    #define TIMER020_MAX_SIZE 32
+    #define TIMER021_MAX_SIZE 32
+    #define TIMER022_MAX_SIZE 32
+    #define TIMER120_MAX_SIZE 32
+    #define TIMER121_MAX_SIZE 32
+    #define TIMER130_MAX_SIZE 32
+    #define TIMER131_MAX_SIZE 32
+    #define TIMER132_MAX_SIZE 32
+    #define TIMER133_MAX_SIZE 32
+    #define TIMER134_MAX_SIZE 32
+    #define TIMER135_MAX_SIZE 32
+    #define TIMER136_MAX_SIZE 32
+    #define TIMER137_MAX_SIZE 32
+
+    #define RTC130_CC_NUM 4
+    #define RTC131_CC_NUM 4
+
+    #define EGU130_CH_NUM 8
+    #define EGU020_CH_NUM 16
+
+    #if defined(DPPIC0_CH_NUM_MAX) && !defined(DPPIC0_CH_NUM)
+        #define DPPIC0_CH_NUM (DPPIC0_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM132_S)
-        #undef NRF_TWIM132_S
-        #define NRF_TWIM132_S ((NRF_TWIM_Type_fixed*) NRF_TWIM132_S_BASE)
+    #if defined(DPPIC1_CH_NUM_MAX) && !defined(DPPIC1_CH_NUM)
+        #define DPPIC1_CH_NUM (DPPIC1_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM133_S)
-        #undef NRF_TWIM133_S
-        #define NRF_TWIM133_S ((NRF_TWIM_Type_fixed*) NRF_TWIM133_S_BASE)
+    #if defined(DPPIC020_CH_NUM_MAX) && !defined(DPPIC020_CH_NUM)
+        #define DPPIC020_CH_NUM (DPPIC020_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM134_S)
-        #undef NRF_TWIM134_S
-        #define NRF_TWIM134_S ((NRF_TWIM_Type_fixed*) NRF_TWIM134_S_BASE)
+    #if defined(DPPIC030_CH_NUM_MAX) && !defined(DPPIC030_CH_NUM)
+        #define DPPIC030_CH_NUM (DPPIC030_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM135_S)
-        #undef NRF_TWIM135_S
-        #define NRF_TWIM135_S ((NRF_TWIM_Type_fixed*) NRF_TWIM135_S_BASE)
+    #if defined(DPPIC120_CH_NUM_MAX) && !defined(DPPIC120_CH_NUM)
+        #define DPPIC120_CH_NUM (DPPIC120_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM136_S)
-        #undef NRF_TWIM136_S
-        #define NRF_TWIM136_S ((NRF_TWIM_Type_fixed*) NRF_TWIM136_S_BASE)
+    #if defined(DPPIC130_CH_NUM_MAX) && !defined(DPPIC130_CH_NUM)
+        #define DPPIC130_CH_NUM (DPPIC130_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_TWIM137_S)
-        #undef NRF_TWIM137_S
-        #define NRF_TWIM137_S ((NRF_TWIM_Type_fixed*) NRF_TWIM137_S_BASE)
+    #if defined(DPPIC131_CH_NUM_MAX) && !defined(DPPIC131_CH_NUM)
+        #define DPPIC131_CH_NUM (DPPIC131_CH_NUM_MAX + 1UL)
     #endif
 
-    #define NRF_TWIM_Type NRF_TWIM_Type_fixed
-
-    typedef struct {
-        __IM  uint32_t  RESERVED;
-        __IOM uint32_t  CNT;                               /*!< (@ 0x00000004) Number of values (duty cycles) in this sequence       */
-        __IOM uint32_t  REFRESH;                           /*!< (@ 0x00000008) Number of additional PWM periods between samples loaded
-                                                                                into compare register*/
-        __IOM uint32_t  ENDDELAY;                          /*!< (@ 0x0000000C) Time added after the sequence                         */
-        __IM  uint32_t  RESERVED1[4];
-    } NRF_PWM_SEQ_Type_fixed;                                  /*!< Size = 32 (0x020)                                                    */
-
-    /* PWM_SEQ_CNT: Number of values (duty cycles) in this sequence */
-    #define PWM_SEQ_CNT_ResetValue (0x00000000UL)      /*!< Reset value of CNT register.                                         */
-
-    /* CNT @Bits 0..14 : Number of values (duty cycles) in this sequence */
-    #define PWM_SEQ_CNT_CNT_Pos (0UL)                  /*!< Position of CNT field.                                               */
-    #define PWM_SEQ_CNT_CNT_Msk (0x7FFFUL << PWM_SEQ_CNT_CNT_Pos) /*!< Bit mask of CNT field.                                    */
-    #define PWM_SEQ_CNT_CNT_Min (0x0UL)                /*!< Min enumerator value of CNT field.                                   */
-    #define PWM_SEQ_CNT_CNT_Max (0x0UL)                /*!< Max enumerator value of CNT field.                                   */
-    #define PWM_SEQ_CNT_CNT_Disabled (0x0000UL)        /*!< Sequence is disabled, and shall not be started as it is empty        */
-
-    typedef struct {                                   /*!< PWM Structure                                                        */
-        __OM uint32_t TASKS_START;                       /*!< (@ 0x00000000) Starts PWM pulse generation with the last loaded
-                                                                            values*/
-        __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000004) Stops PWM pulse generation on all channels at the end
-                                                                            of current PWM period, and stops sequence playback*/
-        __OM uint32_t TASKS_NEXTSTEP;                    /*!< (@ 0x00000008) Steps by one value in the current sequence on all
-                                                                            enabled channels if DECODER.MODE=NextStep. Does not
-                                                                            cause PWM generation to start if not running.*/
-        __OM uint32_t TASKS_SEQABORT;                    /*!< (@ 0x0000000C) (Gracefully) aborts the playback of the current
-                                                                            sequence or the current end delay*/
-        __OM NRF_PWM_TASKS_DMA_Type TASKS_DMA;           /*!< (@ 0x00000010) Peripheral tasks.                                     */
-        __IM uint32_t RESERVED[24];
-        __IOM uint32_t SUBSCRIBE_START;                  /*!< (@ 0x00000080) Subscribe configuration for task START                */
-        __IOM uint32_t SUBSCRIBE_STOP;                   /*!< (@ 0x00000084) Subscribe configuration for task STOP                 */
-        __IOM uint32_t SUBSCRIBE_NEXTSTEP;               /*!< (@ 0x00000088) Subscribe configuration for task NEXTSTEP             */
-        __IOM uint32_t SUBSCRIBE_SEQABORT;               /*!< (@ 0x0000008C) Subscribe configuration for task SEQABORT             */
-        __IOM NRF_PWM_SUBSCRIBE_DMA_Type SUBSCRIBE_DMA;  /*!< (@ 0x00000090) Subscribe configuration for tasks                     */
-        __IM uint32_t RESERVED1[24];
-        __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) Response to START task, emitted when the PWM pulse
-                                                                            generation starts*/
-        __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) Response to STOP task, emitted when PWM pulses are no
-                                                                            longer generated*/
-        __IOM uint32_t EVENTS_SEQSTARTED[2];             /*!< (@ 0x00000108) First PWM period started on sequence n                */
-        __IOM uint32_t EVENTS_SEQEND[2];                 /*!< (@ 0x00000110) Emitted at end of every sequence n, when last value
-                                                                            from RAM has been applied to wave counter*/
-        __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x00000118) Emitted at the end of each PWM period                 */
-        __IOM uint32_t EVENTS_LOOPSDONE;                 /*!< (@ 0x0000011C) Concatenated sequences have been played the amount of
-                                                                            times defined in LOOP.CNT*/
-        __IOM uint32_t EVENTS_RAMUNDERFLOW;              /*!< (@ 0x00000120) Emitted when retrieving from RAM does not complete in
-                                                                            time for the PWM module*/
-        __IOM NRF_PWM_EVENTS_DMA_Type EVENTS_DMA;        /*!< (@ 0x00000124) Peripheral events.                                    */
-        __IOM uint32_t EVENTS_COMPAREMATCH[4];           /*!< (@ 0x0000013C) This event is generated when the compare matches for
-                                                                            the compare channel [n].*/
-        __IM uint32_t RESERVED2[13];
-        __IOM uint32_t PUBLISH_STARTED;                  /*!< (@ 0x00000180) Publish configuration for event STARTED               */
-        __IOM uint32_t PUBLISH_STOPPED;                  /*!< (@ 0x00000184) Publish configuration for event STOPPED               */
-        __IOM uint32_t PUBLISH_SEQSTARTED[2];            /*!< (@ 0x00000188) Publish configuration for event SEQSTARTED[n]         */
-        __IOM uint32_t PUBLISH_SEQEND[2];                /*!< (@ 0x00000190) Publish configuration for event SEQEND[n]             */
-        __IOM uint32_t PUBLISH_PWMPERIODEND;             /*!< (@ 0x00000198) Publish configuration for event PWMPERIODEND          */
-        __IOM uint32_t PUBLISH_LOOPSDONE;                /*!< (@ 0x0000019C) Publish configuration for event LOOPSDONE             */
-        __IOM uint32_t PUBLISH_RAMUNDERFLOW;             /*!< (@ 0x000001A0) Publish configuration for event RAMUNDERFLOW          */
-        __IOM NRF_PWM_PUBLISH_DMA_Type PUBLISH_DMA;      /*!< (@ 0x000001A4) Publish configuration for events                      */
-        __IOM uint32_t PUBLISH_COMPAREMATCH[4];          /*!< (@ 0x000001BC) Publish configuration for event COMPAREMATCH[n]       */
-        __IM uint32_t RESERVED3[13];
-        __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
-        __IM uint32_t RESERVED4[63];
-        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-        __IM uint32_t RESERVED5[124];
-        __IOM uint32_t ENABLE;                           /*!< (@ 0x00000500) PWM module enable register                            */
-        __IOM uint32_t MODE;                             /*!< (@ 0x00000504) Selects operating mode of the wave counter            */
-        __IOM uint32_t COUNTERTOP;                       /*!< (@ 0x00000508) Value up to which the pulse generator counter counts  */
-        __IOM uint32_t PRESCALER;                        /*!< (@ 0x0000050C) Configuration for PWM_CLK                             */
-        __IOM uint32_t DECODER;                          /*!< (@ 0x00000510) Configuration of the decoder                          */
-        __IOM uint32_t LOOP;                             /*!< (@ 0x00000514) Number of playbacks of a loop                         */
-        __IOM uint32_t IDLEOUT;                          /*!< (@ 0x00000518) Configure the output value on the PWM channel during
-                                                                            idle*/
-        __IM uint32_t RESERVED6;
-        __IOM NRF_PWM_SEQ_Type_fixed SEQ[2];                   /*!< (@ 0x00000520) (unspecified)                                         */
-        __IOM NRF_PWM_PSEL_Type PSEL;                    /*!< (@ 0x00000560) (unspecified)                                         */
-        __IM uint32_t RESERVED7[100];
-        __IOM NRF_PWM_DMA_Type DMA;                      /*!< (@ 0x00000700) (unspecified)                                         */
-    } NRF_PWM_Type_fixed;                                    /*!< Size = 1864 (0x748)                                                  */
-
-    #if defined(NRF_PWM120_NS)
-        #undef NRF_PWM120_NS
-        #define NRF_PWM120_NS ((NRF_PWM_Type_fixed*) NRF_PWM120_NS_BASE)
+    #if defined(DPPIC132_CH_NUM_MAX) && !defined(DPPIC132_CH_NUM)
+        #define DPPIC132_CH_NUM (DPPIC132_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_PWM120_S)
-        #undef NRF_PWM120_S
-        #define NRF_PWM120_S ((NRF_PWM_Type_fixed*) NRF_PWM120_S_BASE)
+    #if defined(DPPIC133_CH_NUM_MAX) && !defined(DPPIC133_CH_NUM)
+        #define DPPIC133_CH_NUM (DPPIC133_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_PWM130_NS)
-        #undef NRF_PWM130_NS
-        #define NRF_PWM130_NS ((NRF_PWM_Type_fixed*) NRF_PWM130_NS_BASE)
+    #if defined(DPPIC134_CH_NUM_MAX) && !defined(DPPIC134_CH_NUM)
+        #define DPPIC134_CH_NUM (DPPIC134_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_PWM130_S)
-        #undef NRF_PWM130_S
-        #define NRF_PWM130_S ((NRF_PWM_Type_fixed*) NRF_PWM130_S_BASE)
+    #if defined(DPPIC135_CH_NUM_MAX) && !defined(DPPIC135_CH_NUM)
+        #define DPPIC135_CH_NUM (DPPIC135_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_PWM131_NS)
-        #undef NRF_PWM131_NS
-        #define NRF_PWM131_NS ((NRF_PWM_Type_fixed*) NRF_PWM131_NS_BASE)
+    #if defined(DPPIC136_CH_NUM_MAX) && !defined(DPPIC136_CH_NUM)
+        #define DPPIC136_CH_NUM (DPPIC136_CH_NUM_MAX + 1UL)
     #endif
 
-    #if defined(NRF_PWM131_S)
-        #undef NRF_PWM131_S
-        #define NRF_PWM131_S ((NRF_PWM_Type_fixed*) NRF_PWM131_S_BASE)
-    #endif
-
-    #if defined(NRF_PWM132_NS)
-        #undef NRF_PWM132_NS
-        #define NRF_PWM132_NS ((NRF_PWM_Type_fixed*) NRF_PWM132_NS_BASE)
-    #endif
-
-    #if defined(NRF_PWM132_S)
-        #undef NRF_PWM132_S
-        #define NRF_PWM132_S ((NRF_PWM_Type_fixed*) NRF_PWM132_S_BASE)
-    #endif
-
-    #if defined(NRF_PWM133_NS)
-        #undef NRF_PWM133_NS
-        #define NRF_PWM133_NS ((NRF_PWM_Type_fixed*) NRF_PWM133_NS_BASE)
-    #endif
-
-    #if defined(NRF_PWM133_S)
-        #undef NRF_PWM133_S
-        #define NRF_PWM133_S ((NRF_PWM_Type_fixed*) NRF_PWM133_S_BASE)
-    #endif
-
-    #define NRF_PWM_Type NRF_PWM_Type_fixed
-
-    typedef struct {                                   /*!< GRTC Structure                                                       */
-        __OM uint32_t TASKS_CAPTURE[16];                 /*!< (@ 0x00000000) Capture the counter value to CC[n] register           */
-        __IM uint32_t RESERVED1[8];
-        __OM uint32_t TASKS_START;                       /*!< (@ 0x00000060) Start the counter                                     */
-        __OM uint32_t TASKS_STOP;                        /*!< (@ 0x00000064) Stop the counter                                      */
-        __OM uint32_t TASKS_CLEAR;                       /*!< (@ 0x00000068) Clear the counter                                     */
-        __OM uint32_t TASKS_PWMSTART;                    /*!< (@ 0x0000006C) Start the PWM                                         */
-        __OM uint32_t TASKS_PWMSTOP;                     /*!< (@ 0x00000070) Stop the PWM                                          */
-        __IM uint32_t RESERVED2[3];
-        __IOM uint32_t SUBSCRIBE_CAPTURE[16];            /*!< (@ 0x00000080) Subscribe configuration for task CAPTURE[n]           */
-        __IM uint32_t RESERVED3[16];
-        __IOM uint32_t EVENTS_COMPARE[16];               /*!< (@ 0x00000100) Compare event on CC[n] match                          */
-        __IM uint32_t RESERVED4[8];
-        __IOM uint32_t EVENTS_RTCOMPARE;                 /*!< (@ 0x00000160) Compare event on RTCOMPARE register match             */
-        __IOM uint32_t EVENTS_RTCOMPARESYNC;             /*!< (@ 0x00000164) The value written from the register RTCOMPAREL/H or
-                                                                            RTCOMPARESYNCL/H is latched to RTCOMPARE*/
-        __IOM uint32_t EVENTS_SYSCOUNTERVALID;           /*!< (@ 0x00000168) The SYSCOUNTER is in active state and value is valid  */
-        __IOM uint32_t EVENTS_PWMPERIODEND;              /*!< (@ 0x0000016C) Event on end of each PWM period                       */
-        __IM uint32_t RESERVED5[4];
-        __IOM uint32_t PUBLISH_COMPARE[16];              /*!< (@ 0x00000180) Publish configuration for event COMPARE[n]            */
-        __IM uint32_t RESERVED6[8];
-        __IOM uint32_t PUBLISH_RTCOMPARE;                /*!< (@ 0x000001E0) Publish configuration for event RTCOMPARE             */
-        __IM uint32_t RESERVED7[7];
-        __IOM uint32_t SHORTS;                           /*!< (@ 0x00000200) Shortcuts between local events and tasks              */
-        __IM uint32_t RESERVED8[63];
-        __IOM uint32_t INTEN0;                           /*!< (@ 0x00000300) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET0;                        /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR0;                        /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t INTPEND0;                          /*!< (@ 0x0000030C) Pending interrupts                                    */
-        __IOM uint32_t INTEN1;                           /*!< (@ 0x00000310) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET1;                        /*!< (@ 0x00000314) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR1;                        /*!< (@ 0x00000318) Disable interrupt                                     */
-        __IM uint32_t INTPEND1;                          /*!< (@ 0x0000031C) Pending interrupts                                    */
-        __IOM uint32_t INTEN2;                           /*!< (@ 0x00000320) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET2;                        /*!< (@ 0x00000324) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR2;                        /*!< (@ 0x00000328) Disable interrupt                                     */
-        __IM uint32_t INTPEND2;                          /*!< (@ 0x0000032C) Pending interrupts                                    */
-        __IOM uint32_t INTEN3;                           /*!< (@ 0x00000330) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET3;                        /*!< (@ 0x00000334) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR3;                        /*!< (@ 0x00000338) Disable interrupt                                     */
-        __IM uint32_t INTPEND3;                          /*!< (@ 0x0000033C) Pending interrupts                                    */
-        __IOM uint32_t INTEN4;                           /*!< (@ 0x00000340) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET4;                        /*!< (@ 0x00000344) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR4;                        /*!< (@ 0x00000348) Disable interrupt                                     */
-        __IM uint32_t INTPEND4;                          /*!< (@ 0x0000034C) Pending interrupts                                    */
-        __IOM uint32_t INTEN5;                           /*!< (@ 0x00000350) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET5;                        /*!< (@ 0x00000354) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR5;                        /*!< (@ 0x00000358) Disable interrupt                                     */
-        __IM uint32_t INTPEND5;                          /*!< (@ 0x0000035C) Pending interrupts                                    */
-        __IOM uint32_t INTEN6;                           /*!< (@ 0x00000360) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET6;                        /*!< (@ 0x00000364) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR6;                        /*!< (@ 0x00000368) Disable interrupt                                     */
-        __IM uint32_t INTPEND6;                          /*!< (@ 0x0000036C) Pending interrupts                                    */
-        __IOM uint32_t INTEN7;                           /*!< (@ 0x00000370) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET7;                        /*!< (@ 0x00000374) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR7;                        /*!< (@ 0x00000378) Disable interrupt                                     */
-        __IM uint32_t INTPEND7;                          /*!< (@ 0x0000037C) Pending interrupts                                    */
-        __IOM uint32_t INTEN8;                           /*!< (@ 0x00000380) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET8;                        /*!< (@ 0x00000384) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR8;                        /*!< (@ 0x00000388) Disable interrupt                                     */
-        __IM uint32_t INTPEND8;                          /*!< (@ 0x0000038C) Pending interrupts                                    */
-        __IOM uint32_t INTEN9;                           /*!< (@ 0x00000390) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET9;                        /*!< (@ 0x00000394) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR9;                        /*!< (@ 0x00000398) Disable interrupt                                     */
-        __IM uint32_t INTPEND9;                          /*!< (@ 0x0000039C) Pending interrupts                                    */
-        __IOM uint32_t INTEN10;                          /*!< (@ 0x000003A0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET10;                       /*!< (@ 0x000003A4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR10;                       /*!< (@ 0x000003A8) Disable interrupt                                     */
-        __IM uint32_t INTPEND10;                         /*!< (@ 0x000003AC) Pending interrupts                                    */
-        __IOM uint32_t INTEN11;                          /*!< (@ 0x000003B0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET11;                       /*!< (@ 0x000003B4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR11;                       /*!< (@ 0x000003B8) Disable interrupt                                     */
-        __IM uint32_t INTPEND11;                         /*!< (@ 0x000003BC) Pending interrupts                                    */
-        __IOM uint32_t INTEN12;                          /*!< (@ 0x000003C0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET12;                       /*!< (@ 0x000003C4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR12;                       /*!< (@ 0x000003C8) Disable interrupt                                     */
-        __IM uint32_t INTPEND12;                         /*!< (@ 0x000003CC) Pending interrupts                                    */
-        __IOM uint32_t INTEN13;                          /*!< (@ 0x000003D0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET13;                       /*!< (@ 0x000003D4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR13;                       /*!< (@ 0x000003D8) Disable interrupt                                     */
-        __IM uint32_t INTPEND13;                         /*!< (@ 0x000003DC) Pending interrupts                                    */
-        __IOM uint32_t INTEN14;                          /*!< (@ 0x000003E0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET14;                       /*!< (@ 0x000003E4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR14;                       /*!< (@ 0x000003E8) Disable interrupt                                     */
-        __IM uint32_t INTPEND14;                         /*!< (@ 0x000003EC) Pending interrupts                                    */
-        __IOM uint32_t INTEN15;                          /*!< (@ 0x000003F0) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET15;                       /*!< (@ 0x000003F4) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR15;                       /*!< (@ 0x000003F8) Disable interrupt                                     */
-        __IM uint32_t INTPEND15;                         /*!< (@ 0x000003FC) Pending interrupts                                    */
-        __IOM uint32_t EVTEN;                            /*!< (@ 0x00000400) Enable or disable event routing                       */
-        __IOM uint32_t EVTENSET;                         /*!< (@ 0x00000404) Enable event routing                                  */
-        __IOM uint32_t EVTENCLR;                         /*!< (@ 0x00000408) Disable event routing                                 */
-        __IM uint32_t RESERVED9[61];
-        __IM uint32_t RTCOUNTERL;                        /*!< (@ 0x00000500) The lower 32-bits of the RTCOUNTER counter.           */
-        __IM uint32_t RTCOUNTERH;                        /*!< (@ 0x00000504) The most significant bits of the RTCOUNTER counter.   */
-        __IM uint32_t RESERVED10[2];
-        __IOM uint32_t MODE;                             /*!< (@ 0x00000510) Counter mode selection                                */
-        __IM uint32_t SYSCOUNTERL;                       /*!< (@ 0x00000514) The lower 32-bits of the SYSCOUNTER                   */
-        __IM uint32_t SYSCOUNTERH;                       /*!< (@ 0x00000518) The higher 20-bits of the SYSCOUNTER                  */
-        __IM uint32_t RESERVED11;
-        __IOM NRF_GRTC_CC_Type CC[16];                   /*!< (@ 0x00000520) (unspecified)                                         */
-        __IM uint32_t RESERVED12[32];
-        __IOM uint32_t KEEPRUNNING;                      /*!< (@ 0x000006A0) Request to keep the SYSCOUNTER in the active state and
-                                                                            prevent going to sleep*/
-        __IOM uint32_t TIMEOUT;                          /*!< (@ 0x000006A4) Timeout after all CPUs gone into sleep state to stop
-                                                                            the SYSCOUNTER*/
-        __IOM uint32_t INTERVAL;                         /*!< (@ 0x000006A8) Count to add to CC[0] when the event EVENTS_COMPARE[0]
-                                                                            triggers.*/
-        __IOM uint32_t WAKETIME;                         /*!< (@ 0x000006AC) GRTC wake up time.                                    */
-        __IM uint32_t RESERVED13[20];
-        __IOM uint32_t RTCOMPAREL;                       /*!< (@ 0x00000700) The lower 32-bits of the RTCOMPARE register.          */
-        __IOM uint32_t RTCOMPAREH;                       /*!< (@ 0x00000704) The most significant bits of the RTCOMPARE register.  */
-        __IOM uint32_t RTCOMPARESYNCL;                   /*!< (@ 0x00000708) The lower 32-bits of the RTCOMPARESYNC register.      */
-        __IOM uint32_t RTCOMPARESYNCH;                   /*!< (@ 0x0000070C) The most significant bits of the RTCOMPARESYNC register.*/
-        __IOM uint32_t PWMCONFIG;                        /*!< (@ 0x00000710) PWM configuration.                                    */
-        __IOM uint32_t CLKOUT;                           /*!< (@ 0x00000714) Configuration of clock output                         */
-        __IOM uint32_t CLKCFG;                           /*!< (@ 0x00000718) Clock Configuration                                   */
-        __IM uint32_t RESERVED14;
-        __IOM NRF_GRTC_SYSCOUNTER_Type SYSCOUNTER[16];   /*!< (@ 0x00000720) (unspecified)                                         */
-    } NRF_GRTC_Type_fixed;                             /*!< Size = 2080 (0x820)                                                  */
-
-    #ifdef GRTC_CC_MaxCount
-        #undef GRTC_CC_MaxCount
-        #define GRTC_CC_MaxCount (16UL)                  /*!< Max size of CC[16] array.                                            */
-    #endif
-    #ifdef GRTC_TASKS_CAPTURE_MaxCount
-        #undef GRTC_TASKS_CAPTURE_MaxCount
-        #define GRTC_TASKS_CAPTURE_MaxCount (16UL)       /*!< Max size of TASKS_CAPTURE[16] array.                                 */
-    #endif
-    #ifdef GRTC_SUBSCRIBE_CAPTURE_MaxCount
-        #undef GRTC_SUBSCRIBE_CAPTURE_MaxCount
-        #define GRTC_SUBSCRIBE_CAPTURE_MaxCount (16UL)   /*!< Max size of SUBSCRIBE_CAPTURE[16] array.                             */
-    #endif
-    #ifdef GRTC_EVENTS_COMPARE_MaxCount
-        #undef GRTC_EVENTS_COMPARE_MaxCount
-        #define GRTC_EVENTS_COMPARE_MaxCount (16UL)      /*!< Max size of EVENTS_COMPARE[16] array.                                */
-    #endif
-    #ifdef GRTC_PUBLISH_COMPARE_MaxCount
-        #undef GRTC_PUBLISH_COMPARE_MaxCount
-        #define GRTC_PUBLISH_COMPARE_MaxCount (16UL)     /*!< Max size of PUBLISH_COMPARE[16] array.                               */
-    #endif
-
-    #ifdef NRF_GRTC_NS
-        #undef NRF_GRTC_NS
-        #define NRF_GRTC_NS ((NRF_GRTC_Type_fixed*) NRF_GRTC_NS_BASE)
-    #endif
-    #ifdef NRF_GRTC_S
-        #undef NRF_GRTC_S
-        #define NRF_GRTC_S ((NRF_GRTC_Type_fixed*) NRF_GRTC_S_BASE)
-    #endif
-
-    #define NRF_GRTC_Type NRF_GRTC_Type_fixed
-
-    typedef struct {                                     /*!< HFXO64M Structure                                                    */
-        __IM uint32_t RESERVED[64];
-        __IOM uint32_t EVENTS_STARTED;                   /*!< (@ 0x00000100) HFXO64M started                                       */
-        __IOM uint32_t EVENTS_STOPPED;                   /*!< (@ 0x00000104) HFXO64M stopped                                       */
-        __IOM uint32_t EVENTS_ERRORBIAS;                 /*!< (@ 0x00000108) Error in BIAS setup                                   */
-        __IOM uint32_t EVENTS_ERRORDETECTOR;             /*!< (@ 0x0000010C) Error with DETECTOR                                   */
-        __IOM uint32_t EVENTS_ERRORTCXO;                 /*!< (@ 0x00000110) Error with TCXO startup                               */
-        __IOM uint32_t EVENTS_STARTREQ;                  /*!< (@ 0x00000114) Clock start has been requested                        */
-        __IOM uint32_t EVENTS_STOPREQ;                   /*!< (@ 0x00000118) Clock stop has been requested                         */
-        __IM uint32_t RESERVED1[121];
-        __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-        __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-        __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-        __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-        __IM uint32_t RESERVED2[60];
-        __IM uint32_t STATUS;                            /*!< (@ 0x00000400) HFXO64M status                                        */
-        __IM uint32_t STATUSANA;                         /*!< (@ 0x00000404) Status of analog module output signals                */
-        __IM uint32_t STATUSMMI;                         /*!< (@ 0x00000408) MMI internal values for debug use.                    */
-        __IM uint32_t RESERVED3[13];
-        __IOM NRF_HFXO64M_TRIM_Type TRIM;                /*!< (@ 0x00000440) (unspecified)                                         */
-        __IM uint32_t RESERVED4[5];
-        __IOM NRF_HFXO64M_TS_Type TS;                    /*!< (@ 0x00000460) (unspecified)                                         */
-        __IM uint32_t RESERVED5[4];
-        __IOM uint32_t MIRROR;                           /*!< (@ 0x00000480) Enable LOCK for mirrored registers                    */
-        __IOM uint32_t PWRUPCTRL;                        /*!< (@ 0x00000484) Power up control                                      */
-        __IOM uint32_t MODE;                             /*!< (@ 0x00000488) HFXO64M mode                                          */
-        __IOM uint32_t XTALSETTLETIME;                   /*!< (@ 0x0000048C) Settle time of the crystal. List of pre-coded times.  */
-        __IOM uint32_t CHIRPTIME;                        /*!< (@ 0x00000490) Chirp period length. List of pre-coded times.         */
-        __IOM uint32_t ENABLEDAMPING;                    /*!< (@ 0x00000494) Enables the MMI to do crystal damping when stopping the
-                                                                            oscillator.*/
-        __IOM uint32_t FORCEBUFF;                        /*!< (@ 0x00000498) Enables all clock buffers when sinOut4_ana buffer is
-                                                                            enabled.*/
-        __IOM uint32_t CFG;                              /*!< (@ 0x0000049C) Direct HFXO64M static configurations.                 */
-        __IM uint32_t RESERVED6[24];
-        __IOM NRF_HFXO64M_OVERRIDE_Type OVERRIDE;        /*!< (@ 0x00000500) (unspecified)                                         */
-        __IM uint32_t RESERVED7[41];
-        __IOM NRF_HFXO64M_DFT_Type DFT;                  /*!< (@ 0x00000600) (unspecified)                                         */
-    } NRF_HFXO64M_Type_fixed;                            /*!< Size = 1540 (0x604)                                                  */
-
-    /* HFXO64M_EVENTS_ERRORTCXO: Error with TCXO startup */
-    #define HFXO64M_EVENTS_ERRORTCXO_ResetValue (0x00000000UL)              /*!< Reset value of EVENTS_ERRORTCXO register.       */
-
-    /* EVENTS_ERRORTCXO @Bit 0 : Error with TCXO startup */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos (0UL)             /*!< Position of EVENTS_ERRORTCXO field.             */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Msk (0x1UL << HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Pos)
-                                                                            /*!< Bit mask of EVENTS_ERRORTCXO field.             */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Min (0x0UL)           /*!< Min enumerator value of EVENTS_ERRORTCXO field. */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Max (0x1UL)           /*!< Max enumerator value of EVENTS_ERRORTCXO field. */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_NotGenerated (0x0UL)  /*!< Event not generated                             */
-    #define HFXO64M_EVENTS_ERRORTCXO_EVENTS_ERRORTCXO_Generated (0x1UL)     /*!< Event generated                                 */
-
-    /* HFXO64M_EVENTS_STARTREQ: Clock start has been requested */
-    #define HFXO64M_EVENTS_STARTREQ_ResetValue (0x00000000UL)               /*!< Reset value of EVENTS_STARTREQ register.         */
-
-    /* EVENTS_STARTREQ @Bit 0 : Clock start has been requested */
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos (0UL)               /*!< Position of EVENTS_STARTREQ field.               */
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Msk (0x1UL << HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Pos)
-                                                                            /*!< Bit mask of EVENTS_STARTREQ field.*/
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Min (0x0UL)             /*!< Min enumerator value of EVENTS_STARTREQ field.    */
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Max (0x1UL)             /*!< Max enumerator value of EVENTS_STARTREQ field.    */
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_NotGenerated (0x0UL)    /*!< Event not generated                               */
-    #define HFXO64M_EVENTS_STARTREQ_EVENTS_STARTREQ_Generated (0x1UL)       /*!< Event generated                                   */
-
-    /* HFXO64M_EVENTS_STOPREQ: Clock stop has been requested */
-    #define HFXO64M_EVENTS_STOPREQ_ResetValue (0x00000000UL)                /*!< Reset value of EVENTS_STOPREQ register.         */
-
-    /* EVENTS_STOPREQ @Bit 0 : Clock stop has been requested */
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos (0UL)                 /*!< Position of EVENTS_STOPREQ field.               */
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Msk (0x1UL << HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Pos)
-                                                                            /*!< Bit mask of EVENTS_STOPREQ field.*/
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Min (0x0UL)               /*!< Min enumerator value of EVENTS_STOPREQ field.    */
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Max (0x1UL)               /*!< Max enumerator value of EVENTS_STOPREQ field.    */
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_NotGenerated (0x0UL)      /*!< Event not generated                               */
-    #define HFXO64M_EVENTS_STOPREQ_EVENTS_STOPREQ_Generated (0x1UL)         /*!< Event generated                                   */
-
-    /* ERRORTCXO @Bit 4 : Enable or disable interrupt for event ERRORTCXO */
-    #define HFXO64M_INTEN_ERRORTCXO_Pos (4UL)                                  /*!< Position of ERRORTCXO field.             */
-    #define HFXO64M_INTEN_ERRORTCXO_Msk (0x1UL << HFXO64M_INTEN_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
-    #define HFXO64M_INTEN_ERRORTCXO_Min (0x0UL)                                /*!< Min enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTEN_ERRORTCXO_Max (0x1UL)                                /*!< Max enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTEN_ERRORTCXO_Disabled (0x0UL)                           /*!< Disable                                  */
-    #define HFXO64M_INTEN_ERRORTCXO_Enabled (0x1UL)                            /*!< Enable                                   */
-
-    /* STARTREQ @Bit 5 : Enable or disable interrupt for event STARTREQ */
-    #define HFXO64M_INTEN_STARTREQ_Pos (5UL)                                 /*!< Position of STARTREQ field.             */
-    #define HFXO64M_INTEN_STARTREQ_Msk (0x1UL << HFXO64M_INTEN_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
-    #define HFXO64M_INTEN_STARTREQ_Min (0x0UL)                               /*!< Min enumerator value of STARTREQ field. */
-    #define HFXO64M_INTEN_STARTREQ_Max (0x1UL)                               /*!< Max enumerator value of STARTREQ field. */
-    #define HFXO64M_INTEN_STARTREQ_Disabled (0x0UL)                          /*!< Disable                                 */
-    #define HFXO64M_INTEN_STARTREQ_Enabled (0x1UL)                           /*!< Enable                                  */
-
-    /* STOPREQ @Bit 6 : Enable or disable interrupt for event STOPREQ */
-    #define HFXO64M_INTEN_STOPREQ_Pos (6UL)                                /*!< Position of STOPREQ field.             */
-    #define HFXO64M_INTEN_STOPREQ_Msk (0x1UL << HFXO64M_INTEN_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
-    #define HFXO64M_INTEN_STOPREQ_Min (0x0UL)                              /*!< Min enumerator value of STOPREQ field. */
-    #define HFXO64M_INTEN_STOPREQ_Max (0x1UL)                              /*!< Max enumerator value of STOPREQ field. */
-    #define HFXO64M_INTEN_STOPREQ_Disabled (0x0UL)                         /*!< Disable                                */
-    #define HFXO64M_INTEN_STOPREQ_Enabled (0x1UL)                          /*!< Enable                                 */
-
-    /* ERRORTCXO @Bit 4 : Write '1' to enable interrupt for event ERRORTCXO */
-    #define HFXO64M_INTENSET_ERRORTCXO_Pos (4UL)                                     /*!< Position of ERRORTCXO field.             */
-    #define HFXO64M_INTENSET_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENSET_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
-    #define HFXO64M_INTENSET_ERRORTCXO_Min (0x0UL)                                   /*!< Min enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTENSET_ERRORTCXO_Max (0x1UL)                                   /*!< Max enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTENSET_ERRORTCXO_Set (0x1UL)                                   /*!< Enable                                   */
-    #define HFXO64M_INTENSET_ERRORTCXO_Disabled (0x0UL)                              /*!< Read: Disabled                           */
-    #define HFXO64M_INTENSET_ERRORTCXO_Enabled (0x1UL)                               /*!< Read: Enabled                            */
-
-    /* STARTREQ @Bit 5 : Write '1' to enable interrupt for event STARTREQ */
-    #define HFXO64M_INTENSET_STARTREQ_Pos (5UL)                                     /*!< Position of STARTREQ field.             */
-    #define HFXO64M_INTENSET_STARTREQ_Msk (0x1UL << HFXO64M_INTENSET_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.              */
-    #define HFXO64M_INTENSET_STARTREQ_Min (0x0UL)                                   /*!< Min enumerator value of STARTREQ field. */
-    #define HFXO64M_INTENSET_STARTREQ_Max (0x1UL)                                   /*!< Max enumerator value of STARTREQ field. */
-    #define HFXO64M_INTENSET_STARTREQ_Set (0x1UL)                                   /*!< Enable                                  */
-    #define HFXO64M_INTENSET_STARTREQ_Disabled (0x0UL)                              /*!< Read: Disabled                          */
-    #define HFXO64M_INTENSET_STARTREQ_Enabled (0x1UL)                               /*!< Read: Enabled                           */
-
-    /* STOPREQ @Bit 6 : Write '1' to enable interrupt for event STOPREQ */
-    #define HFXO64M_INTENSET_STOPREQ_Pos (6UL)                                     /*!< Position of STOPREQ field.             */
-    #define HFXO64M_INTENSET_STOPREQ_Msk (0x1UL << HFXO64M_INTENSET_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.               */
-    #define HFXO64M_INTENSET_STOPREQ_Min (0x0UL)                                   /*!< Min enumerator value of STOPREQ field. */
-    #define HFXO64M_INTENSET_STOPREQ_Max (0x1UL)                                   /*!< Max enumerator value of STOPREQ field. */
-    #define HFXO64M_INTENSET_STOPREQ_Set (0x1UL)                                   /*!< Enable                                 */
-    #define HFXO64M_INTENSET_STOPREQ_Disabled (0x0UL)                              /*!< Read: Disabled                         */
-    #define HFXO64M_INTENSET_STOPREQ_Enabled (0x1UL)                               /*!< Read: Enabled                          */
-
-    /* ERRORTCXO @Bit 4 : Write '1' to disable interrupt for event ERRORTCXO */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Pos (4UL)                                     /*!< Position of ERRORTCXO field.             */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Msk (0x1UL << HFXO64M_INTENCLR_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Min (0x0UL)                                   /*!< Min enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Max (0x1UL)                                   /*!< Max enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Clear (0x1UL)                                 /*!< Disable                                  */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Disabled (0x0UL)                              /*!< Read: Disabled                           */
-    #define HFXO64M_INTENCLR_ERRORTCXO_Enabled (0x1UL)                               /*!< Read: Enabled                            */
-
-    /* STARTREQ @Bit 5 : Write '1' to disable interrupt for event STARTREQ */
-    #define HFXO64M_INTENCLR_STARTREQ_Pos (5UL)                                    /*!< Position of STARTREQ field.             */
-    #define HFXO64M_INTENCLR_STARTREQ_Msk (0x1UL << HFXO64M_INTENCLR_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
-    #define HFXO64M_INTENCLR_STARTREQ_Min (0x0UL)                                  /*!< Min enumerator value of STARTREQ field. */
-    #define HFXO64M_INTENCLR_STARTREQ_Max (0x1UL)                                  /*!< Max enumerator value of STARTREQ field. */
-    #define HFXO64M_INTENCLR_STARTREQ_Clear (0x1UL)                                /*!< Disable                                 */
-    #define HFXO64M_INTENCLR_STARTREQ_Disabled (0x0UL)                             /*!< Read: Disabled                          */
-    #define HFXO64M_INTENCLR_STARTREQ_Enabled (0x1UL)                              /*!< Read: Enabled                           */
-
-    /* STOPREQ @Bit 6 : Write '1' to disable interrupt for event STOPREQ */
-    #define HFXO64M_INTENCLR_STOPREQ_Pos (6UL)                                   /*!< Position of STOPREQ field.             */
-    #define HFXO64M_INTENCLR_STOPREQ_Msk (0x1UL << HFXO64M_INTENCLR_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
-    #define HFXO64M_INTENCLR_STOPREQ_Min (0x0UL)                                 /*!< Min enumerator value of STOPREQ field. */
-    #define HFXO64M_INTENCLR_STOPREQ_Max (0x1UL)                                 /*!< Max enumerator value of STOPREQ field. */
-    #define HFXO64M_INTENCLR_STOPREQ_Clear (0x1UL)                               /*!< Disable                                */
-    #define HFXO64M_INTENCLR_STOPREQ_Disabled (0x0UL)                            /*!< Read: Disabled                         */
-    #define HFXO64M_INTENCLR_STOPREQ_Enabled (0x1UL)                             /*!< Read: Enabled                          */
-
-    /* ERRORTCXO @Bit 4 : Read pending status of interrupt for event ERRORTCXO */
-    #define HFXO64M_INTPEND_ERRORTCXO_Pos (4UL)                                    /*!< Position of ERRORTCXO field.             */
-    #define HFXO64M_INTPEND_ERRORTCXO_Msk (0x1UL << HFXO64M_INTPEND_ERRORTCXO_Pos) /*!< Bit mask of ERRORTCXO field.             */
-    #define HFXO64M_INTPEND_ERRORTCXO_Min (0x0UL)                                  /*!< Min enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTPEND_ERRORTCXO_Max (0x1UL)                                  /*!< Max enumerator value of ERRORTCXO field. */
-    #define HFXO64M_INTPEND_ERRORTCXO_NotPending (0x0UL)                           /*!< Read: Not pending                        */
-    #define HFXO64M_INTPEND_ERRORTCXO_Pending (0x1UL)                              /*!< Read: Pending                            */
-
-    /* STARTREQ @Bit 5 : Read pending status of interrupt for event STARTREQ */
-    #define HFXO64M_INTPEND_STARTREQ_Pos (5UL)                                   /*!< Position of STARTREQ field.             */
-    #define HFXO64M_INTPEND_STARTREQ_Msk (0x1UL << HFXO64M_INTPEND_STARTREQ_Pos) /*!< Bit mask of STARTREQ field.             */
-    #define HFXO64M_INTPEND_STARTREQ_Min (0x0UL)                                 /*!< Min enumerator value of STARTREQ field. */
-    #define HFXO64M_INTPEND_STARTREQ_Max (0x1UL)                                 /*!< Max enumerator value of STARTREQ field. */
-    #define HFXO64M_INTPEND_STARTREQ_NotPending (0x0UL)                          /*!< Read: Not pending                       */
-    #define HFXO64M_INTPEND_STARTREQ_Pending (0x1UL)                             /*!< Read: Pending                           */
-
-    /* STOPREQ @Bit 6 : Read pending status of interrupt for event STOPREQ */
-    #define HFXO64M_INTPEND_STOPREQ_Pos (6UL)                                  /*!< Position of STOPREQ field.             */
-    #define HFXO64M_INTPEND_STOPREQ_Msk (0x1UL << HFXO64M_INTPEND_STOPREQ_Pos) /*!< Bit mask of STOPREQ field.             */
-    #define HFXO64M_INTPEND_STOPREQ_Min (0x0UL)                                /*!< Min enumerator value of STOPREQ field. */
-    #define HFXO64M_INTPEND_STOPREQ_Max (0x1UL)                                /*!< Max enumerator value of STOPREQ field. */
-    #define HFXO64M_INTPEND_STOPREQ_NotPending (0x0UL)                         /*!< Read: Not pending                      */
-    #define HFXO64M_INTPEND_STOPREQ_Pending (0x1UL)                            /*!< Read: Pending                          */
-
-    #ifdef NRF_SYSCTRL_HFXO64M_S
-        #undef NRF_SYSCTRL_HFXO64M_S
-        #define NRF_SYSCTRL_HFXO64M_S ((NRF_HFXO64M_Type_fixed*) NRF_SYSCTRL_HFXO64M_S_BASE)
-    #endif
-
-    #define NRF_HFXO64M_Type NRF_HFXO64M_Type_fixed
 #endif
 
 /**************************************************************************************************/
