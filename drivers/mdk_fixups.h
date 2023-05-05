@@ -967,6 +967,15 @@
 
     #define VDETVS0V8_DFT_DTB1CONFIG_SELMUX_Spare0 (0x0UL)
 
+    /* TODO: HM-21442 */
+    #define OSCRFR_TRIM_OSC_VAL_Val34    OSCRFR_TRIM_OSC_VAL_Val23
+    #define OSCRFR_TRIM_OSC_VAL_Val154   OSCRFR_TRIM_OSC_VAL_Val54
+    #define OSCRFR_TRIM_OSC_VAL_Val670   OSCRFR_TRIM_OSC_VAL_Val98
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg54 OSCRFR_TRIM_OSC_VAL_ValNeg51
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg49 OSCRFR_TRIM_OSC_VAL_ValNeg42
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg37 OSCRFR_TRIM_OSC_VAL_ValNeg31
+    #define OSCRFR_TRIM_OSC_VAL_ValNeg26 OSCRFR_TRIM_OSC_VAL_ValNeg18
+
     #if defined(MRAMC_CONFIGNVR_PAGE_LOCK_Pos)
     /* This symbols mapping will be provided with MDK when LiliumFP1 and Halti targets will
     * be updated to newer MDK. Currently it's more proficient to add this fix in mdk_fixups.h
