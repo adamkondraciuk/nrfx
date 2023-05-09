@@ -76,12 +76,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_XXAA)
     #include "nrf9230_peripherals.h"
 
-#elif defined (LILIUMFP1_XXAA)
-    #include "liliumfp1_peripherals.h"
-
-#elif defined (LILIUMSOC1_XXAA)
-    #include "liliumsoc1_peripherals.h"
-
 #elif defined (MOONLIGHT_XXAA)
     #include "moonlight_peripherals.h"
 #else

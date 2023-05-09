@@ -17,7 +17,7 @@
     #elif defined(NRF_SYSCTRL)
         #include <nrfx_config_nrf54h20_enga_sysctrl.h>
     #endif
-#elif defined(LILIUMFP1_XXAA)
+#elif defined(NRF54H20_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf54h20_application.h>
     #elif defined(NRF_RADIOCORE)

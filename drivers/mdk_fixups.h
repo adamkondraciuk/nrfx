@@ -5,7 +5,7 @@
 /* Start fixups section for HALTIUM_XXAA                                                          */
 /**************************************************************************************************/
 
-#if defined(NRF54H20_ENGA_XXAA) || defined(LILIUMFP1_XXAA) || defined(NRF7140_XXAA) \
+#if defined(NRF54H20_ENGA_XXAA) || defined(NRF54H20_XXAA) || defined(NRF7140_XXAA) \
     || defined(NRF9230_XXAA)
     #define HALTIUM_XXAA 1
 #endif
@@ -287,7 +287,7 @@
             #pragma GCC diagnostic pop
         #endif
     };
-    #if defined(LILIUMFP1_XXAA) || defined(NRF7140_XXAA)
+    #if defined(NRF54H20_XXAA) || defined(NRF7140_XXAA)
         __IOM NRF_SPU_FEATURE_BELLS_Type_fixed BELLS;
     #else
         __IOM NRF_SPU_FEATURE_BELLS_Type BELLS;
@@ -1583,7 +1583,7 @@
 /* Start fixups section for NRF54H20_XXAA (LILIUMFP1)                                             */
 /**************************************************************************************************/
 
-#if defined(LILIUMFP1_XXAA)
+#if defined(NRF54H20_XXAA)
     /* MDK for nRF54H20 FP1 is not yet updated to haltium_name_change.h from 8.53.0 */
     #define NRF_DOMAIN_GLOBALFAST NRF_DOMAIN_SYSCTRL
     #define NRF_DOMAIN_GLOBALSLOW NRF_DOMAIN_PPR
