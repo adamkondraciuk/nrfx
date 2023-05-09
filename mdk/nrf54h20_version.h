@@ -32,45 +32,23 @@ POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef SYSTEM_CONFIG_SAU_H
-#define SYSTEM_CONFIG_SAU_H
-
-#include "nrf.h"
+#ifndef NRF54H20_VERSION_H
+#define NRF54H20_VERSION_H
 
 #ifdef __cplusplus
-extern "C" {
+    extern "C" {
 #endif
 
-/* Function that configures default SAU settings in cores with 4 or more SAU regions. */
-static inline void configure_default_sau(void)
-{
-    #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-    /* Configure SAU with default region settings. */
 
-    /* Region 0: Mark [0x00000000:0x10000000> NS */
-    SAU->RNR  = 0;
-    SAU->RBAR = 0x00000000ul;
-    SAU->RLAR = (0x0FFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
+#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
+#define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
+#define MDK_SOURCE_VERSION_MICRO 22                  /*!< Micro version of product specification.                              */
 
-    /* Region 1: Not used, use this region to create a NSC region */
+#define MDK_SOURCE_HASH Lilium_FP1_IPS_v0.2.22-22-gb493550a /*!< Git hash of product specification source.                     */
 
-    /* Region 2: Mark [0x20000000:0x30000000> NS */
-    SAU->RNR  = 2;
-    SAU->RBAR = 0x20000000ul;
-    SAU->RLAR = (0x2FFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
-
-    /* Region 3: Mark [0x40000000:0xFFFFFFFF> NS, reuse to create data RAM NSC region by lowering BADDR */
-    SAU->RNR  = 3;
-    SAU->RBAR = 0x40000000ul;
-    SAU->RLAR = (0xFFFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
-
-    /* Enable SAU. */
-    SAU->CTRL |= (1 << SAU_CTRL_ENABLE_Pos);
-    #endif
-}
 
 #ifdef __cplusplus
 }
 #endif
+#endif /* NRF54H20_VERSION_H */
 
-#endif /* SYSTEM_CONFIG_SAU_H */

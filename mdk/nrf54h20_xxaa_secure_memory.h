@@ -1,5 +1,4 @@
 /*
-
 Copyright (c) 2010 - 2023, Nordic Semiconductor ASA All rights reserved.
 
 SPDX-License-Identifier: BSD-3-Clause
@@ -29,48 +28,46 @@ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
 CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
+ */
 
-*/
+#ifndef NRF_DEVICE_MEM_H_
+#define NRF_DEVICE_MEM_H_
 
-#ifndef SYSTEM_CONFIG_SAU_H
-#define SYSTEM_CONFIG_SAU_H
-
-#include "nrf.h"
-
-#ifdef __cplusplus
-extern "C" {
+#ifndef __DEFAULT_STACK_SIZE
+    #define __DEFAULT_STACK_SIZE 2048
+#endif
+#ifndef __DEFAULT_HEAP_SIZE
+    #define __DEFAULT_HEAP_SIZE 2048
 #endif
 
-/* Function that configures default SAU settings in cores with 4 or more SAU regions. */
-static inline void configure_default_sau(void)
-{
-    #if defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3U)
-    /* Configure SAU with default region settings. */
+/* Device memory Flash: */
+#define NRF_MEMORY_FLASH_BASE 0x0E000000
+#define NRF_MEMORY_FLASH_SIZE 0x00080000
 
-    /* Region 0: Mark [0x00000000:0x10000000> NS */
-    SAU->RNR  = 0;
-    SAU->RBAR = 0x00000000ul;
-    SAU->RLAR = (0x0FFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
+/* Device memory ROMFlash: */
+#define NRF_MEMORY_ROMFLASH_BASE 0x01000000
+#define NRF_MEMORY_ROMFLASH_SIZE 0x00010000
 
-    /* Region 1: Not used, use this region to create a NSC region */
+/* Device memory RAM: */
+#define NRF_MEMORY_RAM_BASE 0x21000000
+#define NRF_MEMORY_RAM_SIZE 0x00008000
 
-    /* Region 2: Mark [0x20000000:0x30000000> NS */
-    SAU->RNR  = 2;
-    SAU->RBAR = 0x20000000ul;
-    SAU->RLAR = (0x2FFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
+/* Device memory PeripheralsAPBS: */
+#define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x51000000
+#define NRF_MEMORY_PERIPHERALSAPBS_SIZE 0x00200000
 
-    /* Region 3: Mark [0x40000000:0xFFFFFFFF> NS, reuse to create data RAM NSC region by lowering BADDR */
-    SAU->RNR  = 3;
-    SAU->RBAR = 0x40000000ul;
-    SAU->RLAR = (0xFFFFFFFFul & (SAU_RLAR_LADDR_Msk)) | (1 << SAU_RLAR_ENABLE_Pos);
+/* Device memory PeripheralsAPBNS: */
+#define NRF_MEMORY_PERIPHERALSAPBNS_BASE 0x41000000
+#define NRF_MEMORY_PERIPHERALSAPBNS_SIZE 0x00200000
 
-    /* Enable SAU. */
-    SAU->CTRL |= (1 << SAU_CTRL_ENABLE_Pos);
-    #endif
-}
+/* Device memory PeripheralsAHB: */
+#define NRF_MEMORY_PERIPHERALSAHB_BASE 0x51840000
+#define NRF_MEMORY_PERIPHERALSAHB_SIZE 0x00003000
 
-#ifdef __cplusplus
-}
+/* Device memory SystemSFR: */
+#define NRF_MEMORY_SYSTEMSFR_BASE 0xE0000000
+#define NRF_MEMORY_SYSTEMSFR_SIZE 0x00100000
+
+
+
 #endif
-
-#endif /* SYSTEM_CONFIG_SAU_H */
