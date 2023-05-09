@@ -59,12 +59,11 @@ extern "C" {
 #define NRF_SAADC_HAS_DMA_REG 0
 #endif
 
-#if (defined(SAADC_TASKS_DMA_START_START_Msk) && defined(SAADC_EVENTS_DMA_END_END_Msk)) || \
-    defined(__NRFX_DOXYGEN__)
-/** @brief Symbol indicating whether SAADC DMA tasks and events are present. */
-#define NRF_SAADC_HAS_DMA_TASKS_EVENTS 1
+#if defined(SAADC_EVENTS_DMA_END_END_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC DMA events are present. */
+#define NRF_SAADC_HAS_DMA_EVENTS 1
 #else
-#define NRF_SAADC_HAS_DMA_TASKS_EVENTS 0
+#define NRF_SAADC_HAS_DMA_EVENTS 0
 #endif
 
 #if !NRF_SAADC_HAS_ACQTIME_ENUM
@@ -240,13 +239,8 @@ typedef enum
 /** @brief Analog-to-digital converter tasks. */
 typedef enum
 {
-#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
-    NRF_SAADC_TASK_START           = offsetof(NRF_SAADC_Type, TASKS_DMA.START),       ///< Start the ADC and prepare the result buffer in RAM.
-    NRF_SAADC_TASK_STOP            = offsetof(NRF_SAADC_Type, TASKS_DMA.STOP),        ///< Stop the ADC and terminate any ongoing conversion.
-#else
     NRF_SAADC_TASK_START           = offsetof(NRF_SAADC_Type, TASKS_START),           ///< Start the ADC and prepare the result buffer in RAM.
     NRF_SAADC_TASK_STOP            = offsetof(NRF_SAADC_Type, TASKS_STOP),            ///< Stop the ADC and terminate any ongoing conversion.
-#endif
     NRF_SAADC_TASK_SAMPLE          = offsetof(NRF_SAADC_Type, TASKS_SAMPLE),          ///< Take one ADC sample. If scan is enabled, all channels are sampled.
     NRF_SAADC_TASK_CALIBRATEOFFSET = offsetof(NRF_SAADC_Type, TASKS_CALIBRATEOFFSET), ///< Starts offset auto-calibration.
 } nrf_saadc_task_t;
@@ -255,7 +249,7 @@ typedef enum
 typedef enum
 {
     NRF_SAADC_EVENT_STARTED       = offsetof(NRF_SAADC_Type, EVENTS_STARTED),       ///< The ADC has started.
-#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
+#if NRF_SAADC_HAS_DMA_EVENTS
     NRF_SAADC_EVENT_END           = offsetof(NRF_SAADC_Type, EVENTS_DMA.END),       ///< The ADC has filled up the result buffer.
 #else
     NRF_SAADC_EVENT_END           = offsetof(NRF_SAADC_Type, EVENTS_END),           ///< The ADC has filled up the result buffer.
@@ -286,7 +280,7 @@ typedef enum
 typedef enum
 {
     NRF_SAADC_INT_STARTED       = SAADC_INTENSET_STARTED_Msk,       ///< Interrupt on EVENTS_STARTED event.
-#if NRF_SAADC_HAS_DMA_TASKS_EVENTS
+#if NRF_SAADC_HAS_DMA_EVENTS
     NRF_SAADC_INT_END           = SAADC_INTENSET_DMAEND_Msk,        ///< Interrupt on EVENTS_END event.
 #else
     NRF_SAADC_INT_END           = SAADC_INTENSET_END_Msk,           ///< Interrupt on EVENTS_END event.
