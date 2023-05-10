@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFX_CONFIG_NRF54H20_APPLICATION_H__
 #define NRFX_CONFIG_NRF54H20_APPLICATION_H__
@@ -392,66 +392,6 @@
  */
 #ifndef NRFX_GRTC_CONFIG_LOG_LEVEL
 #define NRFX_GRTC_CONFIG_LOG_LEVEL 3
-#endif
-
-/**
- * @brief NRFX_I2S_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_I2S_ENABLED
-#define NRFX_I2S_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
- *
- * Integer value. Minimum: 0 Maximum: 7
- */
-#ifndef NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
-#define NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
-#endif
-
-/**
- * @brief NRFX_I2S_CONFIG_LOG_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_I2S_CONFIG_LOG_ENABLED
-#define NRFX_I2S_CONFIG_LOG_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S_CONFIG_LOG_LEVEL
- *
- * Integer value.
- * Supported values:
- * - Off     = 0
- * - Error   = 1
- * - Warning = 2
- * - Info    = 3
- * - Debug   = 4
- */
-#ifndef NRFX_I2S_CONFIG_LOG_LEVEL
-#define NRFX_I2S_CONFIG_LOG_LEVEL 3
-#endif
-
-/**
- * @brief NRFX_I2S130_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_I2S130_ENABLED
-#define NRFX_I2S130_ENABLED 0
-#endif
-
-/**
- * @brief NRFX_I2S131_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_I2S131_ENABLED
-#define NRFX_I2S131_ENABLED 0
 #endif
 
 /**
