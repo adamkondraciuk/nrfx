@@ -174,9 +174,12 @@ typedef struct
     bool vdd;     ///< Mask VDD.
     bool vdda;    ///< Mask VDDA.
     bool vddcfg;  ///< Mask VDD_CFG.
+#if NRF_MRAMC_HAS_POWER_VREFVPR
     bool vrefvpr; ///< Mask VREFVPR.
+#else
     bool vpr;     ///< Mask VPR.
     bool vref;    ///< Mask VREF.
+#endif
 } nrf_mramc_power_conf_t;
 
 /** @brief Configuration structure for NVR page n. */
