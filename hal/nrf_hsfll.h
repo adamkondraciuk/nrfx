@@ -117,6 +117,14 @@ typedef struct
     bool retain; ///< Retain all inputs while powered down. True if retention is enabled, false otherwise.
 } nrf_hsfll_sleep_t;
 
+/** @brief HSFLL trims configuration. */
+typedef struct
+{
+    uint16_t coarse; ///< Coarse frequance trimming.
+    uint16_t fine;   ///< Fine frequency trimming.
+    uint8_t  vsup;   ///< Internal regulator voltage supply level trimming.
+} nrf_hsfll_trim_t;
+
 /**
  * @brief Function for getting the address of the specified task.
  *
@@ -323,6 +331,24 @@ NRF_STATIC_INLINE void nrf_hsfll_clkctrl_dither_init_set(NRF_HSFLL_Type * p_reg,
  * @param[in] enable True if the lock is to be enabled, false otherwise.
  */
 NRF_STATIC_INLINE void nrf_hsfll_mirror_lock_set(NRF_HSFLL_Type * p_reg, bool enable);
+
+/**
+ * @brief Function to setup trims configuration.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] p_trim Pointer to the structure with new HSFLL trim configuration.
+ */
+NRF_STATIC_INLINE void nrf_hsfll_trim_set(NRF_HSFLL_Type *         p_reg,
+                                          nrf_hsfll_trim_t const * p_trim);
+
+/**
+ * @brief Function to getting trims configuration.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] p_trim Pointer to the structure to be filled with HSFLL trim configuration.
+ */
+NRF_STATIC_INLINE void nrf_hsfll_trim_get(NRF_HSFLL_Type const * p_reg,
+                                          nrf_hsfll_trim_t *     p_trim);
 
 #ifndef NRF_DECLARE_ONLY
 
@@ -545,6 +571,29 @@ NRF_STATIC_INLINE void nrf_hsfll_mirror_lock_set(NRF_HSFLL_Type * p_reg, bool en
 {
     p_reg->MIRROR = ((enable ? HSFLL_MIRROR_LOCK_Enabled : HSFLL_MIRROR_LOCK_Disabled)
                      << HSFLL_MIRROR_LOCK_Pos) & HSFLL_MIRROR_LOCK_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_hsfll_trim_set(NRF_HSFLL_Type *         p_reg,
+                                          nrf_hsfll_trim_t const * p_trim)
+{
+    NRFX_ASSERT(p_trim);
+    p_reg->MIRROR = (HSFLL_MIRROR_LOCK_Enabled << HSFLL_MIRROR_LOCK_Pos) & HSFLL_MIRROR_LOCK_Msk;
+
+    p_reg->TRIM.VSUP   = p_trim->vsup;
+    p_reg->TRIM.COARSE = p_trim->coarse;
+    p_reg->TRIM.FINE   = p_trim->fine;
+
+    p_reg->MIRROR = (HSFLL_MIRROR_LOCK_Disabled << HSFLL_MIRROR_LOCK_Pos) & HSFLL_MIRROR_LOCK_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_hsfll_trim_get(NRF_HSFLL_Type const * p_reg,
+                                          nrf_hsfll_trim_t *     p_trim)
+{
+    NRFX_ASSERT(p_trim);
+
+    p_trim->vsup   = p_reg->TRIM.VSUP;
+    p_trim->coarse = p_reg->TRIM.COARSE;
+    p_trim->fine   = p_reg->TRIM.FINE;
 }
 
 #endif // NRF_DECLARE_ONLY
