@@ -325,6 +325,17 @@ nrfx_err_t nrfx_grtc_syscounter_cc_int_disable(uint8_t channel);
 nrfx_err_t nrfx_grtc_syscounter_cc_int_enable(uint8_t channel);
 
 /**
+ * @brief Function for checking whether the SYSCOUNTER compare interrupt is enabled for
+ *        the specified channel.
+ *
+ * @param[in] channel Compare channel number.
+ *
+ * @retval true  The interrupt is enabled for the specified channel.
+ * @retval false The interrupt is disabled for the specified channel.
+ */
+bool nrfx_grtc_syscounter_cc_int_enable_check(uint8_t channel);
+
+/**
  * @brief Function for triggering the SYSCOUNTER capture task
  *
  * @note This function marks the specified @p channel as used.
@@ -365,7 +376,7 @@ void nrfx_grtc_active_request_set(bool active);
  * @brief Function for reading the GRTC SYSCOUNTER value.
  *
  * @param[out] p_counter p_counter Pointer to the variable to be filled with the SYSCOUNTER value.
- * 
+ *
  * @retval NRFX_SUCCESS        The procedure was successful.
  * @retval NRFX_ERROR_INTERNAL The SYSCOUNTER (1 MHz) is not running.
  */

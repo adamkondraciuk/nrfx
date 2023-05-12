@@ -708,6 +708,13 @@ nrfx_err_t nrfx_grtc_syscounter_cc_int_enable(uint8_t channel)
     return err_code;
 }
 
+bool nrfx_grtc_syscounter_cc_int_enable_check(uint8_t channel)
+{
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
+    return nrfy_grtc_int_enable_check(NRF_GRTC, GRTC_CHANNEL_TO_BITMASK(channel));
+}
+
 nrfx_err_t nrfx_grtc_syscounter_capture(uint8_t channel)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
