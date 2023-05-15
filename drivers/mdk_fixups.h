@@ -2675,6 +2675,15 @@
 
     #define NRF_PWM_Type NRF_PWM_Type_fixed
 
+    #define P0_PIN_NUM 12
+    #define P1_PIN_NUM 12
+    #define P2_PIN_NUM 18
+    #define P3_PIN_NUM 18
+    #define P5_PIN_NUM 14
+    #define P6_PIN_NUM 14
+    #define P8_PIN_NUM 5
+    #define P9_PIN_NUM 6
+
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
