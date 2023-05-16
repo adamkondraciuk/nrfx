@@ -15,6 +15,7 @@ POWER
    ../vdet/vdetao0v8/hal.rst
    ../vdet/vdetao1v8/hal.rst
    ../vdet/vdetvs0v8/hal.rst
+   ../vdet/vdetio/hal.rst
    ../vreg/vreg1v0/hal.rst
    ../vreg/vregao0v8/hal.rst
    ../vreg/vregao1v8/hal.rst
