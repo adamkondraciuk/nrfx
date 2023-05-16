@@ -1731,6 +1731,24 @@
 #endif
 
 /**
+ * @brief NRFX_UARTE_CONFIG_TX_LINK - If enabled, driver supports linking of TX transfers
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_UARTE_CONFIG_TX_LINK
+#define NRFX_UARTE_CONFIG_TX_LINK 1
+#endif
+
+/**
+ * @brief NRFX_UARTE_CONFIG_RX_CACHE_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_UARTE_CONFIG_RX_CACHE_ENABLED
+#define NRFX_UARTE_CONFIG_RX_CACHE_ENABLED 1
+#endif
+
+/**
  * @brief NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
  * Integer value. Minimum: 0. Maximum: 7.
