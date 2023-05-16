@@ -16,14 +16,23 @@ extern "C" {
  * @brief   Hardware access layer for managing the User Information Configuration Registers (UICR) peripheral.
  */
 
+#if defined(UICR_GPIO_OWN_PIN0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GPIO port owner feature is present. */
+#define NRF_UICR_HAS_FEATURE_GPIO 1
+#else
+#define NRF_UICR_HAS_FEATURE_GPIO 0
+#endif
+
 /** @brief Number of memory blocks. */
 #define NRF_UICR_MEM_COUNT         UICR_MEM_MaxCount
 
 /** @brief Number of peripherals. */
 #define NRF_UICR_PERIPH_COUNT      UICR_PERIPH_MaxCount
 
+#if NRF_UICR_HAS_FEATURE_GPIO
 /** @brief Number of GPIOs. */
 #define NRF_UICR_GPIO_COUNT        UICR_GPIO_MaxCount
+#endif
 
 /** @brief Number of GPIOTE channels. */
 #define NRF_UICR_GPIOTE_CH_COUNT   UICR_GPIOTE_MaxCount
@@ -344,7 +353,7 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_own_get(NRF_UICR_Type const * p_reg,
 {
     switch (feature)
     {
-#if defined(UICR_GPIO_OWN_PIN0_Msk)
+#if NRF_UICR_HAS_FEATURE_GPIO
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
             return p_reg->GPIO[index].OWN;
@@ -385,7 +394,7 @@ NRF_STATIC_INLINE uint32_t nrf_uicr_feature_secure_get(NRF_UICR_Type const * p_r
 {
     switch (feature)
     {
-#if defined(UICR_GPIO_OWN_PIN0_Msk)
+#if NRF_UICR_HAS_FEATURE_GPIO
         case NRF_UICR_FEATURE_GPIO:
             NRFX_ASSERT(index < NRF_UICR_GPIO_COUNT);
             return p_reg->GPIO[index].SECURE;
