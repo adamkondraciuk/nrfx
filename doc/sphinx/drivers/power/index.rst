@@ -9,6 +9,7 @@ POWER
    ../../nrfx_api/reset_reason.rst
    *
    ../mbias/hal.rst
+   ../oscrfr/hal.rst
    ../reset/hal.rst
    ../usbreg/driver.rst
    ../usbreg/hal.rst
