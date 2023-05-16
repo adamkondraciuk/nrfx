@@ -638,6 +638,18 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type 
  */
 NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t cc_channel);
 
+/**
+ * @brief Function for checking whether the specified capture/compare channel is enabled.
+ *
+ * @param[in] p_reg      Pointer to the structure of registers of the peripheral.
+ * @param[in] cc_channel Channel to be checked.
+ *
+ * @retval true  Specified channel is enabled.
+ * @retval false Specified channel is disabled.
+ */
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_cc_enable_check(NRF_GRTC_Type const * p_reg,
+                                                            uint8_t               cc_channel);
+
 #if NRF_GRTC_HAS_EXTENDED
 /**
  * @brief Function for setting the SYSCOUNTER.
@@ -1129,6 +1141,13 @@ NRF_STATIC_INLINE void nrf_grtc_sys_counter_compare_event_disable(NRF_GRTC_Type 
 NRF_STATIC_INLINE nrf_grtc_event_t nrf_grtc_sys_counter_compare_event_get(uint8_t cc_channel)
 {
     return (nrf_grtc_event_t)NRFX_OFFSETOF(NRF_GRTC_Type, EVENTS_COMPARE[cc_channel]);
+}
+
+NRF_STATIC_INLINE bool nrf_grtc_sys_counter_cc_enable_check(NRF_GRTC_Type const * p_reg,
+                                                            uint8_t               cc_channel)
+{
+    return ((p_reg->CC[cc_channel].CCEN & GRTC_CC_CCEN_ACTIVE_Msk) >> GRTC_CC_CCEN_ACTIVE_Pos) ==
+           GRTC_CC_CCEN_ACTIVE_Enable;
 }
 
 #if NRF_GRTC_HAS_EXTENDED

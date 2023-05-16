@@ -607,6 +607,16 @@ NRFY_STATIC_INLINE nrf_grtc_event_t nrfy_grtc_sys_counter_compare_event_get(uint
     return nrf_grtc_sys_counter_compare_event_get(cc_channel);
 }
 
+/** @refhal{nrf_grtc_sys_counter_cc_enable_check} */
+NRFY_STATIC_INLINE bool nrfy_grtc_sys_counter_cc_enable_check(NRF_GRTC_Type const * p_reg,
+                                                              uint8_t               cc_channel)
+{
+    nrf_barrier_rw();
+    bool check = nrf_grtc_sys_counter_cc_enable_check(p_reg, cc_channel);
+    nrf_barrier_r();
+    return check;
+}
+
 #if NRFY_GRTC_HAS_EXTENDED
 /** @refhal{nrf_grtc_sys_counter_set} */
 NRFY_STATIC_INLINE void nrfy_grtc_sys_counter_set(NRF_GRTC_Type * p_reg, bool enable)

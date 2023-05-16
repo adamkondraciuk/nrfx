@@ -418,6 +418,16 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_capture_task_address_get(uint8_t channel);
  */
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel);
 
+/**
+ * @brief Function for checking whether the specified capture/compare channel is enabled.
+ *
+ * @param[in] channel Channel to be checked.
+ *
+ * @retval true  Channel is enabled.
+ * @retval false Channel is disabled.
+ */
+NRFX_STATIC_INLINE bool nrfx_grtc_sys_counter_cc_enable_check(uint8_t channel);
+
 #if NRFY_GRTC_HAS_EXTENDED || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for reading the GRTC RTCOUNTER value.
@@ -447,6 +457,12 @@ NRFX_STATIC_INLINE uint32_t nrfx_grtc_capture_task_address_get(uint8_t channel)
 NRFX_STATIC_INLINE uint32_t nrfx_grtc_event_compare_address_get(uint8_t channel)
 {
     return nrfy_grtc_event_address_get(NRF_GRTC, nrfy_grtc_sys_counter_compare_event_get(channel));
+}
+
+NRFX_STATIC_INLINE bool nrfx_grtc_sys_counter_cc_enable_check(uint8_t channel)
+{
+    NRFX_ASSERT(channel < NRF_GRTC_SYSCOUNTER_CC_COUNT);
+    return nrfy_grtc_sys_counter_cc_enable_check(NRF_GRTC, channel);
 }
 
 #if NRFY_GRTC_HAS_EXTENDED
