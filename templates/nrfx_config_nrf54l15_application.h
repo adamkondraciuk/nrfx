@@ -31,11 +31,9 @@
  *
  * Integer value.
  * Supported values:
- * - RC = 0
- * - XTAL = 1
+ * - RC    = 0
+ * - XTAL  = 1
  * - Synth = 2
- * - External Low Swing = 131073
- * - External Full Swing = 196609
  */
 #ifndef NRFX_CLOCK_CONFIG_LF_SRC
 #define NRFX_CLOCK_CONFIG_LF_SRC 1
@@ -131,7 +129,7 @@
  * - Debug   = 4
  */
 #ifndef NRFX_COMP_CONFIG_LOG_LEVEL
-#define NRFX_COMP_CONFIG_LOG_LEVEL NRFX_DEFAULT_IRQ_PRIORITY
+#define NRFX_COMP_CONFIG_LOG_LEVEL 3
 #endif
 
 /**
@@ -209,7 +207,7 @@
  * Integer value. Minimum: 0 Maximum: 7
  */
 #ifndef NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
-#define NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY 3
+#define NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
 #endif
 
 /**
