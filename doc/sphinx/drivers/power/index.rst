@@ -12,6 +12,7 @@ POWER
    ../usbreg/driver.rst
    ../usbreg/hal.rst
    ../regulators/hal.rst
+   ../vdet/vdet1v0/hal.rst
    ../vdet/vdetao0v8/hal.rst
    ../vdet/vdetao1v8/hal.rst
    ../vdet/vdetvs0v8/hal.rst
