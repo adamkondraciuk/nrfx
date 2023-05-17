@@ -16,6 +16,48 @@ extern "C" {
  * @brief   Hardware access layer for managing the 1.0V Voltage Regulator.
  */
 
+#if defined(VREG1V0_DFT_ATB0CONFIG_SELMUX_Ibpsr4u) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal 4uA current reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_4UA 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_4UA 0
+#endif
+
+#if defined(VREG1V0_DFT_ATB0CONFIG_SELMUX_Ibpp50nIbpsr4u) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the sum of both internal current reference (50nA and 4uA) for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_SUM 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_SUM 0
+#endif
+
+#if defined(VREG1V0_DFT_ATB0CONFIG_SELMUX_ibpsr8u) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal 8uA current reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 0
+#endif
+
+#if defined(VREG1V0_DFT_ATB0CONFIG_SELMUX_VSS) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the VSS voltage reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_VSS 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_VSS 0
+#endif
+
+#if defined(VREG1V0_DFT_ATB1CONFIG_SELMUX_VSS) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the VSS voltage reference for Analog Test Bus 1 multiplexer is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_VSS 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_VSS 0
+#endif
+
+#if defined(VREG1V0_DFT_ATB1CONFIG_SELMUX_None) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether none selecting multiplexer for Analog Test Bus 1 is available. */
+#define NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_NONE 1
+#else
+#define NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_NONE 0
+#endif
+
 /** @brief VREG1V0 events. */
 typedef enum
 {
@@ -118,14 +160,29 @@ typedef enum
 {
     NRF_VREG1V0_DFT_ATB0_SELMUX_EXT_VREF  = VREG1V0_DFT_ATB0CONFIG_SELMUX_ExtVref,        /**< Negative input of calibration comparator. */
     NRF_VREG1V0_DFT_ATB0_SELMUX_IBPP_50NA = VREG1V0_DFT_ATB0CONFIG_SELMUX_Ibpp50n,        /**< Internal 50nA current reference. */
+#if NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_4UA
     NRF_VREG1V0_DFT_ATB0_SELMUX_IBPSR_4UA = VREG1V0_DFT_ATB0CONFIG_SELMUX_Ibpsr4u,        /**< Internal 4uA current reference. */
+#endif
+#if NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_SUM
     NRF_VREG1V0_DFT_ATB0_SELMUX_SUM       = VREG1V0_DFT_ATB0CONFIG_SELMUX_Ibpp50nIbpsr4u, /**< Sum both internal current reference. */
+#endif
+#if NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_IBPSR_8UA
+    NRF_VREG1V0_DFT_ATB0_SELMUX_IBPSR_8UA = VREG1V0_DFT_ATB0CONFIG_SELMUX_ibpsr8u,        /**< Internal 8uA current reference. */
+#endif
+#if NRF_VREG1V0_HAS_DFT_ATB0_SELMUX_VSS
+    NRF_VREG1V0_DFT_ATB0_SELMUX_VSS       = VREG1V0_DFT_ATB0CONFIG_SELMUX_VSS,            /**< VSS. */
+#endif
 } nrf_vreg1v0_dft_atb0_selmux_t;
 
 /** @brief Select multiplexer for ATB1. */
 typedef enum
 {
+#if NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_VSS
     NRF_VREG1V0_DFT_ATB1_SELMUX_VSS         = VREG1V0_DFT_ATB1CONFIG_SELMUX_VSS,            /**< VSS. */
+#endif
+#if NRF_VREG1V0_HAS_DFT_ATB1_SELMUX_NONE
+    NRF_VREG1V0_DFT_ATB1_SELMUX_NONE        = VREG1V0_DFT_ATB1CONFIG_SELMUX_None,           /**< No multiplexer is selected. */
+#endif
     NRF_VREG1V0_DFT_ATB1_SELMUX_BUF_HP_VREF = VREG1V0_DFT_ATB1CONFIG_SELMUX_BufferedHPvref, /**< Buffered HP vref. */
     NRF_VREG1V0_DFT_ATB1_SELMUX_VDD_1V0     = VREG1V0_DFT_ATB1CONFIG_SELMUX_VDD1V0,         /**< VDD_1V0. */
     NRF_VREG1V0_DFT_ATB1_SELMUX_IBPSR_4UA   = VREG1V0_DFT_ATB1CONFIG_SELMUX_Ibpsr4u,        /**< Internal 4uA current reference, through 225kOhm resistor. */
