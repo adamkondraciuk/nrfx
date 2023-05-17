@@ -459,15 +459,6 @@
         #define RTC0_CC_NUM           8
     #endif
 
-    #if defined(BOARD_FPGA)
-    /* TODO: MDK 8.52.0 contains fix for HM-17533 bug, however the currently available FPGA netlist (017)
-    * is not yet aligned to that change. Revert it back for now so MINTTHRESH feature remains available. */
-        #undef VPRCSR_MINTTHRESH_TH_Pos
-        #undef VPRCSR_MINTTHRESH_TH_Msk
-        #define VPRCSR_MINTTHRESH_TH_Pos (24UL)
-        #define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos)
-    #endif
-
     #define SAADC_CH_NUM 8
     /* MDK-2195 MDK removed information about easydma maxcnt from peripherals since if width is 16. */
     #define SAADC_EASYDMA_MAXCNT_SIZE 15
@@ -993,6 +984,12 @@
 /**************************************************************************************************/
 
 #if defined(NRF54H20_ENGA_XXAA)
+    /* TODO: MDK 8.52.0 contains fix for HM-17533 bug, however it is fixed in VPR1.1 so earlier
+     * revisions needs tweaked offset. Related issues: NRFX-3519 NRFX-2832 */
+    #undef VPRCSR_MINTTHRESH_TH_Pos
+    #undef VPRCSR_MINTTHRESH_TH_Msk
+    #define VPRCSR_MINTTHRESH_TH_Pos (24UL)
+    #define VPRCSR_MINTTHRESH_TH_Msk (0xFFUL << VPRCSR_MINTTHRESH_TH_Pos)
 
     #define SPIM120_FEATURE_HARDWARE_CSN_PRESENT 0
     #define SPIM121_FEATURE_HARDWARE_CSN_PRESENT 0
