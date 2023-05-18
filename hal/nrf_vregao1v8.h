@@ -16,6 +16,34 @@ extern "C" {
  * @brief   Hardware access layer for managing the Always-on 1.8V Voltage Regulator (VREGAO1V8).
  */
 
+ #if defined(VREGAO1V8_DFT_ATB0CONFIG_SELMUX_Spare0) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether selecting SPARE0 multiplexer input for Analog Test Bus 0 is available. */
+#define NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_SPARE0 1
+#else
+#define NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_SPARE0 0
+#endif
+
+#if defined(VREGAO1V8_DFT_ATB0CONFIG_SELMUX_Ibpsr8u) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal 8uA current reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 1
+#else
+#define NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 0
+#endif
+
+ #if defined(VREGAO1V8_DFT_ATB1CONFIG_SELMUX_Spare0) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether selecting SPARE0 multiplexer input for Analog Test Bus 1 is available. */
+#define NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_SPARE0 1
+#else
+#define NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_SPARE0 0
+#endif
+
+#if defined(VREGAO1V8_DFT_ATB1CONFIG_SELMUX_Vdd1V8fb) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal direct feedback voltage for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_VDD_1V8_FB 1
+#else
+#define NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_VDD_1V8_FB 0
+#endif
+
 /** @brief VREGAO1V8 events. */
 typedef enum
 {
@@ -137,7 +165,12 @@ typedef enum
 /** @brief Select multiplexer for ATB0. */
 typedef enum
 {
+#if NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_SPARE0
     NRF_VREGAO1V8_DFT_ATB0_SELMUX_SPARE0     = VREGAO1V8_DFT_ATB0CONFIG_SELMUX_Spare0,   /**< HiZ. */
+#endif
+#if NRF_VREGAO1V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA
+    NRF_VREGAO1V8_DFT_ATB0_SELMUX_IBPSR_8U   = VREGAO1V8_DFT_ATB0CONFIG_SELMUX_Ibpsr8u,  /**< Internal 8uA current reference. */
+#endif
     NRF_VREGAO1V8_DFT_ATB0_SELMUX_VDD_SW_1V8 = VREGAO1V8_DFT_ATB0CONFIG_SELMUX_VddSw1v8, /**< VDD_SW_1V8. */
     NRF_VREGAO1V8_DFT_ATB0_SELMUX_IBPP_50NA  = VREGAO1V8_DFT_ATB0CONFIG_SELMUX_Ibpp50n,  /**< IBPP_50N. */
     NRF_VREGAO1V8_DFT_ATB0_SELMUX_VSS        = VREGAO1V8_DFT_ATB0CONFIG_SELMUX_VSS,      /**< Vss. */
@@ -146,7 +179,12 @@ typedef enum
 /** @brief Select multiplexer for ATB1. */
 typedef enum
 {
+#if NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_SPARE0
     NRF_VREGAO1V8_DFT_ATB1_SELMUX_SPARE0            = VREGAO1V8_DFT_ATB1CONFIG_SELMUX_Spare0,          /**< HiZ. */
+#endif
+#if NRF_VREGAO1V8_HAS_DFT_ATB1_SELMUX_VDD_1V8_FB
+    NRF_VREGAO1V8_DFT_ATB1_SELMUX_VDD_1V8_FB        = VREGAO1V8_DFT_ATB1CONFIG_SELMUX_Vdd1V8fb,        /**< Internal direct feedback voltage. */
+#endif
     NRF_VREGAO1V8_DFT_ATB1_SELMUX_VREF_0V9_DVT      = VREGAO1V8_DFT_ATB1CONFIG_SELMUX_Vref0v9Dvt,      /**< VREF_0V9_DVT. */
     NRF_VREGAO1V8_DFT_ATB1_SELMUX_BUFFERED_VREF_0V9 = VREGAO1V8_DFT_ATB1CONFIG_SELMUX_BufferedVref0V9, /**< Buffered VREF_0V9. */
     NRF_VREGAO1V8_DFT_ATB1_SELMUX_BUFFERED_VFB_0V9  = VREGAO1V8_DFT_ATB1CONFIG_SELMUX_BufferedVfb0V9,  /**< Buffered VFB_0V9. */
