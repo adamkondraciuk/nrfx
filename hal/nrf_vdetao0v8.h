@@ -9,6 +9,34 @@
 extern "C" {
 #endif
 
+#if defined(VDETAO0V8_DFT_TCFG_VDETAO0V8PGDAO0V8_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether overriding in test mode configuration the VDETAO0V8_PGD_AO_0V8 signal is available. */
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_PGD_AO_0V8 1
+#else
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_PGD_AO_0V8 0
+#endif
+
+#if defined(VDETAO0V8_DFT_TCFG_VDETAO0V8BODAO0V81V8_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether overriding in test mode configuration the VDETAO0V8_BOD_AO_0V8 and VDETAO0V8_BOD_AO_1V8 signals are available. */
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_AO 1
+#else
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_AO 0
+#endif
+
+#if defined(VDETAO0V8_DFT_TCFG_OVERRIDEBODPGD0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether overriding in test mode configuration the VDETAO0V8_BOD_AO_0V8, VDETAO0V8_BOD_AO_1V8 and VDETAO0V8_PGD_AO_0V8 signals are available. */
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_PGD_AO 1
+#else
+#define NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_PGD_AO 0
+#endif
+
+#if defined(VDETAO0V8_DFT_TCFG_SETTLEDMBIASIBPSRFORECE0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether forcing the SETTLED_MBIAS_IBPSR_BUF_AO_1V8 signal connect to the control logic to 0.  */
+#define NRF_VDETAO0V8_DFT_TCFG_SETTLED_MBIAS_IBPSR_FORCE_0 1
+#else
+#define NRF_VDETAO0V8_DFT_TCFG_SETTLED_MBIAS_IBPSR_FORCE_0 0
+#endif
+
 /**
  * @defgroup nrf_vdetao0v8_hal Always-on 0.8V Voltage Detector HAL
  * @{
@@ -147,14 +175,24 @@ typedef enum
 /** @brief Test mode configuration. */
 typedef struct
 {
-    bool vdetao0v8_pgd_ao_0v8; /**< Controls VDETAO0V8_PGD_AO_0V8. */
-    bool vdetao0v8_bod_ao_0v8; /**< Controls VDETAO0V8_BOD_AO_0V8. */
-    bool pgd_comparator;       /**< Controls the PGD comparator if overriden option is set. */
-    bool bod_comparator;       /**< Controls the BOD comparator if overriden option is set. */
-    bool bod_comparator_1ua;   /**< Controls BOD comparator 500nA bias if overriden option is set. */
-    bool unlock_bod;           /**< Unlock the BOD deglitch logic if overriden option is set. */
-    bool overriden ;           /**< Override of the internal logic. */
-    bool disconnect_sense;     /**< Disconnect the sense line of the comparator and short-circuit both inputs of the comparator to Vref. */
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_PGD_AO_0V8
+    bool vdetao0v8_pgd_ao_0v8;      /**< Controls VDETAO0V8_PGD_AO_0V8. */
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_AO
+    bool vdetao0v8_bod_ao;          /**< Controls VDETAO0V8_BOD_AO_0V8 and VDETAO0V8_BOD_AO_1V8. */
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_PGD_AO
+    bool vdetao0v8_bod_pgd_ao;      /**< Controls VDETAO0V8_BOD_AO_0V8, VDETAO0V8_BOD_AO_1V8 and VDETAO0V8_PGD_AO_0V8. */
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_SETTLED_MBIAS_IBPSR_FORCE_0
+    bool settled_mbias_ibpsr_force; /**< Forces the SETTLED_MBIAS_IBPSR_BUF_AO_1V8 connecting to the control logic to 0. */
+#endif
+    bool pgd_comparator;            /**< Controls the PGD comparator if overriden option is set. */
+    bool bod_comparator;            /**< Controls the BOD comparator if overriden option is set. */
+    bool bod_comparator_1ua;        /**< Controls BOD comparator 500nA bias if overriden option is set. */
+    bool lock_bod;                  /**< Lock the BOD deglitch logic if overriden option is set. */
+    bool overriden;                 /**< Override of the internal logic. */
+    bool disconnect_sense;          /**< Disconnect the sense line of the comparator and short-circuit both inputs of the comparator to Vref. */
 } nrf_vdetao0v8_tcfg_t;
 
 /**
@@ -761,14 +799,31 @@ NRF_STATIC_INLINE void nrf_vdetao0v8_dft_dtb3_config_set(NRF_VDETAO0V8_Type * p_
 NRF_STATIC_INLINE void nrf_vdetao0v8_dft_tcfg_config_set(NRF_VDETAO0V8_Type * p_reg,
                                                          nrf_vdetao0v8_tcfg_t tcfg)
 {
-    p_reg->DFT.TCFG = ((tcfg.vdetao0v8_pgd_ao_0v8 ?
+    p_reg->DFT.TCFG =
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_PGD_AO_0V8
+                      ((tcfg.vdetao0v8_pgd_ao_0v8 ?
                         VDETAO0V8_DFT_TCFG_VDETAO0V8PGDAO0V8_Enabled :
                         VDETAO0V8_DFT_TCFG_VDETAO0V8PGDAO0V8_Disabled) <<
                        VDETAO0V8_DFT_TCFG_VDETAO0V8PGDAO0V8_Pos)   |
-                      ((tcfg.vdetao0v8_bod_ao_0v8 ?
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_AO
+                      ((tcfg.vdetao0v8_bod_ao ?
                         VDETAO0V8_DFT_TCFG_VDETAO0V8BODAO0V81V8_Enabled :
                         VDETAO0V8_DFT_TCFG_VDETAO0V8BODAO0V81V8_Disabled) <<
                        VDETAO0V8_DFT_TCFG_VDETAO0V8BODAO0V81V8_Pos)  |
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_VDETAO0V8_BOD_PGD_AO
+                      ((tcfg.vdetao0v8_bod_pgd_ao ?
+                        VDETAO0V8_DFT_TCFG_OVERRIDEBODPGD0_Enabled :
+                        VDETAO0V8_DFT_TCFG_OVERRIDEBODPGD0_Disabled) <<
+                       VDETAO0V8_DFT_TCFG_OVERRIDEBODPGD0_Pos)  |
+#endif
+#if NRF_VDETAO0V8_DFT_TCFG_SETTLED_MBIAS_IBPSR_FORCE_0
+                      ((tcfg.settled_mbias_ibpsr_force ?
+                        VDETAO0V8_DFT_TCFG_SETTLEDMBIASIBPSRFORECE0_Enabled :
+                        VDETAO0V8_DFT_TCFG_SETTLEDMBIASIBPSRFORECE0_Disabled) <<
+                       VDETAO0V8_DFT_TCFG_SETTLEDMBIASIBPSRFORECE0_Pos)  |
+#endif
                       ((tcfg.pgd_comparator ?
                         VDETAO0V8_DFT_TCFG_PGDCOMPARATOR_Enabled :
                         VDETAO0V8_DFT_TCFG_PGDCOMPARATOR_Disabled) <<
@@ -781,10 +836,16 @@ NRF_STATIC_INLINE void nrf_vdetao0v8_dft_tcfg_config_set(NRF_VDETAO0V8_Type * p_
                         VDETAO0V8_DFT_TCFG_BODCOMPARATOR1UA_Enabled :
                         VDETAO0V8_DFT_TCFG_BODCOMPARATOR1UA_Disabled) <<
                        VDETAO0V8_DFT_TCFG_BODCOMPARATOR1UA_Pos)     |
-                      ((tcfg.unlock_bod ?
-                        VDETAO0V8_DFT_TCFG_UNLOCKBOD_Enabled :
-                        VDETAO0V8_DFT_TCFG_UNLOCKBOD_Disabled) <<
+                      ((tcfg.lock_bod ?
+#if defined(VDETAO0V8_DFT_TCFG_UNLOCKBOD_Msk)
+                        VDETAO0V8_DFT_TCFG_UNLOCKBOD_Disabled :
+                        VDETAO0V8_DFT_TCFG_UNLOCKBOD_Enabled) <<
                        VDETAO0V8_DFT_TCFG_UNLOCKBOD_Pos)   |
+#elif defined(VDETAO0V8_DFT_TCFG_LOCKBOD_Msk)
+                        VDETAO0V8_DFT_TCFG_LOCKBOD_Disabled :
+                        VDETAO0V8_DFT_TCFG_LOCKBOD_Enabled) <<
+                       VDETAO0V8_DFT_TCFG_LOCKBOD_Pos)   |
+#endif
                       ((tcfg.overriden ?
                         VDETAO0V8_DFT_TCFG_OVERRIDEN_Enabled :
                         VDETAO0V8_DFT_TCFG_OVERRIDEN_Disabled) <<
