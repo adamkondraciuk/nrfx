@@ -16,6 +16,48 @@ extern "C" {
  * @brief   Hardware access layer for managing the Always-on 0.8V Voltage Regulator (VREGAO0V8).
  */
 
+#if defined(VREGAO0V8_DFT_ATB0CONFIG_SELMUX_VddSw1v8) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the VDD_SW_1V8 voltage reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_VDD_SW_1V8 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_VDD_SW_1V8 0
+#endif
+
+#if defined(VREGAO0V8_DFT_ATB0CONFIG_SELMUX_Ibpsr8u) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal 8uA current reference for Analog Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA 0
+#endif
+
+#if defined(VREGAO0V8_DFT_DTB0CONFIG_SELMUX_Spare0) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether selecting SPARE0 multiplexer input for Digital Test Bus 0 is available. */
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE0 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE0 0
+#endif
+
+#if defined(VREGAO0V8_DFT_DTB0CONFIG_SELMUX_Spare1) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether selecting SPARE1 multiplexer input for Digital Test Bus 0 is available. */
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE1 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE1 0
+#endif
+
+#if defined(VREGAO0V8_DFT_DTB0CONFIG_SELMUX_PwrupIbpsr) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the internal 4uA current reference powerup for Digital Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_IBPSR 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_IBPSR 0
+#endif
+
+#if defined(VREGAO0V8_DFT_DTB0CONFIG_SELMUX_PwrupCoreHp) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether setting the high power core powerup signal for Digital Test Bus 0 multiplexer is available. */
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_CORE_HP 1
+#else
+#define NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_CORE_HP 0
+#endif
+
 /** @brief VREGAO0V8 events. */
 typedef enum
 {
@@ -113,7 +155,12 @@ typedef enum
 typedef enum
 {
     NRF_VREGAO0V8_DFT_ATB0_SELMUX_EXT_VREF   = VREGAO0V8_DFT_ATB0CONFIG_SELMUX_ExtVref,  /**< External Vref. */
+#if NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_VDD_SW_1V8
     NRF_VREGAO0V8_DFT_ATB0_SELMUX_VDD_SW_1V8 = VREGAO0V8_DFT_ATB0CONFIG_SELMUX_VddSw1v8, /**< VDD_SW_1V8. */
+#endif
+#if NRF_VREGAO0V8_HAS_DFT_ATB0_SELMUX_IBPSR_8UA
+    NRF_VREGAO0V8_DFT_ATB0_SELMUX_IBPSR_8UA  = VREGAO0V8_DFT_ATB0CONFIG_SELMUX_Ibpsr8u,  /**< Internal 8uA current reference. */
+#endif
     NRF_VREGAO0V8_DFT_ATB0_SELMUX_IBPP_50NA  = VREGAO0V8_DFT_ATB0CONFIG_SELMUX_Ibpp50n,  /**< IBPP_50N. */
     NRF_VREGAO0V8_DFT_ATB0_SELMUX_VSS        = VREGAO0V8_DFT_ATB0CONFIG_SELMUX_VSS,      /**< Vss. */
 } nrf_vregao0v8_dft_atb0_selmux_t;
@@ -136,8 +183,18 @@ typedef enum
     NRF_VREGAO0V8_DFT_DTB0_SELMUX_READY_LDO           = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_ReadyLdo,          /**< READY_LDO. */
     NRF_VREGAO0V8_DFT_DTB0_SELMUX_BP_READY            = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_BpReady,           /**< BP_READY. */
     NRF_VREGAO0V8_DFT_DTB0_SELMUX_IBPP_READY          = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_IbppReady,         /**< IBPP_READY. */
+#if NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE0
     NRF_VREGAO0V8_DFT_DTB0_SELMUX_SPARE0              = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_Spare0,            /**< None selected, logic 0. */
+#endif
+#if NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_SPARE1
     NRF_VREGAO0V8_DFT_DTB0_SELMUX_SPARE1              = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_Spare1,            /**< None selected, logic 0. */
+#endif
+#if NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_IBPSR
+    NRF_VREGAO0V8_DFT_DTB0_SELMUX_PWRUP_IBPSR         = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_PwrupIbpsr,            /**< Internal 4uA current reference powerup. */
+#endif
+#if NRF_VREGAO0V8_HAS_DFT_DTB0_SELMUX_PWRUP_CORE_HP
+    NRF_VREGAO0V8_DFT_DTB0_SELMUX_PWRUP_CORE_HP       = VREGAO0V8_DFT_DTB0CONFIG_SELMUX_PwrupCoreHp,            /**< High Power core powerup. */
+#endif
 } nrf_vregao0v8_dft_dtb0_selmux_t;
 
 /** @brief Select multiplexer for DTB1. */
