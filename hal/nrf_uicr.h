@@ -23,6 +23,17 @@ extern "C" {
 #define NRF_UICR_HAS_FEATURE_GPIO 0
 #endif
 
+#if (defined(UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk) & \
+    defined(UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk)) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Symbol indicating whether linking channels of DPPI as either source or sink is configured
+ *        using the LINK.DIR and LINK.EN registers.
+ */
+#define NRF_UICR_HAS_CH_LINK_DIR_EN 1
+#else
+#define NRF_UICR_HAS_CH_LINK_DIR_EN 0
+#endif
+
 /** @brief Number of memory blocks. */
 #define NRF_UICR_MEM_COUNT         UICR_MEM_MaxCount
 
@@ -453,7 +464,7 @@ NRF_STATIC_INLINE nrf_uicr_dppi_link_t nrf_uicr_feature_link_get(NRF_UICR_Type c
     {
         case NRF_UICR_FEATURE_DPPI_LOCAL_CH:
             NRFX_ASSERT(index < NRF_UICR_DPPI_LOCAL_COUNT);
-#if defined(UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk) && defined(UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk)
+#if NRF_UICR_HAS_CH_LINK_DIR_EN
             link.source = p_reg->DPPI.LOCAL[index].CH.LINK.EN | ~p_reg->DPPI.LOCAL[index].CH.LINK.DIR;
             link.sink = p_reg->DPPI.LOCAL[index].CH.LINK.EN | p_reg->DPPI.LOCAL[index].CH.LINK.DIR;
 #else
@@ -464,7 +475,7 @@ NRF_STATIC_INLINE nrf_uicr_dppi_link_t nrf_uicr_feature_link_get(NRF_UICR_Type c
 
         case NRF_UICR_FEATURE_DPPI_GLOBAL_CH:
             NRFX_ASSERT(index < NRF_UICR_DPPI_GLOBAL_COUNT);
-#if defined(UICR_DPPI_GLOBAL_CH_LINK_DIR_CH0_Msk) && defined(UICR_DPPI_GLOBAL_CH_LINK_EN_CH0_Msk)
+#if NRF_UICR_HAS_CH_LINK_DIR_EN
             link.source = p_reg->DPPI.GLOBAL[index].CH.LINK.EN | ~p_reg->DPPI.GLOBAL[index].CH.LINK.DIR;
             link.sink = p_reg->DPPI.GLOBAL[index].CH.LINK.EN | p_reg->DPPI.GLOBAL[index].CH.LINK.DIR;
 #else
