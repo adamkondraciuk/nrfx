@@ -1,4 +1,5 @@
 /*
+
 Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
@@ -35,46 +36,26 @@ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 
-#ifndef NRF_DEVICE_MEM_H_
-#define NRF_DEVICE_MEM_H_
+*/
 
-#ifndef __DEFAULT_STACK_SIZE
-    #define __DEFAULT_STACK_SIZE 16384
-#endif
-#ifndef __DEFAULT_HEAP_SIZE
-    #define __DEFAULT_HEAP_SIZE 16384
+#ifndef MOONLIGHT_VERSION_H
+#define MOONLIGHT_VERSION_H
+
+#ifdef __cplusplus
+    extern "C" {
 #endif
 
-/* Device memory Flash: */
-#define NRF_MEMORY_FLASH_BASE 0x00000000
-#define NRF_MEMORY_FLASH_SIZE 0x00100000
 
-/* Device memory UICR: */
-#define NRF_MEMORY_UICR_BASE 0x00FFE000
-#define NRF_MEMORY_UICR_SIZE 0x00001000
+#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
+#define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
+#define MDK_SOURCE_VERSION_MICRO 3                   /*!< Micro version of product specification.                              */
 
-/* Device memory RAM: */
-#define NRF_MEMORY_RAM_BASE 0x20000000
-#define NRF_MEMORY_RAM_SIZE 0x00040000
-
-/* Device memory PeripheralsAPBS: */
-#define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x52000000
-#define NRF_MEMORY_PERIPHERALSAPBS_SIZE 0x00200000
-
-/* Device memory PeripheralsAPBNS: */
-#define NRF_MEMORY_PERIPHERALSAPBNS_BASE 0x42000000
-#define NRF_MEMORY_PERIPHERALSAPBNS_SIZE 0x00200000
-
-/* Device memory PeripheralsAHB: */
-#define NRF_MEMORY_PERIPHERALSAHB_BASE 0x52840000
-#define NRF_MEMORY_PERIPHERALSAHB_SIZE 0x00003000
-
-/* Device memory SystemSFR: */
-#define NRF_MEMORY_SYSTEMSFR_BASE 0xE0000000
-#define NRF_MEMORY_SYSTEMSFR_SIZE 0x00100000
+#define MDK_SOURCE_HASH Moonlight_IPS_v0.2.3         /*!< Git hash of product specification source.                            */
 
 
-
+#ifdef __cplusplus
+}
 #endif
+#endif /* MOONLIGHT_VERSION_H */
+

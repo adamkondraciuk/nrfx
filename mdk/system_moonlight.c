@@ -27,32 +27,49 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdbool.h>
 #include "nrf.h"
 #include "system_moonlight.h"
+#include "system_nrf54l_approtect.h"
+#include "system_config_sau.h"
 
 /*lint ++flb "Enter library region" */
 
+#define __SYSTEM_CLOCK_DEFAULT      (64000000ul)
 
-#define __SYSTEM_CLOCK      (192000000UL)
-
-#if defined ( __CC_ARM )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;  
+#if defined ( __CC_ARM ) || defined ( __GNUC__ )
+    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK_DEFAULT;
 #elif defined ( __ICCARM__ )
-    __root uint32_t SystemCoreClock = __SYSTEM_CLOCK;
-#elif defined   ( __GNUC__ )
-    uint32_t SystemCoreClock __attribute__((used)) = __SYSTEM_CLOCK;
-#endif
+    __root uint32_t SystemCoreClock = __SYSTEM_CLOCK_DEFAULT;
+#endif    
 
 void SystemCoreClockUpdate(void)
 {
-    SystemCoreClock = __SYSTEM_CLOCK;
+    switch(NRF_OSCILLATORS->PLL.CURRENTFREQ)
+    {
+        case OSCILLATORS_PLL_CURRENTFREQ_CURRENTFREQ_CK64M:
+            SystemCoreClock = 64000000ul;
+            break;
+        case OSCILLATORS_PLL_CURRENTFREQ_CURRENTFREQ_CK128M:
+            SystemCoreClock = 128000000ul;
+            break;
+    }
 }
 
 void SystemInit(void)
 {
+
     #ifdef __CORTEX_M
         #if !defined(NRF_TRUSTZONE_NONSECURE) && defined(__ARM_FEATURE_CMSE)
-            /* Allow Non-Secure code to run FPU instructions.
-            * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
-            SCB->NSACR |= (3UL << 10);
+            #ifndef NRF_SKIP_TAMPC_CONFIGURATION
+                nrf54l_handle_approtect();
+            #endif
+            #if defined(__FPU_PRESENT) && __FPU_PRESENT
+                /* Allow Non-Secure code to run FPU instructions.
+                * If only the secure code should control FPU power state these registers should be configured accordingly in the secure application code. */
+                SCB->NSACR |= (3UL << 10);
+            #endif
+
+            #ifndef NRF_SKIP_SAU_CONFIGURATION   
+                configure_default_sau();
+            #endif          
         #endif
 
         /* Enable the FPU if the compiler used floating point unit instructions. __FPU_USED is a MACRO defined by the
@@ -64,8 +81,6 @@ void SystemInit(void)
             __ISB();
         #endif
     #endif
-    
-    SystemCoreClockUpdate();
 }
 
 /*lint --flb "Leave library region" */

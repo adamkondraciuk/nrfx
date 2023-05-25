@@ -82,9 +82,6 @@ typedef enum {
   SERIAL00_IRQn                          = 74,       /*!< 74 SERIAL00                                                          */
   RRAMC_IRQn                             = 75,       /*!< 75 RRAMC                                                             */
   VPR00_IRQn                             = 76,       /*!< 76 VPR00                                                             */
-  CTRLAP_IRQn                            = 81,       /*!< 81 CTRLAP                                                            */
-  CM33SS_IRQn                            = 83,       /*!< 83 CM33SS                                                            */
-  TIMER00_IRQn                           = 84,       /*!< 84 TIMER00                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
@@ -103,6 +100,8 @@ typedef enum {
   TIMER22_IRQn                           = 204,      /*!< 204 TIMER22                                                          */
   TIMER23_IRQn                           = 205,      /*!< 205 TIMER23                                                          */
   TIMER24_IRQn                           = 206,      /*!< 206 TIMER24                                                          */
+  PDM20_IRQn                             = 208,      /*!< 208 PDM20                                                            */
+  PDM21_IRQn                             = 209,      /*!< 209 PDM21                                                            */
   PWM20_IRQn                             = 210,      /*!< 210 PWM20                                                            */
   PWM21_IRQn                             = 211,      /*!< 211 PWM21                                                            */
   PWM22_IRQn                             = 212,      /*!< 212 PWM22                                                            */
@@ -142,10 +141,10 @@ typedef enum {
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  1             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX             176             /*!< Size of interrupt vector table                                       */
 #define __Vendor_SysTickConfig         0             /*!< Vendor SysTick Config implementation is used                         */
 #define __SAUREGION_PRESENT            1             /*!< SAU present                                                          */
-#define __NUM_SAUREGIONS               4             /*!< Number of regions                                                    */
+#define __NUM_SAUREGIONS               4             /*!< Number of REGIONs                                                    */
 
 #include "core_cm33.h"                               /*!< ARM Cortex-M33 processor and core peripherals                        */
 #include "system_nrf.h"                              /*!< moonlight_application System Library                                 */

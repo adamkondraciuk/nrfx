@@ -56,16 +56,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 typedef enum {
 /* ===================================================== Core Interrupts ===================================================== */
-  UserSoftware_IRQn                      = -16,      /*!< -16 User Software Interrupt                                          */
-  SuperVisorSoftware_IRQn                = -15,      /*!< -15 Supervisor Software interrupt                                    */
-  MachineSoftware_IRQn                   = -14,      /*!< -14 Machine Software Interrupt                                       */
-  UserTimer_IRQn                         = -12,      /*!< -12 User Timer Interrupt                                             */
-  SuperVisorTimer_IRQn                   = -11,      /*!< -11 Supervisor Timer interrupt                                       */
-  MachineTimer_IRQn                      = -9,       /*!<  -9 Machine Timer Interrupt                                          */
-  UserExternal_IRQn                      = -8,       /*!<  -8 User External (PLIC) Interrupt                                   */
-  SuperVisorExternal_IRQn                = -7,       /*!<  -7 Supervisor External (PLIC) interrupt                             */
-  MachineExternal_IRQn                   = -5,       /*!<  -5 Machine External (PLIC) Interrupt                                */
-  CLICSoftware_IRQn                      = -4,       /*!<  -4 CLIC Software Interrupt                                          */
 /* ============================================== Processor Specific Interrupts ============================================== */
   VPRCLIC_0_IRQn                         = 0,        /*!< 0 VPRCLIC_0                                                          */
   VPRCLIC_1_IRQn                         = 1,        /*!< 1 VPRCLIC_1                                                          */
@@ -107,8 +97,8 @@ typedef enum {
   SERIAL00_IRQn                          = 74,       /*!< 74 SERIAL00                                                          */
   RRAMC_IRQn                             = 75,       /*!< 75 RRAMC                                                             */
   VPR00_IRQn                             = 76,       /*!< 76 VPR00                                                             */
-  CTRLAP_IRQn                            = 81,       /*!< 81 CTRLAP                                                            */
-  TIMER00_IRQn                           = 84,       /*!< 84 TIMER00                                                           */
+  CTRLAP_IRQn                            = 82,       /*!< 82 CTRLAP                                                            */
+  TIMER00_IRQn                           = 85,       /*!< 85 TIMER00                                                           */
   SPU10_IRQn                             = 128,      /*!< 128 SPU10                                                            */
   TIMER10_IRQn                           = 133,      /*!< 133 TIMER10                                                          */
   RTC10_IRQn                             = 134,      /*!< 134 RTC10                                                            */
@@ -133,24 +123,25 @@ typedef enum {
   SAADC_IRQn                             = 213,      /*!< 213 SAADC                                                            */
   NFCT_IRQn                              = 214,      /*!< 214 NFCT                                                             */
   TEMP_IRQn                              = 215,      /*!< 215 TEMP                                                             */
-  GPIOTE20_0_IRQn                        = 217,      /*!< 217 GPIOTE20_0                                                       */
-  GPIOTE20_1_IRQn                        = 218,      /*!< 218 GPIOTE20_1                                                       */
-  TAMPC_IRQn                             = 219,      /*!< 219 TAMPC                                                            */
-  I2S20_IRQn                             = 220,      /*!< 220 I2S20                                                            */
+  GPIOTE20_0_IRQn                        = 218,      /*!< 218 GPIOTE20_0                                                       */
+  GPIOTE20_1_IRQn                        = 219,      /*!< 219 GPIOTE20_1                                                       */
+  TAMPC_IRQn                             = 220,      /*!< 220 TAMPC                                                            */
+  I2S20_IRQn                             = 221,      /*!< 221 I2S20                                                            */
   QDEC20_IRQn                            = 224,      /*!< 224 QDEC20                                                           */
   QDEC21_IRQn                            = 225,      /*!< 225 QDEC21                                                           */
   GRTC_0_IRQn                            = 226,      /*!< 226 GRTC_0                                                           */
   GRTC_1_IRQn                            = 227,      /*!< 227 GRTC_1                                                           */
   GRTC_2_IRQn                            = 228,      /*!< 228 GRTC_2                                                           */
+  GRTC_3_IRQn                            = 229,      /*!< 229 GRTC_3                                                           */
   SPU30_IRQn                             = 256,      /*!< 256 SPU30                                                            */
   SERIAL30_IRQn                          = 260,      /*!< 260 SERIAL30                                                         */
   RTC30_IRQn                             = 261,      /*!< 261 RTC30                                                            */
   COMP_LPCOMP_IRQn                       = 262,      /*!< 262 COMP_LPCOMP                                                      */
   WDT30_IRQn                             = 264,      /*!< 264 WDT30                                                            */
   WDT31_IRQn                             = 265,      /*!< 265 WDT31                                                            */
-  GPIOTE30_0_IRQn                        = 267,      /*!< 267 GPIOTE30_0                                                       */
-  GPIOTE30_1_IRQn                        = 268,      /*!< 268 GPIOTE30_1                                                       */
-  CLOCK_POWER_IRQn                       = 269,      /*!< 269 CLOCK_POWER                                                      */
+  GPIOTE30_0_IRQn                        = 268,      /*!< 268 GPIOTE30_0                                                       */
+  GPIOTE30_1_IRQn                        = 269,      /*!< 269 GPIOTE30_1                                                       */
+  CLOCK_POWER_IRQn                       = 270,      /*!< 270 CLOCK_POWER                                                      */
 } IRQn_Type;
 
 
@@ -159,14 +150,14 @@ typedef enum {
 /* =========================================================================================================================== */
 
 /* ====================== Configuration of the Nordic Semiconductor VPR Processor and Core Peripherals ======================= */
-#define __VPR_REV                    0.7             /*!< VPR Core Revision                                                    */
+#define __VPR_REV                  1.3.1             /*!< VPR Core Revision                                                    */
 #define __DSP_PRESENT                  0             /*!< DSP present or not                                                   */
 #define __CLIC_PRIO_BITS               3             /*!< Number of Bits used for Priority Levels                              */
 #define __MTVT_PRESENT                 1             /*!< CPU supports alternate Vector Table address                          */
 #define __MPU_PRESENT                  1             /*!< MPU present                                                          */
 #define __FPU_PRESENT                  0             /*!< FPU present                                                          */
 #define __FPU_DP                       0             /*!< Double Precision FPU                                                 */
-#define __INTERRUPTS_MAX             480             /*!< Size of interrupt vector table                                       */
+#define __INTERRUPTS_MAX             176             /*!< Size of interrupt vector table                                       */
 
 #include "core_vpr.h"                                /*!< Nordic Semiconductor VPR processor and core peripherals              */
 #include "system_nrf.h"                              /*!< moonlight_flpr System Library                                        */
