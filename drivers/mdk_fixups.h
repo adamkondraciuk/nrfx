@@ -2021,19 +2021,6 @@
         #error "Unknown core"
     #endif
 
-    #define DPPI_PRESENT DPPIC_PRESENT
-    #define DPPI_GROUP_MAX_COUNT NRFX_MAX(DPPIC00_GROUP_NUM, \
-                                 NRFX_MAX(DPPIC10_GROUP_NUM, \
-                                 NRFX_MAX(DPPIC20_GROUP_NUM, \
-                                 DPPIC30_GROUP_NUM)))
-    #define DPPI_GROUP_NUM DPPI_GROUP_MAX_COUNT
-    #define DPPI_CHANNEL_MAX_COUNT NRFX_MAX(DPPIC00_CH_NUM, \
-                                   NRFX_MAX(DPPIC10_CH_NUM, \
-                                   NRFX_MAX(DPPIC20_CH_NUM, \
-                                   DPPIC30_CH_NUM)))
-    #define DPPI_CH_NUM DPPI_CHANNEL_MAX_COUNT
-    #define PPIB_CHANNEL_MAX_COUNT 24UL
-
     #if defined(CCM_PRESENT)
         #define EASYVDMA_PRESENT
         #define VDMADESCRIPTOR_CONFIG_CNT_Pos (0UL)        /*!< Position of CNT field.                                               */
@@ -2062,6 +2049,90 @@
     #define GPIOTE_FEATURE_SET_PRESENT
     #define GPIOTE_FEATURE_CLR_PRESENT
     #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
+
+    #define SPIS20_EASYDMA_MAXCNT_SIZE (SPIS20_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIS21_EASYDMA_MAXCNT_SIZE (SPIS21_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIS22_EASYDMA_MAXCNT_SIZE (SPIS22_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIS30_EASYDMA_MAXCNT_SIZE (SPIS30_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIS00_EASYDMA_MAXCNT_SIZE (SPIS00_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+
+    #define SPIM20_EASYDMA_MAXCNT_SIZE (SPIM20_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIM21_EASYDMA_MAXCNT_SIZE (SPIM21_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIM22_EASYDMA_MAXCNT_SIZE (SPIM22_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIM30_EASYDMA_MAXCNT_SIZE (SPIM30_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define SPIM00_EASYDMA_MAXCNT_SIZE (SPIM00_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+
+    #define TIMER00_CC_NUM (TIMER00_CC_NUM_MAX + 1UL)
+    #define TIMER10_CC_NUM (TIMER10_CC_NUM_MAX + 1UL)
+    #define TIMER20_CC_NUM (TIMER20_CC_NUM_MAX + 1UL)
+    #define TIMER21_CC_NUM (TIMER21_CC_NUM_MAX + 1UL)
+    #define TIMER22_CC_NUM (TIMER22_CC_NUM_MAX + 1UL)
+    #define TIMER23_CC_NUM (TIMER23_CC_NUM_MAX + 1UL)
+    #define TIMER24_CC_NUM (TIMER24_CC_NUM_MAX + 1UL)
+
+    #define UARTE00_EASYDMA_MAXCNT_SIZE (UARTE00_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define UARTE10_EASYDMA_MAXCNT_SIZE (UARTE10_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define UARTE20_EASYDMA_MAXCNT_SIZE (UARTE20_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define UARTE21_EASYDMA_MAXCNT_SIZE (UARTE21_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define UARTE22_EASYDMA_MAXCNT_SIZE (UARTE22_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+    #define UARTE30_EASYDMA_MAXCNT_SIZE (UARTE30_EASYDMA_MAXCNT_SIZE_MAX + 1UL)
+
+    #define TIMER00_MAX_SIZE (TIMER00_MAX_SIZE_MAX + 1UL)
+    #define TIMER10_MAX_SIZE (TIMER10_MAX_SIZE_MAX + 1UL)
+    #define TIMER20_MAX_SIZE (TIMER20_MAX_SIZE_MAX + 1UL)
+    #define TIMER21_MAX_SIZE (TIMER21_MAX_SIZE_MAX + 1UL)
+    #define TIMER22_MAX_SIZE (TIMER22_MAX_SIZE_MAX + 1UL)
+    #define TIMER23_MAX_SIZE (TIMER23_MAX_SIZE_MAX + 1UL)
+    #define TIMER24_MAX_SIZE (TIMER24_MAX_SIZE_MAX + 1UL)
+
+    #define EGU10_CH_NUM (EGU10_CH_NUM_MAX + 1UL)
+    #define EGU20_CH_NUM (EGU20_CH_NUM_MAX + 1UL)
+
+    #define RTC10_CC_NUM (RTC10_CC_NUM_MAX + 1UL)
+    #define RTC30_CC_NUM (RTC30_CC_NUM_MAX + 1UL)
+
+    #define P0_PIN_NUM (P0_PIN_NUM_MAX + 1UL)
+    #define P1_PIN_NUM (P1_PIN_NUM_MAX + 1UL)
+    #define P2_PIN_NUM (P2_PIN_NUM_MAX + 1UL)
+
+    #define GPIOTE20_GPIOTE_NCHANNELS (GPIOTE20_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE30_GPIOTE_NCHANNELS (GPIOTE30_GPIOTE_NCHANNELS_MAX + 1UL)
+
+    #define DPPIC00_CH_NUM (DPPIC00_CH_NUM_MAX + 1UL)
+    #define DPPIC10_CH_NUM (DPPIC10_CH_NUM_MAX + 1UL)
+    #define DPPIC20_CH_NUM (DPPIC20_CH_NUM_MAX + 1UL)
+    #define DPPIC30_CH_NUM (DPPIC30_CH_NUM_MAX + 1UL)
+
+    #define DPPIC00_GROUP_NUM (DPPIC00_GROUP_NUM_MAX + 1UL)
+    #define DPPIC10_GROUP_NUM (DPPIC10_GROUP_NUM_MAX + 1UL)
+    #define DPPIC20_GROUP_NUM (DPPIC20_GROUP_NUM_MAX + 1UL)
+    #define DPPIC30_GROUP_NUM (DPPIC30_GROUP_NUM_MAX + 1UL)
+
+    #define DPPI_PRESENT DPPIC_PRESENT
+    #define DPPI_GROUP_MAX_COUNT NRFX_MAX(DPPIC00_GROUP_NUM, \
+                                 NRFX_MAX(DPPIC10_GROUP_NUM, \
+                                 NRFX_MAX(DPPIC20_GROUP_NUM, \
+                                 DPPIC30_GROUP_NUM)))
+    #define DPPI_GROUP_NUM DPPI_GROUP_MAX_COUNT
+    #define DPPI_CHANNEL_MAX_COUNT NRFX_MAX(DPPIC00_CH_NUM, \
+                                   NRFX_MAX(DPPIC10_CH_NUM, \
+                                   NRFX_MAX(DPPIC20_CH_NUM, \
+                                   DPPIC30_CH_NUM)))
+    #define DPPI_CH_NUM DPPI_CHANNEL_MAX_COUNT
+    #define PPIB_CHANNEL_MAX_COUNT 24UL
+
+    #define SAADC_CH_CONFIG_RESP_Bypass (0x0UL)        /*!< Bypass resistor ladder                                               */
+    #define SAADC_CH_CONFIG_RESP_Pulldown (0x1UL)      /*!< Pull-down to GND                                                     */
+    #define SAADC_CH_CONFIG_RESP_Pullup (0x2UL)        /*!< Pull-up to VDD_AO_1V8                                                */
+
+    //  #define SAADC_CH_CONFIG_GAIN_Gain2_3 (0x0UL)       /*!< 2/3                                                                  */
+    #define SAADC_CH_CONFIG_GAIN_Gain1 (0x1UL)         /*!< 1                                                                    */
+    #define SAADC_CH_CONFIG_GAIN_Gain2 (0x2UL)         /*!< 2                                                                    */
+    #define SAADC_CH_CONFIG_GAIN_Gain4 (0x3UL)         /*!< 4                                                                    */
+    #define SAADC_CH_CONFIG_RESP_Pos (0UL) /*!< Position of RESP field. */
+    #define SAADC_CH_CONFIG_RESP_Msk (0x3UL << SAADC_CH_CONFIG_RESP_Pos) /*!< Bit mask of RESP field.                            */
+    #define SAADC_CH_CONFIG_RESN_Pos (4UL)             /*!< Position of RESN field.                                              */
+    #define SAADC_CH_CONFIG_RESN_Msk (0x3UL << SAADC_CH_CONFIG_RESN_Pos) /*!< Bit mask of RESN field.                            */
 
     /* RRAMC_WAITSTATES: Waitstates for RRAM read access */
     #define RRAMC_WAITSTATES_VALUE_MaxCount 3 /*!< Max size of the index array related to the AXI clock frequencies. */
