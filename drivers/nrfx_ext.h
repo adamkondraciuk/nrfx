@@ -77,6 +77,43 @@ extern "C" {
          NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,),        \
         ())
 
+#if defined(GPIO_RETAIN_PIN0_Msk)
+#define NRF_GPIO_RETAIN_EXT                                                    \
+    NRFX_COND_CODE_1(NRF_GPIO_HAS_RETENTION,                                   \
+        (NRF_GPIO_RETAIN_PIN0_MASK  = GPIO_RETAIN_PIN0_Msk,                    \
+         NRF_GPIO_RETAIN_PIN1_MASK  = GPIO_RETAIN_PIN1_Msk,                    \
+         NRF_GPIO_RETAIN_PIN2_MASK  = GPIO_RETAIN_PIN2_Msk,                    \
+         NRF_GPIO_RETAIN_PIN3_MASK  = GPIO_RETAIN_PIN3_Msk,                    \
+         NRF_GPIO_RETAIN_PIN4_MASK  = GPIO_RETAIN_PIN4_Msk,                    \
+         NRF_GPIO_RETAIN_PIN5_MASK  = GPIO_RETAIN_PIN5_Msk,                    \
+         NRF_GPIO_RETAIN_PIN6_MASK  = GPIO_RETAIN_PIN6_Msk,                    \
+         NRF_GPIO_RETAIN_PIN7_MASK  = GPIO_RETAIN_PIN7_Msk,                    \
+         NRF_GPIO_RETAIN_PIN8_MASK  = GPIO_RETAIN_PIN8_Msk,                    \
+         NRF_GPIO_RETAIN_PIN9_MASK  = GPIO_RETAIN_PIN9_Msk,                    \
+         NRF_GPIO_RETAIN_PIN10_MASK = GPIO_RETAIN_PIN10_Msk,                   \
+         NRF_GPIO_RETAIN_PIN11_MASK = GPIO_RETAIN_PIN11_Msk,                   \
+         NRF_GPIO_RETAIN_PIN12_MASK = GPIO_RETAIN_PIN12_Msk,                   \
+         NRF_GPIO_RETAIN_PIN13_MASK = GPIO_RETAIN_PIN13_Msk,                   \
+         NRF_GPIO_RETAIN_PIN14_MASK = GPIO_RETAIN_PIN14_Msk,                   \
+         NRF_GPIO_RETAIN_PIN15_MASK = GPIO_RETAIN_PIN15_Msk,                   \
+         NRF_GPIO_RETAIN_PIN16_MASK = GPIO_RETAIN_PIN16_Msk,                   \
+         NRF_GPIO_RETAIN_PIN17_MASK = GPIO_RETAIN_PIN17_Msk,                   \
+         NRF_GPIO_RETAIN_PIN18_MASK = GPIO_RETAIN_PIN18_Msk,                   \
+         NRF_GPIO_RETAIN_PIN19_MASK = GPIO_RETAIN_PIN19_Msk,                   \
+         NRF_GPIO_RETAIN_PIN20_MASK = GPIO_RETAIN_PIN20_Msk,                   \
+         NRF_GPIO_RETAIN_PIN21_MASK = GPIO_RETAIN_PIN21_Msk,                   \
+         NRF_GPIO_RETAIN_PIN22_MASK = GPIO_RETAIN_PIN22_Msk,                   \
+         NRF_GPIO_RETAIN_PIN23_MASK = GPIO_RETAIN_PIN23_Msk,                   \
+         NRF_GPIO_RETAIN_PIN24_MASK = GPIO_RETAIN_PIN24_Msk,                   \
+         NRF_GPIO_RETAIN_PIN25_MASK = GPIO_RETAIN_PIN25_Msk,                   \
+         NRF_GPIO_RETAIN_PIN26_MASK = GPIO_RETAIN_PIN26_Msk,                   \
+         NRF_GPIO_RETAIN_PIN27_MASK = GPIO_RETAIN_PIN27_Msk,                   \
+         NRF_GPIO_RETAIN_PIN28_MASK = GPIO_RETAIN_PIN28_Msk,                   \
+         NRF_GPIO_RETAIN_PIN29_MASK = GPIO_RETAIN_PIN29_Msk,                   \
+         NRF_GPIO_RETAIN_PIN30_MASK = GPIO_RETAIN_PIN30_Msk,                   \
+         NRF_GPIO_RETAIN_PIN31_MASK = GPIO_RETAIN_PIN31_Msk,),                 \
+        ())
+#else
 #define NRF_GPIO_RETAIN_EXT                                                    \
     NRFX_COND_CODE_1(NRF_GPIO_HAS_RETENTION,                                   \
         (NRF_GPIO_RETAIN_APPLICATION_MASK     = GPIO_RETAIN_APPLICAION_Msk,    \
@@ -93,6 +130,7 @@ extern "C" {
          NRF_GPIO_RETAIN_DISPLAY_MASK         = GPIO_RETAIN_DISPLAYSS_Msk,     \
          NRF_GPIO_RETAIN_DEBUG_MASK           = GPIO_RETAIN_TDD_Msk,),         \
         ())
+#endif
 
 /*------------------------------------------------------------------------------------------------*/
 /* End of GPIO Extended section                                                                   */
