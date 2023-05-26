@@ -108,7 +108,7 @@ extern "C" {
 #define NRF_GPIO_HAS_PORT_IMPEDANCE 0
 #endif
 
-#if defined(GPIO_RETAIN_APPLICAION_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(GPIO_RETAIN_ResetValue) || defined(__NRFX_DOXYGEN__)
 /** @brief Presence of register retention. */
 #define NRF_GPIO_HAS_RETENTION 1
 #else
