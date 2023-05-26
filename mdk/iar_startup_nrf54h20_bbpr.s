@@ -126,7 +126,7 @@ __vector_table
         DCD     0                         ; Reserved
         DCD     EGU020_IRQHandler
         DCD     AAR020_CCM020_IRQHandler
-        DCD     0                         ; Reserved
+        DCD     GPIOTE_IRQHandler
         DCD     TIMER020_IRQHandler
         DCD     TIMER021_IRQHandler
         DCD     TIMER022_IRQHandler
@@ -735,6 +735,11 @@ EGU020_IRQHandler
         PUBWEAK  AAR020_CCM020_IRQHandler
         SECTION .text:CODE:REORDER:NOROOT(1)
 AAR020_CCM020_IRQHandler
+        j .
+
+        PUBWEAK  GPIOTE_IRQHandler
+        SECTION .text:CODE:REORDER:NOROOT(1)
+GPIOTE_IRQHandler
         j .
 
         PUBWEAK  TIMER020_IRQHandler

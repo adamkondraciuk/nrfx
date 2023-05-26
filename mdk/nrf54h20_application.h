@@ -203,6 +203,7 @@ typedef enum {
 /* ================                                  Peripheral Address Map                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_APPLICATION_UICREXTENDED_NS_BASE 0x00000000UL
 #define NRF_APPLICATION_UICR_NS_BASE      0x0FFF8000UL
 #define NRF_APPLICATION_BICR_NS_BASE      0x0FFF87B0UL
 #define NRF_APPLICATION_ICACHEDATA_S_BASE 0x12F00000UL
@@ -255,6 +256,7 @@ typedef enum {
 /* ================                                  Peripheral Declaration                                  ================ */
 /* =========================================================================================================================== */
 
+#define NRF_APPLICATION_UICREXTENDED_NS   ((NRF_UICREXTENDED_Type*)             NRF_APPLICATION_UICREXTENDED_NS_BASE)
 #define NRF_APPLICATION_UICR_NS           ((NRF_UICR_Type*)                     NRF_APPLICATION_UICR_NS_BASE)
 #define NRF_APPLICATION_BICR_NS           ((NRF_BICR_Type*)                     NRF_APPLICATION_BICR_NS_BASE)
 #define NRF_APPLICATION_ICACHEDATA_S      ((NRF_ICACHEDATA_Type*)               NRF_APPLICATION_ICACHEDATA_S_BASE)
@@ -308,6 +310,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_TRUSTZONE_NONSECURE                       /*!< Remap NRF_X_NS instances to NRF_X symbol for ease of use.            */
+  #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_ETM                     NRF_APPLICATION_ETM_NS
@@ -328,6 +331,7 @@ typedef enum {
   #define NRF_APPLICATION_SWI7                    NRF_APPLICATION_SWI7_NS
   #define NRF_APPLICATION_BELLBOARD               NRF_APPLICATION_BELLBOARD_NS
 #else                                                /*!< Remap NRF_X_S instances to NRF_X symbol for ease of use.             */
+  #define NRF_APPLICATION_UICREXTENDED            NRF_APPLICATION_UICREXTENDED_NS
   #define NRF_APPLICATION_UICR                    NRF_APPLICATION_UICR_NS
   #define NRF_APPLICATION_BICR                    NRF_APPLICATION_BICR_NS
   #define NRF_APPLICATION_ICACHEDATA              NRF_APPLICATION_ICACHEDATA_S
@@ -374,6 +378,7 @@ typedef enum {
 /* =========================================================================================================================== */
 
 #ifdef NRF_APPLICATION                               /*!< Remap NRF_DOMAIN instances to NRF_X symbol for ease of use.          */
+  #define NRF_UICREXTENDED                        NRF_APPLICATION_UICREXTENDED
   #define NRF_UICR                                NRF_APPLICATION_UICR
   #define NRF_BICR                                NRF_APPLICATION_BICR
   #define NRF_ICACHEDATA                          NRF_APPLICATION_ICACHEDATA

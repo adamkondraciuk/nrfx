@@ -314,7 +314,7 @@ __isr_vector:
     .long   0                           /*Reserved */
     .long   EGU020_IRQHandler
     .long   AAR020_CCM020_IRQHandler
-    .long   0                           /*Reserved */
+    .long   GPIOTE_IRQHandler
     .long   TIMER020_IRQHandler
     .long   TIMER021_IRQHandler
     .long   TIMER022_IRQHandler
@@ -865,6 +865,7 @@ Default_Handler:
     IRQ  SPU020_IRQHandler
     IRQ  EGU020_IRQHandler
     IRQ  AAR020_CCM020_IRQHandler
+    IRQ  GPIOTE_IRQHandler
     IRQ  TIMER020_IRQHandler
     IRQ  TIMER021_IRQHandler
     IRQ  TIMER022_IRQHandler

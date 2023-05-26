@@ -52,58 +52,40 @@ POSSIBILITY OF SUCH DAMAGE.
 #define ICACHEDATA_PRESENT 1
 #define ICACHEDATA_COUNT 1
 
-#define ICACHEDATA_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
-#define ICACHEDATA_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
-#define ICACHEDATA_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define ICACHEDATA_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define ICACHEDATA_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..3                                          */
-#define ICACHEDATA_NUMDATAUNIT_MAX 3                 /*!< Number of data units : 0..3                                          */
-#define ICACHEDATA_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..1 words                               */
-#define ICACHEDATA_DATAWIDTH_MAX 1                   /*!< Data width of a data unit : 0..1 words                               */
+#define ICACHEDATA_NUMSETS 256                       /*!< Number of sets : 256                                                 */
+#define ICACHEDATA_NUMWAYS 2                         /*!< Number of ways : 2                                                   */
+#define ICACHEDATA_NUMDATAUNIT 4                     /*!< Number of data units : 4                                             */
+#define ICACHEDATA_DATAWIDTH 2                       /*!< Data width of a data unit : 2 word(s)                                */
 
 /*CACHEINFO*/
 #define ICACHEINFO_PRESENT 1
 #define ICACHEINFO_COUNT 1
 
-#define ICACHEINFO_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
-#define ICACHEINFO_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
-#define ICACHEINFO_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define ICACHEINFO_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define ICACHEINFO_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..3                                          */
-#define ICACHEINFO_NUMDATAUNIT_MAX 3                 /*!< Number of data units : 0..3                                          */
-#define ICACHEINFO_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..1 words                               */
-#define ICACHEINFO_DATAWIDTH_MAX 1                   /*!< Data width of a data unit : 0..1 words                               */
-#define ICACHEINFO_TAGWIDTH_MIN 0                    /*!< TAG width : 0..18                                                    */
-#define ICACHEINFO_TAGWIDTH_MAX 18                   /*!< TAG width : 0..18                                                    */
+#define ICACHEINFO_NUMSETS 256                       /*!< Number of sets : 256                                                 */
+#define ICACHEINFO_NUMWAYS 2                         /*!< Number of ways : 2                                                   */
+#define ICACHEINFO_NUMDATAUNIT 4                     /*!< Number of data units : 4                                             */
+#define ICACHEINFO_DATAWIDTH 2                       /*!< Data width of a data unit : 2 word(s)                                */
+#define ICACHEINFO_TAGWIDTH 19                       /*!< TAG width : 19                                                       */
 #define ICACHEINFO_DU_EXTENSION 0                    /*!< (unspecified)                                                        */
 
 /*CACHEDATA*/
 #define DCACHEDATA_PRESENT 1
 #define DCACHEDATA_COUNT 1
 
-#define DCACHEDATA_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
-#define DCACHEDATA_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
-#define DCACHEDATA_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define DCACHEDATA_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define DCACHEDATA_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..7                                          */
-#define DCACHEDATA_NUMDATAUNIT_MAX 7                 /*!< Number of data units : 0..7                                          */
-#define DCACHEDATA_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..0 words                               */
-#define DCACHEDATA_DATAWIDTH_MAX 0                   /*!< Data width of a data unit : 0..0 words                               */
+#define DCACHEDATA_NUMSETS 256                       /*!< Number of sets : 256                                                 */
+#define DCACHEDATA_NUMWAYS 2                         /*!< Number of ways : 2                                                   */
+#define DCACHEDATA_NUMDATAUNIT 8                     /*!< Number of data units : 8                                             */
+#define DCACHEDATA_DATAWIDTH 1                       /*!< Data width of a data unit : 1 word(s)                                */
 
 /*CACHEINFO*/
 #define DCACHEINFO_PRESENT 1
 #define DCACHEINFO_COUNT 1
 
-#define DCACHEINFO_NUMSETS_MIN 0                     /*!< Number of sets : 0..255                                              */
-#define DCACHEINFO_NUMSETS_MAX 255                   /*!< Number of sets : 0..255                                              */
-#define DCACHEINFO_NUMWAYS_MIN 0                     /*!< Number of ways : 0..1                                                */
-#define DCACHEINFO_NUMWAYS_MAX 1                     /*!< Number of ways : 0..1                                                */
-#define DCACHEINFO_NUMDATAUNIT_MIN 0                 /*!< Number of data units : 0..7                                          */
-#define DCACHEINFO_NUMDATAUNIT_MAX 7                 /*!< Number of data units : 0..7                                          */
-#define DCACHEINFO_DATAWIDTH_MIN 0                   /*!< Data width of a data unit : 0..0 words                               */
-#define DCACHEINFO_DATAWIDTH_MAX 0                   /*!< Data width of a data unit : 0..0 words                               */
-#define DCACHEINFO_TAGWIDTH_MIN 0                    /*!< TAG width : 0..18                                                    */
-#define DCACHEINFO_TAGWIDTH_MAX 18                   /*!< TAG width : 0..18                                                    */
+#define DCACHEINFO_NUMSETS 256                       /*!< Number of sets : 256                                                 */
+#define DCACHEINFO_NUMWAYS 2                         /*!< Number of ways : 2                                                   */
+#define DCACHEINFO_NUMDATAUNIT 8                     /*!< Number of data units : 8                                             */
+#define DCACHEINFO_DATAWIDTH 1                       /*!< Data width of a data unit : 1 word(s)                                */
+#define DCACHEINFO_TAGWIDTH 19                       /*!< TAG width : 19                                                       */
 #define DCACHEINFO_DU_EXTENSION 1                    /*!< (unspecified)                                                        */
 
 /*CRACENCORE*/
@@ -191,6 +173,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU000_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU000_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU000_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU000_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU000_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU000_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU010_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -207,6 +192,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU010_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU010_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU010_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU010_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU010_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU010_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU200_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -223,6 +211,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU200_TDD 1                                 /*!< (unspecified)                                                        */
 #define SPU200_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU200_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU200_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU200_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU200_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU210_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -239,6 +230,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU210_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU210_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU210_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU210_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU210_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU210_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU110_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -255,6 +249,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU110_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU110_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU110_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU110_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU110_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU110_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU111_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -271,6 +268,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU111_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU111_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU111_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU111_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU111_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU111_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU120_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -287,6 +287,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU120_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU120_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU120_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU120_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU120_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU120_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU121_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -303,6 +306,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU121_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU121_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU121_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU121_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU121_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU121_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU122_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -319,6 +325,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU122_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU122_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU122_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU122_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU122_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU122_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU130_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -335,6 +344,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU130_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU130_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU130_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU130_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU130_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU130_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU131_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -351,6 +363,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU131_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU131_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU131_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU131_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU131_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU131_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU132_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -367,6 +382,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU132_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU132_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU132_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU132_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU132_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU132_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU133_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -383,6 +401,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU133_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU133_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU133_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU133_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU133_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU133_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU134_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -399,6 +420,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU134_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU134_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU134_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU134_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU134_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU134_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU135_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -415,6 +439,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU135_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU135_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU135_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU135_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU135_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU135_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU136_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -431,6 +458,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU136_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU136_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU136_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU136_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU136_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU136_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 #define SPU137_GRTCSECONDARYOFFSET 0                 /*!< (unspecified)                                                        */
@@ -447,6 +477,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPU137_TDD 0                                 /*!< (unspecified)                                                        */
 #define SPU137_SLAVE_BITS 4                          /*!< SLAVE_BITS=4 (number of address bits required to represent the
                                                           peripheral slave index)*/
+#define SPU137_SPU_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU137_SPU_NUM_CLOCK_POWER_PAIR_MAX 0        /*!< Number of clock/power pairs used by PCGC Slave - [0..0]              */
+#define SPU137_SPU_NOTFULLPCPZERO 0                  /*!< (unspecified)                                                        */
 #define SPU137_PENALTYTASKS 0                        /*!< (unspecified)                                                        */
 
 /*Memory Privilege Controller*/
@@ -561,6 +594,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define HSFLL_COUNT 1
 
 #define HSFLL_DITHER_32B 1                           /*!< (unspecified)                                                        */
+#define HSFLL_CLOCKCTRL_MULT_RESET 4                 /*!< Reset value of register CLOCKCTRL.MULT: clockctrl_mult_reset         */
 
 /*LRCCONF*/
 #define LRCCONF_PRESENT 1
@@ -625,18 +659,22 @@ POSSIBILITY OF SUCH DAMAGE.
 #define WDT010_START_ON_RESET 1                      /*!< (unspecified)                                                        */
 #define WDT010_CRV_RESETVALUE 32768                  /*!< (unspecified)                                                        */
 #define WDT010_ALLOW_STOP 1                          /*!< (unspecified)                                                        */
+#define WDT010_HAS_INTEN 1                           /*!< (unspecified)                                                        */
 
 #define WDT011_START_ON_RESET 0                      /*!< (unspecified)                                                        */
 #define WDT011_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
 #define WDT011_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
+#define WDT011_HAS_INTEN 1                           /*!< (unspecified)                                                        */
 
 #define WDT131_START_ON_RESET 0                      /*!< (unspecified)                                                        */
 #define WDT131_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
 #define WDT131_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
+#define WDT131_HAS_INTEN 1                           /*!< (unspecified)                                                        */
 
 #define WDT132_START_ON_RESET 0                      /*!< (unspecified)                                                        */
 #define WDT132_CRV_RESETVALUE 4294967295             /*!< (unspecified)                                                        */
 #define WDT132_ALLOW_STOP 0                          /*!< (unspecified)                                                        */
+#define WDT132_HAS_INTEN 1                           /*!< (unspecified)                                                        */
 
 /*Tamper controller*/
 #define TAMPC_PRESENT 1
@@ -750,6 +788,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE130_GPIOTE_NPORTEVENTS_MAX 3           /*!< Number of GPIOTE port events: 0..3                                   */
 #define GPIOTE130_GPIOTE_NINTERRUPTS_MIN 0           /*!< Number of GPIOTE interrupts: 0..1                                    */
 #define GPIOTE130_GPIOTE_NINTERRUPTS_MAX 1           /*!< Number of GPIOTE interrupts: 0..1                                    */
+#define GPIOTE130_HAS_PORT_EVENT 1                   /*!< (unspecified)                                                        */
 
 /*Global Real-time counter*/
 #define GRTC_PRESENT 1
@@ -771,6 +810,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKOUTREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 1                          /*!< (unspecified)                                                        */
+#define GRTC_CCADD_WRITE_ONLY 1                      /*!< (unspecified)                                                        */
 
 /*Trace buffer monitor*/
 #define TBM_PRESENT 1
@@ -779,6 +819,8 @@ POSSIBILITY OF SUCH DAMAGE.
 /*USBHS*/
 #define USBHS_PRESENT 1
 #define USBHS_COUNT 1
+
+#define USBHS_SIMULATIONREGISTERS 0                  /*!< (unspecified)                                                        */
 
 /*MRAM controller*/
 #define MRAMC_PRESENT 1
@@ -1134,7 +1176,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS120_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS120_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS120_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS130_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1149,7 +1191,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS131_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1164,7 +1206,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS132_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1179,7 +1221,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS133_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1194,7 +1236,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS134_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1209,7 +1251,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS135_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1224,7 +1266,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS136_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1239,7 +1281,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define SPIS137_LEGACYPSEL 0                         /*!< (unspecified)                                                        */
@@ -1254,7 +1296,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIS137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIS137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIS137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 /*Serial Peripheral Interface Master with EasyDMA*/
@@ -1269,7 +1311,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM120_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM120_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM120_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM120_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM120_MAX_DATARATE 32                      /*!< (unspecified)                                                        */
 #define SPIM120_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1301,7 +1343,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM121_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM121_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM121_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM121_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM121_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM121_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM121_MAX_DATARATE 32                      /*!< (unspecified)                                                        */
 #define SPIM121_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1333,7 +1375,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM130_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM130_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1365,7 +1407,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM131_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM131_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1397,7 +1439,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM132_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM132_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1429,7 +1471,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM133_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM133_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1461,7 +1503,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM134_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM134_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1493,7 +1535,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM135_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM135_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1525,7 +1567,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM136_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM136_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1557,7 +1599,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SPIM137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define SPIM137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define SPIM137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define SPIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define SPIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define SPIM137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 #define SPIM137_MAX_DATARATE 8                       /*!< (unspecified)                                                        */
 #define SPIM137_EASYDMA_MAXCNT_SIZE_MIN 0            /*!< (unspecified)                                                        */
@@ -1593,13 +1635,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE120_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE120_CORE_CLOCK_16 0                     /*!< (unspecified)                                                        */
 #define UARTE120_CORE_CLOCK_320 1                    /*!< (unspecified)                                                        */
-#define UARTE120_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE120_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE120_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE120_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE120_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE120_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE130_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1610,13 +1652,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE130_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE130_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE130_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE130_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE130_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE130_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE130_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE130_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE131_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1627,13 +1669,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE131_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE131_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE131_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE131_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE131_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE131_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE131_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE131_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE132_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1644,13 +1686,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE132_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE132_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE132_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE132_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE132_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE132_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE132_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE132_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE133_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1661,13 +1703,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE133_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE133_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE133_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE133_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE133_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE133_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE133_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE133_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE134_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1678,13 +1720,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE134_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE134_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE134_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE134_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE134_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE134_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE134_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE134_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE135_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1695,13 +1737,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE135_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE135_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE135_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE135_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE135_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE135_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE135_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE135_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE136_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1712,13 +1754,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE136_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE136_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE136_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE136_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE136_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE136_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE136_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE136_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 #define UARTE137_EASYDMA_MAXCNT_SIZE_MIN 0           /*!< (unspecified)                                                        */
@@ -1729,13 +1771,13 @@ POSSIBILITY OF SUCH DAMAGE.
 #define UARTE137_CONFIGURABLE_DATA_FRAME_SIZE 1      /*!< (unspecified)                                                        */
 #define UARTE137_CORE_CLOCK_16 1                     /*!< (unspecified)                                                        */
 #define UARTE137_CORE_CLOCK_320 0                    /*!< (unspecified)                                                        */
-#define UARTE137_EASYDMALISTINCLUDED 0               /*!< (unspecified)                                                        */
+#define UARTE137_EASYDMALISTINCLUDED 1               /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMAMODEINCLUDED 0               /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMAFULLLPMODEINCLUDED 0         /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMAPATTERNMATCHERINCLUDED 1     /*!< (unspecified)                                                        */
 #define UARTE137_EASYDMANUMMATCHCHANNELS_MIN 0       /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define UARTE137_EASYDMANUMMATCHCHANNELS_MAX 3       /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define UARTE137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                 */
+#define UARTE137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                 */
 #define UARTE137_EASYDMASTOPTASKINCLUDED 1           /*!< (unspecified)                                                        */
 
 /*Real-time counter*/
@@ -1744,9 +1786,13 @@ POSSIBILITY OF SUCH DAMAGE.
 
 #define RTC130_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
 #define RTC130_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
+#define RTC130_BIT_WIDTH_MIN 0                       /*!< (unspecified)                                                        */
+#define RTC130_BIT_WIDTH_MAX 23                      /*!< (unspecified)                                                        */
 
 #define RTC131_CC_NUM_MIN 0                          /*!< (unspecified)                                                        */
 #define RTC131_CC_NUM_MAX 3                          /*!< (unspecified)                                                        */
+#define RTC131_BIT_WIDTH_MIN 0                       /*!< (unspecified)                                                        */
+#define RTC131_BIT_WIDTH_MAX 23                      /*!< (unspecified)                                                        */
 
 /*Event generator unit*/
 #define EGU_PRESENT 1
@@ -1840,24 +1886,27 @@ POSSIBILITY OF SUCH DAMAGE.
 #define SAADC_PRESENT 1
 #define SAADC_COUNT 1
 
-#define SAADC_EASYDMA5 1                             /*!< (unspecified)                                                        */
-#define SAADC_EASYDMATEMP 0                          /*!< (unspecified)                                                        */
+#define SAADC_EASYDMA5 0                             /*!< (unspecified)                                                        */
+#define SAADC_EASYDMATEMP 1                          /*!< (unspecified)                                                        */
 #define SAADC_PSEL_V2 1                              /*!< (unspecified)                                                        */
 #define SAADC_TASKS_CALIBRATEGAIN 1                  /*!< (unspecified)                                                        */
-#define SAADC_EASYDMALISTINCLUDED 1                  /*!< (unspecified)                                                        */
-#define SAADC_EASYDMAMODEINCLUDED 1                  /*!< (unspecified)                                                        */
-#define SAADC_EASYDMAFULLLPMODEINCLUDED 0            /*!< (unspecified)                                                        */
-#define SAADC_EASYDMAPATTERNMATCHERINCLUDED 0        /*!< (unspecified)                                                        */
-#define SAADC_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                    */
-#define SAADC_EASYDMASTOPTASKINCLUDED 1              /*!< (unspecified)                                                        */
+#define SAADC_PADC_TSMC22 0                          /*!< (unspecified)                                                        */
 
 /*Comparator*/
 #define COMP_PRESENT 1
 #define COMP_COUNT 1
 
+#define COMP_GF22N 1                                 /*!< (unspecified)                                                        */
+#define COMP_TSMC22N 0                               /*!< (unspecified)                                                        */
+
 /*Low-power comparator*/
 #define LPCOMP_PRESENT 1
 #define LPCOMP_COUNT 1
+
+#define LPCOMP_GF22N 1                               /*!< (unspecified)                                                        */
+#define LPCOMP_TSMC22N 0                             /*!< (unspecified)                                                        */
+#define LPCOMP_RETAIN 1                              /*!< (unspecified)                                                        */
+#define LPCOMP_POWER 0                               /*!< (unspecified)                                                        */
 
 /*Temperature Sensor*/
 #define TEMP_PRESENT 1
@@ -1868,7 +1917,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #define NFCT_COUNT 1
 
 #define NFCT_EASYDMA5 0                              /*!< (unspecified)                                                        */
-#define NFCT_EASYDMATEMP 0                           /*!< (unspecified)                                                        */
+#define NFCT_EASYDMATEMP 1                           /*!< (unspecified)                                                        */
+#define NFCT_BUSERROR_PRESENT 0                      /*!< (unspecified)                                                        */
 #define NFCT_NFCTFIELDDETCFG_RESET 1                 /*!< Reset value of register NFCTFIELDDETCFG: 1                           */
 
 /*Time division multiplexed audio interface*/
@@ -1879,6 +1929,31 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TDM130_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
 #define TDM130_NUM_CHANNELS_MIN 0                    /*!< (unspecified)                                                        */
 #define TDM130_NUM_CHANNELS_MAX 7                    /*!< (unspecified)                                                        */
+#define TDM130_TDM_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by TDM instance of PCGC Slave -
+                                                          [0..3]*/
+#define TDM130_TDM_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by TDM instance of PCGC Slave -
+                                                          [0..3]*/
+#define TDM130_TDM_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
+#define TDM130_BRGMCK_NUM_CLOCK_POWER_PAIR_MIN 0     /*!< Number of clock/power pairs used by BRGMCK instance of PCGC Slave -
+                                                          [brgmck_numpcp]*/
+#define TDM130_BRGMCK_NUM_CLOCK_POWER_PAIR_MAX 2     /*!< Number of clock/power pairs used by BRGMCK instance of PCGC Slave -
+                                                          [brgmck_numpcp]*/
+#define TDM130_BRGMCK_NOTFULLPCPZERO 1               /*!< (unspecified)                                                        */
+#define TDM130_BRGSCK_NUM_CLOCK_POWER_PAIR_MIN 0     /*!< Number of clock/power pairs used by BRGSCK instance of PCGC Slave -
+                                                          [brgsck_numpcp]*/
+#define TDM130_BRGSCK_NUM_CLOCK_POWER_PAIR_MAX 2     /*!< Number of clock/power pairs used by BRGSCK instance of PCGC Slave -
+                                                          [brgsck_numpcp]*/
+#define TDM130_BRGSCK_NOTFULLPCPZERO 1               /*!< (unspecified)                                                        */
+#define TDM130_DMARX_NUM_CLOCK_POWER_PAIR_MIN 0      /*!< Number of clock/power pairs used by DMARX instance of PCGC Slave -
+                                                          [dmarx_numpcp]*/
+#define TDM130_DMARX_NUM_CLOCK_POWER_PAIR_MAX 1      /*!< Number of clock/power pairs used by DMARX instance of PCGC Slave -
+                                                          [dmarx_numpcp]*/
+#define TDM130_DMARX_NOTFULLPCPZERO 1                /*!< (unspecified)                                                        */
+#define TDM130_DMATX_NUM_CLOCK_POWER_PAIR_MIN 0      /*!< Number of clock/power pairs used by DMATX instance of PCGC Slave -
+                                                          [dmatx_numpcp]*/
+#define TDM130_DMATX_NUM_CLOCK_POWER_PAIR_MAX 1      /*!< Number of clock/power pairs used by DMATX instance of PCGC Slave -
+                                                          [dmatx_numpcp]*/
+#define TDM130_DMATX_NOTFULLPCPZERO 1                /*!< (unspecified)                                                        */
 #define TDM130_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
 #define TDM130_EASYDMAMODEINCLUDED 1                 /*!< (unspecified)                                                        */
 #define TDM130_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
@@ -1890,6 +1965,31 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TDM131_EASYDMATEMP 0                         /*!< (unspecified)                                                        */
 #define TDM131_NUM_CHANNELS_MIN 0                    /*!< (unspecified)                                                        */
 #define TDM131_NUM_CHANNELS_MAX 7                    /*!< (unspecified)                                                        */
+#define TDM131_TDM_NUM_CLOCK_POWER_PAIR_MIN 0        /*!< Number of clock/power pairs used by TDM instance of PCGC Slave -
+                                                          [0..3]*/
+#define TDM131_TDM_NUM_CLOCK_POWER_PAIR_MAX 3        /*!< Number of clock/power pairs used by TDM instance of PCGC Slave -
+                                                          [0..3]*/
+#define TDM131_TDM_NOTFULLPCPZERO 1                  /*!< (unspecified)                                                        */
+#define TDM131_BRGMCK_NUM_CLOCK_POWER_PAIR_MIN 0     /*!< Number of clock/power pairs used by BRGMCK instance of PCGC Slave -
+                                                          [brgmck_numpcp]*/
+#define TDM131_BRGMCK_NUM_CLOCK_POWER_PAIR_MAX 2     /*!< Number of clock/power pairs used by BRGMCK instance of PCGC Slave -
+                                                          [brgmck_numpcp]*/
+#define TDM131_BRGMCK_NOTFULLPCPZERO 1               /*!< (unspecified)                                                        */
+#define TDM131_BRGSCK_NUM_CLOCK_POWER_PAIR_MIN 0     /*!< Number of clock/power pairs used by BRGSCK instance of PCGC Slave -
+                                                          [brgsck_numpcp]*/
+#define TDM131_BRGSCK_NUM_CLOCK_POWER_PAIR_MAX 2     /*!< Number of clock/power pairs used by BRGSCK instance of PCGC Slave -
+                                                          [brgsck_numpcp]*/
+#define TDM131_BRGSCK_NOTFULLPCPZERO 1               /*!< (unspecified)                                                        */
+#define TDM131_DMARX_NUM_CLOCK_POWER_PAIR_MIN 0      /*!< Number of clock/power pairs used by DMARX instance of PCGC Slave -
+                                                          [dmarx_numpcp]*/
+#define TDM131_DMARX_NUM_CLOCK_POWER_PAIR_MAX 1      /*!< Number of clock/power pairs used by DMARX instance of PCGC Slave -
+                                                          [dmarx_numpcp]*/
+#define TDM131_DMARX_NOTFULLPCPZERO 1                /*!< (unspecified)                                                        */
+#define TDM131_DMATX_NUM_CLOCK_POWER_PAIR_MIN 0      /*!< Number of clock/power pairs used by DMATX instance of PCGC Slave -
+                                                          [dmatx_numpcp]*/
+#define TDM131_DMATX_NUM_CLOCK_POWER_PAIR_MAX 1      /*!< Number of clock/power pairs used by DMATX instance of PCGC Slave -
+                                                          [dmatx_numpcp]*/
+#define TDM131_DMATX_NOTFULLPCPZERO 1                /*!< (unspecified)                                                        */
 #define TDM131_EASYDMALISTINCLUDED 0                 /*!< (unspecified)                                                        */
 #define TDM131_EASYDMAMODEINCLUDED 1                 /*!< (unspecified)                                                        */
 #define TDM131_EASYDMAFULLLPMODEINCLUDED 0           /*!< (unspecified)                                                        */
@@ -1909,7 +2009,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define PDM_EASYDMAMODEINCLUDED 0                    /*!< (unspecified)                                                        */
 #define PDM_EASYDMAFULLLPMODEINCLUDED 0              /*!< (unspecified)                                                        */
 #define PDM_EASYDMAPATTERNMATCHERINCLUDED 0          /*!< (unspecified)                                                        */
-#define PDM_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                      */
+#define PDM_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                      */
 #define PDM_EASYDMASTOPTASKINCLUDED 1                /*!< (unspecified)                                                        */
 
 /*Quadrature Decoder*/
@@ -1936,7 +2036,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM131_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -1947,7 +2047,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM132_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -1958,7 +2058,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM133_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -1969,7 +2069,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM134_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -1980,7 +2080,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM135_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -1991,7 +2091,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM136_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2002,7 +2102,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIM137_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2013,7 +2113,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIM137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIM137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIM137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIM137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIM137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 /*I2C compatible Two-Wire Slave Interface with EasyDMA*/
@@ -2028,7 +2128,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS130_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS130_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS130_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS130_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS130_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS131_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2039,7 +2139,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS131_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS131_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS131_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS131_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS131_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS132_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2050,7 +2150,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS132_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS132_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS132_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS132_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS132_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS133_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2061,7 +2161,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS133_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS133_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS133_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS133_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS133_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS134_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2072,7 +2172,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS134_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS134_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS134_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS134_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS134_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS135_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2083,7 +2183,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS135_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS135_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS135_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS135_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS135_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS136_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2094,7 +2194,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS136_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS136_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS136_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS136_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS136_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 #define TWIS137_EASYDMA5 1                           /*!< (unspecified)                                                        */
@@ -2105,7 +2205,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #define TWIS137_EASYDMAPATTERNMATCHERINCLUDED 1      /*!< (unspecified)                                                        */
 #define TWIS137_EASYDMANUMMATCHCHANNELS_MIN 0        /*!< EasyDMA pattern matching engine supports events 0..3.                */
 #define TWIS137_EASYDMANUMMATCHCHANNELS_MAX 3        /*!< EasyDMA pattern matching engine supports events 0..3.                */
-#define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 0 /*!< (unspecified)                                                  */
+#define TWIS137_EASYDMA_CURRENT_AMOUNT_REGISTER_INCLUDED 1 /*!< (unspecified)                                                  */
 #define TWIS137_EASYDMASTOPTASKINCLUDED 1            /*!< (unspecified)                                                        */
 
 

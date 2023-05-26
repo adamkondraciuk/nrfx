@@ -13,7 +13,7 @@ Following table presents current MDK version for specified targets:
 |nrf52834  |8.53.1 External                        |
 |nrf52840  |8.53.1 External                        |
 |nrf5340   |8.53.1 External                        |
-|nrf54h20  |8.53.0 Haltium Strictly Confidential   |
+|nrf54h20  |8.53.1 Haltium Strictly Confidential   |
 |nrf9120   |8.53.1 External                        |
 |nrf9160   |8.53.1 External                        |
 |liliumsoc1|8.53.0 LiliumSOC1 Strictly Confidential|

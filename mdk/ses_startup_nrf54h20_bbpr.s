@@ -180,7 +180,7 @@ _vectors:
   ISR_RESERVED_DUMMY                           /* Reserved */
   ISR_HANDLER   EGU020_IRQHandler
   ISR_HANDLER   AAR020_CCM020_IRQHandler
-  ISR_RESERVED_DUMMY                           /* Reserved */
+  ISR_HANDLER   GPIOTE_IRQHandler
   ISR_HANDLER   TIMER020_IRQHandler
   ISR_HANDLER   TIMER021_IRQHandler
   ISR_HANDLER   TIMER022_IRQHandler

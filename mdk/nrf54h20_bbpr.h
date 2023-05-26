@@ -70,6 +70,7 @@ typedef enum {
   SPU020_IRQn                            = 32,       /*!< 32 SPU020                                                            */
   EGU020_IRQn                            = 37,       /*!< 37 EGU020                                                            */
   AAR020_CCM020_IRQn                     = 38,       /*!< 38 AAR020_CCM020                                                     */
+  GPIOTE_IRQn                            = 39,       /*!< 39 GPIOTE                                                            */
   TIMER020_IRQn                          = 40,       /*!< 40 TIMER020                                                          */
   TIMER021_IRQn                          = 41,       /*!< 41 TIMER021                                                          */
   TIMER022_IRQn                          = 42,       /*!< 42 TIMER022                                                          */
