@@ -485,12 +485,19 @@ NRF_STATIC_INLINE void nrf_grcconf_system_off(NRF_GRCCONF_Type * p_reg)
 
 NRF_STATIC_INLINE void nrf_grcconf_force_system_off(NRF_GRCCONF_Type * p_reg, bool now)
 {
+#if !defined(GRCCONF_SYSTEMOFF_FORCESYSTEMOFF_Msk)
+    (void)now;
+    p_reg->SYSTEMOFF =
+        (GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Force
+         << GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Pos) & GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Msk;
+#else
     p_reg->SYSTEMOFF =
         now ? (GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Force
                << GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Pos) &
         GRCCONF_SYSTEMOFF_FORCESYSTEMOFFNOW_Msk :
               (GRCCONF_SYSTEMOFF_FORCESYSTEMOFF_Force
          << GRCCONF_SYSTEMOFF_FORCESYSTEMOFF_Pos) & GRCCONF_SYSTEMOFF_FORCESYSTEMOFF_Msk;
+#endif
 }
 
 NRF_STATIC_INLINE uint32_t nrf_grcconf_systemoff_stat_get(NRF_GRCCONF_Type const * p_reg)
