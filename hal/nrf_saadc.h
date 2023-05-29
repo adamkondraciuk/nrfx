@@ -66,6 +66,13 @@ extern "C" {
 #define NRF_SAADC_HAS_DMA_EVENTS 0
 #endif
 
+#if defined(SAADC_CH_CONFIG_RESP_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SAADC channel resistor control is present. */
+#define NRF_SAADC_HAS_CH_CONFIG_RES 1
+#else
+#define NRF_SAADC_HAS_CH_CONFIG_RES 0
+#endif
+
 #if !NRF_SAADC_HAS_ACQTIME_ENUM
 /** @brief Maximum value of acquire time. */
 #define NRF_SAADC_ACQTIME_MAX SAADC_CH_CONFIG_TACQ_Max
@@ -153,6 +160,7 @@ typedef enum
     NRF_SAADC_OVERSAMPLE_256X     = SAADC_OVERSAMPLE_OVERSAMPLE_Over256x  ///< Oversample 256x.
 } nrf_saadc_oversample_t;
 
+#if NRF_SAADC_HAS_CH_CONFIG_RES
 /** @brief Analog-to-digital converter channel resistor control. */
 typedef enum
 {
@@ -166,6 +174,7 @@ typedef enum
     NRF_SAADC_RESISTOR_VDD1_2   = SAADC_CH_CONFIG_RESP_VDDAO1V8div2, ///< Set input at VDD/2.
 #endif
 } nrf_saadc_resistor_t;
+#endif
 
 /** @brief Gain factor of the analog-to-digital converter input. */
 typedef enum
@@ -330,8 +339,10 @@ typedef struct
 /** @brief Analog-to-digital converter channel configuration structure. */
 typedef struct
 {
+#if NRF_SAADC_HAS_CH_CONFIG_RES
     nrf_saadc_resistor_t  resistor_p; ///< Resistor value on positive input.
     nrf_saadc_resistor_t  resistor_n; ///< Resistor value on negative input.
+#endif
     nrf_saadc_gain_t      gain;       ///< Gain control value.
     nrf_saadc_reference_t reference;  ///< Reference control value.
     nrf_saadc_acqtime_t   acq_time;   ///< Acquisition time.
@@ -1036,11 +1047,13 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
     NRFX_ASSERT(config->conv_time <= NRF_SAADC_CONVTIME_MAX);
 #endif
     p_reg->CH[channel].CONFIG =
-            ((config->resistor_p   << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
-            | ((config->resistor_n << SAADC_CH_CONFIG_RESN_Pos)   & SAADC_CH_CONFIG_RESN_Msk)
-            | ((config->gain       << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
+            ((config->gain         << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
             | ((config->reference  << SAADC_CH_CONFIG_REFSEL_Pos) & SAADC_CH_CONFIG_REFSEL_Msk)
             | ((config->acq_time   << SAADC_CH_CONFIG_TACQ_Pos)   & SAADC_CH_CONFIG_TACQ_Msk)
+#if NRF_SAADC_HAS_CH_CONTROL_RES
+            | ((config->resistor_p << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
+            | ((config->resistor_n << SAADC_CH_CONFIG_RESN_Pos)   & SAADC_CH_CONFIG_RESN_Msk)
+#endif
 #if NRF_SAADC_HAS_CONVTIME
             | ((config->conv_time  << SAADC_CH_CONFIG_TCONV_Pos)  & SAADC_CH_CONFIG_TCONV_Msk)
 #endif
