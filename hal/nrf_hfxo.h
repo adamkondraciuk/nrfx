@@ -16,6 +16,13 @@ extern "C" {
  * @brief   Hardware access layer for managing the High Frequency Crystal Oscillator (HFXO).
  */
 
+#if defined(HFXO_IDAC_SETTLETIME_VAL_val40us) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether IDAC maximum settling time is equal to 40us. */
+#define NRF_HFXO_IDAC_HAS_MAX_SETTLETIME_40US 1
+#else
+#define NRF_HFXO_IDAC_HAS_MAX_SETTLETIME_40US 0
+#endif
+
 /** @brief HFXO events. */
 typedef enum
 {
@@ -82,14 +89,23 @@ typedef enum
 /** @brief Period value for the IDAC check. */
 typedef enum
 {
-    NRF_HFXO_IDAC_SETTLE_TIME_5US  = HFXO_IDAC_SETTLETIME_VAL_val5us,  /**< Settling time is 5us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_10US = HFXO_IDAC_SETTLETIME_VAL_val10us, /**< Settling time is 10us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_15US = HFXO_IDAC_SETTLETIME_VAL_val15us, /**< Settling time is 15us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_20US = HFXO_IDAC_SETTLETIME_VAL_val20us, /**< Settling time is 20us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_25US = HFXO_IDAC_SETTLETIME_VAL_val25us, /**< Settling time is 25us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_30US = HFXO_IDAC_SETTLETIME_VAL_val30us, /**< Settling time is 30us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_35US = HFXO_IDAC_SETTLETIME_VAL_val35us, /**< Settling time is 35us. */
-    NRF_HFXO_IDAC_SETTLE_TIME_40US = HFXO_IDAC_SETTLETIME_VAL_val40us, /**< Settling time is 40us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_5US   = HFXO_IDAC_SETTLETIME_VAL_val5us,   /**< Settling time is 5us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_10US  = HFXO_IDAC_SETTLETIME_VAL_val10us,  /**< Settling time is 10us. */
+#if NRF_HFXO_IDAC_HAS_MAX_SETTLETIME_40US
+    NRF_HFXO_IDAC_SETTLE_TIME_15US  = HFXO_IDAC_SETTLETIME_VAL_val15us,  /**< Settling time is 15us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_20US  = HFXO_IDAC_SETTLETIME_VAL_val20us,  /**< Settling time is 20us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_25US  = HFXO_IDAC_SETTLETIME_VAL_val25us,  /**< Settling time is 25us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_30US  = HFXO_IDAC_SETTLETIME_VAL_val30us,  /**< Settling time is 30us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_35US  = HFXO_IDAC_SETTLETIME_VAL_val35us,  /**< Settling time is 35us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_40US  = HFXO_IDAC_SETTLETIME_VAL_val40us,  /**< Settling time is 40us. */
+#else
+    NRF_HFXO_IDAC_SETTLE_TIME_25US  = HFXO_IDAC_SETTLETIME_VAL_val25us,  /**< Settling time is 25us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_50US  = HFXO_IDAC_SETTLETIME_VAL_val50us,  /**< Settling time is 50us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_100US = HFXO_IDAC_SETTLETIME_VAL_val100us, /**< Settling time is 100us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_200US = HFXO_IDAC_SETTLETIME_VAL_val200us, /**< Settling time is 200us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_400US = HFXO_IDAC_SETTLETIME_VAL_val400us, /**< Settling time is 400us. */
+    NRF_HFXO_IDAC_SETTLE_TIME_800US = HFXO_IDAC_SETTLETIME_VAL_val800us, /**< Settling time is 800us. */
+#endif
 } nrf_hfxo_idac_settle_time_t;
 
 /**
