@@ -19,4 +19,4 @@ Following table presents current MDK version for specified targets:
 |liliumsoc1|8.53.0 LiliumSOC1 Strictly Confidential|
 |nrf9230   |8.53.1 Leavings Strictly Confidential  |
 |nrf7140   |8.53.1 Strictly Confidential           |
-|moonlight |8.52.0 Eos                             |
+|moonlight |8.53.1 Geras Strictly Confidential     |
