@@ -2156,42 +2156,7 @@ typedef struct {
                                                       * cause conflicts.
                                                       * < (@ 0x00000008) Internal write-buffer is empty
                                                       */
-} NRF_RRAMC_BUFSTATUS_Type;                          /*!< Size = 12 (0x00C)                                                    */
-
-/* RRAMC_BUFSTATUS_EMPTY: Internal write-buffer is empty */
-  #define RRAMC_BUFSTATUS_EMPTY_ResetValue (0x00000000UL) /*!< Reset value of EMPTY register.                                  */
-
-/* EMPTY @Bit 0 : (unspecified) */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_Pos (0UL)      /*!< Position of EMPTY field.                                             */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_Msk (0x1UL << RRAMC_BUFSTATUS_EMPTY_EMPTY_Pos) /*!< Bit mask of EMPTY field.             */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_Min (0x0UL)    /*!< Min enumerator value of EMPTY field.                                 */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_Max (0x1UL)    /*!< Max enumerator value of EMPTY field.                                 */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_NotEmpty (0x0UL) /*!< The internal write-buffer has data that needs committing           */
-  #define RRAMC_BUFSTATUS_EMPTY_EMPTY_Empty (0x1UL)  /*!< The internal write-buffer is empty and has no content that needs to be
-                                                          committed*/
-
-/* ================================================= Struct RRAMC_POWER_CNT ================================================== */
-/**
-  * @brief CNT [RRAMC_POWER_CNT] Counter/timing configuration for 32 MHz frequency
-  */
-typedef struct {
-  __IOM uint32_t  CONFIG0;                           /*!< (@ 0x00000000) Counter timing configuration CONFIG0                  */
-  __IOM uint32_t  CONFIG1;                           /*!< (@ 0x00000004) Counter timing configuration CONFIG1                  */
-} NRF_RRAMC_POWER_CNT_Type;                          /*!< Size = 8 (0x008)                                                     */
-
-/* =================================================== Struct RRAMC_POWER ==================================================== */
-/**
-  * @brief POWER [RRAMC_POWER] (unspecified)
-  */
-typedef struct {
-  __IOM uint32_t  CONFIG;                            /*!< (@ 0x00000000) Power configuration                                   */
-  __IOM uint32_t  STANDBYCONFIG;                     /*!< (@ 0x00000004) Standby mode configuration                            */
-  __IOM uint32_t  LOWPOWERCONFIG;                    /*!< (@ 0x00000008) Low power mode configuration                          */
-  __IOM uint32_t  FORCE;                             /*!< (@ 0x0000000C) Force the power switches to the RRAM On or Off        */
-  __IOM NRF_RRAMC_POWER_CNT_Type CNT;                /*!< (@ 0x00000010) Counter/timing configuration for 32 MHz frequency     */
-  __IM  uint32_t  RESERVED[2];
-  __IM  uint32_t  STATE;                             /*!< (@ 0x00000020) State of the Power control FSM                        */
-} NRF_RRAMC_POWER_Type_fixed;                        /*!< Size = 36 (0x024)                                                    */
+} NRF_RRAMC_BUFSTATUS_Type_fixed;                    /*!< Size = 12 (0x00C)                                                    */
 
 /* ====================================================== Struct RRAMC ======================================================= */
 /**
@@ -2223,14 +2188,14 @@ typedef struct {
     __IM uint32_t READYNEXT;                         /*!< (@ 0x00000404) Ready next flag                                       */
     __IM uint32_t ACCESSERRORADDR;                   /*!< (@ 0x00000408) Address of the first access error                     */
     __IM uint32_t TRCSTATUS;                         /*!< (@ 0x0000040C) TRC status                                            */
-    __IOM NRF_RRAMC_BUFSTATUS_Type BUFSTATUS;        /*!< (@ 0x00000410) (unspecified)                                         */
+    __IOM NRF_RRAMC_BUFSTATUS_Type_fixed BUFSTATUS;  /*!< (@ 0x00000410) (unspecified)                                         */
     __IM uint32_t RESERVED5[57];
     __IOM uint32_t CONFIG;                           /*!< (@ 0x00000500) Configuration register                                */
     __IOM uint32_t READCONFIG;                       /*!< (@ 0x00000504) Read configuration register                           */
     __IOM uint32_t WAITSTATES;                       /*!< (@ 0x00000508) Waitstates for RRAM read access                       */
     __IOM uint32_t READYNEXTTIMEOUT;                 /*!< (@ 0x0000050C) Configuration for ready next timeout counter, in units
                                                                          of AXI clock frequency*/
-    __IOM NRF_RRAMC_POWER_Type_fixed POWER;          /*!< (@ 0x00000510) (unspecified)                                         */
+    __IOM NRF_RRAMC_POWER_Type POWER;                /*!< (@ 0x00000510) (unspecified)                                         */
     __IM uint32_t RESERVED6[3];
     __IOM NRF_RRAMC_ERASE_Type ERASE;                /*!< (@ 0x00000540) (unspecified)                                         */
     __IM uint32_t RESERVED7[2];
