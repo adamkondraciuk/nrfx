@@ -1916,6 +1916,13 @@
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
 
+    /* MLT-5776 */
+    typedef enum {
+        NRF_DOMAIN_APPLICATION = 1, /*!< Application core                   */
+        NRF_DOMAIN_FLPR    = 2,     /*!< Flipper, Fast Peripheral Processor */
+        NRF_DOMAIN_GLOBAL  = 3,     /*!< Global peripherals                 */
+    } NRF_DOMAINS_t;
+
     typedef NRF_DOMAINS_t nrf_domain_t;
     #define ADDRESS_BUS_Pos (18UL)
     #define ADDRESS_BUS_Msk (0x3FUL << ADDRESS_BUS_Pos)
