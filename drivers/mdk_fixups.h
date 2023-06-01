@@ -1939,41 +1939,6 @@
         NRF_OWNER_KMU             = 2,
     } NRF_OWNERID_Type;
 
-    /* PIN @Bits 0..4 : Analog positive input pin select */
-    #define SAADC_CH_PSELP_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
-    #define SAADC_CH_PSELP_PIN_Msk (0x1FUL << SAADC_CH_PSELP_PIN_Pos) /*!< Bit mask of PIN field.                                */
-
-    /* PORT @Bits 8..11 : GPIO Port selection */
-    #define SAADC_CH_PSELP_PORT_Pos (8UL)              /*!< Position of PORT field.                                              */
-    #define SAADC_CH_PSELP_PORT_Msk (0xFUL << SAADC_CH_PSELP_PORT_Pos) /*!< Bit mask of PORT field.                              */
-
-    /* CONNECT @Bits 30..31 : Connection */
-    #define SAADC_CH_PSELP_CONNECT_Pos (30UL)          /*!< Position of CONNECT field.                                           */
-    #define SAADC_CH_PSELP_CONNECT_Msk (0x3UL << SAADC_CH_PSELP_CONNECT_Pos) /*!< Bit mask of CONNECT field.                     */
-    #define SAADC_CH_PSELP_CONNECT_Min (0x0UL)         /*!< Min enumerator value of CONNECT field.                               */
-    #define SAADC_CH_PSELP_CONNECT_Max (0x3UL)         /*!< Max enumerator value of CONNECT field.                               */
-    #define SAADC_CH_PSELP_CONNECT_NC (0x0UL)          /*!< Not connected                                                        */
-    #define SAADC_CH_PSELP_CONNECT_AnalogInput (0x1UL) /*!< Select analog input                                                  */
-
-    /* SAADC_CH_PSELN: Input negative pin selection for CH[n] */
-    #define SAADC_CH_PSELN_ResetValue (0x00000000UL)   /*!< Reset value of PSELN register.                                       */
-
-    /* PIN @Bits 0..4 : Analog negative input pin select */
-    #define SAADC_CH_PSELN_PIN_Pos (0UL)               /*!< Position of PIN field.                                               */
-    #define SAADC_CH_PSELN_PIN_Msk (0x1FUL << SAADC_CH_PSELN_PIN_Pos) /*!< Bit mask of PIN field.                                */
-
-    /* PORT @Bits 8..11 : GPIO Port selection */
-    #define SAADC_CH_PSELN_PORT_Pos (8UL)              /*!< Position of PORT field.                                              */
-    #define SAADC_CH_PSELN_PORT_Msk (0xFUL << SAADC_CH_PSELN_PORT_Pos) /*!< Bit mask of PORT field.                              */
-
-    /* CONNECT @Bits 30..31 : Connection */
-    #define SAADC_CH_PSELN_CONNECT_Pos (30UL)          /*!< Position of CONNECT field.                                           */
-    #define SAADC_CH_PSELN_CONNECT_Msk (0x3UL << SAADC_CH_PSELN_CONNECT_Pos) /*!< Bit mask of CONNECT field.                     */
-    #define SAADC_CH_PSELN_CONNECT_Min (0x0UL)         /*!< Min enumerator value of CONNECT field.                               */
-    #define SAADC_CH_PSELN_CONNECT_Max (0x3UL)         /*!< Max enumerator value of CONNECT field.                               */
-    #define SAADC_CH_PSELN_CONNECT_NC (0x0UL)          /*!< Not connected                                                        */
-    #define SAADC_CH_PSELN_CONNECT_AnalogInput (0x1UL) /*!< Select analog input                                                  */
-
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
     #define GPIOTE_CH_NUM   8
