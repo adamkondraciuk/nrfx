@@ -1972,6 +1972,18 @@
         #define GRTC_IRQn             GRTC_0_IRQn
         #define nrfx_grtc_irq_handler GRTC_0_IRQHandler
     #elif defined(NRF_APPLICATION)
+        #define CTRLAP_IRQn      (IRQn_Type)82
+        #define CM33SS_IRQn      (IRQn_Type)84
+        #define TIMER00_IRQn     (IRQn_Type)85
+        #define GPIOTE20_0_IRQn  (IRQn_Type)218
+        #define GPIOTE20_1_IRQn  (IRQn_Type)219
+        #define TAMPC_IRQn       (IRQn_Type)220
+        #define I2S20_IRQn       (IRQn_Type)221
+        #define GRTC_3_IRQn      (IRQn_Type)229
+        #define GPIOTE30_0_IRQn  (IRQn_Type)268
+        #define GPIOTE30_1_IRQn  (IRQn_Type)269
+        #define CLOCK_POWER_IRQn (IRQn_Type)270
+
         #if defined(NRF_TRUSTZONE_NONSECURE)
             #define NRF_GPIOTE_IRQ_GROUP    0
             #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
