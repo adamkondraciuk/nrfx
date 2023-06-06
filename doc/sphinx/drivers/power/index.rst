@@ -8,6 +8,7 @@ POWER
 
    ../../nrfx_api/reset_reason.rst
    *
+   ../glitchdet/hal.rst
    ../mbias/hal.rst
    ../oscrfr/hal.rst
    ../reset/hal.rst
