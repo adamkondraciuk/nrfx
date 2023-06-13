@@ -53,6 +53,14 @@ extern "C" {
 #define NRF_TAMPC_HAS_ERASE_PROTECTOR 0
 #endif
 
+#if defined(TAMPC_ENABLE_ACTIVESHIELD_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the availability to enable the TAMPC detectors feature is present. */
+#define NRF_TAMPC_HAS_DETECTORS_ENABLE 1
+#else
+#define NRF_TAMPC_HAS_DETECTORS_ENABLE 0
+#endif
+
+
 /** @brief TAMPC events. */
 typedef enum
 {
@@ -93,16 +101,16 @@ typedef enum
 /** @brief TAMPC error detectors. */
 typedef enum
 {
-    NRF_TAMPC_DETECTOR_STATUS_ACTIVE_SHIELD_MASK        = TAMPC_STATUS_ACTIVESHIELD_Msk,      ///< Active shield error detector.
-    NRF_TAMPC_DETECTOR_STATUS_TAMPER_SWITCH_MASK        = TAMPC_STATUS_TAMPERSWITCH_Msk,      ///< External tamper switch error detector.
-    NRF_TAMPC_DETECTOR_STATUS_PROTECTED_SIGNAL_MASK     = TAMPC_STATUS_PROTECT_Msk,           ///< Protected signals error detector.
-    NRF_TAMPC_DETECTOR_STATUS_CRACEN_MASK               = TAMPC_STATUS_CRACENTAMP_Msk,        ///< CRACEN error detector.
-    NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_SLOW_0_MASK = TAMPC_STATUS_GLITCHSLOWDOMAIN0_Msk, ///< Slow domain glitch error detector 0.
-    NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_0_MASK = TAMPC_STATUS_GLITCHFASTDOMAIN0_Msk, ///< Fast domain glitch error detector 0.
-    NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_1_MASK = TAMPC_STATUS_GLITCHFASTDOMAIN1_Msk, ///< Fast domain glitch error detector 1.
-    NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_2_MASK = TAMPC_STATUS_GLITCHFASTDOMAIN2_Msk, ///< Fast domain glitch error detector 2.
-    NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_3_MASK = TAMPC_STATUS_GLITCHFASTDOMAIN3_Msk, ///< Fast domain glitch error detector 3.
-} nrf_tampc_detector_status_mask_t;
+    NRF_TAMPC_DETECTOR_ACTIVE_SHIELD      = TAMPC_STATUS_ACTIVESHIELD_Msk,       ///< Active shield error detector.
+    NRF_TAMPC_DETECTOR_TAMPER_SWITCH      = TAMPC_STATUS_TAMPERSWITCH_Msk,       ///< External tamper switch error detector.
+    NRF_TAMPC_DETECTOR_PROTECTED_SIGNAL   = TAMPC_STATUS_PROTECT_Msk,            ///< Protected signals error detector.
+    NRF_TAMPC_DETECTOR_CRACEN             = TAMPC_STATUS_CRACENTAMP_Msk,         ///< CRACEN error detector.
+    NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_SLOW = TAMPC_STATUS_GLITCHSLOWDOMAIN0_Msk,  ///< Slow domain glitch error detector.
+    NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_FAST = TAMPC_STATUS_GLITCHFASTDOMAIN0_Msk | ///< Fast domain glitch error detector.
+                                            TAMPC_STATUS_GLITCHFASTDOMAIN1_Msk |
+                                            TAMPC_STATUS_GLITCHFASTDOMAIN2_Msk |
+                                            TAMPC_STATUS_GLITCHFASTDOMAIN3_Msk
+} nrf_tampc_detector_t;
 
 #if NRF_TAMPC_HAS_EXTENDED_PROTECTORS
 /** @brief Signal protector registers. */
@@ -218,8 +226,8 @@ NRF_STATIC_INLINE uint32_t nrf_tampc_int_pending_get(NRF_TAMPC_Type const * p_re
  * @retval true  Error detected.
  * @retval false No error detected.
  */
-NRF_STATIC_INLINE bool nrf_tampc_detector_status_check(NRF_TAMPC_Type const *           p_reg,
-                                                       nrf_tampc_detector_status_mask_t detector);
+NRF_STATIC_INLINE bool nrf_tampc_detector_status_check(NRF_TAMPC_Type const * p_reg,
+                                                       nrf_tampc_detector_t   detector);
 
 /**
  * @brief Function for clearing the error detection status for given error detector.
@@ -227,8 +235,8 @@ NRF_STATIC_INLINE bool nrf_tampc_detector_status_check(NRF_TAMPC_Type const *   
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] detector Error detector for which the error status is to be cleared.
  */
-NRF_STATIC_INLINE void nrf_tampc_detector_status_clear(NRF_TAMPC_Type *                 p_reg,
-                                                       nrf_tampc_detector_status_mask_t detector);
+NRF_STATIC_INLINE void nrf_tampc_detector_status_clear(NRF_TAMPC_Type *     p_reg,
+                                                       nrf_tampc_detector_t detector);
 
 #if NRF_TAMPC_HAS_ACTIVE_SHIELD_CHANNELS
 /**
@@ -646,39 +654,71 @@ NRF_STATIC_INLINE uint32_t nrf_tampc_int_pending_get(NRF_TAMPC_Type const * p_re
     return p_reg->INTPEND;
 }
 
-NRF_STATIC_INLINE bool nrf_tampc_detector_status_check(NRF_TAMPC_Type const *           p_reg,
-                                                       nrf_tampc_detector_status_mask_t detector)
+NRF_STATIC_INLINE bool nrf_tampc_detector_status_check(NRF_TAMPC_Type const * p_reg,
+                                                       nrf_tampc_detector_t   detector)
 {
     return ((p_reg->STATUS & detector) != 0);
 }
 
-NRF_STATIC_INLINE void nrf_tampc_detector_status_clear(NRF_TAMPC_Type *                 p_reg,
-                                                       nrf_tampc_detector_status_mask_t detector)
+NRF_STATIC_INLINE void nrf_tampc_detector_status_clear(NRF_TAMPC_Type *     p_reg,
+                                                       nrf_tampc_detector_t detector)
 {
+#if NRF_TAMPC_HAS_EXTENDED_PROTECTORS
+    switch (detector)
+    {
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_SLOW:
+            nrf_tampc_protector_ctrl_value_set(p_reg, NRF_TAMPC_PROTECT_GLITCH_DOMAIN_SLOW, false);
+            break;
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_FAST:
+            nrf_tampc_protector_ctrl_value_set(p_reg, NRF_TAMPC_PROTECT_GLITCH_DOMAIN_FAST, false);
+            break;
+        default:
+            break;
+    }
+#endif
+
+#if NRF_TAMPC_HAS_DETECTORS_ENABLE
+    switch (detector)
+    {
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_SLOW:
+            p_reg->ENABLE = ((p_reg->ENABLE & ~TAMPC_ENABLE_GLITCHSLOWDOMAIN_Msk) |
+                (TAMPC_ENABLE_GLITCHSLOWDOMAIN_Disabled << TAMPC_ENABLE_GLITCHSLOWDOMAIN_Pos));
+            break;
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_FAST:
+            p_reg->ENABLE = ((p_reg->ENABLE & ~TAMPC_ENABLE_GLITCHFASTDOMAIN_Msk) |
+                (TAMPC_ENABLE_GLITCHFASTDOMAIN_Disabled << TAMPC_ENABLE_GLITCHFASTDOMAIN_Pos));
+            break;
+        default:
+            break;
+    }
+#endif
+
     p_reg->STATUS = detector;
+
+#if NRF_TAMPC_HAS_DETECTORS_ENABLE
+    switch (detector)
+    {
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_SLOW:
+            p_reg->ENABLE = ((p_reg->ENABLE & ~TAMPC_ENABLE_GLITCHSLOWDOMAIN_Msk) |
+                (TAMPC_ENABLE_GLITCHSLOWDOMAIN_Enabled << TAMPC_ENABLE_GLITCHSLOWDOMAIN_Pos));
+            break;
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_FAST:
+            p_reg->ENABLE = ((p_reg->ENABLE & ~TAMPC_ENABLE_GLITCHFASTDOMAIN_Msk) |
+                (TAMPC_ENABLE_GLITCHFASTDOMAIN_Enabled << TAMPC_ENABLE_GLITCHFASTDOMAIN_Pos));
+            break;
+        default:
+            break;
+    }
+#endif
 
 #if NRF_TAMPC_HAS_EXTENDED_PROTECTORS
     switch (detector)
     {
-        case NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_SLOW_0_MASK:
-            p_reg->PROTECT.GLITCHSLOWDOMAIN.STATUS =
-                TAMPC_PROTECT_GLITCHSLOWDOMAIN_STATUS_ERROR_Msk;
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_SLOW:
+            nrf_tampc_protector_ctrl_value_set(p_reg, NRF_TAMPC_PROTECT_GLITCH_DOMAIN_SLOW, true);
             break;
-        case NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_0_MASK:
-            p_reg->PROTECT.GLITCHFASTDOMAIN.STATUS =
-                TAMPC_PROTECT_GLITCHFASTDOMAIN_STATUS_ERROR_Msk;
-            break;
-        case NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_1_MASK:
-            p_reg->PROTECT.GLITCHFASTDOMAIN.STATUS =
-                TAMPC_PROTECT_GLITCHFASTDOMAIN_STATUS_ERROR_Msk;
-            break;
-        case NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_2_MASK:
-            p_reg->PROTECT.GLITCHFASTDOMAIN.STATUS =
-                TAMPC_PROTECT_GLITCHFASTDOMAIN_STATUS_ERROR_Msk;
-            break;
-        case NRF_TAMPC_DETECTOR_STATUS_GLITCH_DOMAIN_FAST_3_MASK:
-            p_reg->PROTECT.GLITCHFASTDOMAIN.STATUS =
-                TAMPC_PROTECT_GLITCHFASTDOMAIN_STATUS_ERROR_Msk;
+        case NRF_TAMPC_DETECTOR_GLITCH_DOMAIN_FAST:
+            nrf_tampc_protector_ctrl_value_set(p_reg, NRF_TAMPC_PROTECT_GLITCH_DOMAIN_FAST, true);
             break;
         default:
             break;
