@@ -3,9 +3,20 @@ All notable changes to this project are documented in this file.
 
 ## [3.2.0]
 ### Added
+- Added a function for checking whether the specified voltage regulator is enabled in the REGULATORS HAL.
+- Added a function for checking whether an inductor is connected to the DCC pin in the REGULATORS HAL.
+- Added a function for checking if the detected voltage is below or above the threshold of VPOF (POF Comparator's threshold voltage) in the REGULATORS HAL.
 
 ### Changed
 - Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, one for setting (nrf_power_gpregret_set), and another one for reading (nrf_power_gpregret_get). A new `reg_num` argument was added to both of them.
+- Replaced nrf_regulators_dcdcen_set() and nrf_regulators_dcdcen_vddh_set() functions with nrf_regulators_vreg_enable_set().
+- Replaced nrf_regulators_pofcon_set() and nrf_regulators_pofcon_vddh_set() functions with nrf_regulators_config_set().
+- Replaced nrf_regulators_pofcon_get() function with nrf_regulators_pof_config_get().
+- Renamed nrf_regulators_mainregstatus_get() function to nrf_regulators_main_status_get().
+- Renamed NRF_REGULATORS_POTHR_V{XY} macros to NRF_REGULATORS_POF_THR_{X}V{Y}.
+- Renamed NRF_REGULATORS_PORTHRVDDH_V{XY} macros to NRF_REGULATORS_POF_THR_VDDH_{X}V{Y}.
+- Renamed nrf_regulators_pof_thrvddh_t structure to nrf_regulators_pof_thr_vddh_t.
+- Renamed macros indicating features presence in the REGULATORS HAL.
 
 ### Fixed
 
