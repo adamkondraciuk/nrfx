@@ -674,8 +674,10 @@ static nrfx_err_t spim_xfer(NRF_SPIM_Type               * p_spim,
     nrfx_err_t err_code;
     // EasyDMA requires that transfer buffers are placed in Data RAM region;
     // signal error if they are not.
-    if ((p_xfer_desc->p_tx_buffer != NULL && !nrfx_is_in_ram(p_xfer_desc->p_tx_buffer)) ||
-        (p_xfer_desc->p_rx_buffer != NULL && !nrfx_is_in_ram(p_xfer_desc->p_rx_buffer)))
+    if ((p_xfer_desc->p_tx_buffer != NULL &&
+         !nrf_dma_accessible_check(p_spim, p_xfer_desc->p_tx_buffer)) ||
+        (p_xfer_desc->p_rx_buffer != NULL &&
+         !nrf_dma_accessible_check(p_spim, p_xfer_desc->p_rx_buffer)))
     {
         p_cb->transfer_in_progress = false;
         err_code = NRFX_ERROR_INVALID_ADDR;
