@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [3.2.0]
+### Added
+
+### Changed
+- Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, one for setting (nrf_power_gpregret_set), and another one for reading (nrf_power_gpregret_get). A new `reg_num` argument was added to both of them.
+
+### Fixed
+
 ## [3.1.0] - 2023-06-28
 
 ### Added
