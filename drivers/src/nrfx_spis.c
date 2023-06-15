@@ -40,6 +40,7 @@ static void csn_event_handler(nrfx_gpiote_pin_t     pin,
     (void)trigger;
     (void)p_context;
 }
+static nrfx_gpiote_t const gpiote = NRFX_GPIOTE_INSTANCE(0);
 #endif
 
 
@@ -145,7 +146,7 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
     // first as that pin number may be different now.
     if (p_cb->csn_pin != NRF_SPIS_PIN_NOT_CONNECTED)
     {
-        nrfx_gpiote_pin_uninit(p_cb->csn_pin);
+        nrfx_gpiote_pin_uninit(&gpiote, p_cb->csn_pin);
         p_cb->csn_pin = NRF_SPIS_PIN_NOT_CONNECTED;
     }
 
@@ -164,10 +165,14 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
     nrfx_gpiote_handler_config_t handler_config = {
         .handler = csn_event_handler
     };
-    nrfx_err_t err_code = nrfx_gpiote_input_configure(csn_pin,
-                                                      NULL,
-                                                      &trigger_config,
-                                                      &handler_config);
+    nrfx_gpiote_input_pin_config_t config = {
+        .p_pull_config    = NULL,
+        .p_trigger_config = &trigger_config,
+        .p_handler_config = &handler_config;
+    }
+    nrfx_err_t err_code = nrfx_gpiote_input_configure(&gpiote,
+                                                      csn_pin,
+                                                      &config);
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_ERROR("Function: %s, error code: %s.",
@@ -176,7 +181,7 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
         return false;
     }
 
-    nrfx_gpiote_trigger_enable(csn_pin, true);
+    nrfx_gpiote_trigger_enable(&gpiote, csn_pin, true);
 
     p_cb->csn_pin = csn_pin;
 #endif
@@ -247,9 +252,9 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
     // (the GPIOTE driver may be already initialized at this point, by this
     // driver when another SPIS instance is used or by an application code,
     // so just ignore the returned value here).
-    (void)nrfx_gpiote_init(NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
+    (void)nrfx_gpiote_init(&gpiote, NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
 
-    err_code = nrfx_gpiote_channel_alloc(&p_cb->gpiote_ch);
+    err_code = nrfx_gpiote_channel_alloc(&gpiote, &p_cb->gpiote_ch);
     if (err_code != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_INTERNAL;
@@ -267,7 +272,7 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
         if (!spis_configure(p_instance, p_config))
         {
 #if defined(USE_DMA_ISSUE_WORKAROUND)
-            nrfx_gpiote_channel_free(p_cb->gpiote_ch);
+            nrfx_gpiote_channel_free(&gpiote, p_cb->gpiote_ch);
 #endif
             err_code = NRFX_ERROR_INVALID_PARAM;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -328,9 +333,9 @@ void nrfx_spis_uninit(nrfx_spis_t const * p_instance)
 #if defined(USE_DMA_ISSUE_WORKAROUND)
     if (p_cb->csn_pin != NRF_SPIS_PIN_NOT_CONNECTED)
     {
-        nrfx_gpiote_pin_uninit(p_cb->csn_pin);
+        nrfx_gpiote_pin_uninit(&gpiote, p_cb->csn_pin);
     }
-    nrfx_gpiote_channel_free(p_cb->gpiote_ch);
+    nrfx_gpiote_channel_free(&gpiote, p_cb->gpiote_ch);
 #endif
 
     #define DISABLE_ALL 0xFFFFFFFF
