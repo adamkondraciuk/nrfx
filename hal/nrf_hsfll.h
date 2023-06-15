@@ -577,13 +577,13 @@ NRF_STATIC_INLINE void nrf_hsfll_trim_set(NRF_HSFLL_Type *         p_reg,
                                           nrf_hsfll_trim_t const * p_trim)
 {
     NRFX_ASSERT(p_trim);
-    nrf_hsfll_mirror_lock_set(p_reg, false);
+    nrf_hsfll_mirror_lock_set(p_reg, true);
 
     p_reg->TRIM.VSUP   = p_trim->vsup;
     p_reg->TRIM.COARSE = p_trim->coarse;
     p_reg->TRIM.FINE   = p_trim->fine;
 
-    nrf_hsfll_mirror_lock_set(p_reg, true);
+    nrf_hsfll_mirror_lock_set(p_reg, false);
 }
 
 NRF_STATIC_INLINE void nrf_hsfll_trim_get(NRF_HSFLL_Type const * p_reg,
