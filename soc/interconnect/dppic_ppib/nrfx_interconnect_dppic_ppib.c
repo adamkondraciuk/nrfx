@@ -65,7 +65,6 @@ bool nrfx_interconnect_direct_connection_check(nrfx_interconnect_dppic_to_dppic_
 
     for (uint8_t i = 0; i < NRFX_INTERCONNECT_DPPIC_PPIB_COUNT; i++)
     {
-        
         if (interconnect_dppic_ppib[i].dppic != p_path->src_dppic->dppic)
         {
             continue;
@@ -114,13 +113,13 @@ nrf_apb_index_t nrfx_interconnect_apb_index_get(uint32_t addr)
     {
         nrfx_interconnect_dppic_t const * p_dppic = &interconnect_dppic[i];
         uint8_t bus_address_area = nrf_address_bus_get(addr, p_dppic->apb_size);
-        
+
         if (bus_address_area == nrf_address_bus_get((uint32_t)p_dppic->dppic, p_dppic->apb_size))
         {
             return (nrf_apb_index_t)bus_address_area;
         }
     }
-    return 0;
+    return (nrf_apb_index_t)0;
 }
 
 #endif // defined(LUMOS_XXAA)
