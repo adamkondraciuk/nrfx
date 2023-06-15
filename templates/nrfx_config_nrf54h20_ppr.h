@@ -20,7 +20,7 @@
 /**
  * @brief NRFX_COMP_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_COMP_ENABLED
 #define NRFX_COMP_ENABLED 0
@@ -38,7 +38,7 @@
 /**
  * @brief NRFX_COMP_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_COMP_CONFIG_LOG_ENABLED
 #define NRFX_COMP_CONFIG_LOG_ENABLED 0
@@ -62,7 +62,7 @@
 /**
  * @brief NRFX_DPPI_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_DPPI_ENABLED
 #define NRFX_DPPI_ENABLED 0
@@ -71,7 +71,7 @@
 /**
  * @brief NRFX_DPPI_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_DPPI_CONFIG_LOG_ENABLED
 #define NRFX_DPPI_CONFIG_LOG_ENABLED 0
@@ -207,7 +207,7 @@
 /**
  * @brief NRFX_EGU_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_EGU_ENABLED
 #define NRFX_EGU_ENABLED 0
@@ -225,7 +225,7 @@
 /**
  * @brief NRFX_EGU130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_EGU130_ENABLED
 #define NRFX_EGU130_ENABLED 0
@@ -234,7 +234,7 @@
 /**
  * @brief NRFX_GPIOTE_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GPIOTE_ENABLED
 #define NRFX_GPIOTE_ENABLED 0
@@ -261,7 +261,7 @@
 /**
  * @brief NRFX_GPIOTE_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GPIOTE_CONFIG_LOG_ENABLED
 #define NRFX_GPIOTE_CONFIG_LOG_ENABLED 0
@@ -283,9 +283,18 @@
 #endif
 
 /**
+ * @brief NRFX_GPIOTE130_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE130_ENABLED
+#define NRFX_GPIOTE130_ENABLED 0
+#endif
+
+/**
  * @brief NRFX_GRTC_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GRTC_ENABLED
 #define NRFX_GRTC_ENABLED 0
@@ -319,7 +328,7 @@
 /**
  * @brief NRFX_GRTC_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_GRTC_CONFIG_LOG_ENABLED
 #define NRFX_GRTC_CONFIG_LOG_ENABLED 0
@@ -385,7 +394,7 @@
 /**
  * @brief NRFX_LPCOMP_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_LPCOMP_ENABLED
 #define NRFX_LPCOMP_ENABLED 0
@@ -403,7 +412,7 @@
 /**
  * @brief NRFX_LPCOMP_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_LPCOMP_CONFIG_LOG_ENABLED
 #define NRFX_LPCOMP_CONFIG_LOG_ENABLED 0
@@ -427,7 +436,7 @@
 /**
  * @brief NRFX_MVDMA_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_MVDMA_ENABLED
 #define NRFX_MVDMA_ENABLED 0
@@ -436,7 +445,7 @@
 /**
  * @brief NRFX_MVDMA120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_MVDMA120_ENABLED
 #define NRFX_MVDMA120_ENABLED 0
@@ -445,7 +454,7 @@
 /**
  * @brief NRFX_NFCT_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_NFCT_ENABLED
 #define NRFX_NFCT_ENABLED 0
@@ -472,7 +481,7 @@
 /**
  * @brief NRFX_NFCT_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_NFCT_CONFIG_LOG_ENABLED
 #define NRFX_NFCT_CONFIG_LOG_ENABLED 0
@@ -496,7 +505,7 @@
 /**
  * @brief NRFX_PDM_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PDM_ENABLED
 #define NRFX_PDM_ENABLED 0
@@ -514,7 +523,7 @@
 /**
  * @brief NRFX_PDM_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PDM_CONFIG_LOG_ENABLED
 #define NRFX_PDM_CONFIG_LOG_ENABLED 0
@@ -538,7 +547,7 @@
 /**
  * @brief NRFX_PRS_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_ENABLED
 #define NRFX_PRS_ENABLED 0
@@ -547,7 +556,7 @@
 /**
  * @brief NRFX_PRS_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_CONFIG_LOG_ENABLED
 #define NRFX_PRS_CONFIG_LOG_ENABLED 0
@@ -571,7 +580,7 @@
 /**
  * @brief NRFX_PRS_BOX_0_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_0_ENABLED
 #define NRFX_PRS_BOX_0_ENABLED 0
@@ -580,7 +589,7 @@
 /**
  * @brief NRFX_PRS_BOX_1_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_1_ENABLED
 #define NRFX_PRS_BOX_1_ENABLED 0
@@ -589,7 +598,7 @@
 /**
  * @brief NRFX_PRS_BOX_2_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_2_ENABLED
 #define NRFX_PRS_BOX_2_ENABLED 0
@@ -598,7 +607,7 @@
 /**
  * @brief NRFX_PRS_BOX_3_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_3_ENABLED
 #define NRFX_PRS_BOX_3_ENABLED 0
@@ -607,7 +616,7 @@
 /**
  * @brief NRFX_PRS_BOX_4_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_4_ENABLED
 #define NRFX_PRS_BOX_4_ENABLED 0
@@ -616,7 +625,7 @@
 /**
  * @brief NRFX_PRS_BOX_5_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_5_ENABLED
 #define NRFX_PRS_BOX_5_ENABLED 0
@@ -625,7 +634,7 @@
 /**
  * @brief NRFX_PRS_BOX_6_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_6_ENABLED
 #define NRFX_PRS_BOX_6_ENABLED 0
@@ -634,7 +643,7 @@
 /**
  * @brief NRFX_PRS_BOX_7_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_7_ENABLED
 #define NRFX_PRS_BOX_7_ENABLED 0
@@ -643,25 +652,16 @@
 /**
  * @brief NRFX_PRS_BOX_8_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_8_ENABLED
 #define NRFX_PRS_BOX_8_ENABLED 0
 #endif
 
 /**
- * @brief NRFX_PRS_BOX_9_ENABLED
- *
- * Boolean. Accepted values 0 and 1.
- */
-#ifndef NRFX_PRS_BOX_9_ENABLED
-#define NRFX_PRS_BOX_9_ENABLED 0
-#endif
-
-/**
  * @brief NRFX_PWM_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM_ENABLED
 #define NRFX_PWM_ENABLED 0
@@ -679,7 +679,7 @@
 /**
  * @brief NRFX_PWM_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM_CONFIG_LOG_ENABLED
 #define NRFX_PWM_CONFIG_LOG_ENABLED 0
@@ -703,7 +703,7 @@
 /**
  * @brief NRFX_PWM120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM120_ENABLED
 #define NRFX_PWM120_ENABLED 0
@@ -712,7 +712,7 @@
 /**
  * @brief NRFX_PWM130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM130_ENABLED
 #define NRFX_PWM130_ENABLED 0
@@ -721,7 +721,7 @@
 /**
  * @brief NRFX_PWM131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM131_ENABLED
 #define NRFX_PWM131_ENABLED 0
@@ -730,7 +730,7 @@
 /**
  * @brief NRFX_PWM132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM132_ENABLED
 #define NRFX_PWM132_ENABLED 0
@@ -739,7 +739,7 @@
 /**
  * @brief NRFX_PWM133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PWM133_ENABLED
 #define NRFX_PWM133_ENABLED 0
@@ -748,7 +748,7 @@
 /**
  * @brief NRFX_QDEC_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_QDEC_ENABLED
 #define NRFX_QDEC_ENABLED 0
@@ -766,7 +766,7 @@
 /**
  * @brief NRFX_QDEC_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_QDEC_CONFIG_LOG_ENABLED
 #define NRFX_QDEC_CONFIG_LOG_ENABLED 0
@@ -790,7 +790,7 @@
 /**
  * @brief NRFX_QDEC130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_QDEC130_ENABLED
 #define NRFX_QDEC130_ENABLED 0
@@ -799,7 +799,7 @@
 /**
  * @brief NRFX_QDEC131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_QDEC131_ENABLED
 #define NRFX_QDEC131_ENABLED 0
@@ -808,7 +808,7 @@
 /**
  * @brief NRFX_RTC_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_RTC_ENABLED
 #define NRFX_RTC_ENABLED 0
@@ -826,7 +826,7 @@
 /**
  * @brief NRFX_RTC_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_RTC_CONFIG_LOG_ENABLED
 #define NRFX_RTC_CONFIG_LOG_ENABLED 0
@@ -850,7 +850,7 @@
 /**
  * @brief NRFX_RTC130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_RTC130_ENABLED
 #define NRFX_RTC130_ENABLED 0
@@ -859,7 +859,7 @@
 /**
  * @brief NRFX_RTC131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_RTC131_ENABLED
 #define NRFX_RTC131_ENABLED 0
@@ -868,7 +868,7 @@
 /**
  * @brief NRFX_SAADC_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SAADC_ENABLED
 #define NRFX_SAADC_ENABLED 0
@@ -886,7 +886,7 @@
 /**
  * @brief NRFX_SAADC_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SAADC_CONFIG_LOG_ENABLED
 #define NRFX_SAADC_CONFIG_LOG_ENABLED 0
@@ -910,7 +910,7 @@
 /**
  * @brief NRFX_SPIM_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM_ENABLED
 #define NRFX_SPIM_ENABLED 0
@@ -928,7 +928,7 @@
 /**
  * @brief NRFX_SPIM_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM_CONFIG_LOG_ENABLED
 #define NRFX_SPIM_CONFIG_LOG_ENABLED 0
@@ -952,7 +952,7 @@
 /**
  * @brief NRFX_SPIM120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM120_ENABLED
 #define NRFX_SPIM120_ENABLED 0
@@ -961,7 +961,7 @@
 /**
  * @brief NRFX_SPIM121_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM121_ENABLED
 #define NRFX_SPIM121_ENABLED 0
@@ -970,7 +970,7 @@
 /**
  * @brief NRFX_SPIM130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM130_ENABLED
 #define NRFX_SPIM130_ENABLED 0
@@ -979,7 +979,7 @@
 /**
  * @brief NRFX_SPIM131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM131_ENABLED
 #define NRFX_SPIM131_ENABLED 0
@@ -988,7 +988,7 @@
 /**
  * @brief NRFX_SPIM132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM132_ENABLED
 #define NRFX_SPIM132_ENABLED 0
@@ -997,7 +997,7 @@
 /**
  * @brief NRFX_SPIM133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM133_ENABLED
 #define NRFX_SPIM133_ENABLED 0
@@ -1006,7 +1006,7 @@
 /**
  * @brief NRFX_SPIM134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM134_ENABLED
 #define NRFX_SPIM134_ENABLED 0
@@ -1015,7 +1015,7 @@
 /**
  * @brief NRFX_SPIM135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM135_ENABLED
 #define NRFX_SPIM135_ENABLED 0
@@ -1024,7 +1024,7 @@
 /**
  * @brief NRFX_SPIM136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM136_ENABLED
 #define NRFX_SPIM136_ENABLED 0
@@ -1033,7 +1033,7 @@
 /**
  * @brief NRFX_SPIM137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIM137_ENABLED
 #define NRFX_SPIM137_ENABLED 0
@@ -1042,7 +1042,7 @@
 /**
  * @brief NRFX_SPIS_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS_ENABLED
 #define NRFX_SPIS_ENABLED 0
@@ -1060,7 +1060,7 @@
 /**
  * @brief NRFX_SPIS_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS_CONFIG_LOG_ENABLED
 #define NRFX_SPIS_CONFIG_LOG_ENABLED 0
@@ -1084,7 +1084,7 @@
 /**
  * @brief NRFX_SPIS120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS120_ENABLED
 #define NRFX_SPIS120_ENABLED 0
@@ -1093,7 +1093,7 @@
 /**
  * @brief NRFX_SPIS130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS130_ENABLED
 #define NRFX_SPIS130_ENABLED 0
@@ -1102,7 +1102,7 @@
 /**
  * @brief NRFX_SPIS131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS131_ENABLED
 #define NRFX_SPIS131_ENABLED 0
@@ -1111,7 +1111,7 @@
 /**
  * @brief NRFX_SPIS132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS132_ENABLED
 #define NRFX_SPIS132_ENABLED 0
@@ -1120,7 +1120,7 @@
 /**
  * @brief NRFX_SPIS133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS133_ENABLED
 #define NRFX_SPIS133_ENABLED 0
@@ -1129,7 +1129,7 @@
 /**
  * @brief NRFX_SPIS134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS134_ENABLED
 #define NRFX_SPIS134_ENABLED 0
@@ -1138,7 +1138,7 @@
 /**
  * @brief NRFX_SPIS135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS135_ENABLED
 #define NRFX_SPIS135_ENABLED 0
@@ -1147,7 +1147,7 @@
 /**
  * @brief NRFX_SPIS136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS136_ENABLED
 #define NRFX_SPIS136_ENABLED 0
@@ -1156,7 +1156,7 @@
 /**
  * @brief NRFX_SPIS137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_SPIS137_ENABLED
 #define NRFX_SPIS137_ENABLED 0
@@ -1165,7 +1165,7 @@
 /**
  * @brief NRFX_TEMP_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TEMP_ENABLED
 #define NRFX_TEMP_ENABLED 0
@@ -1183,7 +1183,7 @@
 /**
  * @brief NRFX_TEMP_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TEMP_CONFIG_LOG_ENABLED
 #define NRFX_TEMP_CONFIG_LOG_ENABLED 0
@@ -1207,7 +1207,7 @@
 /**
  * @brief NRFX_TIMER_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER_ENABLED
 #define NRFX_TIMER_ENABLED 0
@@ -1225,7 +1225,7 @@
 /**
  * @brief NRFX_TIMER_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER_CONFIG_LOG_ENABLED
 #define NRFX_TIMER_CONFIG_LOG_ENABLED 0
@@ -1249,7 +1249,7 @@
 /**
  * @brief NRFX_TIMER120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER120_ENABLED
 #define NRFX_TIMER120_ENABLED 0
@@ -1258,7 +1258,7 @@
 /**
  * @brief NRFX_TIMER121_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER121_ENABLED
 #define NRFX_TIMER121_ENABLED 0
@@ -1267,7 +1267,7 @@
 /**
  * @brief NRFX_TIMER130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER130_ENABLED
 #define NRFX_TIMER130_ENABLED 0
@@ -1276,7 +1276,7 @@
 /**
  * @brief NRFX_TIMER131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER131_ENABLED
 #define NRFX_TIMER131_ENABLED 0
@@ -1285,7 +1285,7 @@
 /**
  * @brief NRFX_TIMER132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER132_ENABLED
 #define NRFX_TIMER132_ENABLED 0
@@ -1294,7 +1294,7 @@
 /**
  * @brief NRFX_TIMER133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER133_ENABLED
 #define NRFX_TIMER133_ENABLED 0
@@ -1303,7 +1303,7 @@
 /**
  * @brief NRFX_TIMER134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER134_ENABLED
 #define NRFX_TIMER134_ENABLED 0
@@ -1312,7 +1312,7 @@
 /**
  * @brief NRFX_TIMER135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER135_ENABLED
 #define NRFX_TIMER135_ENABLED 0
@@ -1321,7 +1321,7 @@
 /**
  * @brief NRFX_TIMER136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER136_ENABLED
 #define NRFX_TIMER136_ENABLED 0
@@ -1330,7 +1330,7 @@
 /**
  * @brief NRFX_TIMER137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TIMER137_ENABLED
 #define NRFX_TIMER137_ENABLED 0
@@ -1339,7 +1339,7 @@
 /**
  * @brief NRFX_TWIM_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM_ENABLED
 #define NRFX_TWIM_ENABLED 0
@@ -1357,7 +1357,7 @@
 /**
  * @brief NRFX_TWIM_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM_CONFIG_LOG_ENABLED
 #define NRFX_TWIM_CONFIG_LOG_ENABLED 0
@@ -1381,7 +1381,7 @@
 /**
  * @brief NRFX_TWIM130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM130_ENABLED
 #define NRFX_TWIM130_ENABLED 0
@@ -1390,7 +1390,7 @@
 /**
  * @brief NRFX_TWIM131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM131_ENABLED
 #define NRFX_TWIM131_ENABLED 0
@@ -1399,7 +1399,7 @@
 /**
  * @brief NRFX_TWIM132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM132_ENABLED
 #define NRFX_TWIM132_ENABLED 0
@@ -1408,7 +1408,7 @@
 /**
  * @brief NRFX_TWIM133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM133_ENABLED
 #define NRFX_TWIM133_ENABLED 0
@@ -1417,7 +1417,7 @@
 /**
  * @brief NRFX_TWIM134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM134_ENABLED
 #define NRFX_TWIM134_ENABLED 0
@@ -1426,7 +1426,7 @@
 /**
  * @brief NRFX_TWIM135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM135_ENABLED
 #define NRFX_TWIM135_ENABLED 0
@@ -1435,7 +1435,7 @@
 /**
  * @brief NRFX_TWIM136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM136_ENABLED
 #define NRFX_TWIM136_ENABLED 0
@@ -1444,7 +1444,7 @@
 /**
  * @brief NRFX_TWIM137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIM137_ENABLED
 #define NRFX_TWIM137_ENABLED 0
@@ -1453,7 +1453,7 @@
 /**
  * @brief NRFX_TWIS_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS_ENABLED
 #define NRFX_TWIS_ENABLED 0
@@ -1471,7 +1471,7 @@
 /**
  * @brief NRFX_TWIS_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS_CONFIG_LOG_ENABLED
 #define NRFX_TWIS_CONFIG_LOG_ENABLED 0
@@ -1480,7 +1480,7 @@
 /**
  * @brief NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY - Assume that any instance would be initialized only once.
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY
 #define NRFX_TWIS_ASSUME_INIT_AFTER_RESET_ONLY 0
@@ -1489,7 +1489,7 @@
 /**
  * @brief NRFX_TWIS_NO_SYNC_MODE - Remove support for synchronous mode.
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS_NO_SYNC_MODE
 #define NRFX_TWIS_NO_SYNC_MODE 0
@@ -1513,7 +1513,7 @@
 /**
  * @brief NRFX_TWIS130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS130_ENABLED
 #define NRFX_TWIS130_ENABLED 0
@@ -1522,7 +1522,7 @@
 /**
  * @brief NRFX_TWIS131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS131_ENABLED
 #define NRFX_TWIS131_ENABLED 0
@@ -1531,7 +1531,7 @@
 /**
  * @brief NRFX_TWIS132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS132_ENABLED
 #define NRFX_TWIS132_ENABLED 0
@@ -1540,7 +1540,7 @@
 /**
  * @brief NRFX_TWIS133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS133_ENABLED
 #define NRFX_TWIS133_ENABLED 0
@@ -1549,7 +1549,7 @@
 /**
  * @brief NRFX_TWIS134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS134_ENABLED
 #define NRFX_TWIS134_ENABLED 0
@@ -1558,7 +1558,7 @@
 /**
  * @brief NRFX_TWIS135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS135_ENABLED
 #define NRFX_TWIS135_ENABLED 0
@@ -1567,7 +1567,7 @@
 /**
  * @brief NRFX_TWIS136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS136_ENABLED
 #define NRFX_TWIS136_ENABLED 0
@@ -1576,7 +1576,7 @@
 /**
  * @brief NRFX_TWIS137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_TWIS137_ENABLED
 #define NRFX_TWIS137_ENABLED 0
@@ -1585,7 +1585,7 @@
 /**
  * @brief NRFX_UARTE_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE_ENABLED
 #define NRFX_UARTE_ENABLED 0
@@ -1603,7 +1603,7 @@
 /**
  * @brief NRFX_UARTE_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE_CONFIG_LOG_ENABLED
 #define NRFX_UARTE_CONFIG_LOG_ENABLED 0
@@ -1627,7 +1627,7 @@
 /**
  * @brief NRFX_UARTE120_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE120_ENABLED
 #define NRFX_UARTE120_ENABLED 0
@@ -1636,7 +1636,7 @@
 /**
  * @brief NRFX_UARTE130_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE130_ENABLED
 #define NRFX_UARTE130_ENABLED 0
@@ -1645,7 +1645,7 @@
 /**
  * @brief NRFX_UARTE131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE131_ENABLED
 #define NRFX_UARTE131_ENABLED 0
@@ -1654,7 +1654,7 @@
 /**
  * @brief NRFX_UARTE132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE132_ENABLED
 #define NRFX_UARTE132_ENABLED 0
@@ -1663,7 +1663,7 @@
 /**
  * @brief NRFX_UARTE133_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE133_ENABLED
 #define NRFX_UARTE133_ENABLED 0
@@ -1672,7 +1672,7 @@
 /**
  * @brief NRFX_UARTE134_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE134_ENABLED
 #define NRFX_UARTE134_ENABLED 0
@@ -1681,7 +1681,7 @@
 /**
  * @brief NRFX_UARTE135_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE135_ENABLED
 #define NRFX_UARTE135_ENABLED 0
@@ -1690,7 +1690,7 @@
 /**
  * @brief NRFX_UARTE136_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE136_ENABLED
 #define NRFX_UARTE136_ENABLED 0
@@ -1699,7 +1699,7 @@
 /**
  * @brief NRFX_UARTE137_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_UARTE137_ENABLED
 #define NRFX_UARTE137_ENABLED 0
@@ -1708,7 +1708,7 @@
 /**
  * @brief NRFX_VEVIF_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_VEVIF_ENABLED
 #define NRFX_VEVIF_ENABLED 0
@@ -1717,7 +1717,7 @@
 /**
  * @brief NRFX_WDT_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_WDT_ENABLED
 #define NRFX_WDT_ENABLED 0
@@ -1735,7 +1735,7 @@
 /**
  * @brief NRFX_WDT_CONFIG_NO_IRQ - Remove WDT IRQ handling from WDT driver
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_WDT_CONFIG_NO_IRQ
 #define NRFX_WDT_CONFIG_NO_IRQ 0
@@ -1744,7 +1744,7 @@
 /**
  * @brief NRFX_WDT_CONFIG_LOG_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_WDT_CONFIG_LOG_ENABLED
 #define NRFX_WDT_CONFIG_LOG_ENABLED 0
@@ -1768,7 +1768,7 @@
 /**
  * @brief NRFX_WDT131_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_WDT131_ENABLED
 #define NRFX_WDT131_ENABLED 0
@@ -1777,7 +1777,7 @@
 /**
  * @brief NRFX_WDT132_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_WDT132_ENABLED
 #define NRFX_WDT132_ENABLED 0
