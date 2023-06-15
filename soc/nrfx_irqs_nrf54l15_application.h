@@ -71,12 +71,6 @@ extern "C" {
 #define nrfx_uarte_30_irq_handler       SERIAL30_IRQHandler
 #endif
 
-// GPIOTE20_1_IRQHandler
-#define nrfx_gpiote20_irq_handler       GPIOTE20_1_IRQHandler
-
-// GPIOTE30_1_IRQHandler
-#define nrfx_gpiote30_irq_handler       GPIOTE30_1_IRQHandler
-
 // SAADC_IRQHandler
 #define nrfx_saadc_irq_handler          SAADC_IRQHandler
 
