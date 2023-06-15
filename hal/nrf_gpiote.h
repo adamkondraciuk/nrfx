@@ -9,6 +9,18 @@
 extern "C" {
 #endif
 
+#if !defined(NRF_GPIOTE0) && defined(NRF_GPIOTE)
+#define NRF_GPIOTE0 NRF_GPIOTE
+#endif
+
+#if !defined(GPIOTE0_CH_NUM) && defined(GPIOTE_CH_NUM) && defined(NRF_GPIOTE)
+#define GPIOTE0_CH_NUM GPIOTE_CH_NUM
+#endif
+
+#if !defined(GPIOTE0_AVAILABLE_GPIO_PORTS) && defined(GPIO_COUNT) && defined(NRF_GPIOTE)
+#define GPIOTE0_AVAILABLE_GPIO_PORTS NRFX_BIT_MASK(GPIO_COUNT)
+#endif
+
 /* Internal macro used for NRF_GPIOTE_INT_IN_MASK. */
 #define NRF_GPIOTE_INT_IN(idx, _) NRFX_CONCAT(NRF_GPIOTE_INT_IN, idx, _MASK)
 
@@ -18,6 +30,15 @@ extern "C" {
 * @ingroup nrf_gpiote
 * @brief   Hardware access layer (HAL) for managing the GPIOTE peripheral.
 */
+
+/**
+ * @brief Macro for getting a pointer to the structure of registers of the GPIOTE peripheral.
+ *
+ * @param[in] idx GPIOTE instance index.
+ *
+ * @return Pointer to the structure of registers of the GPIOTE peripheral.
+ */
+#define NRF_GPIOTE_INST_GET(idx) NRFX_CONCAT_2(NRF_GPIOTE, idx)
 
 #if defined(GPIOTE_CONFIG_PORT_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Mask for covering port and pin bits in registers. */
