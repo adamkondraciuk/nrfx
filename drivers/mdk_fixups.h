@@ -125,16 +125,19 @@
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
     #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(__NRFX_DOXYGEN__)
-        #define NRF_GPIOTE130_IRQn      GPIOTE130_0_IRQn
-        #define nrfx_gpiote_irq_handler GPIOTE130_0_IRQHandler
+        #define NRF_GPIOTE130_IRQn          GPIOTE130_0_IRQn
+        #define nrfx_gpiote_130_irq_handler GPIOTE130_0_IRQHandler
     #elif !defined(NRF_CELLCORE)
-        #define NRF_GPIOTE130_IRQn      GPIOTE130_1_IRQn
-        #define nrfx_gpiote_irq_handler GPIOTE130_1_IRQHandler
+        #define NRF_GPIOTE130_IRQn          GPIOTE130_1_IRQn
+        #define nrfx_gpiote_130_irq_handler GPIOTE130_1_IRQHandler
     #endif // defined(NRF_TRUSTZONE_NONSECURE)
 
     #define NRF_GPIOTE_INT_COUNT 7
 
     #define GPIOTE_CH_NUM   8
+    #define GPIOTE130_CH_NUM (GPIOTE130_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE0_AVAILABLE_GPIO_PORTS   0x6UL
+    #define GPIOTE130_AVAILABLE_GPIO_PORTS 0x207UL
     #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
     #define GPIOTE_FEATURE_SET_PRESENT
     #define GPIOTE_FEATURE_CLR_PRESENT
@@ -1929,7 +1932,7 @@
 
 #if defined(NRF54L15_ENGA_XXAA)
     #define LUMOS_XXAA 1
-    
+
     #undef SPIM00_FEATURE_HARDWARE_CSN_PRESENT
     #undef SPIM20_FEATURE_HARDWARE_CSN_PRESENT
     #undef SPIM21_FEATURE_HARDWARE_CSN_PRESENT
@@ -1970,9 +1973,6 @@
 
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
-    #define GPIOTE_CH_NUM   8
-    #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
-
     #define PPIB00_CH_NUM 8
     #define PPIB10_CH_NUM 8
     #define PPIB11_CH_NUM 16
@@ -2002,21 +2002,25 @@
         #define nrfx_grtc_irq_handler GRTC_0_IRQHandler
     #elif defined(NRF_APPLICATION)
         #if defined(NRF_TRUSTZONE_NONSECURE)
-            #define NRF_GPIOTE_IRQ_GROUP    0
-            #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
-            #define nrfx_gpiote_irq_handler GPIOTE20_0_IRQHandler
+            #define NRF_GPIOTE_IRQ_GROUP       0
+            #define NRF_GPIOTE20_IRQn          GPIOTE20_0_IRQn
+            #define nrfx_gpiote_20_irq_handler GPIOTE20_0_IRQHandler
+            #define NRF_GPIOTE30_IRQn          GPIOTE30_0_IRQn
+            #define nrfx_gpiote_30_irq_handler GPIOTE30_0_IRQHandler
 
-            #define NRF_GRTC_IRQ_GROUP      1 // Not sure, no way to check for now.
-            #define GRTC_IRQn               GRTC_1_IRQn
-            #define nrfx_grtc_irq_handler   GRTC_1_IRQHandler
+            #define NRF_GRTC_IRQ_GROUP         1 // Not sure, no way to check for now.
+            #define GRTC_IRQn                  GRTC_1_IRQn
+            #define nrfx_grtc_irq_handler      GRTC_1_IRQHandler
         #else
-            #define NRF_GPIOTE_IRQ_GROUP    1
-            #define NRF_GPIOTE20_IRQn       GPIOTE20_1_IRQn
-            #define nrfx_gpiote_irq_handler GPIOTE20_1_IRQHandler
+            #define NRF_GPIOTE_IRQ_GROUP       1
+            #define NRF_GPIOTE20_IRQn          GPIOTE20_1_IRQn
+            #define nrfx_gpiote_20_irq_handler GPIOTE20_1_IRQHandler
+            #define NRF_GPIOTE30_IRQn          GPIOTE30_1_IRQn
+            #define nrfx_gpiote_30_irq_handler GPIOTE30_1_IRQHandler
 
-            #define NRF_GRTC_IRQ_GROUP    2
-            #define GRTC_IRQn             GRTC_2_IRQn
-            #define nrfx_grtc_irq_handler GRTC_2_IRQHandler
+            #define NRF_GRTC_IRQ_GROUP         2
+            #define GRTC_IRQn                  GRTC_2_IRQn
+            #define nrfx_grtc_irq_handler      GRTC_2_IRQHandler
         #endif // defined(NRF_TRUSTZONE_NONSECURE)
     #else
         #error "Unknown core"
@@ -2047,6 +2051,10 @@
     #define TWIS30_EASYDMA_MAXCNT_SIZE 16
 
     #define GPIOTE_CH_NUM   8
+    #define GPIOTE20_CH_NUM (GPIOTE20_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE30_CH_NUM (GPIOTE30_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE20_AVAILABLE_GPIO_PORTS 0x2UL
+    #define GPIOTE30_AVAILABLE_GPIO_PORTS 0x1UL
     #define GPIOTE_FEATURE_SET_PRESENT
     #define GPIOTE_FEATURE_CLR_PRESENT
     #define GPIOTE_PORT_NUM GPIOTE_EVENTS_PORT_MaxCount
@@ -2582,13 +2590,16 @@
 
     #if defined(NRF_CELLCORE)
         #if defined(NRF_TRUSTZONE_NONSECURE)
-            #define NRF_GPIOTE131_IRQn      GPIOTE131_0_IRQn
-            #define nrfx_gpiote_irq_handler GPIOTE131_0_IRQHandler
+            #define NRF_GPIOTE131_IRQn          GPIOTE131_0_IRQn
+            #define nrfx_gpiote_131_irq_handler GPIOTE131_0_IRQHandler
         #else
-            #define NRF_GPIOTE131_IRQn      GPIOTE131_1_IRQn
-            #define nrfx_gpiote_irq_handler GPIOTE131_1_IRQHandler
+            #define NRF_GPIOTE131_IRQn          GPIOTE131_1_IRQn
+            #define nrfx_gpiote_131_irq_handler GPIOTE131_1_IRQHandler
         #endif // defined(NRF_TRUSTZONE_NONSECURE)
     #endif //defined(NRF_CELLCORE)
+
+    #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)
+    #define GPIOTE131_AVAILABLE_GPIO_PORTS 0x3A07UL
 
     #define GRTC_SYSCOUNTER_INDEX NRF_GRTC_IRQ_GROUP
     // Old HFXO modes are not supported

@@ -161,18 +161,11 @@ extern "C" {
 /* Start of GPIOTE Extended section                                                               */
 /*------------------------------------------------------------------------------------------------*/
 
-#if !defined(NRF_GPIOTE)
-    #if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
-        #if !defined(NRF_CELLCORE)
-            #define NRF_GPIOTE NRF_GPIOTE130
-            #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
-        #else
-            #define NRF_GPIOTE NRF_GPIOTE131
-            #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
-        #endif
-    #elif defined(NRF_GPIOTE20)
-        #define NRF_GPIOTE     NRF_GPIOTE20
-        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE20_IRQn
+#if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
+    #if !defined(NRF_CELLCORE)
+        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
+    #else
+        #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
     #endif
 #endif
 
