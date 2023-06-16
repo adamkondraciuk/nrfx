@@ -42347,7 +42347,6 @@ typedef struct {
 typedef struct {
   __IM  uint32_t  LOADBUF;                           /*!< (@ 0x00000000) Load-buffer status                                    */
   __IM  uint32_t  WRITEBUF;                          /*!< (@ 0x00000004) Write-buffer status                                   */
-  __IM  uint32_t  EMPTY;                             /*!< (@ 0x00000008) Internal write-buffer is empty                        */
 } NRF_RRAMC_BUFSTATUS_Type;                          /*!< Size = 12 (0x00C)                                                    */
 
 /* RRAMC_BUFSTATUS_LOADBUF: Load-buffer status */
