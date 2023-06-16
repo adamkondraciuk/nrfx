@@ -228,8 +228,7 @@ extern "C" {
          ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(4))   ||                                 \
          ((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(8))   ||                                 \
          (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(16)) && (NRF_SPIM_HAS_16_MHZ_FREQ)) ||  \
-         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(32)) && (NRF_SPIM_HAS_32_MHZ_FREQ)) )), \
-        "The specified frequency cannot be achieved with the given SPIM instance.")
+         (((uint32_t)frequency == (uint32_t)NRFX_MHZ_TO_HZ(32)) && (NRF_SPIM_HAS_32_MHZ_FREQ)))))
 
 /** @brief SPIM tasks. */
 typedef enum
