@@ -214,6 +214,7 @@ extern "C" {
     #define NRFX_PRS_BOX_6_ADDR NRF_UARTE136
     #define NRFX_PRS_BOX_7_ADDR NRF_UARTE137
     #define NRFX_PRS_BOX_8_ADDR NRF_UARTE120
+    #define NRFX_PRS_BOX_9_ADDR NRF_LPCOMP
 #elif defined(LUMOS_XXAA)
     #define NRF_PRS_BOX_EXT
     #define NRFX_PRS_BOX_0_ADDR NRF_UARTE00

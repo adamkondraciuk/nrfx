@@ -273,6 +273,12 @@ extern "C" {
 #define nrfx_saadc_irq_handler       SAADC_IRQHandler
 
 // COMP_LPCOMP_IRQn
+#if NRFX_CHECK(NRFX_PRS_ENABLED) && NRFX_CHECK(NRFX_PRS_BOX_9_ENABLED)
+#define nrfx_prs_box_9_irq_handler COMP_LPCOMP_IRQHandler
+#else
+#define nrfx_comp_irq_handler      COMP_LPCOMP_IRQHandler
+#define nrfx_lpcomp_irq_handler    COMP_LPCOMP_IRQHandler
+#endif
 
 // TEMP_IRQn
 #define nrfx_temp_irq_handler        TEMP_IRQHandler
