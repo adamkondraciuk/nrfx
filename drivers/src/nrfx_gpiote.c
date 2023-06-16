@@ -148,6 +148,10 @@ static gpiote_control_block_t m_cb = {
     .available_channels_mask = NRFX_GPIOTE_APP_CHANNELS_MASK
 };
 
+#if defined(NRF_GPIO_LATCH_PRESENT) || (!FULL_PORTS_PRESENT)
+static const uint8_t ports[GPIO_COUNT] = GPIO_PORT_NUM_LIST;
+#endif
+
 #define GPIO_PORT_OFFSET(i, _) \
     NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(NRFX_CONCAT(P, i)),(NRFX_CONCAT(P, i, _PIN_NUM)), (0))
 
@@ -646,12 +650,7 @@ void nrfx_gpiote_uninit(void)
             pin_uninit(i);
     }
 #else
-#define _PORT_ID(periph, prefix, i, _) i,
 #define _PORT_LEN(periph, prefix, i, _) NRFX_CONCAT(periph, prefix, i, _PIN_NUM),
-    static const uint8_t ports[] =
-    {
-        NRFX_FOREACH_PRESENT(P, _PORT_ID, (), (), _)
-    };
     static const uint8_t port_lens[] =
     {
         NRFX_FOREACH_PRESENT(P, _PORT_LEN, (), (), _)
@@ -665,7 +664,6 @@ void nrfx_gpiote_uninit(void)
             pin_uninit(32 * ports[i] + j);
         }
     }
-#undef _PORT_ID
 #undef _PORT_LEN
 #endif
 
@@ -977,20 +975,20 @@ static void port_event_handle(void)
                 uint32_t pin = NRF_CTZ(latch[i]);
 
                 /* Convert to absolute value. */
-                pin += 32 * i;
+                uint32_t abs_pin = NRF_PIN_PORT_TO_PIN_NUMBER(pin, ports[i]);
                 nrf_gpio_pin_sense_t sense;
                 nrfx_gpiote_trigger_t trigger =
-                    PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(pin)]);
+                    PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(abs_pin)]);
 
-                nrf_bitmask_bit_clear(pin, latch);
-                sense = nrfy_gpio_pin_sense_get(pin);
+                nrf_bitmask_bit_clear(pin, &latch[i]);
+                sense = nrfy_gpio_pin_sense_get(abs_pin);
 
-                next_sense_cond_call_handler(pin, trigger, sense);
+                next_sense_cond_call_handler(abs_pin, trigger, sense);
                 /* Try to clear LATCH bit corresponding to currently processed pin.
                  * This may not succeed if the pin's state changed during the interrupt processing
                  * and now it matches the new sense configuration. In such case,
                  * the pin will be processed again in another iteration of the outer loop. */
-                nrfy_gpio_pin_latch_clear(pin);
+                nrfy_gpio_pin_latch_clear(abs_pin);
            }
         }
 
