@@ -19,6 +19,7 @@ All notable changes to this project are documented in this file.
 - Renamed NRF_REGULATORS_PORTHRVDDH_V{XY} macros to NRF_REGULATORS_POF_THR_VDDH_{X}V{Y}.
 - Renamed nrf_regulators_pof_thrvddh_t structure to nrf_regulators_pof_thr_vddh_t.
 - Renamed macros indicating features presence in the REGULATORS HAL.
+- Changed a default value of the source reference structure member from 1.8V to 1.2V in the COMP driver configuration structure.
 
 ### Fixed
 

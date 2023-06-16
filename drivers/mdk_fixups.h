@@ -450,6 +450,14 @@
     #define SPIM136_FEATURE_DCX_PRESENT  0
     #define SPIM137_FEATURE_DCX_PRESENT  0
 
+    #if defined (COMP_REFSEL_REFSEL_Int2V4)
+        #undef COMP_REFSEL_REFSEL_Int2V4
+    #endif
+
+    #if defined (COMP_REFSEL_REFSEL_Int1V8)
+        #undef COMP_REFSEL_REFSEL_Int1V8
+    #endif
+
     #define LPCOMP_REFSEL_RESOLUTION 16
 
     /* TODO: HM-20336 */

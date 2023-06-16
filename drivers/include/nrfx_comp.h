@@ -91,7 +91,7 @@ typedef struct
  */
 #define NRFX_COMP_DEFAULT_CONFIG(_input)                                           \
 {                                                                                  \
-    .reference          = NRF_COMP_REF_INT_1V8,                                    \
+    .reference          = NRF_COMP_REF_INT_1V2,                                    \
     .main_mode          = NRF_COMP_MAIN_MODE_SE,                                   \
     .threshold          = NRFX_COMP_CONFIG_TH,                                     \
     .speed_mode         = NRF_COMP_SP_MODE_HIGH,                                   \
