@@ -147,49 +147,6 @@
     #define GPIOTE_FEATURE_SET_PRESENT
     #define GPIOTE_FEATURE_CLR_PRESENT
 
-    /* TODO: Create ticket for MDK. */
-    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
-        #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
-            #define NRF_GRTC_IRQ_GROUP 0
-        #elif defined(NRF_APPLICATION)
-            #define NRF_GRTC_IRQ_GROUP 2
-        #elif defined(NRF_RADIOCORE)
-            #define NRF_GRTC_IRQ_GROUP 4
-        #elif defined(NRF_CELLCORE)
-            #define NRF_GRTC_IRQ_GROUP 8
-        #else
-            #error Unknown core.
-        #endif
-    #elif defined(NRF_SYSCTRL)
-        #define NRF_GRTC_IRQ_GROUP 6
-    #elif defined(NRF_PPR) || defined(NRF_FLPR)
-        #define NRF_GRTC_IRQ_GROUP 2
-    #else
-        #if defined(NRF_SECURE)
-            #define NRF_GRTC_IRQ_GROUP 1
-        #elif defined(NRF_APPLICATION)
-            #define NRF_GRTC_IRQ_GROUP 3
-        #elif defined(NRF_RADIOCORE) || defined(NRF_BBPR)
-            #define NRF_GRTC_IRQ_GROUP 5
-        #elif defined(NRF_CELLCORE)
-            #define NRF_GRTC_IRQ_GROUP 7
-        #elif defined(NRF_LMAC)
-            #define NRF_GRTC_IRQ_GROUP 8
-        #elif defined(NRF_UMAC)
-            #define NRF_GRTC_IRQ_GROUP 9
-        #else
-            #error Unknown core.
-        #endif
-    #endif
-
-    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || defined(NRF_FLPR) || defined(__NRFX_DOXYGEN__)
-        #define GRTC_IRQn       GRTC_0_IRQn
-        #define GRTC_IRQHandler GRTC_0_IRQHandler
-    #else
-        #define GRTC_IRQn       GRTC_1_IRQn
-        #define GRTC_IRQHandler GRTC_1_IRQHandler
-    #endif
-
     #define NRF_VPR_CLIC_PRIO_COUNT 4
     #define CLIC_CLIC_CLICCFG_NMBITS_ModeMU  1
     #define CLIC_CLIC_CLICCFG_NMBITS_ModeMSU 2
@@ -1013,6 +970,43 @@
 /**************************************************************************************************/
 
 #if defined(NRF54H20_ENGA_XXAA)
+
+    /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
+        #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+            #define NRF_GRTC_IRQ_GROUP 0
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 2
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 4
+        #else
+            #error Unknown core.
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GRTC_IRQ_GROUP 6
+    #elif defined(NRF_PPR) || defined(NRF_FLPR)
+        #define NRF_GRTC_IRQ_GROUP 2
+    #else
+        #if defined(NRF_SECURE)
+            #define NRF_GRTC_IRQ_GROUP 1
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 3
+        #elif defined(NRF_RADIOCORE) || defined(NRF_BBPR)
+            #define NRF_GRTC_IRQ_GROUP 5
+        #else
+            #error Unknown core.
+        #endif
+    #endif
+
+        #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || \
+            defined(NRF_FLPR) || defined(NRF_BBPR) || defined(__NRFX_DOXYGEN__)
+        #define GRTC_IRQn       GRTC_0_IRQn
+        #define GRTC_IRQHandler GRTC_0_IRQHandler
+    #else
+        #define GRTC_IRQn       GRTC_1_IRQn
+        #define GRTC_IRQHandler GRTC_1_IRQHandler
+    #endif
+
     /* TODO: MDK 8.52.0 contains fix for HM-17533 bug, however it is fixed in VPR1.1 so earlier
      * revisions needs tweaked offset. Related issues: NRFX-3519 NRFX-2832 */
     #undef VPRCSR_MINTTHRESH_TH_Pos
@@ -1613,6 +1607,47 @@
 /**************************************************************************************************/
 
 #if defined(NRF54H20_XXAA)
+
+    /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
+        #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+            #define NRF_GRTC_IRQ_GROUP 0
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 2
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 4
+        #else
+            #error Unknown core.
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GRTC_IRQ_GROUP 7
+    #elif defined(NRF_PPR)
+        #define NRF_GRTC_IRQ_GROUP 8
+    #elif defined(NRF_FLPR)
+        #define NRF_GRTC_IRQ_GROUP 9
+    #elif defined(NRF_BBPR)
+        #define NRF_GRTC_IRQ_GROUP 10
+    #else
+        #if defined(NRF_SECURE)
+            #define NRF_GRTC_IRQ_GROUP 1
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 3
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 5
+        #else
+            #error Unknown core.
+        #endif
+    #endif
+
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || \
+            defined(NRF_FLPR) || defined(NRF_BBPR) || defined(__NRFX_DOXYGEN__)
+        #define GRTC_IRQn       GRTC_0_IRQn
+        #define GRTC_IRQHandler GRTC_0_IRQHandler
+    #else
+        #define GRTC_IRQn       GRTC_1_IRQn
+        #define GRTC_IRQHandler GRTC_1_IRQHandler
+    /* TODO: NRFX-3940 - Add GRTC_2_IRQn and GRTC_2_IRQHandler for RadioCore. */
+    #endif
 
     #define RTC130_CC_NUM 4
     #define RTC131_CC_NUM 4
@@ -2217,6 +2252,53 @@ typedef struct {
 
 #if defined(NRF7140_XXAA)
 
+    /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
+        #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+            #define NRF_GRTC_IRQ_GROUP 0
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 2
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 4
+        #else
+            #error Unknown core.
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GRTC_IRQ_GROUP 7
+    #elif defined(NRF_PPR)
+        #define NRF_GRTC_IRQ_GROUP 10
+    #elif defined(NRF_FLPR)
+        #define NRF_GRTC_IRQ_GROUP 11
+    #elif defined(NRF_BBPR)
+        #define NRF_GRTC_IRQ_GROUP 12
+    #elif defined(NRF_LMAC)
+        /* TODO: Investigate how to handle group 9 for this core. */
+        #define NRF_GRTC_IRQ_GROUP 8
+    #elif defined(NRF_UMAC)
+        #define NRF_GRTC_IRQ_GROUP 13
+    #else
+        #if defined(NRF_SECURE)
+            #define NRF_GRTC_IRQ_GROUP 1
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 3
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 5
+        #else
+            #error Unknown core.
+        #endif
+    #endif
+
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || \
+            defined(NRF_FLPR) || defined(NRF_BBPR) || defined(NRF_LMAC) || defined(NRF_UMAC) || \
+            defined(__NRFX_DOXYGEN__)
+        #define GRTC_IRQn       GRTC_0_IRQn
+        #define GRTC_IRQHandler GRTC_0_IRQHandler
+    #else
+        #define GRTC_IRQn       GRTC_1_IRQn
+        #define GRTC_IRQHandler GRTC_1_IRQHandler
+    /* TODO: NRFX-3940 - Add GRTC_2_IRQn and GRTC_2_IRQHandler for RadioCore. */
+    #endif
+
     /* HM-21528 */
     #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL)
     #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos)
@@ -2536,6 +2618,51 @@ typedef struct {
 /**************************************************************************************************/
 
 #if defined(NRF9230_XXAA)
+
+    /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
+        #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
+            #define NRF_GRTC_IRQ_GROUP 0
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 2
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 4
+        #elif defined(NRF_CELLCORE)
+            #define NRF_GRTC_IRQ_GROUP 8
+        #else
+            #error Unknown core.
+        #endif
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GRTC_IRQ_GROUP 7
+    #elif defined(NRF_PPR)
+        #define NRF_GRTC_IRQ_GROUP 10
+    #elif defined(NRF_FLPR)
+        #define NRF_GRTC_IRQ_GROUP 11
+    #elif defined(NRF_BBPR)
+        #define NRF_GRTC_IRQ_GROUP 12
+    #else
+        #if defined(NRF_SECURE)
+            #define NRF_GRTC_IRQ_GROUP 1
+        #elif defined(NRF_APPLICATION)
+            #define NRF_GRTC_IRQ_GROUP 3
+        #elif defined(NRF_RADIOCORE)
+            #define NRF_GRTC_IRQ_GROUP 5
+        #elif defined(NRF_CELLCORE)
+            #define NRF_GRTC_IRQ_GROUP 9
+        #else
+            #error Unknown core.
+        #endif
+    #endif
+
+    #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || \
+            defined(NRF_FLPR) || defined(NRF_BBPR) || defined(__NRFX_DOXYGEN__)
+        #define GRTC_IRQn       GRTC_0_IRQn
+        #define GRTC_IRQHandler GRTC_0_IRQHandler
+    #else
+        #define GRTC_IRQn       GRTC_1_IRQn
+        #define GRTC_IRQHandler GRTC_1_IRQHandler
+    /* TODO: NRFX-3940 - Add GRTC_2_IRQn and GRTC_2_IRQHandler for RadioCore. */
+    #endif
 
     #if defined(NRF_CELLCORE)
         #if defined(NRF_TRUSTZONE_NONSECURE)
