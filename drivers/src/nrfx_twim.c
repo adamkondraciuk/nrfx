@@ -212,7 +212,7 @@ static bool pins_configure(nrfx_twim_config_t const * p_config)
         NRFX_ASSERT(p_config->scl_pin != p_config->sda_pin);
         TWIM_PIN_INIT(p_config->scl_pin, pin_drive);
         TWIM_PIN_INIT(p_config->sda_pin, pin_drive);
-#if NRF_GPIO_HAS_CLOCKPIN
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_TWIM_CLOCKPIN_SCL_NEEDED_EXT)
         nrfy_gpio_pin_clock_set(p_config->scl_pin, true);
 #endif
    }

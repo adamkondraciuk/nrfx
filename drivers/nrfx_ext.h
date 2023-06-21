@@ -132,6 +132,21 @@ extern "C" {
         ())
 #endif
 
+#if defined(NRF54H20_ENGA_XXAA)
+    #define NRF_UARTE_CLOCKPIN_RTS_NEEDED_EXT
+#elif defined(NRF54H20_XXAA) || defined(NRF9230_XXAA)
+    #define NRF_UARTE_CLOCKPIN_TXD_NEEDED_EXT
+    #define NRF_SPIM_CLOCKPIN_MOSI_NEEDED_EXT
+    #define NRF_SPIS_CLOCKPIN_MISO_NEEDED_EXT
+#endif
+
+#if defined(HALTIUM_XXAA)
+    #define NRF_SPIM_CLOCKPIN_SCK_NEEDED_EXT
+    #define NRF_SPIS_CLOCKPIN_SCK_NEEDED_EXT
+    #define NRF_TWIM_CLOCKPIN_SCL_NEEDED_EXT
+    #define NRF_TWIS_CLOCKPIN_SCL_NEEDED_EXT
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of GPIO Extended section                                                                   */
 /*------------------------------------------------------------------------------------------------*/

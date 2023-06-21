@@ -80,7 +80,7 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
                  NRF_GPIO_PIN_NOPULL,
                  NRF_GPIO_PIN_S0S1,
                  NRF_GPIO_PIN_NOSENSE);
-#if NRF_GPIO_HAS_CLOCKPIN
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIS_CLOCKPIN_SCK_NEEDED_EXT)
     nrfy_gpio_pin_clock_set(p_config->sck_pin, true);
 #endif
 
@@ -102,6 +102,9 @@ static void pins_configure(nrfx_spis_config_t const * p_config)
                      NRF_GPIO_PIN_NOPULL,
                      p_config->miso_drive,
                      NRF_GPIO_PIN_NOSENSE);
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_SPIS_CLOCKPIN_MISO_NEEDED_EXT)
+        nrfy_gpio_pin_clock_set(p_config->miso_pin, true);
+#endif
     }
 
     nrf_gpio_cfg(p_config->csn_pin,
