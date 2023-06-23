@@ -68,7 +68,7 @@ extern "C" {
  * @brief Helper macro for calculating the number of 16-bit values in the specified
  *        array of duty cycle values.
  */
-#define NRF_PWM_VALUES_LENGTH(array)  (sizeof(array) / sizeof(uint16_t))
+#define NRF_PWM_VALUES_LENGTH(array)  (sizeof(array) / 2UL)
 
 
 /** @brief PWM tasks. */
