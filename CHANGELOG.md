@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
+## [3.1.0]
+
+### Fixed
+- Fixed a workaround for the anomaly 109 on the nRF52 family in the SPIM and SPIS drivers.
+
 ## [3.0.0] - 2023-04-25
 ### Added
 - Added the HALY layer for the following peripherals: COMP, DPPI, GPIO, GPIOTE, I2S, LPCOMP, PDM, PWM, QDEC, RTC, SAADC, SPIM, TEMP, TIMER, TWIM, UARTE, WDT. HALY is an extension of the HAL layer that aggregates basic hardware use cases within single functions. Now it is used instead of HAL in the corresponding drivers.
