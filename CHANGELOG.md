@@ -4,6 +4,7 @@ All notable changes to this project are documented in this file.
 ## [3.1.0]
 
 ### Changed
+- Updated MDK to version 8.55.0.
 - Modified the power management in the SPIM driver. Now the nrfx_spim_abort() function must be called once all expected transactions using the NRFX_SPIM_FLAG_NO_XFER_EVT_HANDLER, NRFX_SPIM_FLAG_HOLD_XFER, or NRFX_SPIM_FLAG_REPEATED_XFER option flags are finalized.
 
 ### Fixed
