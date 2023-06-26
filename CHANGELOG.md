@@ -1,7 +1,12 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [3.1.0]
+## [3.1.0] - 2023-06-28
+
+### Added
+- Added the HALY layer for the NFCT. HALY is an extension of the HAL layer that aggregates basic hardware use cases within single functions. Now it is used instead of HAL in the NFCT drivers.
+- Added the NRFX_IN_RANGE() macro for checking if a given value is in a given range.
+- Added functions for writing a word to the flash and reading a buffer, word, halfword, and byte in the NVMC HAL.
 
 ### Changed
 - Updated MDK to version 8.55.0.
@@ -9,6 +14,9 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 - Fixed a workaround for the anomaly 109 on the nRF52 family in the SPIM and SPIS drivers.
+- Fixed the NRFX_TIMER_FREQUENCY_STATIC_CHECK() and NRFX_SPIM_FREQUENCY_STATIC_CHECK() macros.
+- Fixed the nrfx_wdt_reconfigure() function that was returning the NRFX_ERROR_INVALID_STATE error code when the driver instance has been initialized.
+- Fixed the nrfx_pwm_stopped_check() function when used without user's handler function.
 
 ## [3.0.0] - 2023-04-25
 ### Added
