@@ -786,6 +786,7 @@ static void gpiote_uninit(nrfx_gpiote_t const * p_instance)
 #endif
 
     m_cb[p_instance->drv_inst_idx].state = NRFX_DRV_STATE_UNINITIALIZED;
+    m_cb[p_instance->drv_inst_idx].global_handler.handler = NULL;
     NRFX_LOG_INFO("Uninitialized.");
 }
 
