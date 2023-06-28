@@ -29,6 +29,8 @@ typedef nrf_regulators_pof_thr_t nrf_power_pof_thr_t;
 #define NRF_POWER_POFTHR_V27     NRF_REGULATORS_POF_THR_2V7
 #define NRF_POWER_POFTHR_V28     NRF_REGULATORS_POF_THR_2V8
 
+#if NRF_REGULATORS_HAS_POF_VDDH
+
 typedef nrf_regulators_pof_thr_vddh_t nrf_power_pof_thrvddh_t;
 #define NRF_POWER_POFTHRVDDH_V27     NRF_REGULATORS_POF_THR_VDDH_2V7
 #define NRF_POWER_POFTHRVDDH_V28     NRF_REGULATORS_POF_THR_VDDH_2V8
@@ -46,6 +48,8 @@ typedef nrf_regulators_pof_thr_vddh_t nrf_power_pof_thrvddh_t;
 #define NRF_POWER_POFTHRVDDH_V40     NRF_REGULATORS_POF_THR_VDDH_4V0
 #define NRF_POWER_POFTHRVDDH_V41     NRF_REGULATORS_POF_THR_VDDH_4V1
 #define NRF_POWER_POFTHRVDDH_V42     NRF_REGULATORS_POF_THR_VDDH_4V2
+
+#endif // NRF_REGULATORS_HAS_POF_VDDH
 
 #endif // NRF_REGULATORS_HAS_POF
 
