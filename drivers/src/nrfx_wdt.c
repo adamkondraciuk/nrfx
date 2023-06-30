@@ -20,6 +20,10 @@ typedef struct
     uint8_t                  alloc_index;
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
     nrfx_wdt_event_handler_t wdt_event_handler;
+    void *                   p_context;
+#endif
+#if NRFX_WDT_HAS_STOP
+    bool                     stoppable;
 #endif
 } wdt_control_block_t;
 
@@ -38,19 +42,36 @@ static void wdt_configure(nrfx_wdt_t const *        p_instance,
 
     nrfy_wdt_periph_configure(p_instance->p_reg, &nrfy_conf);
 
-#if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
     wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+#if NRFX_WDT_HAS_STOP
+    p_cb->stoppable = (bool)(p_config->behaviour & NRF_WDT_BEHAVIOUR_STOP_ENABLE_MASK);
+#endif
+
+#if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
     if (p_cb->wdt_event_handler)
     {
-        nrfy_wdt_int_init(p_instance->p_reg, NRF_WDT_INT_TIMEOUT_MASK,
-                          p_config->interrupt_priority, true);
+        uint32_t mask = NRF_WDT_INT_TIMEOUT_MASK;
+
+#if NRFX_WDT_HAS_STOP
+        if (p_cb->stoppable)
+        {
+            mask |= NRF_WDT_INT_STOPPED_MASK;
+        }
+#endif
+
+        nrfy_wdt_int_init(p_instance->p_reg,
+                          mask,
+                          p_config->interrupt_priority,
+                          true);
     }
 #endif
 }
 
-nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
-                         nrfx_wdt_config_t const * p_config,
-                         nrfx_wdt_event_handler_t  wdt_event_handler)
+static nrfx_err_t wdt_init(nrfx_wdt_t const *        p_instance,
+                           nrfx_wdt_config_t const * p_config,
+                           nrfx_wdt_event_handler_t  wdt_event_handler,
+                           void *                    p_context)
 {
     NRFX_ASSERT(p_config);
     nrfx_err_t err_code;
@@ -59,8 +80,10 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
 
 #if NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
     (void)wdt_event_handler;
+    (void)p_context;
 #else
     p_cb->wdt_event_handler = wdt_event_handler;
+    p_cb->p_context = p_context;
 #endif
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -85,6 +108,23 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
     NRFX_LOG_INFO("Function: %s, error code: %s.", __func__, NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
 }
+
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
+                         nrfx_wdt_config_t const * p_config,
+                         nrfx_wdt_event_handler_t  wdt_event_handler,
+                         void *                    p_context)
+{
+    return wdt_init(p_instance, p_config, wdt_event_handler, p_context);
+}
+#else
+nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
+                         nrfx_wdt_config_t const * p_config,
+                         nrfx_wdt_event_handler_t  wdt_event_handler)
+{
+    return wdt_init(p_instance, p_config, wdt_event_handler, NULL);
+}
+#endif
 
 nrfx_err_t nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
                                 nrfx_wdt_config_t const * p_config)
@@ -155,6 +195,30 @@ void nrfx_wdt_channel_feed(nrfx_wdt_t const * p_instance, nrfx_wdt_channel_id ch
     nrfy_wdt_reload_request_set(p_instance->p_reg, channel_id);
 }
 
+#if NRFX_WDT_HAS_STOP
+nrfx_err_t nrfx_wdt_stop(nrfx_wdt_t const * p_instance)
+{
+    wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    if (!p_cb->stoppable)
+    {
+        return NRFX_ERROR_FORBIDDEN;
+    }
+
+    nrfy_wdt_task_stop_enable_set(p_instance->p_reg, true);
+    nrfy_wdt_task_trigger(p_instance->p_reg, NRF_WDT_TASK_STOP);
+    nrfy_wdt_task_stop_enable_set(p_instance->p_reg, false);
+
+#if NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
+    while (!nrfy_wdt_events_process(p_instance->p_reg,
+                                    NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_STOPPED)))
+    {}
+#endif
+
+    return NRFX_SUCCESS;
+}
+#endif
+
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
 static void irq_handler(NRF_WDT_Type * p_reg, wdt_control_block_t * p_cb)
 {
@@ -163,12 +227,29 @@ static void irq_handler(NRF_WDT_Type * p_reg, wdt_control_block_t * p_cb)
     uint32_t requests = nrf_wdt_request_status_get(p_reg);
 
     uint32_t evt_mask = nrfy_wdt_events_process(p_reg,
-                                                NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_TIMEOUT));
+#if NRFX_WDT_HAS_STOP
+                                                NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_STOPPED) |
+#endif
+                                                NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_TIMEOUT)
+                                               );
 
     if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_TIMEOUT))
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        p_cb->wdt_event_handler(NRF_WDT_EVENT_TIMEOUT, requests, p_cb->p_context);
+#else
         p_cb->wdt_event_handler(requests);
+#endif
     }
+
+#if NRFX_WDT_HAS_STOP
+    if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_STOPPED))
+    {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        p_cb->wdt_event_handler(NRF_WDT_EVENT_STOPPED, 0, p_cb->p_context);
+#endif
+    }
+#endif
 }
 
 NRFX_INSTANCE_IRQ_HANDLERS(WDT, wdt)
