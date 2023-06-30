@@ -656,7 +656,7 @@ NRF_STATIC_INLINE uint32_t nrf_cache_data_get(NRF_CACHEDATA_Type const * p_reg,
     NRFX_ASSERT(set < NRF_CACHEDATA_SET_INDEX_MAX);
 
     uint8_t du   = (word / NRF_CACHEDATA_DATA_WORDS_IN_UNIT_MAX);
-    uint8_t data = (word - (du * NRF_CACHEDATA_DATA_WORDS_IN_UNIT_MAX));
+    uint8_t data = (uint8_t)(word - (du * NRF_CACHEDATA_DATA_WORDS_IN_UNIT_MAX));
 
     return p_reg->SET[set].WAY[way].DU[du].DATA[data];
 #else
