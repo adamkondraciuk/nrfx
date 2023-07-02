@@ -46,6 +46,10 @@ typedef enum
     NRF_RRAMC_INT_READY_MASK        = RRAMC_INTENSET_READY_Msk,       ///< Interrupt on READY event.
     NRF_RRAMC_INT_READY_NEXT_MASK   = RRAMC_INTENSET_READYNEXT_Msk,   ///< Interrupt on READYNEXT event.
     NRF_RRAMC_INT_ERROR_ACCESS_MASK = RRAMC_INTENSET_ACCESSERROR_Msk, ///< Interrupt on ACCESSERROR event.
+    NRF_RRAMC_ALL_INTS_MASK         = NRF_RRAMC_INT_WOKENUP_MASK
+                                    | NRF_RRAMC_INT_READY_MASK
+                                    | NRF_RRAMC_INT_READY_NEXT_MASK
+                                    | NRF_RRAMC_INT_ERROR_ACCESS_MASK ///< All RRAMC interrupts.
 } nrf_rramc_int_mask_t;
 
 /** @brief RRAMC configuration structure. */
@@ -163,7 +167,7 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_int_pending_get(NRF_RRAMC_Type const * p_re
  *
  * @note Not every task has its corresponding subscribe register.
  *       Refer to the Product Specification for more information.
- * 
+ *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] task    Task for which to set the configuration.
  * @param[in] channel Channel through which to subscribe events.
@@ -178,7 +182,7 @@ NRF_STATIC_INLINE void nrf_rramc_subscribe_set(NRF_RRAMC_Type * p_reg,
  *
  * @note Not every task has its corresponding subscribe register.
  *       Refer to the Product Specification for more information.
- * 
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task for which to clear the configuration.
  */
@@ -190,7 +194,7 @@ NRF_STATIC_INLINE void nrf_rramc_subscribe_clear(NRF_RRAMC_Type * p_reg, nrf_rra
  *
  * @note Not every event has its corresponding publish register.
  *       Refer to the Product Specification for more information.
- * 
+ *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] event   Event for which to set the configuration.
  * @param[in] channel Channel through which to publish the event.
@@ -205,7 +209,7 @@ NRF_STATIC_INLINE void nrf_rramc_publish_set(NRF_RRAMC_Type *  p_reg,
  *
  * @note Not every event has its corresponding publish register.
  *       Refer to the Product Specification for more information.
- * 
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
@@ -218,7 +222,7 @@ NRF_STATIC_INLINE void nrf_rramc_publish_clear(NRF_RRAMC_Type * p_reg, nrf_rramc
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @retval true  Current operation is completed and RRAMC is ready.
+ * @retval true  Current operation is completed, and RRAMC is ready.
  * @retval false RRAMC is busy.
  */
 NRF_STATIC_INLINE bool nrf_rramc_ready_check(NRF_RRAMC_Type const * p_reg);
@@ -235,9 +239,9 @@ NRF_STATIC_INLINE bool nrf_rramc_write_ready_check(NRF_RRAMC_Type const * p_reg)
 
 /**
  * @brief Fuction for checking the address of the first access error.
- * 
+ *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @return Access error address.
  */
 NRF_STATIC_INLINE uint32_t nrf_rramc_error_access_addr_get(NRF_RRAMC_Type const * p_reg);
@@ -246,7 +250,7 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_error_access_addr_get(NRF_RRAMC_Type const 
  * @brief Function for checking whether the internal write-buffer has been committed to RRAM and is now empty.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
- * 
+ *
  * @retval true  The internal write-buffer is empty and has no content that needs to be commited.
  * @retval false The internal write-buffer has data that needs to be committed.
  */
