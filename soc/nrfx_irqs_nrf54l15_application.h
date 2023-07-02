@@ -157,6 +157,9 @@ extern "C" {
 // GRTC_1_IRQHandler
 #define nrfx_grtc_1_irq_handler         GRTC_1_IRQHandler
 
+// RRAMC_IRQHandler
+#define nrfx_rramc_irq_handler          RRAMC_IRQHandler
+
 #ifdef __cplusplus
 }
 #endif
