@@ -25,11 +25,11 @@ All notable changes to this project are documented in this file.
 - Renamed macros indicating features presence in the REGULATORS HAL.
 - Changed a default value of the source reference structure member from 1.8V to 1.2V in the COMP driver configuration structure.
 - Replaced the nrf_wdt_task_stop_enable() function with nrf_wdt_task_stop_enable_set(). Now it takes a boolean parameter.
+- Added the new NRFX_ERROR_ALREADY error code that replaced the NRFX_ERROR_ALREADY_INITIALIZED one. Now the NRFX_ERROR_ALREADY_INITIALIZED error code is deprecated.
 
 ### Fixed
 
 ## [3.1.0] - 2023-06-28
-
 ### Added
 - Added the HALY layer for the NFCT. HALY is an extension of the HAL layer that aggregates basic hardware use cases within single functions. Now it is used instead of HAL in the NFCT drivers.
 - Added the NRFX_IN_RANGE() macro for checking if a given value is in a given range.
