@@ -21,7 +21,7 @@ nrfx_err_t nrfx_ipc_init(uint8_t irq_priority, nrfx_ipc_handler_t handler, void 
     NRFX_ASSERT(handler);
     if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     NRFX_IRQ_PRIORITY_SET(IPC_IRQn, irq_priority);

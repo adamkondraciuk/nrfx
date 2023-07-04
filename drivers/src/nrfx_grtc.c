@@ -359,7 +359,7 @@ nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channe
 
     if (is_syscounter_running())
     {
-        err_code = NRFX_ERROR_ALREADY_INITIALIZED;
+        err_code = NRFX_ERROR_ALREADY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

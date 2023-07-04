@@ -216,8 +216,8 @@ nrfx_power_usb_event_handler_t nrfx_power_usb_handler_get(void);
  *
  * @param[in] p_config Pointer to the structure with the initial configuration.
  *
- * @retval NRFX_SUCCESS                   Successfully initialized.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Module was already initialized.
+ * @retval NRFX_SUCCESS       Successfully initialized.
+ * @retval NRFX_ERROR_ALREADY Module was already initialized.
  */
 nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config);
 

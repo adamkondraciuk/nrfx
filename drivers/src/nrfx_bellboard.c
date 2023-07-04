@@ -27,7 +27,7 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
 
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     if (p_cb->state == NRFX_DRV_STATE_INITIALIZED) {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     p_cb->state   = NRFX_DRV_STATE_INITIALIZED;

@@ -149,9 +149,9 @@ nrfx_err_t nrfx_grtc_rtcounter_start(bool busy_wait);
  *                               false otherwise.
  * @param[out] p_main_cc_channel Pointer to the main capture/compare channel.
  *
- * @retval NRFX_SUCCESS                   Starting was successful.
- * @retval NRFX_ERROR_NO_MEM              No resource available to allocate main channel.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED The GRTC is already running.
+ * @retval NRFX_SUCCESS       Starting was successful.
+ * @retval NRFX_ERROR_NO_MEM  No resource available to allocate main channel.
+ * @retval NRFX_ERROR_ALREADY The GRTC is already running.
  */
 nrfx_err_t nrfx_grtc_syscounter_start(bool busy_wait, uint8_t * p_main_cc_channel);
 

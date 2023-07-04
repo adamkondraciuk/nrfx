@@ -45,8 +45,8 @@ typedef void (* nrfx_temp_data_handler_t)(int32_t temperature);
  * @param[in] handler   Data handler provided by the user. If not provided,
  *                      the driver is initialized in blocking mode.
  *
- * @retval NRFX_SUCCESS                    Driver was successfully initialized.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED  Driver was already initialized.
+ * @retval NRFX_SUCCESS       Driver was successfully initialized.
+ * @retval NRFX_ERROR_ALREADY Driver was already initialized.
  */
 nrfx_err_t nrfx_temp_init(nrfx_temp_config_t const * p_config, nrfx_temp_data_handler_t handler);
 

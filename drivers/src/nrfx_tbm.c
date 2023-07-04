@@ -17,7 +17,7 @@ nrfx_err_t nrfx_tbm_init(nrfx_tbm_config_t const * p_config, nrfx_tbm_event_hand
 {
     if (state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     nrfy_tbm_configure(NRF_TBM, p_config->size);

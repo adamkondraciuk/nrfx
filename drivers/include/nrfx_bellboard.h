@@ -76,8 +76,8 @@ typedef void (*nrfx_bellboard_event_handler_t)(uint8_t event_idx, void * p_conte
  * @param[in] event_handler Function to be called on bellboard interrupt.
  * @param[in] p_context     User context passed to event handler.
  *
- * @retval NRFX_SUCCESS                   Instance successfully initialized.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Instance already initialized.
+ * @retval NRFX_SUCCESS       Instance successfully initialized.
+ * @retval NRFX_ERROR_ALREADY Instance already initialized.
  */
 nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
                                uint8_t                        irq_priority,

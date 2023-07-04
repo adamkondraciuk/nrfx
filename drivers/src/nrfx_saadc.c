@@ -428,7 +428,7 @@ nrfx_err_t nrfx_saadc_buffer_set(nrf_saadc_value_t * p_buffer, uint16_t size)
 
     if (m_cb.buffer_secondary.p_buffer)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     if (!nrfx_is_in_ram(p_buffer))

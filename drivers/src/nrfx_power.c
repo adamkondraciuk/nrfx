@@ -81,7 +81,7 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config)
     NRFX_ASSERT(p_config);
     if (m_initialized)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
 #if NRF_POWER_HAS_DCDCEN_VDDH

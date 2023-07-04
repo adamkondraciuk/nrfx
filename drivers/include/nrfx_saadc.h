@@ -335,12 +335,12 @@ nrfx_err_t nrfx_saadc_advanced_mode_set(uint32_t                        channel_
  * @param[in] p_buffer Pointer to the buffer to be filled with conversion results.
  * @param[in] size     Number of @ref nrf_saadc_value_t samples in buffer.
  *
- * @retval NRFX_SUCCESS                   Buffer was supplied successfully.
- * @retval NRFX_ERROR_INVALID_ADDR        The provided buffer is not in the Data RAM region.
- * @retval NRFX_ERROR_INVALID_LENGTH      The provided buffer is not aligned to the number of activated channels
- *                                        or is too long for the EasyDMA to handle.
- * @retval NRFX_ERROR_INVALID_STATE       The driver is in the idle mode.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Both buffers for double-buffered conversions are already set.
+ * @retval NRFX_SUCCESS              Buffer was supplied successfully.
+ * @retval NRFX_ERROR_INVALID_ADDR   The provided buffer is not in the Data RAM region.
+ * @retval NRFX_ERROR_INVALID_LENGTH The provided buffer is not aligned to the number of activated channels
+ *                                   or is too long for the EasyDMA to handle.
+ * @retval NRFX_ERROR_INVALID_STATE  The driver is in the idle mode.
+ * @retval NRFX_ERROR_ALREADY        Both buffers for double-buffered conversions are already set.
  */
 nrfx_err_t nrfx_saadc_buffer_set(nrf_saadc_value_t * p_buffer, uint16_t size);
 

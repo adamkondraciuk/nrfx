@@ -33,8 +33,8 @@ typedef void (*nrfx_vevif_event_handler_t)(uint8_t event_idx, void * p_context);
  * @param[in] event_handler      Function to be called on interrupt.
  * @param[in] p_context          Context passed to the event handler.
  *
- * @retval NRFX_SUCCESS                   Driver successfully initialized.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Driver already initialized.
+ * @retval NRFX_SUCCESS       Driver successfully initialized.
+ * @retval NRFX_ERROR_ALREADY Driver already initialized.
  */
 nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
                            nrfx_vevif_event_handler_t event_handler,

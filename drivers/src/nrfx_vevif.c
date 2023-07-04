@@ -30,7 +30,7 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
 {
     if (m_cb.state == NRFX_DRV_STATE_INITIALIZED)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     m_cb.handler   = event_handler;

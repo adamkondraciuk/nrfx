@@ -45,8 +45,8 @@ typedef void (*nrfx_clock_event_handler_t)(nrfx_clock_evt_type_t event);
  * @param[in] event_handler Event handler provided by the user.
  *                          Must not be NULL.
  *
- * @retval NRFX_SUCCESS                   The procedure is successful.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED The driver is already initialized.
+ * @retval NRFX_SUCCESS       The procedure is successful.
+ * @retval NRFX_ERROR_ALREADY The driver is already initialized.
  */
 nrfx_err_t nrfx_clock_init(nrfx_clock_event_handler_t  event_handler);
 
