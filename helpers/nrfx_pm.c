@@ -15,7 +15,7 @@ static nrfx_err_t pm_mode_handler(nrfx_pm_t *p_driver_pm)
 
     if (p_driver_pm->current_state == p_driver_pm->required_state)
     {
-        return NRFX_ERROR_ALREADY_INITIALIZED;
+        return NRFX_ERROR_ALREADY;
     }
 
     nrfx_pm_state_t const previous_state = p_driver_pm->current_state;

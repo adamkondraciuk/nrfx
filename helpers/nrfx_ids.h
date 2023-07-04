@@ -132,8 +132,8 @@ typedef enum
  * @param[in] p_context          Context passed to the event handler.
  * @param[in] p_config           Pointer to the structure containing peripheral-specific configuration. Can be NULL.
  *
- * @retval NRFX_SUCCESS                   Driver successfully initialized.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Driver already initialized.
+ * @retval NRFX_SUCCESS       Driver successfully initialized.
+ * @retval NRFX_ERROR_ALREADY Driver already initialized.
  */
 __STATIC_INLINE nrfx_err_t nrfx_ids_init(nrfx_ids_t const *       p_instance,
                                          uint8_t                  interrupt_priority,

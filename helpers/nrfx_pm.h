@@ -42,8 +42,8 @@ void nrfx_pm_init(void *p_pm, nrfx_pm_event_handler_t event_handler);
  *
  * @param[in] p_pm Pointer to the instance of driver's power management structure.
  *
- * @retval NRFX_SUCCESS                   Powering up is delegated.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Peripheral is already powered up.
+ * @retval NRFX_SUCCESS       Powering up is delegated.
+ * @retval NRFX_ERROR_ALREADY Peripheral is already powered up.
  */
 nrfx_err_t nrfx_pm_power_on(void *p_pm);
 
@@ -53,8 +53,8 @@ nrfx_err_t nrfx_pm_power_on(void *p_pm);
  * @param[in] p_pm  Pointer to the instance of the power management structure of the peripheral instance.
  * @param[in] force True if power off sequence is forced, false otherwise.
  *
- * @retval NRFX_SUCCESS                   Powering down is delegated.
- * @retval NRFX_ERROR_ALREADY_INITIALIZED Peripheral is already powered down.
+ * @retval NRFX_SUCCESS       Powering down is delegated.
+ * @retval NRFX_ERROR_ALREADY Peripheral is already powered down.
  */
 nrfx_err_t nrfx_pm_power_off(void *p_pm, bool force);
 
