@@ -18,6 +18,9 @@ extern "C" {
     #define VMC_RAM_SECTION_COUNT 16
 #elif defined(NRF5340_XXAA_NETWORK) || defined(NRF9160_XXAA) || defined(NRF9120_XXAA)
     #define VMC_RAM_SECTION_COUNT 4
+    #if !defined(VMC_FEATURE_RAM_REGISTERS_COUNT)
+        #define VMC_FEATURE_RAM_REGISTERS_COUNT 4
+    #endif
 #endif
 
 /**
@@ -110,7 +113,7 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_power_set(NRF_VMC_Type *  p_reg,
                                                    nrf_vmc_power_t sect_power);
 
 /**
- * @brief Function for setting power configuration for the all available RAM blocks.
+ * @brief Function for setting power configuration for all available RAM blocks.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
@@ -202,6 +205,28 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_power_set(NRF_VMC_Type *  p_reg,
     // written to the VMC peripheral.
     volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWERSET;
     (void)dummy;
+}
+
+NRF_STATIC_INLINE void nrf_vmc_ram_block_power_all_set(NRF_VMC_Type * p_reg)
+{
+    for (size_t i = 0; i < VMC_FEATURE_RAM_REGISTERS_COUNT; i++)
+    {
+        p_reg->RAM[i].POWERSET = NRF_VMC_POWER_S0 | NRF_VMC_POWER_S0 |
+                                 NRF_VMC_POWER_S2 | NRF_VMC_POWER_S3 |
+#if (VMC_RAM_SECTION_COUNT > 4)
+                                 NRF_VMC_POWER_S4  | NRF_VMC_POWER_S5  |
+                                 NRF_VMC_POWER_S6  | NRF_VMC_POWER_S7  |
+                                 NRF_VMC_POWER_S8  | NRF_VMC_POWER_S9  |
+                                 NRF_VMC_POWER_S10 | NRF_VMC_POWER_S11 |
+                                 NRF_VMC_POWER_S12 | NRF_VMC_POWER_S13 |
+                                 NRF_VMC_POWER_S14 | NRF_VMC_POWER_S15 |
+#endif
+                                 0;
+        // Perform dummy read of the POWERSET register to ensure that configuration of sections was
+        // written to the VMC peripheral.
+        volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWERSET;
+        (void)dummy;
+    }
 }
 
 NRF_STATIC_INLINE void nrf_vmc_ram_block_power_clear(NRF_VMC_Type *  p_reg,
