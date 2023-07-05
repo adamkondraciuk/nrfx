@@ -265,10 +265,11 @@ extern "C" {
 /* Start of RESET Extended section                                                                */
 /*------------------------------------------------------------------------------------------------*/
 
-#define NRF_RESET_RESETREAS_EXT                                           \
-    NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(RESET_RESETREAS_TAMPC_Msk), \
-        (NRF_RESET_RESETREAS_TAMPC_MASK = RESET_RESETREAS_TAMPC_Msk,),    \
-        ())
+#if defined(RESET_RESETREAS_TAMPC_Msk)
+#define NRF_RESET_RESETREAS_EXT NRF_RESET_RESETREAS_TAMPC_MASK = RESET_RESETREAS_TAMPC_Msk,
+#elif defined(RESET_RESETREAS_SECTAMPER_Msk)
+#define NRF_RESET_RESETREAS_EXT NRF_RESET_RESETREAS_SECTAMPER_MASK = RESET_RESETREAS_SECTAMPER_Msk,
+#endif
 
 /*------------------------------------------------------------------------------------------------*/
 /* End of RESET Extended section                                                                  */

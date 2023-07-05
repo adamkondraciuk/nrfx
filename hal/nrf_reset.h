@@ -78,9 +78,6 @@ typedef enum
 #if NRF_RESET_HAS_NETWORK
     NRF_RESET_RESETREAS_LCTRLAP_MASK    = RESET_RESETREAS_LCTRLAP_Msk,    ///< Bit mask of LCTRLAP field.
 #endif
-#if defined(RESET_RESETREAS_VMON_Msk) || defined(__NRFX_DOXYGEN__)
-    NRF_RESET_RESETREAS_VMON_MASK       = RESET_RESETREAS_VMON_Msk,       ///< Bit mask of VMON field.
-#endif
 #if defined(NRF_RESET_RESETREAS_EXT)
     NRF_RESET_RESETREAS_EXT
 #endif

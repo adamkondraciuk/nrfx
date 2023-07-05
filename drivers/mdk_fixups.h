@@ -2252,6 +2252,15 @@ typedef struct {
     /* Mask for GPREGRET in Moonlight's MDK is 32-bit instead of 8-bit. */
     #undef POWER_GPREGRET_GPREGRET_Msk
     #define POWER_GPREGRET_GPREGRET_Msk (0xFFUL << POWER_GPREGRET_GPREGRET_Pos) /*!< Bit mask of GPREGRET field.           */
+
+    /* TODO: Remove while integrating MDK 8.55.0 */
+    /* LPCOMP @Bit 9 : Reset due to wakeup from System OFF mode when wakeup is triggered by ANADETECT signal from LPCOMP */
+    #define RESET_RESETREAS_LPCOMP_Pos (9UL)           /*!< Position of LPCOMP field.                                            */
+    #define RESET_RESETREAS_LPCOMP_Msk (0x1UL << RESET_RESETREAS_LPCOMP_Pos) /*!< Bit mask of LPCOMP field.                      */
+    #define RESET_RESETREAS_LPCOMP_Min (0x0UL)         /*!< Min enumerator value of LPCOMP field.                                */
+    #define RESET_RESETREAS_LPCOMP_Max (0x1UL)         /*!< Max enumerator value of LPCOMP field.                                */
+    #define RESET_RESETREAS_LPCOMP_NotDetected (0x0UL) /*!< Not detected                                                         */
+    #define RESET_RESETREAS_LPCOMP_Detected (0x1UL)    /*!< Detected                                                             */
 #endif
 
 /**************************************************************************************************/
