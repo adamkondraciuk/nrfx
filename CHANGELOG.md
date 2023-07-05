@@ -6,6 +6,8 @@ All notable changes to this project are documented in this file.
 - Added a function for checking whether the specified voltage regulator is enabled in the REGULATORS HAL.
 - Added a function for checking whether an inductor is connected to the DCC pin in the REGULATORS HAL.
 - Added a function for checking if the detected voltage is below or above the threshold of VPOF (POF Comparator's threshold voltage) in the REGULATORS HAL.
+- Added a function for powering on all RAM blocks in the VMC HAL.
+- Added missing entries in enumerators for RAM sections in the VMC HAL.
 
 ### Changed
 - Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, one for setting (nrf_power_gpregret_set), and another one for reading (nrf_power_gpregret_get). A new `reg_num` argument was added to both of them.
