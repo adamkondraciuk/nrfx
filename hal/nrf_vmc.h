@@ -185,10 +185,8 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_config(NRF_VMC_Type * p_reg,
             (power_mask & (NRFX_BIT_MASK(VMC_RAM_SECTION_COUNT) << VMC_RAM_POWER_S0POWER_Pos)) |
             (retention_mask & (NRFX_BIT_MASK(VMC_RAM_SECTION_COUNT) <<
                                VMC_RAM_POWER_S0RETENTION_Pos));
-    // Perform dummy read of the POWER register to ensure that configuration of sections was
-    // written to the VMC peripheral.
-    volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWER;
-    (void)dummy;
+    // Ensure that memory write operation is completed.
+    __DSB();
 }
 
 NRF_STATIC_INLINE void nrf_vmc_ram_block_clear(NRF_VMC_Type * p_reg, uint8_t ram_block_num)
@@ -201,10 +199,8 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_power_set(NRF_VMC_Type *  p_reg,
                                                    nrf_vmc_power_t sect_power)
 {
     p_reg->RAM[ram_block_num].POWERSET = (uint32_t)sect_power;
-    // Perform dummy read of the POWERSET register to ensure that configuration of sections was
-    // written to the VMC peripheral.
-    volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWERSET;
-    (void)dummy;
+    // Ensure that memory write operation is completed.
+    __DSB();
 }
 
 NRF_STATIC_INLINE void nrf_vmc_ram_block_power_all_set(NRF_VMC_Type * p_reg)
@@ -222,11 +218,9 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_power_all_set(NRF_VMC_Type * p_reg)
                                  NRF_VMC_POWER_S14 | NRF_VMC_POWER_S15 |
 #endif
                                  0;
-        // Perform dummy read of the POWERSET register to ensure that configuration of sections was
-        // written to the VMC peripheral.
-        volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWERSET;
-        (void)dummy;
     }
+    // Ensure that memory write operation is completed.
+    __DSB();
 }
 
 NRF_STATIC_INLINE void nrf_vmc_ram_block_power_clear(NRF_VMC_Type *  p_reg,
@@ -248,10 +242,8 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_set(NRF_VMC_Type *      p_reg
                                                        nrf_vmc_retention_t sect_retention)
 {
     p_reg->RAM[ram_block_num].POWERSET = (uint32_t)sect_retention;
-    // Perform dummy read of the POWERSET register to ensure that configuration of sections was
-    // written to the VMC peripheral.
-    volatile uint32_t dummy = p_reg->RAM[ram_block_num].POWERSET;
-    (void)dummy;
+    // Ensure that memory write operation is completed.
+    __DSB();
 }
 
 NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_clear(NRF_VMC_Type *      p_reg,
