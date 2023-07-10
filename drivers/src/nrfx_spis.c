@@ -278,6 +278,9 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
                             __func__,
                             NRFX_LOG_ERROR_STRING_GET(err_code));
+#if NRFX_CHECK(NRFX_PRS_ENABLED)
+            nrfx_prs_release(p_spis);
+#endif
             return err_code;
         }
     }
