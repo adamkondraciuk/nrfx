@@ -413,7 +413,7 @@ NRF_STATIC_INLINE uint8_t nrf_vpr_csr_machine_interrupt_threshold_get(void)
 {
     // TODO: [NRFX-3172] Remove when FPGA and Palladium will have VPR1.1 implemented (see IP-5053)
 #if defined(BOARD_SYSTEMC)
-    return nrf_csr_read(VPRCSR_MINTTHRESH);
+    return (uint8_t)nrf_csr_read(VPRCSR_MINTTHRESH);
 #else
     return (nrf_csr_read(VPRCSR_MINTTHRESH) & VPRCSR_MINTTHRESH_TH_Msk) >> VPRCSR_MINTTHRESH_TH_Pos;
 #endif

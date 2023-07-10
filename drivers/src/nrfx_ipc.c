@@ -39,7 +39,7 @@ void nrfx_ipc_config_load(const nrfx_ipc_config_t * p_config)
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
-    uint32_t i;
+    uint8_t i;
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_send_config_set(NRF_IPC, i, p_config->send_task_config[i]);
@@ -57,7 +57,7 @@ void nrfx_ipc_uninit(void)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
-    uint32_t i;
+    uint8_t i;
     for (i = 0; i < IPC_CONF_NUM; ++i)
     {
         nrf_ipc_send_config_set(NRF_IPC, i, 0);
@@ -121,7 +121,7 @@ void nrfx_ipc_irq_handler(void)
 
     while (bitmask)
     {
-        uint8_t event_idx = NRF_CTZ(bitmask);
+        uint8_t event_idx = (uint8_t)NRF_CTZ(bitmask);
         bitmask &= ~(1UL << event_idx);
         nrf_ipc_event_clear(NRF_IPC, nrf_ipc_receive_event_get(event_idx));
         if (m_cb.handler)

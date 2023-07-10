@@ -212,9 +212,9 @@ NRF_STATIC_INLINE void nrf_resetinfo_error_status_set(NRF_RESETINFO_Type * p_reg
 NRF_STATIC_INLINE uint8_t nrf_resetinfo_error_status_get(NRF_RESETINFO_Type const * p_reg)
 {
 #if NRF_RESETINFO_HAS_RESETREAS_STRUCT
-    return p_reg->RESETREAS.ERROR.STATUS;
+    return (uint8_t)p_reg->RESETREAS.ERROR.STATUS;
 #else
-    return p_reg->ERROR.STATUS;
+    return (uint8_t)p_reg->ERROR.STATUS;
 #endif
 }
 

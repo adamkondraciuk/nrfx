@@ -462,7 +462,7 @@ NRF_STATIC_INLINE void nrf_resethub_cross_domain_reset_set(NRF_RESETHUB_Type *  
 
 NRF_STATIC_INLINE uint8_t nrf_resethub_gpregret_get(NRF_RESETHUB_Type const * p_reg)
 {
-    return p_reg->GPREGRET;
+    return (uint8_t)p_reg->GPREGRET;
 }
 
 NRF_STATIC_INLINE void nrf_resethub_gpregret_set(NRF_RESETHUB_Type * p_reg, uint8_t data)

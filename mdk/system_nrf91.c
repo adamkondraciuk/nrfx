@@ -303,7 +303,7 @@ void SystemStoreFICRNS()
     /* Make RAM region NS. */
     uint32_t ram_region = ((uint32_t)NRF_FICR_NS - (uint32_t)RAM_BASE) / SPU_RAMREGION_SIZE;
     __DSB();
-    NRF_SPU_S->RAMREGION[ram_region].PERM &= ~(1 << SPU_RAMREGION_PERM_SECATTR_Pos);
+    NRF_SPU_S->RAMREGION[ram_region].PERM &= ~(1UL << SPU_RAMREGION_PERM_SECATTR_Pos);
 }
 
 /* Block write and execute access to FICR RAM region */
@@ -319,10 +319,10 @@ void SystemLockFICRNS()
     __DSB();
     NRF_SPU_S->RAMREGION[ram_region].PERM &=
         ~(
-            (1 << SPU_RAMREGION_PERM_WRITE_Pos) |
-            (1 << SPU_RAMREGION_PERM_EXECUTE_Pos)
+            (1UL << SPU_RAMREGION_PERM_WRITE_Pos) |
+            (1UL << SPU_RAMREGION_PERM_EXECUTE_Pos)
         );
-    NRF_SPU_S->RAMREGION[ram_region].PERM |= 1 << SPU_RAMREGION_PERM_LOCK_Pos;
+    NRF_SPU_S->RAMREGION[ram_region].PERM |= 1UL << SPU_RAMREGION_PERM_LOCK_Pos;
 }
 
 /*lint --flb "Leave library region" */

@@ -276,7 +276,7 @@ NRF_STATIC_INLINE bool nrf_lfxo_statusana_settled_check(NRF_LFXO_Type const * p_
 
 NRF_STATIC_INLINE uint8_t nrf_lfxo_cload_get(NRF_LFXO_Type const * p_reg)
 {
-    uint8_t cload_reg = p_reg->CLOAD;
+    uint8_t cload_reg = (uint8_t)p_reg->CLOAD;
     uint8_t cap = (cload_reg & LFXO_CLOAD_VAL0_Msk) >> LFXO_CLOAD_VAL0_Pos;
 
     if (cload_reg & LFXO_CLOAD_VAL1_Msk)

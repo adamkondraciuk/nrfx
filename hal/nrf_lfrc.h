@@ -363,7 +363,7 @@ NRF_STATIC_INLINE uint32_t nrf_lfrc_cal_result_get(NRF_LFRC_Type const * p_reg, 
 
 NRF_STATIC_INLINE uint16_t nrf_lfrc_cal_num_of_cycles_get(NRF_LFRC_Type const * p_reg)
 {
-    return p_reg->CAL.NHI;
+    return (uint16_t)p_reg->CAL.NHI;
 }
 
 NRF_STATIC_INLINE void nrf_lfrc_power_control_set(NRF_LFRC_Type *          p_reg,

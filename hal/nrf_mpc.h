@@ -851,7 +851,7 @@ NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
     NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
     NRFX_ASSERT((offset & 0x3FFUL) == 0);
 
-    p_reg->OVERRIDE[index].OFFSET = offset;
+    p_reg->OVERRIDE[index].OFFSET = (int32_t)offset;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_reg,
@@ -859,7 +859,7 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_re
 {
     NRFX_ASSERT(index < NRF_MPC_OVERRIDE_COUNT);
 
-    return p_reg->OVERRIDE[index].OFFSET;
+    return (uint32_t)p_reg->OVERRIDE[index].OFFSET;
 }
 
 NRF_STATIC_INLINE void nrf_mpc_override_perm_set(NRF_MPC_Type * p_reg,
@@ -1017,7 +1017,7 @@ NRF_STATIC_INLINE uint8_t nrf_mpc_rtchoke_delay_get(NRF_MPC_Type const * p_reg, 
 {
     NRFX_ASSERT(slave < NRF_MPC_RTCHOKE_COUNT);
 
-    return p_reg->RTCHOKE.DELAY[slave];
+    return (uint8_t)p_reg->RTCHOKE.DELAY[slave];
 }
 #endif
 

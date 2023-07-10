@@ -55,7 +55,7 @@ static nrfx_err_t channel_allocate(nrfx_atomic_t * p_channels_available,
     NRFX_ASSERT(p_channel);
     uint32_t chan_avail;
     uint32_t chan_avail_masked;
-    int8_t chan_to_alloc;
+    uint8_t chan_to_alloc;
     uint32_t prev_mask;
 
     do {
@@ -65,7 +65,10 @@ static nrfx_err_t channel_allocate(nrfx_atomic_t * p_channels_available,
         {
             return NRFX_ERROR_NO_MEM;
         }
-        chan_to_alloc = 31 - NRF_CLZ(chan_avail_masked);
+        else
+        {
+            chan_to_alloc = (uint8_t)(31UL - NRF_CLZ(chan_avail_masked));
+        }
 
         prev_mask = nrfx_atomic_u32_fetch_and((nrfx_atomic_u32_t *)p_channels_available,
                                               ~NRFX_BIT(chan_to_alloc));
@@ -704,7 +707,7 @@ void nrfx_gppi_channels_disable_all(void)
     uint32_t mask = ~(uint32_t)m_virtual_channels;
     while (mask)
     {
-        uint8_t chan = NRF_CTZ(mask);
+        uint8_t chan = (uint8_t)NRF_CTZ(mask);
         dppic_channel_set(chan, false);
         mask &= ~NRFX_BIT(chan);
     }
@@ -714,7 +717,7 @@ void nrfx_gppi_channels_enable(uint32_t mask)
 {
     while (mask)
     {
-        uint8_t chan = NRF_CTZ(mask);
+        uint8_t chan = (uint8_t)NRF_CTZ(mask);
         dppic_channel_set(chan, true);
         mask &= ~NRFX_BIT(chan);
     }
@@ -726,7 +729,7 @@ void nrfx_gppi_channels_disable(uint32_t mask)
     while (mask)
     {
         // Remove assigned channels for all involved DPPICn peripherals.
-        uint8_t chan = NRF_CTZ(mask);
+        uint8_t chan = (uint8_t)NRF_CTZ(mask);
         dppic_channel_set(chan, false);
         mask &= ~NRFX_BIT(chan);
     }

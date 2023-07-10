@@ -829,7 +829,7 @@ NRFY_STATIC_INLINE uint32_t __nrfy_internal_grtc_events_process(NRF_GRTC_Type * 
     nrf_barrier_r();
     while (channel_mask)
     {
-        uint8_t          cc_channel = NRF_CTZ(channel_mask);
+        uint8_t          cc_channel = (uint8_t)NRF_CTZ(channel_mask);
         nrf_grtc_event_t event      = nrf_grtc_sys_counter_compare_event_get(cc_channel);
         (void)__nrfy_internal_grtc_event_handle(p_reg, mask, event, &event_mask);
         channel_mask &= ~NRF_GRTC_CHANNEL_INT_MASK(cc_channel);

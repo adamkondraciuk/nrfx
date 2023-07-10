@@ -684,7 +684,7 @@ void nrf_vregao0v8_config_static_set(NRF_VREGAO0V8_Type *          p_reg,
                                VREGAO0V8_CONFIG_CFGSTATIC_DISABLEBPDET_Enabled :
                                VREGAO0V8_CONFIG_CFGSTATIC_DISABLEBPDET_Disabled) <<
                               VREGAO0V8_CONFIG_CFGSTATIC_DISABLEBPDET_Pos)        |
-                              ((cfg.trim_ibpp0 ? 1 : 0) <<
+                              ((cfg.trim_ibpp0 ? 1UL : 0UL) <<
                               VREGAO0V8_CONFIG_CFGSTATIC_TRIMIBPP0_Pos);
 }
 
@@ -772,7 +772,7 @@ NRF_STATIC_INLINE void nrf_vregao0v8_trim_bpdet_set(NRF_VREGAO0V8_Type * p_reg, 
 
 NRF_STATIC_INLINE uint8_t nrf_vregao0v8_trim_bpdef_get(NRF_VREGAO0V8_Type const * p_reg)
 {
-    return p_reg->TRIM.BPDET;
+    return (uint8_t)p_reg->TRIM.BPDET;
 }
 
 NRF_STATIC_INLINE void nrf_vregao0v8_mirror_lock_set(NRF_VREGAO0V8_Type * p_reg, bool lock)
@@ -788,7 +788,7 @@ NRF_STATIC_INLINE void nrf_vregao0v8_vout_set(NRF_VREGAO0V8_Type * p_reg, uint8_
 
 NRF_STATIC_INLINE uint8_t nrf_vregao0v8_vout_get(NRF_VREGAO0V8_Type const * p_reg)
 {
-    return p_reg->VOUT;
+    return (uint8_t)p_reg->VOUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregao0v8_mode_set(NRF_VREGAO0V8_Type * p_reg,
@@ -811,7 +811,7 @@ NRF_STATIC_INLINE void nrf_vregao0v8_ithreshold_set(NRF_VREGAO0V8_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_vregao0v8_ithreshold_get(NRF_VREGAO0V8_Type const * p_reg)
 {
-    return p_reg->ITHRESHOLD;
+    return (uint8_t)p_reg->ITHRESHOLD;
 }
 
 NRF_STATIC_INLINE void nrf_vregao0v8_override_set(NRF_VREGAO0V8_Type *          p_reg,

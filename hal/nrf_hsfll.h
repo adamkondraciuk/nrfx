@@ -591,9 +591,9 @@ NRF_STATIC_INLINE void nrf_hsfll_trim_get(NRF_HSFLL_Type const * p_reg,
 {
     NRFX_ASSERT(p_trim);
 
-    p_trim->vsup   = p_reg->TRIM.VSUP;
-    p_trim->coarse = p_reg->TRIM.COARSE;
-    p_trim->fine   = p_reg->TRIM.FINE;
+    p_trim->vsup   = (uint8_t)p_reg->TRIM.VSUP;
+    p_trim->coarse = (uint8_t)p_reg->TRIM.COARSE;
+    p_trim->fine   = (uint8_t)p_reg->TRIM.FINE;
 }
 
 #endif // NRF_DECLARE_ONLY

@@ -13,7 +13,7 @@
 #include <soc/interconnect/dppic_ppib/nrfx_interconnect_dppic_ppib_lumos.h>
 
 /** @brief Invalid channel number. */
-#define NRFX_GPPI_CHANNEL_INVALID (-1)
+#define NRFX_GPPI_CHANNEL_INVALID UINT8_MAX
 
 // TODO: Add switch to 1 for Moonlight FP1.
 #define NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG 0
@@ -564,7 +564,7 @@ void nrfx_gppi_channels_disable_all(void)
 
     while (mask)
     {
-        uint8_t channel = NRF_CTZ(mask);
+        uint8_t channel = (uint8_t)NRF_CTZ(mask);
         virtual_channel_enable_set(channel, false);
         mask &= ~NRFX_BIT(channel);
     }
@@ -574,7 +574,7 @@ void nrfx_gppi_channels_enable(uint32_t mask)
 {
     while (mask)
     {
-        uint8_t channel = NRF_CTZ(mask);
+        uint8_t channel = (uint8_t)NRF_CTZ(mask);
         virtual_channel_enable_set(channel, true);
         mask &= ~NRFX_BIT(channel);
     }
@@ -586,7 +586,7 @@ void nrfx_gppi_channels_disable(uint32_t mask)
     while (mask)
     {
         // Remove assigned channels for all involved DPPICn peripherals.
-        uint8_t channel = NRF_CTZ(mask);
+        uint8_t channel = (uint8_t)NRF_CTZ(mask);
         virtual_channel_enable_set(channel, false);
         mask &= ~NRFX_BIT(channel);
     }

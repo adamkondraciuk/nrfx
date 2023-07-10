@@ -153,10 +153,10 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
     {
         nrfy_rtc_cc_set(p_instance->p_reg, channel, val);
         uint32_t cnt = nrfy_rtc_counter_get(p_instance->p_reg);
-        int32_t diff = cnt - val;
+        int32_t diff = (int32_t)(cnt - val);
         if (cnt < val)
         {
-            diff += NRF_RTC_COUNTER_MAX;
+            diff += (int32_t)NRF_RTC_COUNTER_MAX;
         }
         if (diff < m_cb[p_instance->instance_id].tick_latency)
         {
@@ -238,7 +238,7 @@ static void irq_handler(NRF_RTC_Type  * p_reg,
     nrf_rtc_event_t event;
     uint32_t active_cc_mask = nrfy_rtc_int_enable_check(p_reg, NRF_RTC_ALL_CHANNELS_INT_MASK);
 
-    for (uint32_t i = 0; i < channel_count; i++)
+    for (uint8_t i = 0; i < channel_count; i++)
     {
         event = nrf_rtc_compare_event_get(i);
         if ((active_cc_mask & NRFY_EVENT_TO_INT_BITMASK(event)) &&

@@ -156,7 +156,11 @@ typedef enum
     NRF_GPIOTE_INT_IN6_MASK = NRFX_CONCAT(GPIOTE_INTENSET, NRF_GPIOTE_IRQ_GROUP, _IN6_Msk), ///< GPIOTE interrupt from IN6.
     NRF_GPIOTE_INT_IN7_MASK = NRFX_CONCAT(GPIOTE_INTENSET, NRF_GPIOTE_IRQ_GROUP, _IN7_Msk), ///< GPIOTE interrupt from IN7.
 #endif
-    NRF_GPIOTE_INT_PORT_MASK = (int)NRF_GPIOTE_INT_PORT_MASK_NAME                           ///< GPIOTE interrupt from PORT event.
+#if defined(__CC_ARM) || defined(__NRFX_DOXYGEN__)
+    NRF_GPIOTE_INT_PORT_MASK = (int)NRF_GPIOTE_INT_PORT_MASK_NAME,                          ///< GPIOTE interrupt from PORT event.
+#else
+    NRF_GPIOTE_INT_PORT_MASK = NRF_GPIOTE_INT_PORT_MASK_NAME,
+#endif
 } nrf_gpiote_int_t;
 
 /** @brief Symbol specifying bitmask collecting all IN events interrupts. */

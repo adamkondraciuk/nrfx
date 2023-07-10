@@ -417,7 +417,8 @@ NRF_STATIC_INLINE void nrf_fll16m_clockstatus_get(NRF_FLL16M_Type const *    p_r
     p_status->accuracy_withinlimit = (regval & FLL16M_CLOCKSTATUS_ACCURACY_Msk) >>
         FLL16M_CLOCKSTATUS_ACCURACY_Pos;
     p_status->locked = (regval & FLL16M_CLOCKSTATUS_LOCKED_Msk) >> FLL16M_CLOCKSTATUS_LOCKED_Pos;
-    p_status->slope = (regval & FLL16M_CLOCKSTATUS_SLOPE_Msk) >> FLL16M_CLOCKSTATUS_SLOPE_Pos;
+    p_status->slope = (uint8_t)((regval & FLL16M_CLOCKSTATUS_SLOPE_Msk)
+                                >> FLL16M_CLOCKSTATUS_SLOPE_Pos);
 }
 
 NRF_STATIC_INLINE bool nrf_fll16m_freqmeas_done_check(NRF_FLL16M_Type const * p_reg)

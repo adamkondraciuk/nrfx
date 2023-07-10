@@ -456,7 +456,7 @@ NRF_STATIC_INLINE void nrf_vregmram_trim_vbg_set(NRF_VREGMRAM_Type * p_reg, uint
 
 NRF_STATIC_INLINE uint8_t nrf_vregmram_trim_vbg_get(NRF_VREGMRAM_Type const * p_reg)
 {
-    return p_reg->TRIM.VBG;
+    return (uint8_t)p_reg->TRIM.VBG;
 }
 
 NRF_STATIC_INLINE void nrf_vregmram_trim_bias_set(NRF_VREGMRAM_Type *      p_reg, 
@@ -478,7 +478,7 @@ NRF_STATIC_INLINE void nrf_vregmram_trim_vpr_set(NRF_VREGMRAM_Type * p_reg, uint
 
 NRF_STATIC_INLINE uint8_t nrf_vregmram_trim_vpr_get(NRF_VREGMRAM_Type const * p_reg)
 {
-    return p_reg->TRIM.VPR;
+    return (uint8_t)p_reg->TRIM.VPR;
 }
 
 NRF_STATIC_INLINE void nrf_vregmram_trim_vref_set(NRF_VREGMRAM_Type * p_reg, uint8_t val)
@@ -488,7 +488,7 @@ NRF_STATIC_INLINE void nrf_vregmram_trim_vref_set(NRF_VREGMRAM_Type * p_reg, uin
 
 NRF_STATIC_INLINE uint8_t nrf_vregmram_trim_vref_get(NRF_VREGMRAM_Type const * p_reg)
 {
-    return p_reg->TRIM.VREF;
+    return (uint8_t)p_reg->TRIM.VREF;
 }
 
 NRF_STATIC_INLINE void nrf_vregmram_mirror_lock(NRF_VREGMRAM_Type * p_reg, bool lock)

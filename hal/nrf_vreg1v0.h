@@ -731,7 +731,7 @@ NRF_STATIC_INLINE void nrf_vreg1v0_trim_iref_set(NRF_VREG1V0_Type * p_reg, uint8
 
 NRF_STATIC_INLINE uint8_t nrf_vreg1v0_trim_iref_get(NRF_VREG1V0_Type const * p_reg)
 {
-    return p_reg->TRIM.IREF;
+    return (uint8_t)p_reg->TRIM.IREF;
 }
 
 NRF_STATIC_INLINE void nrf_vreg1v0_trim_highpower_set(NRF_VREG1V0_Type * p_reg, uint8_t val)
@@ -741,7 +741,7 @@ NRF_STATIC_INLINE void nrf_vreg1v0_trim_highpower_set(NRF_VREG1V0_Type * p_reg, 
 
 NRF_STATIC_INLINE uint8_t nrf_vreg1v0_trim_highpower_get(NRF_VREG1V0_Type const * p_reg)
 {
-    return p_reg->TRIM.HIGHPOWER;
+    return (uint8_t)p_reg->TRIM.HIGHPOWER;
 }
 
 NRF_STATIC_INLINE void nrf_vreg1v0_trim_lowpower_set(NRF_VREG1V0_Type * p_reg, uint8_t val)
@@ -751,7 +751,7 @@ NRF_STATIC_INLINE void nrf_vreg1v0_trim_lowpower_set(NRF_VREG1V0_Type * p_reg, u
 
 NRF_STATIC_INLINE uint8_t nrf_vreg1v0_trim_lowpower_get(NRF_VREG1V0_Type const * p_reg)
 {
-    return p_reg->TRIM.LOWPOWER;
+    return (uint8_t)p_reg->TRIM.LOWPOWER;
 }
 
 NRF_STATIC_INLINE void nrf_vreg1v0_trim_ulpr_set(NRF_VREG1V0_Type * p_reg, uint8_t val)
@@ -761,7 +761,7 @@ NRF_STATIC_INLINE void nrf_vreg1v0_trim_ulpr_set(NRF_VREG1V0_Type * p_reg, uint8
 
 NRF_STATIC_INLINE uint8_t nrf_vreg1v0_trim_ulpr_get(NRF_VREG1V0_Type const * p_reg)
 {
-    return p_reg->TRIM.ULPR;
+    return (uint8_t)p_reg->TRIM.ULPR;
 }
 
 NRF_STATIC_INLINE void nrf_vreg1v0_mirror_lock_set(NRF_VREG1V0_Type * p_reg, bool lock)
@@ -842,7 +842,7 @@ NRF_STATIC_INLINE void nrf_vreg1v0_ithreshold_set(NRF_VREG1V0_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_vreg1v0_ithreshold_get(NRF_VREG1V0_Type const * p_reg)
 {
-    return p_reg->ITHRESHOLD;
+    return (uint8_t)p_reg->ITHRESHOLD;
 }
 
 NRF_STATIC_INLINE void nrf_vreg1v0_override_set(NRF_VREG1V0_Type *          p_reg,

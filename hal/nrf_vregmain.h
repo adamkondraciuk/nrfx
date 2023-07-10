@@ -1250,7 +1250,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_biasibpsr_set(NRF_VREGMAIN_Type * p_reg
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_biasibpsr_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.BIASIBPSR;
+    return (uint8_t)p_reg->TRIM.BIASIBPSR;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vddao1v8hystoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1261,7 +1261,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vddao1v8hystoutput_set(NRF_VREGMAIN_Typ
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vddao1v8hystoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDDAO1V8HYSTOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDDAO1V8HYSTOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vddao1v8pwmoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1272,7 +1272,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vddao1v8pwmoutput_set(NRF_VREGMAIN_Type
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vddao1v8pwmoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDDAO1V8PWMOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDDAO1V8PWMOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vdd1v0hystoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1283,7 +1283,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vdd1v0hystoutput_set(NRF_VREGMAIN_Type 
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vdd1v0hystoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDD1V0HYSTOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDD1V0HYSTOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vddvs0v8hystoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1294,7 +1294,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vddvs0v8hystoutput_set(NRF_VREGMAIN_Typ
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vddvs0v8hystoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDDVS0V8HYSTOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDDVS0V8HYSTOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vddvs0v8pwmoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1305,7 +1305,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vddvs0v8pwmoutput_set(NRF_VREGMAIN_Type
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vddvs0v8pwmoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDDVS0V8PWMOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDDVS0V8PWMOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_vdd1v0pwmoutput_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1316,7 +1316,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vdd1v0pwmoutput_set(NRF_VREGMAIN_Type *
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vdd1v0pwmoutput_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VDD1V0PWMOUTPUT;
+    return (uint8_t)p_reg->TRIM.VDD1V0PWMOUTPUT;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_zcross_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1327,7 +1327,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_zcross_set(NRF_VREGMAIN_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_zcross_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.ZCROSS;
+    return (uint8_t)p_reg->TRIM.ZCROSS;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_hsilim_set(NRF_VREGMAIN_Type * p_reg, 
@@ -1338,7 +1338,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_hsilim_set(NRF_VREGMAIN_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_hsilim_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.HSILIM;
+    return (uint8_t)p_reg->TRIM.HSILIM;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_trim_icmp_set(NRF_VREGMAIN_Type *      p_reg, 
@@ -1361,7 +1361,7 @@ NRF_STATIC_INLINE void nrf_vregmain_trim_vgnd_set(NRF_VREGMAIN_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_vregmain_trim_vgnd_get(NRF_VREGMAIN_Type const * p_reg)
 {
-    return p_reg->TRIM.VGND;
+    return (uint8_t)p_reg->TRIM.VGND;
 }
 
 NRF_STATIC_INLINE void nrf_vregmain_mirror_lock(NRF_VREGMAIN_Type * p_reg, bool lock)

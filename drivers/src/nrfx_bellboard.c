@@ -80,7 +80,7 @@ static void bellboard_irq_handler(uint8_t interrupt_idx)
     /* Pending interrupts registers are cleared when event is cleared.
      * Add current pending interrupts to be processed later.
      */
-    for (int i = 0; i < NRFX_BELLBOARD_ENABLED_COUNT; i++)
+    for (uint8_t i = 0; i < NRFX_BELLBOARD_ENABLED_COUNT; i++)
     {
         if (m_cb[i].state == NRFX_DRV_STATE_INITIALIZED)
         {
@@ -102,9 +102,9 @@ static void bellboard_irq_handler(uint8_t interrupt_idx)
     {
         while (int_pend)
         {
-            uint32_t event_no = NRF_CTZ(int_pend);
+            uint8_t event_no = (uint8_t)NRF_CTZ(int_pend);
             m_cb[inst_idx].handler(event_no, m_cb[inst_idx].context);
-            nrf_bitmask_bit_clear(event_no, (void *)&int_pend);
+            nrf_bitmask_bit_clear(event_no, &int_pend);
         }
     }
 }

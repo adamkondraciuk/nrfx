@@ -327,7 +327,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_task_address_get(nrfx_timer_t con
                                                                 uint32_t             channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
-    return nrfy_timer_task_address_get(p_instance->p_reg, nrfy_timer_capture_task_get(channel));
+    return nrfy_timer_task_address_get(p_instance->p_reg,
+                                       nrfy_timer_capture_task_get((uint8_t)channel));
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_event_address_get(nrfx_timer_t const * p_instance,
@@ -340,7 +341,8 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t co
                                                                  uint32_t             channel)
 {
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
-    return nrfy_timer_event_address_get(p_instance->p_reg, nrfy_timer_compare_event_get(channel));
+    return nrfy_timer_event_address_get(p_instance->p_reg,
+                                        nrfy_timer_compare_event_get((uint8_t)channel));
 }
 
 NRFX_STATIC_INLINE uint32_t nrfx_timer_capture_get(nrfx_timer_t const *   p_instance,

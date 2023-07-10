@@ -200,7 +200,7 @@ NRF_STATIC_INLINE int32_t nrf_temp_result_get(NRF_TEMP_Type const * p_reg)
     /* Apply workaround for the nRF51 series anomaly 28 - TEMP: Negative measured values are not represented correctly. */
     if ((raw_measurement & 0x00000200) != 0)
     {
-        raw_measurement |= 0xFFFFFC00UL;
+        raw_measurement |= (int32_t)0xFFFFFC00;
     }
 #endif
 

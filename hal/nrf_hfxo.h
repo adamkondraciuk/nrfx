@@ -360,7 +360,7 @@ NRF_STATIC_INLINE void nrf_hfxo_status_get(NRF_HFXO_Type const * p_reg, nrf_hfxo
 
 NRF_STATIC_INLINE uint8_t nrf_hfxo_cload_get(NRF_HFXO_Type const * p_reg)
 {
-    uint8_t cload_reg = p_reg->CLOAD;
+    uint8_t cload_reg = (uint8_t)p_reg->CLOAD;
     uint8_t cap = (cload_reg & HFXO_CLOAD_VAL0_Msk) >> HFXO_CLOAD_VAL0_Pos;
 
     if (cload_reg & HFXO_CLOAD_VAL1_Msk)

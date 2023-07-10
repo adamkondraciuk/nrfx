@@ -273,12 +273,12 @@ static nrfx_err_t qspi_configure(nrfx_qspi_config_t const * p_config)
     uint32_t regval = nrf_qspi_ifconfig0_raw_get(NRF_QSPI);
     if (p_config->phy_if.sck_freq == NRF_QSPI_FREQ_DIV1)
     {
-        regval |= ((1 << 16) | (1 << 17));
+        regval |= ((1UL << 16) | (1UL << 17));
     }
     else
     {
-        regval &= ~(1 << 17);
-        regval |=  (1 << 16);
+        regval &= ~(1UL << 17);
+        regval |=  (1UL << 16);
     }
     nrf_qspi_ifconfig0_raw_set(NRF_QSPI, regval);
     nrf_qspi_iftiming_set(NRF_QSPI, 6);

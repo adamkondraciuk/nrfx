@@ -67,8 +67,8 @@ NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_TOGGLE == GPIOTE_CONFIG_POLARITY_Toggle);
 
 /* Trigger mode field. It stores the information about a trigger type. If trigger
  * is not enabled, it holds information about task usage and pin direction. */
-#define PIN_FLAG_TRIG_MODE_OFFSET 2
-#define PIN_FLAG_TRIG_MODE_BITS 3
+#define PIN_FLAG_TRIG_MODE_OFFSET 2UL
+#define PIN_FLAG_TRIG_MODE_BITS 3UL
 #define PIN_FLAG_TRIG_MODE_MASK \
         (NRFX_BIT_MASK(PIN_FLAG_TRIG_MODE_BITS) << PIN_FLAG_TRIG_MODE_OFFSET)
 NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_MAX <= NRFX_BIT(PIN_FLAG_TRIG_MODE_BITS));
@@ -85,8 +85,8 @@ NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_MAX <= NRFX_BIT(PIN_FLAG_TRIG_MODE_BITS))
 
 #define PIN_FLAG_HANDLER_PRESENT NRFX_BIT(8)
 
-#define PIN_HANDLER_ID_SHIFT 9
-#define PIN_HANDLER_ID_BITS 4
+#define PIN_HANDLER_ID_SHIFT 9UL
+#define PIN_HANDLER_ID_BITS 4UL
 #define PIN_HANDLER_ID_MASK (NRFX_BIT_MASK(PIN_HANDLER_ID_BITS) << PIN_HANDLER_ID_SHIFT)
 #define PIN_HANDLER_MASK (PIN_FLAG_HANDLER_PRESENT | PIN_HANDLER_ID_MASK)
 
@@ -106,8 +106,8 @@ NRFX_STATIC_ASSERT(NRFX_GPIOTE_TRIGGER_MAX <= NRFX_BIT(PIN_FLAG_TRIG_MODE_BITS))
 #define PIN_HANDLER_MAX_COUNT NRFX_BIT_MASK(PIN_HANDLER_ID_BITS)
 NRFX_STATIC_ASSERT(NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS <= PIN_HANDLER_MAX_COUNT);
 
-#define PIN_TE_ID_SHIFT 13
-#define PIN_TE_ID_BITS 3
+#define PIN_TE_ID_SHIFT 13UL
+#define PIN_TE_ID_BITS 3UL
 #define PIN_TE_ID_MASK (NRFX_BIT_MASK(PIN_TE_ID_BITS) << PIN_TE_ID_SHIFT)
 
 /* Validate that field is big enough for number of channels. */
@@ -159,7 +159,7 @@ static uint8_t get_pin_idx(nrfx_gpiote_pin_t pin)
 {
 #if FULL_PORTS_PRESENT
     // If all ports have 32 pins then array ordering matches pin ordering.
-    return pin;
+    return (uint8_t)pin;
 #else
     // Possible instances must be explicitely listed as NRFX_LISTIFY cannot be nested.
     static const uint8_t port_offset[] = {
@@ -302,7 +302,7 @@ static void release_handler(nrfx_gpiote_pin_t pin)
         return;
     }
 
-    m_cb.pin_flags[idx] &= ~PIN_HANDLER_MASK;
+    m_cb.pin_flags[idx] &= (uint16_t)~PIN_HANDLER_MASK;
 
     /* Check if other pin is using same handler and release handler only if handler
      * is not used by others.
@@ -310,7 +310,7 @@ static void release_handler(nrfx_gpiote_pin_t pin)
     if (!handler_in_use(handler_id))
     {
         m_cb.handlers[handler_id].handler = NULL;
-        nrfx_err_t err = nrfx_flag32_free(&m_cb.available_evt_handlers, handler_id);
+        nrfx_err_t err = nrfx_flag32_free(&m_cb.available_evt_handlers, (uint8_t)handler_id);
         (void)err;
         NRFX_ASSERT(err == NRFX_SUCCESS);
     }
@@ -353,7 +353,7 @@ nrfx_err_t nrfx_gpiote_pin_uninit(nrfx_gpiote_pin_t pin)
 
 static int32_t find_handler(nrfx_gpiote_interrupt_handler_t handler, void * p_context)
 {
-    for (uint32_t i = 0; i < NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS; i++)
+    for (int32_t i = 0; i < NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS; i++)
     {
         if ((m_cb.handlers[i].handler == handler) && (m_cb.handlers[i].p_context == p_context))
         {
@@ -394,7 +394,7 @@ static nrfx_err_t pin_handler_set(nrfx_gpiote_pin_t               pin,
 
     m_cb.handlers[handler_id].handler = handler;
     m_cb.handlers[handler_id].p_context = p_context;
-    m_cb.pin_flags[get_pin_idx(pin)] |= PIN_FLAG_HANDLER(handler_id);
+    m_cb.pin_flags[get_pin_idx(pin)] |= PIN_FLAG_HANDLER((uint8_t)handler_id);
 
     return NRFX_SUCCESS;
 }
@@ -441,7 +441,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
 
         nrfy_gpio_reconfigure(pin, &dir, &input_connect, &p_input_config->pull, NULL, NULL);
 
-        m_cb.pin_flags[idx] &= ~PIN_FLAG_OUTPUT;
+        m_cb.pin_flags[idx] &= (uint16_t)~PIN_FLAG_OUTPUT;
         m_cb.pin_flags[idx] |= PIN_FLAG_IN_USE;
     }
 
@@ -459,7 +459,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
         }
         else
         {
-            m_cb.pin_flags[idx] &= ~(PIN_TE_ID_MASK | PIN_FLAG_TE_USED);
+            m_cb.pin_flags[idx] &= (uint16_t)~(PIN_TE_ID_MASK | PIN_FLAG_TE_USED);
             if (use_evt)
             {
                 bool edge = trigger <= NRFX_GPIOTE_TRIGGER_TOGGLE;
@@ -498,7 +498,7 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
             nrf_bitmask_bit_set(pin, (uint8_t *)m_cb.port_pins);
         }
 #endif
-        m_cb.pin_flags[idx] &= ~PIN_FLAG_TRIG_MODE_MASK;
+        m_cb.pin_flags[idx] &= (uint16_t)~PIN_FLAG_TRIG_MODE_MASK;
         m_cb.pin_flags[idx] |= PIN_FLAG_TRIG_MODE_SET(trigger);
     }
 
@@ -553,7 +553,7 @@ nrfx_err_t nrfx_gpiote_output_configure(nrfx_gpiote_pin_t                   pin,
         uint32_t ch = p_task_config->task_ch;
 
         nrfy_gpiote_te_default(NRF_GPIOTE, ch);
-        m_cb.pin_flags[idx] &= ~(PIN_FLAG_TE_USED | PIN_TE_ID_MASK);
+        m_cb.pin_flags[idx] &= (uint16_t)~(PIN_FLAG_TE_USED | PIN_TE_ID_MASK);
         if (p_task_config->polarity != NRF_GPIOTE_POLARITY_NONE)
         {
             nrfy_gpiote_task_configure(NRF_GPIOTE, ch, pin,
@@ -975,7 +975,7 @@ static void port_event_handle(void)
                 uint32_t pin = NRF_CTZ(latch[i]);
 
                 /* Convert to absolute value. */
-                uint32_t abs_pin = NRF_PIN_PORT_TO_PIN_NUMBER(pin, ports[i]);
+                nrfx_gpiote_pin_t abs_pin = NRF_PIN_PORT_TO_PIN_NUMBER(pin, ports[i]);
                 nrf_gpio_pin_sense_t sense;
                 nrfx_gpiote_trigger_t trigger =
                     PIN_FLAG_TRIG_MODE_GET(m_cb.pin_flags[get_pin_idx(abs_pin)]);
@@ -1033,7 +1033,7 @@ static void port_event_handle(void)
     uint32_t pins_to_check[GPIO_COUNT];
     uint32_t input[GPIO_COUNT] = {0};
     uint8_t rel_pin;
-    uint8_t pin;
+    nrfx_gpiote_pin_t pin;
     nrfx_gpiote_trigger_t trigger;
 
     nrfy_gpio_ports_read(0, GPIO_COUNT, input);
@@ -1051,7 +1051,7 @@ static void port_event_handle(void)
                 nrf_gpio_pin_sense_t sense;
                 bool pin_state;
 
-                rel_pin = NRF_CTZ(pins_to_check[i]);
+                rel_pin = (uint8_t)NRF_CTZ(pins_to_check[i]);
                 pins_to_check[i] &= ~NRFX_BIT(rel_pin);
                 /* Absolute */
                 pin = rel_pin + 32 * i;
@@ -1085,7 +1085,7 @@ static void port_event_handle(void)
 
             while (pin_mask)
             {
-                rel_pin = NRF_CTZ(pin_mask);
+                rel_pin = (uint8_t)NRF_CTZ(pin_mask);
                 pin_mask &= ~NRFX_BIT(rel_pin);
                 pin = rel_pin + 32 * i;
                 if (nrfy_gpio_pin_sense_get(pin) != NRF_GPIO_PIN_NOSENSE)

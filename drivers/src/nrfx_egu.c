@@ -53,14 +53,14 @@ static uint32_t egu_event_mask_get_and_clear(NRF_EGU_Type * p_reg, uint32_t int_
     uint32_t event_mask = 0;
     while (int_mask)
     {
-        uint8_t event_idx = NRF_CTZ(int_mask);
-        int_mask &= ~(1uL << event_idx);
+        uint8_t event_idx = (uint8_t)NRF_CTZ(int_mask);
+        int_mask &= ~(1UL << event_idx);
 
         nrf_egu_event_t event = nrf_egu_triggered_event_get(event_idx);
         if (nrf_egu_event_check(p_reg, event))
         {
             nrf_egu_event_clear(p_reg, event);
-            event_mask |= (1uL << event_idx);
+            event_mask |= (1UL << event_idx);
         }
     }
     return event_mask;
@@ -129,7 +129,7 @@ void nrfx_egu_uninit(nrfx_egu_t const * p_instance)
 
     egu_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    nrf_egu_int_disable(p_instance->p_reg, ~0uL);
+    nrf_egu_int_disable(p_instance->p_reg, ~0UL);
     NRFX_IRQ_DISABLE(nrfx_get_irq_number(p_instance->p_reg));
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
@@ -137,15 +137,15 @@ void nrfx_egu_uninit(nrfx_egu_t const * p_instance)
 
 static void irq_handler(NRF_EGU_Type * p_reg, egu_control_block_t * p_cb)
 {
-    uint32_t int_mask = nrf_egu_int_enable_check(p_reg, ~0uL);
+    uint32_t int_mask = nrf_egu_int_enable_check(p_reg, ~0UL);
 
     /* Check (and clear) only the events that are set to generate interrupts.
        Leave the other ones untouched. */
     uint32_t event_mask = egu_event_mask_get_and_clear(p_reg, int_mask);
     while (event_mask)
     {
-        uint8_t event_idx = NRF_CTZ(event_mask);
-        event_mask &= ~(1uL << event_idx);
+        uint8_t event_idx = (uint8_t)NRF_CTZ(event_mask);
+        event_mask &= ~(1UL << event_idx);
         p_cb->handler(event_idx, p_cb->p_context);
     }
 }

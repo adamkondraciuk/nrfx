@@ -434,8 +434,12 @@ static void twis_configure(nrfx_twis_t const *        p_instance,
     {
         nrf_twis_pins_set(p_instance->p_reg, p_config->scl_pin, p_config->sda_pin);
     }
-    nrf_twis_address_set(p_instance->p_reg, 0, p_config->addr[0]);
-    nrf_twis_address_set(p_instance->p_reg, 1, p_config->addr[1]);
+
+    NRFX_ASSERT(p_config->addr[0] <= NRF_TWIS_CONFIG_ADDRESS0_MASK);
+    NRFX_ASSERT(p_config->addr[1] <= NRF_TWIS_CONFIG_ADDRESS1_MASK);
+    nrf_twis_address_set(p_instance->p_reg, 0, (nrf_twis_address_t)p_config->addr[0]);
+    nrf_twis_address_set(p_instance->p_reg, 1, (nrf_twis_address_t)p_config->addr[1]);
+
     nrf_twis_config_address_set(p_instance->p_reg, (nrf_twis_config_addr_mask_t)addr_mask);
 
     if (m_cb[p_instance->drv_inst_idx].ev_handler)

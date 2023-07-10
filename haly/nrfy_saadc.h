@@ -92,7 +92,7 @@ NRFY_STATIC_INLINE void nrfy_saadc_int_init(NRF_SAADC_Type * p_reg,
     __nrfy_internal_saadc_event_enabled_clear(p_reg, mask, NRF_SAADC_EVENT_CALIBRATEDONE);
     __nrfy_internal_saadc_event_enabled_clear(p_reg, mask, NRF_SAADC_EVENT_STOPPED);
 
-    for (uint32_t i = 0; i < SAADC_CH_NUM; i++)
+    for (uint8_t i = 0; i < SAADC_CH_NUM; i++)
     {
          nrf_saadc_event_t event = nrf_saadc_limit_event_get(i, NRF_SAADC_LIMIT_LOW);
          __nrfy_internal_saadc_event_enabled_clear(p_reg, mask, event);
@@ -626,7 +626,7 @@ uint32_t __nrfy_internal_saadc_events_process(NRF_SAADC_Type *            p_reg,
 
     if (mask & NRF_SAADC_ALL_CHANNELS_LIMITS_INT_MASK)
     {
-        for (uint32_t i = 0; i < SAADC_CH_NUM; i++)
+        for (uint8_t i = 0; i < SAADC_CH_NUM; i++)
         {
              nrf_saadc_event_t event = nrf_saadc_limit_event_get(i, NRF_SAADC_LIMIT_LOW);
              __nrfy_internal_saadc_event_handle(p_reg, mask, event, &evt_mask);

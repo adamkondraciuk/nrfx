@@ -44,7 +44,7 @@ typedef struct
     nrfx_pwm_handler_t        handler;
     void *                    p_context;
     nrfx_drv_state_t volatile state;
-    uint8_t                   flags;
+    uint32_t                  flags;
     bool                      skip_gpio_cfg;
 } pwm_control_block_t;
 static pwm_control_block_t m_cb[NRFX_PWM_ENABLED_COUNT];
@@ -234,7 +234,7 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
 
 static uint32_t start_playback(nrfx_pwm_t const *    p_instance,
                                pwm_control_block_t * p_cb,
-                               uint8_t               flags,
+                               uint32_t              flags,
                                uint8_t               seq_id)
 {
     p_cb->state = NRFX_DRV_STATE_POWERED_ON;
@@ -268,7 +268,7 @@ static uint32_t start_playback(nrfx_pwm_t const *    p_instance,
 #endif
         if (flags & NRFX_PWM_FLAG_NO_EVT_FINISHED)
         {
-            int_mask &= ~NRF_PWM_INT_LOOPSDONE_MASK;
+            int_mask &= (uint32_t)~NRF_PWM_INT_LOOPSDONE_MASK;
         }
 
         nrfy_pwm_int_set(p_instance->p_reg, int_mask);
@@ -318,7 +318,7 @@ uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const *         p_instance,
     nrfy_pwm_sequence_set(p_instance->p_reg, 1, p_sequence);
     bool odd = (playback_count & 1);
     nrfy_pwm_loop_set(p_instance->p_reg,
-        (playback_count / 2) + (odd ? 1 : 0));
+        (uint16_t)((playback_count / 2UL) + (odd ? 1UL : 0UL)));
 
     uint32_t shorts_mask = 0;
     if (flags & NRFX_PWM_FLAG_STOP)

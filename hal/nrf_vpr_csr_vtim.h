@@ -196,9 +196,9 @@ NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vtim_simple_counter_get(uint8_t counter)
     switch (counter)
     {
         case 0:
-            return nrf_csr_read(VPRCSR_NORDIC_CNT0);
+            return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_CNT0);
         case 1:
-            return nrf_csr_read(VPRCSR_NORDIC_CNT1);
+            return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_CNT1);
         default:
             NRFX_ASSERT(false);
             return 0;
@@ -210,10 +210,10 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vtim_simple_counter_set(uint8_t counter, uint
     switch (counter)
     {
         case 0:
-            nrf_csr_write(VPRCSR_NORDIC_CNT0, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNT0, (uint32_t)value);
             break;
         case 1:
-            nrf_csr_write(VPRCSR_NORDIC_CNT1, value);
+            nrf_csr_write(VPRCSR_NORDIC_CNT1, (uint32_t)value);
             break;
         default:
             NRFX_ASSERT(false);

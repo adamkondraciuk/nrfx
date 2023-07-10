@@ -288,7 +288,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dirout_toggle_buffered_set(uint32_t mask)
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_dir_get(void)
 {
-    return nrf_csr_read(VPRCSR_NORDIC_DIR);
+    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_DIR);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_set(uint16_t value)
@@ -298,7 +298,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_set(uint16_t value)
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_dir_buffered_get(void)
 {
-    return nrf_csr_read(VPRCSR_NORDIC_DIRB);
+    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_DIRB);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_set(uint16_t value)
@@ -324,7 +324,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_dir_buffered_toggle_set(uint16_t mask)
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_in_get(void)
 {
-    return nrf_csr_read(VPRCSR_NORDIC_IN);
+    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_IN);
 }
 
 #if !defined(NRF54H20_ENGA_XXAA) && !defined(NRF9230_XXAA) && !defined(NRF7140_XXAA)
@@ -340,7 +340,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(nrf_vpr_csr_vio_mode_in_t mod
 #else
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_mode_in_get(void)
 {
-    return nrf_csr_read(VPRCSR_NORDIC_INMODE);
+    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_INMODE);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(uint16_t value)
@@ -351,7 +351,7 @@ NRF_STATIC_INLINE void nrf_vpr_csr_vio_mode_in_set(uint16_t value)
 
 NRF_STATIC_INLINE uint16_t nrf_vpr_csr_vio_out_get(void)
 {
-    return nrf_csr_read(VPRCSR_NORDIC_OUT);
+    return (uint16_t)nrf_csr_read(VPRCSR_NORDIC_OUT);
 }
 
 NRF_STATIC_INLINE void nrf_vpr_csr_vio_out_set(uint16_t value)

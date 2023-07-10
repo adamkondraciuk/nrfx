@@ -149,9 +149,9 @@ static uint8_t get_channel_for_ch_data_idx(uint8_t idx)
 
     for (uint8_t i = 0; i < idx; i++)
     {
-        ch_mask &= ~(1 << NRF_CTZ(ch_mask));
+        ch_mask &= ~(1UL << NRF_CTZ(ch_mask));
     }
-    return NRF_CTZ(ch_mask);
+    return (uint8_t)NRF_CTZ(ch_mask);
 }
 
 static uint8_t get_ch_data_index_for_channel(uint8_t channel)
@@ -161,7 +161,7 @@ static uint8_t get_ch_data_index_for_channel(uint8_t channel)
 
     for (idx = 0; channel != NRF_CTZ(ch_mask); idx++)
     {
-        ch_mask &= ~(1 << NRF_CTZ(ch_mask));
+        ch_mask &= ~(1UL << NRF_CTZ(ch_mask));
     }
     return idx;
 }

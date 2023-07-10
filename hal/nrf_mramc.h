@@ -891,7 +891,7 @@ NRF_STATIC_INLINE void nrf_mramc_autoreadmode_set(NRF_MRAMC_Type * p_reg, uint16
 
 NRF_STATIC_INLINE uint16_t nrf_mramc_autoreadmode_get(NRF_MRAMC_Type const * p_reg)
 {
-    return p_reg->AUTOREADMODE;
+    return (uint16_t)p_reg->AUTOREADMODE;
 }
 
 NRF_STATIC_INLINE void nrf_mramc_waitstates_set(NRF_MRAMC_Type *               p_reg,

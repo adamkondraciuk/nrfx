@@ -283,8 +283,8 @@ void nrfx_timer_compare_int_enable(nrfx_timer_t const * p_instance, uint32_t cha
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
-    nrfy_timer_event_clear(p_instance->p_reg, nrfy_timer_compare_event_get(channel));
-    nrfy_timer_int_enable(p_instance->p_reg, nrfy_timer_compare_int_get(channel));
+    nrfy_timer_event_clear(p_instance->p_reg, nrfy_timer_compare_event_get((uint8_t)channel));
+    nrfy_timer_int_enable(p_instance->p_reg, nrfy_timer_compare_int_get((uint8_t)channel));
 }
 
 void nrfx_timer_compare_int_disable(nrfx_timer_t const * p_instance, uint32_t channel)
@@ -292,7 +292,7 @@ void nrfx_timer_compare_int_disable(nrfx_timer_t const * p_instance, uint32_t ch
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
-    nrfy_timer_int_disable(p_instance->p_reg, nrfy_timer_compare_int_get(channel));
+    nrfy_timer_int_disable(p_instance->p_reg, nrfy_timer_compare_int_get((uint8_t)channel));
 }
 
 static void irq_handler(NRF_TIMER_Type * p_reg, timer_control_block_t * p_cb, uint8_t channel_count)

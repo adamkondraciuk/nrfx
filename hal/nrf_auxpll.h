@@ -458,7 +458,7 @@ NRF_STATIC_INLINE void nrf_auxpll_trim_ctune_set(NRF_AUXPLL_Type * p_reg,
 
 NRF_STATIC_INLINE uint8_t nrf_auxpll_trim_ctune_get(NRF_AUXPLL_Type const * p_reg)
 {
-    return p_reg->TRIM.CTUNE;
+    return (uint8_t)p_reg->TRIM.CTUNE;
 }
 
 NRF_STATIC_INLINE void nrf_auxpll_ctrl_frequency_set(NRF_AUXPLL_Type * p_reg,
@@ -469,13 +469,13 @@ NRF_STATIC_INLINE void nrf_auxpll_ctrl_frequency_set(NRF_AUXPLL_Type * p_reg,
 
 NRF_STATIC_INLINE uint16_t nrf_auxpll_ctrl_frequency_get(NRF_AUXPLL_Type const * p_reg)
 {
-    return p_reg->AUXPLLCTRL.FREQUENCY;
+    return (uint16_t)p_reg->AUXPLLCTRL.FREQUENCY;
 }
 
 NRF_STATIC_INLINE void nrf_auxpll_ctrl_freqinc_set(NRF_AUXPLL_Type * p_reg,
                                                    int8_t            value)
 {
-    p_reg->AUXPLLCTRL.FREQINC = value;
+    p_reg->AUXPLLCTRL.FREQINC = (uint8_t)value;
 }
 
 NRF_STATIC_INLINE int8_t nrf_auxpll_ctrl_freqinc_get(NRF_AUXPLL_Type const * p_reg)
@@ -491,7 +491,7 @@ NRF_STATIC_INLINE void nrf_auxpll_ctrl_freqinc_period_set(NRF_AUXPLL_Type * p_re
 
 NRF_STATIC_INLINE uint16_t nrf_auxpll_ctrl_freqinc_period_get(NRF_AUXPLL_Type const * p_reg)
 {
-    return p_reg->AUXPLLCTRL.FREQINCPERIOD;
+    return (uint16_t)p_reg->AUXPLLCTRL.FREQINCPERIOD;
 }
 
 NRF_STATIC_INLINE void nrf_auxpll_ctrl_outsel_set(NRF_AUXPLL_Type *        p_reg,

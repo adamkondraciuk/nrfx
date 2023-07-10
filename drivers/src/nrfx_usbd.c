@@ -653,7 +653,7 @@ static inline usbd_ep_state_t* ep_state_access(nrfx_usbd_ep_t ep)
 static inline uint8_t ep2bit(nrfx_usbd_ep_t ep)
 {
     NRFX_USBD_ASSERT_EP_VALID(ep);
-    return NRFX_USBD_EP_BITPOS(ep);
+    return (uint8_t)NRFX_USBD_EP_BITPOS(ep);
 }
 
 /**
@@ -772,7 +772,7 @@ static inline void usbd_ep_abort(nrfx_usbd_ep_t ep)
             if(ep != NRFX_USBD_EPIN0)
             {
                 *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x800)) = 0x7B6 + (2u * (NRF_USBD_EP_NR_GET(ep) - 1));
-                uint8_t temp = *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804));
+                uint8_t temp = (uint8_t)*((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804));
                 temp |= (1U << 1);
                 *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)) |= temp;
                 (void)(*((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)));
@@ -780,7 +780,7 @@ static inline void usbd_ep_abort(nrfx_usbd_ep_t ep)
             else
             {
                 *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x800)) = 0x7B4;
-                uint8_t temp = *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804));
+                uint8_t temp = (uint8_t)*((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804));
                 temp |= (1U << 2);
                 *((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)) |= temp;
                 (void)(*((volatile uint32_t *)((uint32_t)(NRF_USBD) + 0x804)));
@@ -817,7 +817,7 @@ static void usbd_ep_abort_all(void)
     uint32_t ep_waiting = m_ep_dma_waiting | (m_ep_ready & NRFX_USBD_EPOUT_BIT_MASK);
     while (0 != ep_waiting)
     {
-        uint8_t bitpos = NRF_CTZ(ep_waiting);
+        uint8_t bitpos = (uint8_t)NRF_CTZ(ep_waiting);
         if (!NRF_USBD_EPISO_CHECK(bit2ep(bitpos)))
         {
             usbd_ep_abort(bit2ep(bitpos));
@@ -1251,7 +1251,7 @@ static void ev_epdata_handler(void)
     /* All finished endpoint have to be marked as busy */
     while (dataepstatus)
     {
-        uint8_t bitpos    = NRF_CTZ(dataepstatus);
+        uint8_t bitpos    = (uint8_t)NRF_CTZ(dataepstatus);
         nrfx_usbd_ep_t ep = bit2ep(bitpos);
         dataepstatus &= ~(1UL << bitpos);
 
@@ -1280,7 +1280,7 @@ static void ev_epdata_handler(void)
 static uint8_t usbd_dma_scheduler_algorithm(uint32_t req)
 {
     /* Only prioritized scheduling mode is supported. */
-    return NRF_CTZ(req);
+    return (uint8_t)NRF_CTZ(req);
 }
 
 /**
@@ -1597,7 +1597,7 @@ void nrfx_usbd_irq_handler(void)
     /* Check all enabled interrupts */
     while (to_process)
     {
-        uint8_t event_nr = NRF_CTZ(to_process);
+        uint8_t event_nr = (uint8_t)NRF_CTZ(to_process);
         if (nrf_usbd_event_get_and_clear(NRF_USBD,
                                          (nrf_usbd_event_t)nrfx_bitpos_to_event(event_nr)))
         {
@@ -1608,11 +1608,11 @@ void nrfx_usbd_irq_handler(void)
 
     /* Process the active interrupts */
     bool setup_active = 0 != (active & NRF_USBD_INT_EP0SETUP_MASK);
-    active &= ~NRF_USBD_INT_EP0SETUP_MASK;
+    active &= (uint32_t)~NRF_USBD_INT_EP0SETUP_MASK;
 
     while (active)
     {
-        uint8_t event_nr = NRF_CTZ(active);
+        uint8_t event_nr = (uint8_t)NRF_CTZ(active);
         m_isr[event_nr]();
         active &= ~(1UL << event_nr);
     }
