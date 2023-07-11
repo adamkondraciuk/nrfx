@@ -212,11 +212,13 @@ static void irq_handler(NRF_QDEC_Type * p_qdec, qdec_control_block_t * p_cb)
     uint32_t evt_to_process;
     nrfx_qdec_event_t event;
     uint32_t evt_mask;
+    uint32_t all_evt_mask;
 
-    evt_to_process = NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_SAMPLERDY) |
-                     NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_REPORTRDY) |
-                     NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_ACCOF);
+    all_evt_mask = NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_SAMPLERDY) |
+                   NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_REPORTRDY) |
+                   NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_ACCOF);
 
+    evt_to_process = nrfy_qdec_int_enable_check(p_qdec, all_evt_mask);
     evt_mask = nrfy_qdec_events_process(p_qdec, evt_to_process);
 
     if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_QDEC_EVENT_SAMPLERDY))
