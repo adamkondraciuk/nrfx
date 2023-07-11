@@ -404,6 +404,24 @@
 #endif
 
 /**
+ * @brief NRFX_POWER_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_POWER_ENABLED
+#define NRFX_POWER_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
+ *
+ * Integer value. Minimum: 0 Maximum: 7
+ */
+#ifndef NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY
+#define NRFX_POWER_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
+#endif
+
+/**
  * @brief NRFX_PRS_ENABLED
  *
  * Boolean. Accepted values 0 and 1.
