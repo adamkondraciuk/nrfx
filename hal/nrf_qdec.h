@@ -54,6 +54,9 @@ extern "C" {
 #define NRF_QDEC_HAS_EVENT_STOPPED 0
 #endif
 
+/** @brief Reset value of LEDPRE register. */
+#define NRF_QDEC_LEDPRE_DEFAULT 0x10
+
 /** @brief QDEC tasks. */
 typedef enum
 {
