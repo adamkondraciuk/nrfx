@@ -8,9 +8,13 @@ All notable changes to this project are documented in this file.
 - Added a function for checking if the detected voltage is below or above the threshold of VPOF (POF Comparator's threshold voltage) in the REGULATORS HAL.
 - Added a function for powering on all RAM blocks in the VMC HAL.
 - Added missing entries in enumerators for RAM sections in the VMC HAL.
+- Added a new signature for an event handler in the WDT driver. The signature accepts an event type, requests and a pointer to the context. A previous signature is deprecated.
+- Added a new signature for the nrfx_wdt_init() function in the WDT driver. The signature accepts a pointer to the instance, a pointer to the configuration, an event handler and a pointer to the context. A previous signature is deprecated.
+- Added the new nrfx_wdt_stop() function to the WDT driver that stops the watchdog.
+- Added the new nrfy_wdt_task_stop_enable_set() function to the WDT HALY that enables or disables stopping the watchdog.
 
 ### Changed
-- Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, one for setting (nrf_power_gpregret_set), and another one for reading (nrf_power_gpregret_get). A new `reg_num` argument was added to both of them.
+- Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, nrf_power_gpregret_set() for setting and nrf_power_gpregret_get() for reading. A new `reg_num` argument was added to both of them.
 - Replaced nrf_regulators_dcdcen_set() and nrf_regulators_dcdcen_vddh_set() functions with nrf_regulators_vreg_enable_set().
 - Replaced nrf_regulators_pofcon_set() and nrf_regulators_pofcon_vddh_set() functions with nrf_regulators_config_set().
 - Replaced nrf_regulators_pofcon_get() function with nrf_regulators_pof_config_get().
@@ -20,6 +24,7 @@ All notable changes to this project are documented in this file.
 - Renamed nrf_regulators_pof_thrvddh_t structure to nrf_regulators_pof_thr_vddh_t.
 - Renamed macros indicating features presence in the REGULATORS HAL.
 - Changed a default value of the source reference structure member from 1.8V to 1.2V in the COMP driver configuration structure.
+- Replaced the nrf_wdt_task_stop_enable() function with nrf_wdt_task_stop_enable_set(). Now it takes a boolean parameter.
 
 ### Fixed
 
