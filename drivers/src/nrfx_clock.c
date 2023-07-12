@@ -58,6 +58,8 @@ extern bool nrfx_power_irq_enabled;
 
 #if defined(CLOCK_LFCLKSRC_SRC_Xtal)
     #define LF_SRC_LFXO CLOCK_LFCLKSRC_SRC_Xtal
+#elif NRF_CLOCK_HAS_LFCLK_TYPE
+    #define LF_SRC_LFXO CLOCK_LFCLK_SRC_SRC_LFXO
 #else
     #define LF_SRC_LFXO CLOCK_LFCLKSRC_SRC_LFXO
 #endif
