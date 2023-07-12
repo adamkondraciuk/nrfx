@@ -133,6 +133,9 @@ typedef enum
 
     NRF_RESETHUB_INT_DOMAIN_RESET_APPLICATION_MASK = (1UL << NRF_DOMAIN_APPLICATION), /**< Interrupt on Application domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_NETWORK_MASK     = (1UL << NRF_DOMAIN_RADIOCORE),   /**< Interrupt on Network domain reset. */
+#if defined(NRF7140_XXAA)
+    NRF_RESETHUB_INT_DOMAIN_RESET_WIFICORE_MASK    = (1UL << NRF_DOMAIN_WIFICORE),    /**< Interrupt on Wificore domain reset. */
+#endif
 #if defined(NRF9230_XXAA)
     NRF_RESETHUB_INT_DOMAIN_RESET_CELLULAR_MASK    = (1UL << NRF_DOMAIN_CELLCORE),    /**< Interrupt on Cellular domain reset. */
     NRF_RESETHUB_INT_DOMAIN_RESET_CELL_DSP_MASK    = (1UL << NRF_DOMAIN_CELLDSP),     /**< Interrupt on Cellular DSP domain reset. */

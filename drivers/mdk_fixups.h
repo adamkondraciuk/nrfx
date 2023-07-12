@@ -2176,6 +2176,11 @@
 
 #if defined(NRF7140_XXAA)
 
+    /* TODO: MDK-2245 - remove when added do MDK release. */
+    #define NRF_OWNER_WIFICORE 6
+    #define NRF_PROCESSOR_WIFILMAC 8
+    #define NRF_PROCESSOR_WIFIUMAC 9
+
     /* TODO: MDK-2233 and MDK-2234 - wait for MDK team response. */
     #if defined(NRF_TRUSTZONE_NONSECURE) || defined(__NRFX_DOXYGEN__)
         #if defined(NRF_SECURE) || defined(__NRFX_DOXYGEN__)
