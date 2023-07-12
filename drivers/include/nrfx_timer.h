@@ -91,8 +91,7 @@ typedef struct
  *                       additional information to the handler function, for
  *                       example, the timer ID.
  */
-typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
-                                            void            * p_context);
+typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type, void * p_context);
 
 /**
  * @brief Function for initializing the timer.
@@ -102,6 +101,7 @@ typedef void (* nrfx_timer_event_handler_t)(nrf_timer_event_t event_type,
  * @param[in] timer_event_handler Event handler provided by the user. Can be NULL.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_INVALID_PARAM Specified frequency is not supported by the TIMER instance.
  * @retval NRFX_ERROR_INVALID_STATE The instance is already initialized.
  */
 nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
@@ -115,8 +115,9 @@ nrfx_err_t nrfx_timer_init(nrfx_timer_t const *        p_instance,
  * @param[in] p_config   Pointer to the structure with the configuration.
  *
  * @retval NRFX_SUCCESS             Reconfiguration was successful.
- * @retval NRFX_ERROR_BUSY          The driver is enabled and cannot be reconfigured.
+ * @retval NRFX_ERROR_INVALID_PARAM Specified frequency is not supported by the TIMER instance.
  * @retval NRFX_ERROR_INVALID_STATE The driver is uninitialized.
+ * @retval NRFX_ERROR_BUSY          The driver is enabled and cannot be reconfigured.
  */
 nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
                                   nrfx_timer_config_t const * p_config);
@@ -235,8 +236,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_timer_compare_event_address_get(nrfx_timer_t co
  *
  * @return Captured value.
  */
-uint32_t nrfx_timer_capture(nrfx_timer_t const *   p_instance,
-                            nrf_timer_cc_channel_t cc_channel);
+uint32_t nrfx_timer_capture(nrfx_timer_t const * p_instance, nrf_timer_cc_channel_t cc_channel);
 
 /**
  * @brief Function for returning the capture value from the specified channel.
@@ -288,8 +288,7 @@ void nrfx_timer_extended_compare(nrfx_timer_t const *   p_instance,
  *
  * @return Number of ticks.
  */
-uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance,
-                                uint32_t             time_us);
+uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance, uint32_t time_us);
 
 /**
  * @brief Function for converting time in milliseconds to timer ticks.
@@ -299,8 +298,7 @@ uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance,
  *
  * @return Number of ticks.
  */
-uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance,
-                                uint32_t             time_ms);
+uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance, uint32_t time_ms);
 
 /**
  * @brief Function for enabling timer compare interrupt.
@@ -308,8 +306,7 @@ uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance,
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    Compare channel.
  */
-void nrfx_timer_compare_int_enable(nrfx_timer_t const * p_instance,
-                                   uint32_t             channel);
+void nrfx_timer_compare_int_enable(nrfx_timer_t const * p_instance, uint32_t channel);
 
 /**
  * @brief Function for disabling timer compare interrupt.
@@ -317,8 +314,7 @@ void nrfx_timer_compare_int_enable(nrfx_timer_t const * p_instance,
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    Compare channel.
  */
-void nrfx_timer_compare_int_disable(nrfx_timer_t const * p_instance,
-                                    uint32_t             channel);
+void nrfx_timer_compare_int_disable(nrfx_timer_t const * p_instance, uint32_t channel);
 
 #ifndef NRFX_DECLARE_ONLY
 NRFX_STATIC_INLINE uint32_t nrfx_timer_task_address_get(nrfx_timer_t const * p_instance,
