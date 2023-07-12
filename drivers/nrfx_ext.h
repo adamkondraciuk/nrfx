@@ -40,6 +40,12 @@ extern "C" {
         }
 #endif
 
+#if defined(HALTIUM_XXAA) || defined(LUMOS_XXAA)
+    #if !defined(DMA_BUFFER_UNIFIED_BYTE_ACCESS)
+        #define DMA_BUFFER_UNIFIED_BYTE_ACCESS 1
+    #endif
+#endif
+
 /*------------------------------------------------------------------------------------------------*/
 /* End of Auxiliary Extended section                                                              */
 /*------------------------------------------------------------------------------------------------*/
@@ -151,6 +157,9 @@ extern "C" {
     #define NRF_SPIS_CLOCKPIN_SCK_NEEDED_EXT
     #define NRF_TWIM_CLOCKPIN_SCL_NEEDED_EXT
     #define NRF_TWIS_CLOCKPIN_SCL_NEEDED_EXT
+    #define NRF_I2S_CLOCKPIN_SCK_NEEDED_EXT
+    #define NRF_I2S_CLOCKPIN_LRCK_NEEDED_EXT
+    #define NRF_I2S_CLOCKPIN_MCK_NEEDED_EXT
 #endif
 
 /*------------------------------------------------------------------------------------------------*/

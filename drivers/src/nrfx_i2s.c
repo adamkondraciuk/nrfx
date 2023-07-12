@@ -71,6 +71,12 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
         {
             nrfy_gpio_cfg_output(p_config->sck_pin);
             nrfy_gpio_cfg_output(p_config->lrck_pin);
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_I2S_CLOCKPIN_SCK_NEEDED_EXT)
+            nrfy_gpio_pin_clock_set(p_config->sck_pin, true);
+#endif
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_I2S_CLOCKPIN_LRCK_NEEDED_EXT)
+            nrfy_gpio_pin_clock_set(p_config->lrck_pin, true);
+#endif
         }
         else
         {
@@ -81,6 +87,9 @@ static void configure_pins(nrfx_i2s_config_t const * p_config)
         if (p_config->mck_pin != NRF_I2S_PIN_NOT_CONNECTED)
         {
             nrfy_gpio_cfg_output(p_config->mck_pin);
+#if NRF_GPIO_HAS_CLOCKPIN && defined(NRF_I2S_CLOCKPIN_MCK_NEEDED_EXT)
+            nrfy_gpio_pin_clock_set(p_config->mck_pin, true);
+#endif
         }
         // - SDOUT (optional) - always output,
         if (p_config->sdout_pin != NRF_I2S_PIN_NOT_CONNECTED)

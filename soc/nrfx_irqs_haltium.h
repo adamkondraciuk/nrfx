@@ -288,8 +288,11 @@ extern "C" {
 
 // GSPU9_IRQn
 
-// I2S_IRQn
-#define nrfx_i2s_irq_handler         I2S_IRQHandler
+// I2S130_IRQn
+#define nrfx_i2s_130_irq_handler     I2S130_IRQHandler
+
+// I2S131_IRQn
+#define nrfx_i2s_131_irq_handler     I2S131_IRQHandler
 
 // PDM_IRQn
 #define nrfx_pdm_irq_handler         PDM_IRQHandler
