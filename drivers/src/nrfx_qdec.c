@@ -142,6 +142,7 @@ void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_qdec_disable(p_instance->p_reg);
+    nrfy_qdec_int_disable(p_instance->p_reg, 0xFFFFFFFF);
     nrfy_qdec_int_uninit(p_instance->p_reg);
 
     nrfy_qdec_shorts_disable(p_instance->p_reg, NRF_QDEC_SHORT_REPORTRDY_READCLRACC_MASK);
