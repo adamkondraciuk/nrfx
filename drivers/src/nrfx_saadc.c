@@ -248,6 +248,7 @@ void nrfx_saadc_uninit(void)
     nrfx_saadc_abort();
 
     nrfy_saadc_int_uninit(NRF_SAADC);
+    nrfy_saadc_event_clear(NRF_SAADC, NRF_SAADC_EVENT_DONE);
     nrfy_saadc_disable(NRF_SAADC);
     saadc_channels_disable(m_cb.channels_configured | m_cb.channels_activated);
     m_cb.saadc_state = NRF_SAADC_STATE_UNINITIALIZED;
