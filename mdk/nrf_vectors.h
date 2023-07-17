@@ -159,7 +159,7 @@ POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_bbpr_vectors.h"
     #endif
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF54L15_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
         #include "moonlight_application_vectors.h"
     #endif

@@ -65,7 +65,7 @@
     #elif defined(NRF_UMAC)
         #include <nrfx_config_nrf7140_umac.h>
     #endif
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF54L15_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
         #include <nrfx_config_nrf54l15_application.h>
     #endif

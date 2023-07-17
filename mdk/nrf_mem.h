@@ -181,7 +181,7 @@ POSSIBILITY OF SUCH DAMAGE.
     #if defined(NRF_BBPR)
         #include "nrf54h20_xxaa_bbpr_memory.h"
     #endif
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF54L15_ENGA_XXAA)
     #if defined(NRF_APPLICATION)
         #include "moonlight_xxaa_application_memory.h"
     #endif

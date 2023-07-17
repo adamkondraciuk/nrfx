@@ -7,7 +7,7 @@
     #include <soc/nrfx_irqs_haltium.h>
 #elif defined(NRF9230_XXAA)
     #include <soc/nrfx_irqs_nrf9230.h>
-#elif defined(MOONLIGHT_XXAA)
+#elif defined(NRF54L15_ENGA_XXAA)
     #include <soc/nrfx_irqs_moonlight.h>
 #else
     #error "Unknown device."

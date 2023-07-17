@@ -76,7 +76,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_XXAA)
     #include "nrf9230_peripherals.h"
 
-#elif defined (MOONLIGHT_XXAA)
+#elif defined (NRF54L15_ENGA_XXAA)
     #include "moonlight_peripherals.h"
 #else
     #error "Device must be defined. See nrf_peripherals.h."

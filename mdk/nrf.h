@@ -279,7 +279,7 @@ POSSIBILITY OF SUCH DAMAGE.
         #include "haltium_name_change.h"
     #endif
 
-#elif defined (MOONLIGHT_XXAA)
+#elif defined (NRF54L15_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
         #include "moonlight.h"
     #endif
