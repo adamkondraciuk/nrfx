@@ -19,7 +19,7 @@ extern "C" {
 
 #define GPIO_PORT_NUM_LIST {NRFX_FOREACH_PRESENT(P, GPIO_PORT_NUM, (), (), _)}
 #define GPIO_REG_LIST      {NRFX_FOREACH_PRESENT(P, GPIO_REG, (), (), _)}
-#define NUMBER_OF_PINS     {NRFX_FOREACH_PRESENT(P, GPIO_NUM_OF_PINS, (+), (0), _)}
+#define NUMBER_OF_PINS     (NRFX_FOREACH_PRESENT(P, GPIO_NUM_OF_PINS, (+), (0), _))
 
 #if !defined(GPIO_REG_LIST)
 #error "Not supported."
