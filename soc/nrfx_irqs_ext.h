@@ -8,7 +8,7 @@
 #elif defined(NRF9230_XXAA)
     #include <soc/nrfx_irqs_nrf9230.h>
 #elif defined(NRF54L15_ENGA_XXAA)
-    #include <soc/nrfx_irqs_moonlight.h>
+    #include <soc/nrfx_irqs_nrf54l15_application.h>
 #else
     #error "Unknown device."
 #endif

@@ -171,7 +171,7 @@ extern "C" {
 #endif
 
 #if defined(GPIOTE_INTEN0_IN0_Msk)
-    #if defined(NRF_SECURE) || defined(NRF54L15_ENGA_XXAA)
+    #if defined(NRF_SECURE) || defined(LUMOS_XXAA)
         #define NRF_GPIOTE_PORT_ID 0
     #elif defined(NRF_APPLICATION) || defined(NRF_PPR)
         #define NRF_GPIOTE_PORT_ID 1

@@ -1924,7 +1924,7 @@
 /**************************************************************************************************/
 
 /**************************************************************************************************/
-/* Start fixups section for NRF54L15_ENGA (MOONLIGHT)                                                  */
+/* Start fixups section for NRF54L15_ENGA_XXAA                                                    */
 /**************************************************************************************************/
 
 #if defined(NRF54L15_ENGA_XXAA)
@@ -2246,7 +2246,7 @@ typedef struct {
 
     #define NRF_RRAMC_Type NRF_RRAMC_Type_fixed
 
-    /* Mask for GPREGRET in Moonlight's MDK is 32-bit instead of 8-bit. */
+    /* Mask for GPREGRET in NRF54L15's MDK is 32-bit instead of 8-bit. */
     #undef POWER_GPREGRET_GPREGRET_Msk
     #define POWER_GPREGRET_GPREGRET_Msk (0xFFUL << POWER_GPREGRET_GPREGRET_Pos) /*!< Bit mask of GPREGRET field.           */
 
@@ -2261,7 +2261,7 @@ typedef struct {
 #endif
 
 /**************************************************************************************************/
-/* End fixups section for NRF54L15 (MOONLIGHT)                                                    */
+/* End fixups section for NRF54L15_ENGA_XXAA                                                      */
 /**************************************************************************************************/
 
 /**************************************************************************************************/

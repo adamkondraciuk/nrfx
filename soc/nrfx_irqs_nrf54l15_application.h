@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2022>$$$*/
 
-#ifndef NRFX_MOONLIGHT_APPLICATION_H__
-#define NRFX_MOONLIGHT_APPLICATION_H__
+#ifndef NRFX_IRQS_NRF54L15_APPLICATION_H__
+#define NRFX_IRQS_NRF54L15_APPLICATION_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -167,4 +167,4 @@ extern "C" {
 }
 #endif
 
-#endif // NRFX_IRQS_NRF5340_APPLICATION_H__
+#endif // NRFX_IRQS_NRF54L15_APPLICATION_H__
