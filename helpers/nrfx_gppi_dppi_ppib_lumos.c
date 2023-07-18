@@ -15,13 +15,10 @@
 /** @brief Invalid channel number. */
 #define NRFX_GPPI_CHANNEL_INVALID (-1)
 
-#if defined(LUMOS_XXAA)
+// TODO: Add switch to 1 for Moonlight FP1.
 #define NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG 0
-#else
-#define NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG 1
-#endif
 
-static uint32_t m_virtual_channels = UINT32_MAX;
+static nrfx_atomic_t m_virtual_channels = NRFX_GPPI_PROG_APP_CHANNELS_MASK;
 
 static nrfx_err_t dppic_channel_get(nrfx_interconnect_dppic_t * p_dppic,
                                     uint8_t                     virtual_channel,
@@ -348,7 +345,7 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
         if (nrfx_interconnect_direct_connection_check(&path))
         {
 #if !NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG
-            uint32_t possible_mask = path.src_dppic->channels_mask;
+            nrfx_atomic_t possible_mask = path.src_dppic->channels_mask;
             possible_mask &= path.dst_dppic->channels_mask;
             possible_mask &= path.ppib->channels_mask;
 
@@ -422,7 +419,7 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
             {
                 uint8_t main_dppi_channel;
 #if !NRFX_GPPI_PPIB_HAS_DYNAMIC_CONFIG
-                uint32_t possible_mask = p_src_dppic->channels_mask;
+                nrfx_atomic_t possible_mask = p_src_dppic->channels_mask;
                 possible_mask &= p_main_dppic->channels_mask;
                 possible_mask &= p_dst_dppic->channels_mask;
                 possible_mask &= path_src_to_main.ppib->channels_mask;
