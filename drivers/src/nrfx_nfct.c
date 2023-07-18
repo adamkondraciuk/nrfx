@@ -437,7 +437,7 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
     m_nfct_cb.config = *p_config;
     nfct_hw_init_setup();
 
-    nrfy_nfct_int_init(NRF_NFCT, 0, p_config->irq_priority, false);
+    nrfy_nfct_int_init(NRF_NFCT, p_config->rxtx_int_mask, p_config->irq_priority, false);
 
 #if NRFX_CHECK(NFCT_WORKAROUND_USES_TIMER)
     /* Initialize Timer module as the workaround for NFCT HW issues. */
