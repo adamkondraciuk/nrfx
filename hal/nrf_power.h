@@ -81,10 +81,38 @@ extern "C" {
 #endif
 
 #if defined(POWER_RESETREAS_RESETPIN_Msk) || defined(__NRFX_DOXYGEN__)
-/** @brief Auxiliary definition to mark the fact that RESETREAS register is present in POWER */
+/** @brief Symbol indicating whether RESETREAS register is present in POWER */
 #define NRF_POWER_HAS_RESETREAS 1
 #else
 #define NRF_POWER_HAS_RESETREAS 0
+#endif
+
+#if defined(POWER_RESETREAS_CTRLAP_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RESETREAS CTRLAP is present. */
+#define NRF_POWER_HAS_RESETREAS_CTRLAP 1
+#else
+#define NRF_POWER_HAS_RESETREAS_CTRLAP 0
+#endif
+
+#if defined(POWER_RESETREAS_LPCOMP_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RESETREAS LPCOMP is present. */
+#define NRF_POWER_HAS_RESETREAS_LPCOMP 1
+#else
+#define NRF_POWER_HAS_RESETREAS_LPCOMP 0
+#endif
+
+#if defined(POWER_RESETREAS_NFC_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RESETREAS NFC is present. */
+#define NRF_POWER_HAS_RESETREAS_NFC 1
+#else
+#define NRF_POWER_HAS_RESETREAS_NFC 0
+#endif
+
+#if defined(POWER_RESETREAS_VBUS_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether RESETREAS VBUS is present. */
+#define NRF_POWER_HAS_RESETREAS_VBUS 1
+#else
+#define NRF_POWER_HAS_RESETREAS_VBUS 0
 #endif
 
 #if defined(POWER_MAINREGSTATUS_MAINREGSTATUS_Msk) || defined(__NRFX_DOXYGEN__)
@@ -253,14 +281,14 @@ typedef enum
     NRF_POWER_RESETREAS_SREQ_MASK     = POWER_RESETREAS_SREQ_Msk    , /**< Bit mask of SREQ field. */
     NRF_POWER_RESETREAS_LOCKUP_MASK   = POWER_RESETREAS_LOCKUP_Msk  , /**< Bit mask of LOCKUP field. */
     NRF_POWER_RESETREAS_OFF_MASK      = POWER_RESETREAS_OFF_Msk     , /**< Bit mask of OFF field. */
-#if defined(POWER_RESETREAS_LPCOMP_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_RESETREAS_LPCOMP
     NRF_POWER_RESETREAS_LPCOMP_MASK   = POWER_RESETREAS_LPCOMP_Msk  , /**< Bit mask of LPCOMP field. */
 #endif
     NRF_POWER_RESETREAS_DIF_MASK      = POWER_RESETREAS_DIF_Msk     , /**< Bit mask of DIF field. */
-#if defined(POWER_RESETREAS_NFC_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_RESETREAS_NFC
     NRF_POWER_RESETREAS_NFC_MASK      = POWER_RESETREAS_NFC_Msk     , /**< Bit mask of NFC field. */
 #endif
-#if defined(POWER_RESETREAS_VBUS_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_RESETREAS_VBUS
     NRF_POWER_RESETREAS_VBUS_MASK     = POWER_RESETREAS_VBUS_Msk    , /**< Bit mask of VBUS field. */
 #endif
 } nrf_power_resetreas_mask_t;
