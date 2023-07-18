@@ -96,8 +96,8 @@ SECTIONS
     } > FLASH
 
     . = ALIGN(4);
-    __vectors_start = .;
-    .vectors : {
+    .vectors . : {
+        __vectors_start = .;
         /* Vector table */
         KEEP(*(.isr_vector))
         KEEP(*(.vectors))
@@ -109,8 +109,7 @@ SECTIONS
 
     /* .ctors section (global constructor function pointers) */
     . = ALIGN(4);
-    .ctors :
-    {
+    .ctors . : {
         __ctors_start = .;
         __CTOR_LIST__ = .;
         KEEP (*crtbegin*.o(.ctors))
@@ -126,8 +125,7 @@ SECTIONS
 
     /* .detors section (global destructor function pointers) */
     . = ALIGN(4);
-    .dtors :
-    {
+    .dtors . : {
         __dtors_start = .;
         __DTOR_LIST__ = .;
         KEEP (*crtbegin*.o(.dtors))
@@ -143,7 +141,7 @@ SECTIONS
 
     /* .rodata section */
     . = ALIGN(4);
-    .rodata : {
+    .rodata . : {
         . = ALIGN(4);
         __rodata_start = .;
         *(.rodata*)
@@ -155,9 +153,8 @@ SECTIONS
 
 
     . = ALIGN(4);
-    __text_start = .;
-    .text :
-    {
+    .text . : {
+        __text_start = .;
         /* text: executable instructions of a program. */
         *(.text*)
 
@@ -211,9 +208,9 @@ SECTIONS
     __text_end = __text_start + __text_size;
     ASSERT(__text_start == __text_end || (__text_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .text is too large to fit in FLASH memory segment")
     
-    .copy.table :
+    . = ALIGN(4);
+    .copy.table . :
     {
-        . = ALIGN(4);
         __copy_table_start__ = .;
 
         LONG (__data_load_start)
@@ -237,9 +234,8 @@ SECTIONS
         __copy_table_end__ = .;
     } > FLASH
 
-    .zero.table :
-    {
-        . = ALIGN(4);
+    . = ALIGN(4);
+    .zero.table . : {
         __zero_table_start__ = .;
         
         LONG (__bss_start)
@@ -288,7 +284,7 @@ SECTIONS
     /* .sdata section */
     . = ALIGN(4);
     __sdata_load_start = ALIGN(__data_load_end, 4);
-    .sdata : AT(__sdata_load_start){
+    .sdata . : AT(__sdata_load_start){
         . = ALIGN(4);
         __sdata_start = .;
         *(.sdata .sdata.* .gnu.linkonce.s.*)
@@ -304,7 +300,7 @@ SECTIONS
     /* .tdata section */
     . = ALIGN(4);
     __tdata_load_start = ALIGN(__sdata_load_end, 4);
-    .tdata : AT(__tdata_load_start){
+    .tdata . : AT(__tdata_load_start){
         . = ALIGN(4);
         __tdata_start = .;
         *(.tdata .tdata.* .gnu.linkonce.td.*)
@@ -320,7 +316,7 @@ SECTIONS
     /* .fast section */
     . = ALIGN(4);
     __fast_load_start = ALIGN(__tdata_load_end, 4);
-    .fast : AT(__fast_load_start){
+    .fast . : AT(__fast_load_start){
         . = ALIGN(4);
         __fast_start = .;
         *(.fast .fast.*)
@@ -342,8 +338,7 @@ SECTIONS
     /* No-init section. */
     . = ALIGN(4);
     __noinit_start = .; PROVIDE(__noinit_start__ = .);
-    .noinit (NOLOAD):
-    {
+    .noinit . (NOLOAD): {
         *(.noinit .noinit.*)
         *(.no_init .no_init.*)
         *(.noninit .noninit.*)
@@ -358,9 +353,8 @@ SECTIONS
 
     /* .bss section */
     . = ALIGN(4);
-    __bss_start = .; PROVIDE(__bss_start__ = .);
-    .bss (NOLOAD):
-    {
+    .bss . (NOLOAD): {
+        __bss_start = .; PROVIDE(__bss_start__ = .);
         *(.bss* .gnu.linkonce.b.*)
         *(.dynbss)
         *(COMMON)
@@ -374,9 +368,9 @@ SECTIONS
 
     /* .sbss section */
     . = ALIGN(4);
-    __sbss_start = .;
-    .sbss (NOLOAD):
-    {
+    .sbss . (NOLOAD): {
+        __sbss_start   = .;
+        __sbss_start__ = __sbss_start;
         *(.sbss .sbss.* .gnu.linkonce.sb.*)
         *(.sbss2 .sbss2.* .gnu.linkonce.sb2.*)
         *(.dynsbss)
@@ -384,14 +378,15 @@ SECTIONS
     } > RAM
     __sbss_size         = SIZEOF(.sbss);
     __sbss_end          = __sbss_start + __sbss_size;
+    __sbss_end__        = __sbss_end;
     ASSERT(__sbss_start == __sbss_end || (__sbss_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .sbss is too large to fit in RAM memory segment")
 
 
     /* .tbss section */
     . = ALIGN(4);
-    __tbss_start = .;
-    .tbss (NOLOAD):
-    {
+    .tbss . (NOLOAD): {
+        __tbss_start   = .;
+        __tbss_start__ = __tbss_start;
         . = ALIGN(4);
         *(.tbss .tbss.* .gnu.linkonce.tb.*)
         *(.tcommon)
@@ -400,6 +395,7 @@ SECTIONS
     } > RAM
     __tbss_size         = SIZEOF(.tbss);
     __tbss_end          = __tbss_start + __tbss_size;
+    __tbss_end__        = __tbss_end;
     ASSERT(__tbss_start == __tbss_end || (__tbss_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .tbss is too large to fit in RAM memory segment")
     
     . = ALIGN(4);
@@ -412,9 +408,8 @@ SECTIONS
 		            MAX(__data_start + 0x800, __tbss_end - 0x800));
 
     . = ALIGN(4);
-    __heap_start = .;
-    .heap (COPY):
-    {
+    .heap . (COPY): {
+        __heap_start = .;
         __HeapBase = .;
         __heap_base = .;
         __end = .; 
@@ -430,8 +425,7 @@ SECTIONS
     /* .stack_dummy section doesn't contains any symbols. It is only
      * used for linker to calculate size of stack sections, and assign
      * values to stack symbols later */
-    .stack_dummy (COPY):
-    {
+    .stack_dummy . (COPY): {
         KEEP(*(.stack*))
     } > RAM
 

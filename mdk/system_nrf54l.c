@@ -26,7 +26,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #include <stdint.h>
 #include <stdbool.h>
 #include "nrf.h"
-#include "system_moonlight.h"
+#include "system_nrf54l.h"
 #include "system_nrf54l_approtect.h"
 #include "system_config_sau.h"
 

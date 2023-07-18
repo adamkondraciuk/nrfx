@@ -39,23 +39,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-#ifndef MOONLIGHT_VERSION_H
-#define MOONLIGHT_VERSION_H
+#ifndef NRF54L15_PERIPHERALS_H
+#define NRF54L15_PERIPHERALS_H
 
 #ifdef __cplusplus
     extern "C" {
 #endif
 
-
-#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 2                   /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO 3                   /*!< Micro version of product specification.                              */
-
-#define MDK_SOURCE_HASH Moonlight_IPS_v0.2.3         /*!< Git hash of product specification source.                            */
-
+#if defined(NRF_APPLICATION)
+  #include "nrf54l15_application_peripherals.h"
+#elif defined(NRF_FLPR)
+  #include "nrf54l15_flpr_peripherals.h"
+#else
+  #error No processor selected
+#endif
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* MOONLIGHT_VERSION_H */
+#endif /* NRF54L15_PERIPHERALS_H */
 

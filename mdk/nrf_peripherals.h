@@ -60,6 +60,9 @@ POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF5340_XXAA_NETWORK)
     #include "nrf5340_network_peripherals.h"
 
+#elif defined (NRF54L15_ENGA_XXAA)
+    #include "nrf54l15_peripherals.h"
+
 #elif defined (NRF54H20_XXAA)
     #include "nrf54h20_peripherals.h"
 #elif defined (NRF54H20_ENGA_XXAA)
@@ -76,8 +79,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #elif defined (NRF9230_XXAA)
     #include "nrf9230_peripherals.h"
 
-#elif defined (NRF54L15_ENGA_XXAA)
-    #include "moonlight_peripherals.h"
 #else
     #error "Device must be defined. See nrf_peripherals.h."
 #endif

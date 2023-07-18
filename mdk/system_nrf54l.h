@@ -20,8 +20,8 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 */
 
-#ifndef SYSTEM_MOONLIGHT_H
-#define SYSTEM_MOONLIGHT_H
+#ifndef SYSTEM_NRF54L_H
+#define SYSTEM_NRF54L_H
 #ifndef __ASSEMBLY__
 #ifdef __cplusplus
 extern "C" {
@@ -58,4 +58,4 @@ extern void SystemCoreClockUpdate (void);
 #endif
 
 #endif /* __ASSEMBLY__ */
-#endif /* SYSTEM_MOONLIGHT_H */
+#endif /* SYSTEM_NRF54L_H */
