@@ -1929,28 +1929,17 @@
 
 #if defined(NRF54L15_ENGA_XXAA)
     #define LUMOS_XXAA 1
-
-    /* HM-21528 */
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos (23UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Pos)
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Min (0x0UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Max (0x1UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Disabled (0x0UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH2_DMA_RX_ENABLEMATCH3_Enabled (0x1UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
-    #define TWIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
-
-    /* HM-21528 */
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Pos (24UL)
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Msk (0x1UL << SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH4_Pos)
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Min (0x0UL)
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Max (0x1UL)
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Disabled (0x0UL)
-    #define SPIM_SHORTS_DMA_RX_MATCH3_DMA_RX_ENABLEMATCH0_Enabled (0x1UL)
+    
+    #undef SPIM00_FEATURE_HARDWARE_CSN_PRESENT
+    #undef SPIM20_FEATURE_HARDWARE_CSN_PRESENT
+    #undef SPIM21_FEATURE_HARDWARE_CSN_PRESENT
+    #undef SPIM22_FEATURE_HARDWARE_CSN_PRESENT
+    #undef SPIM30_FEATURE_HARDWARE_CSN_PRESENT
+    #define SPIM00_FEATURE_HARDWARE_CSN_PRESENT 0
+    #define SPIM20_FEATURE_HARDWARE_CSN_PRESENT 0
+    #define SPIM21_FEATURE_HARDWARE_CSN_PRESENT 0
+    #define SPIM22_FEATURE_HARDWARE_CSN_PRESENT 0
+    #define SPIM30_FEATURE_HARDWARE_CSN_PRESENT 0
 
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
@@ -2012,18 +2001,6 @@
         #define GRTC_IRQn             GRTC_0_IRQn
         #define nrfx_grtc_irq_handler GRTC_0_IRQHandler
     #elif defined(NRF_APPLICATION)
-        #define CTRLAP_IRQn      (IRQn_Type)82
-        #define CM33SS_IRQn      (IRQn_Type)84
-        #define TIMER00_IRQn     (IRQn_Type)85
-        #define GPIOTE20_0_IRQn  (IRQn_Type)218
-        #define GPIOTE20_1_IRQn  (IRQn_Type)219
-        #define TAMPC_IRQn       (IRQn_Type)220
-        #define I2S20_IRQn       (IRQn_Type)221
-        #define GRTC_3_IRQn      (IRQn_Type)229
-        #define GPIOTE30_0_IRQn  (IRQn_Type)268
-        #define GPIOTE30_1_IRQn  (IRQn_Type)269
-        #define CLOCK_POWER_IRQn (IRQn_Type)270
-
         #if defined(NRF_TRUSTZONE_NONSECURE)
             #define NRF_GPIOTE_IRQ_GROUP    0
             #define NRF_GPIOTE20_IRQn       GPIOTE20_0_IRQn
@@ -2167,86 +2144,7 @@
     /* ==================================================== Struct MPC_REGION ==================================================== */
     #define MPC_MASTER_PORTS_MaxCount (15UL) /*!< Max number of master ports. */
 
-
-/* ================================================= Struct RRAMC_BUFSTATUS ================================================== */
-/**
-  * @brief BUFSTATUS [RRAMC_BUFSTATUS] (unspecified)
-  */
-typedef struct {
-  __IM  uint32_t  LOADBUF;                           /*!< (@ 0x00000000) Load-buffer status                                    */
-  __IM  uint32_t  WRITEBUF;                          /*!< (@ 0x00000004) Write-buffer status                                   */
-  __IM  uint32_t  BUF_EMPTY;                         /*TODO This name was changed due to a conflict with zephyr EMPTY macro. If in MDK name EMPTY will still exist
-                                                      * mdk_fixups should take care of it and redefine EMPTY to BUF_EMPTY or any other name that do not
-                                                      * cause conflicts.
-                                                      * < (@ 0x00000008) Internal write-buffer is empty
-                                                      */
-} NRF_RRAMC_BUFSTATUS_Type_fixed;                    /*!< Size = 12 (0x00C)                                                    */
-
-/* ====================================================== Struct RRAMC ======================================================= */
-/**
-  * @brief RRAM controller
-  */
-  typedef struct {                                   /*!< RRAMC Structure                                                      */
-    __OM uint32_t TASKS_WAKEUP;                      /*!< (@ 0x00000000) Wakeup the RRAM from low power mode                   */
-    __OM uint32_t TASKS_CLRWRITEBUF;                 /*!< (@ 0x00000004) Clear internal write-buffer                           */
-    __OM uint32_t TASKS_COMMITWRITEBUF;              /*!< (@ 0x00000008) Commits the data stored in internal write-buffer to
-                                                                         RRAM*/
-    __IM uint32_t RESERVED[29];
-    __IOM uint32_t SUBSCRIBE_WAKEUP;                 /*!< (@ 0x00000080) Subscribe configuration for task WAKEUP               */
-    __IOM uint32_t SUBSCRIBE_CLRWRITEBUF;            /*!< (@ 0x00000084) Subscribe configuration for task CLRWRITEBUF          */
-    __IOM uint32_t SUBSCRIBE_COMMITWRITEBUF;         /*!< (@ 0x00000088) Subscribe configuration for task COMMITWRITEBUF       */
-    __IM uint32_t RESERVED1[29];
-    __IOM uint32_t EVENTS_WOKENUP;                   /*!< (@ 0x00000100) RRAMC is woken up from low power mode                 */
-    __IOM uint32_t EVENTS_READY;                     /*!< (@ 0x00000104) RRAMC is ready                                        */
-    __IOM uint32_t EVENTS_READYNEXT;                 /*!< (@ 0x00000108) Ready to accept a new write operation                 */
-    __IOM uint32_t EVENTS_ACCESSERROR;               /*!< (@ 0x0000010C) RRAM access error                                     */
-    __IM uint32_t RESERVED2[28];
-    __IOM uint32_t PUBLISH_WOKENUP;                  /*!< (@ 0x00000180) Publish configuration for event WOKENUP               */
-    __IM uint32_t RESERVED3[95];
-    __IOM uint32_t INTEN;                            /*!< (@ 0x00000300) Enable or disable interrupt                           */
-    __IOM uint32_t INTENSET;                         /*!< (@ 0x00000304) Enable interrupt                                      */
-    __IOM uint32_t INTENCLR;                         /*!< (@ 0x00000308) Disable interrupt                                     */
-    __IM uint32_t INTPEND;                           /*!< (@ 0x0000030C) Pending interrupts                                    */
-    __IM uint32_t RESERVED4[60];
-    __IM uint32_t READY;                             /*!< (@ 0x00000400) RRAMC ready status                                    */
-    __IM uint32_t READYNEXT;                         /*!< (@ 0x00000404) Ready next flag                                       */
-    __IM uint32_t ACCESSERRORADDR;                   /*!< (@ 0x00000408) Address of the first access error                     */
-    __IM uint32_t TRCSTATUS;                         /*!< (@ 0x0000040C) TRC status                                            */
-    __IOM NRF_RRAMC_BUFSTATUS_Type_fixed BUFSTATUS;  /*!< (@ 0x00000410) (unspecified)                                         */
-    __IM uint32_t RESERVED5[57];
-    __IOM uint32_t CONFIG;                           /*!< (@ 0x00000500) Configuration register                                */
-    __IOM uint32_t READCONFIG;                       /*!< (@ 0x00000504) Read configuration register                           */
-    __IOM uint32_t WAITSTATES;                       /*!< (@ 0x00000508) Waitstates for RRAM read access                       */
-    __IOM uint32_t READYNEXTTIMEOUT;                 /*!< (@ 0x0000050C) Configuration for ready next timeout counter, in units
-                                                                         of AXI clock frequency*/
-    __IOM NRF_RRAMC_POWER_Type POWER;                /*!< (@ 0x00000510) (unspecified)                                         */
-    __IM uint32_t RESERVED6[3];
-    __IOM NRF_RRAMC_ERASE_Type ERASE;                /*!< (@ 0x00000540) (unspecified)                                         */
-    __IM uint32_t RESERVED7[2];
-    __IOM NRF_RRAMC_REGION_Type REGION[5];           /*!< (@ 0x00000550) (unspecified)                                         */
-    __IM uint32_t RESERVED8[10];
-    __IOM NRF_RRAMC_GLITCHDETECTOR_Type GLITCHDETECTOR; /*!< (@ 0x000005A0) (unspecified)                                      */
-    __IM uint32_t RESERVED9[5];
-    __IOM NRF_RRAMC_INTERNAL_Type INTERNAL;          /*!< (@ 0x000005D0) (unspecified)                                         */
-    __IM uint32_t RESERVED10[4];
-    __IOM NRF_RRAMC_TEST_Type TEST;                  /*!< (@ 0x00000600) (unspecified)                                         */
-    __IM uint32_t RESERVED11[383];
-    __IOM NRF_RRAMC_PCGCSLAVE_Type PCGCSLAVE;        /*!< (@ 0x00000C00) (unspecified)                                         */
-  } NRF_RRAMC_Type_fixed; 
-
-    #if defined(NRF_RRAMC_S)
-        #undef NRF_RRAMC_S
-        #define NRF_RRAMC_S ((NRF_RRAMC_Type_fixed*) NRF_RRAMC_S_BASE)
-    #endif
-
-    #if defined(NRF_RRAMC_NS)
-        #undef NRF_RRAMC_NS
-        #define NRF_RRAMC_NS ((NRF_RRAMC_Type_fixed*) NRF_RRAMC_NS_BASE)
-    #endif
-
-    #define NRF_RRAMC_Type NRF_RRAMC_Type_fixed
-
-    /* Mask for GPREGRET in NRF54L15's MDK is 32-bit instead of 8-bit. */
+    /* Mask for GPREGRET in nRF54L15's MDK is 32-bit instead of 8-bit. */
     #undef POWER_GPREGRET_GPREGRET_Msk
     #define POWER_GPREGRET_GPREGRET_Msk (0xFFUL << POWER_GPREGRET_GPREGRET_Pos) /*!< Bit mask of GPREGRET field.           */
 
