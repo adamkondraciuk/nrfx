@@ -3,6 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [3.2.0]
 ### Added
+- Added multi-instance support for the GPIOTE driver.
 - Introduced the NRFX_TIMER_BASE_FREQUENCY_GET() and NRFX_SPIM_BASE_FREQUENCY_GET() macros for getting base frequencies in Hz for the specified TIMER and SPIM instances.
 - Added a function for checking whether the specified voltage regulator is enabled in the REGULATORS HAL.
 - Added a function for checking whether an inductor is connected to the DCC pin in the REGULATORS HAL.
