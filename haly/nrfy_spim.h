@@ -369,7 +369,9 @@ NRFY_STATIC_INLINE void nrfy_spim_ext_pins_get(NRF_SPIM_Type const *  p_reg,
                                                nrfy_spim_ext_pins_t * p_pins)
 {
     p_pins->dcx_pin = nrf_spim_dcx_pin_get(p_reg);
+#if NRFY_SPIM_HAS_HW_CSN
     p_pins->csn_pin = nrf_spim_csn_pin_get(p_reg);
+#endif
 }
 #endif
 
