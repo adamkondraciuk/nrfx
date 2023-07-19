@@ -60,22 +60,28 @@ extern "C" {
 /* Start of GPIO Extended section                                                                 */
 /*------------------------------------------------------------------------------------------------*/
 
-#define NRF_GPIO_PIN_SEL_EXT                                            \
-    NRFX_COND_CODE_1(NRF_GPIO_HAS_MULTIPERIPH_SEL,                      \
-        (NRF_GPIO_PIN_SEL_NETWORK  = GPIO_PIN_CNF_CTRLSEL_RadioCore,    \
-         NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          \
-         NRF_GPIO_PIN_SEL_VPR      = GPIO_PIN_CNF_CTRLSEL_VPR,          \
-         NRF_GPIO_PIN_SEL_SECURE   = GPIO_PIN_CNF_CTRLSEL_SecureDomain, \
-         NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         \
-         NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         \
-         NRF_GPIO_PIN_SEL_GRC      = GPIO_PIN_CNF_CTRLSEL_GRC,          \
-         NRF_GPIO_PIN_SEL_PWM      = GPIO_PIN_CNF_CTRLSEL_PWM,          \
-         NRF_GPIO_PIN_SEL_I3C      = GPIO_PIN_CNF_CTRLSEL_I3C,          \
-         NRF_GPIO_PIN_SEL_SERIAL   = GPIO_PIN_CNF_CTRLSEL_Serial,       \
-         NRF_GPIO_PIN_SEL_HS_SPI   = GPIO_PIN_CNF_CTRLSEL_HSSPI,        \
-         NRF_GPIO_PIN_SEL_EXMIF    = GPIO_PIN_CNF_CTRLSEL_EXMIF,        \
-         NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,),        \
-        ())
+#if defined(LUMOS_XXAA)
+    #define NRF_GPIO_PIN_SEL_EXT                           \
+        NRF_GPIO_PIN_SEL_GPIO = GPIO_PIN_CNF_CTRLSEL_GPIO, \
+        NRF_GPIO_PIN_SEL_VPR  = GPIO_PIN_CNF_CTRLSEL_VPR,  \
+        NRF_GPIO_PIN_SEL_GRTC = GPIO_PIN_CNF_CTRLSEL_GRTC, \
+        NRF_GPIO_PIN_SEL_TND  = GPIO_PIN_CNF_CTRLSEL_TND,
+#elif defined(HALTIUM_XXAA)
+    #define NRF_GPIO_PIN_SEL_EXT                                       \
+        NRF_GPIO_PIN_SEL_NETWORK  = GPIO_PIN_CNF_CTRLSEL_RadioCore,    \
+        NRF_GPIO_PIN_SEL_TND      = GPIO_PIN_CNF_CTRLSEL_TND,          \
+        NRF_GPIO_PIN_SEL_VPR      = GPIO_PIN_CNF_CTRLSEL_VPR,          \
+        NRF_GPIO_PIN_SEL_SECURE   = GPIO_PIN_CNF_CTRLSEL_SecureDomain, \
+        NRF_GPIO_PIN_SEL_CELLULAR = GPIO_PIN_CNF_CTRLSEL_CELL,         \
+        NRF_GPIO_PIN_SEL_GPIO     = GPIO_PIN_CNF_CTRLSEL_GPIO,         \
+        NRF_GPIO_PIN_SEL_GRC      = GPIO_PIN_CNF_CTRLSEL_GRC,          \
+        NRF_GPIO_PIN_SEL_PWM      = GPIO_PIN_CNF_CTRLSEL_PWM,          \
+        NRF_GPIO_PIN_SEL_I3C      = GPIO_PIN_CNF_CTRLSEL_I3C,          \
+        NRF_GPIO_PIN_SEL_SERIAL   = GPIO_PIN_CNF_CTRLSEL_Serial,       \
+        NRF_GPIO_PIN_SEL_HS_SPI   = GPIO_PIN_CNF_CTRLSEL_HSSPI,        \
+        NRF_GPIO_PIN_SEL_EXMIF    = GPIO_PIN_CNF_CTRLSEL_EXMIF,        \
+        NRF_GPIO_PIN_SEL_DTB      = GPIO_PIN_CNF_CTRLSEL_DTB,
+#endif
 
 #if defined(GPIO_RETAIN_PIN0_Msk)
 #define NRF_GPIO_RETAIN_EXT                                                    \

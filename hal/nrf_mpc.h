@@ -24,6 +24,20 @@ extern "C" {
 #define NRF_MPC_HAS_RTCHOKE 0
 #endif
 
+#if defined(MPC_OVERRIDE_CONFIG_SECDOMENABLE_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SECDOM functionality is present. */
+#define NRF_MPC_HAS_SECDOM 1
+#else
+#define NRF_MPC_HAS_SECDOM 0
+#endif
+
+#if defined(MPC_OVERRIDE_OFFSET_OFFSET_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether OVERRIDE OFFSET functionality is present. */
+#define NRF_MPC_HAS_OVERRIDE_OFFSET 1
+#else
+#define NRF_MPC_HAS_OVERRIDE_OFFSET 0
+#endif
+
 /** @brief Number of regions. */
 #define NRF_MPC_REGION_COUNT   MPC_REGION_MaxCount
 
@@ -347,6 +361,7 @@ NRF_STATIC_INLINE void nrf_mpc_override_endaddr_set(NRF_MPC_Type * p_reg,
 NRF_STATIC_INLINE uint32_t nrf_mpc_override_endaddr_get(NRF_MPC_Type const * p_reg,
                                                         uint8_t              index);
 
+#if NRF_MPC_HAS_OVERRIDE_OFFSET
 /**
  * @brief Function for setting offset of the override region.
  *
@@ -372,6 +387,7 @@ NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_reg,
                                                        uint8_t              index);
+#endif
 
 /**
  * @brief Function for setting permission settings for the override region.
@@ -775,10 +791,13 @@ NRF_STATIC_INLINE void nrf_mpc_override_config_set(NRF_MPC_Type *               
                                      ((p_config->enable ? MPC_OVERRIDE_CONFIG_ENABLE_Enabled :
                                        MPC_OVERRIDE_CONFIG_ENABLE_Disabled) <<
                                       MPC_OVERRIDE_CONFIG_ENABLE_Pos) |
+#if NRF_MPC_HAS_SECDOM
                                      ((p_config->secdom_enable ?
                                        MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled :
                                        MPC_OVERRIDE_CONFIG_SECDOMENABLE_Disabled) <<
-                                      MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos));
+                                      MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos) |
+#endif
+                                      0);
 }
 
 NRF_STATIC_INLINE nrf_mpc_override_config_t nrf_mpc_override_config_get(NRF_MPC_Type const * p_reg,
@@ -796,11 +815,11 @@ NRF_STATIC_INLINE nrf_mpc_override_config_t nrf_mpc_override_config_get(NRF_MPC_
 
     ret.enable = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_ENABLE_Msk)
                   >> MPC_OVERRIDE_CONFIG_ENABLE_Pos) == MPC_OVERRIDE_CONFIG_ENABLE_Enabled;
-
+#if NRF_MPC_HAS_SECDOM
     ret.secdom_enable = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_SECDOMENABLE_Msk)
                          >> MPC_OVERRIDE_CONFIG_SECDOMENABLE_Pos)
                         == MPC_OVERRIDE_CONFIG_SECDOMENABLE_Enabled;
-
+#endif
     ret.secure_mask = ((p_reg->OVERRIDE[index].CONFIG & MPC_OVERRIDE_CONFIG_SECUREMASK_Msk)
                        >> MPC_OVERRIDE_CONFIG_SECUREMASK_Pos) ==
                       MPC_OVERRIDE_CONFIG_SECUREMASK_Enabled;
@@ -844,6 +863,7 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_override_endaddr_get(NRF_MPC_Type const * p_r
     return p_reg->OVERRIDE[index].ENDADDR;
 }
 
+#if NRF_MPC_HAS_OVERRIDE_OFFSET
 NRF_STATIC_INLINE void nrf_mpc_override_offset_set(NRF_MPC_Type * p_reg,
                                                    uint8_t        index,
                                                    uint32_t       offset)
@@ -861,6 +881,7 @@ NRF_STATIC_INLINE uint32_t nrf_mpc_override_offset_get(NRF_MPC_Type const * p_re
 
     return (uint32_t)p_reg->OVERRIDE[index].OFFSET;
 }
+#endif
 
 NRF_STATIC_INLINE void nrf_mpc_override_perm_set(NRF_MPC_Type * p_reg,
                                                  uint8_t        index,

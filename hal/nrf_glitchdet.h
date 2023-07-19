@@ -9,11 +9,6 @@
 extern "C" {
 #endif
 
-/* TODO: when MDK aligns to Geras IPS and introduces separate GLITCHDET,
- * remove RRAMC typedef and use proper defines.
- */
-typedef NRF_RRAMC_Type NRF_GLITCHDET_Type;
-
 /**
  * @defgroup nrf_glitchdet_hal GLITCHDET HAL
  * @{
@@ -24,8 +19,8 @@ typedef NRF_RRAMC_Type NRF_GLITCHDET_Type;
 /** @brief Glitch detector mode. */
 typedef enum
 {
-    NRF_GLITCHDET_MODE_HIGH_PASS = RRAMC_GLITCHDETECTOR_CONFIG_MODE_HighPassFilter, ///< High pass filter mode.
-    NRF_GLITCHDET_MODE_CAP_DIV   = RRAMC_GLITCHDETECTOR_CONFIG_MODE_CapDiv,         ///< Cap divider mode.
+    NRF_GLITCHDET_MODE_HIGH_PASS = GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_HighPassFilter, ///< High pass filter mode.
+    NRF_GLITCHDET_MODE_CAP_DIV   = GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_CapDiv,         ///< Cap divider mode.
 } nrf_glitchdet_mode_t;
 
 /**
@@ -68,32 +63,32 @@ NRF_STATIC_INLINE void nrf_glitchdet_mode_set(NRF_GLITCHDET_Type * p_reg,
 
 NRF_STATIC_INLINE bool nrf_glitchdet_enable_check(NRF_GLITCHDET_Type const * p_reg)
 {
-    return ((p_reg->GLITCHDETECTOR.CONFIG & RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Msk)
-            >> RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos) == RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Enable;
+    return ((p_reg->GLITCHDETECTOR.CONFIG & GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Msk)
+            >> GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos) == GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Enable;
 }
 
 NRF_STATIC_INLINE void nrf_glitchdet_enable_set(NRF_GLITCHDET_Type * p_reg, bool enable)
 {
     p_reg->GLITCHDETECTOR.CONFIG = (p_reg->GLITCHDETECTOR.CONFIG &
-                                    ~RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Msk) |
-                                   ((enable ? RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Enable :
-                                     RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Disable)
-                                    << RRAMC_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
+                                    ~GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Msk) |
+                                   ((enable ? GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Enable :
+                                     GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Disable)
+                                    << GLITCHDET_GLITCHDETECTOR_CONFIG_ENABLE_Pos);
 }
 
 NRF_STATIC_INLINE nrf_glitchdet_mode_t nrf_glitchdet_mode_get(NRF_GLITCHDET_Type const * p_reg)
 {
     return (nrf_glitchdet_mode_t)((p_reg->GLITCHDETECTOR.CONFIG &
-                                  RRAMC_GLITCHDETECTOR_CONFIG_MODE_Msk) >>
-                                  RRAMC_GLITCHDETECTOR_CONFIG_MODE_Pos);
+                                  GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Msk) >>
+                                  GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_glitchdet_mode_set(NRF_GLITCHDET_Type * p_reg,
                                               nrf_glitchdet_mode_t mode)
 {
     p_reg->GLITCHDETECTOR.CONFIG = (p_reg->GLITCHDETECTOR.CONFIG &
-                                    ~RRAMC_GLITCHDETECTOR_CONFIG_MODE_Msk) |
-                                   (mode << RRAMC_GLITCHDETECTOR_CONFIG_MODE_Pos);
+                                    ~GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Msk) |
+                                   (mode << GLITCHDET_GLITCHDETECTOR_CONFIG_MODE_Pos);
 }
 #endif // NRF_DECLARE_ONLY
 

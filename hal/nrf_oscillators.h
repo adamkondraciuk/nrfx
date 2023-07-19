@@ -82,9 +82,9 @@ extern "C" {
 /** @brief HFXO clock quality indicator. */
 typedef enum
 {
-    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_NONE  = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_NoClockAvailable, ///< Clock not started.
-    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_PLL   = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_PllQuality,       ///< Clock started but not reached accuracy required for the Radio peripheral.
-    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_RADIO = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_RadioQuality      ///< Clock running with sufficient accuracy for the Radio peripheral.
+    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_NONE     = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_NoStatus, ///< Clock XOSC32M status is not defined.
+    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_STARTING = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_Starting, ///< Clock XOSC32M has started but has not yet reached the specified frequency tolerance requirement fTOL_HFXO.
+    NRF_OSCILLATORS_HFXO_CLOCK_QUALITY_STARTED  = OSCILLATORS_XOSC32M_CLOCKQUALITY_INDICATOR_Started   ///< Clock XOSC32M has started and is operating with the specified frequency tolerance requirement fTOL_HFXO.
 } nrf_oscillators_hfxo_clock_quality_t;
 #endif
 

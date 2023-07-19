@@ -427,9 +427,9 @@ NRF_STATIC_INLINE uint32_t nrf_rramc_error_access_addr_get(NRF_RRAMC_Type const 
 
 NRF_STATIC_INLINE bool nrf_rramc_empty_buffer_check(NRF_RRAMC_Type const * p_reg)
 {
-    return ((p_reg->BUFSTATUS.BUF_EMPTY & RRAMC_BUFSTATUS_EMPTY_EMPTY_Msk) >>
-            RRAMC_BUFSTATUS_EMPTY_EMPTY_Pos) ==
-            RRAMC_BUFSTATUS_EMPTY_EMPTY_Empty;
+    return ((p_reg->BUFSTATUS.WRITEBUFEMPTY & RRAMC_BUFSTATUS_WRITEBUFEMPTY_EMPTY_Msk) >>
+            RRAMC_BUFSTATUS_WRITEBUFEMPTY_EMPTY_Pos) ==
+            RRAMC_BUFSTATUS_WRITEBUFEMPTY_EMPTY_Empty;
 }
 
 NRF_STATIC_INLINE void nrf_rramc_config_get(NRF_RRAMC_Type const * p_reg,
