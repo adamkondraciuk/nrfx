@@ -16,6 +16,9 @@ extern "C" {
  * @brief   Hardware access layer for managing the Inter-Processor Map (IPCMAP) peripheral.
  */
 
+/** @brief Number of IPCMAP channels. */
+#define NRF_IPCMAP_CHANNEL_COUNT IPCMAP_CHANNEL_MaxCount
+
 /**
  * @brief Function for setting the configuration of channel source.
  *

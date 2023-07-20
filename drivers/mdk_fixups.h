@@ -15,14 +15,6 @@
     /* TODO: MDK-2221 */
     #define NRF_DOMAIN_COUNT NRF_DOMAIN_GLOBAL + 1
 
-    #if !defined(NRF_IPCMAP_CHANNEL_COUNT)
-        #if defined(NRF9230_XXAA)
-            #define NRF_IPCMAP_CHANNEL_COUNT (31)
-        #else
-            #define NRF_IPCMAP_CHANNEL_COUNT (16)
-        #endif
-    #endif
-
     #define GRTC_INTEN_Msk NRFX_BIT_MASK(GRTC_CC_MaxCount)
 
     /* TODO: Create ticket for MDK. */
@@ -1004,6 +996,11 @@
         #else
             #error Unknown core.
         #endif
+    #endif
+
+    #if defined(IPCMAP_CHANNEL_MaxCount)
+        #undef IPCMAP_CHANNEL_MaxCount
+        #define IPCMAP_CHANNEL_MaxCount (16UL)
     #endif
 
         #if defined(NRF_TRUSTZONE_NONSECURE) || defined(NRF_SYSCTRL) || defined(NRF_PPR) || \
