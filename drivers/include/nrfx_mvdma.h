@@ -120,7 +120,8 @@ typedef void (*nrfx_mvdma_event_handler_t)(nrfx_mvdma_event_t const * p_event, v
  *
  * @param[in] p_instance         Pointer to the driver instance structure.
  * @param[in] interrupt_priority Interrupt priority.
- * @param[in] event_handler      Event handler provided by the user.
+ * @param[in] event_handler      Event handler provided by the user. If NULL, transfers
+ *                               will be performed in blocking mode.
  *
  * @retval NRFX_SUCCESS       Initialization was successful.
  * @retval NRFX_ERROR_ALREADY The driver is already initialized.
@@ -150,7 +151,7 @@ bool nrfx_mvdma_init_check(nrfx_mvdma_t const * p_instance);
  * @brief Function for requesting a single copy operation.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_request  Pointer to the structure that decribes the request.
+ * @param[in] p_request  Pointer to the structure that describes the request.
  *
  * @retval NRFX_SUCCESS    Copy operation requested successfully.
  * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
@@ -180,7 +181,7 @@ nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
  * @warning Job lists must remain valid while being processed by the MVDMA peripheral.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_request  Pointer to the structure that decribes the request.
+ * @param[in] p_request  Pointer to the structure that describes the request.
  * @param[in] p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS    Execution of job list requested successfully.
@@ -195,7 +196,7 @@ nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
  * @brief Function for setting the specified source and sink job lists.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] p_request  Pointer to the structure that decribes  list of requests.
+ * @param[in] p_request  Pointer to the structure that describes list of requests.
  *
  * @retval NRFX_SUCCESS             Job lists assignment successful.
  * @retval NRFX_ERROR_BUSY          Different request is executed at the moment.

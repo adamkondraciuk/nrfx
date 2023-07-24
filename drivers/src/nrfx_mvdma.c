@@ -78,6 +78,7 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
     p_cb->aximode = NRF_MVDMA_AXIMODE_AXI;
 
     nrfy_mvdma_reset(p_instance->p_reg, true);
+
     nrfy_mvdma_int_init(p_instance->p_reg,
                         NRF_MVDMA_INT_END_MASK |
 #if NRF_MVDMA_HAS_NEW_VER
@@ -90,7 +91,7 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
                         NRF_MVDMA_INT_SINKBUSERROR_MASK |
                         NRF_MVDMA_INT_SOURCEBUSERROR_MASK,
                         interrupt_priority,
-                        true);
+                        event_handler ? true : false);
 
     p_cb->busy = false;
     p_cb->handler = event_handler;
@@ -130,7 +131,7 @@ static void mvdma_job_start(NRF_MVDMA_Type *                  p_reg,
         p_cb->aximode = (nrf_mvdma_aximode_t)aximode;
     }
 
-    // Change aximode if it changed compared to the previous transfer .
+    // Change aximode if it changed compared to the previous transfer.
     if (p_cb->aximode != prev_aximode)
     {
         nrfy_mvdma_aximode_set(p_reg, p_cb->aximode);
@@ -140,7 +141,12 @@ static void mvdma_job_start(NRF_MVDMA_Type *                  p_reg,
 
     mvdma_mode_set(p_reg, p_cb, NRF_MVDMA_MODE_SINGLE);
     nrfy_mvdma_job_list_set(p_reg, p_list_request);
-    nrfy_mvdma_start(p_reg, NULL);
+    nrfy_mvdma_start(p_reg, p_cb->handler ? NULL : p_list_request);
+
+    if (!p_cb->handler)
+    {
+        p_cb->busy = false;
+    }
 }
 
 nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
@@ -295,8 +301,18 @@ nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
         nrfy_mvdma_aximode_set(p_instance->p_reg, p_cb->aximode);
     }
 
-    p_cb->p_context = p_context;
-    nrfy_mvdma_multi_start(p_instance->p_reg, idx, NULL);
+    if (p_cb->handler)
+    {
+        p_cb->p_context = p_context;
+        nrfy_mvdma_multi_start(p_instance->p_reg, idx, NULL);
+    }
+    else
+    {
+        nrfx_mvdma_multi_list_request_t * p_request = NULL;
+        nrfy_mvdma_multi_job_list_get(p_instance->p_reg, p_request);
+        nrfy_mvdma_multi_start(p_instance->p_reg, idx, p_request);
+        p_cb->busy = false;
+    }
 
     return NRFX_SUCCESS;
 }

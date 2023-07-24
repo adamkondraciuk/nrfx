@@ -210,6 +210,21 @@ void nrfy_mvdma_multi_job_list_set(NRF_MVDMA_Type *                        p_reg
     nrf_mvdma_source_list_ptr_set(p_reg, (nrf_vdma_job_t *)p_list_request->pp_source_job_lists);
     nrf_mvdma_sink_list_ptr_set(p_reg, (nrf_vdma_job_t *)p_list_request->pp_sink_job_lists);
 }
+
+/**
+ * @brief Function for getting the MVDMA job lists in multi-mode.
+ *
+ * @param[in]  p_reg          Pointer to the structure of registers of the peripheral.
+ * @param[out] p_list_request Pointer to the structure to be filled with list execution request.
+ */
+NRFY_STATIC_INLINE
+void nrfy_mvdma_multi_job_list_get(NRF_MVDMA_Type const *            p_reg,
+                                   nrfy_mvdma_multi_list_request_t * p_list_request)
+{
+    p_list_request->pp_source_job_lists = (nrf_vdma_job_t **)nrf_mvdma_source_list_ptr_get(p_reg);
+    p_list_request->pp_sink_job_lists = (nrf_vdma_job_t **)nrf_mvdma_sink_list_ptr_get(p_reg);
+}
+
 #endif // NRF_MVDMA_HAS_MULTIMODE || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -280,8 +295,8 @@ NRFY_STATIC_INLINE void nrfy_mvdma_abort(NRF_MVDMA_Type *                  p_reg
 /**
  * @brief Function for getting the MVDMA source job details
  *
- * @param[in] p_reg           Pointer to the structure of registers of the peripheral.
- * @param[in] p_job_list_desc Pointer to the structure to be filled with job list description.
+ * @param[in]  p_reg           Pointer to the structure of registers of the peripheral.
+ * @param[out] p_job_list_desc Pointer to the structure to be filled with job list description.
  */
 NRFY_STATIC_INLINE
 void nrfy_mvdma_source_job_description_get(NRF_MVDMA_Type const *   p_reg,
@@ -297,8 +312,8 @@ void nrfy_mvdma_source_job_description_get(NRF_MVDMA_Type const *   p_reg,
 /**
  * @brief Function for getting the MVDMA sink job details
  *
- * @param[in] p_reg           Pointer to the structure of registers of the peripheral.
- * @param[in] p_job_list_desc Pointer to the structure to be filled with job list description.
+ * @param[in]  p_reg           Pointer to the structure of registers of the peripheral.
+ * @param[out] p_job_list_desc Pointer to the structure to be filled with job list description.
  */
 NRFY_STATIC_INLINE
 void nrfy_mvdma_sink_job_description_get(NRF_MVDMA_Type const *   p_reg,

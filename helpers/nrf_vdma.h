@@ -20,11 +20,14 @@ extern "C" {
 #define NRF_VDMA_BUFFER_SIZE_MASK VDMADESCRIPTOR_CONFIG_CNT_Msk
 
 /** @brief Structure describing VDMA job. */
-typedef struct __PACKED
+typedef struct
 {
-    uint8_t * p_buffer;   ///< Pointer to the job buffer.
-    uint32_t  size : 24;  ///< Size of the job buffer.
-    uint8_t   attributes; ///< Attributes of the job.
+    uint8_t * p_buffer; ///< Pointer to the VDMA job buffer.
+    struct __PACKED
+    {
+        uint32_t size:24;    ///< Size of the job buffer.
+        uint8_t  attributes; ///< Attributes of the job.
+    };
 } nrf_vdma_job_t;
 
 /** @brief Type describing VDMA job with fixed attributes and length. */
