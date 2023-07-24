@@ -11,7 +11,7 @@
 /**
  * @brief NRFX_DEFAULT_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_DEFAULT_IRQ_PRIORITY
 #define NRFX_DEFAULT_IRQ_PRIORITY 3
@@ -29,7 +29,7 @@
 /**
  * @brief NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_COMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -216,7 +216,7 @@
 /**
  * @brief NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_EGU_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -243,7 +243,7 @@
 /**
  * @brief NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -252,7 +252,7 @@
 /**
  * @brief NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS
  *
- * Integer value. Minimum: 0 Maximum: 15
+ * Integer value. Minimum: 0. Maximum: 15.
  */
 #ifndef NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS
 #define NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS 2
@@ -328,7 +328,7 @@
 /**
  * @brief NRFX_GRTC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_GRTC_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_GRTC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -370,7 +370,7 @@
 /**
  * @brief NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_I2S_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -472,7 +472,7 @@
 /**
  * @brief NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -550,7 +550,7 @@
 /**
  * @brief NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_PDM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -715,7 +715,7 @@
 /**
  * @brief NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_PWM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -802,7 +802,7 @@
 /**
  * @brief NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_QDEC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -862,7 +862,7 @@
 /**
  * @brief NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_RTC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -922,7 +922,7 @@
 /**
  * @brief NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_SAADC_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -964,7 +964,7 @@
 /**
  * @brief NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_SPIM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1096,7 +1096,7 @@
 /**
  * @brief NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_SPIS_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1219,7 +1219,7 @@
 /**
  * @brief NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_TEMP_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1261,7 +1261,7 @@
 /**
  * @brief NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_TIMER_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1393,7 +1393,7 @@
 /**
  * @brief NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_TWIM_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1516,7 +1516,7 @@
 /**
  * @brief NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_TWIS_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1648,7 +1648,7 @@
 /**
  * @brief NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_UARTE_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
@@ -1780,7 +1780,7 @@
 /**
  * @brief NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
  *
- * Integer value. Minimum: 0 Maximum: 3
+ * Integer value. Minimum: 0. Maximum: 3.
  */
 #ifndef NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY
 #define NRFX_WDT_DEFAULT_CONFIG_IRQ_PRIORITY NRFX_DEFAULT_IRQ_PRIORITY
