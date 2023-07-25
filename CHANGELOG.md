@@ -13,6 +13,7 @@ All notable changes to this project are documented in this file.
 - Added a new signature for an event handler in the WDT driver. The signature accepts an event type, requests and a pointer to the context. A previous signature is deprecated.
 - Added a new signature for the nrfx_wdt_init() function in the WDT driver. The signature accepts a pointer to the instance, a pointer to the configuration, an event handler and a pointer to the context. A previous signature is deprecated.
 - Added the new nrfx_wdt_stop() function to the WDT driver that stops the watchdog.
+- Added the new nrfx_wdt_uninit() function to the WDT driver that uninitializes the watchdog.
 - Added the new nrfy_wdt_task_stop_enable_set() function to the WDT HALY that enables or disables stopping the watchdog.
 - Added functions for retrieving pointers to the receive and transmit buffers in the TWIS HAL.
 

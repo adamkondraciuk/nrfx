@@ -144,6 +144,20 @@ nrfx_err_t nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
     return NRFX_SUCCESS;
 }
 
+void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance)
+{
+    wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
+#if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
+    if (p_cb->wdt_event_handler)
+    {
+        nrfy_wdt_int_uninit(p_instance->p_reg);
+    }
+#endif
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+
+}
+
 void nrfx_wdt_enable(nrfx_wdt_t const * p_instance)
 {
     wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -213,6 +227,7 @@ nrfx_err_t nrfx_wdt_stop(nrfx_wdt_t const * p_instance)
     while (!nrfy_wdt_events_process(p_instance->p_reg,
                                     NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_STOPPED)))
     {}
+    p_cb->state = NRFX_DRV_STATE_INITIALIZED;
 #endif
 
     return NRFX_SUCCESS;
@@ -246,6 +261,7 @@ static void irq_handler(NRF_WDT_Type * p_reg, wdt_control_block_t * p_cb)
     if (evt_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_WDT_EVENT_STOPPED))
     {
 #if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        p_cb->state = NRFX_DRV_STATE_INITIALIZED;
         p_cb->wdt_event_handler(NRF_WDT_EVENT_STOPPED, 0, p_cb->p_context);
 #endif
     }

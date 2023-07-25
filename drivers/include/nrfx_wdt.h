@@ -154,6 +154,15 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
 #endif
 
 /**
+ * @brief Function for uninitializing the WDT driver instance.
+ *
+ * The instance can be uninitialized only when not running.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ */
+void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance);
+
+/**
  * @brief Function for reconfiguring the watchdog.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
