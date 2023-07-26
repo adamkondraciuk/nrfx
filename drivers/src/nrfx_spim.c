@@ -324,7 +324,7 @@ static nrf_spim_frequency_t spim_frequency_bit_decode(uint32_t frequency)
 #elif NRF_SPIM_HAS_PRESCALER
 static bool spim_frequency_valid_check(nrfx_spim_t const * p_instance, uint32_t frequency)
 {
-    uint32_t base_frequency = NRF_SPIM_BASE_FREQUENCY_GET(p_instance->p_reg);
+    uint32_t base_frequency = NRFX_SPIM_BASE_FREQUENCY_GET(p_instance);
     uint32_t prescaler = NRF_SPIM_PRESCALER_CALCULATE(p_instance->p_reg, frequency);
 
     return (base_frequency % frequency == 0) &&

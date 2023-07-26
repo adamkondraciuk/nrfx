@@ -83,6 +83,14 @@ typedef struct
         NRF_TIMER_FREQUENCY_STATIC_CHECK(NRF_TIMER_INST_GET(id), frequency)
 
 /**
+ * @brief Macro for getting base frequency value in Hz for a given timer instance.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ */
+#define NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) \
+        NRF_TIMER_BASE_FREQUENCY_GET((p_instance)->p_reg)
+
+/**
  * @brief Timer driver event handler type.
  *
  * @param[in] event_type Timer event.

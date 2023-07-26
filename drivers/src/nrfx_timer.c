@@ -28,10 +28,10 @@
 
 #define PRESCALER_INVALID UINT32_MAX
 
-#define TIMER_FREQUENCY_VALID_CHECK(p_instance, frequency)                                      \
-        ((NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) % (frequency) == 0) &&                \
-         NRFX_IS_POWER_OF_TWO(NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / (frequency)) && \
-         ((NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / (frequency)) <=                    \
+#define TIMER_FREQUENCY_VALID_CHECK(p_instance, frequency)                                 \
+        ((NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) % (frequency) == 0) &&                 \
+         NRFX_IS_POWER_OF_TWO(NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) / (frequency)) && \
+         ((NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) / (frequency)) <=                     \
           (1 << NRF_TIMER_PRESCALER_MAX)))
 
 #define NRFX_LOG_MODULE TIMER
@@ -50,7 +50,7 @@ static timer_control_block_t m_cb[NRFX_TIMER_ENABLED_COUNT];
 static uint32_t prescaler_calculate(nrfx_timer_t const * p_instance, uint32_t frequency)
 {
     (void)p_instance;
-    uint32_t base_frequency = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg);
+    uint32_t base_frequency = NRFX_TIMER_BASE_FREQUENCY_GET(p_instance);
 
     if (!TIMER_FREQUENCY_VALID_CHECK(p_instance, frequency))
     {
@@ -219,7 +219,7 @@ uint32_t nrfx_timer_capture(nrfx_timer_t const * p_instance, nrf_timer_cc_channe
 uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance, uint32_t time_us)
 {
     uint32_t prescaler = nrfy_timer_prescaler_get(p_instance->p_reg);
-    uint32_t freq_base_mhz = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / 1000000;
+    uint32_t freq_base_mhz = NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) / 1000000;
     uint64_t ticks = (((uint64_t)time_us * freq_base_mhz) >> prescaler);
     return (uint32_t)ticks;
 }
@@ -227,7 +227,7 @@ uint32_t nrfx_timer_us_to_ticks(nrfx_timer_t const * p_instance, uint32_t time_u
 uint32_t nrfx_timer_ms_to_ticks(nrfx_timer_t const * p_instance, uint32_t time_ms)
 {
     uint32_t prescaler = nrfy_timer_prescaler_get(p_instance->p_reg);
-    uint32_t freq_base_khz = NRF_TIMER_BASE_FREQUENCY_GET(p_instance->p_reg) / 1000;
+    uint32_t freq_base_khz = NRFX_TIMER_BASE_FREQUENCY_GET(p_instance) / 1000;
     uint64_t ticks = (((uint64_t)time_ms * freq_base_khz) >> prescaler);
     return (uint32_t)ticks;
 }

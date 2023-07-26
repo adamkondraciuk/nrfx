@@ -145,6 +145,14 @@ typedef struct
 #define NRFX_SPIM_FREQUENCY_STATIC_CHECK(id, frequency) \
          NRF_SPIM_FREQUENCY_STATIC_CHECK(NRF_SPIM_INST_GET(id), frequency)
 
+/**
+ * @brief Macro for getting base frequency value in Hz for a given SPIM instance.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ */
+#define NRFX_SPIM_BASE_FREQUENCY_GET(p_instance) \
+        NRF_SPIM_BASE_FREQUENCY_GET((p_instance)->p_reg)
+
 /** @brief Flag indicating that TX buffer address will be incremented after transfer. */
 #define NRFX_SPIM_FLAG_TX_POSTINC          (1UL << 0)
 
