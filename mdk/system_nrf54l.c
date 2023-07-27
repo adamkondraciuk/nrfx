@@ -81,6 +81,11 @@ void SystemInit(void)
             __ISB();
         #endif
     #endif
+
+    /* Configure new vector table offset register if defined. */
+#ifdef NRF_VTOR_CONFIG
+    SCB->VTOR = NRF_VTOR_CONFIG;
+#endif
 }
 
 /*lint --flb "Leave library region" */
