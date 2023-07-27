@@ -357,6 +357,15 @@ NRF_STATIC_INLINE void nrf_twis_rx_buffer_set(NRF_TWIS_Type * p_reg,
                                               size_t          length);
 
 /**
+ * @brief Function for getting the receive buffer.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Pointer to the receive buffer.
+ */
+NRF_STATIC_INLINE uint8_t * nrf_twis_rx_buffer_get(NRF_TWIS_Type const * p_reg);
+
+/**
  * @brief Function that prepares TWIS for receiving
  *
  * This function sets receive buffer and then sets NRF_TWIS_TASK_PREPARERX task.
@@ -388,6 +397,15 @@ NRF_STATIC_INLINE size_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_twis_tx_buffer_set(NRF_TWIS_Type * p_reg,
                                               uint8_t const * p_buf,
                                               size_t          length);
+
+/**
+ * @brief Function for getting the transmit buffer.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Pointer to the transmit buffer.
+ */
+NRF_STATIC_INLINE uint8_t * nrf_twis_tx_buffer_get(NRF_TWIS_Type const * p_reg);
 
 /**
  * @brief Function for preparing TWIS for transmitting.
@@ -714,6 +732,15 @@ NRF_STATIC_INLINE void nrf_twis_rx_buffer_set(NRF_TWIS_Type * p_reg,
 #endif
 }
 
+NRF_STATIC_INLINE uint8_t * nrf_twis_rx_buffer_get(NRF_TWIS_Type const * p_reg)
+{
+#if NRF_TWIS_HAS_DMA_REG
+    return (uint8_t *)p_reg->DMA.RX.PTR;
+#else
+    return (uint8_t *)p_reg->RXD.PTR;
+#endif
+}
+
 NRF_STATIC_INLINE void nrf_twis_rx_prepare(NRF_TWIS_Type *   p_reg,
                                            uint8_t *         p_buf,
                                            size_t length)
@@ -741,6 +768,15 @@ NRF_STATIC_INLINE void nrf_twis_tx_buffer_set(NRF_TWIS_Type * p_reg,
 #else
     p_reg->TXD.PTR    = (uint32_t)p_buf;
     p_reg->TXD.MAXCNT = length;
+#endif
+}
+
+NRF_STATIC_INLINE uint8_t * nrf_twis_tx_buffer_get(NRF_TWIS_Type const * p_reg)
+{
+#if NRF_TWIS_HAS_DMA_REG
+    return (uint8_t *)p_reg->DMA.TX.PTR;
+#else
+    return (uint8_t *)p_reg->TXD.PTR;
 #endif
 }
 

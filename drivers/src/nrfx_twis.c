@@ -324,7 +324,7 @@ static void irq_handler(NRF_TWIS_Type * p_reg, twis_control_block_t * p_cb)
                 evdata.data.tx_amount = nrf_twis_tx_amount_get(p_reg);
                 NRFX_LOG_INFO("Transfer tx_len:%d", evdata.data.tx_amount);
                 NRFX_LOG_DEBUG("Tx data:");
-                NRFX_LOG_HEXDUMP_DEBUG((uint8_t const *)p_reg->TXD.PTR,
+                NRFX_LOG_HEXDUMP_DEBUG((uint8_t const *)nrf_twis_tx_buffer_get(p_reg),
                                        evdata.data.tx_amount * sizeof(uint8_t));
                 call_event_handler(p_cb, &evdata);
                 /* Go to idle and repeat the state machine if READ or WRITE events detected.
