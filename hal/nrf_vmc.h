@@ -33,17 +33,17 @@ extern "C" {
 /** @brief Power configuration bits for each section in particular RAM block. */
 typedef enum
 {
-    NRF_VMC_POWER_S0  = VMC_RAM_POWER_S0POWER_Msk, ///< Keep retention on RAM section S0 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S1  = VMC_RAM_POWER_S1POWER_Msk, ///< Keep retention on RAM section S1 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S2  = VMC_RAM_POWER_S2POWER_Msk, ///< Keep retention on RAM section S2 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S3  = VMC_RAM_POWER_S3POWER_Msk, ///< Keep retention on RAM section S3 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S0  = VMC_RAM_POWER_S0POWER_Msk,  ///< Keep retention on RAM section S0 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S1  = VMC_RAM_POWER_S1POWER_Msk,  ///< Keep retention on RAM section S1 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S2  = VMC_RAM_POWER_S2POWER_Msk,  ///< Keep retention on RAM section S2 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S3  = VMC_RAM_POWER_S3POWER_Msk,  ///< Keep retention on RAM section S3 of the particular RAM block when RAM section is switched off.
 #if (VMC_RAM_SECTION_COUNT > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_VMC_POWER_S4  = VMC_RAM_POWER_S4POWER_Msk, ///< Keep retention on RAM section S4 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S5  = VMC_RAM_POWER_S5POWER_Msk, ///< Keep retention on RAM section S5 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S6  = VMC_RAM_POWER_S6POWER_Msk, ///< Keep retention on RAM section S6 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S7  = VMC_RAM_POWER_S7POWER_Msk, ///< Keep retention on RAM section S7 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S8  = VMC_RAM_POWER_S8POWER_Msk, ///< Keep retention on RAM section S8 of the particular RAM block when RAM section is switched off.
-    NRF_VMC_POWER_S9  = VMC_RAM_POWER_S9POWER_Msk, ///< Keep retention on RAM section S9 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S4  = VMC_RAM_POWER_S4POWER_Msk,  ///< Keep retention on RAM section S4 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S5  = VMC_RAM_POWER_S5POWER_Msk,  ///< Keep retention on RAM section S5 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S6  = VMC_RAM_POWER_S6POWER_Msk,  ///< Keep retention on RAM section S6 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S7  = VMC_RAM_POWER_S7POWER_Msk,  ///< Keep retention on RAM section S7 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S8  = VMC_RAM_POWER_S8POWER_Msk,  ///< Keep retention on RAM section S8 of the particular RAM block when RAM section is switched off.
+    NRF_VMC_POWER_S9  = VMC_RAM_POWER_S9POWER_Msk,  ///< Keep retention on RAM section S9 of the particular RAM block when RAM section is switched off.
     NRF_VMC_POWER_S10 = VMC_RAM_POWER_S10POWER_Msk, ///< Keep retention on RAM section S10 of the particular RAM block when RAM section is switched off.
     NRF_VMC_POWER_S11 = VMC_RAM_POWER_S11POWER_Msk, ///< Keep retention on RAM section S11 of the particular RAM block when RAM section is switched off.
     NRF_VMC_POWER_S12 = VMC_RAM_POWER_S12POWER_Msk, ///< Keep retention on RAM section S12 of the particular RAM block when RAM section is switched off.
@@ -56,17 +56,17 @@ typedef enum
 /** @brief Retention configuration bits for each section in particular RAM block. */
 typedef enum
 {
-    NRF_VMC_RETENTION_S0  = VMC_RAM_POWER_S0RETENTION_Msk, ///< Keep RAM section S0 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S1  = VMC_RAM_POWER_S1RETENTION_Msk, ///< Keep RAM section S1 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S2  = VMC_RAM_POWER_S2RETENTION_Msk, ///< Keep RAM section S2 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S3  = VMC_RAM_POWER_S3RETENTION_Msk, ///< Keep RAM section S3 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S0  = VMC_RAM_POWER_S0RETENTION_Msk,  ///< Keep RAM section S0 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S1  = VMC_RAM_POWER_S1RETENTION_Msk,  ///< Keep RAM section S1 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S2  = VMC_RAM_POWER_S2RETENTION_Msk,  ///< Keep RAM section S2 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S3  = VMC_RAM_POWER_S3RETENTION_Msk,  ///< Keep RAM section S3 of the particular RAM block on or off in System ON mode.
 #if (VMC_RAM_SECTION_COUNT > 4) || defined(__NRFX_DOXYGEN__)
-    NRF_VMC_RETENTION_S4  = VMC_RAM_POWER_S4RETENTION_Msk, ///< Keep RAM section S4 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S5  = VMC_RAM_POWER_S5RETENTION_Msk, ///< Keep RAM section S5 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S6  = VMC_RAM_POWER_S6RETENTION_Msk, ///< Keep RAM section S6 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S7  = VMC_RAM_POWER_S7RETENTION_Msk, ///< Keep RAM section S7 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S8  = VMC_RAM_POWER_S8RETENTION_Msk, ///< Keep RAM section S8 of the particular RAM block on or off in System ON mode.
-    NRF_VMC_RETENTION_S9  = VMC_RAM_POWER_S9RETENTION_Msk, ///< Keep RAM section S9 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S4  = VMC_RAM_POWER_S4RETENTION_Msk,  ///< Keep RAM section S4 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S5  = VMC_RAM_POWER_S5RETENTION_Msk,  ///< Keep RAM section S5 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S6  = VMC_RAM_POWER_S6RETENTION_Msk,  ///< Keep RAM section S6 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S7  = VMC_RAM_POWER_S7RETENTION_Msk,  ///< Keep RAM section S7 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S8  = VMC_RAM_POWER_S8RETENTION_Msk,  ///< Keep RAM section S8 of the particular RAM block on or off in System ON mode.
+    NRF_VMC_RETENTION_S9  = VMC_RAM_POWER_S9RETENTION_Msk,  ///< Keep RAM section S9 of the particular RAM block on or off in System ON mode.
     NRF_VMC_RETENTION_S10 = VMC_RAM_POWER_S10RETENTION_Msk, ///< Keep RAM section S10 of the particular RAM block on or off in System ON mode.
     NRF_VMC_RETENTION_S11 = VMC_RAM_POWER_S11RETENTION_Msk, ///< Keep RAM section S11 of the particular RAM block on or off in System ON mode.
     NRF_VMC_RETENTION_S12 = VMC_RAM_POWER_S12RETENTION_Msk, ///< Keep RAM section S12 of the particular RAM block on or off in System ON mode.
@@ -153,6 +153,13 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_set(NRF_VMC_Type *      p_reg
                                                        nrf_vmc_retention_t sect_retention);
 
 /**
+ * @brief Function for setting retention configuration for all available RAM blocks.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ */
+NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_all_set(NRF_VMC_Type * p_reg);
+
+/**
  * @brief Function for clearing retention configuration for the particular RAM block.
  *
  * @param[in] p_reg          Pointer to the structure of registers of the peripheral.
@@ -207,7 +214,7 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_power_all_set(NRF_VMC_Type * p_reg)
 {
     for (size_t i = 0; i < VMC_FEATURE_RAM_REGISTERS_COUNT; i++)
     {
-        p_reg->RAM[i].POWERSET = NRF_VMC_POWER_S0 | NRF_VMC_POWER_S0 |
+        p_reg->RAM[i].POWERSET = NRF_VMC_POWER_S0 | NRF_VMC_POWER_S1 |
                                  NRF_VMC_POWER_S2 | NRF_VMC_POWER_S3 |
 #if (VMC_RAM_SECTION_COUNT > 4)
                                  NRF_VMC_POWER_S4  | NRF_VMC_POWER_S5  |
@@ -242,6 +249,26 @@ NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_set(NRF_VMC_Type *      p_reg
                                                        nrf_vmc_retention_t sect_retention)
 {
     p_reg->RAM[ram_block_num].POWERSET = (uint32_t)sect_retention;
+    // Ensure that memory write operation is completed.
+    __DSB();
+}
+
+NRF_STATIC_INLINE void nrf_vmc_ram_block_retention_all_set(NRF_VMC_Type * p_reg)
+{
+    for (size_t i = 0; i < VMC_FEATURE_RAM_REGISTERS_COUNT; i++)
+    {
+        p_reg->RAM[i].POWERSET = NRF_VMC_RETENTION_S0 | NRF_VMC_RETENTION_S1 |
+                                 NRF_VMC_RETENTION_S2 | NRF_VMC_RETENTION_S3 |
+#if (VMC_RAM_SECTION_COUNT > 4)
+                                 NRF_VMC_RETENTION_S4  | NRF_VMC_RETENTION_S5 |
+                                 NRF_VMC_RETENTION_S6  | NRF_VMC_RETENTION_S7 |
+                                 NRF_VMC_RETENTION_S8  | NRF_VMC_RETENTION_S9 |
+                                 NRF_VMC_RETENTION_S10 | NRF_VMC_RETENTION_S11 |
+                                 NRF_VMC_RETENTION_S12 | NRF_VMC_RETENTION_S13 |
+                                 NRF_VMC_RETENTION_S14 | NRF_VMC_RETENTION_S15 |
+#endif
+                                 0;
+    }
     // Ensure that memory write operation is completed.
     __DSB();
 }
