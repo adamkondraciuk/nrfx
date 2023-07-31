@@ -16,6 +16,7 @@ All notable changes to this project are documented in this file.
 - Added the new nrfx_wdt_uninit() function to the WDT driver that uninitializes the watchdog.
 - Added the new nrfy_wdt_task_stop_enable_set() function to the WDT HALY that enables or disables stopping the watchdog.
 - Added functions for retrieving pointers to the receive and transmit buffers in the TWIS HAL.
+- Added functions for checking whether given instance is initialized to all of the drivers.
 
 ### Changed
 - Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, nrf_power_gpregret_set() for setting and nrf_power_gpregret_get() for reading. A new `reg_num` argument was added to both of them.
