@@ -227,6 +227,15 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_pwm_init_check(nrfx_pwm_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static uint32_t start_playback(nrfx_pwm_t const *    p_instance,
                                pwm_control_block_t * p_cb,
                                uint32_t              flags,

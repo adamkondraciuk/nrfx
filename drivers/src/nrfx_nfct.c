@@ -467,6 +467,11 @@ void nrfx_nfct_uninit(void)
     m_nfct_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_nfct_init_check(void)
+{
+    return (m_nfct_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_nfct_enable(void)
 {
     nrfy_nfct_error_status_clear(NRF_NFCT, NRFX_NFCT_ERROR_STATUS_ALL_MASK);

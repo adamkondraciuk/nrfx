@@ -278,6 +278,16 @@ nrfx_err_t nrfx_spim_reconfigure(nrfx_spim_t const *        p_instance,
 void nrfx_spim_uninit(nrfx_spim_t const * p_instance);
 
 /**
+ * @brief Function for checking if the SPIM driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_spim_init_check(nrfx_spim_t const * p_instance);
+
+/**
  * @brief Function for starting the SPIM data transfer.
  *
  * Additional options are provided using the @c flags parameter:

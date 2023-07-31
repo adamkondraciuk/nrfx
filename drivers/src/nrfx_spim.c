@@ -610,6 +610,15 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_spim_init_check(nrfx_spim_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 #if NRFX_CHECK(NRFX_SPIM_EXTENDED_ENABLED)
 nrfx_err_t nrfx_spim_xfer_dcx(nrfx_spim_t const *           p_instance,
                               nrfx_spim_xfer_desc_t const * p_xfer_desc,

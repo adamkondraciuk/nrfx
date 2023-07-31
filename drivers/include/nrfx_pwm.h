@@ -207,6 +207,16 @@ nrfx_err_t nrfx_pwm_reconfigure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t
 void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance);
 
 /**
+ * @brief Function for checking if the PWM driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_pwm_init_check(nrfx_pwm_t const * p_instance);
+
+/**
  * @brief Function for starting a single sequence playback.
  *
  * To take advantage of the looping mechanism in the PWM peripheral, both

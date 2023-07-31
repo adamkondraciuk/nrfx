@@ -217,6 +217,14 @@ nrfx_err_t nrfx_grtc_rtcounter_cc_absolute_set(nrfx_grtc_rtcounter_handler_data_
 void nrfx_grtc_uninit(void);
 
 /**
+ * @brief Function for checking if the GRTC driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_grtc_init_check(void);
+
+/**
  * @brief Function for enabling the RTCOUNTER compare interrupt.
  *
  * @param[in] sync True if the internal synchronization mechanism shall be used,

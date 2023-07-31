@@ -328,6 +328,15 @@ void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_mvdma_init_check(nrfx_mvdma_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static void mvdma_irq_handler(NRF_MVDMA_Type * p_reg, mvdma_control_block_t * p_cb)
 {
     nrfx_mvdma_event_t event;

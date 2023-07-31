@@ -254,6 +254,11 @@ void nrfx_saadc_uninit(void)
     m_cb.saadc_state = NRF_SAADC_STATE_UNINITIALIZED;
 }
 
+bool nrfx_saadc_init_check(void)
+{
+    return (m_cb.saadc_state != NRF_SAADC_STATE_UNINITIALIZED);
+}
+
 nrfx_err_t nrfx_saadc_channels_config(nrfx_saadc_channel_t const * p_channels,
                                       uint32_t                     channel_count)
 {

@@ -92,6 +92,16 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
 void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance);
 
 /**
+ * @brief Function for checking if the BELLBOARD driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to BELLBOARD driver instance.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_bellboard_init_check(nrfx_bellboard_t const * p_instance);
+
+/**
  * @brief Enable interrupt mask for given bellboard interrupt.
  *
  * @param[in] p_instance Pointer to BELLBOARD driver instance.

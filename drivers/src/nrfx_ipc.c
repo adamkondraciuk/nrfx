@@ -72,6 +72,11 @@ void nrfx_ipc_uninit(void)
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_ipc_init_check(void)
+{
+    return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_ipc_receive_event_enable(uint8_t event_index)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);

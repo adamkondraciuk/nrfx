@@ -184,6 +184,16 @@ nrfx_err_t nrfx_uarte_reconfigure(nrfx_uarte_t const *        p_instance,
 void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance);
 
 /**
+ * @brief Function for checking if the UARTE driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_uarte_init_check(nrfx_uarte_t const * p_instance);
+
+/**
  * @brief Function for getting the address of the specified UARTE task.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

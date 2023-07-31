@@ -72,6 +72,14 @@ void nrfx_rng_stop(void);
 /** @brief Function for uninitializing the nrfx_rng module. */
 void nrfx_rng_uninit(void);
 
+/**
+ * @brief Function for checking if the RNG driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_rng_init_check(void);
+
 /** @} */
 
 

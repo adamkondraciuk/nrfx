@@ -255,6 +255,15 @@ void nrfx_uart_uninit(nrfx_uart_t const * p_instance)
     NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
+bool nrfx_uart_init_check(nrfx_uart_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    uart_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static void tx_byte(NRF_UART_Type * p_uart, uart_control_block_t * p_cb)
 {
     nrf_uart_event_clear(p_uart, NRF_UART_EVENT_TXDRDY);

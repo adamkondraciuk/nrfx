@@ -373,6 +373,14 @@ void nrfx_spis_uninit(nrfx_spis_t const * p_instance)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_spis_init_check(nrfx_spis_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    spis_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
 
 /** @brief Function for executing the state entry action. */
 static void spis_state_entry_action_execute(NRF_SPIS_Type * p_spis,

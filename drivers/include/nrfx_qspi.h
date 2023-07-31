@@ -200,6 +200,14 @@ nrfx_err_t nrfx_qspi_reconfigure(nrfx_qspi_config_t const * p_config);
 void nrfx_qspi_uninit(void);
 
 /**
+ * @brief Function for checking if the QSPI driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_qspi_init_check(void);
+
+/**
  * @brief Function for reading data from the QSPI memory.
  *
  * Write, read, and erase operations check memory device busy state before starting the operation.

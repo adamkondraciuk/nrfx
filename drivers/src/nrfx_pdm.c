@@ -172,6 +172,11 @@ void nrfx_pdm_uninit(void)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_pdm_init_check(void)
+{
+    return (m_cb.drv_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static void pdm_start()
 {
     m_cb.drv_state = NRFX_DRV_STATE_POWERED_ON;

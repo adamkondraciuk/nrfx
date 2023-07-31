@@ -57,6 +57,15 @@ void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
     p_cb->int_idx = 0;
 }
 
+bool nrfx_bellboard_init_check(nrfx_bellboard_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_bellboard_int_enable(nrfx_bellboard_t const * p_instance, uint32_t mask)
 {
     NRFX_ASSERT(p_instance);

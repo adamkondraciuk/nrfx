@@ -197,6 +197,16 @@ nrfx_err_t nrfx_twis_reconfigure(nrfx_twis_t const *        p_instance,
 void nrfx_twis_uninit(nrfx_twis_t const * p_instance);
 
 /**
+ * @brief Function for checking if the TWIS driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_twis_init_check(nrfx_twis_t const * p_instance);
+
+/**
  * @brief Function for enabling the TWIS instance.
  *
  * This function enables the TWIS instance.

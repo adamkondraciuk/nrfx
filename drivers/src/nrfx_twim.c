@@ -326,6 +326,15 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
     NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
+bool nrfx_twim_init_check(nrfx_twim_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_twim_enable(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];

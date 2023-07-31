@@ -131,6 +131,11 @@ void nrfx_power_uninit(void)
     m_initialized = false;
 }
 
+bool nrfx_power_init_check(void)
+{
+    return m_initialized;
+}
+
 #if NRFX_POWER_SUPPORTS_POFCON
 void nrfx_power_pof_init(nrfx_power_pofwarn_config_t const * p_config)
 {

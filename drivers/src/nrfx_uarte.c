@@ -299,6 +299,15 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
     NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
+bool nrfx_uarte_init_check(nrfx_uarte_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
                          uint8_t const *      p_data,
                          size_t               length,

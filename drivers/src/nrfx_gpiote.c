@@ -754,7 +754,7 @@ static nrfx_err_t gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrup
 
 static bool gpiote_init_check(nrfx_gpiote_t const * p_instance)
 {
-    return (m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED) ? true : false;
+    return (m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
 }
 
 static void gpiote_uninit(nrfx_gpiote_t const * p_instance)

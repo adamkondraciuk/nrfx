@@ -1673,6 +1673,10 @@ void nrfx_usbd_uninit(void)
     return;
 }
 
+bool nrfx_usbd_init_check(void)
+{
+    return (m_drv_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
 
 void nrfx_usbd_enable(void)
 {

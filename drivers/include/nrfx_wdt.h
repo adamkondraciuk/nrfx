@@ -160,7 +160,18 @@ nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
  *
  * @param[in] p_instance Pointer to the driver instance structure.
  */
+
 void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance);
+
+/**
+ * @brief Function for checking if the WDT driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_wdt_init_check(nrfx_wdt_t const * p_instance);
 
 /**
  * @brief Function for reconfiguring the watchdog.

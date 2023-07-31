@@ -44,6 +44,14 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
 void nrfx_vevif_uninit(void);
 
 /**
+ * @brief Function for checking if the VEVIF driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_vevif_init_check(void);
+
+/**
  * @brief Function for enabling interrupts on specified VEVIF events.
  *
  * @param[in] mask Mask of interrupts to be enabled.

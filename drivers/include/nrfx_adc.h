@@ -130,6 +130,14 @@ nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
 void nrfx_adc_uninit(void);
 
 /**
+ * @brief Function for checking if the ADC driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_adc_init_check(void);
+
+/**
  * @brief Function for enabling an ADC channel.
  *
  * This function configures and enables the channel. When @ref nrfx_adc_buffer_convert is

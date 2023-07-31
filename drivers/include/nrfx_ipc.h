@@ -82,6 +82,14 @@ NRFX_STATIC_INLINE uint32_t nrfx_ipc_gpmem_get(uint8_t mem_index);
 void nrfx_ipc_uninit(void);
 
 /**
+ * @brief Function for checking if the IPC driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_ipc_init_check(void);
+
+/**
  * @brief Function for enabling events to generate interrupt.
  *
  * @param event_index Index of event to be enabled.

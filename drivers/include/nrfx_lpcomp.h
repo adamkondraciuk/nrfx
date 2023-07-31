@@ -73,7 +73,7 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
                             nrfx_lpcomp_event_handler_t  event_handler);
 
 /**
- * @brief Function for uninitializing the LCOMP driver.
+ * @brief Function for uninitializing the LPCOMP driver.
  *
  * This function uninitializes the LPCOMP driver. The LPCOMP peripheral and
  * its interrupts are disabled, and local variables are cleaned. After this call, you must
@@ -83,6 +83,14 @@ nrfx_err_t nrfx_lpcomp_init(nrfx_lpcomp_config_t const * p_config,
  * @sa nrfx_lpcomp_init
  */
 void  nrfx_lpcomp_uninit(void);
+
+/**
+ * @brief Function for checking if the LPCOMP driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_lpcomp_init_check(void);
 
 /**
  * @brief Function for enabling the LPCOMP peripheral and interrupts.

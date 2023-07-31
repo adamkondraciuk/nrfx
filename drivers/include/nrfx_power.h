@@ -230,6 +230,14 @@ nrfx_err_t nrfx_power_init(nrfx_power_config_t const * p_config);
  */
 void nrfx_power_uninit(void);
 
+/**
+ * @brief Function for checking if the power module driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_power_init_check(void);
+
 #if NRFX_POWER_SUPPORTS_POFCON
 /**
  * @brief Function for initializing the power failure comparator.

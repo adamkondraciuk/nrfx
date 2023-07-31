@@ -568,6 +568,14 @@ void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
     p_cb->state      = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_twis_init_check(nrfx_twis_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    twis_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
 
 void nrfx_twis_enable(nrfx_twis_t const * p_instance)
 {

@@ -68,6 +68,11 @@ void nrfx_adc_uninit(void)
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_adc_init_check(void)
+{
+    return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_adc_channel_enable(nrfx_adc_channel_t * const p_channel)
 {
     NRFX_ASSERT(!nrfx_adc_is_busy());

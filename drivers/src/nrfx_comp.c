@@ -151,6 +151,11 @@ void nrfx_comp_uninit(void)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_comp_init_check(void)
+{
+    return (m_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_comp_pin_select(nrf_comp_input_t psel)
 {
     bool comp_enable_state = nrfy_comp_enable_check(NRF_COMP);

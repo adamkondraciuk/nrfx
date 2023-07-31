@@ -219,6 +219,16 @@ nrfx_err_t nrfx_twi_reconfigure(nrfx_twi_t const *        p_instance,
 void nrfx_twi_uninit(nrfx_twi_t const * p_instance);
 
 /**
+ * @brief Function for checking if the TWI driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_twi_init_check(nrfx_twi_t const * p_instance);
+
+/**
  * @brief Function for enabling the TWI instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

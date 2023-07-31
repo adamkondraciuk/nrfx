@@ -141,6 +141,11 @@ void nrfx_lpcomp_uninit(void)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_lpcomp_init_check(void)
+{
+    return (m_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_lpcomp_enable(void)
 {
     NRFX_ASSERT(m_state == NRFX_DRV_STATE_INITIALIZED);

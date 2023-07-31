@@ -113,6 +113,16 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
 void nrfx_rtc_uninit(nrfx_rtc_t const * p_instance);
 
 /**
+ * @brief Function for checking if the RTC driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_rtc_init_check(nrfx_rtc_t const * p_instance);
+
+/**
  * @brief Function for enabling the RTC driver instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

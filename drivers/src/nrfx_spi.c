@@ -220,6 +220,15 @@ void nrfx_spi_uninit(nrfx_spi_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_spi_init_check(nrfx_spi_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    spi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static void finish_transfer(spi_control_block_t * p_cb)
 {
     // If Slave Select signal is used, this is the time to deactivate it.

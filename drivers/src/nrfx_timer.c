@@ -158,6 +158,15 @@ void nrfx_timer_uninit(nrfx_timer_t const * p_instance)
     NRFX_LOG_INFO("Uninitialized instance: %d.", p_instance->instance_id);
 }
 
+bool nrfx_timer_init_check(nrfx_timer_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    timer_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_timer_enable(nrfx_timer_t const * p_instance)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);

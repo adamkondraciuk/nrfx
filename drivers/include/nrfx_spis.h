@@ -185,6 +185,16 @@ nrfx_err_t nrfx_spis_reconfigure(nrfx_spis_t const *        p_instance,
 void nrfx_spis_uninit(nrfx_spis_t const * p_instance);
 
 /**
+ * @brief Function for checking if the SPIS driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_spis_init_check(nrfx_spis_t const * p_instance);
+
+/**
  * @brief Function for preparing the SPI slave instance for a single SPI transaction.
  *
  * This function prepares the SPI slave device to be ready for a single SPI transaction. It configures

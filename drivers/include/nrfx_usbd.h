@@ -367,6 +367,14 @@ nrfx_err_t nrfx_usbd_init(nrfx_usbd_event_handler_t event_handler);
 void nrfx_usbd_uninit(void);
 
 /**
+ * @brief Function for checking if the USBD driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_usbd_init_check(void);
+
+/**
  * @brief Enable the USBD port.
  *
  * After calling this function USBD peripheral would be enabled.

@@ -219,6 +219,16 @@ nrfx_err_t nrfx_spi_reconfigure(nrfx_spi_t const *        p_instance,
 void nrfx_spi_uninit(nrfx_spi_t const * p_instance);
 
 /**
+ * @brief Function for checking if the SPI driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_spi_init_check(nrfx_spi_t const * p_instance);
+
+/**
  * @brief Function for starting the SPI data transfer.
  *
  * If an event handler was provided in the @ref nrfx_spi_init call, this function

@@ -163,6 +163,15 @@ void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_qdec_init_check(nrfx_qdec_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    qdec_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_qdec_enable(nrfx_qdec_t const * p_instance)
 {
     NRFX_ASSERT(p_instance);

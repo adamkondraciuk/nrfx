@@ -211,6 +211,16 @@ nrfx_err_t nrfx_i2s_init(nrfx_i2s_t const *        p_instance,
 void nrfx_i2s_uninit(nrfx_i2s_t const * p_instance);
 
 /**
+ * @brief Function for checking if the I2S driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_i2s_init_check(nrfx_i2s_t const * p_instance);
+
+/**
  * @brief Function for starting the continuous I2S transfer.
  *
  * The I2S data transfer can be performed in one of three modes: RX (reception)

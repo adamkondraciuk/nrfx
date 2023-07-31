@@ -138,6 +138,16 @@ nrfx_err_t nrfx_timer_reconfigure(nrfx_timer_t const *        p_instance,
 void nrfx_timer_uninit(nrfx_timer_t const * p_instance);
 
 /**
+ * @brief Function for checking if the TIMER driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_timer_init_check(nrfx_timer_t const * p_instance);
+
+/**
  * @brief Function for turning on the timer.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

@@ -66,6 +66,11 @@ void nrfx_temp_uninit(void)
     m_temp_state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_temp_init_check(void)
+{
+    return (m_temp_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 int32_t nrfx_temp_calculate(int32_t raw_measurement)
 {
     /* Raw temperature is a 2's complement signed value. Moreover, it is represented

@@ -119,6 +119,16 @@ void nrfx_egu_trigger(nrfx_egu_t const * p_instance, uint8_t event_idx);
 void nrfx_egu_uninit(nrfx_egu_t const * p_instance);
 
 /**
+ * @brief Function for checking if the EGU driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_egu_init_check(nrfx_egu_t const * p_instance);
+
+/**
  * @brief Macro returning EGU interrupt handler.
  *
  * param[in] idx EGU index.

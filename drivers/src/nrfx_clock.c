@@ -326,6 +326,11 @@ void nrfx_clock_uninit(void)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_clock_init_check(void)
+{
+    return m_clock_cb.module_initialized;
+}
+
 void nrfx_clock_start(nrf_clock_domain_t domain)
 {
     NRFX_ASSERT(m_clock_cb.module_initialized);

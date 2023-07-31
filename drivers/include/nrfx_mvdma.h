@@ -137,6 +137,16 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
 void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance);
 
 /**
+ * @brief Function for checking if the MVDMA driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_mvdma_init_check(nrfx_mvdma_t const * p_instance);
+
+/**
  * @brief Function for requesting a single copy operation.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

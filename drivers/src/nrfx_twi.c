@@ -253,6 +253,15 @@ void nrfx_twi_uninit(nrfx_twi_t const * p_instance)
     NRFX_LOG_INFO("Instance uninitialized: %d.", p_instance->drv_inst_idx);
 }
 
+bool nrfx_twi_init_check(nrfx_twi_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_twi_enable(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];

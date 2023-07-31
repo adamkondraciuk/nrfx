@@ -170,6 +170,14 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config);
 void nrfx_nfct_uninit(void);
 
 /**
+ * @brief Function for checking if the NFCT driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_nfct_init_check(void);
+
+/**
  * @brief Function for starting the NFC subsystem.
  *
  * After this function completes, NFC readers are able to detect the tag.

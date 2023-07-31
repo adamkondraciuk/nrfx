@@ -85,6 +85,13 @@ void nrfx_rtc_uninit(nrfx_rtc_t const * p_instance)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_rtc_init_check(nrfx_rtc_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    return (m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_rtc_enable(nrfx_rtc_t const * p_instance)
 {
     NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);

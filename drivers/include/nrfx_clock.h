@@ -60,6 +60,14 @@ void nrfx_clock_disable(void);
 void nrfx_clock_uninit(void);
 
 /**
+ * @brief Function for checking if the clock driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_clock_init_check(void);
+
+/**
  * @brief Function for starting the specified clock domain.
  *
  * @param[in] domain Clock domain.

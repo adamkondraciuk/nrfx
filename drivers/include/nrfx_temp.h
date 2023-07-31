@@ -54,6 +54,14 @@ nrfx_err_t nrfx_temp_init(nrfx_temp_config_t const * p_config, nrfx_temp_data_ha
 void nrfx_temp_uninit(void);
 
 /**
+ * @brief Function for checking if the TEMP driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_temp_init_check(void);
+
+/**
  * @brief Function for getting the temperature measurement in a 2's complement
  *        signed value representation.
  *

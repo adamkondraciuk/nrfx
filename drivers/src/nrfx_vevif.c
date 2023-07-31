@@ -76,6 +76,11 @@ void nrfx_vevif_int_enable(uint32_t mask)
     }
 }
 
+bool nrfx_vevif_init_check(void)
+{
+    return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_vevif_int_disable(uint32_t mask)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);

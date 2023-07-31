@@ -196,6 +196,16 @@ nrfx_err_t nrfx_uart_reconfigure(nrfx_uart_t const *        p_instance,
 void nrfx_uart_uninit(nrfx_uart_t const * p_instance);
 
 /**
+ * @brief Function for checking if the UART driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_uart_init_check(nrfx_uart_t const * p_instance);
+
+/**
  * @brief Function for getting the address of the specified UART task.
  *
  * @param[in] p_instance Pointer to the driver instance structure.

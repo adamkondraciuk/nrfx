@@ -155,7 +155,15 @@ void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance)
     }
 #endif
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+}
 
+bool nrfx_wdt_init_check(nrfx_wdt_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 }
 
 void nrfx_wdt_enable(nrfx_wdt_t const * p_instance)

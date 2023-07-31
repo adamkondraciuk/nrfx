@@ -175,6 +175,16 @@ nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
 void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance);
 
 /**
+ * @brief Function for checking if the QDEC driver instance is initialized.
+ *
+ * @param[in] p_instance Pointer to the driver instance structure.
+ *
+ * @retval true  Instance is already initialized.
+ * @retval false Instance is not initialized.
+ */
+bool nrfx_qdec_init_check(nrfx_qdec_t const * p_instance);
+
+/**
  * @brief Function for enabling QDEC.
  *
  * @note Function asserts if module is uninitialized or enabled.

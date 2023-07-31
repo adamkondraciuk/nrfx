@@ -140,6 +140,14 @@ nrfx_err_t nrfx_pdm_reconfigure(nrfx_pdm_config_t const * p_config);
 void nrfx_pdm_uninit(void);
 
 /**
+ * @brief Function for checking if the PDM interface is initialized.
+ *
+ * @retval true  Interface is already initialized.
+ * @retval false Interface is not initialized.
+ */
+bool nrfx_pdm_init_check(void);
+
+/**
  * @brief Function for getting the address of a PDM interface task.
  *
  * @param[in] task Task.

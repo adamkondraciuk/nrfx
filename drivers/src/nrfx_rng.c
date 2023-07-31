@@ -70,6 +70,11 @@ void nrfx_rng_uninit(void)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_rng_init_check(void)
+{
+    return (m_rng_state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_rng_irq_handler(void)
 {
     nrf_rng_event_clear(NRF_RNG, NRF_RNG_EVENT_VALRDY);

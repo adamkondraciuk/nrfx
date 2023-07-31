@@ -595,6 +595,11 @@ void nrfx_qspi_uninit(void)
     m_cb.state = NRFX_QSPI_STATE_UNINITIALIZED;
 }
 
+bool nrfx_qspi_init_check(void)
+{
+    return (m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED);
+}
+
 nrfx_err_t nrfx_qspi_write(void const * p_tx_buffer,
                            size_t       tx_buffer_length,
                            uint32_t     dst_address)

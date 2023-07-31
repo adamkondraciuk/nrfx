@@ -135,6 +135,15 @@ void nrfx_egu_uninit(nrfx_egu_t const * p_instance)
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
+bool nrfx_egu_init_check(nrfx_egu_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    egu_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 static void irq_handler(NRF_EGU_Type * p_reg, egu_control_block_t * p_cb)
 {
     uint32_t int_mask = nrf_egu_int_enable_check(p_reg, ~0UL);

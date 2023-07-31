@@ -56,6 +56,13 @@ void nrfx_tbm_uninit(void)
     NRFX_ASSERT(state == NRFX_DRV_STATE_INITIALIZED);
     nrfx_tbm_stop();
     nrfy_tbm_int_uninit(NRF_TBM);
+
+    state = NRFX_DRV_STATE_UNINITIALIZED;
+}
+
+bool nrfx_tbm_init_check(void)
+{
+    return (state != NRFX_DRV_STATE_UNINITIALIZED);
 }
 
 void nrfx_tbm_irq_handler(void)

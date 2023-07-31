@@ -212,6 +212,14 @@ nrfx_err_t nrfx_saadc_init(uint8_t interrupt_priority);
 void nrfx_saadc_uninit(void);
 
 /**
+ * @brief Function for checking if the SAADC driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_saadc_init_check(void);
+
+/**
  * @brief Function for configuring multiple SAADC channels.
  *
  * @note The values of the @ref nrf_saadc_channel_config_t.burst fields in channel configurations

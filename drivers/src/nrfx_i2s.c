@@ -297,6 +297,15 @@ void nrfx_i2s_uninit(nrfx_i2s_t const * p_instance)
     NRFX_LOG_INFO("Uninitialized.");
 }
 
+bool nrfx_i2s_init_check(nrfx_i2s_t const * p_instance)
+{
+    NRFX_ASSERT(p_instance);
+
+    nrfx_i2s_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
                           nrfx_i2s_buffers_t const * p_initial_buffers,
                           uint16_t                   buffer_size,

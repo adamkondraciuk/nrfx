@@ -60,6 +60,14 @@ void nrfx_tbm_stop(void);
 void nrfx_tbm_uninit(void);
 
 /**
+ * @brief Function for checking if the TBM driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_tbm_init_check(void);
+
+/**
  * @brief Function for getting current counter value.
  *
  * @return Current counter value.

@@ -530,6 +530,11 @@ void nrfx_grtc_uninit(void)
     NRFX_LOG_INFO("GRTC uninitialized.");
 }
 
+bool nrfx_grtc_init_check(void)
+{
+    return (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+}
+
 void nrfx_grtc_rtcounter_cc_int_enable(bool sync)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);

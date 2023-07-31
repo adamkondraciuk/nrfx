@@ -143,6 +143,14 @@ nrfx_err_t nrfx_comp_reconfigure(nrfx_comp_config_t const * p_config);
 void nrfx_comp_uninit(void);
 
 /**
+ * @brief Function for checking if the COMP driver is initialized.
+ *
+ * @retval true  Driver is already initialized.
+ * @retval false Driver is not initialized.
+ */
+bool nrfx_comp_init_check(void);
+
+/**
  * @brief Function for setting the analog input.
  *
  * @param[in] psel COMP analog pin selection.
