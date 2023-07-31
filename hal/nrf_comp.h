@@ -190,6 +190,14 @@ typedef enum
     NRF_COMP_INT_CROSS_MASK = COMP_INTENSET_CROSS_Msk  /**< Interrupt on CROSS event. */
 } nrf_comp_int_mask_t;
 
+/** @brief COMP shortcut masks. */
+typedef enum
+{
+    NRF_COMP_SHORT_STOP_CROSS_MASK = COMP_SHORTS_CROSS_STOP_Msk, ///< Shortcut between the CROSS event and the STOP task.
+    NRF_COMP_SHORT_STOP_UP_MASK    = COMP_SHORTS_UP_STOP_Msk,    ///< Shortcut between the UP event and the STOP task.
+    NRF_COMP_SHORT_STOP_DOWN_MASK  = COMP_SHORTS_DOWN_STOP_Msk   ///< Shortcut between the DOWN event and the STOP task.
+} nrf_comp_short_mask_t;
+
 /** @brief COMP reference configuration. */
 typedef struct
 {
