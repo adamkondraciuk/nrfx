@@ -263,9 +263,9 @@ typedef struct
     {                                                                           \
         .hwfc           = NRF_UARTE_HWFC_DISABLED,                              \
         .parity         = NRF_UARTE_PARITY_EXCLUDED,                            \
-        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(UARTE_CONFIG_STOP_Msk),       \
+        NRFX_COND_CODE_1(NRF_UART_HAS_STOP_BITS,                                \
                 (.stop = (nrf_uarte_stop_t)NRF_UARTE_STOP_ONE,), ())            \
-        NRFX_COND_CODE_1(NRFX_ARG_HAS_PARENTHESIS(UARTE_CONFIG_PARITYTYPE_Msk), \
+        NRFX_COND_CODE_1(NRF_UART_HAS_PARITY_BIT,                               \
                 (.paritytype = NRF_UARTE_PARITYTYPE_EVEN,), ())                 \
     },                                                                          \
     .skip_psel_cfg      = false,                                                \
