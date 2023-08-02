@@ -445,6 +445,7 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
 #endif
 
     m_nfct_cb.state           = NRFX_DRV_STATE_INITIALIZED;
+    m_nfct_cb.field_on        = false;
     m_nfct_cb.frame_delay_max = NFCT_FRAMEDELAYMAX_DEFAULT;
     m_nfct_cb.frame_delay_min = NFCT_FRAMEDELAYMIN_DEFAULT;
 
