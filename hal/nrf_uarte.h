@@ -42,6 +42,13 @@ extern "C" {
 #define NRF_UARTE_HAS_DMA_TASKS_EVENTS 0
 #endif
 
+#if defined(UARTE_SHORTS_ENDTX_STOPTX_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether UARTE ENDTX_STOPTX shortcut is present. */
+#define NRF_UARTE_HAS_ENDTX_STOPTX_SHORT 1
+#else
+#define NRF_UARTE_HAS_ENDTX_STOPTX_SHORT 0
+#endif
+
 /** @brief UARTE tasks. */
 typedef enum
 {
@@ -86,7 +93,10 @@ typedef enum
 typedef enum
 {
     NRF_UARTE_SHORT_ENDRX_STARTRX = UARTE_SHORTS_ENDRX_STARTRX_Msk, ///< Shortcut between ENDRX event and STARTRX task.
-    NRF_UARTE_SHORT_ENDRX_STOPRX  = UARTE_SHORTS_ENDRX_STOPRX_Msk   ///< Shortcut between ENDRX event and STOPRX task.
+    NRF_UARTE_SHORT_ENDRX_STOPRX  = UARTE_SHORTS_ENDRX_STOPRX_Msk,  ///< Shortcut between ENDRX event and STOPRX task.
+#if NRF_UARTE_HAS_ENDTX_STOPTX_SHORT
+    NRF_UARTE_SHORT_ENDTX_STOPTX  = UARTE_SHORTS_ENDTX_STOPTX_Msk   ///< Shortcut between ENDTX event and STOPTX task.
+#endif
 } nrf_uarte_short_t;
 
 
@@ -235,7 +245,7 @@ NRF_STATIC_INLINE void nrf_uarte_shorts_set(NRF_UARTE_Type * p_reg, uint32_t mas
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mask  Shortcuts to be checked.
  *
- * @return Mask of requested shorts which were enabled.
+ * @return Mask of requested shortcuts which were enabled.
  */
 NRF_STATIC_INLINE uint32_t nrf_uarte_shorts_get(NRF_UARTE_Type * p_reg, uint32_t mask);
 
