@@ -230,6 +230,7 @@ extern "C" {
     #define NRFX_PRS_BOX_2_ADDR NRF_UARTE21
     #define NRFX_PRS_BOX_3_ADDR NRF_UARTE22
     #define NRFX_PRS_BOX_4_ADDR NRF_UARTE30
+    #define NRFX_PRS_BOX_5_ADDR NRF_LPCOMP
 #endif
 
 /*------------------------------------------------------------------------------------------------*/

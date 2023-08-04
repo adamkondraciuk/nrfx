@@ -1,4 +1,4 @@
-/*$$$LICENCE_NORDIC_STANDARD<2017>$$$*/
+/*$$$LICENCE_NORDIC_STANDARD<2023>$$$*/
 
 #ifndef NRFX_CONFIG_NRF54L15_APPLICATION_H__
 #define NRFX_CONFIG_NRF54L15_APPLICATION_H__
@@ -515,6 +515,15 @@
  */
 #ifndef NRFX_PRS_BOX_4_ENABLED
 #define NRFX_PRS_BOX_4_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_PRS_BOX_5_ENABLED
+ *
+ * Boolean. Accepted values 0 and 1.
+ */
+#ifndef NRFX_PRS_BOX_5_ENABLED
+#define NRFX_PRS_BOX_5_ENABLED 0
 #endif
 
 /**
