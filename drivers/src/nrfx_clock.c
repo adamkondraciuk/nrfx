@@ -161,26 +161,26 @@ static void clock_stop(nrf_clock_domain_t domain)
     {
         case NRF_CLOCK_DOMAIN_LFCLK:
             nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_LF_STARTED_MASK);
-            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_LFCLKSTARTED);
             nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_LFCLKSTOP);
+            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_LFCLKSTARTED);
             break;
         case NRF_CLOCK_DOMAIN_HFCLK:
             nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_HF_STARTED_MASK);
-            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLKSTARTED);
             nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_HFCLKSTOP);
+            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLKSTARTED);
             break;
 #if NRF_CLOCK_HAS_HFCLK192M
         case NRF_CLOCK_DOMAIN_HFCLK192M:
             nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_HF192M_STARTED_MASK);
-            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLK192MSTARTED);
             nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_HFCLK192MSTOP);
+            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLK192MSTARTED);
             break;
 #endif
 #if NRF_CLOCK_HAS_HFCLKAUDIO
         case NRF_CLOCK_DOMAIN_HFCLKAUDIO:
             nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_HFAUDIO_STARTED_MASK);
-            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLKAUDIOSTARTED);
             nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_HFCLKAUDIOSTOP);
+            nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_HFCLKAUDIOSTARTED);
             break;
 #endif
         default:
