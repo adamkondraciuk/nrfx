@@ -41,7 +41,7 @@ enum {
 /** @brief Macro for creating an instance of the GPIOTE driver. */
 #define NRFX_GPIOTE_INSTANCE(id)                               \
 {                                                              \
-    .p_reg        = NRF_GPIOTE##id ,                           \
+    .p_reg        = NRFX_CONCAT(NRF_, GPIOTE, id),             \
     .drv_inst_idx = NRFX_CONCAT_3(NRFX_GPIOTE, id, _INST_IDX), \
 }
 
