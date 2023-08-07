@@ -520,7 +520,7 @@
 /**
  * @brief NRFX_PRS_BOX_5_ENABLED
  *
- * Boolean. Accepted values 0 and 1.
+ * Boolean. Accepted values: 0 and 1.
  */
 #ifndef NRFX_PRS_BOX_5_ENABLED
 #define NRFX_PRS_BOX_5_ENABLED 0
