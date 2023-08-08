@@ -54,7 +54,7 @@ nrfx_err_t nrfx_nvmc_uicr_erase(void);
  */
 void nrfx_nvmc_all_erase(void);
 
-#if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_NVMC_HAS_PARTIAL_ERASE || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for initiating a complete page erase split into parts (also known as partial erase).
  *
@@ -93,7 +93,7 @@ nrfx_err_t nrfx_nvmc_page_partial_erase_init(uint32_t address, uint32_t duration
  */
 bool nrfx_nvmc_page_partial_erase_continue(void);
 
-#endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT) || defined(__NRFX_DOXYGEN__)
+#endif // NRF_NVMC_HAS_PARTIAL_ERASE || defined(__NRFX_DOXYGEN__)
 
 /**
  * @brief Function for checking whether a byte is writable at the specified address.

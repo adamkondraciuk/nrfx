@@ -16,9 +16,26 @@ extern "C" {
  * @brief   Hardware access layer (HAL) for managing the Non-Volatile Memory Controller (NVMC) peripheral.
  */
 
-#if defined(NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(NVMC_ERASEPAGEPARTIALCFG_DURATION_Msk) || defined(NVMC_CONFIG_WEN_PEen) || \
+    defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether the option of page partial erase is present. */
-#define NRF_NVMC_PARTIAL_ERASE_PRESENT
+#define NRF_NVMC_HAS_PARTIAL_ERASE 1
+#else
+#define NRF_NVMC_HAS_PARTIAL_ERASE 0
+#endif
+
+#if defined(NVMC_CONFIGNS_WEN_Msk) || defined (__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether NVMC has non-secure operations available. */
+#define NRF_NVMC_HAS_NON_SECURE_OPERATIONS 1
+#else
+#define NRF_NVMC_HAS_NON_SECURE_OPERATIONS 0
+#endif
+
+#if defined(NVMC_ERASEUICR_ERASEUICR_Msk) || defined (__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether NVMC has UICR erase available. */
+#define NRF_NVMC_HAS_UICR_ERASE 1
+#else
+#define NRF_NVMC_HAS_UICR_ERASE 0
 #endif
 
 /** @brief NVMC modes. */
@@ -32,7 +49,7 @@ typedef enum
 #endif
 } nrf_nvmc_mode_t;
 
-#if defined(NVMC_CONFIGNS_WEN_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_NVMC_HAS_NON_SECURE_OPERATIONS
 /** @brief Non-secure NVMC modes. */
 typedef enum
 {
@@ -91,7 +108,7 @@ NRF_STATIC_INLINE bool nrf_nvmc_write_ready_check(NRF_NVMC_Type const * p_reg);
 NRF_STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
                                          nrf_nvmc_mode_t mode);
 
-#if defined(NVMC_CONFIGNS_WEN_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_NVMC_HAS_NON_SECURE_OPERATIONS
 /**
  * @brief Function for setting the NVMC mode for non-secure Flash page operations.
  *
@@ -187,7 +204,7 @@ NRF_STATIC_INLINE void nrf_nvmc_buffer_read(void *   dst,
 NRF_STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
                                                  uint32_t        page_addr);
 
-#if defined(NVMC_ERASEUICR_ERASEUICR_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_NVMC_HAS_UICR_ERASE
 /**
  * @brief Function for starting the user information configuration registers (UICR) erase.
  *
@@ -205,7 +222,7 @@ NRF_STATIC_INLINE void nrf_nvmc_uicr_erase_start(NRF_NVMC_Type * p_reg);
  */
 NRF_STATIC_INLINE void nrf_nvmc_erase_all_start(NRF_NVMC_Type * p_reg);
 
-#if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
+#if NRF_NVMC_HAS_PARTIAL_ERASE
 /**
  * @brief Function for configuring the page partial erase duration in milliseconds.
  *
@@ -234,7 +251,7 @@ NRF_STATIC_INLINE uint32_t nrf_nvmc_partial_erase_duration_get(NRF_NVMC_Type con
  */
 NRF_STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
                                                          uint32_t        page_addr);
-#endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
+#endif // NRF_NVMC_HAS_PARTIAL_ERASE
 
 #if defined(NVMC_FEATURE_CACHE_PRESENT)
 /**
@@ -316,7 +333,7 @@ NRF_STATIC_INLINE void nrf_nvmc_mode_set(NRF_NVMC_Type * p_reg,
     p_reg->CONFIG = (uint32_t)mode;
 }
 
-#if defined(NVMC_CONFIGNS_WEN_Msk)
+#if NRF_NVMC_HAS_NON_SECURE_OPERATIONS
 NRF_STATIC_INLINE void nrf_nvmc_nonsecure_mode_set(NRF_NVMC_Type *    p_reg,
                                                    nrf_nvmc_ns_mode_t mode)
 {
@@ -380,7 +397,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_erase_start(NRF_NVMC_Type * p_reg,
 #endif
 }
 
-#if defined(NVMC_ERASEUICR_ERASEUICR_Msk)
+#if NRF_NVMC_HAS_UICR_ERASE
 NRF_STATIC_INLINE void nrf_nvmc_uicr_erase_start(NRF_NVMC_Type * p_reg)
 {
     p_reg->ERASEUICR = 1;
@@ -392,7 +409,7 @@ NRF_STATIC_INLINE void nrf_nvmc_erase_all_start(NRF_NVMC_Type * p_reg)
     p_reg->ERASEALL = 1;
 }
 
-#if defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
+#if NRF_NVMC_HAS_PARTIAL_ERASE
 NRF_STATIC_INLINE void nrf_nvmc_partial_erase_duration_set(NRF_NVMC_Type * p_reg,
                                                            uint32_t        duration_ms)
 {
@@ -415,7 +432,7 @@ NRF_STATIC_INLINE void nrf_nvmc_page_partial_erase_start(NRF_NVMC_Type * p_reg,
     #error "Unknown device."
 #endif
 }
-#endif // defined(NRF_NVMC_PARTIAL_ERASE_PRESENT)
+#endif // NRF_NVMC_HAS_PARTIAL_ERASE
 
 #if defined(NVMC_FEATURE_CACHE_PRESENT)
 NRF_STATIC_INLINE void nrf_nvmc_icache_config_set(NRF_NVMC_Type *          p_reg,
