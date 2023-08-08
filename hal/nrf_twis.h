@@ -17,15 +17,6 @@ extern "C" {
  *          (TWIS) peripheral.
  */
 
-/**
- * @brief Macro getting pointer to the structure of registers of the TWIS peripheral.
- *
- * @param[in] idx TWIS instance index.
- *
- * @return Pointer to the structure of registers of the TWIS peripheral.
- */
-#define NRF_TWIS_INST_GET(idx) NRFX_CONCAT(NRF_, TWIS, idx)
-
 #if defined(TWIS_DMA_RX_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether dedicated DMA register is present. */
 #define NRF_TWIS_HAS_DMA_REG 1
@@ -48,6 +39,25 @@ extern "C" {
 #else
 #define NRF_TWIS_HAS_LIST_REG 0
 #endif
+
+#if NRF_TWIS_HAS_DMA_REG
+/** @brief Symbol specifying maximum possible size of the TX channel buffer. */
+#define NRF_TWIS_TX_MAX_COUNT_SIZE TWIS_DMA_TX_MAXCNT_MAXCNT_Max
+/** @brief Symbol specifying maximum possible size of the RX channel buffer. */
+#define NRF_TWIS_RX_MAX_COUNT_SIZE TWIS_DMA_RX_MAXCNT_MAXCNT_Max
+#else
+#define NRF_TWIS_TX_MAX_COUNT_SIZE TWIS_TXD_MAXCNT_MAXCNT_Msk
+#define NRF_TWIS_RX_MAX_COUNT_SIZE TWIS_RXD_MAXCNT_MAXCNT_Msk
+#endif
+
+/**
+ * @brief Macro getting pointer to the structure of registers of the TWIS peripheral.
+ *
+ * @param[in] idx TWIS instance index.
+ *
+ * @return Pointer to the structure of registers of the TWIS peripheral.
+ */
+#define NRF_TWIS_INST_GET(idx) NRFX_CONCAT(NRF_, TWIS, idx)
 
 /** @brief TWIS tasks. */
 typedef enum

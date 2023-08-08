@@ -734,12 +734,7 @@ nrfx_err_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
         return err_code;
     }
     /* Check data size */
-#if NRF_TWIS_HAS_DMA_REG
-    size_t maxsize = TWIS_DMA_TX_MAXCNT_MAXCNT_Msk;
-#else
-    size_t maxsize = TWIS_TXD_MAXCNT_MAXCNT_Msk;
-#endif
-    if ((size & maxsize) != size)
+    if (size > NRF_TWIS_RX_MAX_COUNT_SIZE)
     {
         err_code = NRFX_ERROR_INVALID_LENGTH;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -784,12 +779,7 @@ nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
         return err_code;
     }
     /* Check data size */
-#if NRF_TWIS_HAS_DMA_REG
-    size_t maxsize = TWIS_DMA_RX_MAXCNT_MAXCNT_Msk;
-#else
-    size_t maxsize = TWIS_RXD_MAXCNT_MAXCNT_Msk;
-#endif
-    if ((size & maxsize) != size)
+    if (size > NRF_TWIS_TX_MAX_COUNT_SIZE)
     {
         err_code = NRFX_ERROR_INVALID_LENGTH;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
