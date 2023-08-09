@@ -341,6 +341,22 @@ void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
 
     nrfy_mvdma_reset(p_instance->p_reg, false);
 
+    nrfy_mvdma_int_uninit(p_instance->p_reg);
+    if (p_cb->handler)
+    {
+        nrfy_mvdma_int_disable(p_instance->p_reg,
+                               NRF_MVDMA_INT_END_MASK |
+#if NRF_MVDMA_HAS_NEW_VER
+                               NRF_MVDMA_INT_PAUSED_MASK |
+                               NRF_MVDMA_INT_SINKSELECTJOBDONE_MASK |
+                               NRF_MVDMA_INT_SOURCESELECTJOBDONE_MASK |
+#else
+                               NRF_MVDMA_INT_STOPPED_MASK |
+#endif
+                               NRF_MVDMA_INT_SINKBUSERROR_MASK |
+                               NRF_MVDMA_INT_SOURCEBUSERROR_MASK);
+    }
+
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
 }
 
