@@ -154,29 +154,9 @@ typedef struct
 } gpiote_control_block_t;
 
 #if !defined(__NRFX_DOXYGEN__)
-#if !defined (NRFX_GPIOTE0_CHANNELS_USED)
+#if (defined(NRF_GPIOTE) || defined(NRF_GPIOTE0)) && !defined(NRFX_GPIOTE0_CHANNELS_USED)
 /* Bitmask that defines GPIOTE0 channels that are reserved for use outside of the nrfx library. */
 #define NRFX_GPIOTE0_CHANNELS_USED 0UL
-#endif
-
-#if !defined (NRFX_GPIOTE20_CHANNELS_USED)
-/* Bitmask that defines GPIOTE20 channels that are reserved for use outside of the nrfx library. */
-#define NRFX_GPIOTE20_CHANNELS_USED 0UL
-#endif
-
-#if !defined (NRFX_GPIOTE30_CHANNELS_USED)
-/* Bitmask that defines GPIOTE30 channels that are reserved for use outside of the nrfx library. */
-#define NRFX_GPIOTE30_CHANNELS_USED 0UL
-#endif
-
-#if !defined (NRFX_GPIOTE130_CHANNELS_USED)
-/* Bitmask that defines GPIOTE130 channels that are reserved for use outside of the nrfx library. */
-#define NRFX_GPIOTE130_CHANNELS_USED 0UL
-#endif
-
-#if !defined (NRFX_GPIOTE131_CHANNELS_USED)
-/* Bitmask that defines GPIOTE131 channels that are reserved for use outside of the nrfx library. */
-#define NRFX_GPIOTE131_CHANNELS_USED 0UL
 #endif
 #endif // !defined(__NRFX_DOXYGEN__)
 
