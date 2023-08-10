@@ -451,7 +451,7 @@ static nrfx_err_t pin_handler_set(nrfx_gpiote_t const *           p_instance,
     m_cb[p_instance->drv_inst_idx].handlers[handler_id].handler = handler;
     m_cb[p_instance->drv_inst_idx].handlers[handler_id].p_context = p_context;
     m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)] |=
-        PIN_FLAG_HANDLER((uint8_t)handler_id);
+        (uint16_t)PIN_FLAG_HANDLER((uint8_t)handler_id);
 
     return NRFX_SUCCESS;
 }
@@ -587,7 +587,7 @@ static nrfx_err_t gpiote_input_configure(nrfx_gpiote_t const *                  
                     nrfy_gpiote_event_disable(p_instance->p_reg, ch);
                     nrfy_gpiote_event_configure(p_instance->p_reg, ch, pin, polarity);
 
-                    m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= PIN_FLAG_TE_ID(ch);
+                    m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
                 }
             }
         }
@@ -602,7 +602,7 @@ static nrfx_err_t gpiote_input_configure(nrfx_gpiote_t const *                  
         }
 #endif
         m_cb[p_instance->drv_inst_idx].pin_flags[idx] &= (uint16_t)~PIN_FLAG_TRIG_MODE_MASK;
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= PIN_FLAG_TRIG_MODE_SET(trigger);
+        m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TRIG_MODE_SET(trigger);
     }
 
     if (p_config->p_handler_config)
@@ -668,7 +668,7 @@ static nrfx_err_t gpiote_output_configure(nrfx_gpiote_t const *               p_
             nrfy_gpiote_task_configure(p_instance->p_reg, ch, pin,
                                        p_task_config->polarity,
                                        p_task_config->init_val);
-            m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= PIN_FLAG_TE_ID(ch);
+            m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
         }
     }
 
@@ -706,7 +706,7 @@ static nrfx_err_t gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrup
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     NRFX_LOG_INFO("channels_number: %d, available_channels_mask: 0x%x",
-                    p_cb->channels_number, p_cb->available_channels_mask);
+                  (int)p_cb->channels_number, (int)p_cb->available_channels_mask);
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -778,7 +778,7 @@ static nrfx_err_t pin_channel_free(nrfx_gpiote_t const * p_instance, uint8_t cha
 static nrfx_err_t pin_channel_alloc(nrfx_gpiote_t const * p_instance, uint8_t * p_channel)
 {
     NRFX_LOG_INFO("available_channels_mask = %d",
-                  m_cb[p_instance->drv_inst_idx].available_channels_mask);
+                  (int)m_cb[p_instance->drv_inst_idx].available_channels_mask);
     return nrfx_flag32_alloc(&m_cb[p_instance->drv_inst_idx].available_channels_mask, p_channel);
 }
 

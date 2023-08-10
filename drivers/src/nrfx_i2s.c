@@ -368,8 +368,8 @@ nrfx_err_t nrfx_i2s_start(nrfx_i2s_t const *         p_instance,
     p_cb->state = NRFX_DRV_STATE_POWERED_ON;
 
     nrfy_i2s_int_enable(p_instance->p_reg,
-                        (p_cb->use_rx ? NRF_I2S_INT_RXPTRUPD_MASK : 0) |
-                        (p_cb->use_tx ? NRF_I2S_INT_TXPTRUPD_MASK : 0) |
+                        (p_cb->use_rx ? NRF_I2S_INT_RXPTRUPD_MASK : 0UL) |
+                        (p_cb->use_tx ? NRF_I2S_INT_TXPTRUPD_MASK : 0UL) |
                         NRF_I2S_INT_STOPPED_MASK);
 
     const nrfy_i2s_xfer_desc_t xfer = {

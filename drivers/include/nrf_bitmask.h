@@ -59,7 +59,7 @@ __STATIC_INLINE void nrf_bitmask_bit_set(uint32_t bit, void * p_mask)
     uint8_t * p_mask8 = (uint8_t *)p_mask;
     uint32_t byte_idx = BITMASK_BYTE_GET(bit);
     bit = BITMASK_RELBIT_GET(bit);
-    p_mask8[byte_idx] |= (1U << bit);
+    p_mask8[byte_idx] |= (uint8_t)(1U << bit);
 }
 
 /**
@@ -73,7 +73,7 @@ __STATIC_INLINE void nrf_bitmask_bit_clear(uint32_t bit, void * p_mask)
     uint8_t * p_mask8 = (uint8_t *)p_mask;
     uint32_t byte_idx = BITMASK_BYTE_GET(bit);
     bit = BITMASK_RELBIT_GET(bit);
-    p_mask8[byte_idx] &= ~(uint8_t)(1U << bit);
+    p_mask8[byte_idx] &= (uint8_t)~(1U << bit);
 }
 
 /**

@@ -120,7 +120,7 @@ static void saadc_channel_config(nrfx_saadc_channel_t const * p_channel)
     nrfy_saadc_channel_configure(NRF_SAADC, channel_index, &p_channel->channel_config, NULL);
     m_cb.channels_input[channel_index].input_p = p_channel->pin_p;
     m_cb.channels_input[channel_index].input_n = p_channel->pin_n;
-    m_cb.channels_configured |= 1U << channel_index;
+    m_cb.channels_configured |= (uint8_t)(1U << channel_index);
 }
 
 static void saadc_channels_deconfig(uint32_t channel_mask)
@@ -628,7 +628,7 @@ nrfx_err_t nrfx_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t lim
     }
     else
     {
-        m_cb.limits_low_activated |= (1UL << channel);
+        m_cb.limits_low_activated |= (uint8_t)(1UL << channel);
         nrfy_saadc_int_enable(NRF_SAADC, int_mask);
     }
 
@@ -640,7 +640,7 @@ nrfx_err_t nrfx_saadc_limits_set(uint8_t channel, int16_t limit_low, int16_t lim
     }
     else
     {
-        m_cb.limits_high_activated |= (1UL << channel);
+        m_cb.limits_high_activated |= (uint8_t)(1UL << channel);
         nrfy_saadc_int_enable(NRF_SAADC, int_mask);
     }
 
