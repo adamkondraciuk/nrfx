@@ -1117,7 +1117,7 @@ uint32_t nrfx_gpiote_in_event_address_get(nrfx_gpiote_t const * p_instance, nrfx
 }
 #else
 
-nrfx_gpiote_t const gpio_instance = NRFX_GPIOTE_INSTANCE(0);
+nrfx_gpiote_t const gpio_instance = NRFX_GPIOTE_INSTANCE(NRF_GPIOTE_INDEX);
 
 nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_pin_t                    pin,
                                        nrfx_gpiote_input_config_t const *   p_input_config,

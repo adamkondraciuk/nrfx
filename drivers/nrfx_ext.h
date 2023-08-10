@@ -178,6 +178,14 @@ extern "C" {
     #endif
 #endif
 
+#if defined(NRF_GPIOTE130)
+    #define NRF_GPIOTE_INDEX 130
+#elif defined(NRF_GPIOTE131)
+    #define NRF_GPIOTE_INDEX 131
+#elif defined(NRF_GPIOTE20)
+    #define NRF_GPIOTE_INDEX 20
+#endif
+
 #if defined(GPIOTE_INTEN0_IN0_Msk)
     #if defined(NRF_SECURE) || defined(LUMOS_XXAA)
         #define NRF_GPIOTE_PORT_ID 0

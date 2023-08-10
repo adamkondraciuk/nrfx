@@ -39,10 +39,10 @@ enum {
 #endif
 
 /** @brief Macro for creating an instance of the GPIOTE driver. */
-#define NRFX_GPIOTE_INSTANCE(id)                               \
-{                                                              \
-    .p_reg        = NRFX_CONCAT(NRF_, GPIOTE, id),             \
-    .drv_inst_idx = NRFX_CONCAT_3(NRFX_GPIOTE, id, _INST_IDX), \
+#define NRFX_GPIOTE_INSTANCE(id)                             \
+{                                                            \
+    .p_reg        = NRFX_CONCAT(NRF_, GPIOTE, id),           \
+    .drv_inst_idx = NRFX_CONCAT(NRFX_GPIOTE, id, _INST_IDX), \
 }
 
 /** @brief Pin. */
@@ -584,8 +584,12 @@ NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(nrfx_gpiote_t co
 
 #else
 
+#if !defined(NRF_GPIOTE_INDEX)
+#define NRF_GPIOTE_INDEX 0
+#endif
+
 #if !defined(nrfx_gpiote_irq_handler)
-#define nrfx_gpiote_irq_handler GPIOTE_IRQHandler
+#define nrfx_gpiote_irq_handler NRFX_CONCAT(nrfx_gpiote_, NRF_GPIOTE_INDEX, _irq_handler)
 #endif
 
 #define NRFX_GPIOTE_DEFAULT_INPUT_CONFIG \
@@ -675,12 +679,12 @@ NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void);
 #if NRF_GPIOTE_HAS_LATENCY
 NRFX_STATIC_INLINE void nrfx_gpiote_latency_set(nrf_gpiote_latency_t latency)
 {
-    nrfy_gpiote_latency_set(NRF_GPIOTE0, latency);
+    nrfy_gpiote_latency_set(NRFX_CONCAT(NRF_, GPIOTE, NRF_GPIOTE_INDEX), latency);
 }
 
 NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void)
 {
-    return nrfy_gpiote_latency_get(NRF_GPIOTE0);
+    return nrfy_gpiote_latency_get(NRFX_CONCAT(NRF_, GPIOTE, NRF_GPIOTE_INDEX));
 }
 #endif // NRF_GPIOTE_HAS_LATENCY
 #endif // NRFX_DECLARE_ONLY
