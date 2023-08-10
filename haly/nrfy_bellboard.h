@@ -110,23 +110,23 @@ NRFY_STATIC_INLINE void nrfy_bellboard_task_trigger(NRF_BELLBOARD_Type * p_reg,
 }
 
 /** @refhal{nrf_bellboard_task_address_get} */
-NRF_STATIC_INLINE uint32_t nrfy_bellboard_task_address_get(NRF_BELLBOARD_Type const * p_reg,
-                                                           nrf_bellboard_task_t       task)
+NRFY_STATIC_INLINE uint32_t nrfy_bellboard_task_address_get(NRF_BELLBOARD_Type const * p_reg,
+                                                            nrf_bellboard_task_t       task)
 {
     return nrf_bellboard_task_address_get(p_reg, task);
 }
 
 /** @refhal{nrf_bellboard_event_clear} */
-NRF_STATIC_INLINE void nrfy_bellboard_event_clear(NRF_BELLBOARD_Type *  p_reg,
-                                                  nrf_bellboard_event_t event)
+NRFY_STATIC_INLINE void nrfy_bellboard_event_clear(NRF_BELLBOARD_Type *  p_reg,
+                                                   nrf_bellboard_event_t event)
 {
     nrf_bellboard_event_clear(p_reg, event);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_bellboard_event_check} */
-NRF_STATIC_INLINE bool nrfy_bellboard_event_check(NRF_BELLBOARD_Type const * p_reg,
-                                                  nrf_bellboard_event_t      event)
+NRFY_STATIC_INLINE bool nrfy_bellboard_event_check(NRF_BELLBOARD_Type const * p_reg,
+                                                   nrf_bellboard_event_t      event)
 {
     bool ret = nrf_bellboard_event_check(p_reg, event);
     nrf_barrier_r();
@@ -135,8 +135,8 @@ NRF_STATIC_INLINE bool nrfy_bellboard_event_check(NRF_BELLBOARD_Type const * p_r
 }
 
 /** @refhal{nrf_bellboard_event_address_get} */
-NRF_STATIC_INLINE uint32_t nrfy_bellboard_event_address_get(NRF_BELLBOARD_Type const * p_reg,
-                                                            nrf_bellboard_event_t      event)
+NRFY_STATIC_INLINE uint32_t nrfy_bellboard_event_address_get(NRF_BELLBOARD_Type const * p_reg,
+                                                             nrf_bellboard_event_t      event)
 {
     return nrf_bellboard_event_address_get(p_reg, event);
 }
@@ -160,9 +160,9 @@ NRFY_STATIC_INLINE void nrfy_bellboard_int_disable(NRF_BELLBOARD_Type * p_reg,
 }
 
 /** @refhal{nrf_bellboard_int_enable_check} */
-NRF_STATIC_INLINE uint32_t nrfy_bellboard_int_enable_check(NRF_BELLBOARD_Type const * p_reg,
-                                                           uint8_t                    group_idx,
-                                                           uint32_t                   mask)
+NRFY_STATIC_INLINE uint32_t nrfy_bellboard_int_enable_check(NRF_BELLBOARD_Type const * p_reg,
+                                                            uint8_t                    group_idx,
+                                                            uint32_t                   mask)
 {
     uint32_t ret = nrf_bellboard_int_enable_check(p_reg, group_idx, mask);
     nrf_barrier_r();

@@ -298,14 +298,14 @@ NRFY_STATIC_INLINE nrf_timer_bit_width_t nrfy_timer_bit_width_get(NRF_TIMER_Type
 }
 
 /** @refhal{nrf_timer_prescaler_set} */
-NRF_STATIC_INLINE void nrfy_timer_prescaler_set(NRF_TIMER_Type * p_reg, uint32_t prescaler_factor)
+NRFY_STATIC_INLINE void nrfy_timer_prescaler_set(NRF_TIMER_Type * p_reg, uint32_t prescaler_factor)
 {
     nrf_timer_prescaler_set(p_reg, prescaler_factor);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_timer_prescaler_get} */
-NRF_STATIC_INLINE uint32_t nrfy_timer_prescaler_get(NRF_TIMER_Type const * p_reg)
+NRFY_STATIC_INLINE uint32_t nrfy_timer_prescaler_get(NRF_TIMER_Type const * p_reg)
 {
     nrf_barrier_rw();
     uint32_t prescaler = nrf_timer_prescaler_get(p_reg);

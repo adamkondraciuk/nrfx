@@ -738,14 +738,14 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_waketime_get(NRF_GRTC_Type const * p_reg)
 
 #if NRFY_GRTC_HAS_PWM
 /** @refhal{nrf_grtc_pwm_compare_set} */
-NRF_STATIC_INLINE void nrfy_grtc_pwm_compare_set(NRF_GRTC_Type * p_reg, uint32_t value)
+NRFY_STATIC_INLINE void nrfy_grtc_pwm_compare_set(NRF_GRTC_Type * p_reg, uint32_t value)
 {
     nrf_grtc_pwm_compare_set(p_reg, value);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_grtc_pwm_compare_get} */
-NRF_STATIC_INLINE uint32_t nrfy_grtc_pwm_compare_get(NRF_GRTC_Type const * p_reg)
+NRFY_STATIC_INLINE uint32_t nrfy_grtc_pwm_compare_get(NRF_GRTC_Type const * p_reg)
 {
     nrf_barrier_rw();
     uint32_t compare = nrf_grtc_pwm_compare_get(p_reg);

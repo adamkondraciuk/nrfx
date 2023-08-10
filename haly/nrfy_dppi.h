@@ -42,13 +42,13 @@ NRFY_STATIC_INLINE void nrfy_dppi_channels_set(NRF_DPPIC_Type * p_reg, uint32_t 
 }
 
 /** @refhal{nrf_dppi_channel_number_get} */
-NRF_STATIC_INLINE uint8_t nrfy_dppi_channel_number_get(NRF_DPPIC_Type const * p_reg)
+NRFY_STATIC_INLINE uint8_t nrfy_dppi_channel_number_get(NRF_DPPIC_Type const * p_reg)
 {
     return nrf_dppi_channel_number_get(p_reg);
 }
 
 /** @refhal{nrf_dppi_group_number_get} */
-NRF_STATIC_INLINE uint8_t nrfy_dppi_group_number_get(NRF_DPPIC_Type const * p_reg)
+NRFY_STATIC_INLINE uint8_t nrfy_dppi_group_number_get(NRF_DPPIC_Type const * p_reg)
 {
     return nrf_dppi_group_number_get(p_reg);
 }

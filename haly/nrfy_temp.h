@@ -63,21 +63,21 @@ NRFY_STATIC_INLINE void nrfy_temp_int_uninit(NRF_TEMP_Type * p_reg)
 }
 
 /** @refhal{nrf_temp_int_enable} */
-NRF_STATIC_INLINE void nrfy_temp_int_enable(NRF_TEMP_Type * p_reg, uint32_t mask)
+NRFY_STATIC_INLINE void nrfy_temp_int_enable(NRF_TEMP_Type * p_reg, uint32_t mask)
 {
     nrf_temp_int_enable(p_reg, mask);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_temp_int_disable} */
-NRF_STATIC_INLINE void nrfy_temp_int_disable(NRF_TEMP_Type * p_reg, uint32_t mask)
+NRFY_STATIC_INLINE void nrfy_temp_int_disable(NRF_TEMP_Type * p_reg, uint32_t mask)
 {
     nrf_temp_int_disable(p_reg, mask);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_temp_int_enable_check} */
-NRF_STATIC_INLINE uint32_t nrfy_temp_int_enable_check(NRF_TEMP_Type const * p_reg, uint32_t mask)
+NRFY_STATIC_INLINE uint32_t nrfy_temp_int_enable_check(NRF_TEMP_Type const * p_reg, uint32_t mask)
 {
     nrf_barrier_rw();
     uint32_t check = nrf_temp_int_enable_check(p_reg, mask);
@@ -86,35 +86,35 @@ NRF_STATIC_INLINE uint32_t nrfy_temp_int_enable_check(NRF_TEMP_Type const * p_re
 }
 
 /** @refhal{nrf_temp_task_address_get} */
-NRF_STATIC_INLINE uint32_t nrfy_temp_task_address_get(NRF_TEMP_Type const * p_reg,
-                                                      nrf_temp_task_t       task)
+NRFY_STATIC_INLINE uint32_t nrfy_temp_task_address_get(NRF_TEMP_Type const * p_reg,
+                                                       nrf_temp_task_t       task)
 {
     return nrf_temp_task_address_get(p_reg, task);
 }
 
 /** @refhal{nrf_temp_task_trigger} */
-NRF_STATIC_INLINE void nrfy_temp_task_trigger(NRF_TEMP_Type * p_reg, nrf_temp_task_t task)
+NRFY_STATIC_INLINE void nrfy_temp_task_trigger(NRF_TEMP_Type * p_reg, nrf_temp_task_t task)
 {
     nrf_temp_task_trigger(p_reg, task);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_temp_event_address_get} */
-NRF_STATIC_INLINE uint32_t nrfy_temp_event_address_get(NRF_TEMP_Type const * p_reg,
-                                                       nrf_temp_event_t      event)
+NRFY_STATIC_INLINE uint32_t nrfy_temp_event_address_get(NRF_TEMP_Type const * p_reg,
+                                                        nrf_temp_event_t      event)
 {
     return nrf_temp_event_address_get(p_reg, event);
 }
 
 /** @refhal{nrf_temp_event_clear} */
-NRF_STATIC_INLINE void nrfy_temp_event_clear(NRF_TEMP_Type * p_reg, nrf_temp_event_t event)
+NRFY_STATIC_INLINE void nrfy_temp_event_clear(NRF_TEMP_Type * p_reg, nrf_temp_event_t event)
 {
     nrf_temp_event_clear(p_reg, event);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_temp_event_check} */
-NRF_STATIC_INLINE bool nrfy_temp_event_check(NRF_TEMP_Type const * p_reg, nrf_temp_event_t event)
+NRFY_STATIC_INLINE bool nrfy_temp_event_check(NRF_TEMP_Type const * p_reg, nrf_temp_event_t event)
 {
     nrf_barrier_rw();
     uint32_t check = nrf_temp_event_check(p_reg, event);
@@ -123,7 +123,7 @@ NRF_STATIC_INLINE bool nrfy_temp_event_check(NRF_TEMP_Type const * p_reg, nrf_te
 }
 
 /** @refhal{nrf_temp_result_get} */
-NRF_STATIC_INLINE int32_t nrfy_temp_result_get(NRF_TEMP_Type const * p_reg)
+NRFY_STATIC_INLINE int32_t nrfy_temp_result_get(NRF_TEMP_Type const * p_reg)
 {
     nrf_barrier_r();
     int32_t temperature = nrf_temp_result_get(p_reg);
@@ -133,14 +133,14 @@ NRF_STATIC_INLINE int32_t nrfy_temp_result_get(NRF_TEMP_Type const * p_reg)
 
 #if NRFY_TEMP_HAS_CALIBRATION
 /** @refhal{nrf_temp_calibration_coeff_set} */
-NRF_STATIC_INLINE void nrfy_temp_calibration_coeff_set(NRF_TEMP_Type * p_reg, uint32_t coeff)
+NRFY_STATIC_INLINE void nrfy_temp_calibration_coeff_set(NRF_TEMP_Type * p_reg, uint32_t coeff)
 {
     nrf_temp_calibration_coeff_set(p_reg, coeff);
     nrf_barrier_w();
 }
 
 /** @refhal{nrf_temp_calibration_coeff_get} */
-NRF_STATIC_INLINE uint32_t nrfy_temp_calibration_coeff_get(NRF_TEMP_Type const * p_reg)
+NRFY_STATIC_INLINE uint32_t nrfy_temp_calibration_coeff_get(NRF_TEMP_Type const * p_reg)
 {
     nrf_barrier_rw();
     uint32_t coeff = nrf_temp_calibration_coeff_get(p_reg);
