@@ -333,7 +333,7 @@ void nrfx_gpiote_trigger_disable(nrfx_gpiote_t const * p_instance, nrfx_gpiote_p
  * @brief Set global callback called for each event.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
- * @param[in] handler    Global handler.
+ * @param[in] handler    Global handler. Can be NULL.
  * @param[in] p_context  Context passed to the handler.
  */
 void nrfx_gpiote_global_callback_set(nrfx_gpiote_t const *           p_instance,
