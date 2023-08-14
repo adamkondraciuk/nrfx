@@ -6,6 +6,9 @@
 
 #include <nrfx_ipc.h>
 
+#define NRFX_LOG_MODULE IPC
+#include <nrfx_log.h>
+
 // Control block - driver instance local data.
 typedef struct
 {
@@ -31,6 +34,7 @@ nrfx_err_t nrfx_ipc_init(uint8_t irq_priority, nrfx_ipc_handler_t handler, void 
     m_cb.handler = handler;
     m_cb.p_context = p_context;
 
+    NRFX_LOG_INFO("Initialized.");
     return NRFX_SUCCESS;
 }
 
@@ -51,6 +55,8 @@ void nrfx_ipc_config_load(const nrfx_ipc_config_t * p_config)
     }
 
     nrf_ipc_int_enable(NRF_IPC, p_config->receive_events_enabled);
+
+    NRFX_LOG_INFO("Configuartion loaded.");
 }
 
 void nrfx_ipc_uninit(void)
@@ -68,8 +74,11 @@ void nrfx_ipc_uninit(void)
         nrf_ipc_receive_config_set(NRF_IPC, i, 0);
     }
 
+    NRFX_IRQ_DISABLE(IPC_IRQn);
     nrf_ipc_int_disable(NRF_IPC, 0xFFFFFFFF);
+
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_ipc_init_check(void)
@@ -81,40 +90,56 @@ void nrfx_ipc_receive_event_enable(uint8_t event_index)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     nrf_ipc_int_enable(NRF_IPC, (1UL << event_index));
+
+    NRFX_LOG_INFO("Event %u enabled.", event_index);
 }
 
 void nrfx_ipc_receive_event_disable(uint8_t event_index)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     nrf_ipc_int_disable(NRF_IPC, (1UL << event_index));
+
+    NRFX_LOG_INFO("Event %u disabled.", event_index);
 }
 
 void nrfx_ipc_receive_event_group_enable(uint32_t event_bitmask)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     nrf_ipc_int_enable(NRF_IPC, event_bitmask);
+
+    NRFX_LOG_INFO("Events masked with %x enabled.", event_bitmask);
 }
 
 void nrfx_ipc_receive_event_group_disable(uint32_t event_bitmask)
 {
     NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     nrf_ipc_int_disable(NRF_IPC, event_bitmask);
+
+    NRFX_LOG_INFO("Events masked with %x disabled.", event_bitmask);
 }
 
 void nrfx_ipc_receive_event_channel_assign(uint8_t event_index, uint8_t channel_index)
 {
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(channel_index < IPC_CH_NUM);
+
     uint32_t channel_bitmask = (1UL << channel_index);
     channel_bitmask |= nrf_ipc_receive_config_get(NRF_IPC, event_index);
     nrf_ipc_receive_config_set(NRF_IPC, event_index, channel_bitmask);
+
+    NRFX_LOG_INFO("Event %u assigned to IPC channel %u.", event_index, channel_index);
 }
 
 void nrfx_ipc_send_task_channel_assign(uint8_t send_index, uint8_t channel_index)
 {
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(channel_index < IPC_CH_NUM);
+
     uint32_t channel_bitmask = (1UL << channel_index);
     channel_bitmask |= nrf_ipc_send_config_get(NRF_IPC, send_index);
     nrf_ipc_send_config_set(NRF_IPC, send_index, channel_bitmask);
+
+    NRFX_LOG_INFO("Signal %u assigned to IPC channel %u.", send_index, channel_index);
 }
 
 void nrfx_ipc_irq_handler(void)

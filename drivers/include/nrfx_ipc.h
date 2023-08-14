@@ -37,6 +37,7 @@ typedef struct
  *
  * @param irq_priority Interrupt priority.
  * @param handler      Event handler provided by the user.
+ *                     Must not be NULL.
  * @param p_context    Context passed to event handler.
  *
  * @retval NRFX_SUCCESS       Initialization was successful.
