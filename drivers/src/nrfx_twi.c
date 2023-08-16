@@ -147,7 +147,9 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_evt_handler_t    event_handler,
                          void *                    p_context)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
+
     twi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;
 
@@ -210,7 +212,9 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
 nrfx_err_t nrfx_twi_reconfigure(nrfx_twi_t const *        p_instance,
                                 nrfx_twi_config_t const * p_config)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
+
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -231,6 +235,8 @@ nrfx_err_t nrfx_twi_reconfigure(nrfx_twi_t const *        p_instance,
 void nrfx_twi_uninit(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (p_cb->handler)
@@ -265,6 +271,8 @@ bool nrfx_twi_init_check(nrfx_twi_t const * p_instance)
 void nrfx_twi_enable(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     NRF_TWI_Type * p_twi = p_instance->p_twi;
@@ -277,6 +285,8 @@ void nrfx_twi_enable(nrfx_twi_t const * p_instance)
 void nrfx_twi_disable(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     NRF_TWI_Type * p_twi = p_instance->p_twi;
@@ -576,7 +586,6 @@ static nrfx_err_t twi_xfer(NRF_TWI_Type               * p_twi,
                            nrfx_twi_xfer_desc_t const * p_xfer_desc,
                            uint32_t                     flags)
 {
-
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     if ((p_cb->prev_suspend == TWI_SUSPEND_TX) && (p_xfer_desc->type == NRFX_TWI_XFER_RX))
@@ -634,6 +643,8 @@ static nrfx_err_t twi_xfer(NRF_TWI_Type               * p_twi,
 bool nrfx_twi_is_busy(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
+
     return p_cb->busy;
 }
 
@@ -641,9 +652,13 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t const *           p_instance,
                          nrfx_twi_xfer_desc_t const * p_xfer_desc,
                          uint32_t                     flags)
 {
-
     nrfx_err_t err_code = NRFX_SUCCESS;
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(p_xfer_desc->p_primary_buf != NULL || p_xfer_desc->primary_length == 0);
+    NRFX_ASSERT(p_xfer_desc->p_secondary_buf != NULL || p_xfer_desc->secondary_length == 0);
 
     // TXRX and TXTX transfers are supported only in non-blocking mode.
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWI_XFER_TXRX)));
@@ -669,11 +684,15 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t const *           p_instance,
 
 size_t nrfx_twi_data_count_get(nrfx_twi_t const * p_instance)
 {
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     return m_cb[p_instance->drv_inst_idx].bytes_transferred;
 }
 
 uint32_t nrfx_twi_stopped_event_get(nrfx_twi_t const * p_instance)
 {
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     return nrf_twi_event_address_get(p_instance->p_twi, NRF_TWI_EVENT_STOPPED);
 }
 
@@ -747,7 +766,6 @@ static void irq_handler(NRF_TWI_Type * p_twi, twi_control_block_t * p_cb)
             p_cb->handler(&event, p_cb->p_context);
         }
     }
-
 }
 
 NRFX_INSTANCE_IRQ_HANDLERS(TWI, twi)
