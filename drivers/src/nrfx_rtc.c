@@ -39,6 +39,7 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
                          nrfx_rtc_config_t const * p_config,
                          nrfx_rtc_handler_t        handler)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(handler);
     nrfx_err_t err_code;
@@ -73,10 +74,12 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
 
 void nrfx_rtc_uninit(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     uint32_t mask = NRF_RTC_INT_TICK_MASK     |
                     NRF_RTC_INT_OVERFLOW_MASK |
                     NRF_RTC_ALL_CHANNELS_INT_MASK;
-    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_rtc_int_uninit(p_instance->p_reg);
     nrfy_rtc_stop(p_instance->p_reg, mask);
@@ -94,6 +97,7 @@ bool nrfx_rtc_init_check(nrfx_rtc_t const * p_instance)
 
 void nrfx_rtc_enable(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_START);
@@ -103,6 +107,7 @@ void nrfx_rtc_enable(nrfx_rtc_t const * p_instance)
 
 void nrfx_rtc_disable(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_rtc_task_trigger(p_instance->p_reg, NRF_RTC_TASK_STOP);
@@ -112,6 +117,7 @@ void nrfx_rtc_disable(nrfx_rtc_t const * p_instance)
 
 nrfx_err_t nrfx_rtc_cc_disable(nrfx_rtc_t const * p_instance, uint32_t channel)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
@@ -146,6 +152,7 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
                            uint32_t           val,
                            bool               enable_irq)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(channel < p_instance->cc_channel_count);
 
@@ -192,6 +199,9 @@ nrfx_err_t nrfx_rtc_cc_set(nrfx_rtc_t const * p_instance,
 
 void nrfx_rtc_tick_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
+
     nrfy_rtc_event_int_clear_enable(p_instance->p_reg,
                                     NRF_RTC_EVENT_TICK,
                                     enable_irq);
@@ -200,6 +210,9 @@ void nrfx_rtc_tick_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 
 void nrfx_rtc_tick_disable(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     nrfy_rtc_event_int_disable(p_instance->p_reg,
                                NRF_RTC_INT_TICK_MASK);
     NRFX_LOG_INFO("Tick events disabled.");
@@ -207,6 +220,9 @@ void nrfx_rtc_tick_disable(nrfx_rtc_t const * p_instance)
 
 void nrfx_rtc_overflow_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state == NRFX_DRV_STATE_INITIALIZED);
+
     nrfy_rtc_event_int_clear_enable(p_instance->p_reg,
                                     NRF_RTC_EVENT_OVERFLOW,
                                     enable_irq);
@@ -214,12 +230,18 @@ void nrfx_rtc_overflow_enable(nrfx_rtc_t const * p_instance, bool enable_irq)
 
 void nrfx_rtc_overflow_disable(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     nrfy_rtc_event_int_disable(p_instance->p_reg,
                                NRF_RTC_INT_OVERFLOW_MASK);
 }
 
 uint32_t nrfx_rtc_max_ticks_get(nrfx_rtc_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     uint32_t ticks;
     if (m_cb[p_instance->instance_id].reliable)
     {
