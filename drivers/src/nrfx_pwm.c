@@ -161,6 +161,8 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
 
     pwm_control_block_t * p_cb  = &m_cb[p_instance->instance_id];
 
+    NRFX_ASSERT(p_instance);
+
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
@@ -190,8 +192,10 @@ nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
 
 nrfx_err_t nrfx_pwm_reconfigure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t const * p_config)
 {
-    NRFX_ASSERT(p_config);
     pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(p_config);
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
     {
@@ -210,6 +214,8 @@ nrfx_err_t nrfx_pwm_reconfigure(nrfx_pwm_t const * p_instance, nrfx_pwm_config_t
 void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
 {
     pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_pwm_int_uninit(p_instance->p_reg);
@@ -225,6 +231,7 @@ void nrfx_pwm_uninit(nrfx_pwm_t const * p_instance)
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_pwm_init_check(nrfx_pwm_t const * p_instance)
@@ -312,6 +319,8 @@ uint32_t nrfx_pwm_simple_playback(nrfx_pwm_t const *         p_instance,
                                   uint32_t                   flags)
 {
     pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(playback_count > 0);
     NRFX_ASSERT(nrfx_is_in_ram(p_sequence->values.p_raw));
@@ -356,6 +365,8 @@ uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const *         p_instance,
                                    uint32_t                   flags)
 {
     pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(playback_count > 0);
     NRFX_ASSERT(nrfx_is_in_ram(p_sequence_0->values.p_raw));
@@ -398,6 +409,8 @@ uint32_t nrfx_pwm_complex_playback(nrfx_pwm_t const *         p_instance,
 bool nrfx_pwm_stop(nrfx_pwm_t const * p_instance, bool wait_until_stopped)
 {
     pwm_control_block_t * p_cb = &m_cb[p_instance->instance_id];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     bool ret_val = false;
@@ -427,6 +440,7 @@ bool nrfx_pwm_stop(nrfx_pwm_t const * p_instance, bool wait_until_stopped)
 
 bool nrfx_pwm_stopped_check(nrfx_pwm_t const * p_instance)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED);
 
     bool ret_val = pwm_stopped_check(p_instance);
