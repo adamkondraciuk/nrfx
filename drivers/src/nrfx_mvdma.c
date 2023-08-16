@@ -60,8 +60,6 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
                            uint8_t                    interrupt_priority,
                            nrfx_mvdma_event_handler_t event_handler)
 {
-    NRFX_ASSERT(event_handler);
-
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code = NRFX_SUCCESS;
 
