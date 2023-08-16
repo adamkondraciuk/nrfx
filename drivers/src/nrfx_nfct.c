@@ -420,7 +420,11 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
 
     if (m_nfct_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_ALREADY;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
     nfct_trims_apply();
@@ -429,8 +433,12 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
     /* Make sure that NFC pads are configured as NFCT antenna pins. */
     if (!nrfy_nfct_pad_config_enable_check(NRF_NFCT))
     {
+        err_code = NRFX_ERROR_FORBIDDEN;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
         NRFX_LOG_ERROR("NFCT pads are not configured as NFCT antenna pins");
-        return NRFX_ERROR_FORBIDDEN;
+        return err_code;
     }
 #endif
 
@@ -449,7 +457,7 @@ nrfx_err_t nrfx_nfct_init(nrfx_nfct_config_t const * p_config)
     m_nfct_cb.frame_delay_max = NFCT_FRAMEDELAYMAX_DEFAULT;
     m_nfct_cb.frame_delay_min = NFCT_FRAMEDELAYMIN_DEFAULT;
 
-    NRFX_LOG_INFO("Initialized");
+    NRFX_LOG_INFO("Initialized.");
     return err_code;
 }
 
@@ -465,6 +473,7 @@ void nrfx_nfct_uninit(void)
 #endif
 
     m_nfct_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_nfct_init_check(void)
@@ -474,6 +483,8 @@ bool nrfx_nfct_init_check(void)
 
 void nrfx_nfct_enable(void)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
     nrfy_nfct_error_status_clear(NRF_NFCT, NRFX_NFCT_ERROR_STATUS_ALL_MASK);
     nrfy_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_SENSE);
 
@@ -488,6 +499,8 @@ void nrfx_nfct_enable(void)
 
 void nrfx_nfct_disable(void)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
     nrfy_nfct_int_disable(NRF_NFCT, NRF_NFCT_DISABLE_ALL_INT);
     nrfy_nfct_task_trigger(NRF_NFCT, NRF_NFCT_TASK_DISABLE);
 
@@ -496,6 +509,8 @@ void nrfx_nfct_disable(void)
 
 bool nrfx_nfct_field_check(void)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
     uint32_t const field_state = nrfy_nfct_field_status_get(NRF_NFCT);
 
     if (((field_state & NRF_NFCT_FIELD_STATE_PRESENT_MASK) == 0) &&
@@ -512,6 +527,7 @@ nrfx_err_t nrfx_nfct_rx(nrfx_nfct_data_desc_t const * p_rx_data)
 {
     nrfx_err_t err;
 
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_rx_data);
 
     // EasyDMA requires that transfer buffers are placed in DataRAM,
@@ -539,6 +555,7 @@ nrfx_err_t nrfx_nfct_rx(nrfx_nfct_data_desc_t const * p_rx_data)
 nrfx_err_t nrfx_nfct_tx(nrfx_nfct_data_desc_t const * p_tx_data,
                         nrf_nfct_frame_delay_mode_t   delay_mode)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_tx_data);
     NRFX_ASSERT(p_tx_data->p_data);
 
@@ -598,6 +615,7 @@ nrfx_err_t nrfx_nfct_tx(nrfx_nfct_data_desc_t const * p_tx_data,
 nrfx_err_t nrfx_nfct_bits_tx(nrfx_nfct_data_desc_t const * p_tx_data,
                              nrf_nfct_frame_delay_mode_t   delay_mode)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_tx_data);
     NRFX_ASSERT(p_tx_data->p_data);
 
@@ -663,6 +681,8 @@ nrfx_err_t nrfx_nfct_bits_tx(nrfx_nfct_data_desc_t const * p_tx_data,
 
 void nrfx_nfct_state_force(nrfx_nfct_state_t state)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
 #if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_190)
     if (state == NRFX_NFCT_STATE_ACTIVATED)
     {
@@ -677,6 +697,8 @@ void nrfx_nfct_state_force(nrfx_nfct_state_t state)
 
 void nrfx_nfct_init_substate_force(nrfx_nfct_active_state_t sub_state)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
     if (sub_state == NRFX_NFCT_ACTIVE_STATE_DEFAULT)
     {
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
@@ -707,6 +729,7 @@ void nrfx_nfct_init_substate_force(nrfx_nfct_active_state_t sub_state)
 
 nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_param);
 
     switch (p_param->id)
@@ -773,6 +796,9 @@ nrfx_err_t nrfx_nfct_parameter_set(nrfx_nfct_param_t const * p_param)
 nrfx_err_t nrfx_nfct_nfcid1_default_bytes_get(uint8_t * const p_nfcid1_buff,
                                               uint32_t        nfcid1_buff_len)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(p_nfcid1_buff);
+
     uint32_t tag_header[3];
 
     if ((nfcid1_buff_len != NRFX_NFCT_NFCID1_SINGLE_SIZE) &&
@@ -826,6 +852,8 @@ nrfx_err_t nrfx_nfct_nfcid1_default_bytes_get(uint8_t * const p_nfcid1_buff,
 
 void nrfx_nfct_autocolres_enable(void)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     (*(uint32_t *)(0x4000559C)) &= (~(0x1UL));
 #else
@@ -835,6 +863,8 @@ void nrfx_nfct_autocolres_enable(void)
 
 void nrfx_nfct_autocolres_disable(void)
 {
+    NRFX_ASSERT(m_nfct_cb.state == NRFX_DRV_STATE_INITIALIZED);
+
 #if defined(NRF52832_XXAA) || defined(NRF52832_XXAB)
     (*(uint32_t *)(0x4000559C)) |= (0x1UL);
 #else
