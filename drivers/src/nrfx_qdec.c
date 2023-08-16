@@ -118,6 +118,8 @@ nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
                                  nrfx_qdec_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
+    NRFX_ASSERT(p_instance);
+
     qdec_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
