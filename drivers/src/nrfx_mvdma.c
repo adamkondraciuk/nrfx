@@ -63,6 +63,8 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code = NRFX_SUCCESS;
 
+    NRFX_ASSERT(p_instance);
+
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
         err_code = NRFX_ERROR_INVALID_STATE;
@@ -97,7 +99,7 @@ nrfx_err_t nrfx_mvdma_init(nrfx_mvdma_t const *       p_instance,
     nrf_vdma_job_terminate(&p_cb->sink_job[1]);
 
     p_cb->state = NRFX_DRV_STATE_INITIALIZED;
-    NRFX_LOG_WARNING("Function: %s, error code: %s.",
+    NRFX_LOG_INFO("Function: %s, error code: %s.",
                      __func__,
                      NRFX_LOG_ERROR_STRING_GET(err_code));
     return err_code;
@@ -151,6 +153,9 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
                            nrfx_mvdma_copy_request_t const * p_request)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(p_request);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     if (p_cb->busy)
@@ -190,6 +195,7 @@ nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
                                    void *               p_context)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     if (p_cb->busy)
@@ -217,6 +223,7 @@ nrfx_err_t nrfx_mvdma_list_execute(nrfx_mvdma_t const *              p_instance,
                                    void *                            p_context)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     if (p_cb->busy)
@@ -235,6 +242,9 @@ nrfx_err_t nrfx_mvdma_multi_list_set(nrfx_mvdma_t const *                    p_i
                                      nrfx_mvdma_multi_list_request_t const * p_request)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(p_request);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(p_request->length < MVDMA_JOBLISTCOUNT);
 
@@ -269,6 +279,9 @@ nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrf_mvdma_aximode_t prev_aximode;
     nrfx_mvdma_aximode_t aximode = NRFX_MVDMA_AXIMODE_DETECT;
+
+    NRFX_ASSERT(p_instance);
+    NRFX_ASSERT(idx < MVDMA_JOBLISTCOUNT);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     if (p_cb->mode != NRF_MVDMA_MODE_MULTI)
@@ -319,6 +332,8 @@ nrfx_err_t nrfx_mvdma_multi_list_start(nrfx_mvdma_t const * p_instance,
 bool nrfx_mvdma_busy_check(nrfx_mvdma_t const * p_instance)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     return p_cb->busy;
@@ -327,6 +342,8 @@ bool nrfx_mvdma_busy_check(nrfx_mvdma_t const * p_instance)
 void nrfx_mvdma_abort(nrfx_mvdma_t const * p_instance)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_mvdma_abort(p_instance->p_reg, NULL);
@@ -335,6 +352,8 @@ void nrfx_mvdma_abort(nrfx_mvdma_t const * p_instance)
 void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
 {
     mvdma_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_mvdma_reset(p_instance->p_reg, false);
@@ -356,6 +375,8 @@ void nrfx_mvdma_uninit(nrfx_mvdma_t const * p_instance)
     }
 
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_mvdma_init_check(nrfx_mvdma_t const * p_instance)
