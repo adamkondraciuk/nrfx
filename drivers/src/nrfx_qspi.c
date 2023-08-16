@@ -8,6 +8,9 @@
 #include <hal/nrf_gpio.h>
 #include <nrf_erratas.h>
 
+#define NRFX_LOG_MODULE QSPI
+#include <nrfx_log.h>
+
 /** @brief Command byte used to read status register. */
 #define QSPI_STD_CMD_RDSR 0x05
 
@@ -298,10 +301,17 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
                           nrfx_qspi_handler_t        handler,
                           void *                     p_context)
 {
+    nrfx_err_t err_code;
+
     NRFX_ASSERT(p_config);
+
     if (m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_INVALID_STATE;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
     m_cb.handler = handler;
@@ -313,10 +323,13 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
 
     if (p_config)
     {
-        nrfx_err_t result = qspi_configure(p_config);
-        if (result != NRFX_SUCCESS)
+        nrfx_err_t err_code = qspi_configure(p_config);
+        if (err_code != NRFX_SUCCESS)
         {
-            return result;
+            NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                            __func__,
+                            NRFX_LOG_ERROR_STRING_GET(err_code));
+            return err_code;
         }
     }
 
@@ -330,7 +343,6 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
     nrf_qspi_task_trigger(NRF_QSPI, NRF_QSPI_TASK_ACTIVATE);
 
     // Waiting for the peripheral to activate
-
     return qspi_ready_wait();
 }
 
@@ -425,6 +437,9 @@ nrfx_err_t nrfx_qspi_cinstr_quick_send(uint8_t               opcode,
                                        nrf_qspi_cinstr_len_t length,
                                        void const *          p_tx_buffer)
 {
+    NRFX_ASSERT(m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED);
+    NRFX_ASSERT(p_tx_buffer);
+
     nrf_qspi_cinstr_conf_t config = NRFX_QSPI_DEFAULT_CINSTR(opcode, length);
     return nrfx_qspi_cinstr_xfer(&config, p_tx_buffer, NULL);
 }
@@ -540,6 +555,8 @@ nrfx_err_t nrfx_qspi_lfm_xfer(void const * p_tx_buffer,
 
 nrfx_err_t nrfx_qspi_mem_busy_check(void)
 {
+    NRFX_ASSERT(m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED);
+
     nrfx_err_t ret_code;
     uint8_t status_value = 0;
 
@@ -593,6 +610,7 @@ void nrfx_qspi_uninit(void)
     }
 
     m_cb.state = NRFX_QSPI_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_qspi_init_check(void)
@@ -648,6 +666,8 @@ nrfx_err_t nrfx_qspi_erase(nrf_qspi_erase_len_t length,
 
 nrfx_err_t nrfx_qspi_chip_erase(void)
 {
+    NRFX_ASSERT(m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED);
+
     return nrfx_qspi_erase(NRF_QSPI_ERASE_LEN_ALL, 0);
 }
 
