@@ -224,7 +224,9 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           nrfx_twim_evt_handler_t    event_handler,
                           void *                     p_context)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
+
     twim_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code;
 
@@ -284,7 +286,9 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 nrfx_err_t nrfx_twim_reconfigure(nrfx_twim_t const *        p_instance,
                                  nrfx_twim_config_t const * p_config)
 {
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
+
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -304,6 +308,8 @@ nrfx_err_t nrfx_twim_reconfigure(nrfx_twim_t const *        p_instance,
 void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_twim_int_uninit(p_instance->p_twim);
@@ -349,6 +355,8 @@ void nrfx_twim_enable(nrfx_twim_t const * p_instance)
 void nrfx_twim_disable(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+
+    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     p_cb->int_mask = 0;
@@ -575,6 +583,8 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
     nrfx_err_t err_code = NRFX_SUCCESS;
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
+    NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
+
     // TXRX and TXTX transfers are supported only in non-blocking mode.
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWIM_XFER_TXRX)));
     NRFX_ASSERT( !((p_cb->handler == NULL) && (p_xfer_desc->type == NRFX_TWIM_XFER_TXTX)));
@@ -602,12 +612,16 @@ nrfx_err_t nrfx_twim_xfer(nrfx_twim_t           const * p_instance,
 uint32_t nrfx_twim_start_task_address_get(nrfx_twim_t const *   p_instance,
                                           nrfx_twim_xfer_type_t xfer_type)
 {
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     return nrfy_twim_task_address_get(p_instance->p_twim,
         (xfer_type != NRFX_TWIM_XFER_RX) ? NRF_TWIM_TASK_STARTTX : NRF_TWIM_TASK_STARTRX);
 }
 
 uint32_t nrfx_twim_stopped_event_address_get(nrfx_twim_t const * p_instance)
 {
+    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+
     return nrfy_twim_event_address_get(p_instance->p_twim, NRF_TWIM_EVENT_STOPPED);
 }
 
