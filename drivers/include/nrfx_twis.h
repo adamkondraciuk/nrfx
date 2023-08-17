@@ -153,7 +153,7 @@ typedef struct
  *                          It will be used by interrupts so make it sure that object
  *                          is not destroyed when function is leaving.
  * @param[in] p_config      Pointer to the structure with the initial configuration.
- * @param[in] event_handler Event handler provided by the user.
+ * @param[in] event_handler Event handler provided by the user. If NULL, blocking mode is enabled.
  *
  * @retval NRFX_SUCCESS             Initialization is successful.
  * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
