@@ -20,6 +20,8 @@ All notable changes to this project are documented in this file.
 - Added functions for checking whether given instance is initialized to all of the drivers.
 - Added individual functions for setting reference selection, external reference, detection type and enabling hysteresis in the LPCOMP HAL. Now they are supposed to be used instead of nrf_lpcomp_configure() function.
 - Added a blocking mode to the CLOCK driver. The mode is initialized when a user handler is set to NULL.
+- Added a new member to the configuration structure of the QSPI driver. The new configuration member determines time in milliseconds when a timeout of the QSPI operation occurs.
+- Added the new nrfx_qspi_timeout_signal() function to the QSPI driver that signals premature QSPI operation timeout.
 
 ### Changed
 - Updated MDK to version 8.58.0.
