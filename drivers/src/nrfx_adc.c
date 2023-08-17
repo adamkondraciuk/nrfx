@@ -55,6 +55,8 @@ nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
 
 void nrfx_adc_uninit(void)
 {
+    NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+
     NRFX_IRQ_DISABLE(ADC_IRQn);
     nrf_adc_int_disable(NRF_ADC, NRF_ADC_INT_END_MASK);
     nrf_adc_task_trigger(NRF_ADC, NRF_ADC_TASK_STOP);
@@ -66,6 +68,7 @@ void nrfx_adc_uninit(void)
     m_cb.p_head = NULL;
 
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_adc_init_check(void)
@@ -219,6 +222,7 @@ static bool adc_sample_process()
 nrfx_err_t nrfx_adc_buffer_convert(nrf_adc_value_t * buffer, uint16_t size)
 {
     NRFX_ASSERT(m_cb.state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(buffer);
 
     nrfx_err_t err_code;
 
