@@ -948,11 +948,6 @@
         #define MRAMC_CONFIGNVR_PAGE_Lock_LockEnabled  MRAMC_CONFIGNVR_PAGE_LOCK_LockEnabled
     #endif
 
-    // Haltium plaftorms do not have LPCOMP_FEATURE_HYST_PRESENT defined
-    #if defined(LPCOMP_HYST_HYST_Msk) && defined(HALTIUM_XXAA)
-        #define LPCOMP_FEATURE_HYST_PRESENT
-    #endif
-
     #define MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Msk (0x0000FFFFUL)
     #define MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_Msk (0xFFFF0000UL)
     #define MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Pos 16
@@ -2148,6 +2143,8 @@
 
     #define RADIO_TIMING_RU_Default 0
     #define RADIO_TIMING_RU_Fast    1
+
+    #define LPCOMP_REFSEL_RESOLUTION 16
 
     /* ==================================================== Struct MPC_REGION ==================================================== */
     #define MPC_MASTER_PORTS_MaxCount (15UL) /*!< Max number of master ports. */

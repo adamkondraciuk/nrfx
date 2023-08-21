@@ -23,6 +23,13 @@ extern "C" {
 #define NRF_LPCOMP_HAS_AIN_AS_PIN 0
 #endif
 
+#if defined(LPCOMP_HYST_HYST_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the hysteresis is present. */
+#define NRF_LPCOMP_HAS_HYST 1
+#else
+#define NRF_LPCOMP_HAS_HYST 0
+#endif
+
 /** @brief LPCOMP tasks. */
 typedef enum
 {
@@ -94,15 +101,18 @@ typedef enum
     NRF_LPCOMP_REF_EXT_REF1     = LPCOMP_REFSEL_REFSEL_ARef |
                                   (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), ///< @deprecated Use @ref nrf_lpcomp_ext_ref_t instead.
 #endif
-#endif
 } nrf_lpcomp_ref_t;
 
 /** @brief LPCOMP external reference selection. */
+#if NRF_LPCOMP_HAS_AIN_AS_PIN
+typedef uint32_t nrf_lpcomp_ext_ref_t;
+#else
 typedef enum
 {
     NRF_LPCOMP_EXT_REF_REF0 = LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0, ///< External reference 0.
     NRF_LPCOMP_EXT_REF_REF1 = LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1, ///< External reference 1.
 } nrf_lpcomp_ext_ref_t;
+#endif
 
 /** @brief LPCOMP input selection. */
 #if NRF_LPCOMP_HAS_AIN_AS_PIN
@@ -129,7 +139,7 @@ typedef enum
     NRF_LPCOMP_DETECT_DOWN  = LPCOMP_ANADETECT_ANADETECT_Down   ///< Generate ANADETEC on downwards crossing only.
 } nrf_lpcomp_detect_t;
 
-#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_LPCOMP_HAS_HYST
 /** @brief LPCOMP hysteresis. */
 typedef enum
 {
@@ -144,14 +154,14 @@ typedef enum
     NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Enabled   ///< Comparator hysteresis enabled (typically 50 mV).
 #endif
 } nrf_lpcomp_hyst_t;
-#endif // LPCOMP_FEATURE_HYST_PRESENT
+#endif // NRF_LPCOMP_HAS_HYST
 
 /** @brief LPCOMP configuration. */
 typedef struct
 {
     nrf_lpcomp_ref_t        reference; ///< LPCOMP reference.
     nrf_lpcomp_detect_t     detection; ///< LPCOMP detection type.
-#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_LPCOMP_HAS_HYST
     nrf_lpcomp_hyst_t       hyst;      ///< LPCOMP hysteresis.
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 } nrf_lpcomp_config_t;
@@ -355,7 +365,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpco
 NRF_STATIC_INLINE void nrf_lpcomp_detection_set(NRF_LPCOMP_Type *   p_reg,
                                                 nrf_lpcomp_detect_t detection);
 
-#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
+#if NRF_LPCOMP_HAS_HYST
 /**
  * @brief Function for setting the hysteresis.
  *
@@ -508,9 +518,9 @@ NRF_STATIC_INLINE void nrf_lpcomp_configure(NRF_LPCOMP_Type *           p_reg,
 
     p_reg->ANADETECT = (p_config->detection << LPCOMP_ANADETECT_ANADETECT_Pos) &
                        LPCOMP_ANADETECT_ANADETECT_Msk;
-#ifdef LPCOMP_FEATURE_HYST_PRESENT
+#if NRF_LPCOMP_HAS_HYST
     p_reg->HYST      = ((p_config->hyst) << LPCOMP_HYST_HYST_Pos) & LPCOMP_HYST_HYST_Msk;
-#endif //LPCOMP_FEATURE_HYST_PRESENT
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_lpcomp_ref_set(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_ref_t reference)
@@ -521,8 +531,15 @@ NRF_STATIC_INLINE void nrf_lpcomp_ref_set(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_re
 NRF_STATIC_INLINE void nrf_lpcomp_ext_ref_set(NRF_LPCOMP_Type *    p_reg,
                                               nrf_lpcomp_ext_ref_t ext_ref)
 {
+#if NRF_LPCOMP_HAS_AIN_AS_PIN
+    p_reg->EXTREFSEL = ((NRF_PIN_NUMBER_TO_PIN(ext_ref) << LPCOMP_EXTREFSEL_PIN_Pos) &
+                        LPCOMP_EXTREFSEL_PIN_Msk)
+                        | ((NRF_PIN_NUMBER_TO_PORT(ext_ref) << LPCOMP_EXTREFSEL_PORT_Pos) &
+                        LPCOMP_EXTREFSEL_PORT_Msk);
+#else
     p_reg->EXTREFSEL = (ext_ref << LPCOMP_EXTREFSEL_EXTREFSEL_Pos) &
                        LPCOMP_EXTREFSEL_EXTREFSEL_Msk;
+#endif
 }
 
 NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_input_t input)
@@ -543,7 +560,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_detection_set(NRF_LPCOMP_Type *   p_reg,
                        LPCOMP_ANADETECT_ANADETECT_Msk;
 }
 
-#if defined(LPCOMP_FEATURE_HYST_PRESENT)
+#if NRF_LPCOMP_HAS_HYST
 NRF_STATIC_INLINE void nrf_lpcomp_hysteresis_set(NRF_LPCOMP_Type * p_reg,
                                                  nrf_lpcomp_hyst_t hyst)
 {
