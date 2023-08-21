@@ -252,6 +252,48 @@ NRF_STATIC_INLINE uint32_t nrf_lpcomp_task_address_get(NRF_LPCOMP_Type const * p
 NRF_STATIC_INLINE uint32_t nrf_lpcomp_event_address_get(NRF_LPCOMP_Type const * p_reg,
                                                         nrf_lpcomp_event_t      event);
 
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting subscribe configuration for a given LPCOMP task.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] task    Task for which the configuration is set.
+ * @param[in] channel Channel through which events are subscribed.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_subscribe_set(NRF_LPCOMP_Type * p_reg,
+                                                nrf_lpcomp_task_t task,
+                                                uint8_t           channel);
+
+/**
+ * @brief Function for clearing subscribe configuration for a given LPCOMP task.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] task  Task for which the configuration is cleared.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_subscribe_clear(NRF_LPCOMP_Type * p_reg,
+                                                  nrf_lpcomp_task_t task);
+
+/**
+ * @brief Function for setting publish configuration for a given LPCOMP event.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] event   Event for which the configuration is set.
+ * @param[in] channel Channel through which the event is published.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_publish_set(NRF_LPCOMP_Type *  p_reg,
+                                              nrf_lpcomp_event_t event,
+                                              uint8_t            channel);
+
+/**
+ * @brief Function for clearing publish configuration for a given LPCOMP event.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] event Event for which the configuration is cleared.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_publish_clear(NRF_LPCOMP_Type *  p_reg,
+                                                nrf_lpcomp_event_t event);
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+
 /**
  * @brief  Function for setting LPCOMP shorts.
  *
@@ -373,6 +415,36 @@ NRF_STATIC_INLINE uint32_t nrf_lpcomp_event_address_get(NRF_LPCOMP_Type const * 
 {
     return (uint32_t)((uint8_t *)p_reg + event);
 }
+
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+NRF_STATIC_INLINE void nrf_lpcomp_subscribe_set(NRF_LPCOMP_Type * p_reg,
+                                                nrf_lpcomp_task_t task,
+                                                uint8_t           channel)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) =
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
+}
+
+NRF_STATIC_INLINE void nrf_lpcomp_subscribe_clear(NRF_LPCOMP_Type * p_reg,
+                                                  nrf_lpcomp_task_t task)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
+}
+
+NRF_STATIC_INLINE void nrf_lpcomp_publish_set(NRF_LPCOMP_Type *  p_reg,
+                                              nrf_lpcomp_event_t event,
+                                              uint8_t            channel)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) =
+            ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
+}
+
+NRF_STATIC_INLINE void nrf_lpcomp_publish_clear(NRF_LPCOMP_Type *  p_reg,
+                                                nrf_lpcomp_event_t event)
+{
+    *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
+}
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 NRF_STATIC_INLINE void nrf_lpcomp_shorts_enable(NRF_LPCOMP_Type * p_reg, uint32_t short_mask)
 {
