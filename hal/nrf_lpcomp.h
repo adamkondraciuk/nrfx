@@ -311,6 +311,14 @@ NRF_STATIC_INLINE void nrf_lpcomp_shorts_enable(NRF_LPCOMP_Type * p_reg, uint32_
 NRF_STATIC_INLINE void nrf_lpcomp_shorts_disable(NRF_LPCOMP_Type * p_reg, uint32_t mask);
 
 /**
+ * @brief Function for for setting the specified shortcuts.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of shortcuts.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_shorts_set(NRF_LPCOMP_Type * p_reg, uint32_t mask);
+
+/**
  * @brief Function for setting the specified LPCOMP task.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
@@ -454,6 +462,11 @@ NRF_STATIC_INLINE void nrf_lpcomp_shorts_enable(NRF_LPCOMP_Type * p_reg, uint32_
 NRF_STATIC_INLINE void nrf_lpcomp_shorts_disable(NRF_LPCOMP_Type * p_reg, uint32_t short_mask)
 {
     p_reg->SHORTS &= ~short_mask;
+}
+
+NRF_STATIC_INLINE void nrf_lpcomp_shorts_set(NRF_LPCOMP_Type * p_reg, uint32_t mask)
+{
+    p_reg->SHORTS = mask;
 }
 
 NRF_STATIC_INLINE void nrf_lpcomp_task_trigger(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_task_t task)
