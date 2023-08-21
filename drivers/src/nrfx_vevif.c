@@ -9,6 +9,9 @@
 #include <hal/nrf_vpr_csr.h>
 #include <hal/nrf_vpr_csr_vevif.h>
 
+#define NRFX_LOG_MODULE VEVIF
+#include <nrfx_log.h>
+
 #define NRFX_VEVIF_IRQ_HANDLER_DEFINE(idx, _) \
 void nrfx_vevif_##idx##_irq_handler(void)     \
 {                                             \
@@ -28,9 +31,17 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
                            nrfx_vevif_event_handler_t event_handler,
                            void *                     p_context)
 {
-    if (m_cb.state == NRFX_DRV_STATE_INITIALIZED)
+    NRFX_ASSERT(event_handler);
+
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (m_cb.state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_ALREADY;
+        err_code = NRFX_ERROR_INVALID_STATE;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
     m_cb.handler   = event_handler;
@@ -48,7 +59,8 @@ nrfx_err_t nrfx_vevif_init(nrf_vpr_clic_priority_t    interrupt_priority,
         NRFY_IRQ_PRIORITY_SET((VPRCLIC_0_IRQn + i), interrupt_priority);
     }
 
-    return NRFX_SUCCESS;
+    NRFX_LOG_INFO("Initialized.");
+    return err_code;
 }
 
 void nrfx_vevif_uninit(void)
@@ -62,6 +74,7 @@ void nrfx_vevif_uninit(void)
 
     m_cb.handler = NULL;
     m_cb.state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 void nrfx_vevif_int_enable(uint32_t mask)
@@ -74,6 +87,7 @@ void nrfx_vevif_int_enable(uint32_t mask)
         NRFY_IRQ_ENABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
+    m_cb.state = NRFX_DRV_STATE_POWERED_ON;
 }
 
 bool nrfx_vevif_init_check(void)
@@ -83,7 +97,7 @@ bool nrfx_vevif_init_check(void)
 
 void nrfx_vevif_int_disable(uint32_t mask)
 {
-    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_POWERED_ON);
 
     while (mask != 0)
     {
@@ -91,6 +105,7 @@ void nrfx_vevif_int_disable(uint32_t mask)
         NRFY_IRQ_DISABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
+    m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 }
 
 static void nrfx_vevif_irq_handler(uint8_t irq_idx)
