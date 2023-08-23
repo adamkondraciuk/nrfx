@@ -106,6 +106,7 @@ POSSIBILITY OF SUCH DAMAGE.
     NRF_OWNER_RADIOCORE       = 3,  /* Radio Core */
     NRF_OWNER_CELL            = 4,  /* Cellular Core, Cellular DSP Domain and Cellular RF Domain */
     NRF_OWNER_ISIMCORE        = 5,  /* ISIM Core */
+    NRF_OWNER_WIFICORE        = 6,  /* WIFI Core */
     NRF_OWNER_SYSCTRL         = 8,  /* System Controller, owned by the Secure Domain */
     NRF_OWNER_DBG_SECURE      = 9,  /* AHB-AP for Secure Domain CPU */
     NRF_OWNER_DBG_APPLICATION = 10, /* AHB-AP for Application Core CPU */
@@ -124,6 +125,8 @@ POSSIBILITY OF SUCH DAMAGE.
     NRF_PROCESSOR_CELLDSP     = 5,  /* Cellular DSP Domain Processor */
     NRF_PROCESSOR_CELLRF      = 6,  /* Cellular RF Domain Processor */
     NRF_PROCESSOR_ISIMCORE    = 7,  /* ISIM Core Processor */
+    NRF_PROCESSOR_WIFILMAC    = 8,  /* Wi-Fi Core Processor */
+    NRF_PROCESSOR_WIFIUMAC    = 9,  /* Wi-Fi Core Processor */
     NRF_PROCESSOR_BBPR        = 11, /* Baseband Processor */
     NRF_PROCESSOR_SYSCTRL     = 12, /* System Controller Processor */
     NRF_PROCESSOR_PPR         = 13, /* Peripheral Processor */
