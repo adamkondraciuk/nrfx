@@ -104,6 +104,39 @@ extern "C" {
     .channel_index  = _index,                                           \
 }
 
+#if (NRF_SAADC_8BIT_SAMPLE_WIDTH == 8) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Macro for getting number of bytes needed to store specified number of SAADC samples
+ *        for given resolution of the SAADC.
+ *
+ * @param[in] _resolution Resolution expressed as @ref nrf_saadc_resolution_t.
+ * @param[in] _samples    Number of samples.
+ *
+ * @return Number of bytes needed to store specified number of samples.
+ */
+#define NRFX_SAADC_SAMPLES_TO_BYTES(_resolution, _samples) \
+    ((_resolution) == NRF_SAADC_RESOLUTION_8BIT ? _samples : (_samples * 2))
+#else
+#define NRFX_SAADC_SAMPLES_TO_BYTES(_resolution, _samples) (_samples)
+#endif
+
+#if (NRF_SAADC_8BIT_SAMPLE_WIDTH == 8) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Macro for getting specified SAADC sample from the filled buffer.
+ *
+ * @param[in] _resolution Resolution expressed as @ref nrf_saadc_resolution_t.
+ * @param[in] _samples    Pointer to the buffer filled with SAADC samples.
+ * @param[in] _index      Sample index.
+ *
+ * @return Specified sample.
+ */
+#define NRFX_SAADC_SAMPLE_GET(_resolution, _samples, _index) \
+    ((_resolution) == NRF_SAADC_RESOLUTION_8BIT ? (((int8_t *) (_samples))[(_index)]) : \
+                                                  (((int16_t *)(_samples))[(_index)]))
+#else
+#define NRFX_SAADC_SAMPLE_GET(_resolution, _samples, _index) (((int16_t *)(_samples))[(_index)])
+#endif
+
 /**
  * @brief SAADC driver advanced mode default configuration.
  *
@@ -341,7 +374,7 @@ nrfx_err_t nrfx_saadc_advanced_mode_set(uint32_t                        channel_
  *        the conversion.
  *
  * @param[in] p_buffer Pointer to the buffer to be filled with conversion results.
- * @param[in] size     Number of @ref nrf_saadc_value_t samples in buffer.
+ * @param[in] size     Number of samples in the buffer.
  *
  * @retval NRFX_SUCCESS              Buffer was supplied successfully.
  * @retval NRFX_ERROR_INVALID_ADDR   The provided buffer is not in the Data RAM region.

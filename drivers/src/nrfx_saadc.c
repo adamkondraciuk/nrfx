@@ -41,7 +41,7 @@ typedef struct
     nrfx_saadc_event_handler_t calib_event_handler;          ///< Event handler function pointer for calibration event.
     nrfy_saadc_buffer_t        buffer_primary;               ///< Primary buffer description structure.
     nrfy_saadc_buffer_t        buffer_secondary;             ///< Secondary buffer description structure.
-    nrf_saadc_value_t          calib_samples[2];             ///< Scratch buffer for post-calibration samples.
+    uint16_t                   calib_samples[2];             ///< Scratch buffer for post-calibration samples.
     uint16_t                   samples_converted;            ///< Number of samples present in result buffer when in the blocking mode.
     nrfy_saadc_channel_input_t channels_input[SAADC_CH_NUM]; ///< Array holding input of each of the channels.
     nrf_saadc_state_t          saadc_state;                  ///< State of the SAADC driver.
@@ -534,9 +534,20 @@ nrfx_err_t nrfx_saadc_mode_trigger(void)
             // When in advanced blocking mode, latch single chunk of buffer in EasyDMA.
             // Each chunk consists of single sample from each activated channels.
             // END event will arrive when single chunk is filled with samples.
-            nrfy_saadc_buffer_t chunk =
-                {.p_buffer = &m_cb.buffer_primary.p_buffer[m_cb.samples_converted],
-                 .length   = m_cb.channels_activated_count};
+            nrfy_saadc_buffer_t chunk = { .length = m_cb.channels_activated_count};
+
+#if (NRF_SAADC_8BIT_SAMPLE_WIDTH == 8)
+            if (nrfy_saadc_resolution_get(NRF_SAADC) == NRF_SAADC_RESOLUTION_8BIT)
+            {
+                chunk.p_buffer =
+                    &((uint8_t *)m_cb.buffer_primary.p_buffer)[m_cb.samples_converted];
+            }
+            else
+#endif
+            {
+                chunk.p_buffer =
+                    &((uint16_t *)m_cb.buffer_primary.p_buffer)[m_cb.samples_converted];
+            }
             nrfy_saadc_buffer_set(NRF_SAADC, &chunk, true, true);
             if (m_cb.oversampling_without_burst)
             {
