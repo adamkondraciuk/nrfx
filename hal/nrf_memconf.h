@@ -16,6 +16,20 @@ extern "C" {
  * @brief   Hardware access layer for managing the Memory Configuration (MEMCONF) peripheral.
  */
 
+#if defined(MEMCONF_POWER_RET2_MEM0_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the second retention configuration register is present. */
+#define NRF_MEMCONF_HAS_RET2 1
+#else
+#define NRF_MEMCONF_HAS_RET2 0
+#endif
+
+#if defined(MEMCONF_REPAIR_BITLINE_ADDR_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether the repair configuration for RAM blocks is present. */
+#define NRF_MEMCONF_HAS_REPAIR 1
+#else
+#define NRF_MEMCONF_HAS_REPAIR 0
+#endif
+
 /** @brief Symbol specifying maximum number of available power blocks. */
 #define NRF_MEMCONF_POWERBLOCK_COUNT MEMCONF_POWER_MaxCount
 
@@ -27,6 +41,28 @@ extern "C" {
 
 /** @brief Symbol specifying maximum number of second bank retention RAM blocks. */
 #define NRF_MEMCONF_POWERBLOCK_RAMBLOCK_RET2_COUNT MEMCONF_POWER_RET2_MEM31_Pos
+
+/** @brief Symbol specifying bitmask collecting all memory read and write margin trims. */
+#define NRF_MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_MASK                                    \
+    (MEMCONF_BLOCKTYPE_TRIM_MEMTRIM0_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM1_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM2_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM3_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM4_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM5_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM6_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM7_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM8_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM9_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM10_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM11_Msk | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM12_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM13_Msk | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMTRIM14_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMTRIM15_Msk)
+
+/** @brief Symbol specifying bitmask collecting all memory retention trims. */
+#define NRF_MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_MASK                                       \
+    (MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM0_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM1_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM2_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM3_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM4_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM5_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM6_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM7_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM8_Msk  | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM9_Msk  | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM10_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM11_Msk | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM12_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM13_Msk | \
+     MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM14_Msk | MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM15_Msk)
 
 /**
  * @brief Function for enabling or disabling given RAM block.
@@ -40,6 +76,20 @@ NRF_STATIC_INLINE void nrf_memconf_ramblock_control_enable_set(NRF_MEMCONF_Type 
                                                                uint8_t            power_id,
                                                                uint8_t            ramblock,
                                                                bool               enable);
+
+/**
+ * @brief Function for enabling or disabling specified RAM blocks.
+ *
+ * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
+ * @param[in] power_id      Power block index.
+ * @param[in] ramblock_mask Mask of RAM blocks.
+ * @param[in] enable        True if RAM blocks are to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE
+void nrf_memconf_ramblock_control_mask_enable_set(NRF_MEMCONF_Type * p_reg,
+                                                  uint8_t            power_id,
+                                                  uint32_t           ramblock_mask,
+                                                  bool               enable);
 
 /**
  * @brief Function for checking whether given RAM block is enabled.
@@ -69,6 +119,19 @@ NRF_STATIC_INLINE void nrf_memconf_ramblock_ret_enable_set(NRF_MEMCONF_Type * p_
                                                            bool               enable);
 
 /**
+ * @brief Function for enabling or disabling retention for the specified RAM blocks.
+ *
+ * @param[in] p_reg         Pointer to the structure of registers of the peripheral.
+ * @param[in] power_id      Power block index.
+ * @param[in] ramblock_mask Mask of RAM blocks.
+ * @param[in] enable        True if retention for RAM blocks is to be enabled, false otherwise.
+ */
+NRF_STATIC_INLINE void nrf_memconf_ramblock_ret_mask_enable_set(NRF_MEMCONF_Type * p_reg,
+                                                                uint8_t            power_id,
+                                                                uint32_t           ramblock_mask,
+                                                                bool               enable);
+
+/**
  * @brief Function for checking whether the retention of specified RAM block is enabled.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
@@ -82,6 +145,7 @@ NRF_STATIC_INLINE bool nrf_memconf_ramblock_ret_enable_check(NRF_MEMCONF_Type co
                                                              uint8_t                  power_id,
                                                              uint8_t                  ramblock);
 
+#if NRF_MEMCONF_HAS_RET2
 /**
  * @brief Function for enabling or disabling the retention within the second bank for given RAM block.
  *
@@ -108,7 +172,9 @@ NRF_STATIC_INLINE void nrf_memconf_ramblock_ret2_enable_set(NRF_MEMCONF_Type * p
 NRF_STATIC_INLINE bool nrf_memconf_ramblock_ret2_enable_check(NRF_MEMCONF_Type const * p_reg,
                                                               uint8_t                  power_id,
                                                               uint8_t                  ramblock);
+#endif
 
+#if NRF_MEMCONF_HAS_REPAIR
 /**
  * @brief Function for enabling or disabling given bitline.
  *
@@ -153,6 +219,7 @@ NRF_STATIC_INLINE void nrf_memconf_bitline_address_set(NRF_MEMCONF_Type * p_reg,
  */
 NRF_STATIC_INLINE uint32_t nrf_memconf_bitline_address_get(NRF_MEMCONF_Type const * p_reg,
                                                            uint8_t                  bitline);
+#endif
 
 /**
  * @brief Function for setting memory trim value.
@@ -214,6 +281,24 @@ NRF_STATIC_INLINE void nrf_memconf_ramblock_control_enable_set(NRF_MEMCONF_Type 
                                         MEMCONF_POWER_CONTROL_MEM0_Off) << ramblock));
 }
 
+NRF_STATIC_INLINE
+void nrf_memconf_ramblock_control_mask_enable_set(NRF_MEMCONF_Type * p_reg,
+                                                  uint8_t            power_id,
+                                                  uint32_t           ramblock_mask,
+                                                  bool               enable)
+{
+    NRFX_ASSERT(power_id < NRF_MEMCONF_POWERBLOCK_COUNT);
+
+    if (enable)
+    {
+        p_reg->POWER[power_id].CONTROL |= ramblock_mask;
+    }
+    else
+    {
+        p_reg->POWER[power_id].CONTROL &= ~ramblock_mask;
+    }
+}
+
 NRF_STATIC_INLINE bool nrf_memconf_ramblock_control_enable_check(NRF_MEMCONF_Type const * p_reg,
                                                                  uint8_t                  power_id,
                                                                  uint8_t                  ramblock)
@@ -239,6 +324,23 @@ NRF_STATIC_INLINE void nrf_memconf_ramblock_ret_enable_set(NRF_MEMCONF_Type * p_
                                     MEMCONF_POWER_RET_MEM0_Off) << ramblock));
 }
 
+NRF_STATIC_INLINE void nrf_memconf_ramblock_ret_mask_enable_set(NRF_MEMCONF_Type * p_reg,
+                                                                uint8_t            power_id,
+                                                                uint32_t           ramblock_mask,
+                                                                bool               enable)
+{
+    NRFX_ASSERT(power_id < NRF_MEMCONF_POWERBLOCK_COUNT);
+
+    if (enable)
+    {
+        p_reg->POWER[power_id].RET |= ramblock_mask;
+    }
+    else
+    {
+        p_reg->POWER[power_id].RET &= ~ramblock_mask;
+    }
+}
+
 NRF_STATIC_INLINE bool nrf_memconf_ramblock_ret_enable_check(NRF_MEMCONF_Type const * p_reg,
                                                              uint8_t                  power_id,
                                                              uint8_t                  ramblock)
@@ -249,6 +351,7 @@ NRF_STATIC_INLINE bool nrf_memconf_ramblock_ret_enable_check(NRF_MEMCONF_Type co
     return (bool)(p_reg->POWER[power_id].RET & (MEMCONF_POWER_RET_MEM0_Msk << ramblock));
 }
 
+#if NRF_MEMCONF_HAS_RET2
 NRF_STATIC_INLINE void nrf_memconf_ramblock_ret2_enable_set(NRF_MEMCONF_Type * p_reg,
                                                             uint8_t            power_id,
                                                             uint8_t            ramblock,
@@ -273,7 +376,9 @@ NRF_STATIC_INLINE bool nrf_memconf_ramblock_ret2_enable_check(NRF_MEMCONF_Type c
 
     return (bool)(p_reg->POWER[power_id].RET2 & (MEMCONF_POWER_RET2_MEM0_Msk << ramblock));
 }
+#endif
 
+#if NRF_MEMCONF_HAS_REPAIR
 NRF_STATIC_INLINE void nrf_memconf_bitline_enable_set(NRF_MEMCONF_Type * p_reg,
                                                       uint8_t            bitline,
                                                       bool               enable)
@@ -305,19 +410,21 @@ NRF_STATIC_INLINE uint32_t nrf_memconf_bitline_address_get(NRF_MEMCONF_Type cons
 {
     return (uint32_t)(p_reg->REPAIR[bitline].BITLINE & MEMCONF_REPAIR_BITLINE_ADDR_Msk);
 }
+#endif
 
 NRF_STATIC_INLINE void nrf_memconf_memtrim_set(NRF_MEMCONF_Type * p_reg,
                                                uint8_t            trim_id,
                                                uint16_t           trim_val)
 {
     p_reg->BLOCKTYPE[trim_id].TRIM =
-        (p_reg->BLOCKTYPE[trim_id].TRIM & MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_Msk) |
-        trim_val;
+        (p_reg->BLOCKTYPE[trim_id].TRIM & ~NRF_MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_MASK) |
+        (trim_val << MEMCONF_BLOCKTYPE_TRIM_MEMTRIM0_Pos);
 }
 
 NRF_STATIC_INLINE uint16_t nrf_memconf_memtrim_get(NRF_MEMCONF_Type const * p_reg, uint8_t trim_id)
 {
-    return (uint16_t)(p_reg->BLOCKTYPE[trim_id].TRIM & MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Msk);
+    return (uint16_t)((p_reg->BLOCKTYPE[trim_id].TRIM & NRF_MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_MASK)
+                      >> MEMCONF_BLOCKTYPE_TRIM_MEMTRIM0_Pos);
 }
 
 NRF_STATIC_INLINE void nrf_memconf_rettrim_set(NRF_MEMCONF_Type * p_reg,
@@ -325,14 +432,14 @@ NRF_STATIC_INLINE void nrf_memconf_rettrim_set(NRF_MEMCONF_Type * p_reg,
                                                uint16_t           trim_val)
 {
     p_reg->BLOCKTYPE[trim_id].TRIM =
-        (p_reg->BLOCKTYPE[trim_id].TRIM & MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Msk) |
-        (trim_val << MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Pos);
+        (p_reg->BLOCKTYPE[trim_id].TRIM & ~NRF_MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_MASK) |
+        (trim_val << MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM0_Pos);
 }
 
 NRF_STATIC_INLINE uint16_t nrf_memconf_rettrim_get(NRF_MEMCONF_Type const * p_reg, uint8_t trim_id)
 {
-    return (uint16_t)((p_reg->BLOCKTYPE[trim_id].TRIM & MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_Msk) >>
-                      MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Pos);
+    return (uint16_t)((p_reg->BLOCKTYPE[trim_id].TRIM & NRF_MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_MASK)
+                      >> MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM0_Pos);
 }
 
 #endif // NRF_DECLARE_ONLY

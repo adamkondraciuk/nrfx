@@ -948,10 +948,6 @@
         #define MRAMC_CONFIGNVR_PAGE_Lock_LockEnabled  MRAMC_CONFIGNVR_PAGE_LOCK_LockEnabled
     #endif
 
-    #define MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Msk (0x0000FFFFUL)
-    #define MEMCONF_BLOCKTYPE_TRIM_MEMRETTRIM_Msk (0xFFFF0000UL)
-    #define MEMCONF_BLOCKTYPE_TRIM_MEMTRIM_Pos 16
-
     #define RADIO_TIMING_RU_Default 0
     #define RADIO_TIMING_RU_Fast    1
 
