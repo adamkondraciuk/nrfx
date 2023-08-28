@@ -220,8 +220,8 @@ extern "C" {
 /**
  * @brief Macro for resolving provided user macro for present instances of a peripheral.
  *
- * Macro checks if peripheral instances are present by checking if there is
- * \<peripheral\>\<id\>_PRESENT define set to 1.
+ * Macro checks if peripheral instances are present by checking if there is a token
+ * NRF_\<periph_name\>\<id\> defined with wrapped in parenthesis value.
  *
  * Macro supports check on instances with following names:
  * - \<periph_name\>0 - \<periph_name\>255 - e.g. SPIM0, SPIM255
