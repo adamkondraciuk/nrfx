@@ -11,6 +11,9 @@
 extern "C" {
 #endif
 
+#define NRFX_VEVIF_IRQ_HANDLER_DECLARE(idx, _) \
+void nrfx_vevif_##idx##_irq_handler(void);
+
 /**
  * @defgroup nrfx_vevif VEVIF driver
  * @{
@@ -67,38 +70,8 @@ void nrfx_vevif_int_disable(uint32_t mask);
 
 /** @} */
 
-void nrfx_vevif_0_irq_handler(void);
-void nrfx_vevif_1_irq_handler(void);
-void nrfx_vevif_2_irq_handler(void);
-void nrfx_vevif_3_irq_handler(void);
-void nrfx_vevif_4_irq_handler(void);
-void nrfx_vevif_5_irq_handler(void);
-void nrfx_vevif_6_irq_handler(void);
-void nrfx_vevif_7_irq_handler(void);
-void nrfx_vevif_8_irq_handler(void);
-void nrfx_vevif_9_irq_handler(void);
-void nrfx_vevif_10_irq_handler(void);
-void nrfx_vevif_11_irq_handler(void);
-void nrfx_vevif_12_irq_handler(void);
-void nrfx_vevif_13_irq_handler(void);
-void nrfx_vevif_14_irq_handler(void);
-void nrfx_vevif_15_irq_handler(void);
-void nrfx_vevif_16_irq_handler(void);
-void nrfx_vevif_17_irq_handler(void);
-void nrfx_vevif_18_irq_handler(void);
-void nrfx_vevif_19_irq_handler(void);
-void nrfx_vevif_20_irq_handler(void);
-void nrfx_vevif_21_irq_handler(void);
-void nrfx_vevif_22_irq_handler(void);
-void nrfx_vevif_23_irq_handler(void);
-void nrfx_vevif_24_irq_handler(void);
-void nrfx_vevif_25_irq_handler(void);
-void nrfx_vevif_26_irq_handler(void);
-void nrfx_vevif_27_irq_handler(void);
-void nrfx_vevif_28_irq_handler(void);
-void nrfx_vevif_29_irq_handler(void);
-void nrfx_vevif_30_irq_handler(void);
-void nrfx_vevif_31_irq_handler(void);
+/* Declare interrupt handlers for 0..31 NRF_VEVIF driver instances. */
+NRFX_LISTIFY(32, NRFX_VEVIF_IRQ_HANDLER_DECLARE, (;), _)
 
 #ifdef __cplusplus
 }

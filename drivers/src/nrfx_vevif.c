@@ -9,10 +9,10 @@
 #include <hal/nrf_vpr_csr.h>
 #include <hal/nrf_vpr_csr_vevif.h>
 
-#define NRFX_VEVIF_IRQ_HANDLER(idx)       \
-void nrfx_vevif_##idx##_irq_handler(void) \
-{                                         \
-    nrfx_vevif_irq_handler(idx);          \
+#define NRFX_VEVIF_IRQ_HANDLER_DEFINE(idx, _) \
+void nrfx_vevif_##idx##_irq_handler(void)     \
+{                                             \
+    nrfx_vevif_irq_handler(idx);              \
 }
 
 typedef struct
@@ -100,37 +100,7 @@ static void nrfx_vevif_irq_handler(uint8_t irq_idx)
     m_cb.handler(irq_idx, m_cb.p_context);
 }
 
-NRFX_VEVIF_IRQ_HANDLER(0)
-NRFX_VEVIF_IRQ_HANDLER(1)
-NRFX_VEVIF_IRQ_HANDLER(2)
-NRFX_VEVIF_IRQ_HANDLER(3)
-NRFX_VEVIF_IRQ_HANDLER(4)
-NRFX_VEVIF_IRQ_HANDLER(5)
-NRFX_VEVIF_IRQ_HANDLER(6)
-NRFX_VEVIF_IRQ_HANDLER(7)
-NRFX_VEVIF_IRQ_HANDLER(8)
-NRFX_VEVIF_IRQ_HANDLER(9)
-NRFX_VEVIF_IRQ_HANDLER(10)
-NRFX_VEVIF_IRQ_HANDLER(11)
-NRFX_VEVIF_IRQ_HANDLER(12)
-NRFX_VEVIF_IRQ_HANDLER(13)
-NRFX_VEVIF_IRQ_HANDLER(14)
-NRFX_VEVIF_IRQ_HANDLER(15)
-NRFX_VEVIF_IRQ_HANDLER(16)
-NRFX_VEVIF_IRQ_HANDLER(17)
-NRFX_VEVIF_IRQ_HANDLER(18)
-NRFX_VEVIF_IRQ_HANDLER(19)
-NRFX_VEVIF_IRQ_HANDLER(20)
-NRFX_VEVIF_IRQ_HANDLER(21)
-NRFX_VEVIF_IRQ_HANDLER(22)
-NRFX_VEVIF_IRQ_HANDLER(23)
-NRFX_VEVIF_IRQ_HANDLER(24)
-NRFX_VEVIF_IRQ_HANDLER(25)
-NRFX_VEVIF_IRQ_HANDLER(26)
-NRFX_VEVIF_IRQ_HANDLER(27)
-NRFX_VEVIF_IRQ_HANDLER(28)
-NRFX_VEVIF_IRQ_HANDLER(29)
-NRFX_VEVIF_IRQ_HANDLER(30)
-NRFX_VEVIF_IRQ_HANDLER(31)
+/* Define interrupt handlers for 0..31 NRF_VEVIF driver instances. */
+NRFX_LISTIFY(32, NRFX_VEVIF_IRQ_HANDLER_DEFINE, (;), _)
 
 #endif // NRFX_CHECK(NRFX_VEVIF_ENABLED)
