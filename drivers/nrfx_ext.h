@@ -316,6 +316,30 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
+/* Start of RAM Control Extended section                                                          */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(HALTIUM_XXAA)
+    #define RAM_SECTION_UNIT_SIZE          (32UL * 1024UL)
+    #define RAM_UNIFORM_BLOCKS             1
+    #define RAM_UNIFORM_SECTIONS_PER_BLOCK 1
+    #define RAM_UNIFORM_SECTIONS_TOTAL     1
+#elif defined(LUMOS_XXAA)
+    #define RAM_SECTION_UNIT_SIZE (16UL * 1024UL)
+    #define RAM_NON_UNIFORM_SECTIONS                                                                               \
+        NRFX_LISTIFY(4, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 0, 0), /* Section 0 of block 0 - 4 * 16 kB units. */ \
+        NRFX_LISTIFY(4, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 0, 1), /* Section 1 of block 0 - 4 * 16 kB units. */ \
+        NRFX_LISTIFY(2, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 1, 0), /* Section 0 of block 1 - 2 * 16 kB units. */ \
+        NRFX_LISTIFY(2, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 1, 1), /* Section 1 of block 1 - 2 * 16 kB units. */ \
+        NRFX_LISTIFY(1, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 1, 2), /* Section 2 of block 1 - 1 * 16 kB units. */ \
+        NRFX_LISTIFY(1, RAM_NON_UNIFORM_SECTION_DECLARE, (,), 1, 3)  /* Section 3 of block 1 - 1 * 16 kB units. */
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of RAM Control Extended section                                                            */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
 /* Start of RESET Extended section                                                                */
 /*------------------------------------------------------------------------------------------------*/
 
