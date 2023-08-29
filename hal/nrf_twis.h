@@ -42,69 +42,77 @@ extern "C" {
 #define NRF_TWIS_HAS_DMA_TASKS_EVENTS 0
 #endif
 
+#if defined(TWIS_TXD_LIST_LIST_Msk) || defined(TWIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether TX or RX LIST is present. */
+#define NRF_TWIS_HAS_LIST_REG 1
+#else
+#define NRF_TWIS_HAS_LIST_REG 0
+#endif
+
 /** @brief TWIS tasks. */
 typedef enum
 {
-    NRF_TWIS_TASK_STOP      = offsetof(NRF_TWIS_Type, TASKS_STOP),      /**< Stop TWIS transaction. */
-    NRF_TWIS_TASK_SUSPEND   = offsetof(NRF_TWIS_Type, TASKS_SUSPEND),   /**< Suspend TWIS transaction. */
-    NRF_TWIS_TASK_RESUME    = offsetof(NRF_TWIS_Type, TASKS_RESUME),    /**< Resume TWIS transaction. */
-    NRF_TWIS_TASK_PREPARERX = offsetof(NRF_TWIS_Type, TASKS_PREPARERX), /**< Prepare the TWIS slave to respond to a write command. */
-    NRF_TWIS_TASK_PREPARETX = offsetof(NRF_TWIS_Type, TASKS_PREPARETX)  /**< Prepare the TWIS slave to respond to a read command. */
+    NRF_TWIS_TASK_STOP      = offsetof(NRF_TWIS_Type, TASKS_STOP),      ///< Stop TWIS transaction.
+    NRF_TWIS_TASK_SUSPEND   = offsetof(NRF_TWIS_Type, TASKS_SUSPEND),   ///< Suspend TWIS transaction.
+    NRF_TWIS_TASK_RESUME    = offsetof(NRF_TWIS_Type, TASKS_RESUME),    ///< Resume TWIS transaction.
+    NRF_TWIS_TASK_PREPARERX = offsetof(NRF_TWIS_Type, TASKS_PREPARERX), ///< Prepare the TWIS slave to respond to a write command.
+    NRF_TWIS_TASK_PREPARETX = offsetof(NRF_TWIS_Type, TASKS_PREPARETX)  ///< Prepare the TWIS slave to respond to a read command.
 } nrf_twis_task_t;
 
 /** @brief TWIS events. */
 typedef enum
 {
-    NRF_TWIS_EVENT_STOPPED   = offsetof(NRF_TWIS_Type, EVENTS_STOPPED),      /**< TWIS stopped. */
-    NRF_TWIS_EVENT_ERROR     = offsetof(NRF_TWIS_Type, EVENTS_ERROR),        /**< TWIS error. */
+    NRF_TWIS_EVENT_STOPPED   = offsetof(NRF_TWIS_Type, EVENTS_STOPPED),      ///< TWIS stopped.
+    NRF_TWIS_EVENT_ERROR     = offsetof(NRF_TWIS_Type, EVENTS_ERROR),        ///< TWIS error.
 #if NRF_TWIS_HAS_DMA_TASKS_EVENTS
-    NRF_TWIS_EVENT_RXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_DMA.RX.READY), /**< Receive sequence started. */
-    NRF_TWIS_EVENT_TXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_DMA.TX.READY), /**< Transmit sequence started. */
+    NRF_TWIS_EVENT_RXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_DMA.RX.READY), ///< Receive sequence started.
+    NRF_TWIS_EVENT_TXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_DMA.TX.READY), ///< Transmit sequence started.
 #else
-    NRF_TWIS_EVENT_RXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_RXSTARTED),    /**< Receive sequence started. */
-    NRF_TWIS_EVENT_TXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_TXSTARTED),    /**< Transmit sequence started. */
+    NRF_TWIS_EVENT_RXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_RXSTARTED),    ///< Receive sequence started.
+    NRF_TWIS_EVENT_TXSTARTED = offsetof(NRF_TWIS_Type, EVENTS_TXSTARTED),    ///< Transmit sequence started.
 #endif
-    NRF_TWIS_EVENT_WRITE     = offsetof(NRF_TWIS_Type, EVENTS_WRITE),        /**< Write command received. */
-    NRF_TWIS_EVENT_READ      = offsetof(NRF_TWIS_Type, EVENTS_READ)          /**< Read command received. */
+    NRF_TWIS_EVENT_WRITE     = offsetof(NRF_TWIS_Type, EVENTS_WRITE),        ///< Write command received.
+    NRF_TWIS_EVENT_READ      = offsetof(NRF_TWIS_Type, EVENTS_READ)          ///< Read command received.
 } nrf_twis_event_t;
 
 /** @brief TWIS shortcuts. */
 typedef enum
 {
-    NRF_TWIS_SHORT_WRITE_SUSPEND_MASK   = TWIS_SHORTS_WRITE_SUSPEND_Msk,   /**< Shortcut between WRITE event and SUSPEND task. */
-    NRF_TWIS_SHORT_READ_SUSPEND_MASK    = TWIS_SHORTS_READ_SUSPEND_Msk,    /**< Shortcut between READ event and SUSPEND task. */
+    NRF_TWIS_SHORT_WRITE_SUSPEND_MASK   = TWIS_SHORTS_WRITE_SUSPEND_Msk, ///< Shortcut between WRITE event and SUSPEND task.
+    NRF_TWIS_SHORT_READ_SUSPEND_MASK    = TWIS_SHORTS_READ_SUSPEND_Msk,  ///< Shortcut between READ event and SUSPEND task.
 } nrf_twis_short_mask_t;
 
 /** @brief TWIS interrupts. */
 typedef enum
 {
-    NRF_TWIS_INT_STOPPED_MASK   = TWIS_INTEN_STOPPED_Msk,    /**< Interrupt on STOPPED event. */
-    NRF_TWIS_INT_ERROR_MASK     = TWIS_INTEN_ERROR_Msk,      /**< Interrupt on ERROR event. */
+    NRF_TWIS_INT_STOPPED_MASK   = TWIS_INTEN_STOPPED_Msk,    ///< Interrupt on STOPPED event.
+    NRF_TWIS_INT_ERROR_MASK     = TWIS_INTEN_ERROR_Msk,      ///< Interrupt on ERROR event.
 #if NRF_TWIS_HAS_DMA_TASKS_EVENTS
-    NRF_TWIS_INT_RXSTARTED_MASK = TWIS_INTEN_DMARXREADY_Msk, /**< Interrupt on RXSTARTED event. */
-    NRF_TWIS_INT_TXSTARTED_MASK = TWIS_INTEN_DMATXREADY_Msk, /**< Interrupt on TXSTARTED event. */
+    NRF_TWIS_INT_RXSTARTED_MASK = TWIS_INTEN_DMARXREADY_Msk, ///< Interrupt on RXSTARTED event.
+    NRF_TWIS_INT_TXSTARTED_MASK = TWIS_INTEN_DMATXREADY_Msk, ///< Interrupt on TXSTARTED event.
 #else
-    NRF_TWIS_INT_RXSTARTED_MASK = TWIS_INTEN_RXSTARTED_Msk,  /**< Interrupt on RXSTARTED event. */
-    NRF_TWIS_INT_TXSTARTED_MASK = TWIS_INTEN_TXSTARTED_Msk,  /**< Interrupt on TXSTARTED event. */
+    NRF_TWIS_INT_RXSTARTED_MASK = TWIS_INTEN_RXSTARTED_Msk,  ///< Interrupt on RXSTARTED event.
+    NRF_TWIS_INT_TXSTARTED_MASK = TWIS_INTEN_TXSTARTED_Msk,  ///< Interrupt on TXSTARTED event.
 #endif
-    NRF_TWIS_INT_WRITE_MASK     = TWIS_INTEN_WRITE_Msk,      /**< Interrupt on WRITE event. */
-    NRF_TWIS_INT_READ_MASK      = TWIS_INTEN_READ_Msk,       /**< Interrupt on READ event. */
+    NRF_TWIS_INT_WRITE_MASK     = TWIS_INTEN_WRITE_Msk,      ///< Interrupt on WRITE event.
+    NRF_TWIS_INT_READ_MASK      = TWIS_INTEN_READ_Msk,       ///< Interrupt on READ event.
 } nrf_twis_int_mask_t;
 
 /** @brief TWIS error source. */
 typedef enum
 {
-    NRF_TWIS_ERROR_OVERFLOW  = TWIS_ERRORSRC_OVERFLOW_Msk, /**< RX buffer overflow detected, and prevented. */
-    NRF_TWIS_ERROR_DATA_NACK = TWIS_ERRORSRC_DNACK_Msk,    /**< NACK sent after receiving a data byte. */
-    NRF_TWIS_ERROR_OVERREAD  = TWIS_ERRORSRC_OVERREAD_Msk  /**< TX buffer over-read detected, and prevented. */
+    NRF_TWIS_ERROR_OVERFLOW  = TWIS_ERRORSRC_OVERFLOW_Msk, ///< RX buffer overflow detected, and prevented.
+    NRF_TWIS_ERROR_DATA_NACK = TWIS_ERRORSRC_DNACK_Msk,    ///< NACK sent after receiving a data byte.
+    NRF_TWIS_ERROR_OVERREAD  = TWIS_ERRORSRC_OVERREAD_Msk  ///< TX buffer over-read detected, and prevented.
 } nrf_twis_error_t;
 
 /** @brief TWIS address matching configuration. */
 typedef enum
 {
-    NRF_TWIS_CONFIG_ADDRESS0_MASK  = TWIS_CONFIG_ADDRESS0_Msk, /**< Enable or disable address matching on ADDRESS[0]. */
-    NRF_TWIS_CONFIG_ADDRESS1_MASK  = TWIS_CONFIG_ADDRESS1_Msk, /**< Enable or disable address matching on ADDRESS[1]. */
-    NRF_TWIS_CONFIG_ADDRESS01_MASK = TWIS_CONFIG_ADDRESS0_Msk | TWIS_CONFIG_ADDRESS1_Msk /**< Enable both address matching. */
+    NRF_TWIS_CONFIG_ADDRESS0_MASK  = TWIS_CONFIG_ADDRESS0_Msk, ///< Enable or disable address matching on ADDRESS[0].
+    NRF_TWIS_CONFIG_ADDRESS1_MASK  = TWIS_CONFIG_ADDRESS1_Msk, ///< Enable or disable address matching on ADDRESS[1].
+    NRF_TWIS_CONFIG_ADDRESS01_MASK = TWIS_CONFIG_ADDRESS0_Msk |
+                                     TWIS_CONFIG_ADDRESS1_Msk  ///< Enable both address matching.
 } nrf_twis_config_addr_mask_t;
 
 /**
@@ -142,8 +150,7 @@ NRF_STATIC_INLINE uint32_t nrf_twis_task_address_get(NRF_TWIS_Type const * p_reg
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event The specified event.
  */
-NRF_STATIC_INLINE void nrf_twis_event_clear(NRF_TWIS_Type *  p_reg,
-                                            nrf_twis_event_t event);
+NRF_STATIC_INLINE void nrf_twis_event_clear(NRF_TWIS_Type * p_reg, nrf_twis_event_t event);
 
 /**
  * @brief Function for retrieving the state of the TWIS event.
@@ -154,8 +161,7 @@ NRF_STATIC_INLINE void nrf_twis_event_clear(NRF_TWIS_Type *  p_reg,
  * @retval true  The event has been generated.
  * @retval false The event has not been generated.
  */
-NRF_STATIC_INLINE bool nrf_twis_event_check(NRF_TWIS_Type const * p_reg,
-                                            nrf_twis_event_t      event);
+NRF_STATIC_INLINE bool nrf_twis_event_check(NRF_TWIS_Type const * p_reg, nrf_twis_event_t event);
 
 /**
  * @brief Function for getting and clearing the state of the specified event.
@@ -168,8 +174,7 @@ NRF_STATIC_INLINE bool nrf_twis_event_check(NRF_TWIS_Type const * p_reg,
  * @retval true  The event was set.
  * @retval false The event was not set.
  */
-NRF_STATIC_INLINE bool nrf_twis_event_get_and_clear(NRF_TWIS_Type *  p_reg,
-                                                    nrf_twis_event_t event);
+NRF_STATIC_INLINE bool nrf_twis_event_get_and_clear(NRF_TWIS_Type * p_reg, nrf_twis_event_t event);
 
 /**
  * @brief Function for returning the address of the specified TWIS event register.
@@ -237,8 +242,7 @@ NRF_STATIC_INLINE void nrf_twis_int_disable(NRF_TWIS_Type * p_reg, uint32_t mask
 
 #if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 /**
- * @brief Function for setting the subscribe configuration for a given
- *        TWIS task.
+ * @brief Function for setting the subscribe configuration for a given TWIS task.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] task    Task for which to set the configuration.
@@ -255,12 +259,10 @@ NRF_STATIC_INLINE void nrf_twis_subscribe_set(NRF_TWIS_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] task  Task for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_twis_subscribe_clear(NRF_TWIS_Type * p_reg,
-                                                nrf_twis_task_t task);
+NRF_STATIC_INLINE void nrf_twis_subscribe_clear(NRF_TWIS_Type * p_reg, nrf_twis_task_t task);
 
 /**
- * @brief Function for setting the publish configuration for a given
- *        TWIS event.
+ * @brief Function for setting the publish configuration for a given TWIS event.
  *
  * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
  * @param[in] event   Event for which to set the configuration.
@@ -271,14 +273,12 @@ NRF_STATIC_INLINE void nrf_twis_publish_set(NRF_TWIS_Type *  p_reg,
                                             uint8_t         channel);
 
 /**
- * @brief Function for clearing the publish configuration for a given
- *        TWIS event.
+ * @brief Function for clearing the publish configuration for a given TWIS event.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] event Event for which to clear the configuration.
  */
-NRF_STATIC_INLINE void nrf_twis_publish_clear(NRF_TWIS_Type *  p_reg,
-                                              nrf_twis_event_t event);
+NRF_STATIC_INLINE void nrf_twis_publish_clear(NRF_TWIS_Type * p_reg, nrf_twis_event_t event);
 #endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
 
 /**
@@ -374,16 +374,14 @@ NRF_STATIC_INLINE uint8_t * nrf_twis_rx_buffer_get(NRF_TWIS_Type const * p_reg);
  * @param[in] p_buf  Pointer to the buffer for received data.
  * @param[in] length Maximum number of data bytes to receive.
  */
-NRF_STATIC_INLINE void nrf_twis_rx_prepare(NRF_TWIS_Type * p_reg,
-                                           uint8_t       * p_buf,
-                                           size_t          length);
+NRF_STATIC_INLINE void nrf_twis_rx_prepare(NRF_TWIS_Type * p_reg, uint8_t * p_buf, size_t length);
 
 /**
  * @brief Function for getting number of bytes received in the last transaction.
  *
  * @param[in] p_reg TWIS instance.
  *
- * @return Amount of bytes received.
+ * @return Amount of received bytes.
  * */
 NRF_STATIC_INLINE size_t nrf_twis_rx_amount_get(NRF_TWIS_Type const * p_reg);
 
@@ -476,8 +474,8 @@ NRF_STATIC_INLINE void nrf_twis_config_address_set(NRF_TWIS_Type *             p
  *
  * @return Mask of address indexes of what device should answer to.
  */
-NRF_STATIC_INLINE nrf_twis_config_addr_mask_t nrf_twis_config_address_get(
-        NRF_TWIS_Type const * p_reg);
+NRF_STATIC_INLINE
+nrf_twis_config_addr_mask_t nrf_twis_config_address_get(NRF_TWIS_Type const * p_reg);
 
 /**
  * @brief Function for setting the over-read character.
@@ -486,8 +484,7 @@ NRF_STATIC_INLINE nrf_twis_config_addr_mask_t nrf_twis_config_address_get(
  * @param[in] orc   Over-read character. Character clocked out in case of
  *                  over-read of the TXD buffer.
  */
-NRF_STATIC_INLINE void nrf_twis_orc_set(NRF_TWIS_Type * p_reg,
-                                        uint8_t         orc);
+NRF_STATIC_INLINE void nrf_twis_orc_set(NRF_TWIS_Type * p_reg, uint8_t orc);
 
 /**
  * @brief Function for setting the over-read character.
@@ -498,7 +495,7 @@ NRF_STATIC_INLINE void nrf_twis_orc_set(NRF_TWIS_Type * p_reg,
  */
 NRF_STATIC_INLINE uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * p_reg);
 
-#if defined(TWIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+#if NRF_TWIS_HAS_LIST_REG
 /**
  * @brief Function for enabling the TX list feature.
  *
@@ -512,9 +509,7 @@ NRF_STATIC_INLINE void nrf_twis_tx_list_enable(NRF_TWIS_Type * p_reg);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_twis_tx_list_disable(NRF_TWIS_Type * p_reg);
-#endif // defined(TWIS_TXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
 
-#if defined(TWIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for enabling the RX list feature.
  *
@@ -528,7 +523,7 @@ NRF_STATIC_INLINE void nrf_twis_rx_list_enable(NRF_TWIS_Type * p_reg);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_twis_rx_list_disable(NRF_TWIS_Type * p_reg);
-#endif // defined(TWIS_RXD_LIST_LIST_Msk) || defined(__NRFX_DOXYGEN__)
+#endif
 
 /** @} */ /*  End of nrf_twis_hal */
 
@@ -660,8 +655,7 @@ NRF_STATIC_INLINE void nrf_twis_subscribe_set(NRF_TWIS_Type * p_reg,
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
-NRF_STATIC_INLINE void nrf_twis_subscribe_clear(NRF_TWIS_Type * p_reg,
-                                                nrf_twis_task_t task)
+NRF_STATIC_INLINE void nrf_twis_subscribe_clear(NRF_TWIS_Type * p_reg, nrf_twis_task_t task)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) task + 0x80uL)) = 0;
 }
@@ -674,8 +668,7 @@ NRF_STATIC_INLINE void nrf_twis_publish_set(NRF_TWIS_Type *  p_reg,
             ((uint32_t)channel | NRF_SUBSCRIBE_PUBLISH_ENABLE);
 }
 
-NRF_STATIC_INLINE void nrf_twis_publish_clear(NRF_TWIS_Type *  p_reg,
-                                              nrf_twis_event_t event)
+NRF_STATIC_INLINE void nrf_twis_publish_clear(NRF_TWIS_Type *  p_reg, nrf_twis_event_t event)
 {
     *((volatile uint32_t *) ((uint8_t *) p_reg + (uint32_t) event + 0x80uL)) = 0;
 }
@@ -719,9 +712,7 @@ NRF_STATIC_INLINE uint32_t nrf_twis_sda_pin_get(NRF_TWIS_Type const * p_reg)
     return p_reg->PSEL.SDA;
 }
 
-NRF_STATIC_INLINE void nrf_twis_rx_buffer_set(NRF_TWIS_Type * p_reg,
-                                              uint8_t *       p_buf,
-                                              size_t          length)
+NRF_STATIC_INLINE void nrf_twis_rx_buffer_set(NRF_TWIS_Type * p_reg, uint8_t * p_buf, size_t length)
 {
 #if NRF_TWIS_HAS_DMA_REG
     p_reg->DMA.RX.PTR    = (uint32_t)p_buf;
@@ -741,9 +732,7 @@ NRF_STATIC_INLINE uint8_t * nrf_twis_rx_buffer_get(NRF_TWIS_Type const * p_reg)
 #endif
 }
 
-NRF_STATIC_INLINE void nrf_twis_rx_prepare(NRF_TWIS_Type *   p_reg,
-                                           uint8_t *         p_buf,
-                                           size_t length)
+NRF_STATIC_INLINE void nrf_twis_rx_prepare(NRF_TWIS_Type * p_reg, uint8_t * p_buf, size_t length)
 {
     nrf_twis_rx_buffer_set(p_reg, p_buf, length);
     nrf_twis_task_trigger(p_reg, NRF_TWIS_TASK_PREPARERX);
@@ -801,7 +790,8 @@ NRF_STATIC_INLINE void nrf_twis_address_set(NRF_TWIS_Type *    p_reg,
                                             uint_fast8_t       n,
                                             nrf_twis_address_t addr)
 {
-    p_reg->ADDRESS[n] = addr;
+    NRFX_ASSERT((uint32_t)addr <= TWIS_ADDRESS_ADDRESS_Msk);
+    p_reg->ADDRESS[n] = (uint32_t)addr;
 }
 
 NRF_STATIC_INLINE nrf_twis_address_t nrf_twis_address_get(NRF_TWIS_Type const * p_reg,
@@ -809,17 +799,18 @@ NRF_STATIC_INLINE nrf_twis_address_t nrf_twis_address_get(NRF_TWIS_Type const * 
 {
     return (nrf_twis_address_t)p_reg->ADDRESS[n];
 }
+
 NRF_STATIC_INLINE void nrf_twis_config_address_set(NRF_TWIS_Type *             p_reg,
                                                    nrf_twis_config_addr_mask_t addr_mask)
 {
-    /* This is the only configuration in TWIS - just write it without masking */
-    p_reg->CONFIG = addr_mask;
+    /* This is the only configuration in TWIS - just write it without masking. */
+    p_reg->CONFIG = (uint32_t)addr_mask;
 }
 
-NRF_STATIC_INLINE nrf_twis_config_addr_mask_t nrf_twis_config_address_get(
-        NRF_TWIS_Type const * p_reg)
+NRF_STATIC_INLINE
+nrf_twis_config_addr_mask_t nrf_twis_config_address_get(NRF_TWIS_Type const * p_reg)
 {
-    return (nrf_twis_config_addr_mask_t)(p_reg->CONFIG & TWIS_ADDRESS_ADDRESS_Msk);
+    return (nrf_twis_config_addr_mask_t)(p_reg->CONFIG & NRF_TWIS_CONFIG_ADDRESS01_MASK);
 }
 
 NRF_STATIC_INLINE void nrf_twis_orc_set(NRF_TWIS_Type * p_reg, uint8_t orc)
@@ -832,7 +823,7 @@ NRF_STATIC_INLINE uint8_t nrf_twis_orc_get(NRF_TWIS_Type const * p_reg)
     return (uint8_t)p_reg->ORC;
 }
 
-#if defined(TWIS_TXD_LIST_LIST_Msk)
+#if NRF_TWIS_HAS_LIST_REG
 NRF_STATIC_INLINE void nrf_twis_tx_list_enable(NRF_TWIS_Type * p_reg)
 {
     p_reg->TXD.LIST = TWIS_TXD_LIST_LIST_ArrayList << TWIS_TXD_LIST_LIST_Pos;
@@ -843,9 +834,6 @@ NRF_STATIC_INLINE void nrf_twis_tx_list_disable(NRF_TWIS_Type * p_reg)
     p_reg->TXD.LIST = TWIS_TXD_LIST_LIST_Disabled << TWIS_TXD_LIST_LIST_Pos;
 }
 
-#endif // defined(TWIS_TXD_LIST_LIST_Msk)
-
-#if defined(TWIS_RXD_LIST_LIST_Msk)
 NRF_STATIC_INLINE void nrf_twis_rx_list_enable(NRF_TWIS_Type * p_reg)
 {
     p_reg->RXD.LIST = TWIS_RXD_LIST_LIST_ArrayList << TWIS_RXD_LIST_LIST_Pos;
@@ -855,7 +843,7 @@ NRF_STATIC_INLINE void nrf_twis_rx_list_disable(NRF_TWIS_Type * p_reg)
 {
     p_reg->RXD.LIST = TWIS_RXD_LIST_LIST_Disabled << TWIS_RXD_LIST_LIST_Pos;
 }
-#endif // defined(TWIS_RXD_LIST_LIST_Msk)
+#endif
 
 #endif /* NRF_DECLARE_ONLY */
 
