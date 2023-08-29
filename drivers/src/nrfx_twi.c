@@ -147,7 +147,6 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
                          nrfx_twi_evt_handler_t    event_handler,
                          void *                    p_context)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     twi_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
@@ -212,7 +211,6 @@ nrfx_err_t nrfx_twi_init(nrfx_twi_t const *        p_instance,
 nrfx_err_t nrfx_twi_reconfigure(nrfx_twi_t const *        p_instance,
                                 nrfx_twi_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -236,7 +234,6 @@ void nrfx_twi_uninit(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (p_cb->handler)
@@ -261,8 +258,6 @@ void nrfx_twi_uninit(nrfx_twi_t const * p_instance)
 
 bool nrfx_twi_init_check(nrfx_twi_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -272,7 +267,6 @@ void nrfx_twi_enable(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     NRF_TWI_Type * p_twi = p_instance->p_twi;
@@ -286,7 +280,6 @@ void nrfx_twi_disable(nrfx_twi_t const * p_instance)
 {
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     NRF_TWI_Type * p_twi = p_instance->p_twi;
@@ -655,7 +648,6 @@ nrfx_err_t nrfx_twi_xfer(nrfx_twi_t const *           p_instance,
     nrfx_err_t err_code = NRFX_SUCCESS;
     twi_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
     NRFX_ASSERT(p_xfer_desc->p_primary_buf != NULL || p_xfer_desc->primary_length == 0);
     NRFX_ASSERT(p_xfer_desc->p_secondary_buf != NULL || p_xfer_desc->secondary_length == 0);

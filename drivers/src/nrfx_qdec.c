@@ -81,7 +81,6 @@ nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
                           nrfx_qdec_event_handler_t  handler,
                           void *                     p_context)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
     NRFX_ASSERT(handler);
 
@@ -118,8 +117,6 @@ nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
                                  nrfx_qdec_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
-    NRFX_ASSERT(p_instance);
-
     qdec_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -137,7 +134,6 @@ nrfx_err_t nrfx_qdec_reconfigure(nrfx_qdec_t const *        p_instance,
 
 void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
     qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfy_qdec_pins_t pins;
 
@@ -167,8 +163,6 @@ void nrfx_qdec_uninit(nrfx_qdec_t const * p_instance)
 
 bool nrfx_qdec_init_check(nrfx_qdec_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     qdec_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -176,8 +170,6 @@ bool nrfx_qdec_init_check(nrfx_qdec_t const * p_instance)
 
 void nrfx_qdec_enable(nrfx_qdec_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
 
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
@@ -190,8 +182,6 @@ void nrfx_qdec_enable(nrfx_qdec_t const * p_instance)
 
 void nrfx_qdec_disable(nrfx_qdec_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     qdec_control_block_t * const p_cb = &m_cb[p_instance->drv_inst_idx];
 
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
@@ -205,7 +195,6 @@ void nrfx_qdec_accumulators_read(nrfx_qdec_t const * p_instance,
                                  int32_t *           p_acc,
                                  uint32_t *          p_accdbl)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_accdbl);
     NRFX_ASSERT(p_acc);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_POWERED_ON);

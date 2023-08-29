@@ -224,7 +224,6 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
                           nrfx_twim_evt_handler_t    event_handler,
                           void *                     p_context)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     twim_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
@@ -286,7 +285,6 @@ nrfx_err_t nrfx_twim_init(nrfx_twim_t const *        p_instance,
 nrfx_err_t nrfx_twim_reconfigure(nrfx_twim_t const *        p_instance,
                                  nrfx_twim_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -309,7 +307,6 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_twim_int_uninit(p_instance->p_twim);
@@ -334,8 +331,6 @@ void nrfx_twim_uninit(nrfx_twim_t const * p_instance)
 
 bool nrfx_twim_init_check(nrfx_twim_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -356,7 +351,6 @@ void nrfx_twim_disable(nrfx_twim_t const * p_instance)
 {
     twim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     p_cb->int_mask = 0;

@@ -75,8 +75,6 @@ nrfx_err_t nrfx_egu_init(nrfx_egu_t const *       p_instance,
                          nrfx_egu_event_handler_t event_handler,
                          void *                   p_context)
 {
-    NRFX_ASSERT(p_instance);
-
     egu_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
@@ -98,7 +96,6 @@ nrfx_err_t nrfx_egu_init(nrfx_egu_t const *       p_instance,
 
 void nrfx_egu_int_enable(nrfx_egu_t const * p_instance, uint32_t mask)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].handler);
 
@@ -108,7 +105,6 @@ void nrfx_egu_int_enable(nrfx_egu_t const * p_instance, uint32_t mask)
 
 void nrfx_egu_int_disable(nrfx_egu_t const * p_instance, uint32_t mask)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrf_egu_int_disable(p_instance->p_reg, mask);
@@ -116,7 +112,6 @@ void nrfx_egu_int_disable(nrfx_egu_t const * p_instance, uint32_t mask)
 
 void nrfx_egu_trigger(nrfx_egu_t const * p_instance, uint8_t event_idx)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
     NRFX_ASSERT(event_idx < nrf_egu_channel_count(p_instance->p_reg));
 
@@ -125,8 +120,6 @@ void nrfx_egu_trigger(nrfx_egu_t const * p_instance, uint8_t event_idx)
 
 void nrfx_egu_uninit(nrfx_egu_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     egu_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     nrf_egu_int_disable(p_instance->p_reg, ~0UL);
@@ -137,8 +130,6 @@ void nrfx_egu_uninit(nrfx_egu_t const * p_instance)
 
 bool nrfx_egu_init_check(nrfx_egu_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     egu_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);

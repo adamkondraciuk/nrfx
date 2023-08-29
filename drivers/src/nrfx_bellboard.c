@@ -26,8 +26,6 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
                                nrfx_bellboard_event_handler_t event_handler,
                                void *                         p_context)
 {
-    NRFX_ASSERT(p_instance);
-
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code = NRFX_SUCCESS;
 
@@ -57,7 +55,6 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
 
 void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_bellboard_int_uninit(p_instance->int_idx);
@@ -72,8 +69,6 @@ void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
 
 bool nrfx_bellboard_init_check(nrfx_bellboard_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -81,7 +76,6 @@ bool nrfx_bellboard_init_check(nrfx_bellboard_t const * p_instance)
 
 void nrfx_bellboard_int_enable(nrfx_bellboard_t const * p_instance, uint32_t mask)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_bellboard_int_enable(NRF_BELLBOARD, p_instance->int_idx, mask);
@@ -89,7 +83,6 @@ void nrfx_bellboard_int_enable(nrfx_bellboard_t const * p_instance, uint32_t mas
 
 void nrfx_bellboard_int_disable(nrfx_bellboard_t const * p_instance, uint32_t mask)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfy_bellboard_int_disable(NRF_BELLBOARD, p_instance->int_idx, mask);

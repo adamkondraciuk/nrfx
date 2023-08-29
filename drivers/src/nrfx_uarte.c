@@ -471,7 +471,6 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
 nrfx_err_t nrfx_uarte_reconfigure(nrfx_uarte_t const *        p_instance,
                                   nrfx_uarte_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -538,8 +537,6 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
 
 bool nrfx_uarte_init_check(nrfx_uarte_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -1506,7 +1503,6 @@ nrfx_err_t nrfx_uarte_int_trigger(nrfx_uarte_t const * p_instance)
 
 uint32_t nrfx_uarte_errorsrc_get(nrfx_uarte_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
     /* Function must be used in blocking mode only. */
     NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].handler == NULL);

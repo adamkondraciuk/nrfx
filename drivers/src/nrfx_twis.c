@@ -458,7 +458,6 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
                           nrfx_twis_config_t const * p_config,
                           nrfx_twis_event_handler_t  event_handler)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
     nrfx_err_t err_code;
 
@@ -526,7 +525,6 @@ nrfx_err_t nrfx_twis_init(nrfx_twis_t const *        p_instance,
 nrfx_err_t nrfx_twis_reconfigure(nrfx_twis_t const *        p_instance,
                                  nrfx_twis_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     if (m_cb[p_instance->drv_inst_idx].state == NRFX_DRV_STATE_UNINITIALIZED)
@@ -548,7 +546,6 @@ void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
     NRF_TWIS_Type *        p_reg = p_instance->p_reg;
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfx_twis_swreset(p_reg);
@@ -571,8 +568,6 @@ void nrfx_twis_uninit(nrfx_twis_t const * p_instance)
 
 bool nrfx_twis_init_check(nrfx_twis_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     twis_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -583,7 +578,6 @@ void nrfx_twis_enable(nrfx_twis_t const * p_instance)
     NRF_TWIS_Type *        p_reg = p_instance->p_reg;
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
 
     nrfx_twis_clear_all_events(p_reg);
@@ -605,7 +599,6 @@ void nrfx_twis_disable(nrfx_twis_t const * p_instance)
     NRF_TWIS_Type *        p_reg = p_instance->p_reg;
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrf_twis_int_disable(p_reg, m_used_ints_mask);
@@ -692,7 +685,6 @@ uint32_t nrfx_twis_error_get_and_clear(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t * p_cb  = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfx_twis_preprocess_status(p_instance);
@@ -705,7 +697,6 @@ nrfx_err_t nrfx_twis_tx_prepare(nrfx_twis_t const * p_instance,
                                 void const *        p_buf,
                                 size_t              size)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_buf);
 
     nrfx_err_t err_code;
@@ -756,7 +747,6 @@ nrfx_err_t nrfx_twis_rx_prepare(nrfx_twis_t const * p_instance,
                                 void *              p_buf,
                                 size_t              size)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_buf);
 
     nrfx_err_t err_code;
@@ -807,7 +797,6 @@ bool nrfx_twis_is_busy(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
 
     nrfx_twis_preprocess_status(p_instance);
@@ -818,7 +807,6 @@ bool nrfx_twis_is_waiting_tx_buff(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
 
     nrfx_twis_preprocess_status(p_instance);
@@ -829,7 +817,6 @@ bool nrfx_twis_is_waiting_rx_buff(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
 
     nrfx_twis_preprocess_status(p_instance);
@@ -840,7 +827,6 @@ bool nrfx_twis_is_pending_tx(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
 
     nrfx_twis_preprocess_status(p_instance);
@@ -851,7 +837,6 @@ bool nrfx_twis_is_pending_rx(nrfx_twis_t const * p_instance)
 {
     twis_control_block_t const * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_POWERED_ON);
 
     nrfx_twis_preprocess_status(p_instance);

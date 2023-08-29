@@ -1012,8 +1012,6 @@ nrfx_err_t nrfx_gpiote_input_configure(nrfx_gpiote_t const *                  p_
                                        nrfx_gpiote_pin_t                      pin,
                                        nrfx_gpiote_input_pin_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
-
     return gpiote_input_configure(p_instance, pin, p_config);
 }
 
@@ -1022,8 +1020,6 @@ nrfx_err_t nrfx_gpiote_output_configure(nrfx_gpiote_t const *               p_in
                                         nrfx_gpiote_output_config_t const * p_config,
                                         nrfx_gpiote_task_config_t const *   p_task_config)
 {
-    NRFX_ASSERT(p_instance);
-
     return gpiote_output_configure(p_instance, pin, p_config, p_task_config);
 }
 
@@ -1031,8 +1027,6 @@ void nrfx_gpiote_global_callback_set(nrfx_gpiote_t const *           p_instance,
                                      nrfx_gpiote_interrupt_handler_t handler,
                                      void *                          p_context)
 {
-    NRFX_ASSERT(p_instance);
-
     gpiote_global_callback_set(p_instance, handler, p_context);
 }
 
@@ -1040,8 +1034,6 @@ nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_t const * p_instance,
                                    nrfx_gpiote_pin_t     pin,
                                    uint8_t *             p_channel)
 {
-    NRFX_ASSERT(p_instance);
-
     return gpiote_channel_get(p_instance, pin, p_channel);
 }
 
@@ -1054,107 +1046,77 @@ uint32_t nrfx_gpiote_channels_number_get(nrfx_gpiote_t const * p_instance)
 
 nrfx_err_t nrfx_gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrupt_priority)
 {
-    NRFX_ASSERT(p_instance);
-
     return gpiote_init(p_instance, interrupt_priority);
 }
 
 bool nrfx_gpiote_init_check(nrfx_gpiote_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     return gpiote_init_check(p_instance);
 }
 
 void nrfx_gpiote_uninit(nrfx_gpiote_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     gpiote_uninit(p_instance);
 }
 
 nrfx_err_t nrfx_gpiote_pin_uninit(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_uninit(p_instance, pin);
 }
 
 nrfx_err_t nrfx_gpiote_channel_free(nrfx_gpiote_t const * p_instance, uint8_t channel)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_channel_free(p_instance, channel);
 }
 
 nrfx_err_t nrfx_gpiote_channel_alloc(nrfx_gpiote_t const * p_instance, uint8_t * p_channel)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_channel_alloc(p_instance, p_channel);
 }
 
 void nrfx_gpiote_out_set(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_set(p_instance, pin);
 }
 
 void nrfx_gpiote_out_clear(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_clear(p_instance, pin);
 }
 
 void nrfx_gpiote_out_toggle(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_toggle(p_instance, pin);
 }
 
 void nrfx_gpiote_out_task_enable(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_task_enable(p_instance, pin);
 }
 
 void nrfx_gpiote_out_task_disable(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_task_disable(p_instance, pin);
 }
 
 nrf_gpiote_task_t nrfx_gpiote_out_task_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_out_task_get(p_instance, pin);
 }
 
 uint32_t nrfx_gpiote_out_task_address_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_out_task_address_get(p_instance, pin);
 }
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT)
 nrf_gpiote_task_t nrfx_gpiote_set_task_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_set_task_get(p_instance, pin);
 }
 
 uint32_t nrfx_gpiote_set_task_address_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_set_task_address_get(p_instance, pin);
 }
 #endif // defined(GPIOTE_FEATURE_SET_PRESENT)
@@ -1162,15 +1124,11 @@ uint32_t nrfx_gpiote_set_task_address_get(nrfx_gpiote_t const * p_instance, nrfx
 #if defined(GPIOTE_FEATURE_CLR_PRESENT)
 nrf_gpiote_task_t nrfx_gpiote_clr_task_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_clr_task_get(p_instance, pin);
 }
 
 uint32_t nrfx_gpiote_clr_task_address_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     nrf_gpiote_task_t task = pin_clr_task_get(p_instance, pin);
     return nrfy_gpiote_task_address_get(p_instance->p_reg, task);
 }
@@ -1180,23 +1138,17 @@ void nrfx_gpiote_out_task_force(nrfx_gpiote_t const * p_instance,
                                 nrfx_gpiote_pin_t     pin,
                                 uint8_t               state)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_task_force(p_instance, pin, state);
 }
 
 void nrfx_gpiote_out_task_trigger(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_out_task_trigger(p_instance, pin);
 }
 
 #if defined(GPIOTE_FEATURE_SET_PRESENT)
 void nrfx_gpiote_set_task_trigger(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_set_task_trigger(p_instance, pin);
 }
 #endif // defined(GPIOTE_FEATURE_SET_PRESENT)
@@ -1204,8 +1156,6 @@ void nrfx_gpiote_set_task_trigger(nrfx_gpiote_t const * p_instance, nrfx_gpiote_
 #if  defined(GPIOTE_FEATURE_CLR_PRESENT)
 void nrfx_gpiote_clr_task_trigger(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_clr_task_trigger(p_instance, pin);
 }
 #endif // defined(GPIOTE_FEATURE_CLR_PRESENT)
@@ -1214,30 +1164,22 @@ void nrfx_gpiote_trigger_enable(nrfx_gpiote_t const * p_instance,
                                 nrfx_gpiote_pin_t     pin,
                                 bool                  int_enable)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_trigger_enable(p_instance, pin, int_enable);
 }
 
 void nrfx_gpiote_trigger_disable(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     pin_trigger_disable(p_instance, pin);
 }
 
 nrf_gpiote_event_t nrfx_gpiote_in_event_get(nrfx_gpiote_t const * p_instance,
                                             nrfx_gpiote_pin_t     pin)
 {
-    NRFX_ASSERT(p_instance);
-
     return pin_in_event_get(p_instance, pin);
 }
 
 uint32_t nrfx_gpiote_in_event_address_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    NRFX_ASSERT(p_instance);
-
     nrf_gpiote_event_t event = pin_in_event_get(p_instance, pin);
     return nrfy_gpiote_event_address_get(p_instance->p_reg, event);
 }

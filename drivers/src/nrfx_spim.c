@@ -480,7 +480,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
                           nrfx_spim_evt_handler_t    handler,
                           void *                     p_context)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -533,7 +532,6 @@ nrfx_err_t nrfx_spim_init(nrfx_spim_t const *        p_instance,
 nrfx_err_t nrfx_spim_reconfigure(nrfx_spim_t const *        p_instance,
                                  nrfx_spim_config_t const * p_config)
 {
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_config);
 
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
@@ -571,7 +569,6 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     nrfy_spim_int_uninit(p_instance->p_reg);
@@ -619,8 +616,6 @@ void nrfx_spim_uninit(nrfx_spim_t const * p_instance)
 
 bool nrfx_spim_init_check(nrfx_spim_t const * p_instance)
 {
-    NRFX_ASSERT(p_instance);
-
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     return (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
@@ -775,7 +770,6 @@ nrfx_err_t nrfx_spim_xfer(nrfx_spim_t const *           p_instance,
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
     NRFX_ASSERT(p_xfer_desc->p_tx_buffer != NULL || p_xfer_desc->tx_length == 0);
     NRFX_ASSERT(p_xfer_desc->p_rx_buffer != NULL || p_xfer_desc->rx_length == 0);
@@ -826,7 +820,6 @@ void nrfx_spim_abort(nrfx_spim_t const * p_instance)
 {
     spim_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    NRFX_ASSERT(p_instance);
     NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     spim_abort(p_instance->p_reg, p_cb);
