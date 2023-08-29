@@ -1243,7 +1243,7 @@ NRF_STATIC_INLINE void nrf_usbd_dtoggle_set(NRF_USBD_Type *    p_reg,
     NRFX_ASSERT(NRF_USBD_EP_VALIDATE(ep));
     NRFX_ASSERT(!NRF_USBD_EPISO_CHECK(ep));
     p_reg->DTOGGLE = ep | (NRF_USBD_DTOGGLE_NOP << USBD_DTOGGLE_VALUE_Pos);
-    p_reg->DTOGGLE = ep | (op << USBD_DTOGGLE_VALUE_Pos);
+    p_reg->DTOGGLE = ep | ((uint32_t)op << USBD_DTOGGLE_VALUE_Pos);
     (void) p_reg->DTOGGLE;
 }
 
