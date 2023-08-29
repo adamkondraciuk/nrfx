@@ -452,17 +452,23 @@ nrfx_err_t nrfx_clock_calibration_start(void)
     nrf_clock_hfclk_t clk_src;
     if (!nrfx_clock_is_running(NRF_CLOCK_DOMAIN_HFCLK, &clk_src))
     {
-        return NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_INVALID_STATE;
+    }
+    else if (clk_src != NRF_CLOCK_HFCLK_HIGH_ACCURACY)
+    {
+        err_code = NRFX_ERROR_INVALID_STATE;
+    }
+    else if (!nrfx_clock_is_running(NRF_CLOCK_DOMAIN_LFCLK, NULL))
+    {
+        err_code = NRFX_ERROR_INVALID_STATE;
     }
 
-    if (clk_src != NRF_CLOCK_HFCLK_HIGH_ACCURACY)
+    if (err_code != NRFX_SUCCESS)
     {
-        return NRFX_ERROR_INVALID_STATE;
-    }
-
-    if (!nrfx_clock_is_running(NRF_CLOCK_DOMAIN_LFCLK, NULL))
-    {
-        return NRFX_ERROR_INVALID_STATE;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
     if (m_clock_cb.cal_state == CAL_STATE_IDLE)
@@ -488,11 +494,13 @@ nrfx_err_t nrfx_clock_calibration_start(void)
     else
     {
         err_code = NRFX_ERROR_BUSY;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
-    NRFX_LOG_WARNING("Function: %s, error code: %s.",
-                     __func__,
-                     NRFX_LOG_ERROR_STRING_GET(err_code));
+    NRFX_LOG_INFO("Initialized.");
     return err_code;
 }
 
