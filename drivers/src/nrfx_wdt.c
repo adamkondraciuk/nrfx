@@ -130,15 +130,25 @@ nrfx_err_t nrfx_wdt_reconfigure(nrfx_wdt_t const *        p_instance,
                                 nrfx_wdt_config_t const * p_config)
 {
     NRFX_ASSERT(p_config);
+
+    nrfx_err_t err_code;
     wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
     if (p_cb->state == NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_INVALID_STATE;
+        err_code = NRFX_ERROR_INVALID_STATE;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
-    if (p_cb->state == NRFX_DRV_STATE_POWERED_ON)
+    else if (p_cb->state == NRFX_DRV_STATE_POWERED_ON)
     {
-        return NRFX_ERROR_BUSY;
+        err_code = NRFX_ERROR_BUSY;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
     wdt_configure(p_instance, p_config);
     return NRFX_SUCCESS;
@@ -148,6 +158,7 @@ void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance)
 {
     wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRFX_ASSERT(p_cb->state == NRFX_DRV_STATE_INITIALIZED);
+
 #if !NRFX_CHECK(NRFX_WDT_CONFIG_NO_IRQ)
     if (p_cb->wdt_event_handler)
     {
@@ -155,6 +166,7 @@ void nrfx_wdt_uninit(nrfx_wdt_t const * p_instance)
     }
 #endif
     p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_wdt_init_check(nrfx_wdt_t const * p_instance)
@@ -221,6 +233,7 @@ void nrfx_wdt_channel_feed(nrfx_wdt_t const * p_instance, nrfx_wdt_channel_id ch
 nrfx_err_t nrfx_wdt_stop(nrfx_wdt_t const * p_instance)
 {
     wdt_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    NRFX_ASSERT(p_cb->state != NRFX_DRV_STATE_UNINITIALIZED);
 
     if (!p_cb->stoppable)
     {
