@@ -13,12 +13,22 @@ extern "C" {
 #define NRF_GPIOTE0 NRF_GPIOTE
 #endif
 
-#if !defined(GPIOTE0_CH_NUM) && defined(GPIOTE_CH_NUM) && defined(NRF_GPIOTE)
+#if !defined(GPIOTE0_CH_NUM) && defined(GPIOTE_CH_NUM) && \
+    (defined(NRF_GPIOTE) || defined(NRF_GPIOTE0))
 #define GPIOTE0_CH_NUM GPIOTE_CH_NUM
 #endif
 
-#if !defined(GPIOTE0_AVAILABLE_GPIO_PORTS) && defined(GPIO_COUNT) && defined(NRF_GPIOTE)
+#if !defined(GPIOTE1_CH_NUM) && defined(GPIOTE_CH_NUM) && defined(NRF_GPIOTE1)
+#define GPIOTE1_CH_NUM GPIOTE_CH_NUM
+#endif
+
+#if !defined(GPIOTE0_AVAILABLE_GPIO_PORTS) && defined(GPIO_COUNT) && \
+    (defined(NRF_GPIOTE) || defined(NRF_GPIOTE0))
 #define GPIOTE0_AVAILABLE_GPIO_PORTS NRFX_BIT_MASK(GPIO_COUNT)
+#endif
+
+#if !defined(GPIOTE1_AVAILABLE_GPIO_PORTS) && defined(GPIO_COUNT) && defined(NRF_GPIOTE1)
+#define GPIOTE1_AVAILABLE_GPIO_PORTS NRFX_BIT_MASK(GPIO_COUNT)
 #endif
 
 /* Internal macro used for NRF_GPIOTE_INT_IN_MASK. */

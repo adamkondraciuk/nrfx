@@ -81,13 +81,8 @@
 #endif
 
 /* Fixups for the GPIOTE driver. */
-#if defined(NRF_TRUSTZONE_NONSECURE)
-#define NRF_GPIOTE        NRF_GPIOTE1_NS
-#define GPIOTE_IRQHandler GPIOTE1_IRQHandler
-#else
-#define NRF_GPIOTE        NRF_GPIOTE0_S
-#define GPIOTE_IRQHandler GPIOTE0_IRQHandler
-#endif
+#define NRF_GPIOTE0      NRF_GPIOTE0_S
+#define NRF_GPIOTE1      NRF_GPIOTE1_NS
 
 /**
  * @brief NRFX_DEFAULT_IRQ_PRIORITY
@@ -315,6 +310,24 @@
  */
 #ifndef NRFX_GPIOTE_CONFIG_LOG_LEVEL
 #define NRFX_GPIOTE_CONFIG_LOG_LEVEL 3
+#endif
+
+/**
+ * @brief NRFX_GPIOTE0_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE0_ENABLED
+#define NRFX_GPIOTE0_ENABLED 0
+#endif
+
+/**
+ * @brief NRFX_GPIOTE1_ENABLED
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_GPIOTE1_ENABLED
+#define NRFX_GPIOTE1_ENABLED 0
 #endif
 
 /**

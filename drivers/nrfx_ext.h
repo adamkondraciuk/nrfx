@@ -204,6 +204,11 @@ extern "C" {
 #define NRFX_GPIOTE0_CHANNELS_USED 0UL
 #endif
 
+#if defined(NRF_GPIOTE1) && !defined(NRFX_GPIOTE1_CHANNELS_USED)
+/* Bitmask that defines GPIOTE1 channels that are reserved for use outside of the nrfx library. */
+#define NRFX_GPIOTE1_CHANNELS_USED 0UL
+#endif
+
 #if defined(NRF_GPIOTE20) && !defined(NRFX_GPIOTE20_CHANNELS_USED)
 /* Bitmask that defines GPIOTE20 channels that are reserved for use outside of the nrfx library. */
 #define NRFX_GPIOTE20_CHANNELS_USED 0UL

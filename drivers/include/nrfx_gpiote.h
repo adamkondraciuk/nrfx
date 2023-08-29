@@ -585,7 +585,12 @@ NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(nrfx_gpiote_t co
 #else
 
 #if !defined(NRF_GPIOTE_INDEX)
+#if (defined(NRF5340_XXAA_APPLICATION) || defined(NRF91_SERIES)) && \
+    defined(NRF_TRUSTZONE_NONSECURE)
+#define NRF_GPIOTE_INDEX 1
+#else
 #define NRF_GPIOTE_INDEX 0
+#endif
 #endif
 
 #if !defined(nrfx_gpiote_irq_handler)

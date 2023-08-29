@@ -158,6 +158,11 @@ typedef struct
 /* Bitmask that defines GPIOTE0 channels that are reserved for use outside of the nrfx library. */
 #define NRFX_GPIOTE0_CHANNELS_USED 0UL
 #endif
+
+#if defined(NRF_GPIOTE1) && !defined(NRFX_GPIOTE1_CHANNELS_USED)
+/* Bitmask that defines GPIOTE1 channels that are reserved for use outside of the nrfx library. */
+#define NRFX_GPIOTE1_CHANNELS_USED 0UL
+#endif
 #endif // !defined(__NRFX_DOXYGEN__)
 
 #define _NRFX_GPIOTE_CB_INITIALIZER(periph_name, prefix, idx, _)                        \
@@ -702,6 +707,14 @@ static nrfx_err_t gpiote_channel_get(nrfx_gpiote_t const * p_instance,
 
 static nrfx_err_t gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrupt_priority)
 {
+#if defined(NRF5340_XXAA_APPLICATION) || defined(NRF91_SERIES)
+#if defined(NRF_TRUSTZONE_NONSECURE)
+    NRFX_ASSERT(p_instance->p_reg == NRF_GPIOTE1);
+#else
+    NRFX_ASSERT(p_instance->p_reg == NRF_GPIOTE0);
+#endif
+#endif
+
     gpiote_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     nrfx_err_t err_code = NRFX_SUCCESS;
 
