@@ -7,6 +7,9 @@
 #include <nrfx_bellboard.h>
 #include <nrf_bitmask.h>
 
+#define NRFX_LOG_MODULE BELLBOARD
+#include <nrfx_log.h>
+
 typedef struct
 {
     nrfx_bellboard_event_handler_t handler;
@@ -26,8 +29,15 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
     NRFX_ASSERT(p_instance);
 
     nrfx_bellboard_cb_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    if (p_cb->state == NRFX_DRV_STATE_INITIALIZED) {
-        return NRFX_ERROR_ALREADY;
+    nrfx_err_t err_code = NRFX_SUCCESS;
+
+    if (p_cb->state == NRFX_DRV_STATE_INITIALIZED)
+    {
+        err_code = NRFX_ERROR_ALREADY;
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
     p_cb->state   = NRFX_DRV_STATE_INITIALIZED;
@@ -41,7 +51,8 @@ nrfx_err_t nrfx_bellboard_init(nrfx_bellboard_t const *       p_instance,
                             false,
                             p_instance->int_idx);
 
-    return NRFX_SUCCESS;
+    NRFX_LOG_INFO("Initialized.");
+    return err_code;
 }
 
 void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
@@ -55,6 +66,8 @@ void nrfx_bellboard_uninit(nrfx_bellboard_t const * p_instance)
 
     p_cb->handler = NULL;
     p_cb->int_idx = 0;
+    p_cb->state = NRFX_DRV_STATE_UNINITIALIZED;
+    NRFX_LOG_INFO("Uninitialized.");
 }
 
 bool nrfx_bellboard_init_check(nrfx_bellboard_t const * p_instance)
