@@ -28,7 +28,7 @@ extern "C" {
 #endif
 
 #if defined(ISA_RISCV)
-#define __STATIC_INLINE static inline
+#define __STATIC_INLINE __attribute__((always_inline)) static inline
 #endif
 
 #ifndef NRFX_STATIC_INLINE
