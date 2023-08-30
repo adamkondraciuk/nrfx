@@ -132,7 +132,8 @@
 #define _NRFX_IRQ_HANDLER(periph_name, prefix, i, periph_name_small) \
 void NRFX_CONCAT(nrfx_, periph_name_small, _, prefix, i, _irq_handler)(void) \
 { \
-    irq_handler(NRFX_CONCAT(NRF_, periph_name, prefix, i), \
+    irq_handler(NRFX_COND_CODE_1(NRFX_INSTANCE_PRESENT(NRFX_CONCAT(periph_name, prefix, i)), \
+                                 (NRFX_CONCAT(NRF_, periph_name, prefix, i)), (NULL)), \
                 &m_cb[NRFX_CONCAT(NRFX_, periph_name, prefix, i, _INST_IDX)]); \
 }
 

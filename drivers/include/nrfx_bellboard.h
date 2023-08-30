@@ -37,18 +37,7 @@ typedef struct
 
 #ifndef __NRFX_DOXYGEN__
 enum {
-#if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
-    NRFX_BELLBOARD0_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_BELLBOARD1_ENABLED)
-    NRFX_BELLBOARD1_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_BELLBOARD2_ENABLED)
-    NRFX_BELLBOARD2_INST_IDX,
-#endif
-#if NRFX_CHECK(NRFX_BELLBOARD3_ENABLED)
-    NRFX_BELLBOARD3_INST_IDX,
-#endif
+    NRFX_INSTANCE_ENUM_LIST(BELLBOARD)
     NRFX_BELLBOARD_ENABLED_COUNT
 };
 #endif
@@ -119,10 +108,7 @@ void nrfx_bellboard_int_disable(nrfx_bellboard_t const * p_instance, uint32_t ma
 
 /** @} */
 
-void nrfx_bellboard_0_irq_handler(void);
-void nrfx_bellboard_1_irq_handler(void);
-void nrfx_bellboard_2_irq_handler(void);
-void nrfx_bellboard_3_irq_handler(void);
+NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(BELLBOARD, bellboard)
 
 #ifdef __cplusplus
 }

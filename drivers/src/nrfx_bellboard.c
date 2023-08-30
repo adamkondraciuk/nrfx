@@ -82,10 +82,9 @@ void nrfx_bellboard_int_disable(nrfx_bellboard_t const * p_instance, uint32_t ma
     nrfy_bellboard_int_disable(NRF_BELLBOARD, p_instance->int_idx, mask);
 }
 
-static void bellboard_irq_handler(uint8_t interrupt_idx)
+static void irq_handler(void * unused, nrfx_bellboard_cb_t * p_cb)
 {
-    uint8_t inst_idx = NRFX_BELLBOARD_ENABLED_COUNT;
-
+    (void)unused;
     /* Pending interrupts registers are cleared when event is cleared.
      * Add current pending interrupts to be processed later.
      */
@@ -94,56 +93,25 @@ static void bellboard_irq_handler(uint8_t interrupt_idx)
         if (m_cb[i].state == NRFX_DRV_STATE_INITIALIZED)
         {
             m_cb[i].int_pend |= nrfy_bellboard_int_pending_get(NRF_BELLBOARD, m_cb[i].int_idx);
-
-            if (m_cb[i].int_idx == interrupt_idx)
-            {
-                inst_idx = i;
-            }
         }
     }
 
-    uint32_t int_pend = m_cb[inst_idx].int_pend;
-    m_cb[inst_idx].int_pend = 0;
+    uint32_t int_pend = p_cb->int_pend;
+    p_cb->int_pend = 0;
 
     (void)nrfy_bellboard_events_process(NRF_BELLBOARD, int_pend);
 
-    if (m_cb[inst_idx].handler != NULL)
+    if (p_cb->handler != NULL)
     {
         while (int_pend)
         {
             uint8_t event_no = (uint8_t)NRF_CTZ(int_pend);
-            m_cb[inst_idx].handler(event_no, m_cb[inst_idx].context);
+            p_cb->handler(event_no, p_cb->context);
             nrf_bitmask_bit_clear(event_no, &int_pend);
         }
     }
 }
 
-#if NRFX_CHECK(NRFX_BELLBOARD0_ENABLED)
-void nrfx_bellboard_0_irq_handler(void)
-{
-    bellboard_irq_handler(0);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_BELLBOARD1_ENABLED)
-void nrfx_bellboard_1_irq_handler(void)
-{
-    bellboard_irq_handler(1);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_BELLBOARD2_ENABLED)
-void nrfx_bellboard_2_irq_handler(void)
-{
-    bellboard_irq_handler(2);
-}
-#endif
-
-#if NRFX_CHECK(NRFX_BELLBOARD3_ENABLED)
-void nrfx_bellboard_3_irq_handler(void)
-{
-    bellboard_irq_handler(3);
-}
-#endif
+NRFX_INSTANCE_IRQ_HANDLERS(BELLBOARD, bellboard)
 
 #endif // NRFX_CHECK(NRFX_BELLBOARD_ENABLED)
