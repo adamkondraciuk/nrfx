@@ -17,6 +17,7 @@ All notable changes to this project are documented in this file.
 - Added the new nrfy_wdt_task_stop_enable_set() function to the WDT HALY that enables or disables stopping the watchdog.
 - Added functions for retrieving pointers to the receive and transmit buffers in the TWIS HAL.
 - Added functions for checking whether given instance is initialized to all of the drivers.
+- Added individual functions for setting reference selection, external reference, detection type and enabling hysteresis in the LPCOMP HAL. Now they are supposed to be used instead of nrf_lpcomp_configure() function.
 
 ### Changed
 - Overhauled the UARTE driver. Extended the UARTE driver with various modes of operations including: mixing of blocking and non-blocking transfers, linking transfers, continuous reception, low power operation.
@@ -32,6 +33,7 @@ All notable changes to this project are documented in this file.
 - Changed a default value of the source reference structure member from 1.8V to 1.2V in the COMP driver configuration structure.
 - Replaced the nrf_wdt_task_stop_enable() function with nrf_wdt_task_stop_enable_set(). Now it takes a boolean parameter.
 - Added the new NRFX_ERROR_ALREADY error code that replaced the NRFX_ERROR_ALREADY_INITIALIZED one. Now the NRFX_ERROR_ALREADY_INITIALIZED error code is deprecated.
+- Changed the organization of configuration structure members in the LPCOMP driver.
 
 ### Fixed
 
