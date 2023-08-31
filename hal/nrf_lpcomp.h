@@ -26,72 +26,72 @@ extern "C" {
 /** @brief LPCOMP tasks. */
 typedef enum
 {
-    NRF_LPCOMP_TASK_START  = offsetof(NRF_LPCOMP_Type, TASKS_START), /**< LPCOMP start sampling task. */
-    NRF_LPCOMP_TASK_STOP   = offsetof(NRF_LPCOMP_Type, TASKS_STOP),  /**< LPCOMP stop sampling task. */
-    NRF_LPCOMP_TASK_SAMPLE = offsetof(NRF_LPCOMP_Type, TASKS_SAMPLE) /**< Sample comparator value. */
+    NRF_LPCOMP_TASK_START  = offsetof(NRF_LPCOMP_Type, TASKS_START), ///< LPCOMP start sampling task.
+    NRF_LPCOMP_TASK_STOP   = offsetof(NRF_LPCOMP_Type, TASKS_STOP),  ///< LPCOMP stop sampling task.
+    NRF_LPCOMP_TASK_SAMPLE = offsetof(NRF_LPCOMP_Type, TASKS_SAMPLE) ///< Sample comparator value.
 } nrf_lpcomp_task_t;
 
 /** @brief LPCOMP events. */
 typedef enum
 {
-    NRF_LPCOMP_EVENT_READY = offsetof(NRF_LPCOMP_Type, EVENTS_READY), /**< LPCOMP is ready and output is valid. */
-    NRF_LPCOMP_EVENT_DOWN  = offsetof(NRF_LPCOMP_Type, EVENTS_DOWN),  /**< Input voltage crossed the threshold going down. */
-    NRF_LPCOMP_EVENT_UP    = offsetof(NRF_LPCOMP_Type, EVENTS_UP),    /**< Input voltage crossed the threshold going up. */
-    NRF_LPCOMP_EVENT_CROSS = offsetof(NRF_LPCOMP_Type, EVENTS_CROSS)  /**< Input voltage crossed the threshold in any direction. */
+    NRF_LPCOMP_EVENT_READY = offsetof(NRF_LPCOMP_Type, EVENTS_READY), ///< LPCOMP is ready and output is valid.
+    NRF_LPCOMP_EVENT_DOWN  = offsetof(NRF_LPCOMP_Type, EVENTS_DOWN),  ///< Input voltage crossed the threshold going down.
+    NRF_LPCOMP_EVENT_UP    = offsetof(NRF_LPCOMP_Type, EVENTS_UP),    ///< Input voltage crossed the threshold going up.
+    NRF_LPCOMP_EVENT_CROSS = offsetof(NRF_LPCOMP_Type, EVENTS_CROSS)  ///< Input voltage crossed the threshold in any direction.
 } nrf_lpcomp_event_t;
 
 /** @brief LPCOMP interrupts. */
 typedef enum
 {
-    NRF_LPCOMP_INT_READY_MASK = LPCOMP_INTENSET_READY_Msk, /**< Interrupt on READY event. */
-    NRF_LPCOMP_INT_DOWN_MASK  = LPCOMP_INTENSET_DOWN_Msk,  /**< Interrupt on DOWN event. */
-    NRF_LPCOMP_INT_UP_MASK    = LPCOMP_INTENSET_UP_Msk,    /**< Interrupt on UP event. */
-    NRF_LPCOMP_INT_CROSS_MASK = LPCOMP_INTENSET_CROSS_Msk  /**< Interrupt on CROSS event. */
+    NRF_LPCOMP_INT_READY_MASK = LPCOMP_INTENSET_READY_Msk, ///< Interrupt on READY event.
+    NRF_LPCOMP_INT_DOWN_MASK  = LPCOMP_INTENSET_DOWN_Msk,  ///< Interrupt on DOWN event.
+    NRF_LPCOMP_INT_UP_MASK    = LPCOMP_INTENSET_UP_Msk,    ///< Interrupt on UP event.
+    NRF_LPCOMP_INT_CROSS_MASK = LPCOMP_INTENSET_CROSS_Msk  ///< Interrupt on CROSS event.
 } nrf_lpcomp_int_mask_t;
 
 /** @brief LPCOMP shortcut masks. */
 typedef enum
 {
-    NRF_LPCOMP_SHORT_CROSS_STOP_MASK   = LPCOMP_SHORTS_CROSS_STOP_Msk,  /*!< Shortcut between CROSS event and STOP task. */
-    NRF_LPCOMP_SHORT_UP_STOP_MASK      = LPCOMP_SHORTS_UP_STOP_Msk,     /*!< Shortcut between UP event and STOP task. */
-    NRF_LPCOMP_SHORT_DOWN_STOP_MASK    = LPCOMP_SHORTS_DOWN_STOP_Msk,   /*!< Shortcut between DOWN event and STOP task. */
-    NRF_LPCOMP_SHORT_READY_STOP_MASK   = LPCOMP_SHORTS_READY_STOP_Msk,  /*!< Shortcut between READY event and STOP task. */
-    NRF_LPCOMP_SHORT_READY_SAMPLE_MASK = LPCOMP_SHORTS_READY_SAMPLE_Msk /*!< Shortcut between READY event and SAMPLE task. */
+    NRF_LPCOMP_SHORT_CROSS_STOP_MASK   = LPCOMP_SHORTS_CROSS_STOP_Msk,  ///< Shortcut between CROSS event and STOP task.
+    NRF_LPCOMP_SHORT_UP_STOP_MASK      = LPCOMP_SHORTS_UP_STOP_Msk,     ///< Shortcut between UP event and STOP task.
+    NRF_LPCOMP_SHORT_DOWN_STOP_MASK    = LPCOMP_SHORTS_DOWN_STOP_Msk,   ///< Shortcut between DOWN event and STOP task.
+    NRF_LPCOMP_SHORT_READY_STOP_MASK   = LPCOMP_SHORTS_READY_STOP_Msk,  ///< Shortcut between READY event and STOP task.
+    NRF_LPCOMP_SHORT_READY_SAMPLE_MASK = LPCOMP_SHORTS_READY_SAMPLE_Msk ///< Shortcut between READY event and SAMPLE task.
 } nrf_lpcomp_short_mask_t;
 
 /** @brief LPCOMP reference selection. */
 typedef enum
 {
 #if (LPCOMP_REFSEL_RESOLUTION == 8) || defined(__NRFX_DOXYGEN__)
-    NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_SupplyOneEighthPrescaling,      /**< Use supply with a 1/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_SupplyTwoEighthsPrescaling,     /**< Use supply with a 2/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_SupplyThreeEighthsPrescaling,   /**< Use supply with a 3/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_4_8   = LPCOMP_REFSEL_REFSEL_SupplyFourEighthsPrescaling,    /**< Use supply with a 4/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_5_8   = LPCOMP_REFSEL_REFSEL_SupplyFiveEighthsPrescaling,    /**< Use supply with a 5/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_6_8   = LPCOMP_REFSEL_REFSEL_SupplySixEighthsPrescaling,     /**< Use supply with a 6/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_7_8   = LPCOMP_REFSEL_REFSEL_SupplySevenEighthsPrescaling,   /**< Use supply with a 7/8 prescaler as reference. */
+    NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_SupplyOneEighthPrescaling,      ///< Use supply with a 1/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_SupplyTwoEighthsPrescaling,     ///< Use supply with a 2/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_SupplyThreeEighthsPrescaling,   ///< Use supply with a 3/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_4_8   = LPCOMP_REFSEL_REFSEL_SupplyFourEighthsPrescaling,    ///< Use supply with a 4/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_5_8   = LPCOMP_REFSEL_REFSEL_SupplyFiveEighthsPrescaling,    ///< Use supply with a 5/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_6_8   = LPCOMP_REFSEL_REFSEL_SupplySixEighthsPrescaling,     ///< Use supply with a 6/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_7_8   = LPCOMP_REFSEL_REFSEL_SupplySevenEighthsPrescaling,   ///< Use supply with a 7/8 prescaler as reference.
 #elif (LPCOMP_REFSEL_RESOLUTION == 16) || defined(__NRFX_DOXYGEN__)
-    NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_Ref1_8Vdd,                      /**< Use supply with a 1/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_Ref2_8Vdd,                      /**< Use supply with a 2/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_Ref3_8Vdd,                      /**< Use supply with a 3/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_4_8   = LPCOMP_REFSEL_REFSEL_Ref4_8Vdd,                      /**< Use supply with a 4/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_5_8   = LPCOMP_REFSEL_REFSEL_Ref5_8Vdd,                      /**< Use supply with a 5/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_6_8   = LPCOMP_REFSEL_REFSEL_Ref6_8Vdd,                      /**< Use supply with a 6/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_7_8   = LPCOMP_REFSEL_REFSEL_Ref7_8Vdd,                      /**< Use supply with a 7/8 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_1_16  = LPCOMP_REFSEL_REFSEL_Ref1_16Vdd,                     /**< Use supply with a 1/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_3_16  = LPCOMP_REFSEL_REFSEL_Ref3_16Vdd,                     /**< Use supply with a 3/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_5_16  = LPCOMP_REFSEL_REFSEL_Ref5_16Vdd,                     /**< Use supply with a 5/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_7_16  = LPCOMP_REFSEL_REFSEL_Ref7_16Vdd,                     /**< Use supply with a 7/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_9_16  = LPCOMP_REFSEL_REFSEL_Ref9_16Vdd,                     /**< Use supply with a 9/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_11_16 = LPCOMP_REFSEL_REFSEL_Ref11_16Vdd,                    /**< Use supply with a 11/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_13_16 = LPCOMP_REFSEL_REFSEL_Ref13_16Vdd,                    /**< Use supply with a 13/16 prescaler as reference. */
-    NRF_LPCOMP_REF_SUPPLY_15_16 = LPCOMP_REFSEL_REFSEL_Ref15_16Vdd,                    /**< Use supply with a 15/16 prescaler as reference. */
+    NRF_LPCOMP_REF_SUPPLY_1_8   = LPCOMP_REFSEL_REFSEL_Ref1_8Vdd,                      ///< Use supply with a 1/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_2_8   = LPCOMP_REFSEL_REFSEL_Ref2_8Vdd,                      ///< Use supply with a 2/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_3_8   = LPCOMP_REFSEL_REFSEL_Ref3_8Vdd,                      ///< Use supply with a 3/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_4_8   = LPCOMP_REFSEL_REFSEL_Ref4_8Vdd,                      ///< Use supply with a 4/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_5_8   = LPCOMP_REFSEL_REFSEL_Ref5_8Vdd,                      ///< Use supply with a 5/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_6_8   = LPCOMP_REFSEL_REFSEL_Ref6_8Vdd,                      ///< Use supply with a 6/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_7_8   = LPCOMP_REFSEL_REFSEL_Ref7_8Vdd,                      ///< Use supply with a 7/8 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_1_16  = LPCOMP_REFSEL_REFSEL_Ref1_16Vdd,                     ///< Use supply with a 1/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_3_16  = LPCOMP_REFSEL_REFSEL_Ref3_16Vdd,                     ///< Use supply with a 3/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_5_16  = LPCOMP_REFSEL_REFSEL_Ref5_16Vdd,                     ///< Use supply with a 5/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_7_16  = LPCOMP_REFSEL_REFSEL_Ref7_16Vdd,                     ///< Use supply with a 7/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_9_16  = LPCOMP_REFSEL_REFSEL_Ref9_16Vdd,                     ///< Use supply with a 9/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_11_16 = LPCOMP_REFSEL_REFSEL_Ref11_16Vdd,                    ///< Use supply with a 11/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_13_16 = LPCOMP_REFSEL_REFSEL_Ref13_16Vdd,                    ///< Use supply with a 13/16 prescaler as reference.
+    NRF_LPCOMP_REF_SUPPLY_15_16 = LPCOMP_REFSEL_REFSEL_Ref15_16Vdd,                    ///< Use supply with a 15/16 prescaler as reference.
 #endif
 #if !NRF_LPCOMP_HAS_AIN_AS_PIN
     NRF_LPCOMP_REF_EXT_REF0     = LPCOMP_REFSEL_REFSEL_ARef |
-                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16), /**< External reference 0. */
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16), ///< External reference 0.
     NRF_LPCOMP_REF_EXT_REF1     = LPCOMP_REFSEL_REFSEL_ARef |
-                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), /**< External reference 1. */
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), ///< External reference 1.
 #endif
 } nrf_lpcomp_ref_t;
 
@@ -101,23 +101,23 @@ typedef uint32_t nrf_lpcomp_input_t;
 #else
 typedef enum
 {
-    NRF_LPCOMP_INPUT_0 = LPCOMP_PSEL_PSEL_AnalogInput0, /**< Input 0. */
-    NRF_LPCOMP_INPUT_1 = LPCOMP_PSEL_PSEL_AnalogInput1, /**< Input 1. */
-    NRF_LPCOMP_INPUT_2 = LPCOMP_PSEL_PSEL_AnalogInput2, /**< Input 2. */
-    NRF_LPCOMP_INPUT_3 = LPCOMP_PSEL_PSEL_AnalogInput3, /**< Input 3. */
-    NRF_LPCOMP_INPUT_4 = LPCOMP_PSEL_PSEL_AnalogInput4, /**< Input 4. */
-    NRF_LPCOMP_INPUT_5 = LPCOMP_PSEL_PSEL_AnalogInput5, /**< Input 5. */
-    NRF_LPCOMP_INPUT_6 = LPCOMP_PSEL_PSEL_AnalogInput6, /**< Input 6. */
-    NRF_LPCOMP_INPUT_7 = LPCOMP_PSEL_PSEL_AnalogInput7  /**< Input 7. */
+    NRF_LPCOMP_INPUT_0 = LPCOMP_PSEL_PSEL_AnalogInput0, ///< Input 0.
+    NRF_LPCOMP_INPUT_1 = LPCOMP_PSEL_PSEL_AnalogInput1, ///< Input 1.
+    NRF_LPCOMP_INPUT_2 = LPCOMP_PSEL_PSEL_AnalogInput2, ///< Input 2.
+    NRF_LPCOMP_INPUT_3 = LPCOMP_PSEL_PSEL_AnalogInput3, ///< Input 3.
+    NRF_LPCOMP_INPUT_4 = LPCOMP_PSEL_PSEL_AnalogInput4, ///< Input 4.
+    NRF_LPCOMP_INPUT_5 = LPCOMP_PSEL_PSEL_AnalogInput5, ///< Input 5.
+    NRF_LPCOMP_INPUT_6 = LPCOMP_PSEL_PSEL_AnalogInput6, ///< Input 6.
+    NRF_LPCOMP_INPUT_7 = LPCOMP_PSEL_PSEL_AnalogInput7  ///< Input 7.
 } nrf_lpcomp_input_t;
 #endif
 
 /** @brief LPCOMP detection type selection. */
 typedef enum
 {
-    NRF_LPCOMP_DETECT_CROSS = LPCOMP_ANADETECT_ANADETECT_Cross, /**< Generate ANADETEC on crossing, both upwards and downwards crossing. */
-    NRF_LPCOMP_DETECT_UP    = LPCOMP_ANADETECT_ANADETECT_Up,    /**< Generate ANADETEC on upwards crossing only. */
-    NRF_LPCOMP_DETECT_DOWN  = LPCOMP_ANADETECT_ANADETECT_Down   /**< Generate ANADETEC on downwards crossing only. */
+    NRF_LPCOMP_DETECT_CROSS = LPCOMP_ANADETECT_ANADETECT_Cross, ///< Generate ANADETEC on crossing, both upwards and downwards crossing.
+    NRF_LPCOMP_DETECT_UP    = LPCOMP_ANADETECT_ANADETECT_Up,    ///< Generate ANADETEC on upwards crossing only.
+    NRF_LPCOMP_DETECT_DOWN  = LPCOMP_ANADETECT_ANADETECT_Down   ///< Generate ANADETEC on downwards crossing only.
 } nrf_lpcomp_detect_t;
 
 #if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
@@ -125,14 +125,14 @@ typedef enum
 typedef enum
 {
 #ifdef LPCOMP_HYST_HYST_NoHyst
-    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_NoHyst,   /**< Comparator hysteresis disabled. */
+    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_NoHyst,   ///< Comparator hysteresis disabled.
 #else
-    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_Disabled, /**< Comparator hysteresis disabled. */
+    NRF_LPCOMP_HYST_NOHYST  = LPCOMP_HYST_HYST_Disabled, ///< Comparator hysteresis disabled.
 #endif
 #ifdef LPCOMP_HYST_HYST_Hyst50mV
-    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Hyst50mV  /**< Comparator hysteresis enabled (typically 50 mV). */
+    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Hyst50mV  ///< Comparator hysteresis enabled (typically 50 mV).
 #else
-    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Enabled   /**< Comparator hysteresis enabled (typically 50 mV). */
+    NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Enabled   ///< Comparator hysteresis enabled (typically 50 mV).
 #endif
 }nrf_lpcomp_hysteresis_t;
 #endif // LPCOMP_FEATURE_HYST_PRESENT
@@ -140,10 +140,10 @@ typedef enum
 /** @brief LPCOMP configuration. */
 typedef struct
 {
-    nrf_lpcomp_ref_t        reference; /**< LPCOMP reference. */
-    nrf_lpcomp_detect_t     detection; /**< LPCOMP detection type. */
+    nrf_lpcomp_ref_t        reference; ///< LPCOMP reference.
+    nrf_lpcomp_detect_t     detection; ///< LPCOMP detection type.
 #if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
-    nrf_lpcomp_hysteresis_t hyst;      /**< LPCOMP hysteresis. */
+    nrf_lpcomp_hysteresis_t hyst;      ///< LPCOMP hysteresis.
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 } nrf_lpcomp_config_t;
 
@@ -319,18 +319,14 @@ NRF_STATIC_INLINE void nrf_lpcomp_configure(NRF_LPCOMP_Type *           p_reg,
 NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_input_t input);
 
 /**
- * @brief Function for enabling the Low Power Comparator.
- *
- * This function enables LPCOMP.
+ * @brief Function for enabling the LPCOMP.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_lpcomp_enable(NRF_LPCOMP_Type * p_reg);
 
 /**
- * @brief Function for disabling the Low Power Comparator.
- *
- * This function disables LPCOMP.
+ * @brief Function for disabling the LPCOMP.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
@@ -341,7 +337,7 @@ NRF_STATIC_INLINE void nrf_lpcomp_disable(NRF_LPCOMP_Type * p_reg);
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return The last compare result. If 0 then VIN+ < VIN-, if 1 then the opposite.
+ * @return The last compare result. If 0, then VIN+ < VIN-. If 1, then VIN- < VIN+.
  */
 NRF_STATIC_INLINE uint32_t nrf_lpcomp_result_get(NRF_LPCOMP_Type const * p_reg);
 
