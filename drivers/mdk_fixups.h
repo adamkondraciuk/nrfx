@@ -38,6 +38,48 @@
         #define NRF_DOMAIN NRF_DOMAIN_WIFICORE
     #endif
 
+    #if defined(NRF_SECURE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_SECURE
+    #elif defined(NRF_APPLICATION)
+        #define NRF_PROCESSOR NRF_PROCESSOR_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_RADIOCORE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_PROCESSOR NRF_PROCESSOR_CELLCORE
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_PROCESSOR NRF_PROCESSOR_SYSCTRL
+    #elif defined(NRF_FLPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_FLPR
+    #elif defined(NRF_PPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_PPR
+    #elif defined(NRF_LMAC)
+        #define NRF_PROCESSOR NRF_PROCESSOR_WIFILMAC
+    #elif defined(NRF_UMAC)
+        #define NRF_PROCESSOR NRF_PROCESSOR_WIFIUMAC
+    #elif defined(NRF_BBPR)
+        #define NRF_PROCESSOR NRF_PROCESSOR_BBPR
+    #endif
+
+    #if defined(NRF_SECURE)
+        #define NRF_OWNER NRF_OWNER_SECURE
+    #elif defined(NRF_APPLICATION)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #elif defined(NRF_RADIOCORE)
+        #define NRF_OWNER NRF_OWNER_RADIOCORE
+    #elif defined(NRF_CELLCORE)
+        #define NRF_OWNER NRF_OWNER_CELL
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_OWNER NRF_OWNER_SYSCTRL
+    #elif defined(NRF_FLPR) && !defined(NRF_OWNER)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #elif defined(NRF_PPR) && !defined(NRF_OWNER)
+        #define NRF_OWNER NRF_OWNER_APPLICATION
+    #elif defined(NRF_LMAC)
+        #define NRF_OWNER NRF_OWNER_WIFICORE
+    #elif defined(NRF_UMAC)
+        #define NRF_OWNER NRF_OWNER_WIFICORE
+    #endif
+
     /* TODO: MDK-2221 */
     #define NRF_PROCESSOR_COUNT (NRF_PROCESSOR_FLPR + 1)
 
