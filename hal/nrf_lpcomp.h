@@ -87,13 +87,22 @@ typedef enum
     NRF_LPCOMP_REF_SUPPLY_13_16 = LPCOMP_REFSEL_REFSEL_Ref13_16Vdd,                    ///< Use supply with a 13/16 prescaler as reference.
     NRF_LPCOMP_REF_SUPPLY_15_16 = LPCOMP_REFSEL_REFSEL_Ref15_16Vdd,                    ///< Use supply with a 15/16 prescaler as reference.
 #endif
+    NRF_LPCOMP_REF_EXT_REF      = LPCOMP_REFSEL_REFSEL_ARef,                           ///< Use external analog reference.
 #if !NRF_LPCOMP_HAS_AIN_AS_PIN
     NRF_LPCOMP_REF_EXT_REF0     = LPCOMP_REFSEL_REFSEL_ARef |
-                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16), ///< External reference 0.
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0 << 16), ///< @deprecated Use @ref nrf_lpcomp_ext_ref_t instead.
     NRF_LPCOMP_REF_EXT_REF1     = LPCOMP_REFSEL_REFSEL_ARef |
-                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), ///< External reference 1.
+                                  (LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1 << 16), ///< @deprecated Use @ref nrf_lpcomp_ext_ref_t instead.
+#endif
 #endif
 } nrf_lpcomp_ref_t;
+
+/** @brief LPCOMP external reference selection. */
+typedef enum
+{
+    NRF_LPCOMP_EXT_REF_REF0 = LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference0, ///< External reference 0.
+    NRF_LPCOMP_EXT_REF_REF1 = LPCOMP_EXTREFSEL_EXTREFSEL_AnalogReference1, ///< External reference 1.
+} nrf_lpcomp_ext_ref_t;
 
 /** @brief LPCOMP input selection. */
 #if NRF_LPCOMP_HAS_AIN_AS_PIN
@@ -134,7 +143,7 @@ typedef enum
 #else
     NRF_LPCOMP_HYST_ENABLED = LPCOMP_HYST_HYST_Enabled   ///< Comparator hysteresis enabled (typically 50 mV).
 #endif
-}nrf_lpcomp_hysteresis_t;
+} nrf_lpcomp_hyst_t;
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 
 /** @brief LPCOMP configuration. */
@@ -143,7 +152,7 @@ typedef struct
     nrf_lpcomp_ref_t        reference; ///< LPCOMP reference.
     nrf_lpcomp_detect_t     detection; ///< LPCOMP detection type.
 #if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
-    nrf_lpcomp_hysteresis_t hyst;      ///< LPCOMP hysteresis.
+    nrf_lpcomp_hyst_t       hyst;      ///< LPCOMP hysteresis.
 #endif // LPCOMP_FEATURE_HYST_PRESENT
 } nrf_lpcomp_config_t;
 
@@ -302,6 +311,8 @@ NRF_STATIC_INLINE void nrf_lpcomp_publish_clear(NRF_LPCOMP_Type *  p_reg,
  * This function powers on LPCOMP and configures it. LPCOMP is in DISABLE state after configuration,
  * so it must be enabled before using it. All shorts are inactive, events are cleared, and LPCOMP is stopped.
  *
+ * @deprecated Use the dedicated functions instead.
+ *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
  * @param[in] p_config Configuration.
  */
@@ -309,14 +320,51 @@ NRF_STATIC_INLINE void nrf_lpcomp_configure(NRF_LPCOMP_Type *           p_reg,
                                             nrf_lpcomp_config_t const * p_config);
 
 /**
- * @brief Function for selecting the LPCOMP input.
+ * @brief Function for setting the reference source.
  *
- * This function selects the active input of LPCOMP.
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] reference LPCOMP reference selection.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_ref_set(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_ref_t reference);
+
+/**
+ * @brief Function for setting the external analog reference source.
+ *
+ * To use external reference first call @ref nrf_lpcomp_ref_set with NRF_LPCOMP_REF_EXT_REF argument.
+ *
+ * @param[in] p_reg   Pointer to the structure of registers of the peripheral.
+ * @param[in] ext_ref LPCOMP external analog reference selection.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_ext_ref_set(NRF_LPCOMP_Type *    p_reg,
+                                              nrf_lpcomp_ext_ref_t ext_ref);
+
+/**
+ * @brief Function for selecting an active LPCOMP input.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] input Input to be selected.
  */
 NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_input_t input);
+
+/**
+ * @brief Function for setting the detection type.
+ *
+ * @param[in] p_reg     Pointer to the structure of registers of the peripheral.
+ * @param[in] detection LPCOMP detection type.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_detection_set(NRF_LPCOMP_Type *   p_reg,
+                                                nrf_lpcomp_detect_t detection);
+
+#if defined(LPCOMP_FEATURE_HYST_PRESENT) || defined(__NRFX_DOXYGEN__)
+/**
+ * @brief Function for setting the hysteresis.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] hyst  LPCOMP comparator hysteresis.
+ */
+NRF_STATIC_INLINE void nrf_lpcomp_hysteresis_set(NRF_LPCOMP_Type * p_reg,
+                                                 nrf_lpcomp_hyst_t hyst);
+#endif
 
 /**
  * @brief Function for enabling the LPCOMP.
@@ -331,6 +379,16 @@ NRF_STATIC_INLINE void nrf_lpcomp_enable(NRF_LPCOMP_Type * p_reg);
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_lpcomp_disable(NRF_LPCOMP_Type * p_reg);
+
+/**
+ * @brief Function for checking if the LPCOMP peripheral is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @retval true  The LPCOMP peripheral is enabled.
+ * @retval false The LPCOMP peripheral is not enabled.
+ */
+NRF_STATIC_INLINE bool nrf_lpcomp_enable_check(NRF_LPCOMP_Type * p_reg);
 
 /**
  * @brief Function for getting the last LPCOMP compare result.
@@ -455,6 +513,18 @@ NRF_STATIC_INLINE void nrf_lpcomp_configure(NRF_LPCOMP_Type *           p_reg,
 #endif //LPCOMP_FEATURE_HYST_PRESENT
 }
 
+NRF_STATIC_INLINE void nrf_lpcomp_ref_set(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_ref_t reference)
+{
+    p_reg->REFSEL = (reference << LPCOMP_REFSEL_REFSEL_Pos) & LPCOMP_REFSEL_REFSEL_Msk;
+}
+
+NRF_STATIC_INLINE void nrf_lpcomp_ext_ref_set(NRF_LPCOMP_Type *    p_reg,
+                                              nrf_lpcomp_ext_ref_t ext_ref)
+{
+    p_reg->EXTREFSEL = (ext_ref << LPCOMP_EXTREFSEL_EXTREFSEL_Pos) &
+                       LPCOMP_EXTREFSEL_EXTREFSEL_Msk;
+}
+
 NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpcomp_input_t input)
 {
 #if NRF_LPCOMP_HAS_AIN_AS_PIN
@@ -466,6 +536,21 @@ NRF_STATIC_INLINE void nrf_lpcomp_input_select(NRF_LPCOMP_Type * p_reg, nrf_lpco
 #endif
 }
 
+NRF_STATIC_INLINE void nrf_lpcomp_detection_set(NRF_LPCOMP_Type *   p_reg,
+                                                nrf_lpcomp_detect_t detection)
+{
+    p_reg->ANADETECT = (detection << LPCOMP_ANADETECT_ANADETECT_Pos) &
+                       LPCOMP_ANADETECT_ANADETECT_Msk;
+}
+
+#if defined(LPCOMP_FEATURE_HYST_PRESENT)
+NRF_STATIC_INLINE void nrf_lpcomp_hysteresis_set(NRF_LPCOMP_Type * p_reg,
+                                                 nrf_lpcomp_hyst_t hyst)
+{
+    p_reg->HYST = ((hyst) << LPCOMP_HYST_HYST_Pos) & LPCOMP_HYST_HYST_Msk;
+}
+#endif
+
 NRF_STATIC_INLINE void nrf_lpcomp_enable(NRF_LPCOMP_Type * p_reg)
 {
     p_reg->ENABLE = LPCOMP_ENABLE_ENABLE_Enabled << LPCOMP_ENABLE_ENABLE_Pos;
@@ -474,6 +559,11 @@ NRF_STATIC_INLINE void nrf_lpcomp_enable(NRF_LPCOMP_Type * p_reg)
 NRF_STATIC_INLINE void nrf_lpcomp_disable(NRF_LPCOMP_Type * p_reg)
 {
     p_reg->ENABLE = LPCOMP_ENABLE_ENABLE_Disabled << LPCOMP_ENABLE_ENABLE_Pos;
+}
+
+NRF_STATIC_INLINE bool nrf_lpcomp_enable_check(NRF_LPCOMP_Type * p_reg)
+{
+    return ((p_reg->ENABLE) & LPCOMP_ENABLE_ENABLE_Enabled) >> LPCOMP_ENABLE_ENABLE_Pos;
 }
 
 NRF_STATIC_INLINE uint32_t nrf_lpcomp_result_get(NRF_LPCOMP_Type const * p_reg)
