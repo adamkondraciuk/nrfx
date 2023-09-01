@@ -105,7 +105,7 @@ typedef enum
 typedef uint32_t nrf_saadc_input_t;
 
 /** @brief Symbol specifying disconnected analog input. */
-#define NRF_SAADC_INPUT_DISABLED ((nrf_saadc_input_t)0)
+#define NRF_SAADC_INPUT_DISABLED ((nrf_saadc_input_t)UINT32_MAX)
 #else
 /** @brief Input selection for the analog-to-digital converter. */
 typedef enum
@@ -848,12 +848,16 @@ NRF_STATIC_INLINE void nrf_saadc_channel_input_set(NRF_SAADC_Type *  p_reg,
                                                    nrf_saadc_input_t pseln)
 {
 #if NRF_SAADC_HAS_AIN_AS_PIN
-    p_reg->CH[channel].PSELN = (NRF_PIN_NUMBER_TO_PIN(pseln) << SAADC_CH_PSELP_PIN_Pos)
-                               | (NRF_PIN_NUMBER_TO_PORT(pseln) << SAADC_CH_PSELP_PORT_Pos)
-                               | (SAADC_CH_PSELP_CONNECT_AnalogInput << SAADC_CH_PSELP_CONNECT_Pos);
-    p_reg->CH[channel].PSELP = (NRF_PIN_NUMBER_TO_PIN(pselp) << SAADC_CH_PSELP_PIN_Pos)
+    p_reg->CH[channel].PSELN = (pseln != NRF_SAADC_INPUT_DISABLED) ? 
+                                ((NRF_PIN_NUMBER_TO_PIN(pseln) << SAADC_CH_PSELN_PIN_Pos)
+                               | (NRF_PIN_NUMBER_TO_PORT(pseln) << SAADC_CH_PSELN_PORT_Pos)
+                               | (SAADC_CH_PSELN_CONNECT_AnalogInput << SAADC_CH_PSELN_CONNECT_Pos)
+                                ) : 0;
+    p_reg->CH[channel].PSELP = (pselp != NRF_SAADC_INPUT_DISABLED) ? 
+                                ((NRF_PIN_NUMBER_TO_PIN(pselp) << SAADC_CH_PSELP_PIN_Pos)
                                | (NRF_PIN_NUMBER_TO_PORT(pselp) << SAADC_CH_PSELP_PORT_Pos)
-                               | (SAADC_CH_PSELP_CONNECT_AnalogInput << SAADC_CH_PSELP_CONNECT_Pos);
+                               | (SAADC_CH_PSELP_CONNECT_AnalogInput << SAADC_CH_PSELP_CONNECT_Pos)
+                                ) : 0;
 #else
     p_reg->CH[channel].PSELN = pseln;
     p_reg->CH[channel].PSELP = pselp;
@@ -865,9 +869,11 @@ NRF_STATIC_INLINE void nrf_saadc_channel_pos_input_set(NRF_SAADC_Type *  p_reg,
                                                        nrf_saadc_input_t pselp)
 {
 #if NRF_SAADC_HAS_AIN_AS_PIN
-    p_reg->CH[channel].PSELP = (NRF_PIN_NUMBER_TO_PIN(pselp) << SAADC_CH_PSELP_PIN_Pos)
+    p_reg->CH[channel].PSELP = (pselp != NRF_SAADC_INPUT_DISABLED) ? 
+                                ((NRF_PIN_NUMBER_TO_PIN(pselp) << SAADC_CH_PSELP_PIN_Pos)
                                | (NRF_PIN_NUMBER_TO_PORT(pselp) << SAADC_CH_PSELP_PORT_Pos)
-                               | (SAADC_CH_PSELP_CONNECT_AnalogInput << SAADC_CH_PSELP_CONNECT_Pos);
+                               | (SAADC_CH_PSELP_CONNECT_AnalogInput << SAADC_CH_PSELP_CONNECT_Pos)
+                                ) : 0;
 #else
     p_reg->CH[channel].PSELP = pselp;
 #endif
