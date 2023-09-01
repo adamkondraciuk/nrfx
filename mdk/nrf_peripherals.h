@@ -61,7 +61,7 @@ POSSIBILITY OF SUCH DAMAGE.
     #include "nrf5340_network_peripherals.h"
 
 #elif defined (NRF54L15_ENGA_XXAA)
-    #include "nrf54l15_peripherals.h"
+    #include "nrf54l15_enga_peripherals.h"
 
 #elif defined (NRF54H20_XXAA)
     #include "nrf54h20_peripherals.h"

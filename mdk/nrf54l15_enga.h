@@ -46,11 +46,11 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     extern "C" {
 #endif
 
-#include "nrf54l15_types.h"
+#include "nrf54l15_enga_types.h"
 
-#include "nrf54l15_global.h"
-#include "nrf54l15_application.h"
-#include "nrf54l15_flpr.h"
+#include "nrf54l15_enga_global.h"
+#include "nrf54l15_enga_application.h"
+#include "nrf54l15_enga_flpr.h"
 
 #ifdef __cplusplus
 }

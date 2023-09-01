@@ -859,10 +859,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define VPR00_VEVIF_NEVENTS_MAX 31                   /*!< VEVIF events: 0..31                                                  */
 #define VPR00_DEBUGGER_OFFSET 1024                   /*!< Debugger interface register offset: 0x5004C400                       */
 
-/*GPIO high-speed pad control*/
-#define GPIOHSPADCTRL_PRESENT 1
-#define GPIOHSPADCTRL_COUNT 1
-
 /*GPIO Port*/
 #define GPIO_PRESENT 1
 #define GPIO_COUNT 3
@@ -911,6 +907,28 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define P0_WIFI_CORE_PRESENT 0                       /*!< (unspecified)                                                        */
 #define P0_RETAIN_PER_PIN 0                          /*!< (unspecified)                                                        */
 #define P0_CLOCKPIN 0                                /*!< (unspecified)                                                        */
+
+/*GPIO Internal*/
+#define GPIOINTERNAL_PRESENT 1
+#define GPIOINTERNAL_COUNT 3
+
+#define GPIOINTERNALP2_TURNOFFAUTOCLOCKSOURCEREQ 0   /*!< (unspecified)                                                        */
+#define GPIOINTERNALP2_POWERFORCINGPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP2_DOFORCEPOWERPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP2_PENALTYBITS_MIN 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP2_PENALTYBITS_MAX 1             /*!< (unspecified)                                                        */
+
+#define GPIOINTERNALP1_TURNOFFAUTOCLOCKSOURCEREQ 0   /*!< (unspecified)                                                        */
+#define GPIOINTERNALP1_POWERFORCINGPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP1_DOFORCEPOWERPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP1_PENALTYBITS_MIN 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP1_PENALTYBITS_MAX 1             /*!< (unspecified)                                                        */
+
+#define GPIOINTERNALP0_TURNOFFAUTOCLOCKSOURCEREQ 0   /*!< (unspecified)                                                        */
+#define GPIOINTERNALP0_POWERFORCINGPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP0_DOFORCEPOWERPRE 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP0_PENALTYBITS_MIN 0             /*!< (unspecified)                                                        */
+#define GPIOINTERNALP0_PENALTYBITS_MAX 1             /*!< (unspecified)                                                        */
 
 /*Control access port*/
 #define CTRLAPPERI_PRESENT 1
@@ -1367,6 +1385,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GRTC_CLKOUTREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELREG 1                             /*!< (unspecified)                                                        */
 #define GRTC_CLKSELLFLPRC 0                          /*!< (unspecified)                                                        */
+#define GRTC_CCADD_WRITE_ONLY 0                      /*!< (unspecified)                                                        */
 
 /*Comparator*/
 #define COMP_PRESENT 1

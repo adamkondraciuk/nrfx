@@ -47,9 +47,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 #if defined(NRF_APPLICATION)
-  #include "nrf54l15_application_peripherals.h"
+  #include "nrf54l15_enga_application_peripherals.h"
 #elif defined(NRF_FLPR)
-  #include "nrf54l15_flpr_peripherals.h"
+  #include "nrf54l15_enga_flpr_peripherals.h"
 #else
   #error No processor selected
 #endif

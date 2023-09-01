@@ -44,7 +44,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* MDK version */
 #define MDK_MAJOR_VERSION   8 
-#define MDK_MINOR_VERSION   56 
+#define MDK_MINOR_VERSION   57 
 #define MDK_MICRO_VERSION   0 
 
 
@@ -288,7 +288,7 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #elif defined (NRF54L15_ENGA_XXAA)
     #if !defined(EXCLUDE_HEADER)
-        #include "nrf54l15.h"
+        #include "nrf54l15_enga.h"
     #endif
 
 #elif defined (NRF9160_XXAA)

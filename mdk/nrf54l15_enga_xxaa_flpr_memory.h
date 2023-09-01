@@ -1,5 +1,4 @@
 /*
-
 Copyright (c) 2010 - 2023, Nordic Semiconductor ASA
 
 All rights reserved.
@@ -36,26 +35,42 @@ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
 HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
 LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
 OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
 
-*/
+#ifndef NRF_DEVICE_MEM_H_
+#define NRF_DEVICE_MEM_H_
 
-#ifndef NRF54L15_VERSION_H
-#define NRF54L15_VERSION_H
-
-#ifdef __cplusplus
-    extern "C" {
+#ifndef __DEFAULT_STACK_SIZE
+    #define __DEFAULT_STACK_SIZE 8192
+#endif
+#ifndef __DEFAULT_HEAP_SIZE
+    #define __DEFAULT_HEAP_SIZE 8192
 #endif
 
+/* Device memory Flash: */
+#define NRF_MEMORY_FLASH_BASE 0x00000000
+#define NRF_MEMORY_FLASH_SIZE 0x0017D000
 
-#define MDK_SOURCE_VERSION_MAJOR 0                   /*!< Major version of product specification.                              */
-#define MDK_SOURCE_VERSION_MINOR 5a                  /*!< Minor version of product specification.                              */
-#define MDK_SOURCE_VERSION_MICRO                     /*!< Micro version of product specification.                              */
+/* Device memory RAM: */
+#define NRF_MEMORY_RAM_BASE 0x20020000
+#define NRF_MEMORY_RAM_SIZE 0x00020000
 
-#define MDK_SOURCE_HASH Moonlight_OPS_v0.5A.1-5-g5660482 /*!< Git hash of product specification source.                        */
+/* Device memory PeripheralsAPBS: */
+#define NRF_MEMORY_PERIPHERALSAPBS_BASE 0x54000000
+#define NRF_MEMORY_PERIPHERALSAPBS_SIZE 0x00200000
+
+/* Device memory PeripheralsAPBNS: */
+#define NRF_MEMORY_PERIPHERALSAPBNS_BASE 0x44000000
+#define NRF_MEMORY_PERIPHERALSAPBNS_SIZE 0x00200000
+
+/* Device memory PeripheralsAHB: */
+#define NRF_MEMORY_PERIPHERALSAHB_BASE 0x54840000
+#define NRF_MEMORY_PERIPHERALSAHB_SIZE 0x00003000
+
+/* Device memory SystemSFR: */
+#define NRF_MEMORY_SYSTEMSFR_BASE 0xE0000000
+#define NRF_MEMORY_SYSTEMSFR_SIZE 0x00100000
 
 
-#ifdef __cplusplus
-}
+
 #endif
-#endif /* NRF54L15_VERSION_H */
-

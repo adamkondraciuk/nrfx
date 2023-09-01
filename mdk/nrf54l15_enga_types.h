@@ -64693,7 +64693,7 @@ typedef struct {
 /* UICR_BOOTCONF: Immutable boot region configuration. */
   #define UICR_BOOTCONF_ResetValue (0xFFFFFFFFUL)    /*!< Reset value of BOOTCONF register.                                    */
 
-/* READ @Bit 0 : Read access enable */
+/* READ @Bit 0 : Read access */
   #define UICR_BOOTCONF_READ_Pos (0UL)               /*!< Position of READ field.                                              */
   #define UICR_BOOTCONF_READ_Msk (0x1UL << UICR_BOOTCONF_READ_Pos) /*!< Bit mask of READ field.                                */
   #define UICR_BOOTCONF_READ_Min (0x0UL)             /*!< Min enumerator value of READ field.                                  */
@@ -64701,7 +64701,7 @@ typedef struct {
   #define UICR_BOOTCONF_READ_NotAllowed (0x0UL)      /*!< Reading from the region is not allowed                               */
   #define UICR_BOOTCONF_READ_Allowed (0x1UL)         /*!< Reading from the region is allowed                                   */
 
-/* WRITE @Bit 1 : Write access enable */
+/* WRITE @Bit 1 : Write access */
   #define UICR_BOOTCONF_WRITE_Pos (1UL)              /*!< Position of WRITE field.                                             */
   #define UICR_BOOTCONF_WRITE_Msk (0x1UL << UICR_BOOTCONF_WRITE_Pos) /*!< Bit mask of WRITE field.                             */
   #define UICR_BOOTCONF_WRITE_Min (0x0UL)            /*!< Min enumerator value of WRITE field.                                 */
@@ -64709,7 +64709,7 @@ typedef struct {
   #define UICR_BOOTCONF_WRITE_NotAllowed (0x0UL)     /*!< Writing to the region is not allowed                                 */
   #define UICR_BOOTCONF_WRITE_Allowed (0x1UL)        /*!< Writing to the region is allowed                                     */
 
-/* EXECUTE @Bit 2 : Execute access enable */
+/* EXECUTE @Bit 2 : Execute access */
   #define UICR_BOOTCONF_EXECUTE_Pos (2UL)            /*!< Position of EXECUTE field.                                           */
   #define UICR_BOOTCONF_EXECUTE_Msk (0x1UL << UICR_BOOTCONF_EXECUTE_Pos) /*!< Bit mask of EXECUTE field.                       */
   #define UICR_BOOTCONF_EXECUTE_Min (0x0UL)          /*!< Min enumerator value of EXECUTE field.                               */
@@ -64717,13 +64717,13 @@ typedef struct {
   #define UICR_BOOTCONF_EXECUTE_NotAllowed (0x0UL)   /*!< Executing code from the region is allowed                            */
   #define UICR_BOOTCONF_EXECUTE_Allowed (0x1UL)      /*!< Executing code from the region is not allowed                        */
 
-/* SECURE @Bit 3 : Secure access enable */
+/* SECURE @Bit 3 : Secure access */
   #define UICR_BOOTCONF_SECURE_Pos (3UL)             /*!< Position of SECURE field.                                            */
   #define UICR_BOOTCONF_SECURE_Msk (0x1UL << UICR_BOOTCONF_SECURE_Pos) /*!< Bit mask of SECURE field.                          */
   #define UICR_BOOTCONF_SECURE_Min (0x0UL)           /*!< Min enumerator value of SECURE field.                                */
   #define UICR_BOOTCONF_SECURE_Max (0x1UL)           /*!< Max enumerator value of SECURE field.                                */
-  #define UICR_BOOTCONF_SECURE_NotAllowed (0x0UL)    /*!< Secure access to the region is allowed                               */
-  #define UICR_BOOTCONF_SECURE_Allowed (0x1UL)       /*!< Secure access to the region is not allowed                           */
+  #define UICR_BOOTCONF_SECURE_NonSecure (0x0UL)     /*!< Both secure and non-secure access to region is allowed               */
+  #define UICR_BOOTCONF_SECURE_Secure (0x1UL)        /*!< Only secure access to region is allowed                              */
 
 /* OWNER @Bits 4..7 : Owner ID configuration */
   #define UICR_BOOTCONF_OWNER_Pos (4UL)              /*!< Position of OWNER field.                                             */
