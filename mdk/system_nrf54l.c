@@ -56,18 +56,22 @@ void SystemCoreClockUpdate(void)
 void SystemInit(void)
 {
     /* TEMPORARY: Apply trims. */
-    *((uint32_t *)0x50120550) = 0x007FF3B8;
-    *((uint32_t *)0x50120644) = 0x3118CCC0;
-    *((uint32_t *)0x50120640) = 0x000FCD8C;
-    *((uint32_t *)0x50120824) = 0x00000FFF;
-    *((uint32_t *)0x50120A08) = 0x000000AA;
-    *((uint32_t *)0x500CF900) = 0x00001101;
-    *((uint32_t *)0x50120908) = 0x00000005;
-    *((uint32_t *)0x50106624) = 0x00040008;
-    *((uint32_t *)0x5008A844) = 0x0000041A;
-    *((uint32_t *)0x5008A74C) = 0x70000001;
-    *((uint32_t *)0x5008A848) = 0x00000168;
-    *((uint32_t *)0x5008A8A0) = 0x00580F0D;
+    if ((((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) != 0xFFFFFFFF) || 
+        (((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) != 0))
+    {
+        *((uint32_t *)0x50120550) = 0x007FF3B8;
+        *((uint32_t *)0x50120644) = 0x3118CCC0;
+        *((uint32_t *)0x50120640) = 0x000FCD8C;
+        *((uint32_t *)0x50120824) = 0x00000FFF;
+        *((uint32_t *)0x50120A08) = 0x000000AA;
+        *((uint32_t *)0x500CF900) = 0x00001101;
+        *((uint32_t *)0x50120908) = 0x00000005;
+        *((uint32_t *)0x50106624) = 0x00040008;
+        *((uint32_t *)0x5008A844) = 0x0000041A;
+        *((uint32_t *)0x5008A74C) = 0x70000001;
+        *((uint32_t *)0x5008A848) = 0x00000168;
+        *((uint32_t *)0x5008A8A0) = 0x00580F0D;
+    }
 
     #ifdef __CORTEX_M
         #ifndef NRF_SKIP_CLOCK_CONFIGURATION
