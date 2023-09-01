@@ -26,11 +26,21 @@ typedef void (* nrfx_lpcomp_event_handler_t)(nrf_lpcomp_event_t event);
 /** @brief LPCOMP configuration. */
 typedef struct
 {
-    nrf_lpcomp_config_t config;             ///< Peripheral configuration.
-    nrf_lpcomp_input_t  input;              ///< Input to be monitored.
-    uint8_t             interrupt_priority; ///< LPCOMP interrupt priority.
+#if NRFX_API_VER_AT_LEAST(3, 2, 0) || defined(__NRFX_DOXYGEN__)
+    nrf_lpcomp_ref_t        reference;          ///< Reference selection.
+    nrf_lpcomp_ext_ref_t    ext_ref;            ///< External analog reference selection.
+    nrf_lpcomp_detect_t     detection;          ///< Detection type.
+#if NRF_LPCOMP_HAS_HYST
+    nrf_lpcomp_hyst_t       hyst;               ///< Comparator hysteresis.
+#endif
+#else
+    nrf_lpcomp_config_t     config;             ///< Peripheral configuration.
+#endif
+    nrf_lpcomp_input_t      input;              ///< Input to be monitored.
+    uint8_t                 interrupt_priority; ///< LPCOMP interrupt priority.
 } nrfx_lpcomp_config_t;
 
+#if NRFX_API_VER_AT_LEAST(3, 2, 0) || defined(__NRFX_DOXYGEN__)
 /**
  * @brief LPCOMP driver default configuration.
  *
@@ -41,6 +51,15 @@ typedef struct
  *
  * @param[in] _input Comparator input pin.
  */
+#define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                                               \
+{                                                                                        \
+    .reference = NRF_LPCOMP_REF_SUPPLY_4_8,                                              \
+    .detection = NRF_LPCOMP_DETECT_CROSS,                                                \
+    NRFX_COND_CODE_1(LPCOMP_FEATURE_HYST_PRESENT, (.hyst = NRF_LPCOMP_HYST_NOHYST,), ()) \
+    .input = (nrf_lpcomp_input_t)_input,                                                 \
+    .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY                        \
+}
+#else
 #define NRFX_LPCOMP_DEFAULT_CONFIG(_input)                                                   \
 {                                                                                            \
     .config =                                                                                \
@@ -52,6 +71,7 @@ typedef struct
     .input = (nrf_lpcomp_input_t)_input,                                                     \
     .interrupt_priority = NRFX_LPCOMP_DEFAULT_CONFIG_IRQ_PRIORITY                            \
 }
+#endif
 
 /**
  * @brief Function for initializing the LPCOMP driver.
