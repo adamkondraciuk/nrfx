@@ -246,6 +246,43 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------------------------------------*/
+/* Start of REGULATORS Extended section                                                           */
+/*------------------------------------------------------------------------------------------------*/
+
+#if defined(REGULATORS_TRIM_ResetValue)
+#define NRF_REGULATORS_ELV_MODE_ALL_MASK (REGULATORS_TRIM_ELVPDMAIN_Msk   | \
+                                          REGULATORS_TRIM_ELVPDLP_Msk     | \
+                                          REGULATORS_TRIM_ELVPDPERIPH_Msk | \
+                                          REGULATORS_TRIM_ELVPDMCU_Msk    | \
+                                          REGULATORS_TRIM_ELVPDRADIO_Msk  | \
+                                          REGULATORS_TRIM_ELVPDCRACEN_Msk | \
+                                          REGULATORS_TRIM_ELVLFCLK_Msk    | \
+                                          REGULATORS_TRIM_ELVXOSC32K_Msk  | \
+                                          REGULATORS_TRIM_ELVTAMPMON_Msk  | \
+                                          REGULATORS_TRIM_ELVGRTCLFXO_Msk | \
+                                          REGULATORS_TRIM_ELVDEBUGGER_Msk)
+
+#define NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT                                    \
+    NRFX_COND_CODE_1(NRF_REGULATORS_HAS_TRIM,                                     \
+        (NRF_REGULATORS_ELV_ELVPDMAIN_MASK   = REGULATORS_TRIM_ELVPDMAIN_Msk,     \
+         NRF_REGULATORS_ELV_ELVPDLP_MASK     = REGULATORS_TRIM_ELVPDLP_Msk,       \
+         NRF_REGULATORS_ELV_ELVPDPERIPH_MASK = REGULATORS_TRIM_ELVPDPERIPH_Msk,   \
+         NRF_REGULATORS_ELV_ELVPDMCU_MASK    = REGULATORS_TRIM_ELVPDMCU_Msk,      \
+         NRF_REGULATORS_ELV_ELVPDRADIO_MASK  = REGULATORS_TRIM_ELVPDRADIO_Msk,    \
+         NRF_REGULATORS_ELV_ELVPDCRACEN_MASK = REGULATORS_TRIM_ELVPDCRACEN_Msk,   \
+         NRF_REGULATORS_ELV_ELVLFCLK_MASK    = REGULATORS_TRIM_ELVLFCLK_Msk,      \
+         NRF_REGULATORS_ELV_ELVXOSC32K_MASK  = REGULATORS_TRIM_ELVXOSC32K_Msk,    \
+         NRF_REGULATORS_ELV_ELVTAMPMON_MASK  = REGULATORS_TRIM_ELVTAMPMON_Msk,    \
+         NRF_REGULATORS_ELV_ELVGRTCLFXO_MASK = REGULATORS_TRIM_ELVGRTCLFXO_Msk,   \
+         NRF_REGULATORS_ELV_ELVDEBUGGER_MASK = REGULATORS_TRIM_ELVDEBUGGER_Msk,), \
+   ())
+#endif
+
+/*------------------------------------------------------------------------------------------------*/
+/* End of REGULATORS Extended section                                                             */
+/*------------------------------------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------------------------------------*/
 /* Start of Core-dependent Extended section                                                       */
 /*------------------------------------------------------------------------------------------------*/
 

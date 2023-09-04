@@ -65,6 +65,13 @@ extern "C" {
 #define NRF_REGULATORS_HAS_POF_STATUS 0
 #endif
 
+#if defined(REGULATORS_TRIM_ResetValue) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether TRIM register is present. */
+#define NRF_REGULATORS_HAS_TRIM 1
+#else
+#define NRF_REGULATORS_HAS_TRIM 0
+#endif
+
 #if defined(REGULATORS_MAINREGSTATUS_VREGH_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether main supply status is present. */
 #define NRF_REGULATORS_HAS_MAIN_STATUS 1
@@ -139,6 +146,14 @@ typedef enum
     NRF_REGULATORS_POF_THR_VDDH_4V2 = REGULATORS_POFCON_THRESHOLDVDDH_V42, ///< Set threshold to 4.2 V.
 } nrf_regulators_pof_thr_vddh_t;
 #endif
+
+#if NRF_REGULATORS_HAS_TRIM
+/** @brief Components allowed to introduce ELV mode. */
+typedef enum
+{
+    NRF_REGULATORS_ELV_MODE_ALLOW_MASK_EXT ///< Reserved. For internal use only.
+} nrf_regulators_elv_mode_allow_mask_t;
+#endif // NRF_REGULATORS_HAS_TRIM
 
 #if NRF_REGULATORS_HAS_POF
 /** @brief POF Comparator configuration structure. */
@@ -238,6 +253,31 @@ NRF_STATIC_INLINE void nrf_regulators_pof_config_get(NRF_REGULATORS_Type const *
  */
 NRF_STATIC_INLINE bool nrf_regulators_pof_below_thr_check(NRF_REGULATORS_Type const * p_reg);
 #endif
+
+#if NRF_REGULATORS_HAS_TRIM
+/**
+ * @brief Function for setting components that are allowed to introduce the ELV mode.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ * @param[in] mask  Mask of components to be set, created using @ref nrf_regulators_elv_mode_allow_mask_t.
+ */
+NRF_STATIC_INLINE void nrf_regulators_elv_mode_allow_set(NRF_REGULATORS_Type * p_reg,
+                                                         uint32_t              mask);
+
+/**
+ * @brief Function for geting components that are allowed to introduce the ELV mode.
+ *
+ * @warning This register is retained when retention is enabled.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Mask of components allowed to introduce ELV mode,
+ *         created using @ref nrf_regulators_elv_mode_allow_mask_t.
+ */
+NRF_STATIC_INLINE uint32_t nrf_regulators_elv_mode_allow_get(NRF_REGULATORS_Type const * p_reg);
+#endif // NRF_REGULATORS_HAS_TRIM
 
 #if NRF_REGULATORS_HAS_INDUCTOR_DET
 /**
@@ -420,6 +460,20 @@ NRF_STATIC_INLINE bool nrf_regulators_pof_below_thr_check(NRF_REGULATORS_Type co
            == REGULATORS_POFSTAT_COMPARATOR_Below;
 }
 #endif
+
+#if NRF_REGULATORS_HAS_TRIM
+NRF_STATIC_INLINE void nrf_regulators_elv_mode_allow_set(NRF_REGULATORS_Type * p_reg,
+                                                         uint32_t              mask)
+{
+    p_reg->TRIM = ((p_reg->TRIM & ~NRF_REGULATORS_ELV_MODE_ALL_MASK) |
+                   (mask & NRF_REGULATORS_ELV_MODE_ALL_MASK));
+}
+
+NRF_STATIC_INLINE uint32_t nrf_regulators_elv_mode_allow_get(NRF_REGULATORS_Type const * p_reg)
+{
+    return p_reg->TRIM & NRF_REGULATORS_ELV_MODE_ALL_MASK;
+}
+#endif // NRF_REGULATORS_HAS_TRIM
 
 #if NRF_REGULATORS_HAS_INDUCTOR_DET
 NRF_STATIC_INLINE bool nrf_regulators_inductor_check(NRF_REGULATORS_Type const * p_reg)
