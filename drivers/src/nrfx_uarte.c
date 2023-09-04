@@ -208,17 +208,14 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
 
     apply_workaround_for_enable_anomaly(p_instance);
 
-    if (m_cb[p_instance->drv_inst_idx].handler)
-    {
-        nrfy_uarte_int_init(p_instance->p_reg,
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDTX) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR) |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXTO)  |
-                            NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_TXSTOPPED),
-                            p_config->interrupt_priority,
-                            false);
-    }
+    nrfy_uarte_int_init(p_instance->p_reg,
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDRX) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ENDTX) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR) |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_RXTO)  |
+                        NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_TXSTOPPED),
+                        p_config->interrupt_priority,
+                        false);
 }
 
 static void pins_to_default(nrfx_uarte_t const * p_instance)
@@ -504,16 +501,14 @@ void nrfx_uarte_uninit(nrfx_uarte_t const * p_instance)
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     NRF_UARTE_Type * p_uarte = p_instance->p_reg;
 
-    if (p_cb->handler)
-    {
-        nrfy_uarte_int_disable(p_uarte,
-                               NRF_UARTE_INT_ENDRX_MASK |
-                               NRF_UARTE_INT_ENDTX_MASK |
-                               NRF_UARTE_INT_ERROR_MASK |
-                               NRF_UARTE_INT_RXTO_MASK  |
-                               NRF_UARTE_INT_TXSTOPPED_MASK);
-        nrfy_uarte_int_uninit(p_uarte);
-    }
+    nrfy_uarte_int_disable(p_uarte,
+                           NRF_UARTE_INT_ENDRX_MASK |
+                           NRF_UARTE_INT_ENDTX_MASK |
+                           NRF_UARTE_INT_ERROR_MASK |
+                           NRF_UARTE_INT_RXTO_MASK  |
+                           NRF_UARTE_INT_RXSTARTED_MASK  |
+                           NRF_UARTE_INT_TXSTOPPED_MASK);
+    nrfy_uarte_int_uninit(p_uarte);
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)
     nrfx_prs_release(p_uarte);
@@ -619,6 +614,7 @@ static nrfx_err_t wait_for_endtx(NRF_UARTE_Type * p_uarte,
     const uint8_t * p_tx;
     bool ready;
     uint32_t amount;
+    nrfx_err_t err;
 
     do {
             // Pend until TX is ready again or TX buffer pointer is replaced with new
@@ -629,9 +625,16 @@ static nrfx_err_t wait_for_endtx(NRF_UARTE_Type * p_uarte,
             p_tx = nrfy_uarte_tx_buffer_get(p_uarte);
     } while (!ready && p_tx == p_buf);
 
+
     // Check if transfer got aborted. Note that aborted transfer can only be
     // detected if new transfer is not started.
-    return (p_tx == p_buf && length > amount) ? NRFX_ERROR_FORBIDDEN : NRFX_SUCCESS;
+    err = (p_tx == p_buf && length > amount) ? NRFX_ERROR_FORBIDDEN : NRFX_SUCCESS;
+
+    if ((err == NRFX_SUCCESS) && !stop_on_end) {
+        nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPTX);
+    }
+
+    return err;
 }
 
 static nrfx_err_t poll_out(nrfx_uarte_t const * p_instance, uint8_t const * p_byte, bool early_ret)
@@ -675,7 +678,7 @@ static nrfx_err_t poll_out(nrfx_uarte_t const * p_instance, uint8_t const * p_by
         {
             p_buf = p_byte;
         }
-        tx_start(p_uarte, p_buf, 1, false);
+        tx_start(p_uarte, p_buf, 1, early_ret);
         err = NRFX_SUCCESS;
     }
     NRFX_CRITICAL_SECTION_EXIT();
@@ -683,6 +686,10 @@ static nrfx_err_t poll_out(nrfx_uarte_t const * p_instance, uint8_t const * p_by
     if ((err == NRFX_SUCCESS) && !early_ret)
     {
         err = wait_for_endtx(p_uarte, p_buf, 1, p_cb->flags & UARTE_FLAG_TX_STOP_ON_END);
+
+        NRFX_CRITICAL_SECTION_ENTER();
+        disable_hw_from_tx(p_uarte, p_cb);
+        NRFX_CRITICAL_SECTION_EXIT();
     }
 
     return err;
@@ -1780,11 +1787,6 @@ static void int_trigger_handler(uarte_control_block_t * p_cb)
 
 static void irq_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 {
-    if (nrfy_uarte_events_process(p_uarte, NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR), NULL))
-    {
-        error_irq_handler(p_uarte, p_cb);
-    }
-
     // ENDTX must be handled before TXSTOPPED so we read event status in the reversed order of
     // handling.
     uint32_t mask = NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_TXSTOPPED);
@@ -1798,6 +1800,11 @@ static void irq_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 
     if (p_cb->handler)
     {
+        if (nrfy_uarte_events_process(p_uarte, NRFY_EVENT_TO_INT_BITMASK(NRF_UARTE_EVENT_ERROR), NULL))
+        {
+            error_irq_handler(p_uarte, p_cb);
+        }
+
         // ENDRX must be handled before RXSTARTED. RXTO must be handled as the last one. We collect
         // state of all 3 events before processing to prevent reordering in case of higher interrupt
         // preemption. We read event status in the reversed order of handling.
