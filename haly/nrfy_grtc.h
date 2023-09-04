@@ -63,6 +63,13 @@ NRFY_STATIC_INLINE uint64_t __nrfy_internal_grtc_rt_counter_read(NRF_GRTC_Type c
 #define NRFY_GRTC_HAS_CLKOUT 0
 #endif
 
+#if NRF_GRTC_HAS_CLKSEL || defined(__NRFX_DOXYGEN__)
+/** @refhal{NRF_GRTC_HAS_CLKSEL} */
+#define NRFY_GRTC_HAS_CLKSEL 1
+#else
+#define NRFY_GRTC_HAS_CLKSEL 0
+#endif
+
 /**
  * @brief Function for initializing the specified GRTC interrupts.
  *
@@ -790,6 +797,24 @@ NRFY_STATIC_INLINE uint32_t nrfy_grtc_clkout_divider_get(NRF_GRTC_Type const * p
     return divider;
 }
 #endif // NRFY_GRTC_HAS_CLKOUT
+
+#if NRFY_GRTC_HAS_CLKSEL
+/** @refhal{nrf_grtc_clksel_set} */
+NRF_STATIC_INLINE void nrfy_grtc_clksel_set(NRF_GRTC_Type * p_reg, nrf_grtc_clksel_t clksel)
+{
+    nrf_grtc_clksel_set(p_reg, clksel);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_grtc_clksel_get} */
+NRF_STATIC_INLINE nrf_grtc_clksel_t nrfy_grtc_clksel_get(NRF_GRTC_Type const * p_reg)
+{
+    nrf_barrier_rw();
+    nrf_grtc_clksel_t clksel = nrf_grtc_clksel_get(p_reg);
+    nrf_barrier_r();
+    return clksel;
+}
+#endif // NRFY_GRTC_HAS_CLKSEL
 
 /** @} */
 

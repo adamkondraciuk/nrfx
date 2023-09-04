@@ -34,7 +34,14 @@ extern "C" {
 #define NRF_GRTC_HAS_CLKOUT 0
 #endif
 
-#if NRFX_CHECK(GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
+#if defined(GRTC_CLKCFG_CLKSEL_Msk) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether GRTC has clock source selection. */
+#define NRF_GRTC_HAS_CLKSEL 1
+#else
+#define NRF_GRTC_HAS_CLKSEL 0
+#endif
+
+#if defined(GRTC_SYSCOUNTER_SYSCOUNTERL_VALUE_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC has has multiple SYSCOUNTER registers. */
 #define NRF_GRTC_HAS_SYSCOUNTER_ARRAY 1
 #else
@@ -243,6 +250,15 @@ typedef enum
     NRF_GRTC_CLKOUT_32K  = GRTC_CLKOUT_CLKOUT32K_Msk,  /**< Enable 32K clock output on pin. */
     NRF_GRTC_CLKOUT_FAST = GRTC_CLKOUT_CLKOUTFAST_Msk, /**< Enable fast clock output on pin. */
 } nrf_grtc_clkout_t;
+#endif
+
+#if NRF_GRTC_HAS_CLKSEL
+/** @brief Configuration of the GRTC clock source selection. */
+typedef enum
+{
+    NRF_GRTC_CLKSEL_LFXO  = GRTC_CLKCFG_CLKSEL_LFXO,        /**< LFXO oscillator as the clock source. */
+    NRF_GRTC_CLKSEL_LFCLK = GRTC_CLKCFG_CLKSEL_SystemLFCLK, /**< System LFCLK as the clock source. */
+} nrf_grtc_clksel_t;
 #endif
 
 /**
@@ -836,6 +852,25 @@ NRF_STATIC_INLINE void nrf_grtc_clkout_divider_set(NRF_GRTC_Type * p_reg, uint32
 NRF_STATIC_INLINE uint32_t nrf_grtc_clkout_divider_get(NRF_GRTC_Type const * p_reg);
 #endif // NRF_GRTC_HAS_CLKOUT
 
+#if NRF_GRTC_HAS_CLKSEL
+/**
+ * @brief Function for setting the clock source for the GRTC low-frequency clock.
+ *
+ * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
+ * @param[in] clksel Selected clock source.
+ */
+NRF_STATIC_INLINE void nrf_grtc_clksel_set(NRF_GRTC_Type * p_reg, nrf_grtc_clksel_t clksel);
+
+/**
+ * @brief Function for getting the clock source of the GRTC low-frequency clock.
+ *
+ * @param[in] p_reg Pointer to the structure of registers of the peripheral.
+ *
+ * @return Clock source configuration.
+ */
+NRF_STATIC_INLINE nrf_grtc_clksel_t nrf_grtc_clksel_get(NRF_GRTC_Type const * p_reg);
+#endif // NRF_GRTC_HAS_CLKSEL
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_grtc_sys_counter_cc_set(NRF_GRTC_Type * p_reg,
@@ -1263,7 +1298,8 @@ NRF_STATIC_INLINE bool nrf_grtc_clkout_enable_check(NRF_GRTC_Type const * p_reg,
 NRF_STATIC_INLINE void nrf_grtc_clkout_divider_set(NRF_GRTC_Type * p_reg, uint32_t value)
 {
     NRFX_ASSERT(value <= NRF_GRTC_CLKCFG_CLKFASTDIV_MAX_VALUE);
-    p_reg->CLKCFG = (value & GRTC_CLKCFG_CLKFASTDIV_Msk) << GRTC_CLKCFG_CLKFASTDIV_Pos;
+    p_reg->CLKCFG = (p_reg->CLKCFG & ~GRTC_CLKCFG_CLKFASTDIV_Msk) |
+                    ((value & GRTC_CLKCFG_CLKFASTDIV_Msk) << GRTC_CLKCFG_CLKFASTDIV_Pos);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_grtc_clkout_divider_get(NRF_GRTC_Type const * p_reg)
@@ -1271,6 +1307,19 @@ NRF_STATIC_INLINE uint32_t nrf_grtc_clkout_divider_get(NRF_GRTC_Type const * p_r
     return (p_reg->CLKCFG & GRTC_CLKCFG_CLKFASTDIV_Msk) >> GRTC_CLKCFG_CLKFASTDIV_Pos;
 }
 #endif // NRF_GRTC_HAS_CLKOUT
+
+#if NRF_GRTC_HAS_CLKSEL
+NRF_STATIC_INLINE void nrf_grtc_clksel_set(NRF_GRTC_Type * p_reg, nrf_grtc_clksel_t clksel)
+{
+    p_reg->CLKCFG = (p_reg->CLKCFG & ~GRTC_CLKCFG_CLKSEL_Msk) |
+                    (clksel << GRTC_CLKCFG_CLKSEL_Pos);
+}
+
+NRF_STATIC_INLINE nrf_grtc_clksel_t nrf_grtc_clksel_get(NRF_GRTC_Type const * p_reg)
+{
+    return (nrf_grtc_clksel_t)((p_reg->CLKCFG & GRTC_CLKCFG_CLKSEL_Msk) >> GRTC_CLKCFG_CLKSEL_Pos);
+}
+#endif // NRF_GRTC_HAS_CLKSEL
 
 #endif // NRF_DECLARE_ONLY
 
