@@ -55,9 +55,13 @@ void SystemCoreClockUpdate(void)
 
 void SystemInit(void)
 {
-    /* TEMPORARY: Apply trims. */
-    if ((((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) != 0xFFFFFFFF) || 
-        (((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) != 0))
+
+#if !defined(NRF_TRUSTZONE_NONSECURE)
+
+    /* TEMPORARY: Apply trims to PDKs without data in FICR. */
+    if ((((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) == 0x5A5A5A5A) || 
+        (((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) == 0xFFFFFFFF) || 
+        (((uint32_t)NRF_FICR->CHIPCONF[0].ADDR) == 0))
     {
         *((uint32_t *)0x50120550) = 0x007FF3B8;
         *((uint32_t *)0x50120644) = 0x3118CCC0;
@@ -71,7 +75,25 @@ void SystemInit(void)
         *((uint32_t *)0x5008A74C) = 0x70000001;
         *((uint32_t *)0x5008A848) = 0x00000168;
         *((uint32_t *)0x5008A8A0) = 0x00580F0D;
+    } 
+    else 
+    {
+        /* Trimming of the device. Copy all the trimming values from FICR into the target addresses. Trim
+         until one ADDR is not initialized. */
+        uint32_t index = 0;
+        for (index = 0; (index < FICR_TRIMCNF_MaxCount) && ((uint32_t)NRF_FICR->TRIMCNF[index].ADDR != 0xFFFFFFFFul); index++){
+            #if defined ( __ICCARM__ )
+                /* IAR will complain about the order of volatile pointer accesses. */
+                #pragma diag_suppress=Pa082
+            #endif
+            *((volatile uint32_t *)NRF_FICR->TRIMCNF[index].ADDR) = NRF_FICR->TRIMCNF[index].DATA;
+            #if defined ( __ICCARM__ )
+                #pragma diag_default=Pa082
+            #endif
+        }
     }
+
+#endif
 
     #ifdef __CORTEX_M
         #ifndef NRF_SKIP_CLOCK_CONFIGURATION
