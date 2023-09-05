@@ -2161,6 +2161,34 @@
     #define RESET_RESETREAS_LPCOMP_Max (0x1UL)         /*!< Max enumerator value of LPCOMP field.                                */
     #define RESET_RESETREAS_LPCOMP_NotDetected (0x0UL) /*!< Not detected                                                         */
     #define RESET_RESETREAS_LPCOMP_Detected (0x1UL)    /*!< Detected                                                             */
+
+    /* MLT-6236: POF voltage values are incorrect in IPS 0.5a */
+    #undef REGULATORS_POFCON_THRESHOLD_V17
+    #undef REGULATORS_POFCON_THRESHOLD_V18
+    #undef REGULATORS_POFCON_THRESHOLD_V19
+    #undef REGULATORS_POFCON_THRESHOLD_V20
+    #undef REGULATORS_POFCON_THRESHOLD_V21
+    #undef REGULATORS_POFCON_THRESHOLD_V22
+    #undef REGULATORS_POFCON_THRESHOLD_V23
+    #undef REGULATORS_POFCON_THRESHOLD_V24
+    #undef REGULATORS_POFCON_THRESHOLD_V25
+    #undef REGULATORS_POFCON_THRESHOLD_V26
+    #undef REGULATORS_POFCON_THRESHOLD_V27
+    #undef REGULATORS_POFCON_THRESHOLD_V28
+
+    #define REGULATORS_POFCON_THRESHOLD_V17 (0x0UL)
+    #define REGULATORS_POFCON_THRESHOLD_V18 (0x1UL)
+    #define REGULATORS_POFCON_THRESHOLD_V19 (0x2UL)
+    #define REGULATORS_POFCON_THRESHOLD_V20 (0x3UL)
+    #define REGULATORS_POFCON_THRESHOLD_V21 (0x4UL)
+    #define REGULATORS_POFCON_THRESHOLD_V22 (0x5UL)
+    #define REGULATORS_POFCON_THRESHOLD_V23 (0x6UL)
+    #define REGULATORS_POFCON_THRESHOLD_V24 (0x7UL)
+    #define REGULATORS_POFCON_THRESHOLD_V25 (0x8UL)
+    #define REGULATORS_POFCON_THRESHOLD_V26 (0x9UL)
+    #define REGULATORS_POFCON_THRESHOLD_V27 (0xAUL)
+    #define REGULATORS_POFCON_THRESHOLD_V28 (0xBUL)
+
 #endif
 
 /**************************************************************************************************/
