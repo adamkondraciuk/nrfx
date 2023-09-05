@@ -98,6 +98,12 @@ typedef enum
 /** @brief POF Comparator thresholds. */
 typedef enum
 {
+#if defined(REGULATORS_POFCON_THRESHOLD_V17) || defined(__NRFX_DOXYGEN__)
+    NRF_REGULATORS_POF_THR_1V7 = REGULATORS_POFCON_THRESHOLD_V17, ///< Set threshold to 1.7 V.
+#endif
+#if defined(REGULATORS_POFCON_THRESHOLD_V18) || defined(__NRFX_DOXYGEN__)
+    NRF_REGULATORS_POF_THR_1V8 = REGULATORS_POFCON_THRESHOLD_V18, ///< Set threshold to 1.8 V.
+#endif
     NRF_REGULATORS_POF_THR_1V9 = REGULATORS_POFCON_THRESHOLD_V19, ///< Set threshold to 1.9 V.
     NRF_REGULATORS_POF_THR_2V0 = REGULATORS_POFCON_THRESHOLD_V20, ///< Set threshold to 2.0 V.
     NRF_REGULATORS_POF_THR_2V1 = REGULATORS_POFCON_THRESHOLD_V21, ///< Set threshold to 2.1 V.
