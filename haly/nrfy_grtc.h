@@ -169,16 +169,8 @@ NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_start(NRF_GRTC_Type * p_reg, bool b
     if (busy_wait)
     {
         uint64_t t = __nrfy_internal_grtc_rt_counter_read(p_reg);
-        if (t != 0)
-        {
-            while (__nrfy_internal_grtc_rt_counter_read(p_reg) >= t)
-            {}
-        }
-        else
-        {
-            while (__nrfy_internal_grtc_rt_counter_read(p_reg) == t)
-            {}
-        }
+        while (__nrfy_internal_grtc_rt_counter_read(p_reg) == t)
+        {}
     }
 }
 
