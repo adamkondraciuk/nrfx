@@ -625,12 +625,12 @@ static nrfx_err_t wait_for_endtx(NRF_UARTE_Type * p_uarte,
             p_tx = nrfy_uarte_tx_buffer_get(p_uarte);
     } while (!ready && p_tx == p_buf);
 
-
     // Check if transfer got aborted. Note that aborted transfer can only be
     // detected if new transfer is not started.
-    err = (p_tx == p_buf && length > amount) ? NRFX_ERROR_FORBIDDEN : NRFX_SUCCESS;
+    err = ((p_tx == p_buf) && (length > amount)) ? NRFX_ERROR_FORBIDDEN : NRFX_SUCCESS;
 
-    if ((err == NRFX_SUCCESS) && !stop_on_end) {
+    if ((err == NRFX_SUCCESS) && !stop_on_end)
+    {
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPTX);
     }
 
@@ -1375,7 +1375,7 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
     if (disable_all)
     {
         nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX);
-        flag = UARTE_FLAG_RX_STOP_ON_END | UARTE_FLAG_RX_ABORTED;
+        flag = UARTE_FLAG_RX_STOP_ON_END;
         NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~UARTE_FLAG_RX_RESTARTED);
     }
     else
@@ -1384,6 +1384,7 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
             UARTE_FLAG_RX_RESTARTED : UARTE_FLAG_RX_STOP_ON_END;
 
     }
+    flag |= UARTE_FLAG_RX_ABORTED;
 
     NRFX_ATOMIC_FETCH_OR(&p_cb->flags, flag);
 
@@ -1597,13 +1598,15 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
     size_t rx_amount = (size_t)nrfy_uarte_rx_amount_get(p_uarte);
     bool cont = rxstarted && (p_cb->flags & UARTE_FLAG_RX_CONT);
     bool aborted = p_cb->flags & UARTE_FLAG_RX_ABORTED;
+    bool restarted = false;
 
     if (aborted)
     {
         if (p_cb->flags & UARTE_FLAG_RX_RESTARTED)
         {
-            NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~UARTE_FLAG_RX_RESTARTED);
+            NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~(UARTE_FLAG_RX_RESTARTED | UARTE_FLAG_RX_ABORTED));
             aborted = false;
+            restarted = true;
         }
         else if (cont)
         {
@@ -1614,7 +1617,7 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
         }
     }
 
-    handler_on_rx_done(p_cb, p_cb->rx.curr.p_buffer, rx_amount + p_cb->rx.off, aborted);
+    handler_on_rx_done(p_cb, p_cb->rx.curr.p_buffer, rx_amount + p_cb->rx.off, aborted | restarted);
     p_cb->rx.off = 0;
 
     NRFX_CRITICAL_SECTION_ENTER();
