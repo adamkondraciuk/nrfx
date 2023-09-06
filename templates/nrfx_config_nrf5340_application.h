@@ -1396,7 +1396,25 @@
 #endif
 
 /**
- * @brief NRFX_UARTE_CONFIG_TX_LINK - If enabled, driver supports linking of TX transfers
+ * @brief NRFX_UARTE_CONFIG_GPIO_CONFIG - If enabled, driver optionally can configure GPIO pins used by the UARTE instance.
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_UARTE_CONFIG_GPIO_CONFIG
+#define NRFX_UARTE_CONFIG_GPIO_CONFIG 1
+#endif
+
+/**
+ * @brief NRFX_UARTE_CONFIG_PSEL_CONFIG - If enabled, driver optionally can configure PSEL registers in the UARTE instance.
+ *
+ * Boolean. Accepted values: 0 and 1.
+ */
+#ifndef NRFX_UARTE_CONFIG_PSEL_CONFIG
+#define NRFX_UARTE_CONFIG_PSEL_CONFIG 1
+#endif
+
+/**
+ * @brief NRFX_UARTE_CONFIG_TX_LINK - If enabled, driver supports linking of TX transfers.
  *
  * Boolean. Accepted values: 0 and 1.
  */
