@@ -26,6 +26,7 @@ static void comp_configure(nrfx_comp_config_t const * p_config)
     nrfy_comp_config_t nrfy_config =
     {
         .reference  = p_config->reference,
+        .ext_ref    = p_config->ext_ref,
         .main_mode  = p_config->main_mode,
         .threshold  = p_config->threshold,
         .speed_mode = p_config->speed_mode,
