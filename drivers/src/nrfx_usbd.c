@@ -1639,7 +1639,11 @@ nrfx_err_t nrfx_usbd_init(nrfx_usbd_event_handler_t event_handler)
 
     if (m_drv_state != NRFX_DRV_STATE_UNINITIALIZED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        return NRFX_ERROR_ALREADY;
+#else
         return NRFX_ERROR_INVALID_STATE;
+#endif
     }
 
     m_event_handler = event_handler;

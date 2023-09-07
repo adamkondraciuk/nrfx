@@ -173,7 +173,9 @@ bool nrfx_gpiote_in_is_set(nrfx_gpiote_pin_t pin);
  * @param[in] interrupt_priority Interrupt priority.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrupt_priority);
 

@@ -84,7 +84,9 @@ typedef struct
  *                          Must not be NULL.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver has already been initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_BUSY          The COMP peripheral is already in use.
  *                                  This is possible only if @ref nrfx_prs module
  *                                  is enabled.

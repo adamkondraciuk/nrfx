@@ -178,7 +178,9 @@ typedef void (* nrfx_pwm_handler_t)(nrfx_pwm_evt_type_t event_type, void * p_con
  * @param[in] p_context  Context passed to the event handler.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_pwm_init(nrfx_pwm_t const *        p_instance,
                          nrfx_pwm_config_t const * p_config,

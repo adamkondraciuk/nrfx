@@ -126,7 +126,9 @@ typedef struct
  *                              @ref NRFX_WDT_CONFIG_NO_IRQ option is enabled.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_wdt_init(nrfx_wdt_t const *        p_instance,
                          nrfx_wdt_config_t const * p_config,

@@ -307,7 +307,11 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
 
     if (m_cb.state != NRFX_QSPI_STATE_UNINITIALIZED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        err_code = NRFX_ERROR_ALREADY;
+#else
         err_code = NRFX_ERROR_INVALID_STATE;
+#endif
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

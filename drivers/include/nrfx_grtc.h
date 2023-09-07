@@ -120,7 +120,9 @@ bool nrfx_grtc_is_channel_used(uint8_t channel);
  * @param[in] interrupt_priority Interrupt priority.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The GRTC is already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_INTERNAL      No valid channel configuration provided.
  */
 nrfx_err_t nrfx_grtc_init(uint8_t interrupt_priority);

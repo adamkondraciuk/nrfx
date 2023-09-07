@@ -79,7 +79,11 @@ nrfx_err_t nrfx_egu_init(nrfx_egu_t const *       p_instance,
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        return NRFX_ERROR_ALREADY;
+#else
         return NRFX_ERROR_INVALID_STATE;
+#endif
     }
 
     p_cb->state     = NRFX_DRV_STATE_INITIALIZED;

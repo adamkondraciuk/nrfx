@@ -117,7 +117,9 @@ typedef void (*nrfx_adc_event_handler_t)(nrfx_adc_evt_t const * p_event);
  * @param[in] event_handler Event handler provided by the user.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
  * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_adc_init(nrfx_adc_config_t const * p_config,
                          nrfx_adc_event_handler_t  event_handler);

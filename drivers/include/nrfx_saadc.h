@@ -233,7 +233,9 @@ typedef void (* nrfx_saadc_event_handler_t)(nrfx_saadc_evt_t const * p_event);
  * @param[in] interrupt_priority Interrupt priority.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
  * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_saadc_init(uint8_t interrupt_priority);
 

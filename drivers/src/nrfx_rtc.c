@@ -47,7 +47,11 @@ nrfx_err_t nrfx_rtc_init(nrfx_rtc_t const *        p_instance,
 
     if (m_cb[p_instance->instance_id].state != NRFX_DRV_STATE_UNINITIALIZED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        err_code = NRFX_ERROR_ALREADY;
+#else
         err_code = NRFX_ERROR_INVALID_STATE;
+#endif
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

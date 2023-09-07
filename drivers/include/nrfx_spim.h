@@ -234,7 +234,9 @@ typedef void (* nrfx_spim_evt_handler_t)(nrfx_spim_evt_t const * p_event,
  *          See the chapter <a href=@nRF5340pinAssignmentsURL>Pin assignments</a> in the Product Specification.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_BUSY          Some other peripheral with the same
  *                                  instance ID is already in use. This is
  *                                  possible only if @ref nrfx_prs module

@@ -176,7 +176,9 @@ typedef void (*nrfx_qspi_handler_t)(nrfx_qspi_evt_t event, void * p_context);
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
  * @retval NRFX_ERROR_TIMEOUT       The peripheral cannot connect with external memory.
- * @retval NRFX_ERROR_INVALID_STATE The driver was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_INVALID_PARAM The pin configuration was incorrect.
  */
 nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,

@@ -114,7 +114,9 @@ typedef void (*nrfx_pdm_event_handler_t)(nrfx_pdm_evt_t const * p_evt);
  * @param[in] event_handler Event handler provided by the user. Cannot be NULL.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
  * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_INVALID_PARAM Invalid configuration was specified.
  */
 nrfx_err_t nrfx_pdm_init(nrfx_pdm_config_t const * p_config,

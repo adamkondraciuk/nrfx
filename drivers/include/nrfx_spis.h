@@ -149,7 +149,9 @@ typedef void (*nrfx_spis_event_handler_t)(nrfx_spis_evt_t const * p_event,
  * @param[in] p_context     Context passed to the event handler.
  *
  * @retval NRFX_SUCCESS             The initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The instance is already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_INVALID_PARAM Invalid parameter is supplied.
  * @retval NRFX_ERROR_BUSY          Some other peripheral with the same
  *                                  instance ID is already in use. This is

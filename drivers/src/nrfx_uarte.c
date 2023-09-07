@@ -383,10 +383,19 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     NRFX_ASSERT(p_config);
     uint32_t inst_idx = p_instance->drv_inst_idx;
     uarte_control_block_t * p_cb = &m_cb[inst_idx];
+    nrfx_err_t err_code;
 
     if (p_cb->state != NRFX_DRV_STATE_UNINITIALIZED)
     {
-        return NRFX_ERROR_INVALID_STATE;
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        err_code = NRFX_ERROR_ALREADY;
+#else
+        err_code = NRFX_ERROR_INVALID_STATE;
+#endif
+        NRFX_LOG_WARNING("Function: %s, error code: %s.",
+                         __func__,
+                         NRFX_LOG_ERROR_STRING_GET(err_code));
+        return err_code;
     }
 
 #if NRFX_CHECK(NRFX_PRS_ENABLED)

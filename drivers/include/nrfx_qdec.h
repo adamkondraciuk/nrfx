@@ -145,7 +145,9 @@ typedef void (*nrfx_qdec_event_handler_t)(nrfx_qdec_event_t event, void * p_cont
  * @param[in] p_context  Context passed to event handler.
  *
  * @retval NRFX_SUCCESS             Initialization was successful.
- * @retval NRFX_ERROR_INVALID_STATE The QDEC was already initialized.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  */
 nrfx_err_t nrfx_qdec_init(nrfx_qdec_t const *        p_instance,
                           nrfx_qdec_config_t const * p_config,

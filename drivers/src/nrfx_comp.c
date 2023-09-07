@@ -78,7 +78,11 @@ nrfx_err_t nrfx_comp_init(nrfx_comp_config_t const * p_config,
 
     if (m_state != NRFX_DRV_STATE_UNINITIALIZED)
     { // COMP driver is already initialized
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
+        err_code = NRFX_ERROR_ALREADY;
+#else
         err_code = NRFX_ERROR_INVALID_STATE;
+#endif
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));

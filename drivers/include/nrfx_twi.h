@@ -187,7 +187,9 @@ typedef void (* nrfx_twi_evt_handler_t)(nrfx_twi_evt_t const * p_event,
  * @param[in] p_context     Context passed to event handler.
  *
  * @retval NRFX_SUCCESS             Initialization is successful.
- * @retval NRFX_ERROR_INVALID_STATE The driver is in invalid state.
+ * @retval NRFX_ERROR_ALREADY       The driver is already initialized.
+ * @retval NRFX_ERROR_INVALID_STATE The driver is already initialized.
+ *                                  @deprecated Use @ref NRFX_ERROR_ALREADY instead.
  * @retval NRFX_ERROR_BUSY          Some other peripheral with the same
  *                                  instance ID is already in use. This is
  *                                  possible only if @ref nrfx_prs module
