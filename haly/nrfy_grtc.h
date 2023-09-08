@@ -168,6 +168,10 @@ NRFY_STATIC_INLINE void nrfy_grtc_rt_counter_start(NRF_GRTC_Type * p_reg, bool b
     nrf_barrier_w();
     if (busy_wait)
     {
+        // Make sure that RTCOUNTER is cleared and does not contain the old value.
+        while (__nrfy_internal_grtc_rt_counter_read(p_reg) > 1ULL)
+        {}
+        // Wait one 32k cycle to make sure that RTCOUNTER has started.
         uint64_t t = __nrfy_internal_grtc_rt_counter_read(p_reg);
         while (__nrfy_internal_grtc_rt_counter_read(p_reg) == t)
         {}
