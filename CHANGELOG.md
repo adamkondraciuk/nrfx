@@ -37,6 +37,7 @@ All notable changes to this project are documented in this file.
 - Changed the definition of nrf_saadc_value_t type in the SAADC HAL. Now pointer to the buffer holding conversion results is a void* instead of int16_t*.
 
 ### Fixed
+- Fixed configuration of the external reference in nrfx_comp_init() and nrfx_comp_reconfigure() functions. Now the differential mode can be enabled in the COMP driver.
 
 ## [3.1.0] - 2023-06-28
 ### Added
