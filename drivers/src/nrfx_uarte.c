@@ -1630,25 +1630,39 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
     }
 
-    p_cb->rx.flush.length = (size_t)-1;
-
     NRFX_CRITICAL_SECTION_EXIT();
+
+    bool started;
 
     /* If next buffer was set but RXSTARTED is not set it may indicate that new
      * buffer was set late (e.g. in the context of the RX_DONE event handler).
      * In that case, it is still possible to continue by manually triggering
      * STARTRX. It must occur before RXTO happens.
      */
+    NRFX_CRITICAL_SECTION_ENTER();
+    if (!aborted) {
+        /* We must check again if receiver was not aborted (e.g. in user handler) */
+        aborted = (p_cb->flags & (UARTE_FLAG_RX_ABORTED | UARTE_FLAG_RX_RESTARTED)) ==
+                  UARTE_FLAG_RX_ABORTED;
+    }
+
     if (p_cb->rx.curr.p_buffer && !cont && !aborted)
     {
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STARTRX);
-        if (nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXTO))
-        {
-            nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXTO);
-            nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXSTARTED);
-            nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
-            user_handler(p_cb, NRFX_UARTE_EVT_RX_BUF_TOO_LATE);
-        }
+        started = true;
+    }
+    else
+    {
+        started = false;
+    }
+    NRFX_CRITICAL_SECTION_EXIT();
+
+    if (started && nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXTO))
+    {
+        nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXTO);
+        nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXSTARTED);
+        nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
+        user_handler(p_cb, NRFX_UARTE_EVT_RX_BUF_TOO_LATE);
     }
 
     return aborted;
