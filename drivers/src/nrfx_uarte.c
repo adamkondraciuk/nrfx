@@ -736,7 +736,7 @@ static nrfx_err_t blocking_tx(nrfx_uarte_t const * p_instance,
 {
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
     bool early_ret = flags & NRFX_UARTE_TX_EARLY_RETURN;
-    nrfx_err_t err;
+    nrfx_err_t err = NRFX_SUCCESS;
 
     if ((early_ret && !p_cb->tx.cache.p_buffer) || (p_cb->flags & UARTE_FLAG_TX_LINKED))
     {
@@ -1022,40 +1022,38 @@ static void on_rx_disabled(NRF_UARTE_Type        * p_uarte,
  */
 static bool rx_flushed_handler(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 {
-    if (!(p_cb->flags & UARTE_FLAG_RX_KEEP_FIFO_CONTENT))
+    if (p_cb->rx.flush.length == 0)
     {
-        p_cb->rx.flush.length = 0;
+        return true;
     }
-    else if ((int)p_cb->rx.flush.length > 0)
+
+    if ((uint32_t)p_cb->rx.flush.length > p_cb->rx.curr.length)
     {
-        if ((uint32_t)p_cb->rx.flush.length > p_cb->rx.curr.length)
+        uint8_t * p_buf = p_cb->rx.curr.p_buffer;
+        size_t len = p_cb->rx.curr.length;
+
+        p_cb->rx.curr.p_buffer = NULL;
+        p_cb->rx.curr.length = 0;
+        memcpy(p_buf, p_cb->rx.flush.p_buffer, len);
+        p_cb->rx.flush.length -= len;
+        memmove(p_cb->rx.flush.p_buffer, &p_cb->rx.flush.p_buffer[len], p_cb->rx.flush.length);
+
+        if (p_cb->handler)
         {
-            uint8_t * p_buf = p_cb->rx.curr.p_buffer;
-            size_t len = p_cb->rx.curr.length;
-
-            p_cb->rx.curr.p_buffer = NULL;
-            p_cb->rx.curr.length = 0;
-            memcpy(p_buf, p_cb->rx.flush.p_buffer, len);
-            p_cb->rx.flush.length -= len;
-            memmove(p_cb->rx.flush.p_buffer, &p_cb->rx.flush.p_buffer[len], p_cb->rx.flush.length);
-
-            if (p_cb->handler)
+            user_handler_on_rx_done(p_cb, p_buf, len);
+            if (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END)
             {
-                user_handler_on_rx_done(p_cb, p_buf, len);
-                if (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END)
-                {
-                        on_rx_disabled(p_uarte, p_cb, 0);
-                }
+                    on_rx_disabled(p_uarte, p_cb, 0);
             }
+        }
 
-            return false;
-        }
-        else
-        {
-            memcpy(p_cb->rx.curr.p_buffer, p_cb->rx.flush.p_buffer, p_cb->rx.flush.length);
-            p_cb->rx.off = p_cb->rx.flush.length;
-            p_cb->rx.flush.length = 0;
-        }
+        return false;
+    }
+    else
+    {
+        memcpy(p_cb->rx.curr.p_buffer, p_cb->rx.flush.p_buffer, p_cb->rx.flush.length);
+        p_cb->rx.off = p_cb->rx.flush.length;
+        p_cb->rx.flush.length = 0;
     }
 
     return true;
@@ -1286,11 +1284,12 @@ nrfx_err_t nrfx_uarte_rx_buffer_set(nrfx_uarte_t const * p_instance,
 
 static void rx_flush(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
 {
-    if (!p_cb->rx.flush.p_buffer)
+    if (!(p_cb->flags & UARTE_FLAG_RX_KEEP_FIFO_CONTENT))
     {
         p_cb->rx.flush.length = 0;
         return;
     }
+
     /* Flushing RX fifo requires buffer bigger than 4 bytes to empty fifo*/
     uint32_t prev_rx_amount = nrfy_uarte_rx_amount_get(p_uarte);
 
@@ -1305,7 +1304,7 @@ static void rx_flush(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
         memset(p_cb->rx.flush.p_buffer, 0xAA, UARTE_HW_RX_FIFO_SIZE);
     }
 
-    nrfy_uarte_rx_buffer_set(p_uarte, m_cb->rx.flush.p_buffer, UARTE_HW_RX_FIFO_SIZE);
+    nrfy_uarte_rx_buffer_set(p_uarte, p_cb->rx.flush.p_buffer, UARTE_HW_RX_FIFO_SIZE);
     /* Final part of handling RXTO event is in ENDRX interrupt
      * handler. ENDRX is generated as a result of FLUSHRX task.
      */
@@ -1318,17 +1317,7 @@ static void rx_flush(NRF_UARTE_Type * p_uarte, uarte_control_block_t * p_cb)
     nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXSTARTED);
     nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_ENDRX);
 
-    /* Previous flush_cnt non-zero value indicates that we are interested in flushed data. */
-    uint32_t rx_amount = nrfy_uarte_rx_amount_get(p_uarte);
-
-    if (rx_amount > UARTE_HW_RX_FIFO_SIZE)
-    {
-        p_cb->rx.flush.length = 0;
-    }
-    else
-    {
-        p_cb->rx.flush.length = (m_cb->rx.flush.length != 0) ? rx_amount : 0;
-    }
+    p_cb->rx.flush.length = nrfy_uarte_rx_amount_get(p_uarte);
 
     if (USE_WORKAROUND_FOR_FLUSHRX_ANOMALY)
     {
@@ -1388,7 +1377,6 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
 
     NRFX_ATOMIC_FETCH_OR(&p_cb->flags, flag);
 
-    p_cb->rx.flush.length = 0;
     if (sync || !p_cb->handler)
     {
         nrfy_uarte_int_disable(p_uarte, rx_int_mask);
