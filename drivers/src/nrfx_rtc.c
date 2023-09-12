@@ -22,7 +22,6 @@
     (event == NRF_RTC_EVENT_COMPARE_3 ? "NRF_RTC_EVENT_COMPARE_3" : \
                                         "UNKNOWN EVENT"))))))
 
-
 /** @brief RTC driver instance control block structure. */
 typedef struct
 {
@@ -255,12 +254,11 @@ static void irq_handler(NRF_RTC_Type  * p_reg,
 
     uint32_t event_mask = nrfy_rtc_events_process(p_reg, evt_to_process);
 
-    nrf_rtc_event_t event;
     uint32_t active_cc_mask = nrfy_rtc_int_enable_check(p_reg, NRF_RTC_ALL_CHANNELS_INT_MASK);
 
     for (uint8_t i = 0; i < channel_count; i++)
     {
-        event = nrf_rtc_compare_event_get(i);
+        nrf_rtc_event_t event = nrf_rtc_compare_event_get(i);
         if ((active_cc_mask & NRFY_EVENT_TO_INT_BITMASK(event)) &&
             (event_mask & NRFY_EVENT_TO_INT_BITMASK(event)))
         {
@@ -272,13 +270,13 @@ static void irq_handler(NRF_RTC_Type  * p_reg,
 
     if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_TICK))
     {
-        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(event), p_reg);
+        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(NRF_RTC_EVENT_TICK), p_reg);
         p_cb->handler(NRFX_RTC_INT_TICK);
     }
 
     if (event_mask & NRFY_EVENT_TO_INT_BITMASK(NRF_RTC_EVENT_OVERFLOW))
     {
-        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(event), p_reg);
+        NRFX_LOG_DEBUG("Event: %s, reg: %p.", EVT_TO_STR(NRF_RTC_EVENT_OVERFLOW), p_reg);
         p_cb->handler(NRFX_RTC_INT_OVERFLOW);
     }
 }

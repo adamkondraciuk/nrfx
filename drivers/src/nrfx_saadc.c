@@ -543,13 +543,13 @@ nrfx_err_t nrfx_saadc_mode_trigger(void)
 #if (NRF_SAADC_8BIT_SAMPLE_WIDTH == 8)
             if (nrfy_saadc_resolution_get(NRF_SAADC) == NRF_SAADC_RESOLUTION_8BIT)
             {
-                chunk.p_buffer =
+                chunk.p_buffer = (nrf_saadc_value_t *)
                     &((uint8_t *)m_cb.buffer_primary.p_buffer)[m_cb.samples_converted];
             }
             else
 #endif
             {
-                chunk.p_buffer =
+                chunk.p_buffer = (nrf_saadc_value_t *)
                     &((uint16_t *)m_cb.buffer_primary.p_buffer)[m_cb.samples_converted];
             }
             nrfy_saadc_buffer_set(NRF_SAADC, &chunk, true, true);
