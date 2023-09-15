@@ -19,6 +19,7 @@ All notable changes to this project are documented in this file.
 - Added functions for retrieving pointers to the receive and transmit buffers in the TWIS HAL.
 - Added functions for checking whether given instance is initialized to all of the drivers.
 - Added individual functions for setting reference selection, external reference, detection type and enabling hysteresis in the LPCOMP HAL. Now they are supposed to be used instead of nrf_lpcomp_configure() function.
+- Added a blocking mode to the CLOCK driver. The mode is initialized when a user handler is set to NULL.
 
 ### Changed
 - Overhauled the UARTE driver. Extended the UARTE driver with various modes of operations including: mixing of blocking and non-blocking transfers, linking transfers, continuous reception, low power operation.
