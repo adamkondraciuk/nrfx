@@ -197,9 +197,10 @@ NRFX_STATIC_INLINE void nrfx_clock_hfclkaudio_config_set(uint16_t freq_value);
  * @return Current value of FREQ_VALUE for HFCLKAUDIO.
  */
 NRFX_STATIC_INLINE uint16_t nrfx_clock_hfclkaudio_config_get(void);
-
 #endif
 
+#if (NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)) || \
+     defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for starting the calibration of internal LFCLK.
  *
@@ -222,6 +223,8 @@ nrfx_err_t nrfx_clock_calibration_start(void);
  */
 nrfx_err_t nrfx_clock_is_calibrating(void);
 
+#if (NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)) || \
+    defined(__NRFX_DOXYGEN__)
 /**
  * @brief Function for starting calibration timer.
  *
@@ -231,6 +234,9 @@ void nrfx_clock_calibration_timer_start(uint8_t interval);
 
 /** @brief Function for stopping the calibration timer. */
 void nrfx_clock_calibration_timer_stop(void);
+#endif
+#endif /* (NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)) || \
+           defined(__NRFX_DOXYGEN__) */
 
 /**
  * @brief Function for returning a requested task address for the clock driver module.

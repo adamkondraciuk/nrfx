@@ -442,11 +442,11 @@ void nrfx_clock_stop(nrf_clock_domain_t domain)
     clock_stop(domain);
 }
 
+#if NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 nrfx_err_t nrfx_clock_calibration_start(void)
 {
     nrfx_err_t err_code = NRFX_SUCCESS;
 
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
     nrf_clock_hfclk_t clk_src;
     if (!nrfx_clock_is_running(NRF_CLOCK_DOMAIN_HFCLK, &clk_src))
     {
@@ -487,7 +487,6 @@ nrfx_err_t nrfx_clock_calibration_start(void)
     {
         err_code = NRFX_ERROR_BUSY;
     }
-#endif // NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 
     NRFX_LOG_WARNING("Function: %s, error code: %s.",
                      __func__,
@@ -497,19 +496,16 @@ nrfx_err_t nrfx_clock_calibration_start(void)
 
 nrfx_err_t nrfx_clock_is_calibrating(void)
 {
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
     if (m_clock_cb.cal_state == CAL_STATE_CAL)
     {
         return NRFX_ERROR_BUSY;
     }
-#endif
     return NRFX_SUCCESS;
 }
 
+#if NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
 void nrfx_clock_calibration_timer_start(uint8_t interval)
 {
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && \
-    NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED) &&  NRF_CLOCK_HAS_CALIBRATION_TIMER
     nrf_clock_cal_timer_timeout_set(NRF_CLOCK, interval);
     nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
 
@@ -524,20 +520,15 @@ void nrfx_clock_calibration_timer_start(uint8_t interval)
         {}
         nrf_clock_event_clear(NRF_CLOCK, NRF_CLOCK_EVENT_CTTO);
     }
-
-#else
-    (void)interval;
-#endif
 }
 
 void nrfx_clock_calibration_timer_stop(void)
 {
-#if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED) && \
-    NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED) && NRF_CLOCK_HAS_CALIBRATION_TIMER
     nrf_clock_int_disable(NRF_CLOCK, NRF_CLOCK_INT_CTTO_MASK);
     nrf_clock_task_trigger(NRF_CLOCK, NRF_CLOCK_TASK_CTSTOP);
-#endif
 }
+#endif // NRF_CLOCK_HAS_CALIBRATION_TIMER && NRFX_CHECK(NRFX_CLOCK_CONFIG_CT_ENABLED)
+#endif // NRF_CLOCK_HAS_CALIBRATION && NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
 
 #if defined(CLOCK_FEATURE_HFCLK_DIVIDE_PRESENT) || NRF_CLOCK_HAS_HFCLK192M
 nrfx_err_t nrfx_clock_divider_set(nrf_clock_domain_t domain,
