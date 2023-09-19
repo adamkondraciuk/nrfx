@@ -38,6 +38,7 @@ All notable changes to this project are documented in this file.
 
 ### Fixed
 - Fixed configuration of the external reference in nrfx_comp_init() and nrfx_comp_reconfigure() functions. Now the differential mode can be enabled in the COMP driver.
+- Fixed support for P0.18, P0.20, and P0.28-P0.30 pins in the GPIOTE driver for nRF52820 SoC.
 
 ## [3.1.0] - 2023-06-28
 ### Added
