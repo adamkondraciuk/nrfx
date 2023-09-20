@@ -456,7 +456,8 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
         return NRFX_ERROR_INTERNAL;
     }
 
-    uint32_t tx_int_mask = p_config->tx_stop_on_end ? 0 : NRF_UARTE_INT_ENDTX_MASK;
+    uint32_t tx_int_mask = (!event_handler || p_config->tx_stop_on_end) ?
+                               0 : NRF_UARTE_INT_ENDTX_MASK;
     uint32_t int_mask = tx_int_mask | ((event_handler) ? rx_int_mask : 0);
 
     nrfy_uarte_int_enable(p_instance->p_reg, int_mask);
@@ -735,7 +736,7 @@ static nrfx_err_t blocking_tx(nrfx_uarte_t const * p_instance,
                               uint32_t             flags)
 {
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
-    bool early_ret = flags & NRFX_UARTE_TX_EARLY_RETURN;
+    bool early_ret = p_cb->handler && (flags & NRFX_UARTE_TX_EARLY_RETURN);
     nrfx_err_t err = NRFX_SUCCESS;
 
     if ((early_ret && !p_cb->tx.cache.p_buffer) || (p_cb->flags & UARTE_FLAG_TX_LINKED))

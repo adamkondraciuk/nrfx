@@ -82,6 +82,10 @@ enum {
 /**@} */
 
 /**@defgroup NRFX_UARTE_TX_FLAGS Flags used for @ref nrfx_uarte_tx.
+ *
+ * Flags apply only if an instance is initialized with a user handler. Otherwise flags are
+ * ignored and all transfers are blocking.
+ *
  * @{ */
 
 /**
