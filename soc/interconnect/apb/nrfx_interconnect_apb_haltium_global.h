@@ -7,6 +7,9 @@
 extern "C" {
 #endif
 
+/* Instance of the DPPI peripheral which belongs to the main APB bus. */
+#define NRFX_INTERCONNECT_MAIN_DPPI_INSTANCE 130
+
 #ifndef NRFX_INTERCONNECT_APB_GLOBAL_DPPI_DEFINE
 /* Default DPPI static variables generation in case of bare-metal application. */
 #ifndef NRFX_DPPI_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM
@@ -80,8 +83,8 @@ extern "C" {
          However we would still need such parameter then. Ticket: NRFX-3226. */
 #define NRFX_INTERCONNECT_APB_GLOBAL_BUSES_PROP                                     \
 {                                                                                   \
-    NRFX_INTERCONNECT_APB_PROP_ENTRY(130, NULL, 0x20000)                /* APB32 */ \
     NRFX_INTERCONNECT_APB_PROP_ENTRY(120, NRF_SYSCTRL_PPIB121, 0x10000) /* APB22 */ \
+    NRFX_INTERCONNECT_APB_PROP_ENTRY(130, NULL, 0x20000)                /* APB32 */ \
     NRFX_INTERCONNECT_APB_PROP_ENTRY(131, NRF_SYSCTRL_PPIB132, 0x10000) /* APB38 */ \
     NRFX_INTERCONNECT_APB_PROP_ENTRY(132, NRF_SYSCTRL_PPIB133, 0x10000) /* APB39 */ \
     NRFX_INTERCONNECT_APB_PROP_ENTRY(133, NRF_SYSCTRL_PPIB134, 0x10000) /* APB3A */ \

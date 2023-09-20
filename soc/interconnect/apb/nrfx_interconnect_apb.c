@@ -59,7 +59,7 @@ nrf_domain_t nrfx_interconnect_apb_domain_get(nrfx_interconnect_apb_t const * p_
 
 APB_IDX_STRUCT();
 
-static const int apb_main_idx = APB_IDX(120);
+static const int apb_main_idx = APB_IDX(NRFX_INTERCONNECT_MAIN_DPPI_INSTANCE);
 
 nrfx_interconnect_apb_t const * nrfx_interconnect_apb_main_get(void)
 {

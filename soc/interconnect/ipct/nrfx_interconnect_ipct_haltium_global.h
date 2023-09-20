@@ -7,6 +7,9 @@
 extern "C" {
 #endif
 
+/* Instance of the IPCT peripheral which belongs to the main APB bus. */
+#define NRFX_INTERCONNECT_MAIN_IPCT_INSTANCE 130
+
 #ifndef NRFX_INTERCONNECT_IPCT_GLOBAL_DEFINE
 /* Default IPCT static variables generation in case of bare-metal application. */
 #ifndef NRFX_IPCTx_CHANNELS_SINGLE_VAR_NAME_BY_INST_NUM

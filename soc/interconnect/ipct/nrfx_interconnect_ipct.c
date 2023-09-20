@@ -60,7 +60,7 @@ nrf_domain_t nrfx_interconnect_ipct_domain_get(nrfx_interconnect_ipct_t const * 
 
 IPCT_IDX_STRUCT();
 
-static const int ipct_main_idx = IPCT_IDX(130);
+static const int ipct_main_idx = IPCT_IDX(NRFX_INTERCONNECT_MAIN_IPCT_INSTANCE);
 
 nrfx_interconnect_ipct_t const * nrfx_interconnect_ipct_main_get(void)
 {
