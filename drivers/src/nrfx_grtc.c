@@ -782,7 +782,7 @@ static void grtc_irq_handler(void)
         if (active_int_mask & NRFY_EVENT_TO_INT_BITMASK(event))
         {
             //TODO: [NRFX-3175] Remove when HM-15402 is fixed.
-            if (channel == 0)
+            if (NRFX_IS_ENABLED(ISA_RISCV) && channel == 0)
             {
                 nrfy_grtc_sys_counter_compare_event_disable(NRF_GRTC, channel);
             }
