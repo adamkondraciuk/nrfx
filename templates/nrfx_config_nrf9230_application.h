@@ -1700,21 +1700,21 @@
 #endif
 
 /**
- * @brief NRFX_UARTE_CONFIG_GPIO_CONFIG - If enabled, driver optionally can configure GPIO pins used by the UARTE instance.
+ * @brief NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG - If enabled, support for configuring GPIO pins is removed from the driver
  *
  * Boolean. Accepted values: 0 and 1.
  */
-#ifndef NRFX_UARTE_CONFIG_GPIO_CONFIG
-#define NRFX_UARTE_CONFIG_GPIO_CONFIG 1
+#ifndef NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG
+#define NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG 0
 #endif
 
 /**
- * @brief NRFX_UARTE_CONFIG_PSEL_CONFIG - If enabled, driver optionally can configure PSEL registers in the UARTE instance.
+ * @brief NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG - If enabled, support for configuring PSEL registers is removed from the driver
  *
  * Boolean. Accepted values: 0 and 1.
  */
-#ifndef NRFX_UARTE_CONFIG_PSEL_CONFIG
-#define NRFX_UARTE_CONFIG_PSEL_CONFIG 1
+#ifndef NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG
+#define NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG 0
 #endif
 
 /**

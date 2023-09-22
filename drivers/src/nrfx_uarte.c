@@ -150,7 +150,8 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
 {
     uarte_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
 
-    if (p_config->skip_gpio_cfg == false)
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG) &&
+        (p_config->skip_gpio_cfg == false))
     {
         p_cb->flags |= UARTE_FLAG_GPIO_UNINIT;
         if (p_config->txd_pin != NRF_UARTE_PSEL_DISCONNECTED)
@@ -167,7 +168,8 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
         }
     }
 
-    if ((p_config->config.hwfc == NRF_UARTE_HWFC_ENABLED) && (!p_config->skip_gpio_cfg))
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG) &&
+        (p_config->config.hwfc == NRF_UARTE_HWFC_ENABLED) && (!p_config->skip_gpio_cfg))
     {
         p_cb->flags |= UARTE_FLAG_HWFC_PINS;
         if (p_config->cts_pin != NRF_UARTE_PSEL_DISCONNECTED)
@@ -184,7 +186,7 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
         }
     }
 
-    if (!p_config->skip_psel_cfg)
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG) && !p_config->skip_psel_cfg)
     {
         p_cb->flags |= UARTE_FLAG_PSEL_UNINIT;
     }
@@ -199,8 +201,8 @@ static void uarte_configure(nrfx_uarte_t        const * p_instance,
             .cts_pin = p_config->cts_pin
         },
         .baudrate = p_config->baudrate,
-        .skip_psel_cfg = NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_PSEL_CONFIG) ?
-            p_config->skip_psel_cfg : true
+        .skip_psel_cfg = NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG) ?
+            true : p_config->skip_psel_cfg
     };
     nrfy_config.config = p_config->config;
 
@@ -224,18 +226,19 @@ static void pins_to_default(nrfx_uarte_t const * p_instance)
     nrfy_uarte_pins_t pins;
 
     // Need to read pins before they are reset.
-    if (NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_GPIO_CONFIG))
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG))
     {
         nrfy_uarte_pins_get(p_instance->p_reg, &pins);
     }
 
     // Reset pins to default states.
-    if (NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_PSEL_CONFIG) && (p_cb->flags & UARTE_FLAG_PSEL_UNINIT))
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_PSEL_CONFIG) &&
+        (p_cb->flags & UARTE_FLAG_PSEL_UNINIT))
     {
         nrfy_uarte_pins_disconnect(p_instance->p_reg);
     }
 
-    if (NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_GPIO_CONFIG))
+    if (!NRFX_IS_ENABLED(NRFX_UARTE_CONFIG_SKIP_GPIO_CONFIG))
     {
         if (p_cb->flags & UARTE_FLAG_GPIO_UNINIT)
         {
