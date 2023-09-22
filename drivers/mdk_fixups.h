@@ -1683,6 +1683,68 @@
     #define TIMER136_MAX_SIZE 32
     #define TIMER137_MAX_SIZE 32
 
+    #if defined(P0_PIN_NUM)
+        #undef P0_PIN_NUM
+    #endif
+    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
+
+    #if defined(P1_PIN_NUM)
+        #undef P1_PIN_NUM
+    #endif
+    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
+
+    #if defined(P2_PIN_NUM)
+        #undef P2_PIN_NUM
+    #endif
+    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
+
+    #if defined(P6_PIN_NUM)
+        #undef P6_PIN_NUM
+    #endif
+    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
+
+    #if defined(P7_PIN_NUM)
+        #undef P7_PIN_NUM
+    #endif
+    #define P7_PIN_NUM (P7_PIN_NUM_MAX - P7_PIN_NUM_MIN + 1)
+
+    #if defined(P9_PIN_NUM)
+        #undef P9_PIN_NUM
+    #endif
+    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
+
+    /* TODO: MDK-2220 */
+
+    #if defined(P0_PINS_PRESENT)
+        #undef P0_PINS_PRESENT
+    #endif
+    #define P0_PINS_PRESENT 0xFFFUL
+
+    #if defined(P1_PINS_PRESENT)
+        #undef P1_PINS_PRESENT
+    #endif
+    #define P1_PINS_PRESENT 0xFFFUL
+
+    #if defined(P2_PINS_PRESENT)
+        #undef P2_PINS_PRESENT
+    #endif
+    #define P2_PINS_PRESENT 0xFFFUL
+
+    #if defined(P6_PINS_PRESENT)
+        #undef P6_PINS_PRESENT
+    #endif
+    #define P6_PINS_PRESENT 0x3FFFUL
+
+    #if defined(P7_PINS_PRESENT)
+        #undef P7_PINS_PRESENT
+    #endif
+    #define P7_PINS_PRESENT 0xFFUL
+
+    #if defined(P9_PINS_PRESENT)
+        #undef P9_PINS_PRESENT
+    #endif
+    #define P9_PINS_PRESENT 0x3FUL
+
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
@@ -2407,14 +2469,87 @@
 
     #define NRF_PWM_Type NRF_PWM_Type_fixed
 
-    #define P0_PIN_NUM 12
-    #define P1_PIN_NUM 12
-    #define P2_PIN_NUM 18
-    #define P3_PIN_NUM 18
-    #define P5_PIN_NUM 14
-    #define P6_PIN_NUM 14
-    #define P8_PIN_NUM 5
-    #define P9_PIN_NUM 6
+    #if defined(P0_PIN_NUM)
+        #undef P0_PIN_NUM
+    #endif
+    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
+
+    #if defined(P1_PIN_NUM)
+        #undef P1_PIN_NUM
+    #endif
+    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
+
+    #if defined(P2_PIN_NUM)
+        #undef P2_PIN_NUM
+    #endif
+    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
+
+    #if defined(P3_PIN_NUM)
+        #undef P3_PIN_NUM
+    #endif
+    #define P3_PIN_NUM (P3_PIN_NUM_MAX - P3_PIN_NUM_MIN + 1)
+
+    #if defined(P5_PIN_NUM)
+        #undef P5_PIN_NUM
+    #endif
+    #define P5_PIN_NUM (P5_PIN_NUM_MAX - P5_PIN_NUM_MIN + 1)
+
+    #if defined(P6_PIN_NUM)
+        #undef P6_PIN_NUM
+    #endif
+    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
+
+    #if defined(P8_PIN_NUM)
+        #undef P8_PIN_NUM
+    #endif
+    #define P8_PIN_NUM (P8_PIN_NUM_MAX - P8_PIN_NUM_MIN + 1)
+
+    #if defined(P9_PIN_NUM)
+        #undef P9_PIN_NUM
+    #endif
+    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
+
+    /* TODO: MDK-2220 */
+
+    #if defined(P0_PINS_PRESENT)
+        #undef P0_PINS_PRESENT
+    #endif
+    #define P0_PINS_PRESENT 0xFFFUL
+
+    #if defined(P1_PINS_PRESENT)
+        #undef P1_PINS_PRESENT
+    #endif
+    #define P1_PINS_PRESENT 0xFFFUL
+
+    #if defined(P2_PINS_PRESENT)
+        #undef P2_PINS_PRESENT
+    #endif
+    #define P2_PINS_PRESENT 0x3FFFFUL
+
+    #if defined(P3_PINS_PRESENT)
+        #undef P3_PINS_PRESENT
+    #endif
+    #define P3_PINS_PRESENT 0x3FFFFUL
+
+    #if defined(P5_PINS_PRESENT)
+        #undef P5_PINS_PRESENT
+    #endif
+    #define P5_PINS_PRESENT 0x3FFFUL
+
+    #if defined(P6_PINS_PRESENT)
+        #undef P6_PINS_PRESENT
+    #endif
+    #define P6_PINS_PRESENT 0x3FFFUL
+
+    #if defined(P8_PINS_PRESENT)
+        #undef P8_PINS_PRESENT
+    #endif
+    #define P8_PINS_PRESENT 0x1FUL
+
+    #if defined(P9_PINS_PRESENT)
+        #undef P9_PINS_PRESENT
+    #endif
+    #define P9_PINS_PRESENT 0x3FUL
 
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
@@ -2677,6 +2812,108 @@
         #define UARTE137_EASYDMA_MAXCNT_SIZE UARTE137_EASYDMA_MAXCNT_SIZE_MAX
     #endif
 
+    #if defined(P0_PIN_NUM)
+        #undef P0_PIN_NUM
+    #endif
+    #define P0_PIN_NUM (P0_PIN_NUM_MAX - P0_PIN_NUM_MIN + 1)
+
+    #if defined(P1_PIN_NUM)
+        #undef P1_PIN_NUM
+    #endif
+    #define P1_PIN_NUM (P1_PIN_NUM_MAX - P1_PIN_NUM_MIN + 1)
+
+    #if defined(P2_PIN_NUM)
+        #undef P2_PIN_NUM
+    #endif
+    #define P2_PIN_NUM (P2_PIN_NUM_MAX - P2_PIN_NUM_MIN + 1)
+
+    #if defined(P6_PIN_NUM)
+        #undef P6_PIN_NUM
+    #endif
+    #define P6_PIN_NUM (P6_PIN_NUM_MAX - P6_PIN_NUM_MIN + 1)
+
+    #if defined(P8_PIN_NUM)
+        #undef P8_PIN_NUM
+    #endif
+    #define P8_PIN_NUM (P8_PIN_NUM_MAX - P8_PIN_NUM_MIN + 1)
+
+    #if defined(P9_PIN_NUM)
+        #undef P9_PIN_NUM
+    #endif
+    #define P9_PIN_NUM (P9_PIN_NUM_MAX - P9_PIN_NUM_MIN + 1)
+
+    #if defined(P10_PIN_NUM)
+        #undef P10_PIN_NUM
+    #endif
+    #define P10_PIN_NUM (P10_PIN_NUM_MAX - P10_PIN_NUM_MIN + 1)
+
+    #if defined(P11_PIN_NUM)
+        #undef P11_PIN_NUM
+    #endif
+    #define P11_PIN_NUM (P11_PIN_NUM_MAX - P11_PIN_NUM_MIN + 1)
+
+    #if defined(P12_PIN_NUM)
+        #undef P12_PIN_NUM
+    #endif
+    #define P12_PIN_NUM (P12_PIN_NUM_MAX - P12_PIN_NUM_MIN + 1)
+
+    #if defined(P13_PIN_NUM)
+        #undef P13_PIN_NUM
+    #endif
+    #define P13_PIN_NUM (P13_PIN_NUM_MAX - P13_PIN_NUM_MIN + 1)
+
+    /* TODO: MDK-2220 */
+
+    #if defined(P0_PINS_PRESENT)
+        #undef P0_PINS_PRESENT
+    #endif
+    #define P0_PINS_PRESENT 0x1FFFUL
+
+    #if defined(P1_PINS_PRESENT)
+        #undef P1_PINS_PRESENT
+    #endif
+    #define P1_PINS_PRESENT 0xFFFUL
+
+    #if defined(P2_PINS_PRESENT)
+        #undef P2_PINS_PRESENT
+    #endif
+    #define P2_PINS_PRESENT 0xFFFUL
+
+    #if defined(P6_PINS_PRESENT)
+        #undef P6_PINS_PRESENT
+    #endif
+    #define P6_PINS_PRESENT 0x3FFFUL
+
+    #if defined(P8_PINS_PRESENT)
+        #undef P8_PINS_PRESENT
+    #endif
+    #define P8_PINS_PRESENT 0x1FUL
+
+    #if defined(P9_PINS_PRESENT)
+        #undef P9_PINS_PRESENT
+    #endif
+    #define P9_PINS_PRESENT 0x3FUL
+
+    #if defined(P10_PINS_PRESENT)
+        #undef P10_PINS_PRESENT
+    #endif
+    #define P10_PINS_PRESENT 0xFFUL
+
+    #if defined(P11_PINS_PRESENT)
+        #undef P11_PINS_PRESENT
+    #endif
+    #define P11_PINS_PRESENT 0xFFUL
+
+    #if defined(P12_PINS_PRESENT)
+        #undef P12_PINS_PRESENT
+    #endif
+    #define P12_PINS_PRESENT 0x7UL
+
+    #if defined(P13_PINS_PRESENT)
+        #undef P13_PINS_PRESENT
+    #endif
+    #define P13_PINS_PRESENT 0xFUL
+
     #define P0_FEATURE_PINS_PRESENT P0_PINS_PRESENT
     #define P1_FEATURE_PINS_PRESENT P1_PINS_PRESENT
     #define P2_FEATURE_PINS_PRESENT P2_PINS_PRESENT
@@ -2687,17 +2924,6 @@
     #define P11_FEATURE_PINS_PRESENT P11_PINS_PRESENT
     #define P12_FEATURE_PINS_PRESENT P12_PINS_PRESENT
     #define P13_FEATURE_PINS_PRESENT P13_PINS_PRESENT
-
-    #define P0_PIN_NUM P0_PIN_NUM_MAX
-    #define P1_PIN_NUM P1_PIN_NUM_MAX
-    #define P2_PIN_NUM P2_PIN_NUM_MAX
-    #define P6_PIN_NUM P6_PIN_NUM_MAX
-    #define P8_PIN_NUM P8_PIN_NUM_MAX
-    #define P9_PIN_NUM P9_PIN_NUM_MAX
-    #define P10_PIN_NUM P10_PIN_NUM_MAX
-    #define P11_PIN_NUM P11_PIN_NUM_MAX
-    #define P12_PIN_NUM P12_PIN_NUM_MAX
-    #define P13_PIN_NUM P13_PIN_NUM_MAX
 
     #define TWIM120_EASYDMA_MAXCNT_SIZE 16
     #define TWIM130_EASYDMA_MAXCNT_SIZE 16
