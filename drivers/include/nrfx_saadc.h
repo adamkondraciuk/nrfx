@@ -24,7 +24,7 @@ extern "C" {
 #define NRFX_SAADC_DEFAULT_ACQTIME 79
 #endif
 
-#if NRF_SAADC_HAS_CONV_TIME || defined(__NRFX_DOXYGEN__)
+#if NRF_SAADC_HAS_CONVTIME || defined(__NRFX_DOXYGEN__)
 /** @brief Auxiliary symbol specifying default value for the SAADC conversion time. */
 #define NRFX_SAADC_DEFAULT_CONV_TIME 7
 #endif
