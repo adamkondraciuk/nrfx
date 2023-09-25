@@ -390,7 +390,7 @@ NRF_STATIC_INLINE void nrf_resethub_event_clear(NRF_RESETHUB_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_resethub_event_check(NRF_RESETHUB_Type const * p_reg,
                                                 nrf_resethub_event_t      event)
 {
-    return (bool)*((volatile uint32_t *)((uint8_t *)p_reg + event));
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_resethub_int_enable(NRF_RESETHUB_Type * p_reg,

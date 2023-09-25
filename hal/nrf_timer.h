@@ -709,7 +709,7 @@ NRF_STATIC_INLINE void nrf_timer_task_trigger(NRF_TIMER_Type * p_reg,
 NRF_STATIC_INLINE uint32_t nrf_timer_task_address_get(NRF_TIMER_Type const * p_reg,
                                                       nrf_timer_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_timer_event_clear(NRF_TIMER_Type *  p_reg,
@@ -722,13 +722,13 @@ NRF_STATIC_INLINE void nrf_timer_event_clear(NRF_TIMER_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_timer_event_check(NRF_TIMER_Type const * p_reg,
                                              nrf_timer_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_timer_event_address_get(NRF_TIMER_Type const * p_reg,
                                                        nrf_timer_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_task_event_address_get(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_timer_shorts_enable(NRF_TIMER_Type * p_reg,

@@ -147,7 +147,7 @@ NRF_STATIC_INLINE void nrf_exmif_task_trigger(NRF_EXMIF_Type * p_reg,
 NRF_STATIC_INLINE uint32_t nrf_exmif_task_address_get(NRF_EXMIF_Type const * p_reg,
                                                       nrf_exmif_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_exmif_reset_set(NRF_EXMIF_Type * p_reg,

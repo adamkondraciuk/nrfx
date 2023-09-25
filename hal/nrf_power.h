@@ -1202,7 +1202,7 @@ NRF_STATIC_INLINE void nrf_power_event_clear(NRF_POWER_Type * p_reg, nrf_power_e
 
 NRF_STATIC_INLINE bool nrf_power_event_check(NRF_POWER_Type const * p_reg, nrf_power_event_t event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE bool nrf_power_event_get_and_clear(NRF_POWER_Type *  p_reg,

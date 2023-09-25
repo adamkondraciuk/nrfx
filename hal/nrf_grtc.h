@@ -1051,7 +1051,7 @@ NRF_STATIC_INLINE bool nrf_grtc_event_check(NRF_GRTC_Type const * p_reg, nrf_grt
 #if !NRF_GRTC_HAS_EXTENDED
     NRFX_ASSERT((event != NRF_GRTC_EVENT_RTCOMPARE) && (event != NRF_GRTC_EVENT_RTCOMPARESYNC));
 #endif
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_grtc_event_clear(NRF_GRTC_Type * p_reg, nrf_grtc_event_t event)

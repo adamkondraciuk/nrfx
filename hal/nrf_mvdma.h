@@ -471,7 +471,7 @@ NRF_STATIC_INLINE void nrf_mvdma_event_clear(NRF_MVDMA_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_mvdma_event_check(NRF_MVDMA_Type const * p_reg,
                                              nrf_mvdma_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_mvdma_event_address_get(NRF_MVDMA_Type const * p_reg,

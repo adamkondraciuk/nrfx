@@ -352,7 +352,7 @@ NRF_STATIC_INLINE void nrf_rramc_event_clear(NRF_RRAMC_Type * p_reg, nrf_rramc_e
 
 NRF_STATIC_INLINE bool nrf_rramc_event_check(NRF_RRAMC_Type const * p_reg, nrf_rramc_event_t event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_rramc_event_address_get(NRF_RRAMC_Type const * p_reg,

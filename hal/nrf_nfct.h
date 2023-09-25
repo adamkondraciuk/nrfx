@@ -996,7 +996,7 @@ NRF_STATIC_INLINE void nrf_nfct_task_trigger(NRF_NFCT_Type * p_reg, nrf_nfct_tas
 NRF_STATIC_INLINE uint32_t nrf_nfct_task_address_get(NRF_NFCT_Type const * p_reg,
                                                      nrf_nfct_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_nfct_event_clear(NRF_NFCT_Type * p_reg, nrf_nfct_event_t event)
@@ -1007,13 +1007,13 @@ NRF_STATIC_INLINE void nrf_nfct_event_clear(NRF_NFCT_Type * p_reg, nrf_nfct_even
 
 NRF_STATIC_INLINE bool nrf_nfct_event_check(NRF_NFCT_Type const * p_reg, nrf_nfct_event_t event)
 {
-    return (bool)*(volatile const uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_nfct_event_address_get(NRF_NFCT_Type const * p_reg,
                                                       nrf_nfct_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_task_event_address_get(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_nfct_shorts_enable(NRF_NFCT_Type * p_reg, uint32_t short_mask)

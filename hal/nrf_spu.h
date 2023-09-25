@@ -749,7 +749,7 @@ NRF_STATIC_INLINE void nrf_spu_event_clear(NRF_SPU_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_spu_event_check(NRF_SPU_Type const * p_reg,
                                            nrf_spu_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_spu_int_enable(NRF_SPU_Type * p_reg,

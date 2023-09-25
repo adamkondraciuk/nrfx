@@ -254,7 +254,7 @@ NRF_STATIC_INLINE void nrf_lfrc_power_control_set(NRF_LFRC_Type *          p_reg
 NRF_STATIC_INLINE uint32_t nrf_lfrc_task_address_get(NRF_LFRC_Type const * p_reg,
                                                      nrf_lfrc_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_lfrc_task_trigger(NRF_LFRC_Type * p_reg, nrf_lfrc_task_t task)
@@ -265,7 +265,7 @@ NRF_STATIC_INLINE void nrf_lfrc_task_trigger(NRF_LFRC_Type * p_reg, nrf_lfrc_tas
 NRF_STATIC_INLINE uint32_t nrf_lfrc_event_address_get(NRF_LFRC_Type const * p_reg,
                                                       nrf_lfrc_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_task_event_address_get(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_lfrc_event_clear(NRF_LFRC_Type * p_reg, nrf_lfrc_event_t event)
@@ -276,7 +276,7 @@ NRF_STATIC_INLINE void nrf_lfrc_event_clear(NRF_LFRC_Type * p_reg, nrf_lfrc_even
 
 NRF_STATIC_INLINE bool nrf_lfrc_event_check(NRF_LFRC_Type const * p_reg, nrf_lfrc_event_t event)
 {
-    return (bool)*((volatile uint32_t *)((uint8_t *)p_reg + event));
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_lfrc_int_enable(NRF_LFRC_Type * p_reg, uint32_t mask)

@@ -406,7 +406,7 @@ NRF_STATIC_INLINE void nrf_lrcconf_event_clear(NRF_LRCCONF_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_lrcconf_event_check(NRF_LRCCONF_Type const * p_reg,
                                                nrf_lrcconf_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE nrf_lrcconf_task_t nrf_lrcconf_clkstart_task_get(uint8_t index)

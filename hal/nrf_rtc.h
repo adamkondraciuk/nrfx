@@ -352,7 +352,7 @@ NRF_STATIC_INLINE void nrf_rtc_publish_clear(NRF_RTC_Type *  p_reg,
 
 NRF_STATIC_INLINE bool nrf_rtc_event_check(NRF_RTC_Type const * p_reg, nrf_rtc_event_t event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_rtc_event_clear(NRF_RTC_Type * p_reg, nrf_rtc_event_t event)

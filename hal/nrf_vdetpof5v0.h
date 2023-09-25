@@ -308,7 +308,7 @@ NRF_STATIC_INLINE void nrf_vdetpof5v0_dft_dtb3_config_set(NRF_VDETPOF5V0_Type * 
 NRF_STATIC_INLINE uint32_t nrf_vdetpof5v0_task_address_get(NRF_VDETPOF5V0_Type const * p_reg,
                                                            nrf_vdetpof5v0_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_vdetpof5v0_task_trigger(NRF_VDETPOF5V0_Type * p_reg,
@@ -320,7 +320,7 @@ NRF_STATIC_INLINE void nrf_vdetpof5v0_task_trigger(NRF_VDETPOF5V0_Type * p_reg,
 NRF_STATIC_INLINE uint32_t nrf_vdetpof5v0_event_address_get(NRF_VDETPOF5V0_Type const * p_reg,
                                                             nrf_vdetpof5v0_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_task_event_address_get(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_vdetpof5v0_event_clear(NRF_VDETPOF5V0_Type *  p_reg,
@@ -333,7 +333,7 @@ NRF_STATIC_INLINE void nrf_vdetpof5v0_event_clear(NRF_VDETPOF5V0_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_vdetpof5v0_event_check(NRF_VDETPOF5V0_Type const * p_reg,
                                                   nrf_vdetpof5v0_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_vdetpof5v0_int_enable(NRF_VDETPOF5V0_Type * p_reg, uint32_t mask)

@@ -318,7 +318,7 @@ NRF_STATIC_INLINE void nrf_aar_task_trigger(NRF_AAR_Type * p_reg, nrf_aar_task_t
 NRF_STATIC_INLINE uint32_t nrf_aar_task_address_get(NRF_AAR_Type const * p_reg,
                                                     nrf_aar_task_t       task)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE void nrf_aar_enable(NRF_AAR_Type * p_reg)

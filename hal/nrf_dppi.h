@@ -339,7 +339,7 @@ NRF_STATIC_INLINE void nrf_dppi_task_trigger(NRF_DPPIC_Type * p_reg, nrf_dppi_ta
 NRF_STATIC_INLINE uint32_t nrf_dppi_task_address_get(NRF_DPPIC_Type const * p_reg,
                                                      nrf_dppi_task_t        task)
 {
-    return (uint32_t) ((uint8_t *) p_reg + (uint32_t ) task);
+    return nrf_task_event_address_get(p_reg, task);
 }
 
 NRF_STATIC_INLINE bool nrf_dppi_channel_check(NRF_DPPIC_Type const * p_reg, uint8_t channel)

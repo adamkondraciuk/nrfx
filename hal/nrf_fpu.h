@@ -98,7 +98,7 @@ NRF_STATIC_INLINE void nrf_fpu_event_clear(NRF_FPU_Type *  p_reg,
 NRF_STATIC_INLINE bool nrf_fpu_event_check(NRF_FPU_Type const * p_reg,
                                            nrf_fpu_event_t      event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_fpu_int_enable(NRF_FPU_Type * p_reg, uint32_t mask)

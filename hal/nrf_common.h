@@ -100,6 +100,10 @@ NRF_STATIC_INLINE void nrf_barrier_r(void);
 
 NRF_STATIC_INLINE void nrf_barrier_rw(void);
 
+NRF_STATIC_INLINE bool nrf_event_check(void const * p_reg, uint32_t event);
+
+NRF_STATIC_INLINE uint32_t nrf_task_event_address_get(void const * p_reg, uint32_t task_event);
+
 #ifndef NRF_DECLARE_ONLY
 
 NRF_STATIC_INLINE void nrf_event_readback(void * p_event_reg)
@@ -198,6 +202,15 @@ NRF_STATIC_INLINE bool nrf_dma_accessible_check(void const * p_reg, void const *
 #endif
 }
 
+NRF_STATIC_INLINE bool nrf_event_check(void const * p_reg, uint32_t event)
+{
+    return (bool)*(volatile const uint32_t *)((const uint8_t *)p_reg + (uint32_t)event);
+}
+
+NRF_STATIC_INLINE uint32_t nrf_task_event_address_get(void const * p_reg, uint32_t task_event)
+{
+    return (uint32_t)((const uint8_t *)p_reg + task_event);
+}
 #endif // NRF_DECLARE_ONLY
 
 #ifdef __cplusplus

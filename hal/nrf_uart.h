@@ -343,13 +343,13 @@ NRF_STATIC_INLINE void nrf_uart_event_clear(NRF_UART_Type * p_reg, nrf_uart_even
 
 NRF_STATIC_INLINE bool nrf_uart_event_check(NRF_UART_Type const * p_reg, nrf_uart_event_t event)
 {
-    return (bool)*(volatile uint32_t *)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_event_check(p_reg, event);
 }
 
 NRF_STATIC_INLINE uint32_t nrf_uart_event_address_get(NRF_UART_Type const * p_reg,
                                                       nrf_uart_event_t      event)
 {
-    return (uint32_t)((uint8_t *)p_reg + (uint32_t)event);
+    return nrf_task_event_address_get(p_reg, event);
 }
 
 NRF_STATIC_INLINE void nrf_uart_int_enable(NRF_UART_Type * p_reg, uint32_t mask)
