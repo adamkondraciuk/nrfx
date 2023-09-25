@@ -52,6 +52,13 @@ extern "C" {
 #define NRF_SPU_HAS_IPCT 0
 #endif
 
+#if defined(SPU_FEATURE_TDD_MaxCount) || defined(__NRFX_DOXYGEN__)
+/** @brief Symbol indicating whether SPU has registers related to TDD. */
+#define NRF_SPU_HAS_TDD 1
+#else
+#define NRF_SPU_HAS_TDD 0
+#endif
+
 #if NRF_SPU_HAS_OWNERSHIP
 
 /** @brief Number of peripherals. */
@@ -108,7 +115,12 @@ extern "C" {
 #define NRF_SPU_FEATURE_BELLS_INTERRUPT_COUNT    SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_MaxCount
 #endif
 
+#if NRF_SPU_HAS_TDD
+/** @brief Number of TDDs. */
+#define NRF_SPU_FEATURE_TDD_COUNT                SPU_FEATURE_TDD_MaxCount
 #endif
+
+#endif // NRF_SPU_HAS_OWNERSHIP
 
 /** @brief SPU events. */
 typedef enum
@@ -195,6 +207,12 @@ typedef enum
     NRF_SPU_FEATURE_BELLS_EVENTS,       /**< BELLS events pair. */
     NRF_SPU_FEATURE_BELLS_INTERRUPT,    /**< BELLS interrupt pair. */
 #endif
+#endif
+#if NRF_SPU_HAS_TDD
+    NRF_SPU_FEATURE_TDD,                /**< TDD. */
+#endif
+#if defined(NRF_SPU_FEATURE_EXT)
+    NRF_SPU_FEATURE_EXT,
 #endif
 } nrf_spu_feature_t;
 
@@ -1141,6 +1159,17 @@ NRF_STATIC_INLINE bool nrf_spu_feature_secattr_get(NRF_SPU_Type const * p_reg,
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
 
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            return (p_reg->FEATURE.TDD[index]
+                    & SPU_FEATURE_TDD_SECATTR_Msk)
+                   >> SPU_FEATURE_TDD_SECATTR_Pos;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_SECATTR_GET_EXT)
+        NRF_SPU_FEATURE_SECATTR_GET_EXT();
+#endif
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1245,6 +1274,19 @@ NRF_STATIC_INLINE bool nrf_spu_feature_lock_get(NRF_SPU_Type const * p_reg,
                    >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos;
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
+
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            return (p_reg->FEATURE.TDD[index]
+                    & SPU_FEATURE_TDD_LOCK_Msk)
+                   >> SPU_FEATURE_TDD_LOCK_Pos;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_LOCK_GET_EXT)
+        NRF_SPU_FEATURE_LOCK_GET_EXT();
+#endif
+
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1349,6 +1391,19 @@ NRF_STATIC_INLINE bool nrf_spu_feature_block_get(NRF_SPU_Type const * p_reg,
                    >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos;
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
+
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            return (p_reg->FEATURE.TDD[index]
+                    & SPU_FEATURE_TDD_BLOCK_Msk)
+                   >> SPU_FEATURE_TDD_BLOCK_Pos;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_BLOCK_GET_EXT)
+        NRF_SPU_FEATURE_BLOCK_GET_EXT();
+#endif
+
         default:
             NRFX_ASSERT(0);
             return false;
@@ -1453,6 +1508,19 @@ NRF_STATIC_INLINE nrf_owner_t nrf_spu_feature_ownerid_get(NRF_SPU_Type const * p
                    >> SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos);
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
+
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            return (nrf_owner_t)((p_reg->FEATURE.TDD[index]
+                    & SPU_FEATURE_TDD_OWNERID_Msk)
+                   >> SPU_FEATURE_TDD_OWNERID_Pos);
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_OWNERID_GET_EXT)
+        NRF_SPU_FEATURE_OWNERID_GET_EXT();
+#endif
+
         default:
             NRFX_ASSERT(0);
             return (nrf_owner_t)0;
@@ -1629,6 +1697,23 @@ NRF_STATIC_INLINE void nrf_spu_feature_secattr_set(NRF_SPU_Type *    p_reg,
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
 
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            p_reg->FEATURE.TDD[index] =
+                ((p_reg->FEATURE.TDD[index] &
+                  SPU_FEATURE_TDD_SECATTR_Msk) |
+                 ((enable ?
+                   SPU_FEATURE_TDD_SECATTR_Secure :
+                   SPU_FEATURE_TDD_SECATTR_NonSecure)
+                  << SPU_FEATURE_TDD_SECATTR_Pos));
+            break;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_SECATTR_SET_EXT)
+        NRF_SPU_FEATURE_SECATTR_SET_EXT();
+#endif
+
         default:
             NRFX_ASSERT(0);
             break;
@@ -1776,6 +1861,21 @@ NRF_STATIC_INLINE void nrf_spu_feature_lock_enable(NRF_SPU_Type *    p_reg,
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
 
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            p_reg->FEATURE.TDD[index] =
+                ((p_reg->FEATURE.TDD[index] &
+                  SPU_FEATURE_TDD_LOCK_Msk) |
+                 (SPU_FEATURE_TDD_LOCK_Locked
+                  << SPU_FEATURE_TDD_LOCK_Pos));
+            break;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_LOCK_ENABLE_EXT)
+        NRF_SPU_FEATURE_LOCK_ENABLE_EXT();
+#endif
+
         default:
             NRFX_ASSERT(0);
             break;
@@ -1922,6 +2022,21 @@ NRF_STATIC_INLINE void nrf_spu_feature_block_enable(NRF_SPU_Type *    p_reg,
             break;
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
+
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            p_reg->FEATURE.TDD[index] =
+                ((p_reg->FEATURE.TDD[index] &
+                  SPU_FEATURE_TDD_BLOCK_Msk) |
+                 (SPU_FEATURE_TDD_BLOCK_Blocked
+                  << SPU_FEATURE_TDD_BLOCK_Pos));
+            break;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_BLOCK_ENABLE_EXT)
+        NRF_SPU_FEATURE_BLOCK_ENABLE_EXT();
+#endif
 
         default:
             NRFX_ASSERT(0);
@@ -2084,6 +2199,22 @@ NRF_STATIC_INLINE void nrf_spu_feature_ownerid_set(NRF_SPU_Type *    p_reg,
             break;
 #endif // NRF_SPU_HAS_DOMAIN
 #endif // NRF_SPU_HAS_BELLS
+
+#if NRF_SPU_HAS_TDD
+        case NRF_SPU_FEATURE_TDD:
+            NRFX_ASSERT(index < NRF_SPU_FEATURE_TDD_COUNT);
+            p_reg->FEATURE.TDD[index] =
+                ((p_reg->FEATURE.TDD[index] &
+                  SPU_FEATURE_TDD_OWNERID_Msk) |
+                 ((owner_id
+                   << SPU_FEATURE_TDD_OWNERID_Pos) &
+                  SPU_FEATURE_TDD_OWNERID_Msk));
+            break;
+#endif // NRF_SPU_HAS_TDD
+
+#if defined(NRF_SPU_FEATURE_OWNERID_SET_EXT)
+        NRF_SPU_FEATURE_OWNERID_SET_EXT();
+#endif
 
         default:
             NRFX_ASSERT(0);
