@@ -27,7 +27,7 @@ extern "C" {
  *
  * @return Pointer to the structure of registers of the WDT peripheral.
  */
-#define NRF_WDT_INST_GET(idx) NRFX_CONCAT_2(NRF_WDT, idx)
+#define NRF_WDT_INST_GET(idx) NRFX_CONCAT(NRF_, WDT, idx)
 
 #if defined(WDT_TASKS_STOP_TASKS_STOP_Msk) || defined (__NRFX_DOXYGEN__)
 /** @brief Presence of Task STOP functionality. */

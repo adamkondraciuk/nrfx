@@ -24,7 +24,7 @@ extern "C" {
  *
  * @return Pointer to the structure of registers of the TWIS peripheral.
  */
-#define NRF_TWIS_INST_GET(idx) NRFX_CONCAT_2(NRF_TWIS, idx)
+#define NRF_TWIS_INST_GET(idx) NRFX_CONCAT(NRF_, TWIS, idx)
 
 #if defined(TWIS_DMA_RX_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether dedicated DMA register is present. */

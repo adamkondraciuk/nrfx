@@ -48,7 +48,7 @@ extern "C" {
  *
  * @return Pointer to the structure of registers of the GPIOTE peripheral.
  */
-#define NRF_GPIOTE_INST_GET(idx) NRFX_CONCAT_2(NRF_GPIOTE, idx)
+#define NRF_GPIOTE_INST_GET(idx) NRFX_CONCAT(NRF_, GPIOTE, idx)
 
 #if defined(GPIOTE_CONFIG_PORT_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Mask for covering port and pin bits in registers. */

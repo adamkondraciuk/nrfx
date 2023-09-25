@@ -25,7 +25,7 @@ extern "C" {
  *
  * @return Pointer to the structure of registers of the UARTE peripheral.
  */
-#define NRF_UARTE_INST_GET(idx) NRFX_CONCAT_2(NRF_UARTE, idx)
+#define NRF_UARTE_INST_GET(idx) NRFX_CONCAT(NRF_, UARTE, idx)
 
 #if defined(UARTE_DMA_RX_PTR_PTR_Msk) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether dedicated DMA register is present. */
