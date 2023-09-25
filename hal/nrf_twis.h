@@ -561,7 +561,7 @@ NRF_STATIC_INLINE volatile uint32_t* nrf_twis_getRegPtr(NRF_TWIS_Type * p_reg, u
 NRF_STATIC_INLINE volatile const uint32_t* nrf_twis_getRegPtr_c(NRF_TWIS_Type const * p_reg,
                                                                 uint32_t              offset)
 {
-    return (volatile const uint32_t*)((uint8_t *)p_reg + (uint32_t)offset);
+    return (volatile const uint32_t*)((uint8_t const *)p_reg + (uint32_t)offset);
 }
 
 
