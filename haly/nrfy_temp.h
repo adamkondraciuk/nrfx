@@ -149,6 +149,40 @@ NRFY_STATIC_INLINE uint32_t nrfy_temp_calibration_coeff_get(NRF_TEMP_Type const 
 }
 #endif
 
+#if defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+/** @refhal{nrf_temp_subscribe_set} */
+NRFY_STATIC_INLINE void nrfy_temp_subscribe_set(NRF_TEMP_Type * p_reg,
+                                                nrf_temp_task_t task,
+                                                uint8_t         channel)
+{
+    nrf_temp_subscribe_set(p_reg, task, channel);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_temp_subscribe_clear} */
+NRFY_STATIC_INLINE void nrfy_temp_subscribe_clear(NRF_TEMP_Type * p_reg, nrf_temp_task_t task)
+{
+    nrf_temp_subscribe_clear(p_reg, task);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_temp_publish_set} */
+NRFY_STATIC_INLINE void nrfy_temp_publish_set(NRF_TEMP_Type *  p_reg,
+                                              nrf_temp_event_t event,
+                                              uint8_t          channel)
+{
+    nrf_temp_publish_set(p_reg, event, channel);
+    nrf_barrier_w();
+}
+
+/** @refhal{nrf_temp_publish_clear} */
+NRFY_STATIC_INLINE void nrfy_temp_publish_clear(NRF_TEMP_Type *  p_reg, nrf_temp_event_t event)
+{
+    nrf_temp_publish_clear(p_reg, event);
+    nrf_barrier_w();
+}
+#endif // defined(DPPI_PRESENT) || defined(__NRFX_DOXYGEN__)
+
 /** @} */
 
 #ifdef __cplusplus
