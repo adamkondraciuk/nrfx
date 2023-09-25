@@ -10740,7 +10740,7 @@ static bool nrf52_errata_210(void)
 #endif
 
 #ifndef NRF52_ERRATA_211_ENABLE_WORKAROUND
-    #define NRF52_ERRATA_211_ENABLE_WORKAROUND 0
+    #define NRF52_ERRATA_211_ENABLE_WORKAROUND NRF52_ERRATA_211_PRESENT
 #endif
 
 static bool nrf52_errata_211(void)
@@ -12115,7 +12115,6 @@ static bool nrf52_errata_233(void)
 /* ========= Errata 236 ========= */
 #if    defined (NRF52810_XXAA) || defined (DEVELOP_IN_NRF52810) \
     || defined (NRF52811_XXAA) || defined (DEVELOP_IN_NRF52811) \
-    || defined (NRF52820_XXAA) || defined (DEVELOP_IN_NRF52820) \
     || defined (NRF52833_XXAA) || defined (DEVELOP_IN_NRF52833) \
     || defined (NRF52840_XXAA) || defined (DEVELOP_IN_NRF52840)
     #define NRF52_ERRATA_236_PRESENT 1
@@ -12134,7 +12133,6 @@ static bool nrf52_errata_236(void)
     #else
         #if defined (NRF52810_XXAA) || defined (DEVELOP_IN_NRF52810)\
          || defined (NRF52811_XXAA) || defined (DEVELOP_IN_NRF52811)\
-         || defined (NRF52820_XXAA) || defined (DEVELOP_IN_NRF52820)\
          || defined (NRF52833_XXAA) || defined (DEVELOP_IN_NRF52833)\
          || defined (NRF52840_XXAA) || defined (DEVELOP_IN_NRF52840)
             uint32_t var1 = *(uint32_t *)0x10000130ul;
@@ -12203,24 +12201,6 @@ static bool nrf52_errata_236(void)
                         return true;
                     default:
                         return true;
-                }
-            }
-        #endif
-        #if defined (NRF52820_XXAA) || defined (DEVELOP_IN_NRF52820)
-            if (var1 == 0x10)
-            {
-                switch(var2)
-                {
-                    case 0x00ul:
-                        return true;
-                    case 0x01ul:
-                        return true;
-                    case 0x02ul:
-                        return false;
-                    case 0x03ul:
-                        return false;
-                    default:
-                        return false;
                 }
             }
         #endif
@@ -12444,9 +12424,9 @@ static bool nrf52_errata_241(void)
                     case 0x01ul:
                         return true;
                     case 0x02ul:
-                        return false;
+                        return true;
                     default:
-                        return false;
+                        return true;
                 }
             }
         #endif
@@ -12472,9 +12452,9 @@ static bool nrf52_errata_241(void)
                     case 0x00ul:
                         return true;
                     case 0x01ul:
-                        return false;
+                        return true;
                     default:
-                        return false;
+                        return true;
                 }
             }
         #endif

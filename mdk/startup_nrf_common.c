@@ -42,6 +42,11 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 #endif
 
 /*---------------------------------------------------------------------------
+  Define __PROGRAM_START to avoid conflict with CMSIS
+ *---------------------------------------------------------------------------*/
+#define __PROGRAM_START
+
+/*---------------------------------------------------------------------------
   Interrupt vector tables
  *---------------------------------------------------------------------------*/
 
@@ -70,7 +75,7 @@ typedef struct __zero_table {
     uint32_t wlen;
 } __zero_table_t;
 
-void __STATIC_FORCEINLINE copy_region(const __copy_table_t * table)
+__STATIC_FORCEINLINE void copy_region(const __copy_table_t * table)
 {
     for (uint32_t i = 0; i < table->wlen; ++i)
     {
@@ -78,7 +83,7 @@ void __STATIC_FORCEINLINE copy_region(const __copy_table_t * table)
     }
 }
 
-void __STATIC_FORCEINLINE zero_region(const __zero_table_t * table)
+__STATIC_FORCEINLINE void zero_region(const __zero_table_t * table)
 {
     for (uint32_t i = 0; i < table->wlen; ++i)
     {
@@ -86,7 +91,7 @@ void __STATIC_FORCEINLINE zero_region(const __zero_table_t * table)
     }
 }
 
-void __STATIC_FORCEINLINE GNUInitializeMemories()
+__STATIC_FORCEINLINE void GNUInitializeMemories()
 {
     /* Perform C memory initialization */
     #ifndef NRF_SKIP_VARIABLE_INIT
@@ -186,32 +191,11 @@ extern __NO_RETURN void __START(void);
 
 __RESET_HANDLER_ATTRIBUTE void Reset_Handler(void)
 {
-#ifdef __ARM_ARCH
-    #ifndef NRF_NO_STACK_INIT
-        __set_PSP((uint32_t)(__STACK_BASE));
-        #if __ARM_ARCH >= 8
-            __set_MSPLIM((uint32_t)(__STACK_LIMIT));
-            __set_PSPLIM((uint32_t)(__STACK_LIMIT));
-        #endif
-    #endif
-#else
-	__asm__ __volatile__ (   					\
-            ".option push\n"					\
-            ".option norelax\n"					\
-            "la gp, __global_pointer$ \n"		\
-            ".option pop\n"						\
-        ::: "memory");
-
-    #ifndef NRF_NO_STACK_INIT
-        __set_SP((uint32_t)(__STACK_BASE));
-    #endif
-    #if !defined(NRF_NO_MTVT_CONFIG) && defined(__MTVT_PRESENT) && __MTVT_PRESENT
-        /* Configure machine trap vector table register */
-        csr_write(CSR_MTVT, __VECTOR_TABLE);
-
-        /* Setup machine trap vector in CSR and clear cause register (hardfault exceptions) */
-        csr_write(CSR_MTVEC, Trap_Handler);
-        csr_write(CSR_MCAUSE, 0);
+#ifndef NRF_NO_STACK_INIT
+    __set_PSP((uint32_t)(__STACK_BASE));
+    #if __ARM_ARCH >= 8
+        __set_MSPLIM((uint32_t)(__STACK_LIMIT));
+        __set_PSPLIM((uint32_t)(__STACK_LIMIT));
     #endif
 #endif
 
