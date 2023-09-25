@@ -398,9 +398,9 @@ void nrfx_gppi_channel_endpoints_setup(uint8_t channel, uint32_t eep, uint32_t t
         }
         else
         {
-            nrfx_interconnect_dppic_t * p_src_dppic  = nrfx_interconnect_dppic_get(src_domain);
             nrfx_interconnect_dppic_t * p_main_dppic = nrfx_interconnect_dppic_main_get();
-            nrfx_interconnect_dppic_t * p_dst_dppic  = nrfx_interconnect_dppic_get(dst_domain);
+            p_src_dppic = nrfx_interconnect_dppic_get(src_domain);
+            p_dst_dppic = nrfx_interconnect_dppic_get(dst_domain);
 
             nrfx_interconnect_dppic_to_dppic_path_t path_src_to_main =
             {
