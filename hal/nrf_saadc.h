@@ -1081,7 +1081,7 @@ NRF_STATIC_INLINE void nrf_saadc_channel_init(NRF_SAADC_Type *                  
             ((config->gain         << SAADC_CH_CONFIG_GAIN_Pos)   & SAADC_CH_CONFIG_GAIN_Msk)
             | ((config->reference  << SAADC_CH_CONFIG_REFSEL_Pos) & SAADC_CH_CONFIG_REFSEL_Msk)
             | ((config->acq_time   << SAADC_CH_CONFIG_TACQ_Pos)   & SAADC_CH_CONFIG_TACQ_Msk)
-#if NRF_SAADC_HAS_CH_CONTROL_RES
+#if NRF_SAADC_HAS_CH_CONFIG_RES
             | ((config->resistor_p << SAADC_CH_CONFIG_RESP_Pos)   & SAADC_CH_CONFIG_RESP_Msk)
             | ((config->resistor_n << SAADC_CH_CONFIG_RESN_Pos)   & SAADC_CH_CONFIG_RESN_Msk)
 #endif
