@@ -730,7 +730,15 @@ nrfx_err_t nrfx_qspi_write(void const * p_tx_buffer,
                            size_t       tx_buffer_length,
                            uint32_t     dst_address)
 {
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
     return qspi_xfer((void *)p_tx_buffer, tx_buffer_length, dst_address, NRFX_QSPI_STATE_WRITE);
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 }
 
 nrfx_err_t nrfx_qspi_read(void *   p_rx_buffer,

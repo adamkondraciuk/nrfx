@@ -546,8 +546,18 @@ static void irq_handler(NRF_SPIS_Type * p_spis, spis_cb_t * p_cb)
         switch (p_cb->spi_state)
         {
             case SPIS_BUFFER_RESOURCE_REQUESTED:
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
                 nrf_spis_tx_buffer_set(p_spis, (uint8_t *)p_cb->tx_buffer, p_cb->tx_buffer_size);
                 nrf_spis_rx_buffer_set(p_spis, (uint8_t *)p_cb->rx_buffer, p_cb->rx_buffer_size);
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
                 nrf_spis_task_trigger(p_spis, NRF_SPIS_TASK_RELEASE);
 

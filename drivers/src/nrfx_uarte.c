@@ -839,7 +839,18 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
     if (p_cb->tx.curr.length == 0)
     {
         p_cb->tx.curr.length = length;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
         p_cb->tx.curr.p_buffer = (uint8_t *)p_data;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
+
         if (use_cache)
         {
             p_cb->flags |= UARTE_FLAG_TX_USE_CACHE;
@@ -855,7 +866,18 @@ nrfx_err_t nrfx_uarte_tx(nrfx_uarte_t const * p_instance,
             bool res;
 
             p_cb->flags |= UARTE_FLAG_TX_LINKED;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
             p_cb->tx.next.p_buffer = (uint8_t *)p_data;
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
+
             p_cb->tx.next.length = length;
             NRFX_WAIT_FOR(nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_TXSTARTED), 10, 1, res);
             if (res)
@@ -965,6 +987,11 @@ static void user_handler_on_rx_done(uarte_control_block_t * p_cb,
                                     const uint8_t *         p_data,
                                     size_t                  len)
 {
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
     nrfx_uarte_event_t event = {
         .type = NRFX_UARTE_EVT_RX_DONE,
         .data = {
@@ -975,6 +1002,10 @@ static void user_handler_on_rx_done(uarte_control_block_t * p_cb,
         }
     };
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
+
     p_cb->handler(&event, p_cb->p_context);
 }
 
@@ -983,6 +1014,11 @@ static void user_handler_on_tx_done(uarte_control_block_t * p_cb,
                                     size_t                  len,
                                     bool                    abort)
 {
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-qual"
+#endif
+
     nrfx_uarte_event_t event = {
         .type = NRFX_UARTE_EVT_TX_DONE,
         .data = {
@@ -993,6 +1029,10 @@ static void user_handler_on_tx_done(uarte_control_block_t * p_cb,
             }
         }
     };
+
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
     p_cb->handler(&event, p_cb->p_context);
 }
