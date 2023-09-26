@@ -110,7 +110,7 @@ static void deconfigure_pins(nrfx_i2s_t const * p_instance)
 
     nrfy_i2s_pins_get(p_instance->p_reg, &pins);
 
-#if USE_WORKAROUND_FOR_ANOMALY_170
+#if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_170)
     // Create bitmask for extracting pin number from PSEL register.
     uint32_t pin_mask = I2S_PSEL_SCK_PIN_Msk;
 #if NRF_I2S_HAS_GPIO_PORT_SELECTION
@@ -281,7 +281,7 @@ void nrfx_i2s_uninit(nrfx_i2s_t const * p_instance)
         deconfigure_pins(p_instance);
     }
 
-#if USE_WORKAROUND_FOR_ANOMALY_196
+#if NRFX_CHECK(USE_WORKAROUND_FOR_ANOMALY_196)
     if (!p_cb->skip_psel_cfg)
     {
         // Disabling I2S is insufficient to release pins acquired by the peripheral.
