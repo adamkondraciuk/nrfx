@@ -38,6 +38,7 @@ All notable changes to this project are documented in this file.
 - Added the new NRFX_ERROR_ALREADY error code that replaced the NRFX_ERROR_ALREADY_INITIALIZED one. Now the NRFX_ERROR_ALREADY_INITIALIZED error code is deprecated.
 - Changed the organization of configuration structure members in the LPCOMP driver.
 - Changed the definition of nrf_saadc_value_t type in the SAADC HAL. Now pointer to the buffer holding conversion results is a void* instead of int16_t*.
+- Changed the return value in all drivers in case initialization functions have already been executed. Now the NRFX_ERROR_ALREADY error code will be returned instead of NRFX_ERROR_INVALID_STATE.
 
 ### Fixed
 - Fixed configuration of the external reference in nrfx_comp_init() and nrfx_comp_reconfigure() functions. Now the differential mode can be enabled in the COMP driver.
