@@ -60,10 +60,10 @@ enum {
 /** @brief Structure describing copy request for the MVDMA driver. */
 typedef struct
 {
-    void const * p_source;  ///< Pointer to the source buffer.
-    void *       p_sink;    ///< Pointer to the sink buffer.
-    size_t       size;      ///< Number of bytes to copy.
-    void *       p_context; ///< Request context.
+    void * p_source;  ///< Pointer to the source buffer.
+    void * p_sink;    ///< Pointer to the sink buffer.
+    size_t size;      ///< Number of bytes to copy.
+    void * p_context; ///< Request context.
 } nrfx_mvdma_copy_request_t;
 
 /** @brief Structure describing list execution request for the MVDMA driver. */
@@ -171,7 +171,7 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
  * @retval NRFX_ERROR_BUSY Different request is executed at the moment.
  */
 nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
-                                   void const *         p_buffer,
+                                   void *               p_buffer,
                                    size_t               size,
                                    void *               p_context);
 

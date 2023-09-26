@@ -191,7 +191,7 @@ nrfx_err_t nrfx_mvdma_copy(nrfx_mvdma_t const *              p_instance,
 }
 
 nrfx_err_t nrfx_mvdma_buffer_clear(nrfx_mvdma_t const * p_instance,
-                                   void const *         p_buffer,
+                                   void *               p_buffer,
                                    size_t               size,
                                    void *               p_context)
 {
