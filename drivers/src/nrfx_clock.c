@@ -16,8 +16,10 @@ extern bool nrfx_power_irq_enabled;
 
 #if defined(CLOCK_LFCLKSRC_SRC_RC) || defined(__NRFX_DOXYGEN__)
     #define LF_SRC_RC CLOCK_LFCLKSRC_SRC_RC
-#else
+#elif defined(CLOCK_LFCLKSRC_SRC_LFRC)
     #define LF_SRC_RC CLOCK_LFCLKSRC_SRC_LFRC
+#else
+    #define LF_SRC_RC CLOCK_LFCLK_SRC_SRC_LFRC
 #endif
 
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
@@ -307,7 +309,7 @@ void nrfx_clock_disable(void)
                                      NRF_CLOCK_INT_LF_STARTED_MASK |
 #if NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
                                      NRF_CLOCK_INT_DONE_MASK |
-#if NRF_HAS_CALIBRATION_TIMER
+#if NRF_CLOCK_HAS_CALIBRATION_TIMER
                                      NRF_CLOCK_INT_CTTO_MASK |
 #endif
 #endif // NRFX_CHECK(NRFX_CLOCK_CONFIG_LF_CAL_ENABLED)
