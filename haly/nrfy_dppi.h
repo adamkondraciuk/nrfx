@@ -113,6 +113,15 @@ NRFY_STATIC_INLINE void nrfy_dppi_subscribe_clear(NRF_DPPIC_Type * p_reg, nrf_dp
     nrf_barrier_w();
 }
 
+/** @refhal{nrf_dppi_channels_group_set} */
+NRFY_STATIC_INLINE void nrfy_dppi_channels_group_set(NRF_DPPIC_Type *         p_reg,
+                                                     uint32_t                 channel_mask,
+                                                     nrf_dppi_channel_group_t channel_group)
+{
+    nrf_dppi_channels_group_set(p_reg, channel_mask, channel_group);
+    nrf_barrier_w();
+}
+
 /** @refhal{nrf_dppi_channels_include_in_group} */
 NRFY_STATIC_INLINE void nrfy_dppi_channels_include_in_group(NRF_DPPIC_Type *         p_reg,
                                                             uint32_t                 channel_mask,
