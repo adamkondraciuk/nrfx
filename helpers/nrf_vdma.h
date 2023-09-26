@@ -114,7 +114,7 @@ typedef enum
  * @param[in]  attributes Attributes of the job.
  */
 __STATIC_INLINE void nrf_vdma_job_fill(nrf_vdma_job_t * p_job,
-                                       void const *     p_buffer,
+                                       void *           p_buffer,
                                        size_t           size,
                                        uint8_t          attributes)
 {
@@ -136,7 +136,7 @@ __STATIC_INLINE void nrf_vdma_job_fill(nrf_vdma_job_t * p_job,
  * @param[in]  attributes Additional attribute of the job.
  */
 __STATIC_INLINE void nrf_vdma_job_reduced_init(nrf_vdma_job_reduced_t * p_job,
-                                               void const *             p_buffer,
+                                               void *                   p_buffer,
                                                size_t                   size,
                                                uint8_t                  attributes)
 {
@@ -153,7 +153,7 @@ __STATIC_INLINE void nrf_vdma_job_reduced_init(nrf_vdma_job_reduced_t * p_job,
  * @param[in]  p_buffer Job buffer.
  */
 __STATIC_INLINE void nrf_vdma_job_reduced_fill(nrf_vdma_job_reduced_t * p_job,
-                                               void const *             p_buffer)
+                                               void *                   p_buffer)
 {
     *p_job = (uint32_t)p_buffer;
 }
@@ -203,8 +203,8 @@ __STATIC_INLINE void nrf_vdma_job_terminate(nrf_vdma_job_t * p_job)
  * @param[out] p_job        Pointer to the structure of the job to become link.
  * @param[in]  p_job_linked Pointer to the structure of the job to be linked.
  */
-__STATIC_INLINE void nrf_vdma_job_link(nrf_vdma_job_t *       p_job,
-                                       nrf_vdma_job_t const * p_job_linked)
+__STATIC_INLINE void nrf_vdma_job_link(nrf_vdma_job_t * p_job,
+                                       nrf_vdma_job_t * p_job_linked)
 {
     p_job->p_buffer   = (uint8_t *)p_job_linked;
     p_job->attributes = NRF_VDMA_ATTRIBUTE_JOB_LIST;
