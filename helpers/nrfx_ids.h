@@ -180,7 +180,7 @@ __STATIC_INLINE void nrfx_ids_uninit(nrfx_ids_t const * p_instance)
     nrfx_ipc_uninit();
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
-    nrfx_bellboard_uninit((nrfx_bellboard_t *)p_instance);
+    nrfx_bellboard_uninit((nrfx_bellboard_t const *)p_instance);
 #else /* ISA_RISCV */
     (void)p_instance;
     nrfx_vevif_uninit();
@@ -201,7 +201,7 @@ __STATIC_INLINE void nrfx_ids_int_enable(nrfx_ids_t const * p_instance, uint32_t
     nrfx_ipc_receive_event_group_enable(mask);
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
-    nrfx_bellboard_int_enable((nrfx_bellboard_t *)p_instance, mask);
+    nrfx_bellboard_int_enable((nrfx_bellboard_t const *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
     nrfx_vevif_int_enable(mask);
@@ -222,7 +222,7 @@ __STATIC_INLINE void nrfx_ids_int_disable(nrfx_ids_t const * p_instance, uint32_
     nrfx_ipc_receive_event_group_disable(mask);
 #elif defined(HALTIUM_XXAA)
 #if defined(ISA_ARM) || defined(NRF_SYSTEMC_TEMPORARY_RISCV)
-    nrfx_bellboard_int_disable((nrfx_bellboard_t *)p_instance, mask);
+    nrfx_bellboard_int_disable((nrfx_bellboard_t const *)p_instance, mask);
 #else /* ISA_RISCV */
     (void)p_instance;
     nrfx_vevif_int_disable(mask);
