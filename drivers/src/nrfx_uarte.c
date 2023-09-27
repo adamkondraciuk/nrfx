@@ -23,7 +23,7 @@
 #define UARTE_LENGTH_VALIDATE(drv_inst_idx, len)    \
         (NRFX_FOREACH_ENABLED(UARTE, UARTEX_LENGTH_VALIDATE, (||), (0), drv_inst_idx, len, 0))
 
-#if NRFX_UARTE_CONFIG_RX_CACHE_ENABLED
+#if NRFX_CHECK(NRFX_UARTE_CONFIG_RX_CACHE_ENABLED)
 // Internal cache buffer is used if buffers provided by a user cannot be used in DMA. This is a
 // HW limitation on some platforms but for testing purposes it can be emulated on any platform.
 #define RX_CACHE_SUPPORTED 1
