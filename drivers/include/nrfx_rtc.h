@@ -152,6 +152,9 @@ void nrfx_rtc_disable(nrfx_rtc_t const * p_instance);
  *  -  The requested absolute compare value is not bigger than (0x00FFFFFF)-tick_latency. It is
  *   the user's responsibility to ensure this.
  *
+ * @warning Once the compare event is received, corresponding compare channel
+ *          will be disabled before executing event handler provided by the user.
+ *
  * @param[in] p_instance Pointer to the driver instance structure.
  * @param[in] channel    One of the channels of the instance.
  * @param[in] val        Absolute value to be set in the compare register.
