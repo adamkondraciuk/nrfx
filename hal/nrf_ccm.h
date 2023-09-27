@@ -224,9 +224,9 @@ extern "C" {
 #define NRF_CCM_HAS_MODE_DATARATE_125KBPS 0
 #endif
 
+#if (!NRF_CCM_HAS_MODE_DATARATE_125KBPS && \
+     defined(CCM_MODE_DATARATE_125Kbit)) || defined(__NRFX_DOXYGEN__)
 /** @brief Support for 125 Kbit radio data rate. */
-#if !NRF_CCM_HAS_MODE_DATARATE_125KBPS && \
-    (defined(CCM_MODE_DATARATE_125Kbit) || defined(__NRFX_DOXYGEN__))
 #define NRF_CCM_HAS_MODE_DATARATE_125KBIT 1
 #else
 #define NRF_CCM_HAS_MODE_DATARATE_125KBIT 0
@@ -234,9 +234,9 @@ extern "C" {
 
 #if defined(CCM_MODE_DATARATE_250Kbit) || defined(__NRFX_DOXYGEN__)
 /** @brief Support for 250 Kbit radio data rate. */
-#define NRF_CCM_HAS_MODE_DATARATE_250Kbit 1
+#define NRF_CCM_HAS_MODE_DATARATE_250KBIT 1
 #else
-#define NRF_CCM_HAS_MODE_DATARATE_250Kbit 0
+#define NRF_CCM_HAS_MODE_DATARATE_250KBIT 0
 #endif
 
 #if defined(CCM_MODE_DATARATE_500Kbps) || defined(__NRFX_DOXYGEN__)
@@ -246,9 +246,9 @@ extern "C" {
 #define NRF_CCM_HAS_MODE_DATARATE_500KBPS 0
 #endif
 
+#if (!NRF_CCM_HAS_MODE_DATARATE_500KBPS && \
+     defined(CCM_MODE_DATARATE_500Kbit)) || defined(__NRFX_DOXYGEN__)
 /** @brief Support for 500 Kbit radio data rate. */
-#if !NRF_CCM_HAS_MODE_DATARATE_500KBPS && \
-    (defined(CCM_MODE_DATARATE_500Kbit) || defined(__NRFX_DOXYGEN__))
 #define NRF_CCM_HAS_MODE_DATARATE_500KBIT 1
 #else
 #define NRF_CCM_HAS_MODE_DATARATE_500KBIT 0
@@ -383,17 +383,15 @@ typedef enum
 
 #if NRF_CCM_HAS_MODE_DATARATE_125KBPS
     NRF_CCM_DATARATE_125K = CCM_MODE_DATARATE_125Kbps, ///< 125 Kbps.
-#endif
-#if NRF_CCM_HAS_MODE_DATARATE_125KBIT
+#elif NRF_CCM_HAS_MODE_DATARATE_125KBIT
     NRF_CCM_DATARATE_125K = CCM_MODE_DATARATE_125Kbit, ///< 125 Kbps.
 #endif
-#if NRF_CCM_HAS_MODE_DATARATE_250Kbit
+#if NRF_CCM_HAS_MODE_DATARATE_250KBIT
     NRF_CCM_DATARATE_250K = CCM_MODE_DATARATE_250Kbit, ///< 250 Kbps.
 #endif
 #if NRF_CCM_HAS_MODE_DATARATE_500KBPS
     NRF_CCM_DATARATE_500K = CCM_MODE_DATARATE_500Kbps, ///< 500 Kbps.
-#endif
-#if NRF_CCM_HAS_MODE_DATARATE_500KBIT
+#elif NRF_CCM_HAS_MODE_DATARATE_500KBIT
     NRF_CCM_DATARATE_500K = CCM_MODE_DATARATE_500Kbit, ///< 500 Kbit.
 #endif
     NRF_CCM_DATARATE_1M   = CCM_MODE_DATARATE_1Mbit,   ///< 1 Mbps.
