@@ -250,6 +250,26 @@ static uint8_t get_pin_idx(nrfx_gpiote_pin_t pin)
 #endif
 }
 
+/** @brief Function for getting instance control block.
+ *
+ * Function is optimized for case when there is only one GPIOTE instance.
+ *
+ * @param[in] idx Instance index.
+ *
+ * @return Control block.
+ */
+static gpiote_control_block_t * get_cb(uint32_t idx)
+{
+    if (NRFX_GPIOTE_ENABLED_COUNT == 1)
+    {
+        return &m_cb[0];
+    }
+    else
+    {
+        return &m_cb[idx];
+    }
+}
+
 /** @brief Checks if pin is in use by a given GPIOTE instance.
  *
  * @param[in] p_instance Pointer to the driver instance structure.
@@ -259,7 +279,7 @@ static uint8_t get_pin_idx(nrfx_gpiote_pin_t pin)
  */
 static bool pin_in_use(nrfx_gpiote_t const * p_instance, uint32_t pin)
 {
-    return m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)] & PIN_FLAG_IN_USE;
+    return get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)] & PIN_FLAG_IN_USE;
 }
 
 /** @brief Check if Task/Event is used by a given GPIOTE instance.
@@ -273,7 +293,7 @@ static bool pin_in_use(nrfx_gpiote_t const * p_instance, uint32_t pin)
  */
 static bool pin_in_use_by_te(nrfx_gpiote_t const * p_instance, uint32_t pin)
 {
-    return m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)] & PIN_FLAG_TE_USED;
+    return get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)] & PIN_FLAG_TE_USED;
 }
 
 /** @brief Check if pin has trigger for a given GPIOTE instance.
@@ -286,7 +306,7 @@ static bool pin_in_use_by_te(nrfx_gpiote_t const * p_instance, uint32_t pin)
 static bool pin_has_trigger(nrfx_gpiote_t const * p_instance, uint32_t pin)
 {
     return PIN_FLAG_TRIG_MODE_GET(
-               m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)]) !=
+               get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)]) !=
            NRFX_GPIOTE_TRIGGER_NONE;
 }
 
@@ -301,7 +321,7 @@ static bool pin_has_trigger(nrfx_gpiote_t const * p_instance, uint32_t pin)
  */
 static bool pin_is_output(nrfx_gpiote_t const * p_instance, uint32_t pin)
 {
-    return PIN_FLAG_IS_OUTPUT(m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)]);
+    return PIN_FLAG_IS_OUTPUT(get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)]);
 }
 
 /** @brief Check if pin is output controlled by GPIOTE task for a given GPIOTE instance.
@@ -343,7 +363,7 @@ static nrf_gpiote_polarity_t gpiote_trigger_to_polarity(nrfx_gpiote_trigger_t tr
 /* Returns gpiote TE channel associated with the pin */
 static uint8_t pin_te_get(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
-    return PIN_GET_TE_ID(m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)]);
+    return PIN_GET_TE_ID(get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)]);
 }
 
 static bool is_level(nrfx_gpiote_trigger_t trigger)
@@ -355,7 +375,7 @@ static bool handler_in_use(nrfx_gpiote_t const * p_instance, int32_t handler_id)
 {
     for (uint32_t i = 0; i < MAX_PIN_NUMBER; i++)
     {
-        if (PIN_GET_HANDLER_ID(m_cb[p_instance->drv_inst_idx].pin_flags[i]) == handler_id)
+        if (PIN_GET_HANDLER_ID(get_cb(p_instance->drv_inst_idx)->pin_flags[i]) == handler_id)
         {
             return true;
         }
@@ -368,23 +388,23 @@ static bool handler_in_use(nrfx_gpiote_t const * p_instance, int32_t handler_id)
 static void release_handler(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
 {
     uint8_t idx = get_pin_idx(pin);
-    int32_t handler_id = PIN_GET_HANDLER_ID(m_cb[p_instance->drv_inst_idx].pin_flags[idx]);
+    int32_t handler_id = PIN_GET_HANDLER_ID(get_cb(p_instance->drv_inst_idx)->pin_flags[idx]);
 
     if (handler_id == PIN_FLAG_NO_HANDLER)
     {
         return;
     }
 
-    m_cb[p_instance->drv_inst_idx].pin_flags[idx] &= (uint16_t)~PIN_HANDLER_MASK;
+    get_cb(p_instance->drv_inst_idx)->pin_flags[idx] &= (uint16_t)~PIN_HANDLER_MASK;
 
     /* Check if other pin is using same handler and release handler only if handler
      * is not used by others.
      */
     if (!handler_in_use(p_instance, handler_id))
     {
-        m_cb[p_instance->drv_inst_idx].handlers[handler_id].handler = NULL;
+        get_cb(p_instance->drv_inst_idx)->handlers[handler_id].handler = NULL;
         nrfx_err_t err = nrfx_flag32_free(
-            &m_cb[p_instance->drv_inst_idx].available_evt_handlers, (uint8_t)handler_id);
+            &get_cb(p_instance->drv_inst_idx)->available_evt_handlers, (uint8_t)handler_id);
         (void)err;
         NRFX_ASSERT(err == NRFX_SUCCESS);
     }
@@ -403,12 +423,12 @@ static void pin_handler_trigger_uninit(nrfx_gpiote_t const * p_instance, nrfx_gp
     else
     {
 #if !defined(NRF_GPIO_LATCH_PRESENT)
-        nrf_bitmask_bit_clear(pin, (uint8_t *)m_cb[p_instance->drv_inst_idx].port_pins);
+        nrf_bitmask_bit_clear(pin, (uint8_t *)get_cb(p_instance->drv_inst_idx)->port_pins);
 #endif
     }
 
     release_handler(p_instance, pin);
-    m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)] = PIN_FLAG_NOT_USED;
+    get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)] = PIN_FLAG_NOT_USED;
 }
 
 /* Function disabling sense level for the given pin
@@ -449,8 +469,8 @@ static int32_t find_handler(nrfx_gpiote_t const *           p_instance,
 {
     for (int32_t i = 0; i < NRFX_GPIOTE_CONFIG_NUM_OF_EVT_HANDLERS; i++)
     {
-        if ((m_cb[p_instance->drv_inst_idx].handlers[i].handler == handler) &&
-            (m_cb[p_instance->drv_inst_idx].handlers[i].p_context == p_context))
+        if ((get_cb(p_instance->drv_inst_idx)->handlers[i].handler == handler) &&
+            (get_cb(p_instance->drv_inst_idx)->handlers[i].p_context == p_context))
         {
             return i;
         }
@@ -480,7 +500,7 @@ static nrfx_err_t pin_handler_set(nrfx_gpiote_t const *           p_instance,
     {
         uint8_t id;
 
-        err = nrfx_flag32_alloc(&m_cb[p_instance->drv_inst_idx].available_evt_handlers, &id);
+        err = nrfx_flag32_alloc(&get_cb(p_instance->drv_inst_idx)->available_evt_handlers, &id);
         if (err != NRFX_SUCCESS)
         {
             return err;
@@ -488,9 +508,9 @@ static nrfx_err_t pin_handler_set(nrfx_gpiote_t const *           p_instance,
         handler_id = (int32_t)id;
     }
 
-    m_cb[p_instance->drv_inst_idx].handlers[handler_id].handler = handler;
-    m_cb[p_instance->drv_inst_idx].handlers[handler_id].p_context = p_context;
-    m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)] |=
+    get_cb(p_instance->drv_inst_idx)->handlers[handler_id].handler = handler;
+    get_cb(p_instance->drv_inst_idx)->handlers[handler_id].p_context = p_context;
+    get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)] |=
         (uint16_t)PIN_FLAG_HANDLER((uint8_t)handler_id);
 
     return NRFX_SUCCESS;
@@ -500,7 +520,7 @@ static inline nrf_gpio_pin_sense_t get_initial_sense(nrfx_gpiote_t const * p_ins
                                                      nrfx_gpiote_pin_t     pin)
 {
     nrfx_gpiote_trigger_t trigger = PIN_FLAG_TRIG_MODE_GET(
-        m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)]);
+        get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)]);
     nrf_gpio_pin_sense_t sense;
 
     if (trigger == NRFX_GPIOTE_TRIGGER_LOW)
@@ -584,8 +604,8 @@ static nrfx_err_t gpiote_input_configure(nrfx_gpiote_t const *                  
 
         nrfy_gpio_reconfigure(pin, &dir, &input_connect, p_config->p_pull_config, NULL, NULL);
 
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] &= (uint16_t)~PIN_FLAG_OUTPUT;
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= PIN_FLAG_IN_USE;
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] &= (uint16_t)~PIN_FLAG_OUTPUT;
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] |= PIN_FLAG_IN_USE;
     }
 
     if (p_config->p_trigger_config)
@@ -602,7 +622,7 @@ static nrfx_err_t gpiote_input_configure(nrfx_gpiote_t const *                  
         }
         else
         {
-            m_cb[p_instance->drv_inst_idx].pin_flags[idx] &=
+            get_cb(p_instance->drv_inst_idx)->pin_flags[idx] &=
                 (uint16_t) ~(PIN_TE_ID_MASK | PIN_FLAG_TE_USED);
             if (use_evt) {
                 bool edge = trigger <= NRFX_GPIOTE_TRIGGER_TOGGLE;
@@ -627,22 +647,22 @@ static nrfx_err_t gpiote_input_configure(nrfx_gpiote_t const *                  
                     nrfy_gpiote_event_disable(p_instance->p_reg, ch);
                     nrfy_gpiote_event_configure(p_instance->p_reg, ch, pin, polarity);
 
-                    m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
+                    get_cb(p_instance->drv_inst_idx)->pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
                 }
             }
         }
 #if !defined(NRF_GPIO_LATCH_PRESENT)
         if (use_evt || trigger == NRFX_GPIOTE_TRIGGER_NONE)
         {
-            nrf_bitmask_bit_clear(pin, (uint8_t *)m_cb[p_instance->drv_inst_idx].port_pins);
+            nrf_bitmask_bit_clear(pin, (uint8_t *)get_cb(p_instance->drv_inst_idx)->port_pins);
         }
         else
         {
-            nrf_bitmask_bit_set(pin, (uint8_t *)m_cb[p_instance->drv_inst_idx].port_pins);
+            nrf_bitmask_bit_set(pin, (uint8_t *)get_cb(p_instance->drv_inst_idx)->port_pins);
         }
 #endif
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] &= (uint16_t)~PIN_FLAG_TRIG_MODE_MASK;
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TRIG_MODE_SET(trigger);
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] &= (uint16_t)~PIN_FLAG_TRIG_MODE_MASK;
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] |= (uint16_t)PIN_FLAG_TRIG_MODE_SET(trigger);
     }
 
     if (p_config->p_handler_config)
@@ -688,7 +708,7 @@ static nrfx_err_t gpiote_output_configure(nrfx_gpiote_t const *               p_
         nrfy_gpio_reconfigure(pin, &dir, &p_config->input_connect, &p_config->pull,
                               &p_config->drive, NULL);
 
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= PIN_FLAG_IN_USE | PIN_FLAG_OUTPUT;
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] |= PIN_FLAG_IN_USE | PIN_FLAG_OUTPUT;
     }
 
     if (p_task_config)
@@ -701,14 +721,14 @@ static nrfx_err_t gpiote_output_configure(nrfx_gpiote_t const *               p_
         uint32_t ch = p_task_config->task_ch;
 
         nrfy_gpiote_te_default(p_instance->p_reg, ch);
-        m_cb[p_instance->drv_inst_idx].pin_flags[idx] &=
+        get_cb(p_instance->drv_inst_idx)->pin_flags[idx] &=
             (uint16_t) ~(PIN_FLAG_TE_USED | PIN_TE_ID_MASK);
         if (p_task_config->polarity != NRF_GPIOTE_POLARITY_NONE)
         {
             nrfy_gpiote_task_configure(p_instance->p_reg, ch, pin,
                                        p_task_config->polarity,
                                        p_task_config->init_val);
-            m_cb[p_instance->drv_inst_idx].pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
+            get_cb(p_instance->drv_inst_idx)->pin_flags[idx] |= (uint16_t)PIN_FLAG_TE_ID(ch);
         }
     }
 
@@ -719,8 +739,8 @@ static void gpiote_global_callback_set(nrfx_gpiote_t const *           p_instanc
                                        nrfx_gpiote_interrupt_handler_t handler,
                                        void *                          p_context)
 {
-    m_cb[p_instance->drv_inst_idx].global_handler.handler = handler;
-    m_cb[p_instance->drv_inst_idx].global_handler.p_context = p_context;
+    get_cb(p_instance->drv_inst_idx)->global_handler.handler = handler;
+    get_cb(p_instance->drv_inst_idx)->global_handler.p_context = p_context;
 }
 
 static nrfx_err_t gpiote_channel_get(nrfx_gpiote_t const * p_instance,
@@ -731,7 +751,7 @@ static nrfx_err_t gpiote_channel_get(nrfx_gpiote_t const * p_instance,
 
     if (pin_in_use_by_te(p_instance, pin))
     {
-        *p_channel = PIN_GET_TE_ID(m_cb[p_instance->drv_inst_idx].pin_flags[get_pin_idx(pin)]);
+        *p_channel = PIN_GET_TE_ID(get_cb(p_instance->drv_inst_idx)->pin_flags[get_pin_idx(pin)]);
         return NRFX_SUCCESS;
     }
     else
@@ -750,7 +770,7 @@ static nrfx_err_t gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrup
 #endif
 #endif
 
-    gpiote_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    gpiote_control_block_t * p_cb = get_cb(p_instance->drv_inst_idx);
     nrfx_err_t err_code = NRFX_SUCCESS;
 
     NRFX_LOG_INFO("channels_number: %d, available_channels_mask: 0x%x",
@@ -782,12 +802,12 @@ static nrfx_err_t gpiote_init(nrfx_gpiote_t const * p_instance, uint8_t interrup
 
 static bool gpiote_init_check(nrfx_gpiote_t const * p_instance)
 {
-    return (m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+    return (get_cb(p_instance->drv_inst_idx)->state != NRFX_DRV_STATE_UNINITIALIZED);
 }
 
 static void gpiote_uninit(nrfx_gpiote_t const * p_instance)
 {
-    NRFX_ASSERT(m_cb[p_instance->drv_inst_idx].state != NRFX_DRV_STATE_UNINITIALIZED);
+    NRFX_ASSERT(get_cb(p_instance->drv_inst_idx)->state != NRFX_DRV_STATE_UNINITIALIZED);
 
 #if FULL_PORTS_PRESENT
     // Simple iteration for simple case to save memory
@@ -813,21 +833,21 @@ static void gpiote_uninit(nrfx_gpiote_t const * p_instance)
 #undef _PORT_LEN
 #endif
 
-    m_cb[p_instance->drv_inst_idx].state = NRFX_DRV_STATE_UNINITIALIZED;
-    m_cb[p_instance->drv_inst_idx].global_handler.handler = NULL;
+    get_cb(p_instance->drv_inst_idx)->state = NRFX_DRV_STATE_UNINITIALIZED;
+    get_cb(p_instance->drv_inst_idx)->global_handler.handler = NULL;
     NRFX_LOG_INFO("Uninitialized.");
 }
 
 static nrfx_err_t pin_channel_free(nrfx_gpiote_t const * p_instance, uint8_t channel)
 {
-    return nrfx_flag32_free(&m_cb[p_instance->drv_inst_idx].available_channels_mask, channel);
+    return nrfx_flag32_free(&get_cb(p_instance->drv_inst_idx)->available_channels_mask, channel);
 }
 
 static nrfx_err_t pin_channel_alloc(nrfx_gpiote_t const * p_instance, uint8_t * p_channel)
 {
     NRFX_LOG_INFO("available_channels_mask = %d",
-                  (int)m_cb[p_instance->drv_inst_idx].available_channels_mask);
-    return nrfx_flag32_alloc(&m_cb[p_instance->drv_inst_idx].available_channels_mask, p_channel);
+                  (int)get_cb(p_instance->drv_inst_idx)->available_channels_mask);
+    return nrfx_flag32_alloc(&get_cb(p_instance->drv_inst_idx)->available_channels_mask, p_channel);
 }
 
 static void pin_out_set(nrfx_gpiote_t const * p_instance, nrfx_gpiote_pin_t pin)
@@ -1019,7 +1039,7 @@ nrfx_err_t nrfx_gpiote_channel_get(nrfx_gpiote_t const * p_instance,
 
 uint32_t nrfx_gpiote_channels_number_get(nrfx_gpiote_t const * p_instance)
 {
-    gpiote_control_block_t * p_cb = &m_cb[p_instance->drv_inst_idx];
+    gpiote_control_block_t * p_cb = get_cb(p_instance->drv_inst_idx);
 
     return p_cb->channels_number;
 }
