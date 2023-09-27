@@ -44,7 +44,17 @@ extern "C" {
 #endif // defined(NRF_RADIO)
 #endif // defined(DPPI_PRESENT)
 
+#if !defined(NRFY_CACHE_WB)
+#define NRFY_CACHE_WB(p_buffer, size)
+#endif
 
+#if !defined(NRFY_CACHE_INV)
+#define NRFY_CACHE_INV(p_buffer, size)
+#endif
+
+#if !defined(NRFY_CACHE_WBINV)
+#define NRFY_CACHE_WBINV(p_buffer, size)
+#endif
 
 #if defined(NRFX_CLZ)
 #define NRF_CLZ(value) NRFX_CLZ(value)
