@@ -24,14 +24,15 @@ extern "C" {
  * @brief Helper layer that provides a uniform way of checking the reset reason.
  */
 
-#if NRF_POWER_HAS_RESETREAS_CTRLAP || NRF_RESET_HAS_CTRLAP_RESET || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_RESETREAS_CTRLAP || (defined(NRF_RESET) && NRF_RESET_HAS_CTRLAP_RESET) \
+    || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether CTRAP reset reason is present. */
 #define NRFX_RESET_REASON_HAS_CTRLAP 1
 #else
 #define NRFX_RESET_REASON_HAS_CTRLAP 0
 #endif
 
-#if NRF_RESET_HAS_NETWORK || defined(__NRFX_DOXYGEN__)
+#if (defined(NRF_RESET) && NRF_RESET_HAS_NETWORK) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether network reset reasons are present. */
 #define NRFX_RESET_REASON_HAS_NETWORK 1
 #else
@@ -53,35 +54,36 @@ extern "C" {
 #define NRFX_RESET_REASON_HAS_NFC 0
 #endif
 
-#if NRF_POWER_HAS_RESETREAS_VBUS || NRF_RESET_HAS_VBUS_RESET || defined(__NRFX_DOXYGEN__)
+#if NRF_POWER_HAS_RESETREAS_VBUS || (defined(NRF_RESET) && NRF_RESET_HAS_VBUS_RESET) \
+    || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether VBUS reset reason is present. */
 #define NRFX_RESET_REASON_HAS_VBUS 1
 #else
 #define NRFX_RESET_REASON_HAS_VBUS 0
 #endif
 
-#if NRF_RESET_HAS_CTRLAPSOFT_RESET || defined(__NRFX_DOXYGEN__)
+#if (defined(NRF_RESET) && NRF_RESET_HAS_CTRLAPSOFT_RESET) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether CTRL-AP reset reason is present. */
 #define NRFX_RESET_REASON_HAS_CTRLAPSOFT 1
 #else
 #define NRFX_RESET_REASON_HAS_CTRLAPSOFT 0
 #endif
 
-#if NRF_RESET_HAS_CTRLAPHARD_RESET || defined(__NRFX_DOXYGEN__)
+#if (defined(NRF_RESET) && NRF_RESET_HAS_CTRLAPHARD_RESET) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether CTRL-AP hard reset reason is present. */
 #define NRFX_RESET_REASON_HAS_CTRLAPHARD 1
 #else
 #define NRFX_RESET_REASON_HAS_CTRLAPHARD 0
 #endif
 
-#if NRF_RESET_HAS_CTRLAPPIN_RESET || defined(__NRFX_DOXYGEN__)
+#if (defined(NRF_RESET) && NRF_RESET_HAS_CTRLAPPIN_RESET) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether CTRL-AP pin reset reason is present. */
 #define NRFX_RESET_REASON_HAS_CTRLAPPIN 1
 #else
 #define NRFX_RESET_REASON_HAS_CTRLAPPIN 0
 #endif
 
-#if NRF_RESET_HAS_GRTC_RESET || defined(__NRFX_DOXYGEN__)
+#if (defined(NRF_RESET) && NRF_RESET_HAS_GRTC_RESET) || defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether GRTC reset reason is present. */
 #define NRFX_RESET_REASON_HAS_GRTC 1
 #else
