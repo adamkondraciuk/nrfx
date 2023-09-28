@@ -673,7 +673,7 @@ NRF_STATIC_INLINE void nrf_ccm_key_set(NRF_CCM_Type   * p_reg,
  *
  * @return Pointer to the AES 128-bit key value. The key is stored in big endian byte order.
  */
-NRF_STATIC_INLINE uint32_t const * nrf_ccm_key_get(NRF_CCM_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t const volatile * nrf_ccm_key_get(NRF_CCM_Type const * p_reg);
 
 #endif // NRF_CCM_HAS_KEY
 
@@ -695,7 +695,7 @@ NRF_STATIC_INLINE void nrf_ccm_nonce_set(NRF_CCM_Type *   p_reg,
  *
  * @return Pointer to the AES 13-byte nonce value. The nonce is stored in big endian byte order.
  */
-NRF_STATIC_INLINE uint32_t const * nrf_ccm_nonce_get(NRF_CCM_Type const * p_reg);
+NRF_STATIC_INLINE uint32_t const volatile * nrf_ccm_nonce_get(NRF_CCM_Type const * p_reg);
 #endif // NRF_CCM_HAS_NONCE
 
 #if NRF_CCM_HAS_IN_AMOUNT
@@ -1096,9 +1096,9 @@ NRF_STATIC_INLINE void nrf_ccm_key_set(NRF_CCM_Type   * p_reg,
     }
 }
 
-NRF_STATIC_INLINE uint32_t const * nrf_ccm_key_get(NRF_CCM_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t const volatile * nrf_ccm_key_get(NRF_CCM_Type const * p_reg)
 {
-    return (uint32_t *)(p_reg->KEY.VALUE);
+    return (uint32_t const volatile *)(p_reg->KEY.VALUE);
 }
 #endif // NRF_CCM_HAS_KEY
 
@@ -1113,9 +1113,9 @@ NRF_STATIC_INLINE void nrf_ccm_nonce_set(NRF_CCM_Type *   p_reg,
     }
 }
 
-NRF_STATIC_INLINE uint32_t const * nrf_ccm_nonce_get(NRF_CCM_Type const * p_reg)
+NRF_STATIC_INLINE uint32_t const volatile * nrf_ccm_nonce_get(NRF_CCM_Type const * p_reg)
 {
-    return (uint32_t *)(p_reg->NONCE.VALUE);
+    return (uint32_t const volatile *)(p_reg->NONCE.VALUE);
 }
 #endif // NRF_CCM_HAS_NONCE
 
