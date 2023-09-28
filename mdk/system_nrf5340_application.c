@@ -33,7 +33,7 @@ NOTICE: This file has been modified by Nordic Semiconductor ASA.
 
 /*lint ++flb "Enter library region" */
 
-void SystemStoreFICRNS();
+void SystemStoreFICRNS(void);
 
 /* NRF5340 application core uses a variable System Clock Frequency that starts at 64MHz */
 #define __SYSTEM_CLOCK_MAX      (128000000UL)
@@ -282,7 +282,7 @@ void SystemInit(void)
 #define RAM_END  0x2FFFFFFFul
 
 /* Copy FICR_S to FICR_NS RAM region */
-void SystemStoreFICRNS()
+void SystemStoreFICRNS(void)
 {
     if ((uint32_t)NRF_FICR_NS < RAM_BASE || (uint32_t)NRF_FICR_NS + FICR_SIZE > RAM_END)
     {
@@ -304,7 +304,7 @@ void SystemStoreFICRNS()
 }
 
 /* Block write and execute access to FICR RAM region */
-void SystemLockFICRNS()
+void SystemLockFICRNS(void)
 {
     if ((uint32_t)NRF_FICR_NS < RAM_BASE || (uint32_t)NRF_FICR_NS + FICR_SIZE > RAM_END)
     {
