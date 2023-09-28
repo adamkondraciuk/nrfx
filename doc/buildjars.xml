@@ -6,7 +6,7 @@
 
 <target name="nrfx">
 
-  <jar destfile="drivers_nrfx_v3.1.0.jar"
+  <jar destfile="drivers_nrfx_v3.2.0.jar"
       basedir="html"
       manifest="manifest/MANIFEST.MF.nrfx"
       excludes="*.jar">
