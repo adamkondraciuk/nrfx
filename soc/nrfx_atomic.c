@@ -1,7 +1,7 @@
 /*$$$LICENCE_NORDIC_STANDARD<2018>$$$*/
 #include "nrfx_atomic.h"
 
-#if ((__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U))
+#if NRFX_CHECK(ISA_ARM) && ((__CORTEX_M >= 0x03U) || (__CORTEX_SC >= 300U))
 #define NRFX_ATOMIC_STREX_LDREX_PRESENT
 #else
 /* Cortex-M0 does not have build-in atomic function. Force disabling to avoid linking failure. */
