@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project are documented in this file.
 
-## [3.2.0]
+## [3.2.0] - 2023-10-02
 ### Added
 - Added multi-instance support for the GPIOTE driver.
 - Added the nrfx_ram_ctrl helper layer to facilitate developing generic code that controls the power and retention settings of RAM blocks.
