@@ -22,6 +22,7 @@ All notable changes to this project are documented in this file.
 - Added a blocking mode to the CLOCK driver. The mode is initialized when a user handler is set to NULL.
 
 ### Changed
+- Updated MDK to version 8.58.0.
 - Overhauled the UARTE driver. Extended the UARTE driver with various modes of operations including: mixing of blocking and non-blocking transfers, linking transfers, continuous reception, low power operation.
 - Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, nrf_power_gpregret_set() for setting and nrf_power_gpregret_get() for reading. A new `reg_num` argument was added to both of them.
 - Replaced nrf_regulators_dcdcen_set() and nrf_regulators_dcdcen_vddh_set() functions with nrf_regulators_vreg_enable_set().
