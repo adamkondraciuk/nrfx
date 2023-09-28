@@ -1652,8 +1652,8 @@ NRF_STATIC_INLINE void nrf_tampc_protector_ctrl_value_set(NRF_TAMPC_Type *    p_
 NRF_STATIC_INLINE bool nrf_tampc_protector_ctrl_value_get(NRF_TAMPC_Type const * p_reg,
                                                           nrf_tampc_protect_t    ctrl)
 {
-    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type * reg =
-        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type *)((uint8_t *)p_reg + (uint32_t)ctrl));
+    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const * reg =
+        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const *)((uint8_t const *)p_reg + (uint32_t)ctrl));
 
     return ((reg->CTRL & TAMPC_PROTECT_ACTIVESHIELD_CTRL_VALUE_Msk)
                       >> TAMPC_PROTECT_ACTIVESHIELD_CTRL_VALUE_Pos)
@@ -1681,8 +1681,8 @@ NRF_STATIC_INLINE void nrf_tampc_protector_ctrl_lock_set(NRF_TAMPC_Type *    p_r
 NRF_STATIC_INLINE bool nrf_tampc_protector_ctrl_lock_get(NRF_TAMPC_Type const * p_reg,
                                                          nrf_tampc_protect_t    ctrl)
 {
-    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type * reg =
-        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type *)((uint8_t *)p_reg + (uint32_t)ctrl));
+    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const * reg =
+        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const *)((uint8_t const *)p_reg + (uint32_t)ctrl));
 
     return ((reg->CTRL & TAMPC_PROTECT_ACTIVESHIELD_CTRL_LOCK_Msk)
                       >> TAMPC_PROTECT_ACTIVESHIELD_CTRL_LOCK_Pos)
@@ -1692,8 +1692,8 @@ NRF_STATIC_INLINE bool nrf_tampc_protector_ctrl_lock_get(NRF_TAMPC_Type const * 
 NRF_STATIC_INLINE bool nrf_tampc_protector_status_check(NRF_TAMPC_Type const * p_reg,
                                                         nrf_tampc_protect_t    status)
 {
-    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type * reg =
-        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type *)((uint8_t *)p_reg + (uint32_t)status));
+    NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const * reg =
+        ((NRF_TAMPC_PROTECT_ACTIVESHIELD_Type const *)((uint8_t const *)p_reg + (uint32_t)status));
 
     return ((reg->STATUS & TAMPC_PROTECT_ACTIVESHIELD_STATUS_ERROR_Msk)
                         >> TAMPC_PROTECT_ACTIVESHIELD_STATUS_ERROR_Pos)
