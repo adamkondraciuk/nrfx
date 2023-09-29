@@ -9,6 +9,14 @@
 extern "C" {
 #endif
 
+#if !defined(IPC_EVENTS_NUM) && defined(IPC_CH_NUM)
+#define IPC_EVENTS_NUM IPC_CH_NUM
+#endif
+
+#if !defined(IPC_TASKS_NUM) && defined(IPC_CH_NUM)
+#define IPC_TASKS_NUM IPC_CH_NUM
+#endif
+
 /**
  * @defgroup nrf_ipc_hal IPC HAL
  * @{
