@@ -40,7 +40,9 @@ static void csn_event_handler(nrfx_gpiote_pin_t     pin,
     (void)trigger;
     (void)p_context;
 }
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
 static nrfx_gpiote_t const gpiote = NRFX_GPIOTE_INSTANCE(0);
+#endif
 #endif
 
 
@@ -146,7 +148,11 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
     // first as that pin number may be different now.
     if (p_cb->csn_pin != NRF_SPIS_PIN_NOT_CONNECTED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
         nrfx_gpiote_pin_uninit(&gpiote, p_cb->csn_pin);
+#else
+        nrfx_gpiote_pin_uninit(p_cb->csn_pin);
+#endif
         p_cb->csn_pin = NRF_SPIS_PIN_NOT_CONNECTED;
     }
 
@@ -158,21 +164,24 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
     // on the CSN line. Handling of these interrupts will make the CPU active
     // and thus will protect the DMA transfers started by SPIS right after it
     // is selected for communication.
-    nrfx_gpiote_trigger_config_t trigger_config = {
+    nrfx_gpiote_trigger_config_t trig_config = {
         .trigger = NRFX_GPIOTE_TRIGGER_HITOLO,
         .p_in_channel = &p_cb->gpiote_ch
     };
-    nrfx_gpiote_handler_config_t handler_config = {
+    nrfx_gpiote_handler_config_t hndl_config = {
         .handler = csn_event_handler
     };
+
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
     nrfx_gpiote_input_pin_config_t config = {
         .p_pull_config    = NULL,
-        .p_trigger_config = &trigger_config,
-        .p_handler_config = &handler_config;
-    }
-    nrfx_err_t err_code = nrfx_gpiote_input_configure(&gpiote,
-                                                      csn_pin,
-                                                      &config);
+        .p_trigger_config = &trig_config,
+        .p_handler_config = &hndl_config
+    };
+    nrfx_err_t err_code = nrfx_gpiote_input_configure(&gpiote, csn_pin, &config);
+#else
+    nrfx_err_t err_code = nrfx_gpiote_input_configure(csn_pin, NULL, &trig_config, &hndl_config);
+#endif
     if (err_code != NRFX_SUCCESS)
     {
         NRFX_LOG_ERROR("Function: %s, error code: %s.",
@@ -181,7 +190,11 @@ static bool spis_configure(nrfx_spis_t const *        p_instance,
         return false;
     }
 
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
     nrfx_gpiote_trigger_enable(&gpiote, csn_pin, true);
+#else
+    nrfx_gpiote_trigger_enable(csn_pin, true);
+#endif
 
     p_cb->csn_pin = csn_pin;
 #endif
@@ -257,9 +270,14 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
     // (the GPIOTE driver may be already initialized at this point, by this
     // driver when another SPIS instance is used or by an application code,
     // so just ignore the returned value here).
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
     (void)nrfx_gpiote_init(&gpiote, NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
-
     err_code = nrfx_gpiote_channel_alloc(&gpiote, &p_cb->gpiote_ch);
+#else
+    (void)nrfx_gpiote_init(NRFX_GPIOTE_DEFAULT_CONFIG_IRQ_PRIORITY);
+    err_code = nrfx_gpiote_channel_alloc(&p_cb->gpiote_ch);
+#endif
+
     if (err_code != NRFX_SUCCESS)
     {
         err_code = NRFX_ERROR_INTERNAL;
@@ -277,7 +295,11 @@ nrfx_err_t nrfx_spis_init(nrfx_spis_t const *        p_instance,
         if (!spis_configure(p_instance, p_config))
         {
 #if defined(USE_DMA_ISSUE_WORKAROUND)
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
             nrfx_gpiote_channel_free(&gpiote, p_cb->gpiote_ch);
+#else
+            nrfx_gpiote_channel_free(p_cb->gpiote_ch);
+#endif
 #endif
             err_code = NRFX_ERROR_INVALID_PARAM;
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
@@ -343,9 +365,17 @@ void nrfx_spis_uninit(nrfx_spis_t const * p_instance)
 #if defined(USE_DMA_ISSUE_WORKAROUND)
     if (p_cb->csn_pin != NRF_SPIS_PIN_NOT_CONNECTED)
     {
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
         nrfx_gpiote_pin_uninit(&gpiote, p_cb->csn_pin);
+#else
+        nrfx_gpiote_pin_uninit(p_cb->csn_pin);
+#endif
     }
+#if NRFX_API_VER_AT_LEAST(3, 2, 0)
     nrfx_gpiote_channel_free(&gpiote, p_cb->gpiote_ch);
+#else
+    nrfx_gpiote_channel_free(p_cb->gpiote_ch);
+#endif
 #endif
 
     #define DISABLE_ALL 0xFFFFFFFF
