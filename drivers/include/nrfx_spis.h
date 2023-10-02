@@ -257,7 +257,7 @@ nrfx_err_t nrfx_spis_buffers_set(nrfx_spis_t const * p_instance,
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_SPIS_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_SPIS_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_SPIS_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(SPIS, spis)
 

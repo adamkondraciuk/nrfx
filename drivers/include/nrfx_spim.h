@@ -446,7 +446,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_spim_end_event_address_get(nrfx_spim_t const * 
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_SPIM_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_SPIM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_SPIM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(SPIM, spim)
 

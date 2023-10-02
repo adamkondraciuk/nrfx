@@ -710,7 +710,7 @@ NRFX_STATIC_INLINE nrf_gpiote_latency_t nrfx_gpiote_latency_get(void)
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_GPIOTE_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_GPIOTE_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_GPIOTE_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(GPIOTE, gpiote)
 

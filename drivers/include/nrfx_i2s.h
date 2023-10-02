@@ -306,7 +306,7 @@ void nrfx_i2s_stop(nrfx_i2s_t const * p_instance);
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_I2S_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_I2S_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_I2S_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(I2S, i2s)
 

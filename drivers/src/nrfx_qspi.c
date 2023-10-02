@@ -377,7 +377,7 @@ static void qspi_workaround_apply(void)
     while (!nrf_qspi_event_check(NRF_QSPI, NRF_QSPI_EVENT_READY))
     {}
 
-    /* Restore prevous pins. */
+    /* Restore previous pins. */
     nrf_qspi_pins_set(NRF_QSPI, &pins);
 }
 

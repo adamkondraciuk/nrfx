@@ -399,7 +399,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_uart_event_address_get(nrfx_uart_t const * p_in
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_UART_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_UART_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_UART_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(UART, uart)
 

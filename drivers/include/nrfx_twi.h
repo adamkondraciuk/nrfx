@@ -361,7 +361,7 @@ NRFX_STATIC_INLINE nrfx_err_t nrfx_twi_bus_recover(uint32_t scl_pin, uint32_t sd
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TWI_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_TWI_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_TWI_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TWI, twi)
 

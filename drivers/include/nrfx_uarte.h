@@ -320,9 +320,9 @@ typedef struct
 /**
  * @brief UARTE interrupt event handler.
  *
- * @param[in] p_event    Pointer to event structure. Event is allocated on the stack so it is
- *                       available only within the context of the event handler.
- * @param[in] p_context  Context passed to the interrupt handler, set on initialization.
+ * @param[in] p_event   Pointer to event structure. Event is allocated on the stack so it is
+ *                      available only within the context of the event handler.
+ * @param[in] p_context Context passed to the interrupt handler, set on initialization.
  */
 typedef void (*nrfx_uarte_event_handler_t)(nrfx_uarte_event_t const * p_event,
                                            void *                     p_context);
@@ -678,7 +678,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_uarte_event_address_get(nrfx_uarte_t const * p_
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_UARTE_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_UARTE_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_UARTE_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(UARTE, uarte)
 

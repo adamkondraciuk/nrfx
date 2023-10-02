@@ -45,7 +45,9 @@ extern "C" {
 #endif
 
 #if defined(NRF5340_XXAA_APPLICATION) || defined(__NRFX_DOXYGEN__)
-/** @brief Macro for calculating HFXO internal capacitor value.
+/**
+ * @brief Macro for calculating HFXO internal capacitor value.
+ *
  * Depending on the SoC used, a range of capacitance of internal capacitors is as follows:
  * - From 7 pF to 20 pF in 0.5 pF steps for nRF5340.
  * - From 4 pF to 17 pF in 0.25 pF steps for other SoCs.
@@ -67,7 +69,9 @@ extern "C" {
 #endif
 
 #if NRF_OSCILLATORS_HAS_LFXO_CAP_AS_INT_VALUE
-/** @brief Macro for calculating LFXO internal capacitor value.
+/**
+ * @brief Macro for calculating LFXO internal capacitor value.
+ *
  * The capacitance of internal capacitors ranges from 4 pF to 18 pF in 0.5 pF steps.
  * This macro should be used to calculate argument's value for @ref nrf_oscillators_lfxo_cap_set function.
 */

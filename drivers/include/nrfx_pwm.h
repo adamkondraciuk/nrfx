@@ -411,7 +411,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_pwm_event_address_get(nrfx_pwm_t const * p_inst
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_PWM_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_PWM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_PWM_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(PWM, pwm)
 

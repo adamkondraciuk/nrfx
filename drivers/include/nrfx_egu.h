@@ -166,7 +166,7 @@ NRFX_STATIC_INLINE uint32_t nrfx_egu_event_address_get(nrfx_egu_t const * p_inst
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_EGU_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_EGU_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_EGU_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(EGU, egu)
 

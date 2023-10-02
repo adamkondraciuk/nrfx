@@ -280,7 +280,7 @@ void nrfx_spi_abort(nrfx_spi_t const * p_instance);
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_SPI_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_SPI_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_SPI_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(SPI, spi)
 

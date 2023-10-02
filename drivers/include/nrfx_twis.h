@@ -410,7 +410,7 @@ NRFX_STATIC_INLINE size_t nrfx_twis_rx_amount(nrfx_twis_t const * p_instance)
  * in a Zephyr application:
  *
  * IRQ_CONNECT(NRFX_IRQ_NUMBER_GET(NRF_TWIS_INST_GET(\<instance_index\>)), \<priority\>,
- *                    NRFX_TWIS_INST_HANDLER_GET(\<instance_index\>), 0, 0);
+ *             NRFX_TWIS_INST_HANDLER_GET(\<instance_index\>), 0, 0);
  */
 NRFX_INSTANCE_IRQ_HANDLERS_DECLARE(TWIS, twis)
 

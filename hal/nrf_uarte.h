@@ -496,7 +496,6 @@ NRF_STATIC_INLINE void nrf_uarte_tx_buffer_set(NRF_UARTE_Type * p_reg,
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
  * @return Pointer to the transmit buffer.
- *
  */
 NRF_STATIC_INLINE uint8_t const * nrf_uarte_tx_buffer_get(NRF_UARTE_Type * p_reg);
 
