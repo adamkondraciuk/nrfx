@@ -1374,25 +1374,22 @@ static nrfx_err_t rx_abort(NRF_UARTE_Type *        p_uarte,
                            bool                    sync)
 {
     uint32_t flag;
+    bool endrx_startrx = nrfy_uarte_shorts_get(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX) != 0;
 
     if (!(p_cb->flags & UARTE_FLAG_RX_ENABLED))
     {
         return NRFX_ERROR_INVALID_STATE;
     }
 
-    if (disable_all)
+    if (disable_all || !endrx_startrx)
     {
         nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX);
-        flag = UARTE_FLAG_RX_STOP_ON_END;
-        NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~UARTE_FLAG_RX_RESTARTED);
+        flag = UARTE_FLAG_RX_STOP_ON_END | UARTE_FLAG_RX_ABORTED;
     }
     else
     {
-        flag = nrfy_uarte_shorts_get(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX) ?
-            UARTE_FLAG_RX_RESTARTED : UARTE_FLAG_RX_STOP_ON_END;
-
+        flag = UARTE_FLAG_RX_RESTARTED;
     }
-    flag |= UARTE_FLAG_RX_ABORTED;
 
     NRFX_ATOMIC_FETCH_OR(&p_cb->flags, flag);
 
@@ -1614,68 +1611,43 @@ static bool endrx_irq_handler(NRF_UARTE_Type *        p_uarte,
                               bool                    rxstarted)
 {
     size_t rx_amount = (size_t)nrfy_uarte_rx_amount_get(p_uarte);
-    bool cont = rxstarted && (p_cb->flags & UARTE_FLAG_RX_CONT);
-    bool aborted = p_cb->flags & UARTE_FLAG_RX_ABORTED;
-    bool restarted = false;
+    bool premature = p_cb->flags & (UARTE_FLAG_RX_RESTARTED | UARTE_FLAG_RX_ABORTED);
+    bool aborted = false;
+    bool late = false;
 
-    if (aborted)
-    {
-        if (p_cb->flags & UARTE_FLAG_RX_RESTARTED)
-        {
-            NRFX_ATOMIC_FETCH_AND(&p_cb->flags, ~(UARTE_FLAG_RX_RESTARTED | UARTE_FLAG_RX_ABORTED));
-            aborted = false;
-            restarted = true;
-        }
-        else if (cont)
-        {
-            /* Second buffer aborted when first is not yet handled. */
-            handler_on_rx_done(p_cb, p_cb->rx.curr.p_buffer, p_cb->rx.curr.length, true);
-            p_cb->rx.curr = p_cb->rx.next;
-            p_cb->rx.next = (nrfy_uarte_buffer_t){ NULL, 0 };
-        }
-    }
-
-    handler_on_rx_done(p_cb, p_cb->rx.curr.p_buffer, rx_amount + p_cb->rx.off, aborted | restarted);
+    handler_on_rx_done(p_cb, p_cb->rx.curr.p_buffer, rx_amount + p_cb->rx.off, premature);
     p_cb->rx.off = 0;
 
     NRFX_CRITICAL_SECTION_ENTER();
+
+    p_cb->flags &= ~UARTE_FLAG_RX_RESTARTED;
     p_cb->rx.curr = p_cb->rx.next;
     p_cb->rx.next = (nrfy_uarte_buffer_t){ NULL, 0 };
 
     nrfy_uarte_shorts_disable(p_uarte, NRF_UARTE_SHORT_ENDRX_STARTRX);
-    if (p_cb->rx.curr.p_buffer == NULL && (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END))
+    if (p_cb->flags & UARTE_FLAG_RX_ABORTED)
     {
-        nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
+            aborted = true;
     }
-
-    NRFX_CRITICAL_SECTION_EXIT();
-
-    bool started;
-
-    /* If next buffer was set but RXSTARTED is not set it may indicate that new
-     * buffer was set late (e.g. in the context of the RX_DONE event handler).
-     * In that case, it is still possible to continue by manually triggering
-     * STARTRX. It must occur before RXTO happens.
-     */
-    NRFX_CRITICAL_SECTION_ENTER();
-    if (!aborted) {
-        /* We must check again if receiver was not aborted (e.g. in user handler) */
-        aborted = (p_cb->flags & (UARTE_FLAG_RX_ABORTED | UARTE_FLAG_RX_RESTARTED)) ==
-                  UARTE_FLAG_RX_ABORTED;
+    else if (p_cb->rx.curr.p_buffer == NULL)
+    {
+        if (p_cb->flags & UARTE_FLAG_RX_STOP_ON_END)
+        {
+            nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STOPRX);
+        }
     }
-
-    if (p_cb->rx.curr.p_buffer && !cont && !aborted)
+    else if (!(p_cb->flags & UARTE_FLAG_RX_CONT && rxstarted))
     {
         nrfy_uarte_task_trigger(p_uarte, NRF_UARTE_TASK_STARTRX);
-        started = true;
+        if (nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXTO))
+        {
+            late = true;
+        }
     }
-    else
-    {
-        started = false;
-    }
+
     NRFX_CRITICAL_SECTION_EXIT();
 
-    if (started && nrfy_uarte_event_check(p_uarte, NRF_UARTE_EVENT_RXTO))
+    if (late)
     {
         nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXTO);
         nrfy_uarte_event_clear(p_uarte, NRF_UARTE_EVENT_RXSTARTED);
