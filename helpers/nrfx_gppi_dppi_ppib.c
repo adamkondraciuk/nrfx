@@ -307,17 +307,24 @@ static nrfx_err_t local_connection_create(nrfx_interconnect_apb_t const * p_src_
 
     NRFX_ASSERT(p_src_apb);
     NRFX_ASSERT(p_dst_apb);
+
+    NRFX_CRITICAL_SECTION_ENTER();
     if (p_src_apb == p_dst_apb)
     {
-        /* Creating connection whithin one APB. */
-        chan_mask = (*p_src_apb->p_dppi_channels &
-                    (p_src_apb->dppi_pub_channels_mask | p_dst_apb->dppi_sub_channels_mask));
+        uint32_t chan_mask_to_exclude = p_src_apb->dppi_pub_channels_mask |
+                                        p_src_apb->dppi_sub_channels_mask;
+        /* Creating connection whithin one APB. No need to have publish/subscribe mask then.*/
+        chan_mask = *p_src_apb->p_dppi_channels;
+        if (chan_mask & ~chan_mask_to_exclude)
+        {
+            /* Try not to utilize channels that can be connected to other APBs. */
+            chan_mask &= ~chan_mask_to_exclude;
+        }
         err_code = channel_allocate(p_src_apb->p_dppi_channels, dppi_channel, chan_mask);
     }
     else
     {
         /* Creating connection between two different APBs. */
-        NRFX_CRITICAL_SECTION_ENTER();
         chan_mask = (*p_src_apb->p_dppi_channels & p_src_apb->dppi_pub_channels_mask) &
                     (*p_dst_apb->p_dppi_channels & p_dst_apb->dppi_sub_channels_mask);
         if (is_main_connection_needed(p_src_apb, p_dst_apb))
@@ -362,8 +369,8 @@ static nrfx_err_t local_connection_create(nrfx_interconnect_apb_t const * p_src_
                (For Global Domain it is done by Secure Deomain). */
             apb_connection_create(p_src_apb, p_dst_apb, *dppi_channel);
         }
-        NRFX_CRITICAL_SECTION_EXIT();
     }
+    NRFX_CRITICAL_SECTION_EXIT();
     return err_code;
 }
 
