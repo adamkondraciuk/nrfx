@@ -11,8 +11,6 @@ All notable changes to this project are documented in this file.
 - Added a function for checking if the detected voltage is below or above the threshold of VPOF (POF Comparator's threshold voltage) in the REGULATORS HAL.
 - Added a function for powering on all RAM blocks in the VMC HAL.
 - Added missing entries in enumerators for RAM sections in the VMC HAL.
-- Added a new signature for an event handler in the WDT driver. The signature accepts an event type, requests and a pointer to the context. A previous signature is deprecated.
-- Added a new signature for the nrfx_wdt_init() function in the WDT driver. The signature accepts a pointer to the instance, a pointer to the configuration, an event handler and a pointer to the context. A previous signature is deprecated.
 - Added the new nrfx_wdt_stop() function to the WDT driver that stops the watchdog.
 - Added the new nrfx_wdt_uninit() function to the WDT driver that uninitializes the watchdog.
 - Added the new nrfy_wdt_task_stop_enable_set() function to the WDT HALY that enables or disables stopping the watchdog.
@@ -26,6 +24,7 @@ All notable changes to this project are documented in this file.
 ### Changed
 - Updated MDK to version 8.58.0.
 - Overhauled the UARTE driver. Extended the UARTE driver with various modes of operations including: mixing of blocking and non-blocking transfers, linking transfers, continuous reception, low power operation.
+- Changed all functions' parameters in the GPIOTE driver. A pointer to nrfx_gpiote_t structure was added as the first parameter in all functions. Now functions without the pointer to nrfx_gpiote_t structure as the first argument are deprecated.
 - Changed functions for setting and reading the GPREGRET registers in the POWER HAL. Now there are only two functions, nrf_power_gpregret_set() for setting and nrf_power_gpregret_get() for reading. A new `reg_num` argument was added to both of them.
 - Replaced nrf_regulators_dcdcen_set() and nrf_regulators_dcdcen_vddh_set() functions with nrf_regulators_vreg_enable_set().
 - Replaced nrf_regulators_pofcon_set() and nrf_regulators_pofcon_vddh_set() functions with nrf_regulators_config_set().
@@ -36,14 +35,17 @@ All notable changes to this project are documented in this file.
 - Renamed nrf_regulators_pof_thrvddh_t structure to nrf_regulators_pof_thr_vddh_t.
 - Renamed macros indicating features presence in the REGULATORS HAL.
 - Changed a default value of the source reference structure member from 1.8V to 1.2V in the COMP driver configuration structure.
+- Changed a prototype of an event handler in the WDT driver. The new prototype accepts an event type, requests and a pointer to the context. A previous version is deprecated.
+- Changed a prototype of the nrfx_wdt_init() function in the WDT driver. The new prototype accepts a pointer to the instance, a pointer to the configuration, an event handler and a pointer to the context. A previous version is deprecated.
 - Replaced the nrf_wdt_task_stop_enable() function with nrf_wdt_task_stop_enable_set(). Now it takes a boolean parameter.
-- Added the new NRFX_ERROR_ALREADY error code that replaced the NRFX_ERROR_ALREADY_INITIALIZED one. Now the NRFX_ERROR_ALREADY_INITIALIZED error code is deprecated.
+- Replaced the deprecated NRFX_ERROR_ALREADY_INITIALIZED error code with the new NRFX_ERROR_ALREADY one.
 - Changed the organization of configuration structure members in the LPCOMP driver.
 - Changed the definition of nrf_saadc_value_t type in the SAADC HAL. Now pointer to the buffer holding conversion results is a void* instead of int16_t*.
 - Changed the return value in all drivers in case initialization functions have already been executed. Now the NRFX_ERROR_ALREADY error code will be returned instead of NRFX_ERROR_INVALID_STATE.
 - Changed the way that the QSPI peripheral is activated. Now the driver activates the peripheral instance before the first transfer or when the nrfx_qspi_activate() function is called.
 
 ### Fixed
+- Fixed the device failing to reconnect to the host after USB cable being reconnected in the USBD driver.
 - Fixed configuration of the external reference in nrfx_comp_init() and nrfx_comp_reconfigure() functions. Now the differential mode can be enabled in the COMP driver.
 - Fixed support for P0.18, P0.20, and P0.28-P0.30 pins in the GPIOTE driver for nRF52820 SoC.
 - Fixed events being forwarded to the user callback despite having their interrupts disabled in the QDEC driver.
