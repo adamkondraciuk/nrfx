@@ -407,7 +407,7 @@ nrfx_err_t nrfx_qspi_init(nrfx_qspi_config_t const * p_config,
 
     if (p_config)
     {
-        nrfx_err_t err_code = qspi_configure(p_config);
+        err_code = qspi_configure(p_config);
         if (err_code != NRFX_SUCCESS)
         {
             NRFX_LOG_WARNING("Function: %s, error code: %s.",
