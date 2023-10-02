@@ -404,7 +404,7 @@ nrfx_err_t nrfx_uarte_init(nrfx_uarte_t const *        p_instance,
     };
     if (nrfx_prs_acquire(p_instance->p_reg, irq_handlers[inst_idx]) != NRFX_SUCCESS)
     {
-        nrfx_err_t err_code = NRFX_ERROR_BUSY;
+        err_code = NRFX_ERROR_BUSY;
         NRFX_LOG_WARNING("Function: %s, error code: %s.",
                          __func__,
                          NRFX_LOG_ERROR_STRING_GET(err_code));
