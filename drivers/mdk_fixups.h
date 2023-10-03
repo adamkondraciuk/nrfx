@@ -2254,47 +2254,6 @@
 
     #undef QSPI_PRESENT
 
-    /* SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT: Configuration of features for interrupt register pair [(o * 2) + 1:o * 2] of Processor
-                                            ID n */
-
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_MaxCount (16UL) /*!< Max size of INTERRUPT[16] array.                          */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_ResetValue (0x00000000UL) /*!< Reset value of INTERRUPT[16] register.          */
-
-    /* SECATTR @Bit 4 : SECATTR feature */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos (4UL) /*!< Position of SECATTR field.                              */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Pos) /*!<
-                                                                            Bit mask of SECATTR field.*/
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Min (0x0UL) /*!< Min enumerator value of SECATTR field.                */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Max (0x1UL) /*!< Max enumerator value of SECATTR field.                */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_NonSecure (0x0UL) /*!< Feature is available for non-secure usage       */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_SECATTR_Secure (0x1UL) /*!< Feature is reserved for secure usage               */
-
-    /* LOCK @Bit 8 : LOCK feature */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos (8UL) /*!< Position of LOCK field.                                    */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Pos) /*!< Bit mask
-                                                                            of LOCK field.*/
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Min (0x0UL) /*!< Min enumerator value of LOCK field.                      */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Max (0x1UL) /*!< Max enumerator value of LOCK field.                      */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Unlocked (0x0UL) /*!< Feature permissions can be updated                  */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_LOCK_Locked (0x1UL) /*!< Feature permissions can not be changed until the next
-                                                                        reset*/
-
-    /* BLOCK @Bit 12 : BLOCK feature */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos (12UL) /*!< Position of BLOCK field.                                 */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Msk (0x1UL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Pos) /*!< Bit
-                                                                            mask of BLOCK field.*/
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Min (0x0UL) /*!< Min enumerator value of BLOCK field.                    */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Max (0x1UL) /*!< Max enumerator value of BLOCK field.                    */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Available (0x0UL) /*!< Feature is accessible                             */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_BLOCK_Blocked (0x1UL) /*!< Feature cannot be accessed until next reset         */
-
-    /* OWNERID @Bits 16..19 : Feature owner ID */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos (16UL) /*!< Position of OWNERID field.                             */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Msk (0xFUL << SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Pos) /*!<
-                                                                            Bit mask of OWNERID field.*/
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Min (0x0UL) /*!< Min value of OWNERID field.                           */
-    #define SPU_FEATURE_BELLS_PROCESSOR_INTERRUPT_OWNERID_Max (0xFUL) /*!< Max size of OWNERID field.                            */
-
     #define NRF_GRAPHICS_AUXPLL_NS_BASE       0x4900B000UL
     #define NRF_GRAPHICS_AUXPLL_NS            ((NRF_AUXPLL_Type*) NRF_GRAPHICS_AUXPLL_NS_BASE)
     #define NRF_GRAPHICS_AUXPLL               NRF_GRAPHICS_AUXPLL_NS
