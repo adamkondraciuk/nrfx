@@ -91,7 +91,6 @@ void nrfx_vevif_int_enable(uint32_t mask)
         NRFY_IRQ_ENABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
-    m_cb.state = NRFX_DRV_STATE_POWERED_ON;
 }
 
 bool nrfx_vevif_init_check(void)
@@ -101,7 +100,7 @@ bool nrfx_vevif_init_check(void)
 
 void nrfx_vevif_int_disable(uint32_t mask)
 {
-    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_POWERED_ON);
+    NRFX_ASSERT(m_cb.state == NRFX_DRV_STATE_INITIALIZED);
 
     while (mask != 0)
     {
@@ -109,7 +108,6 @@ void nrfx_vevif_int_disable(uint32_t mask)
         NRFY_IRQ_DISABLE(VPRCLIC_0_IRQn + event_no);
         nrf_bitmask_bit_clear(event_no, (void *)&mask);
     }
-    m_cb.state = NRFX_DRV_STATE_INITIALIZED;
 }
 
 static void nrfx_vevif_irq_handler(uint8_t irq_idx)
