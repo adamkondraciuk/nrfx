@@ -222,11 +222,6 @@
     #define SPU136_PERIPH_COUNT 16
     #define SPU137_PERIPH_COUNT 16
 
-    #if defined(SPU_FEATURE_GPIO_MaxCount)
-        #undef SPU_FEATURE_GPIO_MaxCount
-        #define SPU_FEATURE_GPIO_MaxCount 16
-    #endif
-
     /* TODO: HM-19626 */
     #if defined(NRF_RTC) && !defined(NRF_RTC0)
         #define NRF_RTC0              NRF_RTC
