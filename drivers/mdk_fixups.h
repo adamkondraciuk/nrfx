@@ -2516,6 +2516,9 @@
             #define NRF_GPIOTE131_IRQn          GPIOTE131_1_IRQn
             #define nrfx_gpiote_131_irq_handler GPIOTE131_1_IRQHandler
         #endif // defined(NRF_TRUSTZONE_NONSECURE)
+    #elif defined(NRF_SYSCTRL)
+        #define NRF_GPIOTE131_IRQn          GPIOTE131_0_IRQn
+        #define nrfx_gpiote_131_irq_handler GPIOTE131_0_IRQHandler
     #endif //defined(NRF_CELLCORE)
 
     #define GPIOTE131_CH_NUM (GPIOTE131_GPIOTE_NCHANNELS_MAX + 1UL)

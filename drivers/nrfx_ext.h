@@ -171,14 +171,14 @@ extern "C" {
 /*------------------------------------------------------------------------------------------------*/
 
 #if defined(NRF_GPIOTE130) || defined(NRF_GPIOTE131)
-    #if !defined(NRF_CELLCORE)
+    #if !defined(NRF_CELLCORE) && !(defined(NRF9230_XXAA) && defined(NRF_SYSCTRL))
         #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE130_IRQn
     #else
         #define NRF_GPIOTE_IRQn_EXT NRF_GPIOTE131_IRQn
     #endif
 #endif
 
-#if defined(NRF_GPIOTE130)
+#if defined(NRF_GPIOTE130) && !(defined(NRF9230_XXAA) && defined(NRF_SYSCTRL))
     #define NRF_GPIOTE_INDEX 130
 #elif defined(NRF_GPIOTE131)
     #define NRF_GPIOTE_INDEX 131
