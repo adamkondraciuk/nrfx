@@ -1791,7 +1791,9 @@ void nrfx_usbd_start(bool enable_sof)
 
     uint32_t ints_to_enable =
        NRF_USBD_INT_USBRESET_MASK     |
+#if NRFX_USBD_STARTED_EV_ENABLE
        NRF_USBD_INT_STARTED_MASK      |
+#endif
        NRF_USBD_INT_ENDEPIN0_MASK     |
        NRF_USBD_INT_EP0DATADONE_MASK  |
        NRF_USBD_INT_ENDEPOUT0_MASK    |
