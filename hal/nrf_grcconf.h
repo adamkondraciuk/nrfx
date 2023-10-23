@@ -375,10 +375,10 @@ NRF_STATIC_INLINE void nrf_grcconf_int_enable(NRF_GRCCONF_Type * p_reg,
             p_reg->INTENSET00 |= mask;
             break;
         case 1:
-            p_reg->INTENSET01 |= mask;
+            p_reg->INTENSET11 |= mask;
             break;
         case 2:
-            p_reg->INTENSET02 |= mask;
+            p_reg->INTENSET22 |= mask;
             break;
         default:
             NRFX_ASSERT(false);
@@ -396,10 +396,10 @@ NRF_STATIC_INLINE void nrf_grcconf_int_disable(NRF_GRCCONF_Type * p_reg,
             p_reg->INTENCLR00 |= mask;
             break;
         case 1:
-            p_reg->INTENCLR01 |= mask;
+            p_reg->INTENCLR11 |= mask;
             break;
         case 2:
-            p_reg->INTENCLR02 |= mask;
+            p_reg->INTENCLR22 |= mask;
             break;
         default:
             NRFX_ASSERT(false);
@@ -416,9 +416,9 @@ NRF_STATIC_INLINE uint32_t nrf_grcconf_int_enable_check(NRF_GRCCONF_Type const *
         case 0:
             return p_reg->INTENSET00 & mask;
         case 1:
-            return p_reg->INTENSET01 & mask;
+            return p_reg->INTENSET11 & mask;
         case 2:
-            return p_reg->INTENSET02 & mask;
+            return p_reg->INTENSET22 & mask;
         default:
             NRFX_ASSERT(false);
             return 0;
@@ -433,9 +433,9 @@ NRF_STATIC_INLINE uint32_t nrf_grcconf_int_pending_get(NRF_GRCCONF_Type const * 
         case 0:
             return p_reg->INTPEND00;
         case 1:
-            return p_reg->INTPEND01;
+            return p_reg->INTPEND11;
         case 2:
-            return p_reg->INTPEND02;
+            return p_reg->INTPEND22;
         default:
             NRFX_ASSERT(false);
             return 0;
