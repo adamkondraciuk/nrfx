@@ -23,6 +23,13 @@ extern "C" {
 #define NRF_MRAMC_CONFIGNVR_PAGE_LRSIZE_MAX MRAMC_CONFIGNVR_PAGE_LRSIZE_Max
 #define NRF_MRAMC_CONFIGNVR_PAGE_LWSIZE_MAX MRAMC_CONFIGNVR_PAGE_LWSIZE_Max
 
+/**
+ * @defgroup nrf_mramc_hal MRAMC HAL
+ * @{
+ * @ingroup nrf_mramc
+ * @brief   Hardware access layer for managing the Magnetoresistive Random Access Memory Controller (MRAMC) peripheral.
+ */
+
 #if (defined(MRAMC_CONFIGNVR_PAGE_UREN_Msk) && defined(MRAMC_CONFIGNVR_PAGE_UWEN_Msk)) || \
     defined(__NRFX_DOXYGEN__)
 /** @brief Symbol indicating whether CONFIGNVR.PAGE[n] registers have upper part of NVR page read and write protection fields. */
@@ -46,13 +53,6 @@ extern "C" {
 #else
 #define NRF_MRAMC_HAS_POWER_VREFVPR 0
 #endif
-
-/**
- * @defgroup nrf_mramc_hal MRAMC HAL
- * @{
- * @ingroup nrf_mramc
- * @brief   Hardware access layer for managing the the Magnetoresistive Random Access Memory Controller (MRAMC) peripheral.
- */
 
 /** @brief MRAMC events. */
 typedef enum
@@ -96,21 +96,21 @@ typedef enum
 typedef enum
 {
     NRF_MRAMC_POWER_INIT_MODE_NO_OPERATION  = MRAMC_POWER_INIT_MODE_NoOperation,      ///< No change in power mode.
-    NRF_MRAMC_POWER_INIT_MODE_UP            = MRAMC_POWER_INIT_MODE_PowerUp,          ///< Triggers power up sequence.
-    NRF_MRAMC_POWER_INIT_MODE_DOWN          = MRAMC_POWER_INIT_MODE_PowerDown,        ///< Initiates power down sequence.
-    NRF_MRAMC_POWER_INIT_MODE_DOWN_TRIM_RET = MRAMC_POWER_INIT_MODE_PowerDownTrimRet, ///< Initiates power down sequence with trim retained.
+    NRF_MRAMC_POWER_INIT_MODE_UP            = MRAMC_POWER_INIT_MODE_PowerUp,          ///< Triggers power-up sequence.
+    NRF_MRAMC_POWER_INIT_MODE_DOWN          = MRAMC_POWER_INIT_MODE_PowerDown,        ///< Initiates power-down sequence.
+    NRF_MRAMC_POWER_INIT_MODE_DOWN_TRIM_RET = MRAMC_POWER_INIT_MODE_PowerDownTrimRet, ///< Initiates power-down sequence with trim retained.
 } nrf_mramc_power_init_t;
 
-/** @brief Status of the power up/down sequence. */
+/** @brief Power mode status. */
 typedef enum
 {
     NRF_MRAMC_POWER_STATUS_OFF             = MRAMC_POWER_STATUS_STATE_Off,            ///< MRAM is OFF.
-    NRF_MRAMC_POWER_STATUS_POWER_UP_SEQ    = MRAMC_POWER_STATUS_STATE_PowerUpSeq,     ///< MRAM power up sequence is active.
+    NRF_MRAMC_POWER_STATUS_POWER_UP_SEQ    = MRAMC_POWER_STATUS_STATE_PowerUpSeq,     ///< MRAM power-up sequence is active.
     NRF_MRAMC_POWER_STATUS_TRIM_CFG_SEQ    = MRAMC_POWER_STATUS_STATE_TrimConfigSeq,  ///< Request for the MRAM trim configuration.
     NRF_MRAMC_POWER_STATUS_TRIM_CFG_WAIT   = MRAMC_POWER_STATUS_STATE_TrimConfigWait, ///< Waiting for the MRAM trim configuration to complete.
     NRF_MRAMC_POWER_STATUS_TRIM_CFG_DONE   = MRAMC_POWER_STATUS_STATE_TrimConfigDone, ///< The MRAM trim configuration to completed (This is momentary state).
     NRF_MRAMC_POWER_STATUS_STANDBY         = MRAMC_POWER_STATUS_STATE_Standby,        ///< MRAM is in standby mode.
-    NRF_MRAMC_POWER_STATUS_POWER_DOWN_SEQ  = MRAMC_POWER_STATUS_STATE_PowerDownSeq,   ///< MRAM power down sequence is active.
+    NRF_MRAMC_POWER_STATUS_POWER_DOWN_SEQ  = MRAMC_POWER_STATUS_STATE_PowerDownSeq,   ///< MRAM power-down sequence is active.
     NRF_MRAMC_POWER_STATUS_OFF_TRIM_RETAIN = MRAMC_POWER_STATUS_STATE_OffTrimRetain,  ///< MRAM is OFF with trim configuration in retain.
 } nrf_mramc_power_status_t;
 
@@ -160,15 +160,15 @@ typedef struct
     uint16_t erase; ///< Preload timeout value for low average current in case of erase.
 } nrf_mramc_lowavgcurr_t;
 
-/** @brief Structure for configurating the automatic power down feature using the inactive time period of MRAM. */
+/** @brief Structure for configurating the automatic power-down feature using the inactive time period of MRAM. */
 typedef struct
 {
-    bool     enable;         ///< Enable the automatic power down feature.
+    bool     enable;         ///< Enable the automatic power-down feature.
     bool     power_down_cfg; ///< Power down mode when the timeout happens.
-    uint16_t timeout_value;  ///< Tiemout value for the power down.
+    uint16_t timeout_value;  ///< Timeout value for the power-down.
 } nrf_mramc_power_autopowerdown_t;
 
-/** @brief Mask for the various voltages supplies when initiating power up/down. */
+/** @brief Mask for the various voltages supplies when initiating power-up/down. */
 typedef struct
 {
     bool vdd;     ///< Mask VDD.
@@ -296,14 +296,14 @@ NRF_STATIC_INLINE void nrf_mramc_ecc_get(NRF_MRAMC_Type const * p_reg,
                                          nrf_mramc_ecc_t *      p_data);
 
 /**
- * @brief Function for clearing flag inticating error detected which could not be corrected.
+ * @brief Function for clearing flag indicating detected error which could not be corrected.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
 NRF_STATIC_INLINE void nrf_mramc_ecc_error_clear(NRF_MRAMC_Type * p_reg);
 
 /**
- * @brief Function for clearing flag inticating error detected which was corrected.
+ * @brief Function for clearing flag indicating detected error which was corrected.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  */
@@ -313,7 +313,7 @@ NRF_STATIC_INLINE void nrf_mramc_ecc_corr_clear(NRF_MRAMC_Type * p_reg);
  * @brief Function for setting the MRAMC peripheral configuration.
  *
  * @param[in] p_reg    Pointer to the structure of registers of the peripheral.
- * @param[in] p_config Pointer to the structure with configuration to be set.
+ * @param[in] p_config Pointer to the structure containing configuration to be set.
  */
 NRF_STATIC_INLINE void nrf_mramc_config_set(NRF_MRAMC_Type *           p_reg,
                                             nrf_mramc_config_t const * p_config);
@@ -420,7 +420,7 @@ NRF_STATIC_INLINE void nrf_mramc_lowavgcurr_get(NRF_MRAMC_Type const *   p_reg,
                                                 nrf_mramc_lowavgcurr_t * p_data);
 
 /**
- * @brief Function for setting power up or down sequence.
+ * @brief Function for setting power-up/down sequence.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  * @param[in] mode  Power init mode.
@@ -429,7 +429,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_init_set(NRF_MRAMC_Type *       p_reg,
                                                 nrf_mramc_power_init_t mode);
 
 /**
- * @brief Function for getting power up or down sequence.
+ * @brief Function for getting power-up/down sequence.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
@@ -438,10 +438,10 @@ NRF_STATIC_INLINE void nrf_mramc_power_init_set(NRF_MRAMC_Type *       p_reg,
 NRF_STATIC_INLINE nrf_mramc_power_init_t nrf_mramc_power_init_get(NRF_MRAMC_Type const * p_reg);
 
 /**
- * @brief Function for setting automatic power down feature using the inactive time period of MRAM.
+ * @brief Function for setting automatic power-down feature using the inactive time period of MRAM.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_data Pointer to the structure filled with information about power down feature
+ * @param[in] p_data Pointer to the structure filled with information about power-down feature
  *                   configuration.
  */
 NRF_STATIC_INLINE
@@ -449,10 +449,10 @@ void nrf_mramc_power_autopowerdown_set(NRF_MRAMC_Type *                        p
                                        nrf_mramc_power_autopowerdown_t const * p_data);
 
 /**
- * @brief Function for getting automatic power down feature using the inactive time period of MRAM.
+ * @brief Function for getting automatic power-down feature using the inactive time period of MRAM.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
- * @param[out] p_data Pointer to the structure to be filled with information about power down
+ * @param[out] p_data Pointer to the structure to be filled with information about power-down
  *                    feature configuration.
  */
 NRF_STATIC_INLINE
@@ -460,72 +460,68 @@ void nrf_mramc_power_autopowerdown_get(NRF_MRAMC_Type const *            p_reg,
                                        nrf_mramc_power_autopowerdown_t * p_data);
 
 /**
- * @brief Function for setting mask for the various voltages supplies when initiating power up/down.
+ * @brief Function for setting mask for the various voltages supplies when initiating power-up/down.
  *
  * @note All bits must be set to 0 for normal operation of MRAM. Incorrect usage would
- *       result in unknown behaviour of MRAM.
+ *       result in unknown behavior of MRAM.
  *
- * @warning Do not use this register unless you know the consequences.
+ * @warning Do not use this function unless you know the consequences.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
  * @param[in] p_data Pointer to the structure filled with information about various voltages
- *                   supplies when initiating power up/down.
+ *                   supplies when initiating power-up/down.
  */
 NRF_STATIC_INLINE void nrf_mramc_power_mask_set(NRF_MRAMC_Type *               p_reg,
                                                 nrf_mramc_power_conf_t const * p_data);
 
 /**
- * @brief Function for getting mask for the various voltages supplies when initiating power up/down.
- *
- * @note All bits must be set to 0 for normal operation of MRAM. Incorrect usage would
- *       result in unknown behaviour of MRAM. Do not use this register unless
- *       you know the consequences.
+ * @brief Function for getting mask for the various voltages supplies when initiating power-up/down.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
  * @param[out] p_data Pointer to the structure to be filled with information about various
- *                    voltages supplies when initiating power up/down.
+ *                    voltages supplies when initiating power-up/down.
  */
 NRF_STATIC_INLINE void nrf_mramc_power_mask_get(NRF_MRAMC_Type const *   p_reg,
                                                 nrf_mramc_power_conf_t * p_data);
 
 /**
- * @brief Function for getting status of the power up/down sequence.
+ * @brief Function for getting the power mode status.
  *
  * @param[in] p_reg Pointer to the structure of registers of the peripheral.
  *
- * @return Status of the power up/down sequence.
+ * @return Status of the power mode.
  */
 NRF_STATIC_INLINE nrf_mramc_power_status_t nrf_mramc_power_status_get(NRF_MRAMC_Type const * p_reg);
 
 /**
  * @brief Function for getting status of the power control signals acknowledgement
- *        during power up sequence.
+ *        during power-up sequence.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
  * @param[out] p_data Pointer to the structure to be filled with information about
  *                    status of the power control signals acknowledgement
- *                    during power up sequence.
+ *                    during power-up sequence.
  */
 NRF_STATIC_INLINE void nrf_mramc_powerup_ack_get(NRF_MRAMC_Type const *   p_reg,
                                                  nrf_mramc_power_conf_t * p_data);
 
 /**
  * @brief Function for getting status of the power control signals acknowledgement
- *        during power down sequence.
+ *        during power-down sequence.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
  * @param[out] p_data Pointer to the structure to be filled with information about
  *                    status of the power control signals acknowledgement
- *                    during power down sequence.
+ *                    during power-down sequence.
  */
 NRF_STATIC_INLINE void nrf_mramc_powerdown_ack_get(NRF_MRAMC_Type const *   p_reg,
                                                    nrf_mramc_power_conf_t * p_data);
 
 /**
- * @brief Function for setting the configuration of force on signal of the power supply.
+ * @brief Function for setting the configuration of force ON signal of the power supply.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_data Pointer to the structure filled with information about force on power supply.
+ * @param[in] p_data Pointer to the structure filled with information about force ON power supply.
 */
 NRF_STATIC_INLINE void nrf_mramc_power_force_on_set(NRF_MRAMC_Type *               p_reg,
                                                     nrf_mramc_power_conf_t const * p_data);
@@ -534,7 +530,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_on_set(NRF_MRAMC_Type *            
  * @brief Function for getting force ON the power supply.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
- * @param[out] p_data Pointer to the structure to be filled with information about force on
+ * @param[out] p_data Pointer to the structure to be filled with information about force ON
  *                    power supply.
  */
 NRF_STATIC_INLINE void nrf_mramc_power_force_on_get(NRF_MRAMC_Type const *   p_reg,
@@ -544,7 +540,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_on_get(NRF_MRAMC_Type const *   p_r
  * @brief Function for setting force OFF the power supply.
  *
  * @param[in] p_reg  Pointer to the structure of registers of the peripheral.
- * @param[in] p_data Pointer to the structure filled with information about force off power supply.
+ * @param[in] p_data Pointer to the structure filled with information about force OFF power supply.
  */
 NRF_STATIC_INLINE void nrf_mramc_power_force_off_set(NRF_MRAMC_Type *               p_reg,
                                                      nrf_mramc_power_conf_t const * p_data);
@@ -553,7 +549,7 @@ NRF_STATIC_INLINE void nrf_mramc_power_force_off_set(NRF_MRAMC_Type *           
  * @brief Function for getting force OFF the power supply.
  *
  * @param[in]  p_reg  Pointer to the structure of registers of the peripheral.
- * @param[out] p_data Pointer to the structure to be filled with information about force off
+ * @param[out] p_data Pointer to the structure to be filled with information about force OFF
  *                    power supply.
  */
 NRF_STATIC_INLINE void nrf_mramc_power_force_off_get(NRF_MRAMC_Type const *   p_reg,
